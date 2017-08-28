@@ -1,0 +1,24 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
+
+.coverCardList {
+  :global {
+    .ant-card-meta-description {
+      font-size: 12px;
+    }
+  }
+  .cardItemContent {
+    display: flex;
+    margin-top: 8px;
+    line-height: 20px;
+    height: 20px;
+    span {
+      flex: 1;
+      font-size: 12px;
+      color: @disabled-color;
+    }
+    .avatarList {
+      flex: 0 1 auto;
+    }
+  }
+}

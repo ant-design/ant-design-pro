@@ -1,0 +1,68 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
+
+.standardFormRow {
+  border-bottom: 1px dashed @border-color-split;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  :global {
+    .ant-form-item {
+      margin-right: 24px;
+    }
+    .ant-form-item-label label {
+      color: @text-color;
+      margin-right: 16px;
+    }
+  }
+  .label {
+    color: @heading-color;
+    font-size: @font-size-base;
+    margin-right: 24px;
+    flex: 0 0 auto;
+    text-align: right;
+    & > span {
+      display: inline-block;
+      height: 32px;
+      line-height: 32px;
+      &:after {
+        content: '：';
+      }
+    }
+  }
+  .content {
+    flex: 1 1 0;
+    :global {
+      .ant-form-item:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.standardFormRowLast {
+  border: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.standardFormRowBlock {
+  :global {
+    .ant-form-item,
+    div.ant-form-item-control-wrapper {
+      display: block;
+    }
+  }
+}
+
+.standardFormRowGrid {
+  :global {
+    .ant-form-item,
+    div.ant-form-item-control-wrapper {
+      display: block;
+    }
+    .ant-form-item-label {
+      float: left;
+    }
+  }
+}

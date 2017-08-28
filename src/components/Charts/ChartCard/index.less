@@ -1,0 +1,45 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../utils/utils.less";
+
+.chartCard {
+  position: relative;
+  .meta {
+    color: @text-color-secondary;
+    font-size: @font-size-base;
+    position: relative;
+    line-height: 22px;
+    height: 22px;
+  }
+  .action {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .total {
+    .textOverflow();
+    color: @heading-color;
+    margin-top: 8px;
+    font-size: 30px;
+    line-height: 38px;
+    height: 38px;
+  }
+  .content {
+    position: relative;
+    width: 100%;
+  }
+  .contentFixed {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  .footer {
+    border-top: 1px solid @border-color-split;
+    padding-top: 8px;
+    margin-top: 11px;
+    & > * {
+      position: relative;
+    }
+  }
+}

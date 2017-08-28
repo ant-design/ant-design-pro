@@ -1,0 +1,27 @@
+.input {
+  transition: all .3s;
+  width: 0;
+  background: transparent;
+  border-radius: 0;
+  :global(.ant-select-selection) {
+    background: transparent;
+  }
+  input {
+    border: 0;
+    padding-left: 0;
+    padding-right: 0;
+    color: #fff;
+    &::placeholder {
+      color: rgba(255, 255, 255, .5);
+    }
+  }
+  &,
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid #fff;
+  }
+  &.show {
+    width: 210px;
+    margin-left: 8px;
+  }
+}

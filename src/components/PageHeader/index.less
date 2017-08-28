@@ -1,0 +1,95 @@
+@import "~antd/lib/style/themes/default.less";
+
+.pageHeader {
+  background: @component-background;
+  padding: 18px 28px 0 36px;
+  border-bottom: @border-width-base @border-style-base @border-color-split;
+
+  .detail {
+    display: flex;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  .breadcrumb {
+    margin-bottom: 18px;
+  }
+
+  .tabs {
+    margin: 0 0 -17px -8px;
+
+    :global {
+      .ant-tabs-bar {
+        border-bottom: @border-width-base @border-style-base @border-color-split;
+      }
+    }
+  }
+
+  .logo {
+    flex: 0 1 auto;
+    margin-right: 16px;
+    padding-top: 1px;
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: 500;
+    color: @heading-color;
+  }
+
+  .action {
+    margin-left: 56px;
+    min-width: 266px;
+
+    button:not(:last-child) {
+      margin-right: 8px;
+    }
+  }
+
+  .title, .action, .content, .extraContent, .main {
+    flex: auto;
+  }
+
+  .title, .action {
+    margin-bottom: 16px;
+  }
+
+  .logo, .content, .extraContent {
+    margin-bottom: 12px;
+  }
+
+  .action, .extraContent {
+    text-align: right;
+  }
+
+  .extraContent {
+    margin-left: 88px;
+    min-width: 242px;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .pageHeader {
+    .extraContent {
+      margin-left: 44px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .pageHeader {
+    .extraContent {
+      margin-left: 24px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xs) {
+  .pageHeader {
+    .extraContent {
+      margin-left: 8px;
+    }
+  }
+}

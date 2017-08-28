@@ -1,0 +1,26 @@
+{
+  "entry": "src/index.js",
+  "env": {
+    "development": {
+      "extraBabelPlugins": [
+        "dva-hmr",
+        "transform-runtime",
+        "transform-decorators-legacy",
+        ["import", { "libraryName": "antd", "style": true }]
+      ]
+    },
+    "production": {
+      "extraBabelPlugins": [
+        "transform-runtime",
+        "transform-decorators-legacy",
+        ["import", { "libraryName": "antd", "style": true }]
+      ]
+    }
+  },
+  "theme": {
+    "font-size-base": "14px",
+    "badge-font-size": "12px",
+    "btn-font-size-lg": "@font-size-base",
+    "layout-body-background": "#f5f5f5"
+  }
+}

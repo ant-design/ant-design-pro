@@ -1,0 +1,38 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../utils/utils.less";
+
+.radar {
+  .legend {
+    margin-top: 16px;
+    .legendItem {
+      position: relative;
+      text-align: center;
+      p {
+        cursor: pointer;
+      }
+      h6 {
+        color: @heading-color;
+        font-size: 24px;
+        line-height: 32px;
+        margin-top: 2px;
+      }
+      .split {
+        background-color: @border-color-split;
+        position: absolute;
+        top: 8px;
+        right: 0;
+        height: 40px;
+        width: 1px;
+      }
+    }
+    .dot {
+      border-radius: 8px;
+      display: inline-block;
+      margin-right: 8px;
+      position: relative;
+      top: -1px;
+      height: 8px;
+      width: 8px;
+    }
+  }
+}

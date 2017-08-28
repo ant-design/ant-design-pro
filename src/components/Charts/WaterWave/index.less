@@ -1,0 +1,25 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../utils/utils.less";
+
+.waterWave {
+  display: inline-block;
+  position: relative;
+  transform-origin: left;
+  .text {
+    position: absolute;
+    left: 0;
+    top: 32px;
+    text-align: center;
+    width: 100%;
+    span {
+      color: @text-color-secondary;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    h4 {
+      color: @heading-color;
+      line-height: 32px;
+      font-size: 24px;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../utils/utils.less";
+
+.trend {
+  font-size: 0;
+  height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  .trendItem {
+    display: inline-block;
+    margin-right: 16px;
+    color: @text-color;
+    font-size: @font-size-base;
+    line-height: 22px;
+    height: 22px;
+    .title {
+      margin-right: 4px;
+    }
+    .value {
+      color: @text-color;
+      font-weight: 600;
+    }
+    .up, .down {
+      color: #00a854;
+      margin-right: 4px;
+      position: relative;
+      top: 1px;
+      i {
+        font-size: 12px;
+        transform: scale(0.83);
+      }
+    }
+    .down {
+      color: #f04134;
+      top: -1px;
+    }
+  }
+  .trendItem:last-child {
+    margin-right: 0;
+  }
+}
+
+.trendgray {
+  .trend();
+  .trendItem {
+    color: @text-color-secondary;
+  }
+}

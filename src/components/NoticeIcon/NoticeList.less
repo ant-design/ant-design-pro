@@ -1,0 +1,89 @@
+@import "~antd/lib/style/themes/default.less";
+
+.list {
+  max-height: 400px;
+  overflow: auto;
+  .item {
+    transition: all .3s;
+    overflow: hidden;
+    cursor: pointer;
+
+    .wrapper {
+      margin: 0 32px;
+      padding: 12px 0;
+      border-bottom: 1px solid @border-color-split;
+    }
+    &.read {
+      opacity: .4;
+    }
+    &:last-child .wrapper {
+      border-bottom: 0;
+    }
+    &:hover {
+      background: @primary-1;
+    }
+    .content {
+      position: relative;
+      overflow: hidden;
+    }
+    .avatar {
+      margin-right: 16px;
+      float: left;
+      margin-top: 4px;
+      background: #fff;
+    }
+    .title {
+      font-weight: normal;
+      color: @text-color;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .description {
+      color: @text-color-secondary;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+    .datetime {
+      color: @text-color-secondary;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+    .extra {
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: @text-color-secondary;
+      font-size: 12px;
+    }
+  }
+}
+
+.notFound {
+  text-align: center;
+  height: 120px;
+  line-height: 120px;
+  font-size: 14px;
+  color: @text-color-secondary;
+  > i {
+    font-size: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+    margin-top: -1px;
+  }
+}
+
+.clear {
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  color: @text-color-secondary;
+  border-radius: 0 0 @border-radius-base @border-radius-base;
+  border-top: 1px solid @border-color-split;
+  transition: all .3s;
+  cursor: pointer;
+
+  &:hover {
+    color: @text-color;
+  }
+}
