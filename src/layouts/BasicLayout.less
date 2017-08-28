@@ -10,7 +10,8 @@
   height: 64px;
   position: relative;
   line-height: 64px;
-  padding: 0 24px;
+  padding-left: 32px;
+  transition: all .3s;
   background: @primary-color;
   overflow: hidden;
   img {
@@ -29,8 +30,11 @@
   }
 }
 
-:global(.ant-layout-sider-collapsed) .logo > a {
-  width: 32px;
+:global(.ant-layout-sider-collapsed) .logo {
+  padding-left: 24px;
+  > a {
+    width: 32px;
+  }
 }
 
 .trigger {
@@ -40,7 +44,6 @@
   transition: all .3s;
   color: #fff;
   padding: 0 28px;
-  vertical-align: middle;
   &:hover {
     background: @primary-7;
   }
