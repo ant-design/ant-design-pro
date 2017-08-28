@@ -168,7 +168,7 @@ class BasicLayout extends React.PureComponent {
             breakpoint="md"
             onCollapse={this.onCollapse}
             style={{ minHeight: '100vh' }}
-            width={272}
+            width={256}
           >
             <div className={styles.logo}>
               <Link to="/">
@@ -182,6 +182,7 @@ class BasicLayout extends React.PureComponent {
               defaultOpenKeys={this.getDefaultCollapsedSubMenus()}
               selectedKeys={this.getCurrentMenuSelectedKeys()}
               style={{ margin: '24px 0', width: '100%' }}
+              inlineIndent={32}
             >
               {this.getNavMenuItems(menus)}
             </Menu>
