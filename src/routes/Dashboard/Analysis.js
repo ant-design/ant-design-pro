@@ -246,14 +246,14 @@ export default class Analysis extends Component {
             <Tabs tabBarExtraContent={salesExtra}>
               <TabPane tab="销售额" key="sales">
                 <Row gutter={72}>
-                  <Col sm={16} xs={24}>
+                  <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                     <Bar
                       height={292}
                       title="销售额趋势"
                       data={salesData}
                     />
                   </Col>
-                  <Col sm={8} xs={24}>
+                  <Col xl={8} lg={12} md={12} sm={24} xs={24}>
                     <h4>门店销售额排名</h4>
                     <ul className={styles.rankingList}>
                       {
@@ -277,7 +277,7 @@ export default class Analysis extends Component {
         </Card>
 
         <Row gutter={24}>
-          <Col lg={12} sm={24} xs={24}>
+          <Col lg={24} sm={24} xs={24}>
             <Card
               bordered={false}
               title="线上热门搜索"
@@ -329,7 +329,7 @@ export default class Analysis extends Component {
               />
             </Card>
           </Col>
-          <Col lg={12} sm={24} xs={24}>
+          <Col lg={24} sm={24} xs={24}>
             <Card
               bordered={false}
               title="销售额类别占比"
