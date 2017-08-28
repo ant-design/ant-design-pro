@@ -1,0 +1,32 @@
+@import "~antd/lib/style/themes/default.less";
+
+.toolbar {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  height: 56px;
+  line-height: 56px;
+  box-shadow: @shadow-1-up;
+  background: #fff;
+  padding: 0 28px;
+  transition: all .3s;
+
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .left {
+    float: left;
+  }
+
+  .right {
+    float: right;
+  }
+
+  button + button {
+    margin-left: 8px;
+  }
+}

@@ -1,0 +1,191 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
+
+.activitiesList {
+  padding: 0 24px 24px 24px;
+  :global {
+    .ant-list-item-meta-title:hover {
+      color: @text-color;
+    }
+  }
+}
+
+.pageHeaderTitle {
+  display: flex;
+  .titleAvatar {
+    flex: 0 1 80px;
+    & > span {
+      border-radius: 80px;
+      display: block;
+      width: 80px;
+      height: 80px;
+    }
+  }
+  .titleContent {
+    position: relative;
+    top: 8px;
+    margin-left: 32px;
+    flex: 1 1 auto;
+    p {
+      font-weight: normal;
+    }
+    & > p:last-child {
+      color: @text-color-secondary;
+      font-size: @font-size-base;
+      line-height: 22px;
+      margin-top: 12px;
+    }
+  }
+}
+
+.pageHeaderAction {
+  float: right;
+  .clearfix();
+  & > div {
+    text-align: right;
+    padding: 0 24px;
+    position: relative;
+    float: left;
+    & > p:first-child {
+      color: @text-color-secondary;
+      font-size: @font-size-base;
+      line-height: 22px;
+      margin-bottom: 2px;
+    }
+    & > p {
+      color: @text-color;
+      font-size: 30px;
+      line-height: 38px;
+      & > span {
+        color: @text-color-secondary;
+        font-size: 20px;
+      }
+    }
+    & > em {
+      background-color: @border-color-split;
+      position: absolute;
+      top: 8px;
+      right: 0;
+      width: 1px;
+      height: 40px;
+    }
+  }
+  & > div:last-child {
+    padding-right: 0;
+  }
+}
+
+.members {
+  a {
+    display: block;
+    margin-bottom: 24px;
+    line-height: 24px;
+    height: 24px;
+    .textOverflow();
+    img {
+      border-radius: 24px;
+      display: inline;
+      position: relative;
+      top: -2px;
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    span {
+      font-size: @font-size-base;
+      color: @text-color;
+      line-height: 24px;
+      max-width: 100px;
+      .textOverflow();
+    }
+    &:hover {
+      span {
+        color: @primary-color;
+      }
+    }
+  }
+}
+
+.projectList {
+  :global {
+    .ant-card-meta-title {
+      font-size: 14px;
+      a {
+        color: @heading-color;
+        &:hover {
+          color: @primary-color;
+        }
+      }
+    }
+    .ant-card-meta-description {
+      font-size: 12px;
+      min-height: 36px;
+    }
+  }
+  .projectGrid {
+    width: 33.33%;
+  }
+  .projectItemContent {
+    display: flex;
+    padding-left: 48px;
+    margin-top: 12px;
+    overflow: hidden;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    .textOverflow();
+    a {
+      color: @text-color-secondary;
+      display: inline-block;
+      flex: 1 1 0;
+      .textOverflow();
+      &:hover {
+        color: @primary-color;
+      }
+    }
+    span {
+      color: @text-color-secondary;
+      flex: 0 0 auto;
+      float: right;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xl)  and (min-width: @screen-lg) {
+  .pageHeaderAction {
+    margin-left: -44px;
+    & > div {
+      padding: 0 16px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .pageHeaderAction {
+    margin-left: -64px;
+    & > div {
+      padding: 0 16px;
+      text-align: left;
+      & > em {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .projectList {
+    .projectGrid {
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xs) {
+  .projectList {
+    .projectGrid {
+      width: 100%;
+    }
+  }
+}

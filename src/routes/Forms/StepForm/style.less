@@ -1,0 +1,59 @@
+@import "~antd/lib/style/themes/default.less";
+
+.stepForm {
+  margin: 40px auto;
+  max-width: 500px;
+}
+
+.stepFormText {
+  :global {
+    .ant-form-item-label,
+    .ant-form-item-control {
+      line-height: 22px;
+    }
+  }
+}
+
+.result {
+  margin: 0 auto;
+  max-width: 520px;
+  padding: 32px 0;
+}
+
+.desc {
+  h3 {
+    font-size: 14px;
+    margin: 8px 0;
+    color: @text-color-secondary;
+  }
+  h4 {
+    margin: 2px 0;
+    color: @text-color-secondary;
+  }
+  p {
+    margin-bottom: 16px;
+  }
+  padding: 0 34px;
+  color: @text-color-secondary;
+  font-size: 12px;
+}
+
+.information {
+  line-height: 22px;
+  :global {
+    .ant-row:not(:last-child) {
+      margin-bottom: 24px;
+    }
+  }
+  .label {
+    font-weight: 500;
+    text-align: right;
+    padding-right: 8px;
+  }
+}
+
+.money {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+}

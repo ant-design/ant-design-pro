@@ -1,0 +1,45 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
+
+.search {
+  display: inline-block;
+  :global {
+    .ant-input-group-addon {
+      border: none;
+      padding: 0;
+    }
+    .ant-input-group .ant-input {
+      width: 522px;
+    }
+  }
+  input {
+    border-right: none;
+    height: 40px;
+    line-height: 40px;
+  }
+  button {
+    border-radius: 0 @border-radius-base @border-radius-base 0;
+    width: 86px;
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .search {
+    :global {
+      .ant-input-group .ant-input {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xs) {
+  .search {
+    :global {
+      .ant-input-group .ant-input {
+        width: 200px;
+      }
+    }
+  }
+}

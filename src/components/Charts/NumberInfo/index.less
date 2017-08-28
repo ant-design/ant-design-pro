@@ -1,0 +1,46 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../utils/utils.less";
+
+.numberInfo {
+  h4 {
+    color: @heading-color;
+    margin-bottom: 16px;
+  }
+  h6 {
+    color: @text-color-secondary;
+    font-size: @font-size-base;
+    height: 22px;
+    line-height: 22px;
+    .textOverflow();
+  }
+  & > div {
+    margin-top: 8px;
+    font-size: 0;
+    .textOverflow();
+    & > span {
+      color: @heading-color;
+      display: inline-block;
+      line-height: 32px;
+      height: 32px;
+      font-size: 24px;
+      margin-right: 32px;
+    }
+    .subTotal {
+      color: @text-color-secondary;
+      font-size: @font-size-base;
+      vertical-align: top;
+      i {
+        font-size: 12px;
+        transform: scale(0.82);
+        margin-right: 4px;
+      }
+    }
+  }
+}
+.numberInfolight {
+  & > div {
+    & > span {
+      color: @text-color;
+    }
+  }
+}

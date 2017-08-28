@@ -1,0 +1,26 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
+
+.tagSelect {
+  user-select: none;
+  margin-left: -8px;
+  position: relative;
+  .expand {
+    transition: all 0.32s ease;
+    overflow: hidden;
+    max-height: 100px;
+  }
+  .fold {
+    .expand();
+    max-height: 0;
+  }
+  .trigger {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+.expandTag {
+  padding-right: 50px;
+}
+

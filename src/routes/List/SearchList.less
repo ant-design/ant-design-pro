@@ -1,0 +1,45 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
+
+.listContent {
+  p {
+    line-height: 24px;
+  }
+  & > div {
+    color: @text-color-secondary;
+    margin-top: 16px;
+    height: 22px;
+    line-height: 22px;
+    img {
+      margin-right: 16px;
+    }
+    & > span {
+      vertical-align: top;
+      margin-right: 16px;
+      width: 20px;
+      height: 20px;
+    }
+    & > em {
+      color: @disabled-color;
+      font-style: normal;
+      margin-left: 24px;
+    }
+    a {
+      color: @text-color-secondary;
+      &:hover {
+        color: @primary-color;
+      }
+    }
+  }
+}
+.listItemExtra {
+  width: 272px;
+  height: 1px;
+}
+
+@media screen and (max-width: @screen-lg) {
+  .listItemExtra {
+    width: 0;
+    height: 1px;
+  }
+}

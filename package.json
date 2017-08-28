@@ -1,0 +1,47 @@
+{
+  "name": "ant-design-admin",
+  "private": true,
+  "scripts": {
+    "start": "roadhog server",
+    "build": "roadhog build",
+    "lint": "eslint --ext .js src test",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "antd": "next",
+    "dva": "^1.2.1",
+    "g-cloud": "^1.0.2-beta",
+    "g2": "^2.3.8",
+    "g2-plugin-slider": "^1.2.1",
+    "lodash": "^4.17.4",
+    "marked": "^0.3.6",
+    "numeral": "^2.0.6",
+    "prop-types": "^15.5.10",
+    "qs": "^6.5.0",
+    "react": "^15.4.0",
+    "react-document-title": "^2.0.3",
+    "react-dom": "^15.4.0",
+    "react-redux": "4.x || 5.x",
+    "react-router": "2.x || 3.x"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-dva-hmr": "^0.3.2",
+    "babel-plugin-import": "^1.2.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-runtime": "^6.9.2",
+    "eslint": "^3.0.0",
+    "eslint-config-airbnb": "latest",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.0.1",
+    "expect": "^1.20.2",
+    "husky": "^0.13.4",
+    "mockjs": "^1.0.1-beta3",
+    "redbox-react": "^1.3.2",
+    "roadhog": "^1.0.2",
+    "roadhog-api-doc": "^0.1.0"
+  }
+}

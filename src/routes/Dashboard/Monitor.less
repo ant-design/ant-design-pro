@@ -1,0 +1,45 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
+
+.activeChart {
+  position: relative;
+}
+.activeChartGrid {
+  p {
+    position: absolute;
+    top: 80px;
+  }
+  p:last-child {
+    top: 115px;
+  }
+}
+.activeChartLegend {
+  position: relative;
+  font-size: 0;
+  margin-top: 8px;
+  height: 20px;
+  line-height: 20px;
+  span {
+    display: inline-block;
+    font-size: 12px;
+    text-align: center;
+    width: 33.33%;
+  }
+  span:first-child {
+    text-align: left;
+  }
+  span:last-child {
+    text-align: right;
+  }
+}
+
+.mapChart {
+  padding-top: 46px;
+  height: 436px;
+}
+
+@media screen and (max-width: @screen-lg) {
+  .mapChart {
+    height: auto;
+  }
+}
