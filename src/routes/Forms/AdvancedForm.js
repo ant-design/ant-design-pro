@@ -97,6 +97,7 @@ function AdvancedForm({ form, dispatch, submitting }) {
     <PageHeaderLayout
       title="高级表单"
       content="在后台页面中，大批量的数据修改和提交是很常见的情况。"
+      wrapperClassName={styles.withFooterToolbar}
     >
       <Card title="仓库管理" className={styles.card} bordered={false}>
         <Form layout="vertical" hideRequiredMark>
