@@ -229,23 +229,23 @@ class BasicLayout extends React.PureComponent {
                 </Dropdown>
               </div>
             </Header>
-            <Content style={{ margin: 24, height: '100%' }}>
+            <Content style={{ margin: '24px 24px 0 24px', height: '100%' }}>
               {children}
-              <GlobalFooter
-                links={[{
-                  title: '帮助',
-                  href: '',
-                }, {
-                  title: '隐私',
-                  href: '',
-                }, {
-                  title: '条款',
-                  href: '',
-                  blankTarget: true,
-                }]}
-                copyright={<div>Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品</div>}
-              />
             </Content>
+            <GlobalFooter
+              links={[{
+                title: '帮助',
+                href: '',
+              }, {
+                title: '隐私',
+                href: '',
+              }, {
+                title: '条款',
+                href: '',
+                blankTarget: true,
+              }]}
+              copyright={<div>Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品</div>}
+            />
           </Layout>
         </Layout>
       </DocumentTitle>
