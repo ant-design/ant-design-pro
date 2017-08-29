@@ -36,7 +36,6 @@ function userAdapter(userData) {
       userAdapter(item);
     } else {
       const userItem = item;
-      userItem.target = '_blank';
       userItem.noRoute = true;
     }
   });
