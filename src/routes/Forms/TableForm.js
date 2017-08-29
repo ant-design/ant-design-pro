@@ -59,6 +59,7 @@ export default class TableForm extends PureComponent {
       name: '',
       department: '',
       editable: true,
+      isNew: true,
     });
     this.index += 1;
     this.setState({ data: newData });
@@ -73,6 +74,7 @@ export default class TableForm extends PureComponent {
   }
   saveRow(e, key) {
     const target = this.getRowByKey(key);
+    delete target.isNew;
     if (!target.workId || !target.name || !target.department) {
       message.error('请填写完整成员信息。');
       return;
@@ -148,7 +150,7 @@ export default class TableForm extends PureComponent {
       key: 'action',
       render: (text, record) => {
         if (record.editable) {
-          if (record.key.indexOf('NEW_TEMP_ID_') >= 0) {
+          if (record.isNew) {
             return (
               <span>
                 <a onClick={e => this.saveRow(e, record.key)}>保存</a>
