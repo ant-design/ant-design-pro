@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'dva/router';
 import DocumentTitle from 'react-document-title';
 import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
@@ -44,10 +45,12 @@ class UserLayout extends React.PureComponent {
         <div className={styles.container}>
           <div className={styles.top}>
             <div className={styles.header}>
-              <img alt="" className={styles.logo} src="https://gw.alipayobjects.com/zos/rmsportal/NGCCBOENpgTXpBWUIPnI.svg" />
-              <span className={styles.title}>Ant Design</span>
+              <Link to="/">
+                <img alt="" className={styles.logo} src="https://gw.alipayobjects.com/zos/rmsportal/NGCCBOENpgTXpBWUIPnI.svg" />
+                <span className={styles.title}>Ant Design</span>
+              </Link>
             </div>
-            <p className={styles.desc}>Ant Design 是东半球最具影响力的 Web 设计规范</p>
+            <p className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</p>
           </div>
           {children}
           <GlobalFooter className={styles.footer} links={links} copyright={copyright} />
