@@ -5,7 +5,7 @@
     "start": "roadhog server",
     "build": "roadhog build",
     "lint": "eslint --ext .js src test mock",
-    "test": "lint",
+    "test": "npm run lint",
     "precommit": "npm run lint"
   },
   "dependencies": {
