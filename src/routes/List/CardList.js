@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Card, Avatar, Spin, Button, Icon } from 'antd';
+import { Card, Avatar, Button, Icon, List } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
@@ -42,7 +42,7 @@ export default class CardList extends PureComponent {
 
     const extraContent = (
       <div className={styles.extraImg}>
-        <img alt="这是一个标题" src="https://gw.alipayobjects.com/zos/rmsportal/tTIFdlIcZFvvmCROhyBg.png" />
+        <img alt="这是一个标题" src="https://gw.alipayobjects.com/zos/rmsportal/QfpzdhbrqRtdSyZHKhjp.png" />
       </div>
     );
 
@@ -53,37 +53,35 @@ export default class CardList extends PureComponent {
         extraContent={extraContent}
       >
         <div className={styles.cardList}>
-          {
-            loading ?
-              <Spin />
-              :
-              <Row gutter={16}>
-                <Col lg={8} md={12} sm={12} xs={24} style={{ marginBottom: 16 }}>
-                  <Button type="dashed" className={styles.newButton}>
-                    <Icon type="plus" /> 新增产品
-                  </Button>
-                </Col>
-                {
-                  list && list.map(item => (
-                    <Col lg={8} md={12} sm={12} xs={24} key={item.id} style={{ marginBottom: 16 }}>
-                      <Card
-                        actions={[<a>操作一</a>, <a>操作二</a>]}
-                      >
-                        <Card.Meta
-                          avatar={<Avatar size="large" src={item.avatar} />}
-                          title={item.title}
-                          description={(
-                            <p className={styles.cardDescription}>
-                              <span>{item.description}</span>
-                            </p>
-                          )}
-                        />
-                      </Card>
-                    </Col>
-                  ))
-                }
-              </Row>
-          }
+          <List
+            loading={loading}
+            grid={{ gutter: 16, lg: 3, md: 2, sm: 1, xs: 1 }}
+          >
+            <List.Item>
+              <Button type="dashed" className={styles.newButton}>
+                <Icon type="plus" /> 新增产品
+              </Button>
+            </List.Item>
+            {
+              list && list.map(item => (
+                <List.Item key={item.id}>
+                  <Card
+                    actions={[<a>操作一</a>, <a>操作二</a>]}
+                  >
+                    <Card.Meta
+                      avatar={<Avatar size="large" src={item.avatar} />}
+                      title={item.title}
+                      description={(
+                        <p className={styles.cardDescription}>
+                          <span>{item.description}</span>
+                        </p>
+                      )}
+                    />
+                  </Card>
+                </List.Item>
+              ))
+            }
+          </List>
         </div>
       </PageHeaderLayout>
     );

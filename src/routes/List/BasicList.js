@@ -95,7 +95,7 @@ export default class BasicList extends PureComponent {
     return (
       <PageHeaderLayout>
         <div className={styles.standardList}>
-          <Card>
+          <Card bordered={false}>
             <Row>
               <Col sm={8} xs={24}>
                 <Info title="我的代办" value="8个任务" bordered />
@@ -110,6 +110,7 @@ export default class BasicList extends PureComponent {
           </Card>
 
           <Card
+            bordered={false}
             title="基础列表"
             style={{ marginTop: 16 }}
             extra={extraContent}

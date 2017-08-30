@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import numeral from 'numeral';
 import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 import { Row, Col, Form, Card, Select, Spin, Icon, Avatar } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -60,22 +61,39 @@ export default class FilterCardList extends PureComponent {
     }, 0);
   }
 
+  handleTabChange = (key) => {
+    const { dispatch } = this.props;
+    switch (key) {
+      case 'doc':
+        dispatch(routerRedux.push('/list/search'));
+        break;
+      case 'app':
+        dispatch(routerRedux.push('/list/filter-card-list'));
+        break;
+      case 'project':
+        dispatch(routerRedux.push('/list/cover-card-list'));
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     const { list: { list, loading }, form } = this.props;
     const { getFieldDecorator } = form;
 
     const tabList = [
       {
-        key: 'docs',
+        key: 'doc',
         tab: '文章',
       },
       {
-        key: 'apps',
+        key: 'app',
         tab: '应用',
         default: true,
       },
       {
-        key: 'projects',
+        key: 'project',
         tab: '项目',
       },
     ];
@@ -112,10 +130,12 @@ export default class FilterCardList extends PureComponent {
         title="带筛选卡片列表"
         content={pageHeaderContent}
         tabList={tabList}
+        onTabChange={this.handleTabChange}
       >
         <div className={styles.filterCardList}>
           <Card
             noHovering
+            bordered={false}
           >
             <Form
               layout="inline"

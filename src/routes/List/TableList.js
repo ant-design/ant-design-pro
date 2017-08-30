@@ -164,15 +164,13 @@ export default class TableList extends PureComponent {
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
         <Menu.Item key="remove">删除</Menu.Item>
-        {
-          selectedRows.length > 1 && <Menu.Item key="approval">批量审批</Menu.Item>
-        }
+        <Menu.Item key="approval">批量审批</Menu.Item>
       </Menu>
     );
 
     return (
       <PageHeaderLayout title="标准表格">
-        <Card noHovering>
+        <Card noHovering bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>
               <Form onSubmit={this.handleSearch}>
@@ -229,12 +227,16 @@ export default class TableList extends PureComponent {
             </div>
             <div className={styles.tableListOperator}>
               <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>新建</Button>
-              <Button>批量操作</Button>
-              <Dropdown overlay={menu}>
-                <Button>
-                  更多操作 <Icon type="down" />
-                </Button>
-              </Dropdown>
+              {
+                selectedRows.length > 0 && <span>
+                  <Button>批量操作</Button>
+                  <Dropdown overlay={menu}>
+                    <Button>
+                      更多操作 <Icon type="down" />
+                    </Button>
+                  </Dropdown>
+                </span>
+              }
             </div>
             <StandardTable
               selectedRows={selectedRows}

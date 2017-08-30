@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
-import { Row, Col, Form, Card, Select, Spin } from 'antd';
+import { routerRedux } from 'dva/router';
+import { Row, Col, Form, Card, Select, List } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardFormRow from '../../components/StandardFormRow';
@@ -49,15 +50,35 @@ export default class CoverCardList extends PureComponent {
     }, 0);
   }
 
+  handleTabChange = (key) => {
+    const { dispatch } = this.props;
+    switch (key) {
+      case 'doc':
+        dispatch(routerRedux.push('/list/search'));
+        break;
+      case 'app':
+        dispatch(routerRedux.push('/list/filter-card-list'));
+        break;
+      case 'project':
+        dispatch(routerRedux.push('/list/cover-card-list'));
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     const { list: { list = [], loading }, form } = this.props;
     const { getFieldDecorator } = form;
 
     const cardList = list ? (
-      <Row gutter={16} style={{ marginTop: 16 }}>
+      <List
+        loading={loading}
+        grid={{ gutter: 16, lg: 4, md: 3, sm: 2, xs: 1 }}
+      >
         {
           list.map(item => (
-            <Col lg={6} md={8} sm={12} xs={24} style={{ marginBottom: 16 }} key={item.id}>
+            <List.Item key={item.id}>
               <Card
                 cover={<img alt={item.title} src={item.cover} />}
               >
@@ -82,15 +103,15 @@ export default class CoverCardList extends PureComponent {
                   </div>
                 </div>
               </Card>
-            </Col>
+            </List.Item>
           ))
         }
-      </Row>
+      </List>
     ) : null;
 
     const tabList = [
       {
-        key: 'docs',
+        key: 'doc',
         tab: '文章',
       },
       {
@@ -100,6 +121,7 @@ export default class CoverCardList extends PureComponent {
       {
         key: 'project',
         tab: '项目',
+        default: true,
       },
     ];
 
@@ -121,9 +143,11 @@ export default class CoverCardList extends PureComponent {
         title="带封面的卡片列表"
         content={pageHeaderContent}
         tabList={tabList}
+        onTabChange={this.handleTabChange}
       >
         <div className={styles.coverCardList}>
           <Card
+            bordered={false}
             noHovering
           >
             <Form
@@ -188,17 +212,9 @@ export default class CoverCardList extends PureComponent {
               </StandardFormRow>
             </Form>
           </Card>
-          {
-            loading && (list.length > 0) && <Spin>
-              {cardList}
-            </Spin>
-          }
-          {
-            loading && (list.length < 1) && <div style={{ marginTop: 16 }}><Spin /></div>
-          }
-          {
-            !loading && cardList
-          }
+          <div className={styles.cardList}>
+            { cardList }
+          </div>
         </div>
       </PageHeaderLayout>
     );

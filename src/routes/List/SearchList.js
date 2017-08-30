@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 import { Form, Card, Select, List, Tag, Icon, Avatar, Row, Col } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -70,6 +71,23 @@ export default class SearchList extends Component {
     });
   }
 
+  handleTabChange = (key) => {
+    const { dispatch } = this.props;
+    switch (key) {
+      case 'docs':
+        dispatch(routerRedux.push('/list/search'));
+        break;
+      case 'app':
+        dispatch(routerRedux.push('/list/filter-card-list'));
+        break;
+      case 'project':
+        dispatch(routerRedux.push('/list/cover-card-list'));
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     const { showLoadMore, loadingMore } = this.state;
     const { form, list: { list } } = this.props;
@@ -100,7 +118,7 @@ export default class SearchList extends Component {
 
     const tabList = [
       {
-        key: 'docs',
+        key: 'doc',
         tab: '文章',
       },
       {
@@ -148,9 +166,10 @@ export default class SearchList extends Component {
         title="搜索列表"
         content={pageHeaderContent}
         tabList={tabList}
+        onTabChange={this.handleTabChange}
       >
         <div>
-          <Card noHovering>
+          <Card noHovering bordered={false}>
             <Form layout="inline">
               <StandardFormRow title="所属类目" block>
                 <FormItem>
@@ -243,7 +262,7 @@ export default class SearchList extends Component {
               </StandardFormRow>
             </Form>
           </Card>
-          <Card style={{ marginTop: 16 }}>
+          <Card style={{ marginTop: 16 }} bordered={false}>
             <List
               loadingMore={loadingMore}
               showLoadMore={(list.length > 0) && showLoadMore}
