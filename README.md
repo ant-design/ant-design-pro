@@ -10,5 +10,5 @@ $ npm start
 ```
 
 ```bash
-$ npm run deploy
+$ npm run site
 ```

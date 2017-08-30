@@ -6,7 +6,8 @@
     "build": "roadhog build",
     "lint": "eslint --ext .js src test mock",
     "test": "npm run lint",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "site": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "antd": "next",
@@ -35,6 +36,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.1",
     "eslint-plugin-react": "^7.0.1",
+    "gh-pages": "^1.0.0",
     "husky": "^0.13.4",
     "mockjs": "^1.0.1-beta3",
     "redbox-react": "^1.3.2",
