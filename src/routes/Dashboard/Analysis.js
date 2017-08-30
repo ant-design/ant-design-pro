@@ -277,7 +277,7 @@ export default class Analysis extends Component {
         </Card>
 
         <Row gutter={24}>
-          <Col lg={24} sm={24} xs={24}>
+          <Col lg={12} sm={24} xs={24}>
             <Card
               bordered={false}
               title="线上热门搜索"
@@ -329,7 +329,7 @@ export default class Analysis extends Component {
               />
             </Card>
           </Col>
-          <Col lg={24} sm={24} xs={24}>
+          <Col lg={12} sm={24} xs={24}>
             <Card
               bordered={false}
               title="销售额类别占比"
