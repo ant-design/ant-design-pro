@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { Row, Col, Card } from 'antd';
 import numeral from 'numeral';
 
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import { NumberInfo, MiniArea, Pie, WaterWave, Gauge } from '../../components/Charts';
 import MapChart from '../../components/MapChart';
 import TagCloud from '../../components/TagCloud';
@@ -45,12 +44,10 @@ export default class Monitor extends PureComponent {
     const { tags } = monitor;
 
     return (
-      <PageHeaderLayout
-        title="大盘监控"
-      >
+      <div>
         <Row gutter={24}>
           <Col lg={16} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="活动实时交易情况">
+            <Card title="活动实时交易情况" bordered={false}>
               <Row>
                 <Col sm={6} xs={12}>
                   <NumberInfo
@@ -85,7 +82,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col lg={8} md={24} sm={24} xs={24}>
-            <Card title="活动情况预测" style={{ marginBottom: 24 }}>
+            <Card title="活动情况预测" style={{ marginBottom: 24 }} bordered={false}>
               <div className={styles.activeChart}>
                 <NumberInfo
                   subTitle="目标评估"
@@ -125,7 +122,12 @@ export default class Monitor extends PureComponent {
                 }
               </div>
             </Card>
-            <Card title="券核效率" style={{ marginBottom: 24 }} bodyStyle={{ textAlign: 'center' }}>
+            <Card
+              title="券核效率"
+              style={{ marginBottom: 24 }}
+              bodyStyle={{ textAlign: 'center' }}
+              bordered={false}
+            >
               <Gauge
                 title="跳出率"
                 height={164}
@@ -136,7 +138,11 @@ export default class Monitor extends PureComponent {
         </Row>
         <Row gutter={24}>
           <Col sm={8} xs={24}>
-            <Card title="各品类占比" style={{ marginBottom: 24 }}>
+            <Card
+              title="各品类占比"
+              style={{ marginBottom: 24 }}
+              bordered={false}
+            >
               <Row style={{ padding: '18px 0 19px 0' }}>
                 <Col span={8}>
                   <Pie
@@ -168,7 +174,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col sm={8} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索">
+            <Card title="热门搜索" bordered={false}>
               <TagCloud
                 data={tags}
                 height={161}
@@ -176,7 +182,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col sm={8} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="资源剩余" bodyStyle={{ textAlign: 'center' }}>
+            <Card title="资源剩余" bodyStyle={{ textAlign: 'center' }} bordered={false}>
               <WaterWave
                 height={161}
                 title="补贴资金剩余"
@@ -185,7 +191,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
         </Row>
-      </PageHeaderLayout>
+      </div>
     );
   }
 }

@@ -42,7 +42,7 @@ export default class CardList extends PureComponent {
 
     const extraContent = (
       <div className={styles.extraImg}>
-        <img alt="这是一个标题" src="https://gw.alipayobjects.com/zos/rmsportal/tTIFdlIcZFvvmCROhyBg.png" />
+        <img alt="这是一个标题" src="https://gw.alipayobjects.com/zos/rmsportal/QfpzdhbrqRtdSyZHKhjp.png" />
       </div>
     );
 
