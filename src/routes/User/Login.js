@@ -71,7 +71,7 @@ export default class Login extends Component {
     return (
       <div className={styles.main}>
         <Form onSubmit={this.handleSubmit}>
-          <Tabs activeKey={type} onChange={this.onSwitch}>
+          <Tabs className={styles.tabs} activeKey={type} onChange={this.onSwitch}>
             <TabPane tab="账户密码登录" key="account">
               {login.status === 'error' && login.type === 'account' && this.msg('账户或密码错误')}
               <FormItem>
