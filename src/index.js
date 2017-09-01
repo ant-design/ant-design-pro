@@ -1,9 +1,12 @@
 import dva from 'dva';
+import G2 from 'g2';
 // import { browserHistory } from 'dva/router';
 import 'moment/locale/zh-cn';
 import models from './models';
 
 import './index.less';
+
+G2.track(false);
 
 // 1. Initialize
 const app = dva({
