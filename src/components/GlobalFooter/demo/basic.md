@@ -6,7 +6,7 @@ title: Basic
 基本页脚。
 
 ````jsx
-import { GlobalFooter } from 'ant-design-pro';
+import GlobalFooter from 'ant-design-pro/lib/GlobalFooter';
 import { Icon } from 'antd';
 
 const links = [{

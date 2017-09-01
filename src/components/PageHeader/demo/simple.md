@@ -6,7 +6,7 @@ title: Simple
 简单的页头。
 
 ````jsx
-import { PageHeader } from 'ant-design-pro';
+import PageHeader from 'ant-design-pro/lib/PageHeader';
 
 const breadcrumbList = [{
   title: '一级菜单',

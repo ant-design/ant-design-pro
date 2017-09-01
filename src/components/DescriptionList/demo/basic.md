@@ -6,7 +6,7 @@ title: Basic
 基本描述列表。
 
 ````jsx
-import { DescriptionList } from 'ant-design-pro';
+import DescriptionList from 'ant-design-pro/lib/DescriptionList';
 
 const { Description } = DescriptionList;
 

@@ -6,7 +6,7 @@ title: Structure
 结构包含 `处理结果`，`补充信息` 以及 `操作建议` 三个部分，其中 `处理结果` 由 `提示图标`，`标题` 和 `结果描述` 组成。
 
 ````jsx
-import { Result } from 'ant-design-pro';
+import Result from 'ant-design-pro/lib/Result';
 
 ReactDOM.render(
   <Result

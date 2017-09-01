@@ -6,7 +6,7 @@ title: 带浮层卡片
 点击展开通知卡片，展现多种类型的通知。
 
 ````jsx
-import { NoticeIcon } from 'ant-design-pro';
+import NoticeIcon from 'ant-design-pro/lib/NoticeIcon';
 import moment from 'moment';
 
 const data = [{

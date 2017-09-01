@@ -6,7 +6,7 @@ title: With Image
 带图片的页头。
 
 ````jsx
-import { PageHeader } from 'ant-design-pro';
+import PageHeader from 'ant-design-pro/lib/PageHeader';
 
 const content = (
   <div>

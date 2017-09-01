@@ -6,7 +6,7 @@ title: Standard
 标准页头。
 
 ````jsx
-import { PageHeader } from 'ant-design-pro';
+import PageHeader from 'ant-design-pro/lib/PageHeader';
 import { Button, Menu, Dropdown, Icon, Row, Col } from 'antd';
 
 const menu = (

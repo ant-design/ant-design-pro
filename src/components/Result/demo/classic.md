@@ -6,7 +6,7 @@ title: Classic
 典型结果页面。
 
 ````jsx
-import { Result } from 'ant-design-pro';
+import Result from 'ant-design-pro/lib/Result';
 import { Button, Row, Col, Icon, Steps } from 'antd';
 
 const Step = Steps.Step;

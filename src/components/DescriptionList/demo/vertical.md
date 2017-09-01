@@ -6,7 +6,7 @@ title: Vertical
 垂直布局。
 
 ````jsx
-import { DescriptionList } from 'ant-design-pro';
+import DescriptionList from 'ant-design-pro/lib/DescriptionList';
 
 const { Description } = DescriptionList;
 

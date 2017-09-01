@@ -6,7 +6,7 @@ title: Failed
 提交失败。
 
 ````jsx
-import { Result } from 'ant-design-pro';
+import Result from 'ant-design-pro/lib/Result';
 import { Button, Icon } from 'antd';
 
 const extra = (

@@ -6,7 +6,7 @@ title: Structure
 基本结构，可以形成多种组合。
 
 ````jsx
-import { PageHeader } from 'ant-design-pro';
+import PageHeader from 'ant-design-pro/lib/PageHeader';
 
 const breadcrumbList = [{
   title: '面包屑',
