@@ -44,60 +44,52 @@ function userAdapter(userData) {
 
 export const user = [{
   name: '帐户',
-  icon: 'setting',
+  icon: 'user',
   path: 'user',
   children: [{
     name: '登录',
     path: 'login',
     component: Login,
-    icon: 'setting',
   }, {
     name: '注册',
     path: 'register',
     component: Register,
-    icon: 'setting',
   }, {
     name: '注册结果',
     path: 'register-result',
     component: RegisterResult,
-    icon: 'setting',
   }],
 }];
 
 export const menus = [{
   name: 'Dashboard',
-  icon: 'setting',
+  icon: 'dashboard',
   path: 'dashboard',
   children: [{
     name: '分析页',
     path: 'analysis',
     component: Analysis,
-    icon: 'setting',
   }, {
     name: '监控页',
     path: 'monitor',
     component: Monitor,
-    icon: 'setting',
   }, {
     name: '工作台',
     path: 'workplace',
     component: Workplace,
-    icon: 'setting',
   }],
 }, {
   name: '表单页',
   path: 'form',
-  icon: 'setting',
+  icon: 'form',
   children: [{
     name: '基础表单',
     path: 'basic-form',
     component: BasicForm,
-    icon: 'setting',
   }, {
     name: '分步表单',
     path: 'step-form',
     component: StepForm,
-    icon: 'setting',
     children: [{
       path: 'confirm',
       component: Step2,
@@ -109,85 +101,72 @@ export const menus = [{
     name: '高级表单',
     path: 'advanced-form',
     component: AdvancedForm,
-    icon: 'setting',
   }],
 }, {
   name: '列表页',
   path: 'list',
-  icon: 'setting',
+  icon: 'table',
   children: [{
     name: '标准表格（表格查询）',
     path: 'table-list',
     component: TableList,
-    icon: 'setting',
   }, {
     name: '标准列表',
     path: 'basic-list',
     component: BasicList,
-    icon: 'setting',
   }, {
     name: '卡片列表',
     path: 'card-list',
     component: CardList,
-    icon: 'setting',
   }, {
     name: '卡片列表（封面）',
     path: 'cover-card-list',
     component: CoverCardList,
-    icon: 'setting',
   }, {
     name: '带筛选卡片列表',
     path: 'filter-card-list',
     component: FilterCardList,
-    icon: 'setting',
   }, {
     name: '搜索列表',
     path: 'search',
     component: SearchList,
-    icon: 'setting',
   }],
 }, {
   name: '详情页',
   path: 'profile',
   component: Profile,
-  icon: 'setting',
+  icon: 'profile',
 }, {
   name: '结果',
   path: 'result',
-  icon: 'setting',
+  icon: 'check-circle-o',
   children: [{
     name: '成功',
     path: 'success',
     component: Success,
-    icon: 'setting',
   }, {
     name: '失败',
     path: 'fail',
     component: Error,
-    icon: 'setting',
   }],
 }, {
   name: '错误',
   path: 'error',
-  icon: 'setting',
+  icon: 'warning',
   children: [{
     name: '403',
     path: '403',
     component: Exception403,
-    icon: 'setting',
   }, {
     name: '404',
     path: '404',
     component: Exception404,
-    icon: 'setting',
   }, {
     name: '500',
     path: '500',
     component: Exception500,
-    icon: 'setting',
   }],
 }, userAdapter(JSON.parse(JSON.stringify(user[0])))];
-
 
 export default [{
   component: BasicLayout,
