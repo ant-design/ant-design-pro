@@ -10,7 +10,7 @@ import styles from './BasicLayout.less';
 import HeaderSearch from '../components/HeaderSearch';
 import NoticeIcon from '../components/NoticeIcon';
 import GlobalFooter from '../components/GlobalFooter';
-import { menus } from '../common/nav';
+import { getNavData } from '../common/nav';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -19,6 +19,11 @@ class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     routes: PropTypes.array,
     params: PropTypes.object,
+  }
+  constructor(props) {
+    super(props);
+    // 把一级 Layout 的 children 作为菜单项
+    this.menus = getNavData().reduce((arr, current) => arr.concat(current.children), []);
   }
   state = {
     mode: 'inline',
@@ -52,11 +57,14 @@ class BasicLayout extends React.PureComponent {
     const { location: { pathname } } = this.props;
     const keys = pathname.split('/').slice(1);
     if (keys.length === 1 && keys[0] === '') {
-      return [menus[0].key];
+      return [this.menus[0].key];
     }
     return keys;
   }
   getNavMenuItems(menusData, parentPath = '') {
+    if (!menusData) {
+      return [];
+    }
     return menusData.map((item) => {
       if (!item.name) {
         return null;
@@ -186,7 +194,7 @@ class BasicLayout extends React.PureComponent {
               style={{ margin: '24px 0', width: '100%' }}
               inlineIndent={32}
             >
-              {this.getNavMenuItems(menus)}
+              {this.getNavMenuItems(this.menus)}
             </Menu>
           </Sider>
           <Layout>
