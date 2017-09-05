@@ -21,6 +21,9 @@
     "font-size-base": "14px",
     "badge-font-size": "12px",
     "btn-font-size-lg": "@font-size-base",
+    "@menu-dark-bg": "#000B14",
+    "@menu-dark-submenu-bg": "#00182E",
+    "@layout-sider-background": "#000B14",
     "layout-body-background": "#f5f5f5"
   }
 }

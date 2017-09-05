@@ -66,10 +66,12 @@ class BasicLayout extends React.PureComponent {
         return (
           <SubMenu
             title={
-              <span>
-                <Icon type={item.icon} />
-                <span>{item.name}</span>
-              </span>
+              item.icon ? (
+                <span>
+                  <Icon type={item.icon} />
+                  <span>{item.name}</span>
+                </span>
+              ) : item.name
             }
             key={item.key || item.path}
           >
@@ -80,7 +82,7 @@ class BasicLayout extends React.PureComponent {
       return (
         <Menu.Item key={item.key || item.path}>
           <Link to={itemPath}>
-            <Icon type={item.icon} />
+            {item.icon && <Icon type={item.icon} />}
             <span>{item.name}</span>
           </Link>
         </Menu.Item>

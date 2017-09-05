@@ -1,9 +1,9 @@
 @import "~antd/lib/style/themes/default.less";
 
 .header {
-  background: @primary-color;
   padding: 0 16px 0 0;
-  color: #fff;
+  background: #fff;
+  border-bottom: 1px solid @border-color-split;
 }
 
 .logo {
@@ -12,7 +12,7 @@
   line-height: 64px;
   padding-left: 32px;
   transition: all .3s;
-  background: @primary-color;
+  background: #00284D;
   overflow: hidden;
   img {
     display: inline-block;
@@ -42,10 +42,9 @@
   line-height: 64px;
   cursor: pointer;
   transition: all .3s;
-  color: #fff;
   padding: 0 28px;
   &:hover {
-    background: @primary-7;
+    background: rgba(0, 0, 0, .04);
   }
 }
 
@@ -64,7 +63,7 @@
     }
     &:global(.ant-popover-open),
     &:hover {
-      background: @primary-7;
+      background: rgba(0, 0, 0, .04);
     }
   }
   .search:hover {

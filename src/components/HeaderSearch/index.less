@@ -1,3 +1,5 @@
+@import "~antd/lib/style/themes/default.less";
+
 .input {
   transition: all .3s;
   width: 0;
@@ -10,15 +12,12 @@
     border: 0;
     padding-left: 0;
     padding-right: 0;
-    color: #fff;
-    &::placeholder {
-      color: rgba(255, 255, 255, .5);
-    }
+    box-shadow: none !important;
   }
   &,
   &:hover,
   &:focus {
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid @border-color-base;
   }
   &.show {
     width: 210px;
