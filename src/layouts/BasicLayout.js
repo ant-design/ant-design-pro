@@ -198,6 +198,7 @@ class BasicLayout extends React.PureComponent {
             <Menu
               theme="dark"
               mode="inline"
+              openKeys={this.state.openKeys}
               onOpenChange={this.handleOpenChange}
               selectedKeys={this.getCurrentMenuSelectedKeys()}
               style={{ margin: '24px 0', width: '100%' }}
