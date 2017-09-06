@@ -48,8 +48,12 @@ export async function queryTags() {
   return request('/api/tags');
 }
 
-export async function queryProfile() {
-  return request('/api/profile');
+export async function queryBasicProfile() {
+  return request('/api/profile/basic');
+}
+
+export async function queryAdvancedProfile() {
+  return request('/api/profile/advanced');
 }
 
 export async function queryFakeList(params) {

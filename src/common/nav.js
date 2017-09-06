@@ -12,7 +12,9 @@ import FilterCardList from '../routes/List/FilterCardList';
 import SearchList from '../routes/List/SearchList';
 import BasicList from '../routes/List/BasicList';
 
-import Profile from '../routes/Profile';
+import BasicProfile from '../routes/Profile/BasicProfile';
+import AdvancedProfile from '../routes/Profile/AdvancedProfile';
+
 import BasicForm from '../routes/Forms/BasicForm';
 import AdvancedForm from '../routes/Forms/AdvancedForm';
 import StepForm from '../routes/Forms/StepForm';
@@ -107,8 +109,16 @@ const data = [{
   }, {
     name: '详情页',
     path: 'profile',
-    component: Profile,
     icon: 'profile',
+    children: [{
+      name: '基础详情页',
+      path: 'basic',
+      component: BasicProfile,
+    }, {
+      name: '高级详情页',
+      path: 'advanced',
+      component: AdvancedProfile,
+    }],
   }, {
     name: '结果',
     path: 'result',

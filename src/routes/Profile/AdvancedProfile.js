@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Button, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip } from 'antd';
-import PageHeaderLayout from '../layouts/PageHeaderLayout';
-import DescriptionList from '../components/DescriptionList';
-import styles from './Profile.less';
+import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import DescriptionList from '../../components/DescriptionList';
+import styles from './AdvancedProfile.less';
 
 const { Step } = Steps;
 const { Description } = DescriptionList;
@@ -133,7 +133,7 @@ const columns = [{
 @connect(state => ({
   profile: state.profile,
 }))
-export default class Profile extends Component {
+export default class AdvancedProfile extends Component {
   state = {
     operationkey: 'tab1',
   }
@@ -141,7 +141,7 @@ export default class Profile extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'profile/fetch',
+      type: 'profile/fetchAdvanced',
     });
   }
 
@@ -151,24 +151,24 @@ export default class Profile extends Component {
 
   render() {
     const { profile } = this.props;
-    const { loading, operation1, operation2, operation3 } = profile;
+    const { advancedLoading, advancedOperation1, advancedOperation2, advancedOperation3 } = profile;
     const contentList = {
       tab1: <Table
         pagination={false}
-        loading={loading}
-        dataSource={operation1}
+        loading={advancedLoading}
+        dataSource={advancedOperation1}
         columns={columns}
       />,
       tab2: <Table
         pagination={false}
-        loading={loading}
-        dataSource={operation2}
+        loading={advancedLoading}
+        dataSource={advancedOperation2}
         columns={columns}
       />,
       tab3: <Table
         pagination={false}
-        loading={loading}
-        dataSource={operation3}
+        loading={advancedLoading}
+        dataSource={advancedOperation3}
         columns={columns}
       />,
     };

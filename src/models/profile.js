@@ -1,29 +1,46 @@
-import { queryProfile } from '../services/api';
+import { queryBasicProfile, queryAdvancedProfile } from '../services/api';
 
 export default {
   namespace: 'profile',
 
   state: {
-    operation1: [],
-    operation2: [],
-    operation3: [],
-    loading: true,
+    basicGoods: [],
+    basicLoading: true,
+    advancedOperation1: [],
+    advancedOperation2: [],
+    advancedOperation3: [],
+    advancedLoading: true,
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {
+    *fetchBasic({ payload }, { call, put }) {
       yield put({
         type: 'changeLoading',
-        payload: true,
+        payload: { basicLoading: true },
       });
-      const response = yield call(queryProfile);
+      const response = yield call(queryBasicProfile);
       yield put({
         type: 'show',
         payload: response,
       });
       yield put({
         type: 'changeLoading',
-        payload: false,
+        payload: { basicLoading: false },
+      });
+    },
+    *fetchAdvanced({ payload }, { call, put }) {
+      yield put({
+        type: 'changeLoading',
+        payload: { advancedLoading: true },
+      });
+      const response = yield call(queryAdvancedProfile);
+      yield put({
+        type: 'show',
+        payload: response,
+      });
+      yield put({
+        type: 'changeLoading',
+        payload: { advancedLoading: false },
       });
     },
   },
@@ -38,7 +55,7 @@ export default {
     changeLoading(state, { payload }) {
       return {
         ...state,
-        loading: payload,
+        ...payload,
       };
     },
   },
