@@ -136,7 +136,7 @@ class BasicLayout extends React.PureComponent {
     return groupBy(newNotices, 'type');
   }
   handleOpenChange = (openKeys) => {
-    const latestOpenKey = openKeys.find(key => this.state.openKeys.find(key));
+    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
     this.setState({
       openKeys: latestOpenKey ? [latestOpenKey] : [],
     });
@@ -198,7 +198,6 @@ class BasicLayout extends React.PureComponent {
             <Menu
               theme="dark"
               mode="inline"
-              openKeys={this.state.openKeys}
               onOpenChange={this.handleOpenChange}
               selectedKeys={this.getCurrentMenuSelectedKeys()}
               style={{ margin: '24px 0', width: '100%' }}
