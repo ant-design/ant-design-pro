@@ -123,8 +123,8 @@ const data = [{
       component: Error,
     }],
   }, {
-    name: '错误',
-    path: 'error',
+    name: '异常',
+    path: 'exception',
     icon: 'warning',
     children: [{
       name: '403',

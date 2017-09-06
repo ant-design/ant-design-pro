@@ -1,4 +1,5 @@
 @import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
 
 .exception {
   display: flex;
@@ -8,8 +9,16 @@
   .imgBlock {
     flex: 0 0 62.5%;
     width: 62.5%;
-    text-align: right;
     padding-right: 152px;
+    .clearfix();
+  }
+
+  .imgEle {
+    height: 360px;
+    width: 430px;
+    float: right;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
   }
 
   .content {

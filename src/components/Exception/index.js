@@ -12,7 +12,10 @@ export default ({ className, type, title, desc, img, actions }) => {
   return (
     <div className={clsString}>
       <div className={styles.imgBlock}>
-        <img src={img || config[pageType].img} alt="" />
+        <div
+          className={styles.imgEle}
+          style={{ backgroundImage: `url(${img || config[pageType].img})` }}
+        />
       </div>
       <div className={styles.content}>
         <h1>{title || config[pageType].title}</h1>
