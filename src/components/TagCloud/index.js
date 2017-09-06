@@ -79,7 +79,7 @@ class TagCloud extends PureComponent {
       height,
 
       // 设定文字大小配置函数(默认为12-40px的随机大小)
-      size: words => (((words.value - min) / (max - min)) * 10) + 12,
+      size: words => (((words.value - min) / (max - min)) * 12) + 6,
 
       // 设定文字内容
       text: words => words.name,
