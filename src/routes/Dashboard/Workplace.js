@@ -144,9 +144,9 @@ export default class Workplace extends PureComponent {
 
     return (
       <PageHeaderLayout
+        top={pageHeaderContent}
         action={pageHeaderAction}
         title={pageHeaderTitle}
-        content={pageHeaderContent}
       >
         <Row gutter={24}>
           <Col lg={16} md={24} sm={24} xs={24}>

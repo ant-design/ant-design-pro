@@ -14,7 +14,9 @@ class Pie extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.renderChart(nextProps.data);
+    if (this.props.data !== nextProps.data) {
+      this.renderChart(nextProps.data);
+    }
   }
 
   handleRef = (n) => {

@@ -60,6 +60,10 @@ export default class Analysis extends Component {
     this.setState({
       rangePickerValue,
     });
+
+    this.props.dispatch({
+      type: 'chart/fetchSalesData',
+    });
   }
 
   selectDate = (type) => {
@@ -84,7 +88,7 @@ export default class Analysis extends Component {
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
-      } = chart;
+    } = chart;
 
     const salesPieData = salesType === 'all' ?
       salesTypeData
