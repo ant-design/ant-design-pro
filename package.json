@@ -41,6 +41,6 @@
     "mockjs": "^1.0.1-beta3",
     "redbox-react": "^1.3.2",
     "roadhog": "^1.0.2",
-    "roadhog-api-doc": "^0.1.4"
+    "roadhog-api-doc": "^0.1.5"
   }
 }
