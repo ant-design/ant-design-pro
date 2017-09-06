@@ -24,6 +24,9 @@ class BasicLayout extends React.PureComponent {
     super(props);
     // 把一级 Layout 的 children 作为菜单项
     this.menus = getNavData().reduce((arr, current) => arr.concat(current.children), []);
+    this.state = {
+      openKeys: this.getDefaultCollapsedSubMenus(props),
+    };
   }
   state = {
     mode: 'inline',
@@ -48,13 +51,13 @@ class BasicLayout extends React.PureComponent {
       this.props.dispatch(routerRedux.push('/user/login'));
     }
   }
-  getDefaultCollapsedSubMenus() {
-    const currentMenuSelectedKeys = [...this.getCurrentMenuSelectedKeys()];
+  getDefaultCollapsedSubMenus(props) {
+    const currentMenuSelectedKeys = [...this.getCurrentMenuSelectedKeys(props)];
     currentMenuSelectedKeys.splice(-1, 1);
     return currentMenuSelectedKeys;
   }
-  getCurrentMenuSelectedKeys() {
-    const { location: { pathname } } = this.props;
+  getCurrentMenuSelectedKeys(props) {
+    const { location: { pathname } } = props || this.props;
     const keys = pathname.split('/').slice(1);
     if (keys.length === 1 && keys[0] === '') {
       return [this.menus[0].key];
@@ -132,6 +135,12 @@ class BasicLayout extends React.PureComponent {
     });
     return groupBy(newNotices, 'type');
   }
+  handleOpenChange = (openKeys) => {
+    const latestOpenKey = openKeys.find(key => this.state.openKeys.find(key));
+    this.setState({
+      openKeys: latestOpenKey ? [latestOpenKey] : [],
+    });
+  }
   toggle = () => {
     const { collapsed } = this.props;
     this.props.dispatch({
@@ -189,7 +198,8 @@ class BasicLayout extends React.PureComponent {
             <Menu
               theme="dark"
               mode="inline"
-              defaultOpenKeys={this.getDefaultCollapsedSubMenus()}
+              openKeys={this.state.openKeys}
+              onOpenChange={this.handleOpenChange}
               selectedKeys={this.getCurrentMenuSelectedKeys()}
               style={{ margin: '24px 0', width: '100%' }}
               inlineIndent={32}
