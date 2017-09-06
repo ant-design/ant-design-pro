@@ -13,7 +13,7 @@ export default {
         type: 'changeSubmitting',
         payload: true,
       });
-      const response = yield call(fakeAccountLogin);
+      const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'loginHandle',
         payload: response,

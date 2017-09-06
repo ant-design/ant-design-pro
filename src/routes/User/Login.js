@@ -61,7 +61,14 @@ export default class Login extends Component {
   }
 
   msg = (message) => {
-    return <Alert style={{ marginBottom: 16 }} message={message} type="error" showIcon closable />;
+    return (<Alert
+      key={new Date().getTime()}
+      style={{ marginBottom: 16 }}
+      message={message}
+      type="error"
+      showIcon
+      closable
+    />);
   }
 
   render() {
@@ -73,7 +80,12 @@ export default class Login extends Component {
         <Form onSubmit={this.handleSubmit}>
           <Tabs className={styles.tabs} activeKey={type} onChange={this.onSwitch}>
             <TabPane tab="账户密码登录" key="account">
-              {login.status === 'error' && login.type === 'account' && this.msg('账户或密码错误')}
+              {
+                login.status === 'error' &&
+                login.type === 'account' &&
+                login.submitting === false &&
+                this.msg('账户或密码错误')
+              }
               <FormItem>
                 {getFieldDecorator('userName', {
                   rules: [{
@@ -82,7 +94,7 @@ export default class Login extends Component {
                 })(
                   <Input
                     prefix={<Icon type="user" style={{ fontSize: 14, color: 'rgba(0, 0, 0, 0.25)' }} />}
-                    placeholder="账户"
+                    placeholder="admin"
                   />
                 )}
               </FormItem>
@@ -95,13 +107,18 @@ export default class Login extends Component {
                   <Input
                     prefix={<Icon type="lock" style={{ fontSize: 14, color: 'rgba(0, 0, 0, 0.25)' }} />}
                     type="password"
-                    placeholder="密码"
+                    placeholder="888888"
                   />
                 )}
               </FormItem>
             </TabPane>
             <TabPane tab="手机号登录" key="mobile">
-              {login.status === 'error' && login.type === 'mobile' && this.msg('验证码错误')}
+              {
+                login.status === 'error' &&
+                login.type === 'mobile' &&
+                login.submitting === false &&
+                this.msg('验证码错误')
+              }
               <FormItem>
                 {getFieldDecorator('mobile', {
                   rules: [{

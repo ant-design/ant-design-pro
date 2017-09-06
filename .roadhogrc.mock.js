@@ -65,7 +65,8 @@ const proxy = {
   'GET /api/fake_chart_data': getFakeChartData,
   'GET /api/profile': getProfileData,
   'POST /api/login/account': (req, res) => {
-    res.send({ status: 'error', type: 'account' });
+    const { password, userName } = req.body;
+    res.send({ status: password === '888888' && userName === 'admin' ? 'ok' : 'error', type: 'account' });
   },
   'POST /api/login/mobile': (req, res) => {
     res.send({ status: 'ok', type: 'mobile' });
