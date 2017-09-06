@@ -11,12 +11,15 @@ import { fixedZero } from '../../utils/utils';
 
 import styles from './Monitor.less';
 
-const activeData = [];
-for (let i = 0; i < 24; i += 1) {
-  activeData.push({
-    x: `${fixedZero(i)}:00`,
-    y: (i * 50) + (Math.floor(Math.random() * 200)),
-  });
+function getActiveData() {
+  const activeData = [];
+  for (let i = 0; i < 24; i += 1) {
+    activeData.push({
+      x: `${fixedZero(i)}:00`,
+      y: (i * 50) + (Math.floor(Math.random() * 200)),
+    });
+  }
+  return activeData;
 }
 
 const MapData = [];
@@ -33,13 +36,23 @@ const targetTime = new Date().getTime() + 3900000;
   monitor: state.monitor,
 }))
 export default class Monitor extends PureComponent {
+  state = {
+    activeData: getActiveData(),
+  }
+
   componentDidMount() {
     this.props.dispatch({
       type: 'monitor/fetchTags',
     });
-  }
 
+    setInterval(() => {
+      this.setState({
+        activeData: getActiveData(),
+      });
+    }, 1000);
+  }
   render() {
+    const { activeData = [] } = this.state;
     const { monitor } = this.props;
     const { tags } = monitor;
 
@@ -90,6 +103,7 @@ export default class Monitor extends PureComponent {
                 />
                 <div style={{ marginTop: 32 }}>
                   <MiniArea
+                    animate={false}
                     line
                     color="#5DD1DD"
                     height={84}
@@ -129,7 +143,7 @@ export default class Monitor extends PureComponent {
               bordered={false}
             >
               <Gauge
-                title="跳出率"
+                title="核销率"
                 height={164}
                 percent={87}
               />
@@ -143,7 +157,7 @@ export default class Monitor extends PureComponent {
               style={{ marginBottom: 24 }}
               bordered={false}
             >
-              <Row style={{ padding: '18px 0 19px 0' }}>
+              <Row gutter={4} style={{ padding: '18px 0 19px 0' }}>
                 <Col span={8}>
                   <Pie
                     percent={28}
@@ -174,7 +188,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col sm={8} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索" bordered={false}>
+            <Card title="热门搜索" bordered={false} bodyStyle={{ height: 214 }}>
               <TagCloud
                 data={tags}
                 height={161}
