@@ -1,5 +1,4 @@
 @import "~antd/lib/style/themes/default.less";
-@import "../../utils/utils.less";
 
 .search {
   display: inline-block;
@@ -21,25 +20,5 @@
     border-radius: 0 @border-radius-base @border-radius-base 0;
     width: 86px;
     height: 40px;
-  }
-}
-
-@media screen and (max-width: @screen-sm) {
-  .search {
-    :global {
-      .ant-input-group .ant-input {
-        width: 300px;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: @screen-xs) {
-  .search {
-    :global {
-      .ant-input-group .ant-input {
-        width: 200px;
-      }
-    }
   }
 }
