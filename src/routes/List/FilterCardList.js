@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import numeral from 'numeral';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Row, Col, Form, Card, Select, Spin, Icon, Avatar } from 'antd';
+import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardFormRow from '../../components/StandardFormRow';
@@ -199,15 +199,21 @@ export default class FilterCardList extends PureComponent {
               </StandardFormRow>
             </Form>
           </Card>
-          <Row gutter={16} style={{ marginTop: 16 }}>
+          <List
+            style={{ marginTop: 16 }}
+            grid={{ gutter: 16, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
+            loading={loading}
+          >
             {
-              loading && <Spin />
-            }
-            {
-              !loading && list && list.map(item => (
-                <Col lg={6} md={8} sm={12} xs={24} style={{ marginBottom: 16 }} key={item.id}>
+              list && list.map(item => (
+                <List.Item key={item.id}>
                   <Card
-                    actions={[<Icon type="copy" />, <Icon type="solution" />, <Icon type="setting" />, <Icon type="delete" />]}
+                    actions={[
+                      <Tooltip title="复制"><Icon type="copy" /></Tooltip>,
+                      <Tooltip title="用户"><Icon type="solution" /></Tooltip>,
+                      <Tooltip title="设置"><Icon type="setting" /></Tooltip>,
+                      <Tooltip title="删除"><Icon type="delete" /></Tooltip>,
+                    ]}
                   >
                     <Card.Meta
                       avatar={<Avatar size="large" src={item.avatar} />}
@@ -220,10 +226,10 @@ export default class FilterCardList extends PureComponent {
                       />
                     </div>
                   </Card>
-                </Col>
+                </List.Item>
               ))
             }
-          </Row>
+          </List>
         </div>
       </PageHeaderLayout>
     );
