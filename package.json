@@ -4,10 +4,11 @@
   "scripts": {
     "start": "roadhog server",
     "build": "roadhog build",
-    "lint": "eslint --ext .js src test mock",
+    "lint": "eslint --ext .js",
     "precommit": "npm run lint",
     "site": "roadhog-api-doc static",
-    "test": "jest"
+    "test": "jest",
+    "e2e": "testcafe chrome e2e/*.test.js"
   },
   "dependencies": {
     "antd": "next",
@@ -46,7 +47,9 @@
     "react-test-renderer": "^15.6.1",
     "redbox-react": "^1.3.2",
     "roadhog": "^1.0.2",
-    "roadhog-api-doc": "^0.1.5"
+    "roadhog-api-doc": "^0.1.5",
+    "testcafe": "^0.17.2",
+    "testcafe-react-selectors": "^0.0.8"
   },
   "babel": {
     "presets": [
@@ -54,13 +57,18 @@
       "stage-0",
       "react"
     ],
-    "plugins": ["transform-decorators-legacy"]
+    "plugins": [
+      "transform-decorators-legacy"
+    ]
   },
   "jest": {
     "setupFiles": [
       "./tests/setup.js"
     ],
-    "moduleFileExtensions": ["js", "jsx"],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/tests/styleMock.js"
     }
