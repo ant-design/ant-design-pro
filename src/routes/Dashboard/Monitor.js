@@ -3,12 +3,11 @@ import { connect } from 'dva';
 import { Row, Col, Card } from 'antd';
 import numeral from 'numeral';
 
-import { NumberInfo, MiniArea, Pie, WaterWave, Gauge } from '../../components/Charts';
+import { NumberInfo, Pie, WaterWave, Gauge } from '../../components/Charts';
 import MapChart from '../../components/MapChart';
 import TagCloud from '../../components/TagCloud';
 import Countdown from '../../components/Countdown';
 import ActiveChart from '../../components/ActiveChart';
-import { fixedZero } from '../../utils/utils';
 
 import styles from './Monitor.less';
 
