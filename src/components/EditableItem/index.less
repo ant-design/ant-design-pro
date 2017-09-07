@@ -1,0 +1,25 @@
+@import "~antd/lib/style/themes/default.less";
+
+.editableItem {
+  line-height: @input-height-base;
+  display: table;
+  width: 100%;
+  margin-top: (@font-size-base * @line-height-base - @input-height-base) / 2;
+
+  .wrapper {
+    display: table-row;
+
+    & > * {
+      display: table-cell;
+    }
+
+    & > *:first-child {
+      width: 85%;
+    }
+
+    .icon {
+      cursor: pointer;
+      text-align: right;
+    }
+  }
+}

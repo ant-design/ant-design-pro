@@ -3,9 +3,11 @@ import { connect } from 'dva';
 import { Button, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import DescriptionList from '../../components/DescriptionList';
+import EditableItem from '../../components/EditableItem';
 import styles from './AdvancedProfile.less';
 
 const { Step } = Steps;
+const ButtonGroup = Button.Group;
 const { Description } = DescriptionList;
 
 const menu = (
@@ -18,13 +20,16 @@ const menu = (
 
 const action = (
   <div>
+    <ButtonGroup style={{ marginRight: 8 }}>
+      <Button size="large">操作</Button>
+      <Button size="large">操作</Button>
+      <Dropdown overlay={menu}>
+        <Button size="large">
+          更多操作 <Icon type="down" />
+        </Button>
+      </Dropdown>
+    </ButtonGroup>
     <Button size="large" type="primary">主操作</Button>
-    <Button size="large">次操作</Button>
-    <Dropdown overlay={menu}>
-      <Button size="large">
-        更多 <Icon type="down" />
-      </Button>
-    </Dropdown>
   </div>
 );
 
@@ -44,10 +49,11 @@ const extra = (
 const description = (
   <DescriptionList col="2">
     <Description term="创建人">曲丽丽</Description>
-    <Description term="关联单据"><a href="">12421</a></Description>
+    <Description term="订购产品">XX 服务</Description>
     <Description term="创建时间">2017-07-07</Description>
+    <Description term="关联单据"><a href="">12421</a></Description>
     <Description term="生效日期">2017-07-07 ~ 2017-08-08</Description>
-    <Description term="单据备注">修改公司地址：浙江省杭州市西湖区工专路</Description>
+    <Description term="备注">请于两个工作日内确认</Description>
   </DescriptionList>
 );
 
@@ -195,7 +201,9 @@ export default class AdvancedProfile extends Component {
             <Description term="用户姓名">付小小</Description>
             <Description term="会员卡号">32943898021309809423</Description>
             <Description term="身份证">3321944288191034921</Description>
-            <Description term="联系方式">18322193472</Description>
+            <Description term="联系方式">
+              <EditableItem value="18112345678" />
+            </Description>
             <Description term="联系地址">曲丽丽  18100000000  浙江省杭州市西湖区黄姑山路工专路交叉路口</Description>
           </DescriptionList>
           <DescriptionList style={{ marginBottom: 24 }} title="信息组" col="2">
