@@ -2,3 +2,16 @@ language: node_js
 
 node_js:
   - "8"
+
+env:
+  matrix:
+    - TEST_TYPE=lint
+    - TEST_TYPE=test
+
+script:
+  - |
+    if [ "$TEST_TYPE" = lint ]; then
+      npm run lint
+    elif [ "$TEST_TYPE" = test ]; then
+      npm run test
+    fi
