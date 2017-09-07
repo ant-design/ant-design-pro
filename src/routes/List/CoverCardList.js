@@ -161,9 +161,15 @@ export default class CoverCardList extends PureComponent {
                       <TagOption value="cat2">类目二</TagOption>
                       <TagOption value="cat3">类目三</TagOption>
                       <TagOption value="cat4">类目四</TagOption>
+                      <TagOption value="cat5">类目五</TagOption>
+                      <TagOption value="cat6">类目六</TagOption>
+                      <TagOption value="cat7">类目七</TagOption>
+                      <TagOption value="cat8">类目八</TagOption>
+                      <TagOption value="cat9">类目九</TagOption>
+                      <TagOption value="cat10">类目十</TagOption>
                       <TagExpand>
-                        <TagOption value="cat5">类目五</TagOption>
-                        <TagOption value="cat6">类目六</TagOption>
+                        <TagOption value="cat11">类目十一</TagOption>
+                        <TagOption value="cat12">类目十二</TagOption>
                       </TagExpand>
                     </TagSelect>
                   )}
