@@ -53,14 +53,12 @@
       "es2015",
       "stage-0",
       "react"
-    ]
+    ],
+    "plugins": ["transform-decorators-legacy"]
   },
   "jest": {
     "setupFiles": [
       "./tests/setup.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/"
     ],
     "moduleFileExtensions": ["js", "jsx"],
     "moduleNameMapper": {
