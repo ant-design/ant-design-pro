@@ -20,4 +20,4 @@ export default function Result({
       {actions && <div className={styles.actions}>{actions}</div>}
     </div>
   );
-};
+}
