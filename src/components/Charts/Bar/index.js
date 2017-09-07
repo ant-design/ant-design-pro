@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import G2 from 'g2';
+import equal from '../equal';
 import styles from '../index.less';
 
 class Bar extends PureComponent {
@@ -8,7 +9,7 @@ class Bar extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.props.data) {
+    if (!equal(this.props, nextProps)) {
       this.renderChart(nextProps.data);
     }
   }
