@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import G2 from 'g2';
 import { Row, Col } from 'antd';
+import equal from '../equal';
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
@@ -14,7 +15,7 @@ class Radar extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.props.data) {
+    if (!equal(this.props, nextProps)) {
       this.renderChart(nextProps.data);
     }
   }

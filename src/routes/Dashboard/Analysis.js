@@ -60,10 +60,6 @@ export default class Analysis extends Component {
     this.setState({
       rangePickerValue,
     });
-
-    this.props.dispatch({
-      type: 'chart/fetchSalesData',
-    });
   }
 
   selectDate = (type) => {
@@ -88,7 +84,7 @@ export default class Analysis extends Component {
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
-    } = chart;
+      } = chart;
 
     const salesPieData = salesType === 'all' ?
       salesTypeData
@@ -144,6 +140,8 @@ export default class Analysis extends Component {
       },
     ];
 
+    const activeKey = currentTabKey || (offlineData[0] && offlineData[0].name);
+
     const CustomTab = ({ data, currentTabKey: currentKey }) => (
       <Row gutter={8} style={{ width: 138, margin: '8px 28px' }}>
         <Col span={12}>
@@ -156,7 +154,7 @@ export default class Analysis extends Component {
         </Col>
         <Col span={12} style={{ paddingTop: 36 }}>
           <Pie
-            animate={(currentKey === data.name)}
+            animate={false}
             color={(currentKey !== data.name) && '#99d5fd'}
             inner={0.55}
             tooltip={false}
@@ -365,13 +363,13 @@ export default class Analysis extends Component {
           style={{ marginTop: 24 }}
         >
           <Tabs
-            activeKey={currentTabKey || (offlineData[0] && offlineData[0].name)}
+            activeKey={activeKey}
             onChange={this.handleTabChange}
           >
             {
               offlineData.map(shop => (
                 <TabPane
-                  tab={<CustomTab data={shop} currentTabKey={currentTabKey} />}
+                  tab={<CustomTab data={shop} currentTabKey={activeKey} />}
                   key={shop.name}
                 >
                   <div style={{ padding: '0 24px' }}>

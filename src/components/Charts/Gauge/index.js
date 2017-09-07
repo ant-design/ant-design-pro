@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import G2 from 'g2';
+import equal from '../equal';
 
 const Shape = G2.Shape;
 
@@ -10,7 +11,9 @@ class Gauge extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.renderChart(nextProps);
+    if (!equal(this.props, nextProps)) {
+      this.renderChart(nextProps);
+    }
   }
 
   handleRef = (n) => {
