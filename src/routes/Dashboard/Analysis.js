@@ -254,7 +254,7 @@ export default class Analysis extends Component {
                     />
                   </Col>
                   <Col xl={8} lg={12} md={12} sm={24} xs={24}>
-                    <h4>门店销售额排名</h4>
+                    <h4 className={styles.rankingTitle}>门店销售额排名</h4>
                     <ul className={styles.rankingList}>
                       {
                         rankingListData.map((item, i) => (
@@ -315,7 +315,6 @@ export default class Analysis extends Component {
                 </Col>
               </Row>
               <Table
-                Bordered={false}
                 rowKey={record => record.index}
                 size="middle"
                 columns={columns}
