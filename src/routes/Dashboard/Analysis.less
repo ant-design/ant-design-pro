@@ -3,8 +3,13 @@
 
 .iconGroup {
   i {
+    transition: color 0.32s;
+    color: @text-color-secondary;
     cursor: pointer;
     margin-left: 16px;
+    &:hover {
+      color: @text-color;
+    }
   }
 }
 .rankingList {

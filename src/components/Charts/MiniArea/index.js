@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import G2 from 'g2';
+import equal from '../equal';
 import styles from '../index.less';
 
 class MiniArea extends PureComponent {
@@ -8,7 +9,7 @@ class MiniArea extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.props.data) {
+    if (!equal(this.props, nextProps)) {
       this.renderChart(nextProps.data);
     }
   }
@@ -18,7 +19,7 @@ class MiniArea extends PureComponent {
   }
 
   renderChart(data) {
-    const { height = 0, fit = true, color = '#33abfb', line, xAxis, yAxis } = this.props;
+    const { height = 0, fit = true, color = '#33abfb', line, xAxis, yAxis, animate = true } = this.props;
 
     if (!data || (data && data.length < 1)) {
       return;
@@ -31,6 +32,7 @@ class MiniArea extends PureComponent {
       container: this.node,
       forceFit: fit,
       height: height + 54,
+      animate,
       plotCfg: {
         margin: [36, 0, 30, 0],
       },

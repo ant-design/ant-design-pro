@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import G2 from 'g2';
+import equal from '../equal';
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
@@ -14,7 +15,9 @@ class Pie extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.renderChart(nextProps.data);
+    if (!equal(this.props, nextProps)) {
+      this.renderChart(nextProps.data);
+    }
   }
 
   handleRef = (n) => {

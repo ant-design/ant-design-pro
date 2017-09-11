@@ -35,6 +35,7 @@
     "eslint-plugin-babel": "^4.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-markdown": "^1.0.0-beta.6",
     "eslint-plugin-react": "^7.0.1",
     "gh-pages": "^1.0.0",
     "husky": "^0.13.4",

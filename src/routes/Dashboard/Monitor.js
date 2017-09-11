@@ -3,21 +3,13 @@ import { connect } from 'dva';
 import { Row, Col, Card } from 'antd';
 import numeral from 'numeral';
 
-import { NumberInfo, MiniArea, Pie, WaterWave, Gauge } from '../../components/Charts';
+import { NumberInfo, Pie, WaterWave, Gauge } from '../../components/Charts';
 import MapChart from '../../components/MapChart';
 import TagCloud from '../../components/TagCloud';
 import Countdown from '../../components/Countdown';
-import { fixedZero } from '../../utils/utils';
+import ActiveChart from '../../components/ActiveChart';
 
 import styles from './Monitor.less';
-
-const activeData = [];
-for (let i = 0; i < 24; i += 1) {
-  activeData.push({
-    x: `${fixedZero(i)}:00`,
-    y: (i * 50) + (Math.floor(Math.random() * 200)),
-  });
-}
 
 const MapData = [];
 for (let i = 0; i < 50; i += 1) {
@@ -83,44 +75,7 @@ export default class Monitor extends PureComponent {
           </Col>
           <Col lg={8} md={24} sm={24} xs={24}>
             <Card title="活动情况预测" style={{ marginBottom: 24 }} bordered={false}>
-              <div className={styles.activeChart}>
-                <NumberInfo
-                  subTitle="目标评估"
-                  total="有望达到预期"
-                />
-                <div style={{ marginTop: 32 }}>
-                  <MiniArea
-                    line
-                    color="#5DD1DD"
-                    height={84}
-                    yAxis={{
-                      tickCount: 3,
-                      tickLine: false,
-                      labels: false,
-                      title: false,
-                      line: false,
-                    }}
-                    data={activeData}
-                  />
-                </div>
-                {
-                  activeData && (
-                    <div className={styles.activeChartGrid}>
-                      <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
-                      <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
-                    </div>
-                  )
-                }
-                {
-                  activeData && (
-                    <div className={styles.activeChartLegend}>
-                      <span>00:00</span>
-                      <span>{activeData[Math.floor(activeData.length / 2)].x}</span>
-                      <span>{activeData[activeData.length - 1].x}</span>
-                    </div>
-                  )
-                }
-              </div>
+              <ActiveChart />
             </Card>
             <Card
               title="券核效率"
@@ -129,7 +84,7 @@ export default class Monitor extends PureComponent {
               bordered={false}
             >
               <Gauge
-                title="跳出率"
+                title="核销率"
                 height={164}
                 percent={87}
               />
@@ -143,7 +98,7 @@ export default class Monitor extends PureComponent {
               style={{ marginBottom: 24 }}
               bordered={false}
             >
-              <Row style={{ padding: '18px 0 19px 0' }}>
+              <Row gutter={4} style={{ padding: '18px 0 19px 0' }}>
                 <Col span={8}>
                   <Pie
                     percent={28}
@@ -174,7 +129,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col sm={8} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索" bordered={false}>
+            <Card title="热门搜索" bordered={false} bodyStyle={{ height: 214 }}>
               <TagCloud
                 data={tags}
                 height={161}
