@@ -17,6 +17,7 @@ script:
       npm run uitest
     elif [ "$TEST_TYPE" = e2e ]; then
       npm run site
+      mv dist/* ./
       php -S localhost:8000 &
       npm run e2e
     fi
