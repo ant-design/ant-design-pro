@@ -13,6 +13,7 @@ addons:
   apt:
     packages:
       - xvfb
+
 install:
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
@@ -27,7 +28,6 @@ script:
     elif [ "$TEST_TYPE" = e2e ]; then
       npm run site
       mv dist/* ./
-      ls
       php -S localhost:8000 &
       npm run e2e
     fi
