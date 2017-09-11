@@ -4,11 +4,10 @@
   "scripts": {
     "start": "roadhog server",
     "build": "roadhog build",
-    "lint": "eslint --ext .js",
+    "lint": "eslint --ext .js src mock tests",
     "precommit": "npm run lint",
     "site": "roadhog-api-doc static",
-    "test": "jest",
-    "e2e": "testcafe chrome e2e/*.test.js"
+    "test": "jest"
   },
   "dependencies": {
     "antd": "next",
@@ -44,12 +43,12 @@
     "husky": "^0.13.4",
     "jest": "^21.0.1",
     "mockjs": "^1.0.1-beta3",
+    "nightmare": "^2.10.0",
     "react-test-renderer": "^15.6.1",
     "redbox-react": "^1.3.2",
     "roadhog": "^1.0.2",
     "roadhog-api-doc": "^0.1.5",
-    "testcafe": "^0.17.2",
-    "testcafe-react-selectors": "^0.0.8"
+    "url": "^0.11.0"
   },
   "babel": {
     "presets": [
@@ -64,10 +63,6 @@
   "jest": {
     "setupFiles": [
       "./tests/setup.js"
-    ],
-    "testPathIgnorePatterns": [
-      "node_modules",
-      "e2e"
     ],
     "moduleFileExtensions": [
       "js",
