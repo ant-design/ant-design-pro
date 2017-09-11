@@ -13,5 +13,7 @@ script:
     if [ "$TEST_TYPE" = lint ]; then
       npm run lint
     elif [ "$TEST_TYPE" = test ]; then
-      npm run test
+      npm run site
+      php -S localhost:8000 &
+      CI=true npm run test
     fi
