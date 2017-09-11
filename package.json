@@ -7,6 +7,8 @@
     "lint": "eslint --ext .js src mock tests",
     "precommit": "npm run lint",
     "site": "roadhog-api-doc static",
+    "uitest": "jest src/**/*.test.js",
+    "e2e": "jest src/**/*.e2e.js",
     "test": "jest"
   },
   "dependencies": {
@@ -63,6 +65,9 @@
   "jest": {
     "setupFiles": [
       "<rootDir>/tests/setup.js"
+    ],
+    "testMatch": [
+      "**/?(*.)(spec|test|e2e).js?(x)"
     ],
     "setupTestFrameworkScriptFile": "<rootDir>/tests/jasmine.js",
     "moduleFileExtensions": [

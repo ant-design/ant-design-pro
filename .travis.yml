@@ -6,14 +6,17 @@ node_js:
 env:
   matrix:
     - TEST_TYPE=lint
-    - TEST_TYPE=test
+    - TEST_TYPE=uitest
+    - TEST_TYPE=e2e
 
 script:
   - |
     if [ "$TEST_TYPE" = lint ]; then
       npm run lint
-    elif [ "$TEST_TYPE" = test ]; then
+    elif [ "$TEST_TYPE" = uitest ]; then
+      npm run uitest
+    elif [ "$TEST_TYPE" = e2e ]; then
       npm run site
       php -S localhost:8000 &
-      CI=true npm run test
+      npm run e2e
     fi
