@@ -62,8 +62,9 @@
   },
   "jest": {
     "setupFiles": [
-      "./tests/setup.js"
+      "<rootDir>/tests/setup.js"
     ],
+    "setupTestFrameworkScriptFile": "<rootDir>/tests/jasmine.js",
     "moduleFileExtensions": [
       "js",
       "jsx"

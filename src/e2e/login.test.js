@@ -1,7 +1,5 @@
 import visit from './helpers/visit';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-
 describe('Login', () => {
   it('should login with failure', async () => {
     const page = visit('/#/user/login');
