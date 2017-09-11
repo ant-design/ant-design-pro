@@ -60,15 +60,15 @@ export default class Login extends Component {
     );
   }
 
-  msg = (message) => {
-    return (<Alert
-      key={new Date().getTime()}
-      style={{ marginBottom: 16 }}
-      message={message}
-      type="error"
-      showIcon
-      closable
-    />);
+  renderMessage = (message) => {
+    return (
+      <Alert
+        style={{ marginBottom: 16 }}
+        message={message}
+        type="error"
+        showIcon
+      />
+    );
   }
 
   render() {
@@ -84,7 +84,7 @@ export default class Login extends Component {
                 login.status === 'error' &&
                 login.type === 'account' &&
                 login.submitting === false &&
-                this.msg('账户或密码错误')
+                this.renderMessage('账户或密码错误')
               }
               <FormItem>
                 {getFieldDecorator('userName', {
@@ -117,7 +117,7 @@ export default class Login extends Component {
                 login.status === 'error' &&
                 login.type === 'mobile' &&
                 login.submitting === false &&
-                this.msg('验证码错误')
+                this.renderMessage('验证码错误')
               }
               <FormItem>
                 {getFieldDecorator('mobile', {
