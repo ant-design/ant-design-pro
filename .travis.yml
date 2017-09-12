@@ -6,7 +6,7 @@ node_js:
 env:
   matrix:
     - TEST_TYPE=lint
-    - TEST_TYPE=unit-test
+    - TEST_TYPE=unit
     - TEST_TYPE=e2e
 
 addons:
@@ -24,7 +24,7 @@ script:
     if [ "$TEST_TYPE" = lint ]; then
       npm run lint
     elif [ "$TEST_TYPE" = uitest ]; then
-      npm run unit-test
+      npm run unit
     elif [ "$TEST_TYPE" = e2e ]; then
       npm run site
       mv dist/* ./

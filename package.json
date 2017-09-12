@@ -7,7 +7,7 @@
     "lint": "eslint --ext .js src mock tests",
     "precommit": "npm run lint",
     "site": "roadhog-api-doc static",
-    "unit-test": "jest --testPathPattern '.*\\.test\\.js'",
+    "unit": "jest --testPathPattern '.*\\.test\\.js'",
     "e2e": "jest --testPathPattern '.*\\.e2e\\.js'",
     "test": "jest"
   },
