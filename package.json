@@ -7,9 +7,8 @@
     "lint": "eslint --ext .js src mock tests",
     "precommit": "npm run lint",
     "site": "roadhog-api-doc static",
-    "unit": "jest '\\.test\\.js'",
-    "e2e": "node ./tests/run-e2e-tests.js",
-    "test": "jest"
+    "test": "jest",
+    "test:all": "node ./tests/run-tests.js"
   },
   "dependencies": {
     "antd": "next",

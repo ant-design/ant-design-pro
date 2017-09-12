@@ -6,9 +6,8 @@ node_js:
 env:
   matrix:
     - TEST_TYPE=lint
-    - TEST_TYPE=unit
-    - TEST_TYPE=e2e-src
-    - TEST_TYPE=e2e-dist
+    - TEST_TYPE=test-all
+    - TEST_TYPE=test-dist
 
 addons:
   apt:
@@ -24,13 +23,11 @@ script:
   - |
     if [ "$TEST_TYPE" = lint ]; then
       npm run lint
-    elif [ "$TEST_TYPE" = uitest ]; then
-      npm run unit
-    elif [ "$TEST_TYPE" = e2e-src ]; then
-      npm run e2e
-    elif [ "$TEST_TYPE" = e2e-dist ]; then
+    elif [ "$TEST_TYPE" = test-all ]; then
+      npm run test:all
+    elif [ "$TEST_TYPE" = test-dist ]; then
       npm run site
       mv dist/* ./
       php -S localhost:8000 &
-      npm test -- '\.e2e\.js'
+      npm test .e2e.js
     fi
