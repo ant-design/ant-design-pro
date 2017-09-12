@@ -2,3 +2,32 @@ language: node_js
 
 node_js:
   - "8"
+
+env:
+  matrix:
+    - TEST_TYPE=lint
+    - TEST_TYPE=test-all
+    - TEST_TYPE=test-dist
+
+addons:
+  apt:
+    packages:
+      - xvfb
+
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - npm install
+
+script:
+  - |
+    if [ "$TEST_TYPE" = lint ]; then
+      npm run lint
+    elif [ "$TEST_TYPE" = test-all ]; then
+      npm run test:all
+    elif [ "$TEST_TYPE" = test-dist ]; then
+      npm run site
+      mv dist/* ./
+      php -S localhost:8000 &
+      npm test .e2e.js
+    fi

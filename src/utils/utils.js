@@ -1,10 +1,10 @@
 import moment from 'moment';
 
-function fixedZero(val) {
+export function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
-function getTimeDistance(type) {
+export function getTimeDistance(type) {
   const now = new Date();
   const oneDay = 1000 * 60 * 60 * 24;
 
@@ -48,8 +48,3 @@ function getTimeDistance(type) {
     return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)];
   }
 }
-
-export default {
-  fixedZero,
-  getTimeDistance,
-};

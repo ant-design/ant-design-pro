@@ -3,7 +3,9 @@ import classNames from 'classnames';
 import { Icon } from 'antd';
 import styles from './index.less';
 
-export default ({ className, type, title, description, extra, actions, ...restProps }) => {
+export default function Result({
+  className, type, title, description, extra, actions, ...restProps
+}) {
   const iconMap = {
     error: <Icon className={styles.error} type="close-circle" />,
     success: <Icon className={styles.success} type="check-circle" />,
@@ -18,4 +20,4 @@ export default ({ className, type, title, description, extra, actions, ...restPr
       {actions && <div className={styles.actions}>{actions}</div>}
     </div>
   );
-};
+}
