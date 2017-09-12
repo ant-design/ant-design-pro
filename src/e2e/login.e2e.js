@@ -1,8 +1,13 @@
-import visit from './helpers/visit';
+import Nightmare from 'nightmare';
 
 describe('Login', () => {
+  let page;
+  beforeEach(() => {
+    page = Nightmare();
+    page.goto('http://localhost:8000/#/user/login');
+  });
+
   it('should login with failure', async () => {
-    const page = visit('/#/user/login');
     await page.type('#userName', 'mockuser')
       .type('#password', 'wrong_password')
       .click('button[type="submit"]')
@@ -11,7 +16,6 @@ describe('Login', () => {
   });
 
   it('should login successfully', async () => {
-    const page = visit('/#/user/login');
     const text = await page.type('#userName', 'admin')
       .type('#password', '888888')
       .click('button[type="submit"]')
