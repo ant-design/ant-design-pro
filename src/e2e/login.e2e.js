@@ -15,7 +15,7 @@ describe('Login', () => {
       .end();
   });
 
-  it('should login successfully', async () => {
+  xit('should login successfully', async () => {
     const text = await page.type('#userName', 'admin')
       .type('#password', '888888')
       .click('button[type="submit"]')
