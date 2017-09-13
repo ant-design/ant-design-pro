@@ -2,12 +2,12 @@
   "name": "ant-design-pro",
   "private": true,
   "scripts": {
+    "precommit": "npm run lint",
     "start": "roadhog server",
     "build": "roadhog build",
+    "site": "roadhog-api-doc static",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
-    "precommit": "npm run lint",
-    "site": "roadhog-api-doc static",
     "test": "jest",
     "test:all": "node ./tests/run-tests.js"
   },
