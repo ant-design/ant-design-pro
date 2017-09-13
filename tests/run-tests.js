@@ -22,7 +22,7 @@ startServer.stdout.on('data', (data) => {
   if (data.toString().indexOf('The app is running at') >= 0) {
     // eslint-disable-next-line
     console.log('Development server is started, ready to run tests.');
-    const testCmd = spawn('npm', ['run', 'jest'], {
+    const testCmd = spawn('npm', ['test'], {
       stdio: 'inherit',
     });
     testCmd.on('exit', () => {
