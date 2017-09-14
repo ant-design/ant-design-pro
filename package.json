@@ -4,6 +4,7 @@
   "scripts": {
     "precommit": "npm run lint",
     "start": "roadhog server",
+    "start:no-proxy": "NO_PROXY=true roadhog server",
     "build": "roadhog build",
     "site": "roadhog-api-doc static",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
