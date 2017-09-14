@@ -153,7 +153,6 @@ export default class Workplace extends PureComponent {
             <Card
               className={styles.projectList}
               style={{ marginBottom: 24 }}
-              noHovering
               title="进行中的项目"
               bordered={false}
               extra={<Link to="/">全部项目</Link>}
@@ -163,7 +162,7 @@ export default class Workplace extends PureComponent {
               {
                 !projectLoading && notice.length > 0 && notice.map(item => (
                   <Card.Grid className={styles.projectGrid} key={item.id}>
-                    <Card noHovering bodyStyle={{ padding: 0 }} bordered={false}>
+                    <Card bodyStyle={{ padding: 0 }} bordered={false}>
                       <Card.Meta
                         avatar={<Avatar src={item.logo} />}
                         title={<Link to={item.href}>{item.title}</Link>}
@@ -181,7 +180,6 @@ export default class Workplace extends PureComponent {
               }
             </Card>
             <Card
-              noHovering
               style={{ marginBottom: 24 }}
               bodyStyle={{ padding: 0 }}
               bordered={false}
@@ -208,7 +206,6 @@ export default class Workplace extends PureComponent {
           <Col lg={8} md={24} sm={24} xs={24}>
             <Card
               style={{ marginBottom: 24 }}
-              noHovering
               title="快速开始 / 便捷导航"
               bordered={false}
               bodyStyle={{ padding: 0 }}
@@ -220,7 +217,6 @@ export default class Workplace extends PureComponent {
             </Card>
             <Card
               style={{ marginBottom: 24 }}
-              noHovering
               bordered={false}
               title="xx 指数"
             >
@@ -235,7 +231,6 @@ export default class Workplace extends PureComponent {
               </div>
             </Card>
             <Card
-              noHovering
               bodyStyle={{ paddingBottom: 0 }}
               bordered={false}
               title="团队"

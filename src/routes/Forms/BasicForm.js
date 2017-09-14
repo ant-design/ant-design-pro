@@ -48,7 +48,7 @@ export default class BasicForms extends PureComponent {
 
     return (
       <PageHeaderLayout title="基础表单" content="表单页是向后台提交数据的标准场景。">
-        <Card bordered={false} noHovering>
+        <Card bordered={false}>
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 24 }}>
             <FormItem
               {...formItemLayout}

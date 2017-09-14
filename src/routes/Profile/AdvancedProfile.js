@@ -188,7 +188,7 @@ export default class AdvancedProfile extends Component {
         extraContent={extra}
         tabList={tabList}
       >
-        <Card noHovering title="流程进度" style={{ marginBottom: 24 }} bordered={false}>
+        <Card title="流程进度" style={{ marginBottom: 24 }} bordered={false}>
           <Steps progressDot={customDot} current={1}>
             <Step title="创建项目" description={desc1} />
             <Step title="部门初审" description={desc2} />
@@ -196,7 +196,7 @@ export default class AdvancedProfile extends Component {
             <Step title="完成" />
           </Steps>
         </Card>
-        <Card noHovering title="用户信息" style={{ marginBottom: 24 }} bordered={false}>
+        <Card title="用户信息" style={{ marginBottom: 24 }} bordered={false}>
           <DescriptionList style={{ marginBottom: 24 }}>
             <Description term="用户姓名">付小小</Description>
             <Description term="会员卡号">32943898021309809423</Description>
@@ -222,7 +222,7 @@ export default class AdvancedProfile extends Component {
             </Description>
             <Description term="该数据更新时间">2017-08-08</Description>
           </DescriptionList>
-          <Card noHovering type="inner" title="多层级信息组">
+          <Card type="inner" title="多层级信息组">
             <DescriptionList style={{ marginBottom: 16 }} title="组名称">
               <Description term="负责人">林东东</Description>
               <Description term="角色码">1234567</Description>
@@ -243,13 +243,12 @@ export default class AdvancedProfile extends Component {
             </DescriptionList>
           </Card>
         </Card>
-        <Card noHovering title="用户近半年来电记录" style={{ marginBottom: 24 }} bordered={false}>
+        <Card title="用户近半年来电记录" style={{ marginBottom: 24 }} bordered={false}>
           <div className={styles.noData}>
             <Icon type="frown-o" /> 暂无数据
           </div>
         </Card>
         <Card
-          noHovering
           className={styles.tabsCard}
           bordered={false}
           tabList={operationTabList}

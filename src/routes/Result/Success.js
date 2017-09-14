@@ -52,7 +52,7 @@ const actions = (
 
 export default () => (
   <PageHeaderLayout>
-    <Card bordered={false} noHovering>
+    <Card bordered={false}>
       <Result
         type="success"
         title="提交成功"

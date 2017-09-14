@@ -67,10 +67,7 @@ export default class CardList extends PureComponent {
               list && list.map(item => (
                 <List.Item key={item.id}>
                   <Link to="/list/card-list">
-                    <Card
-                      noHovering={false}
-                      actions={[<a>操作一</a>, <a>操作二</a>]}
-                    >
+                    <Card actions={[<a>操作一</a>, <a>操作二</a>]}>
                       <Card.Meta
                         avatar={<Avatar size="large" src={item.avatar} />}
                         title={item.title}

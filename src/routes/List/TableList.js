@@ -170,7 +170,7 @@ export default class TableList extends PureComponent {
 
     return (
       <PageHeaderLayout title="标准表格">
-        <Card noHovering bordered={false}>
+        <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>
               <Form onSubmit={this.handleSearch}>

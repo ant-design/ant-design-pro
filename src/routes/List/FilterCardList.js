@@ -133,13 +133,8 @@ export default class FilterCardList extends PureComponent {
         onTabChange={this.handleTabChange}
       >
         <div className={styles.filterCardList}>
-          <Card
-            noHovering
-            bordered={false}
-          >
-            <Form
-              layout="inline"
-            >
+          <Card bordered={false}>
+            <Form layout="inline">
               <StandardFormRow title="所属类目" block>
                 <FormItem>
                   {getFieldDecorator('category')(

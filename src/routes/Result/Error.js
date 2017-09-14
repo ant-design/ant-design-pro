@@ -23,7 +23,7 @@ const actions = <Button size="large" type="primary">返回修改</Button>;
 
 export default () => (
   <PageHeaderLayout>
-    <Card bordered={false} noHovering>
+    <Card bordered={false}>
       <Result
         type="error"
         title="提交失败"

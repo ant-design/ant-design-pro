@@ -169,7 +169,7 @@ export default class SearchList extends Component {
         onTabChange={this.handleTabChange}
       >
         <div>
-          <Card noHovering bordered={false}>
+          <Card bordered={false}>
             <Form layout="inline">
               <StandardFormRow title="所属类目" block>
                 <FormItem>
