@@ -88,7 +88,7 @@ export default class Analysis extends Component {
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
-    } = chart;
+      } = chart;
 
     const salesPieData = salesType === 'all' ?
       salesTypeData
@@ -253,30 +253,60 @@ export default class Analysis extends Component {
               <TabPane tab="销售额" key="sales">
                 <Row gutter={72}>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
-                    <Bar
-                      height={292}
-                      title="销售额趋势"
-                      data={salesData}
-                    />
+                    <div className={styles.salesBar}>
+                      <Bar
+                        height={292}
+                        title="销售额趋势"
+                        data={salesData}
+                      />
+                    </div>
                   </Col>
                   <Col xl={8} lg={12} md={12} sm={24} xs={24}>
-                    <h4 className={styles.rankingTitle}>门店销售额排名</h4>
-                    <ul className={styles.rankingList}>
-                      {
-                        rankingListData.map((item, i) => (
-                          <li key={item.title}>
-                            <span className={(i < 3) && styles.active}>{i + 1}</span>
-                            <span>{item.title}</span>
-                            <span>{numeral(item.total).format('0,0')}</span>
-                          </li>
-                        ))
-                      }
-                    </ul>
+                    <div className={styles.salesRank}>
+                      <h4 className={styles.rankingTitle}>门店销售额排名</h4>
+                      <ul className={styles.rankingList}>
+                        {
+                          rankingListData.map((item, i) => (
+                            <li key={item.title}>
+                              <span className={(i < 3) && styles.active}>{i + 1}</span>
+                              <span>{item.title}</span>
+                              <span>{numeral(item.total).format('0,0')}</span>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                    </div>
                   </Col>
                 </Row>
               </TabPane>
-              <TabPane tab="访问量" key="visits">
-                访问量没有, 因为偷懒了
+              <TabPane tab="访问量" key="views">
+                <Row gutter={72}>
+                  <Col xl={16} lg={12} md={12} sm={24} xs={24}>
+                    <div className={styles.salesBar}>
+                      <Bar
+                        height={292}
+                        title="访问量趋势"
+                        data={salesData}
+                      />
+                    </div>
+                  </Col>
+                  <Col xl={8} lg={12} md={12} sm={24} xs={24}>
+                    <div className={styles.salesRank}>
+                      <h4 className={styles.rankingTitle}>门店访问量排名</h4>
+                      <ul className={styles.rankingList}>
+                        {
+                          rankingListData.map((item, i) => (
+                            <li key={item.title}>
+                              <span className={(i < 3) && styles.active}>{i + 1}</span>
+                              <span>{item.title}</span>
+                              <span>{numeral(item.total).format('0,0')}</span>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                    </div>
+                  </Col>
+                </Row>
               </TabPane>
             </Tabs>
           </div>
@@ -390,4 +420,4 @@ export default class Analysis extends Component {
       </div>
     );
   }
-}
+  }
