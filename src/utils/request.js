@@ -1,13 +1,28 @@
 import fetch from 'dva/fetch';
+import { notification } from 'antd';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+  return response.json().then((result) => {
+    if (result.code) {
+      notification.error({
+        message: result.name,
+        description: result.message,
+      });
+    }
+    if (result.stack) {
+      notification.error({
+        message: '请求错误',
+        description: result.message,
+      });
+    }
+    const error = new Error(result.message);
+    error.response = response;
+    throw error;
+  });
 }
 
 /**
