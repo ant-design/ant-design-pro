@@ -20,6 +20,12 @@ class Radar extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
+
   handleRef = (n) => {
     this.node = n;
   }

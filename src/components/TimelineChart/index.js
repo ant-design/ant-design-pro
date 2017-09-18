@@ -14,6 +14,15 @@ class TimelineChart extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+    if (this.slider) {
+      this.slider.destroy();
+    }
+  }
+
   sliderId = `timeline-chart-slider-${Math.random() * 1000}`
 
   handleRef = (n) => {
@@ -75,6 +84,8 @@ class TimelineChart extends Component {
     chart.line().position('x*y1').color('#4FAAEB');
     chart.line().position('x*y2').color('#9AD681');
 
+    this.chart = chart;
+
     /* eslint new-cap:0 */
     const slider = new Slider({
       domId: this.sliderId,
@@ -84,6 +95,8 @@ class TimelineChart extends Component {
       charts: [chart],
     });
     slider.render();
+
+    this.slider = slider;
   }
 
   render() {

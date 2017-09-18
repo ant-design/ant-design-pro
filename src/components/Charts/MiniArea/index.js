@@ -14,6 +14,12 @@ class MiniArea extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
+
   handleRef = (n) => {
     this.node = n;
   }
@@ -79,6 +85,8 @@ class MiniArea extends PureComponent {
       chart.line().position('x*y').color(color).shape('smooth');
     }
     chart.render();
+
+    this.chart = chart;
   }
 
   render() {

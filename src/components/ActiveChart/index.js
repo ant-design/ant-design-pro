@@ -22,11 +22,15 @@ export default class ActiveChart extends PureComponent {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    this.timer = setInterval(() => {
       this.setState({
         activeData: getActiveData(),
       });
     }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   render() {

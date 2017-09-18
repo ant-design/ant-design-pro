@@ -16,12 +16,18 @@ class WaterWave extends PureComponent {
     this.renderChart();
     this.resize();
 
-    window.addEventListener('resize', () => {
-      this.resize();
-    });
+    window.addEventListener('resize', this.resize);
   }
 
-  resize() {
+  componentWillUnmount() {
+    cancelAnimationFrame(this.timer);
+    if (this.node) {
+      this.node.innerHTML = '';
+    }
+    window.removeEventListener('resize', this.resize);
+  }
+
+  resize = () => {
     const { height } = this.props;
     const realWidth = this.root.parentNode.offsetWidth;
     if (realWidth < this.props.height) {
@@ -39,6 +45,7 @@ class WaterWave extends PureComponent {
   renderChart() {
     const { percent, color = '#19AFFA' } = this.props;
     const data = percent / 100;
+    const self = this;
 
     if (!this.node || !data) {
       return;
@@ -163,7 +170,7 @@ class WaterWave extends PureComponent {
         sp += 0.07;
         drawSin();
       }
-      requestAnimationFrame(render);
+      self.timer = requestAnimationFrame(render);
     }
 
     render();

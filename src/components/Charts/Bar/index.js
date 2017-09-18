@@ -14,6 +14,12 @@ class Bar extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
+
   handleRef = (n) => {
     this.node = n;
   }
@@ -68,6 +74,8 @@ class Bar extends PureComponent {
     });
     chart.interval().position('x*y').color(color);
     chart.render();
+
+    this.chart = chart;
   }
 
   render() {

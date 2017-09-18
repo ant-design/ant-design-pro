@@ -14,6 +14,12 @@ class MiniBar extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
+
   handleRef = (n) => {
     this.node = n;
   }
@@ -61,6 +67,8 @@ class MiniBar extends PureComponent {
     });
     chart.interval().position('x*y').color(color);
     chart.render();
+
+    this.chart = chart;
   }
 
   render() {
