@@ -1,6 +1,5 @@
 // https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 module.exports = {
-  'font-size-base': '14px',
   'badge-font-size': '12px',
   'btn-font-size-lg': '@font-size-base',
   'menu-dark-bg': '#00182E',
