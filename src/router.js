@@ -1,5 +1,6 @@
 import React from 'react';
-import { Router, Route, Redirect } from 'dva/router';
+import { Router, Route, Switch, Redirect } from 'dva/router';
+import dynamic from 'dva/dynamic';
 import navData from './common/nav';
 
 function getRoutes(data, level = 0) {
@@ -36,12 +37,29 @@ function getRoutes(data, level = 0) {
   });
 }
 
-function RouterConfig({ history }) {
+function RouterConfig({ history, app }) {
+  const Users = dynamic({
+    app,
+    models: [
+      import('./models/users'),
+    ],
+    component: import('./routes/Users'),
+  });
+
   return (
     <Router history={history}>
-      {getRoutes(navData)}
+      <Switch>
+        // <Route exact path="/" component={IndexPage} />
+        // <Route exact path="/users" component={Users} />
+      </Switch>
     </Router>
   );
+
+  // return (
+  //   <Router history={history}>
+  //     {getRoutes(navData)}
+  //   </Router>
+  // );
 }
 
 export default RouterConfig;
