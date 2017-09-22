@@ -184,7 +184,11 @@ export default class Workplace extends PureComponent {
                       <List.Item key={item.id}>
                         <List.Item.Meta
                           avatar={<Avatar style={{ marginTop: -12 }} src={item.user.avatar} />}
-                          title={<p>{item.user.name} 在 <a>xx</a> 新建了项目 <a>xxxx</a></p>}
+                          title={
+                            <p>
+                              <a>{item.user.name}</a> 在 <a>xx</a> 新建了项目 <a>xxxx</a>
+                            </p>
+                          }
                           description={moment(item.updatedAt).fromNow()}
                         />
                       </List.Item>
