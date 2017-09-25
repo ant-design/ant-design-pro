@@ -59,6 +59,27 @@
   }
 }
 
+@media screen and (max-width: @screen-xs) {
+  .standardList {
+    :global {
+      .ant-list-item-content {
+        display: block;
+        flex: none;
+        width: 100%;
+      }
+      .ant-list-item-action {
+        margin-left: 0;
+      }
+    }
+    .listContent {
+      margin-left: 0;
+      & > div {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: @screen-sm) {
   .standardList {
     .extraContentSearch {
