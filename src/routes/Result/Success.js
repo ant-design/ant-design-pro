@@ -62,7 +62,7 @@ export default () => (
         “单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。"
         extra={extra}
         actions={actions}
-        style={{ margin: '30px 120px' }}
+        style={{ marginTop: 30, marginBottom: 30 }}
       />
     </Card>
   </PageHeaderLayout>
