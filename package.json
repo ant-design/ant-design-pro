@@ -24,7 +24,8 @@
     "qs": "^6.5.0",
     "react": "^15.6.1",
     "react-document-title": "^2.0.3",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "lodash.clonedeep": "^4.5.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
