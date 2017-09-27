@@ -66,7 +66,7 @@
   }
 }
 
-@media screen and (max-width: @screen-md) {
+@media screen and (max-width: @screen-xl) {
   .pageHeader {
     .extraContent {
       margin-left: 44px;
@@ -74,18 +74,44 @@
   }
 }
 
-@media screen and (max-width: @screen-sm) {
+@media screen and (max-width: @screen-lg) {
   .pageHeader {
     .extraContent {
-      margin-left: 24px;
+      margin-left: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .pageHeader {
+    .row {
+      display: block;
+    }
+
+    .action, .extraContent {
+      margin-left: 0;
+      text-align: left;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .pageHeader {
+    .detail {
+      display: block;
     }
   }
 }
 
 @media screen and (max-width: @screen-xs) {
   .pageHeader {
-    .extraContent {
-      margin-left: 8px;
+    .action {
+      :global {
+        .ant-btn-group, :not(.ant-btn-group) .ant-button {
+          display: block;
+          margin-bottom: 8px;
+        }
+      }
     }
   }
 }
