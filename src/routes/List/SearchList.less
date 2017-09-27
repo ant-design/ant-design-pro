@@ -37,6 +37,13 @@
   height: 1px;
 }
 
+@media screen and (max-width: @screen-xs) {
+  .listContent {
+    & > div {
+      height: auto;
+    }
+  }
+}
 @media screen and (max-width: @screen-lg) {
   .listItemExtra {
     width: 0;

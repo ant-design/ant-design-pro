@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import { Row, Col, Card, List, Avatar, Alert, Icon } from 'antd';
+import { Row, Col, Card, List, Avatar, Icon } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import EditableLinkGroup from '../../components/EditableLinkGroup';
@@ -103,14 +103,6 @@ export default class Workplace extends PureComponent {
       chart: { radarData },
     } = this.props;
 
-    const pageHeaderContent = (
-      <Alert
-        message="平台迁移公告：平台将于本周六 03:00 ~ 04:00 进行迁移，请勿在此期间提交数据。"
-        type="warning"
-        showIcon
-      />
-    );
-
     const pageHeaderTitle = (
       <div className={styles.pageHeaderTitle}>
         <div className={styles.titleAvatar}>
@@ -144,7 +136,6 @@ export default class Workplace extends PureComponent {
 
     return (
       <PageHeaderLayout
-        top={pageHeaderContent}
         action={pageHeaderAction}
         title={pageHeaderTitle}
       >
@@ -193,7 +184,11 @@ export default class Workplace extends PureComponent {
                       <List.Item key={item.id}>
                         <List.Item.Meta
                           avatar={<Avatar style={{ marginTop: -12 }} src={item.user.avatar} />}
-                          title={<p>{item.user.name} 在 <a>xx</a> 新建了项目 <a>xxxx</a></p>}
+                          title={
+                            <p>
+                              <a>{item.user.name}</a> 在 <a>xx</a> 新建了项目 <a>xxxx</a>
+                            </p>
+                          }
                           description={moment(item.updatedAt).fromNow()}
                         />
                       </List.Item>

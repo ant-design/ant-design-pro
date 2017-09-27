@@ -74,7 +74,10 @@ export default ({ formItemLayout, form, data, dispatch, submitting }) => {
 
       </Form.Item>
       <Form.Item
-        wrapperCol={{ offset: 5 }}
+        wrapperCol={{
+          xs: { span: 24, offset: 0 },
+          sm: { span: formItemLayout.wrapperCol.span, offset: formItemLayout.labelCol.span },
+        }}
         label=""
       >
         <Button type="primary" onClick={onValidateForm} loading={submitting}>

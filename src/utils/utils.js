@@ -1,5 +1,5 @@
 import moment from 'moment';
-import cloneDeep from 'lodash.cloneDeep';
+import cloneDeep from 'lodash/cloneDeep';
 import navData from '../common/nav';
 
 
