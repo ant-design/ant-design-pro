@@ -31,11 +31,11 @@ const action = (
 
 const extra = (
   <Row>
-    <Col span={12}>
+    <Col sm={24} md={12}>
       <div style={{ color: 'rgba(0, 0, 0, 0.43)' }}>状态</div>
       <div style={{ color: 'rgba(0, 0, 0, 0.85)', fontSize: 20 }}>待审批</div>
     </Col>
-    <Col span={12}>
+    <Col sm={24} md={12}>
       <div style={{ color: 'rgba(0, 0, 0, 0.43)' }}>订单金额</div>
       <div style={{ color: 'rgba(0, 0, 0, 0.85)', fontSize: 20 }}>¥ 568.08</div>
     </Col>

@@ -35,11 +35,11 @@ const action = (
 
 const extra = (
   <Row>
-    <Col span={12}>
+    <Col xs={24} sm={12}>
       <div className={styles.textSecondary}>状态</div>
       <div className={styles.heading}>待审批</div>
     </Col>
-    <Col span={12}>
+    <Col xs={24} sm={12}>
       <div className={styles.textSecondary}>订单金额</div>
       <div className={styles.heading}>¥ 568.08</div>
     </Col>
