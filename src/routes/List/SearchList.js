@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Form, Card, Select, List, Tag, Icon, Avatar, Row, Col } from 'antd';
+import { Form, Card, Select, List, Tag, Icon, Avatar, Row, Col, Button } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardFormRow from '../../components/StandardFormRow';
@@ -90,7 +90,7 @@ export default class SearchList extends Component {
 
   render() {
     const { showLoadMore, loadingMore } = this.state;
-    const { form, list: { list } } = this.props;
+    const { form, list: { list, loading } } = this.props;
     const { getFieldDecorator } = form;
 
     const owners = [
@@ -160,6 +160,15 @@ export default class SearchList extends Component {
         sm: { span: 16 },
       },
     };
+
+    const loadMore = showLoadMore ? (
+      <div style={{ textAlign: 'center', marginTop: 8 }}>
+        <Button onClick={this.handleLoadMore}>
+          {loadingMore && (<span><Icon type="loading" /> 加载中...</span>)}
+          {!loadingMore && (<span>加载更多</span>)}
+        </Button>
+      </div>
+    ) : null;
 
     return (
       <PageHeaderLayout
@@ -264,27 +273,25 @@ export default class SearchList extends Component {
           </Card>
           <Card style={{ marginTop: 16 }} bordered={false}>
             <List
-              loadingMore={loadingMore}
-              showLoadMore={(list.length > 0) && showLoadMore}
-              onLoadMore={this.handleLoadMore}
+              loading={loading}
+              rowKey="id"
               itemLayout="vertical"
-            >
-              {
-                list && list.map(item => (
-                  <List.Item
-                    key={item.id}
-                    actions={[<IconText type="star-o" text={item.star} />, <IconText type="like-o" text={item.like} />, <IconText type="message" text={item.message} />]}
-                    extra={<div className={styles.listItemExtra} />}
-                  >
-                    <List.Item.Meta
-                      title={<a href={item.href}>{item.title}</a>}
-                      description={<span><Tag>Ant Design</Tag><Tag>设计语言</Tag><Tag>蚂蚁金服</Tag></span>}
-                    />
-                    <ListContent data={item} />
-                  </List.Item>
-                ))
-              }
-            </List>
+              loadMore={loadMore}
+              dataSource={list}
+              renderItem={item => (
+                <List.Item
+                  key={item.id}
+                  actions={[<IconText type="star-o" text={item.star} />, <IconText type="like-o" text={item.like} />, <IconText type="message" text={item.message} />]}
+                  extra={<div className={styles.listItemExtra} />}
+                >
+                  <List.Item.Meta
+                    title={<a href={item.href}>{item.title}</a>}
+                    description={<span><Tag>Ant Design</Tag><Tag>设计语言</Tag><Tag>蚂蚁金服</Tag></span>}
+                  />
+                  <ListContent data={item} />
+                </List.Item>
+              )}
+            />
           </Card>
         </div>
       </PageHeaderLayout>

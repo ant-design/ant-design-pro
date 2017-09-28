@@ -119,25 +119,23 @@ export default class BasicList extends PureComponent {
               <Icon type="plus" /> 添加
             </Button>
             <List
+              rowKey="id"
               loading={loading}
               pagination={paginationProps}
-            >
-              {
-                list && list.map(item => (
-                  <List.Item
-                    key={item.id}
-                    actions={[<a>编辑</a>, <MoreBtn />]}
-                  >
-                    <List.Item.Meta
-                      avatar={<Avatar src={item.logo} shape="square" size="large" />}
-                      title={<a href={item.href}>{item.title}</a>}
-                      description={item.subDescription}
-                    />
-                    <ListContent data={item} />
-                  </List.Item>
-                ))
-              }
-            </List>
+              dataSource={list}
+              renderItem={item => (
+                <List.Item
+                  actions={[<a>编辑</a>, <MoreBtn />]}
+                >
+                  <List.Item.Meta
+                    avatar={<Avatar src={item.logo} shape="square" size="large" />}
+                    title={<a href={item.href}>{item.title}</a>}
+                    description={item.subDescription}
+                  />
+                  <ListContent data={item} />
+                </List.Item>
+              )}
+            />
           </Card>
         </div>
       </PageHeaderLayout>

@@ -195,36 +195,35 @@ export default class FilterCardList extends PureComponent {
             </Form>
           </Card>
           <List
+            rowKey="id"
             style={{ marginTop: 16 }}
             grid={{ gutter: 16, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
             loading={loading}
-          >
-            {
-              list && list.map(item => (
-                <List.Item key={item.id}>
-                  <Card
-                    actions={[
-                      <Tooltip title="复制"><Icon type="copy" /></Tooltip>,
-                      <Tooltip title="用户"><Icon type="solution" /></Tooltip>,
-                      <Tooltip title="设置"><Icon type="setting" /></Tooltip>,
-                      <Tooltip title="删除"><Icon type="delete" /></Tooltip>,
-                    ]}
-                  >
-                    <Card.Meta
-                      avatar={<Avatar size="large" src={item.avatar} />}
-                      title={item.title}
+            dataSource={list}
+            renderItem={item => (
+              <List.Item key={item.id}>
+                <Card
+                  actions={[
+                    <Tooltip title="复制"><Icon type="copy" /></Tooltip>,
+                    <Tooltip title="用户"><Icon type="solution" /></Tooltip>,
+                    <Tooltip title="设置"><Icon type="setting" /></Tooltip>,
+                    <Tooltip title="删除"><Icon type="delete" /></Tooltip>,
+                  ]}
+                >
+                  <Card.Meta
+                    avatar={<Avatar size="large" src={item.avatar} />}
+                    title={item.title}
+                  />
+                  <div className={styles.cardItemContent}>
+                    <CardInfo
+                      activeUser={formatWan(item.activeUser)}
+                      newUser={numeral(item.newUser).format('0,0')}
                     />
-                    <div className={styles.cardItemContent}>
-                      <CardInfo
-                        activeUser={formatWan(item.activeUser)}
-                        newUser={numeral(item.newUser).format('0,0')}
-                      />
-                    </div>
-                  </Card>
-                </List.Item>
-              ))
-            }
-          </List>
+                  </div>
+                </Card>
+              </List.Item>
+            )}
+          />
         </div>
       </PageHeaderLayout>
     );
