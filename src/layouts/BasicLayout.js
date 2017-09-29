@@ -176,6 +176,11 @@ class BasicLayout extends React.PureComponent {
 
     const noticeData = this.getNoticeData();
 
+    // Don't show popup menu when it is been collapsed
+    const menuProps = collapsed ? {} : {
+      openKeys: this.state.openKeys,
+    };
+
     return (
       <DocumentTitle title={this.getPageTitle()}>
         <Layout>
@@ -198,7 +203,7 @@ class BasicLayout extends React.PureComponent {
             <Menu
               theme="dark"
               mode="inline"
-              openKeys={this.state.openKeys}
+              {...menuProps}
               onOpenChange={this.handleOpenChange}
               selectedKeys={this.getCurrentMenuSelectedKeys()}
               style={{ margin: '24px 0', width: '100%' }}
