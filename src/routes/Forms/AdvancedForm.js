@@ -253,7 +253,7 @@ function AdvancedForm({ form, dispatch, submitting }) {
       </Card>
       <FooterToolbar>
         {getErrorInfo()}
-        <Button type="primary" size="large" onClick={validate} loading={submitting}>
+        <Button type="primary" onClick={validate} loading={submitting}>
           提交
         </Button>
       </FooterToolbar>

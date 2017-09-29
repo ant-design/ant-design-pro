@@ -39,7 +39,7 @@ export default ({ formItemLayout, form, dispatch }) => {
           label="收款账户"
         >
           <Input.Group compact>
-            <Select defaultValue="alipay" size="large" style={{ width: 80 }}>
+            <Select defaultValue="alipay" style={{ width: 80 }}>
               <Option value="alipay">支付宝</Option>
               <Option value="wepay">微信</Option>
             </Select>
