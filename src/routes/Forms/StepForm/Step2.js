@@ -71,7 +71,6 @@ export default ({ formItemLayout, form, data, dispatch, submitting }) => {
         })(
           <Input type="password" autoComplete="off" style={{ width: '80%' }} />
         )}
-
       </Form.Item>
       <Form.Item
         wrapperCol={{
