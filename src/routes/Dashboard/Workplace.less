@@ -10,9 +10,9 @@
   }
 }
 
-.pageHeaderTitle {
+.pageHeaderContent {
   display: flex;
-  .titleAvatar {
+  .avatar {
     flex: 0 1 80px;
     & > span {
       border-radius: 80px;
@@ -21,28 +21,24 @@
       height: 80px;
     }
   }
-  .titleContent {
+  .content {
     position: relative;
     top: 8px;
     margin-left: 32px;
     flex: 1 1 auto;
-    p {
-      font-weight: normal;
-    }
-    & > p:last-child {
-      color: @text-color-secondary;
-      font-size: @font-size-base;
-      line-height: 22px;
-      margin-top: 12px;
+    color: @text-color-secondary;
+    .contentTitle {
+      font-size: 20px;
+      font-weight: 500;
+      color: @heading-color;
+      margin-bottom: 12px;
     }
   }
 }
 
-.pageHeaderAction {
-  float: right;
+.pageHeaderExtra {
   .clearfix();
   & > div {
-    text-align: right;
     padding: 0 24px;
     position: relative;
     float: left;
@@ -144,7 +140,7 @@
 }
 
 @media screen and (max-width: @screen-xl)  and (min-width: @screen-lg) {
-  .pageHeaderAction {
+  .pageHeaderExtra {
     margin-left: -44px;
     & > div {
       padding: 0 16px;
@@ -153,8 +149,7 @@
 }
 
 @media screen and (max-width: @screen-lg) {
-  .pageHeaderAction {
-    margin-left: -64px;
+  .pageHeaderExtra {
     & > div {
       padding: 0 16px;
       text-align: left;
@@ -166,9 +161,26 @@
 }
 
 @media screen and (max-width: @screen-md) {
+  .pageHeaderExtra {
+    margin-left: -16px;
+  }
   .projectList {
     .projectGrid {
       width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .pageHeaderContent {
+    display: block;
+    .content {
+      margin-left: 0;
+    }
+  }
+  .pageHeaderExtra {
+    & > div {
+      float: none;
     }
   }
 }

@@ -103,20 +103,20 @@ export default class Workplace extends PureComponent {
       chart: { radarData },
     } = this.props;
 
-    const pageHeaderTitle = (
-      <div className={styles.pageHeaderTitle}>
-        <div className={styles.titleAvatar}>
+    const pageHeaderContent = (
+      <div className={styles.pageHeaderContent}>
+        <div className={styles.avatar}>
           <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/XertDCubOxUvZbCdgWTW.png" />
         </div>
-        <div className={styles.titleContent}>
-          <p>早安, 曲丽丽, 祝你开心每一天</p>
+        <div className={styles.content}>
+          <p className={styles.contentTitle}>早安, 曲丽丽, 祝你开心每一天</p>
           <p>交互专家 | 蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</p>
         </div>
       </div>
     );
 
-    const pageHeaderAction = (
-      <div className={styles.pageHeaderAction}>
+    const pageHeaderExtra = (
+      <div className={styles.pageHeaderExtra}>
         <div>
           <p><Icon type="appstore-o" /> 项目数</p>
           <p>56</p>
@@ -136,8 +136,8 @@ export default class Workplace extends PureComponent {
 
     return (
       <PageHeaderLayout
-        action={pageHeaderAction}
-        title={pageHeaderTitle}
+        content={pageHeaderContent}
+        extraContent={pageHeaderExtra}
       >
         <Row gutter={24}>
           <Col lg={16} md={24} sm={24} xs={24}>
