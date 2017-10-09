@@ -38,7 +38,7 @@ class Pie extends Component {
     const newItem = item;
     newItem.checked = !newItem.checked;
 
-    const legendData = this.state.legendData;
+    const { legendData } = this.state;
     legendData[i] = newItem;
 
     if (this.chart) {
@@ -59,7 +59,7 @@ class Pie extends Component {
       margin, percent, color,
       inner = 0.75,
       animate = true,
-      } = this.props;
+    } = this.props;
 
     let selected = this.props.selected || true;
     let tooltip = this.props.tooltips || true;
@@ -109,7 +109,7 @@ class Pie extends Component {
     // clean
     this.node.innerHTML = '';
 
-    const Stat = G2.Stat;
+    const { Stat } = G2;
 
     const chart = new G2.Chart({
       container: this.node,
@@ -189,39 +189,43 @@ class Pie extends Component {
           <div className={styles.content}>
             <div ref={this.handleRef} />
             {
-              (subTitle || total) && <div
-                className={styles.total}
-                ref={this.handleTotalRef}
-                style={{ marginLeft: left, opacity: left ? 1 : 0 }}
-              >
-                {
-                  subTitle && <h4>{subTitle}</h4>
-                }
-                {
-                  // eslint-disable-next-line
-                  total && <p dangerouslySetInnerHTML={{ __html: total }} />
-                }
-              </div>
+              (subTitle || total) && (
+                <div
+                  className={styles.total}
+                  ref={this.handleTotalRef}
+                  style={{ marginLeft: left, opacity: left ? 1 : 0 }}
+                >
+                  {
+                    subTitle && <h4>{subTitle}</h4>
+                  }
+                  {
+                    // eslint-disable-next-line
+                    total && <p dangerouslySetInnerHTML={{ __html: total }} />
+                  }
+                </div>
+              )
             }
             {
-              hasLegend && <ul className={styles.legend} style={{ marginTop: mt }}>
-                {
-                  legendData.map((item, i) => (
-                    <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
-                      <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
-                      <span className={styles.legendTitle}>{item.x}</span>
-                      <span className={styles.line} />
-                      <span className={styles.percent}>{`${(item['..percent'] * 100).toFixed(2)}%`}</span>
-                      <span
-                        className={styles.value}
-                        dangerouslySetInnerHTML={{
-                          __html: valueFormat ? valueFormat(item.y) : item.y,
-                        }}
-                      />
-                    </li>
-                  ))
-                }
-              </ul>
+              hasLegend && (
+                <ul className={styles.legend} style={{ marginTop: mt }}>
+                  {
+                    legendData.map((item, i) => (
+                      <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
+                        <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
+                        <span className={styles.legendTitle}>{item.x}</span>
+                        <span className={styles.line} />
+                        <span className={styles.percent}>{`${(item['..percent'] * 100).toFixed(2)}%`}</span>
+                        <span
+                          className={styles.value}
+                          dangerouslySetInnerHTML={{
+                            __html: valueFormat ? valueFormat(item.y) : item.y,
+                          }}
+                        />
+                      </li>
+                    ))
+                  }
+                </ul>
+              )
             }
           </div>
         </div>

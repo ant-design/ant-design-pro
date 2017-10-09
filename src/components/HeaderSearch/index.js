@@ -17,7 +17,7 @@ export default class HeaderSearch extends PureComponent {
   onKeyDown = (e) => {
     if (e.key === 'Enter') {
       this.timeout = setTimeout(() => {
-        this.props.onPressEnter(this.state.value);  // Fix duplicate onPressEnter
+        this.props.onPressEnter(this.state.value); // Fix duplicate onPressEnter
       }, 0);
     }
   }

@@ -10,7 +10,7 @@ import TagSelect from '../../components/TagSelect';
 import SearchInput from '../../components/SearchInput';
 import styles from './SearchList.less';
 
-const Option = Select.Option;
+const { Option } = Select;
 const FormItem = Form.Item;
 const TagOption = TagSelect.Option;
 const TagExpand = TagSelect.Expand;

@@ -7,7 +7,7 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './TableList.less';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
+const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
 @connect(state => ({
@@ -203,39 +203,43 @@ export default class TableList extends PureComponent {
                   </Col>
                 </Row>
                 {
-                  this.state.expandForm && <Row>
-                    <Col md={8} sm={12} xs={24}>
-                      <FormItem {...formItemLayout} label="更新时间">
-                        {getFieldDecorator('updatedAt')(
-                          <DatePicker style={{ width: '100%' }} />
-                        )}
-                      </FormItem>
-                    </Col>
-                    <Col md={8} sm={12} xs={24}>
-                      <FormItem {...formItemLayout} label="调用次数">
-                        {getFieldDecorator('callNo')(
-                          <InputNumber
-                            prefix={<Icon type="right" />}
-                            placeholder="请输入"
-                          />
-                        )}
-                      </FormItem>
-                    </Col>
-                  </Row>
+                  this.state.expandForm && (
+                    <Row>
+                      <Col md={8} sm={12} xs={24}>
+                        <FormItem {...formItemLayout} label="更新时间">
+                          {getFieldDecorator('updatedAt')(
+                            <DatePicker style={{ width: '100%' }} />
+                          )}
+                        </FormItem>
+                      </Col>
+                      <Col md={8} sm={12} xs={24}>
+                        <FormItem {...formItemLayout} label="调用次数">
+                          {getFieldDecorator('callNo')(
+                            <InputNumber
+                              prefix={<Icon type="right" />}
+                              placeholder="请输入"
+                            />
+                          )}
+                        </FormItem>
+                      </Col>
+                    </Row>
+                  )
                 }
               </Form>
             </div>
             <div className={styles.tableListOperator}>
               <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>新建</Button>
               {
-                selectedRows.length > 0 && <span>
-                  <Button>批量操作</Button>
-                  <Dropdown overlay={menu}>
-                    <Button>
-                      更多操作 <Icon type="down" />
-                    </Button>
-                  </Dropdown>
-                </span>
+                selectedRows.length > 0 && (
+                  <span>
+                    <Button>批量操作</Button>
+                    <Dropdown overlay={menu}>
+                      <Button>
+                        更多操作 <Icon type="down" />
+                      </Button>
+                    </Dropdown>
+                  </span>
+                )
               }
             </div>
             <StandardTable

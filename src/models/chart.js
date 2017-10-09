@@ -16,14 +16,14 @@ export default {
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {
+    *fetch(_, { call, put }) {
       const response = yield call(fakeChartData);
       yield put({
         type: 'save',
         payload: response,
       });
     },
-    *fetchSalesData({ payload }, { call, put }) {
+    *fetchSalesData(_, { call, put }) {
       const response = yield call(fakeChartData);
       yield put({
         type: 'save',

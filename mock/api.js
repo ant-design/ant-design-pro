@@ -73,7 +73,7 @@ export function fakeList(count) {
 export function getFakeList(req, res, u) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    url = req.url;
+    url = req.url; // eslint-disable-line
   }
 
   const params = getUrlParams(url);

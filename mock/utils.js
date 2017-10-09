@@ -12,7 +12,7 @@ export function getUrlParams(url) {
   let queryString = url ? url.split('?')[1] : window.location.search.slice(1);
   const obj = {};
   if (queryString) {
-    queryString = queryString.split('#')[0];
+    queryString = queryString.split('#')[0]; // eslint-disable-line
     const arr = queryString.split('&');
     for (let i = 0; i < arr.length; i += 1) {
       const a = arr[i].split('=');

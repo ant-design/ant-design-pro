@@ -9,7 +9,7 @@ title: Classic
 import Result from 'ant-design-pro/lib/Result';
 import { Button, Row, Col, Icon, Steps } from 'antd';
 
-const Step = Steps.Step;
+const { Step } = Steps;
 
 const desc1 = (
   <div style={{ fontSize: 14 }}>

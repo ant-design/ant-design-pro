@@ -23,7 +23,7 @@ export default {
         payload: false,
       });
     },
-    *mobileSubmit({ payload }, { call, put }) {
+    *mobileSubmit(_, { call, put }) {
       yield put({
         type: 'changeSubmitting',
         payload: true,

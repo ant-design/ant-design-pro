@@ -3,7 +3,7 @@ import { Form, Input, Button, Select, Divider } from 'antd';
 import { routerRedux } from 'dva/router';
 import styles from './style.less';
 
-const Option = Select.Option;
+const { Option } = Select;
 
 export default ({ formItemLayout, form, dispatch }) => {
   const { getFieldDecorator, validateFields } = form;

@@ -10,7 +10,7 @@ import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
 
-const TabPane = Tabs.TabPane;
+const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
 
 const rankingListData = [];
@@ -88,7 +88,7 @@ export default class Analysis extends Component {
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
-      } = chart;
+    } = chart;
 
     const salesPieData = salesType === 'all' ?
       salesTypeData
@@ -101,19 +101,21 @@ export default class Analysis extends Component {
       </span>
     );
 
-    const salesExtra = (<div className={styles.salesExtraWrap}>
-      <div className={styles.salesExtra}>
-        <a onClick={() => this.selectDate('today')}>今日</a>
-        <a onClick={() => this.selectDate('week')}>本周</a>
-        <a onClick={() => this.selectDate('month')}>本月</a>
-        <a onClick={() => this.selectDate('year')}>全年</a>
+    const salesExtra = (
+      <div className={styles.salesExtraWrap}>
+        <div className={styles.salesExtra}>
+          <a onClick={() => this.selectDate('today')}>今日</a>
+          <a onClick={() => this.selectDate('week')}>本周</a>
+          <a onClick={() => this.selectDate('month')}>本月</a>
+          <a onClick={() => this.selectDate('year')}>全年</a>
+        </div>
+        <RangePicker
+          value={rangePickerValue}
+          onChange={this.handleRangePickerChange}
+          style={{ width: 256 }}
+        />
       </div>
-      <RangePicker
-        value={rangePickerValue}
-        onChange={this.handleRangePickerChange}
-        style={{ width: 256 }}
-      />
-    </div>);
+    );
 
     const columns = [
       {
@@ -233,10 +235,12 @@ export default class Analysis extends Component {
               title="线上购物转化率"
               action={<Tooltip title="购买效率"><Icon type="exclamation-circle-o" /></Tooltip>}
               total="78%"
-              footer={<Trend>
-                <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
-                <Trend.Item title="日环比" flag="down">11%</Trend.Item>
-              </Trend>}
+              footer={
+                <Trend>
+                  <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
+                  <Trend.Item title="日环比" flag="down">11%</Trend.Item>
+                </Trend>
+              }
               contentHeight={46}
             >
               <MiniProgress percent={78} strokeWidth={8} target={80} color="#5DD1DD" />
@@ -420,4 +424,4 @@ export default class Analysis extends Component {
       </div>
     );
   }
-  }
+}

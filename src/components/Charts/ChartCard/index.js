@@ -23,9 +23,11 @@ const ChartCard = ({ contentHeight, title, action, total, footer, children, ...r
         </div>
       </div>
       {
-        footer && <div className={styles.footer}>
-          {footer}
-        </div>
+        footer && (
+          <div className={styles.footer}>
+            {footer}
+          </div>
+        )
       }
     </div>
   </Card>

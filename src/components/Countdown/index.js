@@ -8,10 +8,9 @@ class Countdown extends Component {
   constructor(props) {
     super(props);
 
-    const { targetTime, lastTime } = this.initTime(props);
+    const { lastTime } = this.initTime(props);
 
     this.state = {
-      targetTime,
       lastTime,
     };
   }
@@ -22,10 +21,9 @@ class Countdown extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.target !== nextProps.target) {
-      const { targetTime, lastTime } = this.initTime(nextProps);
+      const { lastTime } = this.initTime(nextProps);
       this.setState({
         lastTime,
-        targetTime,
       });
     }
   }
@@ -53,7 +51,6 @@ class Countdown extends Component {
 
     return {
       lastTime,
-      targetTime,
     };
   }
   // defaultFormat = time => (

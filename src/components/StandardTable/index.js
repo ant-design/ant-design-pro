@@ -6,16 +6,13 @@ import styles from './index.less';
 class StandardTable extends PureComponent {
   state = {
     selectedRowKeys: [],
-    selectedRows: [],
     totalCallNo: 0,
-    loading: false,
   };
 
   componentWillReceiveProps(nextProps) {
     // clean state
     if (nextProps.selectedRows.length === 0) {
       this.setState({
-        selectedRows: [],
         selectedRowKeys: [],
         totalCallNo: 0,
       });
@@ -31,7 +28,7 @@ class StandardTable extends PureComponent {
       this.props.onSelectRow(selectedRows);
     }
 
-    this.setState({ selectedRowKeys, selectedRows, totalCallNo });
+    this.setState({ selectedRowKeys, totalCallNo });
   }
 
   handleTableChange = (pagination, filters, sorter) => {

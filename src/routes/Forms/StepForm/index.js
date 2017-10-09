@@ -5,7 +5,7 @@ import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import Step1 from './Step1';
 import styles from '../style.less';
 
-const Step = Steps.Step;
+const { Step } = Steps;
 
 @Form.create()
 class StepForm extends PureComponent {

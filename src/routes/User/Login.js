@@ -5,7 +5,7 @@ import { Form, Input, Tabs, Button, Icon, Checkbox, Row, Col, Alert } from 'antd
 import styles from './Login.less';
 
 const FormItem = Form.Item;
-const TabPane = Tabs.TabPane;
+const { TabPane } = Tabs;
 
 @connect(state => ({
   login: state.login,

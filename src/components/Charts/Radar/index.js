@@ -34,7 +34,7 @@ class Radar extends PureComponent {
     const newItem = item;
     newItem.checked = !newItem.checked;
 
-    const legendData = this.state.legendData;
+    const { legendData } = this.state;
     legendData[i] = newItem;
 
     if (this.chart) {
@@ -130,28 +130,30 @@ class Radar extends PureComponent {
           { title && <h4>{title}</h4>}
           <div ref={this.handleRef} />
           {
-            hasLegend && <Row className={styles.legend}>
-              {
-                legendData.map((item, i) => (
-                  <Col
-                    span={(24 / legendData.length)}
-                    key={item.name}
-                    onClick={() => this.handleLegendClick(item, i)}
-                  >
-                    <div className={styles.legendItem}>
-                      <p>
-                        <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
-                        <span>{item.name}</span>
-                      </p>
-                      <h6>{item.value}</h6>
-                      {
-                        i !== (legendData.length - 1) && <div className={styles.split} />
-                      }
-                    </div>
-                  </Col>
-                ))
-              }
-            </Row>
+            hasLegend && (
+              <Row className={styles.legend}>
+                {
+                  legendData.map((item, i) => (
+                    <Col
+                      span={(24 / legendData.length)}
+                      key={item.name}
+                      onClick={() => this.handleLegendClick(item, i)}
+                    >
+                      <div className={styles.legendItem}>
+                        <p>
+                          <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
+                          <span>{item.name}</span>
+                        </p>
+                        <h6>{item.value}</h6>
+                        {
+                          i !== (legendData.length - 1) && <div className={styles.split} />
+                        }
+                      </div>
+                    </Col>
+                  ))
+                }
+              </Row>
+            )
           }
         </div>
       </div>

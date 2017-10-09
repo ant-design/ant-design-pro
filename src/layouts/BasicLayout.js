@@ -28,9 +28,6 @@ class BasicLayout extends React.PureComponent {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
   }
-  state = {
-    mode: 'inline',
-  };
   getChildContext() {
     const { routes, params } = this.props;
     return { routes, params };
@@ -225,10 +222,10 @@ class BasicLayout extends React.PureComponent {
                   placeholder="站内搜索"
                   dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
                   onSearch={(value) => {
-                    console.log('input', value);  // eslint-disable-line
+                    console.log('input', value); // eslint-disable-line
                   }}
                   onPressEnter={(value) => {
-                    console.log('enter', value);  // eslint-disable-line
+                    console.log('enter', value); // eslint-disable-line
                   }}
                 />
                 <NoticeIcon

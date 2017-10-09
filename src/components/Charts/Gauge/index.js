@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import G2 from 'g2';
 import equal from '../equal';
 
-const Shape = G2.Shape;
+const { Shape } = G2;
 
 /* eslint no-underscore-dangle: 0 */
 class Gauge extends PureComponent {
@@ -75,7 +75,7 @@ class Gauge extends PureComponent {
           },
         });
 
-        const origin = cfg.origin;
+        const { origin } = cfg;
         group.addShape('text', {
           attrs: {
             x: center.x,

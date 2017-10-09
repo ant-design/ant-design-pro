@@ -10,7 +10,7 @@ export default {
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {
+    *fetch(_, { call, put }) {
       yield put({
         type: 'changeLoading',
         payload: true,
@@ -25,7 +25,7 @@ export default {
         payload: false,
       });
     },
-    *fetchCurrent({ payload }, { call, put }) {
+    *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({
         type: 'saveCurrentUser',

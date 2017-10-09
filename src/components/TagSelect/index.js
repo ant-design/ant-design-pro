@@ -4,7 +4,7 @@ import { Tag, Icon } from 'antd';
 
 import styles from './index.less';
 
-const CheckableTag = Tag.CheckableTag;
+const { CheckableTag } = Tag;
 
 const TagSelectOption = ({ children, checked, onChange, value }) => (
   <CheckableTag
@@ -40,18 +40,18 @@ class TagSelect extends PureComponent {
   onSelectAll = (checked) => {
     const { onChange } = this.props;
     let checkedTags = [];
-    let expand = this.state.expand;
+    let expanded = this.state.expand;
 
     if (checked) {
       const tags = this.getAllTags();
       checkedTags = tags.list;
-      expand = tags.expand;
+      expanded = tags.expand;
     }
 
     this.setState({
       checkedAll: checked,
       checkedTags,
-      expand,
+      expand: expanded,
     });
 
     if (onChange) {
@@ -60,7 +60,7 @@ class TagSelect extends PureComponent {
   }
 
   getAllTags() {
-    let expand = this.state.expand;
+    let { expand } = this.state;
     const { children } = this.props;
 
     let checkedTags = children.filter(child => child.props.displayName === 'TagSelectOption').map(child => child.props.value);
@@ -138,20 +138,24 @@ class TagSelect extends PureComponent {
           }))
         }
         {
-          expandNode && <a className={styles.trigger} onClick={this.handleExpand}>
-            { expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
-          </a>
+          expandNode && (
+            <a className={styles.trigger} onClick={this.handleExpand}>
+              { expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
+            </a>
+          )
         }
         {
-          expandNode && <div className={expand ? styles.expand : styles.fold}>
-            {
-              expandNode.props.children.map(child => React.cloneElement(child, {
-                key: `tag-select-${child.props.value}`,
-                checked: checkedTags.indexOf(child.props.value) > -1,
-                onChange: this.handleTagChange,
-              }))
-            }
-          </div>
+          expandNode && (
+            <div className={expand ? styles.expand : styles.fold}>
+              {
+                expandNode.props.children.map(child => React.cloneElement(child, {
+                  key: `tag-select-${child.props.value}`,
+                  checked: checkedTags.indexOf(child.props.value) > -1,
+                  onChange: this.handleTagChange,
+                }))
+              }
+            </div>
+          )
         }
       </div>
     );

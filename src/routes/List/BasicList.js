@@ -9,7 +9,7 @@ import styles from './BasicList.less';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
-const Search = Input.Search;
+const { Search } = Input;
 
 @connect(state => ({
   list: state.list,
