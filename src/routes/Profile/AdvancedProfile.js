@@ -21,15 +21,15 @@ const menu = (
 const action = (
   <div>
     <ButtonGroup style={{ marginRight: 8 }}>
-      <Button size="large">操作</Button>
-      <Button size="large">操作</Button>
+      <Button>操作</Button>
+      <Button>操作</Button>
       <Dropdown overlay={menu}>
-        <Button size="large">
+        <Button>
           更多操作 <Icon type="down" />
         </Button>
       </Dropdown>
     </ButtonGroup>
-    <Button size="large" type="primary">主操作</Button>
+    <Button type="primary">主操作</Button>
   </div>
 );
 

@@ -5,8 +5,8 @@ import Result from '../../components/Result';
 
 const actions = (
   <div>
-    <Button size="large" type="primary"><a href="">查看邮箱</a></Button>
-    <Button size="large"><Link to="/">返回首页</Link></Button>
+    <Button type="primary"><a href="">查看邮箱</a></Button>
+    <Button><Link to="/">返回首页</Link></Button>
   </div>
 );
 

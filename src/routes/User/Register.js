@@ -176,7 +176,6 @@ export default class Register extends Component {
                 }],
               })(
                 <Input
-                  size="large"
                   type="password"
                   placeholder="至少6位密码，区分大小写"
                 />
@@ -203,7 +202,7 @@ export default class Register extends Component {
                 {getFieldDecorator('prefix', {
                   initialValue: '86',
                 })(
-                  <Select size="large">
+                  <Select>
                     <Option value="86">+86</Option>
                     <Option value="87">+87</Option>
                   </Select>
@@ -231,7 +230,6 @@ export default class Register extends Component {
                   }],
                 })(
                   <Input
-                    size="large"
                     placeholder="验证码"
                   />
                 )}
@@ -240,7 +238,6 @@ export default class Register extends Component {
                 <Button
                   disabled={count}
                   className={styles.getCaptcha}
-                  size="large"
                   onClick={this.onGetCaptcha}
                 >
                   {count ? `${count} s` : '获取验证码'}
