@@ -1,5 +1,7 @@
 import React from 'react';
 import { Router, Route, Redirect } from 'dva/router';
+import { LocaleProvider } from 'antd';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
 import navData from './common/nav';
 
 function getRoutes(data, level = 0) {
@@ -38,9 +40,11 @@ function getRoutes(data, level = 0) {
 
 function RouterConfig({ history }) {
   return (
-    <Router history={history}>
-      {getRoutes(navData)}
-    </Router>
+    <LocaleProvider locale={zhCN}>
+      <Router history={history}>
+        {getRoutes(navData)}
+      </Router>
+    </LocaleProvider>
   );
 }
 
