@@ -19,13 +19,14 @@ const menu = (
 
 const action = (
   <div>
-    <Button type="primary">主操作</Button>
-    <Button>次操作</Button>
+    <Button>操作</Button>
+    <Button>操作</Button>
     <Dropdown overlay={menu}>
       <Button>
         更多 <Icon type="down" />
       </Button>
     </Dropdown>
+    <Button type="primary">主操作</Button>
   </div>
 );
 

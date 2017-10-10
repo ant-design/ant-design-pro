@@ -7,7 +7,6 @@ import EditableItem from '../../components/EditableItem';
 import styles from './AdvancedProfile.less';
 
 const { Step } = Steps;
-const ButtonGroup = Button.Group;
 const { Description } = DescriptionList;
 
 const menu = (
@@ -20,15 +19,13 @@ const menu = (
 
 const action = (
   <div>
-    <ButtonGroup style={{ marginRight: 8 }}>
-      <Button>操作</Button>
-      <Button>操作</Button>
-      <Dropdown overlay={menu}>
-        <Button>
-          更多操作 <Icon type="down" />
-        </Button>
-      </Dropdown>
-    </ButtonGroup>
+    <Button>操作</Button>
+    <Button>操作</Button>
+    <Dropdown overlay={menu}>
+      <Button>
+        更多 <Icon type="down" />
+      </Button>
+    </Dropdown>
     <Button type="primary">主操作</Button>
   </div>
 );
@@ -66,9 +63,10 @@ const tabList = [{
 }];
 
 const desc1 = (
-  <div style={{ fontSize: 14 }}>
-    <div style={{ marginTop: 4, marginBottom: 8 }}>
-      曲丽丽 <Icon type="dingding-o" />
+  <div style={{ fontSize: 14 }} className={styles.textSecondary}>
+    <div style={{ marginTop: 8, marginBottom: 4 }}>
+      曲丽丽
+      <Icon type="dingding-o" style={{ marginLeft: 8 }} />
     </div>
     <div>2016-12-12 12:32</div>
   </div>
@@ -76,8 +74,9 @@ const desc1 = (
 
 const desc2 = (
   <div style={{ fontSize: 14 }}>
-    <div style={{ marginTop: 4, marginBottom: 8 }}>
-      周毛毛 <Icon type="dingding-o" style={{ color: '#00A0E9' }} />
+    <div style={{ marginTop: 8, marginBottom: 4 }}>
+      周毛毛
+      <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
     </div>
     <div><a href="">催一下</a></div>
   </div>
@@ -89,12 +88,12 @@ const popoverContent = (
     <span className={styles.textSecondary} style={{ float: 'right' }}>
       <Badge status="default" text="未响应" />
     </span>
-    <p className={styles.textSecondary} style={{ marginTop: 8 }} >耗时：2小时25分钟</p>
+    <p className={styles.textSecondary} style={{ marginTop: 4 }} >耗时：2小时25分钟</p>
   </div>
 );
 
 const customDot = (dot, { status }) => (status === 'process' ?
-  <Popover content={popoverContent}>
+  <Popover placement="topLeft" arrowPointAtCenter content={popoverContent}>
     {dot}
   </Popover>
   : dot
