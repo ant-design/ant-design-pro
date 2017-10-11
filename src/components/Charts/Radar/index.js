@@ -53,7 +53,7 @@ class Radar extends PureComponent {
       hasLegend = true,
       fit = true,
       tickCount = 4,
-      margin = [16, 0, 16, 0] } = this.props;
+      margin = [16, 30, 16, 30] } = this.props;
 
     if (!data || (data && data.length < 1)) {
       return;

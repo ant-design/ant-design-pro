@@ -37,7 +37,7 @@
     "babel-runtime": "^6.9.2",
     "cross-port-killer": "^1.0.1",
     "enzyme": "^2.9.1",
-    "eslint": "^4.0.0",
+    "eslint": "^4.8.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-plugin-babel": "^4.0.0",
     "eslint-plugin-import": "^2.2.0",
