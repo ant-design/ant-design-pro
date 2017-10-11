@@ -1,4 +1,3 @@
-/* eslint no-return-assign: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -18,11 +17,15 @@ const Item = ({ title, flag, children, ...rest }, { mini }) => {
   };
 
   if (mini && mini.forEach) {
-    mini.forEach(size => (map[size] = 1));
+    mini.forEach((size) => {
+      map[size] = 1;
+    });
   }
 
   const clsObj = {};
-  Object.keys(map).forEach(k => (clsObj[styles[k]] = map[k]));
+  Object.keys(map).forEach((k) => {
+    clsObj[styles[k]] = map[k];
+  });
 
   const clsString = classNames(styles.trendItem, {
     [styles.mini]: (typeof mini === 'boolean' && mini),
