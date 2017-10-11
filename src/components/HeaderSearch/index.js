@@ -27,7 +27,7 @@ export default class HeaderSearch extends PureComponent {
   enterSearchMode = () => {
     this.setState({ searchMode: true }, () => {
       if (this.state.searchMode) {
-        this.input.refs.input.focus();
+        this.input.focus();
       }
     });
   }
