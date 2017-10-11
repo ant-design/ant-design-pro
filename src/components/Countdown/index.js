@@ -4,7 +4,7 @@ function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
-class Countdown extends Component {
+class CountDown extends Component {
   constructor(props) {
     super(props);
 
@@ -102,4 +102,4 @@ class Countdown extends Component {
   }
 }
 
-export default Countdown;
+export default CountDown;

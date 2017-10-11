@@ -147,7 +147,7 @@ class Gauge extends PureComponent {
       },
       labelOffset: -12,
       formatter(val) {
-        return tickLabels[(val * 1 / 20)] || '';
+        return tickLabels[(val * 1) / 20] || '';
       },
     });
     chart.point().position('value').shape('dashBoard');

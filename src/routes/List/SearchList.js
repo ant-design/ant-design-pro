@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Form, Card, Select, List, Tag, Icon, Avatar, Row, Col, Button } from 'antd';
+import { Form, Card, Select, List, Tag, Icon, Avatar, Row, Col, Button, Input } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardFormRow from '../../components/StandardFormRow';
 import TagSelect from '../../components/TagSelect';
-import SearchInput from '../../components/SearchInput';
 import styles from './SearchList.less';
 
 const { Option } = Select;
@@ -150,7 +149,13 @@ export default class SearchList extends Component {
 
     const pageHeaderContent = (
       <div style={{ textAlign: 'center' }}>
-        <SearchInput onSearch={this.handleFormSubmit} />
+        <Input.Search
+          placeholder="请输入"
+          enterButton="搜索"
+          size="large"
+          onSearch={this.handleFormSubmit}
+          style={{ width: 522 }}
+        />
       </div>
     );
 
