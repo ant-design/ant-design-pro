@@ -126,7 +126,7 @@ class BasicLayout extends React.PureComponent {
           urgent: 'red',
           doing: 'yellow',
         })[newNotice.status];
-        newNotice.extra = <Tag color={`${color}-inverse`}>{newNotice.extra}</Tag>;
+        newNotice.extra = <Tag color={color}>{newNotice.extra}</Tag>;
       }
       return newNotice;
     });

@@ -7,30 +7,17 @@
     transition: all .3s;
     overflow: hidden;
     cursor: pointer;
+    padding-left: 24px;
+    padding-right: 24px;
 
-    .wrapper {
-      margin: 0 32px;
-      padding: 12px 0;
-      border-bottom: 1px solid @border-color-split;
-    }
     &.read {
       opacity: .4;
     }
-    &:last-child .wrapper {
+    &:last-child {
       border-bottom: 0;
     }
     &:hover {
       background: @primary-1;
-    }
-    .content {
-      position: relative;
-      overflow: hidden;
-    }
-    .avatar {
-      margin-right: 16px;
-      float: left;
-      margin-top: 4px;
-      background: #fff;
     }
     .title {
       font-weight: normal;
@@ -40,21 +27,19 @@
       white-space: nowrap;
     }
     .description {
-      color: @text-color-secondary;
       font-size: 12px;
-      margin-top: 8px;
+      line-height: @line-height-base;
     }
     .datetime {
-      color: @text-color-secondary;
       font-size: 12px;
       margin-top: 4px;
+      line-height: @line-height-base;
     }
     .extra {
-      position: absolute;
-      right: 0;
-      top: 0;
+      float: right;
       color: @text-color-secondary;
-      font-size: 12px;
+      font-weight: normal;
+      margin-right: 0;
     }
   }
 }
@@ -77,13 +62,13 @@
   height: 46px;
   line-height: 46px;
   text-align: center;
-  color: @text-color-secondary;
+  color: @text-color;
   border-radius: 0 0 @border-radius-base @border-radius-base;
   border-top: 1px solid @border-color-split;
   transition: all .3s;
   cursor: pointer;
 
   &:hover {
-    color: @text-color;
+    color: @heading-color;
   }
 }

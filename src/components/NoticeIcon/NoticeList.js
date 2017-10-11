@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Icon } from 'antd';
+import { Avatar, Icon, List } from 'antd';
 import classNames from 'classnames';
 import styles from './NoticeList.less';
 
@@ -14,28 +14,34 @@ export default function NoticeList({ data = [], onClick, onClear, title, locale 
   }
   return (
     <div>
-      <ul className={styles.list}>
+      <List className={styles.list}>
         {data.map((item, i) => {
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,
           });
           return (
-            <li className={itemCls} key={item.key || i} onClick={() => onClick(item)}>
-              <div className={styles.wrapper}>
-                {item.avatar ? <Avatar className={styles.avatar} src={item.avatar} /> : null}
-                <div className={styles.content}>
-                  <h4 className={styles.title} title={item.title}>{item.title}</h4>
-                  <div className={styles.description} title={item.description}>
-                    {item.description}
+            <List.Item className={itemCls} key={item.key || i} onClick={() => onClick(item)}>
+              <List.Item.Meta
+                avatar={item.avatar ? <Avatar className={styles.avatar} src={item.avatar} /> : null}
+                title={
+                  <div>
+                    {item.title}
+                    <div className={styles.extra}>{item.extra}</div>
                   </div>
-                  <div className={styles.datetime}>{item.datetime}</div>
-                  <div className={styles.extra}>{item.extra}</div>
-                </div>
-              </div>
-            </li>
+                }
+                description={
+                  <div>
+                    <div className={styles.description} title={item.description}>
+                      {item.description}
+                    </div>
+                    <div className={styles.datetime}>{item.datetime}</div>
+                  </div>
+                }
+              />
+            </List.Item>
           );
         })}
-      </ul>
+      </List>
       <div className={styles.clear} onClick={onClear}>
         {locale.clear}{title}
       </div>
