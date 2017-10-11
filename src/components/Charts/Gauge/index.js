@@ -103,7 +103,7 @@ class Gauge extends PureComponent {
   }
 
   renderChart(nextProps) {
-    const { height, color = '#00b1f8', bgColor = '#d3f3fe', title, percent } = nextProps || this.props;
+    const { height, color = '#00b1f8', bgColor = '#d3f3fe', title, percent, tickLabels = [] } = nextProps || this.props;
     const data = [{ name: title, value: percent }];
 
     if (this.chart) {
@@ -147,18 +147,7 @@ class Gauge extends PureComponent {
       },
       labelOffset: -12,
       formatter(val) {
-        switch (val * 1) {
-          case 20:
-            return '差';
-          case 40:
-            return '中';
-          case 60:
-            return '良';
-          case 80:
-            return '优';
-          default:
-            return '';
-        }
+        return tickLabels[(val * 1 / 20)] || '';
       },
     });
     chart.point().position('value').shape('dashBoard');

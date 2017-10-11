@@ -84,6 +84,7 @@ export default class Monitor extends PureComponent {
               bordered={false}
             >
               <Gauge
+                tickLabels={['', '差', '中', '良', '优', '']}
                 title="核销率"
                 height={164}
                 percent={87}
