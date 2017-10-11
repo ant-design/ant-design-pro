@@ -80,7 +80,20 @@ export default class Monitor extends PureComponent {
               bordered={false}
             >
               <Gauge
-                tickLabels={['', '差', '中', '良', '优', '']}
+                format={(val) => {
+                  switch (val) {
+                    case 20:
+                      return '差';
+                    case 40:
+                      return '中';
+                    case 60:
+                      return '量';
+                    case 80:
+                      return '优';
+                    default:
+                      return '';
+                  }
+                }}
                 title="核销率"
                 height={164}
                 percent={87}

@@ -103,7 +103,7 @@ class Gauge extends PureComponent {
   }
 
   renderChart(nextProps) {
-    const { height, color = '#00b1f8', bgColor = '#d3f3fe', title, percent, tickLabels = [] } = nextProps || this.props;
+    const { height, color = '#00b1f8', bgColor = '#d3f3fe', title, percent, format } = nextProps || this.props;
     const data = [{ name: title, value: percent }];
 
     if (this.chart) {
@@ -146,9 +146,7 @@ class Gauge extends PureComponent {
         stroke: color,
       },
       labelOffset: -12,
-      formatter(val) {
-        return tickLabels[(val * 1) / 20] || '';
-      },
+      formatter: format,
     });
     chart.point().position('value').shape('dashBoard');
     draw(data);
