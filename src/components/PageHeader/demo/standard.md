@@ -17,7 +17,6 @@ const description = (
     <Description term="创建人">曲丽丽</Description>
     <Description term="订购产品">XX 服务</Description>
     <Description term="创建时间">2017-07-07</Description>
-    <Description term="关联单据"><a href="">12421</a></Description>
   </DescriptionList>
 );
 
