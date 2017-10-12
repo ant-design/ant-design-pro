@@ -8,7 +8,7 @@ title: Standard
 ````jsx
 import PageHeader from 'ant-design-pro/lib/PageHeader';
 import DescriptionList from 'ant-design-pro/lib/DescriptionList';
-import { Button, Menu, Dropdown, Icon, Row, Col } from 'antd';
+import { Button, Menu, Icon, Row, Col } from 'antd';
 
 const { Description } = DescriptionList;
 
@@ -17,6 +17,7 @@ const description = (
     <Description term="创建人">曲丽丽</Description>
     <Description term="订购产品">XX 服务</Description>
     <Description term="创建时间">2017-07-07</Description>
+    <Description term="关联单据"><a href="">12421</a></Description>
   </DescriptionList>
 );
 
@@ -32,11 +33,6 @@ const action = (
   <div>
     <Button>操作</Button>
     <Button>操作</Button>
-    <Dropdown overlay={menu}>
-      <Button>
-        更多 <Icon type="down" />
-      </Button>
-    </Dropdown>
     <Button type="primary">主操作</Button>
   </div>
 );
