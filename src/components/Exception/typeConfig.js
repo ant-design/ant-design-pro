@@ -1,18 +1,18 @@
 const config = {
   403: {
-    img: 'https://gw.alipayobjects.com/zos/rmsportal/eKcaKpQhaYgsEzCnYKSV.svg',
+    img: 'https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg',
     title: '403',
-    desc: '对不起，你没有权限',
+    desc: '抱歉，你无权访问该页面',
   },
   404: {
-    img: 'https://gw.alipayobjects.com/zos/rmsportal/CSBcmGONHHPYIrPukBQW.svg',
+    img: 'https://gw.alipayobjects.com/zos/rmsportal/KpnpchXsobRgLElEozzI.svg',
     title: '404',
-    desc: '你要找的页面不存在',
+    desc: '抱歉，你访问的页面不存在',
   },
   500: {
-    img: 'https://gw.alipayobjects.com/zos/rmsportal/BxwCjbIDiNOcmoEGMXfk.svg',
+    img: 'https://gw.alipayobjects.com/zos/rmsportal/RVRUAYdCGeYNBWoKiIwB.svg',
     title: '500',
-    desc: '服务器错误，我们正在维修',
+    desc: '抱歉，服务器出错了',
   },
 };
 
