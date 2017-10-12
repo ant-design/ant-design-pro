@@ -7,7 +7,19 @@ title: Standard
 
 ````jsx
 import PageHeader from 'ant-design-pro/lib/PageHeader';
+import DescriptionList from 'ant-design-pro/lib/DescriptionList';
 import { Button, Menu, Dropdown, Icon, Row, Col } from 'antd';
+
+const { Description } = DescriptionList;
+
+const description = (
+  <DescriptionList col="2">
+    <Description term="创建人">曲丽丽</Description>
+    <Description term="订购产品">XX 服务</Description>
+    <Description term="创建时间">2017-07-07</Description>
+    <Description term="关联单据"><a href="">12421</a></Description>
+  </DescriptionList>
+);
 
 const menu = (
   <Menu>
@@ -71,7 +83,7 @@ ReactDOM.render(
       title="单号：234231029431"
       logo={<img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/JcBAEvlHGhVvBekIJCWT.svg" />}
       action={action}
-      content="DescriptionList 占位"
+      content={description}
       extraContent={extra}
       breadcrumbList={breadcrumbList}
       tabList={tabList}
