@@ -113,16 +113,16 @@ class TagSelect extends PureComponent {
 
   render() {
     const { checkedTags, checkedAll, expand } = this.state;
-    const { children } = this.props;
+    const { children, className, style } = this.props;
 
     const expandNode = children.filter(child => child.props.displayName === 'TagSelectExpand')[0];
 
-    const cls = classNames(styles.tagSelect, {
+    const cls = classNames(styles.tagSelect, className, {
       [styles.expandTag]: expandNode,
     });
 
     return (
-      <div className={cls}>
+      <div className={cls} style={style}>
         <CheckableTag
           checked={checkedAll}
           key="tag-select-__all__"

@@ -2,13 +2,12 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Row, Col, Form, Card, Select, List } from 'antd';
+import { Row, Col, Form, Card, Select, List, Input } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardFormRow from '../../components/StandardFormRow';
 import TagSelect from '../../components/TagSelect';
 import AvatarList from '../../components/AvatarList';
-import SearchInput from '../../components/SearchInput';
 
 import styles from './CoverCardList.less';
 
@@ -126,7 +125,13 @@ export default class CoverCardList extends PureComponent {
 
     const pageHeaderContent = (
       <div style={{ textAlign: 'center' }}>
-        <SearchInput onSearch={this.handleFormSubmit} />
+        <Input.Search
+          placeholder="请输入"
+          enterButton="搜索"
+          size="large"
+          onSearch={this.handleFormSubmit}
+          style={{ width: 522 }}
+        />
       </div>
     );
 

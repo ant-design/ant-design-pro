@@ -3,9 +3,8 @@ import { connect } from 'dva';
 import { Row, Col, Icon, Card, Tabs, Table, Radio, DatePicker, Tooltip } from 'antd';
 import numeral from 'numeral';
 
-import { ChartCard, Trend, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, NumberInfo, IconUp, IconDown } from '../../components/Charts';
+import { ChartCard, Trend, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, NumberInfo, IconUp, IconDown, TimelineChart } from '../../components/Charts';
 
-import TimelineChart from '../../components/TimelineChart';
 import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
@@ -175,7 +174,9 @@ export default class Analysis extends Component {
     const topColResponsiveProps = {
       xs: 24,
       sm: 12,
-      md: 6,
+      md: 12,
+      lg: 12,
+      xl: 6,
       style: { marginBottom: 24 },
     };
 
@@ -191,7 +192,7 @@ export default class Analysis extends Component {
               footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
               contentHeight={46}
             >
-              <Trend colorType="gray">
+              <Trend colorType="gray" mini={['xlg', 'md']}>
                 <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
                 <Trend.Item title="日环比" flag="down">11%</Trend.Item>
               </Trend>
@@ -236,7 +237,7 @@ export default class Analysis extends Component {
               action={<Tooltip title="购买效率"><Icon type="exclamation-circle-o" /></Tooltip>}
               total="78%"
               footer={
-                <Trend>
+                <Trend mini={['xlg', 'md']}>
                   <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
                   <Trend.Item title="日环比" flag="down">11%</Trend.Item>
                 </Trend>
