@@ -3,10 +3,8 @@ import { connect } from 'dva';
 import { Row, Col, Card } from 'antd';
 import numeral from 'numeral';
 
-import { NumberInfo, Pie, WaterWave, Gauge } from '../../components/Charts';
-import MapChart from '../../components/MapChart';
-import TagCloud from '../../components/TagCloud';
-import Countdown from '../../components/Countdown';
+import { NumberInfo, Pie, WaterWave, Gauge, TagCloud } from '../../components/Charts';
+import CountDown from '../../components/CountDown';
 import ActiveChart from '../../components/ActiveChart';
 
 import styles from './Monitor.less';
@@ -56,7 +54,7 @@ export default class Monitor extends PureComponent {
                 <Col sm={6} xs={12}>
                   <NumberInfo
                     subTitle="活动剩余时间"
-                    total={<Countdown target={targetTime} />}
+                    total={<CountDown target={targetTime} />}
                   />
                 </Col>
                 <Col sm={6} xs={12}>
@@ -67,9 +65,7 @@ export default class Monitor extends PureComponent {
                 </Col>
               </Row>
               <div className={styles.mapChart}>
-                <MapChart
-                  data={MapData}
-                />
+                <img src="https://gw.alipayobjects.com/zos/rmsportal/fBcAYoxWIjlUXwDjqvzg.png" alt="map" />
               </div>
             </Card>
           </Col>
@@ -84,6 +80,20 @@ export default class Monitor extends PureComponent {
               bordered={false}
             >
               <Gauge
+                format={(val) => {
+                  switch (val) {
+                    case 20:
+                      return '差';
+                    case 40:
+                      return '中';
+                    case 60:
+                      return '量';
+                    case 80:
+                      return '优';
+                    default:
+                      return '';
+                  }
+                }}
                 title="核销率"
                 height={164}
                 percent={87}

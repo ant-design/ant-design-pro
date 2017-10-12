@@ -2,12 +2,11 @@ import React, { PureComponent } from 'react';
 import numeral from 'numeral';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip } from 'antd';
+import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Input } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardFormRow from '../../components/StandardFormRow';
 import TagSelect from '../../components/TagSelect';
-import SearchInput from '../../components/SearchInput';
 
 import styles from './FilterCardList.less';
 
@@ -114,7 +113,13 @@ export default class FilterCardList extends PureComponent {
 
     const pageHeaderContent = (
       <div style={{ textAlign: 'center' }}>
-        <SearchInput onSearch={this.handleFormSubmit} />
+        <Input.Search
+          placeholder="请输入"
+          enterButton="搜索"
+          size="large"
+          onSearch={this.handleFormSubmit}
+          style={{ width: 522 }}
+        />
       </div>
     );
 
