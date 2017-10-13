@@ -2,7 +2,7 @@
 category: Components
 type: General
 title: FooterToolbar
-subtitle: 底部固定工具栏
+subtitle: 底部工具栏
 cols: 1
 ---
 
