@@ -151,7 +151,7 @@ export default class Workplace extends PureComponent {
               bodyStyle={{ padding: 0 }}
             >
               {
-                !projectLoading && notice.length > 0 && notice.map(item => (
+                notice.map(item => (
                   <Card.Grid className={styles.projectGrid} key={item.id}>
                     <Card bodyStyle={{ padding: 0 }} bordered={false}>
                       <Card.Meta
@@ -214,6 +214,7 @@ export default class Workplace extends PureComponent {
               style={{ marginBottom: 24 }}
               bordered={false}
               title="xx 指数"
+              loading={radarData.length === 0}
             >
               <div className={styles.chart}>
                 {
