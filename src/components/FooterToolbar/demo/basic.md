@@ -1,14 +1,14 @@
 ---
 order: 0
 title: 演示
-iframe: 600
+iframe: 400
 ---
 
 浮动固定页脚。
 
 ````jsx
 import FooterToolbar from 'ant-design-pro/lib/FooterToolbar';
-import { Icon } from 'antd';
+import { Button } from 'antd';
 
 ReactDOM.render(
   <div style={{ background: '#f7f7f7' }}>

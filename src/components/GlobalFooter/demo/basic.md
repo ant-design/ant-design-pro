@@ -1,7 +1,7 @@
 ---
 order: 0
 title: 演示
-iframe: 600
+iframe: 400
 ---
 
 基本页脚。
