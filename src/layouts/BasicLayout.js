@@ -188,8 +188,8 @@ class BasicLayout extends React.PureComponent {
             collapsedWidth={80}
             breakpoint="md"
             onCollapse={this.onCollapse}
-            style={{ minHeight: '100vh' }}
             width={256}
+            className={styles.sider}
           >
             <div className={styles.logo}>
               <Link to="/">
