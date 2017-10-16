@@ -139,7 +139,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col sm={8} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索" bordered={false} bodyStyle={{ height: 214 }}>
+            <Card title="热门搜索" bordered={false}>
               <TagCloud
                 data={tags}
                 height={161}

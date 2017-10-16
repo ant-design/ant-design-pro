@@ -140,7 +140,7 @@ export default class Workplace extends PureComponent {
         extraContent={pageHeaderExtra}
       >
         <Row gutter={24}>
-          <Col lg={16} md={24} sm={24} xs={24}>
+          <Col xl={16} lg={24} md={24} sm={24} xs={24}>
             <Card
               className={styles.projectList}
               style={{ marginBottom: 24 }}
@@ -198,7 +198,7 @@ export default class Workplace extends PureComponent {
               </List>
             </Card>
           </Col>
-          <Col lg={8} md={24} sm={24} xs={24}>
+          <Col xl={8} lg={24} md={24} sm={24} xs={24}>
             <Card
               style={{ marginBottom: 24 }}
               title="快速开始 / 便捷导航"
