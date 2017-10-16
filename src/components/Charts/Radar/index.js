@@ -55,6 +55,8 @@ class Radar extends PureComponent {
       tickCount = 4,
       margin = [16, 30, 16, 30] } = this.props;
 
+    const colors = ['#1890FF', '#FACC14', '#2FC25B'];
+
     if (!data || (data && data.length < 1)) {
       return;
     }
@@ -93,8 +95,8 @@ class Radar extends PureComponent {
       },
     });
 
-    chart.line().position('label*value').color('name');
-    chart.point().position('label*value').color('name').shape('circle');
+    chart.line().position('label*value').color('name', colors);
+    chart.point().position('label*value').color('name', colors).shape('circle');
 
     chart.render();
 

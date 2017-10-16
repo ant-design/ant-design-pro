@@ -107,8 +107,24 @@
 .projectList {
   :global {
     .ant-card-meta-description {
+      color: @text-color-secondary;
       font-size: 12px;
       min-height: 36px;
+    }
+  }
+  .cardTitle {
+    :global {
+      .ant-avatar {
+        position: relative;
+        top: 5px;
+      }
+    }
+    a {
+      color: @heading-color;
+      margin-left: 12px;
+      &:hover {
+        color: @primary-color;
+      }
     }
   }
   .projectGrid {
@@ -116,7 +132,6 @@
   }
   .projectItemContent {
     display: flex;
-    padding-left: 48px;
     margin-top: 12px;
     overflow: hidden;
     font-size: 12px;
