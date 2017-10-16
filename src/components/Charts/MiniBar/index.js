@@ -34,7 +34,7 @@ class MiniBar extends PureComponent {
     // clean
     this.node.innerHTML = '';
 
-    const Frame = G2.Frame;
+    const { Frame } = G2;
     const frame = new Frame(data);
 
     const chart = new G2.Chart({

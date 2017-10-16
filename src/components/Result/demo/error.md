@@ -25,7 +25,7 @@ const extra = (
   </div>
 );
 
-const actions = <Button size="large" type="primary">返回修改</Button>;
+const actions = <Button type="primary">返回修改</Button>;
 
 ReactDOM.render(
   <Result

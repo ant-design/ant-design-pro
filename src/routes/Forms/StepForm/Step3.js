@@ -30,10 +30,10 @@ export default ({ dispatch, data }) => {
   );
   const actions = (
     <div>
-      <Button type="primary" size="large" onClick={onFinish}>
+      <Button type="primary" onClick={onFinish}>
         再转一笔
       </Button>
-      <Button size="large">
+      <Button>
         查看账单
       </Button>
     </div>

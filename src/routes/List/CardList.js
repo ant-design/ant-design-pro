@@ -26,7 +26,8 @@ export default class CardList extends PureComponent {
     const content = (
       <div className={styles.pageHeaderContent}>
         <p>段落示意：蚂蚁金服务设计平台-design.alipay.com，用最小的工作量，无缝接入蚂蚁金服生态，
-          提供跨越设计与开发的体验解决方案。</p>
+          提供跨越设计与开发的体验解决方案。
+        </p>
         <div className={styles.contentLink}>
           <a>
             <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/wUTAfuNZjhmCIxEPxQVY.svg" /> 快速开始
@@ -55,34 +56,35 @@ export default class CardList extends PureComponent {
       >
         <div className={styles.cardList}>
           <List
+            rowKey="id"
             loading={loading}
             grid={{ gutter: 16, lg: 3, md: 2, sm: 1, xs: 1 }}
-          >
-            <List.Item>
-              <Button type="dashed" className={styles.newButton}>
-                <Icon type="plus" /> 新增产品
-              </Button>
-            </List.Item>
-            {
-              list && list.map(item => (
-                <List.Item key={item.id}>
-                  <Link to="/list/card-list">
-                    <Card actions={[<a>操作一</a>, <a>操作二</a>]}>
-                      <Card.Meta
-                        avatar={<Avatar size="large" src={item.avatar} />}
-                        title={item.title}
-                        description={(
-                          <p className={styles.cardDescription}>
-                            <span>{item.description}</span>
-                          </p>
-                        )}
-                      />
-                    </Card>
-                  </Link>
+            dataSource={['', ...list]}
+            renderItem={item => (item ? (
+              <List.Item key={item.id}>
+                <Link to="/list/card-list">
+                  <Card actions={[<a>操作一</a>, <a>操作二</a>]}>
+                    <Card.Meta
+                      avatar={<Avatar size="large" src={item.avatar} />}
+                      title={item.title}
+                      description={(
+                        <p className={styles.cardDescription}>
+                          <span>{item.description}</span>
+                        </p>
+                      )}
+                    />
+                  </Card>
+                </Link>
+              </List.Item>
+              ) : (
+                <List.Item>
+                  <Button type="dashed" className={styles.newButton}>
+                    <Icon type="plus" /> 新增产品
+                  </Button>
                 </List.Item>
-              ))
-            }
-          </List>
+              )
+            )}
+          />
         </div>
       </PageHeaderLayout>
     );

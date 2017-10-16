@@ -22,7 +22,7 @@ for (let i = 0; i < 46; i += 1) {
 export function getRule(req, res, u) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    url = req.url;
+    url = req.url; // eslint-disable-line
   }
 
   const params = getUrlParams(url);
@@ -74,20 +74,18 @@ export function getRule(req, res, u) {
 export function postRule(req, res, u, b) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    url = req.url;
+    url = req.url; // eslint-disable-line
   }
 
   const body = (b && b.body) || req.body;
-  const method = body.method;
+  const { method, no, description } = body;
 
   switch (method) {
     /* eslint no-case-declarations:0 */
     case 'delete':
-      const no = body.no;
       tableListDataSource = tableListDataSource.filter(item => no.indexOf(item.no) === -1);
       break;
     case 'post':
-      const description = body.description;
       const i = Math.ceil(Math.random() * 10000);
       tableListDataSource.unshift({
         key: i,

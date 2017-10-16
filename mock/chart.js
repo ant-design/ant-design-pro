@@ -3,7 +3,7 @@ import moment from 'moment';
 // mock data
 const visitData = [];
 const beginDay = new Date().getTime();
-for (let i = 0; i < 20; i += 1) {
+for (let i = 0; i < 7; i += 1) {
   visitData.push({
     x: moment(new Date(beginDay + (1000 * 60 * 60 * 24 * i))).format('YYYY-MM-DD'),
     y: Math.floor(Math.random() * 100) + 10,

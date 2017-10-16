@@ -3,10 +3,8 @@ import { connect } from 'dva';
 import { Row, Col, Card } from 'antd';
 import numeral from 'numeral';
 
-import { NumberInfo, Pie, WaterWave, Gauge } from '../../components/Charts';
-import MapChart from '../../components/MapChart';
-import TagCloud from '../../components/TagCloud';
-import Countdown from '../../components/Countdown';
+import { NumberInfo, Pie, WaterWave, Gauge, TagCloud } from '../../components/Charts';
+import CountDown from '../../components/CountDown';
 import ActiveChart from '../../components/ActiveChart';
 
 import styles from './Monitor.less';
@@ -38,12 +36,13 @@ export default class Monitor extends PureComponent {
     return (
       <div>
         <Row gutter={24}>
-          <Col lg={16} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
+          <Col xl={18} lg={24} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card title="活动实时交易情况" bordered={false}>
               <Row>
                 <Col sm={6} xs={12}>
                   <NumberInfo
                     subTitle="今日交易总额"
+                    suffix="元"
                     total={numeral(124543233).format('0,0')}
                   />
                 </Col>
@@ -56,24 +55,23 @@ export default class Monitor extends PureComponent {
                 <Col sm={6} xs={12}>
                   <NumberInfo
                     subTitle="活动剩余时间"
-                    total={<Countdown target={targetTime} />}
+                    total={<CountDown target={targetTime} />}
                   />
                 </Col>
                 <Col sm={6} xs={12}>
                   <NumberInfo
                     subTitle="每秒交易总额"
+                    suffix="元"
                     total={numeral(234).format('0,0')}
                   />
                 </Col>
               </Row>
               <div className={styles.mapChart}>
-                <MapChart
-                  data={MapData}
-                />
+                <img src="https://gw.alipayobjects.com/zos/rmsportal/LYbCPIWLeUrdWSpVvKIL.png" alt="map" />
               </div>
             </Card>
           </Col>
-          <Col lg={8} md={24} sm={24} xs={24}>
+          <Col xl={6} lg={24} md={24} sm={24} xs={24}>
             <Card title="活动情况预测" style={{ marginBottom: 24 }} bordered={false}>
               <ActiveChart />
             </Card>
@@ -84,15 +82,29 @@ export default class Monitor extends PureComponent {
               bordered={false}
             >
               <Gauge
+                format={(val) => {
+                  switch (parseInt(val, 10)) {
+                    case 20:
+                      return '差';
+                    case 40:
+                      return '中';
+                    case 60:
+                      return '良';
+                    case 80:
+                      return '优';
+                    default:
+                      return '';
+                  }
+                }}
                 title="核销率"
-                height={164}
+                height={180}
                 percent={87}
               />
             </Card>
           </Col>
         </Row>
         <Row gutter={24}>
-          <Col sm={8} xs={24}>
+          <Col lg={12} sm={24} xs={24}>
             <Card
               title="各品类占比"
               style={{ marginBottom: 24 }}
@@ -109,7 +121,7 @@ export default class Monitor extends PureComponent {
                 </Col>
                 <Col span={8}>
                   <Pie
-                    color="#5DD1DD"
+                    color="#5DDECF"
                     percent={22}
                     subTitle="西餐"
                     total="22%"
@@ -118,7 +130,7 @@ export default class Monitor extends PureComponent {
                 </Col>
                 <Col span={8}>
                   <Pie
-                    color="#B5EDC9"
+                    color="#2FC25B"
                     percent={32}
                     subTitle="火锅"
                     total="32%"
@@ -128,15 +140,15 @@ export default class Monitor extends PureComponent {
               </Row>
             </Card>
           </Col>
-          <Col sm={8} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索" bordered={false} bodyStyle={{ height: 214 }}>
+          <Col lg={6} sm={12} xs={24} style={{ marginBottom: 24 }}>
+            <Card title="热门搜索" bordered={false}>
               <TagCloud
                 data={tags}
                 height={161}
               />
             </Card>
           </Col>
-          <Col sm={8} xs={24} style={{ marginBottom: 24 }}>
+          <Col lg={6} sm={12} xs={24} style={{ marginBottom: 24 }}>
             <Card title="资源剩余" bodyStyle={{ textAlign: 'center' }} bordered={false}>
               <WaterWave
                 height={161}

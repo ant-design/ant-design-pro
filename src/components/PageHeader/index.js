@@ -5,7 +5,7 @@ import { Link } from 'dva/router';
 import classNames from 'classnames';
 import styles from './index.less';
 
-const TabPane = Tabs.TabPane;
+const { TabPane } = Tabs;
 
 function itemRender(route, params, routes, paths) {
   const last = routes.indexOf(route) === routes.length - 1;

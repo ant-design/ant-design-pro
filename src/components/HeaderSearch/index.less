@@ -1,26 +1,32 @@
 @import "~antd/lib/style/themes/default.less";
 
-.input {
-  transition: width .3s, margin-left .3s;
-  width: 0;
-  background: transparent;
-  border-radius: 0;
-  :global(.ant-select-selection) {
+.headerSearch {
+  :global(.anticon-search) {
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .input {
+    transition: width .3s, margin-left .3s;
+    width: 0;
     background: transparent;
-  }
-  input {
-    border: 0;
-    padding-left: 0;
-    padding-right: 0;
-    box-shadow: none !important;
-  }
-  &,
-  &:hover,
-  &:focus {
-    border-bottom: 1px solid @border-color-base;
-  }
-  &.show {
-    width: 210px;
-    margin-left: 8px;
+    border-radius: 0;
+    :global(.ant-select-selection) {
+      background: transparent;
+    }
+    input {
+      border: 0;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: none !important;
+    }
+    &,
+    &:hover,
+    &:focus {
+      border-bottom: 1px solid @border-color-base;
+    }
+    &.show {
+      width: 210px;
+      margin-left: 8px;
+    }
   }
 }

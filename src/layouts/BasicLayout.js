@@ -29,9 +29,6 @@ class BasicLayout extends React.PureComponent {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
   }
-  state = {
-    mode: 'inline',
-  };
   getChildContext() {
     const { location } = this.props;
     const routeData = getRouteData('BasicLayout');
@@ -138,7 +135,7 @@ class BasicLayout extends React.PureComponent {
           urgent: 'red',
           doing: 'yellow',
         })[newNotice.status];
-        newNotice.extra = <Tag color={`${color}-inverse`}>{newNotice.extra}</Tag>;
+        newNotice.extra = <Tag color={color}>{newNotice.extra}</Tag>;
       }
       return newNotice;
     });
@@ -183,6 +180,12 @@ class BasicLayout extends React.PureComponent {
       </Menu>
     );
     const noticeData = this.getNoticeData();
+
+    // Don't show popup menu when it is been collapsed
+    const menuProps = collapsed ? {} : {
+      openKeys: this.state.openKeys,
+    };
+
     return (
       <DocumentTitle title={this.getPageTitle()}>
         <Layout>
@@ -193,8 +196,8 @@ class BasicLayout extends React.PureComponent {
             collapsedWidth={80}
             breakpoint="md"
             onCollapse={this.onCollapse}
-            style={{ minHeight: '100vh' }}
             width={256}
+            className={styles.sider}
           >
             <div className={styles.logo}>
               <Link to="/">
@@ -205,7 +208,7 @@ class BasicLayout extends React.PureComponent {
             <Menu
               theme="dark"
               mode="inline"
-              openKeys={this.state.openKeys}
+              {...menuProps}
               onOpenChange={this.handleOpenChange}
               selectedKeys={this.getCurrentMenuSelectedKeys()}
               style={{ margin: '24px 0', width: '100%' }}
@@ -227,10 +230,10 @@ class BasicLayout extends React.PureComponent {
                   placeholder="站内搜索"
                   dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
                   onSearch={(value) => {
-                    console.log('input', value);  // eslint-disable-line
+                    console.log('input', value); // eslint-disable-line
                   }}
                   onPressEnter={(value) => {
-                    console.log('enter', value);  // eslint-disable-line
+                    console.log('enter', value); // eslint-disable-line
                   }}
                 />
                 <NoticeIcon

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Input, Icon, AutoComplete } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
@@ -6,6 +7,21 @@ import styles from './index.less';
 export default class HeaderSearch extends PureComponent {
   static defaultProps = {
     defaultActiveFirstOption: false,
+    onPressEnter: () => {},
+    onChange: () => {},
+    onSearch: () => {},
+    className: '',
+    placeholder: '',
+    dataSource: [],
+  };
+  static propTypes = {
+    className: PropTypes.string,
+    placeholder: PropTypes.string,
+    onSearch: PropTypes.func,
+    onPressEnter: PropTypes.func,
+    onChange: PropTypes.func,
+    defaultActiveFirstOption: PropTypes.bool,
+    dataSource: PropTypes.array,
   };
   state = {
     searchMode: false,
@@ -17,17 +33,18 @@ export default class HeaderSearch extends PureComponent {
   onKeyDown = (e) => {
     if (e.key === 'Enter') {
       this.timeout = setTimeout(() => {
-        this.props.onPressEnter(this.state.value);  // Fix duplicate onPressEnter
+        this.props.onPressEnter(this.state.value); // Fix duplicate onPressEnter
       }, 0);
     }
   }
   onChange = (value) => {
     this.setState({ value });
+    this.props.onChange();
   }
   enterSearchMode = () => {
     this.setState({ searchMode: true }, () => {
       if (this.state.searchMode) {
-        this.input.refs.input.focus();
+        this.input.focus();
       }
     });
   }
@@ -43,13 +60,15 @@ export default class HeaderSearch extends PureComponent {
       [styles.show]: this.state.searchMode,
     });
     return (
-      <span className={className} onClick={this.enterSearchMode}>
+      <span
+        className={classNames(className, styles.headerSearch)}
+        onClick={this.enterSearchMode}
+      >
         <Icon type="search" />
         <AutoComplete
           className={inputClass}
           value={this.state.value}
           onChange={this.onChange}
-          onSelect={this.onSelect}
           {...restProps}
         >
           <Input

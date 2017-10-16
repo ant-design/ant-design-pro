@@ -21,7 +21,7 @@ export default ({ className, type, title, desc, img, actions }) => {
         <h1>{title || config[pageType].title}</h1>
         <div className={styles.desc}>{desc || config[pageType].desc}</div>
         <div className={styles.actions}>
-          {actions || <Link to="/"><Button size="large" type="primary">返回首页</Button></Link>}
+          {actions || <Link to="/"><Button type="primary">返回首页</Button></Link>}
         </div>
       </div>
     </div>

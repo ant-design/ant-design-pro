@@ -13,7 +13,7 @@ export default {
   },
 
   effects: {
-    *fetchBasic({ payload }, { call, put }) {
+    *fetchBasic(_, { call, put }) {
       yield put({
         type: 'changeLoading',
         payload: { basicLoading: true },
@@ -28,7 +28,7 @@ export default {
         payload: { basicLoading: false },
       });
     },
-    *fetchAdvanced({ payload }, { call, put }) {
+    *fetchAdvanced(_, { call, put }) {
       yield put({
         type: 'changeLoading',
         payload: { advancedLoading: true },

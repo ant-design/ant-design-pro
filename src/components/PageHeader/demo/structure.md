@@ -3,7 +3,7 @@ order: 0
 title: Structure
 ---
 
-基本结构，可以形成多种组合。
+基本结构，具备响应式布局功能，主要断点为 768px 和 576px，拖动窗口改变大小试试看。
 
 ````jsx
 import PageHeader from 'ant-design-pro/lib/PageHeader';

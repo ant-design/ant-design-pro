@@ -3,7 +3,7 @@ import { Button, Row, Col, Icon, Steps, Card } from 'antd';
 import Result from '../../components/Result';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
-const Step = Steps.Step;
+const { Step } = Steps;
 
 const desc1 = (
   <div style={{ fontSize: 14 }}>
@@ -44,9 +44,9 @@ const extra = (
 
 const actions = (
   <div>
-    <Button size="large" type="primary">返回列表</Button>
-    <Button size="large">查看项目</Button>
-    <Button size="large">打 印</Button>
+    <Button type="primary">返回列表</Button>
+    <Button>查看项目</Button>
+    <Button>打 印</Button>
   </div>
 );
 

@@ -190,7 +190,6 @@ export default class TableForm extends PureComponent {
         <Button
           style={{ width: '100%', marginTop: 24 }}
           type="dashed"
-          size="large"
           onClick={this.newMember}
           icon="plus"
         >

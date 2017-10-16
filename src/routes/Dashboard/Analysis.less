@@ -35,7 +35,8 @@
       text-align: center;
     }
     span.active {
-      background-color: @primary-color;
+      //background-color: @primary-color;
+      background-color: #314659;
       color: #fff;
     }
     span:last-child {
@@ -75,6 +76,33 @@
     .ant-tabs-extra-content {
       padding-right: 24px;
       line-height: 55px;
+    }
+  }
+}
+
+.salesCard {
+  :global {
+    .ant-card-head {
+      position: relative;
+    }
+  }
+}
+.salesCardExtra {
+  height: 88px;
+}
+.salesTypeRadio {
+  position: absolute;
+  left: 24px;
+  bottom: 15px;
+}
+
+.offlineCard {
+  :global {
+    .ant-tabs-bar {
+      border-bottom: none;
+    }
+    .ant-tabs-ink-bar {
+      top: 1px;
     }
   }
 }

@@ -46,7 +46,9 @@ export default class ActiveChart extends PureComponent {
           <MiniArea
             animate={false}
             line
-            color="#5DD1DD"
+            borderColor="#00a2fc"
+            borderWidth={2}
+            color="#c9eafe"
             height={84}
             yAxis={{
               tickCount: 3,

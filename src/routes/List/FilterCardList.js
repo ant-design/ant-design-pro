@@ -2,16 +2,15 @@ import React, { PureComponent } from 'react';
 import numeral from 'numeral';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip } from 'antd';
+import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Input } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardFormRow from '../../components/StandardFormRow';
 import TagSelect from '../../components/TagSelect';
-import SearchInput from '../../components/SearchInput';
 
 import styles from './FilterCardList.less';
 
-const Option = Select.Option;
+const { Option } = Select;
 const FormItem = Form.Item;
 const TagOption = TagSelect.Option;
 const TagExpand = TagSelect.Expand;
@@ -114,7 +113,13 @@ export default class FilterCardList extends PureComponent {
 
     const pageHeaderContent = (
       <div style={{ textAlign: 'center' }}>
-        <SearchInput onSearch={this.handleFormSubmit} />
+        <Input.Search
+          placeholder="请输入"
+          enterButton="搜索"
+          size="large"
+          onSearch={this.handleFormSubmit}
+          style={{ width: 522 }}
+        />
       </div>
     );
 
@@ -195,36 +200,35 @@ export default class FilterCardList extends PureComponent {
             </Form>
           </Card>
           <List
+            rowKey="id"
             style={{ marginTop: 16 }}
             grid={{ gutter: 16, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
             loading={loading}
-          >
-            {
-              list && list.map(item => (
-                <List.Item key={item.id}>
-                  <Card
-                    actions={[
-                      <Tooltip title="复制"><Icon type="copy" /></Tooltip>,
-                      <Tooltip title="用户"><Icon type="solution" /></Tooltip>,
-                      <Tooltip title="设置"><Icon type="setting" /></Tooltip>,
-                      <Tooltip title="删除"><Icon type="delete" /></Tooltip>,
-                    ]}
-                  >
-                    <Card.Meta
-                      avatar={<Avatar size="large" src={item.avatar} />}
-                      title={item.title}
+            dataSource={list}
+            renderItem={item => (
+              <List.Item key={item.id}>
+                <Card
+                  actions={[
+                    <Tooltip title="复制"><Icon type="copy" /></Tooltip>,
+                    <Tooltip title="用户"><Icon type="solution" /></Tooltip>,
+                    <Tooltip title="设置"><Icon type="setting" /></Tooltip>,
+                    <Tooltip title="删除"><Icon type="delete" /></Tooltip>,
+                  ]}
+                >
+                  <Card.Meta
+                    avatar={<Avatar size="large" src={item.avatar} />}
+                    title={item.title}
+                  />
+                  <div className={styles.cardItemContent}>
+                    <CardInfo
+                      activeUser={formatWan(item.activeUser)}
+                      newUser={numeral(item.newUser).format('0,0')}
                     />
-                    <div className={styles.cardItemContent}>
-                      <CardInfo
-                        activeUser={formatWan(item.activeUser)}
-                        newUser={numeral(item.newUser).format('0,0')}
-                      />
-                    </div>
-                  </Card>
-                </List.Item>
-              ))
-            }
-          </List>
+                  </div>
+                </Card>
+              </List.Item>
+            )}
+          />
         </div>
       </PageHeaderLayout>
     );

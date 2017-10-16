@@ -4,7 +4,7 @@ import { Form, Input, DatePicker, Select, Button, Card } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
+const { Option } = Select;
 const { RangePicker } = DatePicker;
 
 @connect(state => ({

@@ -25,7 +25,8 @@ class MiniArea extends PureComponent {
   }
 
   renderChart(data) {
-    const { height = 0, fit = true, color = '#33abfb', line, xAxis, yAxis, animate = true } = this.props;
+    const { height = 0, fit = true, color = '#33abfb', borderWidth = 1, line, xAxis, yAxis, animate = true } = this.props;
+    const borderColor = this.props.borderColor || color;
 
     if (!data || (data && data.length < 1)) {
       return;
@@ -61,7 +62,7 @@ class MiniArea extends PureComponent {
       chart.axis('y', false);
     }
 
-    chart.source(data, {
+    const dataConfig = {
       x: {
         type: 'cat',
         range: [0, 1],
@@ -71,18 +72,35 @@ class MiniArea extends PureComponent {
         min: 0,
         ...yAxis,
       },
-    });
+    };
 
-    chart.tooltip({
+    const view = chart.createView();
+    view.tooltip({
       title: null,
       crosshairs: false,
       map: {
-        name: 'x',
+        name: 'y',
       },
     });
-    chart.area().position('x*y').color(color).shape('smooth');
+
+    view.source(data, dataConfig);
+
+    view.area().position('x*y').color(color).shape('smooth');
+
+    chart.on('tooltipchange', (ev) => {
+      const item = ev.items[0];
+      const { title } = item;
+      item.title = '';
+      item.name = '';
+      item.value = `${title} : ${item.value}`;
+    });
+
     if (line) {
-      chart.line().position('x*y').color(color).shape('smooth');
+      const view2 = chart.createView();
+      view2.source(data, dataConfig);
+      view2.line().position('x*y').color(borderColor).size(borderWidth)
+        .shape('smooth');
+      view2.tooltip(false);
     }
     chart.render();
 

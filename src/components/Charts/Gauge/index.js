@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import G2 from 'g2';
 import equal from '../equal';
 
-const Shape = G2.Shape;
+const { Shape } = G2;
 
 /* eslint no-underscore-dangle: 0 */
 class Gauge extends PureComponent {
@@ -75,7 +75,7 @@ class Gauge extends PureComponent {
           },
         });
 
-        const origin = cfg.origin;
+        const { origin } = cfg;
         group.addShape('text', {
           attrs: {
             x: center.x,
@@ -103,7 +103,7 @@ class Gauge extends PureComponent {
   }
 
   renderChart(nextProps) {
-    const { height, color = '#00b1f8', bgColor = '#d3f3fe', title, percent } = nextProps || this.props;
+    const { height, color = '#00b1f8', bgColor = '#d3f3fe', title, percent, format } = nextProps || this.props;
     const data = [{ name: title, value: percent }];
 
     if (this.chart) {
@@ -146,20 +146,7 @@ class Gauge extends PureComponent {
         stroke: color,
       },
       labelOffset: -12,
-      formatter(val) {
-        switch (val * 1) {
-          case 20:
-            return '差';
-          case 40:
-            return '中';
-          case 60:
-            return '良';
-          case 80:
-            return '优';
-          default:
-            return '';
-        }
-      },
+      formatter: format,
     });
     chart.point().position('value').shape('dashBoard');
     draw(data);

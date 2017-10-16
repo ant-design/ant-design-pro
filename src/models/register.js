@@ -8,7 +8,7 @@ export default {
   },
 
   effects: {
-    *submit({ payload }, { call, put }) {
+    *submit(_, { call, put }) {
       yield put({
         type: 'changeSubmitting',
         payload: true,

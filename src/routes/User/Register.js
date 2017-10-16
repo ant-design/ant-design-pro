@@ -5,7 +5,7 @@ import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
+const { Option } = Select;
 const InputGroup = Input.Group;
 
 const passwordStatusMap = {
@@ -55,7 +55,7 @@ export default class Register extends Component {
   }
 
   getPasswordStatus = () => {
-    const form = this.props.form;
+    const { form } = this.props;
     const value = form.getFieldValue('password');
     if (value && value.length > 9) {
       return 'ok';
@@ -81,12 +81,12 @@ export default class Register extends Component {
   }
 
   handleConfirmBlur = (e) => {
-    const value = e.target.value;
+    const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   }
 
   checkConfirm = (rule, value, callback) => {
-    const form = this.props.form;
+    const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
       callback('两次输入的密码不匹配!');
     } else {
@@ -113,7 +113,7 @@ export default class Register extends Component {
       if (value.length < 6) {
         callback('error');
       } else {
-        const form = this.props.form;
+        const { form } = this.props;
         if (value && this.state.confirmDirty) {
           form.validateFields(['confirm'], { force: true });
         }
@@ -123,7 +123,7 @@ export default class Register extends Component {
   }
 
   renderPasswordProgress = () => {
-    const form = this.props.form;
+    const { form } = this.props;
     const value = form.getFieldValue('password');
     const passwordStatus = this.getPasswordStatus();
     return value && value.length ?
@@ -176,7 +176,6 @@ export default class Register extends Component {
                 }],
               })(
                 <Input
-                  size="large"
                   type="password"
                   placeholder="至少6位密码，区分大小写"
                 />
@@ -203,7 +202,7 @@ export default class Register extends Component {
                 {getFieldDecorator('prefix', {
                   initialValue: '86',
                 })(
-                  <Select size="large">
+                  <Select>
                     <Option value="86">+86</Option>
                     <Option value="87">+87</Option>
                   </Select>
@@ -231,7 +230,6 @@ export default class Register extends Component {
                   }],
                 })(
                   <Input
-                    size="large"
                     placeholder="验证码"
                   />
                 )}
@@ -240,7 +238,6 @@ export default class Register extends Component {
                 <Button
                   disabled={count}
                   className={styles.getCaptcha}
-                  size="large"
                   onClick={this.onGetCaptcha}
                 >
                   {count ? `${count} s` : '获取验证码'}

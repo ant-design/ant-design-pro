@@ -2,17 +2,16 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Row, Col, Form, Card, Select, List } from 'antd';
+import { Row, Col, Form, Card, Select, List, Input } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardFormRow from '../../components/StandardFormRow';
 import TagSelect from '../../components/TagSelect';
 import AvatarList from '../../components/AvatarList';
-import SearchInput from '../../components/SearchInput';
 
 import styles from './CoverCardList.less';
 
-const Option = Select.Option;
+const { Option } = Select;
 const FormItem = Form.Item;
 const TagOption = TagSelect.Option;
 const TagExpand = TagSelect.Expand;
@@ -73,40 +72,39 @@ export default class CoverCardList extends PureComponent {
 
     const cardList = list ? (
       <List
+        rowKey="id"
         loading={loading}
         grid={{ gutter: 16, lg: 4, md: 3, sm: 2, xs: 1 }}
-      >
-        {
-          list.map(item => (
-            <List.Item key={item.id}>
-              <Card
-                cover={<img alt={item.title} src={item.cover} />}
-              >
-                <Card.Meta
-                  title={item.title}
-                  description={item.subDescription}
-                />
-                <div className={styles.cardItemContent}>
-                  <span>{moment(item.updatedAt).fromNow()}</span>
-                  <div className={styles.avatarList}>
-                    <AvatarList size="small">
-                      {
-                        item.members.map((member, i) => (
-                          <AvatarList.Item
-                            key={`${item.id}-avatar-${i}`}
-                            src={member.avatar}
-                            tips={member.name}
-                          />
-                        ))
-                      }
-                    </AvatarList>
-                  </div>
+        dataSource={list}
+        renderItem={item => (
+          <List.Item>
+            <Card
+              cover={<img alt={item.title} src={item.cover} />}
+            >
+              <Card.Meta
+                title={item.title}
+                description={item.subDescription}
+              />
+              <div className={styles.cardItemContent}>
+                <span>{moment(item.updatedAt).fromNow()}</span>
+                <div className={styles.avatarList}>
+                  <AvatarList size="small">
+                    {
+                      item.members.map((member, i) => (
+                        <AvatarList.Item
+                          key={`${item.id}-avatar-${i}`}
+                          src={member.avatar}
+                          tips={member.name}
+                        />
+                      ))
+                    }
+                  </AvatarList>
                 </div>
-              </Card>
-            </List.Item>
-          ))
-        }
-      </List>
+              </div>
+            </Card>
+          </List.Item>
+        )}
+      />
     ) : null;
 
     const tabList = [
@@ -127,7 +125,13 @@ export default class CoverCardList extends PureComponent {
 
     const pageHeaderContent = (
       <div style={{ textAlign: 'center' }}>
-        <SearchInput onSearch={this.handleFormSubmit} />
+        <Input.Search
+          placeholder="请输入"
+          enterButton="搜索"
+          size="large"
+          onSearch={this.handleFormSubmit}
+          style={{ width: 522 }}
+        />
       </div>
     );
 

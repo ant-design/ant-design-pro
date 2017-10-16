@@ -3,14 +3,13 @@ import { connect } from 'dva';
 import { Row, Col, Icon, Card, Tabs, Table, Radio, DatePicker, Tooltip } from 'antd';
 import numeral from 'numeral';
 
-import { ChartCard, Trend, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, NumberInfo, IconUp, IconDown } from '../../components/Charts';
+import { ChartCard, Trend, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, NumberInfo, IconUp, IconDown, TimelineChart } from '../../components/Charts';
 
-import TimelineChart from '../../components/TimelineChart';
 import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
 
-const TabPane = Tabs.TabPane;
+const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
 
 const rankingListData = [];
@@ -88,7 +87,7 @@ export default class Analysis extends Component {
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
-      } = chart;
+    } = chart;
 
     const salesPieData = salesType === 'all' ?
       salesTypeData
@@ -101,19 +100,21 @@ export default class Analysis extends Component {
       </span>
     );
 
-    const salesExtra = (<div className={styles.salesExtraWrap}>
-      <div className={styles.salesExtra}>
-        <a onClick={() => this.selectDate('today')}>今日</a>
-        <a onClick={() => this.selectDate('week')}>本周</a>
-        <a onClick={() => this.selectDate('month')}>本月</a>
-        <a onClick={() => this.selectDate('year')}>全年</a>
+    const salesExtra = (
+      <div className={styles.salesExtraWrap}>
+        <div className={styles.salesExtra}>
+          <a onClick={() => this.selectDate('today')}>今日</a>
+          <a onClick={() => this.selectDate('week')}>本周</a>
+          <a onClick={() => this.selectDate('month')}>本月</a>
+          <a onClick={() => this.selectDate('year')}>全年</a>
+        </div>
+        <RangePicker
+          value={rangePickerValue}
+          onChange={this.handleRangePickerChange}
+          style={{ width: 256 }}
+        />
       </div>
-      <RangePicker
-        value={rangePickerValue}
-        onChange={this.handleRangePickerChange}
-        style={{ width: 256 }}
-      />
-    </div>);
+    );
 
     const columns = [
       {
@@ -173,7 +174,9 @@ export default class Analysis extends Component {
     const topColResponsiveProps = {
       xs: 24,
       sm: 12,
-      md: 6,
+      md: 12,
+      lg: 12,
+      xl: 6,
       style: { marginBottom: 24 },
     };
 
@@ -189,7 +192,7 @@ export default class Analysis extends Component {
               footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
               contentHeight={46}
             >
-              <Trend colorType="gray">
+              <Trend colorType="gray" mini={['xlg', 'md']}>
                 <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
                 <Trend.Item title="日环比" flag="down">11%</Trend.Item>
               </Trend>
@@ -205,8 +208,7 @@ export default class Analysis extends Component {
               contentHeight={46}
             >
               <MiniArea
-                line
-                color="#AF7CE9"
+                color="#9f5ae0"
                 height={46}
                 data={visitData}
               />
@@ -233,10 +235,12 @@ export default class Analysis extends Component {
               title="线上购物转化率"
               action={<Tooltip title="购买效率"><Icon type="exclamation-circle-o" /></Tooltip>}
               total="78%"
-              footer={<Trend>
-                <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
-                <Trend.Item title="日环比" flag="down">11%</Trend.Item>
-              </Trend>}
+              footer={
+                <Trend mini={['xlg', 'md']}>
+                  <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
+                  <Trend.Item title="日环比" flag="down">11%</Trend.Item>
+                </Trend>
+              }
               contentHeight={46}
             >
               <MiniProgress percent={78} strokeWidth={8} target={80} color="#5DD1DD" />
@@ -330,7 +334,8 @@ export default class Analysis extends Component {
                   />
                   <MiniArea
                     line
-                    color="#cceafe"
+                    borderColor="#00a2fc"
+                    color="#c9eafe"
                     height={45}
                     data={visitData}
                   />
@@ -344,7 +349,8 @@ export default class Analysis extends Component {
                   />
                   <MiniArea
                     line
-                    color="#5dd1dd"
+                    borderColor="#00a2fc"
+                    color="#c9eafe"
                     height={45}
                     data={visitData}
                   />
@@ -366,17 +372,24 @@ export default class Analysis extends Component {
           </Col>
           <Col lg={12} sm={24} xs={24}>
             <Card
+              className={styles.salesCard}
               bordered={false}
               title="销售额类别占比"
-              extra={iconGroup}
+              extra={(
+                <div className={styles.salesCardExtra}>
+                  {iconGroup}
+                  <div className={styles.salesTypeRadio}>
+                    <Radio.Group value={salesType} onChange={this.handleChangeSalesType}>
+                      <Radio.Button value="all">全部渠道</Radio.Button>
+                      <Radio.Button value="online">线上</Radio.Button>
+                      <Radio.Button value="offline">门店</Radio.Button>
+                    </Radio.Group>
+                  </div>
+                </div>
+              )}
               style={{ marginTop: 24 }}
             >
-              <Radio.Group value={salesType} onChange={this.handleChangeSalesType}>
-                <Radio.Button value="all">全部渠道</Radio.Button>
-                <Radio.Button value="online">线上</Radio.Button>
-                <Radio.Button value="offline">门店</Radio.Button>
-              </Radio.Group>
-              <div style={{ marginTop: 32, marginBottom: 67 }}>
+              <div style={{ marginTop: 32, marginBottom: 54 }}>
                 <Pie
                   hasLegend
                   title="销售额"
@@ -392,6 +405,7 @@ export default class Analysis extends Component {
         </Row>
 
         <Card
+          className={styles.offlineCard}
           bordered={false}
           bodyStyle={{ padding: '0 0 24px 0' }}
           style={{ marginTop: 24 }}
@@ -420,4 +434,4 @@ export default class Analysis extends Component {
       </div>
     );
   }
-  }
+}

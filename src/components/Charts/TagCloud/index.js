@@ -19,8 +19,7 @@ class TagCloud extends PureComponent {
   }
 
   initTagCloud = () => {
-    const Util = G2.Util;
-    const Shape = G2.Shape;
+    const { Util, Shape } = G2;
 
     function getTextAttrs(cfg) {
       const textAttrs = Util.mix(true, {}, {
@@ -131,4 +130,3 @@ class TagCloud extends PureComponent {
 }
 
 export default TagCloud;
-

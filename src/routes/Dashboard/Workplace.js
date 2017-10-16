@@ -103,20 +103,20 @@ export default class Workplace extends PureComponent {
       chart: { radarData },
     } = this.props;
 
-    const pageHeaderTitle = (
-      <div className={styles.pageHeaderTitle}>
-        <div className={styles.titleAvatar}>
+    const pageHeaderContent = (
+      <div className={styles.pageHeaderContent}>
+        <div className={styles.avatar}>
           <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/XertDCubOxUvZbCdgWTW.png" />
         </div>
-        <div className={styles.titleContent}>
-          <p>早安, 曲丽丽, 祝你开心每一天</p>
+        <div className={styles.content}>
+          <p className={styles.contentTitle}>早安, 曲丽丽, 祝你开心每一天</p>
           <p>交互专家 | 蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</p>
         </div>
       </div>
     );
 
-    const pageHeaderAction = (
-      <div className={styles.pageHeaderAction}>
+    const pageHeaderExtra = (
+      <div className={styles.pageHeaderExtra}>
         <div>
           <p><Icon type="appstore-o" /> 项目数</p>
           <p>56</p>
@@ -136,11 +136,11 @@ export default class Workplace extends PureComponent {
 
     return (
       <PageHeaderLayout
-        action={pageHeaderAction}
-        title={pageHeaderTitle}
+        content={pageHeaderContent}
+        extraContent={pageHeaderExtra}
       >
         <Row gutter={24}>
-          <Col lg={16} md={24} sm={24} xs={24}>
+          <Col xl={16} lg={24} md={24} sm={24} xs={24}>
             <Card
               className={styles.projectList}
               style={{ marginBottom: 24 }}
@@ -151,12 +151,16 @@ export default class Workplace extends PureComponent {
               bodyStyle={{ padding: 0 }}
             >
               {
-                !projectLoading && notice.length > 0 && notice.map(item => (
+                notice.map(item => (
                   <Card.Grid className={styles.projectGrid} key={item.id}>
                     <Card bodyStyle={{ padding: 0 }} bordered={false}>
                       <Card.Meta
-                        avatar={<Avatar src={item.logo} />}
-                        title={<Link to={item.href}>{item.title}</Link>}
+                        title={(
+                          <span className={styles.cardTitle}>
+                            <Avatar size="small" src={item.logo} />
+                            <Link to={item.href}>{item.title}</Link>
+                          </span>
+                        )}
                         description={item.description}
                       />
                       <div className={styles.projectItemContent}>
@@ -171,9 +175,9 @@ export default class Workplace extends PureComponent {
               }
             </Card>
             <Card
-              style={{ marginBottom: 24 }}
               bodyStyle={{ padding: 0 }}
               bordered={false}
+              className={styles.activeCard}
               title="动态"
               loading={activitiesLoading}
             >
@@ -198,7 +202,7 @@ export default class Workplace extends PureComponent {
               </List>
             </Card>
           </Col>
-          <Col lg={8} md={24} sm={24} xs={24}>
+          <Col xl={8} lg={24} md={24} sm={24} xs={24}>
             <Card
               style={{ marginBottom: 24 }}
               title="快速开始 / 便捷导航"
@@ -214,6 +218,7 @@ export default class Workplace extends PureComponent {
               style={{ marginBottom: 24 }}
               bordered={false}
               title="xx 指数"
+              loading={radarData.length === 0}
             >
               <div className={styles.chart}>
                 {

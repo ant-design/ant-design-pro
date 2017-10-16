@@ -3,11 +3,12 @@ order: 2
 title: 带浮层卡片
 ---
 
-点击展开通知卡片，展现多种类型的通知。
+点击展开通知卡片，展现多种类型的通知，通常放在顶部通栏。
 
 ````jsx
 import NoticeIcon from 'ant-design-pro/lib/NoticeIcon';
 import moment from 'moment';
+import { Tag } from 'antd';
 
 const data = [{
   key: '1',
@@ -27,11 +28,29 @@ const data = [{
   title: '标题',
   description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
   datetime: moment('2017-08-07').fromNow(),
+  extra: <Tag color="red">标签</Tag>,
 }];
 
+function onItemClick(item, tabProps) {
+  console.log(item, tabProps);
+}
+
+function onClear(tabTitle) {
+  console.log(tabTitle);
+}
+
 ReactDOM.render(
-  <div style={{ width: 300, textAlign: 'right' }}>
-    <NoticeIcon count={10}>
+  <div
+    style={{
+      textAlign: 'right',
+      height: '64px',
+      lineHeight: '64px',
+      boxShadow: '0 1px 4px rgba(0,21,41,.12)',
+      padding: '0 32px',
+      width: '400px',
+    }}
+  >
+    <NoticeIcon count={5} onItemClick={onItemClick} onClear={onClear}>
       <NoticeIcon.Tab list={data} title="通知" />
       <NoticeIcon.Tab list={data} title="消息" />
       <NoticeIcon.Tab list={[]} title="待办" />

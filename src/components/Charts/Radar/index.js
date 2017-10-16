@@ -34,7 +34,7 @@ class Radar extends PureComponent {
     const newItem = item;
     newItem.checked = !newItem.checked;
 
-    const legendData = this.state.legendData;
+    const { legendData } = this.state;
     legendData[i] = newItem;
 
     if (this.chart) {
@@ -53,7 +53,9 @@ class Radar extends PureComponent {
       hasLegend = true,
       fit = true,
       tickCount = 4,
-      margin = [16, 0, 16, 0] } = this.props;
+      margin = [16, 30, 16, 30] } = this.props;
+
+    const colors = ['#1890FF', '#FACC14', '#2FC25B'];
 
     if (!data || (data && data.length < 1)) {
       return;
@@ -93,8 +95,8 @@ class Radar extends PureComponent {
       },
     });
 
-    chart.line().position('label*value').color('name');
-    chart.point().position('label*value').color('name').shape('circle');
+    chart.line().position('label*value').color('name', colors);
+    chart.point().position('label*value').color('name', colors).shape('circle');
 
     chart.render();
 
@@ -130,28 +132,30 @@ class Radar extends PureComponent {
           { title && <h4>{title}</h4>}
           <div ref={this.handleRef} />
           {
-            hasLegend && <Row className={styles.legend}>
-              {
-                legendData.map((item, i) => (
-                  <Col
-                    span={(24 / legendData.length)}
-                    key={item.name}
-                    onClick={() => this.handleLegendClick(item, i)}
-                  >
-                    <div className={styles.legendItem}>
-                      <p>
-                        <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
-                        <span>{item.name}</span>
-                      </p>
-                      <h6>{item.value}</h6>
-                      {
-                        i !== (legendData.length - 1) && <div className={styles.split} />
-                      }
-                    </div>
-                  </Col>
-                ))
-              }
-            </Row>
+            hasLegend && (
+              <Row className={styles.legend}>
+                {
+                  legendData.map((item, i) => (
+                    <Col
+                      span={(24 / legendData.length)}
+                      key={item.name}
+                      onClick={() => this.handleLegendClick(item, i)}
+                    >
+                      <div className={styles.legendItem}>
+                        <p>
+                          <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
+                          <span>{item.name}</span>
+                        </p>
+                        <h6>{item.value}</h6>
+                        {
+                          i !== (legendData.length - 1) && <div className={styles.split} />
+                        }
+                      </div>
+                    </Col>
+                  ))
+                }
+              </Row>
+            )
           }
         </div>
       </div>

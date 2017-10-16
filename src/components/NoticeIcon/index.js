@@ -63,7 +63,7 @@ export default class NoticeIcon extends PureComponent {
     );
   }
   render() {
-    const { className, count, popupAlign } = this.props;
+    const { className, count, popupAlign, onPopupVisibleChange } = this.props;
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const notificationBox = this.getNotificationBox();
     const trigger = (
@@ -76,6 +76,10 @@ export default class NoticeIcon extends PureComponent {
     if (!notificationBox) {
       return trigger;
     }
+    const popoverProps = {};
+    if ('popupVisible' in this.props) {
+      popoverProps.visible = this.props.popupVisible;
+    }
     return (
       <Popover
         placement="bottomRight"
@@ -84,7 +88,8 @@ export default class NoticeIcon extends PureComponent {
         trigger="click"
         arrowPointAtCenter
         popupAlign={popupAlign}
-        onVisibleChange={this.props.onPopupVisibleChange}
+        onVisibleChange={onPopupVisibleChange}
+        {...popoverProps}
       >
         {trigger}
       </Popover>

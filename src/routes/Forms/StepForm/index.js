@@ -7,7 +7,7 @@ import Step2 from './Step2';
 import Step3 from './Step3';
 import styles from '../style.less';
 
-const Step = Steps.Step;
+const { Step } = Steps;
 
 @Form.create()
 class StepForm extends PureComponent {
