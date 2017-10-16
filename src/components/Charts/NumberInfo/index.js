@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './index.less';
 
-export default ({ theme, title, subTitle, total, subTotal, status, ...rest }) => (
+export default ({ theme, title, subTitle, total, subTotal, status, suffix, ...rest }) => (
   <div
     className={
       classNames(styles.numberInfo, {
@@ -18,7 +18,7 @@ export default ({ theme, title, subTitle, total, subTotal, status, ...rest }) =>
     }
     <h6>{subTitle}</h6>
     <div>
-      <span>{total}</span>
+      <span>{total}{suffix && <em className={styles.suffix}>{suffix}</em>}</span>
       {
         (status || subTotal) && (
           <span className={styles.subTotal}>

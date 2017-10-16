@@ -155,8 +155,12 @@ export default class Workplace extends PureComponent {
                   <Card.Grid className={styles.projectGrid} key={item.id}>
                     <Card bodyStyle={{ padding: 0 }} bordered={false}>
                       <Card.Meta
-                        avatar={<Avatar src={item.logo} />}
-                        title={<Link to={item.href}>{item.title}</Link>}
+                        title={(
+                          <span className={styles.cardTitle}>
+                            <Avatar size="small" src={item.logo} />
+                            <Link to={item.href}>{item.title}</Link>
+                          </span>
+                        )}
                         description={item.description}
                       />
                       <div className={styles.projectItemContent}>

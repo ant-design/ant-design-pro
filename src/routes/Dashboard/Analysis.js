@@ -208,8 +208,7 @@ export default class Analysis extends Component {
               contentHeight={46}
             >
               <MiniArea
-                line
-                color="#AF7CE9"
+                color="#9f5ae0"
                 height={46}
                 data={visitData}
               />
@@ -335,7 +334,8 @@ export default class Analysis extends Component {
                   />
                   <MiniArea
                     line
-                    color="#cceafe"
+                    borderColor="#00a2fc"
+                    color="#c9eafe"
                     height={45}
                     data={visitData}
                   />
@@ -349,7 +349,8 @@ export default class Analysis extends Component {
                   />
                   <MiniArea
                     line
-                    color="#5dd1dd"
+                    borderColor="#00a2fc"
+                    color="#c9eafe"
                     height={45}
                     data={visitData}
                   />
@@ -371,17 +372,24 @@ export default class Analysis extends Component {
           </Col>
           <Col lg={12} sm={24} xs={24}>
             <Card
+              className={styles.salesCard}
               bordered={false}
               title="销售额类别占比"
-              extra={iconGroup}
+              extra={(
+                <div className={styles.salesCardExtra}>
+                  {iconGroup}
+                  <div className={styles.salesTypeRadio}>
+                    <Radio.Group value={salesType} onChange={this.handleChangeSalesType}>
+                      <Radio.Button value="all">全部渠道</Radio.Button>
+                      <Radio.Button value="online">线上</Radio.Button>
+                      <Radio.Button value="offline">门店</Radio.Button>
+                    </Radio.Group>
+                  </div>
+                </div>
+              )}
               style={{ marginTop: 24 }}
             >
-              <Radio.Group value={salesType} onChange={this.handleChangeSalesType}>
-                <Radio.Button value="all">全部渠道</Radio.Button>
-                <Radio.Button value="online">线上</Radio.Button>
-                <Radio.Button value="offline">门店</Radio.Button>
-              </Radio.Group>
-              <div style={{ marginTop: 32, marginBottom: 67 }}>
+              <div style={{ marginTop: 32, marginBottom: 54 }}>
                 <Pie
                   hasLegend
                   title="销售额"
@@ -397,6 +405,7 @@ export default class Analysis extends Component {
         </Row>
 
         <Card
+          className={styles.offlineCard}
           bordered={false}
           bodyStyle={{ padding: '0 0 24px 0' }}
           style={{ marginTop: 24 }}
