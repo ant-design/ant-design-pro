@@ -25,7 +25,7 @@ class MiniArea extends PureComponent {
   }
 
   renderChart(data) {
-    const { height = 0, fit = true, color = '#33abfb', line, xAxis, yAxis, animate = true } = this.props;
+    const { height = 0, fit = true, color = '#33abfb', borderWidth = 1, line, xAxis, yAxis, animate = true } = this.props;
     const borderColor = this.props.borderColor || color;
 
     if (!data || (data && data.length < 1)) {
@@ -98,7 +98,8 @@ class MiniArea extends PureComponent {
     if (line) {
       const view2 = chart.createView();
       view2.source(data, dataConfig);
-      view2.line().position('x*y').color(borderColor).shape('smooth');
+      view2.line().position('x*y').color(borderColor).size(borderWidth)
+        .shape('smooth');
       view2.tooltip(false);
     }
     chart.render();
