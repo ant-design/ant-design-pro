@@ -171,9 +171,9 @@ export default class Workplace extends PureComponent {
               }
             </Card>
             <Card
-              style={{ marginBottom: 24 }}
               bodyStyle={{ padding: 0 }}
               bordered={false}
+              className={styles.activeCard}
               title="动态"
               loading={activitiesLoading}
             >
