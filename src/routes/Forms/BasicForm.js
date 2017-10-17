@@ -1,11 +1,15 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Form, Input, DatePicker, Select, Button, Card } from 'antd';
+import {
+  Form, Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip,
+} from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import styles from './style.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
+const { TextArea } = Input;
 
 @connect(state => ({
   submitting: state.form.regularFormSubmitting,
@@ -25,12 +29,12 @@ export default class BasicForms extends PureComponent {
   }
   render() {
     const { submitting } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
 
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 3 },
+        sm: { span: 7 },
       },
       wrapperCol: {
         xs: { span: 24 },
@@ -42,100 +46,139 @@ export default class BasicForms extends PureComponent {
     const submitFormLayout = {
       wrapperCol: {
         xs: { span: 24, offset: 0 },
-        sm: { span: 10, offset: 3 },
+        sm: { span: 10, offset: 7 },
       },
     };
 
     return (
       <PageHeaderLayout title="基础表单" content="表单页是向后台提交数据的标准场景。">
         <Card bordered={false}>
-          <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 24 }}>
+          <Form
+            onSubmit={this.handleSubmit}
+            hideRequiredMark
+            style={{ marginTop: 8 }}
+          >
             <FormItem
               {...formItemLayout}
-              label="应用类型"
-              hasFeedback
+              label="标题"
             >
-              {getFieldDecorator('appType', {
+              {getFieldDecorator('title', {
                 rules: [{
-                  required: true, message: '应用类型',
+                  required: true, message: '请输入标题',
                 }],
               })(
-                <Select placeholder="请选择应用类型">
-                  <Option value="type1">类型一</Option>
-                  <Option value="type2">类型二</Option>
-                  <Option value="type3">类型三</Option>
-                </Select>
+                <Input placeholder="给目标起个名字" />
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="产品名"
-              hasFeedback
+              label="起止日期"
             >
-              {getFieldDecorator('productName', {
+              {getFieldDecorator('date', {
                 rules: [{
-                  required: true, message: '请输入产品名',
+                  required: true, message: '请选择起止日期',
                 }],
               })(
-                <Input placeholder="产品名" />
+                <RangePicker style={{ width: '100%' }} placeholder={['开始日期', '结束日期']} />
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="应用名"
-              hasFeedback
+              label="目标描述"
             >
-              {getFieldDecorator('appName', {
-                rules: [
-                  { required: true, message: '请输入应用名' },
-                  { pattern: /^[a-zA-Z0-9-]+$/, message: '只能输入英文、数字、中划线' },
-                ],
+              {getFieldDecorator('goal', {
+                rules: [{
+                  required: true, message: '请输入目标描述',
+                }],
               })(
-                <Input placeholder="只能输入英文、数字、中划线" />
+                <TextArea placeholder="请输入你的阶段性工作目标" rows={4} />
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="中文名"
-              hasFeedback
+              label="衡量标准"
             >
-              {getFieldDecorator('appChineseName', {
-                rules: [
-                  { required: true, message: '请输入应用中文名' },
-                  { pattern: /^[\u4e00-\u9fa5]+$/, message: '请输入中文' },
-                ],
+              {getFieldDecorator('standard', {
+                rules: [{
+                  required: true, message: '请输入衡量标准',
+                }],
               })(
-                <Input placeholder="应用中文名" />
+                <TextArea placeholder="请输入衡量标准" rows={4} />
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="生效日期"
+              label={
+                <span>
+                  客户
+                  <em className={styles.optional}>
+                    （选填）
+                    <Tooltip title="目标的服务对象">
+                      <Icon type="info-circle-o" style={{ marginRight: 4 }} />
+                    </Tooltip>
+                  </em>
+                </span>
+              }
             >
-              {getFieldDecorator('dateRange', {
-                rules: [{ type: 'array', required: true, message: '请选择生效日期' }],
-              })(
-                <RangePicker
-                  format="YYYY-MM-DD"
-                  placeholder={['开始日期', '结束日期']}
-                  style={{ width: '100%' }}
-                />
+              {getFieldDecorator('client')(
+                <Input placeholder="请描述你服务的客户，内部客户直接 @姓名／工号" />
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="域名"
+              label={<span>邀评人<em className={styles.optional}>（选填）</em></span>}
             >
-              {getFieldDecorator('domain', {
-                rules: [{ required: true, message: '请输入域名' }],
-              })(
-                <Input addonBefore="http://" addonAfter=".com" placeholder="facebook" style={{ width: '100%' }} />
+              {getFieldDecorator('invites')(
+                <Input placeholder="请直接 @姓名／工号，最多可邀请 5 人" />
               )}
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label={<span>权重<em className={styles.optional}>（选填）</em></span>}
+            >
+              {getFieldDecorator('weight')(
+                <InputNumber placeholder="请输入" min={0} max={100} />
+              )}
+              <span>%</span>
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="目标公开"
+              help="客户、邀评人默认被分享"
+            >
+              <div>
+                {getFieldDecorator('public', {
+                  initialValue: '1',
+                })(
+                  <Radio.Group>
+                    <Radio value="1">公开</Radio>
+                    <Radio value="2">部分公开</Radio>
+                    <Radio value="3">不公开</Radio>
+                  </Radio.Group>
+                )}
+                {getFieldDecorator('publicUsers', {
+                })(
+                  <Select
+                    mode="multiple"
+                    placeholder="公开给"
+                    style={{
+                      margin: '12px 0',
+                      display: getFieldValue('public') === '2' ? 'block' : 'none',
+                    }}
+                  >
+                    <Option value="1">同事甲</Option>
+                    <Option value="2">同事乙</Option>
+                    <Option value="3">同事丙</Option>
+                  </Select>
+                )}
+              </div>
             </FormItem>
             <FormItem {...submitFormLayout} style={{ marginTop: 40 }}>
               <Button type="primary" htmlType="submit" loading={submitting}>
-                新建应用
+                提交
               </Button>
+              <Button style={{ marginLeft: 8 }}>保存</Button>
+              <Button style={{ marginLeft: 8 }}>删除</Button>
             </FormItem>
           </Form>
         </Card>
