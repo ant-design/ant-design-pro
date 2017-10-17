@@ -10,7 +10,7 @@
     margin-top: 16px;
     height: 22px;
     line-height: 22px;
-    img {
+    & > img {
       margin-right: 16px;
     }
     & > span {
@@ -18,6 +18,9 @@
       margin-right: 16px;
       width: 20px;
       height: 20px;
+      & > img {
+        vertical-align: top;
+      }
     }
     & > em {
       color: @disabled-color;

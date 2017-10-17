@@ -2,43 +2,30 @@
 @import "../../utils/utils.less";
 
 .filterCardList {
+  margin-bottom: -24px;
   :global {
-    .ant-card-meta-title {
-      position: relative;
-      top: 8px;
-    }
     .ant-card-meta-content {
       margin-top: 0;
     }
   }
   .cardInfo {
     .clearfix();
-    border: 1px solid @border-color-base;
-    border-radius: @border-radius-base;
-    padding: 8px 0;
-    margin-top: 16px;
-    width: 100%;
+    margin-top: 12px;
+    margin-left: 40px;
     & > div {
       position: relative;
-      text-align: center;
+      text-align: left;
       float: left;
       width: 50%;
-      & > span {
-        background-color: @border-color-split;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 1px;
-        height: 44px;
-      }
       p {
-        color: @text-color-secondary;
+        color: @text-color;
         line-height: 32px;
         font-size: 24px;
       }
       p:first-child {
         font-size: 12px;
         line-height: 20px;
+        margin-bottom: 4px;
       }
     }
   }

@@ -44,7 +44,7 @@ export default class CardList extends PureComponent {
 
     const extraContent = (
       <div className={styles.extraImg}>
-        <img alt="这是一个标题" src="https://gw.alipayobjects.com/zos/rmsportal/QfpzdhbrqRtdSyZHKhjp.png" />
+        <img alt="这是一个标题" src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png" />
       </div>
     );
 
@@ -58,12 +58,12 @@ export default class CardList extends PureComponent {
           <List
             rowKey="id"
             loading={loading}
-            grid={{ gutter: 16, lg: 3, md: 2, sm: 1, xs: 1 }}
+            grid={{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1 }}
             dataSource={['', ...list]}
             renderItem={item => (item ? (
               <List.Item key={item.id}>
                 <Link to="/list/card-list">
-                  <Card actions={[<a>操作一</a>, <a>操作二</a>]}>
+                  <Card hoverable actions={[<a>操作一</a>, <a>操作二</a>]}>
                     <Card.Meta
                       avatar={<Avatar size="large" src={item.avatar} />}
                       title={item.title}

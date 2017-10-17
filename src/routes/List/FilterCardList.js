@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import numeral from 'numeral';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Input } from 'antd';
+import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Input, Dropdown, Menu } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import StandardFormRow from '../../components/StandardFormRow';
@@ -102,7 +102,6 @@ export default class FilterCardList extends PureComponent {
         <div>
           <p>活跃用户</p>
           <p>{activeUser}</p>
-          <span />
         </div>
         <div>
           <p>新增用户</p>
@@ -129,6 +128,20 @@ export default class FilterCardList extends PureComponent {
         sm: { span: 16 },
       },
     };
+
+    const itemMenu = (
+      <Menu>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">1st menu item</a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">2nd menu item</a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">3d menu item</a>
+        </Menu.Item>
+      </Menu>
+    );
 
     return (
       <PageHeaderLayout
@@ -201,22 +214,22 @@ export default class FilterCardList extends PureComponent {
           </Card>
           <List
             rowKey="id"
-            style={{ marginTop: 16 }}
-            grid={{ gutter: 16, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
+            style={{ marginTop: 24 }}
+            grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
             loading={loading}
             dataSource={list}
             renderItem={item => (
               <List.Item key={item.id}>
                 <Card
                   actions={[
-                    <Tooltip title="复制"><Icon type="copy" /></Tooltip>,
-                    <Tooltip title="用户"><Icon type="solution" /></Tooltip>,
-                    <Tooltip title="设置"><Icon type="setting" /></Tooltip>,
-                    <Tooltip title="删除"><Icon type="delete" /></Tooltip>,
+                    <Tooltip title="下载"><Icon type="download" /></Tooltip>,
+                    <Tooltip title="编辑"><Icon type="edit" /></Tooltip>,
+                    <Tooltip title="分享"><Icon type="share-alt" /></Tooltip>,
+                    <Dropdown overlay={itemMenu}><Icon type="ellipsis" /></Dropdown>,
                   ]}
                 >
                   <Card.Meta
-                    avatar={<Avatar size="large" src={item.avatar} />}
+                    avatar={<Avatar size="small" src={item.avatar} />}
                     title={item.title}
                   />
                   <div className={styles.cardItemContent}>

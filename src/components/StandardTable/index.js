@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Table, Alert, Badge } from 'antd';
 import styles from './index.less';
 
+const statusMap = ['default', 'processing', 'success', 'error'];
 class StandardTable extends PureComponent {
   state = {
     selectedRowKeys: [],
@@ -43,7 +44,7 @@ class StandardTable extends PureComponent {
     const { selectedRowKeys, totalCallNo } = this.state;
     const { data: { list, pagination }, loading } = this.props;
 
-    const status = ['关闭', '运行中'];
+    const status = ['关闭', '运行中', '已上线', '异常'];
 
     const columns = [
       {
@@ -76,13 +77,17 @@ class StandardTable extends PureComponent {
             text: status[1],
             value: 1,
           },
+          {
+            text: status[2],
+            value: 2,
+          },
+          {
+            text: status[3],
+            value: 3,
+          },
         ],
         render(val) {
-          if (val === 0) {
-            return <Badge status="default" text={status[val]} />;
-          } else {
-            return <Badge status="processing" text={status[val]} />;
-          }
+          return <Badge status={statusMap[val]} text={status[val]} />;
         },
       },
       {
@@ -112,6 +117,9 @@ class StandardTable extends PureComponent {
     const rowSelection = {
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
+      getCheckboxProps: record => ({
+        disabled: record.disabled,
+      }),
     };
 
     return (

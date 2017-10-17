@@ -167,7 +167,7 @@ export default class SearchList extends Component {
     };
 
     const loadMore = showLoadMore ? (
-      <div style={{ textAlign: 'center', marginTop: 8 }}>
+      <div style={{ textAlign: 'center', marginTop: 16 }}>
         <Button onClick={this.handleLoadMore}>
           {loadingMore && (<span><Icon type="loading" /> 加载中...</span>)}
           {!loadingMore && (<span>加载更多</span>)}
@@ -202,7 +202,7 @@ export default class SearchList extends Component {
                 </FormItem>
               </StandardFormRow>
               <StandardFormRow
-                title="Owner"
+                title="owner"
                 grid
               >
                 <Row>
@@ -276,9 +276,13 @@ export default class SearchList extends Component {
               </StandardFormRow>
             </Form>
           </Card>
-          <Card style={{ marginTop: 16 }} bordered={false}>
+          <Card
+            style={{ marginTop: 24 }}
+            bordered={false}
+            bodyStyle={{ padding: '12px 24px 32px 24px' }}
+          >
             <List
-              loading={loading}
+              loading={!loadingMore && loading}
               rowKey="id"
               itemLayout="vertical"
               loadMore={loadMore}

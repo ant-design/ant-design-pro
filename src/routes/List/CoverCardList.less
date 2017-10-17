@@ -2,6 +2,7 @@
 @import "../../utils/utils.less";
 
 .coverCardList {
+  margin-bottom: -24px;
   :global {
     .ant-card-meta-description {
       font-size: 12px;
@@ -9,13 +10,13 @@
   }
   .cardItemContent {
     display: flex;
-    margin-top: 8px;
+    margin-top: 12px;
     line-height: 20px;
     height: 20px;
-    span {
+    & > span {
+      color: @disabled-color;
       flex: 1;
       font-size: 12px;
-      color: @disabled-color;
     }
     .avatarList {
       flex: 0 1 auto;

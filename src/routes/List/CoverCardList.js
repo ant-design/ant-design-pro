@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
+import { Link, routerRedux } from 'dva/router';
 import { Row, Col, Form, Card, Select, List, Input } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -74,34 +74,37 @@ export default class CoverCardList extends PureComponent {
       <List
         rowKey="id"
         loading={loading}
-        grid={{ gutter: 16, lg: 4, md: 3, sm: 2, xs: 1 }}
+        grid={{ gutter: 24, lg: 4, md: 3, sm: 2, xs: 1 }}
         dataSource={list}
         renderItem={item => (
           <List.Item>
-            <Card
-              cover={<img alt={item.title} src={item.cover} />}
-            >
-              <Card.Meta
-                title={item.title}
-                description={item.subDescription}
-              />
-              <div className={styles.cardItemContent}>
-                <span>{moment(item.updatedAt).fromNow()}</span>
-                <div className={styles.avatarList}>
-                  <AvatarList size="small">
-                    {
-                      item.members.map((member, i) => (
-                        <AvatarList.Item
-                          key={`${item.id}-avatar-${i}`}
-                          src={member.avatar}
-                          tips={member.name}
-                        />
-                      ))
-                    }
-                  </AvatarList>
+            <Link>
+              <Card
+                hoverable
+                cover={<img alt={item.title} src={item.cover} />}
+              >
+                <Card.Meta
+                  title={item.title}
+                  description={item.subDescription}
+                />
+                <div className={styles.cardItemContent}>
+                  <span>{moment(item.updatedAt).fromNow()}</span>
+                  <div className={styles.avatarList}>
+                    <AvatarList size="small">
+                      {
+                        item.members.map((member, i) => (
+                          <AvatarList.Item
+                            key={`${item.id}-avatar-${i}`}
+                            src={member.avatar}
+                            tips={member.name}
+                          />
+                        ))
+                      }
+                    </AvatarList>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </Link>
           </List.Item>
         )}
       />
@@ -179,7 +182,7 @@ export default class CoverCardList extends PureComponent {
                 grid
                 last
               >
-                <Row gutter={16}>
+                <Row gutter={24}>
                   <Col lg={8} md={10} sm={10} xs={24}>
                     <FormItem
                       {...formItemLayout}

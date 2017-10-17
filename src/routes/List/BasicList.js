@@ -112,10 +112,11 @@ export default class BasicList extends PureComponent {
           <Card
             bordered={false}
             title="基础列表"
-            style={{ marginTop: 16 }}
+            style={{ marginTop: 24 }}
+            bodyStyle={{ padding: '16px 32px 40px 32px' }}
             extra={extraContent}
           >
-            <Button type="dashed" style={{ width: '100%' }}>
+            <Button type="dashed" style={{ width: '100%', marginBottom: 12 }}>
               <Icon type="plus" /> 添加
             </Button>
             <List

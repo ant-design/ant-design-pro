@@ -2,13 +2,13 @@ import { imgMap, getUrlParams } from './utils';
 
 export function fakeList(count) {
   const titles = [
-    '凤蝶',
+    'Vue',
     'AntDesignPro',
     'DesignLab',
-    'Basement',
+    'Angular',
     'AntDesign',
-    '云雀',
-    '体验云',
+    'React',
+    'Alipay',
     'AntDesignMobile',
   ];
   const avatars = [
@@ -18,10 +18,10 @@ export function fakeList(count) {
     'https://gw.alipayobjects.com/zos/rmsportal/VcmdbCBcwPTGYgbYeMzX.png', // DesignLab
   ];
   const covers = [
-    'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
-    'https://gw.alipayobjects.com/zos/rmsportal/xMPpMvGSIXusgtgUPAdw.png',
-    'https://gw.alipayobjects.com/zos/rmsportal/hQReiajgtqzIVFjLXjHp.png',
-    'https://gw.alipayobjects.com/zos/rmsportal/nczfTaXEzhSpvgZZjBev.png',
+    'https://gw.alipayobjects.com/zos/rmsportal/nQIAJyTLNeVJfUpTskWk.png',
+    'https://gw.alipayobjects.com/zos/rmsportal/pnhtvpOTzypPvmHVrfKN.png',
+    'https://gw.alipayobjects.com/zos/rmsportal/SVrKVZEFDnhDTNpkplZj.png',
+    'https://gw.alipayobjects.com/zos/rmsportal/bUIOUkPTHgfGdDhgsAgE.png',
   ];
 
   const list = [];
@@ -48,20 +48,16 @@ export function fakeList(count) {
       content: '段落示意：蚂蚁金服设计平台 design.alipay.com，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 design.alipay.com，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
       members: [
         {
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WPOxPBHGyqsgKPsFtVlJ.png',
+          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
+          name: '曲丽丽',
+        },
+        {
+          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
           name: '王昭君',
         },
         {
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WPOxPBHGyqsgKPsFtVlJ.png',
-          name: '王昭君',
-        },
-        {
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WPOxPBHGyqsgKPsFtVlJ.png',
-          name: '王昭君',
-        },
-        {
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WPOxPBHGyqsgKPsFtVlJ.png',
-          name: '王昭君',
+          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
+          name: '董娜娜',
         },
       ],
     });
@@ -136,7 +132,7 @@ export const getNotice = [
     logo: imgMap.c,
     description: '这是一条描述信息这是一条描述信息',
     updatedAt: new Date('2017-07-23 06:23:00'),
-    member: '成都超级小分队',
+    member: '成都小分队',
   },
 ];
 
