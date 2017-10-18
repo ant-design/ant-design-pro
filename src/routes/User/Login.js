@@ -63,7 +63,7 @@ export default class Login extends Component {
   renderMessage = (message) => {
     return (
       <Alert
-        style={{ marginBottom: 16 }}
+        style={{ marginBottom: 24 }}
         message={message}
         type="error"
         showIcon
@@ -93,6 +93,7 @@ export default class Login extends Component {
                   }],
                 })(
                   <Input
+                    size="large"
                     prefix={<Icon type="user" style={{ fontSize: 14, color: 'rgba(0, 0, 0, 0.25)' }} />}
                     placeholder="admin"
                   />
@@ -105,6 +106,7 @@ export default class Login extends Component {
                   }],
                 })(
                   <Input
+                    size="large"
                     prefix={<Icon type="lock" style={{ fontSize: 14, color: 'rgba(0, 0, 0, 0.25)' }} />}
                     type="password"
                     placeholder="888888"
@@ -128,6 +130,7 @@ export default class Login extends Component {
                   }],
                 })(
                   <Input
+                    size="large"
                     prefix={<Icon type="mobile" style={{ fontSize: 14, color: 'rgba(0, 0, 0, 0.25)' }} />}
                     placeholder="手机号"
                   />
@@ -167,10 +170,10 @@ export default class Login extends Component {
               valuePropName: 'checked',
               initialValue: true,
             })(
-              <Checkbox>自动登录</Checkbox>
+              <Checkbox className={styles.autoLogin}>自动登录</Checkbox>
             )}
             <a className={styles.forgot} href="">忘记密码</a>
-            <Button loading={login.submitting} className={styles.submit} type="primary" htmlType="submit">
+            <Button size="large" loading={login.submitting} className={styles.submit} type="primary" htmlType="submit">
               登录
             </Button>
           </FormItem>

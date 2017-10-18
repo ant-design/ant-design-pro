@@ -24,24 +24,28 @@
     color: @heading-color;
     font-weight: 500;
     line-height: 32px;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
   .description {
     font-size: 14px;
     color: @text-color-secondary;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
   .extra {
     background: rgba(245, 245, 245, 0.5);
     padding: 16px 40px;
-    margin-bottom: 24px;
+    margin-top: 24px;
     border-radius: @border-radius-sm;
     text-align: left;
   }
 
-  .actions button:not(:last-child) {
-    margin-right: 8px;
+  .actions {
+    margin-top: 32px;
+
+    button:not(:last-child) {
+      margin-right: 8px;
+    }
   }
 }

@@ -6,39 +6,30 @@
 
   :global {
     .ant-form-item {
-      margin-bottom: 16px;
+      margin-bottom: 24px;
     }
   }
 
   h3 {
     font-size: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .mobileGroup {
     :global {
       .ant-form-item {
         margin-bottom: 0;
-        display: table-cell;
         vertical-align: top;
 
-        &:first-child {
-          width: 20%;
-
-          .ant-select-selection {
-            border-right-width: 0;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-          }
+        &:first-child .ant-select-selection {
+          border-right-width: 0;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
         }
 
-        &:last-child {
-          width: 80%;
-
-          .ant-input {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-          }
+        &:last-child .ant-input {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
         }
       }
     }
@@ -55,6 +46,7 @@
 
   .login {
     float: right;
+    line-height: @btn-height-lg;
   }
 }
 
