@@ -6,7 +6,7 @@ title: Simple
 简单的页头。
 
 ````jsx
-import TagSelect from 'ant-design-pro/lib/CountDown';
+import TagSelect from 'ant-design-pro/lib/TagSelect';
 
 const TagOption = TagSelect.Option;
 const TagExpand = TagSelect.Expand;

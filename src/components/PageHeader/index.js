@@ -50,7 +50,7 @@ export default class PageHeader extends PureComponent {
         <Breadcrumb className={styles.breadcrumb}>
           {
             breadcrumbList.map(item => (
-              <Breadcrumb.Item>
+              <Breadcrumb.Item key={item.title}>
                 {item.href ? <a href="">{item.title}</a> : item.title}
               </Breadcrumb.Item>)
             )
