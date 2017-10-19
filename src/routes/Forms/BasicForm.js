@@ -162,7 +162,7 @@ export default class BasicForms extends PureComponent {
                     mode="multiple"
                     placeholder="公开给"
                     style={{
-                      margin: '12px 0',
+                      margin: '8px 0',
                       display: getFieldValue('public') === '2' ? 'block' : 'none',
                     }}
                   >
@@ -173,7 +173,7 @@ export default class BasicForms extends PureComponent {
                 )}
               </div>
             </FormItem>
-            <FormItem {...submitFormLayout} style={{ marginTop: 40 }}>
+            <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
               <Button type="primary" htmlType="submit" loading={submitting}>
                 提交
               </Button>
