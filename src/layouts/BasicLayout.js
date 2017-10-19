@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Menu, Icon, Avatar, Dropdown, Tag, message } from 'antd';
+import { Layout, Menu, Icon, Avatar, Dropdown, Tag, message, Spin } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { Link, routerRedux } from 'dva/router';
@@ -164,8 +164,8 @@ class BasicLayout extends React.PureComponent {
 
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        <Menu.Item><Icon type="user" />个人中心</Menu.Item>
-        <Menu.Item><Icon type="setting" />设置</Menu.Item>
+        <Menu.Item disabled><Icon type="user" />个人中心</Menu.Item>
+        <Menu.Item disabled><Icon type="setting" />设置</Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout"><Icon type="logout" />退出登录</Menu.Item>
       </Menu>
@@ -243,12 +243,14 @@ class BasicLayout extends React.PureComponent {
                   <NoticeIcon.Tab list={noticeData['消息']} title="消息" />
                   <NoticeIcon.Tab list={noticeData['待办']} title="待办" />
                 </NoticeIcon>
-                <Dropdown overlay={menu}>
-                  <span className={`${styles.action} ${styles.account}`}>
-                    <Avatar size="small" className={styles.avatar} src={currentUser.avatar} />
-                    {currentUser.name}
-                  </span>
-                </Dropdown>
+                {currentUser.name ? (
+                  <Dropdown overlay={menu}>
+                    <span className={`${styles.action} ${styles.account}`}>
+                      <Avatar size="small" className={styles.avatar} src={currentUser.avatar} />
+                      {currentUser.name}
+                    </span>
+                  </Dropdown>
+                ) : <Spin size="small" style={{ marginLeft: 8 }} />}
               </div>
             </Header>
             <Content style={{ margin: '24px 24px 0', height: '100%' }}>
