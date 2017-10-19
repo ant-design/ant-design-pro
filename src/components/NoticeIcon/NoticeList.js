@@ -1,14 +1,18 @@
 import React from 'react';
-import { Avatar, Icon, List } from 'antd';
+import { Avatar, List } from 'antd';
 import classNames from 'classnames';
 import styles from './NoticeList.less';
 
-export default function NoticeList({ data = [], onClick, onClear, title, locale }) {
+export default function NoticeList({
+  data = [], onClick, onClear, title, locale, emptyText, emptyImage,
+}) {
   if (data.length === 0) {
     return (
       <div className={styles.notFound}>
-        <Icon type="frown-o" />
-        {locale.emptyText}
+        {emptyImage ? (
+          <img src={emptyImage} alt="not found" />
+        ) : null}
+        <div>{emptyText || locale.emptyText}</div>
       </div>
     );
   }
