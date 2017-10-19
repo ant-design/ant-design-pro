@@ -55,13 +55,13 @@ ReactDOM.render(
         list={noticeData['通知']}
         title="通知"
         emptyText="你已查看所有通知"
-        emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
+        emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
       />
       <NoticeIcon.Tab
         list={noticeData['消息']}
         title="消息"
         emptyText="您已读完所有消息"
-        emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
+        emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
       />
       <NoticeIcon.Tab
         list={noticeData['待办']}

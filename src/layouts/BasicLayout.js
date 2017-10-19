@@ -122,9 +122,10 @@ class BasicLayout extends React.PureComponent {
       }
       if (newNotice.extra && newNotice.status) {
         const color = ({
+          todo: '',
           processing: 'blue',
           urgent: 'red',
-          doing: 'yellow',
+          doing: 'gold',
         })[newNotice.status];
         newNotice.extra = <Tag color={color}>{newNotice.extra}</Tag>;
       }
@@ -243,13 +244,13 @@ class BasicLayout extends React.PureComponent {
                     list={noticeData['通知']}
                     title="通知"
                     emptyText="你已查看所有通知"
-                    emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
+                    emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
                   />
                   <NoticeIcon.Tab
                     list={noticeData['消息']}
                     title="消息"
                     emptyText="您已读完所有消息"
-                    emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
+                    emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
                   />
                   <NoticeIcon.Tab
                     list={noticeData['待办']}

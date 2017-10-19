@@ -29,7 +29,7 @@ export default function NoticeList({
                 className={styles.meta}
                 avatar={item.avatar ? <Avatar className={styles.avatar} src={item.avatar} /> : null}
                 title={
-                  <div>
+                  <div className={styles.title}>
                     {item.title}
                     <div className={styles.extra}>{item.extra}</div>
                   </div>
