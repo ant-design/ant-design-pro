@@ -21,6 +21,13 @@ export default {
         payload: data,
       });
     },
+    *clearNotices(_, { put, select }) {
+      const count = yield select(state => state.global.notices.length);
+      yield put({
+        type: 'user/changeNotifyCount',
+        payload: count,
+      });
+    },
   },
 
   reducers: {
