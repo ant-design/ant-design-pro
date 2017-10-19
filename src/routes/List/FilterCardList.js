@@ -151,7 +151,7 @@ export default class FilterCardList extends PureComponent {
         onTabChange={this.handleTabChange}
       >
         <div className={styles.filterCardList}>
-          <Card bordered={false}>
+          <Card bordered={false} bodyStyle={{ padding: 24 }}>
             <Form layout="inline">
               <StandardFormRow title="所属类目" block>
                 <FormItem>
@@ -221,6 +221,8 @@ export default class FilterCardList extends PureComponent {
             renderItem={item => (
               <List.Item key={item.id}>
                 <Card
+                  hoverable
+                  bodyStyle={{ paddingBottom: 16 }}
                   actions={[
                     <Tooltip title="下载"><Icon type="download" /></Tooltip>,
                     <Tooltip title="编辑"><Icon type="edit" /></Tooltip>,

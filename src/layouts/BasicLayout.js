@@ -193,7 +193,7 @@ class BasicLayout extends React.PureComponent {
           >
             <div className={styles.logo}>
               <Link to="/">
-                <img src="https://gw.alipayobjects.com/zos/rmsportal/osjtaBtmmQzWRvMbcKeb.svg" alt="logo" />
+                <img src="https://gw.alipayobjects.com/zos/rmsportal/iwWyPinUoseUxIAeElSx.svg" alt="logo" />
                 <h1>Ant Design Pro</h1>
               </Link>
             </div>
@@ -204,7 +204,7 @@ class BasicLayout extends React.PureComponent {
               onOpenChange={this.handleOpenChange}
               selectedKeys={this.getCurrentMenuSelectedKeys()}
               style={{ margin: '24px 0', width: '100%' }}
-              inlineIndent={32}
+              inlineIndent={24}
             >
               {this.getNavMenuItems(this.menus)}
             </Menu>
