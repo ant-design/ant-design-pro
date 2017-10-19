@@ -1,11 +1,11 @@
 import React from 'react';
-import { Popover } from 'antd';
+import { Tooltip } from 'antd';
 
 import styles from './index.less';
 
 const MiniProgress = ({ target, color, strokeWidth, percent }) => (
   <div className={styles.miniProgress}>
-    <Popover title={null} content={`目标值: ${target}%`}>
+    <Tooltip title={`目标值: ${target}%`}>
       <div
         className={styles.target}
         style={{ left: (target ? `${target}%` : null) }}
@@ -13,7 +13,7 @@ const MiniProgress = ({ target, color, strokeWidth, percent }) => (
         <span style={{ backgroundColor: (color || null) }} />
         <span style={{ backgroundColor: (color || null) }} />
       </div>
-    </Popover>
+    </Tooltip>
     <div className={styles.progressWrap}>
       <div
         className={styles.progress}

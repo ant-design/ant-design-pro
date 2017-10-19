@@ -183,7 +183,7 @@ export default class SearchList extends Component {
         onTabChange={this.handleTabChange}
       >
         <div>
-          <Card bordered={false}>
+          <Card bordered={false} bodyStyle={{ padding: 24 }}>
             <Form layout="inline">
               <StandardFormRow title="所属类目" block>
                 <FormItem>
