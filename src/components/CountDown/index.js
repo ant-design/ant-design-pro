@@ -93,12 +93,12 @@ class CountDown extends Component {
   }
 
   render() {
-    const { format = this.defaultFormat } = this.props;
+    const { format = this.defaultFormat, ...rest } = this.props;
     const { lastTime } = this.state;
 
     const result = format(lastTime);
 
-    return result;
+    return (<span {...rest}>{result}</span>);
   }
 }
 

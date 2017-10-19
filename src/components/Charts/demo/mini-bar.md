@@ -1,7 +1,10 @@
 ---
 order: 2
+col: 2
 title: 迷你柱状图
 ---
+
+迷你柱状图更适合展示简单的区间数据，简洁的表现方式可以很好的减少大数据量的视觉展现压力。
 
 ````jsx
 import { MiniBar } from 'ant-design-pro/lib/Charts';
