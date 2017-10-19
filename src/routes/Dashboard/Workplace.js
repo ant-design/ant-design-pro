@@ -187,7 +187,7 @@ export default class Workplace extends PureComponent {
                     activitiesList.map(item => (
                       <List.Item key={item.id}>
                         <List.Item.Meta
-                          avatar={<Avatar style={{ marginTop: -12 }} src={item.user.avatar} />}
+                          avatar={<Avatar src={item.user.avatar} />}
                           title={
                             <p>
                               <a>{item.user.name}</a> 在 <a>xx</a> 新建了项目 <a>xxxx</a>
