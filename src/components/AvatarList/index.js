@@ -22,6 +22,7 @@ const Item = ({ src, size, tips, onClick = (() => {}) }) => {
   const cls = classNames(styles.avatarItem, {
     [styles.avatarItemLarge]: size === 'large',
     [styles.avatarItemSmall]: size === 'small',
+    [styles.avatarItemMini]: size === 'mini',
   });
 
   return (

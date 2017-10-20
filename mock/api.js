@@ -18,10 +18,10 @@ export function fakeList(count) {
     'https://gw.alipayobjects.com/zos/rmsportal/VcmdbCBcwPTGYgbYeMzX.png', // DesignLab
   ];
   const covers = [
-    'https://gw.alipayobjects.com/zos/rmsportal/nQIAJyTLNeVJfUpTskWk.png',
-    'https://gw.alipayobjects.com/zos/rmsportal/pnhtvpOTzypPvmHVrfKN.png',
-    'https://gw.alipayobjects.com/zos/rmsportal/SVrKVZEFDnhDTNpkplZj.png',
-    'https://gw.alipayobjects.com/zos/rmsportal/bUIOUkPTHgfGdDhgsAgE.png',
+    'https://gw.alipayobjects.com/zos/rmsportal/HrxcVbrKnCJOZvtzSqjN.png',
+    'https://gw.alipayobjects.com/zos/rmsportal/alaPpKWajEbIYEUvvVNf.png',
+    'https://gw.alipayobjects.com/zos/rmsportal/RLwlKSYGSXGHuWSojyvp.png',
+    'https://gw.alipayobjects.com/zos/rmsportal/gLaIAoVWTtLbBWZNYEMg.png',
   ];
 
   const list = [];
@@ -31,7 +31,7 @@ export function fakeList(count) {
       owner: '曲丽丽',
       title: titles[i % 8],
       avatar: avatars[i % 4],
-      cover: covers[i % 4],
+      cover: Math.floor(i / 4) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: ['https://gw.alipayobjects.com/zos/rmsportal/KoJjkdbuTFxzJmmjuDVR.png', 'https://gw.alipayobjects.com/zos/rmsportal/UxGORCvEXJEsxOfEKZiA.png'][i % 2],

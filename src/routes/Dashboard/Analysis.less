@@ -12,6 +12,7 @@
     }
   }
 }
+
 .rankingList {
   margin-top: 25px;
   li {
@@ -59,14 +60,14 @@
 
 .salesCard {
   .salesBar {
-    padding: 0 0 24px 24px;
+    padding: 0 0 32px 32px;
   }
   .salesRank {
-    padding: 0 24px 24px 0;
+    padding: 0 32px 32px 72px;
   }
   :global {
     .ant-tabs-bar {
-      padding-left: 24px;
+      padding-left: 16px;
       .ant-tabs-nav .ant-tabs-tab {
         padding-top: 16px;
         padding-bottom: 14px;
@@ -87,9 +88,11 @@
     }
   }
 }
+
 .salesCardExtra {
-  height: 88px;
+  height: 68px;
 }
+
 .salesTypeRadio {
   position: absolute;
   left: 24px;
@@ -104,6 +107,18 @@
     .ant-tabs-ink-bar {
       top: 1px;
     }
+    .ant-tabs-nav-container-scrolling {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    .ant-tabs-tab-prev-icon:before {
+      position: relative;
+      left: 6px;
+    }
+    .ant-tabs-tab-next-icon:before {
+      position: relative;
+      right: 6px;
+    }
   }
 }
 
@@ -111,6 +126,7 @@
   .salesExtra {
     display: none;
   }
+
   .rankingList {
     li {
       span:first-child {
@@ -124,12 +140,19 @@
   .rankingTitle {
     margin-top: 16px;
   }
+
+  .salesCard {
+    .salesBar {
+      padding: 16px;
+    }
+  }
 }
 
 @media screen and (max-width: @screen-sm) {
   .salesExtraWrap {
     display: none;
   }
+
   .salesCard {
     :global {
       .ant-tabs-content {

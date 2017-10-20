@@ -85,7 +85,8 @@ class MiniArea extends PureComponent {
 
     view.source(data, dataConfig);
 
-    view.area().position('x*y').color(color).shape('smooth');
+    view.area().position('x*y').color(color).shape('smooth')
+      .style({ fillOpacity: 1 });
 
     chart.on('tooltipchange', (ev) => {
       const item = ev.items[0];
