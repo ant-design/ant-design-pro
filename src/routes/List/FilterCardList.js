@@ -151,7 +151,7 @@ export default class FilterCardList extends PureComponent {
         onTabChange={this.handleTabChange}
       >
         <div className={styles.filterCardList}>
-          <Card bordered={false} bodyStyle={{ padding: 24 }}>
+          <Card bordered={false}>
             <Form layout="inline">
               <StandardFormRow title="所属类目" block>
                 <FormItem>

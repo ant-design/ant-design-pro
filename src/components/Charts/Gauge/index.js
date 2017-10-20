@@ -121,7 +121,7 @@ class Gauge extends PureComponent {
       height,
       animate: false,
       plotCfg: {
-        margin: [10, 0, 30, 0],
+        margin: [10, 10, 30, 10],
       },
     });
 

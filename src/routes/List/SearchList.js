@@ -141,7 +141,7 @@ export default class SearchList extends Component {
       <div className={styles.listContent}>
         <p>{content}</p>
         <div>
-          <Avatar src={avatar} size="small" />{owner} 发布在 <a href={href}>{href}</a>
+          <Avatar src={avatar} size="small" /><a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
           <em>{moment(updatedAt).format('YYYY-MM-DD hh:mm')}</em>
         </div>
       </div>
@@ -162,13 +162,14 @@ export default class SearchList extends Component {
     const formItemLayout = {
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 24 },
+        md: { span: 12 },
       },
     };
 
     const loadMore = showLoadMore ? (
       <div style={{ textAlign: 'center', marginTop: 16 }}>
-        <Button onClick={this.handleLoadMore}>
+        <Button onClick={this.handleLoadMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
           {loadingMore && (<span><Icon type="loading" /> 加载中...</span>)}
           {!loadingMore && (<span>加载更多</span>)}
         </Button>
@@ -183,7 +184,7 @@ export default class SearchList extends Component {
         onTabChange={this.handleTabChange}
       >
         <div>
-          <Card bordered={false} bodyStyle={{ padding: 24 }}>
+          <Card bordered={false}>
             <Form layout="inline">
               <StandardFormRow title="所属类目" block>
                 <FormItem>
@@ -206,7 +207,7 @@ export default class SearchList extends Component {
                 grid
               >
                 <Row>
-                  <Col lg={16} md={16} sm={20} xs={20}>
+                  <Col lg={16} md={24} sm={24} xs={24}>
                     <FormItem>
                       {getFieldDecorator('owner', {
                         initialValue: ['wjh', 'zxx'],
@@ -223,7 +224,7 @@ export default class SearchList extends Component {
                           }
                         </Select>
                       )}
-                      <a onClick={this.setOwner} style={{ marginLeft: 8 }}>只看自己的</a>
+                      <a className={styles.selfTrigger} onClick={this.setOwner}>只看自己的</a>
                     </FormItem>
                   </Col>
                 </Row>
@@ -234,7 +235,7 @@ export default class SearchList extends Component {
                 last
               >
                 <Row gutter={16}>
-                  <Col lg={8} md={10} sm={10} xs={24}>
+                  <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                     <FormItem
                       {...formItemLayout}
                       label="活跃用户"
@@ -250,7 +251,7 @@ export default class SearchList extends Component {
                       )}
                     </FormItem>
                   </Col>
-                  <Col lg={8} md={10} sm={10} xs={24}>
+                  <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                     <FormItem
                       {...formItemLayout}
                       label="好评度"
@@ -282,6 +283,7 @@ export default class SearchList extends Component {
             bodyStyle={{ padding: '12px 24px 32px 24px' }}
           >
             <List
+              size="large"
               loading={!loadingMore && loading}
               rowKey="id"
               itemLayout="vertical"
@@ -290,11 +292,17 @@ export default class SearchList extends Component {
               renderItem={item => (
                 <List.Item
                   key={item.id}
-                  actions={[<IconText type="star-o" text={item.star} />, <IconText type="like-o" text={item.like} />, <IconText type="message" text={item.message} />]}
+                  actions={[
+                    <IconText type="star-o" text={item.star} />,
+                    <IconText type="like-o" text={item.like} />,
+                    <IconText type="message" text={item.message} />,
+                  ]}
                   extra={<div className={styles.listItemExtra} />}
                 >
                   <List.Item.Meta
-                    title={<a href={item.href}>{item.title}</a>}
+                    title={(
+                      <a className={styles.listItemMetaTitle} href={item.href}>{item.title}</a>
+                    )}
                     description={<span><Tag>Ant Design</Tag><Tag>设计语言</Tag><Tag>蚂蚁金服</Tag></span>}
                   />
                   <ListContent data={item} />

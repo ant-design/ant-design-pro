@@ -25,7 +25,7 @@ class MiniBar extends PureComponent {
   }
 
   renderChart(data) {
-    const { height = 0, fit = true, color = '#33ABFB' } = this.props;
+    const { height = 0, fit = true, color = '#1890FF' } = this.props;
 
     if (!data || (data && data.length < 1)) {
       return;

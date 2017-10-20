@@ -39,26 +39,26 @@ export default class Monitor extends PureComponent {
           <Col xl={18} lg={24} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card title="活动实时交易情况" bordered={false}>
               <Row>
-                <Col sm={6} xs={12}>
+                <Col md={6} sm={12} xs={24}>
                   <NumberInfo
                     subTitle="今日交易总额"
                     suffix="元"
                     total={numeral(124543233).format('0,0')}
                   />
                 </Col>
-                <Col sm={6} xs={12}>
+                <Col md={6} sm={12} xs={24}>
                   <NumberInfo
                     subTitle="销售目标完成率"
                     total="92%"
                   />
                 </Col>
-                <Col sm={6} xs={12}>
+                <Col md={6} sm={12} xs={24}>
                   <NumberInfo
                     subTitle="活动剩余时间"
                     total={<CountDown target={targetTime} />}
                   />
                 </Col>
-                <Col sm={6} xs={12}>
+                <Col md={6} sm={12} xs={24}>
                   <NumberInfo
                     subTitle="每秒交易总额"
                     suffix="元"
@@ -96,7 +96,7 @@ export default class Monitor extends PureComponent {
                       return '';
                   }
                 }}
-                title="核销率"
+                title="跳出率"
                 height={180}
                 percent={87}
               />

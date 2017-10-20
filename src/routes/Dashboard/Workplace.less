@@ -13,18 +13,19 @@
 .pageHeaderContent {
   display: flex;
   .avatar {
-    flex: 0 1 80px;
+    flex: 0 1 72px;
+    margin-bottom: 12px;
     & > span {
-      border-radius: 80px;
+      border-radius: 72px;
       display: block;
-      width: 80px;
-      height: 80px;
+      width: 72px;
+      height: 72px;
     }
   }
   .content {
     position: relative;
     top: 8px;
-    margin-left: 32px;
+    margin-left: 24px;
     flex: 1 1 auto;
     color: @text-color-secondary;
     .contentTitle {
@@ -38,18 +39,20 @@
 
 .pageHeaderExtra {
   .clearfix();
+  float: right;
+  margin-right: 8px;
   & > div {
-    padding: 0 24px;
+    padding: 0 32px;
     position: relative;
     float: left;
     & > p:first-child {
       color: @text-color-secondary;
       font-size: @font-size-base;
       line-height: 22px;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
     & > p {
-      color: @text-color;
+      color: @heading-color;
       font-size: 30px;
       line-height: 38px;
       & > span {
@@ -108,11 +111,11 @@
   :global {
     .ant-card-meta-description {
       color: @text-color-secondary;
-      font-size: 12px;
-      min-height: 36px;
+      min-height: 42px;
     }
   }
   .cardTitle {
+    font-size: 14px;
     :global {
       .ant-avatar {
         position: relative;
@@ -178,6 +181,8 @@
     margin-bottom: 0;
   }
   .pageHeaderExtra {
+    float: none;
+    margin-right: 0;
     & > div {
       padding: 0 16px;
       text-align: left;

@@ -30,7 +30,7 @@ class EditableLinkGroup extends PureComponent {
         }
         {
           <Button size="small" onClick={() => this.handleOnClick()}>
-            <Icon type="plus" /> 添加
+            <Icon type="plus" />添加
           </Button>
         }
       </div>

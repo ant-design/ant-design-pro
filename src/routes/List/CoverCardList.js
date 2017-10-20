@@ -90,7 +90,7 @@ export default class CoverCardList extends PureComponent {
                 <div className={styles.cardItemContent}>
                   <span>{moment(item.updatedAt).fromNow()}</span>
                   <div className={styles.avatarList}>
-                    <AvatarList size="small">
+                    <AvatarList size="mini">
                       {
                         item.members.map((member, i) => (
                           <AvatarList.Item
@@ -153,7 +153,7 @@ export default class CoverCardList extends PureComponent {
         onTabChange={this.handleTabChange}
       >
         <div className={styles.coverCardList}>
-          <Card bordered={false} bodyStyle={{ padding: 24 }}>
+          <Card bordered={false}>
             <Form layout="inline">
               <StandardFormRow title="所属类目" block>
                 <FormItem>
