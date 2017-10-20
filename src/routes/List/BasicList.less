@@ -50,7 +50,6 @@
     }
   }
   .listContent {
-    margin-left: 24px;
     font-size: 0;
     & > div {
       color: @text-color-secondary;
@@ -159,6 +158,20 @@
 @media screen and (max-width: @screen-xl) {
   .standardList {
     .listContent {
+      & > div {
+        margin-left: 24px;
+      }
+      & > div:last-child {
+        top: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .standardList {
+    .listContent {
+      text-align: right;
       & > div:last-child {
         top: 0;
       }

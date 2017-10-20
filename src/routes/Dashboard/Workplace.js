@@ -40,31 +40,31 @@ const links = [
 const members = [
   {
     id: 'members-1',
-    title: '凤蝶精英小分队',
+    title: '科学搬砖组',
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/CRxBvUggxBYzWBTGmkxF.png',
     link: '',
   },
   {
     id: 'members-2',
-    title: 'Ant Design',
+    title: '程序员日常',
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/RBytOnluTcyeyDazAbvs.png',
     link: '',
   },
   {
     id: 'members-3',
-    title: 'DesignLab',
+    title: '设计天团',
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/HQVJYAXtWHEJvLxQjmPa.png',
     link: '',
   },
   {
     id: 'members-4',
-    title: 'Basement',
+    title: '中二少女团',
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/HQVJYAXtWHEJvLxQjmPa.png',
     link: '',
   },
   {
     id: 'members-5',
-    title: 'Github',
+    title: '骗你学计算机',
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/RBytOnluTcyeyDazAbvs.png',
     link: '',
   },

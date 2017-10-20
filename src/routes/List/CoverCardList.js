@@ -147,7 +147,7 @@ export default class CoverCardList extends PureComponent {
 
     return (
       <PageHeaderLayout
-        title="带封面的卡片列表"
+        title="搜索列表"
         content={pageHeaderContent}
         tabList={tabList}
         onTabChange={this.handleTabChange}

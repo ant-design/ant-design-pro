@@ -82,7 +82,7 @@ const data = [{
     path: 'list',
     icon: 'table',
     children: [{
-      name: '标准表格（表格查询）',
+      name: '查询表格',
       path: 'table-list',
       component: TableList,
     }, {
@@ -94,15 +94,15 @@ const data = [{
       path: 'card-list',
       component: CardList,
     }, {
-      name: '卡片列表（封面）',
+      name: '搜索列表（项目）',
       path: 'cover-card-list',
       component: CoverCardList,
     }, {
-      name: '带筛选卡片列表',
+      name: '搜索列表（应用）',
       path: 'filter-card-list',
       component: FilterCardList,
     }, {
-      name: '搜索列表',
+      name: '搜索列表（文章）',
       path: 'search',
       component: SearchList,
     }],
