@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Card, Table, Icon } from 'antd';
+import { Row, Col, Card, Table, Icon, Divider } from 'antd';
 
 const columns = [{
   title: 'Name',
@@ -20,9 +20,9 @@ const columns = [{
   render: (text, record) => (
     <span>
       <a href="">Action 一 {record.name}</a>
-      <span className="ant-divider" />
+      <Divider type="vertical" />
       <a href="">Delete</a>
-      <span className="ant-divider" />
+      <Divider type="vertical" />
       <a href="" className="ant-dropdown-link">
         More actions <Icon type="down" />
       </a>

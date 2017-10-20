@@ -91,7 +91,7 @@ export default ({ formItemLayout, form, dispatch }) => {
           </Button>
         </Form.Item>
       </Form>
-      <Divider style={{ margin: '48px 0 16px' }} />
+      <Divider style={{ margin: '40px 0 24px' }} />
       <div className={styles.desc}>
         <h3>说明</h3>
         <h4>转账到支付宝账户</h4>

@@ -6,6 +6,7 @@
 }
 
 .stepFormText {
+  margin-bottom: 24px;
   :global {
     .ant-form-item-label,
     .ant-form-item-control {
@@ -16,26 +17,36 @@
 
 .result {
   margin: 0 auto;
-  max-width: 520px;
-  padding: 32px 0;
+  max-width: 560px;
+  padding: 24px 0;
 }
 
 .desc {
   h3 {
-    font-size: 14px;
-    margin: 8px 0;
+    font-size: 16px;
+    margin: 0 0 12px 0;
     color: @text-color-secondary;
+    line-height: 32px;
   }
   h4 {
-    margin: 2px 0;
+    margin: 0 0 4px 0;
     color: @text-color-secondary;
+    font-size: 14px;
+    line-height: 22px;
   }
   p {
-    margin-bottom: 16px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 22px;
   }
-  padding: 0 34px;
+  padding: 0 80px;
   color: @text-color-secondary;
-  font-size: 12px;
+}
+
+@media screen and (max-width: @screen-md) {
+  .desc {
+    padding: 0;
+  }
 }
 
 .information {

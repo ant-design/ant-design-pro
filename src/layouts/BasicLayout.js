@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Menu, Icon, Avatar, Dropdown, Tag, message } from 'antd';
+import { Layout, Menu, Icon, Avatar, Dropdown, Tag, message, Spin } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { Link, routerRedux } from 'dva/router';
@@ -122,9 +122,10 @@ class BasicLayout extends React.PureComponent {
       }
       if (newNotice.extra && newNotice.status) {
         const color = ({
+          todo: '',
           processing: 'blue',
           urgent: 'red',
-          doing: 'yellow',
+          doing: 'gold',
         })[newNotice.status];
         newNotice.extra = <Tag color={color}>{newNotice.extra}</Tag>;
       }
@@ -164,8 +165,8 @@ class BasicLayout extends React.PureComponent {
 
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        <Menu.Item><Icon type="user" />个人中心</Menu.Item>
-        <Menu.Item><Icon type="setting" />设置</Menu.Item>
+        <Menu.Item disabled><Icon type="user" />个人中心</Menu.Item>
+        <Menu.Item disabled><Icon type="setting" />设置</Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout"><Icon type="logout" />退出登录</Menu.Item>
       </Menu>
@@ -193,7 +194,7 @@ class BasicLayout extends React.PureComponent {
           >
             <div className={styles.logo}>
               <Link to="/">
-                <img src="https://gw.alipayobjects.com/zos/rmsportal/osjtaBtmmQzWRvMbcKeb.svg" alt="logo" />
+                <img src="https://gw.alipayobjects.com/zos/rmsportal/iwWyPinUoseUxIAeElSx.svg" alt="logo" />
                 <h1>Ant Design Pro</h1>
               </Link>
             </div>
@@ -204,7 +205,7 @@ class BasicLayout extends React.PureComponent {
               onOpenChange={this.handleOpenChange}
               selectedKeys={this.getCurrentMenuSelectedKeys()}
               style={{ margin: '24px 0', width: '100%' }}
-              inlineIndent={32}
+              inlineIndent={24}
             >
               {this.getNavMenuItems(this.menus)}
             </Menu>
@@ -239,16 +240,33 @@ class BasicLayout extends React.PureComponent {
                   loading={fetchingNotices}
                   popupAlign={{ offset: [20, -16] }}
                 >
-                  <NoticeIcon.Tab list={noticeData['通知']} title="通知" />
-                  <NoticeIcon.Tab list={noticeData['消息']} title="消息" />
-                  <NoticeIcon.Tab list={noticeData['待办']} title="待办" />
+                  <NoticeIcon.Tab
+                    list={noticeData['通知']}
+                    title="通知"
+                    emptyText="你已查看所有通知"
+                    emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
+                  />
+                  <NoticeIcon.Tab
+                    list={noticeData['消息']}
+                    title="消息"
+                    emptyText="您已读完所有消息"
+                    emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
+                  />
+                  <NoticeIcon.Tab
+                    list={noticeData['待办']}
+                    title="待办"
+                    emptyText="你已完成所有待办"
+                    emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
+                  />
                 </NoticeIcon>
-                <Dropdown overlay={menu}>
-                  <span className={`${styles.action} ${styles.account}`}>
-                    <Avatar size="small" className={styles.avatar} src={currentUser.avatar} />
-                    {currentUser.name}
-                  </span>
-                </Dropdown>
+                {currentUser.name ? (
+                  <Dropdown overlay={menu}>
+                    <span className={`${styles.action} ${styles.account}`}>
+                      <Avatar size="small" className={styles.avatar} src={currentUser.avatar} />
+                      {currentUser.name}
+                    </span>
+                  </Dropdown>
+                ) : <Spin size="small" style={{ marginLeft: 8 }} />}
               </div>
             </Header>
             <Content style={{ margin: '24px 24px 0', height: '100%' }}>

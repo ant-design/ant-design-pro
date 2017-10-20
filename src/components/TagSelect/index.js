@@ -123,27 +123,29 @@ class TagSelect extends PureComponent {
 
     return (
       <div className={cls} style={style}>
-        <CheckableTag
-          checked={checkedAll}
-          key="tag-select-__all__"
-          onChange={this.onSelectAll}
-        >
-          全部
-        </CheckableTag>
-        {
-          children.filter(child => child.props.displayName === 'TagSelectOption').map(child => React.cloneElement(child, {
-            key: `tag-select-${child.props.value}`,
-            checked: checkedTags.indexOf(child.props.value) > -1,
-            onChange: this.handleTagChange,
-          }))
-        }
-        {
-          expandNode && (
-            <a className={styles.trigger} onClick={this.handleExpand}>
-              { expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
-            </a>
-          )
-        }
+        <div>
+          <CheckableTag
+            checked={checkedAll}
+            key="tag-select-__all__"
+            onChange={this.onSelectAll}
+          >
+            全部
+          </CheckableTag>
+          {
+            children.filter(child => child.props.displayName === 'TagSelectOption').map(child => React.cloneElement(child, {
+              key: `tag-select-${child.props.value}`,
+              checked: checkedTags.indexOf(child.props.value) > -1,
+              onChange: this.handleTagChange,
+            }))
+          }
+          {
+            expandNode && (
+              <a className={styles.trigger} onClick={this.handleExpand}>
+                { expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
+              </a>
+            )
+          }
+        </div>
         {
           expandNode && (
             <div className={expand ? styles.expand : styles.fold}>

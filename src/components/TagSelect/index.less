@@ -5,6 +5,12 @@
   user-select: none;
   margin-left: -8px;
   position: relative;
+  :global {
+    .ant-tag {
+      padding: 0 8px;
+      margin-right: 24px;
+    }
+  }
   .expand {
     transition: all 0.32s ease;
     overflow: hidden;
@@ -18,6 +24,9 @@
     position: absolute;
     top: 0;
     right: 0;
+    i {
+      font-size: 12px;
+    }
   }
 }
 .expandTag {

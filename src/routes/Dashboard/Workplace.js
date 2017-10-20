@@ -109,7 +109,7 @@ export default class Workplace extends PureComponent {
           <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/XertDCubOxUvZbCdgWTW.png" />
         </div>
         <div className={styles.content}>
-          <p className={styles.contentTitle}>早安, 曲丽丽, 祝你开心每一天</p>
+          <p className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天</p>
           <p>交互专家 | 蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</p>
         </div>
       </div>
@@ -187,7 +187,7 @@ export default class Workplace extends PureComponent {
                     activitiesList.map(item => (
                       <List.Item key={item.id}>
                         <List.Item.Meta
-                          avatar={<Avatar style={{ marginTop: -12 }} src={item.user.avatar} />}
+                          avatar={<Avatar src={item.user.avatar} />}
                           title={
                             <p>
                               <a>{item.user.name}</a> 在 <a>xx</a> 新建了项目 <a>xxxx</a>

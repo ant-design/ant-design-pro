@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Table, Button, Input, message } from 'antd';
+import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
 import styles from './style.less';
 
 export default class TableForm extends PureComponent {
@@ -45,8 +45,7 @@ export default class TableForm extends PureComponent {
       this.setState({ data: [...this.state.data] });
     }
   }
-  remove(e, key) {
-    e.preventDefault();
+  remove(key) {
     const newData = this.state.data.filter(item => item.key !== key);
     this.setState({ data: newData });
     this.props.onChange(newData);
@@ -64,6 +63,11 @@ export default class TableForm extends PureComponent {
     this.index += 1;
     this.setState({ data: newData });
   }
+  handleKeyPress(e, key) {
+    if (e.key === 'Enter') {
+      this.saveRow(e, key);
+    }
+  }
   handleFieldChange(e, fieldName, key) {
     const newData = [...this.state.data];
     const target = this.getRowByKey(key);
@@ -73,16 +77,29 @@ export default class TableForm extends PureComponent {
     }
   }
   saveRow(e, key) {
-    const target = this.getRowByKey(key);
-    delete target.isNew;
-    if (!target.workId || !target.name || !target.department) {
-      message.error('请填写完整成员信息。');
-      return;
-    }
-    this.toggleEditable(e, key);
-    this.props.onChange(this.state.data);
+    e.persist();
+    // save field when blur input
+    setTimeout(() => {
+      if (document.activeElement.tagName === 'INPUT' &&
+          document.activeElement !== e.target) {
+        return;
+      }
+      if (this.clickedCancel) {
+        this.clickedCancel = false;
+        return;
+      }
+      const target = this.getRowByKey(key);
+      delete target.isNew;
+      if (!target.workId || !target.name || !target.department) {
+        message.error('请填写完整成员信息。');
+        return;
+      }
+      this.toggleEditable(e, key);
+      this.props.onChange(this.state.data);
+    }, 10);
   }
   cancel(e, key) {
+    this.clickedCancel = true;
     e.preventDefault();
     const target = this.getRowByKey(key);
     if (this.cacheOriginData[key]) {
@@ -105,6 +122,8 @@ export default class TableForm extends PureComponent {
               value={text}
               autoFocus
               onChange={e => this.handleFieldChange(e, 'name', record.key)}
+              onBlur={e => this.saveRow(e, record.key)}
+              onKeyPress={e => this.handleKeyPress(e, record.key)}
               placeholder="成员姓名"
             />
           );
@@ -122,6 +141,8 @@ export default class TableForm extends PureComponent {
             <Input
               value={text}
               onChange={e => this.handleFieldChange(e, 'workId', record.key)}
+              onBlur={e => this.saveRow(e, record.key)}
+              onKeyPress={e => this.handleKeyPress(e, record.key)}
               placeholder="工号"
             />
           );
@@ -139,6 +160,8 @@ export default class TableForm extends PureComponent {
             <Input
               value={text}
               onChange={e => this.handleFieldChange(e, 'department', record.key)}
+              onBlur={e => this.saveRow(e, record.key)}
+              onKeyPress={e => this.handleKeyPress(e, record.key)}
               placeholder="所属部门"
             />
           );
@@ -154,7 +177,7 @@ export default class TableForm extends PureComponent {
             return (
               <span>
                 <a onClick={e => this.saveRow(e, record.key)}>保存</a>
-                <span className="ant-divider" />
+                <Divider type="vertical" />
                 <a onClick={e => this.remove(e, record.key)}>删除</a>
               </span>
             );
@@ -162,7 +185,7 @@ export default class TableForm extends PureComponent {
           return (
             <span>
               <a onClick={e => this.saveRow(e, record.key)}>保存</a>
-              <span className="ant-divider" />
+              <Divider type="vertical" />
               <a onClick={e => this.cancel(e, record.key)}>取消</a>
             </span>
           );
@@ -170,8 +193,10 @@ export default class TableForm extends PureComponent {
         return (
           <span>
             <a onClick={e => this.toggleEditable(e, record.key)}>编辑</a>
-            <span className="ant-divider" />
-            <a onClick={e => this.remove(e, record.key)}>删除</a>
+            <Divider type="vertical" />
+            <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
+              <a>删除</a>
+            </Popconfirm>
           </span>
         );
       },
