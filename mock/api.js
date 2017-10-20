@@ -3,13 +3,13 @@ import { imgMap, getUrlParams } from './utils';
 export function fakeList(count) {
   const titles = [
     'Vue',
-    'AntDesignPro',
-    'DesignLab',
+    'Ant Design Pro',
+    'Bootstrap',
     'Angular',
-    'AntDesign',
+    'Ant Design',
     'React',
     'Alipay',
-    'AntDesignMobile',
+    'Ant Design Mobile',
   ];
   const avatars = [
     'https://gw.alipayobjects.com/zos/rmsportal/hYjIZrUoBfNxOAYBVDfc.png', // 凤蝶
@@ -23,22 +23,42 @@ export function fakeList(count) {
     'https://gw.alipayobjects.com/zos/rmsportal/RLwlKSYGSXGHuWSojyvp.png',
     'https://gw.alipayobjects.com/zos/rmsportal/gLaIAoVWTtLbBWZNYEMg.png',
   ];
+  const desc = [
+    '那是一种内在的东西， 他们到达不了，也无法触及的',
+    '希望是一个好东西，也许是最好的，好东西是不会消亡的',
+    '生命就像一盒巧克力，结果往往出人意料',
+    '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
+    '那时候我只会想自己想要什么，从不想自己拥有什么',
+  ];
+
+  const user = [
+    '付小小',
+    '曲丽丽',
+    '林东东',
+    '周星星',
+    '吴加好',
+    '朱偏右',
+    '鱼酱',
+    '乐哥',
+    '谭小仪',
+    '仲尼',
+  ];
 
   const list = [];
   for (let i = 0; i < count; i += 1) {
     list.push({
       id: `fake-list-${i}`,
-      owner: '曲丽丽',
+      owner: user[i % 10],
       title: titles[i % 8],
       avatar: avatars[i % 4],
-      cover: Math.floor(i / 4) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
+      cover: (i / 4) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: ['https://gw.alipayobjects.com/zos/rmsportal/KoJjkdbuTFxzJmmjuDVR.png', 'https://gw.alipayobjects.com/zos/rmsportal/UxGORCvEXJEsxOfEKZiA.png'][i % 2],
       href: 'https://ant.design',
       updatedAt: new Date(new Date().getTime() - (1000 * 60 * 60 * 2 * i)),
       createdAt: new Date(new Date().getTime() - (1000 * 60 * 60 * 2 * i)),
-      subDescription: '一句话描述一句话描述',
+      subDescription: desc[i % 5],
       description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
       activeUser: Math.ceil(Math.random() * 100000) + 100000,
       newUser: Math.ceil(Math.random() * 1000) + 1000,
@@ -88,51 +108,51 @@ export function getFakeList(req, res, u) {
 export const getNotice = [
   {
     id: 'xxx1',
-    title: '消息列表体验优化',
+    title: 'Vue',
     logo: imgMap.b,
-    description: '这是一条描述信息这是一条描述信息',
+    description: '那是一种内在的东西， 他们到达不了，也无法触及的',
     updatedAt: new Date(),
-    member: '蜂鸟项目组',
+    member: '科学搬砖组',
   },
   {
     id: 'xxx2',
-    title: 'XX 平台',
+    title: 'Angular',
     logo: imgMap.c,
-    description: '这是一条描述信息',
+    description: '希望是一个好东西，也许是最好的，好东西是不会消亡的',
     updatedAt: new Date('2017-07-24 11:00:00'),
-    member: '凤蝶精英小分队',
+    member: '全组都是吴彦祖',
   },
   {
     id: 'xxx3',
-    title: '消息列表体验优化',
+    title: 'React',
     logo: imgMap.a,
-    description: '这是一条描述信息这是一条描述信息',
+    description: '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
     updatedAt: new Date(),
-    member: '蜂鸟项目组',
+    member: '中二少女团',
   },
   {
     id: 'xxx4',
-    title: '文档中心1',
+    title: 'Ant Design',
     logo: imgMap.a,
-    description: '这是一条描述信息这是一条描述信息',
+    description: '那时候我只会想自己想要什么，从不想自己拥有什么',
     updatedAt: new Date('2017-07-23 06:23:00'),
-    member: '成都超级小分队',
+    member: '程序员日常',
   },
   {
     id: 'xxx5',
-    title: '文档中心2',
+    title: 'Ant Design Mobile',
     logo: imgMap.b,
-    description: '这是一条描述信息这是一条描述信息',
+    description: '凛冬将至',
     updatedAt: new Date('2017-07-23 06:23:00'),
-    member: '成都超级小分队',
+    member: '高逼格设计天团',
   },
   {
     id: 'xxx6',
-    title: '智能运营中心',
+    title: 'Ant Motion',
     logo: imgMap.c,
-    description: '这是一条描述信息这是一条描述信息',
+    description: '生命就像一盒巧克力，结果往往出人意料',
     updatedAt: new Date('2017-07-23 06:23:00'),
-    member: '成都小分队',
+    member: '骗你来学计算机',
   },
 ];
 
@@ -144,31 +164,31 @@ export const getActivities = [
       name: '林东东',
       avatar: imgMap.a,
     },
-    action: '在 [凤蝶精英小分队](http://github.com/) 新建项目 [六月迭代](http://github.com/)',
+    action: '在 [高逼格设计天团](http://github.com/) 新建项目 [六月迭代](http://github.com/)',
   },
   {
     id: 'trend-2',
     updatedAt: new Date(),
     user: {
-      name: '林嘻嘻',
+      name: '付小小',
       avatar: imgMap.c,
     },
-    action: '在 [凤蝶精英小分队](http://github.com/) 新建项目 [六月迭代](http://github.com/)',
+    action: '在 [高逼格设计天团](http://github.com/) 新建项目 [六月迭代](http://github.com/)',
   },
   {
     id: 'trend-3',
     updatedAt: new Date(),
     user: {
-      name: '林囡囡',
+      name: '曲丽丽',
       avatar: imgMap.b,
     },
-    action: '在 [凤蝶精英小分队](http://github.com/) 新建项目 [六月迭代](http://github.com/)',
+    action: '在 [中二少女团](http://github.com/) 新建项目 [六月迭代](http://github.com/)',
   },
   {
     id: 'trend-4',
     updatedAt: new Date(),
     user: {
-      name: '林贝贝',
+      name: '周星星',
       avatar: imgMap.c,
     },
     action: '在 [5 月日常迭代](http://github.com/) 更新至已发布状态',
@@ -177,7 +197,7 @@ export const getActivities = [
     id: 'trend-5',
     updatedAt: new Date(),
     user: {
-      name: '林忠忠',
+      name: '朱偏右',
       avatar: imgMap.a,
     },
     action: '在 [工程效能](http://github.com/) 发布了 [留言](http://github.com/)',
@@ -186,10 +206,10 @@ export const getActivities = [
     id: 'trend-6',
     updatedAt: new Date(),
     user: {
-      name: '林呜呜',
+      name: '乐哥',
       avatar: imgMap.d,
     },
-    action: '在 [云雀](http://github.com/) 新建项目 [品牌迭代](http://github.com/)',
+    action: '在 [程序员日常](http://github.com/) 新建项目 [品牌迭代](http://github.com/)',
   },
 ];
 

@@ -187,7 +187,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="总销售额"
-              action={<Tooltip title="我是一段说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
               total={yuan(126560)}
               footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
               contentHeight={46}
@@ -202,7 +202,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="访问量"
-              action={<Tooltip title="访问量是关键指标"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
               total={numeral(8846).format('0,0')}
               footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
               contentHeight={46}
@@ -218,7 +218,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="支付笔数"
-              action={<Tooltip title="支付笔数反应交易质量"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
               total={numeral(6560).format('0,0')}
               footer={<Field label="转化率" value="60%" />}
               contentHeight={46}
@@ -232,8 +232,8 @@ export default class Analysis extends Component {
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
-              title="线上购物转化率"
-              action={<Tooltip title="购买效率"><Icon type="exclamation-circle-o" /></Tooltip>}
+              title="运营活动效果"
+              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
               total="78%"
               footer={
                 <Trend mini={['xlg', 'md']}>

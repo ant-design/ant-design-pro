@@ -145,7 +145,7 @@ export default class FilterCardList extends PureComponent {
 
     return (
       <PageHeaderLayout
-        title="带筛选卡片列表"
+        title="搜索列表"
         content={pageHeaderContent}
         tabList={tabList}
         onTabChange={this.handleTabChange}
