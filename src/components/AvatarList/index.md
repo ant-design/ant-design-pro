@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: AvatarList 
 subtitle: 用户头像列表
