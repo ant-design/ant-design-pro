@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import { Row, Col, Card, List, Avatar, Icon } from 'antd';
+import { Row, Col, Card, List, Avatar } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import EditableLinkGroup from '../../components/EditableLinkGroup';
@@ -109,7 +109,7 @@ export default class Workplace extends PureComponent {
           <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/XertDCubOxUvZbCdgWTW.png" />
         </div>
         <div className={styles.content}>
-          <p className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天</p>
+          <p className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</p>
           <p>交互专家 | 蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</p>
         </div>
       </div>
@@ -118,17 +118,17 @@ export default class Workplace extends PureComponent {
     const pageHeaderExtra = (
       <div className={styles.pageHeaderExtra}>
         <div>
-          <p><Icon type="appstore-o" /> 项目数</p>
+          <p>项目数</p>
           <p>56</p>
           <em />
         </div>
         <div>
-          <p><Icon type="trophy" /> 团队内排名</p>
+          <p>团队内排名</p>
           <p>8<span> / 24</span></p>
           <em />
         </div>
         <div>
-          <p><Icon type="eye-o" /> 项目访问</p>
+          <p>项目访问</p>
           <p>2,223</p>
         </div>
       </div>
@@ -181,7 +181,7 @@ export default class Workplace extends PureComponent {
               title="动态"
               loading={activitiesLoading}
             >
-              <List loading={activitiesLoading}>
+              <List loading={activitiesLoading} size="large">
                 <div className={styles.activitiesList}>
                   {
                     activitiesList.map(item => (
@@ -190,7 +190,7 @@ export default class Workplace extends PureComponent {
                           avatar={<Avatar src={item.user.avatar} />}
                           title={
                             <p>
-                              <a>{item.user.name}</a> 在 <a>xx</a> 新建了项目 <a>xxxx</a>
+                              <a style={{ fontWeight: 'bold' }}>{item.user.name}</a> 在 <a>xx</a> 新建了项目 <a>xxxx</a>
                             </p>
                           }
                           description={moment(item.updatedAt).fromNow()}

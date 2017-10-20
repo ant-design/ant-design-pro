@@ -157,8 +157,8 @@ export default class TableList extends PureComponent {
     const { selectedRows, modalVisible, addInputValue } = this.state;
 
     const formItemLayout = {
-      labelCol: { span: 5 },
-      wrapperCol: { span: 19 },
+      labelCol: { xs: 5, sm: 8, lg: 6, xl: 6 },
+      wrapperCol: { xs: 18, sm: 16, lg: 17, xl: 17 },
     };
 
     const menu = (

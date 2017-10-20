@@ -4,6 +4,7 @@
 .listContent {
   p {
     line-height: 24px;
+    max-width: 720px;
   }
   & > div {
     color: @text-color-secondary;
@@ -15,7 +16,7 @@
     }
     & > span {
       vertical-align: top;
-      margin-right: 16px;
+      margin-right: 8px;
       width: 20px;
       height: 20px;
       & > img {
@@ -25,7 +26,7 @@
     & > em {
       color: @disabled-color;
       font-style: normal;
-      margin-left: 24px;
+      margin-left: 16px;
     }
     a {
       color: @text-color-secondary;
@@ -35,9 +36,15 @@
     }
   }
 }
+.listItemMetaTitle {
+  color: @heading-color;
+}
 .listItemExtra {
   width: 272px;
   height: 1px;
+}
+.selfTrigger {
+  margin-left: 24px;
 }
 
 @media screen and (max-width: @screen-xs) {
@@ -45,6 +52,16 @@
     & > div {
       height: auto;
     }
+  }
+  .selfTrigger {
+    display: block;
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: @screen-md) {
+  .selfTrigger {
+    display: block;
+    margin-left: 0;
   }
 }
 @media screen and (max-width: @screen-lg) {

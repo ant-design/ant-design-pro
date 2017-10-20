@@ -5,7 +5,7 @@
   white-space: nowrap;
 }
 
-.textOverflowMulti(@line: 3) {
+.textOverflowMulti(@line: 3, @bg: #fff) {
   overflow: hidden;
   position: relative;
   line-height: 1.5em;
@@ -14,9 +14,11 @@
   margin-right: -1em;
   padding-right: 1em;
   &:before {
+    background: @bg;
     content: '...';
+    padding: 0 1px;
     position: absolute;
-    right: 0;
+    right: 14px;
     bottom: 0;
   }
   &:after {

@@ -2,6 +2,12 @@
 @import "../../utils/utils.less";
 
 .tableList {
+  padding-bottom: 8px;
+  :global {
+    .ant-form-item {
+      margin-bottom: 24px;
+    }
+  }
   .tableListOperator {
     margin-bottom: 16px;
     button {
@@ -14,6 +20,12 @@
   margin-left: 40px;
   position: relative;
   top: 2px;
+}
+
+@media screen and (max-width: @screen-lg) {
+  .formButton {
+    margin-left: 20px;
+  }
 }
 
 @media screen and (max-width: @screen-md) {

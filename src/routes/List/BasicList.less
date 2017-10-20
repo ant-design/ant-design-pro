@@ -8,9 +8,21 @@
     }
     .ant-card-head-title {
       line-height: 32px;
+      padding: 24px 0;
+    }
+    .ant-card-extra {
+      padding: 24px 0;
     }
     .ant-list-pagination {
       text-align: right;
+    }
+    .ant-avatar-lg {
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+    }
+    .ant-list-pagination {
+      margin-top: 16px;
     }
   }
   .headerInfo {
@@ -44,7 +56,7 @@
       color: @text-color-secondary;
       display: inline-block;
       font-size: @font-size-base;
-      margin-left: 32px;
+      margin-left: 40px;
       & > span {
         line-height: 20px;
       }
@@ -83,6 +95,13 @@
         margin-left: 0;
       }
     }
+    .listCard {
+      :global {
+        .ant-card-head-title {
+          overflow: visible;
+        }
+      }
+    }
   }
 }
 
@@ -113,6 +132,14 @@
       }
     }
   }
+  .listCard {
+    :global {
+      .ant-radio-group {
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: @screen-lg) and (min-width: @screen-md) {
@@ -124,6 +151,16 @@
       & > div:last-child {
         top: 0;
         width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xl) {
+  .standardList {
+    .listContent {
+      & > div:last-child {
+        top: 0;
       }
     }
   }

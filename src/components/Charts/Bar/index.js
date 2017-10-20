@@ -72,7 +72,9 @@ class Bar extends PureComponent {
         name: 'x',
       },
     });
-    chart.interval().position('x*y').color(color);
+    chart.interval().position('x*y').color(color).style({
+      fillOpacity: 1,
+    });
     chart.render();
 
     this.chart = chart;
