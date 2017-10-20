@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: GlobalFooter
 subtitle: 全局页脚

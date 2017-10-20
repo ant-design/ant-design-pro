@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: CountDown 
 subtitle: 倒计时

@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: NoticeIcon
 subtitle: 通知菜单

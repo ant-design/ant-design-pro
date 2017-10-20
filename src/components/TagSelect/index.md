@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: TagSelect 
 subtitle: 标签选择器

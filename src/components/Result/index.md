@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: Result
 subtitle: 处理结果

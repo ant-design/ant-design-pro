@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: DescriptionList
 subtitle: 描述列表

@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: Exception
 subtitle: 异常

@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: Charts
 subtitle: 图表
