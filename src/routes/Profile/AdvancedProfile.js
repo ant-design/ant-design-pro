@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import addEventListener from 'rc-util/lib/Dom/addEventListener';
+import debounce from 'lodash.debounce';
 import { connect } from 'dva';
 import { Button, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'antd';
+import classNames from 'classnames';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import DescriptionList from '../../components/DescriptionList';
-import EditableItem from '../../components/EditableItem';
 import styles from './AdvancedProfile.less';
 
 const { Step } = Steps;
 const { Description } = DescriptionList;
+
+const getWindowWidth = () => (window.innerWidth || document.documentElement.documentElement);
 
 const menu = (
   <Menu>
@@ -44,7 +48,7 @@ const extra = (
 );
 
 const description = (
-  <DescriptionList col="2">
+  <DescriptionList className={styles.headerList} size="small" col="2">
     <Description term="创建人">曲丽丽</Description>
     <Description term="订购产品">XX 服务</Description>
     <Description term="创建时间">2017-07-07</Description>
@@ -63,8 +67,8 @@ const tabList = [{
 }];
 
 const desc1 = (
-  <div style={{ fontSize: 14 }} className={styles.textSecondary}>
-    <div style={{ marginTop: 8, marginBottom: 4 }}>
+  <div className={classNames(styles.textSecondary, styles.stepDescription)}>
+    <div>
       曲丽丽
       <Icon type="dingding-o" style={{ marginLeft: 8 }} />
     </div>
@@ -73,8 +77,8 @@ const desc1 = (
 );
 
 const desc2 = (
-  <div style={{ fontSize: 14 }}>
-    <div style={{ marginTop: 8, marginBottom: 4 }}>
+  <div className={styles.stepDescription}>
+    <div>
       周毛毛
       <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
     </div>
@@ -141,6 +145,7 @@ const columns = [{
 export default class AdvancedProfile extends Component {
   state = {
     operationkey: 'tab1',
+    stepDirection: 'horizontal',
   }
 
   componentDidMount() {
@@ -148,13 +153,39 @@ export default class AdvancedProfile extends Component {
     dispatch({
       type: 'profile/fetchAdvanced',
     });
+
+    this.setStepDirection();
+    this.resizeEvent = addEventListener(window, 'resize', debounce(this.setStepDirection, 100, {
+      leading: false,
+    }));
+  }
+
+  componentWillUnmount() {
+    if (this.resizeEvent) {
+      this.resizeEvent.remove();
+    }
   }
 
   onOperationTabChange = (key) => {
     this.setState({ operationkey: key });
   }
 
+  setStepDirection = () => {
+    const { stepDirection } = this.state;
+    const w = getWindowWidth();
+    if (stepDirection !== 'vertical' && w <= 576) {
+      this.setState({
+        stepDirection: 'vertical',
+      });
+    } else if (stepDirection !== 'horizontal' && w > 576) {
+      this.setState({
+        stepDirection: 'horizontal',
+      });
+    }
+  }
+
   render() {
+    const { stepDirection } = this.state;
     const { profile } = this.props;
     const { advancedLoading, advancedOperation1, advancedOperation2, advancedOperation3 } = profile;
     const contentList = {
@@ -188,7 +219,7 @@ export default class AdvancedProfile extends Component {
         tabList={tabList}
       >
         <Card title="流程进度" style={{ marginBottom: 24 }} bordered={false}>
-          <Steps progressDot={customDot} current={1}>
+          <Steps direction={stepDirection} progressDot={customDot} current={1}>
             <Step title="创建项目" description={desc1} />
             <Step title="部门初审" description={desc2} />
             <Step title="财务复核" />
@@ -200,14 +231,13 @@ export default class AdvancedProfile extends Component {
             <Description term="用户姓名">付小小</Description>
             <Description term="会员卡号">32943898021309809423</Description>
             <Description term="身份证">3321944288191034921</Description>
-            <Description term="联系方式">
-              <EditableItem value="18112345678" />
-            </Description>
+            <Description term="联系方式">18112345678</Description>
             <Description term="联系地址">曲丽丽  18100000000  浙江省杭州市西湖区黄姑山路工专路交叉路口</Description>
           </DescriptionList>
-          <DescriptionList style={{ marginBottom: 24 }} title="信息组" col="2">
+          <DescriptionList style={{ marginBottom: 24 }} title="信息组">
             <Description term="某某数据">725</Description>
             <Description term="该数据更新时间">2017-08-08</Description>
+            <Description>&nbsp;</Description>
             <Description term={
               <span>
                 某某数据
@@ -221,8 +251,9 @@ export default class AdvancedProfile extends Component {
             </Description>
             <Description term="该数据更新时间">2017-08-08</Description>
           </DescriptionList>
+          <h4 style={{ marginBottom: 16 }}>信息组</h4>
           <Card type="inner" title="多层级信息组">
-            <DescriptionList style={{ marginBottom: 16 }} title="组名称">
+            <DescriptionList size="small" style={{ marginBottom: 16 }} title="组名称">
               <Description term="负责人">林东东</Description>
               <Description term="角色码">1234567</Description>
               <Description term="所属部门">XX公司 - YY部</Description>
@@ -244,7 +275,7 @@ export default class AdvancedProfile extends Component {
         </Card>
         <Card title="用户近半年来电记录" style={{ marginBottom: 24 }} bordered={false}>
           <div className={styles.noData}>
-            <Icon type="frown-o" /> 暂无数据
+            <Icon type="frown-o" />暂无数据
           </div>
         </Card>
         <Card
