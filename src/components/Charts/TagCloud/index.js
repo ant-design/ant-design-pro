@@ -6,6 +6,9 @@ import Cloud from 'g-cloud';
 /* eslint no-param-reassign: 0 */
 /* eslint no-return-assign: 0 */
 
+const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/SQlwcHhAbFVjjbDCLROB.png';
+// const imgUrl = 'https://zos.alipayobjects.com/rmsportal/EEFqYWuloqIHRnh.jpg';
+
 class TagCloud extends PureComponent {
   componentDidMount() {
     this.initTagCloud();
@@ -25,7 +28,8 @@ class TagCloud extends PureComponent {
       const textAttrs = Util.mix(true, {}, {
         fillOpacity: cfg.opacity,
         fontSize: cfg.size,
-        rotate: 0, // cfg.origin._origin.rotate,
+        // rotate: 0, // cfg.origin._origin.rotate,
+        rotate: cfg.origin._origin.rotate,
         text: cfg.origin._origin.text,
         textAlign: 'center',
         fill: cfg.color,
@@ -78,45 +82,47 @@ class TagCloud extends PureComponent {
       height,
 
       // 设定文字大小配置函数(默认为12-40px的随机大小)
-      size: words => (((words.value - min) / (max - min)) * 12) + 6,
+      size: words => (((words.value - min) / (max - min)) * 4) + 10,
 
       // 设定文字内容
       text: words => words.name,
     });
 
-    // 执行词云布局函数，并在回调函数中调用G2对结果进行绘制
-    layout.exec((texts) => {
-      const chart = new G2.Chart({
-        container: this.node,
-        width,
-        height,
-        plotCfg: {
-          margin: 0,
-        },
-      });
-
-      chart.legend(false);
-      chart.axis(false);
-      chart.tooltip(false);
-
-      chart.source(texts);
-
-      // 将词云坐标系调整为G2的坐标系
-      chart.coord().reflect();
-
-      chart
-        .point()
-        .position('x*y')
-        .color('text')
-        .size('size', size => size)
-        .shape('cloud')
-        .style({
-          fontStyle: texts[0].style,
-          fontFamily: texts[0].font,
-          fontWeight: texts[0].weight,
+    layout.image(imgUrl, (imageCloud) => {
+      // 执行词云布局函数，并在回调函数中调用G2对结果进行绘制
+      imageCloud.exec((texts) => {
+        const chart = new G2.Chart({
+          container: this.node,
+          width,
+          height,
+          plotCfg: {
+            margin: 0,
+          },
         });
 
-      chart.render();
+        chart.legend(false);
+        chart.axis(false);
+        chart.tooltip(false);
+
+        chart.source(texts);
+
+        // 将词云坐标系调整为G2的坐标系
+        chart.coord().reflect();
+
+        chart
+          .point()
+          .position('x*y')
+          .color('text')
+          .size('size', size => size)
+          .shape('cloud')
+          .style({
+            fontStyle: texts[0].style,
+            fontFamily: texts[0].font,
+            fontWeight: texts[0].weight,
+          });
+
+        chart.render();
+      });
     });
   }
 
