@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import G2 from 'g2';
 import Cloud from 'g-cloud';
 
