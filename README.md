@@ -15,9 +15,9 @@
 
 ## 特性
 
-- :bikini: 优雅美观
+- :gem: 优雅美观
   基于 Ant Design 体系精心设计
-- :straight_ruler: 常见设计模式
+- bikini 常见设计模式
   提炼自中后台应用的典型页面和场景
 - :rocket: 最新技术栈
   使用 React/dva/antd 等前沿技术
@@ -25,9 +25,9 @@
   针对不同屏幕设计
 - :art: 主题
   可配置的主题满足多样化的品牌诉求
-- :earth_africa: 国际化
+- :globe_with_meridians: 国际化
   内建业界通用的国际化方案
-- :construction_site: 最佳实践
+- :gear: 最佳实践
   良好的工程实践助您持续产出高质量代码
 - :1234: Mock 数据
   实用的本地数据调试方案

@@ -15,9 +15,9 @@ An out-of-box UI solution for enterprise applications.
 
 ## Features
 
-- :bikini: Neat Design
+- :gem: Neat Design
   Follow Ant Design specification
-- :straight_ruler: Common templates
+- :triangular_ruler: Common templates
   Typical templates for enterprise applications
 - :rocket: State of The Art Development
   Newest development stack of React/dva/antd
@@ -25,9 +25,9 @@ An out-of-box UI solution for enterprise applications.
   Designed for varies of screen size
 - :art: Themeing
   Customizable theme
-- :earth_africa: International
+- :globe_with_meridians: International
   Built-in i18n solution
-- :construction_site: Best Practice
+- :gear: Best Practice
   Solid workflow make your code health
 - :1234: Mock development
   Easy to use mock development solution
