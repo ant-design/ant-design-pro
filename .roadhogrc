@@ -19,7 +19,8 @@
   },
   "externals": {
     "g2": "G2",
-    "g-cloud": "Cloud"
+    "g-cloud": "Cloud",
+    "g2-plugin-slider": "G2.Plugin.slider"
   },
   "theme": "./src/theme.js"
 }
