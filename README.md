@@ -6,7 +6,7 @@
 
 开箱即用的中台前端解决方案。
 
-![](https://camo.githubusercontent.com/e29d59c69434908ef2b063be77b4b917af15618b/68747470733a2f2f67772e616c697061796f626a656374732e636f6d2f7a6f732f726d73706f7274616c2f41486e41444e464c614b74414f6675616e485a7a2e706e67)
+![](https://gw.alipayobjects.com/zos/rmsportal/UMpXlUaLSMJMhejrlREh.png)
 
 - 预览：http://preview.pro.ant.design
 - 首页：http://pro.ant.design
