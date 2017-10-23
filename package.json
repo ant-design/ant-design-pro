@@ -16,8 +16,6 @@
   "dependencies": {
     "antd": "next",
     "dva": "^1.2.1",
-    "g-cloud": "^1.0.2-beta",
-    "g2": "^2.3.8",
     "g2-plugin-slider": "^1.2.1",
     "lodash": "^4.17.4",
     "numeral": "^2.0.6",

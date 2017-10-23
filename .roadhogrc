@@ -17,5 +17,9 @@
       ]
     }
   },
+  "externals": {
+    "g2": "G2",
+    "g-cloud": "Cloud"
+  },
   "theme": "./src/theme.js"
 }

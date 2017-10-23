@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
+import classNames from 'classNames';
 import G2 from 'g2';
 import Cloud from 'g-cloud';
+
+import styles from './index.less';
 
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-param-reassign: 0 */
 /* eslint no-return-assign: 0 */
 
-const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/SQlwcHhAbFVjjbDCLROB.png';
+const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
 // const imgUrl = 'https://zos.alipayobjects.com/rmsportal/EEFqYWuloqIHRnh.jpg';
 
 class TagCloud extends PureComponent {
@@ -28,8 +31,8 @@ class TagCloud extends PureComponent {
       const textAttrs = Util.mix(true, {}, {
         fillOpacity: cfg.opacity,
         fontSize: cfg.size,
-        // rotate: 0, // cfg.origin._origin.rotate,
         rotate: cfg.origin._origin.rotate,
+        // rotate: cfg.origin._origin.rotate,
         text: cfg.origin._origin.text,
         textAlign: 'center',
         fill: cfg.color,
@@ -59,10 +62,12 @@ class TagCloud extends PureComponent {
       return;
     }
 
-    const { height } = this.props;
+    const colors = ['#1890FF', '#41D9C7', '#2FC25B', '#FACC14', '#9AE65C'];
+
+    const height = this.props.height * 4;
     let width = 0;
     if (this.root) {
-      width = this.root.offsetWidth;
+      width = this.root.offsetWidth * 4;
     }
 
     // clean
@@ -81,8 +86,10 @@ class TagCloud extends PureComponent {
       width,
       height,
 
-      // 设定文字大小配置函数(默认为12-40px的随机大小)
-      size: words => (((words.value - min) / (max - min)) * 4) + 10,
+      rotate: () => 0,
+
+      // 设定文字大小配置函数(默认为12-24px的随机大小)
+      size: words => (((words.value - min) / (max - min)) * 50) + 30,
 
       // 设定文字内容
       text: words => words.name,
@@ -112,7 +119,7 @@ class TagCloud extends PureComponent {
         chart
           .point()
           .position('x*y')
-          .color('text')
+          .color('text', colors)
           .size('size', size => size)
           .shape('cloud')
           .style({
@@ -128,8 +135,12 @@ class TagCloud extends PureComponent {
 
   render() {
     return (
-      <div ref={n => (this.root = n)} style={{ width: '100%' }}>
-        <div ref={n => (this.node = n)} />
+      <div
+        className={classNames(styles.tagCloud, this.props.className)}
+        ref={n => (this.root = n)}
+        style={{ width: '100%' }}
+      >
+        <div ref={n => (this.node = n)} style={{ height: this.props.height }} />
       </div>
     );
   }
