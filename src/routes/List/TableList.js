@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Card, Row, Col, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message } from 'antd';
+import { Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message } from 'antd';
 import StandardTable from '../../components/StandardTable';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
@@ -156,11 +156,6 @@ export default class TableList extends PureComponent {
     const { rule: { loading: ruleLoading, data }, form: { getFieldDecorator } } = this.props;
     const { selectedRows, modalVisible, addInputValue } = this.state;
 
-    const formItemLayout = {
-      labelCol: { xs: 5, sm: 8, lg: 6, xl: 6 },
-      wrapperCol: { xs: 18, sm: 16, lg: 17, xl: 17 },
-    };
-
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
         <Menu.Item key="remove">删除</Menu.Item>
@@ -173,56 +168,47 @@ export default class TableList extends PureComponent {
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>
-              <Form onSubmit={this.handleSearch}>
-                <Row>
-                  <Col md={8} sm={12} xs={24}>
-                    <FormItem {...formItemLayout} label="规则编号">
-                      {getFieldDecorator('no')(
-                        <Input placeholder="请输入" />
-                      )}
-                    </FormItem>
-                  </Col>
-                  <Col md={8} sm={12} xs={24}>
-                    <FormItem {...formItemLayout} label="状态">
-                      {getFieldDecorator('status')(
-                        <Select placeholder="请选择" style={{ width: '100%' }}>
-                          <Option value="0">关闭</Option>
-                          <Option value="1">运行中</Option>
-                        </Select>
-                      )}
-                    </FormItem>
-                  </Col>
-                  <Col md={8} sm={12} xs={24} style={{ marginBottom: 24 }}>
-                    <div className={styles.formButton}>
-                      <Button type="primary" htmlType="submit">查询</Button>
-                      <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
-                      <a style={{ marginLeft: 8, fontSize: 12 }} onClick={this.toggleForm}>
-                        {this.state.expandForm ? '收起' : '展开'} <Icon type={this.state.expandForm ? 'up' : 'down'} />
-                      </a>
-                    </div>
-                  </Col>
-                </Row>
+              <Form onSubmit={this.handleSearch} layout="inline">
+                <div style={{ marginBottom: 16 }}>
+                  <FormItem label="规则编号">
+                    {getFieldDecorator('no')(
+                      <Input placeholder="请输入" style={{ width: 272 }} />
+                    )}
+                  </FormItem>
+                  <FormItem label="使用状态">
+                    {getFieldDecorator('status')(
+                      <Select placeholder="请选择" style={{ width: 272 }}>
+                        <Option value="0">关闭</Option>
+                        <Option value="1">运行中</Option>
+                      </Select>
+                    )}
+                  </FormItem>
+                  <span className={styles.formButton}>
+                    <Button type="primary" htmlType="submit">查询</Button>
+                    <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
+                    <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+                      {this.state.expandForm ? '收起' : '展开'} <Icon type={this.state.expandForm ? 'up' : 'down'} />
+                    </a>
+                  </span>
+                </div>
                 {
                   this.state.expandForm && (
-                    <Row>
-                      <Col md={8} sm={12} xs={24}>
-                        <FormItem {...formItemLayout} label="更新时间">
-                          {getFieldDecorator('updatedAt')(
-                            <DatePicker style={{ width: '100%' }} />
-                          )}
-                        </FormItem>
-                      </Col>
-                      <Col md={8} sm={12} xs={24}>
-                        <FormItem {...formItemLayout} label="调用次数">
-                          {getFieldDecorator('callNo')(
-                            <InputNumber
-                              prefix={<Icon type="right" />}
-                              placeholder="请输入"
-                            />
-                          )}
-                        </FormItem>
-                      </Col>
-                    </Row>
+                    <div style={{ marginBottom: 16 }}>
+                      <FormItem label="更新时间">
+                        {getFieldDecorator('updatedAt')(
+                          <DatePicker style={{ width: 272 }} />
+                        )}
+                      </FormItem>
+                      <FormItem label="调用次数">
+                        {getFieldDecorator('callNo')(
+                          <InputNumber
+                            prefix={<Icon type="right" />}
+                            placeholder="请输入"
+                            style={{ width: 272 }}
+                          />
+                        )}
+                      </FormItem>
+                    </div>
                   )
                 }
               </Form>
