@@ -1,19 +1,19 @@
-简体中文 | [English](./README.en-US.md)
+[简体中文](./README.md) | English
 
 # Ant Design Pro
 
 [![](https://img.shields.io/travis/ant-design/test2.svg?style=flat-square)](https://travis-ci.org/ant-design/test2)
 
-开箱即用的中台前端解决方案。
+An out-of-box UI solution for enterprise applications.
 
 ![](https://camo.githubusercontent.com/e29d59c69434908ef2b063be77b4b917af15618b/68747470733a2f2f67772e616c697061796f626a656374732e636f6d2f7a6f732f726d73706f7274616c2f41486e41444e464c614b74414f6675616e485a7a2e706e67)
 
-- 预览：http://preview.pro.ant.design
-- 首页：http://pro.ant.design
-- 使用文档：http://pro.ant.design/docs/getting-started
-- 常见问题：http://pro.ant.design/docs/faq
+- Preview: http://preview.pro.ant.design
+- Home Page: http://pro.ant.design
+- Documentation: http://pro.ant.design/docs/getting-started
+- FAQ: http://pro.ant.design/docs/faq
 
-## 特性
+## Features
 
 - :bikini: 优雅美观
   基于 Ant Design 体系精心设计
@@ -34,7 +34,7 @@
 - :white_check_mark: UI 测试
   自动化测试保障前端产品质量
 
-## 使用
+## Usage
 
 ```
 $ git clone git@github.com:ant-design/ant-design-pro
@@ -43,12 +43,12 @@ $ npm install
 $ npm start         // 访问 http://127.0.0.1:8000
 ```
 
-更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。
+More instruction at [documentation](http://pro.ant.design/docs/getting-started)。
 
-## 参与贡献
+## Contributing
 
-我们非常欢迎你的贡献，你可以通过以下方式参与：
+Any Contribution of following ways will be welcome:
 
-- 在你的公司或个人项目中使用 Ant Design Pro。
-- 通过 [issues](http://github.com/ant-design/ant-design-pro/issues) 给我们报告 bug 或进行咨询。
-- 给我们提交 [Pull Request](http://github.com/ant-design/ant-design-pro/pulls) 改进我们的代码。
+- Use Ant Design Pro in your daily work.
+- Submit [issues](http://github.com/ant-design/ant-design-pro/issues) to report bug or ask questions.
+- Propose [pull request](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
