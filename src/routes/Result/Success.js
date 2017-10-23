@@ -6,8 +6,8 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 const { Step } = Steps;
 
 const desc1 = (
-  <div style={{ fontSize: 14 }}>
-    <div style={{ margin: '4px 0' }}>
+  <div style={{ fontSize: 12, color: 'rgba(0, 0, 0, 0.45)' }}>
+    <div style={{ margin: '8px 0 4px' }}>
       曲丽丽<Icon style={{ marginLeft: 8 }} type="dingding-o" />
     </div>
     <div>2016-12-12 12:32</div>
@@ -15,8 +15,8 @@ const desc1 = (
 );
 
 const desc2 = (
-  <div style={{ fontSize: 14 }}>
-    <div style={{ margin: '4px 0' }}>
+  <div style={{ fontSize: 12 }}>
+    <div style={{ margin: '8px 0 4px' }}>
       周毛毛<Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
     </div>
     <div><a href="">催一下</a></div>
@@ -25,13 +25,22 @@ const desc2 = (
 
 const extra = (
   <div>
-    <div style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.65)', fontWeight: '600', marginBottom: 16 }}>
+    <div style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.85)', fontWeight: '500', marginBottom: 20 }}>
       项目名称
     </div>
-    <Row style={{ color: 'rgba(0, 0, 0, 0.65)', marginBottom: 20 }}>
-      <Col span={6}>项目 ID：23421</Col>
-      <Col span={6}>负责人：曲丽丽</Col>
-      <Col span={12}>生效时间：2016-12-12 ~ 2017-12-12</Col>
+    <Row style={{ marginBottom: 16 }}>
+      <Col xs={24} sm={12} md={12} lg={12} xl={6}>
+        <span style={{ color: 'rgba(0, 0, 0, 0.85)' }}>项目 ID：</span>
+        23421
+      </Col>
+      <Col xs={24} sm={12} md={12} lg={12} xl={6}>
+        <span style={{ color: 'rgba(0, 0, 0, 0.85)' }}>负责人：</span>
+        曲丽丽
+      </Col>
+      <Col xs={24} sm={24} md={24} lg={24} xl={12}>
+        <span style={{ color: 'rgba(0, 0, 0, 0.85)' }}>生效时间：</span>
+        2016-12-12 ~ 2017-12-12
+      </Col>
     </Row>
     <Steps progressDot current={1}>
       <Step title="创建项目" description={desc1} />
@@ -62,7 +71,7 @@ export default () => (
         “单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。"
         extra={extra}
         actions={actions}
-        style={{ marginTop: 30, marginBottom: 30 }}
+        style={{ marginTop: 48, marginBottom: 16 }}
       />
     </Card>
   </PageHeaderLayout>

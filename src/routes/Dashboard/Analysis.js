@@ -148,7 +148,7 @@ export default class Analysis extends Component {
     const activeKey = currentTabKey || (offlineData[0] && offlineData[0].name);
 
     const CustomTab = ({ data, currentTabKey: currentKey }) => (
-      <Row gutter={8} style={{ width: 138, margin: '8px 28px' }}>
+      <Row gutter={8} style={{ width: 138, margin: '8px 0' }}>
         <Col span={12}>
           <NumberInfo
             title={data.name}
@@ -186,8 +186,8 @@ export default class Analysis extends Component {
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
-              title="销售额"
-              action={<Tooltip title="我是一段说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              title="总销售额"
+              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
               total={yuan(126560)}
               footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
               contentHeight={46}
@@ -202,13 +202,13 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="访问量"
-              action={<Tooltip title="访问量是关键指标"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
               total={numeral(8846).format('0,0')}
               footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
               contentHeight={46}
             >
               <MiniArea
-                color="#9f5ae0"
+                color="#975FE4"
                 height={46}
                 data={visitData}
               />
@@ -218,7 +218,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="支付笔数"
-              action={<Tooltip title="支付笔数反应交易质量"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
               total={numeral(6560).format('0,0')}
               footer={<Field label="转化率" value="60%" />}
               contentHeight={46}
@@ -232,8 +232,8 @@ export default class Analysis extends Component {
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
-              title="线上购物转化率"
-              action={<Tooltip title="购买效率"><Icon type="exclamation-circle-o" /></Tooltip>}
+              title="运营活动效果"
+              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
               total="78%"
               footer={
                 <Trend mini={['xlg', 'md']}>
@@ -243,7 +243,7 @@ export default class Analysis extends Component {
               }
               contentHeight={46}
             >
-              <MiniProgress percent={78} strokeWidth={8} target={80} color="#5DD1DD" />
+              <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
             </ChartCard>
           </Col>
         </Row>
@@ -255,11 +255,11 @@ export default class Analysis extends Component {
           <div className={styles.salesCard}>
             <Tabs tabBarExtraContent={salesExtra}>
               <TabPane tab="销售额" key="sales">
-                <Row gutter={72}>
+                <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesBar}>
                       <Bar
-                        height={292}
+                        height={295}
                         title="销售额趋势"
                         data={salesData}
                       />
@@ -327,7 +327,7 @@ export default class Analysis extends Component {
               <Row gutter={68}>
                 <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
                   <NumberInfo
-                    subTitle={<span>搜索用户数量 <Icon style={{ marginLeft: 8 }} type="info-circle-o" /></span>}
+                    subTitle={<span>搜索用户数 <Icon style={{ marginLeft: 8 }} type="info-circle-o" /></span>}
                     total={numeral(12321).format('0,0')}
                     status="up"
                     subTotal={17.1}
@@ -397,7 +397,7 @@ export default class Analysis extends Component {
                   total={yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))}
                   data={salesPieData}
                   valueFormat={val => yuan(val)}
-                  height={294}
+                  height={314}
                 />
               </div>
             </Card>
@@ -407,8 +407,8 @@ export default class Analysis extends Component {
         <Card
           className={styles.offlineCard}
           bordered={false}
-          bodyStyle={{ padding: '0 0 24px 0' }}
-          style={{ marginTop: 24 }}
+          bodyStyle={{ padding: '0 0 32px 0' }}
+          style={{ marginTop: 32 }}
         >
           <Tabs
             activeKey={activeKey}

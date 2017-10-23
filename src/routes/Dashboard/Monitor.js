@@ -39,26 +39,26 @@ export default class Monitor extends PureComponent {
           <Col xl={18} lg={24} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card title="活动实时交易情况" bordered={false}>
               <Row>
-                <Col sm={6} xs={12}>
+                <Col md={6} sm={12} xs={24}>
                   <NumberInfo
                     subTitle="今日交易总额"
                     suffix="元"
                     total={numeral(124543233).format('0,0')}
                   />
                 </Col>
-                <Col sm={6} xs={12}>
+                <Col md={6} sm={12} xs={24}>
                   <NumberInfo
                     subTitle="销售目标完成率"
                     total="92%"
                   />
                 </Col>
-                <Col sm={6} xs={12}>
+                <Col md={6} sm={12} xs={24}>
                   <NumberInfo
                     subTitle="活动剩余时间"
                     total={<CountDown target={targetTime} />}
                   />
                 </Col>
-                <Col sm={6} xs={12}>
+                <Col md={6} sm={12} xs={24}>
                   <NumberInfo
                     subTitle="每秒交易总额"
                     suffix="元"
@@ -96,7 +96,7 @@ export default class Monitor extends PureComponent {
                       return '';
                   }
                 }}
-                title="核销率"
+                title="跳出率"
                 height={180}
                 percent={87}
               />
@@ -104,7 +104,7 @@ export default class Monitor extends PureComponent {
           </Col>
         </Row>
         <Row gutter={24}>
-          <Col lg={12} sm={24} xs={24}>
+          <Col xl={8} lg={24} sm={24} xs={24}>
             <Card
               title="各品类占比"
               style={{ marginBottom: 24 }}
@@ -113,6 +113,7 @@ export default class Monitor extends PureComponent {
               <Row gutter={4} style={{ padding: '18px 0 19px 0' }}>
                 <Col span={8}>
                   <Pie
+                    animate={false}
                     percent={28}
                     subTitle="中式快餐"
                     total="28%"
@@ -121,6 +122,7 @@ export default class Monitor extends PureComponent {
                 </Col>
                 <Col span={8}>
                   <Pie
+                    animate={false}
                     color="#5DDECF"
                     percent={22}
                     subTitle="西餐"
@@ -130,6 +132,7 @@ export default class Monitor extends PureComponent {
                 </Col>
                 <Col span={8}>
                   <Pie
+                    animate={false}
                     color="#2FC25B"
                     percent={32}
                     subTitle="火锅"
@@ -140,7 +143,7 @@ export default class Monitor extends PureComponent {
               </Row>
             </Card>
           </Col>
-          <Col lg={6} sm={12} xs={24} style={{ marginBottom: 24 }}>
+          <Col xl={8} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card title="热门搜索" bordered={false}>
               <TagCloud
                 data={tags}
@@ -148,7 +151,7 @@ export default class Monitor extends PureComponent {
               />
             </Card>
           </Col>
-          <Col lg={6} sm={12} xs={24} style={{ marginBottom: 24 }}>
+          <Col xl={8} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card title="资源剩余" bodyStyle={{ textAlign: 'center' }} bordered={false}>
               <WaterWave
                 height={161}

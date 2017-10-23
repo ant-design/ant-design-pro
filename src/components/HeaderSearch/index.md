@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: HeaderSearch
 subtitle: 顶部搜索框

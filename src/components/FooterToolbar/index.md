@@ -1,5 +1,4 @@
 ---
-category: Components
 type: General
 title: FooterToolbar
 subtitle: 底部工具栏

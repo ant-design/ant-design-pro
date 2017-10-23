@@ -21,8 +21,8 @@ for (let i = 0; i < 20; i += 1) {
 }
 
 ReactDOM.render(
-  <Row gutter={16}>
-    <Col span={8}>
+  <Row>
+    <Col span={24}>
       <ChartCard
         title="搜索用户数量"
         contentHeight={134}
@@ -41,7 +41,7 @@ ReactDOM.render(
         />
       </ChartCard>
     </Col>  
-    <Col span={8}>
+    <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
         title="访问量"
         action={<Tooltip title="访问量是关键指标"><Icon type="exclamation-circle-o" /></Tooltip>}
@@ -55,7 +55,7 @@ ReactDOM.render(
         />
       </ChartCard>
     </Col>  
-    <Col span={8}>
+    <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
         title="线上购物转化率"
         action={<Tooltip title="购买效率"><Icon type="exclamation-circle-o" /></Tooltip>}

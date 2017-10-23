@@ -6,11 +6,11 @@ import config from './typeConfig';
 import styles from './index.less';
 
 
-export default ({ className, type, title, desc, img, actions }) => {
+export default ({ className, type, title, desc, img, actions, ...rest }) => {
   const pageType = type in config ? type : '404';
   const clsString = classNames(styles.exception, className);
   return (
-    <div className={clsString}>
+    <div className={clsString} {...rest}>
       <div className={styles.imgBlock}>
         <div
           className={styles.imgEle}

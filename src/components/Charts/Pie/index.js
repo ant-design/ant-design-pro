@@ -59,7 +59,10 @@ class Pie extends Component {
       margin, percent, color,
       inner = 0.75,
       animate = true,
+      colors,
     } = this.props;
+
+    const defaultColors = colors || ['#8543E0', '#F04864', '#FACC14', '#1890FF', '#13C2C2', '#2FC25B'];
 
     let selected = this.props.selected || true;
     let tooltip = this.props.tooltips || true;
@@ -146,7 +149,11 @@ class Pie extends Component {
       inner,
     });
 
-    chart.intervalStack().position(Stat.summary.percent('y')).color('x', formatColor).selected(selected);
+    if (percent) {
+      chart.intervalStack().position(Stat.summary.percent('y')).color('x', formatColor).selected(selected);
+    } else {
+      chart.intervalStack().position(Stat.summary.percent('y')).color('x', defaultColors).selected(selected);
+    }
     chart.render();
 
     this.chart = chart;

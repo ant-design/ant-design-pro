@@ -7,6 +7,12 @@
   .tabs {
     padding: 0 2px;
     margin: 0 -2px;
+    :global {
+      .ant-tabs-tab {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
   }
 
   :global {
@@ -17,7 +23,7 @@
     }
 
     .ant-form-item {
-      margin-bottom: 16px;
+      margin-bottom: 24px;
     }
   }
 
@@ -35,7 +41,13 @@
 
     .submit {
       width: 100%;
-      margin-top: 16px;
+      margin-top: 24px;
+    }
+
+    :global {
+      .ant-form-item-control {
+        line-height: 22px;
+      }
     }
   }
 
@@ -75,7 +87,8 @@
 
   .other {
     text-align: left;
-    margin-top: 32px;
+    margin-top: 24px;
+    line-height: 22px;
 
     .register {
       float: right;

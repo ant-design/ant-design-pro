@@ -25,7 +25,7 @@ export default class CardList extends PureComponent {
 
     const content = (
       <div className={styles.pageHeaderContent}>
-        <p>段落示意：蚂蚁金服务设计平台-design.alipay.com，用最小的工作量，无缝接入蚂蚁金服生态，
+        <p>段落示意：蚂蚁金服务设计平台 design.alipay.com，用最小的工作量，无缝接入蚂蚁金服生态，
           提供跨越设计与开发的体验解决方案。
         </p>
         <div className={styles.contentLink}>
@@ -44,13 +44,13 @@ export default class CardList extends PureComponent {
 
     const extraContent = (
       <div className={styles.extraImg}>
-        <img alt="这是一个标题" src="https://gw.alipayobjects.com/zos/rmsportal/QfpzdhbrqRtdSyZHKhjp.png" />
+        <img alt="这是一个标题" src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png" />
       </div>
     );
 
     return (
       <PageHeaderLayout
-        title="这是一个标题"
+        title="卡片列表"
         content={content}
         extraContent={extraContent}
       >
@@ -58,12 +58,12 @@ export default class CardList extends PureComponent {
           <List
             rowKey="id"
             loading={loading}
-            grid={{ gutter: 16, lg: 3, md: 2, sm: 1, xs: 1 }}
+            grid={{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1 }}
             dataSource={['', ...list]}
             renderItem={item => (item ? (
               <List.Item key={item.id}>
-                <Link to="/list/card-list">
-                  <Card actions={[<a>操作一</a>, <a>操作二</a>]}>
+                <Card hoverable actions={[<a>操作一</a>, <a>操作二</a>]}>
+                  <Link to="/list/card-list">
                     <Card.Meta
                       avatar={<Avatar size="large" src={item.avatar} />}
                       title={item.title}
@@ -73,8 +73,8 @@ export default class CardList extends PureComponent {
                         </p>
                       )}
                     />
-                  </Card>
-                </Link>
+                  </Link>
+                </Card>
               </List.Item>
               ) : (
                 <List.Item>

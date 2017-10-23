@@ -62,7 +62,7 @@ const proxy = {
     res.send('Ok');
   },
   'GET /api/tags': mockjs.mock({
-    'list|100': [{ name: '@city', 'value|1-100': 50, 'type|0-2': 1 }]
+    'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }]
   }),
   'GET /api/fake_list': getFakeList,
   'GET /api/fake_chart_data': getFakeChartData,

@@ -2,6 +2,7 @@
 @import "../../utils/utils.less";
 
 .tableList {
+  padding-bottom: 8px;
   .tableListOperator {
     margin-bottom: 16px;
     button {
@@ -10,14 +11,23 @@
   }
 }
 
+.tableListForm :global(.ant-form-item) {
+  margin-right: 48px;
+  margin-bottom: 8px;
+}
+
 .formButton {
-  margin-left: 40px;
-  position: relative;
-  top: 2px;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: @screen-lg) {
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 24px;
+  }
 }
 
 @media screen and (max-width: @screen-md) {
-  .formButton {
-    margin-left: 0;
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 8px;
   }
 }

@@ -98,7 +98,7 @@ export default class BasicList extends PureComponent {
           <Card bordered={false}>
             <Row>
               <Col sm={8} xs={24}>
-                <Info title="我的代办" value="8个任务" bordered />
+                <Info title="我的待办" value="8个任务" bordered />
               </Col>
               <Col sm={8} xs={24}>
                 <Info title="本周任务平均处理时间" value="32分钟" bordered />
@@ -110,15 +110,18 @@ export default class BasicList extends PureComponent {
           </Card>
 
           <Card
+            className={styles.listCard}
             bordered={false}
-            title="基础列表"
-            style={{ marginTop: 16 }}
+            title="标准列表"
+            style={{ marginTop: 24 }}
+            bodyStyle={{ padding: '0 32px 40px 32px' }}
             extra={extraContent}
           >
-            <Button type="dashed" style={{ width: '100%' }}>
+            <Button type="dashed" style={{ width: '100%', marginBottom: 12 }}>
               <Icon type="plus" /> 添加
             </Button>
             <List
+              size="large"
               rowKey="id"
               loading={loading}
               pagination={paginationProps}

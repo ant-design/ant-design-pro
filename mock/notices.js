@@ -56,8 +56,8 @@ export default {
       id: '000000009',
       title: '任务名称',
       description: '任务需要在 2017-01-12 20:00 前启动',
-      extra: '马上到期',
-      status: 'urgent',
+      extra: '未开始',
+      status: 'todo',
       type: '待办',
     }, {
       id: '000000010',

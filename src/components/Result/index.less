@@ -6,9 +6,9 @@
   margin: 0 auto;
 
   .icon {
-    font-size: 72px;
-    line-height: 72px;
-    margin-bottom: 24px;
+    font-size: 64px;
+    line-height: 64px;
+    margin-bottom: 32px;
 
     & > .success {
       color: @success-color;
@@ -20,28 +20,33 @@
   }
 
   .title {
-    font-size: 24px;
+    font-size: 20px;
     color: @heading-color;
     font-weight: 500;
-    line-height: 32px;
+    line-height: 28px;
     margin-bottom: 8px;
   }
 
   .description {
     font-size: 14px;
+    line-height: 22px;
     color: @text-color-secondary;
     margin-bottom: 16px;
   }
 
   .extra {
-    background: rgba(245, 245, 245, 0.5);
+    background: #fafafa;
     padding: 16px 40px;
-    margin-bottom: 24px;
+    margin-top: 16px;
     border-radius: @border-radius-sm;
     text-align: left;
   }
 
-  .actions button:not(:last-child) {
-    margin-right: 8px;
+  .actions {
+    margin-top: 40px;
+
+    button:not(:last-child) {
+      margin-right: 8px;
+    }
   }
 }

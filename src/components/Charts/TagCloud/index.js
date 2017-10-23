@@ -1,10 +1,16 @@
 import React, { PureComponent } from 'react';
+import classNames from 'classNames';
 import G2 from 'g2';
 import Cloud from 'g-cloud';
+
+import styles from './index.less';
 
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-param-reassign: 0 */
 /* eslint no-return-assign: 0 */
+
+const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
+// const imgUrl = 'https://zos.alipayobjects.com/rmsportal/EEFqYWuloqIHRnh.jpg';
 
 class TagCloud extends PureComponent {
   componentDidMount() {
@@ -25,7 +31,8 @@ class TagCloud extends PureComponent {
       const textAttrs = Util.mix(true, {}, {
         fillOpacity: cfg.opacity,
         fontSize: cfg.size,
-        rotate: 0, // cfg.origin._origin.rotate,
+        rotate: cfg.origin._origin.rotate,
+        // rotate: cfg.origin._origin.rotate,
         text: cfg.origin._origin.text,
         textAlign: 'center',
         fill: cfg.color,
@@ -55,10 +62,12 @@ class TagCloud extends PureComponent {
       return;
     }
 
-    const { height } = this.props;
+    const colors = ['#1890FF', '#41D9C7', '#2FC25B', '#FACC14', '#9AE65C'];
+
+    const height = this.props.height * 4;
     let width = 0;
     if (this.root) {
-      width = this.root.offsetWidth;
+      width = this.root.offsetWidth * 4;
     }
 
     // clean
@@ -77,53 +86,61 @@ class TagCloud extends PureComponent {
       width,
       height,
 
-      // 设定文字大小配置函数(默认为12-40px的随机大小)
-      size: words => (((words.value - min) / (max - min)) * 12) + 6,
+      rotate: () => 0,
+
+      // 设定文字大小配置函数(默认为12-24px的随机大小)
+      size: words => (((words.value - min) / (max - min)) * 50) + 30,
 
       // 设定文字内容
       text: words => words.name,
     });
 
-    // 执行词云布局函数，并在回调函数中调用G2对结果进行绘制
-    layout.exec((texts) => {
-      const chart = new G2.Chart({
-        container: this.node,
-        width,
-        height,
-        plotCfg: {
-          margin: 0,
-        },
-      });
-
-      chart.legend(false);
-      chart.axis(false);
-      chart.tooltip(false);
-
-      chart.source(texts);
-
-      // 将词云坐标系调整为G2的坐标系
-      chart.coord().reflect();
-
-      chart
-        .point()
-        .position('x*y')
-        .color('text')
-        .size('size', size => size)
-        .shape('cloud')
-        .style({
-          fontStyle: texts[0].style,
-          fontFamily: texts[0].font,
-          fontWeight: texts[0].weight,
+    layout.image(imgUrl, (imageCloud) => {
+      // 执行词云布局函数，并在回调函数中调用G2对结果进行绘制
+      imageCloud.exec((texts) => {
+        const chart = new G2.Chart({
+          container: this.node,
+          width,
+          height,
+          plotCfg: {
+            margin: 0,
+          },
         });
 
-      chart.render();
+        chart.legend(false);
+        chart.axis(false);
+        chart.tooltip(false);
+
+        chart.source(texts);
+
+        // 将词云坐标系调整为G2的坐标系
+        chart.coord().reflect();
+
+        chart
+          .point()
+          .position('x*y')
+          .color('text', colors)
+          .size('size', size => size)
+          .shape('cloud')
+          .style({
+            fontStyle: texts[0].style,
+            fontFamily: texts[0].font,
+            fontWeight: texts[0].weight,
+          });
+
+        chart.render();
+      });
     });
   }
 
   render() {
     return (
-      <div ref={n => (this.root = n)} style={{ width: '100%' }}>
-        <div ref={n => (this.node = n)} />
+      <div
+        className={classNames(styles.tagCloud, this.props.className)}
+        ref={n => (this.root = n)}
+        style={{ width: '100%' }}
+      >
+        <div ref={n => (this.node = n)} style={{ height: this.props.height }} />
       </div>
     );
   }

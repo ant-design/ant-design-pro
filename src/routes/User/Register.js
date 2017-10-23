@@ -34,7 +34,7 @@ export default class Register extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.register.status === 'ok') {
-      this.props.dispatch(routerRedux.push('/'));
+      this.props.dispatch(routerRedux.push('/user/register-result'));
     }
   }
 
@@ -154,7 +154,7 @@ export default class Register extends Component {
                 type: 'email', message: '邮箱地址格式错误！',
               }],
             })(
-              <Input placeholder="邮箱" />
+              <Input size="large" placeholder="邮箱" />
             )}
           </FormItem>
           <FormItem help={this.state.help}>
@@ -176,6 +176,7 @@ export default class Register extends Component {
                 }],
               })(
                 <Input
+                  size="large"
                   type="password"
                   placeholder="至少6位密码，区分大小写"
                 />
@@ -191,24 +192,25 @@ export default class Register extends Component {
               }],
             })(
               <Input
+                size="large"
                 type="password"
                 placeholder="确认密码"
               />
             )}
           </FormItem>
           <FormItem>
-            <InputGroup className={styles.mobileGroup} compact>
-              <FormItem>
+            <InputGroup size="large" className={styles.mobileGroup} compact>
+              <FormItem style={{ width: '20%' }}>
                 {getFieldDecorator('prefix', {
                   initialValue: '86',
                 })(
-                  <Select>
+                  <Select size="large">
                     <Option value="86">+86</Option>
                     <Option value="87">+87</Option>
                   </Select>
                 )}
               </FormItem>
-              <FormItem>
+              <FormItem style={{ width: '80%' }}>
                 {getFieldDecorator('mobile', {
                   rules: [{
                     required: true, message: '请输入手机号！',
@@ -230,12 +232,14 @@ export default class Register extends Component {
                   }],
                 })(
                   <Input
+                    size="large"
                     placeholder="验证码"
                   />
                 )}
               </Col>
               <Col span={8}>
                 <Button
+                  size="large"
                   disabled={count}
                   className={styles.getCaptcha}
                   onClick={this.onGetCaptcha}
@@ -246,7 +250,7 @@ export default class Register extends Component {
             </Row>
           </FormItem>
           <FormItem>
-            <Button loading={register.submitting} className={styles.submit} type="primary" htmlType="submit">
+            <Button size="large" loading={register.submitting} className={styles.submit} type="primary" htmlType="submit">
               注册
             </Button>
             <Link className={styles.login} to="/user/login">使用已有账户登录</Link>

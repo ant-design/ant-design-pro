@@ -2,6 +2,7 @@
 @import "../../utils/utils.less";
 
 .cardList {
+  margin-bottom: -24px;
   :global {
     .ant-card-meta-content {
       margin-top: 0;
@@ -19,14 +20,11 @@
 }
 
 .newButton {
-  background-color: transparent;
+  background-color: #fff;
   border-color: @border-color-base;
   color: @text-color-secondary;
   width: 100%;
-  height: 178px;
-  &:hover {
-    background-color: transparent;
-  }
+  height: 185px;
 }
 
 .cardDescription {
@@ -42,6 +40,9 @@
   margin-top: 16px;
   a {
     margin-right: 32px;
+    img {
+      width: 24px;
+    }
   }
   img {
     vertical-align: middle;
@@ -54,6 +55,11 @@
     a {
       margin-right: 16px;
     }
+  }
+}
+@media screen and (max-width: @screen-md) {
+  .extraImg {
+    display: none;
   }
 }
 

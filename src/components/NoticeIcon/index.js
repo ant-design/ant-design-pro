@@ -17,6 +17,7 @@ export default class NoticeIcon extends PureComponent {
       emptyText: '暂无数据',
       clear: '清空',
     },
+    emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
   static Tab = TabPane;
   constructor(props) {
@@ -45,6 +46,7 @@ export default class NoticeIcon extends PureComponent {
       return (
         <TabPane tab={title} key={child.props.title}>
           <List
+            {...child.props}
             data={child.props.list}
             onClick={item => this.onItemClick(item, child.props)}
             onClear={() => this.props.onClear(child.props.title)}
