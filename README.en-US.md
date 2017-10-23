@@ -17,39 +17,39 @@ An out-of-box UI solution for enterprise applications.
 
 - :gem: Neat Design
 
-  Follow Ant Design specification
+   Follow Ant Design specification
 
 - :triangular_ruler: Common templates
 
-  Typical templates for enterprise applications
+   Typical templates for enterprise applications
 
 - :rocket: State of The Art Development
 
-  Newest development stack of React/dva/antd
+   Newest development stack of React/dva/antd
 
 - :iphone: Responsive
 
-  Designed for varies of screen size
+   Designed for varies of screen size
 
 - :art: Themeing
 
-  Customizable theme with simple config
+   Customizable theme with simple config
 
 - :globe_with_meridians: International
 
-  Built-in i18n solution
+   Built-in i18n solution
 
 - :gear: Best Practice
 
-  Solid workflow make your code health
+   Solid workflow make your code health
 
 - :1234: Mock development
 
-  Easy to use mock development solution
+   Easy to use mock development solution
 
 - :white_check_mark: UI Test
 
-  Fly safely with unit test and e2e test
+   Fly safely with unit test and e2e test
 
 ## Usage
 
