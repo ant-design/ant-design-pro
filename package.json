@@ -85,7 +85,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx}": "lint-staged:js",
-    "src/**/*.less": "stylelint --syntax less",
+    "**/*.less": "stylelint --syntax less",
     "src/**/demo/*.md": "lint-staged:demo"
   }
 }
