@@ -2,7 +2,7 @@
   "name": "ant-design-pro",
   "private": true,
   "scripts": {
-    "precommit": "npm run lint",
+    "precommit": "npm run lint-staged",
     "start": "roadhog server",
     "start:no-proxy": "NO_PROXY=true roadhog server",
     "build": "roadhog build",
@@ -10,6 +10,8 @@
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
     "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
+    "lint-staged": "lint-staged",
+    "lint-staged:js": "eslint --ext .js",
     "test": "jest",
     "test:all": "node ./tests/run-tests.js"
   },
@@ -45,6 +47,7 @@
     "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
     "jest": "^21.0.1",
+    "lint-staged": "^4.3.0",
     "mockjs": "^1.0.1-beta3",
     "nightmare": "^2.10.0",
     "react-test-renderer": "^15.6.2",
@@ -79,5 +82,10 @@
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/tests/styleMock.js"
     }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": "lint-staged:js",
+    "**/*.less": "stylelint --syntax less",
+    "src/**/demo/*.md": "lint-staged:demo"
   }
 }
