@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "antd": "next",
+    "classnames": "^2.2.5",
     "dva": "^1.2.1",
     "lodash": "^4.17.4",
     "numeral": "^2.0.6",
