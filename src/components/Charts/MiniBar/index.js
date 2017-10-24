@@ -42,7 +42,7 @@ class MiniBar extends PureComponent {
       forceFit: fit,
       height: height + 54,
       plotCfg: {
-        margin: [36, 0, 30, 0],
+        margin: [36, 5, 30, 5],
       },
       legend: null,
     });

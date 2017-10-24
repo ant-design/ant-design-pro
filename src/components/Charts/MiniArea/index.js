@@ -41,7 +41,7 @@ class MiniArea extends PureComponent {
       height: height + 54,
       animate,
       plotCfg: {
-        margin: [36, 0, 30, 0],
+        margin: [36, 5, 30, 5],
       },
       legend: null,
     });
@@ -74,27 +74,21 @@ class MiniArea extends PureComponent {
       },
     };
 
-    const view = chart.createView();
-    view.tooltip({
+    chart.tooltip({
       title: null,
       crosshairs: false,
       map: {
-        name: 'y',
+        title: null,
+        name: 'x',
+        value: 'y',
       },
     });
 
+    const view = chart.createView();
     view.source(data, dataConfig);
 
     view.area().position('x*y').color(color).shape('smooth')
       .style({ fillOpacity: 1 });
-
-    chart.on('tooltipchange', (ev) => {
-      const item = ev.items[0];
-      const { title } = item;
-      item.title = '';
-      item.name = '';
-      item.value = `${title} : ${item.value}`;
-    });
 
     if (line) {
       const view2 = chart.createView();
