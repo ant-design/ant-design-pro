@@ -161,7 +161,7 @@ export default class Analysis extends Component {
         <Col span={12} style={{ paddingTop: 36 }}>
           <Pie
             animate={false}
-            color={(currentKey !== data.name) && '#99d5fd'}
+            color={(currentKey !== data.name) && '#BDE4FF'}
             inner={0.55}
             tooltip={false}
             margin={[0, 0, 0, 0]}
@@ -386,7 +386,7 @@ export default class Analysis extends Component {
               )}
               style={{ marginTop: 24 }}
             >
-              <div style={{ marginTop: 32, marginBottom: 108 }}>
+              <div style={{ marginTop: 32, marginBottom: 100 }}>
                 <Pie
                   hasLegend
                   title="销售额"
@@ -394,7 +394,8 @@ export default class Analysis extends Component {
                   total={yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))}
                   data={salesPieData}
                   valueFormat={val => yuan(val)}
-                  height={260}
+                  height={268}
+                  lineWidth={4}
                 />
               </div>
             </Card>

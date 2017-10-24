@@ -56,7 +56,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
 | title | 图表标题 | ReactNode\|string | - |
-| color | 图表颜色 | string | `#rgba(24, 144, 255, 0.85)` |
+| color | 图表颜色 | string | `rgba(24, 144, 255, 0.85)` |
 | margin | 图表内部间距 | array | \[32, 0, 32, 40\] |
 | height | 图表高度 | number | - |
 | data | 数据 | array<{x, y}> | - |
@@ -66,7 +66,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
 | animate | 是否显示动画 | boolean | true |
-| color | 图表颜色 | string | `#0096fa` |
+| color | 图表颜色 | string | `rgba(24, 144, 255, 0.85)` |
 | height | 图表高度 | number | - |
 | hasLegend | 是否显示 legend | boolean | `false` |
 | margin | 图表内部间距 | array | \[32, 0, 32, 40\] |
