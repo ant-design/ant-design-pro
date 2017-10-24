@@ -11,7 +11,7 @@ import styles from './AdvancedProfile.less';
 const { Step } = Steps;
 const { Description } = DescriptionList;
 
-const getWindowWidth = () => (window.innerWidth || document.documentElement.documentElement);
+const getWindowWidth = () => (window.innerWidth || document.documentElement.clientWidth);
 
 const menu = (
   <Menu>
