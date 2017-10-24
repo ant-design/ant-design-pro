@@ -1,5 +1,6 @@
 {
   "name": "ant-design-pro",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "precommit": "npm run lint-staged",

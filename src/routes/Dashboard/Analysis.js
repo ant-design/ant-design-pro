@@ -80,6 +80,7 @@ export default class Analysis extends Component {
     const { chart } = this.props;
     const {
       visitData,
+      visitData2,
       salesData,
       searchData,
       offlineData,
@@ -187,13 +188,13 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="总销售额"
-              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total={yuan(126560)}
-              footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
+              footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
               contentHeight={46}
             >
               <Trend colorType="gray" mini={['xlg', 'md']}>
-                <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
+                <Trend.Item title="周同比" flag="up">12%</Trend.Item>
                 <Trend.Item title="日环比" flag="down">11%</Trend.Item>
               </Trend>
             </ChartCard>
@@ -202,7 +203,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="访问量"
-              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total={numeral(8846).format('0,0')}
               footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
               contentHeight={46}
@@ -218,7 +219,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="支付笔数"
-              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total={numeral(6560).format('0,0')}
               footer={<Field label="转化率" value="60%" />}
               contentHeight={46}
@@ -233,7 +234,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="运营活动效果"
-              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total="78%"
               footer={
                 <Trend mini={['xlg', 'md']}>
@@ -253,7 +254,7 @@ export default class Analysis extends Component {
           bodyStyle={{ padding: 0 }}
         >
           <div className={styles.salesCard}>
-            <Tabs tabBarExtraContent={salesExtra}>
+            <Tabs tabBarExtraContent={salesExtra} size="large" tabBarStyle={{ marginBottom: 24 }}>
               <TabPane tab="销售额" key="sales">
                 <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
@@ -334,10 +335,8 @@ export default class Analysis extends Component {
                   />
                   <MiniArea
                     line
-                    borderColor="#00a2fc"
-                    color="#c9eafe"
                     height={45}
-                    data={visitData}
+                    data={visitData2}
                   />
                 </Col>
                 <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
@@ -349,10 +348,8 @@ export default class Analysis extends Component {
                   />
                   <MiniArea
                     line
-                    borderColor="#00a2fc"
-                    color="#c9eafe"
                     height={45}
-                    data={visitData}
+                    data={visitData2}
                   />
                 </Col>
               </Row>

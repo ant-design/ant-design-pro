@@ -5,6 +5,7 @@ export default {
 
   state: {
     visitData: [],
+    visitData2: [],
     salesData: [],
     searchData: [],
     offlineData: [],
@@ -50,6 +51,7 @@ export default {
     clear() {
       return {
         visitData: [],
+        visitData2: [],
         salesData: [],
         searchData: [],
         offlineData: [],

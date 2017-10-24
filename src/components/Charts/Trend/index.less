@@ -11,7 +11,7 @@
 
 .trendItem {
   display: inline-block;
-  margin-right: 16px;
+  margin-right: 24px;
   color: @text-color;
   font-size: @font-size-base;
   line-height: 22px;
@@ -26,12 +26,11 @@
     margin-right: 8px;
   }
   .value {
-    color: @text-color;
-    font-weight: 600;
+    color: @heading-color;
   }
   .up, .down {
-    color: #00a854;
-    margin-right: 4px;
+    color: @green-6;
+    margin-left: 4px;
     position: relative;
     top: 1px;
     i {
@@ -40,7 +39,7 @@
     }
   }
   .down {
-    color: #f04134;
+    color: @red-6;
     top: -1px;
   }
 }
@@ -52,7 +51,7 @@
 .trendgray {
   .trend();
   .trendItem {
-    color: @text-color-secondary;
+    color: @text-color;
   }
 }
 

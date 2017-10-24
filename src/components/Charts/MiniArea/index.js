@@ -4,6 +4,11 @@ import equal from '../equal';
 import styles from '../index.less';
 
 class MiniArea extends PureComponent {
+  static defaultProps = {
+    borderColor: '#1890FF',
+    color: 'rgba(24, 144, 255, 0.2)',
+  };
+
   componentDidMount() {
     this.renderChart(this.props.data);
   }
@@ -25,7 +30,9 @@ class MiniArea extends PureComponent {
   }
 
   renderChart(data) {
-    const { height = 0, fit = true, color = '#33abfb', borderWidth = 1, line, xAxis, yAxis, animate = true } = this.props;
+    const {
+      height = 0, fit = true, color, borderWidth = 2, line, xAxis, yAxis, animate = true,
+    } = this.props;
     const borderColor = this.props.borderColor || color;
 
     if (!data || (data && data.length < 1)) {

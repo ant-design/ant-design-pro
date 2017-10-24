@@ -43,8 +43,8 @@ const Item = ({ title, flag, children, ...rest }, { mini }) => {
     <div {...rest} className={clsString}>
       <div className={styles.content}>
         <span className={styles.title}>{title}</span>
-        { flag && <span className={styles[flag]}><Icon type={`caret-${flag}`} /></span>}
         <span className={styles.value}>{children}</span>
+        {flag && <span className={styles[flag]}><Icon type={`caret-${flag}`} /></span>}
       </div>
       <div className={styles.miniContent}>
         {miniContent}
@@ -70,7 +70,10 @@ class Trend extends React.Component {
   render() {
     const { colorType, children, mini, ...rest } = this.props;
     return (
-      <div className={colorType ? (styles[`trend${colorType}`] || styles.trend) : styles.trend} {...rest}>
+      <div
+        className={colorType ? (styles[`trend${colorType}`] || styles.trend) : styles.trend}
+        {...rest}
+      >
         {children}
       </div>
     );
