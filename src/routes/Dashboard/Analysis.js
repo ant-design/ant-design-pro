@@ -386,7 +386,7 @@ export default class Analysis extends Component {
               )}
               style={{ marginTop: 24 }}
             >
-              <div style={{ marginTop: 32, marginBottom: 54 }}>
+              <div style={{ marginTop: 32, marginBottom: 108 }}>
                 <Pie
                   hasLegend
                   title="销售额"
@@ -394,7 +394,7 @@ export default class Analysis extends Component {
                   total={yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))}
                   data={salesPieData}
                   valueFormat={val => yuan(val)}
-                  height={314}
+                  height={260}
                 />
               </div>
             </Card>

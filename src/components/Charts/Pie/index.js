@@ -192,7 +192,7 @@ class Pie extends Component {
     return (
       <div className={styles.pie} style={{ height }}>
         <div>
-          { title && <h4 className={styles.title}>{title}</h4>}
+          {title && <h4 className={styles.title}>{title}</h4>}
           <div className={styles.content}>
             <div ref={this.handleRef} />
             {
