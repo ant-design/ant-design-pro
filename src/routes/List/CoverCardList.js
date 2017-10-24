@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
-import { Link, routerRedux } from 'dva/router';
+import { routerRedux } from 'dva/router';
 import { Row, Col, Form, Card, Select, List, Input } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -78,33 +78,31 @@ export default class CoverCardList extends PureComponent {
         dataSource={list}
         renderItem={item => (
           <List.Item>
-            <Link>
-              <Card
-                hoverable
-                cover={<img alt={item.title} src={item.cover} />}
-              >
-                <Card.Meta
-                  title={item.title}
-                  description={item.subDescription}
-                />
-                <div className={styles.cardItemContent}>
-                  <span>{moment(item.updatedAt).fromNow()}</span>
-                  <div className={styles.avatarList}>
-                    <AvatarList size="mini">
-                      {
-                        item.members.map((member, i) => (
-                          <AvatarList.Item
-                            key={`${item.id}-avatar-${i}`}
-                            src={member.avatar}
-                            tips={member.name}
-                          />
-                        ))
-                      }
-                    </AvatarList>
-                  </div>
+            <Card
+              hoverable
+              cover={<img alt={item.title} src={item.cover} />}
+            >
+              <Card.Meta
+                title={item.title}
+                description={item.subDescription}
+              />
+              <div className={styles.cardItemContent}>
+                <span>{moment(item.updatedAt).fromNow()}</span>
+                <div className={styles.avatarList}>
+                  <AvatarList size="mini">
+                    {
+                      item.members.map((member, i) => (
+                        <AvatarList.Item
+                          key={`${item.id}-avatar-${i}`}
+                          src={member.avatar}
+                          tips={member.name}
+                        />
+                      ))
+                    }
+                  </AvatarList>
                 </div>
-              </Card>
-            </Link>
+              </div>
+            </Card>
           </List.Item>
         )}
       />

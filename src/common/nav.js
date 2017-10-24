@@ -34,6 +34,7 @@ import RegisterResult from '../routes/User/RegisterResult';
 
 const data = [{
   component: BasicLayout,
+  layout: 'BasicLayout',
   name: '首页', // for breadcrumb
   path: '',
   children: [{
@@ -152,6 +153,7 @@ const data = [{
   }],
 }, {
   component: UserLayout,
+  layout: 'UserLayout',
   children: [{
     name: '帐户',
     icon: 'user',
