@@ -75,6 +75,17 @@ export default class Analysis extends Component {
     });
   }
 
+  isActive(type) {
+    const { rangePickerValue } = this.state;
+    const value = getTimeDistance(type);
+    if (!rangePickerValue[0] || !rangePickerValue[1]) {
+      return;
+    }
+    if (rangePickerValue[0].isSame(value[0], 'day') && rangePickerValue[1].isSame(value[1], 'day')) {
+      return styles.currentDate;
+    }
+  }
+
   render() {
     const { rangePickerValue, salesType, currentTabKey } = this.state;
     const { chart } = this.props;
@@ -104,10 +115,18 @@ export default class Analysis extends Component {
     const salesExtra = (
       <div className={styles.salesExtraWrap}>
         <div className={styles.salesExtra}>
-          <a onClick={() => this.selectDate('today')}>今日</a>
-          <a onClick={() => this.selectDate('week')}>本周</a>
-          <a onClick={() => this.selectDate('month')}>本月</a>
-          <a onClick={() => this.selectDate('year')}>全年</a>
+          <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
+            今日
+          </a>
+          <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
+            本周
+          </a>
+          <a className={this.isActive('month')} onClick={() => this.selectDate('month')}>
+            本月
+          </a>
+          <a className={this.isActive('year')} onClick={() => this.selectDate('year')}>
+            全年
+          </a>
         </div>
         <RangePicker
           value={rangePickerValue}
