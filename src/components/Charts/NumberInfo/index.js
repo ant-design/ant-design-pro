@@ -22,8 +22,8 @@ export default ({ theme, title, subTitle, total, subTotal, status, suffix, ...re
       {
         (status || subTotal) && (
           <span className={styles.subTotal}>
-            {status && <Icon type={`caret-${status}`} />}
             {subTotal}
+            {status && <Icon type={`caret-${status}`} />}
           </span>
         )
       }

@@ -11,11 +11,13 @@
 
 .trendItem {
   display: inline-block;
-  margin-right: 24px;
   color: @text-color;
   font-size: @font-size-base;
   line-height: 22px;
   height: 22px;
+  & + & {
+    margin-left: 16px;
+  }
   .content {
     display: block;
   }
@@ -52,110 +54,5 @@
   .trend();
   .trendItem {
     color: @text-color;
-  }
-}
-
-.mini {
-  .content {
-    display: none;
-  }
-  .miniContent {
-    display: block;
-  }
-}
-
-.reset() {
-  .trendItem {
-    .content {
-      display: block;
-    }
-    .miniContent {
-      display: none;
-    }
-  }
-}
-
-@media screen and (max-width: @screen-xxl) {
-  .reset();
-  .xxl {
-    .content {
-      display: none;
-    }
-    .miniContent {
-      display: block;
-    }
-  }
-}
-
-@media screen and (max-width: @screen-xl) {
-  .reset();
-  .xl {
-    .content {
-      display: none;
-    }
-    .miniContent {
-      display: block;
-    }
-  }
-}
-
-@media screen and (max-width: @screen-lg) {
-  .reset();
-  .lg {
-    .content {
-      display: none;
-    }
-    .miniContent {
-      display: block;
-    }
-  }
-}
-
-// xlg
-@media screen and (max-width: 1400px) {
-  .reset();
-  .xlg {
-    .content {
-      display: none;
-    }
-    .miniContent {
-      display: block;
-    }
-  }
-}
-
-@media screen and (max-width: @screen-md) {
-  .reset();
-  .md {
-    .content {
-      display: none;
-    }
-    .miniContent {
-      display: block;
-    }
-  }
-}
-
-@media screen and (max-width: @screen-sm) {
-  .reset();
-  .sm {
-    .content {
-      display: none;
-    }
-    .miniContent {
-      display: block;
-    }
-  }
-}
-
-@media screen and (max-width: @screen-xs) {
-  .reset();
-  .xs {
-    .content {
-      display: none;
-    }
-    .miniContent {
-      display: block;
-    }
   }
 }
