@@ -16,3 +16,4 @@ cols: 1
 | desc        | 补充描述    | ReactNode  | -    |
 | img         | 背景图片地址     | string  | -    |
 | actions     | 建议操作，配置此属性时默认的『返回首页』按钮不生效    | ReactNode  | -    |
+| linkElement | 定义链接的元素，默认为 `a` | string\|ReactElement | - |

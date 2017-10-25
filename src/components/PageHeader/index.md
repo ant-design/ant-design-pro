@@ -1,6 +1,6 @@
 ---
 type: General
-title: PageHeader 
+title: PageHeader
 subtitle: 页头
 cols: 1
 ---
@@ -21,5 +21,6 @@ cols: 1
 | breadcrumbList | 面包屑数据，配置了 `routes` `params` 时此属性无效 | array<{title: ReactNode, href?: string}> | - |
 | tabList | tab 标题列表 | array<{key: string, tab: ReactNode}> | -  |
 | onTabChange | 切换面板的回调 | (key) => void | -  |
+| linkElement | 定义链接的元素，默认为 `a`，可传入 react-router 的 Link | string\|ReactElement | - |
 
 > 面包屑的配置方式有两种，一是结合 `react-router`，通过配置 `routes` 及 `params` 实现，类似 [面包屑 Demo](https://ant.design/components/breadcrumb-cn/#components-breadcrumb-demo-router)；二是直接配置 `breadcrumbList`。 你也可以将 `routes` 及 `params` 放到 context 中，`PageHeader` 组件会自动获取。

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Layout, Menu, Icon, Avatar, Dropdown, Tag, message, Spin } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
-import { Link, routerRedux } from 'dva/router';
+import { Link, routerRedux, Route, Redirect, Switch } from 'dva/router';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import styles from './BasicLayout.less';
@@ -11,14 +11,15 @@ import HeaderSearch from '../components/HeaderSearch';
 import NoticeIcon from '../components/NoticeIcon';
 import GlobalFooter from '../components/GlobalFooter';
 import { getNavData } from '../common/nav';
+import { getRouteData } from '../utils/utils';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
-    routes: PropTypes.array,
-    params: PropTypes.object,
+    location: PropTypes.object,
+    breadcrumbNameMap: PropTypes.object,
   }
   constructor(props) {
     super(props);
@@ -29,8 +30,14 @@ class BasicLayout extends React.PureComponent {
     };
   }
   getChildContext() {
-    const { routes, params } = this.props;
-    return { routes, params };
+    const { location } = this.props;
+    const routeData = getRouteData('BasicLayout');
+    const menuData = getNavData().reduce((arr, current) => arr.concat(current.children), []);
+    const breadcrumbNameMap = {};
+    routeData.concat(menuData).forEach((item) => {
+      breadcrumbNameMap[item.path] = item.name;
+    });
+    return { location, breadcrumbNameMap };
   }
   componentDidMount() {
     this.props.dispatch({
@@ -69,7 +76,12 @@ class BasicLayout extends React.PureComponent {
       if (!item.name) {
         return null;
       }
-      const itemPath = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/');
+      let itemPath;
+      if (item.path.indexOf('http') === 0) {
+        itemPath = item.path;
+      } else {
+        itemPath = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/');
+      }
       if (item.children && item.children.some(child => child.name)) {
         return (
           <SubMenu
@@ -89,7 +101,7 @@ class BasicLayout extends React.PureComponent {
       }
       return (
         <Menu.Item key={item.key || item.path}>
-          <Link to={itemPath}>
+          <Link to={itemPath} target={item.target}>
             {item.icon && <Icon type={item.icon} />}
             <span>{item.name}</span>
           </Link>
@@ -98,13 +110,15 @@ class BasicLayout extends React.PureComponent {
     });
   }
   getPageTitle() {
-    const { routes } = this.props;
-    for (let i = routes.length - 1; i >= 0; i -= 1) {
-      if (routes[i].breadcrumbName) {
-        return `${routes[i].breadcrumbName} - Ant Design Pro`;
+    const { location } = this.props;
+    const { pathname } = location;
+    let title = 'Ant Design Pro';
+    getRouteData('UserLayout').forEach((item) => {
+      if (item.path === pathname) {
+        title = `${item.name} - Ant Design Pro`;
       }
-    }
-    return 'Ant Design Pro';
+    });
+    return title;
   }
   getNoticeData() {
     const { notices = [] } = this.props;
@@ -161,7 +175,7 @@ class BasicLayout extends React.PureComponent {
     }
   }
   render() {
-    const { children, currentUser, collapsed, fetchingNotices } = this.props;
+    const { currentUser, collapsed, fetchingNotices } = this.props;
 
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
@@ -171,7 +185,6 @@ class BasicLayout extends React.PureComponent {
         <Menu.Item key="logout"><Icon type="logout" />退出登录</Menu.Item>
       </Menu>
     );
-
     const noticeData = this.getNoticeData();
 
     // Don't show popup menu when it is been collapsed
@@ -270,20 +283,38 @@ class BasicLayout extends React.PureComponent {
               </div>
             </Header>
             <Content style={{ margin: '24px 24px 0', height: '100%' }}>
-              {children}
+              <Switch>
+                {
+                  getRouteData('BasicLayout').map(item =>
+                    (
+                      <Route
+                        exact={item.exact}
+                        key={item.path}
+                        path={item.path}
+                        component={item.component}
+                      />
+                    )
+                  )
+                }
+                <Redirect to="/dashboard/analysis" />
+              </Switch>
               <GlobalFooter
                 links={[{
-                  title: '帮助',
-                  href: '',
-                }, {
-                  title: '隐私',
-                  href: '',
-                }, {
-                  title: '条款',
-                  href: '',
+                  title: 'Pro 首页',
+                  href: 'http://pro.ant.design',
                   blankTarget: true,
+                }, {
+                  title: '文档',
+                  href: 'http://pro.ant.design/docs/getting-started',
+                }, {
+                  title: 'GitHub',
+                  href: 'https://github.com/ant-design/ant-design-pro',
                 }]}
-                copyright={<div>Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品</div>}
+                copyright={
+                  <div>
+                    Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品
+                  </div>
+                }
               />
             </Content>
           </Layout>

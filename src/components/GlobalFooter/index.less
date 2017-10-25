@@ -10,9 +10,14 @@
 
     a {
       color: @text-color-secondary;
+      transition: all .3s;
 
       &:not(:last-child) {
         margin-right: 40px;
+      }
+
+      &:hover {
+        color: @text-color;
       }
     }
   }

@@ -1,24 +1,24 @@
 import React from 'react';
 import { Icon } from 'antd';
+import classNames from 'classnames';
+import styles from './index.less';
 
-const IconUp = ({ color }) => (
+const IconUp = ({ color, className, ...rest }) => (
   <Icon
-    style={{
-      color: (color === false) ? 'rgba(0,0,0,0.43)' : '#00a854',
-      fontSize: 12,
-      transform: 'scale(0.83)',
-    }}
+    {...rest}
+    className={classNames(styles.normal, className, {
+      [styles.up]: color !== false,
+    })}
     type="caret-up"
   />
 );
 
-const IconDown = ({ color }) => (
+const IconDown = ({ color, className, ...rest }) => (
   <Icon
-    style={{
-      color: (color === false) ? 'rgba(0,0,0,0.43)' : '#f04134',
-      fontSize: 12,
-      transform: 'scale(0.83)',
-    }}
+    {...rest}
+    className={classNames(styles.normal, className, {
+      [styles.down]: color !== false,
+    })}
     type="caret-down"
   />
 );

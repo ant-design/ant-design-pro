@@ -30,7 +30,7 @@ class TimelineChart extends Component {
   }
 
   renderChart(data) {
-    const { height = 400, margin = [60, 20, 40, 40], titleMap } = this.props;
+    const { height = 400, margin = [60, 20, 40, 40], titleMap, borderWidth = 2 } = this.props;
 
     if (!data || (data && data.length < 1)) {
       return;
@@ -81,8 +81,8 @@ class TimelineChart extends Component {
       },
     });
 
-    chart.line().position('x*y1').color('#1890FF');
-    chart.line().position('x*y2').color('#2FC25B');
+    chart.line().position('x*y1').color('#1890FF').size(borderWidth);
+    chart.line().position('x*y2').color('#2FC25B').size(borderWidth);
 
     this.chart = chart;
 

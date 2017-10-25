@@ -75,11 +75,23 @@ export default class Analysis extends Component {
     });
   }
 
+  isActive(type) {
+    const { rangePickerValue } = this.state;
+    const value = getTimeDistance(type);
+    if (!rangePickerValue[0] || !rangePickerValue[1]) {
+      return;
+    }
+    if (rangePickerValue[0].isSame(value[0], 'day') && rangePickerValue[1].isSame(value[1], 'day')) {
+      return styles.currentDate;
+    }
+  }
+
   render() {
     const { rangePickerValue, salesType, currentTabKey } = this.state;
     const { chart } = this.props;
     const {
       visitData,
+      visitData2,
       salesData,
       searchData,
       offlineData,
@@ -103,10 +115,18 @@ export default class Analysis extends Component {
     const salesExtra = (
       <div className={styles.salesExtraWrap}>
         <div className={styles.salesExtra}>
-          <a onClick={() => this.selectDate('today')}>今日</a>
-          <a onClick={() => this.selectDate('week')}>本周</a>
-          <a onClick={() => this.selectDate('month')}>本月</a>
-          <a onClick={() => this.selectDate('year')}>全年</a>
+          <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
+            今日
+          </a>
+          <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
+            本周
+          </a>
+          <a className={this.isActive('month')} onClick={() => this.selectDate('month')}>
+            本月
+          </a>
+          <a className={this.isActive('year')} onClick={() => this.selectDate('year')}>
+            全年
+          </a>
         </div>
         <RangePicker
           value={rangePickerValue}
@@ -133,6 +153,7 @@ export default class Analysis extends Component {
         dataIndex: 'count',
         key: 'count',
         sorter: (a, b) => a.count - b.count,
+        className: styles.alignRight,
       },
       {
         title: '周涨幅',
@@ -140,8 +161,16 @@ export default class Analysis extends Component {
         key: 'range',
         sorter: (a, b) => a.range - b.range,
         render: (text, record) => (
-          <span style={{ textAlign: 'right' }}>{text}% {record.status === 1 ? <IconDown /> : <IconUp />}</span>
+          <span>
+            {text}%
+            {
+              record.status === 1
+                ? <IconDown style={{ marginLeft: 8 }} />
+                : <IconUp style={{ marginLeft: 8 }} />
+            }
+          </span>
         ),
+        className: styles.alignRight,
       },
     ];
 
@@ -153,14 +182,14 @@ export default class Analysis extends Component {
           <NumberInfo
             title={data.name}
             subTitle="转化率"
-            total={`${data.cvr * 100}%`}
+            total={<span style={{ top: '-6px', position: 'relative' }}>{data.cvr * 100}%</span>}
             theme={(currentKey !== data.name) && 'light'}
           />
         </Col>
         <Col span={12} style={{ paddingTop: 36 }}>
           <Pie
             animate={false}
-            color={(currentKey !== data.name) && '#99d5fd'}
+            color={(currentKey !== data.name) && '#BDE4FF'}
             inner={0.55}
             tooltip={false}
             margin={[0, 0, 0, 0]}
@@ -187,13 +216,13 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="总销售额"
-              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total={yuan(126560)}
-              footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
+              footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
               contentHeight={46}
             >
-              <Trend colorType="gray" mini={['xlg', 'md']}>
-                <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
+              <Trend colorType="gray">
+                <Trend.Item title="周同比" flag="up">12%</Trend.Item>
                 <Trend.Item title="日环比" flag="down">11%</Trend.Item>
               </Trend>
             </ChartCard>
@@ -202,7 +231,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="访问量"
-              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total={numeral(8846).format('0,0')}
               footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
               contentHeight={46}
@@ -218,7 +247,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="支付笔数"
-              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total={numeral(6560).format('0,0')}
               footer={<Field label="转化率" value="60%" />}
               contentHeight={46}
@@ -233,10 +262,10 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="运营活动效果"
-              action={<Tooltip title="指标说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+              action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total="78%"
               footer={
-                <Trend mini={['xlg', 'md']}>
+                <Trend>
                   <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
                   <Trend.Item title="日环比" flag="down">11%</Trend.Item>
                 </Trend>
@@ -253,7 +282,7 @@ export default class Analysis extends Component {
           bodyStyle={{ padding: 0 }}
         >
           <div className={styles.salesCard}>
-            <Tabs tabBarExtraContent={salesExtra}>
+            <Tabs tabBarExtraContent={salesExtra} size="large" tabBarStyle={{ marginBottom: 24 }}>
               <TabPane tab="销售额" key="sales">
                 <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
@@ -327,17 +356,22 @@ export default class Analysis extends Component {
               <Row gutter={68}>
                 <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
                   <NumberInfo
-                    subTitle={<span>搜索用户数 <Icon style={{ marginLeft: 8 }} type="info-circle-o" /></span>}
+                    subTitle={
+                      <span>
+                        搜索用户数
+                        <Tooltip title="指标文案">
+                          <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
+                        </Tooltip>
+                      </span>
+                    }
                     total={numeral(12321).format('0,0')}
                     status="up"
                     subTotal={17.1}
                   />
                   <MiniArea
                     line
-                    borderColor="#00a2fc"
-                    color="#c9eafe"
                     height={45}
-                    data={visitData}
+                    data={visitData2}
                   />
                 </Col>
                 <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
@@ -349,16 +383,14 @@ export default class Analysis extends Component {
                   />
                   <MiniArea
                     line
-                    borderColor="#00a2fc"
-                    color="#c9eafe"
                     height={45}
-                    data={visitData}
+                    data={visitData2}
                   />
                 </Col>
               </Row>
               <Table
                 rowKey={record => record.index}
-                size="middle"
+                size="small"
                 columns={columns}
                 dataSource={searchData}
                 pagination={{
@@ -389,7 +421,7 @@ export default class Analysis extends Component {
               )}
               style={{ marginTop: 24 }}
             >
-              <div style={{ marginTop: 32, marginBottom: 54 }}>
+              <div style={{ marginTop: 8, marginBottom: 77 }}>
                 <Pie
                   hasLegend
                   title="销售额"
@@ -397,7 +429,8 @@ export default class Analysis extends Component {
                   total={yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))}
                   data={salesPieData}
                   valueFormat={val => yuan(val)}
-                  height={314}
+                  height={268}
+                  lineWidth={4}
                 />
               </div>
             </Card>

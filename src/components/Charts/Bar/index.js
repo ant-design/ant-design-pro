@@ -25,7 +25,7 @@ class Bar extends PureComponent {
   }
 
   renderChart(data) {
-    const { height = 0, fit = true, color = '#33abfb', margin = [32, 0, 32, 40] } = this.props;
+    const { height = 0, fit = true, color = 'rgba(24, 144, 255, 0.85)', margin = [32, 0, 32, 40] } = this.props;
 
     if (!data || (data && data.length < 1)) {
       return;

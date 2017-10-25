@@ -9,12 +9,15 @@
     margin-left: 4px;
   }
   h4 {
-    color: @heading-color;
+    color: @text-color;
+    font-size: @font-size-lg;
     margin-bottom: 16px;
+    transition: all .3s;
   }
   h6 {
     color: @text-color-secondary;
     font-size: @font-size-base;
+    font-weight: normal;
     height: 22px;
     line-height: 22px;
     .textOverflow();
@@ -33,12 +36,13 @@
     }
     .subTotal {
       color: @text-color-secondary;
-      font-size: @font-size-base;
+      font-size: @font-size-lg;
       vertical-align: top;
+      margin-right: 0;
       i {
         font-size: 12px;
         transform: scale(0.82);
-        margin-right: 4px;
+        margin-left: 4px;
       }
     }
   }
