@@ -13,12 +13,13 @@ export default ({ theme, title, subTitle, total, subTotal, status, suffix, ...re
     }
     {...rest}
   >
-    {
-      title && <h4>{title}</h4>
-    }
-    <h6>{subTitle}</h6>
+    {title && <h4>{title}</h4>}
+    {subTitle && <h6>{subTitle}</h6>}
     <div>
-      <span>{total}{suffix && <em className={styles.suffix}>{suffix}</em>}</span>
+      <span>
+        {total}
+        {suffix && <em className={styles.suffix}>{suffix}</em>}
+      </span>
       {
         (status || subTotal) && (
           <span className={styles.subTotal}>
