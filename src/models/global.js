@@ -21,11 +21,16 @@ export default {
         payload: data,
       });
     },
-    *clearNotices(_, { put, select }) {
+    *clearNotices({ payload }, { put, select }) {
       const count = yield select(state => state.global.notices.length);
       yield put({
         type: 'user/changeNotifyCount',
         payload: count,
+      });
+
+      yield put({
+        type: 'saveClearedNotices',
+        payload,
       });
     },
   },
@@ -44,7 +49,7 @@ export default {
         fetchingNotices: false,
       };
     },
-    clearNotices(state, { payload }) {
+    saveClearedNotices(state, { payload }) {
       return {
         ...state,
         notices: state.notices.filter(item => item.type !== payload),
