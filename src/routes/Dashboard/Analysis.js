@@ -178,7 +178,8 @@ export default class Analysis extends Component {
           <NumberInfo
             title={data.name}
             subTitle="转化率"
-            total={<span style={{ top: '-6px', position: 'relative' }}>{data.cvr * 100}%</span>}
+            gap={2}
+            total={`${data.cvr * 100}%`}
             theme={(currentKey !== data.name) && 'light'}
           />
         </Col>
@@ -370,6 +371,7 @@ export default class Analysis extends Component {
                         </Tooltip>
                       </span>
                     }
+                    gap={8}
                     total={numeral(12321).format('0,0')}
                     status="up"
                     subTotal={17.1}
@@ -386,6 +388,7 @@ export default class Analysis extends Component {
                     total={2.7}
                     status="down"
                     subTotal={26.2}
+                    gap={8}
                   />
                   <MiniArea
                     line
