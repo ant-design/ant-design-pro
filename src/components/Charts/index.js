@@ -7,7 +7,6 @@ import Gauge from './Gauge';
 import MiniArea from './MiniArea';
 import MiniBar from './MiniBar';
 import MiniProgress from './MiniProgress';
-import Trend from './Trend';
 import Field from './Field';
 import NumberInfo from './NumberInfo';
 import WaterWave from './WaterWave';
@@ -26,7 +25,6 @@ export default {
   MiniArea,
   MiniProgress,
   ChartCard,
-  Trend,
   Field,
   NumberInfo,
   WaterWave,

@@ -6,7 +6,8 @@ title: 图表卡片
 用于展示图表的卡片容器，可以方便的配合其它图表套件展示丰富信息。
 
 ````jsx
-import { ChartCard, yuan, Field, Trend } from 'ant-design-pro/lib/Charts';
+import { ChartCard, yuan, Field } from 'ant-design-pro/lib/Charts';
+import Trend from 'ant-design-pro/lib/Trend';
 import { Tooltip, Icon } from 'antd';
 import numeral from 'numeral';
 
