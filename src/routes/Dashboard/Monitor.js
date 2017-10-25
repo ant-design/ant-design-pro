@@ -3,7 +3,8 @@ import { connect } from 'dva';
 import { Row, Col, Card } from 'antd';
 import numeral from 'numeral';
 
-import { NumberInfo, Pie, WaterWave, Gauge, TagCloud } from '../../components/Charts';
+import { Pie, WaterWave, Gauge, TagCloud } from '../../components/Charts';
+import NumberInfo from '../../components/NumberInfo';
 import CountDown from '../../components/CountDown';
 import ActiveChart from '../../components/ActiveChart';
 

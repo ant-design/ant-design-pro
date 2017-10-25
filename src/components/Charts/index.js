@@ -8,7 +8,6 @@ import MiniArea from './MiniArea';
 import MiniBar from './MiniBar';
 import MiniProgress from './MiniProgress';
 import Field from './Field';
-import NumberInfo from './NumberInfo';
 import WaterWave from './WaterWave';
 import TagCloud from './TagCloud';
 import TimelineChart from './TimelineChart';
@@ -26,7 +25,6 @@ export default {
   MiniProgress,
   ChartCard,
   Field,
-  NumberInfo,
   WaterWave,
   TagCloud,
   TimelineChart,

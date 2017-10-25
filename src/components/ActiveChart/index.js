@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 
-import { NumberInfo, MiniArea } from '../Charts';
+import { MiniArea } from '../Charts';
+import NumberInfo from '../NumberInfo';
 import { fixedZero } from '../../utils/utils';
 
 import styles from './index.less';
