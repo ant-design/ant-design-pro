@@ -123,8 +123,8 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
-| title | 标题 | ReactNode\|string | - |
-| flag | 上升下降标识 | boolean | - |
+| colorful | 是否彩色标记 | Boolean | true |
+| flag | 上升下降标识：`up\|down` | string | - |
 
 ### NumberInfo
 

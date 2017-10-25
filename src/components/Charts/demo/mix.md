@@ -61,10 +61,16 @@ ReactDOM.render(
         action={<Tooltip title="购买效率"><Icon type="exclamation-circle-o" /></Tooltip>}
         total="78%"
         footer={
-          <Trend>
-            <Trend.Item flag="up">周同比 12.3%</Trend.Item>
-            <Trend.Item flag="down">日环比 11%</Trend.Item>
-          </Trend>
+          <div>
+            <span>
+              周同比
+              <Trend flag="up" style={{ marginLeft: 8, color: 'rgba(0,0,0,.85)' }}>12%</Trend>
+            </span>
+            <span style={{ marginLeft: 16 }}>
+              日环比
+              <Trend flag="down" style={{ marginLeft: 8, color: 'rgba(0,0,0,.85)' }}>11%</Trend>
+            </span>
+          </div>
         }
         contentHeight={46}
       >
