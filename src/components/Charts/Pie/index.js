@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import G2 from 'g2';
+import { Divider } from 'antd';
 import equal from '../equal';
 import styles from './index.less';
 
@@ -223,7 +224,7 @@ class Pie extends Component {
                       <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
                         <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
                         <span className={styles.legendTitle}>{item.x}</span>
-                        <span className={styles.line} />
+                        <Divider type="vertical" />
                         <span className={styles.percent}>{`${(item['..percent'] * 100).toFixed(2)}%`}</span>
                         <span
                           className={styles.value}
