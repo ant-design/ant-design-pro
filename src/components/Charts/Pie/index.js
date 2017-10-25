@@ -101,7 +101,7 @@ class Pie extends Component {
     let m = margin;
     if (!margin) {
       if (hasLegend) {
-        m = [24, 240, 24, 0];
+        m = [24, 240, 24, 8];
       } else if (percent) {
         m = [0, 0, 0, 0];
       } else {

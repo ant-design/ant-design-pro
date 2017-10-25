@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'dva/router';
 import { Button, Icon } from 'antd';
 import styles from './index.less';
 
