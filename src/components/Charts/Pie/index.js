@@ -64,7 +64,7 @@ class Pie extends Component {
       lineWidth = 0,
     } = this.props;
 
-    const defaultColors = colors || ['#8543E0', '#F04864', '#FACC14', '#1890FF', '#13C2C2', '#2FC25B'];
+    const defaultColors = colors;
 
     let selected = this.props.selected || true;
     let tooltip = this.props.tooltips || true;
