@@ -40,7 +40,7 @@ ReactDOM.render(
           data={visitData}
         />
       </ChartCard>
-    </Col>  
+    </Col>
     <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
         title="访问量"
@@ -54,21 +54,23 @@ ReactDOM.render(
           data={visitData}
         />
       </ChartCard>
-    </Col>  
+    </Col>
     <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
         title="线上购物转化率"
         action={<Tooltip title="购买效率"><Icon type="exclamation-circle-o" /></Tooltip>}
         total="78%"
-        footer={<Trend>
-          <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
-          <Trend.Item title="日环比" flag="down">11%</Trend.Item>
-        </Trend>}
+        footer={
+          <Trend>
+            <Trend.Item flag="up">周同比 12.3%</Trend.Item>
+            <Trend.Item flag="down">日环比 11%</Trend.Item>
+          </Trend>
+        }
         contentHeight={46}
       >
         <MiniProgress percent={78} strokeWidth={8} target={80} color="#5DD1DD" />
       </ChartCard>
-    </Col>  
+    </Col>
   </Row>
 , mountNode);
 ````

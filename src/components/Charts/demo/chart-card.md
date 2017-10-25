@@ -19,8 +19,8 @@ ReactDOM.render(
     contentHeight={46}
   >
     <Trend colorType="gray">
-      <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
-      <Trend.Item title="日环比" flag="down">11%</Trend.Item>
+      <Trend.Item flag="up">周同比 12.3%</Trend.Item>
+      <Trend.Item flag="down">日环比 11%</Trend.Item>
     </Trend>
   </ChartCard>
 , mountNode);
