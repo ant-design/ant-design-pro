@@ -4,15 +4,22 @@ import equal from '../equal';
 
 const { Shape } = G2;
 
+const primaryColor = '#2F9CFF';
+const backgroundColor = '#F0F2F5';
+
 /* eslint no-underscore-dangle: 0 */
 class Gauge extends PureComponent {
   componentDidMount() {
-    this.renderChart();
+    setTimeout(() => {
+      this.renderChart();
+    }, 10);
   }
 
   componentWillReceiveProps(nextProps) {
     if (!equal(this.props, nextProps)) {
-      this.renderChart(nextProps);
+      setTimeout(() => {
+        this.renderChart(nextProps);
+      }, 10);
     }
   }
 
@@ -27,7 +34,7 @@ class Gauge extends PureComponent {
   }
 
   initChart(nextProps) {
-    const { title, color = '#00b1f8' } = nextProps || this.props;
+    const { title, color = primaryColor } = nextProps || this.props;
 
     Shape.registShape('point', 'dashBoard', {
       drawShape(cfg, group) {
@@ -103,7 +110,9 @@ class Gauge extends PureComponent {
   }
 
   renderChart(nextProps) {
-    const { height, color = '#00b1f8', bgColor = '#d3f3fe', title, percent, format } = nextProps || this.props;
+    const {
+      height, color = primaryColor, bgColor = backgroundColor, title, percent, format,
+    } = nextProps || this.props;
     const data = [{ name: title, value: percent }];
 
     if (this.chart) {
@@ -139,11 +148,13 @@ class Gauge extends PureComponent {
       min: 0,
       max: 100,
       tickCount: 6,
-      subTick: false,
     });
     chart.axis('value', {
+      subTick: false,
       tickLine: {
         stroke: color,
+        lineWidth: 2,
+        value: -14,
       },
       labelOffset: -12,
       formatter: format,
@@ -154,7 +165,7 @@ class Gauge extends PureComponent {
     /* eslint no-shadow: 0 */
     function draw(data) {
       const val = data[0].value;
-      const lineWidth = 18;
+      const lineWidth = 12;
       chart.guide().clear();
 
       chart.guide().arc(() => {

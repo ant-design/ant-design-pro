@@ -204,11 +204,11 @@ class Pie extends Component {
                   style={{ marginLeft: left, opacity: left ? 1 : 0 }}
                 >
                   {
-                    subTitle && <h4>{subTitle}</h4>
+                    subTitle && <h4 className="pie-sub-title">{subTitle}</h4>
                   }
                   {
                     // eslint-disable-next-line
-                    total && <p dangerouslySetInnerHTML={{ __html: total }} />
+                    total && <p className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />
                   }
                 </div>
               )
