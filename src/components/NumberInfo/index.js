@@ -1,10 +1,11 @@
 import React from 'react';
 import { Icon } from 'antd';
 import classNames from 'classnames';
-
 import styles from './index.less';
 
-export default ({ theme, title, subTitle, total, subTotal, status, suffix, ...rest }) => (
+export default ({
+  theme, title, subTitle, total, subTotal, status, suffix, gap, ...rest
+}) => (
   <div
     className={
       classNames(styles.numberInfo, {
@@ -13,9 +14,9 @@ export default ({ theme, title, subTitle, total, subTotal, status, suffix, ...re
     }
     {...rest}
   >
-    {title && <h4>{title}</h4>}
-    {subTitle && <h6>{subTitle}</h6>}
-    <div>
+    {title && <div className={styles.numberInfoTitle}>{title}</div>}
+    {subTitle && <div className={styles.numberInfoSubTitle}>{subTitle}</div>}
+    <div className={styles.numberInfoValue} style={gap ? { marginTop: gap } : null}>
       <span>
         {total}
         {suffix && <em className={styles.suffix}>{suffix}</em>}

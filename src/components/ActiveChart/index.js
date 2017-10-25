@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 
-import { NumberInfo, MiniArea } from '../Charts';
+import { MiniArea } from '../Charts';
+import NumberInfo from '../NumberInfo';
 import { fixedZero } from '../../utils/utils';
 
 import styles from './index.less';
@@ -46,9 +47,7 @@ export default class ActiveChart extends PureComponent {
           <MiniArea
             animate={false}
             line
-            borderColor="#00a2fc"
             borderWidth={2}
-            color="#c9eafe"
             height={84}
             yAxis={{
               tickCount: 3,

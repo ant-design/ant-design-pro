@@ -1,5 +1,5 @@
 @import "~antd/lib/style/themes/default.less";
-@import "../../../utils/utils.less";
+@import "../../utils/utils.less";
 
 .numberInfo {
   .suffix {
@@ -8,22 +8,21 @@
     font-style: normal;
     margin-left: 4px;
   }
-  h4 {
+  .numberInfoTitle {
     color: @text-color;
     font-size: @font-size-lg;
     margin-bottom: 16px;
     transition: all .3s;
   }
-  h6 {
+  .numberInfoSubTitle {
     color: @text-color-secondary;
     font-size: @font-size-base;
-    font-weight: normal;
     height: 22px;
     line-height: 22px;
     .textOverflow();
   }
-  & > div {
-    margin-top: 8px;
+  .numberInfoValue {
+    margin-top: 4px;
     font-size: 0;
     .textOverflow();
     & > span {
@@ -48,7 +47,7 @@
   }
 }
 .numberInfolight {
-  & > div {
+  .numberInfoValue {
     & > span {
       color: @text-color;
     }

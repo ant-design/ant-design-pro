@@ -119,16 +119,6 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | titleMap | 指标别名 | Object{y1: '客流量', y2: '支付笔数'} | - |
 | height | 高度值 | number | 400 |
 
-### NumberInfo
-
-| 参数      | 说明                                      | 类型         | 默认值 |
-|----------|------------------------------------------|-------------|-------|
-| title | 标题 | ReactNode\|string | - |
-| subTitle | 子标题 | ReactNode\|string | - |
-| total | 总量 | ReactNode\|string | - |
-| status | 增加状态 | 'up'\/'down' | - |
-| theme | 状态样式 | string | 'light' |
-
 ### Field
 
 | 参数      | 说明                                      | 类型         | 默认值 |
