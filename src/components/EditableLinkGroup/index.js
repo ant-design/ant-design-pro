@@ -1,6 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createElement } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import { Button, Icon } from 'antd';
 import styles from './index.less';
 
@@ -9,27 +8,31 @@ import styles from './index.less';
 class EditableLinkGroup extends PureComponent {
   static defaultProps = {
     links: [],
-    onAdd: () => {
-    },
-  }
-  state = {
-    links: this.props.links,
+    onAdd: () => {},
+    linkElement: 'a',
   };
 
-  handleOnClick() {
-    const { onAdd } = this.props;
-    onAdd();
-  }
+  static propTypes = {
+    links: PropTypes.array,
+    onAdd: PropTypes.func,
+    linkElement: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  };
 
   render() {
-    const { links } = this.state;
+    const { links, linkElement, onAdd } = this.props;
     return (
       <div className={styles.linkGroup}>
         {
-          links.map(link => <Link key={`linkGroup-item-${link.id || link.title}`} to={link.href}>{link.title}</Link>)
+          links.map(link => (
+            createElement(linkElement, {
+              key: `linkGroup-item-${link.id || link.title}`,
+              to: link.href,
+              href: link.href,
+            }, link.title)
+          ))
         }
         {
-          <Button size="small" onClick={() => this.handleOnClick()}>
+          <Button size="small" onClick={onAdd}>
             <Icon type="plus" />添加
           </Button>
         }
@@ -37,10 +40,5 @@ class EditableLinkGroup extends PureComponent {
     );
   }
 }
-
-EditableLinkGroup.propTypes = {
-  links: PropTypes.array,
-  onAdd: PropTypes.func,
-};
 
 export default EditableLinkGroup;

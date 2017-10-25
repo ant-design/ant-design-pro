@@ -212,6 +212,7 @@ export default class Workplace extends PureComponent {
               <EditableLinkGroup
                 onAdd={() => {}}
                 links={links}
+                linkElement={Link}
               />
             </Card>
             <Card
