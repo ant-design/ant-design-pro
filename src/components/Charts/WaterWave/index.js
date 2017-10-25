@@ -29,21 +29,14 @@ class WaterWave extends PureComponent {
 
   resize = () => {
     const { height } = this.props;
-    const realWidth = this.root.parentNode.offsetWidth;
-    if (realWidth < this.props.height) {
-      const radio = realWidth / height;
-      this.setState({
-        radio,
-      });
-    } else {
-      this.setState({
-        radio: 1,
-      });
-    }
+    const { offsetWidth } = this.root.parentNode;
+    this.setState({
+      radio: offsetWidth < height ? offsetWidth / height : 1,
+    });
   }
 
   renderChart() {
-    const { percent, color = '#19AFFA' } = this.props;
+    const { percent, color = '#1890FF' } = this.props;
     const data = percent / 100;
     const self = this;
 
@@ -61,7 +54,7 @@ class WaterWave extends PureComponent {
     const cR = radius - (lineWidth);
 
     ctx.beginPath();
-    ctx.lineWidth = lineWidth;
+    ctx.lineWidth = lineWidth * 2;
 
     const axisLength = canvasWidth - (lineWidth);
     const unit = axisLength / 8;
@@ -108,7 +101,11 @@ class WaterWave extends PureComponent {
       ctx.lineTo(xOffset + axisLength, canvasHeight);
       ctx.lineTo(xOffset, canvasHeight);
       ctx.lineTo(startPoint[0], startPoint[1]);
-      ctx.fillStyle = color;
+
+      const gradient = ctx.createLinearGradient(0, 0, 0, 170);
+      gradient.addColorStop(0, '#ffffff');
+      gradient.addColorStop(1, '#1890FF');
+      ctx.fillStyle = gradient;
       ctx.fill();
       ctx.restore();
     }
@@ -137,7 +134,7 @@ class WaterWave extends PureComponent {
 
           ctx.restore();
           ctx.clip();
-          ctx.fillStyle = '#108ee9';
+          ctx.fillStyle = '#1890FF';
         }
       } else {
         if (data >= 0.85) {
@@ -181,7 +178,14 @@ class WaterWave extends PureComponent {
     const { percent, title, height } = this.props;
     return (
       <div className={styles.waterWave} ref={n => (this.root = n)} style={{ transform: `scale(${radio})` }}>
-        <canvas ref={n => (this.node = n)} width={height} height={height} />
+        <div style={{ width: height, height, overflow: 'hidden' }}>
+          <canvas
+            className={styles.waterWaveCanvasWrapper}
+            ref={n => (this.node = n)}
+            width={height * 2}
+            height={height * 2}
+          />
+        </div>
         <div className={styles.text} style={{ width: height }}>
           {
             title && <span>{title}</span>

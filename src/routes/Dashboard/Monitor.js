@@ -68,7 +68,7 @@ export default class Monitor extends PureComponent {
                 </Col>
               </Row>
               <div className={styles.mapChart}>
-                <img src="https://gw.alipayobjects.com/zos/rmsportal/LYbCPIWLeUrdWSpVvKIL.png" alt="map" />
+                <img src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png" alt="map" />
               </div>
             </Card>
           </Col>
@@ -105,11 +105,12 @@ export default class Monitor extends PureComponent {
           </Col>
         </Row>
         <Row gutter={24}>
-          <Col xl={8} lg={24} sm={24} xs={24}>
+          <Col xl={12} lg={24} sm={24} xs={24}>
             <Card
               title="各品类占比"
               style={{ marginBottom: 24 }}
               bordered={false}
+              className={styles.pieCard}
             >
               <Row gutter={4} style={{ padding: '18px 0 19px 0' }}>
                 <Col span={8}>
@@ -119,6 +120,7 @@ export default class Monitor extends PureComponent {
                     subTitle="中式快餐"
                     total="28%"
                     height={129}
+                    lineWidth={2}
                   />
                 </Col>
                 <Col span={8}>
@@ -129,6 +131,7 @@ export default class Monitor extends PureComponent {
                     subTitle="西餐"
                     total="22%"
                     height={129}
+                    lineWidth={2}
                   />
                 </Col>
                 <Col span={8}>
@@ -139,12 +142,13 @@ export default class Monitor extends PureComponent {
                     subTitle="火锅"
                     total="32%"
                     height={129}
+                    lineWidth={2}
                   />
                 </Col>
               </Row>
             </Card>
           </Col>
-          <Col xl={8} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
+          <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card title="热门搜索" bordered={false} bodyStyle={{ overflow: 'hidden' }}>
               <TagCloud
                 data={tags}
@@ -152,8 +156,8 @@ export default class Monitor extends PureComponent {
               />
             </Card>
           </Col>
-          <Col xl={8} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="资源剩余" bodyStyle={{ textAlign: 'center' }} bordered={false}>
+          <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
+            <Card title="资源剩余" bodyStyle={{ textAlign: 'center', fontSize: 0 }} bordered={false}>
               <WaterWave
                 height={161}
                 title="补贴资金剩余"
