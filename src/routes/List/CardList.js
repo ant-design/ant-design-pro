@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import { Card, Avatar, Button, Icon, List } from 'antd';
+import { Card, Button, Icon, List } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
@@ -65,7 +65,7 @@ export default class CardList extends PureComponent {
                 <Card hoverable actions={[<a>操作一</a>, <a>操作二</a>]}>
                   <Link to="/list/card-list">
                     <Card.Meta
-                      avatar={<Avatar size="large" src={item.avatar} />}
+                      avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
                       title={item.title}
                       description={(
                         <p className={styles.cardDescription}>

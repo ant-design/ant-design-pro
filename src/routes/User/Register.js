@@ -160,7 +160,7 @@ export default class Register extends Component {
           <FormItem help={this.state.help}>
             <Popover
               content={
-                <div>
+                <div style={{ padding: '4px 0' }}>
                   {passwordStatusMap[this.getPasswordStatus()]}
                   {this.renderPasswordProgress()}
                   <p style={{ marginTop: 10 }}>请至少输入 6 个字符。请不要使用容易被猜到的密码。</p>

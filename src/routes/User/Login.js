@@ -94,7 +94,7 @@ export default class Login extends Component {
                 })(
                   <Input
                     size="large"
-                    prefix={<Icon type="user" style={{ fontSize: 14, color: 'rgba(0, 0, 0, 0.25)' }} />}
+                    prefix={<Icon type="user" className={styles.prefixIcon} />}
                     placeholder="admin"
                   />
                 )}
@@ -107,7 +107,7 @@ export default class Login extends Component {
                 })(
                   <Input
                     size="large"
-                    prefix={<Icon type="lock" style={{ fontSize: 14, color: 'rgba(0, 0, 0, 0.25)' }} />}
+                    prefix={<Icon type="lock" className={styles.prefixIcon} />}
                     type="password"
                     placeholder="888888"
                   />
@@ -131,7 +131,7 @@ export default class Login extends Component {
                 })(
                   <Input
                     size="large"
-                    prefix={<Icon type="mobile" style={{ fontSize: 14, color: 'rgba(0, 0, 0, 0.25)' }} />}
+                    prefix={<Icon type="mobile" className={styles.prefixIcon} />}
                     placeholder="手机号"
                   />
                 )}
@@ -146,7 +146,7 @@ export default class Login extends Component {
                     })(
                       <Input
                         size="large"
-                        prefix={<Icon type="mail" style={{ fontSize: 14, color: 'rgba(0, 0, 0, 0.25)' }} />}
+                        prefix={<Icon type="mail" className={styles.prefixIcon} />}
                         placeholder="验证码"
                       />
                     )}
