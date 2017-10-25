@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Row, Col, Icon, Card, Tabs, Table, Radio, DatePicker, Tooltip } from 'antd';
 import numeral from 'numeral';
 
-import { ChartCard, Trend, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, NumberInfo, IconUp, IconDown, TimelineChart } from '../../components/Charts';
+import { ChartCard, Trend, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, NumberInfo, TimelineChart } from '../../components/Charts';
 
 import { getTimeDistance } from '../../utils/utils';
 
@@ -161,14 +161,9 @@ export default class Analysis extends Component {
         key: 'range',
         sorter: (a, b) => a.range - b.range,
         render: (text, record) => (
-          <span>
-            {text}%
-            {
-              record.status === 1
-                ? <IconDown style={{ marginLeft: 8 }} />
-                : <IconUp style={{ marginLeft: 8 }} />
-            }
-          </span>
+          <Trend flag={record.status === 1 ? 'down' : 'up'}>
+            <span style={{ marginRight: 4 }}>{text}%</span>
+          </Trend>
         ),
         className: styles.alignRight,
       },
@@ -223,11 +218,11 @@ export default class Analysis extends Component {
             >
               <span>
                 周同比
-                <Trend colorful={false} flag="up" style={{ marginLeft: 8 }}>12%</Trend>
+                <Trend flag="up" className={styles.trend}>12%</Trend>
               </span>
               <span style={{ marginLeft: 16 }}>
                 日环比
-                <Trend flag="down" style={{ marginLeft: 8 }}>11%</Trend>
+                <Trend flag="down" className={styles.trend}>11%</Trend>
               </span>
             </ChartCard>
           </Col>
@@ -272,11 +267,11 @@ export default class Analysis extends Component {
                 <div>
                   <span>
                     周同比
-                    <Trend flag="up" style={{ marginLeft: 8 }}>12%</Trend>
+                    <Trend flag="up" className={styles.trend}>12%</Trend>
                   </span>
                   <span style={{ marginLeft: 16 }}>
                     日环比
-                    <Trend flag="down" style={{ marginLeft: 8 }}>11%</Trend>
+                    <Trend flag="down" className={styles.trend}>11%</Trend>
                   </span>
                 </div>
               }

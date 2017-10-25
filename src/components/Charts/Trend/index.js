@@ -3,10 +3,10 @@ import { Icon } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 
-const Trend = ({ colorful, flag, children, ...rest }) => {
+const Trend = ({ colorful = true, flag, children, className, ...rest }) => {
   const classString = classNames(styles.trendItem, {
     [styles.trendItemGrey]: !colorful,
-  });
+  }, className);
   return (
     <div
       {...rest}

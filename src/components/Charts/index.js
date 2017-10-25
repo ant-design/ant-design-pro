@@ -13,13 +13,10 @@ import NumberInfo from './NumberInfo';
 import WaterWave from './WaterWave';
 import TagCloud from './TagCloud';
 import TimelineChart from './TimelineChart';
-import { IconUp, IconDown } from './Icon';
 
 const yuan = val => `&yen; ${numeral(val).format('0,0')}`;
 
 export default {
-  IconUp,
-  IconDown,
   yuan,
   Bar,
   Pie,
