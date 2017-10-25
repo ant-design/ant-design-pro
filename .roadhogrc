@@ -7,7 +7,12 @@
         "transform-runtime",
         "transform-decorators-legacy",
         "transform-class-properties",
-        ["import", { "libraryName": "antd", "style": true }]
+        ["import", { "libraryName": "antd", "style": true }],
+        ["module-resolver", {
+          "alias": {
+            "react-router": "dva/router"
+          }
+        }]
       ]
     },
     "production": {
@@ -15,7 +20,12 @@
         "transform-runtime",
         "transform-decorators-legacy",
         "transform-class-properties",
-        ["import", { "libraryName": "antd", "style": true }]
+        ["import", { "libraryName": "antd", "style": true }],
+        ["module-resolver", {
+          "alias": {
+            "react-router": "dva/router"
+          }
+        }]
       ]
     }
   },

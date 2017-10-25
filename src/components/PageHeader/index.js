@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Breadcrumb, Tabs } from 'antd';
-import { Link } from 'dva/router';
+import { Link } from 'react-router';
 import classNames from 'classnames';
 import styles from './index.less';
 

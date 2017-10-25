@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Button } from 'antd';
-import { Link } from 'dva/router';
+import { Link } from 'react-router';
 import config from './typeConfig';
 import styles from './index.less';
 
