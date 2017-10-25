@@ -76,7 +76,12 @@ class BasicLayout extends React.PureComponent {
       if (!item.name) {
         return null;
       }
-      const itemPath = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/');
+      let itemPath;
+      if (item.path.indexOf('http') === 0) {
+        itemPath = item.path;
+      } else {
+        itemPath = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/');
+      }
       if (item.children && item.children.some(child => child.name)) {
         return (
           <SubMenu
@@ -96,7 +101,7 @@ class BasicLayout extends React.PureComponent {
       }
       return (
         <Menu.Item key={item.key || item.path}>
-          <Link to={itemPath}>
+          <Link to={itemPath} target={item.target}>
             {item.icon && <Icon type={item.icon} />}
             <span>{item.name}</span>
           </Link>
@@ -295,17 +300,21 @@ class BasicLayout extends React.PureComponent {
               </Switch>
               <GlobalFooter
                 links={[{
-                  title: '帮助',
-                  href: '',
-                }, {
-                  title: '隐私',
-                  href: '',
-                }, {
-                  title: '条款',
-                  href: '',
+                  title: 'Pro 首页',
+                  href: 'http://pro.ant.design',
                   blankTarget: true,
+                }, {
+                  title: '文档',
+                  href: 'http://pro.ant.design/docs/getting-started',
+                }, {
+                  title: 'GitHub',
+                  href: 'https://github.com/ant-design/ant-design-pro',
                 }]}
-                copyright={<div>Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品</div>}
+                copyright={
+                  <div>
+                    Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品
+                  </div>
+                }
               />
             </Content>
           </Layout>

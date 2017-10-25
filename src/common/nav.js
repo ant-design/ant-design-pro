@@ -1,5 +1,6 @@
 import BasicLayout from '../layouts/BasicLayout';
 import UserLayout from '../layouts/UserLayout';
+import BlankLayout from '../layouts/BlankLayout';
 
 import Analysis from '../routes/Dashboard/Analysis';
 import Monitor from '../routes/Dashboard/Monitor';
@@ -172,6 +173,15 @@ const data = [{
       component: RegisterResult,
     }],
   }],
+}, {
+  component: BlankLayout,
+  layout: 'BlankLayout',
+  children: {
+    name: '使用文档',
+    path: 'http://pro.ant.design/docs/getting-started',
+    target: '_blank',
+    icon: 'book',
+  },
 }];
 
 export function getNavData() {
