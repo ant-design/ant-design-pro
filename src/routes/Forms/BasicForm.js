@@ -91,7 +91,7 @@ export default class BasicForms extends PureComponent {
                   required: true, message: '请输入目标描述',
                 }],
               })(
-                <TextArea placeholder="请输入你的阶段性工作目标" rows={4} />
+                <TextArea style={{ minHeight: 32 }} placeholder="请输入你的阶段性工作目标" rows={4} />
               )}
             </FormItem>
             <FormItem
@@ -103,7 +103,7 @@ export default class BasicForms extends PureComponent {
                   required: true, message: '请输入衡量标准',
                 }],
               })(
-                <TextArea placeholder="请输入衡量标准" rows={4} />
+                <TextArea style={{ minHeight: 32 }} placeholder="请输入衡量标准" rows={4} />
               )}
             </FormItem>
             <FormItem
@@ -150,7 +150,7 @@ export default class BasicForms extends PureComponent {
                 {getFieldDecorator('public', {
                   initialValue: '1',
                 })(
-                  <Radio.Group>
+                  <Radio.Group className={styles.radioGroup}>
                     <Radio value="1">公开</Radio>
                     <Radio value="2">部分公开</Radio>
                     <Radio value="3">不公开</Radio>
