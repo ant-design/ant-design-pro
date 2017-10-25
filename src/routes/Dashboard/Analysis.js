@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Row, Col, Icon, Card, Tabs, Table, Radio, DatePicker, Tooltip } from 'antd';
 import numeral from 'numeral';
-
-import { ChartCard, Trend, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, NumberInfo, IconUp, IconDown, TimelineChart } from '../../components/Charts';
-
+import {
+  ChartCard, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, NumberInfo, TimelineChart,
+} from '../../components/Charts';
+import Trend from '../../components/Trend';
 import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
@@ -161,14 +162,9 @@ export default class Analysis extends Component {
         key: 'range',
         sorter: (a, b) => a.range - b.range,
         render: (text, record) => (
-          <span>
-            {text}%
-            {
-              record.status === 1
-                ? <IconDown style={{ marginLeft: 8 }} />
-                : <IconUp style={{ marginLeft: 8 }} />
-            }
-          </span>
+          <Trend flag={record.status === 1 ? 'down' : 'up'}>
+            <span style={{ marginRight: 4 }}>{text}%</span>
+          </Trend>
         ),
         className: styles.alignRight,
       },
@@ -221,10 +217,14 @@ export default class Analysis extends Component {
               footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
               contentHeight={46}
             >
-              <Trend colorType="gray">
-                <Trend.Item title="周同比" flag="up">12%</Trend.Item>
-                <Trend.Item title="日环比" flag="down">11%</Trend.Item>
-              </Trend>
+              <span>
+                周同比
+                <Trend flag="up" className={styles.trend}>12%</Trend>
+              </span>
+              <span style={{ marginLeft: 16 }}>
+                日环比
+                <Trend flag="down" className={styles.trend}>11%</Trend>
+              </span>
             </ChartCard>
           </Col>
           <Col {...topColResponsiveProps}>
@@ -265,10 +265,16 @@ export default class Analysis extends Component {
               action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total="78%"
               footer={
-                <Trend>
-                  <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
-                  <Trend.Item title="日环比" flag="down">11%</Trend.Item>
-                </Trend>
+                <div>
+                  <span>
+                    周同比
+                    <Trend flag="up" className={styles.trend}>12%</Trend>
+                  </span>
+                  <span style={{ marginLeft: 16 }}>
+                    日环比
+                    <Trend flag="down" className={styles.trend}>11%</Trend>
+                  </span>
+                </div>
               }
               contentHeight={46}
             >

@@ -6,7 +6,8 @@ title: 图表套件组合展示
 利用 Ant Design Pro 提供的图表套件，可以灵活组合符合设计规范的图表来满足复杂的业务需求。
 
 ````jsx
-import { ChartCard, yuan, Field, Trend, NumberInfo, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
+import { ChartCard, yuan, Field, NumberInfo, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
+import Trend from 'ant-design-pro/lib/Trend';
 import { Row, Col, Icon, Tooltip } from 'antd';
 import numeral from 'numeral';
 import moment from 'moment';
@@ -40,7 +41,7 @@ ReactDOM.render(
           data={visitData}
         />
       </ChartCard>
-    </Col>  
+    </Col>
     <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
         title="访问量"
@@ -54,21 +55,29 @@ ReactDOM.render(
           data={visitData}
         />
       </ChartCard>
-    </Col>  
+    </Col>
     <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
         title="线上购物转化率"
         action={<Tooltip title="购买效率"><Icon type="exclamation-circle-o" /></Tooltip>}
         total="78%"
-        footer={<Trend>
-          <Trend.Item title="周同比" flag="up">12.3%</Trend.Item>
-          <Trend.Item title="日环比" flag="down">11%</Trend.Item>
-        </Trend>}
+        footer={
+          <div>
+            <span>
+              周同比
+              <Trend flag="up" style={{ marginLeft: 8, color: 'rgba(0,0,0,.85)' }}>12%</Trend>
+            </span>
+            <span style={{ marginLeft: 16 }}>
+              日环比
+              <Trend flag="down" style={{ marginLeft: 8, color: 'rgba(0,0,0,.85)' }}>11%</Trend>
+            </span>
+          </div>
+        }
         contentHeight={46}
       >
         <MiniProgress percent={78} strokeWidth={8} target={80} color="#5DD1DD" />
       </ChartCard>
-    </Col>  
+    </Col>
   </Row>
 , mountNode);
 ````

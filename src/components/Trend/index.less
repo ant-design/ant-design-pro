@@ -1,0 +1,32 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
+
+.trendItem {
+  display: inline-block;
+  font-size: @font-size-base;
+  line-height: 22px;
+
+  & + & {
+    margin-left: 16px;
+  }
+  .up,
+  .down {
+    color: @green-6;
+    margin-left: 4px;
+    position: relative;
+    top: 1px;
+    i {
+      font-size: 12px;
+      transform: scale(0.83);
+    }
+  }
+  .down {
+    color: @red-6;
+    top: -1px;
+  }
+
+  &.trendItemGrey .up,
+  &.trendItemGrey .down {
+    color: @text-color;
+  }
+}
