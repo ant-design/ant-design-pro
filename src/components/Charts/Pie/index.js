@@ -34,7 +34,6 @@ class Pie extends Component {
     this.totalNode = n;
   }
 
-
   handleLegendClick = (item, i) => {
     const newItem = item;
     newItem.checked = !newItem.checked;
@@ -180,11 +179,9 @@ class Pie extends Component {
     }, () => {
       let left = 0;
       if (this.totalNode) {
-        left = -((this.totalNode.offsetWidth / 2) + ((margin || m)[1] / 2));
+        left = -((this.totalNode.offsetWidth / 2) + ((margin || m)[1] / 2)) + lineWidth;
       }
-      this.setState({
-        left,
-      });
+      this.setState({ left });
     });
   }
 
