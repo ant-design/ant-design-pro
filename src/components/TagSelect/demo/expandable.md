@@ -1,12 +1,14 @@
 ---
-order: 0
-title: 基础样例
+order: 1
+title: 可展开和收起
 ---
 
-结合 `Tag` 的 `TagSelect` 组件，方便的应用于筛选类目的业务场景中。
+使用 `expandable` 属性，让标签组可以收起，避免过高。
 
 ````jsx
 import TagSelect from 'ant-design-pro/lib/TagSelect';
+
+const TagExpand = TagSelect.Expand;
 
 function handleFormSubmit(checkedValue) {
   console.log(checkedValue);
@@ -20,6 +22,12 @@ ReactDOM.render(
     <TagSelect.Option value="cat4">类目四</TagSelect.Option>
     <TagSelect.Option value="cat5">类目五</TagSelect.Option>
     <TagSelect.Option value="cat6">类目六</TagSelect.Option>
+    <TagSelect.Option value="cat7">类目七</TagSelect.Option>
+    <TagSelect.Option value="cat8">类目八</TagSelect.Option>
+    <TagSelect.Option value="cat9">类目九</TagSelect.Option>
+    <TagSelect.Option value="cat10">类目十</TagSelect.Option>
+    <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
+    <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
   </TagSelect>
 , mountNode);
 ````
