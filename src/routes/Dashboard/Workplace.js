@@ -106,7 +106,7 @@ export default class Workplace extends PureComponent {
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
         <div className={styles.avatar}>
-          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/XertDCubOxUvZbCdgWTW.png" />
+          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/TmNVmrOsXeZwnvvZMNmo.png" />
         </div>
         <div className={styles.content}>
           <p className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</p>
@@ -120,12 +120,10 @@ export default class Workplace extends PureComponent {
         <div>
           <p>项目数</p>
           <p>56</p>
-          <em />
         </div>
         <div>
           <p>团队内排名</p>
           <p>8<span> / 24</span></p>
-          <em />
         </div>
         <div>
           <p>项目访问</p>
@@ -156,18 +154,20 @@ export default class Workplace extends PureComponent {
                     <Card bodyStyle={{ padding: 0 }} bordered={false}>
                       <Card.Meta
                         title={(
-                          <span className={styles.cardTitle}>
+                          <div className={styles.cardTitle}>
                             <Avatar size="small" src={item.logo} />
                             <Link to={item.href}>{item.title}</Link>
-                          </span>
+                          </div>
                         )}
                         description={item.description}
                       />
                       <div className={styles.projectItemContent}>
                         <Link to={item.memberLink}>{item.member || ''}</Link>
-                        {
-                          item.updatedAt && <span>{moment(item.updatedAt).fromNow()}</span>
-                        }
+                        {item.updatedAt && (
+                          <span className={styles.datetime} title={item.updatedAt}>
+                            {moment(item.updatedAt).fromNow()}
+                          </span>
+                        )}
                       </div>
                     </Card>
                   </Card.Grid>
@@ -193,7 +193,11 @@ export default class Workplace extends PureComponent {
                               <a style={{ fontWeight: 'bold' }}>{item.user.name}</a> 在 <a>xx</a> 新建了项目 <a>xxxx</a>
                             </p>
                           }
-                          description={moment(item.updatedAt).fromNow()}
+                          description={
+                            <span className={styles.datetime} title={item.updatedAt}>
+                              {moment(item.updatedAt).fromNow()}
+                            </span>
+                          }
                         />
                       </List.Item>
                     ))
