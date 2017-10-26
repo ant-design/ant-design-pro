@@ -90,7 +90,7 @@ const popoverContent = (
   <div style={{ width: 160 }}>
     吴加号
     <span className={styles.textSecondary} style={{ float: 'right' }}>
-      <Badge status="default" text="未响应" />
+      <Badge status="default" text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span>} />
     </span>
     <p className={styles.textSecondary} style={{ marginTop: 4 }} >耗时：2小时25分钟</p>
   </div>
@@ -260,14 +260,14 @@ export default class AdvancedProfile extends Component {
               <Description term="过期时间">2017-08-08</Description>
               <Description term="描述">这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...</Description>
             </DescriptionList>
-            <Divider style={{ marginBottom: 16 }} />
-            <DescriptionList style={{ marginBottom: 16 }} title="组名称" col="1">
+            <Divider style={{ margin: '16px 0' }} />
+            <DescriptionList size="small" style={{ marginBottom: 16 }} title="组名称" col="1">
               <Description term="学名">
                 Citrullus lanatus (Thunb.) Matsum. et Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..
               </Description>
             </DescriptionList>
-            <Divider style={{ marginBottom: 16 }} />
-            <DescriptionList title="组名称">
+            <Divider style={{ margin: '16px 0' }} />
+            <DescriptionList size="small" title="组名称">
               <Description term="负责人">付小小</Description>
               <Description term="角色码">1234568</Description>
             </DescriptionList>

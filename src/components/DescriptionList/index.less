@@ -17,6 +17,7 @@
   }
 
   .term {
+    line-height: 22px;
     padding-bottom: 16px;
     margin-right: 8px;
     color: @heading-color;
@@ -32,6 +33,7 @@
   }
 
   .detail {
+    line-height: 22px;
     width: 100%;
     padding-bottom: 16px;
     color: @text-color;
@@ -52,10 +54,17 @@
 }
 
 .descriptionListSmall {
+  // offset the padding-bottom of last row
+  :global {
+    .ant-row {
+      margin-bottom: -8px;
+    }
+  }
   .title {
     margin-bottom: 12px;
+    color: @text-color;
   }
-  .term {
+  .term, .detail {
     padding-bottom: 8px;
   }
 }
