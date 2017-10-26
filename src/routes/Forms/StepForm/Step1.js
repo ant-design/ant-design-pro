@@ -41,7 +41,7 @@ export default ({ formItemLayout, form, dispatch }) => {
           <Input.Group compact>
             <Select defaultValue="alipay" style={{ width: 80 }}>
               <Option value="alipay">支付宝</Option>
-              <Option value="wepay">微信</Option>
+              <Option value="bank">银行账户</Option>
             </Select>
             {getFieldDecorator('receiverAccount', {
               initialValue: 'test@example.com',

@@ -222,16 +222,15 @@ function AdvancedForm({ form, dispatch, submitting }) {
                 )}
               </Form.Item>
             </Col>
-            <Col id="timepicker-container" xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
               <Form.Item label={fieldLabels.dateRange2}>
                 {getFieldDecorator('dateRange2', {
                   rules: [{ required: true, message: '请输入' }],
                 })(
                   <TimePicker
-                    popupClassName={styles.popup}
                     placeholder="提醒时间"
                     style={{ width: '100%' }}
-                    getPopupContainer={() => document.getElementById('timepicker-container')}
+                    getPopupContainer={trigger => trigger.parentNode}
                   />
                 )}
               </Form.Item>
