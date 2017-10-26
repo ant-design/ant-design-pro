@@ -2,11 +2,12 @@
 @import "../../utils/utils.less";
 
 .activitiesList {
-  padding: 0 24px 24px 24px;
-  :global {
-    .ant-list-item-meta-title:hover {
-      color: @text-color;
-    }
+  padding: 0 24px 8px 24px;
+  .username {
+    color: @text-color;
+  }
+  .operation {
+    font-weight: normal;
   }
 }
 
@@ -14,7 +15,7 @@
   display: flex;
   .avatar {
     flex: 0 1 72px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     & > span {
       border-radius: 72px;
       display: block;
@@ -24,12 +25,14 @@
   }
   .content {
     position: relative;
-    top: 8px;
+    top: 4px;
     margin-left: 24px;
     flex: 1 1 auto;
     color: @text-color-secondary;
+    line-height: 22px;
     .contentTitle {
       font-size: 20px;
+      line-height: 28px;
       font-weight: 500;
       color: @heading-color;
       margin-bottom: 12px;
@@ -40,7 +43,6 @@
 .pageHeaderExtra {
   .clearfix();
   float: right;
-  margin-right: 8px;
   & > div {
     padding: 0 32px;
     position: relative;
@@ -60,43 +62,40 @@
         font-size: 20px;
       }
     }
-    & > em {
+    &:after {
       background-color: @border-color-split;
       position: absolute;
       top: 8px;
       right: 0;
       width: 1px;
       height: 40px;
+      content: '';
     }
   }
   & > div:last-child {
     padding-right: 0;
+    &:after {
+      display: none;
+    }
   }
 }
 
 .members {
-  margin-bottom: 35px;
   a {
     display: block;
-    margin-bottom: 24px;
+    margin: 12px 0;
     line-height: 24px;
     height: 24px;
     .textOverflow();
-    img {
-      border-radius: 24px;
-      display: inline;
-      position: relative;
-      top: -2px;
-      width: 24px;
-      height: 24px;
-      margin-right: 12px;
-      vertical-align: middle;
-    }
-    span {
+    .member {
       font-size: @font-size-base;
       color: @text-color;
       line-height: 24px;
       max-width: 100px;
+      vertical-align: top;
+      margin-left: 12px;
+      transition: all .3s;
+      display: inline-block;
       .textOverflow();
     }
     &:hover {
@@ -111,20 +110,21 @@
   :global {
     .ant-card-meta-description {
       color: @text-color-secondary;
-      min-height: 42px;
+      height: 44px;
+      line-height: 22px;
+      overflow: hidden;
     }
   }
   .cardTitle {
-    font-size: 14px;
-    :global {
-      .ant-avatar {
-        position: relative;
-        top: 5px;
-      }
-    }
+    font-size: 0;
     a {
       color: @heading-color;
       margin-left: 12px;
+      line-height: 24px;
+      height: 24px;
+      display: inline-block;
+      vertical-align: top;
+      font-size: @font-size-base;
       &:hover {
         color: @primary-color;
       }
@@ -135,7 +135,7 @@
   }
   .projectItemContent {
     display: flex;
-    margin-top: 12px;
+    margin-top: 8px;
     overflow: hidden;
     font-size: 12px;
     height: 20px;
@@ -150,12 +150,16 @@
         color: @primary-color;
       }
     }
-    span {
-      color: @text-color-secondary;
+    .datetime {
+      color: @disabled-color;
       flex: 0 0 auto;
       float: right;
     }
   }
+}
+
+.datetime {
+  color: @disabled-color;
 }
 
 @media screen and (max-width: @screen-xl)  and (min-width: @screen-lg) {
@@ -186,7 +190,7 @@
     & > div {
       padding: 0 16px;
       text-align: left;
-      & > em {
+      &:after {
         display: none;
       }
     }

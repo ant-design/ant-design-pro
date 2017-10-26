@@ -1,6 +1,6 @@
 import React, { PureComponent, createElement } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Icon } from 'antd';
+import { Button } from 'antd';
 import styles from './index.less';
 
 // TODO: 添加逻辑
@@ -32,8 +32,8 @@ class EditableLinkGroup extends PureComponent {
           ))
         }
         {
-          <Button size="small" onClick={onAdd}>
-            <Icon type="plus" />添加
+          <Button size="small" type="primary" ghost onClick={onAdd} icon="plus">
+            添加
           </Button>
         }
       </div>
