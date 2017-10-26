@@ -282,7 +282,7 @@ export default class SearchList extends Component {
           <Card
             style={{ marginTop: 24 }}
             bordered={false}
-            bodyStyle={{ padding: '12px 24px 32px 24px' }}
+            bodyStyle={{ padding: '8px 32px 32px 32px' }}
           >
             <List
               size="large"

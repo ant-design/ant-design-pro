@@ -4,8 +4,17 @@
 .coverCardList {
   margin-bottom: -24px;
   :global {
+    .ant-card-meta-title > a {
+      color: @heading-color;
+    }
+    .ant-card:hover .ant-card-meta-title > a {
+      color: @primary-color;
+    }
     .ant-card-meta-description {
       color: @text-color;
+      height: 44px;
+      line-height: 22px;
+      overflow: hidden;
     }
   }
   .cardItemContent {

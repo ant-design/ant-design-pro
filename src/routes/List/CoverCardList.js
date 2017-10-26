@@ -81,7 +81,7 @@ export default class CoverCardList extends PureComponent {
               cover={<img alt={item.title} src={item.cover} />}
             >
               <Card.Meta
-                title={item.title}
+                title={<a href="#">{item.title}</a>}
                 description={item.subDescription}
               />
               <div className={styles.cardItemContent}>
