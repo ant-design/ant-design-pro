@@ -25,6 +25,7 @@ export default ({ formItemLayout, form, data, dispatch, submitting }) => {
   return (
     <Form layout="horizontal" className={styles.stepForm}>
       <Alert
+        closable
         showIcon
         message="确认转账后，资金将直接打入对方账户，无法退回。"
         style={{ marginBottom: 24 }}
@@ -73,6 +74,7 @@ export default ({ formItemLayout, form, data, dispatch, submitting }) => {
         )}
       </Form.Item>
       <Form.Item
+        style={{ marginBottom: 8 }}
         wrapperCol={{
           xs: { span: 24, offset: 0 },
           sm: { span: formItemLayout.wrapperCol.span, offset: formItemLayout.labelCol.span },
