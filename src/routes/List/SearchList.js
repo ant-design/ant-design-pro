@@ -137,8 +137,8 @@ export default class SearchList extends Component {
 
     const ListContent = ({ data: { content, updatedAt, avatar, owner, href } }) => (
       <div className={styles.listContent}>
-        <p>{content}</p>
-        <div>
+        <p className={styles.description}>{content}</p>
+        <div className={styles.extra}>
           <Avatar src={avatar} size="small" /><a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
           <em>{moment(updatedAt).format('YYYY-MM-DD hh:mm')}</em>
         </div>
@@ -305,7 +305,13 @@ export default class SearchList extends Component {
                     title={(
                       <a className={styles.listItemMetaTitle} href={item.href}>{item.title}</a>
                     )}
-                    description={<span><Tag>Ant Design</Tag><Tag>设计语言</Tag><Tag>蚂蚁金服</Tag></span>}
+                    description={
+                      <span>
+                        <Tag>Ant Design</Tag>
+                        <Tag>设计语言</Tag>
+                        <Tag>蚂蚁金服</Tag>
+                      </span>
+                    }
                   />
                   <ListContent data={item} />
                 </List.Item>

@@ -2,41 +2,31 @@
 @import "../../utils/utils.less";
 
 .listContent {
-  p {
-    line-height: 24px;
+  .description {
+    line-height: 22px;
     max-width: 720px;
   }
-  & > div {
+  .extra {
     color: @text-color-secondary;
     margin-top: 16px;
     height: 22px;
     line-height: 22px;
-    & > img {
-      margin-right: 16px;
-    }
-    & > span {
+    & > :global(.ant-avatar) {
       vertical-align: top;
       margin-right: 8px;
       width: 20px;
       height: 20px;
-      & > img {
-        vertical-align: top;
-      }
+      position: relative;
+      top: 1px;
     }
     & > em {
       color: @disabled-color;
       font-style: normal;
       margin-left: 16px;
     }
-    a {
-      color: @text-color-secondary;
-      &:hover {
-        color: @primary-color;
-      }
-    }
   }
 }
-.listItemMetaTitle {
+a.listItemMetaTitle {
   color: @heading-color;
 }
 .listItemExtra {

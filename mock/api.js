@@ -2,20 +2,24 @@ import { imgMap, getUrlParams } from './utils';
 
 export function fakeList(count) {
   const titles = [
-    'Vue',
-    'Ant Design Pro',
-    'Bootstrap',
-    'Angular',
-    'Ant Design',
-    'React',
     'Alipay',
-    'Ant Design Mobile',
+    'Angular',
+    'Ant Design Pro',
+    'Ant Design',
+    'Bootstrap',
+    'React',
+    'Vue',
+    'Webpack',
   ];
   const avatars = [
-    'https://gw.alipayobjects.com/zos/rmsportal/hYjIZrUoBfNxOAYBVDfc.png', // 凤蝶
-    'https://gw.alipayobjects.com/zos/rmsportal/HHWPIzPLCLYmVuPivyiA.png', // 云雀
-    'https://gw.alipayobjects.com/zos/rmsportal/irqByKtOdKfDojxIWTXF.png', // Basement
-    'https://gw.alipayobjects.com/zos/rmsportal/VcmdbCBcwPTGYgbYeMzX.png', // DesignLab
+    'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png', // Alipay
+    'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png', // Angular
+    'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png', // Ant Design Pro
+    'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png', // Ant Design
+    'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png', // Bootstrap
+    'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png', // React
+    'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png', // Vue
+    'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png', // Webpack
   ];
   const covers = [
     'https://gw.alipayobjects.com/zos/rmsportal/HrxcVbrKnCJOZvtzSqjN.png',
@@ -50,11 +54,11 @@ export function fakeList(count) {
       id: `fake-list-${i}`,
       owner: user[i % 10],
       title: titles[i % 8],
-      avatar: avatars[i % 4],
-      cover: (i / 4) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
+      avatar: avatars[i % 8],
+      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
-      logo: ['https://gw.alipayobjects.com/zos/rmsportal/KoJjkdbuTFxzJmmjuDVR.png', 'https://gw.alipayobjects.com/zos/rmsportal/UxGORCvEXJEsxOfEKZiA.png'][i % 2],
+      logo: avatars[i % 8],
       href: 'https://ant.design',
       updatedAt: new Date(new Date().getTime() - (1000 * 60 * 60 * 2 * i)),
       createdAt: new Date(new Date().getTime() - (1000 * 60 * 60 * 2 * i)),
