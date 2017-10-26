@@ -128,7 +128,7 @@ class StandardTable extends PureComponent {
           <Alert
             message={(
               <p>
-                已选择 <a>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
+                已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
                 服务调用总计 <span style={{ fontWeight: 600 }}>{totalCallNo}</span> 万
                 <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>清空</a>
               </p>
