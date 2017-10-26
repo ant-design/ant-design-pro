@@ -220,8 +220,7 @@ class BasicLayout extends React.PureComponent {
               {...menuProps}
               onOpenChange={this.handleOpenChange}
               selectedKeys={this.getCurrentMenuSelectedKeys()}
-              style={{ margin: '24px 0', width: '100%' }}
-              inlineIndent={24}
+              style={{ margin: '16px 0', width: '100%' }}
             >
               {this.getNavMenuItems(this.menus)}
             </Menu>
