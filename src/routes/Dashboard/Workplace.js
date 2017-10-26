@@ -96,10 +96,43 @@ export default class Workplace extends PureComponent {
     });
   }
 
+  renderActivities() {
+    const {
+      activities: { list },
+    } = this.props;
+    return list.map((item) => {
+      const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
+        if (item[key]) {
+          return <a href={item[key].link} key={item[key].name}>{item[key].name}</a>;
+        }
+        return key;
+      });
+      return (
+        <List.Item key={item.id}>
+          <List.Item.Meta
+            avatar={<Avatar src={item.user.avatar} />}
+            title={
+              <span>
+                <a className={styles.username}>{item.user.name}</a>
+                &nbsp;
+                <span className={styles.event}>{events}</span>
+              </span>
+            }
+            description={
+              <span className={styles.datetime} title={item.updatedAt}>
+                {moment(item.updatedAt).fromNow()}
+              </span>
+            }
+          />
+        </List.Item>
+      );
+    });
+  }
+
   render() {
     const {
       project: { loading: projectLoading, notice },
-      activities: { loading: activitiesLoading, list: activitiesList },
+      activities: { loading: activitiesLoading },
       chart: { radarData },
     } = this.props;
 
@@ -183,29 +216,7 @@ export default class Workplace extends PureComponent {
             >
               <List loading={activitiesLoading} size="large">
                 <div className={styles.activitiesList}>
-                  {
-                    activitiesList.map(item => (
-                      <List.Item key={item.id}>
-                        <List.Item.Meta
-                          avatar={<Avatar src={item.user.avatar} />}
-                          title={
-                            <span>
-                              <a className={styles.username}>{item.user.name}</a>
-                              &nbsp;
-                              <span className={styles.operation}>
-                                在 <a>xx</a> 新建了项目 <a>xxxx</a>
-                              </span>
-                            </span>
-                          }
-                          description={
-                            <span className={styles.datetime} title={item.updatedAt}>
-                              {moment(item.updatedAt).fromNow()}
-                            </span>
-                          }
-                        />
-                      </List.Item>
-                    ))
-                  }
+                  {this.renderActivities()}
                 </div>
               </List>
             </Card>
