@@ -7,33 +7,37 @@
     .legendItem {
       position: relative;
       text-align: center;
-      p {
-        cursor: pointer;
-      }
+      cursor: pointer;
+      color: @text-color-secondary;
+      line-height: 22px;
       h6 {
         color: @heading-color;
         padding-left: 16px;
         font-size: 24px;
         line-height: 32px;
-        margin-top: 2px;
+        margin-top: 4px;
       }
-      .split {
+      &:after {
         background-color: @border-color-split;
         position: absolute;
         top: 8px;
         right: 0;
         height: 40px;
         width: 1px;
+        content: '';
       }
     }
+    > :last-child .legendItem:after {
+      display: none;
+    }
     .dot {
-      border-radius: 8px;
+      border-radius: 6px;
       display: inline-block;
-      margin-right: 8px;
+      margin-right: 6px;
       position: relative;
       top: -1px;
-      height: 8px;
-      width: 8px;
+      height: 6px;
+      width: 6px;
     }
   }
 }

@@ -53,9 +53,11 @@ class Radar extends PureComponent {
       hasLegend = true,
       fit = true,
       tickCount = 4,
-      margin = [16, 30, 16, 30] } = this.props;
+      margin = [24, 30, 16, 30] } = this.props;
 
-    const colors = ['#1890FF', '#FACC14', '#2FC25B'];
+    const colors = [
+      '#1890FF', '#FACC14', '#2FC25B', '#8543E0', '#F04864', '#13C2C2', '#fa8c16', '#a0d911',
+    ];
 
     if (!data || (data && data.length < 1)) {
       return;
@@ -87,16 +89,40 @@ class Radar extends PureComponent {
 
     chart.axis('label', {
       line: null,
+      labelOffset: 8,
+      labels: {
+        label: {
+          fill: 'rgba(0, 0, 0, .65)',
+        },
+      },
+      grid: {
+        line: {
+          stroke: '#e9e9e9',
+          lineWidth: 1,
+          lineDash: [0, 0],
+        },
+      },
     });
 
     chart.axis('value', {
       grid: {
         type: 'polygon',
+        line: {
+          stroke: '#e9e9e9',
+          lineWidth: 1,
+          lineDash: [0, 0],
+        },
+      },
+      labels: {
+        label: {
+          fill: 'rgba(0, 0, 0, .65)',
+        },
       },
     });
 
     chart.line().position('label*value').color('name', colors);
-    chart.point().position('label*value').color('name', colors).shape('circle');
+    chart.point().position('label*value').color('name', colors).shape('circle')
+      .size(3);
 
     chart.render();
 
@@ -129,7 +155,7 @@ class Radar extends PureComponent {
     return (
       <div className={styles.radar} style={{ height }}>
         <div>
-          { title && <h4>{title}</h4>}
+          {title && <h4>{title}</h4>}
           <div ref={this.handleRef} />
           {
             hasLegend && (
@@ -147,9 +173,6 @@ class Radar extends PureComponent {
                           <span>{item.name}</span>
                         </p>
                         <h6>{item.value}</h6>
-                        {
-                          i !== (legendData.length - 1) && <div className={styles.split} />
-                        }
                       </div>
                     </Col>
                   ))

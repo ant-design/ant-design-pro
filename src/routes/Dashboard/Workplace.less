@@ -2,11 +2,12 @@
 @import "../../utils/utils.less";
 
 .activitiesList {
-  padding: 0 24px 24px 24px;
-  :global {
-    .ant-list-item-meta-title:hover {
-      color: @text-color;
-    }
+  padding: 0 24px 8px 24px;
+  .username {
+    color: @text-color;
+  }
+  .operation {
+    font-weight: normal;
   }
 }
 
@@ -80,28 +81,21 @@
 }
 
 .members {
-  margin-bottom: 35px;
   a {
     display: block;
-    margin-bottom: 24px;
+    margin: 12px 0;
     line-height: 24px;
     height: 24px;
     .textOverflow();
-    img {
-      border-radius: 24px;
-      display: inline;
-      position: relative;
-      top: -2px;
-      width: 24px;
-      height: 24px;
-      margin-right: 12px;
-      vertical-align: middle;
-    }
-    span {
+    .member {
       font-size: @font-size-base;
       color: @text-color;
       line-height: 24px;
       max-width: 100px;
+      vertical-align: top;
+      margin-left: 12px;
+      transition: all .3s;
+      display: inline-block;
       .textOverflow();
     }
     &:hover {

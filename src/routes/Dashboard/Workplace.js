@@ -189,9 +189,13 @@ export default class Workplace extends PureComponent {
                         <List.Item.Meta
                           avatar={<Avatar src={item.user.avatar} />}
                           title={
-                            <p>
-                              <a style={{ fontWeight: 'bold' }}>{item.user.name}</a> 在 <a>xx</a> 新建了项目 <a>xxxx</a>
-                            </p>
+                            <span>
+                              <a className={styles.username}>{item.user.name}</a>
+                              &nbsp;
+                              <span className={styles.operation}>
+                                在 <a>xx</a> 新建了项目 <a>xxxx</a>
+                              </span>
+                            </span>
                           }
                           description={
                             <span className={styles.datetime} title={item.updatedAt}>
@@ -222,21 +226,15 @@ export default class Workplace extends PureComponent {
             <Card
               style={{ marginBottom: 24 }}
               bordered={false}
-              title="xx 指数"
+              title="XX 指数"
               loading={radarData.length === 0}
             >
               <div className={styles.chart}>
-                {
-                  <Radar
-                    hasLegend
-                    height={286}
-                    data={radarData}
-                  />
-                }
+                <Radar hasLegend height={286} data={radarData} />
               </div>
             </Card>
             <Card
-              bodyStyle={{ paddingBottom: 0 }}
+              bodyStyle={{ paddingTop: 12, paddingBottom: 12 }}
               bordered={false}
               title="团队"
             >
@@ -246,8 +244,8 @@ export default class Workplace extends PureComponent {
                     members.map(item => (
                       <Col span={12} key={`members-item-${item.id}`}>
                         <Link to={item.link}>
-                          <img src={item.logo} alt={item.title} />
-                          <span>{item.title}</span>
+                          <Avatar src={item.logo} size="small" />
+                          <span className={styles.member}>{item.title}</span>
                         </Link>
                       </Col>
                     ))
