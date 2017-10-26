@@ -184,7 +184,7 @@ export default class SearchList extends Component {
         <div>
           <Card bordered={false}>
             <Form layout="inline">
-              <StandardFormRow title="所属类目" block>
+              <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
                 <FormItem>
                   {getFieldDecorator('category')(
                     <TagSelect onChange={this.handleFormSubmit} expandable>
