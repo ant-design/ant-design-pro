@@ -88,3 +88,12 @@
   color: @text-color-secondary;
   font-style: normal;
 }
+
+.popup {
+  width: ~"calc(100% - 16px)";
+  :global {
+    .ant-time-picker-panel-select {
+      width: 33.33%;
+    }
+  }
+}

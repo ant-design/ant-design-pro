@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Alert, Divider } from 'antd';
 import { routerRedux } from 'dva/router';
+import { digitUppercase } from '../../../utils/utils';
 import styles from './style.less';
 
 export default ({ formItemLayout, form, data, dispatch, submitting }) => {
@@ -56,7 +57,8 @@ export default ({ formItemLayout, form, data, dispatch, submitting }) => {
         className={styles.stepFormText}
         label="转账金额"
       >
-        <span className={styles.money}>{data.amount}</span> 元
+        <span className={styles.money}>{data.amount}</span>
+        <span className={styles.uppercase}>（{digitUppercase(data.amount)}）</span>
       </Form.Item>
       <Divider style={{ margin: '24px 0' }} />
       <Form.Item
