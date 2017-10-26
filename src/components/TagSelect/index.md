@@ -1,11 +1,11 @@
 ---
 type: General
-title: TagSelect 
+title: TagSelect
 subtitle: 标签选择器
 cols: 1
 ---
 
-倒计时组件。
+一组标签选择器，带全选/展开/收起功能。
 
 ## API
 
@@ -14,13 +14,4 @@ cols: 1
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
 | onChange | 标签选择的回调函数 | Function(checkedTags) |  |
-
-### TagSelect.TagOption
-
-| 参数      | 说明                                      | 类型         | 默认值 |
-|----------|------------------------------------------|-------------|-------|
-| value | 对应的值 | string |  |
-
-### TagSelect.TagExpand
-
-包裹在 `TagSelect.TagExpand` 的元素会被折叠。
+| expandable | 是否展示 `展开/收起` 按钮 | Boolean | false |

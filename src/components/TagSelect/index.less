@@ -5,20 +5,18 @@
   user-select: none;
   margin-left: -8px;
   position: relative;
+  overflow: hidden;
+  max-height: 32px;
+  transition: all .3s;
   :global {
     .ant-tag {
       padding: 0 8px;
       margin-right: 24px;
     }
   }
-  .expand {
-    transition: all 0.32s ease;
-    overflow: hidden;
-    max-height: 100px;
-  }
-  .fold {
-    .expand();
-    max-height: 0;
+  &.expanded {
+    transition: all .3s;
+    max-height: 200px;
   }
   .trigger {
     position: absolute;
@@ -28,8 +26,7 @@
       font-size: 12px;
     }
   }
+  &.hasExpandTag {
+    padding-right: 50px;
+  }
 }
-.expandTag {
-  padding-right: 50px;
-}
-

@@ -13,8 +13,6 @@ import styles from './CoverCardList.less';
 
 const { Option } = Select;
 const FormItem = Form.Item;
-const TagOption = TagSelect.Option;
-const TagExpand = TagSelect.Expand;
 
 /* eslint react/no-array-index-key: 0 */
 @Form.create()
@@ -156,21 +154,19 @@ export default class CoverCardList extends PureComponent {
               <StandardFormRow title="所属类目" block>
                 <FormItem>
                   {getFieldDecorator('category')(
-                    <TagSelect onChange={this.handleFormSubmit}>
-                      <TagOption value="cat1">类目一</TagOption>
-                      <TagOption value="cat2">类目二</TagOption>
-                      <TagOption value="cat3">类目三</TagOption>
-                      <TagOption value="cat4">类目四</TagOption>
-                      <TagOption value="cat5">类目五</TagOption>
-                      <TagOption value="cat6">类目六</TagOption>
-                      <TagOption value="cat7">类目七</TagOption>
-                      <TagOption value="cat8">类目八</TagOption>
-                      <TagOption value="cat9">类目九</TagOption>
-                      <TagOption value="cat10">类目十</TagOption>
-                      <TagExpand>
-                        <TagOption value="cat11">类目十一</TagOption>
-                        <TagOption value="cat12">类目十二</TagOption>
-                      </TagExpand>
+                    <TagSelect onChange={this.handleFormSubmit} expandable>
+                      <TagSelect.Option value="cat1">类目一</TagSelect.Option>
+                      <TagSelect.Option value="cat2">类目二</TagSelect.Option>
+                      <TagSelect.Option value="cat3">类目三</TagSelect.Option>
+                      <TagSelect.Option value="cat4">类目四</TagSelect.Option>
+                      <TagSelect.Option value="cat5">类目五</TagSelect.Option>
+                      <TagSelect.Option value="cat6">类目六</TagSelect.Option>
+                      <TagSelect.Option value="cat7">类目七</TagSelect.Option>
+                      <TagSelect.Option value="cat8">类目八</TagSelect.Option>
+                      <TagSelect.Option value="cat9">类目九</TagSelect.Option>
+                      <TagSelect.Option value="cat10">类目十</TagSelect.Option>
+                      <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
+                      <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
                     </TagSelect>
                   )}
                 </FormItem>
