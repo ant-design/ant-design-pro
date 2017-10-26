@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Icon, Card, Tabs, Table, Radio, DatePicker, Tooltip } from 'antd';
+import { Row, Col, Icon, Card, Tabs, Table, Radio, DatePicker, Tooltip, Menu, Dropdown } from 'antd';
 import numeral from 'numeral';
 import {
   ChartCard, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, TimelineChart,
@@ -108,9 +108,18 @@ export default class Analysis extends Component {
       :
       (salesType === 'online' ? salesTypeDataOnline : salesTypeDataOffline);
 
+    const menu = (
+      <Menu>
+        <Menu.Item>操作一</Menu.Item>
+        <Menu.Item>操作二</Menu.Item>
+      </Menu>
+    );
+
     const iconGroup = (
       <span className={styles.iconGroup}>
-        <Icon type="camera-o" /><Icon type="export" /><Icon type="ellipsis" />
+        <Dropdown overlay={menu} placement="bottomRight">
+          <Icon type="ellipsis" />
+        </Dropdown>
       </span>
     );
 

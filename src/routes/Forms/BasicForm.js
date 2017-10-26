@@ -51,7 +51,7 @@ export default class BasicForms extends PureComponent {
     };
 
     return (
-      <PageHeaderLayout title="基础表单" content="表单页是向后台提交数据的标准场景。">
+      <PageHeaderLayout title="基础表单" content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。">
         <Card bordered={false}>
           <Form
             onSubmit={this.handleSubmit}

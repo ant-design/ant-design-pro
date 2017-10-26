@@ -96,7 +96,7 @@ function AdvancedForm({ form, dispatch, submitting }) {
   return (
     <PageHeaderLayout
       title="高级表单"
-      content="在后台页面中，大批量的数据修改和提交是很常见的情况。"
+      content="高级表单常见于一次性输入和提交大批量数据的场景。"
       wrapperClassName={styles.advancedForm}
     >
       <Card title="仓库管理" className={styles.card} bordered={false}>
