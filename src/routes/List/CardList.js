@@ -63,7 +63,7 @@ export default class CardList extends PureComponent {
             dataSource={['', ...list]}
             renderItem={item => (item ? (
               <List.Item key={item.id}>
-                <Card hoverable actions={[<a>操作一</a>, <a>操作二</a>]}>
+                <Card actions={[<a>操作一</a>, <a>操作二</a>]}>
                   <Link to="/list/card-list">
                     <Card.Meta
                       avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}

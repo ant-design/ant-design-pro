@@ -215,7 +215,7 @@ export default class CoverCardList extends PureComponent {
             </Form>
           </Card>
           <div className={styles.cardList}>
-            { cardList }
+            {cardList}
           </div>
         </div>
       </PageHeaderLayout>
