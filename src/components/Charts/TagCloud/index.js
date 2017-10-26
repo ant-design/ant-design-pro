@@ -2,26 +2,34 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import G2 from 'g2';
 import Cloud from 'g-cloud';
-
+import Debounce from 'lodash-decorators/debounce';
 import styles from './index.less';
 
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-param-reassign: 0 */
-/* eslint no-return-assign: 0 */
 
 const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
-// const imgUrl = 'https://zos.alipayobjects.com/rmsportal/EEFqYWuloqIHRnh.jpg';
 
 class TagCloud extends PureComponent {
   componentDidMount() {
     this.initTagCloud();
-    this.renderChart(this.props.data);
+    this.renderChart();
+
+    window.addEventListener('resize', this.resize);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.data !== nextProps.data) {
       this.renderChart(nextProps.data);
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
+  resize = () => {
+    this.renderChart();
   }
 
   initTagCloud = () => {
@@ -57,7 +65,17 @@ class TagCloud extends PureComponent {
     });
   }
 
-  renderChart(data) {
+  saveRootRef = (node) => {
+    this.root = node;
+  }
+
+  saveNodeRef = (node) => {
+    this.node = node;
+  }
+
+  @Debounce(300)
+  renderChart = (newData) => {
+    const data = newData || this.props.data;
     if (!data || data.length < 1) {
       return;
     }
@@ -137,10 +155,10 @@ class TagCloud extends PureComponent {
     return (
       <div
         className={classNames(styles.tagCloud, this.props.className)}
-        ref={n => (this.root = n)}
+        ref={this.saveRootRef}
         style={{ width: '100%' }}
       >
-        <div ref={n => (this.node = n)} style={{ height: this.props.height }} />
+        <div ref={this.saveNodeRef} style={{ height: this.props.height }} />
       </div>
     );
   }

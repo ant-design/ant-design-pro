@@ -18,16 +18,17 @@
   },
   "dependencies": {
     "antd": "next",
-    "dva": "^2.0.3",
     "classnames": "^2.2.5",
+    "dva": "^2.0.3",
     "lodash": "^4.17.4",
+    "lodash-decorators": "^4.4.1",
+    "lodash.clonedeep": "^4.5.0",
     "numeral": "^2.0.6",
     "prop-types": "^15.5.10",
     "qs": "^6.5.0",
     "react": "^15.6.2",
     "react-document-title": "^2.0.3",
-    "react-dom": "^15.6.2",
-    "lodash.clonedeep": "^4.5.0"
+    "react-dom": "^15.6.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
