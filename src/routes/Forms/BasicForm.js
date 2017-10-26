@@ -150,7 +150,7 @@ export default class BasicForms extends PureComponent {
                 {getFieldDecorator('public', {
                   initialValue: '1',
                 })(
-                  <Radio.Group className={styles.radioGroup}>
+                  <Radio.Group>
                     <Radio value="1">公开</Radio>
                     <Radio value="2">部分公开</Radio>
                     <Radio value="3">不公开</Radio>

@@ -59,9 +59,8 @@ export default class PageHeader extends PureComponent {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
         return (
           <Breadcrumb.Item key={url}>
-            {createElement(linkElement, {
-              to: url,
-              href: url,
+            {createElement(index === pathSnippets.length - 1 ? 'span' : linkElement, {
+              [linkElement === 'a' ? 'href' : 'to']: url,
             }, breadcrumbNameMap[url] || breadcrumbNameMap[url.replace('/', '')] || url)}
           </Breadcrumb.Item>
         );
@@ -69,8 +68,7 @@ export default class PageHeader extends PureComponent {
       const breadcrumbItems = [(
         <Breadcrumb.Item key="home">
           {createElement(linkElement, {
-            to: '/',
-            href: '/',
+            [linkElement === 'a' ? 'href' : 'to']: '/',
           }, '首页')}
         </Breadcrumb.Item>
       )].concat(extraBreadcrumbItems);
@@ -85,7 +83,11 @@ export default class PageHeader extends PureComponent {
           {
             breadcrumbList.map(item => (
               <Breadcrumb.Item key={item.title}>
-                {item.href ? <a href="">{item.title}</a> : item.title}
+                {item.href ? (
+                  createElement(linkElement, {
+                    [linkElement === 'a' ? 'href' : 'to']: item.href,
+                  }, '首页')
+                ) : item.title}
               </Breadcrumb.Item>)
             )
           }

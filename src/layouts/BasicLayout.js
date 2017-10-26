@@ -58,6 +58,9 @@ class BasicLayout extends React.PureComponent {
   getDefaultCollapsedSubMenus(props) {
     const currentMenuSelectedKeys = [...this.getCurrentMenuSelectedKeys(props)];
     currentMenuSelectedKeys.splice(-1, 1);
+    if (currentMenuSelectedKeys.length === 0) {
+      return ['dashboard'];
+    }
     return currentMenuSelectedKeys;
   }
   getCurrentMenuSelectedKeys(props) {

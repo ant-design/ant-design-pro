@@ -102,7 +102,7 @@ class WaterWave extends PureComponent {
       ctx.lineTo(xOffset, canvasHeight);
       ctx.lineTo(startPoint[0], startPoint[1]);
 
-      const gradient = ctx.createLinearGradient(0, 0, 0, 170);
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvasHeight);
       gradient.addColorStop(0, '#ffffff');
       gradient.addColorStop(1, '#1890FF');
       ctx.fillStyle = gradient;
