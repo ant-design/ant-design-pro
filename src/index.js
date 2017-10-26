@@ -1,6 +1,7 @@
 import dva from 'dva';
 import 'moment/locale/zh-cn';
 import models from './models';
+import './polyfill';
 import './g2';
 // import { browserHistory } from 'dva/router';
 import './index.less';
