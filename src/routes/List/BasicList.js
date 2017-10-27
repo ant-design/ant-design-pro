@@ -117,7 +117,7 @@ export default class BasicList extends PureComponent {
             bodyStyle={{ padding: '0 32px 40px 32px' }}
             extra={extraContent}
           >
-            <Button type="dashed" style={{ width: '100%', margin: 8 }} icon="plus">
+            <Button type="dashed" style={{ width: '100%', marginBottom: 8 }} icon="plus">
               添加
             </Button>
             <List
