@@ -247,7 +247,7 @@ export default class TableList extends PureComponent {
             </FormItem>
           </Col>
         </Row>
-        <div>
+        <div style={{ overflow: 'hidden' }}>
           <span style={{ float: 'right' }}>
             <Button type="primary" htmlType="submit">查询</Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
