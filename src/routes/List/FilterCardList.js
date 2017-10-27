@@ -224,7 +224,7 @@ export default class FilterCardList extends PureComponent {
               <List.Item key={item.id}>
                 <Card
                   hoverable
-                  bodyStyle={{ paddingBottom: 16 }}
+                  bodyStyle={{ paddingBottom: 20 }}
                   actions={[
                     <Tooltip title="下载"><Icon type="download" /></Tooltip>,
                     <Tooltip title="编辑"><Icon type="edit" /></Tooltip>,

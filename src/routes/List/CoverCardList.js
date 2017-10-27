@@ -77,6 +77,7 @@ export default class CoverCardList extends PureComponent {
         renderItem={item => (
           <List.Item>
             <Card
+              className={styles.card}
               hoverable
               cover={<img alt={item.title} src={item.cover} />}
             >

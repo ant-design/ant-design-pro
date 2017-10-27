@@ -3,23 +3,35 @@
 
 .coverCardList {
   margin-bottom: -24px;
-  :global {
-    .ant-card-meta-title > a {
-      color: @heading-color;
+
+  .card {
+    :global {
+      .ant-card-meta-title {
+        margin-bottom: 4px;
+      }
+      .ant-card-meta-title > a {
+        color: @heading-color;
+      }
+      .ant-card-meta-description {
+        height: 44px;
+        line-height: 22px;
+        overflow: hidden;
+      }
     }
-    .ant-card:hover .ant-card-meta-title > a {
-      color: @primary-color;
-    }
-    .ant-card-meta-description {
-      color: @text-color-secondary;
-      height: 44px;
-      line-height: 22px;
-      overflow: hidden;
+
+    &:hover {
+      :global {
+        .ant-card-meta-title > a {
+          color: @primary-color;
+        }
+      }
     }
   }
+
   .cardItemContent {
     display: flex;
-    margin-top: 12px;
+    margin-top: 16px;
+    margin-bottom: -4px;
     line-height: 20px;
     height: 20px;
     & > span {
