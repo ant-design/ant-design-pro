@@ -28,13 +28,17 @@ An out-of-box UI solution for enterprise applications.
 ## Usage
 
 ```
-$ git clone git@github.com:ant-design/ant-design-pro
+$ git clone git@github.com:ant-design/ant-design-pro --depth=1
 $ cd ant-design-pro
 $ npm install
 $ npm start         // Visit http://127.0.0.1:8000
 ```
 
 More instruction at [documentation](http://pro.ant.design/docs/getting-started)。
+
+## Compatibility
+
+Modern browsers and IE11.
 
 ## Contributing
 
