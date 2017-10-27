@@ -27,11 +27,11 @@
 
 ## 使用
 
-```
+```bash
 $ git clone git@github.com:ant-design/ant-design-pro --depth=1
 $ cd ant-design-pro
 $ npm install
-$ npm start         // 访问 http://127.0.0.1:8000
+$ npm start         # 访问 http://localhost:8000
 ```
 
 更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。

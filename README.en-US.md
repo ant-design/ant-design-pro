@@ -25,13 +25,12 @@ An out-of-box UI solution for enterprise applications.
 - :1234: **Mock development**: Easy to use mock development solution
 - :white_check_mark: **UI Test**: Fly safely with unit test and e2e test
 
-## Usage
 
-```
+```bash
 $ git clone git@github.com:ant-design/ant-design-pro --depth=1
 $ cd ant-design-pro
 $ npm install
-$ npm start         // Visit http://127.0.0.1:8000
+$ npm start         # visit http://localhost:8000
 ```
 
 More instruction at [documentation](http://pro.ant.design/docs/getting-started)。
