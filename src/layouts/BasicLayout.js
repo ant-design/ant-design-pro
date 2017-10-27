@@ -44,6 +44,9 @@ class BasicLayout extends React.PureComponent {
       type: 'user/fetchCurrent',
     });
   }
+  componentWillUnmount() {
+    clearTimeout(this.resizeTimeout);
+  }
   onCollapse = (collapsed) => {
     this.props.dispatch({
       type: 'global/changeLayoutCollapsed',
@@ -170,9 +173,11 @@ class BasicLayout extends React.PureComponent {
       type: 'global/changeLayoutCollapsed',
       payload: !collapsed,
     });
-    const event = document.createEvent('HTMLEvents');
-    event.initEvent('resize', true, false);
-    window.dispatchEvent(event);
+    this.resizeTimeout = setTimeout(() => {
+      const event = document.createEvent('HTMLEvents');
+      event.initEvent('resize', true, false);
+      window.dispatchEvent(event);
+    }, 600);
   }
   handleNoticeClear = (type) => {
     message.success(`清空了${type}`);
