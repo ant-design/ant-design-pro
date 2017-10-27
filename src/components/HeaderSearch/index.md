@@ -1,8 +1,8 @@
 ---
-type: General
 title: HeaderSearch
 subtitle: 顶部搜索框
 cols: 1
+order: 8
 ---
 
 用在顶部导航上，提供应用全局搜索入口。

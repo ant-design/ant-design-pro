@@ -1,8 +1,8 @@
 ---
-type: General
 title: DescriptionList
 subtitle: 描述列表
 cols: 1
+order: 4
 ---
 
 描述列表用来展示一系列文本信息。

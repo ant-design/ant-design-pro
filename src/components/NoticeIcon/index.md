@@ -1,8 +1,8 @@
 ---
-type: General
 title: NoticeIcon
 subtitle: 通知菜单
 cols: 1
+order: 9
 ---
 
 用在顶部导航上，作为整个产品统一的通知中心。

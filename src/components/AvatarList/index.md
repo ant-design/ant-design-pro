@@ -1,7 +1,7 @@
 ---
-type: General
 title: AvatarList 
 subtitle: 用户头像列表
+order: 1
 cols: 1
 ---
 

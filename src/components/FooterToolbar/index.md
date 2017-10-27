@@ -1,8 +1,8 @@
 ---
-type: General
 title: FooterToolbar
 subtitle: 底部工具栏
 cols: 1
+order: 6
 ---
 
 固定在底部的工具栏。

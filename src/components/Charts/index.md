@@ -1,7 +1,7 @@
 ---
-type: General
 title: Charts
 subtitle: 图表
+order: 2
 cols: 2
 ---
 

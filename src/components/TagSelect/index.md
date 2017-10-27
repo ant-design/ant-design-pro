@@ -1,8 +1,8 @@
 ---
-type: General
 title: TagSelect
 subtitle: 标签选择器
 cols: 1
+order: 13
 ---
 
 一组标签选择器，带全选/展开/收起功能。
