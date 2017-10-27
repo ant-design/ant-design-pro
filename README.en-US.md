@@ -2,8 +2,7 @@
 
 # Ant Design Pro
 
-[![](https://img.shields.io/travis/ant-design/test2.svg?style=flat-square)](https://travis-ci.org/ant-design/test2)
-
+[![](https://img.shields.io/travis/ant-design/ant-design-pro.svg?style=flat-square)](https://travis-ci.org/ant-design/ant-design-pro) [![Gitter](https://badges.gitter.im/ant-design/ant-design-pro.svg)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 An out-of-box UI solution for enterprise applications.
 
 ![](https://gw.alipayobjects.com/zos/rmsportal/xEdBqwSzvoSapmnSnYjU.png)
