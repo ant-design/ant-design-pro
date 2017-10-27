@@ -58,13 +58,15 @@
     "jest": "^21.0.1",
     "lint-staged": "^4.3.0",
     "mockjs": "^1.0.1-beta3",
-    "nightmare": "^2.10.0",
     "react-test-renderer": "^16.0.0",
     "redbox-react": "^1.3.2",
     "roadhog": "^1.2.1",
     "roadhog-api-doc": "^0.1.8",
     "stylelint": "^8.1.0",
     "stylelint-config-standard": "^17.0.0"
+  },
+  "optionalDependencies": {
+    "nightmare": "^2.10.0"
   },
   "babel": {
     "presets": [
