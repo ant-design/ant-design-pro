@@ -33,7 +33,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
-| color | 图表颜色 | string | `#rgba(24, 144, 255, 0.2)` |
+| color | 图表颜色 | string | `rgba(24, 144, 255, 0.2)` |
 | borderColor | 图表边颜色 | string | `#1890FF` |
 | height | 图表高度 | number | - |
 | line | 是否显示描边 | boolean | false |
@@ -69,7 +69,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | color | 图表颜色 | string | `rgba(24, 144, 255, 0.85)` |
 | height | 图表高度 | number | - |
 | hasLegend | 是否显示 legend | boolean | `false` |
-| margin | 图表内部间距 | array | \[32, 0, 32, 40\] |
+| margin | 图表内部间距 | array | \[24, 0, 24, 0\] |
 | percent | 占比 | number | - |
 | title | 图表标题 | ReactNode\|string | - |
 | tooltip | 是否显示 tooltip | boolean | true |
@@ -83,7 +83,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | title | 图表标题 | ReactNode\|string | - |
 | height | 图表高度 | number | - |
 | hasLegend | 是否显示 legend | boolean | `false` |
-| margin | 图表内部间距 | array | \[16, 0, 16, 0\] |
+| margin | 图表内部间距 | array | \[24, 30, 16, 30\] |
 
 ### Gauge
 
@@ -91,8 +91,8 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 |----------|------------------------------------------|-------------|-------|
 | title | 图表标题 | ReactNode\|string | - |
 | height | 图表高度 | number | - |
-| color | 图表颜色 | string | `#00b1f8` |
-| bgColor | 图表北京颜色 | string | `#d3f3fe` |
+| color | 图表颜色 | string | `#2F9CFF` |
+| bgColor | 图表北京颜色 | string | `#F0F2F5` |
 | percent | 进度比例 | number | - |
 
 ### WaterWave
@@ -101,7 +101,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 |----------|------------------------------------------|-------------|-------|
 | title | 图表标题 | ReactNode\|string | - |
 | height | 图表高度 | number | - |
-| color | 图表颜色 | string | `#19AFFA` |
+| color | 图表颜色 | string | `#1890FF` |
 | percent | 进度比例 | number | - |
 
 ### TagCloud
