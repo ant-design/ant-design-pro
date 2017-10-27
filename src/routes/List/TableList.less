@@ -10,13 +10,16 @@
   }
 }
 
-.tableListForm :global(.ant-form-item) {
-  margin-right: 48px;
-  margin-bottom: 8px;
-}
-
-.formButton {
-  white-space: nowrap;
+.tableListForm {
+  :global {
+    .ant-form-item {
+      margin-bottom: 24px;
+      display: flex;
+    }
+    .ant-form-item-control-wrapper {
+      flex: 1;
+    }
+  }
 }
 
 @media screen and (max-width: @screen-lg) {
