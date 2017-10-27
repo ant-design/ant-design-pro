@@ -228,14 +228,16 @@ export default class Analysis extends Component {
               footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
               contentHeight={46}
             >
-              <span>
-                周同比
-                <Trend flag="up" className={styles.trend}>12%</Trend>
-              </span>
-              <span style={{ marginLeft: 16 }}>
-                日环比
-                <Trend flag="down" className={styles.trend}>11%</Trend>
-              </span>
+              <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                <span>
+                  周同比
+                  <Trend flag="up" className={styles.trend}>12%</Trend>
+                </span>
+                <span style={{ marginLeft: 16 }}>
+                  日环比
+                  <Trend flag="down" className={styles.trend}>11%</Trend>
+                </span>
+              </div>
             </ChartCard>
           </Col>
           <Col {...topColResponsiveProps}>
@@ -276,7 +278,7 @@ export default class Analysis extends Component {
               action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
               total="78%"
               footer={
-                <div>
+                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                   <span>
                     周同比
                     <Trend flag="up" className={styles.trend}>12%</Trend>
