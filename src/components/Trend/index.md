@@ -1,8 +1,8 @@
 ---
-type: General
 title: Trend
 subtitle: 趋势标记
 cols: 1
+order: 14
 ---
 
 趋势符号，标记上升和下降状态。

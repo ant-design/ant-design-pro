@@ -1,8 +1,8 @@
 ---
-type: General
 title: Result
 subtitle: 处理结果
 cols: 1
+order: 12
 ---
 
 结果页用于对用户进行的一系列任务处理结果进行反馈。

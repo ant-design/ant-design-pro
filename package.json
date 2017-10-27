@@ -1,6 +1,7 @@
 {
   "name": "ant-design-pro",
   "version": "0.9.0",
+  "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
     "precommit": "npm run lint-staged",
