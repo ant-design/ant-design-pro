@@ -6,7 +6,7 @@
 
 开箱即用的中台前端解决方案。
 
-![](https://gw.alipayobjects.com/zos/rmsportal/UMpXlUaLSMJMhejrlREh.png)
+![](https://gw.alipayobjects.com/zos/rmsportal/xEdBqwSzvoSapmnSnYjU.png)
 
 - 预览：http://preview.pro.ant.design
 - 首页：http://pro.ant.design

@@ -6,7 +6,7 @@
 
 An out-of-box UI solution for enterprise applications.
 
-![](https://gw.alipayobjects.com/zos/rmsportal/UMpXlUaLSMJMhejrlREh.png)
+![](https://gw.alipayobjects.com/zos/rmsportal/xEdBqwSzvoSapmnSnYjU.png)
 
 - Preview: http://preview.pro.ant.design
 - Home Page: http://pro.ant.design
