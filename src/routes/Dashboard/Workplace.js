@@ -139,7 +139,7 @@ export default class Workplace extends PureComponent {
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
         <div className={styles.avatar}>
-          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/TmNVmrOsXeZwnvvZMNmo.png" />
+          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/lctvVCLfRpYCkYxAsiVQ.png" />
         </div>
         <div className={styles.content}>
           <p className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</p>

@@ -102,12 +102,20 @@ class BasicLayout extends React.PureComponent {
           </SubMenu>
         );
       }
+      const icon = item.icon && <Icon type={item.icon} />;
       return (
         <Menu.Item key={item.key || item.path}>
-          <Link to={itemPath} target={item.target}>
-            {item.icon && <Icon type={item.icon} />}
-            <span>{item.name}</span>
-          </Link>
+          {
+            /^https?:\/\//.test(itemPath) ? (
+              <a href={itemPath} target={item.target}>
+                {icon}<span>{item.name}</span>
+              </a>
+            ) : (
+              <Link to={itemPath} target={item.target}>
+                {icon}<span>{item.name}</span>
+              </Link>
+            )
+          }
         </Menu.Item>
       );
     });
