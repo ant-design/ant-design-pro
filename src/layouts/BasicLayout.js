@@ -170,6 +170,9 @@ class BasicLayout extends React.PureComponent {
       type: 'global/changeLayoutCollapsed',
       payload: !collapsed,
     });
+    const event = document.createEvent('HTMLEvents');
+    event.initEvent('resize', true, false);
+    window.dispatchEvent(event);
   }
   handleNoticeClear = (type) => {
     message.success(`清空了${type}`);
