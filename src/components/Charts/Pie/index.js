@@ -178,7 +178,7 @@ class Pie extends Component {
     return (
       <div className={pieClassName} style={style}>
         <div className={styles.chart}>
-          <div ref={this.handleRef} />
+          <div ref={this.handleRef} style={{ fontSize: 0 }} />
           {
             (subTitle || total) && (
               <div
