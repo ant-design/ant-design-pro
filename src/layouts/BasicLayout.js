@@ -324,9 +324,11 @@ class BasicLayout extends React.PureComponent {
                 }, {
                   title: 'GitHub',
                   href: 'https://github.com/ant-design/ant-design-pro',
+                  blankTarget: true,
                 }, {
                   title: 'Ant Design',
                   href: 'http://ant.design',
+                  blankTarget: true,
                 }]}
                 copyright={
                   <div>
