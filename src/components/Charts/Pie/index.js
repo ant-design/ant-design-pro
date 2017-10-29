@@ -171,8 +171,6 @@ class Pie extends Component {
   render() {
     const { valueFormat, subTitle, total, hasLegend, className, style } = this.props;
     const { legendData } = this.state;
-    const mt = -((legendData.length * 38) - 16) / 2;
-
     const pieClassName = classNames(styles.pie, className, {
       [styles.hasLegend]: !!hasLegend,
     });
@@ -198,7 +196,7 @@ class Pie extends Component {
         </div>
         {
           hasLegend && (
-            <ul className={styles.legend} style={{ marginTop: mt }}>
+            <ul className={styles.legend}>
               {
                 legendData.map((item, i) => (
                   <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>

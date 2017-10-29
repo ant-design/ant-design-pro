@@ -12,14 +12,18 @@
   }
   .legend {
     position: absolute;
-    top: 50%;
     right: 0;
     min-width: 200px;
+    top: 50%;
+    transform: translateY(-50%);
     li {
       cursor: pointer;
       margin-bottom: 16px;
       height: 22px;
       line-height: 22px;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
   .dot {
@@ -73,6 +77,19 @@
       height: 32px;
       line-height: 32px;
       white-space: nowrap;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .pie {
+    &.hasLegend .chart {
+      width: 100%;
+      margin: 0 0 32px 0;
+    }
+    .legend {
+      position: static;
+      transform: none;
     }
   }
 }
