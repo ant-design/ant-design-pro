@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import G2 from 'g2';
 import { Divider } from 'antd';
 import classNames from 'classnames';
+import ReactFitText from 'react-fittext';
 import equal from '../equal';
 import styles from './index.less';
 
@@ -29,10 +30,6 @@ class Pie extends Component {
 
   handleRef = (n) => {
     this.node = n;
-  }
-
-  handleTotalRef = (n) => {
-    this.totalNode = n;
   }
 
   handleLegendClick = (item, i) => {
@@ -177,23 +174,23 @@ class Pie extends Component {
 
     return (
       <div className={pieClassName} style={style}>
-        <div className={styles.chart}>
-          <div ref={this.handleRef} style={{ fontSize: 0 }} />
-          {
-            (subTitle || total) && (
-              <div
-                className={styles.total}
-                ref={this.handleTotalRef}
-              >
-                {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
-                {
-                  // eslint-disable-next-line
-                  total && <p className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />
-                }
-              </div>
-            )
-          }
-        </div>
+        <ReactFitText maxFontSize={40}>
+          <div className={styles.chart}>
+            <div ref={this.handleRef} style={{ fontSize: 0 }} />
+            {
+              (subTitle || total) && (
+                <div className={styles.total}>
+                  {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
+                  {
+                    // eslint-disable-next-line
+                    total && <p className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />
+                  }
+                </div>
+              )
+            }
+          </div>
+        </ReactFitText>
+
         {
           hasLegend && (
             <ul className={styles.legend}>
