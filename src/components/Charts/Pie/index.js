@@ -174,7 +174,7 @@ class Pie extends Component {
 
     return (
       <div className={pieClassName} style={style}>
-        <ReactFitText maxFontSize={40}>
+        <ReactFitText maxFontSize={25}>
           <div className={styles.chart}>
             <div ref={this.handleRef} style={{ fontSize: 0 }} />
             {
