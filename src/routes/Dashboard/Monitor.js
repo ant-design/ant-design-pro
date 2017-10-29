@@ -119,7 +119,7 @@ export default class Monitor extends PureComponent {
                     percent={28}
                     subTitle="中式快餐"
                     total="28%"
-                    height={129}
+                    height={128}
                     lineWidth={2}
                   />
                 </Col>
@@ -130,7 +130,7 @@ export default class Monitor extends PureComponent {
                     percent={22}
                     subTitle="西餐"
                     total="22%"
-                    height={129}
+                    height={128}
                     lineWidth={2}
                   />
                 </Col>
@@ -141,7 +141,7 @@ export default class Monitor extends PureComponent {
                     percent={32}
                     subTitle="火锅"
                     total="32%"
-                    height={129}
+                    height={128}
                     lineWidth={2}
                   />
                 </Col>

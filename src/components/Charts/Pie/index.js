@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import G2 from 'g2';
 import { Divider } from 'antd';
+import classNames from 'classnames';
+import ReactFitText from 'react-fittext';
 import equal from '../equal';
 import styles from './index.less';
 
@@ -8,8 +10,7 @@ import styles from './index.less';
 class Pie extends Component {
   state = {
     legendData: [],
-    left: undefined,
-  }
+  };
 
   componentDidMount() {
     this.renderChart(this.props.data);
@@ -29,9 +30,6 @@ class Pie extends Component {
 
   handleRef = (n) => {
     this.node = n;
-  }
-  handleTotalRef = (n) => {
-    this.totalNode = n;
   }
 
   handleLegendClick = (item, i) => {
@@ -54,8 +52,9 @@ class Pie extends Component {
 
   renderChart(data) {
     const {
-      title, height = 0,
-      hasLegend, fit = true,
+      height = 0,
+      hasLegend,
+      fit = true,
       margin, percent, color,
       inner = 0.75,
       animate = true,
@@ -97,19 +96,6 @@ class Pie extends Component {
       return;
     }
 
-    let m = margin;
-    if (!margin) {
-      if (hasLegend) {
-        m = [24, 240, 24, 8];
-      } else if (percent) {
-        m = [0, 0, 0, 0];
-      } else {
-        m = [24, 0, 24, 0];
-      }
-    }
-
-    const h = title ? (height + m[0] + m[2] + (-46)) : (height + m[0] + m[2]);
-
     // clean
     this.node.innerHTML = '';
 
@@ -118,9 +104,9 @@ class Pie extends Component {
     const chart = new G2.Chart({
       container: this.node,
       forceFit: fit,
-      height: h,
+      height,
       plotCfg: {
-        margin: m,
+        margin,
       },
       animate,
     });
@@ -176,36 +162,25 @@ class Pie extends Component {
 
     this.setState({
       legendData,
-    }, () => {
-      let left = 0;
-      if (this.totalNode) {
-        left = -((this.totalNode.offsetWidth / 2) + ((margin || m)[1] / 2)) + lineWidth;
-      }
-      this.setState({ left });
     });
   }
 
   render() {
-    const { height, title, valueFormat, subTitle, total, hasLegend } = this.props;
-    const { legendData, left } = this.state;
-    const mt = -(((legendData.length * 38) - 16) / 2);
+    const { valueFormat, subTitle, total, hasLegend, className, style } = this.props;
+    const { legendData } = this.state;
+    const pieClassName = classNames(styles.pie, className, {
+      [styles.hasLegend]: !!hasLegend,
+    });
 
     return (
-      <div className={styles.pie} style={{ height }}>
-        <div>
-          {title && <h4 className={styles.title}>{title}</h4>}
-          <div className={styles.content}>
-            <div ref={this.handleRef} />
+      <div className={pieClassName} style={style}>
+        <ReactFitText maxFontSize={40}>
+          <div className={styles.chart}>
+            <div ref={this.handleRef} style={{ fontSize: 0 }} />
             {
               (subTitle || total) && (
-                <div
-                  className={styles.total}
-                  ref={this.handleTotalRef}
-                  style={{ marginLeft: left, opacity: left ? 1 : 0 }}
-                >
-                  {
-                    subTitle && <h4 className="pie-sub-title">{subTitle}</h4>
-                  }
+                <div className={styles.total}>
+                  {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
                   {
                     // eslint-disable-next-line
                     total && <p className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />
@@ -213,30 +188,31 @@ class Pie extends Component {
                 </div>
               )
             }
-            {
-              hasLegend && (
-                <ul className={styles.legend} style={{ marginTop: mt }}>
-                  {
-                    legendData.map((item, i) => (
-                      <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
-                        <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
-                        <span className={styles.legendTitle}>{item.x}</span>
-                        <Divider type="vertical" />
-                        <span className={styles.percent}>{`${(item['..percent'] * 100).toFixed(2)}%`}</span>
-                        <span
-                          className={styles.value}
-                          dangerouslySetInnerHTML={{
-                            __html: valueFormat ? valueFormat(item.y) : item.y,
-                          }}
-                        />
-                      </li>
-                    ))
-                  }
-                </ul>
-              )
-            }
           </div>
-        </div>
+        </ReactFitText>
+
+        {
+          hasLegend && (
+            <ul className={styles.legend}>
+              {
+                legendData.map((item, i) => (
+                  <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
+                    <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
+                    <span className={styles.legendTitle}>{item.x}</span>
+                    <Divider type="vertical" />
+                    <span className={styles.percent}>{`${(item['..percent'] * 100).toFixed(2)}%`}</span>
+                    <span
+                      className={styles.value}
+                      dangerouslySetInnerHTML={{
+                        __html: valueFormat ? valueFormat(item.y) : item.y,
+                      }}
+                    />
+                  </li>
+                ))
+              }
+            </ul>
+          )
+        }
       </div>
     );
   }

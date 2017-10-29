@@ -30,7 +30,8 @@
     "qs": "^6.5.0",
     "react": "^16.0.0",
     "react-document-title": "^2.0.3",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-fittext": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
