@@ -2,19 +2,28 @@
 @import "../../../utils/utils.less";
 
 .pie {
-  .content {
+  position: relative;
+  .chart {
     position: relative;
+  }
+  &.hasLegend .chart {
+    width: ~"calc(100% - 264px)";
+    margin-left: 24px;
   }
   .legend {
     position: absolute;
-    top: 50%;
     right: 0;
     min-width: 200px;
+    top: 50%;
+    transform: translateY(-50%);
     li {
       cursor: pointer;
       margin-bottom: 16px;
       height: 22px;
       line-height: 22px;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
   .dot {
@@ -47,13 +56,12 @@
     margin-bottom: 8px;
   }
   .total {
-    opacity: 0;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-top: -34px;
     text-align: center;
     height: 62px;
+    transform: translate(-50%, -50%);
     & > h4 {
       color: @text-color-secondary;
       font-size: 14px;
@@ -65,9 +73,23 @@
     & > p {
       color: @heading-color;
       display: block;
-      font-size: 30px;
+      font-size: 1.3em;
       height: 32px;
       line-height: 32px;
+      white-space: nowrap;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .pie {
+    &.hasLegend .chart {
+      width: 100%;
+      margin: 0 0 32px 0;
+    }
+    .legend {
+      position: static;
+      transform: none;
     }
   }
 }
