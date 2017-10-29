@@ -228,16 +228,12 @@ export default class Analysis extends Component {
               footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
               contentHeight={46}
             >
-              <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-                <span>
-                  周同比
-                  <Trend flag="up" className={styles.trend}>12%</Trend>
-                </span>
-                <span style={{ marginLeft: 16 }}>
-                  日环比
-                  <Trend flag="down" className={styles.trend}>11%</Trend>
-                </span>
-              </div>
+              <Trend flag="up" style={{ marginRight: 16 }}>
+                周同比<span className={styles.trendText}>12%</span>
+              </Trend>
+              <Trend flag="down">
+                日环比<span className={styles.trendText}>11%</span>
+              </Trend>
             </ChartCard>
           </Col>
           <Col {...topColResponsiveProps}>
@@ -279,14 +275,12 @@ export default class Analysis extends Component {
               total="78%"
               footer={
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-                  <span>
-                    周同比
-                    <Trend flag="up" className={styles.trend}>12%</Trend>
-                  </span>
-                  <span style={{ marginLeft: 16 }}>
-                    日环比
-                    <Trend flag="down" className={styles.trend}>11%</Trend>
-                  </span>
+                  <Trend flag="up" style={{ marginRight: 16 }}>
+                    周同比<span className={styles.trendText}>12%</span>
+                  </Trend>
+                  <Trend flag="down">
+                    日环比<span className={styles.trendText}>11%</span>
+                  </Trend>
                 </div>
               }
               contentHeight={46}
