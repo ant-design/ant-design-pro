@@ -52,13 +52,12 @@
     margin-bottom: 8px;
   }
   .total {
-    opacity: 0;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-top: -34px;
     text-align: center;
     height: 62px;
+    transform: translate(-50%, -50%);
     & > h4 {
       color: @text-color-secondary;
       font-size: 14px;
@@ -73,6 +72,7 @@
       font-size: 30px;
       height: 32px;
       line-height: 32px;
+      white-space: nowrap;
     }
   }
 }

@@ -9,8 +9,7 @@ import styles from './index.less';
 class Pie extends Component {
   state = {
     legendData: [],
-    left: undefined,
-  }
+  };
 
   componentDidMount() {
     this.renderChart(this.props.data);
@@ -31,6 +30,7 @@ class Pie extends Component {
   handleRef = (n) => {
     this.node = n;
   }
+
   handleTotalRef = (n) => {
     this.totalNode = n;
   }
@@ -165,17 +165,13 @@ class Pie extends Component {
 
     this.setState({
       legendData,
-    }, () => {
-      this.setState({
-        left: this.totalNode ? -(this.totalNode.offsetWidth / 2) + lineWidth : 0,
-      });
     });
   }
 
   render() {
     const { valueFormat, subTitle, total, hasLegend, className, style } = this.props;
-    const { legendData, left } = this.state;
-    const mt = -(((legendData.length * 38) - 16) / 2);
+    const { legendData } = this.state;
+    const mt = -((legendData.length * 38) - 16) / 2;
 
     const pieClassName = classNames(styles.pie, className, {
       [styles.hasLegend]: !!hasLegend,
@@ -190,7 +186,6 @@ class Pie extends Component {
               <div
                 className={styles.total}
                 ref={this.handleTotalRef}
-                style={{ marginLeft: left, opacity: left ? 1 : 0 }}
               >
                 {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
                 {
