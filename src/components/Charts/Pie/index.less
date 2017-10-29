@@ -2,8 +2,13 @@
 @import "../../../utils/utils.less";
 
 .pie {
-  .content {
+  position: relative;
+  .chart {
     position: relative;
+  }
+  &.hasLegend .chart {
+    width: ~"calc(100% - 264px)";
+    margin-left: 24px;
   }
   .legend {
     position: absolute;
