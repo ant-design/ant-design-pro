@@ -10,6 +10,7 @@ import styles from './AdvancedProfile.less';
 
 const { Step } = Steps;
 const { Description } = DescriptionList;
+const ButtonGroup = Button.Group;
 
 const getWindowWidth = () => (window.innerWidth || document.documentElement.clientWidth);
 
@@ -23,13 +24,13 @@ const menu = (
 
 const action = (
   <div>
-    <Button>操作</Button>
-    <Button>操作</Button>
-    <Dropdown overlay={menu}>
-      <Button>
-        更多 <Icon type="down" />
-      </Button>
-    </Dropdown>
+    <ButtonGroup>
+      <Button>操作</Button>
+      <Button>操作</Button>
+      <Dropdown overlay={menu} placement="bottomRight">
+        <Button><Icon type="ellipsis" /></Button>
+      </Dropdown>
+    </ButtonGroup>
     <Button type="primary">主操作</Button>
   </div>
 );

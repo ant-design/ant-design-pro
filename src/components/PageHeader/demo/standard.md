@@ -8,9 +8,10 @@ title: Standard
 ````jsx
 import PageHeader from 'ant-design-pro/lib/PageHeader';
 import DescriptionList from 'ant-design-pro/lib/DescriptionList';
-import { Button, Menu, Icon, Row, Col } from 'antd';
+import { Button, Menu, Dropdown, Icon, Row, Col } from 'antd';
 
 const { Description } = DescriptionList;
+const ButtonGroup = Button.Group;
 
 const description = (
   <DescriptionList col="2">
@@ -31,8 +32,13 @@ const menu = (
 
 const action = (
   <div>
-    <Button>操作</Button>
-    <Button>操作</Button>
+    <ButtonGroup>
+      <Button>操作</Button>
+      <Button>操作</Button>
+      <Dropdown overlay={menu} placement="bottomRight">
+        <Button><Icon type="ellipsis" /></Button>
+      </Dropdown>
+    </ButtonGroup>
     <Button type="primary">主操作</Button>
   </div>
 );
