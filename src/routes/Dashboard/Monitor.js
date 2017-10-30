@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Tooltip } from 'antd';
 import numeral from 'numeral';
 
 import { Pie, WaterWave, Gauge, TagCloud } from '../../components/Charts';
@@ -10,14 +10,6 @@ import ActiveChart from '../../components/ActiveChart';
 
 import styles from './Monitor.less';
 
-const MapData = [];
-for (let i = 0; i < 50; i += 1) {
-  MapData.push({
-    x: Math.floor(Math.random() * 600),
-    y: Math.floor(Math.random() * 400),
-    value: Math.floor(Math.random() * 1000) + 500,
-  });
-}
 const targetTime = new Date().getTime() + 3900000;
 
 @connect(state => ({
@@ -68,7 +60,9 @@ export default class Monitor extends PureComponent {
                 </Col>
               </Row>
               <div className={styles.mapChart}>
-                <img src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png" alt="map" />
+                <Tooltip title="等待后期实现">
+                  <img src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png" alt="map" />
+                </Tooltip>
               </div>
             </Card>
           </Col>
