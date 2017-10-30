@@ -241,7 +241,7 @@ export default class Workplace extends PureComponent {
               loading={radarData.length === 0}
             >
               <div className={styles.chart}>
-                <Radar hasLegend height={286} data={radarData} />
+                <Radar hasLegend height={343} data={radarData} />
               </div>
             </Card>
             <Card
