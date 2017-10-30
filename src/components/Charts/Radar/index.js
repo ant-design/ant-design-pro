@@ -69,7 +69,7 @@ class Radar extends PureComponent {
     const chart = new G2.Chart({
       container: this.node,
       forceFit: fit,
-      height: height - 22,
+      height: height - (hasLegend ? 80 : 22),
       plotCfg: {
         margin,
       },
