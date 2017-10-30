@@ -66,6 +66,8 @@ $ npm install
 $ npm start         # visit http://localhost:8000
 ```
 
+or you can use the command tool: [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli)
+
 More instruction at [documentation](http://pro.ant.design/docs/getting-started)。
 
 ## Compatibility

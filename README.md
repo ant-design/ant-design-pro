@@ -66,6 +66,8 @@ $ npm install
 $ npm start         # 访问 http://localhost:8000
 ```
 
+或者你可以使用集成化的 [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli) 工具。
+
 更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。
 
 ## 兼容性
