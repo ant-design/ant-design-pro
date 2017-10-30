@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Link } from 'dva/router';
 import { Card, Button, Icon, List } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -63,18 +62,16 @@ export default class CardList extends PureComponent {
             dataSource={['', ...list]}
             renderItem={item => (item ? (
               <List.Item key={item.id}>
-                <Card className={styles.card} actions={[<a>操作一</a>, <a>操作二</a>]}>
-                  <Link to="/list/card-list">
-                    <Card.Meta
-                      avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
-                      title={item.title}
-                      description={(
-                        <p className={styles.cardDescription}>
-                          <span>{item.description}</span>
-                        </p>
-                      )}
-                    />
-                  </Link>
+                <Card hoverable className={styles.card} actions={[<a>操作一</a>, <a>操作二</a>]}>
+                  <Card.Meta
+                    avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
+                    title={<a href="#">{item.title}</a>}
+                    description={(
+                      <p className={styles.cardDescription}>
+                        <span>{item.description}</span>
+                      </p>
+                    )}
+                  />
                 </Card>
               </List.Item>
               ) : (
