@@ -1,13 +1,10 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Spin } from 'antd';
 
 import styles from './index.less';
 
-const ChartCard = ({ contentHeight, title, action, total, footer, children, ...rest }) => (
-  <Card
-    bodyStyle={{ padding: '20px 24px 8px 24px' }}
-    {...rest}
-  >
+const ChartCard = ({ loading, contentHeight, title, action, total, footer, children, ...rest }) => {
+  const content = (
     <div className={styles.chartCard}>
       <div className={styles.meta}>
         <span className={styles.title}>{title}</span>
@@ -30,7 +27,20 @@ const ChartCard = ({ contentHeight, title, action, total, footer, children, ...r
         )
       }
     </div>
-  </Card>
-);
+  );
+
+  return (
+    <Card
+      bodyStyle={{ padding: '20px 24px 8px 24px' }}
+      {...rest}
+    >
+      {
+        loading ? (
+          <Spin size="large">{content}</Spin>
+        ) : content
+      }
+    </Card>
+  );
+};
 
 export default ChartCard;
