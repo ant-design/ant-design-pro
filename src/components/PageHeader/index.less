@@ -118,9 +118,13 @@
   .pageHeader {
     .action {
       :global {
-        .ant-btn-group, :not(.ant-btn-group) .ant-btn {
+        .ant-btn-group, .ant-btn {
           display: block;
           margin-bottom: 8px;
+        }
+        .ant-btn-group > .ant-btn {
+          display: inline-block;
+          margin-bottom: 0;
         }
       }
     }
