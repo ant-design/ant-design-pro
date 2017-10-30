@@ -60,6 +60,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | margin | 图表内部间距 | array | \[32, 0, 32, 40\] |
 | height | 图表高度 | number | - |
 | data | 数据 | array<{x, y}> | - |
+| autoLabel | 在宽度不足时，自动隐藏 x 轴的 label | boolean | `true` |
 
 ### Pie
 

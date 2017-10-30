@@ -76,7 +76,7 @@ class MiniBar extends PureComponent {
 
     return (
       <div className={styles.miniChart} style={{ height }}>
-        <div>
+        <div className={styles.chartContent}>
           <div ref={this.handleRef} />
         </div>
       </div>
