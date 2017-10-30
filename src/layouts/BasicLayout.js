@@ -78,6 +78,10 @@ class BasicLayout extends React.PureComponent {
   }
   onMenuClick = ({ key }) => {
     if (key === 'logout') {
+      this.props.dispatch({
+        type: 'logout/logoutSubmit',
+        payload: { status: undefined },
+      });
       this.props.dispatch(routerRedux.push('/user/login'));
     }
   }
