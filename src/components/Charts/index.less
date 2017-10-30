@@ -1,7 +1,7 @@
 .miniChart {
   position: relative;
   width: 100%;
-  & > div {
+  .chartContent {
     position: absolute;
     bottom: -34px;
     width: 100%;
@@ -9,5 +9,11 @@
       margin: 0 -5px;
       overflow: hidden;
     }
+  }
+  .chartLoading {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    margin-left: -7px;
   }
 }

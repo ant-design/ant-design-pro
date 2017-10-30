@@ -1,11 +1,18 @@
 import React, { PureComponent } from 'react';
 import G2 from 'g2';
+import Debounce from 'lodash-decorators/debounce';
 import equal from '../equal';
 import styles from '../index.less';
 
 class Bar extends PureComponent {
+  state = {
+    autoHideXLabels: false,
+  }
+
   componentDidMount() {
     this.renderChart(this.props.data);
+
+    window.addEventListener('resize', this.resize);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -15,8 +22,37 @@ class Bar extends PureComponent {
   }
 
   componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
     if (this.chart) {
       this.chart.destroy();
+    }
+  }
+
+  @Debounce(200)
+  resize = () => {
+    if (!this.node) {
+      return;
+    }
+    const canvasWidth = this.node.parentNode.clientWidth;
+    const { data = [], autoLabel = true } = this.props;
+    if (!autoLabel) {
+      return;
+    }
+    const minWidth = data.length * 30;
+    const { autoHideXLabels } = this.state;
+
+    if (canvasWidth <= minWidth) {
+      if (!autoHideXLabels) {
+        this.setState({
+          autoHideXLabels: true,
+        });
+        this.renderChart(data);
+      }
+    } else if (autoHideXLabels) {
+      this.setState({
+        autoHideXLabels: false,
+      });
+      this.renderChart(data);
     }
   }
 
@@ -25,7 +61,14 @@ class Bar extends PureComponent {
   }
 
   renderChart(data) {
-    const { height = 0, fit = true, color = 'rgba(24, 144, 255, 0.85)', margin = [32, 0, 32, 40] } = this.props;
+    const { autoHideXLabels } = this.state;
+    const {
+      height = 0,
+      fit = true,
+      color = 'rgba(24, 144, 255, 0.85)',
+      margin = [32, 0, (autoHideXLabels ? 8 : 32), 40],
+    } = this.props;
+
 
     if (!data || (data && data.length < 1)) {
       return;
@@ -47,9 +90,17 @@ class Bar extends PureComponent {
       },
     });
 
-    chart.axis('x', {
-      title: false,
-    });
+    if (autoHideXLabels) {
+      chart.axis('x', {
+        title: false,
+        tickLine: false,
+        labels: false,
+      });
+    } else {
+      chart.axis('x', {
+        title: false,
+      });
+    }
     chart.axis('y', {
       title: false,
       line: false,

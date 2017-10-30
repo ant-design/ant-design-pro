@@ -27,6 +27,7 @@ for (let i = 0; i < 7; i += 1) {
 }))
 export default class Analysis extends Component {
   state = {
+    loading: true,
     salesType: 'all',
     currentTabKey: '',
     rangePickerValue: [],
@@ -35,6 +36,10 @@ export default class Analysis extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'chart/fetch',
+    }).then(() => {
+      this.setState({
+        loading: false,
+      });
     });
   }
 
@@ -89,7 +94,7 @@ export default class Analysis extends Component {
   }
 
   render() {
-    const { rangePickerValue, salesType, currentTabKey } = this.state;
+    const { rangePickerValue, salesType, currentTabKey, loading } = this.state;
     const { chart } = this.props;
     const {
       visitData,
@@ -221,6 +226,7 @@ export default class Analysis extends Component {
         <Row gutter={24}>
           <Col {...topColResponsiveProps}>
             <ChartCard
+              loading={loading}
               bordered={false}
               title="总销售额"
               action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
@@ -238,6 +244,7 @@ export default class Analysis extends Component {
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
+              loading={loading}
               bordered={false}
               title="访问量"
               action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
@@ -254,6 +261,7 @@ export default class Analysis extends Component {
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
+              loading={loading}
               bordered={false}
               title="支付笔数"
               action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
@@ -269,6 +277,7 @@ export default class Analysis extends Component {
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
+              loading={loading}
               bordered={false}
               title="运营活动效果"
               action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
@@ -291,6 +300,7 @@ export default class Analysis extends Component {
         </Row>
 
         <Card
+          loading={loading}
           bordered={false}
           bodyStyle={{ padding: 0 }}
         >
@@ -359,8 +369,9 @@ export default class Analysis extends Component {
         </Card>
 
         <Row gutter={24}>
-          <Col lg={12} sm={24} xs={24}>
+          <Col xl={12} lg={24} md={24} sm={24} xs={24}>
             <Card
+              loading={loading}
               bordered={false}
               title="线上热门搜索"
               extra={iconGroup}
@@ -417,8 +428,9 @@ export default class Analysis extends Component {
               />
             </Card>
           </Col>
-          <Col lg={12} sm={24} xs={24}>
+          <Col xl={12} lg={24} md={24} sm={24} xs={24}>
             <Card
+              loading={loading}
               className={styles.salesCard}
               bordered={false}
               title="销售额类别占比"
@@ -452,6 +464,7 @@ export default class Analysis extends Component {
         </Row>
 
         <Card
+          loading={loading}
           className={styles.offlineCard}
           bordered={false}
           bodyStyle={{ padding: '0 0 32px 0' }}
