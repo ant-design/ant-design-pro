@@ -74,8 +74,8 @@ $ npm start         # 访问 http://localhost:8000
 
 ## 参与贡献
 
-我们非常欢迎你的贡献，你可以通过以下方式参与：
+我们非常欢迎你的贡献，你可以通过以下方式和我们一起共建 :smiley:：
 
 - 在你的公司或个人项目中使用 Ant Design Pro。
-- 通过 [Issue](http://github.com/ant-design/ant-design-pro/issues) 给我们报告 bug 或进行咨询。
-- 给我们提交 [Pull Request](http://github.com/ant-design/ant-design-pro/pulls) 改进我们的代码。
+- 通过 [Issue](http://github.com/ant-design/ant-design-pro/issues) 报告 bug 或进行咨询。
+- 提交 [Pull Request](http://github.com/ant-design/ant-design-pro/pulls) 改进 Pro 的代码。
