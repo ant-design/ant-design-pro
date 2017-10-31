@@ -28,8 +28,8 @@ ReactDOM.render(
     <p>页面内容 页面内容 页面内容 页面内容</p>
     <p>页面内容 页面内容 页面内容 页面内容</p>
     <FooterToolbar extra="提示信息">
-      <Button type="primary">提交</Button>
       <Button>取消</Button>
+      <Button type="primary">提交</Button>
     </FooterToolbar>
   </div>
 , mountNode);
