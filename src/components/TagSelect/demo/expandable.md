@@ -15,7 +15,7 @@ function handleFormSubmit(checkedValue) {
 }
 
 ReactDOM.render(
-  <TagSelect onChange={handleFormSubmit}>
+  <TagSelect onChange={handleFormSubmit} expandable>
     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
     <TagSelect.Option value="cat3">类目三</TagSelect.Option>

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Tag, Icon } from 'antd';
 
@@ -19,7 +19,7 @@ TagSelectOption.defaultProps = {
   displayName: 'TagSelectOption',
 };
 
-class TagSelect extends PureComponent {
+class TagSelect extends Component {
   static defaultProps = {
     initialValue: [],
   };
@@ -103,7 +103,7 @@ class TagSelect extends PureComponent {
           全部
         </CheckableTag>
         {
-          children.filter(child => child.props.displayName === 'TagSelectOption').map(child => React.cloneElement(child, {
+          checkedTags && children.filter(child => child.props.displayName === 'TagSelectOption').map(child => React.cloneElement(child, {
             key: `tag-select-${child.props.value}`,
             checked: checkedTags.indexOf(child.props.value) > -1,
             onChange: this.handleTagChange,
