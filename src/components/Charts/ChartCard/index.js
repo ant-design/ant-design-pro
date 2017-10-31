@@ -3,7 +3,9 @@ import { Card, Spin } from 'antd';
 
 import styles from './index.less';
 
-const ChartCard = ({ loading, contentHeight, title, action, total, footer, children, ...rest }) => {
+const ChartCard = ({
+  loading = false, contentHeight, title, action, total, footer, children, ...rest
+}) => {
   const content = (
     <div className={styles.chartCard}>
       <div className={styles.meta}>
@@ -34,11 +36,7 @@ const ChartCard = ({ loading, contentHeight, title, action, total, footer, child
       bodyStyle={{ padding: '20px 24px 8px 24px' }}
       {...rest}
     >
-      {
-        loading ? (
-          <Spin size="large">{content}</Spin>
-        ) : content
-      }
+      {<Spin spinning={loading}>{content}</Spin>}
     </Card>
   );
 };
