@@ -73,7 +73,7 @@ class TagCloud extends PureComponent {
     this.node = node;
   }
 
-  @Debounce(300)
+  @Debounce(500)
   renderChart = (newData) => {
     const data = newData || this.props.data;
     if (!data || data.length < 1) {
@@ -86,11 +86,6 @@ class TagCloud extends PureComponent {
     let width = 0;
     if (this.root) {
       width = this.root.offsetWidth * 4;
-    }
-
-    // clean
-    if (this.node) {
-      this.node.innerHTML = '';
     }
 
     data.sort((a, b) => b.value - a.value);
@@ -114,6 +109,11 @@ class TagCloud extends PureComponent {
     });
 
     layout.image(imgUrl, (imageCloud) => {
+      // clean
+      if (this.node) {
+        this.node.innerHTML = '';
+      }
+
       // 执行词云布局函数，并在回调函数中调用G2对结果进行绘制
       imageCloud.exec((texts) => {
         const chart = new G2.Chart({
