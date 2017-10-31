@@ -14,13 +14,13 @@ const content = (
 提供跨越设计与开发的体验解决方案。</p>
     <div className="link">
       <a>
-        <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/wUTAfuNZjhmCIxEPxQVY.svg" /> 快速开始
+        <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg" /> 快速开始
       </a>
       <a>
-        <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/qsmGbwvxTAjXfkkrZYov.svg" /> 产品简介
+        <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg" /> 产品简介
       </a>
       <a>
-        <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/UGEHGuwlGDalIJlbsNxL.svg" /> 产品文档
+        <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg" /> 产品文档
       </a>
     </div>
   </div>
