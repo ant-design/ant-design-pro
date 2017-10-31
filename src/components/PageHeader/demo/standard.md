@@ -82,7 +82,7 @@ ReactDOM.render(
   <div>
     <PageHeader
       title="单号：234231029431"
-      logo={<img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/JcBAEvlHGhVvBekIJCWT.svg" />}
+      logo={<img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png" />}
       action={action}
       content={description}
       extraContent={extra}
