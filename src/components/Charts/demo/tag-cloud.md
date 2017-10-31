@@ -11,7 +11,7 @@ import { TagCloud } from 'ant-design-pro/lib/Charts';
 const tags = [];
 for (let i = 0; i < 50; i += 1) {
   tags.push({
-    name: `test-${i}`,
+    name: `TagClout-Title-${i}`,
     value: Math.floor((Math.random() * 50)) + 20,
   });
 }

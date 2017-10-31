@@ -9,10 +9,10 @@ title: 基础样例
 import AvatarList from 'ant-design-pro/lib/AvatarList';
 
 ReactDOM.render(
-  <AvatarList size="small">
-    <AvatarList.Item tips="Jake" src="https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png" />
-    <AvatarList.Item tips="Andy" src="https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png" />
-    <AvatarList.Item tips="Niko" src="https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png" />
+  <AvatarList size="mini">
+    <AvatarList.Item tips="Jake" src="https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png" />
+    <AvatarList.Item tips="Andy" src="https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png" />
+    <AvatarList.Item tips="Niko" src="https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png" />
   </AvatarList>
 , mountNode);
 ````
