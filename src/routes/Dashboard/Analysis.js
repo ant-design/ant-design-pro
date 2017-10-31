@@ -413,9 +413,6 @@ export default class Analysis extends Component {
                 dataSource={searchData}
                 pagination={{
                   style: { marginBottom: 0 },
-                  showSizeChanger: true,
-                  showQuickJumper: true,
-                  pageSizeOptions: [5, 10, 15, 20],
                   pageSize: 5,
                 }}
               />
