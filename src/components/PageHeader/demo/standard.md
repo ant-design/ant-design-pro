@@ -14,7 +14,7 @@ const { Description } = DescriptionList;
 const ButtonGroup = Button.Group;
 
 const description = (
-  <DescriptionList col="2">
+  <DescriptionList size="small" col="2">
     <Description term="创建人">曲丽丽</Description>
     <Description term="订购产品">XX 服务</Description>
     <Description term="创建时间">2017-07-07</Description>
