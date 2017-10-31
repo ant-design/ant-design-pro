@@ -38,6 +38,15 @@ export default {
         payload: false,
       });
     },
+    *logout({ payload, callback }, { put }) {
+      yield put({
+        type: 'logoutHandle',
+        payload,
+      });
+      if (callback) {
+        callback();
+      }
+    },
   },
 
   reducers: {
@@ -52,6 +61,12 @@ export default {
       return {
         ...state,
         submitting: payload,
+      };
+    },
+    logoutHandle(state, { payload }) {
+      return {
+        ...state,
+        status: payload.status,
       };
     },
   },
