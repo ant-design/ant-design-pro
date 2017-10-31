@@ -28,7 +28,7 @@ const content = (
 
 const extra = (
   <div className="imgContainer">
-    <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/RWDkuWwBqMPLpNqGdxDp.png" />
+    <img style={{ width: '100%' }} alt="" src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png" />
   </div>
 );
 
@@ -56,7 +56,9 @@ ReactDOM.render(
 
 <style>
 #scaffold-src-components-PageHeader-demo-image .imgContainer {
-	text-align: center;
+  margin-top: -60px;
+  text-align: center;
+  width: 195px;
 }
 #scaffold-src-components-PageHeader-demo-image .link {
 	margin-top: 16px;
