@@ -73,6 +73,7 @@ export default class Login extends Component {
 
   render() {
     const { form, login } = this.props;
+    console.log('login', login);
     const { getFieldDecorator } = form;
     const { count, type } = this.state;
     return (

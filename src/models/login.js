@@ -8,6 +8,15 @@ export default {
   },
 
   effects: {
+    *logout({ payload, callback }, { put }) {
+      yield put({
+        type: 'logoutHandle',
+        payload,
+      });
+      if (callback) {
+        callback();
+      }
+    },
     *accountSubmit({ payload }, { call, put }) {
       yield put({
         type: 'changeSubmitting',
