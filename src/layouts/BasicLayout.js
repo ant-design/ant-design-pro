@@ -79,10 +79,14 @@ class BasicLayout extends React.PureComponent {
   onMenuClick = ({ key }) => {
     if (key === 'logout') {
       this.props.dispatch({
-        type: 'logout/logoutSubmit',
-        payload: { status: undefined },
+        type: 'login/logout',
+        payload: {
+          status: false,
+        },
+        callback: () => {
+          this.props.dispatch(routerRedux.push('/user/login'));
+        },
       });
-      this.props.dispatch(routerRedux.push('/user/login'));
     }
   }
   getDefaultCollapsedSubMenus(props) {
