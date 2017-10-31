@@ -8,8 +8,8 @@ const title = <div className={styles.title}>你的账户：AntDesign@example.com
 
 const actions = (
   <div className={styles.actions}>
-    <Button size="large" type="primary"><a href="">查看邮箱</a></Button>
-    <Button size="large"><Link to="/">返回首页</Link></Button>
+    <a href=""><Button size="large" type="primary">查看邮箱</Button></a>
+    <Link to="/"><Button size="large">返回首页</Button></Link>
   </div>
 );
 
