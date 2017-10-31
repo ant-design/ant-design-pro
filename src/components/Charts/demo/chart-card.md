@@ -14,7 +14,7 @@ import numeral from 'numeral';
 ReactDOM.render(
   <ChartCard
     title="销售额"
-    action={<Tooltip title="我是一段说明"><Icon type="exclamation-circle-o" /></Tooltip>}
+    action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
     total={yuan(126560)}
     footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
     contentHeight={46}

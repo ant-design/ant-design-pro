@@ -10,12 +10,16 @@
 }
 
 .avatarItem {
-  border: 1px solid #fff;
   display: inline-block;
   font-size: @font-size-base;
   margin-left: -8px;
   width: @avatar-size-base;
   height: @avatar-size-base;
+  :global {
+    .ant-avatar {
+      border: 1px solid #fff;
+    }
+  }
 }
 
 .avatarItemLarge {

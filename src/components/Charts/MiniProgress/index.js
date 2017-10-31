@@ -3,7 +3,7 @@ import { Tooltip } from 'antd';
 
 import styles from './index.less';
 
-const MiniProgress = ({ target, color, strokeWidth, percent }) => (
+const MiniProgress = ({ target, color = 'rgb(19, 194, 194)', strokeWidth, percent }) => (
   <div className={styles.miniProgress}>
     <Tooltip title={`目标值: ${target}%`}>
       <div
