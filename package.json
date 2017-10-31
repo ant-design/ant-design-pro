@@ -19,7 +19,7 @@
     "test:all": "node ./tests/run-tests.js"
   },
   "dependencies": {
-    "antd": "next",
+    "antd": "^3.0.0-beta.1",
     "classnames": "^2.2.5",
     "core-js": "^2.5.1",
     "dva": "^2.0.3",
