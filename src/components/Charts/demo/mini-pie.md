@@ -9,11 +9,13 @@ title: 迷你饼状图
 import { Pie } from 'ant-design-pro/lib/Charts';
 
 ReactDOM.render(
-  <Pie
-    percent={28}
-    subTitle="中式快餐"
-    total="28%"
-    height={129}
-  />
+  <div style={{ width: 200, display: 'inline-block' }}>
+    <Pie
+      percent={28}
+      subTitle="中式快餐"
+      total="28%"
+      height={130}
+    />
+  </div>
 , mountNode);
 ````
