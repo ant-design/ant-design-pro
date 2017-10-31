@@ -42,7 +42,7 @@ export function getTimeDistance(type) {
     const nextYear = nextDate.year();
     const nextMonth = nextDate.month();
 
-    return [moment(`${year}-${fixedZero(month + 1)}-01 00:00:00`), moment(new Date(`${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`).getTime() - 1000)];
+    return [moment(`${year}-${fixedZero(month + 1)}-01 00:00:00`), moment(moment(`${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`).valueOf() - 1000)];
   }
 
   if (type === 'year') {
