@@ -28,7 +28,7 @@ const data = [{
   title: '标题',
   description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
   datetime: moment('2017-08-07').fromNow(),
-  extra: <Tag color="red">标签</Tag>,
+  extra: <Tag color="red" style={{ marginRight: 0 }}>标签</Tag>,
 }];
 
 function onItemClick(item, tabProps) {
