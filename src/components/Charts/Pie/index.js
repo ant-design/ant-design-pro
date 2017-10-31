@@ -55,7 +55,7 @@ class Pie extends Component {
       height = 0,
       hasLegend,
       fit = true,
-      margin, percent, color,
+      margin = [12, 0, 12, 0], percent, color,
       inner = 0.75,
       animate = true,
       colors,
