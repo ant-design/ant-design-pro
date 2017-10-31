@@ -415,7 +415,7 @@ export default class Analysis extends Component {
                   style: { marginBottom: 0 },
                   showSizeChanger: true,
                   showQuickJumper: true,
-                  //pageSizeOptions: [5, 10, 15, 20],
+                  pageSizeOptions: [5, 10, 15, 20],
                   pageSize: 5,
                 }}
               />
