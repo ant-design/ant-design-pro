@@ -340,7 +340,7 @@ class BasicLayout extends React.PureComponent {
             </Switch>
             <GlobalFooter
               links={[{
-                title: '使用文档',
+                title: 'Pro 首页',
                 href: 'http://pro.ant.design',
                 blankTarget: true,
               }, {
