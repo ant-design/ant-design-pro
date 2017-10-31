@@ -1,4 +1,4 @@
-import { imgMap, getUrlParams } from './utils';
+import { getUrlParams } from './utils';
 
 const titles = [
   'Alipay',
@@ -178,7 +178,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '林东东',
-      avatar: imgMap.a,
+      avatar: avatars[0],
     },
     group: {
       name: '高逼格设计天团',
@@ -195,7 +195,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '付小小',
-      avatar: imgMap.c,
+      avatar: avatars[1],
     },
     group: {
       name: '高逼格设计天团',
@@ -212,7 +212,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '曲丽丽',
-      avatar: imgMap.b,
+      avatar: avatars[2],
     },
     group: {
       name: '中二少女团',
@@ -229,7 +229,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '周星星',
-      avatar: imgMap.c,
+      avatar: avatars[3],
     },
     project: {
       name: '5 月日常迭代',
@@ -242,7 +242,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '朱偏右',
-      avatar: imgMap.a,
+      avatar: avatars[4],
     },
     project: {
       name: '工程效能',
@@ -259,7 +259,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '乐哥',
-      avatar: imgMap.b,
+      avatar: avatars[5],
     },
     group: {
       name: '程序员日常',
