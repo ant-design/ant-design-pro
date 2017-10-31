@@ -97,7 +97,7 @@ export default class PageHeader extends PureComponent {
       breadcrumb = null;
     }
 
-    const tabDefaultValue = tabList && tabList.filter(item => item.default)[0];
+    const tabDefaultValue = tabList && (tabList.filter(item => item.default)[0] || tabList[0]);
 
     return (
       <div className={clsString}>
