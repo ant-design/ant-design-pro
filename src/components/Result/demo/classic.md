@@ -12,20 +12,22 @@ import { Button, Row, Col, Icon, Steps } from 'antd';
 const { Step } = Steps;
 
 const desc1 = (
-  <div style={{ fontSize: 12, color: 'rgba(0, 0, 0, 0.45)' }}>
-    <div style={{ margin: '8px 0 4px' }}>
-      曲丽丽<Icon style={{ marginLeft: 8 }} type="dingding-o" />
+  <div style={{ fontSize: 14, position: 'relative', left: 38 }}>
+    <div style={{ marginTop: 8, marginBottom: 4 }}>
+      曲丽丽
+      <Icon type="dingding-o" style={{ marginLeft: 8 }} />
     </div>
-    <div>2016-12-12 12:32</div>
+    <div style={{ marginTop: 8, marginBottom: 4 }}>2016-12-12 12:32</div>
   </div>
 );
 
 const desc2 = (
-  <div style={{ fontSize: 12 }}>
-    <div style={{ margin: '8px 0 4px' }}>
-      周毛毛<Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
+  <div style={{ fontSize: 14, position: 'relative', left: 38 }}>
+    <div style={{ marginTop: 8, marginBottom: 4 }}>
+      周毛毛
+      <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
     </div>
-    <div><a href="">催一下</a></div>
+    <div style={{ marginTop: 8, marginBottom: 4 }}><a href="">催一下</a></div>
   </div>
 );
 
