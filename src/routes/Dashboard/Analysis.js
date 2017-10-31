@@ -449,7 +449,7 @@ export default class Analysis extends Component {
                 valueFormat={val => yuan(val)}
                 height={240}
                 lineWidth={4}
-                style={{ marginBottom: 52 }}
+                style={{ marginBottom: 57 }}
               />
             </Card>
           </Col>
