@@ -11,8 +11,8 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Search } = Input;
 
-@connect(state => ({
-  list: state.list,
+@connect(({ list }) => ({
+  list,
 }))
 export default class BasicList extends PureComponent {
   componentDidMount() {

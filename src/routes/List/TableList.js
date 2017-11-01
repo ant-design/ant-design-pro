@@ -10,8 +10,8 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
-@connect(state => ({
-  rule: state.rule,
+@connect(({ rule }) => ({
+  rule,
 }))
 @Form.create()
 export default class TableList extends PureComponent {
