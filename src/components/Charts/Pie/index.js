@@ -36,7 +36,8 @@ class Pie extends Component {
   @Debounce(200)
   resize = () => {
     const { hasLegend } = this.props;
-    if (!hasLegend || !this.node) {
+    if (!hasLegend || !this.root) {
+      window.removeEventListener('resize', this.resize);
       return;
     }
     // antd xs size
