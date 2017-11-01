@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import addEventListener from 'rc-util/lib/Dom/addEventListener';
-import debounce from 'lodash.debounce';
+import Debounce from 'lodash-decorators/debounce';
 import { connect } from 'dva';
 import { Button, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'antd';
 import classNames from 'classnames';
@@ -93,7 +92,7 @@ const popoverContent = (
     <span className={styles.textSecondary} style={{ float: 'right' }}>
       <Badge status="default" text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span>} />
     </span>
-    <p className={styles.textSecondary} style={{ marginTop: 4 }} >耗时：2小时25分钟</p>
+    <p className={styles.textSecondary} style={{ marginTop: 4 }}>耗时：2小时25分钟</p>
   </div>
 );
 
@@ -156,21 +155,18 @@ export default class AdvancedProfile extends Component {
     });
 
     this.setStepDirection();
-    this.resizeEvent = addEventListener(window, 'resize', debounce(this.setStepDirection, 100, {
-      leading: false,
-    }));
+    window.addEventListener('resize', this.setStepDirection);
   }
 
   componentWillUnmount() {
-    if (this.resizeEvent) {
-      this.resizeEvent.remove();
-    }
+    window.removeEventListener('resize', this.setStepDirection);
   }
 
   onOperationTabChange = (key) => {
     this.setState({ operationkey: key });
   }
 
+  @Debounce(200)
   setStepDirection = () => {
     const { stepDirection } = this.state;
     const w = getWindowWidth();
@@ -233,7 +229,7 @@ export default class AdvancedProfile extends Component {
             <Description term="会员卡号">32943898021309809423</Description>
             <Description term="身份证">3321944288191034921</Description>
             <Description term="联系方式">18112345678</Description>
-            <Description term="联系地址">曲丽丽  18100000000  浙江省杭州市西湖区黄姑山路工专路交叉路口</Description>
+            <Description term="联系地址">曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口</Description>
           </DescriptionList>
           <DescriptionList style={{ marginBottom: 24 }} title="信息组">
             <Description term="某某数据">725</Description>
