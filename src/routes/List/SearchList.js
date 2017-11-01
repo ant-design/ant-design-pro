@@ -13,8 +13,8 @@ const { Option } = Select;
 const FormItem = Form.Item;
 
 @Form.create()
-@connect(state => ({
-  list: state.list,
+@connect(({ list }) => ({
+  list,
 }))
 export default class SearchList extends Component {
   state = {

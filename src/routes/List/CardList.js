@@ -6,8 +6,8 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
 import styles from './CardList.less';
 
-@connect(state => ({
-  list: state.list,
+@connect(({ list }) => ({
+  list,
 }))
 export default class CardList extends PureComponent {
   componentDidMount() {
