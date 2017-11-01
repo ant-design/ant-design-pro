@@ -24,3 +24,9 @@ ReactDOM.render(
   </div>
 , mountNode);
 ````
+
+<style>
+#scaffold-src-components-PageHeader-demo-simple .code-box-demo {
+  background: #f2f4f5;
+}
+</style>

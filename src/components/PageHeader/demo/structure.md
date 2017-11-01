@@ -41,7 +41,7 @@ ReactDOM.render(
 
 <style>
 #scaffold-src-components-PageHeader-demo-structure .code-box-demo {
-  background: #eee;
+  background: #f2f4f5;
 }
 #scaffold-src-components-PageHeader-demo-structure .logo {
   background: #3ba0e9;
