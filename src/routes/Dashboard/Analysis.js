@@ -424,6 +424,7 @@ export default class Analysis extends Component {
               className={styles.salesCard}
               bordered={false}
               title="销售额类别占比"
+              bodyStyle={{ padding: 24 }}
               extra={(
                 <div className={styles.salesCardExtra}>
                   {iconGroup}
