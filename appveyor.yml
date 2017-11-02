@@ -18,8 +18,5 @@ test_script:
   - npm run test:all
   - npm run build
 
-matrix:
-  fast_finish: true
-
 # Don't actually build.
 build: off
