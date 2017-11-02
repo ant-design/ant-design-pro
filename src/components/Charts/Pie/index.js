@@ -40,8 +40,7 @@ class Pie extends Component {
       window.removeEventListener('resize', this.resize);
       return;
     }
-    // antd xs size
-    if (this.root.parentNode.clientWidth <= 480) {
+    if (this.root.parentNode.clientWidth <= 380) {
       if (!this.state.legendBlock) {
         this.setState({
           legendBlock: true,
