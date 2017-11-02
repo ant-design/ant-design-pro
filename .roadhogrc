@@ -1,21 +1,15 @@
 {
   "entry": "src/index.js",
+  "extraBabelPlugins": [
+    "transform-runtime",
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
+  ],
   "env": {
     "development": {
       "extraBabelPlugins": [
-        "dva-hmr",
-        "transform-runtime",
-        "transform-decorators-legacy",
-        "transform-class-properties",
-        ["import", { "libraryName": "antd", "style": true }]
-      ]
-    },
-    "production": {
-      "extraBabelPlugins": [
-        "transform-runtime",
-        "transform-decorators-legacy",
-        "transform-class-properties",
-        ["import", { "libraryName": "antd", "style": true }]
+        "dva-hmr"
       ]
     }
   },
