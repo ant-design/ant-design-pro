@@ -14,7 +14,6 @@ install:
 
 # Post-install test scripts.
 test_script:
-  - npm run lint
   - npm run test:all
   - npm run site
   - move dist\* .
