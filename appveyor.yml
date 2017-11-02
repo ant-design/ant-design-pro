@@ -14,11 +14,9 @@ install:
 
 # Post-install test scripts.
 test_script:
+  - npm run lint
   - npm run test:all
-  - npm run site
-  - move dist\* .
-  - START /B "" npx http-server -p 8000
-  - npm test .e2e.js
+  - npm run build
 
 matrix:
   fast_finish: true
