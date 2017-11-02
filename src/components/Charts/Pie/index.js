@@ -96,7 +96,7 @@ class Pie extends Component {
       animate = true,
       colors,
       lineWidth = 0,
-      } = this.props;
+    } = this.props;
 
     const defaultColors = colors;
 
