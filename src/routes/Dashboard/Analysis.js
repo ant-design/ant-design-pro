@@ -437,20 +437,18 @@ export default class Analysis extends Component {
                   </div>
                 </div>
               )}
-              style={{ marginTop: 24 }}
+              style={{ marginTop: 24, minHeight: 509 }}
             >
               <h4 style={{ marginTop: 8, marginBottom: 32 }}>销售额</h4>
-              <div style={{ marginBottom: 57 }}>
-                <Pie
-                  hasLegend
-                  subTitle="销售额"
-                  total={yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))}
-                  data={salesPieData}
-                  valueFormat={val => yuan(val)}
-                  height={240}
-                  lineWidth={4}
-                />
-              </div>
+              <Pie
+                hasLegend
+                subTitle="销售额"
+                total={yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))}
+                data={salesPieData}
+                valueFormat={val => yuan(val)}
+                height={248}
+                lineWidth={4}
+              />
             </Card>
           </Col>
         </Row>
