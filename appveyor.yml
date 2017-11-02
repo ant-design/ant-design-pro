@@ -17,7 +17,7 @@ test_script:
   - npm run test:all
   - npm run site
   - move dist\* .
-  - START /B npx http-server -p 8000
+  - START /B "" npx http-server -p 8000
   - npm test .e2e.js
 
 matrix:
