@@ -3,7 +3,7 @@ const { kill } = require('cross-port-killer');
 
 const env = Object.create(process.env);
 env.BROWSER = 'none';
-const startServer = spawn('npm', ['start'], {
+const startServer = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['start'], {
   env,
 });
 
@@ -25,7 +25,7 @@ startServer.stdout.on('data', (data) => {
       data.toString().indexOf('Compiled with warnings') >= 0) {
     // eslint-disable-next-line
     console.log('Development server is started, ready to run tests.');
-    const testCmd = spawn('npm', ['test'], {
+    const testCmd = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['test'], {
       stdio: 'inherit',
     });
     testCmd.on('exit', () => {
