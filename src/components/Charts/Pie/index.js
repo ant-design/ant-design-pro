@@ -45,14 +45,16 @@ class Pie extends Component {
       if (!this.state.legendBlock) {
         this.setState({
           legendBlock: true,
+        }, () => {
+          this.renderChart();
         });
-        this.renderChart();
       }
     } else if (this.state.legendBlock) {
       this.setState({
         legendBlock: false,
+      }, () => {
+        this.renderChart();
       });
-      this.renderChart();
     }
   }
 
@@ -94,7 +96,7 @@ class Pie extends Component {
       animate = true,
       colors,
       lineWidth = 0,
-    } = this.props;
+      } = this.props;
 
     const defaultColors = colors;
 
