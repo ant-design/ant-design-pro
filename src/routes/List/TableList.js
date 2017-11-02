@@ -175,7 +175,7 @@ export default class TableList extends PureComponent {
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <span className={styles.sumbitButtons}>
+            <span className={styles.submitButtons}>
               <Button type="primary" htmlType="submit">查询</Button>
               <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>重置</Button>
               <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
