@@ -12,25 +12,15 @@ import styles from './SearchList.less';
 const { Option } = Select;
 const FormItem = Form.Item;
 
+const pageSize = 5;
+
 @Form.create()
 @connect(state => ({
   list: state.list,
 }))
 export default class SearchList extends Component {
-  state = {
-    count: 3,
-    showLoadMore: true,
-    loadingMore: false,
-  }
-
   componentDidMount() {
-    const { count } = this.state;
-    this.props.dispatch({
-      type: 'list/fetch',
-      payload: {
-        count,
-      },
-    });
+    this.fetchMore();
   }
 
   setOwner = () => {
@@ -40,30 +30,11 @@ export default class SearchList extends Component {
     });
   }
 
-  handleLoadMore = () => {
-    const { count } = this.state;
-    const nextCount = count + 5;
-
-    this.setState({
-      count: nextCount,
-      loadingMore: true,
-    });
+  fetchMore = () => {
     this.props.dispatch({
       type: 'list/fetch',
       payload: {
-        count: nextCount,
-      },
-      callback: () => {
-        this.setState({
-          loadingMore: false,
-        });
-
-        // fack count
-        if (nextCount < 10) {
-          this.setState({
-            showLoadMore: false,
-          });
-        }
+        count: pageSize,
       },
     });
   }
@@ -86,7 +57,6 @@ export default class SearchList extends Component {
   }
 
   render() {
-    const { showLoadMore, loadingMore } = this.state;
     const { form, list: { list, loading } } = this.props;
     const { getFieldDecorator } = form;
 
@@ -165,11 +135,10 @@ export default class SearchList extends Component {
       },
     };
 
-    const loadMore = showLoadMore ? (
+    const loadMore = list.length > 0 ? (
       <div style={{ textAlign: 'center', marginTop: 16 }}>
-        <Button onClick={this.handleLoadMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
-          {loadingMore && (<span><Icon type="loading" /> 加载中...</span>)}
-          {!loadingMore && (<span>加载更多</span>)}
+        <Button onClick={this.fetchMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
+          {loading ? <span><Icon type="loading" /> 加载中...</span> : '加载更多'}
         </Button>
       </div>
     ) : null;
@@ -286,7 +255,7 @@ export default class SearchList extends Component {
           >
             <List
               size="large"
-              loading={!loadingMore && loading}
+              loading={list.length === 0 ? loading : false}
               rowKey="id"
               itemLayout="vertical"
               loadMore={loadMore}
