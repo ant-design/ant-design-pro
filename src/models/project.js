@@ -17,7 +17,7 @@ export default {
       const response = yield call(queryProjectNotice);
       yield put({
         type: 'saveNotice',
-        payload: response,
+        payload: Array.isArray(response) ? response : [],
       });
       yield put({
         type: 'changeLoading',

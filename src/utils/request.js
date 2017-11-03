@@ -5,24 +5,9 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-
-  return response.json().then((result) => {
-    if (result.code) {
-      notification.error({
-        message: result.name,
-        description: result.message,
-      });
-    }
-    if (result.stack) {
-      notification.error({
-        message: '请求错误',
-        description: result.message,
-      });
-    }
-    const error = new Error(result.message);
-    error.response = response;
-    throw error;
-  });
+  const error = new Error(response.statusText);
+  error.response = response;
+  throw error;
 }
 
 /**
@@ -49,5 +34,18 @@ export default function request(url, options) {
   return fetch(url, newOptions)
     .then(checkStatus)
     .then(response => response.json())
-    .catch(err => ({ err }));
+    .catch((error) => {
+      if (error.code) {
+        notification.error({
+          message: error.name,
+          description: error.message,
+        });
+      }
+      if ('stack' in error && 'message' in error) {
+        notification.error({
+          message: `请求错误: ${url}`,
+          description: error.message,
+        });
+      }
+    });
 }
