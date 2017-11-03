@@ -6,6 +6,18 @@ import styles from './index.less';
 
 const { TabPane } = Tabs;
 
+function getBreadcrumbNameWithParams(breadcrumbNameMap, url) {
+  let name = '';
+  Object.keys(breadcrumbNameMap).forEach((item) => {
+    const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
+    const itemRegExp = new RegExp(itemRegExpStr);
+    if (itemRegExp.test(url)) {
+      name = breadcrumbNameMap[item];
+    }
+  });
+  return name;
+}
+
 export default class PageHeader extends PureComponent {
   static contextTypes = {
     routes: PropTypes.array,
@@ -59,9 +71,14 @@ export default class PageHeader extends PureComponent {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
         return (
           <Breadcrumb.Item key={url}>
-            {createElement(index === pathSnippets.length - 1 ? 'span' : linkElement, {
-              [linkElement === 'a' ? 'href' : 'to']: url,
-            }, breadcrumbNameMap[url] || breadcrumbNameMap[url.replace('/', '')] || url)}
+            {createElement(
+              index === pathSnippets.length - 1 ? 'span' : linkElement,
+              { [linkElement === 'a' ? 'href' : 'to']: url },
+              breadcrumbNameMap[url] ||
+              breadcrumbNameMap[url.replace('/', '')] ||
+              getBreadcrumbNameWithParams(breadcrumbNameMap, url) ||
+              url
+            )}
           </Breadcrumb.Item>
         );
       });
