@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Layout, Menu, Icon, Avatar, Dropdown, Tag, message, Spin } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
-import { Link, routerRedux, Route, Redirect, Switch } from 'dva/router';
+import { Link, Route, Redirect, Switch } from 'dva/router';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import { ContainerQuery } from 'react-container-query';
@@ -80,12 +80,6 @@ class BasicLayout extends React.PureComponent {
     if (key === 'logout') {
       this.props.dispatch({
         type: 'login/logout',
-        payload: {
-          status: false,
-        },
-        callback: () => {
-          this.props.dispatch(routerRedux.push('/user/login'));
-        },
       });
     }
   }
