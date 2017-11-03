@@ -6,7 +6,6 @@ export default {
   state: {
     list: [],
     loading: false,
-    cursor: 0,
   },
 
   effects: {
@@ -35,12 +34,6 @@ export default {
       };
     },
     changeLoading(state, action) {
-      return {
-        ...state,
-        loading: action.payload,
-      };
-    },
-    updateCursor(state, action) {
       return {
         ...state,
         loading: action.payload,
