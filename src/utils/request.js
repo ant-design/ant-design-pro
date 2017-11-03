@@ -47,5 +47,6 @@ export default function request(url, options) {
           description: error.message,
         });
       }
+      return error;
     });
 }
