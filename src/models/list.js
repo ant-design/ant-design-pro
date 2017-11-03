@@ -17,7 +17,7 @@ export default {
       const response = yield call(queryFakeList, payload);
       yield put({
         type: 'save',
-        payload: response,
+        payload: Array.isArray(response) ? response : [],
       });
       yield put({
         type: 'changeLoading',
