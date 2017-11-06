@@ -1,5 +1,7 @@
 ---
-title: AvatarList 
+title: 
+  en-US: AvatarList
+  zh-CN: 用户头像列表
 subtitle: 用户头像列表
 order: 1
 cols: 1

@@ -1,5 +1,7 @@
 ---
-title: DescriptionList
+title:
+  en-US: DescriptionList
+  zh-CN: 描述列表
 subtitle: 描述列表
 cols: 1
 order: 4

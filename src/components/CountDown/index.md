@@ -1,5 +1,7 @@
 ---
-title: CountDown 
+title:
+  en-US: CountDown
+  zh-CN: 倒计时
 subtitle: 倒计时
 cols: 1
 order: 3
