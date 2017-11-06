@@ -1,5 +1,7 @@
 ---
-title: FooterToolbar
+title:
+  en-US: FooterToolbar
+  zh-CN: 底部工具栏
 subtitle: 底部工具栏
 cols: 1
 order: 6
