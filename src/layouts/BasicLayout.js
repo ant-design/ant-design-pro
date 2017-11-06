@@ -152,7 +152,7 @@ class BasicLayout extends React.PureComponent {
     const { location } = this.props;
     const { pathname } = location;
     let title = 'Ant Design Pro';
-    getRouteData('UserLayout').forEach((item) => {
+    getRouteData('BasicLayout').forEach((item) => {
       if (item.path === pathname) {
         title = `${item.name} - Ant Design Pro`;
       }
