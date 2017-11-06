@@ -113,7 +113,7 @@ class BasicLayout extends React.PureComponent {
       } else {
         itemPath = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/');
       }
-      if (item.children && item.children.some(child => child.name)) {
+      if (item.children && item.children.every(child => child.name)) {
         return (
           <SubMenu
             title={
