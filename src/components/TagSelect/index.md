@@ -1,7 +1,7 @@
 ---
 title: 
   en-US: TagSelect
-  zh-CN: 标签选择器
+  zh-CN: TagSelect
 subtitle: 标签选择器
 cols: 1
 order: 13

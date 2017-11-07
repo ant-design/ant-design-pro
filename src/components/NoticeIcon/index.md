@@ -1,7 +1,7 @@
 ---
 title:
   en-US: NoticeIcon
-  zh-CN: 通知菜单
+  zh-CN: NoticeIcon
 subtitle: 通知菜单
 cols: 1
 order: 9

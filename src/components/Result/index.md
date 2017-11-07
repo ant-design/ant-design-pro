@@ -1,7 +1,7 @@
 ---
 title:
   en-US: Result
-  zh-CN: 处理结果
+  zh-CN: Result
 subtitle: 处理结果
 cols: 1
 order: 12
