@@ -4,7 +4,7 @@ cols: 1
 order: 3
 ---
 
-倒计时组件。
+Simple CountDown Component.
 
 ## API
 
