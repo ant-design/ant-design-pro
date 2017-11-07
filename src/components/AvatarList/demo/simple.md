@@ -1,9 +1,11 @@
 ---
 order: 0
-title: 基础样例 
+title: 
+  zh-CN: 基础样例 
+  en-US: Basic Usage
 ---
 
-简单的用户头像列表。
+Simplest of usage.
 
 ````jsx
 import AvatarList from 'ant-design-pro/lib/AvatarList';
