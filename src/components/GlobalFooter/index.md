@@ -1,7 +1,7 @@
 ---
 title:
   en-US: GlobalFooter
-  zh-CN: 全局页脚
+  zh-CN: GlobalFooter
 subtitle: 全局页脚
 cols: 1
 order: 7

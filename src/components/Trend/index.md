@@ -1,7 +1,7 @@
 ---
 title: 
   en-US: Trend
-  zh-CN: 趋势标记
+  zh-CN: Trend
 subtitle: 趋势标记
 cols: 1
 order: 14

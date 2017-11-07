@@ -1,7 +1,7 @@
 ---
 title:
   en-US: Exception
-  zh-CN: 异常
+  zh-CN: Exception
 subtitle: 异常
 cols: 1
 order: 5
