@@ -13,6 +13,10 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 - Documentation: http://pro.ant.design/docs/getting-started
 - FAQ: http://pro.ant.design/docs/faq
 
+## Translation Recruitment :loudspeaker:
+
+We need your help: https://github.com/ant-design/ant-design-pro/issues/120
+
 ## Features
 
 - :gem: **Neat Design**: Follow Ant Design specification
