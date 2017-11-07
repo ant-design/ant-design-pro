@@ -8,7 +8,7 @@
     "start": "roadhog server",
     "start:no-proxy": "NO_PROXY=true roadhog server",
     "build": "roadhog build",
-    "site": "roadhog-api-doc static",
+    "site": "roadhog-api-doc static && gh-pages -d dist",
     "analyze": "roadhog build --analyze",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
@@ -38,7 +38,8 @@
     "react-container-query": "^0.9.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.0.0",
-    "react-fittext": "^1.0.0"
+    "react-fittext": "^1.0.0",
+    "roadhog-api-doc": "^0.2.5"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
