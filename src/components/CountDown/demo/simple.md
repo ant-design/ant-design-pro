@@ -1,9 +1,17 @@
 ---
 order: 0
-title: 基础样例 
+title:
+  zh-CN: 基本
+  en-US: Basic
 ---
 
+## zh-CN
+
 简单的倒计时组件使用。
+
+## en-US
+
+The simplest usage.
 
 ````jsx
 import CountDown from 'ant-design-pro/lib/CountDown';
