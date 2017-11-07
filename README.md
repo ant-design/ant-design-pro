@@ -71,7 +71,7 @@ Or you can use the command tool: [ant-design-pro-cli](https://github.com/ant-des
 ```bash
 $ npm install ant-design-pro-cli -g
 $ mkdir pro-demo && cd pro-demo
-$ pro init
+$ pro new
 ```
 
 More instruction at [documentation](http://pro.ant.design/docs/getting-started)。

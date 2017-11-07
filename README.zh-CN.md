@@ -71,7 +71,7 @@ $ npm start         # 访问 http://localhost:8000
 ```bash
 $ npm install ant-design-pro-cli -g
 $ mkdir pro-demo && cd pro-demo
-$ pro init
+$ pro new
 ```
 
 更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。
