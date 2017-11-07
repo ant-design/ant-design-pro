@@ -103,7 +103,7 @@ export default class PageHeader extends PureComponent {
                 {item.href ? (
                   createElement(linkElement, {
                     [linkElement === 'a' ? 'href' : 'to']: item.href,
-                  }, '首页')
+                  }, item.title)
                 ) : item.title}
               </Breadcrumb.Item>)
             )
