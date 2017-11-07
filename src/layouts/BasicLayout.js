@@ -187,9 +187,14 @@ class BasicLayout extends React.PureComponent {
     return groupBy(newNotices, 'type');
   }
   handleOpenChange = (openKeys) => {
-    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+    // const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+    const lastOpenKey = openKeys[openKeys.length - 1];
+    const isMainMenu = this.menus.some(
+      item => (item.key === lastOpenKey || item.path === lastOpenKey)
+    );
     this.setState({
-      openKeys: latestOpenKey ? [latestOpenKey] : [],
+      // openKeys: latestOpenKey ? [latestOpenKey] : [],
+      openKeys: isMainMenu ? [lastOpenKey] : [...openKeys],
     });
   }
   toggle = () => {
