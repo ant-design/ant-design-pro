@@ -2,9 +2,12 @@ import React, { PureComponent } from 'react';
 
 import { MiniArea } from '../Charts';
 import NumberInfo from '../NumberInfo';
-import { fixedZero } from '../../utils/utils';
 
 import styles from './index.less';
+
+function fixedZero(val) {
+  return val * 1 < 10 ? `0${val}` : val;
+}
 
 function getActiveData() {
   const activeData = [];

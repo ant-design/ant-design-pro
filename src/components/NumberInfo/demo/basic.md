@@ -17,13 +17,6 @@ ReactDOM.render(
       status="up"
       subTotal={17.1}
     />
-    <NumberInfo
-      subTitle={<span>本周访问</span>}
-      total={numeral(12321).format('0,0')}
-      status="up"
-      subTotal={17.1}
-      style={{ marginTop: 16 }}
-    />
   </div>
 , mountNode);
 ````

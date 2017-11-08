@@ -1,5 +1,7 @@
 ---
-title: Exception
+title:
+  en-US: Exception
+  zh-CN: Exception
 subtitle: 异常
 cols: 1
 order: 5

@@ -89,11 +89,12 @@ export default class TableForm extends PureComponent {
         return;
       }
       const target = this.getRowByKey(key);
-      delete target.isNew;
       if (!target.workId || !target.name || !target.department) {
         message.error('请填写完整成员信息。');
+        e.target.focus();
         return;
       }
+      delete target.isNew;
       this.toggleEditable(e, key);
       this.props.onChange(this.state.data);
     }, 10);
@@ -176,15 +177,17 @@ export default class TableForm extends PureComponent {
           if (record.isNew) {
             return (
               <span>
-                <a onClick={e => this.saveRow(e, record.key)}>保存</a>
+                <a>保存</a>
                 <Divider type="vertical" />
-                <a onClick={e => this.remove(e, record.key)}>删除</a>
+                <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
+                  <a>删除</a>
+                </Popconfirm>
               </span>
             );
           }
           return (
             <span>
-              <a onClick={e => this.saveRow(e, record.key)}>保存</a>
+              <a>保存</a>
               <Divider type="vertical" />
               <a onClick={e => this.cancel(e, record.key)}>取消</a>
             </span>

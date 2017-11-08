@@ -39,7 +39,7 @@ export default ({ formItemLayout, form, dispatch }) => {
           label="收款账户"
         >
           <Input.Group compact>
-            <Select defaultValue="alipay" style={{ width: 80 }}>
+            <Select defaultValue="alipay" style={{ width: 100 }}>
               <Option value="alipay">支付宝</Option>
               <Option value="bank">银行账户</Option>
             </Select>
@@ -50,7 +50,7 @@ export default ({ formItemLayout, form, dispatch }) => {
                 { type: 'email', message: '账户名应为邮箱格式' },
               ],
             })(
-              <Input style={{ width: 'calc(100% - 80px)' }} placeholder="test@example.com" />
+              <Input style={{ width: 'calc(100% - 100px)' }} placeholder="test@example.com" />
             )}
           </Input.Group>
         </Form.Item>
