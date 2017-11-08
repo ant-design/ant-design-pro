@@ -122,8 +122,6 @@ export default class Ellipsis extends PureComponent {
       return (<EllipsisText className={cls} length={length} text={children || ''} tooltip={tooltip} {...restProps} />);
     }
 
-    const l = lines || 1;
-
     // lines cover
     if (cover) {
       const id = `antd-pro-ellipsis-${`${new Date().getTime()}${Math.floor(Math.random() * 100)}`}`;
@@ -136,7 +134,7 @@ export default class Ellipsis extends PureComponent {
           className={cls}
           style={{
           ...restProps.style,
-          maxHeight: `${l * lineHeight}px`,
+          maxHeight: `${lines * lineHeight}px`,
         }}
         >
           <style>{style}</style>
