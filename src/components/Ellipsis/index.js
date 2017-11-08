@@ -14,16 +14,16 @@ const EllipsisText = ({ text, length, tooltip, ...other }) => {
   } else {
     displayText = text.slice(0, (length - tail.length));
   }
-  const ellipsisText = (
-    <span title={tooltip ? null : text} {...other}>
+
+  if (tooltip) {
+    return <span>{displayText}<Tooltip title={text}>{tail}</Tooltip></span>;
+  }
+
+  return (
+    <span {...other}>
       {displayText}{tail}
     </span>
   );
-
-  if (tooltip) {
-    return <Tooltip title={text}>{ellipsisText}</Tooltip>;
-  }
-  return ellipsisText;
 };
 
 export default ({
