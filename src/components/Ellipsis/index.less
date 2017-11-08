@@ -1,0 +1,45 @@
+@import "~antd/lib/style/themes/default.less";
+
+.textOverflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  white-space: nowrap;
+}
+
+.textOverflowMulti(@line: 3, @bg: #fff) {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.5em;
+  max-height: @line * 1.5em;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  word-break: break-all;
+  &:before {
+    background: @bg;
+    content: '...';
+    padding-left: 0;
+    position: absolute;
+    right: 14px;
+    bottom: 0;
+  }
+  &:after {
+    background: white;
+    content: '';
+    margin-top: 0.2em;
+    position: absolute;
+    right: 14px;
+    width: 1em;
+    height: 1em;
+  }
+}
+
+.ellipsis {
+  display: inline;
+}
+
+.line {
+  .textOverflowMulti();
+  display: inline-block;
+}
