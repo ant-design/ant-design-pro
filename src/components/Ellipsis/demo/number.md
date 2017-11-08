@@ -12,9 +12,9 @@ const article = 'There were injuries alleged in three cases in 2015, and a fourt
 
 ReactDOM.render(
   <div>
-    <Ellipsis length={100} text={article} />
+    <Ellipsis length={100}>{article}</Ellipsis>
     <h4 style={{ marginTop: 24 }}>Show Tooltip</h4>
-    <Ellipsis length={100} text={article} tooltip />
+    <Ellipsis length={100} tooltip>{article}</Ellipsis>
   </div>
 , mountNode);
 ````

@@ -13,9 +13,9 @@ order: 10
 
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
-text | 在按照文本长度截取下的文本内容 | ReactNode\|string | -
-tooltip | 在按照文本长度截取下展示完整内容的提示 | ReactNode\|string | -
-length | 在按照文本长度截取下的文本最大字符数，超过则截取省略 | ReactNode\|string | -
-lines | 在按照文本行数截取下最大的行数，超过则截取省略 | ReactNode\|string | `1`
-suffixColor | 在按照文本行数截取下后缀符号 `...` 的背景颜色 | ReactNode\|string | `#fff`
-suffixOffset | 在按照文本行数截取下后缀符号 `...` 位置偏移量，用于更精细的调整截取位置 | ReactNode\|string | `0`
+tooltip | 移动到 `...` 展示完整内容的提示，在长度截取和覆盖模式的行数截取下可用 | boolean | -
+length | 在按照长度截取下的文本最大字符数，超过则截取省略 | number | -
+lines | 在按照行数截取下最大的行数，超过则截取省略 | number | `1`
+cover | 在按照行数截取下开启覆盖模式，这种模式 `...` 是使用样式覆盖到文本上的，所以文本内容可以是 `ReactNode` | boolean | false
+suffixColor | 在覆盖模式下后缀符号 `...` 的背景颜色 | string | `#fff`
+suffixOffset | 在覆盖下后缀符号 `...` 位置偏移量，用于更精细的调整截取位置 | number | `0`

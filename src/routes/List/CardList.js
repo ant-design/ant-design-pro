@@ -68,7 +68,7 @@ export default class CardList extends PureComponent {
                     avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
                     title={<a href="#">{item.title}</a>}
                     description={(
-                      <Ellipsis maxHeight={64} suffixOffset={1}>{item.description}</Ellipsis>
+                      <Ellipsis lines={3} cover suffixOffset={2}>{item.description}</Ellipsis>
                     )}
                   />
                 </Card>

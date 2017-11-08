@@ -6,9 +6,9 @@
   text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
-  word-break: break-all;
   &:before {
     background: @bg;
+    box-shadow: 2px 0 2px 1px rgba(255, 255, 255, 0.2);
     content: '...';
     padding-left: 0;
     position: absolute;
@@ -27,10 +27,25 @@
 }
 
 .ellipsis {
-  display: inline;
+  display: inline-block;
+  word-break: break-all;
 }
 
-.line {
+.lines {
+  position: relative;
+  .shadow {
+    color: transparent;
+    opacity: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 9999px;
+    z-index: -999;
+  }
+}
+
+.linesCover {
   .textOverflowMulti();
   display: block;
 }
