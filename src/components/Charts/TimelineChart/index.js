@@ -64,6 +64,12 @@ class TimelineChart extends Component {
       position: 'top',
     });
 
+    let max;
+    if (data[0] && data[0].y1 && data[0].y2) {
+      max = Math.max(data.sort((a, b) => b.y1 - a.y1)[0].y1,
+        data.sort((a, b) => b.y2 - a.y2)[0].y2);
+    }
+
     chart.source(data, {
       x: {
         type: 'timeCat',
@@ -73,10 +79,12 @@ class TimelineChart extends Component {
       },
       y1: {
         alias: titleMap.y1,
+        max,
         min: 0,
       },
       y2: {
         alias: titleMap.y2,
+        max,
         min: 0,
       },
     });
