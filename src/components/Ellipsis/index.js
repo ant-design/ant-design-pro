@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import styles from './index.less';
 
 /* eslint react/no-did-mount-set-state: 0 */
+/* eslint no-param-reassign: 0 */
 
 const EllipsisText = ({ text, length, tooltip, ...other }) => {
   if (typeof text !== 'string') {
@@ -66,19 +67,51 @@ export default class Ellipsis extends PureComponent {
       const text = this.shadowChildren.innerText;
       const targetWidth = (this.node.offsetWidth || this.node.parentNode.offsetWidth) * lines;
       const shadowNode = this.shadow.firstChild;
-      shadowNode.innerHTML = text;
-      let count = 1;
-      while (count < text.length) {
-        shadowNode.innerHTML = text.substring(0, count);
-        if (shadowNode.offsetWidth > (targetWidth - (lines * (fontSize / 2)) - fontSize)) {
-          break;
-        }
-        count += 1;
-      }
+
+      // bisection
+      const tw = (targetWidth - (lines * (fontSize / 2)) - fontSize);
+      const len = text.length;
+      const mid = Math.floor(len / 2);
+
+      const count = this.bisection(tw, mid, 0, len, text, shadowNode);
+
       this.setState({
         text,
         targetCount: count,
       });
+    }
+  }
+
+  bisection = (tw, m, b, e, text, shadowNode) => {
+    let mid = m;
+    let end = e;
+    let begin = b;
+    shadowNode.innerHTML = text.substring(0, mid);
+    let sw = shadowNode.offsetWidth;
+
+    if (sw < tw) {
+      shadowNode.innerHTML = text.substring(0, mid + 1);
+      sw = shadowNode.offsetWidth;
+      if (sw >= tw) {
+        return mid;
+      } else {
+        begin = mid;
+        mid = Math.floor((end - begin) / 2) + begin;
+        return this.bisection(tw, mid, begin, end, text, shadowNode);
+      }
+    } else {
+      if (mid - 1 < 0) {
+        return mid;
+      }
+      shadowNode.innerHTML = text.substring(0, mid - 1);
+      sw = shadowNode.offsetWidth;
+      if (sw <= tw) {
+        return mid;
+      } else {
+        end = mid;
+        mid = Math.floor((end - begin) / 2) + begin;
+        return this.bisection(tw, mid, begin, end, text, shadowNode);
+      }
     }
   }
 
