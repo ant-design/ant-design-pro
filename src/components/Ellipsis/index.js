@@ -6,6 +6,8 @@ import styles from './index.less';
 /* eslint react/no-did-mount-set-state: 0 */
 /* eslint no-param-reassign: 0 */
 
+const isSupportLineClamp = (document.body.style.webkitLineClamp !== undefined);
+
 const EllipsisText = ({ text, length, tooltip, ...other }) => {
   if (typeof text !== 'string') {
     throw new Error('Ellipsis children must be string.');
@@ -22,7 +24,7 @@ const EllipsisText = ({ text, length, tooltip, ...other }) => {
   }
 
   if (tooltip) {
-    return <span>{displayText}<Tooltip title={text}>{tail}</Tooltip></span>;
+    return <Tooltip title={text}><span>{displayText}{tail}</span></Tooltip>;
   }
 
   return (
@@ -34,35 +36,25 @@ const EllipsisText = ({ text, length, tooltip, ...other }) => {
 
 export default class Ellipsis extends Component {
   state = {
-    lineHeight: 0,
     text: '',
     targetCount: 0,
   }
 
   componentDidMount() {
-    const { lines, cover } = this.props;
     if (this.node) {
-      if (lines && cover) {
-        this.setState({
-          lineHeight: parseInt(window.getComputedStyle(this.node).lineHeight, 10),
-        });
-      }
       this.computeLine();
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.lines !== nextProps.lines || this.props.cover !== nextProps.cover) {
-      this.setState({
-        lineHeight: parseInt(window.getComputedStyle(this.node).lineHeight, 10),
-      });
+    if (this.props.lines !== nextProps.lines) {
       this.computeLine();
     }
   }
 
   computeLine = () => {
-    const { lines, cover } = this.props;
-    if (lines && !cover) {
+    const { lines } = this.props;
+    if (lines && !isSupportLineClamp) {
       const fontSize = parseInt(window.getComputedStyle(this.node).fontSize, 10) || 14;
       const text = this.shadowChildren.innerText;
       const targetWidth = (this.node.offsetWidth || this.node.parentNode.offsetWidth) * lines;
@@ -128,22 +120,20 @@ export default class Ellipsis extends Component {
   }
 
   render() {
-    const { text, targetCount, lineHeight } = this.state;
+    const { text, targetCount } = this.state;
     const {
       children,
       lines,
       length,
-      cover = false,
-      suffixColor = '#fff',
-      suffixOffset = 0,
       className,
       tooltip,
       ...restProps
     } = this.props;
 
+
     const cls = classNames(styles.ellipsis, className, {
-      [styles.lines]: (lines && !cover),
-      [styles.linesCover]: (lines && cover),
+      [styles.lines]: (lines && !isSupportLineClamp),
+      [styles.lineClamp]: (lines && isSupportLineClamp),
     });
 
     if (!lines && !length) {
@@ -155,29 +145,30 @@ export default class Ellipsis extends Component {
       return (<EllipsisText className={cls} length={length} text={children || ''} tooltip={tooltip} {...restProps} />);
     }
 
-    // lines cover
-    if (cover) {
-      const id = `antd-pro-ellipsis-${`${new Date().getTime()}${Math.floor(Math.random() * 100)}`}`;
-      const style = `#${id}:before{background-color:${suffixColor};padding-left:${suffixOffset}px;}`;
+    const id = `antd-pro-ellipsis-${`${new Date().getTime()}${Math.floor(Math.random() * 100)}`}`;
+
+    // support document.body.style.webkitLineClamp
+    if (isSupportLineClamp) {
+      const style = `#${id}{-webkit-line-clamp:${lines};}`;
       return (
-        <div
-          {...restProps}
-          id={id}
-          ref={this.handleRef}
-          className={cls}
-          style={{
-          ...restProps.style,
-          maxHeight: `${lines * lineHeight}px`,
-        }}
-        >
+        <div id={id} className={cls} {...restProps}>
           <style>{style}</style>
-          {children}
-        </div>
-      );
+          {
+            tooltip ? (<Tooltip title={text}>{children}</Tooltip>) : children
+          }
+        </div>);
     }
 
-    // lines no cover
-    const suffix = tooltip ? <Tooltip title={text}>...</Tooltip> : '...';
+    const childNode = (
+      <span>
+        {
+          (targetCount > 0) && text.substring(0, targetCount)
+        }
+        {
+          (targetCount > 0) && (targetCount < text.length) && '...'
+        }
+      </span>
+    );
 
     return (
       <div
@@ -186,10 +177,9 @@ export default class Ellipsis extends Component {
         className={cls}
       >
         {
-          (targetCount > 0) && text.substring(0, targetCount)
-        }
-        {
-          (targetCount > 0) && (targetCount < text.length) && suffix
+          tooltip ? (
+            <Tooltip title={text}>{childNode}</Tooltip>
+          ) : childNode
         }
         <div className={styles.shadow} ref={this.handleShadowChildren}>{children}</div>
         <div className={styles.shadow} ref={this.handleShadow}><span>{text}</span></div>
