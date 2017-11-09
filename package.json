@@ -23,7 +23,11 @@
     "babel-runtime": "^6.9.2",
     "classnames": "^2.2.5",
     "core-js": "^2.5.1",
+    "d3": "^4.11.0",
     "dva": "^2.0.3",
+    "echarts-for-react": "^2.0.0",
+    "esri-loader": "^1.4.0",
+    "esri-loader-react": "^1.1.0",
     "g-cloud": "^1.0.2-beta",
     "g2": "^2.3.13",
     "g2-plugin-slider": "^1.2.1",
@@ -39,7 +43,9 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^16.0.0",
     "react-fittext": "^1.0.0",
-    "roadhog-api-doc": "^0.2.5"
+    "roadhog-api-doc": "^0.2.5",
+    "save-svg-as-png": "^1.2.0",
+    "venn.js": "^0.2.17"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
