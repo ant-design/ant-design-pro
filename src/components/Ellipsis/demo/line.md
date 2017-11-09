@@ -14,7 +14,7 @@ const article = <p>There were injuries alleged in three <a href="#cover">cases i
 
 ReactDOM.render(
   <div style={{ width: 200 }}>
-    <Ellipsis lines={3}>{article}</Ellipsis>
+    <Ellipsis tooltip lines={3}>{article}</Ellipsis>
   </div>
 , mountNode);
 ````
