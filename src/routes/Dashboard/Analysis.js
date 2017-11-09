@@ -11,6 +11,9 @@ import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
 
+import { dojoRequire } from 'esri-loader';
+import EsriLoader from 'esri-loader-react';
+
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
 
@@ -87,6 +90,14 @@ export default class Analysis extends Component {
     if (rangePickerValue[0].isSame(value[0], 'day') && rangePickerValue[1].isSame(value[1], 'day')) {
       return styles.currentDate;
     }
+  }
+  createMap = () => {
+    dojoRequire(['esri/Map', 'esri/views/MapView'], (Map, MapView) => {
+        new MapView({
+            container: this.mapContainer,
+            map: new Map({basemap: 'topo'})
+        })
+    });
   }
 
   render() {
@@ -217,8 +228,15 @@ export default class Analysis extends Component {
       style: { marginBottom: 24 },
     };
 
+    const options = {
+        url: 'https://js.arcgis.com/4.5/'
+    };
     return (
       <div>
+        <div className="App">
+          <EsriLoader options={options} ready={this.createMap} />
+          <div ref={node => this.mapContainer = node} className='map-view'></div>
+        </div>
         <Row gutter={24}>
           <Col {...topColResponsiveProps}>
             <ChartCard

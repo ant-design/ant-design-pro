@@ -11,6 +11,20 @@
       "extraBabelPlugins": [
         "dva-hmr"
       ]
+    },
+    "production": {
+      "extraBabelPlugins": [
+        "transform-runtime",
+        "transform-decorators-legacy",
+        ["import", { "libraryName": "antd", "style": true }]
+      ]
+    }
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://jsonplaceholder.typicode.com/",
+      "changeOrigin": true,
+      "pathRewrite": { "^/api" : "" }
     }
   },
   "externals": {
