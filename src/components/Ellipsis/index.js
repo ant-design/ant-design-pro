@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
@@ -32,7 +32,7 @@ const EllipsisText = ({ text, length, tooltip, ...other }) => {
   );
 };
 
-export default class Ellipsis extends PureComponent {
+export default class Ellipsis extends Component {
   state = {
     lineHeight: 0,
     text: '',
