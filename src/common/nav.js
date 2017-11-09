@@ -3,11 +3,14 @@ import dynamic from 'dva/dynamic';
 const data = [{
   component: app => dynamic({
     app,
+    models: () => [
+      import('../models/user'),
+    ],
     component: () => import('../layouts/BasicLayout'),
   }),
   layout: 'BasicLayout',
   name: '首页', // for breadcrumb
-  path: '',
+  path: '/',
   children: [{
     name: 'Dashboard',
     icon: 'dashboard',
@@ -17,6 +20,9 @@ const data = [{
       path: 'analysis',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/chart'),
+        ],
         component: () => import('../routes/Dashboard/Analysis'),
       }),
     }, {
@@ -24,6 +30,9 @@ const data = [{
       path: 'monitor',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/monitor'),
+        ],
         component: () => import('../routes/Dashboard/Monitor'),
       }),
     }, {
@@ -31,6 +40,11 @@ const data = [{
       path: 'workplace',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/project'),
+          import('../models/activities'),
+          import('../models/chart'),
+        ],
         component: () => import('../routes/Dashboard/Workplace'),
       }),
     }],
@@ -43,6 +57,9 @@ const data = [{
       path: 'basic-form',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/form'),
+        ],
         component: () => import('../routes/Forms/BasicForm'),
       }),
     }, {
@@ -50,18 +67,27 @@ const data = [{
       path: 'step-form',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/form'),
+        ],
         component: () => import('../routes/Forms/StepForm'),
       }),
       children: [{
         path: 'confirm',
         component: app => dynamic({
           app,
+          models: () => [
+            import('../models/form'),
+          ],
           component: () => import('../routes/Forms/StepForm/Step2'),
         }),
       }, {
         path: 'result',
         component: app => dynamic({
           app,
+          models: () => [
+            import('../models/form'),
+          ],
           component: () => import('../routes/Forms/StepForm/Step3'),
         }),
       }],
@@ -70,6 +96,9 @@ const data = [{
       path: 'advanced-form',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/form'),
+        ],
         component: () => import('../routes/Profile/AdvancedProfile'),
       }),
     }],
@@ -82,6 +111,9 @@ const data = [{
       path: 'table-list',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/rule'),
+        ],
         component: () => import('../routes/List/TableList'),
       }),
     }, {
@@ -89,6 +121,9 @@ const data = [{
       path: 'basic-list',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/list'),
+        ],
         component: () => import('../routes/List/BasicList'),
       }),
     }, {
@@ -96,6 +131,9 @@ const data = [{
       path: 'card-list',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/list'),
+        ],
         component: () => import('../routes/List/CardList'),
       }),
     }, {
@@ -103,6 +141,9 @@ const data = [{
       path: 'cover-card-list',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/list'),
+        ],
         component: () => import('../routes/List/CoverCardList'),
       }),
     }, {
@@ -110,6 +151,9 @@ const data = [{
       path: 'filter-card-list',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/list'),
+        ],
         component: () => import('../routes/List/FilterCardList'),
       }),
     }, {
@@ -117,6 +161,9 @@ const data = [{
       path: 'search',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/list'),
+        ],
         component: () => import('../routes/List/SearchList'),
       }),
     }],
@@ -129,6 +176,9 @@ const data = [{
       path: 'basic',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/profile'),
+        ],
         component: () => import('../routes/Profile/BasicProfile'),
       }),
     }, {
@@ -136,6 +186,9 @@ const data = [{
       path: 'advanced',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/profile'),
+        ],
         component: () => import('../routes/Profile/AdvancedProfile'),
       }),
     }],
@@ -190,6 +243,7 @@ const data = [{
     app,
     component: () => import('../layouts/UserLayout'),
   }),
+  path: '/user',
   layout: 'UserLayout',
   children: [{
     name: '帐户',
@@ -200,6 +254,9 @@ const data = [{
       path: 'login',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/login'),
+        ],
         component: () => import('../routes/User/Login'),
       }),
     }, {
@@ -207,6 +264,9 @@ const data = [{
       path: 'register',
       component: app => dynamic({
         app,
+        models: () => [
+          import('../models/register'),
+        ],
         component: () => import('../routes/User/Register'),
       }),
     }, {
