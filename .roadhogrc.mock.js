@@ -23,8 +23,8 @@ const proxy = {
       },
     },
     $body: {
-      name: 'momo.zxy',
-      avatar: imgMap.user,
+      name: 'Jack Ma',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dRFVcIqZOYPcSNrlJsqQ.png',
       userid: '00000001',
       notifyCount: 12,
     },
