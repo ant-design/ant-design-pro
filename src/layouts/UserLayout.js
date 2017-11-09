@@ -59,7 +59,7 @@ class UserLayout extends React.PureComponent {
                   exact={item.exact}
                   key={item.path}
                   path={item.path}
-                  component={item.component}
+                  component={item.component(this.props.app)}
                 />
               )
             )

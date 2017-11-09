@@ -159,7 +159,7 @@ class BasicLayout extends React.PureComponent {
               >
                 {icon}<span>{item.name}</span>
               </Link>
-            )
+              )
           }
         </Menu.Item>
       );
@@ -239,7 +239,7 @@ class BasicLayout extends React.PureComponent {
     }
   }
   render() {
-    const { currentUser, collapsed, fetchingNotices } = this.props;
+    const { app, currentUser, collapsed, fetchingNotices } = this.props;
 
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
@@ -352,7 +352,7 @@ class BasicLayout extends React.PureComponent {
                       exact={item.exact}
                       key={item.path}
                       path={item.path}
-                      component={item.component}
+                      component={item.component(app)}
                     />
                   )
                 )
