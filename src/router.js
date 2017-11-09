@@ -7,6 +7,9 @@ import dynamic from 'dva/dynamic';
 function RouterConfig({ history, app }) {
   const BasicLayout = dynamic({
     app,
+    models: () => [
+      import('./models/user'),
+    ],
     component: () => import('./layouts/BasicLayout'),
   });
   const UserLayout = dynamic({
@@ -18,8 +21,8 @@ function RouterConfig({ history, app }) {
     <LocaleProvider locale={zhCN}>
       <Router history={history}>
         <Switch>
-          <Route path="/user" component={UserLayout} />
-          <Route path="/" component={BasicLayout} />
+          <Route path="/user" render={props => <UserLayout {...props} app={app} />} />
+          <Route path="/" render={props => <BasicLayout {...props} app={app} />} />
         </Switch>
       </Router>
     </LocaleProvider>
