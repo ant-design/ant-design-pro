@@ -99,7 +99,7 @@ const data = [{
         models: () => [
           import('../models/form'),
         ],
-        component: () => import('../routes/Profile/AdvancedProfile'),
+        component: () => import('../routes/Forms/AdvancedForm'),
       }),
     }],
   }, {
