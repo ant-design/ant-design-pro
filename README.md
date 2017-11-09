@@ -13,9 +13,13 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 - Documentation: http://pro.ant.design/docs/getting-started
 - FAQ: http://pro.ant.design/docs/faq
 
+## Translation Recruitment :loudspeaker:
+
+We need your help: https://github.com/ant-design/ant-design-pro/issues/120
+
 ## Features
 
-- :gem: **Neat Design**: Follow Ant Design specification
+- :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
 - :rocket: **State of The Art Development**: Newest development stack of React/dva/antd
 - :iphone: **Responsive**: Designed for varies of screen size
