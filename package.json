@@ -38,8 +38,7 @@
     "react-container-query": "^0.9.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.0.0",
-    "react-fittext": "^1.0.0",
-    "roadhog-api-doc": "^0.2.5"
+    "react-fittext": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
@@ -70,7 +69,7 @@
     "react-test-renderer": "^16.0.0",
     "redbox-react": "^1.3.2",
     "roadhog": "^1.3.1",
-    "roadhog-api-doc": "^0.2.0",
+    "roadhog-api-doc": "^0.2.5",
     "stylelint": "^8.1.0",
     "stylelint-config-standard": "^17.0.0"
   },
