@@ -142,7 +142,7 @@ class BasicLayout extends React.PureComponent {
               <Link to={itemPath} target={item.target}>
                 {icon}<span>{item.name}</span>
               </Link>
-              )
+            )
           }
         </Menu.Item>
       );
