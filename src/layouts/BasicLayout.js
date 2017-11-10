@@ -55,8 +55,10 @@ class BasicLayout extends React.PureComponent {
   getChildContext() {
     const { location } = this.props;
     const routeData = getRouteData('BasicLayout');
-    const menuData = getNavData().reduce((arr, current) => arr.concat(current.children), []);
+    const firstMenuData = getNavData().reduce((arr, current) => arr.concat(current.children), []);
+    const menuData = this.getMenuData(firstMenuData, '');
     const breadcrumbNameMap = {};
+
     routeData.concat(menuData).forEach((item) => {
       breadcrumbNameMap[item.path] = item.name;
     });
@@ -82,6 +84,16 @@ class BasicLayout extends React.PureComponent {
         type: 'login/logout',
       });
     }
+  }
+  getMenuData = (data, parentPath) => {
+    let arr = [];
+    data.forEach((item) => {
+      if (item.children) {
+        arr.push({ path: `${parentPath}/${item.path}`, name: item.name });
+        arr = arr.concat(this.getMenuData(item.children, `${parentPath}/${item.path}`));
+      }
+    });
+    return arr;
   }
   getDefaultCollapsedSubMenus(props) {
     const currentMenuSelectedKeys = [...this.getCurrentMenuSelectedKeys(props)];
