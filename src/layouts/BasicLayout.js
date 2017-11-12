@@ -151,7 +151,11 @@ class BasicLayout extends React.PureComponent {
                 {icon}<span>{item.name}</span>
               </a>
             ) : (
-              <Link to={itemPath} target={item.target}>
+              <Link
+                to={itemPath}
+                target={item.target}
+                replace={itemPath === this.props.location.pathname}
+              >
                 {icon}<span>{item.name}</span>
               </Link>
             )
