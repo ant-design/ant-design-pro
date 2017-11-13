@@ -60,9 +60,9 @@ class StandardTable extends PureComponent {
         dataIndex: 'callNo',
         sorter: true,
         render: val => (
-          <p style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center' }}>
             {val} 万
-          </p>
+          </div>
         ),
       },
       {
@@ -99,11 +99,11 @@ class StandardTable extends PureComponent {
       {
         title: '操作',
         render: () => (
-          <p>
+          <div>
             <a href="">配置</a>
             <span className={styles.splitLine} />
             <a href="">订阅警报</a>
-          </p>
+          </div>
         ),
       },
     ];
@@ -127,11 +127,11 @@ class StandardTable extends PureComponent {
         <div className={styles.tableAlert}>
           <Alert
             message={(
-              <p>
+              <div>
                 已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
                 服务调用总计 <span style={{ fontWeight: 600 }}>{totalCallNo}</span> 万
                 <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>清空</a>
-              </p>
+              </div>
             )}
             type="info"
             showIcon

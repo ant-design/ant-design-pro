@@ -219,7 +219,7 @@ class Pie extends Component {
                   {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
                   {
                     // eslint-disable-next-line
-                    total && <p className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />
+                    total && <div className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />
                   }
                 </div>
               )

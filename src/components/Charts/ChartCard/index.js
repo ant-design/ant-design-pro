@@ -14,7 +14,7 @@ const ChartCard = ({
       </div>
       {
         // eslint-disable-next-line
-        total && <p className={styles.total} dangerouslySetInnerHTML={{ __html: total }} />
+        total && <div className={styles.total} dangerouslySetInnerHTML={{ __html: total }} />
       }
       <div className={styles.content} style={{ height: contentHeight || 'auto' }}>
         <div className={contentHeight && styles.contentFixed}>

@@ -92,7 +92,7 @@ const popoverContent = (
     <span className={styles.textSecondary} style={{ float: 'right' }}>
       <Badge status="default" text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span>} />
     </span>
-    <p className={styles.textSecondary} style={{ marginTop: 4 }}>耗时：2小时25分钟</p>
+    <div className={styles.textSecondary} style={{ marginTop: 4 }}>耗时：2小时25分钟</div>
   </div>
 );
 
