@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
-import { Table, Alert, Badge } from 'antd';
+import { Table, Alert, Badge, Divider } from 'antd';
 import styles from './index.less';
 
 const statusMap = ['default', 'processing', 'success', 'error'];
@@ -101,7 +101,7 @@ class StandardTable extends PureComponent {
         render: () => (
           <div>
             <a href="">配置</a>
-            <span className={styles.splitLine} />
+            <Divider type="vertical" />
             <a href="">订阅警报</a>
           </div>
         ),
