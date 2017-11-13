@@ -1,31 +1,3 @@
-.textOverflowMulti(@line: 3, @bg: #fff) {
-  overflow: hidden;
-  position: relative;
-  line-height: 1.5em;
-  max-height: @line * 1.5em;
-  text-align: justify;
-  margin-right: -1em;
-  padding-right: 1em;
-  &:before {
-    background: @bg;
-    box-shadow: 2px 0 2px 1px rgba(255, 255, 255, 0.2);
-    content: '...';
-    padding-left: 0;
-    position: absolute;
-    right: 14px;
-    bottom: 0;
-  }
-  &:after {
-    background: white;
-    content: '';
-    margin-top: 0.2em;
-    position: absolute;
-    right: 14px;
-    width: 1em;
-    height: 1em;
-  }
-}
-
 .ellipsis {
   display: inline-block;
   word-break: break-all;
@@ -45,7 +17,10 @@
   }
 }
 
-.linesCover {
-  .textOverflowMulti();
-  display: block;
+.lineClamp {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }

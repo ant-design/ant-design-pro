@@ -1,6 +1,6 @@
 ---
 order: 1
-title: 按照高度省略
+title: 按照行数省略
 ---
 
 通过设置 `lines` 属性指定最大行数，如果超过这个行数的文本会自动截取。但是在这种模式下所有 `children` 将会被转换成纯文本。
@@ -14,7 +14,7 @@ const article = <p>There were injuries alleged in three <a href="#cover">cases i
 
 ReactDOM.render(
   <div style={{ width: 200 }}>
-    <Ellipsis lines={3}>{article}</Ellipsis>
+    <Ellipsis tooltip lines={3}>{article}</Ellipsis>
   </div>
 , mountNode);
 ````
