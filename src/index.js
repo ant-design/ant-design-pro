@@ -5,6 +5,7 @@ import './polyfill';
 import './g2';
 // import { browserHistory } from 'dva/router';
 import './index.less';
+import router from './router';
 
 // 1. Initialize
 const app = dva({
@@ -20,7 +21,7 @@ models.forEach((m) => {
 });
 
 // 4. Router
-app.router(require('./router'));
+app.router(router);
 
 // 5. Start
 app.start('#root');
