@@ -15,19 +15,17 @@ const TagSelectOption = ({ children, checked, onChange, value }) => (
     {children}
   </CheckableTag>
 );
-TagSelectOption.defaultProps = {
-  displayName: 'TagSelectOption',
-};
+
+TagSelectOption.isTagSelectOption = true;
 
 class TagSelect extends Component {
   static defaultProps = {
-    initialValue: [],
+    defaultValue: [],
   };
 
   state = {
-    checkedAll: false,
     expand: false,
-    checkedTags: this.props.initialValue || [],
+    checkedTags: this.props.defaultValue || [],
   };
 
   onSelectAll = (checked) => {
@@ -37,10 +35,7 @@ class TagSelect extends Component {
       checkedTags = this.getAllTags();
     }
 
-    this.setState({
-      checkedAll: checked,
-      checkedTags,
-    });
+    this.setState({ checkedTags });
 
     if (onChange) {
       onChange(checkedTags);
@@ -50,7 +45,7 @@ class TagSelect extends Component {
   getAllTags() {
     const { children } = this.props;
     const checkedTags = children
-      .filter(child => child.props.displayName === 'TagSelectOption')
+      .filter(child => this.isTagSelectOption(child))
       .map(child => child.props.value);
     return checkedTags;
   }
@@ -66,12 +61,7 @@ class TagSelect extends Component {
       checkedTags.splice(index, 1);
     }
 
-    const tags = this.getAllTags();
-
-    this.setState({
-      checkedAll: tags.length === checkedTags.length,
-      checkedTags,
-    });
+    this.setState({ checkedTags });
 
     if (onChange) {
       onChange(checkedTags);
@@ -84,9 +74,17 @@ class TagSelect extends Component {
     });
   }
 
+  isTagSelectOption = (node) => {
+    return node && node.type && (
+      node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption'
+    );
+  }
+
   render() {
-    const { checkedTags, checkedAll, expand } = this.state;
+    const { checkedTags, expand } = this.state;
     const { children, className, style, expandable } = this.props;
+
+    const checkedAll = this.getAllTags().length === checkedTags.length;
 
     const cls = classNames(styles.tagSelect, className, {
       [styles.hasExpandTag]: expandable,
@@ -103,16 +101,22 @@ class TagSelect extends Component {
           全部
         </CheckableTag>
         {
-          checkedTags && children.filter(child => child.props.displayName === 'TagSelectOption').map(child => React.cloneElement(child, {
-            key: `tag-select-${child.props.value}`,
-            checked: checkedTags.indexOf(child.props.value) > -1,
-            onChange: this.handleTagChange,
-          }))
+          checkedTags && children
+            .map((child) => {
+              if (this.isTagSelectOption(child)) {
+                return React.cloneElement(child, {
+                  key: `tag-select-${child.props.value}`,
+                  checked: checkedTags.indexOf(child.props.value) > -1,
+                  onChange: this.handleTagChange,
+                });
+              }
+              return child;
+            })
         }
         {
           expandable && (
             <a className={styles.trigger} onClick={this.handleExpand}>
-              { expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
+              {expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
             </a>
           )
         }
