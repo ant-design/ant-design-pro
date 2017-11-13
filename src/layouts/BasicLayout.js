@@ -8,12 +8,13 @@ import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
-import styles from './BasicLayout.less';
 import HeaderSearch from '../components/HeaderSearch';
 import NoticeIcon from '../components/NoticeIcon';
 import GlobalFooter from '../components/GlobalFooter';
 import { getNavData } from '../common/nav';
 import { getRouteData } from '../utils/utils';
+import NotFound from '../routes/Exception/404';
+import styles from './BasicLayout.less';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -356,7 +357,8 @@ class BasicLayout extends React.PureComponent {
                   )
                 )
               }
-              <Redirect to="/dashboard/analysis" />
+              <Redirect exact from="/" to="/dashboard/analysis" />
+              <Route component={NotFound} />
             </Switch>
             <GlobalFooter
               links={[{
