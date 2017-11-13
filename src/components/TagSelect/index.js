@@ -19,10 +19,6 @@ const TagSelectOption = ({ children, checked, onChange, value }) => (
 TagSelectOption.isTagSelectOption = true;
 
 class TagSelect extends Component {
-  static defaultProps = {
-    defaultValue: [],
-  };
-
   state = {
     expand: false,
     checkedTags: this.props.defaultValue || [],
