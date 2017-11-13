@@ -206,7 +206,7 @@ class BasicLayout extends React.PureComponent {
   handleOpenChange = (openKeys) => {
     const lastOpenKey = openKeys[openKeys.length - 1];
     const isMainMenu = this.menus.some(
-      item => (item.key === lastOpenKey || item.path === lastOpenKey)
+      item => lastOpenKey && (item.key === lastOpenKey || item.path === lastOpenKey)
     );
     this.setState({
       openKeys: isMainMenu ? [lastOpenKey] : [...openKeys],
