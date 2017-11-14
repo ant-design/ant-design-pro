@@ -1,4 +1,5 @@
 .ellipsis {
+  overflow: hidden;
   display: inline-block;
   word-break: break-all;
 }
@@ -6,13 +7,10 @@
 .lines {
   position: relative;
   .shadow {
+    display: block;
+    position: relative;
     color: transparent;
     opacity: 0;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 9999px;
     z-index: -999;
   }
 }
