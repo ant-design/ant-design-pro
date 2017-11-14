@@ -1,6 +1,6 @@
 import moment from 'moment';
-import cloneDeep from 'lodash/cloneDeep';
-import navData from '../common/nav';
+// import cloneDeep from 'lodash/cloneDeep';
+// import navData from '../common/nav';
 
 
 export function fixedZero(val) {
@@ -52,7 +52,7 @@ export function getTimeDistance(type) {
   }
 }
 
-function getPlainNode(nodeList, parentPath = '') {
+export function getPlainNode(nodeList, parentPath = '') {
   const arr = [];
   nodeList.forEach((node) => {
     const item = node;
@@ -70,15 +70,15 @@ function getPlainNode(nodeList, parentPath = '') {
   return arr;
 }
 
-export function getRouteData(path) {
-  if (!navData.some(item => item.layout === path) ||
-      !(navData.filter(item => item.layout === path)[0].children)) {
-    return null;
-  }
-  const dataList = cloneDeep(navData.filter(item => item.layout === path)[0]);
-  const nodeList = getPlainNode(dataList.children);
-  return nodeList;
-}
+// export function getRouteData(path) {
+//   if (!navData.some(item => item.layout === path) ||
+//       !(navData.filter(item => item.layout === path)[0].children)) {
+//     return null;
+//   }
+//   const dataList = cloneDeep(navData.filter(item => item.layout === path)[0]);
+//   const nodeList = getPlainNode(dataList.children);
+//   return nodeList;
+// }
 
 export function digitUppercase(n) {
   const fraction = ['角', '分'];
