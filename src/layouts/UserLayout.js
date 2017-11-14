@@ -39,6 +39,15 @@ class UserLayout extends React.PureComponent {
     });
     return title;
   }
+  getRouteComponent(item) {
+    if (this.routeComponents[item.path]) {
+      return this.routeComponents[item.path];
+    }
+    const component = item.component(this.props.app);
+    this.routeComponents[item.path] = component;
+    return component;
+  }
+  routeComponents = {};
   render() {
     return (
       <DocumentTitle title={this.getPageTitle()}>
@@ -59,7 +68,7 @@ class UserLayout extends React.PureComponent {
                   exact={item.exact}
                   key={item.path}
                   path={item.path}
-                  component={item.component(this.props.app)}
+                  component={this.getRouteComponent()}
                 />
               )
             )
