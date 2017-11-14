@@ -60,7 +60,7 @@
 ## 使用
 
 ```bash
-$ git clone git@github.com:ant-design/ant-design-pro --depth=1
+$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
 $ cd ant-design-pro
 $ npm install
 $ npm start         # 访问 http://localhost:8000
