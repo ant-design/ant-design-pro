@@ -203,6 +203,15 @@ class BasicLayout extends React.PureComponent {
     });
     return groupBy(newNotices, 'type');
   }
+  getRouteComponent(item) {
+    if (this.routeComponents[item.path]) {
+      return this.routeComponents[item.path];
+    }
+    const component = item.component(this.props.app);
+    this.routeComponents[item.path] = component;
+    return component;
+  }
+  routeComponents = {};
   handleOpenChange = (openKeys) => {
     const lastOpenKey = openKeys[openKeys.length - 1];
     const isMainMenu = this.menus.some(
@@ -239,7 +248,7 @@ class BasicLayout extends React.PureComponent {
     }
   }
   render() {
-    const { app, currentUser, collapsed, fetchingNotices } = this.props;
+    const { currentUser, collapsed, fetchingNotices } = this.props;
 
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
@@ -352,7 +361,7 @@ class BasicLayout extends React.PureComponent {
                       exact={item.exact}
                       key={item.path}
                       path={item.path}
-                      component={item.component(app)}
+                      component={this.getRouteComponent(item)}
                     />
                   )
                 )
