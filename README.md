@@ -64,7 +64,7 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 ## Usage
 
 ```bash
-$ git clone git@github.com:ant-design/ant-design-pro --depth=1
+$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
 $ cd ant-design-pro
 $ npm install
 $ npm start         # visit http://localhost:8000
