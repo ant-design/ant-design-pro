@@ -1,6 +1,5 @@
 import dva from 'dva';
 import 'moment/locale/zh-cn';
-import models from './models';
 import './polyfill';
 import './g2';
 // import { browserHistory } from 'dva/router';
@@ -14,10 +13,8 @@ const app = dva({
 // 2. Plugins
 // app.use({});
 
-// 3. Model move to router
-models.forEach((m) => {
-  app.model(m);
-});
+// 3. Register global model
+app.model(require('./models/global'));
 
 // 4. Router
 app.router(require('./router'));
