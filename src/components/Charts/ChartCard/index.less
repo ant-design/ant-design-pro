@@ -1,12 +1,5 @@
 @import "~antd/lib/style/themes/default.less";
 
-.textOverflow() {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-all;
-  white-space: nowrap;
-}
-
 .chartCard {
   position: relative;
   .meta {
@@ -23,7 +16,10 @@
     right: 0;
   }
   .total {
-    .textOverflow();
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
     color: @heading-color;
     margin-top: 4px;
     margin-bottom: 0;
