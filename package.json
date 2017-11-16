@@ -23,7 +23,7 @@
     "babel-runtime": "^6.9.2",
     "classnames": "^2.2.5",
     "core-js": "^2.5.1",
-    "dva": "^2.0.3",
+    "dva": "^2.1.0",
     "g-cloud": "^1.0.2-beta",
     "g2": "^2.3.13",
     "g2-plugin-slider": "^1.2.1",
