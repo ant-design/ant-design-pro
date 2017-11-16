@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import { connect } from 'dva';
 import { Button, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'antd';
 import classNames from 'classnames';
@@ -160,14 +161,16 @@ export default class AdvancedProfile extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.setStepDirection);
+    this.setStepDirection.cancel();
   }
 
   onOperationTabChange = (key) => {
     this.setState({ operationkey: key });
   }
 
+  @Bind()
   @Debounce(200)
-  setStepDirection = () => {
+  setStepDirection() {
     const { stepDirection } = this.state;
     const w = getWindowWidth();
     if (stepDirection !== 'vertical' && w <= 576) {
