@@ -4,6 +4,7 @@ import { Divider } from 'antd';
 import classNames from 'classnames';
 import ReactFitText from 'react-fittext';
 import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import equal from '../equal';
 import styles from './index.less';
 
@@ -31,10 +32,12 @@ class Pie extends Component {
     if (this.chart) {
       this.chart.destroy();
     }
+    this.resize.cancel();
   }
 
-  @Debounce(200)
-  resize = () => {
+  @Bind()
+  @Debounce(300)
+  resize() {
     const { hasLegend } = this.props;
     if (!hasLegend || !this.root) {
       window.removeEventListener('resize', this.resize);

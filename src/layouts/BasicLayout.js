@@ -8,6 +8,7 @@ import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
+import Debounce from 'lodash-decorators/debounce';
 import HeaderSearch from '../components/HeaderSearch';
 import NoticeIcon from '../components/NoticeIcon';
 import GlobalFooter from '../components/GlobalFooter';
@@ -69,7 +70,7 @@ class BasicLayout extends React.PureComponent {
     });
   }
   componentWillUnmount() {
-    clearTimeout(this.resizeTimeout);
+    this.triggerResizeEvent.cancel();
   }
   onCollapse = (collapsed) => {
     this.props.dispatch({
@@ -216,11 +217,13 @@ class BasicLayout extends React.PureComponent {
       type: 'global/changeLayoutCollapsed',
       payload: !collapsed,
     });
-    this.resizeTimeout = setTimeout(() => {
-      const event = document.createEvent('HTMLEvents');
-      event.initEvent('resize', true, false);
-      window.dispatchEvent(event);
-    }, 600);
+    this.triggerResizeEvent();
+  }
+  @Debounce(600)
+  triggerResizeEvent() { // eslint-disable-line
+    const event = document.createEvent('HTMLEvents');
+    event.initEvent('resize', true, false);
+    window.dispatchEvent(event);
   }
   handleNoticeClear = (type) => {
     message.success(`清空了${type}`);

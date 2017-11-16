@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import G2 from 'g2';
 import Cloud from 'g-cloud';
 import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import styles from './index.less';
 
 /* eslint no-underscore-dangle: 0 */
@@ -26,6 +27,7 @@ class TagCloud extends PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
+    this.resize.cancel();
   }
 
   resize = () => {
@@ -73,6 +75,7 @@ class TagCloud extends PureComponent {
     this.node = node;
   }
 
+  @Bind()
   @Debounce(500)
   renderChart = (newData) => {
     const data = newData || this.props.data;
