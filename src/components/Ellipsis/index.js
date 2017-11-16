@@ -6,7 +6,7 @@ import styles from './index.less';
 /* eslint react/no-did-mount-set-state: 0 */
 /* eslint no-param-reassign: 0 */
 
-const isSupportLineClamp = (document.body.style.webkitLineClamp !== undefined);
+const isSupportLineClamp = !(document.body.style.webkitLineClamp !== undefined);
 
 const EllipsisText = ({ text, length, tooltip, ...other }) => {
   if (typeof text !== 'string') {
@@ -56,8 +56,19 @@ export default class Ellipsis extends Component {
     const { lines } = this.props;
     if (lines && !isSupportLineClamp) {
       const text = this.shadowChildren.innerText;
-      const targetHeight = this.root.offsetHeight;
+      const lineHeight = parseInt(getComputedStyle(this.root).lineHeight, 10);
+      const targetHeight = lines * lineHeight;
+      this.content.style.height = `${targetHeight}px`;
+      const totalHeight = this.shadowChildren.offsetHeight;
       const shadowNode = this.shadow.firstChild;
+
+      if (totalHeight <= targetHeight) {
+        this.setState({
+          text,
+          targetCount: text.length,
+        });
+        return;
+      }
 
       // bisection
       const len = text.length;
@@ -80,10 +91,10 @@ export default class Ellipsis extends Component {
     shadowNode.innerHTML = text.substring(0, mid) + suffix;
     let sh = shadowNode.offsetHeight;
 
-    if (sh < th) {
+    if (sh <= th) {
       shadowNode.innerHTML = text.substring(0, mid + 1) + suffix;
       sh = shadowNode.offsetHeight;
-      if (sh >= th) {
+      if (sh > th) {
         return mid;
       } else {
         begin = mid;
@@ -97,7 +108,7 @@ export default class Ellipsis extends Component {
       shadowNode.innerHTML = text.substring(0, mid - 1) + suffix;
       sh = shadowNode.offsetHeight;
       if (sh <= th) {
-        return mid;
+        return mid - 1;
       } else {
         end = mid;
         mid = Math.floor((end - begin) / 2) + begin;
@@ -108,6 +119,10 @@ export default class Ellipsis extends Component {
 
   handleRoot = (n) => {
     this.root = n;
+  }
+
+  handleContent = (n) => {
+    this.content = n;
   }
 
   handleNode = (n) => {
@@ -178,13 +193,17 @@ export default class Ellipsis extends Component {
         ref={this.handleRoot}
         className={cls}
       >
-        {
-          tooltip ? (
-            <Tooltip title={text}>{childNode}</Tooltip>
-          ) : childNode
-        }
-        <div className={styles.shadow} ref={this.handleShadowChildren}>{children}</div>
-        <div className={styles.shadow} ref={this.handleShadow}><span>{text}</span></div>
+        <div
+          ref={this.handleContent}
+        >
+          {
+            tooltip ? (
+              <Tooltip title={text}>{childNode}</Tooltip>
+            ) : childNode
+          }
+          <div className={styles.shadow} ref={this.handleShadowChildren}>{children}</div>
+          <div className={styles.shadow} ref={this.handleShadow}><span>{text}</span></div>
+        </div>
       </div>
     );
   }
