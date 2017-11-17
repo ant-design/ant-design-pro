@@ -1,103 +1,80 @@
 ---
 order: 0
-title: 标准登录框
+title: Standard Login
 ---
 
 支持账号密码及手机号登录两种模式。
 
 ````jsx
 import Login from 'ant-design-pro/lib/Login';
-import { Icon, Checkbox, Alert } from 'antd';
+import { Alert, Checkbox } from 'antd';
 
-const data = [{
-  loginType: '账户密码登录',
-  key: 'account',
-  inputControls: [{
-    key: 'userName',
-    type: 'userName',
-  }, {
-    key: 'password',
-    type: 'password',
-  }],
-}, {
-  loginType: '手机号登录',
-  key: 'mobile',
-  inputControls: [{
-    key: 'mobile',
-    type: 'mobile',
-  }, {
-    key: 'captcha',
-    type: 'captcha',
-  }],
-}]
-
-const extra = (
-  <div>
-    <Checkbox>自动登录</Checkbox>
-    <a style={{ float: 'right' }} href="">忘记密码</a>
-  </div>
-);
-
-const moreLoginTypes = {
-  types: (
-    <span>
-      <span className="icon icon-alipay" />
-      <span className="icon icon-taobao" />
-      <span className="icon icon-weibo" />
-    </span>
-  ),
-};
+const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
 class LoginDemo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notice: {},
-      key: 'account',
-    };
+  state = {
+    notice: '',
+    type: 'tab2',
+    autoLogin: true,
   }
   onSubmit = (err, values) => {
-    console.log(err, values);
-    if (!err) {
+    console.log(`value collected ->`, {...values, autoLogin: this.state.autoLogin});
+    if (this.state.type === 'tab1') {
       this.setState({
-        notice: {},
+        notice: '',
       }, () => {
-        setTimeout(() => {
-          if (this.state.key === 'account' && (values.userName !== 'admin' || values.password !== '888888')) {
-            const { notice } = this.state;
-            notice.message = '账号或密码错误！';
-            notice.type = 'error';
-            notice.closable = true;
-            notice.showIcon = true;
+        if (!err && (values.username !== 'admin' || values.password !== '888888')) {
+          setTimeout(() => {
             this.setState({
-              notice,
+              notice: '账号或密码错误！',
             })
-          }
-        }, 500);
+          }, 500);
+        }
       })
     }
   }
   onTabChange = (key) => {
     this.setState({
-      key,
-      notice: {},
-    });
+      type: key,
+    })
+  }
+  changeAutoLogin = (e) => {
+    this.setState({
+      autoLogin: e.target.checked,
+    })
   }
   render() {
     return (
-      <div>
-        <Login
-          defaultActiveKey={this.state.key}
-          data={data}
-          extra={extra}
-          moreLoginTypes={moreLoginTypes}
-          register={{ href: '/' }}
-          notice={this.state.notice}
-          onTabChange={this.onTabChange}
-          onSubmit={this.onSubmit}
-          onGetCaptcha={() => {console.log('clicked!')}}
-        />
-      </div>
+      <Login
+        defaultActiveKey={this.state.type}
+        onTabChange={this.onTabChange}
+        onSubmit={this.onSubmit}
+      >
+        <Tab key="tab1" tab="账号密码登录">
+          {
+            this.state.notice &&
+            <Alert style={{ marginBottom: 24 }} message={this.state.notice} type="error" showIcon closable />
+          }
+          <UserName itemKey="username" />
+          <Password itemKey="password" />
+        </Tab>
+        <Tab key="tab2" tab="手机号登录">
+          <Mobile itemKey="mobile" />
+          <Captcha onGetCaptcha={() => console.log('Get captcha!')} itemKey="captcha" />
+        </Tab>
+        <div>
+          <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>自动登录</Checkbox>
+          <a style={{ float: 'right' }} href="">忘记密码</a>
+        </div>
+        <Submit>登录</Submit>
+        <div>
+          其他登录方式
+          <span className="icon icon-alipay" />
+          <span className="icon icon-taobao" />
+          <span className="icon icon-weibo" />
+          <a style={{ float: 'right' }} href="">注册账户</a>
+        </div>
+      </Login>
     )
   }
 }

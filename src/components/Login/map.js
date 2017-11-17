@@ -1,30 +1,9 @@
 import React from 'react';
-import { Input, AutoComplete, Select, Icon } from 'antd';
+import { Input, Icon } from 'antd';
 import styles from './index.less';
 
 const map = {
-  Input: {
-    component: Input,
-    props: {
-      size: 'large',
-    },
-    rules: [],
-  },
-  AutoComplete: {
-    component: AutoComplete,
-    props: {
-      size: 'large',
-    },
-    rules: [],
-  },
-  Select: {
-    component: Select,
-    props: {
-      size: 'large',
-    },
-    rules: [],
-  },
-  userName: {
+  UserName: {
     component: Input,
     props: {
       size: 'large',
@@ -35,7 +14,7 @@ const map = {
       required: true, message: '请输入账户名！',
     }],
   },
-  password: {
+  Password: {
     component: Input,
     props: {
       size: 'large',
@@ -47,7 +26,7 @@ const map = {
       required: true, message: '请输入密码！',
     }],
   },
-  mobile: {
+  Mobile: {
     component: Input,
     props: {
       size: 'large',
@@ -60,7 +39,7 @@ const map = {
       pattern: /^1\d{10}$/, message: '手机号格式错误！',
     }],
   },
-  captcha: {
+  Captcha: {
     component: Input,
     props: {
       size: 'large',
