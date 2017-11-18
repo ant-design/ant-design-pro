@@ -1,5 +1,4 @@
 @import "~antd/lib/style/themes/default.less";
-@import "~antd/lib/style/mixins/clearfix.less";
 
 .exception {
   display: flex;
@@ -10,7 +9,18 @@
     flex: 0 0 62.5%;
     width: 62.5%;
     padding-right: 152px;
-    .clearfix();
+    zoom: 1;
+    &:before,
+    &:after {
+      content: " ";
+      display: table;
+    }
+    &:after {
+      clear: both;
+      visibility: hidden;
+      font-size: 0;
+      height: 0;
+    }
   }
 
   .imgEle {
