@@ -2,6 +2,7 @@ import dva from 'dva';
 import 'moment/locale/zh-cn';
 import './polyfill';
 import './g2';
+import './raven';
 // import { browserHistory } from 'dva/router';
 import './index.less';
 
