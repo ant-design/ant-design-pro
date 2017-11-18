@@ -27,7 +27,7 @@ class TagCloud extends PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
-    this.resize.cancel();
+    this.renderChart.cancel();
   }
 
   resize = () => {
@@ -77,7 +77,7 @@ class TagCloud extends PureComponent {
 
   @Bind()
   @Debounce(500)
-  renderChart = (newData) => {
+  renderChart(newData) {
     const data = newData || this.props.data;
     if (!data || data.length < 1) {
       return;
