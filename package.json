@@ -57,6 +57,7 @@
     "eslint": "^4.8.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-compat": "^2.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^6.0.0",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
@@ -107,5 +108,10 @@
   "lint-staged": {
     "**/*.{js,jsx}": "lint-staged:js",
     "**/*.less": "stylelint --syntax less"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
 }
