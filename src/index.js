@@ -3,12 +3,12 @@ import 'moment/locale/zh-cn';
 import './polyfill';
 import './g2';
 import './raven';
-// import { browserHistory } from 'dva/router';
+// import browserHistory from 'history/createBrowserHistory';
 import './index.less';
 
 // 1. Initialize
 const app = dva({
-  // history: browserHistory,
+  // history: browserHistory(),
 });
 
 // 2. Plugins
