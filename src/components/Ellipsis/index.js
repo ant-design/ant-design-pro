@@ -6,7 +6,7 @@ import styles from './index.less';
 /* eslint react/no-did-mount-set-state: 0 */
 /* eslint no-param-reassign: 0 */
 
-const isSupportLineClamp = !(document.body.style.webkitLineClamp !== undefined);
+const isSupportLineClamp = (document.body.style.webkitLineClamp !== undefined);
 
 const EllipsisText = ({ text, length, tooltip, ...other }) => {
   if (typeof text !== 'string') {
