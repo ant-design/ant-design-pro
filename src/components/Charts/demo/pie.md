@@ -8,7 +8,7 @@ import { Pie, yuan } from 'ant-design-pro/lib/Charts';
 
 const salesPieData = [
   {
-    x: '家用电器',
+    x: '华中',
     y: 4544,
   },
   {
