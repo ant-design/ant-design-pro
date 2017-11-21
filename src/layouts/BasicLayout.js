@@ -345,22 +345,24 @@ class BasicLayout extends React.PureComponent {
             </div>
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
-            <Switch>
-              {
-                getRouteData('BasicLayout').map(item =>
-                  (
-                    <Route
-                      exact={item.exact}
-                      key={item.path}
-                      path={item.path}
-                      component={item.component}
-                    />
+            <div style={{ minHeight: 'calc(100vh - 260px)' }}>
+              <Switch>
+                {
+                  getRouteData('BasicLayout').map(item =>
+                    (
+                      <Route
+                        exact={item.exact}
+                        key={item.path}
+                        path={item.path}
+                        component={item.component}
+                      />
+                    )
                   )
-                )
-              }
-              <Redirect exact from="/" to="/dashboard/analysis" />
-              <Route component={NotFound} />
-            </Switch>
+                }
+                <Redirect exact from="/" to="/dashboard/analysis" />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
             <GlobalFooter
               links={[{
                 title: 'Pro 首页',
