@@ -5,7 +5,7 @@ import styles from './style.less';
 
 const { Option } = Select;
 
-export default ({ formItemLayout, form, dispatch }) => {
+export default ({ formItemLayout, form, dispatch, data }) => {
   const { getFieldDecorator, validateFields } = form;
   const onValidateForm = () => {
     validateFields((err, values) => {
@@ -26,7 +26,7 @@ export default ({ formItemLayout, form, dispatch }) => {
           label="付款账户"
         >
           {getFieldDecorator('payAccount', {
-            initialValue: 'ant-design@alipay.com',
+            initialValue: data.payAccount || 'ant-design@alipay.com',
             rules: [{ required: true, message: '请选择付款账户' }],
           })(
             <Select placeholder="test@example.com">
@@ -44,7 +44,7 @@ export default ({ formItemLayout, form, dispatch }) => {
               <Option value="bank">银行账户</Option>
             </Select>
             {getFieldDecorator('receiverAccount', {
-              initialValue: 'test@example.com',
+              initialValue: data.receiverAccount || 'test@example.com',
               rules: [
                 { required: true, message: '请输入收款人账户' },
                 { type: 'email', message: '账户名应为邮箱格式' },
@@ -59,7 +59,7 @@ export default ({ formItemLayout, form, dispatch }) => {
           label="收款人姓名"
         >
           {getFieldDecorator('receiverName', {
-            initialValue: 'Alex',
+            initialValue: data.receiverName || 'Alex',
             rules: [{ required: true, message: '请输入收款人姓名' }],
           })(
             <Input placeholder="请输入收款人姓名" />
@@ -70,7 +70,7 @@ export default ({ formItemLayout, form, dispatch }) => {
           label="转账金额"
         >
           {getFieldDecorator('amount', {
-            initialValue: '500',
+            initialValue: data.amount || '500',
             rules: [
               { required: true, message: '请输入转账金额' },
               { pattern: /^(\d+)((?:\.\d+)?)$/, message: '请输入合法金额数字' },
