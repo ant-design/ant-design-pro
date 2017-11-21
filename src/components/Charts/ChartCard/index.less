@@ -2,10 +2,32 @@
 
 .chartCard {
   position: relative;
+  .chartTop {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  .chartTopMargin {
+    margin-bottom: 12px;
+  }
+  .chartTopHasMargin {
+    margin-bottom: 20px;
+  }
+  .metaWrap {
+    float: left;
+  }
+  .avatar {
+    position: relative;
+    top: 4px;
+    float: left;
+    margin-right: 20px;
+    img {
+      border-radius: 100%;
+    }
+  }
   .meta {
     color: @text-color-secondary;
     font-size: @font-size-base;
-    position: relative;
     line-height: 22px;
     height: 22px;
   }
@@ -45,5 +67,8 @@
     & > * {
       position: relative;
     }
+  }
+  .footerMargin {
+    margin-top: 20px;
   }
 }
