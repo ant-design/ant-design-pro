@@ -2,7 +2,7 @@ import dva from 'dva';
 import 'moment/locale/zh-cn';
 import './polyfill';
 import './g2';
-import './raven';
+import './rollbar';
 // import browserHistory from 'history/createBrowserHistory';
 import './index.less';
 
