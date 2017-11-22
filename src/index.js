@@ -5,6 +5,7 @@ import './g2';
 import './rollbar';
 // import browserHistory from 'history/createBrowserHistory';
 import './index.less';
+import router from './router';
 
 // 1. Initialize
 const app = dva({
@@ -18,7 +19,7 @@ const app = dva({
 app.model(require('./models/global'));
 
 // 4. Router
-app.router(require('./router'));
+app.router(router);
 
 // 5. Start
 app.start('#root');
