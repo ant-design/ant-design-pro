@@ -22,7 +22,7 @@ function generator({ defaultProps, defaultRules, type }) {
       }
       componentDidMount() {
         if (this.context.updateActive) {
-          this.context.updateActive(this.props.itemKey);
+          this.context.updateActive(this.props.name);
         }
       }
       componentWillUnmount() {
@@ -46,7 +46,7 @@ function generator({ defaultProps, defaultRules, type }) {
         const { getFieldDecorator } = this.context.form;
         const options = {};
         let otherProps = {};
-        const { onChange, defaultValue, rules, itemKey, ...restProps } = this.props;
+        const { onChange, defaultValue, rules, name, ...restProps } = this.props;
         const { count } = this.state;
         options.rules = rules || defaultRules;
         if (onChange) {
@@ -62,7 +62,7 @@ function generator({ defaultProps, defaultRules, type }) {
             <FormItem>
               <Row gutter={8}>
                 <Col span={16}>
-                  {getFieldDecorator(itemKey, options)(
+                  {getFieldDecorator(name, options)(
                     <WrappedComponent {...defaultProps} {...inputProps} />
                   )}
                 </Col>
@@ -82,7 +82,7 @@ function generator({ defaultProps, defaultRules, type }) {
         }
         return (
           <FormItem>
-            {getFieldDecorator(itemKey, options)(
+            {getFieldDecorator(name, options)(
               <WrappedComponent {...defaultProps} {...otherProps} />
             )}
           </FormItem>

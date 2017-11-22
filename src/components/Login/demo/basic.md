@@ -55,12 +55,12 @@ class LoginDemo extends React.Component {
             this.state.notice &&
             <Alert style={{ marginBottom: 24 }} message={this.state.notice} type="error" showIcon closable />
           }
-          <UserName itemKey="username" />
-          <Password itemKey="password" />
+          <UserName name="username" />
+          <Password name="password" />
         </Tab>
         <Tab key="tab2" tab="手机号登录">
-          <Mobile itemKey="mobile" />
-          <Captcha onGetCaptcha={() => console.log('Get captcha!')} itemKey="captcha" />
+          <Mobile name="mobile" />
+          <Captcha onGetCaptcha={() => console.log('Get captcha!')} name="captcha" />
         </Tab>
         <div>
           <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>自动登录</Checkbox>

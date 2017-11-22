@@ -30,7 +30,7 @@ tab | 选项卡头显示文字 | ReactNode | -
 
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
-itemKey | 控件标记，提交数据中同样以此为 key | String | -
+name | 控件标记，提交数据中同样以此为 key | String | -
 rules | 校验规则，同 Form getFieldDecorator(id, options) 中 [option.rules 的规则](getFieldDecorator(id, options)) | object[] | -
 
 除上述属性以外，Login.UserName 还支持 antd.Input 的所有属性，并且自带默认的基础配置，包括 `placeholder` `size` `prefix` 等，这些基础配置均可被覆盖。
