@@ -1,6 +1,6 @@
+import 'babel-polyfill';
 import dva from 'dva';
 import 'moment/locale/zh-cn';
-import './polyfill';
 import './g2';
 import './rollbar';
 // import browserHistory from 'history/createBrowserHistory';
