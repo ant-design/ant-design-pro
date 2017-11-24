@@ -11,7 +11,7 @@
   height: 64px;
   position: relative;
   line-height: 64px;
-  padding-left: 24px;
+  padding-left: (@menu-collapsed-width - 32px) / 2;
   transition: all .3s;
   background: #002140;
   overflow: hidden;
@@ -28,13 +28,6 @@
     margin: 0 0 0 12px;
     font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 600;
-  }
-}
-
-:global(.ant-layout-sider-collapsed) .logo {
-  padding-left: 24px;
-  > a {
-    width: 32px;
   }
 }
 
