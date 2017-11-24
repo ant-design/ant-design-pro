@@ -20,6 +20,10 @@ export default {
         type: 'saveNotices',
         payload: data,
       });
+      yield put({
+        type: 'user/changeNotifyCount',
+        payload: data.length,
+      });
     },
     *clearNotices({ payload }, { put, select }) {
       yield put({
