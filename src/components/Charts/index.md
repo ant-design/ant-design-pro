@@ -40,8 +40,8 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | height | 图表高度 | number | - |
 | line | 是否显示描边 | boolean | false |
 | animate | 是否显示动画 | boolean | true |
-| xAxis | [x 轴配置](https://antv.alipay.com/g2/doc/tutorial/start/axis.html) | object | - |
-| yAxis | [y 轴配置](https://antv.alipay.com/g2/doc/tutorial/start/axis.html) | object | - |
+| xAxis | [x 轴配置](http://antvis.github.io/g2/doc/tutorial/start/axis.html) | object | - |
+| yAxis | [y 轴配置](http://antvis.github.io/g2/doc/tutorial/start/axis.html) | object | - |
 | data | 数据 | array<{x, y}> | - |
 
 ### MiniProgress
