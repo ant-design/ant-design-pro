@@ -11,7 +11,7 @@ import { Button, Icon } from 'antd';
 
 const extra = (
   <div>
-    <div style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.85)', fontWeight: '500', marginBottom: 16 }}>
+    <div style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.85)', fontWeight: 500, marginBottom: 16 }}>
       您提交的内容有如下错误：
     </div>
     <div style={{ marginBottom: 16 }}>

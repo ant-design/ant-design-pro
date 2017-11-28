@@ -33,7 +33,7 @@ const desc2 = (
 
 const extra = (
   <div>
-    <div style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.85)', fontWeight: '500', marginBottom: 20 }}>
+    <div style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.85)', fontWeight: 500, marginBottom: 20 }}>
       项目名称
     </div>
     <Row style={{ marginBottom: 16 }}>
