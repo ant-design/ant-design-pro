@@ -1,12 +1,12 @@
 
 import React from 'react';
-export interface AvatarListProps {
+export interface AvatarItemProps {
     tips: string | React.ReactNode,
     src: string
 }
 
-export interface AvatarItemProps {
-    size: "larg" | "small" | "mini" | "default"
+export interface AvatarListProps {
+    size?: "large" | "small" | "mini" | "default"
 }
 
 
