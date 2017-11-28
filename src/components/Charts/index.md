@@ -22,7 +22,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | total | 数据总量 | ReactNode \| number | - |
 | footer | 卡片底部 | ReactNode | - |
 | contentHeight | 内容区域高度 | number | - |
-
+| avatar | 右侧图标 | React.ReactNode | - |
 ### MiniBar
 
 | 参数      | 说明                                      | 类型         | 默认值 |
@@ -76,7 +76,9 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | percent | 占比 | number | - |
 | tooltip | 是否显示 tooltip | boolean | true |
 | valueFormat | 显示值的格式化函数 | function | - |
-| subTitle | 图表子标题 | ReactNode\|string | - |
+| title | 图表标题 | ReactNode|string | - |
+| subTitle | 图表子标题 | ReactNode|string | - |
+| total | 图标中央的总数 | string | - |
 
 ### Radar
 
@@ -86,6 +88,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | height | 图表高度 | number | - |
 | hasLegend | 是否显示 legend | boolean | `false` |
 | margin | 图表内部间距 | array | \[24, 30, 16, 30\] |
+| data | 图标数据 | array<{name,label,value}> | - |
 
 ### Gauge
 
@@ -94,7 +97,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | title | 图表标题 | ReactNode\|string | - |
 | height | 图表高度 | number | - |
 | color | 图表颜色 | string | `#2F9CFF` |
-| bgColor | 图表北京颜色 | string | `#F0F2F5` |
+| bgColor | 图表背景颜色 | string | `#F0F2F5` |
 | percent | 进度比例 | number | - |
 
 ### WaterWave
@@ -110,7 +113,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
-| tags | 标题 | Array<name, value\> | - |
+| data | 标题 | Array<name, value\> | - |
 | height | 高度值 | number | - |
 
 ### TimelineChart
