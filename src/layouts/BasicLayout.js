@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import { Layout, Menu, Icon, Avatar, Dropdown, Tag, message, Spin } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
-import { Link, routerRedux, Route, Redirect, Switch } from 'dva/router';
+import { Link, Route, Redirect, Switch } from 'dva/router';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
-import styles from './BasicLayout.less';
+import Debounce from 'lodash-decorators/debounce';
 import HeaderSearch from '../components/HeaderSearch';
 import NoticeIcon from '../components/NoticeIcon';
 import GlobalFooter from '../components/GlobalFooter';
-import { getNavData } from '../common/nav';
-import { getRouteData } from '../utils/utils';
+import NotFound from '../routes/Exception/404';
+import styles from './BasicLayout.less';
+import logo from '../assets/logo.svg';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -47,16 +48,18 @@ class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
     // 把一级 Layout 的 children 作为菜单项
-    this.menus = getNavData().reduce((arr, current) => arr.concat(current.children), []);
+    this.menus = props.navData.reduce((arr, current) => arr.concat(current.children), []);
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
   }
   getChildContext() {
-    const { location } = this.props;
+    const { location, navData, getRouteData } = this.props;
     const routeData = getRouteData('BasicLayout');
-    const menuData = getNavData().reduce((arr, current) => arr.concat(current.children), []);
+    const firstMenuData = navData.reduce((arr, current) => arr.concat(current.children), []);
+    const menuData = this.getMenuData(firstMenuData, '');
     const breadcrumbNameMap = {};
+
     routeData.concat(menuData).forEach((item) => {
       breadcrumbNameMap[item.path] = item.name;
     });
@@ -68,7 +71,7 @@ class BasicLayout extends React.PureComponent {
     });
   }
   componentWillUnmount() {
-    clearTimeout(this.resizeTimeout);
+    this.triggerResizeEvent.cancel();
   }
   onCollapse = (collapsed) => {
     this.props.dispatch({
@@ -80,14 +83,18 @@ class BasicLayout extends React.PureComponent {
     if (key === 'logout') {
       this.props.dispatch({
         type: 'login/logout',
-        payload: {
-          status: false,
-        },
-        callback: () => {
-          this.props.dispatch(routerRedux.push('/user/login'));
-        },
       });
     }
+  }
+  getMenuData = (data, parentPath) => {
+    let arr = [];
+    data.forEach((item) => {
+      if (item.children) {
+        arr.push({ path: `${parentPath}/${item.path}`, name: item.name });
+        arr = arr.concat(this.getMenuData(item.children, `${parentPath}/${item.path}`));
+      }
+    });
+    return arr;
   }
   getDefaultCollapsedSubMenus(props) {
     const currentMenuSelectedKeys = [...this.getCurrentMenuSelectedKeys(props)];
@@ -145,7 +152,11 @@ class BasicLayout extends React.PureComponent {
                 {icon}<span>{item.name}</span>
               </a>
             ) : (
-              <Link to={itemPath} target={item.target}>
+              <Link
+                to={itemPath}
+                target={item.target}
+                replace={itemPath === this.props.location.pathname}
+              >
                 {icon}<span>{item.name}</span>
               </Link>
             )
@@ -155,10 +166,10 @@ class BasicLayout extends React.PureComponent {
     });
   }
   getPageTitle() {
-    const { location } = this.props;
+    const { location, getRouteData } = this.props;
     const { pathname } = location;
     let title = 'Ant Design Pro';
-    getRouteData('UserLayout').forEach((item) => {
+    getRouteData('BasicLayout').forEach((item) => {
       if (item.path === pathname) {
         title = `${item.name} - Ant Design Pro`;
       }
@@ -193,9 +204,12 @@ class BasicLayout extends React.PureComponent {
     return groupBy(newNotices, 'type');
   }
   handleOpenChange = (openKeys) => {
-    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+    const lastOpenKey = openKeys[openKeys.length - 1];
+    const isMainMenu = this.menus.some(
+      item => lastOpenKey && (item.key === lastOpenKey || item.path === lastOpenKey)
+    );
     this.setState({
-      openKeys: latestOpenKey ? [latestOpenKey] : [],
+      openKeys: isMainMenu ? [lastOpenKey] : [...openKeys],
     });
   }
   toggle = () => {
@@ -204,11 +218,13 @@ class BasicLayout extends React.PureComponent {
       type: 'global/changeLayoutCollapsed',
       payload: !collapsed,
     });
-    this.resizeTimeout = setTimeout(() => {
-      const event = document.createEvent('HTMLEvents');
-      event.initEvent('resize', true, false);
-      window.dispatchEvent(event);
-    }, 600);
+    this.triggerResizeEvent();
+  }
+  @Debounce(600)
+  triggerResizeEvent() { // eslint-disable-line
+    const event = document.createEvent('HTMLEvents');
+    event.initEvent('resize', true, false);
+    window.dispatchEvent(event);
   }
   handleNoticeClear = (type) => {
     message.success(`清空了${type}`);
@@ -225,7 +241,7 @@ class BasicLayout extends React.PureComponent {
     }
   }
   render() {
-    const { currentUser, collapsed, fetchingNotices } = this.props;
+    const { currentUser, collapsed, fetchingNotices, getRouteData } = this.props;
 
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
@@ -255,7 +271,7 @@ class BasicLayout extends React.PureComponent {
         >
           <div className={styles.logo}>
             <Link to="/">
-              <img src="https://gw.alipayobjects.com/zos/rmsportal/iwWyPinUoseUxIAeElSx.svg" alt="logo" />
+              <img src={logo} alt="logo" />
               <h1>Ant Design Pro</h1>
             </Link>
           </div>
@@ -330,21 +346,24 @@ class BasicLayout extends React.PureComponent {
             </div>
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
-            <Switch>
-              {
-                getRouteData('BasicLayout').map(item =>
-                  (
-                    <Route
-                      exact={item.exact}
-                      key={item.path}
-                      path={item.path}
-                      component={item.component}
-                    />
+            <div style={{ minHeight: 'calc(100vh - 260px)' }}>
+              <Switch>
+                {
+                  getRouteData('BasicLayout').map(item =>
+                    (
+                      <Route
+                        exact={item.exact}
+                        key={item.path}
+                        path={item.path}
+                        component={item.component}
+                      />
+                    )
                   )
-                )
-              }
-              <Redirect to="/dashboard/analysis" />
-            </Switch>
+                }
+                <Redirect exact from="/" to="/dashboard/analysis" />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
             <GlobalFooter
               links={[{
                 title: 'Pro 首页',

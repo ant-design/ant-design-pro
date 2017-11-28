@@ -5,7 +5,6 @@ import DocumentTitle from 'react-document-title';
 import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
-import { getRouteData } from '../utils/utils';
 
 const links = [{
   title: '帮助',
@@ -29,7 +28,7 @@ class UserLayout extends React.PureComponent {
     return { location };
   }
   getPageTitle() {
-    const { location } = this.props;
+    const { getRouteData, location } = this.props;
     const { pathname } = location;
     let title = 'Ant Design Pro';
     getRouteData('UserLayout').forEach((item) => {
@@ -40,6 +39,8 @@ class UserLayout extends React.PureComponent {
     return title;
   }
   render() {
+    const { getRouteData } = this.props;
+
     return (
       <DocumentTitle title={this.getPageTitle()}>
         <div className={styles.container}>
@@ -50,7 +51,7 @@ class UserLayout extends React.PureComponent {
                 <span className={styles.title}>Ant Design</span>
               </Link>
             </div>
-            <p className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</p>
+            <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
           </div>
           {
             getRouteData('UserLayout').map(item =>

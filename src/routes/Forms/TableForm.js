@@ -88,7 +88,7 @@ export default class TableForm extends PureComponent {
         this.clickedCancel = false;
         return;
       }
-      const target = this.getRowByKey(key);
+      const target = this.getRowByKey(key) || {};
       if (!target.workId || !target.name || !target.department) {
         message.error('请填写完整成员信息。');
         e.target.focus();

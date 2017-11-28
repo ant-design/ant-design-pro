@@ -177,7 +177,7 @@ export default class Analysis extends Component {
             <span style={{ marginRight: 4 }}>{text}%</span>
           </Trend>
         ),
-        className: styles.alignRight,
+        align: 'right',
       },
     ];
 

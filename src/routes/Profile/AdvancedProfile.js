@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import { connect } from 'dva';
 import { Button, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'antd';
 import classNames from 'classnames';
@@ -92,7 +93,7 @@ const popoverContent = (
     <span className={styles.textSecondary} style={{ float: 'right' }}>
       <Badge status="default" text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span>} />
     </span>
-    <p className={styles.textSecondary} style={{ marginTop: 4 }}>耗时：2小时25分钟</p>
+    <div className={styles.textSecondary} style={{ marginTop: 4 }}>耗时：2小时25分钟</div>
   </div>
 );
 
@@ -160,14 +161,16 @@ export default class AdvancedProfile extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.setStepDirection);
+    this.setStepDirection.cancel();
   }
 
   onOperationTabChange = (key) => {
     this.setState({ operationkey: key });
   }
 
+  @Bind()
   @Debounce(200)
-  setStepDirection = () => {
+  setStepDirection() {
     const { stepDirection } = this.state;
     const w = getWindowWidth();
     if (stepDirection !== 'vertical' && w <= 576) {
