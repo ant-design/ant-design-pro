@@ -97,7 +97,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | title | 图表标题 | ReactNode\|string | - |
 | height | 图表高度 | number | - |
 | color | 图表颜色 | string | `#2F9CFF` |
-| bgColor | 图表北京颜色 | string | `#F0F2F5` |
+| bgColor | 图表背景颜色 | string | `#F0F2F5` |
 | percent | 进度比例 | number | - |
 
 ### WaterWave
