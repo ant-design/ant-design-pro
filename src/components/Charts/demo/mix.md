@@ -6,7 +6,7 @@ title: 图表套件组合展示
 利用 Ant Design Pro 提供的图表套件，可以灵活组合符合设计规范的图表来满足复杂的业务需求。
 
 ````jsx
-import { ChartCard, yuan, Field, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
+import { ChartCard, Field, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
 import Trend from 'ant-design-pro/lib/Trend';
 import NumberInfo from 'ant-design-pro/lib/NumberInfo';
 import { Row, Col, Icon, Tooltip } from 'antd';
