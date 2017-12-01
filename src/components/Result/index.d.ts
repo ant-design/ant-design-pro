@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 export interface ResultProps {
   type: "success" | "error";
   title: React.ReactNode;

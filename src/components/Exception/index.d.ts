@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 export interface ExceptionProps {
   type?: "403" | "404" | "500";
   title?: React.ReactNode;

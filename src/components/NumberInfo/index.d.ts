@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 export interface NumberInfoProps {
   title?: React.ReactNode | string;
   subTitle?: React.ReactNode | string;
