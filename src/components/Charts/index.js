@@ -14,7 +14,7 @@ import TimelineChart from './TimelineChart';
 
 const yuan = val => `&yen; ${numeral(val).format('0,0')}`;
 
-export default {
+export {
   yuan,
   Bar,
   Pie,
