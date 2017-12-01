@@ -11,10 +11,10 @@ export interface PieProps {
     y: number;
   }>;
   total?: string;
-  title?: string | React.ReactNode;
+  title?: React.ReactNode;
   tooltip?: boolean;
   valueFormat?: (value: string) => string;
-  subTitle?: string | React.ReactNode;
+  subTitle?: React.ReactNode;
 }
 
 export default class Pie extends React.Component<PieProps, any> {}

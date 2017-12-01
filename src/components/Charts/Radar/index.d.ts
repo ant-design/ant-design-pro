@@ -1,6 +1,6 @@
 import React from "react";
 export interface RadarProps {
-  title?: string | React.ReactNode;
+  title?: React.ReactNode;
   height: number;
   margin?: [number, number, number, number];
   hasLegend?: boolean;
