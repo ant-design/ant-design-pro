@@ -4,7 +4,7 @@ export interface ChartCardProps {
   action?: React.ReactNode;
   total?: React.ReactNode | number;
   footer?: React.ReactNode;
-  contentHeight: number;
+  contentHeight?: number;
   avatar?: React.ReactNode;
 }
 
