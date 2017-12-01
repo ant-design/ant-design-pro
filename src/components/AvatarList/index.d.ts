@@ -1,6 +1,6 @@
 import React from "react";
 export interface AvatarItemProps {
-  tips: string | React.ReactNode;
+  tips: React.ReactNode;
   src: string;
 }
 
