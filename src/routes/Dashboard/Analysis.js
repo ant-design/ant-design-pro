@@ -8,6 +8,7 @@ import {
 import Trend from '../../components/Trend';
 import NumberInfo from '../../components/NumberInfo';
 import { getTimeDistance } from '../../utils/utils';
+import safeState from '../../components/SafeState';
 
 import styles from './Analysis.less';
 
@@ -25,6 +26,7 @@ for (let i = 0; i < 7; i += 1) {
 @connect(state => ({
   chart: state.chart,
 }))
+@safeState()
 export default class Analysis extends Component {
   state = {
     loading: true,
@@ -36,7 +38,7 @@ export default class Analysis extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'chart/fetch',
-    }).then(() => this.setState({ loading: false }));
+    }).then(() => this.props.setStateSafe({ loading: false }));
   }
 
   componentWillUnmount() {
@@ -47,19 +49,19 @@ export default class Analysis extends Component {
   }
 
   handleChangeSalesType = (e) => {
-    this.setState({
+    this.props.setStateSafe({
       salesType: e.target.value,
     });
   }
 
   handleTabChange = (key) => {
-    this.setState({
+    this.props.setStateSafe({
       currentTabKey: key,
     });
   }
 
   handleRangePickerChange = (rangePickerValue) => {
-    this.setState({
+    this.props.setStateSafe({
       rangePickerValue,
     });
 
@@ -69,7 +71,7 @@ export default class Analysis extends Component {
   }
 
   selectDate = (type) => {
-    this.setState({
+    this.props.setStateSafe({
       rangePickerValue: getTimeDistance(type),
     });
 
