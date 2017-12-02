@@ -61,7 +61,10 @@ class BasicLayout extends React.PureComponent {
     const breadcrumbNameMap = {};
 
     routeData.concat(menuData).forEach((item) => {
-      breadcrumbNameMap[item.path] = item.name;
+      breadcrumbNameMap[item.path] = {
+        name: item.name,
+        component: item.component,
+      };
     });
     return { location, breadcrumbNameMap };
   }

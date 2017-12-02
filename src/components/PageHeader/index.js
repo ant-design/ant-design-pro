@@ -6,16 +6,23 @@ import styles from './index.less';
 
 const { TabPane } = Tabs;
 
-function getBreadcrumbNameWithParams(breadcrumbNameMap, url) {
-  let name = '';
+function getBreadcrumbName(breadcrumbNameMap, url) {
+  if (breadcrumbNameMap[url] && breadcrumbNameMap[url].name) {
+    return breadcrumbNameMap[url].name;
+  }
+  const urlWithoutSplash = url.replace(/\/$/, '');
+  if (breadcrumbNameMap[urlWithoutSplash] && breadcrumbNameMap[urlWithoutSplash].name) {
+    return breadcrumbNameMap[urlWithoutSplash].name;
+  }
+  let breadcrumbName = '';
   Object.keys(breadcrumbNameMap).forEach((item) => {
     const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
     const itemRegExp = new RegExp(itemRegExpStr);
     if (itemRegExp.test(url)) {
-      name = breadcrumbNameMap[item];
+      breadcrumbName = breadcrumbNameMap[item].name;
     }
   });
-  return name;
+  return breadcrumbName || url;
 }
 
 export default class PageHeader extends PureComponent {
@@ -72,12 +79,9 @@ export default class PageHeader extends PureComponent {
         return (
           <Breadcrumb.Item key={url}>
             {createElement(
-              index === pathSnippets.length - 1 ? 'span' : linkElement,
+              (index === pathSnippets.length - 1) ? 'span' : linkElement,
               { [linkElement === 'a' ? 'href' : 'to']: url },
-              breadcrumbNameMap[url] ||
-              breadcrumbNameMap[url.replace('/', '')] ||
-              getBreadcrumbNameWithParams(breadcrumbNameMap, url) ||
-              url
+              getBreadcrumbName(breadcrumbNameMap, url),
             )}
           </Breadcrumb.Item>
         );
