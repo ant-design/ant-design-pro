@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 export interface GlobalFooterProps {
   links: Array<{
-    title: string | React.ReactNode;
+    title: React.ReactNode;
     href: string;
     blankTarget?: boolean;
   }>;

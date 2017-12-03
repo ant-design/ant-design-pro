@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 export interface FieldProps {
-  label: string | React.ReactNode;
-  value: string | React.ReactNode;
+  label: React.ReactNode;
+  value: React.ReactNode;
 }
 
 export default class Field extends React.Component<FieldProps, any> {}

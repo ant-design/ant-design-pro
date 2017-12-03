@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 export interface PageHeaderProps {
   title?: React.ReactNode | string;
   logo?: React.ReactNode | string;
@@ -6,11 +6,11 @@ export interface PageHeaderProps {
   content?: React.ReactNode;
   extraContent?: React.ReactNode;
   routes?: Array<any>;
-  params: any;
+  params?: any;
   breadcrumbList?: Array<{ title: React.ReactNode; href?: string }>;
   tabList?: Array<{ key: string; tab: React.ReactNode }>;
   onTabChange?: (key: string) => void;
-  linkElement?: string | React.ReactNode;
+  linkElement?: React.ReactNode;
 }
 
 export default class PageHeader extends React.Component<PageHeaderProps, any> {}

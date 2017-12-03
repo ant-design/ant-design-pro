@@ -1,10 +1,10 @@
-import React from "react";
+import * as React from "react";
 export interface ChartCardProps {
-  title: string | React.ReactNode;
+  title: React.ReactNode;
   action?: React.ReactNode;
   total?: React.ReactNode | number;
   footer?: React.ReactNode;
-  contentHeight: number;
+  contentHeight?: number;
   avatar?: React.ReactNode;
 }
 

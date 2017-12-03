@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 export interface BarProps {
-  title: string | React.ReactNode;
+  title: React.ReactNode;
   color?: string;
   margin?: [number, number, number, number];
   height: number;

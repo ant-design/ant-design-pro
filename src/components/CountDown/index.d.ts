@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 export interface CountDownProps {
   format?: (time: number) => void;
   target: Date | number;

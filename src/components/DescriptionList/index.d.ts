@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 export interface DescriptionListProps {
   layout?: "horizontal" | "vertical";
   col?: number;

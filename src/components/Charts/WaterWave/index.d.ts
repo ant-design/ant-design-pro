@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 export interface WaterWaveProps {
-  title: string | React.ReactNode;
+  title: React.ReactNode;
   color?: string;
   height: number;
   percent: number;
