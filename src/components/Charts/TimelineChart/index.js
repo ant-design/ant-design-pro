@@ -1,125 +1,129 @@
-import React, { Component } from 'react';
-import G2 from 'g2';
-import Slider from 'g2-plugin-slider';
-import styles from './index.less';
+import React from 'react';
 
-class TimelineChart extends Component {
-  componentDidMount() {
-    this.renderChart(this.props.data);
-  }
+export default () => <div />;
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.props.data) {
-      this.renderChart(nextProps.data);
-    }
-  }
+// import React, { Component } from 'react';
+// import G2 from 'g2';
+// import Slider from 'g2-plugin-slider';
+// import styles from './index.less';
 
-  componentWillUnmount() {
-    if (this.chart) {
-      this.chart.destroy();
-    }
-    if (this.slider) {
-      this.slider.destroy();
-    }
-  }
+// class TimelineChart extends Component {
+//   componentDidMount() {
+//     this.renderChart(this.props.data);
+//   }
 
-  sliderId = `timeline-chart-slider-${Math.random() * 1000}`
+//   componentWillReceiveProps(nextProps) {
+//     if (nextProps.data !== this.props.data) {
+//       this.renderChart(nextProps.data);
+//     }
+//   }
 
-  handleRef = (n) => {
-    this.node = n;
-  }
+//   componentWillUnmount() {
+//     if (this.chart) {
+//       this.chart.destroy();
+//     }
+//     if (this.slider) {
+//       this.slider.destroy();
+//     }
+//   }
 
-  renderChart(data) {
-    const { height = 400, margin = [60, 20, 40, 40], titleMap, borderWidth = 2 } = this.props;
+//   sliderId = `timeline-chart-slider-${Math.random() * 1000}`
 
-    if (!data || (data && data.length < 1)) {
-      return;
-    }
+//   handleRef = (n) => {
+//     this.node = n;
+//   }
 
-    // clean
-    if (this.sliderId) {
-      document.getElementById(this.sliderId).innerHTML = '';
-    }
-    this.node.innerHTML = '';
+//   renderChart(data) {
+//     const { height = 400, margin = [60, 20, 40, 40], titleMap, borderWidth = 2 } = this.props;
 
-    const chart = new G2.Chart({
-      container: this.node,
-      forceFit: true,
-      height,
-      plotCfg: {
-        margin,
-      },
-    });
+//     if (!data || (data && data.length < 1)) {
+//       return;
+//     }
 
-    chart.axis('x', {
-      title: false,
-    });
-    chart.axis('y1', {
-      title: false,
-    });
-    chart.axis('y2', false);
+//     // clean
+//     if (this.sliderId) {
+//       document.getElementById(this.sliderId).innerHTML = '';
+//     }
+//     this.node.innerHTML = '';
 
-    chart.legend({
-      mode: false,
-      position: 'top',
-    });
+//     const chart = new G2.Chart({
+//       container: this.node,
+//       forceFit: true,
+//       height,
+//       plotCfg: {
+//         margin,
+//       },
+//     });
 
-    let max;
-    if (data[0] && data[0].y1 && data[0].y2) {
-      max = Math.max(data.sort((a, b) => b.y1 - a.y1)[0].y1,
-        data.sort((a, b) => b.y2 - a.y2)[0].y2);
-    }
+//     chart.axis('x', {
+//       title: false,
+//     });
+//     chart.axis('y1', {
+//       title: false,
+//     });
+//     chart.axis('y2', false);
 
-    chart.source(data, {
-      x: {
-        type: 'timeCat',
-        tickCount: 16,
-        mask: 'HH:MM',
-        range: [0, 1],
-      },
-      y1: {
-        alias: titleMap.y1,
-        max,
-        min: 0,
-      },
-      y2: {
-        alias: titleMap.y2,
-        max,
-        min: 0,
-      },
-    });
+//     chart.legend({
+//       mode: false,
+//       position: 'top',
+//     });
 
-    chart.line().position('x*y1').color('#1890FF').size(borderWidth);
-    chart.line().position('x*y2').color('#2FC25B').size(borderWidth);
+//     let max;
+//     if (data[0] && data[0].y1 && data[0].y2) {
+//       max = Math.max(data.sort((a, b) => b.y1 - a.y1)[0].y1,
+//         data.sort((a, b) => b.y2 - a.y2)[0].y2);
+//     }
 
-    this.chart = chart;
+//     chart.source(data, {
+//       x: {
+//         type: 'timeCat',
+//         tickCount: 16,
+//         mask: 'HH:MM',
+//         range: [0, 1],
+//       },
+//       y1: {
+//         alias: titleMap.y1,
+//         max,
+//         min: 0,
+//       },
+//       y2: {
+//         alias: titleMap.y2,
+//         max,
+//         min: 0,
+//       },
+//     });
 
-    /* eslint new-cap:0 */
-    const slider = new Slider({
-      domId: this.sliderId,
-      height: 26,
-      xDim: 'x',
-      yDim: 'y1',
-      charts: [chart],
-    });
-    slider.render();
+//     chart.line().position('x*y1').color('#1890FF').size(borderWidth);
+//     chart.line().position('x*y2').color('#2FC25B').size(borderWidth);
 
-    this.slider = slider;
-  }
+//     this.chart = chart;
 
-  render() {
-    const { height, title } = this.props;
+//     /* eslint new-cap:0 */
+//     const slider = new Slider({
+//       domId: this.sliderId,
+//       height: 26,
+//       xDim: 'x',
+//       yDim: 'y1',
+//       charts: [chart],
+//     });
+//     slider.render();
 
-    return (
-      <div className={styles.timelineChart} style={{ height }}>
-        <div>
-          { title && <h4>{title}</h4>}
-          <div ref={this.handleRef} />
-          <div id={this.sliderId} />
-        </div>
-      </div>
-    );
-  }
-}
+//     this.slider = slider;
+//   }
 
-export default TimelineChart;
+//   render() {
+//     const { height, title } = this.props;
+
+//     return (
+//       <div className={styles.timelineChart} style={{ height }}>
+//         <div>
+//           { title && <h4>{title}</h4>}
+//           <div ref={this.handleRef} />
+//           <div id={this.sliderId} />
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+
+// export default TimelineChart;

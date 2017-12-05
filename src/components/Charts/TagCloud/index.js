@@ -1,170 +1,174 @@
-import React, { PureComponent } from 'react';
-import classNames from 'classnames';
-import G2 from 'g2';
-import Cloud from 'g-cloud';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
-import styles from './index.less';
+import React from 'react';
 
-/* eslint no-underscore-dangle: 0 */
-/* eslint no-param-reassign: 0 */
+export default () => <div />;
 
-const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
+// import React, { PureComponent } from 'react';
+// import classNames from 'classnames';
+// import G2 from 'g2';
+// import Cloud from 'g-cloud';
+// import Debounce from 'lodash-decorators/debounce';
+// import Bind from 'lodash-decorators/bind';
+// import styles from './index.less';
 
-class TagCloud extends PureComponent {
-  componentDidMount() {
-    this.initTagCloud();
-    this.renderChart();
+// /* eslint no-underscore-dangle: 0 */
+// /* eslint no-param-reassign: 0 */
 
-    window.addEventListener('resize', this.resize);
-  }
+// const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.data !== nextProps.data) {
-      this.renderChart(nextProps.data);
-    }
-  }
+// class TagCloud extends PureComponent {
+//   componentDidMount() {
+//     this.initTagCloud();
+//     this.renderChart();
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
-    this.renderChart.cancel();
-  }
+//     window.addEventListener('resize', this.resize);
+//   }
 
-  resize = () => {
-    this.renderChart();
-  }
+//   componentWillReceiveProps(nextProps) {
+//     if (this.props.data !== nextProps.data) {
+//       this.renderChart(nextProps.data);
+//     }
+//   }
 
-  initTagCloud = () => {
-    const { Util, Shape } = G2;
+//   componentWillUnmount() {
+//     window.removeEventListener('resize', this.resize);
+//     this.renderChart.cancel();
+//   }
 
-    function getTextAttrs(cfg) {
-      const textAttrs = Util.mix(true, {}, {
-        fillOpacity: cfg.opacity,
-        fontSize: cfg.size,
-        rotate: cfg.origin._origin.rotate,
-        // rotate: cfg.origin._origin.rotate,
-        text: cfg.origin._origin.text,
-        textAlign: 'center',
-        fill: cfg.color,
-        textBaseline: 'Alphabetic',
-      }, cfg.style);
-      return textAttrs;
-    }
+//   resize = () => {
+//     this.renderChart();
+//   }
 
-    // 给point注册一个词云的shape
-    Shape.registShape('point', 'cloud', {
-      drawShape(cfg, container) {
-        cfg.points = this.parsePoints(cfg.points);
-        const attrs = getTextAttrs(cfg);
-        const shape = container.addShape('text', {
-          attrs: Util.mix(attrs, {
-            x: cfg.points[0].x,
-            y: cfg.points[0].y,
-          }),
-        });
-        return shape;
-      },
-    });
-  }
+//   initTagCloud = () => {
+//     const { Util, Shape } = G2;
 
-  saveRootRef = (node) => {
-    this.root = node;
-  }
+//     function getTextAttrs(cfg) {
+//       const textAttrs = Util.mix(true, {}, {
+//         fillOpacity: cfg.opacity,
+//         fontSize: cfg.size,
+//         rotate: cfg.origin._origin.rotate,
+//         // rotate: cfg.origin._origin.rotate,
+//         text: cfg.origin._origin.text,
+//         textAlign: 'center',
+//         fill: cfg.color,
+//         textBaseline: 'Alphabetic',
+//       }, cfg.style);
+//       return textAttrs;
+//     }
 
-  saveNodeRef = (node) => {
-    this.node = node;
-  }
+//     // 给point注册一个词云的shape
+//     Shape.registShape('point', 'cloud', {
+//       drawShape(cfg, container) {
+//         cfg.points = this.parsePoints(cfg.points);
+//         const attrs = getTextAttrs(cfg);
+//         const shape = container.addShape('text', {
+//           attrs: Util.mix(attrs, {
+//             x: cfg.points[0].x,
+//             y: cfg.points[0].y,
+//           }),
+//         });
+//         return shape;
+//       },
+//     });
+//   }
 
-  @Bind()
-  @Debounce(500)
-  renderChart(newData) {
-    const data = newData || this.props.data;
-    if (!data || data.length < 1) {
-      return;
-    }
+//   saveRootRef = (node) => {
+//     this.root = node;
+//   }
 
-    const colors = ['#1890FF', '#41D9C7', '#2FC25B', '#FACC14', '#9AE65C'];
+//   saveNodeRef = (node) => {
+//     this.node = node;
+//   }
 
-    const height = this.props.height * 4;
-    let width = 0;
-    if (this.root) {
-      width = this.root.offsetWidth * 4;
-    }
+//   @Bind()
+//   @Debounce(500)
+//   renderChart(newData) {
+//     const data = newData || this.props.data;
+//     if (!data || data.length < 1) {
+//       return;
+//     }
 
-    data.sort((a, b) => b.value - a.value);
+//     const colors = ['#1890FF', '#41D9C7', '#2FC25B', '#FACC14', '#9AE65C'];
 
-    const max = data[0].value;
-    const min = data[data.length - 1].value;
+//     const height = this.props.height * 4;
+//     let width = 0;
+//     if (this.root) {
+//       width = this.root.offsetWidth * 4;
+//     }
 
-    // 构造一个词云布局对象
-    const layout = new Cloud({
-      words: data,
-      width,
-      height,
+//     data.sort((a, b) => b.value - a.value);
 
-      rotate: () => 0,
+//     const max = data[0].value;
+//     const min = data[data.length - 1].value;
 
-      // 设定文字大小配置函数(默认为12-24px的随机大小)
-      size: words => (((words.value - min) / (max - min)) * 50) + 30,
+//     // 构造一个词云布局对象
+//     const layout = new Cloud({
+//       words: data,
+//       width,
+//       height,
 
-      // 设定文字内容
-      text: words => words.name,
-    });
+//       rotate: () => 0,
 
-    layout.image(imgUrl, (imageCloud) => {
-      // clean
-      if (this.node) {
-        this.node.innerHTML = '';
-      }
+//       // 设定文字大小配置函数(默认为12-24px的随机大小)
+//       size: words => (((words.value - min) / (max - min)) * 50) + 30,
 
-      // 执行词云布局函数，并在回调函数中调用G2对结果进行绘制
-      imageCloud.exec((texts) => {
-        const chart = new G2.Chart({
-          container: this.node,
-          width,
-          height,
-          plotCfg: {
-            margin: 0,
-          },
-        });
+//       // 设定文字内容
+//       text: words => words.name,
+//     });
 
-        chart.legend(false);
-        chart.axis(false);
-        chart.tooltip(false);
+//     layout.image(imgUrl, (imageCloud) => {
+//       // clean
+//       if (this.node) {
+//         this.node.innerHTML = '';
+//       }
 
-        chart.source(texts);
+//       // 执行词云布局函数，并在回调函数中调用G2对结果进行绘制
+//       imageCloud.exec((texts) => {
+//         const chart = new G2.Chart({
+//           container: this.node,
+//           width,
+//           height,
+//           plotCfg: {
+//             margin: 0,
+//           },
+//         });
 
-        // 将词云坐标系调整为G2的坐标系
-        chart.coord().reflect();
+//         chart.legend(false);
+//         chart.axis(false);
+//         chart.tooltip(false);
 
-        chart
-          .point()
-          .position('x*y')
-          .color('text', colors)
-          .size('size', size => size)
-          .shape('cloud')
-          .style({
-            fontStyle: texts[0].style,
-            fontFamily: texts[0].font,
-            fontWeight: texts[0].weight,
-          });
+//         chart.source(texts);
 
-        chart.render();
-      });
-    });
-  }
+//         // 将词云坐标系调整为G2的坐标系
+//         chart.coord().reflect();
 
-  render() {
-    return (
-      <div
-        className={classNames(styles.tagCloud, this.props.className)}
-        ref={this.saveRootRef}
-        style={{ width: '100%' }}
-      >
-        <div ref={this.saveNodeRef} style={{ height: this.props.height }} />
-      </div>
-    );
-  }
-}
+//         chart
+//           .point()
+//           .position('x*y')
+//           .color('text', colors)
+//           .size('size', size => size)
+//           .shape('cloud')
+//           .style({
+//             fontStyle: texts[0].style,
+//             fontFamily: texts[0].font,
+//             fontWeight: texts[0].weight,
+//           });
 
-export default TagCloud;
+//         chart.render();
+//       });
+//     });
+//   }
+
+//   render() {
+//     return (
+//       <div
+//         className={classNames(styles.tagCloud, this.props.className)}
+//         ref={this.saveRootRef}
+//         style={{ width: '100%' }}
+//       >
+//         <div ref={this.saveNodeRef} style={{ height: this.props.height }} />
+//       </div>
+//     );
+//   }
+// }
+
+// export default TagCloud;
