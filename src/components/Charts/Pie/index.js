@@ -6,11 +6,13 @@ import classNames from 'classnames';
 import ReactFitText from 'react-fittext';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
+import autoHeight from '../autoHeight';
 
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
-class Pie extends Component {
+@autoHeight()
+export default class Pie extends Component {
   state = {
     legendData: [],
     legendBlock: false,
@@ -241,5 +243,3 @@ class Pie extends Component {
     );
   }
 }
-
-export default Pie;
