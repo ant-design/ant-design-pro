@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Chart, Axis, Tooltip, Geom } from 'bizcharts';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
+import autoHeight from '../autoHeight';
 import styles from '../index.less';
 
+@autoHeight()
 class Bar extends Component {
   state = {
     autoHideXLabels: false,
@@ -44,6 +46,10 @@ class Bar extends Component {
     }
   }
 
+  handleRoot = (n) => {
+    this.root = n;
+  };
+
   handleRef = (n) => {
     this.node = n;
   };
@@ -73,7 +79,7 @@ class Bar extends Component {
     ];
 
     return (
-      <div className={styles.chart} style={{ height }}>
+      <div className={styles.chart} style={{ height }} ref={this.handleRoot}>
         <div ref={this.handleRef}>
           {title && <h4>{title}</h4>}
           <Chart scale={scale} height={height} forceFit={forceFit} data={data} padding={padding}>

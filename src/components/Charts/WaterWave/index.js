@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
+import autoHeight from '../autoHeight';
 import styles from './index.less';
 
 /* eslint no-return-assign: 0 */
 /* eslint no-mixed-operators: 0 */
 // riddle: https://riddle.alibaba-inc.com/riddles/2d9a4b90
 
-class WaterWave extends PureComponent {
-  static defaultProps = {
-    height: 160,
-  };
+@autoHeight()
+export default class WaterWave extends PureComponent {
   state = {
     radio: 1,
   };
@@ -196,5 +195,3 @@ class WaterWave extends PureComponent {
     );
   }
 }
-
-export default WaterWave;

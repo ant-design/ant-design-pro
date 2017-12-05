@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Chart, Tooltip, Geom, Coord, Axis } from 'bizcharts';
 import { Row, Col } from 'antd';
+import autoHeight from '../autoHeight';
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
-class Radar extends Component {
+@autoHeight()
+export default class Radar extends Component {
   state = {
     legendData: [],
   };
@@ -176,5 +178,3 @@ class Radar extends Component {
     );
   }
 }
-
-export default Radar;
