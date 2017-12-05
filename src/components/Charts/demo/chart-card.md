@@ -34,7 +34,13 @@ ReactDOM.render(
     <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
         title="移动指标"
-        avatar={<img style={{ width: 56, height: 56 }} src="https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png" />}
+        avatar={
+          <img
+            style={{ width: 56, height: 56 }}
+            src="https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png"
+            alt="indicator"
+          />
+        }
         action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
         total={yuan(126560)}
         footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
@@ -43,7 +49,13 @@ ReactDOM.render(
     <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
         title="移动指标"
-        avatar={<img style={{ width: 56, height: 56 }} src="https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png" />}
+        avatar={(
+          <img
+            alt="indicator"
+            style={{ width: 56, height: 56 }}
+            src="https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png"
+          />
+        )}
         action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
         total={yuan(126560)}
       />

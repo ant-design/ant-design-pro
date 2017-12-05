@@ -31,7 +31,7 @@ const salesPieData = [
     x: '其他',
     y: 1231,
   },
-]
+];
 
 ReactDOM.render(
   <Pie
