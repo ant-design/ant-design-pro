@@ -53,8 +53,8 @@ export default (props) => {
           data={data}
           padding={padding}
         >
-          <Axis name="x" label={false} line={false} tickLine={false} {...xAxis} />
-          <Axis name="y" label={false} line={false} tickLine={false} {...yAxis} />
+          <Axis name="x" label={false} line={false} tickLine={false} grid={false} {...xAxis} />
+          <Axis name="y" label={false} line={false} tickLine={false} grid={false} {...yAxis} />
           <Tooltip showTitle={false} crosshairs={false} />
           <Geom
             type="area"
