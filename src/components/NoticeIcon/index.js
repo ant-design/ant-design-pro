@@ -40,7 +40,7 @@ export default class NoticeIcon extends PureComponent {
     if (!children) {
       return null;
     }
-    const panes = children.map((child) => {
+    const panes = React.Children.map(children, (child) => {
       const title = child.props.list && child.props.list.length > 0
         ? `${child.props.title} (${child.props.list.length})` : child.props.title;
       return (
