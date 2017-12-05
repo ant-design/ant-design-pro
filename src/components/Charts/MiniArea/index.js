@@ -6,7 +6,7 @@ import styles from '../index.less';
 class MiniArea extends PureComponent {
   static defaultProps = {
     borderColor: '#1890FF',
-    color: 'rgba(24, 144, 255, 0.2)',
+    color: 'rgba(24, 144, 255, 0.2)'
   };
 
   componentDidMount() {
@@ -25,13 +25,20 @@ class MiniArea extends PureComponent {
     }
   }
 
-  handleRef = (n) => {
+  handleRef = n => {
     this.node = n;
-  }
+  };
 
   renderChart(data) {
     const {
-      height = 0, fit = true, color, borderWidth = 2, line, xAxis, yAxis, animate = true,
+      height = 0,
+      fit = true,
+      color,
+      borderWidth = 2,
+      line,
+      xAxis,
+      yAxis,
+      animate = true
     } = this.props;
     const borderColor = this.props.borderColor || color;
 
@@ -48,9 +55,9 @@ class MiniArea extends PureComponent {
       height: height + 54,
       animate,
       plotCfg: {
-        margin: [36, 5, 30, 5],
+        margin: [36, 5, 30, 5]
       },
-      legend: null,
+      legend: null
     });
 
     if (!xAxis && !yAxis) {
@@ -73,12 +80,12 @@ class MiniArea extends PureComponent {
       x: {
         type: 'cat',
         range: [0, 1],
-        ...xAxis,
+        ...xAxis
       },
       y: {
         min: 0,
-        ...yAxis,
-      },
+        ...yAxis
+      }
     };
 
     chart.tooltip({
@@ -87,20 +94,28 @@ class MiniArea extends PureComponent {
       map: {
         title: null,
         name: 'x',
-        value: 'y',
-      },
+        value: 'y'
+      }
     });
 
     const view = chart.createView();
     view.source(data, dataConfig);
 
-    view.area().position('x*y').color(color).shape('smooth')
+    view
+      .area()
+      .position('x*y')
+      .color(color)
+      .shape('smooth')
       .style({ fillOpacity: 1 });
 
     if (line) {
       const view2 = chart.createView();
       view2.source(data, dataConfig);
-      view2.line().position('x*y').color(borderColor).size(borderWidth)
+      view2
+        .line()
+        .position('x*y')
+        .color(borderColor)
+        .size(borderWidth)
         .shape('smooth');
       view2.tooltip(false);
     }

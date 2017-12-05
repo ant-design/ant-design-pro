@@ -29,9 +29,9 @@ class Gauge extends PureComponent {
     }
   }
 
-  handleRef = (n) => {
+  handleRef = n => {
     this.node = n;
-  }
+  };
 
   initChart(nextProps) {
     const { title, color = primaryColor } = nextProps || this.props;
@@ -43,7 +43,7 @@ class Gauge extends PureComponent {
 
         const center = this.parsePoint({
           x: 0,
-          y: 0,
+          y: 0
         });
 
         const shape = group.addShape('polygon', {
@@ -52,13 +52,13 @@ class Gauge extends PureComponent {
               [center.x, center.y],
               [point.x + 8, point.y],
               [point.x + 8, point.y - 2],
-              [center.x, center.y - 2],
+              [center.x, center.y - 2]
             ],
             radius: 2,
             lineWidth: 2,
             arrow: false,
-            fill: color,
-          },
+            fill: color
+          }
         });
 
         group.addShape('Marker', {
@@ -68,8 +68,8 @@ class Gauge extends PureComponent {
             fill: color,
             radius: 8,
             x: center.x,
-            y: center.y,
-          },
+            y: center.y
+          }
         });
         group.addShape('Marker', {
           attrs: {
@@ -78,8 +78,8 @@ class Gauge extends PureComponent {
             fill: '#fff',
             radius: 5,
             x: center.x,
-            y: center.y,
-          },
+            y: center.y
+          }
         });
 
         const { origin } = cfg;
@@ -90,8 +90,8 @@ class Gauge extends PureComponent {
             text: `${origin._origin.value}%`,
             textAlign: 'center',
             fontSize: 24,
-            fill: 'rgba(0, 0, 0, 0.85)',
-          },
+            fill: 'rgba(0, 0, 0, 0.85)'
+          }
         });
         group.addShape('text', {
           attrs: {
@@ -100,19 +100,25 @@ class Gauge extends PureComponent {
             text: title,
             textAlign: 'center',
             fontSize: 14,
-            fill: 'rgba(0, 0, 0, 0.43)',
-          },
+            fill: 'rgba(0, 0, 0, 0.43)'
+          }
         });
 
         return shape;
-      },
+      }
     });
   }
 
   renderChart(nextProps) {
     const {
-      height, color = primaryColor, bgColor = backgroundColor, title, percent, format,
-    } = nextProps || this.props;
+      height,
+      color = primaryColor,
+      bgColor = backgroundColor,
+      title,
+      percent,
+      format
+    } =
+      nextProps || this.props;
     const data = [{ name: title, value: percent }];
 
     if (this.chart) {
@@ -130,8 +136,8 @@ class Gauge extends PureComponent {
       height,
       animate: false,
       plotCfg: {
-        margin: [10, 10, 30, 10],
-      },
+        margin: [10, 10, 30, 10]
+      }
     });
 
     chart.source(data);
@@ -140,26 +146,29 @@ class Gauge extends PureComponent {
 
     chart.coord('gauge', {
       startAngle: -1.2 * Math.PI,
-      endAngle: 0.20 * Math.PI,
+      endAngle: 0.2 * Math.PI
     });
     chart.col('value', {
       type: 'linear',
       nice: true,
       min: 0,
       max: 100,
-      tickCount: 6,
+      tickCount: 6
     });
     chart.axis('value', {
       subTick: false,
       tickLine: {
         stroke: color,
         lineWidth: 2,
-        value: -14,
+        value: -14
       },
       labelOffset: -12,
-      formatter: format,
+      formatter: format
     });
-    chart.point().position('value').shape('dashBoard');
+    chart
+      .point()
+      .position('value')
+      .shape('dashBoard');
     draw(data);
 
     /* eslint no-shadow: 0 */
@@ -168,23 +177,31 @@ class Gauge extends PureComponent {
       const lineWidth = 12;
       chart.guide().clear();
 
-      chart.guide().arc(() => {
-        return [0, 0.95];
-      }, () => {
-        return [val, 0.95];
-      }, {
-        stroke: color,
-        lineWidth,
-      });
+      chart.guide().arc(
+        () => {
+          return [0, 0.95];
+        },
+        () => {
+          return [val, 0.95];
+        },
+        {
+          stroke: color,
+          lineWidth
+        }
+      );
 
-      chart.guide().arc(() => {
-        return [val, 0.95];
-      }, (arg) => {
-        return [arg.max, 0.95];
-      }, {
-        stroke: bgColor,
-        lineWidth,
-      });
+      chart.guide().arc(
+        () => {
+          return [val, 0.95];
+        },
+        arg => {
+          return [arg.max, 0.95];
+        },
+        {
+          stroke: bgColor,
+          lineWidth
+        }
+      );
 
       chart.changeData(data);
     }
@@ -193,9 +210,7 @@ class Gauge extends PureComponent {
   }
 
   render() {
-    return (
-      <div ref={this.handleRef} />
-    );
+    return <div ref={this.handleRef} />;
   }
 }
 

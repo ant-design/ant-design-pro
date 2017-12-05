@@ -6,21 +6,17 @@ export default ({ title, children, last, block, grid, ...rest }) => {
   const cls = classNames(styles.standardFormRow, {
     [styles.standardFormRowBlock]: block,
     [styles.standardFormRowLast]: last,
-    [styles.standardFormRowGrid]: grid,
+    [styles.standardFormRowGrid]: grid
   });
 
   return (
     <div className={cls} {...rest}>
-      {
-        title && (
-          <div className={styles.label}>
-            <span>{title}</span>
-          </div>
-        )
-      }
-      <div className={styles.content}>
-        {children}
-      </div>
+      {title && (
+        <div className={styles.label}>
+          <span>{title}</span>
+        </div>
+      )}
+      <div className={styles.content}>{children}</div>
     </div>
   );
 };

@@ -17,15 +17,15 @@ const FormItem = Form.Item;
 /* eslint react/no-array-index-key: 0 */
 @Form.create()
 @connect(state => ({
-  list: state.list,
+  list: state.list
 }))
 export default class CoverCardList extends PureComponent {
   componentDidMount() {
     this.props.dispatch({
       type: 'list/fetch',
       payload: {
-        count: 8,
-      },
+        count: 8
+      }
     });
   }
 
@@ -33,21 +33,21 @@ export default class CoverCardList extends PureComponent {
     const { form, dispatch } = this.props;
     // setTimeout 用于保证获取表单值是在所有表单字段更新完毕的时候
     setTimeout(() => {
-      form.validateFields((err) => {
+      form.validateFields(err => {
         if (!err) {
           // eslint-disable-next-line
           dispatch({
             type: 'list/fetch',
             payload: {
-              count: 8,
-            },
+              count: 8
+            }
           });
         }
       });
     }, 0);
-  }
+  };
 
-  handleTabChange = (key) => {
+  handleTabChange = key => {
     const { dispatch } = this.props;
     switch (key) {
       case 'doc':
@@ -62,7 +62,7 @@ export default class CoverCardList extends PureComponent {
       default:
         break;
     }
-  }
+  };
 
   render() {
     const { list: { list = [], loading }, form } = this.props;
@@ -89,15 +89,13 @@ export default class CoverCardList extends PureComponent {
                 <span>{moment(item.updatedAt).fromNow()}</span>
                 <div className={styles.avatarList}>
                   <AvatarList size="mini">
-                    {
-                      item.members.map((member, i) => (
-                        <AvatarList.Item
-                          key={`${item.id}-avatar-${i}`}
-                          src={member.avatar}
-                          tips={member.name}
-                        />
-                      ))
-                    }
+                    {item.members.map((member, i) => (
+                      <AvatarList.Item
+                        key={`${item.id}-avatar-${i}`}
+                        src={member.avatar}
+                        tips={member.name}
+                      />
+                    ))}
                   </AvatarList>
                 </div>
               </div>
@@ -110,17 +108,17 @@ export default class CoverCardList extends PureComponent {
     const tabList = [
       {
         key: 'doc',
-        tab: '文章',
+        tab: '文章'
       },
       {
         key: 'app',
-        tab: '应用',
+        tab: '应用'
       },
       {
         key: 'project',
         tab: '项目',
-        default: true,
-      },
+        default: true
+      }
     ];
 
     const pageHeaderContent = (
@@ -138,8 +136,8 @@ export default class CoverCardList extends PureComponent {
     const formItemLayout = {
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
-      },
+        sm: { span: 16 }
+      }
     };
 
     return (
@@ -152,7 +150,11 @@ export default class CoverCardList extends PureComponent {
         <div className={styles.coverCardList}>
           <Card bordered={false}>
             <Form layout="inline">
-              <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
+              <StandardFormRow
+                title="所属类目"
+                block
+                style={{ paddingBottom: 11 }}
+              >
                 <FormItem>
                   {getFieldDecorator('category')(
                     <TagSelect onChange={this.handleFormSubmit} expandable>
@@ -166,23 +168,20 @@ export default class CoverCardList extends PureComponent {
                       <TagSelect.Option value="cat8">类目八</TagSelect.Option>
                       <TagSelect.Option value="cat9">类目九</TagSelect.Option>
                       <TagSelect.Option value="cat10">类目十</TagSelect.Option>
-                      <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
-                      <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
+                      <TagSelect.Option value="cat11">
+                        类目十一
+                      </TagSelect.Option>
+                      <TagSelect.Option value="cat12">
+                        类目十二
+                      </TagSelect.Option>
                     </TagSelect>
                   )}
                 </FormItem>
               </StandardFormRow>
-              <StandardFormRow
-                title="其它选项"
-                grid
-                last
-              >
+              <StandardFormRow title="其它选项" grid last>
                 <Row gutter={24}>
                   <Col lg={8} md={10} sm={10} xs={24}>
-                    <FormItem
-                      {...formItemLayout}
-                      label="作者"
-                    >
+                    <FormItem {...formItemLayout} label="作者">
                       {getFieldDecorator('author', {})(
                         <Select
                           onChange={this.handleFormSubmit}
@@ -195,10 +194,7 @@ export default class CoverCardList extends PureComponent {
                     </FormItem>
                   </Col>
                   <Col lg={8} md={10} sm={10} xs={24}>
-                    <FormItem
-                      {...formItemLayout}
-                      label="好评度"
-                    >
+                    <FormItem {...formItemLayout} label="好评度">
                       {getFieldDecorator('rate', {})(
                         <Select
                           onChange={this.handleFormSubmit}
@@ -215,9 +211,7 @@ export default class CoverCardList extends PureComponent {
               </StandardFormRow>
             </Form>
           </Card>
-          <div className={styles.cardList}>
-            {cardList}
-          </div>
+          <div className={styles.cardList}>{cardList}</div>
         </div>
       </PageHeaderLayout>
     );

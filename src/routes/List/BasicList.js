@@ -1,7 +1,20 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
-import { List, Card, Row, Col, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar } from 'antd';
+import {
+  List,
+  Card,
+  Row,
+  Col,
+  Radio,
+  Input,
+  Progress,
+  Button,
+  Icon,
+  Dropdown,
+  Menu,
+  Avatar
+} from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
@@ -12,15 +25,15 @@ const RadioGroup = Radio.Group;
 const { Search } = Input;
 
 @connect(state => ({
-  list: state.list,
+  list: state.list
 }))
 export default class BasicList extends PureComponent {
   componentDidMount() {
     this.props.dispatch({
       type: 'list/fetch',
       payload: {
-        count: 5,
-      },
+        count: 5
+      }
     });
   }
 
@@ -54,7 +67,7 @@ export default class BasicList extends PureComponent {
       showSizeChanger: true,
       showQuickJumper: true,
       pageSize: 5,
-      total: 50,
+      total: 50
     };
 
     const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
@@ -117,7 +130,11 @@ export default class BasicList extends PureComponent {
             bodyStyle={{ padding: '0 32px 40px 32px' }}
             extra={extraContent}
           >
-            <Button type="dashed" style={{ width: '100%', marginBottom: 8 }} icon="plus">
+            <Button
+              type="dashed"
+              style={{ width: '100%', marginBottom: 8 }}
+              icon="plus"
+            >
               添加
             </Button>
             <List
@@ -127,11 +144,11 @@ export default class BasicList extends PureComponent {
               pagination={paginationProps}
               dataSource={list}
               renderItem={item => (
-                <List.Item
-                  actions={[<a>编辑</a>, <MoreBtn />]}
-                >
+                <List.Item actions={[<a>编辑</a>, <MoreBtn />]}>
                   <List.Item.Meta
-                    avatar={<Avatar src={item.logo} shape="square" size="large" />}
+                    avatar={
+                      <Avatar src={item.logo} shape="square" size="large" />
+                    }
                     title={<a href={item.href}>{item.title}</a>}
                     description={item.subDescription}
                   />

@@ -5,39 +5,39 @@ export default {
 
   state: {
     list: [],
-    loading: true,
+    loading: true
   },
 
   effects: {
     *fetchList(_, { call, put }) {
       yield put({
         type: 'changeLoading',
-        payload: true,
+        payload: true
       });
       const response = yield call(queryActivities);
       yield put({
         type: 'saveList',
-        payload: Array.isArray(response) ? response : [],
+        payload: Array.isArray(response) ? response : []
       });
       yield put({
         type: 'changeLoading',
-        payload: false,
+        payload: false
       });
-    },
+    }
   },
 
   reducers: {
     saveList(state, action) {
       return {
         ...state,
-        list: action.payload,
+        list: action.payload
       };
     },
     changeLoading(state, action) {
       return {
         ...state,
-        loading: action.payload,
+        loading: action.payload
       };
-    },
-  },
+    }
+  }
 };

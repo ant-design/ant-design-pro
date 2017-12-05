@@ -14,8 +14,10 @@ dynamic.setDefaultLoadingComponent(() => {
 });
 
 function getRouteData(navData, path) {
-  if (!navData.some(item => item.layout === path) ||
-    !(navData.filter(item => item.layout === path)[0].children)) {
+  if (
+    !navData.some(item => item.layout === path) ||
+    !navData.filter(item => item.layout === path)[0].children
+  ) {
     return null;
   }
   const route = cloneDeep(navData.filter(item => item.layout === path)[0]);
@@ -24,8 +26,10 @@ function getRouteData(navData, path) {
 }
 
 function getLayout(navData, path) {
-  if (!navData.some(item => item.layout === path) ||
-    !(navData.filter(item => item.layout === path)[0].children)) {
+  if (
+    !navData.some(item => item.layout === path) ||
+    !navData.filter(item => item.layout === path)[0].children
+  ) {
     return null;
   }
   const route = navData.filter(item => item.layout === path)[0];
@@ -33,7 +37,7 @@ function getLayout(navData, path) {
     component: route.component,
     layout: route.layout,
     name: route.name,
-    path: route.path,
+    path: route.path
   };
 }
 
@@ -45,17 +49,23 @@ function RouterConfig({ history, app }) {
   const passProps = {
     app,
     navData,
-    getRouteData: (path) => {
+    getRouteData: path => {
       return getRouteData(navData, path);
-    },
+    }
   };
 
   return (
     <LocaleProvider locale={zhCN}>
       <Router history={history}>
         <Switch>
-          <Route path="/user" render={props => <UserLayout {...props} {...passProps} />} />
-          <Route path="/" render={props => <BasicLayout {...props} {...passProps} />} />
+          <Route
+            path="/user"
+            render={props => <UserLayout {...props} {...passProps} />}
+          />
+          <Route
+            path="/"
+            render={props => <BasicLayout {...props} {...passProps} />}
+          />
         </Switch>
       </Router>
     </LocaleProvider>

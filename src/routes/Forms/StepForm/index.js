@@ -16,17 +16,21 @@ class StepForm extends PureComponent {
     const { pathname } = location;
     const pathList = pathname.split('/');
     switch (pathList[pathList.length - 1]) {
-      case 'step-form': return 0;
-      case 'confirm': return 1;
-      case 'result': return 2;
-      default: return 0;
+      case 'step-form':
+        return 0;
+      case 'confirm':
+        return 1;
+      case 'result':
+        return 2;
+      default:
+        return 0;
     }
   }
   getCurrentComponent() {
     const componentMap = {
       0: Step1,
       1: Step2,
-      2: Step3,
+      2: Step3
     };
     return componentMap[this.getCurrentStep()];
   }
@@ -34,15 +38,18 @@ class StepForm extends PureComponent {
     const { form, stepFormData, submitting, dispatch } = this.props;
     const formItemLayout = {
       labelCol: {
-        span: 5,
+        span: 5
       },
       wrapperCol: {
-        span: 19,
-      },
+        span: 19
+      }
     };
     const CurrentComponent = this.getCurrentComponent();
     return (
-      <PageHeaderLayout title="分步表单" content="将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。">
+      <PageHeaderLayout
+        title="分步表单"
+        content="将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。"
+      >
         <Card bordered={false}>
           <div>
             <Steps current={this.getCurrentStep()} className={styles.steps}>
@@ -66,5 +73,5 @@ class StepForm extends PureComponent {
 
 export default connect(state => ({
   stepFormData: state.form.step,
-  submitting: state.form.stepFormSubmitting,
+  submitting: state.form.stepFormSubmitting
 }))(StepForm);

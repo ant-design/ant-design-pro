@@ -23,14 +23,19 @@ class TimelineChart extends Component {
     }
   }
 
-  sliderId = `timeline-chart-slider-${Math.random() * 1000}`
+  sliderId = `timeline-chart-slider-${Math.random() * 1000}`;
 
-  handleRef = (n) => {
+  handleRef = n => {
     this.node = n;
-  }
+  };
 
   renderChart(data) {
-    const { height = 400, margin = [60, 20, 40, 40], titleMap, borderWidth = 2 } = this.props;
+    const {
+      height = 400,
+      margin = [60, 20, 40, 40],
+      titleMap,
+      borderWidth = 2
+    } = this.props;
 
     if (!data || (data && data.length < 1)) {
       return;
@@ -47,27 +52,29 @@ class TimelineChart extends Component {
       forceFit: true,
       height,
       plotCfg: {
-        margin,
-      },
+        margin
+      }
     });
 
     chart.axis('x', {
-      title: false,
+      title: false
     });
     chart.axis('y1', {
-      title: false,
+      title: false
     });
     chart.axis('y2', false);
 
     chart.legend({
       mode: false,
-      position: 'top',
+      position: 'top'
     });
 
     let max;
     if (data[0] && data[0].y1 && data[0].y2) {
-      max = Math.max(data.sort((a, b) => b.y1 - a.y1)[0].y1,
-        data.sort((a, b) => b.y2 - a.y2)[0].y2);
+      max = Math.max(
+        data.sort((a, b) => b.y1 - a.y1)[0].y1,
+        data.sort((a, b) => b.y2 - a.y2)[0].y2
+      );
     }
 
     chart.source(data, {
@@ -75,22 +82,30 @@ class TimelineChart extends Component {
         type: 'timeCat',
         tickCount: 16,
         mask: 'HH:MM',
-        range: [0, 1],
+        range: [0, 1]
       },
       y1: {
         alias: titleMap.y1,
         max,
-        min: 0,
+        min: 0
       },
       y2: {
         alias: titleMap.y2,
         max,
-        min: 0,
-      },
+        min: 0
+      }
     });
 
-    chart.line().position('x*y1').color('#1890FF').size(borderWidth);
-    chart.line().position('x*y2').color('#2FC25B').size(borderWidth);
+    chart
+      .line()
+      .position('x*y1')
+      .color('#1890FF')
+      .size(borderWidth);
+    chart
+      .line()
+      .position('x*y2')
+      .color('#2FC25B')
+      .size(borderWidth);
 
     this.chart = chart;
 
@@ -100,7 +115,7 @@ class TimelineChart extends Component {
       height: 26,
       xDim: 'x',
       yDim: 'y1',
-      charts: [chart],
+      charts: [chart]
     });
     slider.render();
 
@@ -113,7 +128,7 @@ class TimelineChart extends Component {
     return (
       <div className={styles.timelineChart} style={{ height }}>
         <div>
-          { title && <h4>{title}</h4>}
+          {title && <h4>{title}</h4>}
           <div ref={this.handleRef} />
           <div id={this.sliderId} />
         </div>

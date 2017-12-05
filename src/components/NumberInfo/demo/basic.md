@@ -5,7 +5,7 @@ title: 演示
 
 各种数据文案的展现方式。
 
-````jsx
+```jsx
 import NumberInfo from 'ant-design-pro/lib/NumberInfo';
 import numeral from 'numeral';
 
@@ -17,6 +17,7 @@ ReactDOM.render(
       status="up"
       subTotal={17.1}
     />
-  </div>
-, mountNode);
-````
+  </div>,
+  mountNode
+);
+```

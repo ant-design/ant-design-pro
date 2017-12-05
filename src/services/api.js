@@ -18,8 +18,8 @@ export async function removeRule(params) {
     method: 'POST',
     body: {
       ...params,
-      method: 'delete',
-    },
+      method: 'delete'
+    }
   });
 }
 
@@ -28,15 +28,15 @@ export async function addRule(params) {
     method: 'POST',
     body: {
       ...params,
-      method: 'post',
-    },
+      method: 'post'
+    }
   });
 }
 
 export async function fakeSubmitForm(params) {
   return request('/api/forms', {
     method: 'POST',
-    body: params,
+    body: params
   });
 }
 
@@ -63,21 +63,21 @@ export async function queryFakeList(params) {
 export async function fakeAccountLogin(params) {
   return request('/api/login/account', {
     method: 'POST',
-    body: params,
+    body: params
   });
 }
 
 export async function fakeMobileLogin(params) {
   return request('/api/login/mobile', {
     method: 'POST',
-    body: params,
+    body: params
   });
 }
 
 export async function fakeRegister(params) {
   return request('/api/register', {
     method: 'POST',
-    body: params,
+    body: params
   });
 }
 

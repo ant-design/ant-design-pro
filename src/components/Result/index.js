@@ -4,11 +4,17 @@ import { Icon } from 'antd';
 import styles from './index.less';
 
 export default function Result({
-  className, type, title, description, extra, actions, ...restProps
+  className,
+  type,
+  title,
+  description,
+  extra,
+  actions,
+  ...restProps
 }) {
   const iconMap = {
     error: <Icon className={styles.error} type="close-circle" />,
-    success: <Icon className={styles.success} type="check-circle" />,
+    success: <Icon className={styles.success} type="check-circle" />
   };
   const clsString = classNames(styles.result, className);
   return (

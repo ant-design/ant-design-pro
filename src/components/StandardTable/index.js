@@ -7,7 +7,7 @@ const statusMap = ['default', 'processing', 'success', 'error'];
 class StandardTable extends PureComponent {
   state = {
     selectedRowKeys: [],
-    totalCallNo: 0,
+    totalCallNo: 0
   };
 
   componentWillReceiveProps(nextProps) {
@@ -15,7 +15,7 @@ class StandardTable extends PureComponent {
     if (nextProps.selectedRows.length === 0) {
       this.setState({
         selectedRowKeys: [],
-        totalCallNo: 0,
+        totalCallNo: 0
       });
     }
   }
@@ -30,15 +30,15 @@ class StandardTable extends PureComponent {
     }
 
     this.setState({ selectedRowKeys, totalCallNo });
-  }
+  };
 
   handleTableChange = (pagination, filters, sorter) => {
     this.props.onChange(pagination, filters, sorter);
-  }
+  };
 
   cleanSelectedKeys = () => {
     this.handleRowSelectChange([], []);
-  }
+  };
 
   render() {
     const { selectedRowKeys, totalCallNo } = this.state;
@@ -49,18 +49,18 @@ class StandardTable extends PureComponent {
     const columns = [
       {
         title: '规则编号',
-        dataIndex: 'no',
+        dataIndex: 'no'
       },
       {
         title: '描述',
-        dataIndex: 'description',
+        dataIndex: 'description'
       },
       {
         title: '服务调用次数',
         dataIndex: 'callNo',
         sorter: true,
         align: 'right',
-        render: val => `${val} 万`,
+        render: val => `${val} 万`
       },
       {
         title: '状态',
@@ -68,30 +68,30 @@ class StandardTable extends PureComponent {
         filters: [
           {
             text: status[0],
-            value: 0,
+            value: 0
           },
           {
             text: status[1],
-            value: 1,
+            value: 1
           },
           {
             text: status[2],
-            value: 2,
+            value: 2
           },
           {
             text: status[3],
-            value: 3,
-          },
+            value: 3
+          }
         ],
         render(val) {
           return <Badge status={statusMap[val]} text={status[val]} />;
-        },
+        }
       },
       {
         title: '更新时间',
         dataIndex: 'updatedAt',
         sorter: true,
-        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>
       },
       {
         title: '操作',
@@ -101,35 +101,39 @@ class StandardTable extends PureComponent {
             <Divider type="vertical" />
             <a href="">订阅警报</a>
           </div>
-        ),
-      },
+        )
+      }
     ];
 
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
-      ...pagination,
+      ...pagination
     };
 
     const rowSelection = {
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
       getCheckboxProps: record => ({
-        disabled: record.disabled,
-      }),
+        disabled: record.disabled
+      })
     };
 
     return (
       <div className={styles.standardTable}>
         <div className={styles.tableAlert}>
           <Alert
-            message={(
+            message={
               <div>
-                已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
-                服务调用总计 <span style={{ fontWeight: 600 }}>{totalCallNo}</span> 万
-                <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>清空</a>
+                已选择{' '}
+                <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>{' '}
+                项&nbsp;&nbsp; 服务调用总计{' '}
+                <span style={{ fontWeight: 600 }}>{totalCallNo}</span> 万
+                <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>
+                  清空
+                </a>
               </div>
-            )}
+            }
             type="info"
             showIcon
           />

@@ -6,7 +6,7 @@ iframe: 400
 
 浮动固定页脚。
 
-````jsx
+```jsx
 import FooterToolbar from 'ant-design-pro/lib/FooterToolbar';
 import { Button } from 'antd';
 
@@ -31,6 +31,7 @@ ReactDOM.render(
       <Button>取消</Button>
       <Button type="primary">提交</Button>
     </FooterToolbar>
-  </div>
-, mountNode);
-````
+  </div>,
+  mountNode
+);
+```

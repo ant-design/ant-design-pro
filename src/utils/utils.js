@@ -27,9 +27,9 @@ export function getTimeDistance(type) {
       day -= 1;
     }
 
-    const beginTime = now.getTime() - (day * oneDay);
+    const beginTime = now.getTime() - day * oneDay;
 
-    return [moment(beginTime), moment(beginTime + ((7 * oneDay) - 1000))];
+    return [moment(beginTime), moment(beginTime + (7 * oneDay - 1000))];
   }
 
   if (type === 'month') {
@@ -39,7 +39,14 @@ export function getTimeDistance(type) {
     const nextYear = nextDate.year();
     const nextMonth = nextDate.month();
 
-    return [moment(`${year}-${fixedZero(month + 1)}-01 00:00:00`), moment(moment(`${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`).valueOf() - 1000)];
+    return [
+      moment(`${year}-${fixedZero(month + 1)}-01 00:00:00`),
+      moment(
+        moment(
+          `${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`
+        ).valueOf() - 1000
+      )
+    ];
   }
 
   if (type === 'year') {
@@ -51,7 +58,7 @@ export function getTimeDistance(type) {
 
 export function getPlainNode(nodeList, parentPath = '') {
   const arr = [];
-  nodeList.forEach((node) => {
+  nodeList.forEach(node => {
     const item = node;
     item.path = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/');
     item.exact = true;
@@ -70,14 +77,14 @@ export function getPlainNode(nodeList, parentPath = '') {
 export function digitUppercase(n) {
   const fraction = ['角', '分'];
   const digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
-  const unit = [
-    ['元', '万', '亿'],
-    ['', '拾', '佰', '仟'],
-  ];
+  const unit = [['元', '万', '亿'], ['', '拾', '佰', '仟']];
   let num = Math.abs(n);
   let s = '';
   fraction.forEach((item, index) => {
-    s += (digit[Math.floor(num * 10 * (10 ** index)) % 10] + item).replace(/零./, '');
+    s += (digit[Math.floor(num * 10 * 10 ** index) % 10] + item).replace(
+      /零./,
+      ''
+    );
   });
   s = s || '整';
   num = Math.floor(num);
@@ -90,5 +97,8 @@ export function digitUppercase(n) {
     s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
   }
 
-  return s.replace(/(零.)*零元/, '元').replace(/(零.)+/g, '零').replace(/^整$/, '零元整');
+  return s
+    .replace(/(零.)*零元/, '元')
+    .replace(/(零.)+/g, '零')
+    .replace(/^整$/, '零元整');
 }
