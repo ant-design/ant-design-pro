@@ -4,7 +4,16 @@ import { Button } from 'antd';
 import config from './typeConfig';
 import styles from './index.less';
 
-export default ({ className, linkElement = 'a', type, title, desc, img, actions, ...rest }) => {
+export default ({
+  className,
+  linkElement = 'a',
+  type,
+  title,
+  desc,
+  img,
+  actions,
+  ...rest
+}) => {
   const pageType = type in config ? type : '404';
   const clsString = classNames(styles.exception, className);
   return (
@@ -19,13 +28,15 @@ export default ({ className, linkElement = 'a', type, title, desc, img, actions,
         <h1>{title || config[pageType].title}</h1>
         <div className={styles.desc}>{desc || config[pageType].desc}</div>
         <div className={styles.actions}>
-          {
-            actions ||
-              createElement(linkElement, {
+          {actions ||
+            createElement(
+              linkElement,
+              {
                 to: '/',
-                href: '/',
-              }, <Button type="primary">返回首页</Button>)
-          }
+                href: '/'
+              },
+              <Button type="primary">返回首页</Button>
+            )}
         </div>
       </div>
     </div>

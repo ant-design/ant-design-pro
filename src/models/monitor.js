@@ -4,7 +4,7 @@ export default {
   namespace: 'monitor',
 
   state: {
-    tags: [],
+    tags: []
   },
 
   effects: {
@@ -12,17 +12,17 @@ export default {
       const response = yield call(queryTags);
       yield put({
         type: 'saveTags',
-        payload: response.list,
+        payload: response.list
       });
-    },
+    }
   },
 
   reducers: {
     saveTags(state, action) {
       return {
         ...state,
-        tags: action.payload,
+        tags: action.payload
       };
-    },
-  },
+    }
+  }
 };

@@ -5,7 +5,7 @@ title: Vertical
 
 垂直布局。
 
-````jsx
+```jsx
 import DescriptionList from 'ant-design-pro/lib/DescriptionList';
 
 const { Description } = DescriptionList;
@@ -13,23 +13,18 @@ const { Description } = DescriptionList;
 ReactDOM.render(
   <DescriptionList size="large" title="title" layout="vertical">
     <Description term="Firefox">
-      A free, open source, cross-platform,
-      graphical web browser developed by the
-      Mozilla Corporation and hundreds of
-      volunteers.
+      A free, open source, cross-platform, graphical web browser developed by
+      the Mozilla Corporation and hundreds of volunteers.
     </Description>
     <Description term="Firefox">
-      A free, open source, cross-platform,
-      graphical web browser developed by the
-      Mozilla Corporation and hundreds of
-      volunteers.
+      A free, open source, cross-platform, graphical web browser developed by
+      the Mozilla Corporation and hundreds of volunteers.
     </Description>
     <Description term="Firefox">
-      A free, open source, cross-platform,
-      graphical web browser developed by the
-      Mozilla Corporation and hundreds of
-      volunteers.
+      A free, open source, cross-platform, graphical web browser developed by
+      the Mozilla Corporation and hundreds of volunteers.
     </Description>
-  </DescriptionList>
-, mountNode);
-````
+  </DescriptionList>,
+  mountNode
+);
+```

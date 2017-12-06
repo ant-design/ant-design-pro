@@ -12,7 +12,7 @@ import styles from './index.less';
 class Pie extends Component {
   state = {
     legendData: [],
-    legendBlock: true,
+    legendBlock: true
   };
 
   componentDidMount() {
@@ -45,28 +45,34 @@ class Pie extends Component {
     }
     if (this.root.parentNode.clientWidth <= 380) {
       if (!this.state.legendBlock) {
-        this.setState({
-          legendBlock: true,
-        }, () => {
-          this.renderChart();
-        });
+        this.setState(
+          {
+            legendBlock: true
+          },
+          () => {
+            this.renderChart();
+          }
+        );
       }
     } else if (this.state.legendBlock) {
-      this.setState({
-        legendBlock: false,
-      }, () => {
-        this.renderChart();
-      });
+      this.setState(
+        {
+          legendBlock: false
+        },
+        () => {
+          this.renderChart();
+        }
+      );
     }
   }
 
-  handleRef = (n) => {
+  handleRef = n => {
     this.node = n;
-  }
+  };
 
-  handleRoot = (n) => {
+  handleRoot = n => {
     this.root = n;
-  }
+  };
 
   handleLegendClick = (item, i) => {
     const newItem = item;
@@ -82,9 +88,9 @@ class Pie extends Component {
     }
 
     this.setState({
-      legendData,
+      legendData
     });
-  }
+  };
 
   renderChart(d) {
     let data = d || this.props.data;
@@ -93,11 +99,13 @@ class Pie extends Component {
       height = 0,
       hasLegend,
       fit = true,
-      margin = [12, 0, 12, 0], percent, color,
+      margin = [12, 0, 12, 0],
+      percent,
+      color,
       inner = 0.75,
       animate = true,
       colors,
-      lineWidth = 0,
+      lineWidth = 0
     } = this.props;
 
     const defaultColors = colors;
@@ -109,7 +117,7 @@ class Pie extends Component {
     if (percent) {
       selected = false;
       tooltip = false;
-      formatColor = (value) => {
+      formatColor = value => {
         if (value === '占比') {
           return color || 'rgba(24, 144, 255, 0.85)';
         } else {
@@ -121,12 +129,12 @@ class Pie extends Component {
       data = [
         {
           x: '占比',
-          y: parseFloat(percent),
+          y: parseFloat(percent)
         },
         {
           x: '反比',
-          y: 100 - parseFloat(percent),
-        },
+          y: 100 - parseFloat(percent)
+        }
       ];
     }
 
@@ -144,16 +152,16 @@ class Pie extends Component {
       forceFit: fit,
       height,
       plotCfg: {
-        margin,
+        margin
       },
-      animate,
+      animate
     });
 
     if (!tooltip) {
       chart.tooltip(false);
     } else {
       chart.tooltip({
-        title: null,
+        title: null
       });
     }
 
@@ -163,15 +171,15 @@ class Pie extends Component {
     chart.source(data, {
       x: {
         type: 'cat',
-        range: [0, 1],
+        range: [0, 1]
       },
       y: {
-        min: 0,
-      },
+        min: 0
+      }
     });
 
     chart.coord('theta', {
-      inner,
+      inner
     });
 
     chart
@@ -189,7 +197,7 @@ class Pie extends Component {
     if (hasLegend) {
       const geom = chart.getGeoms()[0]; // 获取所有的图形
       const items = geom.getData(); // 获取图形对应的数据
-      legendData = items.map((item) => {
+      legendData = items.map(item => {
         /* eslint no-underscore-dangle:0 */
         const origin = item._origin;
         origin.color = item.color;
@@ -199,16 +207,23 @@ class Pie extends Component {
     }
 
     this.setState({
-      legendData,
+      legendData
     });
   }
 
   render() {
-    const { valueFormat, subTitle, total, hasLegend, className, style } = this.props;
+    const {
+      valueFormat,
+      subTitle,
+      total,
+      hasLegend,
+      className,
+      style
+    } = this.props;
     const { legendData, legendBlock } = this.state;
     const pieClassName = classNames(styles.pie, className, {
       [styles.hasLegend]: !!hasLegend,
-      [styles.legendBlock]: legendBlock,
+      [styles.legendBlock]: legendBlock
     });
 
     return (
@@ -216,42 +231,46 @@ class Pie extends Component {
         <ReactFitText maxFontSize={25}>
           <div className={styles.chart}>
             <div ref={this.handleRef} style={{ fontSize: 0 }} />
-            {
-              (subTitle || total) && (
-                <div className={styles.total}>
-                  {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
-                  {
-                    // eslint-disable-next-line
-                    total && <div className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />
-                  }
-                </div>
-              )
-            }
+            {(subTitle || total) && (
+              <div className={styles.total}>
+                {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
+                {// eslint-disable-next-line
+                total && (
+                  <div
+                    className="pie-stat"
+                    dangerouslySetInnerHTML={{ __html: total }}
+                  />
+                )}
+              </div>
+            )}
           </div>
         </ReactFitText>
 
-        {
-          hasLegend && (
-            <ul className={styles.legend}>
-              {
-                legendData.map((item, i) => (
-                  <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
-                    <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
-                    <span className={styles.legendTitle}>{item.x}</span>
-                    <Divider type="vertical" />
-                    <span className={styles.percent}>{`${(item['..percent'] * 100).toFixed(2)}%`}</span>
-                    <span
-                      className={styles.value}
-                      dangerouslySetInnerHTML={{
-                        __html: valueFormat ? valueFormat(item.y) : item.y,
-                      }}
-                    />
-                  </li>
-                ))
-              }
-            </ul>
-          )
-        }
+        {hasLegend && (
+          <ul className={styles.legend}>
+            {legendData.map((item, i) => (
+              <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
+                <span
+                  className={styles.dot}
+                  style={{
+                    backgroundColor: !item.checked ? '#aaa' : item.color
+                  }}
+                />
+                <span className={styles.legendTitle}>{item.x}</span>
+                <Divider type="vertical" />
+                <span className={styles.percent}>
+                  {`${(item['..percent'] * 100).toFixed(2)}%`}
+                </span>
+                <span
+                  className={styles.value}
+                  dangerouslySetInnerHTML={{
+                    __html: valueFormat ? valueFormat(item.y) : item.y
+                  }}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     );
   }

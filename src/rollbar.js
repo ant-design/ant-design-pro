@@ -7,7 +7,7 @@ if (location.host === 'preview.pro.ant.design') {
     captureUncaught: true,
     captureUnhandledRejections: true,
     payload: {
-      environment: 'production',
-    },
+      environment: 'production'
+    }
   });
 }

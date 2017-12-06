@@ -7,7 +7,7 @@ function checkStatus(response) {
   }
   notification.error({
     message: `请求错误 ${response.status}: ${response.url}`,
-    description: response.statusText,
+    description: response.statusText
   });
   const error = new Error(response.statusText);
   error.response = response;
@@ -23,14 +23,14 @@ function checkStatus(response) {
  */
 export default function request(url, options) {
   const defaultOptions = {
-    credentials: 'include',
+    credentials: 'include'
   };
   const newOptions = { ...defaultOptions, ...options };
   if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
     newOptions.headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json; charset=utf-8',
-      ...newOptions.headers,
+      ...newOptions.headers
     };
     newOptions.body = JSON.stringify(newOptions.body);
   }
@@ -38,17 +38,17 @@ export default function request(url, options) {
   return fetch(url, newOptions)
     .then(checkStatus)
     .then(response => response.json())
-    .catch((error) => {
+    .catch(error => {
       if (error.code) {
         notification.error({
           message: error.name,
-          description: error.message,
+          description: error.message
         });
       }
       if ('stack' in error && 'message' in error) {
         notification.error({
           message: `请求错误: ${url}`,
-          description: error.message,
+          description: error.message
         });
       }
       return error;

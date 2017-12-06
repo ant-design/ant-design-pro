@@ -20,9 +20,9 @@ class MiniBar extends PureComponent {
     }
   }
 
-  handleRef = (n) => {
+  handleRef = n => {
     this.node = n;
-  }
+  };
 
   renderChart(data) {
     const { height = 0, fit = true, color = '#1890FF' } = this.props;
@@ -42,30 +42,33 @@ class MiniBar extends PureComponent {
       forceFit: fit,
       height: height + 54,
       plotCfg: {
-        margin: [36, 5, 30, 5],
+        margin: [36, 5, 30, 5]
       },
-      legend: null,
+      legend: null
     });
 
     chart.axis(false);
 
     chart.source(frame, {
       x: {
-        type: 'cat',
+        type: 'cat'
       },
       y: {
-        min: 0,
-      },
+        min: 0
+      }
     });
 
     chart.tooltip({
       title: null,
       crosshairs: false,
       map: {
-        name: 'x',
-      },
+        name: 'x'
+      }
     });
-    chart.interval().position('x*y').color(color);
+    chart
+      .interval()
+      .position('x*y')
+      .color(color);
     chart.render();
 
     this.chart = chart;

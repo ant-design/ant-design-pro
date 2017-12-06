@@ -9,7 +9,8 @@ import styles from './index.less';
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-param-reassign: 0 */
 
-const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
+const imgUrl =
+  'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
 
 class TagCloud extends PureComponent {
   componentDidMount() {
@@ -32,22 +33,27 @@ class TagCloud extends PureComponent {
 
   resize = () => {
     this.renderChart();
-  }
+  };
 
   initTagCloud = () => {
     const { Util, Shape } = G2;
 
     function getTextAttrs(cfg) {
-      const textAttrs = Util.mix(true, {}, {
-        fillOpacity: cfg.opacity,
-        fontSize: cfg.size,
-        rotate: cfg.origin._origin.rotate,
-        // rotate: cfg.origin._origin.rotate,
-        text: cfg.origin._origin.text,
-        textAlign: 'center',
-        fill: cfg.color,
-        textBaseline: 'Alphabetic',
-      }, cfg.style);
+      const textAttrs = Util.mix(
+        true,
+        {},
+        {
+          fillOpacity: cfg.opacity,
+          fontSize: cfg.size,
+          rotate: cfg.origin._origin.rotate,
+          // rotate: cfg.origin._origin.rotate,
+          text: cfg.origin._origin.text,
+          textAlign: 'center',
+          fill: cfg.color,
+          textBaseline: 'Alphabetic'
+        },
+        cfg.style
+      );
       return textAttrs;
     }
 
@@ -59,21 +65,21 @@ class TagCloud extends PureComponent {
         const shape = container.addShape('text', {
           attrs: Util.mix(attrs, {
             x: cfg.points[0].x,
-            y: cfg.points[0].y,
-          }),
+            y: cfg.points[0].y
+          })
         });
         return shape;
-      },
+      }
     });
-  }
+  };
 
-  saveRootRef = (node) => {
+  saveRootRef = node => {
     this.root = node;
-  }
+  };
 
-  saveNodeRef = (node) => {
+  saveNodeRef = node => {
     this.node = node;
-  }
+  };
 
   @Bind()
   @Debounce(500)
@@ -105,27 +111,27 @@ class TagCloud extends PureComponent {
       rotate: () => 0,
 
       // 设定文字大小配置函数(默认为12-24px的随机大小)
-      size: words => (((words.value - min) / (max - min)) * 50) + 30,
+      size: words => (words.value - min) / (max - min) * 50 + 30,
 
       // 设定文字内容
-      text: words => words.name,
+      text: words => words.name
     });
 
-    layout.image(imgUrl, (imageCloud) => {
+    layout.image(imgUrl, imageCloud => {
       // clean
       if (this.node) {
         this.node.innerHTML = '';
       }
 
       // 执行词云布局函数，并在回调函数中调用G2对结果进行绘制
-      imageCloud.exec((texts) => {
+      imageCloud.exec(texts => {
         const chart = new G2.Chart({
           container: this.node,
           width,
           height,
           plotCfg: {
-            margin: 0,
-          },
+            margin: 0
+          }
         });
 
         chart.legend(false);
@@ -146,7 +152,7 @@ class TagCloud extends PureComponent {
           .style({
             fontStyle: texts[0].style,
             fontFamily: texts[0].font,
-            fontWeight: texts[0].weight,
+            fontWeight: texts[0].weight
           });
 
         chart.render();

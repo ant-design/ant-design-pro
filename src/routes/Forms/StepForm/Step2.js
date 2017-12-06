@@ -9,7 +9,7 @@ export default ({ formItemLayout, form, data, dispatch, submitting }) => {
   const onPrev = () => {
     dispatch(routerRedux.push('/form/step-form'));
   };
-  const onValidateForm = (e) => {
+  const onValidateForm = e => {
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
@@ -17,8 +17,8 @@ export default ({ formItemLayout, form, data, dispatch, submitting }) => {
           type: 'form/submitStepForm',
           payload: {
             ...data,
-            ...values,
-          },
+            ...values
+          }
         });
       }
     });
@@ -58,19 +58,20 @@ export default ({ formItemLayout, form, data, dispatch, submitting }) => {
         label="转账金额"
       >
         <span className={styles.money}>{data.amount}</span>
-        <span className={styles.uppercase}>（{digitUppercase(data.amount)}）</span>
+        <span className={styles.uppercase}>
+          （{digitUppercase(data.amount)}）
+        </span>
       </Form.Item>
       <Divider style={{ margin: '24px 0' }} />
-      <Form.Item
-        {...formItemLayout}
-        label="支付密码"
-        required={false}
-      >
+      <Form.Item {...formItemLayout} label="支付密码" required={false}>
         {getFieldDecorator('password', {
           initialValue: '123456',
-          rules: [{
-            required: true, message: '需要支付密码才能进行支付',
-          }],
+          rules: [
+            {
+              required: true,
+              message: '需要支付密码才能进行支付'
+            }
+          ]
         })(
           <Input type="password" autoComplete="off" style={{ width: '80%' }} />
         )}
@@ -79,7 +80,10 @@ export default ({ formItemLayout, form, data, dispatch, submitting }) => {
         style={{ marginBottom: 8 }}
         wrapperCol={{
           xs: { span: 24, offset: 0 },
-          sm: { span: formItemLayout.wrapperCol.span, offset: formItemLayout.labelCol.span },
+          sm: {
+            span: formItemLayout.wrapperCol.span,
+            offset: formItemLayout.labelCol.span
+          }
         }}
         label=""
       >

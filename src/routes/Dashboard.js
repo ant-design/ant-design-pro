@@ -2,38 +2,43 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Row, Col, Card, Table, Icon, Divider } from 'antd';
 
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
-}, {
-  title: 'Age',
-  dataIndex: 'age',
-  key: 'age',
-}, {
-  title: 'Address',
-  dataIndex: 'address',
-  key: 'address',
-}, {
-  title: 'Action',
-  key: 'action',
-  render: (text, record) => (
-    <span>
-      <a href="">Action 一 {record.name}</a>
-      <Divider type="vertical" />
-      <a href="">Delete</a>
-      <Divider type="vertical" />
-      <a href="" className="ant-dropdown-link">
-        More actions <Icon type="down" />
-      </a>
-    </span>
-  ),
-}];
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name'
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age'
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address'
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <span>
+        <a href="">Action 一 {record.name}</a>
+        <Divider type="vertical" />
+        <a href="">Delete</a>
+        <Divider type="vertical" />
+        <a href="" className="ant-dropdown-link">
+          More actions <Icon type="down" />
+        </a>
+      </span>
+    )
+  }
+];
 
 class Dashboard extends PureComponent {
   componentDidMount() {
     this.props.dispatch({
-      type: 'user/fetch',
+      type: 'user/fetch'
     });
   }
   render() {
@@ -96,5 +101,5 @@ class Dashboard extends PureComponent {
 }
 
 export default connect(state => ({
-  user: state.user,
+  user: state.user
 }))(Dashboard);

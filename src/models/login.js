@@ -5,49 +5,49 @@ export default {
   namespace: 'login',
 
   state: {
-    status: undefined,
+    status: undefined
   },
 
   effects: {
     *accountSubmit({ payload }, { call, put }) {
       yield put({
         type: 'changeSubmitting',
-        payload: true,
+        payload: true
       });
       const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
-        payload: response,
+        payload: response
       });
       yield put({
         type: 'changeSubmitting',
-        payload: false,
+        payload: false
       });
     },
     *mobileSubmit(_, { call, put }) {
       yield put({
         type: 'changeSubmitting',
-        payload: true,
+        payload: true
       });
       const response = yield call(fakeMobileLogin);
       yield put({
         type: 'changeLoginStatus',
-        payload: response,
+        payload: response
       });
       yield put({
         type: 'changeSubmitting',
-        payload: false,
+        payload: false
       });
     },
     *logout(_, { put }) {
       yield put({
         type: 'changeLoginStatus',
         payload: {
-          status: false,
-        },
+          status: false
+        }
       });
       yield put(routerRedux.push('/user/login'));
-    },
+    }
   },
 
   reducers: {
@@ -55,14 +55,14 @@ export default {
       return {
         ...state,
         status: payload.status,
-        type: payload.type,
+        type: payload.type
       };
     },
     changeSubmitting(state, { payload }) {
       return {
         ...state,
-        submitting: payload,
+        submitting: payload
       };
-    },
-  },
+    }
+  }
 };

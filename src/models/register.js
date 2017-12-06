@@ -4,39 +4,39 @@ export default {
   namespace: 'register',
 
   state: {
-    status: undefined,
+    status: undefined
   },
 
   effects: {
     *submit(_, { call, put }) {
       yield put({
         type: 'changeSubmitting',
-        payload: true,
+        payload: true
       });
       const response = yield call(fakeRegister);
       yield put({
         type: 'registerHandle',
-        payload: response,
+        payload: response
       });
       yield put({
         type: 'changeSubmitting',
-        payload: false,
+        payload: false
       });
-    },
+    }
   },
 
   reducers: {
     registerHandle(state, { payload }) {
       return {
         ...state,
-        status: payload.status,
+        status: payload.status
       };
     },
     changeSubmitting(state, { payload }) {
       return {
         ...state,
-        submitting: payload,
+        submitting: payload
       };
-    },
-  },
+    }
+  }
 };

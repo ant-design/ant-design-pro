@@ -11,7 +11,7 @@ class CountDown extends Component {
     const { lastTime } = this.initTime(props);
 
     this.state = {
-      lastTime,
+      lastTime
     };
   }
 
@@ -23,7 +23,7 @@ class CountDown extends Component {
     if (this.props.target !== nextProps.target) {
       const { lastTime } = this.initTime(nextProps);
       this.setState({
-        lastTime,
+        lastTime
       });
     }
   }
@@ -34,7 +34,7 @@ class CountDown extends Component {
 
   timer = 0;
   interval = 1000;
-  initTime = (props) => {
+  initTime = props => {
     let lastTime = 0;
     let targetTime = 0;
     try {
@@ -50,23 +50,25 @@ class CountDown extends Component {
     lastTime = targetTime - new Date().getTime();
 
     return {
-      lastTime,
+      lastTime
     };
-  }
+  };
   // defaultFormat = time => (
   //  <span>{moment(time).format('hh:mm:ss')}</span>
   // );
-  defaultFormat = (time) => {
+  defaultFormat = time => {
     const hours = 60 * 60 * 1000;
     const minutes = 60 * 1000;
 
     const h = fixedZero(Math.floor(time / hours));
-    const m = fixedZero(Math.floor((time - (h * hours)) / minutes));
-    const s = fixedZero(Math.floor((time - (h * hours) - (m * minutes)) / 1000));
+    const m = fixedZero(Math.floor((time - h * hours) / minutes));
+    const s = fixedZero(Math.floor((time - h * hours - m * minutes) / 1000));
     return (
-      <span>{h}:{m}:{s}</span>
+      <span>
+        {h}:{m}:{s}
+      </span>
     );
-  }
+  };
   tick = () => {
     const { onEnd } = this.props;
     let { lastTime } = this.state;
@@ -75,7 +77,7 @@ class CountDown extends Component {
       if (lastTime < this.interval) {
         clearTimeout(this.timer);
         this.setState({
-          lastTime: 0,
+          lastTime: 0
         });
 
         if (onEnd) {
@@ -84,13 +86,13 @@ class CountDown extends Component {
       } else {
         lastTime -= this.interval;
         this.setState({
-          lastTime,
+          lastTime
         });
 
         this.tick();
       }
     }, this.interval);
-  }
+  };
 
   render() {
     const { format = this.defaultFormat, ...rest } = this.props;
@@ -98,7 +100,7 @@ class CountDown extends Component {
 
     const result = format(lastTime);
 
-    return (<span {...rest}>{result}</span>);
+    return <span {...rest}>{result}</span>;
   }
 }
 

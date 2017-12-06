@@ -6,64 +6,64 @@ export default {
   state: {
     collapsed: false,
     notices: [],
-    fetchingNotices: false,
+    fetchingNotices: false
   },
 
   effects: {
     *fetchNotices(_, { call, put }) {
       yield put({
         type: 'changeNoticeLoading',
-        payload: true,
+        payload: true
       });
       const data = yield call(queryNotices);
       yield put({
         type: 'saveNotices',
-        payload: data,
+        payload: data
       });
       yield put({
         type: 'user/changeNotifyCount',
-        payload: data.length,
+        payload: data.length
       });
     },
     *clearNotices({ payload }, { put, select }) {
       yield put({
         type: 'saveClearedNotices',
-        payload,
+        payload
       });
       const count = yield select(state => state.global.notices.length);
       yield put({
         type: 'user/changeNotifyCount',
-        payload: count,
+        payload: count
       });
-    },
+    }
   },
 
   reducers: {
     changeLayoutCollapsed(state, { payload }) {
       return {
         ...state,
-        collapsed: payload,
+        collapsed: payload
       };
     },
     saveNotices(state, { payload }) {
       return {
         ...state,
         notices: payload,
-        fetchingNotices: false,
+        fetchingNotices: false
       };
     },
     saveClearedNotices(state, { payload }) {
       return {
         ...state,
-        notices: state.notices.filter(item => item.type !== payload),
+        notices: state.notices.filter(item => item.type !== payload)
       };
     },
     changeNoticeLoading(state, { payload }) {
       return {
         ...state,
-        fetchingNotices: payload,
+        fetchingNotices: payload
       };
-    },
+    }
   },
 
   subscriptions: {
@@ -74,6 +74,6 @@ export default {
           window.ga('send', 'pageview', pathname + search);
         }
       });
-    },
-  },
+    }
+  }
 };

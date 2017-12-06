@@ -27,5 +27,5 @@ export default {
   Field,
   WaterWave,
   TagCloud,
-  TimelineChart,
+  TimelineChart
 };

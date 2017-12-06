@@ -13,12 +13,12 @@ import styles from './Monitor.less';
 const targetTime = new Date().getTime() + 3900000;
 
 @connect(state => ({
-  monitor: state.monitor,
+  monitor: state.monitor
 }))
 export default class Monitor extends PureComponent {
   componentDidMount() {
     this.props.dispatch({
-      type: 'monitor/fetchTags',
+      type: 'monitor/fetchTags'
     });
   }
 
@@ -29,7 +29,14 @@ export default class Monitor extends PureComponent {
     return (
       <div>
         <Row gutter={24}>
-          <Col xl={18} lg={24} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
+          <Col
+            xl={18}
+            lg={24}
+            md={24}
+            sm={24}
+            xs={24}
+            style={{ marginBottom: 24 }}
+          >
             <Card title="活动实时交易情况" bordered={false}>
               <Row>
                 <Col md={6} sm={12} xs={24}>
@@ -40,10 +47,7 @@ export default class Monitor extends PureComponent {
                   />
                 </Col>
                 <Col md={6} sm={12} xs={24}>
-                  <NumberInfo
-                    subTitle="销售目标完成率"
-                    total="92%"
-                  />
+                  <NumberInfo subTitle="销售目标完成率" total="92%" />
                 </Col>
                 <Col md={6} sm={12} xs={24}>
                   <NumberInfo
@@ -61,13 +65,20 @@ export default class Monitor extends PureComponent {
               </Row>
               <div className={styles.mapChart}>
                 <Tooltip title="等待后期实现">
-                  <img src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png" alt="map" />
+                  <img
+                    src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png"
+                    alt="map"
+                  />
                 </Tooltip>
               </div>
             </Card>
           </Col>
           <Col xl={6} lg={24} md={24} sm={24} xs={24}>
-            <Card title="活动情况预测" style={{ marginBottom: 24 }} bordered={false}>
+            <Card
+              title="活动情况预测"
+              style={{ marginBottom: 24 }}
+              bordered={false}
+            >
               <ActiveChart />
             </Card>
             <Card
@@ -77,7 +88,7 @@ export default class Monitor extends PureComponent {
               bordered={false}
             >
               <Gauge
-                format={(val) => {
+                format={val => {
                   switch (parseInt(val, 10)) {
                     case 20:
                       return '差';
@@ -143,20 +154,21 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索" bordered={false} bodyStyle={{ overflow: 'hidden' }}>
-              <TagCloud
-                data={tags}
-                height={161}
-              />
+            <Card
+              title="热门搜索"
+              bordered={false}
+              bodyStyle={{ overflow: 'hidden' }}
+            >
+              <TagCloud data={tags} height={161} />
             </Card>
           </Col>
           <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="资源剩余" bodyStyle={{ textAlign: 'center', fontSize: 0 }} bordered={false}>
-              <WaterWave
-                height={161}
-                title="补贴资金剩余"
-                percent={34}
-              />
+            <Card
+              title="资源剩余"
+              bodyStyle={{ textAlign: 'center', fontSize: 0 }}
+              bordered={false}
+            >
+              <WaterWave height={161} title="补贴资金剩余" percent={34} />
             </Card>
           </Col>
         </Row>
