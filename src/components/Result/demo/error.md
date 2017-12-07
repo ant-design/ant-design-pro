@@ -6,15 +6,15 @@ title: Failed
 提交失败。
 
 ```jsx
-import Result from "ant-design-pro/lib/Result";
-import { Button, Icon } from "antd";
+import Result from 'ant-design-pro/lib/Result';
+import { Button, Icon } from 'antd';
 
 const extra = (
   <div>
     <div
       style={{
         fontSize: 16,
-        color: "rgba(0, 0, 0, 0.85)",
+        color: 'rgba(0, 0, 0, 0.85)',
         fontWeight: 500,
         marginBottom: 16
       }}
@@ -23,7 +23,7 @@ const extra = (
     </div>
     <div style={{ marginBottom: 16 }}>
       <Icon
-        style={{ color: "#f5222d", marginRight: 8 }}
+        style={{ color: '#f5222d', marginRight: 8 }}
         type="close-circle-o"
       />您的账户已被冻结
       <a style={{ marginLeft: 16 }}>
@@ -32,7 +32,7 @@ const extra = (
     </div>
     <div>
       <Icon
-        style={{ color: "#f5222d", marginRight: 8 }}
+        style={{ color: '#f5222d', marginRight: 8 }}
         type="close-circle-o"
       />您的账户还不具备申请资格
       <a style={{ marginLeft: 16 }}>

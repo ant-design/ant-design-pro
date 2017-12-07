@@ -6,7 +6,7 @@ title: 基础样例
 结合 `Tag` 的 `TagSelect` 组件，方便的应用于筛选类目的业务场景中。
 
 ```jsx
-import TagSelect from "ant-design-pro/lib/TagSelect";
+import TagSelect from 'ant-design-pro/lib/TagSelect';
 
 function handleFormSubmit(checkedValue) {
   console.log(checkedValue);

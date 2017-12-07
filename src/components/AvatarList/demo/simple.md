@@ -8,7 +8,7 @@ title:
 Simplest of usage.
 
 ```jsx
-import AvatarList from "ant-design-pro/lib/AvatarList";
+import AvatarList from 'ant-design-pro/lib/AvatarList';
 
 ReactDOM.render(
   <AvatarList size="mini">

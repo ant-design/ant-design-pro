@@ -7,11 +7,11 @@ iframe: 400
 浮动固定页脚。
 
 ```jsx
-import FooterToolbar from "ant-design-pro/lib/FooterToolbar";
-import { Button } from "antd";
+import FooterToolbar from 'ant-design-pro/lib/FooterToolbar';
+import { Button } from 'antd';
 
 ReactDOM.render(
-  <div style={{ background: "#f7f7f7", padding: 24 }}>
+  <div style={{ background: '#f7f7f7', padding: 24 }}>
     <p>页面内容 页面内容 页面内容 页面内容</p>
     <p>页面内容 页面内容 页面内容 页面内容</p>
     <p>页面内容 页面内容 页面内容 页面内容</p>

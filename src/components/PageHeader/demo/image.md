@@ -6,7 +6,7 @@ title: With Image
 带图片的页头。
 
 ```jsx
-import PageHeader from "ant-design-pro/lib/PageHeader";
+import PageHeader from 'ant-design-pro/lib/PageHeader';
 
 const content = (
   <div>
@@ -19,21 +19,21 @@ const content = (
         <img
           alt=""
           src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
-        />{" "}
+        />{' '}
         快速开始
       </a>
       <a>
         <img
           alt=""
           src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
-        />{" "}
+        />{' '}
         产品简介
       </a>
       <a>
         <img
           alt=""
           src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
-        />{" "}
+        />{' '}
         产品文档
       </a>
     </div>
@@ -43,7 +43,7 @@ const content = (
 const extra = (
   <div className="imgContainer">
     <img
-      style={{ width: "100%" }}
+      style={{ width: '100%' }}
       alt=""
       src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png"
     />
@@ -52,15 +52,15 @@ const extra = (
 
 const breadcrumbList = [
   {
-    title: "一级菜单",
-    href: "/"
+    title: '一级菜单',
+    href: '/'
   },
   {
-    title: "二级菜单",
-    href: "/"
+    title: '二级菜单',
+    href: '/'
   },
   {
-    title: "三级菜单"
+    title: '三级菜单'
   }
 ];
 

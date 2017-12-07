@@ -6,7 +6,7 @@ title: 可展开和收起
 使用 `expandable` 属性，让标签组可以收起，避免过高。
 
 ```jsx
-import TagSelect from "ant-design-pro/lib/TagSelect";
+import TagSelect from 'ant-design-pro/lib/TagSelect';
 
 function handleFormSubmit(checkedValue) {
   console.log(checkedValue);

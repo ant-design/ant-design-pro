@@ -14,7 +14,7 @@ title:
 The simplest usage.
 
 ```jsx
-import CountDown from "ant-design-pro/lib/CountDown";
+import CountDown from 'ant-design-pro/lib/CountDown';
 
 const targetTime = new Date().getTime() + 3900000;
 
