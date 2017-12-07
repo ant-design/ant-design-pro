@@ -14,6 +14,11 @@ import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
+import Authorized from '../components/Authorized';
+import { getRole } from '../utils/role';
+
+const { Content } = Layout;
+const { AuthorizedRoute } = Authorized;
 
 /**
  * 根据菜单取得重定向地址.
@@ -34,7 +39,6 @@ const getRedirect = (item) => {
 };
 getMenuData().forEach(getRedirect);
 
-const { Content } = Layout;
 const query = {
   'screen-xs': {
     maxWidth: 575,
@@ -153,19 +157,35 @@ class BasicLayout extends React.PureComponent {
             <div style={{ minHeight: 'calc(100vh - 260px)' }}>
               <Switch>
                 {
-                  redirectData.map(item =>
-                    <Redirect key={item.from} exact from={item.from} to={item.to} />
+                  getRoutes(match.path, routerData).map(item =>
+                    (
+                      item.role ?
+                        (
+                          <AuthorizedRoute
+                            key={item.key}
+                            path={item.path}
+                            component={item.component}
+                            exact={item.exact}
+                            role={item.role}
+                            getRole={getRole}
+                            redirectPath="/exception/403"
+                          />
+                        ) :
+                        (
+                          <Route
+                            key={item.key}
+                            path={item.path}
+                            component={item.component}
+                            exact={item.exact}
+                          />
+                        )
+                    )
                   )
                 }
                 {
-                  getRoutes(match.path, routerData).map(item => (
-                    <Route
-                      key={item.key}
-                      path={item.path}
-                      component={item.component}
-                      exact={item.exact}
-                    />
-                  ))
+                 redirectData.map(item =>
+                   <Redirect key={item.from} exact from={item.from} to={item.to} />
+                 )
                 }
                 <Redirect exact from="/" to="/dashboard/analysis" />
                 <Route render={NotFound} />

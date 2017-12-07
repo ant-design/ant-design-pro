@@ -1,5 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { fakeAccountLogin } from '../services/api';
+import { setRole } from '../utils/role';
 
 export default {
   namespace: 'login',
@@ -29,6 +30,7 @@ export default {
         type: 'changeLoginStatus',
         payload: {
           status: false,
+          currentRole: 'guest',
         },
       });
       yield put(routerRedux.push('/user/login'));
@@ -37,6 +39,7 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
+      setRole(payload.currentRole);
       return {
         ...state,
         status: payload.status,

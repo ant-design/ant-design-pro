@@ -73,10 +73,11 @@ const proxy = {
     res.send({
       status: password === '888888' && userName === 'admin' ? 'ok' : 'error',
       type,
+      currentRole: password === '888888' && userName === 'admin' ? 'admin' : 'guest'
     });
   },
   'POST /api/register': (req, res) => {
-    res.send({ status: 'ok' });
+    res.send({ status: 'ok', currentRole: 'user' });
   },
   'GET /api/notices': getNotices,
   'GET /api/500': (req, res) => {
