@@ -97,7 +97,7 @@
   "lint-staged": {
     "**/*.{js,jsx}": "lint-staged:js",
     "**/*.less": "stylelint --syntax less",
-    "*.{js,jsx,less,json}": ["prettier --write", "git add"]
+    "*.{js,jsx,less,json}": ["prettier --write src/**/**.md", "git add"]
   },
   "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"]
 }

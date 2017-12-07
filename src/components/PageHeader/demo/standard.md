@@ -5,10 +5,10 @@ title: Standard
 
 标准页头。
 
-````jsx
-import PageHeader from 'ant-design-pro/lib/PageHeader';
-import DescriptionList from 'ant-design-pro/lib/DescriptionList';
-import { Button, Menu, Dropdown, Icon, Row, Col } from 'antd';
+```jsx
+import PageHeader from "ant-design-pro/lib/PageHeader";
+import DescriptionList from "ant-design-pro/lib/DescriptionList";
+import { Button, Menu, Dropdown, Icon, Row, Col } from "antd";
 
 const { Description } = DescriptionList;
 const ButtonGroup = Button.Group;
@@ -18,7 +18,9 @@ const description = (
     <Description term="创建人">曲丽丽</Description>
     <Description term="订购产品">XX 服务</Description>
     <Description term="创建时间">2017-07-07</Description>
-    <Description term="关联单据"><a href="">12421</a></Description>
+    <Description term="关联单据">
+      <a href="">12421</a>
+    </Description>
   </DescriptionList>
 );
 
@@ -36,7 +38,9 @@ const action = (
       <Button>操作</Button>
       <Button>操作</Button>
       <Dropdown overlay={menu} placement="bottomRight">
-        <Button><Icon type="ellipsis" /></Button>
+        <Button>
+          <Icon type="ellipsis" />
+        </Button>
       </Dropdown>
     </ButtonGroup>
     <Button type="primary">主操作</Button>
@@ -46,33 +50,40 @@ const action = (
 const extra = (
   <Row>
     <Col sm={24} md={12}>
-      <div style={{ color: 'rgba(0, 0, 0, 0.43)' }}>状态</div>
-      <div style={{ color: 'rgba(0, 0, 0, 0.85)', fontSize: 20 }}>待审批</div>
+      <div style={{ color: "rgba(0, 0, 0, 0.43)" }}>状态</div>
+      <div style={{ color: "rgba(0, 0, 0, 0.85)", fontSize: 20 }}>待审批</div>
     </Col>
     <Col sm={24} md={12}>
-      <div style={{ color: 'rgba(0, 0, 0, 0.43)' }}>订单金额</div>
-      <div style={{ color: 'rgba(0, 0, 0, 0.85)', fontSize: 20 }}>¥ 568.08</div>
+      <div style={{ color: "rgba(0, 0, 0, 0.43)" }}>订单金额</div>
+      <div style={{ color: "rgba(0, 0, 0, 0.85)", fontSize: 20 }}>¥ 568.08</div>
     </Col>
   </Row>
 );
 
-const breadcrumbList = [{
-  title: '一级菜单',
-  href: '/',
-}, {
-  title: '二级菜单',
-  href: '/',
-}, {
-  title: '三级菜单',
-}];
+const breadcrumbList = [
+  {
+    title: "一级菜单",
+    href: "/"
+  },
+  {
+    title: "二级菜单",
+    href: "/"
+  },
+  {
+    title: "三级菜单"
+  }
+];
 
-const tabList = [{
-  key: 'detail',
-  tab: '详情',
-}, {
-  key: 'rule',
-  tab: '规则',
-}];
+const tabList = [
+  {
+    key: "detail",
+    tab: "详情"
+  },
+  {
+    key: "rule",
+    tab: "规则"
+  }
+];
 
 function onTabChange(key) {
   console.log(key);
@@ -82,7 +93,12 @@ ReactDOM.render(
   <div>
     <PageHeader
       title="单号：234231029431"
-      logo={<img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png" />}
+      logo={
+        <img
+          alt=""
+          src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png"
+        />
+      }
       action={action}
       content={description}
       extraContent={extra}
@@ -90,9 +106,10 @@ ReactDOM.render(
       tabList={tabList}
       onTabChange={onTabChange}
     />
-  </div>
-, mountNode);
-````
+  </div>,
+  mountNode
+);
+```
 
 <style>
 #scaffold-src-components-PageHeader-demo-standard .code-box-demo {
