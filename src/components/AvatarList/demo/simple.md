@@ -8,7 +8,11 @@ title:
 Simplest of usage.
 
 ```jsx
+<<<<<<< HEAD
 import AvatarList from 'ant-design-pro/lib/AvatarList';
+=======
+import AvatarList from "ant-design-pro/lib/AvatarList";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 ReactDOM.render(
   <AvatarList size="mini">

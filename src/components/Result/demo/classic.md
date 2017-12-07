@@ -6,13 +6,18 @@ title: Classic
 典型结果页面。
 
 ```jsx
+<<<<<<< HEAD
 import Result from 'ant-design-pro/lib/Result';
 import { Button, Row, Col, Icon, Steps } from 'antd';
+=======
+import Result from "ant-design-pro/lib/Result";
+import { Button, Row, Col, Icon, Steps } from "antd";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 const { Step } = Steps;
 
 const desc1 = (
-  <div style={{ fontSize: 14, position: 'relative', left: 38 }}>
+  <div style={{ fontSize: 14, position: "relative", left: 38 }}>
     <div style={{ marginTop: 8, marginBottom: 4 }}>
       曲丽丽
       <Icon type="dingding-o" style={{ marginLeft: 8 }} />
@@ -22,14 +27,20 @@ const desc1 = (
 );
 
 const desc2 = (
-  <div style={{ fontSize: 14, position: 'relative', left: 38 }}>
+  <div style={{ fontSize: 14, position: "relative", left: 38 }}>
     <div style={{ marginTop: 8, marginBottom: 4 }}>
       周毛毛
-      <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
+      <Icon type="dingding-o" style={{ color: "#00A0E9", marginLeft: 8 }} />
     </div>
     <div style={{ marginTop: 8, marginBottom: 4 }}>
       <a href="">催一下</a>
     </div>
+<<<<<<< HEAD
+    <div style={{ marginTop: 8, marginBottom: 4 }}>
+      <a href="">催一下</a>
+    </div>
+=======
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
   </div>
 );
 
@@ -38,24 +49,30 @@ const extra = (
     <div
       style={{
         fontSize: 16,
+<<<<<<< HEAD
         color: 'rgba(0, 0, 0, 0.85)',
         fontWeight: 500,
         marginBottom: 20,
+=======
+        color: "rgba(0, 0, 0, 0.85)",
+        fontWeight: 500,
+        marginBottom: 20
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
       }}
     >
       项目名称
     </div>
     <Row style={{ marginBottom: 16 }}>
       <Col xs={24} sm={12} md={12} lg={12} xl={6}>
-        <span style={{ color: 'rgba(0, 0, 0, 0.85)' }}>项目 ID：</span>
+        <span style={{ color: "rgba(0, 0, 0, 0.85)" }}>项目 ID：</span>
         23421
       </Col>
       <Col xs={24} sm={12} md={12} lg={12} xl={6}>
-        <span style={{ color: 'rgba(0, 0, 0, 0.85)' }}>负责人：</span>
+        <span style={{ color: "rgba(0, 0, 0, 0.85)" }}>负责人：</span>
         曲丽丽
       </Col>
       <Col xs={24} sm={24} md={24} lg={24} xl={12}>
-        <span style={{ color: 'rgba(0, 0, 0, 0.85)' }}>生效时间：</span>
+        <span style={{ color: "rgba(0, 0, 0, 0.85)" }}>生效时间：</span>
         2016-12-12 ~ 2017-12-12
       </Col>
     </Row>
@@ -83,8 +100,14 @@ ReactDOM.render(
     description="提交结果页用于反馈一系列操作任务的处理结果，如果仅是简单操作，使用 Message 全局提示反馈即可。本文字区域可以展示简单的补充说明，如果有类似展示“单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。"
     extra={extra}
     actions={actions}
+<<<<<<< HEAD
     style={{ width: '100%' }}
   />,
   mountNode,
+=======
+    style={{ width: "100%" }}
+  />,
+  mountNode
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 );
 ```

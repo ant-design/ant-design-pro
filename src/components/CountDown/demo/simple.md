@@ -14,7 +14,11 @@ title:
 The simplest usage.
 
 ```jsx
+<<<<<<< HEAD
 import CountDown from 'ant-design-pro/lib/CountDown';
+=======
+import CountDown from "ant-design-pro/lib/CountDown";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 const targetTime = new Date().getTime() + 3900000;
 

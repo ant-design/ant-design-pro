@@ -6,7 +6,11 @@ title: Vertical
 垂直布局。
 
 ```jsx
+<<<<<<< HEAD
 import DescriptionList from 'ant-design-pro/lib/DescriptionList';
+=======
+import DescriptionList from "ant-design-pro/lib/DescriptionList";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 const { Description } = DescriptionList;
 

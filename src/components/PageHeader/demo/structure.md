@@ -7,16 +7,26 @@ title: Structure
 。
 
 ```jsx
+<<<<<<< HEAD
 import PageHeader from 'ant-design-pro/lib/PageHeader';
 
 const breadcrumbList = [
   {
     title: '面包屑',
   },
+=======
+import PageHeader from "ant-design-pro/lib/PageHeader";
+
+const breadcrumbList = [
+  {
+    title: "面包屑"
+  }
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 ];
 
 const tabList = [
   {
+<<<<<<< HEAD
     key: '1',
     tab: '页签一',
   },
@@ -28,6 +38,19 @@ const tabList = [
     key: '3',
     tab: '页签三',
   },
+=======
+    key: "1",
+    tab: "页签一"
+  },
+  {
+    key: "2",
+    tab: "页签二"
+  },
+  {
+    key: "3",
+    tab: "页签三"
+  }
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 ];
 
 ReactDOM.render(
@@ -43,7 +66,11 @@ ReactDOM.render(
       tabList={tabList}
     />
   </div>,
+<<<<<<< HEAD
   mountNode,
+=======
+  mountNode
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 );
 ```
 

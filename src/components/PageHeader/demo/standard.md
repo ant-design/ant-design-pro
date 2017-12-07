@@ -6,9 +6,15 @@ title: Standard
 标准页头。
 
 ```jsx
+<<<<<<< HEAD
 import PageHeader from 'ant-design-pro/lib/PageHeader';
 import DescriptionList from 'ant-design-pro/lib/DescriptionList';
 import { Button, Menu, Dropdown, Icon, Row, Col } from 'antd';
+=======
+import PageHeader from "ant-design-pro/lib/PageHeader";
+import DescriptionList from "ant-design-pro/lib/DescriptionList";
+import { Button, Menu, Dropdown, Icon, Row, Col } from "antd";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 const { Description } = DescriptionList;
 const ButtonGroup = Button.Group;
@@ -50,18 +56,19 @@ const action = (
 const extra = (
   <Row>
     <Col sm={24} md={12}>
-      <div style={{ color: 'rgba(0, 0, 0, 0.43)' }}>状态</div>
-      <div style={{ color: 'rgba(0, 0, 0, 0.85)', fontSize: 20 }}>待审批</div>
+      <div style={{ color: "rgba(0, 0, 0, 0.43)" }}>状态</div>
+      <div style={{ color: "rgba(0, 0, 0, 0.85)", fontSize: 20 }}>待审批</div>
     </Col>
     <Col sm={24} md={12}>
-      <div style={{ color: 'rgba(0, 0, 0, 0.43)' }}>订单金额</div>
-      <div style={{ color: 'rgba(0, 0, 0, 0.85)', fontSize: 20 }}>¥ 568.08</div>
+      <div style={{ color: "rgba(0, 0, 0, 0.43)" }}>订单金额</div>
+      <div style={{ color: "rgba(0, 0, 0, 0.85)", fontSize: 20 }}>¥ 568.08</div>
     </Col>
   </Row>
 );
 
 const breadcrumbList = [
   {
+<<<<<<< HEAD
     title: '一级菜单',
     href: '/',
   },
@@ -72,10 +79,23 @@ const breadcrumbList = [
   {
     title: '三级菜单',
   },
+=======
+    title: "一级菜单",
+    href: "/"
+  },
+  {
+    title: "二级菜单",
+    href: "/"
+  },
+  {
+    title: "三级菜单"
+  }
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 ];
 
 const tabList = [
   {
+<<<<<<< HEAD
     key: 'detail',
     tab: '详情',
   },
@@ -83,6 +103,15 @@ const tabList = [
     key: 'rule',
     tab: '规则',
   },
+=======
+    key: "detail",
+    tab: "详情"
+  },
+  {
+    key: "rule",
+    tab: "规则"
+  }
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 ];
 
 function onTabChange(key) {
@@ -107,7 +136,11 @@ ReactDOM.render(
       onTabChange={onTabChange}
     />
   </div>,
+<<<<<<< HEAD
   mountNode,
+=======
+  mountNode
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 );
 ```
 

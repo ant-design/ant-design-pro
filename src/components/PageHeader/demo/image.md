@@ -6,7 +6,11 @@ title: With Image
 带图片的页头。
 
 ```jsx
+<<<<<<< HEAD
 import PageHeader from 'ant-design-pro/lib/PageHeader';
+=======
+import PageHeader from "ant-design-pro/lib/PageHeader";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 const content = (
   <div>
@@ -19,21 +23,33 @@ const content = (
         <img
           alt=""
           src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
+<<<<<<< HEAD
         />
+=======
+        />{" "}
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
         快速开始
       </a>
       <a>
         <img
           alt=""
           src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
+<<<<<<< HEAD
         />
+=======
+        />{" "}
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
         产品简介
       </a>
       <a>
         <img
           alt=""
           src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
+<<<<<<< HEAD
         />
+=======
+        />{" "}
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
         产品文档
       </a>
     </div>
@@ -43,7 +59,11 @@ const content = (
 const extra = (
   <div className="imgContainer">
     <img
+<<<<<<< HEAD
       style={{ width: '100%' }}
+=======
+      style={{ width: "100%" }}
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
       alt=""
       src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png"
     />
@@ -52,6 +72,7 @@ const extra = (
 
 const breadcrumbList = [
   {
+<<<<<<< HEAD
     title: '一级菜单',
     href: '/',
   },
@@ -62,6 +83,18 @@ const breadcrumbList = [
   {
     title: '三级菜单',
   },
+=======
+    title: "一级菜单",
+    href: "/"
+  },
+  {
+    title: "二级菜单",
+    href: "/"
+  },
+  {
+    title: "三级菜单"
+  }
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 ];
 
 ReactDOM.render(
@@ -73,7 +106,11 @@ ReactDOM.render(
       breadcrumbList={breadcrumbList}
     />
   </div>,
+<<<<<<< HEAD
   mountNode,
+=======
+  mountNode
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 );
 ```
 

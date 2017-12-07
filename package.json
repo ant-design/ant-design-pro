@@ -96,7 +96,12 @@
   },
   "lint-staged": {
     "**/*.{js,jsx}": "lint-staged:js",
+<<<<<<< HEAD
     "**/*.less": "stylelint --syntax less"
+=======
+    "**/*.less": "stylelint --syntax less",
+    "*.{js,jsx,less,json}": ["prettier --write src/**/**.md", "git add"]
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
   },
   "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"]
 }

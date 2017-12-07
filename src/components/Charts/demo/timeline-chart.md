@@ -7,14 +7,18 @@ title: 带有时间轴的图表
 时间值的指向，默认最多支持同时展现两个指标，分别是 `y1` 和 `y2`。
 
 ```jsx
+<<<<<<< HEAD
 import { TimelineChart } from 'ant-design-pro/lib/Charts';
+=======
+import { TimelineChart } from "ant-design-pro/lib/Charts";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 const chartData = [];
 for (let i = 0; i < 20; i += 1) {
   chartData.push({
     x: new Date().getTime() + 1000 * 60 * 30 * i,
     y1: Math.floor(Math.random() * 100) + 1000,
-    y2: Math.floor(Math.random() * 100) + 10,
+    y2: Math.floor(Math.random() * 100) + 10
   });
 }
 
@@ -22,8 +26,14 @@ ReactDOM.render(
   <TimelineChart
     height={200}
     data={chartData}
+<<<<<<< HEAD
     titleMap={{ y1: '客流量', y2: '支付笔数' }}
   />,
   mountNode,
+=======
+    titleMap={{ y1: "客流量", y2: "支付笔数" }}
+  />,
+  mountNode
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 );
 ```
