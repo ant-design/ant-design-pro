@@ -9,7 +9,7 @@ title: 水波图
 import { WaterWave } from 'ant-design-pro/lib/Charts';
 
 ReactDOM.render(
-  <div style={{textAlign: 'center'}}>
+  <div style={{ textAlign: 'center' }}>
     <WaterWave
       height={161}
       title="补贴资金剩余"
