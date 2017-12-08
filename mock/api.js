@@ -191,7 +191,7 @@ export const getActivities = [
     id: 'trend-1',
     updatedAt: new Date(),
     user: {
-      name: '林东东',
+      name: '曲丽丽',
       avatar: avatars2[0],
     },
     group: {
@@ -225,7 +225,7 @@ export const getActivities = [
     id: 'trend-3',
     updatedAt: new Date(),
     user: {
-      name: '曲丽丽',
+      name: '林东东',
       avatar: avatars2[2],
     },
     group: {
@@ -243,7 +243,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '周星星',
-      avatar: avatars2[3],
+      avatar: avatars2[4],
     },
     project: {
       name: '5 月日常迭代',
@@ -256,7 +256,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '朱偏右',
-      avatar: avatars2[4],
+      avatar: avatars2[3],
     },
     project: {
       name: '工程效能',
