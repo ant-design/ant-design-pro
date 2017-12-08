@@ -16,7 +16,7 @@ const extra = (
         fontSize: 16,
         color: 'rgba(0, 0, 0, 0.85)',
         fontWeight: 500,
-        marginBottom: 16
+        marginBottom: 16,
       }}
     >
       您提交的内容有如下错误：
@@ -52,6 +52,6 @@ ReactDOM.render(
     extra={extra}
     actions={actions}
   />,
-  mountNode
+  mountNode,
 );
 ```

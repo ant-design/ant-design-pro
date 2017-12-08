@@ -11,22 +11,22 @@ import PageHeader from 'ant-design-pro/lib/PageHeader';
 const breadcrumbList = [
   {
     title: '一级菜单',
-    href: '/'
+    href: '/',
   },
   {
     title: '二级菜单',
-    href: '/'
+    href: '/',
   },
   {
-    title: '三级菜单'
-  }
+    title: '三级菜单',
+  },
 ];
 
 ReactDOM.render(
   <div>
     <PageHeader title="页面标题" breadcrumbList={breadcrumbList} />
   </div>,
-  mountNode
+  mountNode,
 );
 ```
 

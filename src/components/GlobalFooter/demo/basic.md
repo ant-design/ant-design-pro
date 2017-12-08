@@ -13,17 +13,17 @@ import { Icon } from 'antd';
 const links = [
   {
     title: '帮助',
-    href: ''
+    href: '',
   },
   {
     title: '隐私',
-    href: ''
+    href: '',
   },
   {
     title: '条款',
     href: '',
-    blankTarget: true
-  }
+    blankTarget: true,
+  },
 ];
 
 const copyright = (
@@ -37,6 +37,6 @@ ReactDOM.render(
     <div style={{ height: 280 }} />
     <GlobalFooter links={links} copyright={copyright} />
   </div>,
-  mountNode
+  mountNode,
 );
 ```

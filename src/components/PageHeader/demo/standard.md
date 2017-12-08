@@ -63,26 +63,26 @@ const extra = (
 const breadcrumbList = [
   {
     title: '一级菜单',
-    href: '/'
+    href: '/',
   },
   {
     title: '二级菜单',
-    href: '/'
+    href: '/',
   },
   {
-    title: '三级菜单'
-  }
+    title: '三级菜单',
+  },
 ];
 
 const tabList = [
   {
     key: 'detail',
-    tab: '详情'
+    tab: '详情',
   },
   {
     key: 'rule',
-    tab: '规则'
-  }
+    tab: '规则',
+  },
 ];
 
 function onTabChange(key) {
@@ -107,7 +107,7 @@ ReactDOM.render(
       onTabChange={onTabChange}
     />
   </div>,
-  mountNode
+  mountNode,
 );
 ```
 

@@ -3,7 +3,8 @@ order: 0
 title: 图表套件组合展示
 ---
 
-利用 Ant Design Pro 提供的图表套件，可以灵活组合符合设计规范的图表来满足复杂的业务需求。
+利用 Ant Design Pro 提供的图表套件，可以灵活组合符合设计规范的图表来满足复杂的业
+务需求。
 
 ```jsx
 import {
@@ -11,7 +12,7 @@ import {
   Field,
   MiniArea,
   MiniBar,
-  MiniProgress
+  MiniProgress,
 } from 'ant-design-pro/lib/Charts';
 import Trend from 'ant-design-pro/lib/Trend';
 import NumberInfo from 'ant-design-pro/lib/NumberInfo';
@@ -24,9 +25,9 @@ const beginDay = new Date().getTime();
 for (let i = 0; i < 20; i += 1) {
   visitData.push({
     x: moment(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format(
-      'YYYY-MM-DD'
+      'YYYY-MM-DD',
     ),
-    y: Math.floor(Math.random() * 100) + 10
+    y: Math.floor(Math.random() * 100) + 10,
   });
 }
 
@@ -95,6 +96,6 @@ ReactDOM.render(
       </ChartCard>
     </Col>
   </Row>,
-  mountNode
+  mountNode,
 );
 ```

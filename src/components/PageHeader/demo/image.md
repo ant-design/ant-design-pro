@@ -19,21 +19,21 @@ const content = (
         <img
           alt=""
           src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
-        />{' '}
+        />
         快速开始
       </a>
       <a>
         <img
           alt=""
           src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
-        />{' '}
+        />
         产品简介
       </a>
       <a>
         <img
           alt=""
           src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
-        />{' '}
+        />
         产品文档
       </a>
     </div>
@@ -53,15 +53,15 @@ const extra = (
 const breadcrumbList = [
   {
     title: '一级菜单',
-    href: '/'
+    href: '/',
   },
   {
     title: '二级菜单',
-    href: '/'
+    href: '/',
   },
   {
-    title: '三级菜单'
-  }
+    title: '三级菜单',
+  },
 ];
 
 ReactDOM.render(
@@ -73,7 +73,7 @@ ReactDOM.render(
       breadcrumbList={breadcrumbList}
     />
   </div>,
-  mountNode
+  mountNode,
 );
 ```
 

@@ -16,7 +16,7 @@ ReactDOM.render(
       lineHeight: '64px',
       boxShadow: '0 1px 4px rgba(0,21,41,.12)',
       padding: '0 32px',
-      width: '400px'
+      width: '400px',
     }}
   >
     <HeaderSearch
@@ -30,6 +30,6 @@ ReactDOM.render(
       }}
     />
   </div>,
-  mountNode
+  mountNode,
 );
 ```

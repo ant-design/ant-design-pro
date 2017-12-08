@@ -18,6 +18,6 @@ ReactDOM.render(
       subTotal={17.1}
     />
   </div>,
-  mountNode
+  mountNode,
 );
 ```

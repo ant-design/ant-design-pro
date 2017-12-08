@@ -15,6 +15,6 @@ ReactDOM.render(
       11%
     </Trend>
   </div>,
-  mountNode
+  mountNode,
 );
 ```

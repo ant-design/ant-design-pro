@@ -40,7 +40,7 @@ const extra = (
         fontSize: 16,
         color: 'rgba(0, 0, 0, 0.85)',
         fontWeight: 500,
-        marginBottom: 20
+        marginBottom: 20,
       }}
     >
       项目名称
@@ -85,6 +85,6 @@ ReactDOM.render(
     actions={actions}
     style={{ width: '100%' }}
   />,
-  mountNode
+  mountNode,
 );
 ```

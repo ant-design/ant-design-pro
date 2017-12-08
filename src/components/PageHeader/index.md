@@ -7,7 +7,8 @@ cols: 1
 order: 11
 ---
 
-页头用来声明页面的主题，包含了用户所关注的最重要的信息，使用户可以快速理解当前页面是什么以及它的功能。
+页头用来声明页面的主题，包含了用户所关注的最重要的信息，使用户可以快速理解当前页
+面是什么以及它的功能。
 
 ## API
 
@@ -25,4 +26,8 @@ order: 11
 | onTabChange    | 切换面板的回调                                          | (key) => void                            | -      |
 | linkElement    | 定义链接的元素，默认为 `a`，可传入 react-router 的 Link | string\|ReactElement                     | -      |
 
-> 面包屑的配置方式有两种，一是结合 `react-router`，通过配置 `routes` 及 `params` 实现，类似 [面包屑 Demo](https://ant.design/components/breadcrumb-cn/#components-breadcrumb-demo-router)；二是直接配置 `breadcrumbList`。 你也可以将 `routes` 及 `params` 放到 context 中，`PageHeader` 组件会自动获取。
+> 面包屑的配置方式有两种，一是结合 `react-router`，通过配置 `routes` 及 `params`
+> 实现，类似
+> [面包屑 Demo](https://ant.design/components/breadcrumb-cn/#components-breadcrumb-demo-router)；
+> 二是直接配置 `breadcrumbList`。 你也可以将 `routes` 及 `params` 放到 context
+> 中，`PageHeader` 组件会自动获取。
