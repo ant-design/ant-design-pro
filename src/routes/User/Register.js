@@ -30,7 +30,8 @@ export default class Register extends Component {
     confirmDirty: false,
     visible: false,
     help: '',
-  }
+    prefix: '86',
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.register.status === 'ok') {
@@ -52,7 +53,7 @@ export default class Register extends Component {
         clearInterval(this.interval);
       }
     }, 1000);
-  }
+  };
 
   getPasswordStatus = () => {
     const { form } = this.props;
@@ -64,26 +65,27 @@ export default class Register extends Component {
       return 'pass';
     }
     return 'pool';
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields({ force: true },
-      (err, values) => {
-        if (!err) {
-          this.props.dispatch({
-            type: 'register/submit',
-            payload: values,
-          });
-        }
+    this.props.form.validateFields({ force: true }, (err, values) => {
+      if (!err) {
+        this.props.dispatch({
+          type: 'register/submit',
+          payload: {
+            ...values,
+            prefix: this.state.prefix,
+          },
+        });
       }
-    );
-  }
+    });
+  };
 
   handleConfirmBlur = (e) => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  }
+  };
 
   checkConfirm = (rule, value, callback) => {
     const { form } = this.props;
@@ -92,7 +94,7 @@ export default class Register extends Component {
     } else {
       callback();
     }
-  }
+  };
 
   checkPassword = (rule, value, callback) => {
     if (!value) {
@@ -120,13 +122,19 @@ export default class Register extends Component {
         callback();
       }
     }
-  }
+  };
+
+  changePrefix = (value) => {
+    this.setState({
+      prefix: value,
+    });
+  };
 
   renderPasswordProgress = () => {
     const { form } = this.props;
     const value = form.getFieldValue('password');
     const passwordStatus = this.getPasswordStatus();
-    return value && value.length ?
+    return value && value.length ? (
       <div className={styles[`progress-${passwordStatus}`]}>
         <Progress
           status={passwordProgressMap[passwordStatus]}
@@ -135,27 +143,31 @@ export default class Register extends Component {
           percent={value.length * 10 > 100 ? 100 : value.length * 10}
           showInfo={false}
         />
-      </div> : null;
-  }
+      </div>
+    ) : null;
+  };
 
   render() {
     const { form, register } = this.props;
     const { getFieldDecorator } = form;
-    const { count } = this.state;
+    const { count, prefix } = this.state;
     return (
       <div className={styles.main}>
         <h3>注册</h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('mail', {
-              rules: [{
-                required: true, message: '请输入邮箱地址！',
-              }, {
-                type: 'email', message: '邮箱地址格式错误！',
-              }],
-            })(
-              <Input size="large" placeholder="邮箱" />
-            )}
+              rules: [
+                {
+                  required: true,
+                  message: '请输入邮箱地址！',
+                },
+                {
+                  type: 'email',
+                  message: '邮箱地址格式错误！',
+                },
+              ],
+            })(<Input size="large" placeholder="邮箱" />)}
           </FormItem>
           <FormItem help={this.state.help}>
             <Popover
@@ -163,7 +175,9 @@ export default class Register extends Component {
                 <div style={{ padding: '4px 0' }}>
                   {passwordStatusMap[this.getPasswordStatus()]}
                   {this.renderPasswordProgress()}
-                  <div style={{ marginTop: 10 }}>请至少输入 6 个字符。请不要使用容易被猜到的密码。</div>
+                  <div style={{ marginTop: 10 }}>
+                    请至少输入 6 个字符。请不要使用容易被猜到的密码。
+                  </div>
                 </div>
               }
               overlayStyle={{ width: 240 }}
@@ -171,9 +185,11 @@ export default class Register extends Component {
               visible={this.state.visible}
             >
               {getFieldDecorator('password', {
-                rules: [{
-                  validator: this.checkPassword,
-                }],
+                rules: [
+                  {
+                    validator: this.checkPassword,
+                  },
+                ],
               })(
                 <Input
                   size="large"
@@ -185,57 +201,59 @@ export default class Register extends Component {
           </FormItem>
           <FormItem>
             {getFieldDecorator('confirm', {
-              rules: [{
-                required: true, message: '请确认密码！',
-              }, {
-                validator: this.checkConfirm,
-              }],
-            })(
-              <Input
-                size="large"
-                type="password"
-                placeholder="确认密码"
-              />
-            )}
+              rules: [
+                {
+                  required: true,
+                  message: '请确认密码！',
+                },
+                {
+                  validator: this.checkConfirm,
+                },
+              ],
+            })(<Input size="large" type="password" placeholder="确认密码" />)}
           </FormItem>
           <FormItem>
-            <InputGroup size="large" className={styles.mobileGroup} compact>
-              <FormItem style={{ width: '20%' }}>
-                {getFieldDecorator('prefix', {
-                  initialValue: '86',
-                })(
-                  <Select size="large">
-                    <Option value="86">+86</Option>
-                    <Option value="87">+87</Option>
-                  </Select>
-                )}
-              </FormItem>
-              <FormItem style={{ width: '80%' }}>
-                {getFieldDecorator('mobile', {
-                  rules: [{
-                    required: true, message: '请输入手机号！',
-                  }, {
-                    pattern: /^1\d{10}$/, message: '手机号格式错误！',
-                  }],
-                })(
-                  <Input placeholder="11位手机号" />
-                )}
-              </FormItem>
+            <InputGroup compact>
+              <Select
+                size="large"
+                value={prefix}
+                onChange={this.changePrefix}
+                style={{ width: '20%' }}
+              >
+                <Option value="86">+86</Option>
+                <Option value="87">+87</Option>
+              </Select>
+              {getFieldDecorator('mobile', {
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入手机号！',
+                  },
+                  {
+                    pattern: /^1\d{10}$/,
+                    message: '手机号格式错误！',
+                  },
+                ],
+              })(
+                <Input
+                  size="large"
+                  style={{ width: '80%' }}
+                  placeholder="11位手机号"
+                />
+              )}
             </InputGroup>
           </FormItem>
           <FormItem>
             <Row gutter={8}>
               <Col span={16}>
                 {getFieldDecorator('captcha', {
-                  rules: [{
-                    required: true, message: '请输入验证码！',
-                  }],
-                })(
-                  <Input
-                    size="large"
-                    placeholder="验证码"
-                  />
-                )}
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入验证码！',
+                    },
+                  ],
+                })(<Input size="large" placeholder="验证码" />)}
               </Col>
               <Col span={8}>
                 <Button
@@ -250,10 +268,18 @@ export default class Register extends Component {
             </Row>
           </FormItem>
           <FormItem>
-            <Button size="large" loading={register.submitting} className={styles.submit} type="primary" htmlType="submit">
+            <Button
+              size="large"
+              loading={register.submitting}
+              className={styles.submit}
+              type="primary"
+              htmlType="submit"
+            >
               注册
             </Button>
-            <Link className={styles.login} to="/user/login">使用已有账户登录</Link>
+            <Link className={styles.login} to="/user/login">
+              使用已有账户登录
+            </Link>
           </FormItem>
         </Form>
       </div>
