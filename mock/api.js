@@ -20,6 +20,20 @@ const avatars = [
   'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png', // Vue
   'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png', // Webpack
 ];
+
+const avatars2 = [
+  'https://gw.alipayobjects.com/zos/rmsportal/keeYtvRpGFVVKOOiOZDS.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/HpGtMMahFSHCFrLHoRgp.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/vbkXPXkeyhWWEQKpTmyB.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/UXeAaBwlPaPqIVOjMqpK.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/lPPRIxHBXYiVglbTqzUM.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/gGbnPtZRDoBIzgnviJSd.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/uDbwqVZzLhaZeVaTDahw.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/HtgZoejyvBLuuRtmMfFh.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/XvQuAhIgggZWZEjWJsuu.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/RsKCNHXwelfBwCzjYfNb.png',
+];
+
 const covers = [
   'https://gw.alipayobjects.com/zos/rmsportal/uMfMFlvUuceEyPpotzlq.png',
   'https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png',
@@ -178,7 +192,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '林东东',
-      avatar: avatars[0],
+      avatar: avatars2[0],
     },
     group: {
       name: '高逼格设计天团',
@@ -195,7 +209,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '付小小',
-      avatar: avatars[1],
+      avatar: avatars2[1],
     },
     group: {
       name: '高逼格设计天团',
@@ -212,7 +226,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '曲丽丽',
-      avatar: avatars[2],
+      avatar: avatars2[2],
     },
     group: {
       name: '中二少女团',
@@ -229,7 +243,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '周星星',
-      avatar: avatars[3],
+      avatar: avatars2[3],
     },
     project: {
       name: '5 月日常迭代',
@@ -242,7 +256,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '朱偏右',
-      avatar: avatars[4],
+      avatar: avatars2[4],
     },
     project: {
       name: '工程效能',
@@ -259,7 +273,7 @@ export const getActivities = [
     updatedAt: new Date(),
     user: {
       name: '乐哥',
-      avatar: avatars[5],
+      avatar: avatars2[5],
     },
     group: {
       name: '程序员日常',
