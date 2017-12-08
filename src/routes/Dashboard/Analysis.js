@@ -328,7 +328,7 @@ export default class Analysis extends Component {
                 </Row>
               </TabPane>
               <TabPane tab="访问量" key="views">
-                <Row gutter={72}>
+                <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesBar}>
                       <Bar
