@@ -59,6 +59,9 @@ export default class TableList extends PureComponent {
   handleFormReset = () => {
     const { form, dispatch } = this.props;
     form.resetFields();
+    this.setState({
+      formValues: {},
+    });
     dispatch({
       type: 'rule/fetch',
       payload: {},
