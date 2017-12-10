@@ -69,11 +69,11 @@ const proxy = {
   'GET /api/profile/basic': getProfileBasicData,
   'GET /api/profile/advanced': getProfileAdvancedData,
   'POST /api/login/account': (req, res) => {
-    const { password, userName } = req.body;
-    res.send({ status: password === '888888' && userName === 'admin' ? 'ok' : 'error', type: 'account' });
-  },
-  'POST /api/login/mobile': (req, res) => {
-    res.send({ status: 'ok', type: 'mobile' });
+    const { password, userName, type } = req.body;
+    res.send({
+      status: password === '888888' && userName === 'admin' ? 'ok' : 'error',
+      type,
+    });
   },
   'POST /api/register': (req, res) => {
     res.send({ status: 'ok' });
