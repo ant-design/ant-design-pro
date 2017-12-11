@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { routerRedux, Link } from 'dva/router';
+import { Link } from 'dva/router';
 import { Form, Input, Tabs, Button, Icon, Checkbox, Row, Col, Alert } from 'antd';
 import styles from './Login.less';
 
@@ -17,20 +17,12 @@ export default class Login extends Component {
     type: 'account',
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.login.status === 'ok') {
-      this.props.dispatch(routerRedux.push('/'));
-    }
-  }
-
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  onSwitch = (key) => {
-    this.setState({
-      type: key,
-    });
+  onSwitch = (type) => {
+    this.setState({ type });
   }
 
   onGetCaptcha = () => {
@@ -47,13 +39,15 @@ export default class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { type } = this.state;
     this.props.form.validateFields({ force: true },
       (err, values) => {
         if (!err) {
           this.props.dispatch({
-            type: `login/${type}Submit`,
-            payload: values,
+            type: 'login/login',
+            payload: {
+              ...values,
+              type: this.state.type,
+            },
           });
         }
       }
