@@ -27,7 +27,6 @@ for (let i = 0; i < 7; i += 1) {
 }))
 export default class Analysis extends Component {
   state = {
-    loading: true,
     salesType: 'all',
     currentTabKey: '',
     rangePickerValue: [],
@@ -36,7 +35,7 @@ export default class Analysis extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'chart/fetch',
-    }).then(() => this.setState({ loading: false }));
+    });
   }
 
   componentWillUnmount() {
@@ -90,7 +89,7 @@ export default class Analysis extends Component {
   }
 
   render() {
-    const { rangePickerValue, salesType, currentTabKey, loading } = this.state;
+    const { rangePickerValue, salesType, currentTabKey } = this.state;
     const { chart } = this.props;
     const {
       visitData,
@@ -102,6 +101,7 @@ export default class Analysis extends Component {
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
+      loading,
     } = chart;
 
     const salesPieData = salesType === 'all' ?
