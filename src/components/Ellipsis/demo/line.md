@@ -7,14 +7,28 @@ title: 按照行数省略
 
 并且注意在这种模式下，外容器需要有指定的宽度（或设置自身宽度）。
 
-````jsx
+```jsx
+<<<<<<< HEAD
 import Ellipsis from 'ant-design-pro/lib/Ellipsis';
+=======
+import Ellipsis from "ant-design-pro/lib/Ellipsis";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
-const article = <p>There were injuries alleged in three <a href="#cover">cases in 2015</a>, and a fourth incident in September, according to the safety recall report. After meeting with US regulators in October, the firm decided to issue a voluntary recall.</p>;
+const article = (
+  <p>
+    There were injuries alleged in three <a href="#cover">cases in 2015</a>, and
+    a fourth incident in September, according to the safety recall report. After
+    meeting with US regulators in October, the firm decided to issue a voluntary
+    recall.
+  </p>
+);
 
 ReactDOM.render(
   <div style={{ width: 200 }}>
-    <Ellipsis tooltip lines={3}>{article}</Ellipsis>
-  </div>
-, mountNode);
-````
+    <Ellipsis tooltip lines={3}>
+      {article}
+    </Ellipsis>
+  </div>,
+  mountNode
+);
+```

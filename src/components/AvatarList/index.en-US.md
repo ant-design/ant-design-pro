@@ -10,13 +10,13 @@ A list of user's avatar for project or group member list frequently. If a large 
 
 ### AvatarList
 
-| Property | Description | Type | Default |
-|----------|------------------------------------------|-------------|-------|
-| size | size of list | `large`、`small` 、`mini`, `default` | `default` |
+| Property | Description  | Type                                 | Default   |
+| -------- | ------------ | ------------------------------------ | --------- |
+| size     | size of list | `large`、`small` 、`mini`, `default` | `default` |
 
 ### AvatarList.Item
 
-| Property | Description | Type | Default |
-|----------|------------------------------------------|-------------|-------|
-| tips | title tips for avatar item | ReactNode\/string | - |
-| src | the address of the image for an image avatar | string | - |
+| Property | Description                                  | Type              | Default |
+| -------- | -------------------------------------------- | ----------------- | ------- |
+| tips     | title tips for avatar item                   | ReactNode\/string | -       |
+| src      | the address of the image for an image avatar | string            | -       |

@@ -5,31 +5,30 @@ title: Basic
 
 基本描述列表。
 
-````jsx
+```jsx
+<<<<<<< HEAD
 import DescriptionList from 'ant-design-pro/lib/DescriptionList';
+=======
+import DescriptionList from "ant-design-pro/lib/DescriptionList";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 const { Description } = DescriptionList;
 
 ReactDOM.render(
   <DescriptionList size="large" title="title">
     <Description term="Firefox">
-      A free, open source, cross-platform,
-      graphical web browser developed by the
-      Mozilla Corporation and hundreds of
-      volunteers.
+      A free, open source, cross-platform, graphical web browser developed by
+      the Mozilla Corporation and hundreds of volunteers.
     </Description>
     <Description term="Firefox">
-      A free, open source, cross-platform,
-      graphical web browser developed by the
-      Mozilla Corporation and hundreds of
-      volunteers.
+      A free, open source, cross-platform, graphical web browser developed by
+      the Mozilla Corporation and hundreds of volunteers.
     </Description>
     <Description term="Firefox">
-      A free, open source, cross-platform,
-      graphical web browser developed by the
-      Mozilla Corporation and hundreds of
-      volunteers.
+      A free, open source, cross-platform, graphical web browser developed by
+      the Mozilla Corporation and hundreds of volunteers.
     </Description>
-  </DescriptionList>
-, mountNode);
-````
+  </DescriptionList>,
+  mountNode
+);
+```

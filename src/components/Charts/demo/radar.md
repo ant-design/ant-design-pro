@@ -3,50 +3,58 @@ order: 7
 title: 雷达图
 ---
 
-````jsx
+```jsx
+<<<<<<< HEAD
 import { Radar, ChartCard } from 'ant-design-pro/lib/Charts';
+=======
+import { Radar, ChartCard } from "ant-design-pro/lib/Charts";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 const radarOriginData = [
   {
-    name: '个人',
+    name: "个人",
     ref: 10,
     koubei: 8,
     output: 4,
     contribute: 5,
-    hot: 7,
+    hot: 7
   },
   {
-    name: '团队',
+    name: "团队",
     ref: 3,
     koubei: 9,
     output: 6,
     contribute: 3,
-    hot: 1,
+    hot: 1
   },
   {
-    name: '部门',
+    name: "部门",
     ref: 4,
     koubei: 1,
     output: 6,
     contribute: 5,
-    hot: 7,
-  },
+    hot: 7
+  }
 ];
 const radarData = [];
 const radarTitleMap = {
-  ref: '引用',
-  koubei: '口碑',
-  output: '产量',
-  contribute: '贡献',
-  hot: '热度',
+  ref: "引用",
+  koubei: "口碑",
+  output: "产量",
+  contribute: "贡献",
+  hot: "热度"
 };
-radarOriginData.forEach((item) => {
-  Object.keys(item).forEach((key) => {
+radarOriginData.forEach(item => {
+  Object.keys(item).forEach(key => {
+<<<<<<< HEAD
     if (key !== 'name') {
+=======
+    if (key !== "name") {
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
       radarData.push({
         name: item.name,
         label: radarTitleMap[key],
-        value: item[key],
+        value: item[key]
       });
     }
   });
@@ -54,11 +62,12 @@ radarOriginData.forEach((item) => {
 
 ReactDOM.render(
   <ChartCard title="数据比例">
-    <Radar
-      hasLegend
-      height={286}
-      data={radarData}
-    />
-  </ChartCard>
-, mountNode);
-````
+    <Radar hasLegend height={286} data={radarData} />
+  </ChartCard>,
+<<<<<<< HEAD
+  mountNode,
+=======
+  mountNode
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
+);
+```

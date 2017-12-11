@@ -13,12 +13,17 @@ title:
 
 The simplest usage.
 
-````jsx
+```jsx
+<<<<<<< HEAD
 import CountDown from 'ant-design-pro/lib/CountDown';
+=======
+import CountDown from "ant-design-pro/lib/CountDown";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 const targetTime = new Date().getTime() + 3900000;
 
 ReactDOM.render(
-  <CountDown style={{ fontSize: 20 }} target={targetTime} />
-, mountNode);
-````
+  <CountDown style={{ fontSize: 20 }} target={targetTime} />,
+  mountNode
+);
+```

@@ -5,8 +5,12 @@ title: 可展开和收起
 
 使用 `expandable` 属性，让标签组可以收起，避免过高。
 
-````jsx
+```jsx
+<<<<<<< HEAD
 import TagSelect from 'ant-design-pro/lib/TagSelect';
+=======
+import TagSelect from "ant-design-pro/lib/TagSelect";
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
 
 function handleFormSubmit(checkedValue) {
   console.log(checkedValue);
@@ -26,6 +30,11 @@ ReactDOM.render(
     <TagSelect.Option value="cat10">类目十</TagSelect.Option>
     <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
     <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
-  </TagSelect>
-, mountNode);
-````
+  </TagSelect>,
+<<<<<<< HEAD
+  mountNode,
+=======
+  mountNode
+>>>>>>> prettier  md ,  remove pre-commit prettier .js action
+);
+```
