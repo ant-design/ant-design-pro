@@ -110,7 +110,7 @@ class Pie extends Component {
       selected = false;
       tooltip = false;
       formatColor = (value) => {
-        if (value === '占比') {
+        if (value === 'Proportion') {
           return color || 'rgba(24, 144, 255, 0.85)';
         } else {
           return '#F0F2F5';
@@ -120,11 +120,11 @@ class Pie extends Component {
       /* eslint no-param-reassign: */
       data = [
         {
-          x: '占比',
+          x: 'Proportion',
           y: parseFloat(percent),
         },
         {
-          x: '反比',
+          x: 'Inverse',
           y: 100 - parseFloat(percent),
         },
       ];
@@ -187,8 +187,8 @@ class Pie extends Component {
 
     let legendData = [];
     if (hasLegend) {
-      const geom = chart.getGeoms()[0]; // 获取所有的图形
-      const items = geom.getData(); // 获取图形对应的数据
+      const geom = chart.getGeoms()[0]; // Get all the graphics
+      const items = geom.getData(); // Get the data corresponding to the graph
       legendData = items.map((item) => {
         /* eslint no-underscore-dangle:0 */
         const origin = item._origin;

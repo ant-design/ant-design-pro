@@ -1,10 +1,10 @@
 ---
 order: 2
 col: 2
-title: 迷你柱状图
+title: Mini Bar Chart
 ---
 
-迷你柱状图更适合展示简单的区间数据，简洁的表现方式可以很好的减少大数据量的视觉展现压力。
+The mini-histogram is suitable for displaying interval data, simplicity can be a good way to reduce the visual pressure of large data volume.
 
 ````jsx
 import { MiniBar } from 'ant-design-pro/lib/Charts';

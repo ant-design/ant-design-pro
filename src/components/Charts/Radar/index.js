@@ -127,8 +127,8 @@ class Radar extends PureComponent {
     chart.render();
 
     if (hasLegend) {
-      const geom = chart.getGeoms()[0]; // 获取所有的图形
-      const items = geom.getData(); // 获取图形对应的数据
+      const geom = chart.getGeoms()[0]; // Get all the graphics
+      const items = geom.getData(); // Get the data corresponding to the graph
       const legendData = items.map((item) => {
         /* eslint no-underscore-dangle:0 */
         const origin = item._origin;

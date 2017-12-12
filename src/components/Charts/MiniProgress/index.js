@@ -5,7 +5,7 @@ import styles from './index.less';
 
 const MiniProgress = ({ target, color = 'rgb(19, 194, 194)', strokeWidth, percent }) => (
   <div className={styles.miniProgress}>
-    <Tooltip title={`目标值: ${target}%`}>
+    <Tooltip title={`Target Value:${target}%`}>
       <div
         className={styles.target}
         style={{ left: (target ? `${target}%` : null) }}

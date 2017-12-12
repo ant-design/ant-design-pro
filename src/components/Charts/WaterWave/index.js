@@ -58,12 +58,12 @@ class WaterWave extends PureComponent {
 
     const axisLength = canvasWidth - (lineWidth);
     const unit = axisLength / 8;
-    const range = 0.2; // 振幅
+    const range = 0.2; // amplitude
     let currRange = range;
     const xOffset = lineWidth;
-    let sp = 0; // 周期偏移量
+    let sp = 0; // period offset
     let currData = 0;
-    const waveupsp = 0.005; // 水波上涨速度
+    const waveupsp = 0.005; // water wave speed
 
     let arcStack = [];
     const bR = radius - (lineWidth);
