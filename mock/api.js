@@ -22,16 +22,16 @@ const avatars = [
 ];
 
 const avatars2 = [
-  'https://gw.alipayobjects.com/zos/rmsportal/keeYtvRpGFVVKOOiOZDS.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/HpGtMMahFSHCFrLHoRgp.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/vbkXPXkeyhWWEQKpTmyB.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/UXeAaBwlPaPqIVOjMqpK.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/lPPRIxHBXYiVglbTqzUM.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/gGbnPtZRDoBIzgnviJSd.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/uDbwqVZzLhaZeVaTDahw.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/HtgZoejyvBLuuRtmMfFh.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/XvQuAhIgggZWZEjWJsuu.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/RsKCNHXwelfBwCzjYfNb.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/psOgztMplJMGpVEqfcgF.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/ZpBqSxLxVEXfcUNoPKrz.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/laiEnJdGHVOhJrUShBaJ.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/UrQsqscbKEpNuJcvBZBu.png',
 ];
 
 const covers = [
