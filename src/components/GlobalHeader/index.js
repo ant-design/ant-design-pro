@@ -10,6 +10,14 @@ import styles from './index.less';
 const { Header } = Layout;
 
 export default class GlobalHeader extends PureComponent {
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'user/fetchCurrent',
+    });
+  }
+  componentWillUnmount() {
+    this.triggerResizeEvent.cancel();
+  }
   getNoticeData() {
     const { notices = [] } = this.props;
     if (notices.length === 0) {
@@ -51,6 +59,13 @@ export default class GlobalHeader extends PureComponent {
       });
     }
   }
+  handleMenuClick = ({ key }) => {
+    if (key === 'logout') {
+      this.props.dispatch({
+        type: 'login/logout',
+      });
+    }
+  }
   toggle = () => {
     const { collapsed } = this.props;
     this.props.dispatch({
@@ -70,7 +85,7 @@ export default class GlobalHeader extends PureComponent {
       currentUser, collapsed, fetchingNotices,
     } = this.props;
     const menu = (
-      <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
+      <Menu className={styles.menu} selectedKeys={[]} onClick={this.handleMenuClick}>
         <Menu.Item disabled><Icon type="user" />个人中心</Menu.Item>
         <Menu.Item disabled><Icon type="setting" />设置</Menu.Item>
         <Menu.Divider />
