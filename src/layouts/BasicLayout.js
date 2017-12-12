@@ -86,6 +86,7 @@ class BasicLayout extends React.PureComponent {
           collapsed={collapsed}
           navData={navData}
           location={location}
+          dispatch={dispatch}
         />
         <Layout>
           <GlobalHeader
