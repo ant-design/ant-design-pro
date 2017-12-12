@@ -117,7 +117,8 @@ class TagCloud extends PureComponent {
         this.node.innerHTML = '';
       }
 
-      // Execute the word cloud layout function and call G2 to draw the result in the callback function
+      // Execute the word cloud layout function and call G2
+      // to draw the result in the callback function
       imageCloud.exec((texts) => {
         const chart = new G2.Chart({
           container: this.node,
