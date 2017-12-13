@@ -1,5 +1,7 @@
 ---
-title: Trend
+title: 
+  en-US: Trend
+  zh-CN: Trend
 subtitle: 趋势标记
 cols: 1
 order: 14
@@ -16,4 +18,4 @@ order: 14
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
 | colorful | 是否彩色标记 | Boolean | true |
-| flag | 上升下降标识：`up\|down` | string | - |
+| flag | 上升下降标识：`up|down` | string | - |

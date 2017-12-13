@@ -31,7 +31,7 @@ const radarOriginData = [
     contribute: 5,
     hot: 7,
   },
-]
+];
 const radarData = [];
 const radarTitleMap = {
   ref: '引用',

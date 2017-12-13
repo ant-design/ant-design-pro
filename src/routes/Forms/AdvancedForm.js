@@ -42,6 +42,22 @@ const tableData = [{
 }];
 
 class AdvancedForm extends PureComponent {
+  state = {
+    width: '100%',
+  };
+  componentDidMount() {
+    window.addEventListener('resize', this.resizeFooterToolbar);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeFooterToolbar);
+  }
+  resizeFooterToolbar = () => {
+    const sider = document.querySelectorAll('.ant-layout-sider')[0];
+    const width = `calc(100% - ${sider.style.width})`;
+    if (this.state.width !== width) {
+      this.setState({ width });
+    }
+  }
   render() {
     const { form, dispatch, submitting } = this.props;
     const { getFieldDecorator, validateFieldsAndScroll, getFieldsError } = form;
@@ -257,7 +273,7 @@ class AdvancedForm extends PureComponent {
             initialValue: tableData,
           })(<TableForm />)}
         </Card>
-        <FooterToolbar>
+        <FooterToolbar style={{ width: this.state.width }}>
           {getErrorInfo()}
           <Button type="primary" onClick={validate} loading={submitting}>
             提交

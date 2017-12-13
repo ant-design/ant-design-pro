@@ -7,7 +7,6 @@ title: 全局搜索
 
 ````jsx
 import HeaderSearch from 'ant-design-pro/lib/HeaderSearch';
-import { Icon } from 'antd';
 
 ReactDOM.render(
   <div

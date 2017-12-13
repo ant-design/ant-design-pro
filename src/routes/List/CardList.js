@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Card, Button, Icon, List } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import Ellipsis from '../../components/Ellipsis';
 
 import styles from './CardList.less';
 
@@ -25,7 +26,7 @@ export default class CardList extends PureComponent {
     const content = (
       <div className={styles.pageHeaderContent}>
         <p>
-          段落示意：蚂蚁金服务设计平台 design.alipay.com，用最小的工作量，无缝接入蚂蚁金服生态，
+          段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，
           提供跨越设计与开发的体验解决方案。
         </p>
         <div className={styles.contentLink}>
@@ -67,9 +68,7 @@ export default class CardList extends PureComponent {
                     avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
                     title={<a href="#">{item.title}</a>}
                     description={(
-                      <p className={styles.cardDescription}>
-                        <span>{item.description}</span>
-                      </p>
+                      <Ellipsis className={styles.item} lines={3}>{item.description}</Ellipsis>
                     )}
                   />
                 </Card>

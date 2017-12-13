@@ -1,5 +1,8 @@
 /* eslint-disable import/first */
-import '../src/polyfill';
+global.requestAnimationFrame =
+  global.requestAnimationFrame || function requestAnimationFrame(callback) {
+    setTimeout(callback, 0);
+  };
 import { jsdom } from 'jsdom';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

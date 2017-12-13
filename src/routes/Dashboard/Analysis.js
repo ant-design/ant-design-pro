@@ -27,16 +27,15 @@ for (let i = 0; i < 7; i += 1) {
 }))
 export default class Analysis extends Component {
   state = {
-    loading: true,
     salesType: 'all',
     currentTabKey: '',
-    rangePickerValue: [],
+    rangePickerValue: getTimeDistance('year'),
   }
 
   componentDidMount() {
     this.props.dispatch({
       type: 'chart/fetch',
-    }).then(() => this.setState({ loading: false }));
+    });
   }
 
   componentWillUnmount() {
@@ -90,7 +89,7 @@ export default class Analysis extends Component {
   }
 
   render() {
-    const { rangePickerValue, salesType, currentTabKey, loading } = this.state;
+    const { rangePickerValue, salesType, currentTabKey } = this.state;
     const { chart } = this.props;
     const {
       visitData,
@@ -102,6 +101,7 @@ export default class Analysis extends Component {
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
+      loading,
     } = chart;
 
     const salesPieData = salesType === 'all' ?
@@ -177,7 +177,7 @@ export default class Analysis extends Component {
             <span style={{ marginRight: 4 }}>{text}%</span>
           </Trend>
         ),
-        className: styles.alignRight,
+        align: 'right',
       },
     ];
 
@@ -328,7 +328,7 @@ export default class Analysis extends Component {
                 </Row>
               </TabPane>
               <TabPane tab="访问量" key="views">
-                <Row gutter={72}>
+                <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesBar}>
                       <Bar
@@ -424,6 +424,7 @@ export default class Analysis extends Component {
               className={styles.salesCard}
               bordered={false}
               title="销售额类别占比"
+              bodyStyle={{ padding: 24 }}
               extra={(
                 <div className={styles.salesCardExtra}>
                   {iconGroup}
@@ -436,20 +437,18 @@ export default class Analysis extends Component {
                   </div>
                 </div>
               )}
-              style={{ marginTop: 24 }}
+              style={{ marginTop: 24, minHeight: 509 }}
             >
               <h4 style={{ marginTop: 8, marginBottom: 32 }}>销售额</h4>
-              <div style={{ marginBottom: 57 }}>
-                <Pie
-                  hasLegend
-                  subTitle="销售额"
-                  total={yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))}
-                  data={salesPieData}
-                  valueFormat={val => yuan(val)}
-                  height={240}
-                  lineWidth={4}
-                />
-              </div>
+              <Pie
+                hasLegend
+                subTitle="销售额"
+                total={yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))}
+                data={salesPieData}
+                valueFormat={val => yuan(val)}
+                height={248}
+                lineWidth={4}
+              />
             </Card>
           </Col>
         </Row>

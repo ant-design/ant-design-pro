@@ -3,6 +3,8 @@ import G2 from 'g2';
 import { Divider } from 'antd';
 import classNames from 'classnames';
 import ReactFitText from 'react-fittext';
+import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import equal from '../equal';
 import styles from './index.less';
 
@@ -10,10 +12,13 @@ import styles from './index.less';
 class Pie extends Component {
   state = {
     legendData: [],
+    legendBlock: true,
   };
 
   componentDidMount() {
-    this.renderChart(this.props.data);
+    this.renderChart();
+    this.resize();
+    window.addEventListener('resize', this.resize);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -23,13 +28,44 @@ class Pie extends Component {
   }
 
   componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
     if (this.chart) {
       this.chart.destroy();
+    }
+    this.resize.cancel();
+  }
+
+  @Bind()
+  @Debounce(300)
+  resize() {
+    const { hasLegend } = this.props;
+    if (!hasLegend || !this.root) {
+      window.removeEventListener('resize', this.resize);
+      return;
+    }
+    if (this.root.parentNode.clientWidth <= 380) {
+      if (!this.state.legendBlock) {
+        this.setState({
+          legendBlock: true,
+        }, () => {
+          this.renderChart();
+        });
+      }
+    } else if (this.state.legendBlock) {
+      this.setState({
+        legendBlock: false,
+      }, () => {
+        this.renderChart();
+      });
     }
   }
 
   handleRef = (n) => {
     this.node = n;
+  }
+
+  handleRoot = (n) => {
+    this.root = n;
   }
 
   handleLegendClick = (item, i) => {
@@ -50,7 +86,9 @@ class Pie extends Component {
     });
   }
 
-  renderChart(data) {
+  renderChart(d) {
+    let data = d || this.props.data;
+
     const {
       height = 0,
       hasLegend,
@@ -167,13 +205,14 @@ class Pie extends Component {
 
   render() {
     const { valueFormat, subTitle, total, hasLegend, className, style } = this.props;
-    const { legendData } = this.state;
+    const { legendData, legendBlock } = this.state;
     const pieClassName = classNames(styles.pie, className, {
       [styles.hasLegend]: !!hasLegend,
+      [styles.legendBlock]: legendBlock,
     });
 
     return (
-      <div className={pieClassName} style={style}>
+      <div ref={this.handleRoot} className={pieClassName} style={style}>
         <ReactFitText maxFontSize={25}>
           <div className={styles.chart}>
             <div ref={this.handleRef} style={{ fontSize: 0 }} />
@@ -183,7 +222,7 @@ class Pie extends Component {
                   {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
                   {
                     // eslint-disable-next-line
-                    total && <p className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />
+                    total && <div className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />
                   }
                 </div>
               )

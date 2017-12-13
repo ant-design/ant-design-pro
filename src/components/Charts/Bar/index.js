@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import G2 from 'g2';
 import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import equal from '../equal';
 import styles from '../index.less';
 
@@ -26,10 +27,12 @@ class Bar extends PureComponent {
     if (this.chart) {
       this.chart.destroy();
     }
+    this.resize.cancel();
   }
 
+  @Bind()
   @Debounce(200)
-  resize = () => {
+  resize() {
     if (!this.node) {
       return;
     }

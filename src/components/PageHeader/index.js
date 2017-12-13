@@ -6,6 +6,25 @@ import styles from './index.less';
 
 const { TabPane } = Tabs;
 
+function getBreadcrumb(breadcrumbNameMap, url) {
+  if (breadcrumbNameMap[url]) {
+    return breadcrumbNameMap[url];
+  }
+  const urlWithoutSplash = url.replace(/\/$/, '');
+  if (breadcrumbNameMap[urlWithoutSplash]) {
+    return breadcrumbNameMap[urlWithoutSplash];
+  }
+  let breadcrumb = '';
+  Object.keys(breadcrumbNameMap).forEach((item) => {
+    const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
+    const itemRegExp = new RegExp(itemRegExpStr);
+    if (itemRegExp.test(url)) {
+      breadcrumb = breadcrumbNameMap[item];
+    }
+  });
+  return breadcrumb;
+}
+
 export default class PageHeader extends PureComponent {
   static contextTypes = {
     routes: PropTypes.array,
@@ -57,11 +76,15 @@ export default class PageHeader extends PureComponent {
       const pathSnippets = location.pathname.split('/').filter(i => i);
       const extraBreadcrumbItems = pathSnippets.map((_, index) => {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+        const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
+        const isLinkable = (index !== pathSnippets.length - 1) && currentBreadcrumb.component;
         return (
           <Breadcrumb.Item key={url}>
-            {createElement(index === pathSnippets.length - 1 ? 'span' : linkElement, {
-              [linkElement === 'a' ? 'href' : 'to']: url,
-            }, breadcrumbNameMap[url] || breadcrumbNameMap[url.replace('/', '')] || url)}
+            {createElement(
+              isLinkable ? linkElement : 'span',
+              { [linkElement === 'a' ? 'href' : 'to']: url },
+              currentBreadcrumb.name || url,
+            )}
           </Breadcrumb.Item>
         );
       });
@@ -86,7 +109,7 @@ export default class PageHeader extends PureComponent {
                 {item.href ? (
                   createElement(linkElement, {
                     [linkElement === 'a' ? 'href' : 'to']: item.href,
-                  }, '首页')
+                  }, item.title)
                 ) : item.title}
               </Breadcrumb.Item>)
             )

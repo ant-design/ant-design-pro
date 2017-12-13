@@ -41,31 +41,31 @@ const members = [
   {
     id: 'members-1',
     title: '科学搬砖组',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     link: '',
   },
   {
     id: 'members-2',
     title: '程序员日常',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png',
     link: '',
   },
   {
     id: 'members-3',
     title: '设计天团',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png',
     link: '',
   },
   {
     id: 'members-4',
     title: '中二少女团',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png',
     link: '',
   },
   {
     id: 'members-5',
     title: '骗你学计算机',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png',
     link: '',
   },
 ];
@@ -139,11 +139,11 @@ export default class Workplace extends PureComponent {
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
         <div className={styles.avatar}>
-          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/lctvVCLfRpYCkYxAsiVQ.png" />
+          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
         </div>
         <div className={styles.content}>
-          <p className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</p>
-          <p>交互专家 | 蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</p>
+          <div className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</div>
+          <div>交互专家 | 蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</div>
         </div>
       </div>
     );
