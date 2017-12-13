@@ -29,7 +29,7 @@ export default class Analysis extends Component {
   state = {
     salesType: 'all',
     currentTabKey: '',
-    rangePickerValue: [],
+    rangePickerValue: getTimeDistance('year'),
   }
 
   componentDidMount() {
