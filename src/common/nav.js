@@ -90,8 +90,8 @@ export const getNavData = app => [
             component: dynamicWrapper(app, ['list'], () => import('../routes/List/CardList')),
           },
           {
-            path: 'search',
             name: '搜索列表',
+            path: 'search',
             component: dynamicWrapper(app, [], () => import('../routes/List/List')),
             children: [{
               name: '搜索列表（项目）',
