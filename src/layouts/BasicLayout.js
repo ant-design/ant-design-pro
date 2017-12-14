@@ -38,6 +38,7 @@ class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
+    routeData: PropTypes.array,
   }
   getChildContext() {
     const { location, navData, getRouteData } = this.props;
@@ -52,7 +53,7 @@ class BasicLayout extends React.PureComponent {
         component: item.component,
       };
     });
-    return { location, breadcrumbNameMap };
+    return { location, breadcrumbNameMap, routeData };
   }
   getPageTitle() {
     const { location, getRouteData } = this.props;
