@@ -66,7 +66,6 @@ class BasicLayout extends React.PureComponent {
       <Layout>
         <SiderMenu
           collapsed={collapsed}
-          navData={navData}
           location={location}
           dispatch={dispatch}
         />

@@ -3,7 +3,7 @@ import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 import logo from '../../assets/logo.svg';
 import styles from './index.less';
-import { getMenuData } from '../common/menuConfig';
+import { getMenuData } from '../../common/menuConfig';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
