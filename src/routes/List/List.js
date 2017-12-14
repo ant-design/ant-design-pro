@@ -4,6 +4,7 @@ import { routerRedux, Route, Switch } from 'dva/router';
 import { connect } from 'dva';
 import { Input } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import { getRoutes } from '../../utils/utils';
 
 @connect()
 export default class SearchList extends Component {
@@ -54,7 +55,7 @@ export default class SearchList extends Component {
 
     const { match } = this.props;
     const { routeData } = this.context;
-    const routes = routeData.filter(item => item.path === match.path)[0].children;
+    const routes = getRoutes(match.path, routeData);
 
     return (
       <PageHeaderLayout

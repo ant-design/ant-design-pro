@@ -3,6 +3,7 @@ import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 import logo from '../../assets/logo.svg';
 import styles from './index.less';
+import { getMenuData } from '../common/menuConfig';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -10,8 +11,7 @@ const { SubMenu } = Menu;
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
-    // 把一级 Layout 的 children 作为菜单项
-    this.menus = props.navData.reduce((arr, current) => arr.concat(current.children), []);
+    this.menus = getMenuData();
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
@@ -38,7 +38,7 @@ export default class SiderMenu extends PureComponent {
     }
     return keys;
   }
-  getNavMenuItems(menusData, parentPath = '') {
+  getNavMenuItems(menusData) {
     if (!menusData) {
       return [];
     }
@@ -47,10 +47,10 @@ export default class SiderMenu extends PureComponent {
         return null;
       }
       let itemPath;
-      if (item.path.indexOf('http') === 0) {
+      if (item.path && item.path.indexOf('http') === 0) {
         itemPath = item.path;
       } else {
-        itemPath = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/');
+        itemPath = `${item.path || ''}`.replace(/\/+/g, '/');
       }
       if (item.children && item.children.some(child => child.name)) {
         return (
@@ -65,7 +65,7 @@ export default class SiderMenu extends PureComponent {
             }
             key={item.key || item.path}
           >
-            {this.getNavMenuItems(item.children, itemPath)}
+            {this.getNavMenuItems(item.children)}
           </SubMenu>
         );
       }

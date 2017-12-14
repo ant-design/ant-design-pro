@@ -6,6 +6,7 @@ import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
+import { getRoutes } from '../utils/utils';
 
 const links = [{
   title: '帮助',
@@ -29,18 +30,16 @@ class UserLayout extends React.PureComponent {
     return { location };
   }
   getPageTitle() {
-    const { getRouteData, location } = this.props;
+    const { routerData, location } = this.props;
     const { pathname } = location;
     let title = 'Ant Design Pro';
-    getRouteData('UserLayout').forEach((item) => {
-      if (item.path === pathname) {
-        title = `${item.name} - Ant Design Pro`;
-      }
-    });
+    if (routerData[pathname] && routerData[pathname].name) {
+      title = `${routerData[pathname].name} - Ant Design Pro`;
+    }
     return title;
   }
   render() {
-    const { getRouteData } = this.props;
+    const { routerData, match } = this.props;
 
     return (
       <DocumentTitle title={this.getPageTitle()}>
@@ -55,13 +54,12 @@ class UserLayout extends React.PureComponent {
             <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
           </div>
           {
-            getRouteData('UserLayout').map(item =>
+            getRoutes(match.path, routerData).map(path =>
               (
                 <Route
-                  exact={item.exact}
-                  key={item.path}
-                  path={item.path}
-                  component={item.component}
+                  key={`${match.path}${path}`}
+                  path={`${match.path}${path}`}
+                  component={routerData[`${match.path}${path}`].component}
                 />
               )
             )
