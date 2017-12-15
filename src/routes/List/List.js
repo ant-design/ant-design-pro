@@ -12,16 +12,16 @@ export default class SearchList extends Component {
   };
 
   handleTabChange = (key) => {
-    const { dispatch } = this.props;
+    const { dispatch, match } = this.props;
     switch (key) {
       case 'articles':
-        dispatch(routerRedux.push('/list/search/articles'));
+        dispatch(routerRedux.push(`${match.url}/articles`));
         break;
       case 'applications':
-        dispatch(routerRedux.push('/list/search/applications'));
+        dispatch(routerRedux.push(`${match.url}/applications`));
         break;
       case 'projects':
-        dispatch(routerRedux.push('/list/search/projects'));
+        dispatch(routerRedux.push(`${match.url}/projects`));
         break;
       default:
         break;
