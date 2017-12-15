@@ -15,13 +15,13 @@ export default class SearchList extends Component {
     const { dispatch, match } = this.props;
     switch (key) {
       case 'articles':
-        dispatch(routerRedux.push(`${match.url}/articles`));
+        dispatch(routerRedux.push(`${match.path}/articles`));
         break;
       case 'applications':
-        dispatch(routerRedux.push(`${match.url}/applications`));
+        dispatch(routerRedux.push(`${match.path}/applications`));
         break;
       case 'projects':
-        dispatch(routerRedux.push(`${match.url}/projects`));
+        dispatch(routerRedux.push(`${match.path}/projects`));
         break;
       default:
         break;
@@ -52,9 +52,9 @@ export default class SearchList extends Component {
       </div>
     );
 
-    const { routeData } = this.context;
-    const routes = routeData.filter(item => item.path === match.url)[0].children;
     const { match } = this.props;
+    const { routeData } = this.context;
+    const routes = routeData.filter(item => item.path === match.path)[0].children;
 
     return (
       <PageHeaderLayout
@@ -69,7 +69,7 @@ export default class SearchList extends Component {
               (
                 <Route
                   key={item.path}
-                  path={`${match.url}/${item.path}`}
+                  path={`${match.path}/${item.path}`}
                   component={item.component}
                 />
               )
