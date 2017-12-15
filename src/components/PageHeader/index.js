@@ -14,7 +14,7 @@ function getBreadcrumb(breadcrumbNameMap, url) {
   if (breadcrumbNameMap[urlWithoutSplash]) {
     return breadcrumbNameMap[urlWithoutSplash];
   }
-  let breadcrumb = '';
+  let breadcrumb = {};
   Object.keys(breadcrumbNameMap).forEach((item) => {
     const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
     const itemRegExp = new RegExp(itemRegExpStr);
@@ -73,20 +73,20 @@ export default class PageHeader extends PureComponent {
         />
       );
     } else if (location && location.pathname && (!breadcrumbList)) {
-      const pathSnippets = Object.keys(breadcrumbNameMap).filter(item =>
-        location.pathname.indexOf(`${item}/`) === 0 || location.pathname === item);
-      const extraBreadcrumbItems = pathSnippets.map((item, index) => {
-        const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, item);
+      const pathSnippets = location.pathname.split('/').filter(i => i);
+      const extraBreadcrumbItems = pathSnippets.map((_, index) => {
+        const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+        const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
         const isLinkable = (index !== pathSnippets.length - 1) && currentBreadcrumb.component;
-        return (
-          <Breadcrumb.Item key={item}>
+        return currentBreadcrumb.name ? (
+          <Breadcrumb.Item key={url}>
             {createElement(
               isLinkable ? linkElement : 'span',
-              { [linkElement === 'a' ? 'href' : 'to']: item },
-              currentBreadcrumb.name || item,
+              { [linkElement === 'a' ? 'href' : 'to']: url },
+              currentBreadcrumb.name,
             )}
           </Breadcrumb.Item>
-        );
+        ) : null;
       });
       const breadcrumbItems = [(
         <Breadcrumb.Item key="home">
