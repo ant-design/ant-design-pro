@@ -53,7 +53,7 @@ export default class SearchList extends Component {
     );
 
     const { routeData } = this.context;
-    const routes = routeData.filter(item => item.path === '/list/search')[0].children;
+    const routes = routeData.filter(item => item.path === match.url)[0].children;
     const { match } = this.props;
 
     return (
