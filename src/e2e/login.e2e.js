@@ -8,8 +8,7 @@ describe('Login', () => {
   });
 
   it('should login with failure', async () => {
-    await page.wait(5000)
-      .type('#username', 'mockuser')
+    await page.type('#userName', 'mockuser')
       .type('#password', 'wrong_password')
       .click('button[type="submit"]')
       .wait('.ant-alert-error') // should display error
@@ -17,8 +16,7 @@ describe('Login', () => {
   });
 
   it('should login successfully', async () => {
-    const text = await page.wait(5000)
-      .type('#username', 'admin')
+    const text = await page.type('#userName', 'admin')
       .type('#password', '888888')
       .click('button[type="submit"]')
       .wait('.ant-layout-sider h1') // should display error
