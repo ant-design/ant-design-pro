@@ -15,13 +15,13 @@ export default class SearchList extends Component {
     const { dispatch, match } = this.props;
     switch (key) {
       case 'articles':
-        dispatch(routerRedux.push(`${match.path}/articles`));
+        dispatch(routerRedux.push(`${match.url}/articles`));
         break;
       case 'applications':
-        dispatch(routerRedux.push(`${match.path}/applications`));
+        dispatch(routerRedux.push(`${match.url}/applications`));
         break;
       case 'projects':
-        dispatch(routerRedux.push(`${match.path}/projects`));
+        dispatch(routerRedux.push(`${match.url}/projects`));
         break;
       default:
         break;
