@@ -19,7 +19,7 @@
     "test:all": "node ./tests/run-tests.js"
   },
   "dependencies": {
-    "@antv/data-set": "^0.7.0",
+    "@antv/data-set": "^0.8.0",
     "antd": "^3.0.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.9.2",
