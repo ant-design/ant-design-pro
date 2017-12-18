@@ -32,7 +32,7 @@ export default class SearchList extends Component {
 
   fetchMore = () => {
     this.props.dispatch({
-      type: 'list/fetch',
+      type: 'list/appendFetch',
       payload: {
         count: pageSize,
       },
