@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Chart, Tooltip, Geom, Legend, Axis } from 'bizcharts';
 import DataSet from '@antv/data-set';
-import Slider from 'bizcharts-plugin-slier';
+import Slider from 'bizcharts-plugin-slider';
+import autoHeight from '../autoHeight';
 import styles from './index.less';
 
-class TimelineChart extends Component {
+@autoHeight()
+export default class TimelineChart extends React.Component {
   render() {
     const {
       title,
@@ -24,22 +26,33 @@ class TimelineChart extends Component {
       ],
     } = this.props;
 
+    data.sort((a, b) => a.x - b.x);
+
     let max;
     if (data[0] && data[0].y1 && data[0].y2) {
       max = Math.max(
-        data.sort((a, b) => b.y1 - a.y1)[0].y1,
-        data.sort((a, b) => b.y2 - a.y2)[0].y2
+        [...data].sort((a, b) => b.y1 - a.y1)[0].y1,
+        [...data].sort((a, b) => b.y2 - a.y2)[0].y2
       );
     }
+
     const ds = new DataSet({
       state: {
         start: data[0].x,
         end: data[data.length - 1].x,
       },
     });
+
     const dv = ds.createView();
     dv
       .source(data)
+      .transform({
+        type: 'filter',
+        callback: (obj) => {
+          const date = obj.x;
+          return date <= ds.state.end && date >= ds.state.start;
+        },
+      })
       .transform({
         type: 'map',
         callback(row) {
@@ -47,13 +60,6 @@ class TimelineChart extends Component {
           newRow[titleMap.y1] = row.y1;
           newRow[titleMap.y2] = row.y2;
           return newRow;
-        },
-      })
-      .transform({
-        type: 'filter',
-        callback: (obj) => {
-          const date = obj.x;
-          return date <= ds.state.end && date >= ds.state.start;
         },
       })
       .transform({
@@ -84,9 +90,9 @@ class TimelineChart extends Component {
         width="auto"
         height={26}
         xAxis="x"
-        yAxis="value"
+        yAxis="y1"
         scales={{ x: timeScale }}
-        data={dv}
+        data={data}
         start={ds.state.start}
         end={ds.state.end}
         backgroundChart={{ type: 'line' }}
@@ -113,5 +119,3 @@ class TimelineChart extends Component {
     );
   }
 }
-
-export default TimelineChart;
