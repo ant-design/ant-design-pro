@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { routerRedux, Route, Switch } from 'dva/router';
+import { routerRedux, Route, Switch, Redirect } from 'dva/router';
 import { connect } from 'dva';
 import { Input } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -9,7 +9,7 @@ import { getRoutes } from '../../utils/utils';
 @connect()
 export default class SearchList extends Component {
   static contextTypes = {
-    routeData: PropTypes.array,
+    routerData: PropTypes.object,
   };
 
   handleTabChange = (key) => {
@@ -54,8 +54,8 @@ export default class SearchList extends Component {
     );
 
     const { match } = this.props;
-    const { routeData } = this.context;
-    const routes = getRoutes(match.path, routeData);
+    const { routerData } = this.context;
+    const routes = getRoutes(match.path, routerData);
 
     return (
       <PageHeaderLayout
@@ -66,16 +66,17 @@ export default class SearchList extends Component {
       >
         <Switch>
           {
-            routes.map(item =>
+            routes.map(path =>
               (
                 <Route
-                  key={item.path}
-                  path={`${match.path}/${item.path}`}
-                  component={item.component}
+                  key={`${match.path}${path}`}
+                  path={`${match.path}${path}`}
+                  component={routerData[`${match.path}${path}`].component}
                 />
               )
             )
           }
+          <Redirect exact from={`${match.path}`} to={`${match.path}${routes[0]}`} />
         </Switch>
       </PageHeaderLayout>
     );

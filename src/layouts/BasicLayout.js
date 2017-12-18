@@ -39,14 +39,14 @@ class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
-    routeData: PropTypes.array,
+    routerData: PropTypes.object,
   }
   getChildContext() {
     const { location, routerData } = this.props;
     return {
       location,
       breadcrumbNameMap: routerData,
-      routeData: routerData,
+      routerData,
     };
   }
   getPageTitle() {
