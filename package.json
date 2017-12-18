@@ -24,6 +24,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.9.2",
     "bizcharts": "^3.0.3",
+    "bizcharts-plugin-slier": "^1.0.0",
     "classnames": "^2.2.5",
     "core-js": "^2.5.1",
     "dva": "^2.1.0",
