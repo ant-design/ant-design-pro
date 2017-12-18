@@ -4,7 +4,7 @@ export interface PieProps {
   color?: string;
   height: number;
   hasLegend?: boolean;
-  margin?: [number, number, number, number];
+  padding?: [number, number, number, number];
   percent?: number;
   data?: Array<{
     x: string;

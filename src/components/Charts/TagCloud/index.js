@@ -4,6 +4,7 @@ import DataSet from '@antv/data-set';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import classNames from 'classnames';
+import autoHeight from '../autoHeight';
 import styles from './index.less';
 
 /* eslint no-underscore-dangle: 0 */
@@ -11,6 +12,7 @@ import styles from './index.less';
 
 const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
 
+@autoHeight()
 class TagCloud extends Component {
   state = {
     dv: null,
