@@ -50,7 +50,7 @@ export default class Analysis extends Component {
     salesType: 'all',
     currentTabKey: '',
     rangePickerValue: getTimeDistance('year'),
-  }
+  };
 
   componentDidMount() {
     this.props.dispatch({
