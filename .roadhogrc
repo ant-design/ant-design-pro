@@ -6,6 +6,7 @@
     "transform-class-properties",
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
   ],
+  "publicPath": "./",
   "env": {
     "development": {
       "extraBabelPlugins": [
