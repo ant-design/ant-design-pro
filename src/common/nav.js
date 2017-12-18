@@ -90,19 +90,22 @@ export const getNavData = app => [
             component: dynamicWrapper(app, ['list'], () => import('../routes/List/CardList')),
           },
           {
-            name: '搜索列表（项目）',
-            path: 'cover-card-list',
-            component: dynamicWrapper(app, ['list'], () => import('../routes/List/CoverCardList')),
-          },
-          {
-            name: '搜索列表（应用）',
-            path: 'filter-card-list',
-            component: dynamicWrapper(app, ['list'], () => import('../routes/List/FilterCardList')),
-          },
-          {
-            name: '搜索列表（文章）',
+            name: '搜索列表',
             path: 'search',
-            component: dynamicWrapper(app, ['list'], () => import('../routes/List/SearchList')),
+            component: dynamicWrapper(app, [], () => import('../routes/List/List')),
+            children: [{
+              name: '搜索列表（项目）',
+              path: 'projects',
+              component: dynamicWrapper(app, ['list'], () => import('../routes/List/Projects')),
+            }, {
+              name: '搜索列表（应用）',
+              path: 'applications',
+              component: dynamicWrapper(app, ['list'], () => import('../routes/List/Applications')),
+            }, {
+              name: '搜索列表（文章）',
+              path: 'articles',
+              component: dynamicWrapper(app, ['list'], () => import('../routes/List/Articles')),
+            }],
           },
         ],
       },

@@ -38,6 +38,7 @@ class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
+    routeData: PropTypes.array,
   }
   getChildContext() {
     const { location, navData, getRouteData } = this.props;
@@ -52,7 +53,7 @@ class BasicLayout extends React.PureComponent {
         component: item.component,
       };
     });
-    return { location, breadcrumbNameMap };
+    return { location, breadcrumbNameMap, routeData };
   }
   getPageTitle() {
     const { location, getRouteData } = this.props;
@@ -68,8 +69,10 @@ class BasicLayout extends React.PureComponent {
   getMenuData = (data, parentPath) => {
     let arr = [];
     data.forEach((item) => {
-      if (item.children) {
+      if (item.name) {
         arr.push({ path: `${parentPath}/${item.path}`, name: item.name });
+      }
+      if (item.children) {
         arr = arr.concat(this.getMenuData(item.children, `${parentPath}/${item.path}`));
       }
     });
