@@ -101,7 +101,7 @@ class TagCloud extends Component {
         imageMask,
         font: 'Verdana',
         size: [w, h], // 宽高设置最好根据 imageMask 做调整
-        padding: 0,
+        padding: 5,
         timeInterval: 5000, // max execute time
         rotate() {
           return 0;
@@ -132,7 +132,7 @@ class TagCloud extends Component {
       >
         {dv && (
           <Chart width={w} height={h} data={dv} padding={0}>
-            <Coord />
+            <Coord reflect="y" />
             <Geom type="point" position="x*y" color="text" shape="cloud" />
           </Chart>
         )}
