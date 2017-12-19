@@ -1,8 +1,9 @@
 @import "~antd/lib/style/themes/default.less";
+
 .header {
   padding: 0 12px 0 0;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
   position: relative;
 }
 
@@ -55,7 +56,7 @@ i.trigger {
     display: inline-block;
     transition: all 0.3s;
     height: 100%;
-    >i {
+    > i {
       font-size: 16px;
       vertical-align: middle;
     }
@@ -75,7 +76,7 @@ i.trigger {
     .avatar {
       margin: 20px 8px 20px 0;
       color: @primary-color;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, .85);
       vertical-align: middle;
     }
   }
@@ -86,22 +87,25 @@ i.trigger {
     :global(.ant-divider-vertical) {
       vertical-align: unset;
     }
-  }
-  i.trigger {
-    padding: 0 12px;
-  }
-  .logo {
-    padding-right: 12px;
-    position: relative;
-  }
-  .right {
-    position: absolute;
-    right: 12px;
-    top: 0;
-    background: #fff;
-    .account {
-      .avatar {
-        margin-right: 0;
+    .name{
+      display: none;
+    }
+    i.trigger {
+      padding: 0 12px;
+    }
+    .logo {
+      padding-right: 12px;
+      position: relative;
+    }
+    .right {
+      position: absolute;
+      right: 12px;
+      top: 0;
+      background: #fff;
+      .account {
+        .avatar {
+          margin-right: 0;
+        }
       }
     }
   }
