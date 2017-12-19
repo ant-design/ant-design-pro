@@ -82,6 +82,7 @@ export default class SiderMenu extends PureComponent {
                 to={itemPath}
                 target={item.target}
                 replace={itemPath === this.props.location.pathname}
+                onClick={this.props.isMobile && (() => { this.props.onCollapse(true); })}
               >
                 {icon}<span>{item.name}</span>
               </Link>
@@ -101,7 +102,7 @@ export default class SiderMenu extends PureComponent {
     });
   }
   render() {
-    const { collapsed } = this.props;
+    const { collapsed, onCollapse } = this.props;
 
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed ? {} : {
@@ -113,7 +114,7 @@ export default class SiderMenu extends PureComponent {
         collapsible
         collapsed={collapsed}
         breakpoint="md"
-        onCollapse={this.onCollapse}
+        onCollapse={onCollapse}
         width={256}
         className={styles.sider}
       >
