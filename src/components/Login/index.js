@@ -59,11 +59,11 @@ class Login extends Component {
       },
     };
   }
-  onSwitch = (key) => {
+  onSwitch = (type) => {
     this.setState({
-      type: key,
+      type,
     });
-    this.props.onTabChange(key);
+    this.props.onTabChange(type);
   }
   handleSubmit = (e) => {
     e.preventDefault();
