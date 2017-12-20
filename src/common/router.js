@@ -16,6 +16,8 @@ export const getRouterData = (app) => {
     '/dashboard/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
       name: '分析页',
+      // hideInMenu: true,                    如果不需要在 menu 中展示
+      // hideInBreadcrumb: true,              如果不需要在 PageHeader Breadcrumb 中展示
     },
     '/dashboard/monitor': {
       component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
@@ -49,7 +51,6 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['list'], () => import('../routes/List/CardList')),
       name: '卡片列表',
     },
-
     '/list/search': {
       component: dynamicWrapper(app, ['list'], () => import('../routes/List/List')),
       name: '搜索列表',
@@ -110,5 +111,9 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
       name: '注册结果',
     },
+    // '/user/:id': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
+    //   name: '带参数路由',
+    // },
   };
 };

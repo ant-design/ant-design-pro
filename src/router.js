@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'dva/router';
 import { LocaleProvider, Spin } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import dynamic from 'dva/dynamic';
-import { getRouterData } from './common/routerConfig';
+import { getRouterData } from './common/router';
 
 import styles from './index.less';
 

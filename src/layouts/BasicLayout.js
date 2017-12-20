@@ -81,12 +81,13 @@ class BasicLayout extends React.PureComponent {
             <div style={{ minHeight: 'calc(100vh - 260px)' }}>
               <Switch>
                 {
-                  getRoutes(match.path, routerData).map(path =>
+                  getRoutes(match.path, routerData).map(item =>
                     (
                       <Route
-                        key={`${match.path}${path}`}
-                        path={`${match.path}${path}`}
-                        component={routerData[`${match.path}${path}`].component}
+                        key={item.key}
+                        path={item.path}
+                        component={item.component}
+                        exact={item.exact}
                       />
                     )
                   )

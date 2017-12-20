@@ -66,12 +66,13 @@ export default class SearchList extends Component {
       >
         <Switch>
           {
-            routes.map(path =>
+            routes.map(item =>
               (
                 <Route
-                  key={`${match.path}${path}`}
-                  path={`${match.path}${path}`}
-                  component={routerData[`${match.path}${path}`].component}
+                  key={item.key}
+                  path={item.path}
+                  component={item.component}
+                  exact={item.exact}
                 />
               )
             )

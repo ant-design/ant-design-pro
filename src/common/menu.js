@@ -15,23 +15,24 @@
  *      path: '/dashboard/workplace',
  *    }]
  *  }]
- * - 因为 routerConfig 中已经包含了部分 menu 所需信息，为了避免重复维护，可以利用 util 函数结合
+ * - 因为 router 配置中已经包含了部分 menu 所需信息，为了避免重复维护，可以利用 util 函数结合
  *   subMenu 信息，来生成总的 menu 信息，一般情况下你只需要像下面这样给出 subMenu 信息即可
 */
 
-import { getRouterData } from './routerConfig';
+import { getRouterData } from './router';
 import { getMenuItem } from '../utils/utils';
 
 const categoryMap = {
   dashboard: {
     name: 'dashboard',
     icon: 'dashboard',
+    // hideInMenu: true,
     // childMap: {                      如果 dashboard 下还有子菜单，可以通过嵌套 childMap 实现
     //   [childKey]: {                  childMap 数据格式与父级相同
     //     name: [childName],
     //     icon: [childIcon],
-    //   }
-    // }
+    //   },
+    // },
   },
   form: {
     name: '表单页',
@@ -44,8 +45,8 @@ const categoryMap = {
       search: {
         name: '搜索列表',
         icon: 'search',
-      }
-    }
+      },
+    },
   },
   profile: {
     name: '详情页',

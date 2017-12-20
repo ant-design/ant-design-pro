@@ -54,12 +54,13 @@ class UserLayout extends React.PureComponent {
             <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
           </div>
           {
-            getRoutes(match.path, routerData).map(path =>
+            getRoutes(match.path, routerData).map(item =>
               (
                 <Route
-                  key={`${match.path}${path}`}
-                  path={`${match.path}${path}`}
-                  component={routerData[`${match.path}${path}`].component}
+                  key={item.key}
+                  path={item.path}
+                  component={item.component}
+                  exact={item.exact}
                 />
               )
             )

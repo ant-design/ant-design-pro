@@ -3,7 +3,7 @@ import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 import logo from '../../assets/logo.svg';
 import styles from './index.less';
-import { getMenuData } from '../../common/menuConfig';
+import { getMenuData } from '../../common/menu';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -23,20 +23,46 @@ export default class SiderMenu extends PureComponent {
     });
   }
   getDefaultCollapsedSubMenus(props) {
-    const currentMenuSelectedKeys = [...this.getCurrentMenuSelectedKeys(props)];
-    currentMenuSelectedKeys.splice(-1, 1);
+    const { location: { pathname } } = props || this.props;
+    const snippets = pathname.split('/').slice(1, -1);
+    const currentPathSnippets = snippets.map((item, index) => {
+      const arr = snippets.filter((_, i) => i <= index);
+      return arr.join('/');
+    });
+    let currentMenuSelectedKeys = [];
+    currentPathSnippets.forEach((item) => {
+      currentMenuSelectedKeys = currentMenuSelectedKeys.concat(this.getSelectedMenuKeys(item));
+    });
     if (currentMenuSelectedKeys.length === 0) {
       return ['dashboard'];
     }
     return currentMenuSelectedKeys;
   }
-  getCurrentMenuSelectedKeys(props) {
-    const { location: { pathname } } = props || this.props;
-    const keys = pathname.split('/').slice(1);
-    if (keys.length === 1 && keys[0] === '') {
-      return [this.menus[0].key];
-    }
+  getFlatMenuKeys(menus) {
+    let keys = [];
+    menus.forEach((item) => {
+      if (item.children) {
+        keys.push(item.key);
+        keys = keys.concat(this.getFlatMenuKeys(item.children));
+      } else {
+        keys.push(item.path);
+      }
+    });
     return keys;
+  }
+  getSelectedMenuKeys = (path) => {
+    const flatMenuKeys = this.getFlatMenuKeys(this.menus);
+    if (flatMenuKeys.indexOf(path) > -1) {
+      return [path];
+    }
+    if (flatMenuKeys.indexOf(path.replace(/\/$/, '')) > -1) {
+      return [path.replace(/\/$/, '')];
+    }
+    return flatMenuKeys.filter((item) => {
+      const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
+      const itemRegExp = new RegExp(itemRegExpStr);
+      return itemRegExp.test(path);
+    });
   }
   getNavMenuItems(menusData) {
     if (!menusData) {
@@ -53,42 +79,44 @@ export default class SiderMenu extends PureComponent {
         itemPath = `${item.path || ''}`.replace(/\/+/g, '/');
       }
       if (item.children && item.children.some(child => child.name)) {
-        return (
-          <SubMenu
-            title={
-              item.icon ? (
-                <span>
-                  <Icon type={item.icon} />
-                  <span>{item.name}</span>
-                </span>
-              ) : item.name
-            }
-            key={item.key || item.path}
-          >
-            {this.getNavMenuItems(item.children)}
-          </SubMenu>
-        );
+        return item.hideInMenu ? null :
+          (
+            <SubMenu
+              title={
+                item.icon ? (
+                  <span>
+                    <Icon type={item.icon} />
+                    <span>{item.name}</span>
+                  </span>
+                ) : item.name
+              }
+              key={item.key || item.path}
+            >
+              {this.getNavMenuItems(item.children)}
+            </SubMenu>
+          );
       }
       const icon = item.icon && <Icon type={item.icon} />;
-      return (
-        <Menu.Item key={item.key || item.path}>
-          {
-            /^https?:\/\//.test(itemPath) ? (
-              <a href={itemPath} target={item.target}>
-                {icon}<span>{item.name}</span>
-              </a>
-            ) : (
-              <Link
-                to={itemPath}
-                target={item.target}
-                replace={itemPath === this.props.location.pathname}
-              >
-                {icon}<span>{item.name}</span>
-              </Link>
-            )
-          }
-        </Menu.Item>
-      );
+      return item.hideInMenu ? null :
+        (
+          <Menu.Item key={item.key || item.path}>
+            {
+              /^https?:\/\//.test(itemPath) ? (
+                <a href={itemPath} target={item.target}>
+                  {icon}<span>{item.name}</span>
+                </a>
+              ) : (
+                <Link
+                  to={itemPath}
+                  target={item.target}
+                  replace={itemPath === this.props.location.pathname}
+                >
+                  {icon}<span>{item.name}</span>
+                </Link>
+              )
+            }
+          </Menu.Item>
+        );
     });
   }
   handleOpenChange = (openKeys) => {
@@ -101,8 +129,7 @@ export default class SiderMenu extends PureComponent {
     });
   }
   render() {
-    const { collapsed } = this.props;
-
+    const { collapsed, location: { pathname } } = this.props;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed ? {} : {
       openKeys: this.state.openKeys,
@@ -128,7 +155,7 @@ export default class SiderMenu extends PureComponent {
           mode="inline"
           {...menuProps}
           onOpenChange={this.handleOpenChange}
-          selectedKeys={this.getCurrentMenuSelectedKeys()}
+          selectedKeys={this.getSelectedMenuKeys(pathname)}
           style={{ padding: '16px 0', width: '100%' }}
         >
           {this.getNavMenuItems(this.menus)}
