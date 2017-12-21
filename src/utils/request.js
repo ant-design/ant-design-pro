@@ -1,7 +1,7 @@
 import fetch from 'dva/fetch';
 import { notification } from 'antd';
 
-const errorMessage = {
+const codeMessage = {
   200: '服务器成功返回请求的数据',
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）',
@@ -13,16 +13,16 @@ const errorMessage = {
   406: '请求的格式不可得。',
   410: '请求的资源被永久删除，且不会再得到的。',
   422: '当创建一个对象时，发生一个验证错误。',
-  500: '服务器发生错误,请检查服务器',
+  500: '服务器发生错误，请检查服务器',
   502: '网关错误',
-  503: '服务不可用,服务器暂时过载或维护',
+  503: '服务不可用，服务器暂时过载或维护',
   504: '网关超时',
 };
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-  const errortext = errorMessage[response.status] || response.statusText;
+  const errortext = codeMessage[response.status] || response.statusText;
   notification.error({
     message: `请求错误 ${response.status}: ${response.url}`,
     description: errortext,
