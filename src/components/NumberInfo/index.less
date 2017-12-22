@@ -1,12 +1,5 @@
 @import "~antd/lib/style/themes/default.less";
 
-.textOverflow() {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-all;
-  white-space: nowrap;
-}
-
 .numberInfo {
   .suffix {
     color: @text-color;
@@ -25,12 +18,18 @@
     font-size: @font-size-base;
     height: 22px;
     line-height: 22px;
-    .textOverflow();
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
   }
   .numberInfoValue {
     margin-top: 4px;
     font-size: 0;
-    .textOverflow();
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
     & > span {
       color: @heading-color;
       display: inline-block;
