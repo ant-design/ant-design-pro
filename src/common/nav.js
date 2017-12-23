@@ -12,7 +12,7 @@ export const getNavData = app => [
   {
     component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     layout: 'BasicLayout',
-    name: '首页', // for breadcrumb
+    name: 'Home', // for breadcrumb
     path: '/',
     children: [
       {
@@ -21,34 +21,34 @@ export const getNavData = app => [
         path: 'dashboard',
         children: [
           {
-            name: '分析页',
+            name: 'Analyis',
             path: 'analysis',
             component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
           },
           {
-            name: '监控页',
+            name: 'Monitor',
             path: 'monitor',
             component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
           },
           {
-            name: '工作台',
+            name: 'Workplace',
             path: 'workplace',
             component: dynamicWrapper(app, ['project', 'activities', 'chart'], () => import('../routes/Dashboard/Workplace')),
           },
         ],
       },
       {
-        name: '表单页',
+        name: 'Form',
         path: 'form',
         icon: 'form',
         children: [
           {
-            name: '基础表单',
+            name: 'Basic Form',
             path: 'basic-form',
             component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
           },
           {
-            name: '分步表单',
+            name: 'Step-Form',
             path: 'step-form',
             component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm')),
             children: [
@@ -63,46 +63,46 @@ export const getNavData = app => [
             ],
           },
           {
-            name: '高级表单',
+            name: 'Advanced Form',
             path: 'advanced-form',
             component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
           },
         ],
       },
       {
-        name: '列表页',
+        name: 'List Page',
         path: 'list',
         icon: 'table',
         children: [
           {
-            name: '查询表格',
+            name: 'Query Form',
             path: 'table-list',
             component: dynamicWrapper(app, ['rule'], () => import('../routes/List/TableList')),
           },
           {
-            name: '标准列表',
+            name: 'Standard List',
             path: 'basic-list',
             component: dynamicWrapper(app, ['list'], () => import('../routes/List/BasicList')),
           },
           {
-            name: '卡片列表',
+            name: 'Card List',
             path: 'card-list',
             component: dynamicWrapper(app, ['list'], () => import('../routes/List/CardList')),
           },
           {
-            name: '搜索列表',
+            name: 'Search List',
             path: 'search',
             component: dynamicWrapper(app, [], () => import('../routes/List/List')),
             children: [{
-              name: '搜索列表（项目）',
+              name: 'Search List (projects)',
               path: 'projects',
               component: dynamicWrapper(app, ['list'], () => import('../routes/List/Projects')),
             }, {
-              name: '搜索列表（应用）',
+              name: 'Search List (applications)',
               path: 'applications',
               component: dynamicWrapper(app, ['list'], () => import('../routes/List/Applications')),
             }, {
-              name: '搜索列表（文章）',
+              name: 'Search List (articles)',
               path: 'articles',
               component: dynamicWrapper(app, ['list'], () => import('../routes/List/Articles')),
             }],
@@ -110,41 +110,41 @@ export const getNavData = app => [
         ],
       },
       {
-        name: '详情页',
+        name: 'Details Page',
         path: 'profile',
         icon: 'profile',
         children: [
           {
-            name: '基础详情页',
+            name: 'Basic Details Page',
             path: 'basic',
             component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/BasicProfile')),
           },
           {
-            name: '高级详情页',
+            name: 'Advanced Details Page',
             path: 'advanced',
             component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/AdvancedProfile')),
           },
         ],
       },
       {
-        name: '结果',
+        name: 'Result',
         path: 'result',
         icon: 'check-circle-o',
         children: [
           {
-            name: '成功',
+            name: 'Sucess',
             path: 'success',
             component: dynamicWrapper(app, [], () => import('../routes/Result/Success')),
           },
           {
-            name: '失败',
+            name: 'Fail',
             path: 'fail',
             component: dynamicWrapper(app, [], () => import('../routes/Result/Error')),
           },
         ],
       },
       {
-        name: '异常',
+        name: 'Exception',
         path: 'exception',
         icon: 'warning',
         children: [
@@ -173,22 +173,22 @@ export const getNavData = app => [
     layout: 'UserLayout',
     children: [
       {
-        name: '帐户',
+        name: 'Account',
         icon: 'user',
         path: 'user',
         children: [
           {
-            name: '登录',
+            name: 'Sign-in',
             path: 'login',
             component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
           },
           {
-            name: '注册',
+            name: 'Register',
             path: 'register',
             component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
           },
           {
-            name: '注册结果',
+            name: 'Registration Results',
             path: 'register-result',
             component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
           },
@@ -200,7 +200,7 @@ export const getNavData = app => [
     component: dynamicWrapper(app, [], () => import('../layouts/BlankLayout')),
     layout: 'BlankLayout',
     children: {
-      name: '使用文档',
+      name: 'Getting Started',
       path: 'http://pro.ant.design/docs/getting-started',
       target: '_blank',
       icon: 'book',
