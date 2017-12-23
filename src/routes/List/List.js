@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { routerRedux, Route, Switch, Redirect } from 'dva/router';
 import { connect } from 'dva';
 import { Input } from 'antd';
@@ -8,10 +7,6 @@ import { getRoutes } from '../../utils/utils';
 
 @connect()
 export default class SearchList extends Component {
-  static contextTypes = {
-    routerData: PropTypes.object,
-  };
-
   handleTabChange = (key) => {
     const { dispatch, match } = this.props;
     switch (key) {
@@ -53,8 +48,7 @@ export default class SearchList extends Component {
       </div>
     );
 
-    const { match } = this.props;
-    const { routerData } = this.context;
+    const { match, routerData } = this.props;
     const routes = getRoutes(match.path, routerData);
 
     return (

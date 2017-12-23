@@ -42,7 +42,7 @@ export default class SiderMenu extends PureComponent {
     let keys = [];
     menus.forEach((item) => {
       if (item.children) {
-        keys.push(item.key);
+        keys.push(item.path);
         keys = keys.concat(this.getFlatMenuKeys(item.children));
       } else {
         keys.push(item.path);
@@ -52,16 +52,17 @@ export default class SiderMenu extends PureComponent {
   }
   getSelectedMenuKeys = (path) => {
     const flatMenuKeys = this.getFlatMenuKeys(this.menus);
-    if (flatMenuKeys.indexOf(path) > -1) {
-      return [path];
+
+    if (flatMenuKeys.indexOf(path.replace(/^\//, '')) > -1) {
+      return [path.replace(/^\//, '')];
     }
-    if (flatMenuKeys.indexOf(path.replace(/\/$/, '')) > -1) {
-      return [path.replace(/\/$/, '')];
+    if (flatMenuKeys.indexOf(path.replace(/^\//, '').replace(/\/$/, '')) > -1) {
+      return [path.replace(/^\//, '').replace(/\/$/, '')];
     }
     return flatMenuKeys.filter((item) => {
       const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
       const itemRegExp = new RegExp(itemRegExpStr);
-      return itemRegExp.test(path);
+      return itemRegExp.test(path.replace(/^\//, ''));
     });
   }
   getNavMenuItems(menusData) {
@@ -76,7 +77,7 @@ export default class SiderMenu extends PureComponent {
       if (item.path && item.path.indexOf('http') === 0) {
         itemPath = item.path;
       } else {
-        itemPath = `${item.path || ''}`.replace(/\/+/g, '/');
+        itemPath = `/${item.path || ''}`.replace(/\/+/g, '/');
       }
       if (item.children && item.children.some(child => child.name)) {
         return item.hideInMenu ? null :

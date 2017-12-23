@@ -1,79 +1,134 @@
-/* Menu 中心化配置文件，脚手架中的 menu 根据此文件 export 的数据生成
- * - 输出数据的格式
- *  [{
- *    name: 'dashborad',               // subMenu title
- *    icon: 'dashboard',               // subMenu icon
- *    key: 'dashboard',                // unique key
- *    children: [{
- *      name: '分析页',                 // menu item title
- *      path: '/dashboard/analysis',   // menu item link(and key)
- *    }, {
- *      name: '监控页',
- *      path: '/dashboard/monitor',
- *    }, {
- *      name: '工作台',
- *      path: '/dashboard/workplace',
- *    }]
- *  }]
- * - 因为 router 配置中已经包含了部分 menu 所需信息，为了避免重复维护，可以利用 util 函数结合
- *   subMenu 信息，来生成总的 menu 信息，一般情况下你只需要像下面这样给出 subMenu 信息即可
-*/
-
-import { getRouterData } from './router';
-import { getMenuItem } from '../utils/utils';
-
-const categoryMap = {
-  dashboard: {
-    name: 'dashboard',
-    icon: 'dashboard',
+const menuData = [{
+  name: 'dashborad',
+  icon: 'dashboard',
+  path: 'dashboard',
+  children: [{
+    name: '分析页',
+    path: 'analysis',
+  }, {
+    name: '监控页',
+    path: 'monitor',
+  }, {
+    name: '工作台',
+    path: 'workplace',
     // hideInMenu: true,
-    // childMap: {                      如果 dashboard 下还有子菜单，可以通过嵌套 childMap 实现
-    //   [childKey]: {                  childMap 数据格式与父级相同
-    //     name: [childName],
-    //     icon: [childIcon],
-    //   },
-    // },
-  },
-  form: {
-    name: '表单页',
-    icon: 'form',
-  },
-  list: {
-    name: '列表页',
-    icon: 'table',
-    childMap: {
-      search: {
-        name: '搜索列表',
-        icon: 'search',
-      },
-    },
-  },
-  profile: {
-    name: '详情页',
-    icon: 'profile',
-  },
-  result: {
-    name: '结果页',
-    icon: 'check-circle-o',
-  },
-  exception: {
-    name: '异常页',
-    icon: 'warning',
-  },
-  user: {
-    name: '账户',
-    icon: 'user',
-  },
-};
+  }],
+}, {
+  name: '表单页',
+  icon: 'form',
+  path: 'form',
+  children: [{
+    name: '基础表单',
+    path: 'basic-form',
+  }, {
+    name: '分步表单',
+    path: 'step-form',
+  }, {
+    name: '高级表单',
+    path: 'advanced-form',
+  }],
+}, {
+  name: '列表页',
+  icon: 'table',
+  path: 'list',
+  children: [{
+    name: '搜索列表',
+    icon: 'search',
+    path: 'search',
+    children: [{
+      name: '搜索列表（项目）',
+      path: 'projects',
+    }, {
+      name: '搜索列表（应用）',
+      path: 'applications',
+    }, {
+      name: '搜索列表（文章）',
+      path: 'articles',
+    }],
+  }, {
+    name: '查询表格',
+    path: 'table-list',
+  }, {
+    name: '标准列表',
+    path: 'basic-list',
+  }, {
+    name: '卡片列表',
+    path: 'card-list',
+  }],
+}, {
+  name: '详情页',
+  icon: 'profile',
+  path: 'profile',
+  children: [{
+    name: '基础详情页',
+    path: 'basic',
+  }, {
+    name: '高级详情页',
+    path: 'advanced',
+  }],
+}, {
+  name: '结果页',
+  icon: 'check-circle-o',
+  path: 'result',
+  children: [{
+    name: '成功',
+    path: 'success',
+  }, {
+    name: '失败',
+    path: 'fail',
+  }],
+}, {
+  name: '异常页',
+  icon: 'warning',
+  path: 'exception',
+  children: [{
+    name: '403',
+    path: '403',
+  }, {
+    name: '404',
+    path: '404',
+  }, {
+    name: '500',
+    path: '500',
+  }],
+}, {
+  name: '账户',
+  icon: 'user',
+  path: 'user',
+  children: [{
+    name: '登录',
+    path: 'login',
+  }, {
+    name: '注册',
+    path: 'register',
+  }, {
+    name: '注册结果',
+    path: 'register-result',
+  }],
+}, {
+  name: '使用文档',
+  icon: 'book',
+  path: 'http://pro.ant.design/docs/getting-started',
+  target: '_blank',
+}];
 
-export const getMenuData = () => {
-  const menuData = Object.keys(categoryMap).map(category =>
-    getMenuItem(category, categoryMap, getRouterData()));
-  const extraData = [{
-    name: '使用文档',
-    icon: 'book',
-    path: 'http://pro.ant.design/docs/getting-started',
-    target: '_blank',
-  }];
-  return menuData.concat(extraData);
-};
+function formatter(data, parentPath = '') {
+  const list = [];
+  data.forEach((item) => {
+    if (item.children) {
+      list.push({
+        ...item,
+        path: `${parentPath}${item.path}`,
+        children: formatter(item.children, `${parentPath}${item.path}/`),
+      });
+    } else {
+      list.push({
+        ...item,
+        path: `${parentPath}${item.path}`,
+      });
+    }
+  });
+  return list;
+}
+
+export const getMenuData = () => formatter(menuData);

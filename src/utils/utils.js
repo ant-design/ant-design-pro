@@ -132,34 +132,3 @@ export function getRoutes(path, routerData) {
   });
   return renderRoutes;
 }
-
-export function getMenuItem(category, categoryMap, configMap, parentCategory = '') {
-  const itemObject = {
-    ...categoryMap[category],
-    key: `${parentCategory}${category}`,
-    children: [],
-  };
-  const itemChildren = Object.keys(configMap).filter(config =>
-    config.indexOf(`/${parentCategory}${category}`) === 0 && config !== `/${parentCategory}${category}`);
-  if (categoryMap[category].childMap) {
-    Object.keys(categoryMap[category].childMap).forEach((child) => {
-      itemObject.children.push(getMenuItem(child, categoryMap[category].childMap, configMap, `${category}/`));
-    });
-    const extraChildren = itemChildren.filter(child =>
-      Object.keys(categoryMap[category].childMap).every(item => child.indexOf(item) === -1));
-    itemObject.children = itemObject.children.concat(extraChildren.map((child) => {
-      return {
-        ...configMap[child],
-        path: child,
-      };
-    }));
-  } else {
-    itemObject.children = itemChildren.map((child) => {
-      return {
-        ...configMap[child],
-        path: child,
-      };
-    });
-  }
-  return itemObject;
-}
