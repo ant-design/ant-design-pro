@@ -73,17 +73,17 @@ export default class Login extends Component {
       <div className={styles.main}>
         <Form onSubmit={this.handleSubmit}>
           <Tabs animated={false} className={styles.tabs} activeKey={type} onChange={this.onSwitch}>
-            <TabPane tab="账户密码登录" key="account">
+            <TabPane tab="Account Login" key="account">
               {
                 login.status === 'error' &&
                 login.type === 'account' &&
                 login.submitting === false &&
-                this.renderMessage('账户或密码错误')
+                this.renderMessage('Account or Password error')
               }
               <FormItem>
                 {getFieldDecorator('userName', {
                   rules: [{
-                    required: type === 'account', message: '请输入账户名！',
+                    required: type === 'account', message: 'Please enter the account name!',
                   }],
                 })(
                   <Input
@@ -96,7 +96,7 @@ export default class Login extends Component {
               <FormItem>
                 {getFieldDecorator('password', {
                   rules: [{
-                    required: type === 'account', message: '请输入密码！',
+                    required: type === 'account', message: 'Please enter a password!',
                   }],
                 })(
                   <Input
@@ -108,25 +108,25 @@ export default class Login extends Component {
                 )}
               </FormItem>
             </TabPane>
-            <TabPane tab="手机号登录" key="mobile">
+            <TabPane tab="Mobile Login" key="mobile">
               {
                 login.status === 'error' &&
                 login.type === 'mobile' &&
                 login.submitting === false &&
-                this.renderMessage('验证码错误')
+                this.renderMessage('Verification Code error')
               }
               <FormItem>
                 {getFieldDecorator('mobile', {
                   rules: [{
-                    required: type === 'mobile', message: '请输入手机号！',
+                    required: type === 'mobile', message: 'Please enter your cell phone number!',
                   }, {
-                    pattern: /^1\d{10}$/, message: '手机号格式错误！',
+                    pattern: /^1\d{10}$/, message: 'Cell phone number is wrong',
                   }],
                 })(
                   <Input
                     size="large"
                     prefix={<Icon type="mobile" className={styles.prefixIcon} />}
-                    placeholder="手机号"
+                    placeholder="Cell phone number"
                   />
                 )}
               </FormItem>
@@ -135,13 +135,13 @@ export default class Login extends Component {
                   <Col span={16}>
                     {getFieldDecorator('captcha', {
                       rules: [{
-                        required: type === 'mobile', message: '请输入验证码！',
+                        required: type === 'mobile', message: 'Please enter the verification code!',
                       }],
                     })(
                       <Input
                         size="large"
                         prefix={<Icon type="mail" className={styles.prefixIcon} />}
-                        placeholder="验证码"
+                        placeholder="Verification Code"
                       />
                     )}
                   </Col>
@@ -152,7 +152,7 @@ export default class Login extends Component {
                       size="large"
                       onClick={this.onGetCaptcha}
                     >
-                      {count ? `${count} s` : '获取验证码'}
+                      {count ? `${count} s` : 'Get code'}
                     </Button>
                   </Col>
                 </Row>
@@ -164,21 +164,21 @@ export default class Login extends Component {
               valuePropName: 'checked',
               initialValue: true,
             })(
-              <Checkbox className={styles.autoLogin}>自动登录</Checkbox>
+              <Checkbox className={styles.autoLogin}>Remember me</Checkbox>
             )}
-            <a className={styles.forgot} href="">忘记密码</a>
+            <a className={styles.forgot} href="">Forgot your password?</a>
             <Button size="large" loading={login.submitting} className={styles.submit} type="primary" htmlType="submit">
-              登录
+              Sign-in
             </Button>
           </FormItem>
         </Form>
         <div className={styles.other}>
-          其他登录方式
-          {/* 需要加到 Icon 中 */}
+          Other login methods
+          {/* Needs to be added to.. Icon 中 */}
           <span className={styles.iconAlipay} />
           <span className={styles.iconTaobao} />
           <span className={styles.iconWeibo} />
-          <Link className={styles.register} to="/user/register">注册账户</Link>
+          <Link className={styles.register} to="/user/register">Register Account</Link>
         </div>
       </div>
     );
