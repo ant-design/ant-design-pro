@@ -28,6 +28,7 @@ function checkStatus(response) {
     description: errortext,
   });
   const error = new Error(errortext);
+  error.name = response.status;
   error.response = response;
   throw error;
 }
