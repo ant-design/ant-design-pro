@@ -53,6 +53,6 @@
     }
   },
   "settings": {
-    "polyfills": ["fetch"]
+    "polyfills": ["fetch", "promises"]
   }
 }

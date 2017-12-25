@@ -14,7 +14,7 @@ function getBreadcrumb(breadcrumbNameMap, url) {
   if (breadcrumbNameMap[urlWithoutSplash]) {
     return breadcrumbNameMap[urlWithoutSplash];
   }
-  let breadcrumb = '';
+  let breadcrumb = {};
   Object.keys(breadcrumbNameMap).forEach((item) => {
     const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
     const itemRegExp = new RegExp(itemRegExpStr);
@@ -78,15 +78,15 @@ export default class PageHeader extends PureComponent {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
         const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
         const isLinkable = (index !== pathSnippets.length - 1) && currentBreadcrumb.component;
-        return (
+        return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
           <Breadcrumb.Item key={url}>
             {createElement(
               isLinkable ? linkElement : 'span',
               { [linkElement === 'a' ? 'href' : 'to']: url },
-              currentBreadcrumb.name || url,
+              currentBreadcrumb.name,
             )}
           </Breadcrumb.Item>
-        );
+        ) : null;
       });
       const breadcrumbItems = [(
         <Breadcrumb.Item key="home">
