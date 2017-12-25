@@ -84,7 +84,7 @@ class BasicLayout extends React.PureComponent {
                       <Route
                         key={item.key}
                         path={item.path}
-                        render={props => <item.component {...props} routerData={routerData} />}
+                        component={item.component}
                         exact={item.exact}
                       />
                     )

@@ -1,3 +1,4 @@
+import React from 'react';
 import dynamic from 'dva/dynamic';
 import { getMenuData } from './menu';
 
@@ -5,7 +6,15 @@ import { getMenuData } from './menu';
 const dynamicWrapper = (app, models, component) => dynamic({
   app,
   models: () => models.map(m => import(`../models/${m}.js`)),
-  component,
+  // add routerData prop
+  component: () => {
+    const p = component();
+    return new Promise((resolve, reject) => {
+      p.then((Comp) => {
+        resolve(props => <Comp {...props} routerData={getRouterData(app)} />);
+      }).catch(err => reject(err));
+    });
+  },
 });
 
 function getFlatMenuData(menus) {
@@ -35,12 +44,19 @@ export const getRouterData = (app) => {
     '/dashboard/workplace': {
       component: dynamicWrapper(app, ['project', 'activities', 'chart'], () => import('../routes/Dashboard/Workplace')),
       // hideInBreadcrumb: true,
+      // name: '工作台',
     },
     '/form/basic-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
     },
     '/form/step-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm')),
+    },
+    '/form/step-form/confirm': {
+      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step2')),
+    },
+    '/form/step-form/result': {
+      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step3')),
     },
     '/form/advanced-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
@@ -103,13 +119,13 @@ export const getRouterData = (app) => {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
     // },
   };
-  // get name from ./menu.js by default
+  // Get name from ./menu.js or just set it in the router data.
   const menuData = getFlatMenuData(getMenuData());
   const routerDataWithName = {};
   Object.keys(routerData).forEach((item) => {
     routerDataWithName[item] = {
       ...routerData[item],
-      name: menuData[item.replace(/^\//, '')],
+      name: routerData[item].name || menuData[item.replace(/^\//, '')],
     };
   });
   return routerDataWithName;
