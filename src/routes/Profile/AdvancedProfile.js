@@ -97,12 +97,11 @@ const popoverContent = (
   </div>
 );
 
-const customDot = (dot, { status }) => (status === 'process' ?
+const customDot = (dot, { status }) => (status === 'process' ? (
   <Popover placement="topLeft" arrowPointAtCenter content={popoverContent}>
     {dot}
   </Popover>
-  : dot
-);
+) : dot);
 
 const operationTabList = [{
   key: 'tab1',

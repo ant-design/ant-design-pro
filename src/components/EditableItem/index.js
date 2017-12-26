@@ -25,7 +25,7 @@ export default class EditableItem extends PureComponent {
     return (
       <div className={styles.editableItem}>
         {
-          editable ?
+          editable ? (
             <div className={styles.wrapper}>
               <Input
                 value={value}
@@ -38,7 +38,7 @@ export default class EditableItem extends PureComponent {
                 onClick={this.check}
               />
             </div>
-            :
+          ) : (
             <div className={styles.wrapper}>
               <span>{value || ' '}</span>
               <Icon
@@ -47,6 +47,7 @@ export default class EditableItem extends PureComponent {
                 onClick={this.edit}
               />
             </div>
+          )
         }
       </div>
     );
