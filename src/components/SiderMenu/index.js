@@ -1,8 +1,7 @@
+import 'rc-drawer-menu/assets/index.css';
 import React, { PureComponent } from 'react';
-
 import DrawerMenu from 'rc-drawer-menu';
 import SiderMenu from './SiderMenu';
-import 'rc-drawer-menu/assets/index.css';
 
 export default class Index extends PureComponent {
   onCollapse = (collapsed) => {
