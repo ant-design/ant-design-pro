@@ -88,6 +88,7 @@ ReactDOM.render(
       extraContent={extra}
       breadcrumbList={breadcrumbList}
       tabList={tabList}
+      tabActiveKey="detail"
       onTabChange={onTabChange}
     />
   </div>

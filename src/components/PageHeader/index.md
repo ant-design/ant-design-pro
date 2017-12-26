@@ -22,6 +22,7 @@ order: 11
 | params | 面包屑相关属性，路由的参数 | object | - |
 | breadcrumbList | 面包屑数据，配置了 `routes` `params` 时此属性无效 | array<{title: ReactNode, href?: string}> | - |
 | tabList | tab 标题列表 | array<{key: string, tab: ReactNode}> | -  |
+| tabActiveKey | 当前高亮的 tab 项 | string | -  |
 | onTabChange | 切换面板的回调 | (key) => void | -  |
 | linkElement | 定义链接的元素，默认为 `a`，可传入 react-router 的 Link | string\|ReactElement | - |
 

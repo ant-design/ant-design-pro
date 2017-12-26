@@ -9,6 +9,7 @@ export interface PageHeaderProps {
   params?: any;
   breadcrumbList?: Array<{ title: React.ReactNode; href?: string }>;
   tabList?: Array<{ key: string; tab: React.ReactNode }>;
+  tabActiveKey?: string;
   onTabChange?: (key: string) => void;
   linkElement?: React.ReactNode;
 }

@@ -6,7 +6,7 @@ import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Me
 import StandardFormRow from '../../components/StandardFormRow';
 import TagSelect from '../../components/TagSelect';
 
-import styles from './Projects.less';
+import styles from './Applications.less';
 
 const { Option } = Select;
 const FormItem = Form.Item;
