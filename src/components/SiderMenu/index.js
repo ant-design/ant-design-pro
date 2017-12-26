@@ -29,10 +29,13 @@ export default class Index extends PureComponent {
           onCollapse={this.onCollapse}
           collapsed={isMobile ? false : collapsed}
         />
-      </DrawerMenu>) : (<SiderMenu
+      </DrawerMenu>
+    ) : (
+      <SiderMenu
         {...this.props}
         isMobile={isMobile}
         onCollapse={this.onCollapse}
-      />);
+      />
+    );
   }
 }
