@@ -32,20 +32,6 @@ const menuData = [{
   icon: 'table',
   path: 'list',
   children: [{
-    name: '搜索列表',
-    icon: 'search',
-    path: 'search',
-    children: [{
-      name: '搜索列表（项目）',
-      path: 'projects',
-    }, {
-      name: '搜索列表（应用）',
-      path: 'applications',
-    }, {
-      name: '搜索列表（文章）',
-      path: 'articles',
-    }],
-  }, {
     name: '查询表格',
     path: 'table-list',
   }, {
@@ -54,6 +40,19 @@ const menuData = [{
   }, {
     name: '卡片列表',
     path: 'card-list',
+  }, {
+    name: '搜索列表',
+    path: 'search',
+    children: [{
+      name: '搜索列表（文章）',
+      path: 'articles',
+    }, {
+      name: '搜索列表（项目）',
+      path: 'projects',
+    }, {
+      name: '搜索列表（应用）',
+      path: 'applications',
+    }],
   }],
 }, {
   name: '详情页',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { routerRedux, Route, Switch, Redirect } from 'dva/router';
+import { routerRedux, Route, Switch } from 'dva/router';
 import { connect } from 'dva';
 import { Input } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -72,7 +72,6 @@ export default class SearchList extends Component {
               )
             )
           }
-          <Redirect exact from={`${match.path}`} to={`${match.path}${routes[0]}`} />
         </Switch>
       </PageHeaderLayout>
     );
