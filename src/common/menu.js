@@ -12,6 +12,7 @@ const menuData = [{
     name: '工作台',
     path: 'workplace',
     // hideInMenu: true,
+    // role: ['admin'],
   }],
 }, {
   name: '表单页',
@@ -97,6 +98,7 @@ const menuData = [{
   name: '账户',
   icon: 'user',
   path: 'user',
+  role: ['guest'],
   children: [{
     name: '登录',
     path: 'login',

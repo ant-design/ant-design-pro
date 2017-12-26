@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
+import { Router, Switch } from 'dva/router';
 import { LocaleProvider, Spin } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import dynamic from 'dva/dynamic';
@@ -25,14 +25,14 @@ function RouterConfig({ history, app }) {
           <AuthorizedRoute
             path="/user"
             render={props => <UserLayout {...props} />}
-            role={['guest']}
+            authorizedRole={['guest']}
             getRole={getRole}
             redirectPath="/"
           />
           <AuthorizedRoute
             path="/"
             render={props => <BasicLayout {...props} />}
-            role={['user', 'admin']}
+            authorizedRole={['admin']}
             getRole={getRole}
             redirectPath="/user/login"
           />
