@@ -148,17 +148,17 @@ export default class Workplace extends PureComponent {
       </div>
     );
 
-    const pageHeaderExtra = (
-      <div className={styles.pageHeaderExtra}>
-        <div>
+    const extraContent = (
+      <div className={styles.extraContent}>
+        <div className={styles.statItem}>
           <p>项目数</p>
           <p>56</p>
         </div>
-        <div>
+        <div className={styles.statItem}>
           <p>团队内排名</p>
           <p>8<span> / 24</span></p>
         </div>
-        <div>
+        <div className={styles.statItem}>
           <p>项目访问</p>
           <p>2,223</p>
         </div>
@@ -168,7 +168,7 @@ export default class Workplace extends PureComponent {
     return (
       <PageHeaderLayout
         content={pageHeaderContent}
-        extraContent={pageHeaderExtra}
+        extraContent={extraContent}
       >
         <Row gutter={24}>
           <Col xl={16} lg={24} md={24} sm={24} xs={24}>

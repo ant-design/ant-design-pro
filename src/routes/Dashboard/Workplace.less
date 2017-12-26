@@ -40,25 +40,26 @@
   }
 }
 
-.pageHeaderExtra {
+.extraContent {
   .clearfix();
   float: right;
-  & > div {
+  white-space: nowrap;
+  .statItem {
     padding: 0 32px;
     position: relative;
-    float: left;
-    & > p:first-child {
+    display: inline-block;
+    > p:first-child {
       color: @text-color-secondary;
       font-size: @font-size-base;
       line-height: 22px;
       margin-bottom: 4px;
     }
-    & > p {
+    > p {
       color: @heading-color;
       font-size: 30px;
       line-height: 38px;
       margin: 0;
-      & > span {
+      > span {
         color: @text-color-secondary;
         font-size: 20px;
       }
@@ -72,11 +73,11 @@
       height: 40px;
       content: '';
     }
-  }
-  & > div:last-child {
-    padding-right: 0;
-    &:after {
-      display: none;
+    &:last-child {
+      padding-right: 0;
+      &:after {
+        display: none;
+      }
     }
   }
 }
@@ -163,12 +164,6 @@
   color: @disabled-color;
 }
 
-@media screen and (min-width: @screen-xl) {
-  .pageHeaderExtra {
-    min-width: 345px;
-  }
-}
-
 @media screen and (max-width: @screen-xl)  and (min-width: @screen-lg) {
   .activeCard {
     margin-bottom: 24px;
@@ -176,9 +171,9 @@
   .members {
     margin-bottom: 0;
   }
-  .pageHeaderExtra {
+  .extraContent {
     margin-left: -44px;
-    & > div {
+    .statItem {
       padding: 0 16px;
     }
   }
@@ -191,10 +186,10 @@
   .members {
     margin-bottom: 0;
   }
-  .pageHeaderExtra {
+  .extraContent {
     float: none;
     margin-right: 0;
-    & > div {
+    .statItem {
       padding: 0 16px;
       text-align: left;
       &:after {
@@ -205,7 +200,7 @@
 }
 
 @media screen and (max-width: @screen-md) {
-  .pageHeaderExtra {
+  .extraContent {
     margin-left: -16px;
   }
   .projectList {
@@ -222,8 +217,8 @@
       margin-left: 0;
     }
   }
-  .pageHeaderExtra {
-    & > div {
+  .extraContent {
+    .statItem {
       float: none;
     }
   }
