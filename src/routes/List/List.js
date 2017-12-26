@@ -48,7 +48,7 @@ export default class SearchList extends Component {
       </div>
     );
 
-    const { match, routerData } = this.props;
+    const { match, routerData, location } = this.props;
     const routes = getRoutes(match.path, routerData);
 
     return (
@@ -56,6 +56,7 @@ export default class SearchList extends Component {
         title="搜索列表"
         content={mainSearch}
         tabList={tabList}
+        activeTabKey={location.pathname.replace(`${match.path}/`, '')}
         onTabChange={this.handleTabChange}
       >
         <Switch>

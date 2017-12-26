@@ -34,6 +34,7 @@ ReactDOM.render(
       extraContent={<div className="extraContent">extraContent</div>}
       breadcrumbList={breadcrumbList}
       tabList={tabList}
+      tabActiveKey="1"
     />
   </div>
 , mountNode);
