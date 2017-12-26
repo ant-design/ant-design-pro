@@ -90,6 +90,9 @@ const menuData = [{
   }, {
     name: '500',
     path: '500',
+  }, {
+    name: '触发异常',
+    path: 'trigger',
   }],
 }, {
   name: '账户',
