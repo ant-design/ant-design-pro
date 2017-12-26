@@ -144,17 +144,18 @@ export default class PageHeader extends PureComponent {
         </div>
         {
           tabList &&
-          tabList.length &&
-          <Tabs
-            className={styles.tabs}
-            defaultActiveKey={(tabDefaultValue && tabDefaultValue.key)}
-            activeKey={activeTabKey}
-            onChange={this.onChange}
-          >
-            {
-              tabList.map(item => <TabPane tab={item.tab} key={item.key} />)
-            }
-          </Tabs>
+          tabList.length && (
+            <Tabs
+              className={styles.tabs}
+              defaultActiveKey={(tabDefaultValue && tabDefaultValue.key)}
+              activeKey={activeTabKey}
+              onChange={this.onChange}
+            >
+              {
+                tabList.map(item => <TabPane tab={item.tab} key={item.key} />)
+              }
+            </Tabs>
+          )
         }
       </div>
     );

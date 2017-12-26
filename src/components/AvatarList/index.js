@@ -28,12 +28,11 @@ const Item = ({ src, size, tips, onClick = (() => {}) }) => {
   return (
     <li className={cls} onClick={onClick} >
       {
-        tips ?
+        tips ? (
           <Tooltip title={tips}>
             <Avatar src={src} size={size} style={{ cursor: 'pointer' }} />
           </Tooltip>
-          :
-          <Avatar src={src} size={size} />
+        ) : <Avatar src={src} size={size} />
       }
     </li>
   );

@@ -95,7 +95,7 @@ export function digitUppercase(n) {
 
 function getRelation(str1, str2) {
   if (str1 === str2) {
-    console.warn('Two path are equal!');
+    console.warn('Two path are equal!');  // eslint-disable-line
   }
   const arr1 = str1.split('/');
   const arr2 = str2.split('/');
