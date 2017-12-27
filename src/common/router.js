@@ -104,6 +104,9 @@ export const getRouterData = (app) => {
     '/exception/500': {
       component: dynamicWrapper(app, [], () => import('../routes/Exception/500')),
     },
+    '/exception/trigger': {
+      component: dynamicWrapper(app, ['error'], () => import('../routes/Exception/triggerException')),
+    },
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },
