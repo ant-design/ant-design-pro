@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Button, Spin } from 'antd';
 import { connect } from 'dva';
+import styles from './style.less';
 
 @connect(state => ({
   isloading: state.error.isloading,
@@ -35,13 +36,13 @@ export default class TriggerException extends PureComponent {
   };
   render() {
     return (
-      <Spin spinning={this.state.isloading}>
+      <Spin spinning={this.state.isloading} wrapperClassName={styles.trigger}>
         <Button type="danger" onClick={this.trigger403}>
         触发403
-        </Button>{'  '}
+        </Button>
         <Button type="danger" onClick={this.trigger500}>
          触发500
-        </Button>{'  '}
+        </Button>
         <Button type="danger" onClick={this.trigger404}>
          触发404
         </Button>
