@@ -25,14 +25,14 @@ function RouterConfig({ history, app }) {
           <AuthorizedRoute
             path="/user"
             render={props => <UserLayout {...props} />}
-            authorizedRole={['guest']}
+            authorizedRole={['guest', 'user']}
             getRole={getRole}
             redirectPath="/"
           />
           <AuthorizedRoute
             path="/"
             render={props => <BasicLayout {...props} />}
-            authorizedRole={['admin']}
+            authorizedRole={['admin', 'user']}
             getRole={getRole}
             redirectPath="/user/login"
           />
