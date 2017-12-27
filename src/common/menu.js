@@ -1,5 +1,5 @@
 const menuData = [{
-  name: 'dashborad',
+  name: 'dashboard',
   icon: 'dashboard',
   path: 'dashboard',
   children: [{
