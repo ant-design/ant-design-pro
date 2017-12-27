@@ -9,7 +9,7 @@ export default {
   },
 
   effects: {
-    *query401(_, { call, put }) {
+    *query403(_, { call, put }) {
       yield call(query403);
       yield put({
         type: 'trigger',

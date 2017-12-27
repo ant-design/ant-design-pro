@@ -14,7 +14,7 @@ export default class TriggerException extends PureComponent {
       isloading: true,
     });
     this.props.dispatch({
-      type: 'error/query401',
+      type: 'error/query403',
     });
   };
   trigger500 = () => {
