@@ -12,10 +12,14 @@ import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
+<<<<<<< HEAD
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
+=======
+>>>>>>> fix list redirect bug (#507)
 import Authorized from '../components/Authorized';
 import { getRole } from '../utils/role';
+import { getMenuData } from '../common/menu';
 
 const { Content } = Layout;
 const { AuthorizedRoute } = Authorized;
