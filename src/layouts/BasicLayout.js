@@ -6,6 +6,7 @@ import { connect } from 'dva';
 import { Route, Redirect, Switch } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
+import { enquireScreen } from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
@@ -55,17 +56,33 @@ const query = {
   },
 };
 
+let isMobile;
+enquireScreen((b) => {
+  isMobile = b;
+});
+
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
   }
+
+  state = {
+    isMobile,
+  };
   getChildContext() {
     const { location, routerData } = this.props;
     return {
       location,
       breadcrumbNameMap: routerData,
     };
+  }
+  componentDidMount() {
+    enquireScreen((b) => {
+      this.setState({
+        isMobile: !!b,
+      });
+    });
   }
   getPageTitle() {
     const { routerData, location } = this.props;
@@ -86,6 +103,7 @@ class BasicLayout extends React.PureComponent {
           collapsed={collapsed}
           location={location}
           dispatch={dispatch}
+          isMobile={this.state.isMobile}
         />
         <Layout>
           <GlobalHeader
@@ -94,6 +112,7 @@ class BasicLayout extends React.PureComponent {
             notices={notices}
             collapsed={collapsed}
             dispatch={dispatch}
+            isMobile={this.state.isMobile}
           />
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <div style={{ minHeight: 'calc(100vh - 260px)' }}>

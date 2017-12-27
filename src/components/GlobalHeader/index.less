@@ -13,6 +13,20 @@
   }
 }
 
+.logo {
+  height: 64px;
+  line-height: 58px;
+  vertical-align: top;
+  display: inline-block;
+  padding: 0 0 0 24px;
+  cursor: pointer;
+  font-size: 20px;
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
 .menu {
   :global(.anticon) {
     margin-right: 8px;
@@ -26,16 +40,10 @@ i.trigger {
   font-size: 20px;
   line-height: 64px;
   cursor: pointer;
-  transition: all .3s;
+  transition: all .3s, padding 0s;
   padding: 0 24px;
   &:hover {
     background: @primary-1;
-  }
-}
-
-@media screen and (max-width: @screen-xs) {
-  .trigger {
-    display: none;
   }
 }
 
@@ -70,6 +78,35 @@ i.trigger {
       color: @primary-color;
       background: rgba(255, 255, 255, .85);
       vertical-align: middle;
+    }
+  }
+}
+
+@media only screen and (max-width: @screen-md) {
+  .header {
+    :global(.ant-divider-vertical) {
+      vertical-align: unset;
+    }
+    .name {
+      display: none;
+    }
+    i.trigger {
+      padding: 0 12px;
+    }
+    .logo {
+      padding-right: 12px;
+      position: relative;
+    }
+    .right {
+      position: absolute;
+      right: 12px;
+      top: 0;
+      background: #fff;
+      .account {
+        .avatar {
+          margin-right: 0;
+        }
+      }
     }
   }
 }
