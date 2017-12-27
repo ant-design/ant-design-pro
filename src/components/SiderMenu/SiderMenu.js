@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 import styles from './index.less';
+import { getMenuData } from '../../common/menu';
+import Authorized from '../Authorized';
+import { getRole } from '../../utils/role';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -34,6 +37,12 @@ export default class SiderMenu extends PureComponent {
         openKeys: this.getDefaultCollapsedSubMenus(nextProps),
       });
     }
+  }
+  onCollapse = (collapsed) => {
+    this.props.dispatch({
+      type: 'global/changeLayoutCollapsed',
+      payload: collapsed,
+    });
   }
   getDefaultCollapsedSubMenus(props) {
     const { location: { pathname } } = props || this.props;
@@ -92,8 +101,13 @@ export default class SiderMenu extends PureComponent {
         itemPath = `/${item.path || ''}`.replace(/\/+/g, '/');
       }
       if (item.children && item.children.some(child => child.name)) {
-        return item.hideInMenu ? null :
-          (
+        if (item.hideInMenu) {
+          return null;
+        } else {
+          return Authorized.create({
+            authorizedRole: item.role,
+            getRole,
+          })(
             <SubMenu
               title={
                 item.icon ? (
@@ -108,6 +122,7 @@ export default class SiderMenu extends PureComponent {
               {this.getNavMenuItems(item.children)}
             </SubMenu>
           );
+        }
       }
       const icon = getIcon(item.icon);
       return item.hideInMenu ? null :
@@ -123,7 +138,6 @@ export default class SiderMenu extends PureComponent {
                   to={itemPath}
                   target={item.target}
                   replace={itemPath === this.props.location.pathname}
-                  onClick={this.props.isMobile ? () => { this.props.onCollapse(true); } : undefined}
                 >
                   {icon}<span>{item.name}</span>
                 </Link>
@@ -143,7 +157,7 @@ export default class SiderMenu extends PureComponent {
     });
   }
   render() {
-    const { logo, collapsed, location: { pathname }, onCollapse } = this.props;
+    const { logo, collapsed, location: { pathname } } = this.props;
     const { openKeys } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed ? {} : {
@@ -160,7 +174,7 @@ export default class SiderMenu extends PureComponent {
         collapsible
         collapsed={collapsed}
         breakpoint="md"
-        onCollapse={onCollapse}
+        onCollapse={this.onCollapse}
         width={256}
         className={styles.sider}
       >
