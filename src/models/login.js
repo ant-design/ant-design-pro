@@ -23,6 +23,8 @@ export default {
       // Login successfully
       if (response.status === 'ok') {
         yield put(routerRedux.push('/'));
+        // 非常粗暴的跳转
+        location.reload();
       }
     },
     *logout(_, { put }) {

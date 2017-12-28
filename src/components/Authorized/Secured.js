@@ -2,7 +2,7 @@ import React from 'react';
 import { Spin } from 'antd';
 import Exception from '../Exception/index';
 
-let ROLE = 'ALL';
+let ROLE = 'NONE';
 const Exception403 = () => (
   <Exception type="403" style={{ minHeight: 500, height: '80%' }} />
 );
@@ -49,9 +49,8 @@ class PromiseRender extends React.PureComponent {
  * @returns bolean
  */
 const decideStringRole = (role) => {
-  if (role.includes('!')) {
-    const myrole = role.substr(1, role.length - 1);
-    return myrole !== ROLE;
+  if (ROLE === 'NONE') {
+    return false;
   }
   const roleList = role.split(',');
   return roleList.includes(ROLE);
@@ -61,8 +60,6 @@ const decideStringRole = (role) => {
  * role 支持传入  string ,funtion:()=>boolean|Promise
  * e.g. 'user' 只有user用户能访问
  * e.g. 'user,admin' user和 admin 都能访问
- * e.g. '!user' 除了user 都能访问
- * e.g. '!user,!name'会报错 ! 只能使用一个用户
  * e.g. ()=>boolean 返回true能访问,返回false不能访问
  * e.g. Promise  then 能访问   catch不能访问
  * @param {string | function | Promise} role
@@ -108,7 +105,7 @@ const Authorize = (role, error) => {
  * @param {string|()=>String} getRole
  */
 const renderAuthorize = (role) => {
-  if (!role) {
+  if (role) {
     if (role.constructor.name === 'Function') {
       ROLE = role();
     }
@@ -116,7 +113,7 @@ const renderAuthorize = (role) => {
       ROLE = role;
     }
   } else {
-    ROLE = 'All';
+    ROLE = 'NONE';
   }
   return Authorize;
 };
