@@ -2,16 +2,16 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Row, Col, Card, Tooltip } from 'antd';
 import numeral from 'numeral';
-
 import { Pie, WaterWave, Gauge, TagCloud } from '../../components/Charts';
 import NumberInfo from '../../components/NumberInfo';
 import CountDown from '../../components/CountDown';
 import ActiveChart from '../../components/ActiveChart';
-
+import { Secured } from '../../utils/Secured';
 import styles from './Monitor.less';
 
 const targetTime = new Date().getTime() + 3900000;
 
+@Secured('user')
 @connect(state => ({
   monitor: state.monitor,
 }))
@@ -29,7 +29,14 @@ export default class Monitor extends PureComponent {
     return (
       <div>
         <Row gutter={24}>
-          <Col xl={18} lg={24} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
+          <Col
+            xl={18}
+            lg={24}
+            md={24}
+            sm={24}
+            xs={24}
+            style={{ marginBottom: 24 }}
+          >
             <Card title="活动实时交易情况" bordered={false}>
               <Row>
                 <Col md={6} sm={12} xs={24}>
@@ -64,7 +71,11 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col xl={6} lg={24} md={24} sm={24} xs={24}>
-            <Card title="活动情况预测" style={{ marginBottom: 24 }} bordered={false}>
+            <Card
+              title="活动情况预测"
+              style={{ marginBottom: 24 }}
+              bordered={false}
+            >
               <ActiveChart />
             </Card>
             <Card
@@ -140,7 +151,11 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索" bordered={false}>
+            <Card
+              title="热门搜索"
+              bordered={false}
+              bodyStyle={{ overflow: 'hidden' }}
+            >
               <TagCloud data={tags} height={161} />
             </Card>
           </Col>
