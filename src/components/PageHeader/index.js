@@ -64,7 +64,23 @@ export default class PageHeader extends PureComponent {
     } = this.props;
     const clsString = classNames(styles.pageHeader, className);
     let breadcrumb;
-    if (routes && params) {
+    if (breadcrumbList && breadcrumbList.length) {
+      breadcrumb = (
+        <Breadcrumb className={styles.breadcrumb}>
+          {
+            breadcrumbList.map(item => (
+              <Breadcrumb.Item key={item.title}>
+                {item.href ? (
+                  createElement(linkElement, {
+                    [linkElement === 'a' ? 'href' : 'to']: item.href,
+                  }, item.title)
+                ) : item.title}
+              </Breadcrumb.Item>)
+            )
+          }
+        </Breadcrumb>
+      );
+    } else if (routes && params) {
       breadcrumb = (
         <Breadcrumb
           className={styles.breadcrumb}
@@ -73,7 +89,7 @@ export default class PageHeader extends PureComponent {
           itemRender={this.itemRender}
         />
       );
-    } else if (location && location.pathname && (!breadcrumbList)) {
+    } else if (location && location.pathname) {
       const pathSnippets = location.pathname.split('/').filter(i => i);
       const extraBreadcrumbItems = pathSnippets.map((_, index) => {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
@@ -99,22 +115,6 @@ export default class PageHeader extends PureComponent {
       breadcrumb = (
         <Breadcrumb className={styles.breadcrumb}>
           {breadcrumbItems}
-        </Breadcrumb>
-      );
-    } else if (breadcrumbList && breadcrumbList.length) {
-      breadcrumb = (
-        <Breadcrumb className={styles.breadcrumb}>
-          {
-            breadcrumbList.map(item => (
-              <Breadcrumb.Item key={item.title}>
-                {item.href ? (
-                  createElement(linkElement, {
-                    [linkElement === 'a' ? 'href' : 'to']: item.href,
-                  }, item.title)
-                ) : item.title}
-              </Breadcrumb.Item>)
-            )
-          }
         </Breadcrumb>
       );
     } else {
