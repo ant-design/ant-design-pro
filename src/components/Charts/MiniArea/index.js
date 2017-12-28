@@ -70,7 +70,7 @@ export default class MiniArea extends React.Component {
                   fillOpacity: 1,
                 }}
               />
-              {!!line && (
+              {line ? (
                 <Geom
                   type="line"
                   position="x*y"
@@ -79,6 +79,8 @@ export default class MiniArea extends React.Component {
                   size={borderWidth}
                   tooltip={false}
                 />
+              ) : (
+                <span style={{ display: 'none' }} />
               )}
             </Chart>
           )}
