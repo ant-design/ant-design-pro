@@ -97,8 +97,8 @@ export default class TimelineChart extends React.Component {
         end={ds.state.end}
         backgroundChart={{ type: 'line' }}
         onChange={({ startValue, endValue }) => {
-          ds.setState('start', new Date(startValue).getTime());
-          ds.setState('end', new Date(endValue).getTime());
+          ds.setState('start', startValue);
+          ds.setState('end', endValue);
         }}
       />
     );
