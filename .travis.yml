@@ -29,5 +29,5 @@ script:
       npm run site
       mv dist/* ./
       php -S localhost:8000 &
-      npm test .e2e.js
+      DEBUG=* npm test .e2e.js
     fi
