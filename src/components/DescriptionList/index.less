@@ -40,8 +40,29 @@
     display: table-cell;
   }
 
-  &.vertical {
+  &.small {
+    // offset the padding-bottom of last row
+    :global {
+      .ant-row {
+        margin-bottom: -8px;
+      }
+    }
+    .title {
+      margin-bottom: 12px;
+      color: @text-color;
+    }
+    .term, .detail {
+      padding-bottom: 8px;
+    }
+  }
 
+  &.large {
+    .title {
+      font-size: 16px;
+    }
+  }
+
+  &.vertical {
     .term {
       padding-bottom: 8px;
       display: block;
@@ -50,26 +71,5 @@
     .detail {
       display: block;
     }
-  }
-}
-
-.descriptionListSmall {
-  // offset the padding-bottom of last row
-  :global {
-    .ant-row {
-      margin-bottom: -8px;
-    }
-  }
-  .title {
-    margin-bottom: 12px;
-    color: @text-color;
-  }
-  .term, .detail {
-    padding-bottom: 8px;
-  }
-}
-.descriptionListLarge {
-  .title {
-    font-size: 16px;
   }
 }
