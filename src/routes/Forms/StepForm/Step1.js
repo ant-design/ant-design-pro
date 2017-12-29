@@ -39,7 +39,7 @@ class Step1 extends React.PureComponent {
             label="付款账户"
           >
             {getFieldDecorator('payAccount', {
-              initialValue: data.payAccount || 'ant-design@alipay.com',
+              initialValue: data.payAccount,
               rules: [{ required: true, message: '请选择付款账户' }],
             })(
               <Select placeholder="test@example.com">
@@ -57,7 +57,7 @@ class Step1 extends React.PureComponent {
                 <Option value="bank">银行账户</Option>
               </Select>
               {getFieldDecorator('receiverAccount', {
-                initialValue: data.receiverAccount || 'test@example.com',
+                initialValue: data.receiverAccount,
                 rules: [
                   { required: true, message: '请输入收款人账户' },
                   { type: 'email', message: '账户名应为邮箱格式' },
@@ -72,7 +72,7 @@ class Step1 extends React.PureComponent {
             label="收款人姓名"
           >
             {getFieldDecorator('receiverName', {
-              initialValue: data.receiverName || 'Alex',
+              initialValue: data.receiverName,
               rules: [{ required: true, message: '请输入收款人姓名' }],
             })(
               <Input placeholder="请输入收款人姓名" />
@@ -83,7 +83,7 @@ class Step1 extends React.PureComponent {
             label="转账金额"
           >
             {getFieldDecorator('amount', {
-              initialValue: data.amount || '500',
+              initialValue: data.amount,
               rules: [
                 { required: true, message: '请输入转账金额' },
                 { pattern: /^(\d+)((?:\.\d+)?)$/, message: '请输入合法金额数字' },

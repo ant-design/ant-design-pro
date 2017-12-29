@@ -7,6 +7,10 @@ export default {
 
   state: {
     step: {
+      payAccount: 'ant-design@alipay.com',
+      receiverAccount: 'test@example.com',
+      receiverName: 'Alex',
+      amount: '500',
     },
     regularFormSubmitting: false,
     stepFormSubmitting: false,
