@@ -16,6 +16,13 @@ export default class SiderMenu extends PureComponent {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.setState({
+        openKeys: this.getDefaultCollapsedSubMenus(nextProps),
+      });
+    }
+  }
   getDefaultCollapsedSubMenus(props) {
     const { location: { pathname } } = props || this.props;
     const snippets = pathname.split('/').slice(1, -1);
@@ -46,7 +53,6 @@ export default class SiderMenu extends PureComponent {
   }
   getSelectedMenuKeys = (path) => {
     const flatMenuKeys = this.getFlatMenuKeys(this.menus);
-
     if (flatMenuKeys.indexOf(path.replace(/^\//, '')) > -1) {
       return [path.replace(/^\//, '')];
     }
@@ -56,7 +62,7 @@ export default class SiderMenu extends PureComponent {
     return flatMenuKeys.filter((item) => {
       const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
       const itemRegExp = new RegExp(itemRegExpStr);
-      return itemRegExp.test(path.replace(/^\//, ''));
+      return itemRegExp.test(path.replace(/^\//, '').replace(/\/$/, ''));
     });
   }
   getNavMenuItems(menusData) {
@@ -126,10 +132,16 @@ export default class SiderMenu extends PureComponent {
   }
   render() {
     const { collapsed, location: { pathname }, onCollapse } = this.props;
+    const { openKeys } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed ? {} : {
-      openKeys: this.state.openKeys,
+      openKeys,
     };
+    // if pathname can't match, use the nearest parent's key
+    let selectedKeys = this.getSelectedMenuKeys(pathname);
+    if (!selectedKeys.length) {
+      selectedKeys = [openKeys[openKeys.length - 1]];
+    }
     return (
       <Sider
         trigger={null}
@@ -151,7 +163,7 @@ export default class SiderMenu extends PureComponent {
           mode="inline"
           {...menuProps}
           onOpenChange={this.handleOpenChange}
-          selectedKeys={this.getSelectedMenuKeys(pathname)}
+          selectedKeys={selectedKeys}
           style={{ padding: '16px 0', width: '100%' }}
         >
           {this.getNavMenuItems(this.menus)}
