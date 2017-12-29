@@ -86,7 +86,7 @@ export default class TimelineChart extends React.Component {
 
     const SliderGen = () => (
       <Slider
-        padding={[0, padding[1], 0, padding[3]]}
+        padding={[0, padding[1] + 20, 0, padding[3]]}
         width="auto"
         height={26}
         xAxis="x"
@@ -113,7 +113,9 @@ export default class TimelineChart extends React.Component {
             <Legend name="key" position="top" />
             <Geom type="line" position="x*value" size={borderWidth} color="key" />
           </Chart>
-          <SliderGen />
+          <div style={{ marginRight: -20 }}>
+            <SliderGen />
+          </div>
         </div>
       </div>
     );
