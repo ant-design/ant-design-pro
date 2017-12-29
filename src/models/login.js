@@ -1,5 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { fakeAccountLogin } from '../services/api';
+import token from '../utils/token';
 
 export default {
   namespace: 'login',
@@ -20,11 +21,17 @@ export default {
         payload: response,
       });
       // Login successfully
+      token.save(response.token);
+
       if (response.status === 'ok') {
         yield put(routerRedux.push('/'));
       }
     },
     *logout(_, { put }) {
+
+      // remove token in sessionStorage
+      token.remove()
+
       yield put({
         type: 'changeLoginStatus',
         payload: {

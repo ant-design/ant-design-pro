@@ -1,5 +1,6 @@
 import fetch from 'dva/fetch';
 import { notification } from 'antd';
+import token from './token';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据',
@@ -33,6 +34,11 @@ function checkStatus(response) {
   throw error;
 }
 
+function buildAuthorization() {
+  const tokenVal = token.get();
+  return (token !== '') ? `Bearer ${tokenVal}` : '';
+}
+
 /**
  * Requests a URL, returning a promise.
  *
@@ -51,6 +57,7 @@ export default function request(url, options) {
       'Content-Type': 'application/json; charset=utf-8',
       ...newOptions.headers,
     };
+    newOptions.headers.Authorization = buildAuthorization();
     newOptions.body = JSON.stringify(newOptions.body);
   }
 
