@@ -66,7 +66,6 @@ class BasicLayout extends React.PureComponent {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
   }
-
   state = {
     isMobile,
   };
@@ -78,9 +77,9 @@ class BasicLayout extends React.PureComponent {
     };
   }
   componentDidMount() {
-    enquireScreen((b) => {
+    enquireScreen((mobile) => {
       this.setState({
-        isMobile: !!b,
+        isMobile: mobile,
       });
     });
   }
