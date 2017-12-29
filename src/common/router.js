@@ -54,6 +54,9 @@ export const getRouterData = (app) => {
     '/form/step-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm')),
     },
+    '/form/step-form/info': {
+      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step1')),
+    },
     '/form/step-form/confirm': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step2')),
     },
