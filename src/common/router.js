@@ -10,10 +10,11 @@ const dynamicWrapper = (app, models, component) => dynamic({
   // add routerData prop
   component: () => {
     const p = component();
+    const routerData = getRouterData(app);
     return new Promise((resolve, reject) => {
       p.then((raw) => {
         const Comp = raw.default || raw;
-        resolve(props => <Comp {...props} routerData={getRouterData(app)} />);
+        resolve(props => <Comp {...props} routerData={routerData} />);
       }).catch(err => reject(err));
     });
   },
