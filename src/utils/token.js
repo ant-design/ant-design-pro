@@ -4,7 +4,7 @@ import _ from 'lodash';
 const STORAGE_TOKEN_NAME = 'TOKEN';
 
 /**
- * JWT的方案
+ * JWT 的方案
  */
 export default {
   parse() {
