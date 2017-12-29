@@ -28,9 +28,8 @@ export default {
       }
     },
     *logout(_, { put }) {
-
       // remove token in sessionStorage
-      token.remove()
+      token.remove();
 
       yield put({
         type: 'changeLoginStatus',
