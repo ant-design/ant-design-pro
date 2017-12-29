@@ -51,7 +51,7 @@ class TagCloud extends PureComponent {
       return textAttrs;
     }
 
-    // 给point注册一个词云的shape
+    // Register a point with a word shape
     Shape.registShape('point', 'cloud', {
       drawShape(cfg, container) {
         cfg.points = this.parsePoints(cfg.points);
@@ -96,7 +96,7 @@ class TagCloud extends PureComponent {
     const max = data[0].value;
     const min = data[data.length - 1].value;
 
-    // 构造一个词云布局对象
+    // Constructs a word cloud layout object
     const layout = new Cloud({
       words: data,
       width,
@@ -104,10 +104,10 @@ class TagCloud extends PureComponent {
 
       rotate: () => 0,
 
-      // 设定文字大小配置函数(默认为12-24px的随机大小)
+      // Set the text size configuration function(The default is a random size of 12-24px)
       size: words => (((words.value - min) / (max - min)) * 50) + 30,
 
-      // 设定文字内容
+      // Set the text content
       text: words => words.name,
     });
 
@@ -117,7 +117,8 @@ class TagCloud extends PureComponent {
         this.node.innerHTML = '';
       }
 
-      // 执行词云布局函数，并在回调函数中调用G2对结果进行绘制
+      // Execute the word cloud layout function and call G2
+      // to draw the result in the callback function
       imageCloud.exec((texts) => {
         const chart = new G2.Chart({
           container: this.node,
@@ -134,7 +135,7 @@ class TagCloud extends PureComponent {
 
         chart.source(texts);
 
-        // 将词云坐标系调整为G2的坐标系
+        // The word cloud coordinate system is adjusted to the G2 coordinate system
         chart.coord().reflect();
 
         chart

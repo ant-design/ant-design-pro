@@ -1,9 +1,9 @@
 ---
 order: 1
-title: 图表卡片
+title: Chart Card
 ---
 
-用于展示图表的卡片容器，可以方便的配合其它图表套件展示丰富信息。
+Card containers for presentational charts.  Easy integration with other chart kits that deliver rich information.
 
 ````jsx
 import { ChartCard, yuan, Field } from 'ant-design-pro/lib/Charts';
@@ -15,25 +15,25 @@ ReactDOM.render(
   <Row>
     <Col span={24}>
       <ChartCard
-        title="销售额"
-        action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
+        title="Sales"
+        action={<Tooltip title="Indicator Description"><Icon type="info-circle-o" /></Tooltip>}
         total={yuan(126560)}
-        footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
+        footer={<Field label="Daily Average Sales" value={numeral(12423).format('0,0')} />}
         contentHeight={46}
       >
         <span>
-          周同比
+          Weekly Comparison
           <Trend flag="up" style={{ marginLeft: 8, color: 'rgba(0,0,0,.85)' }}>12%</Trend>
         </span>
         <span style={{ marginLeft: 16 }}>
-          日环比
+          Daily Comparison
           <Trend flag="down" style={{ marginLeft: 8, color: 'rgba(0,0,0,.85)' }}>11%</Trend>
         </span>
       </ChartCard>
     </Col>
     <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
-        title="移动指标"
+        title="Movement Indicator"
         avatar={
           <img
             style={{ width: 56, height: 56 }}
@@ -41,14 +41,14 @@ ReactDOM.render(
             alt="indicator"
           />
         }
-        action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
+        action={<Tooltip title="Indicator Description"><Icon type="info-circle-o" /></Tooltip>}
         total={yuan(126560)}
-        footer={<Field label="日均销售额" value={numeral(12423).format('0,0')} />}
+        footer={<Field label="Daily Average Sales" value={numeral(12423).format('0,0')} />}
       />
     </Col>
     <Col span={24} style={{ marginTop: 24 }}>
       <ChartCard
-        title="移动指标"
+        title="Movement Indicator"
         avatar={(
           <img
             alt="indicator"
@@ -56,7 +56,7 @@ ReactDOM.render(
             src="https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png"
           />
         )}
-        action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
+        action={<Tooltip title="Indicator Description"><Icon type="info-circle-o" /></Tooltip>}
         total={yuan(126560)}
       />
     </Col>

@@ -1,9 +1,9 @@
 ---
 order: 9
-title: 标签云
+title: Tag Cloud
 ---
 
-标签云是一套相关的标签以及与此相应的权重展示方式，一般典型的标签云有 30 至 150 个标签，而权重影响使用的字体大小或其他视觉效果。
+A tag cloud is a set of related tags and corresponding weighting. There are typically 30 to 150 tags in a typical tag cloud, with weights affecting the font size or other visual effects used.
 
 ````jsx
 import { TagCloud } from 'ant-design-pro/lib/Charts';

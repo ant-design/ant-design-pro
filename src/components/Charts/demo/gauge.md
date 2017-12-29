@@ -1,16 +1,16 @@
 ---
 order: 7
-title: 仪表盘 
+title: Dashboard
 ---
 
-仪表盘是一种进度展示方式，可以更直观的展示当前的进展情况，通常也可表示占比。
+The dashboard intuitively shows progress, often in percentages.
 
 ````jsx
 import { Gauge } from 'ant-design-pro/lib/Charts';
 
 ReactDOM.render(
   <Gauge
-    title="核销率"
+    title="Cancellation Rate"
     height={164}
     percent={87}
   />

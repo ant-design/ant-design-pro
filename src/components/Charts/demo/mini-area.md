@@ -1,7 +1,7 @@
 ---
 order: 2
 col: 2
-title: 迷你区域图
+title: Mini Zone Map
 ---
 
 ````jsx

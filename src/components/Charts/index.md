@@ -2,131 +2,131 @@
 title: 
   en-US: Charts
   zh-CN: Charts
-subtitle: 图表
+subtitle: Charts
 order: 2
 cols: 2
 ---
 
-Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https://antv.alipay.com/g2/doc/index.html) 按照 Ant Design 图表规范封装，需要注意的是 Ant Design Pro 的图表组件以套件形式提供，可以任意组合实现复杂的业务需求。
+Ant Design Pro - These are commonly used enterprise charts and are based on [G2](https://antv.alipay.com/g2/doc/index.html) In accordance with the Ant Design chart specification package, it is important to note that Ant Design Pro's charting components are provided as a suite, allowing complex business requirements to be combined in a wide variety of combinations.
 
-因为结合了 Ant Design 的标准设计，本着极简的设计思想以及开箱即用的理念，简化了大量 API 配置，所以如果需要灵活定制图表，可以参考 Ant Design Pro 图表实现，自行基于 [G2](https://antv.alipay.com/g2/doc/index.html) 封装图表组件使用。
+Because it combines the standard design of Ant Design and simplifies a large number of API configurations with minimal design and out-of-the-box ideas, so if you need to customize the chart flexibly, refer to the Ant Design Pro chart,[G2](https://antv.alipay.com/g2/doc/index.html) Package chart components to use.
 
 ## API
 
 ### ChartCard
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| title | 卡片标题 | ReactNode\|string | - |
-| action | 卡片操作 | ReactNode | - |
-| total | 数据总量 | ReactNode \| number | - |
-| footer | 卡片底部 | ReactNode | - |
-| contentHeight | 内容区域高度 | number | - |
-| avatar | 右侧图标 | React.ReactNode | - |
+| title | Card Title | ReactNode\|string | - |
+| action | Card Operations | ReactNode | - |
+| total | Total Data | ReactNode\| number | - |
+| footer | Card bottom | ReactNode | - |
+| contentHeight | Content Area Height | number | - |
+| avatar | Right icon | React.ReactNode | - |
 ### MiniBar
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| color | 图表颜色 | string | `#1890FF` |
-| height | 图表高度 | number | - |
-| data | 数据 | array<{x, y}> | - |
+| color | Chart color | string |`#1890FF` |
+| height | Chart height | number | - |
+| data | Data | array<{x, y}> | - |
 
 ### MiniArea
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| color | 图表颜色 | string | `rgba(24, 144, 255, 0.2)` |
-| borderColor | 图表边颜色 | string | `#1890FF` |
-| height | 图表高度 | number | - |
-| line | 是否显示描边 | boolean | false |
-| animate | 是否显示动画 | boolean | true |
-| xAxis | [x 轴配置](http://antvis.github.io/g2/doc/tutorial/start/axis.html) | object | - |
-| yAxis | [y 轴配置](http://antvis.github.io/g2/doc/tutorial/start/axis.html) | object | - |
-| data | 数据 | array<{x, y}> | - |
+| color | Chart color | string |`rgba(24, 144, 255, 0.2)` |
+| borderColor | Chart edge color | string |`#1890FF` |
+| height | Chart height | number | - |
+| line | Whether to display stroke | boolean | false |
+| animate | Whether to display animation | boolean | true |
+| xAxis | [x Shaft configuration](http://antvis.github.io/g2/doc/tutorial/start/axis.html) | object | - |
+| yAxis | [y Shaft configuration](http://antvis.github.io/g2/doc/tutorial/start/axis.html) | object | - |
+| data | Data | array<{x, y}> | - |
 
 ### MiniProgress
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| target | 目标比例 | number | - |
-| color | 进度条颜色 | string | - |
-| strokeWidth | 进度条高度 | number | - |
-| percent | 进度比例 | number | - |
+| target | Target ratio | number | - |
+| color | Progress bar color | string | - |
+| strokeWidth | Progress bar height | number | - |
+| percent | Progress ratio | number | - |
 
 ### Bar
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| title | 图表标题 | ReactNode\|string | - |
-| color | 图表颜色 | string | `rgba(24, 144, 255, 0.85)` |
-| margin | 图表内部间距 | array | \[32, 0, 32, 40\] |
-| height | 图表高度 | number | - |
-| data | 数据 | array<{x, y}> | - |
-| autoLabel | 在宽度不足时，自动隐藏 x 轴的 label | boolean | `true` |
+| title | Chart Title | ReactNode\|string | - |
+| color | Chart color | string |`rgba(24, 144, 255, 0.85)` |
+| margin | Inter-chart spacing | array |\[32, 0, 32, 40\] |
+| height | Chart height | number | - |
+| data | Data | array<{x, y}> | - |
+| autoLabel | Auto-hide the x-axis label | boolean | when width is low`true` |
 
 ### Pie
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| animate | 是否显示动画 | boolean | true |
-| color | 图表颜色 | string | `rgba(24, 144, 255, 0.85)` |
-| height | 图表高度 | number | - |
-| hasLegend | 是否显示 legend | boolean | `false` |
-| margin | 图表内部间距 | array | \[24, 0, 24, 0\] |
-| percent | 占比 | number | - |
-| tooltip | 是否显示 tooltip | boolean | true |
-| valueFormat | 显示值的格式化函数 | function | - |
-| title | 图表标题 | ReactNode|string | - |
-| subTitle | 图表子标题 | ReactNode|string | - |
-| total | 图标中央的总数 | string | - |
+| animate | Whether to display animation | boolean | true |
+| color | Chart color | string |`rgba(24, 144, 255, 0.85)` |
+| height | Chart height | number | - |
+| hasLegend | Whether to display legend | boolean |`false` |
+| margin | Inter-chart spacing | array |\[24, 0, 24, 0\] |
+| percent | Proportion | number | - |
+| tooltip | Whether to show tooltip | boolean | true |
+| valueFormat | Display value formatting function | function | - |
+| title | Chart title | ReactNode | string | - |
+| subTitle | Chart Subtitle | ReactNode | string | - |
+| total | The total number of icons in the middle | string | - |
 
 ### Radar
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| title | 图表标题 | ReactNode\|string | - |
-| height | 图表高度 | number | - |
-| hasLegend | 是否显示 legend | boolean | `false` |
-| margin | 图表内部间距 | array | \[24, 30, 16, 30\] |
-| data | 图标数据 | array<{name,label,value}> | - |
+| title | Chart Title | ReactNode\|string | - |
+| height | Chart height | number | - |
+| hasLegend | Whether to display legend | boolean |`false` |
+| margin | Inter-chart spacing | array |\[24, 30, 16, 30\] |
+| data | Icon data | array<{name,label,value}> | - |
 
 ### Gauge
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| title | 图表标题 | ReactNode\|string | - |
-| height | 图表高度 | number | - |
-| color | 图表颜色 | string | `#2F9CFF` |
-| bgColor | 图表背景颜色 | string | `#F0F2F5` |
-| percent | 进度比例 | number | - |
+| title | Chart Title | ReactNode\|string | - |
+| height | Chart height | number | - |
+| color | Chart color | string |`#2F9CFF` |
+| bgColor | Chart background color | string |`#F0F2F5` |
+| percent | Progress ratio | number | - |
 
 ### WaterWave
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| title | 图表标题 | ReactNode\|string | - |
-| height | 图表高度 | number | - |
-| color | 图表颜色 | string | `#1890FF` |
-| percent | 进度比例 | number | - |
+| title | Chart Title | ReactNode\|string | - |
+| height | Chart height | number | - |
+| color | Chart color | string |`#1890FF` |
+| percent | Progress ratio | number | - |
 
 ### TagCloud
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| data | 标题 | Array<name, value\> | - |
-| height | 高度值 | number | - |
+| data | Title | Array<name, value\> | - |
+| height | Height value | number | - |
 
 ### TimelineChart
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| data | 标题 | Array<x, y1, y2\> | - |
-| titleMap | 指标别名 | Object{y1: '客流量', y2: '支付笔数'} | - |
-| height | 高度值 | number | 400 |
+| data | Title | Array<x, y1, y2\> | - |
+| titleMap | Indicator Alias ​​| Object{y1: 'Passenger traffic', y2: 'Pay the number'} | - |
+| height | Height value | number | 400 |
 
 ### Field
 
-| 参数      | 说明                                      | 类型         | 默认值 |
+| Parameter | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| label | 标题 | ReactNode\|string | - |
-| value | 值 | ReactNode\|string | - |
+| label | Title | ReactNode\|string | - |
+| value | Value | ReactNode\|string | - |

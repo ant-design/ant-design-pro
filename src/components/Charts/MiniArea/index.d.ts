@@ -1,7 +1,7 @@
 import * as React from "react";
 
-// g2已经更新到3.0
-// 不带的写了
+// g2 has been updated to 3.0
+// Not yet implemented
 
 export interface Axis {
   title: any;

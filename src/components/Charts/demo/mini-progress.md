@@ -1,6 +1,6 @@
 ---
 order: 3
-title: 迷你进度条
+title: Mini Progress Bar
 ---
 
 ````jsx

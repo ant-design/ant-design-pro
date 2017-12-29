@@ -1,6 +1,6 @@
 ---
 order: 7
-title: 雷达图
+title: Radar Chart
 ---
 
 ````jsx
@@ -8,7 +8,7 @@ import { Radar, ChartCard } from 'ant-design-pro/lib/Charts';
 
 const radarOriginData = [
   {
-    name: '个人',
+    name: 'Personal',
     ref: 10,
     koubei: 8,
     output: 4,
@@ -16,7 +16,7 @@ const radarOriginData = [
     hot: 7,
   },
   {
-    name: '团队',
+    name: 'Team',
     ref: 3,
     koubei: 9,
     output: 6,
@@ -24,7 +24,7 @@ const radarOriginData = [
     hot: 1,
   },
   {
-    name: '部门',
+    name: 'Department',
     ref: 4,
     koubei: 1,
     output: 6,
@@ -34,11 +34,11 @@ const radarOriginData = [
 ];
 const radarData = [];
 const radarTitleMap = {
-  ref: '引用',
-  koubei: '口碑',
-  output: '产量',
-  contribute: '贡献',
-  hot: '热度',
+  ref: 'Quote',
+  koubei: 'Word Of Mouth',
+  output: 'Yield',
+  contribute: 'Contribution',
+  hot: 'Hot',
 };
 radarOriginData.forEach((item) => {
   Object.keys(item).forEach((key) => {
@@ -53,7 +53,7 @@ radarOriginData.forEach((item) => {
 });
 
 ReactDOM.render(
-  <ChartCard title="数据比例">
+  <ChartCard title="Data Ratio">
     <Radar
       hasLegend
       height={286}
