@@ -1,37 +1,26 @@
-import React, { PureComponent } from 'react';
-import G2 from 'g2';
+import React, { Component } from 'react';
+import { Chart, Axis, Tooltip, Geom } from 'bizcharts';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
-import equal from '../equal';
+import autoHeight from '../autoHeight';
 import styles from '../index.less';
 
-class Bar extends PureComponent {
+@autoHeight()
+class Bar extends Component {
   state = {
     autoHideXLabels: false,
-  }
+  };
 
   componentDidMount() {
-    this.renderChart(this.props.data);
-
     window.addEventListener('resize', this.resize);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (!equal(this.props, nextProps)) {
-      this.renderChart(nextProps.data);
-    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
-    if (this.chart) {
-      this.chart.destroy();
-    }
-    this.resize.cancel();
   }
 
   @Bind()
-  @Debounce(200)
+  @Debounce(400)
   resize() {
     if (!this.node) {
       return;
@@ -49,99 +38,60 @@ class Bar extends PureComponent {
         this.setState({
           autoHideXLabels: true,
         });
-        this.renderChart(data);
       }
     } else if (autoHideXLabels) {
       this.setState({
         autoHideXLabels: false,
       });
-      this.renderChart(data);
     }
   }
+
+  handleRoot = (n) => {
+    this.root = n;
+  };
 
   handleRef = (n) => {
     this.node = n;
-  }
+  };
 
-  renderChart(data) {
+  render() {
+    const { height, title, forceFit = true, data, color = 'rgba(24, 144, 255, 0.85)', padding } = this.props;
+
     const { autoHideXLabels } = this.state;
-    const {
-      height = 0,
-      fit = true,
-      color = 'rgba(24, 144, 255, 0.85)',
-      margin = [32, 0, (autoHideXLabels ? 8 : 32), 40],
-    } = this.props;
 
-
-    if (!data || (data && data.length < 1)) {
-      return;
-    }
-
-    // clean
-    this.node.innerHTML = '';
-
-    const { Frame } = G2;
-    const frame = new Frame(data);
-
-    const chart = new G2.Chart({
-      container: this.node,
-      forceFit: fit,
-      height: height - 22,
-      legend: null,
-      plotCfg: {
-        margin,
-      },
-    });
-
-    if (autoHideXLabels) {
-      chart.axis('x', {
-        title: false,
-        tickLine: false,
-        labels: false,
-      });
-    } else {
-      chart.axis('x', {
-        title: false,
-      });
-    }
-    chart.axis('y', {
-      title: false,
-      line: false,
-      tickLine: false,
-    });
-
-    chart.source(frame, {
+    const scale = {
       x: {
         type: 'cat',
       },
       y: {
         min: 0,
       },
-    });
+    };
 
-    chart.tooltip({
-      title: null,
-      crosshairs: false,
-      map: {
-        name: 'x',
-      },
-    });
-    chart.interval().position('x*y').color(color).style({
-      fillOpacity: 1,
-    });
-    chart.render();
-
-    this.chart = chart;
-  }
-
-  render() {
-    const { height, title } = this.props;
+    const tooltip = [
+      'x*y',
+      (x, y) => ({
+        name: x,
+        value: y,
+      }),
+    ];
 
     return (
-      <div className={styles.chart} style={{ height }}>
-        <div>
-          { title && <h4>{title}</h4>}
-          <div ref={this.handleRef} />
+      <div className={styles.chart} style={{ height }} ref={this.handleRoot}>
+        <div ref={this.handleRef}>
+          {title && <h4>{title}</h4>}
+          <Chart
+            scale={scale}
+            height={height}
+            forceFit={forceFit}
+            data={data}
+            padding={padding || 'auto'}
+          >
+            <Axis name="x" title={false} label={!autoHideXLabels} tickLine={!autoHideXLabels} />
+            <Axis name="y" title={false} line={false} tickLine={false} min={0} />
+            <Tooltip showTitle={false} crosshairs={false} />
+            <Geom type="interval" position="x*y" color={color} tooltip={tooltip} />
+          </Chart>
         </div>
       </div>
     );

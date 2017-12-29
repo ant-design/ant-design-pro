@@ -1,34 +1,57 @@
-import React, { PureComponent } from 'react';
-import G2 from 'g2';
+import React, { Component } from 'react';
+import { Chart, Tooltip, Geom, Coord, Axis } from 'bizcharts';
 import { Row, Col } from 'antd';
-import equal from '../equal';
+import autoHeight from '../autoHeight';
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
-class Radar extends PureComponent {
+@autoHeight()
+export default class Radar extends Component {
   state = {
     legendData: [],
-  }
+  };
 
   componentDidMount() {
-    this.renderChart(this.props.data);
+    this.getLengendData();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!equal(this.props, nextProps)) {
-      this.renderChart(nextProps.data);
+    if (this.props.data !== nextProps.data) {
+      this.getLengendData();
     }
   }
 
-  componentWillUnmount() {
-    if (this.chart) {
-      this.chart.destroy();
-    }
-  }
+  getG2Instance = (chart) => {
+    this.chart = chart;
+  };
+
+  // for custom lengend view
+  getLengendData = () => {
+    if (!this.chart) return;
+    const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
+    const items = geom.get('dataArray') || []; // 获取图形对应的
+
+    const legendData = items.map((item) => {
+      // eslint-disable-next-line
+      const origins = item.map(t => t._origin);
+      const result = {
+        name: origins[0].name,
+        color: item[0].color,
+        checked: true,
+        value: origins.reduce((p, n) => p + n.value, 0),
+      };
+
+      return result;
+    });
+
+    this.setState({
+      legendData,
+    });
+  };
 
   handleRef = (n) => {
     this.node = n;
-  }
+  };
 
   handleLegendClick = (item, i) => {
     const newItem = item;
@@ -37,153 +60,121 @@ class Radar extends PureComponent {
     const { legendData } = this.state;
     legendData[i] = newItem;
 
+    const filteredLegendData = legendData.filter(l => l.checked).map(l => l.name);
+
     if (this.chart) {
-      const filterItem = legendData.filter(l => l.checked).map(l => l.name);
-      this.chart.filter('name', filterItem);
+      this.chart.filter('name', val => filteredLegendData.indexOf(val) > -1);
       this.chart.repaint();
     }
 
     this.setState({
       legendData,
     });
-  }
+  };
 
-  renderChart(data) {
-    const { height = 0,
-      hasLegend = true,
-      fit = true,
-      tickCount = 4,
-      margin = [24, 30, 16, 30] } = this.props;
-
-    const colors = [
-      '#1890FF', '#FACC14', '#2FC25B', '#8543E0', '#F04864', '#13C2C2', '#fa8c16', '#a0d911',
+  render() {
+    const defaultColors = [
+      '#1890FF',
+      '#FACC14',
+      '#2FC25B',
+      '#8543E0',
+      '#F04864',
+      '#13C2C2',
+      '#fa8c16',
+      '#a0d911',
     ];
 
-    if (!data || (data && data.length < 1)) {
-      return;
-    }
+    const {
+      data = [],
+      height = 0,
+      title,
+      hasLegend = false,
+      forceFit = true,
+      tickCount = 4,
+      padding = [35, 30, 16, 30],
+      animate = true,
+      colors = defaultColors,
+    } = this.props;
 
-    // clean
-    this.node.innerHTML = '';
+    const { legendData } = this.state;
 
-    const chart = new G2.Chart({
-      container: this.node,
-      forceFit: fit,
-      height: height - (hasLegend ? 80 : 22),
-      plotCfg: {
-        margin,
-      },
-    });
-
-    this.chart = chart;
-
-    chart.source(data, {
+    const scale = {
       value: {
         min: 0,
         tickCount,
       },
-    });
+    };
 
-    chart.coord('polar');
-    chart.legend(false);
-
-    chart.axis('label', {
-      line: null,
-      labelOffset: 8,
-      labels: {
-        label: {
-          fill: 'rgba(0, 0, 0, .65)',
-        },
-      },
-      grid: {
-        line: {
-          stroke: '#e9e9e9',
-          lineWidth: 1,
-          lineDash: [0, 0],
-        },
-      },
-    });
-
-    chart.axis('value', {
-      grid: {
-        type: 'polygon',
-        line: {
-          stroke: '#e9e9e9',
-          lineWidth: 1,
-          lineDash: [0, 0],
-        },
-      },
-      labels: {
-        label: {
-          fill: 'rgba(0, 0, 0, .65)',
-        },
-      },
-    });
-
-    chart.line().position('label*value').color('name', colors);
-    chart.point().position('label*value').color('name', colors).shape('circle')
-      .size(3);
-
-    chart.render();
-
-    if (hasLegend) {
-      const geom = chart.getGeoms()[0]; // 获取所有的图形
-      const items = geom.getData(); // 获取图形对应的数据
-      const legendData = items.map((item) => {
-        /* eslint no-underscore-dangle:0 */
-        const origin = item._origin;
-        const result = {
-          name: origin[0].name,
-          color: item.color,
-          checked: true,
-          value: origin.reduce((p, n) => p + n.value, 0),
-        };
-
-        return result;
-      });
-
-      this.setState({
-        legendData,
-      });
-    }
-  }
-
-  render() {
-    const { height, title, hasLegend } = this.props;
-    const { legendData } = this.state;
+    const chartHeight = height - (hasLegend ? 80 : 22);
 
     return (
       <div className={styles.radar} style={{ height }}>
         <div>
           {title && <h4>{title}</h4>}
-          <div ref={this.handleRef} />
-          {
-            hasLegend && (
-              <Row className={styles.legend}>
-                {
-                  legendData.map((item, i) => (
-                    <Col
-                      span={(24 / legendData.length)}
-                      key={item.name}
-                      onClick={() => this.handleLegendClick(item, i)}
-                    >
-                      <div className={styles.legendItem}>
-                        <p>
-                          <span className={styles.dot} style={{ backgroundColor: !item.checked ? '#aaa' : item.color }} />
-                          <span>{item.name}</span>
-                        </p>
-                        <h6>{item.value}</h6>
-                      </div>
-                    </Col>
-                  ))
-                }
-              </Row>
-            )
-          }
+          <Chart
+            scale={scale}
+            height={chartHeight}
+            forceFit={forceFit}
+            data={data}
+            padding={padding}
+            animate={animate}
+            onGetG2Instance={this.getG2Instance}
+          >
+            <Tooltip />
+            <Coord type="polar" />
+            <Axis
+              name="label"
+              line={null}
+              tickLine={null}
+              grid={{
+                lineStyle: {
+                  lineDash: null,
+                },
+                hideFirstLine: false,
+              }}
+            />
+            <Axis
+              name="value"
+              grid={{
+                type: 'polygon',
+                lineStyle: {
+                  lineDash: null,
+                },
+              }}
+            />
+            <Geom type="line" position="label*value" color={['name', colors]} size={1} />
+            <Geom
+              type="point"
+              position="label*value"
+              color={['name', colors]}
+              shape="circle"
+              size={3}
+            />
+          </Chart>
+          {hasLegend && (
+            <Row className={styles.legend}>
+              {legendData.map((item, i) => (
+                <Col
+                  span={24 / legendData.length}
+                  key={item.name}
+                  onClick={() => this.handleLegendClick(item, i)}
+                >
+                  <div className={styles.legendItem}>
+                    <p>
+                      <span
+                        className={styles.dot}
+                        style={{ backgroundColor: !item.checked ? '#aaa' : item.color }}
+                      />
+                      <span>{item.name}</span>
+                    </p>
+                    <h6>{item.value}</h6>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          )}
         </div>
       </div>
     );
   }
 }
-
-export default Radar;
