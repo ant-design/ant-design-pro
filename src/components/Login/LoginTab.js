@@ -26,9 +26,6 @@ export default class LoginTab extends Component {
     }
   }
   render() {
-    const { tab, children, ...restProps } = this.props;
-    return (
-      <TabPane tab={tab} {...restProps}>{ children }</TabPane>
-    );
+    return <TabPane {...this.props} />;
   }
 }
