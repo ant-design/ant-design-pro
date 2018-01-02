@@ -3,19 +3,20 @@
  * @Author: jim chen
  * @Date: 2018-01-02 09:54:18
  * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-02 13:34:14
+ * @Last Modified time: 2018-01-02 15:31:58
  */
 import React from 'react';
 import PromiseRender from './PromiseRender';
 
 /**
- *检查权限方法, 返回dom
- * @param {传入的权限 支持 string|array|Promise|Function} authorizedRole
- * @param {当前得权限 传入 string} currentRole
- * @param {通过验证返回的Dom} target
- * @param {没有通过返回得Dom} Exception
+ * 通用权限检查方法
+ * Common check permissions method
+ * @param { 权限判定 Permission judgment type string |array | Promise | Function } authorizedRole
+ * @param { 你的权限 Your permission description  type:string} currentRole
+ * @param { 通过的组件 Passing components } target
+ * @param { 未通过的组件 no pass components } Exception
  */
-const CheckPermissions = (authorizedRole, currentRole, target, Exception) => {
+const checkPermissions = (authorizedRole, currentRole, target, Exception) => {
   if (!authorizedRole) {
     return target;
   }
@@ -56,4 +57,4 @@ const CheckPermissions = (authorizedRole, currentRole, target, Exception) => {
   }
 };
 
-export default CheckPermissions;
+export default checkPermissions;

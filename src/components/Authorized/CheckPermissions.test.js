@@ -1,4 +1,11 @@
-import CheckPermissions from './CheckPermissions.js';
+/*
+ * @Author: jim chen
+ * @Date: 2018-01-02 15:13:56
+ * @Last Modified by: jim chen
+ * @Last Modified time: 2018-01-02 15:31:34
+ */
+
+import checkPermissions from './CheckPermissions.js';
 
 
 const target = 'ok';
@@ -6,32 +13,32 @@ const error = 'error';
 
 describe('test CheckPermissions', () => {
   it('Correct string permission authentication', () => {
-    expect(CheckPermissions('user', 'user', target, error)).toEqual('ok');
+    expect(checkPermissions('user', 'user', target, error)).toEqual('ok');
   });
   it('Wrong string permission authentication', () => {
-    expect(CheckPermissions('admin', 'user', target, error)).toEqual('error');
+    expect(checkPermissions('admin', 'user', target, error)).toEqual('error');
   });
   it('Correct Array permission authentication', () => {
-    expect(CheckPermissions(['user', 'admin'], 'user', target, error)).toEqual(
+    expect(checkPermissions(['user', 'admin'], 'user', target, error)).toEqual(
       'ok'
     );
   });
   it('Wrong Array permission authentication,currentRole error', () => {
     expect(
-      CheckPermissions(['user', 'admin'], 'user,admin', target, error)
+      checkPermissions(['user', 'admin'], 'user,admin', target, error)
     ).toEqual('error');
   });
   it('Wrong Array permission authentication', () => {
-    expect(CheckPermissions(['user', 'admin'], 'guest', target, error)).toEqual(
+    expect(checkPermissions(['user', 'admin'], 'guest', target, error)).toEqual(
       'error'
     );
   });
   it('Wrong Function permission authentication', () => {
-    expect(CheckPermissions(() => false, 'guest', target, error)).toEqual(
+    expect(checkPermissions(() => false, 'guest', target, error)).toEqual(
       'error'
     );
   });
   it('Correct Function permission authentication', () => {
-    expect(CheckPermissions(() => true, 'guest', target, error)).toEqual('ok');
+    expect(checkPermissions(() => true, 'guest', target, error)).toEqual('ok');
   });
 });
