@@ -3,7 +3,7 @@
  * @Author: jim chen
  * @Date: 2018-01-02 09:54:18
  * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-02 11:18:30
+ * @Last Modified time: 2018-01-02 13:34:14
  */
 import React from 'react';
 import PromiseRender from './PromiseRender';
@@ -16,7 +16,7 @@ import PromiseRender from './PromiseRender';
  * @param {没有通过返回得Dom} Exception
  */
 const CheckPermissions = (authorizedRole, currentRole, target, Exception) => {
-  if (!authorizedRole || !authorizedRole.length) {
+  if (!authorizedRole) {
     return target;
   }
   // 数组处理
