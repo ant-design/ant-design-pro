@@ -1,9 +1,7 @@
 {
   "entry": "src/index.js",
   "extraBabelPlugins": [
-    "transform-runtime",
     "transform-decorators-legacy",
-    "transform-class-properties",
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
   ],
   "env": {
