@@ -21,6 +21,7 @@
   "dependencies": {
     "@antv/data-set": "^0.8.0",
     "antd": "^3.0.0",
+    "atob": "^2.0.3",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.9.2",
     "bizcharts": "^3.1.0-beta.4",
@@ -63,7 +64,7 @@
     "eslint-plugin-compat": "^2.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^6.0.0",
-    "eslint-plugin-markdown": "^1.0.0-beta.6",
+    "eslint-plugin-markdown": "^1.0.0-beta.7",
     "eslint-plugin-react": "^7.0.1",
     "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
