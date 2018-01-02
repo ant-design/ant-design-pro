@@ -13,5 +13,8 @@
   },
   "ignoreMomentLocale": true,
   "theme": "./src/theme.js",
+  "html": {
+    "template": "./src/index.ejs"
+  },
   "hash": true
 }
