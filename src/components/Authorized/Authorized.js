@@ -1,4 +1,5 @@
 import React from 'react';
+import CheckPermissions from './CheckPermissions';
 
 class Authorized extends React.Component {
   render() {
@@ -8,10 +9,12 @@ class Authorized extends React.Component {
     if (getRole) {
       currentRole = getRole();
     }
-    if (!authorizedRole || !authorizedRole.length) {
-      return childrenRender;
-    }
-    return authorizedRole.indexOf(currentRole) > -1 ? childrenRender : noMatch;
+    return CheckPermissions(
+      authorizedRole,
+      currentRole,
+      childrenRender,
+      noMatch
+    );
   }
 }
 
@@ -23,10 +26,12 @@ const authorizedCreate = ({ authorizedRole, getRole, noMatch = null }) => {
     if (getRole) {
       currentRole = getRole();
     }
-    if (!authorizedRole || !authorizedRole.length) {
-      return Comp;
-    }
-    return authorizedRole.indexOf(currentRole) > -1 ? Comp : noMatch;
+    return CheckPermissions(
+      authorizedRole,
+      currentRole,
+      Comp,
+      noMatch
+    );
   };
 };
 

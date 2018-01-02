@@ -22,8 +22,8 @@ export default {
       });
       // Login successfully
       if (response.status === 'ok') {
-        yield put(routerRedux.push('/'));
-        // 非常粗暴的跳转
+        // 非常粗暴的跳转,登陆成功之后权限发生改变,会自动重定向到主页
+        //  yield put(routerRedux.push('/'));
         location.reload();
       }
     },

@@ -25,7 +25,7 @@ function RouterConfig({ history, app }) {
           <AuthorizedRoute
             path="/user"
             render={props => <UserLayout {...props} />}
-            authorizedRole={['guest', 'user']}
+            authorizedRole="guest"
             getRole={getRole}
             redirectPath="/"
           />
