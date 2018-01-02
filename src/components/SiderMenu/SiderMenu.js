@@ -4,7 +4,6 @@ import { Link } from 'dva/router';
 import styles from './index.less';
 import { getMenuData } from '../../common/menu';
 import Authorized from '../Authorized';
-import { getRole } from '../../utils/role';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -106,7 +105,6 @@ export default class SiderMenu extends PureComponent {
         } else {
           return Authorized.create({
             authorizedRole: item.role,
-            getRole,
           })(
             <SubMenu
               title={

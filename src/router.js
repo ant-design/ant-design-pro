@@ -5,7 +5,6 @@ import zhCN from 'antd/lib/locale-provider/zh_CN';
 import dynamic from 'dva/dynamic';
 import { getRouterData } from './common/router';
 import Authorized from './components/Authorized';
-import { getRole } from './utils/role';
 import styles from './index.less';
 
 const { AuthorizedRoute } = Authorized;
@@ -26,14 +25,12 @@ function RouterConfig({ history, app }) {
             path="/user"
             render={props => <UserLayout {...props} />}
             authorizedRole="guest"
-            getRole={getRole}
             redirectPath="/"
           />
           <AuthorizedRoute
             path="/"
             render={props => <BasicLayout {...props} />}
             authorizedRole={['admin', 'user']}
-            getRole={getRole}
             redirectPath="/user/login"
           />
         </Switch>

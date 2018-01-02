@@ -12,10 +12,9 @@ import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
+import Authorized from '../components/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
-import Authorized from '../components/Authorized';
-import { getRole } from '../utils/role';
 
 const { Content } = Layout;
 const { AuthorizedRoute } = Authorized;
@@ -159,33 +158,21 @@ class BasicLayout extends React.PureComponent {
                 {
                   getRoutes(match.path, routerData).map(item =>
                     (
-                      item.role ?
-                        (
-                          <AuthorizedRoute
-                            key={item.key}
-                            path={item.path}
-                            component={item.component}
-                            exact={item.exact}
-                            role={item.role}
-                            getRole={getRole}
-                            redirectPath="/exception/403"
-                          />
-                        ) :
-                        (
-                          <Route
-                            key={item.key}
-                            path={item.path}
-                            component={item.component}
-                            exact={item.exact}
-                          />
-                        )
+                      <AuthorizedRoute
+                        key={item.key}
+                        path={item.path}
+                        component={item.component}
+                        exact={item.exact}
+                        authorizedRole={item.role}
+                        redirectPath="/exception/403"
+                      />
                     )
                   )
                 }
                 {
-                 redirectData.map(item =>
-                   <Redirect key={item.from} exact from={item.from} to={item.to} />
-                 )
+                  redirectData.map(item =>
+                    <Redirect key={item.from} exact from={item.from} to={item.to} />
+                  )
                 }
                 <Redirect exact from="/" to="/dashboard/analysis" />
                 <Route render={NotFound} />

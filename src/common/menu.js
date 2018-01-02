@@ -12,7 +12,6 @@ const menuData = [{
     name: '工作台',
     path: 'workplace',
     // hideInMenu: true,
-    // role: ['admin'],
   }],
 }, {
   name: '表单页',
