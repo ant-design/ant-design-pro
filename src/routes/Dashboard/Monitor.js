@@ -103,7 +103,7 @@ export default class Monitor extends PureComponent {
               bordered={false}
               className={styles.pieCard}
             >
-              <Row gutter={4} style={{ padding: '16px 0' }}>
+              <Row style={{ padding: '16px 0' }}>
                 <Col span={8}>
                   <Pie
                     animate={false}

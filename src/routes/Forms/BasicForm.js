@@ -156,22 +156,21 @@ export default class BasicForms extends PureComponent {
                     <Radio value="3">不公开</Radio>
                   </Radio.Group>
                 )}
-                <FormItem>
-                  {getFieldDecorator('publicUsers', {
-                    })(
-                      <Select
-                        mode="multiple"
-                        placeholder="公开给"
-                        style={{
-                          margin: '8px 0',
-                          display: getFieldValue('public') === '2' ? 'block' : 'none',
-                        }}
-                      >
-                        <Option value="1">同事甲</Option>
-                        <Option value="2">同事乙</Option>
-                        <Option value="3">同事丙</Option>
-                      </Select>
-                    )}
+                <FormItem style={{ marginBottom: 0 }}>
+                  {getFieldDecorator('publicUsers')(
+                    <Select
+                      mode="multiple"
+                      placeholder="公开给"
+                      style={{
+                        margin: '8px 0',
+                        display: getFieldValue('public') === '2' ? 'block' : 'none',
+                      }}
+                    >
+                      <Option value="1">同事甲</Option>
+                      <Option value="2">同事乙</Option>
+                      <Option value="3">同事丙</Option>
+                    </Select>
+                  )}
                 </FormItem>
               </div>
             </FormItem>
