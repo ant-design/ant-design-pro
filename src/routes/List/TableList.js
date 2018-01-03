@@ -115,6 +115,7 @@ export default class TableList extends PureComponent {
 
       const values = {
         ...fieldsValue,
+        date: fieldsValue['date'].format('YYYY-MM-DD'),
         updatedAt: fieldsValue.updatedAt && fieldsValue.updatedAt.valueOf(),
       };
 
