@@ -18,7 +18,7 @@ class LoginDemo extends React.Component {
     autoLogin: true,
   }
   onSubmit = (err, values) => {
-    console.log(`value collected ->`, {...values, autoLogin: this.state.autoLogin});
+    console.log('value collected ->', { ...values, autoLogin: this.state.autoLogin });
     if (this.state.type === 'tab1') {
       this.setState({
         notice: '',
@@ -27,21 +27,21 @@ class LoginDemo extends React.Component {
           setTimeout(() => {
             this.setState({
               notice: '账号或密码错误！',
-            })
+            });
           }, 500);
         }
-      })
+      });
     }
   }
   onTabChange = (key) => {
     this.setState({
       type: key,
-    })
+    });
   }
   changeAutoLogin = (e) => {
     this.setState({
       autoLogin: e.target.checked,
-    })
+    });
   }
   render() {
     return (
@@ -75,7 +75,7 @@ class LoginDemo extends React.Component {
           <a style={{ float: 'right' }} href="">注册账户</a>
         </div>
       </Login>
-    )
+    );
   }
 }
 
