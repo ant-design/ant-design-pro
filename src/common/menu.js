@@ -115,22 +115,16 @@ const menuData = [{
 }];
 
 function formatter(data, parentPath = '') {
-  const list = [];
-  data.forEach((item) => {
+  return data.map((item) => {
+    const result = {
+      ...item,
+      path: `${parentPath}${item.path}`,
+    };
     if (item.children) {
-      list.push({
-        ...item,
-        path: `${parentPath}${item.path}`,
-        children: formatter(item.children, `${parentPath}${item.path}/`),
-      });
-    } else {
-      list.push({
-        ...item,
-        path: `${parentPath}${item.path}`,
-      });
+      result.children = formatter(item.children, `${parentPath}${item.path}/`);
     }
+    return result;
   });
-  return list;
 }
 
 export const getMenuData = () => formatter(menuData);
