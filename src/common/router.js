@@ -1,9 +1,13 @@
-/* eslint-disable global-require */
 import { createElement } from 'react';
 import dynamic from 'dva/dynamic';
 import { getMenuData } from './menu';
 
 let routerDataCache;
+
+const modelNotExisted = (app, model) => (
+  // eslint-disable-next-line
+  !app._models.some(({ namespace }) => namespace === model)
+);
 
 // wrapper of dynamic
 const dynamicWrapper = (app, models, component) => {
@@ -11,8 +15,9 @@ const dynamicWrapper = (app, models, component) => {
   // transformed by babel-plugin-dynamic-import-node-sync
   if (component.toString().indexOf('.then(') < 0) {
     models.forEach((model) => {
-      if(!app['_models'].some(({ namespace }) => namespace === model)) { // eslint-disable-line
-        app.model(require(`../models/${model}`)); // eslint-disable-line
+      if (modelNotExisted(app, model)) {
+        // eslint-disable-next-line
+        app.model(require(`../models/${model}`));
       }
     });
     return (props) => {
@@ -28,8 +33,9 @@ const dynamicWrapper = (app, models, component) => {
   // () => import('module')
   return dynamic({
     app,
-    // eslint-disable-next-line no-underscore-dangle
-    models: () => models.filter(m => !app._models.some(({ namespace }) => namespace === m)).map(m => import(`../models/${m}.js`)),
+    models: () => models.filter(
+      model => modelNotExisted(app, model)).map(m => import(`../models/${m}.js`)
+    ),
     // add routerData prop
     component: () => {
       if (!routerDataCache) {
