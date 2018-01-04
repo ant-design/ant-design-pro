@@ -16,11 +16,12 @@
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
     "test": "jest",
+    "test:comps": "jest ./src/components",
     "test:all": "node ./tests/run-tests.js"
   },
   "dependencies": {
     "@antv/data-set": "^0.8.0",
-    "antd": "^3.0.0",
+    "antd": "^3.1.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.9.2",
     "bizcharts": "^3.1.0-beta.4",
@@ -37,10 +38,10 @@
     "prop-types": "^15.5.10",
     "qs": "^6.5.0",
     "rc-drawer-menu": "^0.5.0",
-    "react": "^16.0.0",
+    "react": "^16.2.0",
     "react-container-query": "^0.9.1",
     "react-document-title": "^2.0.3",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.2.0",
     "react-fittext": "^1.0.0"
   },
   "devDependencies": {

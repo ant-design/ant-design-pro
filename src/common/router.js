@@ -21,17 +21,17 @@ function getFlatMenuData(menus) {
   let keys = {};
   menus.forEach((item) => {
     if (item.children) {
-      keys[item.path] = item.name;
+      keys[item.path] = { ...item };
       keys = { ...keys, ...getFlatMenuData(item.children) };
     } else {
-      keys[item.path] = item.name;
+      keys[item.path] = { ...item };
     }
   });
   return keys;
 }
 
 export const getRouterData = (app) => {
-  const routerData = {
+  const routerConfig = {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
@@ -45,6 +45,7 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['project', 'activities', 'chart'], () => import('../routes/Dashboard/Workplace')),
       // hideInBreadcrumb: true,
       // name: '工作台',
+      // authority: 'admin',
     },
     '/form/basic-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
@@ -127,12 +128,14 @@ export const getRouterData = (app) => {
   };
   // Get name from ./menu.js or just set it in the router data.
   const menuData = getFlatMenuData(getMenuData());
-  const routerDataWithName = {};
-  Object.keys(routerData).forEach((item) => {
-    routerDataWithName[item] = {
-      ...routerData[item],
-      name: routerData[item].name || menuData[item.replace(/^\//, '')],
+  const routerData = {};
+  Object.keys(routerConfig).forEach((item) => {
+    const menuItem = menuData[item.replace(/^\//, '')] || {};
+    routerData[item] = {
+      ...routerConfig[item],
+      name: routerConfig[item].name || menuItem.name,
+      authority: routerConfig[item].authority || menuItem.authority,
     };
   });
-  return routerDataWithName;
+  return routerData;
 };
