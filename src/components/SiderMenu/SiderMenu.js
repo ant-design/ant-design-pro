@@ -6,6 +6,20 @@ import styles from './index.less';
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
+// Allow menu.js config icon as string or ReactNode
+//   icon: 'setting',
+//   icon: 'http://demo.com/icon.png',
+//   icon: <Icon type="setting" />,
+const getIcon = (icon) => {
+  if (typeof icon === 'string' && icon.indexOf('http') === 0) {
+    return <img src={icon} alt="icon" className={styles.icon} />;
+  }
+  if (typeof icon === 'string') {
+    return <Icon type={icon} />;
+  }
+  return icon;
+};
+
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
@@ -84,7 +98,7 @@ export default class SiderMenu extends PureComponent {
               title={
                 item.icon ? (
                   <span>
-                    <Icon type={item.icon} />
+                    {getIcon(item.icon)}
                     <span>{item.name}</span>
                   </span>
                 ) : item.name
@@ -95,7 +109,7 @@ export default class SiderMenu extends PureComponent {
             </SubMenu>
           );
       }
-      const icon = item.icon && <Icon type={item.icon} />;
+      const icon = getIcon(item.icon);
       return item.hideInMenu ? null :
         (
           <Menu.Item key={item.key || item.path}>
