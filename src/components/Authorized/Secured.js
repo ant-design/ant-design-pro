@@ -10,7 +10,7 @@ const Exception403 = () => (
 );
 
 /**
- * 用于判断时候拥有权限访问此view权限
+ * 用于判断是否拥有权限访问此view权限
  * authority 支持传入  string ,funtion:()=>boolean|Promise
  * e.g. 'user' 只有user用户能访问
  * e.g. 'user,admin' user和 admin 都能访问
@@ -33,6 +33,9 @@ const authorize = (authority, error) => {
   let classError = false;
   if (error) {
     classError = () => error;
+  }
+  if (!authority) {
+    throw new Error('authority is required');
   }
   return function decideAuthority(targer) {
     return CheckPermissions(

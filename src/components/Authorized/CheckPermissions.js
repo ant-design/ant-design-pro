@@ -46,10 +46,11 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
         return target;
       }
       return Exception;
-    } catch (e) {
-      return Exception;
+    } catch (error) {
+      throw error;
     }
   }
+  throw new Error('unsupported parameters');
 };
 
 export { checkPermissions };
