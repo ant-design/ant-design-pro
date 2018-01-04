@@ -23,7 +23,7 @@ describe('test CheckPermissions', () => {
       'ok'
     );
   });
-  it('Wrong Array permission authentication,currentRole error', () => {
+  it('Wrong Array permission authentication,currentAuthority error', () => {
     expect(
       checkPermissions(['user', 'admin'], 'user,admin', target, error)
     ).toEqual('error');

@@ -74,7 +74,7 @@ const proxy = {
       res.send({
         status: 'ok',
         type,
-        currentRole: 'admin'
+        currentAuthority: 'admin'
       });
       return ;
     }
@@ -82,18 +82,18 @@ const proxy = {
       res.send({
         status: 'ok',
         type,
-        currentRole: 'user'
+        currentAuthority: 'user'
       });
       return ;
     }
     res.send({
       status: 'error',
       type,
-      currentRole: 'guest'
+      currentAuthority: 'guest'
     });
   },
   'POST /api/register': (req, res) => {
-    res.send({ status: 'ok', currentRole: 'user' });
+    res.send({ status: 'ok', currentAuthority: 'user' });
   },
   'GET /api/notices': getNotices,
   'GET /api/500': (req, res) => {

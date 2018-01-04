@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, Redirect } from 'dva/router';
 import Authorized from './Authorized';
-import { getRole } from '../../utils/role';
+import { getAuthority } from '../../utils/authority';
 
 class AuthorizedRoute extends React.Component {
   render() {
-    const { component: Component, render, authorizedRole, currentRole = getRole(), redirectPath,
-      ...rest } = this.props;
+    const { component: Component, render, authority, currentAuthority = getAuthority(),
+      redirectPath, ...rest } = this.props;
     return (
       <Authorized
-        authorizedRole={authorizedRole}
-        currentRole={currentRole}
+        authority={authority}
+        currentAuthority={currentAuthority}
         noMatch={<Route {...rest} render={() => <Redirect to={{ pathname: redirectPath }} />} />}
       >
         <Route

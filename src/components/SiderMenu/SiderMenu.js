@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 import styles from './index.less';
-import { getMenuData } from '../../common/menu';
 import Authorized from '../Authorized';
 
 const { Sider } = Layout;
@@ -104,7 +103,7 @@ export default class SiderMenu extends PureComponent {
           return null;
         } else {
           return Authorized.create({
-            authorizedRole: item.role,
+            authority: item.authority,
           })(
             <SubMenu
               title={
@@ -122,9 +121,13 @@ export default class SiderMenu extends PureComponent {
           );
         }
       }
-      const icon = getIcon(item.icon);
-      return item.hideInMenu ? null :
-        (
+      const icon = item.icon && <Icon type={item.icon} />;
+      if (item.hideInMenu) {
+        return null;
+      } else {
+        return Authorized.create({
+          authority: item.authority,
+        })(
           <Menu.Item key={item.key || item.path}>
             {
               /^https?:\/\//.test(itemPath) ? (
@@ -143,6 +146,7 @@ export default class SiderMenu extends PureComponent {
             }
           </Menu.Item>
         );
+      }
     });
   }
   handleOpenChange = (openKeys) => {

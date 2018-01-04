@@ -163,7 +163,7 @@ class BasicLayout extends React.PureComponent {
                         path={item.path}
                         component={item.component}
                         exact={item.exact}
-                        authorizedRole={item.role}
+                        authority={item.authority}
                         redirectPath="/exception/403"
                       />
                     )

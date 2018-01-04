@@ -1,20 +1,20 @@
 import React from 'react';
 import CheckPermissions from './CheckPermissions';
-import { getRole } from '../../utils/role';
+import { getAuthority } from '../../utils/authority';
 
 class Authorized extends React.Component {
   render() {
-    const { children, authorizedRole, currentRole = getRole(), noMatch = null } = this.props;
+    const { children, authority, currentAuthority = getAuthority(), noMatch = null } = this.props;
     const childrenRender = typeof children === 'undefined' ? null : children;
-    let role = 'NULL';
-    if (currentRole.constructor.name === 'Function') {
-      role = currentRole();
-    } else if (role.constructor.name === 'String') {
-      role = currentRole;
+    let current = 'NULL';
+    if (currentAuthority.constructor.name === 'Function') {
+      current = currentAuthority();
+    } else if (currentAuthority.constructor.name === 'String') {
+      current = currentAuthority;
     }
     return CheckPermissions(
-      authorizedRole,
-      role,
+      authority,
+      current,
       childrenRender,
       noMatch
     );
@@ -23,17 +23,17 @@ class Authorized extends React.Component {
 
 // for MenuItem, SubMenu and etc. which can not be wrapped by customized component.
 // https://github.com/ant-design/ant-design/issues/4853
-const authorizedCreate = ({ authorizedRole, currentRole = getRole(), noMatch = null }) => {
+const authorizedCreate = ({ authority, currentAuthority = getAuthority(), noMatch = null }) => {
   return (Comp) => {
-    let role = 'NULL';
-    if (currentRole.constructor.name === 'Function') {
-      role = currentRole();
-    } else if (role.constructor.name === 'String') {
-      role = currentRole;
+    let current = 'NULL';
+    if (currentAuthority.constructor.name === 'Function') {
+      current = currentAuthority();
+    } else if (currentAuthority.constructor.name === 'String') {
+      current = currentAuthority;
     }
     return CheckPermissions(
-      authorizedRole,
-      role,
+      authority,
+      current,
       Comp,
       noMatch
     );

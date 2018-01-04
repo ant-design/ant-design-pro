@@ -25,7 +25,7 @@ const menuData = [{
     path: 'step-form',
   }, {
     name: '高级表单',
-    role: 'admin',
+    authority: 'admin',
     path: 'advanced-form',
   }],
 }, {
@@ -59,14 +59,13 @@ const menuData = [{
   name: '详情页',
   icon: 'profile',
   path: 'profile',
-  role: 'admin',
   children: [{
     name: '基础详情页',
     path: 'basic',
   }, {
     name: '高级详情页',
     path: 'advanced',
-    role: 'admin',
+    authority: 'admin',
   }],
 }, {
   name: '结果页',
@@ -86,7 +85,7 @@ const menuData = [{
   children: [{
     name: '403',
     path: '403',
-    role: 'user',
+    authority: 'user',
   }, {
     name: '404',
     path: '404',
@@ -101,7 +100,7 @@ const menuData = [{
   name: '账户',
   icon: 'user',
   path: 'user',
-  role: 'guest',
+  authority: 'guest',
   children: [{
     name: '登录',
     path: 'login',
@@ -119,14 +118,15 @@ const menuData = [{
   target: '_blank',
 }];
 
-function formatter(data, parentPath = '') {
+function formatter(data, parentPath = '', parentAuthority) {
   return data.map((item) => {
     const result = {
       ...item,
       path: `${parentPath}${item.path}`,
+      authority: item.authority || parentAuthority,
     };
     if (item.children) {
-      result.children = formatter(item.children, `${parentPath}${item.path}/`);
+      result.children = formatter(item.children, `${parentPath}${item.path}/`, item.authority);
     }
     return result;
   });

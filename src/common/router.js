@@ -45,7 +45,7 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['project', 'activities', 'chart'], () => import('../routes/Dashboard/Workplace')),
       // hideInBreadcrumb: true,
       // name: '工作台',
-      // role: 'admin',
+      // authority: 'admin',
     },
     '/form/basic-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
@@ -134,7 +134,7 @@ export const getRouterData = (app) => {
     routerData[item] = {
       ...routerConfig[item],
       name: routerConfig[item].name || menuItem.name,
-      role: routerConfig[item].role || menuItem.role,
+      authority: routerConfig[item].authority || menuItem.authority,
     };
   });
   return routerData;

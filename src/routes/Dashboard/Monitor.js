@@ -12,7 +12,7 @@ import styles from './Monitor.less';
 
 const targetTime = new Date().getTime() + 3900000;
 
-@Secured('user')
+@Secured('admin')
 @connect(state => ({
   monitor: state.monitor,
 }))

@@ -1,5 +1,5 @@
 import { RenderSecured } from '../components/Authorized';
-import { getRole } from './role';
+import { getAuthority } from './authority';
 
-const Secured = RenderSecured(getRole());
+const Secured = RenderSecured(getAuthority());
 export default Secured;

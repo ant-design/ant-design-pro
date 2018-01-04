@@ -11,42 +11,42 @@ import PromiseRender from './PromiseRender';
 /**
  * 通用权限检查方法
  * Common check permissions method
- * @param { 权限判定 Permission judgment type string |array | Promise | Function } authorizedRole
- * @param { 你的权限 Your permission description  type:string} currentRole
+ * @param { 权限判定 Permission judgment type string |array | Promise | Function } authority
+ * @param { 你的权限 Your permission description  type:string} currentAuthority
  * @param { 通过的组件 Passing components } target
  * @param { 未通过的组件 no pass components } Exception
  */
-const checkPermissions = (authorizedRole, currentRole, target, Exception) => {
-  if (!authorizedRole) {
+const checkPermissions = (authority, currentAuthority, target, Exception) => {
+  if (!authority) {
     return target;
   }
   // 数组处理
-  if (authorizedRole.constructor.name === 'Array') {
-    if (authorizedRole.includes(currentRole)) {
+  if (authority.constructor.name === 'Array') {
+    if (authority.includes(currentAuthority)) {
       return target;
     }
     return Exception;
   }
 
   // string 处理
-  if (authorizedRole.constructor.name === 'String') {
-    if (authorizedRole === currentRole) {
+  if (authority.constructor.name === 'String') {
+    if (authority === currentAuthority) {
       return target;
     }
     return Exception;
   }
 
   // Promise 处理
-  if (authorizedRole.constructor.name === 'Promise') {
+  if (authority.constructor.name === 'Promise') {
     return () => (
-      <PromiseRender ok={target} error={Exception} promise={authorizedRole} />
+      <PromiseRender ok={target} error={Exception} promise={authority} />
     );
   }
 
   // Function 处理
-  if (authorizedRole.constructor.name === 'Function') {
+  if (authority.constructor.name === 'Function') {
     try {
-      const bool = authorizedRole();
+      const bool = authority();
       if (bool) {
         return target;
       }

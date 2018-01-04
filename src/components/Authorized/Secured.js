@@ -12,27 +12,27 @@ import CheckPermissions from './CheckPermissions';
  * 默认不能访问任何页面
  * default is "NULL"
  */
-let ROLE = 'NULL';
+let CURRENT = 'NULL';
 const Exception403 = () => (
   <Exception type="403" style={{ minHeight: 500, height: '80%' }} />
 );
 
 /**
  * 用于判断时候拥有权限访问此view权限
- * role 支持传入  string ,funtion:()=>boolean|Promise
+ * authority 支持传入  string ,funtion:()=>boolean|Promise
  * e.g. 'user' 只有user用户能访问
  * e.g. 'user,admin' user和 admin 都能访问
  * e.g. ()=>boolean 返回true能访问,返回false不能访问
  * e.g. Promise  then 能访问   catch不能访问
- * e.g. role support incoming string, funtion: () => boolean | Promise
+ * e.g. authority support incoming string, funtion: () => boolean | Promise
  * e.g. 'user' only user user can access
  * e.g. 'user, admin' user and admin can access
  * e.g. () => boolean true to be able to visit, return false can not be accessed
  * e.g. Promise then can not access the visit to catch
- * @param {string | function | Promise} authorizedRole
+ * @param {string | function | Promise} authority
  * @param {ReactNode} error 非必需参数
  */
-const authorize = (authorizedRole, error) => {
+const authorize = (authority, error) => {
   /**
    * conversion into a class
    * 防止传入字符串时找不到staticContext造成报错
@@ -42,10 +42,10 @@ const authorize = (authorizedRole, error) => {
   if (error) {
     classError = () => error;
   }
-  return function decideRole(targer) {
+  return function decideAuthority(targer) {
     return CheckPermissions(
-      authorizedRole,
-      ROLE,
+      authority,
+      CURRENT,
       targer,
       classError || Exception403
     );
@@ -53,19 +53,19 @@ const authorize = (authorizedRole, error) => {
 };
 
 /**
- * use  role or getRole
- * @param {string|()=>String} getRole
+ * use  authority or getAuthority
+ * @param {string|()=>String} currentAuthority
  */
-const renderAuthorize = (role) => {
-  if (role) {
-    if (role.constructor.name === 'Function') {
-      ROLE = role();
+const renderAuthorize = (currentAuthority) => {
+  if (currentAuthority) {
+    if (currentAuthority.constructor.name === 'Function') {
+      CURRENT = currentAuthority();
     }
-    if (role.constructor.name === 'String') {
-      ROLE = role;
+    if (currentAuthority.constructor.name === 'String') {
+      CURRENT = currentAuthority;
     }
   } else {
-    ROLE = 'NULL';
+    CURRENT = 'NULL';
   }
   return authorize;
 };
