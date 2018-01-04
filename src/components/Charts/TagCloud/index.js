@@ -131,7 +131,16 @@ class TagCloud extends Component {
         ref={this.saveRootRef}
       >
         {dv && (
-          <Chart width={w} height={h} data={dv} padding={0}>
+          <Chart
+            width={w}
+            height={h}
+            data={dv}
+            padding={0}
+            scale={{
+              x: { nice: false },
+              y: { nice: false },
+            }}
+          >
             <Coord reflect="y" />
             <Geom type="point" position="x*y" color="text" shape="cloud" />
           </Chart>

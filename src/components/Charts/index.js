@@ -1,4 +1,5 @@
 import numeral from 'numeral';
+import './g2';
 import ChartCard from './ChartCard';
 import Bar from './Bar';
 import Pie from './Pie';
