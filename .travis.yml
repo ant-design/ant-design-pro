@@ -6,6 +6,7 @@ node_js:
 env:
   matrix:
     - TEST_TYPE=lint
+    - TEST_TYPE=build
     - TEST_TYPE=test-all
     - TEST_TYPE=test-dist
 
@@ -23,6 +24,8 @@ script:
   - |
     if [ "$TEST_TYPE" = lint ]; then
       npm run lint
+    elif [ "$TEST_TYPE" = build ]; then
+      npm run build
     elif [ "$TEST_TYPE" = test-all ]; then
       npm run test:all
     elif [ "$TEST_TYPE" = test-dist ]; then
