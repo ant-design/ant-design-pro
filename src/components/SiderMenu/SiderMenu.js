@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
-import logo from '../../assets/logo.svg';
 import styles from './index.less';
-import { getMenuData } from '../../common/menu';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -11,7 +9,7 @@ const { SubMenu } = Menu;
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
-    this.menus = getMenuData();
+    this.menus = props.menuData;
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
@@ -131,7 +129,7 @@ export default class SiderMenu extends PureComponent {
     });
   }
   render() {
-    const { collapsed, location: { pathname }, onCollapse } = this.props;
+    const { logo, collapsed, location: { pathname }, onCollapse } = this.props;
     const { openKeys } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed ? {} : {

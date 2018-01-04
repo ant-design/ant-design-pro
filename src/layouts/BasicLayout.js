@@ -129,6 +129,8 @@ class BasicLayout extends React.PureComponent {
     const layout = (
       <Layout>
         <SiderMenu
+          logo={logo}
+          menuData={getMenuData()}
           collapsed={collapsed}
           location={location}
           isMobile={this.state.isMobile}
