@@ -2,17 +2,15 @@
  * @Author: jim chen
  * @Date: 2018-01-02 11:18:46
  * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-02 15:50:02
+ * @Last Modified time: 2018-01-04 16:05:24
  */
 import React from 'react';
 import Exception from '../Exception/index';
 import CheckPermissions from './CheckPermissions';
-
 /**
  * 默认不能访问任何页面
  * default is "NULL"
  */
-let CURRENT = 'NULL';
 const Exception403 = () => (
   <Exception type="403" style={{ minHeight: 500, height: '80%' }} />
 );
@@ -45,28 +43,10 @@ const authorize = (authority, error) => {
   return function decideAuthority(targer) {
     return CheckPermissions(
       authority,
-      CURRENT,
       targer,
       classError || Exception403
     );
   };
 };
 
-/**
- * use  authority or getAuthority
- * @param {string|()=>String} currentAuthority
- */
-const renderAuthorize = (currentAuthority) => {
-  if (currentAuthority) {
-    if (currentAuthority.constructor.name === 'Function') {
-      CURRENT = currentAuthority();
-    }
-    if (currentAuthority.constructor.name === 'String') {
-      CURRENT = currentAuthority;
-    }
-  } else {
-    CURRENT = 'NULL';
-  }
-  return authorize;
-};
-export default renderAuthorize;
+export default authorize;

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 import styles from './index.less';
-import Authorized from '../Authorized';
+import { Authorized } from '../Authorized';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;

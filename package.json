@@ -16,6 +16,7 @@
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
     "test": "jest",
+    "test:comps": "jest ./src/components",
     "test:all": "node ./tests/run-tests.js"
   },
   "dependencies": {

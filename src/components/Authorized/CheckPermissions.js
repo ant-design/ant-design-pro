@@ -3,11 +3,11 @@
  * @Author: jim chen
  * @Date: 2018-01-02 09:54:18
  * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-02 15:31:58
+ * @Last Modified time: 2018-01-04 16:50:42
  */
 import React from 'react';
 import PromiseRender from './PromiseRender';
-
+import { CURRENT } from './index';
 /**
  * 通用权限检查方法
  * Common check permissions method
@@ -17,6 +17,8 @@ import PromiseRender from './PromiseRender';
  * @param { 未通过的组件 no pass components } Exception
  */
 const checkPermissions = (authority, currentAuthority, target, Exception) => {
+  // 没有判定权限.默认查看所有
+  // Retirement authority, return target;
   if (!authority) {
     return target;
   }
@@ -57,4 +59,10 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
   }
 };
 
-export default checkPermissions;
+export { checkPermissions };
+
+const checkPermissionsCURRENT = (authority, target, Exception) => {
+  return checkPermissions(authority, CURRENT, target, Exception);
+};
+
+export default checkPermissionsCURRENT;

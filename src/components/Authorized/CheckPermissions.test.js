@@ -2,11 +2,10 @@
  * @Author: jim chen
  * @Date: 2018-01-02 15:13:56
  * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-02 15:31:34
+ * @Last Modified time: 2018-01-04 16:53:59
  */
 
-import checkPermissions from './CheckPermissions.js';
-
+import { checkPermissions } from './CheckPermissions.js';
 
 const target = 'ok';
 const error = 'error';
@@ -14,6 +13,12 @@ const error = 'error';
 describe('test CheckPermissions', () => {
   it('Correct string permission authentication', () => {
     expect(checkPermissions('user', 'user', target, error)).toEqual('ok');
+  });
+  it('Correct string permission authentication', () => {
+    expect(checkPermissions('user', 'NULL', target, error)).toEqual('error');
+  });
+  it('authority is undefined , return ok', () => {
+    expect(checkPermissions(null, 'NULL', target, error)).toEqual('ok');
   });
   it('Wrong string permission authentication', () => {
     expect(checkPermissions('admin', 'user', target, error)).toEqual('error');

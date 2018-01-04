@@ -1,4 +1,3 @@
-import { routerRedux } from 'dva/router';
 import { fakeAccountLogin } from '../services/api';
 import { setAuthority } from '../utils/authority';
 
@@ -37,7 +36,10 @@ export default {
           currentAuthority: 'guest',
         },
       });
-      yield put(routerRedux.push('/user/login'));
+      // yield put(routerRedux.push('/user/login'));
+      // Login out after permission changes to admin or user
+      // The refresh will automatically redirect to the login page
+      location.reload();
     },
   },
 
