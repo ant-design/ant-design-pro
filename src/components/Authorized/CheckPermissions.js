@@ -1,10 +1,3 @@
-/*
- * 通用权限检查类
- * @Author: jim chen
- * @Date: 2018-01-02 09:54:18
- * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-04 21:04:04
- */
 import React from 'react';
 import PromiseRender from './PromiseRender';
 import { CURRENT } from './index';

@@ -1,11 +1,3 @@
-/*
- * Promise异步加载的组件
- * Promise Async loaded components
- * @Author: jim chen
- * @Date: 2018-01-02 11:17:36
- * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-02 15:30:26
- */
 import React from 'react';
 import { Spin } from 'antd';
 

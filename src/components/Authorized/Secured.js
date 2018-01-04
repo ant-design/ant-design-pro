@@ -1,9 +1,3 @@
-/* 注解功能方法
- * @Author: jim chen
- * @Date: 2018-01-02 11:18:46
- * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-04 16:05:24
- */
 import React from 'react';
 import Exception from '../Exception/index';
 import CheckPermissions from './CheckPermissions';

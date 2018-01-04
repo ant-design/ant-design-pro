@@ -1,10 +1,3 @@
-/*
- * @Author: jim chen
- * @Date: 2018-01-02 15:13:56
- * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-04 16:53:59
- */
-
 import { checkPermissions } from './CheckPermissions.js';
 
 const target = 'ok';
