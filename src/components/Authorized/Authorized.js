@@ -13,17 +13,4 @@ class Authorized extends React.Component {
   }
 }
 
-// for MenuItem, SubMenu and etc. which can not be wrapped by customized component.
-// https://github.com/ant-design/ant-design/issues/4853
-const authorizedCreate = ({ authority, noMatch = null }) => {
-  return (Comp) => {
-    return CheckPermissions(
-      authority,
-      Comp,
-      noMatch
-    );
-  };
-};
-
-Authorized.create = authorizedCreate;
 export default Authorized;

@@ -133,6 +133,10 @@ class BasicLayout extends React.PureComponent {
       <Layout>
         <SiderMenu
           logo={logo}
+          // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
+          // If you do not have the Authorized parameter
+          // you will be forced to jump to the 403 interface without permission
+          Authorized={Authorized}
           menuData={getMenuData()}
           collapsed={collapsed}
           location={location}

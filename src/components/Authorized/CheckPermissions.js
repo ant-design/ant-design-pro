@@ -3,7 +3,7 @@
  * @Author: jim chen
  * @Date: 2018-01-02 09:54:18
  * @Last Modified by: jim chen
- * @Last Modified time: 2018-01-04 16:50:42
+ * @Last Modified time: 2018-01-04 21:04:04
  */
 import React from 'react';
 import PromiseRender from './PromiseRender';
@@ -61,8 +61,8 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
 
 export { checkPermissions };
 
-const checkPermissionsCURRENT = (authority, target, Exception) => {
+const check = (authority, target, Exception) => {
   return checkPermissions(authority, CURRENT, target, Exception);
 };
 
-export default checkPermissionsCURRENT;
+export default check;
