@@ -42,8 +42,9 @@ for (let i = 0; i < 7; i += 1) {
   });
 }
 
-@connect(state => ({
-  chart: state.chart,
+@connect(({ chart, loading }) => ({
+  chart,
+  loading: loading.effects['chart/fetch'],
 }))
 export default class Analysis extends Component {
   state = {
@@ -113,7 +114,7 @@ export default class Analysis extends Component {
 
   render() {
     const { rangePickerValue, salesType, currentTabKey } = this.state;
-    const { chart } = this.props;
+    const { chart, loading } = this.props;
     const {
       visitData,
       visitData2,
@@ -124,7 +125,6 @@ export default class Analysis extends Component {
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
-      loading,
     } = chart;
 
     const salesPieData =

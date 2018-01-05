@@ -13,8 +13,9 @@ const FormItem = Form.Item;
 const pageSize = 5;
 
 @Form.create()
-@connect(state => ({
-  list: state.list,
+@connect(({ list, loading }) => ({
+  list,
+  loading: loading.models.list,
 }))
 export default class SearchList extends Component {
   componentDidMount() {
@@ -38,7 +39,7 @@ export default class SearchList extends Component {
   }
 
   render() {
-    const { form, list: { list, loading } } = this.props;
+    const { form, list: { list }, loading } = this.props;
     const { getFieldDecorator } = form;
 
     const owners = [

@@ -11,8 +11,9 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Search } = Input;
 
-@connect(state => ({
-  list: state.list,
+@connect(({ list, loading }) => ({
+  list,
+  loading: loading.models.list,
 }))
 export default class BasicList extends PureComponent {
   componentDidMount() {
@@ -25,7 +26,7 @@ export default class BasicList extends PureComponent {
   }
 
   render() {
-    const { list: { list, loading } } = this.props;
+    const { list: { list }, loading } = this.props;
 
     const Info = ({ title, value, bordered }) => (
       <div className={styles.headerInfo}>

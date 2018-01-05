@@ -10,10 +10,6 @@ export default {
 
   effects: {
     *login({ payload }, { call, put }) {
-      yield put({
-        type: 'changeSubmitting',
-        payload: true,
-      });
       const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
@@ -50,13 +46,6 @@ export default {
         ...state,
         status: payload.status,
         type: payload.type,
-        submitting: false,
-      };
-    },
-    changeSubmitting(state, { payload }) {
-      return {
-        ...state,
-        submitting: payload,
       };
     },
   },

@@ -11,8 +11,8 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-@connect(state => ({
-  submitting: state.form.regularFormSubmitting,
+@connect(({ loading }) => ({
+  submitting: loading.effects['form/submitRegularForm'],
 }))
 @Form.create()
 export default class BasicForms extends PureComponent {

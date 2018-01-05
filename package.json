@@ -28,6 +28,7 @@
     "bizcharts-plugin-slider": "^2.0.1",
     "classnames": "^2.2.5",
     "dva": "^2.1.0",
+    "dva-loading": "^1.0.4",
     "enquire-js": "^0.1.1",
     "fastclick": "^1.0.6",
     "lodash": "^4.17.4",

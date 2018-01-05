@@ -284,7 +284,7 @@ class AdvancedForm extends PureComponent {
   }
 }
 
-export default connect(state => ({
-  collapsed: state.global.collapsed,
-  submitting: state.form.advancedFormSubmitting,
+export default connect(({ global, loading }) => ({
+  collapsed: global.collapsed,
+  submitting: loading.effects['form/submitAdvancedForm'],
 }))(Form.create()(AdvancedForm));

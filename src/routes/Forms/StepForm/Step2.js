@@ -108,7 +108,7 @@ class Step2 extends React.PureComponent {
   }
 }
 
-export default connect(({ form }) => ({
-  submitting: form.stepFormSubmitting,
+export default connect(({ form, loading }) => ({
+  submitting: loading.effects['form/submitStepForm'],
   data: form.step,
 }))(Step2);

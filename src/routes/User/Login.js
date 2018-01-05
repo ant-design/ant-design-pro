@@ -7,8 +7,9 @@ import styles from './Login.less';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
-@connect(state => ({
-  login: state.login,
+@connect(({ login, loading }) => ({
+  login,
+  submitting: loading.effects['login/login'],
 }))
 export default class LoginPage extends Component {
   state = {
@@ -46,7 +47,7 @@ export default class LoginPage extends Component {
   }
 
   render() {
-    const { login } = this.props;
+    const { login, submitting } = this.props;
     const { type } = this.state;
     return (
       <div className={styles.main}>
@@ -79,7 +80,7 @@ export default class LoginPage extends Component {
             <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>自动登录</Checkbox>
             <a style={{ float: 'right' }} href="">忘记密码</a>
           </div>
-          <Submit loading={login.submitting}>登录</Submit>
+          <Submit loading={submitting}>登录</Submit>
           <div className={styles.other}>
             其他登录方式
             <Icon className={styles.icon} type="alipay-circle" />

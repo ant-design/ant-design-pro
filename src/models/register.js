@@ -9,18 +9,10 @@ export default {
 
   effects: {
     *submit(_, { call, put }) {
-      yield put({
-        type: 'changeSubmitting',
-        payload: true,
-      });
       const response = yield call(fakeRegister);
       yield put({
         type: 'registerHandle',
         payload: response,
-      });
-      yield put({
-        type: 'changeSubmitting',
-        payload: false,
       });
     },
   },
@@ -30,12 +22,6 @@ export default {
       return {
         ...state,
         status: payload.status,
-      };
-    },
-    changeSubmitting(state, { payload }) {
-      return {
-        ...state,
-        submitting: payload,
       };
     },
   },
