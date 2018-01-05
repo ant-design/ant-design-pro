@@ -13,6 +13,9 @@ describe('test CheckPermissions', () => {
   it('authority is undefined , return ok', () => {
     expect(checkPermissions(null, 'NULL', target, error)).toEqual('ok');
   });
+  it('currentAuthority is undefined , return error', () => {
+    expect(checkPermissions('admin', null, target, error)).toEqual('error');
+  });
   it('Wrong string permission authentication', () => {
     expect(checkPermissions('admin', 'user', target, error)).toEqual('error');
   });
