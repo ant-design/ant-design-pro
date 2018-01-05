@@ -2,7 +2,6 @@ import '@babel/polyfill';
 import dva from 'dva';
 import 'moment/locale/zh-cn';
 import FastClick from 'fastclick';
-import './g2';
 import './rollbar';
 import onError from './error';
 // import browserHistory from 'history/createBrowserHistory';
