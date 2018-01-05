@@ -141,13 +141,13 @@ export default class SiderMenu extends PureComponent {
     if (!menusData) {
       return [];
     }
-    return menusData.map((item) => {
-      if (!item.name || item.hideInMenu) {
-        return null;
-      }
-      const ItemDom = this.getSubMenuOrItem(item);
-      return this.checkPermissionItem(item.authority, ItemDom);
-    });
+    return menusData
+      .filter(item => item.name && !item.hideInMenu)
+      .map((item) => {
+        const ItemDom = this.getSubMenuOrItem(item);
+        return this.checkPermissionItem(item.authority, ItemDom);
+      })
+      .filter(item => !!item);
   }
   // conversion Path
   // 转化路径
@@ -200,13 +200,14 @@ export default class SiderMenu extends PureComponent {
         width={256}
         className={styles.sider}
       >
-        <div className={styles.logo}>
+        <div className={styles.logo} key="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
             <h1>Ant Design Pro</h1>
           </Link>
         </div>
         <Menu
+          key="Menu"
           theme="dark"
           mode="inline"
           {...menuProps}

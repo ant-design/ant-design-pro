@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import moment from 'moment';
 import { Table, Alert, Badge, Divider } from 'antd';
 import styles from './index.less';
@@ -96,11 +96,11 @@ class StandardTable extends PureComponent {
       {
         title: '操作',
         render: () => (
-          <div>
+          <Fragment>
             <a href="">配置</a>
             <Divider type="vertical" />
             <a href="">订阅警报</a>
-          </div>
+          </Fragment>
         ),
       },
     ];
