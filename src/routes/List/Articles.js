@@ -171,21 +171,20 @@ export default class SearchList extends Component {
                   </FormItem>
                 </Col>
                 <Col xl={8} lg={10} md={12} sm={24} xs={24}>
-                  {getFieldDecorator('rate', {})(
-                    <FormItem
-                      label="好评度"
-                    >
-                      {getFieldDecorator('rate', {})(
-                        <Select
-                          onChange={this.handleFormSubmit}
-                          placeholder="不限"
-                          style={{ maxWidth: 200, width: '100%' }}
-                        >
-                          <Option value="good">优秀</Option>
-                        </Select>
-                      )}
-                    </FormItem>
-                  )}
+                  <FormItem
+                    {...formItemLayout}
+                    label="好评度"
+                  >
+                    {getFieldDecorator('rate', {})(
+                      <Select
+                        onChange={this.handleFormSubmit}
+                        placeholder="不限"
+                        style={{ maxWidth: 200, width: '100%' }}
+                      >
+                        <Option value="good">优秀</Option>
+                      </Select>
+                    )}
+                  </FormItem>
                 </Col>
               </Row>
             </StandardFormRow>
