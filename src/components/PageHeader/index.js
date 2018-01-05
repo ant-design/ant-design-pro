@@ -126,6 +126,13 @@ export default class PageHeader extends PureComponent {
       tabDefaultValue = tabList.filter(item => item.default)[0] || tabList[0];
     }
 
+    const activeKeyProps = {
+      defaultActiveKey: tabDefaultValue && tabDefaultValue.key,
+    };
+    if (activeTabKey !== undefined) {
+      activeKeyProps.activeKey = activeTabKey;
+    }
+
     return (
       <div className={clsString}>
         {breadcrumb}
@@ -147,8 +154,7 @@ export default class PageHeader extends PureComponent {
           tabList.length && (
             <Tabs
               className={styles.tabs}
-              defaultActiveKey={(tabDefaultValue && tabDefaultValue.key)}
-              activeKey={activeTabKey}
+              {...activeKeyProps}
               onChange={this.onChange}
             >
               {

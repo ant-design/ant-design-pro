@@ -52,7 +52,7 @@ const ChartCard = ({
       bodyStyle={{ padding: '20px 24px 8px 24px' }}
       {...rest}
     >
-      {<Spin spinning={loading}>{content}</Spin>}
+      {<Spin spinning={loading} wrapperClassName={styles.spin}>{content}</Spin>}
     </Card>
   );
 };

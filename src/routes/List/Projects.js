@@ -124,7 +124,7 @@ export default class CoverCardList extends PureComponent {
               grid
               last
             >
-              <Row gutter={24}>
+              <Row gutter={16}>
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem
                     {...formItemLayout}

@@ -1,17 +1,29 @@
 import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
-import logo from '../../assets/logo.svg';
 import styles from './index.less';
-import { getMenuData } from '../../common/menu';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
+// Allow menu.js config icon as string or ReactNode
+//   icon: 'setting',
+//   icon: 'http://demo.com/icon.png',
+//   icon: <Icon type="setting" />,
+const getIcon = (icon) => {
+  if (typeof icon === 'string' && icon.indexOf('http') === 0) {
+    return <img src={icon} alt="icon" className={styles.icon} />;
+  }
+  if (typeof icon === 'string') {
+    return <Icon type={icon} />;
+  }
+  return icon;
+};
+
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
-    this.menus = getMenuData();
+    this.menus = props.menuData;
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
@@ -65,61 +77,97 @@ export default class SiderMenu extends PureComponent {
       return itemRegExp.test(path.replace(/^\//, '').replace(/\/$/, ''));
     });
   }
-  getNavMenuItems(menusData) {
+  /**
+  * 判断是否是http链接.返回 Link 或 a
+  * Judge whether it is http link.return a or Link
+  * @memberof SiderMenu
+  */
+  getMenuItemPath = (item) => {
+    const itemPath = this.conversionPath(item.path);
+    const icon = getIcon(item.icon);
+    const { target, name } = item;
+    // Is it a http link
+    if (/^https?:\/\//.test(itemPath)) {
+      return (
+        <a href={itemPath} target={target}>
+          {icon}<span>{name}</span>
+        </a>
+      );
+    }
+    return (
+      <Link
+        to={itemPath}
+        target={target}
+        replace={itemPath === this.props.location.pathname}
+        onClick={this.props.isMobile ? () => { this.props.onCollapse(true); } : undefined}
+      >
+        {icon}<span>{name}</span>
+      </Link>
+    );
+  }
+  /**
+   * get SubMenu or Item
+   */
+  getSubMenuOrItem=(item) => {
+    if (item.children && item.children.some(child => child.name)) {
+      return (
+        <SubMenu
+          title={
+            item.icon ? (
+              <span>
+                {getIcon(item.icon)}
+                <span>{item.name}</span>
+              </span>
+            ) : item.name
+            }
+          key={item.key || item.path}
+        >
+          {this.getNavMenuItems(item.children)}
+        </SubMenu>
+      );
+    } else {
+      return (
+        <Menu.Item key={item.key || item.path}>
+          {this.getMenuItemPath(item)}
+        </Menu.Item>
+      );
+    }
+  }
+  /**
+  * 获得菜单子节点
+  * @memberof SiderMenu
+  */
+  getNavMenuItems = (menusData) => {
     if (!menusData) {
       return [];
     }
     return menusData.map((item) => {
-      if (!item.name) {
+      if (!item.name || item.hideInMenu) {
         return null;
       }
-      let itemPath;
-      if (item.path && item.path.indexOf('http') === 0) {
-        itemPath = item.path;
-      } else {
-        itemPath = `/${item.path || ''}`.replace(/\/+/g, '/');
-      }
-      if (item.children && item.children.some(child => child.name)) {
-        return item.hideInMenu ? null :
-          (
-            <SubMenu
-              title={
-                item.icon ? (
-                  <span>
-                    <Icon type={item.icon} />
-                    <span>{item.name}</span>
-                  </span>
-                ) : item.name
-              }
-              key={item.key || item.path}
-            >
-              {this.getNavMenuItems(item.children)}
-            </SubMenu>
-          );
-      }
-      const icon = item.icon && <Icon type={item.icon} />;
-      return item.hideInMenu ? null :
-        (
-          <Menu.Item key={item.key || item.path}>
-            {
-              /^https?:\/\//.test(itemPath) ? (
-                <a href={itemPath} target={item.target}>
-                  {icon}<span>{item.name}</span>
-                </a>
-              ) : (
-                <Link
-                  to={itemPath}
-                  target={item.target}
-                  replace={itemPath === this.props.location.pathname}
-                  onClick={this.props.isMobile ? () => { this.props.onCollapse(true); } : undefined}
-                >
-                  {icon}<span>{item.name}</span>
-                </Link>
-              )
-            }
-          </Menu.Item>
-        );
+      const ItemDom = this.getSubMenuOrItem(item);
+      return this.checkPermissionItem(item.authority, ItemDom);
     });
+  }
+  // conversion Path
+  // 转化路径
+  conversionPath=(path) => {
+    if (path && path.indexOf('http') === 0) {
+      return path;
+    } else {
+      return `/${path || ''}`.replace(/\/+/g, '/');
+    }
+  }
+  // permission to check
+  checkPermissionItem = (authority, ItemDom) => {
+    if (this.props.Authorized && this.props.Authorized.check) {
+      const { check } = this.props.Authorized;
+      return check(
+        authority,
+        ItemDom
+      );
+    }
+    return ItemDom;
   }
   handleOpenChange = (openKeys) => {
     const lastOpenKey = openKeys[openKeys.length - 1];
@@ -131,7 +179,7 @@ export default class SiderMenu extends PureComponent {
     });
   }
   render() {
-    const { collapsed, location: { pathname }, onCollapse } = this.props;
+    const { logo, collapsed, location: { pathname }, onCollapse } = this.props;
     const { openKeys } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed ? {} : {
