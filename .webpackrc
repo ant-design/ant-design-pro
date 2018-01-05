@@ -1,9 +1,7 @@
 {
   "entry": "src/index.js",
   "extraBabelPlugins": [
-    "transform-runtime",
     "transform-decorators-legacy",
-    "transform-class-properties",
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
   ],
   "env": {
@@ -15,5 +13,8 @@
   },
   "ignoreMomentLocale": true,
   "theme": "./src/theme.js",
+  "html": {
+    "template": "./src/index.ejs"
+  },
   "hash": true
 }

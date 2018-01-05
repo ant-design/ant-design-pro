@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import dva from 'dva';
 import 'moment/locale/zh-cn';
 import FastClick from 'fastclick';
@@ -17,10 +17,10 @@ const app = dva({
 // app.use({});
 
 // 3. Register global model
-app.model(require('./models/global'));
+app.model(require('./models/global').default);
 
 // 4. Router
-app.router(require('./router'));
+app.router(require('./router').default);
 
 // 5. Start
 app.start('#root');
