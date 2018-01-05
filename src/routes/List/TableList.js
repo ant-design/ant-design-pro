@@ -58,7 +58,7 @@ export default class TableList extends PureComponent {
   }
 
   @Bind()
-  @PreAuthorize(new Promise((res, rej) => rej()), '这么好用的功能只能付费后再使用!')
+  @PreAuthorize(new Promise((res, rej) => rej()), '没有通过权限验证!')
   handleFormReset() {
     const { form, dispatch } = this.props;
     form.resetFields();
