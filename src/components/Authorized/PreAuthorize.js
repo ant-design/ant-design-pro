@@ -32,9 +32,16 @@ const preAuthorize = (
       throw new Error('可能是注解箭头函数造成的问题,请检查');
     }
     let { value, writable } = descriptor;
-    if (descriptor.value.constructor.name !== 'Function') {
+    if (value.constructor.name !== 'Function') {
       // preAuthorize only supports function
       throw new Error('preAuthorize 只支持注解方法');
+    }
+    if (authority.constructor.name === 'Promise') {
+      return {
+        ...descriptor,
+        value: () => authority.then(value).catch(() => message.error(errorMessage)),
+        writable,
+      };
     }
     if (!CheckPermissions(authority, true, false)) {
       writable = true;

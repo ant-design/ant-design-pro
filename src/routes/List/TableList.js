@@ -57,7 +57,9 @@ export default class TableList extends PureComponent {
     });
   }
 
-  handleFormReset = () => {
+  @Bind()
+  @PreAuthorize(new Promise((res, rej) => rej()), '这么好用的功能只能付费后再使用!')
+  handleFormReset() {
     const { form, dispatch } = this.props;
     form.resetFields();
     this.setState({
