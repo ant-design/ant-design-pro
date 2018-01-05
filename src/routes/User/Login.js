@@ -79,7 +79,7 @@ export default class LoginPage extends Component {
             <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>自动登录</Checkbox>
             <a style={{ float: 'right' }} href="">忘记密码</a>
           </div>
-          <Submit>登录</Submit>
+          <Submit loading={login.submitting}>登录</Submit>
           <div className={styles.other}>
             其他登录方式
             <Icon className={styles.icon} type="alipay-circle" />
