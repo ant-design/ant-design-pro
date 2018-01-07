@@ -16,6 +16,6 @@
   "html": {
     "template": "./src/index.ejs"
   },
-  "disableDynmicImport": true,
+  "disableDynamicImport": true,
   "hash": true
 }
