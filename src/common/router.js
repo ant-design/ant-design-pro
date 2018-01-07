@@ -17,14 +17,14 @@ const dynamicWrapper = (app, models, component) => {
     models.forEach((model) => {
       if (modelNotExisted(app, model)) {
         // eslint-disable-next-line
-        app.model(require(`../models/${model}`));
+        app.model(require(`../models/${model}`).default);
       }
     });
     return (props) => {
       if (!routerDataCache) {
         routerDataCache = getRouterData(app);
       }
-      return createElement(component(), {
+      return createElement(component().default, {
         ...props,
         routerData: routerDataCache,
       });
