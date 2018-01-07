@@ -14,8 +14,9 @@ const { Secured } = Authorized;
 const targetTime = new Date().getTime() + 3900000;
 
 @Secured('admin')
-@connect(state => ({
-  monitor: state.monitor,
+@connect(({ monitor, loading }) => ({
+  monitor,
+  loading: loading.models.monitor,
 }))
 export default class Monitor extends PureComponent {
   componentDidMount() {
@@ -25,7 +26,7 @@ export default class Monitor extends PureComponent {
   }
 
   render() {
-    const { monitor } = this.props;
+    const { monitor, loading } = this.props;
     const { tags } = monitor;
 
     return (
@@ -142,7 +143,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索" bordered={false} bodyStyle={{ overflow: 'hidden' }}>
+            <Card title="热门搜索" loading={loading} bordered={false} bodyStyle={{ overflow: 'hidden' }}>
               <TagCloud
                 data={tags}
                 height={161}

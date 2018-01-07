@@ -37,7 +37,7 @@ class Dashboard extends PureComponent {
     });
   }
   render() {
-    const { user: { list, loading } } = this.props;
+    const { user: { list }, loading } = this.props;
     return (
       <div>
         <Row gutter={24}>
@@ -95,6 +95,7 @@ class Dashboard extends PureComponent {
   }
 }
 
-export default connect(state => ({
-  user: state.user,
+export default connect(({ user, loading }) => ({
+  user,
+  loading: loading.effects['user/fetch'],
 }))(Dashboard);

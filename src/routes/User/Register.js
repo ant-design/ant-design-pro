@@ -20,8 +20,9 @@ const passwordProgressMap = {
   pool: 'exception',
 };
 
-@connect(state => ({
-  register: state.register,
+@connect(({ register, loading }) => ({
+  register,
+  submitting: loading.effects['register/submit'],
 }))
 @Form.create()
 export default class Register extends Component {
@@ -148,7 +149,7 @@ export default class Register extends Component {
   };
 
   render() {
-    const { form, register } = this.props;
+    const { form, submitting } = this.props;
     const { getFieldDecorator } = form;
     const { count, prefix } = this.state;
     return (
@@ -270,7 +271,7 @@ export default class Register extends Component {
           <FormItem>
             <Button
               size="large"
-              loading={register.submitting}
+              loading={submitting}
               className={styles.submit}
               type="primary"
               htmlType="submit"

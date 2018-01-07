@@ -70,10 +70,12 @@ const members = [
   },
 ];
 
-@connect(state => ({
-  project: state.project,
-  activities: state.activities,
-  chart: state.chart,
+@connect(({ project, activities, chart, loading }) => ({
+  project,
+  activities,
+  chart,
+  projectLoading: loading.effects['project/fetchNotice'],
+  activitiesLoading: loading.effects['activities/fetchList'],
 }))
 export default class Workplace extends PureComponent {
   componentDidMount() {
@@ -131,8 +133,9 @@ export default class Workplace extends PureComponent {
 
   render() {
     const {
-      project: { loading: projectLoading, notice },
-      activities: { loading: activitiesLoading },
+      project: { notice },
+      projectLoading,
+      activitiesLoading,
       chart: { radarData },
     } = this.props;
 

@@ -32,8 +32,9 @@ const progressColumns = [{
   key: 'cost',
 }];
 
-@connect(state => ({
-  profile: state.profile,
+@connect(({ profile, loading }) => ({
+  profile,
+  loading: loading.effects['profile/fetchBasic'],
 }))
 export default class BasicProfile extends Component {
   componentDidMount() {
@@ -44,8 +45,8 @@ export default class BasicProfile extends Component {
   }
 
   render() {
-    const { profile } = this.props;
-    const { basicGoods, basicProgress, basicLoading } = profile;
+    const { profile, loading } = this.props;
+    const { basicGoods, basicProgress } = profile;
     let goodsData = [];
     if (basicGoods.length) {
       let num = 0;
@@ -146,7 +147,7 @@ export default class BasicProfile extends Component {
           <Table
             style={{ marginBottom: 24 }}
             pagination={false}
-            loading={basicLoading}
+            loading={loading}
             dataSource={goodsData}
             columns={goodsColumns}
             rowKey="id"
@@ -155,7 +156,7 @@ export default class BasicProfile extends Component {
           <Table
             style={{ marginBottom: 16 }}
             pagination={false}
-            loading={basicLoading}
+            loading={loading}
             dataSource={basicProgress}
             columns={progressColumns}
           />
