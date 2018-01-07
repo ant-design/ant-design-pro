@@ -8,14 +8,15 @@ import logo from '../assets/logo.svg';
 import { getRoutes } from '../utils/utils';
 
 const links = [{
+  key: 'help',
   title: '帮助',
   href: '',
 }, {
-  key: '隐私',
+  key: 'privacy',
   title: '隐私',
   href: '',
 }, {
-  key: '隐私',
+  key: 'terms',
   title: '条款',
   href: '',
 }];
