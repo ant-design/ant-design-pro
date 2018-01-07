@@ -100,11 +100,11 @@ class Login extends Component {
                   activeKey={type}
                   onChange={this.onSwitch}
                 >
-                  { TabChildren }
+                  {TabChildren}
                 </Tabs>
-                { otherChildren }
+                {otherChildren}
               </div>
-              ) : children
+            ) : children
           }
         </Form>
       </div>
