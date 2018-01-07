@@ -11,9 +11,11 @@ const links = [{
   title: '帮助',
   href: '',
 }, {
+  key: '隐私',
   title: '隐私',
   href: '',
 }, {
+  key: '隐私',
   title: '条款',
   href: '',
 }];

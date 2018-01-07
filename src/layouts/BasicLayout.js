@@ -184,14 +184,17 @@ class BasicLayout extends React.PureComponent {
             </div>
             <GlobalFooter
               links={[{
+                key: 'Pro 首页',
                 title: 'Pro 首页',
                 href: 'http://pro.ant.design',
                 blankTarget: true,
               }, {
-                title: 'GitHub',
+                key: 'github',
+                title: <Icon type="github" />,
                 href: 'https://github.com/ant-design/ant-design-pro',
                 blankTarget: true,
               }, {
+                key: 'Ant Design',
                 title: 'Ant Design',
                 href: 'http://ant.design',
                 blankTarget: true,
