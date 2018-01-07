@@ -60,7 +60,7 @@ export default class LoginPage extends Component {
             {
               login.status === 'error' &&
               login.type === 'account' &&
-              login.submitting === false &&
+              !login.submitting &&
               this.renderMessage('账户或密码错误')
             }
             <UserName name="userName" placeholder="admin/user" />
@@ -70,7 +70,7 @@ export default class LoginPage extends Component {
             {
               login.status === 'error' &&
               login.type === 'mobile' &&
-              login.submitting === false &&
+              !login.submitting &&
               this.renderMessage('验证码错误')
             }
             <Mobile name="mobile" />
