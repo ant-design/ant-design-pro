@@ -16,15 +16,15 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
     return target;
   }
   // 数组处理
-  if (authority.constructor.name === 'Array') {
-    if (authority.includes(currentAuthority)) {
+  if (Array.isArray(authority)) {
+    if (authority.indexOf(currentAuthority) >= 0) {
       return target;
     }
     return Exception;
   }
 
   // string 处理
-  if (authority.constructor.name === 'String') {
+  if (typeof authority === 'string') {
     if (authority === currentAuthority) {
       return target;
     }
@@ -39,7 +39,7 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
   }
 
   // Function 处理
-  if (authority.constructor.name === 'Function') {
+  if (typeof authority === 'function') {
     try {
       const bool = authority();
       if (bool) {
