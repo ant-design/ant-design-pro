@@ -46,8 +46,8 @@
     "react-fittext": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.0.0-beta.36",
-    "@babel/preset-react": "^7.0.0-beta.36",
+    "@babel/preset-env": "7.0.0-beta.36",
+    "@babel/preset-react": "7.0.0-beta.36",
     "babel-eslint": "^8.1.2",
     "babel-jest": "^22.0.4",
     "babel-plugin-dva-hmr": "^0.4.1",
