@@ -165,13 +165,22 @@ export const getRouterData = (app) => {
   };
   // Get name from ./menu.js or just set it in the router data.
   const menuData = getFlatMenuData(getMenuData());
+
+  // 路由配置数据,routerConfig为自定义配置
+  // eg. {name,authority ...routerConfig }
   const routerData = {};
-  Object.keys(routerConfig).forEach((item) => {
-    const menuItem = menuData[item.replace(/^\//, '')] || {};
-    routerData[item] = {
-      ...routerConfig[item],
-      name: routerConfig[item].name || menuItem.name,
-      authority: routerConfig[item].authority || menuItem.authority,
+  // 循环参数用于获得路由name
+  Object.keys(routerConfig).forEach((path) => {
+    /**
+     * 比对路由时删除/:id之类的参数,需要在菜单中配置父级参数
+     * 用于匹配菜单,不支持中间参数匹配
+     */
+    const newPath = path.split(/\/:/)[0];
+    const menuItem = menuData[newPath.replace(/^\//, '')] || {};
+    routerData[path] = {
+      ...routerConfig[path],
+      name: menuItem.name,
+      authority: menuItem.authority,
     };
   });
   return routerData;
