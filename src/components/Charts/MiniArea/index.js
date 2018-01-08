@@ -56,8 +56,24 @@ export default class MiniArea extends React.Component {
               data={data}
               padding={padding}
             >
-              <Axis name="x" label={false} line={false} tickLine={false} grid={false} {...xAxis} />
-              <Axis name="y" label={false} line={false} tickLine={false} grid={false} {...yAxis} />
+              <Axis
+                key="axis-x"
+                name="x"
+                label={false}
+                line={false}
+                tickLine={false}
+                grid={false}
+                {...xAxis}
+              />
+              <Axis
+                key="axis-y"
+                name="y"
+                label={false}
+                line={false}
+                tickLine={false}
+                grid={false}
+                {...yAxis}
+              />
               <Tooltip showTitle={false} crosshairs={false} />
               <Geom
                 type="area"
