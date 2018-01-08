@@ -75,7 +75,7 @@
     "pro-download": "^1.0.1",
     "react-test-renderer": "^16.2.0",
     "redbox-react": "^1.5.0",
-    "roadhog": "^2.0.5",
+    "roadhog": "^2.0.6",
     "roadhog-api-doc": "^0.3.4",
     "rollbar": "^2.3.4",
     "stylelint": "^8.4.0",
