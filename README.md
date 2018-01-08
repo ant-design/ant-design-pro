@@ -78,7 +78,7 @@ $ mkdir pro-demo && cd pro-demo
 $ pro new
 ```
 
-More instruction at [documentation](http://pro.ant.design/docs/getting-started)。
+More instruction at [documentation](http://pro.ant.design/docs/getting-started).
 
 ## Compatibility
 
