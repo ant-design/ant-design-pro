@@ -17,8 +17,8 @@ export default class TableForm extends PureComponent {
       });
     }
   }
-  getRowByKey(key) {
-    return this.state.data.filter(item => item.key === key)[0];
+  getRowByKey(key, newData) {
+    return (newData || this.state.data).filter(item => item.key === key)[0];
   }
   index = 0;
   cacheOriginData = {};
@@ -35,14 +35,15 @@ export default class TableForm extends PureComponent {
   }
   toggleEditable(e, key) {
     e.preventDefault();
-    const target = this.getRowByKey(key);
+    const newData = this.state.data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
     if (target) {
       // 进入编辑状态时保存原始数据
       if (!target.editable) {
         this.cacheOriginData[key] = { ...target };
       }
       target.editable = !target.editable;
-      this.setState({ data: [...this.state.data] });
+      this.setState({ data: newData });
     }
   }
   remove(key) {
@@ -51,7 +52,7 @@ export default class TableForm extends PureComponent {
     this.props.onChange(newData);
   }
   newMember = () => {
-    const newData = [...this.state.data];
+    const newData = this.state.data.map(item => ({ ...item }));
     newData.push({
       key: `NEW_TEMP_ID_${this.index}`,
       workId: '',
@@ -69,8 +70,8 @@ export default class TableForm extends PureComponent {
     }
   }
   handleFieldChange(e, fieldName, key) {
-    const newData = [...this.state.data];
-    const target = this.getRowByKey(key);
+    const newData = this.state.data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
     if (target) {
       target[fieldName] = e.target.value;
       this.setState({ data: newData });
@@ -102,13 +103,14 @@ export default class TableForm extends PureComponent {
   cancel(e, key) {
     this.clickedCancel = true;
     e.preventDefault();
-    const target = this.getRowByKey(key);
+    const newData = this.state.data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
     if (this.cacheOriginData[key]) {
       Object.assign(target, this.cacheOriginData[key]);
       target.editable = false;
       delete this.cacheOriginData[key];
     }
-    this.setState({ data: [...this.state.data] });
+    this.setState({ data: newData });
   }
   render() {
     const columns = [{
