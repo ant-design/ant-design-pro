@@ -23,7 +23,6 @@ export default class SearchList extends Component {
         break;
     }
   }
-
   render() {
     const tabList = [{
       key: 'articles',

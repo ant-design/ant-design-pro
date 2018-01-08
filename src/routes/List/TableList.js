@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
+import Bind from 'lodash-decorators/bind';
 import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message } from 'antd';
 import StandardTable from '../../components/StandardTable';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
-
+import { PreAuthorize } from '../../utils/Authorized';
 import styles from './TableList.less';
 
 const FormItem = Form.Item;
@@ -57,7 +58,9 @@ export default class TableList extends PureComponent {
     });
   }
 
-  handleFormReset = () => {
+  @Bind()
+  @PreAuthorize(new Promise((res, rej) => rej()), '没有通过权限验证!')
+  handleFormReset() {
     const { form, dispatch } = this.props;
     form.resetFields();
     this.setState({
@@ -129,13 +132,13 @@ export default class TableList extends PureComponent {
       });
     });
   }
-
-  handleModalVisible = (flag) => {
+  @Bind()
+  @PreAuthorize('admin')
+  handleModalVisible(flag) {
     this.setState({
       modalVisible: !!flag,
     });
   }
-
   handleAddInput = (e) => {
     this.setState({
       addInputValue: e.target.value,
