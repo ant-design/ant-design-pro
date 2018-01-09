@@ -87,16 +87,6 @@
   "optionalDependencies": {
     "nightmare": "^2.10.0"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "transform-decorators-legacy",
-      "transform-class-properties"
-    ]
-  },
   "jest": {
     "setupFiles": [
       "<rootDir>/tests/setupTests.js"
