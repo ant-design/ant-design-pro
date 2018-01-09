@@ -174,14 +174,17 @@ export const getRouterData = (app) => {
     /**
      * 比对路由时删除/:id之类的参数,需要在菜单中配置父级参数
      * 用于匹配菜单,不支持中间参数匹配
+     * 对于中间参数可以通过 router配置name来进行面包屑管理
      */
     const newPath = path.split(/\/:/)[0];
     const menuItem = menuData[newPath.replace(/^\//, '')] || {};
-    routerData[path] = {
-      ...routerConfig[path],
-      name: menuItem.name,
+    let router = routerConfig[path];
+    router = {
+      ...router,
+      name: router.name || menuItem.name,
       authority: menuItem.authority,
     };
+    routerData[path] = router;
   });
   return routerData;
 };

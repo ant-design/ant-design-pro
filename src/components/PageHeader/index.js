@@ -1,24 +1,17 @@
 import React, { PureComponent, createElement } from 'react';
 import PropTypes from 'prop-types';
+import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb, Tabs } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 
+
 const { TabPane } = Tabs;
 
 function getBreadcrumb(breadcrumbNameMap, url) {
-  if (breadcrumbNameMap[url]) {
-    return breadcrumbNameMap[url];
-  }
-  const urlWithoutSplash = url.replace(/\/$/, '');
-  if (breadcrumbNameMap[urlWithoutSplash]) {
-    return breadcrumbNameMap[urlWithoutSplash];
-  }
   let breadcrumb = {};
   Object.keys(breadcrumbNameMap).forEach((item) => {
-    const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
-    const itemRegExp = new RegExp(itemRegExpStr);
-    if (itemRegExp.test(url)) {
+    if (pathToRegexp(item).test(url)) {
       breadcrumb = breadcrumbNameMap[item];
     }
   });
