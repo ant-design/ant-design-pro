@@ -46,8 +46,10 @@
     "react-fittext": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.0.0-beta.36",
-    "@babel/preset-react": "7.0.0-beta.36",
+    "@babel/core": "^7.0.0-beta.37",
+    "@babel/preset-env": "^7.0.0-beta.36",
+    "@babel/preset-react": "^7.0.0-beta.36",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.1.2",
     "babel-jest": "^22.0.4",
     "babel-plugin-dva-hmr": "^0.4.1",
@@ -75,6 +77,7 @@
     "pro-download": "^1.0.1",
     "react-test-renderer": "^16.2.0",
     "redbox-react": "^1.5.0",
+    "regenerator-runtime": "^0.11.1",
     "roadhog": "^2.0.6",
     "roadhog-api-doc": "^0.3.4",
     "rollbar": "^2.3.4",
