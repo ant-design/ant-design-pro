@@ -5,8 +5,6 @@ title:
   en-US: Basic
 ---
 
-Simplest of usage.
-
 ```jsx
 import RenderAuthorized from 'ant-design-pro/lib/Authorized';
 import { Alert } from 'antd';
@@ -14,71 +12,31 @@ import { Alert } from 'antd';
 const Authorized = RenderAuthorized('user');
 const noMatch = <Alert message="No permission." type="error" showIcon />;
 
-ReactDOM.render(
-  <Authorized authority="admin" noMatch={noMatch}>
-    <Alert message="Passed!" type="success" showIcon />
-  </Authorized>
-  mountNode,
-);
-```
 
-user Array
-
-```jsx
-import RenderAuthorized from 'ant-design-pro/lib/Authorized';
-import { Alert } from 'antd';
-
-const Authorized = RenderAuthorized('user');
-const noMatch = <Alert message="No permission." type="error" showIcon />;
-
-ReactDOM.render(
-  <Authorized authority={['user','admin']} noMatch={noMatch}>
-    <Alert message="Passed!" type="success" showIcon />
-  </Authorized>
-  mountNode,
-);
-```
-
-user Funtion
-
-```jsx
-import RenderAuthorized from 'ant-design-pro/lib/Authorized';
-import { Alert } from 'antd';
-
-const Authorized = RenderAuthorized('user');
-const noMatch = <Alert message="No permission." type="error" showIcon />;
-
-const Havepermission = () => {
+const havePermission = () => {
   return false;
 };
 
-ReactDOM.render(
-  <Authorized authority={Havepermission} noMatch={noMatch}>
-    <Alert message="Passed!" type="success" showIcon />
-  </Authorized>
-  mountNode,
-);
-```
-
-
-user Promise
-
-```jsx
-import RenderAuthorized from 'ant-design-pro/lib/Authorized';
-import { Alert } from 'antd';
-
-const Authorized = RenderAuthorized('user');
-const noMatch = <Alert message="No permission." type="error" showIcon />;
-
-const Havepermission = new Promise((reslove,reject)=>{
+const havePermissionAsync = new Promise((resolve,reject)=>{
   // Call reslove on behalf of passed
   setTimeout(()=>reslove(),1000)
 });
 
 ReactDOM.render(
-  <Authorized authority={Havepermission} noMatch={noMatch}>
-    <Alert message="Passed!" type="success" showIcon />
-  </Authorized>
+  <div>
+    <Authorized authority="admin" noMatch={noMatch}>
+      <Alert message="user Passed!" type="success" showIcon />
+    </Authorized>
+    <Authorized authority={['user','admin']} noMatch={noMatch}>
+      <Alert message="Use Array as a parameter passed!" type="success" showIcon />
+    </Authorized>
+    <Authorized authority={Havepermission} noMatch={noMatch}>
+      <Alert message="Use function as a parameter passed!" type="success" showIcon />
+    </Authorized>
+    <Authorized authority={havePermissionAsync} noMatch={noMatch}>
+      <Alert message="Use Promise as a parameter passed!" type="success" showIcon />
+    </Authorized>
+  </div>
   mountNode,
 );
 ```

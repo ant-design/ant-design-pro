@@ -48,7 +48,7 @@ order: 15
 ### Authorized.check
 
 函数形式的 Authorized，用于某些不能被 HOC 包裹的组件。 `Authorized.check(authority, target, Exception)`  
-注意:传入一个Promise时 无论正确还是错误返回的都是一个ReactNode.
+注意：传入一个 Promise 时，无论正确还是错误返回的都是一个 ReactClass。
 
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
