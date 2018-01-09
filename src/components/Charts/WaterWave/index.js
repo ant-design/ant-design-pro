@@ -1,16 +1,16 @@
 import React, { PureComponent } from 'react';
+import autoHeight from '../autoHeight';
 import styles from './index.less';
 
 /* eslint no-return-assign: 0 */
+/* eslint no-mixed-operators: 0 */
 // riddle: https://riddle.alibaba-inc.com/riddles/2d9a4b90
 
-class WaterWave extends PureComponent {
-  static defaultProps = {
-    height: 160,
-  }
+@autoHeight()
+export default class WaterWave extends PureComponent {
   state = {
     radio: 1,
-  }
+  };
 
   componentDidMount() {
     this.renderChart();
@@ -33,7 +33,7 @@ class WaterWave extends PureComponent {
     this.setState({
       radio: offsetWidth < height ? offsetWidth / height : 1,
     });
-  }
+  };
 
   renderChart() {
     const { percent, color = '#1890FF' } = this.props;
@@ -51,12 +51,12 @@ class WaterWave extends PureComponent {
     const canvasHeight = canvas.height;
     const radius = canvasWidth / 2;
     const lineWidth = 2;
-    const cR = radius - (lineWidth);
+    const cR = radius - lineWidth;
 
     ctx.beginPath();
     ctx.lineWidth = lineWidth * 2;
 
-    const axisLength = canvasWidth - (lineWidth);
+    const axisLength = canvasWidth - lineWidth;
     const unit = axisLength / 8;
     const range = 0.2; // 振幅
     let currRange = range;
@@ -66,15 +66,12 @@ class WaterWave extends PureComponent {
     const waveupsp = 0.005; // 水波上涨速度
 
     let arcStack = [];
-    const bR = radius - (lineWidth);
+    const bR = radius - lineWidth;
     const circleOffset = -(Math.PI / 2);
     let circleLock = true;
 
-    for (let i = circleOffset; i < circleOffset + (2 * Math.PI); i += 1 / (8 * Math.PI)) {
-      arcStack.push([
-        radius + (bR * Math.cos(i)),
-        radius + (bR * Math.sin(i)),
-      ]);
+    for (let i = circleOffset; i < circleOffset + 2 * Math.PI; i += 1 / (8 * Math.PI)) {
+      arcStack.push([radius + bR * Math.cos(i), radius + bR * Math.sin(i)]);
     }
 
     const cStartPoint = arcStack.shift();
@@ -87,10 +84,10 @@ class WaterWave extends PureComponent {
 
       const sinStack = [];
       for (let i = xOffset; i <= xOffset + axisLength; i += 20 / axisLength) {
-        const x = sp + ((xOffset + i) / unit);
+        const x = sp + (xOffset + i) / unit;
         const y = Math.sin(x) * currRange;
         const dx = i;
-        const dy = ((2 * cR * (1 - currData)) + (radius - cR)) - (unit * y);
+        const dy = 2 * cR * (1 - currData) + (radius - cR) - unit * y;
 
         ctx.lineTo(dx, dy);
         sinStack.push([dx, dy]);
@@ -130,7 +127,7 @@ class WaterWave extends PureComponent {
 
           ctx.beginPath();
           ctx.save();
-          ctx.arc(radius, radius, radius - (3 * lineWidth), 0, 2 * Math.PI, 1);
+          ctx.arc(radius, radius, radius - 3 * lineWidth, 0, 2 * Math.PI, 1);
 
           ctx.restore();
           ctx.clip();
@@ -157,10 +154,10 @@ class WaterWave extends PureComponent {
             currRange -= t;
           }
         }
-        if ((data - currData) > 0) {
+        if (data - currData > 0) {
           currData += waveupsp;
         }
-        if ((data - currData) < 0) {
+        if (data - currData < 0) {
           currData -= waveupsp;
         }
 
@@ -177,7 +174,11 @@ class WaterWave extends PureComponent {
     const { radio } = this.state;
     const { percent, title, height } = this.props;
     return (
-      <div className={styles.waterWave} ref={n => (this.root = n)} style={{ transform: `scale(${radio})` }}>
+      <div
+        className={styles.waterWave}
+        ref={n => (this.root = n)}
+        style={{ transform: `scale(${radio})` }}
+      >
         <div style={{ width: height, height, overflow: 'hidden' }}>
           <canvas
             className={styles.waterWaveCanvasWrapper}
@@ -187,14 +188,10 @@ class WaterWave extends PureComponent {
           />
         </div>
         <div className={styles.text} style={{ width: height }}>
-          {
-            title && <span>{title}</span>
-          }
+          {title && <span>{title}</span>}
           <h4>{percent}%</h4>
         </div>
       </div>
     );
   }
 }
-
-export default WaterWave;

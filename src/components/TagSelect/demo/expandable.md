@@ -8,8 +8,6 @@ title: 可展开和收起
 ````jsx
 import TagSelect from 'ant-design-pro/lib/TagSelect';
 
-const TagExpand = TagSelect.Expand;
-
 function handleFormSubmit(checkedValue) {
   console.log(checkedValue);
 }

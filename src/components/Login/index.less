@@ -1,0 +1,47 @@
+@import "~antd/lib/style/themes/default.less";
+
+.main {
+  width: 368px;
+  margin: 0 auto;
+
+  .tabs {
+    padding: 0 2px;
+    margin: 0 -2px;
+    :global {
+      .ant-tabs-tab {
+        font-size: 16px;
+        line-height: 24px;
+      }
+      .ant-input-affix-wrapper .ant-input:not(:first-child) {
+        padding-left: 34px;
+      }
+    }
+  }
+
+  :global {
+    .ant-tabs .ant-tabs-bar {
+      border-bottom: 0;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .ant-form-item {
+      margin-bottom: 24px;
+    }
+  }
+
+  .prefixIcon {
+    font-size: @font-size-base;
+    color: @disabled-color;
+  }
+
+  .getCaptcha {
+    display: block;
+    width: 100%;
+  }
+
+  .submit {
+    width: 100%;
+    margin-top: 24px;
+  }
+}

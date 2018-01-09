@@ -17,3 +17,11 @@ order: 13
 |----------|------------------------------------------|-------------|-------|
 | onChange | 标签选择的回调函数 | Function(checkedTags) |  |
 | expandable | 是否展示 `展开/收起` 按钮 | Boolean | false |
+
+
+### TagSelectOption
+
+| 参数      | 说明                                      | 类型         | 默认值 |
+|----------|------------------------------------------|-------------|-------|
+| value | TagSelect的值  | Function(checkedTags) | - |
+| children | tag的内容 | string \| ReactNode | - |

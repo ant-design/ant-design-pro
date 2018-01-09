@@ -7,44 +7,43 @@
   position: relative;
 }
 
+:global {
+  .ant-layout {
+    overflow-x: hidden;
+  }
+}
+
 .logo {
   height: 64px;
-  position: relative;
-  line-height: 64px;
-  padding-left: (@menu-collapsed-width - 32px) / 2;
-  transition: all .3s;
-  background: #002140;
-  overflow: hidden;
+  line-height: 58px;
+  vertical-align: top;
+  display: inline-block;
+  padding: 0 0 0 24px;
+  cursor: pointer;
+  font-size: 20px;
   img {
     display: inline-block;
     vertical-align: middle;
-    height: 32px;
-  }
-  h1 {
-    color: #fff;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 20px;
-    margin: 0 0 0 12px;
-    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    font-weight: 600;
   }
 }
 
-.trigger {
+.menu {
+  :global(.anticon) {
+    margin-right: 8px;
+  }
+  :global(.ant-dropdown-menu-item) {
+    width: 160px;
+  }
+}
+
+i.trigger {
   font-size: 20px;
   line-height: 64px;
   cursor: pointer;
-  transition: all .3s;
+  transition: all .3s, padding 0s;
   padding: 0 24px;
   &:hover {
     background: @primary-1;
-  }
-}
-
-@media screen and (max-width: @screen-xs) {
-  .trigger {
-    display: none;
   }
 }
 
@@ -61,8 +60,8 @@
       font-size: 16px;
       vertical-align: middle;
     }
-    &:global(.ant-popover-open),
-    &:hover {
+    &:hover,
+    &:global(.ant-popover-open) {
       background: @primary-1;
     }
   }
@@ -83,24 +82,31 @@
   }
 }
 
-.menu {
-  :global(.anticon) {
-    margin-right: 8px;
+@media only screen and (max-width: @screen-md) {
+  .header {
+    :global(.ant-divider-vertical) {
+      vertical-align: unset;
+    }
+    .name {
+      display: none;
+    }
+    i.trigger {
+      padding: 0 12px;
+    }
+    .logo {
+      padding-right: 12px;
+      position: relative;
+    }
+    .right {
+      position: absolute;
+      right: 12px;
+      top: 0;
+      background: #fff;
+      .account {
+        .avatar {
+          margin-right: 0;
+        }
+      }
+    }
   }
-  :global(.ant-dropdown-menu-item) {
-    width: 160px;
-  }
-}
-
-:global {
-  .ant-layout {
-    overflow-x: hidden;
-  }
-}
-
-.sider {
-  min-height: 100vh;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
-  position: relative;
-  z-index: 10;
 }

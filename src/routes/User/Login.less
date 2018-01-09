@@ -4,92 +4,16 @@
   width: 368px;
   margin: 0 auto;
 
-  .tabs {
-    padding: 0 2px;
-    margin: 0 -2px;
-    :global {
-      .ant-tabs-tab {
-        font-size: 16px;
-        line-height: 24px;
-      }
-      .ant-input-affix-wrapper .ant-input:not(:first-child) {
-        padding-left: 34px;
-      }
-    }
-  }
-
-  :global {
-    .ant-tabs .ant-tabs-bar {
-      border-bottom: 0;
-      margin-bottom: 24px;
-      text-align: center;
-    }
-
-    .ant-form-item {
-      margin-bottom: 24px;
-    }
-  }
-
-  .prefixIcon {
-    font-size: @font-size-base;
-    color: @disabled-color;
-  }
-
-  .getCaptcha {
-    display: block;
-    width: 100%;
-  }
-
-  .additional {
-    text-align: left;
-
-    .forgot {
-      float: right;
-    }
-
-    .submit {
-      width: 100%;
-      margin-top: 24px;
-    }
-
-    :global {
-      .ant-form-item-control {
-        line-height: 22px;
-      }
-    }
-  }
-
-  .iconAlipay, .iconTaobao, .iconWeibo {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background: url('https://gw.alipayobjects.com/zos/rmsportal/itDzjUnkelhQNsycranf.svg');
+  .icon {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.2);
     margin-left: 16px;
     vertical-align: middle;
     cursor: pointer;
-  }
-
-  .iconAlipay {
-    background-position: -24px 0;
 
     &:hover {
-      background-position: 0 0;
-    }
-  }
-
-  .iconTaobao {
-    background-position: -24px -24px;
-
-    &:hover {
-      background-position: 0 -24px;
-    }
-  }
-
-  .iconWeibo {
-    background-position: -24px -48px;
-
-    &:hover {
-      background-position: 0 -48px;
+      color: @primary-color;
+      transition: color .3s;
     }
   }
 

@@ -10,8 +10,9 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
-@connect(state => ({
-  rule: state.rule,
+@connect(({ rule, loading }) => ({
+  rule,
+  loading: loading.models.rule,
 }))
 @Form.create()
 export default class TableList extends PureComponent {
@@ -59,6 +60,9 @@ export default class TableList extends PureComponent {
   handleFormReset = () => {
     const { form, dispatch } = this.props;
     form.resetFields();
+    this.setState({
+      formValues: {},
+    });
     dispatch({
       type: 'rule/fetch',
       payload: {},
@@ -265,7 +269,7 @@ export default class TableList extends PureComponent {
   }
 
   render() {
-    const { rule: { loading: ruleLoading, data } } = this.props;
+    const { rule: { data }, loading } = this.props;
     const { selectedRows, modalVisible, addInputValue } = this.state;
 
     const menu = (
@@ -301,7 +305,7 @@ export default class TableList extends PureComponent {
             </div>
             <StandardTable
               selectedRows={selectedRows}
-              loading={ruleLoading}
+              loading={loading}
               data={data}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}

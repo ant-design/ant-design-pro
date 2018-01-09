@@ -1,25 +1,28 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import dva from 'dva';
+import createHistory from 'history/createHashHistory';
+import createLoading from 'dva-loading';
 import 'moment/locale/zh-cn';
-import './g2';
+import FastClick from 'fastclick';
 import './rollbar';
-// import browserHistory from 'history/createBrowserHistory';
-import './index.less';
-import router from './router';
+import onError from './error';
 
+import './index.less';
 // 1. Initialize
 const app = dva({
-  // history: browserHistory(),
+  history: createHistory(),
+  onError,
 });
 
 // 2. Plugins
-// app.use({});
+app.use(createLoading());
 
 // 3. Register global model
-app.model(require('./models/global'));
+app.model(require('./models/global').default);
 
 // 4. Router
-app.router(router);
+app.router(require('./router').default);
 
 // 5. Start
 app.start('#root');
+FastClick.attach(document.body);

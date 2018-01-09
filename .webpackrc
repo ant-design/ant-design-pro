@@ -1,9 +1,7 @@
 {
   "entry": "src/index.js",
   "extraBabelPlugins": [
-    "transform-runtime",
     "transform-decorators-legacy",
-    "transform-class-properties",
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
   ],
   "env": {
@@ -13,12 +11,11 @@
       ]
     }
   },
-  "externals": {
-    "g2": "G2",
-    "g-cloud": "Cloud",
-    "g2-plugin-slider": "G2.Plugin.slider"
-  },
   "ignoreMomentLocale": true,
   "theme": "./src/theme.js",
+  "html": {
+    "template": "./src/index.ejs"
+  },
+  "disableDynamicImport": true,
   "hash": true
 }

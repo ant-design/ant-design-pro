@@ -1,4 +1,5 @@
 import numeral from 'numeral';
+import './g2';
 import ChartCard from './ChartCard';
 import Bar from './Bar';
 import Pie from './Pie';
@@ -14,7 +15,7 @@ import TimelineChart from './TimelineChart';
 
 const yuan = val => `&yen; ${numeral(val).format('0,0')}`;
 
-export default {
+export {
   yuan,
   Bar,
   Pie,

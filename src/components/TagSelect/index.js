@@ -39,7 +39,8 @@ class TagSelect extends Component {
   }
 
   getAllTags() {
-    const { children } = this.props;
+    let { children } = this.props;
+    children = React.Children.toArray(children);
     const checkedTags = children
       .filter(child => this.isTagSelectOption(child))
       .map(child => child.props.value);
@@ -86,7 +87,6 @@ class TagSelect extends Component {
       [styles.hasExpandTag]: expandable,
       [styles.expanded]: expand,
     });
-
     return (
       <div className={cls} style={style}>
         <CheckableTag
@@ -97,8 +97,7 @@ class TagSelect extends Component {
           全部
         </CheckableTag>
         {
-          checkedTags && children
-            .map((child) => {
+          checkedTags && React.Children.map(children, (child) => {
               if (this.isTagSelectOption(child)) {
                 return React.cloneElement(child, {
                   key: `tag-select-${child.props.value}`,

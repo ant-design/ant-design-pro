@@ -24,7 +24,7 @@ const ChartCard = ({
           </div>
           {
             // eslint-disable-next-line
-            total && (<div className={styles.total} dangerouslySetInnerHTML={{ __html: total }} />)
+            (total !== undefined) && (<div className={styles.total} dangerouslySetInnerHTML={{ __html: total }} />)
           }
         </div>
       </div>
@@ -52,7 +52,7 @@ const ChartCard = ({
       bodyStyle={{ padding: '20px 24px 8px 24px' }}
       {...rest}
     >
-      {<Spin spinning={loading}>{content}</Spin>}
+      {<Spin spinning={loading} wrapperClassName={styles.spin}>{content}</Spin>}
     </Card>
   );
 };

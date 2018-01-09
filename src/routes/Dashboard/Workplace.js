@@ -41,39 +41,41 @@ const members = [
   {
     id: 'members-1',
     title: '科学搬砖组',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     link: '',
   },
   {
     id: 'members-2',
     title: '程序员日常',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png',
     link: '',
   },
   {
     id: 'members-3',
     title: '设计天团',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png',
     link: '',
   },
   {
     id: 'members-4',
     title: '中二少女团',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png',
     link: '',
   },
   {
     id: 'members-5',
     title: '骗你学计算机',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png',
     link: '',
   },
 ];
 
-@connect(state => ({
-  project: state.project,
-  activities: state.activities,
-  chart: state.chart,
+@connect(({ project, activities, chart, loading }) => ({
+  project,
+  activities,
+  chart,
+  projectLoading: loading.effects['project/fetchNotice'],
+  activitiesLoading: loading.effects['activities/fetchList'],
 }))
 export default class Workplace extends PureComponent {
   componentDidMount() {
@@ -131,15 +133,16 @@ export default class Workplace extends PureComponent {
 
   render() {
     const {
-      project: { loading: projectLoading, notice },
-      activities: { loading: activitiesLoading },
+      project: { notice },
+      projectLoading,
+      activitiesLoading,
       chart: { radarData },
     } = this.props;
 
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
         <div className={styles.avatar}>
-          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/lctvVCLfRpYCkYxAsiVQ.png" />
+          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
         </div>
         <div className={styles.content}>
           <div className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</div>
@@ -148,17 +151,17 @@ export default class Workplace extends PureComponent {
       </div>
     );
 
-    const pageHeaderExtra = (
-      <div className={styles.pageHeaderExtra}>
-        <div>
+    const extraContent = (
+      <div className={styles.extraContent}>
+        <div className={styles.statItem}>
           <p>项目数</p>
           <p>56</p>
         </div>
-        <div>
+        <div className={styles.statItem}>
           <p>团队内排名</p>
           <p>8<span> / 24</span></p>
         </div>
-        <div>
+        <div className={styles.statItem}>
           <p>项目访问</p>
           <p>2,223</p>
         </div>
@@ -168,7 +171,7 @@ export default class Workplace extends PureComponent {
     return (
       <PageHeaderLayout
         content={pageHeaderContent}
-        extraContent={pageHeaderExtra}
+        extraContent={extraContent}
       >
         <Row gutter={24}>
           <Col xl={16} lg={24} md={24} sm={24} xs={24}>

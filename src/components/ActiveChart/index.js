@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
 import { MiniArea } from '../Charts';
 import NumberInfo from '../NumberInfo';
@@ -14,16 +14,16 @@ function getActiveData() {
   for (let i = 0; i < 24; i += 1) {
     activeData.push({
       x: `${fixedZero(i)}:00`,
-      y: (i * 50) + (Math.floor(Math.random() * 200)),
+      y: Math.floor(Math.random() * 200) + (i * 50),
     });
   }
   return activeData;
 }
 
-export default class ActiveChart extends PureComponent {
+export default class ActiveChart extends Component {
   state = {
     activeData: getActiveData(),
-  }
+  };
 
   componentDidMount() {
     this.timer = setInterval(() => {
@@ -42,43 +42,40 @@ export default class ActiveChart extends PureComponent {
 
     return (
       <div className={styles.activeChart}>
-        <NumberInfo
-          subTitle="目标评估"
-          total="有望达到预期"
-        />
+        <NumberInfo subTitle="目标评估" total="有望达到预期" />
         <div style={{ marginTop: 32 }}>
           <MiniArea
             animate={false}
             line
             borderWidth={2}
             height={84}
+            scale={{
+              y: {
+                tickCount: 3,
+              },
+            }}
             yAxis={{
-              tickCount: 3,
               tickLine: false,
-              labels: false,
+              label: false,
               title: false,
               line: false,
             }}
             data={activeData}
           />
         </div>
-        {
-          activeData && (
-            <div className={styles.activeChartGrid}>
-              <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
-              <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
-            </div>
-          )
-        }
-        {
-          activeData && (
-            <div className={styles.activeChartLegend}>
-              <span>00:00</span>
-              <span>{activeData[Math.floor(activeData.length / 2)].x}</span>
-              <span>{activeData[activeData.length - 1].x}</span>
-            </div>
-          )
-        }
+        {activeData && (
+          <div className={styles.activeChartGrid}>
+            <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
+            <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
+          </div>
+        )}
+        {activeData && (
+          <div className={styles.activeChartLegend}>
+            <span>00:00</span>
+            <span>{activeData[Math.floor(activeData.length / 2)].x}</span>
+            <span>{activeData[activeData.length - 1].x}</span>
+          </div>
+        )}
       </div>
     );
   }
