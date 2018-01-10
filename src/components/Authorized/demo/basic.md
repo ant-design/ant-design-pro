@@ -5,6 +5,8 @@ title:
   en-US: Basic
 ---
 
+Authorized demo used
+
 ```jsx
 import RenderAuthorized from 'ant-design-pro/lib/Authorized';
 import { Alert } from 'antd';
@@ -18,8 +20,8 @@ const havePermission = () => {
 };
 
 const havePermissionAsync = new Promise((resolve,reject)=>{
-  // Call reslove on behalf of passed
-  setTimeout(()=>reslove(),1000)
+  // Call resolve on behalf of passed
+  setTimeout( ()=> resolve() , 1000)
 });
 
 ReactDOM.render(
@@ -30,7 +32,7 @@ ReactDOM.render(
     <Authorized authority={['user','admin']} noMatch={noMatch}>
       <Alert message="Use Array as a parameter passed!" type="success" showIcon />
     </Authorized>
-    <Authorized authority={Havepermission} noMatch={noMatch}>
+    <Authorized authority={havePermission} noMatch={noMatch}>
       <Alert message="Use function as a parameter passed!" type="success" showIcon />
     </Authorized>
     <Authorized authority={havePermissionAsync} noMatch={noMatch}>
