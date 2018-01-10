@@ -37,6 +37,7 @@
       color: @heading-color;
       font-size: 24px;
       line-height: 32px;
+      margin: 0;
     }
     & > em {
       background-color: @border-color-split;
@@ -49,24 +50,20 @@
   }
   .listContent {
     font-size: 0;
-    & > div {
+    .listContentItem {
       color: @text-color-secondary;
       display: inline-block;
+      vertical-align: middle;
       font-size: @font-size-base;
       margin-left: 40px;
-      & > span {
+      > span {
         line-height: 20px;
       }
-      & > p {
+      > p {
         margin-top: 4px;
         margin-bottom: 0;
         line-height: 22px;
       }
-    }
-    & > div:last-child {
-      position: relative;
-      top: -16px;
-      width: 188px;
     }
   }
   .extraContentSearch {
