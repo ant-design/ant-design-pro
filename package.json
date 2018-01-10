@@ -6,8 +6,8 @@
   "scripts": {
     "precommit": "npm run lint-staged",
     "start": "cross-env DISABLE_ESLINT=true roadhog dev",
-    "start:no-proxy": "cross-env NO_PROXY=true roadhog dev",
-    "build": "roadhog build",
+    "start:no-proxy": "cross-env NO_PROXY=true DISABLE_ESLINT=true roadhog dev",
+    "build": "cross-env DISABLE_ESLINT=true roadhog build",
     "site": "roadhog-api-doc static && gh-pages -d dist",
     "analyze": "roadhog build --analyze",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",

@@ -36,7 +36,7 @@ ReactDOM.render(
     <Authorized authority={havePermissionAsync} noMatch={noMatch}>
       <Alert message="Use Promise as a parameter passed!" type="success" showIcon />
     </Authorized>
-  </div>
-  mountNode,
+  </div>,
+  mountNode
 );
 ```

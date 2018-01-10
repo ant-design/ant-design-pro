@@ -15,7 +15,7 @@ const links = [{
   title: '帮助',
   href: '',
 }, {
-  key: 'github'
+  key: 'github',
   title: <Icon type="github" />,
   href: 'https://github.com/ant-design/ant-design-pro',
   blankTarget: true,
