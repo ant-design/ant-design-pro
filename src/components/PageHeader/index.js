@@ -38,9 +38,7 @@ export default class PageHeader extends PureComponent {
       breadcrumbNameMap: this.props.breadcrumbNameMap || this.context.breadcrumbNameMap,
     };
   };
-  /**
-   * 根据props生成
-   */
+  // Generated according to props
   conversionFromProps= () => {
     const {
       breadcrumbList, linkElement = 'a',
@@ -59,9 +57,9 @@ export default class PageHeader extends PureComponent {
   }
   conversionFromLocation = (routerLocation, breadcrumbNameMap) => {
     const { linkElement = 'a' } = this.props;
-    // 将路径转化为数组
+    // Convert the path to an array
     const pathSnippets = routerLocation.pathname.split('/').filter(i => i);
-    // 循环数据拼接路由
+    // Loop data mosaic routing
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {
       const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
       const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
@@ -76,7 +74,7 @@ export default class PageHeader extends PureComponent {
         </Breadcrumb.Item>
       ) : null;
     });
-    // 给头部添加首页面包屑
+    // Add home breadcrumbs to your head
     extraBreadcrumbItems.unshift(
       <Breadcrumb.Item key="home">
         {createElement(linkElement, {
@@ -100,6 +98,7 @@ export default class PageHeader extends PureComponent {
       return this.conversionFromProps();
     }
     // 如果传入 routes 和 params 属性
+    // If pass routes and params attributes
     if (routes && params) {
       return (
         <Breadcrumb
@@ -111,14 +110,14 @@ export default class PageHeader extends PureComponent {
       );
     }
     // 根据 location 生成 面包屑
+    // Generate breadcrumbs based on location
     if (location && location.pathname) {
       return this.conversionFromLocation(routerLocation, breadcrumbNameMap);
     }
     return null;
   }
-  /**
-   * 渲染Breadcrumb 子节点
-   */
+  // 渲染Breadcrumb 子节点
+  // Render the Breadcrumb child node
   itemRender = (route, params, routes, paths) => {
     const { linkElement = 'a' } = this.props;
     const last = routes.indexOf(route) === routes.length - 1;

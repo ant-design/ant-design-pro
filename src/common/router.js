@@ -1,5 +1,6 @@
 import { createElement } from 'react';
 import dynamic from 'dva/dynamic';
+import pathToRegexp from 'path-to-regexp';
 import { getMenuData } from './menu';
 
 let routerDataCache;
@@ -75,7 +76,7 @@ export const getRouterData = (app) => {
     '/dashboard/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
     },
-    '/dashboard/monitor': {
+    '/dashboard/monitor/': {
       component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
     },
     '/dashboard/workplace': {
@@ -166,23 +167,30 @@ export const getRouterData = (app) => {
   // Get name from ./menu.js or just set it in the router data.
   const menuData = getFlatMenuData(getMenuData());
 
-  // 路由配置数据,routerConfig为自定义配置
+  // Route configuration data
   // eg. {name,authority ...routerConfig }
   const routerData = {};
-  // 循环参数用于获得路由name
+  // The route matches the menu
   Object.keys(routerConfig).forEach((path) => {
-    /**
-     * 比对路由时删除/:id之类的参数,需要在菜单中配置父级参数
-     * 用于匹配菜单,不支持中间参数匹配
-     * 对于中间参数可以通过 router配置name来进行面包屑管理
-     */
-    const newPath = path.split(/\/:/)[0];
-    const menuItem = menuData[newPath.replace(/^\//, '')] || {};
+    // Regular match item name
+    // eg.  router /user/:id === /user/chen
+    const pathRegexp = pathToRegexp(path);
+    const menuKey = Object.keys(menuData).find(key => pathRegexp.test(`/${key}`));
+    let menuItem = {};
+    // If menuKey is not empty
+    if (menuKey) {
+      menuItem = menuData[menuKey];
+    }
     let router = routerConfig[path];
+    // If you need to configure complex parameter routing,
+    // bread crumbs can not be displayed.
+    // eg . /list/:type/user/info/:id
+    // you can configure name in the router,
+    // bread crumbs will normally show
     router = {
       ...router,
       name: router.name || menuItem.name,
-      authority: menuItem.authority,
+      authority: router.authority || menuItem.authority,
     };
     routerData[path] = router;
   });

@@ -17,8 +17,5 @@ yarn-error.log
 /coverage
 .idea
 yarn.lock
-<<<<<<< HEAD
 package-lock.json
-=======
 jsconfig.json
->>>>>>> fix parameters match warning

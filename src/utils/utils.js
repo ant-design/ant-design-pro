@@ -93,12 +93,7 @@ export function digitUppercase(n) {
   return s.replace(/(零.)*零元/, '元').replace(/(零.)+/g, '零').replace(/^整$/, '零元整');
 }
 
-/**
- * 判断路径时候包含,如果是丢弃他
- * @param {path} str1
- * @param {path} str2
- * @returns
- */
+
 function getRelation(str1, str2) {
   if (str1 === str2) {
     console.warn('Two path are equal!');  // eslint-disable-line
@@ -130,7 +125,7 @@ function getRenderArr(routes) {
 }
 
 /**
- * 获取router路由配置
+ * Get router routing configuration
  * { path:{name,...param}}=>Array<{name,path ...param}>
  * @param {string} path
  * @param {routerData} routerData
@@ -138,12 +133,11 @@ function getRenderArr(routes) {
 export function getRoutes(path, routerData) {
   let routes = Object.keys(routerData).filter(routePath =>
     routePath.indexOf(path) === 0 && routePath !== path);
-  // 替换 path 为 '' eg. path='user' /user/name => name
+  // Replace path to '' eg. path='user' /user/name => name
   routes = routes.map(item => item.replace(path, ''));
-  // 获得需要渲染的路由 去掉深层的渲染
+  // Get the route to be rendered to remove the deep rendering
   const renderArr = getRenderArr(routes);
-
-  // 转化和拼接参数
+  // Conversion and stitching parameters
   const renderRoutes = renderArr.map((item) => {
     const exact = !routes.some(route => route !== item && getRelation(route, item) === 1);
     return {
