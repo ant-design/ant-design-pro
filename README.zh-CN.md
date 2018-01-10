@@ -9,9 +9,10 @@
 ![](https://gw.alipayobjects.com/zos/rmsportal/xEdBqwSzvoSapmnSnYjU.png)
 
 - 预览：http://preview.pro.ant.design
-- 首页：http://pro.ant.design
-- 使用文档：http://pro.ant.design/docs/getting-started
-- 常见问题：http://pro.ant.design/docs/faq
+- 首页：http://pro.ant.design/index-cn
+- 使用文档：http://pro.ant.design/docs/getting-started-cn
+- 更新日志: http://pro.ant.design/docs/history-cn
+- 常见问题：http://pro.ant.design/docs/faq-cn
 
 ## 特性
 

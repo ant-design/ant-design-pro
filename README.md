@@ -11,6 +11,7 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 - Preview: http://preview.pro.ant.design
 - Home Page: http://pro.ant.design
 - Documentation: http://pro.ant.design/docs/getting-started
+- ChangeLog: http://pro.ant.design/docs/history
 - FAQ: http://pro.ant.design/docs/faq
 
 ## Translation Recruitment :loudspeaker:
