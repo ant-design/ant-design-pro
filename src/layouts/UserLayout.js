@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'dva/router';
+import { Link, Redirect, Switch, Route } from 'dva/router';
 import DocumentTitle from 'react-document-title';
 import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
@@ -47,8 +47,8 @@ class UserLayout extends React.PureComponent {
             </div>
             <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
           </div>
-          {
-            getRoutes(match.path, routerData).map(item =>
+          <Switch>
+            {getRoutes(match.path, routerData).map(item =>
               (
                 <Route
                   key={item.key}
@@ -57,8 +57,9 @@ class UserLayout extends React.PureComponent {
                   exact={item.exact}
                 />
               )
-            )
-          }
+            )}
+            <Redirect exact from="/user" to="/user/login" />
+          </Switch>
           <GlobalFooter className={styles.footer} links={links} copyright={copyright} />
         </div>
       </DocumentTitle>

@@ -60,16 +60,16 @@ export default class BasicList extends PureComponent {
 
     const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
       <div className={styles.listContent}>
-        <div>
+        <div className={styles.listContentItem}>
           <span>Owner</span>
           <p>{owner}</p>
         </div>
-        <div>
+        <div className={styles.listContentItem}>
           <span>开始时间</span>
           <p>{moment(createdAt).format('YYYY-MM-DD hh:mm')}</p>
         </div>
-        <div>
-          <Progress percent={percent} status={status} strokeWidth={6} />
+        <div className={styles.listContentItem}>
+          <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />
         </div>
       </div>
     );
