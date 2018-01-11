@@ -1,7 +1,14 @@
 @import "~antd/lib/style/themes/default.less";
 
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
 .content {
   padding: 32px 0;
+  flex: 1;
 }
 
 @media (min-width: @screen-md-min) {
@@ -13,7 +20,7 @@
   }
 
   .content {
-    padding: 110px 0 144px 0;
+    padding: 112px 0 24px 0;
   }
 }
 

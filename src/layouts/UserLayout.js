@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link, Redirect, Switch, Route } from 'dva/router';
 import DocumentTitle from 'react-document-title';
-import { Layout, Icon } from 'antd';
+import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
 import { getRoutes } from '../utils/utils';
-
-const { Content } = Layout;
 
 const links = [{
   key: 'help',
@@ -39,8 +37,8 @@ class UserLayout extends React.PureComponent {
     const { routerData, match } = this.props;
     return (
       <DocumentTitle title={this.getPageTitle()}>
-        <Layout className={styles.container}>
-          <Content className={styles.content}>
+        <div className={styles.container}>
+          <div className={styles.content}>
             <div className={styles.top}>
               <div className={styles.header}>
                 <Link to="/">
@@ -63,9 +61,9 @@ class UserLayout extends React.PureComponent {
               )}
               <Redirect exact from="/user" to="/user/login" />
             </Switch>
-          </Content>
+          </div>
           <GlobalFooter links={links} copyright={copyright} />
-        </Layout>
+        </div>
       </DocumentTitle>
     );
   }
