@@ -5,6 +5,7 @@ export interface TagCloudProps {
     value: number;
   }>;
   height: number;
+  style?: React.CSSProperties;
 }
 
 export default class TagCloud extends React.Component<TagCloudProps, any> {}

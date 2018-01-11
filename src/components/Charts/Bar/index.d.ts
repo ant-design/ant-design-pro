@@ -9,6 +9,7 @@ export interface BarProps {
     y: number;
   }>;
   autoLabel?: boolean;
+  style?: React.CSSProperties;
 }
 
 export default class Bar extends React.Component<BarProps, any> {}

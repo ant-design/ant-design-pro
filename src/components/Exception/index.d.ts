@@ -6,6 +6,7 @@ export interface ExceptionProps {
   img?: string;
   actions?: React.ReactNode;
   linkElement?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 export default class Exception extends React.Component<ExceptionProps, any> {}

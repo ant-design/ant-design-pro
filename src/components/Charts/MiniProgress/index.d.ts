@@ -4,6 +4,7 @@ export interface MiniProgressProps {
   color?: string;
   strokeWidth?: number;
   percent?: number;
+  style?: React.CSSProperties;
 }
 
 export default class MiniProgress extends React.Component<

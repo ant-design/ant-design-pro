@@ -1,15 +1,19 @@
-import * as React from "react";
-import * as H from "history";
-import { RouteProps } from "react-router";
+import * as React from 'react';
+import { RouteProps } from 'react-router';
 
 type authorityFN = () => string;
 
 type authority = string | Array<string> | authorityFN | Promise<any>;
 
+export type IReactComponent<P = any> =
+  | React.StatelessComponent<P>
+  | React.ComponentClass<P>
+  | React.ClassicComponentClass<P>;
+
 interface Secured {
-  (authority: authority, error?: React.ReactNode): (
-    target: React.ReactNode
-  ) => React.ReactNode;
+  (authority: authority, error?: React.ReactNode): <T extends IReactComponent>(
+    target: T,
+  ) => T;
 }
 
 export interface AuthorizedRouteProps extends RouteProps {
@@ -18,16 +22,14 @@ export interface AuthorizedRouteProps extends RouteProps {
 export class AuthorizedRoute extends React.Component<
   AuthorizedRouteProps,
   any
-> {
-  constructor(props: AuthorizedRouteProps);
-}
+> {}
 
 interface check {
-  (
+  <T extends IReactComponent, S extends IReactComponent>(
     authority: authority,
-    target: React.ReactNode,
-    Exception: React.ReactNode
-  ): React.ReactNode;
+    target: T,
+    Exception: S,
+  ): T | S;
 }
 
 interface AuthorizedProps {
@@ -39,7 +41,6 @@ export class Authorized extends React.Component<AuthorizedProps, any> {
   static Secured: Secured;
   static AuthorizedRoute: typeof AuthorizedRoute;
   static check: check;
-  constructor(props: AuthorizedProps);
 }
 
 declare function renderAuthorize(currentAuthority: string): typeof Authorized;

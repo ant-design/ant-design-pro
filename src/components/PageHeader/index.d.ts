@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 export interface PageHeaderProps {
   title?: React.ReactNode | string;
   logo?: React.ReactNode | string;
@@ -12,6 +12,7 @@ export interface PageHeaderProps {
   tabActiveKey?: string;
   onTabChange?: (key: string) => void;
   linkElement?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 export default class PageHeader extends React.Component<PageHeaderProps, any> {}
