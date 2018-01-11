@@ -1,11 +1,11 @@
 ---
-order: 0
+order: 1
 title: 
-  zh-CN: 基本使用
-  en-US: Basic use
+  zh-CN: 使用数组作为参数
+  en-US: Use Array as a parameter
 ---
 
-Basic use
+Use Array as a parameter
 
 ```jsx
 import RenderAuthorized from 'ant-design-pro/lib/Authorized';
@@ -15,11 +15,9 @@ const Authorized = RenderAuthorized('user');
 const noMatch = <Alert message="No permission." type="error" showIcon />;
 
 ReactDOM.render(
-  <div>
-    <Authorized authority="admin" noMatch={noMatch}>
-      <Alert message="user Passed!" type="success" showIcon />
-    </Authorized>
-  </div>,
+  <Authorized authority={['user', 'admin']} noMatch={noMatch}>
+    <Alert message="Use Array as a parameter passed!" type="success" showIcon />
+  </Authorized>,
   mountNode,
 );
 ```

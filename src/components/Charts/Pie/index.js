@@ -228,7 +228,9 @@ export default class Pie extends Component {
                 />
                 <span className={styles.legendTitle}>{item.x}</span>
                 <Divider type="vertical" />
-                <span className={styles.percent}>{`${(item.percent * 100).toFixed(2)}%`}</span>
+                <span className={styles.percent}>
+                  {`${(isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}
+                </span>
                 <span
                   className={styles.value}
                   dangerouslySetInnerHTML={{

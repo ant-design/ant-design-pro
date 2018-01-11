@@ -171,7 +171,7 @@ export default class Ellipsis extends Component {
         <div id={id} className={cls} {...restProps}>
           <style>{style}</style>
           {
-            tooltip ? (<Tooltip title={text}>{children}</Tooltip>) : children
+            tooltip ? (<Tooltip title={children}>{children}</Tooltip>) : children
           }
         </div>);
     }
