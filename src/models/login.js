@@ -1,5 +1,6 @@
 import { fakeAccountLogin } from '../services/api';
 import { setAuthority } from '../utils/authority';
+import Store from '../index';
 
 export default {
   namespace: 'login',
@@ -25,17 +26,26 @@ export default {
       }
     },
     *logout(_, { put }) {
-      yield put({
-        type: 'changeLoginStatus',
-        payload: {
-          status: false,
-          currentAuthority: 'guest',
-        },
-      });
-      // yield put(routerRedux.push('/user/login'));
-      // Login out after permission changes to admin or user
-      // The refresh will automatically redirect to the login page
-      window.location.reload();
+      try {
+        // get location pathname
+        const urlParams = new URL(window.location.href);
+        const { pathname } = Store.getState().routing.location;
+        // add the parameters in the url
+        urlParams.searchParams.set('redirect', pathname);
+        window.history.pushState(null, 'login', urlParams.href);
+      } finally {
+        // yield put(routerRedux.push('/user/login'));
+        // Login out after permission changes to admin or user
+        // The refresh will automatically redirect to the login page
+        yield put({
+          type: 'changeLoginStatus',
+          payload: {
+            status: false,
+            currentAuthority: 'guest',
+          },
+        });
+        window.location.reload();
+      }
     },
   },
 

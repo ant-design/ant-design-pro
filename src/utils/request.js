@@ -66,7 +66,13 @@ export default function request(url, options) {
     })
     .catch((e) => {
       const { dispatch } = store;
-      if (e.name === 401 || e.name === 403) {
+      if (e.name === 401) {
+        dispatch({
+          type: 'login/logout',
+        });
+        return;
+      }
+      if (e.name === 403) {
         dispatch(routerRedux.push('/exception/403'));
         return;
       }

@@ -10,6 +10,14 @@ export default class TriggerException extends PureComponent {
   state={
     isloading: false,
   }
+  trigger401 = () => {
+    this.setState({
+      isloading: true,
+    });
+    this.props.dispatch({
+      type: 'error/query401',
+    });
+  };
   trigger403 = () => {
     this.setState({
       isloading: true,
@@ -38,6 +46,9 @@ export default class TriggerException extends PureComponent {
     return (
       <Card>
         <Spin spinning={this.state.isloading} wrapperClassName={styles.trigger}>
+          <Button type="danger" onClick={this.trigger401}>
+            触发401
+          </Button>
           <Button type="danger" onClick={this.trigger403}>
             触发403
           </Button>
