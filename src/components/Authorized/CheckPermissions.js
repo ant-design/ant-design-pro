@@ -1,6 +1,11 @@
 import React from 'react';
 import PromiseRender from './PromiseRender';
 import { CURRENT } from './index';
+
+function isPromise(obj) {
+  return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+}
+
 /**
  * 通用权限检查方法
  * Common check permissions method
@@ -32,7 +37,7 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
   }
 
   // Promise 处理
-  if (authority.constructor.name === 'Promise') {
+  if (isPromise(authority)) {
     return () => (
       <PromiseRender ok={target} error={Exception} promise={authority} />
     );
