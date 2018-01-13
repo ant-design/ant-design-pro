@@ -5,6 +5,7 @@ export interface GaugeProps {
   height: number;
   bgColor?: number;
   percent: number;
+  style?: React.CSSProperties;
 }
 
 export default class Gauge extends React.Component<GaugeProps, any> {}

@@ -1,10 +1,12 @@
-import * as React from "react";
+import * as React from 'react';
 export interface TagSelectProps {
   onChange?: (value: Array<string>) => void;
   expandable?: boolean;
+  style?: React.CSSProperties;
 }
 export interface TagSelectOptionProps {
   value: string;
+  style?: React.CSSProperties;
 }
 
 export class TagSelectOption extends React.Component<

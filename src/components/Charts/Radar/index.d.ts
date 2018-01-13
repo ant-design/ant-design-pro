@@ -9,6 +9,7 @@ export interface RadarProps {
     label: string;
     value: string;
   }>;
+  style?: React.CSSProperties;
 }
 
 export default class Radar extends React.Component<RadarProps, any> {}

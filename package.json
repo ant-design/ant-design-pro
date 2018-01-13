@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "start:no-proxy": "cross-env NO_PROXY=true DISABLE_ESLINT=true roadhog dev",
     "build": "cross-env DISABLE_ESLINT=true roadhog build",
     "site": "roadhog-api-doc static && gh-pages -d dist",
-    "analyze": "roadhog build --analyze",
+    "analyze": "ANALYZE=true roadhog build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
     "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",

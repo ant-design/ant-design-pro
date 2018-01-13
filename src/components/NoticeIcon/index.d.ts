@@ -1,10 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 export interface NoticeIconData {
-  avatar: string;
-  title: React.ReactNode;
-  description: React.ReactNode;
-  datetime: React.ReactNode;
-  extra: React.ReactNode;
+  avatar?: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  datetime?: React.ReactNode;
+  extra?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 export interface NoticeIconProps {
@@ -29,8 +30,8 @@ export interface NoticeIconProps {
 }
 
 export interface NoticeIconTabProps {
-  list: Array<NoticeIconData>;
-  title: string;
+  list?: Array<NoticeIconData>;
+  title?: string;
   emptyText?: React.ReactNode;
   emptyImage?: string;
 }

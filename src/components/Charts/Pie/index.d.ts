@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 export interface PieProps {
   animate?: boolean;
   color?: string;
@@ -7,7 +7,7 @@ export interface PieProps {
   padding?: [number, number, number, number];
   percent?: number;
   data?: Array<{
-    x: string;
+    x: string | string;
     y: number;
   }>;
   total?: string;
