@@ -1,6 +1,5 @@
 import { fakeAccountLogin } from '../services/api';
 import { setAuthority } from '../utils/authority';
-import Store from '../index';
 
 export default {
   namespace: 'login',
@@ -25,11 +24,11 @@ export default {
         window.location.reload();
       }
     },
-    *logout(_, { put }) {
+    *logout(_, { put, select }) {
       try {
         // get location pathname
         const urlParams = new URL(window.location.href);
-        const { pathname } = Store.getState().routing.location;
+        const pathname = yield select(state => state.routing.location.pathname);
         // add the parameters in the url
         urlParams.searchParams.set('redirect', pathname);
         window.history.pushState(null, 'login', urlParams.href);
