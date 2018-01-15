@@ -1,5 +1,7 @@
 import fetch from 'dva/fetch';
 import { notification } from 'antd';
+import { routerRedux } from 'dva/router';
+import store from '../index';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据',
@@ -61,5 +63,25 @@ export default function request(url, options) {
         return response.text();
       }
       return response.json();
+    })
+    .catch((e) => {
+      const { dispatch } = store;
+      if (e.name === 401) {
+        dispatch({
+          type: 'login/logout',
+        });
+        return;
+      }
+      if (e.name === 403) {
+        dispatch(routerRedux.push('/exception/403'));
+        return;
+      }
+      if (e.name <= 504 && e.name >= 500) {
+        dispatch(routerRedux.push('/exception/500'));
+        return;
+      }
+      if (e.name >= 404 && e.name < 422) {
+        dispatch(routerRedux.push('/exception/404'));
+      }
     });
 }

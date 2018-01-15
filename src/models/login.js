@@ -24,18 +24,27 @@ export default {
         window.location.reload();
       }
     },
-    *logout(_, { put }) {
-      yield put({
-        type: 'changeLoginStatus',
-        payload: {
-          status: false,
-          currentAuthority: 'guest',
-        },
-      });
-      // yield put(routerRedux.push('/user/login'));
-      // Login out after permission changes to admin or user
-      // The refresh will automatically redirect to the login page
-      window.location.reload();
+    *logout(_, { put, select }) {
+      try {
+        // get location pathname
+        const urlParams = new URL(window.location.href);
+        const pathname = yield select(state => state.routing.location.pathname);
+        // add the parameters in the url
+        urlParams.searchParams.set('redirect', pathname);
+        window.history.pushState(null, 'login', urlParams.href);
+      } finally {
+        // yield put(routerRedux.push('/user/login'));
+        // Login out after permission changes to admin or user
+        // The refresh will automatically redirect to the login page
+        yield put({
+          type: 'changeLoginStatus',
+          payload: {
+            status: false,
+            currentAuthority: 'guest',
+          },
+        });
+        window.location.reload();
+      }
     },
   },
 
