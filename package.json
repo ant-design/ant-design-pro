@@ -10,6 +10,7 @@
     "build": "cross-env DISABLE_ESLINT=true roadhog build",
     "site": "roadhog-api-doc static && gh-pages -d dist",
     "analyze": "ANALYZE=true roadhog build",
+    "analyze:windows": "set ANALYZE=true&&roadhog build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
     "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
