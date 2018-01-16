@@ -40,7 +40,7 @@ export default class Register extends Component {
       this.props.dispatch(routerRedux.push({
         pathname: '/user/register-result',
         query: {
-          account
+          account,
         },
       }));
     }
