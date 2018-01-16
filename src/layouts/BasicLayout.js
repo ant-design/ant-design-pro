@@ -175,6 +175,11 @@ class BasicLayout extends React.PureComponent {
             <div style={{ minHeight: 'calc(100vh - 260px)' }}>
               <Switch>
                 {
+                  redirectData.map(item =>
+                    <Redirect key={item.from} exact from={item.from} to={item.to} />
+                  )
+                }
+                {
                   getRoutes(match.path, routerData).map(item =>
                     (
                       <AuthorizedRoute
@@ -186,11 +191,6 @@ class BasicLayout extends React.PureComponent {
                         redirectPath="/exception/403"
                       />
                     )
-                  )
-                }
-                {
-                  redirectData.map(item =>
-                    <Redirect key={item.from} exact from={item.from} to={item.to} />
                   )
                 }
                 <Redirect exact from="/" to={bashRedirect} />
