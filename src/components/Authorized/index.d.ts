@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { RouteProps } from 'react-router';
+import * as React from "react";
+import { RouteProps } from "react-router";
 
-type authorityFN = () => string;
+type authorityFN = (currentAuthority?: string) => boolean;
 
 type authority = string | Array<string> | authorityFN | Promise<any>;
 
@@ -12,7 +12,7 @@ export type IReactComponent<P = any> =
 
 interface Secured {
   (authority: authority, error?: React.ReactNode): <T extends IReactComponent>(
-    target: T,
+    target: T
   ) => T;
 }
 
@@ -28,7 +28,7 @@ interface check {
   <T extends IReactComponent, S extends IReactComponent>(
     authority: authority,
     target: T,
-    Exception: S,
+    Exception: S
   ): T | S;
 }
 
