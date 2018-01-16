@@ -24,6 +24,7 @@ export interface NoticeIconProps {
     useCssBottom?: boolean;
     useCssTransform?: boolean;
   };
+  style?: React.CSSProperties;
   onPopupVisibleChange?: (visible: boolean) => void;
   popupVisible?: boolean;
   locale?: { emptyText: string; clear: string };
@@ -34,6 +35,7 @@ export interface NoticeIconTabProps {
   title?: string;
   emptyText?: React.ReactNode;
   emptyImage?: string;
+  style?: React.CSSProperties;
 }
 
 export class NoticeIconTab extends React.Component<NoticeIconTabProps, any> {}

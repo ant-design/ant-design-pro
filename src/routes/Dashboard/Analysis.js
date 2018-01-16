@@ -362,7 +362,7 @@ export default class Analysis extends Component {
                       <ul className={styles.rankingList}>
                         {rankingListData.map((item, i) => (
                           <li key={item.title}>
-                            <span className={i < 3 && styles.active}>{i + 1}</span>
+                            <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
                             <span>{item.title}</span>
                             <span>{numeral(item.total).format('0,0')}</span>
                           </li>

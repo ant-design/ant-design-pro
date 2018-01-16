@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
-import { Route, Redirect, Switch } from 'dva/router';
+import { Route, Redirect, Switch, routerRedux } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import { enquireScreen } from 'enquire-js';
@@ -98,6 +98,16 @@ class BasicLayout extends React.PureComponent {
     }
     return title;
   }
+  getBashRedirect = () => {
+    // According to the url parameter to redirect
+    // 这里是重定向的,重定向到 url 的 redirect 参数所示地址
+    const urlParams = new URL(window.location.href);
+    const redirect = urlParams.searchParams.get('redirect') || '/dashboard/analysis';
+    // Remove the parameters in the url
+    urlParams.searchParams.delete('redirect');
+    window.history.pushState(null, 'redirect', urlParams.href);
+    return redirect;
+  }
   handleMenuCollapse = (collapsed) => {
     this.props.dispatch({
       type: 'global/changeLayoutCollapsed',
@@ -112,6 +122,10 @@ class BasicLayout extends React.PureComponent {
     });
   }
   handleMenuClick = ({ key }) => {
+    if (key === 'triggerError') {
+      this.props.dispatch(routerRedux.push('/exception/trigger'));
+      return;
+    }
     if (key === 'logout') {
       this.props.dispatch({
         type: 'login/logout',
@@ -129,6 +143,7 @@ class BasicLayout extends React.PureComponent {
     const {
       currentUser, collapsed, fetchingNotices, notices, routerData, match, location,
     } = this.props;
+    const bashRedirect = this.getBashRedirect();
     const layout = (
       <Layout>
         <SiderMenu
@@ -178,7 +193,7 @@ class BasicLayout extends React.PureComponent {
                     <Redirect key={item.from} exact from={item.from} to={item.to} />
                   )
                 }
-                <Redirect exact from="/" to="/dashboard/analysis" />
+                <Redirect exact from="/" to={bashRedirect} />
                 <Route render={NotFound} />
               </Switch>
             </div>

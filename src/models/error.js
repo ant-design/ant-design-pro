@@ -1,4 +1,4 @@
-import { query403, query404, query500 } from '../services/error';
+import { query403, query401, query404, query500 } from '../services/error';
 
 export default {
   namespace: 'error',
@@ -14,6 +14,13 @@ export default {
       yield put({
         type: 'trigger',
         payload: '403',
+      });
+    },
+    *query401(_, { call, put }) {
+      yield call(query401);
+      yield put({
+        type: 'trigger',
+        payload: '401',
       });
     },
     *query500(_, { call, put }) {
