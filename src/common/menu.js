@@ -1,3 +1,5 @@
+import { isUrl } from '../utils/utils';
+
 const menuData = [{
   name: 'dashboard',
   icon: 'dashboard',
@@ -120,9 +122,13 @@ const menuData = [{
 
 function formatter(data, parentPath = '', parentAuthority) {
   return data.map((item) => {
+    let { path } = item;
+    if (!isUrl(path)) {
+      path = parentPath + item.path;
+    }
     const result = {
       ...item,
-      path: `${parentPath}${item.path}`,
+      path,
       authority: item.authority || parentAuthority,
     };
     if (item.children) {
