@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'dva/router';
+import { Route, Redirect } from 'react-router-dom';
 import Authorized from './Authorized';
 
 class AuthorizedRoute extends React.Component {
