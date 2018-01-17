@@ -39,7 +39,7 @@ export default class Register extends Component {
     if (nextProps.register.status === 'ok') {
       this.props.dispatch(routerRedux.push({
         pathname: '/user/register-result',
-        query: {
+        state: {
           account,
         },
       }));
