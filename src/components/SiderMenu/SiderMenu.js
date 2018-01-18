@@ -63,7 +63,7 @@ export default class SiderMenu extends PureComponent {
       return item;
     });
     snippets = snippets.map((item) => {
-      return item;
+      return this.getSelectedMenuKeys(`/${item}`)[0];
     });
     // eg. ['list','list/search']
     return snippets;
