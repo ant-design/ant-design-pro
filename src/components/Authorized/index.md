@@ -17,7 +17,6 @@ order: 15
 
 权限组件默认 export RenderAuthorized 函数，它接收当前权限作为参数，返回一个权限对象，该对象提供以下几种使用方式。
 
-当使用 function  作为 Authorized,Secured,check的 authority 参数时。currentAuthority将会被注入。
 
 ### Authorized
 
