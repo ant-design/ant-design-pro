@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
 import styles from './style.less';
 
@@ -33,6 +35,8 @@ export default class TableForm extends PureComponent {
       }
     });
   }
+  @Bind()
+  @Debounce(400)
   toggleEditable(e, key) {
     e.preventDefault();
     const newData = this.state.data.map(item => ({ ...item }));
