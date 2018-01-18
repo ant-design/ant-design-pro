@@ -10,6 +10,36 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
+const CreateForm = Form.create()((props) => {
+  const { modalVisible, addInputValue, parent, form } = props;
+  const okHandle = () => {
+    form.validateFields((err/* , fieldsValue */) => {
+      if (err) return;
+      parent.handleAdd();
+    });
+  };
+  return (
+    <Modal
+      title="新建规则"
+      visible={modalVisible}
+      onOk={okHandle}
+      onCancel={() => parent.handleModalVisible()}
+    >
+      <FormItem
+        labelCol={{ span: 5 }}
+        wrapperCol={{ span: 15 }}
+        label="描述"
+      >
+        {form.getFieldDecorator('desc', {
+          rules: [{ required: true, message: 'Please input some description...' }],
+        })(
+          <Input placeholder="请输入" onChange={parent.handleAddInput} value={addInputValue} />
+        )}
+      </FormItem>
+    </Modal>
+  );
+});
+
 @connect(({ rule, loading }) => ({
   rule,
   loading: loading.models.rule,
@@ -279,6 +309,12 @@ export default class TableList extends PureComponent {
       </Menu>
     );
 
+    const parentMethods = {
+      handleAdd: this.handleAdd,
+      handleModalVisible: this.handleModalVisible,
+      handleAddInput: this.handleAddInput,
+    };
+
     return (
       <PageHeaderLayout title="查询表格">
         <Card bordered={false}>
@@ -312,20 +348,11 @@ export default class TableList extends PureComponent {
             />
           </div>
         </Card>
-        <Modal
-          title="新建规则"
-          visible={modalVisible}
-          onOk={this.handleAdd}
-          onCancel={() => this.handleModalVisible()}
-        >
-          <FormItem
-            labelCol={{ span: 5 }}
-            wrapperCol={{ span: 15 }}
-            label="描述"
-          >
-            <Input placeholder="请输入" onChange={this.handleAddInput} value={addInputValue} />
-          </FormItem>
-        </Modal>
+        <CreateForm
+          parent={parentMethods}
+          modalVisible={modalVisible}
+          addInputValue={addInputValue}
+        />
       </PageHeaderLayout>
     );
   }
