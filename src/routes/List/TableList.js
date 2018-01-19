@@ -23,6 +23,7 @@ const CreateForm = Form.create()((props) => {
       title="新建规则"
       visible={modalVisible}
       onOk={okHandle}
+      destroyOnClose
       onCancel={() => parent.handleModalVisible()}
     >
       <FormItem
