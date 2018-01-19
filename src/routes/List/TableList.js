@@ -11,11 +11,11 @@ const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
 const CreateForm = Form.create()((props) => {
-  const { modalVisible, addInputValue, parent, form } = props;
+  const { modalVisible, form, handleAdd, handleModalVisible } = props;
   const okHandle = () => {
-    form.validateFields((err/* , fieldsValue */) => {
+    form.validateFields((err, fieldsValue) => {
       if (err) return;
-      parent.handleAdd();
+      handleAdd(fieldsValue);
     });
   };
   return (
@@ -23,8 +23,7 @@ const CreateForm = Form.create()((props) => {
       title="新建规则"
       visible={modalVisible}
       onOk={okHandle}
-      destroyOnClose
-      onCancel={() => parent.handleModalVisible()}
+      onCancel={() => handleModalVisible()}
     >
       <FormItem
         labelCol={{ span: 5 }}
@@ -34,7 +33,7 @@ const CreateForm = Form.create()((props) => {
         {form.getFieldDecorator('desc', {
           rules: [{ required: true, message: 'Please input some description...' }],
         })(
-          <Input placeholder="请输入" onChange={parent.handleAddInput} value={addInputValue} />
+          <Input placeholder="请输入" />
         )}
       </FormItem>
     </Modal>
@@ -48,7 +47,6 @@ const CreateForm = Form.create()((props) => {
 @Form.create()
 export default class TableList extends PureComponent {
   state = {
-    addInputValue: '',
     modalVisible: false,
     expandForm: false,
     selectedRows: [],
@@ -167,17 +165,11 @@ export default class TableList extends PureComponent {
     });
   }
 
-  handleAddInput = (e) => {
-    this.setState({
-      addInputValue: e.target.value,
-    });
-  }
-
-  handleAdd = () => {
+  handleAdd = (fields) => {
     this.props.dispatch({
       type: 'rule/add',
       payload: {
-        description: this.state.addInputValue,
+        description: fields.desc,
       },
     });
 
@@ -301,7 +293,7 @@ export default class TableList extends PureComponent {
 
   render() {
     const { rule: { data }, loading } = this.props;
-    const { selectedRows, modalVisible, addInputValue } = this.state;
+    const { selectedRows, modalVisible } = this.state;
 
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
@@ -313,7 +305,6 @@ export default class TableList extends PureComponent {
     const parentMethods = {
       handleAdd: this.handleAdd,
       handleModalVisible: this.handleModalVisible,
-      handleAddInput: this.handleAddInput,
     };
 
     return (
@@ -350,9 +341,8 @@ export default class TableList extends PureComponent {
           </div>
         </Card>
         <CreateForm
-          parent={parentMethods}
+          {...parentMethods}
           modalVisible={modalVisible}
-          addInputValue={addInputValue}
         />
       </PageHeaderLayout>
     );
