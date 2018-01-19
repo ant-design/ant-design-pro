@@ -17,18 +17,10 @@ const Description = ({ term, column, className, children, ...restProps }) => {
 
 Description.defaultProps = {
   term: '',
-  children: '',
 };
 
 Description.propTypes = {
-  term: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
+  term: PropTypes.node,
 };
 
 export default Description;
