@@ -21,9 +21,13 @@ TagSelectOption.isTagSelectOption = true;
 class TagSelect extends Component {
   state = {
     expand: false,
-    checkedTags: this.props.defaultValue || [],
+    checkedTags: this.props.value || [],
   };
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.props.value) {
+      this.setState({ checkedTags: nextProps.value });
+    }
+  }
   onSelectAll = (checked) => {
     const { onChange } = this.props;
     let checkedTags = [];
@@ -101,6 +105,7 @@ class TagSelect extends Component {
               if (this.isTagSelectOption(child)) {
                 return React.cloneElement(child, {
                   key: `tag-select-${child.props.value}`,
+                  value: child.props.value,
                   checked: checkedTags.indexOf(child.props.value) > -1,
                   onChange: this.handleTagChange,
                 });
