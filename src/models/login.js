@@ -31,7 +31,7 @@ export default {
         const pathname = yield select(state => state.routing.location.pathname);
         // add the parameters in the url
         urlParams.searchParams.set('redirect', pathname);
-        window.history.pushState(null, 'login', urlParams.href);
+        window.history.replaceState(null, 'login', urlParams.href);
       } finally {
         // yield put(routerRedux.push('/user/login'));
         // Login out after permission changes to admin or user

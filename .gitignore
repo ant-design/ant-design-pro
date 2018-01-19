@@ -17,4 +17,6 @@ yarn-error.log
 /coverage
 .idea
 yarn.lock
+package-lock.json
 *bak
+jsconfig.json
