@@ -56,7 +56,7 @@ export default class SearchList extends Component {
         title="搜索列表"
         content={mainSearch}
         tabList={tabList}
-        activeTabKey={location.pathname.replace(`${match.path}/`, '')}
+        tabActiveKey={location.pathname.replace(`${match.path}/`, '')}
         onTabChange={this.handleTabChange}
       >
         <Switch>
