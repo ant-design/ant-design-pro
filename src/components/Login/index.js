@@ -89,7 +89,7 @@ class Login extends Component {
       }
     });
     return (
-      <div className={classNames(className, styles.main)}>
+      <div className={classNames(className, styles.login)}>
         <Form onSubmit={this.handleSubmit}>
           {
             tabs.length ? (

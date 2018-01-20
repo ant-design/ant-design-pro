@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
+import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
 import styles from './index.less';
 
@@ -35,22 +36,43 @@ export default class SiderMenu extends PureComponent {
       });
     }
   }
+  /**
+   * Convert pathname to openKeys
+   * /list/search/articles = > ['list','/list/search']
+   * @param  props
+   */
   getDefaultCollapsedSubMenus(props) {
     const { location: { pathname } } = props || this.props;
-    const snippets = pathname.split('/').slice(1, -1);
-    const currentPathSnippets = snippets.map((item, index) => {
-      const arr = snippets.filter((_, i) => i <= index);
-      return arr.join('/');
+    // eg. /list/search/articles = > ['','list','search','articles']
+    let snippets = pathname.split('/');
+    // Delete the end
+    // eg.  delete 'articles'
+    snippets.pop();
+    // Delete the head
+    // eg. delete ''
+    snippets.shift();
+    // eg. After the operation is completed, the array should be ['list','search']
+    // eg. Forward the array as ['list','list/search']
+    snippets = snippets.map((item, index) => {
+      // If the array length > 1
+      if (index > 0) {
+        // eg. search => ['list','search'].join('/')
+        return snippets.slice(0, index + 1).join('/');
+      }
+      // index 0 to not do anything
+      return item;
     });
-    let currentMenuSelectedKeys = [];
-    currentPathSnippets.forEach((item) => {
-      currentMenuSelectedKeys = currentMenuSelectedKeys.concat(this.getSelectedMenuKeys(item));
+    snippets = snippets.map((item) => {
+      return this.getSelectedMenuKeys(`/${item}`)[0];
     });
-    if (currentMenuSelectedKeys.length === 0) {
-      return ['dashboard'];
-    }
-    return currentMenuSelectedKeys;
+    // eg. ['list','list/search']
+    return snippets;
   }
+  /**
+   * Recursively flatten the data
+   * [{path:string},{path:string}] => {path,path2}
+   * @param  menus
+   */
   getFlatMenuKeys(menus) {
     let keys = [];
     menus.forEach((item) => {
@@ -63,18 +85,14 @@ export default class SiderMenu extends PureComponent {
     });
     return keys;
   }
+  /**
+   * Get selected child nodes
+   * /user/chen => /user/:id
+   */
   getSelectedMenuKeys = (path) => {
     const flatMenuKeys = this.getFlatMenuKeys(this.menus);
-    if (flatMenuKeys.indexOf(path.replace(/^\//, '')) > -1) {
-      return [path.replace(/^\//, '')];
-    }
-    if (flatMenuKeys.indexOf(path.replace(/^\//, '').replace(/\/$/, '')) > -1) {
-      return [path.replace(/^\//, '').replace(/\/$/, '')];
-    }
     return flatMenuKeys.filter((item) => {
-      const itemRegExpStr = `^${item.replace(/:[\w-]+/g, '[\\w-]+')}$`;
-      const itemRegExp = new RegExp(itemRegExpStr);
-      return itemRegExp.test(path.replace(/^\//, '').replace(/\/$/, ''));
+      return pathToRegexp(`/${item}`).test(path);
     });
   }
   /**
@@ -120,14 +138,14 @@ export default class SiderMenu extends PureComponent {
               </span>
             ) : item.name
             }
-          key={item.key || item.path}
+          key={item.path}
         >
           {this.getNavMenuItems(item.children)}
         </SubMenu>
       );
     } else {
       return (
-        <Menu.Item key={item.key || item.path}>
+        <Menu.Item key={item.path}>
           {this.getMenuItemPath(item)}
         </Menu.Item>
       );

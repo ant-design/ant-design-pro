@@ -9,7 +9,7 @@
     "start:no-proxy": "cross-env NO_PROXY=true DISABLE_ESLINT=true roadhog dev",
     "build": "cross-env DISABLE_ESLINT=true roadhog build",
     "site": "roadhog-api-doc static && gh-pages -d dist",
-    "analyze": "ANALYZE=true roadhog build",
+    "analyze": "cross-env ANALYZE=true roadhog build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
     "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
@@ -36,6 +36,7 @@
     "moment": "^2.19.1",
     "numeral": "^2.0.6",
     "omit.js": "^1.0.0",
+    "path-to-regexp": "^2.1.0",
     "prop-types": "^15.5.10",
     "qs": "^6.5.0",
     "rc-drawer-menu": "^0.5.0",
@@ -43,7 +44,8 @@
     "react-container-query": "^0.9.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.2.0",
-    "react-fittext": "^1.0.0"
+    "react-fittext": "^1.0.0",
+    "url-polyfill": "^1.0.10"
   },
   "devDependencies": {
     "babel-eslint": "^8.1.2",
