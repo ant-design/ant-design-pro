@@ -34,9 +34,9 @@ class TagSelect extends Component {
     if (checked) {
       checkedTags = this.getAllTags();
     }
-
-    this.setState({ checkedTags });
-
+    if (!('value' in this.props)) {
+      this.setState({ checkedTags });
+    }
     if (onChange) {
       onChange(checkedTags);
     }
@@ -61,9 +61,9 @@ class TagSelect extends Component {
     } else if (!checked && index > -1) {
       checkedTags.splice(index, 1);
     }
-
-    this.setState({ checkedTags });
-
+    if (!('value' in this.props)) {
+      this.setState({ checkedTags });
+    }
     if (onChange) {
       onChange(checkedTags);
     }
