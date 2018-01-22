@@ -21,21 +21,30 @@ TagSelectOption.isTagSelectOption = true;
 class TagSelect extends Component {
   state = {
     expand: false,
-    checkedTags: this.props.defaultValue || [],
+    value: this.props.value || this.props.defaultValue || [],
   };
+  componentWillReceiveProps(nextProps) {
+    if ('value' in nextProps) {
+      this.setState({ value: nextProps.value });
+    }
+  }
+
+  onChange = (value) => {
+    const { onChange } = this.props;
+    if (!('value' in this.props)) {
+      this.setState({ value });
+    }
+    if (onChange) {
+      onChange(value);
+    }
+  }
 
   onSelectAll = (checked) => {
-    const { onChange } = this.props;
     let checkedTags = [];
     if (checked) {
       checkedTags = this.getAllTags();
     }
-
-    this.setState({ checkedTags });
-
-    if (onChange) {
-      onChange(checkedTags);
-    }
+    this.onChange(checkedTags);
   }
 
   getAllTags() {
@@ -48,8 +57,7 @@ class TagSelect extends Component {
   }
 
   handleTagChange = (value, checked) => {
-    const { onChange } = this.props;
-    const { checkedTags } = this.state;
+    const checkedTags = [...this.state.value];
 
     const index = checkedTags.indexOf(value);
     if (checked && index === -1) {
@@ -57,12 +65,7 @@ class TagSelect extends Component {
     } else if (!checked && index > -1) {
       checkedTags.splice(index, 1);
     }
-
-    this.setState({ checkedTags });
-
-    if (onChange) {
-      onChange(checkedTags);
-    }
+    this.onChange(checkedTags);
   }
 
   handleExpand = () => {
@@ -78,10 +81,10 @@ class TagSelect extends Component {
   }
 
   render() {
-    const { checkedTags, expand } = this.state;
+    const { value, expand } = this.state;
     const { children, className, style, expandable } = this.props;
 
-    const checkedAll = this.getAllTags().length === checkedTags.length;
+    const checkedAll = this.getAllTags().length === value.length;
 
     const cls = classNames(styles.tagSelect, className, {
       [styles.hasExpandTag]: expandable,
@@ -97,16 +100,17 @@ class TagSelect extends Component {
           全部
         </CheckableTag>
         {
-          checkedTags && React.Children.map(children, (child) => {
-              if (this.isTagSelectOption(child)) {
-                return React.cloneElement(child, {
-                  key: `tag-select-${child.props.value}`,
-                  checked: checkedTags.indexOf(child.props.value) > -1,
-                  onChange: this.handleTagChange,
-                });
-              }
-              return child;
-            })
+          value && React.Children.map(children, (child) => {
+            if (this.isTagSelectOption(child)) {
+              return React.cloneElement(child, {
+                key: `tag-select-${child.props.value}`,
+                value: child.props.value,
+                checked: value.indexOf(child.props.value) > -1,
+                onChange: this.handleTagChange,
+              });
+            }
+            return child;
+          })
         }
         {
           expandable && (
