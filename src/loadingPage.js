@@ -5,7 +5,7 @@ import { Spin } from 'antd';
 import styles from './index.less';
 
 @connect(({ user }) => ({
-  isLoading: user.isLoading,
+  isLoading: user.loading,
 }))
 export default class LoadingPage extends Component {
   static propTypes = {
