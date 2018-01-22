@@ -28,18 +28,23 @@ class TagSelect extends Component {
       this.setState({ value: nextProps.value });
     }
   }
-  onSelectAll = (checked) => {
+
+  onChange = (value) => {
     const { onChange } = this.props;
+    if (!('value' in this.props)) {
+      this.setState({ value });
+    }
+    if (onChange) {
+      onChange(value);
+    }
+  }
+
+  onSelectAll = (checked) => {
     let checkedTags = [];
     if (checked) {
       checkedTags = this.getAllTags();
     }
-    if (!('value' in this.props)) {
-      this.setState({ value: checkedTags });
-    }
-    if (onChange) {
-      onChange(checkedTags);
-    }
+    this.onChange(checkedTags);
   }
 
   getAllTags() {
@@ -52,7 +57,6 @@ class TagSelect extends Component {
   }
 
   handleTagChange = (value, checked) => {
-    const { onChange } = this.props;
     const { value: checkedTags } = this.state;
 
     const index = checkedTags.indexOf(value);
@@ -61,12 +65,7 @@ class TagSelect extends Component {
     } else if (!checked && index > -1) {
       checkedTags.splice(index, 1);
     }
-    if (!('value' in this.props)) {
-      this.setState({ value: checkedTags });
-    }
-    if (onChange) {
-      onChange(checkedTags);
-    }
+    this.onChange(checkedTags);
   }
 
   handleExpand = () => {
@@ -102,16 +101,16 @@ class TagSelect extends Component {
         </CheckableTag>
         {
           value && React.Children.map(children, (child) => {
-              if (this.isTagSelectOption(child)) {
-                return React.cloneElement(child, {
-                  key: `tag-select-${child.props.value}`,
-                  value: child.props.value,
-                  checked: value.indexOf(child.props.value) > -1,
-                  onChange: this.handleTagChange,
-                });
-              }
-              return child;
-            })
+            if (this.isTagSelectOption(child)) {
+              return React.cloneElement(child, {
+                key: `tag-select-${child.props.value}`,
+                value: child.props.value,
+                checked: value.indexOf(child.props.value) > -1,
+                onChange: this.handleTagChange,
+              });
+            }
+            return child;
+          })
         }
         {
           expandable && (
