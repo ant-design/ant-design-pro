@@ -21,11 +21,11 @@ TagSelectOption.isTagSelectOption = true;
 class TagSelect extends Component {
   state = {
     expand: false,
-    checkedTags: this.props.value || this.props.defaultValue || [],
+    value: this.props.value || this.props.defaultValue || [],
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.props.value) {
-      this.setState({ checkedTags: nextProps.value });
+      this.setState({ value: nextProps.value });
     }
   }
   onSelectAll = (checked) => {
@@ -35,7 +35,7 @@ class TagSelect extends Component {
       checkedTags = this.getAllTags();
     }
     if (!('value' in this.props)) {
-      this.setState({ checkedTags });
+      this.setState({ value: checkedTags });
     }
     if (onChange) {
       onChange(checkedTags);
@@ -53,7 +53,7 @@ class TagSelect extends Component {
 
   handleTagChange = (value, checked) => {
     const { onChange } = this.props;
-    const { checkedTags } = this.state;
+    const { value: checkedTags } = this.state;
 
     const index = checkedTags.indexOf(value);
     if (checked && index === -1) {
@@ -62,7 +62,7 @@ class TagSelect extends Component {
       checkedTags.splice(index, 1);
     }
     if (!('value' in this.props)) {
-      this.setState({ checkedTags });
+      this.setState({ value: checkedTags });
     }
     if (onChange) {
       onChange(checkedTags);
@@ -82,10 +82,10 @@ class TagSelect extends Component {
   }
 
   render() {
-    const { checkedTags, expand } = this.state;
+    const { value, expand } = this.state;
     const { children, className, style, expandable } = this.props;
 
-    const checkedAll = this.getAllTags().length === checkedTags.length;
+    const checkedAll = this.getAllTags().length === value.length;
 
     const cls = classNames(styles.tagSelect, className, {
       [styles.hasExpandTag]: expandable,
@@ -101,12 +101,12 @@ class TagSelect extends Component {
           全部
         </CheckableTag>
         {
-          checkedTags && React.Children.map(children, (child) => {
+          value && React.Children.map(children, (child) => {
               if (this.isTagSelectOption(child)) {
                 return React.cloneElement(child, {
                   key: `tag-select-${child.props.value}`,
                   value: child.props.value,
-                  checked: checkedTags.indexOf(child.props.value) > -1,
+                  checked: value.indexOf(child.props.value) > -1,
                   onChange: this.handleTagChange,
                 });
               }
