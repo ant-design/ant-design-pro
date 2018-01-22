@@ -1,5 +1,5 @@
 import React from 'react';
-import { routerRedux, Switch } from 'dva/router';
+import { routerRedux, Route, Switch } from 'dva/router';
 import { LocaleProvider, Spin } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import dynamic from 'dva/dynamic';
@@ -20,26 +20,26 @@ function RouterConfig({ history, app }) {
   const BasicLayout = routerData['/'].component;
   return (
     <LocaleProvider locale={zhCN}>
-      <LoadingPage render={() => {
-        const { AuthorizedRoute } = AuthorizedManger.getAuthorized();
-        return (
-          <ConnectedRouter history={history}>
-            <Switch>
-              <AuthorizedRoute
-                path="/user"
-                render={props => <UserLayout {...props} />}
-                redirectPath="/"
-              />
-              <AuthorizedRoute
-                path="/"
-                render={props => <BasicLayout {...props} />}
-                authority={['admin', 'user']}
-                redirectPath="/user/login"
-              />
-            </Switch>
-          </ConnectedRouter>
-        );
-      }}
+      <LoadingPage
+        render={() => {
+          const { AuthorizedRoute } = AuthorizedManger.getAuthorized();
+          return (
+            <ConnectedRouter history={history}>
+              <Switch>
+                <Route
+                  path="/user"
+                  render={props => <UserLayout {...props} />}
+                />
+                <AuthorizedRoute
+                  path="/"
+                  render={props => <BasicLayout {...props} />}
+                  authority={['admin', 'user']}
+                  redirectPath="/user/login"
+                />
+              </Switch>
+            </ConnectedRouter>
+          );
+        }}
       />
     </LocaleProvider>
   );

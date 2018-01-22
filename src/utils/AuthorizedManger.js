@@ -1,13 +1,18 @@
 import RenderAuthorized from '../components/Authorized';
 
 class AuthorizedManger {
-  setAuthorized(role) {
-    const authority = role || 'admin';
+  constructor(authority) {
     this.Authorized = RenderAuthorized(authority);
+  }
+  setAuthorized(authority) {
+    if (authority) {
+      this.Authorized = RenderAuthorized(authority);
+    }
   }
   getAuthorized() {
     return this.Authorized;
   }
 }
 
-export default new AuthorizedManger();
+// The role default is guest
+export default new AuthorizedManger('guest');

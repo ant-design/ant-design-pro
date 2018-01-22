@@ -3,25 +3,23 @@ import { connect } from 'dva';
 import PropTypes from 'prop-types';
 import { Spin } from 'antd';
 import styles from './index.less';
-import userManger from './utils/userManger';
 
 @connect(({ user }) => ({
-  currentUser: user.currentUser,
+  isLoading: user.isLoading,
 }))
 export default class LoadingPage extends Component {
-    static propTypes = {
-      render: PropTypes.func.isRequired,
+  static propTypes = {
+    render: PropTypes.func.isRequired,
+  };
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'user/fetchCurrent',
+    });
+  }
+  render() {
+    if (!this.props.isLoading) {
+      return this.props.render();
     }
-    componentDidMount() {
-      this.props.dispatch({
-        type: 'user/fetchCurrent',
-        payload: userManger.getUserName(),
-      });
-    }
-    render() {
-      if (this.props.currentUser.userid) {
-        return this.props.render();
-      }
-      return <Spin size="large" className={styles.globalSpin} />;
-    }
+    return <Spin size="large" className={styles.globalSpin} />;
+  }
 }

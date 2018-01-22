@@ -18,35 +18,41 @@ export default {
         payload: response,
         username: payload.userName,
       });
-      // save userName to localStorage
-      userManger.save(payload.userName);
       // Login successfully
       if (response.status === 'ok') {
+        // save userName to localStorage
+        userManger.save(payload.userName);
         // reload userinfo
         yield put({
           type: 'user/fetchCurrent',
-          payload: payload.userName,
         });
         yield put(routerRedux.push('/'));
       }
     },
     *logout(_, { put, select }) {
-      try {
-        // get location pathname
-        const urlParams = new URL(window.location.href);
-        const pathname = yield select(state => state.routing.location.pathname);
+      // get location pathname
+      const urlParams = new URL(window.location.href);
+      // loading page location is null
+      const pathname = yield select((state) => {
+        const { location } = state.routing;
+        if (location && location.pathname) {
+          return location.pathname;
+        }
+        return '';
+      });
+      // pathname is not empty and not in the login page;
+      if (pathname && !pathname.includes('login')) {
         // add the parameters in the url
         urlParams.searchParams.set('redirect', pathname);
         window.history.replaceState(null, 'login', urlParams.href);
-      } finally {
-        yield put({
-          type: 'changeLoginStatus',
-          payload: {
-            status: false,
-          },
-        });
-        yield put(routerRedux.push('/user/login'));
       }
+      yield put({
+        type: 'changeLoginStatus',
+        payload: {
+          status: false,
+        },
+      });
+      yield put(routerRedux.push('/user/login'));
     },
   },
 
