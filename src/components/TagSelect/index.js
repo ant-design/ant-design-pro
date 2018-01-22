@@ -57,7 +57,7 @@ class TagSelect extends Component {
   }
 
   handleTagChange = (value, checked) => {
-    const { value: checkedTags } = this.state;
+    const checkedTags = [...this.state.value];
 
     const index = checkedTags.indexOf(value);
     if (checked && index === -1) {
