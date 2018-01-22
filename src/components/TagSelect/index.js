@@ -24,7 +24,7 @@ class TagSelect extends Component {
     value: this.props.value || this.props.defaultValue || [],
   };
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.props.value) {
+    if ('value' in nextProps) {
       this.setState({ value: nextProps.value });
     }
   }
