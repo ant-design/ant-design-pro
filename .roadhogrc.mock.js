@@ -14,7 +14,7 @@ const noProxy = process.env.NO_PROXY === 'true';
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const proxy = {
   // 支持值为 Object 和 Array
-  'GET /api/currentUser': {
+  'GET /api/currentUser/admin': {
     $desc: "获取当前用户接口",
     $params: {
       pageSize: {
@@ -27,6 +27,23 @@ const proxy = {
       avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
       userid: '00000001',
       notifyCount: 12,
+      role: "admin"
+    },
+  },
+  'GET /api/currentUser/user': {
+    $desc: "获取当前用户接口",
+    $params: {
+      pageSize: {
+        desc: '分页',
+        exp: 2,
+      },
+    },
+    $body: {
+      name: 'Jim Chen',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png',
+      userid: '00000002',
+      notifyCount: 3,
+      role: "user"
     },
   },
   // GET POST 可省略
