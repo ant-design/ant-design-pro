@@ -77,7 +77,7 @@ export default class SearchList extends Component {
         <div className={styles.description}>{content}</div>
         <div className={styles.extra}>
           <Avatar src={avatar} size="small" /><a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
-          <em>{moment(updatedAt).format('YYYY-MM-DD hh:mm')}</em>
+          <em>{moment(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
         </div>
       </div>
     );
