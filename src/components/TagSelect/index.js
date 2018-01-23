@@ -24,7 +24,7 @@ class TagSelect extends Component {
     value: this.props.value || this.props.defaultValue || [],
   };
   componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps) {
+    if ('value' in nextProps && nextProps.value) {
       this.setState({ value: nextProps.value });
     }
   }
@@ -53,7 +53,7 @@ class TagSelect extends Component {
     const checkedTags = children
       .filter(child => this.isTagSelectOption(child))
       .map(child => child.props.value);
-    return checkedTags;
+    return checkedTags || [];
   }
 
   handleTagChange = (value, checked) => {
