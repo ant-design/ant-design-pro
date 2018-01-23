@@ -6,7 +6,7 @@ import styles from './index.less';
 import userManger from './utils/userManger';
 
 @connect(({ user }) => ({
-  currentUser: user.currentUser,
+  isLoading: user.loading,
 }))
 export default class LoadingPage extends Component {
     static propTypes = {
@@ -19,7 +19,7 @@ export default class LoadingPage extends Component {
       });
     }
     render() {
-      if (this.props.currentUser.userid) {
+      if (this.props.isLoading) {
         return this.props.render();
       }
       return <Spin size="large" className={styles.globalSpin} />;
