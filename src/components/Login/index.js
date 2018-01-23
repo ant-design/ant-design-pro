@@ -107,7 +107,7 @@ class Login extends Component {
                 </Tabs>
                 {otherChildren}
               </div>
-            ) : otherChildren
+            ) : [...children]
           }
         </Form>
       </div>
