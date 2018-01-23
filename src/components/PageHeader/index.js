@@ -9,13 +9,15 @@ import styles from './index.less';
 const { TabPane } = Tabs;
 
 function getBreadcrumb(breadcrumbNameMap, url) {
-  let breadcrumb = {};
-  Object.keys(breadcrumbNameMap).forEach((item) => {
-    if (pathToRegexp(item).test(url)) {
-      breadcrumb = breadcrumbNameMap[item];
-    }
-  });
-  return breadcrumb;
+  let breadcrumb = breadcrumbNameMap[url];
+  if (!breadcrumb) {
+    Object.keys(breadcrumbNameMap).forEach((item) => {
+      if (pathToRegexp(item).test(url)) {
+        breadcrumb = breadcrumbNameMap[item];
+      }
+    });
+  }
+  return breadcrumb || {};
 }
 
 export default class PageHeader extends PureComponent {
