@@ -1,12 +1,12 @@
 import { routerRedux } from 'dva/router';
 import { fakeAccountLogin } from '../services/api';
-import { setAuthority } from '../utils/authority';
-import { reloadAuthorized } from '../utils/Authorized';
+import userManger from '../utils/userManger';
 
 export default {
   namespace: 'login',
 
   state: {
+    userName: undefined,
     status: undefined,
   },
 
@@ -16,10 +16,17 @@ export default {
       yield put({
         type: 'changeLoginStatus',
         payload: response,
+        username: payload.userName,
       });
+      // save userName to localStorage
+      userManger.save(payload.userName);
       // Login successfully
       if (response.status === 'ok') {
-        reloadAuthorized();
+        // reload userinfo
+        yield put({
+          type: 'user/fetchCurrent',
+          payload: payload.userName,
+        });
         yield put(routerRedux.push('/'));
       }
     },
@@ -36,10 +43,8 @@ export default {
           type: 'changeLoginStatus',
           payload: {
             status: false,
-            currentAuthority: 'guest',
           },
         });
-        reloadAuthorized();
         yield put(routerRedux.push('/user/login'));
       }
     },
@@ -47,10 +52,10 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
       return {
         ...state,
         status: payload.status,
+        userName: payload.username,
         type: payload.type,
       };
     },

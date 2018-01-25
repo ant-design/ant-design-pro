@@ -12,16 +12,15 @@ import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
-import Authorized from '../utils/Authorized';
+import AuthorizedManger from '../utils/AuthorizedManger';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 
 const { Content } = Layout;
+const Authorized = AuthorizedManger.getAuthorized();
 const { AuthorizedRoute } = Authorized;
 
-/**
- * 根据菜单取得重定向地址.
- */
+// Generate a redirect array
 const redirectData = [];
 const getRedirect = (item) => {
   if (item && item.children) {
@@ -36,6 +35,7 @@ const getRedirect = (item) => {
     }
   }
 };
+// run generate
 getMenuData().forEach(getRedirect);
 
 const query = {
@@ -84,9 +84,6 @@ class BasicLayout extends React.PureComponent {
       this.setState({
         isMobile: mobile,
       });
-    });
-    this.props.dispatch({
-      type: 'user/fetchCurrent',
     });
   }
   getPageTitle() {
