@@ -9,13 +9,15 @@ import styles from './index.less';
 const { TabPane } = Tabs;
 
 function getBreadcrumb(breadcrumbNameMap, url) {
-  let breadcrumb = {};
-  Object.keys(breadcrumbNameMap).forEach((item) => {
-    if (pathToRegexp(item).test(url)) {
-      breadcrumb = breadcrumbNameMap[item];
-    }
-  });
-  return breadcrumb;
+  let breadcrumb = breadcrumbNameMap[url];
+  if (!breadcrumb) {
+    Object.keys(breadcrumbNameMap).forEach((item) => {
+      if (pathToRegexp(item).test(url)) {
+        breadcrumb = breadcrumbNameMap[item];
+      }
+    });
+  }
+  return breadcrumb || {};
 }
 
 export default class PageHeader extends PureComponent {
@@ -132,7 +134,7 @@ export default class PageHeader extends PureComponent {
   render() {
     const {
       title, logo, action, content, extraContent,
-      tabList, className, tabActiveKey,
+      tabList, className, tabActiveKey, tabBarExtraContent,
     } = this.props;
     const clsString = classNames(styles.pageHeader, className);
 
@@ -171,6 +173,7 @@ export default class PageHeader extends PureComponent {
               className={styles.tabs}
               {...activeKeyProps}
               onChange={this.onChange}
+              tabBarExtraContent={tabBarExtraContent}
             >
               {
                 tabList.map(item => <TabPane tab={item.tab} key={item.key} />)
