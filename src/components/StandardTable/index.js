@@ -1,35 +1,56 @@
-import React, { PureComponent, Fragment } from 'react';
-import moment from 'moment';
-import { Table, Alert, Badge, Divider } from 'antd';
+import React, { PureComponent } from 'react';
+import { Table, Alert } from 'antd';
 import styles from './index.less';
 
-const statusMap = ['default', 'processing', 'success', 'error'];
+function initTotalList(columns) {
+  const totalList = [];
+  columns.forEach((column) => {
+    if (column.needTotal) {
+      totalList.push({ ...column, total: 0 });
+    }
+  });
+  return totalList;
+}
+
 class StandardTable extends PureComponent {
-  state = {
-    selectedRowKeys: [],
-    totalCallNo: 0,
-  };
+  constructor(props) {
+    super(props);
+    const { columns } = props;
+    const needTotalList = initTotalList(columns);
+
+    this.state = {
+      selectedRowKeys: [],
+      needTotalList,
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     // clean state
     if (nextProps.selectedRows.length === 0) {
+      const needTotalList = initTotalList(nextProps.columns);
       this.setState({
         selectedRowKeys: [],
-        totalCallNo: 0,
+        needTotalList,
       });
     }
   }
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
-    const totalCallNo = selectedRows.reduce((sum, val) => {
-      return sum + parseFloat(val.callNo, 10);
-    }, 0);
+    let needTotalList = [...this.state.needTotalList];
+    needTotalList = needTotalList.map((item) => {
+      return {
+        ...item,
+        total: selectedRows.reduce((sum, val) => {
+          return sum + parseFloat(val[item.dataIndex], 10);
+        }, 0),
+      };
+    });
 
     if (this.props.onSelectRow) {
       this.props.onSelectRow(selectedRows);
     }
 
-    this.setState({ selectedRowKeys, totalCallNo });
+    this.setState({ selectedRowKeys, needTotalList });
   }
 
   handleTableChange = (pagination, filters, sorter) => {
@@ -41,69 +62,8 @@ class StandardTable extends PureComponent {
   }
 
   render() {
-    const { selectedRowKeys, totalCallNo } = this.state;
-    const { data: { list, pagination }, loading } = this.props;
-
-    const status = ['关闭', '运行中', '已上线', '异常'];
-
-    const columns = [
-      {
-        title: '规则编号',
-        dataIndex: 'no',
-      },
-      {
-        title: '描述',
-        dataIndex: 'description',
-      },
-      {
-        title: '服务调用次数',
-        dataIndex: 'callNo',
-        sorter: true,
-        align: 'right',
-        render: val => `${val} 万`,
-      },
-      {
-        title: '状态',
-        dataIndex: 'status',
-        filters: [
-          {
-            text: status[0],
-            value: 0,
-          },
-          {
-            text: status[1],
-            value: 1,
-          },
-          {
-            text: status[2],
-            value: 2,
-          },
-          {
-            text: status[3],
-            value: 3,
-          },
-        ],
-        render(val) {
-          return <Badge status={statusMap[val]} text={status[val]} />;
-        },
-      },
-      {
-        title: '更新时间',
-        dataIndex: 'updatedAt',
-        sorter: true,
-        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
-      },
-      {
-        title: '操作',
-        render: () => (
-          <Fragment>
-            <a href="">配置</a>
-            <Divider type="vertical" />
-            <a href="">订阅警报</a>
-          </Fragment>
-        ),
-      },
-    ];
+    const { selectedRowKeys, needTotalList } = this.state;
+    const { data: { list, pagination }, loading, columns } = this.props;
 
     const paginationProps = {
       showSizeChanger: true,
@@ -126,7 +86,16 @@ class StandardTable extends PureComponent {
             message={(
               <div>
                 已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
-                服务调用总计 <span style={{ fontWeight: 600 }}>{totalCallNo}</span> 万
+                {
+                  needTotalList.map(item => (
+                    <span style={{ marginLeft: 8 }} key={item.dataIndex}>{item.title}总计&nbsp;
+                      <span style={{ fontWeight: 600 }}>
+                        {item.render ? item.render(item.total) : item.total}
+                      </span>
+                    </span>
+                    )
+                  )
+                }
                 <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>清空</a>
               </div>
             )}

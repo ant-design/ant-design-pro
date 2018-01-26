@@ -66,7 +66,7 @@ export default class BasicList extends PureComponent {
         </div>
         <div className={styles.listContentItem}>
           <span>开始时间</span>
-          <p>{moment(createdAt).format('YYYY-MM-DD hh:mm')}</p>
+          <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
         </div>
         <div className={styles.listContentItem}>
           <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />

@@ -81,6 +81,9 @@ class Login extends Component {
     const TabChildren = [];
     const otherChildren = [];
     React.Children.forEach(children, (item) => {
+      if (!item) {
+        return;
+      }
       // eslint-disable-next-line
       if (item.type.__ANT_PRO_LOGIN_TAB) {
         TabChildren.push(item);
@@ -104,7 +107,7 @@ class Login extends Component {
                 </Tabs>
                 {otherChildren}
               </div>
-            ) : children
+            ) : [...children]
           }
         </Form>
       </div>
