@@ -107,6 +107,9 @@ export function postRule(req, res, u, b) {
         progress: Math.ceil(Math.random() * 100),
       });
       break;
+    case 'update':
+      tableListDataSource = tableListDataSource.filter(item => no.indexOf(item.no) === -1);
+      break;
     default:
       break;
   }

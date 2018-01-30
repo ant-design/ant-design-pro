@@ -1,4 +1,4 @@
-import { queryRule, removeRule, addRule } from '../services/api';
+import { queryRule, removeRule, addRule, updateRule } from '../services/api';
 
 export default {
   namespace: 'rule',
@@ -28,6 +28,14 @@ export default {
     },
     *remove({ payload, callback }, { call, put }) {
       const response = yield call(removeRule, payload);
+      yield put({
+        type: 'save',
+        payload: response,
+      });
+      if (callback) callback();
+    },
+    *update({ payload, callback }, { call, put }) {
+      const response = yield call(updateRule, payload);
       yield put({
         type: 'save',
         payload: response,
