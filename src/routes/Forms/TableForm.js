@@ -23,17 +23,6 @@ export default class TableForm extends PureComponent {
   }
   index = 0;
   cacheOriginData = {};
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        this.props.dispatch({
-          type: 'form/submit',
-          payload: values,
-        });
-      }
-    });
-  }
   toggleEditable=(e, key) => {
     e.preventDefault();
     const newData = this.state.data.map(item => ({ ...item }));
