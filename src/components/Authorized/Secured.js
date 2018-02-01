@@ -38,11 +38,7 @@ const authorize = (authority, error) => {
     throw new Error('authority is required');
   }
   return function decideAuthority(targer) {
-    return () => CheckPermissions(
-      authority,
-      targer,
-      classError || Exception403
-    );
+    return () => CheckPermissions(authority, targer, classError || Exception403);
   };
 };
 
