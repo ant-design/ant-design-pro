@@ -268,7 +268,7 @@ class AdvancedForm extends PureComponent {
             </Row>
           </Form>
         </Card>
-        <Card title="成员管理" className={styles.card} bordered={false}>
+        <Card title="成员管理" bordered={false}>
           {getFieldDecorator('members', {
             initialValue: tableData,
           })(<TableForm />)}
