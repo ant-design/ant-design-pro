@@ -25,7 +25,7 @@ const EllipsisText = ({ text, length, tooltip, ...other }) => {
 
   if (tooltip) {
     return (
-      <Tooltip title={text}>
+      <Tooltip overlayStyle={{ wordBreak: 'break-all' }} title={text}>
         <span>
           {displayText}
           {tail}
@@ -183,7 +183,13 @@ export default class Ellipsis extends Component {
       return (
         <div id={id} className={cls} {...restProps}>
           <style>{style}</style>
-          {tooltip ? <Tooltip title={children}>{children}</Tooltip> : children}
+          {tooltip ? (
+            <Tooltip overlayStyle={{ wordBreak: 'break-all' }} title={children}>
+              {children}
+            </Tooltip>
+          ) : (
+            children
+          )}
         </div>
       );
     }
@@ -198,7 +204,13 @@ export default class Ellipsis extends Component {
     return (
       <div {...restProps} ref={this.handleRoot} className={cls}>
         <div ref={this.handleContent}>
-          {tooltip ? <Tooltip title={text}>{childNode}</Tooltip> : childNode}
+          {tooltip ? (
+            <Tooltip overlayStyle={{ wordBreak: 'break-all' }} title={text}>
+              {childNode}
+            </Tooltip>
+          ) : (
+            childNode
+          )}
           <div className={styles.shadow} ref={this.handleShadowChildren}>
             {children}
           </div>

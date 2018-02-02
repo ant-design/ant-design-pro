@@ -11,6 +11,7 @@ export interface PageHeaderProps {
   tabList?: Array<{ key: string; tab: React.ReactNode }>;
   tabActiveKey?: string;
   onTabChange?: (key: string) => void;
+  tabBarExtraContent?: React.ReactNode;
   linkElement?: React.ReactNode;
   style?: React.CSSProperties;
 }

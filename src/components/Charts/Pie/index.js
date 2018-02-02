@@ -26,7 +26,16 @@ export default class Pie extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.data !== nextProps.data) {
-      this.getLengendData();
+      // because of charts data create when rendered
+      // so there is a trick for get rendered time
+      this.setState(
+        {
+          legendData: [...this.state.legendData],
+        },
+        () => {
+          this.getLengendData();
+        }
+      );
     }
   }
 

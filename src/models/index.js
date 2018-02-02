@@ -1,11 +1,4 @@
 // Use require.context to require reducers automatically
-// Ref: https://webpack.github.io/docs/context.html
+// Ref: https://webpack.js.org/guides/dependency-management/#require-context
 const context = require.context('./', false, /\.js$/);
-const keys = context.keys().filter(item => item !== './index.js');
-
-const models = [];
-for (let i = 0; i < keys.length; i += 1) {
-  models.push(context(keys[i]));
-}
-
-export default models;
+export default context.keys().filter(item => item !== './index.js').map(key => context(key));
