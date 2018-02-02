@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { List, Card, Row, Col, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar,
-  Modal, Form, DatePicker, Select } from 'antd';
+  Modal, Form, DatePicker, Select, Popconfirm } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import Result from '../../components/Result';
@@ -61,6 +61,7 @@ export default class BasicList extends PureComponent {
   handleSubmit = (e) => {
     e.preventDefault();
     const { dispatch, form } = this.props;
+    const id = this.state.current ? this.state.current.id : '';
 
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -69,7 +70,7 @@ export default class BasicList extends PureComponent {
       });
       dispatch({
         type: 'list/appendFetch',
-        payload: fieldsValue,
+        payload: { id, ...fieldsValue },
       });
     });
   }
@@ -84,7 +85,11 @@ export default class BasicList extends PureComponent {
     const { list: { list }, loading } = this.props;
     const { getFieldDecorator } = this.props.form;
     const { visible, done, current = {} } = this.state;
-    const key2text = { xiao: '付晓晓', mao: '周毛毛' };
+
+    const modalFooter = done ?
+      { footer: null, onCancel: this.handleDone }
+      :
+      { okText: '保存', onOk: this.handleSubmit, onCancel: this.handleCancel };
 
     const Info = ({ title, value, bordered }) => (
       <div className={styles.headerInfo}>
@@ -120,7 +125,7 @@ export default class BasicList extends PureComponent {
       <div className={styles.listContent}>
         <div className={styles.listContentItem}>
           <span>Owner</span>
-          <p>{key2text[owner] || owner}</p>
+          <p>{owner}</p>
         </div>
         <div className={styles.listContentItem}>
           <span>开始时间</span>
@@ -135,11 +140,19 @@ export default class BasicList extends PureComponent {
     const MoreBtn = props => (
       <Dropdown overlay={
         <Menu>
-          <Menu.Item>
-            <a onClick={(e) => { e.preventDefault(); this.showEditModal(props.current); }}>编辑</a>
+          <Menu.Item key="edit">
+            <span onClick={() => this.showEditModal(props.current)}>编辑</span>
           </Menu.Item>
-          <Menu.Item>
-            <a onClick={(e) => { e.preventDefault(); this.deleteItem(props.current.id); }}>删除</a>
+          <Menu.Item key="delete">
+            <Popconfirm
+              placement="rightBottom"
+              title="确定删除该任务吗？"
+              okText="确定"
+              cancelText="取消"
+              onConfirm={() => this.deleteItem(props.current.id)}
+            >
+              <span>删除</span>
+            </Popconfirm>
           </Menu.Item>
         </Menu>}
       >
@@ -163,7 +176,6 @@ export default class BasicList extends PureComponent {
       }
       return (
         <Form onSubmit={this.handleSubmit}>
-          {getFieldDecorator('id', { initialValue: current.id })(<input type="hidden" />)}
           <FormItem label="任务名称" {...this.formLayout}>
             {getFieldDecorator('title', {
               rules: [{ required: true, message: '请输入任务名称' }],
@@ -192,8 +204,8 @@ export default class BasicList extends PureComponent {
               initialValue: current.owner,
             })(
               <Select placeholder="请选择">
-                <SelectOption value="xiao">付晓晓</SelectOption>
-                <SelectOption value="mao">周毛毛</SelectOption>
+                <SelectOption value="付晓晓">付晓晓</SelectOption>
+                <SelectOption value="周毛毛">周毛毛</SelectOption>
               </Select>
             )}
           </FormItem>
@@ -268,10 +280,7 @@ export default class BasicList extends PureComponent {
           destroyOnClose
           wrapClassName={styles.infoModal}
           visible={visible}
-          {...(
-            done ? { footer: null, onCancel: this.handleDone } :
-              { okText: '保存', onOk: this.handleSubmit, onCancel: this.handleCancel }
-          )}
+          {...modalFooter}
         >
           {getModalContent()}
         </Modal>
