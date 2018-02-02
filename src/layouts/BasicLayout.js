@@ -12,12 +12,11 @@ import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
-import Authorized from '../utils/Authorized';
+import { AuthorizedRoute, CheckPermissions } from '../components/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 
 const { Content, Header, Footer } = Layout;
-const { AuthorizedRoute } = Authorized;
 
 /**
  * 根据菜单取得重定向地址.
@@ -146,7 +145,14 @@ class BasicLayout extends React.PureComponent {
   }
   render() {
     const {
-      currentUser, collapsed, fetchingNotices, notices, routerData, match, location,
+      currentUser,
+      collapsed,
+      fetchingNotices,
+      notices,
+      routerData,
+      match,
+      location,
+      currentAuthority,
     } = this.props;
     const bashRedirect = this.getBashRedirect();
     const layout = (
@@ -154,9 +160,10 @@ class BasicLayout extends React.PureComponent {
         <SiderMenu
           logo={logo}
           // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
-          // If you do not have the Authorized parameter
+          // If you do not have the CheckPermissions parameter
           // you will be forced to jump to the 403 interface without permission
-          Authorized={Authorized}
+          CheckPermissions={CheckPermissions}
+          currentAuthority={currentAuthority}
           menuData={getMenuData()}
           collapsed={collapsed}
           location={location}
@@ -194,6 +201,7 @@ class BasicLayout extends React.PureComponent {
                       component={item.component}
                       exact={item.exact}
                       authority={item.authority}
+                      currentAuthority={currentAuthority}
                       redirectPath="/exception/403"
                     />
                   )

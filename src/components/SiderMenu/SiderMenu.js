@@ -171,9 +171,13 @@ export default class SiderMenu extends PureComponent {
   };
   // permission to check
   checkPermissionItem = (authority, ItemDom) => {
-    if (this.props.Authorized && this.props.Authorized.check) {
-      const { check } = this.props.Authorized;
-      return check(authority, ItemDom);
+    const { currentAuthority, CheckPermissions } = this.props;
+    if (CheckPermissions) {
+      return CheckPermissions(
+        authority,
+        currentAuthority,
+        ItemDom
+      );
     }
     return ItemDom;
   };
