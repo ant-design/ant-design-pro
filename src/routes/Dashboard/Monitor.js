@@ -107,7 +107,6 @@ export default class Monitor extends PureComponent {
           <Col xl={12} lg={24} sm={24} xs={24}>
             <Card
               title="各品类占比"
-              style={{ marginBottom: 24 }}
               bordered={false}
               className={styles.pieCard}
             >
@@ -147,7 +146,7 @@ export default class Monitor extends PureComponent {
               </Row>
             </Card>
           </Col>
-          <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
+          <Col xl={6} lg={12} sm={24} xs={24}>
             <Card title="热门搜索" loading={loading} bordered={false} bodyStyle={{ overflow: 'hidden' }}>
               <TagCloud
                 data={tags}
@@ -155,7 +154,7 @@ export default class Monitor extends PureComponent {
               />
             </Card>
           </Col>
-          <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
+          <Col xl={6} lg={12} sm={24} xs={24}>
             <Card title="资源剩余" bodyStyle={{ textAlign: 'center', fontSize: 0 }} bordered={false}>
               <WaterWave
                 height={161}
