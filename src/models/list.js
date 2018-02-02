@@ -35,17 +35,17 @@ export default {
       /** ** 模拟入库开始 ** */
       const list = data;
       if (updateItem.id) {
-        list.some((item, i) => {
+        for (let i = 0; i < list.length; i += 1) {
+          const item = list[i];
           if (item.id === updateItem.id) {
             if (Object.keys(updateItem).length === 1) { // delete
               list.splice(i, 1);
             } else {
               list[i] = { ...item, ...updateItem }; // edit
             }
-            return true;
+            break;
           }
-          return false;
-        });
+        }
       } else {
         list.unshift({ id: 'fake-list-x', ...updateItem }); // add
       }
