@@ -3,9 +3,9 @@ import { Spin } from 'antd';
 
 export default class PromiseRender extends React.PureComponent {
   state = {
-    component: false,
+    component: null,
   };
-  async componentDidMount() {
+  componentDidMount() {
     this.props.promise
       .then(() => {
         this.setState({
@@ -14,7 +14,7 @@ export default class PromiseRender extends React.PureComponent {
       })
       .catch(() => {
         this.setState({
-          component: this.props.error,
+          component: () => this.props.error,
         });
       });
   }
