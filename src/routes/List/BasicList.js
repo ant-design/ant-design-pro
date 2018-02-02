@@ -86,6 +86,19 @@ export default class BasicList extends PureComponent {
     const { getFieldDecorator } = this.props.form;
     const { visible, done, current = {} } = this.state;
 
+    const editAndDelete = (key, currentItem) => {
+      if (key === 'edit') this.showEditModal(currentItem);
+      else if (key === 'delete') {
+        Modal.confirm({
+          title: '删除任务',
+          content: '确定删除该任务吗？',
+          okText: '确认',
+          cancelText: '取消',
+          onOk: () => this.deleteItem(currentItem.id),
+        });
+      }
+    };
+
     const modalFooter = done ?
       { footer: null, onCancel: this.handleDone }
       :
@@ -139,19 +152,7 @@ export default class BasicList extends PureComponent {
 
     const MoreBtn = props => (
       <Dropdown overlay={
-        <Menu onClick={({ key }) => {
-            if (key === 'edit') this.showEditModal(props.current);
-            if (key === 'delete') {
-              Modal.confirm({
-                title: '删除任务',
-                content: '确定删除该任务吗？',
-                okText: '确认',
-                cancelText: '取消',
-                onOk: () => this.deleteItem(props.current.id),
-              });
-            }
-          }}
-        >
+        <Menu onClick={({ key }) => editAndDelete(key, props.current)}>
           <Menu.Item key="edit">编辑</Menu.Item>
           <Menu.Item key="delete">删除</Menu.Item>
         </Menu>}
@@ -193,6 +194,7 @@ export default class BasicList extends PureComponent {
                 showTime
                 placeholder="请选择"
                 format="YYYY-MM-DD HH:mm:ss"
+                style={{ width: '100%' }}
               />
             )}
           </FormItem>
@@ -276,7 +278,6 @@ export default class BasicList extends PureComponent {
           width={640}
           bodyStyle={{ padding: '32px 0 8px' }}
           destroyOnClose
-          wrapClassName={styles.infoModal}
           visible={visible}
           {...modalFooter}
         >
