@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Layout, Menu, Icon, Spin, Tag, Dropdown, Avatar, Divider } from 'antd';
+import { Menu, Icon, Spin, Tag, Dropdown, Avatar, Divider } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import Debounce from 'lodash-decorators/debounce';
@@ -7,8 +7,6 @@ import { Link } from 'dva/router';
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
-
-const { Header } = Layout;
 
 export default class GlobalHeader extends PureComponent {
   componentWillUnmount() {
@@ -68,7 +66,7 @@ export default class GlobalHeader extends PureComponent {
     );
     const noticeData = this.getNoticeData();
     return (
-      <Header className={styles.header}>
+      <div className={styles.header}>
         {isMobile && (
           [
             (
@@ -135,7 +133,7 @@ export default class GlobalHeader extends PureComponent {
             </Dropdown>
           ) : <Spin size="small" style={{ marginLeft: 8 }} />}
         </div>
-      </Header>
+      </div>
     );
   }
 }
