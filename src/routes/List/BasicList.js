@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { List, Card, Row, Col, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar,
-  Modal, Form, DatePicker, Select, Popconfirm } from 'antd';
+  Modal, Form, DatePicker, Select } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import Result from '../../components/Result';
@@ -139,21 +139,21 @@ export default class BasicList extends PureComponent {
 
     const MoreBtn = props => (
       <Dropdown overlay={
-        <Menu>
-          <Menu.Item key="edit">
-            <span onClick={() => this.showEditModal(props.current)}>编辑</span>
-          </Menu.Item>
-          <Menu.Item key="delete">
-            <Popconfirm
-              placement="rightBottom"
-              title="确定删除该任务吗？"
-              okText="确定"
-              cancelText="取消"
-              onConfirm={() => this.deleteItem(props.current.id)}
-            >
-              <span>删除</span>
-            </Popconfirm>
-          </Menu.Item>
+        <Menu onClick={({ key }) => {
+            if (key === 'edit') this.showEditModal(props.current);
+            if (key === 'delete') {
+              Modal.confirm({
+                title: '删除任务',
+                content: '确定删除该任务吗？',
+                okText: '确认',
+                cancelText: '取消',
+                onOk: () => this.deleteItem(props.current.id),
+              });
+            }
+          }}
+        >
+          <Menu.Item key="edit">编辑</Menu.Item>
+          <Menu.Item key="delete">删除</Menu.Item>
         </Menu>}
       >
         <a>
@@ -184,7 +184,7 @@ export default class BasicList extends PureComponent {
               <Input placeholder="请输入" />
             )}
           </FormItem>
-          <FormItem key="createdAt" label="开始时间" {...this.formLayout}>
+          <FormItem label="开始时间" {...this.formLayout}>
             {getFieldDecorator('createdAt', {
               rules: [{ required: true, message: '请选择开始时间' }],
               initialValue: current.createdAt ? moment(current.createdAt) : null,
@@ -193,12 +193,10 @@ export default class BasicList extends PureComponent {
                 showTime
                 placeholder="请选择"
                 format="YYYY-MM-DD HH:mm:ss"
-                style={{ width: '100%' }}
-                getCalendarContainer={w => w}
               />
             )}
           </FormItem>
-          <FormItem key="owner" label="任务负责人" {...this.formLayout}>
+          <FormItem label="任务负责人" {...this.formLayout}>
             {getFieldDecorator('owner', {
               rules: [{ required: true, message: '请选择任务负责人' }],
               initialValue: current.owner,
@@ -209,7 +207,7 @@ export default class BasicList extends PureComponent {
               </Select>
             )}
           </FormItem>
-          <FormItem key="subDescription" {...this.formLayout} label="产品描述">
+          <FormItem {...this.formLayout} label="产品描述">
             {getFieldDecorator('subDescription', {
               rules: [{ message: '请输入至少五个字符的产品描述！', min: 5 }],
               initialValue: current.subDescription,
