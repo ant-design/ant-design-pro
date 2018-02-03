@@ -50,7 +50,6 @@ export default class ProvinceSelect extends PureComponent {
       type: 'geographic/fetchCity',
       payload: item.key,
     });
-    this.province = item;
     this.props.onChange({
       province: item,
       city: nullSlectItem,
@@ -58,7 +57,7 @@ export default class ProvinceSelect extends PureComponent {
   };
   selectCityItem = (item) => {
     this.props.onChange({
-      province: this.province,
+      province: this.props.value.province,
       city: item,
     });
   };
