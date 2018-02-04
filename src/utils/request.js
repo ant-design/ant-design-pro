@@ -52,7 +52,7 @@ export default function request(url, options) {
       Accept: 'application/json',
       'Content-Type': 'multipart/form-data',
       ...newOptions.headers,
-    }
+    };
   }
   else if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
     newOptions.headers = {
