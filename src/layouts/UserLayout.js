@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link, Redirect, Switch, Route } from 'dva/router';
 import DocumentTitle from 'react-document-title';
 import { Icon } from 'antd';
@@ -21,7 +21,7 @@ const links = [{
   href: '',
 }];
 
-const copyright = <div>Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品</div>;
+const copyright = <Fragment>Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品</Fragment>;
 
 class UserLayout extends React.PureComponent {
   getPageTitle() {

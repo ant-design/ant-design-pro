@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Chart, Tooltip, Geom, Coord, Axis } from 'bizcharts';
 import { Row, Col } from 'antd';
 import autoHeight from '../autoHeight';
@@ -109,7 +109,7 @@ export default class Radar extends Component {
 
     return (
       <div className={styles.radar} style={{ height }}>
-        <div>
+        <Fragment>
           {title && <h4>{title}</h4>}
           <Chart
             scale={scale}
@@ -173,7 +173,7 @@ export default class Radar extends Component {
               ))}
             </Row>
           )}
-        </div>
+        </Fragment>
       </div>
     );
   }

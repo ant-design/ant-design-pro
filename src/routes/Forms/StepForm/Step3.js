@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'dva';
 import { Button, Row, Col } from 'antd';
 import { routerRedux } from 'dva/router';
@@ -32,14 +32,14 @@ class Step3 extends React.PureComponent {
       </div>
     );
     const actions = (
-      <div>
+      <Fragment>
         <Button type="primary" onClick={onFinish}>
           再转一笔
         </Button>
         <Button>
           查看账单
         </Button>
-      </div>
+      </Fragment>
     );
     return (
       <Result

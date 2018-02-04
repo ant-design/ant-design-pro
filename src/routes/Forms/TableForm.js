@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
 import styles from './style.less';
 
@@ -203,7 +203,7 @@ export default class TableForm extends PureComponent {
     }];
 
     return (
-      <div>
+      <Fragment>
         <Table
           loading={this.state.loading}
           columns={columns}
@@ -221,7 +221,7 @@ export default class TableForm extends PureComponent {
         >
           新增成员
         </Button>
-      </div>
+      </Fragment>
     );
   }
 }
