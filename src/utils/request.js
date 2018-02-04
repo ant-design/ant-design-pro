@@ -53,8 +53,7 @@ export default function request(url, options) {
       'Content-Type': 'multipart/form-data',
       ...newOptions.headers,
     };
-  }
-  else if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
+  } else if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
     newOptions.headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json; charset=utf-8',
