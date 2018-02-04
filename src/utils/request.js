@@ -47,7 +47,14 @@ export default function request(url, options) {
     credentials: 'include',
   };
   const newOptions = { ...defaultOptions, ...options };
-  if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
+  if (newOptions.method === 'POST' && newOptions.body instanceof FormData) {
+    newOptions.headers = {
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
+      ...newOptions.headers,
+    }
+  }
+  else if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
     newOptions.headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json; charset=utf-8',
