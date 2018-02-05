@@ -95,13 +95,14 @@ export default class GlobalHeader extends PureComponent {
             }}
           />
           <Tooltip title="使用文档">
-            <Link
+            <a
               target="_blank"
-              to="http://pro.ant.design/docs/getting-started"
+              href="http://pro.ant.design/docs/getting-started"
+              rel="noopener noreferrer"
               className={styles.action}
             >
               <Icon type="question-circle-o" />
-            </Link>
+            </a >
           </Tooltip>
           <NoticeIcon
             className={styles.action}
