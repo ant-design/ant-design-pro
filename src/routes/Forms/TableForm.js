@@ -23,17 +23,6 @@ export default class TableForm extends PureComponent {
   }
   index = 0;
   cacheOriginData = {};
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        this.props.dispatch({
-          type: 'form/submit',
-          payload: values,
-        });
-      }
-    });
-  }
   toggleEditable=(e, key) => {
     e.preventDefault();
     const newData = this.state.data.map(item => ({ ...item }));
@@ -83,12 +72,7 @@ export default class TableForm extends PureComponent {
     this.setState({
       loading: true,
     });
-    // save field when blur input
     setTimeout(() => {
-      if (document.activeElement.tagName === 'INPUT' &&
-          document.activeElement !== e.target) {
-        return;
-      }
       if (this.clickedCancel) {
         this.clickedCancel = false;
         return;
@@ -121,6 +105,7 @@ export default class TableForm extends PureComponent {
       delete this.cacheOriginData[key];
     }
     this.setState({ data: newData });
+    this.clickedCancel = false;
   }
   render() {
     const columns = [{
@@ -135,7 +120,6 @@ export default class TableForm extends PureComponent {
               value={text}
               autoFocus
               onChange={e => this.handleFieldChange(e, 'name', record.key)}
-              onBlur={e => this.saveRow(e, record.key)}
               onKeyPress={e => this.handleKeyPress(e, record.key)}
               placeholder="成员姓名"
             />
@@ -154,7 +138,6 @@ export default class TableForm extends PureComponent {
             <Input
               value={text}
               onChange={e => this.handleFieldChange(e, 'workId', record.key)}
-              onBlur={e => this.saveRow(e, record.key)}
               onKeyPress={e => this.handleKeyPress(e, record.key)}
               placeholder="工号"
             />
@@ -173,7 +156,6 @@ export default class TableForm extends PureComponent {
             <Input
               value={text}
               onChange={e => this.handleFieldChange(e, 'department', record.key)}
-              onBlur={e => this.saveRow(e, record.key)}
               onKeyPress={e => this.handleKeyPress(e, record.key)}
               placeholder="所属部门"
             />
@@ -192,7 +174,7 @@ export default class TableForm extends PureComponent {
           if (record.isNew) {
             return (
               <span>
-                <a>保存</a>
+                <a onClick={e => this.saveRow(e, record.key)}>添加</a>
                 <Divider type="vertical" />
                 <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
                   <a>删除</a>
@@ -202,7 +184,7 @@ export default class TableForm extends PureComponent {
           }
           return (
             <span>
-              <a>保存</a>
+              <a onClick={e => this.saveRow(e, record.key)}>保存</a>
               <Divider type="vertical" />
               <a onClick={e => this.cancel(e, record.key)}>取消</a>
             </span>

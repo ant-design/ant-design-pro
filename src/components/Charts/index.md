@@ -76,8 +76,8 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | percent | 占比 | number | - |
 | tooltip | 是否显示 tooltip | boolean | true |
 | valueFormat | 显示值的格式化函数 | function | - |
-| title | 图表标题 | ReactNode|string | - |
-| subTitle | 图表子标题 | ReactNode|string | - |
+| title | 图表标题 | ReactNode\|string | - |
+| subTitle | 图表子标题 | ReactNode\|string | - |
 | total | 图标中央的总数 | string | - |
 
 ### Radar
