@@ -125,7 +125,7 @@ export default class Userinfo extends Component {
                 ],
               })(<Input />)}
             </FormItem>
-            <FormItem label="联系地址">
+            <FormItem label="联系电话">
               {getFieldDecorator('phone', {
                 rules: [
                   { required: true, message: 'Please input your phone!' },

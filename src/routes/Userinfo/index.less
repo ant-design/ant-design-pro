@@ -1,4 +1,4 @@
-@import '~antd/lib/style/themes/default.less';
+@import "~antd/lib/style/themes/default.less";
 
 .main {
   width: 100%;
@@ -7,22 +7,12 @@
   display: flex;
   padding-top: 15px;
   padding-bottom: 15px;
-  transition: all 0.3s;
   .leftMeun {
     width: 224px;
     border-right: 1px solid #e8e8e8;
-    .meunItem {
-      height: 40px;
-      cursor: pointer;
-      color: #000;
-      padding-left: 20px;
-      line-height: 40px;
-      margin-bottom: 10px;
-      margin-right: -1px;
-      &.select {
-        color: #1890ff;
-        border-right: 3px solid #1890ff;
-        background-color: #e6f7ff;
+    :global {
+      .ant-menu-inline {
+        border: none;
       }
     }
   }

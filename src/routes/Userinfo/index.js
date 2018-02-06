@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Route, routerRedux } from 'dva/router';
+import { Menu } from 'antd';
 import styles from './index.less';
 import Userinfo from './Userinfo';
 import SafeView from './SafeView';
 import AccountView from './AccountView';
 import MessageView from './MessageView';
+
+const { Item } = Menu;
 
 const meunArray = [
   { title: '基本设置', key: 'info' },
@@ -23,20 +26,7 @@ export default class BaseInfo extends PureComponent {
   };
   getMeun = () => {
     return meunArray.map((item) => {
-      const { selectKey } = this.state;
-      return (
-        <div
-          key={item.key}
-          onClick={() => this.selectKey(item)}
-          className={
-            item.key === selectKey
-              ? `${styles.meunItem} ${styles.select}`
-              : styles.meunItem
-          }
-        >
-          {item.title}
-        </div>
-      );
+      return <Item key={item.key}>{item.title}</Item>;
     });
   };
   getRightTitle = () => {
@@ -56,7 +46,15 @@ export default class BaseInfo extends PureComponent {
     }
     return (
       <div className={styles.main}>
-        <div className={styles.leftMeun}>{this.getMeun()}</div>
+        <div className={styles.leftMeun}>
+          <Menu
+            mode="inline"
+            selectedKeys={[this.state.selectKey]}
+            onClick={this.selectKey}
+          >
+            {this.getMeun()}
+          </Menu>
+        </div>
         <div className={styles.right}>
           <div className={styles.title}>{this.getRightTitle()}</div>
           <Route
