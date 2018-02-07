@@ -60,7 +60,9 @@ export default class Radar extends Component {
     const { legendData } = this.state;
     legendData[i] = newItem;
 
-    const filteredLegendData = legendData.filter(l => l.checked).map(l => l.name);
+    const filteredLegendData = legendData
+      .filter(l => l.checked)
+      .map(l => l.name);
 
     if (this.chart) {
       this.chart.filter('name', val => filteredLegendData.indexOf(val) > -1);
@@ -126,22 +128,27 @@ export default class Radar extends Component {
             line={null}
             tickLine={null}
             grid={{
-                lineStyle: {
-                  lineDash: null,
-                },
-                hideFirstLine: false,
-              }}
+              lineStyle: {
+                lineDash: null,
+              },
+              hideFirstLine: false,
+            }}
           />
           <Axis
             name="value"
             grid={{
-                type: 'polygon',
-                lineStyle: {
-                  lineDash: null,
-                },
-              }}
+              type: 'polygon',
+              lineStyle: {
+                lineDash: null,
+              },
+            }}
           />
-          <Geom type="line" position="label*value" color={['name', colors]} size={1} />
+          <Geom
+            type="line"
+            position="label*value"
+            color={['name', colors]}
+            size={1}
+          />
           <Geom
             type="point"
             position="label*value"
@@ -151,27 +158,29 @@ export default class Radar extends Component {
           />
         </Chart>
         {hasLegend && (
-        <Row className={styles.legend}>
-          {legendData.map((item, i) => (
-            <Col
-              span={24 / legendData.length}
-              key={item.name}
-              onClick={() => this.handleLegendClick(item, i)}
-            >
-              <div className={styles.legendItem}>
-                <p>
-                  <span
-                    className={styles.dot}
-                    style={{ backgroundColor: !item.checked ? '#aaa' : item.color }}
-                  />
-                  <span>{item.name}</span>
-                </p>
-                <h6>{item.value}</h6>
-              </div>
-            </Col>
-              ))}
-        </Row>
-          )}
+          <Row className={styles.legend}>
+            {legendData.map((item, i) => (
+              <Col
+                span={24 / legendData.length}
+                key={item.name}
+                onClick={() => this.handleLegendClick(item, i)}
+              >
+                <div className={styles.legendItem}>
+                  <p>
+                    <span
+                      className={styles.dot}
+                      style={{
+                        backgroundColor: !item.checked ? '#aaa' : item.color,
+                      }}
+                    />
+                    <span>{item.name}</span>
+                  </p>
+                  <h6>{item.value}</h6>
+                </div>
+              </Col>
+           ))}
+          </Row>
+        )}
       </div>
     );
   }
