@@ -104,6 +104,8 @@ export function fakeList(count) {
   return list;
 }
 
+let sourceData;
+
 export function getFakeList(req, res, u) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
@@ -115,6 +117,44 @@ export function getFakeList(req, res, u) {
   const count = (params.count * 1) || 20;
 
   const result = fakeList(count);
+  sourceData = result;
+
+  if (res && res.json) {
+    res.json(result);
+  } else {
+    return result;
+  }
+}
+
+export function postFakeList(req, res) {
+  const { /* url = '', */ body } = req;
+  // const params = getUrlParams(url);
+  const { method, id, ...restParams } = body;
+
+  // const count = (params.count * 1) || 20;
+  let result = sourceData;
+
+  switch (method) {
+    case 'delete':
+      result = result.filter(item => item.id !== id);
+      break;
+    case 'update':
+      result.forEach((item, i) => {
+        if (item.id === id) {
+          result[i] = Object.assign(item, restParams);
+        }
+      });
+      break;
+    case 'post':
+      result.unshift({
+        ...restParams,
+        id: `fake-list-${result.length}`,
+        createdAt: new Date().getTime(),
+      });
+      break;
+    default:
+      break;
+  }
 
   if (res && res.json) {
     res.json(result);
@@ -292,4 +332,5 @@ export default {
   getNotice,
   getActivities,
   getFakeList,
+  postFakeList,
 };
