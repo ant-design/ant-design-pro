@@ -17,6 +17,17 @@ export default class LoginPage extends Component {
     autoLogin: true,
   }
 
+  componentWillMount() {
+    if (this.props.location.state) {
+      this.props.dispatch({
+        type: 'login/loginSuccessRedirect',
+        payload: {
+          locationState: this.props.location.state,
+        },
+      });
+    }
+  }
+
   onTabChange = (type) => {
     this.setState({ type });
   }
