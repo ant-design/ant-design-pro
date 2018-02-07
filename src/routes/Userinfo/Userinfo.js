@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Upload, Select, Button } from 'antd';
 import styles from './Userinfo.less';
 import GeographicView from './GeographicView';
 import PhoneView from './PhoneView';
@@ -14,9 +14,11 @@ const AvatarView = ({ avatar }) => (
     <div className={styles.avatar}>
       <img src={avatar} alt="avatar" />
     </div>
-    <div className={styles.button_view}>
-      <Button icon="upload">更换头像</Button>
-    </div>
+    <Upload fileList={[]}>
+      <div className={styles.button_view}>
+        <Button icon="upload">更换头像</Button>
+      </div>
+    </Upload>
   </Fragment>
 );
 
