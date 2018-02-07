@@ -1,28 +1,44 @@
 import React, { Component, Fragment } from 'react';
-import { Icon } from 'antd';
-import AccountViewItem from './ItemView';
+import { Icon, List } from 'antd';
 
 export default class AccountView extends Component {
+  getData = () => {
+    return [
+      {
+        title: '绑定淘宝',
+        description: '当前未绑定淘宝账号',
+        actions: [<a>绑定</a>],
+        avatar: <Icon type="taobao" className="taobao" />,
+      },
+      {
+        title: '绑定支付宝',
+        description: '当前未绑定支付宝账号',
+        actions: [<a>绑定</a>],
+        avatar: <Icon type="alipay" className="alipay" />,
+      },
+      {
+        title: '绑定钉钉',
+        description: '当前未绑定钉钉账号',
+        actions: [<a>绑定</a>],
+        avatar: <Icon type="dingding" className="dingding" />,
+      },
+    ];
+  };
   render() {
     return (
       <Fragment>
-        <AccountViewItem
-          icon={<Icon type="taobao" className="taobao" />}
-          title="绑定淘宝"
-          subTitle="当前未绑定淘宝账号"
-          action="绑定"
-        />
-        <AccountViewItem
-          icon={<Icon type="alipay" className="alipay" />}
-          title="绑定支付宝"
-          subTitle="当前未绑定支付宝账号"
-          action="绑定"
-        />
-        <AccountViewItem
-          icon={<Icon type="dingding" className="dingding" />}
-          title="绑定钉钉"
-          subTitle="当前未绑定钉钉账号"
-          action="绑定"
+        <List
+          itemLayout="horizontal"
+          dataSource={this.getData()}
+          renderItem={item => (
+            <List.Item actions={item.actions}>
+              <List.Item.Meta
+                avatar={item.avatar}
+                title={item.title}
+                description={item.description}
+              />
+            </List.Item>
+          )}
         />
       </Fragment>
     );
