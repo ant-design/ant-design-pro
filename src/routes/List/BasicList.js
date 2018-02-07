@@ -69,14 +69,14 @@ export default class BasicList extends PureComponent {
         done: true,
       });
       dispatch({
-        type: 'list/appendFetch',
+        type: 'list/submit',
         payload: { id, ...fieldsValue },
       });
     });
   }
   deleteItem = (id) => {
     this.props.dispatch({
-      type: 'list/appendFetch',
+      type: 'list/submit',
       payload: { id },
     });
   }
