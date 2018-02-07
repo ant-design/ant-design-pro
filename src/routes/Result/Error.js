@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Button, Icon, Card } from 'antd';
 import Result from '../../components/Result';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
 const extra = (
-  <div>
+  <Fragment>
     <div style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.85)', fontWeight: '500', marginBottom: 16 }}>
       您提交的内容有如下错误：
     </div>
@@ -16,7 +16,7 @@ const extra = (
       <Icon style={{ color: '#f5222d', marginRight: 8 }} type="close-circle-o" />您的账户还不具备申请资格
       <a style={{ marginLeft: 16 }}>立即升级 <Icon type="right" /></a>
     </div>
-  </div>
+  </Fragment>
 );
 
 const actions = <Button type="primary">返回修改</Button>;
