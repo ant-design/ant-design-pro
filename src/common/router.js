@@ -160,7 +160,16 @@ export const getRouterData = (app) => {
     '/user/register-result': {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
     },
-    '/userinfo/base/:page': {
+    '/userinfo/info': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Userinfo/index.js')),
+    },
+    '/userinfo/safe': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Userinfo/index.js')),
+    },
+    '/userinfo/account': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Userinfo/index.js')),
+    },
+    '/userinfo/message': {
       component: dynamicWrapper(app, ['geographic'], () => import('../routes/Userinfo/index.js')),
     },
     // '/user/:id': {

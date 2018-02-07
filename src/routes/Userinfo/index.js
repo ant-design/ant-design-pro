@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
+import pathToRegexp from 'path-to-regexp';
 import { Route, routerRedux } from 'dva/router';
 import { Menu } from 'antd';
 import styles from './index.less';
@@ -21,9 +22,14 @@ const meunArray = [
   currentUser: user.currentUser,
 }))
 export default class BaseInfo extends PureComponent {
-  state = {
-    selectKey: this.props.match.params.page || 'info',
-  };
+  constructor(props) {
+    super(props);
+    // userinfo/account -> account
+    const key = pathToRegexp('/userinfo/:name').exec(props.location.pathname)[1];
+    this.state = {
+      selectKey: key || 'info',
+    };
+  }
   getMeun = () => {
     return meunArray.map((item) => {
       return <Item key={item.key}>{item.title}</Item>;
@@ -34,7 +40,7 @@ export default class BaseInfo extends PureComponent {
     return meunItem.title;
   };
   selectKey = ({ key }) => {
-    this.props.dispatch(routerRedux.push(`/userinfo/base/${key}`));
+    this.props.dispatch(routerRedux.push(`/userinfo/${key}`));
     this.setState({
       selectKey: key,
     });
@@ -58,12 +64,12 @@ export default class BaseInfo extends PureComponent {
         <div className={styles.right}>
           <div className={styles.title}>{this.getRightTitle()}</div>
           <Route
-            path="/userinfo/base/info"
+            path="/userinfo/info"
             render={props => <Userinfo {...props} currentUser={currentUser} />}
           />
-          <Route path="/userinfo/base/safe" component={SafeView} />
-          <Route path="/userinfo/base/account" component={AccountView} />
-          <Route path="/userinfo/base/message" component={MessageView} />
+          <Route path="/userinfo/safe" component={SafeView} />
+          <Route path="/userinfo/account" component={AccountView} />
+          <Route path="/userinfo/message" component={MessageView} />
         </div>
       </div>
     );
