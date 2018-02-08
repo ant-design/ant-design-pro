@@ -1,0 +1,73 @@
+@import '~antd/lib/style/themes/default.less';
+
+.main {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  .leftmenu {
+    width: 224px;
+    border-right: 1px solid #e8e8e8;
+    :global {
+      .ant-menu-inline {
+        border: none;
+      }
+    }
+  }
+  .right {
+    flex: 1;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    .title {
+      font-size: 20px;
+      color: rgba(0, 0, 0, 0.85);
+      line-height: 28px;
+      width: 100px;
+      height: 28px;
+      font-weight: bold;
+      margin-bottom: 24px;
+    }
+  }
+}
+:global {
+  .ant-list-item-meta {
+    // 账号绑定图标
+    .taobao {
+      color: #ff4000;
+      display: block;
+      font-size: 48px;
+      line-height: 48px;
+      border-radius: 4px;
+    }
+    .dingding {
+      background-color: #2eabff;
+      color: #fff;
+      font-size: 32px;
+      line-height: 32px;
+      padding: 6px;
+      margin: 2px;
+      border-radius: 4px;
+    }
+    .alipay {
+      color: #2eabff;
+      font-size: 48px;
+      line-height: 48px;
+      border-radius: 4px;
+    }
+  }
+
+  // 密码强度
+  font.strong {
+    color: #52c41a;
+  }
+  font.medium {
+    color: yellow;
+  }
+  font.weak {
+    color: red;
+  }
+}
