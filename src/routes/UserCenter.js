@@ -25,7 +25,13 @@ export default class UserCenter extends PureComponent {
       <div className={styles.userCenter}>
         <Row gutter={24}>
           <Col lg={8} md={24}>
-            <Card bordered={false}>test</Card>
+            <Card bordered={false}>
+              <div className={styles.avatarHolder}>
+                <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
+                <div className={styles.name}>username</div>
+                <div className={styles.signature}>海纳百川，有容乃大</div>
+              </div>
+            </Card>
           </Col>
           <Col lg={16} md={24}>
             <Card bordered={false}>test</Card>
