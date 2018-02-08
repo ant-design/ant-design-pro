@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Form, Input, Upload, Select, Button } from 'antd';
-import styles from './Userinfo.less';
+import styles from './BaseView.less';
 import GeographicView from './GeographicView';
 import PhoneView from './PhoneView';
 
@@ -45,11 +45,11 @@ const validatorPhone = (rule, value, callback) => {
 };
 
 @Form.create()
-export default class Userinfo extends Component {
+export default class BaseView extends Component {
   componentDidMount() {
-    this.setUserInfo();
+    this.setBaseInfo();
   }
-  setUserInfo = () => {
+  setBaseInfo = () => {
     const { currentUser } = this.props;
     Object.keys(this.props.form.getFieldsValue()).forEach((key) => {
       const obj = {};
@@ -68,7 +68,7 @@ export default class Userinfo extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className={styles.userinfo}>
+      <div className={styles.baseView}>
         <div className={styles.left}>
           <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
             <FormItem label="邮箱">

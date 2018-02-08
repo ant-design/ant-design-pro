@@ -132,7 +132,7 @@ class BasicLayout extends React.PureComponent {
       return;
     }
     if (key === 'userinfo') {
-      this.props.dispatch(routerRedux.push('/userinfo/info'));
+      this.props.dispatch(routerRedux.push('/userinfo/base'));
       return;
     }
     if (key === 'logout') {
