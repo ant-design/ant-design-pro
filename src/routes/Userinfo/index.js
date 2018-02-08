@@ -11,7 +11,7 @@ import MessageView from './MessageView';
 
 const { Item } = Menu;
 
-const meunArray = [
+const menuArray = [
   { title: '基本设置', key: 'info' },
   { title: '安全设置', key: 'safe' },
   { title: '账号绑定', key: 'account' },
@@ -30,14 +30,14 @@ export default class BaseInfo extends PureComponent {
       selectKey: key || 'info',
     };
   }
-  getMeun = () => {
-    return meunArray.map((item) => {
+  getmenu = () => {
+    return menuArray.map((item) => {
       return <Item key={item.key}>{item.title}</Item>;
     });
   };
   getRightTitle = () => {
-    const meunItem = meunArray.find(item => item.key === this.state.selectKey);
-    return meunItem.title;
+    const menuItem = menuArray.find(item => item.key === this.state.selectKey);
+    return menuItem.title;
   };
   selectKey = ({ key }) => {
     this.props.dispatch(routerRedux.push(`/userinfo/${key}`));
@@ -52,13 +52,13 @@ export default class BaseInfo extends PureComponent {
     }
     return (
       <div className={styles.main}>
-        <div className={styles.leftMeun}>
+        <div className={styles.leftmenu}>
           <Menu
             mode="inline"
             selectedKeys={[this.state.selectKey]}
             onClick={this.selectKey}
           >
-            {this.getMeun()}
+            {this.getmenu()}
           </Menu>
         </div>
         <div className={styles.right}>
