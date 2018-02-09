@@ -1,0 +1,17 @@
+@import '~antd/lib/style/themes/default.less';
+
+.row {
+  .item {
+    width: 220px;
+  }
+  .item:first-child {
+    margin-right: 8px;
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .item:first-child {
+    margin: 0;
+    margin-bottom: 8px;
+  }
+}
