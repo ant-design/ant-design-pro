@@ -2,8 +2,18 @@
 
 .baseView {
   display: flex;
+  &.md {
+    flex-direction: column-reverse;
+    .right {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
   .left {
-    width: 448px;
+    max-width: 448px;
+    min-width: 224px;
   }
   .right {
     flex: 1;

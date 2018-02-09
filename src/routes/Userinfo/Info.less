@@ -7,6 +7,7 @@
   display: flex;
   padding-top: 16px;
   padding-bottom: 16px;
+  overflow: auto;
   .leftmenu {
     width: 224px;
     border-right: 1px solid #e8e8e8;
@@ -67,5 +68,18 @@
   }
   font.weak {
     color: red;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .main {
+    flex-direction: column;
+    .leftmenu {
+      width: 100%;
+      border: none;
+    }
+    .right {
+      padding: 40px;
+    }
   }
 }
