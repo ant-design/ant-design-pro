@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Route, Redirect, Switch } from 'dva/router';
 import { Card, Steps } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
-import NotFound from '../../Exception/404';
 import { getRoutes } from '../../../utils/utils';
 import styles from '../style.less';
 
@@ -43,7 +42,7 @@ export default class StepForm extends PureComponent {
                 ))
               }
               <Redirect exact from="/form/step-form" to="/form/step-form/info" />
-              <Route render={NotFound} />
+              <Redirect to="/exception/404" />
             </Switch>
           </div>
         </Card>
