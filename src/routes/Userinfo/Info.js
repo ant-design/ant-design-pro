@@ -48,7 +48,7 @@ export default class Info extends PureComponent {
       <div className={styles.main}>
         <div className={styles.leftmenu}>
           <Menu
-            mode="inline"
+            mode={window.innerWidth < 769 ? 'horizontal' : 'inline'}
             selectedKeys={[this.state.selectKey]}
             onClick={this.selectKey}
           >
