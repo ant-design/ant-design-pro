@@ -2,15 +2,24 @@
 
 .baseView {
   display: flex;
+  &.md {
+    flex-direction: column-reverse;
+    .right {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
   .left {
-    width: 448px;
+    max-width: 448px;
+    min-width: 224px;
   }
   .right {
     flex: 1;
     padding-left: 104px;
     .avatar_title {
       height: 22px;
-      width: 28px;
       font-size: 14px;
       color: rgba(0, 0, 0, 0.85);
       line-height: 22px;

@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Form, Input, Upload, Select, Button } from 'antd';
+import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import styles from './BaseView.less';
 import GeographicView from './GeographicView';
 import PhoneView from './PhoneView';
@@ -46,8 +48,16 @@ const validatorPhone = (rule, value, callback) => {
 
 @Form.create()
 export default class BaseView extends Component {
+  state = {
+    md: false,
+  };
   componentDidMount() {
     this.setBaseInfo();
+    this.resize();
+    window.addEventListener('resize', this.resize);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
   }
   setBaseInfo = () => {
     const { currentUser } = this.props;
@@ -65,10 +75,29 @@ export default class BaseView extends Component {
       'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
     return url;
   }
+  getViewDom = (ref) => {
+    this.view = ref;
+  };
+  @Bind()
+  @Debounce(200)
+  resize() {
+    if (this.view.offsetWidth > 696) {
+      this.setState({
+        md: false,
+      });
+      return;
+    }
+    this.setState({
+      md: true,
+    });
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className={styles.baseView}>
+      <div
+        className={`${styles.baseView} ${this.state.md ? styles.md : ''}`}
+        ref={this.getViewDom}
+      >
         <div className={styles.left}>
           <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
             <FormItem label="邮箱">
@@ -98,7 +127,7 @@ export default class BaseView extends Component {
                   { required: true, message: 'Please input your country!' },
                 ],
               })(
-                <Select style={{ width: 220 }}>
+                <Select style={{ maxWidth: 220 }}>
                   <Option value="China">中国</Option>
                   <Option value="USA">美国</Option>
                   <Option value="France">法国</Option>

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Select, Spin } from 'antd';
 import { connect } from 'dva';
+import styles from './GeographicView.less';
 
 const { Option } = Select;
 
@@ -17,7 +18,7 @@ const nullSlectItem = {
     isLoading,
   };
 })
-export default class ProvinceSelect extends PureComponent {
+export default class GeographicView extends PureComponent {
   componentDidMount = () => {
     this.props.dispatch({
       type: 'geographic/fetchProvince',
@@ -78,22 +79,22 @@ export default class ProvinceSelect extends PureComponent {
   render() {
     const { province, city } = this.conversionObject();
     return (
-      <Spin spinning={this.props.isLoading}>
+      <Spin spinning={this.props.isLoading} wrapperClassName={styles.row}>
         <Select
+          className={styles.item}
           value={province}
           labelInValue
           showSearch
           onSelect={this.selectProvinceItem}
-          style={{ width: 220, marginRight: 8 }}
         >
           {this.getProvinceOption()}
         </Select>
         <Select
+          className={styles.item}
           value={city}
           labelInValue
           showSearch
           onSelect={this.selectCityItem}
-          style={{ width: 220 }}
         >
           {this.getCityOption()}
         </Select>
