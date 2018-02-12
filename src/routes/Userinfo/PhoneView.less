@@ -1,20 +1,11 @@
 @import '~antd/lib/style/themes/default.less';
 
 .area_code {
-  width: 128px;
+  max-width: 128px;
   margin-right: 8px;
+  width: 30%;
 }
 .phone_number {
-  width: 312px;
-}
-
-@media screen and (max-width: @screen-sm) {
-  .area_code {
-    width: 100%;
-    margin: 0;
-    margin-bottom: 8px;
-  }
-  .phone_number {
-    width: 100%;
-  }
+  max-width: 312px;
+  width: ~'calc( 70% - 8px)';
 }
