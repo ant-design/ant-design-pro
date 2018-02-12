@@ -24,6 +24,14 @@ export default class GeographicView extends PureComponent {
       type: 'geographic/fetchProvince',
     });
   };
+  componentDidUpdate(props) {
+    if (!props.value && !!this.props.value && !!this.props.value.province) {
+      this.props.dispatch({
+        type: 'geographic/fetchCity',
+        payload: this.props.value.province.key,
+      });
+    }
+  }
   getProvinceOption() {
     return this.getOption(this.props.province);
   }
