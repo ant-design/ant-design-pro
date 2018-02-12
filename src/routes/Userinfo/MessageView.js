@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Switch, List } from 'antd';
 
-const Action = <Switch defaultChecked />;
+const Action = <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked />;
 
 export default class MessageView extends Component {
   getData = () => {
@@ -9,11 +9,6 @@ export default class MessageView extends Component {
       {
         title: '账户密码',
         description: '其他用户的消息将以站内信的形式通知',
-        actions: [Action],
-      },
-      {
-        title: '消息通知',
-        description: '已绑定手机：138****8293',
         actions: [Action],
       },
       {
