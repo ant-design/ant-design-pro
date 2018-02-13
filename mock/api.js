@@ -88,14 +88,17 @@ export function fakeList(count) {
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
           name: '曲丽丽',
+          id: 'member1',
         },
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
           name: '王昭君',
+          id: 'member2',
         },
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
           name: '董娜娜',
+          id: 'member3',
         },
       ],
     });
