@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { Form, Input, Upload, Select, Button } from 'antd';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
 import styles from './BaseView.less';
 import GeographicView from './GeographicView';
 import PhoneView from './PhoneView';
@@ -48,16 +46,8 @@ const validatorPhone = (rule, value, callback) => {
 
 @Form.create()
 export default class BaseView extends Component {
-  state = {
-    md: false,
-  };
   componentDidMount() {
     this.setBaseInfo();
-    this.resize();
-    window.addEventListener('resize', this.resize);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
   }
   setBaseInfo = () => {
     const { currentUser } = this.props;
@@ -78,24 +68,11 @@ export default class BaseView extends Component {
   getViewDom = (ref) => {
     this.view = ref;
   };
-  @Bind()
-  @Debounce(200)
-  resize() {
-    if (this.view.offsetWidth > 696) {
-      this.setState({
-        md: false,
-      });
-      return;
-    }
-    this.setState({
-      md: true,
-    });
-  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
       <div
-        className={`${styles.baseView} ${this.state.md ? styles.md : ''}`}
+        className={styles.baseView}
         ref={this.getViewDom}
       >
         <div className={styles.left}>
