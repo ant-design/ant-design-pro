@@ -1,4 +1,5 @@
 import moment from 'moment';
+import React from 'react';
 
 export function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;
@@ -156,4 +157,31 @@ const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-
 
 export function isUrl(path) {
   return reg.test(path);
+}
+
+export function formatWan(val) {
+  const v = val * 1;
+  if (!v || isNaN(v)) return '';
+
+  let result = val;
+  if (val > 10000) {
+    result = Math.floor(val / 10000);
+    result = (
+      <span>
+        {result}
+        <em styles={{
+            position: 'relative',
+            top: -2,
+            fontSize: 14,
+            fontStyle: 'normal',
+            lineHeight: 20,
+            marginLeft: 2,
+          }}
+        >
+          万
+        </em>
+      </span>
+    );
+  }
+  return result;
 }
