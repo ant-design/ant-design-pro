@@ -3,16 +3,7 @@
 .baseView {
   display: flex;
   margin-top: 12px;
-  &.md {
-    flex-direction: column-reverse;
-    .right {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 448px;
-    }
-  }
+
   .left {
     max-width: 448px;
     min-width: 224px;
@@ -22,8 +13,8 @@
     padding-left: 104px;
     .avatar_title {
       height: 22px;
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.85);
+      font-size: @font-size-base;
+      color: @heading-color;
       line-height: 22px;
       margin-bottom: 8px;
     }
@@ -39,6 +30,20 @@
     .button_view {
       width: 144px;
       text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xl) {
+  .baseView {
+    flex-direction: column-reverse;
+
+    .right {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 448px;
     }
   }
 }
