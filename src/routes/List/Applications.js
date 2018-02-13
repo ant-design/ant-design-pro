@@ -5,23 +5,12 @@ import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Me
 
 import StandardFormRow from '../../components/StandardFormRow';
 import TagSelect from '../../components/TagSelect';
+import { formatWan } from '../../utils/utils';
 
 import styles from './Applications.less';
 
 const { Option } = Select;
 const FormItem = Form.Item;
-
-const formatWan = (val) => {
-  const v = val * 1;
-  if (!v || isNaN(v)) return '';
-
-  let result = val;
-  if (val > 10000) {
-    result = Math.floor(val / 10000);
-    result = <span>{result}<em className={styles.wan}>万</em></span>;
-  }
-  return result;
-};
 
 /* eslint react/no-array-index-key: 0 */
 @Form.create()
