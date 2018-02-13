@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Route, routerRedux, Switch, Redirect } from 'dva/router';
 import { Menu } from 'antd';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
 import styles from './Info.less';
 import { getRoutes } from '../../utils/utils';
 
@@ -27,15 +25,7 @@ export default class Info extends Component {
     key = menuMap[key] ? key : 'base';
     this.state = {
       selectKey: key,
-      meunMode: 'inline',
     };
-  }
-  componentDidMount() {
-    this.resize();
-    window.addEventListener('resize', this.resize);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
   }
   getmenu = () => {
     return Object.keys(menuMap).map(item => (
@@ -51,19 +41,6 @@ export default class Info extends Component {
       selectKey: key,
     });
   };
-  @Bind()
-  @Debounce(200)
-  resize() {
-    if (window.innerWidth > 768 || window.innerWidth < 454) {
-      this.setState({
-        meunMode: 'inline',
-      });
-      return;
-    }
-    this.setState({
-      meunMode: 'horizontal',
-    });
-  }
   render() {
     const { match, routerData, currentUser } = this.props;
     if (!currentUser.userid) {
@@ -73,7 +50,7 @@ export default class Info extends Component {
       <div className={styles.main}>
         <div className={styles.leftmenu}>
           <Menu
-            mode={this.state.meunMode}
+            mode="inline"
             selectedKeys={[this.state.selectKey]}
             onClick={this.selectKey}
           >
