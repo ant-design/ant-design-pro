@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import { Row, Col, Card, List, Avatar } from 'antd';
+import { Row, Col, Card, List, Avatar, Spin } from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import EditableLinkGroup from '../../components/EditableLinkGroup';
@@ -37,49 +37,21 @@ const links = [
   },
 ];
 
-const members = [
-  {
-    id: 'members-1',
-    title: '科学搬砖组',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
-    link: '',
-  },
-  {
-    id: 'members-2',
-    title: '程序员日常',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png',
-    link: '',
-  },
-  {
-    id: 'members-3',
-    title: '设计天团',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png',
-    link: '',
-  },
-  {
-    id: 'members-4',
-    title: '中二少女团',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png',
-    link: '',
-  },
-  {
-    id: 'members-5',
-    title: '骗你学计算机',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png',
-    link: '',
-  },
-];
-
-@connect(({ project, activities, chart, loading }) => ({
+@connect(({ user, project, activities, chart, loading }) => ({
+  currentUser: user.currentUser,
   project,
   activities,
   chart,
+  currentUserLoading: loading.effects['user/fetchCurrent'],
   projectLoading: loading.effects['project/fetchNotice'],
   activitiesLoading: loading.effects['activities/fetchList'],
 }))
 export default class Workplace extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
+    dispatch({
+      type: 'user/fetchCurrent',
+    });
     dispatch({
       type: 'project/fetchNotice',
     });
@@ -133,6 +105,8 @@ export default class Workplace extends PureComponent {
 
   render() {
     const {
+      currentUser,
+      currentUserLoading,
       project: { notice },
       projectLoading,
       activitiesLoading,
@@ -140,15 +114,22 @@ export default class Workplace extends PureComponent {
     } = this.props;
 
     const pageHeaderContent = (
-      <div className={styles.pageHeaderContent}>
-        <div className={styles.avatar}>
-          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
-        </div>
-        <div className={styles.content}>
-          <div className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</div>
-          <div>交互专家 | 蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</div>
-        </div>
-      </div>
+      <Spin spinning={currentUserLoading}>
+        {
+          currentUser && Object.keys(currentUser).length ?
+          (
+            <div className={styles.pageHeaderContent}>
+              <div className={styles.avatar}>
+                <Avatar size="large" src={currentUser.avatar} />
+              </div>
+              <div className={styles.content}>
+                <div className={styles.contentTitle}>早安，{currentUser.name}，祝你开心每一天！</div>
+                <div>{currentUser.title} | {currentUser.group}</div>
+              </div>
+            </div>
+          ) : null
+        }
+      </Spin>
     );
 
     const extraContent = (
@@ -251,15 +232,16 @@ export default class Workplace extends PureComponent {
               bodyStyle={{ paddingTop: 12, paddingBottom: 12 }}
               bordered={false}
               title="团队"
+              loading={projectLoading}
             >
               <div className={styles.members}>
                 <Row gutter={48}>
                   {
-                    members.map(item => (
+                    notice.map(item => (
                       <Col span={12} key={`members-item-${item.id}`}>
-                        <Link to={item.link}>
+                        <Link to={item.href}>
                           <Avatar src={item.logo} size="small" />
-                          <span className={styles.member}>{item.title}</span>
+                          <span className={styles.member}>{item.member}</span>
                         </Link>
                       </Col>
                     ))
