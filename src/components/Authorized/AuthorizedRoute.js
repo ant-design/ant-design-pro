@@ -8,12 +8,14 @@ class AuthorizedRoute extends React.Component {
       component: Component,
       render,
       authority,
+      currentAuthority,
       redirectPath,
       ...rest
     } = this.props;
     return (
       <Authorized
         authority={authority}
+        currentAuthority={currentAuthority}
         noMatch={
           <Route
             {...rest}

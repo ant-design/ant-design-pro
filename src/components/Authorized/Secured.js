@@ -35,7 +35,7 @@ const checkIsInstantiation = (target) => {
  * @param {string | function | Promise} authority
  * @param {ReactNode} error 非必需参数
  */
-const authorize = (authority, error) => {
+const authorize = (authority, currentAuthority, error) => {
   /**
    * conversion into a class
    * 防止传入字符串时找不到staticContext造成报错
@@ -49,7 +49,12 @@ const authorize = (authority, error) => {
     throw new Error('authority is required');
   }
   return function decideAuthority(targer) {
-    const component = CheckPermissions(authority, targer, classError || Exception403);
+    const component = CheckPermissions(
+      authority,
+      currentAuthority,
+      targer,
+      classError || Exception403
+    );
     return checkIsInstantiation(component);
   };
 };
