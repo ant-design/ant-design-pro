@@ -1,17 +1,21 @@
 import React from 'react';
+import { connect } from 'dva';
 import { routerRedux, Route, Switch } from 'dva/router';
 import { LocaleProvider, Spin } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import dynamic from 'dva/dynamic';
 import { getRouterData } from './common/router';
-import Authorized from './utils/Authorized';
+import { AuthorizedRoute } from './components/Authorized';
 import styles from './index.less';
 
 const { ConnectedRouter } = routerRedux;
-const { AuthorizedRoute } = Authorized;
 dynamic.setDefaultLoadingComponent(() => {
   return <Spin size="large" className={styles.globalSpin} />;
 });
+
+const EnhanceAuthorizedRoute = connect(({ login }) => ({
+  currentAuthority: login.currentAuthority,
+}))(AuthorizedRoute);
 
 function RouterConfig({ history, app }) {
   const routerData = getRouterData(app);
@@ -25,7 +29,7 @@ function RouterConfig({ history, app }) {
             path="/user"
             component={UserLayout}
           />
-          <AuthorizedRoute
+          <EnhanceAuthorizedRoute
             path="/"
             render={props => <BasicLayout {...props} />}
             authority={['admin', 'user']}
