@@ -41,12 +41,12 @@ FastClick.attach(document.body);
 let prevAuthority;
 app._store.subscribe(() => { // eslint-disable-line no-underscore-dangle
   const { login, register } = app._store.getState(); // eslint-disable-line no-underscore-dangle
-  if (prevAuthority !== login.currentAuthority) {
+  if (prevAuthority !== login.currentAuthority && login.currentAuthority !== undefined) {
     prevAuthority = login.currentAuthority;
     setAuthority(login.currentAuthority);
   }
 
-  if (prevAuthority !== register.currentAuthority) {
+  if (prevAuthority !== register.currentAuthority && register.currentAuthority !== undefined) {
     prevAuthority = register.currentAuthority;
     setAuthority(register.currentAuthority);
   }
