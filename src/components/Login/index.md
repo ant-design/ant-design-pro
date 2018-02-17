@@ -2,50 +2,49 @@
 title:
   en-US: Login
   zh-CN: Login
-subtitle: 登录
+subtitle: Login
 cols: 1
 order: 15
 ---
 
-支持多种登录方式切换，内置了几种常见的登录控件，可以灵活组合，也支持和自定义控件配合使用。
+Support multipal common ways of login with built-on controls. You can choose your own combinations and use with your custom controls.
 
 ## API
 
 ### Login
 
-参数 | 说明 | 类型 | 默认值
+Property | Description | Type | Default
 ----|------|-----|------
-defaultActiveKey | 默认激活 tab 面板的 key | String | -
-onTabChange | 切换页签时的回调 | (key) => void | -
-onSubmit | 点击提交时的回调 | (err, values) => void | -
+defaultActiveKey | default key to activate the tab panel | String | -
+onTabChange | callback on changing tabs | (key) => void | -
+onSubmit | callback on submit | (err, values) => void | -
 
 ### Login.Tab
 
-参数 | 说明 | 类型 | 默认值
+Property | Description | Type | Default
 ----|------|-----|------
-key | 对应选项卡的 key | String | -
-tab | 选项卡头显示文字 | ReactNode | -
+key | key of the tab | String | -
+tab | displayed text of the tab | ReactNode | -
 
 ### Login.UserName
 
-参数 | 说明 | 类型 | 默认值
+Property | Description | Type | Default
 ----|------|-----|------
-name | 控件标记，提交数据中同样以此为 key | String | -
-rules | 校验规则，同 Form getFieldDecorator(id, options) 中 [option.rules 的规则](getFieldDecorator(id, options)) | object[] | -
+name | name of the control, also the key of the submitted data | String | -
+rules | validation rules, same with [option.rules 的规则](getFieldDecorator(id, options)) in Form getFieldDecorator(id, options) | object[] | -
 
-除上述属性以外，Login.UserName 还支持 antd.Input 的所有属性，并且自带默认的基础配置，包括 `placeholder` `size` `prefix` 等，这些基础配置均可被覆盖。
+Apart from the above properties, Login.Username also support all properties of antd.Input, together with the default values of basic settings, such as _placeholder_, _size_ and _prefix_. All of these default values can be over-written.
 
-### Login.Password、Login.Mobile 同 Login.UserName
+### Login.Password, Login.Mobile, and Login.UserName
 
-### Login.Captcha 
+### Login.Captcha
 
-参数 | 说明 | 类型 | 默认值
+Property | Description | Type | Default
 ----|------|-----|------
-onGetCaptcha | 点击获取校验码的回调 | () => void | -
+onGetCaptcha | callback on getting a new Captcha image | () => void | -
 
-除上述属性以外，Login.Captcha 支持的属性与 Login.UserName 相同。
+Apart from the above properties, _Login.Captcha_ support the same properties with _Login.UserName_.
 
 ### Login.Submit
 
-支持 antd.Button 的所有属性。
-
+Support all properties of _antd.Button_.
