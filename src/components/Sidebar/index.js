@@ -38,7 +38,7 @@ class Sidebar extends PureComponent {
       themeColor: '#1890ff',
       layout: 'left',
       grid: 'Wide',
-      fixedHeader: true,
+      fixedHeader: false,
       autoHideoHeader: false,
       fixSiderbar: true,
       colorWeak: false,
