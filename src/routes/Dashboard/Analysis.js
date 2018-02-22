@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'dva';
 import {
   Row,
@@ -14,6 +14,7 @@ import {
   Dropdown,
 } from 'antd';
 import numeral from 'numeral';
+import GridContent from '../../layouts/GridContent';
 import {
   ChartCard,
   yuan,
@@ -241,7 +242,7 @@ export default class Analysis extends Component {
     };
 
     return (
-      <Fragment>
+      <GridContent>
         <Row gutter={24}>
           <Col {...topColResponsiveProps}>
             <ChartCard
@@ -482,7 +483,7 @@ export default class Analysis extends Component {
             ))}
           </Tabs>
         </Card>
-      </Fragment>
+      </GridContent>
     );
   }
 }

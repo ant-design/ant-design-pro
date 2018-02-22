@@ -1,4 +1,4 @@
-import { getMeunMatcheys } from './SiderMenu';
+import { getMeunMatcheys } from './BaseMeun';
 
 const meun = [
   '/dashboard',
