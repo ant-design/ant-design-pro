@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: Login
-  zh-CN: Login
+title: Login
 subtitle: Login
 cols: 1
 order: 15

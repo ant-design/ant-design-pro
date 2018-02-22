@@ -1,6 +1,9 @@
 ---
 order: 0
 title: Standard Login
+title:
+  zh-CN: 标准登录
+  en-US: Standard Login
 ---
 
 Support login with username/password and mobile number.
