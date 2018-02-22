@@ -4,6 +4,7 @@ import { Route, routerRedux, Switch, Redirect } from 'dva/router';
 import { Menu } from 'antd';
 import styles from './Info.less';
 import { getRoutes } from '../../utils/utils';
+import GridContent from '../../layouts/GridContent';
 
 const { Item } = Menu;
 
@@ -47,34 +48,36 @@ export default class Info extends Component {
       return '';
     }
     return (
-      <div className={styles.main}>
-        <div className={styles.leftmenu}>
-          <Menu
-            mode="inline"
-            selectedKeys={[this.state.selectKey]}
-            onClick={this.selectKey}
-          >
-            {this.getmenu()}
-          </Menu>
+      <GridContent>
+        <div className={styles.main}>
+          <div className={styles.leftmenu}>
+            <Menu
+              mode="inline"
+              selectedKeys={[this.state.selectKey]}
+              onClick={this.selectKey}
+            >
+              {this.getmenu()}
+            </Menu>
+          </div>
+          <div className={styles.right}>
+            <div className={styles.title}>{this.getRightTitle()}</div>
+            <Switch>
+              {getRoutes(match.path, routerData).map(item => (
+                <Route
+                  key={item.key}
+                  path={item.path}
+                  render={props => (
+                    <item.component {...props} currentUser={currentUser} />
+                  )}
+                  exact={item.exact}
+                />
+              ))}
+              <Redirect exact from="/userinfo" to="/userinfo/base" />
+              <Redirect to="/exception/404" />
+            </Switch>
+          </div>
         </div>
-        <div className={styles.right}>
-          <div className={styles.title}>{this.getRightTitle()}</div>
-          <Switch>
-            {getRoutes(match.path, routerData).map(item => (
-              <Route
-                key={item.key}
-                path={item.path}
-                render={props => (
-                  <item.component {...props} currentUser={currentUser} />
-                )}
-                exact={item.exact}
-              />
-            ))}
-            <Redirect exact from="/userinfo" to="/userinfo/base" />
-            <Redirect to="/exception/404" />
-          </Switch>
-        </div>
-      </div>
+      </GridContent>
     );
   }
 }

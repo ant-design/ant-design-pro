@@ -1,10 +1,10 @@
-@import "~antd/lib/style/themes/default.less";
+@import '~antd/lib/style/themes/default.less';
 
 .header {
   height: 64px;
   padding: 0 12px 0 0;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   position: relative;
 }
 
@@ -42,7 +42,7 @@ i.trigger {
   font-size: 20px;
   line-height: 64px;
   cursor: pointer;
-  transition: all .3s, padding 0s;
+  transition: all 0.3s, padding 0s;
   padding: 0 24px;
   &:hover {
     background: @primary-1;
@@ -56,7 +56,7 @@ i.trigger {
     cursor: pointer;
     padding: 0 12px;
     display: inline-block;
-    transition: all .3s;
+    transition: all 0.3s;
     height: 100%;
     > i {
       font-size: 16px;
@@ -69,8 +69,7 @@ i.trigger {
     }
   }
   .search {
-    padding: 0;
-    margin: 0 12px;
+    padding: 0 12px;
     &:hover {
       background: transparent;
     }
@@ -79,8 +78,25 @@ i.trigger {
     .avatar {
       margin: 20px 8px 20px 0;
       color: @primary-color;
-      background: rgba(255, 255, 255, .85);
+      background: rgba(255, 255, 255, 0.85);
       vertical-align: middle;
+    }
+  }
+}
+
+.white {
+  height: 64px;
+  .action {
+    color: rgba(255, 255, 255, 0.85);
+    > i {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    &:hover,
+    &:global(.ant-popover-open) {
+      background: @primary-color;
+    }
+    :global(.ant-badge) {
+      color: rgba(255, 255, 255, 0.85);
     }
   }
 }

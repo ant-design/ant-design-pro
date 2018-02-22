@@ -10,6 +10,7 @@ import styles from './UserCenter.less';
 import stylesArticles from './List/Articles.less';
 import stylesApplications from './List/Applications.less';
 import stylesProjects from './List/Projects.less';
+import GridContent from '../layouts/GridContent';
 
 @connect(({ list, loading, user, project }) => ({
   list,
@@ -220,74 +221,76 @@ export default class UserCenter extends PureComponent {
     };
 
     return (
-      <div className={styles.userCenter}>
-        <Row gutter={24}>
-          <Col lg={7} md={24}>
-            <Card
-              bordered={false}
-              style={{ marginBottom: 24 }}
-              loading={currentUserLoading}
-            >
-              {
-                currentUser && Object.keys(currentUser).length ?
-                  (
-                    <div>
-                      <div className={styles.avatarHolder}>
-                        <img alt="" src={currentUser.avatar} />
-                        <div className={styles.name}>{currentUser.name}</div>
-                        <div>{currentUser.signature}</div>
+      <GridContent>
+        <div className={styles.userCenter}>
+          <Row gutter={24}>
+            <Col lg={7} md={24}>
+              <Card
+                bordered={false}
+                style={{ marginBottom: 24 }}
+                loading={currentUserLoading}
+              >
+                {
+                  currentUser && Object.keys(currentUser).length ?
+                    (
+                      <div>
+                        <div className={styles.avatarHolder}>
+                          <img alt="" src={currentUser.avatar} />
+                          <div className={styles.name}>{currentUser.name}</div>
+                          <div>{currentUser.signature}</div>
+                        </div>
+                        <div className={styles.detail}>
+                          <p><i className={styles.title} />{currentUser.title}</p>
+                          <p><i className={styles.group} />{currentUser.group}</p>
+                          <p><i className={styles.address} />
+                            {currentUser.geographic.province.label}
+                            {currentUser.geographic.city.label}
+                          </p>
+                        </div>
+                        <Divider dashed />
+                        <div className={styles.tags}>
+                          <div className={styles.tagsTitle}>标签</div>
+                          {
+                            currentUser.tags.map(item => <Tag key={item.key}>{item.label}</Tag>)
+                          }
+                          <Tag style={{ background: '#fff', borderStyle: 'dashed' }}>
+                            <Icon type="plus" />
+                          </Tag>
+                        </div>
+                        <Divider dashed />
+                        <div className={styles.team}>
+                          <div className={styles.teamTitle}>团队</div>
+                          <Spin spinning={projectLoading}>
+                            <Row gutter={36}>
+                              {
+                                notice.map(item => (
+                                  <Col key={item.id} className={styles.item} lg={24} xl={12}>
+                                    <Avatar size="small" src={item.logo} />
+                                    {item.member}
+                                  </Col>
+                                ))
+                              }
+                            </Row>
+                          </Spin>
+                        </div>
                       </div>
-                      <div className={styles.detail}>
-                        <p><i className={styles.title} />{currentUser.title}</p>
-                        <p><i className={styles.group} />{currentUser.group}</p>
-                        <p><i className={styles.address} />
-                          {currentUser.geographic.province.label}
-                          {currentUser.geographic.city.label}
-                        </p>
-                      </div>
-                      <Divider dashed />
-                      <div className={styles.tags}>
-                        <div className={styles.tagsTitle}>标签</div>
-                        {
-                          currentUser.tags.map(item => <Tag key={item.key}>{item.label}</Tag>)
-                        }
-                        <Tag style={{ background: '#fff', borderStyle: 'dashed' }}>
-                          <Icon type="plus" />
-                        </Tag>
-                      </div>
-                      <Divider dashed />
-                      <div className={styles.team}>
-                        <div className={styles.teamTitle}>团队</div>
-                        <Spin spinning={projectLoading}>
-                          <Row gutter={36}>
-                            {
-                              notice.map(item => (
-                                <Col key={item.id} className={styles.item} lg={24} xl={12}>
-                                  <Avatar size="small" src={item.logo} />
-                                  {item.member}
-                                </Col>
-                              ))
-                            }
-                          </Row>
-                        </Spin>
-                      </div>
-                    </div>
-                  ) : 'loading...'
-              }
-            </Card>
-          </Col>
-          <Col lg={17} md={24}>
-            <Card
-              className={styles.tabsCard}
-              bordered={false}
-              tabList={operationTabList}
-              onTabChange={this.onTabChange}
-            >
-              {contentMap[this.state.key]}
-            </Card>
-          </Col>
-        </Row>
-      </div>
+                    ) : 'loading...'
+                }
+              </Card>
+            </Col>
+            <Col lg={17} md={24}>
+              <Card
+                className={styles.tabsCard}
+                bordered={false}
+                tabList={operationTabList}
+                onTabChange={this.onTabChange}
+              >
+                {contentMap[this.state.key]}
+              </Card>
+            </Col>
+          </Row>
+        </div>
+      </GridContent>
     );
   }
 }

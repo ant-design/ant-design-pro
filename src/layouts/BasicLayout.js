@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import { enquireScreen } from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
+import TopNavHeader from '../components/TopNavHeader';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
@@ -153,26 +154,45 @@ class BasicLayout extends React.PureComponent {
     }
   }
   render() {
+    const isFluid = this.props.layout === 'fluid';
     const {
       currentUser, collapsed, fetchingNotices, notices, routerData, match, location,
     } = this.props;
     const bashRedirect = this.getBashRedirect();
     const layout = (
       <Layout>
-        <SiderMenu
-          logo={logo}
+        {isFluid && !isMobile ? null : (
+          <SiderMenu
+            logo={logo}
           // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
           // If you do not have the Authorized parameter
           // you will be forced to jump to the 403 interface without permission
-          Authorized={Authorized}
-          menuData={getMenuData()}
-          collapsed={collapsed}
-          location={location}
-          isMobile={this.state.isMobile}
-          onCollapse={this.handleMenuCollapse}
-        />
+            Authorized={Authorized}
+            menuData={getMenuData()}
+            collapsed={collapsed}
+            location={location}
+            isMobile={this.state.isMobile}
+            onCollapse={this.handleMenuCollapse}
+          />
+        )}
         <Layout>
           <Header style={{ padding: 0 }}>
+            {isFluid && !isMobile ? (
+              <TopNavHeader
+                logo={logo}
+                mode="horizontal"
+                location={location}
+                menuData={getMenuData()}
+                isMobile={this.state.isMobile}
+                onNoticeClear={this.handleNoticeClear}
+                onCollapse={this.handleMenuCollapse}
+                onMenuClick={this.handleMenuClick}
+                onNoticeVisibleChange={this.handleNoticeVisibleChange}
+                notices={notices}
+                currentUser={currentUser}
+                fetchingNotices={fetchingNotices}
+              />
+          ) : (
             <GlobalHeader
               logo={logo}
               currentUser={currentUser}
@@ -185,6 +205,7 @@ class BasicLayout extends React.PureComponent {
               onMenuClick={this.handleMenuClick}
               onNoticeVisibleChange={this.handleNoticeVisibleChange}
             />
+                    )}
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <Switch>
@@ -253,6 +274,7 @@ class BasicLayout extends React.PureComponent {
 export default connect(({ user, global, loading }) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
+  layout: global.layout,
   fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
 }))(BasicLayout);

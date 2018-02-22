@@ -5,6 +5,7 @@ export default {
 
   state: {
     collapsed: false,
+    layout: 'fluid',
     notices: [],
   },
 
@@ -38,6 +39,12 @@ export default {
       return {
         ...state,
         collapsed: payload,
+      };
+    },
+    changeLayout(state, { payload }) {
+      return {
+        ...state,
+        layout: payload,
       };
     },
     saveNotices(state, { payload }) {
