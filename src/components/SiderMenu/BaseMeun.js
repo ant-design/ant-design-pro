@@ -161,7 +161,6 @@ export default class BaseMeun extends PureComponent {
     return (
       <Menu
         key="Menu"
-        theme="dark"
         mode="inline"
         onOpenChange={this.props.handleOpenChange}
         selectedKeys={selectedKeys}

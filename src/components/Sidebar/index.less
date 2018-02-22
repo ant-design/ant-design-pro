@@ -1,0 +1,40 @@
+.sidebar {
+  position: fixed;
+  right: -300px;
+  top: 150px;
+  transition: 0.3s;
+  display: flex;
+  z-index: 9;
+  &.show {
+    right: 0;
+  }
+  .mini_bar {
+    width: 50px;
+    height: 52px;
+    background-color: white;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    box-shadow: -3px 0 10px 3px rgba(183, 183, 183, 0.3);
+    line-height: 52px;
+    text-align: center;
+    font-size: 24px;
+  }
+  .content {
+    width: 300px;
+    background: white;
+    box-shadow: -3px 0 10px 3px rgba(183, 183, 183, 0.3);
+  }
+  .color_block {
+    width: 40px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 4px;
+    margin: 4px;
+  }
+  .color_block_title {
+    line-height: 30px;
+    display: inline-block;
+    margin-left: 5px;
+  }
+}

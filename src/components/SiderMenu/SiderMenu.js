@@ -5,7 +5,6 @@ import styles from './index.less';
 import BaseMeun, { getMeunMatcheys } from './BaseMeun';
 import { urlToList } from '../utils/pathTools';
 
-
 const { Sider } = Layout;
 
 export default class SiderMenu extends PureComponent {
@@ -60,7 +59,7 @@ export default class SiderMenu extends PureComponent {
     });
   };
   render() {
-    const { logo, collapsed, onCollapse } = this.props;
+    const { logo, collapsed, onCollapse, theme } = this.props;
     const { openKeys } = this.state;
     return (
       <Sider
@@ -70,7 +69,7 @@ export default class SiderMenu extends PureComponent {
         breakpoint="lg"
         onCollapse={onCollapse}
         width={256}
-        className={styles.sider}
+        className={`${styles.sider} ${theme === 'ligth' ? styles.ligth : ''}`}
       >
         <div className={styles.logo} key="logo">
           <Link to="/">
@@ -81,7 +80,6 @@ export default class SiderMenu extends PureComponent {
         <BaseMeun
           {...this.props}
           key="Menu"
-          theme="dark"
           mode="inline"
           handleOpenChange={this.handleOpenChange}
           openKeys={collapsed ? [] : openKeys}
