@@ -52,21 +52,6 @@ class BasicLayout extends React.PureComponent {
       breadcrumbNameMap: routerData,
     };
   }
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'user/fetchCurrent',
-    });
-    const urlParams = new URL(window.location.href);
-    const settingString = urlParams.searchParams.get('setting');
-    if (settingString) {
-      const setting = {};
-      settingString.split(';').forEach((keyValue) => {
-        const [key, value] = keyValue.split(':');
-        setting[key] = value;
-      });
-      this.changeSetting(setting);
-    }
-  }
   getPageTitle() {
     const { routerData, location } = this.props;
     const { pathname } = location;

@@ -8,7 +8,7 @@ export default {
     layout: 'left',
     grid: 'Wide',
     fixedHeader: false,
-    autoHideoHeader: false,
+    autoHideHeader: false,
     fixSiderbar: false,
     colorWeak: false,
   },

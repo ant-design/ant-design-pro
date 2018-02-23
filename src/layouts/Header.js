@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Layout, message } from 'antd';
+import Animate from 'rc-animate';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import GlobalHeader from '../components/GlobalHeader';
@@ -10,6 +11,17 @@ import Authorized from '../utils/Authorized';
 const { Header } = Layout;
 
 class HeaderView extends PureComponent {
+  state = {
+    visible: true,
+  };
+  componentDidMount() {
+    document.getElementById('root').addEventListener('scroll', this.handScroll);
+  }
+  componentWillUnmount() {
+    document
+      .getElementById('root')
+      .removeEventListener('scroll', this.handScroll);
+  }
   getHeadWidth = () => {
     if (
       !this.props.fixedHeader ||
@@ -58,6 +70,28 @@ class HeaderView extends PureComponent {
       });
     }
   };
+  handScroll = () => {
+    if (!this.props.autoHideHeader) {
+      return;
+    }
+    const { scrollTop } = document.getElementById('root');
+    if (!this.ticking) {
+      this.ticking = false;
+      requestAnimationFrame(() => {
+        if (scrollTop > 400 && this.state.visible) {
+          this.setState({
+            visible: false,
+          });
+        }
+        if (scrollTop < 400 && !this.state.visible) {
+          this.setState({
+            visible: true,
+          });
+        }
+        this.ticking = false;
+      });
+    }
+  };
   render() {
     const {
       logo,
@@ -68,7 +102,7 @@ class HeaderView extends PureComponent {
       fixedHeader,
     } = this.props;
     const isTop = layout === 'top';
-    return (
+    const HeaderDom = this.state.visible ? (
       <Header
         style={{ padding: 0, width: this.getHeadWidth() }}
         className={fixedHeader ? styles.fixedHeader : ''}
@@ -97,6 +131,11 @@ class HeaderView extends PureComponent {
           />
         )}
       </Header>
+    ) : null;
+    return (
+      <Animate component="" transitionName="fade">
+        {HeaderDom}
+      </Animate>
     );
   }
 }
@@ -110,4 +149,5 @@ export default connect(({ user, global, setting, loading }) => ({
   silderTheme: setting.silderTheme,
   fixedHeader: setting.fixedHeader,
   fixSiderbar: setting.fixSiderbar,
+  autoHideHeader: setting.autoHideHeader,
 }))(HeaderView);
