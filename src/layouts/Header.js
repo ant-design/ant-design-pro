@@ -6,6 +6,7 @@ import GlobalHeader from '../components/GlobalHeader';
 import TopNavHeader from '../components/TopNavHeader';
 import { getMenuData } from '../common/menu';
 import styles from './Header.less';
+import Authorized from '../utils/Authorized';
 
 const { Header } = Layout;
 
@@ -80,6 +81,7 @@ class HeaderView extends PureComponent {
             theme={silderTheme}
             mode="horizontal"
             location={location}
+            Authorized={Authorized}
             menuData={getMenuData()}
             isMobile={isMobile}
             onNoticeClear={this.handleNoticeClear}
