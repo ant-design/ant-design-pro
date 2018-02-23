@@ -92,12 +92,15 @@ class Sidebar extends PureComponent {
         action: [
           <Switch
             checked={this.state.fixSiderbar}
-            onChange={checked => this.changeSetting('fixSiderbar', checked)}
+            onChange={this.fixSiderbar}
           />,
         ],
       },
     ].filter(item => item.isShow);
   };
+  fixSiderbar = (checked) => {
+    this.changeSetting('fixSiderbar', checked);
+  }
   changeSetting = (key, value) => {
     const nextState = {};
     nextState[key] = value;

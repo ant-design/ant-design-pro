@@ -4,7 +4,7 @@ import DrawerMenu from 'rc-drawer-menu';
 import SiderMenu from './SiderMenu';
 
 export default props => (
-  props.isMobile ? (
+  props.isMobile || props.fixSiderbar ? (
     <DrawerMenu
       parent={null}
       level={null}

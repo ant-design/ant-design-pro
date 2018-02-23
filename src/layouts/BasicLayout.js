@@ -6,12 +6,10 @@ import { connect } from 'dva';
 import { Route, Redirect, Switch } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
-import { enquireScreen } from 'enquire-js';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
-import { getMenuData } from '../common/menu';
 import Sidebar from '../components/Sidebar';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
@@ -21,25 +19,6 @@ const { Content } = Layout;
 const { AuthorizedRoute } = Authorized;
 
 const RightSidebar = connect(({ setting }) => ({ ...setting }))(Sidebar);
-
-/**
- * 根据菜单取得重定向地址.
- */
-const redirectData = [];
-const getRedirect = (item) => {
-  if (item && item.children) {
-    if (item.children[0] && item.children[0].path) {
-      redirectData.push({
-        from: `${item.path}`,
-        to: `${item.children[0].path}`,
-      });
-      item.children.forEach((children) => {
-        getRedirect(children);
-      });
-    }
-  }
-};
-getMenuData().forEach(getRedirect);
 
 const query = {
   'screen-xs': {
@@ -61,19 +40,10 @@ const query = {
     minWidth: 1200,
   },
 };
-
-let isMobile;
-enquireScreen((b) => {
-  isMobile = b;
-});
-
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
-  };
-  state = {
-    isMobile,
   };
   getChildContext() {
     const { location, routerData } = this.props;
@@ -83,11 +53,6 @@ class BasicLayout extends React.PureComponent {
     };
   }
   componentDidMount() {
-    enquireScreen((mobile) => {
-      this.setState({
-        isMobile: mobile,
-      });
-    });
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
@@ -139,36 +104,42 @@ class BasicLayout extends React.PureComponent {
     });
   };
   render() {
-    const { collapsed, routerData, fixedHeader, match, location } = this.props;
+    const {
+      isMobile,
+      redirectData,
+      routerData,
+      fixedHeader,
+      match,
+    } = this.props;
     const isTop = this.props.layout === 'top';
     const bashRedirect = this.getBashRedirect();
+    const myRedirectData = redirectData || [];
     const layout = (
       <Layout>
         {isTop && !isMobile ? null : (
           <SiderMenu
             logo={logo}
-            // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
-            // If you do not have the Authorized parameter
-            // you will be forced to jump to the 403 interface without permission
             Authorized={Authorized}
-            menuData={getMenuData()}
-            collapsed={collapsed}
             theme={this.props.silderTheme}
-            location={location}
-            isMobile={this.state.isMobile}
             onCollapse={this.handleMenuCollapse}
+            {...this.props}
           />
         )}
         <Layout>
           <Header
             handleMenuCollapse={this.handleMenuCollapse}
             logo={logo}
-            isMobile={this.state.isMobile}
-            location={location}
+            {...this.props}
           />
-          <Content style={{ margin: '24px 24px 0', height: '100%', paddingTop: fixedHeader ? 64 : 0 }}>
+          <Content
+            style={{
+              margin: '24px 24px 0',
+              height: '100%',
+              paddingTop: fixedHeader ? 64 : 0,
+            }}
+          >
             <Switch>
-              {redirectData.map(item => (
+              {myRedirectData.map(item => (
                 <Redirect key={item.from} exact from={item.from} to={item.to} />
               ))}
               {getRoutes(match.path, routerData).map(item => (
@@ -208,6 +179,5 @@ class BasicLayout extends React.PureComponent {
 export default connect(({ global, setting }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
-  silderTheme: setting.silderTheme,
-  fixedHeader: setting.fixedHeader,
+  ...setting,
 }))(BasicLayout);

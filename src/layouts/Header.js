@@ -4,7 +4,6 @@ import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import GlobalHeader from '../components/GlobalHeader';
 import TopNavHeader from '../components/TopNavHeader';
-import { getMenuData } from '../common/menu';
 import styles from './Header.less';
 import Authorized from '../utils/Authorized';
 
@@ -12,7 +11,11 @@ const { Header } = Layout;
 
 class HeaderView extends PureComponent {
   getHeadWidth = () => {
-    if (!this.props.fixedHeader || this.props.layout === 'top') {
+    if (
+      !this.props.fixedHeader ||
+      this.props.layout === 'top' ||
+      this.props.fixSiderbar
+    ) {
       return '100%';
     }
     if (!this.props.collapsed) {
@@ -57,13 +60,8 @@ class HeaderView extends PureComponent {
   };
   render() {
     const {
-      currentUser,
       logo,
       isMobile,
-      collapsed,
-      fetchingNotices,
-      notices,
-      location,
       handleMenuCollapse,
       silderTheme,
       layout,
@@ -80,30 +78,22 @@ class HeaderView extends PureComponent {
             logo={logo}
             theme={silderTheme}
             mode="horizontal"
-            location={location}
             Authorized={Authorized}
-            menuData={getMenuData()}
             isMobile={isMobile}
             onNoticeClear={this.handleNoticeClear}
             onCollapse={handleMenuCollapse}
             onMenuClick={this.handleMenuClick}
             onNoticeVisibleChange={this.handleNoticeVisibleChange}
-            notices={notices}
-            currentUser={currentUser}
-            fetchingNotices={fetchingNotices}
+            {...this.props}
           />
         ) : (
           <GlobalHeader
             logo={logo}
-            currentUser={currentUser}
-            fetchingNotices={fetchingNotices}
-            notices={notices}
-            collapsed={collapsed}
-            isMobile={isMobile}
             onNoticeClear={this.handleNoticeClear}
             onCollapse={handleMenuCollapse}
             onMenuClick={this.handleMenuClick}
             onNoticeVisibleChange={this.handleNoticeVisibleChange}
+            {...this.props}
           />
         )}
       </Header>
@@ -119,4 +109,5 @@ export default connect(({ user, global, setting, loading }) => ({
   layout: setting.layout,
   silderTheme: setting.silderTheme,
   fixedHeader: setting.fixedHeader,
+  fixSiderbar: setting.fixSiderbar,
 }))(HeaderView);
