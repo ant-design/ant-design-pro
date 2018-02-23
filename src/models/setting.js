@@ -9,11 +9,20 @@ export default {
     grid: 'Wide',
     fixedHeader: false,
     autoHideoHeader: false,
-    fixSiderbar: true,
+    fixSiderbar: false,
     colorWeak: false,
   },
   reducers: {
     changeSetting(state, { payload }) {
+      const urlParams = new URL(window.location.href);
+      let urlParamsString = '';
+      Object.keys(payload).forEach((key) => {
+        if (payload[key] && state[key] !== undefined && key !== 'collapse') {
+          urlParamsString += `${key}:${payload[key]};`;
+        }
+      });
+      urlParams.searchParams.set('setting', urlParamsString);
+      window.history.replaceState(null, 'setting', urlParams.href);
       return {
         ...state,
         ...payload,

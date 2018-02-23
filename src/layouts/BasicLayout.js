@@ -20,7 +20,7 @@ import Header from './Header';
 const { Content } = Layout;
 const { AuthorizedRoute } = Authorized;
 
-const RightSidebar = connect(setting => ({ ...setting }))(Sidebar);
+const RightSidebar = connect(({ setting }) => ({ ...setting }))(Sidebar);
 
 /**
  * 根据菜单取得重定向地址.
@@ -91,6 +91,16 @@ class BasicLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
+    const urlParams = new URL(window.location.href);
+    const settingString = urlParams.searchParams.get('setting');
+    if (settingString) {
+      const setting = {};
+      settingString.split(';').forEach((keyValue) => {
+        const [key, value] = keyValue.split(':');
+        setting[key] = value;
+      });
+      this.changeSetting(setting);
+    }
   }
   getPageTitle() {
     const { routerData, location } = this.props;

@@ -32,7 +32,7 @@ const Body = ({ children, title }) => (
 class Sidebar extends PureComponent {
   constructor(props) {
     super(props);
-    const defaultstate = {
+    this.defaultstate = {
       collapse: false,
       silderTheme: 'dark',
       themeColor: '#1890ff',
@@ -40,11 +40,11 @@ class Sidebar extends PureComponent {
       grid: 'Wide',
       fixedHeader: false,
       autoHideoHeader: false,
-      fixSiderbar: true,
+      fixSiderbar: false,
       colorWeak: false,
     };
     const propsState = this.propsToState(props);
-    this.state = { ...defaultstate, ...propsState };
+    this.state = { ...this.defaultstate, ...propsState };
   }
   componentWillReceiveProps(props) {
     this.setState(this.propsToState(props));
@@ -117,21 +117,19 @@ class Sidebar extends PureComponent {
   propsToState = (props) => {
     const nextState = {};
     Object.keys(props).forEach((key) => {
-      if (props[key]) {
+      if (props[key] && this.defaultstate[key] !== undefined) {
         nextState[key] = props[key];
       }
     });
     return nextState;
   };
   togglerContent = () => {
-    if (!this.props.collapse) {
-      this.setState(
-        {
-          collapse: !this.state.collapse,
-        },
-        () => this.props.onChage && this.props.onChage(this.state.collapse),
-      );
-    }
+    this.setState(
+      {
+        collapse: !this.state.collapse,
+      },
+      () => this.props.onChage && this.props.onChage(this.state.collapse),
+    );
   };
   render() {
     const radioStyle = {
