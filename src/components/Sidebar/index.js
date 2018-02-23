@@ -78,7 +78,7 @@ class Sidebar extends PureComponent {
       },
       {
         title: '下滑隐藏 Header',
-        isShow: layout === 'left',
+        isShow: true,
         action: [
           <Switch
             checked={this.state.autoHideHeader}
