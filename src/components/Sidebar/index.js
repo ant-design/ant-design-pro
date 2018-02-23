@@ -124,12 +124,7 @@ class Sidebar extends PureComponent {
     return nextState;
   };
   togglerContent = () => {
-    this.setState(
-      {
-        collapse: !this.state.collapse,
-      },
-      () => this.props.onChage && this.props.onChage(this.state.collapse),
-    );
+    this.changeSetting('collapse', !this.state.collapse);
   };
   render() {
     const radioStyle = {
