@@ -12,7 +12,11 @@ export default class TopNavHeader extends PureComponent {
           this.props.theme === 'ligth' ? styles.ligth : ''
         }`}
       >
-        <div className={styles.main}>
+        <div
+          className={`${styles.main} ${
+            this.props.grid === 'Wide' ? styles.wide : ''
+          }`}
+        >
           <div className={styles.left}>
             <div className={styles.logo} key="logo">
               <Link to="/">

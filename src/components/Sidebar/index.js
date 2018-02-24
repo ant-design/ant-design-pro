@@ -71,7 +71,7 @@ class Sidebar extends PureComponent {
         isShow: true,
         action: [
           <Switch
-            checked={this.state.fixedHeader}
+            checked={!!this.state.fixedHeader}
             onChange={checked => this.changeSetting('fixedHeader', checked)}
           />,
         ],
@@ -81,7 +81,7 @@ class Sidebar extends PureComponent {
         isShow: true,
         action: [
           <Switch
-            checked={this.state.autoHideHeader}
+            checked={!!this.state.autoHideHeader}
             onChange={checked => this.changeSetting('autoHideHeader', checked)}
           />,
         ],
@@ -91,7 +91,7 @@ class Sidebar extends PureComponent {
         isShow: layout === 'left',
         action: [
           <Switch
-            checked={this.state.fixSiderbar}
+            checked={!!this.state.fixSiderbar}
             onChange={this.fixSiderbar}
           />,
         ],
