@@ -130,20 +130,31 @@ function getRenderArr(routes) {
  * @param {string} path
  * @param {routerData} routerData
  */
+
 export function getRoutes(path, routerData) {
-  let routes = Object.keys(routerData).filter(routePath =>
-    routePath.indexOf(path) === 0 && routePath !== path);
+  let pathReg = new RegExp('^('+ path.replace(/\:[^\/]+/gi,'[^\/]+') +')(\/?.*)?$');
+  let routes = Object.keys(routerData).filter(routePath => (pathReg.test(routePath) && RegExp.$2 != '') );
   // Replace path to '' eg. path='user' /user/name => name
-  routes = routes.map(item => item.replace(path, ''));
+  let pathes = [];
+  routes = routes.map(item => {
+    if ( pathReg.test(item) ) {
+      pathes.push(RegExp.$1);
+      return RegExp.$2;
+    }
+    else {
+      pathes.push('');
+      return item;
+    }
+  });
   // Get the route to be rendered to remove the deep rendering
   const renderArr = getRenderArr(routes);
   // Conversion and stitching parameters
-  const renderRoutes = renderArr.map((item) => {
+  const renderRoutes = renderArr.map((item, i) => {
     const exact = !routes.some(route => route !== item && getRelation(route, item) === 1);
     return {
-      ...routerData[`${path}${item}`],
-      key: `${path}${item}`,
-      path: `${path}${item}`,
+      ...routerData[`${pathes[i]}${item}`],
+      key: `${pathes[i]}${item}`,
+      path: `${pathes[i]}${item}`,
       exact,
     };
   });
