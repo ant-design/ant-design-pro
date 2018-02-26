@@ -4,13 +4,13 @@ export default {
   state: {
     collapse: false,
     silderTheme: 'dark',
-    themeColor: '#1890ff',
+    themeColor: '#1890FF',
     layout: 'left',
     grid: 'Wide',
     fixedHeader: false,
     autoHideHeader: false,
     fixSiderbar: false,
-    colorWeak: false,
+    colorWeak: 'close',
   },
   reducers: {
     changeSetting(state, { payload }) {

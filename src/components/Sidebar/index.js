@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Icon, Select, List, Switch, Divider, Radio } from 'antd';
+import { Select, List, Switch, Divider, Radio } from 'antd';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import LayoutSeting from './LayoutSetting';
@@ -18,13 +18,14 @@ const ColorBlock = ({ color, title }) => (
   </Fragment>
 );
 
-const Body = ({ children, title }) => (
+const Body = ({ children, title, style }) => (
   <div
     style={{
-      padding: 24,
+      padding: 15,
+      ...style,
     }}
   >
-    <h3>{title}</h3>
+    <h3 className={styles.bodyTitle}>{title}</h3>
     {children}
   </div>
 );
@@ -35,13 +36,13 @@ class Sidebar extends PureComponent {
     this.defaultstate = {
       collapse: false,
       silderTheme: 'dark',
-      themeColor: '#1890ff',
+      themeColor: '#1890FF',
       layout: 'left',
       grid: 'Wide',
       fixedHeader: false,
       autoHideHeader: false,
       fixSiderbar: false,
-      colorWeak: false,
+      colorWeak: 'close',
     };
     const propsState = this.propsToState(props);
     this.state = { ...this.defaultstate, ...propsState };
@@ -77,7 +78,7 @@ class Sidebar extends PureComponent {
         ],
       },
       {
-        title: '下滑隐藏 Header',
+        title: '↳ 下滑时隐藏 Header',
         isShow: true,
         action: [
           <Switch
@@ -100,7 +101,7 @@ class Sidebar extends PureComponent {
   };
   fixSiderbar = (checked) => {
     this.changeSetting('fixSiderbar', checked);
-  }
+  };
   changeSetting = (key, value) => {
     const nextState = {};
     nextState[key] = value;
@@ -140,10 +141,18 @@ class Sidebar extends PureComponent {
         }`}
       >
         <div className={styles.mini_bar} onClick={this.togglerContent}>
-          <Icon type="book" />
+          <img
+            alt="logo"
+            src="https://gw.alipayobjects.com/zos/rmsportal/ApQgLmeZDNJMomKNvavq.svg"
+          />
         </div>
         <div className={styles.content}>
-          <Body title="整体风格设置">
+          <Body
+            title="整体风格设置"
+            style={{
+              paddingBottom: 10,
+            }}
+          >
             <RadioGroup
               onChange={({ target }) =>
                 this.changeSetting('silderTheme', target.value)
@@ -151,10 +160,10 @@ class Sidebar extends PureComponent {
               value={this.state.silderTheme}
             >
               <Radio style={radioStyle} value="dark">
-                <ColorBlock color="#001529" title="深色导航" />
+                <ColorBlock color="#002140" title="深色导航" />
               </Radio>
               <Radio style={radioStyle} value="ligth">
-                <ColorBlock color="#ddd" title="浅色导航" />
+                <ColorBlock color="#E9E9E9" title="浅色导航" />
               </Radio>
             </RadioGroup>
             <ThemeColor
@@ -184,12 +193,14 @@ class Sidebar extends PureComponent {
                 {
                   title: '色弱模式',
                   action: [
-                    <Switch
-                      checked={this.state.colorWeak}
-                      onChange={checked =>
-                        this.changeSetting('colorWeak', checked)
-                      }
-                    />,
+                    <Select
+                      value={this.state.colorWeak}
+                      onSelect={value => this.changeSetting('colorWeak', value)}
+                      style={{ width: 120 }}
+                    >
+                      <Select.Option value="open">打开</Select.Option>
+                      <Select.Option value="colse">关闭</Select.Option>
+                    </Select>,
                   ],
                 },
               ]}
