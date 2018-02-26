@@ -177,14 +177,17 @@ export default class SiderMenu extends PureComponent {
     }
     return ItemDom;
   };
+  isMainMenu = (key) => {
+    return this.menus.some(
+      item =>
+        key && (item.key === key || item.path === key),
+    );
+  }
   handleOpenChange = (openKeys) => {
     const lastOpenKey = openKeys[openKeys.length - 1];
-    const isMainMenu = this.menus.some(
-      item =>
-        lastOpenKey && (item.key === lastOpenKey || item.path === lastOpenKey),
-    );
+    const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({
-      openKeys: isMainMenu ? [lastOpenKey] : [...openKeys],
+      openKeys: moreThanOne ? [lastOpenKey] : [...openKeys],
     });
   };
   render() {
