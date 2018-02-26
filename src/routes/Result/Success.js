@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Button, Row, Col, Icon, Steps, Card } from 'antd';
 import Result from '../../components/Result';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -24,7 +24,7 @@ const desc2 = (
 );
 
 const extra = (
-  <div>
+  <Fragment>
     <div style={{ fontSize: 16, color: 'rgba(0, 0, 0, 0.85)', fontWeight: '500', marginBottom: 20 }}>
       项目名称
     </div>
@@ -48,15 +48,15 @@ const extra = (
       <Step title={<span style={{ fontSize: 14 }}>财务复核</span>} />
       <Step title={<span style={{ fontSize: 14 }}>完成</span>} />
     </Steps>
-  </div>
+  </Fragment>
 );
 
 const actions = (
-  <div>
+  <Fragment>
     <Button type="primary">返回列表</Button>
     <Button>查看项目</Button>
     <Button>打 印</Button>
-  </div>
+  </Fragment>
 );
 
 export default () => (

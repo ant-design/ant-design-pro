@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import { connect } from 'dva';
@@ -23,7 +23,7 @@ const menu = (
 );
 
 const action = (
-  <div>
+  <Fragment>
     <ButtonGroup>
       <Button>操作</Button>
       <Button>操作</Button>
@@ -32,7 +32,7 @@ const action = (
       </Dropdown>
     </ButtonGroup>
     <Button type="primary">主操作</Button>
-  </div>
+  </Fragment>
 );
 
 const extra = (
@@ -69,20 +69,20 @@ const tabList = [{
 
 const desc1 = (
   <div className={classNames(styles.textSecondary, styles.stepDescription)}>
-    <div>
+    <Fragment>
       曲丽丽
       <Icon type="dingding-o" style={{ marginLeft: 8 }} />
-    </div>
+    </Fragment>
     <div>2016-12-12 12:32</div>
   </div>
 );
 
 const desc2 = (
   <div className={styles.stepDescription}>
-    <div>
+    <Fragment>
       周毛毛
       <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
-    </div>
+    </Fragment>
     <div><a href="">催一下</a></div>
   </div>
 );

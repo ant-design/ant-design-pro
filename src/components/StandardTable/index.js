@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { Table, Alert } from 'antd';
 import styles from './index.less';
 
@@ -84,7 +84,7 @@ class StandardTable extends PureComponent {
         <div className={styles.tableAlert}>
           <Alert
             message={(
-              <div>
+              <Fragment>
                 已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
                 {
                   needTotalList.map(item => (
@@ -97,7 +97,7 @@ class StandardTable extends PureComponent {
                   )
                 }
                 <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>清空</a>
-              </div>
+              </Fragment>
             )}
             type="info"
             showIcon

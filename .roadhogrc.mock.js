@@ -2,7 +2,6 @@ import mockjs from 'mockjs';
 import { getRule, postRule } from './mock/rule';
 import { getActivities, getNotice, getFakeList, postFakeList } from './mock/api';
 import { getFakeChartData } from './mock/chart';
-import { imgMap } from './mock/utils';
 import { getProfileBasicData } from './mock/profile';
 import { getProfileAdvancedData } from './mock/profile';
 import { getNotices } from './mock/notices';

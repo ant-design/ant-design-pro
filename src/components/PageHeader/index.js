@@ -7,8 +7,7 @@ import styles from './index.less';
 
 
 const { TabPane } = Tabs;
-
-function getBreadcrumb(breadcrumbNameMap, url) {
+export function getBreadcrumb(breadcrumbNameMap, url) {
   let breadcrumb = breadcrumbNameMap[url];
   if (!breadcrumb) {
     Object.keys(breadcrumbNameMap).forEach((item) => {
@@ -18,6 +17,14 @@ function getBreadcrumb(breadcrumbNameMap, url) {
     });
   }
   return breadcrumb || {};
+}
+
+// /userinfo/2144/id => ['/userinfo','/useinfo/2144,'/userindo/2144/id']
+export function urlToList(url) {
+  const urllist = url.split('/').filter(i => i);
+  return urllist.map((urlItem, index) => {
+    return `/${urllist.slice(0, index + 1).join('/')}`;
+  });
 }
 
 export default class PageHeader extends PureComponent {
@@ -62,11 +69,10 @@ export default class PageHeader extends PureComponent {
   }
   conversionFromLocation = (routerLocation, breadcrumbNameMap) => {
     const { breadcrumbSeparator, linkElement = 'a' } = this.props;
-    // Convert the path to an array
-    const pathSnippets = routerLocation.pathname.split('/').filter(i => i);
+    // Convert the url to an array
+    const pathSnippets = urlToList(routerLocation.pathname);
     // Loop data mosaic routing
-    const extraBreadcrumbItems = pathSnippets.map((_, index) => {
-      const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+    const extraBreadcrumbItems = pathSnippets.map((url, index) => {
       const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
       const isLinkable = (index !== pathSnippets.length - 1) && currentBreadcrumb.component;
       return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (

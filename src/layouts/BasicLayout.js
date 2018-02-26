@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
 import DocumentTitle from 'react-document-title';
@@ -230,9 +230,9 @@ class BasicLayout extends React.PureComponent {
                 blankTarget: true,
               }]}
               copyright={
-                <div>
+                <Fragment>
                   Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
-                </div>
+                </Fragment>
               }
             />
           </Footer>
