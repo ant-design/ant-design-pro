@@ -6,6 +6,7 @@ import { Row, Col, Form, Card, Select, List } from 'antd';
 import StandardFormRow from '../../components/StandardFormRow';
 import TagSelect from '../../components/TagSelect';
 import AvatarList from '../../components/AvatarList';
+import Ellipsis from '../../components/Ellipsis';
 
 import styles from './Projects.less';
 
@@ -54,7 +55,7 @@ export default class CoverCardList extends PureComponent {
       <List
         rowKey="id"
         loading={loading}
-        grid={{ gutter: 24, lg: 4, md: 3, sm: 2, xs: 1 }}
+        grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
         dataSource={list}
         renderItem={item => (
           <List.Item>
@@ -65,7 +66,7 @@ export default class CoverCardList extends PureComponent {
             >
               <Card.Meta
                 title={<a href="#">{item.title}</a>}
-                description={item.subDescription}
+                description={<Ellipsis lines={2}>{item.subDescription}</Ellipsis>}
               />
               <div className={styles.cardItemContent}>
                 <span>{moment(item.updatedAt).fromNow()}</span>
