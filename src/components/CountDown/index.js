@@ -96,7 +96,7 @@ class CountDown extends Component {
   }
 
   render() {
-    const { format = this.defaultFormat, ...rest } = this.props;
+    const { format = this.defaultFormat, onEnd, ...rest } = this.props;
     const { lastTime } = this.state;
 
     const result = format(lastTime);
