@@ -25,7 +25,7 @@ class HeaderView extends PureComponent {
   getHeadWidth = () => {
     if (
       !this.props.fixedHeader ||
-      this.props.layout === 'top' ||
+      this.props.layout === 'topmenu' ||
       this.props.fixSiderbar
     ) {
       return '100%';
@@ -101,7 +101,7 @@ class HeaderView extends PureComponent {
       layout,
       fixedHeader,
     } = this.props;
-    const isTop = layout === 'top';
+    const isTop = layout === 'topmenu';
     const HeaderDom = this.state.visible ? (
       <Header
         style={{ padding: 0, width: this.getHeadWidth() }}

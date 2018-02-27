@@ -1,4 +1,5 @@
 import React from 'react';
+import NavSate from './navState';
 
 const LayoutSetting = ({ value, onChange }) => {
   return (
@@ -8,21 +9,35 @@ const LayoutSetting = ({ value, onChange }) => {
         display: 'flex',
       }}
     >
-      {['left', 'top'].map(layout => (
+      {['sidemenu', 'topmenu'].map(layout => (
         <div
           onClick={() => onChange && onChange(layout)}
           key={layout}
           style={{
-            flex: 1,
-            margin: 5,
-            border: '1px solid #ddd',
-            borderColor: value === layout ? 'red' : '#ddd',
+            width: 70,
+            height: 44,
             textAlign: 'center',
+            margin: 8,
           }}
         >
-          {layout}
+          <NavSate
+            type={layout}
+            state={value === layout ? 'active' : 'default'}
+            alt={layout}
+          />
         </div>
       ))}
+      <div
+        key="topside"
+        style={{
+          width: 70,
+          height: 44,
+          textAlign: 'center',
+          margin: 8,
+        }}
+      >
+        <NavSate type="topside" state="disable" alt="topside" />
+      </div>
     </div>
   );
 };

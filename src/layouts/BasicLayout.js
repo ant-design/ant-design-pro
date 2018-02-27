@@ -96,7 +96,7 @@ class BasicLayout extends React.PureComponent {
       fixedHeader,
       match,
     } = this.props;
-    const isTop = this.props.layout === 'top';
+    const isTop = this.props.layout === 'topmenu';
     const bashRedirect = this.getBashRedirect();
     const myRedirectData = redirectData || [];
     const layout = (

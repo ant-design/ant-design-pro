@@ -37,7 +37,7 @@ class Sidebar extends PureComponent {
       collapse: false,
       silderTheme: 'dark',
       themeColor: '#1890FF',
-      layout: 'left',
+      layout: 'sidemenu',
       grid: 'Wide',
       fixedHeader: false,
       autoHideHeader: false,
@@ -89,7 +89,7 @@ class Sidebar extends PureComponent {
       },
       {
         title: 'Fix Siderbar',
-        isShow: layout === 'left',
+        isShow: layout === 'sidemenu',
         action: [
           <Switch
             checked={!!this.state.fixSiderbar}
@@ -106,7 +106,7 @@ class Sidebar extends PureComponent {
     const nextState = {};
     nextState[key] = value;
     if (key === 'layout') {
-      if (value === 'top') {
+      if (value === 'topmenu') {
         nextState.grid = 'Wide';
       } else {
         nextState.grid = 'Fluid';

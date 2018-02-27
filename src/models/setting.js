@@ -5,7 +5,7 @@ export default {
     collapse: false,
     silderTheme: 'dark',
     themeColor: '#1890FF',
-    layout: 'left',
+    layout: 'sidemenu',
     grid: 'Wide',
     fixedHeader: false,
     autoHideHeader: false,
