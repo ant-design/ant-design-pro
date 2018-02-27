@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
 import DocumentTitle from 'react-document-title';
@@ -16,7 +16,7 @@ import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 
-const { Content } = Layout;
+const { Content, Header, Footer } = Layout;
 const { AuthorizedRoute } = Authorized;
 
 /**
@@ -27,8 +27,8 @@ const getRedirect = (item) => {
   if (item && item.children) {
     if (item.children[0] && item.children[0].path) {
       redirectData.push({
-        from: `/${item.path}`,
-        to: `/${item.children[0].path}`,
+        from: `${item.path}`,
+        to: `${item.children[0].path}`,
       });
       item.children.forEach((children) => {
         getRedirect(children);
@@ -164,18 +164,20 @@ class BasicLayout extends React.PureComponent {
           onCollapse={this.handleMenuCollapse}
         />
         <Layout>
-          <GlobalHeader
-            logo={logo}
-            currentUser={currentUser}
-            fetchingNotices={fetchingNotices}
-            notices={notices}
-            collapsed={collapsed}
-            isMobile={this.state.isMobile}
-            onNoticeClear={this.handleNoticeClear}
-            onCollapse={this.handleMenuCollapse}
-            onMenuClick={this.handleMenuClick}
-            onNoticeVisibleChange={this.handleNoticeVisibleChange}
-          />
+          <Header style={{ padding: 0 }}>
+            <GlobalHeader
+              logo={logo}
+              currentUser={currentUser}
+              fetchingNotices={fetchingNotices}
+              notices={notices}
+              collapsed={collapsed}
+              isMobile={this.state.isMobile}
+              onNoticeClear={this.handleNoticeClear}
+              onCollapse={this.handleMenuCollapse}
+              onMenuClick={this.handleMenuClick}
+              onNoticeVisibleChange={this.handleNoticeVisibleChange}
+            />
+          </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
             <Switch>
               {
@@ -201,29 +203,31 @@ class BasicLayout extends React.PureComponent {
               <Route render={NotFound} />
             </Switch>
           </Content>
-          <GlobalFooter
-            links={[{
-              key: 'Pro 首页',
-              title: 'Pro 首页',
-              href: 'http://pro.ant.design',
-              blankTarget: true,
-            }, {
-              key: 'github',
-              title: <Icon type="github" />,
-              href: 'https://github.com/ant-design/ant-design-pro',
-              blankTarget: true,
-            }, {
-              key: 'Ant Design',
-              title: 'Ant Design',
-              href: 'http://ant.design',
-              blankTarget: true,
-            }]}
-            copyright={
-              <div>
-                Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
-              </div>
-            }
-          />
+          <Footer style={{ padding: 0 }}>
+            <GlobalFooter
+              links={[{
+                key: 'Pro 首页',
+                title: 'Pro 首页',
+                href: 'http://pro.ant.design',
+                blankTarget: true,
+              }, {
+                key: 'github',
+                title: <Icon type="github" />,
+                href: 'https://github.com/ant-design/ant-design-pro',
+                blankTarget: true,
+              }, {
+                key: 'Ant Design',
+                title: 'Ant Design',
+                href: 'http://ant.design',
+                blankTarget: true,
+              }]}
+              copyright={
+                <Fragment>
+                  Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
+                </Fragment>
+              }
+            />
+          </Footer>
         </Layout>
       </Layout>
     );

@@ -113,14 +113,9 @@ const menuData = [{
     name: '注册结果',
     path: 'register-result',
   }],
-}, {
-  name: '使用文档',
-  icon: 'book',
-  path: 'http://pro.ant.design/docs/getting-started',
-  target: '_blank',
 }];
 
-function formatter(data, parentPath = '', parentAuthority) {
+function formatter(data, parentPath = '/', parentAuthority) {
   return data.map((item) => {
     let { path } = item;
     if (!isUrl(path)) {
