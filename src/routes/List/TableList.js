@@ -399,6 +399,7 @@ export default class TableList extends PureComponent {
               loading={loading}
               data={data}
               columns={columns}
+              rowKey="key"
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}
             />
