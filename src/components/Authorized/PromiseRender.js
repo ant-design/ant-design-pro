@@ -6,9 +6,17 @@ export default class PromiseRender extends React.PureComponent {
     component: null,
   };
   componentDidMount() {
-    const ok = this.checkIsInstantiation(this.props.ok);
-    const error = this.checkIsInstantiation(this.props.error);
-    this.props.promise
+    this.setRenderComponent(this.props);
+  }
+  componentWillReceiveProps(nextProps) {
+    // new Props enter
+    this.setRenderComponent(nextProps);
+  }
+  // set render Component : ok or error
+  setRenderComponent(props) {
+    const ok = this.checkIsInstantiation(props.ok);
+    const error = this.checkIsInstantiation(props.error);
+    props.promise
       .then(() => {
         this.setState({
           component: ok,
