@@ -5,11 +5,9 @@ export default class PromiseRender extends React.PureComponent {
   state = {
     component: null,
   };
-
   componentDidMount() {
     this.setRenderComponent(this.props);
   }
-
   componentWillReceiveProps(nextProps) {
     // new Props enter
     this.setRenderComponent(nextProps);
