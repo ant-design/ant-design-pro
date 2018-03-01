@@ -77,7 +77,7 @@
     "stylelint-config-standard": "^18.0.0"
   },
   "optionalDependencies": {
-    "nightmare": "^2.10.0"
+    "puppeteer": "^1.1.1"
   },
   "lint-staged": {
     "**/*.{js,jsx}": "lint-staged:js",
