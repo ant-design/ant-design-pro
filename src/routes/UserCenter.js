@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
+import { Link } from 'dva/router';
 import moment from 'moment';
 import numeral from 'numeral';
 import { List, Card, Row, Col, Icon, Dropdown,
-  Menu, Avatar, Tag, Divider, Tooltip, Spin } from 'antd';
+  Menu, Avatar, Tag, Divider, Tooltip, Spin, Input } from 'antd';
 import AvatarList from '../components/AvatarList';
 import { formatWan } from '../utils/utils';
 import styles from './UserCenter.less';
@@ -22,6 +23,9 @@ import stylesProjects from './List/Projects.less';
 export default class UserCenter extends PureComponent {
   state = {
     key: 'article',
+    newTags: [],
+    inputVisible: false,
+    inputValue: '',
   }
 
   componentDidMount() {
@@ -42,6 +46,32 @@ export default class UserCenter extends PureComponent {
 
   onTabChange = (key) => {
     this.setState({ key });
+  }
+
+  showInput = () => {
+    this.setState({ inputVisible: true }, () => this.input.focus());
+  }
+
+  saveInputRef = (input) => {
+    this.input = input;
+  }
+
+  handleInputChange = (e) => {
+    this.setState({ inputValue: e.target.value });
+  }
+
+  handleInputConfirm = () => {
+    const { state } = this;
+    const { inputValue } = state;
+    let { newTags } = state;
+    if (inputValue && newTags.filter(tag => tag.label === inputValue).length === 0) {
+      newTags = [...newTags, { key: `new-${newTags.length}`, label: inputValue }];
+    }
+    this.setState({
+      newTags,
+      inputVisible: false,
+      inputValue: '',
+    });
   }
 
   renderArticles = (list, loading) => {
@@ -171,7 +201,7 @@ export default class UserCenter extends PureComponent {
             <Card
               className={stylesProjects.card}
               hoverable
-              cover={<img alt={item.title} src={item.cover} height={154} />}
+              cover={<img alt={item.title} src={item.cover} />}
             >
               <Card.Meta
                 title={<a href="#">{item.title}</a>}
@@ -201,17 +231,18 @@ export default class UserCenter extends PureComponent {
   }
 
   render() {
+    const { key, newTags, inputVisible, inputValue } = this.state;
     const { list: { list }, listLoading, currentUser, currentUserLoading,
       project: { notice }, projectLoading } = this.props;
     const operationTabList = [{
       key: 'article',
-      tab: '文章（8）',
+      tab: <span>文章 <span style={{ fontSize: 14 }}>(8)</span></span>,
     }, {
       key: 'application',
-      tab: '应用（8）',
+      tab: <span>应用 <span style={{ fontSize: 14 }}>(8)</span></span>,
     }, {
       key: 'project',
-      tab: '项目（8）',
+      tab: <span>项目 <span style={{ fontSize: 14 }}>(8)</span></span>,
     }];
     const contentMap = {
       article: this.renderArticles(list, listLoading),
@@ -249,22 +280,42 @@ export default class UserCenter extends PureComponent {
                       <div className={styles.tags}>
                         <div className={styles.tagsTitle}>标签</div>
                         {
-                          currentUser.tags.map(item => <Tag key={item.key}>{item.label}</Tag>)
+                          currentUser.tags.concat(newTags).map(item =>
+                            <Tag key={item.key}>{item.label}</Tag>)
                         }
-                        <Tag style={{ background: '#fff', borderStyle: 'dashed' }}>
-                          <Icon type="plus" />
-                        </Tag>
+                        {inputVisible && (
+                          <Input
+                            ref={this.saveInputRef}
+                            type="text"
+                            size="small"
+                            style={{ width: 78 }}
+                            value={inputValue}
+                            onChange={this.handleInputChange}
+                            onBlur={this.handleInputConfirm}
+                            onPressEnter={this.handleInputConfirm}
+                          />
+                        )}
+                        {!inputVisible && (
+                          <Tag
+                            onClick={this.showInput}
+                            style={{ background: '#fff', borderStyle: 'dashed' }}
+                          >
+                            <Icon type="plus" />
+                          </Tag>
+                        )}
                       </div>
-                      <Divider dashed />
+                      <Divider style={{ marginTop: 16 }} dashed />
                       <div className={styles.team}>
                         <div className={styles.teamTitle}>团队</div>
                         <Spin spinning={projectLoading}>
                           <Row gutter={36}>
                             {
                               notice.map(item => (
-                                <Col key={item.id} className={styles.item} lg={24} xl={12}>
-                                  <Avatar size="small" src={item.logo} />
-                                  {item.member}
+                                <Col key={item.id} lg={24} xl={12}>
+                                  <Link to={item.href}>
+                                    <Avatar size="small" src={item.logo} />
+                                    {item.member}
+                                  </Link>
                                 </Col>
                               ))
                             }
@@ -283,7 +334,7 @@ export default class UserCenter extends PureComponent {
               tabList={operationTabList}
               onTabChange={this.onTabChange}
             >
-              {contentMap[this.state.key]}
+              {contentMap[key]}
             </Card>
           </Col>
         </Row>

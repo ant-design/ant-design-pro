@@ -169,7 +169,7 @@ export function formatWan(val) {
     result = (
       <span>
         {result}
-        <em styles={{
+        <span styles={{
             position: 'relative',
             top: -2,
             fontSize: 14,
@@ -179,7 +179,7 @@ export function formatWan(val) {
           }}
         >
           万
-        </em>
+        </span>
       </span>
     );
   }

@@ -31,7 +31,7 @@ const proxy = {
       profile: '简单的介绍下自己',
       signature: '海纳百川，有容乃大',
       title: '交互专家',
-      group: '蚂蚁金服-平台数据技术事业群-基础平台部-用户体验技术部-UED',
+      group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
       tags: [{
         key: '0',
         label: '很有想法的',

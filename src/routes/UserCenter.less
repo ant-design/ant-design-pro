@@ -1,4 +1,5 @@
 @import '~antd/lib/style/themes/default.less';
+@import "../utils/utils.less";
 
 .avatarHolder {
   text-align: center;
@@ -73,11 +74,16 @@
     }
   }
 
-  .item {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  a {
+    display: block;
     margin-bottom: 24px;
+    color: @text-color;
+    transition: color .3s;
+    .textOverflow();
+
+    &:hover {
+      color: @primary-color;
+    }
   }
 }
 

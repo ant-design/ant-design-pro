@@ -87,20 +87,17 @@
     display: block;
     margin: 12px 0;
     height: 24px;
+    color: @text-color;
+    transition: all .3s;
     .textOverflow();
     .member {
       font-size: @font-size-base;
-      color: @text-color;
       line-height: 24px;
       vertical-align: top;
       margin-left: 12px;
-      transition: all .3s;
-      .textOverflow();
     }
     &:hover {
-      span {
-        color: @primary-color;
-      }
+      color: @primary-color;
     }
   }
 }
