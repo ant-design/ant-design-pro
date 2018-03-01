@@ -45,6 +45,7 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^16.2.0",
     "react-fittext": "^1.0.0",
+    "rollbar": "^2.3.4",
     "url-polyfill": "^1.0.10"
   },
   "devDependencies": {
@@ -72,7 +73,6 @@
     "regenerator-runtime": "^0.11.1",
     "roadhog": "^2.1.0",
     "roadhog-api-doc": "^0.3.4",
-    "rollbar": "^2.3.4",
     "stylelint": "^8.4.0",
     "stylelint-config-standard": "^18.0.0"
   },
