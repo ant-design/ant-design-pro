@@ -21,6 +21,10 @@ export default class LoginPage extends Component {
     this.setState({ type });
   }
 
+  onGetCaptcha = (mobile) => {
+    console.log(mobile);
+  }
+
   handleSubmit = (err, values) => {
     const { type } = this.state;
     if (!err) {
@@ -74,7 +78,7 @@ export default class LoginPage extends Component {
               this.renderMessage('验证码错误')
             }
             <Mobile name="mobile" />
-            <Captcha name="captcha" />
+            <Captcha onGetCaptcha={this.onGetCaptcha} name="captcha" />
           </Tab>
           <div>
             <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>自动登录</Checkbox>

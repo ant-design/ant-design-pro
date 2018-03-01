@@ -28,19 +28,26 @@ function generator({ defaultProps, defaultRules, type }) {
       componentWillUnmount() {
         clearInterval(this.interval);
       }
-      onGetCaptcha = () => {
-        let count = 59;
-        this.setState({ count });
-        if (this.props.onGetCaptcha) {
-          this.props.onGetCaptcha();
-        }
-        this.interval = setInterval(() => {
-          count -= 1;
-          this.setState({ count });
-          if (count === 0) {
-            clearInterval(this.interval);
+      onGetCaptcha = (e) => {
+        console.log(e);
+        this.context.form.validateFields(['mobile'], { force: true },
+          (err, values) => {
+            if (!err) {
+              let count = 59;
+              this.setState({ count });
+              if (this.props.onGetCaptcha) {
+                this.props.onGetCaptcha(values);
+              }
+              this.interval = setInterval(() => {
+                count -= 1;
+                this.setState({ count });
+                if (count === 0) {
+                  clearInterval(this.interval);
+                }
+              }, 1000);
+            }
           }
-        }, 1000);
+        );
       }
       render() {
         const { getFieldDecorator } = this.context.form;
