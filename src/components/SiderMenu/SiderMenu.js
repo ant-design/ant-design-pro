@@ -51,6 +51,12 @@ export default class SiderMenu extends PureComponent {
       })
       .filter(item => item);
   }
+  isMainMenu = (key) => {
+    return this.menus.some(
+      item =>
+        key && (item.key === key || item.path === key),
+    );
+  }
   handleOpenChange = (openKeys) => {
     const lastOpenKey = openKeys[openKeys.length - 1];
     const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
