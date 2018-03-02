@@ -44,10 +44,10 @@ const map = {
     props: {
       size: 'large',
       prefix: <Icon type="mail" className={styles.prefixIcon} />,
-      placeholder: 'verification code',
+      placeholder: 'captcha',
     },
     rules: [{
-      required: true, message: 'Please enter verification code!',
+      required: true, message: 'Please enter Captcha!',
     }],
   },
 };
