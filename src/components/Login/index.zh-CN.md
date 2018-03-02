@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: Login
-  zh-CN: Login
+title: Login
 subtitle: 登录
 cols: 1
 order: 15
@@ -48,4 +46,3 @@ onGetCaptcha | 点击获取校验码的回调 | () => void | -
 ### Login.Submit
 
 支持 antd.Button 的所有属性。
-

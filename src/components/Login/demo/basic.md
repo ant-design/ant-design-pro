@@ -1,12 +1,11 @@
 ---
 order: 0
-title: Standard Login
 title:
   zh-CN: 标准登录
   en-US: Standard Login
 ---
 
-Support login with username/password and mobile number.
+Support login with account and mobile number.
 
 ````jsx
 import Login from 'ant-design-pro/lib/Login';
@@ -29,7 +28,7 @@ class LoginDemo extends React.Component {
         if (!err && (values.username !== 'admin' || values.password !== '888888')) {
           setTimeout(() => {
             this.setState({
-              notice: 'the combination of username and password is incorrect!',
+              notice: 'The combination of username and password is incorrect!',
             });
           }, 500);
         }
@@ -53,7 +52,7 @@ class LoginDemo extends React.Component {
         onTabChange={this.onTabChange}
         onSubmit={this.onSubmit}
       >
-        <Tab key="tab1" tab="username/password">
+        <Tab key="tab1" tab="Account">
           {
             this.state.notice &&
             <Alert style={{ marginBottom: 24 }} message={this.state.notice} type="error" showIcon closable />
@@ -61,21 +60,21 @@ class LoginDemo extends React.Component {
           <UserName name="username" />
           <Password name="password" />
         </Tab>
-        <Tab key="tab2" tab="mobile">
+        <Tab key="tab2" tab="Mobile">
           <Mobile name="mobile" />
           <Captcha onGetCaptcha={() => console.log('Get captcha!')} name="captcha" />
         </Tab>
         <div>
-          <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>keep me logged in</Checkbox>
-          <a style={{ float: 'right' }} href="">forget password</a>
+          <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>Keep me logged in</Checkbox>
+          <a style={{ float: 'right' }} href="">Forgot password</a>
         </div>
         <Submit>Login</Submit>
         <div>
-          other login methods
+          Other login methods
           <span className="icon icon-alipay" />
           <span className="icon icon-taobao" />
           <span className="icon icon-weibo" />
-          <a style={{ float: 'right' }} href="">register</a>
+          <a style={{ float: 'right' }} href="">Register</a>
         </div>
       </Login>
     );

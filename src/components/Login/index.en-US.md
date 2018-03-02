@@ -1,6 +1,5 @@
 ---
 title: Login
-subtitle: Login
 cols: 1
 order: 15
 ---
