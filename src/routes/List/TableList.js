@@ -220,7 +220,7 @@ class UpdateForm extends PureComponent {
         footer={this.renderFooter(currentStep)}
         onCancel={() => handleUpdateModalVisible()}
       >
-        <Steps style={{ marginBottom: 32 }} size="small" current={currentStep}>
+        <Steps style={{ marginBottom: 28 }} size="small" current={currentStep}>
           <Step title="基本信息" />
           <Step title="配置规则属性" />
           <Step title="设定调度周期" />
