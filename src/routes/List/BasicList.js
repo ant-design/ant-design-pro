@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { findDOMNode } from 'react-dom';
 import moment from 'moment';
 import { connect } from 'dva';
 import { List, Card, Row, Col, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar,
@@ -48,12 +49,14 @@ export default class BasicList extends PureComponent {
     });
   }
   handleDone = () => {
+    setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
       done: false,
       visible: false,
     });
   }
   handleCancel = () => {
+    setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
       visible: false,
     });
@@ -63,6 +66,7 @@ export default class BasicList extends PureComponent {
     const { dispatch, form } = this.props;
     const id = this.state.current ? this.state.current.id : '';
 
+    setTimeout(() => this.addBtn.blur(), 0);
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       this.setState({
@@ -171,7 +175,7 @@ export default class BasicList extends PureComponent {
             title="操作成功"
             description="一系列的信息描述，很短同样也可以带标点。"
             actions={<Button type="primary" onClick={this.handleDone}>知道了</Button>}
-            style={{ width: '100%', marginBottom: '24px' }}
+            className={styles.formResult}
           />
         );
       }
@@ -246,7 +250,17 @@ export default class BasicList extends PureComponent {
             bodyStyle={{ padding: '0 32px 40px 32px' }}
             extra={extraContent}
           >
-            <Button type="dashed" style={{ width: '100%', marginBottom: 8 }} icon="plus" onClick={this.showModal}>
+            <Button
+              type="dashed"
+              style={{ width: '100%', marginBottom: 8 }}
+              icon="plus"
+              onClick={this.showModal}
+              ref={(component) => {
+                /* eslint-disable */
+                this.addBtn = findDOMNode(component);
+                /* eslint-enable */
+              }}
+            >
               添加
             </Button>
             <List
@@ -274,9 +288,10 @@ export default class BasicList extends PureComponent {
           </Card>
         </div>
         <Modal
-          title={`任务${this.state.current ? '编辑' : '添加'}`}
+          title={done ? null : `任务${this.state.current ? '编辑' : '添加'}`}
+          className={styles.standardListForm}
           width={640}
-          bodyStyle={{ padding: '32px 0 8px' }}
+          bodyStyle={done ? { padding: '72px 0' } : { padding: '28px 0 0' }}
           destroyOnClose
           visible={visible}
           {...modalFooter}
