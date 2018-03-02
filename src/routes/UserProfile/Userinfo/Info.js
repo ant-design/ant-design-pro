@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Route, routerRedux, Switch, Redirect } from 'dva/router';
 import { Menu } from 'antd';
 import styles from './Info.less';
-import { getRoutes } from '../../utils/utils';
+import { getRoutes } from '../../../utils/utils';
 
 const { Item } = Menu;
 
@@ -36,7 +36,7 @@ export default class Info extends Component {
     return menuMap[this.state.selectKey];
   };
   selectKey = ({ key }) => {
-    this.props.dispatch(routerRedux.push(`/userinfo/${key}`));
+    this.props.dispatch(routerRedux.push(`/user-profile/userinfo/${key}`));
     this.setState({
       selectKey: key,
     });
@@ -70,7 +70,7 @@ export default class Info extends Component {
                 exact={item.exact}
               />
             ))}
-            <Redirect exact from="/userinfo" to="/userinfo/base" />
+            <Redirect exact from="/user-profile/userinfo" to="/user-profile/userinfo/base" />
             <Redirect to="/exception/404" />
           </Switch>
         </div>

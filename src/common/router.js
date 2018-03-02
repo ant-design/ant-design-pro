@@ -151,9 +151,6 @@ export const getRouterData = (app) => {
     '/exception/trigger': {
       component: dynamicWrapper(app, ['error'], () => import('../routes/Exception/triggerException')),
     },
-    '/user-center': {
-      component: dynamicWrapper(app, ['list', 'user', 'project'], () => import('../routes/UserCenter')),
-    },
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },
@@ -166,20 +163,23 @@ export const getRouterData = (app) => {
     '/user/register-result': {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
     },
-    '/userinfo': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Userinfo/Info')),
+    '/user-profile/user-center': {
+      component: dynamicWrapper(app, ['list', 'user', 'project'], () => import('../routes/UserProfile/UserCenter')),
     },
-    '/userinfo/base': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Userinfo/BaseView')),
+    '/user-profile/userinfo': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/Info')),
     },
-    '/userinfo/safe': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Userinfo/SafeView')),
+    '/user-profile/userinfo/base': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/BaseView')),
     },
-    '/userinfo/account': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Userinfo/AccountView')),
+    '/user-profile/userinfo/safe': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/SafeView')),
     },
-    '/userinfo/message': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Userinfo/MessageView')),
+    '/user-profile/userinfo/account': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/AccountView')),
+    },
+    '/user-profile/userinfo/message': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/MessageView')),
     },
     // '/user/:id': {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),

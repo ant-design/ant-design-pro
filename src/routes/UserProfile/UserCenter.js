@@ -5,12 +5,12 @@ import moment from 'moment';
 import numeral from 'numeral';
 import { List, Card, Row, Col, Icon, Dropdown,
   Menu, Avatar, Tag, Divider, Tooltip, Spin, Input } from 'antd';
-import AvatarList from '../components/AvatarList';
-import { formatWan } from '../utils/utils';
+import AvatarList from '../../components/AvatarList';
+import { formatWan } from '../../utils/utils';
 import styles from './UserCenter.less';
-import stylesArticles from './List/Articles.less';
-import stylesApplications from './List/Applications.less';
-import stylesProjects from './List/Projects.less';
+import stylesArticles from '../List/Articles.less';
+import stylesApplications from '../List/Applications.less';
+import stylesProjects from '../List/Projects.less';
 
 @connect(({ list, loading, user, project }) => ({
   list,
