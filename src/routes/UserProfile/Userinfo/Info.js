@@ -25,7 +25,15 @@ export default class Info extends Component {
     key = menuMap[key] ? key : 'base';
     this.state = {
       selectKey: key,
+      mode: 'inline',
     };
+  }
+  componentDidMount() {
+    window.addEventListener('resize', this.resize);
+    this.resize();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
   }
   getmenu = () => {
     return Object.keys(menuMap).map(item => (
@@ -41,16 +49,37 @@ export default class Info extends Component {
       selectKey: key,
     });
   };
+  resize = () => {
+    if (!this.main) {
+      return;
+    }
+    let mode = 'inline';
+    const { offsetWidth } = this.main;
+    if (this.main.offsetWidth < 641 && offsetWidth > 400) {
+      mode = 'horizontal';
+    }
+    if (window.innerWidth < 768 && offsetWidth > 400) {
+      mode = 'horizontal';
+    }
+    this.setState({
+      mode,
+    });
+  };
   render() {
     const { match, routerData, currentUser } = this.props;
     if (!currentUser.userid) {
       return '';
     }
     return (
-      <div className={styles.main}>
+      <div
+        className={styles.main}
+        ref={(ref) => {
+          this.main = ref;
+        }}
+      >
         <div className={styles.leftmenu}>
           <Menu
-            mode="inline"
+            mode={this.state.mode}
             selectedKeys={[this.state.selectKey]}
             onClick={this.selectKey}
           >
@@ -70,7 +99,11 @@ export default class Info extends Component {
                 exact={item.exact}
               />
             ))}
-            <Redirect exact from="/user-profile/userinfo" to="/user-profile/userinfo/base" />
+            <Redirect
+              exact
+              from="/user-profile/userinfo"
+              to="/user-profile/userinfo/base"
+            />
             <Redirect to="/exception/404" />
           </Switch>
         </div>

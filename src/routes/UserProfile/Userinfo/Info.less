@@ -15,6 +15,9 @@
       .ant-menu-inline {
         border: none;
       }
+      .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+        font-weight: bold;
+      }
     }
   }
   .right {
@@ -29,6 +32,11 @@
       line-height: 28px;
       font-weight: 500;
       margin-bottom: 12px;
+    }
+  }
+  :global {
+    .ant-list-split .ant-list-item:last-child {
+      border-bottom: 1px solid #e8e8e8;
     }
   }
 }
