@@ -96,7 +96,7 @@ export default class BaseView extends Component {
                 rules: [
                   { required: true, message: 'Please input personal profile!' },
                 ],
-              })(<Input.TextArea rows={4} />)}
+              })(<Input.TextArea placeholder="简单的介绍下自己" rows={4} />)}
             </FormItem>
             <FormItem label="国家/地区">
               {getFieldDecorator('country', {
