@@ -106,10 +106,6 @@ export default class BaseView extends Component {
               })(
                 <Select style={{ maxWidth: 220 }}>
                   <Option value="China">中国</Option>
-                  <Option value="USA">美国</Option>
-                  <Option value="France">法国</Option>
-                  <Option value="Russian">俄罗斯</Option>
-                  <Option value="UK">英国</Option>
                 </Select>,
               )}
             </FormItem>
