@@ -24,9 +24,9 @@ import {
   Bar,
   Pie,
   TimelineChart,
-} from '../../components/Charts';
-import Trend from '../../components/Trend';
-import NumberInfo from '../../components/NumberInfo';
+} from 'ant-design-pro/lib/Charts';
+import Trend from 'ant-design-pro/lib/Trend';
+import NumberInfo from 'ant-design-pro/lib/NumberInfo';
 import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
