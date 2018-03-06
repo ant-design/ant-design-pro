@@ -2,10 +2,10 @@ import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import { Row, Col, Card, Tooltip } from 'antd';
 import numeral from 'numeral';
-import Authorized from '../../utils/Authorized';
 import { Pie, WaterWave, Gauge, TagCloud } from 'ant-design-pro/lib/Charts';
 import NumberInfo from 'ant-design-pro/lib/NumberInfo';
 import CountDown from 'ant-design-pro/lib/CountDown';
+import Authorized from '../../utils/Authorized';
 import ActiveChart from '../../components/ActiveChart';
 import styles from './Monitor.less';
 
