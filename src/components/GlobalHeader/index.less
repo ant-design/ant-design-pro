@@ -1,0 +1,115 @@
+@import "~antd/lib/style/themes/default.less";
+
+.header {
+  height: 64px;
+  padding: 0 12px 0 0;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+  position: relative;
+}
+
+:global {
+  .ant-layout {
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+.logo {
+  height: 64px;
+  line-height: 58px;
+  vertical-align: top;
+  display: inline-block;
+  padding: 0 0 0 24px;
+  cursor: pointer;
+  font-size: 20px;
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.menu {
+  :global(.anticon) {
+    margin-right: 8px;
+  }
+  :global(.ant-dropdown-menu-item) {
+    width: 160px;
+  }
+}
+
+i.trigger {
+  font-size: 20px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: all .3s, padding 0s;
+  padding: 0 24px;
+  &:hover {
+    background: @primary-1;
+  }
+}
+
+.right {
+  float: right;
+  height: 100%;
+  .action {
+    cursor: pointer;
+    padding: 0 12px;
+    display: inline-block;
+    transition: all .3s;
+    height: 100%;
+    > i {
+      font-size: 16px;
+      vertical-align: middle;
+      color: @text-color;
+    }
+    &:hover,
+    &:global(.ant-popover-open) {
+      background: @primary-1;
+    }
+  }
+  .search {
+    padding: 0;
+    margin: 0 12px;
+    &:hover {
+      background: transparent;
+    }
+  }
+  .account {
+    .avatar {
+      margin: 20px 8px 20px 0;
+      color: @primary-color;
+      background: rgba(255, 255, 255, .85);
+      vertical-align: middle;
+    }
+  }
+}
+
+@media only screen and (max-width: @screen-md) {
+  .header {
+    :global(.ant-divider-vertical) {
+      vertical-align: unset;
+    }
+    .name {
+      display: none;
+    }
+    i.trigger {
+      padding: 0 12px;
+    }
+    .logo {
+      padding-right: 12px;
+      position: relative;
+    }
+    .right {
+      position: absolute;
+      right: 12px;
+      top: 0;
+      background: #fff;
+      .account {
+        .avatar {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

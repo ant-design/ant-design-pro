@@ -11,17 +11,18 @@ const InputGroup = Input.Group;
 const passwordStatusMap = {
   ok: <div className={styles.success}>强度：强</div>,
   pass: <div className={styles.warning}>强度：中</div>,
-  pool: <div className={styles.error}>强度：太短</div>,
+  poor: <div className={styles.error}>强度：太短</div>,
 };
 
 const passwordProgressMap = {
   ok: 'success',
   pass: 'normal',
-  pool: 'exception',
+  poor: 'exception',
 };
 
-@connect(state => ({
-  register: state.register,
+@connect(({ register, loading }) => ({
+  register,
+  submitting: loading.effects['register/submit'],
 }))
 @Form.create()
 export default class Register extends Component {
@@ -34,8 +35,14 @@ export default class Register extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    const account = this.props.form.getFieldValue('mail');
     if (nextProps.register.status === 'ok') {
-      this.props.dispatch(routerRedux.push('/user/register-result'));
+      this.props.dispatch(routerRedux.push({
+        pathname: '/user/register-result',
+        state: {
+          account,
+        },
+      }));
     }
   }
 
@@ -64,7 +71,7 @@ export default class Register extends Component {
     if (value && value.length > 5) {
       return 'pass';
     }
-    return 'pool';
+    return 'poor';
   };
 
   handleSubmit = (e) => {
@@ -148,7 +155,7 @@ export default class Register extends Component {
   };
 
   render() {
-    const { form, register } = this.props;
+    const { form, submitting } = this.props;
     const { getFieldDecorator } = form;
     const { count, prefix } = this.state;
     return (
@@ -270,7 +277,7 @@ export default class Register extends Component {
           <FormItem>
             <Button
               size="large"
-              loading={register.submitting}
+              loading={submitting}
               className={styles.submit}
               type="primary"
               htmlType="submit"

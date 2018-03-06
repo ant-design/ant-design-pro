@@ -2,7 +2,6 @@ import mockjs from 'mockjs';
 import { getRule, postRule } from './mock/rule';
 import { getActivities, getNotice, getFakeList } from './mock/api';
 import { getFakeChartData } from './mock/chart';
-import { imgMap } from './mock/utils';
 import { getProfileBasicData } from './mock/profile';
 import { getProfileAdvancedData } from './mock/profile';
 import { getNotices } from './mock/notices';
@@ -24,7 +23,7 @@ const proxy = {
     },
     $body: {
       name: 'Serati Ma',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/keeYtvRpGFVVKOOiOZDS.png',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
       userid: '00000001',
       notifyCount: 12,
     },
@@ -69,16 +68,69 @@ const proxy = {
   'GET /api/profile/basic': getProfileBasicData,
   'GET /api/profile/advanced': getProfileAdvancedData,
   'POST /api/login/account': (req, res) => {
-    const { password, userName } = req.body;
-    res.send({ status: password === '888888' && userName === 'admin' ? 'ok' : 'error', type: 'account' });
-  },
-  'POST /api/login/mobile': (req, res) => {
-    res.send({ status: 'ok', type: 'mobile' });
+    const { password, userName, type } = req.body;
+    if(password === '888888' && userName === 'admin'){
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: 'admin'
+      });
+      return ;
+    }
+    if(password === '123456' && userName === 'user'){
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: 'user'
+      });
+      return ;
+    }
+    res.send({
+      status: 'error',
+      type,
+      currentAuthority: 'guest'
+    });
   },
   'POST /api/register': (req, res) => {
-    res.send({ status: 'ok' });
+    res.send({ status: 'ok', currentAuthority: 'user' });
   },
   'GET /api/notices': getNotices,
+  'GET /api/500': (req, res) => {
+    res.status(500).send({
+      "timestamp": 1513932555104,
+      "status": 500,
+      "error": "error",
+      "message": "error",
+      "path": "/base/category/list"
+    });
+  },
+  'GET /api/404': (req, res) => {
+    res.status(404).send({
+      "timestamp": 1513932643431,
+      "status": 404,
+      "error": "Not Found",
+      "message": "No message available",
+      "path": "/base/category/list/2121212"
+    });
+  },
+  'GET /api/403': (req, res) => {
+    res.status(403).send({
+      "timestamp": 1513932555104,
+      "status": 403,
+      "error": "Unauthorized",
+      "message": "Unauthorized",
+      "path": "/base/category/list"
+    });
+  },
+  'GET /api/401': (req, res) => {
+    res.status(401).send({
+      "timestamp": 1513932555104,
+      "status": 401,
+      "error": "Unauthorized",
+      "message": "Unauthorized",
+      "path": "/base/category/list"
+    });
+  },
 };
 
 export default noProxy ? {} : delay(proxy, 1000);

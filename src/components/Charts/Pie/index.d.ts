@@ -1,13 +1,13 @@
-import * as React from "react";
+import * as React from 'react';
 export interface PieProps {
   animate?: boolean;
   color?: string;
   height: number;
   hasLegend?: boolean;
-  margin?: [number, number, number, number];
+  padding?: [number, number, number, number];
   percent?: number;
   data?: Array<{
-    x: string;
+    x: string | string;
     y: number;
   }>;
   total?: string;

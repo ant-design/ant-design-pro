@@ -1,87 +1,50 @@
-import React, { PureComponent } from 'react';
-import G2 from 'g2';
-import equal from '../equal';
+import React from 'react';
+import { Chart, Tooltip, Geom } from 'bizcharts';
+import autoHeight from '../autoHeight';
 import styles from '../index.less';
 
-class MiniBar extends PureComponent {
-  componentDidMount() {
-    this.renderChart(this.props.data);
-  }
+@autoHeight()
+export default class MiniBar extends React.Component {
+  render() {
+    const { height, forceFit = true, color = '#1890FF', data = [] } = this.props;
 
-  componentWillReceiveProps(nextProps) {
-    if (!equal(this.props, nextProps)) {
-      this.renderChart(nextProps.data);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.chart) {
-      this.chart.destroy();
-    }
-  }
-
-  handleRef = (n) => {
-    this.node = n;
-  }
-
-  renderChart(data) {
-    const { height = 0, fit = true, color = '#1890FF' } = this.props;
-
-    if (!data || (data && data.length < 1)) {
-      return;
-    }
-
-    // clean
-    this.node.innerHTML = '';
-
-    const { Frame } = G2;
-    const frame = new Frame(data);
-
-    const chart = new G2.Chart({
-      container: this.node,
-      forceFit: fit,
-      height: height + 54,
-      plotCfg: {
-        margin: [36, 5, 30, 5],
-      },
-      legend: null,
-    });
-
-    chart.axis(false);
-
-    chart.source(frame, {
+    const scale = {
       x: {
         type: 'cat',
       },
       y: {
         min: 0,
       },
-    });
+    };
 
-    chart.tooltip({
-      title: null,
-      crosshairs: false,
-      map: {
-        name: 'x',
-      },
-    });
-    chart.interval().position('x*y').color(color);
-    chart.render();
+    const padding = [36, 5, 30, 5];
 
-    this.chart = chart;
-  }
+    const tooltip = [
+      'x*y',
+      (x, y) => ({
+        name: x,
+        value: y,
+      }),
+    ];
 
-  render() {
-    const { height } = this.props;
+    // for tooltip not to be hide
+    const chartHeight = height + 54;
 
     return (
       <div className={styles.miniChart} style={{ height }}>
         <div className={styles.chartContent}>
-          <div ref={this.handleRef} />
+          <Chart
+            scale={scale}
+            height={chartHeight}
+            forceFit={forceFit}
+            data={data}
+            padding={padding}
+          >
+            <Tooltip showTitle={false} crosshairs={false} />
+            <Geom type="interval" position="x*y" color={color} tooltip={tooltip} />
+          </Chart>
         </div>
       </div>
     );
   }
 }
-
-export default MiniBar;

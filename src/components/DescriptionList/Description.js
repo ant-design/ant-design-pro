@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Col } from 'antd';
 import styles from './index.less';
@@ -12,6 +13,14 @@ const Description = ({ term, column, className, children, ...restProps }) => {
       {children && <div className={styles.detail}>{children}</div>}
     </Col>
   );
+};
+
+Description.defaultProps = {
+  term: '',
+};
+
+Description.propTypes = {
+  term: PropTypes.node,
 };
 
 export default Description;

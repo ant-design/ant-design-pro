@@ -6,6 +6,7 @@ export interface ChartCardProps {
   footer?: React.ReactNode;
   contentHeight?: number;
   avatar?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 export default class ChartCard extends React.Component<ChartCardProps, any> {}

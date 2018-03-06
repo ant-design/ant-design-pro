@@ -14,6 +14,7 @@ export default {
     salesTypeDataOnline: [],
     salesTypeDataOffline: [],
     radarData: [],
+    loading: false,
   },
 
   effects: {
@@ -37,12 +38,6 @@ export default {
 
   reducers: {
     save(state, { payload }) {
-      return {
-        ...state,
-        ...payload,
-      };
-    },
-    setter(state, { payload }) {
       return {
         ...state,
         ...payload,

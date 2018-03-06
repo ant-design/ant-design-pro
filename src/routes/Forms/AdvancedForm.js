@@ -268,7 +268,7 @@ class AdvancedForm extends PureComponent {
             </Row>
           </Form>
         </Card>
-        <Card title="成员管理" className={styles.card} bordered={false}>
+        <Card title="成员管理" bordered={false}>
           {getFieldDecorator('members', {
             initialValue: tableData,
           })(<TableForm />)}
@@ -284,7 +284,7 @@ class AdvancedForm extends PureComponent {
   }
 }
 
-export default connect(state => ({
-  collapsed: state.global.collapsed,
-  submitting: state.form.advancedFormSubmitting,
+export default connect(({ global, loading }) => ({
+  collapsed: global.collapsed,
+  submitting: loading.effects['form/submitAdvancedForm'],
 }))(Form.create()(AdvancedForm));

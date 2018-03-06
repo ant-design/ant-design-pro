@@ -1,202 +1,167 @@
-import React, { PureComponent } from 'react';
-import G2 from 'g2';
-import equal from '../equal';
+import React from 'react';
+import { Chart, Geom, Axis, Coord, Guide, Shape } from 'bizcharts';
+import autoHeight from '../autoHeight';
 
-const { Shape } = G2;
+const { Arc, Html, Line } = Guide;
 
-const primaryColor = '#2F9CFF';
-const backgroundColor = '#F0F2F5';
-
-/* eslint no-underscore-dangle: 0 */
-class Gauge extends PureComponent {
-  componentDidMount() {
-    setTimeout(() => {
-      this.renderChart();
-    }, 10);
+const defaultFormatter = (val) => {
+  switch (val) {
+    case '2':
+      return '差';
+    case '4':
+      return '中';
+    case '6':
+      return '良';
+    case '8':
+      return '优';
+    default:
+      return '';
   }
+};
 
-  componentWillReceiveProps(nextProps) {
-    if (!equal(this.props, nextProps)) {
-      setTimeout(() => {
-        this.renderChart(nextProps);
-      }, 10);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.chart) {
-      this.chart.destroy();
-    }
-  }
-
-  handleRef = (n) => {
-    this.node = n;
-  }
-
-  initChart(nextProps) {
-    const { title, color = primaryColor } = nextProps || this.props;
-
-    Shape.registShape('point', 'dashBoard', {
-      drawShape(cfg, group) {
-        const originPoint = cfg.points[0];
-        const point = this.parsePoint({ x: originPoint.x, y: 0.4 });
-
-        const center = this.parsePoint({
-          x: 0,
-          y: 0,
-        });
-
-        const shape = group.addShape('polygon', {
-          attrs: {
-            points: [
-              [center.x, center.y],
-              [point.x + 8, point.y],
-              [point.x + 8, point.y - 2],
-              [center.x, center.y - 2],
-            ],
-            radius: 2,
-            lineWidth: 2,
-            arrow: false,
-            fill: color,
-          },
-        });
-
-        group.addShape('Marker', {
-          attrs: {
-            symbol: 'circle',
-            lineWidth: 2,
-            fill: color,
-            radius: 8,
-            x: center.x,
-            y: center.y,
-          },
-        });
-        group.addShape('Marker', {
-          attrs: {
-            symbol: 'circle',
-            lineWidth: 2,
-            fill: '#fff',
-            radius: 5,
-            x: center.x,
-            y: center.y,
-          },
-        });
-
-        const { origin } = cfg;
-        group.addShape('text', {
-          attrs: {
-            x: center.x,
-            y: center.y + 80,
-            text: `${origin._origin.value}%`,
-            textAlign: 'center',
-            fontSize: 24,
-            fill: 'rgba(0, 0, 0, 0.85)',
-          },
-        });
-        group.addShape('text', {
-          attrs: {
-            x: center.x,
-            y: center.y + 45,
-            text: title,
-            textAlign: 'center',
-            fontSize: 14,
-            fill: 'rgba(0, 0, 0, 0.43)',
-          },
-        });
-
-        return shape;
-      },
+Shape.registerShape('point', 'pointer', {
+  drawShape(cfg, group) {
+    let point = cfg.points[0];
+    point = this.parsePoint(point);
+    const center = this.parsePoint({
+      x: 0,
+      y: 0,
     });
-  }
-
-  renderChart(nextProps) {
-    const {
-      height, color = primaryColor, bgColor = backgroundColor, title, percent, format,
-    } = nextProps || this.props;
-    const data = [{ name: title, value: percent }];
-
-    if (this.chart) {
-      this.chart.clear();
-    }
-    if (this.node) {
-      this.node.innerHTML = '';
-    }
-
-    this.initChart(nextProps);
-
-    const chart = new G2.Chart({
-      container: this.node,
-      forceFit: true,
-      height,
-      animate: false,
-      plotCfg: {
-        margin: [10, 10, 30, 10],
-      },
-    });
-
-    chart.source(data);
-
-    chart.tooltip(false);
-
-    chart.coord('gauge', {
-      startAngle: -1.2 * Math.PI,
-      endAngle: 0.20 * Math.PI,
-    });
-    chart.col('value', {
-      type: 'linear',
-      nice: true,
-      min: 0,
-      max: 100,
-      tickCount: 6,
-    });
-    chart.axis('value', {
-      subTick: false,
-      tickLine: {
-        stroke: color,
+    group.addShape('line', {
+      attrs: {
+        x1: center.x,
+        y1: center.y,
+        x2: point.x,
+        y2: point.y,
+        stroke: cfg.color,
         lineWidth: 2,
-        value: -14,
+        lineCap: 'round',
       },
-      labelOffset: -12,
-      formatter: format,
     });
-    chart.point().position('value').shape('dashBoard');
-    draw(data);
+    return group.addShape('circle', {
+      attrs: {
+        x: center.x,
+        y: center.y,
+        r: 6,
+        stroke: cfg.color,
+        lineWidth: 3,
+        fill: '#fff',
+      },
+    });
+  },
+});
 
-    /* eslint no-shadow: 0 */
-    function draw(data) {
-      const val = data[0].value;
-      const lineWidth = 12;
-      chart.guide().clear();
-
-      chart.guide().arc(() => {
-        return [0, 0.95];
-      }, () => {
-        return [val, 0.95];
-      }, {
-        stroke: color,
-        lineWidth,
-      });
-
-      chart.guide().arc(() => {
-        return [val, 0.95];
-      }, (arg) => {
-        return [arg.max, 0.95];
-      }, {
-        stroke: bgColor,
-        lineWidth,
-      });
-
-      chart.changeData(data);
-    }
-
-    this.chart = chart;
-  }
-
+@autoHeight()
+export default class Gauge extends React.Component {
   render() {
+    const {
+      title,
+      height,
+      percent,
+      forceFit = true,
+      formatter = defaultFormatter,
+      color = '#2F9CFF',
+      bgColor = '#F0F2F5',
+    } = this.props;
+    const cols = {
+      value: {
+        type: 'linear',
+        min: 0,
+        max: 10,
+        tickCount: 6,
+        nice: true,
+      },
+    };
+    const data = [{ value: percent / 10 }];
     return (
-      <div ref={this.handleRef} />
+      <Chart height={height} data={data} scale={cols} padding={[-16, 0, 16, 0]} forceFit={forceFit}>
+        <Coord type="polar" startAngle={-1.25 * Math.PI} endAngle={0.25 * Math.PI} radius={0.8} />
+        <Axis name="1" line={null} />
+        <Axis
+          line={null}
+          tickLine={null}
+          subTickLine={null}
+          name="value"
+          zIndex={2}
+          gird={null}
+          label={{
+            offset: -12,
+            formatter,
+            textStyle: {
+              fontSize: 12,
+              fill: 'rgba(0, 0, 0, 0.65)',
+              textAlign: 'center',
+            },
+          }}
+        />
+        <Guide>
+          <Line
+            start={[3, 0.905]}
+            end={[3, 0.85]}
+            lineStyle={{
+              stroke: color,
+              lineDash: null,
+              lineWidth: 2,
+            }}
+          />
+          <Line
+            start={[5, 0.905]}
+            end={[5, 0.85]}
+            lineStyle={{
+              stroke: color,
+              lineDash: null,
+              lineWidth: 3,
+            }}
+          />
+          <Line
+            start={[7, 0.905]}
+            end={[7, 0.85]}
+            lineStyle={{
+              stroke: color,
+              lineDash: null,
+              lineWidth: 3,
+            }}
+          />
+          <Arc
+            zIndex={0}
+            start={[0, 0.965]}
+            end={[10, 0.965]}
+            style={{
+              stroke: bgColor,
+              lineWidth: 10,
+            }}
+          />
+          <Arc
+            zIndex={1}
+            start={[0, 0.965]}
+            end={[data[0].value, 0.965]}
+            style={{
+              stroke: color,
+              lineWidth: 10,
+            }}
+          />
+          <Html
+            position={['50%', '95%']}
+            html={() => {
+              return `
+                <div style="width: 300px;text-align: center;font-size: 12px!important;">
+                  <p style="font-size: 14px; color: rgba(0,0,0,0.43);margin: 0;">${title}</p>
+                  <p style="font-size: 24px;color: rgba(0,0,0,0.85);margin: 0;">
+                    ${data[0].value * 10}%
+                  </p>
+                </div>`;
+            }}
+          />
+        </Guide>
+        <Geom
+          line={false}
+          type="point"
+          position="value*1"
+          shape="pointer"
+          color={color}
+          active={false}
+        />
+      </Chart>
     );
   }
 }
-
-export default Gauge;

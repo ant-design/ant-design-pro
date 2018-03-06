@@ -7,8 +7,9 @@ import Ellipsis from '../../components/Ellipsis';
 
 import styles from './CardList.less';
 
-@connect(state => ({
-  list: state.list,
+@connect(({ list, loading }) => ({
+  list,
+  loading: loading.models.list,
 }))
 export default class CardList extends PureComponent {
   componentDidMount() {
@@ -21,7 +22,7 @@ export default class CardList extends PureComponent {
   }
 
   render() {
-    const { list: { list, loading } } = this.props;
+    const { list: { list }, loading } = this.props;
 
     const content = (
       <div className={styles.pageHeaderContent}>

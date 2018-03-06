@@ -1,10 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 export interface NoticeIconData {
-  avatar: string;
-  title: React.ReactNode;
-  description: React.ReactNode;
-  datetime: React.ReactNode;
-  extra: React.ReactNode;
+  avatar?: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  datetime?: React.ReactNode;
+  extra?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 export interface NoticeIconProps {
@@ -23,16 +24,18 @@ export interface NoticeIconProps {
     useCssBottom?: boolean;
     useCssTransform?: boolean;
   };
+  style?: React.CSSProperties;
   onPopupVisibleChange?: (visible: boolean) => void;
   popupVisible?: boolean;
   locale?: { emptyText: string; clear: string };
 }
 
 export interface NoticeIconTabProps {
-  list: Array<NoticeIconData>;
-  title: string;
+  list?: Array<NoticeIconData>;
+  title?: string;
   emptyText?: React.ReactNode;
   emptyImage?: string;
+  style?: React.CSSProperties;
 }
 
 export class NoticeIconTab extends React.Component<NoticeIconTabProps, any> {}

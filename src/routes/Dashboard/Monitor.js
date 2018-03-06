@@ -1,19 +1,27 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import { Row, Col, Card, Tooltip } from 'antd';
 import numeral from 'numeral';
-
+import Authorized from '../../utils/Authorized';
 import { Pie, WaterWave, Gauge, TagCloud } from '../../components/Charts';
 import NumberInfo from '../../components/NumberInfo';
 import CountDown from '../../components/CountDown';
 import ActiveChart from '../../components/ActiveChart';
-
 import styles from './Monitor.less';
+
+const { Secured } = Authorized;
 
 const targetTime = new Date().getTime() + 3900000;
 
-@connect(state => ({
-  monitor: state.monitor,
+// use permission as a parameter
+const havePermissionAsync = new Promise((resolve) => {
+  // Call resolve on behalf of passed
+  setTimeout(() => resolve(), 1000);
+});
+@Secured(havePermissionAsync)
+@connect(({ monitor, loading }) => ({
+  monitor,
+  loading: loading.models.monitor,
 }))
 export default class Monitor extends PureComponent {
   componentDidMount() {
@@ -23,11 +31,11 @@ export default class Monitor extends PureComponent {
   }
 
   render() {
-    const { monitor } = this.props;
+    const { monitor, loading } = this.props;
     const { tags } = monitor;
 
     return (
-      <div>
+      <Fragment>
         <Row gutter={24}>
           <Col xl={18} lg={24} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card title="活动实时交易情况" bordered={false}>
@@ -46,10 +54,7 @@ export default class Monitor extends PureComponent {
                   />
                 </Col>
                 <Col md={6} sm={12} xs={24}>
-                  <NumberInfo
-                    subTitle="活动剩余时间"
-                    total={<CountDown target={targetTime} />}
-                  />
+                  <NumberInfo subTitle="活动剩余时间" total={<CountDown target={targetTime} />} />
                 </Col>
                 <Col md={6} sm={12} xs={24}>
                   <NumberInfo
@@ -102,11 +107,10 @@ export default class Monitor extends PureComponent {
           <Col xl={12} lg={24} sm={24} xs={24}>
             <Card
               title="各品类占比"
-              style={{ marginBottom: 24 }}
               bordered={false}
               className={styles.pieCard}
             >
-              <Row gutter={4} style={{ padding: '16px 0' }}>
+              <Row style={{ padding: '16px 0' }}>
                 <Col span={8}>
                   <Pie
                     animate={false}
@@ -142,15 +146,15 @@ export default class Monitor extends PureComponent {
               </Row>
             </Card>
           </Col>
-          <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索" bordered={false} bodyStyle={{ overflow: 'hidden' }}>
+          <Col xl={6} lg={12} sm={24} xs={24}>
+            <Card title="热门搜索" loading={loading} bordered={false} bodyStyle={{ overflow: 'hidden' }}>
               <TagCloud
                 data={tags}
                 height={161}
               />
             </Card>
           </Col>
-          <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
+          <Col xl={6} lg={12} sm={24} xs={24}>
             <Card title="资源剩余" bodyStyle={{ textAlign: 'center', fontSize: 0 }} bordered={false}>
               <WaterWave
                 height={161}
@@ -160,7 +164,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
         </Row>
-      </div>
+      </Fragment>
     );
   }
 }
