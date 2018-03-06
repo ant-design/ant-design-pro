@@ -7,7 +7,6 @@ import createHistory from 'history/createHashHistory';
 // import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading';
 import 'moment/locale/zh-cn';
-import FastClick from 'fastclick';
 import './rollbar';
 
 import './index.less';
@@ -27,8 +26,5 @@ app.router(require('./router').default);
 
 // 5. Start
 app.start('#root');
-
-
-FastClick.attach(document.body);
 
 export default app._store;  // eslint-disable-line
