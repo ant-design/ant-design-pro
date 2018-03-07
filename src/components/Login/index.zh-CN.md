@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: Login
-  zh-CN: Login
+title: Login
 subtitle: 登录
 cols: 1
 order: 15
@@ -37,7 +35,7 @@ rules | 校验规则，同 Form getFieldDecorator(id, options) 中 [option.rules
 
 ### Login.Password、Login.Mobile 同 Login.UserName
 
-### Login.Captcha 
+### Login.Captcha
 
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
@@ -48,4 +46,3 @@ onGetCaptcha | 点击获取校验码的回调 | () => void | -
 ### Login.Submit
 
 支持 antd.Button 的所有属性。
-
