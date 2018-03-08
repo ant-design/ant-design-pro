@@ -22,9 +22,9 @@ import AvatarList from '../../components/AvatarList';
 import { formatWan } from '../../utils/utils';
 import styles from './UserCenter.less';
 import stylesProjects from '../List/Projects.less';
-import stylesArticles from './List/Articles.less';
-import stylesApplications from './List/Applications.less';
-import GridContent from '../layouts/GridContent';
+import stylesArticles from '../List/Articles.less';
+import stylesApplications from '../List/Applications.less';
+import GridContent from '../../layouts/GridContent';
 
 @connect(({ list, loading, user, project }) => ({
   list,

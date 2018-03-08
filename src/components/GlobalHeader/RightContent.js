@@ -65,8 +65,8 @@ export default class GlobalHeaderRight extends PureComponent {
     );
     const noticeData = this.getNoticeData();
     let className = styles.right;
-    if (this.props.theme === 'white') {
-      className = `${styles.right}  ${styles.white}`;
+    if (this.props.theme === 'dark') {
+      className = `${styles.right}  ${styles.dark}`;
     }
     return (
       <div className={className} >

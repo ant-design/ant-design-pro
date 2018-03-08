@@ -122,7 +122,7 @@ const menuData = [{
     path: 'user-center',
   }, {
     name: '个人设置',
-    path: 'userinfo',
+    path: 'userinfo/base',
   }],
 }];
 

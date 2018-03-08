@@ -1,0 +1,26 @@
+.themeColor {
+  overflow: hidden;
+  margin-top: 15px;
+  margin-left: -5px;
+  margin-right: -5px;
+  .title {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.65);
+    line-height: 22px;
+    margin-bottom: 5px;
+  }
+  .colorBlock {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    float: left;
+    margin: 5px;
+    &.active {
+      width: 18px;
+      height: 18px;
+      margin: 4px;
+      border: 2px solid  hsl(90, 100%, 50%);
+      box-shadow: 0 0 4px 0 hsl(90, 100%, 50%);
+    }
+  }
+}
