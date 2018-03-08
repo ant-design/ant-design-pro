@@ -41,6 +41,7 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",
     "react-fittext": "^1.0.0",
+    "react-intl": "^2.4.0",
     "rollbar": "^2.3.4",
     "rollup": "^0.62.0",
     "rollup-plugin-json": "^3.0.0",
