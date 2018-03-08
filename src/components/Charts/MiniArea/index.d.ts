@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
 // g2已经更新到3.0
 // 不带的写了
 
-export interface Axis {
+export interface IAxis {
   title: any;
   line: any;
   gridAlign: any;
@@ -12,18 +12,18 @@ export interface Axis {
   grid: any;
 }
 
-export interface MiniAreaProps {
+export interface IMiniAreaProps {
   color?: string;
   height: number;
   borderColor?: string;
   line?: boolean;
   animate?: boolean;
-  xAxis?: Axis;
-  yAxis?: Axis;
+  xAxis?: IAxis;
+  yAxis?: IAxis;
   data: Array<{
     x: number;
     y: number;
   }>;
 }
 
-export default class MiniArea extends React.Component<MiniAreaProps, any> {}
+export default class MiniArea extends React.Component<IMiniAreaProps, any> {}

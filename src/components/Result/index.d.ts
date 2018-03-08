@@ -1,5 +1,5 @@
 import * as React from 'react';
-export interface ResultProps {
+export interface IResultProps {
   type: 'success' | 'error';
   title: React.ReactNode;
   description?: React.ReactNode;
@@ -8,4 +8,4 @@ export interface ResultProps {
   style?: React.CSSProperties;
 }
 
-export default class Result extends React.Component<ResultProps, any> {}
+export default class Result extends React.Component<IResultProps, any> {}

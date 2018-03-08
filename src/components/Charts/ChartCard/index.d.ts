@@ -1,5 +1,5 @@
 import * as React from "react";
-export interface ChartCardProps {
+export interface IChartCardProps {
   title: React.ReactNode;
   action?: React.ReactNode;
   total?: React.ReactNode | number;
@@ -9,4 +9,4 @@ export interface ChartCardProps {
   style?: React.CSSProperties;
 }
 
-export default class ChartCard extends React.Component<ChartCardProps, any> {}
+export default class ChartCard extends React.Component<IChartCardProps, any> {}
