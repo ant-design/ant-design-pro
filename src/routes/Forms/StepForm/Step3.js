@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'dva';
 import { Button, Row, Col } from 'antd';
 import { routerRedux } from 'dva/router';
-import Result from '../../../components/Result';
+import Result from 'components/Result';
 import styles from './style.less';
 
 class Step3 extends React.PureComponent {
