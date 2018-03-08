@@ -113,23 +113,27 @@ export default class SiderMenu extends PureComponent {
    */
   getSubMenuOrItem = (item) => {
     if (item.children && item.children.some(child => child.name)) {
-      return (
-        <SubMenu
-          title={
-            item.icon ? (
-              <span>
-                {getIcon(item.icon)}
-                <span>{item.name}</span>
-              </span>
-            ) : (
-              item.name
-            )
-          }
-          key={item.path}
-        >
-          {this.getNavMenuItems(item.children)}
-        </SubMenu>
-      );
+      const childrenItems = this.getNavMenuItems(item.children);
+      // 当无子菜单时就不展示菜单
+      if (childrenItems && childrenItems.length > 0) {
+        return (
+          <SubMenu
+            title={
+              item.icon ? (
+                <span>
+                  {getIcon(item.icon)}
+                  <span>{item.name}</span>
+                </span>
+              ) : (
+                  item.name
+                )
+            }
+            key={item.path}
+          >
+            {childrenItems}
+          </SubMenu>
+        )
+      }
     } else {
       return (
         <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>
