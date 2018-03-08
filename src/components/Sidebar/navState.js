@@ -3,27 +3,27 @@ import React from 'react';
 const UrlMap = {
   sidemenu: {
     active:
-      'http://alipay-os.oss-cn-hangzhou-zmf.aliyuncs.com/rmsportal/YcoRFFREHxmXebXryzhC.svg',
+      'https://gw.alipayobjects.com/zos/rmsportal/WEqgEeCsLvecmwJwbhif.svg',
     default:
-      'http://alipay-os.oss-cn-hangzhou-zmf.aliyuncs.com/rmsportal/FUcluUxklaHEgbCfosWO.svg',
+      'https://gw.alipayobjects.com/zos/rmsportal/bjdhEDZlJzyMlyGbFQQd.svg',
     disable:
-      'http://alipay-os.oss-cn-hangzhou-zmf.aliyuncs.com/rmsportal/nnbGSviuREntXtWJEquJ.svg',
+      'https://gw.alipayobjects.com/zos/rmsportal/VeCtUculrOjKzkzSzrye.svg',
   },
   topside: {
     active:
-      'http://alipay-os.oss-cn-hangzhou-zmf.aliyuncs.com/rmsportal/cRVYqCCkknDizjyHpjgR.svg',
+      'https://gw.alipayobjects.com/zos/rmsportal/RbntcRzDHttDvYfKxsPc.svg',
     default:
-      'http://alipay-os.oss-cn-hangzhou-zmf.aliyuncs.com/rmsportal/ygeNiTUuhrHuNMjkVQkv.svg',
+      'https://gw.alipayobjects.com/zos/rmsportal/gqjBdnSHfVYIFvpGbLZV.svg',
     disable:
-      'http://alipay-os.oss-cn-hangzhou-zmf.aliyuncs.com/rmsportal/KtcgueNbQdMSbxGDigdT.svg',
+      'https://gw.alipayobjects.com/zos/rmsportal/VlSlQQkUGdbcOZdbUgMp.svg',
   },
   topmenu: {
     active:
-      'http://alipay-os.oss-cn-hangzhou-zmf.aliyuncs.com/rmsportal/RCtKLhlMLWYKaWDzLsBC.svg',
+      'https://gw.alipayobjects.com/zos/rmsportal/nWoQtAGvMihfwxKZEzAi.svg',
     default:
-      'http://alipay-os.oss-cn-hangzhou-zmf.aliyuncs.com/rmsportal/pMRBYBPSKXgEGrglJsdl.svg',
+      'https://gw.alipayobjects.com/zos/rmsportal/tbfuZcaGaYQGyeaiTaDg.svg',
     disable:
-      'http://alipay-os.oss-cn-hangzhou-zmf.aliyuncs.com/rmsportal/PvQhRIcAGTKewuOfJOSn.svg',
+      'https://gw.alipayobjects.com/zos/rmsportal/VYNKTivFAQOBBbZkkWNb.svg',
   },
 };
 
