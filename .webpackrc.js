@@ -12,7 +12,7 @@ export default {
     },
   },
   alias: {
-    'ant-design-pro/lib': path.resolve(__dirname, 'src/components/'),
+    'components': path.resolve(__dirname, 'src/components/'),
   },
   ignoreMomentLocale: true,
   theme: './src/theme.js',

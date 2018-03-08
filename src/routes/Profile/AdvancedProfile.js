@@ -4,7 +4,7 @@ import Bind from 'lodash-decorators/bind';
 import { connect } from 'dva';
 import { Button, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'antd';
 import classNames from 'classnames';
-import DescriptionList from 'ant-design-pro/lib/DescriptionList';
+import DescriptionList from 'components/DescriptionList';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './AdvancedProfile.less';
 

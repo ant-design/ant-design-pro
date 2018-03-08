@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Row, Col, Card, List, Avatar } from 'antd';
 
-import { Radar } from 'ant-design-pro/lib/Charts';
+import { Radar } from 'components/Charts';
 import EditableLinkGroup from '../../components/EditableLinkGroup';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
