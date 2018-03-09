@@ -30,7 +30,7 @@ const getRedirectData = () => {
 };
 const redirectData = getRedirectData();
 
-class LodingPage extends PureComponent {
+class LoadingPage extends PureComponent {
   state = {
     loading: true,
     isMobile: false,
@@ -91,4 +91,4 @@ class LodingPage extends PureComponent {
   }
 }
 
-export default connect()(LodingPage);
+export default connect()(LoadingPage);
