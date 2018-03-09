@@ -171,7 +171,7 @@ export default class PageHeader extends PureComponent {
     const clsString = classNames(styles.pageHeader, className);
 
     let tabDefaultValue;
-    if (tabActiveKey !== undefined && tabList) {
+    if (tabActiveKey === undefined && tabList) {
       tabDefaultValue = tabList.filter(item => item.default)[0] || tabList[0];
     }
     const breadcrumb = this.conversionBreadcrumbList();
