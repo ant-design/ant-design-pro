@@ -73,7 +73,12 @@ export default class Info extends Component {
     }
     return (
       <GridContent>
-        <div className={styles.main}>
+        <div
+          className={styles.main}
+          ref={(ref) => {
+            this.main = ref;
+          }}
+        >
           <div className={styles.leftmenu}>
             <Menu
               mode={this.state.mode}

@@ -23,11 +23,8 @@ class HeaderView extends PureComponent {
       .removeEventListener('scroll', this.handScroll);
   }
   getHeadWidth = () => {
-    if (
-      !this.props.fixedHeader ||
-      this.props.layout === 'topmenu' ||
-      this.props.fixSiderbar
-    ) {
+    const { fixedHeader, layout, fixSiderbar } = this.props.setting;
+    if (!fixedHeader || layout === 'topmenu' || fixSiderbar) {
       return '100%';
     }
     if (!this.props.collapsed) {
@@ -93,14 +90,8 @@ class HeaderView extends PureComponent {
     }
   };
   render() {
-    const {
-      logo,
-      isMobile,
-      handleMenuCollapse,
-      silderTheme,
-      layout,
-      fixedHeader,
-    } = this.props;
+    const { isMobile, handleMenuCollapse } = this.props;
+    const { silderTheme, layout, fixedHeader } = this.props.setting;
     const isTop = layout === 'topmenu';
     const HeaderDom = this.state.visible ? (
       <Header
@@ -109,22 +100,19 @@ class HeaderView extends PureComponent {
       >
         {isTop && !isMobile ? (
           <TopNavHeader
-            logo={logo}
             theme={silderTheme}
             mode="horizontal"
             Authorized={Authorized}
-            isMobile={isMobile}
-            onNoticeClear={this.handleNoticeClear}
             onCollapse={handleMenuCollapse}
+            onNoticeClear={this.handleNoticeClear}
             onMenuClick={this.handleMenuClick}
             onNoticeVisibleChange={this.handleNoticeVisibleChange}
             {...this.props}
           />
         ) : (
           <GlobalHeader
-            logo={logo}
-            onNoticeClear={this.handleNoticeClear}
             onCollapse={handleMenuCollapse}
+            onNoticeClear={this.handleNoticeClear}
             onMenuClick={this.handleMenuClick}
             onNoticeVisibleChange={this.handleNoticeVisibleChange}
             {...this.props}
@@ -145,9 +133,5 @@ export default connect(({ user, global, setting, loading }) => ({
   collapsed: global.collapsed,
   fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
-  layout: setting.layout,
-  silderTheme: setting.silderTheme,
-  fixedHeader: setting.fixedHeader,
-  fixSiderbar: setting.fixSiderbar,
-  autoHideHeader: setting.autoHideHeader,
+  setting,
 }))(HeaderView);
