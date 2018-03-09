@@ -166,18 +166,15 @@ export default class PageHeader extends PureComponent {
       tabList,
       className,
       tabActiveKey,
+      tabDefaultActiveKey,
       tabBarExtraContent,
     } = this.props;
     const clsString = classNames(styles.pageHeader, className);
-
-    let tabDefaultValue;
-    if (tabActiveKey === undefined && tabList) {
-      tabDefaultValue = tabList.filter(item => item.default)[0] || tabList[0];
-    }
     const breadcrumb = this.conversionBreadcrumbList();
-    const activeKeyProps = {
-      defaultActiveKey: tabDefaultValue && tabDefaultValue.key,
-    };
+    const activeKeyProps = {};
+    if (tabDefaultActiveKey !== undefined) {
+      activeKeyProps.defaultActiveKey = tabDefaultActiveKey;
+    }
     if (tabActiveKey !== undefined) {
       activeKeyProps.activeKey = tabActiveKey;
     }

@@ -10,6 +10,7 @@ export interface IPageHeaderProps {
   breadcrumbList?: Array<{ title: React.ReactNode; href?: string }>;
   tabList?: Array<{ key: string; tab: React.ReactNode }>;
   tabActiveKey?: string;
+  tabDefaultActiveKey?: string;
   onTabChange?: (key: string) => void;
   tabBarExtraContent?: React.ReactNode;
   linkElement?: React.ReactNode;
