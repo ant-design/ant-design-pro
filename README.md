@@ -24,7 +24,7 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
 - :rocket: **State of The Art Development**: Newest development stack of React/dva/antd
 - :iphone: **Responsive**: Designed for varies of screen size
-- :art: **Themeing**: Customizable theme with simple config
+- :art: **Theming**: Customizable theme with simple config
 - :globe_with_meridians: **International**: Built-in i18n solution
 - :gear: **Best Practice**: Solid workflow make your code health
 - :1234: **Mock development**: Easy to use mock development solution

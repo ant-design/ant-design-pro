@@ -22,6 +22,7 @@ const CreateForm = Form.create()((props) => {
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
+      form.resetFields();
       handleAdd(fieldsValue);
     });
   };

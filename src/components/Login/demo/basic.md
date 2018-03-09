@@ -1,9 +1,11 @@
 ---
 order: 0
-title: Standard Login
+title:
+  zh-CN: 标准登录
+  en-US: Standard Login
 ---
 
-支持账号密码及手机号登录两种模式。
+Support login with account and mobile number.
 
 ````jsx
 import Login from 'ant-design-pro/lib/Login';
@@ -26,7 +28,7 @@ class LoginDemo extends React.Component {
         if (!err && (values.username !== 'admin' || values.password !== '888888')) {
           setTimeout(() => {
             this.setState({
-              notice: '账号或密码错误！',
+              notice: 'The combination of username and password is incorrect!',
             });
           }, 500);
         }
@@ -50,7 +52,7 @@ class LoginDemo extends React.Component {
         onTabChange={this.onTabChange}
         onSubmit={this.onSubmit}
       >
-        <Tab key="tab1" tab="账号密码登录">
+        <Tab key="tab1" tab="Account">
           {
             this.state.notice &&
             <Alert style={{ marginBottom: 24 }} message={this.state.notice} type="error" showIcon closable />
@@ -58,21 +60,21 @@ class LoginDemo extends React.Component {
           <UserName name="username" />
           <Password name="password" />
         </Tab>
-        <Tab key="tab2" tab="手机号登录">
+        <Tab key="tab2" tab="Mobile">
           <Mobile name="mobile" />
           <Captcha onGetCaptcha={() => console.log('Get captcha!')} name="captcha" />
         </Tab>
         <div>
-          <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>自动登录</Checkbox>
-          <a style={{ float: 'right' }} href="">忘记密码</a>
+          <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>Keep me logged in</Checkbox>
+          <a style={{ float: 'right' }} href="">Forgot password</a>
         </div>
-        <Submit>登录</Submit>
+        <Submit>Login</Submit>
         <div>
-          其他登录方式
+          Other login methods
           <span className="icon icon-alipay" />
           <span className="icon icon-taobao" />
           <span className="icon icon-weibo" />
-          <a style={{ float: 'right' }} href="">注册账户</a>
+          <a style={{ float: 'right' }} href="">Register</a>
         </div>
       </Login>
     );
