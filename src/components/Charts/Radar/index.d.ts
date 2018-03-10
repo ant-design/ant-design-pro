@@ -1,5 +1,5 @@
 import * as React from "react";
-export interface RadarProps {
+export interface IRadarProps {
   title?: React.ReactNode;
   height: number;
   padding?: [number, number, number, number];
@@ -12,4 +12,4 @@ export interface RadarProps {
   style?: React.CSSProperties;
 }
 
-export default class Radar extends React.Component<RadarProps, any> {}
+export default class Radar extends React.Component<IRadarProps, any> {}

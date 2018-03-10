@@ -11,7 +11,7 @@ const map = {
       placeholder: 'admin',
     },
     rules: [{
-      required: true, message: '请输入账户名！',
+      required: true, message: 'Please enter username!',
     }],
   },
   Password: {
@@ -23,7 +23,7 @@ const map = {
       placeholder: '888888',
     },
     rules: [{
-      required: true, message: '请输入密码！',
+      required: true, message: 'Please enter password!',
     }],
   },
   Mobile: {
@@ -31,12 +31,12 @@ const map = {
     props: {
       size: 'large',
       prefix: <Icon type="mobile" className={styles.prefixIcon} />,
-      placeholder: '手机号',
+      placeholder: 'mobile number',
     },
     rules: [{
-      required: true, message: '请输入手机号！',
+      required: true, message: 'Please enter mobile number!',
     }, {
-      pattern: /^1\d{10}$/, message: '手机号格式错误！',
+      pattern: /^1\d{10}$/, message: 'Wrong mobile number format!',
     }],
   },
   Captcha: {
@@ -44,10 +44,10 @@ const map = {
     props: {
       size: 'large',
       prefix: <Icon type="mail" className={styles.prefixIcon} />,
-      placeholder: '验证码',
+      placeholder: 'captcha',
     },
     rules: [{
-      required: true, message: '请输入验证码！',
+      required: true, message: 'Please enter Captcha!',
     }],
   },
 };

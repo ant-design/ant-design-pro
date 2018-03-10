@@ -1,11 +1,11 @@
-@import "~antd/lib/style/themes/default.less";
-@ease-in-out-circ: cubic-bezier(.78, .14, .15, .86);
+@import '~antd/lib/style/themes/default.less';
+@ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
 .logo {
   height: 64px;
   position: relative;
   line-height: 64px;
   padding-left: (@menu-collapsed-width - 32px) / 2;
-  transition: all .3s;
+  transition: all 0.3s;
   background: #002140;
   overflow: hidden;
   img {
@@ -14,7 +14,7 @@
     height: 32px;
   }
   h1 {
-    color: #fff;
+    color: white;
     display: inline-block;
     vertical-align: middle;
     font-size: 20px;
@@ -26,9 +26,18 @@
 
 .sider {
   min-height: 100vh;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   position: relative;
   z-index: 10;
+  &.ligth {
+    background-color: white;
+    .logo {
+      background: white;
+      h1 {
+        color: #002140;
+      }
+    }
+  }
 }
 
 .icon {

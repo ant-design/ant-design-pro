@@ -92,12 +92,15 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm')),
     },
     '/form/step-form/info': {
+      name: '分步表单（填写转账信息）',
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step1')),
     },
     '/form/step-form/confirm': {
+      name: '分步表单（确认转账信息）',
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step2')),
     },
     '/form/step-form/result': {
+      name: '分步表单（完成）',
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step3')),
     },
     '/form/advanced-form': {

@@ -1,8 +1,8 @@
 import * as React from "react";
-export interface FieldProps {
+export interface IFieldProps {
   label: React.ReactNode;
   value: React.ReactNode;
   style?: React.CSSProperties;
 }
 
-export default class Field extends React.Component<FieldProps, any> {}
+export default class Field extends React.Component<IFieldProps, any> {}

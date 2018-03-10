@@ -25,6 +25,7 @@ order: 11
 | breadcrumbNameMap | 面包屑相关属性，路由的地址-名称映射表 | object | - |
 | tabList | tab 标题列表 | array<{key: string, tab: ReactNode}> | -  |
 | tabActiveKey | 当前高亮的 tab 项 | string | -  |
+| tabDefaultActiveKey | 默认高亮的 tab 项 | string | 第一项  |
 | onTabChange | 切换面板的回调 | (key) => void | -  |
 | linkElement | 定义链接的元素，默认为 `a`，可传入 react-router 的 Link | string\|ReactElement | - |
 
