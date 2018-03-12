@@ -164,7 +164,16 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
     },
     '/account/center': {
-      component: dynamicWrapper(app, ['list', 'user', 'project'], () => import('../routes/Account/Center')),
+      component: dynamicWrapper(app, ['list', 'user', 'project'], () => import('../routes/Account/Center/Center')),
+    },
+    '/account/center/articles': {
+      component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Articles')),
+    },
+    '/account/center/applications': {
+      component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Applications')),
+    },
+    '/account/center/projects': {
+      component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Projects')),
     },
     '/account/settings': {
       component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/Info')),
