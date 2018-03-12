@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'dva';
 import { Form, Input, Button, Select, Divider } from 'antd';
 import { routerRedux } from 'dva/router';
@@ -32,7 +32,7 @@ class Step1 extends React.PureComponent {
       });
     };
     return (
-      <div>
+      <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
           <Form.Item
             {...formItemLayout}
@@ -112,7 +112,7 @@ class Step1 extends React.PureComponent {
           <h4>转账到银行卡</h4>
           <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }

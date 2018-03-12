@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Checkbox, Alert, Icon } from 'antd';
-import Login from '../../components/Login';
+import Login from 'components/Login';
 import styles from './Login.less';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
@@ -42,7 +42,7 @@ export default class LoginPage extends Component {
 
   renderMessage = (content) => {
     return (
-      <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon closable />
+      <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
     );
   }
 
@@ -61,7 +61,7 @@ export default class LoginPage extends Component {
               login.status === 'error' &&
               login.type === 'account' &&
               !login.submitting &&
-              this.renderMessage('账户或密码错误')
+              this.renderMessage('账户或密码错误（admin/888888）')
             }
             <UserName name="userName" placeholder="admin/user" />
             <Password name="password" placeholder="888888/123456" />

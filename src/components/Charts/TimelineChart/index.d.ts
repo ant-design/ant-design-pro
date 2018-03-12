@@ -1,5 +1,5 @@
 import * as React from "react";
-export interface TimelineChartProps {
+export interface ITimelineChartProps {
   data: Array<{
     x: string;
     y1: string;
@@ -8,9 +8,10 @@ export interface TimelineChartProps {
   titleMap: { y1: string; y2: string };
   padding?: [number, number, number, number];
   height?: number;
+  style?: React.CSSProperties;
 }
 
 export default class TimelineChart extends React.Component<
-  TimelineChartProps,
+  ITimelineChartProps,
   any
 > {}

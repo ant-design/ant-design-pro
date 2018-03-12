@@ -1,10 +1,11 @@
 import * as React from "react";
-export interface TagCloudProps {
+export interface ITagCloudProps {
   data: Array<{
     name: string;
     value: number;
   }>;
   height: number;
+  style?: React.CSSProperties;
 }
 
-export default class TagCloud extends React.Component<TagCloudProps, any> {}
+export default class TagCloud extends React.Component<ITagCloudProps, any> {}

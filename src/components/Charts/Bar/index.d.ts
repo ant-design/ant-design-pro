@@ -1,5 +1,5 @@
 import * as React from "react";
-export interface BarProps {
+export interface IBarProps {
   title: React.ReactNode;
   color?: string;
   padding?: [number, number, number, number];
@@ -9,6 +9,7 @@ export interface BarProps {
     y: number;
   }>;
   autoLabel?: boolean;
+  style?: React.CSSProperties;
 }
 
-export default class Bar extends React.Component<BarProps, any> {}
+export default class Bar extends React.Component<IBarProps, any> {}

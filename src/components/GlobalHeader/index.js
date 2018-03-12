@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Layout, Menu, Icon, Spin, Tag, Dropdown, Avatar, Divider } from 'antd';
+import { Menu, Icon, Spin, Tag, Dropdown, Avatar, Divider, Tooltip } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import Debounce from 'lodash-decorators/debounce';
@@ -7,8 +7,6 @@ import { Link } from 'dva/router';
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
-
-const { Header } = Layout;
 
 export default class GlobalHeader extends PureComponent {
   componentWillUnmount() {
@@ -61,13 +59,14 @@ export default class GlobalHeader extends PureComponent {
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item disabled><Icon type="user" />个人中心</Menu.Item>
         <Menu.Item disabled><Icon type="setting" />设置</Menu.Item>
+        <Menu.Item key="triggerError"><Icon type="close-circle" />触发报错</Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout"><Icon type="logout" />退出登录</Menu.Item>
       </Menu>
     );
     const noticeData = this.getNoticeData();
     return (
-      <Header className={styles.header}>
+      <div className={styles.header}>
         {isMobile && (
           [
             (
@@ -95,6 +94,16 @@ export default class GlobalHeader extends PureComponent {
               console.log('enter', value); // eslint-disable-line
             }}
           />
+          <Tooltip title="使用文档">
+            <a
+              target="_blank"
+              href="http://pro.ant.design/docs/getting-started"
+              rel="noopener noreferrer"
+              className={styles.action}
+            >
+              <Icon type="question-circle-o" />
+            </a >
+          </Tooltip>
           <NoticeIcon
             className={styles.action}
             count={currentUser.notifyCount}
@@ -134,7 +143,7 @@ export default class GlobalHeader extends PureComponent {
             </Dropdown>
           ) : <Spin size="small" style={{ marginLeft: 8 }} />}
         </div>
-      </Header>
+      </div>
     );
   }
 }

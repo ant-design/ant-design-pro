@@ -1,4 +1,4 @@
-import { getUrlParams } from './utils';
+import { parse } from 'url';
 
 const titles = [
   'Alipay',
@@ -110,7 +110,7 @@ export function getFakeList(req, res, u) {
     url = req.url; // eslint-disable-line
   }
 
-  const params = getUrlParams(url);
+  const params = parse(url, true).query;
 
   const count = (params.count * 1) || 20;
 

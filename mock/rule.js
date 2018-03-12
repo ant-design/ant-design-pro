@@ -1,4 +1,4 @@
-import { getUrlParams } from './utils';
+import { parse } from 'url';
 
 // mock tableListDataSource
 let tableListDataSource = [];
@@ -26,7 +26,7 @@ export function getRule(req, res, u) {
     url = req.url; // eslint-disable-line
   }
 
-  const params = getUrlParams(url);
+  const params = parse(url, true).query;
 
   let dataSource = [...tableListDataSource];
 
