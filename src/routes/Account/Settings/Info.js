@@ -10,9 +10,9 @@ const { Item } = Menu;
 
 const menuMap = {
   base: '基本设置',
-  safe: '安全设置',
-  account: '账号绑定',
-  message: '新消息通知',
+  security: '安全设置',
+  binding: '账号绑定',
+  notification: '新消息通知',
 };
 
 @connect(({ user }) => ({
@@ -45,7 +45,7 @@ export default class Info extends Component {
     return menuMap[this.state.selectKey];
   };
   selectKey = ({ key }) => {
-    this.props.dispatch(routerRedux.push(`/user-profile/userinfo/${key}`));
+    this.props.dispatch(routerRedux.push(`/account/settings/${key}`));
     this.setState({
       selectKey: key,
     });
@@ -101,7 +101,11 @@ export default class Info extends Component {
                   exact={item.exact}
                 />
               ))}
-              <Redirect exact from="/userinfo" to="/userinfo/base" />
+              <Redirect
+                exact
+                from="/account/settings"
+                to="/account/settings/base"
+              />
               <Redirect to="/exception/404" />
             </Switch>
           </div>

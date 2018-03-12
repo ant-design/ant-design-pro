@@ -7,7 +7,7 @@ const passwordStrength = {
   weak: <font className="weak">弱</font>,
 };
 
-export default class SafeView extends Component {
+export default class SecurityView extends Component {
   getData = () => {
     return [
       {

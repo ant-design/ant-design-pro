@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Icon, List } from 'antd';
 
-export default class AccountView extends Component {
+export default class BindingView extends Component {
   getData = () => {
     return [
       {

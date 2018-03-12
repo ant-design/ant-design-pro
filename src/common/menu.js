@@ -116,13 +116,13 @@ const menuData = [{
 }, {
   name: '个人页',
   icon: 'user',
-  path: 'user-profile',
+  path: 'account',
   children: [{
     name: '个人中心',
-    path: 'user-center',
+    path: 'center',
   }, {
     name: '个人设置',
-    path: 'userinfo/base',
+    path: 'settings',
   }],
 }];
 

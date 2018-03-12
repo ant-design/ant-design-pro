@@ -20,8 +20,8 @@ import {
 } from 'antd';
 import AvatarList from '../../components/AvatarList';
 import { formatWan } from '../../utils/utils';
-import styles from './UserCenter.less';
 import stylesProjects from '../List/Projects.less';
+import styles from './Center.less';
 import stylesArticles from '../List/Articles.less';
 import stylesApplications from '../List/Applications.less';
 import GridContent from '../../layouts/GridContent';
@@ -34,7 +34,7 @@ import GridContent from '../../layouts/GridContent';
   project,
   projectLoading: loading.effects['project/fetchNotice'],
 }))
-export default class UserCenter extends PureComponent {
+export default class Center extends PureComponent {
   state = {
     key: 'article',
     newTags: [],
