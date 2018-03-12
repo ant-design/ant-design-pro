@@ -3,7 +3,7 @@ import { Switch, List } from 'antd';
 
 const Action = <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked />;
 
-export default class MessageView extends Component {
+export default class NotificationView extends Component {
   getData = () => {
     return [
       {

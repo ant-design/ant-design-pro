@@ -163,23 +163,23 @@ export const getRouterData = (app) => {
     '/user/register-result': {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
     },
-    '/user-profile/user-center': {
-      component: dynamicWrapper(app, ['list', 'user', 'project'], () => import('../routes/UserProfile/UserCenter')),
+    '/account/center': {
+      component: dynamicWrapper(app, ['list', 'user', 'project'], () => import('../routes/Account/Center')),
     },
-    '/user-profile/userinfo': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/Info')),
+    '/account/settings': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/Info')),
     },
-    '/user-profile/userinfo/base': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/BaseView')),
+    '/account/settings/base': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/BaseView')),
     },
-    '/user-profile/userinfo/safe': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/SafeView')),
+    '/account/settings/security': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/SecurityView')),
     },
-    '/user-profile/userinfo/account': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/AccountView')),
+    '/account/settings/binding': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/BindingView')),
     },
-    '/user-profile/userinfo/message': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/UserProfile/Userinfo/MessageView')),
+    '/account/settings/notification': {
+      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/NotificationView')),
     },
     // '/user/:id': {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
