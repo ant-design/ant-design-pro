@@ -9,7 +9,7 @@ const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
 @connect(({ login, loading }) => ({
   login,
-  submitting: loading.effects['login/login'],
+  submitting: login.effects['login/login'],
 }))
 export default class LoginPage extends Component {
   state = {
