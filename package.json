@@ -22,7 +22,7 @@
   "dependencies": {
     "@antv/data-set": "^0.8.0",
     "@babel/polyfill": "^7.0.0-beta.36",
-    "antd": "^3.1.0",
+    "antd": "^3.3.0",
     "babel-runtime": "^6.9.2",
     "bizcharts": "^3.1.3-beta.1",
     "bizcharts-plugin-slider": "^2.0.1",
@@ -70,7 +70,7 @@
     "pro-download": "^1.0.1",
     "redbox-react": "^1.5.0",
     "regenerator-runtime": "^0.11.1",
-    "roadhog": "^2.1.0",
+    "roadhog": "^2.3.0",
     "roadhog-api-doc": "^0.3.4",
     "stylelint": "^8.4.0",
     "stylelint-config-standard": "^18.0.0"
