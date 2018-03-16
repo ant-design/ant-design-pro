@@ -17,7 +17,7 @@ import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 
 const { Content, Header, Footer } = Layout;
-const { AuthorizedRoute } = Authorized;
+const { AuthorizedRoute, check } = Authorized;
 
 /**
  * 根据菜单取得重定向地址.
@@ -109,7 +109,11 @@ class BasicLayout extends React.PureComponent {
       urlParams.searchParams.delete('redirect');
       window.history.replaceState(null, 'redirect', urlParams.href);
     } else {
-      return '/dashboard/analysis';
+      const { routerData } = this.props;
+      // get the first authorized route path in routerData
+      const authorizedPath = Object.keys(routerData).find(item =>
+        check(routerData[item].authority, item) && item !== '/');
+      return authorizedPath;
     }
     return redirect;
   }
