@@ -82,6 +82,9 @@
     "**/*.{js,jsx}": "lint-staged:js",
     "**/*.less": "stylelint --syntax less"
   },
+  "engines": {
+    "node" : ">=8.0.0"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
