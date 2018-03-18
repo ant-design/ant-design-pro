@@ -31,6 +31,29 @@ const menuData = [{
     path: 'advanced-form',
   }],
 }, {
+  name: '系统页',
+  icon: 'profile',
+  path: 'system',
+  children: [{
+    name: '群组',
+    path: 'group',
+  }, {
+    name: '用户',
+    path: 'user',
+  }, {
+    name: '角色',
+    path: 'role',
+  }, {
+    name: '权限',
+    path: 'authority',
+  }, {
+    name: '资源',
+    path: 'resource',
+  }, {
+    name: '字典',
+    path: 'dictionary',
+  }],
+}, {
   name: '列表页',
   icon: 'table',
   path: 'list',

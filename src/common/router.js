@@ -7,7 +7,7 @@ let routerDataCache;
 
 const modelNotExisted = (app, model) => (
   // eslint-disable-next-line
-  !app._models.some(({ namespace }) => {
+  !app._models.some(({namespace}) => {
     return namespace === model.substring(model.lastIndexOf('/') + 1);
   })
 );
@@ -102,6 +102,12 @@ export const getRouterData = (app) => {
     },
     '/form/advanced-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
+    },
+    '/system/user': {
+      component: dynamicWrapper(app, ['system'], () => import('../routes/System/User')),
+    },
+    '/system/resource': {
+      component: dynamicWrapper(app, ['system'], () => import('../routes/System/Resource')),
     },
     '/list/table-list': {
       component: dynamicWrapper(app, ['rule'], () => import('../routes/List/TableList')),
