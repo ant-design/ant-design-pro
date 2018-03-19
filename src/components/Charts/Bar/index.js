@@ -37,12 +37,12 @@ class Bar extends Component {
         if (!prevState.autoHideXLabels) {
           return {
             autoHideXLabels: true,
-          }
+          };
         }
       } else if (prevState.autoHideXLabels) {
         return {
           autoHideXLabels: false,
-        }
+        };
       }
       return prevState;
     });
