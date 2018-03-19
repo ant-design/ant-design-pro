@@ -1,39 +1,23 @@
-### MacOS ###
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+# roadhog-api-doc ignore
+/src/utils/request-temp.js
+_roadhog-api-doc
+
+# production
+/dist
+
+# misc
 .DS_Store
+npm-debug.log*
+yarn-error.log
 
-### IDE ###
-.idea/
-.vscode/
-
-### Development Build folders ###
-public/
-node_modules/
-.tmp/
-
-### Debug Source maps ###
-# react/jsx
-.srcmap/
-# Stylus
-*.styl.css
-
-### Configuration ###
-config/*.env.js
-
-### Logs ###
-*.log
-
-### Personal ###
-*.prsnl
-
-
-### Tests ###
-**/*.test.js.snap
-
-### Module Builds ###
-dist/
-src/js/modules/*/dist
-
-.npmrc
-*.lock
-.npmbox.cache
+/coverage
+.idea
+yarn.lock
 package-lock.json
+*bak
+jsconfig.json
+.prettierrc
