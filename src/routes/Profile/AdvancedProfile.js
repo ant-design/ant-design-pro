@@ -171,17 +171,20 @@ export default class AdvancedProfile extends Component {
   @Bind()
   @Debounce(200)
   setStepDirection() {
-    const { stepDirection } = this.state;
-    const w = getWindowWidth();
-    if (stepDirection !== 'vertical' && w <= 576) {
-      this.setState({
-        stepDirection: 'vertical',
-      });
-    } else if (stepDirection !== 'horizontal' && w > 576) {
-      this.setState({
-        stepDirection: 'horizontal',
-      });
-    }
+    this.setState((prevState) => {
+      const { stepDirection } = prevState;
+      const w = getWindowWidth();
+      if (stepDirection !== 'vertical' && w <= 576) {
+        return {
+          stepDirection: 'vertical',
+        };
+      } else if (stepDirection !== 'horizontal' && w > 576) {
+        return {
+          stepDirection: 'horizontal',
+        };
+      }
+      return prevState;
+    });
   }
 
   render() {

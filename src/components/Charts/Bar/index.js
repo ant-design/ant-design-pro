@@ -31,19 +31,21 @@ class Bar extends Component {
       return;
     }
     const minWidth = data.length * 30;
-    const { autoHideXLabels } = this.state;
 
-    if (canvasWidth <= minWidth) {
-      if (!autoHideXLabels) {
-        this.setState({
-          autoHideXLabels: true,
-        });
+    this.setState((prevState) => {
+      if (canvasWidth <= minWidth) {
+        if (!prevState.autoHideXLabels) {
+          return {
+            autoHideXLabels: true,
+          }
+        }
+      } else if (prevState.autoHideXLabels) {
+        return {
+          autoHideXLabels: false,
+        }
       }
-    } else if (autoHideXLabels) {
-      this.setState({
-        autoHideXLabels: false,
-      });
-    }
+      return prevState;
+    });
   }
 
   handleRoot = (n) => {
