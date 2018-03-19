@@ -43,7 +43,7 @@ class HeaderView extends PureComponent {
   };
   handleMenuClick = ({ key }) => {
     if (key === 'userCenter') {
-      this.props.dispatch(routerRedux.push('/user-profile/user-center'));
+      this.props.dispatch(routerRedux.push('/account/center'));
       return;
     }
     if (key === 'triggerError') {
@@ -51,7 +51,7 @@ class HeaderView extends PureComponent {
       return;
     }
     if (key === 'userinfo') {
-      this.props.dispatch(routerRedux.push('/user-profile/userinfo/base'));
+      this.props.dispatch(routerRedux.push('/account/settings/base'));
       return;
     }
     if (key === 'logout') {
