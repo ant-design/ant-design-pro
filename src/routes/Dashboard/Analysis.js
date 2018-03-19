@@ -299,7 +299,7 @@ export default class Analysis extends Component {
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
-              title="Test"
+              title="运营活动效果"
               action={
                 <Tooltip title="指标说明">
                   <Icon type="info-circle-o" />
