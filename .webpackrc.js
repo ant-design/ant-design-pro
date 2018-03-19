@@ -19,7 +19,7 @@ export default {
   html: {
     template: './src/index.ejs',
   },
-  publicPath: '/',
   disableDynamicImport: true,
+  publicPath: '/',
   hash: true,
 };
