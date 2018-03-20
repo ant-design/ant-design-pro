@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react';
 import numeral from 'numeral';
 import { connect } from 'dva';
 import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
+import TagSelect from 'components/TagSelect';
+import StandardFormRow from 'components/StandardFormRow';
 
-import StandardFormRow from '../../components/StandardFormRow';
-import TagSelect from '../../components/TagSelect';
 import { formatWan } from '../../utils/utils';
+
 
 import styles from './Applications.less';
 

@@ -16,7 +16,7 @@ import Footer from './Footer';
 import Header from './Header';
 
 const { Content } = Layout;
-const { AuthorizedRoute } = Authorized;
+const { AuthorizedRoute, check } = Authorized;
 
 const RightSidebar = connect(({ setting }) => ({ ...setting }))(Sidebar);
 
@@ -72,7 +72,11 @@ class BasicLayout extends React.PureComponent {
       urlParams.searchParams.delete('redirect');
       window.history.replaceState(null, 'redirect', urlParams.href);
     } else {
-      return '/dashboard/analysis';
+      const { routerData } = this.props;
+      // get the first authorized route path in routerData
+      const authorizedPath = Object.keys(routerData).find(item =>
+        check(routerData[item].authority, item) && item !== '/');
+      return authorizedPath;
     }
     return redirect;
   };

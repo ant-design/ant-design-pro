@@ -1,5 +1,5 @@
 import * as React from 'react';
-export interface PieProps {
+export interface IPieProps {
   animate?: boolean;
   color?: string;
   height: number;
@@ -17,4 +17,4 @@ export interface PieProps {
   subTitle?: React.ReactNode;
 }
 
-export default class Pie extends React.Component<PieProps, any> {}
+export default class Pie extends React.Component<IPieProps, any> {}

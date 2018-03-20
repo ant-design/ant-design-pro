@@ -1,7 +1,7 @@
 import * as React from 'react';
-export interface HeaderSearchProps {
+export interface IHeaderSearchProps {
   placeholder?: string;
-  dataSource?: Array<string>;
+  dataSource?: string[];
   onSearch?: (value: string) => void;
   onChange?: (value: string) => void;
   onPressEnter?: (value: string) => void;
@@ -9,6 +9,6 @@ export interface HeaderSearchProps {
 }
 
 export default class HeaderSearch extends React.Component<
-  HeaderSearchProps,
+  IHeaderSearchProps,
   any
 > {}

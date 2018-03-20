@@ -13,6 +13,7 @@
 - 使用文档：http://pro.ant.design/docs/getting-started-cn
 - 更新日志: http://pro.ant.design/docs/changelog-cn
 - 常见问题：http://pro.ant.design/docs/faq-cn
+- 国内镜像：http://ant-design-pro.gitee.io
 
 ## 特性
 

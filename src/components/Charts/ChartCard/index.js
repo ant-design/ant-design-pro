@@ -4,6 +4,18 @@ import classNames from 'classnames';
 
 import styles from './index.less';
 
+const renderTotal = (total) => {
+  let totalDom;
+  switch (typeof total) {
+    case undefined:
+      totalDom = null;
+      break;
+    default:
+      totalDom = <div className={styles.total}>{total}</div>;
+  }
+  return totalDom;
+};
+
 const ChartCard = ({
   loading = false, contentHeight, title, avatar, action, total, footer, children, ...rest
 }) => {
@@ -22,10 +34,7 @@ const ChartCard = ({
             <span className={styles.title}>{title}</span>
             <span className={styles.action}>{action}</span>
           </div>
-          {
-            // eslint-disable-next-line
-            (total !== undefined) && (<div className={styles.total} dangerouslySetInnerHTML={{ __html: total }} />)
-          }
+          {renderTotal(total)}
         </div>
       </div>
       {

@@ -4,9 +4,9 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Row, Col, Card, List, Avatar, Spin } from 'antd';
 
+import { Radar } from 'components/Charts';
+import EditableLinkGroup from 'components/EditableLinkGroup';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
-import EditableLinkGroup from '../../components/EditableLinkGroup';
-import { Radar } from '../../components/Charts';
 
 import styles from './Workplace.less';
 
