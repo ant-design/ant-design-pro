@@ -90,6 +90,6 @@ ReactDOM.render(
       />
     </Col>
   </Row>,
-  mountNode
+  mountNode,
 );
 ```
