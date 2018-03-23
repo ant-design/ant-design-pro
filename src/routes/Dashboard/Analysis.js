@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import {
   Row,
@@ -24,9 +24,9 @@ import {
   Bar,
   Pie,
   TimelineChart,
-} from '../../components/Charts';
-import Trend from '../../components/Trend';
-import NumberInfo from '../../components/NumberInfo';
+} from 'components/Charts';
+import Trend from 'components/Trend';
+import NumberInfo from 'components/NumberInfo';
 import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
@@ -241,7 +241,7 @@ export default class Analysis extends Component {
     };
 
     return (
-      <div>
+      <Fragment>
         <Row gutter={24}>
           <Col {...topColResponsiveProps}>
             <ChartCard
@@ -482,7 +482,7 @@ export default class Analysis extends Component {
             ))}
           </Tabs>
         </Card>
-      </div>
+      </Fragment>
     );
   }
 }
