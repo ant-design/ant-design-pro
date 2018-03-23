@@ -14,7 +14,7 @@ Authorized.check = check;
  * use  authority or getAuthority
  * @param {string|()=>String} currentAuthority
  */
-const renderAuthorize = (currentAuthority) => {
+const renderAuthorize = currentAuthority => {
   if (currentAuthority) {
     if (currentAuthority.constructor.name === 'Function') {
       CURRENT = currentAuthority();

@@ -66,19 +66,19 @@ export default class Analysis extends Component {
     });
   }
 
-  handleChangeSalesType = (e) => {
+  handleChangeSalesType = e => {
     this.setState({
       salesType: e.target.value,
     });
   };
 
-  handleTabChange = (key) => {
+  handleTabChange = key => {
     this.setState({
       currentTabKey: key,
     });
   };
 
-  handleRangePickerChange = (rangePickerValue) => {
+  handleRangePickerChange = rangePickerValue => {
     this.setState({
       rangePickerValue,
     });
@@ -88,7 +88,7 @@ export default class Analysis extends Component {
     });
   };
 
-  selectDate = (type) => {
+  selectDate = type => {
     this.setState({
       rangePickerValue: getTimeDistance(type),
     });

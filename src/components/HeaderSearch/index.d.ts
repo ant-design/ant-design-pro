@@ -8,7 +8,4 @@ export interface IHeaderSearchProps {
   style?: React.CSSProperties;
 }
 
-export default class HeaderSearch extends React.Component<
-  IHeaderSearchProps,
-  any
-> {}
+export default class HeaderSearch extends React.Component<IHeaderSearchProps, any> {}

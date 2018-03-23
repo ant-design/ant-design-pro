@@ -48,7 +48,7 @@ export default class TimelineChart extends React.Component {
       .source(data)
       .transform({
         type: 'filter',
-        callback: (obj) => {
+        callback: obj => {
           const date = obj.x;
           return date <= ds.state.end && date >= ds.state.start;
         },

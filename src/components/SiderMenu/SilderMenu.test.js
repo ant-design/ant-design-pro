@@ -1,12 +1,6 @@
 import { getMeunMatcheys } from './SiderMenu';
 
-const meun = [
-  '/dashboard',
-  '/userinfo',
-  '/dashboard/name',
-  '/userinfo/:id',
-  '/userinfo/:id/info',
-];
+const meun = ['/dashboard', '/userinfo', '/dashboard/name', '/userinfo/:id', '/userinfo/:id/info'];
 
 describe('test meun match', () => {
   it('simple path', () => {
@@ -17,20 +11,14 @@ describe('test meun match', () => {
   });
 
   it('Secondary path', () => {
-    expect(getMeunMatcheys(meun, '/dashboard/name')).toEqual([
-      '/dashboard/name',
-    ]);
+    expect(getMeunMatcheys(meun, '/dashboard/name')).toEqual(['/dashboard/name']);
   });
 
   it('Parameter path', () => {
-    expect(getMeunMatcheys(meun, '/userinfo/2144')).toEqual([
-      '/userinfo/:id',
-    ]);
+    expect(getMeunMatcheys(meun, '/userinfo/2144')).toEqual(['/userinfo/:id']);
   });
 
   it('three parameter path', () => {
-    expect(getMeunMatcheys(meun, '/userinfo/2144/info')).toEqual([
-      '/userinfo/:id/info',
-    ]);
+    expect(getMeunMatcheys(meun, '/userinfo/2144/info')).toEqual(['/userinfo/:id/info']);
   });
 });

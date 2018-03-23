@@ -1,5 +1,5 @@
 {
-  "extends": "stylelint-config-standard",
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
   "rules": {
     "selector-pseudo-class-no-unknown": null,
     "shorthand-property-no-redundant-values": null,
@@ -17,6 +17,7 @@
     "number-no-trailing-zeros": null,
     "rule-empty-line-before": null,
     "selector-combinator-space-after": null,
+    "selector-descendant-combinator-no-non-space": null,
     "selector-list-comma-newline-after": null,
     "selector-pseudo-element-colon-notation": null,
     "unit-no-unknown": null,
