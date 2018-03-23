@@ -17,7 +17,8 @@
     "lint-staged:js": "eslint --ext .js",
     "test": "roadhog test",
     "test:component": "roadhog test ./src/components",
-    "test:all": "node ./tests/run-tests.js"
+    "test:all": "node ./tests/run-tests.js",
+    "prettier": "prettier --write ./src/**/**/**/*"
   },
   "dependencies": {
     "@antv/data-set": "^0.8.0",
@@ -64,31 +65,31 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
     "eslint-plugin-react": "^7.0.1",
+    "eslint-config-prettier": "^2.9.0",
     "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "mockjs": "^1.0.1-beta3",
+    "prettier": "1.11.1",
     "pro-download": "^1.0.1",
     "redbox-react": "^1.5.0",
     "regenerator-runtime": "^0.11.1",
     "roadhog": "^2.3.0",
     "roadhog-api-doc": "^0.3.4",
     "stylelint": "^8.4.0",
+    "stylelint-config-prettier": "^3.0.4",
     "stylelint-config-standard": "^18.0.0"
   },
   "optionalDependencies": {
     "puppeteer": "^1.1.1"
   },
   "lint-staged": {
+    "**/*.{js,jsx,less}": ["prettier --wirter", "git add"],
     "**/*.{js,jsx}": "lint-staged:js",
     "**/*.less": "stylelint --syntax less"
   },
   "engines": {
     "node": ">=8.0.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 10"
-  ]
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"]
 }

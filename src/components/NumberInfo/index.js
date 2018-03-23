@@ -3,15 +3,11 @@ import { Icon } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 
-export default ({
-  theme, title, subTitle, total, subTotal, status, suffix, gap, ...rest
-}) => (
+export default ({ theme, title, subTitle, total, subTotal, status, suffix, gap, ...rest }) => (
   <div
-    className={
-      classNames(styles.numberInfo, {
-        [styles[`numberInfo${theme}`]]: theme,
-      })
-    }
+    className={classNames(styles.numberInfo, {
+      [styles[`numberInfo${theme}`]]: theme,
+    })}
     {...rest}
   >
     {title && <div className={styles.numberInfoTitle}>{title}</div>}
@@ -21,14 +17,12 @@ export default ({
         {total}
         {suffix && <em className={styles.suffix}>{suffix}</em>}
       </span>
-      {
-        (status || subTotal) && (
-          <span className={styles.subTotal}>
-            {subTotal}
-            {status && <Icon type={`caret-${status}`} />}
-          </span>
-        )
-      }
+      {(status || subTotal) && (
+        <span className={styles.subTotal}>
+          {subTotal}
+          {status && <Icon type={`caret-${status}`} />}
+        </span>
+      )}
     </div>
   </div>
 );

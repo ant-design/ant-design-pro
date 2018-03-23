@@ -67,13 +67,13 @@ export default function request(url, options) {
 
   return fetch(url, newOptions)
     .then(checkStatus)
-    .then((response) => {
+    .then(response => {
       if (newOptions.method === 'DELETE' || response.status === 204) {
         return response.text();
       }
       return response.json();
     })
-    .catch((e) => {
+    .catch(e => {
       const { dispatch } = store;
       const status = e.name;
       if (status === 401) {

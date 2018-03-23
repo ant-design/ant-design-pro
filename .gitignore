@@ -20,4 +20,3 @@ yarn.lock
 package-lock.json
 *bak
 jsconfig.json
-.prettierrc

@@ -10,7 +10,7 @@ const { TabPane } = Tabs;
 export function getBreadcrumb(breadcrumbNameMap, url) {
   let breadcrumb = breadcrumbNameMap[url];
   if (!breadcrumb) {
-    Object.keys(breadcrumbNameMap).forEach((item) => {
+    Object.keys(breadcrumbNameMap).forEach(item => {
       if (pathToRegexp(item).test(url)) {
         breadcrumb = breadcrumbNameMap[item];
       }
@@ -26,7 +26,7 @@ export default class PageHeader extends PureComponent {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
   };
-  onChange = (key) => {
+  onChange = key => {
     if (this.props.onTabChange) {
       this.props.onTabChange(key);
     }
@@ -36,17 +36,12 @@ export default class PageHeader extends PureComponent {
       routes: this.props.routes || this.context.routes,
       params: this.props.params || this.context.params,
       routerLocation: this.props.location || this.context.location,
-      breadcrumbNameMap:
-        this.props.breadcrumbNameMap || this.context.breadcrumbNameMap,
+      breadcrumbNameMap: this.props.breadcrumbNameMap || this.context.breadcrumbNameMap,
     };
   };
   // Generated according to props
   conversionFromProps = () => {
-    const {
-      breadcrumbList,
-      breadcrumbSeparator,
-      linkElement = 'a',
-    } = this.props;
+    const { breadcrumbList, breadcrumbSeparator, linkElement = 'a' } = this.props;
     return (
       <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
         {breadcrumbList.map(item => (
@@ -57,7 +52,7 @@ export default class PageHeader extends PureComponent {
                   {
                     [linkElement === 'a' ? 'href' : 'to']: item.href,
                   },
-                  item.title,
+                  item.title
                 )
               : item.title}
           </Breadcrumb.Item>
@@ -72,14 +67,13 @@ export default class PageHeader extends PureComponent {
     // Loop data mosaic routing
     const extraBreadcrumbItems = pathSnippets.map((url, index) => {
       const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
-      const isLinkable =
-        index !== pathSnippets.length - 1 && currentBreadcrumb.component;
+      const isLinkable = index !== pathSnippets.length - 1 && currentBreadcrumb.component;
       return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
         <Breadcrumb.Item key={url}>
           {createElement(
             isLinkable ? linkElement : 'span',
             { [linkElement === 'a' ? 'href' : 'to']: url },
-            currentBreadcrumb.name,
+            currentBreadcrumb.name
           )}
         </Breadcrumb.Item>
       ) : null;
@@ -92,9 +86,9 @@ export default class PageHeader extends PureComponent {
           {
             [linkElement === 'a' ? 'href' : 'to']: '/',
           },
-          '首页',
+          '首页'
         )}
-      </Breadcrumb.Item>,
+      </Breadcrumb.Item>
     );
     return (
       <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
@@ -108,12 +102,7 @@ export default class PageHeader extends PureComponent {
    */
   conversionBreadcrumbList = () => {
     const { breadcrumbList, breadcrumbSeparator } = this.props;
-    const {
-      routes,
-      params,
-      routerLocation,
-      breadcrumbNameMap,
-    } = this.getBreadcrumbProps();
+    const { routes, params, routerLocation, breadcrumbNameMap } = this.getBreadcrumbProps();
     if (breadcrumbList && breadcrumbList.length) {
       return this.conversionFromProps();
     }
@@ -151,7 +140,7 @@ export default class PageHeader extends PureComponent {
           href: paths.join('/') || '/',
           to: paths.join('/') || '/',
         },
-        route.breadcrumbName,
+        route.breadcrumbName
       )
     );
   };
@@ -191,9 +180,7 @@ export default class PageHeader extends PureComponent {
             </div>
             <div className={styles.row}>
               {content && <div className={styles.content}>{content}</div>}
-              {extraContent && (
-                <div className={styles.extraContent}>{extraContent}</div>
-              )}
+              {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
             </div>
           </div>
         </div>

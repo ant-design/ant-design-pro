@@ -1,7 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": ["compat"],
+  "extends": ["airbnb", "prettier"],
   "env": {
     "browser": true,
     "node": true,
@@ -20,15 +19,18 @@
     "react/jsx-no-bind": [0],
     "react/prop-types": [0],
     "react/prefer-stateless-function": [0],
-    "react/jsx-wrap-multilines": ["error", {
-      "declaration": "parens-new-line",
-      "assignment": "parens-new-line",
-      "return": "parens-new-line",
-      "arrow": "parens-new-line",
-      "condition": "parens-new-line",
-      "logical": "parens-new-line",
-      "prop": "ignore"
-    }],
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": "parens-new-line",
+        "assignment": "parens-new-line",
+        "return": "parens-new-line",
+        "arrow": "parens-new-line",
+        "condition": "parens-new-line",
+        "logical": "parens-new-line",
+        "prop": "ignore"
+      }
+    ],
     "no-else-return": [0],
     "no-restricted-syntax": [0],
     "import/no-extraneous-dependencies": [0],
@@ -43,18 +45,20 @@
     "no-bitwise": [0],
     "no-cond-assign": [0],
     "import/no-unresolved": [0],
-    "comma-dangle": ["error", {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "imports": "always-multiline",
-      "exports": "always-multiline",
-      "functions": "ignore"
-    }],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "ignore"
+      }
+    ],
     "object-curly-newline": [0],
     "function-paren-newline": [0],
     "no-restricted-globals": [0],
-    "require-yield": [1],
-    "compat/compat": "error"
+    "require-yield": [1]
   },
   "parserOptions": {
     "ecmaFeatures": {

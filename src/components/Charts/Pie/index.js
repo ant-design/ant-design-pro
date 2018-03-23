@@ -44,7 +44,7 @@ export default class Pie extends Component {
     this.resize.cancel();
   }
 
-  getG2Instance = (chart) => {
+  getG2Instance = chart => {
     this.chart = chart;
   };
 
@@ -54,7 +54,7 @@ export default class Pie extends Component {
     const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
     const items = geom.get('dataArray') || []; // 获取图形对应的
 
-    const legendData = items.map((item) => {
+    const legendData = items.map(item => {
       /* eslint no-underscore-dangle:0 */
       const origin = item[0]._origin;
       origin.color = item[0].color;
@@ -89,7 +89,7 @@ export default class Pie extends Component {
     }
   }
 
-  handleRoot = (n) => {
+  handleRoot = n => {
     this.root = n;
   };
 
@@ -154,7 +154,7 @@ export default class Pie extends Component {
     if (percent) {
       selected = false;
       tooltip = false;
-      formatColor = (value) => {
+      formatColor = value => {
         if (value === '占比') {
           return color || 'rgba(24, 144, 255, 0.85)';
         } else {
@@ -235,7 +235,9 @@ export default class Pie extends Component {
               <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
                 <span
                   className={styles.dot}
-                  style={{ backgroundColor: !item.checked ? '#aaa' : item.color }}
+                  style={{
+                    backgroundColor: !item.checked ? '#aaa' : item.color,
+                  }}
                 />
                 <span className={styles.legendTitle}>{item.x}</span>
                 <Divider type="vertical" />
