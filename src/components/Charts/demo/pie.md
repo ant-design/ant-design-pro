@@ -4,7 +4,7 @@ title: 饼状图
 ---
 
 ```jsx
-import { Pie, yuan } from "ant-design-pro/lib/Charts";
+import { Pie, yuan } from 'ant-design-pro/lib/Charts';
 
 const salesPieData = [
   {
