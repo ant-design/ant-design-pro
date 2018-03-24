@@ -19,7 +19,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 |----------|------------------------------------------|-------------|-------|
 | title | 卡片标题 | ReactNode\|string | - |
 | action | 卡片操作 | ReactNode | - |
-| total | 数据总量 | ReactNode \| number | - |
+| total | 数据总量 | ReactNode \| number \| function | - |
 | footer | 卡片底部 | ReactNode | - |
 | contentHeight | 内容区域高度 | number | - |
 | avatar | 右侧图标 | React.ReactNode | - |
@@ -78,7 +78,7 @@ Ant Design Pro 提供的业务中常用的图表类型，都是基于 [G2](https
 | valueFormat | 显示值的格式化函数 | function | - |
 | title | 图表标题 | ReactNode\|string | - |
 | subTitle | 图表子标题 | ReactNode\|string | - |
-| total | 图标中央的总数 | string | - |
+| total | 图标中央的总数 | string | function | - |
 
 ### Radar
 
