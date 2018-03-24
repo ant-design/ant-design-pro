@@ -46,7 +46,7 @@ ReactDOM.render(
       />
     )}
     data={salesPieData}
-    valueFormat={val => yuan(val)}
+    valueFormat={val => <span dangerouslySetInnerHTML={{ __html: yuan(val) }} />}
     height={294}
   />,
   mountNode,
