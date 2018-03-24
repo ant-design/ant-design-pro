@@ -82,15 +82,15 @@ export default class Monitor extends PureComponent {
               bordered={false}
             >
               <Gauge
-                format={(val) => {
-                  switch (parseInt(val, 10)) {
-                    case 20:
+                formatter={(val) => {
+                  switch (val) {
+                    case '2':
                       return '差';
-                    case 40:
+                    case '4':
                       return '中';
-                    case 60:
+                    case '6':
                       return '良';
-                    case 80:
+                    case '8':
                       return '优';
                     default:
                       return '';
