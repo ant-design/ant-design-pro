@@ -85,6 +85,10 @@ export const getRouterData = (app) => {
       // name: '工作台',
       // authority: 'admin',
     },
+    // 设备管理列表
+    '/device/devicePage': {
+      component: dynamicWrapper(app, ['device'], () => import('../routes/Device/DevicePage')),
+    },
     '/form/basic-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
     },

@@ -12,7 +12,7 @@ const menuData = [
     path: 'device',
     children: [{
       name: '基本信息',
-      path: 'list',
+      path: 'devicePage',
     }, {
       name: '借用申请',
       path: 'monitor',
