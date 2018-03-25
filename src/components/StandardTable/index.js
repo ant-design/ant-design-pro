@@ -36,21 +36,25 @@ class StandardTable extends PureComponent {
   }
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
-    let needTotalList = [...this.state.needTotalList];
-    needTotalList = needTotalList.map((item) => {
+    this.setState((prevState) => {
+      let needTotalList = [...prevState.needTotalList];
+      needTotalList = needTotalList.map((item) => {
+        return {
+          ...item,
+          total: selectedRows.reduce((sum, val) => {
+            return sum + parseFloat(val[item.dataIndex], 10);
+          }, 0),
+        };
+      });
       return {
-        ...item,
-        total: selectedRows.reduce((sum, val) => {
-          return sum + parseFloat(val[item.dataIndex], 10);
-        }, 0),
+        selectedRowKeys,
+        needTotalList,
       };
+    }, () => {
+      if (this.props.onSelectRow) {
+        this.props.onSelectRow(selectedRows);
+      }
     });
-
-    if (this.props.onSelectRow) {
-      this.props.onSelectRow(selectedRows);
-    }
-
-    this.setState({ selectedRowKeys, needTotalList });
   }
 
   handleTableChange = (pagination, filters, sorter) => {

@@ -69,9 +69,9 @@ class TagSelect extends Component {
   }
 
   handleExpand = () => {
-    this.setState({
-      expand: !this.state.expand,
-    });
+    this.setState(prevState => ({
+      expand: !prevState.expand,
+    }));
   }
 
   isTagSelectOption = (node) => {

@@ -91,7 +91,7 @@ export default class Register extends Component {
 
   handleConfirmBlur = (e) => {
     const { value } = e.target;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+    this.setState(prevState => ({ confirmDirty: prevState.confirmDirty || !!value }));
   };
 
   checkConfirm = (rule, value, callback) => {
@@ -114,11 +114,14 @@ export default class Register extends Component {
       this.setState({
         help: '',
       });
-      if (!this.state.visible) {
-        this.setState({
-          visible: !!value,
-        });
-      }
+      this.setState((prevState) => {
+        if (prevState.visible) {
+          return {
+            visible: !!value,
+          };
+        }
+        return prevState;
+      });
       if (value.length < 6) {
         callback('error');
       } else {

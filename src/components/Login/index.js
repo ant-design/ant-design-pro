@@ -35,26 +35,28 @@ class Login extends Component {
     return {
       tabUtil: {
         addTab: (id) => {
-          this.setState({
-            tabs: [...this.state.tabs, id],
-          });
+          this.setState(prevState => ({
+            tabs: [...prevState.tabs, id],
+          }));
         },
         removeTab: (id) => {
-          this.setState({
-            tabs: this.state.tabs.filter(currentId => currentId !== id),
-          });
+          this.setState(prevState => ({
+            tabs: prevState.tabs.filter(currentId => currentId !== id),
+          }));
         },
       },
       form: this.props.form,
       updateActive: (activeItem) => {
-        const { type, active } = this.state;
-        if (active[type]) {
-          active[type].push(activeItem);
-        } else {
-          active[type] = [activeItem];
-        }
-        this.setState({
-          active,
+        this.setState((prevState) => {
+          const { type, active } = prevState;
+          if (active[type]) {
+            active[type].push(activeItem);
+          } else {
+            active[type] = [activeItem];
+          }
+          return {
+            active,
+          };
         });
       },
     };

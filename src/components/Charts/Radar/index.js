@@ -57,20 +57,17 @@ export default class Radar extends Component {
     const newItem = item;
     newItem.checked = !newItem.checked;
 
-    const { legendData } = this.state;
-    legendData[i] = newItem;
-
-    const filteredLegendData = legendData
-      .filter(l => l.checked)
-      .map(l => l.name);
-
-    if (this.chart) {
-      this.chart.filter('name', val => filteredLegendData.indexOf(val) > -1);
-      this.chart.repaint();
-    }
-
-    this.setState({
-      legendData,
+    this.setState((prevState) => {
+      const { legendData } = prevState;
+      legendData[i] = newItem;
+      return {
+        legendData,
+      };
+    }, () => {
+      if (this.chart) {
+        this.chart.filter('name', val => this.state.legendData.filter(l => l.checked).map(l => l.name).indexOf(val) > -1);
+        this.chart.repaint();
+      }
     });
   };
 

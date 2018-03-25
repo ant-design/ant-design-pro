@@ -163,9 +163,9 @@ export default class TableList extends PureComponent {
   }
 
   toggleForm = () => {
-    this.setState({
-      expandForm: !this.state.expandForm,
-    });
+    this.setState(prevState => ({
+      expandForm: !prevState.expandForm,
+    }));
   }
 
   handleMenuClick = (e) => {

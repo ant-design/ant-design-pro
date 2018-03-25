@@ -54,9 +54,14 @@ class AdvancedForm extends PureComponent {
   resizeFooterToolbar = () => {
     const sider = document.querySelectorAll('.ant-layout-sider')[0];
     const width = `calc(100% - ${sider.style.width})`;
-    if (this.state.width !== width) {
-      this.setState({ width });
-    }
+    this.setState((prevState) => {
+      if (prevState.width !== width) {
+        return {
+          width,
+        };
+      }
+      return prevState;
+    });
   }
   render() {
     const { form, dispatch, submitting } = this.props;
