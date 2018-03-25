@@ -10,10 +10,10 @@ export interface IPieProps {
     x: string | string;
     y: number;
   }>;
-  total?: string;
+  total?: string | function;
   title?: React.ReactNode;
   tooltip?: boolean;
-  valueFormat?: (value: string) => string;
+  valueFormat?: (value: string) => string | React.ReactNode;
   subTitle?: React.ReactNode;
 }
 

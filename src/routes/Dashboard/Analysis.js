@@ -254,7 +254,7 @@ export default class Analysis extends Component {
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
-              total={yuan(126560)}
+              total={() => <span dangerouslySetInnerHTML={{ __html: yuan(126560) }} />}
               footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
               contentHeight={46}
             >
@@ -453,9 +453,15 @@ export default class Analysis extends Component {
               <Pie
                 hasLegend
                 subTitle="销售额"
-                total={yuan(salesPieData.reduce((pre, now) => now.y + pre, 0))}
+                total={() => (
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: yuan(salesPieData.reduce((pre, now) => now.y + pre, 0)),
+                    }}
+                  />
+                )}
                 data={salesPieData}
-                valueFormat={val => yuan(val)}
+                valueFormat={val => <span dangerouslySetInnerHTML={{ __html: yuan(val) }} />}
                 height={248}
                 lineWidth={4}
               />

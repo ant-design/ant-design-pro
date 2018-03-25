@@ -20,6 +20,25 @@ const { AuthorizedRoute, check } = Authorized;
 
 const RightSidebar = connect(({ setting }) => ({ ...setting }))(Sidebar);
 
+/**
+ * 获取面包屑映射
+ * @param {Object} menuData 菜单配置
+ * @param {Object} routerData 路由配置
+ */
+const getBreadcrumbNameMap = (menuData, routerData) => {
+  const result = {};
+  const childResult = {};
+  for (const i of menuData) {
+    if (!routerData[i.path]) {
+      result[i.path] = i;
+    }
+    if (i.children) {
+      Object.assign(childResult, getBreadcrumbNameMap(i.children, routerData));
+    }
+  }
+  return Object.assign({}, routerData, result, childResult);
+};
+
 const query = {
   'screen-xs': {
     maxWidth: 575,
@@ -46,10 +65,10 @@ class BasicLayout extends React.PureComponent {
     breadcrumbNameMap: PropTypes.object,
   };
   getChildContext() {
-    const { location, routerData } = this.props;
+    const { location, routerData, menuData } = this.props;
     return {
       location,
-      breadcrumbNameMap: routerData,
+      breadcrumbNameMap: getBreadcrumbNameMap(menuData, routerData),
     };
   }
   getPageTitle() {
