@@ -63,16 +63,12 @@ class StandardTable extends PureComponent {
 
   render() {
     const { selectedRowKeys, needTotalList } = this.state;
-    const { data, loading, columns } = this.props;
+    const { data: { list, pagination }, loading, columns } = this.props;
 
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
-      showTotal: total => `共 ${total} 条数据`,
-      // ...pagination,
-      current: data.current,
-      total: data.total,
-      pageSize: data.size,
+      ...pagination,
     };
 
     const rowSelection = {
@@ -111,7 +107,7 @@ class StandardTable extends PureComponent {
           loading={loading}
           rowKey={record => record.id}
           rowSelection={rowSelection}
-          dataSource={data.records}
+          dataSource={list}
           columns={columns}
           pagination={paginationProps}
           onChange={this.handleTableChange}

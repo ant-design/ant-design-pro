@@ -18,7 +18,7 @@ const menuData = [
       path: 'monitor',
     }, {
       name: '借用&归还',
-      path: 'monitor',
+      path: 'monitor2',
     }],
   },
   {

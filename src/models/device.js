@@ -1,4 +1,4 @@
-import { queryDevices } from '../services/device';
+import { queryDevices, addDevice } from '../services/device';
 
 export default {
   namespace: 'device',
@@ -18,14 +18,14 @@ export default {
         payload: response,
       });
     },
-    // *add({ payload, callback }, { call, put }) {
-    //   const response = yield call(addRule, payload);
-    //   yield put({
-    //     type: 'save',
-    //     payload: response,
-    //   });
-    //   if (callback) callback();
-    // },
+    *add({ payload, callback }, { call, put }) {
+      const response = yield call(addDevice, payload);
+      yield put({
+        type: 'save',
+        payload: response,
+      });
+      if (callback) callback();
+    },
     // *remove({ payload, callback }, { call, put }) {
     //   const response = yield call(removeRule, payload);
     //   yield put({
@@ -40,7 +40,7 @@ export default {
     save(state, action) {
       return {
         ...state,
-        data: action.payload.content.records,
+        data: action.payload.content,
       };
     },
   },
