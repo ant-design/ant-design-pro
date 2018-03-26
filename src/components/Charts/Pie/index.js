@@ -221,7 +221,9 @@ export default class Pie extends Component {
               <div className={styles.total}>
                 {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
                 {/* eslint-disable-next-line */}
-                {total && <div className="pie-stat" dangerouslySetInnerHTML={{ __html: total }} />}
+                {total && (
+                  <div className="pie-stat">{typeof total === 'function' ? total() : total}</div>
+                )}
               </div>
             )}
           </div>
@@ -240,12 +242,7 @@ export default class Pie extends Component {
                 <span className={styles.percent}>
                   {`${(isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}
                 </span>
-                <span
-                  className={styles.value}
-                  dangerouslySetInnerHTML={{
-                    __html: valueFormat ? valueFormat(item.y) : item.y,
-                  }}
-                />
+                <span className={styles.value}>{valueFormat ? valueFormat(item.y) : item.y}</span>
               </li>
             ))}
           </ul>

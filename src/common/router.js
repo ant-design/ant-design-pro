@@ -196,6 +196,7 @@ export const getRouterData = (app) => {
       ...router,
       name: router.name || menuItem.name,
       authority: router.authority || menuItem.authority,
+      hideInBreadcrumb: router.hideInBreadcrumb || menuItem.hideInBreadcrumb,
     };
     routerData[path] = router;
   });

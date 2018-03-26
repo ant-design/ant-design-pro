@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
@@ -51,6 +51,7 @@
     "babel-eslint": "^8.1.2",
     "babel-plugin-dva-hmr": "^0.4.1",
     "babel-plugin-import": "^1.6.7",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "cross-env": "^5.1.1",
     "cross-port-killer": "^1.0.1",
@@ -83,7 +84,7 @@
     "**/*.less": "stylelint --syntax less"
   },
   "engines": {
-    "node" : ">=8.0.0"
+    "node": ">=8.0.0"
   },
   "browserslist": [
     "> 1%",
