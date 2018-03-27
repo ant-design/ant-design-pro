@@ -1,5 +1,5 @@
 import { getBreadcrumb } from './index';
-import { urlToList } from '../utils/pathTools';
+import { urlToList } from '../_utils/pathTools';
 
 const routerData = {
   '/dashboard/analysis': {
