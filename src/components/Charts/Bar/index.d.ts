@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 export interface IBarProps {
   title: React.ReactNode;
   color?: string;

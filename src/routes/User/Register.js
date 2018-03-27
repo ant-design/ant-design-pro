@@ -37,12 +37,14 @@ export default class Register extends Component {
   componentWillReceiveProps(nextProps) {
     const account = this.props.form.getFieldValue('mail');
     if (nextProps.register.status === 'ok') {
-      this.props.dispatch(routerRedux.push({
-        pathname: '/user/register-result',
-        state: {
-          account,
-        },
-      }));
+      this.props.dispatch(
+        routerRedux.push({
+          pathname: '/user/register-result',
+          state: {
+            account,
+          },
+        })
+      );
     }
   }
 
@@ -74,7 +76,7 @@ export default class Register extends Component {
     return 'poor';
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields({ force: true }, (err, values) => {
       if (!err) {
@@ -89,7 +91,7 @@ export default class Register extends Component {
     });
   };
 
-  handleConfirmBlur = (e) => {
+  handleConfirmBlur = e => {
     const { value } = e.target;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
@@ -131,7 +133,7 @@ export default class Register extends Component {
     }
   };
 
-  changePrefix = (value) => {
+  changePrefix = value => {
     this.setState({
       prefix: value,
     });
@@ -197,13 +199,7 @@ export default class Register extends Component {
                     validator: this.checkPassword,
                   },
                 ],
-              })(
-                <Input
-                  size="large"
-                  type="password"
-                  placeholder="至少6位密码，区分大小写"
-                />
-              )}
+              })(<Input size="large" type="password" placeholder="至少6位密码，区分大小写" />)}
             </Popover>
           </FormItem>
           <FormItem>
@@ -241,13 +237,7 @@ export default class Register extends Component {
                     message: '手机号格式错误！',
                   },
                 ],
-              })(
-                <Input
-                  size="large"
-                  style={{ width: '80%' }}
-                  placeholder="11位手机号"
-                />
-              )}
+              })(<Input size="large" style={{ width: '80%' }} placeholder="11位手机号" />)}
             </InputGroup>
           </FormItem>
           <FormItem>

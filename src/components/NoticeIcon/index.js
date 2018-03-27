@@ -30,19 +30,21 @@ export default class NoticeIcon extends PureComponent {
   onItemClick = (item, tabProps) => {
     const { onItemClick } = this.props;
     onItemClick(item, tabProps);
-  }
-  onTabChange = (tabType) => {
+  };
+  onTabChange = tabType => {
     this.setState({ tabType });
     this.props.onTabChange(tabType);
-  }
+  };
   getNotificationBox() {
     const { children, loading, locale } = this.props;
     if (!children) {
       return null;
     }
-    const panes = React.Children.map(children, (child) => {
-      const title = child.props.list && child.props.list.length > 0
-        ? `${child.props.title} (${child.props.list.length})` : child.props.title;
+    const panes = React.Children.map(children, child => {
+      const title =
+        child.props.list && child.props.list.length > 0
+          ? `${child.props.title} (${child.props.list.length})`
+          : child.props.title;
       return (
         <TabPane tab={title} key={child.props.title}>
           <List
