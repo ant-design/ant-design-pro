@@ -84,12 +84,19 @@
     "puppeteer": "^1.1.1"
   },
   "lint-staged": {
-    "**/*.{js,jsx,less}": ["prettier --wirter", "git add"],
+    "**/*.{js,jsx,less}": [
+      "prettier --wirter",
+      "git add"
+    ],
     "**/*.{js,jsx}": "lint-staged:js",
     "**/*.less": "stylelint --syntax less"
   },
   "engines": {
     "node": ">=8.0.0"
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"]
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
 }
