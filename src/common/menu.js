@@ -2,6 +2,65 @@ import { isUrl } from '../utils/utils';
 
 const menuData = [
   {
+
+    name: '控制台',
+    icon: 'dashboard',
+    path: 'dashboard/analysis',
+  },
+  {
+    name: '设备管理',
+    icon: 'dashboard',
+    path: 'device',
+    children: [{
+      name: '基本信息',
+      path: 'devicePage',
+    }, {
+      name: '借用申请',
+      path: 'monitor',
+    }, {
+      name: '借用&归还',
+      path: 'monitor2',
+    }],
+  },
+  {
+    name: '实验室管理',
+    icon: 'dashboard',
+    path: 'lab',
+    children: [{
+      name: '基本信息',
+      path: 'list',
+    }, {
+      name: '借用申请',
+      path: 'monitor',
+    }],
+  },
+  {
+    name: '实验课程管理',
+    icon: 'dashboard',
+    path: 'labCourse',
+    children: [{
+      name: '基本信息',
+      path: 'list',
+    }, {
+      name: '借用申请',
+      // path: 'monitor',
+    }],
+  },
+  {
+    name: '其它',
+    icon: 'dashboard',
+    path: 'other',
+    children: [{
+      name: '规章制度',
+      icon: 'dashboard',
+      path: 'guizhang',
+    },
+    {
+      name: '意见反馈',
+      icon: 'dashboard',
+      path: 'yijian',
+    }],
+  },
     name: 'dashboard',
     icon: 'dashboard',
     path: 'dashboard',
@@ -135,10 +194,6 @@ const menuData = [
     ],
   },
   {
-    name: '账户',
-    icon: 'user',
-    path: 'user',
-    authority: 'guest',
     children: [
       {
         name: '登录',
