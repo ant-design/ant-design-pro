@@ -12,9 +12,7 @@ export default class SecurityView extends Component {
     return [
       {
         title: '账户密码',
-        description: (
-          <Fragment> 当前密码强度：{passwordStrength.strong}</Fragment>
-        ),
+        description: <Fragment> 当前密码强度：{passwordStrength.strong}</Fragment>,
         actions: [<a>修改</a>],
       },
       {
@@ -47,10 +45,7 @@ export default class SecurityView extends Component {
           dataSource={this.getData()}
           renderItem={item => (
             <List.Item actions={item.actions}>
-              <List.Item.Meta
-                title={item.title}
-                description={item.description}
-              />
+              <List.Item.Meta title={item.title} description={item.description} />
             </List.Item>
           )}
         />

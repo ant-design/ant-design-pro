@@ -13,16 +13,23 @@ export default class StepForm extends PureComponent {
     const { pathname } = location;
     const pathList = pathname.split('/');
     switch (pathList[pathList.length - 1]) {
-      case 'info': return 0;
-      case 'confirm': return 1;
-      case 'result': return 2;
-      default: return 0;
+      case 'info':
+        return 0;
+      case 'confirm':
+        return 1;
+      case 'result':
+        return 2;
+      default:
+        return 0;
     }
   }
   render() {
     const { match, routerData } = this.props;
     return (
-      <PageHeaderLayout title="分步表单" content="将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。">
+      <PageHeaderLayout
+        title="分步表单"
+        content="将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。"
+      >
         <Card bordered={false}>
           <Fragment>
             <Steps current={this.getCurrentStep()} className={styles.steps}>
@@ -31,16 +38,14 @@ export default class StepForm extends PureComponent {
               <Step title="完成" />
             </Steps>
             <Switch>
-              {
-                getRoutes(match.path, routerData).map(item => (
-                  <Route
-                    key={item.key}
-                    path={item.path}
-                    component={item.component}
-                    exact={item.exact}
-                  />
-                ))
-              }
+              {getRoutes(match.path, routerData).map(item => (
+                <Route
+                  key={item.key}
+                  path={item.path}
+                  component={item.component}
+                  exact={item.exact}
+                />
+              ))}
               <Redirect exact from="/form/step-form" to="/form/step-form/info" />
               <Redirect to="/exception/404" />
             </Switch>

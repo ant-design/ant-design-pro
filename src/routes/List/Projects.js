@@ -33,7 +33,7 @@ export default class CoverCardList extends PureComponent {
     const { form, dispatch } = this.props;
     // setTimeout 用于保证获取表单值是在所有表单字段更新完毕的时候
     setTimeout(() => {
-      form.validateFields((err) => {
+      form.validateFields(err => {
         if (!err) {
           // eslint-disable-next-line
           dispatch({

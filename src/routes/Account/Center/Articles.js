@@ -4,7 +4,7 @@ import moment from 'moment';
 import stylesArticles from '../../List/Articles.less';
 import styles from './Articles.less';
 
-export default (props) => {
+export default props => {
   const { list } = props;
   const IconText = ({ type, text }) => (
     <span>
@@ -16,7 +16,8 @@ export default (props) => {
     <div className={stylesArticles.listContent}>
       <div className={stylesArticles.description}>{content}</div>
       <div className={stylesArticles.extra}>
-        <Avatar src={avatar} size="small" /><a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
+        <Avatar src={avatar} size="small" />
+        <a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
         <em>{moment(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
       </div>
     </div>
@@ -38,9 +39,11 @@ export default (props) => {
           ]}
         >
           <List.Item.Meta
-            title={(
-              <a className={stylesArticles.listItemMetaTitle} href={item.href}>{item.title}</a>
-            )}
+            title={
+              <a className={stylesArticles.listItemMetaTitle} href={item.href}>
+                {item.title}
+              </a>
+            }
             description={
               <span>
                 <Tag>Ant Design</Tag>

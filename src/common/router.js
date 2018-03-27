@@ -5,25 +5,24 @@ import { getMenuData } from './menu';
 
 let routerDataCache;
 
-const modelNotExisted = (app, model) => (
+const modelNotExisted = (app, model) =>
   // eslint-disable-next-line
   !app._models.some(({ namespace }) => {
     return namespace === model.substring(model.lastIndexOf('/') + 1);
-  })
-);
+  });
 
 // wrapper of dynamic
 const dynamicWrapper = (app, models, component) => {
   // () => require('module')
   // transformed by babel-plugin-dynamic-import-node-sync
   if (component.toString().indexOf('.then(') < 0) {
-    models.forEach((model) => {
+    models.forEach(model => {
       if (modelNotExisted(app, model)) {
         // eslint-disable-next-line
         app.model(require(`../models/${model}`).default);
       }
     });
-    return (props) => {
+    return props => {
       if (!routerDataCache) {
         routerDataCache = getRouterData(app);
       }
@@ -36,20 +35,20 @@ const dynamicWrapper = (app, models, component) => {
   // () => import('module')
   return dynamic({
     app,
-    models: () => models.filter(
-      model => modelNotExisted(app, model)).map(m => import(`../models/${m}.js`)
-    ),
+    models: () =>
+      models.filter(model => modelNotExisted(app, model)).map(m => import(`../models/${m}.js`)),
     // add routerData prop
     component: () => {
       if (!routerDataCache) {
         routerDataCache = getRouterData(app);
       }
-      return component().then((raw) => {
+      return component().then(raw => {
         const Component = raw.default || raw;
-        return props => createElement(Component, {
-          ...props,
-          routerData: routerDataCache,
-        });
+        return props =>
+          createElement(Component, {
+            ...props,
+            routerData: routerDataCache,
+          });
       });
     },
   });
@@ -57,7 +56,7 @@ const dynamicWrapper = (app, models, component) => {
 
 function getFlatMenuData(menus) {
   let keys = {};
-  menus.forEach((item) => {
+  menus.forEach(item => {
     if (item.children) {
       keys[item.path] = { ...item };
       keys = { ...keys, ...getFlatMenuData(item.children) };
@@ -68,10 +67,12 @@ function getFlatMenuData(menus) {
   return keys;
 }
 
-export const getRouterData = (app) => {
+export const getRouterData = app => {
   const routerConfig = {
     '/': {
-      component: dynamicWrapper(app, ['user', 'login', 'setting'], () => import('../layouts/LoadingPage')),
+      component: dynamicWrapper(app, ['user', 'login', 'setting'], () =>
+        import('../layouts/LoadingPage')
+      ),
     },
     '/dashboard/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
@@ -80,7 +81,9 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
     },
     '/dashboard/workplace': {
-      component: dynamicWrapper(app, ['user', 'project', 'activities', 'chart'], () => import('../routes/Dashboard/Workplace')),
+      component: dynamicWrapper(app, ['user', 'project', 'activities', 'chart'], () =>
+        import('../routes/Dashboard/Workplace')
+      ),
       // hideInBreadcrumb: true,
       // name: '工作台',
       // authority: 'admin',
@@ -131,7 +134,9 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/BasicProfile')),
     },
     '/profile/advanced': {
-      component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/AdvancedProfile')),
+      component: dynamicWrapper(app, ['profile'], () =>
+        import('../routes/Profile/AdvancedProfile')
+      ),
     },
     '/result/success': {
       component: dynamicWrapper(app, [], () => import('../routes/Result/Success')),
@@ -149,7 +154,9 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, [], () => import('../routes/Exception/500')),
     },
     '/exception/trigger': {
-      component: dynamicWrapper(app, ['error'], () => import('../routes/Exception/triggerException')),
+      component: dynamicWrapper(app, ['error'], () =>
+        import('../routes/Exception/triggerException')
+      ),
     },
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
@@ -164,7 +171,9 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
     },
     '/account/center': {
-      component: dynamicWrapper(app, ['list', 'user', 'project'], () => import('../routes/Account/Center/Center')),
+      component: dynamicWrapper(app, ['list', 'user', 'project'], () =>
+        import('../routes/Account/Center/Center')
+      ),
     },
     '/account/center/articles': {
       component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Articles')),
@@ -176,19 +185,29 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Projects')),
     },
     '/account/settings': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/Info')),
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/Info')
+      ),
     },
     '/account/settings/base': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/BaseView')),
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/BaseView')
+      ),
     },
     '/account/settings/security': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/SecurityView')),
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/SecurityView')
+      ),
     },
     '/account/settings/binding': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/BindingView')),
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/BindingView')
+      ),
     },
     '/account/settings/notification': {
-      component: dynamicWrapper(app, ['geographic'], () => import('../routes/Account/Settings/NotificationView')),
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/NotificationView')
+      ),
     },
     // '/user/:id': {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
@@ -201,7 +220,7 @@ export const getRouterData = (app) => {
   // eg. {name,authority ...routerConfig }
   const routerData = {};
   // The route matches the menu
-  Object.keys(routerConfig).forEach((path) => {
+  Object.keys(routerConfig).forEach(path => {
     // Regular match item name
     // eg.  router /user/:id === /user/chen
     const pathRegexp = pathToRegexp(path);

@@ -93,32 +93,27 @@ class BasicLayout extends React.PureComponent {
     } else {
       const { routerData } = this.props;
       // get the first authorized route path in routerData
-      const authorizedPath = Object.keys(routerData).find(item =>
-        check(routerData[item].authority, item) && item !== '/');
+      const authorizedPath = Object.keys(routerData).find(
+        item => check(routerData[item].authority, item) && item !== '/'
+      );
       return authorizedPath;
     }
     return redirect;
   };
-  handleMenuCollapse = (collapsed) => {
+  handleMenuCollapse = collapsed => {
     this.props.dispatch({
       type: 'global/changeLayoutCollapsed',
       payload: collapsed,
     });
   };
-  changeSetting = (setting) => {
+  changeSetting = setting => {
     this.props.dispatch({
       type: 'setting/changeSetting',
       payload: setting,
     });
-  }
+  };
   render() {
-    const {
-      isMobile,
-      redirectData,
-      routerData,
-      fixedHeader,
-      match,
-    } = this.props;
+    const { isMobile, redirectData, routerData, fixedHeader, match } = this.props;
     const isTop = this.props.layout === 'topmenu';
     const bashRedirect = this.getBashRedirect();
     const myRedirectData = redirectData || [];
@@ -134,11 +129,7 @@ class BasicLayout extends React.PureComponent {
           />
         )}
         <Layout>
-          <Header
-            handleMenuCollapse={this.handleMenuCollapse}
-            logo={logo}
-            {...this.props}
-          />
+          <Header handleMenuCollapse={this.handleMenuCollapse} logo={logo} {...this.props} />
           <Content
             style={{
               margin: '24px 24px 0',

@@ -2,8 +2,24 @@ import React, { PureComponent } from 'react';
 import { findDOMNode } from 'react-dom';
 import moment from 'moment';
 import { connect } from 'dva';
-import { List, Card, Row, Col, Radio, Input, Progress, Button, Icon, Dropdown, Menu, Avatar,
-  Modal, Form, DatePicker, Select } from 'antd';
+import {
+  List,
+  Card,
+  Row,
+  Col,
+  Radio,
+  Input,
+  Progress,
+  Button,
+  Icon,
+  Dropdown,
+  Menu,
+  Avatar,
+  Modal,
+  Form,
+  DatePicker,
+  Select,
+} from 'antd';
 
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import Result from '../../components/Result';
@@ -41,27 +57,27 @@ export default class BasicList extends PureComponent {
       visible: true,
       current: undefined,
     });
-  }
-  showEditModal = (item) => {
+  };
+  showEditModal = item => {
     this.setState({
       visible: true,
       current: item,
     });
-  }
+  };
   handleDone = () => {
     setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
       done: false,
       visible: false,
     });
-  }
+  };
   handleCancel = () => {
     setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
       visible: false,
     });
-  }
-  handleSubmit = (e) => {
+  };
+  handleSubmit = e => {
     e.preventDefault();
     const { dispatch, form } = this.props;
     const id = this.state.current ? this.state.current.id : '';
@@ -77,13 +93,13 @@ export default class BasicList extends PureComponent {
         payload: { id, ...fieldsValue },
       });
     });
-  }
-  deleteItem = (id) => {
+  };
+  deleteItem = id => {
     this.props.dispatch({
       type: 'list/submit',
       payload: { id },
     });
-  }
+  };
 
   render() {
     const { list: { list }, loading } = this.props;
@@ -103,10 +119,9 @@ export default class BasicList extends PureComponent {
       }
     };
 
-    const modalFooter = done ?
-      { footer: null, onCancel: this.handleDone }
-      :
-      { okText: '保存', onOk: this.handleSubmit, onCancel: this.handleCancel };
+    const modalFooter = done
+      ? { footer: null, onCancel: this.handleDone }
+      : { okText: '保存', onOk: this.handleSubmit, onCancel: this.handleCancel };
 
     const Info = ({ title, value, bordered }) => (
       <div className={styles.headerInfo}>
@@ -123,11 +138,7 @@ export default class BasicList extends PureComponent {
           <RadioButton value="progress">进行中</RadioButton>
           <RadioButton value="waiting">等待中</RadioButton>
         </RadioGroup>
-        <Search
-          className={styles.extraContentSearch}
-          placeholder="请输入"
-          onSearch={() => ({})}
-        />
+        <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
       </div>
     );
 
@@ -155,11 +166,13 @@ export default class BasicList extends PureComponent {
     );
 
     const MoreBtn = props => (
-      <Dropdown overlay={
-        <Menu onClick={({ key }) => editAndDelete(key, props.current)}>
-          <Menu.Item key="edit">编辑</Menu.Item>
-          <Menu.Item key="delete">删除</Menu.Item>
-        </Menu>}
+      <Dropdown
+        overlay={
+          <Menu onClick={({ key }) => editAndDelete(key, props.current)}>
+            <Menu.Item key="edit">编辑</Menu.Item>
+            <Menu.Item key="delete">删除</Menu.Item>
+          </Menu>
+        }
       >
         <a>
           更多 <Icon type="down" />
@@ -174,7 +187,11 @@ export default class BasicList extends PureComponent {
             type="success"
             title="操作成功"
             description="一系列的信息描述，很短同样也可以带标点。"
-            actions={<Button type="primary" onClick={this.handleDone}>知道了</Button>}
+            actions={
+              <Button type="primary" onClick={this.handleDone}>
+                知道了
+              </Button>
+            }
             className={styles.formResult}
           />
         );
@@ -185,9 +202,7 @@ export default class BasicList extends PureComponent {
             {getFieldDecorator('title', {
               rules: [{ required: true, message: '请输入任务名称' }],
               initialValue: current.title,
-            })(
-              <Input placeholder="请输入" />
-            )}
+            })(<Input placeholder="请输入" />)}
           </FormItem>
           <FormItem label="开始时间" {...this.formLayout}>
             {getFieldDecorator('createdAt', {
@@ -217,9 +232,7 @@ export default class BasicList extends PureComponent {
             {getFieldDecorator('subDescription', {
               rules: [{ message: '请输入至少五个字符的产品描述！', min: 5 }],
               initialValue: current.subDescription,
-            })(
-              <TextArea rows={4} placeholder="请输入至少五个字符" />
-            )}
+            })(<TextArea rows={4} placeholder="请输入至少五个字符" />)}
           </FormItem>
         </Form>
       );
@@ -255,7 +268,7 @@ export default class BasicList extends PureComponent {
               style={{ width: '100%', marginBottom: 8 }}
               icon="plus"
               onClick={this.showModal}
-              ref={(component) => {
+              ref={component => {
                 /* eslint-disable */
                 this.addBtn = findDOMNode(component);
                 /* eslint-enable */
@@ -272,7 +285,14 @@ export default class BasicList extends PureComponent {
               renderItem={item => (
                 <List.Item
                   actions={[
-                    <a onClick={(e) => { e.preventDefault(); this.showEditModal(item); }}>编辑</a>,
+                    <a
+                      onClick={e => {
+                        e.preventDefault();
+                        this.showEditModal(item);
+                      }}
+                    >
+                      编辑
+                    </a>,
                     <MoreBtn current={item} />,
                   ]}
                 >

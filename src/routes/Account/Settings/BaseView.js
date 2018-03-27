@@ -51,7 +51,7 @@ export default class BaseView extends Component {
   }
   setBaseInfo = () => {
     const { currentUser } = this.props;
-    Object.keys(this.props.form.getFieldsValue()).forEach((key) => {
+    Object.keys(this.props.form.getFieldsValue()).forEach(key => {
       const obj = {};
       obj[key] = currentUser[key] || null;
       this.props.form.setFieldsValue(obj);
@@ -61,52 +61,40 @@ export default class BaseView extends Component {
     if (this.props.currentUser.avatar) {
       return this.props.currentUser.avatar;
     }
-    const url =
-      'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
+    const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
     return url;
   }
-  getViewDom = (ref) => {
+  getViewDom = ref => {
     this.view = ref;
   };
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div
-        className={styles.baseView}
-        ref={this.getViewDom}
-      >
+      <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
           <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
             <FormItem label="邮箱">
               {getFieldDecorator('email', {
-                rules: [
-                  { required: true, message: 'Please input your email!' },
-                ],
+                rules: [{ required: true, message: 'Please input your email!' }],
               })(<Input />)}
             </FormItem>
             <FormItem label="昵称">
               {getFieldDecorator('name', {
-                rules: [
-                  { required: true, message: 'Please input your nick name!' },
-                ],
+                rules: [{ required: true, message: 'Please input your nick name!' }],
               })(<Input />)}
             </FormItem>
             <FormItem label="个人简介">
               {getFieldDecorator('profile', {
-                rules: [
-                  { required: true, message: 'Please input personal profile!' },
-                ],
+                rules: [{ required: true, message: 'Please input personal profile!' }],
               })(<Input.TextArea placeholder="简单的介绍下自己" rows={4} />)}
             </FormItem>
             <FormItem label="国家/地区">
               {getFieldDecorator('country', {
-                rules: [
-                  { required: true, message: 'Please input your country!' },
-                ],
+                rules: [{ required: true, message: 'Please input your country!' }],
               })(
                 <Select style={{ maxWidth: 220 }}>
                   <Option value="China">中国</Option>
-                </Select>,
+                </Select>
               )}
             </FormItem>
             <FormItem label="所在省市">
@@ -124,9 +112,7 @@ export default class BaseView extends Component {
             </FormItem>
             <FormItem label="街道地址">
               {getFieldDecorator('address', {
-                rules: [
-                  { required: true, message: 'Please input your address!' },
-                ],
+                rules: [{ required: true, message: 'Please input your address!' }],
               })(<Input />)}
             </FormItem>
             <FormItem label="联系电话">

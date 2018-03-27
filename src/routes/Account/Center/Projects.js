@@ -4,7 +4,7 @@ import moment from 'moment';
 import AvatarList from '../../../components/AvatarList';
 import stylesProjects from '../../List/Projects.less';
 
-export default (props) => {
+export default props => {
   const { list } = props;
   return (
     <List
@@ -19,23 +19,18 @@ export default (props) => {
             hoverable
             cover={<img alt={item.title} src={item.cover} />}
           >
-            <Card.Meta
-              title={<a href="#">{item.title}</a>}
-              description={item.subDescription}
-            />
+            <Card.Meta title={<a href="#">{item.title}</a>} description={item.subDescription} />
             <div className={stylesProjects.cardItemContent}>
               <span>{moment(item.updatedAt).fromNow()}</span>
               <div className={stylesProjects.avatarList}>
                 <AvatarList size="mini">
-                  {
-                    item.members.map(member => (
-                      <AvatarList.Item
-                        key={`${item.id}-avatar-${member.id}`}
-                        src={member.avatar}
-                        tips={member.name}
-                      />
-                    ))
-                  }
+                  {item.members.map(member => (
+                    <AvatarList.Item
+                      key={`${item.id}-avatar-${member.id}`}
+                      src={member.avatar}
+                      tips={member.name}
+                    />
+                  ))}
                 </AvatarList>
               </div>
             </div>

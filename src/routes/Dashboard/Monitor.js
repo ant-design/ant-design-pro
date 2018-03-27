@@ -16,7 +16,7 @@ const { Secured } = Authorized;
 const targetTime = new Date().getTime() + 3900000;
 
 // use permission as a parameter
-const havePermissionAsync = new Promise((resolve) => {
+const havePermissionAsync = new Promise(resolve => {
   // Call resolve on behalf of passed
   setTimeout(() => resolve(), 1000);
 });
@@ -83,11 +83,7 @@ export default class Monitor extends PureComponent {
               bodyStyle={{ textAlign: 'center' }}
               bordered={false}
             >
-              <Gauge
-                title="跳出率"
-                height={180}
-                percent={87}
-              />
+              <Gauge title="跳出率" height={180} percent={87} />
             </Card>
           </Col>
         </Row>

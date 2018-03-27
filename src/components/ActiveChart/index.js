@@ -14,7 +14,7 @@ function getActiveData() {
   for (let i = 0; i < 24; i += 1) {
     activeData.push({
       x: `${fixedZero(i)}:00`,
-      y: Math.floor(Math.random() * 200) + (i * 50),
+      y: Math.floor(Math.random() * 200) + i * 50,
     });
   }
   return activeData;

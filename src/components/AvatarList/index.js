@@ -18,7 +18,7 @@ const AvatarList = ({ children, size, ...other }) => {
   );
 };
 
-const Item = ({ src, size, tips, onClick = (() => {}) }) => {
+const Item = ({ src, size, tips, onClick = () => {} }) => {
   const cls = classNames(styles.avatarItem, {
     [styles.avatarItemLarge]: size === 'large',
     [styles.avatarItemSmall]: size === 'small',
@@ -26,14 +26,14 @@ const Item = ({ src, size, tips, onClick = (() => {}) }) => {
   });
 
   return (
-    <li className={cls} onClick={onClick} >
-      {
-        tips ? (
-          <Tooltip title={tips}>
-            <Avatar src={src} size={size} style={{ cursor: 'pointer' }} />
-          </Tooltip>
-        ) : <Avatar src={src} size={size} />
-      }
+    <li className={cls} onClick={onClick}>
+      {tips ? (
+        <Tooltip title={tips}>
+          <Avatar src={src} size={size} style={{ cursor: 'pointer' }} />
+        </Tooltip>
+      ) : (
+        <Avatar src={src} size={size} />
+      )}
     </li>
   );
 };

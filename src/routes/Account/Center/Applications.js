@@ -4,18 +4,24 @@ import numeral from 'numeral';
 import { formatWan } from '../../../utils/utils';
 import stylesApplications from '../../List/Applications.less';
 
-export default (props) => {
+export default props => {
   const { list } = props;
   const itemMenu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">1st menu item</a>
+        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+          1st menu item
+        </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">2nd menu item</a>
+        <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+          2nd menu item
+        </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">3d menu item</a>
+        <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+          3d menu item
+        </a>
       </Menu.Item>
     </Menu>
   );
@@ -43,16 +49,21 @@ export default (props) => {
             hoverable
             bodyStyle={{ paddingBottom: 20 }}
             actions={[
-              <Tooltip title="下载"><Icon type="download" /></Tooltip>,
-              <Tooltip title="编辑"><Icon type="edit" /></Tooltip>,
-              <Tooltip title="分享"><Icon type="share-alt" /></Tooltip>,
-              <Dropdown overlay={itemMenu}><Icon type="ellipsis" /></Dropdown>,
+              <Tooltip title="下载">
+                <Icon type="download" />
+              </Tooltip>,
+              <Tooltip title="编辑">
+                <Icon type="edit" />
+              </Tooltip>,
+              <Tooltip title="分享">
+                <Icon type="share-alt" />
+              </Tooltip>,
+              <Dropdown overlay={itemMenu}>
+                <Icon type="ellipsis" />
+              </Dropdown>,
             ]}
           >
-            <Card.Meta
-              avatar={<Avatar size="small" src={item.avatar} />}
-              title={item.title}
-            />
+            <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
             <div className={stylesApplications.cardItemContent}>
               <CardInfo
                 activeUser={formatWan(item.activeUser)}

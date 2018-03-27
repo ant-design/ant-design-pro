@@ -14,13 +14,13 @@ class PhoneView extends PureComponent {
         <Input
           className={styles.area_code}
           value={values[0]}
-          onChange={(e) => {
+          onChange={e => {
             onChange(`${e.target.value}-${values[1]}`);
           }}
         />
         <Input
           className={styles.phone_number}
-          onChange={(e) => {
+          onChange={e => {
             onChange(`${values[0]}-${e.target.value}`);
           }}
           value={values[1]}

@@ -38,7 +38,7 @@ export default class GeographicView extends PureComponent {
   getCityOption = () => {
     return this.getOption(this.props.city);
   };
-  getOption = (list) => {
+  getOption = list => {
     if (!list || list.length < 1) {
       return (
         <Option key={0} value={0}>
@@ -46,7 +46,7 @@ export default class GeographicView extends PureComponent {
         </Option>
       );
     }
-    return list.map((item) => {
+    return list.map(item => {
       return (
         <Option key={item.id} value={item.id}>
           {item.name}
@@ -54,7 +54,7 @@ export default class GeographicView extends PureComponent {
       );
     });
   };
-  selectProvinceItem = (item) => {
+  selectProvinceItem = item => {
     this.props.dispatch({
       type: 'geographic/fetchCity',
       payload: item.key,
@@ -64,7 +64,7 @@ export default class GeographicView extends PureComponent {
       city: nullSlectItem,
     });
   };
-  selectCityItem = (item) => {
+  selectCityItem = item => {
     this.props.onChange({
       province: this.props.value.province,
       city: item,

@@ -37,9 +37,7 @@ export default class Info extends Component {
     window.removeEventListener('resize', this.resize);
   }
   getmenu = () => {
-    return Object.keys(menuMap).map(item => (
-      <Item key={item}>{menuMap[item]}</Item>
-    ));
+    return Object.keys(menuMap).map(item => <Item key={item}>{menuMap[item]}</Item>);
   };
   getRightTitle = () => {
     return menuMap[this.state.selectKey];
@@ -75,7 +73,7 @@ export default class Info extends Component {
       <GridContent>
         <div
           className={styles.main}
-          ref={(ref) => {
+          ref={ref => {
             this.main = ref;
           }}
         >
@@ -95,17 +93,11 @@ export default class Info extends Component {
                 <Route
                   key={item.key}
                   path={item.path}
-                  render={props => (
-                    <item.component {...props} currentUser={currentUser} />
-                  )}
+                  render={props => <item.component {...props} currentUser={currentUser} />}
                   exact={item.exact}
                 />
               ))}
-              <Redirect
-                exact
-                from="/account/settings"
-                to="/account/settings/base"
-              />
+              <Redirect exact from="/account/settings" to="/account/settings/base" />
               <Redirect to="/exception/404" />
             </Switch>
           </div>

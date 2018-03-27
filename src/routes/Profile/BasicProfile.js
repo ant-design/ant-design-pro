@@ -23,11 +23,11 @@ const progressColumns = [
     dataIndex: 'status',
     key: 'status',
     render: text =>
-      (text === 'success' ? (
+      text === 'success' ? (
         <Badge status="success" text="成功" />
       ) : (
         <Badge status="processing" text="进行中" />
-      )),
+      ),
   },
   {
     title: '操作员ID',
@@ -60,7 +60,7 @@ export default class BasicProfile extends Component {
     if (basicGoods.length) {
       let num = 0;
       let amount = 0;
-      basicGoods.forEach((item) => {
+      basicGoods.forEach(item => {
         num += Number(item.num);
         amount += Number(item.amount);
       });
