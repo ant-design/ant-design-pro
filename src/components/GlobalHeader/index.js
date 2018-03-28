@@ -48,12 +48,13 @@ export default class GlobalHeader extends PureComponent {
     onCollapse(!collapsed);
     this.triggerResizeEvent();
   };
+  /* eslint-disable*/
   @Debounce(600)
-  triggerResizeEvent = () => {
+  triggerResizeEvent() {
     const event = document.createEvent('HTMLEvents');
     event.initEvent('resize', true, false);
     window.dispatchEvent(event);
-  };
+  }
   render() {
     const {
       currentUser,
