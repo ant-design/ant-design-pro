@@ -105,7 +105,7 @@ class StandardTable extends PureComponent {
         </div>
         <Table
           loading={loading}
-          rowKey={rowKey ? rowKey : 'key'}
+          rowKey={rowKey || 'key'}
           rowSelection={rowSelection}
           dataSource={list}
           columns={columns}
