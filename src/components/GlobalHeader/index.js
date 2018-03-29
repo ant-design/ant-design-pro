@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Icon, Divider } from 'antd';
 import { Link } from 'dva/router';
+import Debounce from 'lodash-decorators/debounce';
 import styles from './index.less';
 import RightContent from './RightContent';
 
