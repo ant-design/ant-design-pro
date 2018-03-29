@@ -12,8 +12,7 @@ export default class HeaderSearch extends PureComponent {
     className: '',
     placeholder: '',
     dataSource: [],
-    alwaysOpen: false,
-    initialOpen: false,
+    defaultOpen: false,
   };
   static propTypes = {
     className: PropTypes.string,
@@ -22,11 +21,10 @@ export default class HeaderSearch extends PureComponent {
     onPressEnter: PropTypes.func,
     defaultActiveFirstOption: PropTypes.bool,
     dataSource: PropTypes.array,
-    alwaysOpen: PropTypes.bool,
-    initialOpen: PropTypes.bool,
+    defaultOpen: PropTypes.bool,
   };
   state = {
-    searchMode: this.props.alwaysOpen || this.props.initialOpen,
+    searchMode: this.props.defaultOpen,
     value: '',
   };
   componentWillUnmount() {
@@ -60,8 +58,9 @@ export default class HeaderSearch extends PureComponent {
   };
   render() {
     const { className, placeholder, ...restProps } = this.props;
+    delete restProps.defaultOpen; // for rc-select not affected
     const inputClass = classNames(styles.input, {
-      [styles.show]: this.props.alwaysOpen || this.state.searchMode,
+      [styles.show]: this.state.searchMode,
     });
     return (
       <span className={classNames(className, styles.headerSearch)} onClick={this.enterSearchMode}>
