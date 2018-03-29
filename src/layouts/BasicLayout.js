@@ -59,6 +59,7 @@ const query = {
     minWidth: 1200,
   },
 };
+
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,

@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
@@ -84,7 +84,10 @@
     "puppeteer": "^1.1.1"
   },
   "lint-staged": {
-    "**/*.{js,jsx,less}": ["prettier --wirter", "git add"],
+    "**/*.{js,jsx,less}": [
+      "prettier --wirter",
+      "git add"
+    ],
     "**/*.{js,jsx}": "lint-staged:js",
     "**/*.less": "stylelint --syntax less"
   },
