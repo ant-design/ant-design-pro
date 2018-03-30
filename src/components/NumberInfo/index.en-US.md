@@ -12,9 +12,9 @@ Often used in data cards for highlighting the business data.
 Property | Description | Type | Default
 ----|------|-----|------
 title | title | ReactNode\|string | -
-subTitle | Subtitle | ReactNode\|string | -
-total | Total amount | ReactNode\|string | -
-subTotal | Total amount of children | ReactNode\|string | -
-status | Increase state | 'up \| down' | -
-theme | State style | string | 'light'
-gap | Set direct spacing (pixels) for numbers and descriptions | number | 8
+subTitle | subtitle | ReactNode\|string | -
+total | total amount | ReactNode\|string | -
+subTotal | total amount of children | ReactNode\|string | -
+status | increase state | 'up \| down' | -
+theme | state style | string | 'light'
+gap | set direct spacing (pixels) for numbers and descriptions | number | 8
