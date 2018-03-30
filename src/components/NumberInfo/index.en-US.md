@@ -7,11 +7,11 @@ cols: 1
 order: 10
 ---
 
-Often used in data cards for highlighting business data.
+Often used in data cards for highlighting the business data.
 
 ## API
 
-Parameter | Instructions | Type | Defaults
+Property | Description | Type | Default
 ----|------|-----|------
 title | title | ReactNode\|string | -
 subTitle | Subtitle | ReactNode\|string | -
