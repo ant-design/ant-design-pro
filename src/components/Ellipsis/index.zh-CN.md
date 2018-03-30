@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: Ellipsis 
-  zh-CN: Ellipsis
+title: Ellipsis
 subtitle: 文本自动省略号
 cols: 1
 order: 10
