@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: NumberInfo
-  zh-CN: NumberInfo
+title: NumberInfo
 subtitle: 数据文本
 cols: 1
 order: 10
