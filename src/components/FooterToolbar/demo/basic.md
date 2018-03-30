@@ -1,12 +1,12 @@
 ---
 order: 0
 title:
-  - zh-CN: 演示
-  - en-US: demo
+  zh-CN: 演示
+  en-US: demo
 iframe: 400
 ---
 
-## zh-CN
+## zh-CN
 
 浮动固定页脚。
 
