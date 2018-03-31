@@ -99,7 +99,7 @@ class BasicLayout extends React.PureComponent {
     };
   }
   componentDidMount() {
-    enquireScreen(mobile => {
+    this.unenquireScreen = enquireScreen(mobile => {
       this.setState({
         isMobile: mobile,
       });
@@ -107,6 +107,9 @@ class BasicLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
+  }
+  componentWillUnmount() {
+    this.unenquireScreen();
   }
   getPageTitle() {
     const { routerData, location } = this.props;
