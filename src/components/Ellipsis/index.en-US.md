@@ -1,11 +1,10 @@
 ---
 title: Ellipsis 
-subtitle: Ellipsis text
 cols: 1
 order: 10
 ---
 
-When the text is too long, the ellipsis automatically shortens it according to its length and the maximum number of lines.
+When the text is too long, the Ellipsis automatically shortens it according to its length or the maximum number of lines.
 
 ## API
 
