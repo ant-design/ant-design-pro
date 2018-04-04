@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Spin } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
 import styles from './index.less';
@@ -31,7 +31,7 @@ export const getMeunMatcheys = (flatMenuKeys, path) => {
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
-    this.menus = props.menuData;
+    // this.menus = props.menuData;
     this.flatMenuKeys = this.getFlatMenuKeys(props.menuData);
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
@@ -53,7 +53,7 @@ export default class SiderMenu extends PureComponent {
     const { location: { pathname } } = props || this.props;
     return urlToList(pathname)
       .map(item => {
-        return getMeunMatcheys(this.flatMenuKeys, item)[0];
+        return getMeunMatcheys(this.getFlatMenuKeys(props.menuData), item)[0];
       })
       .filter(item => item);
   }
@@ -159,7 +159,7 @@ export default class SiderMenu extends PureComponent {
   // Get the currently selected menu
   getSelectedMenuKeys = () => {
     const { location: { pathname } } = this.props;
-    return urlToList(pathname).map(itemPath => getMeunMatcheys(this.flatMenuKeys, itemPath).pop());
+    return urlToList(pathname).map(itemPath => getMeunMatcheys(this.getFlatMenuKeys(this.props.menuData), itemPath).pop());
   };
   // conversion Path
   // 转化路径
@@ -179,7 +179,7 @@ export default class SiderMenu extends PureComponent {
     return ItemDom;
   };
   isMainMenu = key => {
-    return this.menus.some(item => key && (item.key === key || item.path === key));
+    return this.props.menuData.some(item => key && (item.key === key || item.path === key));
   };
   handleOpenChange = openKeys => {
     const lastOpenKey = openKeys[openKeys.length - 1];
@@ -189,7 +189,7 @@ export default class SiderMenu extends PureComponent {
     });
   };
   render() {
-    const { logo, collapsed, onCollapse } = this.props;
+    const { logo, collapsed, onCollapse, menuData } = this.props;
     const { openKeys } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed
@@ -218,17 +218,19 @@ export default class SiderMenu extends PureComponent {
             <h1>Ant Design Pro</h1>
           </Link>
         </div>
-        <Menu
-          key="Menu"
-          theme="dark"
-          mode="inline"
-          {...menuProps}
-          onOpenChange={this.handleOpenChange}
-          selectedKeys={selectedKeys}
-          style={{ padding: '16px 0', width: '100%' }}
-        >
-          {this.getNavMenuItems(this.menus)}
-        </Menu>
+        <Spin spinning={menuData.length === 0}>
+          <Menu
+            key="Menu"
+            theme="dark"
+            mode="inline"
+            {...menuProps}
+            onOpenChange={this.handleOpenChange}
+            selectedKeys={selectedKeys}
+            style={{ padding: '16px 0', width: '100%' }}
+          >
+            {this.getNavMenuItems(menuData)}
+          </Menu>
+        </Spin>
       </Sider>
     );
   }

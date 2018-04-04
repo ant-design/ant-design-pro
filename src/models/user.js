@@ -1,4 +1,5 @@
-import { query as queryUsers, queryCurrent } from '../services/user';
+import { query as queryUsers, queryCurrent, queryMenus } from '../services/user';
+import {getMenuData} from "../common/menu";
 
 export default {
   namespace: 'user',
@@ -6,6 +7,7 @@ export default {
   state: {
     list: [],
     currentUser: {},
+    menuData: [],
   },
 
   effects: {
@@ -23,6 +25,14 @@ export default {
         payload: response,
       });
     },
+    *fetchMenus(_, { call, put }) {
+      const response = yield call(queryMenus);
+      const menus = getMenuData(response)
+      yield put({
+        type: 'saveMenus',
+        payload: menus,
+      });
+    },
   },
 
   reducers: {
@@ -36,6 +46,12 @@ export default {
       return {
         ...state,
         currentUser: action.payload,
+      };
+    },
+    saveMenus(state, action) {
+      return {
+        ...state,
+        menuData: action.payload,
       };
     },
     changeNotifyCount(state, action) {
