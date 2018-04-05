@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'dva/router';
 import RightContent from '../GlobalHeader/RightContent';
-import BaseMeun from '../SiderMenu/BaseMeun';
+import BaseMenu from '../SiderMenu/BaseMenu';
 import styles from './index.less';
 
 export default class TopNavHeader extends PureComponent {
@@ -24,7 +24,7 @@ export default class TopNavHeader extends PureComponent {
                 <h1>Ant Design Pro</h1>
               </Link>
             </div>
-            <BaseMeun
+            <BaseMenu
               {...this.props}
               style={{ padding: '9px 0', border: 'none' }}
             />
