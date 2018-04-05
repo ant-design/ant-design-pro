@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 import styles from './index.less';
-import BaseMeun, { getMeunMatcheys } from './BaseMeun';
+import BaseMenu, { getMenuMatches } from './BaseMenu';
 import { urlToList } from '../_utils/pathTools';
 
 const { Sider } = Layout;
@@ -131,7 +131,7 @@ export default class SiderMenu extends PureComponent {
     const { location: { pathname } } = props || this.props;
     return urlToList(pathname)
       .map(item => {
-        return getMeunMatcheys(this.flatMenuKeys, item)[0];
+        return getMenuMatches(this.flatMenuKeys, item)[0];
       })
       .filter(item => item);
   }
@@ -165,7 +165,7 @@ export default class SiderMenu extends PureComponent {
             <h1>Ant Design Pro</h1>
           </Link>
         </div>
-        <BaseMeun
+        <BaseMenu
           {...this.props}
           key="Menu"
           mode="inline"

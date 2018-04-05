@@ -21,13 +21,13 @@ const getIcon = icon => {
   return icon;
 };
 
-export const getMeunMatcheys = (flatMenuKeys, path) => {
+export const getMenuMatches = (flatMenuKeys, path) => {
   return flatMenuKeys.filter(item => {
     return pathToRegexp(item).test(path);
   });
 };
 
-export default class BaseMeun extends PureComponent {
+export default class BaseMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.menus = props.menuData;
@@ -68,7 +68,7 @@ export default class BaseMeun extends PureComponent {
   // Get the currently selected menu
   getSelectedMenuKeys = () => {
     const { location: { pathname } } = this.props;
-    return urlToList(pathname).map(itemPath => getMeunMatcheys(this.flatMenuKeys, itemPath).pop());
+    return urlToList(pathname).map(itemPath => getMenuMatches(this.flatMenuKeys, itemPath).pop());
   };
   /**
    * get SubMenu or Item
