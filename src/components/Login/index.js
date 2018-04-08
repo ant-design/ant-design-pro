@@ -6,6 +6,7 @@ import LoginItem from './LoginItem';
 import LoginTab from './LoginTab';
 import LoginSubmit from './LoginSubmit';
 import styles from './index.less';
+import LoginContext from './loginContext';
 
 @Form.create()
 class Login extends Component {
@@ -21,17 +22,18 @@ class Login extends Component {
     onTabChange: PropTypes.func,
     onSubmit: PropTypes.func,
   };
-  static childContextTypes = {
-    tabUtil: PropTypes.object,
-    form: PropTypes.object,
-    updateActive: PropTypes.func,
-  };
   state = {
     type: this.props.defaultActiveKey,
     tabs: [],
     active: {},
   };
-  getChildContext() {
+  onSwitch = type => {
+    this.setState({
+      type,
+    });
+    this.props.onTabChange(type);
+  };
+  getContext = () => {
     return {
       tabUtil: {
         addTab: id => {
@@ -58,12 +60,6 @@ class Login extends Component {
         });
       },
     };
-  }
-  onSwitch = type => {
-    this.setState({
-      type,
-    });
-    this.props.onTabChange(type);
   };
   handleSubmit = e => {
     e.preventDefault();
@@ -83,32 +79,34 @@ class Login extends Component {
         return;
       }
       // eslint-disable-next-line
-      if (item.type.__ANT_PRO_LOGIN_TAB) {
+      if (item.type.name === 'warpContext') {
         TabChildren.push(item);
       } else {
         otherChildren.push(item);
       }
     });
     return (
-      <div className={classNames(className, styles.login)}>
-        <Form onSubmit={this.handleSubmit}>
-          {tabs.length ? (
-            <div>
-              <Tabs
-                animated={false}
-                className={styles.tabs}
-                activeKey={type}
-                onChange={this.onSwitch}
-              >
-                {TabChildren}
-              </Tabs>
-              {otherChildren}
-            </div>
-          ) : (
-            [...children]
-          )}
-        </Form>
-      </div>
+      <LoginContext.Provider value={this.getContext()}>
+        <div className={classNames(className, styles.login)}>
+          <Form onSubmit={this.handleSubmit}>
+            {tabs.length ? (
+              <>
+                <Tabs
+                  animated={false}
+                  className={styles.tabs}
+                  activeKey={type}
+                  onChange={this.onSwitch}
+                >
+                  {TabChildren}
+                </Tabs>
+                {otherChildren}
+              </>
+            ) : (
+              [...children]
+            )}
+          </Form>
+        </div>
+      </LoginContext.Provider>
     );
   }
 }
