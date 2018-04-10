@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: Exception
-  zh-CN: Exception
+title: Exception
 subtitle: 异常
 cols: 1
 order: 5
@@ -18,4 +16,4 @@ order: 5
 | desc        | 补充描述    | ReactNode  | -    |
 | img         | 背景图片地址     | string  | -    |
 | actions     | 建议操作，配置此属性时默认的『返回首页』按钮不生效    | ReactNode  | -    |
-| linkElement | 定义链接的元素，默认为 `a` | string\|ReactElement | - |
+| linkElement | 定义链接的元素 | string\|ReactElement | 'a' |
