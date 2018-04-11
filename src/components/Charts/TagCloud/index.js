@@ -26,9 +26,9 @@ class TagCloud extends Component {
     window.addEventListener('resize', this.resize);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {
-      this.renderChart(nextProps);
+  componentDidUpdate(preProps) {
+    if (JSON.stringify(preProps.data) !== JSON.stringify(this.props.data)) {
+      this.renderChart(this.props);
     }
   }
 

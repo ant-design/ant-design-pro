@@ -32,6 +32,15 @@ const Body = ({ children, title, style }) => (
 );
 
 class Sidebar extends PureComponent {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextState = {};
+    Object.keys(nextProps).forEach(key => {
+      if (nextProps[key] && prevState[key] !== undefined) {
+        nextState[key] = nextProps[key];
+      }
+    });
+    return nextState;
+  }
   constructor(props) {
     super(props);
     this.defaultstate = {
@@ -48,9 +57,7 @@ class Sidebar extends PureComponent {
     const propsState = this.propsToState(props);
     this.state = { ...this.defaultstate, ...propsState };
   }
-  componentWillReceiveProps(props) {
-    this.setState(this.propsToState(props));
-  }
+
   getLayOutSetting = () => {
     const { layout } = this.state;
     return [
