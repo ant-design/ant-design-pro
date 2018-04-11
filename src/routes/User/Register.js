@@ -34,9 +34,9 @@ export default class Register extends Component {
     prefix: '86',
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate() {
     const account = this.props.form.getFieldValue('mail');
-    if (nextProps.register.status === 'ok') {
+    if (this.props.register.status === 'ok') {
       this.props.dispatch(
         routerRedux.push({
           pathname: '/user/register-result',
@@ -47,7 +47,6 @@ export default class Register extends Component {
       );
     }
   }
-
   componentWillUnmount() {
     clearInterval(this.interval);
   }

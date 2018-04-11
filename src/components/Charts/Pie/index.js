@@ -23,22 +23,13 @@ export default class Pie extends Component {
     this.resize();
     window.addEventListener('resize', this.resize);
   }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.data !== nextProps.data) {
+  componentDidUpdate(preProps) {
+    if (this.props.data !== preProps.data) {
       // because of charts data create when rendered
       // so there is a trick for get rendered time
-      this.setState(
-        {
-          legendData: [...this.state.legendData],
-        },
-        () => {
-          this.getLengendData();
-        }
-      );
+      this.getLengendData();
     }
   }
-
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
     this.resize.cancel();

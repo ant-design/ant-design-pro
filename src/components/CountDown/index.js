@@ -3,12 +3,40 @@ import React, { Component } from 'react';
 function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;
 }
+const initTime = props => {
+  let lastTime = 0;
+  let targetTime = 0;
+  try {
+    if (Object.prototype.toString.call(props.target) === '[object Date]') {
+      targetTime = props.target.getTime();
+    } else {
+      targetTime = new Date(props.target).getTime();
+    }
+  } catch (e) {
+    throw new Error('invalid target prop', e);
+  }
+
+  lastTime = targetTime - new Date().getTime();
+  return {
+    lastTime: lastTime < 0 ? 0 : lastTime,
+  };
+};
 
 class CountDown extends Component {
+  static getDerivedStateFromProps(nextProps, preState) {
+    const { lastTime } = initTime(nextProps);
+    if (preState.lastTime !== lastTime) {
+      return {
+        lastTime,
+      };
+    }
+    return null;
+  }
+
   constructor(props) {
     super(props);
 
-    const { lastTime } = this.initTime(props);
+    const { lastTime } = initTime(props);
 
     this.state = {
       lastTime,
@@ -19,18 +47,10 @@ class CountDown extends Component {
     this.tick();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.target !== nextProps.target) {
+  componentDidUpdate(prevProps) {
+    if (this.props.target !== prevProps.target) {
       clearTimeout(this.timer);
-      const { lastTime } = this.initTime(nextProps);
-      this.setState(
-        {
-          lastTime,
-        },
-        () => {
-          this.tick();
-        }
-      );
+      this.tick();
     }
   }
 
@@ -40,24 +60,6 @@ class CountDown extends Component {
 
   timer = 0;
   interval = 1000;
-  initTime = props => {
-    let lastTime = 0;
-    let targetTime = 0;
-    try {
-      if (Object.prototype.toString.call(props.target) === '[object Date]') {
-        targetTime = props.target.getTime();
-      } else {
-        targetTime = new Date(props.target).getTime();
-      }
-    } catch (e) {
-      throw new Error('invalid target prop', e);
-    }
-
-    lastTime = targetTime - new Date().getTime();
-    return {
-      lastTime: lastTime < 0 ? 0 : lastTime,
-    };
-  };
   // defaultFormat = time => (
   //  <span>{moment(time).format('hh:mm:ss')}</span>
   // );

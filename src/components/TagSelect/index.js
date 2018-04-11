@@ -15,15 +15,16 @@ const TagSelectOption = ({ children, checked, onChange, value }) => (
 TagSelectOption.isTagSelectOption = true;
 
 class TagSelect extends Component {
+  static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps && nextProps.value) {
+      return { value: nextProps.value };
+    }
+  }
+
   state = {
     expand: false,
     value: this.props.value || this.props.defaultValue || [],
   };
-  componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps && nextProps.value) {
-      this.setState({ value: nextProps.value });
-    }
-  }
 
   onChange = value => {
     const { onChange } = this.props;
