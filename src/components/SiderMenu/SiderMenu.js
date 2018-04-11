@@ -8,6 +8,19 @@ import { urlToList } from '../_utils/pathTools';
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
+/**
+ * 获得菜单子节点
+ * @memberof SiderMenu
+ */
+const getDefaultCollapsedSubMenus = props => {
+  const { location: { pathname } } = props;
+  return urlToList(pathname)
+    .map(item => {
+      return getMenuMatches(props.flatMenuKeys, item)[0];
+    })
+    .filter(item => item);
+};
+
 // Allow menu.js config icon as string or ReactNode
 //   icon: 'setting',
 //   icon: 'http://demo.com/icon.png',
@@ -23,36 +36,18 @@ const getIcon = icon => {
 };
 
 export default class SiderMenu extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.menus = props.menuData;
-    this.flatMenuKeys = this.getFlatMenuKeys(props.menuData);
-    this.state = {
-      openKeys: this.getDefaultCollapsedSubMenus(props),
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      openKeys: getDefaultCollapsedSubMenus(nextProps),
     };
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location.pathname !== this.props.location.pathname) {
-      this.setState({
-        openKeys: this.getDefaultCollapsedSubMenus(nextProps),
-      });
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      openKeys: getDefaultCollapsedSubMenus(props),
+    };
   }
-  /**
-   * Recursively flatten the data
-   * [{path:string},{path:string}] => {path,path2}
-   * @param  menus
-   */
-  getFlatMenuKeys(menus) {
-    let keys = [];
-    menus.forEach(item => {
-      if (item.children) {
-        keys = keys.concat(this.getFlatMenuKeys(item.children));
-      }
-      keys.push(item.path);
-    });
-    return keys;
-  }
+
   /**
    * Convert pathname to openKeys
    * /list/search/articles = > ['list','/list/search']
@@ -123,20 +118,8 @@ export default class SiderMenu extends PureComponent {
       return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
     }
   };
-  /**
-   * 获得菜单子节点
-   * @memberof SiderMenu
-   */
-  getDefaultCollapsedSubMenus(props) {
-    const { location: { pathname } } = props || this.props;
-    return urlToList(pathname)
-      .map(item => {
-        return getMenuMatches(this.flatMenuKeys, item)[0];
-      })
-      .filter(item => item);
-  }
   isMainMenu = key => {
-    return this.menus.some(item => key && (item.key === key || item.path === key));
+    return this.props.menuData.some(item => key && (item.key === key || item.path === key));
   };
   handleOpenChange = openKeys => {
     const lastOpenKey = openKeys[openKeys.length - 1];

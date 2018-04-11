@@ -17,8 +17,8 @@ export default class Radar extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.data !== nextProps.data) {
+  componentDidUpdate(preProps) {
+    if (this.props.data !== preProps.data) {
       this.getLengendData();
     }
   }
