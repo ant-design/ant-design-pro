@@ -3,40 +3,42 @@ import { Spin } from 'antd';
 import { enquireScreen } from 'enquire-js';
 import { connect } from 'dva';
 import BasicLayout from './BasicLayout';
-import { getMenuData } from '../common/menu';
-
+import AppMenu from '../components/_utils/AppMenu';
 /**
  * 根据菜单取得重定向地址.
  */
 
-const MenuData = getMenuData();
-const getRedirectData = () => {
+const getRedirectData = menuData => {
   const redirectData = [];
-  const getRedirect = (item) => {
+  const getRedirect = item => {
     if (item && item.children) {
       if (item.children[0] && item.children[0].path) {
         redirectData.push({
           from: `${item.path}`,
           to: `${item.children[0].path}`,
         });
-        item.children.forEach((children) => {
+        item.children.forEach(children => {
           getRedirect(children);
         });
       }
     }
   };
-  MenuData.forEach(getRedirect);
+  menuData.forEach(getRedirect);
   return redirectData;
 };
-const redirectData = getRedirectData();
 
 class LoadingPage extends PureComponent {
-  state = {
-    loading: true,
-    isMobile: false,
-  };
+  constructor(props) {
+    super(props);
+    this.redirectData = getRedirectData(this.props.menuData);
+    this.state = {
+      loading: true,
+      isMobile: false,
+    };
+  }
+
   componentDidMount() {
-    enquireScreen((mobile) => {
+    enquireScreen(mobile => {
       this.setState({
         isMobile: mobile,
       });
@@ -48,7 +50,7 @@ class LoadingPage extends PureComponent {
     const settingString = urlParams.searchParams.get('setting');
     if (settingString) {
       const setting = {};
-      settingString.split(';').forEach((keyValue) => {
+      settingString.split(';').forEach(keyValue => {
         const [key, value] = keyValue.split(':');
         setting[key] = value;
       });
@@ -59,12 +61,15 @@ class LoadingPage extends PureComponent {
     }
     this.hideLoading();
   }
+
   hideLoading() {
     this.setState({
       loading: false,
     });
   }
+
   render() {
+    const { menuData } = this.props;
     if (this.state.loading) {
       return (
         <div
@@ -83,12 +88,12 @@ class LoadingPage extends PureComponent {
     return (
       <BasicLayout
         isMobile={this.state.isMobile}
-        menuData={MenuData}
-        redirectData={redirectData}
+        menuData={menuData}
+        redirectData={this.redirectData}
         {...this.props}
       />
     );
   }
 }
 
-export default connect()(LoadingPage);
+export default connect()(AppMenu(LoadingPage));
