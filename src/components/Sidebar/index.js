@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Select, List, Switch, Divider, Radio } from 'antd';
+import DrawerMenu from 'rc-drawer-menu';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import LayoutSeting from './LayoutSetting';
@@ -90,16 +91,11 @@ class Sidebar extends PureComponent {
       {
         title: 'Fix Siderbar',
         isShow: layout === 'sidemenu',
-        action: [
-          <Switch
-            checked={!!this.state.fixSiderbar}
-            onChange={this.fixSiderbar}
-          />,
-        ],
+        action: [<Switch checked={!!this.state.fixSiderbar} onChange={this.fixSiderbar} />],
       },
     ].filter(item => item.isShow);
   };
-  fixSiderbar = (checked) => {
+  fixSiderbar = checked => {
     this.changeSetting('fixSiderbar', checked);
   };
   changeSetting = (key, value) => {
@@ -118,9 +114,9 @@ class Sidebar extends PureComponent {
       }
     });
   };
-  propsToState = (props) => {
+  propsToState = props => {
     const nextState = {};
-    Object.keys(props).forEach((key) => {
+    Object.keys(props).forEach(key => {
       if (props[key] && this.defaultstate[key] !== undefined) {
         nextState[key] = props[key];
       }
@@ -135,82 +131,84 @@ class Sidebar extends PureComponent {
       display: 'block',
     };
     return (
-      <div
-        className={`${styles.sidebar} ${
-          this.state.collapse ? styles.show : ''
-        }`}
-      >
-        <div className={styles.mini_bar} onClick={this.togglerContent}>
-          <img
-            alt="logo"
-            src="https://gw.alipayobjects.com/zos/rmsportal/ApQgLmeZDNJMomKNvavq.svg"
-          />
+      <>
+        <div className={styles.sidebar}>
+          <div className={styles.mini_bar} onClick={this.togglerContent}>
+            <img
+              alt="logo"
+              src="https://gw.alipayobjects.com/zos/rmsportal/ApQgLmeZDNJMomKNvavq.svg"
+            />
+          </div>
         </div>
-        <div className={styles.content}>
-          <Body
-            title="整体风格设置"
-            style={{
-              paddingBottom: 10,
-            }}
-          >
-            <RadioGroup
-              onChange={({ target }) =>
-                this.changeSetting('silderTheme', target.value)
-              }
-              value={this.state.silderTheme}
+        <DrawerMenu
+          parent={null}
+          level={null}
+          iconChild={null}
+          open={this.state.collapse}
+          placement="right"
+          width="336px"
+          onMaskClick={this.togglerContent}
+        >
+          <div className={styles.content}>
+            <Body
+              title="整体风格设置"
+              style={{
+                paddingBottom: 10,
+              }}
             >
-              <Radio style={radioStyle} value="dark">
-                <ColorBlock color="#002140" title="深色导航" />
-              </Radio>
-              <Radio style={radioStyle} value="ligth">
-                <ColorBlock color="#E9E9E9" title="浅色导航" />
-              </Radio>
-            </RadioGroup>
-            <ThemeColor
-              value={this.state.themeColor}
-              onChange={color => this.changeSetting('themeColor', color)}
-            />
-          </Body>
-          <Divider style={{ margin: 0 }} />
-          <Body title="导航设置 ">
-            <LayoutSeting
-              value={this.state.layout}
-              onChange={layout => this.changeSetting('layout', layout)}
-            />
-            <List
-              split={false}
-              dataSource={this.getLayOutSetting()}
-              renderItem={item => (
-                <List.Item actions={item.action}>{item.title}</List.Item>
-              )}
-            />
-          </Body>
-          <Divider style={{ margin: 0 }} />
-          <Body title="其他设置">
-            <List
-              split={false}
-              dataSource={[
-                {
-                  title: '色弱模式',
-                  action: [
-                    <Select
-                      value={this.state.colorWeak}
-                      onSelect={value => this.changeSetting('colorWeak', value)}
-                      style={{ width: 120 }}
-                    >
-                      <Select.Option value="open">打开</Select.Option>
-                      <Select.Option value="colse">关闭</Select.Option>
-                    </Select>,
-                  ],
-                },
-              ]}
-              renderItem={item => (
-                <List.Item actions={item.action}>{item.title}</List.Item>
-              )}
-            />
-          </Body>
-        </div>
-      </div>
+              <RadioGroup
+                onChange={({ target }) => this.changeSetting('silderTheme', target.value)}
+                value={this.state.silderTheme}
+              >
+                <Radio style={radioStyle} value="dark">
+                  <ColorBlock color="#002140" title="深色导航" />
+                </Radio>
+                <Radio style={radioStyle} value="ligth">
+                  <ColorBlock color="#E9E9E9" title="浅色导航" />
+                </Radio>
+              </RadioGroup>
+              <ThemeColor
+                value={this.state.themeColor}
+                onChange={color => this.changeSetting('themeColor', color)}
+              />
+            </Body>
+            <Divider style={{ margin: 0 }} />
+            <Body title="导航设置 ">
+              <LayoutSeting
+                value={this.state.layout}
+                onChange={layout => this.changeSetting('layout', layout)}
+              />
+              <List
+                split={false}
+                dataSource={this.getLayOutSetting()}
+                renderItem={item => <List.Item actions={item.action}>{item.title}</List.Item>}
+              />
+            </Body>
+            <Divider style={{ margin: 0 }} />
+            <Body title="其他设置">
+              <List
+                split={false}
+                dataSource={[
+                  {
+                    title: '色弱模式',
+                    action: [
+                      <Select
+                        value={this.state.colorWeak}
+                        onSelect={value => this.changeSetting('colorWeak', value)}
+                        style={{ width: 120 }}
+                      >
+                        <Select.Option value="open">打开</Select.Option>
+                        <Select.Option value="colse">关闭</Select.Option>
+                      </Select>,
+                    ],
+                  },
+                ]}
+                renderItem={item => <List.Item actions={item.action}>{item.title}</List.Item>}
+              />
+            </Body>
+          </div>
+        </DrawerMenu>
+      </>
     );
   }
 }
