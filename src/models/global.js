@@ -1,4 +1,6 @@
 import { queryNotices } from '../services/api';
+import { getAuthMenus } from '../services/auth';
+import * as menuConfig from '../common/menu';
 
 export default {
   namespace: 'global',
@@ -6,9 +8,34 @@ export default {
   state: {
     collapsed: false,
     notices: [],
+    routerConfig: {},
+    // 存储菜单数据(全局缓存)
+    menuData: [],
+    // 存储路由数据(全局缓存)
+    routerData: [],
   },
 
   effects: {
+    *fetchMenus(_, { call, put, select }) {
+      const routerConfig = yield select(state => state.global.routerConfig);
+
+      const remoteMenuData = yield call(getAuthMenus);
+      const menuData = menuConfig.getMenuData(remoteMenuData);
+
+      const flatMenuData = menuConfig.getFlatMenuData(menuData);
+      const routerData = menuConfig.getRouterData(routerConfig, flatMenuData);
+
+      yield put({
+        type: 'saveMenus',
+        payload: menuData,
+      });
+
+      yield put({
+        type: 'saveRouterData',
+        payload: routerData,
+      });
+    },
+
     *fetchNotices(_, { call, put }) {
       const data = yield call(queryNotices);
       yield put({
@@ -34,6 +61,24 @@ export default {
   },
 
   reducers: {
+    saveMenus(state, { payload }) {
+      return {
+        ...state,
+        menuData: payload,
+      };
+    },
+    saveRouterConfig(state, { payload }) {
+      return {
+        ...state,
+        routerConfig: payload,
+      };
+    },
+    saveRouterData(state, { payload }) {
+      return {
+        ...state,
+        routerData: payload,
+      };
+    },
     changeLayoutCollapsed(state, { payload }) {
       return {
         ...state,
