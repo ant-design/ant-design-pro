@@ -23,18 +23,16 @@ class WarpFormItem extends Component {
     clearInterval(this.interval);
   }
   onGetCaptcha = () => {
-    let count = 59;
-    this.setState({ count });
-    if (this.props.onGetCaptcha) {
-      this.props.onGetCaptcha();
+    const { onGetCaptcha } = this.props;
+    const result = onGetCaptcha ? onGetCaptcha() : null;
+    if (result === false) {
+      return;
     }
-    this.interval = setInterval(() => {
-      count -= 1;
-      this.setState({ count });
-      if (count === 0) {
-        clearInterval(this.interval);
-      }
-    }, 1000);
+    if (result instanceof Promise) {
+      result.then(this.runGetCaptchaCountDown);
+    } else {
+      this.runGetCaptchaCountDown();
+    }
   };
   getFormItemOptions = ({ onChange, defaultValue, rules }) => {
     const options = {
@@ -47,6 +45,17 @@ class WarpFormItem extends Component {
       options.initialValue = defaultValue;
     }
     return options;
+  };
+  runGetCaptchaCountDown = () => {
+    let count = this.props.countDown || 59;
+    this.setState({ count });
+    this.interval = setInterval(() => {
+      count -= 1;
+      this.setState({ count });
+      if (count === 0) {
+        clearInterval(this.interval);
+      }
+    }, 1000);
   };
   render() {
     const { count } = this.state;

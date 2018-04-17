@@ -21,6 +21,24 @@ export default class LoginPage extends Component {
     this.setState({ type });
   };
 
+  onGetCaptcha = () => {
+    return new Promise((resolve, reject) => {
+      this.loginForm.validateFields(['mobile'], {}, (err, values) => {
+        if (err) {
+          reject(err);
+        } else {
+          this.props
+            .dispatch({
+              type: 'login/getCaptcha',
+              payload: values.mobile,
+            })
+            .then(resolve)
+            .catch(reject);
+        }
+      });
+    });
+  };
+  loginForm;
   handleSubmit = (err, values) => {
     const { type } = this.state;
     if (!err) {
@@ -49,7 +67,14 @@ export default class LoginPage extends Component {
     const { type } = this.state;
     return (
       <div className={styles.main}>
-        <Login defaultActiveKey={type} onTabChange={this.onTabChange} onSubmit={this.handleSubmit}>
+        <Login
+          defaultActiveKey={type}
+          onTabChange={this.onTabChange}
+          onSubmit={this.handleSubmit}
+          ref={form => {
+            this.loginForm = form;
+          }}
+        >
           <Tab key="account" tab="账户密码登录">
             {login.status === 'error' &&
               login.type === 'account' &&
@@ -64,7 +89,7 @@ export default class LoginPage extends Component {
               !login.submitting &&
               this.renderMessage('验证码错误')}
             <Mobile name="mobile" />
-            <Captcha name="captcha" />
+            <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
           </Tab>
           <div>
             <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>
