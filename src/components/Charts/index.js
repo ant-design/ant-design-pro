@@ -47,3 +47,18 @@ export {
   TagCloud,
   TimelineChart,
 };
+export default {
+  yuan,
+  Bar,
+  Pie,
+  Gauge,
+  Radar,
+  MiniBar,
+  MiniArea,
+  MiniProgress,
+  ChartCard,
+  Field,
+  WaterWave,
+  TagCloud,
+  TimelineChart,
+};

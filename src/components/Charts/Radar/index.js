@@ -19,7 +19,7 @@ export default class Radar extends Component {
 
   componentDidUpdate(preProps) {
     if (this.props.data !== preProps.data) {
-      this.getLengendData();
+      this.getLegendData();
     }
   }
 
@@ -28,7 +28,7 @@ export default class Radar extends Component {
   };
 
   // for custom lengend view
-  getLengendData = () => {
+  getLegendData = () => {
     if (!this.chart) return;
     const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
     const items = geom.get('dataArray') || []; // 获取图形对应的
