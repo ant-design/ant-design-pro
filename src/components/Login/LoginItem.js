@@ -29,11 +29,20 @@ function generator({ defaultProps, defaultRules, type }) {
         clearInterval(this.interval);
       }
       onGetCaptcha = () => {
-        let count = 59;
-        this.setState({ count });
-        if (this.props.onGetCaptcha) {
-          this.props.onGetCaptcha();
+        const { onGetCaptcha } = this.props;
+        const result = onGetCaptcha ? onGetCaptcha() : null;
+        if (result === false) {
+          return;
         }
+        if (result instanceof Promise) {
+          result.then(this.runGetCaptchaTimer);
+        } else {
+          this.runGetCaptchaTimer();
+        }
+      }
+      runGetCaptchaTimer = () => {
+        let count = this.props.countDown || 59;
+        this.setState({ count });
         this.interval = setInterval(() => {
           count -= 1;
           this.setState({ count });
