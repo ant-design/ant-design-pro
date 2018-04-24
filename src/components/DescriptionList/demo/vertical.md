@@ -1,9 +1,17 @@
 ---
 order: 1
-title: Vertical
+title:
+  zh-CN: 垂直型
+  en-US: Vertical
 ---
 
+## zh-CN
+
 垂直布局。
+
+## en-US
+
+Vertical layout.
 
 ````jsx
 import DescriptionList from 'ant-design-pro/lib/DescriptionList';

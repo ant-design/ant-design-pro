@@ -32,7 +32,7 @@
     "classnames": "^2.2.5",
     "dva": "^2.1.0",
     "dva-loading": "^1.0.4",
-    "enquire-js": "^0.1.1",
+    "enquire-js": "^0.2.1",
     "lodash": "^4.17.4",
     "lodash-decorators": "^4.4.1",
     "moment": "^2.19.1",
