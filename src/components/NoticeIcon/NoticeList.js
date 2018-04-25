@@ -11,6 +11,7 @@ export default function NoticeList({
   locale,
   emptyText,
   emptyImage,
+  hideClear,
 }) {
   if (data.length === 0) {
     return (
@@ -51,10 +52,12 @@ export default function NoticeList({
           );
         })}
       </List>
-      <div className={styles.clear} onClick={onClear}>
-        {locale.clear}
-        {title}
-      </div>
+      {hideClear ? null : (
+        <div className={styles.clear} onClick={onClear}>
+          {locale.clear}
+          {title}
+        </div>
+      )}
     </div>
   );
 }
