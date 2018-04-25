@@ -26,17 +26,26 @@ export default class ActiveChart extends Component {
   };
 
   componentDidMount() {
-    this.timer = setInterval(() => {
-      this.setState({
-        activeData: getActiveData(),
-      });
-    }, 1000);
+    this.loopData();
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    clearTimeout(this.timer);
   }
-
+  loopData = () => {
+    this.timer = setTimeout(() => {
+      this.setState(
+        {
+          activeData: getActiveData(),
+        },
+        () => {
+          requestAnimationFrame(() => {
+            this.loopData();
+          });
+        }
+      );
+    }, 1000);
+  };
   render() {
     const { activeData = [] } = this.state;
 

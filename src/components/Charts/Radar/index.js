@@ -12,7 +12,9 @@ export default class Radar extends Component {
   };
 
   componentDidMount() {
-    this.getLengendData();
+    requestAnimationFrame(() => {
+      this.getLengendData();
+    });
   }
 
   componentWillReceiveProps(nextProps) {

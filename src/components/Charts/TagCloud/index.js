@@ -19,8 +19,10 @@ class TagCloud extends Component {
   };
 
   componentDidMount() {
-    this.initTagCloud();
-    this.renderChart();
+    requestAnimationFrame(() => {
+      this.initTagCloud();
+      this.renderChart();
+    });
     window.addEventListener('resize', this.resize);
   }
 
@@ -36,7 +38,9 @@ class TagCloud extends Component {
   }
 
   resize = () => {
-    this.renderChart();
+    requestAnimationFrame(() => {
+      this.renderChart();
+    });
   };
 
   saveRootRef = node => {
