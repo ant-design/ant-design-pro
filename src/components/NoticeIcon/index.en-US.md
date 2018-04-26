@@ -9,7 +9,7 @@ order: 9
 
 ## API
 
-参数 | 说明 | 类型 | 默认值
+Property | Description | Type | Default
 ----|------|-----|------
 count | Total number of messages | number | -
 loading | Popup card loading status | boolean | false
@@ -23,18 +23,18 @@ locale | Default message text | Object | `{ emptyText: '暂无数据', clear: '�
 
 ### NoticeIcon.Tab
 
-参数 | 说明 | 类型 | 默认值
+Property | Description | Type | Default
 ----|------|-----|------
 title |  header for message Tab | string | -
 list | List data, format refer to the following table | Array | `[]`
-hideClear | Clear button display status | boolean | false
+showClear | Clear button display status | boolean | true
 emptyText |  message text when list is empty  | ReactNode | -
 emptyImage | image  when list is empty  | string | -
 
 
 ### Tab data
 
-参数 | 说明 | 类型 | 默认值
+Property | Description | Type | Default
 ----|------|-----|------
 avatar | avatar img url  | string | -
 title | title | ReactNode | -

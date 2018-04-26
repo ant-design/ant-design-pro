@@ -27,7 +27,7 @@ locale | 默认文案 | Object | `{ emptyText: '暂无数据', clear: '清空' }
 ----|------|-----|------
 title | 消息分类的页签标题 | string | -
 list | 列表数据，格式参照下表 | Array | `[]`
-hideClear | 是否显示清空按钮 | boolean | false
+showClear | 是否显示清空按钮 | boolean | true
 emptyText | 针对每个 Tab 定制空数据文案 | ReactNode | -
 emptyImage | 针对每个 Tab 定制空数据图片 | string | -
 
