@@ -5,7 +5,7 @@ import styles from './index.less';
 
 const FormItem = Form.Item;
 
-export default ({ className, ...rest }) => {
+const LoginSubmit = ({ className, ...rest }) => {
   const clsString = classNames(styles.submit, className);
   return (
     <FormItem>
@@ -13,3 +13,5 @@ export default ({ className, ...rest }) => {
     </FormItem>
   );
 };
+
+export default LoginSubmit;

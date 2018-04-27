@@ -3,7 +3,7 @@ import React from 'react';
 import DrawerMenu from 'rc-drawer-menu';
 import SiderMenu from './SiderMenu';
 
-export default props =>
+const SiderMenuWrapper = props =>
   props.isMobile ? (
     <DrawerMenu
       parent={null}
@@ -20,3 +20,5 @@ export default props =>
   ) : (
     <SiderMenu {...props} />
   );
+
+export default SiderMenuWrapper;
