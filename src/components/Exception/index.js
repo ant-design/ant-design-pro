@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import config from './typeConfig';
 import styles from './index.less';
 
-export default ({ className, linkElement = 'a', type, title, desc, img, actions, ...rest }) => {
+const Exception = ({ className, linkElement = 'a', type, title, desc, img, actions, ...rest }) => {
   const pageType = type in config ? type : '404';
   const clsString = classNames(styles.exception, className);
   return (
@@ -33,3 +33,5 @@ export default ({ className, linkElement = 'a', type, title, desc, img, actions,
     </div>
   );
 };
+
+export default Exception;

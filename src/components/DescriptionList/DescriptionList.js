@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Row } from 'antd';
 import styles from './index.less';
 
-export default ({
+const DescriptionList = ({
   className,
   title,
   col = 3,
@@ -27,3 +27,5 @@ export default ({
     </div>
   );
 };
+
+export default DescriptionList;
