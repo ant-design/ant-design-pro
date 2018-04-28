@@ -57,7 +57,7 @@ export default class GlobalHeader extends PureComponent {
   }
   render() {
     const {
-      currentUser,
+      currentUser = {},
       collapsed,
       fetchingNotices,
       isMobile,
