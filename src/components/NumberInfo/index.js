@@ -3,7 +3,7 @@ import { Icon } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 
-export default ({ theme, title, subTitle, total, subTotal, status, suffix, gap, ...rest }) => (
+const NumberInfo = ({ theme, title, subTitle, total, subTotal, status, suffix, gap, ...rest }) => (
   <div
     className={classNames(styles.numberInfo, {
       [styles[`numberInfo${theme}`]]: theme,
@@ -26,3 +26,5 @@ export default ({ theme, title, subTitle, total, subTotal, status, suffix, gap, 
     </div>
   </div>
 );
+
+export default NumberInfo;

@@ -19,8 +19,8 @@ const getFlatMenuKeys = menuData => {
   return keys;
 };
 
-export default props =>
-  props.isMobile || props.fixSiderbar ? (
+const SiderMenuWrapper = props =>
+  props.isMobile ? (
     <DrawerMenu
       parent={null}
       level={null}
@@ -40,3 +40,5 @@ export default props =>
   ) : (
     <SiderMenu {...props} flatMenuKeys={getFlatMenuKeys(props.menuData)} />
   );
+
+export default SiderMenuWrapper;
