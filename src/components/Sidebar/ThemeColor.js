@@ -30,15 +30,12 @@ const ThemeColor = ({ colors, value, onChange }) => {
       '#EB2F96',
     ];
   }
-
   return (
     <div className={styles.themeColor}>
       <h3 className={styles.title}>主题颜色</h3>
-      {colorList.map((color) => {
+      {colorList.map(color => {
         const classname =
-          value === color
-            ? `${styles.colorBlock} ${styles.active}`
-            : styles.colorBlock;
+          value === color ? `${styles.colorBlock} ${styles.active}` : styles.colorBlock;
         return (
           <Tag
             className={classname}
