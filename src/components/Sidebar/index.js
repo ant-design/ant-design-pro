@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Select, List, Switch, Divider, Radio } from 'antd';
+import { Select, message, List, Switch, Divider, Radio } from 'antd';
 import DrawerMenu from 'rc-drawer-menu';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
@@ -133,6 +133,17 @@ class Sidebar extends PureComponent {
   togglerContent = () => {
     this.changeSetting('collapse', !this.state.collapse);
   };
+  colorChange = color => {
+    window.less
+      .modifyVars({
+        '@primary-color': color,
+      })
+      .then(() => {})
+      .catch(() => {
+        message.error(`Failed to update theme`);
+      });
+    this.changeSetting('themeColor', color);
+  };
   render() {
     const radioStyle = {
       display: 'block',
@@ -174,10 +185,7 @@ class Sidebar extends PureComponent {
                   <ColorBlock color="#E9E9E9" title="浅色导航" />
                 </Radio>
               </RadioGroup>
-              <ThemeColor
-                value={this.state.themeColor}
-                onChange={color => this.changeSetting('themeColor', color)}
-              />
+              <ThemeColor value={this.state.themeColor} onChange={this.colorChange} />
             </Body>
             <Divider style={{ margin: 0 }} />
             <Body title="导航设置 ">
