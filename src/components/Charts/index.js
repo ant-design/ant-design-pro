@@ -13,7 +13,7 @@ import WaterWave from './WaterWave';
 import TagCloud from './TagCloud';
 import TimelineChart from './TimelineChart';
 
-const yuan = val => `&yen; ${numeral(val).format('0,0')}`;
+const yuan = val => `¥ ${numeral(val).format('0,0')}`;
 
 const Charts = {
   yuan,
