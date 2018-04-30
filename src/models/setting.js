@@ -15,13 +15,16 @@ export default {
   reducers: {
     changeSetting(state, { payload }) {
       const urlParams = new URL(window.location.href);
-      let urlParamsString = '';
-      Object.keys(payload).forEach((key) => {
-        if (payload[key] && state[key] !== undefined && key !== 'collapse') {
-          urlParamsString += `${key}:${payload[key]};`;
+      Object.keys(payload).forEach(key => {
+        if (key === 'collapse') {
+          return;
         }
+        let value = payload[key];
+        if (value === true) {
+          value = 1;
+        }
+        urlParams.searchParams.set(key, value);
       });
-      urlParams.searchParams.set('setting', urlParamsString);
       window.history.replaceState(null, 'setting', urlParams.href);
       return {
         ...state,

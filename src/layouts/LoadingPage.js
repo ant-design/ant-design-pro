@@ -45,19 +45,7 @@ class LoadingPage extends PureComponent {
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
-    const urlParams = new URL(window.location.href);
-    const settingString = urlParams.searchParams.get('setting');
-    if (settingString) {
-      const setting = {};
-      settingString.split(';').forEach(keyValue => {
-        const [key, value] = keyValue.split(':');
-        setting[key] = value;
-      });
-      this.props.dispatch({
-        type: 'setting/changeSetting',
-        payload: setting,
-      });
-    }
+    this.initSetting();
     this.hideLoading();
   }
   componentWillUnmount() {
@@ -66,6 +54,27 @@ class LoadingPage extends PureComponent {
   hideLoading() {
     this.setState({
       loading: false,
+    });
+  }
+  initSetting() {
+    const setting = {
+      collapse: false,
+      silderTheme: 'dark',
+      themeColor: '#1890FF',
+      layout: 'sidemenu',
+      grid: 'Fluid',
+      fixedHeader: false,
+      autoHideHeader: false,
+      fixSiderbar: false,
+      colorWeak: 'close',
+    };
+    const urlParams = new URL(window.location.href);
+    Object.keys(setting).forEach(key => {
+      setting[key] = urlParams.searchParams.get(key);
+    });
+    this.props.dispatch({
+      type: 'setting/changeSetting',
+      payload: setting,
     });
   }
   render() {
