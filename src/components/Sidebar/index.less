@@ -1,13 +1,4 @@
 .sidebar {
-  position: fixed;
-  right: -336px;
-  top: 150px;
-  transition: 0.3s;
-  display: flex;
-  z-index: 9;
-  &.show {
-    right: 0;
-  }
   .mini_bar {
     width: 50px;
     height: 45px;
@@ -23,6 +14,11 @@
     img {
       width: 28px;
       height: 28px;
+    }
+  }
+  :global {
+    .drawer {
+      z-index: 999;
     }
   }
 }

@@ -57,7 +57,9 @@ class Sidebar extends PureComponent {
     const propsState = this.propsToState(props);
     this.state = { ...this.defaultstate, ...propsState };
   }
-
+  componentDidMount() {
+    this.colorChange(this.state.themeColor);
+  }
   getLayOutSetting = () => {
     const { layout } = this.state;
     return [
@@ -134,29 +136,37 @@ class Sidebar extends PureComponent {
     this.changeSetting('collapse', !this.state.collapse);
   };
   colorChange = color => {
-    window.less
-      .modifyVars({
-        '@primary-color': color,
-      })
-      .then(() => {})
-      .catch(() => {
-        message.error(`Failed to update theme`);
-      });
     this.changeSetting('themeColor', color);
+    this.setState(
+      {
+        themeColor: color,
+      },
+      () => {
+        const hideMessage = message.loading('正在编译主题！', 0);
+        window.less
+          .modifyVars({
+            '@primary-color': color,
+          })
+          .then(() => {
+            hideMessage();
+          })
+          .catch(() => {
+            message.error(`Failed to update theme`);
+          });
+      }
+    );
   };
   render() {
     const radioStyle = {
       display: 'block',
     };
     return (
-      <>
-        <div className={styles.sidebar}>
-          <div className={styles.mini_bar} onClick={this.togglerContent}>
-            <img
-              alt="logo"
-              src="https://gw.alipayobjects.com/zos/rmsportal/ApQgLmeZDNJMomKNvavq.svg"
-            />
-          </div>
+      <div className={styles.sidebar}>
+        <div className={styles.mini_bar} onClick={this.togglerContent}>
+          <img
+            alt="logo"
+            src="https://gw.alipayobjects.com/zos/rmsportal/ApQgLmeZDNJMomKNvavq.svg"
+          />
         </div>
         <DrawerMenu
           parent={null}
@@ -223,7 +233,7 @@ class Sidebar extends PureComponent {
             </Body>
           </div>
         </DrawerMenu>
-      </>
+      </div>
     );
   }
 }
