@@ -30,11 +30,13 @@ export default class WaterWave extends PureComponent {
 
   resize = () => {
     requestAnimationFrame(() => {
-      const { height } = this.props;
-      const { offsetWidth } = this.root.parentNode;
-      this.setState({
-        radio: offsetWidth < height ? offsetWidth / height : 1,
-      });
+      if (this.root) {
+        const { height } = this.props;
+        const { offsetWidth } = this.root.parentNode;
+        this.setState({
+          radio: offsetWidth < height ? offsetWidth / height : 1,
+        });
+      }
     });
   };
 

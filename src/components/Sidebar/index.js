@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Select, message, List, Switch, Divider, Radio } from 'antd';
 import DrawerMenu from 'rc-drawer-menu';
+import { connect } from 'dva';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import LayoutSeting from './LayoutSetting';
@@ -30,45 +31,23 @@ const Body = ({ children, title, style }) => (
     {children}
   </div>
 );
-
+@connect(({ setting }) => ({ setting }))
 class Sidebar extends PureComponent {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const nextState = {};
-    Object.keys(nextProps).forEach(key => {
-      if (nextProps[key] && prevState[key] !== undefined) {
-        nextState[key] = nextProps[key];
-      }
-    });
-    return nextState;
-  }
-  constructor(props) {
-    super(props);
-    this.defaultstate = {
-      collapse: false,
-      silderTheme: 'dark',
-      themeColor: '#1890FF',
-      layout: 'sidemenu',
-      grid: 'Fluid',
-      fixedHeader: false,
-      autoHideHeader: false,
-      fixSiderbar: false,
-      colorWeak: 'close',
-    };
-    const propsState = this.propsToState(props);
-    this.state = { ...this.defaultstate, ...propsState };
-  }
   componentDidMount() {
-    this.colorChange(this.state.themeColor);
+    const { themeColor } = this.props.setting;
+    if (themeColor !== '#1890FF') {
+      this.colorChange(themeColor);
+    }
   }
   getLayOutSetting = () => {
-    const { layout } = this.state;
+    const { grid, fixedHeader, autoHideHeader, fixSiderbar, layout } = this.props.setting;
     return [
       {
         title: '栅格模式',
         isShow: true,
         action: [
           <Select
-            value={this.state.grid}
+            value={grid}
             onSelect={value => this.changeSetting('grid', value)}
             style={{ width: 120 }}
           >
@@ -82,7 +61,7 @@ class Sidebar extends PureComponent {
         isShow: true,
         action: [
           <Switch
-            checked={!!this.state.fixedHeader}
+            checked={!!fixedHeader}
             onChange={checked => this.changeSetting('fixedHeader', checked)}
           />,
         ],
@@ -92,7 +71,7 @@ class Sidebar extends PureComponent {
         isShow: true,
         action: [
           <Switch
-            checked={!!this.state.autoHideHeader}
+            checked={!!autoHideHeader}
             onChange={checked => this.changeSetting('autoHideHeader', checked)}
           />,
         ],
@@ -100,7 +79,7 @@ class Sidebar extends PureComponent {
       {
         title: 'Fix Siderbar',
         isShow: layout === 'sidemenu',
-        action: [<Switch checked={!!this.state.fixSiderbar} onChange={this.fixSiderbar} />],
+        action: [<Switch checked={!!fixSiderbar} onChange={this.fixSiderbar} />],
       },
     ].filter(item => item.isShow);
   };
@@ -118,48 +97,34 @@ class Sidebar extends PureComponent {
       }
     }
     this.setState(nextState, () => {
-      if (this.props.onChange) {
-        this.props.onChange(this.state);
-      }
+      this.props.dispatch({
+        type: 'setting/changeSetting',
+        payload: this.state,
+      });
     });
-  };
-  propsToState = props => {
-    const nextState = {};
-    Object.keys(props).forEach(key => {
-      if (props[key] && this.defaultstate[key] !== undefined) {
-        nextState[key] = props[key];
-      }
-    });
-    return nextState;
   };
   togglerContent = () => {
-    this.changeSetting('collapse', !this.state.collapse);
+    this.changeSetting('collapse', !this.props.setting.collapse);
   };
   colorChange = color => {
     this.changeSetting('themeColor', color);
-    this.setState(
-      {
-        themeColor: color,
-      },
-      () => {
-        const hideMessage = message.loading('正在编译主题！', 0);
-        window.less
-          .modifyVars({
-            '@primary-color': color,
-          })
-          .then(() => {
-            hideMessage();
-          })
-          .catch(() => {
-            message.error(`Failed to update theme`);
-          });
-      }
-    );
+    const hideMessage = message.loading('正在编译主题！', 0);
+    window.less
+      .modifyVars({
+        '@primary-color': color,
+      })
+      .then(() => {
+        hideMessage();
+      })
+      .catch(() => {
+        message.error(`Failed to update theme`);
+      });
   };
   render() {
     const radioStyle = {
       display: 'block',
     };
+    const { collapse, silderTheme, themeColor, layout, colorWeak } = this.props.setting;
     return (
       <div className={styles.sidebar}>
         <div className={styles.mini_bar} onClick={this.togglerContent}>
@@ -172,7 +137,7 @@ class Sidebar extends PureComponent {
           parent={null}
           level={null}
           iconChild={null}
-          open={this.state.collapse}
+          open={collapse}
           placement="right"
           width="336px"
           onMaskClick={this.togglerContent}
@@ -186,7 +151,7 @@ class Sidebar extends PureComponent {
             >
               <RadioGroup
                 onChange={({ target }) => this.changeSetting('silderTheme', target.value)}
-                value={this.state.silderTheme}
+                value={silderTheme}
               >
                 <Radio style={radioStyle} value="dark">
                   <ColorBlock color="#002140" title="深色导航" />
@@ -195,13 +160,13 @@ class Sidebar extends PureComponent {
                   <ColorBlock color="#E9E9E9" title="浅色导航" />
                 </Radio>
               </RadioGroup>
-              <ThemeColor value={this.state.themeColor} onChange={this.colorChange} />
+              <ThemeColor value={themeColor} onChange={this.colorChange} />
             </Body>
             <Divider style={{ margin: 0 }} />
             <Body title="导航设置 ">
               <LayoutSeting
-                value={this.state.layout}
-                onChange={layout => this.changeSetting('layout', layout)}
+                value={layout}
+                onChange={value => this.changeSetting('layout', value)}
               />
               <List
                 split={false}
@@ -218,7 +183,7 @@ class Sidebar extends PureComponent {
                     title: '色弱模式',
                     action: [
                       <Select
-                        value={this.state.colorWeak}
+                        value={colorWeak}
                         onSelect={value => this.changeSetting('colorWeak', value)}
                         style={{ width: 120 }}
                       >

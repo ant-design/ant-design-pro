@@ -56,25 +56,12 @@ class LoadingPage extends PureComponent {
       loading: false,
     });
   }
+  /**
+   * get setting from url params
+   */
   initSetting() {
-    const setting = {
-      collapse: false,
-      silderTheme: 'dark',
-      themeColor: '#1890FF',
-      layout: 'sidemenu',
-      grid: 'Fluid',
-      fixedHeader: false,
-      autoHideHeader: false,
-      fixSiderbar: false,
-      colorWeak: 'close',
-    };
-    const urlParams = new URL(window.location.href);
-    Object.keys(setting).forEach(key => {
-      setting[key] = urlParams.searchParams.get(key);
-    });
     this.props.dispatch({
-      type: 'setting/changeSetting',
-      payload: setting,
+      type: 'setting/getSetting',
     });
   }
   render() {
