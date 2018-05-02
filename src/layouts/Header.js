@@ -18,9 +18,7 @@ class HeaderView extends PureComponent {
     document.getElementById('root').addEventListener('scroll', this.handScroll);
   }
   componentWillUnmount() {
-    document
-      .getElementById('root')
-      .removeEventListener('scroll', this.handScroll);
+    document.getElementById('root').removeEventListener('scroll', this.handScroll);
   }
   getHeadWidth = () => {
     const { fixedHeader, layout, fixSiderbar } = this.props.setting;
@@ -34,7 +32,7 @@ class HeaderView extends PureComponent {
       return 'calc(100% - 80px)';
     }
   };
-  handleNoticeClear = (type) => {
+  handleNoticeClear = type => {
     message.success(`清空了${type}`);
     this.props.dispatch({
       type: 'global/clearNotices',
@@ -60,7 +58,7 @@ class HeaderView extends PureComponent {
       });
     }
   };
-  handleNoticeVisibleChange = (visible) => {
+  handleNoticeVisibleChange = visible => {
     if (visible) {
       this.props.dispatch({
         type: 'global/fetchNotices',

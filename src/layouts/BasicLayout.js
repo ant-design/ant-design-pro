@@ -18,8 +18,6 @@ import Context from './MenuContext';
 const { Content } = Layout;
 const { AuthorizedRoute, check } = Authorized;
 
-const RightSidebar = connect(({ setting }) => ({ ...setting }))(Sidebar);
-
 /**
  * 获取面包屑映射
  * @param {Object} menuData 菜单配置
@@ -103,12 +101,6 @@ class BasicLayout extends React.PureComponent {
       payload: collapsed,
     });
   };
-  changeSetting = setting => {
-    this.props.dispatch({
-      type: 'setting/changeSetting',
-      payload: setting,
-    });
-  };
   render() {
     const { isMobile, redirectData, routerData, fixedHeader, match } = this.props;
     const isTop = this.props.layout === 'topmenu';
@@ -164,7 +156,7 @@ class BasicLayout extends React.PureComponent {
             <Context.Provider value={this.getContext()}>
               <div className={classNames(params)}>
                 {layout}
-                <RightSidebar onChange={this.changeSetting} />
+                <Sidebar />
               </div>
             </Context.Provider>
           )}
