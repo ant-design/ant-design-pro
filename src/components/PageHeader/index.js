@@ -1,5 +1,4 @@
 import React, { PureComponent, createElement } from 'react';
-import PropTypes from 'prop-types';
 import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb, Tabs } from 'antd';
 import classNames from 'classnames';
@@ -18,14 +17,18 @@ export function getBreadcrumb(breadcrumbNameMap, url) {
   }
   return breadcrumb || {};
 }
-
 export default class PageHeader extends PureComponent {
-  static contextTypes = {
-    routes: PropTypes.array,
-    params: PropTypes.object,
-    location: PropTypes.object,
-    breadcrumbNameMap: PropTypes.object,
+  state = {
+    breadcrumb: null,
   };
+
+  componentDidMount() {
+    this.getBreadcrumbDom();
+  }
+  componentWillReceiveProps() {
+    this.getBreadcrumbDom();
+  }
+
   onChange = key => {
     if (this.props.onTabChange) {
       this.props.onTabChange(key);
@@ -33,11 +36,17 @@ export default class PageHeader extends PureComponent {
   };
   getBreadcrumbProps = () => {
     return {
-      routes: this.props.routes || this.context.routes,
-      params: this.props.params || this.context.params,
-      routerLocation: this.props.location || this.context.location,
-      breadcrumbNameMap: this.props.breadcrumbNameMap || this.context.breadcrumbNameMap,
+      routes: this.props.routes,
+      params: this.props.params,
+      routerLocation: this.props.location,
+      breadcrumbNameMap: this.props.breadcrumbNameMap,
     };
+  };
+  getBreadcrumbDom = () => {
+    const breadcrumb = this.conversionBreadcrumbList();
+    this.setState({
+      breadcrumb,
+    });
   };
   // Generated according to props
   conversionFromProps = () => {
@@ -158,8 +167,8 @@ export default class PageHeader extends PureComponent {
       tabDefaultActiveKey,
       tabBarExtraContent,
     } = this.props;
+
     const clsString = classNames(styles.pageHeader, className);
-    const breadcrumb = this.conversionBreadcrumbList();
     const activeKeyProps = {};
     if (tabDefaultActiveKey !== undefined) {
       activeKeyProps.defaultActiveKey = tabDefaultActiveKey;
@@ -170,7 +179,7 @@ export default class PageHeader extends PureComponent {
 
     return (
       <div className={clsString}>
-        {breadcrumb}
+        {this.state.breadcrumb}
         <div className={styles.detail}>
           {logo && <div className={styles.logo}>{logo}</div>}
           <div className={styles.main}>

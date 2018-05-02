@@ -3,6 +3,14 @@ import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
 import styles from './style.less';
 
 export default class TableForm extends PureComponent {
+  static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps) {
+      return {
+        data: nextProps.value,
+      };
+    }
+    return null;
+  }
   constructor(props) {
     super(props);
 
@@ -11,13 +19,7 @@ export default class TableForm extends PureComponent {
       loading: false,
     };
   }
-  componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps) {
-      this.setState({
-        data: nextProps.value,
-      });
-    }
-  }
+
   getRowByKey(key, newData) {
     return (newData || this.state.data).filter(item => item.key === key)[0];
   }

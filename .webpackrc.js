@@ -3,7 +3,6 @@ const path = require('path');
 export default {
   entry: 'src/index.js',
   extraBabelPlugins: [
-    'transform-decorators-legacy',
     ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
   ],
   env: {
@@ -19,7 +18,6 @@ export default {
   html: {
     template: './src/index.ejs',
   },
-  disableDynamicImport: true,
   publicPath: '/',
   hash: true,
 };

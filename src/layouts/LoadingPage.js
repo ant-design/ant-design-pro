@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Spin } from 'antd';
-import { enquireScreen } from 'enquire-js';
 import { connect } from 'dva';
+import { enquireScreen, unenquireScreen } from 'enquire-js';
+
 import BasicLayout from './BasicLayout';
 import { getMenuData } from '../common/menu';
-
 /**
  * 根据菜单取得重定向地址.
  */
@@ -12,14 +12,14 @@ import { getMenuData } from '../common/menu';
 const MenuData = getMenuData();
 const getRedirectData = () => {
   const redirectData = [];
-  const getRedirect = (item) => {
+  const getRedirect = item => {
     if (item && item.children) {
       if (item.children[0] && item.children[0].path) {
         redirectData.push({
           from: `${item.path}`,
           to: `${item.children[0].path}`,
         });
-        item.children.forEach((children) => {
+        item.children.forEach(children => {
           getRedirect(children);
         });
       }
@@ -35,8 +35,9 @@ class LoadingPage extends PureComponent {
     loading: true,
     isMobile: false,
   };
+
   componentDidMount() {
-    enquireScreen((mobile) => {
+    this.enquireHandler = enquireScreen(mobile => {
       this.setState({
         isMobile: mobile,
       });
@@ -48,7 +49,7 @@ class LoadingPage extends PureComponent {
     const settingString = urlParams.searchParams.get('setting');
     if (settingString) {
       const setting = {};
-      settingString.split(';').forEach((keyValue) => {
+      settingString.split(';').forEach(keyValue => {
         const [key, value] = keyValue.split(':');
         setting[key] = value;
       });
@@ -58,6 +59,9 @@ class LoadingPage extends PureComponent {
       });
     }
     this.hideLoading();
+  }
+  componentWillUnmount() {
+    unenquireScreen(this.enquireHandler);
   }
   hideLoading() {
     this.setState({

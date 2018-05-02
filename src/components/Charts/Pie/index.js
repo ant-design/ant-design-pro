@@ -19,26 +19,16 @@ export default class Pie extends Component {
   };
 
   componentDidMount() {
-    this.getLengendData();
-    this.resize();
     window.addEventListener('resize', this.resize);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.data !== nextProps.data) {
+  componentDidUpdate(preProps) {
+    if (this.props.data !== preProps.data) {
       // because of charts data create when rendered
       // so there is a trick for get rendered time
-      this.setState(
-        {
-          legendData: [...this.state.legendData],
-        },
-        () => {
-          this.getLengendData();
-        }
-      );
+      this.getLegendData();
     }
   }
-
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
     this.resize.cancel();
@@ -46,12 +36,17 @@ export default class Pie extends Component {
 
   getG2Instance = chart => {
     this.chart = chart;
+    requestAnimationFrame(() => {
+      this.getLegendData();
+      this.resize();
+    });
   };
 
   // for custom lengend view
-  getLengendData = () => {
+  getLegendData = () => {
     if (!this.chart) return;
     const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
+    if (!geom) return;
     const items = geom.get('dataArray') || []; // 获取图形对应的
 
     const legendData = items.map(item => {
@@ -71,22 +66,24 @@ export default class Pie extends Component {
   @Bind()
   @Debounce(300)
   resize() {
-    const { hasLegend } = this.props;
-    if (!hasLegend || !this.root) {
-      window.removeEventListener('resize', this.resize);
-      return;
-    }
-    if (this.root.parentNode.clientWidth <= 380) {
-      if (!this.state.legendBlock) {
+    requestAnimationFrame(() => {
+      const { hasLegend } = this.props;
+      if (!hasLegend || !this.root) {
+        window.removeEventListener('resize', this.resize);
+        return;
+      }
+      if (this.root.parentNode.clientWidth <= 380) {
+        if (!this.state.legendBlock) {
+          this.setState({
+            legendBlock: true,
+          });
+        }
+      } else if (this.state.legendBlock) {
         this.setState({
-          legendBlock: true,
+          legendBlock: false,
         });
       }
-    } else if (this.state.legendBlock) {
-      this.setState({
-        legendBlock: false,
-      });
-    }
+    });
   }
 
   handleRoot = n => {

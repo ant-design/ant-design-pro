@@ -25,25 +25,27 @@ class Bar extends Component {
     if (!this.node) {
       return;
     }
-    const canvasWidth = this.node.parentNode.clientWidth;
-    const { data = [], autoLabel = true } = this.props;
-    if (!autoLabel) {
-      return;
-    }
-    const minWidth = data.length * 30;
-    const { autoHideXLabels } = this.state;
+    requestAnimationFrame(() => {
+      const canvasWidth = this.node.parentNode.clientWidth;
+      const { data = [], autoLabel = true } = this.props;
+      if (!autoLabel) {
+        return;
+      }
+      const minWidth = data.length * 30;
+      const { autoHideXLabels } = this.state;
 
-    if (canvasWidth <= minWidth) {
-      if (!autoHideXLabels) {
+      if (canvasWidth <= minWidth) {
+        if (!autoHideXLabels) {
+          this.setState({
+            autoHideXLabels: true,
+          });
+        }
+      } else if (autoHideXLabels) {
         this.setState({
-          autoHideXLabels: true,
+          autoHideXLabels: false,
         });
       }
-    } else if (autoHideXLabels) {
-      this.setState({
-        autoHideXLabels: false,
-      });
-    }
+    });
   }
 
   handleRoot = n => {

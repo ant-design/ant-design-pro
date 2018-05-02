@@ -19,14 +19,16 @@ class TagCloud extends Component {
   };
 
   componentDidMount() {
-    this.initTagCloud();
-    this.renderChart();
+    requestAnimationFrame(() => {
+      this.initTagCloud();
+      this.renderChart();
+    });
     window.addEventListener('resize', this.resize);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {
-      this.renderChart(nextProps);
+  componentDidUpdate(preProps) {
+    if (JSON.stringify(preProps.data) !== JSON.stringify(this.props.data)) {
+      this.renderChart(this.props);
     }
   }
 
@@ -36,7 +38,9 @@ class TagCloud extends Component {
   }
 
   resize = () => {
-    this.renderChart();
+    requestAnimationFrame(() => {
+      this.renderChart();
+    });
   };
 
   saveRootRef = node => {

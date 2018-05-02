@@ -14,6 +14,7 @@ export interface INoticeIconTabProps {
   emptyText?: React.ReactNode;
   emptyImage?: string;
   style?: React.CSSProperties;
+  showClear?: boolean;
 }
 
 export default class NoticeIconTab extends React.Component<INoticeIconTabProps, any> {}

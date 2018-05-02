@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
@@ -14,6 +13,7 @@ import Sidebar from '../components/Sidebar';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
+import Context from './MeunContext';
 
 const { Content } = Layout;
 const { AuthorizedRoute, check } = Authorized;
@@ -61,11 +61,7 @@ const query = {
 };
 
 class BasicLayout extends React.PureComponent {
-  static childContextTypes = {
-    location: PropTypes.object,
-    breadcrumbNameMap: PropTypes.object,
-  };
-  getChildContext() {
+  getContext() {
     const { location, routerData, menuData } = this.props;
     return {
       location,
@@ -165,10 +161,12 @@ class BasicLayout extends React.PureComponent {
       <DocumentTitle title={this.getPageTitle()}>
         <ContainerQuery query={query}>
           {params => (
-            <div className={classNames(params)}>
-              {layout}
-              <RightSidebar onChange={this.changeSetting} />
-            </div>
+            <Context.Provider value={this.getContext()}>
+              <div className={classNames(params)}>
+                {layout}
+                <RightSidebar onChange={this.changeSetting} />
+              </div>
+            </Context.Provider>
           )}
         </ContainerQuery>
       </DocumentTitle>
