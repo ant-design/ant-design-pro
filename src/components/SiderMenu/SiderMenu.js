@@ -13,7 +13,9 @@ const { SubMenu } = Menu;
  * @memberof SiderMenu
  */
 const getDefaultCollapsedSubMenus = props => {
-  const { location: { pathname } } = props;
+  const {
+    location: { pathname },
+  } = props;
   return urlToList(pathname)
     .map(item => {
       return getMenuMatches(props.flatMenuKeys, item)[0];
@@ -140,7 +142,7 @@ export default class SiderMenu extends PureComponent {
         breakpoint="lg"
         onCollapse={onCollapse}
         width={256}
-        className={`${styles.sider} ${theme === 'ligth' ? styles.ligth : ''}`}
+        className={`${styles.sider} ${theme === 'light' ? styles.light : ''}`}
       >
         <div className={styles.logo} key="logo">
           <Link to="/">

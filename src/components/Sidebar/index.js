@@ -156,7 +156,7 @@ class Sidebar extends PureComponent {
                 <Radio style={radioStyle} value="dark">
                   <ColorBlock color="#002140" title="深色导航" />
                 </Radio>
-                <Radio style={radioStyle} value="ligth">
+                <Radio style={radioStyle} value="light">
                   <ColorBlock color="#E9E9E9" title="浅色导航" />
                 </Radio>
               </RadioGroup>

@@ -20,7 +20,7 @@ export default {
       Object.keys(state).forEach(key => {
         if (urlParams.searchParams.has(key)) {
           const value = urlParams.searchParams.get(key);
-          setting[key] = value;
+          setting[key] = value === '1' ? true : '1';
         }
       });
       return setting;
