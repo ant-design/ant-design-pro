@@ -33,7 +33,7 @@
     "dva": "^2.2.3",
     "dva-loading": "^2.0.1",
     "enquire-js": "^0.2.1",
-    "less": "3.0.2",
+    "less": "2.7.2",
     "lodash": "^4.17.4",
     "lodash-decorators": "^5.0.0",
     "moment": "^2.22.0",
