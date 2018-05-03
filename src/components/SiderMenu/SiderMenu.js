@@ -22,7 +22,7 @@ const getIcon = icon => {
   return icon;
 };
 
-export const getMeunMatcheys = (flatMenuKeys, path) => {
+export const getMeunMatchKeys = (flatMenuKeys, path) => {
   return flatMenuKeys.filter(item => {
     return pathToRegexp(item).test(path);
   });
@@ -53,7 +53,7 @@ export default class SiderMenu extends PureComponent {
     const { location: { pathname } } = props || this.props;
     return urlToList(pathname)
       .map(item => {
-        return getMeunMatcheys(this.flatMenuKeys, item)[0];
+        return getMeunMatchKeys(this.flatMenuKeys, item)[0];
       })
       .filter(item => item);
   }
@@ -159,7 +159,7 @@ export default class SiderMenu extends PureComponent {
   // Get the currently selected menu
   getSelectedMenuKeys = () => {
     const { location: { pathname } } = this.props;
-    return urlToList(pathname).map(itemPath => getMeunMatcheys(this.flatMenuKeys, itemPath).pop());
+    return urlToList(pathname).map(itemPath => getMeunMatchKeys(this.flatMenuKeys, itemPath).pop());
   };
   // conversion Path
   // 转化路径
