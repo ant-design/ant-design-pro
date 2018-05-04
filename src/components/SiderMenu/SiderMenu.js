@@ -22,17 +22,37 @@ const getIcon = icon => {
   return icon;
 };
 
-export const getMeunMatchKeys = (flatMenuKeys, path) => {
-  return flatMenuKeys.filter(item => {
-    return pathToRegexp(item).test(path);
-  });
-};
+/**
+ * Recursively flatten the data
+ * [{path:string},{path:string}] => {path,path2}
+ * @param  menu
+ */
+export const getFlatMenuKeys = menu =>
+  menu.reduce((keys, item) => {
+    keys.push(item.path);
+    if (item.children) {
+      return keys.concat(getFlatMenuKeys(item.children));
+    }
+    return keys;
+  }, []);
+
+/**
+ * Find all matched menu keys based on paths
+ * @param  flatMenuKeys: [/abc, /abc/:id, /abc/:id/info]
+ * @param  paths: [/abc, /abc/11, /abc/11/info]
+ */
+export const getMeunMatchKeys = (flatMenuKeys, paths) =>
+  paths.reduce(
+    (matchKeys, path) =>
+      matchKeys.concat(flatMenuKeys.filter(item => pathToRegexp(item).test(path))),
+    []
+  );
 
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.menus = props.menuData;
-    this.flatMenuKeys = this.getFlatMenuKeys(props.menuData);
+    this.flatMenuKeys = getFlatMenuKeys(props.menuData);
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
@@ -51,26 +71,7 @@ export default class SiderMenu extends PureComponent {
    */
   getDefaultCollapsedSubMenus(props) {
     const { location: { pathname } } = props || this.props;
-    return urlToList(pathname)
-      .map(item => {
-        return getMeunMatchKeys(this.flatMenuKeys, item)[0];
-      })
-      .filter(item => item);
-  }
-  /**
-   * Recursively flatten the data
-   * [{path:string},{path:string}] => {path,path2}
-   * @param  menus
-   */
-  getFlatMenuKeys(menus) {
-    let keys = [];
-    menus.forEach(item => {
-      if (item.children) {
-        keys = keys.concat(this.getFlatMenuKeys(item.children));
-      }
-      keys.push(item.path);
-    });
-    return keys;
+    return getMeunMatchKeys(this.flatMenuKeys, urlToList(pathname));
   }
   /**
    * 判断是否是http链接.返回 Link 或 a
@@ -159,7 +160,7 @@ export default class SiderMenu extends PureComponent {
   // Get the currently selected menu
   getSelectedMenuKeys = () => {
     const { location: { pathname } } = this.props;
-    return urlToList(pathname).map(itemPath => getMeunMatchKeys(this.flatMenuKeys, itemPath).pop());
+    return getMeunMatchKeys(this.flatMenuKeys, urlToList(pathname));
   };
   // conversion Path
   // 转化路径
