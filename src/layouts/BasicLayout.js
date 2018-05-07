@@ -13,7 +13,7 @@ import Sidebar from '../components/Sidebar';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
-import Context from './MeunContext';
+import Context from './MenuContext';
 
 const { Content } = Layout;
 const { AuthorizedRoute, check } = Authorized;
