@@ -5,7 +5,7 @@ import GridContent from './GridContent';
 import styles from './PageHeaderLayout.less';
 import MenuContext from './MeunContext';
 
-export default ({ children, wrapperClassName, top, ...restProps }) => (
+const PageHeaderLayout = ({ children, wrapperClassName, top, ...restProps }) => (
   <div style={{ margin: '-24px -24px 0' }} className={wrapperClassName}>
     {top}
     <MenuContext.Consumer>
@@ -20,3 +20,5 @@ export default ({ children, wrapperClassName, top, ...restProps }) => (
     ) : null}
   </div>
 );
+
+export default PageHeaderLayout;
