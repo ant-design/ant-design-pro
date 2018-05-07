@@ -3,7 +3,7 @@ import { Link } from 'dva/router';
 import PageHeader from '../components/PageHeader';
 import GridContent from './GridContent';
 import styles from './PageHeaderLayout.less';
-import MenuContext from './MeunContext';
+import MenuContext from './MenuContext';
 
 const PageHeaderLayout = ({ children, wrapperClassName, top, ...restProps }) => (
   <div style={{ margin: '-24px -24px 0' }} className={wrapperClassName}>
