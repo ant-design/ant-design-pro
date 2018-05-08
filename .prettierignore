@@ -1,3 +1,4 @@
 **/*.md
 **/*.svg
+**/*.ejs
 package.json
