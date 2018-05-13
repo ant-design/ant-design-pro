@@ -4,6 +4,9 @@
   text-align: center;
   width: 72%;
   margin: 0 auto;
+  @media screen and (max-width: @screen-xs) {
+    width: 100%;
+  }
 
   .icon {
     font-size: 72px;
@@ -39,6 +42,10 @@
     padding: 24px 40px;
     border-radius: @border-radius-sm;
     text-align: left;
+
+    @media screen and (max-width: @screen-xs) {
+      padding: 18px 20px;
+    }
   }
 
   .actions {
