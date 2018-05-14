@@ -20,7 +20,7 @@ const getFlatMenuKeys = menuData => {
 };
 
 const SiderMenuWrapper = props =>
-  props.isMobile || props.fixSiderbar ? (
+  props.isMobile ? (
     <DrawerMenu
       parent={null}
       level={null}

@@ -75,6 +75,23 @@ class BasicLayout extends React.PureComponent {
     }
     return title;
   }
+  getLayoutStyle = () => {
+    const { fixSiderbar } = this.props;
+    if (fixSiderbar) {
+      return {
+        height: '100vh',
+        overflow: 'auto',
+      };
+    }
+    return null;
+  };
+  getContentStyle = () => {
+    const { fixedHeader } = this.props;
+    return {
+      margin: '24px 24px 0',
+      paddingTop: fixedHeader ? 64 : 0,
+    };
+  };
   getBashRedirect = () => {
     // According to the url parameter to redirect
     // 这里是重定向的,重定向到 url 的 redirect 参数所示地址
@@ -101,8 +118,9 @@ class BasicLayout extends React.PureComponent {
       payload: collapsed,
     });
   };
+
   render() {
-    const { isMobile, redirectData, routerData, fixedHeader, match } = this.props;
+    const { isMobile, redirectData, routerData, match } = this.props;
     const isTop = this.props.layout === 'topmenu';
     const bashRedirect = this.getBashRedirect();
     const myRedirectData = redirectData || [];
@@ -117,15 +135,9 @@ class BasicLayout extends React.PureComponent {
             {...this.props}
           />
         )}
-        <Layout>
+        <Layout style={this.getLayoutStyle()}>
           <Header handleMenuCollapse={this.handleMenuCollapse} logo={logo} {...this.props} />
-          <Content
-            style={{
-              margin: '24px 24px 0',
-              height: '100%',
-              paddingTop: fixedHeader ? 64 : 0,
-            }}
-          >
+          <Content style={this.getContentStyle()}>
             <Switch>
               {myRedirectData.map(item => (
                 <Redirect key={item.from} exact from={item.from} to={item.to} />
