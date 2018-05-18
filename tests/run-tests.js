@@ -30,8 +30,9 @@ startServer.stdout.on('data', data => {
     const testCmd = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['test'], {
       stdio: 'inherit',
     });
-    testCmd.on('exit', () => {
+    testCmd.on('exit', code => {
       startServer.kill();
+      process.exit(code);
     });
   }
 });
