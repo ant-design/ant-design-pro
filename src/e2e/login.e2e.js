@@ -5,7 +5,7 @@ describe('Login', () => {
   let page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   });
 
   beforeEach(async () => {

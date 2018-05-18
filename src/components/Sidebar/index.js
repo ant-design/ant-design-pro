@@ -87,7 +87,7 @@ class Sidebar extends PureComponent {
     this.changeSetting('fixSiderbar', checked);
   };
   changeSetting = (key, value) => {
-    const nextState = {};
+    const nextState = { ...this.props.setting };
     nextState[key] = value;
     if (key === 'layout') {
       if (value === 'topmenu') {

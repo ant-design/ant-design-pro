@@ -5,6 +5,7 @@ import { connect } from 'dva';
 import { Route, Redirect, Switch } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
+import pathToRegexp from 'path-to-regexp';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
@@ -70,8 +71,15 @@ class BasicLayout extends React.PureComponent {
     const { routerData, location } = this.props;
     const { pathname } = location;
     let title = 'Ant Design Pro';
-    if (routerData[pathname] && routerData[pathname].name) {
-      title = `${routerData[pathname].name} - Ant Design Pro`;
+    let currRouterData = null;
+    // match params path
+    Object.keys(routerData).forEach(key => {
+      if (pathToRegexp(key).test(pathname)) {
+        currRouterData = routerData[key];
+      }
+    });
+    if (currRouterData && currRouterData.name) {
+      title = `${currRouterData.name} - Ant Design Pro`;
     }
     return title;
   }

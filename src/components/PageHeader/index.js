@@ -25,10 +25,12 @@ export default class PageHeader extends PureComponent {
   componentDidMount() {
     this.getBreadcrumbDom();
   }
-  componentWillReceiveProps() {
-    this.getBreadcrumbDom();
-  }
 
+  componentDidUpdate(preProps) {
+    if (preProps.tabActiveKey !== this.props.tabActiveKey) {
+      this.getBreadcrumbDom();
+    }
+  }
   onChange = key => {
     if (this.props.onTabChange) {
       this.props.onTabChange(key);

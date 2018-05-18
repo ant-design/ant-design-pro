@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Spin } from 'antd';
 import { connect } from 'dva';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
-
 import BasicLayout from './BasicLayout';
 import { getMenuData } from '../common/menu';
 /**
@@ -35,7 +34,6 @@ class LoadingPage extends PureComponent {
     loading: true,
     isMobile: false,
   };
-
   componentDidMount() {
     this.enquireHandler = enquireScreen(mobile => {
       this.setState({
@@ -45,8 +43,8 @@ class LoadingPage extends PureComponent {
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
-    this.initSetting();
     this.hideLoading();
+    this.initSetting();
   }
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);

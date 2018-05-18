@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   plugins: [
     [
-      'babel-plugin-module-resolver',
+      'module-resolver',
       {
         alias: {
           components: path.join(__dirname, './src/components'),

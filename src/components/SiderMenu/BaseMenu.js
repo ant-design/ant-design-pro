@@ -67,7 +67,9 @@ export default class BaseMenu extends PureComponent {
   };
   // Get the currently selected menu
   getSelectedMenuKeys = () => {
-    const { location: { pathname } } = this.props;
+    const {
+      location: { pathname },
+    } = this.props;
     return urlToList(pathname).map(itemPath => getMenuMatches(this.flatMenuKeys, itemPath).pop());
   };
   /**
@@ -148,20 +150,27 @@ export default class BaseMenu extends PureComponent {
     }
   };
   render() {
-    const { openKeys } = this.props;
+    const { openKeys, theme, mode } = this.props;
     // if pathname can't match, use the nearest parent's key
     let selectedKeys = this.getSelectedMenuKeys();
     if (!selectedKeys.length && openKeys) {
       selectedKeys = [openKeys[openKeys.length - 1]];
     }
+    let props = {};
+    if (openKeys) {
+      props = {
+        openKeys,
+      };
+    }
     return (
       <Menu
         key="Menu"
-        mode="inline"
+        mode={mode}
+        theme={theme}
         onOpenChange={this.props.handleOpenChange}
         selectedKeys={selectedKeys}
         style={this.props.style}
-        {...this.props}
+        {...props}
       >
         {this.getNavMenuItems(this.menus)}
       </Menu>

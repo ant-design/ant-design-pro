@@ -11,19 +11,21 @@ const defaultSetting = {
 };
 export default {
   namespace: 'setting',
-
   state: defaultSetting,
   reducers: {
     getSetting(state) {
-      const setting = { ...state };
+      const setting = {};
       const urlParams = new URL(window.location.href);
       Object.keys(state).forEach(key => {
         if (urlParams.searchParams.has(key)) {
           const value = urlParams.searchParams.get(key);
-          setting[key] = value === '1' ? true : '1';
+          setting[key] = value === '1' ? true : value;
         }
       });
-      return setting;
+      return {
+        ...state,
+        ...setting,
+      };
     },
     changeSetting(state, { payload }) {
       const urlParams = new URL(window.location.href);
