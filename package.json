@@ -75,14 +75,14 @@
     "pro-download": "^1.0.1",
     "redbox-react": "^1.5.0",
     "regenerator-runtime": "^0.11.1",
-    "roadhog": "^2.3.0",
-    "roadhog-api-doc": "^1.0.2",
+    "roadhog": "^2.4.1",
+    "roadhog-api-doc": "^1.0.3",
     "stylelint": "^8.4.0",
     "stylelint-config-prettier": "^3.0.4",
     "stylelint-config-standard": "^18.0.0"
   },
   "optionalDependencies": {
-    "puppeteer": "^1.1.1"
+    "puppeteer": "^1.4.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,less}": [
