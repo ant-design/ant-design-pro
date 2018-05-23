@@ -188,7 +188,7 @@ class Sidebar extends PureComponent {
                         style={{ width: 120 }}
                       >
                         <Select.Option value="open">打开</Select.Option>
-                        <Select.Option value="colse">关闭</Select.Option>
+                        <Select.Option value="close">关闭</Select.Option>
                       </Select>,
                     ],
                   },
