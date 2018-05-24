@@ -18,7 +18,8 @@
     "test": "roadhog test",
     "test:component": "roadhog test ./src/components",
     "test:all": "node ./tests/run-tests.js",
-    "prettier": "prettier --write ./src/**/**/**/*"
+    "prettier": "prettier --write ./src/**/**/**/*",
+    "postinstall": "opencollective postinstall"
   },
   "dependencies": {
     "@antv/data-set": "^0.8.0",
@@ -38,6 +39,7 @@
     "moment": "^2.19.1",
     "numeral": "^2.0.6",
     "omit.js": "^1.0.0",
+    "opencollective": "^1.0.3",
     "path-to-regexp": "^2.1.0",
     "prop-types": "^15.5.10",
     "qs": "^6.5.0",
@@ -99,5 +101,9 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ]
+  ],
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/ant-design-pro"
+  }
 }
