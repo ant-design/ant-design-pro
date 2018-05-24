@@ -2,7 +2,9 @@ English | [简体中文](./README.zh-CN.md)
 
 # Ant Design Pro
 
-[![](https://img.shields.io/travis/ant-design/ant-design-pro/master.svg?style=flat-square)](https://travis-ci.org/ant-design/ant-design-pro) [![Build status](https://ci.appveyor.com/api/projects/status/67fxu2by3ibvqtat/branch/master?svg=true)](https://ci.appveyor.com/project/afc163/ant-design-pro/branch/master)  [![Gitter](https://badges.gitter.im/ant-design/ant-design-pro.svg)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+ [![](https://img.shields.io/travis/ant-design/ant-design-pro/master.svg?style=flat-square)](https://travis-ci.org/ant-design/ant-design-pro) [![Build status](https://ci.appveyor.com/api/projects/status/67fxu2by3ibvqtat/branch/master?svg=true)](https://ci.appveyor.com/project/afc163/ant-design-pro/branch/master)  [![Gitter](https://badges.gitter.im/ant-design/ant-design-pro.svg)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) 
+ [![Backers on Open Collective](https://opencollective.com/ant-design-pro/backers/badge.svg)](#backers) 
+ [![Sponsors on Open Collective](https://opencollective.com/ant-design-pro/sponsors/badge.svg)](#sponsors)
 
 An out-of-box UI solution for enterprise applications as a React boilerplate.
 
@@ -93,3 +95,33 @@ Any Contribution of following ways will be welcome:
 - Use Ant Design Pro in your daily work.
 - Submit [issue](http://github.com/ant-design/ant-design-pro/issues) to report bug or ask questions.
 - Propose [pull request](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/ant-design-pro/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/ant-design-pro#backer)]
+
+<a href="https://opencollective.com/ant-design-pro#backers" target="_blank"><img src="https://opencollective.com/ant-design-pro/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/ant-design-pro#sponsor)]
+
+<a href="https://opencollective.com/ant-design-pro/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/ant-design-pro/sponsor/1/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/ant-design-pro/sponsor/2/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/ant-design-pro/sponsor/3/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/ant-design-pro/sponsor/4/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/ant-design-pro/sponsor/5/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/ant-design-pro/sponsor/6/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/ant-design-pro/sponsor/7/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/ant-design-pro/sponsor/8/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/ant-design-pro/sponsor/9/website" target="_blank"><img src="https://opencollective.com/ant-design-pro/sponsor/9/avatar.svg"></a>
+
+
