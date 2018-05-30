@@ -151,7 +151,7 @@ export default class BasicForms extends PureComponent {
               }
             >
               {getFieldDecorator('weight')(<InputNumber placeholder="请输入" min={0} max={100} />)}
-              <span>%</span>
+              <span className="ant-form-text">%</span>
             </FormItem>
             <FormItem {...formItemLayout} label="目标公开" help="客户、邀评人默认被分享">
               <div>
