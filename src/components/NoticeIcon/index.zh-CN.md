@@ -36,7 +36,7 @@ emptyImage | 针对每个 Tab 定制空数据图片 | string | -
 
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
-avatar | 头像图片链接 | string | -
+avatar | 头像图片链接 | string \| ReactNode | -
 title | 标题 | ReactNode | -
 description | 描述信息 | ReactNode | -
 datetime | 时间戳 | ReactNode | -
