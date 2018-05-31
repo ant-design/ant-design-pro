@@ -36,7 +36,7 @@ emptyImage | image  when list is empty  | string | -
 
 Property | Description | Type | Default
 ----|------|-----|------
-avatar | avatar img url  | string | -
+avatar | avatar img url  | string \| ReactNode | -
 title | title | ReactNode | -
 description | description info | ReactNode | -
 datetime | Timestamps | ReactNode | -
