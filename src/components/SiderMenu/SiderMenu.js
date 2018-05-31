@@ -65,16 +65,22 @@ export const getMenuMatchKeys = (flatMenuKeys, paths) =>
   );
 
 export default class SiderMenu extends PureComponent {
-  static getDerivedStateFromProps(nextProps) {
-    return {
-      openKeys: getDefaultCollapsedSubMenus(nextProps),
-    };
+  static getDerivedStateFromProps(props, state) {
+    const { pathname } = state;
+    if (props.location.pathname !== pathname) {
+      return {
+        pathname: props.location.pathname,
+        openKeys: getDefaultCollapsedSubMenus(props),
+      };
+    }
+    return null;
   }
   constructor(props) {
     super(props);
     this.menus = props.menuData;
     this.flatMenuKeys = getFlatMenuKeys(props.menuData);
     this.state = {
+      pathname: props.location.pathname,
       openKeys: getDefaultCollapsedSubMenus(props),
     };
   }
@@ -113,7 +119,7 @@ export default class SiderMenu extends PureComponent {
       <Link
         to={itemPath}
         target={target}
-        replace={itemPath === this.props.location.pathname}
+        replace={itemPath === this.state.pathname}
         onClick={
           this.props.isMobile
             ? () => {
@@ -200,13 +206,17 @@ export default class SiderMenu extends PureComponent {
     return ItemDom;
   };
   isMainMenu = key => {
-    return this.props.menuData.some(item => key && (item.key === key || item.path === key));
+    return this.props.menuData.some(item => {
+      if (key) {
+        return item.key === key || item.path === key;
+      }
+      return false;
+    });
   };
   handleOpenChange = openKeys => {
-    const lastOpenKey = openKeys[openKeys.length - 1];
     const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({
-      openKeys: moreThanOne ? [lastOpenKey] : [...openKeys],
+      openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys],
     });
   };
   render() {

@@ -136,7 +136,7 @@ class Sidebar extends PureComponent {
         <DrawerMenu
           parent={null}
           level={null}
-          iconChild={null}
+          handleChild={null}
           open={collapse}
           placement="right"
           width="336px"
