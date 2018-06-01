@@ -17,8 +17,9 @@ TagSelectOption.isTagSelectOption = true;
 class TagSelect extends Component {
   static getDerivedStateFromProps(nextProps) {
     if ('value' in nextProps && nextProps.value) {
-      this.setState({ value: nextProps.value });
+      return { value: nextProps.value };
     }
+    return null;
   }
 
   state = {
