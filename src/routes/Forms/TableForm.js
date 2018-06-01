@@ -17,6 +17,7 @@ export default class TableForm extends PureComponent {
     this.state = {
       data: props.value,
       loading: false,
+      editData: [],
     };
   }
 
@@ -39,22 +40,46 @@ export default class TableForm extends PureComponent {
     }
   };
   remove(key) {
+    const { editData } = this.state;
+    const editItem = editData.find(item => item.key === key);
+    if (editItem && editItem.key) {
+      // 如果存在缓存
+      if (this.cacheOriginData[key]) {
+        const data = [...this.state.data];
+        data.push(this.cacheOriginData[key]);
+        this.setState(
+          {
+            data,
+          },
+          () => {
+            delete this.cacheOriginData[key];
+          }
+        );
+      }
+      // 从 editData 中删除
+      this.setState({
+        editData: editData.filter(item => item.key !== key),
+      });
+      return;
+    }
     const newData = this.state.data.filter(item => item.key !== key);
     this.setState({ data: newData });
     this.props.onChange(newData);
   }
   newMember = () => {
-    const newData = this.state.data.map(item => ({ ...item }));
-    newData.push({
-      key: `NEW_TEMP_ID_${this.index}`,
-      workId: '',
-      name: '',
-      department: '',
-      editable: true,
-      isNew: true,
-    });
     this.index += 1;
-    this.setState({ data: newData });
+    this.setState({
+      editData: [
+        {
+          key: `NEW_TEMP_ID_${this.index}`,
+          workId: '',
+          name: '',
+          department: '',
+          editable: true,
+          isNew: true,
+        },
+      ],
+    });
   };
   handleKeyPress(e, key) {
     if (e.key === 'Enter') {
@@ -208,13 +233,13 @@ export default class TableForm extends PureComponent {
         },
       },
     ];
-
+    const dataSource = this.state.data.concat(this.state.editData);
     return (
       <Fragment>
         <Table
           loading={this.state.loading}
           columns={columns}
-          dataSource={this.state.data}
+          dataSource={dataSource}
           pagination={false}
           rowClassName={record => {
             return record.editable ? styles.editable : '';

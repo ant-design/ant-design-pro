@@ -78,7 +78,7 @@ class Login extends Component {
         return;
       }
       // eslint-disable-next-line
-      if (item.type.name === 'warpContext') {
+      if (item.type.typeName === 'LoginTab') {
         TabChildren.push(item);
       } else {
         otherChildren.push(item);
