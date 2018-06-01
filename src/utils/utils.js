@@ -70,14 +70,30 @@ export function getPlainNode(nodeList, parentPath = '') {
   return arr;
 }
 
+function accMul(arg1, arg2) {
+  var m = 0,
+    s1 = arg1.toString(),
+    s2 = arg2.toString();
+  try {
+    m += s1.split(".")[1].length;
+  } catch (e) {}
+  try {
+    m += s2.split(".")[1].length;
+  } catch (e) {}
+  return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
+}
+
 export function digitUppercase(n) {
   const fraction = ['角', '分'];
   const digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
-  const unit = [['元', '万', '亿'], ['', '拾', '佰', '仟']];
+  const unit = [
+    ['元', '万', '亿'],
+    ['', '拾', '佰', '仟', '万']
+  ];
   let num = Math.abs(n);
   let s = '';
   fraction.forEach((item, index) => {
-    s += (digit[Math.floor(num * 10 * 10 ** index) % 10] + item).replace(/零./, '');
+    s += (digit[Math.floor(accMul(num, 10 * 10 ** index)) % 10] + item).replace(/零./, '');
   });
   s = s || '整';
   num = Math.floor(num);
