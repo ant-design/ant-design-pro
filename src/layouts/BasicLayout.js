@@ -10,7 +10,7 @@ import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
-import Sidebar from '../components/Sidebar';
+import SettingDarwer from '../components/SettingDarwer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
@@ -176,7 +176,7 @@ class BasicLayout extends React.PureComponent {
             <Context.Provider value={this.getContext()}>
               <div className={classNames(params)}>
                 {layout}
-                <Sidebar />
+                <SettingDarwer />
               </div>
             </Context.Provider>
           )}
