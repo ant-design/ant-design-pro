@@ -72,11 +72,11 @@ export function getPlainNode(nodeList, parentPath = '') {
 
 function accMul(arg1, arg2) {
   let m = 0;
-  const s1 = arg1.toString();
-  const s2 = arg2.toString();
-  m += s1.split(".")[1].length;
-  m += s2.split(".")[1].length;
-  return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / 10 ** m;
+  let s1 = arg1.toString();
+  let s2 = arg2.toString();
+  m += s1.split(".").length > 1 ? s1.split(".")[1].length : 0;
+  m += s2.split(".").length > 1 ? s2.split(".")[1].length : 0;
+  return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
 }
 
 export function digitUppercase(n) {
