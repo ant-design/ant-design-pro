@@ -11,6 +11,7 @@
 
   .row {
     display: flex;
+    width: 100%;
   }
 
   .breadcrumb {
@@ -66,10 +67,11 @@
   .content,
   .extraContent,
   .main {
-    // IE auto is no have height
-    flex: 1;
+    flex: 0 1 auto;
   }
-
+  .main {
+    width: 100%;
+  }
   .title,
   .action {
     margin-bottom: 16px;
