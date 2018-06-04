@@ -332,9 +332,18 @@ export const getActivities = [
   },
 ];
 
+export function getFakeCaptcha(req, res) {
+  if (res && res.json) {
+    res.json('captcha-xxx');
+  } else {
+    return 'captcha-xxx';
+  }
+}
+
 export default {
   getNotice,
   getActivities,
   getFakeList,
   postFakeList,
+  getFakeCaptcha,
 };

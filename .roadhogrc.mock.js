@@ -1,6 +1,6 @@
 import mockjs from 'mockjs';
 import { getRule, postRule } from './mock/rule';
-import { getActivities, getNotice, getFakeList, postFakeList } from './mock/api';
+import { getActivities, getNotice, getFakeList, postFakeList, getFakeCaptcha } from './mock/api';
 import { getFakeChartData } from './mock/chart';
 import { getProfileBasicData } from './mock/profile';
 import { getProfileAdvancedData } from './mock/profile';
@@ -24,32 +24,38 @@ const proxy = {
     },
     $body: {
       name: 'Serati Ma',
-      avatar:
-        'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
       userid: '00000001',
       email: 'antdesign@alipay.com',
       signature: '海纳百川，有容乃大',
       title: '交互专家',
       group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
-      tags: [{
-        key: '0',
-        label: '很有想法的',
-      }, {
-        key: '1',
-        label: '专注设计',
-      }, {
-        key: '2',
-        label: '辣~',
-      }, {
-        key: '3',
-        label: '大长腿',
-      }, {
-        key: '4',
-        label: '川妹子',
-      }, {
-        key: '5',
-        label: '海纳百川',
-      }],
+      tags: [
+        {
+          key: '0',
+          label: '很有想法的',
+        },
+        {
+          key: '1',
+          label: '专注设计',
+        },
+        {
+          key: '2',
+          label: '辣~',
+        },
+        {
+          key: '3',
+          label: '大长腿',
+        },
+        {
+          key: '4',
+          label: '川妹子',
+        },
+        {
+          key: '5',
+          label: '海纳百川',
+        },
+      ],
       notifyCount: 12,
       country: 'China',
       geographic: {
@@ -176,6 +182,7 @@ const proxy = {
   },
   'GET /api/geographic/province': getProvince,
   'GET /api/geographic/city/:province': getCity,
+  'GET /api/captcha': getFakeCaptcha,
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));
