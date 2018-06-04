@@ -7,6 +7,8 @@ import styles from './index.less';
 const { TabPane } = Tabs;
 
 export default class NoticeIcon extends PureComponent {
+  static Tab = TabPane;
+
   static defaultProps = {
     onItemClick: () => {},
     onPopupVisibleChange: () => {},
@@ -19,7 +21,6 @@ export default class NoticeIcon extends PureComponent {
     },
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
-  static Tab = TabPane;
   constructor(props) {
     super(props);
     this.state = {};

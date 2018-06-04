@@ -20,7 +20,7 @@ const EllipsisText = ({ text, length, tooltip, ...other }) => {
   if (length - tail.length <= 0) {
     displayText = '';
   } else {
-    displayText = text.slice(0, length - tail.length);
+    displayText = text.slice(0, length);
   }
 
   if (tooltip) {

@@ -9,18 +9,20 @@ import styles from './index.less';
 import LoginContext from './loginContext';
 
 class Login extends Component {
-  static defaultProps = {
-    className: '',
-    defaultActiveKey: '',
-    onTabChange: () => {},
-    onSubmit: () => {},
-  };
   static propTypes = {
     className: PropTypes.string,
     defaultActiveKey: PropTypes.string,
     onTabChange: PropTypes.func,
     onSubmit: PropTypes.func,
   };
+
+  static defaultProps = {
+    className: '',
+    defaultActiveKey: '',
+    onTabChange: () => {},
+    onSubmit: () => {},
+  };
+
   state = {
     type: this.props.defaultActiveKey,
     tabs: [],
