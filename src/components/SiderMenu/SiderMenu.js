@@ -65,16 +65,6 @@ export const getMenuMatchKeys = (flatMenuKeys, paths) =>
   );
 
 export default class SiderMenu extends PureComponent {
-  static getDerivedStateFromProps(props, state) {
-    const { pathname } = state;
-    if (props.location.pathname !== pathname) {
-      return {
-        pathname: props.location.pathname,
-        openKeys: getDefaultCollapsedSubMenus(props),
-      };
-    }
-    return null;
-  }
   constructor(props) {
     super(props);
     this.menus = props.menuData;
@@ -85,6 +75,16 @@ export default class SiderMenu extends PureComponent {
     };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    const { pathname } = state;
+    if (props.location.pathname !== pathname) {
+      return {
+        pathname: props.location.pathname,
+        openKeys: getDefaultCollapsedSubMenus(props),
+      };
+    }
+    return null;
+  }
   /**
    * Convert pathname to openKeys
    * /list/search/articles = > ['list','/list/search']

@@ -15,7 +15,6 @@ import {
 } from 'antd';
 import {
   ChartCard,
-  yuan,
   MiniArea,
   MiniBar,
   MiniProgress,
@@ -28,7 +27,7 @@ import Trend from 'components/Trend';
 import NumberInfo from 'components/NumberInfo';
 import numeral from 'numeral';
 import GridContent from '../../layouts/GridContent';
-
+import Yuan from '../../utils/Yuan';
 import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
@@ -43,12 +42,6 @@ for (let i = 0; i < 7; i += 1) {
     total: 323234,
   });
 }
-
-const Yuan = ({ children }) => (
-  <span
-    dangerouslySetInnerHTML={{ __html: yuan(children) }}
-  /> /* eslint-disable-line react/no-danger */
-);
 
 @connect(({ chart, loading }) => ({
   chart,
