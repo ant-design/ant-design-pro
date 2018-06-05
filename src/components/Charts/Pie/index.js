@@ -19,7 +19,7 @@ export default class Pie extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize);
+    window.addEventListener('resize', this.resize, { passive: true });
   }
 
   componentDidUpdate(preProps) {

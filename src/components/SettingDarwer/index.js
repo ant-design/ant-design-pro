@@ -21,9 +21,12 @@ const Body = ({ children, title, style }) => (
 @connect(({ setting }) => ({ setting }))
 class SettingDarwer extends PureComponent {
   componentDidMount() {
-    const { themeColor } = this.props.setting;
+    const { themeColor, colorWeak } = this.props.setting;
     if (themeColor !== '#1890FF') {
       this.colorChange(themeColor);
+    }
+    if (colorWeak === 'open') {
+      document.body.className = 'colorWeak';
     }
   }
   getLayOutSetting = () => {
@@ -85,6 +88,13 @@ class SettingDarwer extends PureComponent {
         nextState.grid = 'Fluid';
       }
     }
+    if (key === 'colorWeak') {
+      if (value === 'open') {
+        document.body.className = 'colorWeak';
+      } else {
+        document.body.className = '';
+      }
+    }
     this.setState(nextState, () => {
       this.props.dispatch({
         type: 'setting/changeSetting',
@@ -112,7 +122,7 @@ class SettingDarwer extends PureComponent {
     }, 200);
   };
   render() {
-    const { collapse, silderTheme, themeColor, layout } = this.props.setting;
+    const { collapse, silderTheme, themeColor, layout, colorWeak } = this.props.setting;
     return (
       <div className={styles.settingDarwer}>
         <div className={styles.mini_bar} onClick={this.togglerContent}>
@@ -177,6 +187,26 @@ class SettingDarwer extends PureComponent {
               dataSource={this.getLayOutSetting()}
               renderItem={item => <List.Item actions={item.action}>{item.title}</List.Item>}
             />
+
+            <Divider />
+
+            <Body title="导航设置 ">
+              <List.Item
+                actions={[
+                  <Select
+                    value={colorWeak}
+                    size="small"
+                    onSelect={value => this.changeSetting('colorWeak', value)}
+                    style={{ width: 80 }}
+                  >
+                    <Select.Option value="close">close</Select.Option>
+                    <Select.Option value="open">open</Select.Option>
+                  </Select>,
+                ]}
+              >
+                色弱模式
+              </List.Item>
+            </Body>
           </div>
         </DrawerMenu>
       </div>

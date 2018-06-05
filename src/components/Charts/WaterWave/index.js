@@ -17,7 +17,7 @@ export default class WaterWave extends PureComponent {
       this.renderChart();
       this.resize();
     });
-    window.addEventListener('resize', this.resize);
+    window.addEventListener('resize', this.resize, { passive: true });
   }
 
   componentWillUnmount() {

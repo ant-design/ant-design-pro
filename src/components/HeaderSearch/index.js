@@ -75,10 +75,10 @@ export default class HeaderSearch extends PureComponent {
           onChange={this.onChange}
         >
           <Input
-            placeholder={placeholder}
             ref={node => {
               this.input = node;
             }}
+            placeholder={placeholder}
             onKeyDown={this.onKeyDown}
             onBlur={this.leaveSearchMode}
           />

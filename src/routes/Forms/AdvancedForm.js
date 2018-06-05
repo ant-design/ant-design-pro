@@ -62,7 +62,7 @@ class AdvancedForm extends PureComponent {
     width: '100%',
   };
   componentDidMount() {
-    window.addEventListener('resize', this.resizeFooterToolbar);
+    window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeFooterToolbar);

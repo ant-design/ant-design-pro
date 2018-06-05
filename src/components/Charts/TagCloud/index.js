@@ -23,7 +23,7 @@ class TagCloud extends Component {
       this.initTagCloud();
       this.renderChart();
     });
-    window.addEventListener('resize', this.resize);
+    window.addEventListener('resize', this.resize, { passive: true });
   }
 
   componentDidUpdate(preProps) {
