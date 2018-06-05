@@ -13,6 +13,17 @@ function initTotalList(columns) {
 }
 
 class StandardTable extends PureComponent {
+  constructor(props) {
+    super(props);
+    const { columns } = props;
+    const needTotalList = initTotalList(columns);
+
+    this.state = {
+      selectedRowKeys: [],
+      needTotalList,
+    };
+  }
+
   static getDerivedStateFromProps(nextProps) {
     // clean state
     if (nextProps.selectedRows.length === 0) {
@@ -23,16 +34,6 @@ class StandardTable extends PureComponent {
       };
     }
     return null;
-  }
-  constructor(props) {
-    super(props);
-    const { columns } = props;
-    const needTotalList = initTotalList(columns);
-
-    this.state = {
-      selectedRowKeys: [],
-      needTotalList,
-    };
   }
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
@@ -63,7 +64,12 @@ class StandardTable extends PureComponent {
 
   render() {
     const { selectedRowKeys, needTotalList } = this.state;
-    const { data: { list, pagination }, loading, columns, rowKey } = this.props;
+    const {
+      data: { list, pagination },
+      loading,
+      columns,
+      rowKey,
+    } = this.props;
 
     const paginationProps = {
       showSizeChanger: true,

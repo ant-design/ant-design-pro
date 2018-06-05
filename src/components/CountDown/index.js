@@ -23,16 +23,6 @@ const initTime = props => {
 };
 
 class CountDown extends Component {
-  static getDerivedStateFromProps(nextProps, preState) {
-    const { lastTime } = initTime(nextProps);
-    if (preState.lastTime !== lastTime) {
-      return {
-        lastTime,
-      };
-    }
-    return null;
-  }
-
   constructor(props) {
     super(props);
 
@@ -41,6 +31,16 @@ class CountDown extends Component {
     this.state = {
       lastTime,
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, preState) {
+    const { lastTime } = initTime(nextProps);
+    if (preState.lastTime !== lastTime) {
+      return {
+        lastTime,
+      };
+    }
+    return null;
   }
 
   componentDidMount() {
