@@ -128,7 +128,7 @@ class BasicLayout extends React.PureComponent {
     }
     return title;
   }
-  getBashRedirect = () => {
+  getBaseRedirect = () => {
     // According to the url parameter to redirect
     // 这里是重定向的,重定向到 url 的 redirect 参数所示地址
     const urlParams = new URL(window.location.href);
@@ -189,7 +189,7 @@ class BasicLayout extends React.PureComponent {
       match,
       location,
     } = this.props;
-    const bashRedirect = this.getBashRedirect();
+    const bashRedirect = this.getBaseRedirect();
     const layout = (
       <Layout>
         <SiderMenu
