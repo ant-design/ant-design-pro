@@ -88,7 +88,6 @@ class BasicLayout extends React.PureComponent {
     if (fixSiderbar) {
       return {
         height: '100vh',
-        overflow: 'auto',
       };
     }
     return null;
