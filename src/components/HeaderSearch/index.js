@@ -78,6 +78,7 @@ export default class HeaderSearch extends PureComponent {
             ref={node => {
               this.input = node;
             }}
+            aria-label={placeholder}
             placeholder={placeholder}
             onKeyDown={this.onKeyDown}
             onBlur={this.leaveSearchMode}
