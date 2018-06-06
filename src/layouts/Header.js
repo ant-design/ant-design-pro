@@ -21,16 +21,12 @@ class HeaderView extends PureComponent {
     document.getElementById('root').removeEventListener('scroll', this.handScroll);
   }
   getHeadWidth = () => {
-    const { fixedHeader, layout, fixSiderbar } = this.props.setting;
-    if (!fixedHeader || layout === 'topmenu' || fixSiderbar) {
+    const { isMobile, collapsed, setting } = this.props;
+    const { fixedHeader, layout } = setting;
+    if (isMobile || !fixedHeader || layout === 'topmenu') {
       return '100%';
     }
-    if (!this.props.collapsed) {
-      return 'calc(100% - 256px)';
-    }
-    if (this.props.collapsed) {
-      return 'calc(100% - 80px)';
-    }
+    return collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)';
   };
   handleNoticeClear = type => {
     message.success(`清空了${type}`);
