@@ -1,32 +1,5 @@
 @import '~antd/lib/style/themes/default.less';
 
-.settingDarwer {
-  .mini_bar {
-    width: 50px;
-    height: 45px;
-    border-top-left-radius: 28px;
-    border-bottom-left-radius: 28px;
-    text-align: center;
-    font-size: 24px;
-    background: white;
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    cursor: pointer;
-    z-index: 99;
-    box-shadow: 0 0 6px 0 rgba(0, 21, 41, 0.35);
-    img {
-      width: 28px;
-      height: 28px;
-    }
-  }
-  :global {
-    .drawer {
-      z-index: 999;
-    }
-  }
-}
-
 .content {
   width: 273px;
   height: 100%;
@@ -74,4 +47,18 @@
   color: rgba(0, 0, 0, 0.85);
   line-height: 22px;
   margin-bottom: 12px;
+}
+
+:global {
+  .drawer-handle {
+    top: 240px;
+    background: #1890ff;
+    width: 57px;
+    height: 48px;
+    padding: 14px 18px;
+    padding-left: 24px;
+  }
+  .drawer-right .drawer-handle {
+    left: -57px;
+  }
 }

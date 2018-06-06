@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, message, List, Switch, Divider } from 'antd';
+import { Select, message, List, Switch, Divider, Icon } from 'antd';
 import DrawerMenu from 'rc-drawer-menu';
 import { connect } from 'dva';
 import styles from './index.less';
@@ -125,17 +125,30 @@ class SettingDarwer extends PureComponent {
     const { collapse, silderTheme, themeColor, layout, colorWeak } = this.props.setting;
     return (
       <div className={styles.settingDarwer}>
-        <div className={styles.mini_bar} onClick={this.togglerContent}>
-          <img
-            alt="logo"
-            src="https://gw.alipayobjects.com/zos/rmsportal/ApQgLmeZDNJMomKNvavq.svg"
-          />
-        </div>
         <DrawerMenu
           parent={null}
           level={null}
-          handleChild={null}
           open={collapse}
+          onHandleClick={this.togglerContent}
+          handleChild={
+            !collapse ? (
+              <Icon
+                type="setting"
+                style={{
+                  color: '#FFF',
+                  fontSize: 20,
+                }}
+              />
+            ) : (
+              <Icon
+                type="close"
+                style={{
+                  color: '#FFF',
+                  fontSize: 20,
+                }}
+              />
+            )
+          }
           placement="right"
           width="336px"
           style={{
