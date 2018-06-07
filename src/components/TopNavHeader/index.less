@@ -5,6 +5,14 @@
   padding: 0 12px 0 0;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   position: relative;
+  :global {
+    .ant-menu-submenu.ant-menu-submenu-horizontal {
+      height: 100%;
+      .ant-menu-submenu-title {
+        height: 100%;
+      }
+    }
+  }
   &.light {
     background-color: #fff;
   }

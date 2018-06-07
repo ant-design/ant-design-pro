@@ -16,7 +16,7 @@ export default class TopNavHeader extends PureComponent {
                 <h1>Ant Design Pro</h1>
               </Link>
             </div>
-            <BaseMenu {...this.props} style={{ padding: '9px 0', border: 'none' }} />
+            <BaseMenu {...this.props} style={{ paddingTop: '9px', border: 'none' }} />
           </div>
           <div className={styles.right}>
             <RightContent {...this.props} />
