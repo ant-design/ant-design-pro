@@ -19,15 +19,6 @@ const menuMap = {
   currentUser: user.currentUser,
 }))
 export default class Info extends Component {
-  static getDerivedStateFromProps(props, state) {
-    const { match, location } = props;
-    let selectKey = location.pathname.replace(`${match.path}/`, '');
-    selectKey = menuMap[selectKey] ? selectKey : 'base';
-    if (selectKey !== state.selectKey) {
-      return { selectKey };
-    }
-    return null;
-  }
   constructor(props) {
     super(props);
     const { match, location } = props;
@@ -37,6 +28,15 @@ export default class Info extends Component {
       selectKey: key,
       mode: 'inline',
     };
+  }
+  static getDerivedStateFromProps(props, state) {
+    const { match, location } = props;
+    let selectKey = location.pathname.replace(`${match.path}/`, '');
+    selectKey = menuMap[selectKey] ? selectKey : 'base';
+    if (selectKey !== state.selectKey) {
+      return { selectKey };
+    }
+    return null;
   }
   componentDidMount() {
     window.addEventListener('resize', this.resize);

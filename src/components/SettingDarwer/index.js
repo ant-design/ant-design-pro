@@ -137,6 +137,7 @@ class SettingDarwer extends PureComponent {
           parent={null}
           level={null}
           open={collapse}
+          mask={false}
           onHandleClick={this.togglerContent}
           handleChild={
             !collapse ? (
@@ -211,7 +212,7 @@ class SettingDarwer extends PureComponent {
 
             <Divider />
 
-            <Body title="导航设置 ">
+            <Body title="其他设置 ">
               <List.Item
                 actions={[
                   <Select
