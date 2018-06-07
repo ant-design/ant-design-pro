@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Select, message, List, Switch, Divider, Icon } from 'antd';
-import DrawerMenu from 'rc-drawer-menu';
+import DrawerMenu from 'rc-drawer';
 import { connect } from 'dva';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';

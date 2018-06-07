@@ -1,6 +1,6 @@
-import 'rc-drawer-menu/assets/index.css';
+import 'rc-drawer/assets/index.css';
 import React from 'react';
-import DrawerMenu from 'rc-drawer-menu';
+import DrawerMenu from 'rc-drawer';
 import SiderMenu from './SiderMenu';
 
 /**
@@ -24,7 +24,7 @@ const SiderMenuWrapper = props =>
     <DrawerMenu
       parent={null}
       level={null}
-      iconChild={null}
+      handleChild={null}
       open={!props.collapsed}
       onMaskClick={() => {
         props.onCollapse(true);
