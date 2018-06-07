@@ -9,6 +9,25 @@ const defaultSetting = {
   fixSiderbar: false,
   colorWeak: 'close',
 };
+
+const localSetting = window.localStorage.getItem('antd-pro-setting');
+if (localSetting) {
+  try {
+    const parsedSetting = JSON.parse(localSetting);
+    Object.keys(parsedSetting).forEach(key => {
+      if (defaultSetting.hasProperty(key)) {
+        defaultSetting[key] = parsedSetting[key];
+      }
+    });
+  } catch (error) {
+    if (error.name === 'SyntaxError') {
+      window.localStorage.removeItem('antd-pro-setting');
+    } else {
+      throw error;
+    }
+  }
+}
+
 export default {
   namespace: 'setting',
   state: defaultSetting,
@@ -47,6 +66,7 @@ export default {
         }
       });
       window.history.replaceState(null, 'setting', urlParams.href);
+      window.localStorage.setItem('antd-pro-setting', JSON.stringify(payload));
       return {
         ...state,
         ...payload,
