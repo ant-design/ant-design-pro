@@ -19,9 +19,11 @@ if (localSetting) {
         defaultSetting[key] = parsedSetting[key];
       }
     });
-  } catch (err) {
-    if (err.name === 'SyntaxError') {
+  } catch (error) {
+    if (error.name === 'SyntaxError') {
       window.localStorage.removeItem('antd-pro-setting');
+    } else {
+      throw error;
     }
   }
 }
