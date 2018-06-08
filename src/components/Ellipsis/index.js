@@ -8,11 +8,40 @@ import styles from './index.less';
 
 const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
 
-const EllipsisText = ({ text, length, tooltip, ...other }) => {
+export const getStrShowLength = (str = '') => {
+  return str.split('').reduce((pre, cur) => {
+    const charCode = cur.charCodeAt(0);
+    if (charCode >= 0 && charCode <= 128) {
+      return pre + 1;
+    } else {
+      return pre + 2;
+    }
+  }, 0);
+};
+
+export const cutStrByShowLength = (str = '', maxLength) => {
+  let showLength = 0;
+  return str.split('').reduce((pre, cur) => {
+    const charCode = cur.charCodeAt(0);
+    if (charCode >= 0 && charCode <= 128) {
+      showLength += 1;
+    } else {
+      showLength += 2;
+    }
+    if (showLength <= maxLength) {
+      return pre + cur;
+    } else {
+      return pre;
+    }
+  }, '');
+};
+
+const EllipsisText = ({ text, length, tooltip, caculateShowLength, ...other }) => {
   if (typeof text !== 'string') {
     throw new Error('Ellipsis children must be string.');
   }
-  if (text.length <= length || length < 0) {
+  const textLength = caculateShowLength ? getStrShowLength(text) : text.length;
+  if (textLength <= length || length < 0) {
     return <span {...other}>{text}</span>;
   }
   const tail = '...';
@@ -20,7 +49,7 @@ const EllipsisText = ({ text, length, tooltip, ...other }) => {
   if (length - tail.length <= 0) {
     displayText = '';
   } else {
-    displayText = text.slice(0, length);
+    displayText = caculateShowLength ? cutStrByShowLength(text, length) : text.slice(0, length);
   }
 
   if (tooltip) {
@@ -147,7 +176,15 @@ export default class Ellipsis extends Component {
 
   render() {
     const { text, targetCount } = this.state;
-    const { children, lines, length, className, tooltip, ...restProps } = this.props;
+    const {
+      children,
+      lines,
+      length,
+      className,
+      tooltip,
+      caculateShowLength,
+      ...restProps
+    } = this.props;
 
     const cls = classNames(styles.ellipsis, className, {
       [styles.lines]: lines && !isSupportLineClamp,
@@ -170,6 +207,7 @@ export default class Ellipsis extends Component {
           length={length}
           text={children || ''}
           tooltip={tooltip}
+          caculateShowLength={caculateShowLength}
           {...restProps}
         />
       );

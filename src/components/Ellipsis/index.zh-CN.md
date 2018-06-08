@@ -14,3 +14,4 @@ order: 10
 tooltip | 移动到文本展示完整内容的提示 | boolean | -
 length | 在按照长度截取下的文本最大字符数，超过则截取省略 | number | -
 lines | 在按照行数截取下最大的行数，超过则截取省略 | number | `1`
+caculateShowLength | 是否将全角字符的长度视为2来计算字符串长度 | boolean | -
