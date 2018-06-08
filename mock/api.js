@@ -1,5 +1,3 @@
-import { parse } from 'url';
-
 const titles = [
   'Alipay',
   'Angular',
@@ -69,7 +67,7 @@ export function fakeList(count) {
       owner: user[i % 10],
       title: titles[i % 8],
       avatar: avatars[i % 8],
-      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - i % 4],
+      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % 8],
@@ -111,13 +109,8 @@ export function fakeList(count) {
 
 let sourceData;
 
-export function getFakeList(req, res, u) {
-  let url = u;
-  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    url = req.url; // eslint-disable-line
-  }
-
-  const params = parse(url, true).query;
+export function getFakeList(req, res) {
+  const params = req.query;
 
   const count = params.count * 1 || 20;
 
