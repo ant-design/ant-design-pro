@@ -58,7 +58,7 @@ class SettingDarwer extends PureComponent {
       },
       {
         title: '下滑时隐藏 Header',
-        hide: fixedHeader,
+        hide: !fixedHeader,
         action: [
           <Switch
             size="small"
