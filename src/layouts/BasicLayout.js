@@ -84,10 +84,10 @@ class BasicLayout extends React.PureComponent {
     return title;
   }
   getLayoutStyle = () => {
-    const { fixSiderbar } = this.props;
+    const { fixSiderbar, collapsed } = this.props;
     if (fixSiderbar) {
       return {
-        height: '100vh',
+        paddingLeft: collapsed ? '80px' : '256px',
       };
     }
     return null;
