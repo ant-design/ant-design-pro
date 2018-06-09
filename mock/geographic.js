@@ -1,8 +1,6 @@
-const fs = require('fs');
-
 function getJson(infoType) {
-  const json = fs.readFileSync(`${__dirname}/${infoType}.json`, 'utf8');
-  return JSON.parse(json);
+  const json = require(`${__dirname}/geographic/${infoType}.json`); // eslint-disable-line
+  return json;
 }
 
 export function getProvince(req, res) {
