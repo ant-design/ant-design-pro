@@ -39,7 +39,7 @@ class TagCloud extends Component {
     this.renderChart();
   };
 
-  saveRootRef = (node) => {
+  saveRootRef = node => {
     this.root = node;
   };
 
@@ -77,7 +77,7 @@ class TagCloud extends Component {
 
   @Bind()
   @Debounce(500)
-  renderChart = (nextProps) => {
+  renderChart(nextProps) {
     // const colors = ['#1890FF', '#41D9C7', '#2FC25B', '#FACC14', '#9AE65C'];
     const { data, height } = nextProps || this.props;
 
@@ -129,7 +129,7 @@ class TagCloud extends Component {
     } else {
       onload();
     }
-  };
+  }
 
   render() {
     const { className, height } = this.props;

@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
 export interface IChartCardProps {
   title: React.ReactNode;
   action?: React.ReactNode;
-  total?: React.ReactNode | number;
+  total?: React.ReactNode | number | (() => React.ReactNode | number);
   footer?: React.ReactNode;
   contentHeight?: number;
   avatar?: React.ReactNode;

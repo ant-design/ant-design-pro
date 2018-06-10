@@ -46,11 +46,11 @@ class Bar extends Component {
     }
   }
 
-  handleRoot = (n) => {
+  handleRoot = n => {
     this.root = n;
   };
 
-  handleRef = (n) => {
+  handleRef = n => {
     this.node = n;
   };
 

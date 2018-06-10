@@ -1,5 +1,17 @@
 import React, { PureComponent } from 'react';
-import { Card, Button, Form, Icon, Col, Row, DatePicker, TimePicker, Input, Select, Popover } from 'antd';
+import {
+  Card,
+  Button,
+  Form,
+  Icon,
+  Col,
+  Row,
+  DatePicker,
+  TimePicker,
+  Input,
+  Select,
+  Popover,
+} from 'antd';
 import { connect } from 'dva';
 import FooterToolbar from 'components/FooterToolbar';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
@@ -24,22 +36,26 @@ const fieldLabels = {
   type2: '任务类型',
 };
 
-const tableData = [{
-  key: '1',
-  workId: '00001',
-  name: 'John Brown',
-  department: 'New York No. 1 Lake Park',
-}, {
-  key: '2',
-  workId: '00002',
-  name: 'Jim Green',
-  department: 'London No. 1 Lake Park',
-}, {
-  key: '3',
-  workId: '00003',
-  name: 'Joe Black',
-  department: 'Sidney No. 1 Lake Park',
-}];
+const tableData = [
+  {
+    key: '1',
+    workId: '00001',
+    name: 'John Brown',
+    department: 'New York No. 1 Lake Park',
+  },
+  {
+    key: '2',
+    workId: '00002',
+    name: 'Jim Green',
+    department: 'London No. 1 Lake Park',
+  },
+  {
+    key: '3',
+    workId: '00003',
+    name: 'Joe Black',
+    department: 'Sidney No. 1 Lake Park',
+  },
+];
 
 class AdvancedForm extends PureComponent {
   state = {
@@ -57,7 +73,7 @@ class AdvancedForm extends PureComponent {
     if (this.state.width !== width) {
       this.setState({ width });
     }
-  }
+  };
   render() {
     const { form, dispatch, submitting } = this.props;
     const { getFieldDecorator, validateFieldsAndScroll, getFieldsError } = form;
@@ -78,13 +94,13 @@ class AdvancedForm extends PureComponent {
       if (!errors || errorCount === 0) {
         return null;
       }
-      const scrollToField = (fieldKey) => {
+      const scrollToField = fieldKey => {
         const labelNode = document.querySelector(`label[for="${fieldKey}"]`);
         if (labelNode) {
           labelNode.scrollIntoView(true);
         }
       };
-      const errorList = Object.keys(errors).map((key) => {
+      const errorList = Object.keys(errors).map(key => {
         if (!errors[key]) {
           return null;
         }
@@ -124,9 +140,7 @@ class AdvancedForm extends PureComponent {
                 <Form.Item label={fieldLabels.name}>
                   {getFieldDecorator('name', {
                     rules: [{ required: true, message: '请输入仓库名称' }],
-                  })(
-                    <Input placeholder="请输入仓库名称" />
-                  )}
+                  })(<Input placeholder="请输入仓库名称" />)}
                 </Form.Item>
               </Col>
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
@@ -200,18 +214,14 @@ class AdvancedForm extends PureComponent {
                 <Form.Item label={fieldLabels.name2}>
                   {getFieldDecorator('name2', {
                     rules: [{ required: true, message: '请输入' }],
-                  })(
-                    <Input placeholder="请输入" />
-                  )}
+                  })(<Input placeholder="请输入" />)}
                 </Form.Item>
               </Col>
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
                 <Form.Item label={fieldLabels.url2}>
                   {getFieldDecorator('url2', {
                     rules: [{ required: true, message: '请选择' }],
-                  })(
-                    <Input placeholder="请输入" />
-                  )}
+                  })(<Input placeholder="请输入" />)}
                 </Form.Item>
               </Col>
               <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>

@@ -10,9 +10,6 @@ export interface IDescriptionListProps {
   style?: React.CSSProperties;
 }
 
-export default class DescriptionList extends React.Component<
-  IDescriptionListProps,
-  any
-> {
+export default class DescriptionList extends React.Component<IDescriptionListProps, any> {
   public static Description: typeof Description;
 }

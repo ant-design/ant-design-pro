@@ -5,12 +5,12 @@ describe('Login', () => {
   let page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   });
 
   beforeEach(async () => {
     page = await browser.newPage();
-    await page.goto('http://localhost:8000/#/user/login');
+    await page.goto('http://localhost:8000/#/user/login', { waitUntil: 'networkidle2' });
     await page.evaluate(() => window.localStorage.setItem('antd-pro-authority', 'guest'));
   });
 

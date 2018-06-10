@@ -7,55 +7,34 @@ import styles from './style.less';
   isloading: state.error.isloading,
 }))
 export default class TriggerException extends PureComponent {
-  state={
+  state = {
     isloading: false,
-  }
-  trigger401 = () => {
-    this.setState({
-      isloading: true,
-    });
-    this.props.dispatch({
-      type: 'error/query401',
-    });
   };
-  trigger403 = () => {
+  triggerError = code => {
     this.setState({
       isloading: true,
     });
     this.props.dispatch({
-      type: 'error/query403',
-    });
-  };
-  trigger500 = () => {
-    this.setState({
-      isloading: true,
-    });
-    this.props.dispatch({
-      type: 'error/query500',
-    });
-  };
-  trigger404 = () => {
-    this.setState({
-      isloading: true,
-    });
-    this.props.dispatch({
-      type: 'error/query404',
+      type: 'error/query',
+      payload: {
+        code,
+      },
     });
   };
   render() {
     return (
       <Card>
         <Spin spinning={this.state.isloading} wrapperClassName={styles.trigger}>
-          <Button type="danger" onClick={this.trigger401}>
+          <Button type="danger" onClick={() => this.triggerError(401)}>
             触发401
           </Button>
-          <Button type="danger" onClick={this.trigger403}>
+          <Button type="danger" onClick={() => this.triggerError(403)}>
             触发403
           </Button>
-          <Button type="danger" onClick={this.trigger500}>
+          <Button type="danger" onClick={() => this.triggerError(500)}>
             触发500
           </Button>
-          <Button type="danger" onClick={this.trigger404}>
+          <Button type="danger" onClick={() => this.triggerError(404)}>
             触发404
           </Button>
         </Spin>

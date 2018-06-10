@@ -99,13 +99,15 @@ export default class Workplace extends PureComponent {
   }
 
   renderActivities() {
-    const {
-      activities: { list },
-    } = this.props;
-    return list.map((item) => {
-      const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
+    const { activities: { list } } = this.props;
+    return list.map(item => {
+      const events = item.template.split(/@\{([^{}]*)\}/gi).map(key => {
         if (item[key]) {
-          return <a href={item[key].link} key={item[key].name}>{item[key].name}</a>;
+          return (
+            <a href={item[key].link} key={item[key].name}>
+              {item[key].name}
+            </a>
+          );
         }
         return key;
       });
@@ -142,7 +144,10 @@ export default class Workplace extends PureComponent {
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
         <div className={styles.avatar}>
-          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
+          <Avatar
+            size="large"
+            src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
+          />
         </div>
         <div className={styles.content}>
           <div className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</div>
@@ -159,7 +164,9 @@ export default class Workplace extends PureComponent {
         </div>
         <div className={styles.statItem}>
           <p>团队内排名</p>
-          <p>8<span> / 24</span></p>
+          <p>
+            8<span> / 24</span>
+          </p>
         </div>
         <div className={styles.statItem}>
           <p>项目访问</p>
@@ -169,10 +176,7 @@ export default class Workplace extends PureComponent {
     );
 
     return (
-      <PageHeaderLayout
-        content={pageHeaderContent}
-        extraContent={extraContent}
-      >
+      <PageHeaderLayout content={pageHeaderContent} extraContent={extraContent}>
         <Row gutter={24}>
           <Col xl={16} lg={24} md={24} sm={24} xs={24}>
             <Card
@@ -184,31 +188,29 @@ export default class Workplace extends PureComponent {
               loading={projectLoading}
               bodyStyle={{ padding: 0 }}
             >
-              {
-                notice.map(item => (
-                  <Card.Grid className={styles.projectGrid} key={item.id}>
-                    <Card bodyStyle={{ padding: 0 }} bordered={false}>
-                      <Card.Meta
-                        title={(
-                          <div className={styles.cardTitle}>
-                            <Avatar size="small" src={item.logo} />
-                            <Link to={item.href}>{item.title}</Link>
-                          </div>
-                        )}
-                        description={item.description}
-                      />
-                      <div className={styles.projectItemContent}>
-                        <Link to={item.memberLink}>{item.member || ''}</Link>
-                        {item.updatedAt && (
-                          <span className={styles.datetime} title={item.updatedAt}>
-                            {moment(item.updatedAt).fromNow()}
-                          </span>
-                        )}
-                      </div>
-                    </Card>
-                  </Card.Grid>
-                ))
-              }
+              {notice.map(item => (
+                <Card.Grid className={styles.projectGrid} key={item.id}>
+                  <Card bodyStyle={{ padding: 0 }} bordered={false}>
+                    <Card.Meta
+                      title={
+                        <div className={styles.cardTitle}>
+                          <Avatar size="small" src={item.logo} />
+                          <Link to={item.href}>{item.title}</Link>
+                        </div>
+                      }
+                      description={item.description}
+                    />
+                    <div className={styles.projectItemContent}>
+                      <Link to={item.memberLink}>{item.member || ''}</Link>
+                      {item.updatedAt && (
+                        <span className={styles.datetime} title={item.updatedAt}>
+                          {moment(item.updatedAt).fromNow()}
+                        </span>
+                      )}
+                    </div>
+                  </Card>
+                </Card.Grid>
+              ))}
             </Card>
             <Card
               bodyStyle={{ padding: 0 }}
@@ -218,9 +220,7 @@ export default class Workplace extends PureComponent {
               loading={activitiesLoading}
             >
               <List loading={activitiesLoading} size="large">
-                <div className={styles.activitiesList}>
-                  {this.renderActivities()}
-                </div>
+                <div className={styles.activitiesList}>{this.renderActivities()}</div>
               </List>
             </Card>
           </Col>
@@ -231,11 +231,7 @@ export default class Workplace extends PureComponent {
               bordered={false}
               bodyStyle={{ padding: 0 }}
             >
-              <EditableLinkGroup
-                onAdd={() => {}}
-                links={links}
-                linkElement={Link}
-              />
+              <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
             </Card>
             <Card
               style={{ marginBottom: 24 }}
@@ -247,23 +243,17 @@ export default class Workplace extends PureComponent {
                 <Radar hasLegend height={343} data={radarData} />
               </div>
             </Card>
-            <Card
-              bodyStyle={{ paddingTop: 12, paddingBottom: 12 }}
-              bordered={false}
-              title="团队"
-            >
+            <Card bodyStyle={{ paddingTop: 12, paddingBottom: 12 }} bordered={false} title="团队">
               <div className={styles.members}>
                 <Row gutter={48}>
-                  {
-                    members.map(item => (
-                      <Col span={12} key={`members-item-${item.id}`}>
-                        <Link to={item.link}>
-                          <Avatar src={item.logo} size="small" />
-                          <span className={styles.member}>{item.title}</span>
-                        </Link>
-                      </Col>
-                    ))
-                  }
+                  {members.map(item => (
+                    <Col span={12} key={`members-item-${item.id}`}>
+                      <Link to={item.link}>
+                        <Avatar src={item.logo} size="small" />
+                        <span className={styles.member}>{item.title}</span>
+                      </Link>
+                    </Col>
+                  ))}
                 </Row>
               </div>
             </Card>

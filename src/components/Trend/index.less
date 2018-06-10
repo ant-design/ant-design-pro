@@ -1,4 +1,4 @@
-@import "~antd/lib/style/themes/default.less";
+@import '~antd/lib/style/themes/default.less';
 
 .trendItem {
   display: inline-block;
@@ -26,5 +26,12 @@
   &.trendItemGrey .up,
   &.trendItemGrey .down {
     color: @text-color;
+  }
+
+  &.reverseColor .up {
+    color: @green-6;
+  }
+  &.reverseColor .down {
+    color: @red-6;
   }
 }

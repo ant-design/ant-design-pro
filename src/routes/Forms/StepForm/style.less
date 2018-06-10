@@ -1,4 +1,4 @@
-@import "~antd/lib/style/themes/default.less";
+@import '~antd/lib/style/themes/default.less';
 
 .stepForm {
   margin: 40px auto 0;
@@ -60,11 +60,14 @@
     color: @heading-color;
     text-align: right;
     padding-right: 8px;
+    @media screen and (max-width: @screen-sm) {
+      text-align: left;
+    }
   }
 }
 
 .money {
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: 'Helvetica Neue', sans-serif;
   font-weight: 500;
   font-size: 20px;
   line-height: 14px;

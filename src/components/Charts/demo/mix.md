@@ -27,6 +27,7 @@ ReactDOM.render(
     <Col span={24}>
       <ChartCard
         title="搜索用户数量"
+        total={numeral(8846).format('0,0')}
         contentHeight={134}
       >
         <NumberInfo
