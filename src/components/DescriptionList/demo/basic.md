@@ -36,7 +36,7 @@ ReactDOM.render(
       A free, open source, cross-platform,
       graphical web browser developed by the
       Mozilla Corporation and hundreds of
-      volunteers.
+      volunteers.123123
     </Description>
   </DescriptionList>
 , mountNode);
