@@ -8,7 +8,7 @@ import styles from './index.less';
 
 const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
 
-export const getStrShowLength = (str = '') => {
+export const getStrFullLength = (str = '') => {
   return str.split('').reduce((pre, cur) => {
     const charCode = cur.charCodeAt(0);
     if (charCode >= 0 && charCode <= 128) {
@@ -19,7 +19,7 @@ export const getStrShowLength = (str = '') => {
   }, 0);
 };
 
-export const cutStrByShowLength = (str = '', maxLength) => {
+export const cutStrByFullLength = (str = '', maxLength) => {
   let showLength = 0;
   return str.split('').reduce((pre, cur) => {
     const charCode = cur.charCodeAt(0);
@@ -36,11 +36,11 @@ export const cutStrByShowLength = (str = '', maxLength) => {
   }, '');
 };
 
-const EllipsisText = ({ text, length, tooltip, caculateShowLength, ...other }) => {
+const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other }) => {
   if (typeof text !== 'string') {
     throw new Error('Ellipsis children must be string.');
   }
-  const textLength = caculateShowLength ? getStrShowLength(text) : text.length;
+  const textLength = fullWidthRecognition ? getStrFullLength(text) : text.length;
   if (textLength <= length || length < 0) {
     return <span {...other}>{text}</span>;
   }
@@ -49,7 +49,7 @@ const EllipsisText = ({ text, length, tooltip, caculateShowLength, ...other }) =
   if (length - tail.length <= 0) {
     displayText = '';
   } else {
-    displayText = caculateShowLength ? cutStrByShowLength(text, length) : text.slice(0, length);
+    displayText = fullWidthRecognition ? cutStrByFullLength(text, length) : text.slice(0, length);
   }
 
   if (tooltip) {
@@ -182,7 +182,7 @@ export default class Ellipsis extends Component {
       length,
       className,
       tooltip,
-      caculateShowLength,
+      fullWidthRecognition,
       ...restProps
     } = this.props;
 
@@ -207,7 +207,7 @@ export default class Ellipsis extends Component {
           length={length}
           text={children || ''}
           tooltip={tooltip}
-          caculateShowLength={caculateShowLength}
+          fullWidthRecognition={fullWidthRecognition}
           {...restProps}
         />
       );
