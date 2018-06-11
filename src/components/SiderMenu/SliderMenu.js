@@ -67,7 +67,6 @@ export const getMenuMatchKeys = (flatMenuKeys, paths) =>
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
-    this.menus = props.menuData;
     this.flatMenuKeys = getFlatMenuKeys(props.menuData);
     this.state = {
       pathname: props.location.pathname,

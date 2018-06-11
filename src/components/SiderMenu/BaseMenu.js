@@ -30,7 +30,6 @@ export const getMenuMatches = (flatMenuKeys, path) => {
 export default class BaseMenu extends PureComponent {
   constructor(props) {
     super(props);
-    this.menus = props.menuData;
     this.flatMenuKeys = this.getFlatMenuKeys(props.menuData);
   }
   /**
@@ -172,7 +171,7 @@ export default class BaseMenu extends PureComponent {
         style={this.props.style}
         {...props}
       >
-        {this.getNavMenuItems(this.menus)}
+        {this.getNavMenuItems(this.props.menuData)}
       </Menu>
     );
   }
