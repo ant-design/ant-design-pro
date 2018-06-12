@@ -40,7 +40,7 @@ export default class WaterWave extends PureComponent {
     const data = percent / 100;
     const self = this;
 
-    if (!this.node || !data) {
+    if (!this.node || (data !== 0 && !data)) {
       return;
     }
 
