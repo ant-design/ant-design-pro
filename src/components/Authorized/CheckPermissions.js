@@ -52,6 +52,10 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
       if (bool) {
         return target;
       }
+      // 函数执行后返回值是 Promise
+      if (isPromise(bool)) {
+        return <PromiseRender ok={target} error={Exception} promise={bool} />;
+      }
       return Exception;
     } catch (error) {
       throw error;
