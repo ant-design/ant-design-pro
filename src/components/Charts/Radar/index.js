@@ -31,6 +31,7 @@ export default class Radar extends Component {
   getLegendData = () => {
     if (!this.chart) return;
     const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
+    if (!geom) return;
     const items = geom.get('dataArray') || []; // 获取图形对应的
 
     const legendData = items.map(item => {
