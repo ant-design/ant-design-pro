@@ -27,6 +27,7 @@
     "bizcharts": "^3.1.10",
     "bizcharts-plugin-slider": "^2.0.3",
     "classnames": "^2.2.6",
+    "cors": "^2.8.4",
     "dva": "^2.3.1",
     "dva-loading": "^2.0.3",
     "enquire-js": "^0.2.1",
