@@ -8,7 +8,7 @@ _roadhog-api-doc
 
 # production
 /dist
-/vscode
+/.vscode
 
 # misc
 .DS_Store
@@ -21,4 +21,3 @@ yarn.lock
 package-lock.json
 *bak
 jsconfig.json
-.vscode/settings.json
