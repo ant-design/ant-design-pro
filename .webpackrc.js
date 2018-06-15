@@ -28,6 +28,9 @@ export default {
   publicPath: '/',
   disableDynamicImport: true,
   hash: true,
+  lessLoaderOptions: {
+    javascriptEnabled: true,
+  },
   cssLoaderOptions: {
     modules: true,
     getLocalIdent: (context, localIdentName, localName) => {
