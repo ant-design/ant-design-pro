@@ -19,7 +19,13 @@ export default class Pie extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize, { passive: true });
+    window.addEventListener(
+      'resize',
+      () => {
+        requestAnimationFrame(() => this.resize());
+      },
+      { passive: true }
+    );
   }
 
   componentDidUpdate(preProps) {
@@ -66,24 +72,22 @@ export default class Pie extends Component {
   @Bind()
   @Debounce(300)
   resize() {
-    requestAnimationFrame(() => {
-      const { hasLegend } = this.props;
-      if (!hasLegend || !this.root) {
-        window.removeEventListener('resize', this.resize);
-        return;
-      }
-      if (this.root.parentNode.clientWidth <= 380) {
-        if (!this.state.legendBlock) {
-          this.setState({
-            legendBlock: true,
-          });
-        }
-      } else if (this.state.legendBlock) {
+    const { hasLegend } = this.props;
+    if (!hasLegend || !this.root) {
+      window.removeEventListener('resize', this.resize);
+      return;
+    }
+    if (this.root.parentNode.clientWidth <= 380) {
+      if (!this.state.legendBlock) {
         this.setState({
-          legendBlock: false,
+          legendBlock: true,
         });
       }
-    });
+    } else if (this.state.legendBlock) {
+      this.setState({
+        legendBlock: false,
+      });
+    }
   }
 
   handleRoot = n => {
