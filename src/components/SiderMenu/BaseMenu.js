@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
+import { FormattedMessage } from 'react-intl';
 import pathToRegexp from 'path-to-regexp';
 import { urlToList } from '../_utils/pathTools';
 import styles from './index.less';
@@ -53,7 +54,7 @@ export default class BaseMenu extends PureComponent {
    * 获得菜单子节点
    * @memberof SiderMenu
    */
-  getNavMenuItems = menusData => {
+  getNavMenuItems = (menusData, parent) => {
     if (!menusData) {
       return [];
     }
@@ -61,7 +62,7 @@ export default class BaseMenu extends PureComponent {
       .filter(item => item.name && !item.hideInMenu)
       .map(item => {
         // make dom
-        const ItemDom = this.getSubMenuOrItem(item);
+        const ItemDom = this.getSubMenuOrItem(item, parent);
         return this.checkPermissionItem(item.authority, ItemDom);
       })
       .filter(item => item);
@@ -78,27 +79,29 @@ export default class BaseMenu extends PureComponent {
   /**
    * get SubMenu or Item
    */
-  getSubMenuOrItem = item => {
+  getSubMenuOrItem = (item, parent) => {
+    const id = parent ? `${parent}.${item.name}` : `menu.${item.name}`;
     if (item.children && item.children.some(child => child.name)) {
+      const name = <FormattedMessage defaultMessage={item.name} id={id} />;
       return (
         <SubMenu
           title={
             item.icon ? (
               <span>
                 {getIcon(item.icon)}
-                <span>{item.name}</span>
+                <span>{name}</span>
               </span>
             ) : (
-              item.name
+              name
             )
           }
           key={item.path}
         >
-          {this.getNavMenuItems(item.children)}
+          {this.getNavMenuItems(item.children, id)}
         </SubMenu>
       );
     } else {
-      return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
+      return <Menu.Item key={item.path}>{this.getMenuItemPath(item, parent)}</Menu.Item>;
     }
   };
 
@@ -107,10 +110,12 @@ export default class BaseMenu extends PureComponent {
    * Judge whether it is http link.return a or Link
    * @memberof SiderMenu
    */
-  getMenuItemPath = item => {
+  getMenuItemPath = (item, parent) => {
+    const id = parent ? `${parent}.${item.name}` : `menu.${item.name}`;
+    const name = <FormattedMessage defaultMessage={item.name} id={id} />;
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
-    const { target, name } = item;
+    const { target } = item;
     // Is it a http link
     if (/^https?:\/\//.test(itemPath)) {
       return (

@@ -11,6 +11,7 @@ import cnLocale from './locale/zh-CN';
 
 const { ConnectedRouter } = routerRedux;
 const { AuthorizedRoute } = Authorized;
+
 dynamic.setDefaultLoadingComponent(() => {
   return <Spin size="large" className={styles.globalSpin} />;
 });

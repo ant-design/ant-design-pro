@@ -9,6 +9,7 @@ export default {
   messages: {
     'app.home.introduce': 'introduce',
     'app.analysis.test': 'Gongzhuan road No.{no} shop',
-  // ...enMessages,
+
+    // ...enMessages,
   },
 };
