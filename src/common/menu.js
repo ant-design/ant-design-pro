@@ -202,15 +202,15 @@ const menuData = [
     path: 'dashboard',
     children: [
       {
-        name: '分析页',
+        name: 'analysis',
         path: 'analysis',
       },
       {
-        name: '监控页',
+        name: 'monitor',
         path: 'monitor',
       },
       {
-        name: '工作台',
+        name: 'workplace',
         path: 'workplace',
         // hideInBreadcrumb: true,
         // hideInMenu: true,
@@ -218,56 +218,61 @@ const menuData = [
     ],
   },
   {
-    name: '表单页',
+    name: 'form',
     icon: 'form',
     path: 'form',
     children: [
       {
-        name: '基础表单',
+        name: 'basicform',
         path: 'basic-form',
       },
       {
-        name: '分步表单',
+        name: 'stepform',
         path: 'step-form',
       },
       {
+<<<<<<< HEAD
         name: '高级表单',
         // authority: 'admin',
+=======
+        name: 'advancedform',
+        authority: 'admin',
+>>>>>>> add meun Intl
         path: 'advanced-form',
       },
     ],
   },
   {
-    name: '列表页',
+    name: 'list',
     icon: 'table',
     path: 'list',
     children: [
       {
-        name: '查询表格',
+        name: 'searchlist',
         path: 'table-list',
       },
       {
-        name: '标准列表',
+        name: 'basiclist',
         path: 'basic-list',
       },
       {
-        name: '卡片列表',
+        name: 'cardlist',
         path: 'card-list',
       },
       {
-        name: '搜索列表',
+        name: 'searchlist',
         path: 'search',
         children: [
           {
-            name: '搜索列表（文章）',
+            name: 'articles',
             path: 'articles',
           },
           {
-            name: '搜索列表（项目）',
+            name: 'projects',
             path: 'projects',
           },
           {
-            name: '搜索列表（应用）',
+            name: 'applications',
             path: 'applications',
           },
         ],
@@ -275,91 +280,91 @@ const menuData = [
     ],
   },
   {
-    name: '详情页',
+    name: 'profile',
     icon: 'profile',
     path: 'profile',
     children: [
       {
-        name: '基础详情页',
+        name: 'basic',
         path: 'basic',
       },
       {
-        name: '高级详情页',
+        name: 'advanced',
         path: 'advanced',
         // authority: 'admin',
       },
     ],
   },
   {
-    name: '结果页',
+    name: 'result',
     icon: 'check-circle-o',
     path: 'result',
     children: [
       {
-        name: '成功',
+        name: 'success',
         path: 'success',
       },
       {
-        name: '失败',
+        name: 'fail',
         path: 'fail',
       },
     ],
   },
   {
-    name: '异常页',
+    name: 'exception',
     icon: 'warning',
     path: 'exception',
     children: [
       {
-        name: '403',
+        name: 'not-permission',
         path: '403',
       },
       {
-        name: '404',
+        name: 'not-find',
         path: '404',
       },
       {
-        name: '500',
+        name: 'server-error',
         path: '500',
       },
-      // {
-      //   name: '触发异常',
-      //   path: 'triggerException',
-      //   hideInMenu: true,
-      // },
+      {
+        name: 'trigger',
+        path: 'trigger',
+        hideInMenu: true,
+      },
     ],
   },
   {
-    name: '账户',
+    name: 'user',
     icon: 'user',
     path: 'User',
     authority: 'guest',
     children: [
       {
-        name: '登录',
+        name: 'login',
         path: 'login',
       },
       {
-        name: '注册',
+        name: 'register',
         path: 'register',
       },
       {
-        name: '注册结果',
+        name: 'register-result',
         path: 'register-result',
       },
     ],
   },
   {
-    name: '个人页',
+    name: 'account',
     icon: 'user',
     path: 'account',
     children: [
       {
-        name: '个人中心',
+        name: 'center',
         path: 'center',
       },
       {
-        name: '个人设置',
+        name: 'settings',
         path: 'settings',
       },
     ],
