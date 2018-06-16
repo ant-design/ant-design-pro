@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
+import { FormattedMessage } from 'react-intl';
 import styles from './index.less';
 import BaseMenu, { getMenuMatches } from './BaseMenu';
 import { urlToList } from '../_utils/pathTools';
@@ -104,6 +105,7 @@ export default class SiderMenu extends PureComponent {
    * @memberof SiderMenu
    */
   getMenuItemPath = item => {
+    console.log(item);
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
     const { target, name } = item;
@@ -112,7 +114,9 @@ export default class SiderMenu extends PureComponent {
       return (
         <a href={itemPath} target={target}>
           {icon}
-          <span>{name}</span>
+          <span>
+            <FormattedMessage id={name} />
+          </span>
         </a>
       );
     }
@@ -131,7 +135,9 @@ export default class SiderMenu extends PureComponent {
         }
       >
         {icon}
-        <span>{name}</span>
+        <span>
+          <FormattedMessage id={name} />
+        </span>
       </Link>
     );
   };
