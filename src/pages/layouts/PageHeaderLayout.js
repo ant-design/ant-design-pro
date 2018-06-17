@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'dva/router';
 import PageHeader from '../../components/PageHeader';
 import GridContent from './GridContent';
@@ -10,7 +11,15 @@ const PageHeaderLayout = ({ children, wrapperClassName, top, ...restProps }) => 
     {top}
     <MenuContext.Consumer>
       {value => {
-        return <PageHeader {...value} key="pageheader" {...restProps} linkElement={Link} />;
+        return (
+          <PageHeader
+            home={<FormattedMessage id="menu.home" defaultMessage="Home" />}
+            {...value}
+            key="pageheader"
+            {...restProps}
+            linkElement={Link}
+          />
+        );
       }}
     </MenuContext.Consumer>
     {children ? (

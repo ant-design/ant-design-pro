@@ -16,6 +16,7 @@ order: 11
 | title | title 区域 | ReactNode | - |
 | logo | logo区域 | ReactNode | - |
 | action | 操作区，位于 title 行的行尾 | ReactNode | - |
+| home | 默认的主页说明文字 | ReactNode | - |
 | content | 内容区 | ReactNode | - |
 | extraContent | 额外内容区，位于content的右侧 | ReactNode | - |
 | breadcrumbList | 面包屑数据，配置了此属性时 `routes` `params` `location` `breadcrumbNameMap` 无效 | array<{title: ReactNode, href?: string}> | - |

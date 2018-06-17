@@ -15,6 +15,7 @@ export interface IPageHeaderProps {
   tabBarExtraContent?: React.ReactNode;
   linkElement?: React.ReactNode;
   style?: React.CSSProperties;
+  home?: React.ReactNode;
 }
 
 export default class PageHeader extends React.Component<IPageHeaderProps, any> {}
