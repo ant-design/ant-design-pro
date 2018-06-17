@@ -7,7 +7,7 @@ export default {
   data: appLocaleData,
   antd: antdEn,
   messages: {
-    'menu.home': 'home',
+    'menu.home': 'Home',
     'menu.dashboard': 'Dashboard',
     'menu.dashboard.analysis': 'Analysis',
     'menu.dashboard.monitor': 'Monitor',
