@@ -371,19 +371,22 @@ const menuData = [
   },
 ];
 
-function formatter(data, parentPath = '/', parentAuthority) {
+function formatter(data, parentPath = '/', parentAuthority, parentName) {
   return data.map(item => {
     let { path } = item;
+    const id = parentName ? `${parentName}.${item.name}` : `menu.${item.name}`;
+
     if (!isUrl(path)) {
       path = parentPath + item.path;
     }
     const result = {
       ...item,
       path,
+      locale: id,
       authority: item.authority || parentAuthority,
     };
     if (item.children) {
-      result.children = formatter(item.children, `${parentPath}${item.path}/`, item.authority);
+      result.children = formatter(item.children, `${parentPath}${item.path}/`, item.authority, id);
     }
     return result;
   });

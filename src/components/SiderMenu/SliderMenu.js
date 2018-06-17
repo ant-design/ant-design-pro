@@ -105,17 +105,16 @@ export default class SiderMenu extends PureComponent {
    * @memberof SiderMenu
    */
   getMenuItemPath = item => {
-    console.log(item);
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
-    const { target, name } = item;
+    const { target, name, locale } = item;
     // Is it a http link
     if (/^https?:\/\//.test(itemPath)) {
       return (
         <a href={itemPath} target={target}>
           {icon}
           <span>
-            <FormattedMessage id={name} />
+            <FormattedMessage id={locale} defaultMessage={name} />
           </span>
         </a>
       );
@@ -136,7 +135,7 @@ export default class SiderMenu extends PureComponent {
       >
         {icon}
         <span>
-          <FormattedMessage id={name} />
+          <FormattedMessage id={locale} defaultMessage={name} />
         </span>
       </Link>
     );
@@ -159,7 +158,7 @@ export default class SiderMenu extends PureComponent {
                   <span>{item.name}</span>
                 </span>
               ) : (
-                item.name
+                <FormattedMessage id={item.locale} defaultMessage={item.name} />
               )
             }
             key={item.path}
