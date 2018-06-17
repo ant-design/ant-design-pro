@@ -40,77 +40,77 @@ for (let i = 0; i < 50; i += 1) {
 }
 const salesTypeData = [
   {
-    x: '家用电器',
+    x: 'House appliances',
     y: 4544,
   },
   {
-    x: '食用酒水',
+    x: 'Drink & wine',
     y: 3321,
   },
   {
-    x: '个护健康',
+    x: 'Health & care',
     y: 3113,
   },
   {
-    x: '服饰箱包',
+    x: 'Clothing & bags',
     y: 2341,
   },
   {
-    x: '母婴产品',
+    x: 'Mother-baby',
     y: 1231,
   },
   {
-    x: '其他',
+    x: 'Other',
     y: 1231,
   },
 ];
 
 const salesTypeDataOnline = [
   {
-    x: '家用电器',
+    x: 'House appliances',
     y: 244,
   },
   {
-    x: '食用酒水',
+    x: 'Drink & wine',
     y: 321,
   },
   {
-    x: '个护健康',
+    x: 'Health & care',
     y: 311,
   },
   {
-    x: '服饰箱包',
+    x: 'Clothing & bags',
     y: 41,
   },
   {
-    x: '母婴产品',
+    x: 'Mother-baby',
     y: 121,
   },
   {
-    x: '其他',
+    x: 'Other',
     y: 111,
   },
 ];
 
 const salesTypeDataOffline = [
   {
-    x: '家用电器',
+    x: 'House appliances',
     y: 99,
   },
   {
-    x: '个护健康',
+    x: 'Drink & wine',
     y: 188,
   },
   {
-    x: '服饰箱包',
+    x: 'Health & care',
     y: 344,
   },
   {
-    x: '母婴产品',
+    x: 'Clothing & bags',
     y: 255,
   },
   {
-    x: '其他',
+    x: 'Other',
     y: 65,
   },
 ];
@@ -118,7 +118,7 @@ const salesTypeDataOffline = [
 const offlineData = [];
 for (let i = 0; i < 10; i += 1) {
   offlineData.push({
-    name: `门店${i}`,
+    name: `Stores ${i}`,
     cvr: Math.ceil(Math.random() * 9) / 10,
   });
 }

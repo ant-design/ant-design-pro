@@ -17,6 +17,9 @@ dynamic.setDefaultLoadingComponent(() => {
 });
 
 function getLang() {
+  if (window) {
+    return 'en-US';
+  }
   return (window.localStorage && localStorage.getItem('locale')) ||
     (navigator.language || navigator.browserLanguage).toLowerCase() === 'en-us'
     ? 'en-US'
