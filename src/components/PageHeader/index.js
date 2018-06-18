@@ -60,21 +60,25 @@ export default class PageHeader extends PureComponent {
   // Generated according to props
   conversionFromProps = () => {
     const { breadcrumbList, breadcrumbSeparator, linkElement = 'a' } = this.props;
+
     return (
       <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
-        {breadcrumbList.map(item => (
-          <Breadcrumb.Item key={item.title}>
-            {item.href
-              ? createElement(
-                  linkElement,
-                  {
-                    [linkElement === 'a' ? 'href' : 'to']: item.href,
-                  },
-                  item.title
-                )
-              : item.title}
-          </Breadcrumb.Item>
-        ))}
+        {breadcrumbList.map(item => {
+          const title = this.props.itemRender ? this.props.itemRender(item) : item.title;
+          return (
+            <Breadcrumb.Item key={item.title}>
+              {item.href
+                ? createElement(
+                    linkElement,
+                    {
+                      [linkElement === 'a' ? 'href' : 'to']: item.href,
+                    },
+                    title
+                  )
+                : title}
+            </Breadcrumb.Item>
+          );
+        })}
       </Breadcrumb>
     );
   };
@@ -85,14 +89,18 @@ export default class PageHeader extends PureComponent {
     const pathSnippets = urlToList(routerLocation.pathname);
     // Loop data mosaic routing
     const extraBreadcrumbItems = pathSnippets.map((url, index) => {
+      console.log(url);
       const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
       const isLinkable = index !== pathSnippets.length - 1 && currentBreadcrumb.component;
+      const name = this.props.itemRender
+        ? this.props.itemRender(currentBreadcrumb)
+        : currentBreadcrumb.name;
       return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
         <Breadcrumb.Item key={url}>
           {createElement(
             isLinkable ? linkElement : 'span',
             { [linkElement === 'a' ? 'href' : 'to']: url },
-            currentBreadcrumb.name
+            name
           )}
         </Breadcrumb.Item>
       ) : null;
