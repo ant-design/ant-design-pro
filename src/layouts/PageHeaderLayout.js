@@ -18,6 +18,12 @@ const PageHeaderLayout = ({ children, wrapperClassName, top, ...restProps }) => 
             key="pageheader"
             {...restProps}
             linkElement={Link}
+            itemRender={item => {
+              if (item.locale) {
+                return <FormattedMessage id={item.locale} defaultMessage={item.name} />;
+              }
+              return item.name;
+            }}
           />
         );
       }}
