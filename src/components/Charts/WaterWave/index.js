@@ -13,10 +13,8 @@ export default class WaterWave extends PureComponent {
   };
 
   componentDidMount() {
-    requestAnimationFrame(() => {
-      this.renderChart();
-      this.resize();
-    });
+    this.renderChart();
+    this.resize();
     window.addEventListener(
       'resize',
       () => {
