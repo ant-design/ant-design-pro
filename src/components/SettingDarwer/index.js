@@ -101,7 +101,7 @@ class SettingDarwer extends PureComponent {
       }
     }
     if (key === 'fixedHeader') {
-      if (value) {
+      if (!value) {
         nextState.autoHideHeader = false;
       }
     }
