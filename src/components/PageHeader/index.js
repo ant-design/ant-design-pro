@@ -1,12 +1,14 @@
 import React, { PureComponent, createElement } from 'react';
 import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb, Tabs, Card } from 'antd';
+import memoizeOne from 'memoize-one';
+import deepEqual from 'lodash.isequal';
 import classNames from 'classnames';
 import styles from './index.less';
 import { urlToList } from '../_utils/pathTools';
 
 const { TabPane } = Tabs;
-export function getBreadcrumb(breadcrumbNameMap, url) {
+export const getBreadcrumb = (breadcrumbNameMap, url) => {
   let breadcrumb = breadcrumbNameMap[url];
   if (!breadcrumb) {
     Object.keys(breadcrumbNameMap).forEach(item => {
@@ -16,8 +18,14 @@ export function getBreadcrumb(breadcrumbNameMap, url) {
     });
   }
   return breadcrumb || {};
-}
+};
+
 export default class PageHeader extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.conversionFromLocation = memoizeOne(this.conversionFromLocation, deepEqual);
+  }
+
   state = {
     breadcrumb: null,
   };
@@ -59,12 +67,11 @@ export default class PageHeader extends PureComponent {
 
   // Generated according to props
   conversionFromProps = () => {
-    const { breadcrumbList, breadcrumbSeparator, linkElement = 'a' } = this.props;
-
+    const { breadcrumbList, breadcrumbSeparator, itemRender, linkElement = 'a' } = this.props;
     return (
       <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
         {breadcrumbList.map(item => {
-          const title = this.props.itemRender ? this.props.itemRender(item) : item.title;
+          const title = itemRender ? itemRender(item) : item.title;
           return (
             <Breadcrumb.Item key={item.title}>
               {item.href
@@ -84,17 +91,14 @@ export default class PageHeader extends PureComponent {
   };
 
   conversionFromLocation = (routerLocation, breadcrumbNameMap) => {
-    const { breadcrumbSeparator, linkElement = 'a' } = this.props;
+    const { breadcrumbSeparator, home, itemRender, linkElement = 'a' } = this.props;
     // Convert the url to an array
     const pathSnippets = urlToList(routerLocation.pathname);
     // Loop data mosaic routing
     const extraBreadcrumbItems = pathSnippets.map((url, index) => {
-      console.log(url);
       const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
       const isLinkable = index !== pathSnippets.length - 1 && currentBreadcrumb.component;
-      const name = this.props.itemRender
-        ? this.props.itemRender(currentBreadcrumb)
-        : currentBreadcrumb.name;
+      const name = itemRender ? itemRender(currentBreadcrumb) : currentBreadcrumb.name;
       return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
         <Breadcrumb.Item key={url}>
           {createElement(
@@ -113,7 +117,7 @@ export default class PageHeader extends PureComponent {
           {
             [linkElement === 'a' ? 'href' : 'to']: '/',
           },
-          this.props.home || 'Home'
+          home || 'Home'
         )}
       </Breadcrumb.Item>
     );
