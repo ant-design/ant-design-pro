@@ -13,8 +13,8 @@ export default class GlobalHeader extends PureComponent {
     this.triggerResizeEvent.cancel();
   }
   getNoticeData() {
-    const { notices = [] } = this.props;
-    if (notices.length === 0) {
+    const { notices} = this.props;
+    if (notices == null || notices.length === 0) {
       return {};
     }
     const newNotices = notices.map(notice => {
@@ -66,6 +66,9 @@ export default class GlobalHeader extends PureComponent {
       onMenuClick,
       onNoticeClear,
     } = this.props;
+    if (currentUser == null) {
+      currentUser = {}
+    }
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item disabled>
