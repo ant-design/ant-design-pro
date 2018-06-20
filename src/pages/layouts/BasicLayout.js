@@ -3,6 +3,8 @@
 import React from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
+import { injectIntl } from 'react-intl';
+import memoizeOne from 'memoize-one';
 import { connect } from 'dva';
 // import { Route, Redirect, Switch } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
@@ -26,7 +28,7 @@ const { AuthorizedRoute, check } = Authorized;
  * @param {Object} menuData 菜单配置
  * @param {Object} routerData 路由配置
  */
-const getBreadcrumbNameMap = (meun, router) => {
+const getBreadcrumbNameMap = memoizeOne((meun, router) => {
   const routerMap = {};
   const mergeMeunAndRouter = meunData => {
     meunData.forEach(meunItem => {
@@ -38,7 +40,7 @@ const getBreadcrumbNameMap = (meun, router) => {
   };
   mergeMeunAndRouter(meun);
   return routerMap;
-};
+});
 
 const query = {
   'screen-xs': {
@@ -66,31 +68,38 @@ const query = {
 };
 
 class BasicLayout extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    const { routerData, menuData } = this.props;
+    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData, routerData);
+  }
+
   getContext() {
-    const { location, routerData, menuData } = this.props;
-    console.log(getBreadcrumbNameMap(menuData, routerData));
+    const { location } = this.props;
     return {
       location,
-      breadcrumbNameMap: getBreadcrumbNameMap(menuData, routerData),
+      breadcrumbNameMap: this.breadcrumbNameMap,
     };
   }
 
-  getPageTitle() {
-    const { routerData, location } = this.props;
-    const { pathname } = location;
-    let title = 'Ant Design Pro';
+  getPageTitle = pathname => {
     let currRouterData = null;
+    const { intl } = this.props;
     // match params path
-    Object.keys(routerData).forEach(key => {
+    Object.keys(this.breadcrumbNameMap).forEach(key => {
       if (pathToRegexp(key).test(pathname)) {
-        currRouterData = routerData[key];
+        currRouterData = this.breadcrumbNameMap[key];
       }
     });
-    if (currRouterData && currRouterData.name) {
-      title = `${currRouterData.name} - Ant Design Pro`;
+    if (!currRouterData) {
+      return 'Ant Design Pro';
     }
-    return title;
-  }
+    const message = intl.formatMessage({
+      id: currRouterData.locale || currRouterData.name,
+      defaultMessage: currRouterData.name,
+    });
+    return `${message} - Ant Design Pro`;
+  };
 
   getLayoutStyle = () => {
     const { fixSiderbar, collapsed, layout } = this.props;
@@ -148,7 +157,7 @@ class BasicLayout extends React.PureComponent {
       silderTheme,
       layout: PropsLayout,
       children,
-      // match,
+      location: { pathname },
     } = this.props;
     const isTop = PropsLayout === 'topmenu';
     // const bashRedirect = this.getBashRedirect();
@@ -190,9 +199,9 @@ class BasicLayout extends React.PureComponent {
         </Layout>
       </Layout>
     );
-
+    const getPageTitle = memoizeOne(this.getPageTitle);
     return (
-      <DocumentTitle title={this.getPageTitle()}>
+      <DocumentTitle title={getPageTitle(pathname)}>
         <ContainerQuery query={query}>
           {params => (
             <Context.Provider value={this.getContext()}>
@@ -212,4 +221,4 @@ export default connect(({ global, setting }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   ...setting,
-}))(BasicLayout);
+}))(injectIntl(BasicLayout));

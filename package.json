@@ -31,6 +31,7 @@
     "lodash-decorators": "^6.0.0",
     "lodash.isequal": "^4.5.0",
     "moment": "^2.22.2",
+    "memoize-one": "^3.1.1",
     "numeral": "^2.0.6",
     "omit.js": "^1.0.0",
     "path-to-regexp": "^2.1.0",
