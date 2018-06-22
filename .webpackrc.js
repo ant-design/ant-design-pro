@@ -38,7 +38,7 @@ export default {
         return localName;
       }
 
-      let antdProPath = context.resourcePath.match(/src(.*)/)[1];
+      let antdProPath = context.resourcePath.match(/src(.*)/)[1].replace('.less', '');
       if (context.resourcePath.includes('components')) {
         antdProPath = antdProPath.replace('components/', '');
       }
@@ -46,7 +46,6 @@ export default {
         .split('/')
         .map(a => a.replace(/([A-Z])/g, '-$1'))
         .map(a => a.toLowerCase());
-      arr.pop();
       return `antd-pro${arr.join('-')}-${localName}`.replace('--', '-');
     },
   },
