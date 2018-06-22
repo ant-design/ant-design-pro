@@ -10,7 +10,7 @@
     "build": "cross-env ESLINT=none roadhog build",
     "build-site": "roadhog-api-doc static",
     "site": "roadhog-api-doc static && gh-pages -d dist",
-    "analyze": "cross-env ANALYZE=true roadhog build",
+    "analyze": "cross-env ANALYZE=1 roadhog build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
     "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
@@ -24,7 +24,7 @@
   "dependencies": {
     "@antv/data-set": "^0.8.0",
     "antd": "^3.6.2",
-    "bizcharts": "^3.1.8",
+    "bizcharts": "^3.1.10",
     "bizcharts-plugin-slider": "^2.0.3",
     "classnames": "^2.2.6",
     "dva": "^2.3.1",

@@ -20,6 +20,11 @@ export default {
   alias: {
     components: path.resolve(__dirname, 'src/components/'),
   },
+  externals: {
+    '@antv/data-set': 'DataSet',
+    bizcharts: 'BizCharts',
+    rollbar: 'rollbar',
+  },
   ignoreMomentLocale: true,
   theme: './src/theme.js',
   html: {
