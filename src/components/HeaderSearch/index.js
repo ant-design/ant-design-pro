@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Input, Icon, AutoComplete } from 'antd';
 import classNames from 'classnames';
+import Debounce from 'lodash-decorators/debounce';
+import Bind from 'lodash-decorators/bind';
 import styles from './index.less';
 
 export default class HeaderSearch extends PureComponent {
@@ -29,14 +31,9 @@ export default class HeaderSearch extends PureComponent {
     searchMode: this.props.defaultOpen,
     value: '',
   };
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
   onKeyDown = e => {
     if (e.key === 'Enter') {
-      this.timeout = setTimeout(() => {
-        this.props.onPressEnter(this.state.value); // Fix duplicate onPressEnter
-      }, 0);
+      this.debouncePressEnter();
     }
   };
   onChange = value => {
@@ -45,6 +42,15 @@ export default class HeaderSearch extends PureComponent {
       this.props.onChange();
     }
   };
+  // NOTE: 不能小于500，如果长按某键，第一次触发auto repeat的间隔是500ms，小于500会导致触发2次
+  @Bind()
+  @Debounce(500, {
+    leading: true,
+    trailing: false,
+  })
+  debouncePressEnter() {
+    this.props.onPressEnter(this.state.value);
+  }
   enterSearchMode = () => {
     this.setState({ searchMode: true }, () => {
       if (this.state.searchMode) {
