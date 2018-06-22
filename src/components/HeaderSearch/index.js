@@ -25,44 +25,58 @@ export default class HeaderSearch extends PureComponent {
     defaultOpen: false,
   };
 
-  state = {
-    searchMode: this.props.defaultOpen,
-    value: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchMode: props.defaultOpen,
+      value: '',
+    };
+  }
+
   componentWillUnmount() {
     clearTimeout(this.timeout);
   }
+
   onKeyDown = e => {
     if (e.key === 'Enter') {
+      const { onPressEnter } = this.props;
+      const { value } = this.state;
       this.timeout = setTimeout(() => {
-        this.props.onPressEnter(this.state.value); // Fix duplicate onPressEnter
+        onPressEnter(value); // Fix duplicate onPressEnter
       }, 0);
     }
   };
+
   onChange = value => {
+    const { onChange } = this.props;
     this.setState({ value });
-    if (this.props.onChange) {
-      this.props.onChange();
+    if (onChange) {
+      onChange();
     }
   };
+
   enterSearchMode = () => {
     this.setState({ searchMode: true }, () => {
-      if (this.state.searchMode) {
+      const { searchMode } = this.state;
+      if (searchMode) {
         this.input.focus();
       }
     });
   };
+
   leaveSearchMode = () => {
     this.setState({
       searchMode: false,
       value: '',
     });
   };
+
   render() {
     const { className, placeholder, ...restProps } = this.props;
     delete restProps.defaultOpen; // for rc-select not affected
+    const { searchMode, value } = this.state;
     const inputClass = classNames(styles.input, {
-      [styles.show]: this.state.searchMode,
+      [styles.show]: searchMode,
     });
     return (
       <span className={classNames(className, styles.headerSearch)} onClick={this.enterSearchMode}>
@@ -71,7 +85,7 @@ export default class HeaderSearch extends PureComponent {
           key="AutoComplete"
           {...restProps}
           className={inputClass}
-          value={this.state.value}
+          value={value}
           onChange={this.onChange}
         >
           <Input

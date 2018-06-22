@@ -17,11 +17,15 @@ class LoginTab extends Component {
     super(props);
     this.uniqueId = generateId('login-tab-');
   }
+
   componentDidMount() {
-    this.props.tabUtil.addTab(this.uniqueId);
+    const { tabUtil } = this.props;
+    tabUtil.addTab(this.uniqueId);
   }
+
   render() {
-    return <TabPane {...this.props}>{this.props.children}</TabPane>;
+    const { children } = this.props;
+    return <TabPane {...this.props}>{children}</TabPane>;
   }
 }
 

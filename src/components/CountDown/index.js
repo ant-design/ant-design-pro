@@ -23,14 +23,32 @@ const initTime = props => {
 };
 
 class CountDown extends Component {
+  timer = 0;
+
+  interval = 1000;
+
   constructor(props) {
     super(props);
-
     const { lastTime } = initTime(props);
-
     this.state = {
       lastTime,
     };
+  }
+
+  componentDidMount() {
+    this.tick();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { target } = this.props;
+    if (target !== prevProps.target) {
+      clearTimeout(this.timer);
+      this.tick();
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   static getDerivedStateFromProps(nextProps, preState) {
@@ -43,23 +61,6 @@ class CountDown extends Component {
     return null;
   }
 
-  componentDidMount() {
-    this.tick();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.target !== prevProps.target) {
-      clearTimeout(this.timer);
-      this.tick();
-    }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-  }
-
-  timer = 0;
-  interval = 1000;
   // defaultFormat = time => (
   //  <span>{moment(time).format('hh:mm:ss')}</span>
   // );
@@ -76,6 +77,7 @@ class CountDown extends Component {
       </span>
     );
   };
+
   tick = () => {
     const { onEnd } = this.props;
     let { lastTime } = this.state;

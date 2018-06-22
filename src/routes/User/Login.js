@@ -27,22 +27,23 @@ export default class LoginPage extends Component {
         if (err) {
           reject(err);
         } else {
-          this.props
-            .dispatch({
-              type: 'login/getCaptcha',
-              payload: values.mobile,
-            })
+          const { dispatch } = this.props;
+          dispatch({
+            type: 'login/getCaptcha',
+            payload: values.mobile,
+          })
             .then(resolve)
             .catch(reject);
         }
       });
     });
   };
-  loginForm;
+
   handleSubmit = (err, values) => {
     const { type } = this.state;
     if (!err) {
-      this.props.dispatch({
+      const { dispatch } = this.props;
+      dispatch({
         type: 'login/login',
         payload: {
           ...values,
@@ -58,13 +59,15 @@ export default class LoginPage extends Component {
     });
   };
 
+  loginForm;
+
   renderMessage = content => {
     return <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />;
   };
 
   render() {
     const { login, submitting } = this.props;
-    const { type } = this.state;
+    const { type, autoLogin } = this.state;
     return (
       <div className={styles.main}>
         <Login
@@ -92,7 +95,7 @@ export default class LoginPage extends Component {
             <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
           </Tab>
           <div>
-            <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>
+            <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
               自动登录
             </Checkbox>
             <a style={{ float: 'right' }} href="">

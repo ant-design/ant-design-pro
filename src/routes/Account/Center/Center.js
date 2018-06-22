@@ -22,7 +22,7 @@ export default class Center extends PureComponent {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    this.props.dispatch({
+    dispatch({
       type: 'user/fetchCurrent',
     });
     dispatch({

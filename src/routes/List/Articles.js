@@ -30,7 +30,8 @@ export default class SearchList extends Component {
   };
 
   fetchMore = () => {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'list/appendFetch',
       payload: {
         count: pageSize,
@@ -39,7 +40,11 @@ export default class SearchList extends Component {
   };
 
   render() {
-    const { form, list: { list }, loading } = this.props;
+    const {
+      form,
+      list: { list },
+      loading,
+    } = this.props;
     const { getFieldDecorator } = form;
 
     const owners = [

@@ -44,7 +44,7 @@ export default class Center extends PureComponent {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    this.props.dispatch({
+    dispatch({
       type: 'user/fetchCurrent',
     });
     dispatch({
@@ -58,7 +58,7 @@ export default class Center extends PureComponent {
     });
   }
 
-  onTabChange = (key) => {
+  onTabChange = key => {
     this.setState({ key });
   };
 
@@ -66,11 +66,11 @@ export default class Center extends PureComponent {
     this.setState({ inputVisible: true }, () => this.input.focus());
   };
 
-  saveInputRef = (input) => {
+  saveInputRef = input => {
     this.input = input;
   };
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     this.setState({ inputValue: e.target.value });
   };
 
@@ -78,14 +78,8 @@ export default class Center extends PureComponent {
     const { state } = this;
     const { inputValue } = state;
     let { newTags } = state;
-    if (
-      inputValue &&
-      newTags.filter(tag => tag.label === inputValue).length === 0
-    ) {
-      newTags = [
-        ...newTags,
-        { key: `new-${newTags.length}`, label: inputValue },
-      ];
+    if (inputValue && newTags.filter(tag => tag.label === inputValue).length === 0) {
+      newTags = [...newTags, { key: `new-${newTags.length}`, label: inputValue }];
     }
     this.setState({
       newTags,
@@ -101,9 +95,7 @@ export default class Center extends PureComponent {
         {text}
       </span>
     );
-    const ListContent = ({
-      data: { content, updatedAt, avatar, owner, href },
-    }) => (
+    const ListContent = ({ data: { content, updatedAt, avatar, owner, href } }) => (
       <div className={stylesArticles.listContent}>
         <div className={stylesArticles.description}>{content}</div>
         <div className={stylesArticles.extra}>
@@ -132,10 +124,7 @@ export default class Center extends PureComponent {
           >
             <List.Item.Meta
               title={
-                <a
-                  className={stylesArticles.listItemMetaTitle}
-                  href={item.href}
-                >
+                <a className={stylesArticles.listItemMetaTitle} href={item.href}>
                   {item.title}
                 </a>
               }
@@ -158,29 +147,17 @@ export default class Center extends PureComponent {
     const itemMenu = (
       <Menu>
         <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.alipay.com/"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
             1st menu item
           </a>
         </Menu.Item>
         <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.taobao.com/"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
             2nd menu item
           </a>
         </Menu.Item>
         <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.tmall.com/"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
             3d menu item
           </a>
         </Menu.Item>
@@ -225,10 +202,7 @@ export default class Center extends PureComponent {
                 </Dropdown>,
               ]}
             >
-              <Card.Meta
-                avatar={<Avatar size="small" src={item.avatar} />}
-                title={item.title}
-              />
+              <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
               <div className={stylesApplications.cardItemContent}>
                 <CardInfo
                   activeUser={formatWan(item.activeUser)}
@@ -257,10 +231,7 @@ export default class Center extends PureComponent {
               hoverable
               cover={<img alt={item.title} src={item.cover} />}
             >
-              <Card.Meta
-                title={<a href="#">{item.title}</a>}
-                description={item.subDescription}
-              />
+              <Card.Meta title={<a href="#">{item.title}</a>} description={item.subDescription} />
               <div className={stylesProjects.cardItemContent}>
                 <span>{moment(item.updatedAt).fromNow()}</span>
                 <div className={stylesProjects.avatarList}>
@@ -281,6 +252,7 @@ export default class Center extends PureComponent {
       />
     );
   };
+
   renderContent() {
     const { newTags, inputVisible, inputValue } = this.state;
     const {
@@ -335,9 +307,7 @@ export default class Center extends PureComponent {
         <Divider dashed />
         <div className={styles.tags}>
           <div className={styles.tagsTitle}>标签</div>
-          {currentUser.tags
-            .concat(newTags)
-            .map(item => <Tag key={item.key}>{item.label}</Tag>)}
+          {currentUser.tags.concat(newTags).map(item => <Tag key={item.key}>{item.label}</Tag>)}
           {inputVisible && (
             <Input
               ref={this.saveInputRef}
@@ -351,10 +321,7 @@ export default class Center extends PureComponent {
             />
           )}
           {!inputVisible && (
-            <Tag
-              onClick={this.showInput}
-              style={{ background: '#fff', borderStyle: 'dashed' }}
-            >
+            <Tag onClick={this.showInput} style={{ background: '#fff', borderStyle: 'dashed' }}>
               <Icon type="plus" />
             </Tag>
           )}
@@ -378,6 +345,7 @@ export default class Center extends PureComponent {
       </div>
     );
   }
+
   render() {
     const {
       list: { list },
@@ -416,17 +384,13 @@ export default class Center extends PureComponent {
       application: this.renderApplications(list, listLoading),
       project: this.renderProjects(list, listLoading),
     };
-
+    const { key } = this.state;
     return (
       <GridContent>
         <div className={styles.userCenter}>
           <Row gutter={24}>
             <Col lg={7} md={24}>
-              <Card
-                bordered={false}
-                style={{ marginBottom: 24 }}
-                loading={currentUserLoading}
-              >
+              <Card bordered={false} style={{ marginBottom: 24 }} loading={currentUserLoading}>
                 {currentUser && Object.keys(currentUser).length
                   ? this.renderContent()
                   : 'loading...'}
@@ -439,7 +403,7 @@ export default class Center extends PureComponent {
                 tabList={operationTabList}
                 onTabChange={this.onTabChange}
               >
-                {contentMap[this.state.key]}
+                {contentMap[key]}
               </Card>
             </Col>
           </Row>

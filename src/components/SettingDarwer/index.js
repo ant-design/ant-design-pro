@@ -21,7 +21,9 @@ const Body = ({ children, title, style }) => (
 @connect(({ setting }) => ({ setting }))
 class SettingDarwer extends PureComponent {
   componentDidMount() {
-    const { themeColor, colorWeak } = this.props.setting;
+    const {
+      setting: { themeColor, colorWeak },
+    } = this.props;
     if (themeColor !== '#1890FF') {
       window.less.refresh().then(() => {
         this.colorChange(themeColor);
@@ -31,8 +33,11 @@ class SettingDarwer extends PureComponent {
       document.body.className = 'colorWeak';
     }
   }
+
   getLayOutSetting = () => {
-    const { grid, fixedHeader, autoHideHeader, fixSiderbar } = this.props.setting;
+    const {
+      setting: { grid, fixedHeader, autoHideHeader, fixSiderbar },
+    } = this.props;
     return [
       {
         title: '栅格模式',
@@ -83,8 +88,10 @@ class SettingDarwer extends PureComponent {
       return !item.hide;
     });
   };
+
   changeSetting = (key, value) => {
-    const nextState = { ...this.props.setting };
+    const { setting } = this.props;
+    const nextState = { ...setting };
     nextState[key] = value;
     if (key === 'layout') {
       if (value === 'topmenu') {
@@ -106,15 +113,19 @@ class SettingDarwer extends PureComponent {
       }
     }
     this.setState(nextState, () => {
-      this.props.dispatch({
+      const { dispatch } = this.props;
+      dispatch({
         type: 'setting/changeSetting',
         payload: this.state,
       });
     });
   };
+
   togglerContent = () => {
-    this.changeSetting('collapse', !this.props.setting.collapse);
+    const { setting } = this.props;
+    this.changeSetting('collapse', !setting.collapse);
   };
+
   colorChange = color => {
     this.changeSetting('themeColor', color);
     const hideMessage = message.loading('正在编译主题！', 0);
@@ -131,8 +142,11 @@ class SettingDarwer extends PureComponent {
         });
     }, 200);
   };
+
   render() {
-    const { collapse, silderTheme, themeColor, layout, colorWeak } = this.props.setting;
+    const {
+      setting: { collapse, silderTheme, themeColor, layout, colorWeak },
+    } = this.props;
     return (
       <div className={styles.settingDarwer}>
         <DrawerMenu

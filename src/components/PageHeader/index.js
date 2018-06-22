@@ -27,29 +27,36 @@ export default class PageHeader extends PureComponent {
   }
 
   componentDidUpdate(preProps) {
-    if (preProps.tabActiveKey !== this.props.tabActiveKey) {
+    const { tabActiveKey } = this.props;
+    if (preProps.tabActiveKey !== tabActiveKey) {
       this.getBreadcrumbDom();
     }
   }
+
   onChange = key => {
-    if (this.props.onTabChange) {
-      this.props.onTabChange(key);
+    const { onTabChange } = this.props;
+    if (onTabChange) {
+      onTabChange(key);
     }
   };
+
   getBreadcrumbProps = () => {
+    const { routes, params, location, breadcrumbNameMap } = this.props;
     return {
-      routes: this.props.routes,
-      params: this.props.params,
-      routerLocation: this.props.location,
-      breadcrumbNameMap: this.props.breadcrumbNameMap,
+      routes,
+      params,
+      routerLocation: location,
+      breadcrumbNameMap,
     };
   };
+
   getBreadcrumbDom = () => {
     const breadcrumb = this.conversionBreadcrumbList();
     this.setState({
       breadcrumb,
     });
   };
+
   // Generated according to props
   conversionFromProps = () => {
     const { breadcrumbList, breadcrumbSeparator, linkElement = 'a' } = this.props;
@@ -71,6 +78,7 @@ export default class PageHeader extends PureComponent {
       </Breadcrumb>
     );
   };
+
   conversionFromLocation = (routerLocation, breadcrumbNameMap) => {
     const { breadcrumbSeparator, linkElement = 'a' } = this.props;
     // Convert the url to an array
@@ -107,6 +115,7 @@ export default class PageHeader extends PureComponent {
       </Breadcrumb>
     );
   };
+
   /**
    * 将参数转化为面包屑
    * Convert parameters into breadcrumbs
@@ -137,6 +146,7 @@ export default class PageHeader extends PureComponent {
     }
     return null;
   };
+
   // 渲染Breadcrumb 子节点
   // Render the Breadcrumb child node
   itemRender = (route, params, routes, paths) => {
@@ -178,10 +188,10 @@ export default class PageHeader extends PureComponent {
     if (tabActiveKey !== undefined) {
       activeKeyProps.activeKey = tabActiveKey;
     }
-
+    const { breadcrumb } = this.state;
     return (
       <div className={clsString}>
-        {this.state.breadcrumb}
+        {breadcrumb}
         <div className={styles.detail}>
           {logo && <div className={styles.logo}>{logo}</div>}
           <div className={styles.main}>

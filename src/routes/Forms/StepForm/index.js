@@ -23,6 +23,7 @@ export default class StepForm extends PureComponent {
         return 0;
     }
   }
+
   render() {
     const { match, routerData, location } = this.props;
     return (
