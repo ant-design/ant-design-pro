@@ -34,36 +34,44 @@ class LoadingPage extends PureComponent {
     loading: true,
     isMobile: false,
   };
+
   componentDidMount() {
+    const { dispatch } = this.props;
     this.enquireHandler = enquireScreen(mobile => {
       this.setState({
         isMobile: mobile,
       });
     });
-    this.props.dispatch({
+    dispatch({
       type: 'user/fetchCurrent',
     });
     this.hideLoading();
     this.initSetting();
   }
+
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);
   }
+
   hideLoading() {
     this.setState({
       loading: false,
     });
   }
+
   /**
    * get setting from url params
    */
   initSetting() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'setting/getSetting',
     });
   }
+
   render() {
-    if (this.state.loading) {
+    const { loading, isMobile } = this.state;
+    if (loading) {
       return (
         <div
           style={{
@@ -80,7 +88,7 @@ class LoadingPage extends PureComponent {
     }
     return (
       <BasicLayout
-        isMobile={this.state.isMobile}
+        isMobile={isMobile}
         menuData={MenuData}
         redirectData={redirectData}
         {...this.props}

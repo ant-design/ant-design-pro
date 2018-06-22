@@ -20,19 +20,9 @@ const renderTotal = total => {
 };
 
 class ChartCard extends React.PureComponent {
-  state = {
-    loading: true,
-  };
-  componentDidMount() {
-    requestAnimationFrame(() => {
-      this.setState({
-        loading: false,
-      });
-    });
-  }
   renderConnet = () => {
     const { contentHeight, title, avatar, action, total, footer, children, loading } = this.props;
-    if (loading || this.state.loading) {
+    if (loading) {
       return false;
     }
     return (
@@ -68,6 +58,7 @@ class ChartCard extends React.PureComponent {
       </div>
     );
   };
+
   render() {
     const {
       loading = false,
@@ -81,11 +72,7 @@ class ChartCard extends React.PureComponent {
       ...rest
     } = this.props;
     return (
-      <Card
-        loading={loading || this.state.loading}
-        bodyStyle={{ padding: '20px 24px 8px 24px' }}
-        {...rest}
-      >
+      <Card loading={loading} bodyStyle={{ padding: '20px 24px 8px 24px' }} {...rest}>
         {this.renderConnet()}
       </Card>
     );
