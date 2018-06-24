@@ -63,7 +63,11 @@ export default class FilterCardList extends PureComponent {
   };
 
   render() {
-    const { list: { list }, loading, form } = this.props;
+    const {
+      list: { list },
+      loading,
+      form,
+    } = this.props;
     const { getFieldDecorator } = form;
 
     const CardInfo = ({ activeUser, newUser }) => (

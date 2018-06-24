@@ -12,8 +12,9 @@ export default class GlobalHeader extends PureComponent {
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
   }
+
   getNoticeData() {
-    const { notices} = this.props;
+    const { notices } = this.props;
     if (notices == null || notices.length === 0) {
       return {};
     }
@@ -43,6 +44,7 @@ export default class GlobalHeader extends PureComponent {
     });
     return groupBy(newNotices, 'type');
   }
+
   toggle = () => {
     const { collapsed, onCollapse } = this.props;
     onCollapse(!collapsed);
@@ -67,7 +69,7 @@ export default class GlobalHeader extends PureComponent {
       onNoticeClear,
     } = this.props;
     if (currentUser == null) {
-      currentUser = {}
+      currentUser = {};
     }
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>

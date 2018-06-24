@@ -21,6 +21,7 @@ export default class NoticeIcon extends PureComponent {
     },
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -28,14 +29,17 @@ export default class NoticeIcon extends PureComponent {
       this.state.tabType = props.children[0].props.title;
     }
   }
+
   onItemClick = (item, tabProps) => {
     const { onItemClick } = this.props;
     onItemClick(item, tabProps);
   };
+
   onTabChange = tabType => {
     this.setState({ tabType });
     this.props.onTabChange(tabType);
   };
+
   getNotificationBox() {
     const { children, loading, locale } = this.props;
     if (!children) {
@@ -67,6 +71,7 @@ export default class NoticeIcon extends PureComponent {
       </Spin>
     );
   }
+
   render() {
     const { className, count, popupAlign, onPopupVisibleChange } = this.props;
     const noticeButtonClass = classNames(className, styles.noticeButton);

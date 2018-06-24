@@ -14,18 +14,22 @@ const generateId = (() => {
 
 export default class LoginTab extends Component {
   static __ANT_PRO_LOGIN_TAB = true;
+
   static contextTypes = {
     tabUtil: PropTypes.object,
   };
+
   constructor(props) {
     super(props);
     this.uniqueId = generateId('login-tab-');
   }
+
   componentWillMount() {
     if (this.context.tabUtil) {
       this.context.tabUtil.addTab(this.uniqueId);
     }
   }
+
   render() {
     return <TabPane {...this.props} />;
   }

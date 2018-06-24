@@ -40,11 +40,13 @@ export default class PageHeader extends PureComponent {
       this.getBreadcrumbDom();
     }
   }
+
   onChange = key => {
     if (this.props.onTabChange) {
       this.props.onTabChange(key);
     }
   };
+
   getBreadcrumbProps = () => {
     return {
       routes: this.props.routes || this.context.routes,
@@ -53,12 +55,14 @@ export default class PageHeader extends PureComponent {
       breadcrumbNameMap: this.props.breadcrumbNameMap || this.context.breadcrumbNameMap,
     };
   };
+
   getBreadcrumbDom = () => {
     const breadcrumb = this.conversionBreadcrumbList();
     this.setState({
       breadcrumb,
     });
   };
+
   // Generated according to props
   conversionFromProps = () => {
     const { breadcrumbList, breadcrumbSeparator, linkElement = 'a' } = this.props;
@@ -80,6 +84,7 @@ export default class PageHeader extends PureComponent {
       </Breadcrumb>
     );
   };
+
   conversionFromLocation = (routerLocation, breadcrumbNameMap) => {
     const { breadcrumbSeparator, linkElement = 'a' } = this.props;
     // Convert the url to an array
@@ -116,6 +121,7 @@ export default class PageHeader extends PureComponent {
       </Breadcrumb>
     );
   };
+
   /**
    * 将参数转化为面包屑
    * Convert parameters into breadcrumbs
@@ -146,6 +152,7 @@ export default class PageHeader extends PureComponent {
     }
     return null;
   };
+
   // 渲染Breadcrumb 子节点
   // Render the Breadcrumb child node
   itemRender = (route, params, routes, paths) => {

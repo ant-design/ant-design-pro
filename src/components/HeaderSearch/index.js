@@ -31,17 +31,20 @@ export default class HeaderSearch extends PureComponent {
     searchMode: this.props.defaultOpen,
     value: '',
   };
+
   onKeyDown = e => {
     if (e.key === 'Enter') {
       this.debouncePressEnter();
     }
   };
+
   onChange = value => {
     this.setState({ value });
     if (this.props.onChange) {
       this.props.onChange();
     }
   };
+
   // NOTE: 不能小于500，如果长按某键，第一次触发auto repeat的间隔是500ms，小于500会导致触发2次
   @Bind()
   @Debounce(500, {
@@ -51,6 +54,7 @@ export default class HeaderSearch extends PureComponent {
   debouncePressEnter() {
     this.props.onPressEnter(this.state.value);
   }
+
   enterSearchMode = () => {
     this.setState({ searchMode: true }, () => {
       if (this.state.searchMode) {
@@ -58,12 +62,14 @@ export default class HeaderSearch extends PureComponent {
       }
     });
   };
+
   leaveSearchMode = () => {
     this.setState({
       searchMode: false,
       value: '',
     });
   };
+
   render() {
     const { className, placeholder, ...restProps } = this.props;
     delete restProps.defaultOpen; // for rc-select not affected

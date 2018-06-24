@@ -10,6 +10,7 @@ export default class TriggerException extends PureComponent {
   state = {
     isloading: false,
   };
+
   triggerError = code => {
     this.setState({
       isloading: true,
@@ -21,6 +22,7 @@ export default class TriggerException extends PureComponent {
       },
     });
   };
+
   render() {
     return (
       <Card>

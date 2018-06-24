@@ -189,7 +189,10 @@ export default class WaterWave extends PureComponent {
         </div>
         <div className={styles.text} style={{ width: height }}>
           {title && <span>{title}</span>}
-          <h4>{percent}%</h4>
+          <h4>
+            {percent}
+            %
+          </h4>
         </div>
       </div>
     );

@@ -11,6 +11,7 @@ export default class TableForm extends PureComponent {
       loading: false,
     };
   }
+
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
       this.setState({
@@ -18,11 +19,15 @@ export default class TableForm extends PureComponent {
       });
     }
   }
+
   getRowByKey(key, newData) {
     return (newData || this.state.data).filter(item => item.key === key)[0];
   }
+
   index = 0;
+
   cacheOriginData = {};
+
   toggleEditable = (e, key) => {
     e.preventDefault();
     const newData = this.state.data.map(item => ({ ...item }));
@@ -36,11 +41,13 @@ export default class TableForm extends PureComponent {
       this.setState({ data: newData });
     }
   };
+
   remove(key) {
     const newData = this.state.data.filter(item => item.key !== key);
     this.setState({ data: newData });
     this.props.onChange(newData);
   }
+
   newMember = () => {
     const newData = this.state.data.map(item => ({ ...item }));
     newData.push({
@@ -54,11 +61,13 @@ export default class TableForm extends PureComponent {
     this.index += 1;
     this.setState({ data: newData });
   };
+
   handleKeyPress(e, key) {
     if (e.key === 'Enter') {
       this.saveRow(e, key);
     }
   }
+
   handleFieldChange(e, fieldName, key) {
     const newData = this.state.data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
@@ -67,6 +76,7 @@ export default class TableForm extends PureComponent {
       this.setState({ data: newData });
     }
   }
+
   saveRow(e, key) {
     e.persist();
     this.setState({
@@ -94,6 +104,7 @@ export default class TableForm extends PureComponent {
       });
     }, 500);
   }
+
   cancel(e, key) {
     this.clickedCancel = true;
     e.preventDefault();
@@ -107,6 +118,7 @@ export default class TableForm extends PureComponent {
     this.setState({ data: newData });
     this.clickedCancel = false;
   }
+
   render() {
     const columns = [
       {

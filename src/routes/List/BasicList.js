@@ -39,7 +39,10 @@ export default class BasicList extends PureComponent {
   }
 
   render() {
-    const { list: { list }, loading } = this.props;
+    const {
+      list: { list },
+      loading,
+    } = this.props;
 
     const Info = ({ title, value, bordered }) => (
       <div className={styles.headerInfo}>

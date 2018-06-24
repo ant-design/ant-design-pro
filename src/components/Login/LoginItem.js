@@ -14,20 +14,24 @@ function generator({ defaultProps, defaultRules, type }) {
         form: PropTypes.object,
         updateActive: PropTypes.func,
       };
+
       constructor(props) {
         super(props);
         this.state = {
           count: 0,
         };
       }
+
       componentDidMount() {
         if (this.context.updateActive) {
           this.context.updateActive(this.props.name);
         }
       }
+
       componentWillUnmount() {
         clearInterval(this.interval);
       }
+
       onGetCaptcha = () => {
         let count = 59;
         this.setState({ count });
@@ -42,6 +46,7 @@ function generator({ defaultProps, defaultRules, type }) {
           }
         }, 1000);
       };
+
       render() {
         const { getFieldDecorator } = this.context.form;
         const options = {};

@@ -61,12 +61,15 @@ class AdvancedForm extends PureComponent {
   state = {
     width: '100%',
   };
+
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar);
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeFooterToolbar);
   }
+
   resizeFooterToolbar = () => {
     const sider = document.querySelectorAll('.ant-layout-sider')[0];
     const width = `calc(100% - ${sider.style.width})`;
@@ -74,6 +77,7 @@ class AdvancedForm extends PureComponent {
       this.setState({ width });
     }
   };
+
   render() {
     const { form, dispatch, submitting } = this.props;
     const { getFieldDecorator, validateFieldsAndScroll, getFieldsError } = form;

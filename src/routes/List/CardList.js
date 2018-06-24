@@ -22,7 +22,10 @@ export default class CardList extends PureComponent {
   }
 
   render() {
-    const { list: { list }, loading } = this.props;
+    const {
+      list: { list },
+      loading,
+    } = this.props;
 
     const content = (
       <div className={styles.pageHeaderContent}>

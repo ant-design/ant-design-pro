@@ -89,9 +89,11 @@ class BasicLayout extends React.PureComponent {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
   };
+
   state = {
     isMobile,
   };
+
   getChildContext() {
     const { location, routerData } = this.props;
     return {
@@ -99,6 +101,7 @@ class BasicLayout extends React.PureComponent {
       breadcrumbNameMap: getBreadcrumbNameMap(getMenuData(), routerData),
     };
   }
+
   componentDidMount() {
     this.enquireHandler = enquireScreen(mobile => {
       this.setState({
@@ -109,9 +112,11 @@ class BasicLayout extends React.PureComponent {
       type: 'user/fetchCurrent',
     });
   }
+
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);
   }
+
   getPageTitle() {
     const { routerData, location } = this.props;
     const { pathname } = location;
@@ -128,6 +133,7 @@ class BasicLayout extends React.PureComponent {
     }
     return title;
   }
+
   getBaseRedirect = () => {
     // According to the url parameter to redirect
     // 这里是重定向的,重定向到 url 的 redirect 参数所示地址
@@ -148,12 +154,14 @@ class BasicLayout extends React.PureComponent {
     }
     return redirect;
   };
+
   handleMenuCollapse = collapsed => {
     this.props.dispatch({
       type: 'global/changeLayoutCollapsed',
       payload: collapsed,
     });
   };
+
   handleNoticeClear = type => {
     message.success(`清空了${type}`);
     this.props.dispatch({
@@ -161,6 +169,7 @@ class BasicLayout extends React.PureComponent {
       payload: type,
     });
   };
+
   handleMenuClick = ({ key }) => {
     if (key === 'triggerError') {
       this.props.dispatch(routerRedux.push('/exception/trigger'));
@@ -172,6 +181,7 @@ class BasicLayout extends React.PureComponent {
       });
     }
   };
+
   handleNoticeVisibleChange = visible => {
     if (visible) {
       this.props.dispatch({
@@ -179,6 +189,7 @@ class BasicLayout extends React.PureComponent {
       });
     }
   };
+
   render() {
     const {
       currentUser,

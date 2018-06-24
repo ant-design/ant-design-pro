@@ -16,13 +16,15 @@ const extra = (
       您提交的内容有如下错误：
     </div>
     <div style={{ marginBottom: 16 }}>
-      <Icon style={{ color: '#f5222d', marginRight: 8 }} type="close-circle-o" />您的账户已被冻结
+      <Icon style={{ color: '#f5222d', marginRight: 8 }} type="close-circle-o" />
+      您的账户已被冻结
       <a style={{ marginLeft: 16 }}>
         立即解冻 <Icon type="right" />
       </a>
     </div>
     <div>
-      <Icon style={{ color: '#f5222d', marginRight: 8 }} type="close-circle-o" />您的账户还不具备申请资格
+      <Icon style={{ color: '#f5222d', marginRight: 8 }} type="close-circle-o" />
+      您的账户还不具备申请资格
       <a style={{ marginLeft: 16 }}>
         立即升级 <Icon type="right" />
       </a>
