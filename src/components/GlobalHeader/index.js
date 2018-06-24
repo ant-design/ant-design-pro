@@ -68,9 +68,6 @@ export default class GlobalHeader extends PureComponent {
       onMenuClick,
       onNoticeClear,
     } = this.props;
-    if (currentUser == null) {
-      currentUser = {};
-    }
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item disabled>
