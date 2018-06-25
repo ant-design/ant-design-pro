@@ -138,7 +138,8 @@ export default class BasicForms extends PureComponent {
               {...formItemLayout}
               label={
                 <span>
-                  邀评人<em className={styles.optional}>（选填）</em>
+                  邀评人
+                  <em className={styles.optional}>（选填）</em>
                 </span>
               }
             >
@@ -150,7 +151,8 @@ export default class BasicForms extends PureComponent {
               {...formItemLayout}
               label={
                 <span>
-                  权重<em className={styles.optional}>（选填）</em>
+                  权重
+                  <em className={styles.optional}>（选填）</em>
                 </span>
               }
             >

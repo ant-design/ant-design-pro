@@ -19,26 +19,27 @@ const getFlatMenuKeys = menuData => {
   return keys;
 };
 
-const SiderMenuWrapper = props =>
-  props.isMobile ? (
+const SiderMenuWrapper = props => {
+  const { isMobile, menuData, collapsed } = props;
+  return isMobile ? (
     <DrawerMenu
-      parent={null}
+      getContainer={null}
       level={null}
       handleChild={null}
-      open={!props.collapsed}
+      open={!collapsed}
       onMaskClick={() => {
         props.onCollapse(true);
       }}
-      width="256px"
     >
       <SiderMenu
         {...props}
-        flatMenuKeys={getFlatMenuKeys(props.menuData)}
-        collapsed={props.isMobile ? false : props.collapsed}
+        flatMenuKeys={getFlatMenuKeys(menuData)}
+        collapsed={isMobile ? false : collapsed}
       />
     </DrawerMenu>
   ) : (
-    <SiderMenu {...props} flatMenuKeys={getFlatMenuKeys(props.menuData)} />
+    <SiderMenu {...props} flatMenuKeys={getFlatMenuKeys(menuData)} />
   );
+};
 
 export default SiderMenuWrapper;
