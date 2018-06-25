@@ -128,6 +128,7 @@ export default class Pie extends Component {
       colors,
       lineWidth = 1,
     } = this.props;
+    let { tooltip = true } = this.props;
 
     const { legendData, legendBlock } = this.state;
     const pieClassName = classNames(styles.pie, className, {
@@ -138,7 +139,6 @@ export default class Pie extends Component {
     const defaultColors = colors;
     let data = this.props.data || [];
     let selected = this.props.selected || true;
-    let tooltip = this.props.tooltip || true;
     let formatColor;
 
     const scale = {
