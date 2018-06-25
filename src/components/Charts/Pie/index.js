@@ -138,11 +138,15 @@ export default class Pie extends Component {
       [styles.legendBlock]: legendBlock,
     });
 
-    const { data: propsData, selected: propsSelected, tooltip: propsTooltip } = this.props;
+    const {
+      data: propsData,
+      selected: propsSelected = true,
+      tooltip: propsTooltip = true,
+    } = this.props;
 
     let data = propsData || [];
-    let selected = propsSelected || true;
-    let tooltip = propsTooltip || true;
+    let selected = propsSelected;
+    let tooltip = propsTooltip;
 
     const defaultColors = colors;
     // let data = this.props.data || [];
