@@ -73,14 +73,14 @@ class AdvancedForm extends PureComponent {
   resizeFooterToolbar = () => {
     const sider = document.querySelectorAll('.ant-layout-sider')[0];
     const width = `calc(100% - ${sider.style.width})`;
-    const { width: w } = this.state;
-    if (w !== width) {
+    const { width: stateWidth } = this.state;
+    if (stateWidth !== width) {
       this.setState({ width });
     }
   };
 
   render() {
-    const { width: w } = this.state;
+    const { width: stateWidth } = this.state;
     const { form, dispatch, submitting } = this.props;
     const { getFieldDecorator, validateFieldsAndScroll, getFieldsError } = form;
     const validate = () => {
@@ -289,7 +289,7 @@ class AdvancedForm extends PureComponent {
             initialValue: tableData,
           })(<TableForm />)}
         </Card>
-        <FooterToolbar style={{ width: w }}>
+        <FooterToolbar style={{ width: stateWidth }}>
           {getErrorInfo()}
           <Button type="primary" onClick={validate} loading={submitting}>
             提交
