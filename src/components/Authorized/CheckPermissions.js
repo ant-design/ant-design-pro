@@ -1,6 +1,6 @@
 import React from 'react';
 import PromiseRender from './PromiseRender';
-import { CURRENT } from './index';
+import { CURRENT } from './renderAuthorize';
 
 function isPromise(obj) {
   return (
