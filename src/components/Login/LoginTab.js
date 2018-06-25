@@ -25,8 +25,9 @@ export default class LoginTab extends Component {
   }
 
   componentWillMount() {
-    if (this.context.tabUtil) {
-      this.context.tabUtil.addTab(this.uniqueId);
+    const { tabUtil } = this.context;
+    if (tabUtil) {
+      tabUtil.addTab(this.uniqueId);
     }
   }
 

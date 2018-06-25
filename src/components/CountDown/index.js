@@ -5,6 +5,10 @@ function fixedZero(val) {
 }
 
 class CountDown extends Component {
+  timer = 0;
+
+  interval = 1000;
+
   constructor(props) {
     super(props);
 
@@ -20,7 +24,8 @@ class CountDown extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.target !== nextProps.target) {
+    const { target } = this.props;
+    if (target !== nextProps.target) {
       clearTimeout(this.timer);
       const { lastTime } = this.initTime(nextProps);
       this.setState(
@@ -37,10 +42,6 @@ class CountDown extends Component {
   componentWillUnmount() {
     clearTimeout(this.timer);
   }
-
-  timer = 0;
-
-  interval = 1000;
 
   initTime = props => {
     let lastTime = 0;
