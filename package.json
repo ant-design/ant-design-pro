@@ -9,7 +9,7 @@
     "start:no-proxy": "cross-env NO_PROXY=true ESLINT=none roadhog dev",
     "build": "cross-env ESLINT=none roadhog build",
     "build-site": "roadhog-api-doc static",
-    "site": "roadhog-api-doc static && gh-pages -d dist",
+    "site": "npm run build && firebase deploy",
     "analyze": "cross-env ANALYZE=1 roadhog build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
