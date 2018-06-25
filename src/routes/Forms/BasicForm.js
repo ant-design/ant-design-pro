@@ -27,9 +27,10 @@ const { TextArea } = Input;
 export default class BasicForms extends PureComponent {
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    const { form, dispatch } = this.props;
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.props.dispatch({
+        dispatch({
           type: 'form/submitRegularForm',
           payload: values,
         });
@@ -38,8 +39,8 @@ export default class BasicForms extends PureComponent {
   };
 
   render() {
-    const { submitting } = this.props;
-    const { getFieldDecorator, getFieldValue } = this.props.form;
+    const { submitting, form } = this.props;
+    const { getFieldDecorator, getFieldValue } = form;
 
     const formItemLayout = {
       labelCol: {

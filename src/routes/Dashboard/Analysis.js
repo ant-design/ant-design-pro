@@ -44,8 +44,8 @@ for (let i = 0; i < 7; i += 1) {
 
 const Yuan = ({ children }) => (
   <span
-    dangerouslySetInnerHTML={{ __html: yuan(children) }}
-  /> /* eslint-disable-line react/no-danger */
+    dangerouslySetInnerHTML={{ __html: yuan(children) }} /* eslint-disable-line react/no-danger */
+  />
 );
 
 @connect(({ chart, loading }) => ({
@@ -60,7 +60,8 @@ export default class Analysis extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'chart/fetch',
     });
   }
@@ -89,7 +90,8 @@ export default class Analysis extends Component {
       rangePickerValue,
     });
 
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'chart/fetchSalesData',
     });
   };
@@ -99,7 +101,8 @@ export default class Analysis extends Component {
       rangePickerValue: getTimeDistance(type),
     });
 
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'chart/fetchSalesData',
     });
   };

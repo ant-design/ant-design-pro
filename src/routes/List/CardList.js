@@ -13,7 +13,8 @@ import styles from './CardList.less';
 }))
 export default class CardList extends PureComponent {
   componentDidMount() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'list/fetch',
       payload: {
         count: 8,

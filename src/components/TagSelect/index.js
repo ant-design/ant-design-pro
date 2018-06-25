@@ -15,10 +15,13 @@ const TagSelectOption = ({ children, checked, onChange, value }) => (
 TagSelectOption.isTagSelectOption = true;
 
 class TagSelect extends Component {
-  state = {
-    expand: false,
-    value: this.props.value || this.props.defaultValue || [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      expand: false,
+      value: props.value || props.defaultValue || [],
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps && nextProps.value) {
@@ -54,7 +57,8 @@ class TagSelect extends Component {
   }
 
   handleTagChange = (value, checked) => {
-    const checkedTags = [...this.state.value];
+    const { value: v } = this.state;
+    const checkedTags = [...v];
 
     const index = checkedTags.indexOf(value);
     if (checked && index === -1) {
@@ -66,8 +70,9 @@ class TagSelect extends Component {
   };
 
   handleExpand = () => {
+    const { expand } = this.state;
     this.setState({
-      expand: !this.state.expand,
+      expand: !expand,
     });
   };
 
