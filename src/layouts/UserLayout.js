@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
-import { getRoutes, getPageQuery } from '../utils/utils';
+import { getRoutes, getPageQuery, getQueryPath } from '../utils/utils';
 
 const links = [
   {
@@ -32,13 +32,11 @@ const copyright = (
 );
 
 function getLoginPathWithRedirectPath() {
-  const routePath = '/user/login';
   const params = getPageQuery();
   const { redirect } = params;
-  if (redirect) {
-    return `${routePath}?redirect=${encodeURIComponent(redirect)}`;
-  }
-  return routePath;
+  return getQueryPath('/user/login', {
+    redirect,
+  });
 }
 
 class UserLayout extends React.PureComponent {
