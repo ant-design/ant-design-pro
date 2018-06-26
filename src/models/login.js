@@ -2,7 +2,7 @@ import { routerRedux } from 'dva/router';
 import { fakeAccountLogin } from '../services/api';
 import { setAuthority } from '../utils/authority';
 import { reloadAuthorized } from '../utils/Authorized';
-import { getPageQuery } from '../utils/utils';
+import { getPageQuery, getQueryPath } from '../utils/utils';
 
 export default {
   namespace: 'login',
@@ -49,7 +49,11 @@ export default {
       });
       reloadAuthorized();
       yield put(
-        routerRedux.push(`/user/login?redirect=${encodeURIComponent(window.location.href)}`)
+        routerRedux.push(
+          getQueryPath('/user/login', {
+            redirect: window.location.href,
+          })
+        )
       );
     },
   },
