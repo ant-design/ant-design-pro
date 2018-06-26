@@ -2,6 +2,7 @@ import { routerRedux } from 'dva/router';
 import { fakeAccountLogin } from '../services/api';
 import { setAuthority } from '../utils/authority';
 import { reloadAuthorized } from '../utils/Authorized';
+import { getPageQuery } from '../utils/utils';
 
 export default {
   namespace: 'login',
@@ -21,11 +22,15 @@ export default {
       if (response.status === 'ok') {
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
-        let redirect = urlParams.searchParams.get('redirect');
+        const params = getPageQuery();
+        let { redirect } = params;
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
           if (redirectUrlParams.origin === urlParams.origin) {
             redirect = redirect.substr(urlParams.origin.length);
+            if (redirect.startsWith('/#')) {
+              redirect = redirect.substr(2);
+            }
           } else {
             window.location.href = redirect;
             return;
