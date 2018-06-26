@@ -26,7 +26,7 @@ function RouterConfig({ history, app }) {
             path="/"
             render={props => <BasicLayout {...props} />}
             authority={['admin', 'user']}
-            redirectPath="/user/login"
+            redirectPath={`/user/login?redirect=${encodeURIComponent(window.location.href)}`}
           />
         </Switch>
       </ConnectedRouter>
