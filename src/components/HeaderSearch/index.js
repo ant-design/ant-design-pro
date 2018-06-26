@@ -27,10 +27,13 @@ export default class HeaderSearch extends PureComponent {
     defaultOpen: false,
   };
 
-  state = {
-    searchMode: this.props.defaultOpen,
-    value: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchMode: props.defaultOpen,
+      value: '',
+    };
+  }
 
   onKeyDown = e => {
     if (e.key === 'Enter') {
@@ -40,24 +43,16 @@ export default class HeaderSearch extends PureComponent {
 
   onChange = value => {
     this.setState({ value });
-    if (this.props.onChange) {
-      this.props.onChange();
+    const { onChange } = this.props;
+    if (onChange) {
+      onChange();
     }
   };
 
-  // NOTE: 不能小于500，如果长按某键，第一次触发auto repeat的间隔是500ms，小于500会导致触发2次
-  @Bind()
-  @Debounce(500, {
-    leading: true,
-    trailing: false,
-  })
-  debouncePressEnter() {
-    this.props.onPressEnter(this.state.value);
-  }
-
   enterSearchMode = () => {
     this.setState({ searchMode: true }, () => {
-      if (this.state.searchMode) {
+      const { searchMode } = this.state;
+      if (searchMode) {
         this.input.focus();
       }
     });
@@ -70,11 +65,24 @@ export default class HeaderSearch extends PureComponent {
     });
   };
 
+  debouncePressEnter() {
+    const { onPressEnter } = this.props;
+    const { value } = this.state;
+    onPressEnter(value);
+  }
+
+  // NOTE: 不能小于500，如果长按某键，第一次触发auto repeat的间隔是500ms，小于500会导致触发2次
+  @Bind()
+  @Debounce(500, {
+    leading: true,
+    trailing: false,
+  })
   render() {
     const { className, placeholder, ...restProps } = this.props;
+    const { searchMode, value } = this.state;
     delete restProps.defaultOpen; // for rc-select not affected
     const inputClass = classNames(styles.input, {
-      [styles.show]: this.state.searchMode,
+      [styles.show]: searchMode,
     });
     return (
       <span className={classNames(className, styles.headerSearch)} onClick={this.enterSearchMode}>
@@ -83,7 +91,7 @@ export default class HeaderSearch extends PureComponent {
           key="AutoComplete"
           {...restProps}
           className={inputClass}
-          value={this.state.value}
+          value={value}
           onChange={this.onChange}
         >
           <Input

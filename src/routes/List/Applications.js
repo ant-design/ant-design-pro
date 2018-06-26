@@ -36,7 +36,8 @@ const formatWan = val => {
 }))
 export default class FilterCardList extends PureComponent {
   componentDidMount() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'list/fetch',
       payload: {
         count: 8,

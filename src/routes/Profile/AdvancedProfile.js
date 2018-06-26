@@ -226,7 +226,7 @@ export default class AdvancedProfile extends Component {
   }
 
   render() {
-    const { stepDirection } = this.state;
+    const { stepDirection, operationkey } = this.state;
     const { profile, loading } = this.props;
     const { advancedOperation1, advancedOperation2, advancedOperation3 } = profile;
     const contentList = {
@@ -343,7 +343,7 @@ export default class AdvancedProfile extends Component {
           tabList={operationTabList}
           onTabChange={this.onOperationTabChange}
         >
-          {contentList[this.state.operationkey]}
+          {contentList[operationkey]}
         </Card>
       </PageHeaderLayout>
     );

@@ -21,7 +21,8 @@ const FormItem = Form.Item;
 }))
 export default class CoverCardList extends PureComponent {
   componentDidMount() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'list/fetch',
       payload: {
         count: 8,

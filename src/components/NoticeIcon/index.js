@@ -37,11 +37,12 @@ export default class NoticeIcon extends PureComponent {
 
   onTabChange = tabType => {
     this.setState({ tabType });
-    this.props.onTabChange(tabType);
+    const { onTabChange } = this.state;
+    onTabChange(tabType);
   };
 
   getNotificationBox() {
-    const { children, loading, locale } = this.props;
+    const { children, loading, locale, onClear } = this.props;
     if (!children) {
       return null;
     }
@@ -56,7 +57,7 @@ export default class NoticeIcon extends PureComponent {
             {...child.props}
             data={child.props.list}
             onClick={item => this.onItemClick(item, child.props)}
-            onClear={() => this.props.onClear(child.props.title)}
+            onClear={() => onClear(child.props.title)}
             title={child.props.title}
             locale={locale}
           />
@@ -73,7 +74,7 @@ export default class NoticeIcon extends PureComponent {
   }
 
   render() {
-    const { className, count, popupAlign, onPopupVisibleChange } = this.props;
+    const { className, count, popupAlign, onPopupVisibleChange, popupVisible } = this.props;
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const notificationBox = this.getNotificationBox();
     const trigger = (
@@ -88,7 +89,7 @@ export default class NoticeIcon extends PureComponent {
     }
     const popoverProps = {};
     if ('popupVisible' in this.props) {
-      popoverProps.visible = this.props.popupVisible;
+      popoverProps.visible = popupVisible;
     }
     return (
       <Popover

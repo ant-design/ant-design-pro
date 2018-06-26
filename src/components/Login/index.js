@@ -28,27 +28,32 @@ class Login extends Component {
     onSubmit: () => {},
   };
 
-  state = {
-    type: this.props.defaultActiveKey,
-    tabs: [],
-    active: {},
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      type: props.defaultActiveKey,
+      tabs: [],
+      active: {},
+    };
+  }
 
   getChildContext() {
+    const { tabs } = this.state;
+    const { form } = this.props;
     return {
       tabUtil: {
         addTab: id => {
           this.setState({
-            tabs: [...this.state.tabs, id],
+            tabs: [...tabs, id],
           });
         },
         removeTab: id => {
           this.setState({
-            tabs: this.state.tabs.filter(currentId => currentId !== id),
+            tabs: tabs.filter(currentId => currentId !== id),
           });
         },
       },
-      form: this.props.form,
+      form,
       updateActive: activeItem => {
         const { type, active } = this.state;
         if (active[type]) {
@@ -64,18 +69,20 @@ class Login extends Component {
   }
 
   onSwitch = type => {
+    const { onTabChange } = this.props;
     this.setState({
       type,
     });
-    this.props.onTabChange(type);
+    onTabChange(type);
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const { active, type } = this.state;
+    const { form, onSubmit } = this.props;
     const activeFileds = active[type];
-    this.props.form.validateFields(activeFileds, { force: true }, (err, values) => {
-      this.props.onSubmit(err, values);
+    form.validateFields(activeFileds, { force: true }, (err, values) => {
+      onSubmit(err, values);
     });
   };
 

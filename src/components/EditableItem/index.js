@@ -3,10 +3,13 @@ import { Input, Icon } from 'antd';
 import styles from './index.less';
 
 export default class EditableItem extends PureComponent {
-  state = {
-    value: this.props.value,
-    editable: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: props.value,
+      editable: false,
+    };
+  }
 
   handleChange = e => {
     const { value } = e.target;
@@ -15,8 +18,10 @@ export default class EditableItem extends PureComponent {
 
   check = () => {
     this.setState({ editable: false });
-    if (this.props.onChange) {
-      this.props.onChange(this.state.value);
+    const { onChange } = this.props;
+    const { value } = this.state;
+    if (onChange) {
+      onChange(value);
     }
   };
 

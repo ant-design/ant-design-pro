@@ -30,7 +30,8 @@ const { Search } = Input;
 }))
 export default class BasicList extends PureComponent {
   componentDidMount() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'list/fetch',
       payload: {
         count: 5,
