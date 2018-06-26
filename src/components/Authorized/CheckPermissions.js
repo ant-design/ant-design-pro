@@ -29,6 +29,14 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
     if (authority.indexOf(currentAuthority) >= 0) {
       return target;
     }
+    if (Array.isArray(currentAuthority)) {
+      for (let i = 0; i < currentAuthority.length; i += 1) {
+        const element = currentAuthority[i];
+        if (authority.indexOf(element) >= 0) {
+          return target;
+        }
+      }
+    }
     return Exception;
   }
 
