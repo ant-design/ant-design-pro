@@ -31,6 +31,16 @@ const copyright = (
   </Fragment>
 );
 
+function getLoginPathWithRedirectPath() {
+  const routePath = '/user/login';
+  const urlParams = new URL(window.location.href);
+  const redirect = urlParams.searchParams.get('redirect');
+  if (redirect) {
+    return `${routePath}?redirect=${encodeURIComponent(redirect)}`;
+  }
+  return routePath;
+}
+
 class UserLayout extends React.PureComponent {
   getPageTitle() {
     const { routerData, location } = this.props;
@@ -66,7 +76,7 @@ class UserLayout extends React.PureComponent {
                   exact={item.exact}
                 />
               ))}
-              <Redirect exact from="/user" to="/user/login" />
+              <Redirect from="/user" to={getLoginPathWithRedirectPath()} />
             </Switch>
           </div>
           <GlobalFooter links={links} copyright={copyright} />
