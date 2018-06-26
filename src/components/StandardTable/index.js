@@ -36,7 +36,9 @@ class StandardTable extends PureComponent {
   }
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
-    let needTotalList = [...this.state.needTotalList];
+    const { needTotalList: list } = this.state;
+    const { onSelectRow } = this.props;
+    let needTotalList = [...list];
     needTotalList = needTotalList.map(item => {
       return {
         ...item,
@@ -46,15 +48,16 @@ class StandardTable extends PureComponent {
       };
     });
 
-    if (this.props.onSelectRow) {
-      this.props.onSelectRow(selectedRows);
+    if (onSelectRow) {
+      onSelectRow(selectedRows);
     }
 
     this.setState({ selectedRowKeys, needTotalList });
   };
 
   handleTableChange = (pagination, filters, sorter) => {
-    this.props.onChange(pagination, filters, sorter);
+    const { onChange } = this.props;
+    onChange(pagination, filters, sorter);
   };
 
   cleanSelectedKeys = () => {

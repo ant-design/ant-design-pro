@@ -19,6 +19,14 @@ class Bar extends Component {
     window.removeEventListener('resize', this.resize);
   }
 
+  handleRoot = n => {
+    this.root = n;
+  };
+
+  handleRef = n => {
+    this.node = n;
+  };
+
   @Bind()
   @Debounce(400)
   resize() {
@@ -45,14 +53,6 @@ class Bar extends Component {
       });
     }
   }
-
-  handleRoot = n => {
-    this.root = n;
-  };
-
-  handleRef = n => {
-    this.node = n;
-  };
 
   render() {
     const {
