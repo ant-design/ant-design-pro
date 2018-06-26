@@ -20,7 +20,18 @@ export default {
       // Login successfully
       if (response.status === 'ok') {
         reloadAuthorized();
-        yield put(routerRedux.push('/'));
+        const urlParams = new URL(window.location.href);
+        let redirect = urlParams.searchParams.get('redirect');
+        if (redirect) {
+          const redirectUrlParams = new URL(redirect);
+          if (redirectUrlParams.origin === urlParams.origin) {
+            redirect = redirect.substr(urlParams.origin.length);
+          } else {
+            window.location.href = redirect;
+            return;
+          }
+        }
+        yield put(routerRedux.push(redirect || '/'));
       }
     },
     *logout(_, { put, select }) {
