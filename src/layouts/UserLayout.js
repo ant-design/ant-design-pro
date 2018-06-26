@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
-import { getRoutes } from '../utils/utils';
+import { getRoutes, getPageQuery } from '../utils/utils';
 
 const links = [
   {
@@ -33,8 +33,8 @@ const copyright = (
 
 function getLoginPathWithRedirectPath() {
   const routePath = '/user/login';
-  const urlParams = new URL(window.location.href);
-  const redirect = urlParams.searchParams.get('redirect');
+  const params = getPageQuery();
+  const { redirect } = params;
   if (redirect) {
     return `${routePath}?redirect=${encodeURIComponent(redirect)}`;
   }
