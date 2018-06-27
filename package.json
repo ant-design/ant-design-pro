@@ -32,7 +32,7 @@
     "enquire-js": "^0.2.1",
     "lodash": "^4.17.10",
     "lodash-decorators": "^6.0.0",
-    "moment": "^2.19.1",
+    "moment": "^2.19.3",
     "numeral": "^2.0.6",
     "omit.js": "^1.0.0",
     "path-to-regexp": "^2.1.0",
