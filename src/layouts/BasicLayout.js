@@ -76,6 +76,10 @@ const query = {
   },
   'screen-xl': {
     minWidth: 1200,
+    maxWidth: 1599,
+  },
+  'screen-xxl': {
+    minWidth: 1600,
   },
 };
 
