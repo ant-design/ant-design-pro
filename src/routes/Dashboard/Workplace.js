@@ -71,7 +71,9 @@ export default class Workplace extends PureComponent {
   }
 
   renderActivities() {
-    const { activities: { list } } = this.props;
+    const {
+      activities: { list },
+    } = this.props;
     return list.map(item => {
       const events = item.template.split(/@\{([^{}]*)\}/gi).map(key => {
         if (item[key]) {
@@ -142,7 +144,8 @@ export default class Workplace extends PureComponent {
         <div className={styles.statItem}>
           <p>团队内排名</p>
           <p>
-            8<span> / 24</span>
+            8
+            <span> / 24</span>
           </p>
         </div>
         <div className={styles.statItem}>

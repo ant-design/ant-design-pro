@@ -88,11 +88,13 @@ class UpdateForm extends PureComponent {
       wrapperCol: { span: 13 },
     };
   }
+
   handleNext = currentStep => {
     const { form, handleUpdate } = this.props;
+    const { formVals: oldValue } = this.state;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
-      const formVals = { ...this.state.formVals, ...fieldsValue };
+      const formVals = { ...oldValue, ...fieldsValue };
       this.setState(
         {
           formVals,
@@ -101,22 +103,27 @@ class UpdateForm extends PureComponent {
           if (currentStep < 2) {
             this.forward();
           } else {
-            handleUpdate(this.state.formVals);
+            handleUpdate(formVals);
           }
         }
       );
     });
   };
+
   backward = () => {
+    const { currentStep } = this.state;
     this.setState({
-      currentStep: this.state.currentStep - 1,
+      currentStep: currentStep - 1,
     });
   };
+
   forward = () => {
+    const { currentStep } = this.state;
     this.setState({
-      currentStep: this.state.currentStep + 1,
+      currentStep: currentStep + 1,
     });
   };
+
   renderContent = (currentStep, formVals) => {
     const { form } = this.props;
     if (currentStep === 1) {
@@ -194,6 +201,7 @@ class UpdateForm extends PureComponent {
       </FormItem>,
     ];
   };
+
   renderFooter = currentStep => {
     const { handleUpdateModalVisible } = this.props;
     if (currentStep === 1) {
@@ -231,6 +239,7 @@ class UpdateForm extends PureComponent {
       </Button>,
     ];
   };
+
   render() {
     const { updateModalVisible, handleUpdateModalVisible } = this.props;
     const { currentStep, formVals } = this.state;
@@ -263,22 +272,6 @@ class UpdateForm extends PureComponent {
 }))
 @Form.create()
 export default class TableList extends PureComponent {
-  state = {
-    modalVisible: false,
-    updateModalVisible: false,
-    expandForm: false,
-    selectedRows: [],
-    formValues: {},
-    stepFormValues: {},
-  };
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'rule/fetch',
-    });
-  }
-
   columns = [
     {
       title: '规则名称',
@@ -340,6 +333,22 @@ export default class TableList extends PureComponent {
     },
   ];
 
+  state = {
+    modalVisible: false,
+    updateModalVisible: false,
+    expandForm: false,
+    selectedRows: [],
+    formValues: {},
+    stepFormValues: {},
+  };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'rule/fetch',
+    });
+  }
+
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
@@ -379,8 +388,9 @@ export default class TableList extends PureComponent {
   };
 
   toggleForm = () => {
+    const { expandForm } = this.state;
     this.setState({
-      expandForm: !this.state.expandForm,
+      expandForm: !expandForm,
     });
   };
 
@@ -452,7 +462,8 @@ export default class TableList extends PureComponent {
   };
 
   handleAdd = fields => {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'rule/add',
       payload: {
         desc: fields.desc,
@@ -464,7 +475,8 @@ export default class TableList extends PureComponent {
   };
 
   handleUpdate = fields => {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'rule/update',
       payload: {
         name: fields.name,
@@ -478,7 +490,9 @@ export default class TableList extends PureComponent {
   };
 
   renderSimpleForm() {
-    const { getFieldDecorator } = this.props.form;
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
@@ -516,7 +530,9 @@ export default class TableList extends PureComponent {
   }
 
   renderAdvancedForm() {
-    const { getFieldDecorator } = this.props.form;
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
@@ -588,11 +604,15 @@ export default class TableList extends PureComponent {
   }
 
   renderForm() {
-    return this.state.expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
+    const { expandForm } = this.state;
+    return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
 
   render() {
-    const { rule: { data }, loading } = this.props;
+    const {
+      rule: { data },
+      loading,
+    } = this.props;
     const { selectedRows, modalVisible, updateModalVisible, stepFormValues } = this.state;
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>

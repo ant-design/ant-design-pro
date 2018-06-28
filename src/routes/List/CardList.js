@@ -13,7 +13,8 @@ import styles from './CardList.less';
 }))
 export default class CardList extends PureComponent {
   componentDidMount() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'list/fetch',
       payload: {
         count: 8,
@@ -22,7 +23,10 @@ export default class CardList extends PureComponent {
   }
 
   render() {
-    const { list: { list }, loading } = this.props;
+    const {
+      list: { list },
+      loading,
+    } = this.props;
 
     const content = (
       <div className={styles.pageHeaderContent}>

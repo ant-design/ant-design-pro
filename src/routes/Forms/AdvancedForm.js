@@ -61,21 +61,26 @@ class AdvancedForm extends PureComponent {
   state = {
     width: '100%',
   };
+
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeFooterToolbar);
   }
+
   resizeFooterToolbar = () => {
     requestAnimationFrame(() => {
       const sider = document.querySelectorAll('.ant-layout-sider')[0];
       const width = `calc(100% - ${sider.style.width})`;
-      if (this.state.width !== width) {
+      const { width: stateWidth } = this.state;
+      if (stateWidth !== width) {
         this.setState({ width });
       }
     });
   };
+
   render() {
     const { form, dispatch, submitting } = this.props;
     const { getFieldDecorator, validateFieldsAndScroll, getFieldsError } = form;
@@ -129,6 +134,7 @@ class AdvancedForm extends PureComponent {
         </span>
       );
     };
+    const { width } = this.state;
     return (
       <PageHeaderLayout
         title="高级表单"
@@ -285,7 +291,7 @@ class AdvancedForm extends PureComponent {
             initialValue: tableData,
           })(<TableForm />)}
         </Card>
-        <FooterToolbar style={{ width: this.state.width }}>
+        <FooterToolbar style={{ width }}>
           {getErrorInfo()}
           <Button type="primary" onClick={validate} loading={submitting}>
             提交

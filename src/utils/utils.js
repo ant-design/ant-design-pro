@@ -124,11 +124,10 @@ function getRenderArr(routes) {
   let renderArr = [];
   renderArr.push(routes[0]);
   for (let i = 1; i < routes.length; i += 1) {
-    let isAdd = false;
-    // 是否包含
-    isAdd = renderArr.every(item => getRelation(item, routes[i]) === 3);
     // 去重
     renderArr = renderArr.filter(item => getRelation(item, routes[i]) !== 1);
+    // 是否包含
+    const isAdd = renderArr.every(item => getRelation(item, routes[i]) === 3);
     if (isAdd) {
       renderArr.push(routes[i]);
     }
@@ -164,7 +163,7 @@ export function getRoutes(path, routerData) {
 }
 
 /* eslint no-useless-escape:0 */
-const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g;
+const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
 
 export function isUrl(path) {
   return reg.test(path);

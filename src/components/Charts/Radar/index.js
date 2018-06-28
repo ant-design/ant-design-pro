@@ -12,9 +12,7 @@ export default class Radar extends Component {
   };
 
   componentDidMount() {
-    requestAnimationFrame(() => {
-      this.getLegendData();
-    });
+    this.getLegendData();
   }
 
   componentDidUpdate(preProps) {

@@ -13,10 +13,8 @@ export default class WaterWave extends PureComponent {
   };
 
   componentDidMount() {
-    requestAnimationFrame(() => {
-      this.renderChart();
-      this.resize();
-    });
+    this.renderChart();
+    this.resize();
     window.addEventListener(
       'resize',
       () => {
@@ -49,7 +47,7 @@ export default class WaterWave extends PureComponent {
     const data = percent / 100;
     const self = this;
 
-    if (!this.node || !data) {
+    if (!this.node || (data !== 0 && !data)) {
       return;
     }
 
@@ -198,7 +196,10 @@ export default class WaterWave extends PureComponent {
         </div>
         <div className={styles.text} style={{ width: height }}>
           {title && <span>{title}</span>}
-          <h4>{percent}%</h4>
+          <h4>
+            {percent}
+            %
+          </h4>
         </div>
       </div>
     );

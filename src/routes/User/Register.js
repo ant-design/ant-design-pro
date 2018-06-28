@@ -35,9 +35,10 @@ export default class Register extends Component {
   };
 
   componentDidUpdate() {
-    const account = this.props.form.getFieldValue('mail');
-    if (this.props.register.status === 'ok') {
-      this.props.dispatch(
+    const { form, register, dispatch } = this.props;
+    const account = form.getFieldValue('mail');
+    if (register.status === 'ok') {
+      dispatch(
         routerRedux.push({
           pathname: '/user/register-result',
           state: {
@@ -47,6 +48,7 @@ export default class Register extends Component {
       );
     }
   }
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
@@ -77,13 +79,15 @@ export default class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields({ force: true }, (err, values) => {
+    const { form, dispatch } = this.props;
+    form.validateFields({ force: true }, (err, values) => {
       if (!err) {
-        this.props.dispatch({
+        const { prefix } = this.state;
+        dispatch({
           type: 'register/submit',
           payload: {
             ...values,
-            prefix: this.state.prefix,
+            prefix,
           },
         });
       }
@@ -92,7 +96,8 @@ export default class Register extends Component {
 
   handleConfirmBlur = e => {
     const { value } = e.target;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+    const { confirmDirty } = this.state;
+    this.setState({ confirmDirty: confirmDirty || !!value });
   };
 
   checkConfirm = (rule, value, callback) => {
@@ -105,6 +110,7 @@ export default class Register extends Component {
   };
 
   checkPassword = (rule, value, callback) => {
+    const { visible, confirmDirty } = this.state;
     if (!value) {
       this.setState({
         help: '请输入密码！',
@@ -115,7 +121,7 @@ export default class Register extends Component {
       this.setState({
         help: '',
       });
-      if (!this.state.visible) {
+      if (!visible) {
         this.setState({
           visible: !!value,
         });
@@ -124,7 +130,7 @@ export default class Register extends Component {
         callback('error');
       } else {
         const { form } = this.props;
-        if (value && this.state.confirmDirty) {
+        if (value && confirmDirty) {
           form.validateFields(['confirm'], { force: true });
         }
         callback();
@@ -158,7 +164,7 @@ export default class Register extends Component {
   render() {
     const { form, submitting } = this.props;
     const { getFieldDecorator } = form;
-    const { count, prefix } = this.state;
+    const { count, prefix, help, visible } = this.state;
     return (
       <div className={styles.main}>
         <h3>注册</h3>
@@ -177,7 +183,7 @@ export default class Register extends Component {
               ],
             })(<Input size="large" placeholder="邮箱" />)}
           </FormItem>
-          <FormItem help={this.state.help}>
+          <FormItem help={help}>
             <Popover
               content={
                 <div style={{ padding: '4px 0' }}>
@@ -190,7 +196,7 @@ export default class Register extends Component {
               }
               overlayStyle={{ width: 240 }}
               placement="right"
-              visible={this.state.visible}
+              visible={visible}
             >
               {getFieldDecorator('password', {
                 rules: [

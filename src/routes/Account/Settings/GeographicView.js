@@ -20,24 +20,33 @@ const nullSlectItem = {
 })
 export default class GeographicView extends PureComponent {
   componentDidMount = () => {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'geographic/fetchProvince',
     });
   };
+
   componentDidUpdate(props) {
-    if (!props.value && !!this.props.value && !!this.props.value.province) {
-      this.props.dispatch({
+    const { dispatch, value } = this.props;
+
+    if (!props.value && !!value && !!value.province) {
+      dispatch({
         type: 'geographic/fetchCity',
-        payload: this.props.value.province.key,
+        payload: value.province.key,
       });
     }
   }
+
   getProvinceOption() {
-    return this.getOption(this.props.province);
+    const { province } = this.props;
+    return this.getOption(province);
   }
+
   getCityOption = () => {
-    return this.getOption(this.props.city);
+    const { city } = this.props;
+    return this.getOption(city);
   };
+
   getOption = list => {
     if (!list || list.length < 1) {
       return (
@@ -54,22 +63,27 @@ export default class GeographicView extends PureComponent {
       );
     });
   };
+
   selectProvinceItem = item => {
-    this.props.dispatch({
+    const { dispatch, onChange } = this.props;
+    dispatch({
       type: 'geographic/fetchCity',
       payload: item.key,
     });
-    this.props.onChange({
+    onChange({
       province: item,
       city: nullSlectItem,
     });
   };
+
   selectCityItem = item => {
-    this.props.onChange({
-      province: this.props.value.province,
+    const { value, onChange } = this.props;
+    onChange({
+      province: value.province,
       city: item,
     });
   };
+
   conversionObject() {
     const { value } = this.props;
     if (!value) {
@@ -84,10 +98,12 @@ export default class GeographicView extends PureComponent {
       city: city || nullSlectItem,
     };
   }
+
   render() {
     const { province, city } = this.conversionObject();
+    const { isLoading } = this.props;
     return (
-      <Spin spinning={this.props.isLoading} wrapperClassName={styles.row}>
+      <Spin spinning={isLoading} wrapperClassName={styles.row}>
         <Select
           className={styles.item}
           value={province}

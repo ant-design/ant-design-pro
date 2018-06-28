@@ -24,6 +24,7 @@ export default class BindingView extends Component {
       },
     ];
   };
+
   render() {
     return (
       <Fragment>

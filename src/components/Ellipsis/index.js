@@ -8,11 +8,40 @@ import styles from './index.less';
 
 const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
 
-const EllipsisText = ({ text, length, tooltip, ...other }) => {
+export const getStrFullLength = (str = '') => {
+  return str.split('').reduce((pre, cur) => {
+    const charCode = cur.charCodeAt(0);
+    if (charCode >= 0 && charCode <= 128) {
+      return pre + 1;
+    } else {
+      return pre + 2;
+    }
+  }, 0);
+};
+
+export const cutStrByFullLength = (str = '', maxLength) => {
+  let showLength = 0;
+  return str.split('').reduce((pre, cur) => {
+    const charCode = cur.charCodeAt(0);
+    if (charCode >= 0 && charCode <= 128) {
+      showLength += 1;
+    } else {
+      showLength += 2;
+    }
+    if (showLength <= maxLength) {
+      return pre + cur;
+    } else {
+      return pre;
+    }
+  }, '');
+};
+
+const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other }) => {
   if (typeof text !== 'string') {
     throw new Error('Ellipsis children must be string.');
   }
-  if (text.length <= length || length < 0) {
+  const textLength = fullWidthRecognition ? getStrFullLength(text) : text.length;
+  if (textLength <= length || length < 0) {
     return <span {...other}>{text}</span>;
   }
   const tail = '...';
@@ -20,7 +49,7 @@ const EllipsisText = ({ text, length, tooltip, ...other }) => {
   if (length - tail.length <= 0) {
     displayText = '';
   } else {
-    displayText = text.slice(0, length);
+    displayText = fullWidthRecognition ? cutStrByFullLength(text, length) : text.slice(0, length);
   }
 
   if (tooltip) {
@@ -55,7 +84,8 @@ export default class Ellipsis extends Component {
   }
 
   componentDidUpdate(perProps) {
-    if (this.props.lines !== perProps.lines) {
+    const { lines } = this.props;
+    if (lines !== perProps.lines) {
       this.computeLine();
     }
   }
@@ -80,7 +110,7 @@ export default class Ellipsis extends Component {
 
       // bisection
       const len = text.length;
-      const mid = Math.floor(len / 2);
+      const mid = Math.ceil(len / 2);
 
       const count = this.bisection(targetHeight, mid, 0, len, text, shadowNode);
 
@@ -147,7 +177,15 @@ export default class Ellipsis extends Component {
 
   render() {
     const { text, targetCount } = this.state;
-    const { children, lines, length, className, tooltip, ...restProps } = this.props;
+    const {
+      children,
+      lines,
+      length,
+      className,
+      tooltip,
+      fullWidthRecognition,
+      ...restProps
+    } = this.props;
 
     const cls = classNames(styles.ellipsis, className, {
       [styles.lines]: lines && !isSupportLineClamp,
@@ -170,6 +208,7 @@ export default class Ellipsis extends Component {
           length={length}
           text={children || ''}
           tooltip={tooltip}
+          fullWidthRecognition={fullWidthRecognition}
           {...restProps}
         />
       );
