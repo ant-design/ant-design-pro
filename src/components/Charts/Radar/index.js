@@ -12,13 +12,12 @@ export default class Radar extends Component {
   };
 
   componentDidMount() {
-    this.getLengendData();
+    this.getLegendData();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { data } = this.props;
-    if (data !== nextProps.data) {
-      this.getLengendData();
+  componentDidUpdate(preProps) {
+    if (this.props.data !== preProps.data) {
+      this.getLegendData();
     }
   }
 
@@ -27,9 +26,10 @@ export default class Radar extends Component {
   };
 
   // for custom lengend view
-  getLengendData = () => {
+  getLegendData = () => {
     if (!this.chart) return;
     const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
+    if (!geom) return;
     const items = geom.get('dataArray') || []; // 获取图形对应的
 
     const legendData = items.map(item => {

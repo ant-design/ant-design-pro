@@ -2,10 +2,15 @@ html,
 body,
 :global(#root) {
   height: 100%;
+  overflow: auto;
+}
+
+:global(.colorWeak) {
+  filter: invert(80%);
 }
 
 :global(.ant-layout) {
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 canvas {

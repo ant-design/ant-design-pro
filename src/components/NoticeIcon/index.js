@@ -22,22 +22,18 @@ export default class NoticeIcon extends PureComponent {
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-    if (props.children && props.children[0]) {
-      this.state.tabType = props.children[0].props.title;
-    }
-  }
-
   onItemClick = (item, tabProps) => {
     const { onItemClick } = this.props;
     onItemClick(item, tabProps);
   };
 
   onTabChange = tabType => {
+<<<<<<< HEAD
     this.setState({ tabType });
     const { onTabChange } = this.props;
+=======
+    const onTabChange = this.props;
+>>>>>>> heroku
     onTabChange(tabType);
   };
 
@@ -74,12 +70,16 @@ export default class NoticeIcon extends PureComponent {
   }
 
   render() {
+<<<<<<< HEAD
     const { className, count, popupAlign, onPopupVisibleChange, popupVisible } = this.props;
+=======
+    const { className, count, popupAlign, popupVisible, onPopupVisibleChange } = this.props;
+>>>>>>> heroku
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const notificationBox = this.getNotificationBox();
     const trigger = (
       <span className={noticeButtonClass}>
-        <Badge count={count} className={styles.badge}>
+        <Badge count={count} style={{ boxShadow: 'none' }} className={styles.badge}>
           <Icon type="bell" className={styles.icon} />
         </Badge>
       </span>

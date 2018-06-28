@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'dva';
 import {
   Row,
@@ -13,10 +13,8 @@ import {
   Menu,
   Dropdown,
 } from 'antd';
-import numeral from 'numeral';
 import {
   ChartCard,
-  yuan,
   MiniArea,
   MiniBar,
   MiniProgress,
@@ -27,6 +25,9 @@ import {
 } from 'components/Charts';
 import Trend from 'components/Trend';
 import NumberInfo from 'components/NumberInfo';
+import numeral from 'numeral';
+import GridContent from '../../layouts/GridContent';
+import Yuan from '../../utils/Yuan';
 import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
@@ -41,12 +42,6 @@ for (let i = 0; i < 7; i += 1) {
     total: 323234,
   });
 }
-
-const Yuan = ({ children }) => (
-  <span
-    dangerouslySetInnerHTML={{ __html: yuan(children) }} /* eslint-disable-line react/no-danger */
-  />
-);
 
 @connect(({ chart, loading }) => ({
   chart,
@@ -86,22 +81,22 @@ export default class Analysis extends Component {
   };
 
   handleRangePickerChange = rangePickerValue => {
+    const { dispatch } = this.props;
     this.setState({
       rangePickerValue,
     });
 
-    const { dispatch } = this.props;
     dispatch({
       type: 'chart/fetchSalesData',
     });
   };
 
   selectDate = type => {
+    const { dispatch } = this.props;
     this.setState({
       rangePickerValue: getTimeDistance(type),
     });
 
-    const { dispatch } = this.props;
     dispatch({
       type: 'chart/fetchSalesData',
     });
@@ -255,7 +250,7 @@ export default class Analysis extends Component {
     };
 
     return (
-      <Fragment>
+      <GridContent>
         <Row gutter={24}>
           <Col {...topColResponsiveProps}>
             <ChartCard
@@ -266,6 +261,7 @@ export default class Analysis extends Component {
                   <Icon type="info-circle-o" />
                 </Tooltip>
               }
+              loading={loading}
               total={() => <Yuan>126560</Yuan>}
               footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
               contentHeight={46}
@@ -283,6 +279,7 @@ export default class Analysis extends Component {
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
+              loading={loading}
               title="访问量"
               action={
                 <Tooltip title="指标说明">
@@ -299,6 +296,7 @@ export default class Analysis extends Component {
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
+              loading={loading}
               title="支付笔数"
               action={
                 <Tooltip title="指标说明">
@@ -314,6 +312,7 @@ export default class Analysis extends Component {
           </Col>
           <Col {...topColResponsiveProps}>
             <ChartCard
+              loading={loading}
               bordered={false}
               title="运营活动效果"
               action={
@@ -500,7 +499,7 @@ export default class Analysis extends Component {
             ))}
           </Tabs>
         </Card>
-      </Fragment>
+      </GridContent>
     );
   }
 }

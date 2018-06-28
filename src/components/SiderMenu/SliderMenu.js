@@ -3,10 +3,27 @@ import { Layout, Menu, Icon } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
 import styles from './index.less';
+import BaseMenu, { getMenuMatches } from './BaseMenu';
 import { urlToList } from '../_utils/pathTools';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
+
+/**
+ * 获得菜单子节点
+ * @memberof SiderMenu
+ */
+const getDefaultCollapsedSubMenus = props => {
+  const {
+    location: { pathname },
+    flatMenuKeys,
+  } = props;
+  return urlToList(pathname)
+    .map(item => {
+      return getMenuMatches(flatMenuKeys, item)[0];
+    })
+    .filter(item => item);
+};
 
 // Allow menu.js config icon as string or ReactNode
 //   icon: 'setting',
@@ -51,20 +68,21 @@ export const getMenuMatchKeys = (flatMenuKeys, paths) =>
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
-    this.menus = props.menuData;
     this.flatMenuKeys = getFlatMenuKeys(props.menuData);
     this.state = {
-      openKeys: this.getDefaultCollapsedSubMenus(props),
+      openKeys: getDefaultCollapsedSubMenus(props),
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { location } = this.props;
-    if (nextProps.location.pathname !== location.pathname) {
-      this.setState({
-        openKeys: this.getDefaultCollapsedSubMenus(nextProps),
-      });
+  static getDerivedStateFromProps(props, state) {
+    const { pathname } = state;
+    if (props.location.pathname !== pathname) {
+      return {
+        pathname: props.location.pathname,
+        openKeys: getDefaultCollapsedSubMenus(props),
+      };
     }
+    return null;
   }
 
   /**
@@ -98,12 +116,12 @@ export default class SiderMenu extends PureComponent {
         </a>
       );
     }
-    const { location, isMobile, onCollapse } = this.props;
+    const { pathname, isMobile, onCollapse } = this.props;
     return (
       <Link
         to={itemPath}
         target={target}
-        replace={itemPath === location.pathname}
+        replace={itemPath === pathname}
         onClick={
           isMobile
             ? () => {
@@ -197,31 +215,26 @@ export default class SiderMenu extends PureComponent {
   };
 
   isMainMenu = key => {
-    return this.menus.some(item => key && (item.key === key || item.path === key));
+    const { menuData } = this.props;
+    return menuData.some(item => {
+      if (key) {
+        return item.key === key || item.path === key;
+      }
+      return false;
+    });
   };
 
   handleOpenChange = openKeys => {
-    const lastOpenKey = openKeys[openKeys.length - 1];
     const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({
-      openKeys: moreThanOne ? [lastOpenKey] : [...openKeys],
+      openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys],
     });
   };
 
   render() {
-    const { logo, collapsed, onCollapse } = this.props;
+    const { logo, collapsed, onCollapse, fixSiderbar, theme } = this.props;
     const { openKeys } = this.state;
-    // Don't show popup menu when it is been collapsed
-    const menuProps = collapsed
-      ? {}
-      : {
-          openKeys,
-        };
-    // if pathname can't match, use the nearest parent's key
-    let selectedKeys = this.getSelectedMenuKeys();
-    if (!selectedKeys.length) {
-      selectedKeys = [openKeys[openKeys.length - 1]];
-    }
+    const defaultProps = collapsed ? {} : { openKeys };
     return (
       <Sider
         trigger={null}
@@ -230,25 +243,25 @@ export default class SiderMenu extends PureComponent {
         breakpoint="lg"
         onCollapse={onCollapse}
         width={256}
-        className={styles.sider}
+        className={`${styles.sider} ${fixSiderbar ? styles.fixSiderbar : ''} ${
+          theme === 'light' ? styles.light : ''
+        }`}
       >
-        <div className={styles.logo} key="logo">
+        <div className={styles.logo} key="logo" id="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
             <h1>Ant Design Pro</h1>
           </Link>
         </div>
-        <Menu
+        <BaseMenu
+          {...this.props}
           key="Menu"
-          theme="dark"
           mode="inline"
-          {...menuProps}
+          handleOpenChange={this.handleOpenChange}
           onOpenChange={this.handleOpenChange}
-          selectedKeys={selectedKeys}
           style={{ padding: '16px 0', width: '100%' }}
-        >
-          {this.getNavMenuItems(this.menus)}
-        </Menu>
+          {...defaultProps}
+        />
       </Sider>
     );
   }

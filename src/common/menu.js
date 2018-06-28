@@ -154,6 +154,21 @@ const menuData = [
       },
     ],
   },
+  {
+    name: '个人页',
+    icon: 'user',
+    path: 'account',
+    children: [
+      {
+        name: '个人中心',
+        path: 'center',
+      },
+      {
+        name: '个人设置',
+        path: 'settings',
+      },
+    ],
+  },
 ];
 
 function formatter(data, parentPath = '/', parentAuthority) {

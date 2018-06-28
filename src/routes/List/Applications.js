@@ -2,33 +2,16 @@ import React, { PureComponent } from 'react';
 import numeral from 'numeral';
 import { connect } from 'dva';
 import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
-
 import TagSelect from 'components/TagSelect';
 import StandardFormRow from 'components/StandardFormRow';
+
+import { formatWan } from '../../utils/utils';
 
 import styles from './Applications.less';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 
-const formatWan = val => {
-  const v = val * 1;
-  if (!v || isNaN(v)) return '';
-
-  let result = val;
-  if (val > 10000) {
-    result = Math.floor(val / 10000);
-    result = (
-      <span>
-        {result}
-        <em className={styles.wan}>万</em>
-      </span>
-    );
-  }
-  return result;
-};
-
-/* eslint react/no-array-index-key: 0 */
 @Form.create()
 @connect(({ list, loading }) => ({
   list,

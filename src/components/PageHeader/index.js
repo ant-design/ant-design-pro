@@ -1,5 +1,4 @@
 import React, { PureComponent, createElement } from 'react';
-import PropTypes from 'prop-types';
 import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb, Tabs } from 'antd';
 import classNames from 'classnames';
@@ -18,15 +17,7 @@ export function getBreadcrumb(breadcrumbNameMap, url) {
   }
   return breadcrumb || {};
 }
-
 export default class PageHeader extends PureComponent {
-  static contextTypes = {
-    routes: PropTypes.array,
-    params: PropTypes.object,
-    location: PropTypes.object,
-    breadcrumbNameMap: PropTypes.object,
-  };
-
   state = {
     breadcrumb: null,
   };
@@ -51,17 +42,11 @@ export default class PageHeader extends PureComponent {
 
   getBreadcrumbProps = () => {
     const { routes, params, location, breadcrumbNameMap } = this.props;
-    const {
-      routes: croutes,
-      params: cparams,
-      location: clocation,
-      breadcrumbNameMap: cbreadcrumbNameMap,
-    } = this.context;
     return {
-      routes: routes || croutes,
-      params: params || cparams,
-      routerLocation: location || clocation,
-      breadcrumbNameMap: breadcrumbNameMap || cbreadcrumbNameMap,
+      routes,
+      params,
+      routerLocation: location,
+      breadcrumbNameMap,
     };
   };
 
@@ -204,7 +189,7 @@ export default class PageHeader extends PureComponent {
     if (tabActiveKey !== undefined) {
       activeKeyProps.activeKey = tabActiveKey;
     }
-
+    const { breadcrumb } = this.state;
     return (
       <div className={clsString}>
         {breadcrumb}

@@ -13,15 +13,17 @@ export default class TableForm extends PureComponent {
     this.state = {
       data: props.value,
       loading: false,
+      editData: [],
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps) {
     if ('value' in nextProps) {
-      this.setState({
+      return {
         data: nextProps.value,
-      });
+      };
     }
+    return null;
   }
 
   getRowByKey(key, newData) {
@@ -45,32 +47,47 @@ export default class TableForm extends PureComponent {
   };
 
   newMember = () => {
-    const { data } = this.state;
-    const newData = data.map(item => ({ ...item }));
-    newData.push({
-      key: `NEW_TEMP_ID_${this.index}`,
-      workId: '',
-      name: '',
-      department: '',
-      editable: true,
-      isNew: true,
-    });
     this.index += 1;
-    this.setState({ data: newData });
+    this.setState({
+      editData: [
+        {
+          key: `NEW_TEMP_ID_${this.index}`,
+          workId: '',
+          name: '',
+          department: '',
+          editable: true,
+          isNew: true,
+        },
+      ],
+    });
   };
 
   remove(key) {
-    const { data } = this.state;
+    const { editData, data } = this.state;
     const { onChange } = this.props;
+    const editItem = editData.find(item => item.key === key);
+    if (editItem && editItem.key) {
+      // 如果存在缓存
+      if (this.cacheOriginData[key]) {
+        data.push(this.cacheOriginData[key]);
+        this.setState(
+          {
+            data,
+          },
+          () => {
+            delete this.cacheOriginData[key];
+          }
+        );
+      }
+      // 从 editData 中删除
+      this.setState({
+        editData: editData.filter(item => item.key !== key),
+      });
+      return;
+    }
     const newData = data.filter(item => item.key !== key);
     this.setState({ data: newData });
     onChange(newData);
-  }
-
-  handleKeyPress(e, key) {
-    if (e.key === 'Enter') {
-      this.saveRow(e, key);
-    }
   }
 
   handleFieldChange(e, fieldName, key) {
@@ -84,6 +101,8 @@ export default class TableForm extends PureComponent {
   }
 
   saveRow(e, key) {
+    const { data } = this.state;
+    const { onChange } = this.props;
     e.persist();
     this.setState({
       loading: true,
@@ -114,9 +133,9 @@ export default class TableForm extends PureComponent {
   }
 
   cancel(e, key) {
+    const { data } = this.state;
     this.clickedCancel = true;
     e.preventDefault();
-    const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
     if (this.cacheOriginData[key]) {
@@ -228,15 +247,20 @@ export default class TableForm extends PureComponent {
         },
       },
     ];
+<<<<<<< HEAD
 
     const { loading, data } = this.state;
 
+=======
+    const { data, editData, loading } = this.state;
+    const dataSource = data.concat(editData);
+>>>>>>> heroku
     return (
       <Fragment>
         <Table
           loading={loading}
           columns={columns}
-          dataSource={data}
+          dataSource={dataSource}
           pagination={false}
           rowClassName={record => {
             return record.editable ? styles.editable : '';

@@ -34,10 +34,10 @@ export default class Register extends Component {
     prefix: '86',
   };
 
-  componentWillReceiveProps(nextProps) {
-    const { form, dispatch } = this.props;
+  componentDidUpdate() {
+    const { form, register, dispatch } = this.props;
     const account = form.getFieldValue('mail');
-    if (nextProps.register.status === 'ok') {
+    if (register.status === 'ok') {
       dispatch(
         routerRedux.push({
           pathname: '/user/register-result',
@@ -81,8 +81,8 @@ export default class Register extends Component {
     e.preventDefault();
     const { form, dispatch } = this.props;
     form.validateFields({ force: true }, (err, values) => {
-      const { prefix } = this.state;
       if (!err) {
+        const { prefix } = this.state;
         dispatch({
           type: 'register/submit',
           payload: {
@@ -110,6 +110,7 @@ export default class Register extends Component {
   };
 
   checkPassword = (rule, value, callback) => {
+    const { visible, confirmDirty } = this.state;
     if (!value) {
       this.setState({
         help: '请输入密码！',
@@ -120,7 +121,6 @@ export default class Register extends Component {
       this.setState({
         help: '',
       });
-      const { visible, confirmDirty } = this.state;
       if (!visible) {
         this.setState({
           visible: !!value,

@@ -67,7 +67,7 @@ export default class CoverCardList extends PureComponent {
             <Card
               className={styles.card}
               hoverable
-              cover={<img alt={item.title} src={item.cover} height={154} />}
+              cover={<img alt={item.title} src={item.cover} />}
             >
               <Card.Meta
                 title={<a href="#">{item.title}</a>}

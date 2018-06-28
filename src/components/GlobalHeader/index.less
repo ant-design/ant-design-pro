@@ -8,13 +8,6 @@
   position: relative;
 }
 
-:global {
-  .ant-layout {
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-}
-
 .logo {
   height: 64px;
   line-height: 58px;
@@ -69,8 +62,7 @@ i.trigger {
     }
   }
   .search {
-    padding: 0;
-    margin: 0 12px;
+    padding: 0 12px;
     &:hover {
       background: transparent;
     }
@@ -81,6 +73,23 @@ i.trigger {
       color: @primary-color;
       background: rgba(255, 255, 255, 0.85);
       vertical-align: middle;
+    }
+  }
+}
+
+.dark {
+  height: 64px;
+  .action {
+    color: rgba(255, 255, 255, 0.85);
+    > i {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    &:hover,
+    &:global(.ant-popover-open) {
+      background: @primary-color;
+    }
+    :global(.ant-badge) {
+      color: rgba(255, 255, 255, 0.85);
     }
   }
 }

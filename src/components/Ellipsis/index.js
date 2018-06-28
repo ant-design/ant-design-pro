@@ -83,9 +83,9 @@ export default class Ellipsis extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(perProps) {
     const { lines } = this.props;
-    if (lines !== nextProps.lines) {
+    if (lines !== perProps.lines) {
       this.computeLine();
     }
   }

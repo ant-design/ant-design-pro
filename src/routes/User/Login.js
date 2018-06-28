@@ -21,10 +21,29 @@ export default class LoginPage extends Component {
     this.setState({ type });
   };
 
+  onGetCaptcha = () => {
+    return new Promise((resolve, reject) => {
+      this.loginForm.validateFields(['mobile'], {}, (err, values) => {
+        if (err) {
+          reject(err);
+        } else {
+          const { dispatch } = this.props;
+          dispatch({
+            type: 'login/getCaptcha',
+            payload: values.mobile,
+          })
+            .then(resolve)
+            .catch(reject);
+        }
+      });
+    });
+  };
+
   handleSubmit = (err, values) => {
     const { type } = this.state;
     const { dispatch } = this.props;
     if (!err) {
+      const { dispatch } = this.props;
       dispatch({
         type: 'login/login',
         payload: {
@@ -41,6 +60,8 @@ export default class LoginPage extends Component {
     });
   };
 
+  loginForm;
+
   renderMessage = content => {
     return <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />;
   };
@@ -50,7 +71,14 @@ export default class LoginPage extends Component {
     const { type, autoLogin } = this.state;
     return (
       <div className={styles.main}>
-        <Login defaultActiveKey={type} onTabChange={this.onTabChange} onSubmit={this.handleSubmit}>
+        <Login
+          defaultActiveKey={type}
+          onTabChange={this.onTabChange}
+          onSubmit={this.handleSubmit}
+          ref={form => {
+            this.loginForm = form;
+          }}
+        >
           <Tab key="account" tab="账户密码登录">
             {login.status === 'error' &&
               login.type === 'account' &&
@@ -65,7 +93,7 @@ export default class LoginPage extends Component {
               !submitting &&
               this.renderMessage('验证码错误')}
             <Mobile name="mobile" />
-            <Captcha name="captcha" />
+            <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
           </Tab>
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>

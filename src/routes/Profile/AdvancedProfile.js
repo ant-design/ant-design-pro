@@ -197,7 +197,7 @@ export default class AdvancedProfile extends Component {
     });
 
     this.setStepDirection();
-    window.addEventListener('resize', this.setStepDirection);
+    window.addEventListener('resize', this.setStepDirection, { passive: true });
   }
 
   componentWillUnmount() {

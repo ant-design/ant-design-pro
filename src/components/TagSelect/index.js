@@ -23,12 +23,6 @@ class TagSelect extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps && nextProps.value) {
-      this.setState({ value: nextProps.value });
-    }
-  }
-
   onChange = value => {
     const { onChange } = this.props;
     if (!('value' in this.props)) {
@@ -47,6 +41,13 @@ class TagSelect extends Component {
     this.onChange(checkedTags);
   };
 
+  static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps && nextProps.value) {
+      return { value: nextProps.value };
+    }
+    return null;
+  }
+
   getAllTags() {
     let { children } = this.props;
     children = React.Children.toArray(children);
@@ -57,8 +58,8 @@ class TagSelect extends Component {
   }
 
   handleTagChange = (value, checked) => {
-    const { value: v } = this.state;
-    const checkedTags = [...v];
+    const { value: StateValue } = this.state;
+    const checkedTags = [...StateValue];
 
     const index = checkedTags.indexOf(value);
     if (checked && index === -1) {

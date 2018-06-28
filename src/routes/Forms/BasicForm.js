@@ -26,8 +26,8 @@ const { TextArea } = Input;
 @Form.create()
 export default class BasicForms extends PureComponent {
   handleSubmit = e => {
+    const { dispatch, form } = this.props;
     e.preventDefault();
-    const { form, dispatch } = this.props;
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         dispatch({
@@ -39,8 +39,10 @@ export default class BasicForms extends PureComponent {
   };
 
   render() {
-    const { submitting, form } = this.props;
-    const { getFieldDecorator, getFieldValue } = form;
+    const { submitting } = this.props;
+    const {
+      form: { getFieldDecorator, getFieldValue },
+    } = this.props;
 
     const formItemLayout = {
       labelCol: {

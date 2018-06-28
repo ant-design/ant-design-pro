@@ -1,5 +1,3 @@
-import { parse } from 'url';
-
 const titles = [
   'Alipay',
   'Angular',
@@ -37,7 +35,7 @@ const avatars2 = [
 const covers = [
   'https://gw.alipayobjects.com/zos/rmsportal/uMfMFlvUuceEyPpotzlq.png',
   'https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/uVZonEtjWwmUZPBQfycs.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/iXjVmWVHbCJAyqvDxdtx.png',
   'https://gw.alipayobjects.com/zos/rmsportal/gLaIAoVWTtLbBWZNYEMg.png',
 ];
 const desc = [
@@ -69,7 +67,7 @@ export function fakeList(count) {
       owner: user[i % 10],
       title: titles[i % 8],
       avatar: avatars[i % 8],
-      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - i % 4],
+      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % 8],
@@ -90,14 +88,17 @@ export function fakeList(count) {
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
           name: '曲丽丽',
+          id: 'member1',
         },
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
           name: '王昭君',
+          id: 'member2',
         },
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
           name: '董娜娜',
+          id: 'member3',
         },
       ],
     });
@@ -106,17 +107,52 @@ export function fakeList(count) {
   return list;
 }
 
-export function getFakeList(req, res, u) {
-  let url = u;
-  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    url = req.url; // eslint-disable-line
-  }
+let sourceData;
 
-  const params = parse(url, true).query;
+export function getFakeList(req, res) {
+  const params = req.query;
 
   const count = params.count * 1 || 20;
 
   const result = fakeList(count);
+  sourceData = result;
+
+  if (res && res.json) {
+    res.json(result);
+  } else {
+    return result;
+  }
+}
+
+export function postFakeList(req, res) {
+  const { /* url = '', */ body } = req;
+  // const params = getUrlParams(url);
+  const { method, id, ...restParams } = body;
+
+  // const count = (params.count * 1) || 20;
+  let result = sourceData;
+
+  switch (method) {
+    case 'delete':
+      result = result.filter(item => item.id !== id);
+      break;
+    case 'update':
+      result.forEach((item, i) => {
+        if (item.id === id) {
+          result[i] = Object.assign(item, restParams);
+        }
+      });
+      break;
+    case 'post':
+      result.unshift({
+        ...restParams,
+        id: `fake-list-${result.length}`,
+        createdAt: new Date().getTime(),
+      });
+      break;
+    default:
+      break;
+  }
 
   if (res && res.json) {
     res.json(result);
@@ -289,8 +325,18 @@ export const getActivities = [
   },
 ];
 
+export function getFakeCaptcha(req, res) {
+  if (res && res.json) {
+    res.json('captcha-xxx');
+  } else {
+    return 'captcha-xxx';
+  }
+}
+
 export default {
   getNotice,
   getActivities,
   getFakeList,
+  postFakeList,
+  getFakeCaptcha,
 };

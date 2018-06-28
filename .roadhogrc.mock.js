@@ -1,11 +1,12 @@
 import mockjs from 'mockjs';
 import { getRule, postRule } from './mock/rule';
-import { getActivities, getNotice, getFakeList } from './mock/api';
+import { getActivities, getNotice, getFakeList, postFakeList, getFakeCaptcha } from './mock/api';
 import { getFakeChartData } from './mock/chart';
 import { getProfileBasicData } from './mock/profile';
 import { getProfileAdvancedData } from './mock/profile';
 import { getNotices } from './mock/notices';
 import { format, delay } from 'roadhog-api-doc';
+import { getProvince, getCity } from './mock/geographic';
 
 // 是否禁用代理
 const noProxy = process.env.NO_PROXY === 'true';
@@ -25,7 +26,50 @@ const proxy = {
       name: 'Serati Ma',
       avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
       userid: '00000001',
+      email: 'antdesign@alipay.com',
+      signature: '海纳百川，有容乃大',
+      title: '交互专家',
+      group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+      tags: [
+        {
+          key: '0',
+          label: '很有想法的',
+        },
+        {
+          key: '1',
+          label: '专注设计',
+        },
+        {
+          key: '2',
+          label: '辣~',
+        },
+        {
+          key: '3',
+          label: '大长腿',
+        },
+        {
+          key: '4',
+          label: '川妹子',
+        },
+        {
+          key: '5',
+          label: '海纳百川',
+        },
+      ],
       notifyCount: 12,
+      country: 'China',
+      geographic: {
+        province: {
+          label: '浙江省',
+          key: '330000',
+        },
+        city: {
+          label: '杭州市',
+          key: '330100',
+        },
+      },
+      address: '西湖区工专路 77 号',
+      phone: '0752-268888888',
     },
   },
   // GET POST 可省略
@@ -68,6 +112,7 @@ const proxy = {
     'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }],
   }),
   'GET /api/fake_list': getFakeList,
+  'POST /api/fake_list': postFakeList,
   'GET /api/fake_chart_data': getFakeChartData,
   'GET /api/profile/basic': getProfileBasicData,
   'GET /api/profile/advanced': getProfileAdvancedData,
@@ -135,6 +180,9 @@ const proxy = {
       path: '/base/category/list',
     });
   },
+  'GET /api/geographic/province': getProvince,
+  'GET /api/geographic/city/:province': getCity,
+  'GET /api/captcha': getFakeCaptcha,
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));

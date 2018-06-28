@@ -15,8 +15,13 @@ export default class WaterWave extends PureComponent {
   componentDidMount() {
     this.renderChart();
     this.resize();
-
-    window.addEventListener('resize', this.resize);
+    window.addEventListener(
+      'resize',
+      () => {
+        requestAnimationFrame(() => this.resize());
+      },
+      { passive: true }
+    );
   }
 
   componentWillUnmount() {
@@ -28,11 +33,13 @@ export default class WaterWave extends PureComponent {
   }
 
   resize = () => {
-    const { height } = this.props;
-    const { offsetWidth } = this.root.parentNode;
-    this.setState({
-      radio: offsetWidth < height ? offsetWidth / height : 1,
-    });
+    if (this.root) {
+      const { height } = this.props;
+      const { offsetWidth } = this.root.parentNode;
+      this.setState({
+        radio: offsetWidth < height ? offsetWidth / height : 1,
+      });
+    }
   };
 
   renderChart() {

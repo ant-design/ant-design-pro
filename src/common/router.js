@@ -70,7 +70,9 @@ function getFlatMenuData(menus) {
 export const getRouterData = app => {
   const routerConfig = {
     '/': {
-      component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
+      component: dynamicWrapper(app, ['user', 'login', 'setting'], () =>
+        import('../layouts/LoadingPage')
+      ),
     },
     '/dashboard/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
@@ -79,7 +81,7 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
     },
     '/dashboard/workplace': {
-      component: dynamicWrapper(app, ['project', 'activities', 'chart'], () =>
+      component: dynamicWrapper(app, ['user', 'project', 'activities', 'chart'], () =>
         import('../routes/Dashboard/Workplace')
       ),
       // hideInBreadcrumb: true,
@@ -167,6 +169,45 @@ export const getRouterData = app => {
     },
     '/user/register-result': {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
+    },
+    '/account/center': {
+      component: dynamicWrapper(app, ['list', 'user', 'project'], () =>
+        import('../routes/Account/Center/Center')
+      ),
+    },
+    '/account/center/articles': {
+      component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Articles')),
+    },
+    '/account/center/applications': {
+      component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Applications')),
+    },
+    '/account/center/projects': {
+      component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Projects')),
+    },
+    '/account/settings': {
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/Info')
+      ),
+    },
+    '/account/settings/base': {
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/BaseView')
+      ),
+    },
+    '/account/settings/security': {
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/SecurityView')
+      ),
+    },
+    '/account/settings/binding': {
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/BindingView')
+      ),
+    },
+    '/account/settings/notification': {
+      component: dynamicWrapper(app, ['geographic'], () =>
+        import('../routes/Account/Settings/NotificationView')
+      ),
     },
     // '/user/:id': {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),

@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: NoticeIcon
-  zh-CN: NoticeIcon
+title: NoticeIcon
 subtitle: 通知菜单
 cols: 1
 order: 9
@@ -29,14 +27,16 @@ locale | 默认文案 | Object | `{ emptyText: '暂无数据', clear: '清空' }
 ----|------|-----|------
 title | 消息分类的页签标题 | string | -
 list | 列表数据，格式参照下表 | Array | `[]`
+showClear | 是否显示清空按钮 | boolean | true
 emptyText | 针对每个 Tab 定制空数据文案 | ReactNode | -
 emptyImage | 针对每个 Tab 定制空数据图片 | string | -
+
 
 ### Tab data
 
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
-avatar | 头像图片链接 | string | -
+avatar | 头像图片链接 | string \| ReactNode | -
 title | 标题 | ReactNode | -
 description | 描述信息 | ReactNode | -
 datetime | 时间戳 | ReactNode | -

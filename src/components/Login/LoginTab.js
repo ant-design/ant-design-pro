@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
+import LoginContext from './loginContext';
 
 const { TabPane } = Tabs;
 
@@ -12,26 +12,33 @@ const generateId = (() => {
   };
 })();
 
-export default class LoginTab extends Component {
-  static __ANT_PRO_LOGIN_TAB = true;
-
-  static contextTypes = {
-    tabUtil: PropTypes.object,
-  };
-
+class LoginTab extends Component {
   constructor(props) {
     super(props);
     this.uniqueId = generateId('login-tab-');
   }
 
-  componentWillMount() {
-    const { tabUtil } = this.context;
-    if (tabUtil) {
-      tabUtil.addTab(this.uniqueId);
-    }
+  componentDidMount() {
+    const { tabUtil } = this.props;
+    tabUtil.addTab(this.uniqueId);
   }
 
   render() {
-    return <TabPane {...this.props} />;
+    const { children } = this.props;
+    return <TabPane {...this.props}>{children}</TabPane>;
   }
 }
+
+const warpContext = props => {
+  return (
+    <LoginContext.Consumer>
+      {value => {
+        return <LoginTab tabUtil={value.tabUtil} {...props} />;
+      }}
+    </LoginContext.Consumer>
+  );
+};
+// 标志位 用来判断是不是自定义组件
+warpContext.typeName = 'LoginTab';
+
+export default warpContext;

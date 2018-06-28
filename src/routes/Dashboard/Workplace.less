@@ -86,24 +86,18 @@
   a {
     display: block;
     margin: 12px 0;
-    line-height: 24px;
     height: 24px;
+    color: @text-color;
+    transition: all 0.3s;
     .textOverflow();
     .member {
       font-size: @font-size-base;
-      color: @text-color;
       line-height: 24px;
-      max-width: 100px;
       vertical-align: top;
       margin-left: 12px;
-      transition: all 0.3s;
-      display: inline-block;
-      .textOverflow();
     }
     &:hover {
-      span {
-        color: @primary-color;
-      }
+      color: @primary-color;
     }
   }
 }
