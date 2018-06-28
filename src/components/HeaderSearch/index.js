@@ -89,7 +89,6 @@ export default class HeaderSearch extends PureComponent {
     const { className, placeholder, ...restProps } = this.props;
     const { searchMode, value } = this.state;
     delete restProps.defaultOpen; // for rc-select not affected
-    const { searchMode, value } = this.state;
     const inputClass = classNames(styles.input, {
       [styles.show]: searchMode,
     });

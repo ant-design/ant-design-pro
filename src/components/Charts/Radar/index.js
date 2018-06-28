@@ -16,7 +16,8 @@ export default class Radar extends Component {
   }
 
   componentDidUpdate(preProps) {
-    if (this.props.data !== preProps.data) {
+    const { data } = this.props;
+    if (data !== preProps.data) {
       this.getLegendData();
     }
   }

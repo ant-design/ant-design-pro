@@ -28,12 +28,7 @@ export default class NoticeIcon extends PureComponent {
   };
 
   onTabChange = tabType => {
-<<<<<<< HEAD
-    this.setState({ tabType });
-    const { onTabChange } = this.props;
-=======
     const onTabChange = this.props;
->>>>>>> heroku
     onTabChange(tabType);
   };
 
@@ -70,11 +65,7 @@ export default class NoticeIcon extends PureComponent {
   }
 
   render() {
-<<<<<<< HEAD
-    const { className, count, popupAlign, onPopupVisibleChange, popupVisible } = this.props;
-=======
     const { className, count, popupAlign, popupVisible, onPopupVisibleChange } = this.props;
->>>>>>> heroku
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const notificationBox = this.getNotificationBox();
     const trigger = (

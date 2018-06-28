@@ -189,7 +189,6 @@ export default class PageHeader extends PureComponent {
     if (tabActiveKey !== undefined) {
       activeKeyProps.activeKey = tabActiveKey;
     }
-    const { breadcrumb } = this.state;
     return (
       <div className={clsString}>
         {breadcrumb}

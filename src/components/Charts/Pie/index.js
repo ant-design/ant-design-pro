@@ -150,7 +150,6 @@ export default class Pie extends Component {
     let tooltip = propsTooltip;
 
     const defaultColors = colors;
-    let { data, selected, tooltip } = this.props;
     data = data || [];
     selected = selected || true;
     tooltip = tooltip || true;

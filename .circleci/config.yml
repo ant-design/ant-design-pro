@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11.2
+    steps:
+      - checkout
+      - run:  npm run build
+  test:
+    docker:
+      - image: circleci/node:8.11.2
+    steps:
+      - checkout
+      - run: npm run test:all
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test

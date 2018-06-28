@@ -121,8 +121,6 @@ export default class TableForm extends PureComponent {
         });
         return;
       }
-      const { data } = this.state;
-      const { onChange } = this.props;
       delete target.isNew;
       this.toggleEditable(e, key);
       onChange(data);
@@ -247,14 +245,8 @@ export default class TableForm extends PureComponent {
         },
       },
     ];
-<<<<<<< HEAD
-
-    const { loading, data } = this.state;
-
-=======
     const { data, editData, loading } = this.state;
     const dataSource = data.concat(editData);
->>>>>>> heroku
     return (
       <Fragment>
         <Table
