@@ -5,12 +5,14 @@ jobs:
       - image: circleci/node:8.11.2
     steps:
       - checkout
+      - run: npm install
       - run:  npm run build
   test:
     docker:
       - image: circleci/node:8.11.2
     steps:
       - checkout
+      - run: npm install
       - run: npm run test:all
 workflows:
   version: 2
