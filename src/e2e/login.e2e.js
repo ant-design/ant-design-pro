@@ -17,6 +17,9 @@ describe('Login', () => {
   afterEach(() => page.close());
 
   it('should login with failure', async () => {
+    await page.waitForSelector('#userName', {
+      timeout: 2000,
+    });
     await page.type('#userName', 'mockuser');
     await page.type('#password', 'wrong_password');
     await page.click('button[type="submit"]');
@@ -24,6 +27,9 @@ describe('Login', () => {
   });
 
   it('should login successfully', async () => {
+    await page.waitForSelector('#userName', {
+      timeout: 2000,
+    });
     await page.type('#userName', 'admin');
     await page.type('#password', '888888');
     await page.click('button[type="submit"]');
