@@ -1,6 +1,6 @@
 import React, { PureComponent, createElement } from 'react';
 import pathToRegexp from 'path-to-regexp';
-import { Breadcrumb, Tabs } from 'antd';
+import { Breadcrumb, Tabs, Card } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 import { urlToList } from '../_utils/pathTools';
@@ -190,7 +190,7 @@ export default class PageHeader extends PureComponent {
     }
     const { breadcrumb } = this.state;
     return (
-      <div className={clsString}>
+      <Card className={clsString} bodyStyle={{ padding: 0 }}>
         {breadcrumb}
         <div className={styles.detail}>
           {logo && <div className={styles.logo}>{logo}</div>}
@@ -216,7 +216,7 @@ export default class PageHeader extends PureComponent {
               {tabList.map(item => <TabPane tab={item.tab} key={item.key} />)}
             </Tabs>
           )}
-      </div>
+      </Card>
     );
   }
 }
