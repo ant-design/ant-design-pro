@@ -1,8 +1,9 @@
 import { routerRedux } from 'dva/router';
+import { stringify } from 'qs';
 import { fakeAccountLogin } from '../services/api';
 import { setAuthority } from '../utils/authority';
 import { reloadAuthorized } from '../utils/Authorized';
-import { getPageQuery, getQueryPath } from '../utils/utils';
+import { getPageQuery } from '../utils/utils';
 
 export default {
   namespace: 'login',
@@ -49,11 +50,12 @@ export default {
       });
       reloadAuthorized();
       yield put(
-        routerRedux.push(
-          getQueryPath('/user/login', {
+        routerRedux.push({
+          pathname: '/user/login',
+          search: stringify({
             redirect: window.location.href,
-          })
-        )
+          }),
+        })
       );
     },
   },
