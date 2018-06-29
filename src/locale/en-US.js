@@ -7,6 +7,7 @@ export default {
   data: appLocaleData,
   antd: antdEn,
   messages: {
+    'navbar.lang': 'English',
     'menu.home': 'Home',
     'menu.dashboard': 'Dashboard',
     'menu.dashboard.analysis': 'Analysis',
