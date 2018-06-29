@@ -18,11 +18,10 @@ dynamic.setDefaultLoadingComponent(() => {
 });
 
 function getLang() {
-  if (window) {
-    return 'en-US';
+  if (window.localStorage && localStorage.getItem('locale')) {
+    return localStorage.getItem('locale');
   }
-  return (window.localStorage && localStorage.getItem('locale')) ||
-    (navigator.language || navigator.browserLanguage).toLowerCase() === 'en-us'
+  return (navigator.language || navigator.browserLanguage).toLowerCase() === 'en-us'
     ? 'en-US'
     : 'zh-CN';
 }

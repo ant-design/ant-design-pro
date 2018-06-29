@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip } from 'antd';
+import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
@@ -39,6 +39,16 @@ export default class GlobalHeaderRight extends PureComponent {
     });
     return groupBy(newNotices, 'type');
   }
+
+  changLang = () => {
+    const locale = localStorage.getItem('locale');
+    if (!locale || locale === 'zh-CN') {
+      localStorage.setItem('locale', 'en-US');
+    } else {
+      localStorage.setItem('locale', 'zh-CN');
+    }
+    location.reload();
+  };
 
   render() {
     const {
@@ -141,8 +151,11 @@ export default class GlobalHeaderRight extends PureComponent {
             </span>
           </Dropdown>
         ) : (
-          <Spin size="small" style={{ marginLeft: 8 }} />
+          <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )}
+        <Button size="small" onClick={this.changLang}>
+          <FormattedMessage id="navbar.lang" />
+        </Button>
       </div>
     );
   }

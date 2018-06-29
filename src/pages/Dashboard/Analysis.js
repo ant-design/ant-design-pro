@@ -322,6 +322,7 @@ class Analysis extends Component {
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
+              loading={loading}
               title={<FormattedMessage id="app.analysis.visits" defaultMessage="visits" />}
               action={
                 <Tooltip
@@ -349,6 +350,7 @@ class Analysis extends Component {
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
+              loading={loading}
               title={<FormattedMessage id="app.analysis.payments" defaultMessage="Payments" />}
               action={
                 <Tooltip
