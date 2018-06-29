@@ -9,7 +9,7 @@
     "start": "cross-env ESLINT=none roadhog dev",
     "start:no-proxy": "cross-env NO_PROXY=true ESLINT=none roadhog dev",
     "build": "cross-env ESLINT=none roadhog build",
-    "site": "npm run build && firebase deploy",
+    "site": "rollup -c && npm run build && firebase deploy",
     "analyze": "cross-env ANALYZE=1 roadhog build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
