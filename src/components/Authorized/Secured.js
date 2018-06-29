@@ -46,8 +46,8 @@ const authorize = (authority, error) => {
   if (!authority) {
     throw new Error('authority is required');
   }
-  return function decideAuthority(targer) {
-    const component = CheckPermissions(authority, targer, classError || Exception403);
+  return function decideAuthority(target) {
+    const component = CheckPermissions(authority, target, classError || Exception403);
     return checkIsInstantiation(component);
   };
 };
