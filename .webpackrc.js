@@ -26,6 +26,7 @@ export default {
   lessLoaderOptions: {
     javascriptEnabled: true,
   },
+  disableDynamicImport: true,
   cssLoaderOptions: {
     modules: true,
     getLocalIdent: (context, localIdentName, localName) => {
