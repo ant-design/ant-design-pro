@@ -178,6 +178,7 @@ export default class PageHeader extends PureComponent {
       tabActiveKey,
       tabDefaultActiveKey,
       tabBarExtraContent,
+      loading = false,
     } = this.props;
 
     const clsString = classNames(styles.pageHeader, className);
@@ -190,7 +191,7 @@ export default class PageHeader extends PureComponent {
     }
     const { breadcrumb } = this.state;
     return (
-      <Card className={clsString} bodyStyle={{ padding: 0 }}>
+      <Card className={clsString} bodyStyle={{ padding: 0 }} loading={loading}>
         {breadcrumb}
         <div className={styles.detail}>
           {logo && <div className={styles.logo}>{logo}</div>}
