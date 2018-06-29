@@ -4,15 +4,10 @@ const express = require('express');
 const mock = require('./mock/index');
 
 const app = express();
-
 const sendData = (body, req, res) => {
   if (!body) {
     res.send('test');
     return '';
-  }
-  if ('$body' in body) {
-    res.send(body.$body);
-    return;
   }
   if (typeof body === 'function') {
     body(req, res);
@@ -21,9 +16,13 @@ const sendData = (body, req, res) => {
 };
 app.get('/api', (req, res) => {
   const html = Object.keys(mock).map(url => {
-    return `<li><code>${url}</code></li>`;
+    const href = url.split(' /')[1];
+    return `<li><a href="${href}"><code>${url}</code></a></li>`;
   });
   res.send(`<ul>${html.join('')}</ul>`);
+});
+app.get('/', (req, res) => {
+  res.send(`<ul><li><a href="api/api"><code>/api</code></a></li></ul>`);
 });
 
 Object.keys(mock).forEach(url => {

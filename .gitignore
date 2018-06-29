@@ -26,3 +26,5 @@ jsconfig.json
 # visual studio code 
 .history
 *.log
+
+funtction/mock
