@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
+import LocaleContext from '../../locale/localeContext';
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
@@ -47,7 +48,6 @@ export default class GlobalHeaderRight extends PureComponent {
     } else {
       localStorage.setItem('locale', 'zh-CN');
     }
-    location.reload();
   };
 
   render() {
@@ -153,9 +153,21 @@ export default class GlobalHeaderRight extends PureComponent {
         ) : (
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )}
-        <Button size="small" onClick={this.changLang}>
-          <FormattedMessage id="navbar.lang" />
-        </Button>
+        <LocaleContext.Consumer>
+          {context => {
+            return (
+              <Button
+                size="small"
+                onClick={() => {
+                  this.changLang();
+                  context.changeLocal();
+                }}
+              >
+                <FormattedMessage id="navbar.lang" />
+              </Button>
+            );
+          }}
+        </LocaleContext.Consumer>
       </div>
     );
   }
