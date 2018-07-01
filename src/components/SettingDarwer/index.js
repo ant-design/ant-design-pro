@@ -106,7 +106,7 @@ class SettingDarwer extends PureComponent {
       }
     }
     if (key === 'colorWeak') {
-      if (value === 'open') {
+      if (value) {
         document.body.className = 'colorWeak';
       } else {
         document.body.className = '';
@@ -155,24 +155,26 @@ class SettingDarwer extends PureComponent {
           open={collapse}
           mask={false}
           onHandleClick={this.togglerContent}
-          handleChild={
-            !collapse ? (
-              <Icon
-                type="setting"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            ) : (
-              <Icon
-                type="close"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            )
+          handler={
+            <div className="drawer-handle">
+              {!collapse ? (
+                <Icon
+                  type="setting"
+                  style={{
+                    color: '#FFF',
+                    fontSize: 20,
+                  }}
+                />
+              ) : (
+                <Icon
+                  type="close"
+                  style={{
+                    color: '#FFF',
+                    fontSize: 20,
+                  }}
+                />
+              )}
+            </div>
           }
           placement="right"
           width="336px"
@@ -231,15 +233,11 @@ class SettingDarwer extends PureComponent {
             <Body title="其他设置 ">
               <List.Item
                 actions={[
-                  <Select
-                    value={colorWeak}
+                  <Switch
                     size="small"
-                    onSelect={value => this.changeSetting('colorWeak', value)}
-                    style={{ width: 80 }}
-                  >
-                    <Select.Option value="close">close</Select.Option>
-                    <Select.Option value="open">open</Select.Option>
-                  </Select>,
+                    checked={!!colorWeak}
+                    onChange={checked => this.changeSetting('colorWeak', checked)}
+                  />,
                 ]}
               >
                 色弱模式

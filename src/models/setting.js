@@ -7,7 +7,7 @@ const defaultSetting = {
   fixedHeader: false,
   autoHideHeader: false,
   fixSiderbar: false,
-  colorWeak: 'close',
+  colorWeak: false,
 };
 
 export default {

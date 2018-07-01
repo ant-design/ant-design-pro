@@ -7,7 +7,7 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "mock":"cd .. && rollup -c"
+    "mock": "cd .. && rollup -c"
   },
   "dependencies": {
     "express": "^4.16.3",
