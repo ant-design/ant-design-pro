@@ -27,7 +27,8 @@ class TagCloud extends Component {
   }
 
   componentDidUpdate(preProps) {
-    if (JSON.stringify(preProps.data) !== JSON.stringify(this.props.data)) {
+    const { data } = this.props;
+    if (JSON.stringify(preProps.data) !== JSON.stringify(data)) {
       this.renderChart(this.props);
     }
   }

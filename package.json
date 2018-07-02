@@ -48,6 +48,7 @@
     "rollbar": "^2.3.4",
     "rollup": "^0.62.0",
     "rollup-plugin-json": "^3.0.0",
+    "setprototypeof": "^1.1.0",
     "url-polyfill": "^1.0.10"
   },
   "devDependencies": {

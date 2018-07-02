@@ -6,13 +6,14 @@ import styles from './index.less';
 
 export default class TopNavHeader extends PureComponent {
   render() {
+    const { theme, grid, logo } = this.props;
     return (
-      <div className={`${styles.head} ${this.props.theme === 'light' ? styles.light : ''}`}>
-        <div className={`${styles.main} ${this.props.grid === 'Wide' ? styles.wide : ''}`}>
+      <div className={`${styles.head} ${theme === 'light' ? styles.light : ''}`}>
+        <div className={`${styles.main} ${grid === 'Wide' ? styles.wide : ''}`}>
           <div className={styles.left}>
             <div className={styles.logo} key="logo" id="logo">
               <Link to="/">
-                <img src={this.props.logo} alt="logo" />
+                <img src={logo} alt="logo" />
                 <h1>Ant Design Pro</h1>
               </Link>
             </div>
