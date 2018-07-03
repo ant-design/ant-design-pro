@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { Link, routerRedux, Route, Switch, Redirect } from 'dva/router';
 import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
 import { getRoutes } from '../../../utils/utils';
+import GridContent from '../../../layouts/GridContent';
 import styles from './Center.less';
 
 @connect(({ list, loading, user, project }) => ({
@@ -122,7 +123,7 @@ export default class Center extends PureComponent {
     ];
 
     return (
-      <div className={styles.userCenter}>
+      <GridContent className={styles.userCenter}>
         <Row gutter={24}>
           <Col lg={7} md={24}>
             <Card bordered={false} style={{ marginBottom: 24 }} loading={currentUserLoading}>
@@ -221,7 +222,7 @@ export default class Center extends PureComponent {
             </Card>
           </Col>
         </Row>
-      </div>
+      </GridContent>
     );
   }
 }
