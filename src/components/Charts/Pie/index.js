@@ -19,16 +19,24 @@ export default class Pie extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize, { passive: true });
+    window.addEventListener(
+      'resize',
+      () => {
+        requestAnimationFrame(() => this.resize());
+      },
+      { passive: true }
+    );
   }
 
   componentDidUpdate(preProps) {
-    if (this.props.data !== preProps.data) {
+    const { data } = this.props;
+    if (data !== preProps.data) {
       // because of charts data create when rendered
       // so there is a trick for get rendered time
       this.getLegendData();
     }
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
     this.resize.cancel();
@@ -62,30 +70,6 @@ export default class Pie extends Component {
     });
   };
 
-  // for window resize auto responsive legend
-  @Bind()
-  @Debounce(300)
-  resize() {
-    requestAnimationFrame(() => {
-      const { hasLegend } = this.props;
-      if (!hasLegend || !this.root) {
-        window.removeEventListener('resize', this.resize);
-        return;
-      }
-      if (this.root.parentNode.clientWidth <= 380) {
-        if (!this.state.legendBlock) {
-          this.setState({
-            legendBlock: true,
-          });
-        }
-      } else if (this.state.legendBlock) {
-        this.setState({
-          legendBlock: false,
-        });
-      }
-    });
-  }
-
   handleRoot = n => {
     this.root = n;
   };
@@ -107,6 +91,29 @@ export default class Pie extends Component {
       legendData,
     });
   };
+
+  // for window resize auto responsive legend
+  @Bind()
+  @Debounce(300)
+  resize() {
+    const { hasLegend } = this.props;
+    const { legendBlock } = this.state;
+    if (!hasLegend || !this.root) {
+      window.removeEventListener('resize', this.resize);
+      return;
+    }
+    if (this.root.parentNode.clientWidth <= 380) {
+      if (!legendBlock) {
+        this.setState({
+          legendBlock: true,
+        });
+      }
+    } else if (legendBlock) {
+      this.setState({
+        legendBlock: false,
+      });
+    }
+  }
 
   render() {
     const {
@@ -132,10 +139,20 @@ export default class Pie extends Component {
       [styles.legendBlock]: legendBlock,
     });
 
+    const {
+      data: propsData,
+      selected: propsSelected = true,
+      tooltip: propsTooltip = true,
+    } = this.props;
+
+    let data = propsData || [];
+    let selected = propsSelected;
+    let tooltip = propsTooltip;
+
     const defaultColors = colors;
-    let data = this.props.data || [];
-    let selected = this.props.selected || true;
-    let tooltip = this.props.tooltip || true;
+    data = data || [];
+    selected = selected || true;
+    tooltip = tooltip || true;
     let formatColor;
 
     const scale = {

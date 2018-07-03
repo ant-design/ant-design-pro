@@ -14,14 +14,18 @@ class WarpFormItem extends Component {
       count: 0,
     };
   }
+
   componentDidMount() {
-    if (this.props.updateActive) {
-      this.props.updateActive(this.props.name);
+    const { updateActive, name } = this.props;
+    if (updateActive) {
+      updateActive(name);
     }
   }
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
   onGetCaptcha = () => {
     const { onGetCaptcha } = this.props;
     const result = onGetCaptcha ? onGetCaptcha() : null;
@@ -34,6 +38,7 @@ class WarpFormItem extends Component {
       this.runGetCaptchaCountDown();
     }
   };
+
   getFormItemOptions = ({ onChange, defaultValue, rules }) => {
     const options = {
       rules: rules || this.customprops.rules,
@@ -46,8 +51,10 @@ class WarpFormItem extends Component {
     }
     return options;
   };
+
   runGetCaptchaCountDown = () => {
-    let count = this.props.countDown || 59;
+    const { countDown } = this.props;
+    let count = countDown || 59;
     this.setState({ count });
     this.interval = setInterval(() => {
       count -= 1;
@@ -57,10 +64,13 @@ class WarpFormItem extends Component {
       }
     }, 1000);
   };
+
   render() {
     const { count } = this.state;
 
-    const { getFieldDecorator } = this.props.form;
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
 
     // 这么写是为了防止restProps中 带入 onChange, defaultValue, rules props
     const {
@@ -70,6 +80,7 @@ class WarpFormItem extends Component {
       rules,
       name,
       updateActive,
+      type,
       ...restProps
     } = this.props;
 
@@ -77,15 +88,13 @@ class WarpFormItem extends Component {
     const options = this.getFormItemOptions(this.props);
 
     const otherProps = restProps || {};
-    if (this.props.type === 'Captcha') {
+    if (type === 'Captcha') {
       const inputProps = omit(otherProps, ['onGetCaptcha']);
       return (
         <FormItem>
           <Row gutter={8}>
             <Col span={16}>
-              {getFieldDecorator(name, options)(
-                <Input {...this.props.customprops} {...inputProps} />
-              )}
+              {getFieldDecorator(name, options)(<Input {...customprops} {...inputProps} />)}
             </Col>
             <Col span={8}>
               <Button
@@ -103,7 +112,7 @@ class WarpFormItem extends Component {
     }
     return (
       <FormItem>
-        {getFieldDecorator(name, options)(<Input {...this.props.customprops} {...otherProps} />)}
+        {getFieldDecorator(name, options)(<Input {...customprops} {...otherProps} />)}
       </FormItem>
     );
   }

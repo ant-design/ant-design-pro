@@ -29,6 +29,16 @@ export default class Info extends Component {
       mode: 'inline',
     };
   }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resize);
+    this.resize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
   static getDerivedStateFromProps(props, state) {
     const { match, location } = props;
     let selectKey = location.pathname.replace(`${match.path}/`, '');
@@ -38,25 +48,24 @@ export default class Info extends Component {
     }
     return null;
   }
-  componentDidMount() {
-    window.addEventListener('resize', this.resize);
-    this.resize();
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
-  }
+
   getmenu = () => {
     return Object.keys(menuMap).map(item => <Item key={item}>{menuMap[item]}</Item>);
   };
+
   getRightTitle = () => {
-    return menuMap[this.state.selectKey];
+    const { selectKey } = this.state;
+    return menuMap[selectKey];
   };
+
   selectKey = ({ key }) => {
-    this.props.dispatch(routerRedux.push(`/account/settings/${key}`));
+    const { dispatch } = this.props;
+    dispatch(routerRedux.push(`/account/settings/${key}`));
     this.setState({
       selectKey: key,
     });
   };
+
   resize = () => {
     if (!this.main) {
       return;
@@ -75,11 +84,13 @@ export default class Info extends Component {
       });
     });
   };
+
   render() {
     const { match, routerData, currentUser } = this.props;
     if (!currentUser.userid) {
       return '';
     }
+    const { mode, selectKey } = this.state;
     return (
       <GridContent>
         <div
@@ -89,11 +100,7 @@ export default class Info extends Component {
           }}
         >
           <div className={styles.leftmenu}>
-            <Menu
-              mode={this.state.mode}
-              selectedKeys={[this.state.selectKey]}
-              onClick={this.selectKey}
-            >
+            <Menu mode={mode} selectedKeys={[selectKey]} onClick={this.selectKey}>
               {this.getmenu()}
             </Menu>
           </div>

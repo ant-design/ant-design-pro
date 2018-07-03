@@ -49,26 +49,33 @@ export default class BaseView extends Component {
   componentDidMount() {
     this.setBaseInfo();
   }
+
   setBaseInfo = () => {
-    const { currentUser } = this.props;
-    Object.keys(this.props.form.getFieldsValue()).forEach(key => {
+    const { currentUser, form } = this.props;
+    Object.keys(form.getFieldsValue()).forEach(key => {
       const obj = {};
       obj[key] = currentUser[key] || null;
-      this.props.form.setFieldsValue(obj);
+      form.setFieldsValue(obj);
     });
   };
+
   getAvatarURL() {
-    if (this.props.currentUser.avatar) {
-      return this.props.currentUser.avatar;
+    const { currentUser } = this.props;
+    if (currentUser.avatar) {
+      return currentUser.avatar;
     }
     const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
     return url;
   }
+
   getViewDom = ref => {
     this.view = ref;
   };
+
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>

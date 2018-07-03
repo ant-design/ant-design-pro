@@ -14,12 +14,15 @@ class HeaderView extends PureComponent {
   state = {
     visible: true,
   };
+
   componentDidMount() {
     document.getElementById('root').addEventListener('scroll', this.handScroll);
   }
+
   componentWillUnmount() {
     document.getElementById('root').removeEventListener('scroll', this.handScroll);
   }
+
   getHeadWidth = () => {
     const { isMobile, collapsed, setting } = this.props;
     const { fixedHeader, layout } = setting;
@@ -28,53 +31,62 @@ class HeaderView extends PureComponent {
     }
     return collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)';
   };
+
   handleNoticeClear = type => {
     message.success(`清空了${type}`);
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'global/clearNotices',
       payload: type,
     });
   };
+
   handleMenuClick = ({ key }) => {
+    const { dispatch } = this.props;
     if (key === 'userCenter') {
-      this.props.dispatch(routerRedux.push('/account/center'));
+      dispatch(routerRedux.push('/account/center'));
       return;
     }
     if (key === 'triggerError') {
-      this.props.dispatch(routerRedux.push('/exception/trigger'));
+      dispatch(routerRedux.push('/exception/trigger'));
       return;
     }
     if (key === 'userinfo') {
-      this.props.dispatch(routerRedux.push('/account/settings/base'));
+      dispatch(routerRedux.push('/account/settings/base'));
       return;
     }
     if (key === 'logout') {
-      this.props.dispatch({
+      dispatch({
         type: 'login/logout',
       });
     }
   };
+
   handleNoticeVisibleChange = visible => {
     if (visible) {
-      this.props.dispatch({
+      const { dispatch } = this.props;
+      dispatch({
         type: 'global/fetchNotices',
       });
     }
   };
+
   handScroll = () => {
-    if (!this.props.autoHideHeader) {
+    const { autoHideHeader } = this.props;
+    const { visible } = this.state;
+    if (!autoHideHeader) {
       return;
     }
     const { scrollTop } = document.getElementById('root');
     if (!this.ticking) {
       this.ticking = false;
       requestAnimationFrame(() => {
-        if (scrollTop > 400 && this.state.visible) {
+        if (scrollTop > 400 && visible) {
           this.setState({
             visible: false,
           });
         }
-        if (scrollTop < 400 && !this.state.visible) {
+        if (scrollTop < 400 && !visible) {
           this.setState({
             visible: true,
           });
@@ -83,11 +95,13 @@ class HeaderView extends PureComponent {
       });
     }
   };
+
   render() {
-    const { isMobile, handleMenuCollapse } = this.props;
-    const { silderTheme, layout, fixedHeader } = this.props.setting;
+    const { isMobile, handleMenuCollapse, setting } = this.props;
+    const { silderTheme, layout, fixedHeader } = setting;
+    const { visible } = this.state;
     const isTop = layout === 'topmenu';
-    const HeaderDom = this.state.visible ? (
+    const HeaderDom = visible ? (
       <Header
         style={{ padding: 0, width: this.getHeadWidth() }}
         className={fixedHeader ? styles.fixedHeader : ''}

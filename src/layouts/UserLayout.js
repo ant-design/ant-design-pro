@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
-import { getRoutes } from '../utils/utils';
+import { getRoutes, getPageQuery, getQueryPath } from '../utils/utils';
 
 const links = [
   {
@@ -31,6 +31,14 @@ const copyright = (
   </Fragment>
 );
 
+function getLoginPathWithRedirectPath() {
+  const params = getPageQuery();
+  const { redirect } = params;
+  return getQueryPath('/user/login', {
+    redirect,
+  });
+}
+
 class UserLayout extends React.PureComponent {
   getPageTitle() {
     const { routerData, location } = this.props;
@@ -41,6 +49,7 @@ class UserLayout extends React.PureComponent {
     }
     return title;
   }
+
   render() {
     const { routerData, match } = this.props;
     return (
@@ -65,7 +74,7 @@ class UserLayout extends React.PureComponent {
                   exact={item.exact}
                 />
               ))}
-              <Redirect exact from="/user" to="/user/login" />
+              <Redirect from="/user" to={getLoginPathWithRedirectPath()} />
             </Switch>
           </div>
           <GlobalFooter links={links} copyright={copyright} />

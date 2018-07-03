@@ -4,11 +4,12 @@ import styles from './GridContent.less';
 
 class GridContent extends PureComponent {
   render() {
+    const { grid, children } = this.props;
     let className = `${styles.main}`;
-    if (this.props.grid === 'Wide') {
+    if (grid === 'Wide') {
       className = `${styles.main} ${styles.wide}`;
     }
-    return <div className={className}>{this.props.children}</div>;
+    return <div className={className}>{children}</div>;
   }
 }
 

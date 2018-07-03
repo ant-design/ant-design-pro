@@ -38,32 +38,37 @@ const { Search, TextArea } = Input;
 }))
 @Form.create()
 export default class BasicList extends PureComponent {
+  formLayout = {
+    labelCol: { span: 7 },
+    wrapperCol: { span: 13 },
+  };
+
   state = { visible: false, done: false };
 
   componentDidMount() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'list/fetch',
       payload: {
         count: 5,
       },
     });
   }
-  formLayout = {
-    labelCol: { span: 7 },
-    wrapperCol: { span: 13 },
-  };
+
   showModal = () => {
     this.setState({
       visible: true,
       current: undefined,
     });
   };
+
   showEditModal = item => {
     this.setState({
       visible: true,
       current: item,
     });
   };
+
   handleDone = () => {
     setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
@@ -71,16 +76,19 @@ export default class BasicList extends PureComponent {
       visible: false,
     });
   };
+
   handleCancel = () => {
     setTimeout(() => this.addBtn.blur(), 0);
     this.setState({
       visible: false,
     });
   };
+
   handleSubmit = e => {
     e.preventDefault();
     const { dispatch, form } = this.props;
-    const id = this.state.current ? this.state.current.id : '';
+    const { current } = this.state;
+    const id = current ? current.id : '';
 
     setTimeout(() => this.addBtn.blur(), 0);
     form.validateFields((err, fieldsValue) => {
@@ -94,16 +102,23 @@ export default class BasicList extends PureComponent {
       });
     });
   };
+
   deleteItem = id => {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'list/submit',
       payload: { id },
     });
   };
 
   render() {
-    const { list: { list }, loading } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    const {
+      list: { list },
+      loading,
+    } = this.props;
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
     const { visible, done, current = {} } = this.state;
 
     const editAndDelete = (key, currentItem) => {
@@ -237,7 +252,6 @@ export default class BasicList extends PureComponent {
         </Form>
       );
     };
-
     return (
       <PageHeaderLayout>
         <div className={styles.standardList}>
@@ -308,7 +322,7 @@ export default class BasicList extends PureComponent {
           </Card>
         </div>
         <Modal
-          title={done ? null : `任务${this.state.current ? '编辑' : '添加'}`}
+          title={done ? null : `任务${current ? '编辑' : '添加'}`}
           className={styles.standardListForm}
           width={640}
           bodyStyle={done ? { padding: '72px 0' } : { padding: '28px 0 0' }}

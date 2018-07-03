@@ -21,16 +21,23 @@ const Body = ({ children, title, style }) => (
 @connect(({ setting }) => ({ setting }))
 class SettingDarwer extends PureComponent {
   componentDidMount() {
-    const { themeColor, colorWeak } = this.props.setting;
+    const {
+      setting: { themeColor, colorWeak },
+    } = this.props;
     if (themeColor !== '#1890FF') {
-      this.colorChange(themeColor);
+      window.less.refresh().then(() => {
+        this.colorChange(themeColor);
+      });
     }
     if (colorWeak === 'open') {
       document.body.className = 'colorWeak';
     }
   }
+
   getLayOutSetting = () => {
-    const { grid, fixedHeader, autoHideHeader, fixSiderbar } = this.props.setting;
+    const {
+      setting: { grid, fixedHeader, autoHideHeader, fixSiderbar },
+    } = this.props;
     return [
       {
         title: '栅格模式',
@@ -58,7 +65,7 @@ class SettingDarwer extends PureComponent {
       },
       {
         title: '下滑时隐藏 Header',
-        hide: fixedHeader,
+        hide: !fixedHeader,
         action: [
           <Switch
             size="small"
@@ -81,8 +88,10 @@ class SettingDarwer extends PureComponent {
       return !item.hide;
     });
   };
+
   changeSetting = (key, value) => {
-    const nextState = { ...this.props.setting };
+    const { setting } = this.props;
+    const nextState = { ...setting };
     nextState[key] = value;
     if (key === 'layout') {
       if (value === 'topmenu') {
@@ -92,27 +101,31 @@ class SettingDarwer extends PureComponent {
       }
     }
     if (key === 'fixedHeader') {
-      if (value) {
+      if (!value) {
         nextState.autoHideHeader = false;
       }
     }
     if (key === 'colorWeak') {
-      if (value === 'open') {
+      if (value) {
         document.body.className = 'colorWeak';
       } else {
         document.body.className = '';
       }
     }
     this.setState(nextState, () => {
-      this.props.dispatch({
+      const { dispatch } = this.props;
+      dispatch({
         type: 'setting/changeSetting',
         payload: this.state,
       });
     });
   };
+
   togglerContent = () => {
-    this.changeSetting('collapse', !this.props.setting.collapse);
+    const { setting } = this.props;
+    this.changeSetting('collapse', !setting.collapse);
   };
+
   colorChange = color => {
     this.changeSetting('themeColor', color);
     const hideMessage = message.loading('正在编译主题！', 0);
@@ -129,8 +142,11 @@ class SettingDarwer extends PureComponent {
         });
     }, 200);
   };
+
   render() {
-    const { collapse, silderTheme, themeColor, layout, colorWeak } = this.props.setting;
+    const {
+      setting: { collapse, silderTheme, themeColor, layout, colorWeak },
+    } = this.props;
     return (
       <div className={styles.settingDarwer}>
         <DrawerMenu
@@ -139,24 +155,26 @@ class SettingDarwer extends PureComponent {
           open={collapse}
           mask={false}
           onHandleClick={this.togglerContent}
-          handleChild={
-            !collapse ? (
-              <Icon
-                type="setting"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            ) : (
-              <Icon
-                type="close"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            )
+          handler={
+            <div className="drawer-handle">
+              {!collapse ? (
+                <Icon
+                  type="setting"
+                  style={{
+                    color: '#FFF',
+                    fontSize: 20,
+                  }}
+                />
+              ) : (
+                <Icon
+                  type="close"
+                  style={{
+                    color: '#FFF',
+                    fontSize: 20,
+                  }}
+                />
+              )}
+            </div>
           }
           placement="right"
           width="336px"
@@ -215,15 +233,11 @@ class SettingDarwer extends PureComponent {
             <Body title="其他设置 ">
               <List.Item
                 actions={[
-                  <Select
-                    value={colorWeak}
+                  <Switch
                     size="small"
-                    onSelect={value => this.changeSetting('colorWeak', value)}
-                    style={{ width: 80 }}
-                  >
-                    <Select.Option value="close">close</Select.Option>
-                    <Select.Option value="open">open</Select.Option>
-                  </Select>,
+                    checked={!!colorWeak}
+                    onChange={checked => this.changeSetting('colorWeak', checked)}
+                  />,
                 ]}
               >
                 色弱模式

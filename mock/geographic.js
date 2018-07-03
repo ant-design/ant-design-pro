@@ -1,14 +1,12 @@
-function getJson(infoType) {
-  const json = require(`${__dirname}/geographic/${infoType}.json`); // eslint-disable-line
-  return json;
-}
+import city from './geographic/city.json';
+import province from './geographic/province.json';
 
 export function getProvince(req, res) {
-  res.json(getJson('province'));
+  res.json(province);
 }
 
 export function getCity(req, res) {
-  res.json(getJson('city')[req.params.province]);
+  res.json(city[req.params.province]);
 }
 
 export default {

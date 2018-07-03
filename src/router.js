@@ -3,8 +3,9 @@ import { routerRedux, Route, Switch } from 'dva/router';
 import { LocaleProvider, Spin } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import dynamic from 'dva/dynamic';
-import { getRouterData } from './common/router';
+import { getRouterConfig } from './common/router';
 import Authorized from './utils/Authorized';
+import { getQueryPath } from './utils/utils';
 import styles from './index.less';
 
 const { ConnectedRouter } = routerRedux;
@@ -14,7 +15,7 @@ dynamic.setDefaultLoadingComponent(() => {
 });
 
 function RouterConfig({ history, app }) {
-  const routerData = getRouterData(app);
+  const routerData = getRouterConfig(app);
   const UserLayout = routerData['/user'].component;
   const BasicLayout = routerData['/'].component;
   return (
@@ -26,7 +27,9 @@ function RouterConfig({ history, app }) {
             path="/"
             render={props => <BasicLayout {...props} />}
             authority={['admin', 'user']}
-            redirectPath="/user/login"
+            redirectPath={getQueryPath('/user/login', {
+              redirect: window.location.href,
+            })}
           />
         </Switch>
       </ConnectedRouter>

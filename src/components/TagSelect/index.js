@@ -15,17 +15,14 @@ const TagSelectOption = ({ children, checked, onChange, value }) => (
 TagSelectOption.isTagSelectOption = true;
 
 class TagSelect extends Component {
-  state = {
-    expand: false,
-    value: this.props.value || this.props.defaultValue || [],
-  };
-
-  static getDerivedStateFromProps(nextProps) {
-    if ('value' in nextProps && nextProps.value) {
-      return { value: nextProps.value };
-    }
-    return null;
+  constructor(props) {
+    super(props);
+    this.state = {
+      expand: false,
+      value: props.value || props.defaultValue || [],
+    };
   }
+
   onChange = value => {
     const { onChange } = this.props;
     if (!('value' in this.props)) {
@@ -44,6 +41,13 @@ class TagSelect extends Component {
     this.onChange(checkedTags);
   };
 
+  static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps && nextProps.value) {
+      return { value: nextProps.value };
+    }
+    return null;
+  }
+
   getAllTags() {
     let { children } = this.props;
     children = React.Children.toArray(children);
@@ -54,7 +58,8 @@ class TagSelect extends Component {
   }
 
   handleTagChange = (value, checked) => {
-    const checkedTags = [...this.state.value];
+    const { value: StateValue } = this.state;
+    const checkedTags = [...StateValue];
 
     const index = checkedTags.indexOf(value);
     if (checked && index === -1) {
@@ -66,8 +71,9 @@ class TagSelect extends Component {
   };
 
   handleExpand = () => {
+    const { expand } = this.state;
     this.setState({
-      expand: !this.state.expand,
+      expand: !expand,
     });
   };
 

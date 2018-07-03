@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import { Row, Col, Card, List, Avatar, Spin } from 'antd';
+import { Row, Col, Card, List, Avatar } from 'antd';
 
 import { Radar } from 'components/Charts';
 import EditableLinkGroup from 'components/EditableLinkGroup';
@@ -71,7 +71,9 @@ export default class Workplace extends PureComponent {
   }
 
   renderActivities() {
-    const { activities: { list } } = this.props;
+    const {
+      activities: { list },
+    } = this.props;
     return list.map(item => {
       const events = item.template.split(/@\{([^{}]*)\}/gi).map(key => {
         if (item[key]) {
@@ -115,23 +117,20 @@ export default class Workplace extends PureComponent {
       chart: { radarData },
     } = this.props;
 
-    const pageHeaderContent = (
-      <Spin spinning={currentUserLoading}>
-        {currentUser && Object.keys(currentUser).length ? (
-          <div className={styles.pageHeaderContent}>
-            <div className={styles.avatar}>
-              <Avatar size="large" src={currentUser.avatar} />
-            </div>
-            <div className={styles.content}>
-              <div className={styles.contentTitle}>早安，{currentUser.name}，祝你开心每一天！</div>
-              <div>
-                {currentUser.title} | {currentUser.group}
-              </div>
+    const pageHeaderContent =
+      currentUser && Object.keys(currentUser).length ? (
+        <div className={styles.pageHeaderContent}>
+          <div className={styles.avatar}>
+            <Avatar size="large" src={currentUser.avatar} />
+          </div>
+          <div className={styles.content}>
+            <div className={styles.contentTitle}>早安，{currentUser.name}，祝你开心每一天！</div>
+            <div>
+              {currentUser.title} | {currentUser.group}
             </div>
           </div>
-        ) : null}
-      </Spin>
-    );
+        </div>
+      ) : null;
 
     const extraContent = (
       <div className={styles.extraContent}>
@@ -142,7 +141,8 @@ export default class Workplace extends PureComponent {
         <div className={styles.statItem}>
           <p>团队内排名</p>
           <p>
-            8<span> / 24</span>
+            8
+            <span> / 24</span>
           </p>
         </div>
         <div className={styles.statItem}>
@@ -153,7 +153,11 @@ export default class Workplace extends PureComponent {
     );
 
     return (
-      <PageHeaderLayout content={pageHeaderContent} extraContent={extraContent}>
+      <PageHeaderLayout
+        loading={currentUserLoading}
+        content={pageHeaderContent}
+        extraContent={extraContent}
+      >
         <Row gutter={24}>
           <Col xl={16} lg={24} md={24} sm={24} xs={24}>
             <Card

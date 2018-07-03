@@ -26,19 +26,23 @@ const { TextArea } = Input;
 @Form.create()
 export default class BasicForms extends PureComponent {
   handleSubmit = e => {
+    const { dispatch, form } = this.props;
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.props.dispatch({
+        dispatch({
           type: 'form/submitRegularForm',
           payload: values,
         });
       }
     });
   };
+
   render() {
     const { submitting } = this.props;
-    const { getFieldDecorator, getFieldValue } = this.props.form;
+    const {
+      form: { getFieldDecorator, getFieldValue },
+    } = this.props;
 
     const formItemLayout = {
       labelCol: {
@@ -134,7 +138,8 @@ export default class BasicForms extends PureComponent {
               {...formItemLayout}
               label={
                 <span>
-                  邀评人<em className={styles.optional}>（选填）</em>
+                  邀评人
+                  <em className={styles.optional}>（选填）</em>
                 </span>
               }
             >
@@ -146,7 +151,8 @@ export default class BasicForms extends PureComponent {
               {...formItemLayout}
               label={
                 <span>
-                  权重<em className={styles.optional}>（选填）</em>
+                  权重
+                  <em className={styles.optional}>（选填）</em>
                 </span>
               }
             >
