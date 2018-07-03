@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 import { connect } from 'dva';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import BasicLayout from './BasicLayout';
-//import { getMenuData } from '../common/menu';
+// import { getMenuData } from '../common/menu';
 /**
  * 根据菜单取得重定向地址.
  */

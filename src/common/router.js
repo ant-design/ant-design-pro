@@ -95,7 +95,7 @@ export const getRouterData = (routerConfig, menuData) => {
     routerData[path] = router;
   });
   return routerData;
-}
+};
 
 export const getRouterConfig = app => {
   const routerConfig = {
@@ -243,6 +243,8 @@ export const getRouterConfig = app => {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
     // },
   };
+
+  /* eslint no-underscore-dangle:0 */
   app._store.dispatch({
     type: 'user/saveRouterConfig',
     payload: routerConfig,
