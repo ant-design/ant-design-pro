@@ -133,6 +133,7 @@ class SettingDarwer extends PureComponent {
       window.less
         .modifyVars({
           '@primary-color': color,
+          '@input-hover-border-color': color,
         })
         .then(() => {
           hideMessage();
