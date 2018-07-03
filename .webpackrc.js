@@ -29,19 +29,18 @@ export default {
   cssLoaderOptions: {
     modules: true,
     getLocalIdent: (context, localIdentName, localName) => {
-      if (context.resourcePath.includes('node_modules')) {
+      if (
+        context.resourcePath.includes('node_modules') ||
+        context.resourcePath.includes('ant.design.pro.less')
+      ) {
         return localName;
       }
-
-      let antdProPath = context.resourcePath.match(/src(.*)/)[1].replace('.less', '');
-      if (context.resourcePath.includes('components')) {
-        antdProPath = antdProPath.replace('components/', '');
-      }
+      const antdProPath = context.resourcePath.match(/src(.*)/)[1].replace('.less', '');
       const arr = antdProPath
         .split('/')
         .map(a => a.replace(/([A-Z])/g, '-$1'))
         .map(a => a.toLowerCase());
-      return `antd-pro${arr.join('-')}-${localName}`.replace('--', '-');
+      return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
     },
   },
 };
