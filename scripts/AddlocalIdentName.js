@@ -24,11 +24,14 @@ const LocalIdentNameplugin = postcss.plugin('LocalIdentNameplugin', ({ localIden
           return;
         }
         // 删除 :global(className) 保留 className
-        if (item.selector && !item.selector.includes('(')) {
+        if (item.selector) {
           if (item.selector.includes(':global(')) {
             // converted :global(.className）
             const className = item.selector.match(/:global\((\S*)\)/)[1];
             item.selector = className;
+            return;
+          }
+          if (item.selector.includes('(')) {
             return;
           }
           const className = item.selector.replace(/\./g, `.${localIdentName}`);

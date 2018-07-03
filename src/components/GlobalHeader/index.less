@@ -56,8 +56,10 @@ i.trigger {
       vertical-align: middle;
       color: @text-color;
     }
-    &:hover,
-    &:global(.ant-popover-open) {
+    &:hover {
+      background: @primary-1;
+    }
+    :global(&.ant-popover-open) {
       background: @primary-1;
     }
   }
