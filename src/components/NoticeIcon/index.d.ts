@@ -5,6 +5,7 @@ export interface INoticeIconProps {
   count?: number;
   className?: string;
   loading?: boolean;
+  bellIcon?: React.ReactNode;
   onClear?: (tableTile: string) => void;
   onItemClick?: (item: INoticeIconData, tabProps: INoticeIconProps) => void;
   onTabChange?: (tableTile: string) => void;
