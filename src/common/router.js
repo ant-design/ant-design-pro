@@ -1,4 +1,4 @@
-import {createElement} from 'react';
+import { createElement } from 'react';
 import dynamic from 'dva/dynamic';
 import pathToRegexp from 'path-to-regexp';
 import concat from 'lodash/concat';
@@ -7,7 +7,7 @@ let routerDataCache;
 
 const modelNotExisted = (app, model) =>
   // eslint-disable-next-line
-  !app._models.some(({namespace}) => {
+  !app._models.some(({ namespace }) => {
     return namespace === model.substring(model.lastIndexOf('/') + 1);
   });
 
@@ -58,10 +58,10 @@ export function getFlatMenuData(menus) {
   let keys = {};
   menus.forEach(item => {
     if (item.children) {
-      keys[item.path] = {...item};
-      keys = {...keys, ...getFlatMenuData(item.children)};
+      keys[item.path] = { ...item };
+      keys = { ...keys, ...getFlatMenuData(item.children) };
     } else {
-      keys[item.path] = {...item};
+      keys[item.path] = { ...item };
     }
   });
   return keys;
