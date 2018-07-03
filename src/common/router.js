@@ -75,142 +75,140 @@ export const getRouterData = app => {
       ),
     },
     '/dashboard/analysis': {
-      component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
+      component: dynamicWrapper(app, ['chart'], () => import('../pages/Dashboard/Analysis')),
     },
     '/dashboard/monitor': {
-      component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
+      component: dynamicWrapper(app, ['monitor'], () => import('../pages/Dashboard/Monitor')),
     },
     '/dashboard/workplace': {
       component: dynamicWrapper(app, ['user', 'project', 'activities', 'chart'], () =>
-        import('../routes/Dashboard/Workplace')
+        import('../pages/Dashboard/Workplace')
       ),
       // hideInBreadcrumb: true,
       // name: '工作台',
       // authority: 'admin',
     },
     '/form/basic-form': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
+      component: dynamicWrapper(app, ['form'], () => import('../pages/Forms/BasicForm')),
     },
     '/form/step-form': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm')),
+      component: dynamicWrapper(app, ['form'], () => import('../pages/Forms/StepForm')),
     },
     '/form/step-form/info': {
       name: '分步表单（填写转账信息）',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step1')),
+      component: dynamicWrapper(app, ['form'], () => import('../pages/Forms/StepForm/Step1')),
     },
     '/form/step-form/confirm': {
       name: '分步表单（确认转账信息）',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step2')),
+      component: dynamicWrapper(app, ['form'], () => import('../pages/Forms/StepForm/Step2')),
     },
     '/form/step-form/result': {
       name: '分步表单（完成）',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step3')),
+      component: dynamicWrapper(app, ['form'], () => import('../pages/Forms/StepForm/Step3')),
     },
     '/form/advanced-form': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
+      component: dynamicWrapper(app, ['form'], () => import('../pages/Forms/AdvancedForm')),
     },
     '/list/table-list': {
-      component: dynamicWrapper(app, ['rule'], () => import('../routes/List/TableList')),
+      component: dynamicWrapper(app, ['rule'], () => import('../pages/List/TableList')),
     },
     '/list/basic-list': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/BasicList')),
+      component: dynamicWrapper(app, ['list'], () => import('../pages/List/BasicList')),
     },
     '/list/card-list': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/CardList')),
+      component: dynamicWrapper(app, ['list'], () => import('../pages/List/CardList')),
     },
     '/list/search': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/List')),
+      component: dynamicWrapper(app, ['list'], () => import('../pages/List/List')),
     },
     '/list/search/projects': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/Projects')),
+      component: dynamicWrapper(app, ['list'], () => import('../pages/List/Projects')),
     },
     '/list/search/applications': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/Applications')),
+      component: dynamicWrapper(app, ['list'], () => import('../pages/List/Applications')),
     },
     '/list/search/articles': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/Articles')),
+      component: dynamicWrapper(app, ['list'], () => import('../pages/List/Articles')),
     },
     '/profile/basic': {
-      component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/BasicProfile')),
+      component: dynamicWrapper(app, ['profile'], () => import('../pages/Profile/BasicProfile')),
     },
     '/profile/advanced': {
-      component: dynamicWrapper(app, ['profile'], () =>
-        import('../routes/Profile/AdvancedProfile')
-      ),
+      component: dynamicWrapper(app, ['profile'], () => import('../pages/Profile/AdvancedProfile')),
     },
     '/result/success': {
-      component: dynamicWrapper(app, [], () => import('../routes/Result/Success')),
+      component: dynamicWrapper(app, [], () => import('../pages/Result/Success')),
     },
     '/result/fail': {
-      component: dynamicWrapper(app, [], () => import('../routes/Result/Error')),
+      component: dynamicWrapper(app, [], () => import('../pages/Result/Error')),
     },
     '/exception/403': {
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),
+      component: dynamicWrapper(app, [], () => import('../pages/Exception/403')),
     },
     '/exception/404': {
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+      component: dynamicWrapper(app, [], () => import('../pages/Exception/404')),
     },
     '/exception/500': {
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/500')),
+      component: dynamicWrapper(app, [], () => import('../pages/Exception/500')),
     },
     '/exception/trigger': {
       component: dynamicWrapper(app, ['error'], () =>
-        import('../routes/Exception/triggerException')
+        import('../pages/Exception/triggerException')
       ),
     },
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },
     '/user/login': {
-      component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
+      component: dynamicWrapper(app, ['login'], () => import('../pages/User/Login')),
     },
     '/user/register': {
-      component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
+      component: dynamicWrapper(app, ['register'], () => import('../pages/User/Register')),
     },
     '/user/register-result': {
-      component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
+      component: dynamicWrapper(app, [], () => import('../pages/User/RegisterResult')),
     },
     '/account/center': {
       component: dynamicWrapper(app, ['list', 'user', 'project'], () =>
-        import('../routes/Account/Center/Center')
+        import('../pages/Account/Center/Center')
       ),
     },
     '/account/center/articles': {
-      component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Articles')),
+      component: dynamicWrapper(app, [], () => import('../pages/Account/Center/Articles')),
     },
     '/account/center/applications': {
-      component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Applications')),
+      component: dynamicWrapper(app, [], () => import('../pages/Account/Center/Applications')),
     },
     '/account/center/projects': {
-      component: dynamicWrapper(app, [], () => import('../routes/Account/Center/Projects')),
+      component: dynamicWrapper(app, [], () => import('../pages/Account/Center/Projects')),
     },
     '/account/settings': {
       component: dynamicWrapper(app, ['geographic'], () =>
-        import('../routes/Account/Settings/Info')
+        import('../pages/Account/Settings/Info')
       ),
     },
     '/account/settings/base': {
       component: dynamicWrapper(app, ['geographic'], () =>
-        import('../routes/Account/Settings/BaseView')
+        import('../pages/Account/Settings/BaseView')
       ),
     },
     '/account/settings/security': {
       component: dynamicWrapper(app, ['geographic'], () =>
-        import('../routes/Account/Settings/SecurityView')
+        import('../pages/Account/Settings/SecurityView')
       ),
     },
     '/account/settings/binding': {
       component: dynamicWrapper(app, ['geographic'], () =>
-        import('../routes/Account/Settings/BindingView')
+        import('../pages/Account/Settings/BindingView')
       ),
     },
     '/account/settings/notification': {
       component: dynamicWrapper(app, ['geographic'], () =>
-        import('../routes/Account/Settings/NotificationView')
+        import('../pages/Account/Settings/NotificationView')
       ),
     },
     // '/user/:id': {
-    //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
+    //   component: dynamicWrapper(app, [], () => import('../pages/User/SomeComponent')),
     // },
   };
   // Get name from ./menu.js or just set it in the router data.

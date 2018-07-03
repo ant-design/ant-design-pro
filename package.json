@@ -45,6 +45,7 @@
     "rollup-plugin-json": "^3.0.0",
     "setprototypeof": "^1.1.0",
     "umi": "^1.3.13",
+    "umi-plugin-routes": "^0.1.5",
     "url-polyfill": "^1.0.10"
   },
   "devDependencies": {

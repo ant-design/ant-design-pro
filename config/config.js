@@ -5,10 +5,21 @@
 const path = require('path');
 
 export default {
-  plugins: ['umi-plugin-dva'],
+  // add for transfer to umi
+  plugins: [
+    'umi-plugin-dva',
+    [
+      'umi-plugin-routes',
+      {
+        exclude: [/\.test\.js/],
+      },
+    ],
+  ],
+  disableServiceWorker: true,
 
-  // TODO remove
-  // entry: 'src/index.js',
+  // copy from old webpackrc.js
+
+  // entry: 'src/index.js', // TODO remove
   extraBabelPlugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
   env: {
     development: {
@@ -21,7 +32,7 @@ export default {
     rollbar: 'rollbar',
   },
   alias: {
-    components: path.resolve(__dirname, 'src/components/'),
+    components: path.resolve(__dirname, '../src/components/'),
   },
   ignoreMomentLocale: true,
   theme: './src/theme.js',

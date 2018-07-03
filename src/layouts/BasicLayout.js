@@ -7,7 +7,7 @@ import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
 import SiderMenu from '../components/SiderMenu';
-import NotFound from '../routes/Exception/404';
+import NotFound from '../pages/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import SettingDarwer from '../components/SettingDarwer';
