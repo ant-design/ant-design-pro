@@ -76,6 +76,10 @@ const query = {
   },
   'screen-xl': {
     minWidth: 1200,
+    maxWidth: 1599,
+  },
+  'screen-xxl': {
+    minWidth: 1600,
   },
 };
 
@@ -89,9 +93,11 @@ class BasicLayout extends React.PureComponent {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
   };
+
   state = {
     isMobile,
   };
+
   getChildContext() {
     const { location, routerData } = this.props;
     return {
@@ -99,19 +105,23 @@ class BasicLayout extends React.PureComponent {
       breadcrumbNameMap: getBreadcrumbNameMap(getMenuData(), routerData),
     };
   }
+
   componentDidMount() {
     this.enquireHandler = enquireScreen(mobile => {
       this.setState({
         isMobile: mobile,
       });
     });
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'user/fetchCurrent',
     });
   }
+
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);
   }
+
   getPageTitle() {
     const { routerData, location } = this.props;
     const { pathname } = location;
@@ -128,6 +138,7 @@ class BasicLayout extends React.PureComponent {
     }
     return title;
   }
+
   getBaseRedirect = () => {
     // According to the url parameter to redirect
     // 这里是重定向的,重定向到 url 的 redirect 参数所示地址
@@ -148,37 +159,46 @@ class BasicLayout extends React.PureComponent {
     }
     return redirect;
   };
+
   handleMenuCollapse = collapsed => {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'global/changeLayoutCollapsed',
       payload: collapsed,
     });
   };
+
   handleNoticeClear = type => {
     message.success(`清空了${type}`);
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'global/clearNotices',
       payload: type,
     });
   };
+
   handleMenuClick = ({ key }) => {
+    const { dispatch } = this.props;
     if (key === 'triggerError') {
-      this.props.dispatch(routerRedux.push('/exception/trigger'));
+      dispatch(routerRedux.push('/exception/trigger'));
       return;
     }
     if (key === 'logout') {
-      this.props.dispatch({
+      dispatch({
         type: 'login/logout',
       });
     }
   };
+
   handleNoticeVisibleChange = visible => {
+    const { dispatch } = this.props;
     if (visible) {
-      this.props.dispatch({
+      dispatch({
         type: 'global/fetchNotices',
       });
     }
   };
+
   render() {
     const {
       currentUser,
@@ -189,6 +209,7 @@ class BasicLayout extends React.PureComponent {
       match,
       location,
     } = this.props;
+    const { isMobile: mb } = this.state;
     const bashRedirect = this.getBaseRedirect();
     const layout = (
       <Layout>
@@ -201,7 +222,7 @@ class BasicLayout extends React.PureComponent {
           menuData={getMenuData()}
           collapsed={collapsed}
           location={location}
-          isMobile={this.state.isMobile}
+          isMobile={mb}
           onCollapse={this.handleMenuCollapse}
         />
         <Layout>
@@ -212,7 +233,7 @@ class BasicLayout extends React.PureComponent {
               fetchingNotices={fetchingNotices}
               notices={notices}
               collapsed={collapsed}
-              isMobile={this.state.isMobile}
+              isMobile={mb}
               onNoticeClear={this.handleNoticeClear}
               onCollapse={this.handleMenuCollapse}
               onMenuClick={this.handleMenuClick}
@@ -281,7 +302,7 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default connect(({ user, global, loading }) => ({
+export default connect(({ user, global = {}, loading }) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
   fetchingNotices: loading.effects['global/fetchNotices'],

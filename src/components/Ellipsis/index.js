@@ -84,7 +84,8 @@ export default class Ellipsis extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.lines !== nextProps.lines) {
+    const { lines } = this.props;
+    if (lines !== nextProps.lines) {
       this.computeLine();
     }
   }
@@ -109,7 +110,7 @@ export default class Ellipsis extends Component {
 
       // bisection
       const len = text.length;
-      const mid = Math.floor(len / 2);
+      const mid = Math.ceil(len / 2);
 
       const count = this.bisection(targetHeight, mid, 0, len, text, shadowNode);
 

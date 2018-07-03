@@ -30,7 +30,8 @@ const { Search } = Input;
 }))
 export default class BasicList extends PureComponent {
   componentDidMount() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'list/fetch',
       payload: {
         count: 5,
@@ -39,7 +40,10 @@ export default class BasicList extends PureComponent {
   }
 
   render() {
-    const { list: { list }, loading } = this.props;
+    const {
+      list: { list },
+      loading,
+    } = this.props;
 
     const Info = ({ title, value, bordered }) => (
       <div className={styles.headerInfo}>

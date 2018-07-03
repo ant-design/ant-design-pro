@@ -43,7 +43,9 @@ for (let i = 0; i < 7; i += 1) {
 }
 
 const Yuan = ({ children }) => (
-  <span dangerouslySetInnerHTML={{ __html: yuan(children) }} /> /* eslint-disable-line react/no-danger */
+  <span
+    dangerouslySetInnerHTML={{ __html: yuan(children) }} /* eslint-disable-line react/no-danger */
+  />
 );
 
 @connect(({ chart, loading }) => ({
@@ -58,7 +60,8 @@ export default class Analysis extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'chart/fetch',
     });
   }
@@ -87,7 +90,8 @@ export default class Analysis extends Component {
       rangePickerValue,
     });
 
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'chart/fetchSalesData',
     });
   };
@@ -97,7 +101,8 @@ export default class Analysis extends Component {
       rangePickerValue: getTimeDistance(type),
     });
 
-    this.props.dispatch({
+    const { dispatch } = this.props;
+    dispatch({
       type: 'chart/fetchSalesData',
     });
   };
@@ -134,7 +139,9 @@ export default class Analysis extends Component {
     const salesPieData =
       salesType === 'all'
         ? salesTypeData
-        : salesType === 'online' ? salesTypeDataOnline : salesTypeDataOffline;
+        : salesType === 'online'
+          ? salesTypeDataOnline
+          : salesTypeDataOffline;
 
     const menu = (
       <Menu>
@@ -201,7 +208,10 @@ export default class Analysis extends Component {
         sorter: (a, b) => a.range - b.range,
         render: (text, record) => (
           <Trend flag={record.status === 1 ? 'down' : 'up'}>
-            <span style={{ marginRight: 4 }}>{text}%</span>
+            <span style={{ marginRight: 4 }}>
+              {text}
+              %
+            </span>
           </Trend>
         ),
         align: 'right',
@@ -261,10 +271,12 @@ export default class Analysis extends Component {
               contentHeight={46}
             >
               <Trend flag="up" style={{ marginRight: 16 }}>
-                周同比<span className={styles.trendText}>12%</span>
+                周同比
+                <span className={styles.trendText}>12%</span>
               </Trend>
               <Trend flag="down">
-                日环比<span className={styles.trendText}>11%</span>
+                日环比
+                <span className={styles.trendText}>11%</span>
               </Trend>
             </ChartCard>
           </Col>
@@ -313,10 +325,12 @@ export default class Analysis extends Component {
               footer={
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                   <Trend flag="up" style={{ marginRight: 16 }}>
-                    周同比<span className={styles.trendText}>12%</span>
+                    周同比
+                    <span className={styles.trendText}>12%</span>
                   </Trend>
                   <Trend flag="down">
-                    日环比<span className={styles.trendText}>11%</span>
+                    日环比
+                    <span className={styles.trendText}>11%</span>
                   </Trend>
                 </div>
               }
@@ -455,9 +469,7 @@ export default class Analysis extends Component {
               <Pie
                 hasLegend
                 subTitle="销售额"
-                total={
-                  () => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>
-                }
+                total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
                 data={salesPieData}
                 valueFormat={value => <Yuan>{value}</Yuan>}
                 height={248}
