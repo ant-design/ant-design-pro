@@ -1,6 +1,7 @@
-import { createElement } from 'react';
-import dynamic from 'dva/dynamic';
+import React, { createElement } from 'react';
+import { Spin } from 'antd';
 import pathToRegexp from 'path-to-regexp';
+import Loadable from 'react-loadable';
 import { getMenuData } from './menu';
 
 let routerDataCache;
@@ -13,15 +14,17 @@ const modelNotExisted = (app, model) =>
 
 // wrapper of dynamic
 const dynamicWrapper = (app, models, component) => {
+  // register models
+  models.forEach(model => {
+    if (modelNotExisted(app, model)) {
+      // eslint-disable-next-line
+      app.model(require(`../models/${model}`).default);
+    }
+  });
+
   // () => require('module')
   // transformed by babel-plugin-dynamic-import-node-sync
   if (component.toString().indexOf('.then(') < 0) {
-    models.forEach(model => {
-      if (modelNotExisted(app, model)) {
-        // eslint-disable-next-line
-        app.model(require(`../models/${model}`).default);
-      }
-    });
     return props => {
       if (!routerDataCache) {
         routerDataCache = getRouterData(app);
@@ -33,12 +36,8 @@ const dynamicWrapper = (app, models, component) => {
     };
   }
   // () => import('module')
-  return dynamic({
-    app,
-    models: () =>
-      models.filter(model => modelNotExisted(app, model)).map(m => import(`../models/${m}.js`)),
-    // add routerData prop
-    component: () => {
+  return Loadable({
+    loader: () => {
       if (!routerDataCache) {
         routerDataCache = getRouterData(app);
       }
@@ -50,6 +49,9 @@ const dynamicWrapper = (app, models, component) => {
             routerData: routerDataCache,
           });
       });
+    },
+    loading: () => {
+      return <Spin size="large" className="global-spin" />;
     },
   });
 };
