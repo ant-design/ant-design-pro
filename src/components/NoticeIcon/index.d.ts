@@ -3,6 +3,7 @@ import NoticeIconTab, { INoticeIconData } from './NoticeIconTab';
 
 export interface INoticeIconProps {
   count?: number;
+  bellIcon?: React.ReactNode;
   className?: string;
   loading?: boolean;
   onClear?: (tableTile: string) => void;
