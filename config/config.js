@@ -8,6 +8,7 @@ export default {
   // add for transfer to umi
   plugins: [
     'umi-plugin-dva',
+    // TODO 决定是否使用约定路由，如果使用配置路由那么 umi-plugin-routes 可以去掉了
     [
       'umi-plugin-routes',
       {
@@ -16,6 +17,65 @@ export default {
     ],
   ],
   disableServiceWorker: true,
+
+  // 路由配置
+  // TODO ./src/pages 太冗余了
+  // routes: [{
+  //   path: '/',
+  //   component: './src/layouts/BasicLayout',
+  //   indexRoute: { redirect: '/dashboard/analysis' },
+  //   childRoutes: [
+
+  //     // dashboard
+  //     { path: 'dashboard/analysis', component: './src/pages/Dashboard/Analysis' },
+  //     { path: 'dashboard/monitor', component: './src/pages/Dashboard/Monitor' },
+  //     { path: 'dashboard/workplace', component: './src/pages/Dashboard/Workplace' },
+
+  //     // forms
+  //     { path: 'form/basic-form', component: './src/pages/Forms/BasicForm' },
+  //     {
+  //       path: 'form/step-form',
+  //       component: './src/pages/Forms/StepForm',
+  //       indexRoute: { redirect: '/form/step-form/info' },
+  //       childRoutes: [
+  //         { path: 'info', component: './src/pages/Forms/StepForm/Step1' },
+  //         { path: 'confirm', component: './src/pages/Forms/StepForm/Step2' },
+  //         { path: 'result', component: './src/pages/Forms/StepForm/Step3' },
+  //       ],
+  //     },
+  //     { path: 'form/advanced-form', component: './src/pages/Forms/AdvancedForm' },
+
+  //     // list
+  //     { path: 'list/table-list', component: './src/pages/List/TableList' },
+  //     { path: 'list/table-list', component: './src/pages/List/TableList' },
+  //     { path: 'list/basic-list', component: './src/pages/List/BasicList' },
+  //     { path: 'list/card-list', component: './src/pages/List/CardList' },
+  //     {
+  //       path: 'list/search',
+  //       component: './src/pages/List/List',
+  //       indexRoute: { redirect: '/list/search/projects' },
+  //       childRoutes: [
+  //         { path: 'articles', component: './src/pages/List/Articles' },
+  //         { path: 'projects', component: './src/pages/List/Projects' },
+  //         { path: 'applications', component: './src/pages/List/Applications' },
+  //       ],
+  //     },
+
+  //     // profile
+  //     { path: 'profile/basic', component: './src/pages/Profile/BasicProfile' },
+  //     { path: 'profile/advanced', component: './src/pages/Profile/AdvancedProfile' },
+
+  //     // result
+  //     { path: 'result/success', component: './src/pages/Result/Success' },
+  //     { path: 'result/fail', component: './src/pages/Result/Error' },
+
+  //     // exception
+  //     { path: 'exception/403', component: './src/pages/Exception/403' },
+  //     { path: 'exception/404', component: './src/pages/Exception/404' },
+  //     { path: 'exception/500', component: './src/pages/Exception/500' },
+
+  // //   ],
+  // }],
 
   // copy from old webpackrc.js
 

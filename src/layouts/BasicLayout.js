@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+// TODO remove eslint-disable
 import React from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
@@ -137,17 +139,19 @@ class BasicLayout extends React.PureComponent {
   };
 
   render() {
+    // TODO remove old router code
     const {
       isMobile,
-      redirectData,
-      routerData,
+      // redirectData,
+      // routerData,
       silderTheme,
       layout: PropsLayout,
-      match,
+      children,
+      // match,
     } = this.props;
     const isTop = PropsLayout === 'topmenu';
-    const bashRedirect = this.getBashRedirect();
-    const myRedirectData = redirectData || [];
+    // const bashRedirect = this.getBashRedirect();
+    // const myRedirectData = redirectData || [];
     const layout = (
       <Layout>
         {isTop && !isMobile ? null : (
@@ -162,7 +166,8 @@ class BasicLayout extends React.PureComponent {
         <Layout style={this.getLayoutStyle()}>
           <Header handleMenuCollapse={this.handleMenuCollapse} logo={logo} {...this.props} />
           <Content style={this.getContentStyle()}>
-            <Switch>
+            {children}
+            {/* <Switch> TODO remove
               {myRedirectData.map(item => (
                 <Redirect key={item.from} exact from={item.from} to={item.to} />
               ))}
@@ -178,7 +183,7 @@ class BasicLayout extends React.PureComponent {
               ))}
               <Redirect exact from="/" to={bashRedirect} />
               <Route render={NotFound} />
-            </Switch>
+            </Switch> */}
           </Content>
           <Footer />
         </Layout>
