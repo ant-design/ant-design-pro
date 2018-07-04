@@ -72,8 +72,8 @@ class LoadingPage extends PureComponent {
 
   render() {
     const { loading, isMobile } = this.state;
-    const { menuData } = this.props;
-    const redirectData = getRedirectData(menuData);
+    const { MenuData } = this.props;
+    const redirectData = getRedirectData(MenuData);
     if (loading) {
       return (
         <div
@@ -92,7 +92,7 @@ class LoadingPage extends PureComponent {
     return (
       <BasicLayout
         isMobile={isMobile}
-        menuData={menuData}
+        menuData={MenuData}
         redirectData={redirectData}
         {...this.props}
       />
@@ -101,5 +101,5 @@ class LoadingPage extends PureComponent {
 }
 
 export default connect(({ menu }) => ({
-  menuData: menu.currentMenu,
+  MenuData: menu.currentMenu,
 }))(LoadingPage);

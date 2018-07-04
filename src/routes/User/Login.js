@@ -84,7 +84,11 @@ export default class LoginPage extends Component {
               !submitting &&
               this.renderMessage('账户或密码错误（admin/888888）')}
             <UserName name="userName" placeholder="admin/user" />
-            <Password name="password" placeholder="888888/123456" />
+            <Password
+              name="password"
+              placeholder="888888/123456"
+              onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
+            />
           </Tab>
           <Tab key="mobile" tab="手机号登录">
             {login.status === 'error' &&
