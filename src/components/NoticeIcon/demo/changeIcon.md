@@ -8,5 +8,5 @@ title: 通知图标
 ````jsx
 import NoticeIcon from 'ant-design-pro/lib/NoticeIcon';
 
-ReactDOM.render(<NoticeIcon  bellIcon={<Icon type="warning" />} />, mountNode);
+ReactDOM.render(<NoticeIcon  bell={<Icon type="warning" />} />, mountNode);
 ````
