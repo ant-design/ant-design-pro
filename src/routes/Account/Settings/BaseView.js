@@ -10,13 +10,13 @@ const { Option } = Select;
 // 头像组件 方便以后独立，增加裁剪之类的功能
 const AvatarView = ({ avatar }) => (
   <Fragment>
-    <div className={styles.avatar_title}>头像</div>
+    <div className={styles.avatar_title}>Avatar</div>
     <div className={styles.avatar}>
       <img src={avatar} alt="avatar" />
     </div>
     <Upload fileList={[]}>
       <div className={styles.button_view}>
-        <Button icon="upload">更换头像</Button>
+        <Button icon="upload">Change avatar</Button>
       </div>
     </Upload>
   </Fragment>
@@ -80,31 +80,31 @@ export default class BaseView extends Component {
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
           <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
-            <FormItem label="邮箱">
+            <FormItem label="Email">
               {getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please input your email!' }],
               })(<Input />)}
             </FormItem>
-            <FormItem label="昵称">
+            <FormItem label="Nickname">
               {getFieldDecorator('name', {
                 rules: [{ required: true, message: 'Please input your nick name!' }],
               })(<Input />)}
             </FormItem>
-            <FormItem label="个人简介">
+            <FormItem label="Personal Profile">
               {getFieldDecorator('profile', {
                 rules: [{ required: true, message: 'Please input personal profile!' }],
-              })(<Input.TextArea placeholder="简单的介绍下自己" rows={4} />)}
+              })(<Input.TextArea placeholder="Brief introduction to yourself" rows={4} />)}
             </FormItem>
-            <FormItem label="国家/地区">
+            <FormItem label="Country / Region">
               {getFieldDecorator('country', {
                 rules: [{ required: true, message: 'Please input your country!' }],
               })(
                 <Select style={{ maxWidth: 220 }}>
-                  <Option value="China">中国</Option>
+                  <Option value="China">China</Option>
                 </Select>
               )}
             </FormItem>
-            <FormItem label="所在省市">
+            <FormItem label="Province or city">
               {getFieldDecorator('geographic', {
                 rules: [
                   {
@@ -117,12 +117,12 @@ export default class BaseView extends Component {
                 ],
               })(<GeographicView />)}
             </FormItem>
-            <FormItem label="街道地址">
+            <FormItem label="Street Address">
               {getFieldDecorator('address', {
                 rules: [{ required: true, message: 'Please input your address!' }],
               })(<Input />)}
             </FormItem>
-            <FormItem label="联系电话">
+            <FormItem label="Phone Number">
               {getFieldDecorator('phone', {
                 rules: [
                   { required: true, message: 'Please input your phone!' },
@@ -130,7 +130,7 @@ export default class BaseView extends Component {
                 ],
               })(<PhoneView />)}
             </FormItem>
-            <Button type="primary">更新信息</Button>
+            <Button type="primary">Update Information</Button>
           </Form>
         </div>
         <div className={styles.right}>
