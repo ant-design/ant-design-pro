@@ -9,10 +9,10 @@ import GridContent from '../../../layouts/GridContent';
 const { Item } = Menu;
 
 const menuMap = {
-  base: '基本设置',
-  security: '安全设置',
-  binding: '账号绑定',
-  notification: '新消息通知',
+  base: 'Basic Settings',
+  security: 'Security Settings',
+  binding: 'Account Binding',
+  notification: 'New Message Notification',
 };
 
 @connect(({ user }) => ({

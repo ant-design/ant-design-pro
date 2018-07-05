@@ -17,7 +17,7 @@ export default props => {
       <div className={stylesArticles.description}>{content}</div>
       <div className={stylesArticles.extra}>
         <Avatar src={avatar} size="small" />
-        <a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
+        <a href={href}>{owner}</a> Published on <a href={href}>{href}</a>
         <em>{moment(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
       </div>
     </div>
@@ -47,8 +47,8 @@ export default props => {
             description={
               <span>
                 <Tag>Ant Design</Tag>
-                <Tag>设计语言</Tag>
-                <Tag>蚂蚁金服</Tag>
+                <Tag>Design Language</Tag>
+                <Tag>Ant Financial Services Group</Tag>
               </span>
             }
           />

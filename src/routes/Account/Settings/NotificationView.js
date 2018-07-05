@@ -1,24 +1,24 @@
 import React, { Component, Fragment } from 'react';
 import { Switch, List } from 'antd';
 
-const Action = <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked />;
+const Action = <Switch checkedChildren="Open" unCheckedChildren="Close" defaultChecked />;
 
 export default class NotificationView extends Component {
   getData = () => {
     return [
       {
-        title: '账户密码',
-        description: '其他用户的消息将以站内信的形式通知',
+        title: 'Account Password',
+        description: 'Messages from other users will be notified in the form of a station letter',
         actions: [Action],
       },
       {
-        title: '系统消息',
-        description: '系统消息将以站内信的形式通知',
+        title: 'System Information',
+        description: 'System messages will be notified in the form of a station letter',
         actions: [Action],
       },
       {
-        title: '待办通知',
-        description: '待办事项将以站内信的形式通知',
+        title: 'To-do Notification',
+        description: 'The to-do list will be notified in the form of a letter from the station',
         actions: [Action],
       },
     ];

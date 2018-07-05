@@ -99,7 +99,7 @@ export default class Center extends PureComponent {
         key: 'articles',
         tab: (
           <span>
-            文章 <span style={{ fontSize: 14 }}>(8)</span>
+            Articles <span style={{ fontSize: 14 }}>(8)</span>
           </span>
         ),
       },
@@ -107,7 +107,7 @@ export default class Center extends PureComponent {
         key: 'applications',
         tab: (
           <span>
-            应用 <span style={{ fontSize: 14 }}>(8)</span>
+            Applications <span style={{ fontSize: 14 }}>(8)</span>
           </span>
         ),
       },
@@ -115,7 +115,7 @@ export default class Center extends PureComponent {
         key: 'projects',
         tab: (
           <span>
-            项目 <span style={{ fontSize: 14 }}>(8)</span>
+            Projects <span style={{ fontSize: 14 }}>(8)</span>
           </span>
         ),
       },
@@ -150,7 +150,7 @@ export default class Center extends PureComponent {
                   </div>
                   <Divider dashed />
                   <div className={styles.tags}>
-                    <div className={styles.tagsTitle}>标签</div>
+                    <div className={styles.tagsTitle}>Tags</div>
                     {currentUser.tags
                       .concat(newTags)
                       .map(item => <Tag key={item.key}>{item.label}</Tag>)}
@@ -177,7 +177,7 @@ export default class Center extends PureComponent {
                   </div>
                   <Divider style={{ marginTop: 16 }} dashed />
                   <div className={styles.team}>
-                    <div className={styles.teamTitle}>团队</div>
+                    <div className={styles.teamTitle}>Team</div>
                     <Spin spinning={projectLoading}>
                       <Row gutter={36}>
                         {notice.map(item => (

@@ -18,33 +18,34 @@ const proxy = {
     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     userid: '00000001',
     email: 'antdesign@alipay.com',
-    signature: '海纳百川，有容乃大',
-    title: '交互专家',
-    group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+    signature: 'Be tolerant to diversity, tolerance is a virtue',
+    title: 'Interaction expert',
+    group:
+      'Ant Financial Services Group - a certain business group - a certain platform department - a certain technical department - UED',
     tags: [
       {
         key: '0',
-        label: '很有想法的',
+        label: 'Very thoughtful',
       },
       {
         key: '1',
-        label: '专注设计',
+        label: 'Focus on design',
       },
       {
         key: '2',
-        label: '辣~',
+        label: 'Hot~',
       },
       {
         key: '3',
-        label: '大长腿',
+        label: 'Big long legs',
       },
       {
         key: '4',
-        label: '川妹子',
+        label: 'Sichuan girl',
       },
       {
         key: '5',
-        label: '海纳百川',
+        label: 'Inclusive',
       },
     ],
     notifyCount: 12,

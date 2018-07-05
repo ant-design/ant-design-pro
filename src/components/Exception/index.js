@@ -26,7 +26,7 @@ const Exception = ({ className, linkElement = 'a', type, title, desc, img, actio
                 to: '/',
                 href: '/',
               },
-              <Button type="primary">返回首页</Button>
+              <Button type="primary">Back to homepage</Button>
             )}
         </div>
       </div>

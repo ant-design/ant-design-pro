@@ -28,11 +28,11 @@ export default props => {
   const CardInfo = ({ activeUser, newUser }) => (
     <div className={stylesApplications.cardInfo}>
       <div>
-        <p>活跃用户</p>
+        <p>Active User</p>
         <p>{activeUser}</p>
       </div>
       <div>
-        <p>新增用户</p>
+        <p>New User</p>
         <p>{newUser}</p>
       </div>
     </div>
@@ -49,13 +49,13 @@ export default props => {
             hoverable
             bodyStyle={{ paddingBottom: 20 }}
             actions={[
-              <Tooltip title="下载">
+              <Tooltip title="Download">
                 <Icon type="download" />
               </Tooltip>,
-              <Tooltip title="编辑">
+              <Tooltip title="Edit">
                 <Icon type="edit" />
               </Tooltip>,
-              <Tooltip title="分享">
+              <Tooltip title="Share">
                 <Icon type="share-alt" />
               </Tooltip>,
               <Dropdown overlay={itemMenu}>

@@ -5,21 +5,21 @@ export default class BindingView extends Component {
   getData = () => {
     return [
       {
-        title: '绑定淘宝',
-        description: '当前未绑定淘宝账号',
-        actions: [<a>绑定</a>],
+        title: 'Binding Taobao',
+        description: 'Currently unbound Taobao account',
+        actions: [<a>Bind</a>],
         avatar: <Icon type="taobao" className="taobao" />,
       },
       {
-        title: '绑定支付宝',
-        description: '当前未绑定支付宝账号',
-        actions: [<a>绑定</a>],
+        title: 'Binding Alipay',
+        description: 'Currently unbound Alipay account',
+        actions: [<a>Bind</a>],
         avatar: <Icon type="alipay" className="alipay" />,
       },
       {
-        title: '绑定钉钉',
-        description: '当前未绑定钉钉账号',
-        actions: [<a>绑定</a>],
+        title: 'Binding DingTalk',
+        description: 'Currently unbound DingTalk account',
+        actions: [<a>Bind</a>],
         avatar: <Icon type="dingding" className="dingding" />,
       },
     ];
