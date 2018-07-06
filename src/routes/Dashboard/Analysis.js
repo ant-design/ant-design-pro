@@ -261,6 +261,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="总销售额"
+              loading={loading}
               action={
                 <Tooltip title="指标说明">
                   <Icon type="info-circle-o" />
@@ -284,6 +285,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="访问量"
+              loading={loading}
               action={
                 <Tooltip title="指标说明">
                   <Icon type="info-circle-o" />
@@ -300,6 +302,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="支付笔数"
+              loading={loading}
               action={
                 <Tooltip title="指标说明">
                   <Icon type="info-circle-o" />
@@ -316,6 +319,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="运营活动效果"
+              loading={loading}
               action={
                 <Tooltip title="指标说明">
                   <Icon type="info-circle-o" />
