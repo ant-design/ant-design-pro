@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import dynamic from 'dva/dynamic';
 import pathToRegexp from 'path-to-regexp';
-import { getMenuData } from './menu';
+import concat from 'lodash/concat';
 
 let routerDataCache;
 
@@ -24,7 +24,7 @@ const dynamicWrapper = (app, models, component) => {
     });
     return props => {
       if (!routerDataCache) {
-        routerDataCache = getRouterData(app);
+        routerDataCache = getRouterConfig(app);
       }
       return createElement(component().default, {
         ...props,
@@ -40,7 +40,7 @@ const dynamicWrapper = (app, models, component) => {
     // add routerData prop
     component: () => {
       if (!routerDataCache) {
-        routerDataCache = getRouterData(app);
+        routerDataCache = getRouterConfig(app);
       }
       return component().then(raw => {
         const Component = raw.default || raw;
@@ -54,7 +54,7 @@ const dynamicWrapper = (app, models, component) => {
   });
 };
 
-function getFlatMenuData(menus) {
+export function getFlatMenuData(menus) {
   let keys = {};
   menus.forEach(item => {
     if (item.children) {
@@ -67,10 +67,10 @@ function getFlatMenuData(menus) {
   return keys;
 }
 
-export const getRouterData = app => {
+export const getRouterConfig = app => {
   const routerConfig = {
     '/': {
-      component: dynamicWrapper(app, ['user', 'login', 'setting'], () =>
+      component: dynamicWrapper(app, ['user', 'login', 'setting', 'menu'], () =>
         import('../layouts/LoadingPage')
       ),
     },
@@ -213,9 +213,16 @@ export const getRouterData = app => {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
     // },
   };
-  // Get name from ./menu.js or just set it in the router data.
-  const menuData = getFlatMenuData(getMenuData());
 
+  /* eslint no-underscore-dangle:0 */
+  app._store.dispatch({
+    type: 'user/saveRouterConfig',
+    payload: routerConfig,
+  });
+  return routerConfig;
+};
+
+export const getRouterData = (routerConfig, menuData) => {
   // Route configuration data
   // eg. {name,authority ...routerConfig }
   const routerData = {};
@@ -237,7 +244,7 @@ export const getRouterData = app => {
     router = {
       ...router,
       name: router.name || menuItem.name,
-      authority: router.authority || menuItem.authority,
+      authority: concat([], router.authority || [], menuItem.authority || []),
       hideInBreadcrumb: router.hideInBreadcrumb || menuItem.hideInBreadcrumb,
     };
     routerData[path] = router;

@@ -3,13 +3,12 @@ import { Spin } from 'antd';
 import { connect } from 'dva';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import BasicLayout from './BasicLayout';
-import { getMenuData } from '../common/menu';
+// import { getMenuData } from '../common/menu';
 /**
  * 根据菜单取得重定向地址.
  */
 
-const MenuData = getMenuData();
-const getRedirectData = () => {
+const getRedirectData = MenuData => {
   const redirectData = [];
   const getRedirect = item => {
     if (item && item.children) {
@@ -27,7 +26,6 @@ const getRedirectData = () => {
   MenuData.forEach(getRedirect);
   return redirectData;
 };
-const redirectData = getRedirectData();
 
 class LoadingPage extends PureComponent {
   state = {
@@ -44,6 +42,9 @@ class LoadingPage extends PureComponent {
     });
     dispatch({
       type: 'user/fetchCurrent',
+    });
+    dispatch({
+      type: 'menu/fetchCurrent',
     });
     this.hideLoading();
     this.initSetting();
@@ -71,6 +72,8 @@ class LoadingPage extends PureComponent {
 
   render() {
     const { loading, isMobile } = this.state;
+    const { MenuData } = this.props;
+    const redirectData = getRedirectData(MenuData);
     if (loading) {
       return (
         <div
@@ -97,4 +100,6 @@ class LoadingPage extends PureComponent {
   }
 }
 
-export default connect()(LoadingPage);
+export default connect(({ menu }) => ({
+  MenuData: menu.currentMenu,
+}))(LoadingPage);
