@@ -44,8 +44,6 @@
     "rollup": "^0.62.0",
     "rollup-plugin-json": "^3.0.0",
     "setprototypeof": "^1.1.0",
-    "umi": "^1.3.13",
-    "umi-plugin-routes": "^0.1.5",
     "url-polyfill": "^1.0.10"
   },
   "devDependencies": {
@@ -81,7 +79,10 @@
     "regenerator-runtime": "^0.12.0",
     "stylelint": "^9.2.1",
     "stylelint-config-prettier": "^3.0.4",
-    "stylelint-config-standard": "^18.0.0"
+    "stylelint-config-standard": "^18.0.0",
+    "umi": "^1.3.13",
+    "umi-plugin-routes": "^0.1.5",
+    "umi-plugin-dva": "^0.9.1"
   },
   "optionalDependencies": {
     "puppeteer": "^1.5.0"
