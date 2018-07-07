@@ -112,7 +112,7 @@ export default class LoginPage extends Component {
             <Icon className={styles.icon} type="alipay-circle" />
             <Icon className={styles.icon} type="taobao-circle" />
             <Icon className={styles.icon} type="weibo-circle" />
-            <Link className={styles.register} to="/user/register">
+            <Link className={styles.register} to="/User/Register">
               注册账户
             </Link>
           </div>
