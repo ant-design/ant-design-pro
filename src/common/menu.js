@@ -301,7 +301,7 @@ const menuData = [
       },
       {
         name: '失败',
-        path: 'Fail',
+        path: 'Error',
       },
     ],
   },
