@@ -93,6 +93,9 @@ export default {
   },
   alias: {
     components: path.resolve(__dirname, '../src/components/'),
+    utils: path.resolve(__dirname, '../src/utils/'),
+    assets: path.resolve(__dirname, '../src/assets/'),
+    common: path.resolve(__dirname, '../src/common/'),
   },
   ignoreMomentLocale: true,
   theme: './src/theme.js',
