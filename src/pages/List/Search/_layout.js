@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
-import { routerRedux, Route, Switch } from 'dva/router';
+import { routerRedux } from 'dva/router';
 import { connect } from 'dva';
 import { Input } from 'antd';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
-import { getRoutes } from '../../utils/utils';
+import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 
 @connect()
 export default class SearchList extends Component {
   handleTabChange = key => {
     const { dispatch, match } = this.props;
     switch (key) {
-      case 'articles':
-        dispatch(routerRedux.push(`${match.url}/articles`));
+      case 'Articles':
+        dispatch(routerRedux.push(`${match.url}/Articles`));
         break;
-      case 'applications':
-        dispatch(routerRedux.push(`${match.url}/applications`));
+      case 'Applications':
+        dispatch(routerRedux.push(`${match.url}/Applications`));
         break;
-      case 'projects':
-        dispatch(routerRedux.push(`${match.url}/projects`));
+      case 'Projects':
+        dispatch(routerRedux.push(`${match.url}/Projects`));
         break;
       default:
         break;
@@ -27,15 +26,15 @@ export default class SearchList extends Component {
   render() {
     const tabList = [
       {
-        key: 'articles',
+        key: 'Articles',
         tab: '文章',
       },
       {
-        key: 'applications',
+        key: 'Applications',
         tab: '应用',
       },
       {
-        key: 'projects',
+        key: 'Projects',
         tab: '项目',
       },
     ];
@@ -52,8 +51,7 @@ export default class SearchList extends Component {
       </div>
     );
 
-    const { match, routerData, location } = this.props;
-    const routes = getRoutes(match.path, routerData);
+    const { match, children, location } = this.props;
 
     return (
       <PageHeaderLayout
@@ -63,11 +61,12 @@ export default class SearchList extends Component {
         tabActiveKey={location.pathname.replace(`${match.path}/`, '')}
         onTabChange={this.handleTabChange}
       >
-        <Switch>
+        {children}
+        {/* <Switch>
           {routes.map(item => (
             <Route key={item.key} path={item.path} component={item.component} exact={item.exact} />
           ))}
-        </Switch>
+        </Switch> */}
       </PageHeaderLayout>
     );
   }

@@ -5,7 +5,7 @@ import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Me
 import TagSelect from 'components/TagSelect';
 import StandardFormRow from 'components/StandardFormRow';
 
-import { formatWan } from '../../utils/utils';
+import { formatWan } from '../../../utils/utils';
 
 import styles from './Applications.less';
 

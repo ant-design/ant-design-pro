@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Icon, Avatar, Tag } from 'antd';
 import moment from 'moment';
-import stylesArticles from '../../List/Articles.less';
+import stylesArticles from '../../List/Search/Articles.less';
 import styles from './Articles.less';
 
 export default props => {

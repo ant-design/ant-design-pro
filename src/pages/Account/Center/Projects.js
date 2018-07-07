@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Card } from 'antd';
 import moment from 'moment';
 import AvatarList from '../../../components/AvatarList';
-import stylesProjects from '../../List/Projects.less';
+import stylesProjects from '../../List/Search/Projects.less';
 
 export default props => {
   const { list } = props;
