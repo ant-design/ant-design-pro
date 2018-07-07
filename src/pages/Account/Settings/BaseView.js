@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { Form, Input, Upload, Select, Button } from 'antd';
 import { connect } from 'dva';
 import styles from './BaseView.less';
 import GeographicView from './GeographicView';
 import PhoneView from './PhoneView';
+// import { getTimeDistance } from '../../../utils/utils';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -11,13 +13,15 @@ const { Option } = Select;
 // 头像组件 方便以后独立，增加裁剪之类的功能
 const AvatarView = ({ avatar }) => (
   <Fragment>
-    <div className={styles.avatar_title}>头像</div>
+    <div className={styles.avatar_title}>Avatar</div>
     <div className={styles.avatar}>
       <img src={avatar} alt="avatar" />
     </div>
     <Upload fileList={[]}>
       <div className={styles.button_view}>
-        <Button icon="upload">更换头像</Button>
+        <Button icon="upload">
+          <FormattedMessage id="app.settings.basic.avatar" defaultMessage="Change avatar" />
+        </Button>
       </div>
     </Upload>
   </Fragment>
@@ -49,7 +53,29 @@ const validatorPhone = (rule, value, callback) => {
   currentUser: user.currentUser,
 }))
 @Form.create()
-export default class BaseView extends Component {
+class BaseView extends Component {
+  constructor(props) {
+    super(props);
+    const { intl } = props;
+    this.formLabelData = {
+      email: intl.formatMessage({ id: 'app.settings.basic.email' }, {}),
+      emailMessage: intl.formatMessage({ id: 'app.settings.basic.email-message' }, {}),
+      nickname: intl.formatMessage({ id: 'app.settings.basic.nickname' }, {}),
+      nicknameMessage: intl.formatMessage({ id: 'app.settings.basic.nickname-message' }, {}),
+      profile: intl.formatMessage({ id: 'app.settings.basic.profile' }, {}),
+      profileMessage: intl.formatMessage({ id: 'app.settings.basic.profile-message' }, {}),
+      profilePlaceholder: intl.formatMessage({ id: 'app.settings.basic.profile-placeholder' }, {}),
+      country: intl.formatMessage({ id: 'app.settings.basic.country' }, {}),
+      countryMessage: intl.formatMessage({ id: 'app.settings.basic.country-message' }, {}),
+      geographic: intl.formatMessage({ id: 'app.settings.basic.geographic' }, {}),
+      geographicMessage: intl.formatMessage({ id: 'app.settings.basic.geographic-message' }, {}),
+      address: intl.formatMessage({ id: 'app.settings.basic.address' }, {}),
+      addressMessage: intl.formatMessage({ id: 'app.settings.basic.address-message' }, {}),
+      phone: intl.formatMessage({ id: 'app.settings.basic.phone' }, {}),
+      phoneMessage: intl.formatMessage({ id: 'app.settings.basic.phone-message' }, {}),
+    };
+  }
+
   componentDidMount() {
     this.setBaseInfo();
   }
@@ -84,36 +110,36 @@ export default class BaseView extends Component {
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
           <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
-            <FormItem label="邮箱">
+            <FormItem label={this.formLabelData.email}>
               {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Please input your email!' }],
+                rules: [{ required: true, message: this.formLabelData.emailMessage }],
               })(<Input />)}
             </FormItem>
-            <FormItem label="昵称">
+            <FormItem label={this.formLabelData.nickname}>
               {getFieldDecorator('name', {
-                rules: [{ required: true, message: 'Please input your nick name!' }],
+                rules: [{ required: true, message: this.formLabelData.nicknameMessage }],
               })(<Input />)}
             </FormItem>
-            <FormItem label="个人简介">
+            <FormItem label={this.formLabelData.profile}>
               {getFieldDecorator('profile', {
-                rules: [{ required: true, message: 'Please input personal profile!' }],
-              })(<Input.TextArea placeholder="简单的介绍下自己" rows={4} />)}
+                rules: [{ required: true, message: this.formLabelData.profileMessage }],
+              })(<Input.TextArea placeholder={this.formLabelData.profilePlaceholder} rows={4} />)}
             </FormItem>
-            <FormItem label="国家/地区">
+            <FormItem label={this.formLabelData.country}>
               {getFieldDecorator('country', {
-                rules: [{ required: true, message: 'Please input your country!' }],
+                rules: [{ required: true, message: this.formLabelData.countryMessage }],
               })(
                 <Select style={{ maxWidth: 220 }}>
                   <Option value="China">中国</Option>
                 </Select>
               )}
             </FormItem>
-            <FormItem label="所在省市">
+            <FormItem label={this.formLabelData.geographic}>
               {getFieldDecorator('geographic', {
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your geographic info!',
+                    message: this.formLabelData.geographicMessage,
                   },
                   {
                     validator: validatorGeographic,
@@ -121,20 +147,25 @@ export default class BaseView extends Component {
                 ],
               })(<GeographicView />)}
             </FormItem>
-            <FormItem label="街道地址">
+            <FormItem label={this.formLabelData.address}>
               {getFieldDecorator('address', {
-                rules: [{ required: true, message: 'Please input your address!' }],
+                rules: [{ required: true, message: this.formLabelData.addressMessage }],
               })(<Input />)}
             </FormItem>
-            <FormItem label="联系电话">
+            <FormItem label={this.formLabelData.phone}>
               {getFieldDecorator('phone', {
                 rules: [
-                  { required: true, message: 'Please input your phone!' },
+                  { required: true, message: this.formLabelData.phoneMessage },
                   { validator: validatorPhone },
                 ],
               })(<PhoneView />)}
             </FormItem>
-            <Button type="primary">更新信息</Button>
+            <Button type="primary">
+              <FormattedMessage
+                id="app.settings.basic.update"
+                defaultMessage="Update Information"
+              />
+            </Button>
           </Form>
         </div>
         <div className={styles.right}>
@@ -144,3 +175,4 @@ export default class BaseView extends Component {
     );
   }
 }
+export default injectIntl(BaseView);

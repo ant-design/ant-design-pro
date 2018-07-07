@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
+import { FormattedMessage } from 'react-intl';
 import { Menu } from 'antd';
 import styles from './Info.less';
 import GridContent from '../../layouts/GridContent';
 
 const { Item } = Menu;
-
-const menuMap = {
-  base: '基本设置',
-  security: '安全设置',
-  binding: '账号绑定',
-  notification: '新消息通知',
-};
 
 @connect(({ user }) => ({
   currentUser: user.currentUser,
@@ -21,11 +15,27 @@ export default class Info extends Component {
   constructor(props) {
     super(props);
     const { match, location } = props;
-    let key = location.pathname.replace(`${match.path}/`, '');
-    key = menuMap[key] ? key : 'base';
+    const key = location.pathname.replace(`${match.path}/`, '');
+    // let key = location.pathname.replace(`${match.path}/`, '');
+    // key = this.state.menuMap[key] ? key : 'base';
     this.state = {
       selectKey: key,
       mode: 'inline',
+      menuMap: {
+        base: <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />,
+        security: (
+          <FormattedMessage id="app.settings.menuMap.security" defaultMessage="Security Settings" />
+        ),
+        binding: (
+          <FormattedMessage id="app.settings.menuMap.binding" defaultMessage="Account Binding" />
+        ),
+        notification: (
+          <FormattedMessage
+            id="app.settings.menuMap.notification"
+            defaultMessage="New Message Notification"
+          />
+        ),
+      },
     };
   }
 
@@ -41,7 +51,7 @@ export default class Info extends Component {
   static getDerivedStateFromProps(props, state) {
     const { match, location } = props;
     let selectKey = location.pathname.replace(`${match.path}/`, '');
-    selectKey = menuMap[selectKey] ? selectKey : 'base';
+    selectKey = state.menuMap[selectKey] ? selectKey : 'base';
     if (selectKey !== state.selectKey) {
       return { selectKey };
     }
@@ -49,11 +59,12 @@ export default class Info extends Component {
   }
 
   getmenu = () => {
+    const { menuMap } = this.state;
     return Object.keys(menuMap).map(item => <Item key={item}>{menuMap[item]}</Item>);
   };
 
   getRightTitle = () => {
-    const { selectKey } = this.state;
+    const { selectKey, menuMap } = this.state;
     return menuMap[selectKey];
   };
 
