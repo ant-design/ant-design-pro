@@ -1,3 +1,3 @@
 import React from 'react';
 
-export default props => <div {...props} />;
+export default props => <div style={{ height: '100%' }} {...props} />;

@@ -1,5 +1,3 @@
-import router from 'umi/router';
-import { getAuthority } from 'utils/authority';
 import { queryNotices } from '../services/api';
 
 export default {
@@ -33,13 +31,6 @@ export default {
         payload: count,
       });
     },
-    *init({ payload }, { put }) {
-      if (payload.hasAuthority) {
-        yield put(router.push('/User/Login'));
-      } else {
-        yield put(router.push('/Dashboard/Analysis'));
-      }
-    },
   },
 
   reducers: {
@@ -64,20 +55,11 @@ export default {
   },
 
   subscriptions: {
-    setup({ history, dispatch }) {
+    setup({ history }) {
       // Subscribe history(url) change, trigger `load` action if pathname is `/`
       return history.listen(({ pathname, search }) => {
         if (typeof window.ga !== 'undefined') {
           window.ga('send', 'pageview', pathname + search);
-        }
-        if (pathname === '/') {
-          const author = getAuthority();
-          dispatch({
-            type: 'init',
-            payload: {
-              hasAuthority: author === 'guest' || !author,
-            },
-          });
         }
       });
     },
