@@ -194,6 +194,7 @@
 
 import { isUrl } from '../utils/utils';
 
+// TODO: authority
 const menuData = [
   {
     name: 'dashboard',
@@ -211,6 +212,7 @@ const menuData = [
       {
         name: '工作台',
         path: 'Workplace',
+        // hideInBreadcrumb: true,
         // hideInMenu: true,
       },
     ],
@@ -226,11 +228,11 @@ const menuData = [
       },
       {
         name: '分步表单',
-        path: 'StepForm/Step1',
+        path: 'StepForm',
       },
       {
         name: '高级表单',
-        authority: 'admin',
+        // authority: 'admin',
         path: 'AdvancedForm',
       },
     ],
@@ -246,7 +248,7 @@ const menuData = [
       },
       {
         name: '标准列表',
-        path: 'BasicList',
+        path: 'basicList',
       },
       {
         name: '卡片列表',
@@ -279,11 +281,11 @@ const menuData = [
     children: [
       {
         name: '基础详情页',
-        path: 'BasicProfile',
+        path: 'Basic',
       },
       {
         name: '高级详情页',
-        path: 'AdvancedProfile',
+        path: 'Advanced',
         authority: 'admin',
       },
     ],
@@ -299,7 +301,7 @@ const menuData = [
       },
       {
         name: '失败',
-        path: 'Error',
+        path: 'Fail',
       },
     ],
   },
@@ -344,6 +346,21 @@ const menuData = [
       {
         name: '注册结果',
         path: 'RegisterResult',
+      },
+    ],
+  },
+  {
+    name: '个人页',
+    icon: 'user',
+    path: 'Account',
+    children: [
+      {
+        name: '个人中心',
+        path: 'Center',
+      },
+      {
+        name: '个人设置',
+        path: 'Settings',
       },
     ],
   },

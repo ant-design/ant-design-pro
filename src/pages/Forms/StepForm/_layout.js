@@ -1,9 +1,10 @@
 import React, { PureComponent, Fragment } from 'react';
-import { Route, Redirect, Switch } from 'dva/router';
 import { Card, Steps } from 'antd';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
-import { getRoutes } from '../../../utils/utils';
 import styles from '../style.less';
+
+// import { Route, Redirect, Switch } from 'dva/router';
+// import { getRoutes } from '../../../utils/utils';
 
 const { Step } = Steps;
 
@@ -13,11 +14,11 @@ export default class StepForm extends PureComponent {
     const { pathname } = location;
     const pathList = pathname.split('/');
     switch (pathList[pathList.length - 1]) {
-      case 'info':
+      case 'Step1':
         return 0;
-      case 'confirm':
+      case 'Step2':
         return 1;
-      case 'result':
+      case 'Step3':
         return 2;
       default:
         return 0;
@@ -25,7 +26,7 @@ export default class StepForm extends PureComponent {
   }
 
   render() {
-    const { match, routerData, location } = this.props;
+    const { location, children } = this.props;
     return (
       <PageHeaderLayout
         title="分步表单"
@@ -39,7 +40,8 @@ export default class StepForm extends PureComponent {
               <Step title="确认转账信息" />
               <Step title="完成" />
             </Steps>
-            <Switch>
+            {children}
+            {/* <Switch>
               {getRoutes(match.path, routerData).map(item => (
                 <Route
                   key={item.key}
@@ -50,7 +52,7 @@ export default class StepForm extends PureComponent {
               ))}
               <Redirect exact from="/form/step-form" to="/form/step-form/info" />
               <Redirect to="/exception/404" />
-            </Switch>
+            </Switch> */}
           </Fragment>
         </Card>
       </PageHeaderLayout>

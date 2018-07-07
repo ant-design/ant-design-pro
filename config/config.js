@@ -3,6 +3,7 @@
 // https://umijs.org/config/
 
 const path = require('path');
+const pageRoutes = require('../src/pages/_routes');
 
 export default {
   // add for transfer to umi
@@ -13,6 +14,9 @@ export default {
       'umi-plugin-routes',
       {
         exclude: [/\.test\.js/],
+        update(routes) {
+          return [...pageRoutes, ...routes];
+        },
       },
     ],
   ],

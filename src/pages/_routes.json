@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/Dashboard",
+    "exact": true,
+    "redirect": "/Dashboard/Analysis"
+  },
+  {
+    "path": "/Forms",
+    "exact": true,
+    "redirect": "/Forms/BasicForm"
+  },
+  {
+    "path": "/Forms/StepForm",
+    "exact": true,
+    "redirect": "/Forms/StepForm/Step1"
+  },
+  {
+    "path": "/List",
+    "exact": true,
+    "redirect": "/List/TableList"
+  },
+  {
+    "path": "/List/Search",
+    "exact": true,
+    "redirect": "/List/Search/Articles"
+  },
+  {
+    "path": "/Profile",
+    "exact": true,
+    "redirect": "/Profile/BasicProfile"
+  },
+  {
+    "path": "/Result",
+    "exact": true,
+    "redirect": "/Result/Success"
+  },
+  {
+    "path": "/Exception",
+    "exact": true,
+    "redirect": "/Exception/403"
+  }
+]
