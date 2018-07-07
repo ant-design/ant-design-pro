@@ -281,12 +281,12 @@ const menuData = [
     children: [
       {
         name: '基础详情页',
-        path: 'Basic',
+        path: 'BasicProfile',
       },
       {
         name: '高级详情页',
-        path: 'Advanced',
-        authority: 'admin',
+        path: 'AdvancedProfile',
+        // authority: 'admin',
       },
     ],
   },
