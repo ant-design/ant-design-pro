@@ -150,7 +150,7 @@ class SettingDarwer extends PureComponent {
     const { collapse, silderTheme, themeColor, layout, colorWeak } = setting;
     return (
       <DrawerMenu
-        parent={null}
+        getContainer={null}
         level={null}
         open={collapse}
         mask={false}
