@@ -59,8 +59,8 @@ class mergeLessPlugin {
       // covert less
       if (fs.existsSync(outFile)) {
         fs.unlinkSync(outFile);
-      } else {
-        fs.mkdir(path.dirname(outFile));
+      } else if (!fs.existsSync(path.dirname(outFile))) {
+        fs.mkdirSync(path.dirname(outFile));
       }
       loopAllLess(options.stylesDir).then(() => {
         fs.writeFileSync(outFile, lessArray.join('\n'));
