@@ -54,28 +54,6 @@ const validatorPhone = (rule, value, callback) => {
 }))
 @Form.create()
 class BaseView extends Component {
-  constructor(props) {
-    super(props);
-    const { intl } = props;
-    this.formLabelData = {
-      email: intl.formatMessage({ id: 'app.settings.basic.email' }, {}),
-      emailMessage: intl.formatMessage({ id: 'app.settings.basic.email-message' }, {}),
-      nickname: intl.formatMessage({ id: 'app.settings.basic.nickname' }, {}),
-      nicknameMessage: intl.formatMessage({ id: 'app.settings.basic.nickname-message' }, {}),
-      profile: intl.formatMessage({ id: 'app.settings.basic.profile' }, {}),
-      profileMessage: intl.formatMessage({ id: 'app.settings.basic.profile-message' }, {}),
-      profilePlaceholder: intl.formatMessage({ id: 'app.settings.basic.profile-placeholder' }, {}),
-      country: intl.formatMessage({ id: 'app.settings.basic.country' }, {}),
-      countryMessage: intl.formatMessage({ id: 'app.settings.basic.country-message' }, {}),
-      geographic: intl.formatMessage({ id: 'app.settings.basic.geographic' }, {}),
-      geographicMessage: intl.formatMessage({ id: 'app.settings.basic.geographic-message' }, {}),
-      address: intl.formatMessage({ id: 'app.settings.basic.address' }, {}),
-      addressMessage: intl.formatMessage({ id: 'app.settings.basic.address-message' }, {}),
-      phone: intl.formatMessage({ id: 'app.settings.basic.phone' }, {}),
-      phoneMessage: intl.formatMessage({ id: 'app.settings.basic.phone-message' }, {}),
-    };
-  }
-
   componentDidMount() {
     this.setBaseInfo();
   }
@@ -105,41 +83,73 @@ class BaseView extends Component {
   render() {
     const {
       form: { getFieldDecorator },
+      intl,
     } = this.props;
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
           <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
-            <FormItem label={this.formLabelData.email}>
+            <FormItem label={intl.formatMessage({ id: 'app.settings.basic.email' }, {})}>
               {getFieldDecorator('email', {
-                rules: [{ required: true, message: this.formLabelData.emailMessage }],
+                rules: [
+                  {
+                    required: true,
+                    message: intl.formatMessage({ id: 'app.settings.basic.email-message' }, {}),
+                  },
+                ],
               })(<Input />)}
             </FormItem>
-            <FormItem label={this.formLabelData.nickname}>
+            <FormItem label={intl.formatMessage({ id: 'app.settings.basic.nickname' }, {})}>
               {getFieldDecorator('name', {
-                rules: [{ required: true, message: this.formLabelData.nicknameMessage }],
+                rules: [
+                  {
+                    required: true,
+                    message: intl.formatMessage({ id: 'app.settings.basic.nickname-message' }, {}),
+                  },
+                ],
               })(<Input />)}
             </FormItem>
-            <FormItem label={this.formLabelData.profile}>
+            <FormItem label={intl.formatMessage({ id: 'app.settings.basic.profile' }, {})}>
               {getFieldDecorator('profile', {
-                rules: [{ required: true, message: this.formLabelData.profileMessage }],
-              })(<Input.TextArea placeholder={this.formLabelData.profilePlaceholder} rows={4} />)}
+                rules: [
+                  {
+                    required: true,
+                    message: intl.formatMessage({ id: 'app.settings.basic.profile-message' }, {}),
+                  },
+                ],
+              })(
+                <Input.TextArea
+                  placeholder={intl.formatMessage(
+                    { id: 'app.settings.basic.profile-placeholder' },
+                    {}
+                  )}
+                  rows={4}
+                />
+              )}
             </FormItem>
-            <FormItem label={this.formLabelData.country}>
+            <FormItem label={intl.formatMessage({ id: 'app.settings.basic.country' }, {})}>
               {getFieldDecorator('country', {
-                rules: [{ required: true, message: this.formLabelData.countryMessage }],
+                rules: [
+                  {
+                    required: true,
+                    message: intl.formatMessage({ id: 'app.settings.basic.country-message' }, {}),
+                  },
+                ],
               })(
                 <Select style={{ maxWidth: 220 }}>
                   <Option value="China">中国</Option>
                 </Select>
               )}
             </FormItem>
-            <FormItem label={this.formLabelData.geographic}>
+            <FormItem label={intl.formatMessage({ id: 'app.settings.basic.geographic' }, {})}>
               {getFieldDecorator('geographic', {
                 rules: [
                   {
                     required: true,
-                    message: this.formLabelData.geographicMessage,
+                    message: intl.formatMessage(
+                      { id: 'app.settings.basic.geographic-message' },
+                      {}
+                    ),
                   },
                   {
                     validator: validatorGeographic,
@@ -147,15 +157,23 @@ class BaseView extends Component {
                 ],
               })(<GeographicView />)}
             </FormItem>
-            <FormItem label={this.formLabelData.address}>
+            <FormItem label={intl.formatMessage({ id: 'app.settings.basic.address' }, {})}>
               {getFieldDecorator('address', {
-                rules: [{ required: true, message: this.formLabelData.addressMessage }],
+                rules: [
+                  {
+                    required: true,
+                    message: intl.formatMessage({ id: 'app.settings.basic.address-message' }, {}),
+                  },
+                ],
               })(<Input />)}
             </FormItem>
-            <FormItem label={this.formLabelData.phone}>
+            <FormItem label={intl.formatMessage({ id: 'app.settings.basic.phone' }, {})}>
               {getFieldDecorator('phone', {
                 rules: [
-                  { required: true, message: this.formLabelData.phoneMessage },
+                  {
+                    required: true,
+                    message: intl.formatMessage({ id: 'app.settings.basic.phone-message' }, {}),
+                  },
                   { validator: validatorPhone },
                 ],
               })(<PhoneView />)}

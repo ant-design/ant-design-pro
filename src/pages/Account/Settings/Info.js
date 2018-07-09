@@ -15,11 +15,7 @@ export default class Info extends Component {
   constructor(props) {
     super(props);
     const { match, location } = props;
-    const key = location.pathname.replace(`${match.path}/`, '');
-    // let key = location.pathname.replace(`${match.path}/`, '');
-    // key = this.state.menuMap[key] ? key : 'base';
     this.state = {
-      selectKey: key,
       mode: 'inline',
       menuMap: {
         base: <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />,
@@ -37,6 +33,12 @@ export default class Info extends Component {
         ),
       },
     };
+    let key = location.pathname.replace(`${match.path}/`, '');
+    const { menuMap } = this.state;
+    key = menuMap[key] ? key : 'base';
+    this.setState({
+      selectKey: key,
+    });
   }
 
   componentDidMount() {

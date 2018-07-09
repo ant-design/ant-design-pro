@@ -1,25 +1,39 @@
 import React, { Component, Fragment } from 'react';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { Icon, List } from 'antd';
 
-export default class BindingView extends Component {
+class BindingView extends Component {
   getData = () => {
+    const { intl } = this.props;
     return [
       {
-        title: '绑定淘宝',
-        description: '当前未绑定淘宝账号',
-        actions: [<a>绑定</a>],
+        title: intl.formatMessage({ id: 'app.settings.binding.taobao' }, {}),
+        description: intl.formatMessage({ id: 'app.settings.binding.taobao-description' }, {}),
+        actions: [
+          <a>
+            <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
+          </a>,
+        ],
         avatar: <Icon type="taobao" className="taobao" />,
       },
       {
-        title: '绑定支付宝',
-        description: '当前未绑定支付宝账号',
-        actions: [<a>绑定</a>],
+        title: intl.formatMessage({ id: 'app.settings.binding.alipay' }, {}),
+        description: intl.formatMessage({ id: 'app.settings.binding.alipay-description' }, {}),
+        actions: [
+          <a>
+            <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
+          </a>,
+        ],
         avatar: <Icon type="alipay" className="alipay" />,
       },
       {
-        title: '绑定钉钉',
-        description: '当前未绑定钉钉账号',
-        actions: [<a>绑定</a>],
+        title: intl.formatMessage({ id: 'app.settings.binding.dingding' }, {}),
+        description: intl.formatMessage({ id: 'app.settings.binding.dingding-description' }, {}),
+        actions: [
+          <a>
+            <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
+          </a>,
+        ],
         avatar: <Icon type="dingding" className="dingding" />,
       },
     ];
@@ -45,3 +59,4 @@ export default class BindingView extends Component {
     );
   }
 }
+export default injectIntl(BindingView);
