@@ -8,6 +8,11 @@ import styles from './index.less';
 
 const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
 
+const TooltipOverlayStyle = {
+  overflowWrap: 'break-word',
+  wordWrap: 'break-word',
+};
+
 export const getStrFullLength = (str = '') => {
   return str.split('').reduce((pre, cur) => {
     const charCode = cur.charCodeAt(0);
@@ -54,7 +59,7 @@ const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other })
 
   if (tooltip) {
     return (
-      <Tooltip overlayStyle={{ wordBreak: 'break-all' }} title={text}>
+      <Tooltip overlayStyle={TooltipOverlayStyle} title={text}>
         <span>
           {displayText}
           {tail}
@@ -223,7 +228,7 @@ export default class Ellipsis extends Component {
         <div id={id} className={cls} {...restProps}>
           <style>{style}</style>
           {tooltip ? (
-            <Tooltip overlayStyle={{ wordBreak: 'break-all' }} title={children}>
+            <Tooltip overlayStyle={TooltipOverlayStyle} title={children}>
               {children}
             </Tooltip>
           ) : (
@@ -244,7 +249,7 @@ export default class Ellipsis extends Component {
       <div {...restProps} ref={this.handleRoot} className={cls}>
         <div ref={this.handleContent}>
           {tooltip ? (
-            <Tooltip overlayStyle={{ wordBreak: 'break-all' }} title={text}>
+            <Tooltip overlayStyle={TooltipOverlayStyle} title={text}>
               {childNode}
             </Tooltip>
           ) : (
