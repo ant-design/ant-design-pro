@@ -1,24 +1,37 @@
 import React, { Component, Fragment } from 'react';
+import { injectIntl } from 'react-intl';
 import { Switch, List } from 'antd';
 
-const Action = <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked />;
-
-export default class NotificationView extends Component {
+class NotificationView extends Component {
   getData = () => {
+    const { intl } = this.props;
+    const Action = (
+      <Switch
+        checkedChildren={intl.formatMessage({ id: 'app.settings.open' }, {})}
+        unCheckedChildren={intl.formatMessage({ id: 'app.settings.close' }, {})}
+        defaultChecked
+      />
+    );
     return [
       {
-        title: '账户密码',
-        description: '其他用户的消息将以站内信的形式通知',
+        title: intl.formatMessage({ id: 'app.settings.notification.password' }, {}),
+        description: intl.formatMessage(
+          { id: 'app.settings.notification.password-description' },
+          {}
+        ),
         actions: [Action],
       },
       {
-        title: '系统消息',
-        description: '系统消息将以站内信的形式通知',
+        title: intl.formatMessage({ id: 'app.settings.notification.messages' }, {}),
+        description: intl.formatMessage(
+          { id: 'app.settings.notification.messages-description' },
+          {}
+        ),
         actions: [Action],
       },
       {
-        title: '待办通知',
-        description: '待办事项将以站内信的形式通知',
+        title: intl.formatMessage({ id: 'app.settings.notification.todo' }, {}),
+        description: intl.formatMessage({ id: 'app.settings.notification.todo-description' }, {}),
         actions: [Action],
       },
     ];
@@ -40,3 +53,4 @@ export default class NotificationView extends Component {
     );
   }
 }
+export default injectIntl(NotificationView);

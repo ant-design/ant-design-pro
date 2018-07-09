@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { List } from 'antd';
+// import { getTimeDistance } from '../../../utils/utils';
 
 const passwordStrength = {
   strong: (
@@ -20,34 +21,67 @@ const passwordStrength = {
   ),
 };
 
-export default class SecurityView extends Component {
+class SecurityView extends Component {
   getData = () => {
+    const { intl } = this.props;
     return [
       {
-        title: 'account password',
-        description: <Fragment> Current password strength：{passwordStrength.strong}</Fragment>,
-        actions: [<a>Modify</a>],
+        title: intl.formatMessage({ id: 'app.settings.security.password' }, {}),
+        description: (
+          <Fragment>
+            {' '}
+            {intl.formatMessage({ id: 'app.settings.security.password-description' }, {})}：{
+              passwordStrength.strong
+            }
+          </Fragment>
+        ),
+        actions: [
+          <a>
+            <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
+          </a>,
+        ],
       },
       {
-        title: 'Security phone',
-        description: 'Bound phone：138****8293',
-        actions: [<a>Modify</a>],
+        title: intl.formatMessage({ id: 'app.settings.security.phone' }, {}),
+        description: `${intl.formatMessage(
+          { id: 'app.settings.security.phone-description' },
+          {}
+        )}：138****8293`,
+        actions: [
+          <a>
+            <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
+          </a>,
+        ],
       },
       {
-        title: 'Security Question',
-        description:
-          'The security question is not set, and the security policy can effectively protect the account security',
-        actions: [<a>Set</a>],
+        title: intl.formatMessage({ id: 'app.settings.security.question' }, {}),
+        description: intl.formatMessage({ id: 'app.settings.security.question-description' }, {}),
+        actions: [
+          <a>
+            <FormattedMessage id="app.settings.security.set" defaultMessage="Set" />
+          </a>,
+        ],
       },
       {
-        title: 'Backup Email',
-        description: 'Bound Email：ant***sign.com',
-        actions: [<a>Modify</a>],
+        title: intl.formatMessage({ id: 'app.settings.security.email' }, {}),
+        description: `${intl.formatMessage(
+          { id: 'app.settings.security.email-description' },
+          {}
+        )}：ant***sign.com`,
+        actions: [
+          <a>
+            <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
+          </a>,
+        ],
       },
       {
-        title: 'MFA Device',
-        description: 'Unbound MFA device, after binding, can be confirmed twice',
-        actions: [<a>Bind</a>],
+        title: intl.formatMessage({ id: 'app.settings.security.mfa' }, {}),
+        description: intl.formatMessage({ id: 'app.settings.security.mfa-description' }, {}),
+        actions: [
+          <a>
+            <FormattedMessage id="app.settings.security.bind" defaultMessage="Bind" />
+          </a>,
+        ],
       },
     ];
   };
@@ -68,3 +102,4 @@ export default class SecurityView extends Component {
     );
   }
 }
+export default injectIntl(SecurityView);
