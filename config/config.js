@@ -76,6 +76,32 @@ export default {
         { path: '/exception/403', component: './Exception/403' },
         { path: '/exception/404', component: './Exception/404' },
         { path: '/exception/500', component: './Exception/500' },
+
+        // acount
+        {
+          path: '/acount/center',
+          component: './Account/Center/Center',
+          routes: [
+            { path: '/acount/center', redirect: '/acount/center/articles' },
+            { path: '/acount/center/articles', component: './Account/Center/Articles' },
+            { path: '/acount/center/applications', component: './Account/Center/Applications' },
+            { path: '/acount/center/projects', component: './Account/Center/Projects' },
+          ],
+        },
+        {
+          path: '/acount/settings',
+          component: './Account/Settings/Info',
+          routes: [
+            { path: '/acount/settings', redirect: '/acount/settings/base' },
+            { path: '/acount/center/base', component: './Account/Settings/BaseView' },
+            { path: '/acount/center/security', component: './Account/Settings/SecurityView' },
+            { path: '/acount/center/binding', component: './Account/Settings/BindingView' },
+            {
+              path: '/acount/center/notification',
+              component: './Account/Settings/NotificationView',
+            },
+          ],
+        },
       ],
     },
   ],
@@ -135,46 +161,3 @@ export default {
     },
   },
 };
-
-// [
-//   {
-//     "path": "/Dashboard",
-//     "exact": true,
-//     "redirect": "/Dashboard/Analysis"
-//   },
-//   {
-//     "path": "/Forms",
-//     "exact": true,
-//     "redirect": "/Forms/BasicForm"
-//   },
-//   {
-//     "path": "/Forms/StepForm",
-//     "exact": true,
-//     "redirect": "/Forms/StepForm/Step1"
-//   },
-//   {
-//     "path": "/List",
-//     "exact": true,
-//     "redirect": "/List/TableList"
-//   },
-//   {
-//     "path": "/List/Search",
-//     "exact": true,
-//     "redirect": "/List/Search/Articles"
-//   },
-//   {
-//     "path": "/Profile",
-//     "exact": true,
-//     "redirect": "/Profile/BasicProfile"
-//   },
-//   {
-//     "path": "/Result",
-//     "exact": true,
-//     "redirect": "/Result/Success"
-//   },
-//   {
-//     "path": "/Exception",
-//     "exact": true,
-//     "redirect": "/Exception/403"
-//   }
-// ]

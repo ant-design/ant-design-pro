@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Route, routerRedux, Switch, Redirect } from 'dva/router';
+import { routerRedux } from 'dva/router';
 import { Menu } from 'antd';
 import styles from './Info.less';
-import { getRoutes } from '../../../utils/utils';
 import GridContent from '../../layouts/GridContent';
 
 const { Item } = Menu;
@@ -86,7 +85,7 @@ export default class Info extends Component {
   };
 
   render() {
-    const { match, routerData, currentUser } = this.props;
+    const { children, currentUser } = this.props;
     if (!currentUser.userid) {
       return '';
     }
@@ -106,18 +105,7 @@ export default class Info extends Component {
           </div>
           <div className={styles.right}>
             <div className={styles.title}>{this.getRightTitle()}</div>
-            <Switch>
-              {getRoutes(match.path, routerData).map(item => (
-                <Route
-                  key={item.key}
-                  path={item.path}
-                  render={props => <item.component {...props} currentUser={currentUser} />}
-                  exact={item.exact}
-                />
-              ))}
-              <Redirect exact from="/account/settings" to="/account/settings/base" />
-              <Redirect to="/exception/404" />
-            </Switch>
+            {children}
           </div>
         </div>
       </GridContent>

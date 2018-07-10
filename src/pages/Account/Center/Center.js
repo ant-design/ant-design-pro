@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Link, routerRedux, Route, Switch, Redirect } from 'dva/router';
+import { Link, routerRedux } from 'dva/router';
 import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
-import { getRoutes } from '../../../utils/utils';
 import GridContent from '../../layouts/GridContent';
 import styles from './Center.less';
 
-@connect(({ list, loading, user, project }) => ({
-  list,
+@connect(({ loading, user, project }) => ({
   listLoading: loading.effects['list/fetch'],
   currentUser: user.currentUser,
   currentUserLoading: loading.effects['user/fetchCurrent'],
@@ -83,17 +81,15 @@ export default class Center extends PureComponent {
   render() {
     const { newTags, inputVisible, inputValue } = this.state;
     const {
-      list: { list },
       listLoading,
       currentUser,
       currentUserLoading,
       project: { notice },
       projectLoading,
       match,
-      routerData,
       location,
+      children,
     } = this.props;
-    const routes = getRoutes(match.path, routerData);
 
     const operationTabList = [
       {
@@ -207,18 +203,7 @@ export default class Center extends PureComponent {
               onTabChange={this.onTabChange}
               loading={listLoading}
             >
-              <Switch>
-                {routes.map(item => (
-                  <Route
-                    key={item.key}
-                    path={item.path}
-                    render={props => <item.component {...props} list={list} />}
-                    exact={item.exact}
-                  />
-                ))}
-                <Redirect exact from="/account/center" to="/account/center/articles" />
-                <Redirect to="/exception/404" />
-              </Switch>
+              {children}
             </Card>
           </Col>
         </Row>
