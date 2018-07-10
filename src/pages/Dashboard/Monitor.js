@@ -6,7 +6,7 @@ import NumberInfo from 'components/NumberInfo';
 import CountDown from 'components/CountDown';
 import ActiveChart from 'components/ActiveChart';
 import numeral from 'numeral';
-import GridContent from '../../layouts/GridContent';
+import GridContent from '../layouts/GridContent';
 
 import Authorized from '../../utils/Authorized';
 import styles from './Monitor.less';

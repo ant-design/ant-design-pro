@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Link, routerRedux, Route, Switch, Redirect } from 'dva/router';
 import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
 import { getRoutes } from '../../../utils/utils';
-import GridContent from '../../../layouts/GridContent';
+import GridContent from '../../layouts/GridContent';
 import styles from './Center.less';
 
 @connect(({ list, loading, user, project }) => ({

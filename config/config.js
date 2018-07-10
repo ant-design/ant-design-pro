@@ -3,83 +3,88 @@
 // https://umijs.org/config/
 
 const path = require('path');
-const pageRoutes = require('../src/pages/_routes');
+// const pageRoutes = require('../_routes');
 
 export default {
   // add for transfer to umi
   plugins: [
     'umi-plugin-dva',
     // TODO 决定是否使用约定路由，如果使用配置路由那么 umi-plugin-routes 可以去掉了
-    [
-      'umi-plugin-routes',
-      {
-        exclude: [/\.test\.js/],
-        update(routes) {
-          return [...pageRoutes, ...routes];
-        },
-      },
-    ],
+    // [
+    //   'umi-plugin-routes',
+    //   {
+    //     exclude: [/\.test\.js/],
+    //     update(routes) {
+    //       return [...pageRoutes, ...routes];
+    //     },
+    //   },
+    // ],
   ],
   disableServiceWorker: true,
 
   // 路由配置
-  // TODO ./src/pages 太冗余了
-  // routes: [{
-  //   path: '/',
-  //   component: './src/layouts/BasicLayout',
-  //   indexRoute: { redirect: '/dashboard/analysis' },
-  //   childRoutes: [
+  routes: [
+    {
+      path: '/',
+      component: './layouts/index',
+      routes: [
+        // dashboard
+        { path: '/', redirect: '/dashboard/analysis' },
+        { path: '/dashboard/analysis', component: './Dashboard/Analysis' },
+        { path: '/dashboard/monitor', component: './Dashboard/Monitor' },
+        { path: '/dashboard/workplace', component: './Dashboard/Workplace' },
 
-  //     // dashboard
-  //     { path: 'dashboard/analysis', component: './src/pages/Dashboard/Analysis' },
-  //     { path: 'dashboard/monitor', component: './src/pages/Dashboard/Monitor' },
-  //     { path: 'dashboard/workplace', component: './src/pages/Dashboard/Workplace' },
+        // forms
+        { path: '/form/basic-form', component: './Forms/BasicForm' },
+        {
+          path: '/form/step-form',
+          component: './Forms/StepForm',
+          routes: [
+            { path: '/form/step-form', redirect: '/form/step-form/info' },
+            { path: '/form/step-form/info', component: './Forms/StepForm/Step1' },
+            { path: '/form/step-form/confirm', component: './Forms/StepForm/Step2' },
+            { path: '/form/step-form/result', component: './Forms/StepForm/Step3' },
+          ],
+        },
+        { path: '/form/advanced-form', component: './Forms/AdvancedForm' },
 
-  //     // forms
-  //     { path: 'form/basic-form', component: './src/pages/Forms/BasicForm' },
-  //     {
-  //       path: 'form/step-form',
-  //       component: './src/pages/Forms/StepForm',
-  //       indexRoute: { redirect: '/form/step-form/info' },
-  //       childRoutes: [
-  //         { path: 'info', component: './src/pages/Forms/StepForm/Step1' },
-  //         { path: 'confirm', component: './src/pages/Forms/StepForm/Step2' },
-  //         { path: 'result', component: './src/pages/Forms/StepForm/Step3' },
-  //       ],
-  //     },
-  //     { path: 'form/advanced-form', component: './src/pages/Forms/AdvancedForm' },
+        // list
+        { path: '/list/table-list', component: './List/TableList' },
+        { path: '/list/table-list', component: './List/TableList' },
+        { path: '/list/basic-list', component: './List/BasicList' },
+        { path: '/list/card-list', component: './List/CardList' },
+        {
+          path: '/list/search',
+          component: './List/List',
+          routes: [
+            { path: '/list/search', redirect: '/list/search/projects' },
+            { path: '/list/search/articles', component: './List/Articles' },
+            { path: '/list/search/projects', component: './List/Projects' },
+            { path: '/list/search/applications', component: './List/Applications' },
+          ],
+        },
 
-  //     // list
-  //     { path: 'list/table-list', component: './src/pages/List/TableList' },
-  //     { path: 'list/table-list', component: './src/pages/List/TableList' },
-  //     { path: 'list/basic-list', component: './src/pages/List/BasicList' },
-  //     { path: 'list/card-list', component: './src/pages/List/CardList' },
-  //     {
-  //       path: 'list/search',
-  //       component: './src/pages/List/List',
-  //       indexRoute: { redirect: '/list/search/projects' },
-  //       childRoutes: [
-  //         { path: 'articles', component: './src/pages/List/Articles' },
-  //         { path: 'projects', component: './src/pages/List/Projects' },
-  //         { path: 'applications', component: './src/pages/List/Applications' },
-  //       ],
-  //     },
+        // profile
+        { path: '/profile/basic', component: './Profile/BasicProfile' },
+        { path: '/profile/advanced', component: './Profile/AdvancedProfile' },
 
-  //     // profile
-  //     { path: 'profile/basic', component: './src/pages/Profile/BasicProfile' },
-  //     { path: 'profile/advanced', component: './src/pages/Profile/AdvancedProfile' },
+        // result
+        { path: '/result/success', component: './Result/Success' },
+        { path: '/result/fail', component: './Result/Error' },
 
-  //     // result
-  //     { path: 'result/success', component: './src/pages/Result/Success' },
-  //     { path: 'result/fail', component: './src/pages/Result/Error' },
+        // exception
+        { path: '/exception/403', component: './Exception/403' },
+        { path: '/exception/404', component: './Exception/404' },
+        { path: '/exception/500', component: './Exception/500' },
+      ],
+    },
+  ],
 
-  //     // exception
-  //     { path: 'exception/403', component: './src/pages/Exception/403' },
-  //     { path: 'exception/404', component: './src/pages/Exception/404' },
-  //     { path: 'exception/500', component: './src/pages/Exception/500' },
-
-  // //   ],
-  // }],
+  // https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+  theme: {
+    // 'primary-color': '#10e99b',
+    'card-actions-background': '#f5f8fa',
+  },
 
   // copy from old webpackrc.js
 
@@ -102,9 +107,9 @@ export default {
     common: path.resolve(__dirname, '../src/common/'),
   },
   ignoreMomentLocale: true,
-  theme: './src/theme.js',
+  // theme: './theme.js',
   // html: { TODO remove
-  //   template: './src/index.ejs',
+  //   template: './index.ejs',
   // },
   publicPath: '/',
   // TODO check hash config
@@ -130,3 +135,46 @@ export default {
     },
   },
 };
+
+// [
+//   {
+//     "path": "/Dashboard",
+//     "exact": true,
+//     "redirect": "/Dashboard/Analysis"
+//   },
+//   {
+//     "path": "/Forms",
+//     "exact": true,
+//     "redirect": "/Forms/BasicForm"
+//   },
+//   {
+//     "path": "/Forms/StepForm",
+//     "exact": true,
+//     "redirect": "/Forms/StepForm/Step1"
+//   },
+//   {
+//     "path": "/List",
+//     "exact": true,
+//     "redirect": "/List/TableList"
+//   },
+//   {
+//     "path": "/List/Search",
+//     "exact": true,
+//     "redirect": "/List/Search/Articles"
+//   },
+//   {
+//     "path": "/Profile",
+//     "exact": true,
+//     "redirect": "/Profile/BasicProfile"
+//   },
+//   {
+//     "path": "/Result",
+//     "exact": true,
+//     "redirect": "/Result/Success"
+//   },
+//   {
+//     "path": "/Exception",
+//     "exact": true,
+//     "redirect": "/Exception/403"
+//   }
+// ]

@@ -1,7 +1,7 @@
 import React from 'react';
 import { getRouterData } from 'common/router';
 import { getMenuData } from 'common/menu';
-import UserLayout from '../../layouts/UserLayout';
+import UserLayout from '../layouts/UserLayout';
 
 export default props => {
   const { children, location } = props;

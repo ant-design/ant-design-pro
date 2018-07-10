@@ -4,7 +4,7 @@ import { Route, routerRedux, Switch, Redirect } from 'dva/router';
 import { Menu } from 'antd';
 import styles from './Info.less';
 import { getRoutes } from '../../../utils/utils';
-import GridContent from '../../../layouts/GridContent';
+import GridContent from '../../layouts/GridContent';
 
 const { Item } = Menu;
 

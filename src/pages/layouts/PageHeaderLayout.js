@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'dva/router';
-import PageHeader from '../components/PageHeader';
+import PageHeader from '../../components/PageHeader';
 import GridContent from './GridContent';
 import styles from './PageHeaderLayout.less';
 import MenuContext from './MenuContext';

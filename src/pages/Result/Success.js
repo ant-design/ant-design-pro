@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Button, Row, Col, Icon, Steps, Card } from 'antd';
 import Result from 'components/Result';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import PageHeaderLayout from '../layouts/PageHeaderLayout';
 
 const { Step } = Steps;
 
