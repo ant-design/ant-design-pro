@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './index.less'
 
 export default class MarginBar extends React.PureComponent {
   defVal = '8px';
@@ -21,6 +22,6 @@ export default class MarginBar extends React.PureComponent {
     if (bottom != null) {
       style.marginBottom = bottom === true ? this.defVal : bottom;
     }
-    return <div style={style}>{children}</div>;
+    return <div className={style.bar} style={style}>{children}</div>;
   }
 }
