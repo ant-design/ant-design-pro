@@ -40,7 +40,7 @@ export default class Register extends Component {
     if (register.status === 'ok') {
       dispatch(
         routerRedux.push({
-          pathname: '/User/RegisterResult',
+          pathname: '/user/register-result',
           state: {
             account,
           },
