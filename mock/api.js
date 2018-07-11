@@ -1,3 +1,5 @@
+import mockjs from 'mockjs';
+
 const titles = [
   'Alipay',
   'Angular',
@@ -59,7 +61,7 @@ const user = [
   '仲尼',
 ];
 
-export function fakeList(count) {
+function fakeList(count) {
   const list = [];
   for (let i = 0; i < count; i += 1) {
     list.push({
@@ -109,7 +111,7 @@ export function fakeList(count) {
 
 let sourceData;
 
-export function getFakeList(req, res) {
+function getFakeList(req, res) {
   const params = req.query;
 
   const count = params.count * 1 || 20;
@@ -124,7 +126,7 @@ export function getFakeList(req, res) {
   }
 }
 
-export function postFakeList(req, res) {
+function postFakeList(req, res) {
   const { /* url = '', */ body } = req;
   // const params = getUrlParams(url);
   const { method, id } = body;
@@ -160,7 +162,7 @@ export function postFakeList(req, res) {
   }
 }
 
-export const getNotice = [
+const getNotice = [
   {
     id: 'xxx1',
     title: titles[0],
@@ -223,7 +225,7 @@ export const getNotice = [
   },
 ];
 
-export const getActivities = [
+const getActivities = [
   {
     id: 'trend-1',
     updatedAt: new Date(),
@@ -324,7 +326,7 @@ export const getActivities = [
   },
 ];
 
-export function getFakeCaptcha(req, res) {
+function getFakeCaptcha(req, res) {
   if (res && res.json) {
     res.json('captcha-xxx');
   } else {
@@ -333,9 +335,15 @@ export function getFakeCaptcha(req, res) {
 }
 
 export default {
-  getNotice,
-  getActivities,
-  getFakeList,
-  postFakeList,
-  getFakeCaptcha,
+  'GET /api/project/notice': getNotice,
+  'GET /api/activities': getActivities,
+  'POST /api/forms': (req, res) => {
+    res.send({ message: 'Ok' });
+  },
+  'GET /api/tags': mockjs.mock({
+    'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }],
+  }),
+  'GET /api/fake_list': getFakeList,
+  'POST /api/fake_list': postFakeList,
+  'GET /api/captcha': getFakeCaptcha,
 };
