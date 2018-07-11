@@ -3,12 +3,14 @@ import { Spin } from 'antd';
 import { connect } from 'dva';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import BasicLayout from './BasicLayout';
-import { getMenuData } from '../common/menu';
+import { getMenuData } from '../../common/menu';
+import { getRouterData } from '../../common/router';
 /**
  * 根据菜单取得重定向地址.
  */
 
 const MenuData = getMenuData();
+const routerData = getRouterData({});
 const getRedirectData = () => {
   const redirectData = [];
   const getRedirect = item => {
@@ -90,6 +92,7 @@ class LoadingPage extends PureComponent {
       <BasicLayout
         isMobile={isMobile}
         menuData={MenuData}
+        routerData={routerData}
         redirectData={redirectData}
         {...this.props}
       />

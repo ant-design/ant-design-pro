@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Form, Input, Upload, Select, Button } from 'antd';
+import { connect } from 'dva';
 import styles from './BaseView.less';
 import GeographicView from './GeographicView';
 import PhoneView from './PhoneView';
@@ -44,6 +45,9 @@ const validatorPhone = (rule, value, callback) => {
   callback();
 };
 
+@connect(({ user }) => ({
+  currentUser: user.currentUser,
+}))
 @Form.create()
 export default class BaseView extends Component {
   componentDidMount() {

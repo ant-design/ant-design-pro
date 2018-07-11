@@ -352,7 +352,7 @@ const menuData = [
   {
     name: '个人页',
     icon: 'user',
-    path: 'acount',
+    path: 'account',
     children: [
       {
         name: '个人中心',
