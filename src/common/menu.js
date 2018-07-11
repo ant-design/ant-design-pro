@@ -231,13 +231,9 @@ const menuData = [
         path: 'step-form',
       },
       {
-<<<<<<< HEAD
-        name: '高级表单',
         // authority: 'admin',
-=======
         name: 'advancedform',
         authority: 'admin',
->>>>>>> add meun Intl
         path: 'advanced-form',
       },
     ],

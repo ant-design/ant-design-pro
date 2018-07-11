@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { formatMessage, FormattedMessage } from 'umi/locale';
 import {
   Row,
   Col,
@@ -51,11 +51,10 @@ for (let i = 0; i < 7; i += 1) {
 class Analysis extends Component {
   constructor(props) {
     super(props);
-    const { intl } = props;
     this.rankingListData = [];
     for (let i = 0; i < 7; i += 1) {
       this.rankingListData.push({
-        title: intl.formatMessage({ id: 'app.analysis.test' }, { no: i }),
+        title: formatMessage({ id: 'app.analysis.test' }, { no: i }),
         total: 323234,
       });
     }
@@ -657,4 +656,4 @@ class Analysis extends Component {
   }
 }
 
-export default injectIntl(Analysis);
+export default Analysis;

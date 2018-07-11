@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'umi/locale';
 import { Link } from 'dva/router';
 import PageHeader from '../../components/PageHeader';
 import GridContent from './GridContent';

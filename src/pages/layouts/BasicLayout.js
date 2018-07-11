@@ -3,13 +3,13 @@
 import React from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
-import { injectIntl } from 'react-intl';
 import memoizeOne from 'memoize-one';
 import { connect } from 'dva';
 // import { Route, Redirect, Switch } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
+import { formatMessage } from 'umi/locale';
 import SiderMenu from '../../components/SiderMenu';
 // import NotFound from '../Exception/404';
 // import { getRoutes } from '../utils/utils';
@@ -21,7 +21,7 @@ import Header from './Header';
 import Context from './MenuContext';
 
 const { Content } = Layout;
-const { AuthorizedRoute, check } = Authorized;
+const { check } = Authorized;
 
 /**
  * 获取面包屑映射
@@ -84,7 +84,6 @@ class BasicLayout extends React.PureComponent {
 
   getPageTitle = pathname => {
     let currRouterData = null;
-    const { intl } = this.props;
     // match params path
     Object.keys(this.breadcrumbNameMap).forEach(key => {
       if (pathToRegexp(key).test(pathname)) {
@@ -94,7 +93,7 @@ class BasicLayout extends React.PureComponent {
     if (!currRouterData) {
       return 'Ant Design Pro';
     }
-    const message = intl.formatMessage({
+    const message = formatMessage({
       id: currRouterData.locale || currRouterData.name,
       defaultMessage: currRouterData.name,
     });
@@ -221,4 +220,4 @@ export default connect(({ global, setting }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   ...setting,
-}))(injectIntl(BasicLayout));
+}))(BasicLayout);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { addLocaleData, IntlProvider } from 'react-intl';
+import { addLocaleData, IntlProvider } from 'umi/locale';
 import { LocaleProvider } from 'antd';
 import enLocale from './en-US';
 import cnLocale from './zh-CN';

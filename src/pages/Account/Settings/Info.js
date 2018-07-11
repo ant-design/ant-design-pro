@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'umi/locale';
 import { Menu } from 'antd';
 import styles from './Info.less';
 import GridContent from '../../layouts/GridContent';

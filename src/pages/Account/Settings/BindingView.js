@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Icon, List } from 'antd';
 
 class BindingView extends Component {
   getData = () => {
-    const { intl } = this.props;
     return [
       {
-        title: intl.formatMessage({ id: 'app.settings.binding.taobao' }, {}),
-        description: intl.formatMessage({ id: 'app.settings.binding.taobao-description' }, {}),
+        title: formatMessage({ id: 'app.settings.binding.taobao' }, {}),
+        description: formatMessage({ id: 'app.settings.binding.taobao-description' }, {}),
         actions: [
           <a>
             <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
@@ -17,8 +16,8 @@ class BindingView extends Component {
         avatar: <Icon type="taobao" className="taobao" />,
       },
       {
-        title: intl.formatMessage({ id: 'app.settings.binding.alipay' }, {}),
-        description: intl.formatMessage({ id: 'app.settings.binding.alipay-description' }, {}),
+        title: formatMessage({ id: 'app.settings.binding.alipay' }, {}),
+        description: formatMessage({ id: 'app.settings.binding.alipay-description' }, {}),
         actions: [
           <a>
             <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
@@ -27,8 +26,8 @@ class BindingView extends Component {
         avatar: <Icon type="alipay" className="alipay" />,
       },
       {
-        title: intl.formatMessage({ id: 'app.settings.binding.dingding' }, {}),
-        description: intl.formatMessage({ id: 'app.settings.binding.dingding-description' }, {}),
+        title: formatMessage({ id: 'app.settings.binding.dingding' }, {}),
+        description: formatMessage({ id: 'app.settings.binding.dingding-description' }, {}),
         actions: [
           <a>
             <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
@@ -59,4 +58,4 @@ class BindingView extends Component {
     );
   }
 }
-export default injectIntl(BindingView);
+export default BindingView;
