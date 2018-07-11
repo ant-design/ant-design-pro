@@ -92,6 +92,7 @@ export default {
     'app.settings.basic.address-message': '请输入您的街道地址!',
     'app.settings.basic.phone': '联系电话',
     'app.settings.basic.phone-message': '请输入您的联系电话!',
+    'app.settings.basic.update': '更新信息',
     'app.settings.security.strong': '强',
     'app.settings.security.medium': '中',
     'app.settings.security.weak': '弱',
@@ -123,6 +124,10 @@ export default {
     'app.settings.notification.todo-description': '账户密码',
     'app.settings.open': '开',
     'app.settings.close': '关',
+    'app.exception.back': '返回首页',
+    'app.exception.description.403': '抱歉，你无权访问该页面',
+    'app.exception.description.404': '抱歉，你访问的页面不存在',
+    'app.exception.description.500': '抱歉，服务器出错了',
 
     // ...zhMessages,
   },
