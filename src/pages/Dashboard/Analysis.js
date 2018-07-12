@@ -642,8 +642,8 @@ class Analysis extends Component {
                     height={400}
                     data={offlineChartData}
                     titleMap={{
-                      y1: <FormattedMessage id="app.analysis.traffic" defaultMessage="Traffic" />,
-                      y2: <FormattedMessage id="app.analysis.payments" defaultMessage="Payments" />,
+                      y1: formatMessage({ id: 'app.analysis.traffic' }),
+                      y2: formatMessage({ id: 'app.analysis.payments' }),
                     }}
                   />
                 </div>
