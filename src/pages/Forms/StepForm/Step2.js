@@ -20,7 +20,7 @@ class Step2 extends React.PureComponent {
     const { form, data, dispatch, submitting } = this.props;
     const { getFieldDecorator, validateFields } = form;
     const onPrev = () => {
-      dispatch(routerRedux.push('/Forms/StepForm'));
+      dispatch(routerRedux.push('/form/step-form/info'));
     };
     const onValidateForm = e => {
       e.preventDefault();

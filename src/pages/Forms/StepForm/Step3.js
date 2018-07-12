@@ -9,7 +9,7 @@ class Step3 extends React.PureComponent {
   render() {
     const { dispatch, data } = this.props;
     const onFinish = () => {
-      dispatch(routerRedux.push('/Forms/StepForm'));
+      dispatch(routerRedux.push('/form/step-form/info'));
     };
     const information = (
       <div className={styles.information}>
