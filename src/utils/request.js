@@ -5,7 +5,7 @@ import { routerRedux } from 'dva/router';
 // TODO set store
 // import store from '../global';
 // use global store
-const store = window.g_app._store
+const store = window.g_app._store;
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
