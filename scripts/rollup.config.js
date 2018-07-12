@@ -1,7 +1,7 @@
 import json from 'rollup-plugin-json';
 // rollup.config.js
 export default {
-  input: './.roadhogrc.mock.js',
+  input: './all_mock.js',
   output: {
     file: './functions/mock/index.js',
     format: 'umd',
