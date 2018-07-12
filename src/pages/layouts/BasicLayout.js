@@ -29,6 +29,7 @@ const { check } = Authorized;
  * @param {Object} routerData 路由配置
  */
 const getBreadcrumbNameMap = memoizeOne((meun, router) => {
+  console.log(meun, router);
   const routerMap = {};
   const mergeMeunAndRouter = meunData => {
     meunData.forEach(meunItem => {
@@ -71,6 +72,7 @@ class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
     const { routerData, menuData } = this.props;
+    this.getPageTitle = memoizeOne(this.getPageTitle);
     this.breadcrumbNameMap = getBreadcrumbNameMap(menuData, routerData);
   }
 
@@ -148,19 +150,14 @@ class BasicLayout extends React.PureComponent {
   };
 
   render() {
-    // TODO remove old router code
     const {
       isMobile,
-      // redirectData,
-      // routerData,
       silderTheme,
       layout: PropsLayout,
       children,
       location: { pathname },
     } = this.props;
     const isTop = PropsLayout === 'topmenu';
-    // const bashRedirect = this.getBashRedirect();
-    // const myRedirectData = redirectData || [];
     const layout = (
       <Layout>
         {isTop && !isMobile ? null : (
@@ -174,33 +171,14 @@ class BasicLayout extends React.PureComponent {
         )}
         <Layout style={this.getLayoutStyle()}>
           <Header handleMenuCollapse={this.handleMenuCollapse} logo={logo} {...this.props} />
-          <Content style={this.getContentStyle()}>
-            {children}
-            {/* <Switch> TODO remove
-              {myRedirectData.map(item => (
-                <Redirect key={item.from} exact from={item.from} to={item.to} />
-              ))}
-              {getRoutes(match.path, routerData).map(item => (
-                <AuthorizedRoute
-                  key={item.key}
-                  path={item.path}
-                  component={item.component}
-                  exact={item.exact}
-                  authority={item.authority}
-                  redirectPath="/exception/403"
-                />
-              ))}
-              <Redirect exact from="/" to={bashRedirect} />
-              <Route render={NotFound} />
-            </Switch> */}
-          </Content>
+          <Content style={this.getContentStyle()}>{children}</Content>
           <Footer />
         </Layout>
       </Layout>
     );
-    const getPageTitle = memoizeOne(this.getPageTitle);
+
     return (
-      <DocumentTitle title={getPageTitle(pathname)}>
+      <DocumentTitle title={this.getPageTitle(pathname)}>
         <ContainerQuery query={query}>
           {params => (
             <Context.Provider value={this.getContext()}>

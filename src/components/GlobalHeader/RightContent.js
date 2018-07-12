@@ -18,7 +18,6 @@ export default class GlobalHeaderRight extends PureComponent {
       if (newNotice.datetime) {
         newNotice.datetime = moment(notice.datetime).fromNow();
       }
-      // transform id to item key
       if (newNotice.id) {
         newNotice.key = newNotice.id;
       }
@@ -154,6 +153,7 @@ export default class GlobalHeaderRight extends PureComponent {
         )}
         <Button
           size="small"
+          ghost={theme === 'dark'}
           onClick={() => {
             this.changLang();
           }}
