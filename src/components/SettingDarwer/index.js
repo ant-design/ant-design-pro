@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, message, List, Switch, Divider, Icon } from 'antd';
+import { Select, message, List, Switch, Divider, Icon, Button } from 'antd';
 import DrawerMenu from 'rc-drawer';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
@@ -184,18 +184,6 @@ class SettingDarwer extends PureComponent {
         onMaskClick={this.togglerContent}
       >
         <div className={styles.content}>
-          <CopyToClipboard
-            text={JSON.stringify(setting)}
-            onCopy={() => message.success('copy success')}
-          >
-            <div className={styles.clipboard}>
-              <img
-                src="https://gw.alipayobjects.com/zos/rmsportal/YuWymXLusbplhCwgZwMT.svg"
-                alt="Copy To Clipboard"
-                width={18}
-              />
-            </div>
-          </CopyToClipboard>
           <Body title="整体风格设置">
             <BlockChecbox
               list={[
@@ -255,6 +243,19 @@ class SettingDarwer extends PureComponent {
               色弱模式
             </List.Item>
           </Body>
+          <Divider />
+          <CopyToClipboard
+            text={JSON.stringify(setting)}
+            onCopy={() => message.success('copy success')}
+          >
+            <Button
+              style={{
+                width: 224,
+              }}
+            >
+              <Icon type="copy" />拷贝代码
+            </Button>
+          </CopyToClipboard>
         </div>
       </DrawerMenu>
     );

@@ -41,7 +41,6 @@ export default {
         { path: '/user/register-result', component: './User/RegisterResult' },
       ],
     },
-
     // app
     {
       path: '/',
@@ -125,13 +124,9 @@ export default {
     },
   ],
 
-  // https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
   theme: {
-    // 'primary-color': '#10e99b',
     'card-actions-background': '#f5f8fa',
   },
-
-  // copy from old webpackrc.js
 
   // entry: 'src/index.js', // TODO remove
   extraBabelPlugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
@@ -152,10 +147,6 @@ export default {
     common: path.resolve(__dirname, '../src/common/'),
   },
   ignoreMomentLocale: true,
-  // theme: './theme.js',
-  // html: { TODO remove
-  //   template: './index.ejs',
-  // },
   publicPath: '/',
   // TODO check hash config
   // hash: true,

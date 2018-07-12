@@ -29,7 +29,6 @@ const { check } = Authorized;
  * @param {Object} routerData 路由配置
  */
 const getBreadcrumbNameMap = memoizeOne((meun, router) => {
-  console.log(meun, router);
   const routerMap = {};
   const mergeMeunAndRouter = meunData => {
     meunData.forEach(meunItem => {

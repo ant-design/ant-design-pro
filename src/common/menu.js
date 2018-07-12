@@ -331,26 +331,6 @@ const menuData = [
     ],
   },
   {
-    name: 'user',
-    icon: 'user',
-    path: 'User',
-    authority: 'guest',
-    children: [
-      {
-        name: 'login',
-        path: 'login',
-      },
-      {
-        name: 'register',
-        path: 'register',
-      },
-      {
-        name: 'register-result',
-        path: 'register-result',
-      },
-    ],
-  },
-  {
     name: 'account',
     icon: 'user',
     path: 'account',
