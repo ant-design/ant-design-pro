@@ -1,33 +1,35 @@
-html,
-body,
-#root {
-  height: 100%;
-}
+:global {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
 
-.colorWeak {
-  filter: invert(80%);
-}
+  .colorWeak {
+    filter: invert(80%);
+  }
 
-.ant-layout {
-  min-height: 100vh;
-}
+  .ant-layout {
+    min-height: 100vh;
+  }
 
-canvas {
-  display: block;
-}
+  canvas {
+    display: block;
+  }
 
-body {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-.globalSpin {
-  width: 100%;
-  margin: 40px 0 !important;
-}
+  .globalSpin {
+    width: 100%;
+    margin: 40px 0 !important;
+  }
 
-// temp fix for https://github.com/ant-design/ant-design/commit/a1fafb5b727b62cb0be29ce6e9eca8f579d4f8b7
-.ant-spin-container {
-  overflow: visible !important;
+  // temp fix for https://github.com/ant-design/ant-design/commit/a1fafb5b727b62cb0be29ce6e9eca8f579d4f8b7
+  .ant-spin-container {
+    overflow: visible !important;
+  }
 }
