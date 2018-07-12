@@ -3,7 +3,7 @@ import json from 'rollup-plugin-json';
 export default {
   input: './all_mock.js',
   output: {
-    file: './functions/mock/index.js',
+    file: '../functions/mock/index.js',
     format: 'umd',
     name: 'mock',
   },

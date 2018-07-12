@@ -9,7 +9,7 @@
     "start": "cross-env ESLINT=none umi dev",
     "start:no-mock": "cross-env MOCK=none ESLINT=none umi dev",
     "build": "cross-env ESLINT=none umi build",
-    "site": "npm run presite && rollup -c && npm run build && firebase deploy",
+    "site": "npm run presite && npm run build && firebase deploy",
     "analyze": "cross-env ANALYZE=1 umi build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
