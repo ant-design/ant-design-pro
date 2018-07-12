@@ -59,7 +59,7 @@ class mergeLessPlugin {
       // covert less
       if (fs.existsSync(outFile)) {
         fs.unlinkSync(outFile);
-      } else {
+      } else if (!fs.existsSync(path.dirname(outFile))) {
         fs.mkdirSync(path.dirname(outFile));
       }
       loopAllLess(options.stylesDir).then(() => {

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
+import { FormattedMessage } from 'umi/locale';
 import styles from './index.less';
 import BaseMenu, { getMenuMatches } from './BaseMenu';
 import { urlToList } from '../_utils/pathTools';
@@ -106,13 +107,15 @@ export default class SiderMenu extends PureComponent {
   getMenuItemPath = item => {
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
-    const { target, name } = item;
+    const { target, name, locale } = item;
     // Is it a http link
     if (/^https?:\/\//.test(itemPath)) {
       return (
         <a href={itemPath} target={target}>
           {icon}
-          <span>{name}</span>
+          <span>
+            <FormattedMessage id={locale} defaultMessage={name} />
+          </span>
         </a>
       );
     }
@@ -131,7 +134,9 @@ export default class SiderMenu extends PureComponent {
         }
       >
         {icon}
-        <span>{name}</span>
+        <span>
+          <FormattedMessage id={locale} defaultMessage={name} />
+        </span>
       </Link>
     );
   };
@@ -153,7 +158,7 @@ export default class SiderMenu extends PureComponent {
                   <span>{item.name}</span>
                 </span>
               ) : (
-                item.name
+                <FormattedMessage id={item.locale} defaultMessage={item.name} />
               )
             }
             key={item.path}

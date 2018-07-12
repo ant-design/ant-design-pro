@@ -151,6 +151,7 @@ class SettingDarwer extends PureComponent {
     return (
       <DrawerMenu
         parent={null}
+        getContainer={null}
         level={null}
         open={collapse}
         mask={false}

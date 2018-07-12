@@ -1,7 +1,11 @@
 import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
-import store from '../index';
+
+// TODO set store
+// import store from '../global';
+// use global store
+const store = window.g_app._store;
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
