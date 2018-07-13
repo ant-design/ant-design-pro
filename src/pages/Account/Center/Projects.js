@@ -26,7 +26,7 @@ export default class Center extends PureComponent {
               hoverable
               cover={<img alt={item.title} src={item.cover} />}
             >
-              <Card.Meta title={<a href="#">{item.title}</a>} description={item.subDescription} />
+              <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />
               <div className={stylesProjects.cardItemContent}>
                 <span>{moment(item.updatedAt).fromNow()}</span>
                 <div className={stylesProjects.avatarList}>

@@ -27,6 +27,8 @@
     "bizcharts-plugin-slider": "^2.0.3",
     "classnames": "^2.2.6",
     "enquire-js": "^0.2.1",
+    "eslint-config-umi": "^0.1.4",
+    "eslint-plugin-flowtype": "2",
     "lodash": "^4.17.4",
     "lodash-decorators": "^6.0.0",
     "lodash.isequal": "^4.5.0",
@@ -47,7 +49,7 @@
     "rollup-plugin-json": "^3.0.0",
     "setprototypeof": "^1.1.0",
     "umi-plugin-locale": "^1.0.1",
-    "url-polyfill": "^1.0.10"
+    "url-polyfill": "^1.0.13"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.0.0-beta.36",
