@@ -28,12 +28,12 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 - :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
 - :rocket: **State of The Art Development**: Newest development stack of React/dva/antd
-- :iphone: **Responsive**: Designed for varies of screen size
+- :iphone: **Responsive**: Designed for variable screen sizes
 - :art: **Theming**: Customizable theme with simple config
 - :globe_with_meridians: **International**: Built-in i18n solution
-- :gear: **Best Practice**: Solid workflow make your code health
+- :gear: **Best Practices**: Solid workflow to make your code healthy
 - :1234: **Mock development**: Easy to use mock development solution
-- :white_check_mark: **UI Test**: Fly safely with unit test and e2e test
+- :white_check_mark: **UI Test**: Fly safely with unit and e2e tests
 
 ## Templates
 
@@ -84,7 +84,7 @@ $ mkdir pro-demo && cd pro-demo
 $ pro new
 ```
 
-More instruction at [documentation](http://pro.ant.design/docs/getting-started).
+More instructions at [documentation](http://pro.ant.design/docs/getting-started).
 
 ## Compatibility
 
@@ -92,8 +92,8 @@ Modern browsers and IE11.
 
 ## Contributing
 
-Any Contribution of following ways will be welcome:
+Any type of contribution is welcome, here are some examples of how you may contribute to this project:
 
 - Use Ant Design Pro in your daily work.
-- Submit [issue](http://github.com/ant-design/ant-design-pro/issues) to report bug or ask questions.
-- Propose [pull request](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+- Submit [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
+- Propose [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
