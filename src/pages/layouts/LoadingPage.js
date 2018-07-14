@@ -7,7 +7,7 @@ import BasicLayout from './BasicLayout';
 import config from '../../../config/config';
 const menuData = config['routes'];
 
-// change router to menu.
+// Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {
   return data.map(item => {
     const id = parentName ? `${parentName}.${item.name}` : `menu.${item.name}`;
@@ -17,8 +17,11 @@ function formatter(data, parentPath = '', parentAuthority, parentName) {
       authority: item.authority || parentAuthority,
     };
     if (item.routes) {
-      result.children = formatter(item.routes, `${parentPath}${item.path}/`, item.authority, id);
+      const children = formatter(item.routes, `${parentPath}${item.path}/`, item.authority, id);
+      // Reduce memory usage
+      result.children = children;
     }
+    delete result.routes;
     return result;
   });
 }

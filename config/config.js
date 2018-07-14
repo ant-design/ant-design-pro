@@ -97,7 +97,7 @@ export default {
           icon: 'table',
           name: 'list',
           routes: [
-            { path: '/list/table-list', name: 'searchlist', component: './List/TableList' },
+            { path: '/list/table-list', name: 'searchtable', component: './List/TableList' },
             { path: '/list/basic-list', name: 'basiclist', component: './List/BasicList' },
             { path: '/list/card-list', name: 'cardlist', component: './List/CardList' },
             {

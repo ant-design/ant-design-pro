@@ -26,10 +26,11 @@ const getBreadcrumbNameMap = memoizeOne(meun => {
   const routerMap = {};
   const mergeMeunAndRouter = meunData => {
     meunData.forEach(meunItem => {
-      routerMap[meunItem.path] = meunItem;
       if (meunItem.children) {
         mergeMeunAndRouter(meunItem.children);
       }
+      // Reduce memory usage
+      routerMap[meunItem.path] = meunItem;
     });
   };
   mergeMeunAndRouter(meun);
@@ -66,7 +67,6 @@ class BasicLayout extends React.PureComponent {
     super(props);
     const { menuData } = this.props;
     this.getPageTitle = memoizeOne(this.getPageTitle);
-    console.log(getBreadcrumbNameMap(menuData));
     this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
 
