@@ -48,75 +48,147 @@ export default {
       routes: [
         // dashboard
         { path: '/', redirect: '/dashboard/analysis' },
-        { path: '/dashboard/analysis', component: './Dashboard/Analysis' },
-        { path: '/dashboard/monitor', component: './Dashboard/Monitor' },
-        { path: '/dashboard/workplace', component: './Dashboard/Workplace' },
-
+        {
+          path: '/dashboard',
+          name: 'dashboard',
+          icon: 'dashboard',
+          routes: [
+            { path: '/dashboard/analysis', name: 'analysis', component: './Dashboard/Analysis' },
+            { path: '/dashboard/monitor', name: 'monitor', component: './Dashboard/Monitor' },
+            { path: '/dashboard/workplace', name: 'workplace', component: './Dashboard/Workplace' },
+          ],
+        },
         // forms
-        { path: '/form/basic-form', component: './Forms/BasicForm' },
         {
-          path: '/form/step-form',
-          component: './Forms/StepForm',
+          path: '/form',
+          icon: 'form',
+          name: 'form',
           routes: [
-            { path: '/form/step-form', redirect: '/form/step-form/info' },
-            { path: '/form/step-form/info', component: './Forms/StepForm/Step1' },
-            { path: '/form/step-form/confirm', component: './Forms/StepForm/Step2' },
-            { path: '/form/step-form/result', component: './Forms/StepForm/Step3' },
-          ],
-        },
-        { path: '/form/advanced-form', component: './Forms/AdvancedForm' },
-
-        // list
-        { path: '/list/table-list', component: './List/TableList' },
-        { path: '/list/table-list', component: './List/TableList' },
-        { path: '/list/basic-list', component: './List/BasicList' },
-        { path: '/list/card-list', component: './List/CardList' },
-        {
-          path: '/list/search',
-          component: './List/List',
-          routes: [
-            { path: '/list/search', redirect: '/list/search/projects' },
-            { path: '/list/search/articles', component: './List/Articles' },
-            { path: '/list/search/projects', component: './List/Projects' },
-            { path: '/list/search/applications', component: './List/Applications' },
-          ],
-        },
-
-        // profile
-        { path: '/profile/basic', component: './Profile/BasicProfile' },
-        { path: '/profile/advanced', component: './Profile/AdvancedProfile' },
-
-        // result
-        { path: '/result/success', component: './Result/Success' },
-        { path: '/result/fail', component: './Result/Error' },
-
-        // exception
-        { path: '/exception/403', component: './Exception/403' },
-        { path: '/exception/404', component: './Exception/404' },
-        { path: '/exception/500', component: './Exception/500' },
-        { path: '/exception/trigger', component: './Exception/triggerException' },
-        // account
-        {
-          path: '/account/center',
-          component: './Account/Center/Center',
-          routes: [
-            { path: '/account/center', redirect: '/account/center/articles' },
-            { path: '/account/center/articles', component: './Account/Center/Articles' },
-            { path: '/account/center/applications', component: './Account/Center/Applications' },
-            { path: '/account/center/projects', component: './Account/Center/Projects' },
-          ],
-        },
-        {
-          path: '/account/settings',
-          component: './Account/Settings/Info',
-          routes: [
-            { path: '/account/settings', redirect: '/account/settings/base' },
-            { path: '/account/settings/base', component: './Account/Settings/BaseView' },
-            { path: '/account/settings/security', component: './Account/Settings/SecurityView' },
-            { path: '/account/settings/binding', component: './Account/Settings/BindingView' },
+            { path: '/form/basic-form', name: 'basicform', component: './Forms/BasicForm' },
             {
-              path: '/account/settings/notification',
-              component: './Account/Settings/NotificationView',
+              name: 'stepform',
+              path: '/form/step-form',
+              component: './Forms/StepForm',
+              hideChildren: true,
+              routes: [
+                { path: '/form/step-form/info', name: 'info', component: './Forms/StepForm/Step1' },
+                {
+                  path: '/form/step-form/confirm',
+                  name: 'confirm',
+                  component: './Forms/StepForm/Step2',
+                },
+                {
+                  path: '/form/step-form/result',
+                  name: 'result',
+                  component: './Forms/StepForm/Step3',
+                },
+              ],
+            },
+            {
+              path: '/form/advanced-form',
+              name: 'advancedform',
+              component: './Forms/AdvancedForm',
+            },
+          ],
+        },
+        // list
+        {
+          path: '/list',
+          icon: 'table',
+          name: 'list',
+          routes: [
+            { path: '/list/table-list', name: 'searchlist', component: './List/TableList' },
+            { path: '/list/basic-list', name: 'basiclist', component: './List/BasicList' },
+            { path: '/list/card-list', name: 'cardlist', component: './List/CardList' },
+            {
+              path: '/list/search',
+              name: 'searchlist',
+              component: './List/List',
+              routes: [
+                { path: '/list/search/articles', name: 'articles', component: './List/Articles' },
+                { path: '/list/search/projects', name: 'projects', component: './List/Projects' },
+                {
+                  path: '/list/search/applications',
+                  name: 'applications',
+                  component: './List/Applications',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: '/profile',
+          name: 'profile',
+          icon: 'profile',
+          routes: [
+            // profile
+            { path: '/profile/basic', name: 'basic', component: './Profile/BasicProfile' },
+            { path: '/profile/advanced', name: 'advanced', component: './Profile/AdvancedProfile' },
+          ],
+        },
+        {
+          name: 'result',
+          icon: 'check-circle-o',
+          path: '/result',
+          routes: [
+            // result
+            { path: '/result/success', name: 'success', component: './Result/Success' },
+            { path: '/result/fail', name: 'fail', component: './Result/Error' },
+          ],
+        },
+        {
+          name: 'exception',
+          icon: 'warning',
+          path: '/exception',
+          routes: [
+            // exception
+            { path: '/exception/403', name: 'not-permission', component: './Exception/403' },
+            { path: '/exception/404', name: 'not-find', component: './Exception/404' },
+            { path: '/exception/500', name: 'server-error', component: './Exception/500' },
+            {
+              path: '/exception/trigger',
+              name: 'trigger',
+              hideInMenu: true,
+              component: './Exception/triggerException',
+            },
+          ],
+        },
+        {
+          name: 'account',
+          icon: 'user',
+          path: '/account',
+          routes: [
+            {
+              path: '/account/center',
+              name: 'center',
+              component: './Account/Center/Center',
+              routes: [
+                { path: '/account/center', redirect: '/account/center/articles' },
+                { path: '/account/center/articles', component: './Account/Center/Articles' },
+                {
+                  path: '/account/center/applications',
+                  component: './Account/Center/Applications',
+                },
+                { path: '/account/center/projects', component: './Account/Center/Projects' },
+              ],
+            },
+            {
+              path: '/account/settings',
+              name: 'settings',
+              component: './Account/Settings/Info',
+              routes: [
+                { path: '/account/settings', redirect: '/account/settings/base' },
+                { path: '/account/settings/base', component: './Account/Settings/BaseView' },
+                {
+                  path: '/account/settings/security',
+                  component: './Account/Settings/SecurityView',
+                },
+                { path: '/account/settings/binding', component: './Account/Settings/BindingView' },
+                {
+                  path: '/account/settings/notification',
+                  component: './Account/Settings/NotificationView',
+                },
+              ],
             },
           ],
         },

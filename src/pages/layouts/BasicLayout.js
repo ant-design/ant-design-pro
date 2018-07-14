@@ -1,18 +1,13 @@
-/* eslint-disable no-unused-vars */
-// TODO remove eslint-disable
 import React from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
 import memoizeOne from 'memoize-one';
 import { connect } from 'dva';
-// import { Route, Redirect, Switch } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
 import { formatMessage } from 'umi/locale';
 import SiderMenu from '../../components/SiderMenu';
-// import NotFound from '../Exception/404';
-// import { getRoutes } from '../utils/utils';
 import Authorized from '../../utils/Authorized';
 import SettingDarwer from '../../components/SettingDarwer';
 import logo from '../../assets/logo.svg';
@@ -26,13 +21,12 @@ const { check } = Authorized;
 /**
  * 获取面包屑映射
  * @param {Object} menuData 菜单配置
- * @param {Object} routerData 路由配置
  */
-const getBreadcrumbNameMap = memoizeOne((meun, router) => {
+const getBreadcrumbNameMap = memoizeOne(meun => {
   const routerMap = {};
   const mergeMeunAndRouter = meunData => {
     meunData.forEach(meunItem => {
-      routerMap[meunItem.path] = Object.assign(meunItem, router);
+      routerMap[meunItem.path] = meunItem;
       if (meunItem.children) {
         mergeMeunAndRouter(meunItem.children);
       }
@@ -70,9 +64,10 @@ const query = {
 class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { routerData, menuData } = this.props;
+    const { menuData } = this.props;
     this.getPageTitle = memoizeOne(this.getPageTitle);
-    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData, routerData);
+    console.log(getBreadcrumbNameMap(menuData));
+    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
 
   getContext() {

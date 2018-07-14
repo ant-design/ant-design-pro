@@ -3,14 +3,30 @@ import { Spin } from 'antd';
 import { connect } from 'dva';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import BasicLayout from './BasicLayout';
-import { getMenuData } from '../../common/menu';
-import { getRouterData } from '../../common/router';
+// TODO: should use this.props.routes
+import config from '../../../config/config';
+const menuData = config['routes'];
+
+// change router to menu.
+function formatter(data, parentPath = '', parentAuthority, parentName) {
+  return data.map(item => {
+    const id = parentName ? `${parentName}.${item.name}` : `menu.${item.name}`;
+    const result = {
+      ...item,
+      locale: id,
+      authority: item.authority || parentAuthority,
+    };
+    if (item.routes) {
+      result.children = formatter(item.routes, `${parentPath}${item.path}/`, item.authority, id);
+    }
+    return result;
+  });
+}
 /**
  * 根据菜单取得重定向地址.
  */
-
-const MenuData = getMenuData();
-const routerData = getRouterData({});
+const MenuData = formatter(menuData[1].routes);
+const routerData = config.routes;
 const getRedirectData = () => {
   const redirectData = [];
   const getRedirect = item => {
