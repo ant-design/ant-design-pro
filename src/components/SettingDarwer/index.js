@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, message, List, Switch, Divider, Icon, Button } from 'antd';
-import DrawerMenu from 'rc-drawer';
+import { Select, message, Drawer, List, Switch, Divider, Icon, Button } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
 import styles from './index.less';
@@ -33,6 +32,9 @@ class SettingDarwer extends PureComponent {
     if (colorWeak === 'open') {
       document.body.className = 'colorWeak';
     }
+    requestAnimationFrame(() => {
+      this.togglerContent();
+    });
   }
 
   getLayOutSetting = () => {
@@ -149,40 +151,34 @@ class SettingDarwer extends PureComponent {
     const { setting } = this.props;
     const { collapse, silderTheme, themeColor, layout, colorWeak } = setting;
     return (
-      <DrawerMenu
-        getContainer={null}
-        level={null}
-        open={collapse}
-        mask={false}
-        onHandleClick={this.togglerContent}
-        handler={
-          <div className="drawer-handle">
-            {!collapse ? (
-              <Icon
-                type="setting"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            ) : (
-              <Icon
-                type="close"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            )}
-          </div>
-        }
+      <Drawer
+        visible={collapse}
+        width={273}
+        onClose={this.togglerContent}
         placement="right"
-        width="336px"
         style={{
           zIndex: 999,
         }}
-        onMaskClick={this.togglerContent}
       >
+        <div className={styles.handle} onClick={this.togglerContent}>
+          {!collapse ? (
+            <Icon
+              type="setting"
+              style={{
+                color: '#FFF',
+                fontSize: 20,
+              }}
+            />
+          ) : (
+            <Icon
+              type="close"
+              style={{
+                color: '#FFF',
+                fontSize: 20,
+              }}
+            />
+          )}
+        </div>
         <div className={styles.content}>
           <Body title="整体风格设置">
             <BlockChecbox
@@ -257,7 +253,7 @@ class SettingDarwer extends PureComponent {
             </Button>
           </CopyToClipboard>
         </div>
-      </DrawerMenu>
+      </Drawer>
     );
   }
 }

@@ -1,9 +1,7 @@
 @import '~antd/lib/style/themes/default.less';
 
 .content {
-  width: 273px;
   min-height: 100%;
-  padding: 24px;
   background: #fff;
   position: relative;
 }
@@ -50,16 +48,19 @@
   margin-bottom: 12px;
 }
 
-:global {
-  .drawer-handle {
-    top: 240px;
-    background: #1890ff;
-    width: 57px;
-    height: 48px;
-    padding: 14px 18px;
-    padding-left: 24px;
-  }
-  .drawer-right .drawer-handle {
-    left: -57px;
-  }
+.handle {
+  position: fixed;
+  top: 240px;
+  background: #1890ff;
+  width: 57px;
+  height: 48px;
+  right: 273px;
+  padding: 14px 18px;
+  padding-left: 24px;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 0;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 4px 0 0 4px;
 }

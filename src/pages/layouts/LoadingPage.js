@@ -59,9 +59,12 @@ class LoadingPage extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     this.enquireHandler = enquireScreen(mobile => {
-      this.setState({
-        isMobile: mobile,
-      });
+      const { isMobile } = this.state;
+      if (isMobile !== mobile) {
+        this.setState({
+          isMobile: mobile,
+        });
+      }
     });
     dispatch({
       type: 'user/fetchCurrent',

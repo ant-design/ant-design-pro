@@ -66,11 +66,12 @@ export default {
           routes: [
             { path: '/form/basic-form', name: 'basicform', component: './Forms/BasicForm' },
             {
-              name: 'stepform',
               path: '/form/step-form',
+              name: 'stepform',
               component: './Forms/StepForm',
               hideChildren: true,
               routes: [
+                { path: '/form/step-form', name: 'stepform', redirect: '/form/step-form/info' },
                 { path: '/form/step-form/info', name: 'info', component: './Forms/StepForm/Step1' },
                 {
                   path: '/form/step-form/confirm',

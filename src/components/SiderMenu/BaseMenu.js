@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
-import { FormattedMessage } from 'umi/locale';
+import { formatMessage } from 'umi/locale';
 import pathToRegexp from 'path-to-regexp';
 import { urlToList } from '../_utils/pathTools';
 import styles from './index.less';
@@ -82,7 +82,7 @@ export default class BaseMenu extends PureComponent {
   getSubMenuOrItem = item => {
     // doc: add hideChildren
     if (item.children && !item.hideChildren && item.children.some(child => child.name)) {
-      const name = <FormattedMessage defaultMessage={item.name} id={item.locale} />;
+      const name = formatMessage({ id: item.locale });
       return (
         <SubMenu
           title={
@@ -111,7 +111,7 @@ export default class BaseMenu extends PureComponent {
    * @memberof SiderMenu
    */
   getMenuItemPath = item => {
-    const name = <FormattedMessage defaultMessage={item.name} id={item.locale} />;
+    const name = formatMessage({ id: item.locale });
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
     const { target } = item;
@@ -143,7 +143,6 @@ export default class BaseMenu extends PureComponent {
       </Link>
     );
   };
-
   // permission to check
   checkPermissionItem = (authority, ItemDom) => {
     const { Authorized } = this.props;
