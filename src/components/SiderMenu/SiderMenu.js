@@ -13,18 +13,19 @@ const { SubMenu } = Menu;
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
 const getIcon = icon => {
-  if (typeof icon === 'string' && icon.indexOf('http') === 0) {
-    return <img src={icon} alt="icon" className={`${styles.icon} sider-menu-item-img`} />;
-  }
   if (typeof icon === 'string') {
+    if (icon.indexOf('http') === 0) {
+      return <img src={icon} alt="icon" className={`${styles.icon} sider-menu-item-img`} />;
+    }
     return <Icon type={icon} />;
   }
+
   return icon;
 };
 
 /**
  * Recursively flatten the data
- * [{path:string},{path:string}] => {path,path2}
+ * [{path:string},{path:string}] => [path,path2]
  * @param  menu
  */
 export const getFlatMenuKeys = menu =>
