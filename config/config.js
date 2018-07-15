@@ -165,12 +165,18 @@ export default {
               component: './Account/Center/Center',
               routes: [
                 { path: '/account/center', redirect: '/account/center/articles' },
-                { path: '/account/center/articles', component: './Account/Center/Articles' },
+                {
+                  path: '/account/center/articles',
+                  component: './Account/Center/Articles',
+                },
                 {
                   path: '/account/center/applications',
                   component: './Account/Center/Applications',
                 },
-                { path: '/account/center/projects', component: './Account/Center/Projects' },
+                {
+                  path: '/account/center/projects',
+                  component: './Account/Center/Projects',
+                },
               ],
             },
             {
@@ -179,7 +185,10 @@ export default {
               component: './Account/Settings/Info',
               routes: [
                 { path: '/account/settings', redirect: '/account/settings/base' },
-                { path: '/account/settings/base', component: './Account/Settings/BaseView' },
+                {
+                  path: '/account/settings/base',
+                  component: './Account/Settings/BaseView',
+                },
                 {
                   path: '/account/settings/security',
                   component: './Account/Settings/SecurityView',

@@ -30,10 +30,11 @@ export default class ActiveChart extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.timer);
+    cancelAnimationFrame(this.requestRef);
   }
 
   loopData = () => {
-    requestAnimationFrame(() => {
+    this.requestRef = requestAnimationFrame(() => {
       this.timer = setTimeout(() => {
         this.setState(
           {

@@ -63,13 +63,15 @@ const query = {
 };
 
 class BasicLayout extends React.PureComponent {
+  state = {
+    rendering: true,
+  };
   constructor(props) {
     super(props);
     const { menuData } = this.props;
     this.getPageTitle = memoizeOne(this.getPageTitle);
     this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
-
   getContext() {
     const { location } = this.props;
     return {
@@ -77,7 +79,6 @@ class BasicLayout extends React.PureComponent {
       breadcrumbNameMap: this.breadcrumbNameMap,
     };
   }
-
   getPageTitle = pathname => {
     let currRouterData = null;
     // match params path
@@ -142,7 +143,16 @@ class BasicLayout extends React.PureComponent {
       payload: collapsed,
     });
   };
-
+  componentDidMount() {
+    this.renderRef = requestAnimationFrame(() => {
+      this.setState({
+        rendering: false,
+      });
+    });
+  }
+  componentWillUnmount() {
+    cancelAnimationFrame(this.renderRef);
+  }
   render() {
     const {
       isMobile,
@@ -170,20 +180,19 @@ class BasicLayout extends React.PureComponent {
         </Layout>
       </Layout>
     );
-
     return (
-      <DocumentTitle title={this.getPageTitle(pathname)}>
-        <ContainerQuery query={query}>
-          {params => (
-            <Context.Provider value={this.getContext()}>
-              <div className={classNames(params)}>
-                {layout}
-                <SettingDarwer />
-              </div>
-            </Context.Provider>
-          )}
-        </ContainerQuery>
-      </DocumentTitle>
+      <React.Fragment>
+        <DocumentTitle title={this.getPageTitle(pathname)}>
+          <ContainerQuery query={query}>
+            {params => (
+              <Context.Provider value={this.getContext()}>
+                <div className={classNames(params)}>{layout}</div>
+              </Context.Provider>
+            )}
+          </ContainerQuery>
+        </DocumentTitle>
+        {this.state.rendering ? null : <SettingDarwer />}
+      </React.Fragment>
     );
   }
 }

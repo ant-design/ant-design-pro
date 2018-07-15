@@ -1,5 +1,5 @@
 const defaultSetting = {
-  collapse: true,
+  collapse: false,
   silderTheme: 'dark',
   themeColor: '#1890FF',
   layout: 'sidemenu',

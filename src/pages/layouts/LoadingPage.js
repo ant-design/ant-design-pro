@@ -10,14 +10,21 @@ const menuData = config['routes'];
 // Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {
   return data.map(item => {
-    const id = parentName ? `${parentName}.${item.name}` : `menu.${item.name}`;
+    let locale = 'menu';
+    if (parentName && item.name) {
+      locale = `${parentName}.${item.name}`;
+    } else if (item.name) {
+      locale = `menu.${item.name}`;
+    } else if (parentName) {
+      locale = parentName;
+    }
     const result = {
       ...item,
-      locale: id,
+      locale,
       authority: item.authority || parentAuthority,
     };
     if (item.routes) {
-      const children = formatter(item.routes, `${parentPath}${item.path}/`, item.authority, id);
+      const children = formatter(item.routes, `${parentPath}${item.path}/`, item.authority, locale);
       // Reduce memory usage
       result.children = children;
     }

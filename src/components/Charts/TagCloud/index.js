@@ -35,11 +35,12 @@ class TagCloud extends Component {
 
   componentWillUnmount() {
     this.isUnmount = true;
+    window.cancelAnimationFrame(this.requestRef);
     window.removeEventListener('resize', this.resize);
   }
 
   resize = () => {
-    requestAnimationFrame(() => {
+    this.requestRef = requestAnimationFrame(() => {
       this.renderChart();
     });
   };

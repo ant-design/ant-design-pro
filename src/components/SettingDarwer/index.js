@@ -24,7 +24,8 @@ class SettingDarwer extends PureComponent {
     const {
       setting: { themeColor, colorWeak },
     } = this.props;
-    if (themeColor !== '#1890FF') {
+    // Determine if the component is remounted
+    if (themeColor !== '#1890FF' && themeColor !== window['antd_pro_less_color']) {
       window.less.refresh().then(() => {
         this.colorChange(themeColor);
       });
@@ -32,9 +33,6 @@ class SettingDarwer extends PureComponent {
     if (colorWeak === 'open') {
       document.body.className = 'colorWeak';
     }
-    requestAnimationFrame(() => {
-      this.togglerContent();
-    });
   }
 
   getLayOutSetting = () => {
@@ -139,6 +137,7 @@ class SettingDarwer extends PureComponent {
           '@input-hover-border-color': color,
         })
         .then(() => {
+          window['antd_pro_less_color'] = color;
           hideMessage();
         })
         .catch(() => {
@@ -152,6 +151,7 @@ class SettingDarwer extends PureComponent {
     const { collapse, silderTheme, themeColor, layout, colorWeak } = setting;
     return (
       <Drawer
+        firstEnter={true}
         visible={collapse}
         width={273}
         onClose={this.togglerContent}

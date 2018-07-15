@@ -22,7 +22,7 @@ export default class Pie extends Component {
     window.addEventListener(
       'resize',
       () => {
-        requestAnimationFrame(() => this.resize());
+        this.requestRef = requestAnimationFrame(() => this.resize());
       },
       { passive: true }
     );
@@ -38,6 +38,7 @@ export default class Pie extends Component {
   }
 
   componentWillUnmount() {
+    window.cancelAnimationFrame(this.requestRef);
     window.removeEventListener('resize', this.resize);
     this.resize.cancel();
   }
