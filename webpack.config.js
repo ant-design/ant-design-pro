@@ -1,5 +1,5 @@
 import AntDesignThemePlugin from 'antd-theme-webpack-plugin';
-import MergeLessPlugin from './scripts/mergeLessPlugin';
+import MergeLessPlugin from 'antd-pro-merge-less';
 
 const path = require('path');
 

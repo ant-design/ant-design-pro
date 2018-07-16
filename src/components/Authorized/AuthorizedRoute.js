@@ -4,6 +4,7 @@ import Authorized from './Authorized';
 
 class AuthorizedRoute extends React.Component {
   render() {
+    // TODO: umi只会返回render和rest
     const { component: Component, render, authority, redirectPath, ...rest } = this.props;
     return (
       <Authorized

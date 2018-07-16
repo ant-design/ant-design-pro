@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip } from 'antd';
+import { FormattedMessage, setLocale, getLocale } from 'umi/locale';
+import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
@@ -17,7 +18,6 @@ export default class GlobalHeaderRight extends PureComponent {
       if (newNotice.datetime) {
         newNotice.datetime = moment(notice.datetime).fromNow();
       }
-      // transform id to item key
       if (newNotice.id) {
         newNotice.key = newNotice.id;
       }
@@ -39,6 +39,15 @@ export default class GlobalHeaderRight extends PureComponent {
     return groupBy(newNotices, 'type');
   }
 
+  changLang = () => {
+    const locale = getLocale();
+    if (!locale || locale === 'zh-CN') {
+      setLocale('en-US');
+    } else {
+      setLocale('zh-CN');
+    }
+  };
+
   render() {
     const {
       currentUser,
@@ -51,13 +60,16 @@ export default class GlobalHeaderRight extends PureComponent {
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="userCenter">
-          <Icon type="user" />个人中心
+          <Icon type="user" />
+          <FormattedMessage id="menu.account.center" defaultMessage="account center" />
         </Menu.Item>
         <Menu.Item key="userinfo">
-          <Icon type="setting" />设置
+          <Icon type="setting" />
+          <FormattedMessage id="menu.account.settings" defaultMessage="account settings" />
         </Menu.Item>
         <Menu.Item key="triggerError">
-          <Icon type="close-circle" />触发报错
+          <Icon type="close-circle" />
+          <FormattedMessage id="menu.account.trigger" defaultMessage="Trigger Error" />
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout">
@@ -137,8 +149,17 @@ export default class GlobalHeaderRight extends PureComponent {
             </span>
           </Dropdown>
         ) : (
-          <Spin size="small" style={{ marginLeft: 8 }} />
+          <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )}
+        <Button
+          size="small"
+          ghost={theme === 'dark'}
+          onClick={() => {
+            this.changLang();
+          }}
+        >
+          <FormattedMessage id="navbar.lang" />
+        </Button>
       </div>
     );
   }

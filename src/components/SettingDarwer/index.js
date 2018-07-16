@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, message, List, Switch, Divider, Icon } from 'antd';
-import DrawerMenu from 'rc-drawer';
+import { Select, message, Drawer, List, Switch, Divider, Icon, Button } from 'antd';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
 import styles from './index.less';
@@ -25,7 +24,8 @@ class SettingDarwer extends PureComponent {
     const {
       setting: { themeColor, colorWeak },
     } = this.props;
-    if (themeColor !== '#1890FF') {
+    // Determine if the component is remounted
+    if (themeColor !== '#1890FF' && themeColor !== window['antd_pro_less_color']) {
       window.less.refresh().then(() => {
         this.colorChange(themeColor);
       });
@@ -137,6 +137,7 @@ class SettingDarwer extends PureComponent {
           '@input-hover-border-color': color,
         })
         .then(() => {
+          window['antd_pro_less_color'] = color;
           hideMessage();
         })
         .catch(() => {
@@ -149,53 +150,36 @@ class SettingDarwer extends PureComponent {
     const { setting } = this.props;
     const { collapse, silderTheme, themeColor, layout, colorWeak } = setting;
     return (
-      <DrawerMenu
-        parent={null}
-        level={null}
-        open={collapse}
-        mask={false}
-        onHandleClick={this.togglerContent}
-        handler={
-          <div className="drawer-handle">
-            {!collapse ? (
-              <Icon
-                type="setting"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            ) : (
-              <Icon
-                type="close"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            )}
-          </div>
-        }
+      <Drawer
+        firstEnter={true}
+        visible={collapse}
+        width={273}
+        onClose={this.togglerContent}
         placement="right"
-        width="336px"
         style={{
           zIndex: 999,
         }}
-        onMaskClick={this.togglerContent}
       >
+        <div className={styles.handle} onClick={this.togglerContent}>
+          {!collapse ? (
+            <Icon
+              type="setting"
+              style={{
+                color: '#FFF',
+                fontSize: 20,
+              }}
+            />
+          ) : (
+            <Icon
+              type="close"
+              style={{
+                color: '#FFF',
+                fontSize: 20,
+              }}
+            />
+          )}
+        </div>
         <div className={styles.content}>
-          <CopyToClipboard
-            text={JSON.stringify(setting)}
-            onCopy={() => message.success('copy success')}
-          >
-            <div className={styles.clipboard}>
-              <img
-                src="https://gw.alipayobjects.com/zos/rmsportal/YuWymXLusbplhCwgZwMT.svg"
-                alt="Copy To Clipboard"
-                width={18}
-              />
-            </div>
-          </CopyToClipboard>
           <Body title="整体风格设置">
             <BlockChecbox
               list={[
@@ -255,8 +239,21 @@ class SettingDarwer extends PureComponent {
               色弱模式
             </List.Item>
           </Body>
+          <Divider />
+          <CopyToClipboard
+            text={JSON.stringify(setting)}
+            onCopy={() => message.success('copy success')}
+          >
+            <Button
+              style={{
+                width: 224,
+              }}
+            >
+              <Icon type="copy" />拷贝代码
+            </Button>
+          </CopyToClipboard>
         </div>
-      </DrawerMenu>
+      </Drawer>
     );
   }
 }

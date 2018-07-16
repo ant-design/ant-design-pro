@@ -1,6 +1,5 @@
-import 'rc-drawer/assets/index.css';
 import React from 'react';
-import DrawerMenu from 'rc-drawer';
+import { Drawer } from 'antd';
 import SiderMenu from './SliderMenu';
 
 /**
@@ -22,13 +21,15 @@ const getFlatMenuKeys = menuData => {
 const SiderMenuWrapper = props => {
   const { isMobile, menuData, collapsed } = props;
   return isMobile ? (
-    <DrawerMenu
-      getContainer={null}
-      level={null}
-      handleChild={null}
-      open={!collapsed}
-      onMaskClick={() => {
+    <Drawer
+      visible={!collapsed}
+      placement="left"
+      onClose={() => {
         props.onCollapse(true);
+      }}
+      style={{
+        padding: 0,
+        height: '100vh',
       }}
     >
       <SiderMenu
@@ -36,7 +37,7 @@ const SiderMenuWrapper = props => {
         flatMenuKeys={getFlatMenuKeys(menuData)}
         collapsed={isMobile ? false : collapsed}
       />
-    </DrawerMenu>
+    </Drawer>
   ) : (
     <SiderMenu {...props} flatMenuKeys={getFlatMenuKeys(menuData)} />
   );

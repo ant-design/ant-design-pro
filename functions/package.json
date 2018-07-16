@@ -2,12 +2,12 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "serve": "npm run mock && firebase serve --only functions",
+    "serve": "firebase serve --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "mock": "cd .. && rollup -c"
+    "mock": "cd ../scripts && rollup -c"
   },
   "dependencies": {
     "express": "^4.16.3",
