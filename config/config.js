@@ -21,7 +21,6 @@ export default {
     //   },
     // ],
   ],
-  disableServiceWorker: true,
   locale: {
     enable: true, // default false
     default: 'zh-CN', // default zh-CN
@@ -209,7 +208,6 @@ export default {
   theme: {
     'card-actions-background': '#f5f8fa',
   },
-
   // entry: 'src/index.js', // TODO remove
   extraBabelPlugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
   env: {
@@ -219,7 +217,6 @@ export default {
   },
   externals: {
     '@antv/data-set': 'DataSet',
-    bizcharts: 'BizCharts',
     rollbar: 'rollbar',
   },
   alias: {
@@ -229,9 +226,6 @@ export default {
     common: path.resolve(__dirname, '../src/common/'),
   },
   ignoreMomentLocale: true,
-  publicPath: '/',
-  // TODO check hash config
-  // hash: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
   },
@@ -253,4 +247,18 @@ export default {
     },
   },
   disableFastClick: true,
+  manifest: {
+    name: 'ant-design-pro',
+    background_color: '#FFF',
+    description: 'An out-of-box UI solution for enterprise applications as a React boilerplate.',
+    display: 'standalone',
+    start_url: '/index.html',
+    icons: [
+      {
+        src: '/favicon.png',
+        sizes: '48x48',
+        type: 'image/png',
+      },
+    ],
+  },
 };

@@ -73,8 +73,10 @@ class Analysis extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch({
-      type: 'chart/fetch',
+    this.reqRef = requestAnimationFrame(() => {
+      dispatch({
+        type: 'chart/fetch',
+      });
     });
   }
 
@@ -83,6 +85,7 @@ class Analysis extends Component {
     dispatch({
       type: 'chart/clear',
     });
+    cancelAnimationFrame(this.reqRef);
   }
 
   handleChangeSalesType = e => {
