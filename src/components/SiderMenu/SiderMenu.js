@@ -196,7 +196,8 @@ export default class SiderMenu extends PureComponent {
   };
 
   isMainMenu = key => {
-    return this.props.menuData.some(item => key && (item.key === key || item.path === key));
+    const { menuData } = this.props;
+    return menuData.some(item => key && (item.key === key || item.path === key));
   };
 
   handleOpenChange = openKeys => {
@@ -208,7 +209,7 @@ export default class SiderMenu extends PureComponent {
   };
 
   render() {
-    const { logo, collapsed, onCollapse } = this.props;
+    const { logo, menuData, collapsed, onCollapse } = this.props;
     const { openKeys } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed
@@ -246,7 +247,7 @@ export default class SiderMenu extends PureComponent {
           selectedKeys={selectedKeys}
           style={{ padding: '16px 0', width: '100%' }}
         >
-          {this.getNavMenuItems(this.props.menuData)}
+          {this.getNavMenuItems(menuData)}
         </Menu>
       </Sider>
     );
