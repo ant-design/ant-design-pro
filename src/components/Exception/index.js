@@ -1,4 +1,5 @@
 import React, { createElement } from 'react';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Button } from 'antd';
 import config from './typeConfig';
@@ -26,7 +27,9 @@ const Exception = ({ className, linkElement = 'a', type, title, desc, img, actio
                 to: '/',
                 href: '/',
               },
-              <Button type="primary">返回首页</Button>
+              <Button type="primary">
+                <FormattedMessage id="app.exception.back" defaultMessage="Back to home" />
+              </Button>
             )}
         </div>
       </div>
@@ -34,4 +37,4 @@ const Exception = ({ className, linkElement = 'a', type, title, desc, img, actio
   );
 };
 
-export default Exception;
+export default injectIntl(Exception);
