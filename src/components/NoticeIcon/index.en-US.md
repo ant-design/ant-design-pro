@@ -12,6 +12,7 @@ order: 9
 Property | Description | Type | Default
 ----|------|-----|------
 count | Total number of messages | number | -
+bell | Change the bell Icon | ReactNode | `<Icon type='bell' />`
 loading | Popup card loading status | boolean | false
 onClear | Click to clear button the callback  | function(tabTitle) | -
 onItemClick | Click on the list item's callback | function(item, tabProps) | -
