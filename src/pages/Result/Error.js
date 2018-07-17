@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Button, Icon, Card } from 'antd';
 import Result from 'components/Result';
 import PageHeaderLayout from '../layouts/PageHeaderLayout';
@@ -13,34 +14,49 @@ const extra = (
         marginBottom: 16,
       }}
     >
-      您提交的内容有如下错误：
+      <FormattedMessage
+        id="app.result.error.hint-title"
+        defaultMessage="The content you submitted has the following error:"
+      />
     </div>
     <div style={{ marginBottom: 16 }}>
       <Icon style={{ color: '#f5222d', marginRight: 8 }} type="close-circle-o" />
-      您的账户已被冻结
+      <FormattedMessage
+        id="app.result.error.hint-text1"
+        defaultMessage="Your account has been frozen"
+      />
       <a style={{ marginLeft: 16 }}>
-        立即解冻 <Icon type="right" />
+        <FormattedMessage id="app.result.error.hint-btn1" defaultMessage="Thaw immediately" />
+        <Icon type="right" />
       </a>
     </div>
     <div>
       <Icon style={{ color: '#f5222d', marginRight: 8 }} type="close-circle-o" />
-      您的账户还不具备申请资格
+      <FormattedMessage
+        id="app.result.error.hint-text2"
+        defaultMessage="Your account is not yet eligible to apply"
+      />
       <a style={{ marginLeft: 16 }}>
-        立即升级 <Icon type="right" />
+        <FormattedMessage id="app.result.error.hint-btn2" defaultMessage="Upgrade immediately" />
+        <Icon type="right" />
       </a>
     </div>
   </Fragment>
 );
 
-const actions = <Button type="primary">返回修改</Button>;
+const actions = (
+  <Button type="primary">
+    <FormattedMessage id="app.result.error.btn-text" defaultMessage="Return to modify" />
+  </Button>
+);
 
 export default () => (
   <PageHeaderLayout>
     <Card bordered={false}>
       <Result
         type="error"
-        title="提交失败"
-        description="请核对并修改以下信息后，再重新提交。"
+        title={formatMessage({ id: 'app.result.error.title' }, {})}
+        description={formatMessage({ id: 'app.result.error.description' }, {})}
         extra={extra}
         actions={actions}
         style={{ marginTop: 48, marginBottom: 16 }}
