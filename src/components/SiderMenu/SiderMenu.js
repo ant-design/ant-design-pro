@@ -13,18 +13,19 @@ const { SubMenu } = Menu;
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
 const getIcon = icon => {
-  if (typeof icon === 'string' && icon.indexOf('http') === 0) {
-    return <img src={icon} alt="icon" className={`${styles.icon} sider-menu-item-img`} />;
-  }
   if (typeof icon === 'string') {
+    if (icon.indexOf('http') === 0) {
+      return <img src={icon} alt="icon" className={`${styles.icon} sider-menu-item-img`} />;
+    }
     return <Icon type={icon} />;
   }
+
   return icon;
 };
 
 /**
  * Recursively flatten the data
- * [{path:string},{path:string}] => {path,path2}
+ * [{path:string},{path:string}] => [path,path2]
  * @param  menu
  */
 export const getFlatMenuKeys = menu =>
@@ -51,7 +52,6 @@ export const getMenuMatchKeys = (flatMenuKeys, paths) =>
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
-    this.menus = props.menuData;
     this.flatMenuKeys = getFlatMenuKeys(props.menuData);
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
@@ -197,7 +197,8 @@ export default class SiderMenu extends PureComponent {
   };
 
   isMainMenu = key => {
-    return this.menus.some(item => key && (item.key === key || item.path === key));
+    const { menuData } = this.props;
+    return menuData.some(item => key && (item.key === key || item.path === key));
   };
 
   handleOpenChange = openKeys => {
@@ -209,7 +210,7 @@ export default class SiderMenu extends PureComponent {
   };
 
   render() {
-    const { logo, collapsed, onCollapse } = this.props;
+    const { logo, menuData, collapsed, onCollapse } = this.props;
     const { openKeys } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed
@@ -247,7 +248,7 @@ export default class SiderMenu extends PureComponent {
           selectedKeys={selectedKeys}
           style={{ padding: '16px 0', width: '100%' }}
         >
-          {this.getNavMenuItems(this.menus)}
+          {this.getNavMenuItems(menuData)}
         </Menu>
       </Sider>
     );

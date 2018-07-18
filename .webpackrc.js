@@ -10,7 +10,6 @@ export default {
   },
   externals: {
     '@antv/data-set': 'DataSet',
-    bizcharts: 'BizCharts',
     rollbar: 'rollbar',
   },
   alias: {
