@@ -20,24 +20,9 @@ const Body = ({ children, title, style }) => (
 
 @connect(({ setting }) => ({ setting }))
 class SettingDarwer extends PureComponent {
-  componentDidMount() {
-    const {
-      setting: { themeColor, colorWeak },
-    } = this.props;
-    // Determine if the component is remounted
-    if (themeColor !== '#1890FF' && themeColor !== window['antd_pro_less_color']) {
-      window.less.refresh().then(() => {
-        this.colorChange(themeColor);
-      });
-    }
-    if (colorWeak === 'open') {
-      document.body.className = 'colorWeak';
-    }
-  }
-
   getLayOutSetting = () => {
     const {
-      setting: { grid, fixedHeader, autoHideHeader, fixSiderbar },
+      setting: { grid, fixedHeader, layout, autoHideHeader, fixSiderbar },
     } = this.props;
     return [
       {
@@ -77,6 +62,7 @@ class SettingDarwer extends PureComponent {
       },
       {
         title: '固定 Siderbar',
+        hide: layout === 'topmenu',
         action: [
           <Switch
             size="small"
@@ -106,13 +92,6 @@ class SettingDarwer extends PureComponent {
         nextState.autoHideHeader = false;
       }
     }
-    if (key === 'colorWeak') {
-      if (value) {
-        document.body.className = 'colorWeak';
-      } else {
-        document.body.className = '';
-      }
-    }
     this.setState(nextState, () => {
       const { dispatch } = this.props;
       dispatch({
@@ -125,25 +104,6 @@ class SettingDarwer extends PureComponent {
   togglerContent = () => {
     const { setting } = this.props;
     this.changeSetting('collapse', !setting.collapse);
-  };
-
-  colorChange = color => {
-    this.changeSetting('themeColor', color);
-    const hideMessage = message.loading('正在编译主题！', 0);
-    setTimeout(() => {
-      window.less
-        .modifyVars({
-          '@primary-color': color,
-          '@input-hover-border-color': color,
-        })
-        .then(() => {
-          window['antd_pro_less_color'] = color;
-          hideMessage();
-        })
-        .catch(() => {
-          message.error(`Failed to update theme`);
-        });
-    }, 200);
   };
 
   render() {
@@ -197,7 +157,10 @@ class SettingDarwer extends PureComponent {
             />
           </Body>
 
-          <ThemeColor value={themeColor} onChange={this.colorChange} />
+          <ThemeColor
+            value={themeColor}
+            onChange={color => this.changeSetting('themeColor', color)}
+          />
 
           <Divider />
 
