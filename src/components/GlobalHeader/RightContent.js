@@ -98,7 +98,7 @@ export default class GlobalHeaderRight extends PureComponent {
         <Tooltip title="使用文档">
           <a
             target="_blank"
-            href="http://pro.ant.design/docs/getting-started"
+            href="https://pro.ant.design/docs/getting-started"
             rel="noopener noreferrer"
             className={styles.action}
             title="使用文档"

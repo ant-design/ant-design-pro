@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "precommit": "npm run lint-staged",
-    "presite": "cd functions && npm install",
+    "presite": "npm run generate-mock && cd functions && npm install",
     "start": "cross-env ESLINT=none umi dev",
     "start:no-mock": "cross-env MOCK=none ESLINT=none umi dev",
     "build": "cross-env ESLINT=none umi build",
@@ -17,6 +17,7 @@
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
     "test": "umi test",
+    "generate-mock": "node ./scripts/generateMock.js",
     "test:component": "umi test ./src/components",
     "test:all": "node ./tests/run-tests.js",
     "prettier": "prettier --write ./src/**/**/**/*"
@@ -24,7 +25,6 @@
   "dependencies": {
     "@antv/data-set": "^0.8.0",
     "antd": "^3.7.0",
-    "antd-pro-merge-less": "^0.0.1",
     "bizcharts": "^3.1.10",
     "bizcharts-plugin-slider": "^2.0.3",
     "classnames": "^2.2.6",
@@ -43,8 +43,6 @@
     "react-document-title": "^2.0.3",
     "react-fittext": "^1.0.0",
     "rollbar": "^2.4.2",
-    "rollup": "^0.62.0",
-    "rollup-plugin-json": "^3.0.0",
     "setprototypeof": "^1.1.0",
     "umi-plugin-locale": "^1.0.1",
     "url-polyfill": "^1.0.13"
@@ -53,6 +51,7 @@
     "@babel/polyfill": "^7.0.0-beta.53",
     "@types/react": "^16.4.4",
     "@types/react-dom": "^16.0.6",
+    "antd-pro-merge-less": "^0.0.1",
     "antd-theme-webpack-plugin": "^1.0.8",
     "babel-eslint": "^8.2.6",
     "babel-plugin-dva-hmr": "^0.4.1",
@@ -78,6 +77,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.0",
     "mockjs": "^1.0.1-beta3",
+    "merge-umi-mock-data": "^0.0.2",
     "prettier": "1.13.7",
     "pro-download": "^1.0.1",
     "redbox-react": "^1.5.0",

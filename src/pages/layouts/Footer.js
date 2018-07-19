@@ -10,7 +10,7 @@ const FooterView = () => (
         {
           key: 'Pro 首页',
           title: 'Pro 首页',
-          href: 'http://pro.ant.design',
+          href: 'https://pro.ant.design',
           blankTarget: true,
         },
         {
@@ -22,7 +22,7 @@ const FooterView = () => (
         {
           key: 'Ant Design',
           title: 'Ant Design',
-          href: 'http://ant.design',
+          href: 'https://ant.design',
           blankTarget: true,
         },
       ]}
