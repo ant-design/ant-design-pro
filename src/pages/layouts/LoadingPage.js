@@ -4,8 +4,7 @@ import { connect } from 'dva';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import BasicLayout from './BasicLayout';
 // TODO: should use this.props.routes
-import config from '../../../config/config';
-const menuData = config['routes'];
+import routerConfig from '../../../config/router.config';
 
 // Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {
@@ -35,27 +34,7 @@ function formatter(data, parentPath = '', parentAuthority, parentName) {
 /**
  * 根据菜单取得重定向地址.
  */
-const MenuData = formatter(menuData[1].routes);
-const routerData = config.routes;
-const getRedirectData = () => {
-  const redirectData = [];
-  const getRedirect = item => {
-    if (item && item.children) {
-      if (item.children[0] && item.children[0].path) {
-        redirectData.push({
-          from: `${item.path}`,
-          to: `${item.children[0].path}`,
-        });
-        item.children.forEach(children => {
-          getRedirect(children);
-        });
-      }
-    }
-  };
-  MenuData.forEach(getRedirect);
-  return redirectData;
-};
-const redirectData = getRedirectData();
+const MenuData = formatter(routerConfig[1].routes);
 
 class LoadingPage extends PureComponent {
   state = {
@@ -121,8 +100,8 @@ class LoadingPage extends PureComponent {
       <BasicLayout
         isMobile={isMobile}
         menuData={MenuData}
-        routerData={routerData}
-        redirectData={redirectData}
+        routerData={routerConfig}
+        redirectData={[]}
         {...this.props}
       />
     );
