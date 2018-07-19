@@ -7,8 +7,17 @@ const path = require('path');
 export default {
   // add for transfer to umi
   plugins: [
-    'umi-plugin-dva',
-    'umi-plugin-locale',
+    [
+      'umi-plugin-react',
+      {
+        dva: true,
+        antd: true,
+        locale: {
+          default: 'zh-CN', // default zh-CN
+          baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
+        },
+      },
+    ],
     // TODO 决定是否使用约定路由，如果使用配置路由那么 umi-plugin-routes 可以去掉了
     // [
     //   'umi-plugin-routes',
@@ -20,20 +29,12 @@ export default {
     //   },
     // ],
   ],
-  locale: {
-    enable: true, // default false
-    default: 'zh-CN', // default zh-CN
-    baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
-    antd: true, // use antd, default is true
-  },
   // 路由配置
   routes: pageRoutes,
 
   theme: {
     'card-actions-background': '#f5f8fa',
   },
-  // entry: 'src/index.js', // TODO remove
-  extraBabelPlugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
   env: {
     development: {
       extraBabelPlugins: ['dva-hmr'],
@@ -70,7 +71,6 @@ export default {
       return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
     },
   },
-  disableFastClick: true,
   manifest: {
     name: 'ant-design-pro',
     background_color: '#FFF',
