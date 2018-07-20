@@ -14,7 +14,6 @@
 // }
 .verticalCenter:global(.vertical-center-modal) {
   text-align: center;
-  white-space: nowrap;
   &:before {
     content: '';
     display: inline-block;
@@ -27,6 +26,10 @@
     vertical-align: middle;
     top: 0;
     text-align: left;
+  }
+  .ant-table-body {
+    white-space: nowrap;
+    overflow-x: auto;
   }
 }
 
