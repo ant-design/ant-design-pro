@@ -5,29 +5,22 @@ const pageRoutes = require('./router.config');
 const path = require('path');
 
 export default {
-  // add for transfer to umi
   plugins: [
     [
       'umi-plugin-react',
       {
         dva: true,
         antd: true,
+        pwa: true,
+        dynamicImport: {
+          webpackChunkName: true,
+        },
         locale: {
           default: 'zh-CN', // default zh-CN
           baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
         },
       },
     ],
-    // TODO 决定是否使用约定路由，如果使用配置路由那么 umi-plugin-routes 可以去掉了
-    // [
-    //   'umi-plugin-routes',
-    //   {
-    //     exclude: [/\.test\.js/],
-    //     update(routes) {
-    //       return [...pageRoutes, ...routes];
-    //     },
-    //   },
-    // ],
   ],
   // 路由配置
   routes: pageRoutes,
