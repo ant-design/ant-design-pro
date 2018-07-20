@@ -41,22 +41,36 @@ export default class CustModal extends Component {
         this.defClose();
         return;
       }
-      const { modalProps } = this.state;
-      this.setState({
-        modalProps: {
-          ...modalProps,
-          confirmLoading: true,
-        },
-      });
-      const result = onOk({
-        close: this.defClose,
-      });
-      if (result === false) {
-        return;
-      }
-      if (result === undefined) {
-        this.defClose();
-      }
+      this.setState(
+        ({ modalProps }) => ({
+          modalProps: {
+            ...modalProps,
+            confirmLoading: true,
+          },
+        }),
+        () => {
+          const okResult = onOk({
+            close: this.defClose,
+          });
+          (okResult instanceof Promise ? okResult : Promise.resolve(okResult)).then(result => {
+            const { modalProps } = this.state;
+            setTimeout(() => {
+              this.setState({
+                modalProps: {
+                  ...modalProps,
+                  confirmLoading: false,
+                },
+              });
+            }, 0);
+            if (result === false) {
+              return;
+            }
+            if (result === undefined) {
+              this.defClose();
+            }
+          });
+        }
+      );
     };
   };
 
@@ -99,6 +113,7 @@ export default class CustModal extends Component {
       footer,
       // centered = true,
       centered,
+      confirmLoading,
       wrapClassName,
       ...rest
     } = modalProps;
@@ -109,6 +124,7 @@ export default class CustModal extends Component {
     const props = {
       destroyOnClose: true,
       ...rest,
+      confirmLoading,
       onCancel: onCancel || this.defClose,
       onOk: okFn,
       footer: React.Children.map(footer, child => {
@@ -125,6 +141,7 @@ export default class CustModal extends Component {
                     type: modalProps.okType,
                     ...restProps,
                     ...modalProps.okButtonProps,
+                    loading: confirmLoading,
                     children: ch || modalProps.okText || '确定',
                     onClick: okFn,
                   });
