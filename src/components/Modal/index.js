@@ -12,6 +12,10 @@ export default class CustModal extends Component {
     };
   }
 
+  componentWillUnmount() {
+    this.isUnmounted = true;
+  }
+
   defClose = () => {
     const { modalProps } = this.state;
     const { onVisibleChange } = this.props;
@@ -29,10 +33,13 @@ export default class CustModal extends Component {
     // 动画结束后清理，直接清理会可见闪烁
     this.timer = setTimeout(() => {
       this.clearTimer();
+      if (this.isUnmounted) {
+        return;
+      }
       this.setState({
         modalProps: {},
       });
-    }, 500);
+    }, 300);
   };
 
   defOk = onOk => {
@@ -53,16 +60,16 @@ export default class CustModal extends Component {
             close: this.defClose,
           });
           (okResult instanceof Promise ? okResult : Promise.resolve(okResult)).then(result => {
-            const { modalProps } = this.state;
-            setTimeout(() => {
-              this.setState({
-                modalProps: {
-                  ...modalProps,
-                  confirmLoading: false,
-                },
-              });
-            }, 0);
             if (result === false) {
+              const { modalProps } = this.state;
+              setTimeout(() => {
+                this.setState({
+                  modalProps: {
+                    ...modalProps,
+                    confirmLoading: false,
+                  },
+                });
+              }, 0);
               return;
             }
             if (result === undefined) {
