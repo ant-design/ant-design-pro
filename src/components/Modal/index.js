@@ -52,7 +52,7 @@ export default class CustModal extends Component {
     }, 300);
   };
 
-  defOk = onOk => {
+  defOk = (onOk, ...rest) => {
     return () => {
       if (onOk == null) {
         this.defClose();
@@ -66,10 +66,16 @@ export default class CustModal extends Component {
           },
         }),
         () => {
-          const okResult = onOk({
-            close: this.defClose,
-            setConfirmLoading: this.setConfirmLoading,
-          });
+          const okResult = onOk(
+            {
+              close: this.defClose,
+              setConfirmLoading: this.setConfirmLoading,
+              deepCallOk: (ok, ...r) => {
+                this.defOk(ok, ...r)();
+              },
+            },
+            ...rest
+          );
           (okResult instanceof Promise ? okResult : Promise.resolve(okResult)).then(result => {
             if (result === false) {
               setTimeout(() => {
