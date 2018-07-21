@@ -16,6 +16,16 @@ export default class CustModal extends Component {
     this.isUnmounted = true;
   }
 
+  setConfirmLoading = confirmLoading => {
+    const { modalProps } = this.state;
+    this.setState({
+      modalProps: {
+        ...modalProps,
+        confirmLoading,
+      },
+    });
+  };
+
   defClose = () => {
     const { modalProps } = this.state;
     const { onVisibleChange } = this.props;
@@ -58,17 +68,12 @@ export default class CustModal extends Component {
         () => {
           const okResult = onOk({
             close: this.defClose,
+            setConfirmLoading: this.setConfirmLoading,
           });
           (okResult instanceof Promise ? okResult : Promise.resolve(okResult)).then(result => {
             if (result === false) {
-              const { modalProps } = this.state;
               setTimeout(() => {
-                this.setState({
-                  modalProps: {
-                    ...modalProps,
-                    confirmLoading: false,
-                  },
-                });
+                this.setConfirmLoading(false);
               }, 0);
               return;
             }
