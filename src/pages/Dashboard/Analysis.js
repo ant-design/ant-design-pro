@@ -61,6 +61,7 @@ class Analysis extends Component {
     this.state = {
       salesType: 'all',
       currentTabKey: '',
+      loading: true,
       rangePickerValue: getTimeDistance('year'),
     };
   }
@@ -77,6 +78,11 @@ class Analysis extends Component {
       dispatch({
         type: 'chart/fetch',
       });
+      setTimeout(() => {
+        this.setState({
+          loading: false,
+        });
+      }, 1000);
     });
   }
 
@@ -137,8 +143,8 @@ class Analysis extends Component {
   }
 
   render() {
-    const { rangePickerValue, salesType, currentTabKey } = this.state;
-    const { chart, loading } = this.props;
+    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey } = this.state;
+    const { chart, loading: stateLoading } = this.props;
     const {
       visitData,
       visitData2,
@@ -150,7 +156,7 @@ class Analysis extends Component {
       salesTypeDataOnline,
       salesTypeDataOffline,
     } = chart;
-
+    const loading = propsLoding || stateLoading;
     const salesPieData =
       salesType === 'all'
         ? salesTypeData

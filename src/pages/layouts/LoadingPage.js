@@ -31,9 +31,7 @@ function formatter(data, parentPath = '', parentAuthority, parentName) {
     return result;
   });
 }
-/**
- * 根据菜单取得重定向地址.
- */
+// get meun map data
 const MenuData = formatter(routerConfig[1].routes);
 
 class LoadingPage extends PureComponent {
