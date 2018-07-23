@@ -66,6 +66,10 @@ export default class PageHeader extends PureComponent {
   };
 
   getBreadcrumbDom = () => {
+    const { hideInBreadcrumb } = this.props;
+    if (hideInBreadcrumb) {
+      return;
+    }
     const breadcrumb = this.conversionBreadcrumbList();
     this.setState({
       breadcrumb,
