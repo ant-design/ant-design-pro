@@ -12,6 +12,7 @@ order: 9
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
 count | 图标上的消息总数 | number | -
+bell | translate this please -> Change the bell Icon | ReactNode | `<Icon type='bell' />`
 loading | 弹出卡片加载状态 | boolean | false
 onClear | 点击清空按钮的回调 | function(tabTitle) | -
 onItemClick | 点击列表项的回调 | function(item, tabProps) | -
