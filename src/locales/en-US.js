@@ -1,5 +1,5 @@
 export default {
-  'navbar.lang': 'English',
+  'navbar.lang': '中文',
   'menu.home': 'Home',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': 'Analysis',
