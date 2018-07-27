@@ -102,7 +102,7 @@ class Login extends Component {
         <div className={classNames(className, styles.login)}>
           <Form onSubmit={this.handleSubmit}>
             {tabs.length ? (
-              <>
+              <React.Fragment>
                 <Tabs
                   animated={false}
                   className={styles.tabs}
@@ -112,7 +112,7 @@ class Login extends Component {
                   {TabChildren}
                 </Tabs>
                 {otherChildren}
-              </>
+              </React.Fragment>
             ) : (
               [...children]
             )}
