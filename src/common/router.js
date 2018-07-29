@@ -6,6 +6,13 @@ import { getMenuData } from './menu';
 
 let routerDataCache;
 
+const getRouterDataCache = app => {
+  if (!routerDataCache) {
+    routerDataCache = getRouterData(app);
+  }
+  return routerDataCache;
+};
+
 const modelNotExisted = (app, model) =>
   // eslint-disable-next-line
   !app._models.some(({ namespace }) => {
@@ -26,27 +33,21 @@ const dynamicWrapper = (app, models, component) => {
   // transformed by babel-plugin-dynamic-import-node-sync
   if (component.toString().indexOf('.then(') < 0) {
     return props => {
-      if (!routerDataCache) {
-        routerDataCache = getRouterData(app);
-      }
       return createElement(component().default, {
         ...props,
-        routerData: routerDataCache,
+        routerData: getRouterDataCache(app),
       });
     };
   }
   // () => import('module')
   return Loadable({
     loader: () => {
-      if (!routerDataCache) {
-        routerDataCache = getRouterData(app);
-      }
       return component().then(raw => {
         const Component = raw.default || raw;
         return props =>
           createElement(Component, {
             ...props,
-            routerData: routerDataCache,
+            routerData: getRouterDataCache(app),
           });
       });
     },
