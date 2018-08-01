@@ -19,4 +19,4 @@ order: 14
 |----------|------------------------------------------|-------------|-------|
 | colorful | 是否彩色标记 | Boolean | true |
 | flag | 上升下降标识：`up|down` | string | - |
-| reverseColor | 颜色反转 | Boolean | true |
+| reverseColor | 颜色反转 | Boolean | false |
