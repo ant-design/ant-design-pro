@@ -15,8 +15,11 @@ const formItemLayout = {
   },
 };
 
+@connect(({ form }) => ({
+  data: form.step,
+}))
 @Form.create()
-class Step1 extends React.PureComponent {
+export default class Step1 extends React.PureComponent {
   render() {
     const { form, dispatch, data } = this.props;
     const { getFieldDecorator, validateFields } = form;
@@ -108,7 +111,3 @@ class Step1 extends React.PureComponent {
     );
   }
 }
-
-export default connect(({ form }) => ({
-  data: form.step,
-}))(Step1);
