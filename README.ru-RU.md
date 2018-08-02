@@ -25,15 +25,15 @@ UI-решение "из коробки" для корпоративных при
 
 ## Возможности
 
-- :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
-- :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React/dva/antd
-- :iphone: **Responsive**: Designed for variable screen sizes
-- :art: **Theming**: Customizable theme with simple config
-- :globe_with_meridians: **International**: Built-in i18n solution
-- :gear: **Best Practices**: Solid workflow to make your code healthy
-- :1234: **Mock development**: Easy to use mock development solution
-- :white_check_mark: **UI Test**: Fly safely with unit and e2e tests
+- :gem: **Аккуратный дизайн**: Посмотрите [спецификацию Ant Design](http://ant.design/)
+- :triangular_ruler: **Общие шаблоны**: Стандартные шаблоны для корпоративных приложений
+- :rocket: **Разработка, как искусство**: Новейший стек технологий React/dva/antd
+- :iphone: **Отзывчивая верстка**: Создан для экранов разных размеров
+- :art: **Темизация**: Возможность изменения темы с помощью конфигурации
+- :globe_with_meridians: **Мультиязычность**: Встроенное i18n решение
+- :gear: **Лучшие практики**: Надежные процессы для хорошего кода
+- :1234: **Разработка по шиблону**: Простое в использовании решение для разработки
+- :white_check_mark: **UI тесты**: Разрабатывайте безопасно с юнит и e2e тестами
 
 ## Шаблоны
 
@@ -76,7 +76,7 @@ $ npm install
 $ npm start         # visit http://localhost:8000
 ```
 
-Or you can use the command tool: [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli)
+Также можно использовать инструмент командной строки: [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli)
 
 ```bash
 $ npm install ant-design-pro-cli -g
@@ -84,16 +84,16 @@ $ mkdir pro-demo && cd pro-demo
 $ pro new
 ```
 
-More instructions at [documentation](http://pro.ant.design/docs/getting-started).
+Больше информации в [документации](http://pro.ant.design/docs/getting-started).
 
 ## Совместимость
 
-Modern browsers and IE11.
+Современные браузеры и IE11.
 
 ## Распространение
 
-Any type of contribution is welcome, here are some examples of how you may contribute to this project:
+Любые варианты распространения приветствуются! Вот несколько примероы того, как вы можете помочь распространению проекта:
 
-- Use Ant Design Pro in your daily work.
-- Submit [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
-- Propose [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+- Использовать Ant Design Pro в ежедневной работе.
+- Создавать [задачи](http://github.com/ant-design/ant-design-pro/issues) заводить баги или отвечать на вопросы.
+- Делать [pull-реквесты](http://github.com/ant-design/ant-design-pro/pulls) для совершенствования нашего кода.
