@@ -19,7 +19,7 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
-function checkStatus(response) {
+const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -32,7 +32,26 @@ function checkStatus(response) {
   error.name = response.status;
   error.response = response;
   throw error;
-}
+};
+
+const cachedSave = (response, hashcode) => {
+  /**
+   * Clone a response data and store it in sessionStorage
+   * Does not support data other than json, Cache only json
+   */
+  let contentType = response.headers.get('Content-Type');
+  if (contentType && contentType.match(/application\/json/i)) {
+    // All data is saved as text
+    response
+      .clone()
+      .text()
+      .then(content => {
+        sessionStorage.setItem(hashcode, content);
+        sessionStorage.setItem(hashcode + ':timestamp', Date.now());
+      });
+  }
+  return response;
+};
 
 /**
  * Requests a URL, returning a promise.
@@ -47,7 +66,7 @@ export default function request(url, options = {}) {
    * Produce fingerprints based on url and parameters
    * Maybe url has the same parameters
    */
-  const fingerprint = url + options.body ? JSON.stringify(options.body) : '';
+  const fingerprint = url + (options.body ? JSON.stringify(options.body) : '');
   const hashcode = hash
     .sha256()
     .update(fingerprint)
@@ -77,8 +96,8 @@ export default function request(url, options = {}) {
       };
     }
   }
-  let cached = localStorage.getItem(hashcode);
-  let whenCached = localStorage.getItem(hashcode + ':timestamp');
+  let cached = sessionStorage.getItem(hashcode);
+  let whenCached = sessionStorage.getItem(hashcode + ':timestamp');
   const expirys = options.expirys || 60;
   if (cached !== null && whenCached !== null && expirys !== false) {
     let age = (Date.now() - whenCached) / 1000;
@@ -86,30 +105,13 @@ export default function request(url, options = {}) {
       let response = new Response(new Blob([cached]));
       return response.json();
     } else {
-      localStorage.removeItem(hashcode);
-      localStorage.removeItem(hashcode + ':timestamp');
+      sessionStorage.removeItem(hashcode);
+      sessionStorage.removeItem(hashcode + ':timestamp');
     }
   }
   return fetch(url, newOptions)
     .then(checkStatus)
-    .then(response => {
-      /**
-       * Clone a response data and store it in localStorage
-       * Does not support data other than json, Cache only json
-       */
-      let contentType = response.headers.get('Content-Type');
-      if (contentType && contentType.match(/application\/json/i)) {
-        // All data is saved as text
-        response
-          .clone()
-          .text()
-          .then(content => {
-            localStorage.setItem(hashcode, content);
-            localStorage.setItem(hashcode + ':timestamp', Date.now());
-          });
-      }
-      return response;
-    })
+    .then(cachedSave)
     .then(response => {
       // DELETE and 204 do not return data by default
       // using .json will report an error.
