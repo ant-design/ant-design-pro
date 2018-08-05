@@ -1,7 +1,7 @@
 import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import router from 'umi/router';
-
+import hash from 'hash.js';
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -41,7 +41,18 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options) {
+export default function request(url, options = {}) {
+  console.log(url);
+  /**
+   * Produce fingerprints based on url and parameters
+   * Maybe url has the same parameters
+   */
+  const fingerprint = url + options.body ? JSON.stringify(options.body) : '';
+  const hashcode = hash
+    .sha256()
+    .update(fingerprint)
+    .digest('hex');
+
   const defaultOptions = {
     credentials: 'include',
   };
@@ -66,10 +77,42 @@ export default function request(url, options) {
       };
     }
   }
-
+  let cached = localStorage.getItem(hashcode);
+  let whenCached = localStorage.getItem(hashcode + ':timestamp');
+  const expirys = options.expirys || 60;
+  if (cached !== null && whenCached !== null && expirys !== false) {
+    let age = (Date.now() - whenCached) / 1000;
+    if (age < expirys) {
+      let response = new Response(new Blob([cached]));
+      return response.json();
+    } else {
+      localStorage.removeItem(hashcode);
+      localStorage.removeItem(hashcode + ':timestamp');
+    }
+  }
   return fetch(url, newOptions)
     .then(checkStatus)
     .then(response => {
+      /**
+       * Clone a response data and store it in localStorage
+       * Does not support data other than json, Cache only json
+       */
+      let contentType = response.headers.get('Content-Type');
+      if (contentType && contentType.match(/application\/json/i)) {
+        // All data is saved as text
+        response
+          .clone()
+          .text()
+          .then(content => {
+            localStorage.setItem(hashcode, content);
+            localStorage.setItem(hashcode + ':timestamp', Date.now());
+          });
+      }
+      return response;
+    })
+    .then(response => {
+      // DELETE and 204 do not return data by default
+      // using .json will report an error.
       if (newOptions.method === 'DELETE' || response.status === 204) {
         return response.text();
       }
@@ -78,12 +121,14 @@ export default function request(url, options) {
     .catch(e => {
       const status = e.name;
       if (status === 401) {
+        // @HACK
         /* eslint-disable no-underscore-dangle */
         window.g_app._store.dispatch({
           type: 'login/logout',
         });
         return;
       }
+      // environment should not be used
       if (status === 403) {
         router.push('/exception/403');
         return;

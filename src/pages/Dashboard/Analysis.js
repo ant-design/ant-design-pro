@@ -236,10 +236,7 @@ class Analysis extends Component {
         sorter: (a, b) => a.range - b.range,
         render: (text, record) => (
           <Trend flag={record.status === 1 ? 'down' : 'up'}>
-            <span style={{ marginRight: 4 }}>
-              {text}
-              %
-            </span>
+            <span style={{ marginRight: 4 }}>{text}%</span>
           </Trend>
         ),
         align: 'right',
