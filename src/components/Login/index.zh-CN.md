@@ -32,15 +32,14 @@ name | 控件标记，提交数据中同样以此为 key | String | -
 rules | 校验规则，同 Form getFieldDecorator(id, options) 中 [option.rules 的规则](getFieldDecorator(id, options)) | object[] | -
 
 除上述属性以外，Login.UserName 还支持 antd.Input 的所有属性，并且自带默认的基础配置，包括 `placeholder` `size` `prefix` 等，这些基础配置均可被覆盖。
-
-### Login.Password、Login.Mobile 同 Login.UserName
+## Login.Password、Login.Mobile 同 Login.UserName
 
 ### Login.Captcha
 
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
 onGetCaptcha | 点击获取校验码的回调 | () => void | -
-buttonText | 点击获取校验码的说明文字 | ReactNode | -
+buttonText | 点击获取校验码的说明文字 | ReactNode | '获取验证码'
 
 除上述属性以外，Login.Captcha 支持的属性与 Login.UserName 相同。
 
