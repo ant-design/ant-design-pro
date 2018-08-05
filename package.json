@@ -23,7 +23,7 @@
   "dependencies": {
     "@antv/data-set": "^0.8.0",
     "@babel/polyfill": "^7.0.0-beta.36",
-    "antd": "3.7.3",
+    "antd": "^3.8.0",
     "bizcharts": "^3.1.10",
     "bizcharts-plugin-slider": "^2.0.1",
     "classnames": "^2.2.5",
