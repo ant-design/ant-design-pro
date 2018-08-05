@@ -40,6 +40,7 @@ rules | 校验规则，同 Form getFieldDecorator(id, options) 中 [option.rules
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
 onGetCaptcha | 点击获取校验码的回调 | () => void | -
+buttonText | 点击获取校验码的说明文字 | ReactNode | -
 
 除上述属性以外，Login.Captcha 支持的属性与 Login.UserName 相同。
 

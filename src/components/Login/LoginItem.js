@@ -15,6 +15,10 @@ function generator({ defaultProps, defaultRules, type }) {
         updateActive: PropTypes.func,
       };
 
+      static defaultProps = {
+        buttonText: '获取验证码',
+      };
+
       constructor(props) {
         super(props);
         this.state = {
@@ -55,7 +59,7 @@ function generator({ defaultProps, defaultRules, type }) {
         const { getFieldDecorator } = form;
         const options = {};
         let otherProps = {};
-        const { onChange, defaultValue, rules, name, ...restProps } = this.props;
+        const { onChange, defaultValue, buttonText, rules, name, ...restProps } = this.props;
         const { count } = this.state;
         options.rules = rules || defaultRules;
         if (onChange) {
@@ -82,7 +86,7 @@ function generator({ defaultProps, defaultRules, type }) {
                     size="large"
                     onClick={this.onGetCaptcha}
                   >
-                    {count ? `${count} s` : '获取验证码'}
+                    {count ? `${count} s` : buttonText}
                   </Button>
                 </Col>
               </Row>
