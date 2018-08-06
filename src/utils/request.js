@@ -61,7 +61,6 @@ const cachedSave = (response, hashcode) => {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options = {}) {
-  console.log(url);
   /**
    * Produce fingerprints based on url and parameters
    * Maybe url has the same parameters
@@ -96,17 +95,21 @@ export default function request(url, options = {}) {
       };
     }
   }
-  let cached = sessionStorage.getItem(hashcode);
-  let whenCached = sessionStorage.getItem(hashcode + ':timestamp');
+
   const expirys = options.expirys || 60;
-  if (cached !== null && whenCached !== null && expirys !== false) {
-    let age = (Date.now() - whenCached) / 1000;
-    if (age < expirys) {
-      let response = new Response(new Blob([cached]));
-      return response.json();
-    } else {
-      sessionStorage.removeItem(hashcode);
-      sessionStorage.removeItem(hashcode + ':timestamp');
+  // options.expirys !== false, return the cache,
+  if (options.expirys !== false) {
+    let cached = sessionStorage.getItem(hashcode);
+    let whenCached = sessionStorage.getItem(hashcode + ':timestamp');
+    if (cached !== null && whenCached !== null) {
+      let age = (Date.now() - whenCached) / 1000;
+      if (age < expirys) {
+        let response = new Response(new Blob([cached]));
+        return response.json();
+      } else {
+        sessionStorage.removeItem(hashcode);
+        sessionStorage.removeItem(hashcode + ':timestamp');
+      }
     }
   }
   return fetch(url, newOptions)
