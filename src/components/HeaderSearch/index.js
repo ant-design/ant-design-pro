@@ -65,18 +65,18 @@ export default class HeaderSearch extends PureComponent {
     });
   };
 
-  debouncePressEnter() {
-    const { onPressEnter } = this.props;
-    const { value } = this.state;
-    onPressEnter(value);
-  }
-
   // NOTE: 不能小于500，如果长按某键，第一次触发auto repeat的间隔是500ms，小于500会导致触发2次
   @Bind()
   @Debounce(500, {
     leading: true,
     trailing: false,
   })
+  debouncePressEnter() {
+    const { onPressEnter } = this.props;
+    const { value } = this.state;
+    onPressEnter(value);
+  }
+
   render() {
     const { className, placeholder, ...restProps } = this.props;
     const { searchMode, value } = this.state;
