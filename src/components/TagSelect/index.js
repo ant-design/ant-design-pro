@@ -15,6 +15,9 @@ const TagSelectOption = ({ children, checked, onChange, value }) => (
 TagSelectOption.isTagSelectOption = true;
 
 class TagSelect extends Component {
+  static defaultProps = {
+    hideCheckAll: false,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -87,7 +90,7 @@ class TagSelect extends Component {
 
   render() {
     const { value, expand } = this.state;
-    const { children, className, style, expandable } = this.props;
+    const { children, hideCheckAll, className, style, expandable } = this.props;
 
     const checkedAll = this.getAllTags().length === value.length;
 
@@ -97,9 +100,11 @@ class TagSelect extends Component {
     });
     return (
       <div className={cls} style={style}>
-        <CheckableTag checked={checkedAll} key="tag-select-__all__" onChange={this.onSelectAll}>
-          全部
-        </CheckableTag>
+        {hideCheckAll ? null : (
+          <CheckableTag checked={checkedAll} key="tag-select-__all__" onChange={this.onSelectAll}>
+            全部
+          </CheckableTag>
+        )}
         {value &&
           React.Children.map(children, child => {
             if (this.isTagSelectOption(child)) {
