@@ -35,8 +35,12 @@ export default class PageHeader extends PureComponent {
   }
 
   componentDidUpdate(preProps) {
-    const { tabActiveKey } = this.props;
-    if (preProps.tabActiveKey !== tabActiveKey) {
+    const {
+      tabActiveKey,
+      location: { pathname },
+    } = this.props;
+    const prePathname = preProps.location.pathname;
+    if (preProps.tabActiveKey !== tabActiveKey || prePathname !== pathname) {
       this.getBreadcrumbDom();
     }
   }
