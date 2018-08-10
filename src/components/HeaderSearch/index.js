@@ -81,7 +81,7 @@ export default class HeaderSearch extends PureComponent {
   })
   debouncePressEnter() {
     const { onPressEnter } = this.props;
-    const value = this.state;
+    const { value } = this.state;
     onPressEnter(value);
   }
 

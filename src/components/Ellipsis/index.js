@@ -137,11 +137,15 @@ export default class Ellipsis extends Component {
     if (sh <= th) {
       shadowNode.innerHTML = text.substring(0, mid + 1) + suffix;
       sh = shadowNode.offsetHeight;
-      if (sh > th) {
+      if (sh > th || mid === begin) {
         return mid;
       } else {
         begin = mid;
-        mid = Math.floor((end - begin) / 2) + begin;
+        if (end - begin === 1) {
+          mid = 1 + begin;
+        } else {
+          mid = Math.floor((end - begin) / 2) + begin;
+        }
         return this.bisection(th, mid, begin, end, text, shadowNode);
       }
     } else {

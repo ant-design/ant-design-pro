@@ -79,6 +79,7 @@ class WarpFormItem extends Component {
       defaultValue,
       rules,
       name,
+      buttonText,
       updateActive,
       type,
       ...restProps
@@ -103,7 +104,7 @@ class WarpFormItem extends Component {
                 size="large"
                 onClick={this.onGetCaptcha}
               >
-                {count ? `${count} s` : '获取验证码'}
+                {count ? `${count} s` : buttonText}
               </Button>
             </Col>
           </Row>

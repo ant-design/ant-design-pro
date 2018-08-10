@@ -587,7 +587,7 @@ export default class TableList extends PureComponent {
           </Col>
         </Row>
         <div style={{ overflow: 'hidden' }}>
-          <span style={{ float: 'right', marginBottom: 24 }}>
+          <div style={{ float: 'right', marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">
               查询
             </Button>
@@ -597,7 +597,7 @@ export default class TableList extends PureComponent {
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
               收起 <Icon type="up" />
             </a>
-          </span>
+          </div>
         </div>
       </Form>
     );

@@ -57,7 +57,12 @@ const tableData = [
   },
 ];
 
-class AdvancedForm extends PureComponent {
+@connect(({ global, loading }) => ({
+  collapsed: global.collapsed,
+  submitting: loading.effects['form/submitAdvancedForm'],
+}))
+@Form.create()
+export default class AdvancedForm extends PureComponent {
   state = {
     width: '100%',
   };
@@ -303,8 +308,3 @@ class AdvancedForm extends PureComponent {
     );
   }
 }
-
-export default connect(({ global, loading }) => ({
-  collapsed: global.collapsed,
-  submitting: loading.effects['form/submitAdvancedForm'],
-}))(Form.create()(AdvancedForm));
