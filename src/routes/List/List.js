@@ -31,12 +31,12 @@ export default class SearchList extends Component {
         tab: '文章',
       },
       {
-        key: 'applications',
-        tab: '应用',
-      },
-      {
         key: 'projects',
         tab: '项目',
+      },
+      {
+        key: 'applications',
+        tab: '应用',
       },
     ];
 
