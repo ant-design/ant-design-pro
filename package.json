@@ -6,9 +6,9 @@
   "scripts": {
     "precommit": "npm run lint-staged",
     "presite": "npm run generate-mock && cd functions && npm install",
-    "start": "cross-env ESLINT=none umi dev",
-    "start:no-mock": "cross-env MOCK=none ESLINT=none umi dev",
-    "build": "cross-env ESLINT=none umi build",
+    "start": "cross-env umi dev",
+    "start:no-mock": "cross-env MOCK=none umi dev",
+    "build": "cross-env umi build",
     "site": "npm run presite && npm run build && firebase deploy",
     "analyze": "cross-env ANALYZE=1 umi build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
@@ -55,10 +55,6 @@
     "antd-pro-merge-less": "^0.0.2",
     "antd-theme-webpack-plugin": "^1.0.8",
     "babel-eslint": "^8.2.6",
-    "babel-plugin-dva-hmr": "^0.4.1",
-    "babel-plugin-import": "^1.8.0",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-runtime": "^6.9.2",
     "cross-env": "^5.1.1",
     "cross-port-killer": "^1.0.1",
@@ -86,10 +82,8 @@
     "stylelint": "^9.4.0",
     "stylelint-config-prettier": "^3.0.4",
     "stylelint-config-standard": "^18.0.0",
-    "umi": "^1.3.15",
-    "umi-plugin-dva": "^0.9.1",
-    "umi-plugin-locale": "^1.0.1",
-    "umi-plugin-routes": "^0.1.5"
+    "umi": "^2.0.0-0",
+    "umi-plugin-react": "^1.0.0-0"
   },
   "optionalDependencies": {
     "puppeteer": "^1.6.0"
