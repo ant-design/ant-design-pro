@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { routerRedux } from 'dva/router';
 import { connect } from 'dva';
 import { Input } from 'antd';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import PageHeaderLayout from '@/layouts/PageHeaderLayout';
 
 @connect()
 export default class SearchList extends Component {

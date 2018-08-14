@@ -21,8 +21,8 @@ import {
   Select,
 } from 'antd';
 
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
-import Result from '../../components/Result';
+import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import Result from '@/components/Result';
 
 import styles from './BasicList.less';
 
