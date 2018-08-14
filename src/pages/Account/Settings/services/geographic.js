@@ -1,4 +1,4 @@
-import request from '../utils/request';
+import request from '../../../../utils/request';
 
 export async function queryProvince() {
   return request('/api/geographic/province');

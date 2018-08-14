@@ -1,6 +1,6 @@
-import { fakeRegister } from '../services/api';
-import { setAuthority } from '../utils/authority';
-import { reloadAuthorized } from '../utils/Authorized';
+import { fakeRegister } from '@/services/api';
+import { setAuthority } from '@/utils/authority';
+import { reloadAuthorized } from '@/utils/Authorized';
 
 export default {
   namespace: 'register',
