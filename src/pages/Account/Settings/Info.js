@@ -4,7 +4,7 @@ import { routerRedux } from 'dva/router';
 import { FormattedMessage } from 'umi/locale';
 import { Menu } from 'antd';
 import styles from './Info.less';
-import GridContent from '../../../layouts/GridContent';
+import GridContent from '@/layouts/GridContent';
 
 const { Item } = Menu;
 
