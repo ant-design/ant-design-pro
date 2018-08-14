@@ -70,6 +70,22 @@ function getFlatMenuData(menus) {
   return keys;
 }
 
+function findMenuKey(menuData, path) {
+  const menuKey = Object.keys(menuData).find(key => pathToRegexp(path).test(key));
+  if (menuKey == null) {
+    if (path === '/') {
+      return null;
+    }
+    const lastIdx = path.lastIndexOf('/');
+    if (lastIdx < 0) {
+      return null;
+    }
+    // 如果没有，使用上一层的配置
+    return findMenuKey(menuData, path.substr(0, lastIdx));
+  }
+  return menuKey;
+}
+
 export const getRouterData = app => {
   const routerConfig = {
     '/': {
@@ -185,8 +201,7 @@ export const getRouterData = app => {
   Object.keys(routerConfig).forEach(path => {
     // Regular match item name
     // eg.  router /user/:id === /user/chen
-    const pathRegexp = pathToRegexp(path);
-    const menuKey = Object.keys(menuData).find(key => pathRegexp.test(`${key}`));
+    const menuKey = findMenuKey(menuData, path);
     let menuItem = {};
     // If menuKey is not empty
     if (menuKey) {
