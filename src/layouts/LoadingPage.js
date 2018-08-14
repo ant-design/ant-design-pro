@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import BasicLayout from './BasicLayout';
 // TODO: should use this.props.routes
-import routerConfig from '../../../config/router.config';
+import routerConfig from '../../config/router.config';
 
 // Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {

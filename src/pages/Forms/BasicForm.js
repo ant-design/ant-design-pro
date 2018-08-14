@@ -12,7 +12,7 @@ import {
   Icon,
   Tooltip,
 } from 'antd';
-import PageHeaderLayout from '../layouts/PageHeaderLayout';
+import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './style.less';
 
 const FormItem = Form.Item;

@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Card, Steps } from 'antd';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 import styles from '../style.less';
 
 // import { Route, Redirect, Switch } from 'dva/router';

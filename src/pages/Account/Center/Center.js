@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Link, routerRedux } from 'dva/router';
 import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
-import GridContent from '../../layouts/GridContent';
+import GridContent from '../../../layouts/GridContent';
 import styles from './Center.less';
 
 @connect(({ loading, user, project }) => ({
