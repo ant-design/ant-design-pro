@@ -6,9 +6,9 @@
   "scripts": {
     "precommit": "npm run lint-staged",
     "presite": "npm run generate-mock && cd functions && npm install",
-    "start": "cross-env umi dev",
+    "start": "umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
-    "build": "cross-env umi build",
+    "build": "umi build",
     "site": "npm run presite && npm run build && firebase deploy",
     "analyze": "cross-env ANALYZE=1 umi build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",

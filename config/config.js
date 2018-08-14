@@ -20,7 +20,14 @@ export default {
           default: 'zh-CN', // default zh-CN
           baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
         },
-        dll: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+        ...(
+          require('os').platform() === 'darwin'
+          ? {
+              dll: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+              hardSource: true,
+            }
+          : {}
+        ),
       },
     ],
   ],
