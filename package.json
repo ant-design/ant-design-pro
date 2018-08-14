@@ -72,7 +72,6 @@
     "eslint-plugin-react": "^7.9.1",
     "gh-pages": "^1.2.0",
     "lint-staged": "^7.2.0",
-    "merge-umi-mock-data": "^0.0.2",
     "mockjs": "^1.0.1-beta3",
     "prettier": "1.14.0",
     "pro-download": "^1.0.1",
