@@ -2,10 +2,10 @@ module.exports = [
   // user
   {
     path: '/user',
-    component: './layouts/UserLayout',
+    component: '../layouts/UserLayout',
     routes: [
       { path: '/user', redirect: '/user/login' },
-      { path: '/user/login', component: '/User/Login' },
+      { path: '/user/login', component: './User/Login' },
       { path: '/user/register', component: './User/Register' },
       { path: '/user/register-result', component: './User/RegisterResult' },
     ],
@@ -13,7 +13,7 @@ module.exports = [
   // app
   {
     path: '/',
-    component: './layouts/LoadingPage',
+    component: '../layouts/LoadingPage',
     routes: [
       // dashboard
       { path: '/', redirect: '/dashboard/analysis' },

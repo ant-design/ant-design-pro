@@ -27,7 +27,7 @@ import {
 import Trend from 'components/Trend';
 import NumberInfo from 'components/NumberInfo';
 import numeral from 'numeral';
-import GridContent from '../layouts/GridContent';
+import GridContent from '../../layouts/GridContent';
 import Yuan from '../../utils/Yuan';
 import { getTimeDistance } from '../../utils/utils';
 

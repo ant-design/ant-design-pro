@@ -22,7 +22,7 @@ import {
   Radio,
 } from 'antd';
 import StandardTable from 'components/StandardTable';
-import PageHeaderLayout from '../layouts/PageHeaderLayout';
+import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 
 import styles from './TableList.less';
 

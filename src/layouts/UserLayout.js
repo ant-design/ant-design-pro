@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { Link } from 'dva/router';
 import { Icon } from 'antd';
-import GlobalFooter from '../../components/GlobalFooter';
+import GlobalFooter from '../components/GlobalFooter/index';
 import styles from './UserLayout.less';
-import logo from '../../assets/logo.svg';
+import logo from '../assets/logo.svg';
 
 const links = [
   {
