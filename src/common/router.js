@@ -80,6 +80,9 @@ function findMenuKey(menuData, path) {
     if (lastIdx < 0) {
       return null;
     }
+    if (lastIdx === 0) {
+      return findMenuKey(menuData, '/');
+    }
     // 如果没有，使用上一层的配置
     return findMenuKey(menuData, path.substr(0, lastIdx));
   }
