@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Button, Icon, Card } from 'antd';
-import Result from 'components/Result';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import Result from '@/components/Result';
+import PageHeaderLayout from '@/layouts/PageHeaderLayout';
 
 const extra = (
   <Fragment>

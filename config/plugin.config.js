@@ -5,6 +5,8 @@ const AntDesignThemePlugin = require('antd-theme-webpack-plugin');
 const path = require('path');
 
 const plugin = config => {
+  return;
+
   // 将所有 less 合并为一个供 themePlugin使用
   const outFile = path.join(__dirname, '../.temp/ant-design-pro.less');
   const stylesDir = path.join(__dirname, '../src/');
