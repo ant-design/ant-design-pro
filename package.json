@@ -43,6 +43,7 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^16.4.1",
     "react-fittext": "^1.0.0",
+    "react-loadable": "^5.5.0",
     "rollbar": "^2.3.4",
     "setprototypeof": "^1.1.0",
     "url-polyfill": "^1.0.10"
@@ -71,7 +72,6 @@
     "mockjs": "^1.0.1-beta3",
     "prettier": "1.14.2",
     "pro-download": "^1.0.1",
-    "react-loadable": "^5.5.0",
     "redbox-react": "^1.5.0",
     "regenerator-runtime": "^0.12.0",
     "roadhog": "^2.4.2",
