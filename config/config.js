@@ -22,7 +22,7 @@ export default {
         },
         polyfills: ['ie9'],
         ...(
-          require('os').platform() === 'darwin'
+          (!process.env.TEST && require('os').platform() === 'darwin')
           ? {
               dll: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
               hardSource: true,
