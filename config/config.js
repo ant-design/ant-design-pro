@@ -90,4 +90,7 @@ export default {
   },
 
   chainWebpack: webpackplugin,
+  cssnano: {
+    mergeRules: false,
+  },
 };
