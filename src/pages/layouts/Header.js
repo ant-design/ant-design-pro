@@ -16,11 +16,11 @@ class HeaderView extends PureComponent {
   };
 
   componentDidMount() {
-    document.getElementById('root').addEventListener('scroll', this.handScroll);
+    document.addEventListener('scroll', this.handScroll, { passive: true });
   }
 
   componentWillUnmount() {
-    document.getElementById('root').removeEventListener('scroll', this.handScroll);
+    document.removeEventListener('scroll', this.handScroll);
   }
 
   getHeadWidth = () => {
@@ -71,16 +71,22 @@ class HeaderView extends PureComponent {
     }
   };
 
-  handScroll = () => {
+  handScroll = e => {
     const { autoHideHeader } = this.props;
     const { visible } = this.state;
     if (!autoHideHeader) {
       return;
     }
-    const { scrollTop } = document.getElementById('root');
+    const scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
     if (!this.ticking) {
-      this.ticking = false;
       requestAnimationFrame(() => {
+        if (this.oldScrollTop > scrollTop) {
+          this.setState({
+            visible: true,
+          });
+          this.scrollTop = scrollTop;
+          return;
+        }
         if (scrollTop > 400 && visible) {
           this.setState({
             visible: false,
@@ -91,9 +97,12 @@ class HeaderView extends PureComponent {
             visible: true,
           });
         }
+        this.oldScrollTop = scrollTop;
         this.ticking = false;
+        return;
       });
     }
+    this.ticking = false;
   };
 
   render() {
