@@ -11,6 +11,7 @@ class Exception403 extends Component {
         desc={formatMessage({ id: 'app.exception.description.403' }, {})}
         style={{ minHeight: 500, height: '80%' }}
         linkElement={Link}
+        backText={formatMessage({ id: 'app.exception.back' })}
       />
     );
   }

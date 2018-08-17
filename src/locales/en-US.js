@@ -36,7 +36,7 @@ export default {
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'app.home.introduce': 'introduce',
-  'app.analysis.test': 'Gongzhuan road No.{no} shop',
+  'app.analysis.test': 'Gongzhuan No.{no} shop',
   'app.analysis.introduce': 'Introduce',
   'app.analysis.total-sales': 'total sales',
   'app.analysis.day-sales': 'Day Sales',
