@@ -2,6 +2,7 @@ import * as React from 'react';
 export interface IPieProps {
   animate?: boolean;
   color?: string;
+  colors?: string[];
   height: number;
   hasLegend?: boolean;
   padding?: [number, number, number, number];
