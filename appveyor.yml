@@ -1,0 +1,26 @@
+# Test against the latest version of this Node.js version
+environment:
+  nodejs_version: "8"
+
+# this is how to allow failing jobs in the matrix
+matrix:
+  fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+  # install modules
+  - npm install
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+
+# Post-install test scripts.
+test_script:
+  - npm run lint
+  - npm run test:all
+  - npm run build
+
+# Don't actually build.
+build: off
