@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
+import deepEqual from 'lodash.isequal';
 import memoizeOne from 'memoize-one';
 import { connect } from 'dva';
 import { ContainerQuery } from 'react-container-query';
@@ -35,7 +36,7 @@ const getBreadcrumbNameMap = memoizeOne(meun => {
   };
   mergeMeunAndRouter(meun);
   return routerMap;
-});
+}, deepEqual);
 
 const query = {
   'screen-xs': {
