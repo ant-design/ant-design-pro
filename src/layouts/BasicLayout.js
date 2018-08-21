@@ -247,54 +247,58 @@ export default class BasicLayout extends React.PureComponent {
               onNoticeVisibleChange={this.handleNoticeVisibleChange}
             />
           </Header>
-          <Content style={{ margin: '24px 24px 0', height: '100%' }}>
-            <Switch>
-              {redirectData.map(item => (
-                <Redirect key={item.from} exact from={item.from} to={item.to} />
-              ))}
-              {getRoutes(match.path, routerData).map(item => (
-                <AuthorizedRoute
-                  key={item.key}
-                  path={item.path}
-                  component={item.component}
-                  exact={item.exact}
-                  authority={item.authority}
-                  redirectPath="/exception/403"
-                />
-              ))}
-              <Redirect exact from="/" to={baseRedirect} />
-              <Route render={NotFound} />
-            </Switch>
-          </Content>
-          <Footer style={{ padding: 0 }}>
-            <GlobalFooter
-              links={[
-                {
-                  key: 'Pro 首页',
-                  title: 'Pro 首页',
-                  href: 'http://pro.ant.design',
-                  blankTarget: true,
-                },
-                {
-                  key: 'github',
-                  title: <Icon type="github" />,
-                  href: 'https://github.com/ant-design/ant-design-pro',
-                  blankTarget: true,
-                },
-                {
-                  key: 'Ant Design',
-                  title: 'Ant Design',
-                  href: 'http://ant.design',
-                  blankTarget: true,
-                },
-              ]}
-              copyright={
-                <Fragment>
-                  Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
-                </Fragment>
-              }
-            />
-          </Footer>
+
+          {/* keep header fixed, scroll the rest */}
+          <div style={{ height: 'calc(100vh - 64px)', overflow: 'scroll' }}>
+            <Content style={{ margin: '24px 24px 0' }}>
+              <Switch>
+                {redirectData.map(item => (
+                  <Redirect key={item.from} exact from={item.from} to={item.to} />
+                ))}
+                {getRoutes(match.path, routerData).map(item => (
+                  <AuthorizedRoute
+                    key={item.key}
+                    path={item.path}
+                    component={item.component}
+                    exact={item.exact}
+                    authority={item.authority}
+                    redirectPath="/exception/403"
+                  />
+                ))}
+                <Redirect exact from="/" to={baseRedirect} />
+                <Route render={NotFound} />
+              </Switch>
+            </Content>
+            <Footer style={{ padding: 0 }}>
+              <GlobalFooter
+                links={[
+                  {
+                    key: 'Pro 首页',
+                    title: 'Pro 首页',
+                    href: 'http://pro.ant.design',
+                    blankTarget: true,
+                  },
+                  {
+                    key: 'github',
+                    title: <Icon type="github" />,
+                    href: 'https://github.com/ant-design/ant-design-pro',
+                    blankTarget: true,
+                  },
+                  {
+                    key: 'Ant Design',
+                    title: 'Ant Design',
+                    href: 'http://ant.design',
+                    blankTarget: true,
+                  },
+                ]}
+                copyright={
+                  <Fragment>
+                    Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
+                  </Fragment>
+                }
+              />
+            </Footer>
+          </div>
         </Layout>
       </Layout>
     );
