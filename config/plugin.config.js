@@ -21,8 +21,7 @@ const plugin = config => {
       antDir: path.join(__dirname, '../node_modules/antd'),
       stylesDir,
       varFile: path.join(__dirname, '../node_modules/antd/lib/style/themes/default.less'),
-      mainLessFile: outFile,
-      themeVariables: ['@primary-color'],
+      mainLessFile: outFile, //     themeVariables: ['@primary-color'],
       indexFileName: 'index.html',
     },
   ]);
