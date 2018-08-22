@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
 import { Form, Input, Button, Select, Divider } from 'antd';
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 import styles from './style.less';
 
 const { Option } = Select;
@@ -30,7 +30,7 @@ export default class Step1 extends React.PureComponent {
             type: 'form/saveStepFormData',
             payload: values,
           });
-          dispatch(routerRedux.push('/form/step-form/confirm'));
+          router.push('/form/step-form/confirm');
         }
       });
     };

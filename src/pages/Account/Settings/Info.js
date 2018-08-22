@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 import { FormattedMessage } from 'umi/locale';
 import { Menu } from 'antd';
 import styles from './Info.less';
@@ -71,8 +71,7 @@ export default class Info extends Component {
   };
 
   selectKey = ({ key }) => {
-    const { dispatch } = this.props;
-    dispatch(routerRedux.push(`/account/settings/${key}`));
+    router.push(`/account/settings/${key}`);
     this.setState({
       selectKey: key,
     });

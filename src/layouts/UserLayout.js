@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'dva/router';
+import Link from 'umi/link';
 import { Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
 import styles from './UserLayout.less';
