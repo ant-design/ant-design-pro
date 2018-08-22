@@ -73,7 +73,8 @@ export default class GlobalHeaderRight extends PureComponent {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout">
-          <Icon type="logout" />退出登录
+          <Icon type="logout" />
+          退出登录
         </Menu.Item>
       </Menu>
     );
@@ -154,6 +155,9 @@ export default class GlobalHeaderRight extends PureComponent {
         <Button
           size="small"
           ghost={theme === 'dark'}
+          style={{
+            margin: '0 8px',
+          }}
           onClick={() => {
             this.changLang();
           }}

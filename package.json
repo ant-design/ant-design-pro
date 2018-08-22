@@ -53,6 +53,7 @@
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.6",
     "antd-pro-merge-less": "^0.0.6",
+    "merge-umi-mock-data": "^0.0.2",
     "antd-theme-webpack-plugin": "^1.0.8",
     "babel-eslint": "^8.2.6",
     "babel-runtime": "^6.9.2",
