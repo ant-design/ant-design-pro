@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'dva/router';
+import Link from 'umi/link';
 import RightContent from '../GlobalHeader/RightContent';
 import BaseMenu from '../SiderMenu/BaseMenu';
 import styles from './index.less';

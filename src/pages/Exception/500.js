@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { formatMessage } from 'umi/locale';
-import { Link } from 'dva/router';
+import Link from 'umi/link';
 import Exception from '@/components/Exception';
 
 class Exception500 extends Component {

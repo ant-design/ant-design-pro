@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Menu, Icon } from 'antd';
-import { Link } from 'dva/router';
+import Link from 'umi/link';
 import { formatMessage } from 'umi/locale';
 import pathToRegexp from 'path-to-regexp';
 import { urlToList } from '../_utils/pathTools';

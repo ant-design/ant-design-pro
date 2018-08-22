@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Layout, message } from 'antd';
 import Animate from 'rc-animate';
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
 import styles from './Header.less';
@@ -44,15 +44,15 @@ class HeaderView extends PureComponent {
   handleMenuClick = ({ key }) => {
     const { dispatch } = this.props;
     if (key === 'userCenter') {
-      dispatch(routerRedux.push('/account/center'));
+      router.push('/account/center');
       return;
     }
     if (key === 'triggerError') {
-      dispatch(routerRedux.push('/exception/trigger'));
+      router.push('/exception/trigger');
       return;
     }
     if (key === 'userinfo') {
-      dispatch(routerRedux.push('/account/settings/base'));
+      router.push('/account/settings/base');
       return;
     }
     if (key === 'logout') {

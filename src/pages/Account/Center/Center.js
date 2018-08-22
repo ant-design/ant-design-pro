@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Link, routerRedux } from 'dva/router';
+import Link from 'umi/link';
+import router from 'umi/router';
 import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
 import GridContent from '@/layouts/GridContent';
 import styles from './Center.less';
@@ -36,16 +37,16 @@ export default class Center extends PureComponent {
   }
 
   onTabChange = key => {
-    const { dispatch, match } = this.props;
+    const { match } = this.props;
     switch (key) {
       case 'articles':
-        dispatch(routerRedux.push(`${match.url}/articles`));
+        router.push(`${match.url}/articles`);
         break;
       case 'applications':
-        dispatch(routerRedux.push(`${match.url}/applications`));
+        router.push(`${match.url}/applications`);
         break;
       case 'projects':
-        dispatch(routerRedux.push(`${match.url}/projects`));
+        router.push(`${match.url}/projects`);
         break;
       default:
         break;
