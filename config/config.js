@@ -89,7 +89,7 @@ export default {
     ],
   },
 
-  chainWebpack: webpackplugin,
+  //chainWebpack: webpackplugin,
   cssnano: {
     mergeRules: false,
   },
