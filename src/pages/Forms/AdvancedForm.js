@@ -57,8 +57,7 @@ const tableData = [
   },
 ];
 
-@connect(({ global, loading }) => ({
-  collapsed: global.collapsed,
+@connect(({ loading }) => ({
   submitting: loading.effects['form/submitAdvancedForm'],
 }))
 @Form.create()
