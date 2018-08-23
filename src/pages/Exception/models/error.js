@@ -1,4 +1,4 @@
-import { query } from '../services/error';
+import { query } from '@/services/error';
 
 export default {
   namespace: 'error',
