@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Form, Input, Button, Alert, Divider } from 'antd';
 import { routerRedux } from 'dva/router';
-import { digitUppercase } from '../../../utils/utils';
+import { digitUppercase } from '@/utils/utils';
 import styles from './style.less';
 
 const formItemLayout = {
@@ -55,11 +55,7 @@ class Step2 extends React.PureComponent {
         </Form.Item>
         <Form.Item {...formItemLayout} className={styles.stepFormText} label="转账金额">
           <span className={styles.money}>{data.amount}</span>
-          <span className={styles.uppercase}>
-            （
-            {digitUppercase(data.amount)}
-            ）
-          </span>
+          <span className={styles.uppercase}>（{digitUppercase(data.amount)}）</span>
         </Form.Item>
         <Divider style={{ margin: '24px 0' }} />
         <Form.Item {...formItemLayout} label="支付密码" required={false}>
