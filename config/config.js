@@ -21,14 +21,12 @@ export default {
           baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
         },
         polyfills: ['ie9'],
-        ...(
-          (!process.env.TEST && require('os').platform() === 'darwin')
+        ...(!process.env.TEST && require('os').platform() === 'darwin'
           ? {
               dll: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
               hardSource: true,
             }
-          : {}
-        ),
+          : {}),
       },
     ],
   ],
@@ -41,12 +39,6 @@ export default {
   externals: {
     '@antv/data-set': 'DataSet',
     rollbar: 'rollbar',
-  },
-  alias: {
-    components: path.resolve(__dirname, '../src/components/'),
-    utils: path.resolve(__dirname, '../src/utils/'),
-    assets: path.resolve(__dirname, '../src/assets/'),
-    common: path.resolve(__dirname, '../src/common/'),
   },
   ignoreMomentLocale: true,
   lessLoaderOptions: {

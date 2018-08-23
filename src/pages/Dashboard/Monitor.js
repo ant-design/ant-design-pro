@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Row, Col, Card, Tooltip } from 'antd';
-import { Pie, WaterWave, Gauge, TagCloud } from 'components/Charts';
-import NumberInfo from 'components/NumberInfo';
-import CountDown from 'components/CountDown';
-import ActiveChart from 'components/ActiveChart';
+import { Pie, WaterWave, Gauge, TagCloud } from '@/components/Charts';
+import NumberInfo from '@/components/NumberInfo';
+import CountDown from '@/components/CountDown';
+import ActiveChart from '@/components/ActiveChart';
 import numeral from 'numeral';
 import GridContent from '@/layouts/GridContent';
 

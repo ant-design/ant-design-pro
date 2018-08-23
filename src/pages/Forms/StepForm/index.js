@@ -4,7 +4,7 @@ import PageHeaderLayout from '@/layouts/PageHeaderLayout';
 import styles from '../style.less';
 
 // import { Route, Redirect, Switch } from 'dva/router';
-// import { getRoutes } from '../../../utils/utils';
+// import { getRoutes } from '@/utils/utils';
 
 const { Step } = Steps;
 

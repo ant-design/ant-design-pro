@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import { List } from 'antd';
-// import { getTimeDistance } from '../../../utils/utils';
+// import { getTimeDistance } from '@/utils/utils';
 
 const passwordStrength = {
   strong: (
@@ -16,7 +16,8 @@ const passwordStrength = {
   ),
   weak: (
     <font className="weak">
-      <FormattedMessage id="app.settings.security.weak" defaultMessage="Weak" />Weak
+      <FormattedMessage id="app.settings.security.weak" defaultMessage="Weak" />
+      Weak
     </font>
   ),
 };
@@ -28,9 +29,8 @@ class SecurityView extends Component {
         title: formatMessage({ id: 'app.settings.security.password' }, {}),
         description: (
           <Fragment>
-            {formatMessage({ id: 'app.settings.security.password-description' }, {})}：{
-              passwordStrength.strong
-            }
+            {formatMessage({ id: 'app.settings.security.password-description' }, {})}：
+            {passwordStrength.strong}
           </Fragment>
         ),
         actions: [

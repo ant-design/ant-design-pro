@@ -18,7 +18,7 @@ import {
   Divider,
 } from 'antd';
 import classNames from 'classnames';
-import DescriptionList from 'components/DescriptionList';
+import DescriptionList from '@/components/DescriptionList';
 import PageHeaderLayout from '@/layouts/PageHeaderLayout';
 import styles from './AdvancedProfile.less';
 
