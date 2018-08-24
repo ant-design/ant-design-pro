@@ -204,7 +204,11 @@ export const getRouterData = app => {
   Object.keys(routerConfig).forEach(path => {
     // Regular match item name
     // eg.  router /user/:id === /user/chen
-    const menuKey = findMenuKey(menuData, path);
+    let menuKey = Object.keys(menuData).find(key => pathToRegexp(path).test(`${key}`));
+    const inherited = menuKey == null;
+    if (menuKey == null) {
+      menuKey = findMenuKey(menuData, path);
+    }
     let menuItem = {};
     // If menuKey is not empty
     if (menuKey) {
@@ -219,6 +223,7 @@ export const getRouterData = app => {
       name: router.name || menuItem.name,
       authority: router.authority || menuItem.authority,
       hideInBreadcrumb: router.hideInBreadcrumb || menuItem.hideInBreadcrumb,
+      inherited,
     };
     routerData[path] = router;
   });
