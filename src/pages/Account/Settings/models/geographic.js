@@ -1,4 +1,4 @@
-import { queryProvince, queryCity } from '../services/geographic';
+import { queryProvince, queryCity } from '@/services/geographic';
 
 export default {
   namespace: 'geographic',
