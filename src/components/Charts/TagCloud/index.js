@@ -87,7 +87,7 @@ class TagCloud extends Component {
     // const colors = ['#1890FF', '#41D9C7', '#2FC25B', '#FACC14', '#9AE65C'];
     const { data, height } = nextProps || this.props;
 
-    if (data.length < 1 || !this.root) {
+    if (!!!data || data.length < 1 || !this.root) {
       return;
     }
 
