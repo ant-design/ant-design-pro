@@ -1,0 +1,73 @@
+.disabled {
+  background-color: #fff5ee;
+}
+.enabled {
+}
+
+.dict_form_item {
+  text-align: left;
+}
+.top_node {
+  background-color: #f5f8f9;
+}
+.blank {
+}
+//左侧字典树
+.dict_left_tree {
+  height: 640px;
+  border: 2px solid #f6f5f4;
+  background-color: #F1F1F1;
+  :global {
+    // 左侧列表树样式
+    .ant-table-content {
+      border-top: none;
+    }
+    .ant-table-title {
+      padding: 0px;
+    }
+    .ant-card-body {
+      background: #6a6a6a;
+      font-weight: bold;
+      padding: 12px 8px;
+      color: #efefef;
+      margin-bottom: 0px;
+      border-bottom: 0px;
+    }
+  }
+}
+
+.dict_right_form_title {
+  border-bottom: 1px dashed #efefef;
+  margin-bottom: 5px;
+}
+.dict_right_form {
+  :global {
+    .ant-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    // 右侧上分类表单样式
+    .ant-card-head {
+      margin-bottom: 0px;
+      border-bottom: none;
+      padding: 0px;
+    }
+    .ant-card-head-wrapper {
+      justify-content: center;
+      align-items: center;
+    }
+    .ant-card-extra {
+      padding: 0px;
+    }
+    //.ant-card-head {
+    //  border-bottom: none;
+    //}
+    //.ant-card-head-title {
+    //  padding: 0;
+    //}
+    //.ant-card-extra {
+    //  padding: 0;
+    //}
+  }
+}
