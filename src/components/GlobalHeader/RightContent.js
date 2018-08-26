@@ -1,13 +1,21 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage, setLocale, getLocale } from 'umi/locale';
 import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
+import Debounce from 'lodash-decorators/debounce';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
+import screenfull from 'screenfull';
+
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
 
 export default class GlobalHeaderRight extends PureComponent {
+  state = {
+    fullscreen: 0,
+  };
+
+
   getNoticeData() {
     const { notices = [] } = this.props;
     if (notices.length === 0) {
@@ -48,7 +56,19 @@ export default class GlobalHeaderRight extends PureComponent {
     }
   };
 
+  @Debounce(600)
+  f11 = () => {
+    this.setState({
+      fullscreen: screenfull.isFullscreen ? 0 : 1,
+    });
+    screenfull.toggle();
+  };
+
   render() {
+    const fullscreenIcon = ['arrows-alt', 'shrink'];
+    const fullscreenText = ['全屏', '退出全屏'];
+    const fullscreen = this.state.fullscreen;
+
     const {
       currentUser,
       fetchingNotices,
@@ -96,6 +116,13 @@ export default class GlobalHeaderRight extends PureComponent {
             console.log('enter', value); // eslint-disable-line
           }}
         />
+        {/*全屏按钮*/}
+        <span className={styles.action} onClick={() => this.f11()}>
+          <Tooltip placement="bottom" title={fullscreenText[fullscreen]}>
+            <Icon type={fullscreenIcon[fullscreen]} />
+          </Tooltip>
+        </span>
+
         <Tooltip title="使用文档">
           <a
             target="_blank"

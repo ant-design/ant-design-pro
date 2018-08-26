@@ -4,7 +4,6 @@
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
-    "precommit": "npm run lint-staged",
     "presite": "npm run generate-mock && cd functions && npm install",
     "start": "umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
@@ -44,6 +43,7 @@
     "react-document-title": "^2.0.3",
     "react-fittext": "^1.0.0",
     "rollbar": "^2.4.2",
+    "screenfull": "^3.3.2",
     "setprototypeof": "^1.1.0",
     "url-polyfill": "^1.0.13"
   },
