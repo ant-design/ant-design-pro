@@ -71,6 +71,7 @@ class BasicLayout extends React.PureComponent {
     super(props);
     const { menuData } = this.props;
     this.getPageTitle = memoizeOne(this.getPageTitle);
+    // Because there are many places to be. So put it here
     this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
   getContext() {
@@ -79,6 +80,10 @@ class BasicLayout extends React.PureComponent {
       location,
       breadcrumbNameMap: this.breadcrumbNameMap,
     };
+  }
+  componentDidUpdate() {
+    const { menuData } = this.props;
+    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
   getPageTitle = pathname => {
     let currRouterData = null;
