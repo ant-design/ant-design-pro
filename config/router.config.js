@@ -27,6 +27,19 @@ module.exports = [
           { path: '/dashboard/workplace', name: 'workplace', component: './Dashboard/Workplace' },
         ],
       },
+      // 系统管理
+      {
+        path: '/sys',
+        name: 'sys',
+        icon: 'setting',
+        routes: [
+          { path: '/sys/organization', name: 'organization', component: './Sys/organization' },
+          { path: '/sys/account', name: 'account', component: './Sys/account' },
+          { path: '/sys/module', name: 'module', component: './Sys/module' },
+          { path: '/sys/role', name: 'role', component: './Sys/role' },
+          { path: '/sys/dictionary', name: 'dictionary', component: './Sys/dictionary' },
+        ],
+      },
       // forms
       {
         path: '/form',
