@@ -6,6 +6,7 @@ import styles from './index.less';
 import RightContent from './RightContent';
 
 export default class GlobalHeader extends PureComponent {
+
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
   }
@@ -17,12 +18,22 @@ export default class GlobalHeader extends PureComponent {
     event.initEvent('resize', true, false);
     window.dispatchEvent(event);
   }
+  @Debounce(600)
+  f11 = () => {
+    this.setState({
+      fullscreen: screenfull.isFullscreen ? 0 : 1,
+    });
+    screenfull.toggle();
+  };
+
   toggle = () => {
     const { collapsed, onCollapse } = this.props;
     onCollapse(!collapsed);
     this.triggerResizeEvent();
   };
   render() {
+
+
     const { collapsed, isMobile, logo } = this.props;
     return (
       <div className={styles.header}>
