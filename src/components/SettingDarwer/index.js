@@ -116,7 +116,6 @@ class SettingDarwer extends PureComponent {
     const { collapse, silderTheme, themeColor, layout, colorWeak } = setting;
     return (
       <Drawer
-        firstEnter={true}
         visible={collapse}
         width={273}
         onClose={this.togglerContent}
