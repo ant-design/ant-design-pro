@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Select, message, Drawer, List, Switch, Divider, Icon, Button } from 'antd';
+import { formatMessage } from 'umi/locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
 import styles from './index.less';
@@ -26,7 +27,7 @@ class SettingDarwer extends PureComponent {
     } = this.props;
     return [
       {
-        title: '栅格模式',
+        title: formatMessage({ id: 'app.setting.gridmode' }),
         action: [
           <Select
             value={grid}
@@ -34,13 +35,17 @@ class SettingDarwer extends PureComponent {
             onSelect={value => this.changeSetting('grid', value)}
             style={{ width: 80 }}
           >
-            <Select.Option value="Wide">定宽</Select.Option>
-            <Select.Option value="Fluid">流式</Select.Option>
+            <Select.Option value="Wide">
+              {formatMessage({ id: 'app.setting.gridmode.wide' })}
+            </Select.Option>
+            <Select.Option value="Fluid">
+              {formatMessage({ id: 'app.setting.gridmode.fluid' })}
+            </Select.Option>
           </Select>,
         ],
       },
       {
-        title: '固定 Header',
+        title: formatMessage({ id: 'app.setting.fixedheader' }),
         action: [
           <Switch
             size="small"
@@ -50,7 +55,7 @@ class SettingDarwer extends PureComponent {
         ],
       },
       {
-        title: '下滑时隐藏 Header',
+        title: formatMessage({ id: 'app.setting.hideheader' }),
         hide: !fixedHeader,
         action: [
           <Switch
@@ -61,7 +66,7 @@ class SettingDarwer extends PureComponent {
         ],
       },
       {
-        title: '固定 Siderbar',
+        title: formatMessage({ id: 'app.setting.fixedsidebar' }),
         hide: layout === 'topmenu',
         action: [
           <Switch
@@ -143,7 +148,7 @@ class SettingDarwer extends PureComponent {
         }}
       >
         <div className={styles.content}>
-          <Body title="整体风格设置">
+          <Body title={formatMessage({ id: 'app.setting.pagestyle' })}>
             <BlockChecbox
               list={[
                 {
@@ -161,13 +166,14 @@ class SettingDarwer extends PureComponent {
           </Body>
 
           <ThemeColor
+            title={formatMessage({ id: 'app.setting.themecolor' })}
             value={themeColor}
             onChange={color => this.changeSetting('themeColor', color)}
           />
 
           <Divider />
 
-          <Body title="导航设置 ">
+          <Body title={formatMessage({ id: 'app.setting.navigationmode' })}>
             <BlockChecbox
               list={[
                 {
@@ -192,7 +198,7 @@ class SettingDarwer extends PureComponent {
 
           <Divider />
 
-          <Body title="其他设置 ">
+          <Body title={formatMessage({ id: 'app.setting.othersettings' })}>
             <List.Item
               actions={[
                 <Switch
@@ -202,17 +208,13 @@ class SettingDarwer extends PureComponent {
                 />,
               ]}
             >
-              色弱模式
+              {formatMessage({ id: 'app.setting.weakmode' })}
             </List.Item>
           </Body>
           <Divider />
           <CopyToClipboard
             text={JSON.stringify(setting)}
-            onCopy={() =>
-              message.success(
-                'copy success，please replace defaultSetting in src/models/setting.js'
-              )
-            }
+            onCopy={() => message.success(formatMessage({ id: 'app.setting.copyinfo' }))}
           >
             <Button
               style={{
@@ -220,7 +222,7 @@ class SettingDarwer extends PureComponent {
               }}
             >
               <Icon type="copy" />
-              拷贝配置
+              {formatMessage({ id: 'app.setting.copy' })}
             </Button>
           </CopyToClipboard>
         </div>
