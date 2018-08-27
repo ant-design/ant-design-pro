@@ -208,7 +208,11 @@ class SettingDarwer extends PureComponent {
           <Divider />
           <CopyToClipboard
             text={JSON.stringify(setting)}
-            onCopy={() => message.success('copy success')}
+            onCopy={() =>
+              message.success(
+                'copy success，please replace defaultSetting in src/models/setting.js'
+              )
+            }
           >
             <Button
               style={{
@@ -216,7 +220,7 @@ class SettingDarwer extends PureComponent {
               }}
             >
               <Icon type="copy" />
-              拷贝代码
+              拷贝配置
             </Button>
           </CopyToClipboard>
         </div>
