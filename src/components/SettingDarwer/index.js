@@ -116,29 +116,32 @@ class SettingDarwer extends PureComponent {
         width={273}
         onClose={this.togglerContent}
         placement="right"
+        handler={
+          <div className={styles.handle}>
+            {!collapse ? (
+              <Icon
+                type="setting"
+                style={{
+                  color: '#FFF',
+                  fontSize: 20,
+                }}
+              />
+            ) : (
+              <Icon
+                type="close"
+                style={{
+                  color: '#FFF',
+                  fontSize: 20,
+                }}
+              />
+            )}
+          </div>
+        }
+        onHandleClick={this.togglerContent}
         style={{
           zIndex: 999,
         }}
       >
-        <div className={styles.handle} onClick={this.togglerContent}>
-          {!collapse ? (
-            <Icon
-              type="setting"
-              style={{
-                color: '#FFF',
-                fontSize: 20,
-              }}
-            />
-          ) : (
-            <Icon
-              type="close"
-              style={{
-                color: '#FFF',
-                fontSize: 20,
-              }}
-            />
-          )}
-        </div>
         <div className={styles.content}>
           <Body title="整体风格设置">
             <BlockChecbox
@@ -212,7 +215,8 @@ class SettingDarwer extends PureComponent {
                 width: 224,
               }}
             >
-              <Icon type="copy" />拷贝代码
+              <Icon type="copy" />
+              拷贝代码
             </Button>
           </CopyToClipboard>
         </div>

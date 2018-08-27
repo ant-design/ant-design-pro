@@ -5,14 +5,16 @@ import PageHeader from '@/components/PageHeader';
 import GridContent from './GridContent';
 import styles from './PageHeaderLayout.less';
 import MenuContext from './MenuContext';
+import { connect } from 'dva';
 
-const PageHeaderLayout = ({ children, wrapperClassName, top, ...restProps }) => (
+const PageHeaderLayout = ({ children, grid, wrapperClassName, top, ...restProps }) => (
   <div style={{ margin: '-24px -24px 0' }} className={wrapperClassName}>
     {top}
     <MenuContext.Consumer>
       {value => {
         return (
           <PageHeader
+            wide={grid === 'Wide'}
             home={<FormattedMessage id="menu.home" defaultMessage="Home" />}
             {...value}
             key="pageheader"
@@ -36,4 +38,6 @@ const PageHeaderLayout = ({ children, wrapperClassName, top, ...restProps }) => 
   </div>
 );
 
-export default PageHeaderLayout;
+export default connect(({ setting }) => ({
+  grid: setting.grid,
+}))(PageHeaderLayout);

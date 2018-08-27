@@ -188,6 +188,7 @@ export default class PageHeader extends PureComponent {
       tabDefaultActiveKey,
       tabBarExtraContent,
       loading = false,
+      wide = false,
     } = this.props;
     const { breadcrumb } = this.state;
 
@@ -201,34 +202,36 @@ export default class PageHeader extends PureComponent {
     }
     return (
       <div className={clsString}>
-        <Skeleton loading={loading}>
-          {breadcrumb}
-          <div className={styles.detail}>
-            {logo && <div className={styles.logo}>{logo}</div>}
-            <div className={styles.main}>
-              <div className={styles.row}>
-                {title && <h1 className={styles.title}>{title}</h1>}
-                {action && <div className={styles.action}>{action}</div>}
-              </div>
-              <div className={styles.row}>
-                {content && <div className={styles.content}>{content}</div>}
-                {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
+        <div className={wide ? styles.wide : ''}>
+          <Skeleton loading={loading}>
+            {breadcrumb}
+            <div className={styles.detail}>
+              {logo && <div className={styles.logo}>{logo}</div>}
+              <div className={styles.main}>
+                <div className={styles.row}>
+                  {title && <h1 className={styles.title}>{title}</h1>}
+                  {action && <div className={styles.action}>{action}</div>}
+                </div>
+                <div className={styles.row}>
+                  {content && <div className={styles.content}>{content}</div>}
+                  {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
+                </div>
               </div>
             </div>
-          </div>
-          {tabList && tabList.length ? (
-            <Tabs
-              className={styles.tabs}
-              {...activeKeyProps}
-              onChange={this.onChange}
-              tabBarExtraContent={tabBarExtraContent}
-            >
-              {tabList.map(item => (
-                <TabPane tab={item.tab} key={item.key} />
-              ))}
-            </Tabs>
-          ) : null}
-        </Skeleton>
+            {tabList && tabList.length ? (
+              <Tabs
+                className={styles.tabs}
+                {...activeKeyProps}
+                onChange={this.onChange}
+                tabBarExtraContent={tabBarExtraContent}
+              >
+                {tabList.map(item => (
+                  <TabPane tab={item.tab} key={item.key} />
+                ))}
+              </Tabs>
+            ) : null}
+          </Skeleton>
+        </div>
       </div>
     );
   }

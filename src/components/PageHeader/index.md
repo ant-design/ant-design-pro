@@ -27,6 +27,7 @@ order: 11
 | tabList | tab 标题列表 | array<{key: string, tab: ReactNode}> | -  |
 | tabActiveKey | 当前高亮的 tab 项 | string | -  |
 | tabDefaultActiveKey | 默认高亮的 tab 项 | string | 第一项  |
+| wide | 是否定宽 | boolean | false  |
 | onTabChange | 切换面板的回调 | (key) => void | -  |
 | itemRender | 自定义节点方法 | (menuItem) => ReactNode | -  |
 | linkElement | 定义链接的元素，默认为 `a`，可传入 react-router 的 Link | string\|ReactElement | - |
