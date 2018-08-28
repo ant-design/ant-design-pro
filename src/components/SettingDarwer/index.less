@@ -12,7 +12,7 @@
     margin-right: 16px;
     position: relative;
     // box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    border-radius: @border-radius-base;
     cursor: pointer;
     img {
       width: 48px;
@@ -31,6 +31,7 @@
     font-weight: bold;
   }
 }
+
 .color_block {
   width: 38px;
   height: 22px;
@@ -41,9 +42,10 @@
   display: inline-block;
   vertical-align: middle;
 }
+
 .title {
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.85);
+  color: @heading-color;
   line-height: 22px;
   margin-bottom: 12px;
 }
@@ -51,7 +53,7 @@
 .handle {
   position: fixed;
   top: 240px;
-  background: #1890ff;
+  background: @primary-color;
   width: 48px;
   height: 48px;
   right: 273px;
@@ -64,4 +66,10 @@
   text-align: center;
   font-size: 16px;
   border-radius: 4px 0 0 4px;
+}
+
+.productionHint {
+  font-size: 12px;
+  color: @text-color-secondary;
+  margin-top: 4px;
 }

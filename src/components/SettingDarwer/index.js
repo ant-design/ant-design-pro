@@ -224,6 +224,9 @@ class SettingDarwer extends PureComponent {
               {formatMessage({ id: 'app.setting.copy' })}
             </Button>
           </CopyToClipboard>
+          <div className={styles.productionHint}>
+            {formatMessage({ id: 'app.setting.production.hint' })}
+          </div>
         </div>
       </Drawer>
     );
