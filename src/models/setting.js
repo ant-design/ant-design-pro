@@ -21,10 +21,11 @@ const updateTheme = primaryColor => {
     lessConfigNode.innerHTML = `
       window.less = {
         async: true,
-        env: 'production'
+        env: 'production',
+        javascriptEnabled: true
       };
     `;
-    lessScriptNode.src = 'https://gw.alipayobjects.com/os/lib/less.js/2.7.3/less.min.js';
+    lessScriptNode.src = 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js';
     lessScriptNode.async = true;
     lessScriptNode.onload = () => {
       buildIt();
