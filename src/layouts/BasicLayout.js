@@ -10,7 +10,7 @@ import pathToRegexp from 'path-to-regexp';
 import { formatMessage } from 'umi/locale';
 import SiderMenu from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
-import SettingDarwer from '@/components/SettingDarwer';
+import SettingDrawer from '@/components/SettingDrawer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
@@ -202,7 +202,7 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {this.state.rendering ? null : <SettingDarwer />}
+        {this.state.rendering ? null : <SettingDrawer />}
       </React.Fragment>
     );
   }
