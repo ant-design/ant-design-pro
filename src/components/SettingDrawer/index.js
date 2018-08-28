@@ -20,7 +20,7 @@ const Body = ({ children, title, style }) => (
 );
 
 @connect(({ setting }) => ({ setting }))
-class SettingDarwer extends PureComponent {
+class SettingDrawer extends PureComponent {
   getLayOutSetting = () => {
     const {
       setting: { grid, fixedHeader, layout, autoHideHeader, fixSiderbar },
@@ -233,4 +233,4 @@ class SettingDarwer extends PureComponent {
   }
 }
 
-export default SettingDarwer;
+export default SettingDrawer;
