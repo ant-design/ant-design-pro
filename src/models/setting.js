@@ -2,15 +2,13 @@ import { message } from 'antd';
 import defaultSetting from '../defaultSetting';
 
 let lessNodesAppended;
-const buildSettings = (themeColor, colorWeak) => {
-  document.body.className = colorWeak ? 'colorWeak' : '';
+const updateTheme = themeColor => {
   // Determine if the component is remounted
-  if (!themeColor || themeColor === '#1890FF' || themeColor === window['antd_pro_less_color']) {
+  if (!themeColor) {
     return;
   }
   const hideMessage = message.loading('正在编译主题！', 0);
   if (!lessNodesAppended) {
-    console.log('append less nodes');
     const lessStyleNode = document.createElement('link');
     const lessConfigNode = document.createElement('script');
     const lessScriptNode = document.createElement('script');
@@ -19,19 +17,18 @@ const buildSettings = (themeColor, colorWeak) => {
     lessConfigNode.innerHTML = `
       window.less = {
         async: true,
-        env: 'production',
-        javascriptEnabled: true
+        env: 'production'
       };
     `;
-    lessScriptNode.src = 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js';
+    lessScriptNode.src = 'https://gw.alipayobjects.com/os/lib/less.js/2.7.3/less.min.js';
     lessScriptNode.async = true;
     lessScriptNode.onload = () => {
       buildIt();
       lessScriptNode.onload = null;
     };
-    document.head.appendChild(lessStyleNode);
-    document.head.appendChild(lessConfigNode);
-    document.head.appendChild(lessScriptNode);
+    document.body.appendChild(lessStyleNode);
+    document.body.appendChild(lessConfigNode);
+    document.body.appendChild(lessScriptNode);
     lessNodesAppended = true;
   } else {
     buildIt();
@@ -40,21 +37,24 @@ const buildSettings = (themeColor, colorWeak) => {
     if (!window.less) {
       return;
     }
-    window.less
-      .modifyVars({
-        '@primary-color': themeColor,
-        '@input-hover-border-color': themeColor,
-      })
-      .then(() => {
-        console.log('start to compile');
-        window['antd_pro_less_color'] = themeColor;
-        hideMessage();
-      })
-      .catch(() => {
-        message.error(`Failed to update theme`);
-        hideMessage();
-      });
+    setTimeout(() => {
+      window.less
+        .modifyVars({
+          '@primary-color': themeColor,
+        })
+        .then(() => {
+          hideMessage();
+        })
+        .catch(() => {
+          message.error('Failed to update theme');
+          hideMessage();
+        });
+    }, 200);
   }
+};
+
+const updateColorWeak = colorWeak => {
+  document.body.className = colorWeak ? 'colorWeak' : '';
 };
 
 export default {
@@ -71,7 +71,10 @@ export default {
         }
       });
       const { themeColor, colorWeak } = setting;
-      buildSettings(themeColor, colorWeak);
+      if (state.themeColor !== themeColor) {
+        updateTheme(themeColor);
+      }
+      updateColorWeak(colorWeak);
       return {
         ...state,
         ...setting,
@@ -97,7 +100,10 @@ export default {
         }
       });
       const { themeColor, colorWeak } = payload;
-      buildSettings(themeColor, colorWeak);
+      if (state.themeColor !== themeColor) {
+        updateTheme(themeColor);
+      }
+      updateColorWeak(colorWeak);
       window.history.replaceState(null, 'setting', urlParams.href);
       return {
         ...state,
