@@ -1,7 +1,7 @@
 // Change theme plugin
 
 const MergeLessPlugin = require('antd-pro-merge-less');
-const AntDesignThemePlugin = require('antd-theme-webpack-plugin');
+const AntDesignThemePlugin = require('antd-pro-theme-webpack-plugin');
 const path = require('path');
 
 const plugin = config => {
