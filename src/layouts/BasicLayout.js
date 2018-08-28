@@ -202,7 +202,9 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {this.state.rendering ? null : <SettingDrawer />}
+        {this.state.rendering && process.env.NODE_ENV === 'production' ? null : ( // Do show SettingDrawer in production
+          <SettingDrawer />
+        )}
       </React.Fragment>
     );
   }
