@@ -35,7 +35,6 @@ export default {
   },
   externals: {
     '@antv/data-set': 'DataSet',
-    rollbar: 'rollbar',
   },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
