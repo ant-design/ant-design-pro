@@ -1,9 +1,6 @@
-/* eslint-disable react/destructuring-assignment */
-
 // https://umijs.org/config/
 const pageRoutes = require('./router.config');
 const webpackplugin = require('./plugin.config');
-const path = require('path');
 
 export default {
   // add for transfer to umi
