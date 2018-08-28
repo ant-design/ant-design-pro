@@ -1,4 +1,4 @@
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 import { stringify } from 'qs';
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
@@ -37,7 +37,7 @@ export default {
             return;
           }
         }
-        yield put(routerRedux.replace(redirect || '/'));
+        router.replace(redirect || '/');
       }
     },
 
@@ -54,14 +54,12 @@ export default {
         },
       });
       reloadAuthorized();
-      yield put(
-        routerRedux.push({
-          pathname: '/user/login',
-          search: stringify({
-            redirect: window.location.href,
-          }),
-        })
-      );
+      router.push({
+        pathname: '/user/login',
+        search: stringify({
+          redirect: window.location.href,
+        }),
+      })
     },
   },
 

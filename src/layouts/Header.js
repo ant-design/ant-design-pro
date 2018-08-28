@@ -5,8 +5,8 @@ import { connect } from 'dva';
 import router from 'umi/router';
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
-import styles from './Header.less';
 import Authorized from '@/utils/Authorized';
+import styles from './Header.less';
 
 const { Header } = Layout;
 
@@ -71,7 +71,7 @@ class HeaderView extends PureComponent {
     }
   };
 
-  handScroll = e => {
+  handScroll = () => {
     const { autoHideHeader } = this.props;
     const { visible } = this.state;
     if (!autoHideHeader) {

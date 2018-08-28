@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
+import { connect } from 'dva';
 import PageHeader from '@/components/PageHeader';
 import GridContent from './GridContent';
 import styles from './PageHeaderLayout.less';
 import MenuContext from './MenuContext';
-import { connect } from 'dva';
 
 const PageHeaderLayout = ({ children, grid, wrapperClassName, top, ...restProps }) => (
   <div style={{ margin: '-24px -24px 0' }} className={wrapperClassName}>
