@@ -61,11 +61,6 @@ module.exports = {
     'no-restricted-globals': [0],
     'require-yield': [1],
   },
-  parserOptions: {
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-    },
-  },
   settings: {
     polyfills: ['fetch', 'promises'],
   },
