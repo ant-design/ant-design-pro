@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   collapse: false,
   silderTheme: 'dark',
   primaryColor: '#1890FF',

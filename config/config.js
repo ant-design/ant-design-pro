@@ -1,6 +1,7 @@
 // https://umijs.org/config/
 const pageRoutes = require('./router.config');
 const webpackplugin = require('./plugin.config');
+const defaultSetting = require('../src/defaultSetting');
 
 export default {
   // add for transfer to umi
@@ -30,9 +31,9 @@ export default {
   ],
   // 路由配置
   routes: pageRoutes,
-
+  // theme for antd
   theme: {
-    'card-actions-background': '#f5f8fa',
+    'primary-color': defaultSetting.primaryColor,
   },
   externals: {
     '@antv/data-set': 'DataSet',
