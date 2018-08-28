@@ -1,4 +1,5 @@
 import { message } from 'antd';
+
 const defaultSetting = {
   collapse: false,
   silderTheme: 'dark',
