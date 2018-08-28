@@ -113,7 +113,7 @@ class SettingDarwer extends PureComponent {
 
   render() {
     const { setting } = this.props;
-    const { collapse, silderTheme, themeColor, layout, colorWeak } = setting;
+    const { collapse, silderTheme, primaryColor, layout, colorWeak } = setting;
     return (
       <Drawer
         visible={collapse}
@@ -166,8 +166,8 @@ class SettingDarwer extends PureComponent {
 
           <ThemeColor
             title={formatMessage({ id: 'app.setting.themecolor' })}
-            value={themeColor}
-            onChange={color => this.changeSetting('themeColor', color)}
+            value={primaryColor}
+            onChange={color => this.changeSetting('primaryColor', color)}
           />
 
           <Divider />

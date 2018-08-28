@@ -2,9 +2,9 @@ import { message } from 'antd';
 import defaultSetting from '../defaultSetting';
 
 let lessNodesAppended;
-const updateTheme = themeColor => {
+const updateTheme = primaryColor => {
   // Determine if the component is remounted
-  if (!themeColor) {
+  if (!primaryColor) {
     return;
   }
   const hideMessage = message.loading('正在编译主题！', 0);
@@ -40,7 +40,7 @@ const updateTheme = themeColor => {
     setTimeout(() => {
       window.less
         .modifyVars({
-          '@primary-color': themeColor,
+          '@primary-color': primaryColor,
         })
         .then(() => {
           hideMessage();
@@ -70,9 +70,9 @@ export default {
           setting[key] = value === '1' ? true : value;
         }
       });
-      const { themeColor, colorWeak } = setting;
-      if (state.themeColor !== themeColor) {
-        updateTheme(themeColor);
+      const { primaryColor, colorWeak } = setting;
+      if (state.primaryColor !== primaryColor) {
+        updateTheme(primaryColor);
       }
       updateColorWeak(colorWeak);
       return {
@@ -99,9 +99,9 @@ export default {
           urlParams.searchParams.set(key, value);
         }
       });
-      const { themeColor, colorWeak } = payload;
-      if (state.themeColor !== themeColor) {
-        updateTheme(themeColor);
+      const { primaryColor, colorWeak } = payload;
+      if (state.primaryColor !== primaryColor) {
+        updateTheme(primaryColor);
       }
       updateColorWeak(colorWeak);
       window.history.replaceState(null, 'setting', urlParams.href);
