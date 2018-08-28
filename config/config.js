@@ -31,7 +31,8 @@ export default {
   ],
   // 路由配置
   routes: pageRoutes,
-  // theme for antd
+  // Theme for antd
+  // https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': defaultSetting.primaryColor,
   },
