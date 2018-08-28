@@ -179,7 +179,12 @@ class BasicLayout extends React.PureComponent {
             {...this.props}
           />
         )}
-        <Layout style={this.getLayoutStyle()}>
+        <Layout
+          style={{
+            ...this.getLayoutStyle(),
+            minHeight: '100vh',
+          }}
+        >
           <Header handleMenuCollapse={this.handleMenuCollapse} logo={logo} {...this.props} />
           <Content style={this.getContentStyle()}>{children}</Content>
           <Footer />

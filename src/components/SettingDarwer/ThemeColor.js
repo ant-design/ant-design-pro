@@ -15,7 +15,7 @@ const Tag = ({ color, check, ...rest }) => {
   );
 };
 
-const ThemeColor = ({ colors, value, onChange }) => {
+const ThemeColor = ({ colors, title, value, onChange }) => {
   let colorList = colors;
   if (!colors) {
     colorList = [
@@ -31,7 +31,7 @@ const ThemeColor = ({ colors, value, onChange }) => {
   }
   return (
     <div className={styles.themeColor}>
-      <h3 className={styles.title}>主题色</h3>
+      <h3 className={styles.title}>{title}</h3>
       <div className={styles.content}>
         {colorList.map(color => {
           return (
