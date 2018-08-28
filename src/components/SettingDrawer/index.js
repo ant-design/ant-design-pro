@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, message, Drawer, List, Switch, Divider, Icon, Button } from 'antd';
+import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert } from 'antd';
 import { formatMessage } from 'umi/locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
@@ -215,18 +215,15 @@ class SettingDrawer extends PureComponent {
             text={JSON.stringify(setting)}
             onCopy={() => message.success(formatMessage({ id: 'app.setting.copyinfo' }))}
           >
-            <Button
-              style={{
-                width: 224,
-              }}
-            >
-              <Icon type="copy" />
+            <Button block icon="copy">
               {formatMessage({ id: 'app.setting.copy' })}
             </Button>
           </CopyToClipboard>
-          <div className={styles.productionHint}>
-            {formatMessage({ id: 'app.setting.production.hint' })}
-          </div>
+          <Alert
+            type="warning"
+            className={styles.productionHint}
+            message={formatMessage({ id: 'app.setting.production.hint' })}
+          />
         </div>
       </Drawer>
     );

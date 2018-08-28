@@ -162,6 +162,6 @@ export default {
   'app.setting.othersettings': '其他设置',
   'app.setting.weakmode': '色弱模式',
   'app.setting.copy': '拷贝设置',
-  'app.setting.copyinfo': '拷贝成功，请到 src/defaultSetting.js 中替换',
-  'app.setting.production.hint': '设置侧边栏只会出现在开发环境，请手动配置 src/defaultSetting.js',
+  'app.setting.copyinfo': '拷贝成功，请到 src/defaultSetting.js 中替换默认配置',
+  'app.setting.production.hint': '设置栏只用于开发环境预览，请拷贝后手动修改 src/defaultSetting.js',
 };
