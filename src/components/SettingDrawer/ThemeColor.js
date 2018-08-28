@@ -30,7 +30,7 @@ const ThemeColor = ({ colors, title, value, onChange }) => {
     ];
   }
   return (
-    <div className={styles.themeColor}>
+    <div className={styles.primaryColor}>
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.content}>
         {colorList.map(color => {
