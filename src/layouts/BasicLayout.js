@@ -57,8 +57,8 @@ const menuData = formatter(routerConfig[1].routes);
  */
 const getBreadcrumbNameMap = memoizeOne(menu => {
   const routerMap = {};
-  const mergeMenuAndRouter = () => {
-    menuData.forEach(menuItem => {
+  const mergeMenuAndRouter = data => {
+    data.forEach(menuItem => {
       if (menuItem.children) {
         mergeMenuAndRouter(menuItem.children);
       }
@@ -100,8 +100,7 @@ class BasicLayout extends React.PureComponent {
     super(props);
     this.getPageTitle = memoizeOne(this.getPageTitle);
     // Because there are many places to be. So put it here
-    this.breadcrumbNameMap = getBreadcrumbNameMap();
-    console.log(this.breadcrumbNameMap);
+    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
 
   state = {
@@ -133,7 +132,7 @@ class BasicLayout extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    this.breadcrumbNameMap = getBreadcrumbNameMap();
+    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
 
   componentWillUnmount() {
@@ -231,6 +230,7 @@ class BasicLayout extends React.PureComponent {
             Authorized={Authorized}
             theme={silderTheme}
             onCollapse={this.handleMenuCollapse}
+            menuData={menuData}
             {...this.props}
           />
         )}
