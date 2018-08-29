@@ -26,6 +26,13 @@ class TagSelect extends Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps && nextProps.value) {
+      return { value: nextProps.value };
+    }
+    return null;
+  }
+
   onChange = value => {
     const { onChange } = this.props;
     if (!('value' in this.props)) {
@@ -43,13 +50,6 @@ class TagSelect extends Component {
     }
     this.onChange(checkedTags);
   };
-
-  static getDerivedStateFromProps(nextProps) {
-    if ('value' in nextProps && nextProps.value) {
-      return { value: nextProps.value };
-    }
-    return null;
-  }
 
   getAllTags() {
     let { children } = this.props;

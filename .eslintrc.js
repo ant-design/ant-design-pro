@@ -10,6 +10,7 @@ module.exports = {
   },
   rules: {
     'jsx-a11y/href-no-hash': [0],
+    'react/sort-comp': 1,
   },
   settings: {
     polyfills: ['fetch', 'promises'],

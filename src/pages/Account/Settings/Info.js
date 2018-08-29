@@ -41,15 +41,6 @@ export default class Info extends Component {
     });
   }
 
-  componentDidMount() {
-    window.addEventListener('resize', this.resize);
-    this.resize();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
-  }
-
   static getDerivedStateFromProps(props, state) {
     const { match, location } = props;
     let selectKey = location.pathname.replace(`${match.path}/`, '');
@@ -58,6 +49,15 @@ export default class Info extends Component {
       return { selectKey };
     }
     return null;
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resize);
+    this.resize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
   }
 
   getmenu = () => {

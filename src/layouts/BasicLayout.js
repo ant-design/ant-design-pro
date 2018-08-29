@@ -64,9 +64,6 @@ const query = {
 };
 
 class BasicLayout extends React.PureComponent {
-  state = {
-    rendering: true,
-  };
   constructor(props) {
     super(props);
     const { menuData } = this.props;
@@ -74,6 +71,28 @@ class BasicLayout extends React.PureComponent {
     // Because there are many places to be. So put it here
     this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
+
+  state = {
+    rendering: true,
+  };
+
+  componentDidMount() {
+    this.renderRef = requestAnimationFrame(() => {
+      this.setState({
+        rendering: false,
+      });
+    });
+  }
+
+  componentDidUpdate() {
+    const { menuData } = this.props;
+    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.renderRef);
+  }
+
   getContext() {
     const { location } = this.props;
     return {
@@ -81,10 +100,7 @@ class BasicLayout extends React.PureComponent {
       breadcrumbNameMap: this.breadcrumbNameMap,
     };
   }
-  componentDidUpdate() {
-    const { menuData } = this.props;
-    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
-  }
+
   getPageTitle = pathname => {
     let currRouterData = null;
     // match params path
@@ -149,16 +165,7 @@ class BasicLayout extends React.PureComponent {
       payload: collapsed,
     });
   };
-  componentDidMount() {
-    this.renderRef = requestAnimationFrame(() => {
-      this.setState({
-        rendering: false,
-      });
-    });
-  }
-  componentWillUnmount() {
-    cancelAnimationFrame(this.renderRef);
-  }
+
   render() {
     const {
       isMobile,
