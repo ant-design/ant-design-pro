@@ -8,10 +8,12 @@ class Excrption extends React.PureComponent {
   static defaultProps = {
     backText: 'back to home',
   };
+
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   render() {
     const {
       className,

@@ -174,6 +174,7 @@ class BasicLayout extends React.PureComponent {
       children,
       location: { pathname },
     } = this.props;
+    const { rendering } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const layout = (
       <Layout>
@@ -209,7 +210,7 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {this.state.rendering && process.env.NODE_ENV === 'production' ? null : ( // Do show SettingDrawer in production
+        {rendering && process.env.NODE_ENV === 'production' ? null : ( // Do show SettingDrawer in production
           <SettingDrawer />
         )}
       </React.Fragment>

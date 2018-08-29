@@ -4,6 +4,9 @@ import isEqual from 'lodash.isequal';
 import styles from './style.less';
 
 export default class TableForm extends PureComponent {
+  index = 0;
+
+  cacheOriginData = {};
 
   constructor(props) {
     super(props);
@@ -25,10 +28,6 @@ export default class TableForm extends PureComponent {
       value: nextProps.value,
     };
   }
-
-  index = 0;
-
-  cacheOriginData = {};
 
   getRowByKey(key, newData) {
     const { data } = this.state;
@@ -244,9 +243,7 @@ export default class TableForm extends PureComponent {
           columns={columns}
           dataSource={data}
           pagination={false}
-          rowClassName={record => {
-            return record.editable ? styles.editable : '';
-          }}
+          rowClassName={record => (record.editable ? styles.editable : '')}
         />
         <Button
           style={{ width: '100%', marginTop: 16, marginBottom: 8 }}

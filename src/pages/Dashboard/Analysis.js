@@ -157,13 +157,12 @@ class Analysis extends Component {
       salesTypeDataOffline,
     } = chart;
     const loading = propsLoding || stateLoading;
-    const salesPieData =
-      salesType === 'all'
-        ? salesTypeData
-        : salesType === 'online'
-          ? salesTypeDataOnline
-          : salesTypeDataOffline;
-
+    let salesPieData;
+    if (salesType === 'all') {
+      salesPieData = salesTypeData;
+    } else {
+      salesPieData = salesType === 'online' ? salesTypeDataOnline : salesTypeDataOffline;
+    }
     const menu = (
       <Menu>
         <Menu.Item>操作一</Menu.Item>

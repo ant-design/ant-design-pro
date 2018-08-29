@@ -38,8 +38,12 @@ const { Search, TextArea } = Input;
 }))
 @Form.create()
 export default class BasicList extends PureComponent {
-
   state = { visible: false, done: false };
+
+  formLayout = {
+    labelCol: { span: 7 },
+    wrapperCol: { span: 13 },
+  };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -50,11 +54,6 @@ export default class BasicList extends PureComponent {
       },
     });
   }
-
-  formLayout = {
-    labelCol: { span: 7 },
-    wrapperCol: { span: 13 },
-  };
 
   showModal = () => {
     this.setState({
