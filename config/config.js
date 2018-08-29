@@ -1,4 +1,5 @@
 // https://umijs.org/config/
+const os = require('os');
 const pageRoutes = require('./router.config');
 const webpackplugin = require('./plugin.config');
 const defaultSetting = require('../src/defaultSetting');
@@ -20,7 +21,7 @@ export default {
         },
         dynamicImport: true,
         polyfills: ['ie11'],
-        ...(!process.env.TEST && require('os').platform() === 'darwin'
+        ...(!process.env.TEST && os.platform() === 'darwin'
           ? {
               dll: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
               hardSource: true,
@@ -60,9 +61,8 @@ export default {
           .map(a => a.replace(/([A-Z])/g, '-$1'))
           .map(a => a.toLowerCase());
         return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
-      } else {
-        return localName;
       }
+      return localName;
     },
   },
   manifest: {
