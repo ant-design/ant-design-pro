@@ -23,10 +23,10 @@ const { check } = Authorized;
  * 获取面包屑映射
  * @param {Object} menuData 菜单配置
  */
-const getBreadcrumbNameMap = memoizeOne(meun => {
+const getBreadcrumbNameMap = memoizeOne((meun) => {
   const routerMap = {};
-  const mergeMeunAndRouter = meunData => {
-    meunData.forEach(meunItem => {
+  const mergeMeunAndRouter = (meunData) => {
+    meunData.forEach((meunItem) => {
       if (meunItem.children) {
         mergeMeunAndRouter(meunItem.children);
       }
@@ -101,10 +101,10 @@ class BasicLayout extends React.PureComponent {
     };
   }
 
-  getPageTitle = pathname => {
+  getPageTitle = (pathname) => {
     let currRouterData = null;
     // match params path
-    Object.keys(this.breadcrumbNameMap).forEach(key => {
+    Object.keys(this.breadcrumbNameMap).forEach((key) => {
       if (pathToRegexp(key).test(pathname)) {
         currRouterData = this.breadcrumbNameMap[key];
       }
@@ -151,14 +151,14 @@ class BasicLayout extends React.PureComponent {
       const { routerData } = this.props;
       // get the first authorized route path in routerData
       const authorizedPath = Object.keys(routerData).find(
-        item => check(routerData[item].authority, item) && item !== '/'
+        item => check(routerData[item].authority, item) && item !== '/',
       );
       return authorizedPath;
     }
     return redirect;
   };
 
-  handleMenuCollapse = collapsed => {
+  handleMenuCollapse = (collapsed) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'global/changeLayoutCollapsed',
@@ -174,6 +174,7 @@ class BasicLayout extends React.PureComponent {
       children,
       location: { pathname },
     } = this.props;
+    const { rendering } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const layout = (
       <Layout>
@@ -209,7 +210,7 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {this.state.rendering ? null : <SettingDarwer />}
+        {rendering ? null : <SettingDarwer />}
       </React.Fragment>
     );
   }

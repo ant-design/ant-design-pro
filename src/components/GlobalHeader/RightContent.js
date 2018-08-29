@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage, setLocale, getLocale } from 'umi/locale';
-import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
+import {
+  Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button,
+} from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
@@ -13,7 +15,7 @@ export default class GlobalHeaderRight extends PureComponent {
     if (notices.length === 0) {
       return {};
     }
-    const newNotices = notices.map(notice => {
+    const newNotices = notices.map((notice) => {
       const newNotice = { ...notice };
       if (newNotice.datetime) {
         newNotice.datetime = moment(notice.datetime).fromNow();
@@ -89,10 +91,10 @@ export default class GlobalHeaderRight extends PureComponent {
           className={`${styles.action} ${styles.search}`}
           placeholder="站内搜索"
           dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
-          onSearch={value => {
+          onSearch={(value) => {
             console.log('input', value); // eslint-disable-line
           }}
-          onPressEnter={value => {
+          onPressEnter={(value) => {
             console.log('enter', value); // eslint-disable-line
           }}
         />

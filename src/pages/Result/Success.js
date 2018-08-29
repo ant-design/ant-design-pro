@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi/locale';
-import { Button, Row, Col, Icon, Steps, Card } from 'antd';
+import {
+  Button, Row, Col, Icon, Steps, Card,
+} from 'antd';
 import Result from '@/components/Result';
 import PageHeaderLayout from '@/layouts/PageHeaderLayout';
 
@@ -74,40 +76,40 @@ const extra = (
     </Row>
     <Steps style={{ marginLeft: -42, width: 'calc(100% + 84px)' }} progressDot current={1}>
       <Step
-        title={
+        title={(
           <span style={{ fontSize: 14 }}>
             <FormattedMessage id="app.result.success.step1-title" defaultMessage="Create project" />
           </span>
-        }
+)}
         description={desc1}
       />
       <Step
-        title={
+        title={(
           <span style={{ fontSize: 14 }}>
             <FormattedMessage
               id="app.result.success.step2-title"
               defaultMessage="Departmental preliminary review"
             />
           </span>
-        }
+)}
         description={desc2}
       />
       <Step
-        title={
+        title={(
           <span style={{ fontSize: 14 }}>
             <FormattedMessage
               id="app.result.success.step3-title"
               defaultMessage="Financial review"
             />
           </span>
-        }
+)}
       />
       <Step
-        title={
+        title={(
           <span style={{ fontSize: 14 }}>
             <FormattedMessage id="app.result.success.step4-title" defaultMessage="Finish" />
           </span>
-        }
+)}
       />
     </Steps>
   </Fragment>

@@ -14,7 +14,7 @@ const defaultSetting = {
 
 const buildLessAndWeak = (themeColor, colorWeak) => {
   // Determine if the component is remounted
-  if (themeColor && themeColor !== '#1890FF' && themeColor !== window['antd_pro_less_color']) {
+  if (themeColor && themeColor !== '#1890FF' && themeColor !== window.antd_pro_less_color) {
     window.less.refresh().then(() => {
       const hideMessage = message.loading('正在编译主题！', 0);
       setTimeout(() => {
@@ -24,11 +24,11 @@ const buildLessAndWeak = (themeColor, colorWeak) => {
             '@input-hover-border-color': themeColor,
           })
           .then(() => {
-            window['antd_pro_less_color'] = themeColor;
+            window.antd_pro_less_color = themeColor;
             hideMessage();
           })
           .catch(() => {
-            message.error(`Failed to update theme`);
+            message.error('Failed to update theme');
           });
       }, 200);
     });
@@ -47,7 +47,7 @@ export default {
     getSetting(state) {
       const setting = {};
       const urlParams = new URL(window.location.href);
-      Object.keys(state).forEach(key => {
+      Object.keys(state).forEach((key) => {
         if (urlParams.searchParams.has(key)) {
           const value = urlParams.searchParams.get(key);
           setting[key] = value === '1' ? true : value;
@@ -62,12 +62,12 @@ export default {
     },
     changeSetting(state, { payload }) {
       const urlParams = new URL(window.location.href);
-      Object.keys(defaultSetting).forEach(key => {
+      Object.keys(defaultSetting).forEach((key) => {
         if (urlParams.searchParams.has(key)) {
           urlParams.searchParams.delete(key);
         }
       });
-      Object.keys(payload).forEach(key => {
+      Object.keys(payload).forEach((key) => {
         if (key === 'collapse') {
           return;
         }

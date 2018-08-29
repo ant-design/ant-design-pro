@@ -46,9 +46,9 @@ function getRule(req, res, u) {
   if (params.status) {
     const status = params.status.split(',');
     let filterDataSource = [];
-    status.forEach(s => {
+    status.forEach((s) => {
       filterDataSource = filterDataSource.concat(
-        dataSource.filter(data => parseInt(data.status, 10) === parseInt(s[0], 10))
+        dataSource.filter(data => parseInt(data.status, 10) === parseInt(s[0], 10)),
       );
     });
     dataSource = filterDataSource;
@@ -86,7 +86,9 @@ function postRule(req, res, u, b) {
   }
 
   const body = (b && b.body) || req.body;
-  const { method, name, desc, key } = body;
+  const {
+    method, name, desc, key,
+  } = body;
 
   switch (method) {
     /* eslint no-case-declarations:0 */
@@ -114,7 +116,7 @@ function postRule(req, res, u, b) {
       });
       break;
     case 'update':
-      tableListDataSource = tableListDataSource.map(item => {
+      tableListDataSource = tableListDataSource.map((item) => {
         if (item.key === key) {
           Object.assign(item, { desc, name });
           return item;

@@ -11,7 +11,7 @@ export default class TriggerException extends PureComponent {
     isloading: false,
   };
 
-  triggerError = code => {
+  triggerError = (code) => {
     this.setState({
       isloading: true,
     });

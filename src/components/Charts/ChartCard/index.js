@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './index.less';
 
-const renderTotal = total => {
+const renderTotal = (total) => {
   let totalDom;
   switch (typeof total) {
     case 'undefined':
@@ -21,7 +21,9 @@ const renderTotal = total => {
 
 class ChartCard extends React.PureComponent {
   renderConnet = () => {
-    const { contentHeight, title, avatar, action, total, footer, children, loading } = this.props;
+    const {
+      contentHeight, title, avatar, action, total, footer, children, loading,
+    } = this.props;
     if (loading) {
       return false;
     }

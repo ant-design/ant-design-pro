@@ -9,7 +9,7 @@ export default {
   },
 
   effects: {
-    *fetchNotices(_, { call, put }) {
+    * fetchNotices(_, { call, put }) {
       const data = yield call(queryNotices);
       yield put({
         type: 'saveNotices',
@@ -20,7 +20,7 @@ export default {
         payload: data.length,
       });
     },
-    *clearNotices({ payload }, { put, select }) {
+    * clearNotices({ payload }, { put, select }) {
       yield put({
         type: 'saveClearedNotices',
         payload,

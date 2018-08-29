@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import Link from 'umi/link';
 import router from 'umi/router';
-import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
+import {
+  Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input,
+} from 'antd';
 import GridContent from '@/layouts/GridContent';
 import styles from './Center.less';
 
@@ -36,7 +38,7 @@ export default class Center extends PureComponent {
     });
   }
 
-  onTabChange = key => {
+  onTabChange = (key) => {
     const { match } = this.props;
     switch (key) {
       case 'articles':
@@ -57,11 +59,11 @@ export default class Center extends PureComponent {
     this.setState({ inputVisible: true }, () => this.input.focus());
   };
 
-  saveInputRef = input => {
+  saveInputRef = (input) => {
     this.input = input;
   };
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     this.setState({ inputValue: e.target.value });
   };
 
@@ -97,7 +99,9 @@ export default class Center extends PureComponent {
         key: 'articles',
         tab: (
           <span>
-            文章 <span style={{ fontSize: 14 }}>(8)</span>
+            文章
+            {' '}
+            <span style={{ fontSize: 14 }}>(8)</span>
           </span>
         ),
       },
@@ -105,7 +109,9 @@ export default class Center extends PureComponent {
         key: 'applications',
         tab: (
           <span>
-            应用 <span style={{ fontSize: 14 }}>(8)</span>
+            应用
+            {' '}
+            <span style={{ fontSize: 14 }}>(8)</span>
           </span>
         ),
       },
@@ -113,7 +119,9 @@ export default class Center extends PureComponent {
         key: 'projects',
         tab: (
           <span>
-            项目 <span style={{ fontSize: 14 }}>(8)</span>
+            项目
+            {' '}
+            <span style={{ fontSize: 14 }}>(8)</span>
           </span>
         ),
       },

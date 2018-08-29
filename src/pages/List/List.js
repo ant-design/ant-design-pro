@@ -6,7 +6,7 @@ import PageHeaderLayout from '@/layouts/PageHeaderLayout';
 
 @connect()
 export default class SearchList extends Component {
-  handleTabChange = key => {
+  handleTabChange = (key) => {
     const { match } = this.props;
     switch (key) {
       case 'articles':

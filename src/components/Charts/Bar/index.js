@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Chart, Axis, Tooltip, Geom } from 'bizcharts';
+import {
+  Chart, Axis, Tooltip, Geom,
+} from 'bizcharts';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import autoHeight from '../autoHeight';
@@ -19,11 +21,11 @@ class Bar extends Component {
     window.removeEventListener('resize', this.resize);
   }
 
-  handleRoot = n => {
+  handleRoot = (n) => {
     this.root = n;
   };
 
-  handleRef = n => {
+  handleRef = (n) => {
     this.node = n;
   };
 

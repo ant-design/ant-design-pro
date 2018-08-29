@@ -35,7 +35,9 @@ export default class FooterToolbar extends Component {
   };
 
   render() {
-    const { children, className, extra, ...restProps } = this.props;
+    const {
+      children, className, extra, ...restProps
+    } = this.props;
     const { width } = this.state;
     return (
       <div className={classNames(className, styles.toolbar)} style={{ width }} {...restProps}>

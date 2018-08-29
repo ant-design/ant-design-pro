@@ -10,7 +10,7 @@ export default {
   },
 
   effects: {
-    *fetchProvince(_, { call, put }) {
+    * fetchProvince(_, { call, put }) {
       yield put({
         type: 'changeLoading',
         payload: true,
@@ -25,7 +25,7 @@ export default {
         payload: false,
       });
     },
-    *fetchCity({ payload }, { call, put }) {
+    * fetchCity({ payload }, { call, put }) {
       yield put({
         type: 'changeLoading',
         payload: true,

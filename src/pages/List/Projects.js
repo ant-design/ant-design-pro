@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
-import { Row, Col, Form, Card, Select, List } from 'antd';
+import {
+  Row, Col, Form, Card, Select, List,
+} from 'antd';
 
 import TagSelect from '@/components/TagSelect';
 import AvatarList from '@/components/AvatarList';
@@ -34,7 +36,7 @@ export default class CoverCardList extends PureComponent {
     const { form, dispatch } = this.props;
     // setTimeout 用于保证获取表单值是在所有表单字段更新完毕的时候
     setTimeout(() => {
-      form.validateFields(err => {
+      form.validateFields((err) => {
         if (!err) {
           // eslint-disable-next-line
           dispatch({
@@ -60,7 +62,14 @@ export default class CoverCardList extends PureComponent {
       <List
         rowKey="id"
         loading={loading}
-        grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
+        grid={{
+          gutter: 24,
+          xl: 4,
+          lg: 3,
+          md: 3,
+          sm: 2,
+          xs: 1,
+        }}
         dataSource={list}
         renderItem={item => (
           <List.Item>
@@ -120,7 +129,7 @@ export default class CoverCardList extends PureComponent {
                     <TagSelect.Option value="cat10">类目十</TagSelect.Option>
                     <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
                     <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
-                  </TagSelect>
+                  </TagSelect>,
                 )}
               </FormItem>
             </StandardFormRow>
@@ -135,7 +144,7 @@ export default class CoverCardList extends PureComponent {
                         style={{ maxWidth: 200, width: '100%' }}
                       >
                         <Option value="lisa">王昭君</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>
@@ -149,7 +158,7 @@ export default class CoverCardList extends PureComponent {
                       >
                         <Option value="good">优秀</Option>
                         <Option value="normal">普通</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>

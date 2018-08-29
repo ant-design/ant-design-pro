@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Row, Col } from 'antd';
+import {
+  Form, Input, Button, Row, Col,
+} from 'antd';
 import omit from 'omit.js';
 import styles from './index.less';
 import ItemMap from './map';
@@ -120,24 +122,22 @@ class WarpFormItem extends Component {
 }
 
 const LoginItem = {};
-Object.keys(ItemMap).forEach(key => {
+Object.keys(ItemMap).forEach((key) => {
   const item = ItemMap[key];
-  LoginItem[key] = props => {
-    return (
-      <LoginContext.Consumer>
-        {context => (
-          <WarpFormItem
-            customprops={item.props}
-            {...props}
-            rules={item.rules}
-            type={key}
-            updateActive={context.updateActive}
-            form={context.form}
-          />
-        )}
-      </LoginContext.Consumer>
-    );
-  };
+  LoginItem[key] = props => (
+    <LoginContext.Consumer>
+      {context => (
+        <WarpFormItem
+          customprops={item.props}
+          {...props}
+          rules={item.rules}
+          type={key}
+          updateActive={context.updateActive}
+          form={context.form}
+        />
+      )}
+    </LoginContext.Consumer>
+  );
 });
 
 export default LoginItem;

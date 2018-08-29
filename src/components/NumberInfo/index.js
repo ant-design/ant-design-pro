@@ -3,7 +3,9 @@ import { Icon } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 
-const NumberInfo = ({ theme, title, subTitle, total, subTotal, status, suffix, gap, ...rest }) => (
+const NumberInfo = ({
+  theme, title, subTitle, total, subTotal, status, suffix, gap, ...rest
+}) => (
   <div
     className={classNames(styles.numberInfo, {
       [styles[`numberInfo${theme}`]]: theme,

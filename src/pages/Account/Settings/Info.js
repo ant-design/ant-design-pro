@@ -106,7 +106,7 @@ export default class Info extends Component {
       <GridContent>
         <div
           className={styles.main}
-          ref={ref => {
+          ref={(ref) => {
             this.main = ref;
           }}
         >

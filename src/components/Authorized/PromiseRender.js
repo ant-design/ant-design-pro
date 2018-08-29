@@ -36,7 +36,7 @@ export default class PromiseRender extends React.PureComponent {
   // AuthorizedRoute is already instantiated
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
-  checkIsInstantiation = target => {
+  checkIsInstantiation = (target) => {
     if (!React.isValidElement(target)) {
       return target;
     }
@@ -45,7 +45,9 @@ export default class PromiseRender extends React.PureComponent {
 
   render() {
     const { component: Component } = this.state;
-    const { ok, error, promise, ...rest } = this.props;
+    const {
+      ok, error, promise, ...rest
+    } = this.props;
     return Component ? (
       <Component {...rest} />
     ) : (

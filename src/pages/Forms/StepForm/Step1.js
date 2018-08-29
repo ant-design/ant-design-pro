@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Select, Divider } from 'antd';
+import {
+  Form, Input, Button, Select, Divider,
+} from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
 
@@ -44,7 +46,7 @@ export default class Step1 extends React.PureComponent {
             })(
               <Select placeholder="test@example.com">
                 <Option value="ant-design@alipay.com">ant-design@alipay.com</Option>
-              </Select>
+              </Select>,
             )}
           </Form.Item>
           <Form.Item {...formItemLayout} label="收款账户">

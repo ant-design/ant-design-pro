@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Card, Badge, Table, Divider } from 'antd';
+import {
+  Card, Badge, Table, Divider,
+} from 'antd';
 import DescriptionList from '@/components/DescriptionList';
 import PageHeaderLayout from '@/layouts/PageHeaderLayout';
 import styles from './BasicProfile.less';
@@ -22,12 +24,11 @@ const progressColumns = [
     title: '状态',
     dataIndex: 'status',
     key: 'status',
-    render: text =>
-      text === 'success' ? (
-        <Badge status="success" text="成功" />
-      ) : (
-        <Badge status="processing" text="进行中" />
-      ),
+    render: text => (text === 'success' ? (
+      <Badge status="success" text="成功" />
+    ) : (
+      <Badge status="processing" text="进行中" />
+    )),
   },
   {
     title: '操作员ID',
@@ -60,7 +61,7 @@ export default class BasicProfile extends Component {
     if (basicGoods.length) {
       let num = 0;
       let amount = 0;
-      basicGoods.forEach(item => {
+      basicGoods.forEach((item) => {
         num += Number(item.num);
         amount += Number(item.amount);
       });

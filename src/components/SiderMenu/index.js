@@ -7,9 +7,9 @@ import SiderMenu from './SliderMenu';
  * [{path:string},{path:string}] => {path,path2}
  * @param  menus
  */
-const getFlatMenuKeys = menuData => {
+const getFlatMenuKeys = (menuData) => {
   let keys = [];
-  menuData.forEach(item => {
+  menuData.forEach((item) => {
     if (item.children) {
       keys = keys.concat(getFlatMenuKeys(item.children));
     }
@@ -18,7 +18,7 @@ const getFlatMenuKeys = menuData => {
   return keys;
 };
 
-const SiderMenuWrapper = props => {
+const SiderMenuWrapper = (props) => {
   const { isMobile, menuData, collapsed } = props;
   return isMobile ? (
     <Drawer

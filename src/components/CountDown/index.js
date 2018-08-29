@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;
 }
-const initTime = props => {
+const initTime = (props) => {
   let lastTime = 0;
   let targetTime = 0;
   try {
@@ -23,6 +23,9 @@ const initTime = props => {
 };
 
 class CountDown extends Component {
+  timer = 0;
+
+  interval = 1000;
 
   constructor(props) {
     super(props);
@@ -58,14 +61,10 @@ class CountDown extends Component {
     clearTimeout(this.timer);
   }
 
-  timer = 0;
-
-  interval = 1000;
-
   // defaultFormat = time => (
   //  <span>{moment(time).format('hh:mm:ss')}</span>
   // );
-  defaultFormat = time => {
+  defaultFormat = (time) => {
     const hours = 60 * 60 * 1000;
     const minutes = 60 * 1000;
 
@@ -75,9 +74,9 @@ class CountDown extends Component {
     return (
       <span>
         {fixedZero(h)}
-        :
+:
         {fixedZero(m)}
-        :
+:
         {fixedZero(s)}
       </span>
     );
@@ -98,7 +97,7 @@ class CountDown extends Component {
             if (onEnd) {
               onEnd();
             }
-          }
+          },
         );
       } else {
         lastTime -= this.interval;
@@ -108,7 +107,7 @@ class CountDown extends Component {
           },
           () => {
             this.tick();
-          }
+          },
         );
       }
     }, this.interval);

@@ -12,7 +12,7 @@ const { SubMenu } = Menu;
 //   icon: 'setting',
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
-const getIcon = icon => {
+const getIcon = (icon) => {
   if (typeof icon === 'string' && icon.indexOf('http') === 0) {
     return <img src={icon} alt="icon" className={styles.icon} />;
   }
@@ -23,9 +23,7 @@ const getIcon = icon => {
 };
 
 export const getMenuMatches = (flatMenuKeys, path) => {
-  return flatMenuKeys.filter(item => {
-    return pathToRegexp(item).test(path);
-  });
+  return flatMenuKeys.filter(item => pathToRegexp(item).test(path));
 };
 
 export default class BaseMenu extends PureComponent {
@@ -41,7 +39,7 @@ export default class BaseMenu extends PureComponent {
    */
   getFlatMenuKeys(menus) {
     let keys = [];
-    menus.forEach(item => {
+    menus.forEach((item) => {
       if (item.children) {
         keys = keys.concat(this.getFlatMenuKeys(item.children));
       }
@@ -60,7 +58,7 @@ export default class BaseMenu extends PureComponent {
     }
     return menusData
       .filter(item => item.name && !item.hideInMenu)
-      .map(item => {
+      .map((item) => {
         // make dom
         const ItemDom = this.getSubMenuOrItem(item, parent);
         return this.checkPermissionItem(item.authority, ItemDom);
@@ -79,7 +77,7 @@ export default class BaseMenu extends PureComponent {
   /**
    * get SubMenu or Item
    */
-  getSubMenuOrItem = item => {
+  getSubMenuOrItem = (item) => {
     // doc: add hideChildren
     if (item.children && !item.hideChildren && item.children.some(child => child.name)) {
       const name = formatMessage({ id: item.locale });
@@ -100,9 +98,8 @@ export default class BaseMenu extends PureComponent {
           {this.getNavMenuItems(item.children)}
         </SubMenu>
       );
-    } else {
-      return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
     }
+    return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
   };
 
   /**
@@ -110,7 +107,7 @@ export default class BaseMenu extends PureComponent {
    * Judge whether it is http link.return a or Link
    * @memberof SiderMenu
    */
-  getMenuItemPath = item => {
+  getMenuItemPath = (item) => {
     const name = formatMessage({ id: item.locale });
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
@@ -133,8 +130,8 @@ export default class BaseMenu extends PureComponent {
         onClick={
           isMobile
             ? () => {
-                onCollapse(true);
-              }
+              onCollapse(true);
+            }
             : undefined
         }
       >
@@ -143,6 +140,7 @@ export default class BaseMenu extends PureComponent {
       </Link>
     );
   };
+
   // permission to check
   checkPermissionItem = (authority, ItemDom) => {
     const { Authorized } = this.props;
@@ -153,12 +151,11 @@ export default class BaseMenu extends PureComponent {
     return ItemDom;
   };
 
-  conversionPath = path => {
+  conversionPath = (path) => {
     if (path && path.indexOf('http') === 0) {
       return path;
-    } else {
-      return `/${path || ''}`.replace(/\/+/g, '/');
     }
+    return `/${path || ''}`.replace(/\/+/g, '/');
   };
 
   render() {

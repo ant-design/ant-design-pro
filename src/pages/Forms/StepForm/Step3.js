@@ -45,7 +45,9 @@ export default class Step3 extends React.PureComponent {
             转账金额：
           </Col>
           <Col xs={24} sm={16}>
-            <span className={styles.money}>{data.amount}</span> 元
+            <span className={styles.money}>{data.amount}</span>
+            {' '}
+元
           </Col>
         </Row>
       </div>

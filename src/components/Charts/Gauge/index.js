@@ -1,10 +1,12 @@
 import React from 'react';
-import { Chart, Geom, Axis, Coord, Guide, Shape } from 'bizcharts';
+import {
+  Chart, Geom, Axis, Coord, Guide, Shape,
+} from 'bizcharts';
 import autoHeight from '../autoHeight';
 
 const { Arc, Html, Line } = Guide;
 
-const defaultFormatter = val => {
+const defaultFormatter = (val) => {
   switch (val) {
     case '2':
       return '差';
@@ -142,15 +144,13 @@ export default class Gauge extends React.Component {
           />
           <Html
             position={['50%', '95%']}
-            html={() => {
-              return `
+            html={() => `
                 <div style="width: 300px;text-align: center;font-size: 12px!important;">
                   <p style="font-size: 14px; color: rgba(0,0,0,0.43);margin: 0;">${title}</p>
                   <p style="font-size: 24px;color: rgba(0,0,0,0.85);margin: 0;">
                     ${data[0].value * 10}%
                   </p>
-                </div>`;
-            }}
+                </div>`}
           />
         </Guide>
         <Geom

@@ -32,7 +32,7 @@ class HeaderView extends PureComponent {
     return collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)';
   };
 
-  handleNoticeClear = type => {
+  handleNoticeClear = (type) => {
     message.success(`清空了${type}`);
     const { dispatch } = this.props;
     dispatch({
@@ -62,7 +62,7 @@ class HeaderView extends PureComponent {
     }
   };
 
-  handleNoticeVisibleChange = visible => {
+  handleNoticeVisibleChange = (visible) => {
     if (visible) {
       const { dispatch } = this.props;
       dispatch({
@@ -71,7 +71,7 @@ class HeaderView extends PureComponent {
     }
   };
 
-  handScroll = e => {
+  handScroll = () => {
     const { autoHideHeader } = this.props;
     const { visible } = this.state;
     if (!autoHideHeader) {
@@ -99,7 +99,6 @@ class HeaderView extends PureComponent {
         }
         this.oldScrollTop = scrollTop;
         this.ticking = false;
-        return;
       });
     }
     this.ticking = false;
@@ -145,7 +144,9 @@ class HeaderView extends PureComponent {
   }
 }
 
-export default connect(({ user, global, setting, loading }) => ({
+export default connect(({
+  user, global, setting, loading,
+}) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
   fetchingNotices: loading.effects['global/fetchNotices'],

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Chart, Tooltip, Geom, Coord } from 'bizcharts';
+import {
+  Chart, Tooltip, Geom, Coord,
+} from 'bizcharts';
 import { DataView } from '@antv/data-set';
 import { Divider } from 'antd';
 import classNames from 'classnames';
@@ -24,7 +26,7 @@ export default class Pie extends Component {
       () => {
         this.requestRef = requestAnimationFrame(() => this.resize());
       },
-      { passive: true }
+      { passive: true },
     );
   }
 
@@ -43,7 +45,7 @@ export default class Pie extends Component {
     this.resize.cancel();
   }
 
-  getG2Instance = chart => {
+  getG2Instance = (chart) => {
     this.chart = chart;
     requestAnimationFrame(() => {
       this.getLegendData();
@@ -58,7 +60,7 @@ export default class Pie extends Component {
     if (!geom) return;
     const items = geom.get('dataArray') || []; // 获取图形对应的
 
-    const legendData = items.map(item => {
+    const legendData = items.map((item) => {
       /* eslint no-underscore-dangle:0 */
       const origin = item[0]._origin;
       origin.color = item[0].color;
@@ -71,7 +73,7 @@ export default class Pie extends Component {
     });
   };
 
-  handleRoot = n => {
+  handleRoot = (n) => {
     this.root = n;
   };
 
@@ -169,12 +171,11 @@ export default class Pie extends Component {
     if (percent) {
       selected = false;
       tooltip = false;
-      formatColor = value => {
+      formatColor = (value) => {
         if (value === '占比') {
           return color || 'rgba(24, 144, 255, 0.85)';
-        } else {
-          return '#F0F2F5';
         }
+        return '#F0F2F5';
       };
 
       data = [
@@ -257,7 +258,7 @@ export default class Pie extends Component {
                 <span className={styles.legendTitle}>{item.x}</span>
                 <Divider type="vertical" />
                 <span className={styles.percent}>
-                  {`${(isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}
+                  {`${(Number.isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}
                 </span>
                 <span className={styles.value}>{valueFormat ? valueFormat(item.y) : item.y}</span>
               </li>

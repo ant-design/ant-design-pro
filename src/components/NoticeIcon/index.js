@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Popover, Icon, Tabs, Badge, Spin } from 'antd';
+import {
+  Popover, Icon, Tabs, Badge, Spin,
+} from 'antd';
 import classNames from 'classnames';
 import List from './NoticeList';
 import styles from './index.less';
@@ -27,21 +29,22 @@ export default class NoticeIcon extends PureComponent {
     onItemClick(item, tabProps);
   };
 
-  onTabChange = tabType => {
+  onTabChange = (tabType) => {
     const { onTabChange } = this.props;
     onTabChange(tabType);
   };
 
   getNotificationBox() {
-    const { children, loading, locale, onClear } = this.props;
+    const {
+      children, loading, locale, onClear,
+    } = this.props;
     if (!children) {
       return null;
     }
-    const panes = React.Children.map(children, child => {
-      const title =
-        child.props.list && child.props.list.length > 0
-          ? `${child.props.title} (${child.props.list.length})`
-          : child.props.title;
+    const panes = React.Children.map(children, (child) => {
+      const title = child.props.list && child.props.list.length > 0
+        ? `${child.props.title} (${child.props.list.length})`
+        : child.props.title;
       return (
         <TabPane tab={title} key={child.props.title}>
           <List
@@ -65,7 +68,9 @@ export default class NoticeIcon extends PureComponent {
   }
 
   render() {
-    const { className, count, popupAlign, popupVisible, onPopupVisibleChange, bell } = this.props;
+    const {
+      className, count, popupAlign, popupVisible, onPopupVisibleChange, bell,
+    } = this.props;
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const notificationBox = this.getNotificationBox();
     const NoticeBellIcon = bell || <Icon type="bell" className={styles.icon} />;

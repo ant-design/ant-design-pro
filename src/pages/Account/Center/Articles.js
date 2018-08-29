@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-import { List, Icon, Avatar, Tag } from 'antd';
+import {
+  List, Icon, Avatar, Tag,
+} from 'antd';
 import moment from 'moment';
 import { connect } from 'dva';
 import stylesArticles from '../../List/Articles.less';
@@ -19,12 +21,19 @@ export default class Center extends PureComponent {
         {text}
       </span>
     );
-    const ListContent = ({ data: { content, updatedAt, avatar, owner, href } }) => (
+    const ListContent = ({
+      data: {
+        content, updatedAt, avatar, owner, href,
+      },
+    }) => (
       <div className={stylesArticles.listContent}>
         <div className={stylesArticles.description}>{content}</div>
         <div className={stylesArticles.extra}>
           <Avatar src={avatar} size="small" />
-          <a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
+          <a href={href}>{owner}</a>
+          {' '}
+发布在
+          <a href={href}>{href}</a>
           <em>{moment(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
         </div>
       </div>
@@ -46,18 +55,18 @@ export default class Center extends PureComponent {
             ]}
           >
             <List.Item.Meta
-              title={
+              title={(
                 <a className={stylesArticles.listItemMetaTitle} href={item.href}>
                   {item.title}
                 </a>
-              }
-              description={
+)}
+              description={(
                 <span>
                   <Tag>Ant Design</Tag>
                   <Tag>设计语言</Tag>
                   <Tag>蚂蚁金服</Tag>
                 </span>
-              }
+)}
             />
             <ListContent data={item} />
           </List.Item>

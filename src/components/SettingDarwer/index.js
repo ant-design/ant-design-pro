@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Select, message, Drawer, List, Switch, Divider, Icon, Button } from 'antd';
+import {
+  Select, message, Drawer, List, Switch, Divider, Icon, Button,
+} from 'antd';
 import { formatMessage } from 'umi/locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
@@ -23,7 +25,9 @@ const Body = ({ children, title, style }) => (
 class SettingDarwer extends PureComponent {
   getLayOutSetting = () => {
     const {
-      setting: { grid, fixedHeader, layout, autoHideHeader, fixSiderbar },
+      setting: {
+        grid, fixedHeader, layout, autoHideHeader, fixSiderbar,
+      },
     } = this.props;
     return [
       {
@@ -76,9 +80,7 @@ class SettingDarwer extends PureComponent {
           />,
         ],
       },
-    ].filter(item => {
-      return !item.hide;
-    });
+    ].filter(item => !item.hide);
   };
 
   changeSetting = (key, value) => {
@@ -113,14 +115,16 @@ class SettingDarwer extends PureComponent {
 
   render() {
     const { setting } = this.props;
-    const { collapse, silderTheme, themeColor, layout, colorWeak } = setting;
+    const {
+      collapse, silderTheme, themeColor, layout, colorWeak,
+    } = setting;
     return (
       <Drawer
         visible={collapse}
         width={273}
         onClose={this.togglerContent}
         placement="right"
-        handler={
+        handler={(
           <div className={styles.handle}>
             {!collapse ? (
               <Icon
@@ -140,7 +144,7 @@ class SettingDarwer extends PureComponent {
               />
             )}
           </div>
-        }
+)}
         onHandleClick={this.togglerContent}
         style={{
           zIndex: 999,
