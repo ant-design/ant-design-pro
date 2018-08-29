@@ -115,7 +115,7 @@ class SettingDrawer extends PureComponent {
     return (
       <Drawer
         visible={collapse}
-        width={273}
+        width={300}
         onClose={this.togglerContent}
         placement="right"
         handler={
