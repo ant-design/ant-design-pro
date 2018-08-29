@@ -203,7 +203,13 @@ export default class PageHeader extends PureComponent {
     return (
       <div className={clsString}>
         <div className={wide ? styles.wide : ''}>
-          <Skeleton loading={loading}>
+          <Skeleton
+            loading={loading}
+            title={false}
+            active
+            paragraph={{ rows: 3 }}
+            avatar={{ size: 'large', shape: 'circle' }}
+          >
             {breadcrumb}
             <div className={styles.detail}>
               {logo && <div className={styles.logo}>{logo}</div>}
