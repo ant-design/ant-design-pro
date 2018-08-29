@@ -2,6 +2,7 @@ import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -19,6 +20,7 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
+
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -39,7 +41,7 @@ const cachedSave = (response, hashcode) => {
    * Clone a response data and store it in sessionStorage
    * Does not support data other than json, Cache only json
    */
-  let contentType = response.headers.get('Content-Type');
+  const contentType = response.headers.get('Content-Type');
   if (contentType && contentType.match(/application\/json/i)) {
     // All data is saved as text
     response
@@ -47,7 +49,7 @@ const cachedSave = (response, hashcode) => {
       .text()
       .then(content => {
         sessionStorage.setItem(hashcode, content);
-        sessionStorage.setItem(hashcode + ':timestamp', Date.now());
+        sessionStorage.setItem(`${hashcode}:timestamp`, Date.now());
       });
   }
   return response;
@@ -99,17 +101,16 @@ export default function request(url, options = {}) {
   const expirys = options.expirys || 60;
   // options.expirys !== false, return the cache,
   if (options.expirys !== false) {
-    let cached = sessionStorage.getItem(hashcode);
-    let whenCached = sessionStorage.getItem(hashcode + ':timestamp');
+    const cached = sessionStorage.getItem(hashcode);
+    const whenCached = sessionStorage.getItem(`${hashcode}:timestamp`);
     if (cached !== null && whenCached !== null) {
-      let age = (Date.now() - whenCached) / 1000;
+      const age = (Date.now() - whenCached) / 1000;
       if (age < expirys) {
-        let response = new Response(new Blob([cached]));
+        const response = new Response(new Blob([cached]));
         return response.json();
-      } else {
-        sessionStorage.removeItem(hashcode);
-        sessionStorage.removeItem(hashcode + ':timestamp');
       }
+      sessionStorage.removeItem(hashcode);
+      sessionStorage.removeItem(`${hashcode}:timestamp`);
     }
   }
   return fetch(url, newOptions)

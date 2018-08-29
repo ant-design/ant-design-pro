@@ -115,7 +115,8 @@ function getRelation(str1, str2) {
   const arr2 = str2.split('/');
   if (arr2.every((item, index) => item === arr1[index])) {
     return 1;
-  } else if (arr1.every((item, index) => item === arr2[index])) {
+  }
+  if (arr1.every((item, index) => item === arr2[index])) {
     return 2;
   }
   return 3;
@@ -184,7 +185,7 @@ export function isUrl(path) {
 
 export function formatWan(val) {
   const v = val * 1;
-  if (!v || isNaN(v)) return '';
+  if (!v || Number.isNaN(v)) return '';
 
   let result = val;
   if (val > 10000) {

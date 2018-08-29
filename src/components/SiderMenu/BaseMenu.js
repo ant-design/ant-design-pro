@@ -22,11 +22,8 @@ const getIcon = icon => {
   return icon;
 };
 
-export const getMenuMatches = (flatMenuKeys, path) => {
-  return flatMenuKeys.filter(item => {
-    return pathToRegexp(item).test(path);
-  });
-};
+export const getMenuMatches = (flatMenuKeys, path) =>
+  flatMenuKeys.filter(item => pathToRegexp(item).test(path));
 
 export default class BaseMenu extends PureComponent {
   constructor(props) {
@@ -100,9 +97,8 @@ export default class BaseMenu extends PureComponent {
           {this.getNavMenuItems(item.children)}
         </SubMenu>
       );
-    } else {
-      return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
     }
+    return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
   };
 
   /**
@@ -143,6 +139,7 @@ export default class BaseMenu extends PureComponent {
       </Link>
     );
   };
+
   // permission to check
   checkPermissionItem = (authority, ItemDom) => {
     const { Authorized } = this.props;
@@ -156,9 +153,8 @@ export default class BaseMenu extends PureComponent {
   conversionPath = path => {
     if (path && path.indexOf('http') === 0) {
       return path;
-    } else {
-      return `/${path || ''}`.replace(/\/+/g, '/');
     }
+    return `/${path || ''}`.replace(/\/+/g, '/');
   };
 
   render() {

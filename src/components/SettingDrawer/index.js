@@ -76,9 +76,7 @@ class SettingDrawer extends PureComponent {
           />,
         ],
       },
-    ].filter(item => {
-      return !item.hide;
-    });
+    ].filter(item => !item.hide);
   };
 
   changeSetting = (key, value) => {

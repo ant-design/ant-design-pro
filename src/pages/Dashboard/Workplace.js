@@ -124,9 +124,13 @@ export default class Workplace extends PureComponent {
             <Avatar size="large" src={currentUser.avatar} />
           </div>
           <div className={styles.content}>
-            <div className={styles.contentTitle}>早安，{currentUser.name}，祝你开心每一天！</div>
+            <div className={styles.contentTitle}>
+              早安，
+              {currentUser.name}
+              ，祝你开心每一天！
+            </div>
             <div>
-              {currentUser.title} | {currentUser.group}
+              {currentUser.title} |{currentUser.group}
             </div>
           </div>
         </div>
@@ -141,8 +145,7 @@ export default class Workplace extends PureComponent {
         <div className={styles.statItem}>
           <p>团队内排名</p>
           <p>
-            8
-            <span> / 24</span>
+            8<span> / 24</span>
           </p>
         </div>
         <div className={styles.statItem}>

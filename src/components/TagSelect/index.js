@@ -18,6 +18,7 @@ class TagSelect extends Component {
   static defaultProps = {
     hideCheckAll: false,
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -80,13 +81,10 @@ class TagSelect extends Component {
     });
   };
 
-  isTagSelectOption = node => {
-    return (
-      node &&
-      node.type &&
-      (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption')
-    );
-  };
+  isTagSelectOption = node =>
+    node &&
+    node.type &&
+    (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
 
   render() {
     const { value, expand } = this.state;

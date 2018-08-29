@@ -71,7 +71,7 @@ class HeaderView extends PureComponent {
     }
   };
 
-  handScroll = e => {
+  handScroll = () => {
     const { autoHideHeader } = this.props;
     const { visible } = this.state;
     if (!autoHideHeader) {
@@ -99,7 +99,6 @@ class HeaderView extends PureComponent {
         }
         this.oldScrollTop = scrollTop;
         this.ticking = false;
-        return;
       });
     }
     this.ticking = false;

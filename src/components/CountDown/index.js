@@ -23,6 +23,9 @@ const initTime = props => {
 };
 
 class CountDown extends Component {
+  timer = 0;
+
+  interval = 1000;
 
   constructor(props) {
     super(props);
@@ -58,10 +61,6 @@ class CountDown extends Component {
     clearTimeout(this.timer);
   }
 
-  timer = 0;
-
-  interval = 1000;
-
   // defaultFormat = time => (
   //  <span>{moment(time).format('hh:mm:ss')}</span>
   // );
@@ -74,11 +73,7 @@ class CountDown extends Component {
     const s = Math.floor((time - h * hours - m * minutes) / 1000);
     return (
       <span>
-        {fixedZero(h)}
-        :
-        {fixedZero(m)}
-        :
-        {fixedZero(s)}
+        {fixedZero(h)}:{fixedZero(m)}:{fixedZero(s)}
       </span>
     );
   };
