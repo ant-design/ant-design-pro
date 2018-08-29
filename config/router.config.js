@@ -13,7 +13,7 @@ module.exports = [
   // app
   {
     path: '/',
-    component: '../layouts/LoadingPage',
+    component: '../layouts/BasicLayout',
     routes: [
       // dashboard
       { path: '/', redirect: '/dashboard/analysis' },
