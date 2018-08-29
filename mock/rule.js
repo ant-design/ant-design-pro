@@ -72,7 +72,7 @@ function getRule(req, res, u) {
     },
   };
 
-  res.json(result);
+  return res.json(result);
 }
 
 function postRule(req, res, u, b) {
@@ -129,7 +129,7 @@ function postRule(req, res, u, b) {
     },
   };
 
-  res.json(result);
+  return res.json(result);
 }
 
 export default {

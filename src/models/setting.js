@@ -12,6 +12,24 @@ const updateTheme = primaryColor => {
     return;
   }
   const hideMessage = message.loading('正在编译主题！', 0);
+  function buildIt() {
+    if (!window.less) {
+      return;
+    }
+    setTimeout(() => {
+      window.less
+        .modifyVars({
+          '@primary-color': primaryColor,
+        })
+        .then(() => {
+          hideMessage();
+        })
+        .catch(() => {
+          message.error('Failed to update theme');
+          hideMessage();
+        });
+    }, 200);
+  }
   if (!lessNodesAppended) {
     const lessStyleNode = document.createElement('link');
     const lessConfigNode = document.createElement('script');
@@ -37,24 +55,6 @@ const updateTheme = primaryColor => {
     lessNodesAppended = true;
   } else {
     buildIt();
-  }
-  function buildIt() {
-    if (!window.less) {
-      return;
-    }
-    setTimeout(() => {
-      window.less
-        .modifyVars({
-          '@primary-color': primaryColor,
-        })
-        .then(() => {
-          hideMessage();
-        })
-        .catch(() => {
-          message.error('Failed to update theme');
-          hideMessage();
-        });
-    }, 200);
   }
 };
 
