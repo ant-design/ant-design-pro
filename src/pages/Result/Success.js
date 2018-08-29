@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Button, Row, Col, Icon, Steps, Card } from 'antd';
 import Result from '@/components/Result';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 const { Step } = Steps;
 
@@ -128,7 +128,7 @@ const actions = (
 );
 
 export default () => (
-  <PageHeaderLayout>
+  <PageHeaderWrapper>
     <Card bordered={false}>
       <Result
         type="success"
@@ -139,5 +139,5 @@ export default () => (
         style={{ marginTop: 48, marginBottom: 16 }}
       />
     </Card>
-  </PageHeaderLayout>
+  </PageHeaderWrapper>
 );

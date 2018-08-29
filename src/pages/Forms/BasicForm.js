@@ -12,7 +12,7 @@ import {
   Icon,
   Tooltip,
 } from 'antd';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './style.less';
 
 const FormItem = Form.Item;
@@ -64,7 +64,7 @@ export default class BasicForms extends PureComponent {
     };
 
     return (
-      <PageHeaderLayout
+      <PageHeaderWrapper
         title="基础表单"
         content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。"
       >
@@ -196,7 +196,7 @@ export default class BasicForms extends PureComponent {
             </FormItem>
           </Form>
         </Card>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

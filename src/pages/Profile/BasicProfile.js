@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Card, Badge, Table, Divider } from 'antd';
 import DescriptionList from '@/components/DescriptionList';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './BasicProfile.less';
 
 const { Description } = DescriptionList;
@@ -142,7 +142,7 @@ export default class BasicProfile extends Component {
       },
     ];
     return (
-      <PageHeaderLayout title="基础详情页">
+      <PageHeaderWrapper title="基础详情页">
         <Card bordered={false}>
           <DescriptionList size="large" title="退款申请" style={{ marginBottom: 32 }}>
             <Description term="取货单号">1000000000</Description>
@@ -177,7 +177,7 @@ export default class BasicProfile extends Component {
             columns={progressColumns}
           />
         </Card>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }
