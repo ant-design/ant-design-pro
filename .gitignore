@@ -28,7 +28,7 @@ jsconfig.json
 *.log
 
 functions/mock
-.temp/**
+.temp
 
 # umi
 .umi

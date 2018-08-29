@@ -17,7 +17,8 @@ export default {
           default: 'zh-CN', // default zh-CN
           baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
         },
-        polyfills: ['ie9'],
+        dynamicImport: true,
+        polyfills: ['ie11'],
         ...(!process.env.TEST && require('os').platform() === 'darwin'
           ? {
               dll: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
