@@ -29,15 +29,11 @@ class LoginTab extends Component {
   }
 }
 
-const warpContext = props => {
-  return (
-    <LoginContext.Consumer>
-      {value => {
-        return <LoginTab tabUtil={value.tabUtil} {...props} />;
-      }}
-    </LoginContext.Consumer>
-  );
-};
+const warpContext = props => (
+  <LoginContext.Consumer>
+    {value => <LoginTab tabUtil={value.tabUtil} {...props} />}
+  </LoginContext.Consumer>
+);
 // 标志位 用来判断是不是自定义组件
 warpContext.typeName = 'LoginTab';
 

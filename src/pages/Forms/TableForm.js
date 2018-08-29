@@ -243,9 +243,7 @@ export default class TableForm extends PureComponent {
           columns={columns}
           dataSource={data}
           pagination={false}
-          rowClassName={record => {
-            return record.editable ? styles.editable : '';
-          }}
+          rowClassName={record => (record.editable ? styles.editable : '')}
         />
         <Button
           style={{ width: '100%', marginTop: 16, marginBottom: 8 }}

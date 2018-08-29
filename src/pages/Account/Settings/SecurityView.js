@@ -23,66 +23,64 @@ const passwordStrength = {
 };
 
 class SecurityView extends Component {
-  getData = () => {
-    return [
-      {
-        title: formatMessage({ id: 'app.settings.security.password' }, {}),
-        description: (
-          <Fragment>
-            {formatMessage({ id: 'app.settings.security.password-description' }, {})}：
-            {passwordStrength.strong}
-          </Fragment>
-        ),
-        actions: [
-          <a>
-            <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
-          </a>,
-        ],
-      },
-      {
-        title: formatMessage({ id: 'app.settings.security.phone' }, {}),
-        description: `${formatMessage(
-          { id: 'app.settings.security.phone-description' },
-          {}
-        )}：138****8293`,
-        actions: [
-          <a>
-            <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
-          </a>,
-        ],
-      },
-      {
-        title: formatMessage({ id: 'app.settings.security.question' }, {}),
-        description: formatMessage({ id: 'app.settings.security.question-description' }, {}),
-        actions: [
-          <a>
-            <FormattedMessage id="app.settings.security.set" defaultMessage="Set" />
-          </a>,
-        ],
-      },
-      {
-        title: formatMessage({ id: 'app.settings.security.email' }, {}),
-        description: `${formatMessage(
-          { id: 'app.settings.security.email-description' },
-          {}
-        )}：ant***sign.com`,
-        actions: [
-          <a>
-            <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
-          </a>,
-        ],
-      },
-      {
-        title: formatMessage({ id: 'app.settings.security.mfa' }, {}),
-        description: formatMessage({ id: 'app.settings.security.mfa-description' }, {}),
-        actions: [
-          <a>
-            <FormattedMessage id="app.settings.security.bind" defaultMessage="Bind" />
-          </a>,
-        ],
-      },
-    ];
-  };
+  getData = () => [
+    {
+      title: formatMessage({ id: 'app.settings.security.password' }, {}),
+      description: (
+        <Fragment>
+          {formatMessage({ id: 'app.settings.security.password-description' }, {})}：
+          {passwordStrength.strong}
+        </Fragment>
+      ),
+      actions: [
+        <a>
+          <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
+        </a>,
+      ],
+    },
+    {
+      title: formatMessage({ id: 'app.settings.security.phone' }, {}),
+      description: `${formatMessage(
+        { id: 'app.settings.security.phone-description' },
+        {}
+      )}：138****8293`,
+      actions: [
+        <a>
+          <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
+        </a>,
+      ],
+    },
+    {
+      title: formatMessage({ id: 'app.settings.security.question' }, {}),
+      description: formatMessage({ id: 'app.settings.security.question-description' }, {}),
+      actions: [
+        <a>
+          <FormattedMessage id="app.settings.security.set" defaultMessage="Set" />
+        </a>,
+      ],
+    },
+    {
+      title: formatMessage({ id: 'app.settings.security.email' }, {}),
+      description: `${formatMessage(
+        { id: 'app.settings.security.email-description' },
+        {}
+      )}：ant***sign.com`,
+      actions: [
+        <a>
+          <FormattedMessage id="app.settings.security.modify" defaultMessage="Modify" />
+        </a>,
+      ],
+    },
+    {
+      title: formatMessage({ id: 'app.settings.security.mfa' }, {}),
+      description: formatMessage({ id: 'app.settings.security.mfa-description' }, {}),
+      actions: [
+        <a>
+          <FormattedMessage id="app.settings.security.bind" defaultMessage="Bind" />
+        </a>,
+      ],
+    },
+  ];
 
   render() {
     return (

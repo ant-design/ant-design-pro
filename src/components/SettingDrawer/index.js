@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, message, Drawer, List, Switch, Divider, Icon, Button } from 'antd';
+import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert } from 'antd';
 import { formatMessage } from 'umi/locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
@@ -20,7 +20,7 @@ const Body = ({ children, title, style }) => (
 );
 
 @connect(({ setting }) => ({ setting }))
-class SettingDarwer extends PureComponent {
+class SettingDrawer extends PureComponent {
   getLayOutSetting = () => {
     const {
       setting: { grid, fixedHeader, layout, autoHideHeader, fixSiderbar },
@@ -76,9 +76,7 @@ class SettingDarwer extends PureComponent {
           />,
         ],
       },
-    ].filter(item => {
-      return !item.hide;
-    });
+    ].filter(item => !item.hide);
   };
 
   changeSetting = (key, value) => {
@@ -113,7 +111,7 @@ class SettingDarwer extends PureComponent {
 
   render() {
     const { setting } = this.props;
-    const { collapse, silderTheme, themeColor, layout, colorWeak } = setting;
+    const { collapse, silderTheme, primaryColor, layout, colorWeak } = setting;
     return (
       <Drawer
         visible={collapse}
@@ -166,8 +164,8 @@ class SettingDarwer extends PureComponent {
 
           <ThemeColor
             title={formatMessage({ id: 'app.setting.themecolor' })}
-            value={themeColor}
-            onChange={color => this.changeSetting('themeColor', color)}
+            value={primaryColor}
+            onChange={color => this.changeSetting('primaryColor', color)}
           />
 
           <Divider />
@@ -215,19 +213,19 @@ class SettingDarwer extends PureComponent {
             text={JSON.stringify(setting)}
             onCopy={() => message.success(formatMessage({ id: 'app.setting.copyinfo' }))}
           >
-            <Button
-              style={{
-                width: 224,
-              }}
-            >
-              <Icon type="copy" />
+            <Button block icon="copy">
               {formatMessage({ id: 'app.setting.copy' })}
             </Button>
           </CopyToClipboard>
+          <Alert
+            type="warning"
+            className={styles.productionHint}
+            message={formatMessage({ id: 'app.setting.production.hint' })}
+          />
         </div>
       </Drawer>
     );
   }
 }
 
-export default SettingDarwer;
+export default SettingDrawer;

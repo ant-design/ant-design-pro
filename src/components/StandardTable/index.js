@@ -38,14 +38,10 @@ class StandardTable extends PureComponent {
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
     let { needTotalList } = this.state;
-    needTotalList = needTotalList.map(item => {
-      return {
-        ...item,
-        total: selectedRows.reduce((sum, val) => {
-          return sum + parseFloat(val[item.dataIndex], 10);
-        }, 0),
-      };
-    });
+    needTotalList = needTotalList.map(item => ({
+      ...item,
+      total: selectedRows.reduce((sum, val) => sum + parseFloat(val[item.dataIndex], 10), 0),
+    }));
     const { onSelectRow } = this.props;
     if (onSelectRow) {
       onSelectRow(selectedRows);

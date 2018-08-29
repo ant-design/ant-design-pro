@@ -1,43 +1,65 @@
 import { message } from 'antd';
+import defaultSetting from '../defaultSetting';
 
-const defaultSetting = {
-  collapse: false,
-  silderTheme: 'dark',
-  themeColor: '#1890FF',
-  layout: 'sidemenu',
-  grid: 'Fluid',
-  fixedHeader: false,
-  autoHideHeader: false,
-  fixSiderbar: false,
-  colorWeak: false,
+let lessNodesAppended;
+const updateTheme = primaryColor => {
+  // Don't compile less in production!
+  if (process.env.NODE_ENV === 'production') {
+    return;
+  }
+  // Determine if the component is remounted
+  if (!primaryColor) {
+    return;
+  }
+  const hideMessage = message.loading('正在编译主题！', 0);
+  function buildIt() {
+    if (!window.less) {
+      return;
+    }
+    setTimeout(() => {
+      window.less
+        .modifyVars({
+          '@primary-color': primaryColor,
+        })
+        .then(() => {
+          hideMessage();
+        })
+        .catch(() => {
+          message.error('Failed to update theme');
+          hideMessage();
+        });
+    }, 200);
+  }
+  if (!lessNodesAppended) {
+    const lessStyleNode = document.createElement('link');
+    const lessConfigNode = document.createElement('script');
+    const lessScriptNode = document.createElement('script');
+    lessStyleNode.setAttribute('rel', 'stylesheet/less');
+    lessStyleNode.setAttribute('href', '/color.less');
+    lessConfigNode.innerHTML = `
+      window.less = {
+        async: true,
+        env: 'production',
+        javascriptEnabled: true
+      };
+    `;
+    lessScriptNode.src = 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js';
+    lessScriptNode.async = true;
+    lessScriptNode.onload = () => {
+      buildIt();
+      lessScriptNode.onload = null;
+    };
+    document.body.appendChild(lessStyleNode);
+    document.body.appendChild(lessConfigNode);
+    document.body.appendChild(lessScriptNode);
+    lessNodesAppended = true;
+  } else {
+    buildIt();
+  }
 };
 
-const buildLessAndWeak = (themeColor, colorWeak) => {
-  // Determine if the component is remounted
-  if (themeColor && themeColor !== '#1890FF' && themeColor !== window['antd_pro_less_color']) {
-    window.less.refresh().then(() => {
-      const hideMessage = message.loading('正在编译主题！', 0);
-      setTimeout(() => {
-        window.less
-          .modifyVars({
-            '@primary-color': themeColor,
-            '@input-hover-border-color': themeColor,
-          })
-          .then(() => {
-            window['antd_pro_less_color'] = themeColor;
-            hideMessage();
-          })
-          .catch(() => {
-            message.error(`Failed to update theme`);
-          });
-      }, 200);
-    });
-  }
-  if (colorWeak) {
-    document.body.className = 'colorWeak';
-  } else {
-    document.body.className = '';
-  }
+const updateColorWeak = colorWeak => {
+  document.body.className = colorWeak ? 'colorWeak' : '';
 };
 
 export default {
@@ -53,8 +75,11 @@ export default {
           setting[key] = value === '1' ? true : value;
         }
       });
-      const { themeColor, colorWeak } = setting;
-      buildLessAndWeak(themeColor, colorWeak);
+      const { primaryColor, colorWeak } = setting;
+      if (state.primaryColor !== primaryColor) {
+        updateTheme(primaryColor);
+      }
+      updateColorWeak(colorWeak);
       return {
         ...state,
         ...setting,
@@ -79,8 +104,11 @@ export default {
           urlParams.searchParams.set(key, value);
         }
       });
-      const { themeColor, colorWeak } = payload;
-      buildLessAndWeak(themeColor, colorWeak);
+      const { primaryColor, colorWeak } = payload;
+      if (state.primaryColor !== primaryColor) {
+        updateTheme(primaryColor);
+      }
+      updateColorWeak(colorWeak);
       window.history.replaceState(null, 'setting', urlParams.href);
       return {
         ...state,

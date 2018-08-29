@@ -168,4 +168,5 @@ export default {
   'app.setting.weakmode': 'Weak Mode',
   'app.setting.copy': 'Copy Setting',
   'app.setting.copyinfo': 'copy success，please replace defaultSetting in src/models/setting.js',
+  'app.setting.production.hint': 'Setting panel show in development enviorment only, please modify src/defaultSetting.js mannually.',
 };

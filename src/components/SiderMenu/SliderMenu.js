@@ -18,9 +18,7 @@ const getDefaultCollapsedSubMenus = props => {
     flatMenuKeys,
   } = props;
   return urlToList(pathname)
-    .map(item => {
-      return getMenuMatches(flatMenuKeys, item)[0];
-    })
+    .map(item => getMenuMatches(flatMenuKeys, item)[0])
     .filter(item => item);
 };
 
@@ -69,6 +67,7 @@ export default class SiderMenu extends PureComponent {
     }
     return null;
   }
+
   isMainMenu = key => {
     const { menuData } = this.props;
     return menuData.some(item => {
@@ -78,12 +77,14 @@ export default class SiderMenu extends PureComponent {
       return false;
     });
   };
+
   handleOpenChange = openKeys => {
     const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({
       openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys],
     });
   };
+
   render() {
     const { logo, collapsed, onCollapse, fixSiderbar, theme } = this.props;
     const { openKeys } = this.state;

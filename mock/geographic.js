@@ -2,11 +2,11 @@ import city from './geographic/city.json';
 import province from './geographic/province.json';
 
 function getProvince(req, res) {
-  res.json(province);
+  return res.json(province);
 }
 
 function getCity(req, res) {
-  res.json(city[req.params.province]);
+  return res.json(city[req.params.province]);
 }
 
 export default {

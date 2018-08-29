@@ -132,7 +132,7 @@ class Analysis extends Component {
     const { rangePickerValue } = this.state;
     const value = getTimeDistance(type);
     if (!rangePickerValue[0] || !rangePickerValue[1]) {
-      return;
+      return '';
     }
     if (
       rangePickerValue[0].isSame(value[0], 'day') &&
@@ -140,6 +140,7 @@ class Analysis extends Component {
     ) {
       return styles.currentDate;
     }
+    return '';
   }
 
   render() {
@@ -157,13 +158,12 @@ class Analysis extends Component {
       salesTypeDataOffline,
     } = chart;
     const loading = propsLoding || stateLoading;
-    const salesPieData =
-      salesType === 'all'
-        ? salesTypeData
-        : salesType === 'online'
-          ? salesTypeDataOnline
-          : salesTypeDataOffline;
-
+    let salesPieData;
+    if (salesType === 'all') {
+      salesPieData = salesTypeData;
+    } else {
+      salesPieData = salesType === 'online' ? salesTypeDataOnline : salesTypeDataOffline;
+    }
     const menu = (
       <Menu>
         <Menu.Item>操作一</Menu.Item>

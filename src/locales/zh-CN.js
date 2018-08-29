@@ -162,5 +162,6 @@ export default {
   'app.setting.othersettings': '其他设置',
   'app.setting.weakmode': '色弱模式',
   'app.setting.copy': '拷贝设置',
-  'app.setting.copyinfo': '拷贝成功，请到 src/models/setting.js 中替换 defaultSetting',
+  'app.setting.copyinfo': '拷贝成功，请到 src/defaultSetting.js 中替换默认配置',
+  'app.setting.production.hint': '设置栏只用于开发环境预览，请拷贝后手动修改 src/defaultSetting.js',
 };
