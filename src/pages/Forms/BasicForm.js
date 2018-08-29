@@ -25,7 +25,7 @@ const { TextArea } = Input;
 }))
 @Form.create()
 export default class BasicForms extends PureComponent {
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     const { dispatch, form } = this.props;
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
@@ -103,7 +103,7 @@ export default class BasicForms extends PureComponent {
                   style={{ minHeight: 32 }}
                   placeholder="请输入你的阶段性工作目标"
                   rows={4}
-                />
+                />,
               )}
             </FormItem>
             <FormItem {...formItemLayout} label="衡量标准">
@@ -118,7 +118,7 @@ export default class BasicForms extends PureComponent {
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label={
+              label={(
                 <span>
                   客户
                   <em className={styles.optional}>
@@ -128,33 +128,33 @@ export default class BasicForms extends PureComponent {
                     </Tooltip>
                   </em>
                 </span>
-              }
+)}
             >
               {getFieldDecorator('client')(
-                <Input placeholder="请描述你服务的客户，内部客户直接 @姓名／工号" />
+                <Input placeholder="请描述你服务的客户，内部客户直接 @姓名／工号" />,
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label={
+              label={(
                 <span>
                   邀评人
                   <em className={styles.optional}>（选填）</em>
                 </span>
-              }
+)}
             >
               {getFieldDecorator('invites')(
-                <Input placeholder="请直接 @姓名／工号，最多可邀请 5 人" />
+                <Input placeholder="请直接 @姓名／工号，最多可邀请 5 人" />,
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label={
+              label={(
                 <span>
                   权重
                   <em className={styles.optional}>（选填）</em>
                 </span>
-              }
+)}
             >
               {getFieldDecorator('weight')(<InputNumber placeholder="请输入" min={0} max={100} />)}
               <span className="ant-form-text">%</span>
@@ -168,7 +168,7 @@ export default class BasicForms extends PureComponent {
                     <Radio value="1">公开</Radio>
                     <Radio value="2">部分公开</Radio>
                     <Radio value="3">不公开</Radio>
-                  </Radio.Group>
+                  </Radio.Group>,
                 )}
                 <FormItem style={{ marginBottom: 0 }}>
                   {getFieldDecorator('publicUsers')(
@@ -183,7 +183,7 @@ export default class BasicForms extends PureComponent {
                       <Option value="1">同事甲</Option>
                       <Option value="2">同事乙</Option>
                       <Option value="3">同事丙</Option>
-                    </Select>
+                    </Select>,
                   )}
                 </FormItem>
               </div>

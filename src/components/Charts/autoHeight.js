@@ -3,9 +3,8 @@ import React from 'react';
 
 function computeHeight(node) {
   const totalHeight = parseInt(getComputedStyle(node).height, 10);
-  const padding =
-    parseInt(getComputedStyle(node).paddingTop, 10) +
-    parseInt(getComputedStyle(node).paddingBottom, 10);
+  const padding = parseInt(getComputedStyle(node).paddingTop, 10)
+    + parseInt(getComputedStyle(node).paddingBottom, 10);
   return totalHeight - padding;
 }
 
@@ -30,8 +29,7 @@ function getAutoHeight(n) {
   return height;
 }
 
-const autoHeight = () => WrappedComponent => {
-  return class extends React.Component {
+const autoHeight = () => WrappedComponent => class extends React.Component {
     state = {
       computedHeight: 0,
     };
@@ -45,7 +43,7 @@ const autoHeight = () => WrappedComponent => {
       }
     }
 
-    handleRoot = node => {
+    handleRoot = (node) => {
       this.root = node;
     };
 
@@ -57,7 +55,6 @@ const autoHeight = () => WrappedComponent => {
         <div ref={this.handleRoot}>{h > 0 && <WrappedComponent {...this.props} height={h} />}</div>
       );
     }
-  };
 };
 
 export default autoHeight;

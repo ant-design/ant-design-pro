@@ -2,7 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './index.less';
 
-const StandardFormRow = ({ title, children, last, block, grid, ...rest }) => {
+const StandardFormRow = ({
+  title, children, last, block, grid, ...rest
+}) => {
   const cls = classNames(styles.standardFormRow, {
     [styles.standardFormRowBlock]: block,
     [styles.standardFormRowLast]: last,

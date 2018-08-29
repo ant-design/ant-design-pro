@@ -41,20 +41,20 @@ export default function NoticeList({
               <List.Item.Meta
                 className={styles.meta}
                 avatar={<span className={styles.iconElement}>{leftIcon}</span>}
-                title={
+                title={(
                   <div className={styles.title}>
                     {item.title}
                     <div className={styles.extra}>{item.extra}</div>
                   </div>
-                }
-                description={
+)}
+                description={(
                   <div>
                     <div className={styles.description} title={item.description}>
                       {item.description}
                     </div>
                     <div className={styles.datetime}>{item.datetime}</div>
                   </div>
-                }
+)}
               />
             </List.Item>
           );

@@ -20,7 +20,7 @@ export default class WaterWave extends PureComponent {
       () => {
         requestAnimationFrame(() => this.resize());
       },
-      { passive: true }
+      { passive: true },
     );
   }
 
@@ -198,7 +198,7 @@ export default class WaterWave extends PureComponent {
           {title && <span>{title}</span>}
           <h4>
             {percent}
-            %
+%
           </h4>
         </div>
       </div>

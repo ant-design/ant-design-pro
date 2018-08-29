@@ -42,7 +42,7 @@ export default class ActiveChart extends Component {
           },
           () => {
             this.loopData();
-          }
+          },
         );
       }, 1000);
     });
@@ -76,8 +76,16 @@ export default class ActiveChart extends Component {
         </div>
         {activeData && (
           <div className={styles.activeChartGrid}>
-            <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
-            <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
+            <p>
+              {[...activeData].sort()[activeData.length - 1].y + 200}
+              {' '}
+亿元
+            </p>
+            <p>
+              {[...activeData].sort()[Math.floor(activeData.length / 2)].y}
+              {' '}
+亿元
+            </p>
           </div>
         )}
         {activeData && (

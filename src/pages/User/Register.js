@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import Link from 'umi/link';
 import router from 'umi/router';
-import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
+import {
+  Form, Input, Button, Select, Row, Col, Popover, Progress,
+} from 'antd';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
@@ -45,7 +47,7 @@ export default class Register extends Component {
           state: {
             account,
           },
-        })
+        }),
       );
     }
   }
@@ -78,7 +80,7 @@ export default class Register extends Component {
     return 'poor';
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { form, dispatch } = this.props;
     form.validateFields({ force: true }, (err, values) => {
@@ -95,7 +97,7 @@ export default class Register extends Component {
     });
   };
 
-  handleConfirmBlur = e => {
+  handleConfirmBlur = (e) => {
     const { value } = e.target;
     const { confirmDirty } = this.state;
     this.setState({ confirmDirty: confirmDirty || !!value });
@@ -139,7 +141,7 @@ export default class Register extends Component {
     }
   };
 
-  changePrefix = value => {
+  changePrefix = (value) => {
     this.setState({
       prefix: value,
     });
@@ -165,7 +167,9 @@ export default class Register extends Component {
   render() {
     const { form, submitting } = this.props;
     const { getFieldDecorator } = form;
-    const { count, prefix, help, visible } = this.state;
+    const {
+      count, prefix, help, visible,
+    } = this.state;
     return (
       <div className={styles.main}>
         <h3>注册</h3>
@@ -186,7 +190,7 @@ export default class Register extends Component {
           </FormItem>
           <FormItem help={help}>
             <Popover
-              content={
+              content={(
                 <div style={{ padding: '4px 0' }}>
                   {passwordStatusMap[this.getPasswordStatus()]}
                   {this.renderPasswordProgress()}
@@ -194,7 +198,7 @@ export default class Register extends Component {
                     请至少输入 6 个字符。请不要使用容易被猜到的密码。
                   </div>
                 </div>
-              }
+)}
               overlayStyle={{ width: 240 }}
               placement="right"
               visible={visible}

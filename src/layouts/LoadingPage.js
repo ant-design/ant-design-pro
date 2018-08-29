@@ -8,7 +8,7 @@ import routerConfig from '../../config/router.config';
 
 // Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {
-  return data.map(item => {
+  return data.map((item) => {
     let locale = 'menu';
     if (parentName && item.name) {
       locale = `${parentName}.${item.name}`;
@@ -42,7 +42,7 @@ class LoadingPage extends PureComponent {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    this.enquireHandler = enquireScreen(mobile => {
+    this.enquireHandler = enquireScreen((mobile) => {
       const { isMobile } = this.state;
       if (isMobile !== mobile) {
         this.setState({

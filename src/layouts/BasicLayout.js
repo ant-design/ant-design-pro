@@ -23,10 +23,10 @@ const { check } = Authorized;
  * 获取面包屑映射
  * @param {Object} menuData 菜单配置
  */
-const getBreadcrumbNameMap = memoizeOne(meun => {
+const getBreadcrumbNameMap = memoizeOne((meun) => {
   const routerMap = {};
-  const mergeMeunAndRouter = meunData => {
-    meunData.forEach(meunItem => {
+  const mergeMeunAndRouter = (meunData) => {
+    meunData.forEach((meunItem) => {
       if (meunItem.children) {
         mergeMeunAndRouter(meunItem.children);
       }
@@ -64,9 +64,6 @@ const query = {
 };
 
 class BasicLayout extends React.PureComponent {
-  state = {
-    rendering: true,
-  };
   constructor(props) {
     super(props);
     const { menuData } = this.props;
@@ -74,6 +71,28 @@ class BasicLayout extends React.PureComponent {
     // Because there are many places to be. So put it here
     this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
+
+  state = {
+    rendering: true,
+  };
+
+  componentDidMount() {
+    this.renderRef = requestAnimationFrame(() => {
+      this.setState({
+        rendering: false,
+      });
+    });
+  }
+
+  componentDidUpdate() {
+    const { menuData } = this.props;
+    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.renderRef);
+  }
+
   getContext() {
     const { location } = this.props;
     return {
@@ -81,14 +100,11 @@ class BasicLayout extends React.PureComponent {
       breadcrumbNameMap: this.breadcrumbNameMap,
     };
   }
-  componentDidUpdate() {
-    const { menuData } = this.props;
-    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
-  }
-  getPageTitle = pathname => {
+
+  getPageTitle = (pathname) => {
     let currRouterData = null;
     // match params path
-    Object.keys(this.breadcrumbNameMap).forEach(key => {
+    Object.keys(this.breadcrumbNameMap).forEach((key) => {
       if (pathToRegexp(key).test(pathname)) {
         currRouterData = this.breadcrumbNameMap[key];
       }
@@ -135,30 +151,21 @@ class BasicLayout extends React.PureComponent {
       const { routerData } = this.props;
       // get the first authorized route path in routerData
       const authorizedPath = Object.keys(routerData).find(
-        item => check(routerData[item].authority, item) && item !== '/'
+        item => check(routerData[item].authority, item) && item !== '/',
       );
       return authorizedPath;
     }
     return redirect;
   };
 
-  handleMenuCollapse = collapsed => {
+  handleMenuCollapse = (collapsed) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'global/changeLayoutCollapsed',
       payload: collapsed,
     });
   };
-  componentDidMount() {
-    this.renderRef = requestAnimationFrame(() => {
-      this.setState({
-        rendering: false,
-      });
-    });
-  }
-  componentWillUnmount() {
-    cancelAnimationFrame(this.renderRef);
-  }
+
   render() {
     const {
       isMobile,
@@ -167,6 +174,7 @@ class BasicLayout extends React.PureComponent {
       children,
       location: { pathname },
     } = this.props;
+    const { rendering } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const layout = (
       <Layout>
@@ -202,7 +210,7 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {this.state.rendering ? null : <SettingDarwer />}
+        {rendering ? null : <SettingDarwer />}
       </React.Fragment>
     );
   }

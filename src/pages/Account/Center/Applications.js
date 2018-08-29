@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-import { List, Card, Icon, Dropdown, Menu, Avatar, Tooltip } from 'antd';
+import {
+  List, Card, Icon, Dropdown, Menu, Avatar, Tooltip,
+} from 'antd';
 import numeral from 'numeral';
 import { connect } from 'dva';
 import { formatWan } from '@/utils/utils';
@@ -48,7 +50,15 @@ export default class Center extends PureComponent {
       <List
         rowKey="id"
         className={stylesApplications.filterCardList}
-        grid={{ gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
+        grid={{
+          gutter: 24,
+          xxl: 3,
+          xl: 2,
+          lg: 2,
+          md: 2,
+          sm: 2,
+          xs: 1,
+        }}
         dataSource={list}
         renderItem={item => (
           <List.Item key={item.id}>

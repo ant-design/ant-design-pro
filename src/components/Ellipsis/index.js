@@ -13,16 +13,13 @@ const TooltipOverlayStyle = {
   wordWrap: 'break-word',
 };
 
-export const getStrFullLength = (str = '') => {
-  return str.split('').reduce((pre, cur) => {
-    const charCode = cur.charCodeAt(0);
-    if (charCode >= 0 && charCode <= 128) {
-      return pre + 1;
-    } else {
-      return pre + 2;
-    }
-  }, 0);
-};
+export const getStrFullLength = (str = '') => str.split('').reduce((pre, cur) => {
+  const charCode = cur.charCodeAt(0);
+  if (charCode >= 0 && charCode <= 128) {
+    return pre + 1;
+  }
+  return pre + 2;
+}, 0);
 
 export const cutStrByFullLength = (str = '', maxLength) => {
   let showLength = 0;
@@ -35,13 +32,14 @@ export const cutStrByFullLength = (str = '', maxLength) => {
     }
     if (showLength <= maxLength) {
       return pre + cur;
-    } else {
-      return pre;
     }
+    return pre;
   }, '');
 };
 
-const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other }) => {
+const EllipsisText = ({
+  text, length, tooltip, fullWidthRecognition, ...other
+}) => {
   if (typeof text !== 'string') {
     throw new Error('Ellipsis children must be string.');
   }
@@ -139,48 +137,45 @@ export default class Ellipsis extends Component {
       sh = shadowNode.offsetHeight;
       if (sh > th || mid === begin) {
         return mid;
-      } else {
-        begin = mid;
-        if (end - begin === 1) {
-          mid = 1 + begin;
-        } else {
-          mid = Math.floor((end - begin) / 2) + begin;
-        }
-        return this.bisection(th, mid, begin, end, text, shadowNode);
       }
-    } else {
-      if (mid - 1 < 0) {
-        return mid;
-      }
-      shadowNode.innerHTML = text.substring(0, mid - 1) + suffix;
-      sh = shadowNode.offsetHeight;
-      if (sh <= th) {
-        return mid - 1;
+      begin = mid;
+      if (end - begin === 1) {
+        mid = 1 + begin;
       } else {
-        end = mid;
         mid = Math.floor((end - begin) / 2) + begin;
-        return this.bisection(th, mid, begin, end, text, shadowNode);
       }
+      return this.bisection(th, mid, begin, end, text, shadowNode);
     }
+    if (mid - 1 < 0) {
+      return mid;
+    }
+    shadowNode.innerHTML = text.substring(0, mid - 1) + suffix;
+    sh = shadowNode.offsetHeight;
+    if (sh <= th) {
+      return mid - 1;
+    }
+    end = mid;
+    mid = Math.floor((end - begin) / 2) + begin;
+    return this.bisection(th, mid, begin, end, text, shadowNode);
   };
 
-  handleRoot = n => {
+  handleRoot = (n) => {
     this.root = n;
   };
 
-  handleContent = n => {
+  handleContent = (n) => {
     this.content = n;
   };
 
-  handleNode = n => {
+  handleNode = (n) => {
     this.node = n;
   };
 
-  handleShadow = n => {
+  handleShadow = (n) => {
     this.shadow = n;
   };
 
-  handleShadowChildren = n => {
+  handleShadowChildren = (n) => {
     this.shadowChildren = n;
   };
 

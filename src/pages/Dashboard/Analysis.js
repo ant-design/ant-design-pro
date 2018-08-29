@@ -94,19 +94,19 @@ class Analysis extends Component {
     cancelAnimationFrame(this.reqRef);
   }
 
-  handleChangeSalesType = e => {
+  handleChangeSalesType = (e) => {
     this.setState({
       salesType: e.target.value,
     });
   };
 
-  handleTabChange = key => {
+  handleTabChange = (key) => {
     this.setState({
       currentTabKey: key,
     });
   };
 
-  handleRangePickerChange = rangePickerValue => {
+  handleRangePickerChange = (rangePickerValue) => {
     const { dispatch } = this.props;
     this.setState({
       rangePickerValue,
@@ -117,7 +117,7 @@ class Analysis extends Component {
     });
   };
 
-  selectDate = type => {
+  selectDate = (type) => {
     const { dispatch } = this.props;
     this.setState({
       rangePickerValue: getTimeDistance(type),
@@ -135,15 +135,17 @@ class Analysis extends Component {
       return;
     }
     if (
-      rangePickerValue[0].isSame(value[0], 'day') &&
-      rangePickerValue[1].isSame(value[1], 'day')
+      rangePickerValue[0].isSame(value[0], 'day')
+      && rangePickerValue[1].isSame(value[1], 'day')
     ) {
       return styles.currentDate;
     }
   }
 
   render() {
-    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey } = this.state;
+    const {
+      rangePickerValue, salesType, loading: propsLoding, currentTabKey,
+    } = this.state;
     const { chart, loading: stateLoading } = this.props;
     const {
       visitData,
@@ -157,12 +159,11 @@ class Analysis extends Component {
       salesTypeDataOffline,
     } = chart;
     const loading = propsLoding || stateLoading;
-    const salesPieData =
-      salesType === 'all'
-        ? salesTypeData
-        : salesType === 'online'
-          ? salesTypeDataOnline
-          : salesTypeDataOffline;
+    const salesPieData = salesType === 'all'
+      ? salesTypeData
+      : salesType === 'online'
+        ? salesTypeDataOnline
+        : salesTypeDataOffline;
 
     const menu = (
       <Menu>
@@ -236,7 +237,10 @@ class Analysis extends Component {
         sorter: (a, b) => a.range - b.range,
         render: (text, record) => (
           <Trend flag={record.status === 1 ? 'down' : 'up'}>
-            <span style={{ marginRight: 4 }}>{text}%</span>
+            <span style={{ marginRight: 4 }}>
+              {text}
+%
+            </span>
           </Trend>
         ),
         align: 'right',
@@ -250,12 +254,12 @@ class Analysis extends Component {
         <Col span={12}>
           <NumberInfo
             title={data.name}
-            subTitle={
+            subTitle={(
               <FormattedMessage
                 id="app.analysis.conversion-rate"
                 defaultMessage="Conversion Rate"
               />
-            }
+)}
             gap={2}
             total={`${data.cvr * 100}%`}
             theme={currentKey !== data.name && 'light'}
@@ -293,7 +297,7 @@ class Analysis extends Component {
               title={
                 <FormattedMessage id="app.analysis.total-sales" defaultMessage="Total Sales" />
               }
-              action={
+              action={(
                 <Tooltip
                   title={
                     <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
@@ -301,17 +305,17 @@ class Analysis extends Component {
                 >
                   <Icon type="info-circle-o" />
                 </Tooltip>
-              }
+)}
               loading={loading}
               total={() => <Yuan>126560</Yuan>}
-              footer={
+              footer={(
                 <Field
                   label={
                     <FormattedMessage id="app.analysis.day-sales" defaultMessage="Day Sales" />
                   }
                   value={`￥${numeral(12423).format('0,0')}`}
                 />
-              }
+)}
               contentHeight={46}
             >
               <Trend flag="up" style={{ marginRight: 16 }}>
@@ -329,7 +333,7 @@ class Analysis extends Component {
               bordered={false}
               loading={loading}
               title={<FormattedMessage id="app.analysis.visits" defaultMessage="visits" />}
-              action={
+              action={(
                 <Tooltip
                   title={
                     <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
@@ -337,16 +341,16 @@ class Analysis extends Component {
                 >
                   <Icon type="info-circle-o" />
                 </Tooltip>
-              }
+)}
               total={numeral(8846).format('0,0')}
-              footer={
+              footer={(
                 <Field
                   label={
                     <FormattedMessage id="app.analysis.day-visits" defaultMessage="Day Visits" />
                   }
                   value={numeral(1234).format('0,0')}
                 />
-              }
+)}
               contentHeight={46}
             >
               <MiniArea color="#975FE4" data={visitData} />
@@ -357,7 +361,7 @@ class Analysis extends Component {
               bordered={false}
               loading={loading}
               title={<FormattedMessage id="app.analysis.payments" defaultMessage="Payments" />}
-              action={
+              action={(
                 <Tooltip
                   title={
                     <FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />
@@ -365,19 +369,19 @@ class Analysis extends Component {
                 >
                   <Icon type="info-circle-o" />
                 </Tooltip>
-              }
+)}
               total={numeral(6560).format('0,0')}
-              footer={
+              footer={(
                 <Field
-                  label={
+                  label={(
                     <FormattedMessage
                       id="app.analysis.conversion-rate"
                       defaultMessage="Conversion Rate"
                     />
-                  }
+)}
                   value="60%"
                 />
-              }
+)}
               contentHeight={46}
             >
               <MiniBar data={visitData} />
@@ -387,13 +391,13 @@ class Analysis extends Component {
             <ChartCard
               loading={loading}
               bordered={false}
-              title={
+              title={(
                 <FormattedMessage
                   id="app.analysis.operational-effect"
                   defaultMessage="Operational Effect"
                 />
-              }
-              action={
+)}
+              action={(
                 <Tooltip
                   title={
                     <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
@@ -401,9 +405,9 @@ class Analysis extends Component {
                 >
                   <Icon type="info-circle-o" />
                 </Tooltip>
-              }
+)}
               total="78%"
-              footer={
+              footer={(
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                   <Trend flag="up" style={{ marginRight: 16 }}>
                     <FormattedMessage id="app.analysis.week" defaultMessage="Weekly changes" />
@@ -414,7 +418,7 @@ class Analysis extends Component {
                     <span className={styles.trendText}>11%</span>
                   </Trend>
                 </div>
-              }
+)}
               contentHeight={46}
             >
               <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
@@ -434,12 +438,12 @@ class Analysis extends Component {
                     <div className={styles.salesBar}>
                       <Bar
                         height={295}
-                        title={
+                        title={(
                           <FormattedMessage
                             id="app.analysis.sales-trend"
                             defaultMessage="Sales Trend"
                           />
-                        }
+)}
                         data={salesData}
                       />
                     </div>
@@ -474,12 +478,12 @@ class Analysis extends Component {
                     <div className={styles.salesBar}>
                       <Bar
                         height={292}
-                        title={
+                        title={(
                           <FormattedMessage
                             id="app.analysis.visits-trend"
                             defaultMessage="Visits Trend"
                           />
-                        }
+)}
                         data={salesData}
                       />
                     </div>
@@ -514,36 +518,36 @@ class Analysis extends Component {
             <Card
               loading={loading}
               bordered={false}
-              title={
+              title={(
                 <FormattedMessage
                   id="app.analysis.online-top-search"
                   defaultMessage="Online Top Search"
                 />
-              }
+)}
               extra={iconGroup}
               style={{ marginTop: 24 }}
             >
               <Row gutter={68}>
                 <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
                   <NumberInfo
-                    subTitle={
+                    subTitle={(
                       <span>
                         <FormattedMessage
                           id="app.analysis.search-users"
                           defaultMessage="search users"
                         />
                         <Tooltip
-                          title={
+                          title={(
                             <FormattedMessage
                               id="app.analysis.introduce"
                               defaultMessage="introduce"
                             />
-                          }
+)}
                         >
                           <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
                         </Tooltip>
                       </span>
-                    }
+)}
                     gap={8}
                     total={numeral(12321).format('0,0')}
                     status="up"
@@ -553,12 +557,12 @@ class Analysis extends Component {
                 </Col>
                 <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
                   <NumberInfo
-                    subTitle={
+                    subTitle={(
                       <FormattedMessage
                         id="app.analysis.per-capita-search"
                         defaultMessage="Per Capita Search"
                       />
-                    }
+)}
                     total={2.7}
                     status="down"
                     subTotal={26.2}
@@ -584,14 +588,14 @@ class Analysis extends Component {
               loading={loading}
               className={styles.salesCard}
               bordered={false}
-              title={
+              title={(
                 <FormattedMessage
                   id="app.analysis.the-proportion-of-sales"
                   defaultMessage="The Proportion of Sales"
                 />
-              }
+)}
               bodyStyle={{ padding: 24 }}
-              extra={
+              extra={(
                 <div className={styles.salesCardExtra}>
                   {iconGroup}
                   <div className={styles.salesTypeRadio}>
@@ -614,7 +618,7 @@ class Analysis extends Component {
                     </Radio.Group>
                   </div>
                 </div>
-              }
+)}
               style={{ marginTop: 24, minHeight: 509 }}
             >
               <h4 style={{ marginTop: 8, marginBottom: 32 }}>

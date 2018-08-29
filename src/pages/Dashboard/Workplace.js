@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import Link from 'umi/link';
-import { Row, Col, Card, List, Avatar } from 'antd';
+import {
+  Row, Col, Card, List, Avatar,
+} from 'antd';
 
 import { Radar } from '@/components/Charts';
 import EditableLinkGroup from '@/components/EditableLinkGroup';
@@ -37,7 +39,9 @@ const links = [
   },
 ];
 
-@connect(({ user, project, activities, chart, loading }) => ({
+@connect(({
+  user, project, activities, chart, loading,
+}) => ({
   currentUser: user.currentUser,
   project,
   activities,
@@ -74,8 +78,8 @@ export default class Workplace extends PureComponent {
     const {
       activities: { list },
     } = this.props;
-    return list.map(item => {
-      const events = item.template.split(/@\{([^{}]*)\}/gi).map(key => {
+    return list.map((item) => {
+      const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
         if (item[key]) {
           return (
             <a href={item[key].link} key={item[key].name}>
@@ -89,18 +93,18 @@ export default class Workplace extends PureComponent {
         <List.Item key={item.id}>
           <List.Item.Meta
             avatar={<Avatar src={item.user.avatar} />}
-            title={
+            title={(
               <span>
                 <a className={styles.username}>{item.user.name}</a>
                 &nbsp;
                 <span className={styles.event}>{events}</span>
               </span>
-            }
-            description={
+)}
+            description={(
               <span className={styles.datetime} title={item.updatedAt}>
                 {moment(item.updatedAt).fromNow()}
               </span>
-            }
+)}
           />
         </List.Item>
       );
@@ -117,20 +121,26 @@ export default class Workplace extends PureComponent {
       chart: { radarData },
     } = this.props;
 
-    const pageHeaderContent =
-      currentUser && Object.keys(currentUser).length ? (
-        <div className={styles.pageHeaderContent}>
-          <div className={styles.avatar}>
-            <Avatar size="large" src={currentUser.avatar} />
+    const pageHeaderContent = currentUser && Object.keys(currentUser).length ? (
+      <div className={styles.pageHeaderContent}>
+        <div className={styles.avatar}>
+          <Avatar size="large" src={currentUser.avatar} />
+        </div>
+        <div className={styles.content}>
+          <div className={styles.contentTitle}>
+              早安，
+            {currentUser.name}
+              ，祝你开心每一天！
           </div>
-          <div className={styles.content}>
-            <div className={styles.contentTitle}>早安，{currentUser.name}，祝你开心每一天！</div>
-            <div>
-              {currentUser.title} | {currentUser.group}
-            </div>
+          <div>
+            {currentUser.title}
+            {' '}
+|
+            {currentUser.group}
           </div>
         </div>
-      ) : null;
+      </div>
+    ) : null;
 
     const extraContent = (
       <div className={styles.extraContent}>
@@ -173,12 +183,12 @@ export default class Workplace extends PureComponent {
                 <Card.Grid className={styles.projectGrid} key={item.id}>
                   <Card bodyStyle={{ padding: 0 }} bordered={false}>
                     <Card.Meta
-                      title={
+                      title={(
                         <div className={styles.cardTitle}>
                           <Avatar size="small" src={item.logo} />
                           <Link to={item.href}>{item.title}</Link>
                         </div>
-                      }
+)}
                       description={item.description}
                     />
                     <div className={styles.projectItemContent}>

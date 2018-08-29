@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Chart, Tooltip, Geom, Coord, Axis } from 'bizcharts';
+import {
+  Chart, Tooltip, Geom, Coord, Axis,
+} from 'bizcharts';
 import { Row, Col } from 'antd';
 import autoHeight from '../autoHeight';
 import styles from './index.less';
@@ -22,7 +24,7 @@ export default class Radar extends Component {
     }
   }
 
-  getG2Instance = chart => {
+  getG2Instance = (chart) => {
     this.chart = chart;
   };
 
@@ -33,7 +35,7 @@ export default class Radar extends Component {
     if (!geom) return;
     const items = geom.get('dataArray') || []; // 获取图形对应的
 
-    const legendData = items.map(item => {
+    const legendData = items.map((item) => {
       // eslint-disable-next-line
       const origins = item.map(t => t._origin);
       const result = {
@@ -51,7 +53,7 @@ export default class Radar extends Component {
     });
   };
 
-  handleRef = n => {
+  handleRef = (n) => {
     this.node = n;
   };
 

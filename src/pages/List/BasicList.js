@@ -38,12 +38,12 @@ const { Search, TextArea } = Input;
 }))
 @Form.create()
 export default class BasicList extends PureComponent {
+  state = { visible: false, done: false };
+
   formLayout = {
     labelCol: { span: 7 },
     wrapperCol: { span: 13 },
   };
-
-  state = { visible: false, done: false };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -62,7 +62,7 @@ export default class BasicList extends PureComponent {
     });
   };
 
-  showEditModal = item => {
+  showEditModal = (item) => {
     this.setState({
       visible: true,
       current: item,
@@ -84,7 +84,7 @@ export default class BasicList extends PureComponent {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { dispatch, form } = this.props;
     const { current } = this.state;
@@ -103,7 +103,7 @@ export default class BasicList extends PureComponent {
     });
   };
 
-  deleteItem = id => {
+  deleteItem = (id) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'list/submit',
@@ -164,7 +164,11 @@ export default class BasicList extends PureComponent {
       total: 50,
     };
 
-    const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
+    const ListContent = ({
+      data: {
+        owner, createdAt, percent, status,
+      },
+    }) => (
       <div className={styles.listContent}>
         <div className={styles.listContentItem}>
           <span>Owner</span>
@@ -182,15 +186,17 @@ export default class BasicList extends PureComponent {
 
     const MoreBtn = props => (
       <Dropdown
-        overlay={
+        overlay={(
           <Menu onClick={({ key }) => editAndDelete(key, props.current)}>
             <Menu.Item key="edit">编辑</Menu.Item>
             <Menu.Item key="delete">删除</Menu.Item>
           </Menu>
-        }
+)}
       >
         <a>
-          更多 <Icon type="down" />
+          更多
+          {' '}
+          <Icon type="down" />
         </a>
       </Dropdown>
     );
@@ -202,11 +208,11 @@ export default class BasicList extends PureComponent {
             type="success"
             title="操作成功"
             description="一系列的信息描述，很短同样也可以带标点。"
-            actions={
+            actions={(
               <Button type="primary" onClick={this.handleDone}>
                 知道了
               </Button>
-            }
+)}
             className={styles.formResult}
           />
         );
@@ -229,7 +235,7 @@ export default class BasicList extends PureComponent {
                 placeholder="请选择"
                 format="YYYY-MM-DD HH:mm:ss"
                 style={{ width: '100%' }}
-              />
+              />,
             )}
           </FormItem>
           <FormItem label="任务负责人" {...this.formLayout}>
@@ -240,7 +246,7 @@ export default class BasicList extends PureComponent {
               <Select placeholder="请选择">
                 <SelectOption value="付晓晓">付晓晓</SelectOption>
                 <SelectOption value="周毛毛">周毛毛</SelectOption>
-              </Select>
+              </Select>,
             )}
           </FormItem>
           <FormItem {...this.formLayout} label="产品描述">
@@ -282,7 +288,7 @@ export default class BasicList extends PureComponent {
               style={{ width: '100%', marginBottom: 8 }}
               icon="plus"
               onClick={this.showModal}
-              ref={component => {
+              ref={(component) => {
                 /* eslint-disable */
                 this.addBtn = findDOMNode(component);
                 /* eslint-enable */
@@ -300,7 +306,7 @@ export default class BasicList extends PureComponent {
                 <List.Item
                   actions={[
                     <a
-                      onClick={e => {
+                      onClick={(e) => {
                         e.preventDefault();
                         this.showEditModal(item);
                       }}

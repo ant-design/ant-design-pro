@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 export const getBreadcrumb = (breadcrumbNameMap, url) => {
   let breadcrumb = breadcrumbNameMap[url];
   if (!breadcrumb) {
-    Object.keys(breadcrumbNameMap).forEach(item => {
+    Object.keys(breadcrumbNameMap).forEach((item) => {
       if (pathToRegexp(item).test(url)) {
         breadcrumb = breadcrumbNameMap[item];
       }
@@ -38,7 +38,7 @@ export default class PageHeader extends PureComponent {
     }
   }
 
-  onChange = key => {
+  onChange = (key) => {
     const { onTabChange } = this.props;
     if (onTabChange) {
       onTabChange(key);
@@ -46,7 +46,9 @@ export default class PageHeader extends PureComponent {
   };
 
   getBreadcrumbProps = () => {
-    const { routes, params, location, breadcrumbNameMap } = this.props;
+    const {
+      routes, params, location, breadcrumbNameMap,
+    } = this.props;
     return {
       routes,
       params,
@@ -64,21 +66,23 @@ export default class PageHeader extends PureComponent {
 
   // Generated according to props
   conversionFromProps = () => {
-    const { breadcrumbList, breadcrumbSeparator, itemRender, linkElement = 'a' } = this.props;
+    const {
+      breadcrumbList, breadcrumbSeparator, itemRender, linkElement = 'a',
+    } = this.props;
     return (
       <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
-        {breadcrumbList.map(item => {
+        {breadcrumbList.map((item) => {
           const title = itemRender ? itemRender(item) : item.title;
           return (
             <Breadcrumb.Item key={item.title}>
               {item.href
                 ? createElement(
-                    linkElement,
-                    {
-                      [linkElement === 'a' ? 'href' : 'to']: item.href,
-                    },
-                    title
-                  )
+                  linkElement,
+                  {
+                    [linkElement === 'a' ? 'href' : 'to']: item.href,
+                  },
+                  title,
+                )
                 : title}
             </Breadcrumb.Item>
           );
@@ -88,7 +92,9 @@ export default class PageHeader extends PureComponent {
   };
 
   conversionFromLocation = (routerLocation, breadcrumbNameMap) => {
-    const { breadcrumbSeparator, home, itemRender, linkElement = 'a' } = this.props;
+    const {
+      breadcrumbSeparator, home, itemRender, linkElement = 'a',
+    } = this.props;
     // Convert the url to an array
     const pathSnippets = urlToList(routerLocation.pathname);
     // Loop data mosaic routing
@@ -101,7 +107,7 @@ export default class PageHeader extends PureComponent {
           {createElement(
             isLinkable ? linkElement : 'span',
             { [linkElement === 'a' ? 'href' : 'to']: url },
-            name
+            name,
           )}
         </Breadcrumb.Item>
       ) : null;
@@ -114,9 +120,9 @@ export default class PageHeader extends PureComponent {
           {
             [linkElement === 'a' ? 'href' : 'to']: '/',
           },
-          home || 'Home'
+          home || 'Home',
         )}
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
     return (
       <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
@@ -131,7 +137,9 @@ export default class PageHeader extends PureComponent {
    */
   conversionBreadcrumbList = () => {
     const { breadcrumbList, breadcrumbSeparator } = this.props;
-    const { routes, params, routerLocation, breadcrumbNameMap } = this.getBreadcrumbProps();
+    const {
+      routes, params, routerLocation, breadcrumbNameMap,
+    } = this.getBreadcrumbProps();
     if (breadcrumbList && breadcrumbList.length) {
       return this.conversionFromProps();
     }
@@ -170,7 +178,7 @@ export default class PageHeader extends PureComponent {
           href: paths.join('/') || '/',
           to: paths.join('/') || '/',
         },
-        route.breadcrumbName
+        route.breadcrumbName,
       )
     );
   };

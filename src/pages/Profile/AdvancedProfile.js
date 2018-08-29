@@ -122,14 +122,13 @@ const popoverContent = (
   </div>
 );
 
-const customDot = (dot, { status }) =>
-  status === 'process' ? (
-    <Popover placement="topLeft" arrowPointAtCenter content={popoverContent}>
-      {dot}
-    </Popover>
-  ) : (
-    dot
-  );
+const customDot = (dot, { status }) => (status === 'process' ? (
+  <Popover placement="topLeft" arrowPointAtCenter content={popoverContent}>
+    {dot}
+  </Popover>
+) : (
+  dot
+));
 
 const operationTabList = [
   {
@@ -161,12 +160,11 @@ const columns = [
     title: '执行结果',
     dataIndex: 'status',
     key: 'status',
-    render: text =>
-      text === 'agree' ? (
-        <Badge status="success" text="成功" />
-      ) : (
-        <Badge status="error" text="驳回" />
-      ),
+    render: text => (text === 'agree' ? (
+      <Badge status="success" text="成功" />
+    ) : (
+      <Badge status="error" text="驳回" />
+    )),
   },
   {
     title: '操作时间',
@@ -205,7 +203,7 @@ export default class AdvancedProfile extends Component {
     this.setStepDirection.cancel();
   }
 
-  onOperationTabChange = key => {
+  onOperationTabChange = (key) => {
     this.setState({ operationkey: key });
   };
 
@@ -290,7 +288,7 @@ export default class AdvancedProfile extends Component {
             <Description term="该数据更新时间">2017-08-08</Description>
             <Description>&nbsp;</Description>
             <Description
-              term={
+              term={(
                 <span>
                   某某数据
                   <Tooltip title="数据说明">
@@ -300,7 +298,7 @@ export default class AdvancedProfile extends Component {
                     />
                   </Tooltip>
                 </span>
-              }
+)}
             >
               725
             </Description>

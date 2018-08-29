@@ -6,7 +6,9 @@ import styles from './index.less';
 
 const { CheckableTag } = Tag;
 
-const TagSelectOption = ({ children, checked, onChange, value }) => (
+const TagSelectOption = ({
+  children, checked, onChange, value,
+}) => (
   <CheckableTag checked={checked} key={value} onChange={state => onChange(value, state)}>
     {children}
   </CheckableTag>
@@ -18,6 +20,7 @@ class TagSelect extends Component {
   static defaultProps = {
     hideCheckAll: false,
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +29,14 @@ class TagSelect extends Component {
     };
   }
 
-  onChange = value => {
+  static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps && nextProps.value) {
+      return { value: nextProps.value };
+    }
+    return null;
+  }
+
+  onChange = (value) => {
     const { onChange } = this.props;
     if (!('value' in this.props)) {
       this.setState({ value });
@@ -36,20 +46,13 @@ class TagSelect extends Component {
     }
   };
 
-  onSelectAll = checked => {
+  onSelectAll = (checked) => {
     let checkedTags = [];
     if (checked) {
       checkedTags = this.getAllTags();
     }
     this.onChange(checkedTags);
   };
-
-  static getDerivedStateFromProps(nextProps) {
-    if ('value' in nextProps && nextProps.value) {
-      return { value: nextProps.value };
-    }
-    return null;
-  }
 
   getAllTags() {
     let { children } = this.props;
@@ -80,17 +83,15 @@ class TagSelect extends Component {
     });
   };
 
-  isTagSelectOption = node => {
-    return (
-      node &&
-      node.type &&
-      (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption')
-    );
-  };
+  isTagSelectOption = node => node
+    && node.type
+    && (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
 
   render() {
     const { value, expand } = this.state;
-    const { children, hideCheckAll, className, style, expandable } = this.props;
+    const {
+      children, hideCheckAll, className, style, expandable,
+    } = this.props;
 
     const checkedAll = this.getAllTags().length === value.length;
 
@@ -105,8 +106,8 @@ class TagSelect extends Component {
             全部
           </CheckableTag>
         )}
-        {value &&
-          React.Children.map(children, child => {
+        {value
+          && React.Children.map(children, (child) => {
             if (this.isTagSelectOption(child)) {
               return React.cloneElement(child, {
                 key: `tag-select-${child.props.value}`,
@@ -119,7 +120,9 @@ class TagSelect extends Component {
           })}
         {expandable && (
           <a className={styles.trigger} onClick={this.handleExpand}>
-            {expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
+            {expand ? '收起' : '展开'}
+            {' '}
+            <Icon type={expand ? 'up' : 'down'} />
           </a>
         )}
       </div>

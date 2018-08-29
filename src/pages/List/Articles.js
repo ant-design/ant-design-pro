@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
-import { Form, Card, Select, List, Tag, Icon, Avatar, Row, Col, Button } from 'antd';
+import {
+  Form, Card, Select, List, Tag, Icon, Avatar, Row, Col, Button,
+} from 'antd';
 
 import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
@@ -77,12 +79,18 @@ export default class SearchList extends Component {
       </span>
     );
 
-    const ListContent = ({ data: { content, updatedAt, avatar, owner, href } }) => (
+    const ListContent = ({
+      data: {
+        content, updatedAt, avatar, owner, href,
+      },
+    }) => (
       <div className={styles.listContent}>
         <div className={styles.description}>{content}</div>
         <div className={styles.extra}>
           <Avatar src={avatar} size="small" />
-          <a href={href}>{owner}</a> 发布在
+          <a href={href}>{owner}</a>
+          {' '}
+发布在
           <a href={href}>{href}</a>
           <em>{moment(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
         </div>
@@ -97,20 +105,21 @@ export default class SearchList extends Component {
       },
     };
 
-    const loadMore =
-      list.length > 0 ? (
-        <div style={{ textAlign: 'center', marginTop: 16 }}>
-          <Button onClick={this.fetchMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
-            {loading ? (
-              <span>
-                <Icon type="loading" /> 加载中...
-              </span>
-            ) : (
-              '加载更多'
-            )}
-          </Button>
-        </div>
-      ) : null;
+    const loadMore = list.length > 0 ? (
+      <div style={{ textAlign: 'center', marginTop: 16 }}>
+        <Button onClick={this.fetchMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
+          {loading ? (
+            <span>
+              <Icon type="loading" />
+              {' '}
+加载中...
+            </span>
+          ) : (
+            '加载更多'
+          )}
+        </Button>
+      </div>
+    ) : null;
 
     return (
       <Fragment>
@@ -132,7 +141,7 @@ export default class SearchList extends Component {
                     <TagSelect.Option value="cat10">类目十</TagSelect.Option>
                     <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
                     <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
-                  </TagSelect>
+                  </TagSelect>,
                 )}
               </FormItem>
             </StandardFormRow>
@@ -153,7 +162,7 @@ export default class SearchList extends Component {
                             {owner.name}
                           </Option>
                         ))}
-                      </Select>
+                      </Select>,
                     )}
                     <a className={styles.selfTrigger} onClick={this.setOwner}>
                       只看自己的
@@ -173,7 +182,7 @@ export default class SearchList extends Component {
                         style={{ maxWidth: 200, width: '100%' }}
                       >
                         <Option value="lisa">李三</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>
@@ -186,7 +195,7 @@ export default class SearchList extends Component {
                         style={{ maxWidth: 200, width: '100%' }}
                       >
                         <Option value="good">优秀</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>
@@ -217,18 +226,18 @@ export default class SearchList extends Component {
                 extra={<div className={styles.listItemExtra} />}
               >
                 <List.Item.Meta
-                  title={
+                  title={(
                     <a className={styles.listItemMetaTitle} href={item.href}>
                       {item.title}
                     </a>
-                  }
-                  description={
+)}
+                  description={(
                     <span>
                       <Tag>Ant Design</Tag>
                       <Tag>设计语言</Tag>
                       <Tag>蚂蚁金服</Tag>
                     </span>
-                  }
+)}
                 />
                 <ListContent data={item} />
               </List.Item>
