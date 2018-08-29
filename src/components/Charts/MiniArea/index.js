@@ -5,6 +5,29 @@ import styles from '../index.less';
 
 @autoHeight()
 export default class MiniArea extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.chartRef = React.createRef();
+  }
+  componentDidMount() {
+    const dom = this.chartRef.current;
+    const check = () => {
+      this.timer = setTimeout(() => {    
+        const width = getComputedStyle(dom).width;
+        // eslint-disable-next-line
+        if (!parseInt(width)) {
+          check();
+          return;
+        }
+        clearTimeout(this.timer);
+        this.g2Chart.forceFit();
+      }, 16);
+    };
+    check();
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
   render() {
     const {
       height,
@@ -46,7 +69,7 @@ export default class MiniArea extends React.PureComponent {
 
     return (
       <div className={styles.miniChart} style={{ height }}>
-        <div className={styles.chartContent}>
+        <div className={styles.chartContent} ref={this.chartRef}>
           {height > 0 && (
             <Chart
               animate={animate}
@@ -55,6 +78,9 @@ export default class MiniArea extends React.PureComponent {
               forceFit={forceFit}
               data={data}
               padding={padding}
+              onGetG2Instance={g2Chart => {
+                this.g2Chart = g2Chart;
+              }}
             >
               <Axis
                 key="axis-x"
