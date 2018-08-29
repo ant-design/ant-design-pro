@@ -118,12 +118,7 @@ function getFakeList(req, res) {
 
   const result = fakeList(count);
   sourceData = result;
-
-  if (res && res.json) {
-    res.json(result);
-  } else {
-    return result;
-  }
+  res.json(result);
 }
 
 function postFakeList(req, res) {
@@ -155,11 +150,7 @@ function postFakeList(req, res) {
       break;
   }
 
-  if (res && res.json) {
-    res.json(result);
-  } else {
-    return result;
-  }
+  res.json(result);
 }
 
 const getNotice = [
@@ -327,11 +318,7 @@ const getActivities = [
 ];
 
 function getFakeCaptcha(req, res) {
-  if (res && res.json) {
-    res.json('captcha-xxx');
-  } else {
-    return 'captcha-xxx';
-  }
+  res.json('captcha-xxx');
 }
 
 export default {

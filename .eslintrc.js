@@ -22,7 +22,6 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/anchor-is-valid': 0,
-    'consistent-return': 0,
   },
   settings: {
     polyfills: ['fetch', 'promises'],
