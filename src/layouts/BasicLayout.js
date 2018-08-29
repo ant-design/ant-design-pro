@@ -1,12 +1,13 @@
 import React from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
-import deepEqual from 'lodash/isEqual';
+import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import { connect } from 'dva';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
+import { enquireScreen, unenquireScreen } from 'enquire-js';
 import { formatMessage } from 'umi/locale';
 import SiderMenu from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
@@ -15,28 +16,59 @@ import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
+// TODO: should use this.props.routes
+import routerConfig from '../../config/router.config';
 
 const { Content } = Layout;
 const { check } = Authorized;
+
+// Conversion router to menu.
+function formatter(data, parentPath = '', parentAuthority, parentName) {
+  return data.map(item => {
+    let locale = 'menu';
+    if (parentName && item.name) {
+      locale = `${parentName}.${item.name}`;
+    } else if (item.name) {
+      locale = `menu.${item.name}`;
+    } else if (parentName) {
+      locale = parentName;
+    }
+    const result = {
+      ...item,
+      locale,
+      authority: item.authority || parentAuthority,
+    };
+    if (item.routes) {
+      const children = formatter(item.routes, `${parentPath}${item.path}/`, item.authority, locale);
+      // Reduce memory usage
+      result.children = children;
+    }
+    delete result.routes;
+    return result;
+  });
+}
+
+// get menu map data
+const menuData = formatter(routerConfig[1].routes);
 
 /**
  * 获取面包屑映射
  * @param {Object} menuData 菜单配置
  */
-const getBreadcrumbNameMap = memoizeOne(meun => {
+const getBreadcrumbNameMap = memoizeOne(menu => {
   const routerMap = {};
-  const mergeMeunAndRouter = meunData => {
-    meunData.forEach(meunItem => {
-      if (meunItem.children) {
-        mergeMeunAndRouter(meunItem.children);
+  const mergeMenuAndRouter = () => {
+    menuData.forEach(menuItem => {
+      if (menuItem.children) {
+        mergeMenuAndRouter(menuItem.children);
       }
       // Reduce memory usage
-      routerMap[meunItem.path] = meunItem;
+      routerMap[menuItem.path] = menuItem;
     });
   };
-  mergeMeunAndRouter(meun);
+  mergeMenuAndRouter(menu);
   return routerMap;
-}, deepEqual);
+}, isEqual);
 
 const query = {
   'screen-xs': {
@@ -66,31 +98,47 @@ const query = {
 class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { menuData } = this.props;
     this.getPageTitle = memoizeOne(this.getPageTitle);
     // Because there are many places to be. So put it here
-    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
+    this.breadcrumbNameMap = getBreadcrumbNameMap();
+    console.log(this.breadcrumbNameMap);
   }
 
   state = {
     rendering: true,
+    isMobile: false,
   };
 
   componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'user/fetchCurrent',
+    });
+    dispatch({
+      type: 'setting/getSetting',
+    });
     this.renderRef = requestAnimationFrame(() => {
       this.setState({
         rendering: false,
       });
     });
+    this.enquireHandler = enquireScreen(mobile => {
+      const { isMobile } = this.state;
+      if (isMobile !== mobile) {
+        this.setState({
+          isMobile: mobile,
+        });
+      }
+    });
   }
 
   componentDidUpdate() {
-    const { menuData } = this.props;
-    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
+    this.breadcrumbNameMap = getBreadcrumbNameMap();
   }
 
   componentWillUnmount() {
     cancelAnimationFrame(this.renderRef);
+    unenquireScreen(this.enquireHandler);
   }
 
   getContext() {
@@ -168,13 +216,12 @@ class BasicLayout extends React.PureComponent {
 
   render() {
     const {
-      isMobile,
       silderTheme,
       layout: PropsLayout,
       children,
       location: { pathname },
     } = this.props;
-    const { rendering } = this.state;
+    const { rendering, isMobile } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const layout = (
       <Layout>
