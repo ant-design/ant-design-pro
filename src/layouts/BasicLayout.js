@@ -16,8 +16,6 @@ import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
-// TODO: should use this.props.routes
-import routerConfig from '../../config/router.config';
 
 const { Content } = Layout;
 const { check } = Authorized;
@@ -48,28 +46,6 @@ function formatter(data, parentPath = '', parentAuthority, parentName) {
   });
 }
 
-// get menu map data
-const menuData = formatter(routerConfig[1].routes);
-
-/**
- * 获取面包屑映射
- * @param {Object} menuData 菜单配置
- */
-const getBreadcrumbNameMap = memoizeOne(menu => {
-  const routerMap = {};
-  const mergeMenuAndRouter = data => {
-    data.forEach(menuItem => {
-      if (menuItem.children) {
-        mergeMenuAndRouter(menuItem.children);
-      }
-      // Reduce memory usage
-      routerMap[menuItem.path] = menuItem;
-    });
-  };
-  mergeMenuAndRouter(menu);
-  return routerMap;
-}, isEqual);
-
 const query = {
   'screen-xs': {
     maxWidth: 575,
@@ -99,8 +75,8 @@ class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
     this.getPageTitle = memoizeOne(this.getPageTitle);
-    // Because there are many places to be. So put it here
-    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
+    this.getBreadcrumbNameMap = memoizeOne(this.getBreadcrumbNameMap, isEqual);
+    this.breadcrumbNameMap = this.getBreadcrumbNameMap();
   }
 
   state = {
@@ -132,7 +108,7 @@ class BasicLayout extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
+    this.breadcrumbNameMap = this.getBreadcrumbNameMap();
   }
 
   componentWillUnmount() {
@@ -146,6 +122,32 @@ class BasicLayout extends React.PureComponent {
       location,
       breadcrumbNameMap: this.breadcrumbNameMap,
     };
+  }
+
+  getMenuData() {
+    const {
+      route: { routes },
+    } = this.props;
+    return formatter(routes);
+  }
+
+  /**
+   * 获取面包屑映射
+   * @param {Object} menuData 菜单配置
+   */
+  getBreadcrumbNameMap() {
+    const routerMap = {};
+    const mergeMenuAndRouter = data => {
+      data.forEach(menuItem => {
+        if (menuItem.children) {
+          mergeMenuAndRouter(menuItem.children);
+        }
+        // Reduce memory usage
+        routerMap[menuItem.path] = menuItem;
+      });
+    };
+    mergeMenuAndRouter(this.getMenuData());
+    return routerMap;
   }
 
   getPageTitle = pathname => {
@@ -230,7 +232,7 @@ class BasicLayout extends React.PureComponent {
             Authorized={Authorized}
             theme={silderTheme}
             onCollapse={this.handleMenuCollapse}
-            menuData={menuData}
+            menuData={this.getMenuData()}
             {...this.props}
           />
         )}

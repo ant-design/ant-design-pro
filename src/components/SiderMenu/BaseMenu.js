@@ -23,7 +23,7 @@ const getIcon = icon => {
 };
 
 export const getMenuMatches = (flatMenuKeys, path) =>
-  flatMenuKeys.filter(item => pathToRegexp(item).test(path));
+  flatMenuKeys.filter(item => item && pathToRegexp(item).test(path));
 
 export default class BaseMenu extends PureComponent {
   constructor(props) {
