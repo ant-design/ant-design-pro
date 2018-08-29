@@ -21,7 +21,7 @@ import {
   Select,
 } from 'antd';
 
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Result from '@/components/Result';
 
 import styles from './BasicList.less';
@@ -253,7 +253,7 @@ export default class BasicList extends PureComponent {
       );
     };
     return (
-      <PageHeaderLayout>
+      <PageHeaderWrapper>
         <div className={styles.standardList}>
           <Card bordered={false}>
             <Row>
@@ -332,7 +332,7 @@ export default class BasicList extends PureComponent {
         >
           {getModalContent()}
         </Modal>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

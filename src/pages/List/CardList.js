@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Card, Button, Icon, List } from 'antd';
 
 import Ellipsis from '@/components/Ellipsis';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from './CardList.less';
 
@@ -61,7 +61,7 @@ export default class CardList extends PureComponent {
     );
 
     return (
-      <PageHeaderLayout title="卡片列表" content={content} extraContent={extraContent}>
+      <PageHeaderWrapper title="卡片列表" content={content} extraContent={extraContent}>
         <div className={styles.cardList}>
           <List
             rowKey="id"
@@ -93,7 +93,7 @@ export default class CardList extends PureComponent {
             }
           />
         </div>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

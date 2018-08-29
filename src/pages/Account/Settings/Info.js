@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import router from 'umi/router';
 import { FormattedMessage } from 'umi/locale';
 import { Menu } from 'antd';
-import GridContent from '@/layouts/GridContent';
+import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import styles from './Info.less';
 
 const { Item } = Menu;
