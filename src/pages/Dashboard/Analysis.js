@@ -132,7 +132,7 @@ class Analysis extends Component {
     const { rangePickerValue } = this.state;
     const value = getTimeDistance(type);
     if (!rangePickerValue[0] || !rangePickerValue[1]) {
-      return undefined;
+      return '';
     }
     if (
       rangePickerValue[0].isSame(value[0], 'day') &&
@@ -140,7 +140,7 @@ class Analysis extends Component {
     ) {
       return styles.currentDate;
     }
-    return undefined;
+    return '';
   }
 
   render() {
