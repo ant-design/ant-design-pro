@@ -1,4 +1,4 @@
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 import { message } from 'antd';
 import { fakeSubmitForm } from '@/services/api';
 
@@ -25,7 +25,7 @@ export default {
         type: 'saveStepFormData',
         payload,
       });
-      yield put(routerRedux.push('/form/step-form/result'));
+      router.push('/form/step-form/result');
     },
     *submitAdvancedForm({ payload }, { call }) {
       yield call(fakeSubmitForm, payload);
