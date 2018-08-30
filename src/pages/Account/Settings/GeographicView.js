@@ -55,13 +55,11 @@ export default class GeographicView extends PureComponent {
         </Option>
       );
     }
-    return list.map(item => {
-      return (
-        <Option key={item.id} value={item.id}>
-          {item.name}
-        </Option>
-      );
-    });
+    return list.map(item => (
+      <Option key={item.id} value={item.id}>
+        {item.name}
+      </Option>
+    ));
   };
 
   selectProvinceItem = item => {

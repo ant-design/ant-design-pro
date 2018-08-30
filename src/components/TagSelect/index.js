@@ -18,12 +18,20 @@ class TagSelect extends Component {
   static defaultProps = {
     hideCheckAll: false,
   };
+
   constructor(props) {
     super(props);
     this.state = {
       expand: false,
       value: props.value || props.defaultValue || [],
     };
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps && nextProps.value) {
+      return { value: nextProps.value };
+    }
+    return null;
   }
 
   onChange = value => {
@@ -43,13 +51,6 @@ class TagSelect extends Component {
     }
     this.onChange(checkedTags);
   };
-
-  static getDerivedStateFromProps(nextProps) {
-    if ('value' in nextProps && nextProps.value) {
-      return { value: nextProps.value };
-    }
-    return null;
-  }
 
   getAllTags() {
     let { children } = this.props;
@@ -80,13 +81,10 @@ class TagSelect extends Component {
     });
   };
 
-  isTagSelectOption = node => {
-    return (
-      node &&
-      node.type &&
-      (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption')
-    );
-  };
+  isTagSelectOption = node =>
+    node &&
+    node.type &&
+    (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
 
   render() {
     const { value, expand } = this.state;

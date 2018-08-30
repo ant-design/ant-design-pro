@@ -21,8 +21,8 @@ export default class LoginPage extends Component {
     this.setState({ type });
   };
 
-  onGetCaptcha = () => {
-    return new Promise((resolve, reject) => {
+  onGetCaptcha = () =>
+    new Promise((resolve, reject) => {
       this.loginForm.validateFields(['mobile'], {}, (err, values) => {
         if (err) {
           reject(err);
@@ -37,7 +37,6 @@ export default class LoginPage extends Component {
         }
       });
     });
-  };
 
   handleSubmit = (err, values) => {
     const { type } = this.state;
@@ -59,9 +58,9 @@ export default class LoginPage extends Component {
     });
   };
 
-  renderMessage = content => {
-    return <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />;
-  };
+  renderMessage = content => (
+    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
+  );
 
   render() {
     const { login, submitting } = this.props;

@@ -26,22 +26,18 @@ describe('test getBreadcrumb', () => {
     expect(getBreadcrumb(routerData, '/userinfo/2144/addr').name).toEqual('收货订单');
   });
   it('Loop through the parameters', () => {
-    const urlNameList = urlToList('/userinfo/2144/addr').map(url => {
-      return getBreadcrumb(routerData, url).name;
-    });
+    const urlNameList = urlToList('/userinfo/2144/addr').map(
+      url => getBreadcrumb(routerData, url).name
+    );
     expect(urlNameList).toEqual(['用户列表', '用户信息', '收货订单']);
   });
 
   it('a path', () => {
-    const urlNameList = urlToList('/userinfo').map(url => {
-      return getBreadcrumb(routerData, url).name;
-    });
+    const urlNameList = urlToList('/userinfo').map(url => getBreadcrumb(routerData, url).name);
     expect(urlNameList).toEqual(['用户列表']);
   });
   it('Secondary path', () => {
-    const urlNameList = urlToList('/userinfo/2144').map(url => {
-      return getBreadcrumb(routerData, url).name;
-    });
+    const urlNameList = urlToList('/userinfo/2144').map(url => getBreadcrumb(routerData, url).name);
     expect(urlNameList).toEqual(['用户列表', '用户信息']);
   });
 });

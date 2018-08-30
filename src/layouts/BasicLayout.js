@@ -10,7 +10,7 @@ import pathToRegexp from 'path-to-regexp';
 import { formatMessage } from 'umi/locale';
 import SiderMenu from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
-import SettingDarwer from '@/components/SettingDarwer';
+import SettingDrawer from '@/components/SettingDrawer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
@@ -64,9 +64,6 @@ const query = {
 };
 
 class BasicLayout extends React.PureComponent {
-  state = {
-    rendering: true,
-  };
   constructor(props) {
     super(props);
     const { menuData } = this.props;
@@ -74,6 +71,28 @@ class BasicLayout extends React.PureComponent {
     // Because there are many places to be. So put it here
     this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
   }
+
+  state = {
+    rendering: true,
+  };
+
+  componentDidMount() {
+    this.renderRef = requestAnimationFrame(() => {
+      this.setState({
+        rendering: false,
+      });
+    });
+  }
+
+  componentDidUpdate() {
+    const { menuData } = this.props;
+    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.renderRef);
+  }
+
   getContext() {
     const { location } = this.props;
     return {
@@ -81,10 +100,7 @@ class BasicLayout extends React.PureComponent {
       breadcrumbNameMap: this.breadcrumbNameMap,
     };
   }
-  componentDidUpdate() {
-    const { menuData } = this.props;
-    this.breadcrumbNameMap = getBreadcrumbNameMap(menuData);
-  }
+
   getPageTitle = pathname => {
     let currRouterData = null;
     // match params path
@@ -149,16 +165,7 @@ class BasicLayout extends React.PureComponent {
       payload: collapsed,
     });
   };
-  componentDidMount() {
-    this.renderRef = requestAnimationFrame(() => {
-      this.setState({
-        rendering: false,
-      });
-    });
-  }
-  componentWillUnmount() {
-    cancelAnimationFrame(this.renderRef);
-  }
+
   render() {
     const {
       isMobile,
@@ -167,6 +174,7 @@ class BasicLayout extends React.PureComponent {
       children,
       location: { pathname },
     } = this.props;
+    const { rendering } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const layout = (
       <Layout>
@@ -202,7 +210,9 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {this.state.rendering ? null : <SettingDarwer />}
+        {rendering && process.env.NODE_ENV === 'production' ? null : ( // Do show SettingDrawer in production
+          <SettingDrawer />
+        )}
       </React.Fragment>
     );
   }

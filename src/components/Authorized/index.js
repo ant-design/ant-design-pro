@@ -1,7 +1,7 @@
 import Authorized from './Authorized';
 import AuthorizedRoute from './AuthorizedRoute';
 import Secured from './Secured';
-import check from './CheckPermissions.js';
+import check from './CheckPermissions';
 import renderAuthorize from './renderAuthorize';
 
 Authorized.Secured = Secured;

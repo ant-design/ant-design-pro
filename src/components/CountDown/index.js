@@ -35,6 +35,16 @@ class CountDown extends Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, preState) {
+    const { lastTime } = initTime(nextProps);
+    if (preState.lastTime !== lastTime) {
+      return {
+        lastTime,
+      };
+    }
+    return null;
+  }
+
   componentDidMount() {
     this.tick();
   }
@@ -51,16 +61,6 @@ class CountDown extends Component {
     clearTimeout(this.timer);
   }
 
-  static getDerivedStateFromProps(nextProps, preState) {
-    const { lastTime } = initTime(nextProps);
-    if (preState.lastTime !== lastTime) {
-      return {
-        lastTime,
-      };
-    }
-    return null;
-  }
-
   // defaultFormat = time => (
   //  <span>{moment(time).format('hh:mm:ss')}</span>
   // );
@@ -73,11 +73,7 @@ class CountDown extends Component {
     const s = Math.floor((time - h * hours - m * minutes) / 1000);
     return (
       <span>
-        {fixedZero(h)}
-        :
-        {fixedZero(m)}
-        :
-        {fixedZero(s)}
+        {fixedZero(h)}:{fixedZero(m)}:{fixedZero(s)}
       </span>
     );
   };

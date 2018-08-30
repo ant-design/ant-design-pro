@@ -1,6 +1,7 @@
 // https://umijs.org/config/
 const pageRoutes = require('./router.config');
 const webpackplugin = require('./plugin.config');
+const defaultSetting = require('../src/defaultSetting');
 
 export default {
   // add for transfer to umi
@@ -17,7 +18,8 @@ export default {
           default: 'zh-CN', // default zh-CN
           baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
         },
-        polyfills: ['ie9'],
+        dynamicImport: true,
+        polyfills: ['ie11'],
         ...(!process.env.TEST && require('os').platform() === 'darwin'
           ? {
               dll: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
@@ -29,13 +31,13 @@ export default {
   ],
   // 路由配置
   routes: pageRoutes,
-
+  // Theme for antd
+  // https://ant.design/docs/react/customize-theme-cn
   theme: {
-    'card-actions-background': '#f5f8fa',
+    'primary-color': defaultSetting.primaryColor,
   },
   externals: {
     '@antv/data-set': 'DataSet',
-    rollbar: 'rollbar',
   },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
