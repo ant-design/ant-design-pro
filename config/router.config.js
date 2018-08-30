@@ -38,7 +38,7 @@ module.exports = [
             path: '/form/step-form',
             name: 'stepform',
             component: './Forms/StepForm',
-            hideChildren: true,
+            hideChildrenInMenu: true,
             routes: [
               { path: '/form/step-form', name: 'stepform', redirect: '/form/step-form/info' },
               { path: '/form/step-form/info', name: 'info', component: './Forms/StepForm/Step1' },

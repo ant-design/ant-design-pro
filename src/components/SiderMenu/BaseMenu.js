@@ -77,8 +77,8 @@ export default class BaseMenu extends PureComponent {
    * get SubMenu or Item
    */
   getSubMenuOrItem = item => {
-    // doc: add hideChildren
-    if (item.children && !item.hideChildren && item.children.some(child => child.name)) {
+    // doc: add hideChildrenInMenu
+    if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
       const name = formatMessage({ id: item.locale });
       return (
         <SubMenu
