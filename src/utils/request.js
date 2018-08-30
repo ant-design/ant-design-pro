@@ -1,8 +1,9 @@
-import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
-
+import * as AppInfo from '@/common/config/AppInfo';
+import ax from './axiosWrap';
+import cookie from "react-cookies";
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -20,7 +21,6 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
-
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -97,6 +97,20 @@ export default function request(url, options = {}) {
       };
     }
   }
+  const config = {
+    url: AppInfo.request_prefix+url,
+    ...newOptions,
+  };
+
+  if('/auth/login' === url ){
+    config.headers ={
+      'Authorization': 'login'
+    }
+  }else {
+    config.headers ={
+      'Authorization': "Bearer" + (cookie.load("eva_token")?cookie.load("eva_token"):'')
+    }
+  }
 
   const expirys = options.expirys || 60;
   // options.expirys !== false, return the cache,
@@ -113,22 +127,26 @@ export default function request(url, options = {}) {
       sessionStorage.removeItem(`${hashcode}:timestamp`);
     }
   }
-  return fetch(url, newOptions)
-    .then(checkStatus)
-    .then(cachedSave)
+
+  return ax
+    .request(config)
+ 	.then(checkStatus)
     .then(response => {
-      // DELETE and 204 do not return data by default
-      // using .json will report an error.
-      if (newOptions.method === 'DELETE' || response.status === 204) {
-        return response.text();
-      }
-      return response.json();
+      return response.data;
     })
     .catch(e => {
-      const status = e.name;
+      const response = e.response;
+      const status = response.status;
+
+      const errortext = response.statusText ? response.statusText : codeMessage[response.status];
+      const url = response.config.url;
+
+      notification.error({
+        message: `请求错误 : ${url}`,
+        description: errortext ? errortext : '服务器错误',
+      });
+
       if (status === 401) {
-        // @HACK
-        /* eslint-disable no-underscore-dangle */
         window.g_app._store.dispatch({
           type: 'login/logout',
         });
