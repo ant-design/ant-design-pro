@@ -13,7 +13,7 @@ module.exports = [
   // app
   {
     path: '/',
-    component: '../layouts/LoadingPage',
+    component: '../layouts/BasicLayout',
     routes: [
       // dashboard
       { path: '/', redirect: '/dashboard/analysis' },
@@ -42,7 +42,7 @@ module.exports = [
             path: '/form/step-form',
             name: 'stepform',
             component: './Forms/StepForm',
-            hideChildren: true,
+            hideChildrenInMenu: true,
             routes: [
               {
                 path: '/form/step-form',

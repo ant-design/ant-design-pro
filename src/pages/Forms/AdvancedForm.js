@@ -14,7 +14,7 @@ import {
 } from 'antd';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import TableForm from './TableForm';
 import styles from './style.less';
 
@@ -142,7 +142,7 @@ export default class AdvancedForm extends PureComponent {
     };
     const { width } = this.state;
     return (
-      <PageHeaderLayout
+      <PageHeaderWrapper
         title="高级表单"
         content="高级表单常见于一次性输入和提交大批量数据的场景。"
         wrapperClassName={styles.advancedForm}
@@ -303,7 +303,7 @@ export default class AdvancedForm extends PureComponent {
             提交
           </Button>
         </FooterToolbar>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

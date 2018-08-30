@@ -19,7 +19,7 @@ import {
 } from 'antd';
 import classNames from 'classnames';
 import DescriptionList from '@/components/DescriptionList';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './AdvancedProfile.less';
 
 const { Step } = Steps;
@@ -257,7 +257,7 @@ export default class AdvancedProfile extends Component {
     };
 
     return (
-      <PageHeaderLayout
+      <PageHeaderWrapper
         title="单号：234231029431"
         logo={
           <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png" />
@@ -345,7 +345,7 @@ export default class AdvancedProfile extends Component {
         >
           {contentList[operationkey]}
         </Card>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }
