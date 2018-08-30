@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
-import { Route, Redirect, Switch, routerRedux } from 'dva/router';
+import { routerRedux } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
+import memoizeOne from 'memoize-one';
+import deepEqual from 'lodash.isequal';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
-import NotFound from '../routes/Exception/404';
-import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 
 const { Content, Header, Footer } = Layout;
-const { AuthorizedRoute, check } = Authorized;
+const { check } = Authorized;
 
 /**
  * 根据菜单取得重定向地址.
@@ -42,21 +42,21 @@ getMenuData().forEach(getRedirect);
 /**
  * 获取面包屑映射
  * @param {Object} menuData 菜单配置
- * @param {Object} routerData 路由配置
  */
-const getBreadcrumbNameMap = (menuData, routerData) => {
-  const result = {};
-  const childResult = {};
-  for (const i of menuData) {
-    if (!routerData[i.path]) {
-      result[i.path] = i;
-    }
-    if (i.children) {
-      Object.assign(childResult, getBreadcrumbNameMap(i.children, routerData));
-    }
-  }
-  return Object.assign({}, routerData, result, childResult);
-};
+const getBreadcrumbNameMap = memoizeOne(meun => {
+  const routerMap = {};
+  const mergeMeunAndRouter = meunData => {
+    meunData.forEach(meunItem => {
+      if (meunItem.children) {
+        mergeMeunAndRouter(meunItem.children);
+      }
+      // Reduce memory usage
+      routerMap[meunItem.path] = meunItem;
+    });
+  };
+  mergeMeunAndRouter(meun);
+  return routerMap;
+}, deepEqual);
 
 const query = {
   'screen-xs': {
@@ -104,11 +104,17 @@ export default class BasicLayout extends React.PureComponent {
     isMobile,
   };
 
+  constructor(props) {
+    super(props);
+    this.getPageTitle = memoizeOne(this.getPageTitle);
+    this.breadcrumbNameMap = getBreadcrumbNameMap(getMenuData());
+  }
+
   getChildContext() {
-    const { location, routerData } = this.props;
+    const { location } = this.props;
     return {
       location,
-      breadcrumbNameMap: getBreadcrumbNameMap(getMenuData(), routerData),
+      breadcrumbNameMap: this.breadcrumbNameMap,
     };
   }
 
@@ -128,23 +134,19 @@ export default class BasicLayout extends React.PureComponent {
     unenquireScreen(this.enquireHandler);
   }
 
-  getPageTitle() {
-    const { routerData, location } = this.props;
-    const { pathname } = location;
-    let title = 'Ant Design Pro';
+  getPageTitle = pathname => {
     let currRouterData = null;
     // match params path
-    for (const key in routerData) {
+    Object.keys(this.breadcrumbNameMap).forEach(key => {
       if (pathToRegexp(key).test(pathname)) {
-        currRouterData = routerData[key];
-        break;
+        currRouterData = this.breadcrumbNameMap[key];
       }
+    });
+    if (!currRouterData) {
+      return 'Ant Design Pro';
     }
-    if (currRouterData && currRouterData.name) {
-      title = `${currRouterData.name} - Ant Design Pro`;
-    }
-    return title;
-  }
+    return `${currRouterData.name} - Ant Design Pro`;
+  };
 
   getBaseRedirect = () => {
     // According to the url parameter to redirect
@@ -212,12 +214,11 @@ export default class BasicLayout extends React.PureComponent {
       collapsed,
       fetchingNotices,
       notices,
-      routerData,
-      match,
-      location,
+      children,
+      location: { pathname },
     } = this.props;
     const { isMobile: mb } = this.state;
-    const baseRedirect = this.getBaseRedirect();
+    // const baseRedirect = this.getBaseRedirect();
     const layout = (
       <Layout>
         <SiderMenu
@@ -247,25 +248,7 @@ export default class BasicLayout extends React.PureComponent {
               onNoticeVisibleChange={this.handleNoticeVisibleChange}
             />
           </Header>
-          <Content style={{ margin: '24px 24px 0', height: '100%' }}>
-            <Switch>
-              {redirectData.map(item => (
-                <Redirect key={item.from} exact from={item.from} to={item.to} />
-              ))}
-              {getRoutes(match.path, routerData).map(item => (
-                <AuthorizedRoute
-                  key={item.key}
-                  path={item.path}
-                  component={item.component}
-                  exact={item.exact}
-                  authority={item.authority}
-                  redirectPath="/exception/403"
-                />
-              ))}
-              <Redirect exact from="/" to={baseRedirect} />
-              <Route render={NotFound} />
-            </Switch>
-          </Content>
+          <Content style={{ margin: '24px 24px 0', height: '100%' }}>{children}</Content>
           <Footer style={{ padding: 0 }}>
             <GlobalFooter
               links={[
@@ -300,7 +283,7 @@ export default class BasicLayout extends React.PureComponent {
     );
 
     return (
-      <DocumentTitle title={this.getPageTitle()}>
+      <DocumentTitle title={this.getPageTitle(pathname)}>
         <ContainerQuery query={query}>
           {params => <div className={classNames(params)}>{layout}</div>}
         </ContainerQuery>

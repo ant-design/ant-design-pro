@@ -1,4 +1,5 @@
 import { parse } from 'url';
+import mockjs from 'mockjs';
 
 const titles = [
   'Alipay',
@@ -69,7 +70,7 @@ export function fakeList(count) {
       owner: user[i % 10],
       title: titles[i % 8],
       avatar: avatars[i % 8],
-      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - i % 4],
+      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % 8],
@@ -290,7 +291,14 @@ export const getActivities = [
 ];
 
 export default {
-  getNotice,
-  getActivities,
-  getFakeList,
+  'GET /api/project/notice': getNotice,
+  'GET /api/activities': getActivities,
+
+  'POST /api/forms': (req, res) => {
+    res.send({ message: 'Ok' });
+  },
+  'GET /api/tags': mockjs.mock({
+    'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }],
+  }),
+  'GET /api/fake_list': getFakeList,
 };
