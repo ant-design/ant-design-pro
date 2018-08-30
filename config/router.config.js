@@ -133,7 +133,10 @@ module.exports = [
             name: 'center',
             component: './Account/Center/Center',
             routes: [
-              { path: '/account/center', redirect: '/account/center/articles' },
+              {
+                path: '/account/center',
+                redirect: '/account/center/articles',
+              },
               {
                 path: '/account/center/articles',
                 component: './Account/Center/Articles',
@@ -153,7 +156,10 @@ module.exports = [
             name: 'settings',
             component: './Account/Settings/Info',
             routes: [
-              { path: '/account/settings', redirect: '/account/settings/base' },
+              {
+                path: '/account/settings',
+                redirect: '/account/settings/base',
+              },
               {
                 path: '/account/settings/base',
                 component: './Account/Settings/BaseView',
@@ -162,7 +168,10 @@ module.exports = [
                 path: '/account/settings/security',
                 component: './Account/Settings/SecurityView',
               },
-              { path: '/account/settings/binding', component: './Account/Settings/BindingView' },
+              {
+                path: '/account/settings/binding',
+                component: './Account/Settings/BindingView',
+              },
               {
                 path: '/account/settings/notification',
                 component: './Account/Settings/NotificationView',
