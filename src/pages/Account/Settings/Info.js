@@ -15,30 +15,27 @@ export default class Info extends Component {
   constructor(props) {
     super(props);
     const { match, location } = props;
+    const menuMap = {
+      base: <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />,
+      security: (
+        <FormattedMessage id="app.settings.menuMap.security" defaultMessage="Security Settings" />
+      ),
+      binding: (
+        <FormattedMessage id="app.settings.menuMap.binding" defaultMessage="Account Binding" />
+      ),
+      notification: (
+        <FormattedMessage
+          id="app.settings.menuMap.notification"
+          defaultMessage="New Message Notification"
+        />
+      ),
+    };
+    const key = location.pathname.replace(`${match.path}/`, '');
     this.state = {
       mode: 'inline',
-      menuMap: {
-        base: <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />,
-        security: (
-          <FormattedMessage id="app.settings.menuMap.security" defaultMessage="Security Settings" />
-        ),
-        binding: (
-          <FormattedMessage id="app.settings.menuMap.binding" defaultMessage="Account Binding" />
-        ),
-        notification: (
-          <FormattedMessage
-            id="app.settings.menuMap.notification"
-            defaultMessage="New Message Notification"
-          />
-        ),
-      },
+      menuMap,
+      selectKey: menuMap[key] ? key : 'base',
     };
-    let key = location.pathname.replace(`${match.path}/`, '');
-    const { menuMap } = this.state;
-    key = menuMap[key] ? key : 'base';
-    this.setState({
-      selectKey: key,
-    });
   }
 
   static getDerivedStateFromProps(props, state) {
