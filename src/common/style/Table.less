@@ -1,7 +1,11 @@
 // 列表区域提示窗样式
-.tableAlert() {
-  margin-top: 8px;
-  margin-bottom: 8px;
+.tableAlert {
+  :global{
+    .ant-alert {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+  }
 }
 // 列表按钮样式
 .tableActionBtn() {

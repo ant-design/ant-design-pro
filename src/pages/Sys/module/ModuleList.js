@@ -286,7 +286,7 @@ export default class ModuleList extends Component {
         </Row>
         {/* 已选提示 */}
         <Alert
-          className={tableStyle.tableAlert}
+          style={{ marginTop: 8, marginBottom: 8 }}
           message={
             <div>
               已选择 已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>{' '}

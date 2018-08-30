@@ -163,6 +163,7 @@ export default class RoleGrid extends PureComponent {
     return (
       <div>
         <Alert
+          style={{ marginTop: 8, marginBottom: 8 }}
           message={
             <div>
               已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;

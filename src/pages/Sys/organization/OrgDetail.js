@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Input, InputNumber, Modal, Switch, TreeSelect } from 'antd';
-import { filterTreeByAttr } from '@/utils/DataHelper';
 
 const FormItem = Form.Item;
 const Area = Input.TextArea;
-const TreeNode = TreeSelect.TreeNode;
+const TreeNode = {...TreeSelect};
 
 @Form.create()
 export default class OrgDetail extends Component {
@@ -15,7 +14,8 @@ export default class OrgDetail extends Component {
 
   // 关闭窗口
   handleCloseForm = () => {
-    this.props.dispatch({
+    const that = this;
+    that.props.dispatch({
       type: 'organization/updateState',
       payload: {
         modalType: '',
@@ -25,26 +25,26 @@ export default class OrgDetail extends Component {
 
   // 校验编码唯一性
   checkCode = (rule, value, callback) => {
-    const { getFieldValue } = this.props.form;
     const that = this;
+    const { getFieldValue } = that.props.form;
+
     const code = getFieldValue('code');
     const { currentItem } = this.props;
     if (currentItem && currentItem.id && value === currentItem.code) {
       return callback();
     }
-      const data = { code };
-      that.props
-        .dispatch({
-          type: 'organization/checkUnique',
-          payload: data,
-        })
-        .then(r => {
-          if (r.success) {
-            return callback();
-          }
-            return callback('该编码已存在');
-
-        });
+    const data = { code };
+    that.props
+      .dispatch({
+        type: 'organization/checkUnique',
+        payload: data,
+      })
+      .then(r => {
+        if (r.success) {
+          return callback();
+        }
+          return callback('该编码已存在');
+      });
 
   };
 
@@ -67,7 +67,7 @@ export default class OrgDetail extends Component {
             );
           }
           return (
-            <Node
+            <TreeNode
               title={item.name}
               pathName={item.pathName ? item.pathName : item.name}
               key={item.id}
@@ -83,8 +83,10 @@ export default class OrgDetail extends Component {
 
   // 保存
   handleSaveClick = () => {
-    const { dispatch, currentItem } = this.props;
-    const { getFieldsValue, validateFields } = this.props.form;
+    const that = this;
+
+    const { dispatch, currentItem } = that.props;
+    const { getFieldsValue, validateFields } = that.props.form;
     validateFields(errors => {
       if (errors) {
         return;
@@ -103,8 +105,10 @@ export default class OrgDetail extends Component {
 
   // 渲染界面
   render() {
-    const { getFieldDecorator } = this.props.form;
-    const { modalType, currentItem, data } = this.props;
+    const that = this;
+
+    const { getFieldDecorator } = that.props.form;
+    const { modalType, currentItem, data } = that.props;
     const cmView = modalType === 'view';
 
     const formItemLayout = {
@@ -125,9 +129,7 @@ export default class OrgDetail extends Component {
         title={
           modalType === 'create'
             ? '新增组织信息'
-            : modalType === 'edit'
-              ? '编辑组织信息'
-              : '查看组织信息'
+            : modalType === 'edit'? '编辑组织信息': '查看组织信息'
         }
       >
         <Form>
@@ -165,7 +167,7 @@ export default class OrgDetail extends Component {
                 treeNodeLabelProp="pathName"
                 placeholder="请选择上级节点"
               >
-                <Node title="根节点" pathName="根节点" key="0" value="0" />
+                <TreeNode title="根节点" pathName="根节点" key="0" value="0" />
                 {this.renderTreeNodes(data)}
               </TreeSelect>
             )}

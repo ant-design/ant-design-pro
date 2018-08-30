@@ -269,7 +269,7 @@ export default class Account extends PureComponent {
             </Col>
             {/* 右侧列表 */}
             <Col xl={18} lg={18} md={18} sm={18} xs={18}>
-              <Card bordered={false}>
+              <Card bordered={false} className={styles.noPadding}>
                 <div className={styles.goodsInfoList}>
                   <div className={styles.goodsInfoListForm}>{this.renderSimpleForm()}</div>
                   <AccountList {...listPops} />

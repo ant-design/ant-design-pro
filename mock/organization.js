@@ -143,7 +143,7 @@ export function listOrg(req, res, u) {
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
     url = req.url; // eslint-disable-line
   }
-  let dataSource = data;
+  const dataSource = data;
 
   const params = getUrlParams(url);
   if (params.name) {
@@ -177,7 +177,7 @@ export function changeStatus(req, res, b) {
   const body = (b && b.body) || req.body;
   const {id, status} = body;
 
-  let dataSource = data;
+  const dataSource = data;
   dataSource.data = dataSource.data.map(data => {
     if (id === data.id) {
       data.status = status;
@@ -196,21 +196,21 @@ export function changeStatus(req, res, b) {
 export function saveOrg(req, res, b) {
   const body = (b && b.body) || req.body;
   const {id, name, parentId, orders, code, remark, status} = body;
-  let itemId = id ? Math.random() + 0.14 : id;
-  let itemStatus = status ? '0001' : '0000';
+  const itemId = id ? Math.random() + 0.14 : id;
+  const itemStatus = status ? '0001' : '0000';
   const item = {
     id: itemId,
-    code: code,
-    name: name,
+    code,
+    name,
     isLeaf: true,
     parentId: '',
     parentName: '根节点',
-    orders: orders,
-    remark: remark,
+    orders,
+    remark,
     status: itemStatus,
   };
 
-  let dataSource = data;
+  const dataSource = data;
   dataSource.data.push(item);
 
   if (res && res.json) {

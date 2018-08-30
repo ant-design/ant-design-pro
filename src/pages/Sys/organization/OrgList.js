@@ -35,7 +35,7 @@ export default class OrgList extends Component {
 
   // 新增
   handleAdd = record => {
-    const id = Object === typeof record ? record.parent : '';
+    const id =  typeof(record) === 'object'? record.parent : '';
     this.props.dispatch({
       type: 'organization/create',
       payload: {
@@ -191,7 +191,7 @@ export default class OrgList extends Component {
               )}
               {size !== 0 && index !== 0 ? (
                 <BizIcon
-                  onClick={e => this.handleSort(brother, index, 'up')}
+                  onClick={() => this.handleSort(brother, index, 'up')}
                   style={{ color: '#098FFF', cursor: 'pointer' }}
                   type="ascending"
                 />
@@ -212,9 +212,9 @@ export default class OrgList extends Component {
         render: (text, record) =>
           record.status === '0001' && (
             <div>
-              <a onClick={e => this.handleEdit(record)}>编辑</a>
+              <a onClick={() => this.handleEdit(record)}>编辑</a>
               <Divider type="vertical" />
-              <a onClick={e => this.handleAdd(record)}>添加下级</a>
+              <a onClick={() => this.handleAdd(record)}>添加下级</a>
             </div>
           ),
       },
@@ -273,7 +273,7 @@ export default class OrgList extends Component {
         </Row>
         {/* 已选提示 */}
         <Alert
-          className={tableStyle.tableAlert}
+          style={{ marginTop: 8, marginBottom: 8 }}
           message={
             <div>
               已选择 已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>{' '}
