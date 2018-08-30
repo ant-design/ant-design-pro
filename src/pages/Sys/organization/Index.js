@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import OrgList from './OrgList';
 import OrgDetail from './OrgDetail';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 @connect(state => ({
   organization: state.organization,
@@ -26,10 +26,10 @@ export default class organization extends Component {
     };
 
     return (
-      <PageHeaderLayout title="组织信息管理">
+      <PageHeaderWrapper title="组织信息管理">
         <OrgList {...tableProps} />
         {'' !== modalType && <OrgDetail {...modalProps} />}
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

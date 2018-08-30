@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Tree, Row, Col, Card, Form, Input, Icon, Button, Popconfirm } from 'antd';
 import AccountList from './List';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Page from '@/components/Page';
 import AOEForm from './AOEForm';
 import styles from './Index.less';
@@ -23,7 +23,8 @@ export default class Account extends PureComponent {
     dispatch({
       type: 'account/fetch',
     });
-  }
+  };
+
   // 树节点选择
   onSelect = selectedKeys => {
     const { dispatch } = this.props;
@@ -35,6 +36,7 @@ export default class Account extends PureComponent {
       payload: values,
     });
   };
+
   // 重置事件
   handleFormReset = () => {
     const { form, dispatch } = this.props;
@@ -44,6 +46,7 @@ export default class Account extends PureComponent {
       payload: {},
     });
   };
+
   // 解锁/锁定
   handleLockSwitch = status => {
     const { account: { selectedRowKeys } } = this.props;
@@ -235,7 +238,7 @@ export default class Account extends PureComponent {
     };
 
     return (
-      <PageHeaderLayout title="用户信息管理">
+      <PageHeaderWrapper title="用户信息管理">
         <Page inner>
           <Row gutter={24} className={styles.flex_stretch}>
             {/* 左侧树 */}
@@ -255,7 +258,7 @@ export default class Account extends PureComponent {
           {/* 新增窗口 */}
           {'' !== modalType && <AOEForm {...modalProps} />}
         </Page>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

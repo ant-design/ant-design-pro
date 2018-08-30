@@ -4,7 +4,7 @@ import { Row, Col, Card } from 'antd';
 import DictGrid from './DictGrid';
 import DictDetail from './DictDetail';
 
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 @connect(state => ({
   dict: state.dict,
@@ -43,7 +43,7 @@ export default class Dict extends PureComponent {
     };
 
     return (
-      <PageHeaderLayout title="字典信息管理">
+      <PageHeaderWrapper title="字典信息管理">
         <Card>
           <Row gutter={24}>
             {/* 左侧列表 */}
@@ -57,7 +57,7 @@ export default class Dict extends PureComponent {
             </Col>
           </Row>
         </Card>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

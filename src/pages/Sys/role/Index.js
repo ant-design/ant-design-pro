@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Card, Form, Popconfirm, Input, Button, Row, Col } from 'antd';
 import { connect } from 'dva';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import List from './List';
 import RoleModule from './RoleModule';
 import RoleUser from './RoleUser';
@@ -194,7 +194,7 @@ export default class Role extends PureComponent {
       title: `${modalType === 'create' ? '新增角色' : '编辑角色'}`,
     };
     return (
-      <PageHeaderLayout title="角色授权管理">
+      <PageHeaderWrapper title="角色授权管理">
         <Card>
           {this.renderSimpleForm()}
           <List {...listPops} />
@@ -210,7 +210,7 @@ export default class Role extends PureComponent {
         )}
         {/* 新增窗口 */}
         {'' !== modalType && <AOEForm {...AOEProps} />}
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

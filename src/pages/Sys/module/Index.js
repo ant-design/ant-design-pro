@@ -1,7 +1,7 @@
 import React from 'react';
 import Page from '@/components/Page';
 import { connect } from 'dva';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import ModuleList from './ModuleList';
 import ModuleDetail from './ModuleDetail';
 
@@ -28,12 +28,12 @@ export default class Module extends React.PureComponent {
     };
 
     return (
-      <PageHeaderLayout title="模块管理">
+      <PageHeaderWrapper title="模块管理">
         <Page>
           <ModuleList {...tableProps} />
           {'' !== modalType && <ModuleDetail {...modalProps} />}
         </Page>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }
