@@ -1,11 +1,11 @@
 module.exports = {
   collapse: false,
   silderTheme: 'dark',
-  primaryColor: '#1890FF',
+  primaryColor: '#13C2C2',
   layout: 'sidemenu',
   grid: 'Fluid',
-  fixedHeader: false,
+  fixedHeader: true,
   autoHideHeader: false,
-  fixSiderbar: false,
+  fixSiderbar: true,
   colorWeak: false,
 };
