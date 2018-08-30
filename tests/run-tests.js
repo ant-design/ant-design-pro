@@ -10,7 +10,7 @@ const startServer = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['s
 
 startServer.stderr.on('data', data => {
   // eslint-disable-next-line
-  console.log(data);
+  console.log(data.toString());
 });
 
 startServer.on('exit', () => {

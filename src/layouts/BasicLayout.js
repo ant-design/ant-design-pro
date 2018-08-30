@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
-import deepEqual from 'lodash.isequal';
+import deepEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import { connect } from 'dva';
 import { ContainerQuery } from 'react-container-query';
