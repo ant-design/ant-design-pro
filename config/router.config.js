@@ -25,7 +25,6 @@ module.exports = [
         routes: [
           {
             path: '/dashboard/analysis',
-            authority: ['admin'],
             name: 'analysis',
             component: './Dashboard/Analysis',
           },
@@ -173,6 +172,7 @@ module.exports = [
             path: '/account/settings',
             name: 'settings',
             component: './Account/Settings/Info',
+            // authority: ['admin'],
             routes: [
               {
                 path: '/account/settings',

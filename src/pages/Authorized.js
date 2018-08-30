@@ -3,7 +3,7 @@ import RenderAuthorized from '@/components/Authorized';
 import Exception from '@/components/Exception';
 import { matchRoutes } from 'react-router-config';
 
-const Authorized = RenderAuthorized('user');
+const Authorized = RenderAuthorized(['admin', 'user']);
 const noMatch = <Exception type="403" style={{ minHeight: 500, height: '80%' }} />;
 
 export default ({ children, route, location }) => {
