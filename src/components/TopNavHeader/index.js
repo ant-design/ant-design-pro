@@ -5,11 +5,31 @@ import BaseMenu from '../SiderMenu/BaseMenu';
 import styles from './index.less';
 
 export default class TopNavHeader extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      maxWidth: (props.grid === 'Wide' ? 1200 : window.innerWidth) - 324 - 165 - 4,
+    };
+  }
+
+  static getDerivedStateFromProps(props) {
+    return {
+      maxWidth: (props.grid === 'Wide' ? 1200 : window.innerWidth) - 324 - 165 - 4,
+    };
+  }
+
   render() {
     const { theme, grid, logo } = this.props;
+    const { maxWidth } = this.state;
     return (
       <div className={`${styles.head} ${theme === 'light' ? styles.light : ''}`}>
-        <div className={`${styles.main} ${grid === 'Wide' ? styles.wide : ''}`}>
+        <div
+          ref={ref => {
+            this.maim = ref;
+          }}
+          className={`${styles.main} ${grid === 'Wide' ? styles.wide : ''}`}
+        >
           <div className={styles.left}>
             <div className={styles.logo} key="logo" id="logo">
               <Link to="/">
@@ -17,11 +37,16 @@ export default class TopNavHeader extends PureComponent {
                 <h1>Ant Design Pro</h1>
               </Link>
             </div>
-            <BaseMenu {...this.props} style={{ paddingTop: '9px', border: 'none' }} />
+            <div
+              style={{
+                flex: 1,
+                maxWidth,
+              }}
+            >
+              <BaseMenu {...this.props} style={{ border: 'none', height: 64 }} />
+            </div>
           </div>
-          <div className={styles.right}>
-            <RightContent {...this.props} />
-          </div>
+          <RightContent {...this.props} />
         </div>
       </div>
     );

@@ -249,6 +249,9 @@ module.exports = [
           },
         ],
       },
+      {
+        component: '404',
+      },
     ],
   },
 ];
