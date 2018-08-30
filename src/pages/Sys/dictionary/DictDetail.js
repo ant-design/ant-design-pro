@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Input, Badge, Button, Table, Form, Row, Col, Select, Divider, Icon } from 'antd';
-import style from './Index.less';
 import { connect } from 'dva';
+import style from './Index.less';
 
 import DictItem from './DictItem';
 
@@ -26,18 +26,19 @@ export default class DictDetail extends Component {
       .dispatch({
         type: 'dict/checkUnique',
         payload: {
-          id: id,
-          code: code,
+          id,
+          code,
         },
       })
       .then(() => {
         if (!codeUnique) {
           return callback('已存在该编码');
-        } else {
+        } 
           return callback();
-        }
+        
       });
   };
+
   // 新增字典项
   handleAddClick = () => {
     this.props.dispatch({
@@ -47,6 +48,7 @@ export default class DictDetail extends Component {
       },
     });
   };
+
   // 编辑事件
   handleEditClick = record => {
     const { dispatch } = this.props;
@@ -58,6 +60,7 @@ export default class DictDetail extends Component {
       },
     });
   };
+
   // 保存
   handleTypeSaveClick = () => {
     const { dispatch, currentItem } = this.props;
@@ -77,6 +80,7 @@ export default class DictDetail extends Component {
       });
     });
   };
+
   // 删除事件
   handleDeleteClick = record => {
     const { dispatch } = this.props;
@@ -104,7 +108,7 @@ export default class DictDetail extends Component {
       wrapperCol: { span: 20 },
     };
     // 获得根分类
-    const options = !!data ? data.map(i => <Option key={i.id}>{i.name}</Option>) : '';
+    const options = data ? data.map(i => <Option key={i.id}>{i.name}</Option>) : '';
     const column = [
       {
         title: 'Key',
@@ -121,13 +125,11 @@ export default class DictDetail extends Component {
       {
         title: '是否可用',
         dataIndex: 'enable',
-        render: (text, record) => {
-          return record.status === '0001' ? (
-            <Badge status="success" text="正常" />
+        render: (text, record) => record.status === '0001' ? (
+          <Badge status="success" text="正常" />
           ) : (
             <Badge status="error" text="停用" />
-          );
-        },
+          ),
       },
       {
         title: '备注',
@@ -146,11 +148,13 @@ export default class DictDetail extends Component {
     ];
     // 表单动态按钮
     const extraContent =
-      'typeCreate' === operateType || !!currentItem.id ? (
-          <Button type="primary" onClick={() => this.handleTypeSaveClick()}>
-            保存
-          </Button>
-      ) : ('');
+      operateType === 'typeCreate' || !!currentItem.id ? (
+        <Button type="primary" onClick={() => this.handleTypeSaveClick()}>
+          保存
+        </Button>
+      ) : (
+        ''
+      );
 
     return (
       <div>
@@ -176,12 +180,12 @@ export default class DictDetail extends Component {
                 },
               ],
             })(
-              <Select disabled={'' === operateType || currentItem.parentId === '0'}>
+              <Select disabled={operateType === '' || currentItem.parentId === '0'}>
                 {options}
               </Select>
             )}
           </FormItem>
-          {/*第二行*/}
+          {/* 第二行 */}
           <FormItem wrapperCol={{ span: 24 }} style={{ marginBottom: 30 }}>
             <Col span={12}>
               <FormItem label="编码" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
@@ -197,7 +201,7 @@ export default class DictDetail extends Component {
                       validator: this.checkUnique,
                     },
                   ],
-                })(<Input disabled={'' === operateType} />)}
+                })(<Input disabled={operateType === ''} />)}
               </FormItem>
             </Col>
             <Col span={12}>
@@ -210,14 +214,14 @@ export default class DictDetail extends Component {
                       message: '请输入字典项',
                     },
                   ],
-                })(<Input disabled={'' === operateType} />)}
+                })(<Input disabled={operateType === ''} />)}
               </FormItem>
             </Col>
           </FormItem>
           <FormItem label="备注" {...formRowOne}>
             {getFieldDecorator('remark', {
               initialValue: currentItem.remark,
-            })(<Area disabled={'' === operateType} />)}
+            })(<Area disabled={operateType === ''} />)}
           </FormItem>
         </Form>
         <Divider />
@@ -228,15 +232,14 @@ export default class DictDetail extends Component {
           title="字典项"
           extra={
             <Button disabled={!currentItem.id} onClick={() => this.handleAddClick()} type="primary">
-              <Icon type="edit" />新增
+              <Icon type="edit" />
+              新增
             </Button>
           }
         />
         <Table
           rowKey={record => record.id}
-          rowClassName={record => {
-            return record.status === '0000' ? style.disabled : style.enabled;
-          }}
+          rowClassName={record => record.status === '0000' ? style.disabled : style.enabled}
           columns={column}
           dataSource={currentItem.items}
           pagination={false}

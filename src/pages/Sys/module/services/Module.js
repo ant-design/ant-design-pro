@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 import { getNoUndefinedString } from '@/utils/utils';
-//获取组织信息
+// 获取组织信息
 export async function getModule(params) {
   return request(`/module/get/${getNoUndefinedString(params.id)}`);
 }

@@ -13,6 +13,7 @@ export default class Dict extends PureComponent {
   componentDidMount() {
     console.info('dict loaded');
   }
+
   render() {
     const { dispatch } = this.props;
     const {

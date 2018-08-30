@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Card, Table, Icon, message, Tooltip } from 'antd';
-import style from './Index.less';
 import { connect } from 'dva';
+import style from './Index.less';
 // 字典管理左侧列表树
 
 @connect(({ loading }) => ({
@@ -14,6 +14,7 @@ export default class DictGrid extends PureComponent {
       type: 'dict/listDict',
     });
   }
+
   // 行点击事件
   handleOnRowClick = record => {
     // 根节点不加载
@@ -29,6 +30,7 @@ export default class DictGrid extends PureComponent {
       },
     });
   };
+
   // 字典删除
   handleDelete = record => {
     const { dispatch } = this.props;
@@ -43,9 +45,10 @@ export default class DictGrid extends PureComponent {
       },
     });
   };
+
   // 新建分类
   handleAddClick = () => {
-    console.info("add type click");
+    console.info('add type click');
     this.props.dispatch({
       type: 'dict/updateState',
       payload: {
@@ -54,6 +57,7 @@ export default class DictGrid extends PureComponent {
       },
     });
   };
+
   render() {
     const { loading, data } = this.props;
 
@@ -70,7 +74,7 @@ export default class DictGrid extends PureComponent {
         title: '',
         render: (text, record) =>
           // 根分类不可进行删除
-          '0' === record.parentId ? (
+          record.parentId === '0' ? (
             ''
           ) : (
             <a onClick={e => this.handleDelete(record)}>
@@ -85,26 +89,22 @@ export default class DictGrid extends PureComponent {
         <Table
           indentSize={5}
           className={style.dict_left_tree}
-          title={() => {
-            return (
-              <Card
-                actions={[
-                  <Tooltip placement="bottom" title="新建分类">
-                    <Icon type="edit" onClick={e => this.handleAddClick()} />
-                  </Tooltip>,
-                  <div> </div>,
+          title={() => (
+            <Card
+              actions={[
+                <Tooltip placement="bottom" title="新建分类">
+                  <Icon type="edit" onClick={e => this.handleAddClick()} />
+                </Tooltip>,
+                <div />,
                 ]}
-              >
+            >
                 字典分类
-              </Card>
-            );
-          }}
+            </Card>
+            )}
           onRow={(record, index) => ({
             onClick: () => this.handleOnRowClick(record, index),
           })}
-          rowClassName={record => {
-            return record.children ? style.top_node : style.blank;
-          }}
+          rowClassName={record => record.children ? style.top_node : style.blank}
           loading={loading}
           rowKey={record => record.id}
           defaultExpandAllRows

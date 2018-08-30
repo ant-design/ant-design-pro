@@ -11,6 +11,7 @@ export default class ModuleDetail extends Component {
     // 加载树数据 - 只加载未停用状态的数据
     console.info('load module detail');
   }
+
   // 关闭窗口
   handleCloseForm = () => {
     this.props.dispatch({
@@ -20,6 +21,7 @@ export default class ModuleDetail extends Component {
       },
     });
   };
+
   // 校验路径唯一性
   checkPath = (rule, value, callback) => {
     const { getFieldValue } = this.props.form;
@@ -29,7 +31,7 @@ export default class ModuleDetail extends Component {
     const { currentItem } = this.props;
     if (currentItem && currentItem.id && value === currentItem.path) {
       return callback();
-    } else {
+    } 
       const data = { path, parentId };
       that.props
         .dispatch({
@@ -39,11 +41,11 @@ export default class ModuleDetail extends Component {
         .then(r => {
           if (r.success) {
             return callback();
-          } else {
+          } 
             return callback('该路径已存在');
-          }
+          
         });
-    }
+    
   };
 
   // 渲染树节点 - 剔除状态为停用状态(0000)得节点
@@ -51,7 +53,7 @@ export default class ModuleDetail extends Component {
     const { currentItem } = this.props;
     return data
       .map(item => {
-        if ('0001' === item.status && item.id !== currentItem.id) {
+        if (item.status === '0001' && item.id !== currentItem.id) {
           if (item.children) {
             return (
               <TreeNode
@@ -72,18 +74,19 @@ export default class ModuleDetail extends Component {
               value={item.id}
             />
           );
-        } else {
+        } 
           return null;
-        }
+        
       })
-      .filter(item => (item ? item : false));
+      .filter(item => (item || false));
   };
+
   // 保存
   handleSaveClick = () => {
     const { dispatch, currentItem } = this.props;
     const { getFieldsValue, validateFields } = this.props.form;
     // 对校验过的表单域 再进行一次强制表单校验
-    validateFields({force: true}, errors => {
+    validateFields({ force: true }, errors => {
       if (errors) {
         return;
       }
@@ -98,6 +101,7 @@ export default class ModuleDetail extends Component {
       });
     });
   };
+
   // 渲染界面
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -122,11 +126,13 @@ export default class ModuleDetail extends Component {
         title={
           modalType === 'create'
             ? '新增模块信息'
-            : modalType === 'edit' ? '编辑模块信息' : '查看模块信息'
+            : modalType === 'edit'
+              ? '编辑模块信息'
+              : '查看模块信息'
         }
       >
         <Form>
-          {/*第一行*/}
+          {/* 第一行 */}
           <FormItem label="名称" hasFeedback {...formRowOne}>
             {getFieldDecorator('name', {
               initialValue: currentItem.name,
@@ -137,10 +143,7 @@ export default class ModuleDetail extends Component {
             {getFieldDecorator('path', {
               initialValue: currentItem.path,
               validateTrigger: 'onBlur',
-              rules: [
-                {required: true,message: '请输入path',},
-                { validator: this.checkPath},
-              ],
+              rules: [{ required: true, message: '请输入path' }, { validator: this.checkPath }],
             })(<Input />)}
           </FormItem>
           <FormItem label="icon" hasFeedback {...formRowOne}>
@@ -153,7 +156,7 @@ export default class ModuleDetail extends Component {
               ],
             })(<Input />)}
           </FormItem>
-          {/*第二行*/}
+          {/* 第二行 */}
           <FormItem label="上级节点" hasFeedback {...formRowOne}>
             {getFieldDecorator('parentId', {
               initialValue: currentItem.parentId,
@@ -172,7 +175,7 @@ export default class ModuleDetail extends Component {
               </TreeSelect>
             )}
           </FormItem>
-          {/*第三行*/}
+          {/* 第三行 */}
           <Row>
             <Col span={12}>
               <FormItem label="排序" hasFeedback {...formItemLayout}>
@@ -196,7 +199,7 @@ export default class ModuleDetail extends Component {
               </FormItem>
             </Col>
           </Row>
-          {/*第四行*/}
+          {/* 第四行 */}
           <FormItem label="备注" hasFeedback {...formRowOne}>
             {getFieldDecorator('remark', {
               initialValue: currentItem.remark,
@@ -207,7 +210,7 @@ export default class ModuleDetail extends Component {
               ],
             })(<Area />)}
           </FormItem>
-          {/*第五行*/}
+          {/* 第五行 */}
           {cmView && (
             <Row>
               <Col span={12}>
@@ -222,7 +225,7 @@ export default class ModuleDetail extends Component {
               </Col>
             </Row>
           )}
-          {/*第六行*/}
+          {/* 第六行 */}
           {cmView && (
             <Row>
               <Col span={12}>

@@ -10,16 +10,15 @@ export default class DictItem extends React.PureComponent {
   checkUnique = (r, value, callback) => {
     const { itemList, itemValues } = this.props;
 
-    const exist = itemList.find(v => {
-      return value === v.keyName && v.id !== itemValues.id;
-    });
+    const exist = itemList.find(v => value === v.keyName && v.id !== itemValues.id);
 
     if (exist) {
       return callback('字典项已存在');
-    } else {
+    } 
       return callback();
-    }
+    
   };
+
   // 保存子表
   handleSubmit = () => {
     const { getFieldsValue, validateFields } = this.props.form;
@@ -43,7 +42,8 @@ export default class DictItem extends React.PureComponent {
       });
     });
   };
-  //关闭窗口
+
+  // 关闭窗口
   handleCloseForm = () => {
     this.props.dispatch({
       type: 'dict/updateState',
@@ -63,7 +63,7 @@ export default class DictItem extends React.PureComponent {
 
     return (
       <Modal
-        title={'edit' === itemOperateType ? '字典项编辑' : '字典项新增'}
+        title={itemOperateType === 'edit' ? '字典项编辑' : '字典项新增'}
         visible
         onCancel={() => this.handleCloseForm()}
         onOk={() => this.handleSubmit()}

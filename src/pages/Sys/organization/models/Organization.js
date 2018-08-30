@@ -1,7 +1,15 @@
 import modelExtend from 'dva-model-extend';
 import { model } from '@/common/model/BaseModel';
 import { message } from 'antd';
-import { editOrg, getOrg, listOrg, deleteOrg, switchStatus, checkUnique, sortOrg } from '../services/Organization';
+import {
+  editOrg,
+  getOrg,
+  listOrg,
+  deleteOrg,
+  switchStatus,
+  checkUnique,
+  sortOrg,
+} from '../services/Organization';
 
 export default modelExtend(model, {
   namespace: 'organization',
@@ -95,7 +103,7 @@ export default modelExtend(model, {
           type: 'updateState',
           payload: {
             data: response.data,
-          }
+          },
         });
       }
     },
@@ -117,7 +125,7 @@ export default modelExtend(model, {
           callback();
         }
       } else {
-        message.error(`操作失败： ${response.statusText? response.statusText: '请联系管理员'}.`);
+        message.error(`操作失败： ${response.statusText ? response.statusText : '请联系管理员'}.`);
       }
     },
   },

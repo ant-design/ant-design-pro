@@ -15,7 +15,6 @@ export default class GlobalHeaderRight extends PureComponent {
     fullscreen: 0,
   };
 
-
   getNoticeData() {
     const { notices = [] } = this.props;
     if (notices.length === 0) {
@@ -116,7 +115,7 @@ export default class GlobalHeaderRight extends PureComponent {
             console.log('enter', value); // eslint-disable-line
           }}
         />
-        {/*全屏按钮*/}
+        {/* 全屏按钮 */}
         <span className={styles.action} onClick={() => this.f11()}>
           <Tooltip placement="bottom" title={fullscreenText[fullscreen]}>
             <Icon type={fullscreenIcon[fullscreen]} />

@@ -32,6 +32,7 @@ export default class OrgList extends Component {
     //   type: 'organization/listOrg',
     // });
   }
+
   // 新增
   handleAdd = record => {
     const id = Object === typeof record ? record.parent : '';
@@ -40,12 +41,13 @@ export default class OrgList extends Component {
       payload: {
         modalType: 'create',
         currentItem: {
-          parentId: record.id
+          parentId: record.id,
         },
         parent: id,
       },
     });
   };
+
   // 编辑
   handleEdit = record => {
     if (!record.id) {
@@ -60,6 +62,7 @@ export default class OrgList extends Component {
       },
     });
   };
+
   // 启用/停用
   handleEnable = (record, e, status) => {
     if (!record.id) {
@@ -70,10 +73,11 @@ export default class OrgList extends Component {
       type: 'organization/changeStatus',
       payload: {
         id: record.id,
-        status: status,
+        status,
       },
     });
   };
+
   // 删除
   handleDelete = record => {
     const { dispatch, selectedRowKeys, data } = this.props;
@@ -94,6 +98,7 @@ export default class OrgList extends Component {
       });
     }
   };
+
   // 批量删除
   handleBatchDelete = () => {
     const { dispatch, selectedRowKeys, data } = this.props;
@@ -111,6 +116,7 @@ export default class OrgList extends Component {
     }
     // end if/else
   };
+
   // 搜索
   handleSearch = val => {
     const { dispatch } = this.props;
@@ -119,6 +125,7 @@ export default class OrgList extends Component {
       payload: val,
     });
   };
+
   // 行选
   handleSelectRows = rows => {
     this.props.dispatch({
@@ -127,11 +134,11 @@ export default class OrgList extends Component {
     });
   };
 
-  //排序操作
+  // 排序操作
   handleSort = (nodes, index, upOrDown) => {
-    let orginOrders = index;
-    let targetID = 'up' === upOrDown ? nodes[index - 1].id : nodes[index + 1].id;
-    let targetOrders = 'up' === upOrDown ? index-1 : index+1;
+    const orginOrders = index;
+    const targetID = upOrDown === 'up' ? nodes[index - 1].id : nodes[index + 1].id;
+    const targetOrders = upOrDown === 'up' ? index - 1 : index + 1;
     const switchObj = [
       {
         id: nodes[index].id,
@@ -147,6 +154,7 @@ export default class OrgList extends Component {
       payload: switchObj,
     });
   };
+
   render() {
     const { data, selectedRowKeys, loading } = this.props;
 
@@ -172,7 +180,7 @@ export default class OrgList extends Component {
             <div>
               {text}
               <Divider type="vertical" />
-              {0 !== size && index !== size - 1 ? (
+              {size !== 0 && index !== size - 1 ? (
                 <BizIcon
                   onClick={e => this.handleSort(brother, index, 'down')}
                   type="descending"
@@ -181,7 +189,7 @@ export default class OrgList extends Component {
               ) : (
                 <BizIcon type="descending" />
               )}
-              {0 !== size && index !== 0 ? (
+              {size !== 0 && index !== 0 ? (
                 <BizIcon
                   onClick={e => this.handleSort(brother, index, 'up')}
                   style={{ color: '#098FFF', cursor: 'pointer' }}
@@ -197,20 +205,18 @@ export default class OrgList extends Component {
       {
         title: '状态',
         dataIndex: 'status',
-        render: text => {
-          return <Badge status={statusMap[text]} text={status[text]} />;
-        },
+        render: text => <Badge status={statusMap[text]} text={status[text]} />,
       },
       {
         title: '操作',
-        render: (text, record) => (
-         '0001' === record.status &&
-          <div>
-            <a onClick={e => this.handleEdit(record)}>编辑</a>
-            <Divider type="vertical" />
-            <a onClick={e => this.handleAdd(record)}>添加下级</a>
-          </div>
-        ),
+        render: (text, record) =>
+          record.status === '0001' && (
+            <div>
+              <a onClick={e => this.handleEdit(record)}>编辑</a>
+              <Divider type="vertical" />
+              <a onClick={e => this.handleAdd(record)}>添加下级</a>
+            </div>
+          ),
       },
       {
         title: '是否启用',
@@ -285,9 +291,7 @@ export default class OrgList extends Component {
           columns={column}
           dataSource={data}
           loading={loading}
-          rowClassName={record => {
-            return record.status === '0000' ? styles.disabled : styles.enabled;
-          }}
+          rowClassName={record => record.status === '0000' ? styles.disabled : styles.enabled}
           pagination={false}
           rowKey={record => record.id}
           rowSelection={rowSelection}

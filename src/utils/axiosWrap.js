@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
 /* 创建一个新的 AXIOS 对象，确保原有的对象不变 */
-let axiosWrap = axios.create({
+const axiosWrap = axios.create({
   headers: {
     /* 一些公用的 header */
     'content-type': 'application/json',
@@ -15,9 +15,7 @@ let axiosWrap = axios.create({
 });
 
 /* 过滤请求 */
-axiosWrap.interceptors.request.use((config) => {
-  return config
-});
+axiosWrap.interceptors.request.use(config => config);
 /* 过滤响应 */
 // axiosWrap.interceptors.response.use((result) => {
 //   /* 假设当code为0时代表响应成功 */
@@ -29,4 +27,4 @@ axiosWrap.interceptors.request.use((config) => {
 //   return Promise.reject(result)
 // });
 
-export default axiosWrap
+export default axiosWrap;

@@ -6,15 +6,14 @@ export default class RoleUser extends PureComponent {
   componentDidMount() {
     console.info('load role user');
   }
+
   // 保存模块关系
   handleSubmit = () => {
     const { currentItem } = this.props;
     const { checked } = { ...this.props.data };
     let users = [];
-    if( checked && checked.length > 0){
-      users = checked.map(item => {
-        return { userId: item };
-      });
+    if (checked && checked.length > 0) {
+      users = checked.map(item => ({ userId: item }));
     }
     this.props.dispatch({
       type: 'role/saveUser',
@@ -24,6 +23,7 @@ export default class RoleUser extends PureComponent {
       },
     });
   };
+
   // 保存已选
   handleSelectRows = checkedKeys => {
     const { data } = { ...this.props.data };
@@ -37,6 +37,7 @@ export default class RoleUser extends PureComponent {
       },
     });
   };
+
   // 表格动作触发事件
   handleListChange = (pagination, filtersArg, sorter) => {
     const { dispatch, formValues } = this.props;
@@ -62,9 +63,13 @@ export default class RoleUser extends PureComponent {
       payload: params,
     });
   };
+
   render() {
     const { operateType } = this.props;
-    const { data: { list, pagination }, checked } = { ...this.props.data };
+    const {
+      data: { list, pagination },
+      checked,
+    } = { ...this.props.data };
 
     const column = [
       {
@@ -103,8 +108,8 @@ export default class RoleUser extends PureComponent {
         width={750}
         bodyStyle={{ maxHeight: 500, overflowY: 'auto', overflowX: 'auto' }}
       >
-        {/*左侧部门树列表*/}
-        {/*右侧列表*/}
+        {/* 左侧部门树列表 */}
+        {/* 右侧列表 */}
         <Table
           dataSource={list}
           columns={column}

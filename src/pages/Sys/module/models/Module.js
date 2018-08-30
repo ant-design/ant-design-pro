@@ -1,7 +1,14 @@
 import modelExtend from 'dva-model-extend';
 import { model } from '@/common/model/BaseModel';
 import { message } from 'antd';
-import { editModule, getModule, listModule, deleteModule, checkUnique, sortModule } from '../services/Module';
+import {
+  editModule,
+  getModule,
+  listModule,
+  deleteModule,
+  checkUnique,
+  sortModule,
+} from '../services/Module';
 
 export default modelExtend(model, {
   namespace: 'module',
@@ -116,7 +123,7 @@ export default modelExtend(model, {
           callback();
         }
       } else {
-        message.error(`操作失败： ${response.statusText? response.statusText: '请联系管理员'}.`);
+        message.error(`操作失败： ${response.statusText ? response.statusText : '请联系管理员'}.`);
         yield put({
           type: 'updateState',
           payload: {

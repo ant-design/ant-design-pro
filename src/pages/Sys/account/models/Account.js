@@ -1,5 +1,6 @@
 import modelExtend from 'dva-model-extend';
 import { pageModel } from '@/common/model/BaseModel';
+import { message } from 'antd';
 import {
   listUser,
   delUser,
@@ -9,7 +10,6 @@ import {
   checkUnique,
 } from '../services/AccountService';
 import { listOrgByAttr } from '../../organization/services/Organization';
-import { message } from 'antd';
 
 export default modelExtend(pageModel, {
   namespace: 'account',

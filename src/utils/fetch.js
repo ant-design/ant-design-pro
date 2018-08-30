@@ -69,7 +69,7 @@ export default function request(url, options) {
       };
     }
   }
-  //TODO 需要处理返回200但success为false的情况
+  // TODO 需要处理返回200但success为false的情况
   return fetch(url, newOptions)
     .then(checkStatus)
     .then(response => {

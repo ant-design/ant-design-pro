@@ -9,6 +9,7 @@ export default class AOEForm extends Component {
   componentDidMount() {
     console.info('load role detail');
   }
+
   // 校验角色编码唯一性
   checkCode = (rule, value, callback) => {
     const { getFieldValue } = this.props.form;
@@ -17,7 +18,7 @@ export default class AOEForm extends Component {
 
     if (item && item.id && value === item.code) {
       return callback();
-    } else {
+    } 
       const data = { code };
       this.props
         .dispatch({
@@ -27,12 +28,13 @@ export default class AOEForm extends Component {
         .then(r => {
           if (r.success) {
             return callback();
-          } else {
+          } 
             return callback('编码已存在');
-          }
+          
         });
-    }
+    
   };
+
   // 关闭窗口
   handleCloseForm = () => {
     this.props.dispatch({
@@ -42,6 +44,7 @@ export default class AOEForm extends Component {
       },
     });
   };
+
   // 保存
   handleSaveClick = () => {
     const { dispatch, item } = this.props;
@@ -60,6 +63,7 @@ export default class AOEForm extends Component {
       });
     });
   };
+
   // 渲染界面
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -83,11 +87,13 @@ export default class AOEForm extends Component {
         title={
           modalType === 'create'
             ? '新增角色信息'
-            : modalType === 'edit' ? '编辑角色信息' : '查看角色信息'
+            : modalType === 'edit'
+              ? '编辑角色信息'
+              : '查看角色信息'
         }
       >
         <Form>
-          {/*第一行*/}
+          {/* 第一行 */}
           <Row>
             <Col span={12}>
               <FormItem label="角色名称" hasFeedback {...formItemLayout}>
@@ -102,12 +108,15 @@ export default class AOEForm extends Component {
                 {getFieldDecorator('code', {
                   initialValue: item.code,
                   validateTrigger: 'onBlur',
-                  rules: [{ required: true, message: '请输入角色编码' }, { validator: this.checkCode }],
+                  rules: [
+                    { required: true, message: '请输入角色编码' },
+                    { validator: this.checkCode },
+                  ],
                 })(<Input />)}
               </FormItem>
             </Col>
           </Row>
-          {/*第二行*/}
+          {/* 第二行 */}
           <FormItem label="角色描述" hasFeedback {...formRowOne}>
             {getFieldDecorator('remark', {
               initialValue: item.remark,
@@ -118,7 +127,7 @@ export default class AOEForm extends Component {
               ],
             })(<Area />)}
           </FormItem>
-          {/*第五行*/}
+          {/* 第五行 */}
           {cmView && (
             <Row>
               <Col span={12}>
@@ -133,7 +142,7 @@ export default class AOEForm extends Component {
               </Col>
             </Row>
           )}
-          {/*第六行*/}
+          {/* 第六行 */}
           {cmView && (
             <Row>
               <Col span={12}>

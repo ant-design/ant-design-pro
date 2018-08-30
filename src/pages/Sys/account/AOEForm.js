@@ -10,6 +10,7 @@ export default class AOEForm extends Component {
   componentDidMount() {
     console.info('load org detail');
   }
+
   // 校验账号唯一性
   checkAccount = (rule, value, callback) => {
     const { getFieldValue } = this.props.form;
@@ -17,7 +18,7 @@ export default class AOEForm extends Component {
     const { item } = this.props;
     if (item && item.id && value === item.account) {
       return callback();
-    } else {
+    } 
       const data = { account };
       this.props
         .dispatch({
@@ -27,12 +28,13 @@ export default class AOEForm extends Component {
         .then(r => {
           if (r.success) {
             return callback();
-          } else {
+          } 
             return callback('该账号已存在');
-          }
+          
         });
-    }
+    
   };
+
   // 校验编码唯一性
   checkCode = (rule, value, callback) => {
     const { getFieldValue } = this.props.form;
@@ -40,7 +42,7 @@ export default class AOEForm extends Component {
     const { item } = this.props;
     if (item && item.id && value === item.code) {
       return callback();
-    } else {
+    } 
       const data = { code };
       this.props
         .dispatch({
@@ -54,8 +56,9 @@ export default class AOEForm extends Component {
             callback('该编码已存在');
           }
         });
-    }
+    
   };
+
   // 关闭窗口
   handleCloseForm = () => {
     this.props.dispatch({
@@ -65,6 +68,7 @@ export default class AOEForm extends Component {
       },
     });
   };
+
   // 保存
   handleSaveClick = () => {
     const { dispatch, item } = this.props;
@@ -83,11 +87,11 @@ export default class AOEForm extends Component {
       });
     });
   };
+
   // 渲染树节点
-  renderTreeNodes = data => {
-    return data
+  renderTreeNodes = data => data
       .map(item => {
-        if ('0001' === item.status) {
+        if (item.status === '0001') {
           if (item.children) {
             return (
               <TreeNode
@@ -108,12 +112,12 @@ export default class AOEForm extends Component {
               value={item.id}
             />
           );
-        } else {
+        } 
           return null;
-        }
+        
       })
-      .filter(item => (item ? item : false));
-  };
+      .filter(item => (item || false));
+
   // 渲染界面
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -137,11 +141,13 @@ export default class AOEForm extends Component {
         title={
           modalType === 'create'
             ? '新增用户信息'
-            : modalType === 'edit' ? '编辑用户信息' : '查看用户信息'
+            : modalType === 'edit'
+              ? '编辑用户信息'
+              : '查看用户信息'
         }
       >
         <Form>
-          {/*第一行*/}
+          {/* 第一行 */}
           <Row>
             <Col span={12}>
               <FormItem label="姓名" hasFeedback {...formItemLayout}>
@@ -186,7 +192,7 @@ export default class AOEForm extends Component {
               </FormItem>
             </Col>
           </Row>
-          {/*第二行*/}
+          {/* 第二行 */}
           <FormItem label="所属部门" hasFeedback {...formRowOne}>
             {getFieldDecorator('deptId', {
               initialValue: item.deptId,
@@ -204,14 +210,13 @@ export default class AOEForm extends Component {
               </TreeSelect>
             )}
           </FormItem>
-          {/*第三行*/}
+          {/* 第三行 */}
           <Row>
             <Col span={12}>
               <FormItem label="电话" hasFeedback {...formItemLayout}>
                 {getFieldDecorator('tel', {
                   initialValue: item.tel,
-                })(  <Input addonBefore="86" type="tel"
-                            style={{ width: '100%' }} />)}
+                })(<Input addonBefore="86" type="tel" style={{ width: '100%' }} />)}
               </FormItem>
             </Col>
             <Col span={12}>
@@ -234,7 +239,7 @@ export default class AOEForm extends Component {
               initialValue: !!item.locked,
             })(<Switch checkedChildren="启用" unCheckedChildren="锁定" />)}
           </FormItem>
-          {/*第四行*/}
+          {/* 第四行 */}
           <FormItem label="备注" hasFeedback {...formRowOne}>
             {getFieldDecorator('remark', {
               initialValue: item.remark,
@@ -245,7 +250,7 @@ export default class AOEForm extends Component {
               ],
             })(<Area />)}
           </FormItem>
-          {/*第五行*/}
+          {/* 第五行 */}
           {cmView && (
             <Row>
               <Col span={12}>
@@ -260,7 +265,7 @@ export default class AOEForm extends Component {
               </Col>
             </Row>
           )}
-          {/*第六行*/}
+          {/* 第六行 */}
           {cmView && (
             <Row>
               <Col span={12}>

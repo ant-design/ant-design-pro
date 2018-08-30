@@ -31,7 +31,7 @@ export default class Module extends React.PureComponent {
       <PageHeaderWrapper title="模块管理">
         <Page>
           <ModuleList {...tableProps} />
-          {'' !== modalType && <ModuleDetail {...modalProps} />}
+          {modalType !== '' && <ModuleDetail {...modalProps} />}
         </Page>
       </PageHeaderWrapper>
     );

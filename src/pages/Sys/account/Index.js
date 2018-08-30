@@ -23,7 +23,7 @@ export default class Account extends PureComponent {
     dispatch({
       type: 'account/fetch',
     });
-  };
+  }
 
   // 树节点选择
   onSelect = selectedKeys => {
@@ -49,7 +49,9 @@ export default class Account extends PureComponent {
 
   // 解锁/锁定
   handleLockSwitch = status => {
-    const { account: { selectedRowKeys } } = this.props;
+    const {
+      account: { selectedRowKeys },
+    } = this.props;
     this.props.dispatch({
       type: 'account/lockSwitch',
       payload: {
@@ -61,7 +63,10 @@ export default class Account extends PureComponent {
 
   // 批量删除
   handleRemoveClick = () => {
-    const { dispatch, account: { selectedRowKeys } } = this.props;
+    const {
+      dispatch,
+      account: { selectedRowKeys },
+    } = this.props;
     if (!selectedRowKeys) return;
 
     dispatch({
@@ -71,6 +76,7 @@ export default class Account extends PureComponent {
       },
     });
   };
+
   // 搜索事件
   handleSearch = e => {
     e.preventDefault();
@@ -90,6 +96,7 @@ export default class Account extends PureComponent {
       });
     });
   };
+
   // 新增窗口
   handleModalVisible = () => {
     const { dispatch } = this.props;
@@ -101,6 +108,7 @@ export default class Account extends PureComponent {
       },
     });
   };
+
   // 渲染树节点
   renderTreeNodes(data) {
     return data.map(item => {
@@ -114,13 +122,15 @@ export default class Account extends PureComponent {
       return <TreeNode title={item.name} key={item.id} value={item.id} />;
     });
   }
+
   // 左侧树
   renderCategoryTree() {
     const { orgData } = this.props.account;
     return (
       <Card className={styles.leftTree}>
         <div className={styles.goodsInfoCategory}>
-          <Icon type="tags" />归属部门
+          <Icon type="tags" />
+          归属部门
         </div>
         <Tree showLine onSelect={this.onSelect}>
           {this.renderTreeNodes(orgData)}
@@ -128,6 +138,7 @@ export default class Account extends PureComponent {
       </Card>
     );
   }
+
   renderLeftBtn() {
     const { selectedRowKeys } = this.props.account;
 
@@ -172,6 +183,7 @@ export default class Account extends PureComponent {
       </div>
     );
   }
+
   renderRightBtn() {
     return (
       <div>
@@ -184,6 +196,7 @@ export default class Account extends PureComponent {
       </div>
     );
   }
+
   // 简单搜索条件
   renderSimpleForm() {
     const { getFieldDecorator } = this.props.form;
@@ -215,10 +228,19 @@ export default class Account extends PureComponent {
       </Form>
     );
   }
+
   // 渲染界面
   render() {
     const { dispatch } = this.props;
-    const { loading, list, pagination, selectedRowKeys, orgData, modalType, currentItem } = this.props.account;
+    const {
+      loading,
+      list,
+      pagination,
+      selectedRowKeys,
+      orgData,
+      modalType,
+      currentItem,
+    } = this.props.account;
 
     const listPops = {
       dispatch,
@@ -256,7 +278,7 @@ export default class Account extends PureComponent {
             </Col>
           </Row>
           {/* 新增窗口 */}
-          {'' !== modalType && <AOEForm {...modalProps} />}
+          {modalType !== '' && <AOEForm {...modalProps} />}
         </Page>
       </PageHeaderWrapper>
     );

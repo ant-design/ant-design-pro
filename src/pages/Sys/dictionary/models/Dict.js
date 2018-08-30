@@ -64,7 +64,7 @@ export default modelExtend(model, {
           },
         });
       } else {
-        message.error(`操作失败： ${response.statusText? response.statusText: '请联系管理员'}.`);
+        message.error(`操作失败： ${response.statusText ? response.statusText : '请联系管理员'}.`);
       }
     },
     // 新增/编辑字典项
@@ -111,7 +111,7 @@ export default modelExtend(model, {
       yield put({
         type: 'removeDictItem',
         payload: {
-          id: id,
+          id,
         },
       });
     },
@@ -119,15 +119,15 @@ export default modelExtend(model, {
   reducers: {
     // 更新字典项
     updateDictItem(state, action) {
-      let currentItem = state.currentItem;
+      const currentItem = state.currentItem;
       // 更新/新增字典项列表
       const exist = currentItem.items.find((v, i, array) => {
         if (v.id === action.payload.formItem.id) {
           array[i] = action.payload.formItem;
           return true;
-        } else {
+        } 
           return false;
-        }
+        
       });
 
       if (!exist) {
@@ -137,13 +137,13 @@ export default modelExtend(model, {
       return {
         ...state,
         itemOperateType: action.payload.itemOperateType,
-        currentItem: currentItem,
+        currentItem,
         itemValues: {},
       };
     },
     // 移除已删除得数据项
     removeDictItem(state, action) {
-      let currentItem = state.currentItem;
+      const currentItem = state.currentItem;
       const id = action.payload.id;
       currentItem.items = currentItem.items.filter(i => id !== i.id);
       return {

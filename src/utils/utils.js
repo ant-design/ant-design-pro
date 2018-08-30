@@ -3,7 +3,7 @@ import { parse, stringify } from 'qs';
 
 // 获取非Undefined字符串
 export function getNoUndefinedString(obj) {
-  return obj ? obj : '';
+  return obj || '';
 }
 export function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;

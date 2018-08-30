@@ -2,8 +2,9 @@ import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
 import * as AppInfo from '@/common/config/AppInfo';
+import cookie from 'react-cookies';
 import ax from './axiosWrap';
-import cookie from "react-cookies";
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -98,18 +99,18 @@ export default function request(url, options = {}) {
     }
   }
   const config = {
-    url: AppInfo.request_prefix+url,
+    url: AppInfo.request_prefix + url,
     ...newOptions,
   };
 
-  if('/auth/login' === url ){
-    config.headers ={
-      'Authorization': 'login'
-    }
-  }else {
-    config.headers ={
-      'Authorization': "Bearer" + (cookie.load("eva_token")?cookie.load("eva_token"):'')
-    }
+  if (url === '/auth/login') {
+    config.headers = {
+      Authorization: 'login',
+    };
+  } else {
+    config.headers = {
+      Authorization: `Bearer${  cookie.load('eva_token') ? cookie.load('eva_token') : ''}`,
+    };
   }
 
   const expirys = options.expirys || 60;
@@ -130,10 +131,8 @@ export default function request(url, options = {}) {
 
   return ax
     .request(config)
- 	.then(checkStatus)
-    .then(response => {
-      return response.data;
-    })
+    .then(checkStatus)
+    .then(response => response.data)
     .catch(e => {
       const response = e.response;
       const status = response.status;
@@ -143,7 +142,7 @@ export default function request(url, options = {}) {
 
       notification.error({
         message: `请求错误 : ${url}`,
-        description: errortext ? errortext : '服务器错误',
+        description: errortext || '服务器错误',
       });
 
       if (status === 401) {

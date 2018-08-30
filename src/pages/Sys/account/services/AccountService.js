@@ -19,7 +19,7 @@ export async function checkUnique(params) {
     },
   });
 }
-//保存用户信息
+// 保存用户信息
 export async function saveUser(params) {
   return request('/account/save', {
     method: 'POST',

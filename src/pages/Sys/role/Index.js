@@ -12,7 +12,7 @@ import styles from './Index.less';
 const FormItem = Form.Item;
 
 @Form.create()
-@connect( state => ({
+@connect(state => ({
   role: state.role,
   loading: state.loading.models.role,
 }))
@@ -27,6 +27,7 @@ export default class Role extends PureComponent {
       },
     });
   };
+
   // 新增窗口
   handleModalVisible = () => {
     const { dispatch } = this.props;
@@ -38,9 +39,12 @@ export default class Role extends PureComponent {
       },
     });
   };
+
   // 解锁/锁定
   handleLockSwitch = status => {
-    const { role: { selectedRowKeys } } = this.props;
+    const {
+      role: { selectedRowKeys },
+    } = this.props;
     this.props.dispatch({
       type: 'role/lockSwitch',
       payload: {
@@ -49,6 +53,7 @@ export default class Role extends PureComponent {
       },
     });
   };
+
   // 重置事件
   handleFormReset = () => {
     const { form, dispatch } = this.props;
@@ -58,6 +63,7 @@ export default class Role extends PureComponent {
       payload: {},
     });
   };
+
   // 搜索事件
   handleSearch = e => {
     e.preventDefault();
@@ -77,6 +83,7 @@ export default class Role extends PureComponent {
       });
     });
   };
+
   renderLeftBtn() {
     const { selectedRowKeys } = this.props.role;
 
@@ -121,6 +128,7 @@ export default class Role extends PureComponent {
       </div>
     );
   }
+
   renderRightBtn() {
     return (
       <div>
@@ -133,6 +141,7 @@ export default class Role extends PureComponent {
       </div>
     );
   }
+
   // 简单搜索条件
   renderSimpleForm() {
     const { getFieldDecorator } = this.props.form;
@@ -159,6 +168,7 @@ export default class Role extends PureComponent {
       </Form>
     );
   }
+
   render() {
     const { dispatch, loading } = this.props;
     const {
@@ -209,7 +219,7 @@ export default class Role extends PureComponent {
           <RoleConfig {...modalProps} handleCancel={() => this.handleCancel()} />
         )}
         {/* 新增窗口 */}
-        {'' !== modalType && <AOEForm {...AOEProps} />}
+        {modalType !== '' && <AOEForm {...AOEProps} />}
       </PageHeaderWrapper>
     );
   }

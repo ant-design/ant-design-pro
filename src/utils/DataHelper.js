@@ -2,7 +2,7 @@
 import { isUrl } from './utils';
 
 export function hasChildren(data, idArray) {
-  let itemArray = [];
+  const itemArray = [];
   idArray.forEach(id => {
     filterID(data, id, itemArray);
   });
@@ -12,12 +12,10 @@ export function hasChildren(data, idArray) {
 export function filterID(data, id, itemArray) {
   return data.forEach(item => {
     if (item.id === id) {
-      if (!!item.children) return itemArray.push(item.name);
-    } else {
-      if (item.children) {
+      if (item.children) return itemArray.push(item.name);
+    } else if (item.children) {
         filterID(item.children, id, itemArray);
       }
-    }
   });
 }
 
@@ -29,10 +27,9 @@ export function filterID(data, id, itemArray) {
  */
 export function getNodeBorther(data, targetPid) {
   let dude = [];
-  if ('0' === targetPid || 0 === targetPid || '-' === targetPid || '' === targetPid || !targetPid) {
+  if (targetPid === '0' || targetPid === 0 || targetPid === '-' || targetPid === '' || !targetPid) {
     dude = [...data];
-  } else {
-    if (data && data.length > 1){
+  } else if (data && data.length > 1) {
       data.forEach(item => {
         if (item.id === targetPid) {
           dude = [...item.children];
@@ -41,7 +38,6 @@ export function getNodeBorther(data, targetPid) {
         }
       });
     }
-  }
   return dude;
 }
 

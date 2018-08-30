@@ -33,20 +33,25 @@ export default class ModuleList extends Component {
       type: 'module/listModule',
     });
   }
+
   // 新增
   handleAdd = record => {
-    const parentId =  '0001' === record.status? {
-      parentId: record.id
-    } : {};
+    const parentId =
+      record.status === '0001'
+        ? {
+            parentId: record.id,
+          }
+        : {};
 
     this.props.dispatch({
       type: 'module/create',
       payload: {
         modalType: 'create',
-        currentItem: parentId
+        currentItem: parentId,
       },
     });
   };
+
   // 编辑
   handleEdit = record => {
     if (!record.id) {
@@ -61,6 +66,7 @@ export default class ModuleList extends Component {
       },
     });
   };
+
   // 启用/停用
   handleEnable = (record, e, status) => {
     if (!record.id) {
@@ -71,11 +77,12 @@ export default class ModuleList extends Component {
       type: 'module/changeStatus',
       payload: {
         id: record.id,
-        status: status,
+        status,
         record,
       },
     });
   };
+
   // 删除
   handleDelete = record => {
     const { dispatch, selectedRowKeys, data } = this.props;
@@ -96,6 +103,7 @@ export default class ModuleList extends Component {
       });
     }
   };
+
   // 批量删除
   handleBatchDelete = () => {
     const { dispatch, selectedRowKeys, data } = this.props;
@@ -113,6 +121,7 @@ export default class ModuleList extends Component {
     }
     // end if/else
   };
+
   // 搜索
   handleSearch = val => {
     const { dispatch } = this.props;
@@ -121,6 +130,7 @@ export default class ModuleList extends Component {
       payload: val,
     });
   };
+
   // 行选
   handleSelectRows = rows => {
     this.props.dispatch({
@@ -128,11 +138,12 @@ export default class ModuleList extends Component {
       payload: { selectedRowKeys: rows },
     });
   };
-  //排序操作
+
+  // 排序操作
   handleSort = (nodes, index, upOrDown) => {
-    let orginOrders = index;
-    let targetID = 'up' === upOrDown ? nodes[index - 1].id : nodes[index + 1].id;
-    let targetOrders = 'up' === upOrDown ? index-1 : index+1;
+    const orginOrders = index;
+    const targetID = upOrDown === 'up' ? nodes[index - 1].id : nodes[index + 1].id;
+    const targetOrders = upOrDown === 'up' ? index - 1 : index + 1;
     const switchObj = [
       {
         id: nodes[index].id,
@@ -148,6 +159,7 @@ export default class ModuleList extends Component {
       payload: switchObj,
     });
   };
+
   render() {
     const { data, selectedRowKeys, loading } = this.props;
     const statusMap = { '0000': 'error', '0001': 'success' };
@@ -161,7 +173,7 @@ export default class ModuleList extends Component {
       {
         title: '图标',
         dataIndex: 'icon',
-        render: (text) => <Icon type={text} />,
+        render: text => <Icon type={text} />,
       },
       {
         title: 'Path',
@@ -181,7 +193,7 @@ export default class ModuleList extends Component {
             <div>
               {text}
               <Divider type="vertical" />
-              {0 !== size && index !== size - 1 ? (
+              {size !== 0 && index !== size - 1 ? (
                 <BizIcon
                   onClick={e => this.handleSort(brother, index, 'down')}
                   type="descending"
@@ -190,7 +202,7 @@ export default class ModuleList extends Component {
               ) : (
                 <BizIcon type="descending" />
               )}
-              {0 !== size && index !== 0 ? (
+              {size !== 0 && index !== 0 ? (
                 <BizIcon
                   onClick={e => this.handleSort(brother, index, 'up')}
                   style={{ color: '#098FFF', cursor: 'pointer' }}
@@ -206,20 +218,18 @@ export default class ModuleList extends Component {
       {
         title: '状态',
         dataIndex: 'status',
-        render: text => {
-          return <Badge status={statusMap[text]} text={status[text]} />;
-        },
+        render: text => <Badge status={statusMap[text]} text={status[text]} />,
       },
       {
         title: '操作',
-        render: (text, record) => (
-          record.status === '0001' &&
-          <div>
-            <a onClick={e => this.handleEdit(record)}>编辑</a>
-            <Divider type="vertical" />
-            <a onClick={e => this.handleAdd(record)}>添加下级</a>
-          </div>
-        ),
+        render: (text, record) =>
+          record.status === '0001' && (
+            <div>
+              <a onClick={e => this.handleEdit(record)}>编辑</a>
+              <Divider type="vertical" />
+              <a onClick={e => this.handleAdd(record)}>添加下级</a>
+            </div>
+          ),
       },
       {
         title: '是否启用',
@@ -294,9 +304,7 @@ export default class ModuleList extends Component {
           columns={column}
           dataSource={data}
           loading={loading}
-          rowClassName={record => {
-            return record.status === '0000' ? styles.disabled : styles.enabled;
-          }}
+          rowClassName={record => record.status === '0000' ? styles.disabled : styles.enabled}
           pagination={false}
           rowKey={record => record.id}
           rowSelection={rowSelection}

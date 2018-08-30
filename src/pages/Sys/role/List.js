@@ -10,6 +10,7 @@ export default class RoleGrid extends PureComponent {
       type: 'role/listRole',
     });
   }
+
   // 用户授权按钮
   handleRoleClick = (record, operate) => {
     const { dispatch } = this.props;
@@ -23,6 +24,7 @@ export default class RoleGrid extends PureComponent {
       },
     });
   };
+
   // 表格动作触发事件
   handleListChange = (pagination, filtersArg, sorter) => {
     const { dispatch, formValues } = this.props;
@@ -53,6 +55,7 @@ export default class RoleGrid extends PureComponent {
   cleanSelectedKeys = () => {
     this.handleSelectRows([]);
   };
+
   // 编辑
   handleEditClick = record => {
     if (record.id) {
@@ -67,6 +70,7 @@ export default class RoleGrid extends PureComponent {
       notification.error('没有选择记录');
     }
   };
+
   // 单条删除
   handleDeleteClick = record => {
     this.props.dispatch({
@@ -79,6 +83,7 @@ export default class RoleGrid extends PureComponent {
       },
     });
   };
+
   // 行选事件
   handleSelectRows = rows => {
     const { dispatch } = this.props;
@@ -105,9 +110,7 @@ export default class RoleGrid extends PureComponent {
       {
         title: '角色名称',
         dataIndex: 'name',
-        render: (text, record) => {
-          return <Badge status={statusMap[record.locked]} text={text} />;
-        },
+        render: (text, record) => <Badge status={statusMap[record.locked]} text={text} />,
       },
       {
         title: '角色编码',
@@ -175,9 +178,7 @@ export default class RoleGrid extends PureComponent {
           pagination={paginationProps}
           bordered
           rowSelection={rowSelectionProps}
-          rowClassName={record => {
-            return record.locked ? styles.disabled : styles.enabled;
-          }}
+          rowClassName={record => record.locked ? styles.disabled : styles.enabled}
           onSelectRow={this.handleSelectRows}
           onChange={this.handleListChange}
           dataSource={list}

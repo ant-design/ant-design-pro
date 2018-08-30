@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import { Table, Alert, Divider, Badge, notification, message  } from 'antd';
+import { Table, Alert, Divider, Badge, notification, message } from 'antd';
+import { connect } from 'dva';
 import styles from './List.less';
 import { getValue } from '@/utils/utils';
-import { connect } from 'dva';
 // 部门管理列表
 @connect(({ loading }) => ({
   loading: loading.models.account,
@@ -12,6 +12,7 @@ export default class List extends PureComponent {
   cleanSelectedKeys = () => {
     this.handleSelectRows([]);
   };
+
   // 行选事件
   handleSelectRows = rows => {
     const { dispatch } = this.props;
@@ -35,6 +36,7 @@ export default class List extends PureComponent {
       notification.error('没有选择记录');
     }
   };
+
   // 单条删除
   handleDeleteClick = record => {
     this.props.dispatch({
@@ -47,6 +49,7 @@ export default class List extends PureComponent {
       },
     });
   };
+
   // 表格动作触发事件
   handleListChange = (pagination, filtersArg, sorter) => {
     const { dispatch, formValues } = this.props;
@@ -80,9 +83,7 @@ export default class List extends PureComponent {
 
     const columns = [
       {
-        render: (t,r,i)=>{
-          return i;
-        }
+        render: (t, r, i) => i,
       },
       {
         title: '编码',
@@ -112,9 +113,7 @@ export default class List extends PureComponent {
         title: '状态',
         dataIndex: 'locked',
         sorter: true,
-        render: text => {
-          return <Badge status={statusMap[text]} text={status[text]} />;
-        },
+        render: text => <Badge status={statusMap[text]} text={status[text]} />,
       },
       {
         title: '最后登录时间',
@@ -170,9 +169,7 @@ export default class List extends PureComponent {
           dataSource={list}
           rowKey={record => record.id}
           rowSelection={rowSelectionProps}
-          rowClassName={record => {
-            return record.locked ? styles.disabled : styles.enabled;
-          }}
+          rowClassName={record => record.locked ? styles.disabled : styles.enabled}
           pagination={paginationProps}
           columns={columns}
           onSelectRow={this.handleSelectRows}
