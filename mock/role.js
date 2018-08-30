@@ -226,7 +226,7 @@ const users = {
 };
 
 // 获取权限列表数据
-export function listRole(req, res, u) {
+export function listRole(req, res) {
   const dataSource = data;
   if (res && res.json) {
     res.json(dataSource);
@@ -236,7 +236,7 @@ export function listRole(req, res, u) {
 }
 
 // 根据权限组获取绑定的模块数据
-export function listModule(req, res, u) {
+export function listModule(req, res) {
   const dataSource = module;
   if (res && res.json) {
     res.json(dataSource);
@@ -245,7 +245,7 @@ export function listModule(req, res, u) {
   }
 }
 // 获取用户列表
-export function listUser(req, res, u) {
+export function listUser(req, res) {
   const dataSource = users;
   if (res && res.json) {
     res.json(dataSource);
@@ -254,7 +254,7 @@ export function listUser(req, res, u) {
   }
 }
 // 获取字典项数据
-export function getDictItemByRoleId(req, res, u) {
+export function getDictItemByRoleId(req, res) {
   if (res && res.json) {
     res.json(configData);
   } else {

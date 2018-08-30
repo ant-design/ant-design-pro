@@ -106,7 +106,12 @@ function fakeList(count) {
     });
   }
 
-  return list;
+  return {
+    data: list,
+    "status":200,
+    "statusText":"操作成功",
+    "success":true
+  };
 }
 
 let sourceData;
@@ -216,7 +221,7 @@ const getNotice = [
   },
 ];
 
-const getActivities = [
+const getActivities = {data:[
   {
     id: 'trend-1',
     updatedAt: new Date(),
@@ -315,7 +320,11 @@ const getActivities = [
     },
     template: '在 @{group} 新建项目 @{project}',
   },
-];
+],
+"status":200,
+"statusText":"操作成功",
+"success":true
+};
 
 function getFakeCaptcha(req, res) {
   return res.json('captcha-xxx');

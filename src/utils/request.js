@@ -75,9 +75,10 @@ export default function request(url, options = {}) {
     .digest('hex');
 
   const defaultOptions = {
-    credentials: 'include',
+    credentials: 'include'
+
   };
-  const newOptions = { ...defaultOptions, ...options };
+  const newOptions = { ...defaultOptions, ...`options` };
   if (
     newOptions.method === 'POST' ||
     newOptions.method === 'PUT' ||
@@ -132,16 +133,20 @@ export default function request(url, options = {}) {
   return ax
     .request(config)
     .then(checkStatus)
-    .then(response => response.data)
+    .then(response => {
+      console.info(`${url}` );
+      console.info(response);
+      return response.data;
+    })
     .catch(e => {
       const response = e.response;
       const status = response.status;
 
       const errortext = response.statusText ? response.statusText : codeMessage[response.status];
-      const url = response.config.url;
+      const requestUrl = response.config.url;
 
       notification.error({
-        message: `请求错误 : ${url}`,
+        message: `请求错误 : ${requestUrl}`,
         description: errortext || '服务器错误',
       });
 

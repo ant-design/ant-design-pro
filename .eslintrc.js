@@ -24,6 +24,8 @@ module.exports = {
     'no-nested-ternary': 0,
     'consistent-return': 1,
     'react/destructuring-assignment': 0,
+    'prefer-destructuring': 0,
+    'no-underscore-dangle': 0,
   },
   settings: {
     polyfills: ['fetch', 'promises', 'url'],
