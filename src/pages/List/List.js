@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
 import { Input } from 'antd';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 @connect()
 export default class SearchList extends Component {
@@ -54,7 +54,7 @@ export default class SearchList extends Component {
     const { match, children, location } = this.props;
 
     return (
-      <PageHeaderLayout
+      <PageHeaderWrapper
         title="搜索列表"
         content={mainSearch}
         tabList={tabList}
@@ -67,7 +67,7 @@ export default class SearchList extends Component {
             <Route key={item.key} path={item.path} component={item.component} exact={item.exact} />
           ))}
         </Switch> */}
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

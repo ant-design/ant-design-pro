@@ -6,7 +6,7 @@ import { Row, Col, Card, List, Avatar } from 'antd';
 
 import { Radar } from '@/components/Charts';
 import EditableLinkGroup from '@/components/EditableLinkGroup';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from './Workplace.less';
 
@@ -156,7 +156,7 @@ export default class Workplace extends PureComponent {
     );
 
     return (
-      <PageHeaderLayout
+      <PageHeaderWrapper
         loading={currentUserLoading}
         content={pageHeaderContent}
         extraContent={extraContent}
@@ -248,7 +248,7 @@ export default class Workplace extends PureComponent {
             </Card>
           </Col>
         </Row>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

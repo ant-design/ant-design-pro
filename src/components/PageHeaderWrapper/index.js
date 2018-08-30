@@ -4,10 +4,10 @@ import Link from 'umi/link';
 import PageHeader from '@/components/PageHeader';
 import { connect } from 'dva';
 import GridContent from './GridContent';
-import styles from './PageHeaderLayout.less';
-import MenuContext from './MenuContext';
+import styles from './index.less';
+import MenuContext from '@/layouts/MenuContext';
 
-const PageHeaderLayout = ({ children, grid, wrapperClassName, top, ...restProps }) => (
+const PageHeaderWrapper = ({ children, grid, wrapperClassName, top, ...restProps }) => (
   <div style={{ margin: '-24px -24px 0' }} className={wrapperClassName}>
     {top}
     <MenuContext.Consumer>
@@ -38,4 +38,4 @@ const PageHeaderLayout = ({ children, grid, wrapperClassName, top, ...restProps 
 
 export default connect(({ setting }) => ({
   grid: setting.grid,
-}))(PageHeaderLayout);
+}))(PageHeaderWrapper);
