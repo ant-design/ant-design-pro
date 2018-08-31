@@ -1,8 +1,8 @@
 // https://umijs.org/config/
-const os = require('os');
-const pageRoutes = require('./router.config');
-const webpackplugin = require('./plugin.config');
-const defaultSetting = require('../src/defaultSetting');
+import os from 'os';
+import pageRoutes from './router.config';
+import webpackplugin from './plugin.config';
+import defaultSetting from '../src/defaultSetting';
 
 export default {
   // add for transfer to umi
