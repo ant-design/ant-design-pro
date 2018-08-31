@@ -168,5 +168,12 @@ export default {
   'app.setting.weakmode': 'Weak Mode',
   'app.setting.copy': 'Copy Setting',
   'app.setting.copyinfo': 'copy success，please replace defaultSetting in src/models/setting.js',
-  'app.setting.production.hint': 'Setting panel show in development enviorment only, please modify src/defaultSetting.js mannually.',
+  'app.setting.production.hint':
+    'Setting panel show in development enviorment only, please modify src/defaultSetting.js mannually.',
+  'app.publish.title': 'Ant Desgin Pro@2.0.0  has been released! 🎉 🎉 🎉',
+  'app.publish.greeting': 'Hello, ',
+  'app.publish.intro': ' has been released, and please upgrade. ',
+  'app.publish.url':
+    'https://medium.com/ant-design/beautiful-and-powerful-ant-design-pro-2-0-release-51358da5af95',
+  'app.publish.old-version-guide': 'If you need documentation of older version, please visit ',
 };
