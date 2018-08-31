@@ -1,0 +1,1275 @@
+* [31m07a8c6e[m -[33m (HEAD -> infoNewVersion, origin/infoNewVersion)[m fix doc warning [32m(34 minutes ago) [1;34m<陈帅>[m
+* [31me9bd0c1[m -[33m[m add infoNewVersion modal [32m(46 minutes ago) [1;34m<陈帅>[m
+* [31m7cc1fcc[m -[33m (origin/v2, v2)[m remove extra empty object argument [32m(3 hours ago) [1;34m<afc163>[m
+* [31m5b24b0e[m -[33m[m Move style to Exception css [32m(3 hours ago) [1;34m<afc163>[m
+* [31m83df426[m -[33m[m fix authority [32m(3 hours ago) [1;34m<afc163>[m
+* [31mff08655[m -[33m[m check every matched route for authority [32m(3 hours ago) [1;34m<afc163>[m
+* [31m621299e[m -[33m[m default authorize [32m(3 hours ago) [1;34m<afc163>[m
+* [31m631483e[m -[33m[m Authorize the routes [32m(3 hours ago) [1;34m<afc163>[m
+* [31m92341fd[m -[33m[m update text [32m(5 hours ago) [1;34m<afc163>[m
+* [31m171c264[m -[33m[m hideChildren => hidenChildrenInMenu [32m(24 hours ago) [1;34m<afc163>[m
+* [31me235ca5[m -[33m[m move out PageHeaderLayout and rename to PageHeaderWrapper [32m(24 hours ago) [1;34m<afc163>[m
+* [31m4c3eef1[m -[33m[m Add BlankLayout [32m(24 hours ago) [1;34m<afc163>[m
+* [31m9420791[m -[33m[m use this.props.routes replace import config [32m(24 hours ago) [1;34m<afc163>[m
+* [31m9b3ad05[m -[33m[m fix menu data passing [32m(24 hours ago) [1;34m<afc163>[m
+* [31mc2fe400[m -[33m[m remove LoadingPage [32m(24 hours ago) [1;34m<afc163>[m
+* [31mc93b016[m -[33m[m should not setState before mount [32m(25 hours ago) [1;34m<afc163>[m
+* [31mb657fc0[m -[33m[m fix missing locale text [32m(25 hours ago) [1;34m<afc163>[m
+* [31m203ea77[m -[33m[m format router.config.js [32m(29 hours ago) [1;34m<afc163>[m
+* [31m74b1a28[m -[33m[m chore: use @layout-body-background [32m(2 days ago) [1;34m<bzone>[m
+* [31m7272fd6[m -[33m[m indent => 2 [32m(2 days ago) [1;34m<afc163>[m
+* [31m794697b[m -[33m[m fix typo [32m(2 days ago) [1;34m<afc163>[m
+* [31me2cb8b0[m -[33m[m update codestyle [32m(2 days ago) [1;34m<愚道>[m
+* [31mb9d2ec9[m -[33m[m fix eslintrc [32m(2 days ago) [1;34m<afc163>[m
+* [31m4230554[m -[33m[m Configure the Skeleton to match the style [32m(2 days ago) [1;34m<陈帅>[m
+* [31mee9787e[m -[33m[m Fix npm test output [32m(2 days ago) [1;34m<afc163>[m
+* [31m3ea5106[m -[33m[m enable eslint import rules [32m(2 days ago) [1;34m<afc163>[m
+* [31ma0da507[m -[33m[m fix config lint error [32m(2 days ago) [1;34m<陈帅>[m
+* [31m3a08a00[m -[33m[m Add eslint-plugin-compat [32m(2 days ago) [1;34m<afc163>[m
+* [31m3def673[m -[33m[m up firebase-functions version [32m(2 days ago) [1;34m<陈帅>[m
+* [31m1cb8f04[m -[33m[m Increase drawer width to cancel line breaks [32m(2 days ago) [1;34m<陈帅>[m
+* [31m8335d7c[m -[33m[m remove unused deps [32m(2 days ago) [1;34m<afc163>[m
+* [31m3c33c90[m -[33m[m fix package.json in funtions [32m(2 days ago) [1;34m<afc163>[m
+* [31m39e8051[m -[33m[m update babel deps [32m(2 days ago) [1;34m<afc163>[m
+* [31m962c1d7[m -[33m[m renew stylelintrc.json [32m(2 days ago) [1;34m<afc163>[m
+* [31m1f77cb5[m -[33m[m Fix steps margin and text-align [32m(2 days ago) [1;34m<afc163>[m
+* [31m71056ac[m -[33m[m fix review issue [32m(2 days ago) [1;34m<愚道>[m
+* [31mae2a58d[m -[33m[m rebase and fix review issue [32m(2 days ago) [1;34m<愚道>[m
+* [31m6d0a622[m -[33m[m fix reveiw issue add consistent-return rule [32m(2 days ago) [1;34m<愚道>[m
+* [31mcd1754e[m -[33m[m fix e2e test [32m(2 days ago) [1;34m<愚道>[m
+* [31m6d7d119[m -[33m[m fix code style update bug [32m(2 days ago) [1;34m<愚道>[m
+* [31m2c61850[m -[33m[m prettier file [32m(2 days ago) [1;34m<愚道>[m
+* [31m33b4e46[m -[33m[m sort custom rule [32m(2 days ago) [1;34m<愚道>[m
+* [31m8545d50[m -[33m[m remove repeat rule [32m(2 days ago) [1;34m<愚道>[m
+* [31m8cf518a[m -[33m[m use airbnb eslint config and fix some rule [32m(2 days ago) [1;34m<愚道>[m
+* [31mfc9c88a[m -[33m[m fix: add lint react/sort-comp rule and fix it [32m(2 days ago) [1;34m<愚道>[m
+* [31m3d728ed[m -[33m[m fix: global style in `global.less` not need :global anymore [32m(2 days ago) [1;34m<愚道>[m
+* [31m05a7245[m -[33m[m restore less css module className [32m(2 days ago) [1;34m<afc163>[m
+* [31mb556855[m -[33m[m 使用最新的 less.js [32m(2 days ago) [1;34m<afc163>[m
+* [31m6efffad[m -[33m[m do not compile less in production [32m(2 days ago) [1;34m<afc163>[m
+* [31md1144e4[m -[33m[m Add doc link [32m(2 days ago) [1;34m<afc163>[m
+* [31m77333e4[m -[33m[m defaultSetting primary color works on theme [32m(2 days ago) [1;34m<afc163>[m
+* [31m3fcd79a[m -[33m[m Fix typo: SettingDarwer => SettingDrawer [32m(2 days ago) [1;34m<afc163>[m
+* [31m121c880[m -[33m[m rename themeColor to primaryColor [32m(2 days ago) [1;34m<afc163>[m
+* [31m3bc8524[m -[33m[m fix locale [32m(2 days ago) [1;34m<afc163>[m
+* [31m9b93c38[m -[33m[m Fix typo: SettingDarwer => SettingDrawer [32m(2 days ago) [1;34m<afc163>[m
+* [31mb1e03cb[m -[33m[m refactor less compile logic [32m(2 days ago) [1;34m<afc163>[m
+* [31m0a5a9fc[m -[33m[m improve less compile [32m(2 days ago) [1;34m<afc163>[m
+* [31ma623b7f[m -[33m[m remove rollbar [32m(2 days ago) [1;34m<afc163>[m
+* [31mf9a06d9[m -[33m[m update umi config by setting polyfill to IE11 and enable dynamicImport [32m(2 days ago) [1;34m<afc163>[m
+* [31mb55ce83[m -[33m[m clean eslintrc [32m(3 days ago) [1;34m<afc163>[m
+* [31m152ec7d[m -[33m[m remove eslint warning [32m(3 days ago) [1;34m<afc163>[m
+* [31me7a7dd8[m -[33m[m use antd-pro-theme-webpack-plugin [32m(3 days ago) [1;34m<陈帅>[m
+* [31m93cb8b1[m -[33m[m remove extra blanks [32m(3 days ago) [1;34m<afc163>[m
+* [31m2b82f6b[m -[33m[m handler use flex [32m(4 days ago) [1;34m<陈帅>[m
+* [31mc961cca[m -[33m[m add settings drawer i18n [32m(4 days ago) [1;34m<陈帅>[m
+* [31m983d737[m -[33m[m Improve copy success tips [32m(4 days ago) [1;34m<陈帅>[m
+* [31md68666f[m -[33m[m fix #2027,optimization style [32m(4 days ago) [1;34m<陈帅>[m
+* [31mec1fafc[m -[33m[m Umi does not support pwa for the time being [32m(5 days ago) [1;34m<陈帅>[m
+* [31mb4858a6[m -[33m[m fix #1945 and use Skeleton replace card [32m(5 days ago) [1;34m<陈帅>[m
+* [31mfc93979[m -[33m[m move service file [32m(6 days ago) [1;34m<愚道>[m
+* [31m24e9ab7[m -[33m[m fixed umi/link umi/router [32m(8 days ago) [1;34m<zinkey>[m
+* [31m8189570[m -[33m[m use new alias @ which default set in umi [32m(8 days ago) [1;34m<愚道>[m
+* [31mb0816a4[m -[33m[m fix: remove unnecessary files [32m(8 days ago) [1;34m<愚道>[m
+* [31mffc305e[m -[33m[m move error service to the right place [32m(8 days ago) [1;34m<愚道>[m
+* [31m16a0921[m -[33m[m 搜索列(SearchList)头部的tablist不能切换 [32m(9 days ago) [1;34m<lijiehua>[m
+* [31m8a8ffc5[m -[33m[m fixed form [32m(9 days ago) [1;34m<zinkey>[m
+* [31me37787a[m -[33m[m upgrade merge-umi-mock-data version [32m(9 days ago) [1;34m<陈帅>[m
+* [31m8b03bd0[m -[33m[m fix #2027 style warning [32m(9 days ago) [1;34m<陈帅>[m
+* [31m4d3fe37[m -[33m[m Optimization less compile time [32m(10 days ago) [1;34m<陈帅>[m
+* [31mf4e8f45[m -[33m[m Roll back appveyor.yml [32m(12 days ago) [1;34m<陈帅>[m
+* [31mc9ba69f[m -[33m[m bigfix:Fix drawer hidden bug [32m(12 days ago) [1;34m<陈帅>[m
+* [31m806369e[m -[33m[m fix ci [32m(12 days ago) [1;34m<陈帅>[m
+* [31ma628a21[m -[33m[m up dependencies version [32m(12 days ago) [1;34m<陈帅>[m
+* [31medaef0a[m -[33m[m Remove redundant package references [32m(12 days ago) [1;34m<陈帅>[m
+* [31m5b3826d[m -[33m[m add backText api doc [32m(2 weeks ago) [1;34m<陈帅>[m
+* [31m3928e0d[m -[33m[m feat:Decoupling component dependency [32m(2 weeks ago) [1;34m<陈帅>[m
+* [31m4fdd2b0[m -[33m[m change min-height = 100vh [32m(2 weeks ago) [1;34m<陈帅>[m
+* [31m60f751d[m -[33m[m fix: cssnano failed in merging rules [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m42b97cf[m -[33m[m remove tmp code [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m304574a[m -[33m[m code style, use @/layouts/ and remove /index affix [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31mecd12e5[m -[33m[m try to fix ci [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31mc6139e0[m -[33m[m disable dll and hard-source in test [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31mb536754[m -[33m[m Revert "alias is not needed, use @/ for src directory instead" [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m349142f[m -[33m[m umi@2.0.0-beta.10 [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m86520dc[m -[33m[m alias is not needed, use @/ for src directory instead [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31mece1a97[m -[33m[m Make model and page together [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31md6b2123[m -[33m[m move src/pages/layouts to src/layouts [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31meb10d86[m -[33m[m remove unused files [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m13dc0de[m -[33m[m Remove unused files [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m6e3f3cc[m -[33m[m Init roolbar in global.js [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m5714498[m -[33m[m remove unused file [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m50cd334[m -[33m[m polyfill with umi-plugin-react [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31mc20ddf8[m -[33m[m global.less don't need to wrap with :global [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31mbfa9a32[m -[33m[m Only enable hardSource and dll for mac [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m8f4c3f6[m -[33m[m fix change theme plugin [32m(2 weeks ago) [1;34m<陈帅>[m
+* [31m56dba6c[m -[33m[m umi@2.0.0-beta.8 [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31mf97a804[m -[33m[m feat: migrate to umi@2 [32m(2 weeks ago) [1;34m<sorrycc>[m
+* [31m2ba897f[m -[33m[m fix #1989 Fix problem with scroll not working [32m(2 weeks ago) [1;34m<陈帅>[m
+* [31mec93edc[m -[33m[m Increase the judgment of pathname [32m(3 weeks ago) [1;34m<陈帅>[m
+*   [31m8f0262b[m -[33m[m Merge branch 'master' into v2 [32m(3 weeks ago) [1;34m<陈帅>[m
+[32m|[m[33m\[m  
+[32m|[m * [31mc26ff42[m -[33m[m The order of modification is the same as the menu [32m(3 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31ma236888[m -[33m[m use drawer repalce rc-drawer [32m(3 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31m8b2b78e[m -[33m[m fix #1981 change import function [32m(3 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31m12e12e8[m -[33m (tag: 1.4.4, tag: 1.4.2, tag: 1.4.1)[m up version to 1.4.1 [32m(3 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31m5f54bad[m -[33m[m Fix header search debounce enter [32m(4 weeks ago) [1;34m<Sean Bao>[m
+[32m|[m * [31m0dc5822[m -[33m (tag: 1.4.0)[m up version to 1.4.0 [32m(4 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31md69249d[m -[33m[m upgrade antd version [32m(4 weeks ago) [1;34m<偏右>[m
+[32m|[m * [31m77ce0fd[m -[33m[m doc:Modify the error of the document [32m(4 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31m189e6c5[m -[33m[m Features: add buttonText on Login.Captcha [32m(4 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31m11df359[m -[33m[m update browser support table [32m(4 weeks ago) [1;34m<afc163>[m
+[32m|[m * [31md7b4f80[m -[33m[m [BugFix] Fix chart data type and requirement [32m(4 weeks ago) [1;34m<Yun Chen>[m
+[32m|[m * [31m53b4917[m -[33m[m Added link to russian README file to all README [32m(4 weeks ago) [1;34m<Alex Agafonov>[m
+[32m|[m * [31m8900d03[m -[33m[m Russian README translation added [32m(4 weeks ago) [1;34m<Alex Agafonov>[m
+[32m|[m * [31mff744a3[m -[33m[m Russian README file added [32m(4 weeks ago) [1;34m<Alex Agafonov>[m
+[32m|[m * [31m0196493[m -[33m[m refactor: connect,Form.create use decorator [32m(4 weeks ago) [1;34m<KJlmfe>[m
+[32m|[m * [31m784d71e[m -[33m[m Fix PageHeader Tabs Display Issue [32m(4 weeks ago) [1;34m<Sean Bao>[m
+[32m|[m * [31m6018ee6[m -[33m[m docs(trend): reverseColor default value is false [32m(4 weeks ago) [1;34m<卡色>[m
+[32m|[m * [31mba7cbf0[m -[33m[m style: fix typo bashRedirect=>baseRedirect [32m(4 weeks ago) [1;34m<KJlmfe>[m
+[32m|[m * [31m73be04e[m -[33m[m up version and fix ga error [32m(4 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31mb75ca54[m -[33m[m fix Ellipsis break in firefox #1882 (#1921) [32m(4 weeks ago) [1;34m<niko>[m
+[32m|[m * [31m54b25ea[m -[33m[m test: fix tests by adding testURL to jest configuration [32m(5 weeks ago) [1;34m<KJlmfe>[m
+[32m|[m * [31m56a0748[m -[33m[m Fix rerender bug of ListContent [32m(5 weeks ago) [1;34m<afc163>[m
+[32m|[m * [31m1fb2185[m -[33m[m fix: lint and d.ts [32m(5 weeks ago) [1;34m<绯一>[m
+[32m|[m * [31m5215714[m -[33m[m feat: export bizcharts [32m(5 weeks ago) [1;34m<绯一>[m
+[32m|[m * [31m0e3c493[m -[33m[m fix: use max-height to replace height for better vertical-align (#1919) [32m(5 weeks ago) [1;34m<绯一>[m
+[32m|[m * [31mc294c85[m -[33m[m FooterToolBar width is fixed at 100% when using rc-drawer SliderMenu. [32m(6 weeks ago) [1;34m<yoyo837>[m
+[32m|[m * [31mae38575[m -[33m[m remove unused closing tag (#1876) [32m(6 weeks ago) [1;34m<gentlecoder>[m
+[32m|[m * [31m529dff8[m -[33m[m 减少一次判断，及修正一个文档错误 [32m(6 weeks ago) [1;34m<eruca>[m
+[32m|[m * [31m4903acb[m -[33m[m 修复侧边栏菜单不能动态显示的问题 [32m(6 weeks ago) [1;34m<杨伟荣>[m
+[32m|[m * [31me3cb9b2[m -[33m[m 修复侧边栏菜单不能动态显示的问题 [32m(6 weeks ago) [1;34m<杨伟荣>[m
+[32m|[m * [31m7d68af1[m -[33m[m Add hostWhiteList for rollbar [32m(7 weeks ago) [1;34m<afc163>[m
+[32m|[m * [31m4e78647[m -[33m[m Optimization: Use non-confused CDN [32m(7 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31mecbd99d[m -[33m[m Optimization: delete externals [32m(7 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31m53c4e7a[m -[33m[m Update README.md (#1844) [32m(7 weeks ago) [1;34m<Leonardo Farroco>[m
+[32m|[m * [31m2a761d4[m -[33m[m bugfix: change version to 1.3.0 [32m(7 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31m9bf818a[m -[33m[m Add overflow-wrap & wordWrap for ? character break line. Fix: #1767 (#1808) [32m(8 weeks ago) [1;34m<niko>[m
+[32m|[m * [31me1e0a7d[m -[33m[m style: Card should not use Spin [32m(8 weeks ago) [1;34m<陈帅>[m
+[32m|[m * [31mfba1af0[m -[33m[m feat: instead of dva/dynamic using react-loadable [32m(8 weeks ago) [1;34m<Ethan_Wan>[m
+* [33m|[m [31m17827d5[m -[33m[m up to 2.0.0-beta.4 [32m(3 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m6138c03[m -[33m[m add hideCheckAll in TagSelect [32m(3 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31md2de675[m -[33m[m Modify a few logical errors [32m(4 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m36eeb6c[m -[33m[m localStorage -> sessionStorage [32m(4 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mcb3c382[m -[33m[m Features:Fetch increase cache [32m(4 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m50c8ce3[m -[33m[m up dependencies version [32m(5 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m93c49f0[m -[33m[m delete index.ejs [32m(5 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mef806d1[m -[33m[m style: change <> to React.Fragment [32m(5 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31me7aba01[m -[33m[m delete webpackrc.js [32m(5 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31macd357c[m -[33m[m bugfix:change lang text [32m(5 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m724fea6[m -[33m[m fix: lint and d.ts [32m(5 weeks ago) [1;34m<绯一>[m
+* [33m|[m [31m1c74c62[m -[33m[m feat: export bizcharts [32m(5 weeks ago) [1;34m<绯一>[m
+* [33m|[m [31mf131b50[m -[33m[m fix: use max-height to replace height for better vertical-align (#1919) [32m(5 weeks ago) [1;34m<绯一>[m
+* [33m|[m [31mfcc4844[m -[33m[m FooterToolBar width is fixed at 100% when using rc-drawer SliderMenu. [32m(5 weeks ago) [1;34m<yoyo837>[m
+* [33m|[m [31mcbadacb[m -[33m[m remove unused closing tag (#1876) [32m(5 weeks ago) [1;34m<gentlecoder>[m
+* [33m|[m [31m503dcfd[m -[33m[m 减少一次判断，及修正一个文档错误 [32m(5 weeks ago) [1;34m<eruca>[m
+* [33m|[m [31m99099eb[m -[33m[m 修复侧边栏菜单不能动态显示的问题 [32m(5 weeks ago) [1;34m<杨伟荣>[m
+* [33m|[m [31ma5b5f9c[m -[33m[m 修复侧边栏菜单不能动态显示的问题 [32m(5 weeks ago) [1;34m<杨伟荣>[m
+* [33m|[m [31m76d8fcb[m -[33m[m Add hostWhiteList for rollbar [32m(5 weeks ago) [1;34m<afc163>[m
+* [33m|[m [31ma7a883f[m -[33m[m Optimization: Use non-confused CDN [32m(5 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m75e4ac6[m -[33m[m Optimization: delete externals [32m(5 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mb068046[m -[33m[m Update README.md (#1844) [32m(5 weeks ago) [1;34m<Leonardo Farroco>[m
+* [33m|[m [31md6d7b89[m -[33m[m bugfix: change version to 1.3.0 [32m(5 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m582523c[m -[33m[m Add overflow-wrap & wordWrap for ? character break line. Fix: #1767 (#1808) [32m(5 weeks ago) [1;34m<niko>[m
+* [33m|[m [31md17780f[m -[33m[m style: Card should not use Spin [32m(5 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m0436777[m -[33m[m feat: instead of dva/dynamic using react-loadable [32m(5 weeks ago) [1;34m<Ethan_Wan>[m
+* [33m|[m [31mf2b99a1[m -[33m[m NoticeIcon new feature [32m(5 weeks ago) [1;34m<Juan Rodrigo Venegas Boesch>[m
+* [33m|[m [31mad38d93[m -[33m[m Optimization: use state to control rendering time [32m(6 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mf3b77d4[m -[33m[m format package.json [32m(6 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mc936a6e[m -[33m[m translate success page [32m(6 weeks ago) [1;34m<张秀玲>[m
+* [33m|[m [31mfc1ac96[m -[33m[m Revert "migrate to umi@2-beta" [32m(6 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m9ed1581[m -[33m[m Revert "try to fix ci" [32m(6 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m9b9e5d4[m -[33m[m Revert "eslint check is removed in umi@2" [32m(6 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m1f59fe7[m -[33m[m eslint check is removed in umi@2 [32m(6 weeks ago) [1;34m<chencheng>[m
+* [33m|[m [31m751eeb0[m -[33m[m try to fix ci [32m(6 weeks ago) [1;34m<chencheng>[m
+* [33m|[m [31m5c2df04[m -[33m[m migrate to umi@2-beta [32m(6 weeks ago) [1;34m<chencheng>[m
+* [33m|[m [31m29640ca[m -[33m[m change english to chinese [32m(6 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m4a20186[m -[33m[m Optimization : add router.config.js [32m(6 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mab48106[m -[33m[m Optimization: Reduce the dependency of the setting component [32m(6 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31me2fda6e[m -[33m[m bugfix: fix site script [32m(6 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31ma8d201b[m -[33m[m translate error page [32m(6 weeks ago) [1;34m<张秀玲>[m
+* [33m|[m [31md8b3214[m -[33m[m Optimization:Independent MergeLessPlugin [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m2797662[m -[33m[m Optimization: Slight performance optimization [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m15c8853[m -[33m[m Optimization: Robust code [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mb0be02b[m -[33m[m Optimization：change to antd drawer [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mc4524c8[m -[33m[m bugfix: TableList name  searchlist change to searchtable [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m57c9820[m -[33m[m Optimization: Remove the use router.js and menu.js [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31md8ab492[m -[33m[m lint: change to eslint-config-umi [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m3c1cfab[m -[33m[m Optimization: chnage firebase site script [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31me0db0d1[m -[33m[m Optimization：change firebase to script [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mbc9b314[m -[33m[m bugfix:Chart data read error [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31me7a78e7[m -[33m[m bugfix: fix trigger error [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mb1ef8d4[m -[33m[m bugfix: Fix trigger page [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mac4dfc1[m -[33m[m translate exception pages [32m(7 weeks ago) [1;34m<张秀玲>[m
+* [33m|[m [31m57fb525[m -[33m[m localStorage  array [32m(7 weeks ago) [1;34m<rongxingsun>[m
+* [33m|[m [31md00bec8[m -[33m[m bigfix: fix step from page [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mf23ea6b[m -[33m[m style:fix Global.less does not work [32m(7 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m956da47[m -[33m[m remove umi/locale dep (#1823) [32m(7 weeks ago) [1;34m<愚指导>[m
+* [33m|[m   [31m785815f[m -[33m (umi)[m Merge branch 'umi' of https://github.com/ant-design/ant-design-pro into umi [32m(7 weeks ago) [1;34m<陈帅>[m
+[34m|[m[35m\[m [33m\[m  
+[34m|[m * [33m|[m [31m3b202a8[m -[33m[m remove .umirc.mock.js [32m(7 weeks ago) [1;34m<愚道>[m
+* [35m|[m [33m|[m [31md6860a7[m -[33m[m change to umi [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31mb3c2037[m -[33m[m translate settings page [32m(7 weeks ago) [1;34m<张秀玲>[m
+* [35m|[m [33m|[m [31mdab141a[m -[33m[m translate settings page [32m(7 weeks ago) [1;34m<张秀玲>[m
+* [35m|[m [33m|[m [31m08ed292[m -[33m[m bugfix: paernt ->getContainer [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31mcb85fd1[m -[33m[m bugfix: Determine if temp exists [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31m9d25d63[m -[33m[m bugfix: fix locale context is null [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31maa50ab4[m -[33m[m mkdir改成同步方法 [32m(7 weeks ago) [1;34m<wangyun>[m
+* [35m|[m [33m|[m [31m81774c2[m -[33m[m rebase: rebase v2 [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31mf07927f[m -[33m[m Increase dynamic switching local [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31m5bf31a4[m -[33m[m add change lang button [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31mc035a5f[m -[33m[m Simple performance optimization [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31m123401a[m -[33m[m Optimize the Breadcrumb [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31m93cc387[m -[33m[m optimize menu [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31mc9a09d8[m -[33m[m add analysis locale [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31m4caebc0[m -[33m[m add meun Intl [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31m663e34a[m -[33m[m base framework [32m(7 weeks ago) [1;34m<ddcat1115>[m
+* [35m|[m [33m|[m [31m85e9fa7[m -[33m[m Add copy setting button look #1751 [32m(7 weeks ago) [1;34m<陈帅>[m
+* [35m|[m [33m|[m [31m1595c7d[m -[33m[m Switch theme completion [32m(7 weeks ago) [1;34m<陈帅>[m
+[35m|[m[35m/[m [33m/[m  
+* [33m|[m [31me89dade[m -[33m[m finish login and register page [32m(7 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31mda4bd11[m -[33m[m add account settings [32m(7 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31m931e27f[m -[33m[m add acount center [32m(7 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31mdc5b0f6[m -[33m[m use config routes [32m(7 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31m64b5984[m -[33m[m add user layout [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31m14bed53[m -[33m[m check result and exception [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31ma02aa22[m -[33m[m change Profile menu [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31m20c01e0[m -[33m[m 1.add list search layout [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31m5ef482e[m -[33m[m 1.add step-form layout 2.add routes redirect [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31m2378eb0[m -[33m[m 1.use global layout 2.simplify routerData menuData 3.remove init route [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31me2aeb7c[m -[33m[m set init route [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31m7494ac0[m -[33m[m install umi-plugin-dva，and move umi to devDependencies [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31md32d460[m -[33m[m use global store [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31md9a965b[m -[33m[m rename mockjs [32m(8 weeks ago) [1;34m<xiaohu>[m
+* [33m|[m [31maa44bbb[m -[33m[m add layout [32m(8 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31m677621d[m -[33m[m mv index.* to global.* [32m(8 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31mfc44275[m -[33m[m rename index.ejs to document.ejs [32m(8 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31m532b4ef[m -[33m[m remove models/index.js [32m(8 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31m28310e1[m -[33m[m remove webpackrc to config/config.js [32m(8 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31m57d4e8f[m -[33m[m rename routes to pages [32m(8 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31m76a3391[m -[33m[m add umi dep [32m(8 weeks ago) [1;34m<愚道>[m
+* [33m|[m [31m8566117[m -[33m[m user center support GridContent [32m(8 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31mf4431e6[m -[33m[m password add onPressEnter [32m(8 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31m2d3982e[m -[33m[m Modify the scroll bar to body [32m(8 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31ma44b833[m -[33m[m chage temp file path [32m(8 weeks ago) [1;34m<陈帅>[m
+* [33m|[m [31maedadc3[m -[33m[m fix theme change [32m(8 weeks ago) [1;34m<陈帅>[m
+* [33m|[m   [31me3a7330[m -[33m[m Merge branch 'master' into v2 [32m(9 weeks ago) [1;34m<陈帅>[m
+[36m|[m[33m\[m [33m\[m  
+[36m|[m [33m|[m[33m/[m  
+[36m|[m * [31m67f686a[m -[33m[m fix #1748 in IE11 error [32m(9 weeks ago) [1;34m<陈帅>[m
+[36m|[m * [31md13c881[m -[33m[m 非使用字符串的地方 使用 push(location: LocationDescriptor, state?: LocationState) [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31mc9d71c9[m -[33m[m 抽取 getQueryPath 方法封装路径和查询参数拼接 [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31m63c8ceb[m -[33m[m 兼容hash 路由模式 [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31mf904467[m -[33m[m 登录使用replace，登出携带redirect for #1728 [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31m0eaad1d[m -[33m[m Redirect to expected page after logging in [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31mc5df073[m -[33m[m fix: modify argument name (#1752) [32m(9 weeks ago) [1;34m<EthanWan>[m
+[36m|[m * [31me7b603e[m -[33m[m Fix ci privilege bug [32m(9 weeks ago) [1;34m<陈帅>[m
+[36m|[m * [31mebb4db4[m -[33m[m add screen-xxl [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31made5cbb[m -[33m[m add circleci support [32m(9 weeks ago) [1;34m<陈帅>[m
+[36m|[m * [31m8de6bda[m -[33m[m Bump moment version to handle dependency security (https://nodesecurity.io/advisories/532) [32m(9 weeks ago) [1;34m<Nikhil Bhargava>[m
+[36m|[m * [31mfce74f9[m -[33m[m Compatible with IE10 [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31mf347ead[m -[33m[m check it when authority is string and currentAuthority is array. And update CheckPermissions test [32m(9 weeks ago) [1;34m<ubbcou>[m
+[36m|[m * [31mfdd6035[m -[33m[m Increase the permission judgment: when the user's permission is an array. [32m(9 weeks ago) [1;34m<ubbcou>[m
+[36m|[m * [31m268e0ee[m -[33m[m onTabChange fixed [32m(9 weeks ago) [1;34m<JoeyKo>[m
+[36m|[m * [31m6984ac0[m -[33m[m See #1729 [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31m3722129[m -[33m[m prettier [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31mbfda5fe[m -[33m[m naming specification [32m(9 weeks ago) [1;34m<yoyo837>[m
+[36m|[m * [31md1b424d[m -[33m[m fix some other eslint error , close #1722 [32m(9 weeks ago) [1;34m<yoyo837>[m
+* [1;31m|[m [31m902bdcb[m -[33m[m delete more externals [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31m180e33a[m -[33m[m fixed #1740 Advanced Form Member Management Cannot Add and Edit [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31m8c74bc6[m -[33m[m Weak mode changed to switch [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31m6b8665e[m -[33m[m fix onTabChange error [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31mff77771[m -[33m[m pageHeader app loading [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31m635e362[m -[33m[m Add compilation script [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31m518094b[m -[33m[m Perfect mock demo [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31ma8ef08b[m -[33m[m fixed #1750 Excessive loading in the workplace [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31meaf60da[m -[33m[m edit site script [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31mf903f9a[m -[33m[m support_firebase [32m(9 weeks ago) [1;34m<陈帅>[m
+* [1;31m|[m [31m16cf4ce[m -[33m[m Enable Dynamic Import defautly [32m(9 weeks ago) [1;34m<偏右>[m
+* [1;31m|[m   [31m7c729cd[m -[33m[m Merge branch 'master' into v2 [32m(10 weeks ago) [1;34m<陈帅>[m
+[1;32m|[m[1;31m\[m [1;31m\[m  
+[1;32m|[m [1;31m|[m[1;31m/[m  
+[1;32m|[m * [31m494a468[m -[33m[m Remove Authorized circular reference [32m(10 weeks ago) [1;34m<陈帅>[m
+[1;32m|[m * [31m422c720[m -[33m[m fix falsy currentUser [32m(10 weeks ago) [1;34m<afc163>[m
+[1;32m|[m * [31m2fa5a26[m -[33m[m stop re-assigning read-only "currentUser" [32m(10 weeks ago) [1;34m<Minqi Pan>[m
+[1;32m|[m * [31md7b87c2[m -[33m[m fix some eslint error [32m(10 weeks ago) [1;34m<陈帅>[m
+[1;32m|[m * [31m484d71d[m -[33m[m vscode  support alias [32m(10 weeks ago) [1;34m<陈帅>[m
+[1;32m|[m * [31m9a4ddb9[m -[33m[m Recover roadhog version [32m(2 months ago) [1;34m<偏右>[m
+[1;32m|[m * [31m84a05cb[m -[33m[m fix: HeaderSearch 组件中添加对 enter 键的防抖处理 [32m(2 months ago) [1;34m<Kevin Lee>[m
+[1;32m|[m * [31mfc8c9a5[m -[33m[m upgrade modules [32m(2 months ago) [1;34m<陈帅>[m
+[1;32m|[m * [31m70448f0[m -[33m[m externals bizcharts dataset and rollbar [32m(2 months ago) [1;34m<陈帅>[m
+[1;32m|[m * [31m9b08f2e[m -[33m[m fix: isUrl func failed && support judge url with port [32m(2 months ago) [1;34m<zhiyan>[m
+[1;32m|[m * [31m72e765b[m -[33m[m fix global hmr error [32m(2 months ago) [1;34m<Amumu>[m
+[1;32m|[m * [31m43a570d[m -[33m[m For robustness [32m(2 months ago) [1;34m<Amumu>[m
+[1;32m|[m * [31m2465ac2[m -[33m[m Fix PageHeader align issue, close #1693 [32m(2 months ago) [1;34m<afc163>[m
+[1;32m|[m * [31m631b665[m -[33m[m Fix PageHeader align [32m(2 months ago) [1;34m<afc163>[m
+[1;32m|[m * [31me685dc6[m -[33m[m fix chechPermissions.js isPromise(bool) [32m(2 months ago) [1;34m<guowenfh>[m
+[1;32m|[m * [31ma8f8180[m -[33m[m fix checkPermissions if bool [32m(2 months ago) [1;34m<guowenfh>[m
+[1;32m|[m * [31m80dc056[m -[33m[m feature: add <Authorized/> authority function After performing return Promise is render <PromiseRender/> component [32m(2 months ago) [1;34m<guowenfh>[m
+[1;32m|[m * [31m6c1b112[m -[33m[m fix #1681  `lint-staged` no longer supports running scripts defined in package.json. [32m(3 months ago) [1;34m<陈帅>[m
+[1;32m|[m * [31m0f9f767[m -[33m[m fix Ellipsis floor-mid to ceil-mid #1258 (#1680) [32m(3 months ago) [1;34m<niko>[m
+[1;32m|[m * [31m5c2dd01[m -[33m[m Update register.js [32m(3 months ago) [1;34m<Advoster>[m
+[1;32m|[m * [31m1da5d11[m -[33m[m upgrade deps version [32m(3 months ago) [1;34m<陈帅>[m
+[1;32m|[m * [31maaca87c[m -[33m[m rc-drawer-menu is deprecated, use rc-drawer instead. Apply API change, fix iconHandle not work. [32m(3 months ago) [1;34m<yoyo837>[m
+[1;32m|[m * [31m566d407[m -[33m[m Add deps badges [32m(3 months ago) [1;34m<afc163>[m
+[1;32m|[m * [31m456d25a[m -[33m[m change api name [32m(3 months ago) [1;34m<twisger>[m
+[1;32m|[m * [31m5baed89[m -[33m[m feature: consider full-width character length as 2 when calculate string length [32m(3 months ago) [1;34m<twisger>[m
+[1;32m|[m * [31mbcb9280[m -[33m[m fix: waterwave doesn't render when precent=0 [32m(3 months ago) [1;34m<patientayo>[m
+[1;32m|[m * [31m27a2353[m -[33m[m 修正DELETE请求方法request时body参数无效的BUG [32m(3 months ago) [1;34m<zbz>[m
+[1;32m|[m * [31m7ffc34b[m -[33m[m fix: add property className into interface IHeaderSearchProps [32m(3 months ago) [1;34m<Mashiro>[m
+[1;32m|[m * [31m2553b04[m -[33m[m Fix children empty judgement in Description [32m(3 months ago) [1;34m<Sean Bao>[m
+[1;32m|[m * [31ma06e795[m -[33m[m fix #1593 (#1616) [32m(3 months ago) [1;34m<Amumu>[m
+[1;32m|[m * [31m5f5bc2f[m -[33m[m fix typo (#1611) [32m(3 months ago) [1;34m<wangyun122>[m
+* [1;33m|[m [31mff2fc1a[m -[33m[m fix: judgment condition of autoHideHeader state [32m(2 months ago) [1;34m<F-loat>[m
+* [1;33m|[m [31m8bb0415[m -[33m[m externals bizcharts dataset and rollbar [32m(2 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m533c091[m -[33m[m fix lint error [32m(2 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31mcfbf108[m -[33m[m fix the problem that the chart cannot be displayed [32m(2 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m64f9cbe[m -[33m[m fix #1707 Duplicate classname [32m(2 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m08739b5[m -[33m[m fix static api [32m(2 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m868f84a[m -[33m[m delete some no no needrequestAnimationFrame [32m(2 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m8e3050a[m -[33m[m fix: judgment condition of autoHideHeader switch [32m(3 months ago) [1;34m<F-loat>[m
+* [1;33m|[m [31m5ec7dcf[m -[33m[m add css and less configuration [32m(3 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m782b803[m -[33m[m Optimize performance [32m(3 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31me9799a3[m -[33m[m fix: less modify method [32m(3 months ago) [1;34m<F-loat>[m
+* [1;33m|[m [31mbaac17a[m -[33m[m fix: #1649 height of settingDarwer [32m(3 months ago) [1;34m<F-loat>[m
+* [1;33m|[m [31mb918f44[m -[33m[m fix error in workplace #1660 [32m(3 months ago) [1;34m<wangyun>[m
+* [1;33m|[m [31mc100052[m -[33m[m rm .vscode folder [32m(3 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m05acc60[m -[33m[m Adjust package.json [32m(3 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31mf02c479[m -[33m[m fix: layout height [32m(3 months ago) [1;34m<F-loat>[m
+* [1;33m|[m [31meda9f31[m -[33m[m remove  this.menus [32m(3 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31maee80d1[m -[33m[m add layout==="topmenu" judgment [32m(3 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m904ca0a[m -[33m[m Fix#1640 Floating Component Style Issues [32m(3 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m1d8293a[m -[33m[m Modify the address location algorithm of the mock [32m(3 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m0bf6380[m -[33m[m Remove hardcoded [32m(3 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m233b4fb[m -[33m[m fix meun border style [32m(3 months ago) [1;34m<qixian.cs@outlook.com>[m
+* [1;33m|[m [31m81d47bc[m -[33m[m fix: layout overflow style with fixSiderbar [32m(3 months ago) [1;34m<F-loat>[m
+* [1;33m|[m [31m017a406[m -[33m[m fix ci errot [32m(3 months ago) [1;34m<qixian.cs@outlook.com>[m
+* [1;33m|[m [31m22785c3[m -[33m[m Adjust the siderbar style [32m(3 months ago) [1;34m<qixian.cs@outlook.com>[m
+* [1;33m|[m [31mc6d129a[m -[33m[m up pakage.json version [32m(3 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m856990a[m -[33m[m edit setting title [32m(3 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m85ca316[m -[33m[m change rc-drawer-menu to rc-drawer [32m(3 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m318152e[m -[33m[m edit drawer icon [32m(3 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m6e3422f[m -[33m[m fix #1532 menu select bug [32m(3 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m9da8cb5[m -[33m[m Improve accessibility [32m(3 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m344c9f7[m -[33m[m fix: fixed header width (#1614) [32m(3 months ago) [1;34m<柴茂源>[m
+* [1;33m|[m [31me0cf86a[m -[33m[m Increase color weakness [32m(3 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m55946fb[m -[33m[m fix fixed header transition (#1605) [32m(3 months ago) [1;34m<柴茂源>[m
+* [1;33m|[m [31m3086f72[m -[33m[m fix eslint error [32m(3 months ago) [1;34m<jim>[m
+* [1;33m|[m [31me6e305d[m -[33m[m delete HARD_SOURCE=none and upgrade roadhog [32m(3 months ago) [1;34m<jim>[m
+* [1;33m|[m   [31m193aa9f[m -[33m[m Merge branch 'master' into v2 [32m(3 months ago) [1;34m<jim>[m
+[1;34m|[m[1;33m\[m [1;33m\[m  
+[1;34m|[m [1;33m|[m[1;33m/[m  
+[1;34m|[m * [31m2fbc37b[m -[33m[m fix eslint error [32m(3 months ago) [1;34m<jim>[m
+[1;34m|[m * [31m2982d86[m -[33m[m add  ejs file to .prettierignore [32m(3 months ago) [1;34m<jim>[m
+[1;34m|[m * [31m536ce37[m -[33m[m remove captcha button height [32m(3 months ago) [1;34m<柴茂源>[m
+[1;34m|[m * [31me68f472[m -[33m[m 修复digitUppercase(2.01)返回为贰元整的，数字大写增加了“万亿” (#1589) [32m(3 months ago) [1;34m<Kitten9533>[m
+[1;34m|[m * [31m95dbbf9[m -[33m[m Fix the IE style exception [32m(3 months ago) [1;34m<jim>[m
+[1;34m|[m * [31m846d308[m -[33m[m Use `submitting` from `props` (#1579) [32m(3 months ago) [1;34m<Amumu>[m
+[1;34m|[m * [31m7dbd7c4[m -[33m[m fix length property include "..." tail length (#1592) [32m(3 months ago) [1;34m<niko>[m
+* [1;35m|[m [31m2c3214f[m -[33m[m Login.Captcha组件支持countDown，onGetCaptcha支持Promise (#1305) [32m(3 months ago) [1;34m<lyingd>[m
+* [1;35m|[m [31madd2529[m -[33m[m Notice Icon avatar can accepts node elements [32m(3 months ago) [1;34m<Juan Rodrigo Venegas Boesch>[m
+* [1;35m|[m [31mc1e9122[m -[33m[m fix #1561  fix getDerivedStateFromProps bug [32m(3 months ago) [1;34m<jim>[m
+* [1;35m|[m [31m86b9ac0[m -[33m[m fix tagselect bug [32m(3 months ago) [1;34m<jim>[m
+* [1;35m|[m [31m78a2070[m -[33m[m new setting bar style [32m(3 months ago) [1;34m<jim>[m
+* [1;35m|[m [31mc1c36b6[m -[33m[m Fix menu click exception [32m(3 months ago) [1;34m<jim>[m
+* [1;35m|[m   [31m2c0e700[m -[33m[m Merge branch 'master' into v2 [32m(3 months ago) [1;34m<jim>[m
+[1;36m|[m[1;35m\[m [1;35m\[m  
+[1;36m|[m [1;35m|[m[1;35m/[m  
+[1;36m|[m * [31ma144bbd[m -[33m[m up lodash fix #1519 [32m(3 months ago) [1;34m<jim>[m
+[1;36m|[m * [31m67f5e55[m -[33m[m Add margin before % [32m(3 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31mec8f082[m -[33m[m add Trend reverseColor doc [32m(4 months ago) [1;34m<jim>[m
+[1;36m|[m * [31md6330a7[m -[33m[m Allow toggling to let upward trends be positive (instead of only negative) - Update prop name to be `reverseColor` [32m(4 months ago) [1;34m<Nikhil Bhargava>[m
+[1;36m|[m * [31m3cfbae3[m -[33m[m fix ci [32m(4 months ago) [1;34m<jim>[m
+[1;36m|[m * [31m4bec524[m -[33m[m fix typo [32m(4 months ago) [1;34m<此去>[m
+[1;36m|[m * [31me26e375[m -[33m (tag: 2.0.0-beta.1)[m up to 2.0.0@beta [32m(4 months ago) [1;34m<jim>[m
+[1;36m|[m * [31m63fcc3d[m -[33m[m Ugly fix  #1409 [32m(4 months ago) [1;34m<jim>[m
+[1;36m|[m * [31me15226a[m -[33m[m fix broken login page on mobile device with small screen resolution (#1483) [32m(4 months ago) [1;34m<Liu Yue>[m
+[1;36m|[m * [31mc6bbef8[m -[33m[m tweak test case description [32m(4 months ago) [1;34m<Alan Wei>[m
+[1;36m|[m * [31ma8cc827[m -[33m[m remove unused code in test file [32m(4 months ago) [1;34m<Alan Wei>[m
+[1;36m|[m * [31mfad3f4a[m -[33m[m tweak code to keep coding style consistency [32m(4 months ago) [1;34m<Alan Wei>[m
+[1;36m|[m * [31m4ddbfe6[m -[33m[m refactor getFlatMenuKeys & getMeunMatchKeys to improve code readability & robustness [32m(4 months ago) [1;34m<Alan Wei>[m
+[1;36m|[m * [31me09da6b[m -[33m[m fix typo in package.json (#1454) [32m(4 months ago) [1;34m<dong>[m
+[1;36m|[m * [31mc92252f[m -[33m[m fix login view explain message block display error [32m(4 months ago) [1;34m<Harris>[m
+[1;36m|[m * [31mabd2dd8[m -[33m[m fix React.cloneElement in component DescriptionList (#1428) [32m(4 months ago) [1;34m<Liu Yue>[m
+[1;36m|[m * [31md4d49bb[m -[33m[m <LoginItem> has noProperty 'placeholder' (#1433) [32m(4 months ago) [1;34m<成都梁朝伟>[m
+[1;36m|[m * [31m311e8d5[m -[33m[m ignore html [32m(4 months ago) [1;34m<jim>[m
+[1;36m|[m * [31me4c4373[m -[33m[m fix functionName typo from getMeunMatcheys to getMeunMatchKeys [32m(4 months ago) [1;34m<Alan Wei>[m
+[1;36m|[m * [31m29e9547[m -[33m[m change less version to 2.7.2 [32m(4 months ago) [1;34m<jim>[m
+[1;36m|[m * [31ma5907a3[m -[33m[m fix #1248   match params path [32m(4 months ago) [1;34m<jim>[m
+[1;36m|[m * [31m6481a3a[m -[33m[m fix danger warning [32m(4 months ago) [1;34m<afc163>[m
+* [31m|[m [31m84315b3[m -[33m[m change colse => close [32m(3 months ago) [1;34m<jim>[m
+* [31m|[m [31m0e2cd76[m -[33m[m fix default setting bug [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31m255a70b[m -[33m[m Optimize fixSiderbar [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31ma69e306[m -[33m[m move package [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31mf9ba912[m -[33m[m fix #1453   prettier html error [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31m167b741[m -[33m[m change less version to 2.7.2 [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31m3e127cc[m -[33m[m fix fixSiderbar [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31m28b07b8[m -[33m[m typ ligth [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31m9d3a8ae[m -[33m[m add less version [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31m0af3300[m -[33m[m fix ci [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31m680c0c3[m -[33m[m Optimization parameter logic [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31m56ce1ef[m -[33m[m add build message [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31mc0bf754[m -[33m[m add theme change [32m(4 months ago) [1;34m<jim>[m
+* [31m|[m [31m6816dd8[m -[33m[m rename MeunContext to MenuContext [32m(4 months ago) [1;34m<Erwin Zhang>[m
+* [31m|[m [31mfd0926b[m -[33m[m add component's name [32m(4 months ago) [1;34m<Erwin Zhang>[m
+* [31m|[m   [31m2835ffa[m -[33m[m merge master [32m(4 months ago) [1;34m<jim>[m
+[32m|[m[31m\[m [31m\[m  
+[32m|[m [31m|[m[31m/[m  
+[32m|[m * [31mdf0ffd6[m -[33m[m Clean up typescript definitions [32m(4 months ago) [1;34m<Nikhil Bhargava>[m
+[32m|[m * [31m3df1c08[m -[33m[m add component's name [32m(4 months ago) [1;34m<ZHAO Jinxiang>[m
+[32m|[m * [31m48ad98c[m -[33m[m allow render without currentUser [32m(4 months ago) [1;34m<afc163>[m
+[32m|[m * [31m7176b4a[m -[33m[m fix #1324 Step-Form breadcrumbs path problem [32m(4 months ago) [1;34m<jim>[m
+[32m|[m * [31m99715b0[m -[33m[m cover .eslintrc to .eslintrc.js [32m(4 months ago) [1;34m<jim>[m
+[32m|[m * [31m744f528[m -[33m[m roadhog-api-doc need  transform-decorators-legacy [32m(4 months ago) [1;34m<jim>[m
+[32m|[m * [31m24333d5[m -[33m[m fix #1287   advanced details page is not displayed in IE11 [32m(4 months ago) [1;34m<jim>[m
+[32m|[m * [31m4b08575[m -[33m[m fix #1315  ie style error [32m(4 months ago) [1;34m<jim>[m
+[32m|[m * [31mcac7145[m -[33m[m up version [32m(4 months ago) [1;34m<jim>[m
+[32m|[m * [31mfb9d0d7[m -[33m[m fix:add the type declaration of the "key" field (#1367) [32m(4 months ago) [1;34m<kenve>[m
+* [33m|[m [31mdeccafe[m -[33m[m change hideClear to showClear [32m(4 months ago) [1;34m<jim>[m
+* [33m|[m [31m89b3d2e[m -[33m[m NoticeIcon add hideClear props [32m(4 months ago) [1;34m<jim>[m
+* [33m|[m [31m02f0624[m -[33m[m getLengendData()->getLegendData() (#1392) [32m(4 months ago) [1;34m<拷钉>[m
+* [33m|[m [31m3007437[m -[33m[m Enable code split defaultly, close #1117 [32m(4 months ago) [1;34m<afc163>[m
+* [33m|[m [31m7807794[m -[33m[m fix rebase error [32m(4 months ago) [1;34m<jim>[m
+* [33m|[m [31m7126de9[m -[33m[m getLengendData => getLegendData [32m(4 months ago) [1;34m<jim>[m
+* [33m|[m [31m5fd9f36[m -[33m[m upgrade version [32m(4 months ago) [1;34m<jim>[m
+* [33m|[m [31mbf73643[m -[33m[m change to new context api [32m(4 months ago) [1;34m<jim>[m
+* [33m|[m [31m072e30b[m -[33m[m change to react 16.3.0 [32m(4 months ago) [1;34m<jim>[m
+* [33m|[m [31m388d804[m -[33m[m Maybe useful performance optimization [32m(4 months ago) [1;34m<jim>[m
+* [33m|[m [31m62e77de[m -[33m[m fix background color error [32m(4 months ago) [1;34m<jim>[m
+* [33m|[m   [31mf953334[m -[33m[m Merge branch 'master' into v2 [32m(4 months ago) [1;34m<jim>[m
+[34m|[m[33m\[m [33m\[m  
+[34m|[m [33m|[m[33m/[m  
+[34m|[m * [31m42e2267[m -[33m[m remove deps [32m(4 months ago) [1;34m<chencheng>[m
+[34m|[m * [31m80ba0b8[m -[33m[m fix: babel transform failed with transform-decorators-legacy [32m(4 months ago) [1;34m<chencheng>[m
+[34m|[m * [31m7c7fb5e[m -[33m[m Update index.js (#1335) [32m(4 months ago) [1;34m<Rupeshiya>[m
+[34m|[m * [31m2d47f4b[m -[33m (tag: 1.3.0)[m bump 1.3.0 [32m(4 months ago) [1;34m<ddcat1115>[m
+[34m|[m * [31m3bc5c54[m -[33m[m add default Charts export - to support: import Charts from 'ant-design-pro/lib/Charts'; [32m(4 months ago) [1;34m<ddcat1115>[m
+[34m|[m * [31mfe1aeb2[m -[33m[m Fix charts api, margin => padding [32m(5 months ago) [1;34m<afc163>[m
+[34m|[m * [31mc86c321[m -[33m[m Fix TimelineChart time format issue (#1283) [32m(5 months ago) [1;34m<mdluo>[m
+[34m|[m * [31mc864630[m -[33m[m Fix undefined type [32m(5 months ago) [1;34m<Wei Zhu>[m
+* [35m|[m   [31m5b13479[m -[33m[m merge master [32m(4 months ago) [1;34m<jim>[m
+[36m|[m[35m\[m [35m\[m  
+[36m|[m [35m|[m[35m/[m  
+[36m|[m * [31m7f704c4[m -[33m[m translation of DescriptionList [32m(5 months ago) [1;34m<ddcat1115>[m
+[36m|[m * [31mb07d8cb[m -[33m[m translation of Exception [32m(5 months ago) [1;34m<ddcat1115>[m
+[36m|[m * [31md9a25af[m -[33m[m remove setting Content-Type when body is FormData [32m(5 months ago) [1;34m<chieveit>[m
+[36m|[m * [31mbfe1393[m -[33m[m fix #1215 [32m(5 months ago) [1;34m<jljsj>[m
+[36m|[m * [31m558f73b[m -[33m[m Added en translation for Ellipsis (#1210) [32m(5 months ago) [1;34m<Cemre Mengu>[m
+[36m|[m * [31m4ca52a1[m -[33m[m Added en translation number info (#1211) [32m(5 months ago) [1;34m<Cemre Mengu>[m
+[36m|[m * [31me959ba8[m -[33m[m fix site error [32m(5 months ago) [1;34m<jim>[m
+[36m|[m * [31m314c933[m -[33m[m fix tagcloud bug [32m(5 months ago) [1;34m<jim>[m
+[36m|[m * [31mb6261b4[m -[33m[m fix #1209 [32m(5 months ago) [1;34m<ddcat1115>[m
+[36m|[m * [31m13725bc[m -[33m[m 顶部搜索框组件添加默认打开配置 (#1179) [32m(5 months ago) [1;34m<低位>[m
+[36m|[m * [31m6b7b454[m -[33m[m fix #1202 [32m(5 months ago) [1;34m<ddcat1115>[m
+* [1;31m|[m [31m7eb045c[m -[33m[m Modify the style [32m(5 months ago) [1;34m<jim>[m
+* [1;31m|[m [31m93267fc[m -[33m[m rebase v2 [32m(5 months ago) [1;34m<jim>[m
+* [1;31m|[m [31m0a38658[m -[33m[m chang to new context api [32m(5 months ago) [1;34m<jim>[m
+* [1;31m|[m [31mb3821d5[m -[33m[m fix tagcloud bug [32m(5 months ago) [1;34m<jim>[m
+* [1;31m|[m [31m083c285[m -[33m[m fix #1209 [32m(5 months ago) [1;34m<ddcat1115>[m
+* [1;31m|[m [31mfe05a06[m -[33m[m 顶部搜索框组件添加默认打开配置 (#1179) [32m(5 months ago) [1;34m<低位>[m
+* [1;31m|[m [31m36feb4c[m -[33m[m fix #1202 [32m(5 months ago) [1;34m<ddcat1115>[m
+* [1;31m|[m [31mf4855c2[m -[33m[m Fix menu typos [32m(5 months ago) [1;34m<Erwin Zhang>[m
+* [1;31m|[m [31mf60ee6e[m -[33m[m use less var [32m(5 months ago) [1;34m<jim>[m
+* [1;31m|[m [31m6ffc494[m -[33m[m Optimized logo style [32m(5 months ago) [1;34m<jim>[m
+* [1;31m|[m   [31m8fe4c6f[m -[33m[m Merge remote-tracking branch 'origin/master' into v2 [32m(5 months ago) [1;34m<ddcat1115>[m
+[1;32m|[m[1;31m\[m [1;31m\[m  
+[1;32m|[m [1;31m|[m[1;31m/[m  
+[1;32m|[m * [31ma982ded[m -[33m[m StandardTable need a "rowKey" prop (#1175) [32m(5 months ago) [1;34m<neoscript99>[m
+[1;32m|[m * [31m52772ae[m -[33m[m fix #1188  @Debounce no use arrow function [32m(5 months ago) [1;34m<jim>[m
+[1;32m|[m * [31m774f8d4[m -[33m[m no perttier package.json [32m(5 months ago) [1;34m<jim>[m
+[1;32m|[m * [31mb5dfc1f[m -[33m[m delete vscode [32m(5 months ago) [1;34m<jim>[m
+[1;32m|[m * [31ma78785a[m -[33m (tag: 1.2.1)[m Upgrade version [32m(5 months ago) [1;34m<jim>[m
+[1;32m|[m * [31m645f7da[m -[33m[m support perttier [32m(5 months ago) [1;34m<jim>[m
+[1;32m|[m * [31m08456b9[m -[33m[m Modify the path for easy publishing [32m(5 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m6ef237e[m -[33m[m merge master [32m(5 months ago) [1;34m<jim>[m
+* [1;33m|[m   [31mbb35833[m -[33m[m Merge branch 'master' into v2 [32m(5 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m[1;33m\[m [1;33m\[m  
+[1;34m|[m [1;33m|[m[1;33m/[m  
+[1;34m|[m * [31m420b297[m -[33m (tag: 1.2.0)[m temp fix: roadhog test failed with alias set [32m(5 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m * [31m9bc3e71[m -[33m[m bump 1.2.0 [32m(5 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m * [31mfc178e5[m -[33m[m Fixed: #1142 (#1160) [32m(5 months ago) [1;34m<niko>[m
+[1;34m|[m * [31m9dcebdc[m -[33m[m fix #948 [32m(5 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m * [31m4f9d8ce[m -[33m[m remove useless setting [32m(5 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m * [31m148aaa8[m -[33m[m let `hideInBreadcrumb` available in menu.js [32m(5 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m * [31m9a34d47[m -[33m[m Improve the display of bread crumbs (#1053) [32m(5 months ago) [1;34m<Reed Sun>[m
+[1;34m|[m * [31m6225aa6[m -[33m[m :bug: fix inner exact cover custom exact bug (#1148) [32m(5 months ago) [1;34m<ws456999>[m
+* [1;35m|[m   [31me258747[m -[33m[m merge master [32m(5 months ago) [1;34m<jim>[m
+[1;36m|[m[1;35m\[m [1;35m\[m  
+[1;36m|[m [1;35m|[m[1;35m/[m  
+[1;36m|[m * [31m303c5e4[m -[33m[m Remove Error Trigger dump code & support static env (#1128) [32m(6 months ago) [1;34m<niko>[m
+[1;36m|[m * [31m603bcd7[m -[33m[m Use `ESLINT=none` (#1130) [32m(6 months ago) [1;34m<PKAQ>[m
+[1;36m|[m * [31mb187ca5[m -[33m[m default open split code [32m(6 months ago) [1;34m<jim>[m
+[1;36m|[m * [31m62c8eaf[m -[33m[m Enable code split defaultly close #1117 [32m(6 months ago) [1;34m<jim>[m
+[1;36m|[m * [31m9e44f5a[m -[33m[m Add engines in package.json [32m(6 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31mcbc0ea7[m -[33m[m Use `ESLINT=none` [32m(6 months ago) [1;34m<偏右>[m
+[1;36m|[m * [31m091adac[m -[33m[m babel-plugin-import version #1121 [32m(6 months ago) [1;34m<ddcat1115>[m
+[1;36m|[m * [31m2009bf3[m -[33m[m Upgrade version number [32m(6 months ago) [1;34m<jim>[m
+[1;36m|[m * [31mbacc203[m -[33m[m fix title can't be hidden in <img /> type icon when menu collapsed [32m(6 months ago) [1;34m<ddcat1115>[m
+[1;36m|[m * [31mbf833b0[m -[33m[m fix ChartCard total issue close #1110 [32m(6 months ago) [1;34m<ddcat1115>[m
+[1;36m|[m * [31maa67588[m -[33m[m fix redirect loop (#1103) [32m(6 months ago) [1;34m<ddcat1115>[m
+[1;36m|[m * [31m5519345[m -[33m[m update mirror site [32m(6 months ago) [1;34m<ddcat1115>[m
+[1;36m|[m * [31me618d4d[m -[33m[m PageHeader support tabDefaultActiveKey [32m(6 months ago) [1;34m<ddcat1115>[m
+[1;36m|[m * [31md44f8af[m -[33m[m 这一步应该判断没指定默认tab时候，tab默认为tablist第一个. (#1040) [32m(6 months ago) [1;34m<Diro Guan>[m
+[1;36m|[m * [31madca7f5[m -[33m[m alias ant-design-pro (#1035) [32m(6 months ago) [1;34m<niko>[m
+[1;36m|[m * [31m9c49d4b[m -[33m[m Update SiderMenu.js [32m(6 months ago) [1;34m<hzq>[m
+[1;36m|[m * [31m1a46c6e[m -[33m[m Update SiderMenu.js [32m(6 months ago) [1;34m<hzq>[m
+[1;36m|[m * [31ma28a71e[m -[33m[m standardized typescript d.ts file [32m(6 months ago) [1;34m<jim>[m
+* [31m|[m [31m31052b2[m -[33m[m fix rebase url bug [32m(6 months ago) [1;34m<jim>[m
+* [31m|[m [31m04e920e[m -[33m[m Enable code split defaultly [32m(6 months ago) [1;34m<jim>[m
+* [31m|[m [31m1a99a24[m -[33m[m remove useless files [32m(6 months ago) [1;34m<ddcat1115>[m
+* [31m|[m [31m522ec42[m -[33m[m individual url #1072 [32m(6 months ago) [1;34m<ddcat1115>[m
+* [31m|[m [31mf87d737[m -[33m[m better url #1072 [32m(6 months ago) [1;34m<ddcat1115>[m
+* [31m|[m [31med0b743[m -[33m[m fix megre v2 bug [32m(6 months ago) [1;34m<jim>[m
+* [31m|[m   [31mc9ff3d3[m -[33m[m Merge branch 'v2' into top_nav [32m(6 months ago) [1;34m<jim>[m
+[32m|[m[33m\[m [31m\[m  
+[32m|[m * [31m\[m   [31m3621feb[m -[33m[m Merge branch 'master' into v2 [32m(6 months ago) [1;34m<ddcat1115>[m
+[32m|[m [34m|[m[31m\[m [31m\[m  
+[32m|[m [34m|[m [31m|[m[31m/[m  
+[32m|[m [34m|[m * [31m234c97f[m -[33m[m Remove fastclick [32m(6 months ago) [1;34m<afc163>[m
+[32m|[m [34m|[m * [31m58ca12e[m -[33m[m Nightmare -> puppeteer (#1006) [32m(6 months ago) [1;34m<valleykid>[m
+[32m|[m [34m|[m * [31m928e236[m -[33m[m Translated the document of the Login component. (#953) [32m(6 months ago) [1;34m<SimpleFrontend>[m
+[32m|[m [34m|[m * [31m7dbdbae[m -[33m[m Update README.md [32m(6 months ago) [1;34m<nestoralonso>[m
+[32m|[m [34m|[m * [31mb0d3aad[m -[33m[m fix #1015 then add reset fields [32m(6 months ago) [1;34m<jim>[m
+* [34m|[m [35m|[m [31m8b904c6[m -[33m[m LoadingPage [32m(6 months ago) [1;34m<lijiehua>[m
+* [34m|[m [35m|[m [31m5c8d9c1[m -[33m[m update img url [32m(6 months ago) [1;34m<jim>[m
+* [34m|[m [35m|[m [31m91bfd88[m -[33m[m add top_meun and siderbar [32m(6 months ago) [1;34m<jim>[m
+* [34m|[m [35m|[m [31mb021ef4[m -[33m[m add top nav layout [32m(6 months ago) [1;34m<jim>[m
+[34m|[m[34m/[m [35m/[m  
+* [35m|[m [31m2e59803[m -[33m[m del other country [32m(6 months ago) [1;34m<jim>[m
+* [35m|[m [31m67cb032[m -[33m[m add placeholder 简单的介绍下自己 [32m(6 months ago) [1;34m<jim>[m
+* [35m|[m [31m93efb1b[m -[33m[m hidden 头像 [32m(6 months ago) [1;34m<jim>[m
+* [35m|[m [31m86823dc[m -[33m[m when mini width hide tile [32m(6 months ago) [1;34m<jim>[m
+* [35m|[m [31m2a11d9a[m -[33m[m fix review warning [32m(6 months ago) [1;34m<jim>[m
+* [35m|[m [31me9d8e00[m -[33m[m Fix @luli reveiw [32m(6 months ago) [1;34m<valleykid>[m
+* [35m|[m [31m6d61977[m -[33m[m adjust category [32m(6 months ago) [1;34m<ddcat1115>[m
+* [35m|[m [31m257e294[m -[33m[m update TableList [32m(6 months ago) [1;34m<ddcat1115>[m
+* [35m|[m [31me0cf61e[m -[33m[m update userCenter [32m(6 months ago) [1;34m<ddcat1115>[m
+* [35m|[m   [31m92293e4[m -[33m[m Merge branch 'master' into v2 [32m(6 months ago) [1;34m<ddcat1115>[m
+[36m|[m[35m\[m [35m\[m  
+[36m|[m [35m|[m[35m/[m  
+[36m|[m * [31mebd6f2f[m -[33m[m fix Countdown error format and invalid initial time, close #1009 [32m(6 months ago) [1;34m<ddcat1115>[m
+[36m|[m * [31mcb88864[m -[33m[m Fast finish for ci [32m(6 months ago) [1;34m<valleykid>[m
+[36m|[m * [31mb00289b[m -[33m[m fix #984 add step-form title [32m(6 months ago) [1;34m<jim>[m
+[36m|[m * [31m69cb402[m -[33m[m fix Authorized Promise render recreating (#987) [32m(6 months ago) [1;34m<guowenfh>[m
+[36m|[m * [31mf651660[m -[33m[m deps: move rollbar to dependencies (#990) [32m(6 months ago) [1;34m<Haoliang Gao>[m
+[36m|[m * [31m6e51cba[m -[33m[m fix #948 [32m(6 months ago) [1;34m<ddcat1115>[m
+[36m|[m * [31mcec0f45[m -[33m[m improve SiderMenu [32m(6 months ago) [1;34m<ddcat1115>[m
+[36m|[m * [31m42bfd96[m -[33m[m fix CountDown Unknown event warning [32m(6 months ago) [1;34m<jim>[m
+[36m|[m * [31m27266c5[m -[33m[m fix #972 delete  extra / [32m(6 months ago) [1;34m<jim>[m
+[36m|[m * [31m74f5028[m -[33m[m bugfix (#970) [32m(6 months ago) [1;34m<Alexius Lee>[m
+[36m|[m * [31m3b82625[m -[33m[m add meun test and Modify part of the logic (#917) [32m(7 months ago) [1;34m<陈帅>[m
+* [1;31m|[m   [31m509e432[m -[33m[m Merge branch 'v2' of https://github.com/ant-design/ant-design-pro into v2 [32m(6 months ago) [1;34m<ddcat1115>[m
+[1;32m|[m[1;33m\[m [1;31m\[m  
+[1;32m|[m * [1;31m|[m [31mc230fa8[m -[33m[m workplace use user model [32m(7 months ago) [1;34m<ddcat1115>[m
+[1;32m|[m * [1;31m|[m [31maeda0d9[m -[33m[m User center (#940) [32m(7 months ago) [1;34m<ddcat1115>[m
+[1;32m|[m * [1;31m|[m [31m97547e8[m -[33m[m use less variables & remove some responsive setting [32m(7 months ago) [1;34m<ddcat1115>[m
+[1;32m|[m * [1;31m|[m [31m95e9968[m -[33m[m fix style warning [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [1;31m|[m [31m7c1d6a9[m -[33m[m fix city unload error [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [1;31m|[m [31m52b64ba[m -[33m[m optimize GeographicView style [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [1;31m|[m [31m972719a[m -[33m[m optimize phoneview style [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [1;31m|[m [31m80a585c[m -[33m[m optimize avatar style [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [1;31m|[m [31m9445abd[m -[33m[m Enhanced meun response [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [1;31m|[m [31m8b83a6f[m -[33m[m responsive support for user information interface [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [1;31m|[m [31m2183e98[m -[33m[m modify review style [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [1;31m|[m [31m415b8ae[m -[33m[m features  add userinfo page (#880) [32m(7 months ago) [1;34m<陈帅>[m
+[1;32m|[m * [1;31m|[m [31m26860e3[m -[33m[m New page info modal (#876) [32m(7 months ago) [1;34m<valleykid>[m
+[1;32m|[m * [1;31m|[m [31m44ca667[m -[33m[m New page - step modal (#855) [32m(7 months ago) [1;34m<ddcat1115>[m
+[1;32m|[m [1;31m|[m[1;31m/[m  
+[1;32m|[m * [31mbd391d7[m -[33m[m Format the code [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [31mfd9773f[m -[33m[m fix #933  add className prop [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [31m38f1302[m -[33m[m ⚡️ Change 'getUrlParams()' as standard library to 'url.parse()' (#926) [32m(7 months ago) [1;34m<王集鹄>[m
+[1;32m|[m * [31m3c18317[m -[33m[m div to fragment (#883) [32m(7 months ago) [1;34m<陈帅>[m
+[1;32m|[m * [31m6db2e48[m -[33m[m Translate FooterToolbar (#903) [32m(7 months ago) [1;34m<诸岳>[m
+[1;32m|[m * [31mb3af8f8[m -[33m[m fix #821  Menu selection problem [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [31m5c21b99[m -[33m[m Unit testing to increase breadcrumbs [32m(7 months ago) [1;34m<jim>[m
+[1;32m|[m * [31mf388d92[m -[33m[m 修復点使用文档没有进行正确的跳转 (#893) [32m(7 months ago) [1;34m<PKAQ>[m
+[1;32m|[m * [31m9994368[m -[33m[m let request.js be able to deal with FormData (#884) [32m(7 months ago) [1;34m<Guangshuo Chen>[m
+[1;32m|[m * [31m9c4e9c1[m -[33m[m Add period in the end for the tip which don't has period before. (#877) [32m(7 months ago) [1;34m<Reed Sun>[m
+[1;32m|[m * [31m5ba91f2[m -[33m[m move pro doc link to header [32m(7 months ago) [1;34m<afc163>[m
+* [1;33m|[m [31m124802f[m -[33m[m workplace use user model [32m(7 months ago) [1;34m<ddcat1115>[m
+* [1;33m|[m [31m3f00025[m -[33m[m User center (#940) [32m(7 months ago) [1;34m<ddcat1115>[m
+* [1;33m|[m [31m4295b18[m -[33m[m use less variables & remove some responsive setting [32m(7 months ago) [1;34m<ddcat1115>[m
+* [1;33m|[m [31mea38c9b[m -[33m[m fix style warning [32m(7 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m50845e4[m -[33m[m fix city unload error [32m(7 months ago) [1;34m<jim>[m
+* [1;33m|[m [31mf9e2386[m -[33m[m optimize GeographicView style [32m(7 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m778e646[m -[33m[m optimize phoneview style [32m(7 months ago) [1;34m<jim>[m
+* [1;33m|[m [31mbe06f15[m -[33m[m optimize avatar style [32m(7 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m996f9e5[m -[33m[m Enhanced meun response [32m(7 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m7c0550f[m -[33m[m responsive support for user information interface [32m(7 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m3d66a58[m -[33m[m modify review style [32m(7 months ago) [1;34m<jim>[m
+* [1;33m|[m [31m09c7235[m -[33m[m features  add userinfo page (#880) [32m(7 months ago) [1;34m<陈帅>[m
+* [1;33m|[m [31m28d3327[m -[33m[m New page info modal (#876) [32m(7 months ago) [1;34m<valleykid>[m
+* [1;33m|[m   [31m34f49bf[m -[33m[m Merge branch 'master' into v2 [32m(7 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m[1;33m\[m [1;33m\[m  
+[1;34m|[m [1;33m|[m[1;33m/[m  
+[1;34m|[m * [31m6844c41[m -[33m[m tweak style & move Layout.Header outside of GlobalHeader [32m(7 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m * [31m6b7221c[m -[33m[m Let ‘button of save’ & ‘button of cancel’ have a opportunity  to be used -- Advanced Form (#864) [32m(7 months ago) [1;34m<wunayou>[m
+[1;34m|[m * [31m295580c[m -[33m[m add Secured check instantiation [32m(7 months ago) [1;34m<jim>[m
+[1;34m|[m * [31ma798149[m -[33m[m bug  fix#862  determine if the target is instantiated [32m(7 months ago) [1;34m<jim>[m
+[1;34m|[m * [31m5c08dab[m -[33m[m remove useless code [32m(7 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m * [31mcafec89[m -[33m[m fix #843 Modify permissions component logic [32m(7 months ago) [1;34m<jim>[m
+[1;34m|[m * [31mc2d1979[m -[33m[m 更新bizcharts版本，解决不兼容ie9/ie10问题 (#838) [32m(7 months ago) [1;34m<龙小川>[m
+[1;34m|[m * [31m4d03f9c[m -[33m[m fix Pie lengendData can not update. fixed: #819 [32m(7 months ago) [1;34m<nikogu>[m
+* [1;35m|[m [31mf187468[m -[33m[m New page - step modal (#855) [32m(7 months ago) [1;34m<ddcat1115>[m
+[1;35m|[m[1;35m/[m  
+* [31mac4f659[m -[33m[m Repair pie api document format [32m(7 months ago) [1;34m<jim>[m
+* [31m8bee64c[m -[33m (tag: 1.1.0)[m bump 1.1.0 [32m(7 months ago) [1;34m<ddcat1115>[m
+* [31mf89a6b7[m -[33m[m fix #724 After registration, change the permission to user [32m(7 months ago) [1;34m<jim>[m
+* [31m6e56098[m -[33m[m  breadcrumb separator custom (#811) [32m(7 months ago) [1;34m<unrealsmart>[m
+*   [31mfd03153[m -[33m[m Merge branch 'master' of https://github.com/ant-design/ant-design-pro [32m(7 months ago) [1;34m<ddcat1115>[m
+[1;36m|[m[31m\[m  
+[1;36m|[m * [31m53d2de7[m -[33m[m 修复TableForm数据验证不过时loading不恢复问题 (#812) [32m(7 months ago) [1;34m<clannadxr>[m
+* [31m|[m [31m33ef0ad[m -[33m[m refactor StandardTable - extract columns - support multiple sums display [32m(7 months ago) [1;34m<ddcat1115>[m
+[31m|[m[31m/[m  
+* [31m2566834[m -[33m[m Simplify the code and update the comments (#809) [32m(7 months ago) [1;34m<王集鹄>[m
+* [31md6a56da[m -[33m[m 修复面包屑显示不正确的问题 （如`/issues/new` 会被认为`/issues/:id`） (#801) [32m(7 months ago) [1;34m<Jeepeng>[m
+* [31m2d36097[m -[33m[m 修复当Login内不使用Tab时，输入框无法输入的问题 (#794) [32m(7 months ago) [1;34m<lyingd>[m
+* [31md8e591e[m -[33m[m fix moment format (#799) [32m(7 months ago) [1;34m<spiritree>[m
+* [31m0c9f5b0[m -[33m[m Add PageHeader new props `tabBarExtraContent` to be pass to `Tabs` (#793) [32m(7 months ago) [1;34m<Randy Garces>[m
+* [31m9691ce3[m -[33m[m use 100vh instead of 100% (#790) [32m(7 months ago) [1;34m<陈帅>[m
+* [31m42c5de1[m -[33m[m authority injection (#702) [32m(7 months ago) [1;34m<陈帅>[m
+* [31mb4fd0e0[m -[33m[m Perfect fix # 744 [32m(7 months ago) [1;34m<jim chen>[m
+* [31m99f9e59[m -[33m[m fix TagSelect prop value is an undefined [32m(7 months ago) [1;34m<jim chen>[m
+* [31m288169d[m -[33m[m Slider breakpoint: md => lg (#779) [32m(7 months ago) [1;34m<unrealsmart>[m
+* [31m9223ce0[m -[33m[m 修改TagSelect为受控组件 (#763) [32m(7 months ago) [1;34m<一月的尾巴>[m
+* [31mb8e9fb7[m -[33m[m Fix a warning (#762) [32m(7 months ago) [1;34m<valleykid>[m
+* [31m7008363[m -[33m[m add destroyOnClose close #770 [32m(7 months ago) [1;34m<jim chen>[m
+* [31m320aa8e[m -[33m[m update Description propTypes [32m(7 months ago) [1;34m<afc163>[m
+* [31mb97547e[m -[33m[m fix error prop [32m(7 months ago) [1;34m<ddcat1115>[m
+* [31m1f496dd[m -[33m[m improve NumberInfo style [32m(7 months ago) [1;34m<ddcat1115>[m
+* [31me7ddfff[m -[33m[m add break-all to Ellipsis tooltip [32m(8 months ago) [1;34m<nikogu>[m
+* [31mc29f22f[m -[33m[m 修复TableList验证误触发 (#756) [32m(8 months ago) [1;34m<valleykid>[m
+* [31m3f2263d[m -[33m[m fix parameters match warning (#613) [32m(8 months ago) [1;34m<陈帅>[m
+* [31mfc2862b[m -[33m[m move -webkit-box-orient to js Ellipsis [32m(8 months ago) [1;34m<nikogu>[m
+* [31m4a87502[m -[33m[m add Debounce fix #744 [32m(8 months ago) [1;34m<jim chen>[m
+* [31mc06d16a[m -[33m[m 减少属性访问 (#731) [32m(8 months ago) [1;34m<LiuTongTong>[m
+* [31m7e336e8[m -[33m[m add default register email [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m8924f3c[m -[33m[m fix user account in register-result (#695) [32m(8 months ago) [1;34m<elevensky>[m
+* [31m2d83ca7[m -[33m[m fix missing background color [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31md81f5b6[m -[33m[m move background on login page to correct position on large screens (#665) [32m(8 months ago) [1;34m<Andreas Cederström>[m
+* [31m03e3a2d[m -[33m[m 添加忽略文件 (#742) [32m(8 months ago) [1;34m<杨圆建>[m
+* [31mca4e8f4[m -[33m[m Update package.json (#737) [32m(8 months ago) [1;34m<hzq>[m
+* [31m87ca9fd[m -[33m[m fix #729 prevent pollution url history [32m(8 months ago) [1;34m<jim>[m
+* [31mdf93c64[m -[33m[m fix #716 Contact with dva / router coupling [32m(8 months ago) [1;34m<jim>[m
+* [31mc5449a3[m -[33m[m  Increase url-polyfill, ie11 edge support (#699) [32m(8 months ago) [1;34m<陈帅>[m
+* [31mf9f8eb0[m -[33m[m fix #710 [32m(8 months ago) [1;34m<jim>[m
+* [31m4893296[m -[33m[m fix #697  when the menu path is url, the parent path is not spliced [32m(8 months ago) [1;34m<jim>[m
+* [31m29e87b8[m -[33m[m Change trigger menu address Modify the starting error handling (#675) [32m(8 months ago) [1;34m<陈帅>[m
+* [31me4c1f02[m -[33m[m fix warning about className, close #689 [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m254c5a6[m -[33m[m Add style  property [32m(8 months ago) [1;34m<jim>[m
+* [31m3c03f22[m -[33m[m Fix firefox error, close #677 [32m(8 months ago) [1;34m<afc163>[m
+* [31mc3dfe2e[m -[33m[m fix indent [32m(8 months ago) [1;34m<afc163>[m
+* [31md091cf4[m -[33m[m Fix prop name typo, close #681 [32m(8 months ago) [1;34m<afc163>[m
+* [31m5e568ad[m -[33m[m Use redux connected router (#669) [32m(8 months ago) [1;34m<Andreas Cederström>[m
+* [31me4f75af[m -[33m[m Add username/password hint [32m(8 months ago) [1;34m<afc163>[m
+* [31ma0ecd04[m -[33m[m Fix roadhog build analyze, sorrycc/roadhog#541 [32m(8 months ago) [1;34m<afc163>[m
+* [31m5107967[m -[33m[m publish 1.0.1 [32m(8 months ago) [1;34m<nikogu>[m
+* [31m98005f8[m -[33m[m fix #670 login error info [32m(8 months ago) [1;34m<jim>[m
+* [31mb591451[m -[33m[m 1.0.1-rc.0 [32m(8 months ago) [1;34m<nikogu>[m
+* [31m2baef5e[m -[33m[m support typescript [32m(8 months ago) [1;34m<jim>[m
+* [31m976e610[m -[33m[m fix #656  misspelled words [32m(8 months ago) [1;34m<jim>[m
+* [31m6f27820[m -[33m[m fix #649 browserHistory error [32m(8 months ago) [1;34m<jim>[m
+* [31m5820d95[m -[33m[m fix Unexpected use of 'location' no-restricted-globals error (#654) [32m(8 months ago) [1;34m<WhatAKitty>[m
+* [31mb9002a3[m -[33m (tag: 1.0.0)[m fix changelog link [32m(8 months ago) [1;34m<afc163>[m
+* [31mcd64adf[m -[33m[m update links [32m(8 months ago) [1;34m<afc163>[m
+* [31m6ae1530[m -[33m[m Use roadhog test (#640) [32m(8 months ago) [1;34m<偏右>[m
+* [31m0fe6003[m -[33m[m fix #616 (#622) [32m(8 months ago) [1;34m<PKAQ>[m
+* [31m479ddf7[m -[33m[m bump 1.0.0 [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31mecef625[m -[33m[m Modify the document [32m(8 months ago) [1;34m<jim>[m
+* [31m31b8213[m -[33m[m fixed Pie all 0 NaN #645 [32m(8 months ago) [1;34m<nikogu>[m
+* [31m522ddd8[m -[33m[m fix login icon style [32m(8 months ago) [1;34m<afc163>[m
+* [31md867d7e[m -[33m[m Modify the document in the mistakes [32m(8 months ago) [1;34m<jim>[m
+* [31mbb85b06[m -[33m[m Fix some style problems [32m(8 months ago) [1;34m<afc163>[m
+*   [31mc592981[m -[33m[m Merge branch 'master' of github.com:ant-design/ant-design-pro [32m(8 months ago) [1;34m<afc163>[m
+[32m|[m[33m\[m  
+[32m|[m * [31m5776750[m -[33m[m redirect from /user to /user/login (#632) [32m(8 months ago) [1;34m<Andreas Cederström>[m
+[32m|[m * [31mc036c86[m -[33m[m add secured doc [32m(8 months ago) [1;34m<jim>[m
+[32m|[m * [31m0949342[m -[33m[m Turn off eslint check before build [32m(8 months ago) [1;34m<偏右>[m
+[32m|[m * [31mcb206dc[m -[33m[m restore package.json babel [32m(8 months ago) [1;34m<nikogu>[m
+[32m|[m * [31ma17f543[m -[33m[m fixed Authorized Demo & Ellipsis tooltip #615 [32m(8 months ago) [1;34m<nikogu>[m
+* [33m|[m [31mcf41067[m -[33m[m update .gitignore [32m(8 months ago) [1;34m<afc163>[m
+[33m|[m[33m/[m  
+* [31mf610902[m -[33m[m Fix babel 7 issue, facebook/jest#4557 [32m(8 months ago) [1;34m<afc163>[m
+* [31m39f7830[m -[33m[m update  Authorized doc [32m(8 months ago) [1;34m<jim>[m
+* [31m365ad51[m -[33m[m Fix loose undefined, babel/babel#7110 [32m(8 months ago) [1;34m<afc163>[m
+* [31mc16aebf[m -[33m[m temp fix of extra scroll bar [32m(8 months ago) [1;34m<afc163>[m
+* [31m9666d03[m -[33m[m Fix test case finnally [32m(8 months ago) [1;34m<afc163>[m
+* [31m5af4b82[m -[33m[m Update README.md [32m(8 months ago) [1;34m<偏右>[m
+* [31m8d0a772[m -[33m[m Fix jest babel config [32m(8 months ago) [1;34m<afc163>[m
+* [31mf9c0fff[m -[33m[m Should not mutate state, close #602 [32m(8 months ago) [1;34m<afc163>[m
+* [31m9c69097[m -[33m[m add  Authorized doc [32m(8 months ago) [1;34m<jim>[m
+* [31m0647007[m -[33m[m Do not check lint in roadhog dev [32m(8 months ago) [1;34m<afc163>[m
+* [31m677d171[m -[33m[m fix should have a unique "key" prop [32m(8 months ago) [1;34m<jim>[m
+* [31m74b1e62[m -[33m[m Change the default role to admin [32m(8 months ago) [1;34m<jim>[m
+* [31mcc37cab[m -[33m[m 2017 => 2018 [32m(8 months ago) [1;34m<afc163>[m
+* [31mfe26f89[m -[33m[m remove useless code [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31mb290f01[m -[33m[m update roadhog-api-doc & export notices [32m(8 months ago) [1;34m<nikogu>[m
+* [31mc859fde[m -[33m[m Authorized typescript (#573) [32m(8 months ago) [1;34m<陈帅>[m
+* [31m5ade223[m -[33m[m 1. fixed TagCloud unmount setState 2. fixed PageHeader key warning 3. fixed MiniArea key warning [32m(8 months ago) [1;34m<nikogu>[m
+* [31mcfced55[m -[33m[m update menu [32m(8 months ago) [1;34m<afc163>[m
+* [31mb372626[m -[33m[m add Authorized doc & demo [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m61c60a2[m -[33m[m Config code split (#562) [32m(8 months ago) [1;34m<偏右>[m
+* [31m668074c[m -[33m[m Fix test case [32m(8 months ago) [1;34m<afc163>[m
+* [31m889447f[m -[33m[m Fix code style [32m(8 months ago) [1;34m<afc163>[m
+* [31m4778d95[m -[33m[m Fix login fail [32m(8 months ago) [1;34m<afc163>[m
+* [31m8a23290[m -[33m[m Fix footer key [32m(8 months ago) [1;34m<afc163>[m
+* [31me822179[m -[33m[m add dva-loading (#587) [32m(8 months ago) [1;34m<Andreas Cederström>[m
+* [31m474c746[m -[33m[m fix(GlobalFooter): manually define link item keys (#586) [32m(8 months ago) [1;34m<Connor Brathwaite>[m
+* [31m662fd28[m -[33m[m update script for test [32m(8 months ago) [1;34m<afc163>[m
+* [31m0e3c6f6[m -[33m[m remove dep [32m(8 months ago) [1;34m<afc163>[m
+* [31m45132e8[m -[33m[m fix rmock error [32m(8 months ago) [1;34m<jim>[m
+* [31m25e6789[m -[33m[m fix #584 [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31mfa79d05[m -[33m[m fix 578 (#581) [32m(8 months ago) [1;34m<陈帅>[m
+* [31m013247c[m -[33m[m fixed charts colors & import default g2 config in charts (#567) [32m(8 months ago) [1;34m<niko>[m
+* [31m135735b[m -[33m[m 增加登录中按钮loading效果 (#576) [32m(8 months ago) [1;34m<WhatAKitty>[m
+* [31mc6cf634[m -[33m[m Migrate to roadhog@2 (#542) [32m(8 months ago) [1;34m<chencheng (云谦)>[m
+* [31mcfa27b1[m -[33m[m Authority management (#508) [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m74f0a0a[m -[33m[m Allow menu icon config as img url or ReactNode [32m(8 months ago) [1;34m<afc163>[m
+* [31m84dd304[m -[33m[m Add build to travis ci (#565) [32m(8 months ago) [1;34m<Wei Zhu>[m
+* [31mbba32aa[m -[33m[m fix #560 [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m9ace75b[m -[33m[m style: fix more detail [32m(8 months ago) [1;34m<afc163>[m
+* [31mc159f06[m -[33m[m Update README.md [32m(8 months ago) [1;34m<偏右>[m
+* [31m8b75ed3[m -[33m[m style: fix some detail [32m(8 months ago) [1;34m<afc163>[m
+* [31md2afa15[m -[33m[m Fix default activeTabKey, close #563 [32m(8 months ago) [1;34m<afc163>[m
+* [31m34e69e5[m -[33m[m refactor formatter [32m(8 months ago) [1;34m<afc163>[m
+* [31m60a768d[m -[33m[m fix Login demo lint [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m481787a[m -[33m[m fixed charts color style [32m(8 months ago) [1;34m<nikogu>[m
+* [31m6404250[m -[33m[m remove extra scroll bar, close #532 [32m(8 months ago) [1;34m<afc163>[m
+* [31m587c5dd[m -[33m[m remove typescript code [32m(8 months ago) [1;34m<afc163>[m
+* [31m1a5b7ac[m -[33m[m New Login component (#147) [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m2e0efbb[m -[33m[m update dependencies and fix lint and test case [32m(8 months ago) [1;34m<afc163>[m
+* [31me2b1261[m -[33m[m - fix step-form can't match any menu item - fix click logo can't change menu open keys [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m2bbef8d[m -[33m[m More detail in travis log [32m(8 months ago) [1;34m<afc163>[m
+* [31m2fb922d[m -[33m[m take dispatch outside the component, close #528 [32m(8 months ago) [1;34m<afc163>[m
+* [31mc1366eb[m -[33m[m update code style [32m(8 months ago) [1;34m<afc163>[m
+* [31m86a2d26[m -[33m[m simplify code [32m(8 months ago) [1;34m<afc163>[m
+* [31mb27bf8d[m -[33m[m Fix unneccessary rerender of parent page, close #525 [32m(8 months ago) [1;34m<afc163>[m
+* [31mc148b64[m -[33m[m Upgrade BizCharts (#370) [32m(8 months ago) [1;34m<niko>[m
+* [31mcc28e06[m -[33m[m Do with new router (#519) [32m(8 months ago) [1;34m<WhatAKitty>[m
+* [31m8a15e9b[m -[33m[m fix error while using react-script (#516) [32m(8 months ago) [1;34m<WhatAKitty>[m
+* [31m3683e0d[m -[33m[m Fix warning of applying `bool` into onClick prop (#521) [32m(8 months ago) [1;34m<WhatAKitty>[m
+* [31md9d02c3[m -[33m[m add proptypes for Description [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31md8b0a9e[m -[33m[m fix breadcrumb prop priority [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m12d8b40[m -[33m[m Add fastclick [32m(8 months ago) [1;34m<afc163>[m
+* [31m838d841[m -[33m[m Increase global error handling (#500) [32m(8 months ago) [1;34m<陈帅>[m
+* [31m99e714a[m -[33m[m 扩展dymaicWrapper，防止Model重复导入报错 (#506) [32m(8 months ago) [1;34m<henrydf>[m
+* [31me221476[m -[33m[m Mobile menu (#463) [32m(8 months ago) [1;34m<jiang>[m
+* [31mce84e3f[m -[33m[m Update menu.js (#511) [32m(8 months ago) [1;34m<Arun Kumar T K>[m
+* [31m5e02d63[m -[33m[m fix list redirect bug (#507) [32m(8 months ago) [1;34m<陈帅>[m
+* [31m74b4f30[m -[33m[m Fix pageHeader responsive issue [32m(8 months ago) [1;34m<afc163>[m
+* [31m2885fa9[m -[33m[m better jsx-wrap-multilines eslint rule [32m(8 months ago) [1;34m<afc163>[m
+* [31ma8caa50[m -[33m[m Add activeTabKey for PageHeader [32m(8 months ago) [1;34m<afc163>[m
+* [31m577ded4[m -[33m[m Router config (#442) [32m(8 months ago) [1;34m<ddcat1115>[m
+* [31m6e37a93[m -[33m (tag: 0.3.1)[m bump 0.3.1 [32m(8 months ago) [1;34m<nikogu>[m
+* [31m924626e[m -[33m[m remove overflow(), because of babel-css-modules bug [32m(8 months ago) [1;34m<nikogu>[m
+* [31maffacb7[m -[33m[m fix 437 (#477) [32m(8 months ago) [1;34m<陈帅>[m
+* [31m94c2363[m -[33m[m Add clearer tips (#475) [32m(8 months ago) [1;34m<陈帅>[m
+* [31m7733f4f[m -[33m[m Fix list page style [32m(8 months ago) [1;34m<afc163>[m
+* [31me111d7b[m -[33m[m Refactor search list routes (#440) [32m(9 months ago) [1;34m<偏右>[m
+* [31m69a9d9b[m -[33m[m Unlimited list to add a special method (#451) [32m(9 months ago) [1;34m<陈帅>[m
+* [31mc03d59b[m -[33m[m use require to fix dist error [32m(9 months ago) [1;34m<afc163>[m
+* [31mc4f69fc[m -[33m[m No default with export multi objects (#337) [32m(9 months ago) [1;34m<WhatAKitty>[m
+* [31md1596ea[m -[33m[m Initial range [32m(9 months ago) [1;34m<afc163>[m
+* [31m1991960[m -[33m[m Fix double scroll bars in IE11 & Edge, close #393 [32m(9 months ago) [1;34m<afc163>[m
+* [31mf67bff3[m -[33m[m GlobalHeader & SiderMenu (#411) [32m(9 months ago) [1;34m<偏右>[m
+* [31m3e1ad8f[m -[33m[m change avatars [32m(9 months ago) [1;34m<afc163>[m
+* [31m1e315ca[m -[33m[m Fix setState on unmounted component, close #338 [32m(9 months ago) [1;34m<afc163>[m
+* [31m753dc95[m -[33m[m Refactor Login code [32m(9 months ago) [1;34m<afc163>[m
+* [31me783edb[m -[33m[m Repair query form parameters not reset problem (#398) [32m(9 months ago) [1;34m<陈帅>[m
+* [31m5715817[m -[33m[m switch avatars [32m(9 months ago) [1;34m<afc163>[m
+* [31m07dd3eb[m -[33m[m change avatars [32m(9 months ago) [1;34m<afc163>[m
+* [31m0027851[m -[33m[m repair problem: countdown will not change when target time update (#392) [32m(9 months ago) [1;34m<dong>[m
+* [31m9d9025a[m -[33m[m Reformatted (#391) [32m(9 months ago) [1;34m<陈帅>[m
+* [31m907f1a5[m -[33m[m fix register page mobile style [32m(9 months ago) [1;34m<ddcat1115>[m
+* [31m0a46224[m -[33m[m Fix FooterToolbar width [32m(9 months ago) [1;34m<afc163>[m
+* [31m5acd5e7[m -[33m[m Fix FooterToolbar z-index, close #362 [32m(9 months ago) [1;34m<afc163>[m
+* [31m117ac96[m -[33m[m add prettier to precommit [32m(9 months ago) [1;34m<nikogu>[m
+* [31m1f95db9[m -[33m[m fixed components demo lint [32m(9 months ago) [1;34m<nikogu>[m
+* [31m1a65f5b[m -[33m[m fix component Children map error (#368) [32m(9 months ago) [1;34m<陈帅>[m
+* [31m268cbe6[m -[33m[m upgrade to antd@3.0 [32m(9 months ago) [1;34m<afc163>[m
+* [31mebf8b00[m -[33m[m fixed when ChartCard total is 0, total has no style https://github.com/ant-design/ant-design-pro/issues/329 [32m(9 months ago) [1;34m<nikogu>[m
+* [31m8feaa32[m -[33m[m Support typescript  (#341) [32m(9 months ago) [1;34m<陈帅>[m
+* [31mee0f8db[m -[33m[m Fix breadcrumb 404 link, close #343 [32m(9 months ago) [1;34m<afc163>[m
+* [31m4ff721f[m -[33m[m Refactor breadcrumbMap [32m(9 months ago) [1;34m<afc163>[m
+* [31mfaec7ed[m -[33m[m Fix bug when TagSelectOption is 1 (#336) [32m(9 months ago) [1;34m<陈帅>[m
+* [31m687057b[m -[33m[m Fix Exception background in Firefox [32m(9 months ago) [1;34m<afc163>[m
+* [31m7a1b8b7[m -[33m[m  doc:  remove a convenience defined as a reference (#324) [32m(9 months ago) [1;34m<陈帅>[m
+* [31m529647e[m -[33m[m change logo [32m(9 months ago) [1;34m<afc163>[m
+* [31m0d2a250[m -[33m[m remove public/sample.js [32m(9 months ago) [1;34m<afc163>[m
+* [31mf15770a[m -[33m[m add .d.ts file & optimized some docs (#315) [32m(9 months ago) [1;34m<jim chen>[m
+* [31m8499228[m -[33m[m Fix image card layout bug, close #281 [32m(9 months ago) [1;34m<afc163>[m
+* [31m16310bb[m -[33m[m fix roadhog-api-doc version [32m(9 months ago) [1;34m<afc163>[m
+* [31m55e5d20[m -[33m[m  增加所有剩余对外开发的组件 .d.ts     (#312) [32m(9 months ago) [1;34m<jim chen>[m
+* [31mffbba86[m -[33m[m promote trigger weight (#310) [32m(9 months ago) [1;34m<guihua>[m
+* [31m41cbebb[m -[33m[m change avatar [32m(9 months ago) [1;34m<afc163>[m
+* [31mc98fa71[m -[33m[m 修改错误的图表文档. 增加几处漏写的文档 (#308) [32m(9 months ago) [1;34m<jim chen>[m
+* [31m2dfe10f[m -[33m[m 两个文档方面的修改 (#307) [32m(9 months ago) [1;34m<jim chen>[m
+* [31m52c14ea[m -[33m[m Use public and assets resource, close #299 [32m(9 months ago) [1;34m<afc163>[m
+* [31mb3d2547[m -[33m[m Fix Steps position style [32m(9 months ago) [1;34m<afc163>[m
+* [31m0e601d1[m -[33m[m fix updating badge bug (#289) [32m(9 months ago) [1;34m<Xiaoming Liu>[m
+* [31me531356[m -[33m[m Fix logo padding calculate way [32m(9 months ago) [1;34m<afc163>[m
+* [31m3dec7c8[m -[33m[m use rollbar over rollbar-browser [32m(9 months ago) [1;34m<afc163>[m
+* [31m66583a7[m -[33m[m use a temp roadhog-api-doc, #84 [32m(9 months ago) [1;34m<afc163>[m
+* [31m7532598[m -[33m[m Fix test case [32m(9 months ago) [1;34m<afc163>[m
+* [31m8262d14[m -[33m[m Fix polyfill, #210 [32m(9 months ago) [1;34m<afc163>[m
+* [31m8c68b73[m -[33m[m Add babel-polyfill [32m(9 months ago) [1;34m<afc163>[m
+* [31mc206828[m -[33m[m Fix workId undefined, close #246 [32m(9 months ago) [1;34m<afc163>[m
+* [31m81577c8[m -[33m[m add roadhog "hash" charater (#256) [32m(9 months ago) [1;34m<Xiaoming Liu>[m
+* [31m1ac8b45[m -[33m[m require -> import (#162) [32m(9 months ago) [1;34m<Jifa Jiang>[m
+* [31mb3e917c[m -[33m[m Replace sentry with rollbar (#253) [32m(9 months ago) [1;34m<偏右>[m
+* [31m51e1ffe[m -[33m[m fixed clearNotices effects in global model (#266) [32m(9 months ago) [1;34m<Xiaoming Liu>[m
+* [31m0d00edd[m -[33m[m use Table column.align [32m(9 months ago) [1;34m<afc163>[m
+* [31m9924514[m -[33m[m Add minHeight for loading content [32m(9 months ago) [1;34m<afc163>[m
+* [31m36d21a6[m -[33m[m update images [32m(9 months ago) [1;34m<afc163>[m
+* [31m80d7eb1[m -[33m[m remove whitespace [32m(9 months ago) [1;34m<afc163>[m
+* [31me642aa1[m -[33m[m fix user input information will lose (#255) [32m(9 months ago) [1;34m<Xiaoming Liu>[m
+* [31m1d31618[m -[33m[m add SimpleCard style to fixed: https://github.com/ant-design/ant-design-pro/issues/192 [32m(9 months ago) [1;34m<nikogu>[m
+* [31m0688459[m -[33m[m Fixed import BasicLayout login model https://github.com/ant-design/ant-design-pro/issues/243 [32m(9 months ago) [1;34m<nikogu>[m
+* [31md678bbb[m -[33m (tag: 0.3.0)[m bump 0.3.0 [32m(9 months ago) [1;34m<nikogu>[m
+* [31m6b35360[m -[33m[m Fixed: https://github.com/ant-design/ant-design-pro/issues/229 [32m(9 months ago) [1;34m<nikogu>[m
+* [31m2c9da74[m -[33m[m Fixed default BrowserHistory demo [32m(9 months ago) [1;34m<nikogu>[m
+* [31m591beb1[m -[33m[m fixed isSupportLineClamp’s judgment (#240) [32m(9 months ago) [1;34m<huaxiabuluo>[m
+* [31m7ffd48d[m -[33m[m import -> ()=>import Fixed: https://github.com/ant-design/ant-design-pro/issues/228 [32m(9 months ago) [1;34m<nikogu>[m
+* [31m0c0cb87[m -[33m[m Add eslint-config-compact [32m(10 months ago) [1;34m<afc163>[m
+* [31mfc57d8f[m -[33m[m Fix cancel undefined [32m(10 months ago) [1;34m<afc163>[m
+* [31mb8a96c5[m -[33m[m Trace errors by using sentry.io [32m(10 months ago) [1;34m<afc163>[m
+* [31mdfc118f[m -[33m (tag: 0.2.3-rc.3)[m bump 0.2.3-rc.3 [32m(10 months ago) [1;34m<nikogu>[m
+* [31m5cce044[m -[33m[m Debounce not working [32m(10 months ago) [1;34m<afc163>[m
+* [31m486ec4f[m -[33m[m Fix code indent [32m(10 months ago) [1;34m<afc163>[m
+* [31m43add56[m -[33m (tag: 0.2.3-rc.2)[m Fixed: https://github.com/ant-design/ant-design-pro/issues/212 [32m(10 months ago) [1;34m<nikogu>[m
+* [31m5a61434[m -[33m[m fixed dynamic router [32m(10 months ago) [1;34m<nikogu>[m
+* [31m44d2c7b[m -[33m[m refactor inhuman code of nav.js [32m(10 months ago) [1;34m<nikogu>[m
+* [31m5a47aa0[m -[33m[m upgrade dva to 2.1.0, fix #179 (#204) [32m(10 months ago) [1;34m<mgcnrx11>[m
+* [31ma67a951[m -[33m[m Fix NO_PROXY in windows, ref #181 [32m(10 months ago) [1;34m<afc163>[m
+* [31m31af67c[m -[33m[m Fix dynamic component remount #114 #150 (#184) [32m(10 months ago) [1;34m<WhatAKitty>[m
+* [31mdebfa50[m -[33m (tag: 0.2.3-rc.1)[m fix babel-plugin-css-modules-transform broken with less function for the moment https://github.com/michalkvasnicak/babel-plugin-css-modules-transform/issues/67 [32m(10 months ago) [1;34m<nikogu>[m
+* [31mcc7212e[m -[33m[m Fix dynamic component remount, #114 [32m(10 months ago) [1;34m<afc163>[m
+* [31m5c6de66[m -[33m[m Update README.md (#174) [32m(10 months ago) [1;34m<Jeff Wen>[m
+*   [31md93b0bf[m -[33m[m Merge branch 'WhatAKitty-master' [32m(10 months ago) [1;34m<afc163>[m
+[34m|[m[35m\[m  
+[34m|[m * [31m9a58410[m -[33m[m Add spin for dynamic import [32m(10 months ago) [1;34m<afc163>[m
+[34m|[m * [31m0d9b229[m -[33m[m Format code [32m(10 months ago) [1;34m<WhatAKitty>[m
+[34m|[m * [31meb971d3[m -[33m[m Fix wrong import [32m(10 months ago) [1;34m<WhatAKitty>[m
+[34m|[m * [31mc67c769[m -[33m[m Load models on demand [32m(10 months ago) [1;34m<WhatAKitty>[m
+[34m|[m * [31m7808f66[m -[33m[m Dynamic route [32m(10 months ago) [1;34m<WhatAKitty>[m
+[34m|[m[34m/[m  
+* [31m5a972e9[m -[33m[m Update Ellipsis compute through height (#171) [32m(10 months ago) [1;34m<niko>[m
+* [31m1800435[m -[33m[m Fix mock data [32m(10 months ago) [1;34m<afc163>[m
+* [31m6e2d122[m -[33m[m use antd Divider [32m(10 months ago) [1;34m<afc163>[m
+* [31m63b7645[m -[33m[m Remove v2 reset styles [32m(10 months ago) [1;34m<afc163>[m
+* [31mebde3e5[m -[33m[m Fixed bug#140 (#164) [32m(10 months ago) [1;34m<valleykid>[m
+* [31m60c34b6[m -[33m[m remove default value of defaultValue [32m(10 months ago) [1;34m<afc163>[m
+* [31mf2817df[m -[33m[m refactor TagSelect state, close #161 [32m(10 months ago) [1;34m<afc163>[m
+* [31m7815eec[m -[33m[m 404 page for /xxx/whatever [32m(10 months ago) [1;34m<afc163>[m
+* [31mc0c65a0[m -[33m[m Fix same path warning [32m(10 months ago) [1;34m<afc163>[m
+* [31md4f10ee[m -[33m[m fix #128 [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m3fbfc92[m -[33m[m bump 0.2.3-rc.0 to fixed Ellipsis [32m(10 months ago) [1;34m<nikogu>[m
+* [31mb6570f1[m -[33m[m use -webkit-line-clamp & remove cover mode [32m(10 months ago) [1;34m<nikogu>[m
+* [31md04c138[m -[33m[m Fixed: https://github.com/ant-design/ant-design-pro/issues/130 [32m(10 months ago) [1;34m<nikogu>[m
+* [31mcfa8063[m -[33m[m Fixed Ellipsis PureComponent -> Component [32m(10 months ago) [1;34m<nikogu>[m
+* [31mbe80a72[m -[33m[m fixed Ellipsis demo title [32m(10 months ago) [1;34m<nikogu>[m
+* [31me08b003[m -[33m[m Update README.md [32m(10 months ago) [1;34m<偏右>[m
+* [31mca6fe1f[m -[33m[m remove roadhog-api-doc from deps [32m(10 months ago) [1;34m<nikogu>[m
+* [31mbecfc14[m -[33m (tag: 0.2.2)[m bump 0.2.2 [32m(10 months ago) [1;34m<nikogu>[m
+* [31mecdfb4c[m -[33m[m change default profile [32m(10 months ago) [1;34m<afc163>[m
+* [31m4538dfa[m -[33m[m change default profile [32m(10 months ago) [1;34m<afc163>[m
+* [31mffea9d9[m -[33m[m Add Ellipsis Component (#135) [32m(10 months ago) [1;34m<niko>[m
+* [31m6306c2f[m -[33m[m Fix HeaderSearch onPressEnter, close #131 [32m(10 months ago) [1;34m<afc163>[m
+* [31md8ea7d6[m -[33m[m Fix account select width [32m(10 months ago) [1;34m<afc163>[m
+* [31m9e264ce[m -[33m[m fix breadcrumb error title [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m1bd9071[m -[33m[m fixed monitor map image overflow width when screen is large [32m(10 months ago) [1;34m<nikogu>[m
+* [31mebe7965[m -[33m[m fixed site script [32m(10 months ago) [1;34m<nikogu>[m
+* [31maa75b44[m -[33m[m add ie meta [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31mcc9deb3[m -[33m[m Update README.md [32m(10 months ago) [1;34m<偏右>[m
+* [31m77eac16[m -[33m[m Fixed issue#124 (#125) [32m(10 months ago) [1;34m<valleykid>[m
+* [31m7cc62e5[m -[33m[m fixed title of docs [32m(10 months ago) [1;34m<nikogu>[m
+* [31m737830a[m -[33m[m update readme for cli [32m(10 months ago) [1;34m<nikogu>[m
+* [31m060b41e[m -[33m[m translate AvatarList (#123) [32m(10 months ago) [1;34m<niko>[m
+* [31m50f9546[m -[33m[m fixed CountDown docs for en [32m(10 months ago) [1;34m<nikogu>[m
+* [31m982872b[m -[33m[m translation CountDown (#121) [32m(10 months ago) [1;34m<niko>[m
+* [31m544922c[m -[33m[m fixed english docs [32m(10 months ago) [1;34m<nikogu>[m
+* [31me21642b[m -[33m[m fix pageTitle for BasicLayout [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m035ef3d[m -[33m[m Fix TableList align [32m(10 months ago) [1;34m<afc163>[m
+* [31m3e998fb[m -[33m[m bump 0.2.2-rc.1 to fix build components [32m(10 months ago) [1;34m<nikogu>[m
+* [31mf836ced[m -[33m[m Fix deps [32m(10 months ago) [1;34m<afc163>[m
+* [31m796a242[m -[33m[m update devDeps [32m(10 months ago) [1;34m<afc163>[m
+* [31ma26eafd[m -[33m[m Update README.md [32m(10 months ago) [1;34m<偏右>[m
+* [31mb4c2395[m -[33m[m update README.md [32m(10 months ago) [1;34m<afc163>[m
+* [31ma85b364[m -[33m[m update README.md [32m(10 months ago) [1;34m<afc163>[m
+* [31mcf37e9a[m -[33m[m remove unused code [32m(10 months ago) [1;34m<afc163>[m
+* [31md8e9f22[m -[33m[m Improve search saga and loading logic [32m(10 months ago) [1;34m<afc163>[m
+* [31mf50867b[m -[33m[m Better dispatch and saga for login logic [32m(10 months ago) [1;34m<afc163>[m
+* [31m41fffed[m -[33m[m bump 0.2.2-rc.0 [32m(10 months ago) [1;34m<nikogu>[m
+* [31m66d5996[m -[33m[m More notification when api failed [32m(10 months ago) [1;34m<afc163>[m
+* [31mc771ea2[m -[33m[m PageHeader - breadcrumb support url with params fix #64 [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m7efcab1[m -[33m[m return error always, ref #82 [32m(10 months ago) [1;34m<afc163>[m
+* [31m10e8c03[m -[33m[m Fix API fetch error, close #82 [32m(10 months ago) [1;34m<afc163>[m
+* [31m874afcc[m -[33m[m Use es module (#86) [32m(10 months ago) [1;34m<Wei Zhu>[m
+* [31m61c9124[m -[33m[m CI in windows (#89) [32m(10 months ago) [1;34m<偏右>[m
+* [31me34c584[m -[33m[m Fix responsive style of Pie, close #76 [32m(10 months ago) [1;34m<afc163>[m
+* [31mba3760a[m -[33m[m Tweak sale Pie margin [32m(10 months ago) [1;34m<afc163>[m
+* [31m3654685[m -[33m (tag: 0.2.1, tag: 0.2.0)[m bump 0.2.1 [32m(10 months ago) [1;34m<nikogu>[m
+* [31m48bda57[m -[33m[m fixed: https://github.com/ant-design/ant-design-pro/issues/76 [32m(10 months ago) [1;34m<nikogu>[m
+* [31m8293582[m -[33m[m TYPO in TableList (#74) [32m(10 months ago) [1;34m<FOCUS>[m
+* [31m9059189[m -[33m[m fixed ci [32m(10 months ago) [1;34m<nikogu>[m
+* [31m37758b8[m -[33m[m Remove unnecessary dependency of components from scaffold [32m(10 months ago) [1;34m<nikogu>[m
+* [31m541128e[m -[33m[m Add ga listener [32m(10 months ago) [1;34m<afc163>[m
+* [31m81cceb5[m -[33m[m Fix Editable Table, close #68 [32m(10 months ago) [1;34m<afc163>[m
+* [31me9bfded[m -[33m[m Add g2 into deps [32m(10 months ago) [1;34m<afc163>[m
+* [31m9709268[m -[33m[m Responsive search form in Table List page [32m(10 months ago) [1;34m<afc163>[m
+* [31m993fab9[m -[33m[m fix dump resize function in Pie [32m(10 months ago) [1;34m<nikogu>[m
+* [31m8d9b7cf[m -[33m[m update Pie responsive depend on root node width [32m(10 months ago) [1;34m<nikogu>[m
+* [31mbdffd00[m -[33m[m tweak PageHeader demo style [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31mb24322d[m -[33m[m tweak some styles [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31mea78a8e[m -[33m[m update mock data [32m(10 months ago) [1;34m<afc163>[m
+* [31m7f05409[m -[33m[m Delete CNAME [32m(10 months ago) [1;34m<偏右>[m
+* [31me465295[m -[33m[m fixed: https://github.com/ant-design/ant-design-pro/issues/63#issuecomment-340979650 [32m(10 months ago) [1;34m<nikogu>[m
+* [31mb0cfa10[m -[33m[m update README [32m(10 months ago) [1;34m<afc163>[m
+* [31m11505f7[m -[33m[m update product svg [32m(10 months ago) [1;34m<afc163>[m
+* [31m5c9ce52[m -[33m[m update demo [32m(10 months ago) [1;34m<afc163>[m
+* [31m3cc8570[m -[33m[m update components [32m(10 months ago) [1;34m<afc163>[m
+* [31m84ebabf[m -[33m[m Fix pie rerender [32m(10 months ago) [1;34m<afc163>[m
+* [31m9f511d8[m -[33m[m update roadhog [32m(10 months ago) [1;34m<nikogu>[m
+* [31m39544d5[m -[33m[m bump 0.2.0 [32m(10 months ago) [1;34m<nikogu>[m
+* [31md90c08b[m -[33m[m fix P0 issue in http://gitlab.alipay-inc.com/ued/ant-design/issues/271 [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m0b78878[m -[33m[m update component demo [32m(10 months ago) [1;34m<afc163>[m
+* [31mb27ab27[m -[33m[m Highlight first tab defaultly [32m(10 months ago) [1;34m<afc163>[m
+* [31m65dc73e[m -[33m[m fixed time select invalid in safari [32m(10 months ago) [1;34m<nikogu>[m
+* [31m8ea7531[m -[33m[m fix searchlist responsive [32m(10 months ago) [1;34m<nikogu>[m
+* [31m8dc29fd[m -[33m[m remove unused prop [32m(10 months ago) [1;34m<afc163>[m
+* [31mf810179[m -[33m[m exception responsive improve [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m13a1cac[m -[33m[m Improve reponsive [32m(10 months ago) [1;34m<afc163>[m
+* [31mebb3a09[m -[33m[m update antd version [32m(10 months ago) [1;34m<afc163>[m
+* [31m4ad345a[m -[33m[m Remove pageSizeOption again [32m(10 months ago) [1;34m<afc163>[m
+* [31m9d898fb[m -[33m[m Fix list height [32m(10 months ago) [1;34m<afc163>[m
+* [31m6c40175[m -[33m[m add pagination pageSizeOptions [32m(10 months ago) [1;34m<nikogu>[m
+* [31m88faa66[m -[33m[m fix tagCloud repain [32m(10 months ago) [1;34m<nikogu>[m
+* [31m61cd9c1[m -[33m[m fix pagination pageSizeOptions options [32m(10 months ago) [1;34m<nikogu>[m
+* [31m0d17791[m -[33m[m Fix PageHeader logo size [32m(10 months ago) [1;34m<afc163>[m
+* [31m6508029[m -[33m[m Replace product logo [32m(10 months ago) [1;34m<afc163>[m
+* [31m94d2fe6[m -[33m[m Remove pageSize select in table [32m(10 months ago) [1;34m<afc163>[m
+* [31mf8d345f[m -[33m[m Fix RegisterResult button style [32m(10 months ago) [1;34m<afc163>[m
+* [31m3a941f2[m -[33m[m Fix tag margin right [32m(10 months ago) [1;34m<afc163>[m
+* [31m7f96f60[m -[33m[m fix TagSelect demo & line-height [32m(10 months ago) [1;34m<nikogu>[m
+* [31mdf6ecfb[m -[33m[m update charts demo [32m(10 months ago) [1;34m<nikogu>[m
+* [31ma8f3a07[m -[33m[m update avatars [32m(10 months ago) [1;34m<afc163>[m
+* [31mea6e99f[m -[33m[m Fix safari invalid date [32m(10 months ago) [1;34m<afc163>[m
+* [31mffb677e[m -[33m[m Fix pie cut [32m(10 months ago) [1;34m<afc163>[m
+* [31maef1e4a[m -[33m[m fix #52 [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m748fd44[m -[33m[m Update CNAME [32m(10 months ago) [1;34m<偏右>[m
+* [31mc55747e[m -[33m[m update card height [32m(10 months ago) [1;34m<afc163>[m
+* [31m6f3f753[m -[33m[m upgrade roadhog and use ignoreMomentLocale [32m(10 months ago) [1;34m<afc163>[m
+* [31m3047229[m -[33m[m Remove spinning of analysis page cards [32m(10 months ago) [1;34m<afc163>[m
+* [31mc1f4026[m -[33m[m Remove delete button [32m(10 months ago) [1;34m<afc163>[m
+* [31m4f6379e[m -[33m[m update footer link title [32m(10 months ago) [1;34m<afc163>[m
+* [31mf1c9a2a[m -[33m[m fix: https://github.com/ant-design/ant-design-pro/pull/39 [32m(10 months ago) [1;34m<nikogu>[m
+* [31mae1f594[m -[33m[m change .ga code [32m(10 months ago) [1;34m<nikogu>[m
+* [31m4293b25[m -[33m[m change .ga.json -> .ga [32m(10 months ago) [1;34m<nikogu>[m
+* [31m42d92e6[m -[33m[m add .ga.json file [32m(10 months ago) [1;34m<nikogu>[m
+* [31m2b8d0aa[m -[33m[m add pro-cli docs (#49) [32m(10 months ago) [1;34m<niko>[m
+* [31m9b55900[m -[33m[m fix button list rule [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m52f5356[m -[33m[m Update README.md [32m(10 months ago) [1;34m<偏右>[m
+* [31m298785b[m -[33m[m fixed: https://github.com/ant-design/ant-design-pro/issues/40 (#44) [32m(10 months ago) [1;34m<niko>[m
+* [31mff0385a[m -[33m[m improve according to http://gitlab.alipay-inc.com/ued/ant-design/issues/269 [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m03e0ca4[m -[33m[m fixed: https://github.com/ant-design/ant-design-pro/issues/33 (#42) [32m(10 months ago) [1;34m<niko>[m
+* [31md25b112[m -[33m[m update max pie title font size [32m(10 months ago) [1;34m<afc163>[m
+* [31m2bf2497[m -[33m[m Fix #38 [32m(10 months ago) [1;34m<偏右>[m
+* [31m1ae2d59[m -[33m[m Avoid import moment locales [32m(10 months ago) [1;34m<afc163>[m
+* [31med38f7e[m -[33m[m Add moment as deps [32m(10 months ago) [1;34m<afc163>[m
+* [31m86314e2[m -[33m[m Add npm run analyze [32m(10 months ago) [1;34m<afc163>[m
+* [31mc2f34d5[m -[33m[m Better pie responsive (#37) [32m(10 months ago) [1;34m<偏右>[m
+* [31m57eb471[m -[33m[m use cdn combo [32m(10 months ago) [1;34m<afc163>[m
+* [31mf423c75[m -[33m[m update Trend [32m(10 months ago) [1;34m<afc163>[m
+* [31m55b6eef[m -[33m[m Add screen reponsive className [32m(10 months ago) [1;34m<afc163>[m
+* [31m76f9865[m -[33m[m update footer [32m(10 months ago) [1;34m<afc163>[m
+* [31m92bb538[m -[33m[m update footer [32m(10 months ago) [1;34m<afc163>[m
+* [31m0da5621[m -[33m (tag: 0.1.10)[m update README [32m(10 months ago) [1;34m<afc163>[m
+* [31m316ab41[m -[33m[m Move nightmare into optionalDependencies, #31 [32m(10 months ago) [1;34m<afc163>[m
+* [31m7ecd068[m -[33m[m bump 0.1.10 [32m(10 months ago) [1;34m<nikogu>[m
+* [31mf1b8acb[m -[33m[m Update README.md [32m(10 months ago) [1;34m<偏右>[m
+* [31m2fc0cb9[m -[33m[m Add delay for resize [32m(10 months ago) [1;34m<afc163>[m
+* [31m17feda3[m -[33m[m dispatch window resize event when menu collapse [32m(10 months ago) [1;34m<afc163>[m
+* [31mcae8242[m -[33m[m update README.md [32m(10 months ago) [1;34m<afc163>[m
+* [31mcc3f75a[m -[33m[m update README.md [32m(10 months ago) [1;34m<afc163>[m
+* [31mfcb290e[m -[33m[m Fix link and head picture [32m(10 months ago) [1;34m<afc163>[m
+*   [31m9d54701[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(10 months ago) [1;34m<ddcat1115>[m
+[36m|[m[1;31m\[m  
+[36m|[m * [31me92c016[m -[33m[m Fix readme [32m(10 months ago) [1;34m<afc163>[m
+* [1;31m|[m   [31m61fdf7a[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(10 months ago) [1;34m<ddcat1115>[m
+[1;32m|[m[1;31m\[m [1;31m\[m  
+[1;32m|[m [1;31m|[m[1;31m/[m  
+[1;32m|[m * [31m557e287[m -[33m[m update README.md [32m(10 months ago) [1;34m<afc163>[m
+* [1;33m|[m [31m1cd81f3[m -[33m[m fix Exception demo [32m(10 months ago) [1;34m<ddcat1115>[m
+[1;33m|[m[1;33m/[m  
+* [31m1589623[m -[33m[m update README [32m(10 months ago) [1;34m<afc163>[m
+* [31mde1b760[m -[33m[m update advanced form style [32m(10 months ago) [1;34m<afc163>[m
+*   [31m0a27682[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(10 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [31m243be5d[m -[33m[m update [32m(10 months ago) [1;34m<afc163>[m
+[1;34m|[m * [31m59d0ddc[m -[33m[m fix style [32m(10 months ago) [1;34m<afc163>[m
+[1;34m|[m * [31m435434d[m -[33m[m Add CNAME [32m(10 months ago) [1;34m<afc163>[m
+[1;34m|[m * [31mb061a3a[m -[33m[m update components doc [32m(10 months ago) [1;34m<nikogu>[m
+[1;34m|[m * [31m8ec95ea[m -[33m[m [WIP] Add README (#24) [32m(10 months ago) [1;34m<偏右>[m
+* [1;35m|[m [31m393682d[m -[33m[m update card style [32m(10 months ago) [1;34m<ddcat1115>[m
+[1;35m|[m[1;35m/[m  
+* [31m99ae700[m -[33m[m update Charts docs default value [32m(10 months ago) [1;34m<nikogu>[m
+* [31m9be2358[m -[33m[m fix style [32m(10 months ago) [1;34m<afc163>[m
+* [31ma5b4c85[m -[33m[m Change advanced form layout [32m(10 months ago) [1;34m<afc163>[m
+* [31mf81fc7d[m -[33m[m close: https://github.com/ant-design/test2/issues/29 [32m(10 months ago) [1;34m<nikogu>[m
+* [31mded8c84[m -[33m[m update specify the list description color [32m(10 months ago) [1;34m<nikogu>[m
+* [31m9f5635c[m -[33m[m Fix button margin [32m(10 months ago) [1;34m<afc163>[m
+*   [31m1b069a0[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(10 months ago) [1;34m<ddcat1115>[m
+[1;36m|[m[31m\[m  
+[1;36m|[m * [31ma9c1b88[m -[33m[m Fix react className warning [32m(10 months ago) [1;34m<afc163>[m
+* [31m|[m [31mf0102c6[m -[33m[m update style [32m(10 months ago) [1;34m<ddcat1115>[m
+[31m|[m[31m/[m  
+* [31m2b626f2[m -[33m[m update logo font family [32m(10 months ago) [1;34m<afc163>[m
+* [31m36d3f39[m -[33m[m upgrade to React 16 [32m(10 months ago) [1;34m<afc163>[m
+* [31m82d5b5d[m -[33m[m Fix margin [32m(10 months ago) [1;34m<afc163>[m
+* [31m097f1d5[m -[33m[m Fix text of site [32m(10 months ago) [1;34m<afc163>[m
+* [31mdc6b13b[m -[33m[m Switch Trend color [32m(10 months ago) [1;34m<afc163>[m
+* [31m45aa12c[m -[33m[m tweak card style [32m(10 months ago) [1;34m<afc163>[m
+* [31m12ba3e1[m -[33m[m Tweak style [32m(10 months ago) [1;34m<afc163>[m
+* [31m281746e[m -[33m[m Fix form style [32m(10 months ago) [1;34m<afc163>[m
+* [31m1e54651[m -[33m[m update mock data [32m(10 months ago) [1;34m<afc163>[m
+* [31m5609cde[m -[33m[m Add new avatar pictures [32m(10 months ago) [1;34m<afc163>[m
+*   [31m6a2fea1[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(10 months ago) [1;34m<ddcat1115>[m
+[32m|[m[33m\[m  
+[32m|[m * [31m47b554a[m -[33m[m Fix margin [32m(10 months ago) [1;34m<afc163>[m
+[32m|[m * [31m6fc6d13[m -[33m[m Refactor TagSelect [32m(10 months ago) [1;34m<afc163>[m
+[32m|[m * [31m99162c7[m -[33m[m update activities data [32m(10 months ago) [1;34m<afc163>[m
+* [33m|[m [31mba31041[m -[33m[m update style for profile and DescriptionList [32m(10 months ago) [1;34m<ddcat1115>[m
+[33m|[m[33m/[m  
+*   [31m348c62b[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(10 months ago) [1;34m<ddcat1115>[m
+[34m|[m[35m\[m  
+[34m|[m * [31m54b17ee[m -[33m[m Fix workspace style [32m(10 months ago) [1;34m<afc163>[m
+[34m|[m * [31md05a69b[m -[33m[m Fix workplace style [32m(10 months ago) [1;34m<afc163>[m
+* [35m|[m [31m9c0b675[m -[33m[m update style & add digitUppercase util [32m(10 months ago) [1;34m<ddcat1115>[m
+[35m|[m[35m/[m  
+* [31m339ea67[m -[33m[m Improve TagCloud [32m(10 months ago) [1;34m<afc163>[m
+* [31m89ed9cc[m -[33m[m Tweak menu margin [32m(10 months ago) [1;34m<afc163>[m
+*   [31mc9164b8[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(10 months ago) [1;34m<ddcat1115>[m
+[36m|[m[1;31m\[m  
+[36m|[m * [31m95aef7c[m -[33m[m Fix waterwave background [32m(10 months ago) [1;34m<afc163>[m
+[36m|[m * [31m0aa70e3[m -[33m[m Fix home page collapsed menu [32m(10 months ago) [1;34m<afc163>[m
+[36m|[m * [31mdb197c3[m -[33m[m fix breadcrumb [32m(10 months ago) [1;34m<afc163>[m
+[36m|[m * [31m76324ce[m -[33m[m Remove radio margin tweak [32m(10 months ago) [1;34m<afc163>[m
+* [1;31m|[m [31m03c26af[m -[33m[m update style [32m(10 months ago) [1;34m<ddcat1115>[m
+[1;31m|[m[1;31m/[m  
+* [31m979ce4f[m -[33m[m update style [32m(10 months ago) [1;34m<ddcat1115>[m
+*   [31mf97fd54[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(10 months ago) [1;34m<ddcat1115>[m
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [31m05d0e99[m -[33m[m Fix card height [32m(10 months ago) [1;34m<afc163>[m
+[1;32m|[m * [31m4a7fada[m -[33m[m update monitor page style [32m(10 months ago) [1;34m<afc163>[m
+* [1;33m|[m [31mb55be88[m -[33m[m update styles [32m(10 months ago) [1;34m<ddcat1115>[m
+[1;33m|[m[1;33m/[m  
+* [31m7dc26cf[m -[33m[m Add Trend demo [32m(10 months ago) [1;34m<afc163>[m
+* [31madb3759[m -[33m[m Refactor number info (#28) [32m(10 months ago) [1;34m<偏右>[m
+* [31m9d24906[m -[33m[m Refactor Trend (#27) [32m(10 months ago) [1;34m<偏右>[m
+* [31mec36e19[m -[33m[m update code style [32m(10 months ago) [1;34m<afc163>[m
+* [31m2a108cf[m -[33m[m tweak pie position [32m(10 months ago) [1;34m<afc163>[m
+* [31mabf86fa[m -[33m[m remove cursor pointer [32m(10 months ago) [1;34m<afc163>[m
+* [31mf81b65a[m -[33m[m Fix clear notices [32m(10 months ago) [1;34m<afc163>[m
+* [31m0f631ee[m -[33m[m update g2 colors globally [32m(10 months ago) [1;34m<afc163>[m
+* [31mc10ca6f[m -[33m[m Remove dva from component (#26) [32m(10 months ago) [1;34m<偏右>[m
+* [31m0148ddb[m -[33m[m Add document links [32m(10 months ago) [1;34m<afc163>[m
+* [31m9867f6e[m -[33m[m split dva from components [32m(10 months ago) [1;34m<nikogu>[m
+* [31m2f8b6c3[m -[33m[m revert to dva/router .... [32m(10 months ago) [1;34m<nikogu>[m
+* [31ma957bff[m -[33m[m Add favicon and update g2 default theme [32m(10 months ago) [1;34m<afc163>[m
+* [31m85b880c[m -[33m[m change components Link from dva/router to react-router [32m(10 months ago) [1;34m<nikogu>[m
+* [31ma30e058[m -[33m[m update detail [32m(10 months ago) [1;34m<afc163>[m
+* [31mf802859[m -[33m[m Lots of improvement [32m(10 months ago) [1;34m<afc163>[m
+* [31m224e566[m -[33m[m active date selection [32m(10 months ago) [1;34m<afc163>[m
+* [31m6044738[m -[33m[m Fix tabs [32m(10 months ago) [1;34m<afc163>[m
+* [31m378d9ae[m -[33m[m Fix pie [32m(10 months ago) [1;34m<afc163>[m
+* [31m1a1aa95[m -[33m[m update dashboard [32m(10 months ago) [1;34m<afc163>[m
+* [31m3e042cb[m -[33m[m Fix dashboard style [32m(10 months ago) [1;34m<afc163>[m
+* [31m577564c[m -[33m[m fixed charts padding [32m(10 months ago) [1;34m<nikogu>[m
+* [31m20bf326[m -[33m[m fixed get width [32m(10 months ago) [1;34m<nikogu>[m
+* [31mcfc0aea[m -[33m[m Dva@2 (#13) [32m(10 months ago) [1;34m<ddcat1115>[m
+* [31m9e5bbe7[m -[33m[m use babel-plugin-env [32m(10 months ago) [1;34m<afc163>[m
+* [31m457066a[m -[33m[m Fix typo [32m(10 months ago) [1;34m<afc163>[m
+* [31mb0baf66[m -[33m[m Fix deps [32m(10 months ago) [1;34m<afc163>[m
+* [31m77e1edd[m -[33m[m Fix test case [32m(10 months ago) [1;34m<afc163>[m
+* [31mcd0248e[m -[33m[m Lint staged (#25) [32m(10 months ago) [1;34m<偏右>[m
+* [31m12f41ad[m -[33m[m upgrade enzyme [32m(10 months ago) [1;34m<afc163>[m
+* [31mc6e28e6[m -[33m[m update devDeps [32m(10 months ago) [1;34m<afc163>[m
+* [31ma347918[m -[33m[m Create LICENSE [32m(10 months ago) [1;34m<偏右>[m
+* [31m35129a9[m -[33m[m Create CODE_OF_CONDUCT.md [32m(10 months ago) [1;34m<偏右>[m
+* [31m1679154[m -[33m[m bold active tabs [32m(10 months ago) [1;34m<afc163>[m
+* [31m2106660[m -[33m[m update header shadow [32m(10 months ago) [1;34m<afc163>[m
+* [31m2247fc1[m -[33m[m split g2-slider [32m(10 months ago) [1;34m<nikogu>[m
+* [31mca45dd0[m -[33m[m update tag clound [32m(10 months ago) [1;34m<nikogu>[m
+* [31m7c2ec98[m -[33m[m update styles [32m(10 months ago) [1;34m<afc163>[m
+* [31m0153ec1[m -[33m[m update detail [32m(10 months ago) [1;34m<nikogu>[m
+* [31m16d768d[m -[33m[m fixed design of result & user page [32m(10 months ago) [1;34m<nikogu>[m
+* [31m3390281[m -[33m[m fixed design of exception & detail page [32m(10 months ago) [1;34m<nikogu>[m
+* [31m897b1f8[m -[33m[m fixed text (#23) [32m(11 months ago) [1;34m<niko>[m
+*   [31m72b393e[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(11 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [31mff612c5[m -[33m[m design review (#22) [32m(11 months ago) [1;34m<niko>[m
+* [1;35m|[m [31md8aef5a[m -[33m[m remove useless category [32m(11 months ago) [1;34m<ddcat1115>[m
+[1;35m|[m[1;35m/[m  
+*   [31m6facbbe[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(11 months ago) [1;34m<ddcat1115>[m
+[1;36m|[m[31m\[m  
+[1;36m|[m * [31m4ccb61a[m -[33m[m update mock data [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31m9f5203a[m -[33m[m update logo style [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31m8548488[m -[33m[m Improve header responsive [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31mcfbe147[m -[33m[m Use @heading-color [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31me5dd0ec[m -[33m[m Use Divider component [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31ma50a4fa[m -[33m[m update form styles [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31m5580703[m -[33m[m fix editable table [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31mb474cb9[m -[33m[m bold tab [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31m2618a58[m -[33m[m update notice style [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31m5e27eba[m -[33m[m Fix margins [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31mf45aeee[m -[33m[m update text [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31mab20621[m -[33m[m clear notices count [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31mcedd92c[m -[33m[m update NoticeIcon api doc [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31m4f2f9e5[m -[33m[m update notification [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31mc0e2d67[m -[33m[m update doc [32m(11 months ago) [1;34m<nikogu>[m
+[1;36m|[m * [31meb2a31e[m -[33m[m update component docs [32m(11 months ago) [1;34m<nikogu>[m
+[1;36m|[m * [31m7f1d829[m -[33m[m Fix avatar position [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31m68013a5[m -[33m[m update logo background [32m(11 months ago) [1;34m<afc163>[m
+[1;36m|[m * [31m664e928[m -[33m[m update style (#21) [32m(11 months ago) [1;34m<niko>[m
+[1;36m|[m * [31m268a4ef[m -[33m[m update head profile style [32m(11 months ago) [1;34m<afc163>[m
+* [31m|[m [31m9fb1146[m -[33m[m remove useless components level in doc [32m(11 months ago) [1;34m<ddcat1115>[m
+[31m|[m[31m/[m  
+* [31m9fc2c15[m -[33m[m update result pages [32m(11 months ago) [1;34m<ddcat1115>[m
+* [31m1152d6d[m -[33m[m fixed TagSelect demo & PageHeader index [32m(11 months ago) [1;34m<nikogu>[m
+* [31m8b48d54[m -[33m[m update login/register/resut pages [32m(11 months ago) [1;34m<ddcat1115>[m
+* [31m9e05143[m -[33m[m update BasicForm [32m(11 months ago) [1;34m<afc163>[m
+* [31m4417360[m -[33m[m remove Countdown [32m(11 months ago) [1;34m<afc163>[m
+* [31m36fbfbe[m -[33m[m rename Countdown to CountDown [32m(11 months ago) [1;34m<afc163>[m
+* [31m05ca4cf[m -[33m[m update list style [32m(11 months ago) [1;34m<nikogu>[m
+* [31m402532c[m -[33m[m Dashboard: design update (#18) [32m(11 months ago) [1;34m<niko>[m
+* [31m92898b2[m -[33m[m Tweak styles [32m(11 months ago) [1;34m<afc163>[m
+* [31m62792cc[m -[33m[m remove useless margin [32m(11 months ago) [1;34m<nikogu>[m
+* [31mb34c2fe[m -[33m[m fixed: https://github.com/ant-design/test2/issues/15 [32m(11 months ago) [1;34m<nikogu>[m
+* [31mc222d67[m -[33m[m update components [32m(11 months ago) [1;34m<afc163>[m
+* [31m6375d51[m -[33m[m update demos [32m(11 months ago) [1;34m<afc163>[m
+* [31meb326aa[m -[33m[m update doc [32m(11 months ago) [1;34m<afc163>[m
+* [31md6386bb[m -[33m[m update components API and demo [32m(11 months ago) [1;34m<afc163>[m
+* [31m3ab0043[m -[33m[m fixed card loaing [32m(11 months ago) [1;34m<nikogu>[m
+* [31m0a62cb8[m -[33m[m update Result [32m(11 months ago) [1;34m<ddcat1115>[m
+* [31me7d8c49[m -[33m[m update PageHeader [32m(11 months ago) [1;34m<ddcat1115>[m
+* [31maca772d[m -[33m[m test [32m(11 months ago) [1;34m<ddcat1115>[m
+* [31ma830f6b[m -[33m[m update docs [32m(11 months ago) [1;34m<ddcat1115>[m
+*   [31m36bad2b[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(11 months ago) [1;34m<ddcat1115>[m
+[32m|[m[33m\[m  
+[32m|[m * [31m936d833[m -[33m[m fixed package dependences [32m(11 months ago) [1;34m<nikogu>[m
+[32m|[m * [31m87f624d[m -[33m[m Component update (#17) [32m(11 months ago) [1;34m<niko>[m
+* [33m|[m [31m9562f27[m -[33m[m update Exception style [32m(11 months ago) [1;34m<ddcat1115>[m
+[33m|[m[33m/[m  
+* [31m2ed3f76[m -[33m[m fix FooterToolbar style [32m(11 months ago) [1;34m<afc163>[m
+* [31m64f00d3[m -[33m[m Fix HeaderSearch error [32m(11 months ago) [1;34m<afc163>[m
+* [31mffc1e5a[m -[33m[m Fix NoticeList style [32m(11 months ago) [1;34m<afc163>[m
+* [31m848a8d9[m -[33m[m renew NoticeIcon [32m(11 months ago) [1;34m<afc163>[m
+* [31ma949a3c[m -[33m[m 视觉调整 [32m(11 months ago) [1;34m<ddcat1115>[m
+* [31m3cf2fea[m -[33m[m remove tag style reset [32m(11 months ago) [1;34m<afc163>[m
+* [31m73128be[m -[33m[m change default locale to chinese [32m(11 months ago) [1;34m<afc163>[m
+* [31m707be3c[m -[33m[m Remove unused component RadioText [32m(11 months ago) [1;34m<afc163>[m
+* [31m2b01db7[m -[33m[m upgrade eslint-config-airbnb [32m(11 months ago) [1;34m<afc163>[m
+* [31mcb286ee[m -[33m[m remove size="large" [32m(11 months ago) [1;34m<afc163>[m
+* [31mc320f1b[m -[33m[m lock eslint version [32m(11 months ago) [1;34m<afc163>[m
+* [31m30a394a[m -[33m[m Fix footer padding [32m(11 months ago) [1;34m<afc163>[m
+* [31ma9bf39c[m -[33m[m Fix popover style [32m(11 months ago) [1;34m<afc163>[m
+* [31ma935dfe[m -[33m[m remove less variables [32m(11 months ago) [1;34m<afc163>[m
+* [31maf0b06e[m -[33m[m change usage of PageHeader in Workplace [32m(11 months ago) [1;34m<ddcat1115>[m
+* [31m4186ba6[m -[33m[m Fix menu collapsed behavior [32m(11 months ago) [1;34m<afc163>[m
+* [31m25c4411[m -[33m[m Remove size="large" [32m(11 months ago) [1;34m<afc163>[m
+* [31ma40b4c7[m -[33m[m remove [32m(11 months ago) [1;34m<afc163>[m
+* [31mdcb5f76[m -[33m[m update antd3.0 [32m(11 months ago) [1;34m<nikogu>[m
+* [31me6d23ae[m -[33m[m improve responsive [32m(11 months ago) [1;34m<ddcat1115>[m
+* [31m9b23270[m -[33m[m Fix button response design [32m(11 months ago) [1;34m<afc163>[m
+* [31mc4d9e02[m -[33m[m add list responsive [32m(11 months ago) [1;34m<nikogu>[m
+* [31mbde065b[m -[33m[m fix Result style #14 [32m(11 months ago) [1;34m<ddcat1115>[m
+* [31m7e69f3c[m -[33m[m Fix feed link color [32m(11 months ago) [1;34m<afc163>[m
+* [31m30a6423[m -[33m[m remove global alert [32m(11 months ago) [1;34m<afc163>[m
+* [31m8599753[m -[33m[m 添加 Charts 的文档和DEMO [32m(12 months ago) [1;34m<nikogu>[m
+* [31m7b8ea8d[m -[33m[m Fix variable error [32m(12 months ago) [1;34m<afc163>[m
+* [31m73b25c7[m -[33m[m fix ui test [32m(12 months ago) [1;34m<afc163>[m
+* [31mf0e520e[m -[33m[m Remove font-size variable [32m(12 months ago) [1;34m<afc163>[m
+* [31m6470e03[m -[33m[m close: https://github.com/ant-design/test2/issues/11 [32m(12 months ago) [1;34m<nikogu>[m
+* [31m558da10[m -[33m[m 优化图表清理的代码 [32m(12 months ago) [1;34m<nikogu>[m
+* [31maa83304[m -[33m[m clost: https://github.com/ant-design/test2/issues/12 [32m(12 months ago) [1;34m<nikogu>[m
+* [31m21dba8b[m -[33m[m Move theme to a saperate file [32m(12 months ago) [1;34m<afc163>[m
+* [31me5cd825[m -[33m[m 增加禁用 proxy 的 start [32m(12 months ago) [1;34m<nikogu>[m
+* [31m5e0d868[m -[33m[m Remove unneccessary card noHovering prop [32m(12 months ago) [1;34m<afc163>[m
+* [31mf6c32c2[m -[33m[m add stylelintrc [32m(12 months ago) [1;34m<nikogu>[m
+* [31m5349737[m -[33m[m clost #https://github.com/ant-design/test/issues/69 [32m(12 months ago) [1;34m<nikogu>[m
+* [31m315b660[m -[33m[m add style lint [32m(12 months ago) [1;34m<nikogu>[m
+* [31mc271a7b[m -[33m[m fix test [32m(12 months ago) [1;34m<afc163>[m
+* [31m2d1148e[m -[33m[m Add UI Test (#10) [32m(12 months ago) [1;34m<偏右>[m
+* [31m3357ffb[m -[33m[m remove alert closable [32m(12 months ago) [1;34m<afc163>[m
+* [31m7ae6bac[m -[33m[m update input transition [32m(12 months ago) [1;34m<afc163>[m
+*   [31m63b095f[m -[33m[m Merge pull request #8 from ant-design/design-review [32m(12 months ago) [1;34m<niko>[m
+[34m|[m[35m\[m  
+[34m|[m *   [31md9a2f91[m -[33m[m Merge branch 'design-review' of https://github.com/ant-design/test2 into design-review [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m [36m|[m * [31m69674c8[m -[33m[m 列表页视觉 review 优化 [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m [36m|[m * [31m0de5588[m -[33m[m 去掉冗余代码 [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m [36m|[m * [31m75684f6[m -[33m[m 抽离定时器图表为上层组件 [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m [36m|[m *   [31mc48a0d4[m -[33m[m 除去冗余代码 [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m [36m|[m [1;32m|[m[1;33m\[m  
+[34m|[m [36m|[m [1;32m|[m * [31m523adcc[m -[33m[m update searchinput [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m [36m|[m [1;32m|[m * [31mb4d7f6c[m -[33m[m List & Dashboard Design Review [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m [36m|[m * [1;33m|[m [31m9fc1609[m -[33m[m 修正图表渲染时机的比对 [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m [36m|[m * [1;33m|[m [31m8768c69[m -[33m[m update searchinput [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m [36m|[m * [1;33m|[m [31m02204c3[m -[33m[m List & Dashboard Design Review [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m * [1;33m|[m [1;33m|[m [31m15a59ad[m -[33m[m 列表页视觉 review 优化 [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m * [1;33m|[m [1;33m|[m [31m2b521cb[m -[33m[m 去掉冗余代码 [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m * [1;33m|[m [1;33m|[m [31m8f9b004[m -[33m[m 抽离定时器图表为上层组件 [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m * [1;33m|[m [1;33m|[m [31m148a9b2[m -[33m[m 修正图表渲染时机的比对 [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m * [1;33m|[m [1;33m|[m [31mf8332f2[m -[33m[m update searchinput [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m * [1;33m|[m [1;33m|[m [31mb938262[m -[33m[m List & Dashboard Design Review [32m(12 months ago) [1;34m<nikogu>[m
+[34m|[m[34m/[m [1;33m/[m [1;33m/[m  
+* [1;33m|[m [1;33m|[m [31m2f801ef[m -[33m[m update some detail [32m(12 months ago) [1;34m<afc163>[m
+* [1;33m|[m [1;33m|[m [31m07cb81c[m -[33m[m update popover title height [32m(12 months ago) [1;34m<afc163>[m
+* [1;33m|[m [1;33m|[m [31m488867e[m -[33m[m code style [32m(12 months ago) [1;34m<afc163>[m
+* [1;33m|[m [1;33m|[m [31ma924c48[m -[33m[m add EditableItem adjust AdvancedProfile page [32m(12 months ago) [1;34m<ddcat1115>[m
+[1;33m|[m[1;33m/[m [1;33m/[m  
+* [1;33m|[m [31mf649e4b[m -[33m[m add BasicProfile [32m(12 months ago) [1;34m<ddcat1115>[m
+* [1;33m|[m   [31mde9a38e[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(12 months ago) [1;34m<ddcat1115>[m
+[1;34m|[m[1;35m\[m [1;33m\[m  
+[1;34m|[m * [1;33m|[m [31ma4cf614[m -[33m[m Update logo font style [32m(12 months ago) [1;34m<afc163>[m
+* [1;35m|[m [1;33m|[m [31m2044e07[m -[33m[m improve exception [32m(12 months ago) [1;34m<ddcat1115>[m
+* [1;35m|[m [1;33m|[m [31m6ecfedd[m -[33m[m fix login page [32m(12 months ago) [1;34m<ddcat1115>[m
+[1;35m|[m[1;35m/[m [1;33m/[m  
+* [1;33m|[m [31m246fd23[m -[33m[m fix menu [32m(12 months ago) [1;34m<afc163>[m
+[1;33m|[m[1;33m/[m  
+* [31meca38b9[m -[33m[m Fix menu [32m(12 months ago) [1;34m<afc163>[m
+* [31mf7fa398[m -[33m[m Only open current menu [32m(12 months ago) [1;34m<afc163>[m
+* [31m32693bb[m -[33m[m 升级 roadhog-api-doc & 添加 .gitignore [32m(12 months ago) [1;34m<nikogu>[m
+* [31me2f62c6[m -[33m[m refactor menu data [32m(12 months ago) [1;34m<afc163>[m
+* [31meb9881d[m -[33m[m update layout to new design [32m(12 months ago) [1;34m<afc163>[m
+* [31m9a3d41c[m -[33m[m change menu icons [32m(12 months ago) [1;34m<afc163>[m
+* [31m6efdab5[m -[33m[m Merge branch 'master' of github.com:ant-design/test2 [32m(12 months ago) [1;34m<afc163>[m
+* [31me80ace5[m -[33m[m turn off g2 track [32m(12 months ago) [1;34m<afc163>[m
+* [31m722a3b0[m -[33m[m ant-design-pro -> ant-design-pro/lib [32m(12 months ago) [1;34m<nikogu>[m
+* [31mbc38597[m -[33m[m update roadhog-api-doc to support gh-pages [32m(12 months ago) [1;34m<nikogu>[m
+* [31m51fc534[m -[33m[m 修复图表响应式变化中溢出的问题 [32m(12 months ago) [1;34m<nikogu>[m
+* [31m2a8f16a[m -[33m[m 修复遮挡问题 [32m(12 months ago) [1;34m<nikogu>[m
+* [31m94e5002[m -[33m[m fix login style [32m(1 year ago) [1;34m<ddcat1115>[m
+*   [31m8e75fc9[m -[33m[m Merge pull request #2 from ant-design/List_Dashboard-optimize-again [32m(1 year ago) [1;34m<niko>[m
+[1;36m|[m[31m\[m  
+[1;36m|[m * [31mabca36b[m -[33m[m fixed list loading [32m(1 year ago) [1;34m<nikogu>[m
+[1;36m|[m * [31mbbb5676[m -[33m[m 修复二次List 和 Dashboard 的二次确认优化 [32m(1 year ago) [1;34m<nikogu>[m
+* [31m|[m [31m2691043[m -[33m[m update analysis responsive [32m(1 year ago) [1;34m<nikogu>[m
+* [31m|[m [31mdaea08e[m -[33m[m pub to gh-pages [32m(1 year ago) [1;34m<afc163>[m
+* [31m|[m [31m55274c4[m -[33m[m Remove ActivitiesItem [32m(1 year ago) [1;34m<afc163>[m
+* [31m|[m [31maea9983[m -[33m[m cleanup deps [32m(1 year ago) [1;34m<afc163>[m
+[31m|[m[31m/[m  
+* [31m6670f9f[m -[33m[m Fix footer [32m(1 year ago) [1;34m<afc163>[m
+*   [31mc5d6923[m -[33m[m Merge branch 'master' of https://github.com/ant-design/test2 [32m(1 year ago) [1;34m<ddcat1115>[m
+[32m|[m[33m\[m  
+[32m|[m * [31md928341[m -[33m[m Fix details [32m(1 year ago) [1;34m<afc163>[m
+* [33m|[m [31mf2497cb[m -[33m[m open user pages in current tag [32m(1 year ago) [1;34m<ddcat1115>[m
+[33m|[m[33m/[m  
+* [31m14fa296[m -[33m[m fix travis [32m(1 year ago) [1;34m<afc163>[m
+* [31m91aca7a[m -[33m[m Add travis test and badge [32m(1 year ago) [1;34m<afc163>[m
+* [31mbbc2a41[m -[33m[m Fix Footer margin [32m(1 year ago) [1;34m<afc163>[m
+* [31m50119ae[m -[33m[m add travis [32m(1 year ago) [1;34m<nikogu>[m
+* [31m63bcfdb[m -[33m[m Fix menu and logo style [32m(1 year ago) [1;34m<afc163>[m
+* [31m291a36b[m -[33m[m 修复分析页响应式 [32m(1 year ago) [1;34m<nikogu>[m
+* [31md7ddf3a[m -[33m[m Extract scaffold to independent git repo [32m(1 year ago) [1;34m<nikogu>[m
+* [31m653d86f[m -[33m[m init [32m(1 year ago) [1;34m<niko>[m

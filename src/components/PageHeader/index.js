@@ -28,12 +28,12 @@ export default class PageHeader extends PureComponent {
   }
 
   componentDidUpdate(preProps) {
-    const {
-      tabActiveKey,
-      location: { pathname },
-    } = this.props;
+    const { location } = this.props;
+    if (!location || !preProps.location) {
+      return;
+    }
     const prePathname = preProps.location.pathname;
-    if (preProps.tabActiveKey !== tabActiveKey || prePathname !== pathname) {
+    if (prePathname !== location.pathname) {
       this.getBreadcrumbDom();
     }
   }
