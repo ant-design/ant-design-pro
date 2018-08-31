@@ -134,8 +134,6 @@ export default function request(url, options = {}) {
     .request(config)
     .then(checkStatus)
     .then(response => {
-      console.info(`${url}` );
-      console.info(response);
       return response.data;
     })
     .catch(e => {

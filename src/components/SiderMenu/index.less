@@ -24,6 +24,16 @@
   }
 }
 
+:global {
+  // 侧边栏底色
+  .ant-layout-sider {
+    background: #3a3a3a;
+  }
+  .drawer .drawer-content {
+    background: #272822;
+  }
+}
+
 .sider {
   min-height: 100vh;
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
@@ -46,6 +56,42 @@
       }
     }
   }
+  :global {
+
+    // 一级菜单底色
+    .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+      background: #3a3a3a;
+    }
+    // 二级菜单颜色
+    .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+      background: #272822;
+    }
+    // 选中菜单颜色
+    .ant-menu.ant-menu-dark .ant-menu-item-selected,
+    .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+      background-color: #515151;
+      border-right: 3px solid #2be7d6;
+    }
+    .ant-menu-inline-collapsed {
+      & > .ant-menu-item .sider-menu-item-img + span,
+      &
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-item
+        .sider-menu-item-img
+        + span,
+      & > .ant-menu-submenu > .ant-menu-submenu-title .sider-menu-item-img + span {
+        max-width: 0;
+        display: inline-block;
+        opacity: 0;
+      }
+    }
+    .ant-menu-item .sider-menu-item-img + span,
+    .ant-menu-submenu-title .sider-menu-item-img + span {
+      transition: opacity 0.3s @ease-in-out, width 0.3s @ease-in-out;
+      opacity: 1;
+    }
+  }
 }
 
 .icon {
@@ -53,46 +99,4 @@
   margin-right: 10px;
 }
 
-:global {
-  .drawer .drawer-content {
-    background: #272822;
-  }
-  // 侧边栏底色
-  .ant-layout-sider {
-    background: #3a3a3a;
-  }
-  // 一级菜单底色
-  .ant-menu-dark,
-  .ant-menu-dark .ant-menu-sub {
-    background: #3a3a3a;
-  }
-  // 二级菜单颜色
-  .ant-menu-dark .ant-menu-inline.ant-menu-sub {
-    background: #272822;
-  }
-  // 选中菜单颜色
-  .ant-menu.ant-menu-dark .ant-menu-item-selected,
-  .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
-    background-color: #515151;
-    border-right: 3px solid #2be7d6;
-  }
-  .ant-menu-inline-collapsed {
-    & > .ant-menu-item .sider-menu-item-img + span,
-    &
-      > .ant-menu-item-group
-      > .ant-menu-item-group-list
-      > .ant-menu-item
-      .sider-menu-item-img
-      + span,
-    & > .ant-menu-submenu > .ant-menu-submenu-title .sider-menu-item-img + span {
-      max-width: 0;
-      display: inline-block;
-      opacity: 0;
-    }
-  }
-  .ant-menu-item .sider-menu-item-img + span,
-  .ant-menu-submenu-title .sider-menu-item-img + span {
-    transition: opacity 0.3s @ease-in-out, width 0.3s @ease-in-out;
-    opacity: 1;
-  }
-}
+

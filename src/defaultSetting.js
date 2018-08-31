@@ -1,7 +1,7 @@
 module.exports = {
   collapse: false,
   silderTheme: 'dark',
-  primaryColor: '#13C2C2',
+  primaryColor: '#2BE',
   layout: 'sidemenu',
   grid: 'Fluid',
   fixedHeader: true,
