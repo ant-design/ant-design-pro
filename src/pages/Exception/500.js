@@ -7,7 +7,6 @@ const Exception500 = () => (
   <Exception
     type="500"
     desc={formatMessage({ id: 'app.exception.description.500' }, {})}
-    style={{ minHeight: 500, height: '80%' }}
     linkElement={Link}
     backText={formatMessage({ id: 'app.exception.back' })}
   />

@@ -22,7 +22,6 @@ export default ({ children, route, location }) => {
     <Exception
       type="403"
       desc={formatMessage({ id: 'app.exception.description.403' }, {})}
-      style={{ minHeight: 500, height: '80%' }}
       linkElement={Link}
       backText={formatMessage({ id: 'app.exception.back' })}
     />
