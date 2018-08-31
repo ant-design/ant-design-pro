@@ -14,6 +14,7 @@ module.exports = [
   {
     path: '/',
     component: '../layouts/BasicLayout',
+    Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
       { path: '/', redirect: '/dashboard/analysis' },
@@ -22,9 +23,21 @@ module.exports = [
         name: 'dashboard',
         icon: 'dashboard',
         routes: [
-          { path: '/dashboard/analysis', name: 'analysis', component: './Dashboard/Analysis' },
-          { path: '/dashboard/monitor', name: 'monitor', component: './Dashboard/Monitor' },
-          { path: '/dashboard/workplace', name: 'workplace', component: './Dashboard/Workplace' },
+          {
+            path: '/dashboard/analysis',
+            name: 'analysis',
+            component: './Dashboard/Analysis',
+          },
+          {
+            path: '/dashboard/monitor',
+            name: 'monitor',
+            component: './Dashboard/Monitor',
+          },
+          {
+            path: '/dashboard/workplace',
+            name: 'workplace',
+            component: './Dashboard/Workplace',
+          },
         ],
       },
       // 系统管理
@@ -92,16 +105,36 @@ module.exports = [
         icon: 'table',
         name: 'list',
         routes: [
-          { path: '/list/table-list', name: 'searchtable', component: './List/TableList' },
-          { path: '/list/basic-list', name: 'basiclist', component: './List/BasicList' },
-          { path: '/list/card-list', name: 'cardlist', component: './List/CardList' },
+          {
+            path: '/list/table-list',
+            name: 'searchtable',
+            component: './List/TableList',
+          },
+          {
+            path: '/list/basic-list',
+            name: 'basiclist',
+            component: './List/BasicList',
+          },
+          {
+            path: '/list/card-list',
+            name: 'cardlist',
+            component: './List/CardList',
+          },
           {
             path: '/list/search',
             name: 'searchlist',
             component: './List/List',
             routes: [
-              { path: '/list/search/articles', name: 'articles', component: './List/Articles' },
-              { path: '/list/search/projects', name: 'projects', component: './List/Projects' },
+              {
+                path: '/list/search/articles',
+                name: 'articles',
+                component: './List/Articles',
+              },
+              {
+                path: '/list/search/projects',
+                name: 'projects',
+                component: './List/Projects',
+              },
               {
                 path: '/list/search/applications',
                 name: 'applications',
@@ -117,8 +150,16 @@ module.exports = [
         icon: 'profile',
         routes: [
           // profile
-          { path: '/profile/basic', name: 'basic', component: './Profile/BasicProfile' },
-          { path: '/profile/advanced', name: 'advanced', component: './Profile/AdvancedProfile' },
+          {
+            path: '/profile/basic',
+            name: 'basic',
+            component: './Profile/BasicProfile',
+          },
+          {
+            path: '/profile/advanced',
+            name: 'advanced',
+            component: './Profile/AdvancedProfile',
+          },
         ],
       },
       {
@@ -127,7 +168,11 @@ module.exports = [
         path: '/result',
         routes: [
           // result
-          { path: '/result/success', name: 'success', component: './Result/Success' },
+          {
+            path: '/result/success',
+            name: 'success',
+            component: './Result/Success',
+          },
           { path: '/result/fail', name: 'fail', component: './Result/Error' },
         ],
       },
@@ -137,9 +182,21 @@ module.exports = [
         path: '/exception',
         routes: [
           // exception
-          { path: '/exception/403', name: 'not-permission', component: './Exception/403' },
-          { path: '/exception/404', name: 'not-find', component: './Exception/404' },
-          { path: '/exception/500', name: 'server-error', component: './Exception/500' },
+          {
+            path: '/exception/403',
+            name: 'not-permission',
+            component: './Exception/403',
+          },
+          {
+            path: '/exception/404',
+            name: 'not-find',
+            component: './Exception/404',
+          },
+          {
+            path: '/exception/500',
+            name: 'server-error',
+            component: './Exception/500',
+          },
           {
             path: '/exception/trigger',
             name: 'trigger',

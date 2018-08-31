@@ -5,7 +5,7 @@ import CheckPermissions from './CheckPermissions';
  * 默认不能访问任何页面
  * default is "NULL"
  */
-const Exception403 = () => <Exception type="403" style={{ minHeight: 500, height: '80%' }} />;
+const Exception403 = () => <Exception type="403" />;
 
 // Determine whether the incoming component has been instantiated
 // AuthorizedRoute is already instantiated
