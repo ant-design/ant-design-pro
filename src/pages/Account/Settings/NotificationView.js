@@ -6,8 +6,8 @@ class NotificationView extends Component {
   getData = () => {
     const Action = (
       <Switch
-        checkedChildren={formatMessage({ id: 'app.settings.open' }, {})}
-        unCheckedChildren={formatMessage({ id: 'app.settings.close' }, {})}
+        checkedChildren={formatMessage({ id: 'app.settings.open' })}
+        unCheckedChildren={formatMessage({ id: 'app.settings.close' })}
         defaultChecked
       />
     );

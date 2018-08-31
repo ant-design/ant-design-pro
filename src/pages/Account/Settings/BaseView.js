@@ -88,7 +88,7 @@ class BaseView extends Component {
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
           <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.email' }, {})}>
+            <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
               {getFieldDecorator('email', {
                 rules: [
                   {
@@ -98,7 +98,7 @@ class BaseView extends Component {
                 ],
               })(<Input />)}
             </FormItem>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' }, {})}>
+            <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' })}>
               {getFieldDecorator('name', {
                 rules: [
                   {
@@ -108,7 +108,7 @@ class BaseView extends Component {
                 ],
               })(<Input />)}
             </FormItem>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.profile' }, {})}>
+            <FormItem label={formatMessage({ id: 'app.settings.basic.profile' })}>
               {getFieldDecorator('profile', {
                 rules: [
                   {
@@ -118,12 +118,12 @@ class BaseView extends Component {
                 ],
               })(
                 <Input.TextArea
-                  placeholder={formatMessage({ id: 'app.settings.basic.profile-placeholder' }, {})}
+                  placeholder={formatMessage({ id: 'app.settings.basic.profile-placeholder' })}
                   rows={4}
                 />
               )}
             </FormItem>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.country' }, {})}>
+            <FormItem label={formatMessage({ id: 'app.settings.basic.country' })}>
               {getFieldDecorator('country', {
                 rules: [
                   {
@@ -137,7 +137,7 @@ class BaseView extends Component {
                 </Select>
               )}
             </FormItem>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.geographic' }, {})}>
+            <FormItem label={formatMessage({ id: 'app.settings.basic.geographic' })}>
               {getFieldDecorator('geographic', {
                 rules: [
                   {
@@ -150,7 +150,7 @@ class BaseView extends Component {
                 ],
               })(<GeographicView />)}
             </FormItem>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.address' }, {})}>
+            <FormItem label={formatMessage({ id: 'app.settings.basic.address' })}>
               {getFieldDecorator('address', {
                 rules: [
                   {
@@ -160,7 +160,7 @@ class BaseView extends Component {
                 ],
               })(<Input />)}
             </FormItem>
-            <FormItem label={formatMessage({ id: 'app.settings.basic.phone' }, {})}>
+            <FormItem label={formatMessage({ id: 'app.settings.basic.phone' })}>
               {getFieldDecorator('phone', {
                 rules: [
                   {
