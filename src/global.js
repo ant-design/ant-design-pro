@@ -4,6 +4,8 @@ import React from 'react';
 import { Modal } from 'antd';
 import { formatMessage } from 'umi/locale';
 
+const key = 'antd-pro@2.0.0-notification-sent';
+
 const infoNewVersion = () => {
   Modal.info({
     title: formatMessage({ id: 'app.publish.title' }),
@@ -24,24 +26,21 @@ const infoNewVersion = () => {
           </a>
           {formatMessage({ id: 'app.publish.intro' })}
           {formatMessage({ id: 'app.publish.old-version-guide' })}
-          <a target="_blank" rel="noopener noreferrer" href="http://http://v1.pro.ant.design/">
+          <a target="_blank" rel="noopener noreferrer" href="https://v1.pro.ant.design/">
             v1.ant.design.pro
           </a>
         </p>
       </div>
     ),
     okText: 'OK',
-    onOk: () => localStorage.setItem('antd-pro@3.0.0-notification-sent', 'true'),
+    onOk: () => localStorage.setItem(key, 'true'),
     className: 'new-version-info-modal',
     width: 470,
   });
 };
 
 requestAnimationFrame(() => {
-  if (
-    localStorage.getItem('antd-pro@3.0.0-notification-sent') !== 'true' &&
-    Date.now() < new Date('2018/9/5').getTime()
-  ) {
+  if (localStorage.getItem(key) !== 'true' && Date.now() < new Date('2018/9/5').getTime()) {
     infoNewVersion();
   }
 });

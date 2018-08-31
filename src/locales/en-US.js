@@ -170,7 +170,7 @@ export default {
   'app.setting.copyinfo': 'copy success，please replace defaultSetting in src/models/setting.js',
   'app.setting.production.hint':
     'Setting panel show in development enviorment only, please modify src/defaultSetting.js mannually.',
-  'app.publish.title': 'Ant Desgin Pro@2.0.0  has been released! 🎉 🎉 🎉',
+  'app.publish.title': 'Ant Desgin Pro@2.0.0 has been released! 🎉 🎉 🎉',
   'app.publish.greeting': 'Hello, ',
   'app.publish.intro': ' has been released, and please upgrade. ',
   'app.publish.url':
