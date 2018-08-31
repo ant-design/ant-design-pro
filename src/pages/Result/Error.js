@@ -55,8 +55,8 @@ export default () => (
     <Card bordered={false}>
       <Result
         type="error"
-        title={formatMessage({ id: 'app.result.error.title' }, {})}
-        description={formatMessage({ id: 'app.result.error.description' }, {})}
+        title={formatMessage({ id: 'app.result.error.title' })}
+        description={formatMessage({ id: 'app.result.error.description' })}
         extra={extra}
         actions={actions}
         style={{ marginTop: 48, marginBottom: 16 }}
