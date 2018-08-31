@@ -39,7 +39,6 @@ export default class TopNavHeader extends PureComponent {
             </div>
             <div
               style={{
-                flex: 1,
                 maxWidth,
               }}
             >
