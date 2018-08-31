@@ -22,12 +22,12 @@ const infoNewVersion = () => {
             rel="noopener noreferrer"
             href={formatMessage({ id: 'app.publish.url' })}
           >
-            Ant Desgin Pro
+            Ant Desgin Pro {formatMessage({ id: 'app.publish.intro' })}
           </a>
-          {formatMessage({ id: 'app.publish.intro' })}
+          {formatMessage({ id: 'app.publish.tips' })}
           {formatMessage({ id: 'app.publish.old-version-guide' })}
-          <a target="_blank" rel="noopener noreferrer" href="https://v1.pro.ant.design/">
-            v1.ant.design.pro
+          <a target="_blank" rel="noopener noreferrer" href="https://v1.pro.ant.design">
+            v1.pro.ant.design
           </a>
         </p>
       </div>

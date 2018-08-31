@@ -167,7 +167,8 @@ export default {
   'app.setting.production.hint': '设置栏只用于开发环境预览，请拷贝后手动修改 src/defaultSetting.js',
   'app.publish.title': 'Ant Desgin Pro@2.0.0 发布！🎉 🎉 🎉',
   'app.publish.greeting': '你好，',
-  'app.publish.intro': ' 已正式发布，欢迎升级。',
+  'app.publish.intro': ' 已正式发布',
+  'app.publish.tips': '，欢迎升级和体验。',
   'app.publish.url': 'https://www.yuque.com/ant-design/ant-design-pro/gg1e9a',
   'app.publish.old-version-guide': '如果您还需要使用旧版，请查阅 ',
 };
