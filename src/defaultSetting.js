@@ -1,6 +1,6 @@
 module.exports = {
   collapse: false,
-  silderTheme: 'dark',
+  navTheme: 'dark',
   primaryColor: '#1890FF',
   layout: 'sidemenu',
   grid: 'Fluid',

@@ -111,7 +111,7 @@ class SettingDrawer extends PureComponent {
 
   render() {
     const { setting } = this.props;
-    const { collapse, silderTheme, primaryColor, layout, colorWeak } = setting;
+    const { collapse, navTheme, primaryColor, layout, colorWeak } = setting;
     return (
       <Drawer
         visible={collapse}
@@ -157,8 +157,8 @@ class SettingDrawer extends PureComponent {
                   url: 'https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg',
                 },
               ]}
-              value={silderTheme}
-              onChange={value => this.changeSetting('silderTheme', value)}
+              value={navTheme}
+              onChange={value => this.changeSetting('navTheme', value)}
             />
           </Body>
 

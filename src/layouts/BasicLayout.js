@@ -217,7 +217,7 @@ class BasicLayout extends React.PureComponent {
 
   render() {
     const {
-      silderTheme,
+      navTheme,
       layout: PropsLayout,
       children,
       location: { pathname },
@@ -231,7 +231,7 @@ class BasicLayout extends React.PureComponent {
           <SiderMenu
             logo={logo}
             Authorized={Authorized}
-            theme={silderTheme}
+            theme={navTheme}
             onCollapse={this.handleMenuCollapse}
             menuData={menuData}
             {...this.props}
