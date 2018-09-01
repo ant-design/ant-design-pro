@@ -66,7 +66,7 @@ class SettingDrawer extends PureComponent {
       {
         title: formatMessage({ id: 'app.setting.hideheader' }),
         disabled: !fixedHeader,
-        disabledReason: '固定 Header 时有效',
+        disabledReason: formatMessage({ id: 'app.setting.hideheader.hint' }),
         action: (
           <Switch
             size="small"
@@ -78,7 +78,7 @@ class SettingDrawer extends PureComponent {
       {
         title: formatMessage({ id: 'app.setting.fixedsidebar' }),
         disabled: layout === 'topmenu',
-        disabledReason: '侧边菜单布局时有效',
+        disabledReason: formatMessage({ id: 'app.setting.fixedsidebar.hint' }),
         action: (
           <Switch
             size="small"
