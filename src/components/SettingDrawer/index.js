@@ -21,6 +21,10 @@ const Body = ({ children, title, style }) => (
 
 @connect(({ setting }) => ({ setting }))
 class SettingDrawer extends PureComponent {
+  state = {
+    collapse: false,
+  };
+
   getLayOutSetting = () => {
     const {
       setting: { grid, fixedHeader, layout, autoHideHeader, fixSiderbar },
@@ -98,13 +102,14 @@ class SettingDrawer extends PureComponent {
   };
 
   togglerContent = () => {
-    const { setting } = this.props;
-    this.changeSetting('collapse', !setting.collapse);
+    const { collapse } = this.state;
+    this.setState({ collapse: !collapse });
   };
 
   render() {
     const { setting } = this.props;
-    const { collapse, navTheme, primaryColor, layout, colorWeak } = setting;
+    const { navTheme, primaryColor, layout, colorWeak } = setting;
+    const { collapse } = this.state;
     return (
       <Drawer
         visible={collapse}

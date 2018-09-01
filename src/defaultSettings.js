@@ -1,5 +1,4 @@
 module.exports = {
-  collapse: false,
   navTheme: 'dark',
   primaryColor: '#1890FF',
   layout: 'sidemenu',
