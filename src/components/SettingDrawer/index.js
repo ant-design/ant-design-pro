@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert } from 'antd';
+import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert, Tooltip } from 'antd';
 import { formatMessage } from 'umi/locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
@@ -7,6 +7,8 @@ import omit from 'omit.js';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import BlockChecbox from './BlockChecbox';
+
+const { Option } = Select;
 
 const Body = ({ children, title, style }) => (
   <div
@@ -33,55 +35,59 @@ class SettingDrawer extends PureComponent {
     return [
       {
         title: formatMessage({ id: 'app.setting.content-width' }),
-        action: [
+        action: (
           <Select
             value={contentWidth}
             size="small"
             onSelect={value => this.changeSetting('contentWidth', value)}
             style={{ width: 80 }}
           >
-            <Select.Option value="Fixed">
-              {formatMessage({ id: 'app.setting.content-width.fixed' })}
-            </Select.Option>
-            <Select.Option value="Fluid">
+            {layout === 'sidemenu' ? null : (
+              <Option value="Fixed">
+                {formatMessage({ id: 'app.setting.content-width.fixed' })}
+              </Option>
+            )}
+            <Option value="Fluid">
               {formatMessage({ id: 'app.setting.content-width.fluid' })}
-            </Select.Option>
-          </Select>,
-        ],
+            </Option>
+          </Select>
+        ),
       },
       {
         title: formatMessage({ id: 'app.setting.fixedheader' }),
-        action: [
+        action: (
           <Switch
             size="small"
             checked={!!fixedHeader}
             onChange={checked => this.changeSetting('fixedHeader', checked)}
-          />,
-        ],
+          />
+        ),
       },
       {
         title: formatMessage({ id: 'app.setting.hideheader' }),
-        hide: !fixedHeader,
-        action: [
+        disabled: !fixedHeader,
+        disabledReason: '固定 Header 时有效',
+        action: (
           <Switch
             size="small"
             checked={!!autoHideHeader}
             onChange={checked => this.changeSetting('autoHideHeader', checked)}
-          />,
-        ],
+          />
+        ),
       },
       {
         title: formatMessage({ id: 'app.setting.fixedsidebar' }),
-        hide: layout === 'topmenu',
-        action: [
+        disabled: layout === 'topmenu',
+        disabledReason: '侧边菜单布局时有效',
+        action: (
           <Switch
             size="small"
             checked={!!fixSiderbar}
             onChange={checked => this.changeSetting('fixSiderbar', checked)}
-          />,
-        ],
+          />
+        ),
       },
-    ].filter(item => !item.hide);
+    ];
   };
 
   changeSetting = (key, value) => {
@@ -105,6 +111,19 @@ class SettingDrawer extends PureComponent {
   togglerContent = () => {
     const { collapse } = this.state;
     this.setState({ collapse: !collapse });
+  };
+
+  renderLayoutSettingItem = item => {
+    const action = React.cloneElement(item.action, {
+      disabled: item.disabled,
+    });
+    return (
+      <Tooltip title={item.disabled ? item.disabledReason : ''} placement="left">
+        <List.Item actions={[action]}>
+          <span style={{ opacity: item.disabled ? '0.5' : '' }}>{item.title}</span>
+        </List.Item>
+      </Tooltip>
+    );
   };
 
   render() {
@@ -183,7 +202,7 @@ class SettingDrawer extends PureComponent {
           <List
             split={false}
             dataSource={this.getLayoutSetting()}
-            renderItem={item => <List.Item actions={item.action}>{item.title}</List.Item>}
+            renderItem={this.renderLayoutSettingItem}
           />
 
           <Divider />
