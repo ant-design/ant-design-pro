@@ -13,7 +13,7 @@ const PageHeaderWrapper = ({ children, grid, wrapperClassName, top, ...restProps
     <MenuContext.Consumer>
       {value => (
         <PageHeader
-          wide={grid === 'Wide'}
+          wide={grid === 'Fixed'}
           home={<FormattedMessage id="menu.home" defaultMessage="Home" />}
           {...value}
           key="pageheader"
