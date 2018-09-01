@@ -26,7 +26,7 @@ class SettingDrawer extends PureComponent {
     collapse: false,
   };
 
-  getLayOutSetting = () => {
+  getLayoutSetting = () => {
     const {
       setting: { contentWidth, fixedHeader, layout, autoHideHeader, fixSiderbar },
     } = this.props;
@@ -182,7 +182,7 @@ class SettingDrawer extends PureComponent {
 
           <List
             split={false}
-            dataSource={this.getLayOutSetting()}
+            dataSource={this.getLayoutSetting()}
             renderItem={item => <List.Item actions={item.action}>{item.title}</List.Item>}
           />
 
