@@ -84,16 +84,9 @@ class SettingDrawer extends PureComponent {
     const nextState = { ...setting };
     nextState[key] = value;
     if (key === 'layout') {
-      if (value === 'topmenu') {
-        nextState.grid = 'Wide';
-      } else {
-        nextState.grid = 'Fluid';
-      }
-    }
-    if (key === 'fixedHeader') {
-      if (!value) {
-        nextState.autoHideHeader = false;
-      }
+      nextState.grid = value === 'topmenu' ? 'Wide' : 'Fluid';
+    } else if (key === 'fixedHeader' && !value) {
+      nextState.autoHideHeader = false;
     }
     this.setState(nextState, () => {
       const { dispatch } = this.props;
@@ -120,23 +113,13 @@ class SettingDrawer extends PureComponent {
         placement="right"
         handler={
           <div className={styles.handle}>
-            {!collapse ? (
-              <Icon
-                type="setting"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            ) : (
-              <Icon
-                type="close"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            )}
+            <Icon
+              type={collapse ? 'close' : 'setting'}
+              style={{
+                color: '#fff',
+                fontSize: 20,
+              }}
+            />
           </div>
         }
         onHandleClick={this.togglerContent}
