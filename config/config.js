@@ -2,7 +2,7 @@
 const os = require('os');
 const pageRoutes = require('./router.config');
 const webpackplugin = require('./plugin.config');
-const defaultSetting = require('../src/defaultSetting');
+const defaultSettings = require('../src/defaultSettings');
 
 export default {
   // add for transfer to umi
@@ -35,7 +35,7 @@ export default {
   // Theme for antd
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
-    'primary-color': defaultSetting.primaryColor,
+    'primary-color': defaultSettings.primaryColor,
   },
   externals: {
     '@antv/data-set': 'DataSet',
