@@ -28,23 +28,23 @@ class SettingDrawer extends PureComponent {
 
   getLayOutSetting = () => {
     const {
-      setting: { grid, fixedHeader, layout, autoHideHeader, fixSiderbar },
+      setting: { contentWidth, fixedHeader, layout, autoHideHeader, fixSiderbar },
     } = this.props;
     return [
       {
-        title: formatMessage({ id: 'app.setting.gridmode' }),
+        title: formatMessage({ id: 'app.setting.content-width' }),
         action: [
           <Select
-            value={grid}
+            value={contentWidth}
             size="small"
-            onSelect={value => this.changeSetting('grid', value)}
+            onSelect={value => this.changeSetting('contentWidth', value)}
             style={{ width: 80 }}
           >
             <Select.Option value="Fixed">
-              {formatMessage({ id: 'app.setting.gridmode.fixed' })}
+              {formatMessage({ id: 'app.setting.content-width.fixed' })}
             </Select.Option>
             <Select.Option value="Fluid">
-              {formatMessage({ id: 'app.setting.gridmode.fluid' })}
+              {formatMessage({ id: 'app.setting.content-width.fluid' })}
             </Select.Option>
           </Select>,
         ],
@@ -89,7 +89,7 @@ class SettingDrawer extends PureComponent {
     const nextState = { ...setting };
     nextState[key] = value;
     if (key === 'layout') {
-      nextState.grid = value === 'topmenu' ? 'Fixed' : 'Fluid';
+      nextState.contentWidth = value === 'topmenu' ? 'Fixed' : 'Fluid';
     } else if (key === 'fixedHeader' && !value) {
       nextState.autoHideHeader = false;
     }
@@ -140,10 +140,12 @@ class SettingDrawer extends PureComponent {
                 {
                   key: 'dark',
                   url: 'https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg',
+                  title: formatMessage({ id: 'app.setting.pagestyle.dark' }),
                 },
                 {
                   key: 'light',
                   url: 'https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg',
+                  title: formatMessage({ id: 'app.setting.pagestyle.light' }),
                 },
               ]}
               value={navTheme}
@@ -165,10 +167,12 @@ class SettingDrawer extends PureComponent {
                 {
                   key: 'sidemenu',
                   url: 'https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg',
+                  title: formatMessage({ id: 'app.setting.sidemenu' }),
                 },
                 {
                   key: 'topmenu',
                   url: 'https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg',
+                  title: formatMessage({ id: 'app.setting.topmenu' }),
                 },
               ]}
               value={layout}

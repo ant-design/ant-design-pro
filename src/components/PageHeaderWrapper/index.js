@@ -7,13 +7,13 @@ import GridContent from './GridContent';
 import styles from './index.less';
 import MenuContext from '@/layouts/MenuContext';
 
-const PageHeaderWrapper = ({ children, grid, wrapperClassName, top, ...restProps }) => (
+const PageHeaderWrapper = ({ children, contentWidth, wrapperClassName, top, ...restProps }) => (
   <div style={{ margin: '-24px -24px 0' }} className={wrapperClassName}>
     {top}
     <MenuContext.Consumer>
       {value => (
         <PageHeader
-          wide={grid === 'Fixed'}
+          wide={contentWidth === 'Fixed'}
           home={<FormattedMessage id="menu.home" defaultMessage="Home" />}
           {...value}
           key="pageheader"
@@ -37,5 +37,5 @@ const PageHeaderWrapper = ({ children, grid, wrapperClassName, top, ...restProps
 );
 
 export default connect(({ setting }) => ({
-  grid: setting.grid,
+  contentWidth: setting.contentWidth,
 }))(PageHeaderWrapper);
