@@ -18,7 +18,7 @@ const targetTime = new Date().getTime() + 3900000;
 // use permission as a parameter
 const havePermissionAsync = new Promise(resolve => {
   // Call resolve on behalf of passed
-  setTimeout(() => resolve(), 100);
+  setTimeout(() => resolve(), 300);
 });
 @Secured(havePermissionAsync)
 @connect(({ monitor, loading }) => ({

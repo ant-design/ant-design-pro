@@ -78,11 +78,11 @@ class Analysis extends Component {
       dispatch({
         type: 'chart/fetch',
       });
-      setTimeout(() => {
+      this.timeoutId = setTimeout(() => {
         this.setState({
           loading: false,
         });
-      }, 1000);
+      }, 600);
     });
   }
 
@@ -92,6 +92,7 @@ class Analysis extends Component {
       type: 'chart/clear',
     });
     cancelAnimationFrame(this.reqRef);
+    clearTimeout(this.timeoutId);
   }
 
   handleChangeSalesType = e => {
