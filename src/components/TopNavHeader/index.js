@@ -9,13 +9,13 @@ export default class TopNavHeader extends PureComponent {
     super(props);
 
     this.state = {
-      maxWidth: (props.grid === 'Wide' ? 1200 : window.innerWidth) - 324 - 165 - 4,
+      maxWidth: (props.grid === 'Fixed' ? 1200 : window.innerWidth) - 324 - 165 - 4,
     };
   }
 
   static getDerivedStateFromProps(props) {
     return {
-      maxWidth: (props.grid === 'Wide' ? 1200 : window.innerWidth) - 324 - 165 - 4,
+      maxWidth: (props.grid === 'Fixed' ? 1200 : window.innerWidth) - 324 - 165 - 4,
     };
   }
 
@@ -28,7 +28,7 @@ export default class TopNavHeader extends PureComponent {
           ref={ref => {
             this.maim = ref;
           }}
-          className={`${styles.main} ${grid === 'Wide' ? styles.wide : ''}`}
+          className={`${styles.main} ${grid === 'Fixed' ? styles.wide : ''}`}
         >
           <div className={styles.left}>
             <div className={styles.logo} key="logo" id="logo">

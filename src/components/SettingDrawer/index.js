@@ -3,6 +3,7 @@ import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert } f
 import { formatMessage } from 'umi/locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
+import omit from 'omit.js';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import BlockChecbox from './BlockChecbox';
@@ -39,8 +40,8 @@ class SettingDrawer extends PureComponent {
             onSelect={value => this.changeSetting('grid', value)}
             style={{ width: 80 }}
           >
-            <Select.Option value="Wide">
-              {formatMessage({ id: 'app.setting.gridmode.wide' })}
+            <Select.Option value="Fixed">
+              {formatMessage({ id: 'app.setting.gridmode.fixed' })}
             </Select.Option>
             <Select.Option value="Fluid">
               {formatMessage({ id: 'app.setting.gridmode.fluid' })}
@@ -88,7 +89,7 @@ class SettingDrawer extends PureComponent {
     const nextState = { ...setting };
     nextState[key] = value;
     if (key === 'layout') {
-      nextState.grid = value === 'topmenu' ? 'Wide' : 'Fluid';
+      nextState.grid = value === 'topmenu' ? 'Fixed' : 'Fluid';
     } else if (key === 'fixedHeader' && !value) {
       nextState.autoHideHeader = false;
     }
@@ -198,7 +199,7 @@ class SettingDrawer extends PureComponent {
           </Body>
           <Divider />
           <CopyToClipboard
-            text={JSON.stringify(setting)}
+            text={JSON.stringify(omit(setting, ['colorWeak']), null, 2)}
             onCopy={() => message.success(formatMessage({ id: 'app.setting.copyinfo' }))}
           >
             <Button block icon="copy">

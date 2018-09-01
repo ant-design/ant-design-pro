@@ -6,7 +6,7 @@ class GridContent extends PureComponent {
   render() {
     const { grid, children } = this.props;
     let className = `${styles.main}`;
-    if (grid === 'Wide') {
+    if (grid === 'Fixed') {
       className = `${styles.main} ${styles.wide}`;
     }
     return <div className={className}>{children}</div>;
