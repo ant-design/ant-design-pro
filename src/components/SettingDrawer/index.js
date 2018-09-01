@@ -213,7 +213,18 @@ class SettingDrawer extends PureComponent {
           <Alert
             type="warning"
             className={styles.productionHint}
-            message={formatMessage({ id: 'app.setting.production.hint' })}
+            message={
+              <div>
+                {formatMessage({ id: 'app.setting.production.hint' })}{' '}
+                <a
+                  href="https://u.ant.design/pro-v2-default-settings"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  src/defaultSettings.js
+                </a>
+              </div>
+            }
           />
         </div>
       </Drawer>
