@@ -51,7 +51,8 @@ export default {
     getLocalIdent: (context, localIdentName, localName) => {
       if (
         context.resourcePath.includes('node_modules') ||
-        context.resourcePath.includes('ant.design.pro.less')
+        context.resourcePath.includes('ant.design.pro.less') ||
+        context.resourcePath.includes('global.less')
       ) {
         return localName;
       }
