@@ -25,7 +25,7 @@
   "dependencies": {
     "@antv/data-set": "^0.9.0",
     "@babel/runtime": "^7.0.0",
-    "antd": "3.9.0-beta.6",
+    "antd": "^3.9.0",
     "bizcharts": "^3.1.10",
     "bizcharts-plugin-slider": "^2.0.3",
     "classnames": "^2.2.6",
