@@ -14,12 +14,13 @@ const { Option } = Select;
 const FormItem = Form.Item;
 
 /* eslint react/no-array-index-key: 0 */
+export default
 @Form.create()
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-export default class CoverCardList extends PureComponent {
+class CoverCardList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

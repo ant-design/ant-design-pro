@@ -10,6 +10,7 @@ const nullSlectItem = {
   key: '',
 };
 
+export default
 @connect(({ geographic }) => {
   const { province, isLoading, city } = geographic;
   return {
@@ -18,7 +19,7 @@ const nullSlectItem = {
     isLoading,
   };
 })
-export default class GeographicView extends PureComponent {
+class GeographicView extends PureComponent {
   componentDidMount = () => {
     const { dispatch } = this.props;
     dispatch({

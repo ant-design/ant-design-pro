@@ -20,12 +20,14 @@ const havePermissionAsync = new Promise(resolve => {
   // Call resolve on behalf of passed
   setTimeout(() => resolve(), 300);
 });
+
+export default
 @Secured(havePermissionAsync)
 @connect(({ monitor, loading }) => ({
   monitor,
   loading: loading.models.monitor,
 }))
-export default class Monitor extends PureComponent {
+class Monitor extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

@@ -12,12 +12,13 @@ const FormItem = Form.Item;
 
 const pageSize = 5;
 
+export default
 @Form.create()
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-export default class SearchList extends Component {
+class SearchList extends Component {
   componentDidMount() {
     this.fetchMore();
   }

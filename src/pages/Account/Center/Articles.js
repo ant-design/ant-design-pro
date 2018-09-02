@@ -5,10 +5,11 @@ import { connect } from 'dva';
 import stylesArticles from '../../List/Articles.less';
 import styles from './Articles.less';
 
+export default
 @connect(({ list }) => ({
   list,
 }))
-export default class Center extends PureComponent {
+class Center extends PureComponent {
   render() {
     const {
       list: { list },

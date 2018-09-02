@@ -8,10 +8,11 @@ import styles from './Info.less';
 
 const { Item } = Menu;
 
+export default
 @connect(({ user }) => ({
   currentUser: user.currentUser,
 }))
-export default class Info extends Component {
+class Info extends Component {
   constructor(props) {
     super(props);
     const { match, location } = props;

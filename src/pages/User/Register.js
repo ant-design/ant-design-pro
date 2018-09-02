@@ -21,12 +21,13 @@ const passwordProgressMap = {
   poor: 'exception',
 };
 
+export default
 @connect(({ register, loading }) => ({
   register,
   submitting: loading.effects['register/submit'],
 }))
 @Form.create()
-export default class Register extends Component {
+class Register extends Component {
   state = {
     count: 0,
     confirmDirty: false,

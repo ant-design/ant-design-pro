@@ -41,11 +41,12 @@ const progressColumns = [
   },
 ];
 
+export default
 @connect(({ profile, loading }) => ({
   profile,
   loading: loading.effects['profile/fetchBasic'],
 }))
-export default class BasicProfile extends Component {
+class BasicProfile extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
