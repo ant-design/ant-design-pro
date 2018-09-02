@@ -13,6 +13,7 @@ const desc1 = (
       color: 'rgba(0, 0, 0, 0.45)',
       position: 'relative',
       left: 42,
+      textAlign: 'left',
     }}
   >
     <div style={{ margin: '8px 0 4px' }}>
