@@ -1,6 +1,10 @@
-[Русский](./README.ru-RU.md)  | [English](./README.md) | 简体中文
+[English](./README.md) | 简体中文 | [Русский](./README.ru-RU.md)
 
-# Ant Design Pro
+<h1 align="center">Ant Design Pro</h1>
+
+<div align="center">
+
+开箱即用的中台前端/设计解决方案。
 
 [![](https://img.shields.io/travis/ant-design/ant-design-pro/master.svg?style=flat-square)](https://travis-ci.org/ant-design/ant-design-pro)
 [![Build status](https://ci.appveyor.com/api/projects/status/67fxu2by3ibvqtat/branch/master?svg=true)](https://ci.appveyor.com/project/afc163/ant-design-pro/branch/master)
@@ -8,9 +12,9 @@
 [![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro?type=dev)
 [![Gitter](https://badges.gitter.im/ant-design/ant-design-pro.svg)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-开箱即用的中台前端/设计解决方案。
-
 ![](https://gw.alipayobjects.com/zos/rmsportal/xEdBqwSzvoSapmnSnYjU.png)
+
+</div>
 
 - 预览：http://preview.pro.ant.design
 - 首页：http://pro.ant.design/index-cn
