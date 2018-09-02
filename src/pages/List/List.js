@@ -4,8 +4,9 @@ import { connect } from 'dva';
 import { Input } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
+export default
 @connect()
-export default class SearchList extends Component {
+class SearchList extends Component {
   handleTabChange = key => {
     const { match } = this.props;
     switch (key) {

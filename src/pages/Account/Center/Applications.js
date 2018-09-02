@@ -5,10 +5,11 @@ import { connect } from 'dva';
 import { formatWan } from '@/utils/utils';
 import stylesApplications from '../../List/Applications.less';
 
+export default
 @connect(({ list }) => ({
   list,
 }))
-export default class Center extends PureComponent {
+class Center extends PureComponent {
   render() {
     const {
       list: { list },

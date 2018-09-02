@@ -180,11 +180,12 @@ const columns = [
   },
 ];
 
+export default
 @connect(({ profile, loading }) => ({
   profile,
   loading: loading.effects['profile/fetchAdvanced'],
 }))
-export default class AdvancedProfile extends Component {
+class AdvancedProfile extends Component {
   state = {
     operationkey: 'tab1',
     stepDirection: 'horizontal',

@@ -6,6 +6,7 @@ import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import styles from './Center.less';
 
+export default
 @connect(({ loading, user, project }) => ({
   listLoading: loading.effects['list/fetch'],
   currentUser: user.currentUser,
@@ -13,7 +14,7 @@ import styles from './Center.less';
   project,
   projectLoading: loading.effects['project/fetchNotice'],
 }))
-export default class Center extends PureComponent {
+class Center extends PureComponent {
   state = {
     newTags: [],
     inputVisible: false,

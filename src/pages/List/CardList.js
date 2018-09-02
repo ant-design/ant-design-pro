@@ -7,11 +7,12 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from './CardList.less';
 
+export default
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-export default class CardList extends PureComponent {
+class CardList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

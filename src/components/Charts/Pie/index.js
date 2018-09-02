@@ -11,8 +11,9 @@ import autoHeight from '../autoHeight';
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
+export default
 @autoHeight()
-export default class Pie extends Component {
+class Pie extends Component {
   state = {
     legendData: [],
     legendBlock: false,

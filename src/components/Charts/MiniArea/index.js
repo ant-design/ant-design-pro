@@ -3,8 +3,9 @@ import { Chart, Axis, Tooltip, Geom } from 'bizcharts';
 import autoHeight from '../autoHeight';
 import styles from '../index.less';
 
+export default
 @autoHeight()
-export default class MiniArea extends React.PureComponent {
+class MiniArea extends React.PureComponent {
   render() {
     const {
       height,

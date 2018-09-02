@@ -32,12 +32,13 @@ const RadioGroup = Radio.Group;
 const SelectOption = Select.Option;
 const { Search, TextArea } = Input;
 
+export default
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
 @Form.create()
-export default class BasicList extends PureComponent {
+class BasicList extends PureComponent {
   state = { visible: false, done: false };
 
   formLayout = {
