@@ -20,30 +20,36 @@
   li {
     .clearfix();
     margin-top: 16px;
+    display: flex;
+    align-items: center;
     span {
       color: @text-color;
       font-size: 14px;
       line-height: 22px;
     }
-    span:first-child {
+    .rankingItemNumber {
       background-color: @background-color-base;
       border-radius: 20px;
       display: inline-block;
       font-size: 12px;
       font-weight: 600;
-      margin-right: 24px;
+      margin-right: 16px;
       height: 20px;
       line-height: 20px;
       width: 20px;
       text-align: center;
+      margin-top: 1.5px;
+      &.active {
+        background-color: #314659;
+        color: #fff;
+      }
     }
-    span.active {
-      //background-color: @primary-color;
-      background-color: #314659;
-      color: #fff;
-    }
-    span:last-child {
-      float: right;
+    .rankingItemTitle {
+      flex: 1;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-right: 8px;
     }
   }
 }
