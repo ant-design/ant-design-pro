@@ -188,7 +188,7 @@ export default [
             path: '/exception/trigger',
             name: 'trigger',
             hideInMenu: true,
-            component: './Exception/triggerException',
+            component: './Exception/TriggerException',
           },
         ],
       },
