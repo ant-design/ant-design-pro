@@ -50,7 +50,7 @@
     "react-fittext": "^1.0.0",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",
-    "umi": "^2.0.0-beta.10"
+    "umi": "^2.0.0-rc.1"
   },
   "devDependencies": {
     "@types/react": "^16.4.11",
@@ -79,7 +79,7 @@
     "stylelint": "^9.4.0",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.0.0",
-    "umi-plugin-react": "^1.0.0-beta.10"
+    "umi-plugin-react": "^1.0.0-rc.1"
   },
   "optionalDependencies": {
     "puppeteer": "^1.6.0"
