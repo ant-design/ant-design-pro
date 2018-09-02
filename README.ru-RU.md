@@ -58,6 +58,9 @@ UI-решение "из коробки" для корпоративных при
 - Profile
   - Simple Profile
   - Advanced Profile
+- Account
+  - Account Center
+  - Account Settings
 - Result
   - Success
   - Failed

@@ -58,6 +58,9 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 - Profile
   - Simple Profile
   - Advanced Profile
+- Account
+  - Account Center
+  - Account Settings
 - Result
   - Success
   - Failed
