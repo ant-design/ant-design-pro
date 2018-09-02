@@ -94,6 +94,9 @@ export default class PageHeader extends PureComponent {
     // Loop data mosaic routing
     const extraBreadcrumbItems = pathSnippets.map((url, index) => {
       const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
+      if (currentBreadcrumb.inherited) {
+        return null;
+      }
       const isLinkable = index !== pathSnippets.length - 1 && currentBreadcrumb.component;
       const name = itemRender ? itemRender(currentBreadcrumb) : currentBreadcrumb.name;
       return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
