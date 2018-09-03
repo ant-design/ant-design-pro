@@ -32,6 +32,9 @@ export default {
       },
     ],
   ],
+  define: {
+    APP_TYPE: process.env.APP_TYPE,
+  },
   // 路由配置
   routes: pageRoutes,
   // Theme for antd
