@@ -78,11 +78,11 @@ class Analysis extends Component {
       dispatch({
         type: 'chart/fetch',
       });
-      setTimeout(() => {
+      this.timeoutId = setTimeout(() => {
         this.setState({
           loading: false,
         });
-      }, 1000);
+      }, 600);
     });
   }
 
@@ -92,6 +92,7 @@ class Analysis extends Component {
       type: 'chart/clear',
     });
     cancelAnimationFrame(this.reqRef);
+    clearTimeout(this.timeoutId);
   }
 
   handleChangeSalesType = e => {
@@ -455,9 +456,19 @@ class Analysis extends Component {
                       <ul className={styles.rankingList}>
                         {this.rankingListData.map((item, i) => (
                           <li key={item.title}>
-                            <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
-                            <span>{item.title}</span>
-                            <span>{numeral(item.total).format('0,0')}</span>
+                            <span
+                              className={`${styles.rankingItemNumber} ${
+                                i < 3 ? styles.active : ''
+                              }`}
+                            >
+                              {i + 1}
+                            </span>
+                            <span className={styles.rankingItemTitle} title={item.title}>
+                              {item.title}
+                            </span>
+                            <span className={styles.rankingItemValue}>
+                              {numeral(item.total).format('0,0')}
+                            </span>
                           </li>
                         ))}
                       </ul>

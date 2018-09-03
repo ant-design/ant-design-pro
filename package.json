@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0",
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
@@ -24,7 +24,7 @@
   "dependencies": {
     "@antv/data-set": "^0.9.0",
     "@babel/runtime": "^7.0.0",
-    "antd": "3.9.0-beta.2",
+    "antd": "^3.9.0",
     "axios": "^0.18.0",
     "bizcharts": "^3.1.10",
     "bizcharts-plugin-slider": "^2.0.3",
@@ -61,7 +61,7 @@
     "@types/react-dom": "^16.0.6",
     "antd-pro-merge-less": "^0.0.9",
     "antd-pro-theme-webpack-plugin": "^1.1.8",
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "^9.0.0",
     "cross-env": "^5.1.1",
     "cross-port-killer": "^1.0.1",
     "enzyme": "^3.4.4",

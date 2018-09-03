@@ -266,12 +266,13 @@ class UpdateForm extends PureComponent {
 }
 
 /* eslint react/no-multi-comp:0 */
+export default
 @connect(({ rule, loading }) => ({
   rule,
   loading: loading.models.rule,
 }))
 @Form.create()
-export default class TableList extends PureComponent {
+class TableList extends PureComponent {
   state = {
     modalVisible: false,
     updateModalVisible: false,

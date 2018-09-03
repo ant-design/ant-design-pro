@@ -5,10 +5,11 @@ import router from 'umi/router';
 import Result from '@/components/Result';
 import styles from './style.less';
 
+export default
 @connect(({ form }) => ({
   data: form.step,
 }))
-export default class Step3 extends React.PureComponent {
+class Step3 extends React.PureComponent {
   render() {
     const { data } = this.props;
     const onFinish = () => {

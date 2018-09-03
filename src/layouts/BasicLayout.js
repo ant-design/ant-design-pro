@@ -217,22 +217,24 @@ class BasicLayout extends React.PureComponent {
 
   render() {
     const {
-      silderTheme,
+      navTheme,
       layout: PropsLayout,
       children,
       location: { pathname },
     } = this.props;
     const { rendering, isMobile } = this.state;
     const isTop = PropsLayout === 'topmenu';
+    const menuData = this.getMenuData();
     const layout = (
       <Layout>
         {isTop && !isMobile ? null : (
           <SiderMenu
             logo={logo}
             Authorized={Authorized}
-            theme={silderTheme}
+            theme={navTheme}
             onCollapse={this.handleMenuCollapse}
-            menuData={this.getMenuData()}
+            menuData={menuData}
+            isMobile={isMobile}
             {...this.props}
           />
         )}
@@ -242,7 +244,13 @@ class BasicLayout extends React.PureComponent {
             minHeight: '100vh',
           }}
         >
-          <Header handleMenuCollapse={this.handleMenuCollapse} logo={logo} {...this.props} />
+          <Header
+            menuData={menuData}
+            handleMenuCollapse={this.handleMenuCollapse}
+            logo={logo}
+            isMobile={isMobile}
+            {...this.props}
+          />
           <Content style={this.getContentStyle()}>{children}</Content>
           <Footer />
         </Layout>

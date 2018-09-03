@@ -5,8 +5,9 @@ import autoHeight from '../autoHeight';
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
+export default
 @autoHeight()
-export default class Radar extends Component {
+class Radar extends Component {
   state = {
     legendData: [],
   };

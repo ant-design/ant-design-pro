@@ -28,12 +28,12 @@ export default class PageHeader extends PureComponent {
   }
 
   componentDidUpdate(preProps) {
-    const {
-      tabActiveKey,
-      location: { pathname },
-    } = this.props;
+    const { location } = this.props;
+    if (!location || !preProps.location) {
+      return;
+    }
     const prePathname = preProps.location.pathname;
-    if (preProps.tabActiveKey !== tabActiveKey || prePathname !== pathname) {
+    if (prePathname !== location.pathname) {
       this.getBreadcrumbDom();
     }
   }
@@ -94,6 +94,9 @@ export default class PageHeader extends PureComponent {
     // Loop data mosaic routing
     const extraBreadcrumbItems = pathSnippets.map((url, index) => {
       const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
+      if (currentBreadcrumb.inherited) {
+        return null;
+      }
       const isLinkable = index !== pathSnippets.length - 1 && currentBreadcrumb.component;
       const name = itemRender ? itemRender(currentBreadcrumb) : currentBreadcrumb.name;
       return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (

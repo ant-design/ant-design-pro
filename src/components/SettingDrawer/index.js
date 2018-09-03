@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react';
-import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert } from 'antd';
+import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert, Tooltip } from 'antd';
 import { formatMessage } from 'umi/locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
+import omit from 'omit.js';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import BlockChecbox from './BlockChecbox';
+
+const { Option } = Select;
 
 const Body = ({ children, title, style }) => (
   <div
@@ -21,62 +24,70 @@ const Body = ({ children, title, style }) => (
 
 @connect(({ setting }) => ({ setting }))
 class SettingDrawer extends PureComponent {
-  getLayOutSetting = () => {
+  state = {
+    collapse: false,
+  };
+
+  getLayoutSetting = () => {
     const {
-      setting: { grid, fixedHeader, layout, autoHideHeader, fixSiderbar },
+      setting: { contentWidth, fixedHeader, layout, autoHideHeader, fixSiderbar },
     } = this.props;
     return [
       {
-        title: formatMessage({ id: 'app.setting.gridmode' }),
-        action: [
+        title: formatMessage({ id: 'app.setting.content-width' }),
+        action: (
           <Select
-            value={grid}
+            value={contentWidth}
             size="small"
-            onSelect={value => this.changeSetting('grid', value)}
+            onSelect={value => this.changeSetting('contentWidth', value)}
             style={{ width: 80 }}
           >
-            <Select.Option value="Wide">
-              {formatMessage({ id: 'app.setting.gridmode.wide' })}
-            </Select.Option>
-            <Select.Option value="Fluid">
-              {formatMessage({ id: 'app.setting.gridmode.fluid' })}
-            </Select.Option>
-          </Select>,
-        ],
+            {layout === 'sidemenu' ? null : (
+              <Option value="Fixed">
+                {formatMessage({ id: 'app.setting.content-width.fixed' })}
+              </Option>
+            )}
+            <Option value="Fluid">
+              {formatMessage({ id: 'app.setting.content-width.fluid' })}
+            </Option>
+          </Select>
+        ),
       },
       {
         title: formatMessage({ id: 'app.setting.fixedheader' }),
-        action: [
+        action: (
           <Switch
             size="small"
             checked={!!fixedHeader}
             onChange={checked => this.changeSetting('fixedHeader', checked)}
-          />,
-        ],
+          />
+        ),
       },
       {
         title: formatMessage({ id: 'app.setting.hideheader' }),
-        hide: !fixedHeader,
-        action: [
+        disabled: !fixedHeader,
+        disabledReason: formatMessage({ id: 'app.setting.hideheader.hint' }),
+        action: (
           <Switch
             size="small"
             checked={!!autoHideHeader}
             onChange={checked => this.changeSetting('autoHideHeader', checked)}
-          />,
-        ],
+          />
+        ),
       },
       {
         title: formatMessage({ id: 'app.setting.fixedsidebar' }),
-        hide: layout === 'topmenu',
-        action: [
+        disabled: layout === 'topmenu',
+        disabledReason: formatMessage({ id: 'app.setting.fixedsidebar.hint' }),
+        action: (
           <Switch
             size="small"
             checked={!!fixSiderbar}
             onChange={checked => this.changeSetting('fixSiderbar', checked)}
-          />,
-        ],
+          />
+        ),
       },
-    ].filter(item => !item.hide);
+    ];
   };
 
   changeSetting = (key, value) => {
@@ -84,16 +95,9 @@ class SettingDrawer extends PureComponent {
     const nextState = { ...setting };
     nextState[key] = value;
     if (key === 'layout') {
-      if (value === 'topmenu') {
-        nextState.grid = 'Wide';
-      } else {
-        nextState.grid = 'Fluid';
-      }
-    }
-    if (key === 'fixedHeader') {
-      if (!value) {
-        nextState.autoHideHeader = false;
-      }
+      nextState.contentWidth = value === 'topmenu' ? 'Fixed' : 'Fluid';
+    } else if (key === 'fixedHeader' && !value) {
+      nextState.autoHideHeader = false;
     }
     this.setState(nextState, () => {
       const { dispatch } = this.props;
@@ -105,13 +109,27 @@ class SettingDrawer extends PureComponent {
   };
 
   togglerContent = () => {
-    const { setting } = this.props;
-    this.changeSetting('collapse', !setting.collapse);
+    const { collapse } = this.state;
+    this.setState({ collapse: !collapse });
+  };
+
+  renderLayoutSettingItem = item => {
+    const action = React.cloneElement(item.action, {
+      disabled: item.disabled,
+    });
+    return (
+      <Tooltip title={item.disabled ? item.disabledReason : ''} placement="left">
+        <List.Item actions={[action]}>
+          <span style={{ opacity: item.disabled ? '0.5' : '' }}>{item.title}</span>
+        </List.Item>
+      </Tooltip>
+    );
   };
 
   render() {
     const { setting } = this.props;
-    const { collapse, silderTheme, primaryColor, layout, colorWeak } = setting;
+    const { navTheme, primaryColor, layout, colorWeak } = setting;
+    const { collapse } = this.state;
     return (
       <Drawer
         visible={collapse}
@@ -120,23 +138,13 @@ class SettingDrawer extends PureComponent {
         placement="right"
         handler={
           <div className={styles.handle}>
-            {!collapse ? (
-              <Icon
-                type="setting"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            ) : (
-              <Icon
-                type="close"
-                style={{
-                  color: '#FFF',
-                  fontSize: 20,
-                }}
-              />
-            )}
+            <Icon
+              type={collapse ? 'close' : 'setting'}
+              style={{
+                color: '#fff',
+                fontSize: 20,
+              }}
+            />
           </div>
         }
         onHandleClick={this.togglerContent}
@@ -151,14 +159,16 @@ class SettingDrawer extends PureComponent {
                 {
                   key: 'dark',
                   url: 'https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg',
+                  title: formatMessage({ id: 'app.setting.pagestyle.dark' }),
                 },
                 {
                   key: 'light',
                   url: 'https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg',
+                  title: formatMessage({ id: 'app.setting.pagestyle.light' }),
                 },
               ]}
-              value={silderTheme}
-              onChange={value => this.changeSetting('silderTheme', value)}
+              value={navTheme}
+              onChange={value => this.changeSetting('navTheme', value)}
             />
           </Body>
 
@@ -176,10 +186,12 @@ class SettingDrawer extends PureComponent {
                 {
                   key: 'sidemenu',
                   url: 'https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg',
+                  title: formatMessage({ id: 'app.setting.sidemenu' }),
                 },
                 {
                   key: 'topmenu',
                   url: 'https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg',
+                  title: formatMessage({ id: 'app.setting.topmenu' }),
                 },
               ]}
               value={layout}
@@ -189,8 +201,8 @@ class SettingDrawer extends PureComponent {
 
           <List
             split={false}
-            dataSource={this.getLayOutSetting()}
-            renderItem={item => <List.Item actions={item.action}>{item.title}</List.Item>}
+            dataSource={this.getLayoutSetting()}
+            renderItem={this.renderLayoutSettingItem}
           />
 
           <Divider />
@@ -210,7 +222,7 @@ class SettingDrawer extends PureComponent {
           </Body>
           <Divider />
           <CopyToClipboard
-            text={JSON.stringify(setting)}
+            text={JSON.stringify(omit(setting, ['colorWeak']), null, 2)}
             onCopy={() => message.success(formatMessage({ id: 'app.setting.copyinfo' }))}
           >
             <Button block icon="copy">
@@ -220,7 +232,18 @@ class SettingDrawer extends PureComponent {
           <Alert
             type="warning"
             className={styles.productionHint}
-            message={formatMessage({ id: 'app.setting.production.hint' })}
+            message={
+              <div>
+                {formatMessage({ id: 'app.setting.production.hint' })}{' '}
+                <a
+                  href="https://u.ant.design/pro-v2-default-settings"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  src/defaultSettings.js
+                </a>
+              </div>
+            }
           />
         </div>
       </Drawer>

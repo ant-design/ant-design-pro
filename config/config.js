@@ -1,8 +1,8 @@
 // https://umijs.org/config/
-const os = require('os');
-const pageRoutes = require('./router.config');
-const webpackplugin = require('./plugin.config');
-const defaultSetting = require('../src/defaultSetting');
+import os from 'os';
+import pageRoutes from './router.config';
+import webpackplugin from './plugin.config';
+import defaultSettings from '../src/defaultSettings';
 
 export default {
   // add for transfer to umi
@@ -19,7 +19,9 @@ export default {
           default: 'zh-CN', // default zh-CN
           baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
         },
-        dynamicImport: true,
+        dynamicImport: {
+          loadingComponent: './components/PageLoading/index',
+        },
         polyfills: ['ie11'],
         ...(!process.env.TEST && os.platform() === 'darwin'
           ? {
@@ -35,7 +37,7 @@ export default {
   // Theme for antd
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
-    'primary-color': defaultSetting.primaryColor,
+    'primary-color': defaultSettings.primaryColor,
   },
   externals: {
     '@antv/data-set': 'DataSet',
@@ -49,7 +51,8 @@ export default {
     getLocalIdent: (context, localIdentName, localName) => {
       if (
         context.resourcePath.includes('node_modules') ||
-        context.resourcePath.includes('ant.design.pro.less')
+        context.resourcePath.includes('ant.design.pro.less') ||
+        context.resourcePath.includes('global.less')
       ) {
         return localName;
       }

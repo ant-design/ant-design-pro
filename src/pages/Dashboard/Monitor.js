@@ -18,14 +18,16 @@ const targetTime = new Date().getTime() + 3900000;
 // use permission as a parameter
 const havePermissionAsync = new Promise(resolve => {
   // Call resolve on behalf of passed
-  setTimeout(() => resolve(), 100);
+  setTimeout(() => resolve(), 300);
 });
+
+export default
 @Secured(havePermissionAsync)
 @connect(({ monitor, loading }) => ({
   monitor,
   loading: loading.models.monitor,
 }))
-export default class Monitor extends PureComponent {
+class Monitor extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

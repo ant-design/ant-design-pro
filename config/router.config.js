@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   // user
   {
     path: '/user',
@@ -201,7 +201,7 @@ module.exports = [
             path: '/exception/trigger',
             name: 'trigger',
             hideInMenu: true,
-            component: './Exception/triggerException',
+            component: './Exception/TriggerException',
           },
         ],
       },
@@ -261,6 +261,9 @@ module.exports = [
             ],
           },
         ],
+      },
+      {
+        component: '404',
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import defaultSetting from '../defaultSetting';
+import defaultSettings from '../defaultSettings';
 
 let lessNodesAppended;
 const updateTheme = primaryColor => {
@@ -64,7 +64,7 @@ const updateColorWeak = colorWeak => {
 
 export default {
   namespace: 'setting',
-  state: defaultSetting,
+  state: defaultSettings,
   reducers: {
     getSetting(state) {
       const setting = {};
@@ -87,7 +87,7 @@ export default {
     },
     changeSetting(state, { payload }) {
       const urlParams = new URL(window.location.href);
-      Object.keys(defaultSetting).forEach(key => {
+      Object.keys(defaultSettings).forEach(key => {
         if (urlParams.searchParams.has(key)) {
           urlParams.searchParams.delete(key);
         }
@@ -100,7 +100,7 @@ export default {
         if (value === true) {
           value = 1;
         }
-        if (defaultSetting[key] !== value) {
+        if (defaultSettings[key] !== value) {
           urlParams.searchParams.set(key, value);
         }
       });

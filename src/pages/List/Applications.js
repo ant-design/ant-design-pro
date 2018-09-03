@@ -12,12 +12,13 @@ import styles from './Applications.less';
 const { Option } = Select;
 const FormItem = Form.Item;
 
+export default
 @Form.create()
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-export default class FilterCardList extends PureComponent {
+class FilterCardList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

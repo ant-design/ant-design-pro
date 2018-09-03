@@ -1,6 +1,8 @@
 import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
+
+import { isAntdPro } from './utils';
 import * as AppInfo from '@/common/config/AppInfo';
 import cookie from 'react-cookies';
 import ax from './axiosWrap';
@@ -63,7 +65,12 @@ const cachedSave = (response, hashcode) => {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options = {}) {
+export default function request(
+  url,
+  options = {
+    expirys: isAntdPro(),
+  }
+) {
   /**
    * Produce fingerprints based on url and parameters
    * Maybe url has the same parameters

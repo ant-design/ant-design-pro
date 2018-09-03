@@ -53,7 +53,7 @@ export default class HeaderSearch extends PureComponent {
     const { onChange } = this.props;
     this.setState({ value });
     if (onChange) {
-      onChange();
+      onChange(value);
     }
   };
 

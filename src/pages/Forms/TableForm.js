@@ -107,10 +107,10 @@ export default class TableForm extends PureComponent {
         });
         return;
       }
-      const { data } = this.state;
-      const { onChange } = this.props;
       delete target.isNew;
       this.toggleEditable(e, key);
+      const { data } = this.state;
+      const { onChange } = this.props;
       onChange(data);
       this.setState({
         loading: false,
@@ -126,9 +126,9 @@ export default class TableForm extends PureComponent {
     const target = this.getRowByKey(key, newData);
     if (this.cacheOriginData[key]) {
       Object.assign(target, this.cacheOriginData[key]);
-      target.editable = false;
       delete this.cacheOriginData[key];
     }
+    target.editable = false;
     this.setState({ data: newData });
     this.clickedCancel = false;
   }
