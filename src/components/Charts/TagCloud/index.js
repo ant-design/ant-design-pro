@@ -19,25 +19,30 @@ class TagCloud extends Component {
   };
 
   componentDidMount() {
-    this.initTagCloud();
-    this.renderChart();
-    window.addEventListener('resize', this.resize);
+    requestAnimationFrame(() => {
+      this.initTagCloud();
+      this.renderChart();
+    });
+    window.addEventListener('resize', this.resize, { passive: true });
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(preProps) {
     const { data } = this.props;
-    if (JSON.stringify(nextProps.data) !== JSON.stringify(data)) {
-      this.renderChart(nextProps);
+    if (JSON.stringify(preProps.data) !== JSON.stringify(data)) {
+      this.renderChart(this.props);
     }
   }
 
   componentWillUnmount() {
     this.isUnmount = true;
+    window.cancelAnimationFrame(this.requestRef);
     window.removeEventListener('resize', this.resize);
   }
 
   resize = () => {
-    this.renderChart();
+    this.requestRef = requestAnimationFrame(() => {
+      this.renderChart();
+    });
   };
 
   saveRootRef = node => {

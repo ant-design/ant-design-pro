@@ -11,49 +11,52 @@ import autoHeight from '../autoHeight';
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
+export default
 @autoHeight()
-export default class Pie extends Component {
+class Pie extends Component {
   state = {
     legendData: [],
     legendBlock: false,
   };
 
   componentDidMount() {
-    this.getLegendData();
-    this.resize();
-    window.addEventListener('resize', this.resize);
+    window.addEventListener(
+      'resize',
+      () => {
+        this.requestRef = requestAnimationFrame(() => this.resize());
+      },
+      { passive: true }
+    );
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(preProps) {
     const { data } = this.props;
-    if (data !== nextProps.data) {
+    if (data !== preProps.data) {
       // because of charts data create when rendered
       // so there is a trick for get rendered time
-      const { legendData } = this.state;
-      this.setState(
-        {
-          legendData: [...legendData],
-        },
-        () => {
-          this.getLegendData();
-        }
-      );
+      this.getLegendData();
     }
   }
 
   componentWillUnmount() {
+    window.cancelAnimationFrame(this.requestRef);
     window.removeEventListener('resize', this.resize);
     this.resize.cancel();
   }
 
   getG2Instance = chart => {
     this.chart = chart;
+    requestAnimationFrame(() => {
+      this.getLegendData();
+      this.resize();
+    });
   };
 
   // for custom lengend view
   getLegendData = () => {
     if (!this.chart) return;
     const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
+    if (!geom) return;
     const items = geom.get('dataArray') || []; // 获取图形对应的
 
     const legendData = items.map(item => {
@@ -96,11 +99,11 @@ export default class Pie extends Component {
   @Debounce(300)
   resize() {
     const { hasLegend } = this.props;
+    const { legendBlock } = this.state;
     if (!hasLegend || !this.root) {
       window.removeEventListener('resize', this.resize);
       return;
     }
-    const { legendBlock } = this.state;
     if (this.root.parentNode.clientWidth <= 380) {
       if (!legendBlock) {
         this.setState({
@@ -149,9 +152,9 @@ export default class Pie extends Component {
     let tooltip = propsTooltip;
 
     const defaultColors = colors;
-    // let data = this.props.data || [];
-    // let selected = this.props.selected || true;
-    // let tooltip = this.props.tooltip || true;
+    data = data || [];
+    selected = selected || true;
+    tooltip = tooltip || true;
     let formatColor;
 
     const scale = {
@@ -170,9 +173,8 @@ export default class Pie extends Component {
       formatColor = value => {
         if (value === '占比') {
           return color || 'rgba(24, 144, 255, 0.85)';
-        } else {
-          return '#F0F2F5';
         }
+        return '#F0F2F5';
       };
 
       data = [
@@ -255,7 +257,7 @@ export default class Pie extends Component {
                 <span className={styles.legendTitle}>{item.x}</span>
                 <Divider type="vertical" />
                 <span className={styles.percent}>
-                  {`${(isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}
+                  {`${(Number.isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}
                 </span>
                 <span className={styles.value}>{valueFormat ? valueFormat(item.y) : item.y}</span>
               </li>

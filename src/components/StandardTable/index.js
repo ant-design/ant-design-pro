@@ -24,30 +24,25 @@ class StandardTable extends PureComponent {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps) {
     // clean state
     if (nextProps.selectedRows.length === 0) {
       const needTotalList = initTotalList(nextProps.columns);
-      this.setState({
+      return {
         selectedRowKeys: [],
         needTotalList,
-      });
+      };
     }
+    return null;
   }
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
-    const { needTotalList: list } = this.state;
+    let { needTotalList } = this.state;
+    needTotalList = needTotalList.map(item => ({
+      ...item,
+      total: selectedRows.reduce((sum, val) => sum + parseFloat(val[item.dataIndex], 10), 0),
+    }));
     const { onSelectRow } = this.props;
-    let needTotalList = [...list];
-    needTotalList = needTotalList.map(item => {
-      return {
-        ...item,
-        total: selectedRows.reduce((sum, val) => {
-          return sum + parseFloat(val[item.dataIndex], 10);
-        }, 0),
-      };
-    });
-
     if (onSelectRow) {
       onSelectRow(selectedRows);
     }
@@ -57,7 +52,9 @@ class StandardTable extends PureComponent {
 
   handleTableChange = (pagination, filters, sorter) => {
     const { onChange } = this.props;
-    onChange(pagination, filters, sorter);
+    if (onChange) {
+      onChange(pagination, filters, sorter);
+    }
   };
 
   cleanSelectedKeys = () => {

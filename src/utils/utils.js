@@ -1,4 +1,5 @@
 import moment from 'moment';
+import React from 'react';
 import { parse, stringify } from 'qs';
 
 export function fixedZero(val) {
@@ -46,11 +47,8 @@ export function getTimeDistance(type) {
     ];
   }
 
-  if (type === 'year') {
-    const year = now.getFullYear();
-
-    return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)];
-  }
+  const year = now.getFullYear();
+  return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)];
 }
 
 export function getPlainNode(nodeList, parentPath = '') {
@@ -114,7 +112,8 @@ function getRelation(str1, str2) {
   const arr2 = str2.split('/');
   if (arr2.every((item, index) => item === arr1[index])) {
     return 1;
-  } else if (arr1.every((item, index) => item === arr2[index])) {
+  }
+  if (arr1.every((item, index) => item === arr2[index])) {
     return 2;
   }
   return 3;
@@ -179,4 +178,36 @@ const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(
 
 export function isUrl(path) {
   return reg.test(path);
+}
+
+export function formatWan(val) {
+  const v = val * 1;
+  if (!v || Number.isNaN(v)) return '';
+
+  let result = val;
+  if (val > 10000) {
+    result = Math.floor(val / 10000);
+    result = (
+      <span>
+        {result}
+        <span
+          styles={{
+            position: 'relative',
+            top: -2,
+            fontSize: 14,
+            fontStyle: 'normal',
+            lineHeight: 20,
+            marginLeft: 2,
+          }}
+        >
+          万
+        </span>
+      </span>
+    );
+  }
+  return result;
+}
+
+export function isAntdPro() {
+  return window.location.hostname === 'preview.pro.ant.design';
 }

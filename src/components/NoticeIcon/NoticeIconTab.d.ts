@@ -1,6 +1,6 @@
 import * as React from 'react';
 export interface INoticeIconData {
-  avatar?: string;
+  avatar?: string|React.ReactNode;
   title?: React.ReactNode;
   description?: React.ReactNode;
   datetime?: React.ReactNode;
@@ -14,6 +14,7 @@ export interface INoticeIconTabProps {
   emptyText?: React.ReactNode;
   emptyImage?: string;
   style?: React.CSSProperties;
+  showClear?: boolean;
 }
 
 export default class NoticeIconTab extends React.Component<INoticeIconTabProps, any> {}
