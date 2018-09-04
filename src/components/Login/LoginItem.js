@@ -8,6 +8,10 @@ import LoginContext from './loginContext';
 const FormItem = Form.Item;
 
 class WarpFormItem extends Component {
+  static defaultProps = {
+    buttonText: '获取验证码',
+  };
+
   constructor(props) {
     super(props);
     this.state = {

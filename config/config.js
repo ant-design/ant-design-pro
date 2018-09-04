@@ -25,13 +25,19 @@ export default {
         polyfills: ['ie11'],
         ...(!process.env.TEST && os.platform() === 'darwin'
           ? {
-              dll: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+              dll: {
+                include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+                exclude: ['@babel/runtime'],
+              },
               hardSource: true,
             }
           : {}),
       },
     ],
   ],
+  define: {
+    APP_TYPE: process.env.APP_TYPE || '',
+  },
   // 路由配置
   routes: pageRoutes,
   // Theme for antd

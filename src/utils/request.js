@@ -140,6 +140,7 @@ export default function request(
   return ax
     .request(config)
     .then(checkStatus)
+    .then(response => cachedSave(response, hashcode))
     .then(response => {
       return response.data;
     })

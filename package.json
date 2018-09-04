@@ -5,10 +5,10 @@
   "private": true,
   "scripts": {
     "presite": "npm run generate-mock && cd functions && npm install",
-    "start": "umi dev",
+    "start": "cross-env APP_TYPE=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "build": "umi build",
-    "site": "npm run presite && npm run build && firebase deploy",
+    "site": "npm run presite && cross-env APP_TYPE=site npm run build && firebase deploy",
     "analyze": "cross-env ANALYZE=1 umi build",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@antv/data-set": "^0.9.0",
+    "@babel/polyfill": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "antd": "^3.9.0",
     "axios": "^0.18.0",
@@ -52,11 +53,12 @@
     "react-dom": "^16.4.2",
     "react-fittext": "^1.0.0",
     "react-router-config": "^1.0.0-beta.4",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^4.3.1"
     "screenfull": "^3.3.2",
-    "umi": "^2.0.0-beta.10"
   },
   "devDependencies": {
+    "umi": "^2.0.0",
+    "umi-plugin-react": "^1.0.0",
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.6",
     "antd-pro-merge-less": "^0.0.9",
@@ -82,8 +84,7 @@
     "pro-download": "^1.0.1",
     "stylelint": "^9.4.0",
     "stylelint-config-prettier": "^4.0.0",
-    "stylelint-config-standard": "^18.0.0",
-    "umi-plugin-react": "^1.0.0-beta.10"
+    "stylelint-config-standard": "^18.0.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,less}": [
