@@ -22,7 +22,7 @@ export default {
         dynamicImport: {
           loadingComponent: './components/PageLoading/index',
         },
-        polyfills: ['ie9'],
+        polyfills: ['ie11'],
         ...(!process.env.TEST && os.platform() === 'darwin'
           ? {
               dll: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
