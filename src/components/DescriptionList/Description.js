@@ -10,8 +10,7 @@ const Description = ({ term, column, className, children, ...restProps }) => {
   return (
     <Col className={clsString} {...responsive[column]} {...restProps}>
       {term && <div className={styles.term}>{term}</div>}
-      {children !== null &&
-        children !== undefined && <div className={styles.detail}>{children}</div>}
+      <div className={styles.detail}>{children || ''}</div>
     </Col>
   );
 };

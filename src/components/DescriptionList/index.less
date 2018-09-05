@@ -34,7 +34,11 @@
   }
 
   .detail {
-    line-height: 22px;
+    // Line-height is 22px IE dom height will calculate error
+    line-height: 20px;
+    // Prevent layout disorder
+    min-height: 20px;
+    box-sizing: content-box;
     width: 100%;
     padding-bottom: 16px;
     color: @text-color;
