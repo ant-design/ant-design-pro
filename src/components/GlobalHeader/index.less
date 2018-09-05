@@ -1,5 +1,7 @@
 @import '~antd/lib/style/themes/default.less';
 
+@pro-header-hover-bg: rgba(0, 0, 0, 0.025);
+
 .header {
   height: 64px;
   padding: 0 12px 0 0;
@@ -39,7 +41,7 @@ i.trigger {
   transition: all 0.3s, padding 0s;
   padding: 22px 24px;
   &:hover {
-    background: @primary-1;
+    background: @pro-header-hover-bg;
   }
 }
 
@@ -58,10 +60,10 @@ i.trigger {
       color: @text-color;
     }
     &:hover {
-      background: @primary-1;
+      background: @pro-header-hover-bg;
     }
     :global(&.ant-popover-open) {
-      background: @primary-1;
+      background: @pro-header-hover-bg;
     }
   }
   .search {
