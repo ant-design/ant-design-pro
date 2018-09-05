@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Layout } from 'antd';
 import pathToRegexp from 'path-to-regexp';
+import classNames from 'classnames';
 import Link from 'umi/link';
 import styles from './index.less';
 import BaseMenu, { getMenuMatches } from './BaseMenu';
@@ -89,6 +90,12 @@ export default class SiderMenu extends PureComponent {
     const { logo, collapsed, onCollapse, fixSiderbar, theme } = this.props;
     const { openKeys } = this.state;
     const defaultProps = collapsed ? {} : { openKeys };
+
+    const siderClassName = classNames(styles.sider, {
+      [styles.fixSiderbar]: fixSiderbar,
+      [styles.light]: theme === 'light',
+    });
+
     return (
       <Sider
         trigger={null}
@@ -97,11 +104,10 @@ export default class SiderMenu extends PureComponent {
         breakpoint="lg"
         onCollapse={onCollapse}
         width={256}
-        className={`${styles.sider} ${fixSiderbar ? styles.fixSiderbar : ''} ${
-          theme === 'light' ? styles.light : ''
-        }`}
+        theme={theme}
+        className={siderClassName}
       >
-        <div className={styles.logo} key="logo" id="logo">
+        <div className={styles.logo} id="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
             <h1>Ant Design Pro</h1>
@@ -109,7 +115,6 @@ export default class SiderMenu extends PureComponent {
         </div>
         <BaseMenu
           {...this.props}
-          key="Menu"
           mode="inline"
           handleOpenChange={this.handleOpenChange}
           onOpenChange={this.handleOpenChange}
