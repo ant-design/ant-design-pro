@@ -10,17 +10,19 @@ const Description = ({ term, column, className, children, ...restProps }) => {
   return (
     <Col className={clsString} {...responsive[column]} {...restProps}>
       {term && <div className={styles.term}>{term}</div>}
-      <div className={styles.detail}>{children || ''}</div>
+      <div className={styles.detail}>{children}</div>
     </Col>
   );
 };
 
 Description.defaultProps = {
   term: '',
+  children: '',
 };
 
 Description.propTypes = {
   term: PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default Description;
