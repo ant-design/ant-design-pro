@@ -121,7 +121,7 @@ export default function request(
   }
   return fetch(url, newOptions)
     .then(checkStatus)
-    .then(cachedSave)
+    .then(response => cachedSave(response, hashcode))
     .then(response => {
       // DELETE and 204 do not return data by default
       // using .json will report an error.
