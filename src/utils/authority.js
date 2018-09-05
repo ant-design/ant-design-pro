@@ -6,7 +6,7 @@ export function getAuthority() {
     if (authority.includes('[')) {
       authority = JSON.parse(authority);
     } else {
-      authority = [authority];
+      authority = [JSON.parse(authority)];
     }
   } else {
     authority = ['admin'];
