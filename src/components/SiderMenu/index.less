@@ -1,9 +1,11 @@
 @import '~antd/lib/style/themes/default.less';
 
+@nav-header-height: 64px;
+
 .logo {
-  height: 64px;
+  height: @nav-header-height;
   position: relative;
-  line-height: 64px;
+  line-height: @nav-header-height;
   padding-left: (@menu-collapsed-width - 32px) / 2;
   transition: all 0.3s;
   background: #002140;
@@ -33,6 +35,10 @@
     position: fixed;
     top: 0;
     left: 0;
+    :global(.ant-menu-root) {
+      overflow-y: auto;
+      height: ~'calc(100vh - @{nav-header-height})';
+    }
   }
   &.light {
     box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
