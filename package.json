@@ -23,9 +23,8 @@
   },
   "dependencies": {
     "@antv/data-set": "^0.9.0",
-    "@babel/polyfill": "^7.0.0",
     "@babel/runtime": "^7.0.0",
-    "antd": "^3.9.0",
+    "antd": "^3.9.1",
     "axios": "^0.18.0",
     "bizcharts": "^3.1.10",
     "bizcharts-plugin-slider": "^2.0.3",
@@ -57,8 +56,8 @@
     "screenfull": "^3.3.2",
   },
   "devDependencies": {
-    "umi": "^2.0.0",
-    "umi-plugin-react": "^1.0.0",
+    "umi": "^2.0.1",
+    "umi-plugin-react": "^1.0.1",
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.6",
     "antd-pro-merge-less": "^0.0.9",
