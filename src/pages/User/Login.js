@@ -7,7 +7,6 @@ import styles from './Login.less';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
-export default
 @connect(({ login, loading }) => ({
   login,
   submitting: loading.effects['login/login'],
@@ -107,9 +106,9 @@ class LoginPage extends Component {
           <Submit loading={submitting}>登录</Submit>
           <div className={styles.other}>
             其他登录方式
-            <Icon className={styles.icon} type="alipay-circle" />
-            <Icon className={styles.icon} type="taobao-circle" />
-            <Icon className={styles.icon} type="weibo-circle" />
+            <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
+            <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
+            <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
             <Link className={styles.register} to="/User/Register">
               注册账户
             </Link>
@@ -119,3 +118,5 @@ class LoginPage extends Component {
     );
   }
 }
+
+export default LoginPage;
