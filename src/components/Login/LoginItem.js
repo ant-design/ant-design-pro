@@ -94,7 +94,7 @@ class WarpFormItem extends Component {
 
     const otherProps = restProps || {};
     if (type === 'Captcha') {
-      const inputProps = omit(otherProps, ['onGetCaptcha']);
+      const inputProps = omit(otherProps, ['onGetCaptcha', 'countDown']);
       return (
         <FormItem>
           <Row gutter={8}>
