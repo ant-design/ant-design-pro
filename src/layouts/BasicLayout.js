@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
 import isEqual from 'lodash/isEqual';
@@ -15,9 +15,9 @@ import SettingDrawer from '@/components/SettingDrawer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
-import Context from './MenuContext';
 
 const { Content } = Layout;
+const Context = createContext();
 
 // Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {
