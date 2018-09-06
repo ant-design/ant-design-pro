@@ -14,7 +14,7 @@ const { Option } = Select;
 const FormItem = Form.Item;
 
 /* eslint react/no-array-index-key: 0 */
-export default
+
 @Form.create()
 @connect(({ list, loading }) => ({
   list,
@@ -163,3 +163,5 @@ class CoverCardList extends PureComponent {
     );
   }
 }
+
+export default CoverCardList;

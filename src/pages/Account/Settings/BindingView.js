@@ -56,4 +56,5 @@ class BindingView extends Component {
     );
   }
 }
+
 export default BindingView;

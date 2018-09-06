@@ -3,7 +3,6 @@ import { Button, Spin, Card } from 'antd';
 import { connect } from 'dva';
 import styles from './style.less';
 
-export default
 @connect(state => ({
   isloading: state.error.isloading,
 }))
@@ -47,3 +46,5 @@ class TriggerException extends PureComponent {
     );
   }
 }
+
+export default TriggerException;

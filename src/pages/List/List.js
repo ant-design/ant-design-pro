@@ -4,7 +4,6 @@ import { connect } from 'dva';
 import { Input } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
-export default
 @connect()
 class SearchList extends Component {
   handleTabChange = key => {
@@ -72,3 +71,5 @@ class SearchList extends Component {
     );
   }
 }
+
+export default SearchList;

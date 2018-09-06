@@ -180,7 +180,6 @@ const columns = [
   },
 ];
 
-export default
 @connect(({ profile, loading }) => ({
   profile,
   loading: loading.effects['profile/fetchAdvanced'],
@@ -350,3 +349,5 @@ class AdvancedProfile extends Component {
     );
   }
 }
+
+export default AdvancedProfile;
