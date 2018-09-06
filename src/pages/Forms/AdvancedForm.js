@@ -57,7 +57,6 @@ const tableData = [
   },
 ];
 
-export default
 @connect(({ loading }) => ({
   submitting: loading.effects['form/submitAdvancedForm'],
 }))
@@ -308,3 +307,5 @@ class AdvancedForm extends PureComponent {
     );
   }
 }
+
+export default AdvancedForm;
