@@ -33,6 +33,7 @@ const updateTheme = primaryColor => {
     }, 200);
   }
   if (!lessNodesAppended) {
+    // insert less.js and color.less
     const lessStyleNode = document.createElement('link');
     const lessConfigNode = document.createElement('script');
     const lessScriptNode = document.createElement('script');
@@ -106,9 +107,12 @@ export default {
           urlParams.searchParams.set(key, value);
         }
       });
-      const { primaryColor, colorWeak } = payload;
+      const { primaryColor, colorWeak, contentWidth } = payload;
       if (state.primaryColor !== primaryColor) {
         updateTheme(primaryColor);
+      }
+      if (state.contentWidth !== contentWidth) {
+        window.dispatchEvent ? window.dispatchEvent(new Event('resize')) : null;
       }
       updateColorWeak(colorWeak);
       window.history.replaceState(null, 'setting', urlParams.href);
