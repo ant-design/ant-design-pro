@@ -11,7 +11,7 @@ const Authorized = RenderAuthorized(getAuthority());
 
 export default ({ children, route, location }) => {
   const routes = matchRoutes(route.routes, location.pathname);
-  let authorities = [];
+  const authorities = [];
   routes.forEach(item => {
     if (Array.isArray(item.route.authority) && item.route.authority.length) {
       authorities.push(item.route.authority);
