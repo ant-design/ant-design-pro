@@ -19,7 +19,13 @@ const pageSize = 5;
 }))
 class SearchList extends Component {
   componentDidMount() {
-    this.fetchMore();
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'list/fetch',
+      payload: {
+        count: 5,
+      },
+    });
   }
 
   setOwner = () => {
