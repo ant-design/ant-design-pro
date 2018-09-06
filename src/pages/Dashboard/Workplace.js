@@ -37,7 +37,6 @@ const links = [
   },
 ];
 
-export default
 @connect(({ user, project, activities, chart, loading }) => ({
   currentUser: user.currentUser,
   project,
@@ -253,3 +252,5 @@ class Workplace extends PureComponent {
     );
   }
 }
+
+export default Workplace;
