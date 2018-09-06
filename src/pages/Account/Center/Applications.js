@@ -5,7 +5,6 @@ import { connect } from 'dva';
 import { formatWan } from '@/utils/utils';
 import stylesApplications from '../../List/Applications.less';
 
-export default
 @connect(({ list }) => ({
   list,
 }))
@@ -85,3 +84,5 @@ class Center extends PureComponent {
     );
   }
 }
+
+export default Center;

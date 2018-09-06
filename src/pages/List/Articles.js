@@ -12,7 +12,6 @@ const FormItem = Form.Item;
 
 const pageSize = 5;
 
-export default
 @Form.create()
 @connect(({ list, loading }) => ({
   list,
@@ -240,3 +239,5 @@ class SearchList extends Component {
     );
   }
 }
+
+export default SearchList;

@@ -8,7 +8,6 @@ import styles from './Info.less';
 
 const { Item } = Menu;
 
-export default
 @connect(({ user }) => ({
   currentUser: user.currentUser,
 }))
@@ -122,3 +121,5 @@ class Info extends Component {
     );
   }
 }
+
+export default Info;

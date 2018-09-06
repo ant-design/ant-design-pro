@@ -21,7 +21,6 @@ const passwordProgressMap = {
   poor: 'exception',
 };
 
-export default
 @connect(({ register, loading }) => ({
   register,
   submitting: loading.effects['register/submit'],
@@ -290,3 +289,5 @@ class Register extends Component {
     );
   }
 }
+
+export default Register;

@@ -20,7 +20,6 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-export default
 @connect(({ loading }) => ({
   submitting: loading.effects['form/submitRegularForm'],
 }))
@@ -201,3 +200,5 @@ class BasicForms extends PureComponent {
     );
   }
 }
+
+export default BasicForms;
