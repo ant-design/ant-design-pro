@@ -18,7 +18,6 @@ import Header from './Header';
 import Context from './MenuContext';
 
 const { Content } = Layout;
-const { check } = Authorized;
 
 // Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {
