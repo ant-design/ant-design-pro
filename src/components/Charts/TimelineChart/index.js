@@ -5,7 +5,6 @@ import Slider from 'bizcharts-plugin-slider';
 import autoHeight from '../autoHeight';
 import styles from './index.less';
 
-export default
 @autoHeight()
 class TimelineChart extends React.Component {
   render() {
@@ -121,3 +120,5 @@ class TimelineChart extends React.Component {
     );
   }
 }
+
+export default TimelineChart;
