@@ -4,6 +4,7 @@ import router from 'umi/router';
 import hash from 'hash.js';
 import { isAntdPro } from './utils';
 
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -80,7 +81,8 @@ export default function request(
     .digest('hex');
 
   const defaultOptions = {
-    credentials: 'include',
+    // 注释后允许跨域
+    // credentials: 'include',
   };
   const newOptions = { ...defaultOptions, ...options };
   if (
@@ -119,6 +121,10 @@ export default function request(
       sessionStorage.removeItem(`${hashcode}:timestamp`);
     }
   }
+  if(!newOptions.headers){
+    newOptions.headers = {};
+  }
+  newOptions.headers.token = localStorage.getItem('token');
   return fetch(url, newOptions)
     .then(checkStatus)
     .then(response => cachedSave(response, hashcode))
@@ -128,9 +134,26 @@ export default function request(
       if (newOptions.method === 'DELETE' || response.status === 204) {
         return response.text();
       }
+      // return {json:response.json(),url:response.url };
       return response.json();
     })
+    .then(data => {
+      if(data.rspMsg){
+        notification.error({
+          message: `请求错误 : `,
+          description: data.rspMsg,
+        });
+      }
+      return data;
+    })
     .catch(e => {
+      console.log('catch %o',e);
+      if( options.body && options.body.showError && e == 'TypeError: Failed to fetch'){
+        notification.error({
+          message: `请求错误 : `,
+          description: `网络异常`,
+        });
+      }
       const status = e.name;
       if (status === 401) {
         // @HACK
