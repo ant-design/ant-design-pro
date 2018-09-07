@@ -1,0 +1,74 @@
+@import '~antd/lib/style/themes/default.less';
+
+.content {
+  min-height: 100%;
+  background: #fff;
+  position: relative;
+}
+
+.blockChecbox {
+  display: flex;
+  .item {
+    margin-right: 16px;
+    position: relative;
+    // box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    border-radius: @border-radius-base;
+    cursor: pointer;
+    img {
+      width: 48px;
+    }
+  }
+  .selectIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding-top: 15px;
+    padding-left: 24px;
+    height: 100%;
+    color: @primary-color;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+.color_block {
+  width: 38px;
+  height: 22px;
+  margin: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 12px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.title {
+  font-size: 14px;
+  color: @heading-color;
+  line-height: 22px;
+  margin-bottom: 12px;
+}
+
+.handle {
+  position: fixed;
+  top: 240px;
+  background: @primary-color;
+  width: 48px;
+  height: 48px;
+  right: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 0;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 4px 0 0 4px;
+}
+
+.productionHint {
+  font-size: 12px;
+  margin-top: 16px;
+}

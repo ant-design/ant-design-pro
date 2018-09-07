@@ -35,15 +35,23 @@ export default class HeaderSearch extends PureComponent {
     };
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
   onKeyDown = e => {
     if (e.key === 'Enter') {
-      this.debouncePressEnter();
+      const { onPressEnter } = this.props;
+      const { value } = this.state;
+      this.timeout = setTimeout(() => {
+        onPressEnter(value); // Fix duplicate onPressEnter
+      }, 0);
     }
   };
 
   onChange = value => {
-    this.setState({ value });
     const { onChange } = this.props;
+    this.setState({ value });
     if (onChange) {
       onChange(value);
     }
@@ -95,10 +103,11 @@ export default class HeaderSearch extends PureComponent {
           onChange={this.onChange}
         >
           <Input
-            placeholder={placeholder}
             ref={node => {
               this.input = node;
             }}
+            aria-label={placeholder}
+            placeholder={placeholder}
             onKeyDown={this.onKeyDown}
             onBlur={this.leaveSearchMode}
           />
