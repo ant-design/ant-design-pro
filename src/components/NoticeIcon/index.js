@@ -22,21 +22,12 @@ export default class NoticeIcon extends PureComponent {
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-    if (props.children && props.children[0]) {
-      this.state.tabType = props.children[0].props.title;
-    }
-  }
-
   onItemClick = (item, tabProps) => {
     const { onItemClick } = this.props;
     onItemClick(item, tabProps);
   };
 
   onTabChange = tabType => {
-    this.setState({ tabType });
     const { onTabChange } = this.props;
     onTabChange(tabType);
   };
@@ -74,13 +65,14 @@ export default class NoticeIcon extends PureComponent {
   }
 
   render() {
-    const { className, count, popupAlign, onPopupVisibleChange, popupVisible } = this.props;
+    const { className, count, popupAlign, popupVisible, onPopupVisibleChange, bell } = this.props;
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const notificationBox = this.getNotificationBox();
+    const NoticeBellIcon = bell || <Icon type="bell" className={styles.icon} />;
     const trigger = (
       <span className={noticeButtonClass}>
-        <Badge count={count} className={styles.badge}>
-          <Icon type="bell" className={styles.icon} />
+        <Badge count={count} style={{ boxShadow: 'none' }} className={styles.badge}>
+          {NoticeBellIcon}
         </Badge>
       </span>
     );

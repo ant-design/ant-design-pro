@@ -1,4 +1,6 @@
 import moment from 'moment';
+import React from 'react';
+import nzh from 'nzh/cn';
 import { parse, stringify } from 'qs';
 
 export function fixedZero(val) {
@@ -46,11 +48,8 @@ export function getTimeDistance(type) {
     ];
   }
 
-  if (type === 'year') {
-    const year = now.getFullYear();
-
-    return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)];
-  }
+  const year = now.getFullYear();
+  return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)];
 }
 
 export function getPlainNode(nodeList, parentPath = '') {
@@ -71,39 +70,8 @@ export function getPlainNode(nodeList, parentPath = '') {
   return arr;
 }
 
-function accMul(arg1, arg2) {
-  let m = 0;
-  const s1 = arg1.toString();
-  const s2 = arg2.toString();
-  m += s1.split('.').length > 1 ? s1.split('.')[1].length : 0;
-  m += s2.split('.').length > 1 ? s2.split('.')[1].length : 0;
-  return (Number(s1.replace('.', '')) * Number(s2.replace('.', ''))) / 10 ** m;
-}
-
 export function digitUppercase(n) {
-  const fraction = ['角', '分'];
-  const digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
-  const unit = [['元', '万', '亿'], ['', '拾', '佰', '仟', '万']];
-  let num = Math.abs(n);
-  let s = '';
-  fraction.forEach((item, index) => {
-    s += (digit[Math.floor(accMul(num, 10 * 10 ** index)) % 10] + item).replace(/零./, '');
-  });
-  s = s || '整';
-  num = Math.floor(num);
-  for (let i = 0; i < unit[0].length && num > 0; i += 1) {
-    let p = '';
-    for (let j = 0; j < unit[1].length && num > 0; j += 1) {
-      p = digit[num % 10] + unit[1][j] + p;
-      num = Math.floor(num / 10);
-    }
-    s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
-  }
-
-  return s
-    .replace(/(零.)*零元/, '元')
-    .replace(/(零.)+/g, '零')
-    .replace(/^整$/, '零元整');
+  return nzh.toMoney(n);
 }
 
 function getRelation(str1, str2) {
@@ -114,7 +82,8 @@ function getRelation(str1, str2) {
   const arr2 = str2.split('/');
   if (arr2.every((item, index) => item === arr1[index])) {
     return 1;
-  } else if (arr1.every((item, index) => item === arr2[index])) {
+  }
+  if (arr1.every((item, index) => item === arr2[index])) {
     return 2;
   }
   return 3;
@@ -179,4 +148,36 @@ const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(
 
 export function isUrl(path) {
   return reg.test(path);
+}
+
+export function formatWan(val) {
+  const v = val * 1;
+  if (!v || Number.isNaN(v)) return '';
+
+  let result = val;
+  if (val > 10000) {
+    result = Math.floor(val / 10000);
+    result = (
+      <span>
+        {result}
+        <span
+          styles={{
+            position: 'relative',
+            top: -2,
+            fontSize: 14,
+            fontStyle: 'normal',
+            lineHeight: 20,
+            marginLeft: 2,
+          }}
+        >
+          万
+        </span>
+      </span>
+    );
+  }
+  return result;
+}
+
+export function isAntdPro() {
+  return window.location.hostname === 'preview.pro.ant.design';
 }

@@ -1,4 +1,4 @@
-export const getNotices = (req, res) => {
+const getNotices = (req, res) =>
   res.json([
     {
       id: '000000001',
@@ -93,7 +93,7 @@ export const getNotices = (req, res) => {
       type: '待办',
     },
   ]);
-};
+
 export default {
-  getNotices,
+  'GET /api/notices': getNotices,
 };

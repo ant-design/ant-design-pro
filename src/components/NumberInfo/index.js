@@ -10,8 +10,19 @@ const NumberInfo = ({ theme, title, subTitle, total, subTotal, status, suffix, g
     })}
     {...rest}
   >
-    {title && <div className={styles.numberInfoTitle}>{title}</div>}
-    {subTitle && <div className={styles.numberInfoSubTitle}>{subTitle}</div>}
+    {title && (
+      <div className={styles.numberInfoTitle} title={typeof title === 'string' ? title : ''}>
+        {title}
+      </div>
+    )}
+    {subTitle && (
+      <div
+        className={styles.numberInfoSubTitle}
+        title={typeof subTitle === 'string' ? subTitle : ''}
+      >
+        {subTitle}
+      </div>
+    )}
     <div className={styles.numberInfoValue} style={gap ? { marginTop: gap } : null}>
       <span>
         {total}

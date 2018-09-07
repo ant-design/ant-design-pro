@@ -38,7 +38,9 @@ Apart from the above properties, Login.Username also support all properties of a
 
 Property | Description | Type | Default
 ----|------|-----|------
-onGetCaptcha | callback on getting a new Captcha | () => void | -
+onGetCaptcha | callback on getting a new Captcha | () => (void \| false \| Promise) | -
+countDown | count down | number |-
+buttonText | text on getting a new Captcha  | ReactNode | '获取验证码'
 
 Apart from the above properties, _Login.Captcha_ support the same properties with _Login.UserName_.
 

@@ -1,0 +1,65 @@
+@import '~antd/lib/style/themes/default.less';
+@import '~@/utils/utils.less';
+
+.listContent {
+  .description {
+    line-height: 22px;
+    max-width: 720px;
+  }
+  .extra {
+    color: @text-color-secondary;
+    margin-top: 16px;
+    line-height: 22px;
+    & > :global(.ant-avatar) {
+      vertical-align: top;
+      margin-right: 8px;
+      width: 20px;
+      height: 20px;
+      position: relative;
+      top: 1px;
+    }
+    & > em {
+      color: @disabled-color;
+      font-style: normal;
+      margin-left: 16px;
+    }
+  }
+}
+a.listItemMetaTitle {
+  color: @heading-color;
+}
+.listItemExtra {
+  width: 272px;
+  height: 1px;
+}
+.selfTrigger {
+  margin-left: 12px;
+}
+
+@media screen and (max-width: @screen-xs) {
+  .selfTrigger {
+    display: block;
+    margin-left: 0;
+  }
+  .listContent {
+    .extra {
+      & > em {
+        display: block;
+        margin-left: 0;
+        margin-top: 8px;
+      }
+    }
+  }
+}
+@media screen and (max-width: @screen-md) {
+  .selfTrigger {
+    display: block;
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: @screen-lg) {
+  .listItemExtra {
+    width: 0;
+    height: 1px;
+  }
+}

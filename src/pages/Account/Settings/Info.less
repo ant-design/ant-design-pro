@@ -1,0 +1,97 @@
+@import '~antd/lib/style/themes/default.less';
+
+.main {
+  width: 100%;
+  height: 100%;
+  background-color: @body-background;
+  display: flex;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  overflow: auto;
+  .leftmenu {
+    width: 224px;
+    border-right: @border-width-base @border-style-base @border-color-split;
+    :global {
+      .ant-menu-inline {
+        border: none;
+      }
+      .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+        font-weight: bold;
+      }
+    }
+  }
+  .right {
+    flex: 1;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    .title {
+      font-size: 20px;
+      color: @heading-color;
+      line-height: 28px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+  }
+  :global {
+    .ant-list-split .ant-list-item:last-child {
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .ant-list-item {
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+  }
+}
+:global {
+  .ant-list-item-meta {
+    // 账号绑定图标
+    .taobao {
+      color: #ff4000;
+      display: block;
+      font-size: 48px;
+      line-height: 48px;
+      border-radius: @border-radius-base;
+    }
+    .dingding {
+      background-color: #2eabff;
+      color: #fff;
+      font-size: 32px;
+      line-height: 32px;
+      padding: 6px;
+      margin: 2px;
+      border-radius: @border-radius-base;
+    }
+    .alipay {
+      color: #2eabff;
+      font-size: 48px;
+      line-height: 48px;
+      border-radius: @border-radius-base;
+    }
+  }
+
+  // 密码强度
+  font.strong {
+    color: @success-color;
+  }
+  font.medium {
+    color: @warning-color;
+  }
+  font.weak {
+    color: @error-color;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .main {
+    flex-direction: column;
+    .leftmenu {
+      width: 100%;
+      border: none;
+    }
+    .right {
+      padding: 40px;
+    }
+  }
+}

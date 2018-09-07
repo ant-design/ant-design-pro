@@ -1,8 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import NoticeIconTab, { INoticeIconData } from './NoticeIconTab';
 
 export interface INoticeIconProps {
   count?: number;
+  bell?: React.ReactNode;
   className?: string;
   loading?: boolean;
   onClear?: (tableTile: string) => void;
