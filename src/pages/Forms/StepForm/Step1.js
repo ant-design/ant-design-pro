@@ -15,7 +15,6 @@ const formItemLayout = {
   },
 };
 
-export default
 @connect(({ form }) => ({
   data: form.step,
 }))
@@ -112,3 +111,5 @@ class Step1 extends React.PureComponent {
     );
   }
 }
+
+export default Step1;

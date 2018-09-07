@@ -98,4 +98,5 @@ class SecurityView extends Component {
     );
   }
 }
+
 export default SecurityView;
