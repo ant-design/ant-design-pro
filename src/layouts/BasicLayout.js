@@ -20,8 +20,8 @@ import Context from './MenuContext';
 const { Content } = Layout;
 
 // Conversion router to menu.
-function formatter(data, parentPath = '', parentAuthority, parentName) {
-  return data.map(item => {
+function formatter(data, filter, parentPath = '', parentAuthority, parentName) {
+  const next = data.map(item => {
     let locale = 'menu';
     if (parentName && item.name) {
       locale = `${parentName}.${item.name}`;
@@ -36,13 +36,20 @@ function formatter(data, parentPath = '', parentAuthority, parentName) {
       authority: item.authority || parentAuthority,
     };
     if (item.routes) {
-      const children = formatter(item.routes, `${parentPath}${item.path}/`, item.authority, locale);
+      const children = formatter(
+        item.routes,
+        filter,
+        `${parentPath}${item.path}/`,
+        item.authority,
+        locale
+      );
       // Reduce memory usage
       result.children = children;
     }
     delete result.routes;
     return result;
   });
+  return filter ? next.filter(filter) : next;
 }
 
 const query = {
@@ -130,11 +137,11 @@ class BasicLayout extends React.PureComponent {
     };
   }
 
-  getMenuData() {
+  getMenuData(filter) {
     const {
       route: { routes },
     } = this.props;
-    return formatter(routes);
+    return formatter(routes, filter);
   }
 
   /**
@@ -210,7 +217,7 @@ class BasicLayout extends React.PureComponent {
     } = this.props;
     const { rendering, isMobile } = this.state;
     const isTop = PropsLayout === 'topmenu';
-    const menuData = this.getMenuData();
+    const menuData = this.getMenuData(menuItem => !menuItem.hideNav);
     const layout = (
       <Layout>
         {isTop && !isMobile ? null : (
