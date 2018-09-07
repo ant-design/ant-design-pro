@@ -46,4 +46,5 @@ class NotificationView extends Component {
     );
   }
 }
+
 export default NotificationView;

@@ -14,6 +14,10 @@ const formItemLayout = {
   },
 };
 
+@connect(({ form, loading }) => ({
+  submitting: loading.effects['form/submitStepForm'],
+  data: form.step,
+}))
 @Form.create()
 class Step2 extends React.PureComponent {
   render() {
@@ -92,7 +96,4 @@ class Step2 extends React.PureComponent {
   }
 }
 
-export default connect(({ form, loading }) => ({
-  submitting: loading.effects['form/submitStepForm'],
-  data: form.step,
-}))(Step2);
+export default Step2;

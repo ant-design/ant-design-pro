@@ -3,7 +3,7 @@ import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
 import isEqual from 'lodash/isEqual';
 import styles from './style.less';
 
-export default class TableForm extends PureComponent {
+class TableForm extends PureComponent {
   index = 0;
 
   cacheOriginData = {};
@@ -257,3 +257,5 @@ export default class TableForm extends PureComponent {
     );
   }
 }
+
+export default TableForm;

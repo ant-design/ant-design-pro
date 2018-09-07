@@ -18,7 +18,6 @@ import Header from './Header';
 import Context from './MenuContext';
 
 const { Content } = Layout;
-const { check } = Authorized;
 
 // Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {
@@ -107,8 +106,15 @@ class BasicLayout extends React.PureComponent {
     });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(preProps) {
+    // After changing to phone mode,
+    // if collapsed is true, you need to click twice to display
     this.breadcrumbNameMap = this.getBreadcrumbNameMap();
+    const { isMobile } = this.state;
+    const { collapsed } = this.props;
+    if (isMobile && !preProps.isMobile && !collapsed) {
+      this.handleMenuCollapse(false);
+    }
   }
 
   componentWillUnmount() {
@@ -169,8 +175,9 @@ class BasicLayout extends React.PureComponent {
   };
 
   getLayoutStyle = () => {
+    const { isMobile } = this.state;
     const { fixSiderbar, collapsed, layout } = this.props;
-    if (fixSiderbar && layout !== 'topmenu') {
+    if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
       return {
         paddingLeft: collapsed ? '80px' : '256px',
       };
@@ -184,27 +191,6 @@ class BasicLayout extends React.PureComponent {
       margin: '24px 24px 0',
       paddingTop: fixedHeader ? 64 : 0,
     };
-  };
-
-  getBashRedirect = () => {
-    // According to the url parameter to redirect
-    // 这里是重定向的,重定向到 url 的 redirect 参数所示地址
-    const urlParams = new URL(window.location.href);
-
-    const redirect = urlParams.searchParams.get('redirect');
-    // Remove the parameters in the url
-    if (redirect) {
-      urlParams.searchParams.delete('redirect');
-      window.history.replaceState(null, 'redirect', urlParams.href);
-    } else {
-      const { routerData } = this.props;
-      // get the first authorized route path in routerData
-      const authorizedPath = Object.keys(routerData).find(
-        item => check(routerData[item].authority, item) && item !== '/'
-      );
-      return authorizedPath;
-    }
-    return redirect;
   };
 
   handleMenuCollapse = collapsed => {

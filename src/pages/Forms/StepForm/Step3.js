@@ -5,7 +5,6 @@ import router from 'umi/router';
 import Result from '@/components/Result';
 import styles from './style.less';
 
-export default
 @connect(({ form }) => ({
   data: form.step,
 }))
@@ -71,3 +70,5 @@ class Step3 extends React.PureComponent {
     );
   }
 }
+
+export default Step3;
