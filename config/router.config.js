@@ -126,6 +126,10 @@ export default [
             component: './List/List',
             routes: [
               {
+                path: '/list/search',
+                redirect: '/list/search/articles',
+              },
+              {
                 path: '/list/search/articles',
                 name: 'articles',
                 component: './List/Articles',

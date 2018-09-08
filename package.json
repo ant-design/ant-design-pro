@@ -22,7 +22,7 @@
     "prettier": "prettier --write ./src/**/**/**/*"
   },
   "dependencies": {
-    "@antv/data-set": "^0.9.0",
+    "@antv/data-set": "^0.9.5",
     "@babel/runtime": "^7.0.0",
     "antd": "^3.9.1",
     "axios": "^0.18.0",
