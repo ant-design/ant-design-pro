@@ -1,12 +1,75 @@
 import { stringify } from 'qs';
 import request from '@/utils/request';
 
+const url = 'http://localhost:8011';
+
 export async function queryProjectNotice() {
   return request('/api/project/notice');
 }
 
 export async function queryActivities() {
   return request('/api/activities');
+}
+
+
+export async function accountLogin(params) {
+  return request(`${url}/login.account`, {
+    method: 'POST',
+    body: params,
+  });
+}
+
+export async function query(params) {
+  // return request(url + `/api/${params.tradeCode}?${stringify(params)}`);
+  return request(`${url  }/api/${params.type?`${params.type}.`:''}${params.tradeCode}`, {
+    method: 'POST',
+    headers: {
+      token: params.token,
+    },
+    body: {
+      ...params,
+      // method: 'get',
+    },
+  });
+}
+
+export async function remove(params) {
+  return request(`${url  }/api/${params.type?`${params.type}.`:''}${params.tradeCode}`, {
+    method: 'POST',
+    headers: {
+      token: params.token,
+    },
+    body: {
+      ...params,
+      // method: 'delete',
+    },
+  });
+}
+
+export async function add(params) {
+  return request(`${url  }/api/${params.type?`${params.type}.`:''}${params.tradeCode}`, {
+    method: 'POST',
+    headers: {
+      token: params.token,
+    },
+    body: {
+      ...params,
+      // method: 'add',
+    },
+  });
+}
+
+export async function update(params) {
+  return request(`${url  }/api/${params.type?`${params.type}.`:''}${params.tradeCode}`, {
+    method: 'POST',
+    headers: {
+      token: params.token,
+    },
+    body: {
+      ...params,
+      // method: 'update',
+    },
+  });
 }
 
 export async function queryRule(params) {
@@ -104,7 +167,7 @@ export async function updateFakeList(params) {
 }
 
 export async function fakeAccountLogin(params) {
-  return request('/api/login/account', {
+  return request(`${url}/login.account`, {
     method: 'POST',
     body: params,
   });
