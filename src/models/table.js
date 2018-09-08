@@ -1,4 +1,4 @@
-import { query, remove, add, update } from '../services/api';
+import { query, remove, add, update } from '@/services/api';
 
 export default {
   namespace: 'table',
@@ -7,12 +7,12 @@ export default {
     data: {
       list: [],
       pagination: {},
-    },
+    }
   },
 
   effects: {
     *fetchKV({ payload }, { call, put }) {
-      payload.showError = false;
+      // payload.showError = false;
       const response = yield call(query, payload);
       yield put({
         type: 'saveKV',
@@ -20,7 +20,7 @@ export default {
       });
     },
     *fetch({ payload }, { call, put }) {
-      payload.showError = true;
+      // payload.showError = true;
       const response = yield call(query, payload);
       yield put({
         type: 'save',
@@ -59,7 +59,7 @@ export default {
       });
       if (callback) callback();
     },
-    *clean({ payload, callback }, { call, put }) {
+    *clean({ callback }, { put }) {
       yield put({
         type: 'clean',
       });

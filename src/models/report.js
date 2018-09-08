@@ -1,4 +1,4 @@
-import { query, remove, add, update } from '../services/api';
+import { query, remove, add, update } from '@/services/api';
 
 export default {
   namespace: 'report',
