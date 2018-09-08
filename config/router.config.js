@@ -34,6 +34,7 @@ export default [
             component: './Dashboard/Monitor',
           },
           {
+            // hideInMenu: true,
             path: '/dashboard/workplace',
             name: 'workplace',
             component: './Dashboard/Workplace',
