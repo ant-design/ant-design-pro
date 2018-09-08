@@ -26,7 +26,8 @@ import {
   Avatar,
 } from 'antd';
 import StandardTable from '../../../components/StandardTable';
-import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import { getTimeDistance } from '../../../utils/utils';
 
@@ -61,7 +62,7 @@ const relationFlagColor = {'0':'grey','1':'orange','-1':'red'};
   loading: loading.models.table,
 }))
 @Form.create()
-export default class TableList extends PureComponent {
+class TableList extends PureComponent {
 
   getColumns = table => {
     // to update: 列名
@@ -890,7 +891,7 @@ export default class TableList extends PureComponent {
     };
 
     return (
-      <PageHeaderLayout title="查询表格">
+      <PageHeaderWrapper title="查询表格">
         <Card bordered={false}>
           <div className={styles.tableList}>
             {/* // to choose: 设置查询条件 */}
@@ -909,7 +910,8 @@ export default class TableList extends PureComponent {
             />
           </div>
         </Card>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
-}
+};
+export default TableList;

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Card, Button, Icon, List, Popconfirm, Modal, Upload, Form, Input, Radio } from 'antd';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './CardList.less';
 
 
@@ -233,7 +233,7 @@ export default class CardList extends PureComponent {
         const { previewVisible, previewImage, upVisible } = this.state;
 
         return (
-            <PageHeaderLayout title="卡片列表">
+            <PageHeaderWrapper title="卡片列表">
 
                 <div className={styles.cardList}>
                     <List
@@ -309,7 +309,7 @@ export default class CardList extends PureComponent {
                         }
                     />
                 </div>
-            </PageHeaderLayout>
+            </PageHeaderWrapper>
         );
     }
 }

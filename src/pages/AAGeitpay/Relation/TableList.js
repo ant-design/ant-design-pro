@@ -25,7 +25,8 @@ import {
   Tag,
 } from 'antd';
 import StandardTable from '../../../components/StandardTable';
-import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import { getTimeDistance } from '../../../utils/utils';
 
@@ -582,7 +583,7 @@ export default class TableList extends PureComponent {
     const { selectedRows } = this.state;
 
     return (
-      <PageHeaderLayout title="查询表格">
+      <PageHeaderWrapper title="查询表格">
         <Card bordered={false}>
           <div className={styles.tableList}>
             {/* // to choose: 设置查询条件 */}
@@ -600,7 +601,7 @@ export default class TableList extends PureComponent {
             />
           </div>
         </Card>
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }

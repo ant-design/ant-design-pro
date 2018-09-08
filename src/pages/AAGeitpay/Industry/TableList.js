@@ -23,7 +23,7 @@ import {
     Popconfirm,
 } from 'antd';
 import StandardTable from '@/components/StandardTable';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from './TableList.less';
 
@@ -711,7 +711,7 @@ export default class TableList extends PureComponent {
             handleUpdate: this.handleUpdate,
         };
         return (
-            <PageHeaderLayout title="查询表格">
+            <PageHeaderWrapper title="查询表格">
                 <Card bordered={false}>
                     <div className={styles.tableList}>
                         {/* {<div className={styles.tableListForm}>{this.renderForm()}</div>} */}
@@ -767,7 +767,7 @@ export default class TableList extends PureComponent {
                         values={stepFormValues}
                     />
                 ) : null}
-            </PageHeaderLayout>
+            </PageHeaderWrapper>
         );
     }
 }

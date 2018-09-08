@@ -25,7 +25,8 @@ import {
   Popconfirm,
 } from 'antd';
 import StandardTable from '../../../components/StandardTable';
-import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+
 import { getTimeDistance } from '../../../utils/utils';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 
@@ -954,7 +955,7 @@ export default class TableList extends PureComponent {
       handleUpdate: this.handleUpdate,
     };
     return (
-      <PageHeaderLayout title="查询表格">
+      <PageHeaderWrapper title="查询表格">
         <Card bordered={false}>
           <div className={styles.tableList}>
             {/* // to choose: 设置查询条件 */}
@@ -987,7 +988,7 @@ export default class TableList extends PureComponent {
             values={stepFormValues}
           />
         ) : null}
-      </PageHeaderLayout>
+      </PageHeaderWrapper>
     );
   }
 }
