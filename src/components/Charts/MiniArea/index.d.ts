@@ -21,7 +21,7 @@ export interface IMiniAreaProps {
   xAxis?: IAxis;
   yAxis?: IAxis;
   data: Array<{
-    x: number;
+    x: number | string;
     y: number;
   }>;
 }
