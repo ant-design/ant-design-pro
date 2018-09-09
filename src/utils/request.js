@@ -25,7 +25,7 @@ const codeMessage = {
   504: '网关超时。',
 };
 const checkStatus = response => {
-  if (response.status >= 200 && response.status < 300) {
+  if (response.status && response.status >= 200 && response.status < 300) {
     return response;
   }
   const errortext = codeMessage[response.status] || response.statusText;
@@ -44,16 +44,11 @@ const cachedSave = (response, hashcode) => {
    * Clone a response data and store it in sessionStorage
    * Does not support data other than json, Cache only json
    */
-  const contentType = response.headers.get('Content-Type');
+  const contentType = response.headers['content-type'] ||  response.headers.get('Content-Type');
   if (contentType && contentType.match(/application\/json/i)) {
     // All data is saved as text
-    response
-      .clone()
-      .text()
-      .then(content => {
-        sessionStorage.setItem(hashcode, content);
-        sessionStorage.setItem(`${hashcode}:timestamp`, Date.now());
-      });
+    sessionStorage.setItem(hashcode, response.data);
+    sessionStorage.setItem(`${hashcode}:timestamp`, Date.now());
   }
   return response;
 };
