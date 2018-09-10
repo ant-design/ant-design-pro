@@ -21,7 +21,7 @@ module.exports = [
       {
         path: '/dev',
         name: 'dev',
-        icon: 'dev',
+        icon: 'tool',
         routes: [
           {
             path: '/dev/log',
@@ -52,78 +52,78 @@ module.exports = [
           },
         ],
       },
-      // {
-      //   path: '/basic',
-      //   name: 'basic',
-      //   icon: 'appstore-o',
-      //   routes: [
-      //     {
-      //       path: '/basic/order-type',
-      //       name: 'order-type',
-      //       component: './AAGeitpay/OrderType/TableList',
-      //     },
-      //     {
-      //       path: '/basic/channel-type',
-      //       name: 'channel-type',
-      //       component: './AAGeitpay/ChannelType/TableList',
-      //     },
-      //     {
-      //       path: '/basic/third',
-      //       name: 'third',
-      //       component: './AAGeitpay/Third/TableList',
-      //     },
-      //     {
-      //       path: '/basic/pay-type',
-      //       name: 'pay-type',
-      //       component: './AAGeitpay/PayType/TableList',
-      //     },
-      //     {
-      //       path: '/basic/third-return',
-      //       name: 'third-return',
-      //       component: './AAGeitpay/ThirdReturn/TableList',
-      //     },
-      //     {
-      //       path: '/basic/third-state',
-      //       name: 'third-state',
-      //       component: './AAGeitpay/ThirdState/TableList',
-      //     },
-      //     {
-      //       path: '/basic/trans-type',
-      //       name: 'trans-type',
-      //       component: './AAGeitpay/TransType/TableList',
-      //     },
-      //     {
-      //       path: '/basic/error-code',
-      //       name: 'error-code',
-      //       component: './AAGeitpay/ErrorCode/TableList',
-      //     },
-      //     {
-      //       path: '/basic/merchant',
-      //       name: 'merchant',
-      //       component: './AAGeitpay/Merchant/TableList',
-      //     },
-      //     {
-      //       path: '/basic/merchant-acc',
-      //       name: 'merchant-acc',
-      //       component: './AAGeitpay/MerchantAcc/TableList',
-      //     },
-      //     {
-      //       path: '/basic/casher',
-      //       name: 'casher',
-      //       component: './AAGeitpay/Casher/TableList',
-      //     },
-      //     {
-      //       path: '/basic/industry',
-      //       name: 'industry',
-      //       component: './AAGeitpay/Industry/TableList',
-      //     },
-      //     {
-      //       path: '/basic/order',
-      //       name: 'order',
-      //       component: './AAGeitpay/Order/TableList',
-      //     },
-      //   ],
-      // },
+      {
+        path: '/basic',
+        name: 'basic',
+        icon: 'appstore-o',
+        routes: [
+          {
+            path: '/basic/order-type',
+            name: 'order-type',
+            component: './AAGeitpay/OrderType/TableList',
+          },
+          {
+            path: '/basic/channel-type',
+            name: 'channel-type',
+            component: './AAGeitpay/ChannelType/TableList',
+          },
+          {
+            path: '/basic/third',
+            name: 'third',
+            component: './AAGeitpay/Third/TableList',
+          },
+          {
+            path: '/basic/pay-type',
+            name: 'pay-type',
+            component: './AAGeitpay/PayType/TableList',
+          },
+          {
+            path: '/basic/third-return',
+            name: 'third-return',
+            component: './AAGeitpay/ThirdReturn/TableList',
+          },
+          {
+            path: '/basic/third-state',
+            name: 'third-state',
+            component: './AAGeitpay/ThirdState/TableList',
+          },
+          {
+            path: '/basic/trans-type',
+            name: 'trans-type',
+            component: './AAGeitpay/TransType/TableList',
+          },
+          {
+            path: '/basic/error-code',
+            name: 'error-code',
+            component: './AAGeitpay/ErrorCode/TableList',
+          },
+          {
+            path: '/basic/merchant',
+            name: 'merchant',
+            component: './AAGeitpay/Merchant/TableList',
+          },
+          {
+            path: '/basic/merchant-acc',
+            name: 'merchant-acc',
+            component: './AAGeitpay/MerchantAcc/TableList',
+          },
+          {
+            path: '/basic/casher',
+            name: 'casher',
+            component: './AAGeitpay/Casher/TableList',
+          },
+          {
+            path: '/basic/industry',
+            name: 'industry',
+            component: './AAGeitpay/Industry/TableList',
+          },
+          {
+            path: '/basic/order',
+            name: 'order',
+            component: './AAGeitpay/Order/TableList',
+          },
+        ],
+      },
       {
         path: '/trans',
         name: 'trans',
