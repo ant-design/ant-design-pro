@@ -166,8 +166,8 @@ export async function updateFakeList(params) {
   });
 }
 
-export async function fakeAccountLogin(params) {
-  return request(`${url}/login.account`, {
+export async function fakeAccountLogi(params) {
+  return request(`/api/login/account`, {
     method: 'POST',
     body: params,
   });
