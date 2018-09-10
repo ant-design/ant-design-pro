@@ -1,6 +1,6 @@
 import React from 'react';
 import { Drawer } from 'antd';
-import SiderMenu from './SliderMenu';
+import SiderMenu from './SiderMenu';
 
 /**
  * Recursively flatten the data
