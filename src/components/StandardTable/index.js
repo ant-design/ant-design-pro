@@ -68,6 +68,8 @@ class StandardTable extends PureComponent {
       loading,
       columns,
       rowKey,
+      scroll,
+      expandedRowRender,
     } = this.props;
 
     const paginationProps = {
@@ -86,7 +88,7 @@ class StandardTable extends PureComponent {
 
     return (
       <div className={styles.standardTable}>
-        <div className={styles.tableAlert}>
+        {/* <div className={styles.tableAlert}>
           <Alert
             message={
               <Fragment>
@@ -108,7 +110,7 @@ class StandardTable extends PureComponent {
             type="info"
             showIcon
           />
-        </div>
+        </div> */}
         <Table
           loading={loading}
           rowKey={rowKey || 'key'}
@@ -117,6 +119,9 @@ class StandardTable extends PureComponent {
           columns={columns}
           pagination={paginationProps}
           onChange={this.handleTableChange}
+          size="small"
+          scroll={scroll || {}}
+          expandedRowRender={expandedRowRender || ''}
         />
       </div>
     );
