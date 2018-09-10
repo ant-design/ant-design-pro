@@ -71,6 +71,7 @@
     "eslint-plugin-markdown": "^1.0.0-beta.6",
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^1.2.0",
+    "husky": "^0.14.3",
     "lint-staged": "^7.2.0",
     "merge-umi-mock-data": "^0.0.3",
     "mockjs": "^1.0.1-beta3",
