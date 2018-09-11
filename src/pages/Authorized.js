@@ -2,24 +2,15 @@ import React from 'react';
 import RenderAuthorized from '@/components/Authorized';
 import Exception from '@/components/Exception';
 import { getAuthority } from '@/utils/authority';
-import { matchRoutes } from 'react-router-config';
-import intersection from 'lodash/intersection';
 import { formatMessage } from 'umi/locale';
 import Link from 'umi/link';
+import Redirect from 'umi/redirect';
 
-const Authorized = RenderAuthorized(getAuthority());
+const Authority = getAuthority();
+const Authorized = RenderAuthorized(Authority);
 
-export default ({ children, route, location }) => {
-  const routes = matchRoutes(route.routes, location.pathname);
-  const authorities = [];
-  routes.forEach(item => {
-    if (Array.isArray(item.route.authority) && item.route.authority.length) {
-      authorities.push(item.route.authority);
-    } else if (typeof item.route.authority === 'string' && item.route.authority) {
-      authorities.push([item.route.authority]);
-    }
-  });
-  const noMatch = (
+export default ({ children }) => {
+  let noMatch = (
     <Exception
       type="403"
       desc={formatMessage({ id: 'app.exception.description.403' })}
@@ -27,11 +18,13 @@ export default ({ children, route, location }) => {
       backText={formatMessage({ id: 'app.exception.back' })}
     />
   );
+  // if Authority === ['guest'] redirect to /user/login
+  // You can implement the logic here.
+  if (Authority.join('') === 'guest') {
+    noMatch = <Redirect to="/user/login" />;
+  }
   return (
-    <Authorized
-      authority={authorities.length === 0 ? undefined : intersection(...authorities)}
-      noMatch={noMatch}
-    >
+    <Authorized authority={children.props.route.authority} noMatch={noMatch}>
       {children}
     </Authorized>
   );
