@@ -87,7 +87,7 @@ export default class SiderMenu extends PureComponent {
   };
 
   render() {
-    const { logo, collapsed, onCollapse, fixSiderbar, theme } = this.props;
+    const { logo, collapsed, fixSiderbar, theme } = this.props;
     const { openKeys } = this.state;
     const defaultProps = collapsed ? {} : { openKeys };
 
@@ -95,14 +95,12 @@ export default class SiderMenu extends PureComponent {
       [styles.fixSiderbar]: fixSiderbar,
       [styles.light]: theme === 'light',
     });
-
     return (
       <Sider
         trigger={null}
         collapsible
         collapsed={collapsed}
         breakpoint="lg"
-        onCollapse={onCollapse}
         width={256}
         theme={theme}
         className={siderClassName}
