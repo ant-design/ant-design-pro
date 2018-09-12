@@ -9,6 +9,7 @@ export interface IExceptionProps {
   style?: React.CSSProperties;
   className?: string;
   backText?: React.ReactNode;
+  redirect?: string;
 }
 
 export default class Exception extends React.Component<IExceptionProps, any> {}

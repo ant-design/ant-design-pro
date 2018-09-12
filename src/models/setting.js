@@ -4,11 +4,9 @@ import defaultSettings from '../defaultSettings';
 let lessNodesAppended;
 const updateTheme = primaryColor => {
   // // Don't compile less in production!
-  /* eslint-disable */
   if (APP_TYPE !== 'site') {
     return;
   }
-  /* eslint-disable */
   // Determine if the component is remounted
   if (!primaryColor) {
     return;
@@ -111,8 +109,8 @@ export default {
       if (state.primaryColor !== primaryColor) {
         updateTheme(primaryColor);
       }
-      if (state.contentWidth !== contentWidth) {
-        window.dispatchEvent ? window.dispatchEvent(new Event('resize')) : null;
+      if (state.contentWidth !== contentWidth && window.dispatchEvent) {
+        window.dispatchEvent(new Event('resize'));
       }
       updateColorWeak(colorWeak);
       window.history.replaceState(null, 'setting', urlParams.href);

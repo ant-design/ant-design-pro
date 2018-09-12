@@ -15,6 +15,7 @@ export default [
     path: '/',
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
+    authority: ['admin', 'user'],
     routes: [
       // dashboard
       { path: '/', redirect: '/dashboard/analysis' },
@@ -95,6 +96,7 @@ export default [
           {
             path: '/form/advanced-form',
             name: 'advancedform',
+            authority: ['admin'],
             component: './Forms/AdvancedForm',
           },
         ],
@@ -162,6 +164,7 @@ export default [
           {
             path: '/profile/advanced',
             name: 'advanced',
+            authority: ['admin'],
             component: './Profile/AdvancedProfile',
           },
         ],
