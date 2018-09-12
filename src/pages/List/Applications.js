@@ -12,11 +12,24 @@ import styles from './Applications.less';
 const { Option } = Select;
 const FormItem = Form.Item;
 
-@Form.create()
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
+@Form.create({
+  onValuesChange({ dispatch }, values) {
+    // 表单项变化时请求数据
+    // eslint-disable-next-line
+    console.log(values);
+    // 模拟查询表单生效
+    dispatch({
+      type: 'list/fetch',
+      payload: {
+        count: 8,
+      },
+    });
+  },
+})
 class FilterCardList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -27,24 +40,6 @@ class FilterCardList extends PureComponent {
       },
     });
   }
-
-  handleFormSubmit = () => {
-    const { form, dispatch } = this.props;
-    // setTimeout 用于保证获取表单值是在所有表单字段更新完毕的时候
-    setTimeout(() => {
-      form.validateFields(err => {
-        if (!err) {
-          // eslint-disable-next-line
-          dispatch({
-            type: 'list/fetch',
-            payload: {
-              count: 8,
-            },
-          });
-        }
-      });
-    }, 0);
-  };
 
   render() {
     const {
@@ -101,7 +96,7 @@ class FilterCardList extends PureComponent {
             <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
-                  <TagSelect onChange={this.handleFormSubmit} expandable>
+                  <TagSelect expandable>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
                     <TagSelect.Option value="cat3">类目三</TagSelect.Option>
@@ -123,11 +118,7 @@ class FilterCardList extends PureComponent {
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem {...formItemLayout} label="作者">
                     {getFieldDecorator('author', {})(
-                      <Select
-                        onChange={this.handleFormSubmit}
-                        placeholder="不限"
-                        style={{ maxWidth: 200, width: '100%' }}
-                      >
+                      <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="lisa">王昭君</Option>
                       </Select>
                     )}
@@ -136,11 +127,7 @@ class FilterCardList extends PureComponent {
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem {...formItemLayout} label="好评度">
                     {getFieldDecorator('rate', {})(
-                      <Select
-                        onChange={this.handleFormSubmit}
-                        placeholder="不限"
-                        style={{ maxWidth: 200, width: '100%' }}
-                      >
+                      <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="good">优秀</Option>
                         <Option value="normal">普通</Option>
                       </Select>

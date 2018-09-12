@@ -12,11 +12,24 @@ const FormItem = Form.Item;
 
 const pageSize = 5;
 
-@Form.create()
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
+@Form.create({
+  onValuesChange({ dispatch }, values) {
+    // 表单项变化时请求数据
+    // eslint-disable-next-line
+    console.log(values);
+    // 模拟查询表单生效
+    dispatch({
+      type: 'list/fetch',
+      payload: {
+        count: 5,
+      },
+    });
+  },
+})
 class SearchList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -125,7 +138,7 @@ class SearchList extends Component {
             <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
-                  <TagSelect onChange={this.handleFormSubmit} expandable>
+                  <TagSelect expandable>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
                     <TagSelect.Option value="cat3">类目三</TagSelect.Option>
@@ -174,7 +187,6 @@ class SearchList extends Component {
                   <FormItem {...formItemLayout} label="活跃用户">
                     {getFieldDecorator('user', {})(
                       <Select
-                        onChange={this.handleFormSubmit}
                         placeholder="不限"
                         style={{ maxWidth: 200, width: '100%' }}
                       >
@@ -187,7 +199,6 @@ class SearchList extends Component {
                   <FormItem {...formItemLayout} label="好评度">
                     {getFieldDecorator('rate', {})(
                       <Select
-                        onChange={this.handleFormSubmit}
                         placeholder="不限"
                         style={{ maxWidth: 200, width: '100%' }}
                       >
