@@ -1,13 +1,9 @@
 import React from 'react';
-import RenderAuthorized from '@/components/Authorized';
+import Authorized from '@/utils/Authorized';
 import Exception from '@/components/Exception';
-import { getAuthority } from '@/utils/authority';
 import { formatMessage } from 'umi/locale';
 import Link from 'umi/link';
 import Redirect from 'umi/redirect';
-
-const Authority = getAuthority();
-const Authorized = RenderAuthorized(Authority);
 
 export default ({ children }) => {
   let noMatch = (
@@ -20,7 +16,7 @@ export default ({ children }) => {
   );
   // if Authority === ['guest'] redirect to /user/login
   // You can implement the logic here.
-  if (Authority.join('') === 'guest') {
+  if (Authorized.getCurrentAuthority().join('') === 'guest') {
     noMatch = <Redirect to="/user/login" />;
   }
   return (
