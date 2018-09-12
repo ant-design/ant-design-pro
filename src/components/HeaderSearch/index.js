@@ -69,14 +69,14 @@ export default class HeaderSearch extends PureComponent {
   };
 
   enterSearchMode = () => {
+    const { onVisibleChange } = this.props;
+    onVisibleChange(true);
     this.setState({ searchMode: true }, () => {
       const { searchMode } = this.state;
       if (searchMode) {
         this.input.focus();
       }
     });
-    const { onVisibleChange } = this.props;
-    onVisibleChange(true);
   };
 
   leaveSearchMode = () => {
@@ -110,11 +110,9 @@ export default class HeaderSearch extends PureComponent {
         className={classNames(className, styles.headerSearch)}
         onClick={this.enterSearchMode}
         onTransitionEnd={({ propertyName }) => {
-          if (propertyName === 'width') {
-            if (!searchMode) {
-              const { onVisibleChange } = this.props;
-              onVisibleChange(searchMode);
-            }
+          if (propertyName === 'width' && !searchMode) {
+            const { onVisibleChange } = this.props;
+            onVisibleChange(searchMode);
           }
         }}
       >
