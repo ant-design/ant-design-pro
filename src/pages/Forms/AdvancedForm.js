@@ -74,6 +74,49 @@ class AdvancedForm extends PureComponent {
     window.removeEventListener('resize', this.resizeFooterToolbar);
   }
 
+  getErrorInfo = () => {
+    const {
+      form: { getFieldsError },
+    } = this.props;
+    const errors = getFieldsError();
+    const errorCount = Object.keys(errors).filter(key => errors[key]).length;
+    if (!errors || errorCount === 0) {
+      return null;
+    }
+    const scrollToField = fieldKey => {
+      const labelNode = document.querySelector(`label[for="${fieldKey}"]`);
+      if (labelNode) {
+        labelNode.scrollIntoView(true);
+      }
+    };
+    const errorList = Object.keys(errors).map(key => {
+      if (!errors[key]) {
+        return null;
+      }
+      return (
+        <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
+          <Icon type="cross-circle-o" className={styles.errorIcon} />
+          <div className={styles.errorMessage}>{errors[key][0]}</div>
+          <div className={styles.errorField}>{fieldLabels[key]}</div>
+        </li>
+      );
+    });
+    return (
+      <span className={styles.errorIcon}>
+        <Popover
+          title="表单校验信息"
+          content={errorList}
+          overlayClassName={styles.errorPopover}
+          trigger="click"
+          getPopupContainer={trigger => trigger.parentNode}
+        >
+          <Icon type="exclamation-circle" />
+        </Popover>
+        {errorCount}
+      </span>
+    );
+  };
+
   resizeFooterToolbar = () => {
     requestAnimationFrame(() => {
       const sider = document.querySelectorAll('.ant-layout-sider')[0];
@@ -87,60 +130,29 @@ class AdvancedForm extends PureComponent {
     });
   };
 
-  render() {
-    const { form, dispatch, submitting } = this.props;
-    const { getFieldDecorator, validateFieldsAndScroll, getFieldsError } = form;
-    const validate = () => {
-      validateFieldsAndScroll((error, values) => {
-        if (!error) {
-          // submit the values
-          dispatch({
-            type: 'form/submitAdvancedForm',
-            payload: values,
-          });
-        }
-      });
-    };
-    const errors = getFieldsError();
-    const getErrorInfo = () => {
-      const errorCount = Object.keys(errors).filter(key => errors[key]).length;
-      if (!errors || errorCount === 0) {
-        return null;
+  validate = () => {
+    const {
+      form: { validateFieldsAndScroll },
+      dispatch,
+    } = this.props;
+    validateFieldsAndScroll((error, values) => {
+      if (!error) {
+        // submit the values
+        dispatch({
+          type: 'form/submitAdvancedForm',
+          payload: values,
+        });
       }
-      const scrollToField = fieldKey => {
-        const labelNode = document.querySelector(`label[for="${fieldKey}"]`);
-        if (labelNode) {
-          labelNode.scrollIntoView(true);
-        }
-      };
-      const errorList = Object.keys(errors).map(key => {
-        if (!errors[key]) {
-          return null;
-        }
-        return (
-          <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
-            <Icon type="cross-circle-o" className={styles.errorIcon} />
-            <div className={styles.errorMessage}>{errors[key][0]}</div>
-            <div className={styles.errorField}>{fieldLabels[key]}</div>
-          </li>
-        );
-      });
-      return (
-        <span className={styles.errorIcon}>
-          <Popover
-            title="表单校验信息"
-            content={errorList}
-            overlayClassName={styles.errorPopover}
-            trigger="click"
-            getPopupContainer={trigger => trigger.parentNode}
-          >
-            <Icon type="exclamation-circle" />
-          </Popover>
-          {errorCount}
-        </span>
-      );
-    };
+    });
+  };
+
+  render() {
+    const {
+      form: { getFieldDecorator },
+      submitting,
+    } = this.props;
     const { width } = this.state;
+
     return (
       <PageHeaderWrapper
         title="高级表单"
@@ -298,8 +310,8 @@ class AdvancedForm extends PureComponent {
           })(<TableForm />)}
         </Card>
         <FooterToolbar style={{ width }}>
-          {getErrorInfo()}
-          <Button type="primary" onClick={validate} loading={submitting}>
+          {this.getErrorInfo()}
+          <Button type="primary" onClick={this.validate} loading={submitting}>
             提交
           </Button>
         </FooterToolbar>
