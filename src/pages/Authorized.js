@@ -15,12 +15,13 @@ export default ({ children }) => {
       type="403"
       desc={formatMessage({ id: 'app.exception.description.403' })}
       linkElement={Link}
-      backText={formatMessage({ id: 'app.exception.back' })}
+      redirect="/user/login"
+      backText="back to login"
     />
   );
   // if Authority === ['guest'] redirect to /user/login
   // You can implement the logic here.
-  if (Authority.join('') === 'guest') {
+  if (Authority === 'guest' || Authority.join('') === 'guest') {
     noMatch = <Redirect to="/user/login" />;
   }
   return (
