@@ -9,6 +9,9 @@ module.exports = {
     jest: true,
     jasmine: true,
   },
+  globals: {
+    APP_TYPE: true,
+  },
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js'] }],
     'react/jsx-wrap-multilines': 0,
