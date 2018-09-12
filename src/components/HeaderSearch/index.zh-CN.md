@@ -18,4 +18,6 @@ dataSource | 当前提示内容列表 | string[] | -
 onSearch | 选择某项或按下回车时的回调 | function(value) | -
 onChange | 输入搜索字符的回调 | function(value) | -
 onPressEnter | 按下回车时的回调 | function(value) | -
-defaultOpen | 输入框首次显示是否打开 | boolean | false
+onVisibleChange | 显示或隐藏文本框的回调 | function(value) |-
+defaultOpen | 输入框首次显示是否显示  | boolean | false
+open | 控制输入框是否显示 | booelan |false
