@@ -127,7 +127,7 @@ class Pie extends Component {
       style,
       height,
       forceFit = true,
-      percent = 0,
+      percent,
       color,
       inner = 0.75,
       animate = true,
