@@ -75,11 +75,10 @@ export default {
           data: action.payload,
         };
       } 
-        return {
-          ...state,
-          ...action.payload,
-        };
-      
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
     saveKV(state, action) {
       return {
@@ -87,14 +86,13 @@ export default {
         ...action.payload,
       };
     },
-    // clean(state){
-    //   return {
-    //     ...state,
-    //     data: {
-    //       list: [],
-    //       pagination: {},
-    //     },
-    //   }
-    // },
+    clean(){
+      return {
+        data: {
+          list: [],
+          pagination: {},
+        },
+      }
+    },
   },
 };
