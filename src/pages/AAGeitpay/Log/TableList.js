@@ -327,16 +327,6 @@ export default class TableList extends PureComponent {
     const { tradeSpace } = this.state;
 
     dispatch({
-      type: 'table/fetchKV',
-      payload: {
-        tradeCode: 'selectKeyValue',
-        key: 'F_CODE',
-        value: 'F_NAME',
-        table: 'T_INDUSTRY',
-      },
-    });
-
-    dispatch({
       type: 'table/fetch',
       payload: {
         tradeCode: `${tradeSpace  }.selectByPrimaryKey`,
