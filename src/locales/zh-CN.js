@@ -4,6 +4,11 @@ export default {
   'navbar.lang': 'English',
   'menu.home': '首页',
 
+  'menu.face': '人脸库',
+  'menu.face.wall': '图片墙',
+  'menu.face.facelist': '个人信息',
+  'menu.face.facetype': '库类型',
+
   'menu.test': 'test',
   'menu.test.table-list': 'test',
   'menu.test.advanced-form': 'form',

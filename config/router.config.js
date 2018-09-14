@@ -19,6 +19,29 @@ module.exports = [
       // dashboard
       { path: '/', redirect: '/dashboard/analysis' },
       {
+        path: '/face',
+        name: 'face',
+        icon: 'user',
+        routes: [
+          {
+            path: '/face/wall',
+            name: 'wall',
+            component: './AAGeitpay/Wall/TableList',
+          },
+          {
+            path: '/face/list',
+            name: 'facelist',
+            component: './AAGeitpay/Face/TableList',
+          },
+          {
+            path: '/face/type',
+            name: 'facetype',
+            component: './AAGeitpay/Facetype/TableList',
+          },
+          
+        ],
+      },
+      {
         path: '/dev',
         name: 'dev',
         icon: 'tool',
