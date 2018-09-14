@@ -6,12 +6,12 @@ let CURRENT = 'NULL';
  */
 const renderAuthorize = Authorized => currentAuthority => {
   if (currentAuthority) {
-    if (currentAuthority.constructor.name === 'Function') {
+    if (typeof currentAuthority === 'function') {
       CURRENT = currentAuthority();
     }
     if (
-      currentAuthority.constructor.name === 'String' ||
-      currentAuthority.constructor.name === 'Array'
+      Object.prototype.toString.call(currentAuthority) === '[object String]' ||
+      Array.isArray(currentAuthority)
     ) {
       CURRENT = currentAuthority;
     }
