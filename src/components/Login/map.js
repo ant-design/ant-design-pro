@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatMessage } from 'umi/locale';
 import { Icon } from 'antd';
 import styles from './index.less';
 
@@ -7,12 +8,14 @@ export default {
     props: {
       size: 'large',
       prefix: <Icon type="user" className={styles.prefixIcon} />,
-      placeholder: 'admin',
     },
     rules: [
       {
         required: true,
-        message: 'Please enter username!',
+        message: formatMessage(
+          { id: 'login.username.required.message', defaultMessage: 'Please enter username!' },
+          {}
+        ),
       },
     ],
   },
@@ -26,7 +29,10 @@ export default {
     rules: [
       {
         required: true,
-        message: 'Please enter password!',
+        message: formatMessage(
+          { id: 'login.password.required.message', defaultMessage: 'Please enter password!' },
+          {}
+        ),
       },
     ],
   },
@@ -39,11 +45,17 @@ export default {
     rules: [
       {
         required: true,
-        message: 'Please enter mobile number!',
+        message: formatMessage(
+          { id: 'login.mobile.required.message', defaultMessage: 'Please enter mobile number!' },
+          {}
+        ),
       },
       {
         pattern: /^1\d{10}$/,
-        message: 'Wrong mobile number format!',
+        message: formatMessage(
+          { id: 'login.mobile.format.message', defaultMessage: 'Wrong mobile number format!' },
+          {}
+        ),
       },
     ],
   },
@@ -56,7 +68,10 @@ export default {
     rules: [
       {
         required: true,
-        message: 'Please enter Captcha!',
+        message: formatMessage(
+          { id: 'login.captcha.required.message', defaultMessage: 'Please enter Captcha!' },
+          {}
+        ),
       },
     ],
   },

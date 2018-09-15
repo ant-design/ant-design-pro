@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
+import { FormattedMessage, formatMessage } from 'umi/locale';
 import Link from 'umi/link';
 import { Checkbox, Alert, Icon } from 'antd';
 import Login from '@/components/Login';
@@ -75,11 +76,26 @@ class LoginPage extends Component {
             this.loginForm = form;
           }}
         >
-          <Tab key="account" tab="账户密码登录">
+          <Tab
+            key="account"
+            tab={formatMessage(
+              { id: 'user.login.type.account.title', defaultMessage: 'Account Login' },
+              {}
+            )}
+          >
+            ,
             {login.status === 'error' &&
               login.type === 'account' &&
               !submitting &&
-              this.renderMessage('账户或密码错误（admin/888888）')}
+              this.renderMessage(
+                formatMessage(
+                  {
+                    id: 'user.login.account.error.message',
+                    defaultMessage: 'account or password error!',
+                  },
+                  {}
+                )
+              )}
             <UserName name="userName" placeholder="admin/user" />
             <Password
               name="password"
@@ -87,30 +103,43 @@ class LoginPage extends Component {
               onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
             />
           </Tab>
-          <Tab key="mobile" tab="手机号登录">
+          <Tab
+            key="mobile"
+            tab={formatMessage(
+              { id: 'user.login.type.mobile.title', defaultMessage: 'Mobile Login' },
+              {}
+            )}
+          >
             {login.status === 'error' &&
               login.type === 'mobile' &&
               !submitting &&
-              this.renderMessage('验证码错误')}
+              this.renderMessage(
+                formatMessage(
+                  { id: 'user.login.mobile.error.message', defaultMessage: 'captcha error!' },
+                  {}
+                )
+              )}
             <Mobile name="mobile" />
             <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
           </Tab>
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
-              自动登录
+              <FormattedMessage id="user.login.auto-login" defaultMessage="Auto Login" />
             </Checkbox>
             <a style={{ float: 'right' }} href="">
-              忘记密码
+              <FormattedMessage id="user.login.forgot-password" defaultMessage="Forgot Password" />
             </a>
           </div>
-          <Submit loading={submitting}>登录</Submit>
+          <Submit loading={submitting}>
+            <FormattedMessage id="user.login.submit" defaultMessage="Login" />
+          </Submit>
           <div className={styles.other}>
-            其他登录方式
+            <FormattedMessage id="user.login.other-login-mode" defaultMessage="Others" />
             <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
             <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
             <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
             <Link className={styles.register} to="/User/Register">
-              注册账户
+              <FormattedMessage id="user.login.to-register" defaultMessage="Register" />
             </Link>
           </div>
         </Login>
