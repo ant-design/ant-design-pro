@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import { FormattedMessage, setLocale, getLocale } from 'umi/locale';
+import { FormattedMessage } from 'umi/locale';
 import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
+import { changLang } from '@/components/_utils/applicationTools';
 
 export default class GlobalHeaderRight extends PureComponent {
   getNoticeData() {
@@ -38,15 +39,6 @@ export default class GlobalHeaderRight extends PureComponent {
     });
     return groupBy(newNotices, 'type');
   }
-
-  changLang = () => {
-    const locale = getLocale();
-    if (!locale || locale === 'zh-CN') {
-      setLocale('en-US');
-    } else {
-      setLocale('zh-CN');
-    }
-  };
 
   render() {
     const {
@@ -159,7 +151,7 @@ export default class GlobalHeaderRight extends PureComponent {
             margin: '0 8px',
           }}
           onClick={() => {
-            this.changLang();
+            changLang();
           }}
         >
           <FormattedMessage id="navbar.lang" />
