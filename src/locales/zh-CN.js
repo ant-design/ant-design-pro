@@ -1,6 +1,50 @@
-// import zhMessages from '../../locales/zh.json';
-
 export default {
+  // Login Components
+  'login.username.required.message': '请输入用户名!',
+  'login.password.required.message': '请输入密码!',
+  'login.mobile.required.message': '请输入手机号!',
+  'login.mobile.format.message': '手机号格式不正确!',
+  'login.captcha.get-captcha-button-text': '获取验证码',
+  'login.captcha.required.message': '请输入验证码!',
+  // User Login
+  'user.login.type.account.title': '账户登录',
+  'user.login.account.error.message': '账户或密码错误（admin/888888）!',
+  'user.login.type.mobile.title': '手机号登录',
+  'user.login.mobile.error.message': '或密码错误（admin/888888）',
+
+  'user.login.submit': '登录',
+  'user.login.auto-login': '自动登录',
+  'user.login.forgot-password': '忘记密码',
+  'user.login.other-login-mode': '其他登录方式',
+  'user.login.to-register': '注册账户',
+  // Register
+  'user.register.title': '注册',
+  'user.register.mail.title': '邮箱',
+  'user.register.mail.required.message': '请输入邮箱地址！',
+  'user.register.mail.format.message': '邮箱地址格式错误！',
+
+  'user.register.password.title': '至少6位密码，区分大小写',
+  'user.register.password.required.message': '请输入密码！',
+  'user.register.password.status.desc': '请至少输入 6 个字符。请不要使用容易被猜到的密码。',
+  'user.register.password.status.ok': '强度：强', // strength
+  'user.register.password.status.pass': '强度：中',
+  'user.register.password.status.poor': '强度：太短',
+
+  'user.register.confirm-password.title': '确认密码',
+  'user.register.confirm-password.required.message': '请确认密码！',
+  'user.register.confirm-password.error.message': '两次输入的密码不匹配！',
+
+  'user.register.mobile.title': '11位手机号',
+  'user.register.mobile.required.message': '请输入手机号！',
+  'user.register.mobile.format.message': '手机号格式错误！',
+
+  'user.register.captcha.title': '验证码',
+  'user.register.captcha.get-captcha-button-text': '获取验证码',
+  'user.register.captcha.required.message': '请输入验证码！',
+
+  'user.register.submit': '注册',
+  'user.register.to-login': '使用已有账户登录',
+  // App
   'navbar.lang': 'English',
   'menu.home': '首页',
   'menu.dashboard': 'Dashboard',

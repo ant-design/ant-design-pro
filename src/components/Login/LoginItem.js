@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Row, Col } from 'antd';
+import { formatMessage } from 'umi/locale';
 import omit from 'omit.js';
 import styles from './index.less';
 import ItemMap from './map';
@@ -9,7 +10,10 @@ const FormItem = Form.Item;
 
 class WarpFormItem extends Component {
   static defaultProps = {
-    buttonText: '获取验证码',
+    buttonText: formatMessage(
+      { id: 'login.captcha.get-captcha-button-text', defaultMessage: 'Get Captcha' },
+      {}
+    ),
   };
 
   constructor(props) {
