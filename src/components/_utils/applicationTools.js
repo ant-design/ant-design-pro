@@ -10,7 +10,7 @@ export function changLang() {
 }
 
 export function getCopyrightInfo() {
-  return '2018 蚂蚁金服体验技术部出品 sdfsadfasdf ';
+  return '2018 蚂蚁金服体验技术部出品';
 }
 
 export function getApplicationTitle() {
