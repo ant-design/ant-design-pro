@@ -43,9 +43,9 @@ class WarpFormItem extends Component {
     }
   };
 
-  getFormItemOptions = ({ onChange, defaultValue, rules }) => {
+  getFormItemOptions = ({ onChange, defaultValue, customprops, rules }) => {
     const options = {
-      rules: rules || this.customprops.rules,
+      rules: rules || customprops.rules,
     };
     if (onChange) {
       options.onChange = onChange;
