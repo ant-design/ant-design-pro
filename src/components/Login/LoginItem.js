@@ -7,7 +7,7 @@ import LoginContext from './loginContext';
 
 const FormItem = Form.Item;
 
-class WarpFormItem extends Component {
+class WrapFormItem extends Component {
   static defaultProps = {
     buttonText: '获取验证码',
   };
