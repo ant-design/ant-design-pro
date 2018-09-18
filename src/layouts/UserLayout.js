@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
-import { Icon, Button } from 'antd';
+import { Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
@@ -52,13 +52,13 @@ class UserLayout extends React.PureComponent {
       // @TODO <DocumentTitle title={this.getPageTitle()}>
       <div className={styles.container}>
         <div className={styles.lang}>
-          <Button
+          <a
             onClick={() => {
               changLang();
             }}
           >
             <FormattedMessage id="navbar.lang" />
-          </Button>
+          </a>
         </div>
         <div className={styles.content}>
           <div className={styles.top}>
