@@ -222,17 +222,20 @@ export default class Ellipsis extends Component {
     // support document.body.style.webkitLineClamp
     if (isSupportLineClamp) {
       const style = `#${id}{-webkit-line-clamp:${lines};-webkit-box-orient: vertical;}`;
-      return (
+
+      const node = (
         <div id={id} className={cls} {...restProps}>
           <style>{style}</style>
-          {tooltip ? (
-            <Tooltip overlayStyle={TooltipOverlayStyle} title={children}>
-              {children}
-            </Tooltip>
-          ) : (
-            children
-          )}
+          {children}
         </div>
+      );
+
+      return tooltip ? (
+        <Tooltip overlayStyle={TooltipOverlayStyle} title={children}>
+          {node}
+        </Tooltip>
+      ) : (
+        node
       );
     }
 
