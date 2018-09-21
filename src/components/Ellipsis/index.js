@@ -95,7 +95,7 @@ export default class Ellipsis extends Component {
   computeLine = () => {
     const { lines } = this.props;
     if (lines && !isSupportLineClamp) {
-      const text = this.shadowChildren.innerText;
+      const text = this.shadowChildren.innerText || this.shadowChildren.textContent;
       const lineHeight = parseInt(getComputedStyle(this.root).lineHeight, 10);
       const targetHeight = lines * lineHeight;
       this.content.style.height = `${targetHeight}px`;
