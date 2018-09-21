@@ -129,7 +129,7 @@ Object.keys(ItemMap).forEach(key => {
   LoginItem[key] = props => (
     <LoginContext.Consumer>
       {context => (
-        <WarpFormItem
+        <WrapFormItem
           customprops={item.props}
           {...props}
           rules={item.rules}
