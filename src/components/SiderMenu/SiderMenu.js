@@ -6,6 +6,7 @@ import Link from 'umi/link';
 import styles from './index.less';
 import BaseMenu, { getMenuMatches } from './BaseMenu';
 import { urlToList } from '../_utils/pathTools';
+import { getApplicationTitle } from '@/components/_utils/applicationTools';
 
 const { Sider } = Layout;
 
@@ -110,7 +111,7 @@ export default class SiderMenu extends PureComponent {
         <div className={styles.logo} id="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
-            <h1>Ant Design Pro</h1>
+            <h1>{getApplicationTitle()}</h1>
           </Link>
         </div>
         <BaseMenu

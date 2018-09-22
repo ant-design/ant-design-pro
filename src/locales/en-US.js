@@ -1,4 +1,52 @@
 export default {
+  // Login Components
+  'login.username.required.message': 'Please enter username!',
+  'login.password.required.message': 'Please enter password!',
+  'login.mobile.required.message': 'Please enter mobile number!',
+  'login.mobile.format.message': 'Wrong mobile number format!',
+  'login.captcha.get-captcha-button-text': 'Get Captcha',
+  'login.captcha.required.message': 'Please enter Captcha!',
+  // User Login
+  'user.login.type.account.title': 'Account Login',
+  'user.login.account.error.message': 'account or password is error（admin/888888）!',
+  'user.login.type.mobile.title': 'Mobile Login',
+  'user.login.mobile.error.message': 'captcha is error!',
+
+  'user.login.submit': 'Login',
+  'user.login.auto-login': 'Auto Login',
+  'user.login.forgot-password': 'Forgot password?',
+  'user.login.other-login-mode': 'Others',
+  'user.login.to-register': 'Create an account',
+
+  // Register
+  'user.register.title': 'Register',
+  'user.register.mail.title': 'email',
+  'user.register.mail.required.message': 'Please enter mail!',
+  'user.register.mail.format.message': 'Wrong email format!',
+
+  'user.register.password.title': 'least 6 bits, case sensitive',
+  'user.register.password.required.message': 'Please enter password！',
+  'user.register.password.status.desc':
+    'Please enter at least 6 characters. Please do not use easily guessed passwords.',
+  'user.register.password.status.ok': 'Status：Ok',
+  'user.register.password.status.pass': 'Status：Pass',
+  'user.register.password.status.poor': 'Status：Poor',
+
+  'user.register.confirm-password.title': 'confirm password',
+  'user.register.confirm-password.required.message': 'Please enter confirm password！',
+  'user.register.confirm-password.error.message': 'Two passwords do not match！',
+
+  'user.register.mobile.title': 'mobile number',
+  'user.register.mobile.required.message': 'Please enter mobile number!',
+  'user.register.mobile.format.message': 'Wrong mobile number format!',
+
+  'user.register.captcha.title': 'captcha',
+  'user.register.captcha.get-captcha-button-text': 'Get Captcha',
+  'user.register.captcha.required.message': 'Please enter captcha!',
+
+  'user.register.submit': 'Register',
+  'user.register.to-login': 'Already have an account',
+  // App
   'navbar.lang': '中文',
   'menu.home': 'Home',
   'menu.dashboard': 'Dashboard',
