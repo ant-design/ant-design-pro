@@ -77,6 +77,7 @@ export default class GlobalHeaderRight extends PureComponent {
       <Menu className={styles.menu} selectedKeys={[getLocale()]} onClick={this.changLang}>
         <Menu.Item key="zh-CN">中文</Menu.Item>
         <Menu.Item key="en-US">English</Menu.Item>
+        <Menu.Item key="pt-BR">Português</Menu.Item>
       </Menu>
     );
     const noticeData = this.getNoticeData();
