@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage, setLocale, getLocale } from 'umi/locale';
-import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
+import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
@@ -39,13 +39,8 @@ export default class GlobalHeaderRight extends PureComponent {
     return groupBy(newNotices, 'type');
   }
 
-  changLang = () => {
-    const locale = getLocale();
-    if (!locale || locale === 'zh-CN') {
-      setLocale('en-US');
-    } else {
-      setLocale('zh-CN');
-    }
+  changLang = ({ key }) => {
+    setLocale(key);
   };
 
   render() {
@@ -76,6 +71,12 @@ export default class GlobalHeaderRight extends PureComponent {
           <Icon type="logout" />
           <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
         </Menu.Item>
+      </Menu>
+    );
+    const langMenu = (
+      <Menu className={styles.menu} selectedKeys={[getLocale()]} onClick={this.changLang}>
+        <Menu.Item key="zh-CN">中文</Menu.Item>
+        <Menu.Item key="en-US">English</Menu.Item>
       </Menu>
     );
     const noticeData = this.getNoticeData();
@@ -152,18 +153,11 @@ export default class GlobalHeaderRight extends PureComponent {
         ) : (
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )}
-        <Button
-          size="small"
-          ghost={theme === 'dark'}
-          style={{
-            margin: '0 8px',
-          }}
-          onClick={() => {
-            this.changLang();
-          }}
-        >
-          <FormattedMessage id="navbar.lang" />
-        </Button>
+        <Dropdown overlay={langMenu}>
+          <span className={styles.action}>
+            <FormattedMessage id="navbar.lang" /> <Icon type="down" />
+          </span>
+        </Dropdown>
       </div>
     );
   }
