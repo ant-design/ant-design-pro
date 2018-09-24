@@ -20,4 +20,6 @@ export interface IPageHeaderProps {
   hiddenBreadcrumb?:boolean;
 }
 
+export function getBreadcrumb(breadcrumbNameMap: Object, url: string): typeof Object;
+
 export default class PageHeader extends React.Component<IPageHeaderProps, any> {}
