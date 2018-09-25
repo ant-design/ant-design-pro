@@ -17,6 +17,7 @@ export interface IPageHeaderProps {
   style?: React.CSSProperties;
   home?: React.ReactNode;
   wide?: boolean;
+  hiddenBreadcrumb?:boolean;
 }
 
 export function getBreadcrumb(breadcrumbNameMap: Object, url: string): typeof Object;

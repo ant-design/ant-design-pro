@@ -20,6 +20,7 @@ order: 11
 | content | 内容区 | ReactNode | - |
 | extraContent | 额外内容区，位于content的右侧 | ReactNode | - |
 | breadcrumbList | 面包屑数据，配置了此属性时 `routes` `params` `location` `breadcrumbNameMap` 无效 | array<{title: ReactNode, href?: string}> | - |
+| hiddenBreadcrumb |隐藏面包屑 | boolean | false |
 | routes | 面包屑相关属性，router 的路由栈信息 | object[] | - |
 | params | 面包屑相关属性，路由的参数 | object | - |
 | location | 面包屑相关属性，当前的路由信息 | object | - |

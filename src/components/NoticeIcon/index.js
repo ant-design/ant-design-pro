@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { formatMessage } from 'umi/locale';
 import { Popover, Icon, Tabs, Badge, Spin } from 'antd';
 import classNames from 'classnames';
 import List from './NoticeList';
@@ -16,8 +17,8 @@ export default class NoticeIcon extends PureComponent {
     onClear: () => {},
     loading: false,
     locale: {
-      emptyText: '暂无数据',
-      clear: '清空',
+      emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
+      clear: formatMessage({ id: 'component.noticeIcon.clear' }),
     },
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };

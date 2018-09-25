@@ -1,5 +1,19 @@
 export default {
   'navbar.lang': '中文',
+  'component.globalHeader.search': 'Search',
+  'component.globalHeader.search.example1': 'Search example 1',
+  'component.globalHeader.search.example2': 'Search example 2',
+  'component.globalHeader.search.example3': 'Search example 3',
+  'component.globalHeader.help': 'Help',
+  'component.globalHeader.notification': 'Notification',
+  'component.globalHeader.notification.empty': 'You have viewed all notifications.',
+  'component.globalHeader.message': 'Message',
+  'component.globalHeader.message.empty': 'You have viewed all messsages.',
+  'component.globalHeader.event': 'Event',
+  'component.globalHeader.event.empty': 'You have viewed all events.',
+  'component.noticeIcon.clear': 'Clear',
+  'component.noticeIcon.cleared': 'Cleared',
+  'component.noticeIcon.empty': 'No notifications',
   'menu.home': 'Home',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': 'Analysis',
@@ -184,5 +198,5 @@ export default {
   'app.setting.copy': 'Copy Setting',
   'app.setting.copyinfo': 'copy success，please replace defaultSettings in src/models/setting.js',
   'app.setting.production.hint':
-    'Setting panel show in development enviroment only, please mannually modify',
+    'Setting panel shows in development environment only, please manually modify',
 };
