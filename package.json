@@ -80,7 +80,8 @@
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.0.0",
     "umi": "^2.0.1",
-    "umi-plugin-react": "^1.0.1"
+    "umi-plugin-react": "^1.0.1",
+    "umi-plugin-ga": "^1.0.2"
   },
   "optionalDependencies": {
     "puppeteer": "^1.6.0"
