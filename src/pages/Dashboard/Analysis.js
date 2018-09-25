@@ -64,6 +64,7 @@ class Analysis extends Component {
     salesType: 'all',
     currentTabKey: '',
     rangePickerValue: getTimeDistance('year'),
+    loading: true,
   };
 
   componentDidMount() {
