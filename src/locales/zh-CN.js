@@ -1,7 +1,7 @@
 // import zhMessages from '../../locales/zh.json';
 
 export default {
-  'navbar.lang': '中文',
+  'navbar.lang': 'English',
   'layout.user.link.help': '帮助',
   'layout.user.link.privacy': '隐私',
   'layout.user.link.terms': '条款',
