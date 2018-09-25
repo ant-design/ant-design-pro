@@ -66,12 +66,6 @@ class Analysis extends Component {
     };
   }
 
-  state = {
-    salesType: 'all',
-    currentTabKey: '',
-    rangePickerValue: getTimeDistance('year'),
-  };
-
   componentDidMount() {
     const { dispatch } = this.props;
     this.reqRef = requestAnimationFrame(() => {
