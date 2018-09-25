@@ -88,7 +88,11 @@ export default class GlobalHeaderRight extends PureComponent {
         <HeaderSearch
           className={`${styles.action} ${styles.search}`}
           placeholder={formatMessage({ id: 'component.globalHeader.search' })}
-          dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
+          dataSource={[
+            formatMessage({ id: 'component.globalHeader.search.example1' }),
+            formatMessage({ id: 'component.globalHeader.search.example2' }),
+            formatMessage({ id: 'component.globalHeader.search.example3' }),
+          ]}
           onSearch={value => {
             console.log('input', value); // eslint-disable-line
           }}
@@ -119,19 +123,19 @@ export default class GlobalHeaderRight extends PureComponent {
           popupAlign={{ offset: [20, -16] }}
         >
           <NoticeIcon.Tab
-            list={noticeData['通知']}
+            list={noticeData.notification}
             title={formatMessage({ id: 'component.globalHeader.notification' })}
             emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
           />
           <NoticeIcon.Tab
-            list={noticeData['消息']}
+            list={noticeData.message}
             title={formatMessage({ id: 'component.globalHeader.message' })}
             emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
           />
           <NoticeIcon.Tab
-            list={noticeData['待办']}
+            list={noticeData.event}
             title={formatMessage({ id: 'component.globalHeader.event' })}
             emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
