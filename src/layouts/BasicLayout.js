@@ -206,8 +206,8 @@ class BasicLayout extends React.PureComponent {
   };
 
   renderSettingDrawer() {
-    // Do show SettingDrawer in production
-    // unless deployed in preview.pro.ant.design as demo
+    // Do not render SettingDrawer in production
+    // unless it is deployed in preview.pro.ant.design as demo
     const { rendering } = this.state;
     if ((rendering || process.env.NODE_ENV === 'production') && APP_TYPE !== 'site') {
       return null;

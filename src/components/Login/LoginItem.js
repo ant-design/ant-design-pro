@@ -7,7 +7,7 @@ import LoginContext from './loginContext';
 
 const FormItem = Form.Item;
 
-class WarpFormItem extends Component {
+class WrapFormItem extends Component {
   static defaultProps = {
     buttonText: '获取验证码',
   };
@@ -129,7 +129,7 @@ Object.keys(ItemMap).forEach(key => {
   LoginItem[key] = props => (
     <LoginContext.Consumer>
       {context => (
-        <WarpFormItem
+        <WrapFormItem
           customprops={item.props}
           {...props}
           rules={item.rules}

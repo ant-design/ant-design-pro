@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { FormattedMessage, setLocale, getLocale } from 'umi/locale';
+import { FormattedMessage, formatMessage, setLocale, getLocale } from 'umi/locale';
 import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
 import Debounce from 'lodash-decorators/debounce';
 import moment from 'moment';
@@ -65,7 +65,7 @@ export default class GlobalHeaderRight extends PureComponent {
 
   render() {
     const fullscreenIcon = ['arrows-alt', 'shrink'];
-    const fullscreenText = ['全屏', '退出全屏'];
+    const fullscreenText = ['ȫ��', '�˳�ȫ��'];
     const fullscreen = this.state.fullscreen;
 
     const {
@@ -106,8 +106,12 @@ export default class GlobalHeaderRight extends PureComponent {
       <div className={className}>
         <HeaderSearch
           className={`${styles.action} ${styles.search}`}
-          placeholder="站内搜索"
-          dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
+          placeholder={formatMessage({ id: 'component.globalHeader.search' })}
+          dataSource={[
+            formatMessage({ id: 'component.globalHeader.search.example1' }),
+            formatMessage({ id: 'component.globalHeader.search.example2' }),
+            formatMessage({ id: 'component.globalHeader.search.example3' }),
+          ]}
           onSearch={value => {
             console.log('input', value); // eslint-disable-line
           }}
@@ -115,20 +119,20 @@ export default class GlobalHeaderRight extends PureComponent {
             console.log('enter', value); // eslint-disable-line
           }}
         />
-        {/* 全屏按钮 */}
+        <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
+        {/* ȫ����ť */}
         <span className={styles.action} onClick={() => this.f11()}>
           <Tooltip placement="bottom" title={fullscreenText[fullscreen]}>
             <Icon type={fullscreenIcon[fullscreen]} />
           </Tooltip>
         </span>
 
-        <Tooltip title="使用文档">
           <a
             target="_blank"
             href="https://pro.ant.design/docs/getting-started"
             rel="noopener noreferrer"
             className={styles.action}
-            title="使用文档"
+            title="{ formatMessage({id: 'component.globalHeader.help'}) }"
           >
             <Icon type="question-circle-o" />
           </a>
@@ -145,21 +149,21 @@ export default class GlobalHeaderRight extends PureComponent {
           popupAlign={{ offset: [20, -16] }}
         >
           <NoticeIcon.Tab
-            list={noticeData['通知']}
-            title="通知"
-            emptyText="你已查看所有通知"
+            list={noticeData.notification}
+            title={formatMessage({ id: 'component.globalHeader.notification' })}
+            emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
           />
           <NoticeIcon.Tab
-            list={noticeData['消息']}
-            title="消息"
-            emptyText="您已读完所有消息"
+            list={noticeData.message}
+            title={formatMessage({ id: 'component.globalHeader.message' })}
+            emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
           />
           <NoticeIcon.Tab
-            list={noticeData['待办']}
-            title="待办"
-            emptyText="你已完成所有待办"
+            list={noticeData.event}
+            title={formatMessage({ id: 'component.globalHeader.event' })}
+            emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
           />
         </NoticeIcon>

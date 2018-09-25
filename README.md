@@ -31,6 +31,7 @@ yarn config set registry https://registry.npm.taobao.org --global
  - [DVA知识图谱](https://github.com/dvajs/dva-knowledgemap)
  - [umijs](https://umijs.org/)
  - [less](https://www.w3cschool.cn/less/operations.html)
+ - [antd实战](https://www.yuque.com/ant-design/course)
 
 目录说明   
 - dist: 打包目录   
