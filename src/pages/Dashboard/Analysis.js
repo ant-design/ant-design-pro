@@ -58,13 +58,13 @@ class Analysis extends Component {
         total: 323234,
       });
     }
-    this.state = {
-      salesType: 'all',
-      currentTabKey: '',
-      loading: true,
-      rangePickerValue: getTimeDistance('year'),
-    };
   }
+
+  state = {
+    salesType: 'all',
+    currentTabKey: '',
+    rangePickerValue: getTimeDistance('year'),
+  };
 
   componentDidMount() {
     const { dispatch } = this.props;
