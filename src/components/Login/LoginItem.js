@@ -131,8 +131,8 @@ Object.keys(ItemMap).forEach(key => {
       {context => (
         <WrapFormItem
           customprops={item.props}
-          {...props}
           rules={item.rules}
+          {...props}
           type={key}
           updateActive={context.updateActive}
           form={context.form}
