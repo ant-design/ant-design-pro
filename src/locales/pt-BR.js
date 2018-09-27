@@ -1,5 +1,5 @@
 export default {
-  'navbar.lang': 'Português',
+  'navbar.lang': 'Idiomas',
   'menu.home': 'Início',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': 'Análise',
