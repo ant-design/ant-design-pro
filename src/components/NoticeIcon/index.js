@@ -49,7 +49,7 @@ export default class NoticeIcon extends PureComponent {
             {...child.props}
             data={child.props.list}
             onClick={item => this.onItemClick(item, child.props)}
-            onClear={() => onClear(child.props.title)}
+            onClear={() => onClear(child.props.name)}
             title={child.props.title}
             locale={locale}
           />

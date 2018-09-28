@@ -27,6 +27,7 @@ locale | Default message text | Object | `{ emptyText: '暂无数据', clear: '�
 Property | Description | Type | Default
 ----|------|-----|------
 title |  header for message Tab | string | -
+name | identifier for message Tab | string | -
 list | List data, format refer to the following table | Array | `[]`
 showClear | Clear button display status | boolean | true
 emptyText |  message text when list is empty  | ReactNode | -

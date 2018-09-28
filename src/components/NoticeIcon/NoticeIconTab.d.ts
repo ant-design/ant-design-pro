@@ -2,6 +2,7 @@ import * as React from 'react';
 export interface INoticeIconData {
   avatar?: string|React.ReactNode;
   title?: React.ReactNode;
+  name?: React.ReactNode;
   description?: React.ReactNode;
   datetime?: React.ReactNode;
   extra?: React.ReactNode;
@@ -11,6 +12,7 @@ export interface INoticeIconData {
 export interface INoticeIconTabProps {
   list?: INoticeIconData[];
   title?: string;
+  name?: string;
   emptyText?: React.ReactNode;
   emptyImage?: string;
   style?: React.CSSProperties;
