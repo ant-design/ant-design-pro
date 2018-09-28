@@ -14,7 +14,7 @@ Property | Description | Type | Default
 count | Total number of messages | number | -
 bell | Change the bell Icon | ReactNode | `<Icon type='bell' />`
 loading | Popup card loading status | boolean | false
-onClear | Click to clear button the callback  | function(tabTitle) | -
+onClear | Click to clear button the callback  | function(tabName) | -
 onItemClick | Click on the list item's callback | function(item, tabProps) | -
 onTabChange | Switching callbacks for tabs | function(tabTitle) | -
 popupAlign | Popup card location configuration | Object [alignConfig](https://github.com/yiminghe/dom-align#alignconfig-object-details) | -

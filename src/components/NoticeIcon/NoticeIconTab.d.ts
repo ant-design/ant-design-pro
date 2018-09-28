@@ -2,7 +2,6 @@ import * as React from 'react';
 export interface INoticeIconData {
   avatar?: string|React.ReactNode;
   title?: React.ReactNode;
-  name?: React.ReactNode;
   description?: React.ReactNode;
   datetime?: React.ReactNode;
   extra?: React.ReactNode;

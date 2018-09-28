@@ -44,7 +44,7 @@ export default class NoticeIcon extends PureComponent {
           ? `${child.props.title} (${child.props.list.length})`
           : child.props.title;
       return (
-        <TabPane tab={title} key={child.props.title}>
+        <TabPane tab={title} key={child.props.name}>
           <List
             {...child.props}
             data={child.props.list}

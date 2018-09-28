@@ -14,7 +14,7 @@ order: 9
 count | 图标上的消息总数 | number | -
 bell | translate this please -> Change the bell Icon | ReactNode | `<Icon type='bell' />`
 loading | 弹出卡片加载状态 | boolean | false
-onClear | 点击清空按钮的回调 | function(tabTitle) | -
+onClear | 点击清空按钮的回调 | function(tabName) | -
 onItemClick | 点击列表项的回调 | function(item, tabProps) | -
 onTabChange | 切换页签的回调 | function(tabTitle) | -
 popupAlign | 弹出卡片的位置配置 | Object [alignConfig](https://github.com/yiminghe/dom-align#alignconfig-object-details) | -
