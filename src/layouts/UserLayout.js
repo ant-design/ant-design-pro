@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { formatMessage } from 'umi/locale';
 import Link from 'umi/link';
 import { Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
@@ -8,17 +9,17 @@ import logo from '../assets/logo.svg';
 const links = [
   {
     key: 'help',
-    title: '帮助',
+    title: formatMessage({ id: 'layout.user.link.help' }),
     href: '',
   },
   {
     key: 'privacy',
-    title: '隐私',
+    title: formatMessage({ id: 'layout.user.link.privacy' }),
     href: '',
   },
   {
     key: 'terms',
-    title: '条款',
+    title: formatMessage({ id: 'layout.user.link.terms' }),
     href: '',
   },
 ];

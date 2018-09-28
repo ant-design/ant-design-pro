@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
+import { formatMessage, FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
 import router from 'umi/router';
 import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
@@ -10,9 +11,21 @@ const { Option } = Select;
 const InputGroup = Input.Group;
 
 const passwordStatusMap = {
-  ok: <div className={styles.success}>强度：强</div>,
-  pass: <div className={styles.warning}>强度：中</div>,
-  poor: <div className={styles.error}>强度：太短</div>,
+  ok: (
+    <div className={styles.success}>
+      <FormattedMessage id="validation.password.strength.strong" />
+    </div>
+  ),
+  pass: (
+    <div className={styles.warning}>
+      <FormattedMessage id="validation.password.strength.medium" />
+    </div>
+  ),
+  poor: (
+    <div className={styles.error}>
+      <FormattedMessage id="validation.password.strength.short" />
+    </div>
+  ),
 };
 
 const passwordProgressMap = {
@@ -102,7 +115,7 @@ class Register extends Component {
   checkConfirm = (rule, value, callback) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
-      callback('两次输入的密码不匹配!');
+      callback(formatMessage({ id: 'validation.password.twice' }));
     } else {
       callback();
     }
@@ -112,7 +125,7 @@ class Register extends Component {
     const { visible, confirmDirty } = this.state;
     if (!value) {
       this.setState({
-        help: '请输入密码！',
+        help: formatMessage({ id: 'validation.password.required' }),
         visible: !!value,
       });
       callback('error');
@@ -166,21 +179,25 @@ class Register extends Component {
     const { count, prefix, help, visible } = this.state;
     return (
       <div className={styles.main}>
-        <h3>注册</h3>
+        <h3>
+          <FormattedMessage id="app.register.register" />
+        </h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('mail', {
               rules: [
                 {
                   required: true,
-                  message: '请输入邮箱地址！',
+                  message: formatMessage({ id: 'validation.email.required' }),
                 },
                 {
                   type: 'email',
-                  message: '邮箱地址格式错误！',
+                  message: formatMessage({ id: 'validation.email.wrong-format' }),
                 },
               ],
-            })(<Input size="large" placeholder="邮箱" />)}
+            })(
+              <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
+            )}
           </FormItem>
           <FormItem help={help}>
             <Popover
@@ -189,7 +206,7 @@ class Register extends Component {
                   {passwordStatusMap[this.getPasswordStatus()]}
                   {this.renderPasswordProgress()}
                   <div style={{ marginTop: 10 }}>
-                    请至少输入 6 个字符。请不要使用容易被猜到的密码。
+                    <FormattedMessage id="validation.password.strength.msg" />
                   </div>
                 </div>
               }
@@ -203,7 +220,13 @@ class Register extends Component {
                     validator: this.checkPassword,
                   },
                 ],
-              })(<Input size="large" type="password" placeholder="至少6位密码，区分大小写" />)}
+              })(
+                <Input
+                  size="large"
+                  type="password"
+                  placeholder={formatMessage({ id: 'form.password.placeholder' })}
+                />
+              )}
             </Popover>
           </FormItem>
           <FormItem>
@@ -211,13 +234,19 @@ class Register extends Component {
               rules: [
                 {
                   required: true,
-                  message: '请确认密码！',
+                  message: formatMessage({ id: 'validation.confirm-password.required' }),
                 },
                 {
                   validator: this.checkConfirm,
                 },
               ],
-            })(<Input size="large" type="password" placeholder="确认密码" />)}
+            })(
+              <Input
+                size="large"
+                type="password"
+                placeholder={formatMessage({ id: 'form.confirm-password.placeholder' })}
+              />
+            )}
           </FormItem>
           <FormItem>
             <InputGroup compact>
@@ -234,14 +263,20 @@ class Register extends Component {
                 rules: [
                   {
                     required: true,
-                    message: '请输入手机号！',
+                    message: formatMessage({ id: 'validation.phone-number.required' }),
                   },
                   {
-                    pattern: /^1\d{10}$/,
-                    message: '手机号格式错误！',
+                    pattern: /^\d{10}$/,
+                    message: formatMessage({ id: 'validation.phone-number.wrong-format' }),
                   },
                 ],
-              })(<Input size="large" style={{ width: '80%' }} placeholder="11位手机号" />)}
+              })(
+                <Input
+                  size="large"
+                  style={{ width: '80%' }}
+                  placeholder={formatMessage({ id: 'form.phone-number.placeholder' })}
+                />
+              )}
             </InputGroup>
           </FormItem>
           <FormItem>
@@ -251,10 +286,15 @@ class Register extends Component {
                   rules: [
                     {
                       required: true,
-                      message: '请输入验证码！',
+                      message: formatMessage({ id: 'validation.verification-code.required' }),
                     },
                   ],
-                })(<Input size="large" placeholder="验证码" />)}
+                })(
+                  <Input
+                    size="large"
+                    placeholder={formatMessage({ id: 'form.verification-code.placeholder' })}
+                  />
+                )}
               </Col>
               <Col span={8}>
                 <Button
@@ -263,7 +303,9 @@ class Register extends Component {
                   className={styles.getCaptcha}
                   onClick={this.onGetCaptcha}
                 >
-                  {count ? `${count} s` : '获取验证码'}
+                  {count
+                    ? `${count} s`
+                    : formatMessage({ id: 'app.register.get-verification-code' })}
                 </Button>
               </Col>
             </Row>
@@ -276,10 +318,10 @@ class Register extends Component {
               type="primary"
               htmlType="submit"
             >
-              注册
+              <FormattedMessage id="app.register.register" />
             </Button>
             <Link className={styles.login} to="/User/Login">
-              使用已有账户登录
+              <FormattedMessage id="app.register.sing-in" />
             </Link>
           </FormItem>
         </Form>
