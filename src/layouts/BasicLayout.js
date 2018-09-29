@@ -70,8 +70,12 @@ const query = {
     minWidth: 1600,
   },
 };
-
-class BasicLayout extends React.PureComponent {
+@connect(({ global, setting }) => ({
+  collapsed: global.collapsed,
+  layout: setting.layout,
+  ...setting,
+}))
+export default class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
     this.getPageTitle = memoizeOne(this.getPageTitle);
@@ -278,8 +282,3 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default connect(({ global, setting }) => ({
-  collapsed: global.collapsed,
-  layout: setting.layout,
-  ...setting,
-}))(BasicLayout);
