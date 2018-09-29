@@ -98,7 +98,6 @@ export default class GlobalHeaderRight extends PureComponent {
             href="https://pro.ant.design/docs/getting-started"
             rel="noopener noreferrer"
             className={styles.action}
-            title="{ formatMessage({id: 'component.globalHeader.help'}) }"
           >
             <Icon type="question-circle-o" />
           </a>
