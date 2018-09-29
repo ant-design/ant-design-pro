@@ -22,7 +22,6 @@ export default {
         dynamicImport: {
           loadingComponent: './components/PageLoading/index',
         },
-        polyfills: ['ie11'],
         ...(!process.env.TEST && os.platform() === 'darwin'
           ? {
               dll: {
@@ -41,6 +40,9 @@ export default {
       },
     ],
   ],
+  targets: {
+    ie: 11,
+  },
   define: {
     APP_TYPE: process.env.APP_TYPE || '',
   },
