@@ -14,7 +14,7 @@ Property | Description | Type | Default
 count | Total number of messages | number | -
 bell | Change the bell Icon | ReactNode | `<Icon type='bell' />`
 loading | Popup card loading status | boolean | false
-onClear | Click to clear button the callback  | function(tabTitle) | -
+onClear | Click to clear button the callback  | function(tabName) | -
 onItemClick | Click on the list item's callback | function(item, tabProps) | -
 onTabChange | Switching callbacks for tabs | function(tabTitle) | -
 popupAlign | Popup card location configuration | Object [alignConfig](https://github.com/yiminghe/dom-align#alignconfig-object-details) | -
@@ -27,6 +27,7 @@ locale | Default message text | Object | `{ emptyText: '暂无数据', clear: '�
 Property | Description | Type | Default
 ----|------|-----|------
 title |  header for message Tab | string | -
+name | identifier for message Tab | string | -
 list | List data, format refer to the following table | Array | `[]`
 showClear | Clear button display status | boolean | true
 emptyText |  message text when list is empty  | ReactNode | -

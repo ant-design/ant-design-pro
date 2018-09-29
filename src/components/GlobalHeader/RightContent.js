@@ -117,18 +117,21 @@ export default class GlobalHeaderRight extends PureComponent {
           <NoticeIcon.Tab
             list={noticeData.notification}
             title={formatMessage({ id: 'component.globalHeader.notification' })}
+            name="notification"
             emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
           />
           <NoticeIcon.Tab
             list={noticeData.message}
             title={formatMessage({ id: 'component.globalHeader.message' })}
+            name="message"
             emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
           />
           <NoticeIcon.Tab
             list={noticeData.event}
             title={formatMessage({ id: 'component.globalHeader.event' })}
+            name="event"
             emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
           />

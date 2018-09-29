@@ -6,9 +6,9 @@ export interface INoticeIconProps {
   bell?: React.ReactNode;
   className?: string;
   loading?: boolean;
-  onClear?: (tableTile: string) => void;
+  onClear?: (tabName: string) => void;
   onItemClick?: (item: INoticeIconData, tabProps: INoticeIconProps) => void;
-  onTabChange?: (tableTile: string) => void;
+  onTabChange?: (tabTile: string) => void;
   popupAlign?: {
     points?: [string, string];
     offset?: [number, number];
