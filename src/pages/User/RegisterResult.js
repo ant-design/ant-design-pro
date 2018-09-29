@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Button } from 'antd';
 import Link from 'umi/link';
 import Result from '@/components/Result';
@@ -8,11 +9,13 @@ const actions = (
   <div className={styles.actions}>
     <a href="">
       <Button size="large" type="primary">
-        查看邮箱
+        <FormattedMessage id="app.register-result.view-mailbox" />
       </Button>
     </a>
     <Link to="/">
-      <Button size="large">返回首页</Button>
+      <Button size="large">
+        <FormattedMessage id="app.register-result.back-home" />
+      </Button>
     </Link>
   </div>
 );
@@ -23,12 +26,13 @@ const RegisterResult = ({ location }) => (
     type="success"
     title={
       <div className={styles.title}>
-        你的账户：
-        {location.state ? location.state.account : 'AntDesign@example.com'}
-        注册成功
+        <FormattedMessage
+          id="app.register-result.msg"
+          values={{ email: location.state ? location.state.account : 'AntDesign@example.com' }}
+        />
       </div>
     }
-    description="激活邮件已发送到你的邮箱中，邮件有效期为24小时。请及时登录邮箱，点击邮件中的链接激活帐户。"
+    description={formatMessage({ id: 'app.register-result.activation-email' })}
     actions={actions}
     style={{ marginTop: 56 }}
   />

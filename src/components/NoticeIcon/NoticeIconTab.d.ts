@@ -11,6 +11,7 @@ export interface INoticeIconData {
 export interface INoticeIconTabProps {
   list?: INoticeIconData[];
   title?: string;
+  name?: string;
   emptyText?: React.ReactNode;
   emptyImage?: string;
   style?: React.CSSProperties;

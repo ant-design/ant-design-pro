@@ -14,7 +14,7 @@ order: 9
 count | 图标上的消息总数 | number | -
 bell | translate this please -> Change the bell Icon | ReactNode | `<Icon type='bell' />`
 loading | 弹出卡片加载状态 | boolean | false
-onClear | 点击清空按钮的回调 | function(tabTitle) | -
+onClear | 点击清空按钮的回调 | function(tabName) | -
 onItemClick | 点击列表项的回调 | function(item, tabProps) | -
 onTabChange | 切换页签的回调 | function(tabTitle) | -
 popupAlign | 弹出卡片的位置配置 | Object [alignConfig](https://github.com/yiminghe/dom-align#alignconfig-object-details) | -
@@ -27,6 +27,7 @@ locale | 默认文案 | Object | `{ emptyText: '暂无数据', clear: '清空' }
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
 title | 消息分类的页签标题 | string | -
+name | 消息分类的标识符 | string | -
 list | 列表数据，格式参照下表 | Array | `[]`
 showClear | 是否显示清空按钮 | boolean | true
 emptyText | 针对每个 Tab 定制空数据文案 | ReactNode | -
