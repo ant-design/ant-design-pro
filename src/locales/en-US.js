@@ -1,5 +1,5 @@
 export default {
-  'navbar.lang': '中文',
+  'navbar.lang': 'Languages',
   'layout.user.link.help': 'help',
   'layout.user.link.privacy': 'privacy',
   'layout.user.link.terms': 'terms',
