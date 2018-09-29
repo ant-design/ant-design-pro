@@ -79,8 +79,8 @@
     "stylelint": "^9.4.0",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.0.0",
-    "umi": "^2.0.3",
-    "umi-plugin-react": "^1.0.3",
+    "umi": "^2.1.1",
+    "umi-plugin-react": "^1.1.1",
     "umi-plugin-ga": "^1.0.3"
   },
   "optionalDependencies": {
