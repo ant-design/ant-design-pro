@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "precommit": "npm run lint-staged",
-    "presite": "npm run generate-mock && cd functions && npm install",
+    "presite": "node ./scripts/generateMock.js && cd functions && npm install",
     "start": "cross-env APP_TYPE=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "build": "umi build",
@@ -17,10 +17,13 @@
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
     "test": "umi test",
-    "generate-mock": "node ./scripts/generateMock.js",
     "test:component": "umi test ./src/components",
     "test:all": "node ./tests/run-tests.js",
-    "prettier": "prettier --write ./src/**/**/**/*"
+    "prettier": "prettier --write ./src/**/**/**/*",
+    "docker:dev":"docker-compose -f ./docker/docker-compose.dev.yml up",
+    "docker:build":"docker-compose -f ./docker/docker-compose.dev.yml build",
+    "docker-prod:dev":"docker-compose -f ./docker/docker-compose.yml up",
+    "docker-prod:build":"docker-compose -f ./docker/docker-compose.yml build"
   },
   "dependencies": {
     "@antv/data-set": "^0.9.6",
