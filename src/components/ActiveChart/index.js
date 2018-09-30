@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'umi/locale';
 import { MiniArea } from '../Charts';
 import NumberInfo from '../NumberInfo';
 
@@ -53,7 +54,20 @@ export default class ActiveChart extends Component {
 
     return (
       <div className={styles.activeChart}>
-        <NumberInfo subTitle="目标评估" total="有望达到预期" />
+        <NumberInfo
+          subTitle={
+            <FormattedMessage
+              id="component.activeChart.target-assessment"
+              defaultMessage="Target assessment"
+            />
+          }
+          total={
+            <FormattedMessage
+              id="component.activeChart.expected-to-reach"
+              defaultMessage="Expected to reach"
+            />
+          }
+        />
         <div style={{ marginTop: 32 }}>
           <MiniArea
             animate={false}
@@ -76,8 +90,20 @@ export default class ActiveChart extends Component {
         </div>
         {activeData && (
           <div className={styles.activeChartGrid}>
-            <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
-            <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
+            <p>
+              <FormattedMessage
+                id="component.activeChart.billion"
+                defaultMessage="Billion"
+                values={{ number: [...activeData].sort()[activeData.length - 1].y + 200 }}
+              />
+            </p>
+            <p>
+              <FormattedMessage
+                id="component.activeChart.billion"
+                defaultMessage="Billion"
+                values={{ number: [...activeData].sort()[Math.floor(activeData.length / 2)].y }}
+              />
+            </p>
           </div>
         )}
         {activeData && (

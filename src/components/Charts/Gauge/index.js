@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatMessage } from 'umi/locale';
 import { Chart, Geom, Axis, Coord, Guide, Shape } from 'bizcharts';
 import autoHeight from '../autoHeight';
 
@@ -7,13 +8,13 @@ const { Arc, Html, Line } = Guide;
 const defaultFormatter = val => {
   switch (val) {
     case '2':
-      return '差';
+      return formatMessage({ id: 'component.gauge.low' });
     case '4':
-      return '中';
+      return formatMessage({ id: 'component.gauge.medium' });
     case '6':
-      return '良';
+      return formatMessage({ id: 'component.gauge.good' });
     case '8':
-      return '优';
+      return formatMessage({ id: 'component.gauge.great' });
     default:
       return '';
   }
