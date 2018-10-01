@@ -226,7 +226,7 @@ export default {
   'app.setting.topmenu': 'Layout do Menu Superior',
   'app.setting.fixedheader': 'Cabeçalho fixo',
   'app.setting.fixedsidebar': 'Barra lateral fixa',
-  'app.setting.fixedsidebar.hint': 'Funciona no leioute de menu lateral',
+  'app.setting.fixedsidebar.hint': 'Funciona no layout do menu lateral',
   'app.setting.hideheader': 'Esconder o cabeçalho quando rolar',
   'app.setting.hideheader.hint': 'Funciona quando o esconder cabeçalho está abilitado',
   'app.setting.othersettings': 'Outras configurações',
