@@ -1,5 +1,9 @@
 export default {
-  'navbar.lang': 'Idiomas',
+  'navBar.lang': 'Idiomas',
+  'lang.simplified-chinese': 'Simplified Chinese',
+  'lang.traditional-chinese': 'Traditional Chinese',
+  'lang.english': 'English',
+  'lang.portuguese': 'Portuguese',
   'layout.user.link.help': 'ajuda',
   'layout.user.link.privacy': 'política de privacidade',
   'layout.user.link.terms': 'termos de serviços',
