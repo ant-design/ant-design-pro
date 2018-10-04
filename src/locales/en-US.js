@@ -160,7 +160,7 @@ export default {
   'app.forms.basic.description':
     'Form pages are used to collect or verify information to users, and basic forms are common in scenarios where there are fewer data items.',
   'app.monitor.trading-activity': 'Real-Time Trading Activity',
-  'app.monitor.total-transactions-today': 'Total transactions today',
+  'app.monitor.total-transactions': 'Total transactions today',
   'app.monitor.sales-target': 'Sales target completion rate',
   'app.monitor.remaining-time': 'Remaining time of activity',
   'app.monitor.total-transactions-per-second': 'Total transactions per second',
