@@ -25,7 +25,7 @@ const desc1 = (
 );
 
 const desc2 = (
-  <div style={{ fontSize: 12, position: 'relative', left: 42 }}>
+  <div style={{ fontSize: 12, position: 'relative', left: 42, textAlign: 'left' }}>
     <div style={{ margin: '8px 0 4px' }}>
       <FormattedMessage id="app.result.success.step2-operator" defaultMessage="Zhou Maomao" />
       <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
