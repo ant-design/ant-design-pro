@@ -11,17 +11,27 @@ export default class SelectLang extends PureComponent {
 
   render() {
     const { className } = this.props;
+    const selectedLang = getLocale;
     const langMenu = (
-      <Menu className={styles.menu} selectedKeys={[getLocale()]} onClick={this.changLang}>
-        <Menu.Item key="zh-CN">中文</Menu.Item>
-        <Menu.Item key="en-US">English</Menu.Item>
-        <Menu.Item key="pt-BR">Português</Menu.Item>
+      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changLang}>
+        <Menu.Item key="zh-CN">
+          <FormattedMessage id="lang.simplified-chinese" />
+        </Menu.Item>
+        <Menu.Item key="zh-TW">
+          <FormattedMessage id="lang.traditional-chinese" />
+        </Menu.Item>
+        <Menu.Item key="en-US">
+          <FormattedMessage id="lang.english" />
+        </Menu.Item>
+        <Menu.Item key="pt-BR">
+          <FormattedMessage id="lang.portuguese" />
+        </Menu.Item>
       </Menu>
     );
     return (
       <Dropdown overlay={langMenu}>
-        <span className={classNames(styles.dropdown, className)}>
-          <FormattedMessage id="navbar.lang" /> <Icon type="down" />
+        <span className={classNames(styles.dropDown, className)}>
+          <FormattedMessage id="navBar.lang" /> <Icon type="down" />
         </span>
       </Dropdown>
     );
