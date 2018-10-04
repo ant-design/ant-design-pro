@@ -72,9 +72,7 @@ export default class BaseMenu extends PureComponent {
 
   // Get the currently selected menu
   getSelectedMenuKeys = pathname =>
-    urlToList(pathname).map(function(itemPath) {
-      return getMenuMatches(this.flatMenuKeys, itemPath).pop();
-    });
+    urlToList(pathname).map(itemPath => getMenuMatches(this.flatMenuKeys, itemPath).pop());
 
   /**
    * get SubMenu or Item
