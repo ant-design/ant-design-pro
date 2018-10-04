@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Menu, Icon } from 'antd';
 import Link from 'umi/link';
+import isEqual from 'lodash/isEqual';
+import memoizeOne from 'memoize-one';
 import { formatMessage } from 'umi/locale';
 import pathToRegexp from 'path-to-regexp';
 import { urlToList } from '../_utils/pathTools';
@@ -22,12 +24,15 @@ const getIcon = icon => {
   return icon;
 };
 
-export const getMenuMatches = (flatMenuKeys, path) =>
-  flatMenuKeys.filter(item => item && pathToRegexp(item).test(path));
+export const getMenuMatches = memoizeOne(
+  (flatMenuKeys, path) => flatMenuKeys.filter(item => item && pathToRegexp(item).test(path)),
+  isEqual
+);
 
 export default class BaseMenu extends PureComponent {
   constructor(props) {
     super(props);
+    this.getSelectedMenuKeys = memoizeOne(this.getSelectedMenuKeys, isEqual);
     this.flatMenuKeys = this.getFlatMenuKeys(props.menuData);
   }
 
@@ -66,12 +71,10 @@ export default class BaseMenu extends PureComponent {
   };
 
   // Get the currently selected menu
-  getSelectedMenuKeys = () => {
-    const {
-      location: { pathname },
-    } = this.props;
-    return urlToList(pathname).map(itemPath => getMenuMatches(this.flatMenuKeys, itemPath).pop());
-  };
+  getSelectedMenuKeys = pathname =>
+    urlToList(pathname).map(function(itemPath) {
+      return getMenuMatches(this.flatMenuKeys, itemPath).pop();
+    });
 
   /**
    * get SubMenu or Item
@@ -158,9 +161,14 @@ export default class BaseMenu extends PureComponent {
   };
 
   render() {
-    const { openKeys, theme, mode } = this.props;
+    const {
+      openKeys,
+      theme,
+      mode,
+      location: { pathname },
+    } = this.props;
     // if pathname can't match, use the nearest parent's key
-    let selectedKeys = this.getSelectedMenuKeys();
+    let selectedKeys = this.getSelectedMenuKeys(pathname);
     if (!selectedKeys.length && openKeys) {
       selectedKeys = [openKeys[openKeys.length - 1]];
     }

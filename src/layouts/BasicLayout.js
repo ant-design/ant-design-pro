@@ -46,6 +46,8 @@ function formatter(data, parentPath = '', parentAuthority, parentName) {
   });
 }
 
+const memoizeOneFormatter = memoizeOne(formatter, isEqual);
+
 const query = {
   'screen-xs': {
     maxWidth: 575,
@@ -136,7 +138,7 @@ class BasicLayout extends React.PureComponent {
     const {
       route: { routes },
     } = this.props;
-    return formatter(routes);
+    return memoizeOneFormatter(routes);
   }
 
   /**

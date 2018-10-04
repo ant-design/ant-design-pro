@@ -121,7 +121,7 @@ class Monitor extends PureComponent {
             <Card
               title={
                 <FormattedMessage
-                  id="app.monitor.total-activity-forecast"
+                  id="app.monitor.activity-forecast"
                   defaultMessage="Activity forecast"
                 />
               }
