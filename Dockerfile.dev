@@ -7,7 +7,5 @@ RUN npm install --silent --no-cache
 
 COPY ./ ./
 
-RUN sh ./tests/fix_puppeteer.sh
-RUN npm run test:all
 
-CMD ["npm", "run", "build"]
+CMD ["npm", "run", "start"]
