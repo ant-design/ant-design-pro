@@ -15,7 +15,7 @@ export default {
           hmr: true,
         },
         targets: {
-          ie: 9,
+          ie: 11,
         },
         locale: {
           enable: true, // default false
