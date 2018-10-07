@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { List, Icon, Avatar, Tag } from 'antd';
-import moment from 'moment';
+import { List, Icon, Tag } from 'antd';
 import { connect } from 'dva';
-import stylesArticles from '../../List/Articles.less';
+import ListContent from '@/components/ListContent';
 import styles from './Articles.less';
 
 @connect(({ list }) => ({
@@ -18,16 +17,6 @@ class Center extends PureComponent {
         <Icon type={type} style={{ marginRight: 8 }} />
         {text}
       </span>
-    );
-    const ListContent = ({ data: { content, updatedAt, avatar, owner, href } }) => (
-      <div className={stylesArticles.listContent}>
-        <div className={stylesArticles.description}>{content}</div>
-        <div className={stylesArticles.extra}>
-          <Avatar src={avatar} size="small" />
-          <a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
-          <em>{moment(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
-        </div>
-      </div>
     );
     return (
       <List
@@ -47,7 +36,7 @@ class Center extends PureComponent {
           >
             <List.Item.Meta
               title={
-                <a className={stylesArticles.listItemMetaTitle} href={item.href}>
+                <a className={styles.listItemMetaTitle} href={item.href}>
                   {item.title}
                 </a>
               }
