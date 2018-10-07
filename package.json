@@ -23,7 +23,7 @@
     "docker:dev":"docker-compose -f ./docker/docker-compose.dev.yml up",
     "docker:build":"docker-compose -f ./docker/docker-compose.dev.yml build",
     "docker-prod:dev":"docker-compose -f ./docker/docker-compose.yml up",
-    "docker-prod:build":"npm run test:all && docker-compose -f ./docker/docker-compose.yml build"
+    "docker-prod:build":"docker-compose -f ./docker/docker-compose.yml build"
   },
   "dependencies": {
     "@antv/data-set": "^0.9.6",
