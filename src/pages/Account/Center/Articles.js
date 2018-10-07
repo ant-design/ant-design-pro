@@ -24,8 +24,7 @@ class Center extends PureComponent {
         <div className={stylesArticles.description}>{content}</div>
         <div className={stylesArticles.extra}>
           <Avatar src={avatar} size="small" />
-          <a href={href}>{owner}</a> 发布在
-          <a href={href}>{href}</a>
+          <a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
           <em>{moment(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
         </div>
       </div>
