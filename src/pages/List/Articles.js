@@ -4,7 +4,7 @@ import { Form, Card, Select, List, Tag, Icon, Row, Col, Button } from 'antd';
 
 import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
-import ListContent from '@/components/ListContent';
+import ArticleListContent from '@/components/ArticleListContent';
 import styles from './Articles.less';
 
 const { Option } = Select;
@@ -229,7 +229,7 @@ class SearchList extends Component {
                     </span>
                   }
                 />
-                <ListContent data={item} />
+                <ArticleListContent data={item} />
               </List.Item>
             )}
           />

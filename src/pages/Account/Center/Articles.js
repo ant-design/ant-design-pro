@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { List, Icon, Tag } from 'antd';
 import { connect } from 'dva';
-import ListContent from '@/components/ListContent';
+import ArticleListContent from '@/components/ArticleListContent';
 import styles from './Articles.less';
 
 @connect(({ list }) => ({
@@ -48,7 +48,7 @@ class Center extends PureComponent {
                 </span>
               }
             />
-            <ListContent data={item} />
+            <ArticleListContent data={item} />
           </List.Item>
         )}
       />
