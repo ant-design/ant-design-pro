@@ -84,10 +84,10 @@
     "stylelint-config-standard": "^18.0.0",
     "umi": "^2.1.1",
     "umi-plugin-react": "^1.1.1",
-    "umi-plugin-ga": "^1.0.3"
+    "umi-plugin-ga": "^1.1.1"
   },
   "optionalDependencies": {
-    "puppeteer": "^1.6.0"
+    "puppeteer": "^1.9.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,less}": [
