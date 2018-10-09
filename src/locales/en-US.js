@@ -108,6 +108,8 @@ export default {
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
+  'app.login.message-invalid-credentials': 'Invalid username or password（admin/888888）',
+  'app.login.message-invalid-verification-code': 'Invalid verification code',
   'app.login.tab-login-credentials': 'Credentials',
   'app.login.tab-login-mobile': 'Mobile number',
   'app.login.remember-me': 'Remember me',
