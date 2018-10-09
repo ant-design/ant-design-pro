@@ -1,14 +1,11 @@
 import React, { createElement } from 'react';
+import { formatMessage } from 'umi/locale';
 import classNames from 'classnames';
 import { Button } from 'antd';
 import config from './typeConfig';
 import styles from './index.less';
 
 class Excrption extends React.PureComponent {
-  static defaultProps = {
-    backText: 'back to home',
-  };
-
   constructor(props) {
     super(props);
     this.state = {};
@@ -17,7 +14,6 @@ class Excrption extends React.PureComponent {
   render() {
     const {
       className,
-      backText,
       linkElement = 'a',
       type,
       title,
@@ -47,7 +43,7 @@ class Excrption extends React.PureComponent {
                   to: '/',
                   href: '/',
                 },
-                <Button type="primary">{backText}</Button>
+                <Button type="primary">{formatMessage({ id: 'app.exception.back' })}</Button>
               )}
           </div>
         </div>
