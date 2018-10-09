@@ -40,7 +40,7 @@ export default {
       'umi-plugin-ga',
       {
         code: 'UA-72788897-6',
-        judge: () => window.location.hostname === 'preview.pro.ant.design',
+        judge: () => process.env.APP_TYPE === 'site',
       },
     ],
   ],
