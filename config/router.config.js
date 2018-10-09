@@ -15,6 +15,7 @@ export default [
     path: '/',
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
+    authority: ['admin', 'user'],
     routes: [
       // dashboard
       { path: '/', redirect: '/dashboard/analysis' },
@@ -82,6 +83,7 @@ export default [
           {
             path: '/form/advanced-form',
             name: 'advancedform',
+            authority: ['admin'],
             component: './Forms/AdvancedForm',
           },
         ],
@@ -112,6 +114,10 @@ export default [
             name: 'searchlist',
             component: './List/List',
             routes: [
+              {
+                path: '/list/search',
+                redirect: '/list/search/articles',
+              },
               {
                 path: '/list/search/articles',
                 name: 'articles',
@@ -145,6 +151,7 @@ export default [
           {
             path: '/profile/advanced',
             name: 'advanced',
+            authority: ['admin'],
             component: './Profile/AdvancedProfile',
           },
         ],

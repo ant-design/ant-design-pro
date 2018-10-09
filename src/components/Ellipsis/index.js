@@ -95,7 +95,7 @@ export default class Ellipsis extends Component {
   computeLine = () => {
     const { lines } = this.props;
     if (lines && !isSupportLineClamp) {
-      const text = this.shadowChildren.innerText;
+      const text = this.shadowChildren.innerText || this.shadowChildren.textContent;
       const lineHeight = parseInt(getComputedStyle(this.root).lineHeight, 10);
       const targetHeight = lines * lineHeight;
       this.content.style.height = `${targetHeight}px`;
@@ -222,17 +222,20 @@ export default class Ellipsis extends Component {
     // support document.body.style.webkitLineClamp
     if (isSupportLineClamp) {
       const style = `#${id}{-webkit-line-clamp:${lines};-webkit-box-orient: vertical;}`;
-      return (
+
+      const node = (
         <div id={id} className={cls} {...restProps}>
           <style>{style}</style>
-          {tooltip ? (
-            <Tooltip overlayStyle={TooltipOverlayStyle} title={children}>
-              {children}
-            </Tooltip>
-          ) : (
-            children
-          )}
+          {children}
         </div>
+      );
+
+      return tooltip ? (
+        <Tooltip overlayStyle={TooltipOverlayStyle} title={children}>
+          {node}
+        </Tooltip>
+      ) : (
+        node
       );
     }
 

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { formatMessage } from 'umi/locale';
 import { Layout, message } from 'antd';
 import Animate from 'rc-animate';
 import { connect } from 'dva';
@@ -14,6 +15,15 @@ class HeaderView extends PureComponent {
   state = {
     visible: true,
   };
+
+  static getDerivedStateFromProps(props, state) {
+    if (!props.autoHideHeader && !state.visible) {
+      return {
+        visible: true,
+      };
+    }
+    return null;
+  }
 
   componentDidMount() {
     document.addEventListener('scroll', this.handScroll, { passive: true });
@@ -33,7 +43,7 @@ class HeaderView extends PureComponent {
   };
 
   handleNoticeClear = type => {
-    message.success(`清空了${type}`);
+    message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({ id: `component.globalHeader.${type}` })}`);
     const { dispatch } = this.props;
     dispatch({
       type: 'global/clearNotices',
@@ -87,12 +97,12 @@ class HeaderView extends PureComponent {
           this.scrollTop = scrollTop;
           return;
         }
-        if (scrollTop > 400 && visible) {
+        if (scrollTop > 300 && visible) {
           this.setState({
             visible: false,
           });
         }
-        if (scrollTop < 400 && !visible) {
+        if (scrollTop < 300 && !visible) {
           this.setState({
             visible: true,
           });
@@ -109,11 +119,9 @@ class HeaderView extends PureComponent {
     const { navTheme, layout, fixedHeader } = setting;
     const { visible } = this.state;
     const isTop = layout === 'topmenu';
+    const width = this.getHeadWidth();
     const HeaderDom = visible ? (
-      <Header
-        style={{ padding: 0, width: this.getHeadWidth() }}
-        className={fixedHeader ? styles.fixedHeader : ''}
-      >
+      <Header style={{ padding: 0, width }} className={fixedHeader ? styles.fixedHeader : ''}>
         {isTop && !isMobile ? (
           <TopNavHeader
             theme={navTheme}

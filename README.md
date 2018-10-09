@@ -79,6 +79,8 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 
 ## Usage
 
+### Use bash
+
 ```bash
 $ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
 $ cd ant-design-pro
@@ -86,12 +88,21 @@ $ npm install
 $ npm start         # visit http://localhost:8000
 ```
 
-Or you can use the command tool: [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli)
+### Use by docker
 
 ```bash
-$ npm install ant-design-pro-cli -g
-$ mkdir pro-demo && cd pro-demo
-$ pro new
+// dev 
+$ npm run docker:dev
+
+// build 
+$ npm run docker:build
+
+
+// production dev 
+$ npm run docker-prod:dev
+
+// production build 
+$ npm run docker-prod:build
 ```
 
 More instructions at [documentation](http://pro.ant.design/docs/getting-started).

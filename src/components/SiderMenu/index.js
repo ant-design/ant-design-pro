@@ -1,6 +1,6 @@
 import React from 'react';
 import { Drawer } from 'antd';
-import SiderMenu from './SliderMenu';
+import SiderMenu from './SiderMenu';
 
 /**
  * Recursively flatten the data
@@ -19,14 +19,12 @@ const getFlatMenuKeys = menuData => {
 };
 
 const SiderMenuWrapper = props => {
-  const { isMobile, menuData, collapsed } = props;
+  const { isMobile, menuData, collapsed, onCollapse } = props;
   return isMobile ? (
     <Drawer
       visible={!collapsed}
       placement="left"
-      onClose={() => {
-        props.onCollapse(true);
-      }}
+      onClose={() => onCollapse(true)}
       style={{
         padding: 0,
         height: '100vh',

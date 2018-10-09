@@ -3,7 +3,6 @@ import { Chart, Tooltip, Geom } from 'bizcharts';
 import autoHeight from '../autoHeight';
 import styles from '../index.less';
 
-export default
 @autoHeight()
 class MiniBar extends React.Component {
   render() {
@@ -49,3 +48,4 @@ class MiniBar extends React.Component {
     );
   }
 }
+export default MiniBar;

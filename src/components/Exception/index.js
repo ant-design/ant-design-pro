@@ -5,7 +5,11 @@ import { Button } from 'antd';
 import config from './typeConfig';
 import styles from './index.less';
 
-class Excrption extends React.PureComponent {
+class Exception extends React.PureComponent {
+  static defaultProps = {
+    redirect: '/',
+  };
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,6 +24,7 @@ class Excrption extends React.PureComponent {
       desc,
       img,
       actions,
+      redirect,
       ...rest
     } = this.props;
     const pageType = type in config ? type : '404';
@@ -40,8 +45,8 @@ class Excrption extends React.PureComponent {
               createElement(
                 linkElement,
                 {
-                  to: '/',
-                  href: '/',
+                  to: redirect,
+                  href: redirect,
                 },
                 <Button type="primary">{formatMessage({ id: 'app.exception.back' })}</Button>
               )}
@@ -52,4 +57,4 @@ class Excrption extends React.PureComponent {
   }
 }
 
-export default Excrption;
+export default Exception;

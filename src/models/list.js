@@ -15,6 +15,13 @@ export default {
         payload: Array.isArray(response) ? response : [],
       });
     },
+    *appendFetch({ payload }, { call, put }) {
+      const response = yield call(queryFakeList, payload);
+      yield put({
+        type: 'appendList',
+        payload: Array.isArray(response) ? response : [],
+      });
+    },
     *submit({ payload }, { call, put }) {
       let callback;
       if (payload.id) {
@@ -35,6 +42,12 @@ export default {
       return {
         ...state,
         list: action.payload,
+      };
+    },
+    appendList(state, action) {
+      return {
+        ...state,
+        list: state.list.concat(action.payload),
       };
     },
   },

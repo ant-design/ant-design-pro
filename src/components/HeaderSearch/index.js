@@ -15,6 +15,7 @@ export default class HeaderSearch extends PureComponent {
     defaultActiveFirstOption: PropTypes.bool,
     dataSource: PropTypes.array,
     defaultOpen: PropTypes.bool,
+    onVisibleChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -25,7 +26,17 @@ export default class HeaderSearch extends PureComponent {
     placeholder: '',
     dataSource: [],
     defaultOpen: false,
+    onVisibleChange: () => {},
   };
+
+  static getDerivedStateFromProps(props) {
+    if ('open' in props) {
+      return {
+        searchMode: props.open,
+      };
+    }
+    return null;
+  }
 
   constructor(props) {
     super(props);
@@ -58,6 +69,8 @@ export default class HeaderSearch extends PureComponent {
   };
 
   enterSearchMode = () => {
+    const { onVisibleChange } = this.props;
+    onVisibleChange(true);
     this.setState({ searchMode: true }, () => {
       const { searchMode } = this.state;
       if (searchMode) {
@@ -86,14 +99,23 @@ export default class HeaderSearch extends PureComponent {
   }
 
   render() {
-    const { className, placeholder, ...restProps } = this.props;
+    const { className, placeholder, open, ...restProps } = this.props;
     const { searchMode, value } = this.state;
     delete restProps.defaultOpen; // for rc-select not affected
     const inputClass = classNames(styles.input, {
       [styles.show]: searchMode,
     });
     return (
-      <span className={classNames(className, styles.headerSearch)} onClick={this.enterSearchMode}>
+      <span
+        className={classNames(className, styles.headerSearch)}
+        onClick={this.enterSearchMode}
+        onTransitionEnd={({ propertyName }) => {
+          if (propertyName === 'width' && !searchMode) {
+            const { onVisibleChange } = this.props;
+            onVisibleChange(searchMode);
+          }
+        }}
+      >
         <Icon type="search" key="Icon" />
         <AutoComplete
           key="AutoComplete"

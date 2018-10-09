@@ -3,12 +3,10 @@ import defaultSettings from '../defaultSettings';
 
 let lessNodesAppended;
 const updateTheme = primaryColor => {
-  // // Don't compile less in production!
-  /* eslint-disable */
+  // Don't compile less in production!
   if (APP_TYPE !== 'site') {
     return;
   }
-  /* eslint-disable */
   // Determine if the component is remounted
   if (!primaryColor) {
     return;
@@ -33,6 +31,7 @@ const updateTheme = primaryColor => {
     }, 200);
   }
   if (!lessNodesAppended) {
+    // insert less.js and color.less
     const lessStyleNode = document.createElement('link');
     const lessConfigNode = document.createElement('script');
     const lessScriptNode = document.createElement('script');
@@ -106,9 +105,12 @@ export default {
           urlParams.searchParams.set(key, value);
         }
       });
-      const { primaryColor, colorWeak } = payload;
+      const { primaryColor, colorWeak, contentWidth } = payload;
       if (state.primaryColor !== primaryColor) {
         updateTheme(primaryColor);
+      }
+      if (state.contentWidth !== contentWidth && window.dispatchEvent) {
+        window.dispatchEvent(new Event('resize'));
       }
       updateColorWeak(colorWeak);
       window.history.replaceState(null, 'setting', urlParams.href);

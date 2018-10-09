@@ -7,7 +7,6 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from './CardList.less';
 
-export default
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
@@ -98,3 +97,5 @@ class CardList extends PureComponent {
     );
   }
 }
+
+export default CardList;

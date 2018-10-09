@@ -32,7 +32,6 @@ const RadioGroup = Radio.Group;
 const SelectOption = Select.Option;
 const { Search, TextArea } = Input;
 
-export default
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
@@ -337,3 +336,5 @@ class BasicList extends PureComponent {
     );
   }
 }
+
+export default BasicList;

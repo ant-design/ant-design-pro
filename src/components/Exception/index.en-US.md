@@ -17,3 +17,4 @@ desc | supplementary description | ReactNode | -
 img | the url of background image | string | -
 actions | suggested operations, a default 'Home' link will show if not set | ReactNode | -
 linkElement | to specify the element of link | string\|ReactElement | 'a'
+redirect | redirect path | string | '/'
