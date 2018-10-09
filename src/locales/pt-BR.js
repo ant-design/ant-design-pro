@@ -75,6 +75,8 @@ export default {
   'menu.account.settings': 'Configurar Conta',
   'menu.account.trigger': 'Disparar Erro',
   'menu.account.logout': 'Sair',
+  'app.login.message-invalid-credentials': 'Nome de usuário ou senha inválidosd（admin/888888）',
+  'app.login.message-invalid-verification-code': 'Código de verificação inválido',
   'app.login.tab-login-credentials': 'Credenciais',
   'app.login.tab-login-mobile': 'Telefone',
   'app.login.remember-me': 'Lembre-me',
