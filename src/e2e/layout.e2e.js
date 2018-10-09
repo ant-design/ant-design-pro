@@ -23,9 +23,11 @@ describe('Homepage', () => {
         const path = layout[index];
         try {
           await page.goto(`http://localhost:8000${path}`, { waitUntil: 'networkidle2' });
-          const text = await page.evaluate(() => document.getElementById('footer').innerHTML);
+          const haveFooter = await page.evaluate(
+            () => document.getElementsByTagName('footer').length > 0
+          );
 
-          expect(text).toBeTruthy();
+          expect(haveFooter).toBeTruthy();
 
           if (index < layout.length - 1) {
             loadPage(index + 1);
