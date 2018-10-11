@@ -80,7 +80,7 @@ class LoginPage extends Component {
             {login.status === 'error' &&
               login.type === 'account' &&
               !submitting &&
-              this.renderMessage('账户或密码错误（admin/888888）')}
+              this.renderMessage(formatMessage({ id: 'app.message-login.invalid-credentials' }))}
             <UserName name="userName" placeholder="admin/user" />
             <Password
               name="password"
@@ -92,7 +92,7 @@ class LoginPage extends Component {
             {login.status === 'error' &&
               login.type === 'mobile' &&
               !submitting &&
-              this.renderMessage('验证码错误')}
+              this.renderMessage(formatMessage({ id: 'app.login.message-invalid-verification-code' }))}
             <Mobile name="mobile" />
             <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
           </Tab>

@@ -21,30 +21,38 @@ import Exception403 from '../pages/Exception/403';
 const { Content } = Layout;
 
 // Conversion router to menu.
-function formatter(data, parentPath = '', parentAuthority, parentName) {
-  return data.map(item => {
-    let locale = 'menu';
-    if (parentName && item.name) {
-      locale = `${parentName}.${item.name}`;
-    } else if (item.name) {
-      locale = `menu.${item.name}`;
-    } else if (parentName) {
-      locale = parentName;
-    }
-    const result = {
-      ...item,
-      locale,
-      authority: item.authority || parentAuthority,
-    };
-    if (item.routes) {
-      const children = formatter(item.routes, `${parentPath}${item.path}/`, item.authority, locale);
-      // Reduce memory usage
-      result.children = children;
-    }
-    delete result.routes;
-    return result;
-  });
+function formatter(data, parentAuthority, parentName) {
+  return data
+    .map(item => {
+      let locale = 'menu';
+      if (parentName && item.name) {
+        locale = `${parentName}.${item.name}`;
+      } else if (item.name) {
+        locale = `menu.${item.name}`;
+      } else if (parentName) {
+        locale = parentName;
+      }
+      if (item.path) {
+        const result = {
+          ...item,
+          locale,
+          authority: item.authority || parentAuthority,
+        };
+        if (item.routes) {
+          const children = formatter(item.routes, item.authority, locale);
+          // Reduce memory usage
+          result.children = children;
+        }
+        delete result.routes;
+        return result;
+      }
+
+      return null;
+    })
+    .filter(item => item);
 }
+
+const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
 const query = {
   'screen-xs': {
@@ -87,6 +95,7 @@ export default class BasicLayout extends React.PureComponent {
   state = {
     rendering: true,
     isMobile: false,
+    menuData: this.getMenuData(),
   };
 
   componentDidMount() {
@@ -140,7 +149,7 @@ export default class BasicLayout extends React.PureComponent {
     const {
       route: { routes },
     } = this.props;
-    return formatter(routes);
+    return memoizeOneFormatter(routes);
   }
 
   /**
@@ -226,9 +235,8 @@ export default class BasicLayout extends React.PureComponent {
       children,
       location: { pathname },
     } = this.props;
-    const { isMobile } = this.state;
+    const { isMobile, menuData } = this.state;
     const isTop = PropsLayout === 'topmenu';
-    const menuData = this.getMenuData();
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (
       <Layout>
@@ -257,7 +265,10 @@ export default class BasicLayout extends React.PureComponent {
             {...this.props}
           />
           <Content style={this.getContentStyle()}>
-            <Authorized authority={routerConfig.authority} noMatch={<Exception403 />}>
+            <Authorized
+              authority={routerConfig && routerConfig.authority}
+              noMatch={<Exception403 />}
+            >
               {children}
             </Authorized>
           </Content>

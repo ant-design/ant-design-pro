@@ -124,7 +124,6 @@ export default class GlobalHeaderRight extends PureComponent {
             href="https://pro.ant.design/docs/getting-started"
             rel="noopener noreferrer"
             className={styles.action}
-            title="{ formatMessage({id: 'component.globalHeader.help'}) }"
           >
             <Icon type="question-circle-o" />
           </a>
@@ -134,6 +133,10 @@ export default class GlobalHeaderRight extends PureComponent {
           count={currentUser.notifyCount}
           onItemClick={(item, tabProps) => {
             console.log(item, tabProps); // eslint-disable-line
+          }}
+          locale={{
+            emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
+            clear: formatMessage({ id: 'component.noticeIcon.clear' }),
           }}
           onClear={onNoticeClear}
           onPopupVisibleChange={onNoticeVisibleChange}
