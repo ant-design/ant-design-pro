@@ -14,7 +14,7 @@ const { Option } = Select;
 const AvatarView = ({ avatar }) => (
   <Fragment>
     <div className={styles.avatar_title}>
-      <FormattedMessage id="app.settings.basic.avatar" defaultMessage="avatar" />
+      <FormattedMessage id="app.settings.basic.avatar" defaultMessage="Avatar" />
     </div>
     <div className={styles.avatar}>
       <img src={avatar} alt="avatar" />
