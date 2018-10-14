@@ -5,17 +5,13 @@ import BaseMenu from '../SiderMenu/BaseMenu';
 import styles from './index.less';
 
 export default class TopNavHeader extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      maxWidth: (props.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 330 - 165 - 4 - 36,
-    };
-  }
+  state = {
+    maxWidth: undefined,
+  };
 
   static getDerivedStateFromProps(props) {
     return {
-      maxWidth: (props.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 330 - 165 - 4 - 36,
+      maxWidth: (props.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 280 - 165 - 40,
     };
   }
 

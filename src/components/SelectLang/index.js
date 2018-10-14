@@ -29,7 +29,7 @@ export default class SelectLang extends PureComponent {
       </Menu>
     );
     return (
-      <Dropdown overlay={langMenu}>
+      <Dropdown overlay={langMenu} placement="bottomRight">
         <Icon
           type="global"
           className={classNames(styles.dropDown, className)}
