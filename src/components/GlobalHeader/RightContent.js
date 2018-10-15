@@ -47,7 +47,7 @@ export default class GlobalHeaderRight extends PureComponent {
       onNoticeVisibleChange,
       onMenuClick,
       onNoticeClear,
-      theme,
+      navTheme,
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
@@ -72,7 +72,7 @@ export default class GlobalHeaderRight extends PureComponent {
     );
     const noticeData = this.getNoticeData();
     let className = styles.right;
-    if (theme === 'dark') {
+    if (navTheme === 'dark') {
       className = `${styles.right}  ${styles.dark}`;
     }
     return (
