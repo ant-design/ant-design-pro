@@ -16,19 +16,11 @@ export default class NoticeIcon extends PureComponent {
     onClear: () => {},
     loading: false,
     locale: {
-      emptyText: '暂无数据',
-      clear: '清空',
+      emptyText: 'No notifications',
+      clear: 'Clear',
     },
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-    if (props.children && props.children[0]) {
-      this.state.tabType = props.children[0].props.title;
-    }
-  }
 
   onItemClick = (item, tabProps) => {
     const { onItemClick } = this.props;
@@ -36,7 +28,6 @@ export default class NoticeIcon extends PureComponent {
   };
 
   onTabChange = tabType => {
-    this.setState({ tabType });
     const { onTabChange } = this.props;
     onTabChange(tabType);
   };
@@ -52,12 +43,12 @@ export default class NoticeIcon extends PureComponent {
           ? `${child.props.title} (${child.props.list.length})`
           : child.props.title;
       return (
-        <TabPane tab={title} key={child.props.title}>
+        <TabPane tab={title} key={child.props.name}>
           <List
             {...child.props}
             data={child.props.list}
             onClick={item => this.onItemClick(item, child.props)}
-            onClear={() => onClear(child.props.title)}
+            onClear={() => onClear(child.props.name)}
             title={child.props.title}
             locale={locale}
           />
@@ -74,13 +65,14 @@ export default class NoticeIcon extends PureComponent {
   }
 
   render() {
-    const { className, count, popupAlign, onPopupVisibleChange, popupVisible } = this.props;
+    const { className, count, popupAlign, popupVisible, onPopupVisibleChange, bell } = this.props;
     const noticeButtonClass = classNames(className, styles.noticeButton);
     const notificationBox = this.getNotificationBox();
+    const NoticeBellIcon = bell || <Icon type="bell" className={styles.icon} />;
     const trigger = (
       <span className={noticeButtonClass}>
-        <Badge count={count} className={styles.badge}>
-          <Icon type="bell" className={styles.icon} />
+        <Badge count={count} style={{ boxShadow: 'none' }} className={styles.badge}>
+          {NoticeBellIcon}
         </Badge>
       </span>
     );

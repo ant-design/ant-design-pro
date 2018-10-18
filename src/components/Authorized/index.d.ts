@@ -27,7 +27,7 @@ interface check {
   ): T | S;
 }
 
-interface AuthorizedProps {
+export interface AuthorizedProps {
   authority: authority;
   noMatch?: React.ReactNode;
 }

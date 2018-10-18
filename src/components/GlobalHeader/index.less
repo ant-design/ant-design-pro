@@ -1,18 +1,13 @@
 @import '~antd/lib/style/themes/default.less';
 
+@pro-header-hover-bg: rgba(0, 0, 0, 0.025);
+
 .header {
   height: 64px;
-  padding: 0 12px 0 0;
+  padding: 0;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   position: relative;
-}
-
-:global {
-  .ant-layout {
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
 }
 
 .logo {
@@ -40,18 +35,19 @@
 
 i.trigger {
   font-size: 20px;
-  line-height: 64px;
+  height: 64px;
   cursor: pointer;
   transition: all 0.3s, padding 0s;
-  padding: 0 24px;
+  padding: 22px 24px;
   &:hover {
-    background: @primary-1;
+    background: @pro-header-hover-bg;
   }
 }
 
 .right {
   float: right;
   height: 100%;
+  overflow: hidden;
   .action {
     cursor: pointer;
     padding: 0 12px;
@@ -59,18 +55,18 @@ i.trigger {
     transition: all 0.3s;
     height: 100%;
     > i {
-      font-size: 16px;
       vertical-align: middle;
       color: @text-color;
     }
-    &:hover,
-    &:global(.ant-popover-open) {
-      background: @primary-1;
+    &:hover {
+      background: @pro-header-hover-bg;
+    }
+    :global(&.ant-popover-open) {
+      background: @pro-header-hover-bg;
     }
   }
   .search {
-    padding: 0;
-    margin: 0 12px;
+    padding: 0 12px;
     &:hover {
       background: transparent;
     }
@@ -80,7 +76,24 @@ i.trigger {
       margin: 20px 8px 20px 0;
       color: @primary-color;
       background: rgba(255, 255, 255, 0.85);
-      vertical-align: middle;
+      vertical-align: top;
+    }
+  }
+}
+
+.dark {
+  height: 64px;
+  .action {
+    color: rgba(255, 255, 255, 0.85);
+    > i {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    &:hover,
+    &:global(.ant-popover-open) {
+      background: @primary-color;
+    }
+    :global(.ant-badge) {
+      color: rgba(255, 255, 255, 0.85);
     }
   }
 }
@@ -94,9 +107,10 @@ i.trigger {
       display: none;
     }
     i.trigger {
-      padding: 0 12px;
+      padding: 22px 12px;
     }
     .logo {
+      padding-left: 12px;
       padding-right: 12px;
       position: relative;
     }

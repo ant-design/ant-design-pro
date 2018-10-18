@@ -3,13 +3,17 @@ const { kill } = require('cross-port-killer');
 
 const env = Object.create(process.env);
 env.BROWSER = 'none';
+env.TEST = true;
+// flag to prevent multiple test
+let once = false;
+
 const startServer = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['start'], {
   env,
 });
 
 startServer.stderr.on('data', data => {
   // eslint-disable-next-line
-  console.log(data);
+  console.log(data.toString());
 });
 
 startServer.on('exit', () => {
@@ -21,11 +25,9 @@ console.log('Starting development server for e2e tests...');
 startServer.stdout.on('data', data => {
   // eslint-disable-next-line
   console.log(data.toString());
-  if (
-    data.toString().indexOf('Compiled successfully') >= 0 ||
-    data.toString().indexOf('Compiled with warnings') >= 0
-  ) {
+  if (!once && data.toString().indexOf('App running at') >= 0) {
     // eslint-disable-next-line
+    once = true;
     console.log('Development server is started, ready to run tests.');
     const testCmd = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['test'], {
       stdio: 'inherit',

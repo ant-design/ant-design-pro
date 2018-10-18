@@ -4,23 +4,21 @@ let CURRENT = 'NULL';
  * use  authority or getAuthority
  * @param {string|()=>String} currentAuthority
  */
-const renderAuthorize = Authorized => {
-  return currentAuthority => {
-    if (currentAuthority) {
-      if (currentAuthority.constructor.name === 'Function') {
-        CURRENT = currentAuthority();
-      }
-      if (
-        currentAuthority.constructor.name === 'String' ||
-        currentAuthority.constructor.name === 'Array'
-      ) {
-        CURRENT = currentAuthority;
-      }
-    } else {
-      CURRENT = 'NULL';
+const renderAuthorize = Authorized => currentAuthority => {
+  if (currentAuthority) {
+    if (typeof currentAuthority === 'function') {
+      CURRENT = currentAuthority();
     }
-    return Authorized;
-  };
+    if (
+      Object.prototype.toString.call(currentAuthority) === '[object String]' ||
+      Array.isArray(currentAuthority)
+    ) {
+      CURRENT = currentAuthority;
+    }
+  } else {
+    CURRENT = 'NULL';
+  }
+  return Authorized;
 };
 
 export { CURRENT };

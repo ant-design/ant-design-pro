@@ -12,7 +12,7 @@ class Bar extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize);
+    window.addEventListener('resize', this.resize, { passive: true });
   }
 
   componentWillUnmount() {

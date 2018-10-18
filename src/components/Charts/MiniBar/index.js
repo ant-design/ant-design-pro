@@ -4,7 +4,7 @@ import autoHeight from '../autoHeight';
 import styles from '../index.less';
 
 @autoHeight()
-export default class MiniBar extends React.Component {
+class MiniBar extends React.Component {
   render() {
     const { height, forceFit = true, color = '#1890FF', data = [] } = this.props;
 
@@ -48,3 +48,4 @@ export default class MiniBar extends React.Component {
     );
   }
 }
+export default MiniBar;
