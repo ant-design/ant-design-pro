@@ -63,10 +63,7 @@ const cachedSave = (response, hashcode) => {
  * @param  {object} [option] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(
-  url,
-  option,
-) {
+export default function request(url, option) {
   const options = {
     expirys: isAntdPro(),
     ...option,
@@ -125,9 +122,9 @@ export default function request(
     .then(checkStatus)
     .then(response => cachedSave(response, hashcode))
     .then(response => {
-      // DELETE and 204 do not return data by default
+      // 204 do not return data by default
       // using .json will report an error.
-      if (newOptions.method === 'DELETE' || response.status === 204) {
+      if (response.status === 204) {
         return response.text();
       }
       return response.json();
