@@ -267,7 +267,7 @@ class Register extends Component {
                     message: formatMessage({ id: 'validation.phone-number.required' }),
                   },
                   {
-                    pattern: /^\d{10}$/,
+                    pattern: /^\d{11}$/,
                     message: formatMessage({ id: 'validation.phone-number.wrong-format' }),
                   },
                 ],
