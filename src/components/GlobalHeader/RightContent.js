@@ -57,7 +57,7 @@ export default class GlobalHeaderRight extends PureComponent {
 
   render() {
     const fullscreenIcon = ['arrows-alt', 'shrink'];
-    const fullscreenText = ['全屏', '退出全屏'];
+    const fullscreenText = ['鍏ㄥ睆', '鍙栨秷鍏ㄥ睆'];
     const fullscreen = this.state.fullscreen;
 
     const {
@@ -112,12 +112,12 @@ export default class GlobalHeaderRight extends PureComponent {
           }}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
-        {/* 全屏按钮 */}
-        <span className={styles.action} onClick={() => this.f11()}>
-          <Tooltip placement="bottom" title={fullscreenText[fullscreen]}>
-            <Icon type={fullscreenIcon[fullscreen]} />
-          </Tooltip>
-        </span>
+          {/* 鍏ㄥ睆鎺у埗 */}
+          <span className={styles.action} onClick={() => this.f11()}>
+            <Tooltip placement="bottom" title={fullscreenText[fullscreen]}>
+              <Icon type={fullscreenIcon[fullscreen]} />
+            </Tooltip>
+          </span>
 
           <a
             target="_blank"

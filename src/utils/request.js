@@ -44,7 +44,7 @@ const cachedSave = (response, hashcode) => {
    * Clone a response data and store it in sessionStorage
    * Does not support data other than json, Cache only json
    */
-  const contentType = response.headers['content-type'] ||  response.headers.get('Content-Type');
+  const contentType = response.headers['content-type'] || response.headers.get('Content-Type');
   if (contentType && contentType.match(/application\/json/i)) {
     // All data is saved as text
     sessionStorage.setItem(hashcode, response.data);
@@ -60,10 +60,7 @@ const cachedSave = (response, hashcode) => {
  * @param  {object} [option] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(
-  url,
-  option,
-) {
+export default function request(url, option) {
   const options = {
     expirys: isAntdPro(),
     ...option,
@@ -79,10 +76,9 @@ export default function request(
     .digest('hex');
 
   const defaultOptions = {
-    credentials: 'include'
-
+    credentials: 'include',
   };
-  const newOptions = { ...defaultOptions, ...`options` };
+  const newOptions = { ...defaultOptions, ...options };
   if (
     newOptions.method === 'POST' ||
     newOptions.method === 'PUT' ||
@@ -94,7 +90,7 @@ export default function request(
         'Content-Type': 'application/json; charset=utf-8',
         ...newOptions.headers,
       };
-      newOptions.body = JSON.stringify(newOptions.body);
+      newOptions.data = JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
       newOptions.headers = {
@@ -104,7 +100,7 @@ export default function request(
     }
   }
   const config = {
-    url: AppInfo.request_prefix + url,
+    url: AppInfo.url + AppInfo.request_prefix + url,
     ...newOptions,
   };
 
@@ -114,7 +110,7 @@ export default function request(
     };
   } else {
     config.headers = {
-      Authorization: `Bearer${  cookie.load('eva_token') ? cookie.load('eva_token') : ''}`,
+      Authorization: `Bearer${cookie.load('eva_token') ? cookie.load('eva_token') : ''}`,
     };
   }
 
@@ -133,6 +129,7 @@ export default function request(
       sessionStorage.removeItem(`${hashcode}:timestamp`);
     }
   }
+  console.info(config);
 
   return ax
     .request(config)

@@ -80,6 +80,7 @@ const query = {
 };
 @connect(({ global, setting }) => ({
   collapsed: global.collapsed,
+  menus: global.menus,
   layout: setting.layout,
   ...setting,
 }))
@@ -95,11 +96,14 @@ export default class BasicLayout extends React.PureComponent {
   state = {
     rendering: true,
     isMobile: false,
-    menuData: this.getMenuData(),
+    menuData: this.props.menus,
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
+    dispatch({
+      type: 'global/fetchMenus',
+    });
     dispatch({
       type: 'user/fetchCurrent',
     });
@@ -292,4 +296,3 @@ export default class BasicLayout extends React.PureComponent {
     );
   }
 }
-

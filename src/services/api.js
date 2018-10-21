@@ -1,6 +1,11 @@
 import { stringify } from 'qs';
 import request from '@/utils/request';
 
+// 获取用户菜单
+export async function getUserMenu(params) {
+  return request(`/module/listModuleByAttr?status=0001`);
+}
+
 export async function queryProjectNotice() {
   return request('/project/notice');
 }
@@ -103,8 +108,13 @@ export async function updateFakeList(params) {
   });
 }
 
+/**
+ * 用户登录
+ * @param params
+ * @returns {Promise<void>}
+ */
 export async function fakeAccountLogin(params) {
-  return request('/login/account', {
+  return request('/auth/login', {
     method: 'POST',
     body: params,
   });
