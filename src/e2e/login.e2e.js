@@ -1,5 +1,7 @@
 import puppeteer from 'puppeteer';
 
+const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
+
 describe('Login', () => {
   let browser;
   let page;
@@ -10,7 +12,7 @@ describe('Login', () => {
 
   beforeEach(async () => {
     page = await browser.newPage();
-    await page.goto('http://localhost:8000/user/login', { waitUntil: 'networkidle2' });
+    await page.goto(`${BASE_URL}/user/login`, { waitUntil: 'networkidle2' });
     await page.evaluate(() => window.localStorage.setItem('antd-pro-authority', 'guest'));
   });
 
