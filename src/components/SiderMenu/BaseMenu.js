@@ -24,10 +24,13 @@ const getIcon = icon => {
   return icon;
 };
 
-export const getMenuMatches = memoizeOne(
-  (flatMenuKeys, path) => flatMenuKeys.filter(item => item && pathToRegexp(item).test(path)),
-  isEqual
-);
+export const getMenuMatches = (flatMenuKeys, path) =>
+  flatMenuKeys.filter(item => {
+    if (item) {
+      return pathToRegexp(item).test(path);
+    }
+    return false;
+  });
 
 export default class BaseMenu extends PureComponent {
   constructor(props) {
