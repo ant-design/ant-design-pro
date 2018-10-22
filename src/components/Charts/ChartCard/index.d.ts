@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { CardProps } from 'antd/lib/card';
+import * as React from 'react';
 
 export interface IChartCardProps extends CardProps {
   title: React.ReactNode;
