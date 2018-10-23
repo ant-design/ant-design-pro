@@ -28,8 +28,9 @@
     "@antv/data-set": "^0.9.6",
     "@babel/runtime": "^7.1.2",
     "antd": "^3.10.0",
+    "axios": "^0.18.0",
     "bizcharts": "^3.2.2",
-    "axios": "^0.18.0",    "bizcharts-plugin-slider": "^2.0.3",
+    "bizcharts-plugin-slider": "^2.0.3",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "dva-model-extend": "^0.1.2",
@@ -107,10 +108,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
-  }
+  ]
 }

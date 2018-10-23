@@ -129,8 +129,6 @@ export default function request(url, option) {
       sessionStorage.removeItem(`${hashcode}:timestamp`);
     }
   }
-  console.info(config);
-
   return ax
     .request(config)
     .then(checkStatus)

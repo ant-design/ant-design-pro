@@ -21,17 +21,17 @@ $ yarn start         # visit http://localhost:8000
 yarn config set registry https://registry.npm.taobao.org --global
 
 ## 需要补充得知识
+ - [antd实战](https://www.yuque.com/ant-design/course)
+ - [DVA知识图谱](https://github.com/dvajs/dva-knowledgemap)
+ - [umijs](https://umijs.org/)
  - [es6语法](http://es6.ruanyifeng.com)
+ - [less](https://www.w3cschool.cn/less/operations.html)
  - [react入门](http://www.ruanyifeng.com/blog/2015/03/react.html)
  - [react redux文档](http://cn.redux.js.org/index.html)
  - [react redux入门] (http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html)
  - [react router入门] (http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu)
  - [saga入门] (https://www.jianshu.com/p/89ed2a01a3db)
  - [saga文档](https://redux-saga-in-chinese.js.org/index.html)
- - [DVA知识图谱](https://github.com/dvajs/dva-knowledgemap)
- - [umijs](https://umijs.org/)
- - [less](https://www.w3cschool.cn/less/operations.html)
- - [antd实战](https://www.yuque.com/ant-design/course)
 
 目录说明   
 - dist: 打包目录   

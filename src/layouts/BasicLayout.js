@@ -91,6 +91,8 @@ export default class BasicLayout extends React.PureComponent {
     this.getBreadcrumbNameMap = memoizeOne(this.getBreadcrumbNameMap, isEqual);
     this.breadcrumbNameMap = this.getBreadcrumbNameMap();
     this.matchParamsPath = memoizeOne(this.matchParamsPath, isEqual);
+    console.info("menus  : ");
+    console.info(props.menus);
   }
 
   state = {
@@ -99,11 +101,9 @@ export default class BasicLayout extends React.PureComponent {
     menuData: this.props.menus,
   };
 
+
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch({
-      type: 'global/fetchMenus',
-    });
     dispatch({
       type: 'user/fetchCurrent',
     });

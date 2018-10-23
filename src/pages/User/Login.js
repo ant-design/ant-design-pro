@@ -13,6 +13,14 @@ const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
   submitting: loading.effects['login/login'],
 }))
 class LoginPage extends Component {
+
+  constructor(props) {
+    super(props);
+
+    console.info("this is login page: " );
+
+  }
+
   state = {
     type: 'account',
     autoLogin: true,
