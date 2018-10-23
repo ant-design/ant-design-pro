@@ -95,18 +95,7 @@ export default {
     },
   },
   manifest: {
-    name: 'ant-design-pro',
-    background_color: '#FFF',
-    description: 'An out-of-box UI solution for enterprise applications as a React boilerplate.',
-    display: 'standalone',
-    start_url: '/index.html',
-    icons: [
-      {
-        src: '/favicon.png',
-        sizes: '48x48',
-        type: 'image/png',
-      },
-    ],
+    basePath:"/"
   },
 
   chainWebpack: webpackPlugin,
