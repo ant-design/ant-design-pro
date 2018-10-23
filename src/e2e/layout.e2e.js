@@ -1,6 +1,8 @@
 import puppeteer from 'puppeteer';
 import RouterConfig from '../../config/router.config';
 
+const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
+
 function formatter(data) {
   return data
     .reduce((pre, item) => {
@@ -22,7 +24,7 @@ describe('Homepage', () => {
       const loadPage = async index => {
         const path = layout[index];
         try {
-          await page.goto(`http://localhost:8000${path}`, { waitUntil: 'networkidle2' });
+          await page.goto(`${BASE_URL}${path}`, { waitUntil: 'networkidle2' });
           const haveFooter = await page.evaluate(
             () => document.getElementsByTagName('footer').length > 0
           );
