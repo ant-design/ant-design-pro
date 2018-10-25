@@ -69,7 +69,7 @@
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-compat": "^2.6.2",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
     "eslint-plugin-react": "^7.11.1",
