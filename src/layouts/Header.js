@@ -43,7 +43,11 @@ class HeaderView extends PureComponent {
   };
 
   handleNoticeClear = type => {
-    message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({ id: `component.globalHeader.${type}` })}`);
+    message.success(
+      `${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({
+        id: `component.globalHeader.${type}`,
+      })}`
+    );
     const { dispatch } = this.props;
     dispatch({
       type: 'global/clearNotices',

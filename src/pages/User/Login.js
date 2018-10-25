@@ -92,7 +92,9 @@ class LoginPage extends Component {
             {login.status === 'error' &&
               login.type === 'mobile' &&
               !submitting &&
-              this.renderMessage(formatMessage({ id: 'app.login.message-invalid-verification-code' }))}
+              this.renderMessage(
+                formatMessage({ id: 'app.login.message-invalid-verification-code' })
+              )}
             <Mobile name="mobile" />
             <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
           </Tab>
