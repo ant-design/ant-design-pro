@@ -93,13 +93,12 @@ class HeaderView extends PureComponent {
     }
     const scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
     if (!this.ticking) {
+      this.ticking = true;
       requestAnimationFrame(() => {
         if (this.oldScrollTop > scrollTop) {
           this.setState({
             visible: true,
           });
-          this.scrollTop = scrollTop;
-          return;
         }
         if (scrollTop > 300 && visible) {
           this.setState({
@@ -115,7 +114,6 @@ class HeaderView extends PureComponent {
         this.ticking = false;
       });
     }
-    this.ticking = false;
   };
 
   render() {
