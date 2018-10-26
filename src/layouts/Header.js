@@ -98,8 +98,6 @@ class HeaderView extends PureComponent {
           this.setState({
             visible: true,
           });
-          this.scrollTop = scrollTop;
-          return;
         }
         if (scrollTop > 300 && visible) {
           this.setState({
