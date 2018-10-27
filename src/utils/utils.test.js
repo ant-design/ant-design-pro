@@ -22,7 +22,6 @@ describe('fixedZero tests', () => {
     expect(fixedZero(8)).toEqual('08');
     expect(fixedZero(9)).toEqual('09');
   });
-
 });
 
 describe('isUrl tests', () => {
@@ -60,5 +59,4 @@ describe('isUrl tests', () => {
     expect(isUrl('http://www.example.com/test/123?foo=bar')).toBeTruthy();
     expect(isUrl('https://www.example.com/test/123?foo=bar')).toBeTruthy();
   });
-
 });
