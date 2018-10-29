@@ -35,6 +35,7 @@ const checkStatus = response => {
   });
   const error = new Error(errortext);
   error.name = response.status;
+  error.response = response.status;
   error.response = response;
   throw error;
 };
@@ -137,15 +138,20 @@ export default function request(url, option) {
       return response.data;
     })
     .catch(e => {
+      console.info(e);
       const response = e.response;
-      const status = response.status;
+      let status = "", errortext = "", requestUrl = "";
 
-      const errortext = response.statusText ? response.statusText : codeMessage[response.status];
-      const requestUrl = response.config.url;
+      if(response){
+        status = response? response.status: 400;
+        errortext = response.statusText ? response.statusText : codeMessage[response.status];
+        requestUrl = response.config.url;
+      }
+
 
       notification.error({
         message: `请求错误 : ${requestUrl}`,
-        description: errortext || '服务器错误',
+        description: errortext || '请求服务器失败',
       });
 
       if (status === 401) {

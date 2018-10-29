@@ -104,8 +104,18 @@ export default class BasicLayout extends React.PureComponent {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    /** 获取菜单 **/
     dispatch({
-      type: 'user/fetchCurrent',
+      type: 'global/fetchMenus',
+    });
+
+    const USER_KEY = "eva_user";
+    const user = JSON.parse(localStorage.getItem(USER_KEY));
+    dispatch({
+      type: 'account/fetchCurrent',
+      payload: {
+        id: user.id,
+      }
     });
     dispatch({
       type: 'setting/getSetting',

@@ -14,6 +14,7 @@ import { listOrgByAttr } from '../../organization/services/Organization';
 export default modelExtend(pageModel, {
   namespace: 'account',
   state: {
+    currentUser: {},
     orgData: [],
     currentItem: {},
     modalType: '',
@@ -21,6 +22,15 @@ export default modelExtend(pageModel, {
     formValues: {},
   },
   effects: {
+    /** 查询当前用户 **/
+    *fetchCurrent({ payload }, { call, put }){
+      const response = yield call(getUser, payload);
+      console.info(response.data);
+      yield put({
+        type: 'saveCurrentUser',
+        payload: response.data,
+      });
+    },
     // 校验编码唯一性
     *checkUnique({ payload }, { call }) {
       return yield call(checkUnique, payload);
@@ -132,6 +142,14 @@ export default modelExtend(pageModel, {
         });
       }
       if (callback) callback();
+    },
+  },
+  reducers: {
+    saveCurrentUser(state, action) {
+      return {
+        ...state,
+        currentUser: action.payload || {},
+      };
     },
   },
 });

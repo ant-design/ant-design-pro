@@ -11,7 +11,14 @@ import Authorized from '@/utils/Authorized';
 
 const { Header } = Layout;
 
-class HeaderView extends PureComponent {
+@connect(({ account, global, setting, loading }) => ({
+  currentUser: account.currentUser,
+  collapsed: global.collapsed,
+  fetchingNotices: loading.effects['global/fetchNotices'],
+  notices: global.notices,
+  setting,
+}))
+export default class HeaderView extends PureComponent {
   state = {
     visible: true,
   };
@@ -153,11 +160,3 @@ class HeaderView extends PureComponent {
     );
   }
 }
-
-export default connect(({ user, global, setting, loading }) => ({
-  currentUser: user.currentUser,
-  collapsed: global.collapsed,
-  fetchingNotices: loading.effects['global/fetchNotices'],
-  notices: global.notices,
-  setting,
-}))(HeaderView);

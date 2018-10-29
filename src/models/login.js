@@ -26,7 +26,6 @@ export default {
       // 登录鉴权
       if (response && response.success) {
         // 拿到token 存cookie
-        console.info("response token is : " + response.data.token);
         cookie.save(TOKEN_KEY, response.data.token, {
           maxAge: 60 * 60 * 24,
         });
