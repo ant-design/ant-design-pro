@@ -1,4 +1,11 @@
 import * as React from 'react';
+import { TooltipProps } from 'antd/lib/tooltip';
+
+export interface IEllipsisTooltipProps extends TooltipProps {
+  title?: undefined;
+  overlayStyle?: undefined;
+}
+
 export interface IEllipsisProps {
   tooltip?: boolean;
   length?: number;
