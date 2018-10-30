@@ -81,10 +81,10 @@ class LoginPage extends Component {
               login.type === 'account' &&
               !submitting &&
               this.renderMessage(formatMessage({ id: 'app.login.message-invalid-credentials' }))}
-            <UserName name="userName" placeholder="admin/user" />
+            <UserName name="userName" placeholder="username: admin or user" />
             <Password
               name="password"
-              placeholder="888888/123456"
+              placeholder="password: ant.design"
               onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
             />
           </Tab>
