@@ -7,7 +7,7 @@ export interface IEllipsisTooltipProps extends TooltipProps {
 }
 
 export interface IEllipsisProps {
-  tooltip?: boolean;
+  tooltip?: boolean | IEllipsisTooltipProps;
   length?: number;
   lines?: number;
   style?: React.CSSProperties;
