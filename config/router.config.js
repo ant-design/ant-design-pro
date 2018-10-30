@@ -51,7 +51,6 @@ export default [
             routes: [
               {
                 path: '/form/step-form',
-                name: 'stepform',
                 redirect: '/form/step-form/info',
               },
               {
