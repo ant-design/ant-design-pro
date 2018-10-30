@@ -80,7 +80,7 @@ export default class GlobalHeaderRight extends PureComponent {
       notifyCount,
       theme,
       searchDataSource = [],
-      notificationType = 'notification,message,event',
+      notificationTypes = ['notification', 'message', 'event'],
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
@@ -140,40 +140,18 @@ export default class GlobalHeaderRight extends PureComponent {
           loading={fetchingNotices}
           popupAlign={{ offset: [20, -16] }}
         >
-          {notificationType.indexOf('notification') !== -1 ? ( // 支持自定义显示消息标签页
+          {notificationTypes.map(item => (
             <NoticeIcon.Tab
-              list={noticeData.notification}
-              title={formatMessage({ id: 'component.globalHeader.notification' })}
-              name="notification"
-              emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
-              emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
+              key={item}
+              list={noticeData[`${item}`]}
+              title={formatMessage({ id: `component.globalHeader.${item}` })}
+              name={`${item}`}
+              emptyText={formatMessage({ id: `component.globalHeader.${item}.empty` })}
+              emptyImage={`https://gw.alipayobjects.com/zos/rmsportal/${
+                item === 'message' ? 'sAuJeJzSKbUmHfBQRzmZ' : 'wAhyIChODzsoKIOBHcBk'
+              }.svg`}
             />
-          ) : (
-            ''
-          )}
-
-          {notificationType.indexOf('message') !== -1 ? (
-            <NoticeIcon.Tab
-              list={noticeData.message}
-              title={formatMessage({ id: 'component.globalHeader.message' })}
-              name="message"
-              emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
-              emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
-            />
-          ) : (
-            ''
-          )}
-          {notificationType.indexOf('event') !== -1 ? (
-            <NoticeIcon.Tab
-              list={noticeData.event}
-              title={formatMessage({ id: 'component.globalHeader.event' })}
-              name="event"
-              emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
-              emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
-            />
-          ) : (
-            ''
-          )}
+          ))}
         </NoticeIcon>
         {currentUser.name ? (
           <Dropdown overlay={menu}>

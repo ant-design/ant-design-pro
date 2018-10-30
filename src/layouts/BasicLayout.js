@@ -306,10 +306,10 @@ class BasicLayout extends React.PureComponent {
  *  onPressEnter, // 顶部搜索回车事件回调函数 function(value:string)
  *  searchDataSource, // 顶部搜索提示数据 string[]
  *  onItemClick,  // 消息记录点击事件回调行数 function(item:obect,tabprops:object)
- *  notificationType="notification,message,event", // 消息类型展示自定义
+ *  notificationTypes=['notification','message','event'], // 消息类型展示自定义
  *  notifyCount, // 总消息条数 value:number
  *  fetchingNotices, // 消息面板显示时,加载图标状态显示控制
- *  handleNoticeVisibleChange,  // 消息面板展开事件 function(type:String)
+ *  handleNoticeVisibleChange,  // 消息面板展开事件 function(visible:boolean)
  *  menuData, // 菜单数据 ，结构参考formatter object[]
  *  pageTitle, // 页面title
  * }
@@ -319,5 +319,6 @@ export default connect(({ global, setting, loading }) => ({
   layout: setting.layout,
   loading,
   // pageTitle:'demo',
+  notificationTypes: ['notification', 'message'],
   ...setting,
 }))(BasicLayout);
