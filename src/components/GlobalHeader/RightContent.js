@@ -70,6 +70,24 @@ export default class GlobalHeaderRight extends PureComponent {
     }
   };
 
+  noticeIconTabs = () =>{
+    const { notificationTypes = ['notification', 'message', 'event']} = this.props;
+    const noticeData = this.getNoticeData();
+    const tabs = notificationTypes.map(item => (
+      <NoticeIcon.Tab
+        key={item}
+        list={noticeData[`${item}`]}
+        title={formatMessage({ id: `component.globalHeader.${item}` })}
+        name={`${item}`}
+        emptyText={formatMessage({ id: `component.globalHeader.${item}.empty` })}
+        emptyImage={`https://gw.alipayobjects.com/zos/rmsportal/${
+          item === 'message' ? 'sAuJeJzSKbUmHfBQRzmZ' : 'wAhyIChODzsoKIOBHcBk'
+        }.svg`}
+      />
+    ))
+    return tabs 
+  }
+
   render() {
     const {
       currentUser,
@@ -80,7 +98,6 @@ export default class GlobalHeaderRight extends PureComponent {
       notifyCount,
       theme,
       searchDataSource = [],
-      notificationTypes = ['notification', 'message', 'event'],
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
@@ -103,11 +120,11 @@ export default class GlobalHeaderRight extends PureComponent {
         </Menu.Item>
       </Menu>
     );
-    const noticeData = this.getNoticeData();
     let className = styles.right;
     if (theme === 'dark') {
       className = `${styles.right}  ${styles.dark}`;
     }
+
     return (
       <div className={className}>
         <HeaderSearch
@@ -140,18 +157,7 @@ export default class GlobalHeaderRight extends PureComponent {
           loading={fetchingNotices}
           popupAlign={{ offset: [20, -16] }}
         >
-          {notificationTypes.map(item => (
-            <NoticeIcon.Tab
-              key={item}
-              list={noticeData[`${item}`]}
-              title={formatMessage({ id: `component.globalHeader.${item}` })}
-              name={`${item}`}
-              emptyText={formatMessage({ id: `component.globalHeader.${item}.empty` })}
-              emptyImage={`https://gw.alipayobjects.com/zos/rmsportal/${
-                item === 'message' ? 'sAuJeJzSKbUmHfBQRzmZ' : 'wAhyIChODzsoKIOBHcBk'
-              }.svg`}
-            />
-          ))}
+          {this.noticeIconTabs()}
         </NoticeIcon>
         {currentUser.name ? (
           <Dropdown overlay={menu}>
