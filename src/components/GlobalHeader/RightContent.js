@@ -70,8 +70,8 @@ export default class GlobalHeaderRight extends PureComponent {
     }
   };
 
-  noticeIconTabs = () =>{
-    const { notificationTypes = ['notification', 'message', 'event']} = this.props;
+  noticeIconTabs = () => {
+    const { notificationTypes = ['notification', 'message', 'event'] } = this.props;
     const noticeData = this.getNoticeData();
     const tabs = notificationTypes.map(item => (
       <NoticeIcon.Tab
@@ -84,9 +84,9 @@ export default class GlobalHeaderRight extends PureComponent {
           item === 'message' ? 'sAuJeJzSKbUmHfBQRzmZ' : 'wAhyIChODzsoKIOBHcBk'
         }.svg`}
       />
-    ))
-    return tabs 
-  }
+    ));
+    return tabs;
+  };
 
   render() {
     const {

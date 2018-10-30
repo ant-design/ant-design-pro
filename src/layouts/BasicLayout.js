@@ -310,7 +310,7 @@ class BasicLayout extends React.PureComponent {
  *  notifyCount, // 总消息条数 value:number
  *  fetchingNotices, // 消息面板显示时,加载图标状态显示控制
  *  handleNoticeVisibleChange,  // 消息面板展开事件 function(visible:boolean)
- *  menuData, // 菜单数据 ，object[],结构参考formatter 
+ *  menuData, // 菜单数据 ，object[],结构参考formatter
  *  pageTitle, // 页面title
  * }
  */
@@ -318,7 +318,7 @@ export default connect(({ global, setting, loading }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   loading,
-  pageTitle:'demo',
+  pageTitle: 'demo',
   notificationTypes: ['notification', 'message'],
   ...setting,
 }))(BasicLayout);
