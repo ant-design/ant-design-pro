@@ -107,8 +107,7 @@ export default class NoticeIcon extends PureComponent {
         popupAlign={popupAlign}
         onVisibleChange={onPopupVisibleChange}
         {...popoverProps}
-         /* eslint-disable */ 
-        ref={node => { this.popover = ReactDOM.findDOMNode(node)}}
+        ref={node => { this.popover = ReactDOM.findDOMNode(node)}} // eslint-disable-line
       >
         {trigger}
       </Popover>
