@@ -43,12 +43,16 @@ class HeaderView extends PureComponent {
   };
 
   handleNoticeClear = type => {
-    const { handleNoticeClear } = this.props
+    const { handleNoticeClear } = this.props;
     // 支持自定义
-    if(handleNoticeClear){
-      handleNoticeClear(type)
-    }else{
-      message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({ id: `component.globalHeader.${type}` })}`);
+    if (handleNoticeClear) {
+      handleNoticeClear(type);
+    } else {
+      message.success(
+        `${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({
+          id: `component.globalHeader.${type}`,
+        })}`
+      );
       const { dispatch } = this.props;
       dispatch({
         type: 'global/clearNotices',
@@ -80,16 +84,15 @@ class HeaderView extends PureComponent {
 
   handleNoticeVisibleChanged = visible => {
     // 可外部定义此方法
-    const { handleNoticeVisibleChange } = this.props 
-    if(handleNoticeVisibleChange){
-      handleNoticeVisibleChange(visible)
-    }else if (visible) {
-        const { dispatch } = this.props;
-        dispatch({
-          type: 'global/fetchNotices',
-        });
-      }
-    
+    const { handleNoticeVisibleChange } = this.props;
+    if (handleNoticeVisibleChange) {
+      handleNoticeVisibleChange(visible);
+    } else if (visible) {
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'global/fetchNotices',
+      });
+    }
   };
 
   handScroll = () => {

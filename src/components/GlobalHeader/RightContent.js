@@ -43,33 +43,32 @@ export default class GlobalHeaderRight extends PureComponent {
   /**
    * 支持外部定义搜索事件响应
    */
-  onSearch = (value)=>{
-    const {onSearch} = this.props
-    if(onSearch){
-      onSearch(value)
+  onSearch = value => {
+    const { onSearch } = this.props;
+    if (onSearch) {
+      onSearch(value);
     }
+  };
 
-  }
-
-   /**
+  /**
    * 支持外部定义回车事件响应
    */
-  onPressEnter = (value)=>{
-    const {onSearch} = this.props
-    if(onSearch){
-      onSearch(value)
+  onPressEnter = value => {
+    const { onSearch } = this.props;
+    if (onSearch) {
+      onSearch(value);
     }
-  }
+  };
 
   /**
    * 支持外部定义通知记录点击事件
    */
-  onItemClick = (item,tabProps)=>{
-    const {onItemClick} = this.props
-    if(onItemClick){
-      onItemClick(item,tabProps)
+  onItemClick = (item, tabProps) => {
+    const { onItemClick } = this.props;
+    if (onItemClick) {
+      onItemClick(item, tabProps);
     }
-  }
+  };
 
   render() {
     const {
@@ -80,8 +79,8 @@ export default class GlobalHeaderRight extends PureComponent {
       onNoticeClear,
       notifyCount,
       theme,
-      searchDataSource=[],
-      notificationType="notification,message,event",
+      searchDataSource = [],
+      notificationType = 'notification,message,event',
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
@@ -141,36 +140,40 @@ export default class GlobalHeaderRight extends PureComponent {
           loading={fetchingNotices}
           popupAlign={{ offset: [20, -16] }}
         >
-          {notificationType.indexOf('notification') !== -1? // 支持自定义显示消息标签页
-            (<NoticeIcon.Tab
+          {notificationType.indexOf('notification') !== -1 ? ( // 支持自定义显示消息标签页
+            <NoticeIcon.Tab
               list={noticeData.notification}
               title={formatMessage({ id: 'component.globalHeader.notification' })}
               name="notification"
               emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
               emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
-            />):''
-           }
-          
-          {notificationType.indexOf('message') !== -1?
-            (<NoticeIcon.Tab
+            />
+          ) : (
+            ''
+          )}
+
+          {notificationType.indexOf('message') !== -1 ? (
+            <NoticeIcon.Tab
               list={noticeData.message}
               title={formatMessage({ id: 'component.globalHeader.message' })}
               name="message"
               emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
               emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
-            />)
-            :'' 
-          }
-          {notificationType.indexOf('event') !== -1?
-              (<NoticeIcon.Tab
-                list={noticeData.event}
-                title={formatMessage({ id: 'component.globalHeader.event' })}
-                name="event"
-                emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
-                emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
-              />)
-              :'' 
-            }
+            />
+          ) : (
+            ''
+          )}
+          {notificationType.indexOf('event') !== -1 ? (
+            <NoticeIcon.Tab
+              list={noticeData.event}
+              title={formatMessage({ id: 'component.globalHeader.event' })}
+              name="event"
+              emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
+              emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
+            />
+          ) : (
+            ''
+          )}
         </NoticeIcon>
         {currentUser.name ? (
           <Dropdown overlay={menu}>

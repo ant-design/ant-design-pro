@@ -179,10 +179,10 @@ class BasicLayout extends React.PureComponent {
   };
 
   getPageTitle = pathname => {
-    const { pageTitle } = this.props
+    const { pageTitle } = this.props;
     const currRouterData = this.matchParamsPath(pathname);
     // 支持自定义页面title
-    const title =  pageTitle || 'Ant Design Pro';
+    const title = pageTitle || 'Ant Design Pro';
     if (!currRouterData) {
       return title;
     }
@@ -243,7 +243,7 @@ class BasicLayout extends React.PureComponent {
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
     const fetching = fetchingNotices || loading.effects['global/fetchNotices'];
-    const headerProps = {...this.props,fetchingNotices:fetching}
+    const headerProps = { ...this.props, fetchingNotices: fetching };
     const layout = (
       <Layout>
         {isTop && !isMobile ? null : (
@@ -269,7 +269,6 @@ class BasicLayout extends React.PureComponent {
             logo={logo}
             isMobile={isMobile}
             {...headerProps}
-            
           />
           <Content style={this.getContentStyle()}>
             <Authorized
@@ -300,22 +299,22 @@ class BasicLayout extends React.PureComponent {
   }
 }
 /**
-  * 如果您想要扩展 BasicLayout ，同时又想通过更新ant-design-pro来获得antd-pro团队最新特性，可以通过包装BasicLayout实现
-  * 以下是BasicLayout 外部可定义props
-  * props = {
-  *  onSearch, // 顶部搜索回调函数 function(value:string)
-  *  onPressEnter, // 顶部搜索回车事件回调函数 function(value:string)
-  *  searchDataSource, // 顶部搜索提示数据 string[]
-  *  onItemClick,  // 消息记录点击事件回调行数 function(item:obect,tabprops:object)
-  *  notificationType="notification,message,event", // 消息类型展示自定义
-  *  notifyCount, // 总消息条数 value:number
-  *  fetchingNotices, // 消息面板显示时,加载图标状态显示控制
-  *  handleNoticeVisibleChange,  // 消息面板展开事件 function(type:String)
-  *  menuData, // 菜单数据 ，结构参考formatter object[]
-  *  pageTitle, // 页面title
-  * }
-  */
-export default connect(({ global, setting,loading }) => ({
+ * 如果您想要扩展 BasicLayout ，同时又想通过更新ant-design-pro来获得antd-pro团队最新特性，可以通过包装BasicLayout实现
+ * 以下是BasicLayout 外部可定义props
+ * props = {
+ *  onSearch, // 顶部搜索回调函数 function(value:string)
+ *  onPressEnter, // 顶部搜索回车事件回调函数 function(value:string)
+ *  searchDataSource, // 顶部搜索提示数据 string[]
+ *  onItemClick,  // 消息记录点击事件回调行数 function(item:obect,tabprops:object)
+ *  notificationType="notification,message,event", // 消息类型展示自定义
+ *  notifyCount, // 总消息条数 value:number
+ *  fetchingNotices, // 消息面板显示时,加载图标状态显示控制
+ *  handleNoticeVisibleChange,  // 消息面板展开事件 function(type:String)
+ *  menuData, // 菜单数据 ，结构参考formatter object[]
+ *  pageTitle, // 页面title
+ * }
+ */
+export default connect(({ global, setting, loading }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   loading,
