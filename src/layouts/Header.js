@@ -43,12 +43,18 @@ class HeaderView extends PureComponent {
   };
 
   handleNoticeClear = type => {
-    message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({ id: `component.globalHeader.${type}` })}`);
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'global/clearNotices',
-      payload: type,
-    });
+    const { handleNoticeClear } = this.props
+    // 支持自定义
+    if(handleNoticeClear){
+      handleNoticeClear(type)
+    }else{
+      message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({ id: `component.globalHeader.${type}` })}`);
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'global/clearNotices',
+        payload: type,
+      });
+    }
   };
 
   handleMenuClick = ({ key }) => {
@@ -72,13 +78,18 @@ class HeaderView extends PureComponent {
     }
   };
 
-  handleNoticeVisibleChange = visible => {
-    if (visible) {
-      const { dispatch } = this.props;
-      dispatch({
-        type: 'global/fetchNotices',
-      });
-    }
+  handleNoticeVisibleChanged = visible => {
+    // 可外部定义此方法
+    const { handleNoticeVisibleChange } = this.props 
+    if(handleNoticeVisibleChange){
+      handleNoticeVisibleChange(visible)
+    }else if (visible) {
+        const { dispatch } = this.props;
+        dispatch({
+          type: 'global/fetchNotices',
+        });
+      }
+    
   };
 
   handScroll = () => {
@@ -130,7 +141,7 @@ class HeaderView extends PureComponent {
             onCollapse={handleMenuCollapse}
             onNoticeClear={this.handleNoticeClear}
             onMenuClick={this.handleMenuClick}
-            onNoticeVisibleChange={this.handleNoticeVisibleChange}
+            onNoticeVisibleChange={this.handleNoticeVisibleChanged}
             {...this.props}
           />
         ) : (
@@ -138,7 +149,7 @@ class HeaderView extends PureComponent {
             onCollapse={handleMenuCollapse}
             onNoticeClear={this.handleNoticeClear}
             onMenuClick={this.handleMenuClick}
-            onNoticeVisibleChange={this.handleNoticeVisibleChange}
+            onNoticeVisibleChange={this.handleNoticeVisibleChanged}
             {...this.props}
           />
         )}
@@ -152,10 +163,9 @@ class HeaderView extends PureComponent {
   }
 }
 
-export default connect(({ user, global, setting, loading }) => ({
+export default connect(({ user, global, setting }) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
-  fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
   setting,
 }))(HeaderView);
