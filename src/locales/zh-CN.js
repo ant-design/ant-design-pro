@@ -102,7 +102,7 @@ export default {
   'menu.account.settings': '个人设置',
   'menu.account.trigger': '触发报错',
   'menu.account.logout': '退出登录',
-  'app.login.message-invalid-credentials': '账户或密码错误（admin/888888）',
+  'app.login.message-invalid-credentials': '账户或密码错误（admin/ant.design）',
   'app.login.message-invalid-verification-code': '验证码错误',
   'app.login.tab-login-credentials': '账户密码登录',
   'app.login.tab-login-mobile': '手机号登录',
