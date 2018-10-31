@@ -140,8 +140,8 @@ class Analysis extends Component {
   }
 
   render() {
-    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey } = this.state;
-    const { chart, loading: stateLoading } = this.props;
+    const { rangePickerValue, salesType, loading: stateLoading, currentTabKey } = this.state;
+    const { chart, loading: propsLoading } = this.props;
     const {
       visitData,
       visitData2,
@@ -153,7 +153,7 @@ class Analysis extends Component {
       salesTypeDataOnline,
       salesTypeDataOffline,
     } = chart;
-    const loading = propsLoding || stateLoading;
+    const loading = propsLoading || stateLoading;
     let salesPieData;
     if (salesType === 'all') {
       salesPieData = salesTypeData;
