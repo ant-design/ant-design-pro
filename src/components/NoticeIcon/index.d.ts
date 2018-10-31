@@ -22,6 +22,7 @@ export interface INoticeIconProps {
   onPopupVisibleChange?: (visible: boolean) => void;
   popupVisible?: boolean;
   locale?: { emptyText: string; clear: string };
+  clearClose?: boolean;
 }
 
 export default class NoticeIcon extends React.Component<INoticeIconProps, any> {
