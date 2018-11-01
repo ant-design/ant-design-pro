@@ -315,7 +315,7 @@ class BasicLayout extends React.PureComponent {
  *  pageTitle, // 页面title
  * }
  */
-export default connect(({ global, setting,loading }) => ({
+export default connect(({ global, setting, loading }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   pageTitle: 'demo',

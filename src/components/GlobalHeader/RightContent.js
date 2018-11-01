@@ -38,7 +38,7 @@ export default class GlobalHeaderRight extends PureComponent {
       return newNotice;
     });
     const dataMap = groupBy(newNotices, 'type');
-    return dataMap
+    return dataMap;
   }
 
   /**
