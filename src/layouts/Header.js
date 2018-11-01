@@ -42,7 +42,7 @@ class HeaderView extends PureComponent {
     return collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)';
   };
 
-  handleNoticeClear = type => {
+  handleNoticeClear1 = type => {
     const { handleNoticeClear } = this.props;
     // 支持自定义
     if (handleNoticeClear) {
@@ -142,7 +142,7 @@ class HeaderView extends PureComponent {
             mode="horizontal"
             Authorized={Authorized}
             onCollapse={handleMenuCollapse}
-            onNoticeClear={this.handleNoticeClear}
+            onNoticeClear={this.handleNoticeClear1}
             onMenuClick={this.handleMenuClick}
             onNoticeVisibleChange={this.handleNoticeVisibleChanged}
             {...this.props}
@@ -150,7 +150,7 @@ class HeaderView extends PureComponent {
         ) : (
           <GlobalHeader
             onCollapse={handleMenuCollapse}
-            onNoticeClear={this.handleNoticeClear}
+            onNoticeClear={this.handleNoticeClear1}
             onMenuClick={this.handleMenuClick}
             onNoticeVisibleChange={this.handleNoticeVisibleChanged}
             {...this.props}

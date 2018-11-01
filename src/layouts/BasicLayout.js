@@ -305,20 +305,20 @@ class BasicLayout extends React.PureComponent {
  *  onSearch, // 顶部搜索回调函数 function(value:string)
  *  onPressEnter, // 顶部搜索回车事件回调函数 function(value:string)
  *  searchDataSource, // 顶部搜索提示数据 string[]
- *  onItemClick,  // 消息记录点击事件回调行数 function(item:obect,tabprops:object)
+ *  onItemClick,  // 消息记录点击事件回调函数 function(item:obect,tabprops:object)
  *  notificationTypes=['notification','message','event'], // 消息类型展示自定义
  *  notifyCount, // 总消息条数 value:number
+ *  handleNoticeClear(type),// 清理消息回调函数
  *  fetchingNotices, // 消息面板显示时,加载图标状态显示控制
  *  handleNoticeVisibleChange,  // 消息面板展开事件 function(visible:boolean)
  *  menuData, // 菜单数据 ，object[],结构参考formatter
  *  pageTitle, // 页面title
  * }
  */
-export default connect(({ global, setting, loading }) => ({
+export default connect(({ global, setting,loading }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
-  loading,
   pageTitle: 'demo',
-  notificationTypes: ['notification', 'message'],
+  loading,
   ...setting,
 }))(BasicLayout);

@@ -37,7 +37,8 @@ export default class GlobalHeaderRight extends PureComponent {
       }
       return newNotice;
     });
-    return groupBy(newNotices, 'type');
+    const dataMap = groupBy(newNotices, 'type');
+    return dataMap
   }
 
   /**
@@ -124,7 +125,6 @@ export default class GlobalHeaderRight extends PureComponent {
     if (theme === 'dark') {
       className = `${styles.right}  ${styles.dark}`;
     }
-
     return (
       <div className={className}>
         <HeaderSearch
