@@ -147,7 +147,7 @@ class BasicLayout extends React.PureComponent {
       menuData,
     } = this.props;
     // 支持通过 组合的方式定义菜单
-    return menuData ||enuData memoizeOneFormatter(routes);
+    return menuData || memoizeOneFormatter(routes);
   }
 
   /**
