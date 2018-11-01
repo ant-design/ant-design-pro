@@ -40,6 +40,57 @@ export default class GlobalHeaderRight extends PureComponent {
     return groupBy(newNotices, 'type');
   }
 
+  /**
+   * 支持自定义搜索事件响应
+   */
+  onSearch = value => {
+    const { onSearch } = this.props;
+    if (onSearch) {
+      onSearch(value);
+    }
+  };
+
+  /**
+   * 支持自定义搜索回车事件响应
+   */
+  onPressEnter = value => {
+    const { onPressEnter } = this.props;
+    if (onPressEnter) {
+      onPressEnter(value);
+    }
+  };
+
+  /**
+   * 支持自定义通知记录点击事件
+   */
+  onItemClick = (item, tabProps) => {
+    const { onItemClick } = this.props;
+    if (onItemClick) {
+      onItemClick(item, tabProps);
+    }
+  };
+
+  /**
+   * 支持自定义消息面板可展示的类型
+   */
+  noticeIconTabs = () => {
+    const { notificationTypes = ['notification', 'message', 'event'] } = this.props;
+    const noticeData = this.getNoticeData();
+    const tabs = notificationTypes.map(item => (
+      <NoticeIcon.Tab
+        key={item}
+        list={noticeData[`${item}`]}
+        title={formatMessage({ id: `component.globalHeader.${item}` })}
+        name={`${item}`}
+        emptyText={formatMessage({ id: `component.globalHeader.${item}.empty` })}
+        emptyImage={`https://gw.alipayobjects.com/zos/rmsportal/${
+          item === 'message' ? 'sAuJeJzSKbUmHfBQRzmZ' : 'wAhyIChODzsoKIOBHcBk'
+        }.svg`}
+      />
+    ));
+    return tabs;
+  };
+
   render() {
     const {
       currentUser,
@@ -48,6 +99,8 @@ export default class GlobalHeaderRight extends PureComponent {
       onMenuClick,
       onNoticeClear,
       theme,
+      searchDataSource = [],
+      notifyCount,
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
@@ -80,17 +133,9 @@ export default class GlobalHeaderRight extends PureComponent {
         <HeaderSearch
           className={`${styles.action} ${styles.search}`}
           placeholder={formatMessage({ id: 'component.globalHeader.search' })}
-          dataSource={[
-            formatMessage({ id: 'component.globalHeader.search.example1' }),
-            formatMessage({ id: 'component.globalHeader.search.example2' }),
-            formatMessage({ id: 'component.globalHeader.search.example3' }),
-          ]}
-          onSearch={value => {
-            console.log('input', value); // eslint-disable-line
-          }}
-          onPressEnter={value => {
-            console.log('enter', value); // eslint-disable-line
-          }}
+          dataSource={searchDataSource}
+          onSearch={this.onSearch}
+          onPressEnter={this.onPressEnter}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
           <a
@@ -104,10 +149,8 @@ export default class GlobalHeaderRight extends PureComponent {
         </Tooltip>
         <NoticeIcon
           className={styles.action}
-          count={currentUser.notifyCount}
-          onItemClick={(item, tabProps) => {
-            console.log(item, tabProps); // eslint-disable-line
-          }}
+          count={notifyCount || currentUser.notifyCount}
+          onItemClick={this.onItemClick}
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
             clear: formatMessage({ id: 'component.noticeIcon.clear' }),
@@ -118,27 +161,7 @@ export default class GlobalHeaderRight extends PureComponent {
           popupAlign={{ offset: [20, -16] }}
           clearClose
         >
-          <NoticeIcon.Tab
-            list={noticeData.notification}
-            title={formatMessage({ id: 'component.globalHeader.notification' })}
-            name="notification"
-            emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
-            emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
-          />
-          <NoticeIcon.Tab
-            list={noticeData.message}
-            title={formatMessage({ id: 'component.globalHeader.message' })}
-            name="message"
-            emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
-            emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
-          />
-          <NoticeIcon.Tab
-            list={noticeData.event}
-            title={formatMessage({ id: 'component.globalHeader.event' })}
-            name="event"
-            emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
-            emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
-          />
+          {this.noticeIconTabs()}
         </NoticeIcon>
         {currentUser.name ? (
           <Dropdown overlay={menu}>

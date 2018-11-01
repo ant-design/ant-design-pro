@@ -144,8 +144,10 @@ class BasicLayout extends React.PureComponent {
   getMenuData() {
     const {
       route: { routes },
+      menuData,
     } = this.props;
-    return memoizeOneFormatter(routes);
+    // 支持通过 组合的方式定义菜单
+    return menuData ||enuData memoizeOneFormatter(routes);
   }
 
   /**
@@ -175,16 +177,18 @@ class BasicLayout extends React.PureComponent {
   };
 
   getPageTitle = pathname => {
+    const { pageTitle } = this.props;
     const currRouterData = this.matchParamsPath(pathname);
-
+    // 支持通过 组合的方式定义PageTitle
+    const title = pageTitle || 'Ant Design Pro';
     if (!currRouterData) {
-      return 'Ant Design Pro';
+      return title;
     }
     const message = formatMessage({
       id: currRouterData.locale || currRouterData.name,
       defaultMessage: currRouterData.name,
     });
-    return `${message} - Ant Design Pro`;
+    return `${message} - ${title}`;
   };
 
   getLayoutStyle = () => {
@@ -230,10 +234,15 @@ class BasicLayout extends React.PureComponent {
       layout: PropsLayout,
       children,
       location: { pathname },
+      loading,
+      fetchingNotices,
     } = this.props;
     const { isMobile, menuData } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
+    // 支持通过 组合的方式定义消息面板loading状态
+    const fetching = fetchingNotices || loading.effects['global/fetchNotices'];
+    const headerProps = { ...this.props, fetchingNotices: fetching };
     const layout = (
       <Layout>
         {isTop && !isMobile ? null : (
@@ -258,7 +267,7 @@ class BasicLayout extends React.PureComponent {
             handleMenuCollapse={this.handleMenuCollapse}
             logo={logo}
             isMobile={isMobile}
-            {...this.props}
+            {...headerProps}
           />
           <Content style={this.getContentStyle()}>
             <Authorized
@@ -288,9 +297,27 @@ class BasicLayout extends React.PureComponent {
     );
   }
 }
-
-export default connect(({ global, setting }) => ({
+/**
+ * 如果您想要扩展 BasicLayout ，同时又想通过更新ant-design-pro来获得antd-pro最新特性，可以通过新建组件组合BasicLayout实现
+ * 以下是BasicLayout可支持自定义的 props
+ * {
+ *  onSearch, // 顶部搜索钩子函数 function(value:string)
+ *  onPressEnter, // 顶部搜索回车事件钩子函数 function(value:string)
+ *  searchDataSource, // 顶部搜索提示数据 string[]
+ *  onItemClick,  // 消息面板的消息点击事件钩子函数 function(item:obect,tabprops:object)
+ *  notificationTypes=['notification','message','event'], // 可自定义消息面板可展示的类型
+ *  notifyCount, // 消息面板的消息总条数 value:number
+ *  handleNoticeClear(type),// 消息面板清理消息钩子函数
+ *  fetchingNotices, // 消息面板加载消息的loading状态
+ *  handleNoticeVisibleChange,  // 消息面板显示事件钩子函数 function(visible:boolean)
+ *  menuData, // 菜单数据 ，object[], 结构参考路由配置和formatter方法逻辑
+ *  pageTitle, // 页面title
+ * }
+ */
+export default connect(({ global, setting,loading }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
+  loading,
+  // pageTitle:"antd-pro-title",
   ...setting,
 }))(BasicLayout);

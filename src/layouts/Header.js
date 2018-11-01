@@ -43,6 +43,12 @@ class HeaderView extends PureComponent {
   };
 
   handleNoticeClear = type => {
+    // 支持自定义消息清空方法
+    const { handleNoticeClear } = this.props;
+    if(handleNoticeClear){
+      handleNoticeClear(type)
+      return 
+    }
     message.success(
       `${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({
         id: `component.globalHeader.${type}`,
@@ -77,6 +83,12 @@ class HeaderView extends PureComponent {
   };
 
   handleNoticeVisibleChange = visible => {
+    // 支持自定义消息面板显示时的钩子函数
+    const { handleNoticeVisibleChange } = this.props;
+    if(handleNoticeVisibleChange){
+      handleNoticeVisibleChange(visible)
+      return 
+    }
     if (visible) {
       const { dispatch } = this.props;
       dispatch({
