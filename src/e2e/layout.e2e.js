@@ -19,44 +19,23 @@ describe('Homepage', () => {
   let browser;
   let page;
 
-  const testAllPage = async layout =>
-    new Promise(async (resolve, reject) => {
-      const loadPage = async index => {
-        const path = layout[index];
-        try {
-          await page.goto(`${BASE_URL}${path}`, { waitUntil: 'networkidle2' });
-          const haveFooter = await page.evaluate(
-            () => document.getElementsByTagName('footer').length > 0
-          );
-
-          expect(haveFooter).toBeTruthy();
-
-          if (index < layout.length - 1) {
-            loadPage(index + 1);
-          } else {
-            resolve('ok');
-          }
-        } catch (error) {
-          reject(error);
-        }
-      };
-      loadPage(0);
-    });
+  const testPage = path => async () => {
+    await page.goto(`${BASE_URL}${path}`, { waitUntil: 'networkidle2' });
+    const haveFooter = await page.evaluate(
+      () => document.getElementsByTagName('footer').length > 0
+    );
+    expect(haveFooter).toBeTruthy();
+  };
 
   beforeAll(async () => {
     browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     page = await browser.newPage();
-    jest.setTimeout(1000000);
   });
 
-  it('test user layout', async () => {
-    const userLayout = formatter(RouterConfig[0].routes);
-    await testAllPage(userLayout);
-  });
-
-  it('test base layout', async () => {
-    const baseLayout = formatter(RouterConfig[1].routes);
-    await testAllPage(baseLayout);
+  RouterConfig.forEach(({ routes = [] }) => {
+    formatter(routes).forEach(route => {
+      it(`test pages ${route}`, testPage(route));
+    });
   });
 
   afterAll(() => browser.close());
