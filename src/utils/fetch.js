@@ -43,7 +43,6 @@ function checkStatus(response) {
  */
 export default function request(url, options) {
   const token = cookie.token;
-  console.info(token);
 
   const defaultOptions = {
     credentials: 'include',

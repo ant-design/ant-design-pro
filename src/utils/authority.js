@@ -24,7 +24,6 @@ export function getAuthority(str) {
  */
 export function isLogin(){
   const eva_token = cookie.load('eva_token');
-  console.info("eva_token : " + eva_token);
   return eva_token && eva_token !== '';
 }
 

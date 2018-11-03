@@ -25,7 +25,6 @@ export default modelExtend(pageModel, {
     /** 查询当前用户 **/
     *fetchCurrent({ payload }, { call, put }){
       const response = yield call(getUser, payload);
-      console.info(response.data);
       yield put({
         type: 'saveCurrentUser',
         payload: response.data,

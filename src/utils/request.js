@@ -138,7 +138,6 @@ export default function request(url, option) {
       return response.data;
     })
     .catch(e => {
-      console.info(e);
       const response = e.response;
       let status = "", errortext = "", requestUrl = "";
 

@@ -17,6 +17,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
+import * as AppInfo from '@/common/config/AppInfo';
 
 const { Content } = Layout;
 
@@ -91,23 +92,19 @@ export default class BasicLayout extends React.PureComponent {
     this.getBreadcrumbNameMap = memoizeOne(this.getBreadcrumbNameMap, isEqual);
     this.breadcrumbNameMap = this.getBreadcrumbNameMap();
     this.matchParamsPath = memoizeOne(this.matchParamsPath, isEqual);
-    console.info("menus  : ");
-    console.info(props.menus);
+
+    /** 获取菜单 **/
+    this.props.dispatch({
+      type: 'global/fetchMenus',
+    });
   }
 
   state = {
     rendering: true,
     isMobile: false,
-    menuData: this.props.menus,
   };
-
-
   componentDidMount() {
     const { dispatch } = this.props;
-    /** 获取菜单 **/
-    dispatch({
-      type: 'global/fetchMenus',
-    });
 
     const USER_KEY = "eva_user";
     const user = JSON.parse(localStorage.getItem(USER_KEY));
@@ -196,13 +193,13 @@ export default class BasicLayout extends React.PureComponent {
     const currRouterData = this.matchParamsPath(pathname);
 
     if (!currRouterData) {
-      return 'Ant Design Pro';
+      return AppInfo.title;
     }
     const message = formatMessage({
       id: currRouterData.locale || currRouterData.name,
       defaultMessage: currRouterData.name,
     });
-    return `${message} - Ant Design Pro`;
+    return `${message} -${AppInfo.title}`;
   };
 
   getLayoutStyle = () => {
@@ -247,9 +244,10 @@ export default class BasicLayout extends React.PureComponent {
       navTheme,
       layout: PropsLayout,
       children,
+      menus,
       location: { pathname },
     } = this.props;
-    const { isMobile, menuData } = this.state;
+    const { isMobile } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (
@@ -260,7 +258,7 @@ export default class BasicLayout extends React.PureComponent {
             Authorized={Authorized}
             theme={navTheme}
             onCollapse={this.handleMenuCollapse}
-            menuData={menuData}
+            menuData={menus}
             isMobile={isMobile}
             {...this.props}
           />
@@ -272,7 +270,7 @@ export default class BasicLayout extends React.PureComponent {
           }}
         >
           <Header
-            menuData={menuData}
+            menuData={menus}
             handleMenuCollapse={this.handleMenuCollapse}
             logo={logo}
             isMobile={isMobile}

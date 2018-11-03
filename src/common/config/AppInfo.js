@@ -1,8 +1,8 @@
 module.exports = {
   url: 'http://localhost:9009',
-  copyRight: '2018 PKAQ',
-  title: 'Eva',
-  description: 'Power by PKAQ',
+  copyright: 'Power by PKAQ',
+  title: 'Eva Admin',
+  description: '后台管理方案',
   request_prefix: '/api',
   icons: [
     'question-circle-o',
