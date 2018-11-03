@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import styles from './index.less';
 
 export default class SelectLang extends PureComponent {
-  changLang = ({ key }) => {
+  changeLang = ({ key }) => {
     setLocale(key);
   };
 
@@ -13,7 +13,7 @@ export default class SelectLang extends PureComponent {
     const { className } = this.props;
     const selectedLang = getLocale();
     const langMenu = (
-      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changLang}>
+      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changeLang}>
         <Menu.Item key="zh-CN">
           <span role="img" aria-label="简体中文">
             🇨🇳

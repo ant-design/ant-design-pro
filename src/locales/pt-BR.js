@@ -71,7 +71,8 @@ export default {
   'menu.account.settings': 'Configurar Conta',
   'menu.account.trigger': 'Disparar Erro',
   'menu.account.logout': 'Sair',
-  'app.login.message-invalid-credentials': 'Nome de usuário ou senha inválidosd（admin/ant.design）',
+  'app.login.message-invalid-credentials':
+    'Nome de usuário ou senha inválidosd（admin/ant.design）',
   'app.login.message-invalid-verification-code': 'Código de verificação inválido',
   'app.login.tab-login-credentials': 'Credenciais',
   'app.login.tab-login-mobile': 'Telefone',
@@ -82,7 +83,7 @@ export default {
   'app.login.login': 'Login',
   'app.register.register': 'Cadastro',
   'app.register.get-verification-code': 'Recuperar código',
-  'app.register.sing-in': 'Já tem uma conta?',
+  'app.register.sign-in': 'Já tem uma conta?',
   'app.register-result.msg': 'Conta：registrada em {email}',
   'app.register-result.activation-email':
     'Um email de ativação foi enviado para o seu email e é válido por 24 horas. Por favor entre no seu email e clique no link de ativação da conta.',

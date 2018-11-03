@@ -292,7 +292,7 @@ class Analysis extends Component {
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
+                    <FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />
@@ -303,7 +303,7 @@ class Analysis extends Component {
               footer={
                 <Field
                   label={
-                    <FormattedMessage id="app.analysis.day-sales" defaultMessage="Day Sales" />
+                    <FormattedMessage id="app.analysis.day-sales" defaultMessage="Daily Sales" />
                   }
                   value={`￥${numeral(12423).format('0,0')}`}
                 />
@@ -320,15 +320,16 @@ class Analysis extends Component {
               </Trend>
             </ChartCard>
           </Col>
+
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
               loading={loading}
-              title={<FormattedMessage id="app.analysis.visits" defaultMessage="visits" />}
+              title={<FormattedMessage id="app.analysis.visits" defaultMessage="Visits" />}
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
+                    <FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />
@@ -338,7 +339,7 @@ class Analysis extends Component {
               footer={
                 <Field
                   label={
-                    <FormattedMessage id="app.analysis.day-visits" defaultMessage="Day Visits" />
+                    <FormattedMessage id="app.analysis.day-visits" defaultMessage="Daily Visits" />
                   }
                   value={numeral(1234).format('0,0')}
                 />
@@ -392,7 +393,7 @@ class Analysis extends Component {
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
+                    <FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />
@@ -402,11 +403,11 @@ class Analysis extends Component {
               footer={
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                   <Trend flag="up" style={{ marginRight: 16 }}>
-                    <FormattedMessage id="app.analysis.week" defaultMessage="Weekly changes" />
+                    <FormattedMessage id="app.analysis.week" defaultMessage="Weekly Changes" />
                     <span className={styles.trendText}>12%</span>
                   </Trend>
                   <Trend flag="down">
-                    <FormattedMessage id="app.analysis.day" defaultMessage="Weekly changes" />
+                    <FormattedMessage id="app.analysis.day" defaultMessage="Weekly Changes" />
                     <span className={styles.trendText}>11%</span>
                   </Trend>
                 </div>

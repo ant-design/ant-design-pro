@@ -113,7 +113,7 @@ export default {
   'app.login.login': '登录',
   'app.register.register': '注册',
   'app.register.get-verification-code': '获取验证码',
-  'app.register.sing-in': '使用已有账户登录',
+  'app.register.sign-in': '使用已有账户登录',
   'app.register-result.msg': '你的账户：{email} 注册成功',
   'app.register-result.activation-email':
     '激活邮件已发送到你的邮箱中，邮件有效期为24小时。请及时登录邮箱，点击邮件中的链接激活帐户。',

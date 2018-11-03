@@ -113,7 +113,7 @@ export default {
   'app.login.login': '登錄',
   'app.register.register': '註冊',
   'app.register.get-verification-code': '獲取驗證碼',
-  'app.register.sing-in': '使用已有賬戶登錄',
+  'app.register.sign-in': '使用已有賬戶登錄',
   'app.register-result.msg': '妳的賬戶：{email} 註冊成功',
   'app.register-result.activation-email':
     '激活郵件已發送到妳的郵箱中，郵件有效期為24小時。請及時登錄郵箱，點擊郵件中的鏈接激活帳戶。',
