@@ -31,19 +31,6 @@ export default {
         });
         localStorage.setItem(USER_KEY, JSON.stringify(response.data.user));
 
-        // 更新用户菜单状态
-        if (response.data.user.modules && response.data.user.modules.length > 0) {
-          yield put({
-            type: 'global/updateState',
-            payload: {
-              currentUser: {
-                name: response.data.user.name,
-                avatar: response.data.user.avatar,
-              },
-              menus: response.data.user.modules,
-            },
-          });
-        }
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
