@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import OrgList from './OrgList';
-import OrgDetail from './OrgDetail';
+import AOEForm from './AOEForm';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 @connect(state => ({
@@ -28,7 +28,7 @@ export default class organization extends Component {
     return (
       <PageHeaderWrapper title="组织信息管理">
         <OrgList {...tableProps} />
-        {modalType !== '' && <OrgDetail {...modalProps} />}
+        {modalType !== '' && <AOEForm {...modalProps} />}
       </PageHeaderWrapper>
     );
   }

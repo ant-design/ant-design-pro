@@ -3,10 +3,10 @@ import { Row, Col, Form, Input, InputNumber, Modal, Switch, TreeSelect } from 'a
 
 const FormItem = Form.Item;
 const Area = Input.TextArea;
-const TreeNode = {...TreeSelect};
+const TreeNode = TreeSelect.TreeNode;
 
 @Form.create()
-export default class OrgDetail extends Component {
+export default class AOEForm extends Component {
   componentDidMount() {
     // 加载树数据 - 只加载未停用状态的数据
     console.info('load org detail');
@@ -109,6 +109,8 @@ export default class OrgDetail extends Component {
 
     const { getFieldDecorator } = that.props.form;
     const { modalType, currentItem, data } = that.props;
+
+    console.info(data);
     const cmView = modalType === 'view';
 
     const formItemLayout = {
@@ -163,7 +165,7 @@ export default class OrgDetail extends Component {
                 showCheckedStrategy={TreeSelect.SHOW_ALL}
                 allowClear
                 showSearch
-                treeNodeFilterProp="title"
+                treeNodeFilterProp="name"
                 treeNodeLabelProp="pathName"
                 placeholder="请选择上级节点"
               >

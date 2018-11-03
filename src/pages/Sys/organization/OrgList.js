@@ -28,9 +28,9 @@ const { Search } = { ...Input };
 export default class OrgList extends Component {
   // 加载组织列表
   componentDidMount() {
-    // this.props.dispatch({
-    //   type: 'organization/listOrg',
-    // });
+    this.props.dispatch({
+      type: 'organization/listOrg',
+    });
   }
 
   // 新增
