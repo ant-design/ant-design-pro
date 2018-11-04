@@ -43,7 +43,7 @@ export default modelExtend(pageModel, {
       yield put({
         type: 'updateState',
         payload: {
-          list: response.data.data,
+          list: response.data.records,
           pagination: {
             showSizeChanger: true,
             showQuickJumper: true,
