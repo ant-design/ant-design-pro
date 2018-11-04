@@ -6,7 +6,7 @@ export async function getModule(params) {
 }
 // 加载组织列表
 export async function listModule(params) {
-  return request(`/module/list/${getNoUndefinedString(params)}`);
+  return request(`/module/listNoPage/${getNoUndefinedString(params)}`);
 }
 // 新增/编辑组织信息
 export async function editModule(params) {
