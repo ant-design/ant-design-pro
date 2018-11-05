@@ -28,6 +28,7 @@ describe('Homepage', () => {
   };
 
   beforeAll(async () => {
+    jest.setTimeout(1000000);
     browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     page = await browser.newPage();
   });
