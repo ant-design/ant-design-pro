@@ -21,7 +21,10 @@ export default {
       const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
-        payload: response,
+        payload: {
+          ...response,
+          'currentAuthority' : 'admin'
+        },
       });
       // 登录鉴权
       if (response && response.success) {
