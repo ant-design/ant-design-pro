@@ -1,10 +1,11 @@
 import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
+import cookie from 'react-cookies';
+
 
 import { isAntdPro } from './utils';
 import * as AppInfo from '@/common/config/AppInfo';
-import cookie from 'react-cookies';
 import ax from './axiosWrap';
 
 const codeMessage = {
@@ -79,6 +80,11 @@ export default function request(url, option) {
 
   const defaultOptions = {
     credentials: 'include',
+    headers: {
+      Authorization: (cookie.load('eva_token') ? 'Bearer'+cookie.load('eva_token') : ''),
+      'Content-Type': 'application/json; charset=utf-8',
+      Accept: 'application/json',
+    }
   };
   const newOptions = { ...defaultOptions, ...options };
   if (
@@ -88,15 +94,13 @@ export default function request(url, option) {
   ) {
     if (!(newOptions.body instanceof FormData)) {
       newOptions.headers = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json; charset=utf-8',
         ...newOptions.headers,
+        'Content-Type': 'application/json; charset=utf-8',
       };
       newOptions.data = JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
       newOptions.headers = {
-        Accept: 'application/json',
         ...newOptions.headers,
       };
     }
@@ -105,16 +109,6 @@ export default function request(url, option) {
     url: AppInfo.url + AppInfo.request_prefix + url,
     ...newOptions,
   };
-
-  if (url === '/auth/login') {
-    config.headers = {
-      Authorization: 'login',
-    };
-  } else {
-    config.headers = {
-      Authorization: `Bearer${cookie.load('eva_token') ? cookie.load('eva_token') : ''}`,
-    };
-  }
 
   const expirys = options.expirys && 60;
   // options.expirys !== false, return the cache,
