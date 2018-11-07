@@ -7,6 +7,7 @@ describe('Login', () => {
   let page;
 
   beforeAll(async () => {
+    jest.setTimeout(1000000);
     browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   });
 
@@ -33,7 +34,7 @@ describe('Login', () => {
       timeout: 2000,
     });
     await page.type('#userName', 'admin');
-    await page.type('#password', '888888');
+    await page.type('#password', 'ant.design');
     await page.click('button[type="submit"]');
     await page.waitForSelector('.ant-layout-sider h1'); // should display error
     const text = await page.evaluate(() => document.body.innerHTML);

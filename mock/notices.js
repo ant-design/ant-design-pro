@@ -43,6 +43,7 @@ const getNotices = (req, res) =>
       description: '描述信息描述信息描述信息',
       datetime: '2017-08-07',
       type: 'message',
+      clickClose: true,
     },
     {
       id: '000000007',
@@ -51,6 +52,7 @@ const getNotices = (req, res) =>
       description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
       datetime: '2017-08-07',
       type: 'message',
+      clickClose: true,
     },
     {
       id: '000000008',
@@ -59,6 +61,7 @@ const getNotices = (req, res) =>
       description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
       datetime: '2017-08-07',
       type: 'message',
+      clickClose: true,
     },
     {
       id: '000000009',
