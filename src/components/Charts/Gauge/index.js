@@ -72,7 +72,7 @@ class Gauge extends React.Component {
         nice: true,
       },
     };
-    const data = [{ value: percent }];
+    const data = [{ value: percent / 10 }];
     return (
       <Chart height={height} data={data} scale={cols} padding={[-16, 0, 16, 0]} forceFit={forceFit}>
         <Coord type="polar" startAngle={-1.25 * Math.PI} endAngle={0.25 * Math.PI} radius={0.8} />
@@ -134,7 +134,7 @@ class Gauge extends React.Component {
           <Arc
             zIndex={1}
             start={[0, 0.965]}
-            end={[data[0].value / 10, 0.965]}
+            end={[data[0].value, 0.965]}
             style={{
               stroke: color,
               lineWidth: 10,
@@ -146,7 +146,7 @@ class Gauge extends React.Component {
                 <div style="width: 300px;text-align: center;font-size: 12px!important;">
                   <p style="font-size: 14px; color: rgba(0,0,0,0.43);margin: 0;">${title}</p>
                   <p style="font-size: 24px;color: rgba(0,0,0,0.85);margin: 0;">
-                    ${data[0].value}%
+                    ${data[0].value * 10}%
                   </p>
                 </div>`}
           />
