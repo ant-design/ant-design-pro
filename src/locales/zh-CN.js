@@ -19,6 +19,8 @@ export default {
   'validation.date.required': '请选择起止日期',
   'validation.goal.required': '请输入目标描述',
   'validation.standard.required': '请输入衡量标准',
+  'form.captcha': '获取验证码',
+  'form.captcha.second': '秒',
   'form.optional': '（选填）',
   'form.submit': '提交',
   'form.save': '保存',
