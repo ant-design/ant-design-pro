@@ -21,6 +21,7 @@ popupAlign | 弹出卡片的位置配置 | Object [alignConfig](https://github.c
 onPopupVisibleChange | 弹出卡片显隐的回调 | function(visible) | -
 popupVisible | 控制弹层显隐 | boolean | -
 locale | 默认文案 | Object | `{ emptyText: '暂无数据', clear: '清空' }`
+clearClose | 点击清空按钮后关闭通知菜单 | boolean | false
 
 ### NoticeIcon.Tab
 
@@ -43,3 +44,4 @@ title | 标题 | ReactNode | -
 description | 描述信息 | ReactNode | -
 datetime | 时间戳 | ReactNode | -
 extra | 额外信息，在列表项右上角 | ReactNode | -
+clickClose | 点击列表项关闭通知菜单 | boolean | false
