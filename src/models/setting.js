@@ -4,7 +4,7 @@ import defaultSettings from '../defaultSettings';
 let lessNodesAppended;
 const updateTheme = primaryColor => {
   // Don't compile less in production!
-  if (APP_TYPE !== 'site') {
+  if (window.ORIGIN_NODE_ENV !== 'site') {
     return;
   }
   // Determine if the component is remounted
