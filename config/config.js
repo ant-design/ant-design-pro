@@ -23,6 +23,12 @@ const plugins = [
       dynamicImport: {
         loadingComponent: './components/PageLoading/index',
       },
+      pwa: {
+        workboxPluginMode: 'InjectManifest',
+        workboxOptions: {
+          importWorkboxFrom: 'local',
+        },
+      },
       ...(!process.env.TEST && os.platform() === 'darwin'
         ? {
             dll: {

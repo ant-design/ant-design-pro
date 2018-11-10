@@ -290,4 +290,8 @@ export default {
   'app.setting.copyinfo': 'copy success，please replace defaultSettings in src/models/setting.js',
   'app.setting.production.hint':
     'Setting panel shows in development environment only, please manually modify',
+  'app.pwa.offline': 'You are offline now',
+  'app.pwa.serviceworker.updated': 'New content is available',
+  'app.pwa.serviceworker.updated.hint': 'Please press the "Refresh" button to reload current page',
+  'app.pwa.serviceworker.updated.ok': 'Refresh',
 };

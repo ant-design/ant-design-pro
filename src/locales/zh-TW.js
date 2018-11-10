@@ -282,4 +282,8 @@ export default {
   'app.setting.copyinfo': '拷貝成功，請到 src/defaultSettings.js 中替換默認配置',
   'app.setting.production.hint':
     '配置欄只在開發環境用於預覽，生產環境不會展現，請拷貝後手動修改配置文件',
+  'app.pwa.offline': '當前處於離線狀態',
+  'app.pwa.serviceworker.updated': '有新內容',
+  'app.pwa.serviceworker.updated.hint': '請點擊“刷新”按鈕或者手動刷新頁面',
+  'app.pwa.serviceworker.updated.ok': '刷新',
 };

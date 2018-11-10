@@ -71,7 +71,8 @@ export default {
   'menu.account.settings': 'Configurar Conta',
   'menu.account.trigger': 'Disparar Erro',
   'menu.account.logout': 'Sair',
-  'app.login.message-invalid-credentials': 'Nome de usuário ou senha inválidosd（admin/ant.design）',
+  'app.login.message-invalid-credentials':
+    'Nome de usuário ou senha inválidosd（admin/ant.design）',
   'app.login.message-invalid-verification-code': 'Código de verificação inválido',
   'app.login.tab-login-credentials': 'Credenciais',
   'app.login.tab-login-mobile': 'Telefone',
@@ -239,4 +240,9 @@ export default {
     'copiado com sucesso，por favor trocar o defaultSettings em src/models/setting.js',
   'app.setting.production.hint':
     'O painel de configuração apenas é exibido no ambiente de desenvolvimento, por favor modifique manualmente o',
+  'app.pwa.offline': 'Você está offline agora',
+  'app.pwa.serviceworker.updated': 'Novo conteúdo está disponível',
+  'app.pwa.serviceworker.updated.hint':
+    'Por favor, pressione o botão "Atualizar" para recarregar a página atual',
+  'app.pwa.serviceworker.updated.ok': 'Atualizar',
 };
