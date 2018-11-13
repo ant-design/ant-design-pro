@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IPageHeaderProps } from './index'
+import { IPageHeaderProps } from './index';
 
 export default class BreadcrumbView extends React.Component<IPageHeaderProps, any> {}
 
-export function getBreadcrumb(breadcrumbNameMap: Object, url: string): Object;
+export function getBreadcrumb(breadcrumbNameMap: object, url: string): object;

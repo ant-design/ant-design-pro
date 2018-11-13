@@ -267,7 +267,7 @@ class Register extends Component {
                     message: formatMessage({ id: 'validation.phone-number.required' }),
                   },
                   {
-                    pattern: /^\d{10}$/,
+                    pattern: /^\d{11}$/,
                     message: formatMessage({ id: 'validation.phone-number.wrong-format' }),
                   },
                 ],
@@ -321,7 +321,7 @@ class Register extends Component {
             >
               <FormattedMessage id="app.register.register" />
             </Button>
-            <Link className={styles.login} to="/User/Login">
+            <Link className={styles.login} to="/user/login">
               <FormattedMessage id="app.register.sing-in" />
             </Link>
           </FormItem>
