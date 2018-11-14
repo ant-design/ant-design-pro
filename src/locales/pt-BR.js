@@ -1,9 +1,5 @@
 export default {
   'navBar.lang': 'Idiomas',
-  'lang.simplified-chinese': '🇨🇳 简体中文',
-  'lang.traditional-chinese': '🇭🇰 繁体中文',
-  'lang.english': '🇬🇧 English',
-  'lang.portuguese': '🇵🇹 Portuguese',
   'layout.user.link.help': 'ajuda',
   'layout.user.link.privacy': 'política de privacidade',
   'layout.user.link.terms': 'termos de serviços',
@@ -20,6 +16,8 @@ export default {
   'validation.phone-number.required': 'Por favor insira seu telefone!',
   'validation.phone-number.wrong-format': 'Formato de telefone errado!',
   'validation.verification-code.required': 'Por favor insira seu código de verificação!',
+  'form.captcha': 'Get Captcha',
+  'form.captcha.second': 'sec',
   'form.email.placeholder': 'Email',
   'form.password.placeholder': 'Senha',
   'form.confirm-password.placeholder': 'Confirme a senha',
@@ -75,7 +73,8 @@ export default {
   'menu.account.settings': 'Configurar Conta',
   'menu.account.trigger': 'Disparar Erro',
   'menu.account.logout': 'Sair',
-  'app.login.message-invalid-credentials': 'Nome de usuário ou senha inválidosd（admin/888888）',
+  'app.login.message-invalid-credentials':
+    'Nome de usuário ou senha inválidosd（admin/ant.design）',
   'app.login.message-invalid-verification-code': 'Código de verificação inválido',
   'app.login.tab-login-credentials': 'Credenciais',
   'app.login.tab-login-mobile': 'Telefone',
@@ -86,7 +85,7 @@ export default {
   'app.login.login': 'Login',
   'app.register.register': 'Cadastro',
   'app.register.get-verification-code': 'Recuperar código',
-  'app.register.sing-in': 'Já tem uma conta?',
+  'app.register.sign-in': 'Já tem uma conta?',
   'app.register-result.msg': 'Conta：registrada em {email}',
   'app.register-result.activation-email':
     'Um email de ativação foi enviado para o seu email e é válido por 24 horas. Por favor entre no seu email e clique no link de ativação da conta.',

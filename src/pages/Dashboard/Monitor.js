@@ -145,7 +145,7 @@ class Monitor extends PureComponent {
           </Col>
         </Row>
         <Row gutter={24}>
-          <Col xl={12} lg={24} sm={24} xs={24}>
+          <Col xl={12} lg={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card
               title={
                 <FormattedMessage
@@ -201,7 +201,7 @@ class Monitor extends PureComponent {
               </Row>
             </Card>
           </Col>
-          <Col xl={6} lg={12} sm={24} xs={24}>
+          <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card
               title={
                 <FormattedMessage
@@ -216,7 +216,7 @@ class Monitor extends PureComponent {
               <TagCloud data={tags} height={161} />
             </Card>
           </Col>
-          <Col xl={6} lg={12} sm={24} xs={24}>
+          <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card
               title={
                 <FormattedMessage

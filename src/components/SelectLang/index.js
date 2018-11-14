@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import { formatMessage, FormattedMessage, setLocale, getLocale } from 'umi/locale';
+import { formatMessage, setLocale, getLocale } from 'umi/locale';
 import { Menu, Icon, Dropdown } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 
 export default class SelectLang extends PureComponent {
-  changLang = ({ key }) => {
+  changeLang = ({ key }) => {
     setLocale(key);
   };
 
@@ -13,18 +13,30 @@ export default class SelectLang extends PureComponent {
     const { className } = this.props;
     const selectedLang = getLocale();
     const langMenu = (
-      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changLang}>
+      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changeLang}>
         <Menu.Item key="zh-CN">
-          <FormattedMessage id="lang.simplified-chinese" />
+          <span role="img" aria-label="简体中文">
+            🇨🇳
+          </span>{' '}
+          简体中文
         </Menu.Item>
         <Menu.Item key="zh-TW">
-          <FormattedMessage id="lang.traditional-chinese" />
+          <span role="img" aria-label="繁体中文">
+            🇭🇰
+          </span>{' '}
+          繁体中文
         </Menu.Item>
         <Menu.Item key="en-US">
-          <FormattedMessage id="lang.english" />
+          <span role="img" aria-label="English">
+            🇬🇧
+          </span>{' '}
+          English
         </Menu.Item>
         <Menu.Item key="pt-BR">
-          <FormattedMessage id="lang.portuguese" />
+          <span role="img" aria-label="Português">
+            🇵🇹
+          </span>{' '}
+          Português
         </Menu.Item>
       </Menu>
     );
