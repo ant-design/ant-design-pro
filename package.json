@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@antv/data-set": "^0.10.0",
-    "@babel/runtime": "^7.1.2",
+    "@babel/runtime": "^7.1.5",
     "antd": "^3.10.7",
     "bizcharts": "^3.2.5-beta.4",
     "bizcharts-plugin-slider": "^2.0.3",
@@ -58,7 +58,7 @@
   "devDependencies": {
     "@types/react": "^16.4.16",
     "@types/react-dom": "^16.0.9",
-    "antd-pro-merge-less": "^0.1.0",
+    "antd-pro-merge-less": "^0.2.0",
     "antd-theme-webpack-plugin": "^1.1.8",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.1.1",
