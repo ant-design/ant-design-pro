@@ -1,23 +1,14 @@
-import puppeteer from 'puppeteer';
-
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 
 describe('Login', () => {
-  let browser;
-  let page;
-
   beforeAll(async () => {
     jest.setTimeout(1000000);
-    browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   });
 
   beforeEach(async () => {
-    page = await browser.newPage();
     await page.goto(`${BASE_URL}/user/login`, { waitUntil: 'networkidle2' });
     await page.evaluate(() => window.localStorage.setItem('antd-pro-authority', 'guest'));
   });
-
-  afterEach(() => page.close());
 
   it('should login with failure', async () => {
     await page.waitForSelector('#userName', {
@@ -40,6 +31,4 @@ describe('Login', () => {
     const text = await page.evaluate(() => document.body.innerHTML);
     expect(text).toContain('<h1>Ant Design Pro</h1>');
   });
-
-  afterAll(() => browser.close());
 });
