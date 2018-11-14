@@ -29,9 +29,13 @@ startServer.stdout.on('data', data => {
     // eslint-disable-next-line
     once = true;
     console.log('Development server is started, ready to run tests.');
-    const testCmd = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['test'], {
-      stdio: 'inherit',
-    });
+    const testCmd = spawn(
+      /^win/.test(process.platform) ? 'npm.cmd' : 'npm',
+      ['test', '--', '--maxWorkers=1'],
+      {
+        stdio: 'inherit',
+      }
+    );
     testCmd.on('exit', code => {
       startServer.kill();
       process.exit(code);

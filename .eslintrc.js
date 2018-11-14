@@ -11,6 +11,7 @@ module.exports = {
   },
   globals: {
     APP_TYPE: true,
+    page: true,
   },
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js'] }],

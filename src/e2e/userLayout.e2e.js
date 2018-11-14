@@ -17,7 +17,10 @@ describe('Homepage', () => {
   let page;
 
   const testPage = path => async () => {
-    await page.goto(`${BASE_URL}${path}`, { waitUntil: 'networkidle2' });
+    await page.goto(`${BASE_URL}${path}`);
+    await page.waitForSelector('footer', {
+      timeout: 2000,
+    });
     const haveFooter = await page.evaluate(
       () => document.getElementsByTagName('footer').length > 0
     );
@@ -29,11 +32,8 @@ describe('Homepage', () => {
     browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     page = await browser.newPage();
   });
-
-  RouterConfig.forEach(({ routes = [] }) => {
-    formatter(routes).forEach(route => {
-      it(`test pages ${route}`, testPage(route));
-    });
+  formatter(RouterConfig[0].routes).forEach(route => {
+    fit(`test pages ${route}`, testPage(route));
   });
 
   afterAll(() => browser.close());
