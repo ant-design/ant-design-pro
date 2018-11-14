@@ -6,9 +6,6 @@ const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 function formatter(data) {
   return data
     .reduce((pre, item) => {
-      if (item.routes) {
-        return pre.concat(formatter(item.routes));
-      }
       pre.push(item.path);
       return pre;
     }, [])
