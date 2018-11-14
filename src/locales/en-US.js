@@ -20,6 +20,8 @@ export default {
   'validation.date.required': 'Please select the start and end date',
   'validation.goal.required': 'Please enter a description of the goal',
   'validation.standard.required': 'Please enter a metric',
+  'form.captcha': 'Get Captcha',
+  'form.captcha.second': 'sec',
   'form.optional': ' (optional) ',
   'form.submit': 'Submit',
   'form.save': 'Save',

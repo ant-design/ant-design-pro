@@ -16,6 +16,8 @@ export default {
   'validation.phone-number.required': 'Por favor insira seu telefone!',
   'validation.phone-number.wrong-format': 'Formato de telefone errado!',
   'validation.verification-code.required': 'Por favor insira seu código de verificação!',
+  'form.captcha': 'Get Captcha',
+  'form.captcha.second': 'sec',
   'form.email.placeholder': 'Email',
   'form.password.placeholder': 'Senha',
   'form.confirm-password.placeholder': 'Confirme a senha',

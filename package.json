@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
@@ -27,10 +27,10 @@
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build"
   },
   "dependencies": {
-    "@antv/data-set": "^0.9.6",
-    "@babel/runtime": "^7.1.2",
-    "antd": "^3.10.0",
-    "bizcharts": "^3.2.2",
+    "@antv/data-set": "^0.10.0",
+    "@babel/runtime": "^7.1.5",
+    "antd": "^3.10.7",
+    "bizcharts": "^3.2.5-beta.4",
     "bizcharts-plugin-slider": "^2.0.3",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
@@ -58,7 +58,7 @@
   "devDependencies": {
     "@types/react": "^16.4.16",
     "@types/react-dom": "^16.0.9",
-    "antd-pro-merge-less": "^0.0.9",
+    "antd-pro-merge-less": "^0.2.0",
     "antd-theme-webpack-plugin": "^1.1.8",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.1.1",
@@ -73,25 +73,25 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
     "eslint-plugin-react": "^7.11.1",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.10.0",
-    "tslint-react": "^3.6.0",
     "gh-pages": "^2.0.1",
     "husky": "^1.1.2",
-    "lint-staged": "^7.2.0",
+    "lint-staged": "^8.0.4",
     "merge-umi-mock-data": "^0.0.3",
     "mockjs": "^1.0.1-beta3",
-    "prettier": "1.14.3",
+    "prettier": "1.15.2",
     "pro-download": "^1.0.1",
     "stylelint": "^9.4.0",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.0.0",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.10.0",
+    "tslint-react": "^3.6.0",
     "umi": "^2.2.1",
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-react": "^1.2.0"
   },
   "optionalDependencies": {
-    "puppeteer": "^1.9.0"
+    "puppeteer": "^1.10.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,less}": [
