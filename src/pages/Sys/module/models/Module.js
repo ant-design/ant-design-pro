@@ -47,6 +47,8 @@ export default modelExtend(model, {
     // 编辑按钮
     *edit({ payload }, { call, put }) {
       const response = yield call(getModule, payload);
+      console.info(response.data);
+
       if (response && response.data) {
         yield put({
           type: 'updateState',
@@ -115,7 +117,7 @@ export default modelExtend(model, {
         yield put({
           type: 'updateState',
           payload: {
-            data: response.data,
+            data: response.data.records,
             selectedRowKeys: [],
           },
         });

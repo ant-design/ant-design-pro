@@ -43,6 +43,7 @@ export default class ModuleList extends Component {
           }
         : {};
 
+    console.info(record);
     this.props.dispatch({
       type: 'module/create',
       payload: {
@@ -162,8 +163,6 @@ export default class ModuleList extends Component {
 
   render() {
     const { data, selectedRowKeys, loading } = this.props;
-
-    console.info(data);
 
     const statusMap = { '0000': 'error', '0001': 'success' };
     const status = { '0000': '已停用', '0001': '正常' };
