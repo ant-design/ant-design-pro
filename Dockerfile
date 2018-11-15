@@ -1,9 +1,9 @@
-FROM node:latest
+FROM circleci/node:latest
 
 WORKDIR /usr/src/app/
-
+USER root
 COPY package.json ./
-RUN npm install --silent --no-cache
+RUN yarn
 
 COPY ./ ./
 
