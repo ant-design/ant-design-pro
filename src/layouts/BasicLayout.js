@@ -143,9 +143,9 @@ class BasicLayout extends React.PureComponent {
 
   getMenuData() {
     const {
-      route: { routes, path, authority },
+      route: { routes, authority },
     } = this.props;
-    return memoizeOneFormatter(routes, path, authority);
+    return memoizeOneFormatter(routes, authority);
   }
 
   /**
