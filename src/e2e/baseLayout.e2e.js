@@ -12,35 +12,23 @@ function formatter(data) {
 }
 
 describe('Homepage', async () => {
-  const testPage = path =>
-    new Promise(async reslove => {
-      console.log(`test ${path}`);
-      await page.goto(`${BASE_URL}${path}`, {
-        timeout: 600000,
-      });
-      await page.waitForSelector('footer', {
-        timeout: 600000,
-      });
-      reslove();
+  const testPage = path => async () => {
+    await page.goto(`${BASE_URL}${path}`);
+    await page.waitForSelector('footer', {
+      timeout: 2000,
     });
+    const haveFooter = await page.evaluate(
+      () => document.getElementsByTagName('footer').length > 0
+    );
+    expect(haveFooter).toBeTruthy();
+  };
 
   beforeAll(async () => {
     jest.setTimeout(1000000);
     await page.setCacheEnabled(false);
   });
-
-  it(`test pages`, async () => {
-    const routers = formatter(RouterConfig[1].routes);
-    const testAll = index =>
-      new Promise(async reslove => {
-        await testPage(routers[index]);
-        if (index < routers.length - 1) {
-          const newIndex = index + 1;
-          await testAll(newIndex);
-          reslove();
-        }
-        reslove();
-      });
-    await testAll(0);
+  const routers = formatter(RouterConfig[1].routes);
+  routers.forEach(route => {
+    fit(`test pages ${route}`, testPage(route));
   });
 });

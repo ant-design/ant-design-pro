@@ -36,7 +36,6 @@
     "dva": "^2.4.0",
     "enquire-js": "^0.2.1",
     "hash.js": "^1.1.5",
-    "jest-puppeteer": "^3.5.1",
     "lodash": "^4.17.10",
     "lodash-decorators": "^6.0.0",
     "memoize-one": "^4.0.0",
@@ -57,7 +56,7 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
-    "@types/react": "^16.4.16",
+    "@types/react": "^16.7.6",
     "@types/react-dom": "^16.0.9",
     "antd-pro-merge-less": "^0.2.0",
     "antd-theme-webpack-plugin": "^1.1.8",
@@ -76,6 +75,7 @@
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^2.0.1",
     "husky": "^1.1.2",
+    "jest-puppeteer": "^3.5.1",
     "lint-staged": "^8.0.4",
     "merge-umi-mock-data": "^0.0.3",
     "mockjs": "^1.0.1-beta3",

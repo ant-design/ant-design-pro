@@ -31,7 +31,7 @@ startServer.stdout.on('data', data => {
     console.log('Development server is started, ready to run tests.');
     const testCmd = spawn(
       /^win/.test(process.platform) ? 'npm.cmd' : 'npm',
-      ['test', '--', '--maxWorkers=1'],
+      ['test', '--', '--maxWorkers=1', '--runInBand'],
       {
         stdio: 'inherit',
       }
