@@ -2,14 +2,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.11.4
+      - image: circleci/node:latest
     steps:
       - checkout
       - run: npm install
       - run: npm run build
   test:
     docker:
-      - image: circleci/node:8.11.4
+      - image: circleci/node:latest
     steps:
       - checkout
       - run: sh ./tests/fix_puppeteer.sh

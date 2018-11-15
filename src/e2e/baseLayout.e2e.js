@@ -1,4 +1,3 @@
-import puppeteer from 'puppeteer';
 import RouterConfig from '../../config/router.config';
 
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
@@ -6,21 +5,18 @@ const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 function formatter(data) {
   return data
     .reduce((pre, item) => {
-      if (item.routes) {
-        return pre.concat(formatter(item.routes));
-      }
       pre.push(item.path);
       return pre;
     }, [])
     .filter(item => item);
 }
 
-describe('Homepage', () => {
-  let browser;
-  let page;
-
+describe('Homepage', async () => {
   const testPage = path => async () => {
-    await page.goto(`${BASE_URL}${path}`, { waitUntil: 'networkidle2' });
+    await page.goto(`${BASE_URL}${path}`);
+    await page.waitForSelector('footer', {
+      timeout: 2000,
+    });
     const haveFooter = await page.evaluate(
       () => document.getElementsByTagName('footer').length > 0
     );
@@ -29,15 +25,10 @@ describe('Homepage', () => {
 
   beforeAll(async () => {
     jest.setTimeout(1000000);
-    browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-    page = await browser.newPage();
+    await page.setCacheEnabled(false);
   });
-
-  RouterConfig.forEach(({ routes = [] }) => {
-    formatter(routes).forEach(route => {
-      it(`test pages ${route}`, testPage(route));
-    });
+  const routers = formatter(RouterConfig[1].routes);
+  routers.forEach(route => {
+    fit(`test pages ${route}`, testPage(route));
   });
-
-  afterAll(() => browser.close());
 });

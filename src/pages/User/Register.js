@@ -321,8 +321,8 @@ class Register extends Component {
             >
               <FormattedMessage id="app.register.register" />
             </Button>
-            <Link className={styles.login} to="/user/login">
-              <FormattedMessage id="app.register.sing-in" />
+            <Link className={styles.login} to="/User/Login">
+              <FormattedMessage id="app.register.sign-in" />
             </Link>
           </FormItem>
         </Form>
