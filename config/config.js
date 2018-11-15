@@ -53,6 +53,10 @@ if (process.env.APP_TYPE === 'site') {
   ]);
 }
 
+if (process.env.NODE_ENV === 'development') {
+  plugins.push('umi-plugin-vcr');
+}
+
 export default {
   // add for transfer to umi
   plugins,

@@ -1,0 +1,169 @@
+{
+  "pagePath": "/user/login",
+  "viewport": {
+    "width": 1440,
+    "height": 747
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36",
+  "language": "zh-CN",
+  "events": [
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #userName",
+      "value": "",
+      "tagName": "INPUT",
+      "action": "click",
+      "keyCode": null,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #userName",
+      "value": "",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 65,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #userName",
+      "value": "a",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 68,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #userName",
+      "value": "ad",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 77,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #userName",
+      "value": "adm",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 73,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #userName",
+      "value": "admi",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 78,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #userName",
+      "value": "admin",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 9,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #userName",
+      "value": "admin",
+      "tagName": "INPUT",
+      "action": "change",
+      "keyCode": null,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #password",
+      "value": "",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 56,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #password",
+      "value": "8",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 56,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #password",
+      "value": "88",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 56,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #password",
+      "value": "888",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 56,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #password",
+      "value": "8888",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 56,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #password",
+      "value": "88888",
+      "tagName": "INPUT",
+      "action": "keydown",
+      "keyCode": 56,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-input-affix-wrapper > #password",
+      "value": "888888",
+      "tagName": "INPUT",
+      "action": "change",
+      "keyCode": null,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-row > .ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > .ant-btn",
+      "value": "",
+      "tagName": "BUTTON",
+      "action": "click",
+      "keyCode": null,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-tabs > .ant-tabs-content > .ant-tabs-tabpane > .ant-alert > .ant-alert-message",
+      "tagName": "SPAN",
+      "action": "click",
+      "keyCode": null,
+      "href": null,
+      "coordinates": null
+    },
+    {
+      "selector": ".ant-tabs > .ant-tabs-content > .ant-tabs-tabpane > .ant-alert > .ant-alert-message",
+      "action": "snapshot",
+      "snapshot": "<span class=\"ant-alert-message\">账户或密码错误（admin/ant.design）</span>"
+    }
+  ],
+  "HTTPInteractions": []
+}

@@ -57,7 +57,9 @@
     "react-dom": "^16.5.1",
     "react-fittext": "^1.0.0",
     "react-media": "^1.8.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "umi-plugin-vcr": "^0.0.1-alpha.17",
+    "vcr-cli": "^0.0.1-alpha.19"
   },
   "devDependencies": {
     "@types/react": "^16.7.7",
