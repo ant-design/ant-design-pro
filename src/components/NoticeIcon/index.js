@@ -33,13 +33,13 @@ export default class NoticeIcon extends PureComponent {
     }
   };
 
-  onClear = (name) => {
+  onClear = name => {
     const { onClear, clearClose } = this.props;
-    onClear(name)
+    onClear(name);
     if (clearClose) {
       this.popover.click();
     }
-  }
+  };
 
   onTabChange = tabType => {
     const { onTabChange } = this.props;
@@ -52,18 +52,18 @@ export default class NoticeIcon extends PureComponent {
       return null;
     }
     const panes = React.Children.map(children, child => {
-      const title =
-        child.props.list && child.props.list.length > 0
-          ? `${child.props.title} (${child.props.list.length})`
-          : child.props.title;
+      const { list, title, name, count } = child.props;
+      const len = list && list.length ? list.length : 0;
+      const msgCount = count || count === 0 ? count : len;
+      const tabTitle = msgCount > 0 ? `${title} (${msgCount})` : title;
       return (
-        <TabPane tab={title} key={child.props.name}>
+        <TabPane tab={tabTitle} key={name}>
           <List
             {...child.props}
-            data={child.props.list}
+            data={list}
             onClick={item => this.onItemClick(item, child.props)}
-            onClear={() => this.onClear(child.props.name)}
-            title={child.props.title}
+            onClear={() => this.onClear(name)}
+            title={title}
             locale={locale}
           />
         </TabPane>
@@ -107,7 +107,7 @@ export default class NoticeIcon extends PureComponent {
         popupAlign={popupAlign}
         onVisibleChange={onPopupVisibleChange}
         {...popoverProps}
-        ref={node => { this.popover = ReactDOM.findDOMNode(node)}} // eslint-disable-line
+        ref={node => (this.popover = ReactDOM.findDOMNode(node))} // eslint-disable-line
       >
         {trigger}
       </Popover>
