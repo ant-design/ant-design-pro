@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Row, Col } from 'antd';
-import { formatMessage } from 'umi/locale';
 import omit from 'omit.js';
 import styles from './index.less';
 import ItemMap from './map';
@@ -10,8 +9,8 @@ const FormItem = Form.Item;
 
 class WrapFormItem extends Component {
   static defaultProps = {
-    getCaptchaButtonText: formatMessage({ id: 'form.captcha' }),
-    getCaptchaSecondText: formatMessage({ id: 'form.captcha.second' }),
+    getCaptchaButtonText: 'captcha',
+    getCaptchaSecondText: 'second',
   };
 
   constructor(props) {

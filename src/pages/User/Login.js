@@ -96,7 +96,13 @@ class LoginPage extends Component {
                 formatMessage({ id: 'app.login.message-invalid-verification-code' })
               )}
             <Mobile name="mobile" />
-            <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
+            <Captcha
+              name="captcha"
+              countDown={120}
+              onGetCaptcha={this.onGetCaptcha}
+              getCaptchaButtonText={formatMessage({ id: 'form.captcha' })}
+              getCaptchaSecondText={formatMessage({ id: 'form.captcha.second' })}
+            />
           </Tab>
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
