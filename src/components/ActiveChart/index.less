@@ -29,3 +29,23 @@
     text-align: right;
   }
 }
+.dashedLine {
+  position: relative;
+  height: 1px;
+  top: -70px;
+  left: -3px;
+
+  .line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, transparent 50%, #e9e9e9 50%);
+    background-size: 6px;
+  }
+}
+
+.dashedLine:last-child {
+  top: -36px;
+}
