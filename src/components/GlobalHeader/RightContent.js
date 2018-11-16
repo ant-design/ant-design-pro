@@ -40,6 +40,28 @@ export default class GlobalHeaderRight extends PureComponent {
     return groupBy(newNotices, 'type');
   }
 
+  getUnreadData = noticeData => {
+    const unreadMsg = {};
+    Object.entries(noticeData).forEach(([key, value]) => {
+      if (!unreadMsg[key]) {
+        unreadMsg[key] = 0;
+      }
+      if (Array.isArray(value)) {
+        unreadMsg[key] = value.filter(item => !item.read).length;
+      }
+    });
+    return unreadMsg;
+  };
+
+  changeReadState = clickedItem => {
+    const { id } = clickedItem;
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'global/changeNoticeReadState',
+      payload: id,
+    });
+  };
+
   render() {
     const {
       currentUser,
@@ -71,6 +93,7 @@ export default class GlobalHeaderRight extends PureComponent {
       </Menu>
     );
     const noticeData = this.getNoticeData();
+    const unreadMsg = this.getUnreadData(noticeData);
     let className = styles.right;
     if (theme === 'dark') {
       className = `${styles.right}  ${styles.dark}`;
@@ -104,9 +127,10 @@ export default class GlobalHeaderRight extends PureComponent {
         </Tooltip>
         <NoticeIcon
           className={styles.action}
-          count={currentUser.notifyCount}
+          count={currentUser.unreadCount}
           onItemClick={(item, tabProps) => {
             console.log(item, tabProps); // eslint-disable-line
+            this.changeReadState(item, tabProps);
           }}
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
@@ -119,6 +143,7 @@ export default class GlobalHeaderRight extends PureComponent {
           clearClose
         >
           <NoticeIcon.Tab
+            count={unreadMsg.notification}
             list={noticeData.notification}
             title={formatMessage({ id: 'component.globalHeader.notification' })}
             name="notification"
@@ -126,6 +151,7 @@ export default class GlobalHeaderRight extends PureComponent {
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
           />
           <NoticeIcon.Tab
+            count={unreadMsg.message}
             list={noticeData.message}
             title={formatMessage({ id: 'component.globalHeader.message' })}
             name="message"
@@ -133,6 +159,7 @@ export default class GlobalHeaderRight extends PureComponent {
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
           />
           <NoticeIcon.Tab
+            count={unreadMsg.event}
             list={noticeData.event}
             title={formatMessage({ id: 'component.globalHeader.event' })}
             name="event"
