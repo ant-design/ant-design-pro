@@ -8,6 +8,7 @@ import monitor from './zh-TW/monitor';
 import result from './zh-TW/result';
 import settingDrawer from './zh-TW/settingDrawer';
 import settings from './zh-TW/settings';
+import pwa from './zh-TW/pwa';
 
 export default {
   'navBar.lang': '語言',
@@ -28,4 +29,5 @@ export default {
   ...result,
   ...settingDrawer,
   ...settings,
+  ...pwa,
 };

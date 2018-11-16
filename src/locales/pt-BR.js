@@ -8,6 +8,7 @@ import monitor from './pt-BR/monitor';
 import result from './pt-BR/result';
 import settingDrawer from './pt-BR/settingDrawer';
 import settings from './pt-BR/settings';
+import pwa from './pt-BR/pwa';
 
 export default {
   'navBar.lang': 'Idiomas',
@@ -28,4 +29,5 @@ export default {
   ...result,
   ...settingDrawer,
   ...settings,
+  ...pwa,
 };

@@ -180,11 +180,11 @@ class BasicLayout extends React.PureComponent {
     if (!currRouterData) {
       return 'Ant Design Pro';
     }
-    const message = formatMessage({
+    const pageName = formatMessage({
       id: currRouterData.locale || currRouterData.name,
       defaultMessage: currRouterData.name,
     });
-    return `${message} - Ant Design Pro`;
+    return `${pageName} - Ant Design Pro`;
   };
 
   getLayoutStyle = () => {
