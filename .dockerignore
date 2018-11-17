@@ -5,7 +5,6 @@
 /src/utils/request-temp.js
 
 # production
-/dist
 /.vscode
 
 # misc

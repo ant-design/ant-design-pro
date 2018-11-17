@@ -83,14 +83,19 @@ $ npm start         # 访问 http://localhost:8000
 ### 使用 docker
 
 ```bash
-// dev 
+# preview 
+$ docker pull chenshuai2144/ant-design-pro
+$ docker run -p 80:80 chenshuai2144/ant-design-pro
+# open http://localhost
+
+# dev 
 $ npm run docker:dev
 
-// build 
+# build 
 $ npm run docker:build
 
 
-// production dev 
+# production dev 
 $ npm run docker-prod:dev
 
 // production build 
