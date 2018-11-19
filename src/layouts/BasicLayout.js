@@ -174,6 +174,47 @@ class BasicLayout extends React.PureComponent {
     return this.breadcrumbNameMap[pathKey];
   };
 
+  /**
+   * filter menuData
+   */
+  filterMenuData = menuData => {
+    if (!menuData) {
+      return [];
+    }
+    return menuData
+      .filter(item => item.name && !item.hideInMenu)
+      .map(item => {
+        // make dom
+        const ItemDom = this.getSubMenu(item);
+        const data = this.checkPermissionItem(item.authority, ItemDom);
+        return data;
+      })
+      .filter(item => item);
+  };
+
+  /**
+   * get SubMenu or Item
+   */
+  getSubMenu = item => {
+    // doc: add hideChildrenInMenu
+    if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
+      return {
+        ...item,
+        children: this.filterMenuData(item.children),
+      };
+    }
+    return item;
+  };
+
+  // permission to check
+  checkPermissionItem = (authority, ItemDom) => {
+    if (Authorized && Authorized.check) {
+      const { check } = Authorized;
+      return check(authority, ItemDom);
+    }
+    return ItemDom;
+  };
+
   getPageTitle = pathname => {
     const currRouterData = this.matchParamsPath(pathname);
 
@@ -239,10 +280,10 @@ class BasicLayout extends React.PureComponent {
         {isTop && !isMobile ? null : (
           <SiderMenu
             logo={logo}
-            Authorized={Authorized}
             theme={navTheme}
+            // Authorized={Authorized}
             onCollapse={this.handleMenuCollapse}
-            menuData={menuData}
+            menuData={this.filterMenuData(menuData)}
             isMobile={isMobile}
             {...this.props}
           />
