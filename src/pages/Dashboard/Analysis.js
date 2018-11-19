@@ -58,18 +58,13 @@ class Analysis extends Component {
         total: 323234,
       });
     }
-    this.state = {
-      salesType: 'all',
-      currentTabKey: '',
-      loading: true,
-      rangePickerValue: getTimeDistance('year'),
-    };
   }
 
   state = {
     salesType: 'all',
     currentTabKey: '',
     rangePickerValue: getTimeDistance('year'),
+    loading: true,
   };
 
   componentDidMount() {
@@ -145,8 +140,8 @@ class Analysis extends Component {
   }
 
   render() {
-    const { rangePickerValue, salesType, loading: propsLoding, currentTabKey } = this.state;
-    const { chart, loading: stateLoading } = this.props;
+    const { rangePickerValue, salesType, loading: stateLoading, currentTabKey } = this.state;
+    const { chart, loading: propsLoading } = this.props;
     const {
       visitData,
       visitData2,
@@ -158,7 +153,7 @@ class Analysis extends Component {
       salesTypeDataOnline,
       salesTypeDataOffline,
     } = chart;
-    const loading = propsLoding || stateLoading;
+    const loading = propsLoading || stateLoading;
     let salesPieData;
     if (salesType === 'all') {
       salesPieData = salesTypeData;
@@ -297,7 +292,7 @@ class Analysis extends Component {
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
+                    <FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />
@@ -308,7 +303,7 @@ class Analysis extends Component {
               footer={
                 <Field
                   label={
-                    <FormattedMessage id="app.analysis.day-sales" defaultMessage="Day Sales" />
+                    <FormattedMessage id="app.analysis.day-sales" defaultMessage="Daily Sales" />
                   }
                   value={`￥${numeral(12423).format('0,0')}`}
                 />
@@ -325,15 +320,16 @@ class Analysis extends Component {
               </Trend>
             </ChartCard>
           </Col>
+
           <Col {...topColResponsiveProps}>
             <ChartCard
               bordered={false}
               loading={loading}
-              title={<FormattedMessage id="app.analysis.visits" defaultMessage="visits" />}
+              title={<FormattedMessage id="app.analysis.visits" defaultMessage="Visits" />}
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
+                    <FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />
@@ -343,7 +339,7 @@ class Analysis extends Component {
               footer={
                 <Field
                   label={
-                    <FormattedMessage id="app.analysis.day-visits" defaultMessage="Day Visits" />
+                    <FormattedMessage id="app.analysis.day-visits" defaultMessage="Daily Visits" />
                   }
                   value={numeral(1234).format('0,0')}
                 />
@@ -397,7 +393,7 @@ class Analysis extends Component {
               action={
                 <Tooltip
                   title={
-                    <FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />
+                    <FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />
                   }
                 >
                   <Icon type="info-circle-o" />
@@ -407,11 +403,11 @@ class Analysis extends Component {
               footer={
                 <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                   <Trend flag="up" style={{ marginRight: 16 }}>
-                    <FormattedMessage id="app.analysis.week" defaultMessage="Weekly changes" />
+                    <FormattedMessage id="app.analysis.week" defaultMessage="Weekly Changes" />
                     <span className={styles.trendText}>12%</span>
                   </Trend>
                   <Trend flag="down">
-                    <FormattedMessage id="app.analysis.day" defaultMessage="Weekly changes" />
+                    <FormattedMessage id="app.analysis.day" defaultMessage="Weekly Changes" />
                     <span className={styles.trendText}>11%</span>
                   </Trend>
                 </div>
@@ -506,8 +502,16 @@ class Analysis extends Component {
                       <ul className={styles.rankingList}>
                         {this.rankingListData.map((item, i) => (
                           <li key={item.title}>
-                            <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
-                            <span>{item.title}</span>
+                            <span
+                              className={`${styles.rankingItemNumber} ${
+                                i < 3 ? styles.active : ''
+                              }`}
+                            >
+                              {i + 1}
+                            </span>
+                            <span className={styles.rankingItemTitle} title={item.title}>
+                              {item.title}
+                            </span>
                             <span>{numeral(item.total).format('0,0')}</span>
                           </li>
                         ))}
@@ -565,10 +569,22 @@ class Analysis extends Component {
                 <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
                   <NumberInfo
                     subTitle={
-                      <FormattedMessage
-                        id="app.analysis.per-capita-search"
-                        defaultMessage="Per Capita Search"
-                      />
+                      <span>
+                        <FormattedMessage
+                          id="app.analysis.per-capita-search"
+                          defaultMessage="Per Capita Search"
+                        />
+                        <Tooltip
+                          title={
+                            <FormattedMessage
+                              id="app.analysis.introduce"
+                              defaultMessage="introduce"
+                            />
+                          }
+                        >
+                          <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
+                        </Tooltip>
+                      </span>
                     }
                     total={2.7}
                     status="down"

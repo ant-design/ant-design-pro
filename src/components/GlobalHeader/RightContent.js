@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
-import { FormattedMessage, setLocale, getLocale } from 'umi/locale';
-import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip, Button } from 'antd';
+import { FormattedMessage, formatMessage } from 'umi/locale';
+import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
+import SelectLang from '../SelectLang';
 import styles from './index.less';
 
 export default class GlobalHeaderRight extends PureComponent {
@@ -39,13 +40,26 @@ export default class GlobalHeaderRight extends PureComponent {
     return groupBy(newNotices, 'type');
   }
 
-  changLang = () => {
-    const locale = getLocale();
-    if (!locale || locale === 'zh-CN') {
-      setLocale('en-US');
-    } else {
-      setLocale('zh-CN');
-    }
+  getUnreadData = noticeData => {
+    const unreadMsg = {};
+    Object.entries(noticeData).forEach(([key, value]) => {
+      if (!unreadMsg[key]) {
+        unreadMsg[key] = 0;
+      }
+      if (Array.isArray(value)) {
+        unreadMsg[key] = value.filter(item => !item.read).length;
+      }
+    });
+    return unreadMsg;
+  };
+
+  changeReadState = clickedItem => {
+    const { id } = clickedItem;
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'global/changeNoticeReadState',
+      payload: id,
+    });
   };
 
   render() {
@@ -79,6 +93,7 @@ export default class GlobalHeaderRight extends PureComponent {
       </Menu>
     );
     const noticeData = this.getNoticeData();
+    const unreadMsg = this.getUnreadData(noticeData);
     let className = styles.right;
     if (theme === 'dark') {
       className = `${styles.right}  ${styles.dark}`;
@@ -87,8 +102,12 @@ export default class GlobalHeaderRight extends PureComponent {
       <div className={className}>
         <HeaderSearch
           className={`${styles.action} ${styles.search}`}
-          placeholder="站内搜索"
-          dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
+          placeholder={formatMessage({ id: 'component.globalHeader.search' })}
+          dataSource={[
+            formatMessage({ id: 'component.globalHeader.search.example1' }),
+            formatMessage({ id: 'component.globalHeader.search.example2' }),
+            formatMessage({ id: 'component.globalHeader.search.example3' }),
+          ]}
           onSearch={value => {
             console.log('input', value); // eslint-disable-line
           }}
@@ -96,44 +115,55 @@ export default class GlobalHeaderRight extends PureComponent {
             console.log('enter', value); // eslint-disable-line
           }}
         />
-        <Tooltip title="使用文档">
+        <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
           <a
             target="_blank"
             href="https://pro.ant.design/docs/getting-started"
             rel="noopener noreferrer"
             className={styles.action}
-            title="使用文档"
           >
             <Icon type="question-circle-o" />
           </a>
         </Tooltip>
         <NoticeIcon
           className={styles.action}
-          count={currentUser.notifyCount}
+          count={currentUser.unreadCount}
           onItemClick={(item, tabProps) => {
             console.log(item, tabProps); // eslint-disable-line
+            this.changeReadState(item, tabProps);
+          }}
+          locale={{
+            emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
+            clear: formatMessage({ id: 'component.noticeIcon.clear' }),
           }}
           onClear={onNoticeClear}
           onPopupVisibleChange={onNoticeVisibleChange}
           loading={fetchingNotices}
           popupAlign={{ offset: [20, -16] }}
+          clearClose
         >
           <NoticeIcon.Tab
-            list={noticeData['通知']}
-            title="通知"
-            emptyText="你已查看所有通知"
+            count={unreadMsg.notification}
+            list={noticeData.notification}
+            title={formatMessage({ id: 'component.globalHeader.notification' })}
+            name="notification"
+            emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
           />
           <NoticeIcon.Tab
-            list={noticeData['消息']}
-            title="消息"
-            emptyText="您已读完所有消息"
+            count={unreadMsg.message}
+            list={noticeData.message}
+            title={formatMessage({ id: 'component.globalHeader.message' })}
+            name="message"
+            emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
           />
           <NoticeIcon.Tab
-            list={noticeData['待办']}
-            title="待办"
-            emptyText="你已完成所有待办"
+            count={unreadMsg.event}
+            list={noticeData.event}
+            title={formatMessage({ id: 'component.globalHeader.event' })}
+            name="event"
+            emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
           />
         </NoticeIcon>
@@ -152,18 +182,7 @@ export default class GlobalHeaderRight extends PureComponent {
         ) : (
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )}
-        <Button
-          size="small"
-          ghost={theme === 'dark'}
-          style={{
-            margin: '0 8px',
-          }}
-          onClick={() => {
-            this.changLang();
-          }}
-        >
-          <FormattedMessage id="navbar.lang" />
-        </Button>
+        <SelectLang className={styles.action} />
       </div>
     );
   }

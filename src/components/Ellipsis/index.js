@@ -38,6 +38,14 @@ export const cutStrByFullLength = (str = '', maxLength) => {
   }, '');
 };
 
+const getTooltip = ({ tooltip, overlayStyle, title, children }) => {
+  if (tooltip) {
+    const props = tooltip === true ? { overlayStyle, title } : { ...tooltip, overlayStyle, title };
+    return <Tooltip {...props}>{children}</Tooltip>;
+  }
+  return children;
+};
+
 const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other }) => {
   if (typeof text !== 'string') {
     throw new Error('Ellipsis children must be string.');
@@ -54,23 +62,18 @@ const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other })
     displayText = fullWidthRecognition ? cutStrByFullLength(text, length) : text.slice(0, length);
   }
 
-  if (tooltip) {
-    return (
-      <Tooltip overlayStyle={TooltipOverlayStyle} title={text}>
-        <span>
-          {displayText}
-          {tail}
-        </span>
-      </Tooltip>
-    );
-  }
-
-  return (
-    <span {...other}>
-      {displayText}
-      {tail}
-    </span>
-  );
+  const spanAttrs = tooltip ? {} : { ...other };
+  return getTooltip({
+    tooltip,
+    overlayStyle: TooltipOverlayStyle,
+    title: text,
+    children: (
+      <span {...spanAttrs}>
+        {displayText}
+        {tail}
+      </span>
+    ),
+  });
 };
 
 export default class Ellipsis extends Component {
@@ -95,7 +98,7 @@ export default class Ellipsis extends Component {
   computeLine = () => {
     const { lines } = this.props;
     if (lines && !isSupportLineClamp) {
-      const text = this.shadowChildren.innerText;
+      const text = this.shadowChildren.innerText || this.shadowChildren.textContent;
       const lineHeight = parseInt(getComputedStyle(this.root).lineHeight, 10);
       const targetHeight = lines * lineHeight;
       this.content.style.height = `${targetHeight}px`;
@@ -222,18 +225,20 @@ export default class Ellipsis extends Component {
     // support document.body.style.webkitLineClamp
     if (isSupportLineClamp) {
       const style = `#${id}{-webkit-line-clamp:${lines};-webkit-box-orient: vertical;}`;
-      return (
+
+      const node = (
         <div id={id} className={cls} {...restProps}>
           <style>{style}</style>
-          {tooltip ? (
-            <Tooltip overlayStyle={TooltipOverlayStyle} title={children}>
-              {children}
-            </Tooltip>
-          ) : (
-            children
-          )}
+          {children}
         </div>
       );
+
+      return getTooltip({
+        tooltip,
+        overlayStyle: TooltipOverlayStyle,
+        title: children,
+        children: node,
+      });
     }
 
     const childNode = (
@@ -246,13 +251,12 @@ export default class Ellipsis extends Component {
     return (
       <div {...restProps} ref={this.handleRoot} className={cls}>
         <div ref={this.handleContent}>
-          {tooltip ? (
-            <Tooltip overlayStyle={TooltipOverlayStyle} title={text}>
-              {childNode}
-            </Tooltip>
-          ) : (
-            childNode
-          )}
+          {getTooltip({
+            tooltip,
+            overlayStyle: TooltipOverlayStyle,
+            title: text,
+            children: childNode,
+          })}
           <div className={styles.shadow} ref={this.handleShadowChildren}>
             {children}
           </div>

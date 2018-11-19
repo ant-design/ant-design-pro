@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Menu, Icon } from 'antd';
 import Link from 'umi/link';
-import { formatMessage } from 'umi/locale';
+import isEqual from 'lodash/isEqual';
+import memoizeOne from 'memoize-one';
 import pathToRegexp from 'path-to-regexp';
 import { urlToList } from '../_utils/pathTools';
 import styles from './index.less';
@@ -23,11 +24,17 @@ const getIcon = icon => {
 };
 
 export const getMenuMatches = (flatMenuKeys, path) =>
-  flatMenuKeys.filter(item => item && pathToRegexp(item).test(path));
+  flatMenuKeys.filter(item => {
+    if (item) {
+      return pathToRegexp(item).test(path);
+    }
+    return false;
+  });
 
 export default class BaseMenu extends PureComponent {
   constructor(props) {
     super(props);
+    this.getSelectedMenuKeys = memoizeOne(this.getSelectedMenuKeys, isEqual);
     this.flatMenuKeys = this.getFlatMenuKeys(props.menuData);
   }
 
@@ -66,12 +73,8 @@ export default class BaseMenu extends PureComponent {
   };
 
   // Get the currently selected menu
-  getSelectedMenuKeys = () => {
-    const {
-      location: { pathname },
-    } = this.props;
-    return urlToList(pathname).map(itemPath => getMenuMatches(this.flatMenuKeys, itemPath).pop());
-  };
+  getSelectedMenuKeys = pathname =>
+    urlToList(pathname).map(itemPath => getMenuMatches(this.flatMenuKeys, itemPath).pop());
 
   /**
    * get SubMenu or Item
@@ -79,7 +82,7 @@ export default class BaseMenu extends PureComponent {
   getSubMenuOrItem = item => {
     // doc: add hideChildrenInMenu
     if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
-      const name = formatMessage({ id: item.locale });
+      const { name } = item;
       return (
         <SubMenu
           title={
@@ -107,7 +110,7 @@ export default class BaseMenu extends PureComponent {
    * @memberof SiderMenu
    */
   getMenuItemPath = item => {
-    const name = formatMessage({ id: item.locale });
+    const { name } = item;
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
     const { target } = item;
@@ -158,9 +161,14 @@ export default class BaseMenu extends PureComponent {
   };
 
   render() {
-    const { openKeys, theme, mode } = this.props;
+    const {
+      openKeys,
+      theme,
+      mode,
+      location: { pathname },
+    } = this.props;
     // if pathname can't match, use the nearest parent's key
-    let selectedKeys = this.getSelectedMenuKeys();
+    let selectedKeys = this.getSelectedMenuKeys(pathname);
     if (!selectedKeys.length && openKeys) {
       selectedKeys = [openKeys[openKeys.length - 1]];
     }
@@ -179,6 +187,7 @@ export default class BaseMenu extends PureComponent {
         onOpenChange={handleOpenChange}
         selectedKeys={selectedKeys}
         style={style}
+        className={mode === 'horizontal' ? 'top-nav-menu' : ''}
         {...props}
       >
         {this.getNavMenuItems(menuData)}

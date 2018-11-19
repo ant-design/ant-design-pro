@@ -8,6 +8,16 @@
   background: @layout-body-background;
 }
 
+.lang {
+  text-align: right;
+  width: 100%;
+  height: 40px;
+  line-height: 44px;
+  :global(.ant-dropdown-trigger) {
+    margin-right: 24px;
+  }
+}
+
 .content {
   padding: 32px 0;
   flex: 1;
@@ -22,7 +32,7 @@
   }
 
   .content {
-    padding: 112px 0 24px 0;
+    padding: 32px 0 24px 0;
   }
 }
 
@@ -47,7 +57,7 @@
 .title {
   font-size: 33px;
   color: @heading-color;
-  font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: 600;
   position: relative;
   top: 2px;

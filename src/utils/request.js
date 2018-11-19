@@ -60,15 +60,14 @@ const cachedSave = (response, hashcode) => {
  * Requests a URL, returning a promise.
  *
  * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
+ * @param  {object} [option] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(
-  url,
-  options = {
+export default function request(url, option) {
+  const options = {
     expirys: isAntdPro(),
-  }
-) {
+    ...option,
+  };
   /**
    * Produce fingerprints based on url and parameters
    * Maybe url has the same parameters
@@ -104,7 +103,7 @@ export default function request(
     }
   }
 
-  const expirys = options.expirys || 60;
+  const expirys = options.expirys && 60;
   // options.expirys !== false, return the cache,
   if (options.expirys !== false) {
     const cached = sessionStorage.getItem(hashcode);

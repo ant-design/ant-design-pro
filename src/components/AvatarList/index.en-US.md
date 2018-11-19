@@ -18,5 +18,5 @@ A list of user's avatar for project or group member list frequently. If a large 
 
 | Property | Description | Type | Default |
 |----------|------------------------------------------|-------------|-------|
-| tips | title tips for avatar item | ReactNode\/string | - |
+| tips | title tips for avatar item | ReactNode | - |
 | src | the address of the image for an image avatar | string | - |
