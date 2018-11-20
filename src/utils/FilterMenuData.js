@@ -1,4 +1,6 @@
-import CheckPermissions from './CheckPermissions';
+import Authorized from './Authorized';
+
+const { check } = Authorized;
 
 /**
  * get SubMenu or Item
@@ -26,7 +28,7 @@ const filterMenuData = menuData => {
     .map(item => {
       // make dom
       const ItemDom = getSubMenu(item);
-      const data = CheckPermissions(item.authority, ItemDom);
+      const data = check(item.authority, ItemDom);
       return data;
     })
     .filter(item => item);

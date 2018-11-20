@@ -11,6 +11,7 @@ import { enquireScreen, unenquireScreen } from 'enquire-js';
 import { formatMessage } from 'umi/locale';
 import SiderMenu from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
+import FilterMenuData from '@/utils/FilterMenuData';
 import SettingDrawer from '@/components/SettingDrawer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
@@ -232,7 +233,6 @@ class BasicLayout extends React.PureComponent {
       location: { pathname },
     } = this.props;
     const { isMobile, menuData } = this.state;
-    const { filterMenuData } = Authorized;
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (
@@ -242,7 +242,7 @@ class BasicLayout extends React.PureComponent {
             logo={logo}
             theme={navTheme}
             onCollapse={this.handleMenuCollapse}
-            menuData={filterMenuData(menuData)}
+            menuData={FilterMenuData(menuData)}
             isMobile={isMobile}
             {...this.props}
           />
@@ -254,7 +254,7 @@ class BasicLayout extends React.PureComponent {
           }}
         >
           <Header
-            menuData={filterMenuData(menuData)}
+            menuData={FilterMenuData(menuData)}
             handleMenuCollapse={this.handleMenuCollapse}
             logo={logo}
             isMobile={isMobile}
