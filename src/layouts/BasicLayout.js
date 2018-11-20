@@ -174,47 +174,6 @@ class BasicLayout extends React.PureComponent {
     return this.breadcrumbNameMap[pathKey];
   };
 
-  /**
-   * filter menuData
-   */
-  filterMenuData = menuData => {
-    if (!menuData) {
-      return [];
-    }
-    return menuData
-      .filter(item => item.name && !item.hideInMenu)
-      .map(item => {
-        // make dom
-        const ItemDom = this.getSubMenu(item);
-        const data = this.checkPermissionItem(item.authority, ItemDom);
-        return data;
-      })
-      .filter(item => item);
-  };
-
-  /**
-   * get SubMenu or Item
-   */
-  getSubMenu = item => {
-    // doc: add hideChildrenInMenu
-    if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
-      return {
-        ...item,
-        children: this.filterMenuData(item.children),
-      };
-    }
-    return item;
-  };
-
-  // permission to check
-  checkPermissionItem = (authority, ItemDom) => {
-    if (Authorized && Authorized.check) {
-      const { check } = Authorized;
-      return check(authority, ItemDom);
-    }
-    return ItemDom;
-  };
-
   getPageTitle = pathname => {
     const currRouterData = this.matchParamsPath(pathname);
 
@@ -273,6 +232,7 @@ class BasicLayout extends React.PureComponent {
       location: { pathname },
     } = this.props;
     const { isMobile, menuData } = this.state;
+    const { filterMenuData } = Authorized;
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (
@@ -281,9 +241,8 @@ class BasicLayout extends React.PureComponent {
           <SiderMenu
             logo={logo}
             theme={navTheme}
-            // Authorized={Authorized}
             onCollapse={this.handleMenuCollapse}
-            menuData={this.filterMenuData(menuData)}
+            menuData={filterMenuData(menuData)}
             isMobile={isMobile}
             {...this.props}
           />
@@ -295,7 +254,7 @@ class BasicLayout extends React.PureComponent {
           }}
         >
           <Header
-            menuData={menuData}
+            menuData={filterMenuData(menuData)}
             handleMenuCollapse={this.handleMenuCollapse}
             logo={logo}
             isMobile={isMobile}

@@ -64,11 +64,7 @@ export default class BaseMenu extends PureComponent {
     }
     return menusData
       .filter(item => item.name && !item.hideInMenu)
-      .map(item => {
-        // make dom
-        const ItemDom = this.getSubMenuOrItem(item, parent);
-        return this.checkPermissionItem(item.authority, ItemDom);
-      })
+      .map(item => this.getSubMenuOrItem(item, parent))
       .filter(item => item);
   };
 
@@ -141,16 +137,6 @@ export default class BaseMenu extends PureComponent {
         <span>{name}</span>
       </Link>
     );
-  };
-
-  // permission to check
-  checkPermissionItem = (authority, ItemDom) => {
-    const { Authorized } = this.props;
-    if (Authorized && Authorized.check) {
-      const { check } = Authorized;
-      return check(authority, ItemDom);
-    }
-    return ItemDom;
   };
 
   conversionPath = path => {
