@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
 import isEqual from 'lodash/isEqual';
@@ -9,16 +9,18 @@ import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import { formatMessage } from 'umi/locale';
-import SiderMenu from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
-import SettingDrawer from '@/components/SettingDrawer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
+import PageLoading from '@/components/PageLoading';
 
-const { Content } = Layout;
+const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
+const SiderMenu = React.lazy(() => import('@/components/SiderMenu'));
+
+const { Content, Sider } = Layout;
 
 function mapRoutesToMenu(routes, parentAuthority, parentName) {
   return routes
@@ -236,15 +238,23 @@ class BasicLayout extends React.PureComponent {
     const layout = (
       <Layout>
         {isTop && !isMobile ? null : (
-          <SiderMenu
-            logo={logo}
-            Authorized={Authorized}
-            theme={navTheme}
-            onCollapse={this.handleMenuCollapse}
-            menuData={menuData}
-            isMobile={isMobile}
-            {...this.props}
-          />
+          <Suspense
+            fallback={
+              <Sider width={256}>
+                <PageLoading />
+              </Sider>
+            }
+          >
+            <SiderMenu
+              logo={logo}
+              Authorized={Authorized}
+              theme={navTheme}
+              onCollapse={this.handleMenuCollapse}
+              menuData={menuData}
+              isMobile={isMobile}
+              {...this.props}
+            />
+          </Suspense>
         )}
         <Layout
           style={{
@@ -282,7 +292,7 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {this.renderSettingDrawer()}
+        <Suspense fallback={<PageLoading />}>{this.renderSettingDrawer()}</Suspense>
       </React.Fragment>
     );
   }
