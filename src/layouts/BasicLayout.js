@@ -11,7 +11,6 @@ import { enquireScreen, unenquireScreen } from 'enquire-js';
 import { formatMessage } from 'umi/locale';
 import SiderMenu from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
-import FilterMenuData from '@/utils/FilterMenuData';
 import SettingDrawer from '@/components/SettingDrawer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
@@ -20,40 +19,6 @@ import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
 
 const { Content } = Layout;
-
-// Conversion router to menu.
-function formatter(data, parentAuthority, parentName) {
-  return data
-    .map(item => {
-      if (!item.name || !item.path) {
-        return null;
-      }
-
-      let locale = 'menu';
-      if (parentName) {
-        locale = `${parentName}.${item.name}`;
-      } else {
-        locale = `menu.${item.name}`;
-      }
-
-      const result = {
-        ...item,
-        name: formatMessage({ id: locale, defaultMessage: item.name }),
-        locale,
-        authority: item.authority || parentAuthority,
-      };
-      if (item.routes) {
-        const children = formatter(item.routes, item.authority, locale);
-        // Reduce memory usage
-        result.children = children;
-      }
-      delete result.routes;
-      return result;
-    })
-    .filter(item => item);
-}
-
-const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
 const query = {
   'screen-xs': {
@@ -92,16 +57,22 @@ class BasicLayout extends React.PureComponent {
   state = {
     rendering: true,
     isMobile: false,
-    menuData: this.getMenuData(),
   };
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const {
+      dispatch,
+      route: { routes, authority },
+    } = this.props;
     dispatch({
       type: 'user/fetchCurrent',
     });
     dispatch({
       type: 'setting/getSetting',
+    });
+    dispatch({
+      type: 'menu/getMenuData',
+      payload: { routes, authority },
     });
     this.renderRef = requestAnimationFrame(() => {
       this.setState({
@@ -142,19 +113,13 @@ class BasicLayout extends React.PureComponent {
     };
   }
 
-  getMenuData() {
-    const {
-      route: { routes, authority },
-    } = this.props;
-    return memoizeOneFormatter(routes, authority);
-  }
-
   /**
    * 获取面包屑映射
    * @param {Object} menuData 菜单配置
    */
   getBreadcrumbNameMap() {
     const routerMap = {};
+    const { menuData } = this.props;
     const mergeMenuAndRouter = data => {
       data.forEach(menuItem => {
         if (menuItem.children) {
@@ -164,7 +129,7 @@ class BasicLayout extends React.PureComponent {
         routerMap[menuItem.path] = menuItem;
       });
     };
-    mergeMenuAndRouter(this.getMenuData());
+    mergeMenuAndRouter(menuData);
     return routerMap;
   }
 
@@ -231,8 +196,9 @@ class BasicLayout extends React.PureComponent {
       layout: PropsLayout,
       children,
       location: { pathname },
+      menuData,
     } = this.props;
-    const { isMobile, menuData } = this.state;
+    const { isMobile } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (
@@ -242,7 +208,7 @@ class BasicLayout extends React.PureComponent {
             logo={logo}
             theme={navTheme}
             onCollapse={this.handleMenuCollapse}
-            menuData={FilterMenuData(menuData)}
+            menuData={menuData}
             isMobile={isMobile}
             {...this.props}
           />
@@ -254,7 +220,7 @@ class BasicLayout extends React.PureComponent {
           }}
         >
           <Header
-            menuData={FilterMenuData(menuData)}
+            menuData={menuData}
             handleMenuCollapse={this.handleMenuCollapse}
             logo={logo}
             isMobile={isMobile}
@@ -289,8 +255,9 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default connect(({ global, setting }) => ({
+export default connect(({ global, setting, menu }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
+  menuData: menu.menuData,
   ...setting,
 }))(BasicLayout);
