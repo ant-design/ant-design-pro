@@ -15,7 +15,7 @@ import SettingDrawer from '@/components/SettingDrawer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
-import Context from './MenuContext';
+import MenuContext from './MenuContext';
 import Exception403 from '../pages/Exception/403';
 
 const { Content } = Layout;
@@ -277,9 +277,9 @@ class BasicLayout extends React.PureComponent {
         <DocumentTitle title={this.getPageTitle(pathname)}>
           <ContainerQuery query={query}>
             {params => (
-              <Context.Provider value={this.getContext()}>
+              <MenuContext.Provider value={this.getContext()}>
                 <div className={classNames(params)}>{layout}</div>
-              </Context.Provider>
+              </MenuContext.Provider>
             )}
           </ContainerQuery>
         </DocumentTitle>
