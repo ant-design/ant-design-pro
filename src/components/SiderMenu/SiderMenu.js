@@ -102,7 +102,6 @@ export default class SiderMenu extends PureComponent {
           {...this.props}
           mode="inline"
           handleOpenChange={this.handleOpenChange}
-          onOpenChange={this.handleOpenChange}
           style={{ padding: '16px 0', width: '100%' }}
           {...defaultProps}
         />
