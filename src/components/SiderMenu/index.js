@@ -7,13 +7,13 @@ import SiderMenu from './SiderMenu';
  * [{path:string},{path:string}] => {path,path2}
  * @param  menus
  */
-const getFlatMenuKeys = menuData => {
+export const getFlatMenuKeys = menuData => {
   let keys = [];
   menuData.forEach(item => {
+    keys.push(item.path);
     if (item.children) {
       keys = keys.concat(getFlatMenuKeys(item.children));
     }
-    keys.push(item.path);
   });
   return keys;
 };
