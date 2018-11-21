@@ -24,20 +24,6 @@ const getDefaultCollapsedSubMenus = props => {
 };
 
 /**
- * Recursively flatten the data
- * [{path:string},{path:string}] => {path,path2}
- * @param  menu
- */
-export const getFlatMenuKeys = menu =>
-  menu.reduce((keys, item) => {
-    keys.push(item.path);
-    if (item.children) {
-      return keys.concat(getFlatMenuKeys(item.children));
-    }
-    return keys;
-  }, []);
-
-/**
  * Find all matched menu keys based on paths
  * @param  flatMenuKeys: [/abc, /abc/:id, /abc/:id/info]
  * @param  paths: [/abc, /abc/11, /abc/11/info]
@@ -52,7 +38,6 @@ export const getMenuMatchKeys = (flatMenuKeys, paths) =>
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
-    this.flatMenuKeys = getFlatMenuKeys(props.menuData);
     this.state = {
       openKeys: getDefaultCollapsedSubMenus(props),
     };
