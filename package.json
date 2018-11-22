@@ -55,6 +55,7 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^16.5.1",
     "react-fittext": "^1.0.0",
+    "react-media": "^1.8.0",
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {

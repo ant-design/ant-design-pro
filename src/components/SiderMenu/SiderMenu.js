@@ -1,11 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Suspense } from 'react';
 import { Layout } from 'antd';
 import classNames from 'classnames';
 import Link from 'umi/link';
 import styles from './index.less';
-import BaseMenu, { getMenuMatches } from './BaseMenu';
+import { getMenuMatches } from './BaseMenu';
 import { urlToList } from '../_utils/pathTools';
+import PageLoading from '../PageLoading';
 
+const BaseMenu = React.lazy(() => import('./BaseMenu'));
 const { Sider } = Layout;
 
 /**
@@ -84,13 +86,16 @@ export default class SiderMenu extends PureComponent {
             <h1>Ant Design Pro</h1>
           </Link>
         </div>
-        <BaseMenu
-          {...this.props}
-          mode="inline"
-          handleOpenChange={this.handleOpenChange}
-          style={{ padding: '16px 0', width: '100%' }}
-          {...defaultProps}
-        />
+        <Suspense fallback={<PageLoading />}>
+          <BaseMenu
+            {...this.props}
+            mode="inline"
+            handleOpenChange={this.handleOpenChange}
+            onOpenChange={this.handleOpenChange}
+            style={{ padding: '16px 0', width: '100%' }}
+            {...defaultProps}
+          />
+        </Suspense>
       </Sider>
     );
   }
