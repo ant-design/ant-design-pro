@@ -36,7 +36,7 @@ const ProportionSales = memo(
           </div>
         </div>
       }
-      style={{ marginTop: 24, minHeight: 509 }}
+      style={{ marginTop: 24, minHeight: loading ? 0 : 509 }}
     >
       <h4 style={{ marginTop: 8, marginBottom: 32 }}>
         <FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />

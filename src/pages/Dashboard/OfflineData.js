@@ -40,7 +40,7 @@ const OfflineData = memo(
       loading={loading}
       className={styles.offlineCard}
       bordered={false}
-      bodyStyle={{ padding: '0 0 32px 0' }}
+      bodyStyle={loading ? { padding: 24 } : { padding: '0 0 32px 0' }}
       style={{ marginTop: 32 }}
     >
       <Tabs activeKey={activeKey} onChange={handleTabChange}>
