@@ -3,26 +3,11 @@ import { Layout } from 'antd';
 import classNames from 'classnames';
 import Link from 'umi/link';
 import styles from './index.less';
-import { getMenuMatches } from './BaseMenu';
-import { urlToList } from '../_utils/pathTools';
 import PageLoading from '../PageLoading';
+import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
 
 const BaseMenu = React.lazy(() => import('./BaseMenu'));
 const { Sider } = Layout;
-
-/**
- * 获得菜单子节点
- * @memberof SiderMenu
- */
-const getDefaultCollapsedSubMenus = props => {
-  const {
-    location: { pathname },
-    flatMenuKeys,
-  } = props;
-  return urlToList(pathname)
-    .map(item => getMenuMatches(flatMenuKeys, item)[0])
-    .filter(item => item);
-};
 
 export default class SiderMenu extends PureComponent {
   constructor(props) {
