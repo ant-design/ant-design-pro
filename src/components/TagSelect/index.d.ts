@@ -7,6 +7,7 @@ export interface ITagSelectProps {
   value?: string[] | number[];
   style?: React.CSSProperties;
   hideCheckAll?: boolean;
+  expand?:boolean;
 }
 
 export default class TagSelect extends React.Component<ITagSelectProps, any> {

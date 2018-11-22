@@ -22,7 +22,7 @@ class TagSelect extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expand: false,
+      expand: props.expand || false,
       value: props.value || props.defaultValue || [],
     };
   }
