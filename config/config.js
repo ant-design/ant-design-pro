@@ -3,7 +3,7 @@ import os from 'os';
 import pageRoutes from './router.config';
 import webpackPlugin from './plugin.config';
 import defaultSettings from '../src/defaultSettings';
-import Dart from './dart';
+import Dark from './dark';
 
 const plugins = [
   [
@@ -69,7 +69,7 @@ export default {
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': defaultSettings.primaryColor,
-    ...Dart,
+    ...Dark,
   },
   externals: {
     '@antv/data-set': 'DataSet',
