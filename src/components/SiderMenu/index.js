@@ -18,7 +18,7 @@ export const getFlatMenuKeys = menuData => {
   return keys;
 };
 
-const SiderMenuWrapper = props => {
+const SiderMenuWrapper = React.memo(props => {
   const { isMobile, menuData, collapsed, onCollapse } = props;
   return isMobile ? (
     <Drawer
@@ -39,6 +39,6 @@ const SiderMenuWrapper = props => {
   ) : (
     <SiderMenu {...props} flatMenuKeys={getFlatMenuKeys(menuData)} />
   );
-};
+});
 
 export default SiderMenuWrapper;
