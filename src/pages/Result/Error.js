@@ -3,6 +3,7 @@ import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Button, Icon, Card } from 'antd';
 import Result from '@/components/Result';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import styles from './index.less';
 
 const extra = (
   <Fragment>
@@ -20,7 +21,7 @@ const extra = (
       />
     </div>
     <div style={{ marginBottom: 16 }}>
-      <Icon style={{ color: '#f5222d', marginRight: 8 }} type="close-circle-o" />
+      <Icon style={{ marginRight: 8 }} className={styles.error_icon} type="close-circle-o" />
       <FormattedMessage
         id="app.result.error.hint-text1"
         defaultMessage="Your account has been frozen"
@@ -31,7 +32,7 @@ const extra = (
       </a>
     </div>
     <div>
-      <Icon style={{ color: '#f5222d', marginRight: 8 }} type="close-circle-o" />
+      <Icon style={{ marginRight: 8 }} className={styles.error_icon} type="close-circle-o" />
       <FormattedMessage
         id="app.result.error.hint-text2"
         defaultMessage="Your account is not yet eligible to apply"
