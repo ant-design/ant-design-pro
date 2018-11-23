@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
 import isEqual from 'lodash/isEqual';
@@ -7,16 +7,19 @@ import { connect } from 'dva';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
-import { enquireScreen, unenquireScreen } from 'enquire-js';
+import Media from 'react-media';
 import { formatMessage } from 'umi/locale';
-import SiderMenu from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
-import SettingDrawer from '@/components/SettingDrawer';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
+import PageLoading from '@/components/PageLoading';
+import SiderMenu from '@/components/SiderMenu';
+
+// lazy load SettingDrawer
+const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
 
 const { Content } = Layout;
 
@@ -54,11 +57,6 @@ class BasicLayout extends React.PureComponent {
     this.matchParamsPath = memoizeOne(this.matchParamsPath, isEqual);
   }
 
-  state = {
-    rendering: true,
-    isMobile: false,
-  };
-
   componentDidMount() {
     const {
       dispatch,
@@ -74,35 +72,16 @@ class BasicLayout extends React.PureComponent {
       type: 'menu/getMenuData',
       payload: { routes, authority },
     });
-    this.renderRef = requestAnimationFrame(() => {
-      this.setState({
-        rendering: false,
-      });
-    });
-    this.enquireHandler = enquireScreen(mobile => {
-      const { isMobile } = this.state;
-      if (isMobile !== mobile) {
-        this.setState({
-          isMobile: mobile,
-        });
-      }
-    });
   }
 
   componentDidUpdate(preProps) {
     // After changing to phone mode,
     // if collapsed is true, you need to click twice to display
     this.breadcrumbNameMap = this.getBreadcrumbNameMap();
-    const { isMobile } = this.state;
-    const { collapsed } = this.props;
+    const { collapsed, isMobile } = this.props;
     if (isMobile && !preProps.isMobile && !collapsed) {
       this.handleMenuCollapse(false);
     }
-  }
-
-  componentWillUnmount() {
-    cancelAnimationFrame(this.renderRef);
-    unenquireScreen(this.enquireHandler);
   }
 
   getContext() {
@@ -120,16 +99,16 @@ class BasicLayout extends React.PureComponent {
   getBreadcrumbNameMap() {
     const routerMap = {};
     const { menuData } = this.props;
-    const mergeMenuAndRouter = data => {
+    const flattenMenuData = data => {
       data.forEach(menuItem => {
         if (menuItem.children) {
-          mergeMenuAndRouter(menuItem.children);
+          flattenMenuData(menuItem.children);
         }
         // Reduce memory usage
         routerMap[menuItem.path] = menuItem;
       });
     };
-    mergeMenuAndRouter(menuData);
+    flattenMenuData(menuData);
     return routerMap;
   }
 
@@ -154,8 +133,7 @@ class BasicLayout extends React.PureComponent {
   };
 
   getLayoutStyle = () => {
-    const { isMobile } = this.state;
-    const { fixSiderbar, collapsed, layout } = this.props;
+    const { fixSiderbar, isMobile, collapsed, layout } = this.props;
     if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
       return {
         paddingLeft: collapsed ? '80px' : '256px',
@@ -180,15 +158,14 @@ class BasicLayout extends React.PureComponent {
     });
   };
 
-  renderSettingDrawer() {
+  renderSettingDrawer = () => {
     // Do not render SettingDrawer in production
     // unless it is deployed in preview.pro.ant.design as demo
-    const { rendering } = this.state;
-    if ((rendering || process.env.NODE_ENV === 'production') && APP_TYPE !== 'site') {
+    if (process.env.NODE_ENV === 'production' && APP_TYPE !== 'site') {
       return null;
     }
     return <SettingDrawer />;
-  }
+  };
 
   render() {
     const {
@@ -196,9 +173,9 @@ class BasicLayout extends React.PureComponent {
       layout: PropsLayout,
       children,
       location: { pathname },
+      isMobile,
       menuData,
     } = this.props;
-    const { isMobile } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (
@@ -249,7 +226,7 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        {this.renderSettingDrawer()}
+        <Suspense fallback={<PageLoading />}>{this.renderSettingDrawer()}</Suspense>
       </React.Fragment>
     );
   }
@@ -260,4 +237,8 @@ export default connect(({ global, setting, menu }) => ({
   layout: setting.layout,
   menuData: menu.menuData,
   ...setting,
-}))(BasicLayout);
+}))(props => (
+  <Media query="(max-width: 599px)">
+    {isMobile => <BasicLayout {...props} isMobile={isMobile} />}
+  </Media>
+));
