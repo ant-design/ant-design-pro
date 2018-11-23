@@ -256,6 +256,12 @@ export default [
         ],
       },
       {
+        name: 'editor',
+        icon: 'highlight',
+        path: '/editor',
+        routes: [{ path: '/editor/richtext', name: 'richText', component: './Editor/RichText' }],
+      },
+      {
         component: '404',
       },
     ],

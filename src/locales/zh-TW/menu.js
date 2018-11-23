@@ -35,4 +35,7 @@ export default {
   'menu.exception.not-find': '404',
   'menu.exception.server-error': '500',
   'menu.exception.trigger': '触发错误',
+  'menu.editor': '編輯器',
+  'menu.editor.flow': '流程編輯器',
+  'menu.editor.richText': '富文本編輯器',
 };

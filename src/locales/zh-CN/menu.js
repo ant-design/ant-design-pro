@@ -35,4 +35,7 @@ export default {
   'menu.account.settings': '个人设置',
   'menu.account.trigger': '触发报错',
   'menu.account.logout': '退出登录',
+  'menu.editor': '编辑器',
+  'menu.editor.flow': '流程编辑器',
+  'menu.editor.richText': '富文本编辑器',
 };
