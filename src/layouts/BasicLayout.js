@@ -23,39 +23,6 @@ const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
 
 const { Content } = Layout;
 
-function mapRoutesToMenu(routes, parentAuthority, parentName) {
-  return routes
-    .map(item => {
-      if (!item.name || !item.path) {
-        return null;
-      }
-
-      let locale = 'menu';
-      if (parentName) {
-        locale = `${parentName}.${item.name}`;
-      } else {
-        locale = `menu.${item.name}`;
-      }
-
-      const result = {
-        ...item,
-        name: formatMessage({ id: locale, defaultMessage: item.name }),
-        locale,
-        authority: item.authority || parentAuthority,
-      };
-      if (item.routes) {
-        const children = mapRoutesToMenu(item.routes, item.authority, locale);
-        // Reduce memory usage
-        result.children = children;
-      }
-      delete result.routes;
-      return result;
-    })
-    .filter(item => item);
-}
-
-const memoizedMapRoutesToMenu = memoizeOne(mapRoutesToMenu, isEqual);
-
 const query = {
   'screen-xs': {
     maxWidth: 575,
@@ -90,17 +57,20 @@ class BasicLayout extends React.PureComponent {
     this.matchParamsPath = memoizeOne(this.matchParamsPath, isEqual);
   }
 
-  state = {
-    menuData: this.getMenuData(),
-  };
-
   componentDidMount() {
-    const { dispatch } = this.props;
+    const {
+      dispatch,
+      route: { routes, authority },
+    } = this.props;
     dispatch({
       type: 'user/fetchCurrent',
     });
     dispatch({
       type: 'setting/getSetting',
+    });
+    dispatch({
+      type: 'menu/getMenuData',
+      payload: { routes, authority },
     });
   }
 
@@ -114,10 +84,6 @@ class BasicLayout extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    cancelAnimationFrame(this.renderRef);
-  }
-
   getContext() {
     const { location } = this.props;
     return {
@@ -126,19 +92,13 @@ class BasicLayout extends React.PureComponent {
     };
   }
 
-  getMenuData() {
-    const {
-      route: { routes, authority },
-    } = this.props;
-    return memoizedMapRoutesToMenu(routes, authority);
-  }
-
   /**
    * 获取面包屑映射
    * @param {Object} menuData 菜单配置
    */
   getBreadcrumbNameMap() {
     const routerMap = {};
+    const { menuData } = this.props;
     const flattenMenuData = data => {
       data.forEach(menuItem => {
         if (menuItem.children) {
@@ -148,7 +108,7 @@ class BasicLayout extends React.PureComponent {
         routerMap[menuItem.path] = menuItem;
       });
     };
-    flattenMenuData(this.getMenuData());
+    flattenMenuData(menuData);
     return routerMap;
   }
 
@@ -214,8 +174,8 @@ class BasicLayout extends React.PureComponent {
       children,
       location: { pathname },
       isMobile,
+      menuData,
     } = this.props;
-    const { menuData } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (
@@ -223,7 +183,6 @@ class BasicLayout extends React.PureComponent {
         {isTop && !isMobile ? null : (
           <SiderMenu
             logo={logo}
-            Authorized={Authorized}
             theme={navTheme}
             onCollapse={this.handleMenuCollapse}
             menuData={menuData}
@@ -273,9 +232,10 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default connect(({ global, setting }) => ({
+export default connect(({ global, setting, menu }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
+  menuData: menu.menuData,
   ...setting,
 }))(props => (
   <Media query="(max-width: 599px)">
