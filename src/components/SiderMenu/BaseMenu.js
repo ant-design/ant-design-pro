@@ -5,6 +5,7 @@ import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import { urlToList } from '../_utils/pathTools';
 import { getMenuMatches } from './SiderMenuUtils';
+import { isUrl } from '@/utils/utils';
 import styles from './index.less';
 
 const { SubMenu } = Menu;
@@ -14,7 +15,7 @@ const { SubMenu } = Menu;
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
 const getIcon = icon => {
-  if (typeof icon === 'string' && icon.indexOf('http') === 0) {
+  if (typeof icon === 'string' && isUrl(icon)) {
     return <img src={icon} alt="icon" className={styles.icon} />;
   }
   if (typeof icon === 'string') {
