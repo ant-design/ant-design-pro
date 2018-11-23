@@ -21,9 +21,9 @@ const PageHeaderWrapper = ({ children, contentWidth, wrapperClassName, top, ...r
           linkElement={Link}
           itemRender={item => {
             if (item.locale) {
-              return <FormattedMessage id={item.locale} defaultMessage={item.name} />;
+              return <FormattedMessage id={item.locale} defaultMessage={item.title} />;
             }
-            return item.name;
+            return item.title;
           }}
         />
       )}
