@@ -1,26 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Suspense } from 'react';
 import { Layout } from 'antd';
 import classNames from 'classnames';
 import Link from 'umi/link';
 import styles from './index.less';
-import BaseMenu, { getMenuMatches } from './BaseMenu';
-import { urlToList } from '../_utils/pathTools';
+import PageLoading from '../PageLoading';
+import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
 
+const BaseMenu = React.lazy(() => import('./BaseMenu'));
 const { Sider } = Layout;
-
-/**
- * 获得菜单子节点
- * @memberof SiderMenu
- */
-const getDefaultCollapsedSubMenus = props => {
-  const {
-    location: { pathname },
-    flatMenuKeys,
-  } = props;
-  return urlToList(pathname)
-    .map(item => getMenuMatches(flatMenuKeys, item)[0])
-    .filter(item => item);
-};
 
 export default class SiderMenu extends PureComponent {
   constructor(props) {
@@ -67,7 +54,6 @@ export default class SiderMenu extends PureComponent {
       [styles.fixSiderbar]: fixSiderbar,
       [styles.light]: theme === 'light',
     });
-
     return (
       <Sider
         trigger={null}
@@ -85,13 +71,16 @@ export default class SiderMenu extends PureComponent {
             <h1>Ant Design Pro</h1>
           </Link>
         </div>
-        <BaseMenu
-          {...this.props}
-          mode="inline"
-          handleOpenChange={this.handleOpenChange}
-          style={{ padding: '16px 0', width: '100%' }}
-          {...defaultProps}
-        />
+        <Suspense fallback={<PageLoading />}>
+          <BaseMenu
+            {...this.props}
+            mode="inline"
+            handleOpenChange={this.handleOpenChange}
+            onOpenChange={this.handleOpenChange}
+            style={{ padding: '16px 0', width: '100%' }}
+            {...defaultProps}
+          />
+        </Suspense>
       </Sider>
     );
   }

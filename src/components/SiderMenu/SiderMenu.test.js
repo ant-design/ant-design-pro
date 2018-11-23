@@ -1,4 +1,4 @@
-import { getFlatMenuKeys } from './index';
+import { getFlatMenuKeys } from './SiderMenuUtils';
 
 const menu = [
   {
