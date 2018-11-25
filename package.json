@@ -30,11 +30,11 @@
     "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push chenshuai2144/ant-design-pro"
   },
   "dependencies": {
+    "@antv/data-set": "^0.10.0",
     "@babel/runtime": "^7.1.5",
     "antd": "^3.10.9",
     "bizcharts": "^3.4.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
-    "@antv/data-set": "^0.10.0",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "enquire-js": "^0.2.1",
@@ -57,9 +57,7 @@
     "react-dom": "^16.5.1",
     "react-fittext": "^1.0.0",
     "react-media": "^1.8.0",
-    "react-router-dom": "^4.3.1",
-    "umi-plugin-vcr": "^0.0.1-alpha.17",
-    "vcr-cli": "^0.0.1-alpha.19"
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "@types/react": "^16.7.7",
@@ -95,7 +93,9 @@
     "tslint-react": "^3.6.0",
     "umi": "^2.2.7",
     "umi-plugin-ga": "^1.1.3",
-    "umi-plugin-react": "^1.2.0"
+    "umi-plugin-react": "^1.2.0",
+    "umi-plugin-vcr": "^0.0.1-alpha.17",
+    "vcr-cli": "^0.0.1-alpha.19"
   },
   "optionalDependencies": {
     "puppeteer": "^1.10.0"
