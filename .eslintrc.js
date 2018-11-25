@@ -22,7 +22,10 @@ module.exports = {
     'import/no-unresolved': [2, { ignore: ['^@/', '^umi/'] }],
     'import/no-extraneous-dependencies': [
       2,
-      { optionalDependencies: true, devDependencies: false },
+      {
+        optionalDependencies: true,
+        devDependencies: ['**/tests/**.js', '/mock/**.js', '**/**.test.js'],
+      },
     ],
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     'jsx-a11y/click-events-have-key-events': 0,

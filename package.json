@@ -34,6 +34,7 @@
     "antd": "^3.10.9",
     "bizcharts": "^3.4.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
+    "@antv/data-set": "^0.10.0",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "enquire-js": "^0.2.1",
@@ -59,7 +60,6 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
-    "@antv/data-set": "^0.10.0",
     "@types/react": "^16.7.7",
     "@types/react-dom": "^16.0.10",
     "antd-pro-merge-less": "^0.2.0",
