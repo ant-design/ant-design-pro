@@ -9,10 +9,9 @@ jobs:
       - run: npm run build
   test:
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:latest-browsers
     steps:
       - checkout
-      - run: sh ./tests/fix_puppeteer.sh
       - run: npm install
       - run: 
           command : npm run test:all
