@@ -12,9 +12,6 @@ function formatter(data) {
 }
 
 describe('Homepage', () => {
-  let browser;
-  let page;
-
   const testPage = path => async () => {
     await page.goto(`${BASE_URL}${path}`);
     await page.waitForSelector('footer', {
@@ -32,6 +29,4 @@ describe('Homepage', () => {
   formatter(RouterConfig[0].routes).forEach(route => {
     fit(`test pages ${route}`, testPage(route));
   });
-
-  afterAll(() => browser.close());
 });

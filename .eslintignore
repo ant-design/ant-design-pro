@@ -1,1 +1,3 @@
 /functions/mock
+/tests/*
+./*
