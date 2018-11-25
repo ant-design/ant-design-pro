@@ -1,4 +1,3 @@
-import puppeteer from 'puppeteer';
 import RouterConfig from '../../config/router.config';
 
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
@@ -29,8 +28,6 @@ describe('Homepage', () => {
 
   beforeAll(async () => {
     jest.setTimeout(1000000);
-    browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-    page = await browser.newPage();
   });
   formatter(RouterConfig[0].routes).forEach(route => {
     fit(`test pages ${route}`, testPage(route));
