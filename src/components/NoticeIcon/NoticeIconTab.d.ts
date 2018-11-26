@@ -10,6 +10,7 @@ export interface INoticeIconData {
 
 export interface INoticeIconTabProps {
   list?: INoticeIconData[];
+  count?: number;
   title?: string;
   name?: string;
   emptyText?: React.ReactNode;

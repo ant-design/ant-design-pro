@@ -5,7 +5,7 @@ title: 颜色反转
 
 在数值背后添加一个小图标来标识涨跌情况。
 
-````jsx
+```jsx
 import Trend from 'ant-design-pro/lib/Trend';
 
 ReactDOM.render(
@@ -14,4 +14,4 @@ ReactDOM.render(
     <Trend flag="down" reverseColor={true} style={{ marginLeft: 8 }}>11%</Trend>
   </div>
 , mountNode);
-````
+```

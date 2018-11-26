@@ -9,7 +9,8 @@ const FormItem = Form.Item;
 
 class WrapFormItem extends Component {
   static defaultProps = {
-    buttonText: '获取验证码',
+    getCaptchaButtonText: 'captcha',
+    getCaptchaSecondText: 'second',
   };
 
   constructor(props) {
@@ -83,7 +84,8 @@ class WrapFormItem extends Component {
       defaultValue,
       rules,
       name,
-      buttonText,
+      getCaptchaButtonText,
+      getCaptchaSecondText,
       updateActive,
       type,
       ...restProps
@@ -108,7 +110,7 @@ class WrapFormItem extends Component {
                 size="large"
                 onClick={this.onGetCaptcha}
               >
-                {count ? `${count} s` : buttonText}
+                {count ? `${count} ${getCaptchaSecondText}` : getCaptchaButtonText}
               </Button>
             </Col>
           </Row>

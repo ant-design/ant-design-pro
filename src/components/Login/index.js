@@ -114,7 +114,7 @@ class Login extends Component {
                 {otherChildren}
               </React.Fragment>
             ) : (
-              [...children]
+              children
             )}
           </Form>
         </div>
