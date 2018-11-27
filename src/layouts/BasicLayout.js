@@ -163,6 +163,14 @@ class BasicLayout extends React.PureComponent {
     return <SettingDrawer />;
   };
 
+  getPageAuthority = (pathname, breadcrumbNameMap) => {
+    const routerConfig = this.matchParamsPath(pathname, breadcrumbNameMap);
+    if (pathname === '/') {
+      return null;
+    }
+    return routerConfig ? routerConfig.authority : ['noAuthority'];
+  };
+
   render() {
     const {
       navTheme,
@@ -175,7 +183,6 @@ class BasicLayout extends React.PureComponent {
     } = this.props;
 
     const isTop = PropsLayout === 'topmenu';
-    const routerConfig = this.matchParamsPath(pathname, breadcrumbNameMap);
 
     const layout = (
       <Layout>
@@ -204,7 +211,7 @@ class BasicLayout extends React.PureComponent {
           />
           <Content style={this.getContentStyle()}>
             <Authorized
-              authority={routerConfig ? routerConfig.authority : ['noAuthority']}
+              authority={this.getPageAuthority(pathname, breadcrumbNameMap)}
               noMatch={<Exception403 />}
             >
               {children}
