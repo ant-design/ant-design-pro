@@ -133,7 +133,7 @@ const IntroduceRow = memo(({ loading, visitData }) => (
             </Trend>
           </div>
         }
-        contentHeight={26}
+        contentHeight={46}
       >
         <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
       </ChartCard>
