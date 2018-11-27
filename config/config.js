@@ -72,13 +72,17 @@ export default {
   externals: {
     '@antv/data-set': 'DataSet',
   },
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
+  proxy: {
+    '/backstage/': {
+      target: 'http://farseer.pikaent.com/',
+      changeOrigin: true,
+      pathRewrite: {
+        /*
+        '^/backstage': 'backstage',
+        */
+      },
+    },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
