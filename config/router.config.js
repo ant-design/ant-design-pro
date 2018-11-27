@@ -41,6 +41,24 @@ export default [
           },
         ],
       },
+      // list
+      {
+        path: '/uniComp',
+        icon: 'table',
+        name: 'uniComp',
+        routes: [
+          {
+            path: '/uniComp/org',
+            name: 'org',
+            component: './UniComp/Org',
+          },
+          {
+            path: '/uniComp/component',
+            name: 'component',
+            component: './UniComp/Component',
+          },
+        ],
+      },
       // forms
       {
         path: '/form',
