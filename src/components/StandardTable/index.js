@@ -1,5 +1,6 @@
-import React, { PureComponent, Fragment } from 'react';
-import { Table, Alert } from 'antd';
+import React, { PureComponent } from 'react';
+import { Table } from 'antd';
+// import PropTypes from 'prop-types';
 import styles from './index.less';
 
 function initTotalList(columns) {
@@ -17,7 +18,6 @@ class StandardTable extends PureComponent {
     super(props);
     const { columns } = props;
     const needTotalList = initTotalList(columns);
-
     this.state = {
       selectedRowKeys: [],
       needTotalList,
@@ -37,6 +37,7 @@ class StandardTable extends PureComponent {
   }
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
+    // selectedRows获取选中的行信息
     let { needTotalList } = this.state;
     needTotalList = needTotalList.map(item => ({
       ...item,
@@ -57,16 +58,45 @@ class StandardTable extends PureComponent {
     }
   };
 
+  // 点击行选中
+  selectRow = (flag, record) => {
+    const { selectedRowKeys } = this.state;
+    const selectedRowKey = [...selectedRowKeys];
+    // 单击删除一直处于选中状态
+    if (flag) {
+      if (selectedRowKey.indexOf(record.id) >= 0) {
+        selectedRowKey.splice(selectedRowKey.indexOf(record.id), 1);
+        selectedRowKey.push(record.id);
+      } else {
+        selectedRowKey.push(record.id);
+      }
+    }
+    // 单击某一行处于选中状态，再次单击取消
+    if (!flag) {
+      if (selectedRowKey.indexOf(record.id) >= 0) {
+        selectedRowKey.splice(selectedRowKey.indexOf(record.id), 1);
+      } else {
+        selectedRowKey.push(record.id);
+      }
+    }
+    const { onSelectRow } = this.props;
+    if (onSelectRow) {
+      onSelectRow(selectedRowKey);
+    }
+    this.setState({ selectedRowKeys: selectedRowKey });
+  };
+
   cleanSelectedKeys = () => {
     this.handleRowSelectChange([], []);
   };
 
   render() {
-    const { selectedRowKeys, needTotalList } = this.state;
+    const { selectedRowKeys } = this.state;
     const {
       data: { list, pagination },
+      loading,
+      columns,
       rowKey,
-      ...rest
     } = this.props;
 
     const paginationProps = {
@@ -74,51 +104,33 @@ class StandardTable extends PureComponent {
       showQuickJumper: true,
       ...pagination,
     };
-
     const rowSelection = {
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
-      getCheckboxProps: record => ({
-        disabled: record.disabled,
-      }),
+      onClick: this.handleRowSelectChange,
     };
 
     return (
       <div className={styles.standardTable}>
-        <div className={styles.tableAlert}>
-          <Alert
-            message={
-              <Fragment>
-                已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
-                {needTotalList.map(item => (
-                  <span style={{ marginLeft: 8 }} key={item.dataIndex}>
-                    {item.title}
-                    总计&nbsp;
-                    <span style={{ fontWeight: 600 }}>
-                      {item.render ? item.render(item.total) : item.total}
-                    </span>
-                  </span>
-                ))}
-                <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>
-                  清空
-                </a>
-              </Fragment>
-            }
-            type="info"
-            showIcon
-          />
-        </div>
         <Table
-          rowKey={rowKey || 'key'}
+          scroll={{ x: 1100 }}
+          loading={loading}
+          rowKey={rowKey || 'id'}
           rowSelection={rowSelection}
           dataSource={list}
+          columns={columns}
           pagination={paginationProps}
           onChange={this.handleTableChange}
-          {...rest}
+          onRow={record => ({
+            onClick: () => {
+              const flag = false;
+              this.selectRow(flag, record);
+            },
+          })}
         />
       </div>
     );
   }
 }
-
+StandardTable.propTypes = {};
 export default StandardTable;

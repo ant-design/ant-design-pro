@@ -1,0 +1,92 @@
+@import '~antd/lib/style/themes/default.less';
+//@import '~@/utils/utils.less';
+@Iline: inline-block;
+.messageInfo {
+  text-align: center;
+  font-size: 20px;
+}
+.picImg {
+  width: 100px;
+  height: 56px;
+}
+.tableList {
+  .tableListOperator {
+    margin-bottom: 16px;
+    button {
+      margin-right: 8px;
+    }
+  }
+  .text {
+    display: @Iline;
+    max-width: 500px;
+  }
+  .release_at {
+    display: @Iline;
+    min-width: 102px;
+  }
+  .operate {
+    display: @Iline;
+    min-width: 115px;
+  }
+  .status {
+    display: @Iline;
+    min-width: 70px;
+  }
+  .filmDuration {
+    display: @Iline;
+    min-width: 30px;
+  }
+
+  .del {
+    margin-left: 5px;
+  }
+}
+
+.addMovie {
+  display: flex;
+  padding-top: 12px;
+  background: #fff;
+  .left {
+    max-width: 448px;
+    min-width: 224px;
+  }
+  .imgSize {
+    width: 30%;
+  }
+  .avatar {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  .uploadImg {
+    margin-bottom: 15px;
+  }
+  .formWidth {
+    width: 100%;
+  }
+  .right {
+    flex: 1;
+    padding-left: 104px;
+    .avatar_title {
+      height: 22px;
+      font-size: @font-size-base;
+      color: @heading-color;
+      line-height: 22px;
+      margin-bottom: 8px;
+    }
+    .avatar {
+      width: 144px;
+      height: 144px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .headImg {
+      width: 30px !important;
+      height: 30px;
+    }
+    .button_view {
+      width: 144px;
+      text-align: center;
+    }
+  }
+}

@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import { formatMessage, setLocale, getLocale } from 'umi/locale';
+import { FormattedMessage, setLocale, getLocale } from 'umi/locale';
 import { Menu, Icon, Dropdown } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 
 export default class SelectLang extends PureComponent {
-  changeLang = ({ key }) => {
+  changLang = ({ key }) => {
     setLocale(key);
   };
 
@@ -13,40 +13,26 @@ export default class SelectLang extends PureComponent {
     const { className } = this.props;
     const selectedLang = getLocale();
     const langMenu = (
-      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changeLang}>
+      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changLang}>
         <Menu.Item key="zh-CN">
-          <span role="img" aria-label="简体中文">
-            🇨🇳
-          </span>{' '}
-          简体中文
+          <FormattedMessage id="lang.simplified-chinese" />
         </Menu.Item>
         <Menu.Item key="zh-TW">
-          <span role="img" aria-label="繁体中文">
-            🇭🇰
-          </span>{' '}
-          繁体中文
+          <FormattedMessage id="lang.traditional-chinese" />
         </Menu.Item>
         <Menu.Item key="en-US">
-          <span role="img" aria-label="English">
-            🇬🇧
-          </span>{' '}
-          English
+          <FormattedMessage id="lang.english" />
         </Menu.Item>
         <Menu.Item key="pt-BR">
-          <span role="img" aria-label="Português">
-            🇵🇹
-          </span>{' '}
-          Português
+          <FormattedMessage id="lang.portuguese" />
         </Menu.Item>
       </Menu>
     );
     return (
-      <Dropdown overlay={langMenu} placement="bottomRight">
-        <Icon
-          type="global"
-          className={classNames(styles.dropDown, className)}
-          title={formatMessage({ id: 'navBar.lang' })}
-        />
+      <Dropdown overlay={langMenu}>
+        <span className={classNames(styles.dropDown, className)}>
+          <FormattedMessage id="navBar.lang" /> <Icon type="down" />
+        </span>
       </Dropdown>
     );
   }
