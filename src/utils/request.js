@@ -3,6 +3,7 @@ import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
 import { isAntdPro } from './utils';
+import './promise';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -137,19 +138,21 @@ export default function request(url, option) {
         window.g_app._store.dispatch({
           type: 'login/logout',
         });
-        return;
+        return Promise.stop();
       }
       // environment should not be used
       if (status === 403) {
         router.push('/exception/403');
-        return;
+        return Promise.stop();
       }
       if (status <= 504 && status >= 500) {
         router.push('/exception/500');
-        return;
+        return Promise.stop();
       }
       if (status >= 404 && status < 422) {
         router.push('/exception/404');
+        return Promise.stop();
       }
+      return Promise.stop();
     });
 }
