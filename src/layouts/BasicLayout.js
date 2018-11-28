@@ -52,8 +52,6 @@ class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
     this.getPageTitle = memoizeOne(this.getPageTitle);
-    this.getBreadcrumbNameMap = memoizeOne(this.getBreadcrumbNameMap, isEqual);
-    this.breadcrumbNameMap = this.getBreadcrumbNameMap();
     this.matchParamsPath = memoizeOne(this.matchParamsPath, isEqual);
   }
 
@@ -77,7 +75,6 @@ class BasicLayout extends React.PureComponent {
   componentDidUpdate(preProps) {
     // After changing to phone mode,
     // if collapsed is true, you need to click twice to display
-    this.breadcrumbNameMap = this.getBreadcrumbNameMap();
     const { collapsed, isMobile } = this.props;
     if (isMobile && !preProps.isMobile && !collapsed) {
       this.handleMenuCollapse(false);
@@ -85,10 +82,10 @@ class BasicLayout extends React.PureComponent {
   }
 
   getContext() {
-    const { location } = this.props;
+    const { location, breadcrumbNameMap } = this.props;
     return {
       location,
-      breadcrumbNameMap: this.breadcrumbNameMap,
+      breadcrumbNameMap,
     };
   }
 
@@ -112,15 +109,13 @@ class BasicLayout extends React.PureComponent {
     return routerMap;
   }
 
-  matchParamsPath = pathname => {
-    const pathKey = Object.keys(this.breadcrumbNameMap).find(key =>
-      pathToRegexp(key).test(pathname)
-    );
-    return this.breadcrumbNameMap[pathKey];
+  matchParamsPath = (pathname, breadcrumbNameMap) => {
+    const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
+    return breadcrumbNameMap[pathKey];
   };
 
-  getPageTitle = pathname => {
-    const currRouterData = this.matchParamsPath(pathname);
+  getPageTitle = (pathname, breadcrumbNameMap) => {
+    const currRouterData = this.matchParamsPath(pathname, breadcrumbNameMap);
 
     if (!currRouterData) {
       return 'Ant Design Pro';
@@ -129,6 +124,7 @@ class BasicLayout extends React.PureComponent {
       id: currRouterData.locale || currRouterData.name,
       defaultMessage: currRouterData.name,
     });
+
     return `${pageName} - Ant Design Pro`;
   };
 
@@ -175,9 +171,11 @@ class BasicLayout extends React.PureComponent {
       location: { pathname },
       isMobile,
       menuData,
+      breadcrumbNameMap,
     } = this.props;
+
     const isTop = PropsLayout === 'topmenu';
-    const routerConfig = this.matchParamsPath(pathname);
+    const routerConfig = this.matchParamsPath(pathname, breadcrumbNameMap);
     const layout = (
       <Layout>
         {isTop && !isMobile ? null : (
@@ -217,7 +215,7 @@ class BasicLayout extends React.PureComponent {
     );
     return (
       <React.Fragment>
-        <DocumentTitle title={this.getPageTitle(pathname)}>
+        <DocumentTitle title={this.getPageTitle(pathname, breadcrumbNameMap)}>
           <ContainerQuery query={query}>
             {params => (
               <Context.Provider value={this.getContext()}>
@@ -236,6 +234,7 @@ export default connect(({ global, setting, menu }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   menuData: menu.menuData,
+  breadcrumbNameMap: menu.breadcrumbNameMap,
   ...setting,
 }))(props => (
   <Media query="(max-width: 599px)">
