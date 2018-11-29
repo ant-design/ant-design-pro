@@ -56,8 +56,6 @@ if (process.env.APP_TYPE === 'site') {
 export default {
   // add for transfer to umi
   plugins,
-  // enable hash suffix for the built files
-  hash: true,
   targets: {
     ie: 11,
   },
