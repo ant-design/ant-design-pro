@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from 'antd';
+import { formatMessage } from 'umi/locale';
 import styles from './index.less';
 
 export default {
@@ -13,7 +14,7 @@ export default {
     rules: [
       {
         required: true,
-        message: 'Please enter username!',
+        message: formatMessage({ id: 'validation.userName.required' }),
       },
     ],
   },
@@ -28,7 +29,7 @@ export default {
     rules: [
       {
         required: true,
-        message: 'Please enter password!',
+        message: formatMessage({ id: 'validation.password.required' }),
       },
     ],
   },
@@ -36,16 +37,16 @@ export default {
     props: {
       size: 'large',
       prefix: <Icon type="mobile" className={styles.prefixIcon} />,
-      placeholder: 'mobile number',
+      placeholder: formatMessage({ id: 'form.phone-number.placeholder' }),
     },
     rules: [
       {
         required: true,
-        message: 'Please enter mobile number!',
+        message: formatMessage({ id: 'validation.phone-number.required' }),
       },
       {
         pattern: /^1\d{10}$/,
-        message: 'Wrong mobile number format!',
+        message: formatMessage({ id: 'validation.phone-number.wrong-format' }),
       },
     ],
   },
@@ -53,12 +54,12 @@ export default {
     props: {
       size: 'large',
       prefix: <Icon type="mail" className={styles.prefixIcon} />,
-      placeholder: 'captcha',
+      placeholder: formatMessage({ id: 'form.verification-code.placeholder' }),
     },
     rules: [
       {
         required: true,
-        message: 'Please enter Captcha!',
+        message: formatMessage({ id: 'validation.verification-code.required' }),
       },
     ],
   },

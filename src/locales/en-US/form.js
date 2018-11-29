@@ -1,5 +1,5 @@
 export default {
-  'form.captcha': 'Get Captcha',
+  'form.get-captcha': 'Get Captcha',
   'form.captcha.second': 'sec',
   'form.optional': ' (optional) ',
   'form.submit': 'Submit',

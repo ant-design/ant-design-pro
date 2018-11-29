@@ -81,10 +81,13 @@ class LoginPage extends Component {
               login.type === 'account' &&
               !submitting &&
               this.renderMessage(formatMessage({ id: 'app.login.message-invalid-credentials' }))}
-            <UserName name="userName" placeholder="username: admin or user" />
+            <UserName
+              name="userName"
+              placeholder={`${formatMessage({ id: 'app.login.userName' })}: admin or user`}
+            />
             <Password
               name="password"
-              placeholder="password: ant.design"
+              placeholder={`${formatMessage({ id: 'app.login.password' })}: ant.design`}
               onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
             />
           </Tab>
@@ -100,7 +103,7 @@ class LoginPage extends Component {
               name="captcha"
               countDown={120}
               onGetCaptcha={this.onGetCaptcha}
-              getCaptchaButtonText={formatMessage({ id: 'form.captcha' })}
+              getCaptchaButtonText={formatMessage({ id: 'form.get-captcha' })}
               getCaptchaSecondText={formatMessage({ id: 'form.captcha.second' })}
             />
           </Tab>

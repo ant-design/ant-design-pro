@@ -1,4 +1,6 @@
 export default {
+  'app.login.userName': 'userName',
+  'app.login.password': 'password',
   'app.login.message-invalid-credentials': 'Invalid username or password（admin/ant.design）',
   'app.login.message-invalid-verification-code': 'Invalid verification code',
   'app.login.tab-login-credentials': 'Credentials',
@@ -18,6 +20,7 @@ export default {
   'app.register-result.view-mailbox': 'View mailbox',
   'validation.email.required': 'Please enter your email!',
   'validation.email.wrong-format': 'The email address is in the wrong format!',
+  'validation.userName.required': 'Please enter your userName!',
   'validation.password.required': 'Please enter your password!',
   'validation.password.twice': 'The passwords entered twice do not match!',
   'validation.password.strength.msg':
