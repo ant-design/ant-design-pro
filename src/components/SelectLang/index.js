@@ -42,11 +42,9 @@ export default class SelectLang extends PureComponent {
     );
     return (
       <Dropdown overlay={langMenu} placement="bottomRight">
-        <Icon
-          type="global"
-          className={classNames(styles.dropDown, className)}
-          title={formatMessage({ id: 'navBar.lang' })}
-        />
+        <span className={classNames(styles.dropDown, className)}>
+          <Icon type="global" title={formatMessage({ id: 'navBar.lang' })} />
+        </span>
       </Dropdown>
     );
   }
