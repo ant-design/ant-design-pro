@@ -1,12 +1,14 @@
+@import '~antd/lib/style/themes/default.less';
+
 .head {
   width: 100%;
   transition: background 0.3s, width 0.2s;
-  height: 64px;
+  height: @layout-header-height;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   position: relative;
   :global {
     .ant-menu-submenu.ant-menu-submenu-horizontal {
-      line-height: 64px;
+      line-height: @layout-header-height;
       height: 100%;
       .ant-menu-submenu-title {
         height: 100%;
@@ -18,7 +20,7 @@
   }
   .main {
     display: flex;
-    height: 64px;
+    height: @layout-header-height;
     padding-left: 24px;
     &.wide {
       max-width: 1200px;
@@ -37,9 +39,9 @@
 
 .logo {
   width: 165px;
-  height: 64px;
+  height: @layout-header-height;
   position: relative;
-  line-height: 64px;
+  line-height: @layout-header-height;
   transition: all 0.3s;
   overflow: hidden;
   img {
@@ -61,4 +63,10 @@
   h1 {
     color: #002140;
   }
+}
+
+.menu {
+  border: none;
+  height: @layout-header-height;
+  line-height: @layout-header-height;
 }

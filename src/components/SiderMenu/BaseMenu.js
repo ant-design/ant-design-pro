@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import classNames from 'classnames';
 import { Menu, Icon } from 'antd';
 import Link from 'umi/link';
 import isEqual from 'lodash/isEqual';
@@ -130,6 +131,7 @@ export default class BaseMenu extends PureComponent {
       theme,
       mode,
       location: { pathname },
+      className,
     } = this.props;
     // if pathname can't match, use the nearest parent's key
     let selectedKeys = this.getSelectedMenuKeys(pathname);
@@ -143,6 +145,10 @@ export default class BaseMenu extends PureComponent {
       };
     }
     const { handleOpenChange, style, menuData } = this.props;
+    const cls = classNames(className, {
+      'top-nav-menu': mode === 'horizontal',
+    });
+
     return (
       <Menu
         key="Menu"
@@ -151,7 +157,7 @@ export default class BaseMenu extends PureComponent {
         onOpenChange={handleOpenChange}
         selectedKeys={selectedKeys}
         style={style}
-        className={mode === 'horizontal' ? 'top-nav-menu' : ''}
+        className={cls}
         {...props}
       >
         {this.getNavMenuItems(menuData)}
