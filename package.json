@@ -99,7 +99,7 @@
     "puppeteer": "^1.10.0"
   },
   "lint-staged": {
-    "**/*.{js,jsx,less}": [
+    "**/*.{js,ts,tsx,json,jsx,less}": [
       "node ./scripts/lint-prettier.js",
       "git add"
     ],

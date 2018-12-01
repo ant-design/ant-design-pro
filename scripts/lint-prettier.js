@@ -22,6 +22,9 @@ files.forEach(file => {
   });
   try {
     const fileInfo = prettier.getFileInfo.sync(file);
+    if (fileInfo.ignored) {
+      return;
+    }
     const input = fs.readFileSync(file, 'utf8');
     const withParserOptions = {
       ...options,
