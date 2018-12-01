@@ -166,7 +166,6 @@ export function formatWan(val) {
             top: -2,
             fontSize: 14,
             fontStyle: 'normal',
-            lineHeight: 20,
             marginLeft: 2,
           }}
         >
