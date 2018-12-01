@@ -2,7 +2,7 @@
  * copy to https://github.com/facebook/react/blob/master/scripts/prettier/index.js
  * prettier api doc https://prettier.io/docs/en/api.html
  *----------*****--------------
- *  prettier all js and all ts.
+ *  lint file is prettier
  *----------*****--------------
  */
 
@@ -11,39 +11,33 @@ const prettier = require('prettier');
 const fs = require('fs');
 const prettierConfigPath = require.resolve('../.prettierrc');
 
-let didError = false;
+const files = process.argv.slice(2);
 
-let files = [];
-const jsFiles = glob.sync('src/**/*.js*', { ignore: ['**/node_modules/**', 'build/**'] });
-const tsFiles = glob.sync('src/**/*.ts*', { ignore: ['**/node_modules/**', 'build/**'] });
-files = files.concat(jsFiles);
-files = files.concat(tsFiles);
-if (!files.length) {
-  return;
-}
+let didError = false;
+let didWarn = false;
 
 files.forEach(file => {
   const options = prettier.resolveConfig.sync(file, {
     config: prettierConfigPath,
   });
-  const fileInfo = prettier.getFileInfo.sync(file);
   try {
+    const fileInfo = prettier.getFileInfo.sync(file);
     const input = fs.readFileSync(file, 'utf8');
     const withParserOptions = {
       ...options,
       parser: fileInfo.inferredParser,
     };
-    const output = prettier.format(input, withParserOptions);
-    if (output !== input) {
-      fs.writeFileSync(file, output, 'utf8');
-      console.log(`\x1b[34m ${file} is prettier`);
+    const isPrettier = prettier.check(input, withParserOptions);
+    if (!isPrettier) {
+      console.log(`\x1b[31m ${file} is no prettier, please use npm run prettier and git add !`);
+      didWarn = true;
     }
   } catch (e) {
     didError = true;
   }
 });
 
-if (didError) {
+if (didWarn || didError) {
   process.exit(1);
 }
-console.log('\x1b[32m prettier success!');
+console.log('\x1b[32m lint prettier success!');

@@ -20,7 +20,7 @@
     "test": "umi test",
     "test:component": "umi test ./src/components",
     "test:all": "node ./tests/run-tests.js",
-    "prettier": "node node ./scripts/prettier.js",
+    "prettier": "node ./scripts/prettier.js",
     "docker:dev": "docker-compose -f ./docker/docker-compose.dev.yml up",
     "docker:build": "docker-compose -f ./docker/docker-compose.dev.yml build",
     "docker-prod:dev": "docker-compose -f ./docker/docker-compose.yml up",
@@ -100,7 +100,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,less}": [
-      "prettier --write",
+      "node ./scripts/lint-prettier.js",
       "git add"
     ],
     "**/*.{js,jsx}": "npm run lint-staged:js",
