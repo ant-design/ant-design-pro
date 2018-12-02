@@ -75,6 +75,7 @@ export default {
   proxy: {
     '/interface': {
       target: 'http://localhost:8282/interface',
+      // target: 'http://47.75.168.140/interface',
       changeOrigin: true,
       pathRewrite: { '^/interface': '' },
     },
