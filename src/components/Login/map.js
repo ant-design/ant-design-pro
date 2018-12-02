@@ -8,12 +8,12 @@ export default {
       size: 'large',
       id: 'userName',
       prefix: <Icon type="user" className={styles.prefixIcon} />,
-      placeholder: 'admin',
+      placeholder: '手机',
     },
     rules: [
       {
         required: true,
-        message: 'Please enter username!',
+        message: '请输入手机号码!',
       },
     ],
   },
@@ -23,12 +23,12 @@ export default {
       prefix: <Icon type="lock" className={styles.prefixIcon} />,
       type: 'password',
       id: 'password',
-      placeholder: '888888',
+      placeholder: '密码',
     },
     rules: [
       {
         required: true,
-        message: 'Please enter password!',
+        message: '请输入密码',
       },
     ],
   },

@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React from 'react';
+import { message } from 'antd';
 import nzh from 'nzh/cn';
 import { parse, stringify } from 'qs';
 
@@ -181,4 +182,14 @@ export function formatWan(val) {
 // 给官方演示站点用，用于关闭真实开发环境不需要使用的特性
 export function isAntdPro() {
   return window.location.hostname === 'preview.pro.ant.design';
+}
+
+export function showMessageByResponse(response) {
+  if (!response.info) return;
+  if (response.status === '__OK__') {
+    message.success(response.info);
+  }
+  if (response.status === '__INVALIDATION_ERROR__') {
+    message.error(response.info);
+  }
 }

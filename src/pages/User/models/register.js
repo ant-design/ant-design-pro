@@ -1,6 +1,7 @@
 import { fakeRegister } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { reloadAuthorized } from '@/utils/Authorized';
+import { showMessageByResponse } from '@/utils/utils';
 
 export default {
   namespace: 'register',
@@ -12,6 +13,7 @@ export default {
   effects: {
     *submit({ payload }, { call, put }) {
       const response = yield call(fakeRegister, payload);
+      showMessageByResponse(response);
       yield put({
         type: 'registerHandle',
         payload: response,

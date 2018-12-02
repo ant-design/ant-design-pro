@@ -6,6 +6,10 @@
 /src/utils/request-temp.js
 _roadhog-api-doc
 
+# vim
+*.swo
+*.swp
+
 # production
 /dist
 /.vscode

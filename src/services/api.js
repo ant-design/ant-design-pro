@@ -104,14 +104,14 @@ export async function updateFakeList(params) {
 }
 
 export async function fakeAccountLogin(params) {
-  return request('/api/login/account', {
+  return request('/interface/user/login', {
     method: 'POST',
     body: params,
   });
 }
 
 export async function fakeRegister(params) {
-  return request('/api/register', {
+  return request('/interface/user/register', {
     method: 'POST',
     body: params,
   });
@@ -122,5 +122,10 @@ export async function queryNotices() {
 }
 
 export async function getFakeCaptcha(mobile) {
-  return request(`/api/captcha?mobile=${mobile}`);
+  return request('/interface/user/captcha/phone', {
+    method: 'POST',
+    body: {
+      phone: mobile,
+    },
+  });
 }
