@@ -1,5 +1,5 @@
 export default {
-  'form.captcha': '獲取驗證碼',
+  'form.get-captcha': '獲取驗證碼',
   'form.captcha.second': '秒',
   'form.optional': '（選填）',
   'form.submit': '提交',
@@ -7,7 +7,7 @@ export default {
   'form.email.placeholder': '郵箱',
   'form.password.placeholder': '至少6位密碼，區分大小寫',
   'form.confirm-password.placeholder': '確認密碼',
-  'form.phone-number.placeholder': '位手機號',
+  'form.phone-number.placeholder': '手機號',
   'form.verification-code.placeholder': '驗證碼',
   'form.title.label': '標題',
   'form.title.placeholder': '給目標起個名字',
