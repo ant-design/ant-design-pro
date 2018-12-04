@@ -139,7 +139,6 @@ export default class GlobalHeaderRight extends PureComponent {
           onClear={onNoticeClear}
           onPopupVisibleChange={onNoticeVisibleChange}
           loading={fetchingNotices}
-          popupAlign={{ offset: [20, -16] }}
           clearClose
         >
           <NoticeIcon.Tab

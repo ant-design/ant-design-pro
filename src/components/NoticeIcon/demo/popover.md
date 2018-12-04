@@ -149,7 +149,6 @@ ReactDOM.render(
       count={5}
       onItemClick={onItemClick}
       onClear={onClear}
-      popupAlign={{ offset: [20, -16] }}
     >
       <NoticeIcon.Tab
         list={noticeData['通知']}

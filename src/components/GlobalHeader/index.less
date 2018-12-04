@@ -61,7 +61,7 @@
     &:hover {
       background: @pro-header-hover-bg;
     }
-    :global(&.ant-popover-open) {
+    &:global(.opened) {
       background: @pro-header-hover-bg;
     }
   }
@@ -90,7 +90,7 @@
       color: rgba(255, 255, 255, 0.85);
     }
     &:hover,
-    &:global(.ant-popover-open) {
+    &:global(.opened) {
       background: @primary-color;
     }
     :global(.ant-badge) {
