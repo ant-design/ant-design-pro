@@ -8,6 +8,7 @@ export default [
       { path: '/user/login', component: './User/Login' },
       { path: '/user/register', component: './User/Register' },
       { path: '/user/register-result', component: './User/RegisterResult' },
+      { path: '/user/change-password', component: './User/ChangePassword' },
     ],
   },
   // app
