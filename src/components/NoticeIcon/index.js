@@ -1,7 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { Dropdown, Icon, Tabs, Badge, Spin } from 'antd';
+import { Icon, Tabs, Badge, Spin } from 'antd';
 import classNames from 'classnames';
+import HeaderDropdown from '../HeaderDropdown';
 import List from './NoticeList';
 import styles from './index.less';
 
@@ -111,7 +112,7 @@ export default class NoticeIcon extends PureComponent {
       popoverProps.visible = popupVisible;
     }
     return (
-      <Dropdown
+      <HeaderDropdown
         placement="bottomRight"
         overlay={notificationBox}
         overlayClassName={styles.popover}
@@ -122,7 +123,7 @@ export default class NoticeIcon extends PureComponent {
         ref={node => (this.popover = ReactDOM.findDOMNode(node))} // eslint-disable-line
       >
         {trigger}
-      </Dropdown>
+      </HeaderDropdown>
     );
   }
 }
