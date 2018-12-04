@@ -48,8 +48,8 @@ export default {
   'app.settings.notification.password-description': '其他用户的消息将以站内信的形式通知',
   'app.settings.notification.messages': '系统消息',
   'app.settings.notification.messages-description': '系统消息将以站内信的形式通知',
-  'app.settings.notification.todo': '账户密码',
-  'app.settings.notification.todo-description': '账户密码',
+  'app.settings.notification.todo': '待办任务',
+  'app.settings.notification.todo-description': '待办任务将以站内信的形式通知',
   'app.settings.open': '开',
   'app.settings.close': '关',
 };
