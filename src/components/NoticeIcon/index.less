@@ -1,10 +1,16 @@
 @import '~antd/lib/style/themes/default.less';
 
 .popover {
-  width: 336px;
+  width: 100%;
   background-color: #fff;
-  border-radius: 4px;
   box-shadow: @shadow-1-down;
+}
+
+@media screen and (min-width: @screen-xs-min) {
+  .popover {
+    width: 336px;
+    border-radius: 4px;
+  }
 }
 
 .noticeButton {
