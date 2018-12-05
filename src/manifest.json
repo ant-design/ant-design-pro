@@ -1,6 +1,6 @@
 {
-  "name": "ant-design-pro",
-  "short_name": "antd-pro",
+  "name": "Ant Design Pro",
+  "short_name": "Ant Design Pro",
   "display": "standalone",
   "start_url": "./?utm_source=homescreen",
   "theme_color": "#002140",
@@ -13,6 +13,10 @@
     {
       "src": "icons/icon-128x128.png",
       "sizes": "128x128"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512"
     }
   ]
 }
