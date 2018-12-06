@@ -17,7 +17,6 @@ loading | 弹出卡片加载状态 | boolean | false
 onClear | 点击清空按钮的回调 | function(tabName) | -
 onItemClick | 点击列表项的回调 | function(item, tabProps) | -
 onTabChange | 切换页签的回调 | function(tabTitle) | -
-popupAlign | 弹出卡片的位置配置 | Object [alignConfig](https://github.com/yiminghe/dom-align#alignconfig-object-details) | -
 onPopupVisibleChange | 弹出卡片显隐的回调 | function(visible) | -
 popupVisible | 控制弹层显隐 | boolean | -
 locale | 默认文案 | Object | `{ emptyText: '暂无数据', clear: '清空' }`

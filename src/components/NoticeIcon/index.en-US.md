@@ -17,7 +17,6 @@ loading | Popup card loading status | boolean | false
 onClear | Click to clear button the callback  | function(tabName) | -
 onItemClick | Click on the list item's callback | function(item, tabProps) | -
 onTabChange | Switching callbacks for tabs | function(tabTitle) | -
-popupAlign | Popup card location configuration | Object [alignConfig](https://github.com/yiminghe/dom-align#alignconfig-object-details) | -
 onPopupVisibleChange | Popup Card Showing or Hiding Callbacks | function(visible) | -
 popupVisible | Popup card display state | boolean | -
 locale | Default message text | Object | `{ emptyText: '暂无数据', clear: '清空' }`
