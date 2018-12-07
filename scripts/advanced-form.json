@@ -1,0 +1,12 @@
+{
+  "source": "src/pages/Forms/AdvancedForm.js",
+  "target": "../umi-blocks/ant-design-pro/AdvancedForm",
+  "extFiles": [
+    ["src/pages/Forms/models/form.js", "src/models/form.js"],
+    ["src/models/setting.js", "src/models/setting.js"],
+    ["mock/api.js", "src/_mock.js"],
+    ["src/locales/zh-CN/form.js", "src/locales/zh-CN.js"],
+    ["src/locales/zh-TW/form.js", "src/locales/zh-TW.js"],
+    ["src/locales/en-US/form.js", "src/locales/en-US.js"]
+  ]
+}
