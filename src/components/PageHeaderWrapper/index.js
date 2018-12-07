@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
-import PageHeader from '@/components/PageHeader';
+import PageHeader from 'ant-design-pro/lib/PageHeader';
 import { connect } from 'dva';
 import GridContent from './GridContent';
 import styles from './index.less';

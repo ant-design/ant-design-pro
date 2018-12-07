@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Card, Radio } from 'antd';
 import { FormattedMessage } from 'umi/locale';
 import styles from './Analysis.less';
-import { Pie } from '@/components/Charts';
+import { Pie } from 'ant-design-pro/lib/Charts';
 import Yuan from '@/utils/Yuan';
 
 const ProportionSales = memo(

@@ -18,7 +18,7 @@ import {
   Divider,
 } from 'antd';
 import classNames from 'classnames';
-import DescriptionList from '@/components/DescriptionList';
+import DescriptionList from 'ant-design-pro/lib/DescriptionList';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './AdvancedProfile.less';
 

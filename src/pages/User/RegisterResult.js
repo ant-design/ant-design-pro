@@ -2,7 +2,7 @@ import React from 'react';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Button } from 'antd';
 import Link from 'umi/link';
-import Result from '@/components/Result';
+import Result from 'ant-design-pro/lib/Result';
 import styles from './RegisterResult.less';
 
 const actions = (

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Button, Icon, Card } from 'antd';
-import Result from '@/components/Result';
+import Result from 'ant-design-pro/lib/Result';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 const extra = (
