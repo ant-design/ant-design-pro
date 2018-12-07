@@ -1,7 +1,7 @@
 import mockjs from 'mockjs';
 
 const titles = [
-  'Alipay',
+  '易崛企科技有限公司',
   'Angular',
   'Ant Design',
   'Ant Design Pro',

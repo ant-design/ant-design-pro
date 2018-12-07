@@ -21,29 +21,20 @@ export default [
       // dashboard
       { path: '/', redirect: '/dashboard/analysis' },
       {
-        path: '/dashboard',
+        path: '/dashboard/analysis',
         name: 'dashboard',
         icon: 'dashboard',
-        routes: [
-          {
-            path: '/dashboard/analysis',
-            name: 'analysis',
-            component: './Dashboard/Analysis',
-          },
-          {
-            path: '/dashboard/monitor',
-            name: 'monitor',
-            component: './Dashboard/Monitor',
-          },
-          {
-            path: '/dashboard/workplace',
-            name: 'workplace',
-            component: './Dashboard/Workplace',
-          },
-        ],
+        component: './Dashboard/Analysis',
+      },
+      {
+        path: '/teams',
+        icon: 'form',
+        name: 'team',
+        component: './Team/Teams',
       },
       // forms
       {
+        hideInMenu: true,
         path: '/form',
         icon: 'form',
         name: 'form',
@@ -90,6 +81,7 @@ export default [
       },
       // list
       {
+        hideInMenu: true,
         path: '/list',
         icon: 'table',
         name: 'list',
@@ -138,6 +130,7 @@ export default [
         ],
       },
       {
+        hideInMenu: true,
         path: '/profile',
         name: 'profile',
         icon: 'profile',
@@ -157,6 +150,7 @@ export default [
         ],
       },
       {
+        hideInMenu: true,
         name: 'result',
         icon: 'check-circle-o',
         path: '/result',
@@ -171,6 +165,7 @@ export default [
         ],
       },
       {
+        hideInMenu: true,
         name: 'exception',
         icon: 'warning',
         path: '/exception',
@@ -200,6 +195,7 @@ export default [
         ],
       },
       {
+        hideInMenu: true,
         name: 'account',
         icon: 'user',
         path: '/account',
