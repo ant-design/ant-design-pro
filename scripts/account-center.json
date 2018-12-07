@@ -1,0 +1,10 @@
+{
+  "source": "src/pages/Account/Center/Center.js",
+  "target": "../umi-blocks/ant-design-pro/AccountCenter",
+  "extFiles": [
+    ["src/models/setting.js", "src/models/setting.js"],
+    ["src/models/project.js", "src/models/project.js"],
+    ["src/models/user.js", "src/models/user.js"],
+    ["mock/api.js", "src/_mock.js"]
+  ]
+}
