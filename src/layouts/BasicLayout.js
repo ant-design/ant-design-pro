@@ -14,7 +14,6 @@ import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
-import Exception403 from '../pages/Exception/403';
 import PageLoading from '@/components/PageLoading';
 import SiderMenu from '@/components/SiderMenu';
 import { title } from '../defaultSettings';
@@ -24,6 +23,8 @@ import styles from './BasicLayout.less';
 const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
 
 const { Content } = Layout;
+
+const Exception403 = <p>Exception403</p>;
 
 const query = {
   'screen-xs': {
