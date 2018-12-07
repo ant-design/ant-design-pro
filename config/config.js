@@ -27,15 +27,15 @@ const plugins = [
           importWorkboxFrom: 'local',
         },
       },
-      ...(!process.env.TEST && os.platform() === 'darwin'
-        ? {
-            dll: {
-              include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-              exclude: ['@babel/runtime'],
-            },
-            hardSource: false,
-          }
-        : {}),
+      // ...(!process.env.TEST && os.platform() === 'darwin'
+      //   ? {
+      //       dll: {
+      //         include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+      //         exclude: ['@babel/runtime'],
+      //       },
+      //       hardSource: true,
+      //     }
+      //   : {}),
     },
   ],
 ];
