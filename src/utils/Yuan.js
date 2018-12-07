@@ -1,5 +1,5 @@
 import React from 'react';
-import { yuan } from '@/components/Charts';
+import { yuan } from 'ant-design-pro/lib/Charts';
 /**
  * 减少使用 dangerouslySetInnerHTML
  */

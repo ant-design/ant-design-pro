@@ -1,5 +1,5 @@
 import React from 'react';
-import RenderAuthorized from '@/components/Authorized';
+import RenderAuthorized from 'ant-design-pro/lib/Authorized';
 import { getAuthority } from '@/utils/authority';
 import Redirect from 'umi/redirect';
 

@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
 import { Row, Col, Table, Tooltip, Card, Icon } from 'antd';
 import { FormattedMessage } from 'umi/locale';
-import Trend from '@/components/Trend';
+import Trend from 'ant-design-pro/lib/Trend';
 import numeral from 'numeral';
+import NumberInfo from 'ant-design-pro/lib/NumberInfo';
+import { MiniArea } from 'ant-design-pro/lib/Charts';
 import styles from './Analysis.less';
-import NumberInfo from '@/components/NumberInfo';
-import { MiniArea } from '@/components/Charts';
 
 const columns = [
   {

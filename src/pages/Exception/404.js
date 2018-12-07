@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatMessage } from 'umi/locale';
 import Link from 'umi/link';
-import Exception from '@/components/Exception';
+import Exception from 'ant-design-pro/lib/Exception';
 
 const Exception404 = () => (
   <Exception

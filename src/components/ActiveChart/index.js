@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { MiniArea } from '../Charts';
-import NumberInfo from '../NumberInfo';
+import { MiniArea } from 'ant-design-pro/lib/Charts';
+import NumberInfo from 'ant-design-pro/lib/NumberInfo';
 
 import styles from './index.less';
 
