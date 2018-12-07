@@ -1,0 +1,12 @@
+{
+  "source": "src/pages/Account/Settings/SecurityView.js",
+  "target": "../umi-blocks/ant-design-pro/AccountSettingsSecurity",
+  "extFiles": [
+    ["src/models/user.js", "src/models/user.js"],
+    ["src/models/setting.js", "src/models/setting.js"],
+    ["mock/user.js", "src/_mock.js"],
+    ["src/locales/zh-CN/settings.js", "src/locales/zh-CN.js"],
+    ["src/locales/zh-TW/settings.js", "src/locales/zh-TW.js"],
+    ["src/locales/en-US/settings.js", "src/locales/en-US.js"]
+  ]
+}

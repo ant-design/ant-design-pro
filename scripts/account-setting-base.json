@@ -1,0 +1,13 @@
+{
+  "source": "src/pages/Account/Settings/BaseView.js",
+  "target": "../umi-blocks/ant-design-pro/AccountSettingsBase",
+  "extFiles": [
+    ["src/pages/Account/Settings/models/geographic.js", "src/models/geographic.js"],
+    ["src/models/user.js", "src/models/user.js"],
+    ["src/models/setting.js", "src/models/setting.js"],
+    ["mock/geographic.js", "src/_mock.js"],
+    ["src/locales/zh-CN/settings.js", "src/locales/zh-CN.js"],
+    ["src/locales/zh-TW/settings.js", "src/locales/zh-TW.js"],
+    ["src/locales/en-US/settings.js", "src/locales/en-US.js"]
+  ]
+}

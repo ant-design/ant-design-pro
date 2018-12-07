@@ -1,0 +1,12 @@
+{
+  "source": "src/pages/Dashboard/Workplace.js",
+  "target": "../umi-blocks/ant-design-pro/Workplace",
+  "extFiles": [
+    ["src/pages/Dashboard/models/activities.js", "src/models/activities.js"],
+    ["src/pages/Dashboard/models/chart.js", "src/models/chart.js"],
+    ["src/models/user.js", "src/models/user.js"],
+    ["src/models/project.js", "src/models/project.js"],
+    ["src/models/setting.js", "src/models/setting.js"],
+    ["mock/api.js", "src/_mock.js"]
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source": "src/pages/Exception/500.js",
+  "target": "../umi-blocks/ant-design-pro/Exception500",
+  "extFiles": [
+    ["src/pages/Exception/models/error.js", "src/models/error.js"],
+    ["src/models/setting.js", "src/models/setting.js"],
+    ["src/locales/zh-CN/exception.js", "src/locales/zh-CN.js"],
+    ["src/locales/zh-TW/exception.js", "src/locales/zh-TW.js"],
+    ["src/locales/en-US/exception.js", "src/locales/en-US.js"]
+  ]
+}

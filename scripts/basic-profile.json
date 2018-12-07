@@ -1,0 +1,9 @@
+{
+  "source": "src/pages/Profile/BasicProfile.js",
+  "target": "../umi-blocks/ant-design-pro/BasicProfile",
+  "extFiles": [
+    ["src/pages/Profile/models/profile.js", "src/models/profile.js"],
+    ["src/models/setting.js", "src/models/setting.js"],
+    ["mock/profile.js", "src/_mock.js"]
+  ]
+}

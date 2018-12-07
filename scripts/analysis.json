@@ -1,0 +1,9 @@
+{
+  "source": "src/pages/Dashboard/Analysis.js",
+  "target": "../umi-blocks/ant-design-pro/Analysis",
+  "extFiles": [
+    ["src/pages/Dashboard/models/chart.js", "src/models/chart.js"],
+    ["src/models/setting.js", "src/models/setting.js"],
+    ["mock/chart.js", "src/_mock.js"]
+  ]
+}

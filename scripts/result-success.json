@@ -1,0 +1,7 @@
+{
+  "source": "src/pages/Result/Success.js",
+  "target": "../umi-blocks/ant-design-pro/ResultSuccess",
+  "extFiles": [
+    ["src/models/setting.js", "src/models/setting.js"]
+  ]
+}

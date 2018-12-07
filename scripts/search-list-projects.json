@@ -1,0 +1,10 @@
+{
+  "source": "src/pages/List/Projects.js",
+  "target": "../umi-blocks/ant-design-pro/SearchListProjects",
+  "extFiles": [
+    ["src/models/list.js", "src/models/list.js"],
+    ["src/pages/List/models/rule.js", "src/models/rule.js"],
+    ["src/models/setting.js", "src/models/setting.js"],
+    ["mock/api.js", "src/_mock.js"]
+  ]
+}
