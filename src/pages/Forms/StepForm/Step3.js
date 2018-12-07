@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'dva';
 import { Button, Row, Col } from 'antd';
 import router from 'umi/router';
-import Result from '@/components/Result';
+import Result from 'ant-design-pro/lib/Result';
 import styles from './style.less';
 
 @connect(({ form }) => ({

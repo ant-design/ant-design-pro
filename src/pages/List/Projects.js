@@ -3,9 +3,9 @@ import moment from 'moment';
 import { connect } from 'dva';
 import { Row, Col, Form, Card, Select, List } from 'antd';
 
-import TagSelect from '@/components/TagSelect';
-import AvatarList from '@/components/AvatarList';
-import Ellipsis from '@/components/Ellipsis';
+import TagSelect from 'ant-design-pro/lib/TagSelect';
+import AvatarList from 'ant-design-pro/lib/AvatarList';
+import Ellipsis from 'ant-design-pro/lib/Ellipsis';
 import StandardFormRow from '@/components/StandardFormRow';
 
 import styles from './Projects.less';

@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 import { Row, Col, Card, Tabs, DatePicker } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi/locale';
 import numeral from 'numeral';
+import { Bar } from 'ant-design-pro/lib/Charts';
 import styles from './Analysis.less';
-import { Bar } from '@/components/Charts';
 
 const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
