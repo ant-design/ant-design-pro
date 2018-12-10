@@ -9,6 +9,12 @@ export default [
       { path: '/user/register', component: './User/Register' },
       { path: '/user/register-result', component: './User/RegisterResult' },
       { path: '/user/change-password', component: './User/ChangePassword' },
+      {
+        path: '/user/teams',
+        icon: 'form',
+        name: 'team',
+        component: './Team/Teams',
+      },
     ],
   },
   // app
@@ -25,12 +31,6 @@ export default [
         name: 'dashboard',
         icon: 'dashboard',
         component: './Dashboard/Analysis',
-      },
-      {
-        path: '/teams',
-        icon: 'form',
-        name: 'team',
-        component: './Team/Teams',
       },
       // forms
       {

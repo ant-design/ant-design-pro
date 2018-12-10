@@ -46,6 +46,7 @@ class LoginPage extends Component {
     const { autoLogin } = this.state;
     return (
       <div className={styles.main}>
+        <h3> 登录 </h3>
         <Login
           onSubmit={this.handleSubmit}
           ref={form => {
