@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Select, Divider } from 'antd';
+import { Form, Input, Button, Select, Divider, InputNumber } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
 
@@ -68,7 +68,7 @@ class Step1 extends React.PureComponent {
               rules: [{ required: true, message: '请输入收款人姓名' }],
             })(<Input placeholder="请输入收款人姓名" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="转账金额">
+          <Form.Item {...formItemLayout} label="转账金额￥">
             {getFieldDecorator('amount', {
               initialValue: data.amount,
               rules: [
@@ -77,8 +77,9 @@ class Step1 extends React.PureComponent {
                   pattern: /^(\d+)((?:\.\d+)?)$/,
                   message: '请输入合法金额数字',
                 },
+                { type: 'number' },
               ],
-            })(<Input prefix="￥" placeholder="请输入金额" />)}
+            })(<InputNumber min={0.01} step={0.01} placeholder="请输入金额" />)}
           </Form.Item>
           <Form.Item
             wrapperCol={{
