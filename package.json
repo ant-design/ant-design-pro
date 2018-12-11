@@ -59,7 +59,8 @@
     "react-dom": "^16.6.3",
     "react-fittext": "^1.0.0",
     "react-media": "^1.8.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "umi-request": "^1.0.0"
   },
   "devDependencies": {
     "@types/react": "^16.7.7",
