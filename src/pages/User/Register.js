@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
-import router from 'umi/router';
 import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
 import styles from './Register.less';
 
@@ -47,19 +46,6 @@ class Register extends Component {
     help: '',
     prefix: '86',
   };
-
-  componentDidUpdate() {
-    const { form, register } = this.props;
-    const account = form.getFieldValue('mail');
-    if (register.status === 'ok') {
-      router.push({
-        pathname: '/user/register-result',
-        state: {
-          account,
-        },
-      });
-    }
-  }
 
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -266,7 +252,7 @@ class Register extends Component {
                     message: formatMessage({ id: 'validation.phone-number.required' }),
                   },
                   {
-                    pattern: /^\d{10}$/,
+                    pattern: /^\d{11}$/,
                     message: formatMessage({ id: 'validation.phone-number.wrong-format' }),
                   },
                 ],
