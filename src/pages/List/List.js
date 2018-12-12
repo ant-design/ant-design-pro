@@ -23,6 +23,11 @@ class SearchList extends Component {
     }
   };
 
+  handleFormSubmit = value => {
+    // eslint-disable-next-line
+    console.log(value);
+  };
+
   render() {
     const tabList = [
       {

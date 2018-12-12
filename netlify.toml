@@ -1,0 +1,13 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://us-central1-antd-pro.cloudfunctions.net/api/api/:splat"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"
+    X-Api-Key = "some-api-key-string"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

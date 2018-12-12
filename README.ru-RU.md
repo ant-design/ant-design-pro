@@ -83,14 +83,6 @@ $ npm install
 $ npm start         # visit http://localhost:8000
 ```
 
-Также можно использовать инструмент командной строки: [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli)
-
-```bash
-$ npm install ant-design-pro-cli -g
-$ mkdir pro-demo && cd pro-demo
-$ pro new
-```
-
 Больше информации в [документации](http://pro.ant.design/docs/getting-started).
 
 ## Совместимость
@@ -103,7 +95,7 @@ $ pro new
 
 ## Распространение
 
-Любые варианты распространения приветствуются! Вот несколько примероы того, как вы можете помочь распространению проекта:
+Любые варианты распространения приветствуются! Вот несколько примеров того, как вы можете помочь распространению проекта:
 
 - Использовать Ant Design Pro в ежедневной работе.
 - Создавать [задачи](http://github.com/ant-design/ant-design-pro/issues) заводить баги или отвечать на вопросы.

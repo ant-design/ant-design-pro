@@ -1,4 +1,4 @@
-import { getBreadcrumb } from './index';
+import { getBreadcrumb } from './breadcrumb';
 import { urlToList } from '../_utils/pathTools';
 
 const routerData = {

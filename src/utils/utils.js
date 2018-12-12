@@ -161,12 +161,11 @@ export function formatWan(val) {
       <span>
         {result}
         <span
-          styles={{
+          style={{
             position: 'relative',
             top: -2,
             fontSize: 14,
             fontStyle: 'normal',
-            lineHeight: 20,
             marginLeft: 2,
           }}
         >
@@ -178,6 +177,7 @@ export function formatWan(val) {
   return result;
 }
 
+// 给官方演示站点用，用于关闭真实开发环境不需要使用的特性
 export function isAntdPro() {
   return window.location.hostname === 'preview.pro.ant.design';
 }

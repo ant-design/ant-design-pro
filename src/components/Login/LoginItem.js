@@ -7,9 +7,10 @@ import LoginContext from './loginContext';
 
 const FormItem = Form.Item;
 
-class WarpFormItem extends Component {
+class WrapFormItem extends Component {
   static defaultProps = {
-    buttonText: '获取验证码',
+    getCaptchaButtonText: 'captcha',
+    getCaptchaSecondText: 'second',
   };
 
   constructor(props) {
@@ -43,9 +44,9 @@ class WarpFormItem extends Component {
     }
   };
 
-  getFormItemOptions = ({ onChange, defaultValue, rules }) => {
+  getFormItemOptions = ({ onChange, defaultValue, customprops, rules }) => {
     const options = {
-      rules: rules || this.customprops.rules,
+      rules: rules || customprops.rules,
     };
     if (onChange) {
       options.onChange = onChange;
@@ -83,7 +84,8 @@ class WarpFormItem extends Component {
       defaultValue,
       rules,
       name,
-      buttonText,
+      getCaptchaButtonText,
+      getCaptchaSecondText,
       updateActive,
       type,
       ...restProps
@@ -108,7 +110,7 @@ class WarpFormItem extends Component {
                 size="large"
                 onClick={this.onGetCaptcha}
               >
-                {count ? `${count} s` : buttonText}
+                {count ? `${count} ${getCaptchaSecondText}` : getCaptchaButtonText}
               </Button>
             </Col>
           </Row>
@@ -129,10 +131,10 @@ Object.keys(ItemMap).forEach(key => {
   LoginItem[key] = props => (
     <LoginContext.Consumer>
       {context => (
-        <WarpFormItem
+        <WrapFormItem
           customprops={item.props}
-          {...props}
           rules={item.rules}
+          {...props}
           type={key}
           updateActive={context.updateActive}
           form={context.form}

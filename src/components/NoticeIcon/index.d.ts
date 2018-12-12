@@ -6,22 +6,14 @@ export interface INoticeIconProps {
   bell?: React.ReactNode;
   className?: string;
   loading?: boolean;
-  onClear?: (tableTile: string) => void;
+  onClear?: (tabName: string) => void;
   onItemClick?: (item: INoticeIconData, tabProps: INoticeIconProps) => void;
-  onTabChange?: (tableTile: string) => void;
-  popupAlign?: {
-    points?: [string, string];
-    offset?: [number, number];
-    targetOffset?: [number, number];
-    overflow?: any;
-    useCssRight?: boolean;
-    useCssBottom?: boolean;
-    useCssTransform?: boolean;
-  };
+  onTabChange?: (tabTile: string) => void;
   style?: React.CSSProperties;
   onPopupVisibleChange?: (visible: boolean) => void;
   popupVisible?: boolean;
   locale?: { emptyText: string; clear: string };
+  clearClose?: boolean;
 }
 
 export default class NoticeIcon extends React.Component<INoticeIconProps, any> {

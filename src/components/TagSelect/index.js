@@ -28,8 +28,8 @@ class TagSelect extends Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    if ('value' in nextProps && nextProps.value) {
-      return { value: nextProps.value };
+    if ('value' in nextProps) {
+      return { value: nextProps.value || [] };
     }
     return null;
   }
