@@ -405,7 +405,7 @@ class TableList extends PureComponent {
     const { dispatch } = this.props;
     const { selectedRows } = this.state;
 
-    if (!selectedRows) return;
+    if (selectedRows.length === 0) return;
     switch (e.key) {
       case 'remove':
         dispatch({
