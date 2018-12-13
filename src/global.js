@@ -1,7 +1,6 @@
 import React from 'react';
 import { notification, Button, message } from 'antd';
 import { formatMessage } from 'umi/locale';
-import 'ant-design-pro/dist/ant-design-pro.css';
 
 // Notify user if offline now
 window.addEventListener('sw.offline', () => {

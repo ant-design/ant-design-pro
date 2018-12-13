@@ -1,4 +1,4 @@
-import RenderAuthorized from 'ant-design-pro/lib/Authorized';
+import { Authorized as RenderAuthorized } from 'ant-design-pro';
 import { getAuthority } from './authority';
 
 let Authorized = RenderAuthorized(getAuthority()); // eslint-disable-line
