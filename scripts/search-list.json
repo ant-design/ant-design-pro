@@ -1,7 +1,0 @@
-{
-  "source": "src/pages/List/List.js",
-  "target": "../umi-blocks/ant-design-pro/SearchList",
-  "extFiles": [
-    ["src/models/setting.js", "src/models/setting.js"]
-  ]
-}

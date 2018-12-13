@@ -1,9 +1,0 @@
-{
-  "source": "src/pages/Account/Settings/Info.js",
-  "target": "../umi-blocks/ant-design-pro/AccountSettings",
-  "extFiles": [
-    ["src/models/user.js", "src/models/user.js"],
-    ["src/models/setting.js", "src/models/setting.js"],
-    ["mock/user.js", "src/_mock.js"]
-  ]
-}
