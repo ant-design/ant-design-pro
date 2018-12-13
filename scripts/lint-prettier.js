@@ -32,7 +32,7 @@ files.forEach(file => {
     };
     const isPrettier = prettier.check(input, withParserOptions);
     if (!isPrettier) {
-      console.log(`\x1b[31m ${file} is no prettier, please use npm run prettier and git add !`);
+      console.log(`\x1b[31m ${file} is no prettier, please use npm run prettier and git add !\x1b[0m`);
       didWarn = true;
     }
   } catch (e) {
@@ -43,4 +43,4 @@ files.forEach(file => {
 if (didWarn || didError) {
   process.exit(1);
 }
-console.log('\x1b[32m lint prettier success!');
+console.log('\x1b[32m lint prettier success!\x1b[0m');
