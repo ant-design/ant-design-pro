@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { MiniArea } from 'ant-design-pro/lib/Charts';
-import NumberInfo from 'ant-design-pro/lib/NumberInfo';
+import { NumberInfo, Charts } from 'ant-design-pro';
 
 import styles from './index.less';
+
+const { MiniArea } =  Charts;
 
 function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;
