@@ -62,7 +62,7 @@
   "devDependencies": {
     "@types/react": "^16.7.7",
     "@types/react-dom": "^16.0.10",
-    "antd-pro-merge-less": "^0.2.0",
+    "antd-pro-merge-less": "^1.0.0",
     "antd-theme-webpack-plugin": "^1.1.8",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.1.1",
