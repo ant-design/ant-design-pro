@@ -15,6 +15,12 @@ export default [
         name: 'team',
         component: './Team/Teams',
       },
+      {
+        path: '/user/join',
+        icon: 'form',
+        name: 'join',
+        component: './Team/Join',
+      },
     ],
   },
   // app
