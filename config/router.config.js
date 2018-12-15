@@ -36,7 +36,7 @@ export default [
         path: '/dashboard',
         name: 'dashboard',
         icon: 'dashboard',
-        component: './Dashboard/Analysis',
+        component: './Dashboard/Home',
       },
       {
         path: '/members',
