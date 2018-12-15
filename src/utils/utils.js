@@ -193,3 +193,13 @@ export function showMessageByResponse(response) {
     message.error(response.info);
   }
 }
+
+export function linkCopyToClipboard(text) {
+  const textField = document.createElement('textarea');
+  textField.innerText = text;
+  document.body.appendChild(textField);
+  textField.select();
+  document.execCommand('copy');
+  textField.remove();
+  message.success('复制成功');
+}

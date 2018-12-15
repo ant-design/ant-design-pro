@@ -5,6 +5,7 @@ export default {
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
   'menu.team': '团队',
+  'menu.members': '成员',
   'menu.form': '表单页',
   'menu.form.basicform': '基础表单',
   'menu.form.stepform': '分步表单',

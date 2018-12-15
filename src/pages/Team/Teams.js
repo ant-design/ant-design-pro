@@ -86,7 +86,7 @@ class TeamsPage extends PureComponent {
                                     message: '支持中文，字母，下划线',
                                   },
                                 ],
-                              })(<Input size="large" placeholder="如：易掘企科技有限公司" />)}
+                              })(<Input size="large" placeholder="如：易掘企产品研发团队" />)}
                             </InputGroup>
                           </Col>
                           <Col span={6}>
@@ -104,7 +104,7 @@ class TeamsPage extends PureComponent {
                   onVisibleChange={this.handleVisibleChange}
                 >
                   <Button className={styles.newButton} type="dashed">
-                    <Icon type="plus" /> 创建企业
+                    <Icon type="plus" /> 创建团队
                   </Button>
                 </Popover>
               </List.Item>
