@@ -24,7 +24,7 @@ export default class SelectLang extends PureComponent {
       'zh-CN': '🇨🇳',
       'zh-TW': '🇭🇰',
       'en-US': '🇬🇧',
-      'pt-BR': '🇵🇹',
+      'pt-BR': '🇧🇷',
     };
     const langMenu = (
       <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changeLang}>
