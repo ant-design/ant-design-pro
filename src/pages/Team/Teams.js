@@ -7,9 +7,9 @@ import styles from './Teams.less';
 const FormItem = Form.Item;
 const InputGroup = Input.Group;
 
-@connect(({ list, loading }) => ({
-  list,
-  loading: loading.models.list,
+@connect(({ team, loading }) => ({
+  team,
+  loading: loading.models.team,
 }))
 @Form.create()
 class TeamsPage extends PureComponent {
@@ -20,10 +20,7 @@ class TeamsPage extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'list/fetch',
-      payload: {
-        count: 8,
-      },
+      type: 'team/list',
     });
   }
 
@@ -37,13 +34,31 @@ class TeamsPage extends PureComponent {
     this.setState({ visible });
   };
 
+  handleTeamSelect = team => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'team/select',
+      payload: team,
+    });
+  };
+
   onTeamCreate = () => {
-    // console.log('todo create team.');
+    const { dispatch, form } = this.props;
+
+    this.hide();
+    form.validateFields(['team_name'], {}, (err, values) => {
+      if (!err) {
+        dispatch({
+          type: 'team/create',
+          payload: values,
+        });
+      }
+    });
   };
 
   render() {
     const {
-      list: { list },
+      team: { list },
       form,
       loading,
     } = this.props;
@@ -60,9 +75,9 @@ class TeamsPage extends PureComponent {
           dataSource={['', ...list]}
           renderItem={item =>
             item ? (
-              <List.Item key={item.id}>
+              <List.Item key={item.team_id} onClick={() => this.handleTeamSelect(item)}>
                 <Card hoverable className={styles.card}>
-                  <Card.Meta title={<a>{item.title}</a>} />
+                  <Card.Meta title={<a>{item.team_name}</a>} />
                 </Card>
               </List.Item>
             ) : (
@@ -75,7 +90,7 @@ class TeamsPage extends PureComponent {
                         <Row gutter={8}>
                           <Col span={18}>
                             <InputGroup compact>
-                              {getFieldDecorator('teamname', {
+                              {getFieldDecorator('team_name', {
                                 rules: [
                                   {
                                     required: true,

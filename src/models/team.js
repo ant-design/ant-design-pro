@@ -1,4 +1,6 @@
-import { queryFakeList, removeFakeList, addFakeList, updateFakeList } from '@/services/api';
+import { fakeTeamCreate, fakeTeamList } from '@/services/api';
+import router from 'umi/router';
+import { currentTeamSet } from '@/utils/team';
 
 export default {
   namespace: 'team',
@@ -8,47 +10,32 @@ export default {
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {
-      const response = yield call(queryFakeList, payload);
-      console.log(response);
-      yield put({
-        type: 'queryList',
-        payload: Array.isArray(response) ? response : [],
-      });
-    },
-    *appendFetch({ payload }, { call, put }) {
-      const response = yield call(queryFakeList, payload);
-      yield put({
-        type: 'appendList',
-        payload: Array.isArray(response) ? response : [],
-      });
-    },
-    *submit({ payload }, { call, put }) {
-      let callback;
-      if (payload.id) {
-        callback = Object.keys(payload).length === 1 ? removeFakeList : updateFakeList;
-      } else {
-        callback = addFakeList;
+    *create({ payload }, { call }) {
+      const response = yield call(fakeTeamCreate, payload);
+      if (response.status === '__OK__') {
+        currentTeamSet(response.team_id);
+        router.push('/');
       }
-      const response = yield call(callback, payload); // post
+    },
+    *list(_, { call, put }) {
+      const response = yield call(fakeTeamList);
+
       yield put({
-        type: 'queryList',
-        payload: response,
+        type: 'queryTeams',
+        payload: Array.isArray(response.teams) ? response.teams : [],
       });
+    },
+    *select({ payload }) {
+      currentTeamSet(payload.team_id);
+      yield router.push('/');
     },
   },
 
   reducers: {
-    queryList(state, action) {
+    queryTeams(state, action) {
       return {
         ...state,
         list: action.payload,
-      };
-    },
-    appendList(state, action) {
-      return {
-        ...state,
-        list: state.list.concat(action.payload),
       };
     },
   },

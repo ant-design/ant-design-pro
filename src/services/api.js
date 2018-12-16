@@ -103,6 +103,17 @@ export async function updateFakeList(params) {
   });
 }
 
+export async function fakeTeamList() {
+  return request('/interface/team/user-teams');
+}
+
+export async function fakeTeamCreate(params) {
+  return request('/interface/team/create', {
+    method: 'POST',
+    body: params,
+  });
+}
+
 export async function fakeAccountLogin(params) {
   return request('/interface/user/login', {
     method: 'POST',

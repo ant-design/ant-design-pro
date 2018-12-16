@@ -74,7 +74,6 @@ const accessTokenCheck = response => {
 export default function request(url, option) {
   const options = {
     expirys: isAntdPro(),
-    access_token: getAccessToken(),
     ...option,
   };
   /**
@@ -111,6 +110,10 @@ export default function request(url, option) {
       };
     }
   }
+  newOptions.headers = {
+    'Access-Token': getAccessToken(),
+    ...newOptions.headers,
+  };
 
   const expirys = options.expirys && 60;
   // options.expirys !== false, return the cache,
