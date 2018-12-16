@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
 import router from 'umi/router';
-import { Form, Input, Button, Row, Col, Popover, Progress, Alert } from 'antd';
+import { Form, Input, Button, Row, Col, Popover, Progress } from 'antd';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
@@ -33,9 +33,9 @@ const passwordProgressMap = {
   poor: 'exception',
 };
 
-@connect(({ register, loading }) => ({
-  register,
-  submitting: loading.effects['register/submit'],
+@connect(({ password, loading }) => ({
+  password,
+  submitting: loading.effects['password/change'],
 }))
 @Form.create()
 class ChangePassword extends Component {
@@ -47,15 +47,14 @@ class ChangePassword extends Component {
   };
 
   componentDidUpdate() {
-    const { form, register } = this.props;
-    const account = form.getFieldValue('mail');
-    if (register.status === 'ok') {
-      router.push({
-        pathname: '/user/register-result',
-        state: {
-          account,
-        },
-      });
+    const { password } = this.props;
+    if (password.status === '__OK__') {
+      password.status = undefined;
+      setTimeout(() => {
+        router.push({
+          pathname: '/user/login',
+        });
+      }, 1000);
     }
   }
 
@@ -63,35 +62,33 @@ class ChangePassword extends Component {
     clearInterval(this.interval);
   }
 
-  getCaptcha = () =>
+  getCaptcha = values =>
     new Promise((resolve, reject) => {
-      const { form } = this.props;
-      form.validateFields(['mobile'], {}, (err, values) => {
-        if (err) {
-          reject(err);
-        } else {
-          const { dispatch } = this.props;
-          dispatch({
-            type: 'login/getCaptcha',
-            payload: values.mobile,
-          })
-            .then(resolve)
-            .catch(reject);
-        }
-      });
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'login/getCaptcha',
+        payload: values.mobile,
+      })
+        .then(resolve)
+        .catch(reject);
     });
 
   onGetCaptcha = () => {
-    let count = 59;
-    this.setState({ count });
-    this.interval = setInterval(() => {
-      count -= 1;
-      this.setState({ count });
-      if (count === 0) {
-        clearInterval(this.interval);
+    const { form } = this.props;
+    form.validateFields(['mobile'], {}, (err, values) => {
+      if (!err) {
+        let count = 59;
+        this.setState({ count });
+        this.interval = setInterval(() => {
+          count -= 1;
+          this.setState({ count });
+          if (count === 0) {
+            clearInterval(this.interval);
+          }
+        }, 1000);
+        this.getCaptcha(values);
       }
-    }, 1000);
-    this.getCaptcha();
+    });
   };
 
   getPasswordStatus = () => {
@@ -112,7 +109,7 @@ class ChangePassword extends Component {
     form.validateFields({ force: true }, (err, values) => {
       if (!err) {
         dispatch({
-          type: 'register/submit',
+          type: 'password/change',
           payload: {
             ...values,
           },
@@ -182,20 +179,13 @@ class ChangePassword extends Component {
     ) : null;
   };
 
-  renderMessage = content => (
-    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
-  );
-
   render() {
     const { form, submitting } = this.props;
     const { getFieldDecorator } = form;
     const { count, help, visible } = this.state;
     return (
       <div className={styles.main}>
-        <h3>
-          <FormattedMessage id="app.register.register" />
-        </h3>
-        {false && this.renderMessage('手机已被使用')}
+        <h3>修改密码</h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <InputGroup compact>

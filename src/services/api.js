@@ -117,6 +117,13 @@ export async function fakeRegister(params) {
   });
 }
 
+export async function fakePasswordChange(params) {
+  return request('/interface/user/change/password', {
+    method: 'POST',
+    body: params,
+  });
+}
+
 export async function queryNotices() {
   return request('/api/notices');
 }

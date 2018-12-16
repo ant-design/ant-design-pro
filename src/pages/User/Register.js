@@ -47,15 +47,14 @@ class Register extends Component {
   };
 
   componentDidUpdate() {
-    const { form, register } = this.props;
-    const account = form.getFieldValue('mail');
-    if (register.status === 'ok') {
-      router.push({
-        pathname: '/user/register-result',
-        state: {
-          account,
-        },
-      });
+    const { register } = this.props;
+    if (register.status === '__OK__') {
+      register.status = undefined;
+      setTimeout(() => {
+        router.push({
+          pathname: '/user/login',
+        });
+      }, 1000);
     }
   }
 
@@ -63,35 +62,33 @@ class Register extends Component {
     clearInterval(this.interval);
   }
 
-  getCaptcha = () =>
+  getCaptcha = values =>
     new Promise((resolve, reject) => {
-      const { form } = this.props;
-      form.validateFields(['mobile'], {}, (err, values) => {
-        if (err) {
-          reject(err);
-        } else {
-          const { dispatch } = this.props;
-          dispatch({
-            type: 'login/getCaptcha',
-            payload: values.mobile,
-          })
-            .then(resolve)
-            .catch(reject);
-        }
-      });
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'login/getCaptcha',
+        payload: values.mobile,
+      })
+        .then(resolve)
+        .catch(reject);
     });
 
   onGetCaptcha = () => {
-    let count = 59;
-    this.setState({ count });
-    this.interval = setInterval(() => {
-      count -= 1;
-      this.setState({ count });
-      if (count === 0) {
-        clearInterval(this.interval);
+    const { form } = this.props;
+    form.validateFields(['mobile'], {}, (err, values) => {
+      if (!err) {
+        let count = 59;
+        this.setState({ count });
+        this.interval = setInterval(() => {
+          count -= 1;
+          this.setState({ count });
+          if (count === 0) {
+            clearInterval(this.interval);
+          }
+        }, 1000);
+        this.getCaptcha(values);
       }
-    }, 1000);
-    this.getCaptcha();
+    });
   };
 
   getPasswordStatus = () => {
