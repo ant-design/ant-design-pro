@@ -3,6 +3,7 @@ import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
 import { isAntdPro } from './utils';
+import { getAccessToken } from '@/utils/authority';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -56,6 +57,13 @@ const cachedSave = (response, hashcode) => {
   return response;
 };
 
+const accessTokenCheck = response => {
+  if (response.status === '__TOKEN_ERROR__') {
+    router.push('/user/login');
+  }
+  return response;
+};
+
 /**
  * Requests a URL, returning a promise.
  *
@@ -66,6 +74,7 @@ const cachedSave = (response, hashcode) => {
 export default function request(url, option) {
   const options = {
     expirys: isAntdPro(),
+    access_token: getAccessToken(),
     ...option,
   };
   /**
@@ -129,6 +138,7 @@ export default function request(url, option) {
       }
       return response.json();
     })
+    .then(response => accessTokenCheck(response))
     .catch(e => {
       const status = e.name;
       if (status === 401) {

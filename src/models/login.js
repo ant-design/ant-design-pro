@@ -1,7 +1,7 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
-import { setAuthority } from '@/utils/authority';
+import { setAuthority, setAccessToken, clearAccessToken } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
 
@@ -53,6 +53,7 @@ export default {
           currentAuthority: 'guest',
         },
       });
+      clearAccessToken();
       reloadAuthorized();
       yield put(
         routerRedux.push({
@@ -68,6 +69,9 @@ export default {
   reducers: {
     changeLoginStatus(state, { payload }) {
       setAuthority('user');
+      if (payload.status === '__OK__') {
+        setAccessToken(payload.access_token);
+      }
       return {
         ...state,
         status: payload.status,
