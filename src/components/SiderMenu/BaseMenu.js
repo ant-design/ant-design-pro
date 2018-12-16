@@ -24,7 +24,6 @@ const getIcon = icon => {
 };
 
 export default class BaseMenu extends PureComponent {
-
   /**
    * 获得菜单子节点
    * @memberof SiderMenu
