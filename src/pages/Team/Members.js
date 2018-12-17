@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
-import moment from 'moment';
 import { connect } from 'dva';
 import { Card, Avatar, Popover, Button, Icon, List } from 'antd';
 import { linkCopyToClipboard } from '@/utils/utils';
 
 import styles from './Members.less';
 
-@connect(({ activities, loading }) => ({
-  activities,
-  activitiesLoading: loading.effects['activities/fetchList'],
+@connect(({ team, loading }) => ({
+  team,
+  teamLoading: loading.effects['team/members'],
 }))
 class Members extends PureComponent {
   state = {
@@ -18,7 +17,7 @@ class Members extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'activities/fetchList',
+      type: 'team/members',
     });
   }
 
@@ -62,30 +61,26 @@ class Members extends PureComponent {
 
   renderActivities() {
     const {
-      activities: { list },
+      team: { members },
     } = this.props;
 
-    return list.map(item => (
-      <List.Item key={item.id}>
+    return members.map(item => (
+      <List.Item key={item.user_id}>
         <List.Item.Meta
-          avatar={<Avatar src={item.user.avatar} />}
+          avatar={<Avatar src={item.avatar} />}
           title={
             <span>
-              <a className={styles.username}>{item.user.name}</a>
+              <a className={styles.username}>{item.name}</a>
             </span>
           }
-          description={
-            <span className={styles.membertype} title={item.updatedAt}>
-              {moment(item.updatedAt).fromNow()}
-            </span>
-          }
+          description={<span className={styles.membertype}>{item.team_role_desc}</span>}
         />
       </List.Item>
     ));
   }
 
   render() {
-    const { activitiesLoading } = this.props;
+    const { teamLoading } = this.props;
 
     return (
       <div className={styles.membersList}>
@@ -95,9 +90,9 @@ class Members extends PureComponent {
           className={styles.activeCard}
           extra={this.memberInvite()}
           title="易崛企（共1人）"
-          loading={activitiesLoading}
+          loading={teamLoading}
         >
-          <List loading={activitiesLoading} size="large">
+          <List loading={teamLoading} size="large">
             <div className={styles.activitiesList}>{this.renderActivities()}</div>
           </List>
         </Card>

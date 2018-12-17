@@ -107,6 +107,13 @@ export async function fakeTeamList() {
   return request('/interface/team/user-teams');
 }
 
+export async function fakeTeamMembers(params) {
+  return request('/interface/team/members', {
+    method: 'POST',
+    body: params,
+  });
+}
+
 export async function fakeTeamCreate(params) {
   return request('/interface/team/create', {
     method: 'POST',
