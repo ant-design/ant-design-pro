@@ -1,4 +1,9 @@
-import { fakeTeamCreate, fakeTeamList, fakeTeamMembers } from '@/services/api';
+import {
+  fakeTeamCreate,
+  fakeTeamList,
+  fakeTeamMembers,
+  fakeTeamMembersInvite,
+} from '@/services/api';
 import router from 'umi/router';
 import { currentTeamSet, currentTeamGet } from '@/utils/team';
 
@@ -6,8 +11,11 @@ export default {
   namespace: 'team',
 
   state: {
+    total: 0,
     list: [],
     members: [],
+    inviteToken: '',
+    status: '',
   },
 
   effects: {
@@ -32,7 +40,16 @@ export default {
       });
       yield put({
         type: 'queryMembers',
-        payload: Array.isArray(response.members) ? response.members : [],
+        payload: response,
+      });
+    },
+    *memberInvite(_, { call, put }) {
+      const response = yield call(fakeTeamMembersInvite, {
+        team_id: currentTeamGet(),
+      });
+      yield put({
+        type: 'memberInviteLink',
+        payload: response,
       });
     },
     *select({ payload }) {
@@ -51,7 +68,15 @@ export default {
     queryMembers(state, action) {
       return {
         ...state,
-        members: action.payload,
+        members: Array.isArray(action.payload.members) ? action.payload.members : [],
+        total: action.payload.total,
+      };
+    },
+    memberInviteLink(state, action) {
+      return {
+        ...state,
+        inviteToken: action.payload.invite_token ? action.payload.invite_token : '',
+        status: action.payload.status,
       };
     },
   },

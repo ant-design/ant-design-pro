@@ -8,6 +8,7 @@ import styles from './Members.less';
 @connect(({ team, loading }) => ({
   team,
   teamLoading: loading.effects['team/members'],
+  linkLoading: loading.effects['team/membersInvite'],
 }))
 class Members extends PureComponent {
   state = {
@@ -19,30 +20,44 @@ class Members extends PureComponent {
     dispatch({
       type: 'team/members',
     });
+    dispatch({
+      type: 'team/memberInvite',
+    });
   }
 
   handleVisibleChange = visible => {
     this.setState({ visible });
   };
 
-  handleInviteLinkCreate = () => {
-    linkCopyToClipboard('link copy success.');
+  handleInviteLinkCreate = link => {
+    linkCopyToClipboard(link);
   };
 
   memberInvite() {
     const { visible } = this.state;
+    const {
+      team: { inviteToken, status },
+    } = this.props;
+    const domain = window.location.host;
+    const uri = '/user/join?invite=';
 
-    return (
+    return status === '__OK__' ? (
       <Popover
         placement="bottom"
         content={
-          <div>
+          <div className={styles.inviteLink}>
             <p>
               将下面都链接发送给你想要邀请的人，任何点开该链接的人都可以申请加入团队。
               <br />
-              https://abc.com?invite=sbdk12dasdj
+              {`${domain}${uri}${inviteToken}`}
             </p>
-            <Button onClick={this.handleInviteLinkCreate} type="primary" block>
+            <Button
+              onClick={() => {
+                this.handleInviteLinkCreate(`${domain}${uri}${inviteToken}`);
+              }}
+              type="primary"
+              block
+            >
               复制链接
             </Button>
           </div>
@@ -56,6 +71,8 @@ class Members extends PureComponent {
           <Icon type="plus" /> 邀请成员
         </Button>
       </Popover>
+    ) : (
+      <div />
     );
   }
 
@@ -80,7 +97,10 @@ class Members extends PureComponent {
   }
 
   render() {
-    const { teamLoading } = this.props;
+    const {
+      team: { total },
+      teamLoading,
+    } = this.props;
 
     return (
       <div className={styles.membersList}>
@@ -89,7 +109,7 @@ class Members extends PureComponent {
           bordered={false}
           className={styles.activeCard}
           extra={this.memberInvite()}
-          title="易崛企（共1人）"
+          title={`共${total}人`}
           loading={teamLoading}
         >
           <List loading={teamLoading} size="large">
