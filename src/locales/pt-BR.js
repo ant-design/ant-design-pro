@@ -1,4 +1,3 @@
-
 import globalHeader from './pt-BR/globalHeader';
 import menu from './pt-BR/menu';
 import settingDrawer from './pt-BR/settingDrawer';

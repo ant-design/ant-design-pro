@@ -4,7 +4,6 @@
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
-    "presite": "node ./scripts/generateMock.js && cd functions && npm install",
     "start": "cross-env APP_TYPE=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "dev": "cross-env APP_TYPE=site umi dev",
@@ -22,14 +21,7 @@
     "test": "umi test",
     "test:component": "umi test ./src/components",
     "test:all": "node ./tests/run-tests.js",
-    "prettier": "node ./scripts/prettier.js",
-    "docker:dev": "docker-compose -f ./docker/docker-compose.dev.yml up",
-    "docker:build": "docker-compose -f ./docker/docker-compose.dev.yml build",
-    "docker-prod:dev": "docker-compose -f ./docker/docker-compose.yml up",
-    "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
-    "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
-    "docker:tag": "docker tag ant-design-pro chenshuai2144/ant-design-pro",
-    "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push chenshuai2144/ant-design-pro"
+    "prettier": "node ./scripts/prettier.js"
   },
   "dependencies": {
     "@antv/data-set": "^0.10.0",
