@@ -3,7 +3,7 @@ import { NumberInfo, Charts } from 'ant-design-pro';
 
 import styles from './index.less';
 
-const { MiniArea } =  Charts;
+const { MiniArea } = Charts;
 
 function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;
