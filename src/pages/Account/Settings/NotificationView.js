@@ -13,18 +13,18 @@ class NotificationView extends Component {
     );
     return [
       {
-        title: formatMessage({ id: 'app.settings.notification.password' }, {}),
-        description: formatMessage({ id: 'app.settings.notification.password-description' }, {}),
+        title: '邮件提醒',
+        description: '在任务开始和延期时发邮件提醒',
         actions: [Action],
       },
       {
-        title: formatMessage({ id: 'app.settings.notification.messages' }, {}),
-        description: formatMessage({ id: 'app.settings.notification.messages-description' }, {}),
+        title: '每天一封邮件',
+        description: '每天发一封您当天待办任务',
         actions: [Action],
       },
       {
-        title: formatMessage({ id: 'app.settings.notification.todo' }, {}),
-        description: formatMessage({ id: 'app.settings.notification.todo-description' }, {}),
+        title: '其它设置',
+        description: '其它设置描述',
         actions: [Action],
       },
     ];

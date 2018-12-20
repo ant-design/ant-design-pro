@@ -2,6 +2,7 @@ import {
   fakeTeamCreate,
   fakeTeamList,
   fakeTeamMembers,
+  fakeTeamMemberJoin,
   fakeTeamMembersInvite,
 } from '@/services/api';
 import router from 'umi/router';
@@ -16,6 +17,8 @@ export default {
     members: [],
     inviteToken: '',
     status: '',
+    joinInfo: '',
+    joinStatus: '',
   },
 
   effects: {
@@ -56,6 +59,13 @@ export default {
       currentTeamSet(payload.team_id);
       yield router.push('/');
     },
+    *join({ payload }, { call, put }) {
+      const response = yield call(fakeTeamMemberJoin, payload);
+      yield put({
+        type: 'memberJoin',
+        payload: response,
+      });
+    },
   },
 
   reducers: {
@@ -77,6 +87,13 @@ export default {
         ...state,
         inviteToken: action.payload.invite_token ? action.payload.invite_token : '',
         status: action.payload.status,
+      };
+    },
+    memberJoin(state, action) {
+      return {
+        ...state,
+        joinInfo: action.payload.info,
+        joinStatus: action.payload.status,
       };
     },
   },

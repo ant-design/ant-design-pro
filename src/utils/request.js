@@ -59,7 +59,10 @@ const cachedSave = (response, hashcode) => {
 
 const accessTokenCheck = response => {
   if (response.status === '__TOKEN_ERROR__') {
-    router.push('/user/login');
+    /* eslint-disable no-underscore-dangle */
+    window.g_app._store.dispatch({
+      type: 'login/logout',
+    });
   }
   return response;
 };

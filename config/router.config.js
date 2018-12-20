@@ -253,10 +253,6 @@ export default [
                 component: './Account/Settings/SecurityView',
               },
               {
-                path: '/account/settings/binding',
-                component: './Account/Settings/BindingView',
-              },
-              {
                 path: '/account/settings/notification',
                 component: './Account/Settings/NotificationView',
               },
