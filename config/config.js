@@ -23,6 +23,15 @@ export default {
         },
       },
     ],
+    [
+      'umi-plugin-pro-block',
+      {
+        moveMock: false,
+        moveService: false,
+        modifyRequest: true,
+        autoAddMenu: true,
+      },
+    ],
   ],
   targets: {
     ie: 11,
