@@ -20,8 +20,6 @@ import styles from './BasicLayout.less';
 
 const { Content } = Layout;
 
-const Exception403 = <p>Exception403</p>;
-
 const query = {
   'screen-xs': {
     maxWidth: 575,
@@ -183,7 +181,7 @@ class BasicLayout extends React.PureComponent {
             {...this.props}
           />
           <Content className={styles.content} style={contentStyle}>
-            <Authorized authority={routerConfig} noMatch={<Exception403 />}>
+            <Authorized authority={routerConfig} noMatch={<p>Exception403</p>}>
               {children}
             </Authorized>
           </Content>
