@@ -4,7 +4,6 @@
  */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
-import router from 'umi/router';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -36,24 +35,6 @@ const errorHandler = error => {
     message: `请求错误 ${status}: ${url}`,
     description: errortext,
   });
-
-  if (status === 401) {
-    notification.error({
-      message: '未登录或登录已过期，请重新登录。',
-    });
-  }
-  // environment should not be used
-  if (status === 403) {
-    router.push('/exception/403');
-    return;
-  }
-  if (status <= 504 && status >= 500) {
-    router.push('/exception/500');
-    return;
-  }
-  if (status >= 404 && status < 422) {
-    router.push('/exception/404');
-  }
 };
 
 /**
