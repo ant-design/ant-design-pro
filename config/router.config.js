@@ -42,7 +42,7 @@ export default [
         path: '/members',
         name: 'members',
         icon: 'team',
-        component: './Team/members',
+        component: './Team/Members',
       },
       // forms
       {
