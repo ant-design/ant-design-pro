@@ -60,7 +60,7 @@ export default {
         },
         {
           path: 'https://github.com/umijs/umi-blocks/tree/master/ant-design-pro',
-          name: '更多页面',
+          name: 'more-blocks',
           icon: 'block',
         },
       ],
