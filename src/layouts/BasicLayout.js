@@ -107,7 +107,7 @@ class BasicLayout extends React.PureComponent {
         }
         return route;
       });
-       return routeAuthority;
+      return routeAuthority;
     };
     return getAuthority(pathname, routeData);
   };
