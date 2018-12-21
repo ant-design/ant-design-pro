@@ -150,6 +150,7 @@ export default function request(url, option) {
       }
       else if (status >= 404 && status < 422) {
         router.push('/exception/404');
+        return;
       } else {
         router.push('/login');
         return;
