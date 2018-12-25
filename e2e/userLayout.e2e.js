@@ -1,4 +1,6 @@
-import RouterConfig from '../../config/router.config';
+import config from '../config/config';
+
+const RouterConfig = config.routes;
 
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 
