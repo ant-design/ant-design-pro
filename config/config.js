@@ -43,8 +43,8 @@ export default {
   routes: [
     {
       path: '/user',
-      components: ['../layouts/UserLayout'],
-      routes: [],
+      component: '../layouts/UserLayout',
+      routes: [{ path: '/user', component: './Welcome' }],
     },
     {
       path: '/',
