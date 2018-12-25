@@ -31,6 +31,9 @@ describe('Homepage', async () => {
   });
   const routers = formatter(RouterConfig[1].routes);
   routers.forEach(route => {
+    if (/^https?:\/\//.test(route)) {
+      return;
+    }
     fit(`test pages ${route}`, testPage(route));
   });
 });
