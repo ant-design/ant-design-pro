@@ -1,4 +1,6 @@
-import RouterConfig from '../../config/router.config';
+import config from '../config/config';
+
+const RouterConfig = config.routes;
 
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 
@@ -11,7 +13,7 @@ function formatter(data) {
     .filter(item => item);
 }
 
-describe('Homepage', async () => {
+describe('Homepage', () => {
   const testPage = path => async () => {
     await page.goto(`${BASE_URL}${path}`);
     await page.waitForSelector('footer', {
@@ -25,10 +27,8 @@ describe('Homepage', async () => {
 
   beforeAll(async () => {
     jest.setTimeout(1000000);
-    await page.setCacheEnabled(false);
   });
-  const routers = formatter(RouterConfig[1].routes);
-  routers.forEach(route => {
+  formatter(RouterConfig[0].routes).forEach(route => {
     it(`test pages ${route}`, testPage(route));
   });
 });
