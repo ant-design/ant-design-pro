@@ -28,7 +28,7 @@ export default {
       const state1 = state;
       state1.mutiData[action.key] = action.payload;
       return {
-        ...state,
+        ...state1,
         process: 'reducers',
       };
     },
