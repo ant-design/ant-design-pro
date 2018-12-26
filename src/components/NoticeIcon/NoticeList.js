@@ -13,6 +13,7 @@ export default function NoticeList({
   emptyImage,
   loading,
   onLoadMore,
+  loadedAll = true,
   loadMoreCount = 5,
   showClear = true,
   skeletonProps = {},
@@ -25,12 +26,17 @@ export default function NoticeList({
       </div>
     );
   }
-  const loadingList = !loading
-    ? []
-    : Array.from({ length: loadMoreCount }).map(() => ({ loading }));
+  const loadingList = Array.from({ length: loading ? loadMoreCount : 0 }).map(() => ({ loading }));
+  const LoadMore = (
+    <div style={{ margin: '8px 0 20px 0', textAlign: 'center' }}>
+      {loadedAll
+        ? <span style={{ color: '#bfbfbf' }}>{locale.loadedAll}</span>
+        : <a onClick={onLoadMore}>{locale.loadMore}</a>}
+    </div>
+  );
   return (
     <div>
-      <List className={styles.list} loadMore={<a onClick={onLoadMore}>a</a>}>
+      <List className={styles.list} loadMore={LoadMore}>
         {[...data, ...loadingList].map((item, i) => {
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,
@@ -40,8 +46,8 @@ export default function NoticeList({
             typeof item.avatar === 'string' ? (
               <Avatar className={styles.avatar} src={item.avatar} />
             ) : (
-              item.avatar
-            )
+                item.avatar
+              )
           ) : null;
 
           return (

@@ -21,6 +21,8 @@ export default class NoticeIcon extends PureComponent {
     locale: {
       emptyText: 'No notifications',
       clear: 'Clear',
+      loadedAll: 'Loaded',
+      loadMore: 'Loading more',
     },
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
@@ -67,9 +69,9 @@ export default class NoticeIcon extends PureComponent {
         title,
         name,
         count,
-        loaded,
+        loadedAll,
         loadMoreCount,
-        SkeletonProps,
+        skeletonProps,
         loading: tabLoading,
       } = child.props;
       const len = list && list.length ? list.length : 0;
@@ -85,10 +87,10 @@ export default class NoticeIcon extends PureComponent {
             onLoadMore={() => this.onLoadMore(child.props)}
             title={title}
             locale={locale}
-            loaded={loaded}
+            loadedAll={loadedAll}
             loading={tabLoading}
             loadMoreCount={loadMoreCount}
-            SkeletonProps={SkeletonProps}
+            skeletonProps={skeletonProps}
           />
         </TabPane>
       );
