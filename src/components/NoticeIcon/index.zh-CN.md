@@ -19,19 +19,25 @@ onItemClick | 点击列表项的回调 | function(item, tabProps) | -
 onTabChange | 切换页签的回调 | function(tabTitle) | -
 onPopupVisibleChange | 弹出卡片显隐的回调 | function(visible) | -
 popupVisible | 控制弹层显隐 | boolean | -
-locale | 默认文案 | Object | `{ emptyText: '暂无数据', clear: '清空' }`
+locale | Default message text | Object | `{ emptyText: 'No notifications', clear: 'Clear', loadedAll: 'Loaded', loadMore: 'Loading more' }`
 clearClose | 点击清空按钮后关闭通知菜单 | boolean | false
 
 ### NoticeIcon.Tab
 
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
-title | 消息分类的页签标题 | string | -
-name | 消息分类的标识符 | string | -
-list | 列表数据，格式参照下表 | Array | `[]`
-showClear | 是否显示清空按钮 | boolean | true
+count | 当前 Tab 未读消息数量 | number | list.length
 emptyText | 针对每个 Tab 定制空数据文案 | ReactNode | -
 emptyImage | 针对每个 Tab 定制空数据图片 | string | -
+list | 列表数据，格式参照下表 | Array | `[]`
+loadedAll | 已加载完所有消息 | boolean | true
+loading | 当前 Tab 的加载状态 | boolean | false
+loadMoreCount | 加载时占位骨架的数量 | number | `5`
+name | 消息分类的标识符 | string | -
+onLoadMore | 加载更多的回调 | function(tabProps) | -
+skeletonProps | 加载时占位骨架的属性 | SkeletonProps | `{}`
+showClear | 是否显示清空按钮 | boolean | true
+title | 消息分类的页签标题 | string | -
 
 
 ### Tab data
