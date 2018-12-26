@@ -136,6 +136,8 @@ export default class GlobalHeaderRight extends PureComponent {
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
             clear: formatMessage({ id: 'component.noticeIcon.clear' }),
+            loadedAll: formatMessage({ id: 'component.noticeIcon.loaded' }),
+            loadMore: formatMessage({ id: 'component.noticeIcon.loading-more' }),
           }}
           onClear={onNoticeClear}
           onPopupVisibleChange={onNoticeVisibleChange}
