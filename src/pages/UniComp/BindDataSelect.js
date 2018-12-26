@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react';
 import { Select } from 'antd';
 import { connect } from 'dva';
 
-const { Option } = Select;
-
 @connect(({ componentModel, loading }) => ({
   componentModel,
   loading: loading.models.componentModel,
@@ -11,7 +9,6 @@ const { Option } = Select;
 class BindDataSelect extends PureComponent {
   state = {
     uniList: [],
-    value: '',
   };
 
   // componentWillMount() {
@@ -44,36 +41,8 @@ class BindDataSelect extends PureComponent {
     });
   };
 
-  handleChange = value => {
-    this.setState({ value });
-    const { onChange } = this.props;
-    if (onChange) {
-      onChange(value);
-    }
-  };
-
   render() {
-    const {
-      componentModel: { mutiData },
-      showId,
-      tableName,
-      tableKey,
-      tableTitle,
-      value,
-    } = this.props;
-    this.state.value = value;
-    const uniList = mutiData[tableName] ? mutiData[tableName].list : [];
-    this.state.uniList = uniList;
-    const options = uniList.map(d => (
-      <Option
-        value={showId ? `${d[tableKey]}:${d[tableTitle]}` : d[tableKey]}
-        key={showId ? `${d[tableKey]}:${d[tableTitle]}` : d[tableKey]}
-      >
-        {showId ? `${d[tableKey]}:${d[tableTitle]}` : d[tableTitle]}
-      </Option>
-    ));
-
-    return <Select>{options}</Select>;
+    return <Select />;
   }
 }
 export default BindDataSelect;
