@@ -51,13 +51,27 @@ export default class NoticeIcon extends PureComponent {
     onTabChange(tabType);
   };
 
+  onLoadMore = tabProps => {
+    const { onLoadMore } = this.props;
+    onLoadMore(tabProps);
+  };
+
   getNotificationBox() {
     const { children, loading, locale } = this.props;
     if (!children) {
       return null;
     }
     const panes = React.Children.map(children, child => {
-      const { list, title, name, count } = child.props;
+      const {
+        list,
+        title,
+        name,
+        count,
+        loaded,
+        loadMoreCount,
+        SkeletonProps,
+        loading: tabLoading,
+      } = child.props;
       const len = list && list.length ? list.length : 0;
       const msgCount = count || count === 0 ? count : len;
       const tabTitle = msgCount > 0 ? `${title} (${msgCount})` : title;
@@ -68,8 +82,13 @@ export default class NoticeIcon extends PureComponent {
             data={list}
             onClick={item => this.onItemClick(item, child.props)}
             onClear={() => this.onClear(name)}
+            onLoadMore={() => this.onLoadMore(child.props)}
             title={title}
             locale={locale}
+            loaded={loaded}
+            loading={tabLoading}
+            loadMoreCount={loadMoreCount}
+            SkeletonProps={SkeletonProps}
           />
         </TabPane>
       );
