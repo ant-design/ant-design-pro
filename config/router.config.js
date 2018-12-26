@@ -43,6 +43,50 @@ export default [
       },
       // list
       {
+        path: '/apiGateway',
+        icon: 'table',
+        name: 'apiGateway',
+        routes: [
+          {
+            path: '/apiGateway/apiList',
+            name: 'apiList',
+            component: './ApiGateway/ApiList',
+          },
+          {
+            path: '/apiGateway/apiCreate',
+            name: 'apiCreate',
+            component: './ApiGateway/ApiCreate',
+            hideChildrenInMenu: true,
+            routes: [
+              {
+                path: '/apiGateway/apiCreate',
+                redirect: '/apiGateway/apiCreate/info',
+              },
+              {
+                path: '/apiGateway/apiCreate/info',
+                name: 'info',
+                component: './ApiGateway/ApiCreate/Step1',
+              },
+              {
+                path: '/apiGateway/apiCreate/consumer',
+                name: 'consumer',
+                component: './ApiGateway/ApiCreate/Step2',
+              },
+              {
+                path: '/apiGateway/apiCreate/producer',
+                name: 'producer',
+                component: './ApiGateway/ApiCreate/Step3',
+              },
+              {
+                path: '/apiGateway/apiCreate/result',
+                name: 'result',
+                component: './ApiGateway/ApiCreate/Step4',
+              },
+            ],
+          },
+        ],
+      },
+      {
         path: '/uniComp',
         icon: 'table',
         name: 'uniComp',
