@@ -26,12 +26,12 @@ export default {
       console.log('postinfo response add:', response);
       if (callback) callback(response);
     },
-    *remove({ payload, callback }, { call, put }) {
+    *remove({ payload, callback }, { call }) {
       const response = yield call(remove, payload);
-      yield put({
-        type: 'save',
-        payload: response,
-      });
+      // yield put({
+      //   type: 'save',
+      //   payload: response,
+      // });
       if (callback) callback(response);
     },
   },
