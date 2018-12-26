@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, List } from 'antd';
+import { Avatar, List, Skeleton } from 'antd';
 import classNames from 'classnames';
 import styles from './NoticeList.less';
 
@@ -11,7 +11,11 @@ export default function NoticeList({
   locale,
   emptyText,
   emptyImage,
+  loading,
+  onLoadMore,
+  loadMoreCount = 5,
   showClear = true,
+  skeletonProps = {},
 }) {
   if (data.length === 0) {
     return (
@@ -21,10 +25,13 @@ export default function NoticeList({
       </div>
     );
   }
+  const loadingList = !loading
+    ? []
+    : Array.from({ length: loadMoreCount }).map(() => ({ loading }));
   return (
     <div>
-      <List className={styles.list}>
-        {data.map((item, i) => {
+      <List className={styles.list} loadMore={<a onClick={onLoadMore}>a</a>}>
+        {[...data, ...loadingList].map((item, i) => {
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,
           });
@@ -39,24 +46,26 @@ export default function NoticeList({
 
           return (
             <List.Item className={itemCls} key={item.key || i} onClick={() => onClick(item)}>
-              <List.Item.Meta
-                className={styles.meta}
-                avatar={<span className={styles.iconElement}>{leftIcon}</span>}
-                title={
-                  <div className={styles.title}>
-                    {item.title}
-                    <div className={styles.extra}>{item.extra}</div>
-                  </div>
-                }
-                description={
-                  <div>
-                    <div className={styles.description} title={item.description}>
-                      {item.description}
+              <Skeleton avatar title={false} active {...skeletonProps} loading={item.loading}>
+                <List.Item.Meta
+                  className={styles.meta}
+                  avatar={<span className={styles.iconElement}>{leftIcon}</span>}
+                  title={
+                    <div className={styles.title}>
+                      {item.title}
+                      <div className={styles.extra}>{item.extra}</div>
                     </div>
-                    <div className={styles.datetime}>{item.datetime}</div>
-                  </div>
-                }
-              />
+                  }
+                  description={
+                    <div>
+                      <div className={styles.description} title={item.description}>
+                        {item.description}
+                      </div>
+                      <div className={styles.datetime}>{item.datetime}</div>
+                    </div>
+                  }
+                />
+              </Skeleton>
             </List.Item>
           );
         })}
