@@ -18,12 +18,12 @@ export interface INoticeIconTabProps {
   list?: INoticeIconData[];
   loadedAll?: boolean;
   loading?: boolean;
-  loadMoreCount?: number;
   name?: string;
   onLoadMore?: (tabProps: INoticeIconProps) => void;
+  showClear?: boolean;
+  skeletonCount?: number;
   skeletonProps: SkeletonProps;
   style?: React.CSSProperties;
-  showClear?: boolean;
   title?: string;
 }
 

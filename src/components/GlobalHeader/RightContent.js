@@ -78,10 +78,10 @@ export default class GlobalHeaderRight extends PureComponent {
       fetchingMoreNotices,
       fetchingNotices,
       loadedAllNotices,
-      loadMoreCount,
       onNoticeVisibleChange,
       onMenuClick,
       onNoticeClear,
+      skeletonCount,
       theme,
     } = this.props;
     const menu = (
@@ -106,7 +106,7 @@ export default class GlobalHeaderRight extends PureComponent {
       </Menu>
     );
     const loadMoreProps = {
-      loadMoreCount,
+      skeletonCount,
       loadedAll: loadedAllNotices,
       loading: fetchingMoreNotices,
     };

@@ -32,7 +32,7 @@ emptyImage | 针对每个 Tab 定制空数据图片 | string | -
 list | 列表数据，格式参照下表 | Array | `[]`
 loadedAll | 已加载完所有消息 | boolean | true
 loading | 当前 Tab 的加载状态 | boolean | false
-loadMoreCount | 加载时占位骨架的数量 | number | `5`
+skeletonCount | 加载时占位骨架的数量 | number | `5`
 name | 消息分类的标识符 | string | -
 onLoadMore | 加载更多的回调 | function(tabProps) | -
 skeletonProps | 加载时占位骨架的属性 | SkeletonProps | `{}`
