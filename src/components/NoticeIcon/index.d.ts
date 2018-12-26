@@ -12,7 +12,12 @@ export interface INoticeIconProps {
   style?: React.CSSProperties;
   onPopupVisibleChange?: (visible: boolean) => void;
   popupVisible?: boolean;
-  locale?: { emptyText: string; clear: string };
+  locale?: {
+    emptyText: string;
+    clear: string;
+    loadedAll: string;
+    loadMore: string;
+  };
   clearClose?: boolean;
 }
 

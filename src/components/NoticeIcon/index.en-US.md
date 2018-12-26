@@ -19,7 +19,8 @@ onItemClick | Click on the list item's callback | function(item, tabProps) | -
 onTabChange | Switching callbacks for tabs | function(tabTitle) | -
 onPopupVisibleChange | Popup Card Showing or Hiding Callbacks | function(visible) | -
 popupVisible | Popup card display state | boolean | -
-locale | Default message text | Object | `{ emptyText: '暂无数据', clear: '清空' }`
+locale | Default message text | Object | `{ emptyText: 'No notifications', clear: 'Clear', loadedAll: 'Loaded', loadMore: 'Loading more' }`
+clearClose | Close menu after clear | boolean | false
 
 ### NoticeIcon.Tab
 

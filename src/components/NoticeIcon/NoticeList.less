@@ -3,6 +3,9 @@
 .list {
   max-height: 400px;
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .item {
     transition: all 0.3s;
     overflow: hidden;
