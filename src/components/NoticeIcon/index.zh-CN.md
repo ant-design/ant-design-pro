@@ -16,8 +16,9 @@ bell | translate this please -> Change the bell Icon | ReactNode | `<Icon type='
 loading | 弹出卡片加载状态 | boolean | false
 onClear | 点击清空按钮的回调 | function(tabName) | -
 onItemClick | 点击列表项的回调 | function(item, tabProps) | -
-onTabChange | 切换页签的回调 | function(tabTitle) | -
+onLoadMore | 加载更多的回调 | function(tabProps) | -
 onPopupVisibleChange | 弹出卡片显隐的回调 | function(visible) | -
+onTabChange | 切换页签的回调 | function(tabTitle) | -
 popupVisible | 控制弹层显隐 | boolean | -
 locale | Default message text | Object | `{ emptyText: 'No notifications', clear: 'Clear', loadedAll: 'Loaded', loadMore: 'Loading more' }`
 clearClose | 点击清空按钮后关闭通知菜单 | boolean | false
@@ -34,7 +35,6 @@ loadedAll | 已加载完所有消息 | boolean | true
 loading | 当前 Tab 的加载状态 | boolean | false
 skeletonCount | 加载时占位骨架的数量 | number | `5`
 name | 消息分类的标识符 | string | -
-onLoadMore | 加载更多的回调 | function(tabProps) | -
 skeletonProps | 加载时占位骨架的属性 | SkeletonProps | `{}`
 showClear | 是否显示清空按钮 | boolean | true
 title | 消息分类的页签标题 | string | -
