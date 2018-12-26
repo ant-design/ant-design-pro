@@ -1,14 +1,9 @@
-import React, { PureComponent } from 'react';
-import { Select } from 'antd';
-import { connect } from 'dva';
+import React from 'react';
+import { Button } from 'antd';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
-@connect(({ componentModel, loading }) => ({
-  componentModel,
-  loading: loading.models.componentModel,
-}))
-class BindDataSelect extends PureComponent {
-  render() {
-    return <Select />;
-  }
-}
-export default BindDataSelect;
+export default () => (
+  <PageHeaderWrapper title="接入系统管理">
+    <Button>d</Button>
+  </PageHeaderWrapper>
+);
