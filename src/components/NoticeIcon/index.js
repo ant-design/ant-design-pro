@@ -70,7 +70,7 @@ export default class NoticeIcon extends PureComponent {
         name,
         count,
         loadedAll,
-        loadMoreCount,
+        skeletonCount,
         skeletonProps,
         loading: tabLoading,
       } = child.props;
@@ -89,7 +89,7 @@ export default class NoticeIcon extends PureComponent {
             locale={locale}
             loadedAll={loadedAll}
             loading={tabLoading}
-            loadMoreCount={loadMoreCount}
+            skeletonCount={skeletonCount}
             skeletonProps={skeletonProps}
           />
         </TabPane>

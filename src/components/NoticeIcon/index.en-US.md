@@ -26,12 +26,18 @@ clearClose | Close menu after clear | boolean | false
 
 Property | Description | Type | Default
 ----|------|-----|------
-title |  header for message Tab | string | -
-name | identifier for message Tab | string | -
+count | Unread messages count of this tab | number | list.length
+emptyText |  Message text when list is empty  | ReactNode | -
+emptyImage | Image when list is empty  | string | -
 list | List data, format refer to the following table | Array | `[]`
+loadedAll | All messages have been loaded | boolean | true
+loading | Loading status of this tab | boolean | false
+skeletonCount | Number of skeleton when tab is loading | number | `5`
+name | identifier for message Tab | string | -
+onLoadMore | Callback of click for loading more | function(tabProps) | -
+skeletonProps | Props of skeleton | SkeletonProps | `{}`
 showClear | Clear button display status | boolean | true
-emptyText |  message text when list is empty  | ReactNode | -
-emptyImage | image  when list is empty  | string | -
+title |  header for message Tab | string | -
 
 
 ### Tab data

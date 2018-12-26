@@ -14,8 +14,8 @@ export default function NoticeList({
   loading,
   onLoadMore,
   loadedAll = true,
-  loadMoreCount = 5,
   showClear = true,
+  skeletonCount = 5,
   skeletonProps = {},
 }) {
   if (data.length === 0) {
@@ -26,7 +26,7 @@ export default function NoticeList({
       </div>
     );
   }
-  const loadingList = Array.from({ length: loading ? loadMoreCount : 0 }).map(() => ({ loading }));
+  const loadingList = Array.from({ length: loading ? skeletonCount : 0 }).map(() => ({ loading }));
   const LoadMore = loadedAll ? undefined : (
     <div style={{ margin: '8px 0 20px 0', textAlign: 'center' }}>
       <a onClick={onLoadMore}>{locale.loadMore}</a>
