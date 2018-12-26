@@ -73,23 +73,7 @@ class BindDataSelect extends PureComponent {
       </Option>
     ));
 
-    return (
-      <Select
-        showSearch
-        style={{ width: 200 }}
-        placeholder="请输入"
-        optionFilterProp="children"
-        onChange={this.handleChange}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
-        filterOption={(input, option) =>
-          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        value={value}
-      >
-        {options}
-      </Select>
-    );
+    return <Select>{options}</Select>;
   }
 }
 export default BindDataSelect;
