@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { SkeletonProps } from 'antd/lib/skeleton';
-import { INoticeIconProps } from './index';
 
 export interface INoticeIconData {
   avatar?: string | React.ReactNode;
@@ -19,7 +18,6 @@ export interface INoticeIconTabProps {
   loadedAll?: boolean;
   loading?: boolean;
   name?: string;
-  onLoadMore?: (tabProps: INoticeIconProps) => void;
   showClear?: boolean;
   skeletonCount?: number;
   skeletonProps: SkeletonProps;

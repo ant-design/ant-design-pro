@@ -16,8 +16,9 @@ bell | Change the bell Icon | ReactNode | `<Icon type='bell' />`
 loading | Popup card loading status | boolean | false
 onClear | Click to clear button the callback  | function(tabName) | -
 onItemClick | Click on the list item's callback | function(item, tabProps) | -
-onTabChange | Switching callbacks for tabs | function(tabTitle) | -
+onLoadMore | Callback of click for loading more | function(tabProps) | -
 onPopupVisibleChange | Popup Card Showing or Hiding Callbacks | function(visible) | -
+onTabChange | Switching callbacks for tabs | function(tabTitle) | -
 popupVisible | Popup card display state | boolean | -
 locale | Default message text | Object | `{ emptyText: 'No notifications', clear: 'Clear', loadedAll: 'Loaded', loadMore: 'Loading more' }`
 clearClose | Close menu after clear | boolean | false
@@ -34,7 +35,6 @@ loadedAll | All messages have been loaded | boolean | true
 loading | Loading status of this tab | boolean | false
 skeletonCount | Number of skeleton when tab is loading | number | `5`
 name | identifier for message Tab | string | -
-onLoadMore | Callback of click for loading more | function(tabProps) | -
 skeletonProps | Props of skeleton | SkeletonProps | `{}`
 showClear | Clear button display status | boolean | true
 title |  header for message Tab | string | -
