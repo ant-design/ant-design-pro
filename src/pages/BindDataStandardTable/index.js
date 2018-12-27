@@ -43,7 +43,7 @@ const getFormItemArray = (currentProps, type) => {
 };
 const CreateForm = Form.create()(props => {
   const { selectedRow, modalVisible, form, handleAdd, handleModalVisible } = props;
-  console.log('1 selectedRow in CreateForm:', selectedRow);
+  console.log('1 selectedRow in CreateForm :', selectedRow);
   const {
     columnSchemas: { tableName, key, name },
   } = props;
