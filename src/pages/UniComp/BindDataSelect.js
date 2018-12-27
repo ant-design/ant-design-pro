@@ -25,7 +25,9 @@ class BindDataSelect extends PureComponent {
   //   });
   //   this.state.value=this.props.value;
   // }
+
   componentDidMount() {
+    // console.log("componentDidMount");
     // console.log("componentDidMount");
     this.state.uniList = [];
     this.fetchList();
