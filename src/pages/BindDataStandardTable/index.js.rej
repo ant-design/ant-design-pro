@@ -1,0 +1,36 @@
+diff a/src/pages/BindDataStandardTable/index.js b/src/pages/BindDataStandardTable/index.js	(rejected hunks)
+@@ -92 +92 @@ const CreateForm = Form.create()(props => {
+-            ) : (item.tag === 'commonSelect' ? (
++            ) : item.tag === 'commonSelect' ? (
+@@ -102 +102 @@ const CreateForm = Form.create()(props => {
+-            ))
++            )
+@@ -308 +308 @@ class BindDataStandardTable extends PureComponent {
+-    const {expandForm} = this.state;
++    const { expandForm } = this.state;
+@@ -344 +344 @@ class BindDataStandardTable extends PureComponent {
+-    const {expandForm} = this.state;
++    const { expandForm } = this.state;
+@@ -349,5 +349,2 @@ class BindDataStandardTable extends PureComponent {
+-    const {
+-      form,
+-      columnSchemas,
+-    } = this.props;
+-    const { tableName, key, name }=columnSchemas
++    const { form, columnSchemas } = this.props;
++    const { tableName, key, name } = columnSchemas;
+@@ -405,4 +402,2 @@ class BindDataStandardTable extends PureComponent {
+-    const {
+-      columnSchemas,
+-    } = this.props;
+-    const {tableName, key, name}=columnSchemas;
++    const { columnSchemas } = this.props;
++    const { tableName, key, name } = columnSchemas;
+@@ -445 +440 @@ class BindDataStandardTable extends PureComponent {
+-    const {form} = this.props;
++    const { form } = this.props;
+@@ -474,2 +469,2 @@ class BindDataStandardTable extends PureComponent {
+-    const {key} = columnSchemas;
+-    const { selectedRow,selectedRows, modalVisible } = this.state;
++    const { key } = columnSchemas;
++    const { selectedRow, selectedRows, modalVisible } = this.state;
