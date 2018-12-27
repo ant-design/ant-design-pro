@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { SkeletonProps } from 'antd/lib/skeleton';
+import * as React from 'react';
 
 export interface INoticeIconData {
   avatar?: string | React.ReactNode;
