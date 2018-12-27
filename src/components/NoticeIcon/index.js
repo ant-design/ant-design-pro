@@ -12,10 +12,10 @@ export default class NoticeIcon extends PureComponent {
   static Tab = TabPane;
 
   static defaultProps = {
-    onItemClick: () => {},
-    onPopupVisibleChange: () => {},
-    onTabChange: () => {},
-    onClear: () => {},
+    onItemClick: () => { },
+    onPopupVisibleChange: () => { },
+    onTabChange: () => { },
+    onClear: () => { },
     loading: false,
     clearClose: false,
     locale: {
@@ -64,16 +64,7 @@ export default class NoticeIcon extends PureComponent {
       return null;
     }
     const panes = React.Children.map(children, child => {
-      const {
-        list,
-        title,
-        name,
-        count,
-        loadedAll,
-        skeletonCount,
-        skeletonProps,
-        loading: tabLoading,
-      } = child.props;
+      const { list, title, name, count } = child.props;
       const len = list && list.length ? list.length : 0;
       const msgCount = count || count === 0 ? count : len;
       const tabTitle = msgCount > 0 ? `${title} (${msgCount})` : title;
@@ -82,15 +73,10 @@ export default class NoticeIcon extends PureComponent {
           <List
             {...child.props}
             data={list}
+            locale={locale}
             onClick={item => this.onItemClick(item, child.props)}
             onClear={() => this.onClear(name)}
             onLoadMore={() => this.onLoadMore(child.props)}
-            title={title}
-            locale={locale}
-            loadedAll={loadedAll}
-            loading={tabLoading}
-            skeletonCount={skeletonCount}
-            skeletonProps={skeletonProps}
           />
         </TabPane>
       );

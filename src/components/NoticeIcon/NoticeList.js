@@ -44,8 +44,8 @@ export default function NoticeList({
             typeof item.avatar === 'string' ? (
               <Avatar className={styles.avatar} src={item.avatar} />
             ) : (
-                item.avatar
-              )
+              <span className={styles.iconElement}>{item.avatar}</span>
+            )
           ) : null;
 
           return (
@@ -53,7 +53,7 @@ export default function NoticeList({
               <Skeleton avatar title={false} active {...skeletonProps} loading={item.loading}>
                 <List.Item.Meta
                   className={styles.meta}
-                  avatar={<span className={styles.iconElement}>{leftIcon}</span>}
+                  avatar={leftIcon}
                   title={
                     <div className={styles.title}>
                       {item.title}
