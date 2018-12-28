@@ -30,14 +30,15 @@
     "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push chenshuai2144/ant-design-pro"
   },
   "dependencies": {
+    "@antv/data-set": "^0.10.0",
     "@babel/runtime": "^7.1.5",
     "antd": "^3.10.9",
     "bizcharts": "^3.4.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
-    "@antv/data-set": "^0.10.0",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "enquire-js": "^0.2.1",
+    "errlop": "1.0.3",
     "hash.js": "^1.1.5",
     "lodash": "^4.17.10",
     "lodash-decorators": "^6.0.0",
