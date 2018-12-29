@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -18,7 +18,7 @@ jobs:
           command: npm run test:all
           no_output_timeout: 30m
 workflows:
-  version: 2
+  version: 2.1
   build_and_test:
     jobs:
       - build
