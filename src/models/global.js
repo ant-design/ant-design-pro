@@ -124,7 +124,7 @@ export default {
       return {
         ...state,
         loadedAllNotices: payload,
-      }
+      };
     },
   },
 
