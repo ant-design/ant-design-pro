@@ -83,21 +83,19 @@ export default class NoticeIcon extends PureComponent {
       return (
         <TabPane tab={tabTitle} key={name}>
           <List
-            {...{
-              title,
-              emptyText,
-              emptyImage,
-              loadedAll,
-              showClear,
-              skeletonCount,
-              skeletonProps,
-            }}
             data={list}
-            locale={locale}
+            emptyImage={emptyImage}
+            emptyText={emptyText}
+            loadedAll={loadedAll}
             loading={tabLoading}
-            onClick={item => this.onItemClick(item, child.props)}
+            locale={locale}
             onClear={() => this.onClear(name)}
+            onClick={item => this.onItemClick(item, child.props)}
             onLoadMore={() => this.onLoadMore(child.props)}
+            showClear={showClear}
+            skeletonCount={skeletonCount}
+            skeletonProps={skeletonProps}
+            title={title}
           />
         </TabPane>
       );
