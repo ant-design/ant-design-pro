@@ -3,6 +3,8 @@ import { Avatar, List, Skeleton } from 'antd';
 import classNames from 'classnames';
 import styles from './NoticeList.less';
 
+let ListElement = null;
+
 export default function NoticeList({
   data = [],
   onClick,
@@ -13,7 +15,9 @@ export default function NoticeList({
   emptyImage,
   loading,
   onLoadMore,
+  visible,
   loadedAll = true,
+  scrollToLoad = true,
   showClear = true,
   skeletonCount = 5,
   skeletonProps = {},
@@ -28,15 +32,33 @@ export default function NoticeList({
   }
   const loadingList = Array.from({ length: loading ? skeletonCount : 0 }).map(() => ({ loading }));
   const LoadMore = loadedAll ? (
-    undefined
+    <div className={classNames(styles.loadMore, styles.loadedAll)}>
+      <span>{locale.loadedAll}</span>
+    </div>
   ) : (
-    <div style={{ margin: '8px 0 20px 0', textAlign: 'center' }}>
-      <a onClick={onLoadMore}>{locale.loadMore}</a>
+    <div className={styles.loadMore} onClick={onLoadMore}>
+      <span>{locale.loadMore}</span>
     </div>
   );
+  const onScroll = event => {
+    if (!scrollToLoad || loading || loadedAll) return;
+    if (typeof onLoadMore !== 'function') return;
+    const { currentTarget: t } = event;
+    if (t.scrollHeight - t.scrollTop - t.clientHeight <= 40) {
+      onLoadMore(event);
+      ListElement = t;
+    }
+  };
+  if (!visible && ListElement) {
+    try {
+      ListElement.scrollTo(null, 0);
+    } catch (err) {
+      ListElement = null;
+    }
+  }
   return (
     <div>
-      <List className={styles.list} loadMore={LoadMore}>
+      <List className={styles.list} loadMore={LoadMore} onScroll={onScroll}>
         {[...data, ...loadingList].map((item, i) => {
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,

@@ -64,11 +64,16 @@ export default class GlobalHeaderRight extends PureComponent {
   };
 
   fetchMoreNotices = tabProps => {
-    const { name } = tabProps;
-    const { dispatch } = this.props;
+    const { list, name } = tabProps;
+    const { dispatch, notices = [] } = this.props;
+    const lastItemId = notices[notices.length - 1].id;
     dispatch({
       type: 'global/fetchMoreNotices',
-      payload: name,
+      payload: {
+        lastItemId,
+        type: name,
+        offset: list.length,
+      },
     });
   };
 

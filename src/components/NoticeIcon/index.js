@@ -53,12 +53,13 @@ export default class NoticeIcon extends PureComponent {
     onTabChange(tabType);
   };
 
-  onLoadMore = tabProps => {
+  onLoadMore = (tabProps, eventType, event) => {
     const { onLoadMore } = this.props;
-    onLoadMore(tabProps);
+    onLoadMore(tabProps, eventType, event);
   };
 
   getNotificationBox() {
+    const { visible } = this.state;
     const { children, loading, locale } = this.props;
     if (!children) {
       return null;
@@ -73,6 +74,7 @@ export default class NoticeIcon extends PureComponent {
         emptyImage,
         showClear,
         loadedAll,
+        scrollToLoad,
         skeletonCount,
         skeletonProps,
         loading: tabLoading,
@@ -91,11 +93,13 @@ export default class NoticeIcon extends PureComponent {
             locale={locale}
             onClear={() => this.onClear(name)}
             onClick={item => this.onItemClick(item, child.props)}
-            onLoadMore={() => this.onLoadMore(child.props)}
+            onLoadMore={event => this.onLoadMore(child.props, event)}
+            scrollToLoad={scrollToLoad}
             showClear={showClear}
             skeletonCount={skeletonCount}
             skeletonProps={skeletonProps}
             title={title}
+            visible={visible}
           />
         </TabPane>
       );
