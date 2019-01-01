@@ -16,7 +16,7 @@ bell | Change the bell Icon | ReactNode | `<Icon type='bell' />`
 loading | Popup card loading status | boolean | `false`
 onClear | Click to clear button the callback | function(tabName) | -
 onItemClick | Click on the list item's callback | function(item, tabProps) | -
-onLoadMore | Callback of click for loading more | function(tabProps) | -
+onLoadMore | Callback of click for loading more | function(tabProps, event) | -
 onPopupVisibleChange | Popup Card Showing or Hiding Callbacks | function(visible) | -
 onTabChange | Switching callbacks for tabs | function(tabTitle) | -
 popupVisible | Popup card display state | boolean | -
