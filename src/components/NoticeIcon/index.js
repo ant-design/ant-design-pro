@@ -53,9 +53,9 @@ export default class NoticeIcon extends PureComponent {
     onTabChange(tabType);
   };
 
-  onLoadMore = (tabProps, eventType, event) => {
+  onLoadMore = (tabProps, event) => {
     const { onLoadMore } = this.props;
-    onLoadMore(tabProps, eventType, event);
+    onLoadMore(tabProps, event);
   };
 
   getNotificationBox() {
