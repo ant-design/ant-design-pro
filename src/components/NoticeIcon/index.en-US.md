@@ -10,7 +10,7 @@ order: 9
 ## API
 
 Property | Description | Type | Default
--------- | ----------- | ---- | -------
+----|------|-----|------
 count | Total number of messages | number | -
 bell | Change the bell Icon | ReactNode | `<Icon type='bell' />`
 loading | Popup card loading status | boolean | `false`
@@ -26,7 +26,7 @@ clearClose | Close menu after clear | boolean | `false`
 ### NoticeIcon.Tab
 
 Property | Description | Type | Default
--------- | ----------- | ---- | -------
+----|------|-----|------
 count | Unread messages count of this tab | number | list.length
 emptyText | Message text when list is empty | ReactNode | -
 emptyImage | Image when list is empty | string | -
@@ -42,10 +42,11 @@ title | header for message Tab | string | -
 
 ### Tab data
 
-Property | Description | Type | Default |
--------- | ----------- | ---- | ------- |
-avatar | avatar img url | string \| ReactNode | - |
-title | title | ReactNode | - |
-description | description info | ReactNode | - |
-datetime | Timestamps | ReactNode | - |
-extra | Additional information in the upper right corner of the list item | ReactNode | - |
+Property | Description | Type | Default
+----|------|-----|------
+avatar | avatar img url | string \| ReactNode | -
+title | title | ReactNode | -
+description | description info | ReactNode | -
+datetime | Timestamps | ReactNode | -
+extra | Additional information in the upper right corner of the list item | ReactNode | -
+clickClose | Close menu after clicking list item | boolean | `false`
