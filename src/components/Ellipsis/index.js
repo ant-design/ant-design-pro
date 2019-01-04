@@ -196,6 +196,7 @@ export default class Ellipsis extends Component {
     const cls = classNames(styles.ellipsis, className, {
       [styles.lines]: lines && !isSupportLineClamp,
       [styles.lineClamp]: lines && isSupportLineClamp,
+      'antd-pro-ellipsis': !!isSupportLineClamp,
     });
 
     if (!lines && !length) {
@@ -220,14 +221,13 @@ export default class Ellipsis extends Component {
       );
     }
 
-    const id = `antd-pro-ellipsis-${`${new Date().getTime()}${Math.floor(Math.random() * 100)}`}`;
 
     // support document.body.style.webkitLineClamp
     if (isSupportLineClamp) {
-      const style = `#${id}{-webkit-line-clamp:${lines};-webkit-box-orient: vertical;}`;
+      const style = `.antd-pro-ellipsis{-webkit-line-clamp:${lines};-webkit-box-orient: vertical;}`;
 
       const node = (
-        <div id={id} className={cls} {...restProps}>
+        <div className={cls} {...restProps}>
           <style>{style}</style>
           {children}
         </div>
