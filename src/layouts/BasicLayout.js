@@ -17,6 +17,7 @@ import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
 import PageLoading from '@/components/PageLoading';
 import SiderMenu from '@/components/SiderMenu';
+import { layoutLocal } from '../defaultSettings';
 
 import styles from './BasicLayout.less';
 
@@ -118,10 +119,12 @@ class BasicLayout extends React.PureComponent {
     if (!currRouterData) {
       return 'Ant Design Pro';
     }
-    const pageName = formatMessage({
-      id: currRouterData.locale || currRouterData.name,
-      defaultMessage: currRouterData.name,
-    });
+    const pageName = layoutLocal
+      ? formatMessage({
+          id: currRouterData.locale || currRouterData.name,
+          defaultMessage: currRouterData.name,
+        })
+      : currRouterData.name;
 
     return `${pageName} - Ant Design Pro`;
   };
