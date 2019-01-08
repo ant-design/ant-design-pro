@@ -4,7 +4,7 @@
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
-    "presite": "node ./scripts/generateMock.js && cd functions && npm install",
+    "presite": "cd functions && npm install",
     "start": "cross-env APP_TYPE=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "build": "umi build",
@@ -27,8 +27,8 @@
     "docker-prod:dev": "docker-compose -f ./docker/docker-compose.yml up",
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
-    "docker:tag": "docker tag ant-design-pro chenshuai2144/ant-design-pro",
-    "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push chenshuai2144/ant-design-pro"
+    "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
+    "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro"
   },
   "dependencies": {
     "@antv/data-set": "^0.10.0",
@@ -83,7 +83,7 @@
     "husky": "^1.2.0",
     "jest-puppeteer": "^3.5.1",
     "lint-staged": "^8.1.0",
-    "merge-umi-mock-data": "^0.0.3",
+    "merge-umi-mock-data": "^1.0.4",
     "mockjs": "^1.0.1-beta3",
     "prettier": "1.15.2",
     "pro-download": "^1.0.1",
