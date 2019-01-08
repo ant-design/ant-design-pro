@@ -8,12 +8,12 @@
 
 const prettier = require('prettier');
 const fs = require('fs');
+const chalk = require('chalk');
 const prettierConfigPath = require.resolve('../.prettierrc');
 
 const files = process.argv.slice(2);
 
 let didError = false;
-let didWarn = false;
 
 files.forEach(file => {
   Promise.all([
@@ -32,21 +32,19 @@ files.forEach(file => {
         ...options,
         parser: fileInfo.inferredParser,
       };
-      const isPrettier = prettier.check(input, withParserOptions);
-      if (!isPrettier) {
-        console.log(
-          `\x1b[31m ${file} is no prettier, please use npm run prettier and git add !\x1b[0m`
-        );
-        didWarn = true;
+      const output = prettier.format(input, withParserOptions);
+      if (output !== input) {
+        fs.writeFileSync(file, output, 'utf8');
+        console.log(chalk.green(`${file} is prettier`));
       }
     })
     .catch(e => {
       didError = true;
     })
     .finally(() => {
-      if (didWarn || didError) {
+      if (didError) {
         process.exit(1);
       }
-      console.log('\x1b[32m lint prettier success!\x1b[0m');
+      console.log(chalk.hex('#1890FF')('prettier success!'));
     });
 });
