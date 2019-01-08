@@ -17,7 +17,7 @@ import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
 import PageLoading from '@/components/PageLoading';
 import SiderMenu from '@/components/SiderMenu';
-import { layoutLocal, title } from '../defaultSettings';
+import { enableLayoutLocale, title } from '../defaultSettings';
 
 import styles from './BasicLayout.less';
 
@@ -119,12 +119,12 @@ class BasicLayout extends React.PureComponent {
     if (!currRouterData) {
       return title;
     }
-    const pageName = layoutLocal
-      ? formatMessage({
+    const pageName = enableLayoutLocale
+      ? currRouterData.name
+      : formatMessage({
           id: currRouterData.locale || currRouterData.name,
           defaultMessage: currRouterData.name,
-        })
-      : currRouterData.name;
+        });
 
     return `${pageName} - ${title}`;
   };

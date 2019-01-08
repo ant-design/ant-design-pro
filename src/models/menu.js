@@ -2,7 +2,7 @@ import memoizeOne from 'memoize-one';
 import isEqual from 'lodash/isEqual';
 import { formatMessage } from 'umi/locale';
 import Authorized from '@/utils/Authorized';
-import { layoutLocal } from '../defaultSettings';
+import { enableLayoutLocale } from '../defaultSettings';
 
 const { check } = Authorized;
 
@@ -20,11 +20,11 @@ function formatter(data, parentAuthority, parentName) {
       } else {
         locale = `menu.${item.name}`;
       }
-      // if layoutLocal use item.name,
+      // if enableLayoutLocale use item.name,
       // close menu international
-      const name = layoutLocal
-        ? formatMessage({ id: locale, defaultMessage: item.name })
-        : item.name;
+      const name = enableLayoutLocale
+        ? item.name
+        : formatMessage({ id: locale, defaultMessage: item.name });
       const result = {
         ...item,
         name,
