@@ -17,7 +17,7 @@ import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
 import PageLoading from '@/components/PageLoading';
 import SiderMenu from '@/components/SiderMenu';
-import { layoutLocal } from '../defaultSettings';
+import { layoutLocal, title } from '../defaultSettings';
 
 import styles from './BasicLayout.less';
 
@@ -117,7 +117,7 @@ class BasicLayout extends React.PureComponent {
     const currRouterData = this.matchParamsPath(pathname, breadcrumbNameMap);
 
     if (!currRouterData) {
-      return 'Ant Design Pro';
+      return title;
     }
     const pageName = layoutLocal
       ? formatMessage({
@@ -126,7 +126,7 @@ class BasicLayout extends React.PureComponent {
         })
       : currRouterData.name;
 
-    return `${pageName} - Ant Design Pro`;
+    return `${pageName} - ${title}`;
   };
 
   getLayoutStyle = () => {
