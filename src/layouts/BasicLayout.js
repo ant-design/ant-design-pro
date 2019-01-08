@@ -17,7 +17,7 @@ import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
 import PageLoading from '@/components/PageLoading';
 import SiderMenu from '@/components/SiderMenu';
-import { enableLayoutLocale, title } from '../defaultSettings';
+import { enableMenuLocale, title } from '../defaultSettings';
 
 import styles from './BasicLayout.less';
 
@@ -119,7 +119,7 @@ class BasicLayout extends React.PureComponent {
     if (!currRouterData) {
       return title;
     }
-    const pageName = enableLayoutLocale
+    const pageName = enableMenuLocale
       ? currRouterData.name
       : formatMessage({
           id: currRouterData.locale || currRouterData.name,

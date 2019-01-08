@@ -6,6 +6,6 @@ module.exports = {
   fixedHeader: false, // sticky header
   autoHideHeader: false, // auto hide header
   fixSiderbar: false, // sticky siderbar
-  enableLayoutLocale: false,
+  enableMenuLocale: false,
   title: 'Ant Design Pro',
 };
