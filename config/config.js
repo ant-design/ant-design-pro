@@ -18,9 +18,7 @@ const plugins = [
         default: 'zh-CN', // default zh-CN
         baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
       },
-      dynamicImport: {
-        loadingComponent: './components/PageLoading/index',
-      },
+      dynamicImport: false,
       pwa: {
         workboxPluginMode: 'InjectManifest',
         workboxOptions: {
@@ -61,7 +59,7 @@ export default {
     ie: 11,
   },
   // 路由配置
-  routes: pageRoutes,
+  routes: process.env.APP_ROUTES === 'runtime' ? null : pageRoutes,
   // Theme for antd
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
