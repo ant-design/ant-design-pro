@@ -5,8 +5,11 @@ export interface IExceptionProps {
   desc?: React.ReactNode;
   img?: string;
   actions?: React.ReactNode;
-  linkElement?: React.ReactNode;
+  linkElement?: string | React.ComponentType;
   style?: React.CSSProperties;
+  className?: string;
+  backText?: React.ReactNode;
+  redirect?: string;
 }
 
 export default class Exception extends React.Component<IExceptionProps, any> {}

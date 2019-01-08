@@ -1,4 +1,4 @@
-import { parse } from 'url';
+import mockjs from 'mockjs';
 
 const titles = [
   'Alipay',
@@ -37,7 +37,7 @@ const avatars2 = [
 const covers = [
   'https://gw.alipayobjects.com/zos/rmsportal/uMfMFlvUuceEyPpotzlq.png',
   'https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png',
-  'https://gw.alipayobjects.com/zos/rmsportal/uVZonEtjWwmUZPBQfycs.png',
+  'https://gw.alipayobjects.com/zos/rmsportal/iXjVmWVHbCJAyqvDxdtx.png',
   'https://gw.alipayobjects.com/zos/rmsportal/gLaIAoVWTtLbBWZNYEMg.png',
 ];
 const desc = [
@@ -61,7 +61,7 @@ const user = [
   '仲尼',
 ];
 
-export function fakeList(count) {
+function fakeList(count) {
   const list = [];
   for (let i = 0; i < count; i += 1) {
     list.push({
@@ -69,7 +69,7 @@ export function fakeList(count) {
       owner: user[i % 10],
       title: titles[i % 8],
       avatar: avatars[i % 8],
-      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - i % 4],
+      cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % 8],
@@ -90,14 +90,17 @@ export function fakeList(count) {
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
           name: '曲丽丽',
+          id: 'member1',
         },
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
           name: '王昭君',
+          id: 'member2',
         },
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
           name: '董娜娜',
+          id: 'member3',
         },
       ],
     });
@@ -106,26 +109,51 @@ export function fakeList(count) {
   return list;
 }
 
-export function getFakeList(req, res, u) {
-  let url = u;
-  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    url = req.url; // eslint-disable-line
-  }
+let sourceData;
 
-  const params = parse(url, true).query;
+function getFakeList(req, res) {
+  const params = req.query;
 
   const count = params.count * 1 || 20;
 
   const result = fakeList(count);
-
-  if (res && res.json) {
-    res.json(result);
-  } else {
-    return result;
-  }
+  sourceData = result;
+  return res.json(result);
 }
 
-export const getNotice = [
+function postFakeList(req, res) {
+  const { /* url = '', */ body } = req;
+  // const params = getUrlParams(url);
+  const { method, id } = body;
+  // const count = (params.count * 1) || 20;
+  let result = sourceData;
+
+  switch (method) {
+    case 'delete':
+      result = result.filter(item => item.id !== id);
+      break;
+    case 'update':
+      result.forEach((item, i) => {
+        if (item.id === id) {
+          result[i] = Object.assign(item, body);
+        }
+      });
+      break;
+    case 'post':
+      result.unshift({
+        body,
+        id: `fake-list-${result.length}`,
+        createdAt: new Date().getTime(),
+      });
+      break;
+    default:
+      break;
+  }
+
+  return res.json(result);
+}
+
+const getNotice = [
   {
     id: 'xxx1',
     title: titles[0],
@@ -188,7 +216,7 @@ export const getNotice = [
   },
 ];
 
-export const getActivities = [
+const getActivities = [
   {
     id: 'trend-1',
     updatedAt: new Date(),
@@ -289,8 +317,20 @@ export const getActivities = [
   },
 ];
 
+function getFakeCaptcha(req, res) {
+  return res.json('captcha-xxx');
+}
+
 export default {
-  getNotice,
-  getActivities,
-  getFakeList,
+  'GET /api/project/notice': getNotice,
+  'GET /api/activities': getActivities,
+  'POST /api/forms': (req, res) => {
+    res.send({ message: 'Ok' });
+  },
+  'GET /api/tags': mockjs.mock({
+    'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }],
+  }),
+  'GET /api/fake_list': getFakeList,
+  'POST /api/fake_list': postFakeList,
+  'GET /api/captcha': getFakeCaptcha,
 };

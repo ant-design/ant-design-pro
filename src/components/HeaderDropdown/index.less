@@ -1,0 +1,16 @@
+@import '~antd/lib/style/themes/default.less';
+
+.container > * {
+  background-color: #fff;
+  box-shadow: @shadow-1-down;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: @screen-xs) {
+  .container {
+    width: 100% !important;
+  }
+  .container > * {
+    border-radius: 0 !important;
+  }
+}

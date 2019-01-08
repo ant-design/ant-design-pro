@@ -30,8 +30,8 @@ function getAutoHeight(n) {
   return height;
 }
 
-const autoHeight = () => WrappedComponent => {
-  return class extends React.Component {
+const autoHeight = () => WrappedComponent =>
+  class extends React.Component {
     state = {
       computedHeight: 0,
     };
@@ -58,6 +58,5 @@ const autoHeight = () => WrappedComponent => {
       );
     }
   };
-};
 
 export default autoHeight;

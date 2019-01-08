@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { MiniArea } from '../Charts';
 import NumberInfo from '../NumberInfo';
 
@@ -26,16 +25,28 @@ export default class ActiveChart extends Component {
   };
 
   componentDidMount() {
-    this.timer = setInterval(() => {
-      this.setState({
-        activeData: getActiveData(),
-      });
-    }, 1000);
+    this.loopData();
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    clearTimeout(this.timer);
+    cancelAnimationFrame(this.requestRef);
   }
+
+  loopData = () => {
+    this.requestRef = requestAnimationFrame(() => {
+      this.timer = setTimeout(() => {
+        this.setState(
+          {
+            activeData: getActiveData(),
+          },
+          () => {
+            this.loopData();
+          }
+        );
+      }, 1000);
+    });
+  };
 
   render() {
     const { activeData = [] } = this.state;
@@ -64,9 +75,17 @@ export default class ActiveChart extends Component {
           />
         </div>
         {activeData && (
-          <div className={styles.activeChartGrid}>
-            <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
-            <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
+          <div>
+            <div className={styles.activeChartGrid}>
+              <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
+              <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
+            </div>
+            <div className={styles.dashedLine}>
+              <div className={styles.line} />
+            </div>
+            <div className={styles.dashedLine}>
+              <div className={styles.line} />
+            </div>
           </div>
         )}
         {activeData && (

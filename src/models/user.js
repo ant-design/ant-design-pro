@@ -1,4 +1,4 @@
-import { query as queryUsers, queryCurrent } from '../services/user';
+import { query as queryUsers, queryCurrent } from '@/services/user';
 
 export default {
   namespace: 'user',
@@ -43,7 +43,8 @@ export default {
         ...state,
         currentUser: {
           ...state.currentUser,
-          notifyCount: action.payload,
+          notifyCount: action.payload.totalCount,
+          unreadCount: action.payload.unreadCount,
         },
       };
     },

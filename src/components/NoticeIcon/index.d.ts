@@ -1,26 +1,25 @@
-import React from 'react';
+import * as React from 'react';
 import NoticeIconTab, { INoticeIconData } from './NoticeIconTab';
 
 export interface INoticeIconProps {
   count?: number;
+  bell?: React.ReactNode;
   className?: string;
   loading?: boolean;
-  onClear?: (tableTile: string) => void;
+  onClear?: (tabName: string) => void;
   onItemClick?: (item: INoticeIconData, tabProps: INoticeIconProps) => void;
-  onTabChange?: (tableTile: string) => void;
-  popupAlign?: {
-    points?: [string, string];
-    offset?: [number, number];
-    targetOffset?: [number, number];
-    overflow?: any;
-    useCssRight?: boolean;
-    useCssBottom?: boolean;
-    useCssTransform?: boolean;
-  };
+  onLoadMore?: (tabProps: INoticeIconProps) => void;
+  onTabChange?: (tabTile: string) => void;
   style?: React.CSSProperties;
   onPopupVisibleChange?: (visible: boolean) => void;
   popupVisible?: boolean;
-  locale?: { emptyText: string; clear: string };
+  locale?: {
+    emptyText: string;
+    clear: string;
+    loadedAll: string;
+    loadMore: string;
+  };
+  clearClose?: boolean;
 }
 
 export default class NoticeIcon extends React.Component<INoticeIconProps, any> {

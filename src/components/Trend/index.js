@@ -14,7 +14,7 @@ const Trend = ({ colorful = true, reverseColor = false, flag, children, classNam
   );
   return (
     <div {...rest} className={classString} title={typeof children === 'string' ? children : ''}>
-      <span className={styles.value}>{children}</span>
+      <span>{children}</span>
       {flag && (
         <span className={styles[flag]}>
           <Icon type={`caret-${flag}`} />

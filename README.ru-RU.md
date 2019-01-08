@@ -1,16 +1,20 @@
-Русский | [English](./README.md) | [简体中文](./README.zh-CN.md)
+[English](./README.md) | [简体中文](./README.zh-CN.md) | Русский
 
-# Ant Design Pro
+<h1 align="center">Ant Design Pro</h1>
 
-[![](https://img.shields.io/travis/ant-design/ant-design-pro/master.svg?style=flat-square)](https://travis-ci.org/ant-design/ant-design-pro)
-[![Build status](https://ci.appveyor.com/api/projects/status/67fxu2by3ibvqtat/branch/master?svg=true)](https://ci.appveyor.com/project/afc163/ant-design-pro/branch/master)
-[![Dependencies](https://img.shields.io/david/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro)
-[![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro#info=devDependencies&view=list)
-[![Gitter](https://badges.gitter.im/ant-design/ant-design-pro.svg)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+<div align="center">
 
 UI-решение "из коробки" для корпоративных приложений как React boilerplate
 
-![](https://gw.alipayobjects.com/zos/rmsportal/xEdBqwSzvoSapmnSnYjU.png)
+[![CircleCI Status](https://circleci.com/gh/ant-design/ant-design-pro.svg?style=svg)](https://circleci.com/gh/ant-design/ant-design-pro/)
+[![Build status](https://ci.appveyor.com/api/projects/status/67fxu2by3ibvqtat/branch/master?svg=true)](https://ci.appveyor.com/project/afc163/ant-design-pro/branch/master)
+[![Dependencies](https://img.shields.io/david/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro)
+[![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro?type=dev)
+[![Gitter](https://badges.gitter.im/ant-design/ant-design-pro.svg)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+![](https://user-images.githubusercontent.com/8186664/44953195-581e3d80-aec4-11e8-8dcb-54b9db38ec11.png)
+
+</div>
 
 - Демо: http://preview.pro.ant.design
 - Домашняя страница: http://pro.ant.design
@@ -27,12 +31,12 @@ UI-решение "из коробки" для корпоративных при
 
 - :gem: **Аккуратный дизайн**: Посмотрите [спецификацию Ant Design](http://ant.design/)
 - :triangular_ruler: **Общие шаблоны**: Стандартные шаблоны для корпоративных приложений
-- :rocket: **Разработка, как искусство**: Новейший стек технологий React/dva/antd
+- :rocket: **Разработка, как искусство**: Новейший стек технологий React/umi/dva/antd
 - :iphone: **Отзывчивая верстка**: Создан для экранов разных размеров
 - :art: **Темизация**: Возможность изменения темы с помощью конфигурации
 - :globe_with_meridians: **Мультиязычность**: Встроенное i18n решение
 - :gear: **Лучшие практики**: Надежные процессы для хорошего кода
-- :1234: **Разработка по шиблону**: Простое в использовании решение для разработки
+- :1234: **Разработка по шаблону**: Простое в использовании решение для разработки
 - :white_check_mark: **UI тесты**: Разрабатывайте безопасно с юнит и e2e тестами
 
 ## Шаблоны
@@ -54,6 +58,9 @@ UI-решение "из коробки" для корпоративных при
 - Profile
   - Simple Profile
   - Advanced Profile
+- Account
+  - Account Center
+  - Account Settings
 - Result
   - Success
   - Failed
@@ -76,14 +83,6 @@ $ npm install
 $ npm start         # visit http://localhost:8000
 ```
 
-Также можно использовать инструмент командной строки: [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli)
-
-```bash
-$ npm install ant-design-pro-cli -g
-$ mkdir pro-demo && cd pro-demo
-$ pro new
-```
-
 Больше информации в [документации](http://pro.ant.design/docs/getting-started).
 
 ## Совместимость
@@ -96,7 +95,7 @@ $ pro new
 
 ## Распространение
 
-Любые варианты распространения приветствуются! Вот несколько примероы того, как вы можете помочь распространению проекта:
+Любые варианты распространения приветствуются! Вот несколько примеров того, как вы можете помочь распространению проекта:
 
 - Использовать Ant Design Pro в ежедневной работе.
 - Создавать [задачи](http://github.com/ant-design/ant-design-pro/issues) заводить баги или отвечать на вопросы.
