@@ -11,6 +11,7 @@ export default class HeaderSearch extends PureComponent {
     className: PropTypes.string,
     placeholder: PropTypes.string,
     onSearch: PropTypes.func,
+    onChange: PropTypes.func,
     onPressEnter: PropTypes.func,
     defaultActiveFirstOption: PropTypes.bool,
     dataSource: PropTypes.array,
@@ -22,6 +23,7 @@ export default class HeaderSearch extends PureComponent {
     defaultActiveFirstOption: false,
     onPressEnter: () => {},
     onSearch: () => {},
+    onChange: () => {},
     className: '',
     placeholder: '',
     dataSource: [],
@@ -61,8 +63,11 @@ export default class HeaderSearch extends PureComponent {
   };
 
   onChange = value => {
-    const { onChange } = this.props;
+    const { onSearch, onChange } = this.props;
     this.setState({ value });
+    if (onSearch) {
+      onSearch(value);
+    }
     if (onChange) {
       onChange(value);
     }

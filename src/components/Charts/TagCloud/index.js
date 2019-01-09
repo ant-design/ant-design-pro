@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Chart, Geom, Coord, Shape } from 'bizcharts';
+import { Chart, Geom, Coord, Shape, Tooltip } from 'bizcharts';
 import DataSet from '@antv/data-set';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
@@ -91,8 +91,8 @@ class TagCloud extends Component {
       return;
     }
 
-    const h = height * 4;
-    const w = this.root.offsetWidth * 4;
+    const h = height;
+    const w = this.root.offsetWidth;
 
     const onload = () => {
       const dv = new DataSet.View().source(data);
@@ -104,14 +104,14 @@ class TagCloud extends Component {
         imageMask: this.imageMask,
         font: 'Verdana',
         size: [w, h], // 宽高设置最好根据 imageMask 做调整
-        padding: 5,
+        padding: 0,
         timeInterval: 5000, // max execute time
         rotate() {
           return 0;
         },
         fontSize(d) {
           // eslint-disable-next-line
-          return Math.pow((d.value - min) / (max - min), 2) * (70 - 20) + 20;
+          return Math.pow((d.value - min) / (max - min), 2) * (17.5 - 5) + 5;
         },
       });
 
@@ -158,8 +158,20 @@ class TagCloud extends Component {
               y: { nice: false },
             }}
           >
+            <Tooltip showTitle={false} />
             <Coord reflect="y" />
-            <Geom type="point" position="x*y" color="text" shape="cloud" />
+            <Geom
+              type="point"
+              position="x*y"
+              color="text"
+              shape="cloud"
+              tooltip={[
+                'text*value',
+                function trans(text, value) {
+                  return { name: text, value };
+                },
+              ]}
+            />
           </Chart>
         )}
       </div>

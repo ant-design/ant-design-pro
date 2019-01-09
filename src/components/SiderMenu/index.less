@@ -1,6 +1,6 @@
 @import '~antd/lib/style/themes/default.less';
 
-@nav-header-height: 64px;
+@nav-header-height: @layout-header-height;
 
 .logo {
   height: @nav-header-height;
@@ -87,5 +87,10 @@
   .ant-menu-submenu-title .sider-menu-item-img + span {
     transition: opacity 0.3s @ease-in-out, width 0.3s @ease-in-out;
     opacity: 1;
+  }
+  .ant-drawer-left {
+    .ant-drawer-body {
+      padding: 0;
+    }
   }
 }

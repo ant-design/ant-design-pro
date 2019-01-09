@@ -3,6 +3,9 @@
 .list {
   max-height: 400px;
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .item {
     transition: all 0.3s;
     overflow: hidden;
@@ -50,6 +53,16 @@
       font-weight: normal;
       margin-right: 0;
       margin-top: -1.5px;
+    }
+  }
+  .loadMore {
+    padding: 8px 0;
+    cursor: pointer;
+    color: @primary-6;
+    text-align: center;
+    &.loadedAll {
+      cursor: unset;
+      color: rgba(0, 0, 0, 0.25);
     }
   }
 }

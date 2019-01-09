@@ -113,7 +113,9 @@ class Login extends Component {
                 </Tabs>
                 {otherChildren}
               </React.Fragment>
-            ) : children}
+            ) : (
+              children
+            )}
           </Form>
         </div>
       </LoginContext.Provider>

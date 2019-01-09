@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { spawn } = require('child_process');
 const { kill } = require('cross-port-killer');
 
@@ -20,10 +21,8 @@ startServer.on('exit', () => {
   kill(process.env.PORT || 8000);
 });
 
-// eslint-disable-next-line
 console.log('Starting development server for e2e tests...');
 startServer.stdout.on('data', data => {
-  // eslint-disable-next-line
   console.log(data.toString());
   if (!once && data.toString().indexOf('Compiled successfully') >= 0) {
     // eslint-disable-next-line

@@ -8,20 +8,17 @@ export interface INoticeIconProps {
   loading?: boolean;
   onClear?: (tabName: string) => void;
   onItemClick?: (item: INoticeIconData, tabProps: INoticeIconProps) => void;
+  onLoadMore?: (tabProps: INoticeIconProps) => void;
   onTabChange?: (tabTile: string) => void;
-  popupAlign?: {
-    points?: [string, string];
-    offset?: [number, number];
-    targetOffset?: [number, number];
-    overflow?: any;
-    useCssRight?: boolean;
-    useCssBottom?: boolean;
-    useCssTransform?: boolean;
-  };
   style?: React.CSSProperties;
   onPopupVisibleChange?: (visible: boolean) => void;
   popupVisible?: boolean;
-  locale?: { emptyText: string; clear: string };
+  locale?: {
+    emptyText: string;
+    clear: string;
+    loadedAll: string;
+    loadMore: string;
+  };
   clearClose?: boolean;
 }
 
