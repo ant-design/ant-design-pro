@@ -1,5 +1,6 @@
 import fetch from 'dva/fetch';
 import React from 'react';
+import defaultSettings from './defaultSettings';
 
 export const dva = {
   config: {
@@ -41,21 +42,22 @@ function renderRoutes(routes) {
 }
 
 export function patchRoutes(routes) {
-  // 这里获取不到 process.env.APP_ROUTES
-  // console.log(process.env.APP_ROUTES === 'runtime');
-  // 这里应该做判断的
-  // if (process.env.APP_ROUTES === 'runtime') {
-  const routesRender = renderRoutes(authRoutes);
-  routes.length = 0; // eslint-disable-line
-  Object.assign(routes, routesRender);
-  // }
+  if (defaultSettings.runtimeMenu) {
+    const routesRender = renderRoutes(authRoutes);
+    routes.length = 0; // eslint-disable-line
+    Object.assign(routes, routesRender);
+  }
 }
 
 export function render(oldRender) {
-  fetch('/api/auth_routes')
-    .then(res => res.json())
-    .then(ret => {
-      authRoutes = ret;
-      oldRender();
-    });
+  if (defaultSettings.runtimeMenu) {
+    fetch('/api/auth_routes')
+      .then(res => res.json())
+      .then(ret => {
+        authRoutes = ret;
+        oldRender();
+      });
+  } else {
+    oldRender();
+  }
 }

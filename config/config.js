@@ -59,7 +59,7 @@ export default {
     ie: 11,
   },
   // 路由配置
-  routes: process.env.APP_ROUTES === 'runtime' ? null : pageRoutes,
+  routes: defaultSettings.runtimeMenu ? null : pageRoutes,
   // Theme for antd
   // https://ant.design/docs/react/customize-theme-cn
   theme: {

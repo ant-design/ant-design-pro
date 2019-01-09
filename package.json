@@ -7,7 +7,6 @@
     "presite": "node ./scripts/generateMock.js && cd functions && npm install",
     "start": "cross-env APP_TYPE=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
-    "start:runtime": "cross-env APP_TYPE=site APP_ROUTES=runtime umi dev",
     "build": "umi build",
     "site": "npm run presite && cross-env APP_TYPE=site npm run build && firebase deploy && npm run docker:push",
     "analyze": "cross-env ANALYZE=1 umi build",
