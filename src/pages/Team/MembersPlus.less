@@ -4,23 +4,28 @@
   //滚动条凹槽的颜色，还可以设置边框属性
   background-color: #f8f8f8;
 }
+
 ::-webkit-scrollbar {
   //滚动条的宽度
   width: 8px;
 }
+
 ::-webkit-scrollbar-thumb {
   //滚动条的设置
   background-color: #ddd;
   background-clip: padding-box;
   min-height: 28px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background-color: #bbb;
 }
+
 .inviteLink {
   word-wrap: break-word;
   max-width: 480px;
 }
+
 .content {
   position: fixed;
   top: 100px;
@@ -32,24 +37,29 @@
 .cardRow {
   height: 100%;
 }
+
 .listCol {
   height: 100%;
 }
+
 .listCard {
   position: relative;
   height: 100%;
   padding: 0 5px;
 }
+
 .memberList:hover,
 .ListItem:hover {
   background-color: #e8e8e8;
   cursor: pointer;
 }
+
 .listCard p {
   position: absolute;
   top: 24px;
   left: 24px;
 }
+
 .mune {
   position: absolute;
   top: 30px;
@@ -58,23 +68,28 @@
   right: 0;
   overflow-y: auto;
 }
+
 .membersList {
   margin: 0 auto;
   max-width: 1200px;
   height: 100%;
   padding: 0 20px;
 }
+
 .cardCol {
   height: 100%;
 }
+
 .listIcon {
   margin: 3px 5px;
 }
+
 .activeCard {
   height: 100%;
   overflow-y: auto;
   margin-left: 16px;
 }
+
 .activitiesList {
   padding: 0 24px 8px 24px;
   .username {
@@ -96,6 +111,35 @@
   color: @disabled-color;
 }
 
+.secIcon {
+  float: left;
+}
+
+.stateIcon {
+  float: right;
+}
+
+.tree {
+  margin-right: 20px;
+}
+.treeNode {
+  .nodeCard:hover {
+    background-color: #f6f6f6;
+    cursor: pointer;
+  }
+  .treeNode {
+    margin-left: 20px;
+  }
+}
+.nodeCard {
+  line-height: 20px;
+  padding: 10px 0;
+  .secIcon,
+  .stateIcon {
+    font-size: 16px;
+    margin: 2px 5px;
+  }
+}
 @media screen and (max-width: @screen-xl) and (min-width: @screen-lg) {
   .activeCard {
     max-width: 800;
@@ -112,9 +156,7 @@
 
 // @media screen and (max-width: @screen-md) {
 // }
-
 // @media screen and (max-width: @screen-sm) {
 // }
-
 // @media screen and (max-width: @screen-xs) {
 // }

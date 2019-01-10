@@ -6,6 +6,9 @@ export default {
   'menu.team': '团队',
   'menu.join': '加入团队',
   'menu.members': '成员',
+
+  'menu.membersPlus': '成员',
+
   'menu.form': '表单页',
   'menu.form.basicform': '基础表单',
   'menu.form.stepform': '分步表单',
