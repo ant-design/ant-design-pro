@@ -19,6 +19,9 @@ const plugins = [
         baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
       },
       dynamicImport: false,
+      routes: {
+        exclude: [/\.test\.(j|t)sx?$/],
+      },
       pwa: {
         workboxPluginMode: 'InjectManifest',
         workboxOptions: {
