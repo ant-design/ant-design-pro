@@ -99,7 +99,7 @@ class BasicLayout extends React.PureComponent {
   getRouterAuthority = (pathname, routeData) => {
     let routeAuthority = ['noAuthority'];
     const getAuthority = (key, routes) => {
-      routes.map(route => {
+      routes.forEach(route => {
         if (route.path && pathToRegexp(route.path).test(key)) {
           routeAuthority = route.authority;
         } else if (route.routes) {
