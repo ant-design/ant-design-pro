@@ -1,4 +1,5 @@
 import fetch from 'dva/fetch';
+import path from 'path';
 import React from 'react';
 import defaultSettings from './defaultSettings';
 
@@ -11,9 +12,17 @@ export const dva = {
 };
 
 let authRoutes = null;
+function checkJsPath(jsPath) {
+  return /^\./.test(jsPath) ? jsPath : `./${jsPath}`;
+}
+function findJS(name) {
+  const jsPath = /^src/.test(name) ? name.replace(/src/, '.') : name;
+  const preUri = /^\./.test(name) ? './pages/' : '';
+  return require(`${checkJsPath(path.join(preUri, jsPath))}`).default; // eslint-disable-line
+}
 
 function renderRoute(route) {
-  if (route.component) route.component = require(`${route.component}`).default; // eslint-disable-line
+  if (route.component && route.path) route.component = findJS(route.component); // eslint-disable-line
   return route;
 }
 function renderRoutes(routes) {
@@ -25,7 +34,7 @@ function renderRoutes(routes) {
       element.exact = element.exact || true; // eslint-disable-line
     }
     if (element.Routes) {
-      element.Routes = renderRoute(element.Routes); // eslint-disable-line
+      element.Routes = element.Routes.map(item => findJS(item)); // eslint-disable-line
     }
   });
 
