@@ -1,39 +1,49 @@
 import React, { PureComponent } from 'react';
-import { FormattedMessage, setLocale, getLocale } from 'umi/locale';
-import { Menu, Icon, Dropdown } from 'antd';
+import { formatMessage, setLocale, getLocale } from 'umi/locale';
+import { Menu, Icon } from 'antd';
 import classNames from 'classnames';
+import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 export default class SelectLang extends PureComponent {
-  changLang = ({ key }) => {
+  changeLang = ({ key }) => {
     setLocale(key);
   };
 
   render() {
     const { className } = this.props;
     const selectedLang = getLocale();
+    const locales = ['zh-CN', 'zh-TW', 'en-US', 'pt-BR'];
+    const languageLabels = {
+      'zh-CN': '简体中文',
+      'zh-TW': '繁体中文',
+      'en-US': 'English',
+      'pt-BR': 'Português',
+    };
+    const languageIcons = {
+      'zh-CN': '🇨🇳',
+      'zh-TW': '🇭🇰',
+      'en-US': '🇬🇧',
+      'pt-BR': '🇧🇷',
+    };
     const langMenu = (
-      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changLang}>
-        <Menu.Item key="zh-CN">
-          <FormattedMessage id="lang.simplified-chinese" />
-        </Menu.Item>
-        <Menu.Item key="zh-TW">
-          <FormattedMessage id="lang.traditional-chinese" />
-        </Menu.Item>
-        <Menu.Item key="en-US">
-          <FormattedMessage id="lang.english" />
-        </Menu.Item>
-        <Menu.Item key="pt-BR">
-          <FormattedMessage id="lang.portuguese" />
-        </Menu.Item>
+      <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changeLang}>
+        {locales.map(locale => (
+          <Menu.Item key={locale}>
+            <span role="img" aria-label={languageLabels[locale]}>
+              {languageIcons[locale]}
+            </span>{' '}
+            {languageLabels[locale]}
+          </Menu.Item>
+        ))}
       </Menu>
     );
     return (
-      <Dropdown overlay={langMenu}>
+      <HeaderDropdown overlay={langMenu} placement="bottomRight">
         <span className={classNames(styles.dropDown, className)}>
-          <FormattedMessage id="navBar.lang" /> <Icon type="down" />
+          <Icon type="global" title={formatMessage({ id: 'navBar.lang' })} />
         </span>
-      </Dropdown>
+      </HeaderDropdown>
     );
   }
 }

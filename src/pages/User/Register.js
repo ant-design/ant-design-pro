@@ -187,6 +187,7 @@ class Register extends Component {
           </FormItem>
           <FormItem help={help}>
             <Popover
+              getPopupContainer={node => node.parentNode}
               content={
                 <div style={{ padding: '4px 0' }}>
                   {passwordStatusMap[this.getPasswordStatus()]}
@@ -307,7 +308,7 @@ class Register extends Component {
               <FormattedMessage id="app.register.register" />
             </Button>
             <Link className={styles.login} to="/User/Login">
-              <FormattedMessage id="app.register.sing-in" />
+              <FormattedMessage id="app.register.sign-in" />
             </Link>
           </FormItem>
         </Form>

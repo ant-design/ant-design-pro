@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage, formatMessage } from 'umi/locale';
-import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip } from 'antd';
+import { Spin, Tag, Menu, Icon, Avatar, Tooltip } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
+import HeaderDropdown from '../HeaderDropdown';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 
@@ -40,13 +41,52 @@ export default class GlobalHeaderRight extends PureComponent {
     return groupBy(newNotices, 'type');
   }
 
+  getUnreadData = noticeData => {
+    const unreadMsg = {};
+    Object.entries(noticeData).forEach(([key, value]) => {
+      if (!unreadMsg[key]) {
+        unreadMsg[key] = 0;
+      }
+      if (Array.isArray(value)) {
+        unreadMsg[key] = value.filter(item => !item.read).length;
+      }
+    });
+    return unreadMsg;
+  };
+
+  changeReadState = clickedItem => {
+    const { id } = clickedItem;
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'global/changeNoticeReadState',
+      payload: id,
+    });
+  };
+
+  fetchMoreNotices = tabProps => {
+    const { list, name } = tabProps;
+    const { dispatch, notices = [] } = this.props;
+    const lastItemId = notices[notices.length - 1].id;
+    dispatch({
+      type: 'global/fetchMoreNotices',
+      payload: {
+        lastItemId,
+        type: name,
+        offset: list.length,
+      },
+    });
+  };
+
   render() {
     const {
       currentUser,
+      fetchingMoreNotices,
       fetchingNotices,
+      loadedAllNotices,
       onNoticeVisibleChange,
       onMenuClick,
       onNoticeClear,
+      skeletonCount,
       theme,
     } = this.props;
     const menu = (
@@ -70,7 +110,13 @@ export default class GlobalHeaderRight extends PureComponent {
         </Menu.Item>
       </Menu>
     );
+    const loadMoreProps = {
+      skeletonCount,
+      loadedAll: loadedAllNotices,
+      loading: fetchingMoreNotices,
+    };
     const noticeData = this.getNoticeData();
+    const unreadMsg = this.getUnreadData(noticeData);
     let className = styles.right;
     if (theme === 'dark') {
       className = `${styles.right}  ${styles.dark}`;
@@ -104,43 +150,53 @@ export default class GlobalHeaderRight extends PureComponent {
         </Tooltip>
         <NoticeIcon
           className={styles.action}
-          count={currentUser.notifyCount}
+          count={currentUser.unreadCount}
           onItemClick={(item, tabProps) => {
             console.log(item, tabProps); // eslint-disable-line
+            this.changeReadState(item, tabProps);
           }}
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
             clear: formatMessage({ id: 'component.noticeIcon.clear' }),
+            loadedAll: formatMessage({ id: 'component.noticeIcon.loaded' }),
+            loadMore: formatMessage({ id: 'component.noticeIcon.loading-more' }),
           }}
           onClear={onNoticeClear}
+          onLoadMore={this.fetchMoreNotices}
           onPopupVisibleChange={onNoticeVisibleChange}
           loading={fetchingNotices}
-          popupAlign={{ offset: [20, -16] }}
+          clearClose
         >
           <NoticeIcon.Tab
+            count={unreadMsg.notification}
             list={noticeData.notification}
             title={formatMessage({ id: 'component.globalHeader.notification' })}
             name="notification"
             emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
+            {...loadMoreProps}
           />
           <NoticeIcon.Tab
+            count={unreadMsg.message}
             list={noticeData.message}
             title={formatMessage({ id: 'component.globalHeader.message' })}
             name="message"
             emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
+            {...loadMoreProps}
           />
           <NoticeIcon.Tab
+            count={unreadMsg.event}
             list={noticeData.event}
             title={formatMessage({ id: 'component.globalHeader.event' })}
             name="event"
             emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
+            {...loadMoreProps}
           />
         </NoticeIcon>
         {currentUser.name ? (
-          <Dropdown overlay={menu}>
+          <HeaderDropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>
               <Avatar
                 size="small"
@@ -150,7 +206,7 @@ export default class GlobalHeaderRight extends PureComponent {
               />
               <span className={styles.name}>{currentUser.name}</span>
             </span>
-          </Dropdown>
+          </HeaderDropdown>
         ) : (
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )}

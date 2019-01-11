@@ -7,7 +7,6 @@ import router from 'umi/router';
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
 import styles from './Header.less';
-import Authorized from '@/utils/Authorized';
 
 const { Header } = Layout;
 
@@ -43,7 +42,11 @@ class HeaderView extends PureComponent {
   };
 
   handleNoticeClear = type => {
-    message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({ id: `component.globalHeader.${type}` })}`);
+    message.success(
+      `${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({
+        id: `component.globalHeader.${type}`,
+      })}`
+    );
     const { dispatch } = this.props;
     dispatch({
       type: 'global/clearNotices',
@@ -89,20 +92,17 @@ class HeaderView extends PureComponent {
     }
     const scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
     if (!this.ticking) {
+      this.ticking = true;
       requestAnimationFrame(() => {
         if (this.oldScrollTop > scrollTop) {
           this.setState({
             visible: true,
           });
-          this.scrollTop = scrollTop;
-          return;
-        }
-        if (scrollTop > 300 && visible) {
+        } else if (scrollTop > 300 && visible) {
           this.setState({
             visible: false,
           });
-        }
-        if (scrollTop < 300 && !visible) {
+        } else if (scrollTop < 300 && !visible) {
           this.setState({
             visible: true,
           });
@@ -111,7 +111,6 @@ class HeaderView extends PureComponent {
         this.ticking = false;
       });
     }
-    this.ticking = false;
   };
 
   render() {
@@ -126,7 +125,6 @@ class HeaderView extends PureComponent {
           <TopNavHeader
             theme={navTheme}
             mode="horizontal"
-            Authorized={Authorized}
             onCollapse={handleMenuCollapse}
             onNoticeClear={this.handleNoticeClear}
             onMenuClick={this.handleMenuClick}
@@ -155,7 +153,9 @@ class HeaderView extends PureComponent {
 export default connect(({ user, global, setting, loading }) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
+  fetchingMoreNotices: loading.effects['global/fetchMoreNotices'],
   fetchingNotices: loading.effects['global/fetchNotices'],
+  loadedAllNotices: global.loadedAllNotices,
   notices: global.notices,
   setting,
 }))(HeaderView);
