@@ -103,7 +103,11 @@ class BasicLayout extends React.PureComponent {
         if (route.path && pathToRegexp(route.path).test(key)) {
           routeAuthority = route.authority ? route.authority : parentAuthority;
         } else if (route.routes) {
-          routeAuthority = getAuthority(key, route.routes, route.authority ? route.authority : parentAuthority);
+          routeAuthority = getAuthority(
+            key,
+            route.routes,
+            route.authority ? route.authority : parentAuthority
+          );
         }
         return route;
       });
