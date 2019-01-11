@@ -36,26 +36,23 @@ const ProportionSales = memo(
           </div>
         </div>
       }
-      style={{ marginTop: 24 }}
+      style={{
+        height: 'calc(100% - 24px)',
+        marginTop: 24,
+      }}
     >
-      <div
-        style={{
-          minHeight: 380,
-        }}
-      >
-        <h4 style={{ marginTop: 8, marginBottom: 32 }}>
-          <FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />
-        </h4>
-        <Pie
-          hasLegend
-          subTitle={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
-          total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
-          data={salesPieData}
-          valueFormat={value => <Yuan>{value}</Yuan>}
-          height={248}
-          lineWidth={4}
-        />
-      </div>
+      <h4 style={{ marginTop: 8, marginBottom: 32 }}>
+        <FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />
+      </h4>
+      <Pie
+        hasLegend
+        subTitle={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
+        total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
+        data={salesPieData}
+        valueFormat={value => <Yuan>{value}</Yuan>}
+        height={248}
+        lineWidth={4}
+      />
     </Card>
   )
 );
