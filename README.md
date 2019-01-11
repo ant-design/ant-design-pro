@@ -1,14 +1,22 @@
-[Русский](./README.ru-RU.md) | English | [简体中文](./README.zh-CN.md)
+English | [简体中文](./README.zh-CN.md) | [Русский](./README.ru-RU.md)
 
-# Ant Design Pro
-[![CircleCI Status](https://circleci.com/gh/ant-design/ant-design-pro.svg?style=svg)](https://circleci.com/gh/ant-design/ant-design-pro/)
-[![Dependencies](https://img.shields.io/david/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro)
-[![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro#info=devDependencies&view=list)
-[![Gitter](https://badges.gitter.im/ant-design/ant-design-pro.svg)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+<h1 align="center">Ant Design Pro</h1>
+
+<div align="center">
 
 An out-of-box UI solution for enterprise applications as a React boilerplate.
 
-![](https://gw.alipayobjects.com/zos/rmsportal/xEdBqwSzvoSapmnSnYjU.png)
+[![CircleCI Status](https://circleci.com/gh/ant-design/ant-design-pro.svg?style=svg)](https://circleci.com/gh/ant-design/ant-design-pro/)
+[![Build status](https://ci.appveyor.com/api/projects/status/67fxu2by3ibvqtat/branch/master?svg=true)](https://ci.appveyor.com/project/afc163/ant-design-pro/branch/master)
+[![Dependencies](https://img.shields.io/david/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro)
+[![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro?type=dev)
+[![Gitter](https://img.shields.io/gitter/room/ant-design/pro-english.svg)](https://gitter.im/ant-design/pro-english?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)(🇺🇸)
+[![Gitter](https://img.shields.io/gitter/room/ant-design/ant-design-pro.svg?style=flat-square)](https://gitter.im/ant-design/ant-design-pro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)(🇨🇳)
+
+
+![](https://user-images.githubusercontent.com/8186664/44953195-581e3d80-aec4-11e8-8dcb-54b9db38ec11.png)
+
+</div>
 
 - Preview: http://preview.pro.ant.design
 - Home Page: http://pro.ant.design
@@ -16,6 +24,9 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 - ChangeLog: http://pro.ant.design/docs/changelog
 - FAQ: http://pro.ant.design/docs/faq
 - Mirror Site in China: http://ant-design-pro.gitee.io
+
+## 2.0 Released Now! 🎉🎉🎉
+[Announcing Ant Design Pro 2.0.0](https://medium.com/ant-design/beautiful-and-powerful-ant-design-pro-2-0-release-51358da5af95)
 
 ## Translation Recruitment :loudspeaker:
 
@@ -25,7 +36,7 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 
 - :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React/dva/antd
+- :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd
 - :iphone: **Responsive**: Designed for variable screen sizes
 - :art: **Theming**: Customizable theme with simple config
 - :globe_with_meridians: **International**: Built-in i18n solution
@@ -52,6 +63,9 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 - Profile
   - Simple Profile
   - Advanced Profile
+- Account
+  - Account Center
+  - Account Settings
 - Result
   - Success
   - Failed
@@ -67,6 +81,8 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 
 ## Usage
 
+### Use bash
+
 ```bash
 $ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
 $ cd ant-design-pro
@@ -74,12 +90,26 @@ $ npm install
 $ npm start         # visit http://localhost:8000
 ```
 
-Or you can use the command tool: [ant-design-pro-cli](https://github.com/ant-design/ant-design-pro-cli)
+### Use by docker
 
 ```bash
-$ npm install ant-design-pro-cli -g
-$ mkdir pro-demo && cd pro-demo
-$ pro new
+# preview 
+$ docker pull antdesign/ant-design-pro
+$ docker run -p 80:80 antdesign/ant-design-pro
+# open http://localhost
+
+# dev 
+$ npm run docker:dev
+
+# build 
+$ npm run docker:build
+
+
+# production dev 
+$ npm run docker-prod:dev
+
+# production build 
+$ npm run docker-prod:build
 ```
 
 More instructions at [documentation](http://pro.ant.design/docs/getting-started).
