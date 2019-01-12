@@ -29,6 +29,6 @@ describe('Homepage', async () => {
   });
   const routers = formatter(RouterConfig[1].routes);
   routers.forEach(route => {
-    fit(`test pages ${route}`, testPage(route));
+    it(`test pages ${route}`, testPage(route));
   });
 });
