@@ -483,12 +483,16 @@ class TableList extends PureComponent {
 
   handleUpdate = fields => {
     const { dispatch } = this.props;
+    const { formValues } = this.state;
     dispatch({
       type: 'rule/update',
       payload: {
-        name: fields.name,
-        desc: fields.desc,
-        key: fields.key,
+        query: formValues,
+        body: {
+          name: fields.name,
+          desc: fields.desc,
+          key: fields.key,
+        },
       },
     });
 
