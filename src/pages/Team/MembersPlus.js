@@ -12,6 +12,7 @@ import styles from './MembersPlus.less';
 class MembersPlus extends PureComponent {
   state = {
     visible: false,
+    toggles: {},
   };
 
   componentDidMount() {
@@ -34,11 +35,17 @@ class MembersPlus extends PureComponent {
     linkCopyToClipboard(link);
   };
 
-  IconClick = e => {
+  IconClick = (e, item) => {
+    const { id } = item;
+    const { toggles } = this.state;
+
     e.stopPropagation();
+    toggles[id] = !toggles[id];
+
+    this.setState(toggles);
   };
 
-  handleClick = () => {};
+  handleDepartmentSelect = () => {};
 
   memberInvite() {
     const { visible } = this.state;
@@ -83,22 +90,24 @@ class MembersPlus extends PureComponent {
     );
   }
 
-  childDom(item) {
-    if (item.length !== 0) {
-      return item.map(items => (
-        <div className={styles.treeNode} key={items.name}>
-          <div className={styles.nodeCard} onClick={() => this.handleClick()}>
+  childDom(items) {
+    const { toggles } = this.state;
+
+    if (items.length !== 0) {
+      return items.map(item => (
+        <div className={styles.treeNode} key={item.name}>
+          <div className={styles.nodeCard} onClick={() => this.handleDepartmentSelect()}>
             <Icon type="user" className={styles.secIcon} />
-            <span>{items.name}</span>
-            {items.child.length !== 0 ? (
+            <span>{item.name}</span>
+            {item.child.length !== 0 ? (
               <Icon
                 type="down-circle"
                 className={styles.stateIcon}
-                onClick={e => this.IconClick(e)}
+                onClick={e => this.IconClick(e, item)}
               />
             ) : null}
           </div>
-          {items.child.length !== 0 ? this.childDom(items.child) : null}
+          {item.child.length !== 0 && toggles[item.id] ? this.childDom(item.child) : null}
         </div>
       ));
     }
@@ -131,29 +140,36 @@ class MembersPlus extends PureComponent {
   renderSection() {
     const data = [
       {
+        id: 'parent1',
         name: 'parent1',
         child: [
           {
+            id: 'child1',
             name: 'child1',
             child: [
               {
+                id: 'grand child1',
                 name: 'grand child1',
                 child: [],
               },
               {
+                id: 'grand child2',
                 name: 'grand child2',
                 child: [],
               },
             ],
           },
           {
+            id: 'child2',
             name: 'child2',
             child: [
               {
+                id: 'grand child1',
                 name: 'grand child1',
                 child: [],
               },
               {
+                id: 'grand child2',
                 name: 'grand child2',
                 child: [],
               },
@@ -162,22 +178,7 @@ class MembersPlus extends PureComponent {
         ],
       },
     ];
-    return data.map(item => (
-      <div className={styles.treeNode} key={item.name}>
-        <div className={styles.nodeCard} onClick={() => this.handleClick()}>
-          <Icon type="team" className={styles.secIcon} />
-          <span>{item.name}</span>
-          {item.child.length !== 0 ? (
-            <Icon
-              type="down-circle"
-              className={styles.stateIcon}
-              onClick={e => this.IconClick(e)}
-            />
-          ) : null}
-        </div>
-        {this.childDom(item.child)}
-      </div>
-    ));
+    return this.childDom(data);
   }
 
   renderActivities() {
