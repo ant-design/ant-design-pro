@@ -39,6 +39,12 @@ export default [
         component: './Dashboard/Home',
       },
       {
+        path: '/taskboard',
+        name: 'taskboard',
+        icon: 'dashboard',
+        component: './Task/TaskBoard',
+      },
+      {
         path: '/members',
         name: 'members',
         icon: 'team',
