@@ -7,7 +7,7 @@
 
 ::-webkit-scrollbar {
   //滚动条的宽度
-  width: 8px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -48,9 +48,12 @@
   padding: 0 5px;
 }
 
-.memberList:hover,
+.ListItem {
+  padding-left: 20px;
+}
+
 .ListItem:hover {
-  background-color: #e8e8e8;
+  background-color: #f0f2f5;
   cursor: pointer;
 }
 
@@ -62,11 +65,18 @@
 
 .mune {
   position: absolute;
-  top: 30px;
+  top: 0;
   bottom: 0;
-  left: 24px;
+  left: 0;
   right: 0;
   overflow-y: auto;
+  .title {
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    padding-left: 20px;
+    color: gray;
+  }
 }
 
 .membersList {
@@ -74,6 +84,8 @@
   max-width: 1200px;
   height: 100%;
   padding: 0 20px;
+  color: #383838;
+  border: none;
 }
 
 .cardCol {
@@ -91,15 +103,12 @@
 }
 
 .activitiesList {
-  padding: 0 24px 8px 24px;
+  padding: 0 0 8px 0;
   .username {
     color: @text-color;
   }
   .event {
     font-weight: normal;
-  }
-  .ListItem {
-    padding-left: 10px;
   }
   .avatarPic {
     width: 46px;
@@ -111,34 +120,60 @@
   color: @disabled-color;
 }
 
-.secIcon {
-  float: left;
-}
-
-.stateIcon {
+.stateIcon,
+.dropIcon {
   float: right;
+  :hover {
+    color: #1890ff;
+  }
 }
 
-.tree {
-  margin-right: 20px;
-}
 .treeNode {
-  .nodeCard:hover {
-    background-color: #f6f6f6;
-    cursor: pointer;
-  }
   .treeNode {
-    margin-left: 20px;
+    .nodeCard {
+      padding-left: 20px;
+    }
+    .treeNode {
+      .nodeCard {
+        padding-left: 20px;
+      }
+    }
   }
 }
+
+.nodeCard:hover {
+  background-color: #f0f2f5;
+  cursor: pointer;
+}
+
 .nodeCard {
   line-height: 20px;
   padding: 10px 0;
-  .secIcon,
-  .stateIcon {
-    font-size: 16px;
-    margin: 2px 5px;
-  }
+}
+
+.nodeCardClick {
+  line-height: 20px;
+  padding: 10px 0;
+  background-color: #f0f2f5;
+}
+.secIcon {
+  float: left;
+  font-size: 16px;
+  margin: 2px 5px 2px 15px;
+}
+
+.stateIcon {
+  font-size: 16px;
+  margin: 2px 15px 2px 5px;
+}
+
+.dropIcon {
+  font-size: 16px;
+  margin: 2px 15px 2px 5px;
+}
+.menuIcon {
+  font-size: 14px;
+  margin-right: 8px;
 }
 @media screen and (max-width: @screen-xl) and (min-width: @screen-lg) {
   .activeCard {
