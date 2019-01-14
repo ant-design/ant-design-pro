@@ -39,9 +39,8 @@ export default [
         component: './Dashboard/Home',
       },
       {
+        hideInMenu: true,
         path: '/taskboard',
-        name: 'taskboard',
-        icon: 'dashboard',
         component: './Task/TaskBoard',
       },
       {
