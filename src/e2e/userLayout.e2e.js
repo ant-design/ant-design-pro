@@ -27,6 +27,6 @@ describe('Homepage', () => {
     jest.setTimeout(1000000);
   });
   formatter(RouterConfig[0].routes).forEach(route => {
-    fit(`test pages ${route}`, testPage(route));
+    it(`test pages ${route}`, testPage(route));
   });
 });
