@@ -83,6 +83,7 @@
     "gh-pages": "^2.0.1",
     "husky": "^1.2.0",
     "jest-puppeteer": "^3.5.1",
+    "less": "^3.9.0",
     "lint-staged": "^8.1.0",
     "merge-umi-mock-data": "^1.0.4",
     "mockjs": "^1.0.1-beta3",
@@ -95,7 +96,7 @@
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.10.0",
     "tslint-react": "^3.6.0",
-    "umi": "^2.3.5",
+    "umi": "^2.4.2",
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-react": "^1.3.4"
   },
