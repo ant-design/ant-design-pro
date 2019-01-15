@@ -33,11 +33,11 @@ export async function addRule(params) {
   });
 }
 
-export async function updateRule(params) {
-  return request('/api/rule', {
+export async function updateRule(params = {}) {
+  return request(`/api/rule?${stringify(params.query)}`, {
     method: 'POST',
     body: {
-      ...params,
+      ...params.body,
       method: 'update',
     },
   });
