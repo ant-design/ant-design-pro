@@ -35,8 +35,10 @@
     position: fixed;
     top: 0;
     left: 0;
-    :global(.ant-menu-root) {
+    .baseMenu {
       overflow-y: auto;
+    }
+    :global(.ant-menu-root) {
       height: ~'calc(100vh - @{nav-header-height})';
     }
   }
