@@ -47,8 +47,9 @@ const ProportionSales = memo(
         total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
         data={salesPieData}
         valueFormat={value => <Yuan>{value}</Yuan>}
-        height={248}
+        height={270}
         lineWidth={4}
+        style={{ padding: '8px 0' }}
       />
     </Card>
   )
