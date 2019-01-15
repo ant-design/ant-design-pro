@@ -38,7 +38,7 @@ const ProportionSales = memo(
       }
       style={{ marginTop: 24 }}
     >
-      <h4 style={{ marginTop: 8, marginBottom: 32 }}>
+      <h4 style={{ marginTop: 10, marginBottom: 32 }}>
         <FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />
       </h4>
       <Pie
