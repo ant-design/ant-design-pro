@@ -134,6 +134,25 @@
   }
 }
 
+.twoColLayout {
+  .salesCard {
+    height: calc(100% - 24px);
+  }
+  div[class^='ant-col']:last-child {
+    right: 0\9;
+    height: 100%\9;
+    position: absolute\9;
+  }
+  :global {
+    .ant-row {
+      display: flex;
+      display: block\9;
+      flex-flow: row wrap;
+      position: relative\9;
+    }
+  }
+}
+
 .trendText {
   margin-left: 8px;
   color: @heading-color;
