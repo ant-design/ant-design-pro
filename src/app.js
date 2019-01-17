@@ -8,7 +8,7 @@ export const dva = {
   },
 };
 
-let authRoutes = null;
+let authRoutes = {};
 
 function ergodicRoutes(routes, authKey, authority) {
   routes.forEach(element => {
@@ -31,8 +31,13 @@ export function patchRoutes(routes) {
 export function render(oldRender) {
   fetch('/api/auth_routes')
     .then(res => res.json())
-    .then(ret => {
-      authRoutes = ret;
-      oldRender();
-    });
+    .then(
+      ret => {
+        authRoutes = ret;
+        oldRender();
+      },
+      () => {
+        oldRender();
+      }
+    );
 }
