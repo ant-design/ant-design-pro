@@ -1,2 +1,27 @@
-@import '~antd/lib/style/themes/default.less';
-@import '~@/utils/utils.less';
+.kanban {
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  position: absolute;
+  z-index: 1;
+}
+
+.ListItem {
+  padding-left: 10px;
+}
+
+.listContainer {
+  display: inline-block;
+  padding: 8px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.listGroup {
+  display: inline-block;
+  width: 300px;
+  height: 100%;
+  padding: 8px;
+}
