@@ -20,7 +20,7 @@ export interface INoticeIconTabProps {
   name?: string;
   showClear?: boolean;
   skeletonCount?: number;
-  skeletonProps: SkeletonProps;
+  skeletonProps?: SkeletonProps;
   style?: React.CSSProperties;
   title?: string;
 }
