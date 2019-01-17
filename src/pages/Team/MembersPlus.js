@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Card, Avatar, Popover, Button, Icon, List, Row, Col } from 'antd';
+import { Card, Avatar, Popover, Button, Icon, List, Row, Col, Menu, Dropdown } from 'antd';
 import { linkCopyToClipboard } from '@/utils/utils';
 import styles from './MembersPlus.less';
 
@@ -12,7 +12,8 @@ import styles from './MembersPlus.less';
 class MembersPlus extends PureComponent {
   state = {
     visible: false,
-    toggles: {},
+    click: 'all',
+    toggle: {},
   };
 
   componentDidMount() {
@@ -37,15 +38,18 @@ class MembersPlus extends PureComponent {
 
   IconClick = (e, item) => {
     const { id } = item;
-    const { toggles } = this.state;
-
+    const { toggle } = this.state;
     e.stopPropagation();
-    toggles[id] = !toggles[id];
-
-    this.setState(toggles);
+    toggle[id] = !toggle[id];
+    this.setState(toggle);
   };
 
-  handleDepartmentSelect = () => {};
+  handleDepartmentSelect = item => {
+    const { id } = item;
+    let { click } = this.state;
+    click = id;
+    this.setState(click);
+  };
 
   memberInvite() {
     const { visible } = this.state;
@@ -91,23 +95,46 @@ class MembersPlus extends PureComponent {
   }
 
   childDom(items) {
-    const { toggles } = this.state;
+    const menu = (
+      <Menu>
+        <Menu.Item key="0">
+          <a href="">
+            <Icon type="plus-square" className={styles.menuIcon} />
+            增加分组
+          </a>
+        </Menu.Item>
+        <Menu.Item key="1">
+          <a href="">
+            <Icon type="close-circle" className={styles.menuIcon} />
+            删除分组
+          </a>
+        </Menu.Item>
+      </Menu>
+    );
+    const { toggle } = this.state;
+    const { click } = this.state;
 
     if (items.length !== 0) {
       return items.map(item => (
         <div className={styles.treeNode} key={item.name}>
-          <div className={styles.nodeCard} onClick={() => this.handleDepartmentSelect()}>
-            <Icon type="user" className={styles.secIcon} />
-            <span>{item.name}</span>
+          <div
+            className={item.id === click ? styles.nodeCardClick : styles.nodeCard}
+            onClick={() => this.handleDepartmentSelect(item)}
+          >
             {item.child.length !== 0 ? (
               <Icon
-                type="down-circle"
-                className={styles.stateIcon}
+                type={toggle[item.id] ? 'up-circle' : 'down-circle'}
+                className={styles.secIcon}
                 onClick={e => this.IconClick(e, item)}
               />
             ) : null}
+            <span>{item.name}</span>
+
+            <Dropdown overlay={menu} trigger={['click']}>
+              <Icon type="dash" className={styles.dropIcon} />
+            </Dropdown>
           </div>
-          {item.child.length !== 0 && toggles[item.id] ? this.childDom(item.child) : null}
+          {item.child.length !== 0 && toggle[item.id] ? this.childDom(item.child) : null}
         </div>
       ));
     }
@@ -115,25 +142,34 @@ class MembersPlus extends PureComponent {
   }
 
   renderMenu = () => {
+    const { click } = this.state;
     const data = [
       {
+        id: 'all',
         text: '所用成员',
       },
       {
+        id: 'new',
         text: '新加入成员',
       },
       {
-        text: '未分配部门成员.',
+        id: 'noWork',
+        text: '未分配部门成员',
       },
       {
-        text: '停用成员.',
+        id: 'block',
+        text: '停用成员',
       },
     ];
     return data.map(item => (
-      <List.Item key={item.text} className={styles.memberList} style={{ border: 'none' }}>
-        <Icon type="user" className={styles.listIcon} />
+      <div
+        key={item.id}
+        className={item.id === click ? styles.nodeCardClick : styles.nodeCard}
+        onClick={() => this.handleDepartmentSelect(item)}
+      >
+        <Icon type="user" className={styles.secIcon} />
         {item.text}
-      </List.Item>
+      </div>
     ));
   };
 
