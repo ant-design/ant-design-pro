@@ -12,7 +12,7 @@ import styles from './MembersPlus.less';
 class MembersPlus extends PureComponent {
   state = {
     visible: false,
-    click: 'all',
+    click: { all: true },
     toggle: {},
   };
 
@@ -42,13 +42,6 @@ class MembersPlus extends PureComponent {
     e.stopPropagation();
     toggle[id] = !toggle[id];
     this.setState(toggle);
-  };
-
-  handleDepartmentSelect = item => {
-    const { id } = item;
-    let { click } = this.state;
-    click = id;
-    this.setState(click);
   };
 
   memberInvite() {
@@ -117,10 +110,7 @@ class MembersPlus extends PureComponent {
     if (items.length !== 0) {
       return items.map(item => (
         <div className={styles.treeNode} key={item.name}>
-          <div
-            className={item.id === click ? styles.nodeCardClick : styles.nodeCard}
-            onClick={() => this.handleDepartmentSelect(item)}
-          >
+          <div className={click[item.id] ? styles.nodeCardClick : styles.nodeCard}>
             {item.child.length !== 0 ? (
               <Icon
                 type={toggle[item.id] ? 'up-circle' : 'down-circle'}
@@ -162,11 +152,7 @@ class MembersPlus extends PureComponent {
       },
     ];
     return data.map(item => (
-      <div
-        key={item.id}
-        className={item.id === click ? styles.nodeCardClick : styles.nodeCard}
-        onClick={() => this.handleDepartmentSelect(item)}
-      >
+      <div key={item.id} className={click[item.id] ? styles.nodeCardClick : styles.nodeCard}>
         <Icon type="user" className={styles.secIcon} />
         {item.text}
       </div>
