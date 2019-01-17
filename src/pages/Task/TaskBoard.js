@@ -25,6 +25,121 @@ class TaskBoard extends PureComponent {
                   />
                 </List.Item>
               </List>
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+            </Card>
+          </div>
+          <div className={styles.listGroup}>
+            <Card bodyStyle={{ padding: 0, height: '100%' }} bordered={false} title="列表">
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+            </Card>
+          </div>
+          <div className={styles.listGroup}>
+            <Card bodyStyle={{ padding: 0, height: '100%' }} bordered={false} title="列表">
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+            </Card>
+          </div>
+          <div className={styles.listGroup}>
+            <Card bodyStyle={{ padding: 0, height: '100%' }} bordered={false} title="列表">
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
+            </Card>
+          </div>
+          <div className={styles.listGroup}>
+            <Card bodyStyle={{ padding: 0, height: '100%' }} bordered={false} title="列表">
+              <List size="small">
+                <List.Item className={styles.ListItem}>
+                  <List.Item.Meta
+                    avatar={<Avatar src="" className={styles.avatarPic} />}
+                    title="名称"
+                    description={<span className={styles.membertype}>描述</span>}
+                  />
+                </List.Item>
+              </List>
             </Card>
           </div>
         </div>
