@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Tag, Icon } from 'antd';
+import { formatMessage } from 'umi/locale';
 
 import styles from './index.less';
 
@@ -117,7 +118,10 @@ class TagSelect extends Component {
           })}
         {expandable && (
           <a className={styles.trigger} onClick={this.handleExpand}>
-            {expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
+            {expand
+              ? formatMessage({ id: 'component.tagSelect.expand' })
+              : formatMessage({ id: 'component.tagSelect.collapse' })}
+            <Icon type={expand ? 'up' : 'down'} />
           </a>
         )}
       </div>
