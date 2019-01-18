@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Tag, Icon } from 'antd';
 
@@ -15,8 +16,18 @@ const TagSelectOption = ({ children, checked, onChange, value }) => (
 TagSelectOption.isTagSelectOption = true;
 
 class TagSelect extends Component {
+  static propTypes = {
+    expandText: PropTypes.string,
+    collapseText: PropTypes.string,
+    selectAllText: PropTypes.string,
+    hideCheckAll: PropTypes.bool,
+  };
+
   static defaultProps = {
     hideCheckAll: false,
+    expandText: 'expand',
+    collapseText: 'collapse',
+    selectAllText: 'select all',
   };
 
   constructor(props) {
@@ -88,7 +99,16 @@ class TagSelect extends Component {
 
   render() {
     const { value, expand } = this.state;
-    const { children, hideCheckAll, className, style, expandable } = this.props;
+    const {
+      children,
+      hideCheckAll,
+      className,
+      style,
+      expandable,
+      expandText,
+      collapseText,
+      selectAllText,
+    } = this.props;
 
     const checkedAll = this.getAllTags().length === value.length;
 
@@ -100,7 +120,7 @@ class TagSelect extends Component {
       <div className={cls} style={style}>
         {hideCheckAll ? null : (
           <CheckableTag checked={checkedAll} key="tag-select-__all__" onChange={this.onSelectAll}>
-            全部
+            {selectAllText}
           </CheckableTag>
         )}
         {value &&
@@ -117,7 +137,7 @@ class TagSelect extends Component {
           })}
         {expandable && (
           <a className={styles.trigger} onClick={this.handleExpand}>
-            {expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
+            {expand ? collapseText : expandText} <Icon type={expand ? 'up' : 'down'} />
           </a>
         )}
       </div>
