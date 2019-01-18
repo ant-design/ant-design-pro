@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
-container: antdesign/docker-azure
+container: antdesign/docker-azure:latest
 
 steps:
   - task: NodeTool@0
