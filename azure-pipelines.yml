@@ -9,8 +9,9 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
-container: image:circleci/node:latest-browsers
-    options: "-u root"
+container:
+  image: circleci/node:latest-browsers
+  options: '-u root'
 
 steps:
   - task: NodeTool@0
