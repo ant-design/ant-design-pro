@@ -19,6 +19,7 @@ class TagSelect extends Component {
   static propTypes = {
     expandText: PropTypes.string,
     collapseText: PropTypes.string,
+    selectAllText: PropTypes.string,
     hideCheckAll: PropTypes.bool,
   };
 
@@ -26,6 +27,7 @@ class TagSelect extends Component {
     hideCheckAll: false,
     expandText: 'expand',
     collapseText: 'collapse',
+    selectAllText: 'select all',
   };
 
   constructor(props) {
@@ -105,6 +107,7 @@ class TagSelect extends Component {
       expandable,
       expandText,
       collapseText,
+      selectAllText,
     } = this.props;
 
     const checkedAll = this.getAllTags().length === value.length;
@@ -117,7 +120,7 @@ class TagSelect extends Component {
       <div className={cls} style={style}>
         {hideCheckAll ? null : (
           <CheckableTag checked={checkedAll} key="tag-select-__all__" onChange={this.onSelectAll}>
-            全部
+            {selectAllText}
           </CheckableTag>
         )}
         {value &&
