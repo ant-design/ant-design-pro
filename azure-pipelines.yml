@@ -13,7 +13,7 @@ jobs:
       vmImage: 'Ubuntu-16.04'
 
     steps:
-      - script: npm install
+      - script: yarn install
         displayName: install
       - script: npm run lint
         displayName: lint
@@ -29,7 +29,7 @@ jobs:
       options: '-u root'
 
     steps:
-      - script: npm install
+      - script: yarn install
         displayName: install
       - script: npm run test:all
         displayName: test
@@ -41,7 +41,7 @@ jobs:
       - task: NodeTool@0
         inputs:
           versionSpec: '11.x'
-      - script: npm install
+      - script: yarn install
         displayName: install
       - script: npm run lint
         displayName: lint
@@ -55,7 +55,7 @@ jobs:
       - task: NodeTool@0
         inputs:
           versionSpec: '11.x'
-      - script: npm install
+      - script: yarn install
         displayName: install
       - script: npm run lint
         displayName: lint
