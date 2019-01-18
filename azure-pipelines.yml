@@ -9,7 +9,9 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
-container: antdesign/docker-azure:latest
+container: 
+  - image:circleci/node:latest-browsers
+    options: "-u root"
 
 steps:
   - task: NodeTool@0
