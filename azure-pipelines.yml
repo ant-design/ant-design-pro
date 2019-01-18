@@ -4,27 +4,36 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
+container: antdesign/docker-azure
+
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      command: install
 
-- script: |
-    npm install
-    npm run lint
-    npm run build
-  displayName: 'npm install and build'
+  - task: Npm@1
+    displayName: 'lint'
+    inputs:
+      command: custom
+      customCommand: 'run lint'
 
-- task: test@0
-  inputs:
-    versionSpec: '10.x'
-  - script: |
-    npm install
-    npm run test:all
-  displayName: 'test ant-design-pro'
+  - task: Npm@1
+    displayName: 'build'
+    inputs:
+      command: custom
+      customCommand: 'run build'
+
+  - task: Npm@1
+    displayName: 'test:all'
+    inputs:
+      command: custom
+      customCommand: 'run test:all'
