@@ -322,7 +322,7 @@ class BasicList extends PureComponent {
           </Card>
         </div>
         <Modal
-          title={done ? null : `任务${current ? '编辑' : '添加'}`}
+          title={done ? null : `任务${current.id ? '编辑' : '添加'}`}
           className={styles.standardListForm}
           width={640}
           bodyStyle={done ? { padding: '72px 0' } : { padding: '28px 0 0' }}

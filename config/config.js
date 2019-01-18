@@ -20,6 +20,7 @@ const plugins = [
       },
       dynamicImport: {
         loadingComponent: './components/PageLoading/index',
+        webpackChunkName: true,
       },
       pwa: {
         workboxPluginMode: 'InjectManifest',
@@ -33,7 +34,7 @@ const plugins = [
               include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
               exclude: ['@babel/runtime'],
             },
-            hardSource: true,
+            hardSource: false,
           }
         : {}),
     },
@@ -57,6 +58,7 @@ export default {
   define: {
     APP_TYPE: process.env.APP_TYPE || '',
   },
+  treeShaking: true,
   targets: {
     ie: 11,
   },
