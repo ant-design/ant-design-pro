@@ -18,16 +18,16 @@ TagSelectOption.isTagSelectOption = true;
 class TagSelect extends Component {
   static propTypes = {
     expandText: PropTypes.string,
-    collapseText: PropTypes.string,
-    selectAllText: PropTypes.string,
-    hideCheckAll: PropTypes.bool,
+    collapseText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    selectAllText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    hideCheckAll: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   };
 
   static defaultProps = {
     hideCheckAll: false,
     expandText: 'expand',
     collapseText: 'collapse',
-    selectAllText: 'select all',
+    selectAllText: 'all',
   };
 
   constructor(props) {
