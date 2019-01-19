@@ -7,6 +7,11 @@ trigger:
   - master
 
 jobs:
+  - checkout: self
+    clean: false
+    fetchDepth: 5
+    lfs: true
+
   - job: lintAndBuild
 
     pool:
