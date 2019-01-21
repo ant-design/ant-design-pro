@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Icon, Tabs, Badge, Spin } from 'antd';
 import classNames from 'classnames';
+import Debounce from 'lodash-decorators/debounce';
 import HeaderDropdown from '../HeaderDropdown';
 import List from './NoticeList';
 import styles from './index.less';
@@ -53,6 +54,7 @@ export default class NoticeIcon extends PureComponent {
     onTabChange(tabType);
   };
 
+  @Debounce(100)
   onLoadMore = (tabProps, event) => {
     const { onLoadMore } = this.props;
     onLoadMore(tabProps, event);
