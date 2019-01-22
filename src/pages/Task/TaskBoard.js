@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Checkbox, Icon } from 'antd';
+import { Checkbox, Icon, Menu, Dropdown } from 'antd';
 import styles from './TaskBoard.less';
 
 @connect(({ team, loading }) => ({
@@ -12,7 +12,31 @@ class TaskBoard extends PureComponent {
 
   componentDidMount() {}
 
+  titleHandle() {
+    console.log(this);
+  }
+
   render() {
+    const menu = (
+      <Menu className={styles.menu}>
+        <div className={styles.menuTitle}>列表菜单</div>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="">
+            1st menu item
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="">
+            2nd menu item
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="">
+            3rd menu item
+          </a>
+        </Menu.Item>
+      </Menu>
+    );
     return (
       <div className={styles.kanban}>
         <div className={styles.listContainer}>
@@ -22,13 +46,17 @@ class TaskBoard extends PureComponent {
                 任务一任务一任务一任务一任务一任务一任务一任务一任务一任务一任务一任务一
               </h4>
               <div className={styles.iconBox}>
-                <Icon type="dash" className={styles.titleIcon} />
+                <Dropdown overlay={menu} trigger={['click']}>
+                  <a className="ant-dropdown-link" href="#">
+                    <Icon type="dash" className={styles.titleIcon} />
+                  </a>
+                </Dropdown>
               </div>
             </div>
             <div className={styles.cardList}>
               <div className={styles.item}>
                 <div className={styles.checkBox}>
-                  <Checkbox />
+                  <Checkbox disabled />
                   <span title="触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014">
                     触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014
                   </span>
@@ -36,23 +64,10 @@ class TaskBoard extends PureComponent {
                 <div className={styles.icon}>
                   <span className={styles.ceo}>林鑫</span>
                 </div>
-              </div>
-              <div className={styles.item}>
-                <div className={styles.checkBox}>
-                  <Checkbox />
-                  <span>触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014</span>
-                </div>
-                <div className={styles.icon}>
-                  <span className={styles.ceo}>林鑫</span>
-                </div>
-              </div>
-              <div className={styles.item}>
-                <div className={styles.checkBox}>
-                  <Checkbox />
-                  <span>触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014</span>
-                </div>
-                <div className={styles.icon}>
-                  <span className={styles.ceo}>林鑫</span>
+                <div className={styles.endTime}>
+                  <span className={styles.rich}>
+                    <i>上周四</i> 截止
+                  </span>
                 </div>
               </div>
             </div>
@@ -70,7 +85,7 @@ class TaskBoard extends PureComponent {
             <div className={styles.cardList}>
               <div className={styles.item}>
                 <div className={styles.checkBox}>
-                  <Checkbox />
+                  <Checkbox disabled />
                   <span title="触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014">
                     触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014
                   </span>
@@ -78,25 +93,19 @@ class TaskBoard extends PureComponent {
                 <div className={styles.icon}>
                   <span className={styles.ceo}>林鑫</span>
                 </div>
-              </div>
-              <div className={styles.item}>
-                <div className={styles.checkBox}>
-                  <Checkbox />
-                  <span>触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014</span>
-                </div>
-                <div className={styles.icon}>
-                  <span className={styles.ceo}>林鑫</span>
+                <div className={styles.endTime}>
+                  <span className={styles.overdue}>
+                    <i>上周四</i> 截止
+                  </span>
                 </div>
               </div>
-              <div className={styles.item}>
-                <div className={styles.checkBox}>
-                  <Checkbox />
-                  <span>触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014</span>
-                </div>
-                <div className={styles.icon}>
-                  <span className={styles.ceo}>林鑫</span>
-                </div>
-              </div>
+            </div>
+          </div>
+
+          <div className={styles.listGroup}>
+            <div className={styles.add}>
+              <Icon type="plus" />
+              <span>新建列表</span>
             </div>
           </div>
         </div>

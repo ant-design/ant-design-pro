@@ -26,6 +26,7 @@
   right: 0;
   bottom: 0;
   z-index: 1;
+  overflow-x: auto;
 }
 
 .ListItem {
@@ -33,16 +34,16 @@
 }
 
 .listContainer {
-  display: block;
   padding: 8px;
-  white-space: nowrap;
   height: 100%;
+  width: max-content;
+  overflow-x: auto;
 }
 
 .listGroup {
   position: relative;
   display: block;
-  width: 300px;
+  width: 260px;
   height: 100%;
   padding: 8px 15px;
   margin: 0 10px;
@@ -107,13 +108,12 @@
 }
 .checkBox {
   display: inline-block;
-  width: 200px;
-  height: 40px;
-  line-height: 40px;
+  width: 190px;
+  height: 35px;
+  line-height: 35px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
   span {
     cursor: Default;
   }
@@ -121,7 +121,7 @@
 .icon {
   display: inline-block;
   float: right;
-  padding: 8px 10px;
+  padding: 4.5px 0;
   span {
     display: block;
     width: 24px;
@@ -146,4 +146,47 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.6);
+}
+.add {
+  line-height: 30px;
+  font-size: 16px;
+  color: #999;
+  cursor: pointer;
+  span {
+    display: inline-block;
+    text-indent: 5px;
+  }
+}
+.endTime {
+  margin-left: 25px;
+  span {
+    display: inline-block;
+    padding: 0 5px;
+    line-height: 20px;
+    color: #fff;
+    border-radius: 5px;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: default;
+    i {
+      font-style: normal;
+    }
+  }
+  .overdue {
+    background-color: #f00;
+  }
+  .rich {
+    background-color: #15bc84;
+  }
+}
+.menu {
+  width: 200px;
+  .menuTitle {
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-bottom: 1px solid #999;
+  }
 }
