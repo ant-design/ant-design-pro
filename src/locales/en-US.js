@@ -1,6 +1,8 @@
 import globalHeader from './en-US/globalHeader';
 import menu from './en-US/menu';
+import settingDrawer from './en-US/settingDrawer';
 import settings from './en-US/settings';
+import pwa from './en-US/pwa';
 
 export default {
   'navBar.lang': 'Languages',
@@ -10,5 +12,7 @@ export default {
   'app.home.introduce': 'introduce',
   ...globalHeader,
   ...menu,
+  ...settingDrawer,
   ...settings,
+  ...pwa,
 };
