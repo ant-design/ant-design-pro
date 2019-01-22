@@ -1,11 +1,32 @@
+::-webkit-scrollbar-track-piece {
+  //滚动条凹槽的颜色，还可以设置边框属性
+  background-color: #f8f8f8;
+}
+
+::-webkit-scrollbar {
+  //滚动条的宽度
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  //滚动条的设置
+  background-color: #ddd;
+  background-clip: padding-box;
+  min-height: 28px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
 .kanban {
+  position: fixed;
   top: 60px;
   left: 0;
   right: 0;
   bottom: 0;
-  overflow: auto;
-  position: absolute;
   z-index: 1;
+  overflow-x: auto;
 }
 
 .ListItem {
@@ -13,15 +34,159 @@
 }
 
 .listContainer {
-  display: inline-block;
   padding: 8px;
-  white-space: nowrap;
+  height: 100%;
+  width: max-content;
   overflow-x: auto;
 }
 
 .listGroup {
-  display: inline-block;
-  width: 300px;
+  position: relative;
+  display: block;
+  width: 260px;
   height: 100%;
-  padding: 8px;
+  padding: 8px 15px;
+  margin: 0 10px;
+  float: left;
+}
+.listTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: #f0f2f5;
+  h4 {
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    color: #383838;
+    line-height: 40px;
+    font-weight: bold;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .iconBox {
+    float: right;
+    padding: 13px;
+  }
+  .titleIcon {
+    font-size: 14px;
+  }
+}
+.cardList {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}
+.item {
+  position: relative;
+  height: 75px;
+  padding: 0 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.item:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  bottom: 0;
+  background-color: #999;
+  transition: width 0.5s;
+  border-radius: 5px 0 0 5px;
+}
+.item:hover:before {
+  width: 10px;
+}
+.checkBox {
+  display: inline-block;
+  width: 190px;
+  height: 35px;
+  line-height: 35px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  span {
+    cursor: Default;
+  }
+}
+.icon {
+  display: inline-block;
+  float: right;
+  padding: 4.5px 0;
+  span {
+    display: block;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: 12px;
+    text-align: center;
+    color: #fff;
+  }
+  .ceo {
+    background-color: #f4cf5b;
+  }
+  .minister {
+    background-color: #c38acf;
+  }
+}
+.testPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.add {
+  line-height: 30px;
+  font-size: 16px;
+  color: #999;
+  cursor: pointer;
+  span {
+    display: inline-block;
+    text-indent: 5px;
+  }
+}
+.endTime {
+  margin-left: 25px;
+  span {
+    display: inline-block;
+    padding: 0 5px;
+    line-height: 20px;
+    color: #fff;
+    border-radius: 5px;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: default;
+    i {
+      font-style: normal;
+    }
+  }
+  .overdue {
+    background-color: #f00;
+  }
+  .rich {
+    background-color: #15bc84;
+  }
+}
+.menu {
+  width: 200px;
+  .menuTitle {
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-bottom: 1px solid #999;
+  }
 }
