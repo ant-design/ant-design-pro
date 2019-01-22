@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import { Form, Card, Select, List, Tag, Icon, Row, Col, Button } from 'antd';
+import { FormattedMessage } from 'umi/locale';
 
 import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
@@ -104,6 +105,14 @@ class SearchList extends Component {
       },
     };
 
+    const actionsTextMap = {
+      expandText: <FormattedMessage id="component.tagSelect.expand" defaultMessage="Expand" />,
+      collapseText: (
+        <FormattedMessage id="component.tagSelect.collapse" defaultMessage="Collapse" />
+      ),
+      selectAllText: <FormattedMessage id="component.tagSelect.all" defaultMessage="All" />,
+    };
+
     const loadMore =
       list.length > 0 ? (
         <div style={{ textAlign: 'center', marginTop: 16 }}>
@@ -126,7 +135,7 @@ class SearchList extends Component {
             <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
-                  <TagSelect expandable>
+                  <TagSelect expandable actionsText={actionsTextMap}>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
                     <TagSelect.Option value="cat3">类目三</TagSelect.Option>
