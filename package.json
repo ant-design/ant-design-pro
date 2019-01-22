@@ -38,11 +38,13 @@
     "lodash-decorators": "^6.0.0",
     "memoize-one": "^5.0.0",
     "moment": "^2.22.2",
+    "omit.js": "^1.0.0",
     "path-to-regexp": "^2.4.0",
     "prop-types": "^15.5.10",
     "rc-animate": "^2.4.4",
     "react": "^16.6.3",
     "react-container-query": "^0.11.0",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",
     "react-media": "^1.8.0",
     "umi-request": "^1.0.0"

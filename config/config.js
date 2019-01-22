@@ -71,25 +71,28 @@ export default {
     ie: 11,
   },
   // 路由配置
-  routes: [{
-    path: '/user',
-    components: ['../layouts/UserLayout'],
-    routes: [],
-  }, {
-    path: '/',
-    component: '../layouts/BasicLayout',
-    Routes: ['src/pages/Authorized'],
-    authority: ['admin', 'user'],
-    routes: [
-      // dashboard
-      {
-        path: '/',
-        name: 'dashboard',
-        icon: 'dashboard',
-        component: './BasicDemo',
-      },
-    ],
-  }],
+  routes: [
+    {
+      path: '/user',
+      components: ['../layouts/UserLayout'],
+      routes: [],
+    },
+    {
+      path: '/',
+      component: '../layouts/BasicLayout',
+      Routes: ['src/pages/Authorized'],
+      authority: ['admin', 'user'],
+      routes: [
+        // dashboard
+        {
+          path: '/',
+          name: 'welcome',
+          icon: 'smile',
+          component: './Welcome',
+        },
+      ],
+    },
+  ],
   // Theme for antd
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
