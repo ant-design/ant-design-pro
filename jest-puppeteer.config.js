@@ -10,4 +10,10 @@ module.exports = {
       '--no-zygote',
     ],
   },
+  server: {
+    command: `npm start`,
+    port: 8000,
+    launchTimeout: 10000,
+    debug: true,
+  },
 };
