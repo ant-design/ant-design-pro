@@ -40,7 +40,7 @@ export default class PromiseRender extends React.PureComponent {
     if (!React.isValidElement(target)) {
       return target;
     }
-    return () => target;
+    return (props) => React.cloneElement(target, {...props});
   };
 
   render() {
