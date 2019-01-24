@@ -12,10 +12,6 @@ class TaskBoard extends PureComponent {
 
   componentDidMount() {}
 
-  titleHandle() {
-    console.log(this);
-  }
-
   render() {
     const menu = (
       <Menu className={styles.menu}>
@@ -54,6 +50,57 @@ class TaskBoard extends PureComponent {
               </div>
             </div>
             <div className={styles.cardList}>
+              <div className={styles.item}>
+                <div className={styles.checkBox}>
+                  <Checkbox disabled />
+                  <span title="触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014">
+                    触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014
+                  </span>
+                </div>
+                <div className={styles.icon}>
+                  <span className={styles.ceo}>林鑫</span>
+                </div>
+                <div className={styles.endTime}>
+                  <span className={styles.rich}>
+                    <i>上周四</i> 截止
+                  </span>
+                </div>
+              </div>
+
+              <div className={styles.item}>
+                <div className={styles.checkBox}>
+                  <Checkbox disabled />
+                  <span title="触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014">
+                    触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014
+                  </span>
+                </div>
+                <div className={styles.icon}>
+                  <span className={styles.ceo}>林鑫</span>
+                </div>
+                <div className={styles.endTime}>
+                  <span className={styles.rich}>
+                    <i>上周四</i> 截止
+                  </span>
+                </div>
+              </div>
+
+              <div className={styles.item}>
+                <div className={styles.checkBox}>
+                  <Checkbox disabled />
+                  <span title="触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014">
+                    触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014
+                  </span>
+                </div>
+                <div className={styles.icon}>
+                  <span className={styles.ceo}>林鑫</span>
+                </div>
+                <div className={styles.endTime}>
+                  <span className={styles.rich}>
+                    <i>上周四</i> 截止
+                  </span>
+                </div>
+              </div>
+
               <div className={styles.item}>
                 <div className={styles.checkBox}>
                   <Checkbox disabled />

@@ -1,3 +1,4 @@
+@import '~antd/lib/style/themes/default.less';
 ::-webkit-scrollbar-track-piece {
   //滚动条凹槽的颜色，还可以设置边框属性
   background-color: #f8f8f8;
@@ -87,10 +88,12 @@
 .item {
   position: relative;
   height: 75px;
+  width: 250px;
   padding: 0 20px;
   margin-top: 10px;
-  border-radius: 5px;
+  border-radius: @border-radius-base;
   background-color: #fff;
+  box-shadow: @box-shadow-base;
 }
 .item:before {
   content: '';
@@ -104,11 +107,11 @@
   border-radius: 5px 0 0 5px;
 }
 .item:hover:before {
-  width: 10px;
+  width: 5px;
 }
 .checkBox {
   display: inline-block;
-  width: 190px;
+  width: 170px;
   height: 35px;
   line-height: 35px;
   white-space: nowrap;
@@ -133,19 +136,11 @@
     color: #fff;
   }
   .ceo {
-    background-color: #f4cf5b;
+    background-color: @processing-color;
   }
   .minister {
-    background-color: #c38acf;
+    background-color: @processing-color;
   }
-}
-.testPopup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
 }
 .add {
   line-height: 30px;
@@ -174,10 +169,10 @@
     }
   }
   .overdue {
-    background-color: #f00;
+    background-color: @error-color;
   }
   .rich {
-    background-color: #15bc84;
+    background-color: @success-color;
   }
 }
 .menu {

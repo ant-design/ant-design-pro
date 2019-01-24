@@ -49,12 +49,6 @@ export default [
         icon: 'team',
         component: './Team/Members',
       },
-      {
-        path: '/membersPlus',
-        name: 'membersPlus',
-        icon: 'team',
-        component: './Team/MembersPlus',
-      },
       // forms
       {
         hideInMenu: true,
