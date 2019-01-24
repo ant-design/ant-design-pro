@@ -100,14 +100,15 @@ class TagSelect extends Component {
   render() {
     const { value, expand } = this.state;
     const { children, hideCheckAll, className, style, expandable, actionsText } = this.props;
-
     const checkedAll = this.getAllTags().length === value.length;
-    const { expandText, collapseText, selectAllText } = actionsText;
+    const { expandText = 'Expand', collapseText = 'Collapse', selectAllText = 'All' } =
+      actionsText === null ? {} : actionsText;
 
     const cls = classNames(styles.tagSelect, className, {
       [styles.hasExpandTag]: expandable,
       [styles.expanded]: expand,
     });
+
     return (
       <div className={cls} style={style}>
         {hideCheckAll ? null : (
