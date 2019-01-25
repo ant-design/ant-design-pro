@@ -301,7 +301,6 @@ class TableList extends PureComponent {
       title: '服务调用次数',
       dataIndex: 'callNo',
       sorter: true,
-      align: 'right',
       render: val => `${val} 万`,
       // mark to display a total number
       needTotal: true,
@@ -598,7 +597,7 @@ class TableList extends PureComponent {
           </Col>
         </Row>
         <div style={{ overflow: 'hidden' }}>
-          <div style={{ float: 'right', marginBottom: 24 }}>
+          <div style={{ marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">
               查询
             </Button>
