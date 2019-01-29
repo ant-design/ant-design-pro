@@ -35,9 +35,18 @@
     position: fixed;
     top: 0;
     left: 0;
-    :global(.ant-menu-root) {
-      overflow-y: auto;
-      height: ~'calc(100vh - @{nav-header-height})';
+    :global {
+      .ant-menu-root {
+        overflow-y: auto;
+        height: ~'calc(100vh - @{nav-header-height})';
+      }
+      .ant-menu-inline {
+        border-right: 0;
+        .ant-menu-item,
+        .ant-menu-submenu-title {
+          width: 100%;
+        }
+      }
     }
   }
   &.light {
