@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, List, Skeleton, Tag } from 'antd';
+import { Avatar, List, Skeleton } from 'antd';
 import classNames from 'classnames';
 import styles from './NoticeList.less';
 
@@ -31,19 +31,6 @@ export default function NoticeList({
     );
   }
   const loadingList = Array.from({ length: loading ? skeletonCount : 0 }).map(() => ({ loading }));
-  const LoadMore = !onLoadMore ? null : (
-    <div className={styles.loadMore}>
-      {loadedAll ? (
-        <Tag>
-          <span>{locale.loadedAll}</span>
-        </Tag>
-      ) : (
-        <Tag color="#1890FF" onClick={onLoadMore}>
-          <span>{locale.loadMore}</span>
-        </Tag>
-      )}
-    </div>
-  );
   const onScroll = event => {
     if (!scrollToLoad || loading || loadedAll) return;
     if (typeof onLoadMore !== 'function') return;
@@ -62,7 +49,7 @@ export default function NoticeList({
   }
   return (
     <div>
-      <List className={styles.list} loadMore={LoadMore} onScroll={onScroll}>
+      <List className={styles.list} onScroll={onScroll}>
         {[...data, ...loadingList].map((item, i) => {
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,
@@ -102,11 +89,21 @@ export default function NoticeList({
           );
         })}
       </List>
-      {showClear ? (
-        <div className={styles.clear} onClick={onClear}>
-          {locale.clear} {title}
-        </div>
-      ) : null}
+      <div className={styles.bottomBar}>
+        {!showClear ? (
+          <div onClick={onClear}>
+            {locale.clear} {title}
+          </div>
+        ) : null}
+        {onLoadMore ? (
+          <div
+            className={classNames({ [styles.disabled]: loading || loadedAll })}
+            onClick={onLoadMore}
+          >
+            {loadedAll ? locale.loadedAll : locale.loadMore}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

@@ -75,17 +75,32 @@
   }
 }
 
-.clear {
+.bottomBar {
   height: 46px;
   line-height: 46px;
   text-align: center;
   color: @text-color;
   border-radius: 0 0 @border-radius-base @border-radius-base;
   border-top: 1px solid @border-color-split;
-  transition: all 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    color: @heading-color;
+  div {
+    width: 50%;
+    display: inline-block;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+      color: @heading-color;
+    }
+    &:only-child {
+      width: 100%;
+    }
+    &:not(:only-child):last-child {
+      border-left: 1px solid @border-color-split;
+    }
+    &.disabled {
+      cursor: unset;
+      &:hover {
+        color: @text-color;
+      }
+    }
   }
 }
