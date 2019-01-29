@@ -98,7 +98,7 @@ export default function NoticeList({
         {onLoadMore ? (
           <div
             className={classNames({ [styles.disabled]: loading || loadedAll })}
-            onClick={onLoadMore}
+            onClick={loadedAll ? null : onLoadMore}
           >
             {loadedAll ? locale.loadedAll : locale.loadMore}
           </div>
