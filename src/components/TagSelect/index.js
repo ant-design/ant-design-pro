@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Tag, Icon } from 'antd';
+import { formatMessage, FormattedMessage } from 'umi/locale';
 
 import styles from './index.less';
 
@@ -100,7 +101,7 @@ class TagSelect extends Component {
       <div className={cls} style={style}>
         {hideCheckAll ? null : (
           <CheckableTag checked={checkedAll} key="tag-select-__all__" onChange={this.onSelectAll}>
-            全部
+            <FormattedMessage id="app.tag.select.all" />
           </CheckableTag>
         )}
         {value &&
@@ -117,7 +118,10 @@ class TagSelect extends Component {
           })}
         {expandable && (
           <a className={styles.trigger} onClick={this.handleExpand}>
-            {expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
+            {expand
+              ? formatMessage({ id: 'app.tag.select.collapse' })
+              : formatMessage({ id: 'app.tag.select.expand' })}{' '}
+            <Icon type={expand ? 'up' : 'down'} />
           </a>
         )}
       </div>

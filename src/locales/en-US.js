@@ -9,6 +9,7 @@ import result from './en-US/result';
 import settingDrawer from './en-US/settingDrawer';
 import settings from './en-US/settings';
 import pwa from './en-US/pwa';
+import tagSelect from './en-US/tagSelect';
 
 export default {
   'navBar.lang': 'Languages',
@@ -30,4 +31,5 @@ export default {
   ...settingDrawer,
   ...settings,
   ...pwa,
+  ...tagSelect,
 };
