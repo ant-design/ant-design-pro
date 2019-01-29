@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, List, Skeleton } from 'antd';
+import { Avatar, List, Skeleton, Tag } from 'antd';
 import classNames from 'classnames';
 import styles from './NoticeList.less';
 
@@ -31,13 +31,17 @@ export default function NoticeList({
     );
   }
   const loadingList = Array.from({ length: loading ? skeletonCount : 0 }).map(() => ({ loading }));
-  const LoadMore = loadedAll ? (
-    <div className={classNames(styles.loadMore, styles.loadedAll)}>
-      <span>{locale.loadedAll}</span>
-    </div>
-  ) : (
-    <div className={styles.loadMore} onClick={onLoadMore}>
-      <span>{locale.loadMore}</span>
+  const LoadMore = (
+    <div className={styles.loadMore}>
+      {loadedAll ? (
+        <Tag>
+          <span>{locale.loadedAll}</span>
+        </Tag>
+      ) : (
+        <Tag color="#1890FF" onClick={onLoadMore}>
+          <span>{locale.loadMore}</span>
+        </Tag>
+      )}
     </div>
   );
   const onScroll = event => {
