@@ -144,20 +144,18 @@ export default class BaseMenu extends PureComponent {
     });
 
     return (
-      <div className={styles.baseMenu}>
-        <Menu
-          key="Menu"
-          mode={mode}
-          theme={theme}
-          onOpenChange={handleOpenChange}
-          selectedKeys={selectedKeys}
-          style={style}
-          className={cls}
-          {...props}
-        >
-          {this.getNavMenuItems(menuData)}
-        </Menu>
-      </div>
+      <Menu
+        key="Menu"
+        mode={mode}
+        theme={theme}
+        onOpenChange={handleOpenChange}
+        selectedKeys={selectedKeys}
+        style={style}
+        className={cls}
+        {...props}
+      >
+        {this.getNavMenuItems(menuData)}
+      </Menu>
     );
   }
 }
