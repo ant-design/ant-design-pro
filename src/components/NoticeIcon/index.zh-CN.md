@@ -16,7 +16,7 @@ bell | translate this please -> Change the bell Icon | ReactNode | `<Icon type='
 loading | 弹出卡片加载状态 | boolean | `false`
 onClear | 点击清空按钮的回调 | function(tabName) | -
 onItemClick | 点击列表项的回调 | function(item, tabProps) | -
-onLoadMore | 加载更多的回调 | function(tabProps, event) | -
+onLoadMore | 加载更多的回调 | function(tabProps, event) \| null | `null`
 onPopupVisibleChange | 弹出卡片显隐的回调 | function(visible) | -
 onTabChange | 切换页签的回调 | function(tabTitle) | -
 popupVisible | 控制弹层显隐 | boolean | -

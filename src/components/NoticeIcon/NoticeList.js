@@ -14,9 +14,9 @@ export default function NoticeList({
   emptyText,
   emptyImage,
   loading,
-  onLoadMore,
   visible,
   loadedAll = true,
+  onLoadMore = null,
   scrollToLoad = true,
   showClear = true,
   skeletonCount = 5,
@@ -31,7 +31,7 @@ export default function NoticeList({
     );
   }
   const loadingList = Array.from({ length: loading ? skeletonCount : 0 }).map(() => ({ loading }));
-  const LoadMore = (
+  const LoadMore = !onLoadMore ? null : (
     <div className={styles.loadMore}>
       {loadedAll ? (
         <Tag>
