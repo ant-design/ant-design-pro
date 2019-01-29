@@ -90,7 +90,7 @@ export default function NoticeList({
         })}
       </List>
       <div className={styles.bottomBar}>
-        {!showClear ? (
+        {showClear ? (
           <div onClick={onClear}>
             {locale.clear} {title}
           </div>
