@@ -100,18 +100,20 @@ export default class BreadcrumbView extends PureComponent {
         </Breadcrumb.Item>
       ) : null;
     });
-    // Add home breadcrumbs to your head
-    extraBreadcrumbItems.unshift(
-      <Breadcrumb.Item key="home">
-        {createElement(
-          linkElement,
-          {
-            [linkElement === 'a' ? 'href' : 'to']: '/',
-          },
-          home || 'Home'
-        )}
-      </Breadcrumb.Item>
-    );
+    // Add home breadcrumbs to your head if defined
+    if (home) {
+      extraBreadcrumbItems.unshift(
+        <Breadcrumb.Item key="home">
+          {createElement(
+            linkElement,
+            {
+              [linkElement === 'a' ? 'href' : 'to']: '/',
+            },
+            home
+          )}
+        </Breadcrumb.Item>
+      );
+    }
     return (
       <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
         {extraBreadcrumbItems}
