@@ -22,7 +22,7 @@ export default function NoticeList({
   skeletonCount = 5,
   skeletonProps = {},
 }) {
-  if (data.length === 0) {
+  if (!loading && data.length === 0) {
     return (
       <div className={styles.notFound}>
         {emptyImage ? <img src={emptyImage} alt="not found" /> : null}

@@ -66,9 +66,9 @@ export default class GlobalHeaderRight extends PureComponent {
   fetchMoreNotices = tabProps => {
     const { list, name } = tabProps;
     const { dispatch, notices = [] } = this.props;
-    const lastItemId = notices[notices.length - 1].id;
+    const lastItemId = notices.length ? notices[notices.length - 1].id : null;
     dispatch({
-      type: 'global/fetchMoreNotices',
+      type: 'global/fetchNotices',
       payload: {
         lastItemId,
         type: name,
@@ -80,7 +80,6 @@ export default class GlobalHeaderRight extends PureComponent {
   render() {
     const {
       currentUser,
-      fetchingMoreNotices,
       fetchingNotices,
       loadedAllNotices,
       onNoticeVisibleChange,
@@ -113,7 +112,7 @@ export default class GlobalHeaderRight extends PureComponent {
     const loadMoreProps = {
       skeletonCount,
       loadedAll: loadedAllNotices,
-      loading: fetchingMoreNotices,
+      loading: fetchingNotices,
     };
     const noticeData = this.getNoticeData();
     const unreadMsg = this.getUnreadData(noticeData);
@@ -164,7 +163,6 @@ export default class GlobalHeaderRight extends PureComponent {
           onClear={onNoticeClear}
           onLoadMore={this.fetchMoreNotices}
           onPopupVisibleChange={onNoticeVisibleChange}
-          loading={fetchingNotices}
           clearClose
         >
           <NoticeIcon.Tab

@@ -77,9 +77,13 @@ class HeaderView extends PureComponent {
 
   handleNoticeVisibleChange = visible => {
     if (visible) {
-      const { dispatch } = this.props;
+      const { dispatch, notices = [] } = this.props;
+      const lastItemId = notices.length ? notices[notices.length - 1].id : null;
       dispatch({
         type: 'global/fetchNotices',
+        payload: {
+          lastItemId,
+        },
       });
     }
   };
@@ -153,7 +157,6 @@ class HeaderView extends PureComponent {
 export default connect(({ user, global, setting, loading }) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
-  fetchingMoreNotices: loading.effects['global/fetchMoreNotices'],
   fetchingNotices: loading.effects['global/fetchNotices'],
   loadedAllNotices: global.loadedAllNotices,
   notices: global.notices,
