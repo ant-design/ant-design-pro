@@ -16,6 +16,7 @@ import {
 } from 'antd';
 
 import styles from './Home.less';
+import MulitTree from '@/components/MulitTree';
 
 @connect(({ list, loading }) => ({
   list,
@@ -114,17 +115,13 @@ class Home extends PureComponent {
     );
 
     return (
-      <Row className={styles.membersList}>
-        <Col span={6} className={styles.listCol} />
-
-        <Col span={18} className={styles.cardCol}>
+      <Row style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <Col span={6} style={{ paddingRight: '5px' }}>
+          <MulitTree tree="success" />
+        </Col>
+        <Col span={18}>
           <div className={styles.standardList}>
-            <Card
-              className={styles.listCard}
-              bordered={false}
-              title="项目列表"
-              bodyStyle={{ padding: '0 32px 40px 32px' }}
-            >
+            <Card bordered={false} title="项目列表" bodyStyle={{ padding: '0 32px 40px 32px' }}>
               <Button type="dashed" style={{ width: '100%', marginBottom: 8 }} icon="plus">
                 添加
               </Button>
