@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage, formatMessage } from 'umi/locale';
-import { Spin, Tag, Menu, Icon, Avatar, Tooltip } from 'antd';
+import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
@@ -63,29 +63,13 @@ export default class GlobalHeaderRight extends PureComponent {
     });
   };
 
-  fetchMoreNotices = tabProps => {
-    const { list, name } = tabProps;
-    const { dispatch, notices = [] } = this.props;
-    const lastItemId = notices.length ? notices[notices.length - 1].id : null;
-    dispatch({
-      type: 'global/fetchNotices',
-      payload: {
-        lastItemId,
-        type: name,
-        offset: list.length,
-      },
-    });
-  };
-
   render() {
     const {
       currentUser,
       fetchingNotices,
-      loadedAllNotices,
       onNoticeVisibleChange,
       onMenuClick,
       onNoticeClear,
-      skeletonCount,
       theme,
     } = this.props;
     const menu = (
@@ -109,11 +93,6 @@ export default class GlobalHeaderRight extends PureComponent {
         </Menu.Item>
       </Menu>
     );
-    const loadMoreProps = {
-      skeletonCount,
-      loadedAll: loadedAllNotices,
-      loading: fetchingNotices,
-    };
     const noticeData = this.getNoticeData();
     const unreadMsg = this.getUnreadData(noticeData);
     let className = styles.right;
@@ -154,15 +133,15 @@ export default class GlobalHeaderRight extends PureComponent {
             console.log(item, tabProps); // eslint-disable-line
             this.changeReadState(item, tabProps);
           }}
+          loading={fetchingNotices}
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
             clear: formatMessage({ id: 'component.noticeIcon.clear' }),
-            loadedAll: formatMessage({ id: 'component.noticeIcon.loaded' }),
-            loadMore: formatMessage({ id: 'component.noticeIcon.loading-more' }),
+            viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }),
           }}
           onClear={onNoticeClear}
-          onLoadMore={this.fetchMoreNotices}
           onPopupVisibleChange={onNoticeVisibleChange}
+          onViewMore={() => message.info('Click on view more')}
           clearClose
         >
           <NoticeIcon.Tab
@@ -172,7 +151,7 @@ export default class GlobalHeaderRight extends PureComponent {
             name="notification"
             emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
-            {...loadMoreProps}
+            showViewMore
           />
           <NoticeIcon.Tab
             count={unreadMsg.message}
@@ -181,7 +160,7 @@ export default class GlobalHeaderRight extends PureComponent {
             name="message"
             emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
-            {...loadMoreProps}
+            showViewMore
           />
           <NoticeIcon.Tab
             count={unreadMsg.event}
@@ -190,7 +169,7 @@ export default class GlobalHeaderRight extends PureComponent {
             name="event"
             emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
-            {...loadMoreProps}
+            showViewMore
           />
         </NoticeIcon>
         {currentUser.name ? (

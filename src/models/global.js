@@ -6,33 +6,25 @@ export default {
   state: {
     collapsed: false,
     notices: [],
-    loadedAllNotices: false,
   },
 
   effects: {
-    *fetchNotices({ payload }, { call, put, select }) {
-      const data = yield call(queryNotices, payload);
-      if (data === null) {
-        yield put({
-          type: 'setLoadedStatus',
-          payload: true,
-        });
-      } else {
-        yield put({
-          type: 'pushNotices',
-          payload: data,
-        });
-        const unreadCount = yield select(
-          state => state.global.notices.filter(item => !item.read).length
-        );
-        yield put({
-          type: 'user/changeNotifyCount',
-          payload: {
-            totalCount: data.length,
-            unreadCount,
-          },
-        });
-      }
+    *fetchNotices(_, { call, put, select }) {
+      const data = yield call(queryNotices);
+      yield put({
+        type: 'saveNotices',
+        payload: data,
+      });
+      const unreadCount = yield select(
+        state => state.global.notices.filter(item => !item.read).length
+      );
+      yield put({
+        type: 'user/changeNotifyCount',
+        payload: {
+          totalCount: data.length,
+          unreadCount,
+        },
+      });
     },
     *clearNotices({ payload }, { put, select }) {
       yield put({
@@ -92,18 +84,6 @@ export default {
       return {
         ...state,
         notices: state.notices.filter(item => item.type !== payload),
-      };
-    },
-    pushNotices(state, { payload }) {
-      return {
-        ...state,
-        notices: [...state.notices, ...payload],
-      };
-    },
-    setLoadedStatus(state, { payload }) {
-      return {
-        ...state,
-        loadedAllNotices: payload,
       };
     },
   },

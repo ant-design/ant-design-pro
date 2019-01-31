@@ -2,7 +2,6 @@ import React, { PureComponent, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Icon, Tabs, Badge, Spin } from 'antd';
 import classNames from 'classnames';
-import debounce from 'lodash/debounce';
 import HeaderDropdown from '../HeaderDropdown';
 import List from './NoticeList';
 import styles from './index.less';
@@ -17,13 +16,13 @@ export default class NoticeIcon extends PureComponent {
     onPopupVisibleChange: () => {},
     onTabChange: () => {},
     onClear: () => {},
+    onViewMore: () => {},
     loading: false,
     clearClose: false,
     locale: {
       emptyText: 'No notifications',
       clear: 'Clear',
-      loadedAll: 'Loaded',
-      loadMore: 'Loading more',
+      viewMore: 'More',
     },
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
@@ -54,17 +53,12 @@ export default class NoticeIcon extends PureComponent {
     onTabChange(tabType);
   };
 
-  onLoadMore = debounce(
-    (tabProps, event) => {
-      const { onLoadMore } = this.props;
-      onLoadMore(tabProps, event);
-    },
-    50,
-    { leading: true }
-  );
+  onViewMore = (tabProps, event) => {
+    const { onViewMore } = this.props;
+    onViewMore(tabProps, event);
+  };
 
   getNotificationBox() {
-    const { visible } = this.state;
     const { children, loading, locale } = this.props;
     if (!children) {
       return null;
@@ -78,11 +72,7 @@ export default class NoticeIcon extends PureComponent {
         emptyText,
         emptyImage,
         showClear,
-        loadedAll,
-        scrollToLoad,
-        skeletonCount,
-        skeletonProps,
-        loading: tabLoading,
+        showViewMore,
       } = child.props;
       const len = list && list.length ? list.length : 0;
       const msgCount = count || count === 0 ? count : len;
@@ -93,18 +83,13 @@ export default class NoticeIcon extends PureComponent {
             data={list}
             emptyImage={emptyImage}
             emptyText={emptyText}
-            loadedAll={loadedAll}
-            loading={tabLoading}
             locale={locale}
             onClear={() => this.onClear(name)}
             onClick={item => this.onItemClick(item, child.props)}
-            onLoadMore={event => this.onLoadMore(child.props, event)}
-            scrollToLoad={scrollToLoad}
+            onViewMore={event => this.onViewMore(child.props, event)}
             showClear={showClear}
-            skeletonCount={skeletonCount}
-            skeletonProps={skeletonProps}
+            showViewMore={showViewMore}
             title={title}
-            visible={visible}
           />
         </TabPane>
       );

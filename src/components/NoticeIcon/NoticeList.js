@@ -1,9 +1,7 @@
 import React from 'react';
-import { Avatar, List, Skeleton } from 'antd';
+import { Avatar, List } from 'antd';
 import classNames from 'classnames';
 import styles from './NoticeList.less';
-
-let ListElement = null;
 
 export default function NoticeList({
   data = [],
@@ -13,16 +11,11 @@ export default function NoticeList({
   locale,
   emptyText,
   emptyImage,
-  loading,
-  visible,
-  loadedAll = true,
-  onLoadMore = null,
-  scrollToLoad = true,
+  onViewMore = null,
   showClear = true,
-  skeletonCount = 5,
-  skeletonProps = {},
+  showViewMore = false,
 }) {
-  if (!loading && data.length === 0) {
+  if (data.length === 0) {
     return (
       <div className={styles.notFound}>
         {emptyImage ? <img src={emptyImage} alt="not found" /> : null}
@@ -30,27 +23,10 @@ export default function NoticeList({
       </div>
     );
   }
-  const loadingList = Array.from({ length: loading ? skeletonCount : 0 }).map(() => ({ loading }));
-  const onScroll = event => {
-    if (!scrollToLoad || loading || loadedAll) return;
-    if (typeof onLoadMore !== 'function') return;
-    const { currentTarget: t } = event;
-    if (t.scrollHeight - t.scrollTop - t.clientHeight <= 40) {
-      onLoadMore(event);
-      ListElement = t;
-    }
-  };
-  if (!visible && ListElement) {
-    try {
-      ListElement.scrollTo(null, 0);
-    } catch (err) {
-      ListElement = null;
-    }
-  }
   return (
     <div>
-      <List className={styles.list} onScroll={onScroll}>
-        {[...data, ...loadingList].map((item, i) => {
+      <List className={styles.list}>
+        {data.map((item, i) => {
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,
           });
@@ -65,26 +41,24 @@ export default function NoticeList({
 
           return (
             <List.Item className={itemCls} key={item.key || i} onClick={() => onClick(item)}>
-              <Skeleton avatar title={false} active {...skeletonProps} loading={item.loading}>
-                <List.Item.Meta
-                  className={styles.meta}
-                  avatar={leftIcon}
-                  title={
-                    <div className={styles.title}>
-                      {item.title}
-                      <div className={styles.extra}>{item.extra}</div>
+              <List.Item.Meta
+                className={styles.meta}
+                avatar={leftIcon}
+                title={
+                  <div className={styles.title}>
+                    {item.title}
+                    <div className={styles.extra}>{item.extra}</div>
+                  </div>
+                }
+                description={
+                  <div>
+                    <div className={styles.description} title={item.description}>
+                      {item.description}
                     </div>
-                  }
-                  description={
-                    <div>
-                      <div className={styles.description} title={item.description}>
-                        {item.description}
-                      </div>
-                      <div className={styles.datetime}>{item.datetime}</div>
-                    </div>
-                  }
-                />
-              </Skeleton>
+                    <div className={styles.datetime}>{item.datetime}</div>
+                  </div>
+                }
+              />
             </List.Item>
           );
         })}
@@ -95,14 +69,7 @@ export default function NoticeList({
             {locale.clear} {title}
           </div>
         ) : null}
-        {onLoadMore ? (
-          <div
-            className={classNames({ [styles.disabled]: loading || loadedAll })}
-            onClick={loadedAll ? null : onLoadMore}
-          >
-            {loadedAll ? locale.loadedAll : locale.loadMore}
-          </div>
-        ) : null}
+        {showViewMore ? <div onClick={onViewMore}>{locale.viewMore}</div> : null}
       </div>
     </div>
   );
