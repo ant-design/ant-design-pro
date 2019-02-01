@@ -5,12 +5,10 @@
 name: ant design pro
 
 trigger:
-  - master
-
-resources:
-  repositories:
-  - repository: self
-    fetchDepth: 1
+  batch: true
+  branches:
+    exclude:
+      - gh-pages
 
 jobs:
   - job: lintAndBuild
@@ -19,6 +17,9 @@ jobs:
       vmImage: 'Ubuntu-16.04'
 
     steps:
+      - checkout: self
+        fetchDepth: 1
+        clean: false
       - script: yarn install
         displayName: install
       - script: npm run lint
@@ -35,6 +36,9 @@ jobs:
       options: '-u root'
 
     steps:
+      - checkout: self
+        fetchDepth: 1
+        clean: false
       - script: yarn install
         displayName: install
       - script: npm run test:all
@@ -44,6 +48,9 @@ jobs:
     pool:
       vmImage: 'vs2017-win2016'
     steps:
+      - checkout: self
+        fetchDepth: 1
+        clean: false
       - task: NodeTool@0
         inputs:
           versionSpec: '11.x'
@@ -58,6 +65,9 @@ jobs:
     pool:
       vmImage: 'macOS-10.13'
     steps:
+      - checkout: self
+        fetchDepth: 1
+        clean: false
       - task: NodeTool@0
         inputs:
           versionSpec: '11.x'
