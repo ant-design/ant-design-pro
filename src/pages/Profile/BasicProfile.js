@@ -46,11 +46,20 @@ const progressColumns = [
   loading: loading.effects['profile/fetchBasic'],
 }))
 class BasicProfile extends Component {
+  state = {
+    id: '1000000000',
+  };
+
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, match } = this.props;
     dispatch({
       type: 'profile/fetchBasic',
     });
+    const { params } = match;
+    if (params.id) {
+      // use id to get order info
+      this.setState({ id: params.id });
+    }
   }
 
   render() {
@@ -141,11 +150,12 @@ class BasicProfile extends Component {
         },
       },
     ];
+    const { id } = this.state;
     return (
       <PageHeaderWrapper title="基础详情页">
         <Card bordered={false}>
           <DescriptionList size="large" title="退款申请" style={{ marginBottom: 32 }}>
-            <Description term="取货单号">1000000000</Description>
+            <Description term="取货单号">{id}</Description>
             <Description term="状态">已取货</Description>
             <Description term="销售单号">1234123421</Description>
             <Description term="子订单">3214321432</Description>
