@@ -67,7 +67,7 @@ export default class SiderMenu extends PureComponent {
         collapsible
         collapsed={collapsed}
         breakpoint="lg"
-        onCollapse={(collapse) => {
+        onCollapse={collapse => {
           if (firstMount || !isMobile) {
             onCollapse(collapse);
           }
