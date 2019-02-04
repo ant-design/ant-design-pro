@@ -7,11 +7,6 @@ name: ant design pro
 trigger:
   - master
 
-resources:
-  repositories:
-    - repository: self
-      fetchDepth: 1
-
 jobs:
   - job: lintAndBuild
 
