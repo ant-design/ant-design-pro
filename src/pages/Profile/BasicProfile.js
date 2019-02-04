@@ -46,25 +46,19 @@ const progressColumns = [
   loading: loading.effects['profile/fetchBasic'],
 }))
 class BasicProfile extends Component {
-  state = {
-    id: '1000000000',
-  };
-
   componentDidMount() {
     const { dispatch, match } = this.props;
+    const { params } = match;
+
     dispatch({
       type: 'profile/fetchBasic',
+      payload: params.id || '1000000000',
     });
-    const { params } = match;
-    if (params.id) {
-      // use id to get order info
-      this.setState({ id: params.id });
-    }
   }
 
   render() {
-    const { profile, loading } = this.props;
-    const { basicGoods, basicProgress } = profile;
+    const { profile = {}, loading } = this.props;
+    const { basicGoods = [], basicProgress = [], userInfo = {}, application = {} } = profile;
     let goodsData = [];
     if (basicGoods.length) {
       let num = 0;
@@ -150,23 +144,22 @@ class BasicProfile extends Component {
         },
       },
     ];
-    const { id } = this.state;
     return (
-      <PageHeaderWrapper title="基础详情页">
+      <PageHeaderWrapper title="基础详情页" loading={loading}>
         <Card bordered={false}>
           <DescriptionList size="large" title="退款申请" style={{ marginBottom: 32 }}>
-            <Description term="取货单号">{id}</Description>
-            <Description term="状态">已取货</Description>
-            <Description term="销售单号">1234123421</Description>
-            <Description term="子订单">3214321432</Description>
+            <Description term="取货单号">{application.id}</Description>
+            <Description term="状态">{application.status}</Description>
+            <Description term="销售单号">{application.orderNo}</Description>
+            <Description term="子订单">{application.childOrderNo}</Description>
           </DescriptionList>
           <Divider style={{ marginBottom: 32 }} />
           <DescriptionList size="large" title="用户信息" style={{ marginBottom: 32 }}>
-            <Description term="用户姓名">付小小</Description>
-            <Description term="联系电话">18100000000</Description>
-            <Description term="常用快递">菜鸟仓储</Description>
-            <Description term="取货地址">浙江省杭州市西湖区万塘路18号</Description>
-            <Description term="备注">无</Description>
+            <Description term="用户姓名">{userInfo.name}</Description>
+            <Description term="联系电话">{userInfo.tel}</Description>
+            <Description term="常用快递">{userInfo.delivery}</Description>
+            <Description term="取货地址">{userInfo.addr}</Description>
+            <Description term="备注">{userInfo.remark}</Description>
           </DescriptionList>
           <Divider style={{ marginBottom: 32 }} />
           <div className={styles.title}>退货商品</div>
