@@ -14,6 +14,8 @@ jobs:
       vmImage: 'Ubuntu-16.04'
 
     steps:
+      - checkout: self
+        clean: false
       - script: yarn install
         displayName: install
       - script: npm run lint
