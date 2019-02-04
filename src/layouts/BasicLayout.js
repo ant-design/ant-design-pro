@@ -75,15 +75,6 @@ class BasicLayout extends React.Component {
     });
   }
 
-  componentDidUpdate(preProps) {
-    // After changing to phone mode,
-    // if collapsed is true, you need to click twice to display
-    const { collapsed, isMobile } = this.props;
-    if (isMobile && !preProps.isMobile && !collapsed) {
-      this.handleMenuCollapse(false);
-    }
-  }
-
   getContext() {
     const { location, breadcrumbNameMap } = this.props;
     return {
