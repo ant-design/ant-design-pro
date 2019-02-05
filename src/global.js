@@ -3,8 +3,9 @@ import { notification, Button, message } from 'antd';
 import { formatMessage } from 'umi/locale';
 import defaultSettings from './defaultSettings';
 
+const { pwa } = defaultSettings;
 // if pwa is true
-if (defaultSettings.pwa) {
+if (pwa) {
   // Notify user if offline now
   window.addEventListener('sw.offline', () => {
     message.warning(formatMessage({ id: 'app.pwa.offline' }));
