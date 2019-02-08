@@ -10,4 +10,5 @@ module.exports = {
     disableLocal: false,
   },
   title: 'Ant Design Pro',
+  pwa: true,
 };

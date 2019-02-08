@@ -5,6 +5,8 @@ import webpackPlugin from './plugin.config';
 import defaultSettings from '../src/defaultSettings';
 import slash from 'slash2';
 
+const { pwa, primaryColor } = defaultSettings;
+
 const plugins = [
   [
     'umi-plugin-react',
@@ -22,12 +24,14 @@ const plugins = [
         loadingComponent: './components/PageLoading/index',
         webpackChunkName: true,
       },
-      pwa: {
-        workboxPluginMode: 'InjectManifest',
-        workboxOptions: {
-          importWorkboxFrom: 'local',
-        },
-      },
+      pwa: pwa
+        ? {
+            workboxPluginMode: 'InjectManifest',
+            workboxOptions: {
+              importWorkboxFrom: 'local',
+            },
+          }
+        : {},
       ...(!process.env.TEST && os.platform() === 'darwin'
         ? {
             dll: {
@@ -67,7 +71,7 @@ export default {
   // Theme for antd
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
-    'primary-color': defaultSettings.primaryColor,
+    'primary-color': primaryColor,
   },
   externals: {
     '@antv/data-set': 'DataSet',
