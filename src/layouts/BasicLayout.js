@@ -88,20 +88,29 @@ class BasicLayout extends React.Component {
     return breadcrumbNameMap[pathKey];
   };
 
-  getRouterAuthority = (pathname, routeData) => {
-    let routeAuthority = ['noAuthority'];
-    const getAuthority = (key, routes) => {
-      routes.forEach(route => {
-        if (route.path && pathToRegexp(route.path).test(key)) {
-          routeAuthority = route.authority;
-        } else if (route.routes) {
-          routeAuthority = getAuthority(key, route.routes);
+  getRouteAuthority = (pathname, routeData) => {
+    const routes = routeData.slice(); // clone
+    let authorities;
+
+    while (routes.length > 0) {
+      const route = routes.shift();
+      // check partial route
+      if (pathToRegexp(`${route.path}(.*)`).test(pathname)) {
+        if (route.authority) {
+          authorities = route.authority;
         }
-        return route;
-      });
-      return routeAuthority;
-    };
-    return getAuthority(pathname, routeData);
+        // is exact route?
+        if (pathToRegexp(route.path).test(pathname)) {
+          break;
+        }
+
+        if (route.routes) {
+          route.routes.forEach(r => routes.push(r));
+        }
+      }
+    }
+
+    return authorities;
   };
 
   getPageTitle = (pathname, breadcrumbNameMap) => {
@@ -161,7 +170,7 @@ class BasicLayout extends React.Component {
     } = this.props;
 
     const isTop = PropsLayout === 'topmenu';
-    const routerConfig = this.getRouterAuthority(pathname, routes);
+    const routerConfig = this.getRouteAuthority(pathname, routes);
     const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
     const layout = (
       <Layout>
