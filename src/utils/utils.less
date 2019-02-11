@@ -13,7 +13,7 @@
   text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
-  &:before {
+  &::before {
     background: @bg;
     content: '...';
     padding: 0 1px;
@@ -21,7 +21,7 @@
     right: 14px;
     bottom: 0;
   }
-  &:after {
+  &::after {
     background: white;
     content: '';
     margin-top: 0.2em;
@@ -36,12 +36,12 @@
 // ------------------------
 .clearfix() {
   zoom: 1;
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: ' ';
     display: table;
   }
-  &:after {
+  &::after {
     clear: both;
     visibility: hidden;
     font-size: 0;

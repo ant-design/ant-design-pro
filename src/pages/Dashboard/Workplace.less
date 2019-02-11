@@ -64,7 +64,7 @@
         font-size: 20px;
       }
     }
-    &:after {
+    &::after {
       background-color: @border-color-split;
       position: absolute;
       top: 8px;
@@ -75,7 +75,7 @@
     }
     &:last-child {
       padding-right: 0;
-      &:after {
+      &::after {
         display: none;
       }
     }
@@ -186,7 +186,7 @@
     .statItem {
       padding: 0 16px;
       text-align: left;
-      &:after {
+      &::after {
         display: none;
       }
     }

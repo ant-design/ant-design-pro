@@ -20,7 +20,7 @@
         margin-top: 4px;
         margin-bottom: 0;
       }
-      &:after {
+      &::after {
         background-color: @border-color-split;
         position: absolute;
         top: 8px;
@@ -30,7 +30,7 @@
         content: '';
       }
     }
-    > :last-child .legendItem:after {
+    > :last-child .legendItem::after {
       display: none;
     }
     .dot {
