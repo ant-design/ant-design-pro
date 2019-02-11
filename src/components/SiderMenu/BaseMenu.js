@@ -23,7 +23,7 @@ const getIcon = icon => {
     return <Icon type={icon} />;
   }
   if (Array.isArray(icon)) {
-    return <IconFont type={icon[0]} className={icon[1]} />;
+    return <IconFont type={icon[0]} className={icon[1] || ''} />;
   }
   return icon;
 };
