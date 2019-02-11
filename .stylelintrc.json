@@ -4,8 +4,10 @@
     "stylelint-config-css-modules",
     "stylelint-config-prettier"
   ],
+  "plugins": ["stylelint-declaration-block-no-ignored-properties"],
   "rules": {
     "declaration-empty-line-before": null,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "plugin/declaration-block-no-ignored-properties": true
   }
 }
