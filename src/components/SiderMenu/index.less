@@ -3,42 +3,42 @@
 @nav-header-height: @layout-header-height;
 
 .logo {
-  height: @nav-header-height;
   position: relative;
-  line-height: @nav-header-height;
+  height: @nav-header-height;
   padding-left: (@menu-collapsed-width - 32px) / 2;
-  transition: all 0.3s;
-  background: #002140;
   overflow: hidden;
+  line-height: @nav-header-height;
+  background: #002140;
+  transition: all 0.3s;
   img {
     display: inline-block;
-    vertical-align: middle;
     height: 32px;
+    vertical-align: middle;
   }
   h1 {
-    color: white;
     display: inline-block;
-    vertical-align: middle;
-    font-size: 20px;
     margin: 0 0 0 12px;
-    font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    color: white;
     font-weight: 600;
+    font-size: 20px;
+    font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    vertical-align: middle;
   }
 }
 .sider {
-  min-height: 100vh;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   position: relative;
   z-index: 10;
+  min-height: 100vh;
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   &.fixSiderBar {
-    box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
     position: fixed;
     top: 0;
     left: 0;
+    box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
     :global {
       .ant-menu-root {
-        overflow-y: auto;
         height: ~'calc(100vh - @{nav-header-height})';
+        overflow-y: auto;
       }
       .ant-menu-inline {
         border-right: 0;
@@ -50,8 +50,8 @@
     }
   }
   &.light {
-    box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
     background-color: white;
+    box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
     .logo {
       background: white;
       box-shadow: 1px 1px 0 0 @border-color-split;
@@ -66,8 +66,8 @@
 }
 
 .icon {
-  vertical-align: baseline;
   width: 14px;
+  vertical-align: baseline;
 }
 
 :global {
@@ -87,15 +87,15 @@
       .sider-menu-item-img
       + span,
     & > .ant-menu-submenu > .ant-menu-submenu-title .sider-menu-item-img + span {
-      max-width: 0;
       display: inline-block;
+      max-width: 0;
       opacity: 0;
     }
   }
   .ant-menu-item .sider-menu-item-img + span,
   .ant-menu-submenu-title .sider-menu-item-img + span {
-    transition: opacity 0.3s @ease-in-out, width 0.3s @ease-in-out;
     opacity: 1;
+    transition: opacity 0.3s @ease-in-out, width 0.3s @ease-in-out;
   }
   .ant-drawer-left {
     .ant-drawer-body {

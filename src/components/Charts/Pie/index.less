@@ -10,38 +10,38 @@
   }
   .legend {
     position: absolute;
+    top: 50%;
     right: 0;
     min-width: 200px;
-    top: 50%;
-    transform: translateY(-50%);
     margin: 0 20px;
-    list-style: none;
     padding: 0;
+    list-style: none;
+    transform: translateY(-50%);
     li {
-      cursor: pointer;
-      margin-bottom: 16px;
       height: 22px;
+      margin-bottom: 16px;
       line-height: 22px;
+      cursor: pointer;
       &:last-child {
         margin-bottom: 0;
       }
     }
   }
   .dot {
-    border-radius: 8px;
-    display: inline-block;
-    margin-right: 8px;
     position: relative;
     top: -1px;
-    height: 8px;
+    display: inline-block;
     width: 8px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 8px;
   }
   .line {
-    background-color: @border-color-split;
     display: inline-block;
-    margin-right: 8px;
     width: 1px;
     height: 16px;
+    margin-right: 8px;
+    background-color: @border-color-split;
   }
   .legendTitle {
     color: @text-color;
@@ -58,24 +58,24 @@
   }
   .total {
     position: absolute;
-    left: 50%;
     top: 50%;
-    text-align: center;
+    left: 50%;
     max-height: 62px;
+    text-align: center;
     transform: translate(-50%, -50%);
     & > h4 {
-      color: @text-color-secondary;
-      font-size: 14px;
-      line-height: 22px;
       height: 22px;
       margin-bottom: 8px;
+      color: @text-color-secondary;
       font-weight: normal;
+      font-size: 14px;
+      line-height: 22px;
     }
     & > p {
-      color: @heading-color;
       display: block;
-      font-size: 1.2em;
       height: 32px;
+      color: @heading-color;
+      font-size: 1.2em;
       line-height: 32px;
       white-space: nowrap;
     }
