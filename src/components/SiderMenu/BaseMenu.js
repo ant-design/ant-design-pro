@@ -12,7 +12,7 @@ const { SubMenu } = Menu;
 
 // Allow menu.js config icon as string or ReactNode
 //   icon: 'setting',
-//   icon:  ['icon-demo']     .for Iconfont
+//   icon: 'icon-geren' #For Iconfont ,
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
 const getIcon = icon => {
@@ -20,10 +20,10 @@ const getIcon = icon => {
     if (isUrl(icon)) {
       return <Icon component={() => <img src={icon} alt="icon" className={styles.icon} />} />;
     }
+    if (icon.startsWith('icon-')) {
+      return <IconFont type={icon} />;
+    }
     return <Icon type={icon} />;
-  }
-  if (Array.isArray(icon)) {
-    return <IconFont type={icon[0]} className={icon[1] || ''} />;
   }
   return icon;
 };
