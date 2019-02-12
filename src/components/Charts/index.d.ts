@@ -15,34 +15,34 @@ import { default as TimelineChart } from './TimelineChart';
 declare const yuan: (value: number | string) => string;
 
 declare const Charts: {
-    yuan: (value: number | string) => string,
-    Bar: Bar,
-    Pie: Pie,
-    Gauge: Gauge,
-    Radar: Radar,
-    MiniBar: MiniBar,
-    MiniArea: MiniArea,
-    MiniProgress: MiniProgress,
-    ChartCard: ChartCard,
-    Field: Field,
-    WaterWave: WaterWave,
-    TagCloud: TagCloud,
-    TimelineChart: TimelineChart,
+  yuan: (value: number | string) => string;
+  Bar: Bar;
+  Pie: Pie;
+  Gauge: Gauge;
+  Radar: Radar;
+  MiniBar: MiniBar;
+  MiniArea: MiniArea;
+  MiniProgress: MiniProgress;
+  ChartCard: ChartCard;
+  Field: Field;
+  WaterWave: WaterWave;
+  TagCloud: TagCloud;
+  TimelineChart: TimelineChart;
 };
 
 export {
-    Charts as default,
-    yuan,
-    Bar,
-    Pie,
-    Gauge,
-    Radar,
-    MiniBar,
-    MiniArea,
-    MiniProgress,
-    ChartCard,
-    Field,
-    WaterWave,
-    TagCloud,
-    TimelineChart,
+  Charts as default,
+  yuan,
+  Bar,
+  Pie,
+  Gauge,
+  Radar,
+  MiniBar,
+  MiniArea,
+  MiniProgress,
+  ChartCard,
+  Field,
+  WaterWave,
+  TagCloud,
+  TimelineChart,
 };
