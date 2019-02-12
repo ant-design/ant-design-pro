@@ -31,19 +31,19 @@ class MulitTree extends Component {
       <Menu>
         <Menu.Item key="0">
           <a href="">
-            <Icon type="plus-circle" />
-            &nbsp;增加分组
-          </a>
-        </Menu.Item>
-        <Menu.Item key="1">
-          <a href="">
-            <Icon type="plus-square" color="danger" />
+            <Icon type="plus" />
             &nbsp;增加子分组
           </a>
         </Menu.Item>
+        <Menu.Item key="0">
+          <a href="">
+            <Icon type="edit" />
+            &nbsp;重命名
+          </a>
+        </Menu.Item>
         <Menu.Item key="1">
           <a href="">
-            <Icon type="close-circle" color="danger" />
+            <Icon type="close" />
             &nbsp;删除分组
           </a>
         </Menu.Item>
@@ -106,8 +106,14 @@ class MulitTree extends Component {
       <Card bordered={false}>
         <h4>{menu.name}</h4>
         <List>{this.renderMenu(menu.list)}</List>
-        <h4>{tree.name}</h4>
-        <div>{this.renderSection(tree.list)}</div>
+        <h4>{tree.name} </h4>
+        <div>
+          <div className={styles.nodeCard}>
+            <Icon type="plus" className={styles.secIcon} />
+            <span>新增分组</span>
+          </div>
+          {this.renderSection(tree.list)}
+        </div>
       </Card>
     );
   }

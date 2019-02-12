@@ -224,7 +224,7 @@ class Home extends PureComponent {
 
     return (
       <Row style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <Col span={6} style={{ paddingRight: '5px' }}>
+        <Col span={6} style={{ paddingRight: '10px' }}>
           <MulitTree data={data} handlers={this.groupSelectHandler} />
         </Col>
         <Col span={18}>
