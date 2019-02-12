@@ -1,17 +1,17 @@
 @import '~antd/lib/style/themes/default.less';
 
 .standardFormRow {
-  display: flex;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
   border-bottom: 1px dashed @border-color-split;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  display: flex;
   :global {
     .ant-form-item {
       margin-right: 24px;
     }
     .ant-form-item-label label {
-      margin-right: 0;
       color: @text-color;
+      margin-right: 0;
     }
     .ant-form-item-label,
     .ant-form-item-control {
@@ -20,10 +20,10 @@
     }
   }
   .label {
-    flex: 0 0 auto;
-    margin-right: 24px;
     color: @heading-color;
     font-size: @font-size-base;
+    margin-right: 24px;
+    flex: 0 0 auto;
     text-align: right;
     & > span {
       display: inline-block;
@@ -45,9 +45,9 @@
 }
 
 .standardFormRowLast {
-  margin-bottom: 0;
-  padding-bottom: 0;
   border: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .standardFormRowBlock {
