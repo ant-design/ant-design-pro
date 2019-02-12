@@ -7,11 +7,6 @@ name: ant design pro
 trigger:
   - master
 
-resources:
-  repositories:
-    - repository: self
-      fetchDepth: 1
-
 jobs:
   - job: lintAndBuild
 
@@ -19,11 +14,15 @@ jobs:
       vmImage: 'Ubuntu-16.04'
 
     steps:
+      - checkout: self
+        clean: false
       - script: yarn install
         displayName: install
       - script: npm run lint
         displayName: lint
       - script: npm run build
+        env:
+          PROGRESS: none
         displayName: build
 
   - job: test
@@ -38,6 +37,8 @@ jobs:
       - script: yarn install
         displayName: install
       - script: npm run test:all
+        env:
+          PROGRESS: none
         displayName: test
 
   - job: Windows
@@ -52,6 +53,8 @@ jobs:
       - script: npm run lint
         displayName: lint
       - script: npm run build
+        env:
+          PROGRESS: none
         displayName: build
 
   - job: MacOS
@@ -65,5 +68,7 @@ jobs:
         displayName: install
       - script: npm run lint
         displayName: lint
-      - script: npm run build
+      - script: npm run
+        env:
+          PROGRESS: none
         displayName: build
