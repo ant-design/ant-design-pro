@@ -2,8 +2,8 @@
 @import '~@/utils/utils.less';
 
 .avatarHolder {
-  text-align: center;
   margin-bottom: 24px;
+  text-align: center;
 
   & > img {
     width: 104px;
@@ -12,19 +12,19 @@
   }
 
   .name {
+    margin-bottom: 4px;
+    color: @heading-color;
+    font-weight: 500;
     font-size: 20px;
     line-height: 28px;
-    font-weight: 500;
-    color: @heading-color;
-    margin-bottom: 4px;
   }
 }
 
 .detail {
   p {
+    position: relative;
     margin-bottom: 8px;
     padding-left: 26px;
-    position: relative;
 
     &:last-child {
       margin-bottom: 0;
@@ -33,10 +33,10 @@
 
   i {
     position: absolute;
-    height: 14px;
-    width: 14px;
-    left: 0;
     top: 4px;
+    left: 0;
+    width: 14px;
+    height: 14px;
     background: url(https://gw.alipayobjects.com/zos/rmsportal/pBjWzVAHnOOtAUvZmZfy.svg);
 
     &.title {
@@ -55,9 +55,9 @@
 
 .tagsTitle,
 .teamTitle {
-  font-weight: 500;
-  color: @heading-color;
   margin-bottom: 12px;
+  color: @heading-color;
+  font-weight: 500;
 }
 
 .tags {

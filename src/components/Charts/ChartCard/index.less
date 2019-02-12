@@ -4,8 +4,8 @@
   position: relative;
   .chartTop {
     position: relative;
-    overflow: hidden;
     width: 100%;
+    overflow: hidden;
   }
   .chartTopMargin {
     margin-bottom: 12px;
@@ -26,45 +26,45 @@
     }
   }
   .meta {
+    height: 22px;
     color: @text-color-secondary;
     font-size: @font-size-base;
     line-height: 22px;
-    height: 22px;
   }
   .action {
-    cursor: pointer;
     position: absolute;
     top: 4px;
     right: 0;
     line-height: 1;
+    cursor: pointer;
   }
   .total {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-all;
-    white-space: nowrap;
-    color: @heading-color;
+    height: 38px;
     margin-top: 4px;
     margin-bottom: 0;
+    overflow: hidden;
+    color: @heading-color;
     font-size: 30px;
     line-height: 38px;
-    height: 38px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
   }
   .content {
-    margin-bottom: 12px;
     position: relative;
     width: 100%;
+    margin-bottom: 12px;
   }
   .contentFixed {
     position: absolute;
-    left: 0;
     bottom: 0;
+    left: 0;
     width: 100%;
   }
   .footer {
-    border-top: 1px solid @border-color-split;
-    padding-top: 9px;
     margin-top: 8px;
+    padding-top: 9px;
+    border-top: 1px solid @border-color-split;
     & > * {
       position: relative;
     }
