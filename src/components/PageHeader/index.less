@@ -1,8 +1,8 @@
 @import '~antd/lib/style/themes/default.less';
 
 .pageHeader {
-  background: @component-background;
   padding: 16px 32px 0 32px;
+  background: @component-background;
   border-bottom: @border-width-base @border-style-base @border-color-split;
   .wide {
     max-width: 1200px;
@@ -27,8 +27,8 @@
     :global {
       // 1px 可以让选中效果显示完成
       .ant-tabs-bar {
-        border-bottom: none;
         margin-bottom: 1px;
+        border-bottom: none;
       }
     }
   }
@@ -38,22 +38,22 @@
     margin-right: 16px;
     padding-top: 1px;
     > img {
+      display: block;
       width: 28px;
       height: 28px;
       border-radius: @border-radius-base;
-      display: block;
     }
   }
 
   .title {
-    font-size: 20px;
-    font-weight: 500;
     color: @heading-color;
+    font-weight: 500;
+    font-size: 20px;
   }
 
   .action {
-    margin-left: 56px;
     min-width: 266px;
+    margin-left: 56px;
 
     :global {
       .ant-btn-group:not(:last-child),
@@ -99,8 +99,8 @@
   }
 
   .extraContent {
-    margin-left: 88px;
     min-width: 242px;
+    margin-left: 88px;
   }
 }
 
