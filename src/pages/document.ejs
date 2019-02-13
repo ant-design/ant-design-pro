@@ -9,7 +9,12 @@
     />
     <title>Ant Design Pro</title>
     <link rel="icon" href="/favicon.png" type="image/x-icon" />
-    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.9.6/dist/data-set.min.js"></script>
+    <% if(context.env === 'production') { %>
+    <script src="//gw.alipayobjects.com/os/lib/react/16.8.1/umd/react.production.min.js"></script>
+    <script src="//gw.alipayobjects.com/os/lib/react-dom/16.8.1/umd/react-dom.production.min.js"></script>
+    <script src="//gw.alipayobjects.com/os/lib/bizcharts/3.4.3/umd/BizCharts.min.js"></script>
+    <% }%>
+    <script src="https://gw.alipayobjects.com/os/lib/antv/data-set/0.10.1/dist/data-set.min.js"></script>
   </head>
   <body>
     <noscript>Sorry, we need js to run correctly!</noscript>
