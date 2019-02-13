@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { Dropdown, Menu, Icon, Card, List } from 'antd';
+import { Popover, Button, Form, Row, Col, Input, Dropdown, Menu, Icon, Card, List } from 'antd';
 import styles from './index.less';
 
+const FormItem = Form.Item;
+const InputGroup = Input.Group;
+
+@Form.create()
 class MulitTree extends Component {
   state = {
     toggle: {},
     select: {},
+    rootGroupVisible: false,
   };
 
   IconClick = (e, item) => {
@@ -18,15 +23,81 @@ class MulitTree extends Component {
 
   menuSelect = item => {
     const { id } = item;
-    const { handlers } = this.props;
+    const { itemSelectHandlers } = this.props;
     const selection = {};
 
     selection[id] = true;
     this.setState({ select: selection });
-    handlers(item);
+    itemSelectHandlers(item);
   };
 
-  childDom(items, count) {
+  onRootGroupCreate = () => {
+    const { rootGroupCreateHandler } = this.props;
+    const { form } = this.props;
+
+    this.setState({
+      rootGroupVisible: false,
+    });
+
+    form.validateFields(['newGroupName'], {}, (err, values) => {
+      rootGroupCreateHandler(values.newGroupName || '新分组');
+    });
+  };
+
+  handleVisibleChange = rootGroupVisible => {
+    this.setState({ rootGroupVisible });
+  };
+
+  newGroupButton = () => {
+    const { rootGroupVisible } = this.state;
+    const { form } = this.props;
+    const { getFieldDecorator } = form;
+
+    return (
+      <Popover
+        placement="bottom"
+        content={
+          <Form style={{ width: '320px' }}>
+            <FormItem>
+              <Row gutter={8}>
+                <Col span={18}>
+                  <InputGroup compact>
+                    {getFieldDecorator('newGroupName', {
+                      rules: [
+                        {
+                          required: false,
+                        },
+                        {
+                          pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{1,32}$/,
+                          message: '支持中文，字母，下划线',
+                        },
+                      ],
+                    })(<Input size="large" placeholder="新分组" />)}
+                  </InputGroup>
+                </Col>
+                <Col span={6}>
+                  <Button size="large" type="primary" onClick={this.onRootGroupCreate}>
+                    创建
+                  </Button>
+                </Col>
+              </Row>
+            </FormItem>
+          </Form>
+        }
+        title="创建分组"
+        trigger="click"
+        visible={rootGroupVisible}
+        onVisibleChange={this.handleVisibleChange}
+      >
+        <div className={styles.nodeCard}>
+          <Icon type="plus" className={styles.secIcon} />
+          <span>新增分组</span>
+        </div>
+      </Popover>
+    );
+  };
+
+  childGroupsRender = (items, count) => {
     const menu = (
       <Menu>
         <Menu.Item key="0">
@@ -73,16 +144,14 @@ class MulitTree extends Component {
               <Icon type="ellipsis" className={styles.dropIcon} />
             </Dropdown>
           </div>
-          {item.child.length !== 0 && toggle[item.id] ? this.childDom(item.child, cnt) : null}
+          {item.child.length !== 0 && toggle[item.id]
+            ? this.childGroupsRender(item.child, cnt)
+            : null}
         </div>
       ));
     }
     return null;
-  }
-
-  renderSection(data) {
-    return this.childDom(data, 0);
-  }
+  };
 
   renderMenu = data => {
     const { select } = this.state;
@@ -107,13 +176,8 @@ class MulitTree extends Component {
         <h4>{menu.name}</h4>
         <List>{this.renderMenu(menu.list)}</List>
         <h4>{tree.name} </h4>
-        <div>
-          <div className={styles.nodeCard}>
-            <Icon type="plus" className={styles.secIcon} />
-            <span>新增分组</span>
-          </div>
-          {this.renderSection(tree.list)}
-        </div>
+        {this.newGroupButton()}
+        {this.childGroupsRender(tree.list, 0)}
       </Card>
     );
   }

@@ -40,6 +40,10 @@ class Home extends PureComponent {
     console.log(item);
   };
 
+  rootGroupCreateHandler = name => {
+    console.log(name);
+  };
+
   showEditModal = item => {
     console.log(item);
   };
@@ -225,7 +229,11 @@ class Home extends PureComponent {
     return (
       <Row style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <Col span={6} style={{ paddingRight: '10px' }}>
-          <MulitTree data={data} handlers={this.groupSelectHandler} />
+          <MulitTree
+            data={data}
+            itemSelectHandlers={this.groupSelectHandler}
+            rootGroupCreateHandler={this.rootGroupCreateHandler}
+          />
         </Col>
         <Col span={18}>
           <div className={styles.standardList}>
