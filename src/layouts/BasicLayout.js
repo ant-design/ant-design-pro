@@ -101,7 +101,7 @@ class BasicLayout extends React.Component {
           }
           // is exact route?
           if (!pathToRegexp(route.path).test(path) && route.routes) {
-            getAuthority(route.routes, path);
+            authorities = getAuthority(route.routes, path);
           }
         }
       });
