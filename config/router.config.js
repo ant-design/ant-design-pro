@@ -5,9 +5,9 @@ export default [
     component: '../layouts/UserLayout',
     routes: [
       { path: '/user', redirect: '/user/login' },
-      { path: '/user/login', component: './User/Login' },
-      { path: '/user/register', component: './User/Register' },
-      { path: '/user/register-result', component: './User/RegisterResult' },
+      { path: '/user/login', name: 'Login', component: './User/Login' },
+      { path: '/user/register', name: 'Register', component: './User/Register' },
+      { path: '/user/register-result', name: 'Register Result', component: './User/RegisterResult' },
     ],
   },
   // app
