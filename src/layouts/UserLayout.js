@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { formatMessage } from 'umi/locale';
 import Link from 'umi/link';
 import { Icon } from 'antd';
@@ -32,7 +32,7 @@ const copyright = (
   </Fragment>
 );
 
-class UserLayout extends React.PureComponent {
+class UserLayout extends Component {
   getPageTitle() {
     const {
       location: { pathname },
@@ -55,7 +55,7 @@ class UserLayout extends React.PureComponent {
     const { children } = this.props;
 
     return (
-      <DocumentTitle title={getPageTitle}>
+      <DocumentTitle title={this.getPageTitle()}>
         <div className={styles.container}>
           <div className={styles.lang}>
             <SelectLang />
