@@ -18,9 +18,10 @@ import {
 import styles from './Home.less';
 import MulitTree from '@/components/MulitTree';
 
-@connect(({ list, loading }) => ({
+@connect(({ list, project, loading }) => ({
   list,
-  loading: loading.models.list,
+  project,
+  projectsLoading: loading.models.list,
 }))
 @Form.create()
 class Home extends PureComponent {
@@ -28,6 +29,10 @@ class Home extends PureComponent {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    dispatch({
+      type: 'project/groupTree',
+    });
+
     dispatch({
       type: 'list/fetch',
       payload: {
@@ -41,7 +46,31 @@ class Home extends PureComponent {
   };
 
   rootGroupCreateHandler = name => {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'project/groupCreate',
+      payload: {
+        group_name: name,
+        parent_node: '', // root node
+      },
+    });
+  };
+
+  childGroupCreateHandler = (id, name) => {
+    console.log(id);
     console.log(name);
+  };
+
+  groupDelete = item => {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'project/groupDelete',
+      payload: {
+        project_group_id: item.id,
+      },
+    });
   };
 
   showEditModal = item => {
@@ -82,9 +111,37 @@ class Home extends PureComponent {
 
   render() {
     const {
+      project: { tree },
       list: { list },
-      loading,
+      projectsLoading,
     } = this.props;
+
+    const data = {
+      menu: {
+        name: '项目',
+        list: [
+          {
+            id: 'all',
+            icon: 'bars',
+            text: '所有项目',
+          },
+          {
+            id: 'star',
+            icon: 'star',
+            text: '我的标星',
+          },
+          {
+            id: 'unsort',
+            icon: 'menu-fold',
+            text: '未分组',
+          },
+        ],
+      },
+      tree: {
+        name: '分组',
+        list: tree,
+      },
+    };
 
     const editAndDelete = (key, currentItem) => {
       if (key === 'edit') this.showEditModal(currentItem);
@@ -122,117 +179,15 @@ class Home extends PureComponent {
       </Dropdown>
     );
 
-    const data = {
-      menu: {
-        name: '项目',
-        list: [
-          {
-            id: 'all',
-            icon: 'bars',
-            text: '所有项目',
-          },
-          {
-            id: 'star',
-            icon: 'star',
-            text: '我的标星',
-          },
-          {
-            id: 'unsort',
-            icon: 'menu-fold',
-            text: '未分组',
-          },
-        ],
-      },
-      tree: {
-        name: '分组',
-        list: [
-          {
-            id: 'parent1',
-            name: '父分组1',
-            child: [
-              {
-                id: 'child1',
-                name: 'child1',
-                child: [
-                  {
-                    id: 'grand child1',
-                    name: 'grand child1',
-                    child: [],
-                  },
-                  {
-                    id: 'grand child2',
-                    name: 'grand child2',
-                    child: [],
-                  },
-                ],
-              },
-              {
-                id: 'child2',
-                name: 'child2',
-                child: [
-                  {
-                    id: 'grand child1',
-                    name: 'grand child1',
-                    child: [],
-                  },
-                  {
-                    id: 'grand child2',
-                    name: 'grand child2',
-                    child: [],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            id: 'parent5',
-            name: '父分组5',
-            child: [
-              {
-                id: 'child6',
-                name: 'child6',
-                child: [
-                  {
-                    id: 'grand child7',
-                    name: 'grand child7',
-                    child: [],
-                  },
-                  {
-                    id: 'grand child8',
-                    name: 'grand child8',
-                    child: [],
-                  },
-                ],
-              },
-              {
-                id: 'child9',
-                name: 'child9',
-                child: [
-                  {
-                    id: 'grand child10',
-                    name: 'grand child10',
-                    child: [],
-                  },
-                  {
-                    id: 'grand child11',
-                    name: 'grand child11',
-                    child: [],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    };
-
     return (
       <Row style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <Col span={6} style={{ paddingRight: '10px' }}>
           <MulitTree
             data={data}
-            itemSelectHandlers={this.groupSelectHandler}
-            rootGroupCreateHandler={this.rootGroupCreateHandler}
+            onItemSelect={this.groupSelectHandler}
+            onRootGroupCreate={this.rootGroupCreateHandler}
+            onChildGroupCreate={this.childGroupCreateHandler}
+            onGroupDelete={this.groupDelete}
           />
         </Col>
         <Col span={18}>
@@ -244,7 +199,7 @@ class Home extends PureComponent {
               <List
                 size="large"
                 rowKey="id"
-                loading={loading}
+                loading={projectsLoading}
                 dataSource={list}
                 renderItem={item => (
                   <List.Item actions={[<MoreBtn current={item} />]}>

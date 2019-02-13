@@ -103,6 +103,10 @@ export async function updateFakeList(params) {
   });
 }
 
+export async function queryNotices() {
+  return request('/api/notices');
+}
+
 export async function fakeTeamList() {
   return request('/interface/team/user-teams');
 }
@@ -156,15 +160,33 @@ export async function fakePasswordChange(params) {
   });
 }
 
-export async function queryNotices() {
-  return request('/api/notices');
-}
-
 export async function getFakeCaptcha(mobile) {
   return request('/interface/user/captcha/phone', {
     method: 'POST',
     body: {
       phone: mobile,
     },
+  });
+}
+
+export async function projectGroupCreate(params) {
+  return request('/interface/project/group/create', {
+    method: 'POST',
+    body: params,
+  });
+}
+
+export async function projectGroupDelete(params) {
+  return request('/interface/project/group/delete', {
+    method: 'POST',
+    body: params,
+  });
+}
+
+export async function projectGroupTree(params) {
+  console.log(params);
+  return request('/interface/project/group/tree', {
+    method: 'POST',
+    body: params,
   });
 }
