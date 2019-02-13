@@ -11,5 +11,5 @@ module.exports = {
   },
   title: 'Ant Design Pro',
   pwa: true,
-  iconFontScriptUrl: '//at.alicdn.com/t/font_1039637_btcrd5co4w.js', // your iconfont Symbol Scrip Url
+  iconfontUrl: '//at.alicdn.com/t/font_1039637_btcrd5co4w.js', // your iconfont Symbol Scrip Url
 };
