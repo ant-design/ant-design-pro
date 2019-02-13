@@ -111,31 +111,6 @@ class BasicLayout extends React.Component {
     return getAuthority(routes, pathname);
   };
 
-  // getRouteAuthority = (pathname, routeData) => {
-  //   const routes = routeData.slice(); // clone
-  //   let authorities;
-
-  //   while (routes.length > 0) {
-  //     const route = routes.shift();
-  //     // check partial route
-  //     if (pathToRegexp(`${route.path}(.*)`).test(pathname)) {
-  //       if (route.authority) {
-  //         authorities = route.authority;
-  //       }
-  //       // is exact route?
-  //       if (pathToRegexp(route.path).test(pathname)) {
-  //         break;
-  //       }
-
-  //       if (route.routes) {
-  //         route.routes.forEach(r => routes.push(r));
-  //       }
-  //     }
-  //   }
-
-  //   return authorities;
-  // };
-
   getPageTitle = (pathname, breadcrumbNameMap) => {
     const currRouterData = this.matchParamsPath(pathname, breadcrumbNameMap);
 
