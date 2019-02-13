@@ -83,8 +83,8 @@ $ npm start         # 访问 http://localhost:8000
 
 ```bash
 # preview 
-$ docker pull chenshuai2144/ant-design-pro
-$ docker run -p 80:80 chenshuai2144/ant-design-pro
+$ docker pull antdesign/ant-design-pro
+$ docker run -p 80:80 antdesign/ant-design-pro
 # open http://localhost
 
 # dev 
