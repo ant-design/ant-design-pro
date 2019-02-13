@@ -2,51 +2,51 @@
 
 .numberInfo {
   .suffix {
+    margin-left: 4px;
     color: @text-color;
     font-size: 16px;
     font-style: normal;
-    margin-left: 4px;
   }
   .numberInfoTitle {
+    margin-bottom: 16px;
     color: @text-color;
     font-size: @font-size-lg;
-    margin-bottom: 16px;
     transition: all 0.3s;
   }
   .numberInfoSubTitle {
+    height: 22px;
+    overflow: hidden;
     color: @text-color-secondary;
     font-size: @font-size-base;
-    height: 22px;
     line-height: 22px;
-    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
     word-break: break-all;
-    white-space: nowrap;
   }
   .numberInfoValue {
     margin-top: 4px;
-    font-size: 0;
     overflow: hidden;
+    font-size: 0;
+    white-space: nowrap;
     text-overflow: ellipsis;
     word-break: break-all;
-    white-space: nowrap;
     & > span {
-      color: @heading-color;
       display: inline-block;
-      line-height: 32px;
       height: 32px;
-      font-size: 24px;
       margin-right: 32px;
+      color: @heading-color;
+      font-size: 24px;
+      line-height: 32px;
     }
     .subTotal {
+      margin-right: 0;
       color: @text-color-secondary;
       font-size: @font-size-lg;
       vertical-align: top;
-      margin-right: 0;
       i {
+        margin-left: 4px;
         font-size: 12px;
         transform: scale(0.82);
-        margin-left: 4px;
       }
       :global {
         .anticon-caret-up {

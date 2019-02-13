@@ -17,65 +17,66 @@
     flex: 0 1 72px;
     margin-bottom: 8px;
     & > span {
-      border-radius: 72px;
       display: block;
       width: 72px;
       height: 72px;
+      border-radius: 72px;
     }
   }
   .content {
     position: relative;
     top: 4px;
-    margin-left: 24px;
     flex: 1 1 auto;
+    margin-left: 24px;
     color: @text-color-secondary;
     line-height: 22px;
     .contentTitle {
+      margin-bottom: 12px;
+      color: @heading-color;
+      font-weight: 500;
       font-size: 20px;
       line-height: 28px;
-      font-weight: 500;
-      color: @heading-color;
-      margin-bottom: 12px;
     }
   }
 }
 
 .extraContent {
   .clearfix();
+
   float: right;
   white-space: nowrap;
   .statItem {
-    padding: 0 32px;
     position: relative;
     display: inline-block;
+    padding: 0 32px;
     > p:first-child {
+      margin-bottom: 4px;
       color: @text-color-secondary;
       font-size: @font-size-base;
       line-height: 22px;
-      margin-bottom: 4px;
     }
     > p {
+      margin: 0;
       color: @heading-color;
       font-size: 30px;
       line-height: 38px;
-      margin: 0;
       > span {
         color: @text-color-secondary;
         font-size: 20px;
       }
     }
-    &:after {
-      background-color: @border-color-split;
+    &::after {
       position: absolute;
       top: 8px;
       right: 0;
       width: 1px;
       height: 40px;
+      background-color: @border-color-split;
       content: '';
     }
     &:last-child {
       padding-right: 0;
-      &:after {
+      &::after {
         display: none;
       }
     }
@@ -85,16 +86,16 @@
 .members {
   a {
     display: block;
-    margin: 12px 0;
     height: 24px;
+    margin: 12px 0;
     color: @text-color;
     transition: all 0.3s;
     .textOverflow();
     .member {
+      margin-left: 12px;
       font-size: @font-size-base;
       line-height: 24px;
       vertical-align: top;
-      margin-left: 12px;
     }
     &:hover {
       color: @primary-color;
@@ -105,22 +106,22 @@
 .projectList {
   :global {
     .ant-card-meta-description {
-      color: @text-color-secondary;
       height: 44px;
-      line-height: 22px;
       overflow: hidden;
+      color: @text-color-secondary;
+      line-height: 22px;
     }
   }
   .cardTitle {
     font-size: 0;
     a {
-      color: @heading-color;
-      margin-left: 12px;
-      line-height: 24px;
-      height: 24px;
       display: inline-block;
-      vertical-align: top;
+      height: 24px;
+      margin-left: 12px;
+      color: @heading-color;
       font-size: @font-size-base;
+      line-height: 24px;
+      vertical-align: top;
       &:hover {
         color: @primary-color;
       }
@@ -131,25 +132,25 @@
   }
   .projectItemContent {
     display: flex;
+    height: 20px;
     margin-top: 8px;
     overflow: hidden;
     font-size: 12px;
-    height: 20px;
     line-height: 20px;
     .textOverflow();
     a {
-      color: @text-color-secondary;
       display: inline-block;
       flex: 1 1 0;
+      color: @text-color-secondary;
       .textOverflow();
       &:hover {
         color: @primary-color;
       }
     }
     .datetime {
-      color: @disabled-color;
       flex: 0 0 auto;
       float: right;
+      color: @disabled-color;
     }
   }
 }
@@ -186,7 +187,7 @@
     .statItem {
       padding: 0 16px;
       text-align: left;
-      &:after {
+      &::after {
         display: none;
       }
     }

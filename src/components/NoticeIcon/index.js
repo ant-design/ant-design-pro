@@ -21,6 +21,8 @@ export default class NoticeIcon extends PureComponent {
     locale: {
       emptyText: 'No notifications',
       clear: 'Clear',
+      loadedAll: 'Loaded',
+      loadMore: 'Loading more',
     },
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
@@ -51,25 +53,53 @@ export default class NoticeIcon extends PureComponent {
     onTabChange(tabType);
   };
 
+  onLoadMore = (tabProps, event) => {
+    const { onLoadMore } = this.props;
+    onLoadMore(tabProps, event);
+  };
+
   getNotificationBox() {
+    const { visible } = this.state;
     const { children, loading, locale } = this.props;
     if (!children) {
       return null;
     }
     const panes = React.Children.map(children, child => {
-      const { list, title, name, count } = child.props;
+      const {
+        list,
+        title,
+        name,
+        count,
+        emptyText,
+        emptyImage,
+        showClear,
+        loadedAll,
+        scrollToLoad,
+        skeletonCount,
+        skeletonProps,
+        loading: tabLoading,
+      } = child.props;
       const len = list && list.length ? list.length : 0;
       const msgCount = count || count === 0 ? count : len;
       const tabTitle = msgCount > 0 ? `${title} (${msgCount})` : title;
       return (
         <TabPane tab={tabTitle} key={name}>
           <List
-            {...child.props}
             data={list}
-            onClick={item => this.onItemClick(item, child.props)}
-            onClear={() => this.onClear(name)}
-            title={title}
+            emptyImage={emptyImage}
+            emptyText={emptyText}
+            loadedAll={loadedAll}
+            loading={tabLoading}
             locale={locale}
+            onClear={() => this.onClear(name)}
+            onClick={item => this.onItemClick(item, child.props)}
+            onLoadMore={event => this.onLoadMore(child.props, event)}
+            scrollToLoad={scrollToLoad}
+            showClear={showClear}
+            skeletonCount={skeletonCount}
+            skeletonProps={skeletonProps}
+            title={title}
+            visible={visible}
           />
         </TabPane>
       );
