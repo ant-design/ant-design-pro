@@ -90,27 +90,25 @@ class BasicLayout extends React.Component {
 
   getRouteAuthority = (pathname, routeData) => {
     const routes = routeData.slice(); // clone
-    let authorities;
 
-    while (routes.length > 0) {
-      const route = routes.shift();
-      // check partial route
-      if (pathToRegexp(`${route.path}(.*)`).test(pathname)) {
-        if (route.authority) {
-          authorities = route.authority;
+    const getAuthority = (routeDatas, path) => {
+      let authorities;
+      routeDatas.forEach(route => {
+        // check partial route
+        if (pathToRegexp(`${route.path}(.*)`).test(path)) {
+          if (route.authority) {
+            authorities = route.authority;
+          }
+          // is exact route?
+          if (!pathToRegexp(route.path).test(path) && route.routes) {
+            authorities = getAuthority(route.routes, path);
+          }
         }
-        // is exact route?
-        if (pathToRegexp(route.path).test(pathname)) {
-          break;
-        }
+      });
+      return authorities;
+    };
 
-        if (route.routes) {
-          route.routes.forEach(r => routes.push(r));
-        }
-      }
-    }
-
-    return authorities;
+    return getAuthority(routes, pathname);
   };
 
   getPageTitle = (pathname, breadcrumbNameMap) => {
