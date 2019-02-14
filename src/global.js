@@ -3,6 +3,8 @@ import { notification, Button, message } from 'antd';
 import { formatMessage } from 'umi/locale';
 import defaultSettings from './defaultSettings';
 
+window.React = React;
+
 const { pwa } = defaultSettings;
 // if pwa is true
 if (pwa) {
