@@ -8,4 +8,4 @@ export interface ILoginItemProps {
   buttonText?: React.ReactNode;
 }
 
-export class LoginItem extends React.Component<ILoginItemProps, any> {}
+export default class LoginItem extends React.Component<ILoginItemProps, any> {}
