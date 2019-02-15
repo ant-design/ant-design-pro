@@ -6,18 +6,23 @@ import { urlToList } from '../_utils/pathTools';
 import { getMenuMatches } from './SiderMenuUtils';
 import { isUrl } from '@/utils/utils';
 import styles from './index.less';
+import IconFont from '@/components/IconFont';
 
 const { SubMenu } = Menu;
 
 // Allow menu.js config icon as string or ReactNode
 //   icon: 'setting',
+//   icon: 'icon-geren' #For Iconfont ,
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
 const getIcon = icon => {
-  if (typeof icon === 'string' && isUrl(icon)) {
-    return <Icon component={() => <img src={icon} alt="icon" className={styles.icon} />} />;
-  }
   if (typeof icon === 'string') {
+    if (isUrl(icon)) {
+      return <Icon component={() => <img src={icon} alt="icon" className={styles.icon} />} />;
+    }
+    if (icon.startsWith('icon-')) {
+      return <IconFont type={icon} />;
+    }
     return <Icon type={icon} />;
   }
   return icon;
