@@ -7,19 +7,19 @@
     display: none;
   }
   .item {
-    transition: all 0.3s;
+    padding-right: 24px;
+    padding-left: 24px;
     overflow: hidden;
     cursor: pointer;
-    padding-left: 24px;
-    padding-right: 24px;
+    transition: all 0.3s;
 
     .meta {
       width: 100%;
     }
 
     .avatar {
-      background: #fff;
       margin-top: 4px;
+      background: #fff;
     }
     .iconElement {
       font-size: 32px;
@@ -35,58 +35,58 @@
       background: @primary-1;
     }
     .title {
-      font-weight: normal;
       margin-bottom: 8px;
+      font-weight: normal;
     }
     .description {
       font-size: 12px;
       line-height: @line-height-base;
     }
     .datetime {
-      font-size: 12px;
       margin-top: 4px;
+      font-size: 12px;
       line-height: @line-height-base;
     }
     .extra {
       float: right;
+      margin-top: -1.5px;
+      margin-right: 0;
       color: @text-color-secondary;
       font-weight: normal;
-      margin-right: 0;
-      margin-top: -1.5px;
     }
   }
   .loadMore {
     padding: 8px 0;
-    cursor: pointer;
     color: @primary-6;
     text-align: center;
+    cursor: pointer;
     &.loadedAll {
-      cursor: unset;
       color: rgba(0, 0, 0, 0.25);
+      cursor: unset;
     }
   }
 }
 
 .notFound {
-  text-align: center;
   padding: 73px 0 88px 0;
   color: @text-color-secondary;
+  text-align: center;
   img {
     display: inline-block;
-    margin-bottom: 16px;
     height: 76px;
+    margin-bottom: 16px;
   }
 }
 
 .clear {
   height: 46px;
+  color: @text-color;
   line-height: 46px;
   text-align: center;
-  color: @text-color;
-  border-radius: 0 0 @border-radius-base @border-radius-base;
   border-top: 1px solid @border-color-split;
-  transition: all 0.3s;
+  border-radius: 0 0 @border-radius-base @border-radius-base;
   cursor: pointer;
+  transition: all 0.3s;
 
   &:hover {
     color: @heading-color;

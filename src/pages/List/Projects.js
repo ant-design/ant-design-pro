@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { Row, Col, Form, Card, Select, List } from 'antd';
+import { FormattedMessage } from 'umi/locale';
 
 import TagSelect from '@/components/TagSelect';
 import AvatarList from '@/components/AvatarList';
@@ -96,6 +97,14 @@ class CoverCardList extends PureComponent {
       },
     };
 
+    const actionsTextMap = {
+      expandText: <FormattedMessage id="component.tagSelect.expand" defaultMessage="Expand" />,
+      collapseText: (
+        <FormattedMessage id="component.tagSelect.collapse" defaultMessage="Collapse" />
+      ),
+      selectAllText: <FormattedMessage id="component.tagSelect.all" defaultMessage="All" />,
+    };
+
     return (
       <div className={styles.coverCardList}>
         <Card bordered={false}>
@@ -103,7 +112,7 @@ class CoverCardList extends PureComponent {
             <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
-                  <TagSelect expandable>
+                  <TagSelect expandable actionsText={actionsTextMap}>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
                     <TagSelect.Option value="cat3">类目三</TagSelect.Option>

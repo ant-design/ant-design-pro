@@ -11,8 +11,8 @@ export default {
   },
 
   effects: {
-    *fetchBasic(_, { call, put }) {
-      const response = yield call(queryBasicProfile);
+    *fetchBasic({ payload }, { call, put }) {
+      const response = yield call(queryBasicProfile, payload);
       yield put({
         type: 'show',
         payload: response,
