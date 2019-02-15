@@ -110,7 +110,7 @@ class Monitor extends Component {
                   }
                 >
                   <img
-                    src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png"
+                    src="https://gw.alipayobjects.com/zos/antfincdn/h%24wFbzuuzz/HBWnDEUXCnGnGrRfrpKa.png"
                     alt="map"
                   />
                 </Tooltip>
