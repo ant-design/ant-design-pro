@@ -278,7 +278,7 @@ class TableList extends PureComponent {
 
   handleTest = (flag, record) => {
     console.log('handleTest', flag, record);
-    alert('下一个版本实现');
+    message.success('下一个版本实现');
   };
 
   renderSimpleForm() {

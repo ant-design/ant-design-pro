@@ -27,45 +27,45 @@ export function setEnumData(keyName, rows) {
 //   console.log('rows:', rows);
 //   return rows;
 // }
-const g = function*(keyName) {
-  try {
-    const payload = { key: keyName };
-    const rows = yield getMasterData(payload);
-    console.log('rows in masterData:', rows);
-    return rows;
-  } catch (e) {
-    console.log(e);
-  }
-  return [];
-};
-function run(generator, keyName) {
-  const it = generator(keyName);
+// const g = function* (keyName) {
+//   try {
+//     const payload = { key: keyName };
+//     const rows = yield getMasterData(payload);
+//     console.log('rows in masterData:', rows);
+//     return rows;
+//   } catch (e) {
+//     console.log(e);
+//   }
+//   return [];
+// };
+// function run(generator, keyName) {
+//   const it = generator(keyName);
+//
+//   function go(result) {
+//     console.log('go in masterData:', result);
+//     if (result.done) return result.value;
+//     return result.value.then(value => go(it.next(value)), error => go(it.throw(error)));
+//   }
+//
+//   const result = go(it.next());
+//   console.log('result in masterData:', result);
+//   return result;
+// }
 
-  function go(result) {
-    console.log('go in masterData:', result);
-    if (result.done) return result.value;
-    return result.value.then(value => go(it.next(value)), error => go(it.throw(error)));
-  }
-
-  const result = go(it.next());
-  console.log('result in masterData:', result);
-  return result;
-}
-
-export function fetchEnumData7(keyName) {
-  return run(g, keyName);
-  // const call=fetchEnumData0(keyName);
-  // const promise=call.next();
-  // let rows=[];
-  // promise.then( (response)=> {
-  //   console.log("getEnumData response:", response);
-  //   rows = response && response.data ? response.data.rows : [];
-  //   // setEnumData(keyName,rows);
-  //   call.next(rows);
-  // },  (error) => {
-  //   console.error('出错了', error);
-  // });
-}
+// export function fetchEnumData7(keyName) {
+//   return run(g, keyName);
+//   // const call=fetchEnumData0(keyName);
+//   // const promise=call.next();
+//   // let rows=[];
+//   // promise.then( (response)=> {
+//   //   console.log("getEnumData response:", response);
+//   //   rows = response && response.data ? response.data.rows : [];
+//   //   // setEnumData(keyName,rows);
+//   //   call.next(rows);
+//   // },  (error) => {
+//   //   console.error('出错了', error);
+//   // });
+// }
 // export function* fetchEnumData5(keyName) {
 //   // localStorage.removeItem(keyName);
 //   let localRows = getEnumData(keyName);

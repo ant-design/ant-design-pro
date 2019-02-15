@@ -97,6 +97,11 @@ export default [
             component: './UniComp/Org',
           },
           {
+            path: '/uniComp/group',
+            name: 'group',
+            component: './UniComp/Group',
+          },
+          {
             path: '/uniComp/component',
             name: 'component',
             component: './UniComp/Component',

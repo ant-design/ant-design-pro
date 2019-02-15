@@ -3,6 +3,7 @@ import { parse } from 'url';
 
 // mock tableListDataSource
 let tableListDataSource = [];
+let groupsDataSource = [];
 let componentDataSource = [];
 const serviceDataSource = [];
 
@@ -10,6 +11,9 @@ function getList(innerTableName) {
   let dataSource = tableListDataSource;
   switch (innerTableName) {
     /* eslint no-case-declarations:0 */
+    case 'groups':
+      dataSource = groupsDataSource;
+      break;
     case 'component':
       dataSource = componentDataSource;
       break;
@@ -20,6 +24,16 @@ function getList(innerTableName) {
       break;
   }
   return dataSource;
+}
+function pushGroups() {
+  const groupId = ['语音识别', 'OCR识别', '身份识别', '文本识别'];
+  groupId.forEach((value, index) => {
+    groupsDataSource.push({
+      disabled: false,
+      id: index,
+      name: value,
+    });
+  });
 }
 function pushOrg() {
   tableListDataSource.push({
@@ -85,6 +99,7 @@ function pushComponent() {
 }
 pushOrg();
 pushComponent();
+pushGroups();
 
 export function sug(req, res, u) {
   console.log('pushOrg');
@@ -187,7 +202,7 @@ export function postInfo(req, res, u, b) {
   }
 
   const body = (b && b.body) || req.body;
-  const { tableName, method, orgCode, orgName, id, componentId } = body;
+  const { tableName, method, orgCode, orgName, id, componentId, name } = body;
   const { appKey, orgType } = body;
   console.log('postInfo', body, id);
   const datasource = getList(tableName);
@@ -198,6 +213,10 @@ export function postInfo(req, res, u, b) {
         case 'org':
           tableListDataSource = tableListDataSource.filter(item => id.indexOf(item.id) === -1);
           console.log('delete :', tableListDataSource);
+          break;
+        case 'groups':
+          groupsDataSource = groupsDataSource.filter(item => id.indexOf(item.id) === -1);
+          console.log('delete :', groupsDataSource);
           break;
         default:
           componentDataSource = componentDataSource.filter(item => id.indexOf(item.id) === -1);
@@ -226,6 +245,22 @@ export function postInfo(req, res, u, b) {
               appKey,
               orgType,
               createTime: new Date(),
+            });
+          }
+          break;
+        case 'groups':
+          const tmpGroupsArray = datasource.filter(item => id && id == item.id);
+          if (tmpGroupsArray && tmpGroupsArray.length > 0) {
+            const tmpObj = tmpGroupsArray.shift();
+            tmpObj.name = name;
+            if (id) {
+              tmpObj.id = id;
+            }
+          } else {
+            const newId = datasource.length + 1;
+            datasource.unshift({
+              id: newId,
+              name,
             });
           }
           break;
