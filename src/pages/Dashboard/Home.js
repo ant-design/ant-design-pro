@@ -45,30 +45,37 @@ class Home extends PureComponent {
     console.log(item);
   };
 
-  rootGroupCreateHandler = name => {
+  groupCreateHandler = (name, id) => {
     const { dispatch } = this.props;
 
     dispatch({
       type: 'project/groupCreate',
       payload: {
         group_name: name,
-        parent_node: '', // root node
+        parent_node: id,
       },
     });
-  };
-
-  childGroupCreateHandler = (id, name) => {
-    console.log(id);
-    console.log(name);
   };
 
   groupDelete = item => {
     const { dispatch } = this.props;
 
-    dispatch({
-      type: 'project/groupDelete',
-      payload: {
-        project_group_id: item.id,
+    Modal.confirm({
+      title: '删除',
+      content: (
+        <div>
+          确定删除 <b>{item.name}</b> 吗？删除后该分组的项目将被转存到未分组!
+        </div>
+      ),
+      okText: '确认',
+      cancelText: '取消',
+      onOk: () => {
+        dispatch({
+          type: 'project/groupDelete',
+          payload: {
+            project_group_id: item.id,
+          },
+        });
       },
     });
   };
@@ -118,7 +125,7 @@ class Home extends PureComponent {
 
     const data = {
       menu: {
-        name: '项目',
+        name: '常用',
         list: [
           {
             id: 'all',
@@ -138,7 +145,7 @@ class Home extends PureComponent {
         ],
       },
       tree: {
-        name: '分组',
+        name: '项目组',
         list: tree,
       },
     };
@@ -185,8 +192,7 @@ class Home extends PureComponent {
           <MulitTree
             data={data}
             onItemSelect={this.groupSelectHandler}
-            onRootGroupCreate={this.rootGroupCreateHandler}
-            onChildGroupCreate={this.childGroupCreateHandler}
+            onGroupCreate={this.groupCreateHandler}
             onGroupDelete={this.groupDelete}
           />
         </Col>

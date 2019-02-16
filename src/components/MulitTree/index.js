@@ -1,18 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Modal,
-  Popover,
-  Button,
-  Form,
-  Row,
-  Col,
-  Input,
-  Dropdown,
-  Menu,
-  Icon,
-  Card,
-  List,
-} from 'antd';
+import { Popover, Button, Form, Row, Col, Input, Dropdown, Menu, Icon, Card, List } from 'antd';
 import styles from './index.less';
 
 const FormItem = Form.Item;
@@ -23,7 +10,7 @@ class MulitTree extends Component {
   state = {
     toggle: {},
     select: {},
-    rootGroupVisible: false,
+    newGroupPopoverVisible: {},
   };
 
   groupToggle = (e, item) => {
@@ -48,43 +35,37 @@ class MulitTree extends Component {
     }
   };
 
-  rootGroupCreate = () => {
-    const { onRootGroupCreate } = this.props;
-    const { form } = this.props;
+  groupPopoverSet = (id, val) => {
+    const { newGroupPopoverVisible } = this.state;
 
-    this.setState({
-      rootGroupVisible: false,
-    });
-
-    form.validateFields(['newGroupName'], {}, (err, values) => {
-      onRootGroupCreate(values.newGroupName || '新分组');
-    });
+    newGroupPopoverVisible[id] = val;
+    this.setState({ newGroupPopoverVisible });
   };
 
-  handleVisibleChange = rootGroupVisible => {
-    this.setState({ rootGroupVisible });
+  groupCreate = id => {
+    const {
+      onGroupCreate,
+      form,
+      data: { tree },
+    } = this.props;
+
+    this.groupPopoverSet(id, false);
+    form.validateFields(['newGroupName'], {}, (err, values) => {
+      onGroupCreate(values.newGroupName || `新${tree.name}`, id);
+    });
   };
 
   groupDelete = item => {
     const { onGroupDelete } = this.props;
-    Modal.confirm({
-      title: '删除',
-      content: (
-        <div>
-          确定删除 <b>{item.name}</b> 吗？
-        </div>
-      ),
-      okText: '确认',
-      cancelText: '取消',
-      onOk: () => {
-        onGroupDelete(item);
-      },
-    });
+    onGroupDelete(item);
   };
 
-  newChildGroupButton = () => {
-    const { rootGroupVisible } = this.state;
-    const { form } = this.props;
+  newGroupButton = id => {
+    const { newGroupPopoverVisible } = this.state;
+    const {
+      form,
+      data: { tree },
+    } = this.props;
     const { getFieldDecorator } = form;
 
     return (
@@ -106,11 +87,17 @@ class MulitTree extends Component {
                           message: '支持中文，字母，下划线',
                         },
                       ],
-                    })(<Input size="large" placeholder="新分组" />)}
+                    })(<Input size="large" placeholder={`新${tree.name}`} />)}
                   </InputGroup>
                 </Col>
                 <Col span={6}>
-                  <Button size="large" type="primary" onClick={this.rootGroupCreate}>
+                  <Button
+                    size="large"
+                    type="primary"
+                    onClick={() => {
+                      this.groupCreate(id);
+                    }}
+                  >
                     新增
                   </Button>
                 </Col>
@@ -118,69 +105,21 @@ class MulitTree extends Component {
             </FormItem>
           </Form>
         }
-        title="新增分组"
+        title={`新增${tree.name}`}
         trigger="click"
-        visible={rootGroupVisible}
-        onVisibleChange={this.handleVisibleChange}
-      >
-        <div className={styles.nodeCard}>
-          <Icon type="plus" className={styles.secIcon} />
-          <span>新增分组</span>
-        </div>
-      </Popover>
-    );
-  };
-
-  newGroupButton = () => {
-    const { rootGroupVisible } = this.state;
-    const { form } = this.props;
-    const { getFieldDecorator } = form;
-
-    return (
-      <Popover
-        placement="bottom"
-        content={
-          <Form style={{ width: '320px' }}>
-            <FormItem>
-              <Row gutter={8}>
-                <Col span={18}>
-                  <InputGroup compact>
-                    {getFieldDecorator('newGroupName', {
-                      rules: [
-                        {
-                          required: false,
-                        },
-                        {
-                          pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{1,32}$/,
-                          message: '支持中文，字母，下划线',
-                        },
-                      ],
-                    })(<Input size="large" placeholder="新分组" />)}
-                  </InputGroup>
-                </Col>
-                <Col span={6}>
-                  <Button size="large" type="primary" onClick={this.rootGroupCreate}>
-                    新增
-                  </Button>
-                </Col>
-              </Row>
-            </FormItem>
-          </Form>
-        }
-        title="新增分组"
-        trigger="click"
-        visible={rootGroupVisible}
-        onVisibleChange={this.handleVisibleChange}
-      >
-        <div className={styles.nodeCard}>
-          <Icon type="plus" className={styles.secIcon} />
-          <span>新增分组</span>
-        </div>
-      </Popover>
+        visible={newGroupPopoverVisible[id]}
+        onVisibleChange={flag => {
+          newGroupPopoverVisible[id] = flag;
+          this.setState({ newGroupPopoverVisible });
+        }}
+      />
     );
   };
 
   childGroupsRender = (items, count) => {
+    const {
+      data: { tree },
+    } = this.props;
     const { toggle, select } = this.state;
     let cnt = count;
     cnt += 1;
@@ -201,13 +140,18 @@ class MulitTree extends Component {
               />
             ) : null}
             <span>{item.name}</span>
+            {this.newGroupButton(item.id)}
             <Dropdown
               overlay={
                 <Menu>
                   <Menu.Item key="m0">
-                    <a>
+                    <a
+                      onClick={() => {
+                        this.groupPopoverSet(item.id, true);
+                      }}
+                    >
                       <Icon type="plus" />
-                      &nbsp;增加子分组
+                      &nbsp;{`新增子${tree.name}`}
                     </a>
                   </Menu.Item>
                   <Menu.Item key="m1">
@@ -223,7 +167,7 @@ class MulitTree extends Component {
                       }}
                     >
                       <Icon type="close" />
-                      &nbsp;删除分组
+                      &nbsp;{`删除${tree.name}`}
                     </a>
                   </Menu.Item>
                 </Menu>
@@ -265,7 +209,16 @@ class MulitTree extends Component {
         <h4>{menu.name}</h4>
         <List>{this.renderMenu(menu.list)}</List>
         <h4>{tree.name} </h4>
-        {this.newGroupButton()}
+        {this.newGroupButton('-')}
+        <div
+          className={styles.nodeCard}
+          onClick={() => {
+            this.groupPopoverSet('-', true);
+          }}
+        >
+          <Icon type="plus" className={styles.secIcon} />
+          <span>新增{tree.name}</span>
+        </div>
         {this.childGroupsRender(tree.list, 0)}
       </Card>
     );
