@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Row, Col, Card, Tooltip } from 'antd';
@@ -8,7 +9,6 @@ import CountDown from '@/components/CountDown';
 import ActiveChart from '@/components/ActiveChart';
 import numeral from 'numeral';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
-
 import Authorized from '@/utils/Authorized';
 import styles from './Monitor.less';
 
@@ -27,7 +27,7 @@ const havePermissionAsync = new Promise(resolve => {
   monitor,
   loading: loading.models.monitor,
 }))
-class Monitor extends PureComponent {
+class Monitor extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -110,7 +110,7 @@ class Monitor extends PureComponent {
                   }
                 >
                   <img
-                    src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png"
+                    src="https://gw.alipayobjects.com/zos/antfincdn/h%24wFbzuuzz/HBWnDEUXCnGnGrRfrpKa.png"
                     alt="map"
                   />
                 </Tooltip>
@@ -242,4 +242,8 @@ class Monitor extends PureComponent {
   }
 }
 
-export default Monitor;
+export default props => (
+  <AsyncLoadBizCharts>
+    <Monitor {...props} />
+  </AsyncLoadBizCharts>
+);
