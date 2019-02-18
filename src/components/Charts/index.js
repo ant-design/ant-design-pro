@@ -1,11 +1,12 @@
 import React, { Suspense } from 'react';
 import numeral from 'numeral';
 import ChartCard from './ChartCard';
+import Field from './Field';
 
 const getComponent = Component => {
   return props => {
     return (
-      <Suspense fallback={null}>
+      <Suspense fallback="...">
         <Component {...props} />
       </Suspense>
     );
@@ -19,7 +20,6 @@ const Gauge = getComponent(React.lazy(() => import('./Gauge')));
 const MiniArea = getComponent(React.lazy(() => import('./MiniArea')));
 const MiniBar = getComponent(React.lazy(() => import('./MiniBar')));
 const MiniProgress = getComponent(React.lazy(() => import('./MiniProgress')));
-const Field = getComponent(React.lazy(() => import('./Field')));
 const WaterWave = getComponent(React.lazy(() => import('./WaterWave')));
 const TagCloud = getComponent(React.lazy(() => import('./TagCloud')));
 const TimelineChart = getComponent(React.lazy(() => import('./TimelineChart')));

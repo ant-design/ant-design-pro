@@ -33,18 +33,16 @@ export default class ActiveChart extends Component {
   }
 
   loopData = () => {
-    this.requestRef = requestAnimationFrame(() => {
-      this.timer = setTimeout(() => {
-        this.setState(
-          {
-            activeData: getActiveData(),
-          },
-          () => {
-            this.loopData();
-          }
-        );
-      }, 1000);
-    });
+    this.timer = setTimeout(() => {
+      this.setState(
+        {
+          activeData: getActiveData(),
+        },
+        () => {
+          this.loopData();
+        }
+      );
+    }, 500);
   };
 
   render() {

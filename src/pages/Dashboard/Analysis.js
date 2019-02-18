@@ -25,7 +25,6 @@ class Analysis extends Component {
   };
 
   componentDidMount() {
-    console.log('run');
     const { dispatch } = this.props;
     this.reqRef = requestAnimationFrame(() => {
       dispatch({

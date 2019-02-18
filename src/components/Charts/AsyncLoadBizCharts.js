@@ -24,8 +24,10 @@ class AsyncLoadBizCharts extends React.Component {
 
   async componentDidMount() {
     await loadBizCharts();
-    this.setState({
-      loading: false,
+    requestAnimationFrame(() => {
+      this.setState({
+        loading: false,
+      });
     });
   }
 
