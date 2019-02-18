@@ -13,16 +13,20 @@ const TagSelectOption = ({ children, checked, onChange, value }) => (
   </CheckableTag>
 );
 
+const emptyValue = isSingleSelect => (isSingleSelect ? '' : []);
+
 TagSelectOption.isTagSelectOption = true;
 
 class TagSelect extends Component {
   static propTypes = {
     actionsText: PropTypes.object,
     hideCheckAll: PropTypes.bool,
+    isSingleSelect: PropTypes.bool,
   };
 
   static defaultProps = {
-    hideCheckAll: false,
+    hideCheckAll: false, // 单选情况下不显示
+    isSingleSelect: false, // 是否单选
     actionsText: {
       expandText: 'Expand',
       collapseText: 'Collapse',
@@ -34,13 +38,13 @@ class TagSelect extends Component {
     super(props);
     this.state = {
       expand: false,
-      value: props.value || props.defaultValue || [],
+      value: props.value || props.defaultValue || emptyValue(props.isSingleSelect),
     };
   }
 
   static getDerivedStateFromProps(nextProps) {
     if ('value' in nextProps) {
-      return { value: nextProps.value || [] };
+      return { value: nextProps.value || emptyValue(nextProps.isSingleSelect) };
     }
     return null;
   }
@@ -73,15 +77,21 @@ class TagSelect extends Component {
   }
 
   handleTagChange = (value, checked) => {
+    const { isSingleSelect } = this.props;
     const { value: StateValue } = this.state;
-    const checkedTags = [...StateValue];
-
-    const index = checkedTags.indexOf(value);
-    if (checked && index === -1) {
-      checkedTags.push(value);
-    } else if (!checked && index > -1) {
-      checkedTags.splice(index, 1);
+    let checkedTags;
+    if (isSingleSelect) {
+      checkedTags = value;
+    } else {
+      checkedTags = [...StateValue];
+      const isInclude = checkedTags.includes(value);
+      if (checked && !isInclude) {
+        checkedTags.push(value);
+      } else if (!checked && isInclude) {
+        checkedTags.splice(checkedTags.findIndex(v => v === value), 1);
+      }
     }
+
     this.onChange(checkedTags);
   };
 
@@ -99,30 +109,41 @@ class TagSelect extends Component {
 
   render() {
     const { value, expand } = this.state;
-    const { children, hideCheckAll, className, style, expandable, actionsText } = this.props;
+    const {
+      children,
+      hideCheckAll,
+      className,
+      style,
+      expandable,
+      actionsText,
+      isSingleSelect,
+    } = this.props;
     const checkedAll = this.getAllTags().length === value.length;
     const { expandText = 'Expand', collapseText = 'Collapse', selectAllText = 'All' } =
       actionsText === null ? {} : actionsText;
 
     const cls = classNames(styles.tagSelect, className, {
       [styles.hasExpandTag]: expandable,
-      [styles.expanded]: expand,
+      [styles.expanded]: expandable ? expand : true,
     });
 
     return (
       <div className={cls} style={style}>
-        {hideCheckAll ? null : (
+        {hideCheckAll || isSingleSelect ? null : (
           <CheckableTag checked={checkedAll} key="tag-select-__all__" onChange={this.onSelectAll}>
             {selectAllText}
           </CheckableTag>
         )}
-        {value &&
+        {value !== undefined &&
           React.Children.map(children, child => {
+            const {
+              props: { value: childValue },
+            } = child;
             if (this.isTagSelectOption(child)) {
               return React.cloneElement(child, {
-                key: `tag-select-${child.props.value}`,
-                value: child.props.value,
-                checked: value.indexOf(child.props.value) > -1,
+                key: `tag-select-${childValue}`,
+                value: childValue,
+                checked: isSingleSelect ? value === childValue : value.includes(childValue),
                 onChange: this.handleTagChange,
               });
             }
