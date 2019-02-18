@@ -79,10 +79,8 @@ class TagSelect extends Component {
   handleTagChange = (value, checked) => {
     const { isSingleSelect } = this.props;
     const { value: StateValue } = this.state;
-    let checkedTags;
-    if (isSingleSelect) {
-      checkedTags = value;
-    } else {
+    let checkedTags = value;
+    if (!isSingleSelect) {
       checkedTags = [...StateValue];
       const isInclude = checkedTags.includes(value);
       if (checked && !isInclude) {
