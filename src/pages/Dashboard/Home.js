@@ -13,10 +13,14 @@ import {
   Avatar,
   Modal,
   Form,
+  Input,
 } from 'antd';
 
 import styles from './Home.less';
 import MulitTree from '@/components/MulitTree';
+
+const FormItem = Form.Item;
+const { TextArea } = Input;
 
 @connect(({ list, project, loading }) => ({
   list,
@@ -25,7 +29,11 @@ import MulitTree from '@/components/MulitTree';
 }))
 @Form.create()
 class Home extends PureComponent {
-  state = {};
+  state = {
+    // currentGroup: null,
+    visible: false,
+    currentProject: undefined,
+  };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -42,6 +50,7 @@ class Home extends PureComponent {
   }
 
   groupSelectHandler = item => {
+    // this.setState({ currentGroup: item });
     console.log(item);
   };
 
@@ -57,7 +66,7 @@ class Home extends PureComponent {
     });
   };
 
-  groupDelete = item => {
+  groupDeleteHandler = item => {
     const { dispatch } = this.props;
 
     Modal.confirm({
@@ -80,6 +89,14 @@ class Home extends PureComponent {
     });
   };
 
+  projectCreate = () => {
+    console.log('project create');
+    this.setState({
+      visible: true,
+      currentProject: undefined,
+    });
+  };
+
   showEditModal = item => {
     console.log(item);
   };
@@ -92,19 +109,19 @@ class Home extends PureComponent {
     setTimeout(() => this.addBtn.blur(), 0);
   };
 
-  handleSubmit = e => {
+  handleProjectSubmit = e => {
     e.preventDefault();
-    const { dispatch, form } = this.props;
-    const { current } = this.state;
-    const id = current ? current.id : '';
+    const { form } = this.props;
+    // const { currentProject } = this.state;
+    // const id = currentProject ? currentProject.id : '';
 
-    setTimeout(() => this.addBtn.blur(), 0);
     form.validateFields((err, fieldsValue) => {
       if (err) return;
-      dispatch({
-        type: 'list/submit',
-        payload: { id, ...fieldsValue },
-      });
+      console.log(fieldsValue);
+      // dispatch({
+      //   type: 'list/submit',
+      //   payload: { id, ...fieldsValue },
+      // });
     });
   };
 
@@ -121,7 +138,10 @@ class Home extends PureComponent {
       project: { tree },
       list: { list },
       projectsLoading,
+
+      form: { getFieldDecorator },
     } = this.props;
+    const { visible, currentProject = {} } = this.state;
 
     const data = {
       menu: {
@@ -174,7 +194,7 @@ class Home extends PureComponent {
     const MoreBtn = props => (
       <Dropdown
         overlay={
-          <Menu onClick={({ key }) => editAndDelete(key, props.current)}>
+          <Menu onClick={({ key }) => editAndDelete(key, props.currentProject)}>
             <Menu.Item key="edit">编辑</Menu.Item>
             <Menu.Item key="delete">移动到</Menu.Item>
           </Menu>
@@ -186,42 +206,82 @@ class Home extends PureComponent {
       </Dropdown>
     );
 
+    const getModalContent = (
+      <Form onSubmit={this.handleProjectSubmit}>
+        <FormItem label="项目名称">
+          {getFieldDecorator('projectName', {
+            rules: [{ required: true, message: '请输入项目名称' }],
+            initialValue: currentProject.name,
+          })(<Input placeholder="请输入项目名称" />)}
+        </FormItem>
+        <FormItem label="项目描述">
+          {getFieldDecorator('projectDesc', {
+            rules: [{ message: '请输入项目描述！', min: 0 }],
+            initialValue: currentProject.desc,
+          })(<TextArea rows={2} placeholder="请输入项目描述" />)}
+        </FormItem>
+      </Form>
+    );
+
     return (
-      <Row style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <Col span={6} style={{ paddingRight: '10px' }}>
-          <MulitTree
-            data={data}
-            onItemSelect={this.groupSelectHandler}
-            onGroupCreate={this.groupCreateHandler}
-            onGroupDelete={this.groupDelete}
-          />
-        </Col>
-        <Col span={18}>
-          <div className={styles.standardList}>
-            <Card bordered={false} title="项目列表" bodyStyle={{ padding: '0 32px 40px 32px' }}>
-              <Button type="dashed" style={{ width: '100%', marginBottom: 8 }} icon="plus">
-                添加
-              </Button>
-              <List
-                size="large"
-                rowKey="id"
-                loading={projectsLoading}
-                dataSource={list}
-                renderItem={item => (
-                  <List.Item actions={[<MoreBtn current={item} />]}>
-                    <List.Item.Meta
-                      avatar={<Avatar src={item.logo} shape="square" size="large" />}
-                      title={<a href={item.href}>{item.title}</a>}
-                      description={item.subDescription}
-                    />
-                    <ListContent data={item} />
-                  </List.Item>
-                )}
-              />
-            </Card>
-          </div>
-        </Col>
-      </Row>
+      <div>
+        <Row style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <Col span={6} style={{ paddingRight: '10px' }}>
+            <MulitTree
+              data={data}
+              onItemSelect={this.groupSelectHandler}
+              onGroupCreate={this.groupCreateHandler}
+              onGroupDelete={this.groupDeleteHandler}
+            />
+          </Col>
+          <Col span={18}>
+            <div className={styles.standardList}>
+              <Card bordered={false} title="项目列表" bodyStyle={{ padding: '0 32px 40px 32px' }}>
+                <Button
+                  type="dashed"
+                  style={{ width: '100%', marginBottom: 8 }}
+                  onClick={this.projectCreate}
+                  icon="plus"
+                >
+                  添加
+                </Button>
+                <List
+                  size="large"
+                  rowKey="id"
+                  loading={projectsLoading}
+                  dataSource={list}
+                  renderItem={item => (
+                    <List.Item actions={[<MoreBtn currentProject={item} />]}>
+                      <List.Item.Meta
+                        avatar={<Avatar src={item.logo} shape="square" size="large" />}
+                        title={<a href={item.href}>{item.title}</a>}
+                        description={item.subDescription}
+                      />
+                      <ListContent data={item} />
+                    </List.Item>
+                  )}
+                />
+              </Card>
+            </div>
+          </Col>
+        </Row>
+        <Modal
+          title={`项目${currentProject.name ? '编辑' : '添加'}`}
+          width={480}
+          className={styles.standardListForm}
+          bodyStyle={{ padding: '0px 28px' }}
+          destroyOnClose
+          visible={visible}
+          onOk={this.handleProjectSubmit}
+          onCancel={() => {
+            this.setState({
+              visible: false,
+            });
+          }}
+        >
+          {getModalContent}
+        </Modal>
+      </div>
     );
   }
 }
