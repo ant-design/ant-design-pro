@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { formatMessage } from 'umi/locale';
+import { connect } from 'dva';
 import Link from 'umi/link';
 import { Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
@@ -7,6 +8,7 @@ import DocumentTitle from 'react-document-title';
 import SelectLang from '@/components/SelectLang';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
+import getPageTitle from '@/utils/getPageTitle';
 
 const links = [
   {
@@ -33,29 +35,25 @@ const copyright = (
 );
 
 class UserLayout extends Component {
-  getPageTitle() {
+  componentDidMount() {
     const {
-      location: { pathname },
-      route: { routes },
+      dispatch,
+      route: { routes, authority },
     } = this.props;
-
-    const currentRoute = routes.filter(route => route.path === pathname);
-
-    let title = 'Ant Design';
-    if (currentRoute.length > 0) {
-      if (currentRoute[0].name) {
-        title = `${currentRoute[0].name} - Ant Design`;
-      }
-    }
-
-    return title;
+    dispatch({
+      type: 'menu/getMenuData',
+      payload: { routes, authority },
+    });
   }
 
   render() {
-    const { children } = this.props;
-
+    const {
+      children,
+      location: { pathname },
+      breadcrumbNameMap,
+    } = this.props;
     return (
-      <DocumentTitle title={this.getPageTitle()}>
+      <DocumentTitle title={getPageTitle(pathname, breadcrumbNameMap)}>
         <div className={styles.container}>
           <div className={styles.lang}>
             <SelectLang />
@@ -75,8 +73,11 @@ class UserLayout extends Component {
           <GlobalFooter links={links} copyright={copyright} />
         </div>
       </DocumentTitle>
-    )
+    );
   }
 }
 
-export default UserLayout;
+export default connect(({ menu: menuModel }) => ({
+  menuData: menuModel.menuData,
+  breadcrumbNameMap: menuModel.breadcrumbNameMap,
+}))(UserLayout);
