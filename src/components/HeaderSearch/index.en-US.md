@@ -1,6 +1,6 @@
 ---
 title: HeaderSearch
-subtitle: Top search box
+subtitle:
 cols: 1
 order: 8
 ---
