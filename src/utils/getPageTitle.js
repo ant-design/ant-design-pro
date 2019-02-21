@@ -8,6 +8,7 @@ export const matchParamsPath = (pathname, breadcrumbNameMap) => {
   const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
   return breadcrumbNameMap[pathKey];
 };
+
 const getPageTitle = (pathname, breadcrumbNameMap) => {
   const currRouterData = matchParamsPath(pathname, breadcrumbNameMap);
   if (!currRouterData) {

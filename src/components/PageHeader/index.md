@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: PageHeader
-  zh-CN: PageHeader
+title: PageHeader
 subtitle: 页头
 cols: 1
 order: 11

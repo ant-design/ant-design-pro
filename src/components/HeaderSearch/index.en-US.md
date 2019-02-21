@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: HeaderSearch
-  zh-CN: HeaderSearch
+title: HeaderSearch
 subtitle: Top search box
 cols: 1
 order: 8
@@ -21,4 +19,4 @@ onSelect | Called when a option is selected. param is option's value and option 
 onPressEnter | Callback when pressing Enter | function(value) | -
 onVisibleChange | Show or hide the callback of the text box | function(value) |-
 defaultOpen | The input box is displayed for the first time. | boolean | false
-open | The input box is displayed | booelan |false
+open | The input box is displayed | boolean |false
