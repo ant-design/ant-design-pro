@@ -154,8 +154,8 @@ class SearchList extends Component {
             </StandardFormRow>
             <StandardFormRow title="owner" grid>
               <Row>
-                <Col lg={16} md={24} sm={24} xs={24}>
-                  <FormItem>
+                <Col>
+                  <FormItem {...formItemLayout}>
                     {getFieldDecorator('owner', {
                       initialValue: ['wjh', 'zxx'],
                     })(
