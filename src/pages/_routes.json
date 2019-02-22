@@ -1,0 +1,57 @@
+[
+  {
+    "path": "/",
+    "exact": true,
+    "redirect": "/dashboard/analysis"
+  },
+  {
+    "path": "/dashboard",
+    "exact": true,
+    "redirect": "/dashboard/analysis"
+  },
+  {
+    "path": "/forms",
+    "exact": true,
+    "redirect": "/forms/basicform"
+  },
+  {
+    "path": "/forms/stepform",
+    "exact": true,
+    "redirect": "/forms/stepform/info"
+  },
+  {
+    "path": "/list",
+    "exact": true,
+    "redirect": "/list/tableList"
+  },
+  {
+    "path": "/list/search",
+    "exact": true,
+    "redirect": "/list/search/articles"
+  },
+  {
+    "path": "/profile",
+    "exact": true,
+    "redirect": "/profile/basicprofile"
+  },
+  {
+    "path": "/result",
+    "exact": true,
+    "redirect": "/result/success"
+  },
+  {
+    "path": "/exception",
+    "exact": true,
+    "redirect": "/exception/403"
+  },
+  {
+    "path": "/account/center",
+    "exact": true,
+    "redirect": "/account/center/articles"
+  },
+  {
+    "path": "/account/settings",
+    "exact": true,
+    "redirect": "/account/settings/baseview"
+  }
+]

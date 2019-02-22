@@ -16,14 +16,16 @@ class Info extends Component {
     super(props);
     const { match, location } = props;
     const menuMap = {
-      base: <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />,
-      security: (
+      baseview: (
+        <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />
+      ),
+      securityview: (
         <FormattedMessage id="app.settings.menuMap.security" defaultMessage="Security Settings" />
       ),
-      binding: (
+      bindingview: (
         <FormattedMessage id="app.settings.menuMap.binding" defaultMessage="Account Binding" />
       ),
-      notification: (
+      notificationview: (
         <FormattedMessage
           id="app.settings.menuMap.notification"
           defaultMessage="New Message Notification"

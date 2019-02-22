@@ -3,6 +3,7 @@ import isEqual from 'lodash/isEqual';
 import { formatMessage } from 'umi/locale';
 import Authorized from '@/utils/Authorized';
 import { menu } from '../defaultSettings';
+import { queryMenu } from '@/services/user';
 
 const { check } = Authorized;
 
@@ -97,17 +98,18 @@ export default {
 
   state: {
     menuData: [],
+    routerData: [],
     breadcrumbNameMap: {},
   },
 
   effects: {
-    *getMenuData({ payload }, { put }) {
-      const { routes, authority } = payload;
+    *getMenuData(_, { put, call }) {
+      const { routes, authority } = yield call(queryMenu);
       const menuData = filterMenuData(memoizeOneFormatter(routes, authority));
       const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(menuData);
       yield put({
         type: 'save',
-        payload: { menuData, breadcrumbNameMap },
+        payload: { menuData, breadcrumbNameMap, routerData: routes },
       });
     },
   },
