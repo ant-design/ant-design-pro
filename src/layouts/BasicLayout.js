@@ -4,14 +4,11 @@ import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
-import pathToRegexp from 'path-to-regexp';
 import Media from 'react-media';
-import Authorized from '@/utils/Authorized';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
-import Exception403 from '../pages/Exception/403';
 import PageLoading from '@/components/PageLoading';
 import SiderMenu from '@/components/SiderMenu';
 import getPageTitle from '@/utils/getPageTitle';
@@ -73,29 +70,6 @@ class BasicLayout extends React.Component {
     };
   }
 
-  getRouteAuthority = (pathname, routeData) => {
-    const routes = routeData.slice(); // clone
-
-    const getAuthority = (routeDatas, path) => {
-      let authorities;
-      routeDatas.forEach(route => {
-        // check partial route
-        if (pathToRegexp(`${route.path}(.*)`).test(path)) {
-          if (route.authority) {
-            authorities = route.authority;
-          }
-          // is exact route?
-          if (!pathToRegexp(route.path).test(path) && route.routes) {
-            authorities = getAuthority(route.routes, path);
-          }
-        }
-      });
-      return authorities;
-    };
-
-    return getAuthority(routes, pathname);
-  };
-
   getLayoutStyle = () => {
     const { fixSiderbar, isMobile, collapsed, layout } = this.props;
     if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
@@ -132,12 +106,10 @@ class BasicLayout extends React.Component {
       isMobile,
       menuData,
       breadcrumbNameMap,
-      route: { routes },
       fixedHeader,
     } = this.props;
 
     const isTop = PropsLayout === 'topmenu';
-    const routerConfig = this.getRouteAuthority(pathname, routes);
     const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
     const layout = (
       <Layout>
@@ -165,9 +137,7 @@ class BasicLayout extends React.Component {
             {...this.props}
           />
           <Content className={styles.content} style={contentStyle}>
-            <Authorized authority={routerConfig} noMatch={<Exception403 />}>
-              {children}
-            </Authorized>
+            {children}
           </Content>
           <Footer />
         </Layout>
