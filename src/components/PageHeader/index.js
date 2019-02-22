@@ -15,7 +15,7 @@ export default class PageHeader extends PureComponent {
 
   render() {
     const {
-      title,
+      title = '',
       logo,
       action,
       content,
