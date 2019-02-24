@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Card, Avatar, Popover, Button, Icon, List, Row, Col, Menu, Dropdown } from 'antd';
+import { Card, Avatar, Popover, Button, Icon, List, Row, Col, Menu, Dropdown, Modal } from 'antd';
+import MulitTree from '@/components/MulitTree';
 import { linkCopyToClipboard } from '@/utils/utils';
 import styles from './Members.less';
 
@@ -46,48 +47,35 @@ class Members extends PureComponent {
 
   handleDepartmentSelect = () => {};
 
-  memberInvite() {
-    const { visible } = this.state;
-    const {
-      team: { inviteToken, status },
-    } = this.props;
-    const domain = window.location.host;
-    const uri = '/user/join?invite=';
+  // data部分
 
-    return status === '__OK__' ? (
-      <Popover
-        placement="bottom"
-        content={
-          <div className={styles.inviteLink}>
-            <p>
-              将下面都链接发送给你想要邀请的人，任何点开该链接的人都可以申请加入团队。
-              <br />
-              {`${domain}${uri}${inviteToken}`}
-            </p>
-            <Button
-              onClick={() => {
-                this.handleInviteLinkCreate(`${domain}${uri}${inviteToken}`);
-              }}
-              type="primary"
-              block
-            >
-              复制链接
-            </Button>
-          </div>
-        }
-        title="邀请链接"
-        trigger="click"
-        visible={visible}
-        onVisibleChange={this.handleVisibleChange}
-      >
-        <Button>
-          <Icon type="plus" /> 邀请成员
-        </Button>
-      </Popover>
-    ) : (
-      <div />
-    );
-  }
+  groupSelectHandler = item => {
+    // this.setState({ currentGroup: item });
+    console.log(item);
+  };
+
+  groupCreateHandler = (name, id) => {
+    console.log(name);
+    console.log(id);
+  };
+
+  groupDeleteHandler = item => {
+    // const { dispatch } = this.props;
+
+    Modal.confirm({
+      title: '删除',
+      content: (
+        <div>
+          确定删除 <b>{item.name}</b> 吗？删除后该分组的项目将被转存到未分组!
+        </div>
+      ),
+      okText: '确认',
+      cancelText: '取消',
+      onOk: () => {
+        console.log('删除');
+      },
+    });
+  };
 
   childDom(items, count) {
     let cou = count;
@@ -137,6 +125,49 @@ class Members extends PureComponent {
       ));
     }
     return null;
+  }
+
+  memberInvite() {
+    const { visible } = this.state;
+    const {
+      team: { inviteToken, status },
+    } = this.props;
+    const domain = window.location.host;
+    const uri = '/user/join?invite=';
+
+    return status === '__OK__' ? (
+      <Popover
+        placement="bottom"
+        content={
+          <div className={styles.inviteLink}>
+            <p>
+              将下面都链接发送给你想要邀请的人，任何点开该链接的人都可以申请加入团队。
+              <br />
+              {`${domain}${uri}${inviteToken}`}
+            </p>
+            <Button
+              onClick={() => {
+                this.handleInviteLinkCreate(`${domain}${uri}${inviteToken}`);
+              }}
+              type="primary"
+              block
+            >
+              复制链接
+            </Button>
+          </div>
+        }
+        title="邀请链接"
+        trigger="click"
+        visible={visible}
+        onVisibleChange={this.handleVisibleChange}
+      >
+        <Button>
+          <Icon type="plus" /> 邀请成员
+        </Button>
+      </Popover>
+    ) : (
+      <div />
+    );
   }
 
   renderMenu = () => {
@@ -240,20 +271,77 @@ class Members extends PureComponent {
       team: { total },
       teamLoading,
     } = this.props;
-
+    const tree = [
+      {
+        id: 'parent1',
+        name: 'parent1',
+        child: [
+          {
+            id: 'child1',
+            name: 'child1',
+            child: [
+              {
+                id: 'grand child1',
+                name: 'grand child1',
+                child: [],
+              },
+              {
+                id: 'grand child2',
+                name: 'grand child2',
+                child: [],
+              },
+            ],
+          },
+          {
+            id: 'child2',
+            name: 'child2',
+            child: [
+              {
+                id: 'grand child1',
+                name: 'grand child1',
+                child: [],
+              },
+              {
+                id: 'grand child2',
+                name: 'grand child2',
+                child: [],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    const data = {
+      menu: {
+        name: '成员',
+        list: [
+          {
+            id: 'all',
+            icon: 'bars',
+            text: '所用成员',
+          },
+          {
+            id: 'unsort',
+            icon: 'menu-fold',
+            text: '未分配部门成员',
+          },
+        ],
+      },
+      tree: {
+        name: '部门',
+        list: tree,
+      },
+    };
     return (
       <div className={styles.content}>
         <Row className={styles.membersList}>
           <Col span={6} className={styles.listCol}>
-            <Card className={styles.listCard}>
-              <div className={styles.mune}>
-                <div className={styles.title}>成员</div>
-                <List loading={teamLoading}>{this.renderMenu()}</List>
-                <div className={styles.title}>部门</div>
-
-                <div className={styles.tree}>{this.renderSection()}</div>
-              </div>
-            </Card>
+            <MulitTree
+              data={data}
+              onItemSelect={this.groupSelectHandler}
+              onGroupCreate={this.groupCreateHandler}
+              onGroupDelete={this.groupDeleteHandler}
+            />
           </Col>
 
           <Col span={18} className={styles.cardCol}>
