@@ -36,6 +36,7 @@ class TableForm extends PureComponent {
 
   toggleEditable = (e, key) => {
     e.preventDefault();
+    const { onChange } = this.props;
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
@@ -45,11 +46,12 @@ class TableForm extends PureComponent {
         this.cacheOriginData[key] = { ...target };
       }
       target.editable = !target.editable;
-      this.setState({ data: newData });
+      this.setState({ data: newData }, ()=>onChange(newData));
     }
   };
 
   newMember = () => {
+    const { onChange } = this.props;
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     newData.push({
@@ -61,7 +63,7 @@ class TableForm extends PureComponent {
       isNew: true,
     });
     this.index += 1;
-    this.setState({ data: newData });
+    this.setState({ data: newData }, ()=>onChange(newData));
   };
 
   remove(key) {
@@ -121,6 +123,7 @@ class TableForm extends PureComponent {
   cancel(e, key) {
     this.clickedCancel = true;
     e.preventDefault();
+    const { onChange } = this.props;
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
@@ -129,7 +132,7 @@ class TableForm extends PureComponent {
       delete this.cacheOriginData[key];
     }
     target.editable = false;
-    this.setState({ data: newData });
+    this.setState({ data: newData }, ()=>onChange(newData));
     this.clickedCancel = false;
   }
 
