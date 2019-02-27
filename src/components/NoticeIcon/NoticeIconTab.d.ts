@@ -15,12 +15,9 @@ export interface INoticeIconTabProps {
   emptyText?: React.ReactNode;
   emptyImage?: string;
   list?: INoticeIconData[];
-  loadedAll?: boolean;
-  loading?: boolean;
   name?: string;
   showClear?: boolean;
-  skeletonCount?: number;
-  skeletonProps?: SkeletonProps;
+  showViewMore?: boolean;
   style?: React.CSSProperties;
   title?: string;
 }

@@ -55,16 +55,6 @@
       margin-top: -1.5px;
     }
   }
-  .loadMore {
-    padding: 8px 0;
-    cursor: pointer;
-    color: @primary-6;
-    text-align: center;
-    &.loadedAll {
-      cursor: unset;
-      color: rgba(0, 0, 0, 0.25);
-    }
-  }
 }
 
 .notFound {
@@ -78,17 +68,27 @@
   }
 }
 
-.clear {
+.bottomBar {
   height: 46px;
   line-height: 46px;
   text-align: center;
   color: @text-color;
   border-radius: 0 0 @border-radius-base @border-radius-base;
   border-top: 1px solid @border-color-split;
-  transition: all 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    color: @heading-color;
+  div {
+    width: 50%;
+    user-select: none;
+    display: inline-block;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+      color: @heading-color;
+    }
+    &:only-child {
+      width: 100%;
+    }
+    &:not(:only-child):last-child {
+      border-left: 1px solid @border-color-split;
+    }
   }
 }
