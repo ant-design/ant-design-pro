@@ -27,6 +27,6 @@ export class Authorized extends React.Component<IAuthorizedProps, any> {
   public static check: check;
 }
 
-declare function renderAuthorize(currentAuthority: string): typeof Authorized;
+declare function renderAuthorize(currentAuthority: any): typeof Authorized;
 
 export default renderAuthorize;

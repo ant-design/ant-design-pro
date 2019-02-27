@@ -1,7 +1,7 @@
-import fetch from 'dva/fetch';
 import { notification } from 'antd';
-import router from 'umi/router';
+import fetch from 'dva/fetch';
 import hash from 'hash.js';
+import router from 'umi/router';
 import { isAntdPro } from './utils';
 
 const codeMessage = {
@@ -22,7 +22,13 @@ const codeMessage = {
   504: '网关超时。',
 };
 
-const checkStatus = response => {
+interface IResponseError extends Error {
+  name: any;
+  data?: any;
+  response?: Response;
+}
+
+const checkStatus: (response: Response) => Response = response => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -31,13 +37,13 @@ const checkStatus = response => {
     message: `请求错误 ${response.status}: ${response.url}`,
     description: errortext,
   });
-  const error = new Error(errortext);
+  const error: IResponseError = new Error(errortext);
   error.name = response.status;
   error.response = response;
   throw error;
 };
 
-const cachedSave = (response, hashcode) => {
+const cachedSave = (response: Response, hashcode: string): Response | Promise<any> => {
   /**
    * Clone a response data and store it in sessionStorage
    * Does not support data other than json, Cache only json
@@ -50,7 +56,7 @@ const cachedSave = (response, hashcode) => {
       .text()
       .then(content => {
         sessionStorage.setItem(hashcode, content);
-        sessionStorage.setItem(`${hashcode}:timestamp`, Date.now());
+        sessionStorage.setItem(`${hashcode}:timestamp`, Date.now() + '');
       });
   }
   return response;
@@ -63,7 +69,7 @@ const cachedSave = (response, hashcode) => {
  * @param  {object} [option] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, option) {
+export default function request(url: string, option: any) {
   const options = {
     expirys: isAntdPro(),
     ...option,
@@ -109,7 +115,7 @@ export default function request(url, option) {
     const cached = sessionStorage.getItem(hashcode);
     const whenCached = sessionStorage.getItem(`${hashcode}:timestamp`);
     if (cached !== null && whenCached !== null) {
-      const age = (Date.now() - whenCached) / 1000;
+      const age = (Date.now() - parseInt(whenCached, 10)) / 1000;
       if (age < expirys) {
         const response = new Response(new Blob([cached]));
         return response.json();
@@ -134,7 +140,7 @@ export default function request(url, option) {
       if (status === 401) {
         // @HACK
         /* eslint-disable no-underscore-dangle */
-        window.g_app._store.dispatch({
+        (window as any).g_app._store.dispatch({
           type: 'login/logout',
         });
         return;

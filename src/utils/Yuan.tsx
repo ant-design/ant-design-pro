@@ -1,9 +1,16 @@
-import React from 'react';
 import { yuan } from '@/components/Charts';
+import React from 'react';
+
+interface IYuanProps {
+  children: any;
+}
+
 /**
  * 减少使用 dangerouslySetInnerHTML
  */
-export default class Yuan extends React.PureComponent {
+export default class Yuan extends React.PureComponent<IYuanProps> {
+  main: any;
+
   componentDidMount() {
     this.rendertoHtml();
   }
