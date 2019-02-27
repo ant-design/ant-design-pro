@@ -92,7 +92,7 @@ const BasicLayout: React.SFC<IBasicLayoutProps> = props => {
   // Do not render SettingDrawer in production
   // unless it is deployed in preview.pro.ant.design as demo
   const renderSettingDrawer = () =>
-    process.env.NODE_ENV === 'production' && APP_TYPE !== 'site' && <SettingDrawer />;
+    !(process.env.NODE_ENV === 'production' && APP_TYPE !== 'site') && <SettingDrawer />;
 
   const layout = (
     <Layout>
