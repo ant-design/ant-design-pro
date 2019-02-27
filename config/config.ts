@@ -1,9 +1,9 @@
 // https://umijs.org/config/
 import os from 'os';
-import pageRoutes from './router.config';
-import webpackPlugin from './plugin.config';
-import defaultSettings from '../src/defaultSettings';
 import slash from 'slash2';
+import defaultSettings from '../src/defaultSettings';
+import webpackPlugin from './plugin.config';
+import pageRoutes from './router.config';
 
 const { pwa, primaryColor } = defaultSettings;
 const { NODE_ENV, APP_TYPE, TEST } = process.env;
