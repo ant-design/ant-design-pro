@@ -1,18 +1,18 @@
-import React, { Suspense } from 'react';
-import { Layout } from 'antd';
-import DocumentTitle from 'react-document-title';
-import { connect } from 'dva';
-import { ContainerQuery } from 'react-container-query';
-import classNames from 'classnames';
-import Media from 'react-media';
-import logo from '../assets/logo.svg';
-import Footer from './Footer';
-import Header from './Header';
-import Context from './MenuContext';
 import PageLoading from '@/components/PageLoading';
 import SiderMenu from '@/components/SiderMenu';
 import getPageTitle from '@/utils/getPageTitle';
+import { Layout } from 'antd';
+import classNames from 'classnames';
+import { connect } from 'dva';
+import React, { Suspense } from 'react';
+import { ContainerQuery } from 'react-container-query';
+import DocumentTitle from 'react-document-title';
+import Media from 'react-media';
+import logo from '../assets/logo.svg';
 import styles from './BasicLayout.less';
+import Footer from './Footer';
+import Header from './Header';
+import Context from './MenuContext';
 
 // lazy load SettingDrawer
 const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
@@ -44,8 +44,27 @@ const query = {
   },
 };
 
-class BasicLayout extends React.Component {
-  componentDidMount() {
+interface IBasicLayoutProps {
+  dispatch: (args: any) => void;
+  isMobile: boolean;
+  route: any;
+  breadcrumbNameMap: object;
+  fixSiderbar: boolean;
+  layout: string;
+  navTheme: string;
+  menuData: object;
+  fixedHeader: boolean;
+  location: Location;
+  collapsed: boolean;
+}
+
+interface IBaseLayoutContext {
+  location: Location;
+  breadcrumbNameMap: object;
+}
+
+class BasicLayout extends React.Component<IBasicLayoutProps> {
+  componentDidMount(): void {
     const {
       dispatch,
       route: { routes, authority },
@@ -62,7 +81,7 @@ class BasicLayout extends React.Component {
     });
   }
 
-  getContext() {
+  getContext(): IBaseLayoutContext {
     const { location, breadcrumbNameMap } = this.props;
     return {
       location,
@@ -91,7 +110,7 @@ class BasicLayout extends React.Component {
   renderSettingDrawer = () => {
     // Do not render SettingDrawer in production
     // unless it is deployed in preview.pro.ant.design as demo
-    if (process.env.NODE_ENV === 'production' && APP_TYPE !== 'site') {
+    if (process.env.NODE_ENV === 'production' && process.env.APP_TYPE !== 'site') {
       return null;
     }
     return <SettingDrawer />;
