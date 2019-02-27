@@ -67,7 +67,8 @@ export default class NoticeIcon extends PureComponent {
       const { list, title, count, emptyText, emptyImage, showClear, showViewMore } = child.props;
       const len = list && list.length ? list.length : 0;
       const msgCount = count || count === 0 ? count : len;
-      const tabTitle = msgCount > 0 ? `${title} (${msgCount})` : title;
+      const localeTitle = locale[title] || title;
+      const tabTitle = msgCount > 0 ? `${localeTitle} (${msgCount})` : localeTitle;
       return (
         <TabPane tab={tabTitle} key={title}>
           <List
