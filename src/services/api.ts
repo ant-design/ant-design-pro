@@ -1,19 +1,19 @@
-import { stringify } from 'qs';
 import request from '@/utils/request';
+import { stringify } from 'qs';
 
-export async function queryProjectNotice() {
+export async function queryProjectNotice(): Promise<any> {
   return request('/api/project/notice');
 }
 
-export async function queryActivities() {
+export async function queryActivities(): Promise<any> {
   return request('/api/activities');
 }
 
-export async function queryRule(params) {
+export async function queryRule(params: any): Promise<any> {
   return request(`/api/rule?${stringify(params)}`);
 }
 
-export async function removeRule(params) {
+export async function removeRule(params: any): Promise<any> {
   return request('/api/rule', {
     method: 'POST',
     body: {
@@ -23,7 +23,7 @@ export async function removeRule(params) {
   });
 }
 
-export async function addRule(params) {
+export async function addRule(params: any): Promise<any> {
   return request('/api/rule', {
     method: 'POST',
     body: {
@@ -33,7 +33,7 @@ export async function addRule(params) {
   });
 }
 
-export async function updateRule(params = {}) {
+export async function updateRule(params = {} as any): Promise<any> {
   return request(`/api/rule?${stringify(params.query)}`, {
     method: 'POST',
     body: {
@@ -43,34 +43,34 @@ export async function updateRule(params = {}) {
   });
 }
 
-export async function fakeSubmitForm(params) {
+export async function fakeSubmitForm(params: any): Promise<any> {
   return request('/api/forms', {
     method: 'POST',
     body: params,
   });
 }
 
-export async function fakeChartData() {
+export async function fakeChartData(): Promise<any> {
   return request('/api/fake_chart_data');
 }
 
-export async function queryTags() {
+export async function queryTags(): Promise<any> {
   return request('/api/tags');
 }
 
-export async function queryBasicProfile(id) {
+export async function queryBasicProfile(id: string | number): Promise<any> {
   return request(`/api/profile/basic?id=${id}`);
 }
 
-export async function queryAdvancedProfile() {
+export async function queryAdvancedProfile(): Promise<any> {
   return request('/api/profile/advanced');
 }
 
-export async function queryFakeList(params) {
+export async function queryFakeList(params: any): Promise<any> {
   return request(`/api/fake_list?${stringify(params)}`);
 }
 
-export async function removeFakeList(params) {
+export async function removeFakeList(params: any): Promise<any> {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
@@ -81,7 +81,7 @@ export async function removeFakeList(params) {
   });
 }
 
-export async function addFakeList(params) {
+export async function addFakeList(params: any): Promise<any> {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
@@ -92,7 +92,7 @@ export async function addFakeList(params) {
   });
 }
 
-export async function updateFakeList(params) {
+export async function updateFakeList(params: any): Promise<any> {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
@@ -103,24 +103,24 @@ export async function updateFakeList(params) {
   });
 }
 
-export async function fakeAccountLogin(params) {
+export async function fakeAccountLogin(params: any): Promise<any> {
   return request('/api/login/account', {
     method: 'POST',
     body: params,
   });
 }
 
-export async function fakeRegister(params) {
+export async function fakeRegister(params: any): Promise<any> {
   return request('/api/register', {
     method: 'POST',
     body: params,
   });
 }
 
-export async function queryNotices(params = {}) {
+export async function queryNotices(params = {} as any): Promise<any> {
   return request(`/api/notices?${stringify(params)}`);
 }
 
-export async function getFakeCaptcha(mobile) {
+export async function getFakeCaptcha(mobile: string | number): Promise<any> {
   return request(`/api/captcha?mobile=${mobile}`);
 }
