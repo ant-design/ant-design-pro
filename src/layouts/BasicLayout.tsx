@@ -4,10 +4,10 @@ import getPageTitle from '@/utils/getPageTitle';
 import { Layout } from 'antd';
 import classNames from 'classnames';
 import { connect } from 'dva';
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { ContainerQuery } from 'react-container-query';
 import DocumentTitle from 'react-document-title';
-import Media from 'react-media';
+import useMedia from 'react-media-hook2';
 import logo from '../assets/logo.svg';
 import styles from './BasicLayout.less';
 import Footer from './Footer';
@@ -46,8 +46,7 @@ const query = {
 
 interface IBasicLayoutProps {
   dispatch: (args: any) => void;
-  isMobile: boolean;
-  route: any;
+  route: Route;
   breadcrumbNameMap: object;
   fixSiderbar: boolean;
   layout: string;
@@ -58,126 +57,89 @@ interface IBasicLayoutProps {
   collapsed: boolean;
 }
 
-interface IBaseLayoutContext {
+interface IBasicLayoutContext {
   location: Location;
   breadcrumbNameMap: object;
 }
 
-class BasicLayout extends React.Component<IBasicLayoutProps> {
-  componentDidMount(): void {
-    const {
-      dispatch,
-      route: { routes, authority },
-    } = this.props;
-    dispatch({
-      type: 'user/fetchCurrent',
-    });
-    dispatch({
-      type: 'setting/getSetting',
-    });
-    dispatch({
-      type: 'menu/getMenuData',
-      payload: { routes, authority },
-    });
-  }
+const BasicLayout: React.SFC<IBasicLayoutProps> = props => {
+  const {
+    breadcrumbNameMap,
+    dispatch,
+    children,
+    collapsed,
+    fixedHeader,
+    fixSiderbar,
+    layout: PropsLayout,
+    location,
+    menuData,
+    navTheme,
+    route: { routes, authority },
+  } = props;
+  useState(() => {
+    dispatch({ type: 'user/fetchCurrent' });
+    dispatch({ type: 'setting/getSetting' });
+    dispatch({ type: 'menu/getMenuData', payload: { routes, authority } });
+  });
+  const isTop = PropsLayout === 'topmenu';
+  const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
+  const isMobile = useMedia({ id: 'BasicLayout', query: '(max-width: 599px)' })[0];
+  const hasLeftPadding = fixSiderbar && PropsLayout !== 'topmenu' && !isMobile;
+  const getContext = (): IBasicLayoutContext => ({ location, breadcrumbNameMap });
+  const handleMenuCollapse = (payload: boolean) =>
+    dispatch({ type: 'global/changeLayoutCollapsed', payload });
+  // Do not render SettingDrawer in production
+  // unless it is deployed in preview.pro.ant.design as demo
+  const renderSettingDrawer = () =>
+    process.env.NODE_ENV === 'production' && process.env.APP_TYPE !== 'site' && <SettingDrawer />;
 
-  getContext(): IBaseLayoutContext {
-    const { location, breadcrumbNameMap } = this.props;
-    return {
-      location,
-      breadcrumbNameMap,
-    };
-  }
-
-  getLayoutStyle = () => {
-    const { fixSiderbar, isMobile, collapsed, layout } = this.props;
-    if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
-      return {
-        paddingLeft: collapsed ? '80px' : '256px',
-      };
-    }
-    return null;
-  };
-
-  handleMenuCollapse = collapsed => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'global/changeLayoutCollapsed',
-      payload: collapsed,
-    });
-  };
-
-  renderSettingDrawer = () => {
-    // Do not render SettingDrawer in production
-    // unless it is deployed in preview.pro.ant.design as demo
-    if (process.env.NODE_ENV === 'production' && process.env.APP_TYPE !== 'site') {
-      return null;
-    }
-    return <SettingDrawer />;
-  };
-
-  render() {
-    const {
-      navTheme,
-      layout: PropsLayout,
-      children,
-      location: { pathname },
-      isMobile,
-      menuData,
-      breadcrumbNameMap,
-      fixedHeader,
-    } = this.props;
-
-    const isTop = PropsLayout === 'topmenu';
-    const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
-    const layout = (
-      <Layout>
-        {isTop && !isMobile ? null : (
-          <SiderMenu
-            logo={logo}
-            theme={navTheme}
-            onCollapse={this.handleMenuCollapse}
-            menuData={menuData}
-            isMobile={isMobile}
-            {...this.props}
-          />
-        )}
-        <Layout
-          style={{
-            ...this.getLayoutStyle(),
-            minHeight: '100vh',
-          }}
-        >
-          <Header
-            menuData={menuData}
-            handleMenuCollapse={this.handleMenuCollapse}
-            logo={logo}
-            isMobile={isMobile}
-            {...this.props}
-          />
-          <Content className={styles.content} style={contentStyle}>
-            {children}
-          </Content>
-          <Footer />
-        </Layout>
+  const layout = (
+    <Layout>
+      {isTop && !isMobile ? null : (
+        <SiderMenu
+          logo={logo}
+          theme={navTheme}
+          onCollapse={handleMenuCollapse}
+          menuData={menuData}
+          isMobile={isMobile}
+          {...props}
+        />
+      )}
+      <Layout
+        style={{
+          paddingLeft: hasLeftPadding ? (collapsed ? 80 : 256) : void 0,
+          minHeight: '100vh',
+        }}
+      >
+        <Header
+          menuData={menuData}
+          handleMenuCollapse={handleMenuCollapse}
+          logo={logo}
+          isMobile={isMobile}
+          {...props}
+        />
+        <Content className={styles.content} style={contentStyle}>
+          {children}
+        </Content>
+        <Footer />
       </Layout>
-    );
-    return (
-      <React.Fragment>
-        <DocumentTitle title={getPageTitle(pathname, breadcrumbNameMap)}>
-          <ContainerQuery query={query}>
-            {params => (
-              <Context.Provider value={this.getContext()}>
-                <div className={classNames(params)}>{layout}</div>
-              </Context.Provider>
-            )}
-          </ContainerQuery>
-        </DocumentTitle>
-        <Suspense fallback={<PageLoading />}>{this.renderSettingDrawer()}</Suspense>
-      </React.Fragment>
-    );
-  }
-}
+    </Layout>
+  );
+  return (
+    <React.Fragment>
+      <DocumentTitle title={getPageTitle(location.pathname, breadcrumbNameMap)}>
+        <ContainerQuery query={query}>
+          {params => (
+            <Context.Provider value={getContext()}>
+              <div className={classNames(params)}>{layout}</div>
+            </Context.Provider>
+          )}
+        </ContainerQuery>
+      </DocumentTitle>
+      <Suspense fallback={<PageLoading />}>{renderSettingDrawer()}</Suspense>
+    </React.Fragment>
+  );
+};
 
 export default connect(({ global, setting, menu: menuModel }) => ({
   collapsed: global.collapsed,
@@ -185,8 +147,4 @@ export default connect(({ global, setting, menu: menuModel }) => ({
   menuData: menuModel.menuData,
   breadcrumbNameMap: menuModel.breadcrumbNameMap,
   ...setting,
-}))(props => (
-  <Media query="(max-width: 599px)">
-    {isMobile => <BasicLayout {...props} isMobile={isMobile} />}
-  </Media>
-));
+}))(BasicLayout);
