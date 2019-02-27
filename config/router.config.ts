@@ -17,7 +17,7 @@ export default [
   // app
   {
     path: '/',
-    component: '../layouts/BlankLayout',
+    component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
