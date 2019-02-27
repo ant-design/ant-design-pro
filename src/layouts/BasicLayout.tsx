@@ -110,7 +110,7 @@ class BasicLayout extends React.Component<IBasicLayoutProps> {
   renderSettingDrawer = () => {
     // Do not render SettingDrawer in production
     // unless it is deployed in preview.pro.ant.design as demo
-    if (process.env.NODE_ENV === 'production' && process.env.APP_TYPE !== 'site') {
+    if (process.env.NODE_ENV === 'production' && APP_TYPE !== 'site') {
       return null;
     }
     return <SettingDrawer />;

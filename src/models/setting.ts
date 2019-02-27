@@ -1,8 +1,32 @@
 import { message } from 'antd';
+import { Reducer } from 'redux';
 import defaultSettings from '../defaultSettings';
 
-let lessNodesAppended;
-const updateTheme = primaryColor => {
+export interface ISettingModelState {
+  navTheme: string;
+  primaryColor: string;
+  layout: string;
+  contentWidth: string;
+  fixedHeader: boolean;
+  autoHideHeader: boolean;
+  fixSiderbar: boolean;
+  menu: { disableLocal: boolean };
+  title: string;
+  pwa: boolean;
+  iconfontUrl: string;
+}
+
+export interface ISettingModel {
+  namespace: 'setting';
+  state: ISettingModelState;
+  reducers: {
+    getSetting: Reducer<any>;
+    changeSetting: Reducer<any>;
+  };
+}
+let lessNodesAppended: boolean;
+
+const updateTheme: (primaryColor?: string) => void = primaryColor => {
   // Don't compile less in production!
   if (APP_TYPE !== 'site') {
     return;
@@ -13,11 +37,12 @@ const updateTheme = primaryColor => {
   }
   const hideMessage = message.loading('正在编译主题！', 0);
   function buildIt() {
-    if (!window.less) {
+    if (!(window as any).less) {
+      console.log('no less');
       return;
     }
     setTimeout(() => {
-      window.less
+      (window as any).less
         .modifyVars({
           '@primary-color': primaryColor,
         })
@@ -59,16 +84,16 @@ const updateTheme = primaryColor => {
   }
 };
 
-const updateColorWeak = colorWeak => {
+const updateColorWeak: (colorWeak: string) => void = colorWeak => {
   document.body.className = colorWeak ? 'colorWeak' : '';
 };
 
-export default {
+const SettingModel: ISettingModel = {
   namespace: 'setting',
   state: defaultSettings,
   reducers: {
     getSetting(state) {
-      const setting = {};
+      const setting: any = {};
       const urlParams = new URL(window.location.href);
       Object.keys(state).forEach(key => {
         if (urlParams.searchParams.has(key)) {
@@ -121,3 +146,4 @@ export default {
     },
   },
 };
+export default SettingModel;
