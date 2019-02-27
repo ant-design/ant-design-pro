@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
-import { Layout, Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
+import { Icon, Layout } from 'antd';
+import React, { Fragment } from 'react';
 
 const { Footer } = Layout;
 const FooterView = () => (
