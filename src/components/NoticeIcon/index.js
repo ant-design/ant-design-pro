@@ -67,7 +67,6 @@ export default class NoticeIcon extends PureComponent {
       const {
         list,
         title,
-        name,
         count,
         emptyText,
         emptyImage,
@@ -78,13 +77,13 @@ export default class NoticeIcon extends PureComponent {
       const msgCount = count || count === 0 ? count : len;
       const tabTitle = msgCount > 0 ? `${title} (${msgCount})` : title;
       return (
-        <TabPane tab={tabTitle} key={name}>
+        <TabPane tab={tabTitle} key={title}>
           <List
             data={list}
             emptyImage={emptyImage}
             emptyText={emptyText}
             locale={locale}
-            onClear={() => this.onClear(name)}
+            onClear={() => this.onClear(title)}
             onClick={item => this.onItemClick(item, child.props)}
             onViewMore={event => this.onViewMore(child.props, event)}
             showClear={showClear}

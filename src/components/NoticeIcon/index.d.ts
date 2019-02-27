@@ -17,6 +17,7 @@ export interface INoticeIconProps {
     emptyText: string;
     clear: string;
     viewMore: string;
+    [key: string]: string;
   };
   clearClose?: boolean;
 }

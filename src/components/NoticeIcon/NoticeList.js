@@ -66,7 +66,7 @@ export default function NoticeList({
       <div className={styles.bottomBar}>
         {showClear ? (
           <div onClick={onClear}>
-            {locale.clear} {title}
+            {locale.clear} {locale[title] || title}
           </div>
         ) : null}
         {showViewMore ? <div onClick={onViewMore}>{locale.viewMore}</div> : null}

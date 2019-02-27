@@ -31,10 +31,9 @@ count | Unread messages count of this tab | number | list.length
 emptyText | Message text when list is empty | ReactNode | -
 emptyImage | Image when list is empty | string | -
 list | List data, format refer to the following table | Array | `[]`
-name | identifier for message Tab | string | -
 showClear | Clear button display status | boolean | `true`
 showViewMore | View more button display status | boolean | `false`
-title | header for message Tab | string | -
+title | header for message Tab, the actual text is `locale[title] || title` | string | -
 
 ### Tab data
 

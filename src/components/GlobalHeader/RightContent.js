@@ -138,6 +138,9 @@ export default class GlobalHeaderRight extends PureComponent {
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
             clear: formatMessage({ id: 'component.noticeIcon.clear' }),
             viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }),
+            notification: formatMessage({ id: 'component.globalHeader.notification' }),
+            message: formatMessage({ id: 'component.globalHeader.message' }),
+            event: formatMessage({ id: 'component.globalHeader.event' }),
           }}
           onClear={onNoticeClear}
           onPopupVisibleChange={onNoticeVisibleChange}
@@ -147,8 +150,7 @@ export default class GlobalHeaderRight extends PureComponent {
           <NoticeIcon.Tab
             count={unreadMsg.notification}
             list={noticeData.notification}
-            title={formatMessage({ id: 'component.globalHeader.notification' })}
-            name="notification"
+            title="notification"
             emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
             showViewMore
@@ -156,8 +158,7 @@ export default class GlobalHeaderRight extends PureComponent {
           <NoticeIcon.Tab
             count={unreadMsg.message}
             list={noticeData.message}
-            title={formatMessage({ id: 'component.globalHeader.message' })}
-            name="message"
+            title="message"
             emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
             showViewMore
@@ -165,8 +166,7 @@ export default class GlobalHeaderRight extends PureComponent {
           <NoticeIcon.Tab
             count={unreadMsg.event}
             list={noticeData.event}
-            title={formatMessage({ id: 'component.globalHeader.event' })}
-            name="event"
+            title="event"
             emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
             showViewMore
