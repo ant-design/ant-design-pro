@@ -1,14 +1,14 @@
-import React, { Component, Fragment } from 'react';
-import { formatMessage } from 'umi/locale';
-import { connect } from 'dva';
-import Link from 'umi/link';
-import { Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
-import DocumentTitle from 'react-document-title';
 import SelectLang from '@/components/SelectLang';
-import styles from './UserLayout.less';
-import logo from '../assets/logo.svg';
 import getPageTitle from '@/utils/getPageTitle';
+import { Icon } from 'antd';
+import { connect } from 'dva';
+import React, { Component, Fragment } from 'react';
+import DocumentTitle from 'react-document-title';
+import { formatMessage } from 'umi-plugin-locale';
+import Link from 'umi/link';
+import logo from '../assets/logo.svg';
+import styles from './UserLayout.less';
 
 const links = [
   {
@@ -34,7 +34,15 @@ const copyright = (
   </Fragment>
 );
 
-class UserLayout extends Component {
+interface IUserLayoutProps {
+  dispatch: (args: any) => void;
+  route: any;
+  breadcrumbNameMap: object;
+  navTheme: string;
+  location: Location;
+}
+
+class UserLayout extends Component<IUserLayoutProps> {
   componentDidMount() {
     const {
       dispatch,
