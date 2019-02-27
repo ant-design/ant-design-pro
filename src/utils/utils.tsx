@@ -1,13 +1,13 @@
-import moment from 'moment';
-import React from 'react';
+import moment, { Moment } from 'moment';
 import nzh from 'nzh/cn';
 import { parse, stringify } from 'qs';
+import React from 'react';
 
-export function fixedZero(val) {
+export function fixedZero(val: any): string | number {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
-export function getTimeDistance(type) {
+export function getTimeDistance(type: string): Moment[] {
   const now = new Date();
   const oneDay = 1000 * 60 * 60 * 24;
 
@@ -36,14 +36,14 @@ export function getTimeDistance(type) {
   }
 
   if (type === 'month') {
-    const year = now.getFullYear();
+    const yearNum = now.getFullYear();
     const month = now.getMonth();
     const nextDate = moment(now).add(1, 'months');
     const nextYear = nextDate.year();
     const nextMonth = nextDate.month();
 
     return [
-      moment(`${year}-${fixedZero(month + 1)}-01 00:00:00`),
+      moment(`${yearNum}-${fixedZero(month + 1)}-01 00:00:00`),
       moment(moment(`${nextYear}-${fixedZero(nextMonth + 1)}-01 00:00:00`).valueOf() - 1000),
     ];
   }
@@ -52,8 +52,14 @@ export function getTimeDistance(type) {
   return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)];
 }
 
-export function getPlainNode(nodeList, parentPath = '') {
-  const arr = [];
+interface IPlainNode {
+  path: string;
+  exact?: boolean;
+  children?: any;
+  component?: any;
+}
+export function getPlainNode(nodeList: IPlainNode[], parentPath = ''): IPlainNode[] {
+  const arr: IPlainNode[] = [];
   nodeList.forEach(node => {
     const item = node;
     item.path = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/');
@@ -70,11 +76,11 @@ export function getPlainNode(nodeList, parentPath = '') {
   return arr;
 }
 
-export function digitUppercase(n) {
+export function digitUppercase(n: any): string {
   return nzh.toMoney(n);
 }
 
-function getRelation(str1, str2) {
+function getRelation(str1: string, str2: string): number {
   if (str1 === str2) {
     console.warn('Two path are equal!'); // eslint-disable-line
   }
@@ -89,7 +95,7 @@ function getRelation(str1, str2) {
   return 3;
 }
 
-function getRenderArr(routes) {
+function getRenderArr(routes: any[]): any[] {
   let renderArr = [];
   renderArr.push(routes[0]);
   for (let i = 1; i < routes.length; i += 1) {
@@ -110,7 +116,7 @@ function getRenderArr(routes) {
  * @param {string} path
  * @param {routerData} routerData
  */
-export function getRoutes(path, routerData) {
+export function getRoutes(path: string, routerData: any[]): any[] {
   let routes = Object.keys(routerData).filter(
     routePath => routePath.indexOf(path) === 0 && routePath !== path
   );
@@ -131,11 +137,11 @@ export function getRoutes(path, routerData) {
   return renderRoutes;
 }
 
-export function getPageQuery() {
+export function getPageQuery(): any {
   return parse(window.location.href.split('?')[1]);
 }
 
-export function getQueryPath(path = '', query = {}) {
+export function getQueryPath(path = '', query = {}): string {
   const search = stringify(query);
   if (search.length) {
     return `${path}?${search}`;
@@ -146,13 +152,15 @@ export function getQueryPath(path = '', query = {}) {
 /* eslint no-useless-escape:0 */
 const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
 
-export function isUrl(path) {
+export function isUrl(path: string): boolean {
   return reg.test(path);
 }
 
-export function formatWan(val) {
+export function formatWan(val: any): any {
   const v = val * 1;
-  if (!v || Number.isNaN(v)) return '';
+  if (!v || Number.isNaN(v)) {
+    return '';
+  }
 
   let result = val;
   if (val > 10000) {
@@ -178,12 +186,12 @@ export function formatWan(val) {
 }
 
 // 给官方演示站点用，用于关闭真实开发环境不需要使用的特性
-export function isAntdPro() {
+export function isAntdPro(): boolean {
   return window.location.hostname === 'preview.pro.ant.design';
 }
 
-export const importCDN = (url, name) =>
-  new Promise(resolve => {
+export const importCDN = (url: string, name: string): Promise<number> =>
+  new Promise<number>(resolve => {
     const dom = document.createElement('script');
     dom.src = url;
     dom.type = 'text/javascript';
