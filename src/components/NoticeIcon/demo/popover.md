@@ -5,10 +5,8 @@ title: 带浮层卡片
 
 点击展开通知卡片，展现多种类型的通知，通常放在导航工具栏。
 
-````jsx
+```jsx
 import NoticeIcon from 'ant-design-pro/lib/NoticeIcon';
-import moment from 'moment';
-import groupBy from 'lodash/groupBy';
 import { Tag } from 'antd';
 
 const data = [{
@@ -108,32 +106,38 @@ function getNoticeData(notices) {
   if (notices.length === 0) {
     return {};
   }
-  const newNotices = notices.map((notice) => {
+  const newNotices = notices.map(notice => {
     const newNotice = { ...notice };
-    if (newNotice.datetime) {
-      newNotice.datetime = moment(notice.datetime).fromNow();
-    }
     // transform id to item key
     if (newNotice.id) {
       newNotice.key = newNotice.id;
     }
     if (newNotice.extra && newNotice.status) {
-      const color = ({
+      const color = {
         todo: '',
         processing: 'blue',
         urgent: 'red',
         doing: 'gold',
-      })[newNotice.status];
-      newNotice.extra = <Tag color={color} style={{ marginRight: 0 }}>{newNotice.extra}</Tag>;
+      }[newNotice.status];
+      newNotice.extra = (
+        <Tag color={color} style={{ marginRight: 0 }}>
+          {newNotice.extra}
+        </Tag>
+      );
     }
     return newNotice;
   });
-  return groupBy(newNotices, 'type');
+  return newNotices.reduce((pre, data) => {
+    if (!pre[data.type]) {
+      pre[data.type] = [];
+    }
+    pre[data.type].push(data);
+    return pre;
+  }, {});
 }
 
 const noticeData = getNoticeData(data);
-
-ReactDOM.render(
+const Demo = () => (
   <div
     style={{
       textAlign: 'right',
@@ -144,12 +148,7 @@ ReactDOM.render(
       width: '400px',
     }}
   >
-    <NoticeIcon
-      className="notice-icon"
-      count={5}
-      onItemClick={onItemClick}
-      onClear={onClear}
-    >
+    <NoticeIcon className="notice-icon" count={5} onItemClick={onItemClick} onClear={onClear}>
       <NoticeIcon.Tab
         list={noticeData.notification}
         title="notification"
@@ -170,9 +169,7 @@ ReactDOM.render(
       />
     </NoticeIcon>
   </div>
-, mountNode);
-````
+);
 
-```css
-
+ReactDOM.render(<Demo />, mountNode);
 ```

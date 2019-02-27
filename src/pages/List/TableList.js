@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
+import router from 'umi/router';
 import {
   Row,
   Col,
@@ -292,6 +293,7 @@ class TableList extends PureComponent {
     {
       title: '规则名称',
       dataIndex: 'name',
+      render: text => <a onClick={() => this.previewItem(text)}>{text}</a>,
     },
     {
       title: '描述',
@@ -379,6 +381,10 @@ class TableList extends PureComponent {
       type: 'rule/fetch',
       payload: params,
     });
+  };
+
+  previewItem = id => {
+    router.push(`/profile/basic/${id}`);
   };
 
   handleFormReset = () => {

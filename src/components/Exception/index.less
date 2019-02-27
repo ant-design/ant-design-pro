@@ -11,24 +11,24 @@
     width: 62.5%;
     padding-right: 152px;
     zoom: 1;
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       content: ' ';
       display: table;
     }
-    &:after {
+    &::after {
       clear: both;
-      visibility: hidden;
-      font-size: 0;
       height: 0;
+      font-size: 0;
+      visibility: hidden;
     }
   }
 
   .imgEle {
-    height: 360px;
+    float: right;
     width: 100%;
     max-width: 430px;
-    float: right;
+    height: 360px;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
@@ -38,18 +38,18 @@
     flex: auto;
 
     h1 {
-      color: #434e59;
-      font-size: 72px;
-      font-weight: 600;
-      line-height: 72px;
       margin-bottom: 24px;
+      color: #434e59;
+      font-weight: 600;
+      font-size: 72px;
+      line-height: 72px;
     }
 
     .desc {
+      margin-bottom: 16px;
       color: @text-color-secondary;
       font-size: 20px;
       line-height: 28px;
-      margin-bottom: 16px;
     }
 
     .actions {
@@ -73,8 +73,8 @@
     display: block;
     text-align: center;
     .imgBlock {
-      padding-right: 0;
       margin: 0 auto 24px;
+      padding-right: 0;
     }
   }
 }

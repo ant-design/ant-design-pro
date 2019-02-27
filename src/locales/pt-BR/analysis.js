@@ -21,7 +21,7 @@ export default {
   'app.analysis.search-users': 'Pesquisa de Usuários',
   'app.analysis.per-capita-search': 'Busca Per Capta',
   'app.analysis.online-top-search': 'Mais Buscadas Online',
-  'app.analysis.the-proportion-of-sales': 'The Proportion Of Sales',
+  'app.analysis.the-proportion-of-sales': 'Proporção de Vendas',
   'app.analysis.channel.all': 'Tudo',
   'app.analysis.channel.online': 'Online',
   'app.analysis.channel.stores': 'Lojas',

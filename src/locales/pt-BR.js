@@ -9,6 +9,7 @@ import result from './pt-BR/result';
 import settingDrawer from './pt-BR/settingDrawer';
 import settings from './pt-BR/settings';
 import pwa from './pt-BR/pwa';
+import component from './pt-BR/component';
 
 export default {
   'navBar.lang': 'Idiomas',
@@ -30,4 +31,5 @@ export default {
   ...settingDrawer,
   ...settings,
   ...pwa,
+  ...component,
 };

@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: Charts
-  zh-CN: Charts
+title: Charts
 subtitle: 图表
 order: 2
 cols: 2

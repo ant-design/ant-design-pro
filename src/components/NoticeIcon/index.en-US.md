@@ -1,6 +1,6 @@
 ---
 title: NoticeIcon
-subtitle: Notification Menu
+subtitle: 
 cols: 1
 order: 9
 ---

@@ -137,7 +137,7 @@ class SettingDrawer extends PureComponent {
         onClose={this.togglerContent}
         placement="right"
         handler={
-          <div className={styles.handle}>
+          <div className={styles.handle} onClick={this.togglerContent}>
             <Icon
               type={collapse ? 'close' : 'setting'}
               style={{
@@ -147,7 +147,6 @@ class SettingDrawer extends PureComponent {
             />
           </div>
         }
-        onHandleClick={this.togglerContent}
         style={{
           zIndex: 999,
         }}

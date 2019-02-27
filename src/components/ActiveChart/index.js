@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { MiniArea } from '../Charts';
 import NumberInfo from '../NumberInfo';
-
 import styles from './index.less';
 
 function fixedZero(val) {
@@ -34,18 +33,16 @@ export default class ActiveChart extends Component {
   }
 
   loopData = () => {
-    this.requestRef = requestAnimationFrame(() => {
-      this.timer = setTimeout(() => {
-        this.setState(
-          {
-            activeData: getActiveData(),
-          },
-          () => {
-            this.loopData();
-          }
-        );
-      }, 1000);
-    });
+    this.timer = setTimeout(() => {
+      this.setState(
+        {
+          activeData: getActiveData(),
+        },
+        () => {
+          this.loopData();
+        }
+      );
+    }, 500);
   };
 
   render() {

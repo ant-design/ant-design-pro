@@ -1,9 +1,13 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-css-modules",
+    "stylelint-config-rational-order",
+    "stylelint-config-prettier"
+  ],
+  "plugins": ["stylelint-order", "stylelint-declaration-block-no-ignored-properties"],
   "rules": {
-    "declaration-empty-line-before": null,
     "no-descending-specificity": null,
-    "selector-pseudo-class-no-unknown": null,
-    "selector-pseudo-element-colon-notation": null
+    "plugin/declaration-block-no-ignored-properties": true
   }
 }
