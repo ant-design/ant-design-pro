@@ -1,6 +1,27 @@
 import { query as queryUsers, queryCurrent } from '@/services/user';
+import { Effect } from 'dva';
+import { Reducer } from 'redux';
 
-export default {
+export interface IUserModelState {
+  list: any[];
+  currentUser: object;
+}
+
+export interface IUserModel {
+  namespace: 'user';
+  state: IUserModelState;
+  effects: {
+    fetch: Effect;
+    fetchCurrent: Effect;
+  };
+  reducers: {
+    save: Reducer<any>;
+    saveCurrentUser: Reducer<any>;
+    changeNotifyCount: Reducer<any>;
+  };
+}
+
+const UserModel: IUserModel = {
   namespace: 'user',
 
   state: {
@@ -50,3 +71,5 @@ export default {
     },
   },
 };
+
+export default UserModel;

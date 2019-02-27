@@ -1,6 +1,22 @@
 import { queryProjectNotice } from '@/services/api';
+import { Effect } from 'dva';
+import { Reducer } from 'redux';
 
-export default {
+export interface IProjectModelState {
+  notice: any[];
+}
+
+export interface IProjectModel {
+  namespace: 'project';
+  state: IProjectModelState;
+  effects: {
+    fetchNotice: Effect;
+  };
+  reducers: {
+    saveNotice: Reducer<any>;
+  };
+}
+const ProjectModel: IProjectModel = {
   namespace: 'project',
 
   state: {
@@ -26,3 +42,5 @@ export default {
     },
   },
 };
+
+export default ProjectModel;

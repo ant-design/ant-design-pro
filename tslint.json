@@ -7,6 +7,7 @@
     "jsx-no-lambda": false,
     "no-implicit-dependencies": false,
     "no-console": false,
-    "member-access": false
+    "member-access": false,
+    "prefer-conditional-expression": false
   }
 }

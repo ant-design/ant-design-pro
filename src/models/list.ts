@@ -1,6 +1,26 @@
-import { queryFakeList, removeFakeList, addFakeList, updateFakeList } from '@/services/api';
+import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from '@/services/api';
+import { Effect } from 'dva';
+import { Reducer } from 'redux';
 
-export default {
+export interface IListModelState {
+  list: any[];
+}
+
+export interface IListModel {
+  namespace: 'list';
+  state: IListModelState;
+  effects: {
+    fetch: Effect;
+    appendFetch: Effect;
+    submit: Effect;
+  };
+  reducers: {
+    queryList: Reducer<any>;
+    appendList: Reducer<any>;
+  };
+}
+
+const ListModel: IListModel = {
   namespace: 'list',
 
   state: {
@@ -23,7 +43,7 @@ export default {
       });
     },
     *submit({ payload }, { call, put }) {
-      let callback;
+      let callback: () => void;
       if (payload.id) {
         callback = Object.keys(payload).length === 1 ? removeFakeList : updateFakeList;
       } else {
@@ -52,3 +72,5 @@ export default {
     },
   },
 };
+
+export default ListModel;

@@ -1,11 +1,29 @@
-import { routerRedux } from 'dva/router';
-import { stringify } from 'qs';
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
-import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
+import { getPageQuery } from '@/utils/utils';
+import { Effect } from 'dva';
+import { routerRedux } from 'dva/router';
+import { stringify } from 'qs';
+import { Reducer } from 'redux';
 
-export default {
+export interface ILoginModelState {
+  status?: boolean;
+}
+
+export interface ILoginModel {
+  namespace: 'login';
+  state: ILoginModelState;
+  effects: {
+    login: Effect;
+    getCaptcha: Effect;
+    logout: Effect;
+  };
+  reducers: {
+    changeLoginStatus: Reducer<any>;
+  };
+}
+const LoginModel: ILoginModel = {
   namespace: 'login',
 
   state: {
@@ -76,3 +94,5 @@ export default {
     },
   },
 };
+
+export default LoginModel;
