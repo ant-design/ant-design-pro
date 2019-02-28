@@ -1,7 +1,7 @@
 import * as React from 'react';
 export interface IMiniBarProps {
   color?: string;
-  height: number;
+  height?: number;
   data: Array<{
     x: number | string;
     y: number;

@@ -1,11 +1,15 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'dva';
 import { Row, Col, Icon, Menu, Dropdown } from 'antd';
+import { RangePickerValue } from 'antd/lib/date-picker/interface';
+import { Dispatch } from 'redux';
+import * as H from 'history';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import { getTimeDistance } from '@/utils/utils';
-import styles from './Analysis.less';
 import PageLoading from '@/components/PageLoading';
 import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
+import styles from './Analysis.less';
+import { IChartModelState } from './models/chart';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const SalesCard = React.lazy(() => import('./SalesCard'));
@@ -13,16 +17,31 @@ const TopSearch = React.lazy(() => import('./TopSearch'));
 const ProportionSales = React.lazy(() => import('./ProportionSales'));
 const OfflineData = React.lazy(() => import('./OfflineData'));
 
+interface AnalysisProps {
+  dispatch: Dispatch<any>;
+  location: H.Location;
+  chart: IChartModelState;
+  loading: boolean;
+}
+
+interface AnalysisState {
+  salesType: string;
+  currentTabKey: string;
+  rangePickerValue: RangePickerValue;
+}
+
 @connect(({ chart, loading }) => ({
   chart,
   loading: loading.effects['chart/fetch'],
 }))
-class Analysis extends Component {
+class Analysis extends Component<AnalysisProps, AnalysisState> {
   state = {
     salesType: 'all',
     currentTabKey: '',
     rangePickerValue: getTimeDistance('year'),
   };
+
+  reqRef: number;
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -39,7 +58,7 @@ class Analysis extends Component {
       type: 'chart/clear',
     });
     cancelAnimationFrame(this.reqRef);
-    clearTimeout(this.timeoutId);
+    // clearTimeout(this.timeoutId);
   }
 
   handleChangeSalesType = e => {
@@ -54,7 +73,10 @@ class Analysis extends Component {
     });
   };
 
-  handleRangePickerChange = rangePickerValue => {
+  handleRangePickerChange: (
+    dates: RangePickerValue,
+    dateStrings: [string, string]
+  ) => void = rangePickerValue => {
     const { dispatch } = this.props;
     this.setState({
       rangePickerValue,
@@ -65,7 +87,7 @@ class Analysis extends Component {
     });
   };
 
-  selectDate = type => {
+  selectDate: (type: string) => void = type => {
     const { dispatch } = this.props;
     this.setState({
       rangePickerValue: getTimeDistance(type),
@@ -76,7 +98,7 @@ class Analysis extends Component {
     });
   };
 
-  isActive = type => {
+  isActive: (type: string) => string = type => {
     const { rangePickerValue } = this.state;
     const value = getTimeDistance(type);
     if (!rangePickerValue[0] || !rangePickerValue[1]) {
@@ -150,7 +172,7 @@ class Analysis extends Component {
                 <TopSearch
                   loading={loading}
                   visitData2={visitData2}
-                  selectDate={this.selectDate}
+                  // selectDate={this.selectDate}
                   searchData={searchData}
                   dropdownGroup={dropdownGroup}
                 />
@@ -182,9 +204,10 @@ class Analysis extends Component {
     );
   }
 }
-
-export default props => (
+const AnalysisPage: React.SFC<AnalysisProps> = props => (
   <AsyncLoadBizCharts>
     <Analysis {...props} />
   </AsyncLoadBizCharts>
 );
+
+export default AnalysisPage;

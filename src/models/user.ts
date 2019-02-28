@@ -4,7 +4,12 @@ import { Reducer } from 'redux';
 
 export interface IUserModelState {
   list: any[];
-  currentUser: object;
+  currentUser: {
+    avatar?: string;
+    name?: string;
+    title?: string;
+    group?: string;
+  };
 }
 
 export interface IUserModel {

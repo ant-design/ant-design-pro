@@ -1,13 +1,17 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
+import { Dispatch } from 'redux';
 import Link from 'umi/link';
 import { Row, Col, Card, List, Avatar } from 'antd';
 import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import { Radar } from '@/components/Charts';
 import EditableLinkGroup from '@/components/EditableLinkGroup';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-
+import { IActivitiesState } from './models/activities';
+import { IChartModelState } from './models/chart';
+import { IProjectModelState } from '@/models/project';
+import { IUserModelState } from '@/models/user';
 import styles from './Workplace.less';
 
 const links = [
@@ -37,6 +41,17 @@ const links = [
   },
 ];
 
+interface WorkplaceProps {
+  dispatch: Dispatch<any>;
+  activities: IActivitiesState;
+  currentUser: IUserModelState['currentUser'];
+  project: IProjectModelState;
+  chart: IChartModelState;
+  currentUserLoading: boolean;
+  projectLoading: boolean;
+  activitiesLoading: boolean;
+}
+
 @connect(({ user, project, activities, chart, loading }) => ({
   currentUser: user.currentUser,
   project,
@@ -46,7 +61,7 @@ const links = [
   projectLoading: loading.effects['project/fetchNotice'],
   activitiesLoading: loading.effects['activities/fetchList'],
 }))
-class Workplace extends PureComponent {
+class Workplace extends PureComponent<WorkplaceProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -203,7 +218,7 @@ class Workplace extends PureComponent {
               title="动态"
               loading={activitiesLoading}
             >
-              <List loading={activitiesLoading} size="large">
+              <List loading={activitiesLoading} size="large" renderItem={() => null}>
                 <div className={styles.activitiesList}>{this.renderActivities()}</div>
               </List>
             </Card>

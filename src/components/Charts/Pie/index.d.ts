@@ -16,6 +16,10 @@ export interface IPieProps {
   tooltip?: boolean;
   valueFormat?: (value: string) => string | React.ReactNode;
   subTitle?: React.ReactNode;
+  lineWidth?: number;
+  inner?: number;
+  margin?: number[];
+  style?: React.CSSProperties;
 }
 
 export default class Pie extends React.Component<IPieProps, any> {}

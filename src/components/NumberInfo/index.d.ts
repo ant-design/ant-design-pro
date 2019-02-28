@@ -7,6 +7,7 @@ export interface INumberInfoProps {
   theme?: string;
   gap?: number;
   subTotal?: number;
+  suffix?: string;
   style?: React.CSSProperties;
 }
 

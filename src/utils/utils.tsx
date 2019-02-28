@@ -1,13 +1,14 @@
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import nzh from 'nzh/cn';
 import { parse, stringify } from 'qs';
 import React from 'react';
+import { RangePickerValue } from 'antd/lib/date-picker/interface';
 
 export function fixedZero(val: any): string | number {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
-export function getTimeDistance(type: string): Moment[] {
+export function getTimeDistance(type: string): RangePickerValue {
   const now = new Date();
   const oneDay = 1000 * 60 * 60 * 24;
 
