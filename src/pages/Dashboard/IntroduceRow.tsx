@@ -1,13 +1,23 @@
 import React, { memo } from 'react';
 import { Row, Col, Icon, Tooltip } from 'antd';
-import { FormattedMessage } from 'umi/locale';
+import { FormattedMessage } from 'umi-plugin-locale';
 import styles from './Analysis.less';
 import { ChartCard, MiniArea, MiniBar, MiniProgress, Field } from '@/components/Charts';
 import Trend from '@/components/Trend';
 import numeral from 'numeral';
 import Yuan from '@/utils/Yuan';
 
-const topColResponsiveProps = {
+interface TopColResponsiveProps {
+  xs: number;
+  sm: number;
+  md: number;
+  lg: number;
+  xl: number;
+  style: {
+    marginBottom: number;
+  };
+}
+const topColResponsiveProps: TopColResponsiveProps = {
   xs: 24,
   sm: 12,
   md: 12,
@@ -16,7 +26,12 @@ const topColResponsiveProps = {
   style: { marginBottom: 24 },
 };
 
-const IntroduceRow = memo(({ loading, visitData }) => (
+interface IntroduceRowProps {
+  visitData: any[];
+  loading: boolean;
+}
+
+const IntroduceRow: React.SFC<IntroduceRowProps> = ({ loading, visitData }) => (
   <Row gutter={24}>
     <Col {...topColResponsiveProps}>
       <ChartCard
@@ -139,6 +154,6 @@ const IntroduceRow = memo(({ loading, visitData }) => (
       </ChartCard>
     </Col>
   </Row>
-));
+);
 
-export default IntroduceRow;
+export default memo(IntroduceRow);

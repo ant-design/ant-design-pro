@@ -1,13 +1,14 @@
 import React, { memo } from 'react';
 import { Row, Col, Table, Tooltip, Card, Icon } from 'antd';
-import { FormattedMessage } from 'umi/locale';
+import { FormattedMessage } from 'umi-plugin-locale';
 import Trend from '@/components/Trend';
 import numeral from 'numeral';
 import styles from './Analysis.less';
 import NumberInfo from '@/components/NumberInfo';
 import { MiniArea } from '@/components/Charts';
+import { ColumnProps } from 'antd/lib/table/interface';
 
-const columns = [
+const columns: ColumnProps<any>[] = [
   {
     title: <FormattedMessage id="app.analysis.table.rank" defaultMessage="Rank" />,
     dataIndex: 'index',
@@ -42,7 +43,18 @@ const columns = [
   },
 ];
 
-const TopSearch = memo(({ loading, visitData2, searchData, dropdownGroup }) => (
+interface TopSearchProps {
+  loading: boolean;
+  visitData2: any[];
+  searchData: any[];
+  dropdownGroup: JSX.Element;
+}
+const TopSearch: React.SFC<TopSearchProps> = ({
+  loading,
+  visitData2,
+  searchData,
+  dropdownGroup,
+}) => (
   <Card
     loading={loading}
     bordered={false}
@@ -106,6 +118,6 @@ const TopSearch = memo(({ loading, visitData2, searchData, dropdownGroup }) => (
       }}
     />
   </Card>
-));
+);
 
-export default TopSearch;
+export default memo(TopSearch);

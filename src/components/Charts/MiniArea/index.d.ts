@@ -14,7 +14,7 @@ export interface IAxis {
 
 export interface IMiniAreaProps {
   color?: string;
-  height: number;
+  height?: number;
   borderColor?: string;
   line?: boolean;
   animate?: boolean;

@@ -43,7 +43,7 @@ const ListModel: IListModel = {
       });
     },
     *submit({ payload }, { call, put }) {
-      let callback: () => void;
+      let callback: (params: any) => Promise<any>;
       if (payload.id) {
         callback = Object.keys(payload).length === 1 ? removeFakeList : updateFakeList;
       } else {

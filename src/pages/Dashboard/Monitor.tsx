@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import { connect } from 'dva';
-import { formatMessage, FormattedMessage } from 'umi/locale';
+import { Dispatch } from 'redux';
+import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import { Row, Col, Card, Tooltip } from 'antd';
 import { Pie, WaterWave, Gauge, TagCloud } from '@/components/Charts';
 import NumberInfo from '@/components/NumberInfo';
@@ -11,6 +12,7 @@ import numeral from 'numeral';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import Authorized from '@/utils/Authorized';
 import styles from './Monitor.less';
+import { IMonitorState } from './models/monitor';
 
 const { Secured } = Authorized;
 
@@ -22,12 +24,18 @@ const havePermissionAsync = new Promise(resolve => {
   setTimeout(() => resolve(), 300);
 });
 
+interface MonitorProps {
+  dispatch: Dispatch<any>;
+  monitor: IMonitorState;
+  loading: boolean;
+}
+
 @Secured(havePermissionAsync)
 @connect(({ monitor, loading }) => ({
   monitor,
   loading: loading.models.monitor,
 }))
-class Monitor extends Component {
+class Monitor extends Component<MonitorProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -242,8 +250,10 @@ class Monitor extends Component {
   }
 }
 
-export default props => (
+const MonitorPage: React.SFC<MonitorProps> = props => (
   <AsyncLoadBizCharts>
     <Monitor {...props} />
   </AsyncLoadBizCharts>
 );
+
+export default MonitorPage;
