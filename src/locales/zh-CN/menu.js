@@ -4,6 +4,8 @@ export default {
   'menu.dashboard.analysis': '分析页',
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
+  'menu.test': '测试页面',
+  'menu.test.test1': '测试页面一',
   'menu.uniComp': '基础配置',
   'menu.uniComp.org': '接入系统管理',
   'menu.uniComp.group': '分组管理',
