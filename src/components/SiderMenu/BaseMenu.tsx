@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { Menu, Icon } from 'antd';
 import Link from 'umi/link';
+import * as H from 'history';
 import { urlToList } from '../_utils/pathTools';
 import { getMenuMatches } from './SiderMenuUtils';
 import { isUrl } from '@/utils/utils';
@@ -28,18 +29,45 @@ const getIcon = icon => {
   return icon;
 };
 
-export default class BaseMenu extends PureComponent {
+export declare type CollapseType = 'clickTrigger' | 'responsive';
+export declare type SiderTheme = 'light' | 'dark';
+export declare type MenuMode =
+  | 'vertical'
+  | 'vertical-left'
+  | 'vertical-right'
+  | 'horizontal'
+  | 'inline';
+
+interface IBaseMenuProps {
+  flatMenuKeys: any[];
+  location: H.Location;
+  onCollapse: (collapsed: boolean, type?: CollapseType) => void;
+  isMobile: boolean;
+  openKeys?: any;
+  theme: SiderTheme;
+  mode: MenuMode;
+  className?: string;
+  collapsed: boolean;
+  handleOpenChange: (openKeys: any[]) => void;
+  menuData: any[];
+  style: React.CSSProperties;
+  onOpenChange: (openKeys: string[]) => void;
+}
+
+interface IBaseMenuState {}
+
+export default class BaseMenu extends PureComponent<IBaseMenuProps, IBaseMenuState> {
   /**
    * 获得菜单子节点
    * @memberof SiderMenu
    */
-  getNavMenuItems = (menusData, parent) => {
+  getNavMenuItems: (menusData: any[], parent?: string) => any[] = (menusData, parent) => {
     if (!menusData) {
       return [];
     }
     return menusData
       .filter(item => item.name && !item.hideInMenu)
-      .map(item => this.getSubMenuOrItem(item, parent))
+      .map(item => this.getSubMenuOrItem(item))
       .filter(item => item);
   };
 
@@ -131,6 +159,9 @@ export default class BaseMenu extends PureComponent {
       location: { pathname },
       className,
       collapsed,
+      handleOpenChange,
+      style,
+      menuData,
     } = this.props;
     // if pathname can't match, use the nearest parent's key
     let selectedKeys = this.getSelectedMenuKeys(pathname);
@@ -143,7 +174,6 @@ export default class BaseMenu extends PureComponent {
         openKeys: openKeys.length === 0 ? [...selectedKeys] : openKeys,
       };
     }
-    const { handleOpenChange, style, menuData } = this.props;
     const cls = classNames(className, {
       'top-nav-menu': mode === 'horizontal',
     });

@@ -17,7 +17,18 @@ const loadBizCharts = async () => {
   return Promise.resolve(true);
 };
 
-class AsyncLoadBizCharts extends React.Component {
+interface IAsyncLoadBizChartsProps {
+  children: React.ReactNode;
+}
+
+interface IAsyncLoadBizChartsState {
+  loading: boolean;
+}
+
+class AsyncLoadBizCharts extends React.Component<
+  IAsyncLoadBizChartsProps,
+  IAsyncLoadBizChartsState
+> {
   state = {
     loading: !isLoaderBizChart,
   };
