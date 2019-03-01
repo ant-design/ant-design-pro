@@ -6,8 +6,17 @@ export default class PromiseRender extends React.PureComponent {
     component: null,
   };
 
+  constructor(props) {
+    super(props);
+    this.isPromised = false;
+  }
+  
   componentDidMount() {
-    this.setRenderComponent(this.props);
+    if (this.isPromised === false) {
+        this.setRenderComponent(this.props);
+    } else {
+        this.isPromised = false;
+    }
   }
 
   // set render Component : ok or error
@@ -16,11 +25,13 @@ export default class PromiseRender extends React.PureComponent {
     const error = this.checkIsInstantiation(props.error);
     props.promise
       .then(() => {
+        this.isPromised = true;
         this.setState({
           component: ok,
         });
       })
       .catch(() => {
+        this.isPromised = true;
         this.setState({
           component: error,
         });
