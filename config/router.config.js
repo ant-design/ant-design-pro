@@ -41,7 +41,7 @@ export default [
           },
         ],
       },
-      // list
+      // apiGateWay
       {
         path: '/apiGateway',
         icon: 'table',
@@ -86,6 +86,7 @@ export default [
           },
         ],
       },
+      // uniComp
       {
         path: '/uniComp',
         icon: 'table',
@@ -105,6 +106,34 @@ export default [
             path: '/uniComp/component',
             name: 'component',
             component: './UniComp/Component',
+          },
+        ],
+      },
+      // test
+      {
+        path: '/test',
+        icon: 'table',
+        name: 'test',
+        routes: [
+          {
+            path: '/test/test1',
+            name: 'test1',
+            component: './Test/Test1',
+          },
+          {
+            path: '/test/test2',
+            name: 'test2',
+            component: './Test/Test2',
+          },
+          {
+            path: '/test/test3',
+            name: 'test3',
+            component: './Test/Test3',
+          },
+          {
+            path: '/test/test4',
+            name: 'test4',
+            component: './Test/Test4',
           },
         ],
       },
