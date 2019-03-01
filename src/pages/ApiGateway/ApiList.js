@@ -133,7 +133,7 @@ class TableList extends PureComponent {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    // fetchEnumData(this,constants.API_STATE_KEY);
+    // fetchEnumData(this, constants.API_STATE_KEY);
     console.log('state1:', this.state);
     dispatch({
       type: 'apiGateway/fetch',
@@ -308,7 +308,7 @@ class TableList extends PureComponent {
               <Button type="primary" htmlType="submit">
                 查询
               </Button>
-              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset} htmlType="button">
                 重置
               </Button>
               <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
@@ -360,7 +360,7 @@ class TableList extends PureComponent {
             <Button type="primary" htmlType="submit">
               查询
             </Button>
-            <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
+            <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset} htmlType="button">
               重置
             </Button>
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
@@ -401,7 +401,7 @@ class TableList extends PureComponent {
             <div className={styles.tableListOperator}>
               {selectedRows.length > 0 && (
                 <span>
-                  <Button>批量删除</Button>
+                  <Button htmlType="button">批量删除</Button>
                   {/* <Dropdown overlay={menu}> */}
                   {/* <Button> */}
                   {/* 更多操作 <Icon type="down" /> */}
