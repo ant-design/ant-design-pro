@@ -12,6 +12,7 @@ order: 11
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
 | title | title 区域 | ReactNode | - |
+| loading | 骨架屏loading状态 | boolean | false |
 | logo | logo区域 | ReactNode | - |
 | action | 操作区，位于 title 行的行尾 | ReactNode | - |
 | home | 默认的主页说明文字 | ReactNode | - |
