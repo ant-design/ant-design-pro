@@ -1,34 +1,34 @@
 .textOverflow() {
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
-  white-space: nowrap;
 }
 
 .textOverflowMulti(@line: 3, @bg: #fff) {
-  overflow: hidden;
   position: relative;
-  line-height: 1.5em;
   max-height: @line * 1.5em;
-  text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
-  &:before {
-    background: @bg;
-    content: '...';
-    padding: 0 1px;
+  overflow: hidden;
+  line-height: 1.5em;
+  text-align: justify;
+  &::before {
     position: absolute;
     right: 14px;
     bottom: 0;
+    padding: 0 1px;
+    background: @bg;
+    content: '...';
   }
-  &:after {
-    background: white;
-    content: '';
-    margin-top: 0.2em;
+  &::after {
     position: absolute;
     right: 14px;
     width: 1em;
     height: 1em;
+    margin-top: 0.2em;
+    background: white;
+    content: '';
   }
 }
 
@@ -36,15 +36,15 @@
 // ------------------------
 .clearfix() {
   zoom: 1;
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: ' ';
     display: table;
   }
-  &:after {
+  &::after {
     clear: both;
-    visibility: hidden;
-    font-size: 0;
     height: 0;
+    font-size: 0;
+    visibility: hidden;
   }
 }

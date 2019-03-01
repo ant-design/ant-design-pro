@@ -35,5 +35,6 @@ export const getDefaultCollapsedSubMenus = props => {
   } = props;
   return urlToList(pathname)
     .map(item => getMenuMatches(flatMenuKeys, item)[0])
-    .filter(item => item);
+    .filter(item => item)
+    .reduce((acc, curr) => [...acc, curr], ['/']);
 };
