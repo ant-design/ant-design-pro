@@ -78,17 +78,28 @@
   }
 }
 
-.clear {
+.bottomBar {
   height: 46px;
   color: @text-color;
   line-height: 46px;
   text-align: center;
   border-top: 1px solid @border-color-split;
   border-radius: 0 0 @border-radius-base @border-radius-base;
-  cursor: pointer;
   transition: all 0.3s;
-
-  &:hover {
-    color: @heading-color;
+  div {
+    display: inline-block;
+    width: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+    &:hover {
+      color: @heading-color;
+    }
+    &:only-child {
+      width: 100%;
+    }
+    &:not(:only-child):last-child {
+      border-left: 1px solid @border-color-split;
+    }
   }
 }
