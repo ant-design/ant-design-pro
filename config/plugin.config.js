@@ -17,6 +17,7 @@ function getModulePackageName(module) {
   let packageName = moduleDirName;
   // handle tree shaking
   if (packageName.match('^_')) {
+    // eslint-disable-next-line prefer-destructuring
     packageName = packageName.match(/^_(@?[^@]+)/)[1];
   }
   return packageName;
@@ -58,20 +59,20 @@ export default config => {
       minSize: 0,
       cacheGroups: {
         vendors: {
-          test: (module, chunk) => {
+          test: module => {
             const packageName = getModulePackageName(module);
             if (packageName) {
-              return packageName in ['bizcharts', '@antv_data-set', '@ant-design_icons'];
+              return ['bizcharts', '@antv_data-set', '@ant-design_icons'].indexOf(packageName) >= 0;
             }
             return false;
           },
           name(module) {
             const packageName = getModulePackageName(module);
 
-            if (packageName in ['bizcharts', '@antv_data-set']) {
+            if (['bizcharts', '@antv_data-set'].indexOf(packageName) >= 0) {
               return 'viz'; // visualization package
             }
-            if (packageName in ['@ant-design_icons']) {
+            if (packageName === '@ant-design_icons') {
               return 'icons';
             }
             return 'misc';
