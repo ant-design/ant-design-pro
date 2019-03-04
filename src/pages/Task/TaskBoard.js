@@ -14,25 +14,28 @@ class TaskBoard extends PureComponent {
 
   render() {
     const menu = (
-      <Menu className={styles.menu}>
-        <div className={styles.menuTitle}>列表菜单</div>
-        <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="">
-            1st menu item
+      <Menu>
+        <Menu.Item key="0">
+          <a href="">
+            <Icon type="plus" />
+            &nbsp;新建任务
           </a>
         </Menu.Item>
-        <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="">
-            2nd menu item
+        <Menu.Item key="1">
+          <a href="">
+            <Icon type="edit" />
+            &nbsp;重命名
           </a>
         </Menu.Item>
-        <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="">
-            3rd menu item
+        <Menu.Item key="3">
+          <a href="">
+            <Icon type="close" />
+            &nbsp;删除列表
           </a>
         </Menu.Item>
       </Menu>
     );
+
     return (
       <div className={styles.kanban}>
         <div className={styles.listContainer}>
@@ -44,7 +47,7 @@ class TaskBoard extends PureComponent {
               <div className={styles.iconBox}>
                 <Dropdown overlay={menu} trigger={['click']}>
                   <a className="ant-dropdown-link" href="#">
-                    <Icon type="dash" className={styles.titleIcon} />
+                    C<Icon type="down" />
                   </a>
                 </Dropdown>
               </div>
