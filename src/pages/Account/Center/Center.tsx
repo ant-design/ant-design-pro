@@ -3,8 +3,38 @@ import { connect } from 'dva';
 import Link from 'umi/link';
 import router from 'umi/router';
 import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
+import InputProps from 'antd/lib/input';
+import { Dispatch } from 'redux';
+import { match } from 'react-router';
+import * as H from 'history';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
+import { IProjectModelState } from '@/models/project';
 import styles from './Center.less';
+
+interface CenterProps {
+  listLoading: boolean;
+  currentUser: {
+    avatar?: string;
+    name?: string;
+    title?: string;
+    group?: string;
+    signature?: string;
+    geographic?: any;
+    tags?: any[];
+  };
+  currentUserLoading: boolean;
+  project: IProjectModelState;
+  projectLoading: boolean;
+  dispatch: Dispatch<any>;
+  match: match;
+  location: H.Location;
+}
+
+interface CenterState {
+  newTags: any[];
+  inputVisible: boolean;
+  inputValue: string;
+}
 
 @connect(({ loading, user, project }) => ({
   listLoading: loading.effects['list/fetch'],
@@ -13,12 +43,14 @@ import styles from './Center.less';
   project,
   projectLoading: loading.effects['project/fetchNotice'],
 }))
-class Center extends PureComponent {
+class Center extends PureComponent<CenterProps, CenterState> {
   state = {
     newTags: [],
     inputVisible: false,
     inputValue: '',
   };
+
+  input: InputProps;
 
   componentDidMount() {
     const { dispatch } = this.props;
