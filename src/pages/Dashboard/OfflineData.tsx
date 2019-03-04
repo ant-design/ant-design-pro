@@ -1,9 +1,9 @@
+import { Pie, TimelineChart } from '@/components/Charts';
+import NumberInfo from '@/components/NumberInfo';
+import { Card, Col, Row, Tabs } from 'antd';
 import React, { memo } from 'react';
-import { Card, Tabs, Row, Col } from 'antd';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import styles from './Analysis.less';
-import { TimelineChart, Pie } from '@/components/Charts';
-import NumberInfo from '@/components/NumberInfo';
 
 interface CustomTabProps {
   data: {

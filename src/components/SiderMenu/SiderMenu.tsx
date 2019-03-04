@@ -1,12 +1,12 @@
-import React, { PureComponent, Suspense } from 'react';
 import { Layout } from 'antd';
 import classNames from 'classnames';
-import Link from 'umi/link';
 import * as H from 'history';
-import styles from './index.less';
-import PageLoading from '../PageLoading';
-import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
+import React, { PureComponent, Suspense } from 'react';
+import Link from 'umi/link';
 import { title } from '../../defaultSettings';
+import PageLoading from '../PageLoading';
+import styles from './index.less';
+import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
 
 const BaseMenu = React.lazy(() => import('./BaseMenu'));
 const { Sider } = Layout;
@@ -34,16 +34,6 @@ interface ISiderMenuState {
 }
 
 export default class SiderMenu extends PureComponent<ISiderMenuProps, ISiderMenuState> {
-  constructor(props: ISiderMenuProps) {
-    super(props);
-    this.state = {
-      openKeys: getDefaultCollapsedSubMenus(props),
-    };
-  }
-
-  componentDidMount() {
-    firstMount = false;
-  }
 
   static getDerivedStateFromProps(props, state) {
     const { pathname, flatMenuKeysLen } = state;
@@ -55,6 +45,16 @@ export default class SiderMenu extends PureComponent<ISiderMenuProps, ISiderMenu
       };
     }
     return null;
+  }
+  constructor(props: ISiderMenuProps) {
+    super(props);
+    this.state = {
+      openKeys: getDefaultCollapsedSubMenus(props),
+    };
+  }
+
+  componentDidMount() {
+    firstMount = false;
   }
 
   isMainMenu: (key: string) => boolean = key => {
@@ -86,7 +86,7 @@ export default class SiderMenu extends PureComponent<ISiderMenuProps, ISiderMenu
     return (
       <Sider
         trigger={null}
-        collapsible
+        collapsible={true}
         collapsed={collapsed}
         breakpoint="lg"
         onCollapse={collapse => {

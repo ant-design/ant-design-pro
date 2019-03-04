@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
-import moment from 'moment';
-import { connect } from 'dva';
-import { Dispatch } from 'redux';
-import Link from 'umi/link';
-import { Row, Col, Card, List, Avatar } from 'antd';
-import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import { Radar } from '@/components/Charts';
+import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import EditableLinkGroup from '@/components/EditableLinkGroup';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import { IActivitiesState } from './models/activities';
-import { IChartModelState } from './models/chart';
 import { IProjectModelState } from '@/models/project';
 import { IUserModelState } from '@/models/user';
+import { Avatar, Card, Col, List, Row } from 'antd';
+import { connect } from 'dva';
+import moment from 'moment';
+import React, { PureComponent } from 'react';
+import { Dispatch } from 'redux';
+import Link from 'umi/link';
+import { IActivitiesState } from './models/activities';
+import { IChartModelState } from './models/chart';
 import styles from './Workplace.less';
 
 const links = [
@@ -239,7 +239,7 @@ class Workplace extends PureComponent<WorkplaceProps> {
               loading={radarData.length === 0}
             >
               <div className={styles.chart}>
-                <Radar hasLegend height={343} data={radarData} />
+                <Radar hasLegend={true} height={343} data={radarData} />
               </div>
             </Card>
             <Card

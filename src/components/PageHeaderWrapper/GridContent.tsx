@@ -1,5 +1,5 @@
-import React from 'react';
 import { connect } from 'dva';
+import React from 'react';
 import styles from './GridContent.less';
 
 interface GridContentProps {

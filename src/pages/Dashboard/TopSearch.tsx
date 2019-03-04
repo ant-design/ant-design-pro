@@ -1,14 +1,14 @@
-import React, { memo } from 'react';
-import { Row, Col, Table, Tooltip, Card, Icon } from 'antd';
-import { FormattedMessage } from 'umi-plugin-locale';
-import Trend from '@/components/Trend';
-import numeral from 'numeral';
-import styles from './Analysis.less';
-import NumberInfo from '@/components/NumberInfo';
 import { MiniArea } from '@/components/Charts';
+import NumberInfo from '@/components/NumberInfo';
+import Trend from '@/components/Trend';
+import { Card, Col, Icon, Row, Table, Tooltip } from 'antd';
 import { ColumnProps } from 'antd/lib/table/interface';
+import numeral from 'numeral';
+import React, { memo } from 'react';
+import { FormattedMessage } from 'umi-plugin-locale';
+import styles from './Analysis.less';
 
-const columns: ColumnProps<any>[] = [
+const columns: Array<ColumnProps<any>> = [
   {
     title: <FormattedMessage id="app.analysis.table.rank" defaultMessage="Rank" />,
     dataIndex: 'index',
@@ -82,7 +82,7 @@ const TopSearch: React.SFC<TopSearchProps> = ({
           status="up"
           subTotal={17.1}
         />
-        <MiniArea line height={45} data={visitData2} />
+        <MiniArea line={true} height={45} data={visitData2} />
       </Col>
       <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
         <NumberInfo
@@ -104,7 +104,7 @@ const TopSearch: React.SFC<TopSearchProps> = ({
           subTotal={26.2}
           gap={8}
         />
-        <MiniArea line height={45} data={visitData2} />
+        <MiniArea line={true} height={45} data={visitData2} />
       </Col>
     </Row>
     <Table

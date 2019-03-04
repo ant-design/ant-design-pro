@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
-import { Row, Col, Card, Tabs, DatePicker } from 'antd';
-import { RangePickerValue } from 'antd/lib/date-picker/interface';
-import { FormattedMessage, formatMessage } from 'umi-plugin-locale';
-import numeral from 'numeral';
-import styles from './Analysis.less';
 import { Bar } from '@/components/Charts';
+import { Card, Col, DatePicker, Row, Tabs } from 'antd';
+import { RangePickerValue } from 'antd/lib/date-picker/interface';
+import numeral from 'numeral';
+import React, { memo } from 'react';
+import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
+import styles from './Analysis.less';
 
 const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;

@@ -1,13 +1,13 @@
-import React, { Component, Suspense } from 'react';
-import { connect } from 'dva';
-import { Row, Col, Icon, Menu, Dropdown } from 'antd';
-import { RangePickerValue } from 'antd/lib/date-picker/interface';
-import { Dispatch } from 'redux';
-import * as H from 'history';
-import GridContent from '@/components/PageHeaderWrapper/GridContent';
-import { getTimeDistance } from '@/utils/utils';
-import PageLoading from '@/components/PageLoading';
 import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
+import GridContent from '@/components/PageHeaderWrapper/GridContent';
+import PageLoading from '@/components/PageLoading';
+import { getTimeDistance } from '@/utils/utils';
+import { Col, Dropdown, Icon, Menu, Row } from 'antd';
+import { RangePickerValue } from 'antd/lib/date-picker/interface';
+import { connect } from 'dva';
+import * as H from 'history';
+import React, { Component, Suspense } from 'react';
+import { Dispatch } from 'redux';
 import styles from './Analysis.less';
 import { IChartModelState } from './models/chart';
 

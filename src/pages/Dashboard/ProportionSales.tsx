@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
-import { Card, Radio } from 'antd';
-import { FormattedMessage } from 'umi-plugin-locale';
-import styles from './Analysis.less';
 import { Pie } from '@/components/Charts';
 import Yuan from '@/utils/Yuan';
+import { Card, Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio/interface';
+import React, { memo } from 'react';
+import { FormattedMessage } from 'umi-plugin-locale';
+import styles from './Analysis.less';
 
 interface ProportionSalesProps {
   dropdownGroup: JSX.Element;
@@ -56,7 +56,7 @@ const ProportionSales: React.SFC<ProportionSalesProps> = ({
       <FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />
     </h4>
     <Pie
-      hasLegend
+      hasLegend={true}
       subTitle={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
       total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
       data={salesPieData}

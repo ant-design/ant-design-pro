@@ -1,8 +1,8 @@
+import { RangePickerValue } from 'antd/lib/date-picker/interface';
 import moment from 'moment';
 import nzh from 'nzh/cn';
 import { parse, stringify } from 'qs';
 import React from 'react';
-import { RangePickerValue } from 'antd/lib/date-picker/interface';
 
 export function fixedZero(val: any): string | number {
   return val * 1 < 10 ? `0${val}` : val;

@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
-import { connect } from 'dva';
-import { Dispatch } from 'redux';
-import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
-import { Row, Col, Card, Tooltip } from 'antd';
-import { Pie, WaterWave, Gauge, TagCloud } from '@/components/Charts';
-import NumberInfo from '@/components/NumberInfo';
-import CountDown from '@/components/CountDown';
 import ActiveChart from '@/components/ActiveChart';
-import numeral from 'numeral';
+import { Gauge, Pie, TagCloud, WaterWave } from '@/components/Charts';
+import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
+import CountDown from '@/components/CountDown';
+import NumberInfo from '@/components/NumberInfo';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import Authorized from '@/utils/Authorized';
-import styles from './Monitor.less';
+import { Card, Col, Row, Tooltip } from 'antd';
+import { connect } from 'dva';
+import numeral from 'numeral';
+import React, { Component } from 'react';
+import { Dispatch } from 'redux';
+import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import { IMonitorState } from './models/monitor';
+import styles from './Monitor.less';
 
 const { Secured } = Authorized;
 

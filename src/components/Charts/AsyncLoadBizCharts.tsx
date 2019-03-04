@@ -1,6 +1,6 @@
+import { importCDN } from '@/utils/utils';
 import React from 'react';
 import PageLoading from '../PageLoading';
-import { importCDN } from '@/utils/utils';
 
 let isLoaderBizChart = false;
 const loadBizCharts = async () => {

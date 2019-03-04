@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'umi/link';
-import { formatMessage } from 'umi-plugin-locale';
 import Exception from '@/components/Exception';
+import React from 'react';
+import { formatMessage } from 'umi-plugin-locale';
+import Link from 'umi/link';
 
 const Exception404: React.SFC = () => (
   <Exception
