@@ -1,5 +1,5 @@
-import React from 'react';
 import { Spin } from 'antd';
+import React from 'react';
 
 // loading components from code split
 // https://umijs.org/plugin/umi-plugin-react.html#dynamicimport

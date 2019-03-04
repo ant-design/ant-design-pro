@@ -1,10 +1,23 @@
-import React, { createElement } from 'react';
-import classNames from 'classnames';
 import { Button } from 'antd';
-import config from './typeConfig';
+import classNames from 'classnames';
+import React, { createElement } from 'react';
 import styles from './index.less';
+import config from './typeConfig';
 
-class Exception extends React.PureComponent {
+export interface IExceptionProps {
+  type?: '403' | '404' | '500';
+  title?: React.ReactNode;
+  desc?: React.ReactNode;
+  img?: string;
+  actions?: React.ReactNode;
+  linkElement?: React.FunctionComponent | React.ComponentClass | string;
+  style?: React.CSSProperties;
+  className?: string;
+  backText?: React.ReactNode;
+  redirect?: string;
+}
+
+class Exception extends React.PureComponent<IExceptionProps, any> {
   static defaultProps = {
     backText: 'back to home',
     redirect: '/',
@@ -43,7 +56,7 @@ class Exception extends React.PureComponent {
           <div className={styles.desc}>{desc || config[pageType].desc}</div>
           <div className={styles.actions}>
             {actions ||
-              createElement(
+              createElement<{ to: string; href: string }>(
                 linkElement,
                 {
                   to: redirect,

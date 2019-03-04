@@ -1,11 +1,11 @@
+import { ChartCard, Field, MiniArea, MiniBar, MiniProgress } from '@/components/Charts';
+import Trend from '@/components/Trend';
+import Yuan from '@/utils/Yuan';
+import { Col, Icon, Row, Tooltip } from 'antd';
+import numeral from 'numeral';
 import React, { memo } from 'react';
-import { Row, Col, Icon, Tooltip } from 'antd';
 import { FormattedMessage } from 'umi-plugin-locale';
 import styles from './Analysis.less';
-import { ChartCard, MiniArea, MiniBar, MiniProgress, Field } from '@/components/Charts';
-import Trend from '@/components/Trend';
-import numeral from 'numeral';
-import Yuan from '@/utils/Yuan';
 
 interface TopColResponsiveProps {
   xs: number;

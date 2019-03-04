@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import classNames from 'classnames';
-import { Menu, Icon } from 'antd';
-import Link from 'umi/link';
-import * as H from 'history';
-import { urlToList } from '../_utils/pathTools';
-import { getMenuMatches } from './SiderMenuUtils';
-import { isUrl } from '@/utils/utils';
-import styles from './index.less';
 import IconFont from '@/components/IconFont';
+import { isUrl } from '@/utils/utils';
+import { Icon, Menu } from 'antd';
+import classNames from 'classnames';
+import * as H from 'history';
+import React, { PureComponent } from 'react';
+import Link from 'umi/link';
+import { urlToList } from '../_utils/pathTools';
+import styles from './index.less';
+import { getMenuMatches } from './SiderMenuUtils';
 
 const { SubMenu } = Menu;
 
