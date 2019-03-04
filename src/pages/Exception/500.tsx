@@ -3,13 +3,13 @@ import { formatMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
 import Exception from '@/components/Exception';
 
-const Exception403 = () => (
+const Exception500: React.SFC = () => (
   <Exception
-    type="403"
-    desc={formatMessage({ id: 'app.exception.description.403' })}
+    type="500"
+    desc={formatMessage({ id: 'app.exception.description.500' })}
     linkElement={Link}
     backText={formatMessage({ id: 'app.exception.back' })}
   />
 );
 
-export default Exception403;
+export default Exception500;

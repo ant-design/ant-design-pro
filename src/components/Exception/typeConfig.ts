@@ -1,4 +1,21 @@
-const config = {
+interface IConfig {
+  403: {
+    img: string;
+    title: string;
+    desc: string;
+  };
+  404: {
+    img: string;
+    title: string;
+    desc: string;
+  };
+  500: {
+    img: string;
+    title: string;
+    desc: string;
+  };
+}
+const config: IConfig = {
   403: {
     img: 'https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg',
     title: '403',

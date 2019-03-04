@@ -4,7 +4,17 @@ import pathToRegexp from 'path-to-regexp';
 import { connect } from 'dva';
 import Authorized from '@/utils/Authorized';
 
-function AuthComponent({ children, location, routerData, status }) {
+interface IAuthComponentProps {
+  location: Location;
+  routerData: any[];
+  status: string;
+}
+const AuthComponent: React.SFC<IAuthComponentProps> = ({
+  children,
+  location,
+  routerData,
+  status,
+}) => {
   const isLogin = status === 'ok';
 
   const getRouteAuthority = (pathname, routeData) => {
@@ -37,7 +47,7 @@ function AuthComponent({ children, location, routerData, status }) {
       {children}
     </Authorized>
   );
-}
+};
 export default connect(({ menu: menuModel, login: loginModel }) => ({
   routerData: menuModel.routerData,
   status: loginModel.status,

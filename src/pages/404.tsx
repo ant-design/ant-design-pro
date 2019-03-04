@@ -3,7 +3,7 @@ import Link from 'umi/link';
 import { formatMessage } from 'umi-plugin-locale';
 import Exception from '@/components/Exception';
 
-export default () => (
+const Exception404: React.SFC = () => (
   <Exception
     type="404"
     linkElement={Link}
@@ -11,3 +11,5 @@ export default () => (
     backText={formatMessage({ id: 'app.exception.back' })}
   />
 );
+
+export default Exception404;

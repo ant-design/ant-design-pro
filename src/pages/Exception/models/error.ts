@@ -1,6 +1,24 @@
 import queryError from '@/services/error';
+import { Effect, Subscription } from 'dva';
+import { Reducer } from 'redux';
 
-export default {
+export interface IErrorModelState {
+  error: string;
+  isloading: boolean;
+}
+
+export interface IErrorModel {
+  namespace: 'error';
+  state: IErrorModelState;
+  effects: {
+    query: Effect;
+  };
+  reducers: {
+    trigger: Reducer<any>;
+  };
+}
+
+const ErrorModel: IErrorModel = {
   namespace: 'error',
 
   state: {
@@ -26,3 +44,5 @@ export default {
     },
   },
 };
+
+export default ErrorModel;
