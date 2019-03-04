@@ -61,7 +61,7 @@ export default class BaseMenu extends PureComponent<IBaseMenuProps, IBaseMenuSta
    * 获得菜单子节点
    * @memberof SiderMenu
    */
-  getNavMenuItems: (menusData: any[], parent?: string) => any[] = (menusData, parent) => {
+  getNavMenuItems: (menusData: any[]) => any[] = menusData => {
     if (!menusData) {
       return [];
     }

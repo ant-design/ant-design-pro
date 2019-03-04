@@ -58,7 +58,6 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
       type: 'chart/clear',
     });
     cancelAnimationFrame(this.reqRef);
-    // clearTimeout(this.timeoutId);
   }
 
   handleChangeSalesType = e => {

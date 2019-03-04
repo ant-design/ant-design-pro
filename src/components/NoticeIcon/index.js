@@ -16,13 +16,13 @@ export default class NoticeIcon extends PureComponent {
     onPopupVisibleChange: () => {},
     onTabChange: () => {},
     onClear: () => {},
+    onViewMore: () => {},
     loading: false,
     clearClose: false,
     locale: {
       emptyText: 'No notifications',
       clear: 'Clear',
-      loadedAll: 'Loaded',
-      loadMore: 'Loading more',
+      viewMore: 'More',
     },
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
@@ -53,53 +53,35 @@ export default class NoticeIcon extends PureComponent {
     onTabChange(tabType);
   };
 
-  onLoadMore = (tabProps, event) => {
-    const { onLoadMore } = this.props;
-    onLoadMore(tabProps, event);
+  onViewMore = (tabProps, event) => {
+    const { onViewMore } = this.props;
+    onViewMore(tabProps, event);
   };
 
   getNotificationBox() {
-    const { visible } = this.state;
     const { children, loading, locale } = this.props;
     if (!children) {
       return null;
     }
     const panes = React.Children.map(children, child => {
-      const {
-        list,
-        title,
-        name,
-        count,
-        emptyText,
-        emptyImage,
-        showClear,
-        loadedAll,
-        scrollToLoad,
-        skeletonCount,
-        skeletonProps,
-        loading: tabLoading,
-      } = child.props;
+      const { list, title, count, emptyText, emptyImage, showClear, showViewMore } = child.props;
       const len = list && list.length ? list.length : 0;
       const msgCount = count || count === 0 ? count : len;
-      const tabTitle = msgCount > 0 ? `${title} (${msgCount})` : title;
+      const localeTitle = locale[title] || title;
+      const tabTitle = msgCount > 0 ? `${localeTitle} (${msgCount})` : localeTitle;
       return (
-        <TabPane tab={tabTitle} key={name}>
+        <TabPane tab={tabTitle} key={title}>
           <List
             data={list}
             emptyImage={emptyImage}
             emptyText={emptyText}
-            loadedAll={loadedAll}
-            loading={tabLoading}
             locale={locale}
-            onClear={() => this.onClear(name)}
+            onClear={() => this.onClear(title)}
             onClick={item => this.onItemClick(item, child.props)}
-            onLoadMore={event => this.onLoadMore(child.props, event)}
-            scrollToLoad={scrollToLoad}
+            onViewMore={event => this.onViewMore(child.props, event)}
             showClear={showClear}
-            skeletonCount={skeletonCount}
-            skeletonProps={skeletonProps}
+            showViewMore={showViewMore}
             title={title}
-            visible={visible}
           />
         </TabPane>
       );
