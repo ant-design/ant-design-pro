@@ -9,6 +9,9 @@ export interface IUserModelState {
     name?: string;
     title?: string;
     group?: string;
+    signature?: string;
+    geographic?: any;
+    tags?: any[];
   };
 }
 
