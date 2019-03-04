@@ -3,6 +3,7 @@ import {
   projectGroupCreate,
   projectGroupTree,
   projectGroupDelete,
+  projectCreate,
 } from '@/services/api';
 
 import { currentTeamGet } from '@/utils/team';
@@ -66,6 +67,18 @@ export default {
           type: 'queryGroups',
           payload: response.groups,
         });
+      }
+    },
+    *create({ payload }, { call }) {
+      const response = yield call(projectCreate, {
+        ...payload,
+        team_id: currentTeamGet(),
+      });
+
+      showMessageByResponse(response);
+
+      if (response.status === '__OK__') {
+        console.log('Project creat sucess.');
       }
     },
   },

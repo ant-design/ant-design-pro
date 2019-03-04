@@ -30,7 +30,7 @@ const { TextArea } = Input;
 @Form.create()
 class Home extends PureComponent {
   state = {
-    // currentGroup: null,
+    currentGroup: null,
     visible: false,
     currentProject: undefined,
   };
@@ -50,7 +50,7 @@ class Home extends PureComponent {
   }
 
   groupSelectHandler = item => {
-    // this.setState({ currentGroup: item });
+    this.setState({ currentGroup: item });
     console.log(item);
   };
 
@@ -112,16 +112,24 @@ class Home extends PureComponent {
   handleProjectSubmit = e => {
     e.preventDefault();
     const { form } = this.props;
-    // const { currentProject } = this.state;
-    // const id = currentProject ? currentProject.id : '';
 
     form.validateFields((err, fieldsValue) => {
       if (err) return;
-      console.log(fieldsValue);
-      // dispatch({
-      //   type: 'list/submit',
-      //   payload: { id, ...fieldsValue },
-      // });
+      const { dispatch } = this.props;
+      const { currentProject, currentGroup } = this.state;
+      const id = currentProject ? currentProject.id : undefined;
+
+      if (id) {
+        console.log({ id, ...fieldsValue });
+      } else {
+        dispatch({
+          type: 'project/create',
+          payload: {
+            project_group_id: currentGroup || '',
+            ...fieldsValue,
+          },
+        });
+      }
     });
   };
 
@@ -209,13 +217,13 @@ class Home extends PureComponent {
     const getModalContent = (
       <Form onSubmit={this.handleProjectSubmit}>
         <FormItem label="项目名称">
-          {getFieldDecorator('projectName', {
+          {getFieldDecorator('project_name', {
             rules: [{ required: true, message: '请输入项目名称' }],
             initialValue: currentProject.name,
           })(<Input placeholder="请输入项目名称" />)}
         </FormItem>
         <FormItem label="项目描述">
-          {getFieldDecorator('projectDesc', {
+          {getFieldDecorator('project_desc', {
             rules: [{ message: '请输入项目描述！', min: 0 }],
             initialValue: currentProject.desc,
           })(<TextArea rows={2} placeholder="请输入项目描述" />)}

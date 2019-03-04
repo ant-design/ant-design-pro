@@ -184,8 +184,14 @@ export async function projectGroupDelete(params) {
 }
 
 export async function projectGroupTree(params) {
-  console.log(params);
   return request('/interface/project/group/tree', {
+    method: 'POST',
+    body: params,
+  });
+}
+
+export async function projectCreate(params) {
+  return request('/interface/project/create', {
     method: 'POST',
     body: params,
   });
