@@ -1,16 +1,24 @@
 import { Button } from 'antd';
 import classNames from 'classnames';
 import React, { createElement } from 'react';
+import * as H from 'history';
 import styles from './index.less';
 import config from './typeConfig';
 
-export interface IExceptionProps {
+export interface IExceptionProps<
+  L = {
+    to: H.LocationDescriptor;
+    href?: H.LocationDescriptor;
+    replace?: boolean;
+    innerRef?: (node: HTMLAnchorElement | null) => void;
+  }
+> {
   type?: '403' | '404' | '500';
   title?: React.ReactNode;
   desc?: React.ReactNode;
   img?: string;
   actions?: React.ReactNode;
-  linkElement?: React.FunctionComponent | React.ComponentClass | string;
+  linkElement?: string | React.ComponentType<L>;
   style?: React.CSSProperties;
   className?: string;
   backText?: React.ReactNode;
@@ -56,7 +64,7 @@ class Exception extends React.PureComponent<IExceptionProps, any> {
           <div className={styles.desc}>{desc || config[pageType].desc}</div>
           <div className={styles.actions}>
             {actions ||
-              createElement<{ to: string; href: string }>(
+              createElement(
                 linkElement,
                 {
                   to: redirect,
