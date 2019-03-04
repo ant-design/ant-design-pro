@@ -53,7 +53,7 @@ export default config => {
   config.optimization
     .runtimeChunk(false) // share the same chunks across different modules
     .splitChunks({
-      chunks: 'all',
+      chunks: 'async',
       name: 'vendors',
       maxInitialRequests: Infinity,
       minSize: 0,
@@ -62,7 +62,7 @@ export default config => {
           test: module => {
             const packageName = getModulePackageName(module);
             if (packageName) {
-              return ['bizcharts', '@antv_data-set', '@ant-design_icons'].indexOf(packageName) >= 0;
+              return ['bizcharts', '@antv_data-set'].indexOf(packageName) >= 0;
             }
             return false;
           },
@@ -71,9 +71,6 @@ export default config => {
 
             if (['bizcharts', '@antv_data-set'].indexOf(packageName) >= 0) {
               return 'viz'; // visualization package
-            }
-            if (packageName === '@ant-design_icons') {
-              return 'icons';
             }
             return 'misc';
           },
