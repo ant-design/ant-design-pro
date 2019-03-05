@@ -3,15 +3,39 @@ import { connect } from 'dva';
 import router from 'umi/router';
 import { FormattedMessage } from 'umi-plugin-locale';
 import { Menu } from 'antd';
+import { match } from 'react-router';
+import * as H from 'history';
+import { MenuMode } from 'antd/lib/menu';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import styles from './Info.less';
 
 const { Item } = Menu;
 
+interface InfoProps {
+  currentUser: {
+    avatar?: string;
+    name?: string;
+    title?: string;
+    group?: string;
+    signature?: string;
+    geographic?: any;
+    tags?: any[];
+    userid?: string;
+  };
+  match: match;
+  location: H.Location;
+}
+
+interface InfoState {
+  mode: MenuMode;
+  menuMap: object;
+  selectKey: string;
+}
+
 @connect(({ user }) => ({
   currentUser: user.currentUser,
 }))
-class Info extends Component {
+class Info extends Component<InfoProps, InfoState> {
   constructor(props) {
     super(props);
     const { match, location } = props;
@@ -37,6 +61,8 @@ class Info extends Component {
       selectKey: menuMap[key] ? key : 'base',
     };
   }
+
+  main: HTMLDivElement;
 
   static getDerivedStateFromProps(props, state) {
     const { match, location } = props;
@@ -79,7 +105,7 @@ class Info extends Component {
       return;
     }
     requestAnimationFrame(() => {
-      let mode = 'inline';
+      let mode: MenuMode = 'inline';
       const { offsetWidth } = this.main;
       if (this.main.offsetWidth < 641 && offsetWidth > 400) {
         mode = 'horizontal';

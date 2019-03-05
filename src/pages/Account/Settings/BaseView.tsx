@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import { Form, Input, Upload, Select, Button } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
+
 import { connect } from 'dva';
 import styles from './BaseView.less';
 import GeographicView from './GeographicView';
@@ -51,14 +53,27 @@ const validatorPhone = (rule, value, callback) => {
   callback();
 };
 
+interface BaseProps extends FormComponentProps {
+  currentUser: {
+    avatar?: string;
+    name?: string;
+    title?: string;
+    group?: string;
+    signature?: string;
+    geographic?: any;
+    tags?: any[];
+  };
+}
+
 @connect(({ user }) => ({
   currentUser: user.currentUser,
 }))
-@Form.create()
-class BaseView extends Component {
+class BaseView extends Component<BaseProps> {
   componentDidMount() {
     this.setBaseInfo();
   }
+
+  view: HTMLDivElement;
 
   setBaseInfo = () => {
     const { currentUser, form } = this.props;
@@ -78,7 +93,7 @@ class BaseView extends Component {
     return url;
   }
 
-  getViewDom = ref => {
+  getViewDom: (ref: HTMLDivElement) => void = ref => {
     this.view = ref;
   };
 
@@ -89,7 +104,7 @@ class BaseView extends Component {
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
-          <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
+          <Form layout="vertical" hideRequiredMark>
             <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
               {getFieldDecorator('email', {
                 rules: [
@@ -189,4 +204,4 @@ class BaseView extends Component {
   }
 }
 
-export default BaseView;
+export default Form.create()(BaseView);
