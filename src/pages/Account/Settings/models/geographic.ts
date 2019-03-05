@@ -1,6 +1,28 @@
 import { queryProvince, queryCity } from '@/services/geographic';
+import { Effect, Subscription } from 'dva';
+import { Reducer } from 'redux';
 
-export default {
+export interface IGeographicModelState {
+  province: any[];
+  city: any[];
+  isLoading: boolean;
+}
+
+export interface IGeographicModel {
+  namespace: 'geographic';
+  state: IGeographicModelState;
+  effects: {
+    fetchProvince: Effect;
+    fetchCity: Effect;
+  };
+  reducers: {
+    setProvince: Reducer<any>;
+    setCity: Reducer<any>;
+    changeLoading: Reducer<any>;
+  };
+}
+
+const GeographicModel: IGeographicModel = {
   namespace: 'geographic',
 
   state: {
@@ -63,3 +85,5 @@ export default {
     },
   },
 };
+
+export default GeographicModel;

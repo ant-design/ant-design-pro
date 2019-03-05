@@ -5,20 +5,20 @@ import { List } from 'antd';
 
 const passwordStrength = {
   strong: (
-    <font className="strong">
+    <span className="strong">
       <FormattedMessage id="app.settings.security.strong" defaultMessage="Strong" />
-    </font>
+    </span>
   ),
   medium: (
-    <font className="medium">
+    <span className="medium">
       <FormattedMessage id="app.settings.security.medium" defaultMessage="Medium" />
-    </font>
+    </span>
   ),
   weak: (
-    <font className="weak">
+    <span className="weak">
       <FormattedMessage id="app.settings.security.weak" defaultMessage="Weak" />
       Weak
-    </font>
+    </span>
   ),
 };
 

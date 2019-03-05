@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Select, Spin } from 'antd';
 import { connect } from 'dva';
+import { Dispatch } from 'redux';
+import { WrappedFormUtils } from 'antd/lib/form/Form';
 import styles from './GeographicView.less';
 
 const { Option } = Select;
@@ -10,6 +12,16 @@ const nullSlectItem = {
   key: '',
 };
 
+interface GeographicProps {
+  province?: any[];
+  city?: any[];
+  isLoading?: boolean;
+  dispatch?: Dispatch<any>;
+  value?: any;
+  onChange?: ({ province: any, city: object }) => void;
+  form?: WrappedFormUtils;
+}
+
 @connect(({ geographic }) => {
   const { province, isLoading, city } = geographic;
   return {
@@ -18,7 +30,7 @@ const nullSlectItem = {
     isLoading,
   };
 })
-class GeographicView extends PureComponent {
+class GeographicView extends PureComponent<GeographicProps> {
   componentDidMount = () => {
     const { dispatch } = this.props;
     dispatch({
@@ -50,7 +62,7 @@ class GeographicView extends PureComponent {
   getOption = list => {
     if (!list || list.length < 1) {
       return (
-        <Option key={0} value={0}>
+        <Option key="0" value={0}>
           没有找到选项
         </Option>
       );
