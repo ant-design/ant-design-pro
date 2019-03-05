@@ -18,6 +18,8 @@ export interface IPageHeaderProps {
   home?: React.ReactNode;
   wide?: boolean;
   hiddenBreadcrumb?: boolean;
+  location?:any
+  breadcrumbNameMap?:any;
 }
 
 export default class PageHeader extends React.Component<IPageHeaderProps, any> {}
