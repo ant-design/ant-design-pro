@@ -10,12 +10,12 @@ export default class PromiseRender extends React.PureComponent {
     super(props);
     this.isPromised = false;
   }
-  
+
   componentDidMount() {
     if (this.isPromised === false) {
-        this.setRenderComponent(this.props);
+      this.setRenderComponent(this.props);
     } else {
-        this.isPromised = false;
+      this.isPromised = false;
     }
   }
 
