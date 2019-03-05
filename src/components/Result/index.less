@@ -2,10 +2,12 @@
 
 .result {
   width: 72%;
+  min-width: 600px;
   margin: 0 auto;
   text-align: center;
-  @media screen and (max-width: @screen-xs) {
-    width: 100%;
+  @media screen and (max-width: @screen-md) {
+    width: 90%;
+    min-width: unset;
   }
 
   .icon {
