@@ -4,6 +4,9 @@ import webpackPlugin from './plugin.config';
 import defaultSettings from '../src/defaultSettings';
 import slash from 'slash2';
 
+const { pwa, primaryColor } = defaultSettings;
+const { NODE_ENV, APP_TYPE, TEST } = process.env;
+
 const plugins = [
   [
     'umi-plugin-react',
@@ -20,6 +23,7 @@ const plugins = [
       dynamicImport: {
         loadingComponent: './components/PageLoading/index',
         webpackChunkName: true,
+        level: 3,
       },
       pwa: {
         workboxPluginMode: 'InjectManifest',
@@ -51,7 +55,7 @@ const plugins = [
 
 // 针对 preview.pro.ant.design 的 GA 统计代码
 // 业务上不需要这个
-if (process.env.APP_TYPE === 'site') {
+if (APP_TYPE === 'site') {
   plugins.push([
     'umi-plugin-ga',
     {
@@ -64,7 +68,7 @@ export default {
   // add for transfer to umi
   plugins,
   define: {
-    APP_TYPE: process.env.APP_TYPE || '',
+    APP_TYPE: APP_TYPE || '',
   },
   treeShaking: true,
   targets: {
@@ -96,10 +100,11 @@ export default {
   // Theme for antd
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
-    'primary-color': defaultSettings.primaryColor,
+    'primary-color': primaryColor,
   },
   externals: {
     '@antv/data-set': 'DataSet',
+    bizcharts: 'BizCharts',
   },
   // proxy: {
   //   '/server/api/': {
