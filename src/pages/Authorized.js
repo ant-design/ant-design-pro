@@ -4,8 +4,8 @@ import pathToRegexp from 'path-to-regexp';
 import { connect } from 'dva';
 import Authorized from '@/utils/Authorized';
 
-function AuthComponent({ children, location, routerData, status }) {
-  const isLogin = status === 'ok';
+function AuthComponent({ children, location, routerData, currentCuser }) {
+  const isLogin = currentCuser && currentCuser.name;
 
   const getRouteAuthority = (pathname, routeData) => {
     const routes = routeData.slice(); // clone
@@ -38,7 +38,7 @@ function AuthComponent({ children, location, routerData, status }) {
     </Authorized>
   );
 }
-export default connect(({ menu: menuModel, login: loginModel }) => ({
+export default connect(({ menu: menuModel, user: userModel }) => ({
   routerData: menuModel.routerData,
-  status: loginModel.status,
+  currentCuser: userModel.currentCuser,
 }))(AuthComponent);
