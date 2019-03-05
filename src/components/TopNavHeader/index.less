@@ -1,15 +1,15 @@
 @import '~antd/lib/style/themes/default.less';
 
 .head {
+  position: relative;
   width: 100%;
-  transition: background 0.3s, width 0.2s;
   height: @layout-header-height;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  position: relative;
+  transition: background 0.3s, width 0.2s;
   :global {
     .ant-menu-submenu.ant-menu-submenu-horizontal {
-      line-height: @layout-header-height;
       height: 100%;
+      line-height: @layout-header-height;
       .ant-menu-submenu-title {
         height: 100%;
       }
@@ -28,8 +28,8 @@
       padding-left: 0;
     }
     .left {
-      flex: 1;
       display: flex;
+      flex: 1;
     }
     .right {
       width: 324px;
@@ -38,24 +38,24 @@
 }
 
 .logo {
+  position: relative;
   width: 165px;
   height: @layout-header-height;
-  position: relative;
+  overflow: hidden;
   line-height: @layout-header-height;
   transition: all 0.3s;
-  overflow: hidden;
   img {
     display: inline-block;
-    vertical-align: middle;
     height: 32px;
+    vertical-align: middle;
   }
   h1 {
-    color: #fff;
     display: inline-block;
-    vertical-align: top;
-    font-size: 16px;
     margin: 0 0 0 12px;
+    color: #fff;
     font-weight: 400;
+    font-size: 16px;
+    vertical-align: top;
   }
 }
 
@@ -66,7 +66,7 @@
 }
 
 .menu {
-  border: none;
   height: @layout-header-height;
   line-height: @layout-header-height;
+  border: none;
 }

@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: HeaderSearch
-  zh-CN: HeaderSearch
+title: HeaderSearch
 subtitle: 顶部搜索框
 cols: 1
 order: 8
@@ -21,4 +19,4 @@ onSelect | 被选中时调用，参数为选中项的 value 值 | function(value
 onPressEnter | 按下回车时的回调 | function(value) | -
 onVisibleChange | 显示或隐藏文本框的回调 | function(value) |-
 defaultOpen | 输入框首次显示是否显示  | boolean | false
-open | 控制输入框是否显示 | booelan |false
+open | 控制输入框是否显示 | boolean |false
