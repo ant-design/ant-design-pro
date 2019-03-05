@@ -18,8 +18,9 @@ export interface IPageHeaderProps {
   home?: React.ReactNode;
   wide?: boolean;
   hiddenBreadcrumb?: boolean;
-  location?:any
-  breadcrumbNameMap?:any;
+  location?: any
+  itemRender: (menuItem: any) => React.ReactNode;
+  breadcrumbNameMap?: any;
 }
 
-export default class PageHeader extends React.Component<IPageHeaderProps, any> {}
+export default class PageHeader extends React.Component<IPageHeaderProps, any> { }
