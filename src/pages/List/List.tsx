@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import router from 'umi/router';
 import { connect } from 'dva';
 import { Input } from 'antd';
+import { match } from 'react-router';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
+interface ISearchListProps {
+  dispatch: (args: any) => void;
+  loading: boolean;
+  match: match;
+  location: Location;
+}
+
 @connect()
-class SearchList extends Component {
+class SearchList extends Component<ISearchListProps> {
   handleTabChange = key => {
     const { match } = this.props;
     switch (key) {

@@ -1,6 +1,30 @@
 import { queryRule, removeRule, addRule, updateRule } from '@/services/api';
+import { Effect } from 'dva';
+import { Reducer } from 'redux';
 
-export default {
+export interface IRuleModelState {
+  data: {
+    list: any[];
+    pagination: object;
+  };
+  list?: any[];
+}
+
+export interface IRuleModel {
+  namespace: 'rule';
+  state: IRuleModelState;
+  effects: {
+    fetch: Effect;
+    add: Effect;
+    remove: Effect;
+    update: Effect;
+  };
+  reducers: {
+    save: Reducer<any>;
+  };
+}
+
+const RuleModel: IRuleModel = {
   namespace: 'rule',
 
   state: {
@@ -53,3 +77,5 @@ export default {
     },
   },
 };
+
+export default RuleModel;

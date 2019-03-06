@@ -1,37 +1,30 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import { Form, Card, Select, List, Tag, Icon, Row, Col, Button } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
 import { FormattedMessage } from 'umi-plugin-locale';
-
 import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
 import ArticleListContent from '@/components/ArticleListContent';
 import styles from './Articles.less';
+import { IRuleModelState } from './models/rule';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 
 const pageSize = 5;
 
+interface ISearchListProps extends FormComponentProps {
+  list: IRuleModelState;
+  dispatch: (args: any) => void;
+  loading: boolean;
+}
+
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-@Form.create({
-  onValuesChange({ dispatch }, changedValues, allValues) {
-    // 表单项变化时请求数据
-    // eslint-disable-next-line
-    console.log(changedValues, allValues);
-    // 模拟查询表单生效
-    dispatch({
-      type: 'list/fetch',
-      payload: {
-        count: 5,
-      },
-    });
-  },
-})
-class SearchList extends Component {
+class SearchList extends Component<ISearchListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -248,4 +241,17 @@ class SearchList extends Component {
   }
 }
 
-export default SearchList;
+export default Form.create({
+  onValuesChange({ dispatch }, changedValues, allValues) {
+    // 表单项变化时请求数据
+    // eslint-disable-next-line
+    console.log(changedValues, allValues);
+    // 模拟查询表单生效
+    dispatch({
+      type: 'list/fetch',
+      payload: {
+        count: 5,
+      },
+    });
+  },
+})(SearchList);

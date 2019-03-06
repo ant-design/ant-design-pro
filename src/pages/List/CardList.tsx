@@ -1,17 +1,22 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Card, Button, Icon, List } from 'antd';
-
 import Ellipsis from '@/components/Ellipsis';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-
 import styles from './CardList.less';
+import { IRuleModelState } from './models/rule';
+
+interface ICardListProps {
+  list: IRuleModelState;
+  dispatch: (args: any) => void;
+  loading: boolean;
+}
 
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-class CardList extends PureComponent {
+class CardList extends PureComponent<ICardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

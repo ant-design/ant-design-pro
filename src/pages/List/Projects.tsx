@@ -2,39 +2,31 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { Row, Col, Form, Card, Select, List } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
 import { FormattedMessage } from 'umi-plugin-locale';
-
 import TagSelect from '@/components/TagSelect';
 import AvatarList from '@/components/AvatarList';
 import Ellipsis from '@/components/Ellipsis';
 import StandardFormRow from '@/components/StandardFormRow';
-
 import styles from './Projects.less';
+import { IRuleModelState } from './models/rule';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 
 /* eslint react/no-array-index-key: 0 */
 
+interface ICoverCardListProps extends FormComponentProps {
+  list: IRuleModelState;
+  dispatch: (args: any) => void;
+  loading: boolean;
+}
+
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-@Form.create({
-  onValuesChange({ dispatch }, changedValues, allValues) {
-    // 表单项变化时请求数据
-    // eslint-disable-next-line
-    console.log(changedValues, allValues);
-    // 模拟查询表单生效
-    dispatch({
-      type: 'list/fetch',
-      payload: {
-        count: 8,
-      },
-    });
-  },
-})
-class CoverCardList extends PureComponent {
+class CoverCardList extends PureComponent<ICoverCardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -160,4 +152,17 @@ class CoverCardList extends PureComponent {
   }
 }
 
-export default CoverCardList;
+export default Form.create({
+  onValuesChange({ dispatch }, changedValues, allValues) {
+    // 表单项变化时请求数据
+    // eslint-disable-next-line
+    console.log(changedValues, allValues);
+    // 模拟查询表单生效
+    dispatch({
+      type: 'list/fetch',
+      payload: {
+        count: 8,
+      },
+    });
+  },
+})(CoverCardList);

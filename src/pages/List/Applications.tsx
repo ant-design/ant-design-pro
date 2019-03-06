@@ -3,35 +3,27 @@ import numeral from 'numeral';
 import { connect } from 'dva';
 import { FormattedMessage } from 'umi-plugin-locale';
 import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
 import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
-
 import { formatWan } from '@/utils/utils';
-
 import styles from './Applications.less';
+import { IRuleModelState } from './models/rule';
 
 const { Option } = Select;
 const FormItem = Form.Item;
+
+interface IFilterCardListProps extends FormComponentProps {
+  list: IRuleModelState;
+  dispatch: (args: any) => void;
+  loading: boolean;
+}
 
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-@Form.create({
-  onValuesChange({ dispatch }, changedValues, allValues) {
-    // 表单项变化时请求数据
-    // eslint-disable-next-line
-    console.log(changedValues, allValues);
-    // 模拟查询表单生效
-    dispatch({
-      type: 'list/fetch',
-      payload: {
-        count: 8,
-      },
-    });
-  },
-})
-class FilterCardList extends PureComponent {
+class FilterCardList extends PureComponent<IFilterCardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -100,7 +92,7 @@ class FilterCardList extends PureComponent {
 
     return (
       <div className={styles.filterCardList}>
-        <Card bordered={false}>
+        <Card bordered={false} style={{ marginBottom: 24 }}>
           <Form layout="inline">
             <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
@@ -149,7 +141,6 @@ class FilterCardList extends PureComponent {
         </Card>
         <List
           rowKey="id"
-          style={{ marginTop: 24 }}
           grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
           loading={loading}
           dataSource={list}
@@ -189,4 +180,17 @@ class FilterCardList extends PureComponent {
   }
 }
 
-export default FilterCardList;
+export default Form.create({
+  onValuesChange({ dispatch }, changedValues, allValues) {
+    // 表单项变化时请求数据
+    // eslint-disable-next-line
+    console.log(changedValues, allValues);
+    // 模拟查询表单生效
+    dispatch({
+      type: 'list/fetch',
+      payload: {
+        count: 8,
+      },
+    });
+  },
+})(FilterCardList);
