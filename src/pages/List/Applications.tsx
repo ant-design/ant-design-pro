@@ -3,7 +3,7 @@ import numeral from 'numeral';
 import { connect } from 'dva';
 import { FormattedMessage } from 'umi-plugin-locale';
 import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import { FormComponentProps } from 'antd/es/form';
 import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
 import { formatWan } from '@/utils/utils';

@@ -22,9 +22,9 @@ import {
   Steps,
   Radio,
 } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
-import { SorterResult, TableCurrentDataSource } from 'antd/lib/table';
-import { PaginationConfig } from 'antd/lib/pagination';
+import { FormComponentProps } from 'antd/es/form';
+import { SorterResult, TableCurrentDataSource } from 'antd/es/table';
+import { PaginationConfig } from 'antd/es/pagination';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './TableList.less';
