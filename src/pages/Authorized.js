@@ -7,27 +7,24 @@ import Authorized from '@/utils/Authorized';
 function AuthComponent({ children, location, routerData, status }) {
   const isLogin = status === 'ok';
 
-  const getRouteAuthority = (pathname, routeData) => {
-    const routes = routeData.slice(); // clone
-
-    const getAuthority = (routeDatas, path) => {
-      let authorities;
-      routeDatas.forEach(route => {
-        // check partial route
-        if (pathToRegexp(`${route.path}(.*)`).test(path)) {
-          if (route.authority) {
-            authorities = route.authority;
-          }
-          // is exact route?
-          if (!pathToRegexp(route.path).test(path) && route.routes) {
-            authorities = getAuthority(route.routes, path);
+  const getRouteAuthority = (path, routeData) => {
+    let authorities;
+    routeData.forEach(route => {
+      // match prefix
+      if (pathToRegexp(`${route.path}(.*)`).test(path)) {
+        if (route.authority) {
+          authorities = route.authority;
+        }
+        // get children authority recursively
+        if (route.routes) {
+          const auths = getRouteAuthority(path, route.routes);
+          if (auths) {
+            authorities = auths;
           }
         }
-      });
-      return authorities;
-    };
-
-    return getAuthority(routes, pathname);
+      }
+    });
+    return authorities;
   };
   return (
     <Authorized
