@@ -3,7 +3,7 @@ import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import PageLoading from '@/components/PageLoading';
 import { getTimeDistance } from '@/utils/utils';
 import { Col, Dropdown, Icon, Menu, Row } from 'antd';
-import { RangePickerValue } from 'antd/lib/date-picker/interface';
+import { RangePickerValue } from 'antd/es/date-picker/interface';
 import { connect } from 'dva';
 import * as H from 'history';
 import React, { Component, Suspense } from 'react';
