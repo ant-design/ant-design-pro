@@ -12,6 +12,7 @@ import {
   Select,
   Popover,
 } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -57,11 +58,16 @@ const tableData = [
   },
 ];
 
+interface IAdvancedFormProps extends FormComponentProps {
+  location: Location;
+  dispatch: (args: any) => void;
+  submitting: boolean;
+}
+
 @connect(({ loading }) => ({
   submitting: loading.effects['form/submitAdvancedForm'],
 }))
-@Form.create()
-class AdvancedForm extends PureComponent {
+class AdvancedForm extends PureComponent<IAdvancedFormProps> {
   state = {
     width: '100%',
   };
@@ -108,7 +114,7 @@ class AdvancedForm extends PureComponent {
           content={errorList}
           overlayClassName={styles.errorPopover}
           trigger="click"
-          getPopupContainer={trigger => trigger.parentNode}
+          getPopupContainer={trigger => (trigger as any).parentNode}
         >
           <Icon type="exclamation-circle" />
         </Popover>
@@ -119,7 +125,7 @@ class AdvancedForm extends PureComponent {
 
   resizeFooterToolbar = () => {
     requestAnimationFrame(() => {
-      const sider = document.querySelectorAll('.ant-layout-sider')[0];
+      const sider = document.querySelectorAll('.ant-layout-sider')[0] as HTMLElement;
       if (sider) {
         const width = `calc(100% - ${sider.style.width})`;
         const { width: stateWidth } = this.state;
@@ -284,7 +290,7 @@ class AdvancedForm extends PureComponent {
                     <TimePicker
                       placeholder="提醒时间"
                       style={{ width: '100%' }}
-                      getPopupContainer={trigger => trigger.parentNode}
+                      getPopupContainer={trigger => (trigger as any).parentNode}
                     />
                   )}
                 </Form.Item>
@@ -320,4 +326,4 @@ class AdvancedForm extends PureComponent {
   }
 }
 
-export default AdvancedForm;
+export default Form.create()(AdvancedForm);
