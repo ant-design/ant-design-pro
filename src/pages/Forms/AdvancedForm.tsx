@@ -114,7 +114,7 @@ class AdvancedForm extends PureComponent<IAdvancedFormProps> {
           content={errorList}
           overlayClassName={styles.errorPopover}
           trigger="click"
-          getPopupContainer={trigger => (trigger as any).parentNode}
+          getPopupContainer={trigger => trigger.parentNode as HTMLElement}
         >
           <Icon type="exclamation-circle" />
         </Popover>
@@ -290,7 +290,7 @@ class AdvancedForm extends PureComponent<IAdvancedFormProps> {
                     <TimePicker
                       placeholder="提醒时间"
                       style={{ width: '100%' }}
-                      getPopupContainer={trigger => (trigger as any).parentNode}
+                      getPopupContainer={trigger => trigger.parentNode as HTMLElement}
                     />
                   )}
                 </Form.Item>
