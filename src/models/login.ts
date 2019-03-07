@@ -8,7 +8,8 @@ import { stringify } from 'qs';
 import { Reducer } from 'redux';
 
 export interface ILoginModelState {
-  status?: boolean;
+  status?: string;
+  type?: string;
 }
 
 export interface ILoginModel {

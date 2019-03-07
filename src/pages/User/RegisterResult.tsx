@@ -20,7 +20,15 @@ const actions = (
   </div>
 );
 
-const RegisterResult = ({ location }) => (
+interface IRegisterResultProps {
+  location: {
+    state?: {
+      account?: string;
+    };
+  };
+}
+
+const RegisterResult: React.SFC<IRegisterResultProps> = ({ location }) => (
   <Result
     className={styles.registerResult}
     type="success"

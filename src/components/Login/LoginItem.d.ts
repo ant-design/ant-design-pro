@@ -6,6 +6,10 @@ export interface ILoginItemProps {
   onGetCaptcha?: () => void;
   placeholder?: string;
   buttonText?: React.ReactNode;
+  onPressEnter?: (e: any) => void;
+  countDown?: number;
+  getCaptchaButtonText?: string;
+  getCaptchaSecondText?: string;
 }
 
 export default class LoginItem extends React.Component<ILoginItemProps, any> {}

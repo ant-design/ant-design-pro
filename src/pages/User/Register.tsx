@@ -4,7 +4,9 @@ import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
 import router from 'umi/router';
 import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
 import styles from './Register.less';
+import { IRegisterModelState } from './models/register';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -28,18 +30,27 @@ const passwordStatusMap = {
   ),
 };
 
-const passwordProgressMap = {
+const passwordProgressMap: {
+  ok: 'normal' | 'active' | 'success' | 'exception';
+  pass: 'normal' | 'active' | 'success' | 'exception';
+  poor: 'normal' | 'active' | 'success' | 'exception';
+} = {
   ok: 'success',
   pass: 'normal',
   poor: 'exception',
 };
 
+interface IRegisterProps extends FormComponentProps {
+  register: IRegisterModelState;
+  dispatch: (args: any) => void;
+  submitting: boolean;
+}
+
 @connect(({ register, loading }) => ({
   register,
   submitting: loading.effects['register/submit'],
 }))
-@Form.create()
-class Register extends Component {
+class Register extends Component<IRegisterProps> {
   state = {
     count: 0,
     confirmDirty: false,
@@ -47,6 +58,8 @@ class Register extends Component {
     help: '',
     prefix: '86',
   };
+
+  interval: NodeJS.Timeout;
 
   componentDidUpdate() {
     const { form, register } = this.props;
@@ -201,7 +214,7 @@ class Register extends Component {
           </FormItem>
           <FormItem help={help}>
             <Popover
-              getPopupContainer={node => node.parentNode}
+              getPopupContainer={node => node.parentNode as HTMLElement}
               content={
                 <div style={{ padding: '4px 0' }}>
                   {passwordStatusMap[this.getPasswordStatus()]}
@@ -300,7 +313,7 @@ class Register extends Component {
               <Col span={8}>
                 <Button
                   size="large"
-                  disabled={count}
+                  disabled={!!count}
                   className={styles.getCaptcha}
                   onClick={this.onGetCaptcha}
                 >
@@ -331,4 +344,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default Form.create()(Register);

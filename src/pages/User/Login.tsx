@@ -5,18 +5,27 @@ import Link from 'umi/link';
 import { Checkbox, Alert, Icon } from 'antd';
 import Login from '@/components/Login';
 import styles from './Login.less';
+import { ILoginModelState } from '@/models/login';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
+
+interface ILoginPageProps {
+  login: ILoginModelState;
+  dispatch: (args: any) => Promise<any>;
+  submitting: boolean;
+}
 
 @connect(({ login, loading }) => ({
   login,
   submitting: loading.effects['login/login'],
 }))
-class LoginPage extends Component {
+class LoginPage extends Component<ILoginPageProps> {
   state = {
     type: 'account',
     autoLogin: true,
   };
+
+  loginForm: Login;
 
   onTabChange = type => {
     this.setState({ type });
