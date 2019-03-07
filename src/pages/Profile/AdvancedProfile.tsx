@@ -21,6 +21,7 @@ import classNames from 'classnames';
 import DescriptionList from '@/components/DescriptionList';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './AdvancedProfile.less';
+import { IProfileModelState } from './models/profile';
 
 const { Step } = Steps;
 const { Description } = DescriptionList;
@@ -65,7 +66,7 @@ const extra = (
 );
 
 const description = (
-  <DescriptionList className={styles.headerList} size="small" col="2">
+  <DescriptionList className={styles.headerList} size="small" col={2}>
     <Description term="创建人">曲丽丽</Description>
     <Description term="订购产品">XX 服务</Description>
     <Description term="创建时间">2017-07-07</Description>
@@ -110,11 +111,15 @@ const desc2 = (
   </div>
 );
 
+// https://github.com/ant-design/ant-design/pull/1526  这个函数的as any
 const popoverContent = (
   <div style={{ width: 160 }}>
     吴加号
     <span className={styles.textSecondary} style={{ float: 'right' }}>
-      <Badge status="default" text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span>} />
+      <Badge
+        status="default"
+        text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span> as any}
+      />
     </span>
     <div className={styles.textSecondary} style={{ marginTop: 4 }}>
       耗时：2小时25分钟
@@ -180,14 +185,25 @@ const columns = [
   },
 ];
 
+interface IAdvancedProfileProps {
+  profile: IProfileModelState;
+  dispatch: (args: any) => void;
+  loading: boolean;
+}
+
+interface IAdvancedProfileState {
+  operationkey: string;
+  stepDirection: 'horizontal' | 'vertical';
+}
+
 @connect(({ profile, loading }) => ({
   profile,
   loading: loading.effects['profile/fetchAdvanced'],
 }))
-class AdvancedProfile extends Component {
+class AdvancedProfile extends Component<IAdvancedProfileProps, IAdvancedProfileState> {
   state = {
     operationkey: 'tab1',
-    stepDirection: 'horizontal',
+    stepDirection: 'horizontal' as ('horizontal' | 'vertical'),
   };
 
   componentDidMount() {
@@ -202,6 +218,7 @@ class AdvancedProfile extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.setStepDirection);
+    // 使用Debounce注解之后，会有两个函数 cancel  和 flush;
     this.setStepDirection.cancel();
   }
 
@@ -318,7 +335,7 @@ class AdvancedProfile extends Component {
               </Description>
             </DescriptionList>
             <Divider style={{ margin: '16px 0' }} />
-            <DescriptionList size="small" style={{ marginBottom: 16 }} title="组名称" col="1">
+            <DescriptionList size="small" style={{ marginBottom: 16 }} title="组名称" col={1}>
               <Description term="学名">
                 Citrullus lanatus (Thunb.) Matsum. et
                 Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Card, Badge, Table, Divider } from 'antd';
+import { ColumnProps } from 'antd/es/table';
+import { match } from 'react-router';
 import DescriptionList from '@/components/DescriptionList';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './BasicProfile.less';
+import { IProfileModelState } from './models/profile';
 
 const { Description } = DescriptionList;
 
@@ -41,24 +44,36 @@ const progressColumns = [
   },
 ];
 
+interface IBasicProfileProps {
+  profile: IProfileModelState;
+  dispatch: (args: any) => void;
+  loading: boolean;
+  match: match;
+}
+
 @connect(({ profile, loading }) => ({
   profile,
   loading: loading.effects['profile/fetchBasic'],
 }))
-class BasicProfile extends Component {
+class BasicProfile extends Component<IBasicProfileProps> {
   componentDidMount() {
     const { dispatch, match } = this.props;
     const { params } = match;
 
     dispatch({
       type: 'profile/fetchBasic',
-      payload: params.id || '1000000000',
+      payload: (params as { id: string }).id || '1000000000',
     });
   }
 
   render() {
     const { profile = {}, loading } = this.props;
-    const { basicGoods = [], basicProgress = [], userInfo = {}, application = {} } = profile;
+    const {
+      basicGoods = [],
+      basicProgress = [],
+      userInfo = {},
+      application = {},
+    } = profile as IProfileModelState;
     let goodsData = [];
     if (basicGoods.length) {
       let num = 0;
@@ -74,7 +89,7 @@ class BasicProfile extends Component {
       });
     }
     const renderContent = (value, row, index) => {
-      const obj = {
+      const obj: { children: any; props: { colSpan?: number } } = {
         children: value,
         props: {},
       };
@@ -83,7 +98,7 @@ class BasicProfile extends Component {
       }
       return obj;
     };
-    const goodsColumns = [
+    const goodsColumns: ColumnProps<any>[] = [
       {
         title: '商品编号',
         dataIndex: 'id',
