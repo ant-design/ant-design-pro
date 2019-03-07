@@ -1,40 +1,29 @@
 import React, { PureComponent } from 'react';
-import moment from 'moment';
+import numeral from 'numeral';
 import { connect } from 'dva';
-import { Row, Col, Form, Card, Select, List } from 'antd';
 import { FormattedMessage } from 'umi-plugin-locale';
-
+import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
 import TagSelect from '@/components/TagSelect';
-import AvatarList from '@/components/AvatarList';
-import Ellipsis from '@/components/Ellipsis';
 import StandardFormRow from '@/components/StandardFormRow';
-
-import styles from './Projects.less';
+import { formatWan } from '@/utils/utils';
+import styles from './Applications.less';
+import { IRuleModelState } from './models/rule';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 
-/* eslint react/no-array-index-key: 0 */
+interface IFilterCardListProps extends FormComponentProps {
+  list: IRuleModelState;
+  dispatch: (args: any) => void;
+  loading: boolean;
+}
 
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-@Form.create({
-  onValuesChange({ dispatch }, changedValues, allValues) {
-    // 表单项变化时请求数据
-    // eslint-disable-next-line
-    console.log(changedValues, allValues);
-    // 模拟查询表单生效
-    dispatch({
-      type: 'list/fetch',
-      payload: {
-        count: 8,
-      },
-    });
-  },
-})
-class CoverCardList extends PureComponent {
+class FilterCardList extends PureComponent<IFilterCardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -47,48 +36,24 @@ class CoverCardList extends PureComponent {
 
   render() {
     const {
-      list: { list = [] },
+      list: { list },
       loading,
       form,
     } = this.props;
     const { getFieldDecorator } = form;
 
-    const cardList = list ? (
-      <List
-        rowKey="id"
-        loading={loading}
-        grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
-        dataSource={list}
-        renderItem={item => (
-          <List.Item>
-            <Card
-              className={styles.card}
-              hoverable
-              cover={<img alt={item.title} src={item.cover} />}
-            >
-              <Card.Meta
-                title={<a>{item.title}</a>}
-                description={<Ellipsis lines={2}>{item.subDescription}</Ellipsis>}
-              />
-              <div className={styles.cardItemContent}>
-                <span>{moment(item.updatedAt).fromNow()}</span>
-                <div className={styles.avatarList}>
-                  <AvatarList size="mini">
-                    {item.members.map((member, i) => (
-                      <AvatarList.Item
-                        key={`${item.id}-avatar-${i}`}
-                        src={member.avatar}
-                        tips={member.name}
-                      />
-                    ))}
-                  </AvatarList>
-                </div>
-              </div>
-            </Card>
-          </List.Item>
-        )}
-      />
-    ) : null;
+    const CardInfo = ({ activeUser, newUser }) => (
+      <div className={styles.cardInfo}>
+        <div>
+          <p>活跃用户</p>
+          <p>{activeUser}</p>
+        </div>
+        <div>
+          <p>新增用户</p>
+          <p>{newUser}</p>
+        </div>
+      </div>
+    );
 
     const formItemLayout = {
       wrapperCol: {
@@ -105,9 +70,29 @@ class CoverCardList extends PureComponent {
       selectAllText: <FormattedMessage id="component.tagSelect.all" defaultMessage="All" />,
     };
 
+    const itemMenu = (
+      <Menu>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.alipay.com/">
+            1st menu item
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.taobao.com/">
+            2nd menu item
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.tmall.com/">
+            3d menu item
+          </a>
+        </Menu.Item>
+      </Menu>
+    );
+
     return (
-      <div className={styles.coverCardList}>
-        <Card bordered={false}>
+      <div className={styles.filterCardList}>
+        <Card bordered={false} style={{ marginBottom: 24 }}>
           <Form layout="inline">
             <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
@@ -154,10 +139,58 @@ class CoverCardList extends PureComponent {
             </StandardFormRow>
           </Form>
         </Card>
-        <div className={styles.cardList}>{cardList}</div>
+        <List
+          rowKey="id"
+          grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
+          loading={loading}
+          dataSource={list}
+          renderItem={item => (
+            <List.Item key={item.id}>
+              <Card
+                hoverable
+                bodyStyle={{ paddingBottom: 20 }}
+                actions={[
+                  <Tooltip title="下载">
+                    <Icon type="download" />
+                  </Tooltip>,
+                  <Tooltip title="编辑">
+                    <Icon type="edit" />
+                  </Tooltip>,
+                  <Tooltip title="分享">
+                    <Icon type="share-alt" />
+                  </Tooltip>,
+                  <Dropdown overlay={itemMenu}>
+                    <Icon type="ellipsis" />
+                  </Dropdown>,
+                ]}
+              >
+                <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
+                <div className={styles.cardItemContent}>
+                  <CardInfo
+                    activeUser={formatWan(item.activeUser)}
+                    newUser={numeral(item.newUser).format('0,0')}
+                  />
+                </div>
+              </Card>
+            </List.Item>
+          )}
+        />
       </div>
     );
   }
 }
 
-export default CoverCardList;
+export default Form.create({
+  onValuesChange({ dispatch }, changedValues, allValues) {
+    // 表单项变化时请求数据
+    // eslint-disable-next-line
+    console.log(changedValues, allValues);
+    // 模拟查询表单生效
+    dispatch({
+      type: 'list/fetch',
+      payload: {
+        count: 8,
+      },
+    });
+  },
+})(FilterCardList);

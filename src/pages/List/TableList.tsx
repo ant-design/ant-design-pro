@@ -22,10 +22,13 @@ import {
   Steps,
   Radio,
 } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
+import { SorterResult, TableCurrentDataSource } from 'antd/es/table';
+import { PaginationConfig } from 'antd/es/pagination';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-
 import styles from './TableList.less';
+import { IRuleModelState } from './models/rule';
 
 const FormItem = Form.Item;
 const { Step } = Steps;
@@ -36,10 +39,16 @@ const getValue = obj =>
   Object.keys(obj)
     .map(key => obj[key])
     .join(',');
-const statusMap = ['default', 'processing', 'success', 'error'];
+const statusMap: any = ['default', 'processing', 'success', 'error'];
 const status = ['关闭', '运行中', '已上线', '异常'];
 
-const CreateForm = Form.create()(props => {
+interface ICreateFormProps extends FormComponentProps {
+  modalVisible: boolean;
+  handleAdd: (fields: any) => void;
+  handleModalVisible: (flag?: boolean) => void;
+}
+
+const CreateFormFunc: React.SFC<ICreateFormProps> = props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
@@ -63,15 +72,24 @@ const CreateForm = Form.create()(props => {
       </FormItem>
     </Modal>
   );
-});
+};
 
-@Form.create()
-class UpdateForm extends PureComponent {
-  static defaultProps = {
-    handleUpdate: () => {},
-    handleUpdateModalVisible: () => {},
-    values: {},
-  };
+const CreateForm = Form.create()(CreateFormFunc);
+
+interface IUpdateFormProps extends FormComponentProps {
+  handleUpdate: (e?: any) => void;
+  handleUpdateModalVisible: (flag?: boolean, record?: any) => void;
+  updateModalVisible: boolean;
+  values: {};
+}
+
+interface IUpdateFormState {
+  formVals: {};
+  currentStep: number;
+}
+
+class UpdateFormClass extends PureComponent<IUpdateFormProps, IUpdateFormState> {
+  formLayout: object;
 
   constructor(props) {
     super(props);
@@ -273,13 +291,29 @@ class UpdateForm extends PureComponent {
   }
 }
 
+const UpdateForm = Form.create()(UpdateFormClass);
+
+interface ITableListProps extends FormComponentProps {
+  dispatch: (args: any) => void;
+  rule: IRuleModelState;
+  loading: boolean;
+}
+
+interface ITableListState {
+  modalVisible: boolean;
+  updateModalVisible: boolean;
+  expandForm: boolean;
+  selectedRows: any[];
+  formValues: object;
+  stepFormValues: object;
+}
+
 /* eslint react/no-multi-comp:0 */
 @connect(({ rule, loading }) => ({
   rule,
   loading: loading.models.rule,
 }))
-@Form.create()
-class TableList extends PureComponent {
+class TableList extends PureComponent<ITableListProps, ITableListState> {
   state = {
     modalVisible: false,
     updateModalVisible: false,
@@ -289,66 +323,9 @@ class TableList extends PureComponent {
     stepFormValues: {},
   };
 
-  columns = [
-    {
-      title: '规则名称',
-      dataIndex: 'name',
-      render: text => <a onClick={() => this.previewItem(text)}>{text}</a>,
-    },
-    {
-      title: '描述',
-      dataIndex: 'desc',
-    },
-    {
-      title: '服务调用次数',
-      dataIndex: 'callNo',
-      sorter: true,
-      render: val => `${val} 万`,
-      // mark to display a total number
-      needTotal: true,
-    },
-    {
-      title: '状态',
-      dataIndex: 'status',
-      filters: [
-        {
-          text: status[0],
-          value: 0,
-        },
-        {
-          text: status[1],
-          value: 1,
-        },
-        {
-          text: status[2],
-          value: 2,
-        },
-        {
-          text: status[3],
-          value: 3,
-        },
-      ],
-      render(val) {
-        return <Badge status={statusMap[val]} text={status[val]} />;
-      },
-    },
-    {
-      title: '上次调度时间',
-      dataIndex: 'updatedAt',
-      sorter: true,
-      render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
-    },
-    {
-      title: '操作',
-      render: (text, record) => (
-        <Fragment>
-          <a onClick={() => this.handleUpdateModalVisible(true, record)}>配置</a>
-          <Divider type="vertical" />
-          <a href="">订阅警报</a>
-        </Fragment>
-      ),
-    },
-  ];
+  previewItem = id => {
+    router.push(`/profile/basic/${id}`);
+  };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -357,7 +334,12 @@ class TableList extends PureComponent {
     });
   }
 
-  handleStandardTableChange = (pagination, filtersArg, sorter) => {
+  handleStandardTableChange: (
+    pagination: PaginationConfig,
+    filters: Record<any, any>,
+    sorter: SorterResult<any>,
+    extra: TableCurrentDataSource<any>
+  ) => void = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
 
@@ -370,6 +352,7 @@ class TableList extends PureComponent {
     const params = {
       currentPage: pagination.current,
       pageSize: pagination.pageSize,
+      sorter: '',
       ...formValues,
       ...filters,
     };
@@ -381,10 +364,6 @@ class TableList extends PureComponent {
       type: 'rule/fetch',
       payload: params,
     });
-  };
-
-  previewItem = id => {
-    router.push(`/profile/basic/${id}`);
   };
 
   handleFormReset = () => {
@@ -460,13 +439,13 @@ class TableList extends PureComponent {
     });
   };
 
-  handleModalVisible = flag => {
+  handleModalVisible: (flag?: boolean) => void = flag => {
     this.setState({
       modalVisible: !!flag,
     });
   };
 
-  handleUpdateModalVisible = (flag, record) => {
+  handleUpdateModalVisible: (flag?: boolean, record?: any) => void = (flag, record) => {
     this.setState({
       updateModalVisible: !!flag,
       stepFormValues: record || {},
@@ -504,6 +483,66 @@ class TableList extends PureComponent {
     message.success('配置成功');
     this.handleUpdateModalVisible();
   };
+  columns = [
+    {
+      title: '规则名称',
+      dataIndex: 'name',
+      render: text => <a onClick={() => this.previewItem(text)}>{text}</a>,
+    },
+    {
+      title: '描述',
+      dataIndex: 'desc',
+    },
+    {
+      title: '服务调用次数',
+      dataIndex: 'callNo',
+      sorter: true,
+      render: val => `${val} 万`,
+      // mark to display a total number
+      needTotal: true,
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      filters: [
+        {
+          text: status[0],
+          value: 0,
+        },
+        {
+          text: status[1],
+          value: 1,
+        },
+        {
+          text: status[2],
+          value: 2,
+        },
+        {
+          text: status[3],
+          value: 3,
+        },
+      ],
+      render(val) {
+        return <Badge status={statusMap[val]} text={status[val]} />;
+      },
+    },
+    {
+      title: '上次调度时间',
+      dataIndex: 'updatedAt',
+      sorter: true,
+      render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+    },
+    {
+      title: '操作',
+      render: (text, record) => (
+        <Fragment>
+          <a onClick={() => this.handleUpdateModalVisible(true, record)}>配置</a>
+          <Divider type="vertical" />
+          <a href="">订阅警报</a>
+        </Fragment>
+      ),
+    },
+  ];
 
   renderSimpleForm() {
     const {
@@ -688,4 +727,4 @@ class TableList extends PureComponent {
   }
 }
 
-export default TableList;
+export default Form.create()(TableList);

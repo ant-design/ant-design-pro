@@ -20,11 +20,11 @@ import {
   DatePicker,
   Select,
 } from 'antd';
-
+import { FormComponentProps } from 'antd/es/form';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Result from '@/components/Result';
-
 import styles from './BasicList.less';
+import { IRuleModelState } from './models/rule';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
@@ -32,13 +32,26 @@ const RadioGroup = Radio.Group;
 const SelectOption = Select.Option;
 const { Search, TextArea } = Input;
 
+interface IBasicListProps extends FormComponentProps {
+  list: IRuleModelState;
+  dispatch: (args: any) => void;
+  loading: boolean;
+}
+
+interface IBasicListState {
+  visible: boolean;
+  done: boolean;
+  current: object;
+}
+
 @connect(({ list, loading }) => ({
   list,
   loading: loading.models.list,
 }))
-@Form.create()
-class BasicList extends PureComponent {
-  state = { visible: false, done: false };
+class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
+  state = { visible: false, done: false, current: undefined };
+
+  addBtn: HTMLElement;
 
   formLayout = {
     labelCol: { span: 7 },
@@ -138,7 +151,15 @@ class BasicList extends PureComponent {
       ? { footer: null, onCancel: this.handleDone }
       : { okText: '保存', onOk: this.handleSubmit, onCancel: this.handleCancel };
 
-    const Info = ({ title, value, bordered }) => (
+    const Info: ({
+      title,
+      value,
+      bordered,
+    }: {
+      title: string;
+      value: string;
+      bordered?: boolean;
+    }) => JSX.Element = ({ title, value, bordered }) => (
       <div className={styles.headerInfo}>
         <span>{title}</span>
         <p>{value}</p>
@@ -284,7 +305,7 @@ class BasicList extends PureComponent {
               onClick={this.showModal}
               ref={component => {
                 /* eslint-disable */
-                this.addBtn = findDOMNode(component);
+                this.addBtn = findDOMNode(component) as HTMLElement;
                 /* eslint-enable */
               }}
             >
@@ -337,4 +358,4 @@ class BasicList extends PureComponent {
   }
 }
 
-export default BasicList;
+export default Form.create()(BasicList);
