@@ -1,6 +1,6 @@
+import { List, Switch } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { formatMessage } from 'umi-plugin-locale';
-import { Switch, List } from 'antd';
 
 class NotificationView extends Component {
   getData = () => {
@@ -8,7 +8,7 @@ class NotificationView extends Component {
       <Switch
         checkedChildren={formatMessage({ id: 'app.settings.open' })}
         unCheckedChildren={formatMessage({ id: 'app.settings.close' })}
-        defaultChecked
+        defaultChecked={true}
       />
     );
     return [

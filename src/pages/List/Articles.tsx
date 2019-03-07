@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'dva';
-import { Form, Card, Select, List, Tag, Icon, Row, Col, Button } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
-import { FormattedMessage } from 'umi-plugin-locale';
-import TagSelect from '@/components/TagSelect';
-import StandardFormRow from '@/components/StandardFormRow';
 import ArticleListContent from '@/components/ArticleListContent';
+import StandardFormRow from '@/components/StandardFormRow';
+import TagSelect from '@/components/TagSelect';
+import { Button, Card, Col, Form, Icon, List, Row, Select, Tag } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
+import { connect } from 'dva';
+import React, { Component, Fragment } from 'react';
+import { FormattedMessage } from 'umi-plugin-locale';
 import styles from './Articles.less';
 import { IRuleModelState } from './models/rule';
 
@@ -125,10 +125,10 @@ class SearchList extends Component<ISearchListProps> {
       <Fragment>
         <Card bordered={false}>
           <Form layout="inline">
-            <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
+            <StandardFormRow title="所属类目" block={true} style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
-                  <TagSelect expandable actionsText={actionsTextMap}>
+                  <TagSelect expandable={true} actionsText={actionsTextMap}>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
                     <TagSelect.Option value="cat3">类目三</TagSelect.Option>
@@ -145,7 +145,7 @@ class SearchList extends Component<ISearchListProps> {
                 )}
               </FormItem>
             </StandardFormRow>
-            <StandardFormRow title="owner" grid>
+            <StandardFormRow title="owner" grid={true}>
               <Row>
                 <Col>
                   <FormItem {...formItemLayout}>
@@ -171,7 +171,7 @@ class SearchList extends Component<ISearchListProps> {
                 </Col>
               </Row>
             </StandardFormRow>
-            <StandardFormRow title="其它选项" grid last>
+            <StandardFormRow title="其它选项" grid={true} last={true}>
               <Row gutter={16}>
                 <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                   <FormItem {...formItemLayout} label="活跃用户">

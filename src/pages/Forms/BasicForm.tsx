@@ -1,20 +1,20 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'dva';
-import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {
-  Form,
-  Input,
-  DatePicker,
-  Select,
   Button,
   Card,
+  DatePicker,
+  Form,
+  Icon,
+  Input,
   InputNumber,
   Radio,
-  Icon,
+  Select,
   Tooltip,
 } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { connect } from 'dva';
+import React, { PureComponent } from 'react';
+import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import styles from './style.less';
 
 const FormItem = Form.Item;
@@ -76,7 +76,7 @@ class BasicForms extends PureComponent<IBasicFormsProps> {
         content={<FormattedMessage id="app.forms.basic.description" />}
       >
         <Card bordered={false}>
-          <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
+          <Form onSubmit={this.handleSubmit} hideRequiredMark={true} style={{ marginTop: 8 }}>
             <FormItem {...formItemLayout} label={<FormattedMessage id="form.title.label" />}>
               {getFieldDecorator('title', {
                 rules: [

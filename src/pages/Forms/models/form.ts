@@ -1,8 +1,8 @@
-import { routerRedux } from 'dva/router';
+import { fakeSubmitForm } from '@/services/api';
 import { message } from 'antd';
 import { Effect } from 'dva';
+import { routerRedux } from 'dva/router';
 import { Reducer } from 'redux';
-import { fakeSubmitForm } from '@/services/api';
 
 export interface IFormModelState {
   step: {

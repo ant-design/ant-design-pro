@@ -1,8 +1,8 @@
+import Result from '@/components/Result';
+import { Button } from 'antd';
 import React from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
-import { Button } from 'antd';
 import Link from 'umi/link';
-import Result from '@/components/Result';
 import styles from './RegisterResult.less';
 
 const actions = (

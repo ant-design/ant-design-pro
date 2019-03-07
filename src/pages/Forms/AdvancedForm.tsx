@@ -1,23 +1,23 @@
-import React, { PureComponent } from 'react';
+import FooterToolbar from '@/components/FooterToolbar';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {
-  Card,
   Button,
+  Card,
+  Col,
+  DatePicker,
   Form,
   Icon,
-  Col,
-  Row,
-  DatePicker,
-  TimePicker,
   Input,
-  Select,
   Popover,
+  Row,
+  Select,
+  TimePicker,
 } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
-import FooterToolbar from '@/components/FooterToolbar';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import TableForm from './TableForm';
+import React, { PureComponent } from 'react';
 import styles from './style.less';
+import TableForm from './TableForm';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -166,7 +166,7 @@ class AdvancedForm extends PureComponent<IAdvancedFormProps> {
         wrapperClassName={styles.advancedForm}
       >
         <Card title="仓库管理" className={styles.card} bordered={false}>
-          <Form layout="vertical" hideRequiredMark>
+          <Form layout="vertical" hideRequiredMark={true}>
             <Row gutter={16}>
               <Col lg={6} md={12} sm={24}>
                 <Form.Item label={fieldLabels.name}>
@@ -240,7 +240,7 @@ class AdvancedForm extends PureComponent<IAdvancedFormProps> {
           </Form>
         </Card>
         <Card title="任务管理" className={styles.card} bordered={false}>
-          <Form layout="vertical" hideRequiredMark>
+          <Form layout="vertical" hideRequiredMark={true}>
             <Row gutter={16}>
               <Col lg={6} md={12} sm={24}>
                 <Form.Item label={fieldLabels.name2}>

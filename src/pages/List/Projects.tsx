@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react';
-import moment from 'moment';
-import { connect } from 'dva';
-import { Row, Col, Form, Card, Select, List } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
-import { FormattedMessage } from 'umi-plugin-locale';
-import TagSelect from '@/components/TagSelect';
 import AvatarList from '@/components/AvatarList';
 import Ellipsis from '@/components/Ellipsis';
 import StandardFormRow from '@/components/StandardFormRow';
-import styles from './Projects.less';
+import TagSelect from '@/components/TagSelect';
+import { Card, Col, Form, List, Row, Select } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
+import { connect } from 'dva';
+import moment from 'moment';
+import React, { PureComponent } from 'react';
+import { FormattedMessage } from 'umi-plugin-locale';
 import { IRuleModelState } from './models/rule';
+import styles from './Projects.less';
 
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -55,7 +55,7 @@ class CoverCardList extends PureComponent<ICoverCardListProps> {
           <List.Item>
             <Card
               className={styles.card}
-              hoverable
+              hoverable={true}
               cover={<img alt={item.title} src={item.cover} />}
             >
               <Card.Meta
@@ -101,10 +101,10 @@ class CoverCardList extends PureComponent<ICoverCardListProps> {
       <div className={styles.coverCardList}>
         <Card bordered={false}>
           <Form layout="inline">
-            <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
+            <StandardFormRow title="所属类目" block={true} style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
-                  <TagSelect expandable actionsText={actionsTextMap}>
+                  <TagSelect expandable={true} actionsText={actionsTextMap}>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
                     <TagSelect.Option value="cat3">类目三</TagSelect.Option>
@@ -121,7 +121,7 @@ class CoverCardList extends PureComponent<ICoverCardListProps> {
                 )}
               </FormItem>
             </StandardFormRow>
-            <StandardFormRow title="其它选项" grid last>
+            <StandardFormRow title="其它选项" grid={true} last={true}>
               <Row gutter={16}>
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem {...formItemLayout} label="作者">

@@ -1,6 +1,6 @@
-import React, { PureComponent, Fragment } from 'react';
-import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
+import { Button, Divider, Input, message, Popconfirm, Table } from 'antd';
 import isEqual from 'lodash/isEqual';
+import React, { Fragment, PureComponent } from 'react';
 import styles from './style.less';
 
 interface ITableFormProps {
@@ -14,6 +14,16 @@ interface ITableFormState {
 }
 
 class TableForm extends PureComponent<ITableFormProps, ITableFormState> {
+
+  static getDerivedStateFromProps(nextProps, preState) {
+    if (isEqual(nextProps.value, preState.value)) {
+      return null;
+    }
+    return {
+      data: nextProps.value,
+      value: nextProps.value,
+    };
+  }
   clickedCancel: boolean;
   index = 0;
 
@@ -27,16 +37,6 @@ class TableForm extends PureComponent<ITableFormProps, ITableFormState> {
       loading: false,
       /* eslint-disable-next-line react/no-unused-state */
       value: props.value,
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, preState) {
-    if (isEqual(nextProps.value, preState.value)) {
-      return null;
-    }
-    return {
-      data: nextProps.value,
-      value: nextProps.value,
     };
   }
 
@@ -156,7 +156,7 @@ class TableForm extends PureComponent<ITableFormProps, ITableFormState> {
             return (
               <Input
                 value={text}
-                autoFocus
+                autoFocus={true}
                 onChange={e => this.handleFieldChange(e, 'name', record.key)}
                 onKeyPress={e => this.handleKeyPress(e, record.key)}
                 placeholder="成员姓名"

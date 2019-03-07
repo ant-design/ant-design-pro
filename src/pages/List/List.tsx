@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import router from 'umi/router';
-import { connect } from 'dva';
-import { Input } from 'antd';
-import { match } from 'react-router';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { Input } from 'antd';
+import { connect } from 'dva';
+import React, { Component } from 'react';
+import { match } from 'react-router';
+import router from 'umi/router';
 
 interface ISearchListProps {
   dispatch: (args: any) => void;

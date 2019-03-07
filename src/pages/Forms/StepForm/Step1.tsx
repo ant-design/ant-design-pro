@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
-import { connect } from 'dva';
+import { Button, Divider, Form, Input, Select } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
-import { Form, Input, Button, Select, Divider } from 'antd';
+import { connect } from 'dva';
+import React, { Fragment } from 'react';
 import router from 'umi/router';
 import styles from './style.less';
 
@@ -43,7 +43,7 @@ const Info: React.SFC<IInfoFormProps> = props => {
   };
   return (
     <Fragment>
-      <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
+      <Form layout="horizontal" className={styles.stepForm} hideRequiredMark={true}>
         <Form.Item {...formItemLayout} label="付款账户">
           {getFieldDecorator('payAccount', {
             initialValue: data.payAccount,
@@ -55,7 +55,7 @@ const Info: React.SFC<IInfoFormProps> = props => {
           )}
         </Form.Item>
         <Form.Item {...formItemLayout} label="收款账户">
-          <Input.Group compact>
+          <Input.Group compact={true}>
             <Select defaultValue="alipay" style={{ width: 100 }}>
               <Option value="alipay">支付宝</Option>
               <Option value="bank">银行账户</Option>

@@ -1,28 +1,28 @@
-import React, { PureComponent } from 'react';
-import { findDOMNode } from 'react-dom';
-import moment from 'moment';
-import { connect } from 'dva';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Result from '@/components/Result';
 import {
-  List,
-  Card,
-  Row,
-  Col,
-  Radio,
-  Input,
-  Progress,
-  Button,
-  Icon,
-  Dropdown,
-  Menu,
   Avatar,
-  Modal,
-  Form,
+  Button,
+  Card,
+  Col,
   DatePicker,
+  Dropdown,
+  Form,
+  Icon,
+  Input,
+  List,
+  Menu,
+  Modal,
+  Progress,
+  Radio,
+  Row,
   Select,
 } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import Result from '@/components/Result';
+import { connect } from 'dva';
+import moment from 'moment';
+import React, { PureComponent } from 'react';
+import { findDOMNode } from 'react-dom';
 import styles from './BasicList.less';
 import { IRuleModelState } from './models/rule';
 
@@ -105,7 +105,7 @@ class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
 
     setTimeout(() => this.addBtn.blur(), 0);
     form.validateFields((err, fieldsValue) => {
-      if (err) return;
+      if (err) { return; }
       this.setState({
         done: true,
       });
@@ -135,7 +135,7 @@ class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
     const { visible, done, current = {} } = this.state;
 
     const editAndDelete = (key, currentItem) => {
-      if (key === 'edit') this.showEditModal(currentItem);
+      if (key === 'edit') { this.showEditModal(currentItem); }
       else if (key === 'delete') {
         Modal.confirm({
           title: '删除任务',
@@ -246,7 +246,7 @@ class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
               initialValue: current.createdAt ? moment(current.createdAt) : null,
             })(
               <DatePicker
-                showTime
+                showTime={true}
                 placeholder="请选择"
                 format="YYYY-MM-DD HH:mm:ss"
                 style={{ width: '100%' }}
@@ -279,10 +279,10 @@ class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
           <Card bordered={false}>
             <Row>
               <Col sm={8} xs={24}>
-                <Info title="我的待办" value="8个任务" bordered />
+                <Info title="我的待办" value="8个任务" bordered={true} />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="本周任务平均处理时间" value="32分钟" bordered />
+                <Info title="本周任务平均处理时间" value="32分钟" bordered={true} />
               </Col>
               <Col sm={8} xs={24}>
                 <Info title="本周完成任务数" value="24个任务" />
@@ -347,7 +347,7 @@ class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
           className={styles.standardListForm}
           width={640}
           bodyStyle={done ? { padding: '72px 0' } : { padding: '28px 0 0' }}
-          destroyOnClose
+          destroyOnClose={true}
           visible={visible}
           {...modalFooter}
         >

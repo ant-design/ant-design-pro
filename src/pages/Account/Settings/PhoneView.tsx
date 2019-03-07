@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
 import { Input } from 'antd';
+import React, { Fragment } from 'react';
 import styles from './PhoneView.less';
 
 interface PhoneProps {

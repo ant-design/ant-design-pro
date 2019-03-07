@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import { Button, Col, Form, Input, Popover, Progress, Row, Select } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
+import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
 import router from 'umi/router';
-import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
-import styles from './Register.less';
 import { IRegisterModelState } from './models/register';
+import styles from './Register.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -263,7 +263,7 @@ class Register extends Component<IRegisterProps> {
             )}
           </FormItem>
           <FormItem>
-            <InputGroup compact>
+            <InputGroup compact={true}>
               <Select
                 size="large"
                 value={prefix}

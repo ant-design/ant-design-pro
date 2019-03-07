@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import Login from '@/components/Login';
+import { ILoginModelState } from '@/models/login';
+import { Alert, Checkbox, Icon } from 'antd';
 import { connect } from 'dva';
+import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
-import { Checkbox, Alert, Icon } from 'antd';
-import Login from '@/components/Login';
 import styles from './Login.less';
-import { ILoginModelState } from '@/models/login';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
@@ -69,7 +69,7 @@ class LoginPage extends Component<ILoginPageProps> {
   };
 
   renderMessage = content => (
-    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
+    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon={true} />
   );
 
   render() {

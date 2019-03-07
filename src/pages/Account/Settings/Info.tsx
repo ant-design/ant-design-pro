@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'dva';
-import router from 'umi/router';
-import { FormattedMessage } from 'umi-plugin-locale';
-import { Menu } from 'antd';
-import { match } from 'react-router';
-import * as H from 'history';
-import { MenuMode } from 'antd/es/menu';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
+import { Menu } from 'antd';
+import { MenuMode } from 'antd/es/menu';
+import { connect } from 'dva';
+import * as H from 'history';
+import React, { Component } from 'react';
+import { match } from 'react-router';
+import { FormattedMessage } from 'umi-plugin-locale';
+import router from 'umi/router';
 import styles from './Info.less';
 
 const { Item } = Menu;
@@ -36,6 +36,18 @@ interface InfoState {
   currentUser: user.currentUser,
 }))
 class Info extends Component<InfoProps, InfoState> {
+
+  static getDerivedStateFromProps(props, state) {
+    const { match, location } = props;
+    let selectKey = location.pathname.replace(`${match.path}/`, '');
+    selectKey = state.menuMap[selectKey] ? selectKey : 'base';
+    if (selectKey !== state.selectKey) {
+      return { selectKey };
+    }
+    return null;
+  }
+
+  main: HTMLDivElement;
   constructor(props) {
     super(props);
     const { match, location } = props;
@@ -60,18 +72,6 @@ class Info extends Component<InfoProps, InfoState> {
       menuMap,
       selectKey: menuMap[key] ? key : 'base',
     };
-  }
-
-  main: HTMLDivElement;
-
-  static getDerivedStateFromProps(props, state) {
-    const { match, location } = props;
-    let selectKey = location.pathname.replace(`${match.path}/`, '');
-    selectKey = state.menuMap[selectKey] ? selectKey : 'base';
-    if (selectKey !== state.selectKey) {
-      return { selectKey };
-    }
-    return null;
   }
 
   componentDidMount() {

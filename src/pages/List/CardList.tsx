@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'dva';
-import { Card, Button, Icon, List } from 'antd';
 import Ellipsis from '@/components/Ellipsis';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { Button, Card, Icon, List } from 'antd';
+import { connect } from 'dva';
+import React, { PureComponent } from 'react';
 import styles from './CardList.less';
 import { IRuleModelState } from './models/rule';
 
@@ -76,7 +76,7 @@ class CardList extends PureComponent<ICardListProps> {
             renderItem={item =>
               item ? (
                 <List.Item key={item.id}>
-                  <Card hoverable className={styles.card} actions={[<a>操作一</a>, <a>操作二</a>]}>
+                  <Card hoverable={true} className={styles.card} actions={[<a>操作一</a>, <a>操作二</a>]}>
                     <Card.Meta
                       avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
                       title={<a>{item.title}</a>}
