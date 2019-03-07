@@ -44,7 +44,7 @@ const extra = (
       style={{
         fontSize: 16,
         color: 'rgba(0, 0, 0, 0.85)',
-        fontWeight: '500',
+        fontWeight: 'bold',
         marginBottom: 20,
       }}
     >
@@ -128,7 +128,7 @@ const actions = (
   </Fragment>
 );
 
-export default () => (
+const Successs: React.SFC = () => (
   <PageHeaderWrapper>
     <Card bordered={false}>
       <Result
@@ -142,3 +142,5 @@ export default () => (
     </Card>
   </PageHeaderWrapper>
 );
+
+export default Successs;
