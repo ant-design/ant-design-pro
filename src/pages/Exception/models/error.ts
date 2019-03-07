@@ -1,5 +1,5 @@
 import queryError from '@/services/error';
-import { Effect, Subscription } from 'dva';
+import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
 export interface IErrorModelState {
