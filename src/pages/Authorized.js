@@ -6,21 +6,16 @@ import Authorized from '@/utils/Authorized';
 
 function AuthComponent({ children, location, routerData, status }) {
   const isLogin = status === 'ok';
-
   const getRouteAuthority = (path, routeData) => {
     let authorities;
     routeData.forEach(route => {
       // match prefix
       if (pathToRegexp(`${route.path}(.*)`).test(path)) {
-        if (route.authority) {
-          authorities = route.authority;
-        }
+        authorities = route.authority || authorities;
+
         // get children authority recursively
         if (route.routes) {
-          const auths = getRouteAuthority(path, route.routes);
-          if (auths) {
-            authorities = auths;
-          }
+          authorities = getRouteAuthority(path, route.routes) || authorities;
         }
       }
     });
