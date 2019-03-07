@@ -10,7 +10,7 @@ const extra = (
       style={{
         fontSize: 16,
         color: 'rgba(0, 0, 0, 0.85)',
-        fontWeight: '500',
+        fontWeight: 'bold',
         marginBottom: 16,
       }}
     >
@@ -50,7 +50,7 @@ const actions = (
   </Button>
 );
 
-export default () => (
+const Error: React.SFC = () => (
   <PageHeaderWrapper>
     <Card bordered={false}>
       <Result
@@ -64,3 +64,5 @@ export default () => (
     </Card>
   </PageHeaderWrapper>
 );
+
+export default Error;
