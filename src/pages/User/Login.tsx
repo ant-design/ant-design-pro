@@ -1,22 +1,31 @@
-import React, { Component } from 'react';
+import Login from '@/components/Login';
+import { ILoginModelState } from '@/models/login';
+import { Alert, Checkbox, Icon } from 'antd';
 import { connect } from 'dva';
+import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
-import { Checkbox, Alert, Icon } from 'antd';
-import Login from '@/components/Login';
 import styles from './Login.less';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
+
+interface ILoginPageProps {
+  login: ILoginModelState;
+  dispatch: (args: any) => Promise<any>;
+  submitting: boolean;
+}
 
 @connect(({ login, loading }) => ({
   login,
   submitting: loading.effects['login/login'],
 }))
-class LoginPage extends Component {
+class LoginPage extends Component<ILoginPageProps> {
   state = {
     type: 'account',
     autoLogin: true,
   };
+
+  loginForm: Login;
 
   onTabChange = type => {
     this.setState({ type });
@@ -60,7 +69,7 @@ class LoginPage extends Component {
   };
 
   renderMessage = content => (
-    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
+    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon={true} />
   );
 
   render() {

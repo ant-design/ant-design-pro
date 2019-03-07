@@ -1,9 +1,9 @@
-import React from 'react';
-import { List, Card, Icon, Dropdown, Menu, Avatar, Tooltip } from 'antd';
-import numeral from 'numeral';
-import { connect } from 'dva';
-import { formatWan } from '@/utils/utils';
 import { IListModelState } from '@/models/list';
+import { formatWan } from '@/utils/utils';
+import { Avatar, Card, Dropdown, Icon, List, Menu, Tooltip } from 'antd';
+import { connect } from 'dva';
+import numeral from 'numeral';
+import React from 'react';
 import stylesApplications from './Applications.less';
 
 interface ApplicationsProps {
@@ -54,7 +54,7 @@ const Center: React.SFC<ApplicationsProps> = props => {
       renderItem={item => (
         <List.Item key={item.id}>
           <Card
-            hoverable
+            hoverable={true}
             bodyStyle={{ paddingBottom: 20 }}
             actions={[
               <Tooltip title="下载">

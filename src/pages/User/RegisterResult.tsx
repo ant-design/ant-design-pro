@@ -1,8 +1,8 @@
+import Result from '@/components/Result';
+import { Button } from 'antd';
 import React from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
-import { Button } from 'antd';
 import Link from 'umi/link';
-import Result from '@/components/Result';
 import styles from './RegisterResult.less';
 
 const actions = (
@@ -20,7 +20,15 @@ const actions = (
   </div>
 );
 
-const RegisterResult = ({ location }) => (
+interface IRegisterResultProps {
+  location: {
+    state?: {
+      account?: string;
+    };
+  };
+}
+
+const RegisterResult: React.SFC<IRegisterResultProps> = ({ location }) => (
   <Result
     className={styles.registerResult}
     type="success"

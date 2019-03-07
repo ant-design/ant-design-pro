@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'dva';
-import { Form, Input, Button, Alert, Divider } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
-import router from 'umi/router';
 import { digitUppercase } from '@/utils/utils';
+import { Alert, Button, Divider, Form, Input } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
+import { connect } from 'dva';
+import React from 'react';
+import router from 'umi/router';
 import styles from './style.less';
 
 const formItemLayout = {
@@ -49,8 +49,8 @@ const Confirm: React.SFC<IConfirmFormProps> = props => {
   return (
     <Form layout="horizontal" className={styles.stepForm}>
       <Alert
-        closable
-        showIcon
+        closable={true}
+        showIcon={true}
         message="确认转账后，资金将直接打入对方账户，无法退回。"
         style={{ marginBottom: 24 }}
       />

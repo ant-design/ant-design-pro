@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import { connect } from 'dva';
-import { Button, Row, Col } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
-import router from 'umi/router';
 import Result from '@/components/Result';
+import { Button, Col, Row } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
+import { connect } from 'dva';
+import React, { Fragment } from 'react';
+import router from 'umi/router';
 import styles from './style.less';
 
 interface IResultFormProps extends FormComponentProps {

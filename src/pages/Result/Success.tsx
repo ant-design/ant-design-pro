@@ -1,8 +1,8 @@
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Result from '@/components/Result';
+import { Button, Card, Col, Icon, Row, Steps } from 'antd';
 import React, { Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
-import { Button, Row, Col, Icon, Steps, Card } from 'antd';
-import Result from '@/components/Result';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 const { Step } = Steps;
 
@@ -73,7 +73,7 @@ const extra = (
         2016-12-12 ~ 2017-12-12
       </Col>
     </Row>
-    <Steps style={{ marginLeft: -42, width: 'calc(100% + 84px)' }} progressDot current={1}>
+    <Steps style={{ marginLeft: -42, width: 'calc(100% + 84px)' }} progressDot={true} current={1}>
       <Step
         title={
           <span style={{ fontSize: 14 }}>

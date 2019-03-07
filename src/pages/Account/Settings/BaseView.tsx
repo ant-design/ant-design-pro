@@ -1,7 +1,7 @@
+import { Button, Form, Input, Select, Upload } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
 import React, { Component, Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
-import { Form, Input, Upload, Select, Button } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
 
 import { connect } from 'dva';
 import styles from './BaseView.less';
@@ -69,11 +69,11 @@ interface BaseProps extends FormComponentProps {
   currentUser: user.currentUser,
 }))
 class BaseView extends Component<BaseProps> {
+
+  view: HTMLDivElement;
   componentDidMount() {
     this.setBaseInfo();
   }
-
-  view: HTMLDivElement;
 
   setBaseInfo = () => {
     const { currentUser, form } = this.props;
@@ -104,7 +104,7 @@ class BaseView extends Component<BaseProps> {
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
-          <Form layout="vertical" hideRequiredMark>
+          <Form layout="vertical" hideRequiredMark={true}>
             <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
               {getFieldDecorator('email', {
                 rules: [

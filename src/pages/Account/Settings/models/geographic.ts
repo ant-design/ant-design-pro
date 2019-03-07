@@ -1,4 +1,4 @@
-import { queryProvince, queryCity } from '@/services/geographic';
+import { queryCity, queryProvince } from '@/services/geographic';
 import { Effect, Subscription } from 'dva';
 import { Reducer } from 'redux';
 

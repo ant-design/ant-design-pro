@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
-import { Card, Steps } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { Card, Steps } from 'antd';
+import React, { Fragment } from 'react';
 import styles from '../style.less';
 
 const { Step } = Steps;

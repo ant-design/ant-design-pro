@@ -1,6 +1,6 @@
-import React from 'react';
-import moment from 'moment';
 import { Avatar } from 'antd';
+import moment from 'moment';
+import React from 'react';
 import styles from './index.less';
 
 interface ApplicationsProps {

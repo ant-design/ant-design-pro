@@ -1,9 +1,9 @@
-import React from 'react';
-import { List, Card } from 'antd';
-import moment from 'moment';
-import { connect } from 'dva';
 import AvatarList from '@/components/AvatarList';
 import { IListModelState } from '@/models/list';
+import { Card, List } from 'antd';
+import { connect } from 'dva';
+import moment from 'moment';
+import React from 'react';
 import stylesProjects from './Projects.less';
 
 interface ProjectsProps {
@@ -24,7 +24,7 @@ const Projects: React.SFC<ProjectsProps> = props => {
         <List.Item>
           <Card
             className={stylesProjects.card}
-            hoverable
+            hoverable={true}
             cover={<img alt={item.title} src={item.cover} />}
           >
             <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />

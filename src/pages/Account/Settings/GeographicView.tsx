@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
 import { Select, Spin } from 'antd';
-import { connect } from 'dva';
-import { Dispatch } from 'redux';
 import { WrappedFormUtils } from 'antd/es/form/Form';
+import { connect } from 'dva';
+import React, { PureComponent } from 'react';
+import { Dispatch } from 'redux';
 import styles from './GeographicView.less';
 
 const { Option } = Select;
@@ -117,8 +117,8 @@ class GeographicView extends PureComponent<GeographicProps> {
         <Select
           className={styles.item}
           value={province}
-          labelInValue
-          showSearch
+          labelInValue={true}
+          showSearch={true}
           onSelect={this.selectProvinceItem}
         >
           {this.getProvinceOption()}
@@ -126,8 +126,8 @@ class GeographicView extends PureComponent<GeographicProps> {
         <Select
           className={styles.item}
           value={city}
-          labelInValue
-          showSearch
+          labelInValue={true}
+          showSearch={true}
           onSelect={this.selectCityItem}
         >
           {this.getCityOption()}

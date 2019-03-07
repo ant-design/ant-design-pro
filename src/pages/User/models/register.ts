@@ -1,8 +1,25 @@
 import { fakeRegister } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { reloadAuthorized } from '@/utils/Authorized';
+import { Effect } from 'dva';
+import { Reducer } from 'redux';
 
-export default {
+export interface IRegisterModelState {
+  status: undefined | string;
+}
+
+export interface IRegisterModel {
+  namespace: 'register';
+  state: IRegisterModelState;
+  effects: {
+    submit: Effect;
+  };
+  reducers: {
+    registerHandle: Reducer<any>;
+  };
+}
+
+const RegisterModel: IRegisterModel = {
   namespace: 'register',
 
   state: {
@@ -30,3 +47,5 @@ export default {
     },
   },
 };
+
+export default RegisterModel;
