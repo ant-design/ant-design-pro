@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import Link from 'umi/link';
 import router from 'umi/router';
 import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
-import InputProps from 'antd/lib/input';
+import InputProps from 'antd/es/input';
 import { Dispatch } from 'redux';
 import { match } from 'react-router';
 import * as H from 'history';

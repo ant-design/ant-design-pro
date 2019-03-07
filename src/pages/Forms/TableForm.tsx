@@ -3,7 +3,18 @@ import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
 import isEqual from 'lodash/isEqual';
 import styles from './style.less';
 
-class TableForm extends PureComponent {
+interface ITableFormProps {
+  onChange?: (data: any) => void;
+}
+
+interface ITableFormState {
+  data?: any[];
+  loading?: boolean;
+  value?: any[];
+}
+
+class TableForm extends PureComponent<ITableFormProps, ITableFormState> {
+  clickedCancel: boolean;
   index = 0;
 
   cacheOriginData = {};
@@ -29,10 +40,10 @@ class TableForm extends PureComponent {
     };
   }
 
-  getRowByKey(key, newData) {
+  getRowByKey: (key: any, newData?: any) => any = (key, newData) => {
     const { data } = this.state;
     return (newData || data).filter(item => item.key === key)[0];
-  }
+  };
 
   toggleEditable = (e, key) => {
     e.preventDefault();

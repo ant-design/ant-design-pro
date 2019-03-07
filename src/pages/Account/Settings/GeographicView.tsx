@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Select, Spin } from 'antd';
 import { connect } from 'dva';
 import { Dispatch } from 'redux';
-import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { WrappedFormUtils } from 'antd/es/form/Form';
 import styles from './GeographicView.less';
 
 const { Option } = Select;

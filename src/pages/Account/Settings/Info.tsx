@@ -5,7 +5,7 @@ import { FormattedMessage } from 'umi-plugin-locale';
 import { Menu } from 'antd';
 import { match } from 'react-router';
 import * as H from 'history';
-import { MenuMode } from 'antd/lib/menu';
+import { MenuMode } from 'antd/es/menu';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import styles from './Info.less';
 

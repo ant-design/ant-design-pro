@@ -1,4 +1,4 @@
-import Button from 'antd/lib/button';
+import Button from 'antd/es/button';
 import * as React from 'react';
 import LoginItem from './LoginItem';
 import LoginTab from './LoginTab';

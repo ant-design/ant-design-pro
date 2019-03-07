@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import { Form, Input, Upload, Select, Button } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import { FormComponentProps } from 'antd/es/form';
 
 import { connect } from 'dva';
 import styles from './BaseView.less';

@@ -13,6 +13,7 @@ import {
   Icon,
   Tooltip,
 } from 'antd';
+import { FormComponentProps } from 'antd/es/form';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './style.less';
 
@@ -21,11 +22,16 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
+interface IBasicFormsProps extends FormComponentProps {
+  location: Location;
+  dispatch: (args: any) => void;
+  submitting: boolean;
+}
+
 @connect(({ loading }) => ({
   submitting: loading.effects['form/submitRegularForm'],
 }))
-@Form.create()
-class BasicForms extends PureComponent {
+class BasicForms extends PureComponent<IBasicFormsProps> {
   handleSubmit = e => {
     const { dispatch, form } = this.props;
     e.preventDefault();
@@ -244,4 +250,4 @@ class BasicForms extends PureComponent {
   }
 }
 
-export default BasicForms;
+export default Form.create()(BasicForms);
