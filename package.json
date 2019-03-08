@@ -64,6 +64,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",
+    "@types/lodash": "^4.14.122",
     "@types/numeral": "^0.0.25",
     "@types/react": "^16.8.1",
     "@types/react-document-title": "^2.0.3",
