@@ -1,25 +1,24 @@
-import React, { Component, Fragment } from 'react';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
-import { connect } from 'dva';
-import {
-  Button,
-  Menu,
-  Dropdown,
-  Icon,
-  Row,
-  Col,
-  Steps,
-  Card,
-  Popover,
-  Badge,
-  Table,
-  Tooltip,
-  Divider,
-} from 'antd';
-import classNames from 'classnames';
 import DescriptionList from '@/components/DescriptionList';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import {
+  Badge,
+  Button,
+  Card,
+  Col,
+  Divider,
+  Dropdown,
+  Icon,
+  Menu,
+  Popover,
+  Row,
+  Steps,
+  Table,
+  Tooltip,
+} from 'antd';
+import classNames from 'classnames';
+import { connect } from 'dva';
+import debounce from 'lodash/debounce';
+import React, { Component, Fragment } from 'react';
 import styles from './AdvancedProfile.less';
 import { IProfileModelState } from './models/profile';
 
@@ -206,6 +205,20 @@ class AdvancedProfile extends Component<IAdvancedProfileProps, IAdvancedProfileS
     stepDirection: 'horizontal' as ('horizontal' | 'vertical'),
   };
 
+  setStepDirection = debounce(() => {
+    const { stepDirection } = this.state;
+    const w = getWindowWidth();
+    if (stepDirection !== 'vertical' && w <= 576) {
+      this.setState({
+        stepDirection: 'vertical',
+      });
+    } else if (stepDirection !== 'horizontal' && w > 576) {
+      this.setState({
+        stepDirection: 'horizontal',
+      });
+    }
+  }, 200);
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -218,29 +231,12 @@ class AdvancedProfile extends Component<IAdvancedProfileProps, IAdvancedProfileS
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.setStepDirection);
-    // 使用Debounce注解之后，会有两个函数 cancel  和 flush;
     this.setStepDirection.cancel();
   }
 
-  onOperationTabChange = key => {
+  onOperationTabChange = (key: string) => {
     this.setState({ operationkey: key });
   };
-
-  @Bind()
-  @Debounce(200)
-  setStepDirection() {
-    const { stepDirection } = this.state;
-    const w = getWindowWidth();
-    if (stepDirection !== 'vertical' && w <= 576) {
-      this.setState({
-        stepDirection: 'vertical',
-      });
-    } else if (stepDirection !== 'horizontal' && w > 576) {
-      this.setState({
-        stepDirection: 'horizontal',
-      });
-    }
-  }
 
   render() {
     const { stepDirection, operationkey } = this.state;

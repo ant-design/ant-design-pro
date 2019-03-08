@@ -1,6 +1,7 @@
 import Login from '@/components/Login';
 import { ILoginModelState } from '@/models/login';
 import { Alert, Checkbox, Icon } from 'antd';
+import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { connect } from 'dva';
 import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
@@ -9,25 +10,30 @@ import styles from './Login.less';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
-interface ILoginPageProps {
+export interface ILoginPageProps {
   login: ILoginModelState;
   dispatch: (args: any) => Promise<any>;
   submitting: boolean;
+}
+
+interface ILoginPageState {
+  type: string;
+  autoLogin: boolean;
 }
 
 @connect(({ login, loading }) => ({
   login,
   submitting: loading.effects['login/login'],
 }))
-class LoginPage extends Component<ILoginPageProps> {
-  state = {
+class LoginPage extends Component<ILoginPageProps, ILoginPageState> {
+  state: ILoginPageState = {
     type: 'account',
     autoLogin: true,
   };
 
   loginForm: Login;
 
-  onTabChange = type => {
+  onTabChange = (type: string) => {
     this.setState({ type });
   };
 
@@ -48,7 +54,7 @@ class LoginPage extends Component<ILoginPageProps> {
       });
     });
 
-  handleSubmit = (err, values) => {
+  handleSubmit = (err: { [field: string]: object }, values: { [field: string]: string }) => {
     const { type } = this.state;
     if (!err) {
       const { dispatch } = this.props;
@@ -62,13 +68,13 @@ class LoginPage extends Component<ILoginPageProps> {
     }
   };
 
-  changeAutoLogin = e => {
+  changeAutoLogin = (e: CheckboxChangeEvent) => {
     this.setState({
       autoLogin: e.target.checked,
     });
   };
 
-  renderMessage = content => (
+  renderMessage = (content: string) => (
     <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon={true} />
   );
 
@@ -81,9 +87,7 @@ class LoginPage extends Component<ILoginPageProps> {
           defaultActiveKey={type}
           onTabChange={this.onTabChange}
           onSubmit={this.handleSubmit}
-          ref={form => {
-            this.loginForm = form;
-          }}
+          ref={form => (this.loginForm = form)}
         >
           <Tab key="account" tab={formatMessage({ id: 'app.login.tab-login-credentials' })}>
             {login.status === 'error' &&
