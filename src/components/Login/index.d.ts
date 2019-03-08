@@ -9,7 +9,6 @@ export interface ILoginProps {
   onTabChange?: (key: string) => void;
   style?: React.CSSProperties;
   onSubmit?: (error: any, values: any) => void;
-  wrappedComponentRef?: (instance: Login) => void;
 }
 
 interface Login extends React.Component<ILoginProps>, WrappedFormUtils {}
