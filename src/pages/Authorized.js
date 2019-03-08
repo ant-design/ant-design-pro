@@ -20,7 +20,7 @@ function AuthComponent({ children, location, routerData, status }) {
           }
           // is exact route?
           if (!pathToRegexp(route.path).test(path) && route.routes) {
-            authorities = getAuthority(route.routes, path);
+            authorities = getAuthority(route.routes, path) || authorities;
           }
         }
       });
@@ -29,6 +29,7 @@ function AuthComponent({ children, location, routerData, status }) {
 
     return getAuthority(routes, pathname);
   };
+
   return (
     <Authorized
       authority={getRouteAuthority(location.pathname, routerData)}
