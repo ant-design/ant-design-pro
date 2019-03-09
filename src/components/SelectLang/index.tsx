@@ -5,10 +5,10 @@ import classNames from 'classnames';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
-interface ISelectLangProps {
-  className: string;
+interface SelectLangProps {
+  className?: string;
 }
-const SelectLang: React.SFC<ISelectLangProps> = props => {
+const SelectLang: React.SFC<SelectLangProps> = props => {
   const { className } = props;
   const selectedLang = getLocale();
   const changeLang = ({ key }) => {

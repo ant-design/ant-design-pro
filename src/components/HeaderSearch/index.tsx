@@ -7,7 +7,7 @@ import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import styles from './index.less';
 
-interface IHeaderSearchProps {
+interface HeaderSearchProps {
   onPressEnter: (value: string) => void;
   onSearch: (value: string) => void;
   onChange: (value: string) => void;
@@ -20,11 +20,11 @@ interface IHeaderSearchProps {
   open?: boolean;
 }
 
-interface IHeaderSearchState {
+interface HeaderSearchState {
   value: string;
   searchMode: boolean;
 }
-export default class HeaderSearch extends Component<IHeaderSearchProps, IHeaderSearchState> {
+export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSearchState> {
   static defaultProps = {
     defaultActiveFirstOption: false,
     onPressEnter: () => {},

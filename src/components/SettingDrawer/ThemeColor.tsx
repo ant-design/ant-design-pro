@@ -3,13 +3,13 @@ import { Tooltip, Icon } from 'antd';
 import { formatMessage } from 'umi-plugin-locale';
 import styles from './ThemeColor.less';
 
-interface ITagProps {
+interface TagProps {
   color: string;
   check: boolean;
   className?: string;
   onClick?: () => void;
 }
-const Tag: React.SFC<ITagProps> = ({ color, check, ...rest }) => (
+const Tag: React.SFC<TagProps> = ({ color, check, ...rest }) => (
   <div
     {...rest}
     style={{
@@ -20,14 +20,14 @@ const Tag: React.SFC<ITagProps> = ({ color, check, ...rest }) => (
   </div>
 );
 
-interface IThemeColorProps {
+interface ThemeColorProps {
   colors?: any[];
   title?: string;
   value: string;
   onChange: (color: string) => void;
 }
 
-const ThemeColor: React.SFC<IThemeColorProps> = ({ colors, title, value, onChange }) => {
+const ThemeColor: React.SFC<ThemeColorProps> = ({ colors, title, value, onChange }) => {
   let colorList = colors;
   if (!colors) {
     colorList = [

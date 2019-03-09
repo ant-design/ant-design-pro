@@ -12,7 +12,7 @@ import styles from './index.less';
 
 export declare type SiderTheme = 'light' | 'dark';
 
-interface IGlobalHeaderRightProps {
+interface GlobalHeaderRightProps {
   notices?: any[];
   dispatch?: (args: any) => void;
   // wait for https://github.com/umijs/umi/pull/2036
@@ -32,7 +32,7 @@ interface IGlobalHeaderRightProps {
   onNoticeClear?: (tabName: string) => void;
   theme?: SiderTheme;
 }
-export default class GlobalHeaderRight extends Component<IGlobalHeaderRightProps> {
+export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
   getNoticeData() {
     const { notices = [] } = this.props;
     if (notices.length === 0) {

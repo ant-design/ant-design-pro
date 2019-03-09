@@ -3,20 +3,15 @@ import { connect } from 'dva';
 import pathToRegexp from 'path-to-regexp';
 import React from 'react';
 import Redirect from 'umi/redirect';
-import { IUserModelState } from '../models/user';
+import { UserModelState } from '../models/user';
 
-interface IAuthComponentProps {
+interface AuthComponentProps {
   location: Location;
   routerData: any[];
-  user: IUserModelState;
+  user: UserModelState;
 }
 
-const AuthComponent: React.SFC<IAuthComponentProps> = ({
-  children,
-  location,
-  routerData,
-  user,
-}) => {
+const AuthComponent: React.SFC<AuthComponentProps> = ({ children, location, routerData, user }) => {
   const { currentUser } = user;
   const isLogin = currentUser && currentUser.name;
   const getRouteAuthority = (path, routeData) => {

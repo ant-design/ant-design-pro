@@ -1,9 +1,9 @@
 import React, { ReactNode, SFC } from 'react';
 
-interface IProps {
+interface BlankLayoutProps {
   children: ReactNode;
 }
 
-const Layout: SFC<IProps> = ({ children }) => <div>{children}</div>;
+const Layout: SFC<BlankLayoutProps> = ({ children }) => <div>{children}</div>;
 
 export default Layout;

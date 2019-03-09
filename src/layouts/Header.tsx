@@ -1,6 +1,6 @@
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
-import { IDefaultSettings } from '../../config/defaultSettings';
+import { DefaultSettings } from '../../config/defaultSettings';
 import { Layout, message } from 'antd';
 import { connect } from 'dva';
 import Animate from 'rc-animate';
@@ -13,21 +13,21 @@ const { Header } = Layout;
 
 export declare type SiderTheme = 'light' | 'dark';
 
-interface IHeaderViewProps {
+interface HeaderViewProps {
   isMobile: boolean;
   collapsed: boolean;
-  setting: IDefaultSettings;
+  setting: DefaultSettings;
   dispatch: (args: any) => void;
   autoHideHeader: boolean;
   handleMenuCollapse: (args: boolean) => void;
 }
 
-interface IHeaderViewState {
+interface HeaderViewState {
   visible: boolean;
 }
 
-class HeaderView extends Component<IHeaderViewProps, IHeaderViewState> {
-  static getDerivedStateFromProps(props: IHeaderViewProps, state: IHeaderViewState) {
+class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
+  static getDerivedStateFromProps(props: HeaderViewProps, state: HeaderViewState) {
     if (!props.autoHideHeader && !state.visible) {
       return {
         visible: true,

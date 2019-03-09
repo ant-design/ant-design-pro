@@ -1,10 +1,10 @@
 import { message } from 'antd';
 import { Reducer } from 'redux';
-import defaultSettings, { IDefaultSettings } from '../../config/defaultSettings';
+import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
 
-export interface ISettingModel {
+export interface SettingModelType {
   namespace: 'setting';
-  state: IDefaultSettings;
+  state: DefaultSettings;
   reducers: {
     getSetting: Reducer<any>;
     changeSetting: Reducer<any>;
@@ -74,7 +74,7 @@ const updateColorWeak: (colorWeak: string) => void = colorWeak => {
   document.body.className = colorWeak ? 'colorWeak' : '';
 };
 
-const SettingModel: ISettingModel = {
+const SettingModel: SettingModelType = {
   namespace: 'setting',
   state: defaultSettings,
   reducers: {
