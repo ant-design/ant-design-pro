@@ -48,7 +48,9 @@ const RuleModel: IRuleModel = {
         type: 'save',
         payload: response,
       });
-      if (callback) { callback(); }
+      if (callback) {
+        callback();
+      }
     },
     *remove({ payload, callback }, { call, put }) {
       const response = yield call(removeRule, payload);
@@ -56,7 +58,9 @@ const RuleModel: IRuleModel = {
         type: 'save',
         payload: response,
       });
-      if (callback) { callback(); }
+      if (callback) {
+        callback();
+      }
     },
     *update({ payload, callback }, { call, put }) {
       const response = yield call(updateRule, payload);
@@ -64,7 +68,9 @@ const RuleModel: IRuleModel = {
         type: 'save',
         payload: response,
       });
-      if (callback) { callback(); }
+      if (callback) {
+        callback();
+      }
     },
   },
 

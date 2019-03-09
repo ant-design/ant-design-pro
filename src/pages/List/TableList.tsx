@@ -52,7 +52,9 @@ const CreateFormFunc: React.SFC<ICreateFormProps> = props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
-      if (err) { return; }
+      if (err) {
+        return;
+      }
       form.resetFields();
       handleAdd(fieldsValue);
     });
@@ -118,7 +120,9 @@ class UpdateFormClass extends PureComponent<IUpdateFormProps, IUpdateFormState> 
     const { form, handleUpdate } = this.props;
     const { formVals: oldValue } = this.state;
     form.validateFields((err, fieldsValue) => {
-      if (err) { return; }
+      if (err) {
+        return;
+      }
       const formVals = { ...oldValue, ...fieldsValue };
       this.setState(
         {
@@ -309,6 +313,7 @@ interface ITableListState {
 }
 
 /* eslint react/no-multi-comp:0 */
+/* tslint:disable-next-line */
 @connect(({ rule, loading }) => ({
   rule,
   loading: loading.models.rule,
@@ -449,7 +454,9 @@ class TableList extends PureComponent<ITableListProps, ITableListState> {
     const { dispatch } = this.props;
     const { selectedRows } = this.state;
 
-    if (selectedRows.length === 0) { return; }
+    if (selectedRows.length === 0) {
+      return;
+    }
     switch (e.key) {
       case 'remove':
         dispatch({
@@ -481,7 +488,9 @@ class TableList extends PureComponent<ITableListProps, ITableListState> {
     const { dispatch, form } = this.props;
 
     form.validateFields((err, fieldsValue) => {
-      if (err) { return; }
+      if (err) {
+        return;
+      }
 
       const values = {
         ...fieldsValue,

@@ -105,7 +105,9 @@ class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
 
     setTimeout(() => this.addBtn.blur(), 0);
     form.validateFields((err, fieldsValue) => {
-      if (err) { return; }
+      if (err) {
+        return;
+      }
       this.setState({
         done: true,
       });
@@ -135,8 +137,9 @@ class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
     const { visible, done, current = {} } = this.state;
 
     const editAndDelete = (key, currentItem) => {
-      if (key === 'edit') { this.showEditModal(currentItem); }
-      else if (key === 'delete') {
+      if (key === 'edit') {
+        this.showEditModal(currentItem);
+      } else if (key === 'delete') {
         Modal.confirm({
           title: '删除任务',
           content: '确定删除该任务吗？',
@@ -321,6 +324,7 @@ class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
                 <List.Item
                   actions={[
                     <a
+                      key="0"
                       onClick={e => {
                         e.preventDefault();
                         this.showEditModal(item);
@@ -328,7 +332,7 @@ class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
                     >
                       编辑
                     </a>,
-                    <MoreBtn current={item} />,
+                    <MoreBtn current={item} key="1" />,
                   ]}
                 >
                   <List.Item.Meta

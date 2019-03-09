@@ -76,7 +76,11 @@ class CardList extends PureComponent<ICardListProps> {
             renderItem={item =>
               item ? (
                 <List.Item key={item.id}>
-                  <Card hoverable={true} className={styles.card} actions={[<a>操作一</a>, <a>操作二</a>]}>
+                  <Card
+                    hoverable={true}
+                    className={styles.card}
+                    actions={[<a key="0">操作一</a>, <a key="1">操作二</a>]}
+                  >
                     <Card.Meta
                       avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
                       title={<a>{item.title}</a>}

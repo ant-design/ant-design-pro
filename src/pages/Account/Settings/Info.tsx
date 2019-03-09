@@ -36,7 +36,6 @@ interface InfoState {
   currentUser: user.currentUser,
 }))
 class Info extends Component<InfoProps, InfoState> {
-
   static getDerivedStateFromProps(props, state) {
     const { match, location } = props;
     let selectKey = location.pathname.replace(`${match.path}/`, '');
