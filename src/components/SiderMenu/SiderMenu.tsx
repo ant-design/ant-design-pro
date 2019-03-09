@@ -3,14 +3,14 @@ import classNames from 'classnames';
 import * as H from 'history';
 import React, { PureComponent, Suspense } from 'react';
 import Link from 'umi/link';
-import { title } from '../../defaultSettings';
+import defaultSettings from '../../../config/defaultSettings';
 import PageLoading from '../PageLoading';
 import styles from './index.less';
 import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
 
 const BaseMenu = React.lazy(() => import('./BaseMenu'));
 const { Sider } = Layout;
-
+const { title } = defaultSettings;
 let firstMount: boolean = true;
 
 export declare type CollapseType = 'clickTrigger' | 'responsive';

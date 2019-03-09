@@ -2,7 +2,7 @@
 import os from 'os';
 import slash from 'slash2';
 import { IPlugin } from 'umi-types';
-import defaultSettings from '../src/defaultSettings';
+import defaultSettings from './defaultSettings';
 import webpackPlugin from './plugin.config';
 import pageRoutes from './router.config';
 

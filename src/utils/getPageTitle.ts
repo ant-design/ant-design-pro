@@ -2,7 +2,9 @@ import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import pathToRegexp from 'path-to-regexp';
 import { formatMessage } from 'umi-plugin-locale';
-import { menu, title } from '../defaultSettings';
+import defaultSettings from '../../config/defaultSettings';
+
+const { menu, title } = defaultSettings;
 
 export const matchParamsPath = (pathname: string, breadcrumbNameMap: object): IRouterData => {
   const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
