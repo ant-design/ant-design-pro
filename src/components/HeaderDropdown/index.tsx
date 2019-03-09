@@ -3,9 +3,17 @@ import { Dropdown } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 
-export default class HeaderDropdown extends PureComponent {
+declare type OverlayFunc = () => React.ReactNode;
+
+interface IHeaderDropdownProps {
+  overlayClassName?: string;
+  overlay: React.ReactNode | OverlayFunc;
+}
+
+export default class HeaderDropdown extends PureComponent<IHeaderDropdownProps> {
   render() {
     const { overlayClassName, ...props } = this.props;
+
     return (
       <Dropdown overlayClassName={classNames(styles.container, overlayClassName)} {...props} />
     );
