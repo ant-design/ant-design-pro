@@ -35,5 +35,6 @@ module.exports = {
   },
   settings: {
     polyfills: ['fetch', 'promises', 'url'],
+    'import/resolver': { node: { extensions: ['.js', '.ts', '.tsx'] } },
   },
 };
