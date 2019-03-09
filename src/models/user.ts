@@ -12,6 +12,7 @@ export interface IUserModelState {
     signature?: string;
     geographic?: any;
     tags?: any[];
+    unreadCount?: number;
   };
 }
 

@@ -2,8 +2,10 @@ import { message } from 'antd';
 import { Reducer } from 'redux';
 import defaultSettings from '../defaultSettings';
 
+export declare type SiderTheme = 'light' | 'dark';
+
 export interface ISettingModelState {
-  navTheme: string;
+  navTheme: string | SiderTheme;
   primaryColor: string;
   layout: string;
   contentWidth: string;

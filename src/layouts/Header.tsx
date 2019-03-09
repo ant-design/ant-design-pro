@@ -12,6 +12,8 @@ import styles from './Header.less';
 
 const { Header } = Layout;
 
+export declare type SiderTheme = 'light' | 'dark';
+
 interface IHeaderViewProps {
   isMobile: boolean;
   collapsed: boolean;
@@ -142,7 +144,7 @@ class HeaderView extends Component<IHeaderViewProps, IHeaderViewState> {
       <Header style={{ padding: 0, width }} className={fixedHeader ? styles.fixedHeader : ''}>
         {isTop && !isMobile ? (
           <TopNavHeader
-            theme={navTheme}
+            theme={navTheme as SiderTheme}
             mode="horizontal"
             onCollapse={handleMenuCollapse}
             onNoticeClear={this.handleNoticeClear}
