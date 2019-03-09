@@ -6,13 +6,33 @@ import { getFlatMenuKeys } from '../SiderMenu/SiderMenuUtils';
 import styles from './index.less';
 import { title } from '../../defaultSettings';
 
+export declare type CollapseType = 'clickTrigger' | 'responsive';
 export declare type SiderTheme = 'light' | 'dark';
+export declare type MenuMode =
+  | 'vertical'
+  | 'vertical-left'
+  | 'vertical-right'
+  | 'horizontal'
+  | 'inline';
 
 interface ITopNavHeaderProps {
   theme: SiderTheme;
-  contentWidth: string;
-  menuData: any[];
-  logo: string;
+  contentWidth?: string;
+  menuData?: any[];
+  logo?: string;
+  mode?: MenuMode;
+  flatMenuKeys?: any[];
+  onCollapse?: (collapsed: boolean, type?: CollapseType) => void;
+  isMobile?: boolean;
+  openKeys?: any;
+  className?: string;
+  collapsed?: boolean;
+  handleOpenChange?: (openKeys: any[]) => void;
+  style?: React.CSSProperties;
+  onOpenChange?: (openKeys: string[]) => void;
+  onNoticeClear?: (type: string) => void;
+  onMenuClick?: ({ key: string }) => void;
+  onNoticeVisibleChange?: (b: boolean) => void;
 }
 
 interface ITopNavHeaderState {
