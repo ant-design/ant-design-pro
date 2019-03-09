@@ -18,13 +18,13 @@ export declare type SiderTheme = 'light' | 'dark';
 
 interface ISiderMenuProps {
   menuData: any[];
-  location: H.Location;
-  flatMenuKeys: any[];
-  logo: string;
+  location?: H.Location;
+  flatMenuKeys?: any[];
+  logo?: string;
   collapsed: boolean;
   onCollapse: (collapsed: boolean, type?: CollapseType) => void;
-  fixSiderbar: boolean;
-  theme: SiderTheme;
+  fixSiderbar?: boolean;
+  theme?: SiderTheme;
   isMobile: boolean;
 }
 

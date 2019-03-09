@@ -1,4 +1,4 @@
-import { CardProps } from 'antd/lib/card';
+import { CardProps } from 'antd/es/card';
 import * as React from 'react';
 
 export interface IChartCardProps extends CardProps {

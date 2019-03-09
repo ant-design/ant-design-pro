@@ -1,4 +1,4 @@
-import { RangePickerValue } from 'antd/lib/date-picker/interface';
+import { RangePickerValue } from 'antd/es/date-picker/interface';
 import moment from 'moment';
 import nzh from 'nzh/cn';
 import { parse, stringify } from 'qs';

@@ -1,6 +1,6 @@
 import { Bar } from '@/components/Charts';
 import { Card, Col, DatePicker, Row, Tabs } from 'antd';
-import { RangePickerValue } from 'antd/lib/date-picker/interface';
+import { RangePickerValue } from 'antd/es/date-picker/interface';
 import numeral from 'numeral';
 import React, { memo } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';

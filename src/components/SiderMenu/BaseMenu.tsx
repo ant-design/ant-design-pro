@@ -39,12 +39,12 @@ export declare type MenuMode =
   | 'inline';
 
 interface IBaseMenuProps {
-  flatMenuKeys: any[];
-  location: H.Location;
+  flatMenuKeys?: any[];
+  location?: H.Location;
   onCollapse: (collapsed: boolean, type?: CollapseType) => void;
   isMobile: boolean;
   openKeys?: any;
-  theme: SiderTheme;
+  theme?: SiderTheme;
   mode: MenuMode;
   className?: string;
   collapsed: boolean;

@@ -1,4 +1,4 @@
-import { SkeletonProps } from 'antd/lib/skeleton';
+import { SkeletonProps } from 'antd/es/skeleton';
 import * as React from 'react';
 
 export interface INoticeIconData {

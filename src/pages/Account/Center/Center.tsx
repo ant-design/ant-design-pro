@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'dva';
-import Link from 'umi/link';
-import router from 'umi/router';
-import { Card, Row, Col, Icon, Avatar, Tag, Divider, Spin, Input } from 'antd';
-import InputProps from 'antd/lib/input';
-import { Dispatch } from 'redux';
-import { match } from 'react-router';
-import * as H from 'history';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import { IProjectModelState } from '@/models/project';
+import { Avatar, Card, Col, Divider, Icon, Input, Row, Spin, Tag } from 'antd';
+import InputProps from 'antd/es/input';
+import { connect } from 'dva';
+import * as H from 'history';
+import React, { PureComponent } from 'react';
+import { match } from 'react-router';
+import { Dispatch } from 'redux';
+import Link from 'umi/link';
+import router from 'umi/router';
 import styles from './Center.less';
 
 interface CenterProps {
@@ -178,7 +178,7 @@ class Center extends PureComponent<CenterProps, CenterState> {
                       {currentUser.geographic.city.label}
                     </p>
                   </div>
-                  <Divider dashed />
+                  <Divider dashed={true} />
                   <div className={styles.tags}>
                     <div className={styles.tagsTitle}>标签</div>
                     {currentUser.tags.concat(newTags).map(item => (
@@ -205,7 +205,7 @@ class Center extends PureComponent<CenterProps, CenterState> {
                       </Tag>
                     )}
                   </div>
-                  <Divider style={{ marginTop: 16 }} dashed />
+                  <Divider style={{ marginTop: 16 }} dashed={true} />
                   <div className={styles.team}>
                     <div className={styles.teamTitle}>团队</div>
                     <Spin spinning={projectLoading}>

@@ -1,7 +1,7 @@
 import { Pie } from '@/components/Charts';
 import Yuan from '@/utils/Yuan';
 import { Card, Radio } from 'antd';
-import { RadioChangeEvent } from 'antd/lib/radio/interface';
+import { RadioChangeEvent } from 'antd/es/radio/interface';
 import React, { memo } from 'react';
 import { FormattedMessage } from 'umi-plugin-locale';
 import styles from './Analysis.less';
