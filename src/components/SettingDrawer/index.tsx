@@ -1,16 +1,21 @@
 import React, { PureComponent } from 'react';
 import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert, Tooltip } from 'antd';
-import { formatMessage } from 'umi/locale';
+import { formatMessage } from 'umi-plugin-locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
 import omit from 'omit.js';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import BlockCheckbox from './BlockCheckbox';
+import { ISettingModelState } from '@/models/setting';
 
 const { Option } = Select;
+interface IBodyProps {
+  title: string;
+  style?: React.CSSProperties;
+}
 
-const Body = ({ children, title, style }) => (
+const Body: React.SFC<IBodyProps> = ({ children, title, style }) => (
   <div
     style={{
       ...style,
@@ -22,8 +27,14 @@ const Body = ({ children, title, style }) => (
   </div>
 );
 
+interface ISettingDrawerProps {
+  setting?: ISettingModelState;
+  dispatch?: (args: any) => void;
+}
+interface ISettingDrawerState {}
+
 @connect(({ setting }) => ({ setting }))
-class SettingDrawer extends PureComponent {
+class SettingDrawer extends PureComponent<ISettingDrawerProps, ISettingDrawerState> {
   state = {
     collapse: false,
   };
@@ -117,10 +128,11 @@ class SettingDrawer extends PureComponent {
     const action = React.cloneElement(item.action, {
       disabled: item.disabled,
     });
+    console.log(item);
     return (
       <Tooltip title={item.disabled ? item.disabledReason : ''} placement="left">
         <List.Item actions={[action]}>
-          <span style={{ opacity: item.disabled ? '0.5' : '' }}>{item.title}</span>
+          <span style={{ opacity: item.disabled ? 0.5 : 1 }}>{item.title}</span>
         </List.Item>
       </Tooltip>
     );

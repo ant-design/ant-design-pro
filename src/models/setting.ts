@@ -14,6 +14,7 @@ export interface ISettingModelState {
   title: string;
   pwa: boolean;
   iconfontUrl: string;
+  colorWeak: boolean;
 }
 
 export interface ISettingModel {

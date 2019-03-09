@@ -1,9 +1,15 @@
 import React from 'react';
 import { Tooltip, Icon } from 'antd';
-import { formatMessage } from 'umi/locale';
+import { formatMessage } from 'umi-plugin-locale';
 import styles from './ThemeColor.less';
 
-const Tag = ({ color, check, ...rest }) => (
+interface ITagProps {
+  color: string;
+  check: boolean;
+  className?: string;
+  onClick?: () => void;
+}
+const Tag: React.SFC<ITagProps> = ({ color, check, ...rest }) => (
   <div
     {...rest}
     style={{
@@ -14,7 +20,14 @@ const Tag = ({ color, check, ...rest }) => (
   </div>
 );
 
-const ThemeColor = ({ colors, title, value, onChange }) => {
+interface IThemeColorProps {
+  colors?: any[];
+  title?: string;
+  value: string;
+  onChange: (color: string) => void;
+}
+
+const ThemeColor: React.SFC<IThemeColorProps> = ({ colors, title, value, onChange }) => {
   let colorList = colors;
   if (!colors) {
     colorList = [

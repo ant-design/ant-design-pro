@@ -58,7 +58,7 @@ interface ISubMenuItem {
 /**
  * get SubMenu or Item
  */
-const getSubMenu: (item: ISubMenuItem) => ISubMenuItem = item => {
+const getSubMenu: (item: ISubMenuItem) => any = item => {
   // doc: add hideChildrenInMenu
   if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
     return {
@@ -78,7 +78,7 @@ const filterMenuData: (menuData: ISubMenuItem[]) => ISubMenuItem[] = menuData =>
   }
   return menuData
     .filter(item => item.name && !item.hideInMenu)
-    .map(item => check(item.authority, getSubMenu(item)))
+    .map(item => check(item.authority, getSubMenu(item), null))
     .filter(item => item);
 };
 /**
