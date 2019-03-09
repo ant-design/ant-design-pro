@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import classNames from 'classnames';
 import * as H from 'history';
-import React, { PureComponent, Suspense } from 'react';
+import React, { Component, Suspense } from 'react';
 import Link from 'umi/link';
 import defaultSettings from '../../../config/defaultSettings';
 import PageLoading from '../PageLoading';
@@ -33,7 +33,7 @@ interface ISiderMenuState {
   flatMenuKeysLen?: number;
 }
 
-export default class SiderMenu extends PureComponent<ISiderMenuProps, ISiderMenuState> {
+export default class SiderMenu extends Component<ISiderMenuProps, ISiderMenuState> {
   static getDerivedStateFromProps(props, state) {
     const { pathname, flatMenuKeysLen } = state;
     if (props.location.pathname !== pathname || props.flatMenuKeys.length !== flatMenuKeysLen) {

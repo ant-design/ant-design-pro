@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Input, Icon, AutoComplete } from 'antd';
 import InputProps from 'antd/es/input';
 
@@ -24,7 +24,7 @@ interface IHeaderSearchState {
   value: string;
   searchMode: boolean;
 }
-export default class HeaderSearch extends PureComponent<IHeaderSearchProps, IHeaderSearchState> {
+export default class HeaderSearch extends Component<IHeaderSearchProps, IHeaderSearchState> {
   static defaultProps = {
     defaultActiveFirstOption: false,
     onPressEnter: () => {},

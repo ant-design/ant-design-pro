@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert, Tooltip } from 'antd';
 import { formatMessage } from 'umi-plugin-locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -7,7 +7,7 @@ import omit from 'omit.js';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import BlockCheckbox from './BlockCheckbox';
-import { ISettingModelState } from '@/models/setting';
+import { IDefaultSettings } from '../../../config/defaultSettings';
 
 const { Option } = Select;
 interface IBodyProps {
@@ -28,13 +28,13 @@ const Body: React.SFC<IBodyProps> = ({ children, title, style }) => (
 );
 
 interface ISettingDrawerProps {
-  setting?: ISettingModelState;
+  setting?: IDefaultSettings;
   dispatch?: (args: any) => void;
 }
 interface ISettingDrawerState {}
 
 @connect(({ setting }) => ({ setting }))
-class SettingDrawer extends PureComponent<ISettingDrawerProps, ISettingDrawerState> {
+class SettingDrawer extends Component<ISettingDrawerProps, ISettingDrawerState> {
   state = {
     collapse: false,
   };

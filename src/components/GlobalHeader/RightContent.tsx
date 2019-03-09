@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { FormattedMessage, formatMessage } from 'umi-plugin-locale';
 import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
 import { ClickParam } from 'antd/es/menu';
@@ -32,7 +32,7 @@ interface IGlobalHeaderRightProps {
   onNoticeClear?: (tabName: string) => void;
   theme?: SiderTheme;
 }
-export default class GlobalHeaderRight extends PureComponent<IGlobalHeaderRightProps> {
+export default class GlobalHeaderRight extends Component<IGlobalHeaderRightProps> {
   getNoticeData() {
     const { notices = [] } = this.props;
     if (notices.length === 0) {

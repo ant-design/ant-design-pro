@@ -1,27 +1,10 @@
 import { message } from 'antd';
 import { Reducer } from 'redux';
-import defaultSettings from '../../config/defaultSettings';
-
-export declare type SiderTheme = 'light' | 'dark';
-
-export interface ISettingModelState {
-  navTheme: string | SiderTheme;
-  primaryColor: string;
-  layout: string;
-  contentWidth: string;
-  fixedHeader: boolean;
-  autoHideHeader: boolean;
-  fixSiderbar: boolean;
-  menu: { disableLocal: boolean };
-  title: string;
-  pwa: boolean;
-  iconfontUrl: string;
-  colorWeak: boolean;
-}
+import defaultSettings, { IDefaultSettings } from '../../config/defaultSettings';
 
 export interface ISettingModel {
   namespace: 'setting';
-  state: ISettingModelState;
+  state: IDefaultSettings;
   reducers: {
     getSetting: Reducer<any>;
     changeSetting: Reducer<any>;

@@ -1,7 +1,6 @@
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
-import { ISettingModelState } from '@/models/setting';
-
+import { IDefaultSettings } from '../../config/defaultSettings';
 import { Layout, message } from 'antd';
 import { connect } from 'dva';
 import Animate from 'rc-animate';
@@ -17,7 +16,7 @@ export declare type SiderTheme = 'light' | 'dark';
 interface IHeaderViewProps {
   isMobile: boolean;
   collapsed: boolean;
-  setting: ISettingModelState;
+  setting: IDefaultSettings;
   dispatch: (args: any) => void;
   autoHideHeader: boolean;
   handleMenuCollapse: (args: boolean) => void;

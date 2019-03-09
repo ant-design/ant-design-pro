@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Dropdown } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
@@ -10,7 +10,7 @@ interface IHeaderDropdownProps {
   overlay: React.ReactNode | OverlayFunc;
 }
 
-export default class HeaderDropdown extends PureComponent<IHeaderDropdownProps> {
+export default class HeaderDropdown extends Component<IHeaderDropdownProps> {
   render() {
     const { overlayClassName, ...props } = this.props;
 

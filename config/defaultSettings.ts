@@ -1,3 +1,20 @@
+export declare type SiderTheme = 'light' | 'dark';
+
+export interface IDefaultSettings {
+  navTheme: string | SiderTheme;
+  primaryColor: string;
+  layout: string;
+  contentWidth: string;
+  fixedHeader: boolean;
+  autoHideHeader: boolean;
+  fixSiderbar: boolean;
+  menu: { disableLocal: boolean };
+  title: string;
+  pwa: boolean;
+  iconfontUrl: string;
+  colorWeak: boolean;
+}
+
 export default {
   navTheme: 'dark', // theme for nav menu
   primaryColor: '#1890FF', // primary color of ant design
@@ -16,4 +33,4 @@ export default {
   // eg：//at.alicdn.com/t/font_1039637_btcrd5co4w.js
   // 注意：如果需要图标多色，Iconfont图标项目里要进行批量去色处理
   iconfontUrl: '',
-};
+} as IDefaultSettings;

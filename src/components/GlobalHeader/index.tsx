@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Icon } from 'antd';
 import Link from 'umi/link';
 import debounce from 'lodash/debounce';
@@ -15,7 +15,7 @@ interface IGlobalHeaderProps {
   onNoticeVisibleChange?: (b: boolean) => void;
 }
 
-export default class GlobalHeader extends PureComponent<IGlobalHeaderProps> {
+export default class GlobalHeader extends Component<IGlobalHeaderProps> {
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
   }
