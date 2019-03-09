@@ -44,6 +44,8 @@ const query = {
   },
 };
 
+export declare type SiderTheme = 'light' | 'dark';
+
 interface IBasicLayoutProps {
   dispatch: (args: any) => void;
   // wait for https://github.com/umijs/umi/pull/2036
@@ -51,8 +53,8 @@ interface IBasicLayoutProps {
   breadcrumbNameMap: object;
   fixSiderbar: boolean;
   layout: string;
-  navTheme: string;
-  menuData: object;
+  navTheme: SiderTheme;
+  menuData: any[];
   fixedHeader: boolean;
   location: Location;
   collapsed: boolean;

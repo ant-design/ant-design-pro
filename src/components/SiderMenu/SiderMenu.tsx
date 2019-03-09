@@ -18,13 +18,13 @@ export declare type SiderTheme = 'light' | 'dark';
 
 interface ISiderMenuProps {
   menuData: any[];
-  location: H.Location;
-  flatMenuKeys: any[];
-  logo: string;
+  location?: H.Location;
+  flatMenuKeys?: any[];
+  logo?: string;
   collapsed: boolean;
   onCollapse: (collapsed: boolean, type?: CollapseType) => void;
-  fixSiderbar: boolean;
-  theme: SiderTheme;
+  fixSiderbar?: boolean;
+  theme?: SiderTheme;
   isMobile: boolean;
 }
 
@@ -34,7 +34,6 @@ interface ISiderMenuState {
 }
 
 export default class SiderMenu extends PureComponent<ISiderMenuProps, ISiderMenuState> {
-
   static getDerivedStateFromProps(props, state) {
     const { pathname, flatMenuKeysLen } = state;
     if (props.location.pathname !== pathname || props.flatMenuKeys.length !== flatMenuKeysLen) {
