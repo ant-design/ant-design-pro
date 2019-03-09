@@ -1,24 +1,30 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Input, Icon, AutoComplete } from 'antd';
+import InputProps from 'antd/es/input';
+
 import classNames from 'classnames';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import styles from './index.less';
 
-export default class HeaderSearch extends PureComponent {
-  static propTypes = {
-    className: PropTypes.string,
-    placeholder: PropTypes.string,
-    onSearch: PropTypes.func,
-    onChange: PropTypes.func,
-    onPressEnter: PropTypes.func,
-    defaultActiveFirstOption: PropTypes.bool,
-    dataSource: PropTypes.array,
-    defaultOpen: PropTypes.bool,
-    onVisibleChange: PropTypes.func,
-  };
+interface IHeaderSearchProps {
+  onPressEnter: (value: string) => void;
+  onSearch: (value: string) => void;
+  onChange: (value: string) => void;
+  onVisibleChange: (b: boolean) => void;
+  className: string;
+  placeholder: string;
+  defaultActiveFirstOption: boolean;
+  dataSource: any[];
+  defaultOpen: boolean;
+  open?: boolean;
+}
 
+interface IHeaderSearchState {
+  value: string;
+  searchMode: boolean;
+}
+export default class HeaderSearch extends PureComponent<IHeaderSearchProps, IHeaderSearchState> {
   static defaultProps = {
     defaultActiveFirstOption: false,
     onPressEnter: () => {},
@@ -40,6 +46,8 @@ export default class HeaderSearch extends PureComponent {
     return null;
   }
 
+  timeout: NodeJS.Timeout;
+  input: InputProps;
   constructor(props) {
     super(props);
     this.state = {
