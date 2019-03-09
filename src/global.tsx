@@ -1,9 +1,9 @@
 import React from 'react';
 import { notification, Button, message } from 'antd';
-import { formatMessage } from 'umi/locale';
-import defaultSettings from './defaultSettings';
+import { formatMessage } from 'umi-plugin-locale';
+import defaultSettings from '../config/defaultSettings';
 
-window.React = React;
+(window as any).React = React;
 
 const { pwa } = defaultSettings;
 // if pwa is true
@@ -14,7 +14,7 @@ if (pwa) {
   });
 
   // Pop up a prompt on the page asking the user if they want to use the latest version
-  window.addEventListener('sw.updated', e => {
+  window.addEventListener('sw.updated', (e: CustomEvent) => {
     const reloadSW = async () => {
       // Check if there is sw whose state is waiting in ServiceWorkerRegistration
       // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration
