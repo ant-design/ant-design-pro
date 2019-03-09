@@ -4,8 +4,8 @@ import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import { Reducer } from 'redux';
 import { formatMessage } from 'umi-plugin-locale';
-import { menu } from '../defaultSettings';
-
+import defaultSettings from '../../config/defaultSettings';
+const { menu } = defaultSettings;
 const { check } = Authorized;
 
 // Conversion router to menu.

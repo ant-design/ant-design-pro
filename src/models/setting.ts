@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import { Reducer } from 'redux';
-import defaultSettings from '../defaultSettings';
+import defaultSettings from '../../config/defaultSettings';
 
 export declare type SiderTheme = 'light' | 'dark';
 

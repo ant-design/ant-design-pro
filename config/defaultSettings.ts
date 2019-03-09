@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   navTheme: 'dark', // theme for nav menu
   primaryColor: '#1890FF', // primary color of ant design
   layout: 'sidemenu', // nav menu position: sidemenu or topmenu
@@ -6,6 +6,7 @@ module.exports = {
   fixedHeader: false, // sticky header
   autoHideHeader: false, // auto hide header
   fixSiderbar: false, // sticky siderbar
+  colorWeak: false,
   menu: {
     disableLocal: false,
   },

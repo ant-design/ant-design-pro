@@ -4,7 +4,7 @@ import RightContent from '../GlobalHeader/RightContent';
 import BaseMenu from '../SiderMenu/BaseMenu';
 import { getFlatMenuKeys } from '../SiderMenu/SiderMenuUtils';
 import styles from './index.less';
-import { title } from '../../defaultSettings';
+import defaultSettings from '../../../config/defaultSettings';
 
 export declare type CollapseType = 'clickTrigger' | 'responsive';
 export declare type SiderTheme = 'light' | 'dark';
@@ -15,6 +15,7 @@ export declare type MenuMode =
   | 'horizontal'
   | 'inline';
 
+const { title } = defaultSettings;
 interface ITopNavHeaderProps {
   theme: SiderTheme;
   contentWidth?: string;
