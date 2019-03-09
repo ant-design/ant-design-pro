@@ -1,6 +1,29 @@
 import { queryNotices } from '@/services/user';
+import { Effect, Subscription } from 'dva';
+import { Reducer } from 'redux';
 
-export default {
+export interface IGlobalModelState {
+  collapsed: boolean;
+  notices: any[];
+}
+
+export interface IGlobalModel {
+  namespace: 'global';
+  state: IGlobalModelState;
+  effects: {
+    fetchNotices: Effect;
+    clearNotices: Effect;
+    changeNoticeReadState: Effect;
+  };
+  reducers: {
+    changeLayoutCollapsed: Reducer<any>;
+    saveNotices: Reducer<any>;
+    saveClearedNotices: Reducer<any>;
+  };
+  subscriptions: { setup: Subscription };
+}
+
+const GlobalModel: IGlobalModel = {
   namespace: 'global',
 
   state: {
@@ -92,10 +115,12 @@ export default {
     setup({ history }) {
       // Subscribe history(url) change, trigger `load` action if pathname is `/`
       return history.listen(({ pathname, search }) => {
-        if (typeof window.ga !== 'undefined') {
-          window.ga('send', 'pageview', pathname + search);
+        if (typeof (window as any).ga !== 'undefined') {
+          (window as any).ga('send', 'pageview', pathname + search);
         }
       });
     },
   },
 };
+
+export default GlobalModel;

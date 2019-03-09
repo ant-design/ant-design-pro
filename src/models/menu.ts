@@ -1,13 +1,15 @@
-import memoizeOne from 'memoize-one';
-import isEqual from 'lodash/isEqual';
-import { formatMessage } from 'umi/locale';
 import Authorized from '@/utils/Authorized';
+import { Effect } from 'dva';
+import isEqual from 'lodash/isEqual';
+import memoizeOne from 'memoize-one';
+import { Reducer } from 'redux';
+import { formatMessage } from 'umi-plugin-locale';
 import { menu } from '../defaultSettings';
 
 const { check } = Authorized;
 
 // Conversion router to menu.
-function formatter(data, parentAuthority, parentName) {
+function formatter(data: any[], parentAuthority: string[], parentName: string): any[] {
   return data
     .map(item => {
       if (!item.name || !item.path) {
@@ -44,10 +46,19 @@ function formatter(data, parentAuthority, parentName) {
 
 const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
+interface ISubMenuItem {
+  children: ISubMenuItem[];
+  hideChildrenInMenu?: boolean;
+  hideInMenu?: boolean;
+  name?: any;
+  component: any;
+  authority?: string[];
+  path: string;
+}
 /**
  * get SubMenu or Item
  */
-const getSubMenu = item => {
+const getSubMenu: (item: ISubMenuItem) => ISubMenuItem = item => {
   // doc: add hideChildrenInMenu
   if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
     return {
@@ -61,7 +72,7 @@ const getSubMenu = item => {
 /**
  * filter menuData
  */
-const filterMenuData = menuData => {
+const filterMenuData: (menuData: ISubMenuItem[]) => ISubMenuItem[] = menuData => {
   if (!menuData) {
     return [];
   }
@@ -72,12 +83,12 @@ const filterMenuData = menuData => {
 };
 /**
  * 获取面包屑映射
- * @param {Object} menuData 菜单配置
+ * @param ISubMenuItem[] menuData 菜单配置
  */
-const getBreadcrumbNameMap = menuData => {
+const getBreadcrumbNameMap: (menuData: ISubMenuItem[]) => object = menuData => {
   const routerMap = {};
 
-  const flattenMenuData = data => {
+  const flattenMenuData: (data: ISubMenuItem[]) => void = data => {
     data.forEach(menuItem => {
       if (menuItem.children) {
         flattenMenuData(menuItem.children);
@@ -92,7 +103,23 @@ const getBreadcrumbNameMap = menuData => {
 
 const memoizeOneGetBreadcrumbNameMap = memoizeOne(getBreadcrumbNameMap, isEqual);
 
-export default {
+export interface IMenuModelState {
+  menuData: any[];
+  routerData: any[];
+  breadcrumbNameMap: object;
+}
+
+export interface IMenuModel {
+  namespace: 'menu';
+  state: IMenuModelState;
+  effects: {
+    getMenuData: Effect;
+  };
+  reducers: {
+    save: Reducer<any>;
+  };
+}
+const MenuModel: IMenuModel = {
   namespace: 'menu',
 
   state: {
@@ -123,3 +150,5 @@ export default {
     },
   },
 };
+
+export default MenuModel;

@@ -1,21 +1,32 @@
-import React, { Component } from 'react';
-import { formatMessage } from 'umi/locale';
-import { Layout, message } from 'antd';
-import Animate from 'rc-animate';
-import { connect } from 'dva';
-import router from 'umi/router';
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
+import { ISettingModelState } from '@/models/setting';
+
+import { Layout, message } from 'antd';
+import { connect } from 'dva';
+import Animate from 'rc-animate';
+import React, { Component } from 'react';
+import { formatMessage } from 'umi-plugin-locale';
+import router from 'umi/router';
 import styles from './Header.less';
 
 const { Header } = Layout;
 
-class HeaderView extends Component {
-  state = {
-    visible: true,
-  };
+interface IHeaderViewProps {
+  isMobile: boolean;
+  collapsed: boolean;
+  setting: ISettingModelState;
+  dispatch: (args: any) => void;
+  autoHideHeader: boolean;
+  handleMenuCollapse: (args: boolean) => void;
+}
 
-  static getDerivedStateFromProps(props, state) {
+interface IHeaderViewState {
+  visible: boolean;
+}
+
+class HeaderView extends Component<IHeaderViewProps, IHeaderViewState> {
+  static getDerivedStateFromProps(props: IHeaderViewProps, state: IHeaderViewState) {
     if (!props.autoHideHeader && !state.visible) {
       return {
         visible: true,
@@ -23,6 +34,14 @@ class HeaderView extends Component {
     }
     return null;
   }
+
+  state = {
+    visible: true,
+  };
+
+  ticking: boolean;
+
+  oldScrollTop: number;
 
   componentDidMount() {
     document.addEventListener('scroll', this.handScroll, { passive: true });

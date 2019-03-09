@@ -1,5 +1,5 @@
+import { Icon, Layout } from 'antd';
 import React, { Fragment } from 'react';
-import { Layout, Icon } from 'antd';
 import { GlobalFooter } from 'ant-design-pro';
 
 const { Footer } = Layout;

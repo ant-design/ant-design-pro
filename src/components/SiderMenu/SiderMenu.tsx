@@ -1,29 +1,39 @@
-import React, { PureComponent, Suspense } from 'react';
 import { Layout } from 'antd';
 import classNames from 'classnames';
+import * as H from 'history';
+import React, { PureComponent, Suspense } from 'react';
 import Link from 'umi/link';
-import styles from './index.less';
-import PageLoading from '../PageLoading';
-import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
 import { title } from '../../defaultSettings';
+import PageLoading from '../PageLoading';
+import styles from './index.less';
+import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
 
 const BaseMenu = React.lazy(() => import('./BaseMenu'));
 const { Sider } = Layout;
 
-let firstMount = true;
+let firstMount: boolean = true;
 
-export default class SiderMenu extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openKeys: getDefaultCollapsedSubMenus(props),
-    };
-  }
+export declare type CollapseType = 'clickTrigger' | 'responsive';
+export declare type SiderTheme = 'light' | 'dark';
 
-  componentDidMount() {
-    firstMount = false;
-  }
+interface ISiderMenuProps {
+  menuData: any[];
+  location?: H.Location;
+  flatMenuKeys?: any[];
+  logo?: string;
+  collapsed: boolean;
+  onCollapse: (collapsed: boolean, type?: CollapseType) => void;
+  fixSiderbar?: boolean;
+  theme?: SiderTheme;
+  isMobile: boolean;
+}
 
+interface ISiderMenuState {
+  openKeys: any;
+  flatMenuKeysLen?: number;
+}
+
+export default class SiderMenu extends PureComponent<ISiderMenuProps, ISiderMenuState> {
   static getDerivedStateFromProps(props, state) {
     const { pathname, flatMenuKeysLen } = state;
     if (props.location.pathname !== pathname || props.flatMenuKeys.length !== flatMenuKeysLen) {
@@ -35,8 +45,18 @@ export default class SiderMenu extends PureComponent {
     }
     return null;
   }
+  constructor(props: ISiderMenuProps) {
+    super(props);
+    this.state = {
+      openKeys: getDefaultCollapsedSubMenus(props),
+    };
+  }
 
-  isMainMenu = key => {
+  componentDidMount() {
+    firstMount = false;
+  }
+
+  isMainMenu: (key: string) => boolean = key => {
     const { menuData } = this.props;
     return menuData.some(item => {
       if (key) {
@@ -46,7 +66,7 @@ export default class SiderMenu extends PureComponent {
     });
   };
 
-  handleOpenChange = openKeys => {
+  handleOpenChange: (openKeys: any[]) => void = openKeys => {
     const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({
       openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys],
@@ -65,7 +85,7 @@ export default class SiderMenu extends PureComponent {
     return (
       <Sider
         trigger={null}
-        collapsible
+        collapsible={true}
         collapsed={collapsed}
         breakpoint="lg"
         onCollapse={collapse => {
