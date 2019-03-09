@@ -6,10 +6,25 @@ import { getFlatMenuKeys } from '../SiderMenu/SiderMenuUtils';
 import styles from './index.less';
 import { title } from '../../defaultSettings';
 
-export default class TopNavHeader extends PureComponent {
+export declare type SiderTheme = 'light' | 'dark';
+
+interface ITopNavHeaderProps {
+  theme: SiderTheme;
+  contentWidth: string;
+  menuData: any[];
+  logo: string;
+}
+
+interface ITopNavHeaderState {
+  maxWidth: undefined | number;
+}
+
+export default class TopNavHeader extends PureComponent<ITopNavHeaderProps, ITopNavHeaderState> {
   state = {
     maxWidth: undefined,
   };
+
+  maim: HTMLDivElement;
 
   static getDerivedStateFromProps(props) {
     return {

@@ -41,17 +41,17 @@ export declare type MenuMode =
 interface IBaseMenuProps {
   flatMenuKeys?: any[];
   location?: H.Location;
-  onCollapse: (collapsed: boolean, type?: CollapseType) => void;
-  isMobile: boolean;
+  onCollapse?: (collapsed: boolean, type?: CollapseType) => void;
+  isMobile?: boolean;
   openKeys?: any;
   theme?: SiderTheme;
-  mode: MenuMode;
+  mode?: MenuMode;
   className?: string;
-  collapsed: boolean;
-  handleOpenChange: (openKeys: any[]) => void;
-  menuData: any[];
-  style: React.CSSProperties;
-  onOpenChange: (openKeys: string[]) => void;
+  collapsed?: boolean;
+  handleOpenChange?: (openKeys: any[]) => void;
+  menuData?: any[];
+  style?: React.CSSProperties;
+  onOpenChange?: (openKeys: string[]) => void;
 }
 
 interface IBaseMenuState {}

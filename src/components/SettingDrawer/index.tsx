@@ -128,7 +128,6 @@ class SettingDrawer extends PureComponent<ISettingDrawerProps, ISettingDrawerSta
     const action = React.cloneElement(item.action, {
       disabled: item.disabled,
     });
-    console.log(item);
     return (
       <Tooltip title={item.disabled ? item.disabledReason : ''} placement="left">
         <List.Item actions={[action]}>
