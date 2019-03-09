@@ -1,22 +1,30 @@
 import React, { PureComponent } from 'react';
 import { Icon } from 'antd';
 import Link from 'umi/link';
-import Debounce from 'lodash-decorators/debounce';
+import debounce from 'lodash/debounce';
 import styles from './index.less';
 import RightContent from './RightContent';
 
-export default class GlobalHeader extends PureComponent {
+interface IGlobalHeaderProps {
+  collapsed?: boolean;
+  onCollapse?: (collapsed: boolean) => void;
+  isMobile?: boolean;
+  logo?: string;
+  onNoticeClear?: (type: string) => void;
+  onMenuClick?: ({ key: string }) => void;
+  onNoticeVisibleChange?: (b: boolean) => void;
+}
+
+export default class GlobalHeader extends PureComponent<IGlobalHeaderProps> {
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
   }
-  /* eslint-disable*/
-  @Debounce(600)
-  triggerResizeEvent() {
+  triggerResizeEvent = debounce(() => {
     // eslint-disable-line
     const event = document.createEvent('HTMLEvents');
     event.initEvent('resize', true, false);
     window.dispatchEvent(event);
-  }
+  });
   toggle = () => {
     const { collapsed, onCollapse } = this.props;
     onCollapse(!collapsed);
