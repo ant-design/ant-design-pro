@@ -52,6 +52,7 @@
     "umi-types": "^0.2.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.11",
     "@types/react": "^16.8.1",
     "@types/react-dom": "^16.0.11",
     "antd-pro-merge-less": "^1.0.0",
