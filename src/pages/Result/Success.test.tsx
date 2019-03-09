@@ -1,5 +1,6 @@
-import React from 'react';
 import { shallow } from 'enzyme';
+import 'jest';
+import React from 'react';
 import Success from './Success';
 
 it('renders with Result', () => {

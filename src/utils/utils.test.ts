@@ -1,3 +1,4 @@
+import 'jest';
 import { fixedZero, isUrl } from './utils';
 
 describe('fixedZero tests', () => {
@@ -26,14 +27,14 @@ describe('fixedZero tests', () => {
 
 describe('isUrl tests', () => {
   it('should return false for invalid and corner case inputs', () => {
-    expect(isUrl([])).toBeFalsy();
-    expect(isUrl({})).toBeFalsy();
-    expect(isUrl(false)).toBeFalsy();
-    expect(isUrl(true)).toBeFalsy();
-    expect(isUrl(NaN)).toBeFalsy();
+    expect(isUrl([] as any)).toBeFalsy();
+    expect(isUrl({} as any)).toBeFalsy();
+    expect(isUrl(false as any)).toBeFalsy();
+    expect(isUrl(true as any)).toBeFalsy();
+    expect(isUrl(NaN as any)).toBeFalsy();
     expect(isUrl(null)).toBeFalsy();
     expect(isUrl(undefined)).toBeFalsy();
-    expect(isUrl()).toBeFalsy();
+    expect(isUrl(void 0)).toBeFalsy();
     expect(isUrl('')).toBeFalsy();
   });
 

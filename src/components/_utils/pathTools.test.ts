@@ -1,3 +1,4 @@
+import 'jest';
 import { urlToList } from './pathTools';
 
 describe('test urlToList', () => {

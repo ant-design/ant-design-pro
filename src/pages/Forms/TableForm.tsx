@@ -14,7 +14,6 @@ interface ITableFormState {
 }
 
 class TableForm extends PureComponent<ITableFormProps, ITableFormState> {
-
   static getDerivedStateFromProps(nextProps, preState) {
     if (isEqual(nextProps.value, preState.value)) {
       return null;
@@ -145,6 +144,7 @@ class TableForm extends PureComponent<ITableFormProps, ITableFormState> {
   }
 
   render() {
+    const { loading, data } = this.state;
     const columns = [
       {
         title: '成员姓名',
@@ -207,8 +207,7 @@ class TableForm extends PureComponent<ITableFormProps, ITableFormState> {
       {
         title: '操作',
         key: 'action',
-        render: (text, record) => {
-          const { loading } = this.state;
+        render: (_, record) => {
           if (!!record.editable && loading) {
             return null;
           }
@@ -244,8 +243,6 @@ class TableForm extends PureComponent<ITableFormProps, ITableFormState> {
         },
       },
     ];
-
-    const { loading, data } = this.state;
 
     return (
       <Fragment>
