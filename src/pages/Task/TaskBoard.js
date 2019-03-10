@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Checkbox, Icon, Menu, Dropdown } from 'antd';
+import { Checkbox, Icon, Menu, Dropdown, Avatar, Skeleton, List } from 'antd';
 import styles from './TaskBoard.less';
 
 @connect(({ team, loading }) => ({
@@ -12,23 +12,74 @@ class TaskBoard extends PureComponent {
 
   componentDidMount() {}
 
+  deleteCard = id => {
+    console.log(id);
+  };
+
+  renderCard = () => {
+    const list = [
+      {
+        id: 'work1',
+        title: 'work',
+        name: 'work1',
+      },
+      {
+        id: 'work2',
+        title: 'work',
+        name: 'work2',
+      },
+    ];
+    return (
+      <List
+        itemLayout="horizontal"
+        dataSource={list}
+        renderItem={item => (
+          <List.Item style={{ backgroundColor: '#fff', padding: '12px 15px' }}>
+            <Skeleton avatar title={false} loading={false} active>
+              <List.Item.Meta
+                avatar=<Checkbox />
+                title={<a href="https://ant.design">{item.name}</a>}
+                description="上周四截止"
+              />
+              <div>
+                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+              </div>
+            </Skeleton>
+          </List.Item>
+        )}
+      />
+    );
+  };
+
   render() {
     const menu = (
       <Menu>
         <Menu.Item key="0">
-          <a href="">
+          <a
+            onClick={() => {
+              this.addCardList();
+            }}
+          >
             <Icon type="plus" />
             &nbsp;新建任务
           </a>
         </Menu.Item>
         <Menu.Item key="1">
-          <a href="">
+          <a
+            onClick={() => {
+              this.addCardList();
+            }}
+          >
             <Icon type="edit" />
             &nbsp;重命名
           </a>
         </Menu.Item>
         <Menu.Item key="3">
-          <a href="">
+          <a
+            onClick={() => {
+              this.addCardList();
+            }}
+          >
             <Icon type="close" />
             &nbsp;删除列表
           </a>
@@ -47,80 +98,13 @@ class TaskBoard extends PureComponent {
               <div className={styles.iconBox}>
                 <Dropdown overlay={menu} trigger={['click']}>
                   <a className="ant-dropdown-link" href="#">
-                    C<Icon type="down" />
+                    <Icon type="small-dash" />
                   </a>
                 </Dropdown>
               </div>
             </div>
-            <div className={styles.cardList}>
-              <div className={styles.item}>
-                <div className={styles.checkBox}>
-                  <Checkbox disabled />
-                  <span title="触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014">
-                    触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014
-                  </span>
-                </div>
-                <div className={styles.icon}>
-                  <span className={styles.ceo}>林鑫</span>
-                </div>
-                <div className={styles.endTime}>
-                  <span className={styles.rich}>
-                    <i>上周四</i> 截止
-                  </span>
-                </div>
-              </div>
 
-              <div className={styles.item}>
-                <div className={styles.checkBox}>
-                  <Checkbox disabled />
-                  <span title="触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014">
-                    触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014
-                  </span>
-                </div>
-                <div className={styles.icon}>
-                  <span className={styles.ceo}>林鑫</span>
-                </div>
-                <div className={styles.endTime}>
-                  <span className={styles.rich}>
-                    <i>上周四</i> 截止
-                  </span>
-                </div>
-              </div>
-
-              <div className={styles.item}>
-                <div className={styles.checkBox}>
-                  <Checkbox disabled />
-                  <span title="触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014">
-                    触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014
-                  </span>
-                </div>
-                <div className={styles.icon}>
-                  <span className={styles.ceo}>林鑫</span>
-                </div>
-                <div className={styles.endTime}>
-                  <span className={styles.rich}>
-                    <i>上周四</i> 截止
-                  </span>
-                </div>
-              </div>
-
-              <div className={styles.item}>
-                <div className={styles.checkBox}>
-                  <Checkbox disabled />
-                  <span title="触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014">
-                    触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014触屏游戏设计2014
-                  </span>
-                </div>
-                <div className={styles.icon}>
-                  <span className={styles.ceo}>林鑫</span>
-                </div>
-                <div className={styles.endTime}>
-                  <span className={styles.rich}>
-                    <i>上周四</i> 截止
-                  </span>
-                </div>
-              </div>
-            </div>
+            <div className={styles.cardList}>{this.renderCard()}</div>
           </div>
 
           <div className={styles.listGroup}>
