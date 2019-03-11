@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
 import { Chart, Axis, Tooltip, Geom } from 'bizcharts';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
+import debounce from 'lodash/debounce';
 import autoHeight from '../autoHeight';
 import styles from '../index.less';
 
-@autoHeight()
-class Bar extends Component {
+interface BarProps {
+  title: React.ReactNode;
+  color?: string;
+  padding?: [number, number, number, number];
+  height: number;
+  data: Array<{
+    x: string;
+    y: number;
+  }>;
+  autoLabel?: boolean;
+  style?: React.CSSProperties;
+  forceFit: boolean;
+}
+
+interface BarState {
+  autoHideXLabels: boolean;
+}
+
+class Bar extends Component<BarProps, BarState> {
   state = {
     autoHideXLabels: false,
   };
 
+  root: HTMLDivElement;
+  node: any;
   componentDidMount() {
     window.addEventListener('resize', this.resize, { passive: true });
   }
@@ -27,9 +45,7 @@ class Bar extends Component {
     this.node = n;
   };
 
-  @Bind()
-  @Debounce(400)
-  resize() {
+  resize = debounce(() => {
     if (!this.node) {
       return;
     }
@@ -52,7 +68,7 @@ class Bar extends Component {
         autoHideXLabels: false,
       });
     }
-  }
+  }, 400);
 
   render() {
     const {
@@ -74,8 +90,7 @@ class Bar extends Component {
         min: 0,
       },
     };
-
-    const tooltip = [
+    const tooltip: [string, (...args: any[]) => { name?: string; value: string }] = [
       'x*y',
       (x, y) => ({
         name: x,
@@ -110,4 +125,4 @@ class Bar extends Component {
   }
 }
 
-export default Bar;
+export default autoHeight()(Bar);

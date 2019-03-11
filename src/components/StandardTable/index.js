@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Table, Alert } from 'antd';
 import styles from './index.less';
 
@@ -12,7 +12,7 @@ function initTotalList(columns) {
   return totalList;
 }
 
-class StandardTable extends PureComponent {
+class StandardTable extends Component {
   constructor(props) {
     super(props);
     const { columns } = props;

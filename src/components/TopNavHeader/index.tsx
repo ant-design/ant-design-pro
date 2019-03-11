@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import Link from 'umi/link';
 import RightContent from '../GlobalHeader/RightContent';
 import BaseMenu from '../SiderMenu/BaseMenu';
@@ -40,7 +40,7 @@ interface ITopNavHeaderState {
   maxWidth: undefined | number;
 }
 
-export default class TopNavHeader extends PureComponent<ITopNavHeaderProps, ITopNavHeaderState> {
+export default class TopNavHeader extends Component<ITopNavHeaderProps, ITopNavHeaderState> {
   state = {
     maxWidth: undefined,
   };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
+import { CardProps } from 'antd/es/card';
 import classNames from 'classnames';
 
 import styles from './index.less';
@@ -19,7 +20,17 @@ const renderTotal = total => {
   return totalDom;
 };
 
-class ChartCard extends React.PureComponent {
+interface ChartCardProps extends CardProps {
+  title: React.ReactNode;
+  action?: React.ReactNode;
+  total?: React.ReactNode | number | (() => React.ReactNode | number);
+  footer?: React.ReactNode;
+  contentHeight?: number;
+  avatar?: React.ReactNode;
+  style?: React.CSSProperties;
+}
+
+class ChartCard extends React.Component<ChartCardProps> {
   renderConnet = () => {
     const { contentHeight, title, avatar, action, total, footer, children, loading } = this.props;
     if (loading) {

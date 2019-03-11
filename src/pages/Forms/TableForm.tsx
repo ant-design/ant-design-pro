@@ -1,6 +1,6 @@
 import { Button, Divider, Input, message, Popconfirm, Table } from 'antd';
 import isEqual from 'lodash/isEqual';
-import React, { Fragment, PureComponent } from 'react';
+import React, { Fragment, Component } from 'react';
 import styles from './style.less';
 
 interface ITableFormProps {
@@ -13,7 +13,7 @@ interface ITableFormState {
   value?: any[];
 }
 
-class TableForm extends PureComponent<ITableFormProps, ITableFormState> {
+class TableForm extends Component<ITableFormProps, ITableFormState> {
   static getDerivedStateFromProps(nextProps, preState) {
     if (isEqual(nextProps.value, preState.value)) {
       return null;

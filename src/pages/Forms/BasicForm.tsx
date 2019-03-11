@@ -13,7 +13,7 @@ import {
 } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import styles from './style.less';
 
@@ -31,7 +31,7 @@ interface IBasicFormsProps extends FormComponentProps {
 @connect(({ loading }) => ({
   submitting: loading.effects['form/submitRegularForm'],
 }))
-class BasicForms extends PureComponent<IBasicFormsProps> {
+class BasicForms extends Component<IBasicFormsProps> {
   handleSubmit = e => {
     const { dispatch, form } = this.props;
     e.preventDefault();

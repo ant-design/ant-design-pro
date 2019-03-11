@@ -21,6 +21,7 @@ const defaultFormatter = val => {
 
 Shape.registerShape('point', 'pointer', {
   drawShape(cfg, group) {
+    // todo: 这里还不知道怎么修改。
     let point = cfg.points[0];
     point = this.parsePoint(point);
     const center = this.parsePoint({
@@ -51,8 +52,18 @@ Shape.registerShape('point', 'pointer', {
   },
 });
 
-@autoHeight()
-class Gauge extends React.Component {
+interface GaugeProps {
+  title: React.ReactNode;
+  color?: string;
+  height: number;
+  bgColor?: number;
+  percent: number;
+  style?: React.CSSProperties;
+  forceFit: boolean;
+  formatter: (val: string) => string;
+}
+
+class Gauge extends React.Component<GaugeProps> {
   render() {
     const {
       title,
@@ -83,7 +94,7 @@ class Gauge extends React.Component {
           subTickLine={null}
           name="value"
           zIndex={2}
-          gird={null}
+          grid={false}
           label={{
             offset: -12,
             formatter,
@@ -142,7 +153,7 @@ class Gauge extends React.Component {
           />
           <Html
             position={['50%', '95%']}
-            html={() => `
+            html={`
                 <div style="width: 300px;text-align: center;font-size: 12px!important;">
                   <p style="font-size: 14px; color: rgba(0,0,0,0.43);margin: 0;">${title}</p>
                   <p style="font-size: 24px;color: rgba(0,0,0,0.85);margin: 0;">
@@ -164,4 +175,4 @@ class Gauge extends React.Component {
   }
 }
 
-export default Gauge;
+export default autoHeight()(Gauge);

@@ -21,7 +21,7 @@ import {
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import moment from 'moment';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import styles from './BasicList.less';
 import { IRuleModelState } from './models/rule';
@@ -48,7 +48,7 @@ interface IBasicListState {
   list,
   loading: loading.models.list,
 }))
-class BasicList extends PureComponent<IBasicListProps, IBasicListState> {
+class BasicList extends Component<IBasicListProps, IBasicListState> {
   state = { visible: false, done: false, current: undefined };
 
   addBtn: HTMLElement;

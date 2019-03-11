@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Icon, Tabs, Badge, Spin } from 'antd';
 import classNames from 'classnames';
@@ -8,7 +8,7 @@ import styles from './index.less';
 
 const { TabPane } = Tabs;
 
-export default class NoticeIcon extends PureComponent {
+export default class NoticeIcon extends Component {
   static Tab = TabPane;
 
   static defaultProps = {

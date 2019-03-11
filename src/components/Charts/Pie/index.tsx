@@ -4,20 +4,49 @@ import { DataView } from '@antv/data-set';
 import { Divider } from 'antd';
 import classNames from 'classnames';
 import ReactFitText from 'react-fittext';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
+import debounce from 'lodash/debounce';
 import autoHeight from '../autoHeight';
 
 import styles from './index.less';
 
-/* eslint react/no-danger:0 */
-@autoHeight()
-class Pie extends Component {
+interface PieProps {
+  animate?: boolean;
+  color?: string;
+  colors?: string[];
+  height: number;
+  hasLegend?: boolean;
+  padding?: [number, number, number, number];
+  percent?: number;
+  data?: Array<{
+    x: string | string;
+    y: number;
+  }>;
+  total?: React.ReactNode | number | (() => React.ReactNode | number);
+  title?: React.ReactNode;
+  tooltip?: boolean;
+  valueFormat?: (value: string) => string | React.ReactNode;
+  subTitle?: React.ReactNode;
+  lineWidth?: number;
+  inner?: number;
+  margin?: number[];
+  style?: React.CSSProperties;
+  forceFit: boolean;
+  className: string;
+  selected: boolean;
+}
+
+interface PieState {
+  legendData: any[];
+  legendBlock: boolean;
+}
+class Pie extends Component<PieProps, PieState> {
   state = {
     legendData: [],
     legendBlock: false,
   };
-
+  requestRef: number;
+  root: any;
+  chart: G2.Chart;
   componentDidMount() {
     window.addEventListener(
       'resize',
@@ -93,10 +122,7 @@ class Pie extends Component {
     });
   };
 
-  // for window resize auto responsive legend
-  @Bind()
-  @Debounce(300)
-  resize() {
+  resize = debounce(() => {
     const { hasLegend } = this.props;
     const { legendBlock } = this.state;
     if (!hasLegend || !this.root) {
@@ -114,7 +140,7 @@ class Pie extends Component {
         legendBlock: false,
       });
     }
-  }
+  }, 300);
 
   render() {
     const {
@@ -179,16 +205,16 @@ class Pie extends Component {
       data = [
         {
           x: '占比',
-          y: parseFloat(percent),
+          y: parseFloat(percent + ''),
         },
         {
           x: '反比',
-          y: 100 - parseFloat(percent),
+          y: 100 - parseFloat(percent + ''),
         },
       ];
     }
 
-    const tooltipFormat = [
+    const tooltipFormat: [string, (...args: any[]) => { name?: string; value: string }] = [
       'x*percent',
       (x, p) => ({
         name: x,
@@ -196,7 +222,7 @@ class Pie extends Component {
       }),
     ];
 
-    const padding = [12, 0, 12, 0];
+    const padding: [number, number, number, number] = [12, 0, 12, 0];
 
     const dv = new DataView();
     dv.source(data).transform({
@@ -268,4 +294,4 @@ class Pie extends Component {
   }
 }
 
-export default Pie;
+export default autoHeight()(Pie);

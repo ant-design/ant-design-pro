@@ -7,7 +7,7 @@ import { IUserModelState } from '@/models/user';
 import { Avatar, Card, Col, List, Row } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Dispatch } from 'redux';
 import Link from 'umi/link';
 import { IActivitiesState } from './models/activities';
@@ -61,7 +61,7 @@ interface WorkplaceProps {
   projectLoading: loading.effects['project/fetchNotice'],
   activitiesLoading: loading.effects['activities/fetchList'],
 }))
-class Workplace extends PureComponent<WorkplaceProps> {
+class Workplace extends Component<WorkplaceProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

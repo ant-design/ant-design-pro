@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Button, Spin, Card } from 'antd';
 import { connect } from 'dva';
 import styles from './style.less';
@@ -15,7 +15,7 @@ interface ITriggerExceptionState {
 @connect(state => ({
   isloading: state.error.isloading,
 }))
-class TriggerException extends PureComponent<ITriggerExceptionProps, ITriggerExceptionState> {
+class TriggerException extends Component<ITriggerExceptionProps, ITriggerExceptionState> {
   state = {
     isloading: false,
   };

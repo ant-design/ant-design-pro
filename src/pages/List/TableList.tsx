@@ -25,7 +25,7 @@ import { PaginationConfig } from 'antd/es/pagination';
 import { SorterResult, TableCurrentDataSource } from 'antd/es/table';
 import { connect } from 'dva';
 import moment from 'moment';
-import React, { Fragment, PureComponent } from 'react';
+import React, { Fragment, Component } from 'react';
 import router from 'umi/router';
 import { IRuleModelState } from './models/rule';
 import styles from './TableList.less';
@@ -90,7 +90,7 @@ interface IUpdateFormState {
   currentStep: number;
 }
 
-class UpdateFormClass extends PureComponent<IUpdateFormProps, IUpdateFormState> {
+class UpdateFormClass extends Component<IUpdateFormProps, IUpdateFormState> {
   formLayout: object;
 
   constructor(props) {
@@ -318,7 +318,7 @@ interface ITableListState {
   rule,
   loading: loading.models.rule,
 }))
-class TableList extends PureComponent<ITableListProps, ITableListState> {
+class TableList extends Component<ITableListProps, ITableListState> {
   state = {
     modalVisible: false,
     updateModalVisible: false,

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import autoHeight from '../autoHeight';
 import styles from './index.less';
 
@@ -6,12 +6,25 @@ import styles from './index.less';
 /* eslint no-mixed-operators: 0 */
 // riddle: https://riddle.alibaba-inc.com/riddles/2d9a4b90
 
-@autoHeight()
-class WaterWave extends PureComponent {
+interface WaterWaveProps {
+  title: React.ReactNode;
+  color?: string;
+  height: number;
+  percent: number;
+  style?: React.CSSProperties;
+}
+
+interface WaterWaveState {
+  radio: number;
+}
+class WaterWave extends Component<WaterWaveProps, WaterWaveState> {
   state = {
     radio: 1,
   };
 
+  timer: number;
+  node: HTMLCanvasElement;
+  root: any;
   componentDidMount() {
     this.renderChart();
     this.resize();
@@ -50,7 +63,7 @@ class WaterWave extends PureComponent {
     }
   };
 
-  renderChart(type) {
+  renderChart(type?: string) {
     const { percent, color = '#1890FF' } = this.props;
     const data = percent / 100;
     const self = this;
@@ -138,11 +151,11 @@ class WaterWave extends PureComponent {
           ctx.globalCompositeOperation = 'destination-over';
           ctx.beginPath();
           ctx.lineWidth = lineWidth;
-          ctx.arc(radius, radius, bR, 0, 2 * Math.PI, 1);
+          ctx.arc(radius, radius, bR, 0, 2 * Math.PI, true);
 
           ctx.beginPath();
           ctx.save();
-          ctx.arc(radius, radius, radius - 3 * lineWidth, 0, 2 * Math.PI, 1);
+          ctx.arc(radius, radius, radius - 3 * lineWidth, 0, 2 * Math.PI, true);
 
           ctx.restore();
           ctx.clip();
@@ -210,4 +223,4 @@ class WaterWave extends PureComponent {
   }
 }
 
-export default WaterWave;
+export default autoHeight()(WaterWave);

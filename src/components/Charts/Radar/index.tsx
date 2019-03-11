@@ -4,13 +4,33 @@ import { Row, Col } from 'antd';
 import autoHeight from '../autoHeight';
 import styles from './index.less';
 
-/* eslint react/no-danger:0 */
-@autoHeight()
-class Radar extends Component {
+interface RadarProps {
+  title?: React.ReactNode;
+  height: number;
+  padding: [number, number, number, number];
+  hasLegend?: boolean;
+  data: Array<{
+    name: string;
+    label: string;
+    value: string;
+  }>;
+  style?: React.CSSProperties;
+  forceFit: boolean;
+  tickCount: number;
+  animate: boolean;
+  colors: string[];
+}
+
+interface RadarState {
+  legendData: any[];
+}
+class Radar extends Component<RadarProps, RadarState> {
   state = {
     legendData: [],
   };
 
+  chart: G2.Chart;
+  node: HTMLDivElement;
   componentDidMount() {
     this.getLegendData();
   }
@@ -93,7 +113,7 @@ class Radar extends Component {
       hasLegend = false,
       forceFit = true,
       tickCount = 5,
-      padding = [35, 30, 16, 30],
+      padding = [35, 30, 16, 30] as [number, number, number, number],
       animate = true,
       colors = defaultColors,
     } = this.props;
@@ -181,4 +201,4 @@ class Radar extends Component {
   }
 }
 
-export default Radar;
+export default autoHeight()(Radar);

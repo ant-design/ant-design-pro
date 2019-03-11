@@ -1,7 +1,7 @@
 import { Select, Spin } from 'antd';
 import { WrappedFormUtils } from 'antd/es/form/Form';
 import { connect } from 'dva';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Dispatch } from 'redux';
 import styles from './GeographicView.less';
 
@@ -30,7 +30,7 @@ interface GeographicProps {
     isLoading,
   };
 })
-class GeographicView extends PureComponent<GeographicProps> {
+class GeographicView extends Component<GeographicProps> {
   componentDidMount = () => {
     const { dispatch } = this.props;
     dispatch({

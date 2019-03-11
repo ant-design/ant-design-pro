@@ -13,7 +13,7 @@ const initTime = props => {
       targetTime = new Date(props.target).getTime();
     }
   } catch (e) {
-    throw new Error('invalid target prop', e);
+    throw new Error('invalid target prop');
   }
 
   lastTime = targetTime - new Date().getTime();
@@ -22,8 +22,18 @@ const initTime = props => {
   };
 };
 
-class CountDown extends Component {
-  timer = 0;
+interface CountDownProps {
+  format?: (time: number) => JSX.Element;
+  target: Date | number;
+  onEnd?: () => void;
+  style?: React.CSSProperties;
+}
+
+interface CountDownState {
+  lastTime: number;
+}
+class CountDown extends Component<CountDownProps, CountDownState> {
+  timer: NodeJS.Timeout;
 
   interval = 1000;
 
@@ -64,7 +74,7 @@ class CountDown extends Component {
   // defaultFormat = time => (
   //  <span>{moment(time).format('hh:mm:ss')}</span>
   // );
-  defaultFormat = time => {
+  defaultFormat: (time: number) => JSX.Element = time => {
     const hours = 60 * 60 * 1000;
     const minutes = 60 * 1000;
 

@@ -1,4 +1,4 @@
-import React, { PureComponent, createElement } from 'react';
+import React, { Component, createElement } from 'react';
 import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb } from 'antd';
 import styles from './index.less';
@@ -16,7 +16,7 @@ export const getBreadcrumb = (breadcrumbNameMap, url) => {
   return breadcrumb || {};
 };
 
-export default class BreadcrumbView extends PureComponent {
+export default class BreadcrumbView extends Component {
   state = {
     breadcrumb: null,
   };

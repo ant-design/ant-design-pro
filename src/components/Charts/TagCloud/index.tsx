@@ -1,23 +1,39 @@
 import React, { Component } from 'react';
 import { Chart, Geom, Coord, Shape, Tooltip } from 'bizcharts';
 import DataSet from '@antv/data-set';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
+import debounce from 'lodash/debounce';
 import classNames from 'classnames';
 import autoHeight from '../autoHeight';
 import styles from './index.less';
 
-/* eslint no-underscore-dangle: 0 */
-/* eslint no-param-reassign: 0 */
-
 const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
 
-@autoHeight()
-class TagCloud extends Component {
+interface TagCloudProps {
+  data: Array<{
+    name: string;
+    value: number;
+  }>;
+  height: number;
+  style?: React.CSSProperties;
+  className: string;
+}
+
+interface TagCloudState {
+  dv: any;
+  w: number;
+  h: number;
+}
+class TagCloud extends Component<TagCloudProps, TagCloudState> {
   state = {
     dv: null,
+    w: 0,
+    h: 0,
   };
 
+  root: HTMLDivElement;
+  requestRef: number;
+  isUnmount: boolean;
+  imageMask: HTMLImageElement;
   componentDidMount() {
     requestAnimationFrame(() => {
       this.initTagCloud();
@@ -66,6 +82,7 @@ class TagCloud extends Component {
     // 给point注册一个词云的shape
     Shape.registerShape('point', 'cloud', {
       drawShape(cfg, container) {
+        // todo:这里还不知道怎么改
         const attrs = getTextAttrs(cfg);
         return container.addShape('text', {
           attrs: Object.assign(attrs, {
@@ -77,9 +94,7 @@ class TagCloud extends Component {
     });
   };
 
-  @Bind()
-  @Debounce(500)
-  renderChart(nextProps) {
+  renderChart = debounce((nextProps?: TagCloudProps) => {
     // const colors = ['#1890FF', '#41D9C7', '#2FC25B', '#FACC14', '#9AE65C'];
     const { data, height } = nextProps || this.props;
 
@@ -131,7 +146,7 @@ class TagCloud extends Component {
     } else {
       onload();
     }
-  }
+  }, 500);
 
   render() {
     const { className, height } = this.props;
@@ -175,4 +190,4 @@ class TagCloud extends Component {
   }
 }
 
-export default TagCloud;
+export default autoHeight()(TagCloud);

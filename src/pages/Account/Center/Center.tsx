@@ -4,7 +4,7 @@ import { Avatar, Card, Col, Divider, Icon, Input, Row, Spin, Tag } from 'antd';
 import InputProps from 'antd/es/input';
 import { connect } from 'dva';
 import * as H from 'history';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { match } from 'react-router';
 import { Dispatch } from 'redux';
 import Link from 'umi/link';
@@ -43,7 +43,7 @@ interface CenterState {
   project,
   projectLoading: loading.effects['project/fetchNotice'],
 }))
-class Center extends PureComponent<CenterProps, CenterState> {
+class Center extends Component<CenterProps, CenterState> {
   state = {
     newTags: [],
     inputVisible: false,

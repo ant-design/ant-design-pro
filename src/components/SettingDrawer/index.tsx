@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert, Tooltip } from 'antd';
 import { formatMessage } from 'umi-plugin-locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -34,7 +34,7 @@ interface ISettingDrawerProps {
 interface ISettingDrawerState {}
 
 @connect(({ setting }) => ({ setting }))
-class SettingDrawer extends PureComponent<ISettingDrawerProps, ISettingDrawerState> {
+class SettingDrawer extends Component<ISettingDrawerProps, ISettingDrawerState> {
   state = {
     collapse: false,
   };

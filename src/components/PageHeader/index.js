@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Tabs, Skeleton } from 'antd';
 import classNames from 'classnames';
 import styles from './index.less';
 import BreadcrumbView from './breadcrumb';
 
 const { TabPane } = Tabs;
-export default class PageHeader extends PureComponent {
+export default class PageHeader extends Component {
   onChange = key => {
     const { onTabChange } = this.props;
     if (onTabChange) {

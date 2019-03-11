@@ -1,4 +1,4 @@
-import AvatarList from '@/components/AvatarList';
+import { AvatarList, AvatarListItem } from '@/components/AvatarList';
 import Ellipsis from '@/components/Ellipsis';
 import StandardFormRow from '@/components/StandardFormRow';
 import TagSelect from '@/components/TagSelect';
@@ -6,7 +6,7 @@ import { Card, Col, Form, List, Row, Select } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import moment from 'moment';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { FormattedMessage } from 'umi-plugin-locale';
 import { IRuleModelState } from './models/rule';
 import styles from './Projects.less';
@@ -26,7 +26,7 @@ interface ICoverCardListProps extends FormComponentProps {
   list,
   loading: loading.models.list,
 }))
-class CoverCardList extends PureComponent<ICoverCardListProps> {
+class CoverCardList extends Component<ICoverCardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -65,9 +65,9 @@ class CoverCardList extends PureComponent<ICoverCardListProps> {
               <div className={styles.cardItemContent}>
                 <span>{moment(item.updatedAt).fromNow()}</span>
                 <div className={styles.avatarList}>
-                  <AvatarList size="mini">
+                  <AvatarList size="small">
                     {item.members.map((member, i) => (
-                      <AvatarList.Item
+                      <AvatarListItem
                         key={`${item.id}-avatar-${i}`}
                         src={member.avatar}
                         tips={member.name}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin } from 'antd';
 
-export default class PromiseRender extends React.PureComponent {
+export default class PromiseRender extends React.Component {
   state = {
     component: null,
   };

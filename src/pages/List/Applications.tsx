@@ -5,7 +5,7 @@ import { Avatar, Card, Col, Dropdown, Form, Icon, List, Menu, Row, Select, Toolt
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import numeral from 'numeral';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { FormattedMessage } from 'umi-plugin-locale';
 import styles from './Applications.less';
 import { IRuleModelState } from './models/rule';
@@ -23,7 +23,7 @@ interface IFilterCardListProps extends FormComponentProps {
   list,
   loading: loading.models.list,
 }))
-class FilterCardList extends PureComponent<IFilterCardListProps> {
+class FilterCardList extends Component<IFilterCardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

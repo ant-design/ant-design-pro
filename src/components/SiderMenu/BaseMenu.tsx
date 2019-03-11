@@ -3,7 +3,7 @@ import { isUrl } from '@/utils/utils';
 import { Icon, Menu } from 'antd';
 import classNames from 'classnames';
 import * as H from 'history';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import Link from 'umi/link';
 import { urlToList } from '../_utils/pathTools';
 import styles from './index.less';
@@ -56,7 +56,7 @@ interface IBaseMenuProps {
 
 interface IBaseMenuState {}
 
-export default class BaseMenu extends PureComponent<IBaseMenuProps, IBaseMenuState> {
+export default class BaseMenu extends Component<IBaseMenuProps, IBaseMenuState> {
   /**
    * 获得菜单子节点
    * @memberof SiderMenu

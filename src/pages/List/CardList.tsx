@@ -2,7 +2,7 @@ import Ellipsis from '@/components/Ellipsis';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { Button, Card, Icon, List } from 'antd';
 import { connect } from 'dva';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import styles from './CardList.less';
 import { IRuleModelState } from './models/rule';
 
@@ -16,7 +16,7 @@ interface ICardListProps {
   list,
   loading: loading.models.list,
 }))
-class CardList extends PureComponent<ICardListProps> {
+class CardList extends Component<ICardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

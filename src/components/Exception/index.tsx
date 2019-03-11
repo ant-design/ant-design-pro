@@ -25,7 +25,7 @@ export interface IExceptionProps<
   redirect?: string;
 }
 
-class Exception extends React.PureComponent<IExceptionProps, any> {
+class Exception extends React.Component<IExceptionProps, any> {
   static defaultProps = {
     backText: 'back to home',
     redirect: '/',

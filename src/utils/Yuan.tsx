@@ -8,7 +8,7 @@ interface IYuanProps {
 /**
  * 减少使用 dangerouslySetInnerHTML
  */
-export default class Yuan extends React.PureComponent<IYuanProps> {
+export default class Yuan extends React.Component<IYuanProps> {
   main: any;
 
   componentDidMount() {

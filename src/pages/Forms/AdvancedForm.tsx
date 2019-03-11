@@ -15,7 +15,7 @@ import {
 } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import styles from './style.less';
 import TableForm from './TableForm';
 
@@ -67,7 +67,7 @@ interface IAdvancedFormProps extends FormComponentProps {
 @connect(({ loading }) => ({
   submitting: loading.effects['form/submitAdvancedForm'],
 }))
-class AdvancedForm extends PureComponent<IAdvancedFormProps> {
+class AdvancedForm extends Component<IAdvancedFormProps> {
   state = {
     width: '100%',
   };
