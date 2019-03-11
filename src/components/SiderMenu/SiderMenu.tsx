@@ -84,8 +84,8 @@ export default class SiderMenu extends Component<SiderMenuProps, SiderMenuState>
     });
     return (
       <Sider
+        collapsible
         trigger={null}
-        collapsible={true}
         collapsed={collapsed}
         breakpoint="lg"
         onCollapse={collapse => {

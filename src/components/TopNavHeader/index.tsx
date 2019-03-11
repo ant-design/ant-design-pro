@@ -1,3 +1,4 @@
+import { ClickParam } from 'antd/es/menu';
 import React, { Component } from 'react';
 import Link from 'umi/link';
 import RightContent from '../GlobalHeader/RightContent';
@@ -32,7 +33,7 @@ interface TopNavHeaderProps {
   style?: React.CSSProperties;
   onOpenChange?: (openKeys: string[]) => void;
   onNoticeClear?: (type: string) => void;
-  onMenuClick?: ({ key: string }) => void;
+  onMenuClick?: (param: ClickParam) => void;
   onNoticeVisibleChange?: (b: boolean) => void;
 }
 
@@ -41,17 +42,17 @@ interface TopNavHeaderState {
 }
 
 export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHeaderState> {
-  state = {
-    maxWidth: undefined,
-  };
-
-  maim: HTMLDivElement;
-
   static getDerivedStateFromProps(props) {
     return {
       maxWidth: (props.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 280 - 165 - 40,
     };
   }
+
+  state = {
+    maxWidth: undefined,
+  };
+
+  maim: HTMLDivElement;
 
   render() {
     const { theme, contentWidth, menuData, logo } = this.props;

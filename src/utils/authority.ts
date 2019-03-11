@@ -6,7 +6,7 @@ export function getAuthority(str?: string): any {
   // authorityString could be admin, "admin", ["admin"]
   let authority;
   try {
-    authority = JSON.parse(authorityString);
+    authority = JSON.parse(authorityString!);
   } catch (e) {
     authority = authorityString;
   }

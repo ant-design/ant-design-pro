@@ -221,6 +221,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
             <List.Item
               actions={[
                 <Switch
+                  key="Switch"
                   size="small"
                   checked={!!colorWeak}
                   onChange={checked => this.changeSetting('colorWeak', checked)}
