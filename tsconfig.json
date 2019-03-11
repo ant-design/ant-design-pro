@@ -9,18 +9,19 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "rootDirs": ["/src", "/test", "/mock","./typings"],
+    "rootDirs": ["/src", "/test", "/mock", "./typings"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "allowJs": true,
     "experimentalDecorators": true,
+    "strictNullChecks": true,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["./src"],
+  "include": ["./src", "config/defaultSettings.ts"],
   "exclude": [
     "node_modules",
     "build",

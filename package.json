@@ -13,8 +13,8 @@
     "analyze": "cross-env ANALYZE=1 umi build",
     "lint:style": "stylelint 'src/**/*.less' --syntax less",
     "lint:prettier": "check-prettier lint",
-    "lint": "eslint --ext .js src mock tests && npm run lint:style && npm run lint:prettier",
-    "lint:fix": "eslint --fix --ext .js src mock tests && stylelint --fix 'src/**/*.less' --syntax less",
+    "lint": "eslint --ext .js src tests && npm run lint:style && npm run lint:prettier",
+    "lint:fix": "eslint --fix --ext .js src tests && stylelint --fix 'src/**/*.less' --syntax less",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
     "test": "umi test",
@@ -47,9 +47,12 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",
     "react-media": "^1.8.0",
-    "umi-request": "^1.0.0"
+    "react-media-hook2": "^1.0.2",
+    "umi-request": "^1.0.0",
+    "umi-types": "^0.2.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.11",
     "@types/react": "^16.8.1",
     "@types/react-dom": "^16.0.11",
     "antd-pro-merge-less": "^1.0.0",
@@ -90,8 +93,8 @@
     "tslint-react": "^3.6.0",
     "umi": "^2.4.4",
     "umi-plugin-ga": "^1.1.3",
-    "umi-plugin-react": "^1.3.4",
-    "umi-plugin-pro-block": "^1.2.0"
+    "umi-plugin-pro-block": "^1.2.0",
+    "umi-plugin-react": "^1.3.4"
   },
   "optionalDependencies": {
     "puppeteer": "^1.12.1"
