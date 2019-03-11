@@ -116,6 +116,12 @@ class MulitTree extends Component {
     );
   };
 
+  sortnum = (a, b) => {
+    const l1 = a.child.length > 0 ? 1 : 0;
+    const l2 = b.child.length > 0 ? 1 : 0;
+    return l2 - l1;
+  };
+
   childGroupsRender = (items, count) => {
     const {
       data: { tree },
@@ -124,8 +130,10 @@ class MulitTree extends Component {
     let cnt = count;
     cnt += 1;
 
-    if (items.length !== 0) {
-      return items.map(item => (
+    const list = items.sort(this.sortnum);
+
+    if (list.length !== 0) {
+      return list.map(item => (
         <div key={item.id}>
           <div
             className={select[item.id] ? styles.nodeCardClick : styles.nodeCard}
