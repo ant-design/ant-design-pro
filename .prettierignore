@@ -3,3 +3,4 @@
 package.json
 .umi
 .umi-production
+**/*.ejs
