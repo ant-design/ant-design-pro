@@ -16,6 +16,7 @@
     "noUnusedLocals": true,
     "allowJs": true,
     "experimentalDecorators": true,
+    "strictNullChecks": true,
     "paths": {
       "@/*": ["./src/*"]
     }
