@@ -35,5 +35,7 @@ module.exports = {
   },
   settings: {
     polyfills: ['fetch', 'promises', 'url'],
+    // support import modules from TypeScript files in JavaScript files
+    'import/resolver': { node: { extensions: ['.js', '.ts', '.tsx'] } },
   },
 };

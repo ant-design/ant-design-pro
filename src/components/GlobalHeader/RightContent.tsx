@@ -10,12 +10,17 @@ import HeaderDropdown from '../HeaderDropdown';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 
-export declare type SiderTheme = 'light' | 'dark';
+export type SiderTheme = 'light' | 'dark';
 
-interface GlobalHeaderRightProps {
-  notices?: any[];
+export interface NoticeItem {
+  id: string;
+  type: string;
+  [key: string]: any;
+}
+
+export interface GlobalHeaderRightProps {
+  notices?: NoticeItem[];
   dispatch?: (args: any) => void;
-  // wait for https://github.com/umijs/umi/pull/2036
   currentUser?: {
     avatar?: string;
     name?: string;
@@ -77,10 +82,10 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
     return unreadMsg;
   };
 
-  changeReadState = clickedItem => {
+  changeReadState = (clickedItem: NoticeItem) => {
     const { id } = clickedItem;
     const { dispatch } = this.props;
-    dispatch({
+    dispatch!({
       type: 'global/changeNoticeReadState',
       payload: id,
     });
@@ -133,10 +138,10 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
             formatMessage({ id: 'component.globalHeader.search.example3' }),
           ]}
           onSearch={value => {
-            console.log('input', value); // eslint-disable-line
+            console.log('input', value); // tslint:disable-line no-console
           }}
           onPressEnter={value => {
-            console.log('enter', value); // eslint-disable-line
+            console.log('enter', value); // tslint:disable-line no-console
           }}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
@@ -154,8 +159,8 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
           className={styles.action}
           count={currentUser.unreadCount}
           onItemClick={(item, tabProps) => {
-            console.log(item, tabProps); // eslint-disable-line
-            this.changeReadState(item);
+            console.log(item, tabProps); // tslint:disable-line no-console
+            this.changeReadState(item as NoticeItem);
           }}
           loading={fetchingNotices}
           locale={{

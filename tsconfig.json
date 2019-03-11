@@ -2,8 +2,8 @@
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "esnext",
-    "target": "es2016",
-    "lib": ["es6", "dom"],
+    "target": "esnext",
+    "lib": ["esnext", "dom"],
     "sourceMap": true,
     "baseUrl": ".",
     "jsx": "react",
@@ -16,7 +16,7 @@
     "noUnusedLocals": true,
     "allowJs": true,
     "experimentalDecorators": true,
-    "strictNullChecks": true,
+    "strict": true,
     "paths": {
       "@/*": ["./src/*"]
     }
