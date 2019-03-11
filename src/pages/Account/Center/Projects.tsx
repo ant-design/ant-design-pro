@@ -1,4 +1,4 @@
-import AvatarList from '@/components/AvatarList';
+import { AvatarList, AvatarListItem } from '@/components/AvatarList';
 import { IListModelState } from '@/models/list';
 import { Card, List } from 'antd';
 import { connect } from 'dva';
@@ -31,9 +31,9 @@ const Projects: React.SFC<ProjectsProps> = props => {
             <div className={stylesProjects.cardItemContent}>
               <span>{moment(item.updatedAt).fromNow()}</span>
               <div className={stylesProjects.avatarList}>
-                <AvatarList size="mini">
+                <AvatarList size="small">
                   {item.members.map(member => (
-                    <AvatarList.Item
+                    <AvatarListItem
                       key={`${item.id}-avatar-${member.id}`}
                       src={member.avatar}
                       tips={member.name}

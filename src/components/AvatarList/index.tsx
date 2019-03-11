@@ -4,20 +4,45 @@ import classNames from 'classnames';
 
 import styles from './index.less';
 
-const avatarSizeToClassName = size =>
+export declare type SizeType = number | 'small' | 'default' | 'large' | undefined;
+
+const avatarSizeToClassName: (size: SizeType) => string = size =>
   classNames(styles.avatarItem, {
     [styles.avatarItemLarge]: size === 'large',
     [styles.avatarItemSmall]: size === 'small',
     [styles.avatarItemMini]: size === 'mini',
   });
 
-const AvatarList = ({ children, size, maxLength, excessItemsStyle, ...other }) => {
+interface AvatarItemProps {
+  tips: React.ReactNode;
+  src: string;
+  size?: SizeType;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}
+
+interface AvatarListProps {
+  Item?: React.ReactElement<AvatarItemProps>;
+  size?: SizeType;
+  maxLength?: number;
+  excessItemsStyle?: React.CSSProperties;
+  style?: React.CSSProperties;
+  children: React.ReactElement<AvatarItemProps> | Array<React.ReactElement<AvatarItemProps>>;
+}
+
+export const AvatarList: React.SFC<AvatarListProps> = ({
+  children,
+  size,
+  maxLength,
+  excessItemsStyle,
+  ...other
+}) => {
   const numOfChildren = React.Children.count(children);
   const numToShow = maxLength >= numOfChildren ? numOfChildren : maxLength;
 
   const childrenWithProps = React.Children.toArray(children)
     .slice(0, numToShow)
-    .map(child =>
+    .map((child: React.ReactElement<AvatarItemProps>) =>
       React.cloneElement(child, {
         size,
       })
@@ -40,7 +65,12 @@ const AvatarList = ({ children, size, maxLength, excessItemsStyle, ...other }) =
   );
 };
 
-const Item = ({ src, size, tips, onClick = () => {} }) => {
+export const AvatarListItem: React.SFC<AvatarItemProps> = ({
+  src,
+  size,
+  tips,
+  onClick = () => {},
+}) => {
   const cls = avatarSizeToClassName(size);
 
   return (
@@ -55,7 +85,3 @@ const Item = ({ src, size, tips, onClick = () => {} }) => {
     </li>
   );
 };
-
-AvatarList.Item = Item;
-
-export default AvatarList;
