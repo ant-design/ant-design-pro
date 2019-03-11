@@ -4,7 +4,7 @@ import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
-import { NoticeIcon } from 'ant-design-pro';
+import NoticeIcon from '@/components/NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import HeaderDropdown from '../HeaderDropdown';
 import SelectLang from '../SelectLang';
@@ -33,7 +33,7 @@ interface IGlobalHeaderRightProps {
   theme?: SiderTheme;
 }
 export default class GlobalHeaderRight extends PureComponent<IGlobalHeaderRightProps> {
-  getNoticeData() {
+  getNoticeData: () => any = () => {
     const { notices = [] } = this.props;
     if (notices.length === 0) {
       return {};
@@ -62,7 +62,7 @@ export default class GlobalHeaderRight extends PureComponent<IGlobalHeaderRightP
       return newNotice;
     });
     return groupBy(newNotices, 'type');
-  }
+  };
 
   getUnreadData: (noticeData: object) => any = noticeData => {
     const unreadMsg = {};

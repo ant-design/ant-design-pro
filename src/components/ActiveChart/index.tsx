@@ -7,7 +7,7 @@ function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
-function getActiveData() {
+function getActiveData(): any[] {
   const activeData = [];
   for (let i = 0; i < 24; i += 1) {
     activeData.push({
@@ -18,10 +18,16 @@ function getActiveData() {
   return activeData;
 }
 
-export default class ActiveChart extends Component {
+interface ActiveChartProps {}
+interface ActiveChartState {
+  activeData: any[];
+}
+export default class ActiveChart extends Component<ActiveChartProps, ActiveChartState> {
   state = {
     activeData: getActiveData(),
   };
+
+  timer: NodeJS.Timeout;
 
   componentDidMount() {
     this.loopData();
@@ -29,7 +35,7 @@ export default class ActiveChart extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.timer);
-    cancelAnimationFrame(this.requestRef);
+    // cancelAnimationFrame(this.requestRef);
   }
 
   loopData = () => {
