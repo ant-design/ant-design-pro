@@ -1,18 +1,11 @@
 import React from 'react';
 import { Drawer } from 'antd';
+import { SiderMenuProps } from './SiderMenu';
 import SiderMenu from './SiderMenu';
 import { getFlatMenuKeys } from './SiderMenuUtils';
 
-export declare type SiderTheme = 'light' | 'dark';
-
-interface SiderMenuProps {
-  isMobile: boolean;
-  menuData: any[];
-  collapsed: boolean;
-  logo?: string;
-  theme?: SiderTheme;
-  onCollapse: (payload: boolean) => void;
-}
+export { SiderMenuProps };
+export { MenuDataItem } from './BaseMenu';
 
 const SiderMenuWrapper: React.FunctionComponent<SiderMenuProps> = props => {
   const { isMobile, menuData, collapsed, onCollapse } = props;
@@ -21,7 +14,7 @@ const SiderMenuWrapper: React.FunctionComponent<SiderMenuProps> = props => {
     <Drawer
       visible={!collapsed}
       placement="left"
-      onClose={() => onCollapse(true)}
+      onClose={() => onCollapse!(true)}
       style={{
         padding: 0,
         height: '100vh',
@@ -32,6 +25,10 @@ const SiderMenuWrapper: React.FunctionComponent<SiderMenuProps> = props => {
   ) : (
     <SiderMenu {...props} flatMenuKeys={flatMenuKeys} />
   );
+};
+
+SiderMenuWrapper.defaultProps = {
+  onCollapse: () => void 0,
 };
 
 export default React.memo(SiderMenuWrapper);

@@ -34,4 +34,5 @@ declare module 'ant-design-pro' {
   export class NoticeIcon extends React.Component<MixinNoticeIconProps, any> {
     public static Tab: typeof NoticeIconTab;
   }
+  export * from 'ant-design-pro/lib';
 }

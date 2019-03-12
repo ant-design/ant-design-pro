@@ -1,3 +1,4 @@
+import { MenuDataItem } from '@/components/SiderMenu';
 import { ClickParam } from 'antd/es/menu';
 import React, { Component } from 'react';
 import Link from 'umi/link';
@@ -5,25 +6,18 @@ import RightContent from '../GlobalHeader/RightContent';
 import BaseMenu from '../SiderMenu/BaseMenu';
 import { getFlatMenuKeys } from '../SiderMenu/SiderMenuUtils';
 import styles from './index.less';
-import defaultSettings from '../../../config/defaultSettings';
+import defaultSettings, { SiderTheme } from '../../../config/defaultSettings';
 
-export declare type CollapseType = 'clickTrigger' | 'responsive';
-export declare type SiderTheme = 'light' | 'dark';
-export declare type MenuMode =
-  | 'vertical'
-  | 'vertical-left'
-  | 'vertical-right'
-  | 'horizontal'
-  | 'inline';
+export type CollapseType = 'clickTrigger' | 'responsive';
+export type MenuMode = 'vertical' | 'vertical-left' | 'vertical-right' | 'horizontal' | 'inline';
 
 const { title } = defaultSettings;
 interface TopNavHeaderProps {
   theme: SiderTheme;
   contentWidth?: string;
-  menuData?: any[];
+  menuData?: MenuDataItem[];
   logo?: string;
   mode?: MenuMode;
-  flatMenuKeys?: any[];
   onCollapse?: (collapsed: boolean, type?: CollapseType) => void;
   isMobile?: boolean;
   openKeys?: any;
@@ -38,11 +32,11 @@ interface TopNavHeaderProps {
 }
 
 interface TopNavHeaderState {
-  maxWidth: undefined | number;
+  maxWidth?: number;
 }
 
 export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHeaderState> {
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps(props: TopNavHeaderProps) {
     return {
       maxWidth: (props.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 280 - 165 - 40,
     };
@@ -52,7 +46,7 @@ export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHea
     maxWidth: undefined,
   };
 
-  maim: HTMLDivElement;
+  maim: HTMLDivElement | null = null;
 
   render() {
     const { theme, contentWidth, menuData, logo } = this.props;
@@ -61,9 +55,7 @@ export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHea
     return (
       <div className={`${styles.head} ${theme === 'light' ? styles.light : ''}`}>
         <div
-          ref={ref => {
-            this.maim = ref;
-          }}
+          ref={ref => (this.maim = ref)}
           className={`${styles.main} ${contentWidth === 'Fixed' ? styles.wide : ''}`}
         >
           <div className={styles.left}>

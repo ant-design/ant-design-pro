@@ -1,7 +1,7 @@
-export declare type SiderTheme = 'light' | 'dark';
+import { MenuTheme } from 'antd/es/menu';
 
 export interface DefaultSettings {
-  navTheme: string | SiderTheme;
+  navTheme: string | MenuTheme;
   primaryColor: string;
   layout: string;
   contentWidth: string;
