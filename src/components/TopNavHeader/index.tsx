@@ -1,34 +1,14 @@
-import { MenuDataItem } from '@/components/SiderMenu';
-import { ClickParam } from 'antd/es/menu';
+import { SiderMenuProps } from '@/components/SiderMenu';
 import React, { Component } from 'react';
 import Link from 'umi/link';
-import RightContent from '../GlobalHeader/RightContent';
+import RightContent, { GlobalHeaderRightProps } from '../GlobalHeader/RightContent';
 import BaseMenu from '../SiderMenu/BaseMenu';
 import { getFlatMenuKeys } from '../SiderMenu/SiderMenuUtils';
 import styles from './index.less';
-import defaultSettings, { SiderTheme } from '../../../config/defaultSettings';
+import defaultSettings from '../../../config/defaultSettings';
 
-export type CollapseType = 'clickTrigger' | 'responsive';
-export type MenuMode = 'vertical' | 'vertical-left' | 'vertical-right' | 'horizontal' | 'inline';
-
-const { title } = defaultSettings;
-interface TopNavHeaderProps {
-  theme: SiderTheme;
+export interface TopNavHeaderProps extends SiderMenuProps, GlobalHeaderRightProps {
   contentWidth?: string;
-  menuData?: MenuDataItem[];
-  logo?: string;
-  mode?: MenuMode;
-  onCollapse?: (collapsed: boolean, type?: CollapseType) => void;
-  isMobile?: boolean;
-  openKeys?: any;
-  className?: string;
-  collapsed?: boolean;
-  handleOpenChange?: (openKeys: any[]) => void;
-  style?: React.CSSProperties;
-  onOpenChange?: (openKeys: string[]) => void;
-  onNoticeClear?: (type: string) => void;
-  onMenuClick?: (param: ClickParam) => void;
-  onNoticeVisibleChange?: (b: boolean) => void;
 }
 
 interface TopNavHeaderState {
@@ -42,9 +22,7 @@ export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHea
     };
   }
 
-  state = {
-    maxWidth: undefined,
-  };
+  state: TopNavHeaderState = {};
 
   maim: HTMLDivElement | null = null;
 
@@ -62,14 +40,10 @@ export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHea
             <div className={styles.logo} key="logo" id="logo">
               <Link to="/">
                 <img src={logo} alt="logo" />
-                <h1>{title}</h1>
+                <h1>{defaultSettings.title}</h1>
               </Link>
             </div>
-            <div
-              style={{
-                maxWidth,
-              }}
-            >
+            <div style={{ maxWidth }}>
               <BaseMenu {...this.props} flatMenuKeys={flatMenuKeys} className={styles.menu} />
             </div>
           </div>
