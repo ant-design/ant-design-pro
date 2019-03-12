@@ -16,11 +16,11 @@ bell | translate this please -> Change the bell Icon | ReactNode | `<Icon type='
 loading | 弹出卡片加载状态 | boolean | `false`
 onClear | 点击清空按钮的回调 | function(tabName) | -
 onItemClick | 点击列表项的回调 | function(item, tabProps) | -
-onLoadMore | 加载更多的回调 | function(tabProps, event) | -
 onPopupVisibleChange | 弹出卡片显隐的回调 | function(visible) | -
 onTabChange | 切换页签的回调 | function(tabTitle) | -
+onViewMore | 点击查看更多的回调 | function(tabProps, event) | -
 popupVisible | 控制弹层显隐 | boolean | -
-locale | 默认文案 | Object | `{ emptyText: 'No notifications', clear: 'Clear', loadedAll: 'Loaded', loadMore: 'Loading more' }`
+locale | 默认文案 | Object | `{ emptyText: 'No notifications', clear: 'Clear', viewMore: 'Loading more' }`
 clearClose | 点击清空按钮后关闭通知菜单 | boolean | `false`
 
 ### NoticeIcon.Tab
@@ -31,14 +31,9 @@ count | 当前 Tab 未读消息数量 | number | list.length
 emptyText | 针对每个 Tab 定制空数据文案 | ReactNode | -
 emptyImage | 针对每个 Tab 定制空数据图片 | string | -
 list | 列表数据，格式参照下表 | Array | `[]`
-loadedAll | 已加载完所有消息 | boolean | `true`
-loading | 当前 Tab 的加载状态 | boolean | `false`
-name | 消息分类的标识符 | string | -
-scrollToLoad | 允许滚动自加载 | boolean | `true`
-skeletonCount | 加载时占位骨架的数量 | number | `5`
-skeletonProps | 加载时占位骨架的属性 | SkeletonProps | `{}`
 showClear | 是否显示清空按钮 | boolean | `true`
-title | 消息分类的页签标题 | string | -
+showViewMore | 是否显示查看更多按钮 | boolean | `false`
+title | 消息分类的页签标题，实际的文案是 `locale[title] || title` | string | -
 
 ### Tab data
 

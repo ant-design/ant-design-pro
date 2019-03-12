@@ -3,15 +3,11 @@ import numeral from 'numeral';
 import ChartCard from './ChartCard';
 import Field from './Field';
 
-const getComponent = Component => {
-  return props => {
-    return (
-      <Suspense fallback="...">
-        <Component {...props} />
-      </Suspense>
-    );
-  };
-};
+const getComponent = Component => props => (
+  <Suspense fallback="...">
+    <Component {...props} />
+  </Suspense>
+);
 
 const Bar = getComponent(React.lazy(() => import('./Bar')));
 const Pie = getComponent(React.lazy(() => import('./Pie')));
