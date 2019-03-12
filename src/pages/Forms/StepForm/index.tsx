@@ -9,7 +9,7 @@ interface IStepFormProps {
   location: Location;
 }
 
-const StepForm: React.SFC<IStepFormProps> = props => {
+const StepForm: React.FunctionComponent<IStepFormProps> = props => {
   const { location, children } = props;
   const getCurrentStep = () => {
     const { pathname } = location;

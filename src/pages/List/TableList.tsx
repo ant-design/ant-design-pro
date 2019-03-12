@@ -48,7 +48,7 @@ interface ICreateFormProps extends FormComponentProps {
   handleModalVisible: (flag?: boolean) => void;
 }
 
-const CreateFormFunc: React.SFC<ICreateFormProps> = props => {
+const CreateFormFunc: React.FunctionComponent<ICreateFormProps> = props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
@@ -476,7 +476,7 @@ class TableList extends Component<ITableListProps, ITableListState> {
     }
   };
 
-  handleSelectRows = rows => {
+  handleSelectRows: (row: any) => void = rows => {
     this.setState({
       selectedRows: rows,
     });

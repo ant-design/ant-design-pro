@@ -10,7 +10,7 @@ interface MiniProgressProps {
   style?: React.CSSProperties;
 }
 
-const MiniProgress: React.SFC<MiniProgressProps> = ({
+const MiniProgress: React.FunctionComponent<MiniProgressProps> = ({
   target,
   color = 'rgb(19, 194, 194)',
   strokeWidth,

@@ -9,7 +9,7 @@ interface ITagProps {
   className?: string;
   onClick?: () => void;
 }
-const Tag: React.SFC<ITagProps> = ({ color, check, ...rest }) => (
+const Tag: React.FunctionComponent<ITagProps> = ({ color, check, ...rest }) => (
   <div
     {...rest}
     style={{
@@ -27,7 +27,12 @@ interface IThemeColorProps {
   onChange: (color: string) => void;
 }
 
-const ThemeColor: React.SFC<IThemeColorProps> = ({ colors, title, value, onChange }) => {
+const ThemeColor: React.FunctionComponent<IThemeColorProps> = ({
+  colors,
+  title,
+  value,
+  onChange,
+}) => {
   let colorList = colors;
   if (!colors) {
     colorList = [

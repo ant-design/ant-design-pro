@@ -1,8 +1,9 @@
-import React, { Component, createElement } from 'react';
-import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb } from 'antd';
-import styles from './index.less';
+import pathToRegexp from 'path-to-regexp';
+import React, { Component, createElement } from 'react';
 import { urlToList } from '../_utils/pathTools';
+import { PageHeaderProps } from './index';
+import styles from './index.less';
 
 export const getBreadcrumb = (breadcrumbNameMap, url) => {
   let breadcrumb = breadcrumbNameMap[url];
@@ -16,7 +17,7 @@ export const getBreadcrumb = (breadcrumbNameMap, url) => {
   return breadcrumb || {};
 };
 
-export default class BreadcrumbView extends Component {
+export default class BreadcrumbView extends Component<PageHeaderProps> {
   state = {
     breadcrumb: null,
   };
@@ -64,7 +65,7 @@ export default class BreadcrumbView extends Component {
             <Breadcrumb.Item key={item.title}>
               {item.href
                 ? createElement(
-                    linkElement,
+                    linkElement as any,
                     {
                       [linkElement === 'a' ? 'href' : 'to']: item.href,
                     },
@@ -93,7 +94,7 @@ export default class BreadcrumbView extends Component {
       return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
         <Breadcrumb.Item key={url}>
           {createElement(
-            isLinkable ? linkElement : 'span',
+            (isLinkable ? linkElement : 'span') as any,
             { [linkElement === 'a' ? 'href' : 'to']: url },
             name
           )}
@@ -105,7 +106,7 @@ export default class BreadcrumbView extends Component {
       extraBreadcrumbItems.unshift(
         <Breadcrumb.Item key="home">
           {createElement(
-            linkElement,
+            linkElement as any,
             {
               [linkElement === 'a' ? 'href' : 'to']: '/',
             },
@@ -161,7 +162,7 @@ export default class BreadcrumbView extends Component {
       <span>{route.breadcrumbName}</span>
     ) : (
       createElement(
-        linkElement,
+        linkElement as any,
         {
           href: paths.join('/') || '/',
           to: paths.join('/') || '/',

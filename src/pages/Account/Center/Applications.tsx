@@ -10,7 +10,7 @@ interface ApplicationsProps {
   list: IListModelState;
 }
 
-const Center: React.SFC<ApplicationsProps> = props => {
+const Center: React.FunctionComponent<ApplicationsProps> = props => {
   const {
     list: { list },
   } = props;

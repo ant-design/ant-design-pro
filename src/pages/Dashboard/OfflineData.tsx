@@ -49,7 +49,7 @@ interface OfflineDataProps {
   handleTabChange: (activeKey: string) => void;
 }
 
-const OfflineData: React.SFC<OfflineDataProps> = ({
+const OfflineData: React.FunctionComponent<OfflineDataProps> = ({
   activeKey,
   loading,
   offlineData,

@@ -1,5 +1,6 @@
+import { Alert, Table } from 'antd';
+import { PaginationConfig, SorterResult, TableCurrentDataSource } from 'antd/lib/table';
 import React, { Component, Fragment } from 'react';
-import { Table, Alert } from 'antd';
 import styles from './index.less';
 
 function initTotalList(columns) {
@@ -12,18 +13,26 @@ function initTotalList(columns) {
   return totalList;
 }
 
-class StandardTable extends Component {
-  constructor(props) {
-    super(props);
-    const { columns } = props;
-    const needTotalList = initTotalList(columns);
+interface StandardTableProps {
+  columns: any;
+  onSelectRow: (row: any) => void;
+  data: any;
+  rowKey: string;
+  selectedRows: any[];
+  onChange?: (
+    pagination: PaginationConfig,
+    filters: Record<keyof any, string[]>,
+    sorter: SorterResult<any>,
+    extra?: TableCurrentDataSource<any>
+  ) => void;
+  loading?: boolean;
+}
 
-    this.state = {
-      selectedRowKeys: [],
-      needTotalList,
-    };
-  }
-
+interface StandardTableState {
+  selectedRowKeys: any[];
+  needTotalList: any[];
+}
+class StandardTable extends Component<StandardTableProps, StandardTableState> {
   static getDerivedStateFromProps(nextProps) {
     // clean state
     if (nextProps.selectedRows.length === 0) {
@@ -35,12 +44,22 @@ class StandardTable extends Component {
     }
     return null;
   }
+  constructor(props) {
+    super(props);
+    const { columns } = props;
+    const needTotalList = initTotalList(columns);
+
+    this.state = {
+      selectedRowKeys: [],
+      needTotalList,
+    };
+  }
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
     let { needTotalList } = this.state;
     needTotalList = needTotalList.map(item => ({
       ...item,
-      total: selectedRows.reduce((sum, val) => sum + parseFloat(val[item.dataIndex], 10), 0),
+      total: selectedRows.reduce((sum, val) => sum + parseFloat(val[item.dataIndex]), 0),
     }));
     const { onSelectRow } = this.props;
     if (onSelectRow) {

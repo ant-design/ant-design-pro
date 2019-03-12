@@ -1,9 +1,27 @@
-import React from 'react';
 import { Avatar, List } from 'antd';
 import classNames from 'classnames';
+import React from 'react';
+import { NoticeIconData } from './index';
 import styles from './NoticeList.less';
 
-export default function NoticeList({
+export interface NoticeIconTabProps {
+  count?: number;
+  emptyText?: React.ReactNode;
+  emptyImage?: string;
+  list?: NoticeIconData[];
+  name?: string;
+  showClear?: boolean;
+  showViewMore?: boolean;
+  style?: React.CSSProperties;
+  title?: string;
+  data?: any[];
+  onClick: (item: any) => void;
+  onClear: (item: any) => void;
+  locale: any;
+  onViewMore: (e: any) => void;
+}
+
+const NoticeList: React.FunctionComponent<NoticeIconTabProps> = ({
   data = [],
   onClick,
   onClear,
@@ -14,7 +32,7 @@ export default function NoticeList({
   onViewMore = null,
   showClear = true,
   showViewMore = false,
-}) {
+}) => {
   if (data.length === 0) {
     return (
       <div className={styles.notFound}>
@@ -25,7 +43,7 @@ export default function NoticeList({
   }
   return (
     <div>
-      <List className={styles.list}>
+      <List className={styles.list} renderItem={null}>
         {data.map((item, i) => {
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,
@@ -73,4 +91,6 @@ export default function NoticeList({
       </div>
     </div>
   );
-}
+};
+
+export default NoticeList;

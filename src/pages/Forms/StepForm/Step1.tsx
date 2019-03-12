@@ -27,7 +27,7 @@ interface IInfoFormProps extends FormComponentProps {
   };
 }
 
-const Info: React.SFC<IInfoFormProps> = props => {
+const Info: React.FunctionComponent<IInfoFormProps> = props => {
   const { form, dispatch, data } = props;
   const { getFieldDecorator, validateFields } = form;
   const onValidateForm = () => {

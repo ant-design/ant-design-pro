@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import { Tabs } from 'antd';
+import React, { Component } from 'react';
 import LoginContext from './loginContext';
 
 const { TabPane } = Tabs;
@@ -12,12 +12,22 @@ const generateId = (() => {
   };
 })();
 
-class LoginTab extends Component {
+interface LoginTabProps {
+  key?: string;
+  tab?: React.ReactNode;
+  tabUtil: {
+    addTab: (id: any) => void;
+    removeTab: (id: any) => void;
+  };
+}
+
+class LoginTab extends Component<LoginTabProps> {
+  uniqueId: string;
+
   constructor(props) {
     super(props);
     this.uniqueId = generateId('login-tab-');
   }
-
   componentDidMount() {
     const { tabUtil } = this.props;
     tabUtil.addTab(this.uniqueId);

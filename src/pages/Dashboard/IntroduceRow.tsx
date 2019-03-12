@@ -31,7 +31,7 @@ interface IntroduceRowProps {
   loading: boolean;
 }
 
-const IntroduceRow: React.SFC<IntroduceRowProps> = ({ loading, visitData }) => (
+const IntroduceRow: React.FunctionComponent<IntroduceRowProps> = ({ loading, visitData }) => (
   <Row gutter={24}>
     <Col {...topColResponsiveProps}>
       <ChartCard

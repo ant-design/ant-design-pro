@@ -50,7 +50,7 @@ const actions = (
   </Button>
 );
 
-const Error: React.SFC = () => (
+const Error: React.FunctionComponent = () => (
   <PageHeaderWrapper>
     <Card bordered={false}>
       <Result

@@ -1,14 +1,14 @@
-import React from 'react';
-import { formatMessage, setLocale, getLocale } from 'umi-plugin-locale';
-import { Menu, Icon } from 'antd';
+import { Icon, Menu } from 'antd';
 import classNames from 'classnames';
+import React from 'react';
+import { formatMessage, getLocale, setLocale } from 'umi-plugin-locale';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 interface ISelectLangProps {
   className: string;
 }
-const SelectLang: React.SFC<ISelectLangProps> = props => {
+const SelectLang: React.FunctionComponent<ISelectLangProps> = props => {
   const { className } = props;
   const selectedLang = getLocale();
   const changeLang = ({ key }) => {

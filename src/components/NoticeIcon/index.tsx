@@ -1,14 +1,44 @@
+import { Badge, Icon, Spin, Tabs } from 'antd';
+import classNames from 'classnames';
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { Icon, Tabs, Badge, Spin } from 'antd';
-import classNames from 'classnames';
-import HeaderDropdown from '../HeaderDropdown';
-import List from './NoticeList';
+import HeaderDropdown, { HeaderDropdownProps } from '../HeaderDropdown';
 import styles from './index.less';
+import NoticeList from './NoticeList';
 
 const { TabPane } = Tabs;
 
-export default class NoticeIcon extends Component {
+export interface NoticeIconData {
+  avatar?: string | React.ReactNode;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  datetime?: React.ReactNode;
+  extra?: React.ReactNode;
+  style?: React.CSSProperties;
+}
+
+interface NoticeIconProps {
+  count?: number;
+  bell?: React.ReactNode;
+  className?: string;
+  loading?: boolean;
+  onClear?: (tabName: string) => void;
+  onItemClick?: (item: NoticeIconData, tabProps: NoticeIconProps) => void;
+  onViewMore?: (tabProps: NoticeIconProps, e: MouseEvent) => void;
+  onTabChange?: (tabTile: string) => void;
+  style?: React.CSSProperties;
+  onPopupVisibleChange?: (visible: boolean) => void;
+  popupVisible?: boolean;
+  locale?: {
+    emptyText: string;
+    clear: string;
+    viewMore: string;
+    [key: string]: string;
+  };
+  clearClose?: boolean;
+}
+
+export default class NoticeIcon extends Component<NoticeIconProps> {
   static Tab = TabPane;
 
   static defaultProps = {
@@ -27,6 +57,7 @@ export default class NoticeIcon extends Component {
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
 
+  popover: any;
   state = {
     visible: false,
   };
@@ -63,7 +94,7 @@ export default class NoticeIcon extends Component {
     if (!children) {
       return null;
     }
-    const panes = React.Children.map(children, child => {
+    const panes = React.Children.map(children, (child: any) => {
       const { list, title, count, emptyText, emptyImage, showClear, showViewMore } = child.props;
       const len = list && list.length ? list.length : 0;
       const msgCount = count || count === 0 ? count : len;
@@ -71,7 +102,7 @@ export default class NoticeIcon extends Component {
       const tabTitle = msgCount > 0 ? `${localeTitle} (${msgCount})` : localeTitle;
       return (
         <TabPane tab={tabTitle} key={title}>
-          <List
+          <NoticeList
             data={list}
             emptyImage={emptyImage}
             emptyText={emptyText}
@@ -119,7 +150,7 @@ export default class NoticeIcon extends Component {
     if (!notificationBox) {
       return trigger;
     }
-    const popoverProps = {};
+    const popoverProps: any = {};
     if ('popupVisible' in this.props) {
       popoverProps.visible = popupVisible;
     }

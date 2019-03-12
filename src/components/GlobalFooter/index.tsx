@@ -1,8 +1,24 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 import styles from './index.less';
 
-const GlobalFooter = ({ className, links, copyright }) => {
+interface GlobalFooterProps {
+  links?: Array<{
+    key?: string;
+    title: React.ReactNode;
+    href: string;
+    blankTarget?: boolean;
+  }>;
+  copyright?: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
+}
+
+const GlobalFooter: React.FunctionComponent<GlobalFooterProps> = ({
+  className,
+  links,
+  copyright,
+}) => {
   const clsString = classNames(styles.globalFooter, className);
   return (
     <footer className={clsString}>

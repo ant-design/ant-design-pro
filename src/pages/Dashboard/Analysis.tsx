@@ -203,7 +203,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     );
   }
 }
-const AnalysisPage: React.SFC<AnalysisProps> = props => (
+const AnalysisPage: React.FunctionComponent<AnalysisProps> = props => (
   <AsyncLoadBizCharts>
     <Analysis {...props} />
   </AsyncLoadBizCharts>

@@ -26,7 +26,7 @@ interface IConfirmFormProps extends FormComponentProps {
   submitting: boolean;
 }
 
-const Confirm: React.SFC<IConfirmFormProps> = props => {
+const Confirm: React.FunctionComponent<IConfirmFormProps> = props => {
   const { form, data, dispatch, submitting } = props;
   const { getFieldDecorator, validateFields } = form;
   const onPrev = () => {

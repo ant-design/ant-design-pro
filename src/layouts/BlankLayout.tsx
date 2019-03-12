@@ -1,9 +1,9 @@
-import React, { ReactNode, SFC } from 'react';
+import React, { ReactNode, FunctionComponent } from 'react';
 
 interface IProps {
   children: ReactNode;
 }
 
-const Layout: SFC<IProps> = ({ children }) => <div>{children}</div>;
+const Layout: FunctionComponent<IProps> = ({ children }) => <div>{children}</div>;
 
 export default Layout;

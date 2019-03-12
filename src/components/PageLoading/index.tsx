@@ -3,7 +3,7 @@ import React from 'react';
 
 // loading components from code split
 // https://umijs.org/plugin/umi-plugin-react.html#dynamicimport
-const PageLoading: React.SFC = () => (
+const PageLoading: React.FunctionComponent = () => (
   <div style={{ paddingTop: 100, textAlign: 'center' }}>
     <Spin size="large" />
   </div>

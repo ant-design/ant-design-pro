@@ -230,7 +230,7 @@ class Workplace extends Component<WorkplaceProps> {
               bordered={false}
               bodyStyle={{ padding: 0 }}
             >
-              <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
+              <EditableLinkGroup links={links} linkElement={Link} />
             </Card>
             <Card
               style={{ marginBottom: 24 }}

@@ -13,7 +13,7 @@ interface ApplicationsProps {
   };
 }
 
-const ArticleListContent: React.SFC<ApplicationsProps> = ({
+const ArticleListContent: React.FunctionComponent<ApplicationsProps> = ({
   data: { content, updatedAt, avatar, owner, href },
 }) => (
   <div className={styles.listContent}>

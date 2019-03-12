@@ -14,7 +14,7 @@ interface IResultFormProps extends FormComponentProps {
     amount: string;
   };
 }
-const ResultPage: React.SFC<IResultFormProps> = props => {
+const ResultPage: React.FunctionComponent<IResultFormProps> = props => {
   const { data } = props;
   const onFinish = () => {
     router.push('/form/step-form/info');

@@ -1,11 +1,14 @@
-import React from 'react';
-import classNames from 'classnames';
 import { Button, Form } from 'antd';
+import classNames from 'classnames';
+import React from 'react';
 import styles from './index.less';
 
 const FormItem = Form.Item;
 
-const LoginSubmit = ({ className, ...rest }) => {
+interface LoginSubmitProps {
+  className?: string;
+}
+const LoginSubmit: React.FunctionComponent<LoginSubmitProps> = ({ className, ...rest }) => {
   const clsString = classNames(styles.submit, className);
   return (
     <FormItem>

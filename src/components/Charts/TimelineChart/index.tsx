@@ -19,7 +19,7 @@ interface TimelineChartProps {
   title: string;
 }
 
-const TimelineChart: React.SFC<TimelineChartProps> = props => {
+const TimelineChart: React.FunctionComponent<TimelineChartProps> = props => {
   const {
     title,
     height = 400,

@@ -10,7 +10,7 @@ interface ProjectsProps {
   list: IListModelState;
 }
 
-const Projects: React.SFC<ProjectsProps> = props => {
+const Projects: React.FunctionComponent<ProjectsProps> = props => {
   const {
     list: { list },
   } = props;

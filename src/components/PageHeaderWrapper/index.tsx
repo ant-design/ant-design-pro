@@ -12,7 +12,7 @@ interface PageHeaderWrapperProps {
   wrapperClassName: string;
   top: JSX.Element;
 }
-const PageHeaderWrapper: React.SFC<PageHeaderWrapperProps> = ({
+const PageHeaderWrapper: React.FunctionComponent<PageHeaderWrapperProps> = ({
   children,
   contentWidth,
   wrapperClassName,

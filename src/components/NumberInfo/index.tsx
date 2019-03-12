@@ -1,9 +1,31 @@
-import React from 'react';
 import { Icon } from 'antd';
 import classNames from 'classnames';
+import React from 'react';
 import styles from './index.less';
 
-const NumberInfo = ({ theme, title, subTitle, total, subTotal, status, suffix, gap, ...rest }) => (
+interface NumberInfoProps {
+  title?: React.ReactNode | string;
+  subTitle?: React.ReactNode | string;
+  total?: React.ReactNode | string;
+  status?: 'up' | 'down';
+  theme?: string;
+  gap?: number;
+  subTotal?: number;
+  suffix?: string;
+  style?: React.CSSProperties;
+}
+
+const NumberInfo: React.FunctionComponent<NumberInfoProps> = ({
+  theme,
+  title,
+  subTitle,
+  total,
+  subTotal,
+  status,
+  suffix,
+  gap,
+  ...rest
+}) => (
   <div
     className={classNames(styles.numberInfo, {
       [styles[`numberInfo${theme}`]]: theme,

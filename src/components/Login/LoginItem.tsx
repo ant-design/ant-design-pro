@@ -1,17 +1,42 @@
-import React, { Component } from 'react';
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Button, Col, Form, Input, Row } from 'antd';
+import { WrappedFormUtils } from 'antd/es/form/Form';
 import omit from 'omit.js';
+import React, { Component } from 'react';
 import styles from './index.less';
-import ItemMap from './map';
 import LoginContext from './loginContext';
+import ItemMap from './map';
 
 const FormItem = Form.Item;
 
-class WrapFormItem extends Component {
+interface LoginItemProps {
+  name?: string;
+  rules?: any[];
+  style?: React.CSSProperties;
+  onGetCaptcha?: (event?: MouseEvent) => void;
+  placeholder?: string;
+  buttonText?: React.ReactNode;
+  onPressEnter?: (e: any) => void;
+  countDown?: number;
+  getCaptchaButtonText?: string;
+  getCaptchaSecondText?: string;
+  updateActive: (activeItem: any) => void;
+  form: WrappedFormUtils;
+  type: string;
+  defaultValue?: string;
+  customprops?: any;
+  onChange: (e: any) => void;
+}
+
+interface WrapFormItemState {
+  count: number;
+}
+
+class WrapFormItem extends Component<LoginItemProps, WrapFormItemState> {
   static defaultProps = {
     getCaptchaButtonText: 'captcha',
     getCaptchaSecondText: 'second',
   };
+  interval: NodeJS.Timeout;
 
   constructor(props) {
     super(props);
@@ -33,7 +58,7 @@ class WrapFormItem extends Component {
 
   onGetCaptcha = () => {
     const { onGetCaptcha } = this.props;
-    const result = onGetCaptcha ? onGetCaptcha() : null;
+    const result: any = onGetCaptcha ? onGetCaptcha() : null;
     if (result === false) {
       return;
     }
@@ -44,8 +69,9 @@ class WrapFormItem extends Component {
     }
   };
 
-  getFormItemOptions = ({ onChange, defaultValue, customprops, rules }) => {
-    const options = {
+  getFormItemOptions = props => {
+    const { onChange, defaultValue, customprops, rules } = props;
+    const options: any = {
       rules: rules || customprops.rules,
     };
     if (onChange) {
@@ -105,7 +131,7 @@ class WrapFormItem extends Component {
             </Col>
             <Col span={8}>
               <Button
-                disabled={count}
+                disabled={!!count}
                 className={styles.getCaptcha}
                 size="large"
                 onClick={this.onGetCaptcha}

@@ -1,8 +1,17 @@
+import { Icon, Input } from 'antd';
 import React, { Component } from 'react';
-import { Input, Icon } from 'antd';
 import styles from './index.less';
 
-export default class EditableItem extends Component {
+interface EditableItemProps {
+  onChange: (value?: string | string[] | number) => void;
+}
+
+interface EditableItemState {
+  value?: string | string[] | number;
+  editable: boolean;
+}
+
+export default class EditableItem extends Component<EditableItemProps, EditableItemState> {
   constructor(props) {
     super(props);
     this.state = {

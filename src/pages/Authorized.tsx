@@ -9,7 +9,7 @@ interface IAuthComponentProps {
   routerData: any[];
   status: string;
 }
-const AuthComponent: React.SFC<IAuthComponentProps> = ({
+const AuthComponent: React.FunctionComponent<IAuthComponentProps> = ({
   children,
   location,
   routerData,

@@ -1,19 +1,34 @@
-import React, { Component } from 'react';
 import { Tooltip } from 'antd';
+import { TooltipProps } from 'antd/es/tooltip';
 import classNames from 'classnames';
+import React, { Component } from 'react';
 import styles from './index.less';
 
 /* eslint react/no-did-mount-set-state: 0 */
 /* eslint no-param-reassign: 0 */
 
-const isSupportLineClamp = document.body.style.webkitLineClamp !== undefined;
+const isSupportLineClamp = (document.body.style as any).webkitLineClamp !== undefined;
 
 const TooltipOverlayStyle = {
   overflowWrap: 'break-word',
   wordWrap: 'break-word',
 };
 
-export const getStrFullLength = (str = '') =>
+interface EllipsisTooltipProps extends TooltipProps {
+  title?: undefined;
+  overlayStyle?: undefined;
+}
+
+interface EllipsisProps {
+  tooltip?: boolean | EllipsisTooltipProps;
+  length?: number;
+  lines?: number;
+  style?: React.CSSProperties;
+  className?: string;
+  fullWidthRecognition?: boolean;
+}
+
+export const getStrFullLength: (str: string) => number = (str = '') =>
   str.split('').reduce((pre, cur) => {
     const charCode = cur.charCodeAt(0);
     if (charCode >= 0 && charCode <= 128) {
@@ -22,7 +37,10 @@ export const getStrFullLength = (str = '') =>
     return pre + 2;
   }, 0);
 
-export const cutStrByFullLength = (str = '', maxLength) => {
+export const cutStrByFullLength: (str: string, maxLength: number) => string = (
+  str = '',
+  maxLength
+) => {
   let showLength = 0;
   return str.split('').reduce((pre, cur) => {
     const charCode = cur.charCodeAt(0);
@@ -76,11 +94,22 @@ const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other })
   });
 };
 
-export default class Ellipsis extends Component {
+interface EllipsisState {
+  text: string;
+  targetCount: number;
+}
+
+export default class Ellipsis extends Component<EllipsisProps, EllipsisState> {
   state = {
     text: '',
     targetCount: 0,
   };
+
+  node: HTMLSpanElement;
+  root: HTMLDivElement;
+  content: HTMLDivElement;
+  shadow: HTMLDivElement;
+  shadowChildren: HTMLDivElement;
 
   componentDidMount() {
     if (this.node) {

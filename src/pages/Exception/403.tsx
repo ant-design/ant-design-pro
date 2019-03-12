@@ -3,7 +3,7 @@ import React from 'react';
 import { formatMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
 
-const Exception403: React.SFC = () => (
+const Exception403: React.FunctionComponent = () => (
   <Exception
     type="403"
     desc={formatMessage({ id: 'app.exception.description.403' })}

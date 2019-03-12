@@ -1,9 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import styles from './index.less';
 
-export default class FooterToolbar extends Component {
+interface FooterToolbarProps {
+  extra?: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
+}
+
+interface FooterToolbarState {
+  width?: string | number;
+}
+export default class FooterToolbar extends Component<FooterToolbarProps, FooterToolbarState> {
   static contextTypes = {
     isMobile: PropTypes.bool,
   };
@@ -22,7 +31,7 @@ export default class FooterToolbar extends Component {
   }
 
   resizeFooterToolbar = () => {
-    const sider = document.querySelector('.ant-layout-sider');
+    const sider: any = document.querySelector('.ant-layout-sider');
     if (sider == null) {
       return;
     }

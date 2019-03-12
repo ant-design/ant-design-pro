@@ -7,8 +7,8 @@ interface EditableLinkGroupProps {
   onAdd: () => void;
   linkElement: string;
 }
-const EditableLinkGroup: React.SFC<EditableLinkGroupProps> = props => {
-  const { links = [], linkElement = 'a', onAdd = () => {} } = this.props;
+const EditableLinkGroup: React.FunctionComponent<EditableLinkGroupProps> = props => {
+  const { links = [], linkElement = 'a', onAdd = () => {} } = props;
   return (
     <div className={styles.linkGroup}>
       {links.map(link =>

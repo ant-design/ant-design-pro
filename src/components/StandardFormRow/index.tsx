@@ -9,7 +9,7 @@ interface StandardFormRowProps {
   grid?: boolean;
   style?: React.CSSProperties;
 }
-const StandardFormRow: React.SFC<StandardFormRowProps> = ({
+const StandardFormRow: React.FunctionComponent<StandardFormRowProps> = ({
   title,
   children,
   last,

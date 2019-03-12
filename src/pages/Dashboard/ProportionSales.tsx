@@ -14,7 +14,7 @@ interface ProportionSalesProps {
   handleChangeSalesType: (ev: RadioChangeEvent) => void;
 }
 
-const ProportionSales: React.SFC<ProportionSalesProps> = ({
+const ProportionSales: React.FunctionComponent<ProportionSalesProps> = ({
   dropdownGroup,
   salesType,
   loading,

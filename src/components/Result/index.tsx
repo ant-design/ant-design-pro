@@ -18,7 +18,7 @@ const iconMap = {
   success: <Icon className={styles.success} type="check-circle" theme="filled" />,
 };
 
-const Result: React.SFC<IResultProps> = ({
+const Result: React.FunctionComponent<IResultProps> = ({
   actions,
   className,
   description,

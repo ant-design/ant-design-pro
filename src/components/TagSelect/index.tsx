@@ -1,26 +1,52 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Icon, Tag } from 'antd';
 import classNames from 'classnames';
-import { Tag, Icon } from 'antd';
+import React, { Component } from 'react';
 
 import styles from './index.less';
 
 const { CheckableTag } = Tag;
 
-const TagSelectOption = ({ children, checked, onChange, value }) => (
+interface TagSelectOptionProps {
+  value: string | number;
+  style?: React.CSSProperties;
+  checked: boolean;
+  onChange: (value: string | number, state: boolean) => void;
+}
+
+const TagSelectOption: React.FunctionComponent<TagSelectOptionProps> = ({
+  children,
+  checked,
+  onChange,
+  value,
+}) => (
   <CheckableTag checked={checked} key={value} onChange={state => onChange(value, state)}>
     {children}
   </CheckableTag>
 );
 
-TagSelectOption.isTagSelectOption = true;
+TagSelectOption.isTagSelectOption = true; // todo: 这里不知道怎么写，在武无状态组件里面，如何修改
 
-class TagSelect extends Component {
-  static propTypes = {
-    actionsText: PropTypes.object,
-    hideCheckAll: PropTypes.bool,
+interface TagSelectProps {
+  onChange?: (value: string[]) => void;
+  expandable?: boolean;
+  value?: string[] | number[];
+  style?: React.CSSProperties;
+  hideCheckAll?: boolean;
+  actionsText?: {
+    expandText?: React.ReactNode;
+    collapseText?: React.ReactNode;
+    selectAllText?: React.ReactNode;
   };
+  className: string;
+  Option: TagSelectOptionProps;
+  children: React.ReactElement<TagSelectOption> | Array<React.ReactElement<TagSelectOption>>;
+}
 
+interface TagSelectState {
+  value: any[];
+  expand: boolean;
+}
+class TagSelect extends Component<TagSelectProps, TagSelectState> {
   static defaultProps = {
     hideCheckAll: false,
     actionsText: {
@@ -30,19 +56,21 @@ class TagSelect extends Component {
     },
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      expand: false,
-      value: props.value || props.defaultValue || [],
-    };
-  }
+  public static Option: typeof TagSelectOption;
 
   static getDerivedStateFromProps(nextProps) {
     if ('value' in nextProps) {
       return { value: nextProps.value || [] };
     }
     return null;
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      expand: false,
+      value: props.value || props.defaultValue || [],
+    };
   }
 
   onChange = value => {
@@ -65,7 +93,7 @@ class TagSelect extends Component {
 
   getAllTags() {
     let { children } = this.props;
-    children = React.Children.toArray(children);
+    children = React.Children.toArray(children) as Array<React.ReactElement<TagSelectOption>>;
     const checkedTags = children
       .filter(child => this.isTagSelectOption(child))
       .map(child => child.props.value);
@@ -117,7 +145,7 @@ class TagSelect extends Component {
           </CheckableTag>
         )}
         {value &&
-          React.Children.map(children, child => {
+          React.Children.map(children, (child: React.ReactElement<TagSelectOption>) => {
             if (this.isTagSelectOption(child)) {
               return React.cloneElement(child, {
                 key: `tag-select-${child.props.value}`,

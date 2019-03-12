@@ -1,14 +1,38 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Tabs } from 'antd';
+import Button from 'antd/es/button';
+import { WrappedFormUtils } from 'antd/es/form/Form';
 import classNames from 'classnames';
-import LoginItem from './LoginItem';
-import LoginTab from './LoginTab';
-import LoginSubmit from './LoginSubmit';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import styles from './index.less';
 import LoginContext from './loginContext';
+import LoginItem from './LoginItem';
+import LoginSubmit from './LoginSubmit';
+import LoginTab from './LoginTab';
 
-class Login extends Component {
+interface LoginProps {
+  defaultActiveKey?: string;
+  onTabChange?: (key: string) => void;
+  style?: React.CSSProperties;
+  onSubmit?: (error: any, values: any) => void;
+  form: WrappedFormUtils;
+  className?: string;
+}
+
+interface LoginState {
+  tabs: any[];
+  type: string;
+  active: object;
+}
+
+class Login extends Component<LoginProps, LoginState> {
+  public static Tab: typeof LoginTab;
+  public static UserName: typeof LoginItem;
+  public static Password: typeof LoginItem;
+  public static Mobile: typeof LoginItem;
+  public static Captcha: typeof LoginItem;
+  public static Submit: typeof LoginSubmit;
+
   static propTypes = {
     className: PropTypes.string,
     defaultActiveKey: PropTypes.string,
@@ -86,7 +110,7 @@ class Login extends Component {
     const { type, tabs } = this.state;
     const TabChildren = [];
     const otherChildren = [];
-    React.Children.forEach(children, item => {
+    React.Children.forEach(children, (item: any) => {
       if (!item) {
         return;
       }
