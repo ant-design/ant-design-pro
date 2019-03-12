@@ -13,11 +13,11 @@ import styles from './Header.less';
 const { Header } = Layout;
 
 export interface HeaderViewProps extends ConnectProps, TopNavHeaderProps, GlobalHeaderProps {
-  isMobile: boolean;
-  collapsed: boolean;
-  setting: SettingModelState;
-  autoHideHeader: boolean;
-  handleMenuCollapse: (args: boolean) => void;
+  isMobile?: boolean;
+  collapsed?: boolean;
+  setting?: SettingModelState;
+  autoHideHeader?: boolean;
+  handleMenuCollapse?: (collapse: boolean) => void;
 }
 
 interface HeaderViewState {
@@ -25,6 +25,10 @@ interface HeaderViewState {
 }
 
 class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
+  static defaultProps: HeaderViewProps = {
+    handleMenuCollapse: () => void 0,
+  };
+
   static getDerivedStateFromProps(props: HeaderViewProps, state: HeaderViewState) {
     if (!props.autoHideHeader && !state.visible) {
       return {
@@ -50,7 +54,7 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
 
   getHeadWidth = () => {
     const { isMobile, collapsed, setting } = this.props;
-    const { fixedHeader, layout } = setting;
+    const { fixedHeader, layout } = setting!;
     if (isMobile || !fixedHeader || layout === 'topmenu') {
       return '100%';
     }
@@ -131,7 +135,7 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
 
   render() {
     const { isMobile, handleMenuCollapse, setting } = this.props;
-    const { navTheme, layout, fixedHeader } = setting;
+    const { navTheme, layout, fixedHeader } = setting!;
     const { visible } = this.state;
     const isTop = layout === 'topmenu';
     const width = this.getHeadWidth();

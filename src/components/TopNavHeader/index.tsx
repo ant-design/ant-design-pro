@@ -5,10 +5,10 @@ import RightContent, { GlobalHeaderRightProps } from '../GlobalHeader/RightConte
 import BaseMenu from '../SiderMenu/BaseMenu';
 import { getFlatMenuKeys } from '../SiderMenu/SiderMenuUtils';
 import styles from './index.less';
-import defaultSettings from '../../../config/defaultSettings';
+import defaultSettings, { ContentWidth } from '../../../config/defaultSettings';
 
 export interface TopNavHeaderProps extends SiderMenuProps, GlobalHeaderRightProps {
-  contentWidth?: string;
+  contentWidth?: ContentWidth;
 }
 
 interface TopNavHeaderState {
