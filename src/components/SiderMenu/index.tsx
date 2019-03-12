@@ -14,7 +14,7 @@ interface SiderMenuProps {
   onCollapse: (payload: boolean) => void;
 }
 
-const SiderMenuWrapper: React.SFC<SiderMenuProps> = props => {
+const SiderMenuWrapper: React.FunctionComponent<SiderMenuProps> = props => {
   const { isMobile, menuData, collapsed, onCollapse } = props;
   const flatMenuKeys = getFlatMenuKeys(menuData);
   return isMobile ? (

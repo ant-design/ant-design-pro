@@ -11,7 +11,12 @@ interface AuthComponentProps {
   user: UserModelState;
 }
 
-const AuthComponent: React.SFC<AuthComponentProps> = ({ children, location, routerData, user }) => {
+const AuthComponent: React.FunctionComponent<AuthComponentProps> = ({
+  children,
+  location,
+  routerData,
+  user,
+}) => {
   const { currentUser } = user;
   const isLogin = currentUser && currentUser.name;
   const getRouteAuthority = (path, routeData) => {

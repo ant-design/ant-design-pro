@@ -7,7 +7,7 @@ interface BlockChecboxProps {
   onChange: (key: string) => void;
   list: any[];
 }
-const BlockChecbox: React.SFC<BlockChecboxProps> = ({ value, onChange, list }) => (
+const BlockChecbox: React.FunctionComponent<BlockChecboxProps> = ({ value, onChange, list }) => (
   <div className={style.blockChecbox} key={value}>
     {list.map(item => (
       <Tooltip title={item.title} key={item.key}>

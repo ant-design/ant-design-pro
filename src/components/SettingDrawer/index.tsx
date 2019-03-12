@@ -15,7 +15,7 @@ interface BodyProps {
   style?: React.CSSProperties;
 }
 
-const Body: React.SFC<BodyProps> = ({ children, title, style }) => (
+const Body: React.FunctionComponent<BodyProps> = ({ children, title, style }) => (
   <div
     style={{
       ...style,
