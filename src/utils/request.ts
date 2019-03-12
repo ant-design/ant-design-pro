@@ -5,6 +5,12 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 
+interface ResponseError<D = any> extends Error {
+  name: string;
+  data: D;
+  response: Response;
+}
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -26,8 +32,8 @@ const codeMessage = {
 /**
  * 异常处理程序
  */
-const errorHandler = error => {
-  const { response = {} } = error;
+const errorHandler = (error: ResponseError) => {
+  const { response = {} as Response } = error;
   const errortext = codeMessage[response.status] || response.statusText;
   const { status, url } = response;
 

@@ -9,6 +9,7 @@ declare module '*.jpeg';
 declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
+declare module 'rc-animate';
 declare var APP_TYPE: string;
 declare module 'ant-design-pro' {
   import React from 'react';

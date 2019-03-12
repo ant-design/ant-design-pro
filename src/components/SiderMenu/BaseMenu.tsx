@@ -29,7 +29,10 @@ const getIcon = (icon?: string | React.ReactNode) => {
   return icon;
 };
 
-export interface MenuDataItem {
+/**
+ * @type R: is route
+ */
+export interface MenuDataItem<R extends boolean = false> {
   authority?: string[] | string;
   children?: MenuDataItem[];
   hideChildrenInMenu?: boolean;
@@ -38,6 +41,7 @@ export interface MenuDataItem {
   locale?: string;
   name?: string;
   path: string;
+  routes?: R extends true ? MenuDataItem<R>[] : never;
   [key: string]: any;
 }
 

@@ -1,7 +1,7 @@
 import { MenuTheme } from 'antd/es/menu';
 
 export interface DefaultSettings {
-  navTheme: string | MenuTheme;
+  navTheme: MenuTheme;
   primaryColor: string;
   layout: string;
   contentWidth: string;
