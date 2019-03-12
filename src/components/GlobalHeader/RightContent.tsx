@@ -1,3 +1,6 @@
+import { ConnectProps } from '@/models/connect';
+import { NoticeItem } from '@/models/global';
+import { CurrentUser } from '@/models/user';
 import React, { Component } from 'react';
 import { FormattedMessage, formatMessage } from 'umi-plugin-locale';
 import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
@@ -12,33 +15,18 @@ import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';
 
-export interface NoticeItem {
-  id: string;
-  type: string;
-  [key: string]: any;
-}
-
-export interface GlobalHeaderRightProps {
+export interface GlobalHeaderRightProps extends ConnectProps {
   notices?: NoticeItem[];
-  dispatch?: (args: any) => void;
-  currentUser?: {
-    avatar?: string;
-    name?: string;
-    title?: string;
-    group?: string;
-    signature?: string;
-    geographic?: any;
-    tags?: any[];
-    unreadCount: number;
-  };
+  currentUser?: CurrentUser;
   fetchingNotices?: boolean;
   onNoticeVisibleChange?: (visible: boolean) => void;
   onMenuClick?: (param: ClickParam) => void;
   onNoticeClear?: (tabName: string) => void;
   theme?: SiderTheme;
 }
+
 export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
-  getNoticeData() {
+  getNoticeData = (): { [key: string]: NoticeItem[] } => {
     const { notices = [] } = this.props;
     if (notices.length === 0) {
       return {};
@@ -46,7 +34,7 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
     const newNotices = notices.map(notice => {
       const newNotice = { ...notice };
       if (newNotice.datetime) {
-        newNotice.datetime = moment(notice.datetime).fromNow();
+        newNotice.datetime = moment(notice.datetime as string).fromNow();
       }
       if (newNotice.id) {
         newNotice.key = newNotice.id;
@@ -67,10 +55,10 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
       return newNotice;
     });
     return groupBy(newNotices, 'type');
-  }
+  };
 
-  getUnreadData: (noticeData: object) => any = noticeData => {
-    const unreadMsg = {};
+  getUnreadData = (noticeData: { [key: string]: NoticeItem[] }) => {
+    const unreadMsg: { [key: string]: number } = {};
     Object.entries(noticeData).forEach(([key, value]) => {
       if (!unreadMsg[key]) {
         unreadMsg[key] = 0;
@@ -157,7 +145,7 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
 
         <NoticeIcon
           className={styles.action}
-          count={currentUser.unreadCount}
+          count={currentUser && currentUser.unreadCount}
           onItemClick={(item, tabProps) => {
             console.log(item, tabProps); // tslint:disable-line no-console
             this.changeReadState(item as NoticeItem);
@@ -166,14 +154,14 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
             clear: formatMessage({ id: 'component.noticeIcon.clear' }),
-            viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }), // todo:node_modules/ant-design-pro/lib/NoticeIcon/index.d.ts 21 [key: string]: string;
+            viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }),
             notification: formatMessage({ id: 'component.globalHeader.notification' }),
             message: formatMessage({ id: 'component.globalHeader.message' }),
             event: formatMessage({ id: 'component.globalHeader.event' }),
           }}
           onClear={onNoticeClear}
           onPopupVisibleChange={onNoticeVisibleChange}
-          onViewMore={() => message.info('Click on view more')} // todo:onViewMore?: (tabProps: INoticeIconProps) => void;
+          onViewMore={() => message.info('Click on view more')}
           clearClose
         >
           <NoticeIcon.Tab
@@ -201,7 +189,7 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
             showViewMore
           />
         </NoticeIcon>
-        {currentUser.name ? (
+        {currentUser && currentUser.name ? (
           <HeaderDropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>
               <Avatar

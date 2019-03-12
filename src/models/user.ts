@@ -2,18 +2,20 @@ import { query as queryUsers, queryCurrent } from '@/services/user';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
+export interface CurrentUser {
+  avatar?: string;
+  name?: string;
+  title?: string;
+  group?: string;
+  signature?: string;
+  geographic?: any;
+  tags?: any[];
+  unreadCount?: number;
+}
+
 export interface UserModelState {
   list: any[];
-  currentUser: {
-    avatar?: string;
-    name?: string;
-    title?: string;
-    group?: string;
-    signature?: string;
-    geographic?: any;
-    tags?: any[];
-    unreadCount?: number;
-  };
+  currentUser: CurrentUser;
 }
 
 export interface UserModelType {

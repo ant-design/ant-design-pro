@@ -6,7 +6,11 @@ import styles from './index.less';
 import RightContent, { GlobalHeaderRightProps } from './RightContent';
 
 type PartialGlobalHeaderRightProps = {
-  [K in 'onMenuClick' | 'onNoticeClear' | 'onNoticeVisibleChange']: GlobalHeaderRightProps[K]
+  [K in
+    | 'onMenuClick'
+    | 'onNoticeClear'
+    | 'onNoticeVisibleChange'
+    | 'currentUser']?: GlobalHeaderRightProps[K]
 };
 
 export interface GlobalHeaderProps extends PartialGlobalHeaderRightProps {

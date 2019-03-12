@@ -9,7 +9,7 @@ const { menu } = defaultSettings;
 const { check } = Authorized;
 
 // Conversion router to menu.
-function formatter(data: any[], parentAuthority: string[], parentName: string): any[] {
+function formatter(data: any[], parentAuthority: string[], parentName?: string): any[] {
   return data
     .map(item => {
       if (!item.name || !item.path) {
@@ -46,7 +46,7 @@ function formatter(data: any[], parentAuthority: string[], parentName: string): 
 
 const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
-interface SubMenuItem {
+export interface SubMenuItem {
   children: SubMenuItem[];
   hideChildrenInMenu?: boolean;
   hideInMenu?: boolean;
@@ -55,6 +55,7 @@ interface SubMenuItem {
   authority?: string[];
   path: string;
 }
+
 /**
  * get SubMenu or Item
  */
@@ -78,7 +79,7 @@ const filterMenuData: (menuData: SubMenuItem[]) => SubMenuItem[] = menuData => {
   }
   return menuData
     .filter(item => item.name && !item.hideInMenu)
-    .map(item => check(item.authority, getSubMenu(item), null))
+    .map(item => check(item.authority!, getSubMenu(item), null!))
     .filter(item => item);
 };
 /**
@@ -116,7 +117,7 @@ export interface MenuModelType {
     getMenuData: Effect;
   };
   reducers: {
-    save: Reducer<any>;
+    save: Reducer<MenuModelState>;
   };
 }
 const MenuModel: MenuModelType = {
