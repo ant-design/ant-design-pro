@@ -8,6 +8,9 @@ const { check } = Authorized;
 
 // Conversion router to menu.
 function formatter(data, parentAuthority, parentName) {
+  if (!data) {
+    return undefined;
+  }
   return data
     .map(item => {
       if (!item.name || !item.path) {
@@ -75,6 +78,9 @@ const filterMenuData = menuData => {
  * @param {Object} menuData 菜单配置
  */
 const getBreadcrumbNameMap = menuData => {
+  if (!menuData) {
+    return {};
+  }
   const routerMap = {};
 
   const flattenMenuData = data => {
