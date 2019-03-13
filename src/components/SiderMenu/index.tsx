@@ -7,7 +7,7 @@ import { getFlatMenuKeys } from './SiderMenuUtils';
 export { SiderMenuProps };
 export { MenuDataItem } from './BaseMenu';
 
-const SiderMenuWrapper: React.FunctionComponent<SiderMenuProps> = props => {
+const SiderMenuWrapper: React.FC<SiderMenuProps> = props => {
   const { isMobile, menuData, collapsed, onCollapse } = props;
   const flatMenuKeys = getFlatMenuKeys(menuData);
   return isMobile ? (

@@ -10,6 +10,8 @@ declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
 declare module 'rc-animate';
+declare module 'omit.js';
+declare module 'react-copy-to-clipboard';
 declare var APP_TYPE: string;
 declare module 'ant-design-pro' {
   import React from 'react';

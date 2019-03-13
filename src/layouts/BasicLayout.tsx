@@ -59,7 +59,7 @@ export interface BasicLayoutContext {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
 }
 
-const BasicLayout: React.FunctionComponent<BasicLayoutProps> = props => {
+const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const {
     breadcrumbNameMap,
     dispatch,

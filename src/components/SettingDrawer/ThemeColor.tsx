@@ -10,7 +10,7 @@ export interface TagProps {
   onClick?: () => void;
 }
 
-const Tag: React.FunctionComponent<TagProps> = ({ color, check, ...rest }) => (
+const Tag: React.FC<TagProps> = ({ color, check, ...rest }) => (
   <div {...rest} style={{ backgroundColor: color }}>
     {check ? <Icon type="check" /> : ''}
   </div>
@@ -23,12 +23,7 @@ export interface ThemeColorProps {
   onChange: (color: string) => void;
 }
 
-const ThemeColor: React.FunctionComponent<ThemeColorProps> = ({
-  colors,
-  title,
-  value,
-  onChange,
-}) => {
+const ThemeColor: React.FC<ThemeColorProps> = ({ colors, title, value, onChange }) => {
   const colorList = colors || [
     {
       key: 'dust',

@@ -27,12 +27,7 @@ const getRouteAuthority = (path: string, routeData: IRoute[]) => {
   return authorities;
 };
 
-const AuthComponent: React.FunctionComponent<AuthComponentProps> = ({
-  children,
-  location,
-  routerData,
-  user,
-}) => {
+const AuthComponent: React.FC<AuthComponentProps> = ({ children, location, routerData, user }) => {
   const { currentUser } = user;
   const isLogin = currentUser && currentUser.name;
   return (
