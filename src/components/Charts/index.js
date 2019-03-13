@@ -1,24 +1,16 @@
-import React, { Suspense } from 'react';
 import numeral from 'numeral';
 import ChartCard from './ChartCard';
 import Field from './Field';
-
-const getComponent = Component => props => (
-  <Suspense fallback="...">
-    <Component {...props} />
-  </Suspense>
-);
-
-const Bar = getComponent(React.lazy(() => import('./Bar')));
-const Pie = getComponent(React.lazy(() => import('./Pie')));
-const Radar = getComponent(React.lazy(() => import('./Radar')));
-const Gauge = getComponent(React.lazy(() => import('./Gauge')));
-const MiniArea = getComponent(React.lazy(() => import('./MiniArea')));
-const MiniBar = getComponent(React.lazy(() => import('./MiniBar')));
-const MiniProgress = getComponent(React.lazy(() => import('./MiniProgress')));
-const WaterWave = getComponent(React.lazy(() => import('./WaterWave')));
-const TagCloud = getComponent(React.lazy(() => import('./TagCloud')));
-const TimelineChart = getComponent(React.lazy(() => import('./TimelineChart')));
+import Bar from './Bar';
+import Pie from './Pie';
+import Radar from './Radar';
+import Gauge from './Gauge';
+import MiniArea from './MiniArea';
+import MiniBar from './MiniBar';
+import MiniProgress from './MiniProgress';
+import WaterWave from './WaterWave';
+import TagCloud from './TagCloud';
+import TimelineChart from './TimelineChart';
 
 const yuan = val => `¥ ${numeral(val).format('0,0')}`;
 
