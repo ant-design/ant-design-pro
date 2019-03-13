@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Row, Col, Card, Tooltip } from 'antd';
@@ -242,8 +241,4 @@ class Monitor extends Component {
   }
 }
 
-export default props => (
-  <AsyncLoadBizCharts>
-    <Monitor {...props} />
-  </AsyncLoadBizCharts>
-);
+export default Monitor;
