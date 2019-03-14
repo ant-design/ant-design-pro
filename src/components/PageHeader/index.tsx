@@ -33,7 +33,7 @@ export interface PageHeaderProps {
   breadcrumbSeparator?: React.ReactNode;
 }
 
-const PageHeader: React.FunctionComponent<PageHeaderProps> = props => {
+const PageHeader: React.FC<PageHeaderProps> = props => {
   const {
     title = '',
     logo,

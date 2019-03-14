@@ -13,7 +13,7 @@ interface ApplicationsProps {
   };
 }
 
-const ArticleListContent: React.FunctionComponent<ApplicationsProps> = ({
+const ArticleListContent: React.FC<ApplicationsProps> = ({
   data: { content, updatedAt, avatar, owner, href },
 }) => (
   <div className={styles.listContent}>

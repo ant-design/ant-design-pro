@@ -6,7 +6,7 @@ interface GridContentProps {
   contentWidth: string;
   children: React.ReactNode;
 }
-const GridContent: React.FunctionComponent<GridContentProps> = props => {
+const GridContent: React.FC<GridContentProps> = props => {
   const { contentWidth, children } = props;
   let className = `${styles.main}`;
   if (contentWidth === 'Fixed') {

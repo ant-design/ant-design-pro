@@ -21,7 +21,7 @@ export interface NoticeIconTabProps {
   onViewMore: (e: any) => void;
 }
 
-const NoticeList: React.FunctionComponent<NoticeIconTabProps> = ({
+const NoticeList: React.FC<NoticeIconTabProps> = ({
   data = [],
   onClick,
   onClear,

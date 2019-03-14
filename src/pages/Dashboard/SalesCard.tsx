@@ -28,7 +28,7 @@ interface SalesCard {
   loading: boolean;
   selectDate: (type: string) => void;
 }
-const SalesCard: React.FunctionComponent<SalesCard> = ({
+const SalesCard: React.FC<SalesCard> = ({
   rangePickerValue,
   salesData,
   isActive,

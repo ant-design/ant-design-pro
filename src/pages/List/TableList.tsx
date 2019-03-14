@@ -48,7 +48,7 @@ interface ICreateFormProps extends FormComponentProps {
   handleModalVisible: (flag?: boolean) => void;
 }
 
-const CreateFormFunc: React.FunctionComponent<ICreateFormProps> = props => {
+const CreateFormFunc: React.FC<ICreateFormProps> = props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {

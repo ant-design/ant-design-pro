@@ -20,7 +20,7 @@ interface MiniAreaProps {
   }>;
 }
 
-const MiniArea: React.FunctionComponent<MiniAreaProps> = props => {
+const MiniArea: React.FC<MiniAreaProps> = props => {
   const {
     height,
     data = [],

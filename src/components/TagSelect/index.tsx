@@ -13,18 +13,17 @@ interface TagSelectOptionProps {
   onChange: (value: string | number, state: boolean) => void;
 }
 
-const TagSelectOption: React.FunctionComponent<TagSelectOptionProps> = ({
-  children,
-  checked,
-  onChange,
-  value,
-}) => (
+interface TagSelectOptionType extends React.FC<TagSelectOptionProps> {
+  isTagSelectOption?: boolean;
+}
+
+const TagSelectOption: TagSelectOptionType = ({ children, checked, onChange, value }) => (
   <CheckableTag checked={checked} key={value} onChange={state => onChange(value, state)}>
     {children}
   </CheckableTag>
 );
 
-TagSelectOption.isTagSelectOption = true; // todo: 这里不知道怎么写，在武无状态组件里面，如何修改
+TagSelectOption.isTagSelectOption = true;
 
 interface TagSelectProps {
   onChange?: (value: string[]) => void;

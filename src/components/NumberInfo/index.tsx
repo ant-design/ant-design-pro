@@ -15,7 +15,7 @@ interface NumberInfoProps {
   style?: React.CSSProperties;
 }
 
-const NumberInfo: React.FunctionComponent<NumberInfoProps> = ({
+const NumberInfo: React.FC<NumberInfoProps> = ({
   theme,
   title,
   subTitle,

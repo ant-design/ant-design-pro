@@ -30,7 +30,7 @@ interface AvatarListProps {
   children: React.ReactElement<AvatarItemProps> | Array<React.ReactElement<AvatarItemProps>>;
 }
 
-export const AvatarList: React.FunctionComponent<AvatarListProps> = ({
+export const AvatarList: React.FC<AvatarListProps> = ({
   children,
   size,
   maxLength,
@@ -65,7 +65,7 @@ export const AvatarList: React.FunctionComponent<AvatarListProps> = ({
   );
 };
 
-export const AvatarListItem: React.FunctionComponent<AvatarItemProps> = ({
+export const AvatarListItem: React.FC<AvatarItemProps> = ({
   src,
   size,
   tips,

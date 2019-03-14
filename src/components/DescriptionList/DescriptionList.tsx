@@ -15,7 +15,7 @@ export interface IDescriptionListProps {
   title?: React.ReactNode;
 }
 
-export type IDescriptionListComponent = React.FunctionComponent<IDescriptionListProps> & {
+export type IDescriptionListComponent = React.FC<IDescriptionListProps> & {
   Description: Description;
 };
 

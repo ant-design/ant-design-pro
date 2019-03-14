@@ -15,7 +15,7 @@ interface IBodyProps {
   style?: React.CSSProperties;
 }
 
-const Body: React.FunctionComponent<IBodyProps> = ({ children, title, style }) => (
+const Body: React.FC<IBodyProps> = ({ children, title, style }) => (
   <div
     style={{
       ...style,

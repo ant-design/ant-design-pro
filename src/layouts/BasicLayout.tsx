@@ -65,7 +65,7 @@ interface IBasicLayoutContext {
   breadcrumbNameMap: object;
 }
 
-const BasicLayout: React.FunctionComponent<IBasicLayoutProps> = props => {
+const BasicLayout: React.FC<IBasicLayoutProps> = props => {
   const {
     breadcrumbNameMap,
     dispatch,

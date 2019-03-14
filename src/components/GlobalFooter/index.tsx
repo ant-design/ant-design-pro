@@ -14,11 +14,7 @@ interface GlobalFooterProps {
   className?: string;
 }
 
-const GlobalFooter: React.FunctionComponent<GlobalFooterProps> = ({
-  className,
-  links,
-  copyright,
-}) => {
+const GlobalFooter: React.FC<GlobalFooterProps> = ({ className, links, copyright }) => {
   const clsString = classNames(styles.globalFooter, className);
   return (
     <footer className={clsString}>

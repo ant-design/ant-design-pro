@@ -28,7 +28,7 @@ interface IRegisterResultProps {
   };
 }
 
-const RegisterResult: React.FunctionComponent<IRegisterResultProps> = ({ location }) => (
+const RegisterResult: React.FC<IRegisterResultProps> = ({ location }) => (
   <Result
     className={styles.registerResult}
     type="success"

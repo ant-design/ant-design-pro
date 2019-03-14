@@ -17,7 +17,7 @@ interface StandardTableProps {
   columns: any;
   onSelectRow: (row: any) => void;
   data: any;
-  rowKey: string;
+  rowKey?: string;
   selectedRows: any[];
   onChange?: (
     pagination: PaginationConfig,

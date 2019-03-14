@@ -14,7 +14,7 @@ interface MiniBarProps {
   forceFit: boolean;
 }
 
-const MiniBar: React.FunctionComponent<MiniBarProps> = props => {
+const MiniBar: React.FC<MiniBarProps> = props => {
   const { height, forceFit = true, color = '#1890FF', data = [] } = props;
 
   const scale = {

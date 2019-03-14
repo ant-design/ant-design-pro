@@ -250,7 +250,7 @@ class Monitor extends Component<MonitorProps> {
   }
 }
 
-const MonitorPage: React.FunctionComponent<MonitorProps> = props => (
+const MonitorPage: React.FC<MonitorProps> = props => (
   <AsyncLoadBizCharts>
     <Monitor {...props} />
   </AsyncLoadBizCharts>

@@ -3,7 +3,7 @@ import React from 'react';
 import { formatMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
 
-const Exception404: React.FunctionComponent = () => (
+const Exception404: React.FC = () => (
   <Exception
     type="404"
     linkElement={Link}

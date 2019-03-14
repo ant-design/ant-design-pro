@@ -7,7 +7,7 @@ interface PhoneProps {
   onChange?: (e: string) => void;
 }
 
-const PhoneView: React.FunctionComponent<PhoneProps> = props => {
+const PhoneView: React.FC<PhoneProps> = props => {
   const { value, onChange } = props;
   let values = ['', ''];
   if (value) {

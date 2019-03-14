@@ -49,7 +49,7 @@ interface TopSearchProps {
   searchData: any[];
   dropdownGroup: JSX.Element;
 }
-const TopSearch: React.FunctionComponent<TopSearchProps> = ({
+const TopSearch: React.FC<TopSearchProps> = ({
   loading,
   visitData2,
   searchData,

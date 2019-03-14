@@ -128,7 +128,7 @@ const actions = (
   </Fragment>
 );
 
-const Successs: React.FunctionComponent = () => (
+const Successs: React.FC = () => (
   <PageHeaderWrapper>
     <Card bordered={false}>
       <Result

@@ -203,7 +203,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     );
   }
 }
-const AnalysisPage: React.FunctionComponent<AnalysisProps> = props => (
+const AnalysisPage: React.FC<AnalysisProps> = props => (
   <AsyncLoadBizCharts>
     <Analysis {...props} />
   </AsyncLoadBizCharts>

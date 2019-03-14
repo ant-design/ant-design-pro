@@ -7,7 +7,7 @@ interface EditableLinkGroupProps {
   onAdd: () => void;
   linkElement: string;
 }
-const EditableLinkGroup: React.FunctionComponent<EditableLinkGroupProps> = props => {
+const EditableLinkGroup: React.FC<EditableLinkGroupProps> = props => {
   const { links = [], linkElement = 'a', onAdd = () => {} } = props;
   return (
     <div className={styles.linkGroup}>

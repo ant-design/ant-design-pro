@@ -8,7 +8,7 @@ const FormItem = Form.Item;
 interface LoginSubmitProps {
   className?: string;
 }
-const LoginSubmit: React.FunctionComponent<LoginSubmitProps> = ({ className, ...rest }) => {
+const LoginSubmit: React.FC<LoginSubmitProps> = ({ className, ...rest }) => {
   const clsString = classNames(styles.submit, className);
   return (
     <FormItem>

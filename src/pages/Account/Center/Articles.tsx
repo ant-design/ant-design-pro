@@ -9,7 +9,7 @@ interface ArticlesProps {
   list: IListModelState;
 }
 
-const Center: React.FunctionComponent<ArticlesProps> = props => {
+const Center: React.FC<ArticlesProps> = props => {
   const {
     list: { list },
   } = props;
