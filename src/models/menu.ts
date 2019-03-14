@@ -1,33 +1,29 @@
+import { MenuDataItem } from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
 import { Effect } from 'dva';
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import { Reducer } from 'redux';
 import { formatMessage } from 'umi-plugin-locale';
+import { IRoute } from 'umi-types';
 import defaultSettings from '../../config/defaultSettings';
-const { menu } = defaultSettings;
-const { check } = Authorized;
 
 // Conversion router to menu.
-function formatter(data: any[], parentAuthority: string[], parentName: string): any[] {
+function formatter(
+  data: MenuDataItem[],
+  parentAuthority?: string[] | string,
+  parentName?: string,
+): MenuDataItem[] {
   return data
+    .filter(item => item.name && item.path)
     .map(item => {
-      if (!item.name || !item.path) {
-        return null;
-      }
-
-      let locale = 'menu';
-      if (parentName) {
-        locale = `${parentName}.${item.name}`;
-      } else {
-        locale = `menu.${item.name}`;
-      }
+      const locale = `${parentName || 'menu'}.${item.name!}`;
       // if enableMenuLocale use item.name,
       // close menu international
-      const name = menu.disableLocal
-        ? item.name
-        : formatMessage({ id: locale, defaultMessage: item.name });
-      const result = {
+      const name = defaultSettings.menu.disableLocal
+        ? item.name!
+        : formatMessage({ id: locale, defaultMessage: item.name! });
+      const result: MenuDataItem = {
         ...item,
         name,
         locale,
@@ -40,55 +36,43 @@ function formatter(data: any[], parentAuthority: string[], parentName: string): 
       }
       delete result.routes;
       return result;
-    })
-    .filter(item => item);
+    });
 }
 
 const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
-interface SubMenuItem {
-  children: SubMenuItem[];
-  hideChildrenInMenu?: boolean;
-  hideInMenu?: boolean;
-  name?: any;
-  component: any;
-  authority?: string[];
-  path: string;
-}
 /**
  * get SubMenu or Item
  */
-const getSubMenu: (item: SubMenuItem) => any = item => {
-  // doc: add hideChildrenInMenu
-  if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
-    return {
-      ...item,
-      children: filterMenuData(item.children), // eslint-disable-line
-    };
+const getSubMenu: (item: MenuDataItem) => MenuDataItem = item => {
+  if (
+    Array.isArray(item.children) &&
+    !item.hideChildrenInMenu &&
+    item.children.some(child => (child.name ? true : false))
+  ) {
+    const children = filterMenuData(item.children);
+    if (children.length) return { ...item, children };
   }
-  return item;
+  return { ...item, children: void 0 };
 };
 
 /**
  * filter menuData
  */
-const filterMenuData: (menuData: SubMenuItem[]) => SubMenuItem[] = menuData => {
-  if (!menuData) {
-    return [];
-  }
+const filterMenuData = (menuData: MenuDataItem[] = []): MenuDataItem[] => {
   return menuData
     .filter(item => item.name && !item.hideInMenu)
-    .map(item => check(item.authority, getSubMenu(item), null))
+    .map(item => Authorized.check<any, any>(item.authority!, getSubMenu(item), null))
     .filter(item => item);
 };
+
 /**
  * 获取面包屑映射
- * @param ISubMenuItem[] menuData 菜单配置
+ * @param MenuDataItem[] menuData 菜单配置
  */
-const getBreadcrumbNameMap: (menuData: SubMenuItem[]) => object = menuData => {
-  const routerMap = {};
-
-  const flattenMenuData: (data: SubMenuItem[]) => void = data => {
+const getBreadcrumbNameMap = (menuData: MenuDataItem[]) => {
+  const routerMap: { [key: string]: MenuDataItem } = {};
+  const flattenMenuData: (data: MenuDataItem[]) => void = data => {
     data.forEach(menuItem => {
       if (menuItem.children) {
         flattenMenuData(menuItem.children);
@@ -104,8 +88,8 @@ const getBreadcrumbNameMap: (menuData: SubMenuItem[]) => object = menuData => {
 const memoizeOneGetBreadcrumbNameMap = memoizeOne(getBreadcrumbNameMap, isEqual);
 
 export interface MenuModelState {
-  menuData: any[];
-  routerData: any[];
+  menuData: MenuDataItem[];
+  routerData: IRoute[];
   breadcrumbNameMap: object;
 }
 
@@ -116,9 +100,10 @@ export interface MenuModelType {
     getMenuData: Effect;
   };
   reducers: {
-    save: Reducer<any>;
+    save: Reducer<MenuModelState>;
   };
 }
+
 const MenuModel: MenuModelType = {
   namespace: 'menu',
 

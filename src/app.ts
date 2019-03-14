@@ -1,8 +1,9 @@
 import fetch from 'dva/fetch';
+import { IRoute } from 'umi-types';
 
 export const dva = {
   config: {
-    onError(err) {
+    onError(err: ErrorEvent) {
       err.preventDefault();
     },
   },
@@ -10,7 +11,7 @@ export const dva = {
 
 let authRoutes = {};
 
-function ergodicRoutes(routes, authKey, authority) {
+function ergodicRoutes(routes: IRoute[], authKey: string, authority: string | string[]) {
   routes.forEach(element => {
     if (element.path === authKey) {
       if (!element.authority) element.authority = []; // eslint-disable-line
@@ -22,14 +23,14 @@ function ergodicRoutes(routes, authKey, authority) {
   });
 }
 
-export function patchRoutes(routes) {
+export function patchRoutes(routes: IRoute[]) {
   Object.keys(authRoutes).map(authKey =>
-    ergodicRoutes(routes, authKey, authRoutes[authKey].authority)
+    ergodicRoutes(routes, authKey, authRoutes[authKey].authority),
   );
   (window as any).g_routes = routes;
 }
 
-export function render(oldRender) {
+export function render(oldRender: Function) {
   fetch('/api/auth_routes')
     .then(res => res.json())
     .then(
@@ -39,6 +40,6 @@ export function render(oldRender) {
       },
       () => {
         oldRender();
-      }
+      },
     );
 }

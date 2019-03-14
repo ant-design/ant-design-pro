@@ -1,7 +1,7 @@
 // https://umijs.org/config/
-import os from 'os';
+// import os from 'os';
 import slash from 'slash2';
-import { IPlugin } from 'umi-types';
+import { IPlugin, IConfig } from 'umi-types';
 import defaultSettings from './defaultSettings';
 import webpackPlugin from './plugin.config';
 
@@ -144,6 +144,5 @@ export default {
   manifest: {
     basePath: '/',
   },
-
   chainWebpack: webpackPlugin,
-};
+} as IConfig;

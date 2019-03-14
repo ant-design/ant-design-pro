@@ -11,12 +11,15 @@
     "dev:no-mock": "cross-env MOCK=none umi dev",
     "build": "umi build",
     "analyze": "cross-env ANALYZE=1 umi build",
+    "lint:js": "eslint --ext .js src tests",
+    "lint:ts": "tslint -p . -c tslint.yml",
     "lint:style": "stylelint 'src/**/*.less' --syntax less",
     "lint:prettier": "check-prettier lint",
-    "lint": "eslint --ext .js src tests && npm run lint:style && npm run lint:prettier",
-    "lint:fix": "eslint --fix --ext .js src tests && stylelint --fix 'src/**/*.less' --syntax less",
+    "lint": "npm run lint:js && npm run lint:ts && npm run lint:style && npm run lint:prettier",
+    "lint:fix": "eslint --fix --ext .js src tests && tslint --fix -p . -c tslint.yml && stylelint --fix 'src/**/*.less' --syntax less",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
+    "lint-staged:ts": "tslint",
     "test": "umi test",
     "test:component": "umi test ./src/components",
     "test:all": "node ./tests/run-tests.js",
@@ -46,14 +49,17 @@
     "react-container-query": "^0.11.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",
-    "react-media": "^1.8.0",
     "react-media-hook2": "^1.0.2",
-    "umi-request": "^1.0.0",
-    "umi-types": "^0.2.0"
+    "umi-request": "^1.0.0"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.7",
+    "@types/enzyme": "^3.9.0",
     "@types/jest": "^24.0.11",
+    "@types/lodash": "^4.14.122",
+    "@types/memoize-one": "^4.1.0",
     "@types/react": "^16.8.1",
+    "@types/react-document-title": "^2.0.3",
     "@types/react-dom": "^16.0.11",
     "antd-pro-merge-less": "^1.0.0",
     "antd-theme-webpack-plugin": "^1.2.0",
@@ -90,11 +96,13 @@
     "stylelint-order": "^2.0.0",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
+    "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
     "umi": "^2.4.4",
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-pro-block": "^1.2.0",
-    "umi-plugin-react": "^1.3.4"
+    "umi-plugin-react": "^1.3.4",
+    "umi-types": "^0.2.0"
   },
   "optionalDependencies": {
     "puppeteer": "^1.12.1"
@@ -105,6 +113,7 @@
       "git add"
     ],
     "**/*.{js,jsx}": "npm run lint-staged:js",
+    "**/*.{ts,tsx}": "npm run lint-staged:ts",
     "**/*.less": "stylelint --syntax less"
   },
   "engines": {
