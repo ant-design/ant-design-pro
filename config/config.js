@@ -6,7 +6,7 @@ import defaultSettings from '../src/defaultSettings';
 import slash from 'slash2';
 
 const { pwa, primaryColor } = defaultSettings;
-const { NODE_ENV, APP_TYPE, TEST } = process.env;
+const { APP_TYPE, TEST } = process.env;
 
 const plugins = [
   [
@@ -74,10 +74,6 @@ export default {
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': primaryColor,
-  },
-  externals: {
-    '@antv/data-set': 'DataSet',
-    bizcharts: 'BizCharts',
   },
   // proxy: {
   //   '/server/api/': {

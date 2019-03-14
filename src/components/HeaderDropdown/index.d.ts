@@ -1,2 +1,8 @@
 import * as React from 'react';
-export default class HeaderDropdown extends React.Component<any, any> {}
+import { DropDownProps } from 'antd/lib/dropdown';
+
+export interface IHeaderDropdownProps extends DropDownProps {
+  overlayClassName?: string;
+}
+
+export default class HeaderDropdown extends React.Component<IHeaderDropdownProps, any> {}
