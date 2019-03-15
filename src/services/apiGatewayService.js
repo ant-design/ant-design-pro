@@ -1,17 +1,23 @@
-import { stringify } from 'qs';
+// import { stringify } from 'qs';
 import request from '@/utils/request';
 import constants from '@/utils/constUtil';
 
 const { PREFIX_PATH } = constants;
 
-export async function queryApi(params) {
+export async function apiList(params) {
   console.log('params in queryApi:', params);
-  return request(`/conf/apiGateway?${stringify(params)}`);
+  return request(`${PREFIX_PATH}/baseinfo/apiService/apiList`, {
+    method: 'POST',
+    body: {
+      ...params,
+      method: 'post',
+    },
+  });
 }
 
-export async function removeApi(params) {
+export async function apiStatusBatch(params) {
   console.log('params:', params);
-  return request('/conf/apiGateway', {
+  return request(`${PREFIX_PATH}/baseinfo/apiService/apiStatusBatch`, {
     method: 'POST',
     body: {
       ...params,
@@ -41,13 +47,13 @@ export async function updateApi(params) {
 }
 
 export async function saveApi(params) {
-  return request('/conf/save/api', {
+  return request(`${PREFIX_PATH}/baseinfo/apiService/saveApi`, {
     method: 'POST',
     body: params,
   });
 }
 
-// --------masterData.js--------------
+// --------enumMock.js--------------
 export async function getMasterData(params) {
   return request(`${PREFIX_PATH}enum/${params.key}`);
 }
