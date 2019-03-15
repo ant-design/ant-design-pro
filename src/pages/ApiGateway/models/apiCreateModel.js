@@ -1,8 +1,8 @@
 import { routerRedux } from 'dva/router';
-import { saveApi } from '@/services/conf';
+import { saveApi } from '@/services/apiGatewayService';
 
 export default {
-  namespace: 'apiCreate',
+  namespace: 'apiCreateModel',
 
   state: {
     step: {
