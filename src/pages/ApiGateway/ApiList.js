@@ -22,7 +22,8 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from './ApiList.less';
 import constants from '@/utils/constUtil';
-// import {fetchEnumData, getItem, getItemValue} from "@/utils/masterData";
+import { getGroupName, getItems, getItemValue2 } from '@/utils/masterData';
+import SelectView from './SelectView';
 
 const { DEL_ACT, ONLINE_ACT, OFFLINE_ACT, API_STATUS_0, API_STATUS_1, API_STATUS_2 } = constants;
 
@@ -32,14 +33,17 @@ const getValue = obj =>
   Object.keys(obj)
     .map(key => obj[key])
     .join(',');
-const statusMap = ['default', 'processing', 'success', 'error'];
-const status = ['关闭', '未发布', '已发布', '异常'];
-const groupId = ['语音识别', 'OCR识别', '身份识别', '文本识别'];
-
+const statusMap = ['default', 'processing', 'success', 'default', 'error'];
+const statusList = getItems('apiService', 'status');
+const statusFilter = statusList.map(item => ({
+  value: item.itemCode,
+  text: item.itemValue,
+}));
 /* eslint react/no-multi-comp:0 */
-@connect(({ apiGateway, loading }) => ({
-  apiGateway,
-  loading: loading.models.apiGateway,
+@connect(({ apiGatewayModel, groupModel, loading }) => ({
+  apiGatewayModel,
+  groupList: groupModel.groupList,
+  loading: loading.models.apiGatewayModel,
 }))
 @Form.create()
 class TableList extends PureComponent {
@@ -47,100 +51,116 @@ class TableList extends PureComponent {
     expandForm: false,
     selectedRows: [],
     formValues: {},
+    pagination: {},
+    filtersArg: {},
+    sorter: {},
   };
-
-  columns = [
-    {
-      title: 'API名称',
-      dataIndex: 'name',
-    },
-    {
-      title: '分组',
-      dataIndex: 'groupId',
-      render(val) {
-        return <Fragment>{groupId[val]} </Fragment>;
-      },
-    },
-    {
-      title: '状态',
-      dataIndex: 'status',
-      filters: [
-        {
-          text: status[0],
-          value: 0,
-        },
-        {
-          text: status[1],
-          value: 1,
-        },
-        {
-          text: status[2],
-          value: 2,
-        },
-      ],
-      render(val) {
-        return <Badge status={statusMap[val]} text={status[val]} />;
-      },
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'updatedTime',
-      sorter: true,
-      render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
-    },
-    {
-      title: '操作',
-      render: (text, record) => (
-        <Fragment>
-          <span
-            id="toOnline"
-            style={{
-              display:
-                record.status === API_STATUS_1 || record.status === API_STATUS_0
-                  ? 'inline'
-                  : 'none',
-            }}
-          >
-            <a onClick={() => this.handleStatusClick(ONLINE_ACT, record)}>发布</a>
-            <Divider type="vertical" />
-          </span>
-          <span
-            id="toOffline"
-            style={{
-              display: record.status === API_STATUS_2 ? 'inline' : 'none',
-            }}
-          >
-            <a onClick={() => this.handleStatusClick(OFFLINE_ACT, record)}>下线</a>
-            <Divider type="vertical" />
-          </span>
-
-          <span
-            id="toOnline"
-            style={{
-              display: record.status === API_STATUS_1 ? 'inline' : 'none',
-            }}
-          >
-            <a onClick={() => this.handleStatusClick(DEL_ACT, record)}>删除</a>
-            <Divider type="vertical" />
-          </span>
-          <a onClick={() => this.handleTest(true, record)}>调试</a>
-          <Divider type="vertical" />
-          <a onClick={() => this.handleTest(true, record)}>授权</a>
-        </Fragment>
-      ),
-    },
-  ];
 
   componentDidMount() {
     const { dispatch } = this.props;
-    // fetchEnumData(this, constants.API_STATE_KEY);
-    console.log('state1:', this.state);
     dispatch({
-      type: 'apiGateway/fetch',
+      type: 'groupModel/allGroupList',
+    });
+    dispatch({
+      type: 'apiGatewayModel/apiList',
+      payload: {},
     });
   }
 
-  respDeal = (resp, dispatch) => {
+  getColumns = () => {
+    const { groupList } = this.props;
+    const columns = [
+      {
+        title: 'API名称',
+        dataIndex: 'name',
+      },
+      {
+        title: '分组',
+        dataIndex: 'groupId',
+        render(val) {
+          return <Fragment>{getGroupName(groupList, val)} </Fragment>;
+        },
+      },
+      {
+        title: '状态',
+        dataIndex: 'status',
+        filters: statusFilter,
+        render(val) {
+          return <Badge status={statusMap[val]} text={getItemValue2(statusList, val)} />;
+        },
+      },
+      {
+        title: '更新时间',
+        dataIndex: 'updatedTime',
+        sorter: true,
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      },
+      {
+        title: '操作',
+        render: (text, record) => (
+          <Fragment>
+            <span
+              id="toOnline"
+              style={{
+                display:
+                  record.status === API_STATUS_1 || record.status === API_STATUS_0
+                    ? 'inline'
+                    : 'none',
+              }}
+            >
+              <a onClick={() => this.handleStatusClick(ONLINE_ACT, record)}>发布</a>
+              <Divider type="vertical" />
+            </span>
+            <span
+              id="toOffline"
+              style={{
+                display: record.status === API_STATUS_2 ? 'inline' : 'none',
+              }}
+            >
+              <a onClick={() => this.handleStatusClick(OFFLINE_ACT, record)}>下线</a>
+              <Divider type="vertical" />
+            </span>
+
+            <span
+              id="toOnline"
+              style={{
+                display: record.status === API_STATUS_1 ? 'inline' : 'none',
+              }}
+            >
+              <a onClick={() => this.handleStatusClick(DEL_ACT, record)}>删除</a>
+              <Divider type="vertical" />
+            </span>
+            <a onClick={() => this.handleTest(true, record)}>调试</a>
+            <Divider type="vertical" />
+            <a onClick={() => this.handleTest(true, record)}>授权</a>
+          </Fragment>
+        ),
+      },
+    ];
+    return columns;
+  };
+
+  getGroupOption() {
+    const { groupList } = this.props;
+    return this.getOption(groupList, 'groupId', 'groupName');
+  }
+
+  getOption = (list, keyName, titleName) => {
+    if (!list || list.length < 1) {
+      return (
+        <Option key={0} value={0}>
+          没有找到选项
+        </Option>
+      );
+    }
+    return list.map(item => (
+      <Option key={item[keyName]} value={item[keyName]}>
+        {item[titleName]}
+      </Option>
+    ));
+  };
+
+  respDeal = resp => {
     const { code } = resp;
     let { msg } = resp;
     if (code === 200) {
@@ -151,27 +171,32 @@ class TableList extends PureComponent {
       this.setState({
         selectedRows: [],
       });
-      dispatch({
-        type: 'apiGateway/fetch',
-        payload: {},
-      });
+      const { pagination, filtersArg, sorter } = this.state;
+      this.handleStandardTableChange(pagination, filtersArg, sorter);
     } else {
       message.error(`error:${msg}`);
     }
   };
 
-  handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const { dispatch } = this.props;
-    const { formValues } = this.state;
-
+  /**
+   * {status: Array(2)} 转化为{status: "1,2"}
+   */
+  conversionFilter = filtersArg => {
     const filters = Object.keys(filtersArg).reduce((obj, key) => {
       const newObj = { ...obj };
       newObj[key] = getValue(filtersArg[key]);
       return newObj;
     }, {});
+    return filters;
+  };
 
+  handleStandardTableChange = (pagination, filtersArg, sorter) => {
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
+    this.setState({ pagination, filtersArg, sorter });
+    const filters = this.conversionFilter(filtersArg);
     const params = {
-      currentPage: pagination.current,
+      pageNo: pagination.current,
       pageSize: pagination.pageSize,
       ...formValues,
       ...filters,
@@ -180,9 +205,13 @@ class TableList extends PureComponent {
       params.sorter = `${sorter.field}_${sorter.order}`;
     }
 
+    const payload = {};
+    payload.data = {};
+    payload.data.info = params;
+
     dispatch({
-      type: 'apiGateway/fetch',
-      payload: params,
+      type: 'apiGatewayModel/apiList',
+      payload,
     });
   };
 
@@ -193,7 +222,7 @@ class TableList extends PureComponent {
       formValues: {},
     });
     dispatch({
-      type: 'apiGateway/fetch',
+      type: 'apiGatewayModel/apiList',
       payload: {},
     });
   };
@@ -215,7 +244,7 @@ class TableList extends PureComponent {
     payload.data.info.apiIds = [record.apiId];
     console.log('-----:', payload, act);
     dispatch({
-      type: 'apiGateway/remove',
+      type: 'apiGatewayModel/apiStatusBatch',
       payload,
       callback: resp => {
         this.respDeal(resp, dispatch);
@@ -238,7 +267,7 @@ class TableList extends PureComponent {
   //     console.log(data, index, array);
   //   });
   //   dispatch({
-  //     type: 'apiGateway/remove',
+  //     type: 'apiGatewayModel/remove',
   //     payload,
   //     callback: (resp) => {
   //       this.respDeal(resp,dispatch);
@@ -269,9 +298,14 @@ class TableList extends PureComponent {
         formValues: values,
       });
 
+      const { filtersArg, sorter } = this.state;
+      const filters = this.conversionFilter(filtersArg);
+      const payload = {};
+      payload.data = {};
+      payload.data.info = { ...filters, ...values, ...sorter };
       dispatch({
-        type: 'apiGateway/fetch',
-        payload: values,
+        type: 'apiGatewayModel/apiList',
+        payload,
       });
     });
   };
@@ -297,8 +331,7 @@ class TableList extends PureComponent {
             <FormItem label="分组">
               {getFieldDecorator('groupId')(
                 <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">语音识别</Option>
-                  <Option value="1">OCR识别</Option>
+                  {this.getGroupOption()}
                 </Select>
               )}
             </FormItem>
@@ -337,21 +370,14 @@ class TableList extends PureComponent {
             <FormItem label="分组">
               {getFieldDecorator('groupId')(
                 <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">语音识别</Option>
-                  <Option value="1">OCR识别</Option>
+                  {this.getGroupOption()}
                 </Select>
               )}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="使用状态">
-              {getFieldDecorator('status')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">未发布</Option>
-                  <Option value="2">已发布</Option>
-                </Select>
-              )}
+              {getFieldDecorator('status')(<SelectView javaCode="apiService" javaKey="status" />)}
             </FormItem>
           </Col>
         </Row>
@@ -379,12 +405,10 @@ class TableList extends PureComponent {
 
   render() {
     const {
-      apiGateway: { data },
+      apiGatewayModel: { data },
       loading,
     } = this.props;
     const { selectedRows } = this.state;
-
-    console.log('state2:', this.state);
     // const menu = (
     //   <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
     //     <Menu.Item key={DEL_ACT}>删除/下线</Menu.Item>
@@ -393,6 +417,7 @@ class TableList extends PureComponent {
     // );
 
     const rowKey = 'apiId';
+    const columns = this.getColumns();
     return (
       <PageHeaderWrapper>
         <Card bordered={false}>
@@ -415,7 +440,7 @@ class TableList extends PureComponent {
               selectedRows={selectedRows}
               loading={loading}
               data={data}
-              columns={this.columns}
+              columns={columns}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}
             />
