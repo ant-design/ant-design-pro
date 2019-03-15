@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Select, Divider } from 'antd';
+import { Form, Input, Button, Divider } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
-
-const { Option } = Select;
+import GroupSelectView from '../GroupSelectView';
 
 const formItemLayout = {
   labelCol: {
@@ -15,8 +14,8 @@ const formItemLayout = {
   },
 };
 
-@connect(({ apiCreate }) => ({
-  data: apiCreate.step,
+@connect(({ apiCreateModel }) => ({
+  data: apiCreateModel.step,
 }))
 @Form.create()
 class Step1 extends React.PureComponent {
@@ -27,7 +26,7 @@ class Step1 extends React.PureComponent {
       validateFields((err, values) => {
         if (!err) {
           dispatch({
-            type: 'apiCreate/saveStepFormData',
+            type: 'apiCreateModel/saveStepFormData',
             payload: values,
           });
           router.push('/apiGateway/apiCreate/consumer');
@@ -39,14 +38,8 @@ class Step1 extends React.PureComponent {
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
           <Form.Item {...formItemLayout} label="分组">
             {getFieldDecorator('groupId', {
-              initialValue: data.groupId,
               rules: [{ required: true, message: '请选择分组' }],
-            })(
-              <Select placeholder="语音识别">
-                <Option value="0">语音识别</Option>
-                <Option value="1">OCR识别</Option>
-              </Select>
-            )}
+            })(<GroupSelectView />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Api名称">
             {getFieldDecorator('apiName', {
@@ -64,7 +57,7 @@ class Step1 extends React.PureComponent {
             }}
             label=""
           >
-            <Button type="primary" onClick={onValidateForm}>
+            <Button type="primary" onClick={onValidateForm} htmlType="submit">
               下一步
             </Button>
           </Form.Item>

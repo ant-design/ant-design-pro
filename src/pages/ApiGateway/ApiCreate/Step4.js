@@ -5,8 +5,8 @@ import router from 'umi/router';
 import Result from '@/components/Result';
 import styles from './style.less';
 
-@connect(({ apiCreate }) => ({
-  data: apiCreate.step,
+@connect(({ apiCreateModel }) => ({
+  data: apiCreateModel.step,
 }))
 class Step4 extends React.PureComponent {
   render() {
@@ -52,7 +52,7 @@ class Step4 extends React.PureComponent {
     );
     const actions = (
       <Fragment>
-        <Button type="primary" onClick={onFinish}>
+        <Button type="primary" onClick={onFinish} htmlType="button">
           再创建一笔
         </Button>
       </Fragment>

@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Select, Divider } from 'antd';
+import { Form, Input, Button, Divider } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
 import { getPayload } from './util';
-
-const { Option } = Select;
+import SelectView from '../SelectView';
 
 const formItemLayout = {
   labelCol: {
@@ -16,12 +15,23 @@ const formItemLayout = {
   },
 };
 
-@connect(({ apiCreate, loading }) => ({
-  submitting: loading.effects['apiCreate/submitStepForm'],
-  data: apiCreate.step,
+@connect(({ apiCreateModel, loading }) => ({
+  submitting: loading.effects['apiCreateModel/submitStepForm'],
+  data: apiCreateModel.step,
 }))
 @Form.create()
 class Step3 extends React.PureComponent {
+  setBaseInfo = () => {
+    const { data, form } = this.props;
+    console.log('data:', data);
+    Object.keys(form.getFieldsValue()).forEach(key => {
+      const obj = {};
+      obj[key] = data[key] || null;
+      console.log('key:', key, 'currentUser key:', data[key], obj);
+      form.setFieldsValue(obj);
+    });
+  };
+
   render() {
     const { form, data, dispatch, submitting } = this.props;
     const { getFieldDecorator, validateFields } = form;
@@ -38,7 +48,7 @@ class Step3 extends React.PureComponent {
         console.log('create api commit:', apiInfo);
         if (!err) {
           dispatch({
-            type: 'apiCreate/submitStepForm',
+            type: 'apiCreateModel/submitStepForm',
             payload: apiInfo,
           });
         }
@@ -57,13 +67,7 @@ class Step3 extends React.PureComponent {
           {getFieldDecorator('producerServiceType', {
             initialValue: data.producerServiceType,
             rules: [{ required: true, message: '请选择后端服务类型' }],
-          })(
-            <Select placeholder="REST">
-              <Option value="1">REST</Option>
-              <Option value="2">WebService</Option>
-              <Option value="3">HTTP</Option>
-            </Select>
-          )}
+          })(<SelectView javaCode="apiService" javaKey="service_type" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="后端请求地址">
           {getFieldDecorator('producerUrl', {
@@ -81,12 +85,7 @@ class Step3 extends React.PureComponent {
           {getFieldDecorator('producerProtocol', {
             initialValue: data.producerProtocol,
             rules: [{ required: true, message: '请选择后端协议' }],
-          })(
-            <Select placeholder="HTTP">
-              <Option value="0">HTTP</Option>
-              <Option value="1">HTTPS</Option>
-            </Select>
-          )}
+          })(<SelectView javaCode="apiService" javaKey="protocol" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="后端服务连接超时">
           {getFieldDecorator('producerConnectTimeout', {
@@ -111,10 +110,10 @@ class Step3 extends React.PureComponent {
           }}
           label=""
         >
-          <Button type="primary" onClick={onValidateForm} loading={submitting}>
+          <Button type="primary" onClick={onValidateForm} loading={submitting} htmlType="submit">
             提交
           </Button>
-          <Button onClick={onPrev} style={{ marginLeft: 8 }}>
+          <Button onClick={onPrev} style={{ marginLeft: 8 }} htmlType="button">
             上一步
           </Button>
         </Form.Item>
