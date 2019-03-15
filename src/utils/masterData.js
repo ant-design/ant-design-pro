@@ -1,133 +1,61 @@
-import { getMasterData } from '../services/conf';
-
+import { allEnumList } from '../services/enumService';
 // clear Cache
 export const clearCache = () => {
   localStorage.clear();
 };
 
-// use localStorage to store the authority info, which might be sent from server in actual project.
-export function getEnumData(keyName) {
-  // console.log("getEnumData----------:",localStorage.getItem(keyName));
-  const str = localStorage.getItem(keyName) || '[]';
-  // console.log("getEnumData----------:",str);
-  const rows = JSON.parse(str);
-  // console.log("getEnumData3----------:",rows);
-  return rows;
+export function setAllEnumData() {
+  // localStorage.removeItem("allEnum")
+  const promise = allEnumList();
+  promise.then(
+    response => {
+      console.log('allEnumList response:', response);
+      const allEnum = response && response.data ? response.data : [];
+      // console.log("allEnum:", allEnum);
+      localStorage.setItem('allEnum', JSON.stringify(allEnum));
+    },
+    error => {
+      console.error('出错了', error);
+    }
+  );
 }
 
-export function setEnumData(keyName, rows) {
-  // console.log("setEnumData----------:",JSON.stringify(rows));
-  localStorage.setItem(keyName, JSON.stringify(rows));
-  // const test=getEnumData(keyName);
-  // console.log("setEnumData----------:",test);
-}
-// function* call(keyName) {
-//   const payload = { key: keyName };
-//   const rows = yield getMasterData(payload);
-//   console.log('rows:', rows);
-//   return rows;
-// }
-// const g = function* (keyName) {
-//   try {
-//     const payload = { key: keyName };
-//     const rows = yield getMasterData(payload);
-//     console.log('rows in masterData:', rows);
-//     return rows;
-//   } catch (e) {
-//     console.log(e);
-//   }
-//   return [];
-// };
-// function run(generator, keyName) {
-//   const it = generator(keyName);
-//
-//   function go(result) {
-//     console.log('go in masterData:', result);
-//     if (result.done) return result.value;
-//     return result.value.then(value => go(it.next(value)), error => go(it.throw(error)));
-//   }
-//
-//   const result = go(it.next());
-//   console.log('result in masterData:', result);
-//   return result;
-// }
-
-// export function fetchEnumData7(keyName) {
-//   return run(g, keyName);
-//   // const call=fetchEnumData0(keyName);
-//   // const promise=call.next();
-//   // let rows=[];
-//   // promise.then( (response)=> {
-//   //   console.log("getEnumData response:", response);
-//   //   rows = response && response.data ? response.data.rows : [];
-//   //   // setEnumData(keyName,rows);
-//   //   call.next(rows);
-//   // },  (error) => {
-//   //   console.error('出错了', error);
-//   // });
-// }
-// export function* fetchEnumData5(keyName) {
-//   // localStorage.removeItem(keyName);
-//   let localRows = getEnumData(keyName);
-//   // console.log("fetchEnumData----------:",localRows);
-//   console.debug('getEnumData localRows:', localRows);
-//   if (localRows.length === 0) {
-//     const payload = { key: keyName };
-//     console.log('getEnumData payload:', payload);
-//     const promise = yield getMasterData(payload);
-//     console.log('getEnumData promise:', promise);
-//     // let rows = [];
-//     // promise.then( (response)=> {
-//     //   console.log("getEnumData response:", response);
-//     //   rows = response && response.data ? response.data.rows : [];
-//     //   // setEnumData(keyName,rows);
-//     //   localRows= rows;
-//     // },  (error) => {
-//     //   console.error('出错了', error);
-//     // });
-//     // console.log("getEnumData rows:", rows);
-//     return promise;
-//   }
-// }
-
-export function fetchEnumData(component, keyName) {
-  // localStorage.removeItem(keyName);
-  clearCache();
-  const localRows = getEnumData(keyName);
-  // console.log("fetchEnumData----------:",localRows);
-  const obj = {};
-  obj[`${keyName}Rows`] = localRows;
-  console.debug('getEnumData localRows:', localRows);
-  if (localRows.length === 0) {
-    const payload = { key: keyName };
-    // console.log("getEnumData payload:", payload);
-    const promise = getMasterData(payload);
-    // console.log("getEnumData promise:", promise);
-    promise.then(
-      response => {
-        // console.log("getEnumData response:", response);
-        const rows = response && response.data ? response.data.rows : [];
-        setEnumData(keyName, rows);
-        obj[`${keyName}Rows`] = rows;
-        component.setState(obj);
-      },
-      error => {
-        console.error('出错了', error);
-      }
-    );
-    console.debug('getEnumData rows:');
-  } else {
-    component.setState(obj);
-  }
-}
-export function getItem(rows, val) {
-  let row = rows.find(data => data.itemCode === val);
-  if (!row) {
-    row = { itemCode: val, itemValue: val };
-  }
-  return row;
+export function getAllEnumData() {
+  const rows = localStorage.getItem('allEnum');
+  return JSON.parse(rows);
 }
 
-export function getItemValue(rows, val) {
-  return getItem(rows, val).itemValue;
+export function getItems(javaCode, javaKey) {
+  const allEnum = getAllEnumData();
+  return allEnum.filter(obj => obj.javaCode === javaCode && obj.javaKey === javaKey);
+}
+
+export function getItem(javaCode, javaKey, itemCode) {
+  const rows = getItems(javaCode, javaKey);
+  // console.log("masterdata items:",rows);
+  // console.log("masterdata item:",row)
+  return rows.find(data => data.itemCode === itemCode);
+}
+
+export function getItemValue(javaCode, javaKey, itemCode) {
+  return getItem(javaCode, javaKey, itemCode).itemValue;
+}
+
+export function getItem2(rows, itemCode) {
+  // console.log("masterdata items:",rows);
+  // console.log("masterdata item:",row)
+  return rows.find(data => data.itemCode === itemCode);
+}
+
+export function getItemValue2(items, itemCode) {
+  return getItem2(items, itemCode).itemValue;
+}
+
+export function getName(list, val, keyName, titleName) {
+  const data = list ? list.find(obj => obj[keyName] === val) : undefined;
+  return data ? data[titleName] : val;
+}
+
+export function getGroupName(list, val) {
+  return getName(list, val, 'groupId', 'groupName');
 }
