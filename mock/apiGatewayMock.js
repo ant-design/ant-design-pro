@@ -1,4 +1,4 @@
-import { parse } from 'url';
+// import { parse } from 'url';
 
 const DEL_ACT = 3;
 const ONLINE_ACT = 4;
@@ -14,7 +14,7 @@ for (let i = 0; i < 46; i += 1) {
     name: `Api Name ${i}`,
     actionName: `queryUser`,
     serviceType: Math.floor(Math.random() * 10) % 4,
-    groupId: Math.floor(Math.random() * 10) % 4,
+    groupId: (Math.floor(Math.random() * 10) % 4) + 1,
     status: `${Math.floor(Math.random() * 10) % 3}`,
     updateTime: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
     createTime: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
@@ -22,18 +22,14 @@ for (let i = 0; i < 46; i += 1) {
   });
 }
 
-function getApi(req, res, u) {
-  let url = u;
-  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    url = req.url; // eslint-disable-line
-  }
-
-  const params = parse(url, true).query;
-  console.log('params in getApi :', params);
+function apiList(req, res, u, b) {
+  const payload = (b && b.body) || req.body;
+  console.log('payload in getApi :', payload);
   let dataSource = tableListDataSource;
-
+  const params = payload && payload.data && payload.data.info ? payload.data.info : {};
   if (params.sorter) {
     const s = params.sorter.split('_');
+    console.log('sorter:', s);
     dataSource = dataSource.sort((prev, next) => {
       if (s[1] === 'descend') {
         return next[s[0]] - prev[s[0]];
@@ -54,14 +50,7 @@ function getApi(req, res, u) {
   }
 
   if (params.groupId) {
-    const status = params.groupId.split(',');
-    let filterDataSource = [];
-    status.forEach(s => {
-      filterDataSource = filterDataSource.concat(
-        dataSource.filter(data => parseInt(data.groupId, 10) === parseInt(s[0], 10))
-      );
-    });
-    dataSource = filterDataSource;
+    dataSource = dataSource.filter(data => data.groupId === parseInt(params.groupId, 10));
   }
   if (params.name) {
     dataSource = dataSource.filter(data => data.name.indexOf(params.name) > -1);
@@ -77,14 +66,14 @@ function getApi(req, res, u) {
     pagination: {
       total: dataSource.length,
       pageSize,
-      current: parseInt(params.currentPage, 10) || 1,
+      pageNo: parseInt(params.pageNo, 10) || 1,
     },
   };
 
   return res.json(result);
 }
 
-function postApi(req, res, u, b) {
+function apiStatusBatch(req, res, u, b) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
     url = req.url; // eslint-disable-line
@@ -96,8 +85,6 @@ function postApi(req, res, u, b) {
     option,
     data: { info },
   } = body;
-  console.log('body', body);
-  console.log('info', info);
 
   switch (option) {
     /* eslint no-case-declarations:0 */
@@ -142,8 +129,8 @@ function postApi(req, res, u, b) {
 }
 
 export default {
-  'GET /conf/apiGateway': getApi,
-  'POST /conf/apiGateway': postApi,
+  'POST /baseinfo/apiService/apiList': apiList,
+  'POST /baseinfo/apiService/apiStatusBatch': apiStatusBatch,
   'POST /conf/forms': (req, res) => {
     res.send({ message: 'Ok' });
   },
