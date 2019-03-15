@@ -1,19 +1,104 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Button, Card, Checkbox, Icon, Menu, Dropdown, Avatar, Skeleton, List } from 'antd';
+import {
+  Button,
+  Card,
+  Checkbox,
+  Icon,
+  Menu,
+  Dropdown,
+  Avatar,
+  Skeleton,
+  List,
+  Form,
+  Input,
+  Modal,
+  DatePicker,
+  TreeSelect,
+} from 'antd';
 import styles from './TaskBoard.less';
+
+const { TextArea } = Input;
+const { RangePicker } = DatePicker;
 
 @connect(({ team, loading }) => ({
   team,
   teamLoading: loading.effects['team/join'],
 }))
 class TaskBoard extends PureComponent {
-  state = {};
+  state = {
+    value: undefined,
+  };
 
   componentDidMount() {}
 
   deleteCard = id => {
     console.log(id);
+  };
+
+  onChange = value => {
+    console.log(value);
+    this.setState({ value });
+  };
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  randerTreeSect = () => {
+    const { value } = this.state;
+    const treeData = [
+      {
+        title: 'Node1',
+        value: '0-0',
+        key: '0-0',
+        children: [
+          {
+            title: 'Child Node1',
+            value: '0-0-1',
+            key: '0-0-1',
+          },
+          {
+            title: 'Child Node2',
+            value: '0-0-2',
+            key: '0-0-2',
+          },
+        ],
+      },
+      {
+        title: 'Node2',
+        value: '0-1',
+        key: '0-1',
+      },
+    ];
+
+    return (
+      <TreeSelect
+        style={{ width: 300 }}
+        value={value}
+        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+        treeData={treeData}
+        placeholder="Please select"
+        treeDefaultExpandAll
+        onChange={this.onChange}
+      />
+    );
   };
 
   renderCard = () => {
@@ -79,7 +164,10 @@ class TaskBoard extends PureComponent {
         itemLayout="horizontal"
         dataSource={list}
         renderItem={item => (
-          <List.Item style={{ backgroundColor: '#fff', padding: '12px 15px' }}>
+          <List.Item
+            style={{ backgroundColor: '#fff', padding: '12px 15px' }}
+            onClick={this.showModal}
+          >
             <Skeleton avatar title={false} loading={false} active>
               <List.Item.Meta
                 avatar=<Checkbox />
@@ -97,6 +185,25 @@ class TaskBoard extends PureComponent {
   };
 
   render() {
+    const { visible } = this.state;
+    const formItemLayout = {
+      labelCol: { span: 4 },
+      wrapperCol: { span: 20 },
+    };
+
+    const ModelContent = (
+      <Form>
+        <Form.Item {...formItemLayout} label="工作人员">
+          {this.randerTreeSect}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="截止日期">
+          <RangePicker />
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="任务描述">
+          <TextArea rows={2} placeholder="请输入项目描述" />
+        </Form.Item>
+      </Form>
+    );
     const menu = (
       <Menu>
         <Menu.Item key="1">
@@ -157,6 +264,9 @@ class TaskBoard extends PureComponent {
             </Button>
           </div>
         </div>
+        <Modal title="任务详情" visible={visible} onOk={this.handleOk} onCancel={this.handleCancel}>
+          {ModelContent}
+        </Modal>
       </div>
     );
   }
