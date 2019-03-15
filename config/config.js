@@ -72,13 +72,22 @@ export default {
   externals: {
     '@antv/data-set': 'DataSet',
   },
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
+  proxy: {
+    '/server/api/': {
+      target: 'https://preview.pro.ant.design/',
+      changeOrigin: true,
+      pathRewrite: { '^/server': '' },
+    },
+    '/server/test/test2list': {
+      target: 'http://jsonplaceholder.typicode.com',
+      changeOrigin: true,
+      pathRewrite: { '^/server/test/test2list': 'albums' },
+    },
+    // '/albums': {
+    //   target: 'http://jsonplaceholder.typicode.com',
+    //   changeOrigin: true,
+    // },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
