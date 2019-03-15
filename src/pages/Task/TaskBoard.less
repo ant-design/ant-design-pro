@@ -3,7 +3,6 @@
   //滚动条凹槽的颜色，还可以设置边框属性
   background-color: #f8f8f8;
 }
-
 ::-webkit-scrollbar {
   //滚动条的宽度
   width: 5px;
@@ -18,6 +17,7 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #bbb;
+  width: 5px;
 }
 
 .kanban {
@@ -46,34 +46,6 @@
   margin: 0 10px;
   float: left;
 }
-
-.listTitle {
-  position: absolute;
-  top: 0;
-  left: 5px;
-  right: 0;
-  height: 40px;
-  background-color: #f0f2f5;
-  h4 {
-    display: inline-block;
-    float: left;
-    font-size: 14px;
-    color: #383838;
-    line-height: 40px;
-    font-weight: bold;
-    width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .iconBox {
-    float: right;
-    padding: 13px;
-  }
-  .titleIcon {
-    font-size: 14px;
-  }
-}
 .cardList {
   position: absolute;
   top: 65px;
@@ -81,63 +53,6 @@
   right: 0;
   bottom: 0;
   overflow: auto;
-}
-.item {
-  position: relative;
-  height: 75px;
-  width: 250px;
-  padding: 0 20px;
-  margin-top: 10px;
-  border-radius: @border-radius-base;
-  background-color: #fff;
-  box-shadow: @box-shadow-base;
-}
-.item:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  bottom: 0;
-  background-color: #999;
-  transition: width 0.5s;
-  border-radius: 5px 0 0 5px;
-}
-.item:hover:before {
-  width: 5px;
-}
-.checkBox {
-  display: inline-block;
-  width: 170px;
-  height: 35px;
-  line-height: 35px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  span {
-    cursor: Default;
-  }
-}
-.icon {
-  display: inline-block;
-  float: right;
-  padding: 4.5px 0;
-  span {
-    display: block;
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-    line-height: 24px;
-    border-radius: 12px;
-    text-align: center;
-    color: #fff;
-  }
-  .ceo {
-    background-color: @processing-color;
-  }
-  .minister {
-    background-color: @processing-color;
-  }
 }
 .add {
   line-height: 30px;
@@ -169,15 +84,5 @@
   }
   .rich {
     background-color: @success-color;
-  }
-}
-.menu {
-  width: 200px;
-  .menuTitle {
-    position: relative;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    border-bottom: 1px solid #999;
   }
 }
