@@ -1,7 +1,7 @@
-import { queryApi, removeApi, addApi, updateApi } from '@/services/conf';
+import { apiList, apiStatusBatch, addApi, updateApi } from '@/services/apiGatewayService';
 
 export default {
-  namespace: 'apiGateway',
+  namespace: 'apiGatewayModel',
 
   state: {
     data: {
@@ -11,9 +11,9 @@ export default {
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {
+    *apiList({ payload }, { call, put }) {
       console.log('payload', payload);
-      const response = yield call(queryApi, payload);
+      const response = yield call(apiList, payload);
 
       console.log('response', response);
       yield put({
@@ -29,9 +29,9 @@ export default {
       });
       if (callback) callback();
     },
-    *remove({ payload, callback }, { call }) {
+    *apiStatusBatch({ payload, callback }, { call }) {
       console.log('payload', payload);
-      const response = yield call(removeApi, payload);
+      const response = yield call(apiStatusBatch, payload);
       // yield put({
       //   type: 'save',
       //   payload: response,
