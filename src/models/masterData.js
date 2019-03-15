@@ -1,4 +1,4 @@
-import { getMasterData } from '../services/conf';
+import { getMasterData } from '../services/apiGatewayService';
 
 export default {
   namespace: 'masterData',
