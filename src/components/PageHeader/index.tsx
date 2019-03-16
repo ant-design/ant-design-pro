@@ -46,15 +46,10 @@ const PageHeader: React.FC<PageHeaderProps> = props => {
     tabDefaultActiveKey,
     tabBarExtraContent,
     loading = false,
+    onTabChange = () => void 0,
     wide = false,
     hiddenBreadcrumb = false,
   } = props;
-  const onChange = key => {
-    const { onTabChange } = this.props;
-    if (onTabChange) {
-      onTabChange(key);
-    }
-  };
   const clsString = classNames(styles.pageHeader, className);
   const activeKeyProps: any = {};
   if (tabDefaultActiveKey !== undefined) {
@@ -73,7 +68,7 @@ const PageHeader: React.FC<PageHeaderProps> = props => {
           paragraph={{ rows: 3 }}
           avatar={{ size: 'large', shape: 'circle' }}
         >
-          {hiddenBreadcrumb ? null : <BreadcrumbView {...this.props} />}
+          {hiddenBreadcrumb ? null : <BreadcrumbView {...props} />}
           <div className={styles.detail}>
             {logo && <div className={styles.logo}>{logo}</div>}
             <div className={styles.main}>
@@ -91,7 +86,7 @@ const PageHeader: React.FC<PageHeaderProps> = props => {
             <Tabs
               className={styles.tabs}
               {...activeKeyProps}
-              onChange={onChange}
+              onChange={onTabChange}
               tabBarExtraContent={tabBarExtraContent}
             >
               {tabList.map(item => (

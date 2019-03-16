@@ -46,7 +46,7 @@ const authorize = (authority: Authority, error?: React.ReactNode) => {
   if (!authority) {
     throw new Error('authority is required');
   }
-  return function decideAuthority(target: AnyComponent | React.ReactNode) {
+  return function decideAuthority(target: AnyComponent) {
     const component = CheckPermissions(authority, target, classError || Exception403);
     return checkIsInstantiation(component);
   };

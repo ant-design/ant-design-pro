@@ -18,6 +18,16 @@ export default class PromiseRender extends React.Component<PromiseRenderPorps, P
     component: null,
   };
 
+  shouldComponentUpdate = (nextProps: PromiseRenderPorps, nextState: PromiseRenderState) => {
+    const { component } = this.state;
+    const { error, ok, promise } = this.props;
+    if (nextProps.promise !== promise) return true;
+    if (nextProps.error !== error) return true;
+    if (nextProps.ok !== ok) return true;
+    if (nextState.component !== component) return true;
+    return false;
+  };
+
   componentDidMount() {
     this.setRenderComponent(this.props);
   }
@@ -48,9 +58,9 @@ export default class PromiseRender extends React.Component<PromiseRenderPorps, P
   // AuthorizedRoute is already instantiated
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
-  checkIsInstantiation = target => {
+  checkIsInstantiation = (target: AnyComponent | React.ReactNode): AnyComponent => {
     if (!React.isValidElement(target)) {
-      return target;
+      return target as AnyComponent;
     }
     return () => target;
   };
