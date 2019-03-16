@@ -1,3 +1,4 @@
+import 'jest';
 import { checkPermissions } from './CheckPermissions';
 
 const target = 'ok';

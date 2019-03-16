@@ -1,7 +1,19 @@
-import React from 'react';
 import { Spin } from 'antd';
+import React from 'react';
 
-export default class PromiseRender extends React.Component {
+export type AnyComponent = React.Component | React.FunctionComponent;
+
+export interface PromiseRenderPorps {
+  error?: AnyComponent | React.ReactNode;
+  ok?: AnyComponent | React.ReactNode;
+  promise: Promise<any>;
+}
+
+interface PromiseRenderState {
+  component?: AnyComponent;
+}
+
+export default class PromiseRender extends React.Component<PromiseRenderPorps, PromiseRenderState> {
   state = {
     component: null,
   };
@@ -10,13 +22,13 @@ export default class PromiseRender extends React.Component {
     this.setRenderComponent(this.props);
   }
 
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(nextProps: PromiseRenderPorps) {
     // new Props enter
     this.setRenderComponent(nextProps);
   }
 
   // set render Component : ok or error
-  setRenderComponent(props) {
+  setRenderComponent(props: PromiseRenderPorps) {
     const ok = this.checkIsInstantiation(props.ok);
     const error = this.checkIsInstantiation(props.error);
     props.promise
