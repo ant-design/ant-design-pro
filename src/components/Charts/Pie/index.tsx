@@ -53,7 +53,7 @@ class Pie extends Component<PieProps, PieState> {
       () => {
         this.requestRef = requestAnimationFrame(() => this.resize());
       },
-      { passive: true }
+      { passive: true },
     );
   }
 

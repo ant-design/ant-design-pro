@@ -18,7 +18,7 @@ describe('Homepage', async () => {
       timeout: 2000,
     });
     const haveFooter = await page.evaluate(
-      () => document.getElementsByTagName('footer').length > 0
+      () => document.getElementsByTagName('footer').length > 0,
     );
     expect(haveFooter).toBeTruthy();
   };

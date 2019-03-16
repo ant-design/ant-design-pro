@@ -23,7 +23,7 @@ interface StandardTableProps {
     pagination: PaginationConfig,
     filters: Record<keyof any, string[]>,
     sorter: SorterResult<any>,
-    extra?: TableCurrentDataSource<any>
+    extra?: TableCurrentDataSource<any>,
   ) => void;
   loading?: boolean;
 }

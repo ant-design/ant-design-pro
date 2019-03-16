@@ -39,7 +39,7 @@ const GlobalModel: IGlobalModel = {
         payload: data,
       });
       const unreadCount = yield select(
-        state => state.global.notices.filter(item => !item.read).length
+        state => state.global.notices.filter(item => !item.read).length,
       );
       yield put({
         type: 'user/changeNotifyCount',
@@ -56,7 +56,7 @@ const GlobalModel: IGlobalModel = {
       });
       const count = yield select(state => state.global.notices.length);
       const unreadCount = yield select(
-        state => state.global.notices.filter(item => !item.read).length
+        state => state.global.notices.filter(item => !item.read).length,
       );
       yield put({
         type: 'user/changeNotifyCount',
@@ -74,7 +74,7 @@ const GlobalModel: IGlobalModel = {
             notice.read = true;
           }
           return notice;
-        })
+        }),
       );
       yield put({
         type: 'saveNotices',

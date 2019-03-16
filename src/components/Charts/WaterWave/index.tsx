@@ -33,7 +33,7 @@ class WaterWave extends Component<WaterWaveProps, WaterWaveState> {
       () => {
         requestAnimationFrame(() => this.resize());
       },
-      { passive: true }
+      { passive: true },
     );
   }
 

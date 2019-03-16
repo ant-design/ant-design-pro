@@ -51,7 +51,7 @@ const Info: React.FC<IInfoFormProps> = props => {
           })(
             <Select placeholder="test@example.com">
               <Option value="ant-design@alipay.com">ant-design@alipay.com</Option>
-            </Select>
+            </Select>,
           )}
         </Form.Item>
         <Form.Item {...formItemLayout} label="收款账户">
@@ -121,5 +121,5 @@ const Info: React.FC<IInfoFormProps> = props => {
 export default Form.create()(
   connect(({ form }) => ({
     data: form.step,
-  }))(Info)
+  }))(Info),
 );

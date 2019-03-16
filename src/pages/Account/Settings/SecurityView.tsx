@@ -42,7 +42,7 @@ class SecurityView extends Component {
       title: formatMessage({ id: 'app.settings.security.phone' }, {}),
       description: `${formatMessage(
         { id: 'app.settings.security.phone-description' },
-        {}
+        {},
       )}：138****8293`,
       actions: [
         <a>
@@ -63,7 +63,7 @@ class SecurityView extends Component {
       title: formatMessage({ id: 'app.settings.security.email' }, {}),
       description: `${formatMessage(
         { id: 'app.settings.security.email-description' },
-        {}
+        {},
       )}：ant***sign.com`,
       actions: [
         <a>

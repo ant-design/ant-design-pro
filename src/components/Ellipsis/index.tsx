@@ -39,7 +39,7 @@ export const getStrFullLength: (str: string) => number = (str = '') =>
 
 export const cutStrByFullLength: (str: string, maxLength: number) => string = (
   str = '',
-  maxLength
+  maxLength,
 ) => {
   let showLength = 0;
   return str.split('').reduce((pre, cur) => {

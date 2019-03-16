@@ -27,7 +27,7 @@ describe('test getBreadcrumb', () => {
   });
   it('Loop through the parameters', () => {
     const urlNameList = urlToList('/userinfo/2144/addr').map(
-      url => getBreadcrumb(routerData, url).name
+      url => getBreadcrumb(routerData, url).name,
     );
     expect(urlNameList).toEqual(['用户列表', '用户信息', '收货订单']);
   });

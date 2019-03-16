@@ -74,7 +74,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
 
   handleRangePickerChange: (
     dates: RangePickerValue,
-    dateStrings: [string, string]
+    dateStrings: [string, string],
   ) => void = rangePickerValue => {
     const { dispatch } = this.props;
     this.setState({

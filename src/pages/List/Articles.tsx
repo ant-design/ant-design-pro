@@ -141,7 +141,7 @@ class SearchList extends Component<ISearchListProps> {
                     <TagSelect.Option value="cat10">类目十</TagSelect.Option>
                     <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
                     <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
-                  </TagSelect>
+                  </TagSelect>,
                 )}
               </FormItem>
             </StandardFormRow>
@@ -162,7 +162,7 @@ class SearchList extends Component<ISearchListProps> {
                             {owner.name}
                           </Option>
                         ))}
-                      </Select>
+                      </Select>,
                     )}
                     <a className={styles.selfTrigger} onClick={this.setOwner}>
                       只看自己的
@@ -178,7 +178,7 @@ class SearchList extends Component<ISearchListProps> {
                     {getFieldDecorator('user', {})(
                       <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="lisa">李三</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>
@@ -187,7 +187,7 @@ class SearchList extends Component<ISearchListProps> {
                     {getFieldDecorator('rate', {})(
                       <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="good">优秀</Option>
-                      </Select>
+                      </Select>,
                     )}
                   </FormItem>
                 </Col>

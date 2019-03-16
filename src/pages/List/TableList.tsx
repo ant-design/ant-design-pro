@@ -134,7 +134,7 @@ class UpdateFormClass extends Component<IUpdateFormProps, IUpdateFormState> {
           } else {
             handleUpdate(formVals);
           }
-        }
+        },
       );
     });
   };
@@ -164,7 +164,7 @@ class UpdateFormClass extends Component<IUpdateFormProps, IUpdateFormState> {
             <Select style={{ width: '100%' }}>
               <Option value="0">表一</Option>
               <Option value="1">表二</Option>
-            </Select>
+            </Select>,
           )}
         </FormItem>,
         <FormItem key="template" {...this.formLayout} label="规则模板">
@@ -174,7 +174,7 @@ class UpdateFormClass extends Component<IUpdateFormProps, IUpdateFormState> {
             <Select style={{ width: '100%' }}>
               <Option value="0">规则模板一</Option>
               <Option value="1">规则模板二</Option>
-            </Select>
+            </Select>,
           )}
         </FormItem>,
         <FormItem key="type" {...this.formLayout} label="规则类型">
@@ -184,7 +184,7 @@ class UpdateFormClass extends Component<IUpdateFormProps, IUpdateFormState> {
             <RadioGroup>
               <Radio value="0">强</Radio>
               <Radio value="1">弱</Radio>
-            </RadioGroup>
+            </RadioGroup>,
           )}
         </FormItem>,
       ];
@@ -200,7 +200,7 @@ class UpdateFormClass extends Component<IUpdateFormProps, IUpdateFormState> {
               showTime={true}
               format="YYYY-MM-DD HH:mm:ss"
               placeholder="选择开始时间"
-            />
+            />,
           )}
         </FormItem>,
         <FormItem key="frequency" {...this.formLayout} label="调度周期">
@@ -210,7 +210,7 @@ class UpdateFormClass extends Component<IUpdateFormProps, IUpdateFormState> {
             <Select style={{ width: '100%' }}>
               <Option value="month">月</Option>
               <Option value="week">周</Option>
-            </Select>
+            </Select>,
           )}
         </FormItem>,
       ];
@@ -403,7 +403,7 @@ class TableList extends Component<ITableListProps, ITableListState> {
     pagination: PaginationConfig,
     filters: Record<any, any>,
     sorter: SorterResult<any>,
-    extra: TableCurrentDataSource<any>
+    extra: TableCurrentDataSource<any>,
   ) => void = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
@@ -571,7 +571,7 @@ class TableList extends Component<ITableListProps, ITableListState> {
                 <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
-                </Select>
+                </Select>,
               )}
             </FormItem>
           </Col>
@@ -611,7 +611,7 @@ class TableList extends Component<ITableListProps, ITableListState> {
                 <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
-                </Select>
+                </Select>,
               )}
             </FormItem>
           </Col>
@@ -625,7 +625,7 @@ class TableList extends Component<ITableListProps, ITableListState> {
           <Col md={8} sm={24}>
             <FormItem label="更新日期">
               {getFieldDecorator('date')(
-                <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />
+                <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />,
               )}
             </FormItem>
           </Col>
@@ -635,7 +635,7 @@ class TableList extends Component<ITableListProps, ITableListState> {
                 <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
-                </Select>
+                </Select>,
               )}
             </FormItem>
           </Col>
@@ -645,7 +645,7 @@ class TableList extends Component<ITableListProps, ITableListState> {
                 <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
-                </Select>
+                </Select>,
               )}
             </FormItem>
           </Col>
