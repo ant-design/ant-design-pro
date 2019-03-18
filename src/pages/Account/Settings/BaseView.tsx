@@ -136,7 +136,7 @@ class BaseView extends Component<IBaseProps> {
                 <Input.TextArea
                   placeholder={formatMessage({ id: 'app.settings.basic.profile-placeholder' })}
                   rows={4}
-                />
+                />,
               )}
             </FormItem>
             <FormItem label={formatMessage({ id: 'app.settings.basic.country' })}>
@@ -150,7 +150,7 @@ class BaseView extends Component<IBaseProps> {
               })(
                 <Select style={{ maxWidth: 220 }}>
                   <Option value="China">中国</Option>
-                </Select>
+                </Select>,
               )}
             </FormItem>
             <FormItem label={formatMessage({ id: 'app.settings.basic.geographic' })}>

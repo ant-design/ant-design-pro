@@ -1,22 +1,44 @@
-import React from 'react';
 import { Spin } from 'antd';
+import React from 'react';
 
-export default class PromiseRender extends React.Component {
+export type AnyComponent = React.Component | React.FunctionComponent;
+
+export interface PromiseRenderPorps {
+  error?: AnyComponent | React.ReactNode;
+  ok?: AnyComponent | React.ReactNode;
+  promise: Promise<any>;
+}
+
+interface PromiseRenderState {
+  component?: AnyComponent;
+}
+
+export default class PromiseRender extends React.Component<PromiseRenderPorps, PromiseRenderState> {
   state = {
     component: null,
+  };
+
+  shouldComponentUpdate = (nextProps: PromiseRenderPorps, nextState: PromiseRenderState) => {
+    const { component } = this.state;
+    const { error, ok, promise } = this.props;
+    if (nextProps.promise !== promise) return true;
+    if (nextProps.error !== error) return true;
+    if (nextProps.ok !== ok) return true;
+    if (nextState.component !== component) return true;
+    return false;
   };
 
   componentDidMount() {
     this.setRenderComponent(this.props);
   }
 
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(nextProps: PromiseRenderPorps) {
     // new Props enter
     this.setRenderComponent(nextProps);
   }
 
   // set render Component : ok or error
-  setRenderComponent(props) {
+  setRenderComponent(props: PromiseRenderPorps) {
     const ok = this.checkIsInstantiation(props.ok);
     const error = this.checkIsInstantiation(props.error);
     props.promise
@@ -36,9 +58,9 @@ export default class PromiseRender extends React.Component {
   // AuthorizedRoute is already instantiated
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
-  checkIsInstantiation = target => {
+  checkIsInstantiation = (target: AnyComponent | React.ReactNode): AnyComponent => {
     if (!React.isValidElement(target)) {
-      return target;
+      return target as AnyComponent;
     }
     return () => target;
   };

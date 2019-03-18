@@ -69,7 +69,7 @@ export default class BreadcrumbView extends Component<PageHeaderProps> {
                     {
                       [linkElement === 'a' ? 'href' : 'to']: item.href,
                     },
-                    title
+                    title,
                   )
                 : title}
             </Breadcrumb.Item>
@@ -96,7 +96,7 @@ export default class BreadcrumbView extends Component<PageHeaderProps> {
           {createElement(
             (isLinkable ? linkElement : 'span') as any,
             { [linkElement === 'a' ? 'href' : 'to']: url },
-            name
+            name,
           )}
         </Breadcrumb.Item>
       ) : null;
@@ -110,9 +110,9 @@ export default class BreadcrumbView extends Component<PageHeaderProps> {
             {
               [linkElement === 'a' ? 'href' : 'to']: '/',
             },
-            home
+            home,
           )}
-        </Breadcrumb.Item>
+        </Breadcrumb.Item>,
       );
     }
     return (
@@ -167,7 +167,7 @@ export default class BreadcrumbView extends Component<PageHeaderProps> {
           href: paths.join('/') || '/',
           to: paths.join('/') || '/',
         },
-        route.breadcrumbName
+        route.breadcrumbName,
       )
     );
   };

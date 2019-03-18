@@ -124,7 +124,7 @@ class LoginPage extends Component<ILoginPageProps, ILoginPageState> {
               login.type === 'mobile' &&
               !submitting &&
               this.renderMessage(
-                formatMessage({ id: 'app.login.message-invalid-verification-code' })
+                formatMessage({ id: 'app.login.message-invalid-verification-code' }),
               )}
             <Mobile
               name="mobile"

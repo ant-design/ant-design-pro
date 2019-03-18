@@ -209,7 +209,7 @@ class Register extends Component<IRegisterProps> {
                 },
               ],
             })(
-              <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
+              <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />,
             )}
           </FormItem>
           <FormItem help={help}>
@@ -239,7 +239,7 @@ class Register extends Component<IRegisterProps> {
                   size="large"
                   type="password"
                   placeholder={formatMessage({ id: 'form.password.placeholder' })}
-                />
+                />,
               )}
             </Popover>
           </FormItem>
@@ -259,7 +259,7 @@ class Register extends Component<IRegisterProps> {
                 size="large"
                 type="password"
                 placeholder={formatMessage({ id: 'form.confirm-password.placeholder' })}
-              />
+              />,
             )}
           </FormItem>
           <FormItem>
@@ -289,7 +289,7 @@ class Register extends Component<IRegisterProps> {
                   size="large"
                   style={{ width: '80%' }}
                   placeholder={formatMessage({ id: 'form.phone-number.placeholder' })}
-                />
+                />,
               )}
             </InputGroup>
           </FormItem>
@@ -307,7 +307,7 @@ class Register extends Component<IRegisterProps> {
                   <Input
                     size="large"
                     placeholder={formatMessage({ id: 'form.verification-code.placeholder' })}
-                  />
+                  />,
                 )}
               </Col>
               <Col span={8}>

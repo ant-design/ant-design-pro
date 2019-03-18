@@ -45,7 +45,7 @@ export const AvatarList: React.FC<AvatarListProps> = ({
     .map((child: React.ReactElement<AvatarItemProps>) =>
       React.cloneElement(child, {
         size,
-      })
+      }),
     );
 
   if (numToShow < numOfChildren) {
@@ -54,7 +54,7 @@ export const AvatarList: React.FC<AvatarListProps> = ({
     childrenWithProps.push(
       <li key="exceed" className={cls}>
         <Avatar size={size} style={excessItemsStyle}>{`+${numOfChildren - maxLength}`}</Avatar>
-      </li>
+      </li>,
     );
   }
 

@@ -38,11 +38,11 @@ workbox.routing.registerRoute(/\/api\//, workbox.strategies.networkFirst());
  */
 workbox.routing.registerRoute(
   /^https:\/\/gw.alipayobjects.com\//,
-  workbox.strategies.networkFirst()
+  workbox.strategies.networkFirst(),
 );
 workbox.routing.registerRoute(
   /^https:\/\/cdnjs.cloudflare.com\//,
-  workbox.strategies.networkFirst()
+  workbox.strategies.networkFirst(),
 );
 workbox.routing.registerRoute(/\/color.less/, workbox.strategies.networkFirst());
 
@@ -58,8 +58,8 @@ addEventListener('message', event => {
         .skipWaiting()
         .then(
           () => replyPort.postMessage({ error: null }),
-          error => replyPort.postMessage({ error })
-        )
+          error => replyPort.postMessage({ error }),
+        ),
     );
   }
 });

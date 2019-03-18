@@ -70,7 +70,7 @@ class Exception extends React.Component<IExceptionProps, any> {
                   to: redirect,
                   href: redirect,
                 },
-                <Button type="primary">{backText}</Button>
+                <Button type="primary">{backText}</Button>,
               )}
           </div>
         </div>

@@ -105,5 +105,5 @@ export default Form.create()(
   connect(({ form, loading }) => ({
     submitting: loading.effects['form/submitStepForm'],
     data: form.step,
-  }))(Confirm)
+  }))(Confirm),
 );
