@@ -11,7 +11,7 @@ export const dva = {
 
 let authRoutes = {};
 
-function ergodicRoutes(routes: IRoute[], authKey: string, authority: string | string[]) {
+function ergodicRoutes(routes: IRoute[], authKey: string, authority: string | string[]): void {
   routes.forEach(element => {
     if (element.path === authKey) {
       if (!element.authority) element.authority = []; // eslint-disable-line
@@ -27,7 +27,7 @@ export function patchRoutes(routes: IRoute[]) {
   Object.keys(authRoutes).map(authKey =>
     ergodicRoutes(routes, authKey, authRoutes[authKey].authority),
   );
-  (window as any).g_routes = routes;
+  // (window as any).g_routes = routes;
 }
 
 export function render(oldRender: Function) {

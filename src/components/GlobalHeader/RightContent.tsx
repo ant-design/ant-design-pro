@@ -126,10 +126,10 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
             formatMessage({ id: 'component.globalHeader.search.example3' }),
           ]}
           onSearch={value => {
-            console.log('input', value); // tslint:disable-line no-console
+            console.log('input', value); // eslint-disable-line no-console
           }}
           onPressEnter={value => {
-            console.log('enter', value); // tslint:disable-line no-console
+            console.log('enter', value); // eslint-disable-line no-console
           }}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
@@ -147,7 +147,7 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
           className={styles.action}
           count={currentUser && currentUser.unreadCount}
           onItemClick={(item, tabProps) => {
-            console.log(item, tabProps); // tslint:disable-line no-console
+            console.log(item, tabProps); // eslint-disable-line no-console
             this.changeReadState(item as NoticeItem);
           }}
           loading={fetchingNotices}

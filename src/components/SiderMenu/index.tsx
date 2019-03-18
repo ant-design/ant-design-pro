@@ -1,7 +1,6 @@
 import React from 'react';
 import { Drawer } from 'antd';
-import { SiderMenuProps } from './SiderMenu';
-import SiderMenu from './SiderMenu';
+import SiderMenu, { SiderMenuProps } from './SiderMenu';
 import { getFlatMenuKeys } from './SiderMenuUtils';
 
 export { SiderMenuProps };

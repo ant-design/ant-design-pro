@@ -7,6 +7,14 @@ import { DefaultSettings as SettingModelState } from '../../config/defaultSettin
 
 export { GlobalModelState, MenuModelState, SettingModelState, UserModelState };
 
+export interface ConnectState {
+  global: GlobalModelState;
+  loading: Loading;
+  menu: MenuModelState;
+  setting: SettingModelState;
+  user: UserModelState;
+}
+
 export type Effect = (
   action: AnyAction,
   effects: EffectsCommandMap & { select: <T>(func: (state: ConnectState) => T) => T },
@@ -34,14 +42,6 @@ export interface Loading {
   };
 }
 
-export interface ConnectState {
-  global: GlobalModelState;
-  loading: Loading;
-  menu: MenuModelState;
-  setting: SettingModelState;
-  user: UserModelState;
-}
-
 /**
  * @type T: Params matched in dynamic routing
  * @type R: Instance type of ref
@@ -58,4 +58,4 @@ export interface ConnectProps<T extends { [key: string]: any } = {}, R = any>
   };
 }
 
-export default ConnectState;
+export default ConnectState; // eslint-disable-line

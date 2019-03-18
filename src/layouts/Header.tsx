@@ -39,7 +39,9 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
   }
 
   ticking: boolean = false;
+
   oldScrollTop: number = 0;
+
   state: HeaderViewState = {
     visible: true,
   };

@@ -1,3 +1,4 @@
+declare let APP_TYPE: string;
 declare module '*.css';
 declare module '*.less';
 declare module '*.scss';
@@ -12,7 +13,6 @@ declare module '*.tiff';
 declare module 'rc-animate';
 declare module 'omit.js';
 declare module 'react-copy-to-clipboard';
-declare var APP_TYPE: string;
 declare module 'ant-design-pro' {
   import React from 'react';
   import { INoticeIconProps } from 'ant-design-pro/lib/NoticeIcon';

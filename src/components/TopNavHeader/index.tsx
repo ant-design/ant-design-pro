@@ -16,7 +16,7 @@ interface TopNavHeaderState {
 }
 
 export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHeaderState> {
-  static getDerivedStateFromProps(props: TopNavHeaderProps) {
+  static getDerivedStateFromProps(props: TopNavHeaderProps): object {
     return {
       maxWidth: (props.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 280 - 165 - 40,
     };
@@ -33,7 +33,7 @@ export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHea
     return (
       <div className={`${styles.head} ${theme === 'light' ? styles.light : ''}`}>
         <div
-          ref={ref => (this.maim = ref)}
+          ref={ref => (this.maim = ref)} // eslint-disable-line
           className={`${styles.main} ${contentWidth === 'Fixed' ? styles.wide : ''}`}
         >
           <div className={styles.left}>

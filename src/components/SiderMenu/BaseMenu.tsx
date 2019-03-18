@@ -99,7 +99,7 @@ export default class BaseMenu extends Component<BaseMenuProps> {
     if (
       Array.isArray(item.children) &&
       !item.hideChildrenInMenu &&
-      item.children.some(child => (child.name ? true : false))
+      item.children.some(child => !!child.name)
     ) {
       return (
         <SubMenu
@@ -107,7 +107,7 @@ export default class BaseMenu extends Component<BaseMenuProps> {
             item.icon ? (
               <span>
                 {getIcon(item.icon)}
-                <span>{name}</span>
+                <span>{item.name}</span>
               </span>
             ) : (
               item.name

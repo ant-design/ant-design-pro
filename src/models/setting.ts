@@ -24,8 +24,9 @@ const updateTheme: (primaryColor?: string) => void = primaryColor => {
   const hideMessage = message.loading('正在编译主题！', 0);
   function buildIt() {
     if (!(window as any).less) {
-      // tslint:disable-next-line no-console
-      return console.log('no less');
+      // eslint-disable-next-line no-console
+      console.log('no less');
+      return;
     }
     setTimeout(() => {
       (window as any).less

@@ -26,14 +26,17 @@ export default class GlobalHeader extends Component<GlobalHeaderProps> {
     event.initEvent('resize', true, false);
     window.dispatchEvent(event);
   });
+
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
   }
+
   toggle = () => {
     const { collapsed, onCollapse } = this.props;
     if (onCollapse) onCollapse(!collapsed);
     this.triggerResizeEvent();
   };
+
   render() {
     const { collapsed, isMobile, logo } = this.props;
     return (

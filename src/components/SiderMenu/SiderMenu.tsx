@@ -11,7 +11,7 @@ import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
 const BaseMenu = React.lazy(() => import('./BaseMenu'));
 const { Sider } = Layout;
 const { title } = defaultSettings;
-let firstMount: boolean = true;
+let firstMount = true;
 
 export interface SiderMenuProps extends BaseMenuProps {
   logo?: string;
@@ -28,13 +28,13 @@ export default class SiderMenu extends Component<SiderMenuProps, SiderMenuState>
   static defaultProps: SiderMenuProps = {
     flatMenuKeys: [],
     location: window.location,
-    onCollapse: () => void 0,
+    onCollapse: () => 0,
     isMobile: false,
     openKeys: [],
     collapsed: false,
-    handleOpenChange: () => void 0,
+    handleOpenChange: () => 0,
     menuData: [],
-    onOpenChange: () => void 0,
+    onOpenChange: () => 0,
   };
 
   static getDerivedStateFromProps(props: SiderMenuProps, state: SiderMenuState) {

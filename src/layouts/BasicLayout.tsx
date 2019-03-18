@@ -93,6 +93,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const renderSettingDrawer = () =>
     !(process.env.NODE_ENV === 'production' && APP_TYPE !== 'site') && <SettingDrawer />;
 
+  const collapsedPaddingLeft = collapsed ? 80 : 256;
   const layout = (
     <Layout>
       {PropsLayout === 'topmenu' && !isMobile ? null : (
@@ -107,7 +108,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       )}
       <Layout
         style={{
-          paddingLeft: hasLeftPadding ? (collapsed ? 80 : 256) : void 0,
+          paddingLeft: hasLeftPadding ? collapsedPaddingLeft : void 0,
           minHeight: '100vh',
         }}
       >

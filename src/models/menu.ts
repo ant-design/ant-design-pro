@@ -42,28 +42,28 @@ function formatter(
 const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
 /**
+ * filter menuData
+ */
+const filterMenuData = (menuData: MenuDataItem[] = []): MenuDataItem[] => {
+  return menuData
+    .filter(item => item.name && !item.hideInMenu)
+    .map(item => Authorized.check<any, any>(item.authority!, getSubMenu(item), null)) // eslint-disable-line
+    .filter(item => item);
+};
+
+/**
  * get SubMenu or Item
  */
 const getSubMenu: (item: MenuDataItem) => MenuDataItem = item => {
   if (
     Array.isArray(item.children) &&
     !item.hideChildrenInMenu &&
-    item.children.some(child => (child.name ? true : false))
+    item.children.some(child => !!child.name)
   ) {
     const children = filterMenuData(item.children);
     if (children.length) return { ...item, children };
   }
   return { ...item, children: void 0 };
-};
-
-/**
- * filter menuData
- */
-const filterMenuData = (menuData: MenuDataItem[] = []): MenuDataItem[] => {
-  return menuData
-    .filter(item => item.name && !item.hideInMenu)
-    .map(item => Authorized.check<any, any>(item.authority!, getSubMenu(item), null))
-    .filter(item => item);
 };
 
 /**
