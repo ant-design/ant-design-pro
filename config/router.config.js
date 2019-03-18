@@ -12,6 +12,9 @@ export default [
         name: 'register.result',
         component: './User/RegisterResult',
       },
+      {
+        component: '404',
+      },
     ],
   },
   // app
