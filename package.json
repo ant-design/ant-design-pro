@@ -58,7 +58,7 @@
     "react-dom": "^16.7.0",
     "react-fittext": "^1.0.0",
     "react-media": "^1.9.2",
-    "react-router-dom": "^4.3.1"
+    "umi": "^2.4.4"
   },
   "devDependencies": {
     "@types/react": "^16.8.1",
@@ -99,7 +99,6 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
-    "umi": "^2.4.4",
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-react": "^1.4.2"
   },
