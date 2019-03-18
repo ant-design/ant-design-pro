@@ -57,5 +57,3 @@ export interface ConnectProps<T extends { [key: string]: any } = {}, R = any>
     url: string;
   };
 }
-
-export default ConnectState; // eslint-disable-line
