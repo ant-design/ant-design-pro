@@ -89,6 +89,16 @@ module.exports = {
         ],
       },
     ],
+    'jsx-a11y/no-noninteractive-element-interactions': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/anchor-is-valid': 0,
+    'linebreak-style': 0,
+  },
+  settings: {
+    polyfills: ['fetch', 'promises', 'url'],
+    // support import modules from TypeScript files in JavaScript files
+    'import/resolver': { node: { extensions: ['.js', '.ts', '.tsx'] } },
   },
   overrides: [
     {

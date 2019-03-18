@@ -2,12 +2,13 @@ import React from 'react';
 import { Tooltip, Icon } from 'antd';
 import style from './index.less';
 
-interface BlockChecboxProps {
+export interface BlockChecboxProps {
   value: string;
   onChange: (key: string) => void;
   list: any[];
 }
-const BlockChecbox: React.SFC<BlockChecboxProps> = ({ value, onChange, list }) => (
+
+const BlockChecbox: React.FC<BlockChecboxProps> = ({ value, onChange, list }) => (
   <div className={style.blockChecbox} key={value}>
     {list.map(item => (
       <Tooltip title={item.title} key={item.key}>

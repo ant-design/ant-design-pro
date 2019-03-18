@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Input, Icon, AutoComplete } from 'antd';
-import InputProps from 'antd/es/input';
-
+import { DataSourceItemType } from 'antd/es/auto-complete';
 import classNames from 'classnames';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import styles from './index.less';
 
-interface HeaderSearchProps {
+export interface HeaderSearchProps {
   onPressEnter: (value: string) => void;
   onSearch: (value: string) => void;
   onChange: (value: string) => void;
@@ -15,7 +14,7 @@ interface HeaderSearchProps {
   className: string;
   placeholder: string;
   defaultActiveFirstOption: boolean;
-  dataSource: any[];
+  dataSource: DataSourceItemType[];
   defaultOpen: boolean;
   open?: boolean;
 }
@@ -24,6 +23,7 @@ interface HeaderSearchState {
   value: string;
   searchMode: boolean;
 }
+
 export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSearchState> {
   static defaultProps = {
     defaultActiveFirstOption: false,
@@ -37,7 +37,7 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     onVisibleChange: () => {},
   };
 
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps(props: HeaderSearchProps) {
     if ('open' in props) {
       return {
         searchMode: props.open,
@@ -46,9 +46,10 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     return null;
   }
 
-  timeout: NodeJS.Timeout;
-  input: InputProps;
-  constructor(props) {
+  private timeout: NodeJS.Timeout = null!;
+  private inputRef: Input | null = null;
+
+  constructor(props: HeaderSearchProps) {
     super(props);
     this.state = {
       searchMode: props.defaultOpen,
@@ -60,7 +61,7 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     clearTimeout(this.timeout);
   }
 
-  onKeyDown = e => {
+  onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       const { onPressEnter } = this.props;
       const { value } = this.state;
@@ -70,7 +71,7 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     }
   };
 
-  onChange = value => {
+  onChange = (value: string) => {
     const { onSearch, onChange } = this.props;
     this.setState({ value });
     if (onSearch) {
@@ -86,8 +87,8 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     onVisibleChange(true);
     this.setState({ searchMode: true }, () => {
       const { searchMode } = this.state;
-      if (searchMode) {
-        this.input.focus();
+      if (searchMode && this.inputRef) {
+        this.inputRef.focus();
       }
     });
   };
@@ -135,11 +136,11 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
           {...restProps}
           className={inputClass}
           value={value}
-          onChange={this.onChange}
+          onChange={this.onChange as any}
         >
           <Input
             ref={node => {
-              this.input = node;
+              this.inputRef = node;
             }}
             aria-label={placeholder}
             placeholder={placeholder}

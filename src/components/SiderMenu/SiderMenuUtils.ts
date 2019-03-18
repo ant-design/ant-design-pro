@@ -1,13 +1,14 @@
 import pathToRegexp from 'path-to-regexp';
 import { urlToList } from '../_utils/pathTools';
+import { MenuDataItem, BaseMenuProps } from './BaseMenu';
 
 /**
  * Recursively flatten the data
  * [{path:string},{path:string}] => {path,path2}
  * @param  menus
  */
-export const getFlatMenuKeys = menuData => {
-  let keys = [];
+export const getFlatMenuKeys = (menuData: MenuDataItem[] = []) => {
+  let keys: string[] = [];
   menuData.forEach(item => {
     keys.push(item.path);
     if (item.children) {
@@ -17,24 +18,15 @@ export const getFlatMenuKeys = menuData => {
   return keys;
 };
 
-export const getMenuMatches = (flatMenuKeys, path) =>
-  flatMenuKeys.filter(item => {
-    if (item) {
-      return pathToRegexp(item).test(path);
-    }
-    return false;
-  });
+export const getMenuMatches = (flatMenuKeys: string[] = [], path: string) =>
+  flatMenuKeys.filter(item => item && pathToRegexp(item).test(path));
 
 /**
  * 获得菜单子节点
- * @memberof SiderMenu
  */
-export const getDefaultCollapsedSubMenus = props => {
-  const {
-    location: { pathname },
-    flatMenuKeys,
-  } = props;
-  return urlToList(pathname)
+export const getDefaultCollapsedSubMenus = (props: BaseMenuProps) => {
+  const { location, flatMenuKeys } = props;
+  return urlToList(location!.pathname)
     .map(item => getMenuMatches(flatMenuKeys, item)[0])
     .filter(item => item)
     .reduce((acc, curr) => [...acc, curr], ['/']);

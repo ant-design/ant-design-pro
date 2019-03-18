@@ -1,4 +1,6 @@
 import SelectLang from '@/components/SelectLang';
+import { MenuDataItem } from '@/components/SiderMenu';
+import { ConnectProps, ConnectState } from '@/models/connect';
 import getPageTitle from '@/utils/getPageTitle';
 import { GlobalFooter } from 'ant-design-pro';
 import { Icon } from 'antd';
@@ -34,12 +36,10 @@ const copyright = (
   </Fragment>
 );
 
-interface UserLayoutProps {
-  dispatch: (args: any) => void;
-  route: any;
-  breadcrumbNameMap: object;
+export interface UserLayoutProps extends ConnectProps {
+  route: MenuDataItem;
+  breadcrumbNameMap: { [path: string]: MenuDataItem };
   navTheme: string;
-  location: Location;
 }
 
 class UserLayout extends Component<UserLayoutProps> {
@@ -48,20 +48,16 @@ class UserLayout extends Component<UserLayoutProps> {
       dispatch,
       route: { routes, authority },
     } = this.props;
-    dispatch({
+    dispatch!({
       type: 'menu/getMenuData',
       payload: { routes, authority },
     });
   }
 
   render() {
-    const {
-      children,
-      location: { pathname },
-      breadcrumbNameMap,
-    } = this.props;
+    const { children, location, breadcrumbNameMap } = this.props;
     return (
-      <DocumentTitle title={getPageTitle(pathname, breadcrumbNameMap)}>
+      <DocumentTitle title={getPageTitle(location!.pathname, breadcrumbNameMap)}>
         <div className={styles.container}>
           <div className={styles.lang}>
             <SelectLang />
@@ -85,7 +81,7 @@ class UserLayout extends Component<UserLayoutProps> {
   }
 }
 
-export default connect(({ menu: menuModel }) => ({
+export default connect(({ menu: menuModel }: ConnectState) => ({
   menuData: menuModel.menuData,
   breadcrumbNameMap: menuModel.breadcrumbNameMap,
 }))(UserLayout);

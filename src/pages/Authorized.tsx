@@ -1,37 +1,38 @@
 import Authorized from '@/utils/Authorized';
+import { ConnectProps, ConnectState, UserModelState } from '@/models/connect';
 import { connect } from 'dva';
 import pathToRegexp from 'path-to-regexp';
 import React from 'react';
 import Redirect from 'umi/redirect';
-import { UserModelState } from '../models/user';
+import { IRoute } from 'umi-types';
 
-interface AuthComponentProps {
+interface AuthComponentProps extends ConnectProps {
   location: Location;
-  routerData: any[];
+  routerData: IRoute[];
   user: UserModelState;
 }
 
-const AuthComponent: React.SFC<AuthComponentProps> = ({ children, location, routerData, user }) => {
+const getRouteAuthority = (path: string, routeData: IRoute[]) => {
+  let authorities: string[] | string | undefined = void 0;
+  routeData.forEach(route => {
+    // match prefix
+    if (pathToRegexp(`${route.path}(.*)`).test(path)) {
+      authorities = route.authority || authorities;
+      // get children authority recursively
+      if (route.routes) {
+        authorities = getRouteAuthority(path, route.routes) || authorities;
+      }
+    }
+  });
+  return authorities;
+};
+
+const AuthComponent: React.FC<AuthComponentProps> = ({ children, location, routerData, user }) => {
   const { currentUser } = user;
   const isLogin = currentUser && currentUser.name;
-  const getRouteAuthority = (path, routeData) => {
-    let authorities;
-    routeData.forEach(route => {
-      // match prefix
-      if (pathToRegexp(`${route.path}(.*)`).test(path)) {
-        authorities = route.authority || authorities;
-
-        // get children authority recursively
-        if (route.routes) {
-          authorities = getRouteAuthority(path, route.routes) || authorities;
-        }
-      }
-    });
-    return authorities;
-  };
   return (
     <Authorized
-      authority={getRouteAuthority(location.pathname, routerData)}
+      authority={getRouteAuthority(location.pathname, routerData)!}
       noMatch={isLogin ? <Redirect to="/exception/403" /> : <Redirect to="/user/login" />}
     >
       {children}
@@ -39,7 +40,7 @@ const AuthComponent: React.SFC<AuthComponentProps> = ({ children, location, rout
   );
 };
 
-export default connect(({ menu: menuModel, user }) => ({
+export default connect(({ menu: menuModel, user }: ConnectState) => ({
   routerData: menuModel.routerData,
   user,
 }))(AuthComponent);

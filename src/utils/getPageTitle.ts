@@ -3,24 +3,22 @@ import memoizeOne from 'memoize-one';
 import pathToRegexp from 'path-to-regexp';
 import { formatMessage } from 'umi-plugin-locale';
 import defaultSettings from '../../config/defaultSettings';
+import { MenuDataItem } from '@/components/SiderMenu/BaseMenu';
 
 const { menu, title } = defaultSettings;
 
-interface RouterData {
-  name: string;
-  locale: string;
-  authority?: string[];
-  children?: any[];
-  icon?: string;
-  path: string;
-}
-
-export const matchParamsPath = (pathname: string, breadcrumbNameMap: object): RouterData => {
+export const matchParamsPath = (
+  pathname: string,
+  breadcrumbNameMap: { [path: string]: MenuDataItem },
+): MenuDataItem => {
   const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
-  return breadcrumbNameMap[pathKey];
+  return breadcrumbNameMap[pathKey!];
 };
 
-const getPageTitle = (pathname: string, breadcrumbNameMap: object): string => {
+const getPageTitle = (
+  pathname: string,
+  breadcrumbNameMap: { [path: string]: MenuDataItem },
+): string => {
   const currRouterData = matchParamsPath(pathname, breadcrumbNameMap);
   if (!currRouterData) {
     return title;
@@ -28,7 +26,7 @@ const getPageTitle = (pathname: string, breadcrumbNameMap: object): string => {
   const pageName = menu.disableLocal
     ? currRouterData.name
     : formatMessage({
-        id: currRouterData.locale || currRouterData.name,
+        id: currRouterData.locale || currRouterData.name!,
         defaultMessage: currRouterData.name,
       });
 

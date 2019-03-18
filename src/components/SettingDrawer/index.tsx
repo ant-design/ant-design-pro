@@ -1,3 +1,4 @@
+import { ConnectProps, ConnectState, SettingModelState } from '@/models/connect';
 import React, { Component } from 'react';
 import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert, Tooltip } from 'antd';
 import { formatMessage } from 'umi-plugin-locale';
@@ -7,7 +8,6 @@ import omit from 'omit.js';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import BlockCheckbox from './BlockCheckbox';
-import { DefaultSettings } from '../../../config/defaultSettings';
 
 const { Option } = Select;
 interface BodyProps {
@@ -15,34 +15,37 @@ interface BodyProps {
   style?: React.CSSProperties;
 }
 
-const Body: React.SFC<BodyProps> = ({ children, title, style }) => (
-  <div
-    style={{
-      ...style,
-      marginBottom: 24,
-    }}
-  >
+const Body: React.FC<BodyProps> = ({ children, title, style }) => (
+  <div style={{ ...style, marginBottom: 24 }}>
     <h3 className={styles.title}>{title}</h3>
     {children}
   </div>
 );
 
-interface SettingDrawerProps {
-  setting?: DefaultSettings;
-  dispatch?: (args: any) => void;
+interface SettingItemProps {
+  title: React.ReactNode;
+  action: React.ReactElement;
+  disabled?: boolean;
+  disabledReason?: React.ReactNode;
 }
-interface SettingDrawerState {}
 
-@connect(({ setting }) => ({ setting }))
+export interface SettingDrawerProps extends ConnectProps {
+  setting?: SettingModelState;
+}
+
+export interface SettingDrawerState extends Partial<SettingModelState> {
+  collapse: boolean;
+}
+
+@connect(({ setting }: ConnectState) => ({ setting }))
 class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
-  state = {
+  state: SettingDrawerState = {
     collapse: false,
   };
 
-  getLayoutSetting = () => {
-    const {
-      setting: { contentWidth, fixedHeader, layout, autoHideHeader, fixSiderbar },
-    } = this.props;
+  getLayoutSetting = (): SettingItemProps[] => {
+    const { setting } = this.props;
+    const { contentWidth, fixedHeader, layout, autoHideHeader, fixSiderbar } = setting!;
     return [
       {
         title: formatMessage({ id: 'app.setting.content-width' }),
@@ -101,9 +104,9 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
     ];
   };
 
-  changeSetting = (key, value) => {
+  changeSetting = (key: string, value: any) => {
     const { setting } = this.props;
-    const nextState = { ...setting };
+    const nextState = { ...setting! };
     nextState[key] = value;
     if (key === 'layout') {
       nextState.contentWidth = value === 'topmenu' ? 'Fixed' : 'Fluid';
@@ -112,7 +115,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
     }
     this.setState(nextState, () => {
       const { dispatch } = this.props;
-      dispatch({
+      dispatch!({
         type: 'setting/changeSetting',
         payload: this.state,
       });
@@ -124,7 +127,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
     this.setState({ collapse: !collapse });
   };
 
-  renderLayoutSettingItem = item => {
+  renderLayoutSettingItem = (item: SettingItemProps) => {
     const action = React.cloneElement(item.action, {
       disabled: item.disabled,
     });
@@ -139,7 +142,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
 
   render() {
     const { setting } = this.props;
-    const { navTheme, primaryColor, layout, colorWeak } = setting;
+    const { navTheme, primaryColor, layout, colorWeak } = setting!;
     const { collapse } = this.state;
     return (
       <Drawer
@@ -149,18 +152,10 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
         placement="right"
         handler={
           <div className={styles.handle} onClick={this.togglerContent}>
-            <Icon
-              type={collapse ? 'close' : 'setting'}
-              style={{
-                color: '#fff',
-                fontSize: 20,
-              }}
-            />
+            <Icon type={collapse ? 'close' : 'setting'} style={{ color: '#fff', fontSize: 20 }} />
           </div>
         }
-        style={{
-          zIndex: 999,
-        }}
+        style={{ zIndex: 999 }}
       >
         <div className={styles.content}>
           <Body title={formatMessage({ id: 'app.setting.pagestyle' })}>
@@ -221,6 +216,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
             <List.Item
               actions={[
                 <Switch
+                  key="Switch"
                   size="small"
                   checked={!!colorWeak}
                   onChange={checked => this.changeSetting('colorWeak', checked)}

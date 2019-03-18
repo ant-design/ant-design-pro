@@ -1,10 +1,18 @@
 import { queryNotices } from '@/services/user';
-import { Effect, Subscription } from 'dva';
+import { Subscription } from 'dva';
 import { Reducer } from 'redux';
+import { Effect } from './connect';
+import { INoticeIconData } from 'ant-design-pro/lib/NoticeIcon/NoticeIconTab';
+
+export interface NoticeItem extends INoticeIconData {
+  id: string;
+  type: string;
+  [key: string]: any;
+}
 
 export interface GlobalModelState {
   collapsed: boolean;
-  notices: any[];
+  notices: NoticeItem[];
 }
 
 export interface GlobalModelType {
@@ -16,9 +24,9 @@ export interface GlobalModelType {
     changeNoticeReadState: Effect;
   };
   reducers: {
-    changeLayoutCollapsed: Reducer<any>;
-    saveNotices: Reducer<any>;
-    saveClearedNotices: Reducer<any>;
+    changeLayoutCollapsed: Reducer<GlobalModelState>;
+    saveNotices: Reducer<GlobalModelState>;
+    saveClearedNotices: Reducer<GlobalModelState>;
   };
   subscriptions: { setup: Subscription };
 }
@@ -38,8 +46,8 @@ const GlobalModel: GlobalModelType = {
         type: 'saveNotices',
         payload: data,
       });
-      const unreadCount = yield select(
-        state => state.global.notices.filter(item => !item.read).length
+      const unreadCount: number = yield select(
+        state => state.global.notices.filter(item => !item.read).length,
       );
       yield put({
         type: 'user/changeNotifyCount',
@@ -54,9 +62,9 @@ const GlobalModel: GlobalModelType = {
         type: 'saveClearedNotices',
         payload,
       });
-      const count = yield select(state => state.global.notices.length);
-      const unreadCount = yield select(
-        state => state.global.notices.filter(item => !item.read).length
+      const count: number = yield select(state => state.global.notices.length);
+      const unreadCount: number = yield select(
+        state => state.global.notices.filter(item => !item.read).length,
       );
       yield put({
         type: 'user/changeNotifyCount',
@@ -67,14 +75,14 @@ const GlobalModel: GlobalModelType = {
       });
     },
     *changeNoticeReadState({ payload }, { put, select }) {
-      const notices = yield select(state =>
+      const notices: NoticeItem[] = yield select(state =>
         state.global.notices.map(item => {
           const notice = { ...item };
           if (notice.id === payload) {
             notice.read = true;
           }
           return notice;
-        })
+        }),
       );
       yield put({
         type: 'saveNotices',

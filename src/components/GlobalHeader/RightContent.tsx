@@ -1,3 +1,6 @@
+import { ConnectProps } from '@/models/connect';
+import { NoticeItem } from '@/models/global';
+import { CurrentUser } from '@/models/user';
 import React, { Component } from 'react';
 import { FormattedMessage, formatMessage } from 'umi-plugin-locale';
 import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
@@ -10,30 +13,20 @@ import HeaderDropdown from '../HeaderDropdown';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 
-export declare type SiderTheme = 'light' | 'dark';
+export type SiderTheme = 'light' | 'dark';
 
-interface GlobalHeaderRightProps {
-  notices?: any[];
-  dispatch?: (args: any) => void;
-  // wait for https://github.com/umijs/umi/pull/2036
-  currentUser?: {
-    avatar?: string;
-    name?: string;
-    title?: string;
-    group?: string;
-    signature?: string;
-    geographic?: any;
-    tags?: any[];
-    unreadCount: number;
-  };
+export interface GlobalHeaderRightProps extends ConnectProps {
+  notices?: NoticeItem[];
+  currentUser?: CurrentUser;
   fetchingNotices?: boolean;
   onNoticeVisibleChange?: (visible: boolean) => void;
   onMenuClick?: (param: ClickParam) => void;
   onNoticeClear?: (tabName: string) => void;
   theme?: SiderTheme;
 }
+
 export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
-  getNoticeData() {
+  getNoticeData = (): { [key: string]: NoticeItem[] } => {
     const { notices = [] } = this.props;
     if (notices.length === 0) {
       return {};
@@ -41,7 +34,7 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
     const newNotices = notices.map(notice => {
       const newNotice = { ...notice };
       if (newNotice.datetime) {
-        newNotice.datetime = moment(notice.datetime).fromNow();
+        newNotice.datetime = moment(notice.datetime as string).fromNow();
       }
       if (newNotice.id) {
         newNotice.key = newNotice.id;
@@ -62,10 +55,10 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
       return newNotice;
     });
     return groupBy(newNotices, 'type');
-  }
+  };
 
-  getUnreadData: (noticeData: object) => any = noticeData => {
-    const unreadMsg = {};
+  getUnreadData = (noticeData: { [key: string]: NoticeItem[] }) => {
+    const unreadMsg: { [key: string]: number } = {};
     Object.entries(noticeData).forEach(([key, value]) => {
       if (!unreadMsg[key]) {
         unreadMsg[key] = 0;
@@ -77,10 +70,10 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
     return unreadMsg;
   };
 
-  changeReadState = clickedItem => {
+  changeReadState = (clickedItem: NoticeItem) => {
     const { id } = clickedItem;
     const { dispatch } = this.props;
-    dispatch({
+    dispatch!({
       type: 'global/changeNoticeReadState',
       payload: id,
     });
@@ -133,10 +126,10 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
             formatMessage({ id: 'component.globalHeader.search.example3' }),
           ]}
           onSearch={value => {
-            console.log('input', value); // eslint-disable-line
+            console.log('input', value); // tslint:disable-line no-console
           }}
           onPressEnter={value => {
-            console.log('enter', value); // eslint-disable-line
+            console.log('enter', value); // tslint:disable-line no-console
           }}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
@@ -152,23 +145,23 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
 
         <NoticeIcon
           className={styles.action}
-          count={currentUser.unreadCount}
+          count={currentUser && currentUser.unreadCount}
           onItemClick={(item, tabProps) => {
-            console.log(item, tabProps); // eslint-disable-line
-            this.changeReadState(item);
+            console.log(item, tabProps); // tslint:disable-line no-console
+            this.changeReadState(item as NoticeItem);
           }}
           loading={fetchingNotices}
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
             clear: formatMessage({ id: 'component.noticeIcon.clear' }),
-            viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }), // todo:node_modules/ant-design-pro/lib/NoticeIcon/index.d.ts 21 [key: string]: string;
+            viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }),
             notification: formatMessage({ id: 'component.globalHeader.notification' }),
             message: formatMessage({ id: 'component.globalHeader.message' }),
             event: formatMessage({ id: 'component.globalHeader.event' }),
           }}
           onClear={onNoticeClear}
           onPopupVisibleChange={onNoticeVisibleChange}
-          onViewMore={() => message.info('Click on view more')} // todo:onViewMore?: (tabProps: INoticeIconProps) => void;
+          onViewMore={() => message.info('Click on view more')}
           clearClose
         >
           <NoticeIcon.Tab
@@ -196,7 +189,7 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
             showViewMore
           />
         </NoticeIcon>
-        {currentUser.name ? (
+        {currentUser && currentUser.name ? (
           <HeaderDropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>
               <Avatar
