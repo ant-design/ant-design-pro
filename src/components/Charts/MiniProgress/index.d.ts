@@ -1,6 +1,7 @@
 import * as React from 'react';
 export interface IMiniProgressProps {
   target: number;
+  targetLabel: string;
   color?: string;
   strokeWidth?: number;
   percent?: number;
