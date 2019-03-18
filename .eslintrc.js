@@ -1,18 +1,6 @@
 module.exports = {
   extends: ['umi'],
   plugins: ['markdown', 'react'],
-  env: {
-    browser: true,
-    node: true,
-    es6: true,
-    mocha: true,
-    jest: true,
-    jasmine: true,
-  },
-  globals: {
-    APP_TYPE: true,
-    page: true,
-  },
   rules: {
     'comma-dangle': ['error', 'always-multiline'],
     'react/sort-comp': 0,
@@ -76,7 +64,7 @@ module.exports = {
     'react/no-access-state-in-setstate': 1,
     'react/no-multi-comp': 1,
     'import/no-extraneous-dependencies': [
-      'error',
+      0,
       {
         devDependencies: [
           'site/**',
@@ -89,16 +77,9 @@ module.exports = {
         ],
       },
     ],
-    'jsx-a11y/no-noninteractive-element-interactions': 0,
-    'jsx-a11y/click-events-have-key-events': 0,
-    'jsx-a11y/no-static-element-interactions': 0,
-    'jsx-a11y/anchor-is-valid': 0,
-    'linebreak-style': 0,
-  },
-  settings: {
-    polyfills: ['fetch', 'promises', 'url'],
-    // support import modules from TypeScript files in JavaScript files
-    'import/resolver': { node: { extensions: ['.js', '.ts', '.tsx'] } },
+    'no-void': 0,
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/no-multi-comp': 0,
   },
   overrides: [
     {
@@ -113,7 +94,7 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/explicit-member-accessibility': 0,
-        '@typescript-eslint/no-object-literal-type-assertion': 1,
+        '@typescript-eslint/no-object-literal-type-assertion': 0,
         '@typescript-eslint/no-empty-interface': 1,
         '@typescript-eslint/no-non-null-assertion': 1,
         'no-use-before-define': 0,
@@ -124,6 +105,9 @@ module.exports = {
         '@typescript-eslint/ban-types': 1,
         '@typescript-eslint/camelcase': 1,
         '@typescript-eslint/interface-name-prefix': 1,
+        '@typescript-eslint/explicit-function-return-type': 0,
+        '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
       },
     },
     {
