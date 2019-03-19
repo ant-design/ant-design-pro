@@ -22,6 +22,7 @@ export default {
   'menu.form.stepform.info': 'Step Form(write transfer information)',
   'menu.form.stepform.confirm': 'Step Form(confirm transfer information)',
   'menu.form.stepform.result': 'Step Form(finished)',
+  'menu.form.stepform.advance': 'Step Form(advance config)',
   'menu.form.advancedform': 'Advanced Form',
   'menu.list': 'List',
   'menu.list.searchtable': 'Search Table',

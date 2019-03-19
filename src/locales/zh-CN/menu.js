@@ -20,6 +20,7 @@ export default {
   'menu.apiGateway.apiCreate.consumer': '定义请求信息',
   'menu.apiGateway.apiCreate.producer': '定义Api后端服务',
   'menu.apiGateway.apiCreate.result': '完成',
+  'menu.apiGateway.apiCreate.advance': '高级配置',
   'menu.form': '表单页',
   'menu.form.basicform': '基础表单',
   'menu.form.stepform': '分步表单',
