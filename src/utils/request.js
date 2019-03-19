@@ -132,6 +132,11 @@ export default function request(url, option) {
     .catch(e => {
       const status = e.name;
       if (status === 401) {
+        // if already in login page ,do nothing
+        const urlParams = new URL(window.location.href);
+        const { pathname } = urlParams;
+        if (pathname === '/user/login') return;
+        
         // @HACK
         /* eslint-disable no-underscore-dangle */
         window.g_app._store.dispatch({
