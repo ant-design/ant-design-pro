@@ -19,6 +19,8 @@ export default class StepForm extends PureComponent {
         return 2;
       case 'result':
         return 3;
+      case 'advance':
+        return 3;
       default:
         return 0;
     }
@@ -37,7 +39,7 @@ export default class StepForm extends PureComponent {
               <Step title="基本信息" />
               <Step title="定义请求信息" />
               <Step title="定义Api后端服务" />
-              <Step title="完成" />
+              <Step title="高级配置／完成" />
             </Steps>
             {children}
           </Fragment>
