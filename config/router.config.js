@@ -82,6 +82,11 @@ export default [
                 name: 'result',
                 component: './ApiGateway/ApiCreate/Step4',
               },
+              {
+                path: '/apiGateway/apiCreate/advance',
+                name: 'advance',
+                component: './ApiGateway/ApiCreate/Step5',
+              },
             ],
           },
         ],
