@@ -1,5 +1,6 @@
 @import '~antd/lib/style/themes/default.less';
-@import '../../utils/utils.less';
+//noinspection CssUnknownTarget
+@import '~@/utils/utils.less';
 
 .tableList {
   .tableListOperator {
@@ -13,13 +14,13 @@
 .tableListForm {
   :global {
     .ant-form-item {
-      margin-bottom: 24px;
-      margin-right: 0;
       display: flex;
+      margin-right: 0;
+      margin-bottom: 24px;
       > .ant-form-item-label {
         width: auto;
-        line-height: 32px;
         padding-right: 8px;
+        line-height: 32px;
       }
       .ant-form-item-control {
         line-height: 32px;
@@ -30,8 +31,9 @@
     }
   }
   .submitButtons {
-    white-space: nowrap;
+    display: block;
     margin-bottom: 24px;
+    white-space: nowrap;
   }
 }
 
