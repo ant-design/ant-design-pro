@@ -4,6 +4,7 @@ import RightContent from '../GlobalHeader/RightContent';
 import BaseMenu from '../SiderMenu/BaseMenu';
 import { getFlatMenuKeys } from '../SiderMenu/SiderMenuUtils';
 import styles from './index.less';
+import { title } from '../../defaultSettings';
 
 export default class TopNavHeader extends PureComponent {
   state = {
@@ -12,7 +13,11 @@ export default class TopNavHeader extends PureComponent {
 
   static getDerivedStateFromProps(props) {
     return {
-      maxWidth: (props.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 280 - 165 - 40,
+      maxWidth:
+        (props.contentWidth === 'Fixed' && window.innerWidth > 1200 ? 1200 : window.innerWidth) -
+        280 -
+        120 -
+        40,
     };
   }
 
@@ -32,7 +37,7 @@ export default class TopNavHeader extends PureComponent {
             <div className={styles.logo} key="logo" id="logo">
               <Link to="/">
                 <img src={logo} alt="logo" />
-                <h1>Ant Design Pro</h1>
+                <h1>{title}</h1>
               </Link>
             </div>
             <div
@@ -40,11 +45,7 @@ export default class TopNavHeader extends PureComponent {
                 maxWidth,
               }}
             >
-              <BaseMenu
-                {...this.props}
-                flatMenuKeys={flatMenuKeys}
-                style={{ border: 'none', height: 64 }}
-              />
+              <BaseMenu {...this.props} flatMenuKeys={flatMenuKeys} className={styles.menu} />
             </div>
           </div>
           <RightContent {...this.props} />

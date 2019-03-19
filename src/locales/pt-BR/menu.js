@@ -1,5 +1,8 @@
 export default {
   'menu.home': 'Início',
+  'menu.login': 'Login',
+  'menu.register': 'Registro',
+  'menu.register.result': 'Resultado de registro',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': 'Análise',
   'menu.dashboard.monitor': 'Monitor',

@@ -8,37 +8,44 @@
       overflow: hidden;
     }
   }
+  // fix margin top error of following descriptionList
+  & + & {
+    :global {
+      .ant-row {
+        margin-top: 16px;
+      }
+    }
+  }
 
   .title {
-    font-size: 14px;
+    margin-bottom: 16px;
     color: @heading-color;
     font-weight: 500;
-    margin-bottom: 16px;
+    font-size: 14px;
   }
 
   .term {
+    display: table-cell;
+    padding-bottom: 16px;
+    color: @heading-color;
     // Line-height is 22px IE dom height will calculate error
     line-height: 20px;
-    padding-bottom: 16px;
-    margin-right: 8px;
-    color: @heading-color;
     white-space: nowrap;
-    display: table-cell;
 
-    &:after {
-      content: ':';
-      margin: 0 8px 0 2px;
+    &::after {
       position: relative;
       top: -0.5px;
+      margin: 0 8px 0 2px;
+      content: ':';
     }
   }
 
   .detail {
-    line-height: 20px;
+    display: table-cell;
     width: 100%;
     padding-bottom: 16px;
     color: @text-color;
-    display: table-cell;
+    line-height: 20px;
   }
 
   &.small {
@@ -46,6 +53,14 @@
     :global {
       .ant-row {
         margin-bottom: -8px;
+      }
+    }
+    // fix margin top error of following descriptionList
+    & + .descriptionList {
+      :global {
+        .ant-row {
+          margin-top: 8px;
+        }
       }
     }
     .title {
@@ -66,8 +81,8 @@
 
   &.vertical {
     .term {
-      padding-bottom: 8px;
       display: block;
+      padding-bottom: 8px;
     }
 
     .detail {

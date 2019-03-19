@@ -1,13 +1,15 @@
+@import '~antd/lib/style/themes/default.less';
+
 .head {
-  width: 100%;
-  transition: background 0.3s, width 0.2s;
-  height: 64px;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   position: relative;
+  width: 100%;
+  height: @layout-header-height;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  transition: background 0.3s, width 0.2s;
   :global {
     .ant-menu-submenu.ant-menu-submenu-horizontal {
-      line-height: 64px;
       height: 100%;
+      line-height: @layout-header-height;
       .ant-menu-submenu-title {
         height: 100%;
       }
@@ -18,7 +20,7 @@
   }
   .main {
     display: flex;
-    height: 64px;
+    height: @layout-header-height;
     padding-left: 24px;
     &.wide {
       max-width: 1200px;
@@ -26,8 +28,8 @@
       padding-left: 0;
     }
     .left {
-      flex: 1;
       display: flex;
+      flex: 1;
     }
     .right {
       width: 324px;
@@ -36,24 +38,24 @@
 }
 
 .logo {
-  width: 165px;
-  height: 64px;
   position: relative;
-  line-height: 64px;
-  transition: all 0.3s;
+  width: 165px;
+  height: @layout-header-height;
   overflow: hidden;
+  line-height: @layout-header-height;
+  transition: all 0.3s;
   img {
     display: inline-block;
-    vertical-align: middle;
     height: 32px;
+    vertical-align: middle;
   }
   h1 {
-    color: #fff;
     display: inline-block;
-    vertical-align: top;
-    font-size: 16px;
     margin: 0 0 0 12px;
+    color: #fff;
     font-weight: 400;
+    font-size: 16px;
+    vertical-align: top;
   }
 }
 
@@ -61,4 +63,10 @@
   h1 {
     color: #002140;
   }
+}
+
+.menu {
+  height: @layout-header-height;
+  line-height: @layout-header-height;
+  border: none;
 }

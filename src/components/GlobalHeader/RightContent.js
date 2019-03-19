@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage, formatMessage } from 'umi/locale';
-import { Spin, Tag, Menu, Icon, Dropdown, Avatar, Tooltip } from 'antd';
+import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
+import HeaderDropdown from '../HeaderDropdown';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 
@@ -132,43 +133,47 @@ export default class GlobalHeaderRight extends PureComponent {
             console.log(item, tabProps); // eslint-disable-line
             this.changeReadState(item, tabProps);
           }}
+          loading={fetchingNotices}
           locale={{
             emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
             clear: formatMessage({ id: 'component.noticeIcon.clear' }),
+            viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }),
+            notification: formatMessage({ id: 'component.globalHeader.notification' }),
+            message: formatMessage({ id: 'component.globalHeader.message' }),
+            event: formatMessage({ id: 'component.globalHeader.event' }),
           }}
           onClear={onNoticeClear}
           onPopupVisibleChange={onNoticeVisibleChange}
-          loading={fetchingNotices}
-          popupAlign={{ offset: [20, -16] }}
+          onViewMore={() => message.info('Click on view more')}
           clearClose
         >
           <NoticeIcon.Tab
             count={unreadMsg.notification}
             list={noticeData.notification}
-            title={formatMessage({ id: 'component.globalHeader.notification' })}
-            name="notification"
+            title="notification"
             emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
+            showViewMore
           />
           <NoticeIcon.Tab
             count={unreadMsg.message}
             list={noticeData.message}
-            title={formatMessage({ id: 'component.globalHeader.message' })}
-            name="message"
+            title="message"
             emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
+            showViewMore
           />
           <NoticeIcon.Tab
             count={unreadMsg.event}
             list={noticeData.event}
-            title={formatMessage({ id: 'component.globalHeader.event' })}
-            name="event"
+            title="event"
             emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
+            showViewMore
           />
         </NoticeIcon>
         {currentUser.name ? (
-          <Dropdown overlay={menu}>
+          <HeaderDropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>
               <Avatar
                 size="small"
@@ -178,7 +183,7 @@ export default class GlobalHeaderRight extends PureComponent {
               />
               <span className={styles.name}>{currentUser.name}</span>
             </span>
-          </Dropdown>
+          </HeaderDropdown>
         ) : (
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )}

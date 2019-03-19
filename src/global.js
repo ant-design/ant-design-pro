@@ -1,18 +1,21 @@
-import { Modal, message } from 'antd';
+import React from 'react';
+import { notification, Button, message } from 'antd';
 import { formatMessage } from 'umi/locale';
+import defaultSettings from './defaultSettings';
 
-// Notify user if offline now
-window.addEventListener('sw.offline', () => {
-  message.warning(formatMessage({ id: 'app.pwa.offline' }));
-});
+window.React = React;
 
-// Pop up a prompt on the page asking the user if they want to use the latest version
-window.addEventListener('sw.updated', e => {
-  Modal.confirm({
-    title: formatMessage({ id: 'app.pwa.serviceworker.updated' }),
-    content: formatMessage({ id: 'app.pwa.serviceworker.updated.hint' }),
-    okText: formatMessage({ id: 'app.pwa.serviceworker.updated.ok' }),
-    onOk: async () => {
+const { pwa } = defaultSettings;
+// if pwa is true
+if (pwa) {
+  // Notify user if offline now
+  window.addEventListener('sw.offline', () => {
+    message.warning(formatMessage({ id: 'app.pwa.offline' }));
+  });
+
+  // Pop up a prompt on the page asking the user if they want to use the latest version
+  window.addEventListener('sw.updated', e => {
+    const reloadSW = async () => {
       // Check if there is sw whose state is waiting in ServiceWorkerRegistration
       // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration
       const worker = e.detail && e.detail.waiting;
@@ -34,6 +37,25 @@ window.addEventListener('sw.updated', e => {
       // Refresh current page to use the updated HTML and other assets after SW has skiped waiting
       window.location.reload(true);
       return true;
-    },
+    };
+    const key = `open${Date.now()}`;
+    const btn = (
+      <Button
+        type="primary"
+        onClick={() => {
+          notification.close(key);
+          reloadSW();
+        }}
+      >
+        {formatMessage({ id: 'app.pwa.serviceworker.updated.ok' })}
+      </Button>
+    );
+    notification.open({
+      message: formatMessage({ id: 'app.pwa.serviceworker.updated' }),
+      description: formatMessage({ id: 'app.pwa.serviceworker.updated.hint' }),
+      btn,
+      key,
+      onClose: async () => {},
+    });
   });
-});
+}

@@ -1,4 +1,6 @@
 export default {
+  'app.login.userName': '賬戶',
+  'app.login.password': '密碼',
   'app.login.message-invalid-credentials': '賬戶或密碼錯誤（admin/ant.design）',
   'app.login.message-invalid-verification-code': '驗證碼錯誤',
   'app.login.tab-login-credentials': '賬戶密碼登錄',
@@ -18,6 +20,7 @@ export default {
   'app.register-result.view-mailbox': '查看郵箱',
   'validation.email.required': '請輸入郵箱地址！',
   'validation.email.wrong-format': '郵箱地址格式錯誤！',
+  'validation.userName.required': '請輸入賬戶!',
   'validation.password.required': '請輸入密碼！',
   'validation.password.twice': '兩次輸入的密碼不匹配!',
   'validation.password.strength.msg': '請至少輸入 6 個字符。請不要使用容易被猜到的密碼。',

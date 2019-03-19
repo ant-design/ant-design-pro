@@ -3,6 +3,8 @@ import AvatarItem from './AvatarItem';
 
 export interface IAvatarListProps {
   size?: 'large' | 'small' | 'mini' | 'default';
+  maxLength?: number;
+  excessItemsStyle?: React.CSSProperties;
   style?: React.CSSProperties;
   children: React.ReactElement<AvatarItem> | Array<React.ReactElement<AvatarItem>>;
 }

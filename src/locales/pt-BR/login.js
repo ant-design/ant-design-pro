@@ -1,4 +1,6 @@
 export default {
+  'app.login.userName': 'Nome de usuário',
+  'app.login.password': 'Sua senha',
   'app.login.message-invalid-credentials':
     'Nome de usuário ou senha inválidosd（admin/ant.design）',
   'app.login.message-invalid-verification-code': 'Código de verificação inválido',
@@ -19,6 +21,7 @@ export default {
   'app.register-result.view-mailbox': 'Visualizar a caixa de email',
   'validation.email.required': 'Por favor insira seu email!',
   'validation.email.wrong-format': 'O email está errado!',
+  'validation.userName.required': 'Por favor insira nome de usuário!',
   'validation.password.required': 'Por favor insira sua senha!',
   'validation.password.twice': 'As senhas não estão iguais!',
   'validation.password.strength.msg':

@@ -1,4 +1,6 @@
+import { SkeletonProps } from 'antd/lib/skeleton';
 import * as React from 'react';
+
 export interface INoticeIconData {
   avatar?: string | React.ReactNode;
   title?: React.ReactNode;
@@ -9,14 +11,15 @@ export interface INoticeIconData {
 }
 
 export interface INoticeIconTabProps {
-  list?: INoticeIconData[];
   count?: number;
-  title?: string;
-  name?: string;
   emptyText?: React.ReactNode;
   emptyImage?: string;
-  style?: React.CSSProperties;
+  list?: INoticeIconData[];
+  name?: string;
   showClear?: boolean;
+  showViewMore?: boolean;
+  style?: React.CSSProperties;
+  title?: string;
 }
 
 export default class NoticeIconTab extends React.Component<INoticeIconTabProps, any> {}

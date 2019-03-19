@@ -1,4 +1,6 @@
 export default {
+  'app.login.userName': '用户名',
+  'app.login.password': '密码',
   'app.login.message-invalid-credentials': '账户或密码错误（admin/ant.design）',
   'app.login.message-invalid-verification-code': '验证码错误',
   'app.login.tab-login-credentials': '账户密码登录',
@@ -18,6 +20,7 @@ export default {
   'app.register-result.view-mailbox': '查看邮箱',
   'validation.email.required': '请输入邮箱地址！',
   'validation.email.wrong-format': '邮箱地址格式错误！',
+  'validation.userName.required': '请输入用户名!',
   'validation.password.required': '请输入密码！',
   'validation.password.twice': '两次输入的密码不匹配!',
   'validation.password.strength.msg': '请至少输入 6 个字符。请不要使用容易被猜到的密码。',
