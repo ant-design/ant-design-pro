@@ -14,6 +14,9 @@ class Step4 extends React.PureComponent {
     const onFinish = () => {
       router.push('/apiGateway/apiCreate/info');
     };
+    const advance = () => {
+      router.push('/apiGateway/apiCreate/advance');
+    };
     const information = (
       <div className={styles.information}>
         <Row>
@@ -54,6 +57,9 @@ class Step4 extends React.PureComponent {
       <Fragment>
         <Button type="primary" onClick={onFinish} htmlType="button">
           再创建一笔
+        </Button>
+        <Button onClick={advance} htmlType="button">
+          高级配置
         </Button>
       </Fragment>
     );
