@@ -20,6 +20,10 @@ export default class PromiseRender extends React.Component<PromiseRenderPorps, P
     component: null,
   };
 
+  componentDidMount() {
+    this.setRenderComponent(this.props);
+  }
+
   shouldComponentUpdate = (nextProps: PromiseRenderPorps, nextState: PromiseRenderState) => {
     const { component } = this.state;
     if (!isEqual(nextProps, this.props)) {
@@ -28,10 +32,6 @@ export default class PromiseRender extends React.Component<PromiseRenderPorps, P
     if (nextState.component !== component) return true;
     return false;
   };
-
-  componentDidMount() {
-    this.setRenderComponent(this.props);
-  }
 
   // set render Component : ok or error
   setRenderComponent(props: PromiseRenderPorps) {
@@ -58,7 +58,8 @@ export default class PromiseRender extends React.Component<PromiseRenderPorps, P
     if (isComponentClass(target)) {
       const Target: React.ComponentClass = target as any;
       return (props: any) => <Target {...props} />;
-    } else if (React.isValidElement(target)) {
+    }
+    if (React.isValidElement(target)) {
       return (props => React.cloneElement(target, props)) as React.FC;
     }
     return (() => target) as React.FC;

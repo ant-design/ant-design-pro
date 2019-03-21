@@ -24,7 +24,8 @@ const checkIsInstantiation = (target: AnyComponent | React.ReactNode): AnyCompon
   if (isComponentClass(target)) {
     const Target: React.ComponentClass = target as any;
     return (props: any) => <Target {...props} />;
-  } else if (React.isValidElement(target)) {
+  }
+  if (React.isValidElement(target)) {
     return (props => React.cloneElement(target, props)) as React.FC;
   }
   return (() => target) as React.FC;
