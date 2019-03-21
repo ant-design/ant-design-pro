@@ -1,9 +1,7 @@
 import { Icon } from 'antd';
 
-export const FlowIconFont = Icon.createFromIconfontCN({
-  scriptUrl: 'https://at.alicdn.com/t/font_598462_3xve1872wizzolxr.js',
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: 'https://at.alicdn.com/t/font_1101588_01zniftxm9yp.js',
 });
 
-export const MindIconFont = Icon.createFromIconfontCN({
-  scriptUrl: 'https://at.alicdn.com/t/font_843931_h64nf4py977.js',
-});
+export default IconFont;

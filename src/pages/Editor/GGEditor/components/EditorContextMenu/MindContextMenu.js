@@ -1,56 +1,21 @@
 import React from 'react';
-import { Command, NodeMenu, CanvasMenu, ContextMenu } from 'gg-editor';
-import { FlowIconFont, MindIconFont } from '../../common/IconFont';
+import { NodeMenu, CanvasMenu, ContextMenu } from 'gg-editor';
+import MenuItem from './MenuItem';
 import styles from './index.less';
 
 const MindContextMenu = () => {
   return (
     <ContextMenu className={styles.contextMenu}>
       <NodeMenu>
-        <Command name="append">
-          <div className={styles.item}>
-            <MindIconFont type="icon-append" />
-            <span>Topic</span>
-          </div>
-        </Command>
-        <Command name="appendChild">
-          <div className={styles.item}>
-            <MindIconFont type="icon-appendChild" />
-            <span>Subtopic</span>
-          </div>
-        </Command>
-        <Command name="collapse">
-          <div className={styles.item}>
-            <MindIconFont type="icon-collapse" />
-            <span>Fold</span>
-          </div>
-        </Command>
-        <Command name="expand">
-          <div className={styles.item}>
-            <MindIconFont type="icon-expand" />
-            <span>Unfold</span>
-          </div>
-        </Command>
-        <Command name="delete">
-          <div className={styles.item}>
-            <FlowIconFont type="icon-delete-o" />
-            <span>Delete</span>
-          </div>
-        </Command>
+        <MenuItem command="append" text="Topic" />
+        <MenuItem command="appendChild" icon="append-child" text="Subtopic" />
+        <MenuItem command="collapse" text="Fold" />
+        <MenuItem command="expand" text="Unfold" />
+        <MenuItem command="delete" />
       </NodeMenu>
       <CanvasMenu>
-        <Command name="undo">
-          <div className={styles.item}>
-            <FlowIconFont type="icon-undo" />
-            <span>Undo</span>
-          </div>
-        </Command>
-        <Command name="redo">
-          <div className={styles.item}>
-            <FlowIconFont type="icon-redo" />
-            <span>Redo</span>
-          </div>
-        </Command>
+        <MenuItem command="undo" />
+        <MenuItem command="redo" />
       </CanvasMenu>
     </ContextMenu>
   );

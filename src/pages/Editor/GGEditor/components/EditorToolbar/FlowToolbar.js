@@ -1,86 +1,30 @@
 import React from 'react';
-import { Tooltip, Divider } from 'antd';
-import { Toolbar, Command } from 'gg-editor';
-import { FlowIconFont } from '../../common/IconFont';
+import { Divider } from 'antd';
+import { Toolbar } from 'gg-editor';
+import ToolbarButton from './ToolbarButton';
 import styles from './index.less';
 
 const FlowToolbar = () => {
   return (
     <Toolbar className={styles.toolbar}>
-      <Command name="undo">
-        <Tooltip title="Undo" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-undo" />
-        </Tooltip>
-      </Command>
-      <Command name="redo">
-        <Tooltip title="Redo" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-redo" />
-        </Tooltip>
-      </Command>
+      <ToolbarButton command="undo" />
+      <ToolbarButton command="redo" />
       <Divider type="vertical" />
-      <Command name="copy">
-        <Tooltip title="Copy" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-copy-o" />
-        </Tooltip>
-      </Command>
-      <Command name="paste">
-        <Tooltip title="Paste" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-paster-o" />
-        </Tooltip>
-      </Command>
-      <Command name="delete">
-        <Tooltip title="Delete" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-delete-o" />
-        </Tooltip>
-      </Command>
+      <ToolbarButton command="copy" />
+      <ToolbarButton command="paste" />
+      <ToolbarButton command="delete" />
       <Divider type="vertical" />
-      <Command name="zoomIn">
-        <Tooltip title="Zoom In" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-zoom-in-o" />
-        </Tooltip>
-      </Command>
-      <Command name="zoomOut">
-        <Tooltip title="Zoom Out" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-zoom-out-o" />
-        </Tooltip>
-      </Command>
-      <Command name="autoZoom">
-        <Tooltip title="Fit Map" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-fit" />
-        </Tooltip>
-      </Command>
-      <Command name="resetZoom">
-        <Tooltip title="Actual Size" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-actual-size-o" />
-        </Tooltip>
-      </Command>
+      <ToolbarButton command="zoomIn" icon="zoom-in" text="Zoom In" />
+      <ToolbarButton command="zoomOut" icon="zoom-out" text="Zoom Out" />
+      <ToolbarButton command="autoZoom" icon="fit-map" text="Fit Map" />
+      <ToolbarButton command="resetZoom" icon="actual-size" text="Actual Size" />
       <Divider type="vertical" />
-      <Command name="toBack">
-        <Tooltip title="To Back" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-to-back" />
-        </Tooltip>
-      </Command>
-      <Command name="toFront">
-        <Tooltip title="To Front" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-to-front" />
-        </Tooltip>
-      </Command>
+      <ToolbarButton command="toBack" icon="to-back" text="To Back" />
+      <ToolbarButton command="toFront" icon="to-front" text="To Front" />
       <Divider type="vertical" />
-      <Command name="multiSelect">
-        <Tooltip title="Multi Select" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-select" />
-        </Tooltip>
-      </Command>
-      <Command name="addGroup">
-        <Tooltip title="Add Group" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-group" />
-        </Tooltip>
-      </Command>
-      <Command name="unGroup">
-        <Tooltip title="Ungroup" placement="bottom" overlayClassName={styles.tooltip}>
-          <FlowIconFont type="icon-ungroup" />
-        </Tooltip>
-      </Command>
+      <ToolbarButton command="multiSelect" icon="multi-select" text="Multi Select" />
+      <ToolbarButton command="addGroup" icon="group" text="Add Group" />
+      <ToolbarButton command="unGroup" icon="ungroup" text="Ungroup" />
     </Toolbar>
   );
 };
