@@ -67,11 +67,6 @@ class SearchList extends Component {
         onTabChange={this.handleTabChange}
       >
         {children}
-        {/* <Switch>
-          {routes.map(item => (
-            <Route key={item.key} path={item.path} component={item.component} exact={item.exact} />
-          ))}
-        </Switch> */}
       </PageHeaderWrapper>
     );
   }
