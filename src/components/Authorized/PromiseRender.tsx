@@ -1,5 +1,7 @@
 import { Spin } from 'antd';
+import isEqual from 'lodash/isEqual';
 import React from 'react';
+import { isComponentClass } from './Secured';
 
 export type AnyComponent = React.Component | React.FunctionComponent;
 
@@ -20,21 +22,15 @@ export default class PromiseRender extends React.Component<PromiseRenderPorps, P
 
   shouldComponentUpdate = (nextProps: PromiseRenderPorps, nextState: PromiseRenderState) => {
     const { component } = this.state;
-    const { error, ok, promise } = this.props;
-    if (nextProps.promise !== promise) return true;
-    if (nextProps.error !== error) return true;
-    if (nextProps.ok !== ok) return true;
+    if (!isEqual(nextProps, this.props)) {
+      this.setRenderComponent(nextProps);
+    }
     if (nextState.component !== component) return true;
     return false;
   };
 
   componentDidMount() {
     this.setRenderComponent(this.props);
-  }
-
-  componentDidUpdate(nextProps: PromiseRenderPorps) {
-    // new Props enter
-    this.setRenderComponent(nextProps);
   }
 
   // set render Component : ok or error
@@ -59,10 +55,13 @@ export default class PromiseRender extends React.Component<PromiseRenderPorps, P
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
   checkIsInstantiation = (target: AnyComponent | React.ReactNode): AnyComponent => {
-    if (!React.isValidElement(target)) {
-      return target as AnyComponent;
+    if (isComponentClass(target)) {
+      const Target: React.ComponentClass = target as any;
+      return (props: any) => <Target {...props} />;
+    } else if (React.isValidElement(target)) {
+      return (props => React.cloneElement(target, props)) as React.FC;
     }
-    return () => target;
+    return (() => target) as React.FC;
   };
 
   render() {
