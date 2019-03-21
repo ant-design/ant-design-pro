@@ -11,7 +11,7 @@ const MindDetailPanel = () => {
         <NodeDetail />
       </NodePanel>
       <CanvasPanel>
-        <Card type="inner" title="Canvas" bordered={false} />
+        <Card type="inner" size="small" title="Canvas" bordered={false} />
       </CanvasPanel>
     </DetailPanel>
   );

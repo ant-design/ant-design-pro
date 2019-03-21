@@ -64,14 +64,14 @@ class EdgeDetail extends React.Component {
     const { label = '', shape = 'flow-smooth' } = item.getModel();
 
     return (
-      <Card type="inner" title="边线属性" bordered={false}>
+      <Card type="inner" size="small" title="Edge" bordered={false}>
         <Form onSubmit={this.handleSubmit}>
           <Item label="Label" {...inlineFormItemLayout}>
             {getFieldDecorator('label', {
               initialValue: label,
             })(<Input onBlur={this.handleSubmit} />)}
           </Item>
-          <Item label="图形" {...inlineFormItemLayout}>
+          <Item label="Shape" {...inlineFormItemLayout}>
             {getFieldDecorator('shape', {
               initialValue: shape,
             })(this.renderShapeSelect())}

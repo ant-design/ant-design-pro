@@ -51,7 +51,7 @@ class GroupDetail extends React.Component {
     const { label = '新建分组' } = item.getModel();
 
     return (
-      <Card type="inner" title="Group" bordered={false}>
+      <Card type="inner" size="small" title="Group" bordered={false}>
         <Form onSubmit={this.handleSubmit}>
           <Item label="Label" {...inlineFormItemLayout}>
             {getFieldDecorator('label', {

@@ -53,7 +53,7 @@ class NodeDetail extends React.Component {
     const { label } = item.getModel();
 
     return (
-      <Card type="inner" title="Node" bordered={false}>
+      <Card type="inner" size="small" title="Node" bordered={false}>
         <Form onSubmit={this.handleSubmit}>
           <Item label="Label" {...inlineFormItemLayout}>
             {getFieldDecorator('label', {
