@@ -1,4 +1,5 @@
 import { Button, Col, Form, Input, Row } from 'antd';
+import { Omit } from 'antd/es/_util/type';
 import { WrappedFormUtils } from 'antd/es/form/Form';
 import omit from 'omit.js';
 import React, { Component } from 'react';
@@ -24,7 +25,7 @@ export interface LoginItemProps {
   type: string;
   defaultValue?: string;
   customprops?: any;
-  onChange: (e: any) => void;
+  onChange?: (e: any) => void;
 }
 
 interface WrapFormItemState {
@@ -151,10 +152,13 @@ class WrapFormItem extends Component<LoginItemProps, WrapFormItemState> {
   }
 }
 
-const LoginItem: { [key: string]: React.FC<LoginItemProps> } = {};
+export type WrappedLoginItemProps = Omit<LoginItemProps, 'form' | 'type' | 'updateActive'>;
+export type LoginItemType = { [K in keyof typeof ItemMap]: React.FC<WrappedLoginItemProps> };
+
+const LoginItem = {} as LoginItemType;
 Object.keys(ItemMap).forEach(key => {
   const item = ItemMap[key];
-  LoginItem[key] = props => (
+  LoginItem[key] = (props: WrappedLoginItemProps) => (
     <LoginContext.Consumer>
       {context => (
         <WrapFormItem

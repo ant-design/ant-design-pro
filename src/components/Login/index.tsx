@@ -1,10 +1,11 @@
 import { Form, Tabs } from 'antd';
+import { Omit } from 'antd/es/_util/type';
 import { WrappedFormUtils } from 'antd/es/form/Form';
 import classNames from 'classnames';
 import React, { Component } from 'react';
 import styles from './index.less';
 import LoginContext from './loginContext';
-import LoginItem, { LoginItemProps } from './LoginItem';
+import LoginItem, { LoginItemProps, LoginItemType } from './LoginItem';
 import LoginSubmit from './LoginSubmit';
 import LoginTab from './LoginTab';
 
@@ -144,15 +145,11 @@ Object.keys(LoginItem).forEach(item => {
   Login[item] = LoginItem[item];
 });
 
-type WrappedLoginProps = { [P in Exclude<keyof LoginProps, 'form'>]?: LoginProps[P] };
+type WrappedLoginProps = Omit<LoginProps, 'form'>;
 interface WrappedLogin extends WrappedFormUtils {}
 declare class WrappedLogin extends Component<WrappedLoginProps, LoginState> {
   public static Tab: typeof LoginTab;
-  public static UserName: React.FC<LoginItemProps>;
-  public static Password: React.FC<LoginItemProps>;
-  public static Mobile: React.FC<LoginItemProps>;
-  public static Captcha: React.FC<LoginItemProps>;
   public static Submit: typeof LoginSubmit;
 }
 
-export default Form.create()(Login) as typeof WrappedLogin;
+export default Form.create()(Login) as (LoginItemType & typeof WrappedLogin);
