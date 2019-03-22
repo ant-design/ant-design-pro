@@ -1,5 +1,5 @@
 import Login from '@/components/Login';
-import { ILoginModelState } from '@/models/login';
+import { LoginModelState } from '@/models/login';
 import { Alert, Checkbox, Icon } from 'antd';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { connect } from 'dva';
@@ -10,13 +10,13 @@ import styles from './Login.less';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
-export interface ILoginPageProps {
-  login: ILoginModelState;
+export interface LoginPageProps {
+  login: LoginModelState;
   dispatch: (args: any) => Promise<any>;
   submitting: boolean;
 }
 
-interface ILoginPageState {
+interface LoginPageState {
   type: string;
   autoLogin: boolean;
 }
@@ -25,8 +25,8 @@ interface ILoginPageState {
   login,
   submitting: loading.effects['login/login'],
 }))
-class LoginPage extends Component<ILoginPageProps, ILoginPageState> {
-  state: ILoginPageState = {
+class LoginPage extends Component<LoginPageProps, LoginPageState> {
+  state: LoginPageState = {
     type: 'account',
     autoLogin: true,
   };

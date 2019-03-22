@@ -3,17 +3,17 @@ import isEqual from 'lodash/isEqual';
 import React, { Fragment, Component } from 'react';
 import styles from './style.less';
 
-interface ITableFormProps {
+interface TableFormProps {
   onChange?: (data: any) => void;
 }
 
-interface ITableFormState {
+interface TableFormState {
   data?: any[];
   loading?: boolean;
   value?: any[];
 }
 
-class TableForm extends Component<ITableFormProps, ITableFormState> {
+class TableForm extends Component<TableFormProps, TableFormState> {
   static getDerivedStateFromProps(nextProps, preState) {
     if (isEqual(nextProps.value, preState.value)) {
       return null;

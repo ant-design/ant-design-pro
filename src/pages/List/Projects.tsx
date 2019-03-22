@@ -8,7 +8,7 @@ import { connect } from 'dva';
 import moment from 'moment';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'umi-plugin-locale';
-import { IRuleModelState } from './models/rule';
+import { RuleModelState } from './models/rule';
 import styles from './Projects.less';
 
 const { Option } = Select;
@@ -16,8 +16,8 @@ const FormItem = Form.Item;
 
 /* eslint react/no-array-index-key: 0 */
 
-interface ICoverCardListProps extends FormComponentProps {
-  list: IRuleModelState;
+interface CoverCardListProps extends FormComponentProps {
+  list: RuleModelState;
   dispatch: (args: any) => void;
   loading: boolean;
 }
@@ -26,7 +26,7 @@ interface ICoverCardListProps extends FormComponentProps {
   list,
   loading: loading.models.list,
 }))
-class CoverCardList extends Component<ICoverCardListProps> {
+class CoverCardList extends Component<CoverCardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

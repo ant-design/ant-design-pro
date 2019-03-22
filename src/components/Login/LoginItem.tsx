@@ -8,7 +8,7 @@ import ItemMap from './map';
 
 const FormItem = Form.Item;
 
-interface LoginItemProps {
+export interface LoginItemProps {
   name?: string;
   rules?: any[];
   style?: React.CSSProperties;
@@ -38,7 +38,7 @@ class WrapFormItem extends Component<LoginItemProps, WrapFormItemState> {
   };
   interval: NodeJS.Timeout;
 
-  constructor(props) {
+  constructor(props: LoginItemProps) {
     super(props);
     this.state = {
       count: 0,

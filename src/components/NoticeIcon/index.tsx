@@ -39,7 +39,7 @@ interface NoticeIconProps {
 }
 
 export default class NoticeIcon extends Component<NoticeIconProps> {
-  static Tab = TabPane;
+  static Tab = TabPane as any; // ？？！！？？
 
   static defaultProps = {
     onItemClick: () => {},

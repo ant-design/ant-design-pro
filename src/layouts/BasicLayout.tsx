@@ -46,7 +46,7 @@ const query = {
 
 export declare type SiderTheme = 'light' | 'dark';
 
-interface IBasicLayoutProps {
+interface BasicLayoutProps {
   dispatch: (args: any) => void;
   // wait for https://github.com/umijs/umi/pull/2036
   route: any;
@@ -60,12 +60,12 @@ interface IBasicLayoutProps {
   collapsed: boolean;
 }
 
-interface IBasicLayoutContext {
+interface BasicLayoutContext {
   location: Location;
   breadcrumbNameMap: object;
 }
 
-const BasicLayout: React.FC<IBasicLayoutProps> = props => {
+const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const {
     breadcrumbNameMap,
     dispatch,
@@ -88,7 +88,7 @@ const BasicLayout: React.FC<IBasicLayoutProps> = props => {
   const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
   const isMobile = useMedia({ id: 'BasicLayout', query: '(max-width: 599px)' })[0];
   const hasLeftPadding = fixSiderbar && PropsLayout !== 'topmenu' && !isMobile;
-  const getContext = (): IBasicLayoutContext => ({ location, breadcrumbNameMap });
+  const getContext = (): BasicLayoutContext => ({ location, breadcrumbNameMap });
   const handleMenuCollapse = (payload: boolean) =>
     dispatch({ type: 'global/changeLayoutCollapsed', payload });
   // Do not render SettingDrawer in production

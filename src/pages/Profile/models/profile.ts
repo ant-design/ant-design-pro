@@ -2,7 +2,7 @@ import { queryBasicProfile, queryAdvancedProfile } from '@/services/api';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
-export interface IProfileModelState {
+export interface ProfileModelState {
   basicGoods: [];
   advancedOperation1: [];
   advancedOperation2: [];
@@ -12,9 +12,9 @@ export interface IProfileModelState {
   application: any;
 }
 
-export interface IProfileModel {
+export interface ProfileModel {
   namespace: 'profile';
-  state: IProfileModelState;
+  state: ProfileModelState;
   effects: {
     fetchBasic: Effect;
     fetchAdvanced: Effect;
@@ -24,7 +24,7 @@ export interface IProfileModel {
   };
 }
 
-const ProfileModel: IProfileModel = {
+const ProfileModel: ProfileModel = {
   namespace: 'profile',
 
   state: {

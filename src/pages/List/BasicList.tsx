@@ -24,7 +24,7 @@ import moment from 'moment';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import styles from './BasicList.less';
-import { IRuleModelState } from './models/rule';
+import { RuleModelState } from './models/rule';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
@@ -32,13 +32,13 @@ const RadioGroup = Radio.Group;
 const SelectOption = Select.Option;
 const { Search, TextArea } = Input;
 
-interface IBasicListProps extends FormComponentProps {
-  list: IRuleModelState;
+interface BasicListProps extends FormComponentProps {
+  list: RuleModelState;
   dispatch: (args: any) => void;
   loading: boolean;
 }
 
-interface IBasicListState {
+interface BasicListState {
   visible: boolean;
   done: boolean;
   current: object;
@@ -48,7 +48,7 @@ interface IBasicListState {
   list,
   loading: loading.models.list,
 }))
-class BasicList extends Component<IBasicListProps, IBasicListState> {
+class BasicList extends Component<BasicListProps, BasicListState> {
   state = { visible: false, done: false, current: undefined };
 
   addBtn: HTMLElement;

@@ -16,7 +16,7 @@ const formItemLayout = {
   },
 };
 
-interface IInfoFormProps extends FormComponentProps {
+interface InfoFormProps extends FormComponentProps {
   location: Location;
   dispatch: (args: any) => void;
   data: {
@@ -27,7 +27,7 @@ interface IInfoFormProps extends FormComponentProps {
   };
 }
 
-const Info: React.FC<IInfoFormProps> = props => {
+const Info: React.FC<InfoFormProps> = props => {
   const { form, dispatch, data } = props;
   const { getFieldDecorator, validateFields } = form;
   const onValidateForm = () => {

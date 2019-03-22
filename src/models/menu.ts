@@ -47,8 +47,8 @@ function formatter(data: any[], parentAuthority: string[], parentName: string): 
 
 const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
-interface ISubMenuItem {
-  children: ISubMenuItem[];
+interface SubMenuItem {
+  children: SubMenuItem[];
   hideChildrenInMenu?: boolean;
   hideInMenu?: boolean;
   name?: any;
@@ -59,7 +59,7 @@ interface ISubMenuItem {
 /**
  * get SubMenu or Item
  */
-const getSubMenu: (item: ISubMenuItem) => ISubMenuItem = item => {
+const getSubMenu: (item: SubMenuItem) => SubMenuItem = item => {
   // doc: add hideChildrenInMenu
   if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
     return {
@@ -73,23 +73,23 @@ const getSubMenu: (item: ISubMenuItem) => ISubMenuItem = item => {
 /**
  * filter menuData
  */
-const filterMenuData: (menuData: ISubMenuItem[]) => ISubMenuItem[] = menuData => {
+const filterMenuData: (menuData: SubMenuItem[]) => SubMenuItem[] = menuData => {
   if (!menuData) {
     return [];
   }
   return menuData
     .filter(item => item.name && !item.hideInMenu)
     .map(item => check(item.authority, getSubMenu(item)))
-    .filter(item => item);
+    .filter(item => item) as SubMenuItem[];
 };
 /**
  * 获取面包屑映射
  * @param ISubMenuItem[] menuData 菜单配置
  */
-const getBreadcrumbNameMap: (menuData: ISubMenuItem[]) => object = menuData => {
+const getBreadcrumbNameMap: (menuData: SubMenuItem[]) => object = menuData => {
   const routerMap = {};
 
-  const flattenMenuData: (data: ISubMenuItem[]) => void = data => {
+  const flattenMenuData: (data: SubMenuItem[]) => void = data => {
     data.forEach(menuItem => {
       if (menuItem.children) {
         flattenMenuData(menuItem.children);
@@ -104,15 +104,15 @@ const getBreadcrumbNameMap: (menuData: ISubMenuItem[]) => object = menuData => {
 
 const memoizeOneGetBreadcrumbNameMap = memoizeOne(getBreadcrumbNameMap, isEqual);
 
-export interface IMenuModelState {
+export interface MenuModelState {
   menuData: any[];
   routerData: any[];
   breadcrumbNameMap: object;
 }
 
-export interface IMenuModel {
+export interface MenuModel {
   namespace: 'menu';
-  state: IMenuModelState;
+  state: MenuModelState;
   effects: {
     getMenuData: Effect;
   };
@@ -120,7 +120,7 @@ export interface IMenuModel {
     save: Reducer<any>;
   };
 }
-const MenuModel: IMenuModel = {
+const MenuModel: MenuModel = {
   namespace: 'menu',
 
   state: {

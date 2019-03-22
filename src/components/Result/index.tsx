@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import React from 'react';
 import styles from './index.less';
 
-export interface IResultProps {
+export interface ResultProps {
   actions?: React.ReactNode;
   className?: string;
   description?: React.ReactNode;
@@ -18,7 +18,7 @@ const iconMap = {
   success: <Icon className={styles.success} type="check-circle" theme="filled" />,
 };
 
-const Result: React.FC<IResultProps> = ({
+const Result: React.FC<ResultProps> = ({
   actions,
   className,
   description,

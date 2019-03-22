@@ -5,7 +5,7 @@ import { getFlatMenuKeys } from './SiderMenuUtils';
 
 export declare type SiderTheme = 'light' | 'dark';
 
-interface ISiderMenuProps {
+interface SiderMenuProps {
   isMobile: boolean;
   menuData: any[];
   collapsed: boolean;
@@ -14,7 +14,7 @@ interface ISiderMenuProps {
   onCollapse: (payload: boolean) => void;
 }
 
-const SiderMenuWrapper: React.FC<ISiderMenuProps> = props => {
+const SiderMenuWrapper: React.FC<SiderMenuProps> = props => {
   const { isMobile, menuData, collapsed, onCollapse } = props;
   const flatMenuKeys = getFlatMenuKeys(menuData);
   return isMobile ? (

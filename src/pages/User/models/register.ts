@@ -4,13 +4,13 @@ import { reloadAuthorized } from '@/utils/Authorized';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
-export interface IRegisterModelState {
+export interface RegisterModelState {
   status: undefined | string;
 }
 
-export interface IRegisterModel {
+export interface RegisterModel {
   namespace: 'register';
-  state: IRegisterModelState;
+  state: RegisterModelState;
   effects: {
     submit: Effect;
   };
@@ -19,7 +19,7 @@ export interface IRegisterModel {
   };
 }
 
-const RegisterModel: IRegisterModel = {
+const RegisterModel: RegisterModel = {
   namespace: 'register',
 
   state: {

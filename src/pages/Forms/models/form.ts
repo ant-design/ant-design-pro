@@ -4,7 +4,7 @@ import { Effect } from 'dva';
 import { routerRedux } from 'dva/router';
 import { Reducer } from 'redux';
 
-export interface IFormModelState {
+export interface FormModelState {
   step: {
     payAccount: string;
     receiverAccount: string;
@@ -13,9 +13,9 @@ export interface IFormModelState {
   };
 }
 
-export interface IFormModel {
+export interface FormModel {
   namespace: 'form';
-  state: IFormModelState;
+  state: FormModelState;
   effects: {
     submitRegularForm: Effect;
     submitStepForm: Effect;
@@ -26,7 +26,7 @@ export interface IFormModel {
   };
 }
 
-const FormModel: IFormModel = {
+const FormModel: FormModel = {
   namespace: 'form',
 
   state: {

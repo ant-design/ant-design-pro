@@ -7,10 +7,10 @@ import styles from './index.less';
 const { CheckableTag } = Tag;
 
 interface TagSelectOptionProps {
-  value: string | number;
+  value?: string | number;
   style?: React.CSSProperties;
-  checked: boolean;
-  onChange: (value: string | number, state: boolean) => void;
+  checked?: boolean;
+  onChange?: (value: string | number, state: boolean) => void;
 }
 
 interface TagSelectOptionType extends React.FC<TagSelectOptionProps> {
@@ -36,8 +36,8 @@ interface TagSelectProps {
     collapseText?: React.ReactNode;
     selectAllText?: React.ReactNode;
   };
-  className: string;
-  Option: TagSelectOptionProps;
+  className?: string;
+  Option?: TagSelectOptionProps;
   children: React.ReactElement<TagSelectOption> | Array<React.ReactElement<TagSelectOption>>;
 }
 

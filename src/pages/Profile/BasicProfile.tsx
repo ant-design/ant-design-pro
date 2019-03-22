@@ -6,7 +6,7 @@ import { match } from 'react-router';
 import DescriptionList from '@/components/DescriptionList';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './BasicProfile.less';
-import { IProfileModelState } from './models/profile';
+import { ProfileModelState } from './models/profile';
 
 const { Description } = DescriptionList;
 
@@ -44,8 +44,8 @@ const progressColumns = [
   },
 ];
 
-interface IBasicProfileProps {
-  profile: IProfileModelState;
+interface BasicProfileProps {
+  profile: ProfileModelState;
   dispatch: (args: any) => void;
   loading: boolean;
   match: match;
@@ -55,7 +55,7 @@ interface IBasicProfileProps {
   profile,
   loading: loading.effects['profile/fetchBasic'],
 }))
-class BasicProfile extends Component<IBasicProfileProps> {
+class BasicProfile extends Component<BasicProfileProps> {
   componentDidMount() {
     const { dispatch, match } = this.props;
     const { params } = match;
@@ -73,7 +73,7 @@ class BasicProfile extends Component<IBasicProfileProps> {
       basicProgress = [],
       userInfo = {},
       application = {},
-    } = profile as IProfileModelState;
+    } = profile as ProfileModelState;
     let goodsData = [];
     if (basicGoods.length) {
       let num = 0;

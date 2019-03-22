@@ -2,13 +2,13 @@ import { queryActivities } from '@/services/api';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
-export interface IActivitiesState {
+export interface ActivitiesState {
   list: any[];
 }
 
-export interface IActivitiesModel {
+export interface ActivitiesModel {
   namespace: 'activities';
-  state: IActivitiesState;
+  state: ActivitiesState;
   effects: {
     fetchList: Effect;
   };

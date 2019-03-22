@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
 import router from 'umi/router';
-import { IRegisterModelState } from './models/register';
+import { RegisterModelState } from './models/register';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
@@ -40,8 +40,8 @@ const passwordProgressMap: {
   poor: 'exception',
 };
 
-interface IRegisterProps extends FormComponentProps {
-  register: IRegisterModelState;
+interface RegisterProps extends FormComponentProps {
+  register: RegisterModelState;
   dispatch: (args: any) => void;
   submitting: boolean;
 }
@@ -50,7 +50,7 @@ interface IRegisterProps extends FormComponentProps {
   register,
   submitting: loading.effects['register/submit'],
 }))
-class Register extends Component<IRegisterProps> {
+class Register extends Component<RegisterProps> {
   state = {
     count: 0,
     confirmDirty: false,

@@ -5,11 +5,11 @@ import styles from '../style.less';
 
 const { Step } = Steps;
 
-interface IStepFormProps {
+interface StepFormProps {
   location: Location;
 }
 
-const StepForm: React.FC<IStepFormProps> = props => {
+const StepForm: React.FC<StepFormProps> = props => {
   const { location, children } = props;
   const getCurrentStep = () => {
     const { pathname } = location;

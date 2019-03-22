@@ -20,7 +20,7 @@ import { connect } from 'dva';
 import debounce from 'lodash/debounce';
 import React, { Component, Fragment } from 'react';
 import styles from './AdvancedProfile.less';
-import { IProfileModelState } from './models/profile';
+import { ProfileModelState } from './models/profile';
 
 const { Step } = Steps;
 const { Description } = DescriptionList;
@@ -184,13 +184,13 @@ const columns = [
   },
 ];
 
-interface IAdvancedProfileProps {
-  profile: IProfileModelState;
+interface AdvancedProfileProps {
+  profile: ProfileModelState;
   dispatch: (args: any) => void;
   loading: boolean;
 }
 
-interface IAdvancedProfileState {
+interface AdvancedProfileState {
   operationkey: string;
   stepDirection: 'horizontal' | 'vertical';
 }
@@ -199,7 +199,7 @@ interface IAdvancedProfileState {
   profile,
   loading: loading.effects['profile/fetchAdvanced'],
 }))
-class AdvancedProfile extends Component<IAdvancedProfileProps, IAdvancedProfileState> {
+class AdvancedProfile extends Component<AdvancedProfileProps, AdvancedProfileState> {
   state = {
     operationkey: 'tab1',
     stepDirection: 'horizontal' as ('horizontal' | 'vertical'),

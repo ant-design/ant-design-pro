@@ -2,14 +2,14 @@ import queryError from '@/services/error';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
-export interface IErrorModelState {
+export interface ErrorModelState {
   error: string;
   isloading: boolean;
 }
 
-export interface IErrorModel {
+export interface ErrorModel {
   namespace: 'error';
-  state: IErrorModelState;
+  state: ErrorModelState;
   effects: {
     query: Effect;
   };
@@ -18,7 +18,7 @@ export interface IErrorModel {
   };
 }
 
-const ErrorModel: IErrorModel = {
+const ErrorModel: ErrorModel = {
   namespace: 'error',
 
   state: {

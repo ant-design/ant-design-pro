@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { match } from 'react-router';
 import router from 'umi/router';
 
-interface ISearchListProps {
+interface SearchListProps {
   dispatch: (args: any) => void;
   loading: boolean;
   match: match;
@@ -13,7 +13,7 @@ interface ISearchListProps {
 }
 
 @connect()
-class SearchList extends Component<ISearchListProps> {
+class SearchList extends Component<SearchListProps> {
   handleTabChange = key => {
     const { match } = this.props;
     switch (key) {
