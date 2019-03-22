@@ -17,4 +17,6 @@ interface AvatarListProps {
   style?: React.CSSProperties;
   children: React.ReactElement<AvatarItemProps> | Array<React.ReactElement<AvatarItemProps>>;
 }
-export default class AvatarList extends React.Component<AvatarListProps, any> {}
+export default class AvatarList extends React.Component<AvatarListProps, any> {
+  public static Item: typeof AvatarItem;
+}
