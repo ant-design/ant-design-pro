@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { IPageHeaderProps } from './index';
+import React from 'react';
+import { PageHeaderProps } from './index';
 
-export default class BreadcrumbView extends React.Component<IPageHeaderProps, any> {}
+export default class BreadcrumbView extends React.Component<PageHeaderProps, any> {}
 
 export function getBreadcrumb(breadcrumbNameMap: object, url: string): object;

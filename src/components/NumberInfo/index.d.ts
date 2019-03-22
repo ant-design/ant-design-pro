@@ -1,5 +1,5 @@
-import * as React from 'react';
-export interface INumberInfoProps {
+import React from 'react';
+export interface NumberInfoProps {
   title?: React.ReactNode | string;
   subTitle?: React.ReactNode | string;
   total?: React.ReactNode | string;
@@ -7,7 +7,8 @@ export interface INumberInfoProps {
   theme?: string;
   gap?: number;
   subTotal?: number;
+  suffix?: string;
   style?: React.CSSProperties;
 }
 
-export default class NumberInfo extends React.Component<INumberInfoProps, any> {}
+export default class NumberInfo extends React.Component<NumberInfoProps, any> {}

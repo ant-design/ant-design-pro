@@ -1,7 +1,8 @@
-import * as React from 'react';
-export interface IFooterToolbarProps {
+import React from 'react';
+export interface FooterToolbarProps {
   extra: React.ReactNode;
   style?: React.CSSProperties;
+  className?: string;
 }
 
-export default class FooterToolbar extends React.Component<IFooterToolbarProps, any> {}
+export default class FooterToolbar extends React.Component<FooterToolbarProps, any> {}
