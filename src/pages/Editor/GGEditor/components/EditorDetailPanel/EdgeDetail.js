@@ -43,9 +43,9 @@ class EdgeDetail extends React.Component {
   renderShapeSelect() {
     return (
       <Select onChange={this.handleSubmit}>
-        <Option value="flow-smooth">图曲线</Option>
-        <Option value="flow-polyline">图折线</Option>
-        <Option value="flow-polyline-round">圆角折线</Option>
+        <Option value="flow-smooth">Smooth</Option>
+        <Option value="flow-polyline">Polyline</Option>
+        <Option value="flow-polyline-round">Polyline Round</Option>
       </Select>
     );
   }
