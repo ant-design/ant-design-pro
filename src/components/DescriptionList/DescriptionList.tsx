@@ -4,7 +4,7 @@ import React from 'react';
 import Description, { DescriptionProps } from './Description';
 import styles from './index.less';
 
-export interface IDescriptionListProps {
+export interface DescriptionListProps {
   className?: string;
   col?: number;
   description?: DescriptionProps[];
@@ -15,8 +15,8 @@ export interface IDescriptionListProps {
   title?: React.ReactNode;
 }
 
-export type IDescriptionListComponent = React.FC<IDescriptionListProps> & {
-  Description: Description;
+export type IDescriptionListComponent = React.FC<DescriptionListProps> & {
+  Description: typeof Description;
 };
 
 const DescriptionList: IDescriptionListComponent = ({
@@ -38,8 +38,8 @@ const DescriptionList: IDescriptionListComponent = ({
     <div className={clsString} {...restProps}>
       {title ? <div className={styles.title}>{title}</div> : null}
       <Row gutter={gutter}>
-        {React.Children.map(children, (child: React.ReactElement<Description>) =>
-          child ? React.cloneElement(child, { column }) : child,
+        {React.Children.map(children, (child: React.ReactElement<DescriptionProps>) =>
+          child ? React.cloneElement<DescriptionProps>(child, { column }) : child,
         )}
       </Row>
     </div>

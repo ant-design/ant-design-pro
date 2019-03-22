@@ -7,14 +7,14 @@ import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
 import { Reducer } from 'redux';
 
-export interface ILoginModelState {
+export interface LoginModelState {
   status?: string;
   type?: string;
 }
 
-export interface ILoginModel {
+export interface LoginModel {
   namespace: 'login';
-  state: ILoginModelState;
+  state: LoginModelState;
   effects: {
     login: Effect;
     getCaptcha: Effect;
@@ -24,7 +24,7 @@ export interface ILoginModel {
     changeLoginStatus: Reducer<any>;
   };
 }
-const LoginModel: ILoginModel = {
+const LoginModel: LoginModel = {
   namespace: 'login',
 
   state: {

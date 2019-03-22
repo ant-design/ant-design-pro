@@ -6,7 +6,7 @@ import React, { Fragment } from 'react';
 import router from 'umi/router';
 import styles from './style.less';
 
-interface IResultFormProps extends FormComponentProps {
+interface ResultFormProps extends FormComponentProps {
   data: {
     payAccount: string;
     receiverAccount: string;
@@ -14,7 +14,7 @@ interface IResultFormProps extends FormComponentProps {
     amount: string;
   };
 }
-const ResultPage: React.FC<IResultFormProps> = props => {
+const ResultPage: React.FC<ResultFormProps> = props => {
   const { data } = props;
   const onFinish = () => {
     router.push('/form/step-form/info');

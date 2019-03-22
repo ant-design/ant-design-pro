@@ -15,7 +15,7 @@ const formItemLayout = {
   },
 };
 
-interface IConfirmFormProps extends FormComponentProps {
+interface ConfirmFormProps extends FormComponentProps {
   dispatch: (args: any) => void;
   data: {
     payAccount: string;
@@ -26,7 +26,7 @@ interface IConfirmFormProps extends FormComponentProps {
   submitting: boolean;
 }
 
-const Confirm: React.FC<IConfirmFormProps> = props => {
+const Confirm: React.FC<ConfirmFormProps> = props => {
   const { form, data, dispatch, submitting } = props;
   const { getFieldDecorator, validateFields } = form;
   const onPrev = () => {

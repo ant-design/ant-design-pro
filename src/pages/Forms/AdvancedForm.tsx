@@ -58,7 +58,7 @@ const tableData = [
   },
 ];
 
-interface IAdvancedFormProps extends FormComponentProps {
+interface AdvancedFormProps extends FormComponentProps {
   location: Location;
   dispatch: (args: any) => void;
   submitting: boolean;
@@ -67,7 +67,7 @@ interface IAdvancedFormProps extends FormComponentProps {
 @connect(({ loading }) => ({
   submitting: loading.effects['form/submitAdvancedForm'],
 }))
-class AdvancedForm extends Component<IAdvancedFormProps> {
+class AdvancedForm extends Component<AdvancedFormProps> {
   state = {
     width: '100%',
   };

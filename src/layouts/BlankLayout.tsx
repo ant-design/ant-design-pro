@@ -1,9 +1,9 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 
-interface IProps {
+interface LayoutProps {
   children: ReactNode;
 }
 
-const Layout: FunctionComponent<IProps> = ({ children }) => <div>{children}</div>;
+const Layout: FunctionComponent<LayoutProps> = ({ children }) => <div>{children}</div>;
 
 export default Layout;

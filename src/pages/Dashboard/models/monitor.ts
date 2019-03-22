@@ -2,13 +2,13 @@ import { queryTags } from '@/services/api';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
-export interface IMonitorState {
+export interface MonitorState {
   tags: any[];
 }
 
-export interface IMonitorModel {
+export interface MonitorModel {
   namespace: 'monitor';
-  state: IMonitorState;
+  state: MonitorState;
   effects: {
     fetchTags: Effect;
   };

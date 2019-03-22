@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import styles from './index.less';
 import RightContent from './RightContent';
 
-interface IGlobalHeaderProps {
+interface GlobalHeaderProps {
   collapsed?: boolean;
   onCollapse?: (collapsed: boolean) => void;
   isMobile?: boolean;
@@ -15,7 +15,7 @@ interface IGlobalHeaderProps {
   onNoticeVisibleChange?: (b: boolean) => void;
 }
 
-export default class GlobalHeader extends Component<IGlobalHeaderProps> {
+export default class GlobalHeader extends Component<GlobalHeaderProps> {
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
   }

@@ -4,12 +4,12 @@ import pathToRegexp from 'path-to-regexp';
 import React from 'react';
 import Redirect from 'umi/redirect';
 
-interface IAuthComponentProps {
+interface AuthComponentProps {
   location: Location;
   routerData: any[];
   status: string;
 }
-const AuthComponent: React.FC<IAuthComponentProps> = ({
+const AuthComponent: React.FC<AuthComponentProps> = ({
   children,
   location,
   routerData,

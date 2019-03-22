@@ -27,7 +27,7 @@ import { connect } from 'dva';
 import moment from 'moment';
 import React, { Fragment, Component } from 'react';
 import router from 'umi/router';
-import { IRuleModelState } from './models/rule';
+import { RuleModelState } from './models/rule';
 import styles from './TableList.less';
 
 const FormItem = Form.Item;
@@ -42,13 +42,13 @@ const getValue = obj =>
 const statusMap: any = ['default', 'processing', 'success', 'error'];
 const status = ['关闭', '运行中', '已上线', '异常'];
 
-interface ICreateFormProps extends FormComponentProps {
+interface CreateFormProps extends FormComponentProps {
   modalVisible: boolean;
   handleAdd: (fields: any) => void;
   handleModalVisible: (flag?: boolean) => void;
 }
 
-const CreateFormFunc: React.FC<ICreateFormProps> = props => {
+const CreateFormFunc: React.FC<CreateFormProps> = props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
@@ -78,19 +78,19 @@ const CreateFormFunc: React.FC<ICreateFormProps> = props => {
 
 const CreateForm = Form.create()(CreateFormFunc);
 
-interface IUpdateFormProps extends FormComponentProps {
+interface UpdateFormProps extends FormComponentProps {
   handleUpdate: (e?: any) => void;
   handleUpdateModalVisible: (flag?: boolean, record?: any) => void;
   updateModalVisible: boolean;
   values: {};
 }
 
-interface IUpdateFormState {
+interface UpdateFormState {
   formVals: {};
   currentStep: number;
 }
 
-class UpdateFormClass extends Component<IUpdateFormProps, IUpdateFormState> {
+class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
   formLayout: object;
 
   constructor(props) {
@@ -297,13 +297,13 @@ class UpdateFormClass extends Component<IUpdateFormProps, IUpdateFormState> {
 
 const UpdateForm = Form.create()(UpdateFormClass);
 
-interface ITableListProps extends FormComponentProps {
+interface TableListProps extends FormComponentProps {
   dispatch: (args: any) => void;
-  rule: IRuleModelState;
+  rule: RuleModelState;
   loading: boolean;
 }
 
-interface ITableListState {
+interface TableListState {
   modalVisible: boolean;
   updateModalVisible: boolean;
   expandForm: boolean;
@@ -318,7 +318,7 @@ interface ITableListState {
   rule,
   loading: loading.models.rule,
 }))
-class TableList extends Component<ITableListProps, ITableListState> {
+class TableList extends Component<TableListProps, TableListState> {
   state = {
     modalVisible: false,
     updateModalVisible: false,

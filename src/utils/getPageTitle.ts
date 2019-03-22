@@ -6,12 +6,7 @@ import defaultSettings from '../../config/defaultSettings';
 
 const { menu, title } = defaultSettings;
 
-export const matchParamsPath = (pathname: string, breadcrumbNameMap: object): IRouterData => {
-  const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
-  return breadcrumbNameMap[pathKey];
-};
-
-interface IRouterData {
+interface RouterData {
   name: string;
   locale: string;
   authority?: string[];
@@ -19,6 +14,11 @@ interface IRouterData {
   icon?: string;
   path: string;
 }
+
+export const matchParamsPath = (pathname: string, breadcrumbNameMap: object): RouterData => {
+  const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
+  return breadcrumbNameMap[pathKey];
+};
 
 const getPageTitle = (pathname: string, breadcrumbNameMap: object): string => {
   const currRouterData = matchParamsPath(pathname, breadcrumbNameMap);

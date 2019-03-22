@@ -4,10 +4,10 @@ import { Button, Card, Icon, List } from 'antd';
 import { connect } from 'dva';
 import React, { Component } from 'react';
 import styles from './CardList.less';
-import { IRuleModelState } from './models/rule';
+import { RuleModelState } from './models/rule';
 
-interface ICardListProps {
-  list: IRuleModelState;
+interface CardListProps {
+  list: RuleModelState;
   dispatch: (args: any) => void;
   loading: boolean;
 }
@@ -16,7 +16,7 @@ interface ICardListProps {
   list,
   loading: loading.models.list,
 }))
-class CardList extends Component<ICardListProps> {
+class CardList extends Component<CardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

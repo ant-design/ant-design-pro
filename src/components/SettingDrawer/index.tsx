@@ -7,15 +7,15 @@ import omit from 'omit.js';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import BlockCheckbox from './BlockCheckbox';
-import { ISettingModelState } from '@/models/setting';
+import { SettingModelState } from '@/models/setting';
 
 const { Option } = Select;
-interface IBodyProps {
+interface BodyProps {
   title: string;
   style?: React.CSSProperties;
 }
 
-const Body: React.FC<IBodyProps> = ({ children, title, style }) => (
+const Body: React.FC<BodyProps> = ({ children, title, style }) => (
   <div
     style={{
       ...style,
@@ -27,14 +27,15 @@ const Body: React.FC<IBodyProps> = ({ children, title, style }) => (
   </div>
 );
 
-interface ISettingDrawerProps {
-  setting?: ISettingModelState;
+interface SettingDrawerProps {
+  setting?: SettingModelState;
   dispatch?: (args: any) => void;
 }
-interface ISettingDrawerState {}
+
+interface SettingDrawerState {}
 
 @connect(({ setting }) => ({ setting }))
-class SettingDrawer extends Component<ISettingDrawerProps, ISettingDrawerState> {
+class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
   state = {
     collapse: false,
   };

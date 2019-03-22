@@ -53,7 +53,7 @@ const validatorPhone = (rule, value, callback) => {
   callback();
 };
 
-interface IBaseProps extends FormComponentProps {
+interface BaseProps extends FormComponentProps {
   currentUser: {
     avatar?: string;
     name?: string;
@@ -68,7 +68,7 @@ interface IBaseProps extends FormComponentProps {
 @connect(({ user }) => ({
   currentUser: user.currentUser,
 }))
-class BaseView extends Component<IBaseProps> {
+class BaseView extends Component<BaseProps> {
   view: HTMLDivElement;
   componentDidMount() {
     this.setBaseInfo();

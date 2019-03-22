@@ -16,7 +16,7 @@ export declare type MenuMode =
   | 'inline';
 
 const { title } = defaultSettings;
-interface ITopNavHeaderProps {
+interface TopNavHeaderProps {
   theme: SiderTheme;
   contentWidth?: string;
   menuData?: any[];
@@ -36,11 +36,11 @@ interface ITopNavHeaderProps {
   onNoticeVisibleChange?: (b: boolean) => void;
 }
 
-interface ITopNavHeaderState {
+interface TopNavHeaderState {
   maxWidth: undefined | number;
 }
 
-export default class TopNavHeader extends Component<ITopNavHeaderProps, ITopNavHeaderState> {
+export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHeaderState> {
   state = {
     maxWidth: undefined,
   };

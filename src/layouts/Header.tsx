@@ -1,6 +1,6 @@
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
-import { ISettingModelState } from '@/models/setting';
+import { SettingModelState } from '@/models/setting';
 
 import { Layout, message } from 'antd';
 import { connect } from 'dva';
@@ -12,21 +12,23 @@ import styles from './Header.less';
 
 const { Header } = Layout;
 
-interface IHeaderViewProps {
+export declare type SiderTheme = 'light' | 'dark';
+
+interface HeaderViewProps {
   isMobile: boolean;
   collapsed: boolean;
-  setting: ISettingModelState;
+  setting: SettingModelState;
   dispatch: (args: any) => void;
   autoHideHeader: boolean;
   handleMenuCollapse: (args: boolean) => void;
 }
 
-interface IHeaderViewState {
+interface HeaderViewState {
   visible: boolean;
 }
 
-class HeaderView extends Component<IHeaderViewProps, IHeaderViewState> {
-  static getDerivedStateFromProps(props: IHeaderViewProps, state: IHeaderViewState) {
+class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
+  static getDerivedStateFromProps(props: HeaderViewProps, state: HeaderViewState) {
     if (!props.autoHideHeader && !state.visible) {
       return {
         visible: true,
@@ -142,7 +144,7 @@ class HeaderView extends Component<IHeaderViewProps, IHeaderViewState> {
       <Header style={{ padding: 0, width }} className={fixedHeader ? styles.fixedHeader : ''}>
         {isTop && !isMobile ? (
           <TopNavHeader
-            theme={navTheme}
+            theme={navTheme as SiderTheme}
             mode="horizontal"
             onCollapse={handleMenuCollapse}
             onNoticeClear={this.handleNoticeClear}

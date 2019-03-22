@@ -53,14 +53,14 @@ export function getTimeDistance(type: string): RangePickerValue {
   return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)];
 }
 
-interface IPlainNode {
+interface PlainNode {
   path: string;
   exact?: boolean;
   children?: any;
   component?: any;
 }
-export function getPlainNode(nodeList: IPlainNode[], parentPath = ''): IPlainNode[] {
-  const arr: IPlainNode[] = [];
+export function getPlainNode(nodeList: PlainNode[], parentPath = ''): PlainNode[] {
+  const arr: PlainNode[] = [];
   nodeList.forEach(node => {
     const item = node;
     item.path = `${parentPath}/${item.path || ''}`.replace(/\/+/g, '/');

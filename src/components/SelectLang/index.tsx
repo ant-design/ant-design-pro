@@ -5,10 +5,10 @@ import { formatMessage, getLocale, setLocale } from 'umi-plugin-locale';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
-interface ISelectLangProps {
-  className: string;
+interface SelectLangProps {
+  className?: string;
 }
-const SelectLang: React.FC<ISelectLangProps> = props => {
+const SelectLang: React.FC<SelectLangProps> = props => {
   const { className } = props;
   const selectedLang = getLocale();
   const changeLang = ({ key }) => {

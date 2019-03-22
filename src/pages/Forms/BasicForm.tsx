@@ -22,7 +22,7 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-interface IBasicFormsProps extends FormComponentProps {
+interface BasicFormsProps extends FormComponentProps {
   location: Location;
   dispatch: (args: any) => void;
   submitting: boolean;
@@ -31,7 +31,7 @@ interface IBasicFormsProps extends FormComponentProps {
 @connect(({ loading }) => ({
   submitting: loading.effects['form/submitRegularForm'],
 }))
-class BasicForms extends Component<IBasicFormsProps> {
+class BasicForms extends Component<BasicFormsProps> {
   handleSubmit = e => {
     const { dispatch, form } = this.props;
     e.preventDefault();

@@ -38,7 +38,7 @@ export declare type MenuMode =
   | 'horizontal'
   | 'inline';
 
-interface IBaseMenuProps {
+interface BaseMenuProps {
   flatMenuKeys?: any[];
   location?: H.Location;
   onCollapse?: (collapsed: boolean, type?: CollapseType) => void;
@@ -54,9 +54,9 @@ interface IBaseMenuProps {
   onOpenChange?: (openKeys: string[]) => void;
 }
 
-interface IBaseMenuState {}
+interface BaseMenuState {}
 
-export default class BaseMenu extends Component<IBaseMenuProps, IBaseMenuState> {
+export default class BaseMenu extends Component<BaseMenuProps, BaseMenuState> {
   /**
    * 获得菜单子节点
    * @memberof SiderMenu

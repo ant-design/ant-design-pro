@@ -2,13 +2,13 @@ import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from '@/se
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
-export interface IListModelState {
+export interface ListModelState {
   list: any[];
 }
 
-export interface IListModel {
+export interface ListModel {
   namespace: 'list';
-  state: IListModelState;
+  state: ListModelState;
   effects: {
     fetch: Effect;
     appendFetch: Effect;
@@ -20,7 +20,7 @@ export interface IListModel {
   };
 }
 
-const ListModel: IListModel = {
+const ListModel: ListModel = {
   namespace: 'list',
 
   state: {

@@ -5,7 +5,7 @@ import React, { createElement } from 'react';
 import styles from './index.less';
 import config from './typeConfig';
 
-export interface IExceptionProps<
+export interface ExceptionProps<
   L = {
     to: H.LocationDescriptor;
     href?: H.LocationDescriptor;
@@ -25,7 +25,7 @@ export interface IExceptionProps<
   redirect?: string;
 }
 
-class Exception extends React.Component<IExceptionProps, any> {
+class Exception extends React.Component<ExceptionProps, any> {
   static defaultProps = {
     backText: 'back to home',
     redirect: '/',

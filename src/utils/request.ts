@@ -22,7 +22,7 @@ const codeMessage = {
   504: '网关超时。',
 };
 
-interface IResponseError extends Error {
+interface ResponseError extends Error {
   name: any;
   data?: any;
   response?: Response;
@@ -37,7 +37,7 @@ const checkStatus: (response: Response) => Response = response => {
     message: `请求错误 ${response.status}: ${response.url}`,
     description: errortext,
   });
-  const error: IResponseError = new Error(errortext);
+  const error: ResponseError = new Error(errortext);
   error.name = response.status;
   error.response = response;
   throw error;

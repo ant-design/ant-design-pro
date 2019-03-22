@@ -20,7 +20,7 @@ const actions = (
   </div>
 );
 
-interface IRegisterResultProps {
+interface RegisterResultProps {
   location: {
     state?: {
       account?: string;
@@ -28,7 +28,7 @@ interface IRegisterResultProps {
   };
 }
 
-const RegisterResult: React.FC<IRegisterResultProps> = ({ location }) => (
+const RegisterResult: React.FC<RegisterResultProps> = ({ location }) => (
   <Result
     className={styles.registerResult}
     type="success"

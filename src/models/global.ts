@@ -2,14 +2,14 @@ import { queryNotices } from '@/services/api';
 import { Effect, Subscription } from 'dva';
 import { Reducer } from 'redux';
 
-export interface IGlobalModelState {
+export interface GlobalModelState {
   collapsed: boolean;
   notices: any[];
 }
 
-export interface IGlobalModel {
+export interface GlobalModel {
   namespace: 'global';
-  state: IGlobalModelState;
+  state: GlobalModelState;
   effects: {
     fetchNotices: Effect;
     clearNotices: Effect;
@@ -23,7 +23,7 @@ export interface IGlobalModel {
   subscriptions: { setup: Subscription };
 }
 
-const GlobalModel: IGlobalModel = {
+const GlobalModel: GlobalModel = {
   namespace: 'global',
 
   state: {

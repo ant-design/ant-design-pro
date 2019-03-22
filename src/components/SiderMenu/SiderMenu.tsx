@@ -16,7 +16,7 @@ let firstMount: boolean = true;
 export declare type CollapseType = 'clickTrigger' | 'responsive';
 export declare type SiderTheme = 'light' | 'dark';
 
-interface ISiderMenuProps {
+interface SiderMenuProps {
   menuData: any[];
   location?: H.Location;
   flatMenuKeys?: any[];
@@ -28,12 +28,12 @@ interface ISiderMenuProps {
   isMobile: boolean;
 }
 
-interface ISiderMenuState {
+interface SiderMenuState {
   openKeys: any;
   flatMenuKeysLen?: number;
 }
 
-export default class SiderMenu extends Component<ISiderMenuProps, ISiderMenuState> {
+export default class SiderMenu extends Component<SiderMenuProps, SiderMenuState> {
   static getDerivedStateFromProps(props, state) {
     const { pathname, flatMenuKeysLen } = state;
     if (props.location.pathname !== pathname || props.flatMenuKeys.length !== flatMenuKeysLen) {
@@ -45,7 +45,7 @@ export default class SiderMenu extends Component<ISiderMenuProps, ISiderMenuStat
     }
     return null;
   }
-  constructor(props: ISiderMenuProps) {
+  constructor(props: SiderMenuProps) {
     super(props);
     this.state = {
       openKeys: getDefaultCollapsedSubMenus(props),

@@ -2,7 +2,7 @@ import { fakeChartData } from '@/services/api';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
-export interface IChartModelState {
+export interface ChartModelState {
   visitData: any[];
   visitData2: any[];
   salesData: any[];
@@ -16,9 +16,9 @@ export interface IChartModelState {
   loading: boolean;
 }
 
-export interface IChartModel {
+export interface ChartModel {
   namespace: 'chart';
-  state: IChartModelState;
+  state: ChartModelState;
   effects: {
     fetch: Effect;
     fetchSalesData: Effect;
@@ -29,7 +29,7 @@ export interface IChartModel {
   };
 }
 
-const ChartModel: IChartModel = {
+const ChartModel: ChartModel = {
   namespace: 'chart',
 
   state: {

@@ -1,8 +1,6 @@
 import { Form, Tabs } from 'antd';
-import Button from 'antd/es/button';
 import { WrappedFormUtils } from 'antd/es/form/Form';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styles from './index.less';
 import LoginContext from './loginContext';
@@ -33,13 +31,6 @@ class Login extends Component<LoginProps, LoginState> {
   public static Captcha: typeof LoginItem;
   public static Submit: typeof LoginSubmit;
 
-  static propTypes = {
-    className: PropTypes.string,
-    defaultActiveKey: PropTypes.string,
-    onTabChange: PropTypes.func,
-    onSubmit: PropTypes.func,
-  };
-
   static defaultProps = {
     className: '',
     defaultActiveKey: '',
@@ -47,7 +38,7 @@ class Login extends Component<LoginProps, LoginState> {
     onSubmit: () => {},
   };
 
-  constructor(props) {
+  constructor(props: LoginProps) {
     super(props);
     this.state = {
       type: props.defaultActiveKey,
@@ -153,4 +144,4 @@ Object.keys(LoginItem).forEach(item => {
   Login[item] = LoginItem[item];
 });
 
-export default Form.create()(Login);
+export default Form.create()(Login) as typeof Login;

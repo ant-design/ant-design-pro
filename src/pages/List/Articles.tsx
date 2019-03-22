@@ -7,15 +7,15 @@ import { connect } from 'dva';
 import React, { Component, Fragment } from 'react';
 import { FormattedMessage } from 'umi-plugin-locale';
 import styles from './Articles.less';
-import { IRuleModelState } from './models/rule';
+import { RuleModelState } from './models/rule';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 
 const pageSize = 5;
 
-interface ISearchListProps extends FormComponentProps {
-  list: IRuleModelState;
+interface SearchListProps extends FormComponentProps {
+  list: RuleModelState;
   dispatch: (args: any) => void;
   loading: boolean;
 }
@@ -24,7 +24,7 @@ interface ISearchListProps extends FormComponentProps {
   list,
   loading: loading.models.list,
 }))
-class SearchList extends Component<ISearchListProps> {
+class SearchList extends Component<SearchListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

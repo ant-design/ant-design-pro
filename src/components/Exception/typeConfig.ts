@@ -1,4 +1,4 @@
-interface IConfig {
+interface Config {
   403: {
     img: string;
     title: string;
@@ -15,7 +15,7 @@ interface IConfig {
     desc: string;
   };
 }
-const config: IConfig = {
+const config: Config = {
   403: {
     img: 'https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg',
     title: '403',

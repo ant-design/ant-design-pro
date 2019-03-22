@@ -34,7 +34,7 @@ const copyright = (
   </Fragment>
 );
 
-interface IUserLayoutProps {
+interface UserLayoutProps {
   dispatch: (args: any) => void;
   route: any;
   breadcrumbNameMap: object;
@@ -42,7 +42,7 @@ interface IUserLayoutProps {
   location: Location;
 }
 
-class UserLayout extends Component<IUserLayoutProps> {
+class UserLayout extends Component<UserLayoutProps> {
   componentDidMount() {
     const {
       dispatch,

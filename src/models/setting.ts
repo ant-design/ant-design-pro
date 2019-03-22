@@ -4,7 +4,7 @@ import defaultSettings from '../../config/defaultSettings';
 
 export declare type SiderTheme = 'light' | 'dark';
 
-export interface ISettingModelState {
+export interface SettingModelState {
   navTheme: string | SiderTheme;
   primaryColor: string;
   layout: string;
@@ -19,9 +19,9 @@ export interface ISettingModelState {
   colorWeak: boolean;
 }
 
-export interface ISettingModel {
+export interface SettingModel {
   namespace: 'setting';
-  state: ISettingModelState;
+  state: SettingModelState;
   reducers: {
     getSetting: Reducer<any>;
     changeSetting: Reducer<any>;
@@ -91,7 +91,7 @@ const updateColorWeak: (colorWeak: string) => void = colorWeak => {
   document.body.className = colorWeak ? 'colorWeak' : '';
 };
 
-const SettingModel: ISettingModel = {
+const SettingModel: SettingModel = {
   namespace: 'setting',
   state: defaultSettings,
   reducers: {

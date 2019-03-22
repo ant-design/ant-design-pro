@@ -8,13 +8,13 @@ import numeral from 'numeral';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'umi-plugin-locale';
 import styles from './Applications.less';
-import { IRuleModelState } from './models/rule';
+import { RuleModelState } from './models/rule';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 
-interface IFilterCardListProps extends FormComponentProps {
-  list: IRuleModelState;
+interface FilterCardListProps extends FormComponentProps {
+  list: RuleModelState;
   dispatch: (args: any) => void;
   loading: boolean;
 }
@@ -23,7 +23,7 @@ interface IFilterCardListProps extends FormComponentProps {
   list,
   loading: loading.models.list,
 }))
-class FilterCardList extends Component<IFilterCardListProps> {
+class FilterCardList extends Component<FilterCardListProps> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

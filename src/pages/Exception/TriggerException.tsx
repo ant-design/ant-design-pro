@@ -3,19 +3,19 @@ import { Button, Spin, Card } from 'antd';
 import { connect } from 'dva';
 import styles from './style.less';
 
-interface ITriggerExceptionProps {
+interface TriggerExceptionProps {
   isloading: boolean;
   dispatch: (args: any) => Promise<any>;
 }
 
-interface ITriggerExceptionState {
+interface TriggerExceptionState {
   isloading: boolean;
 }
 
 @connect(state => ({
   isloading: state.error.isloading,
 }))
-class TriggerException extends Component<ITriggerExceptionProps, ITriggerExceptionState> {
+class TriggerException extends Component<TriggerExceptionProps, TriggerExceptionState> {
   state = {
     isloading: false,
   };
