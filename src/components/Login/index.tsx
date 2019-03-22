@@ -1,7 +1,6 @@
 import { Form, Tabs } from 'antd';
 import { WrappedFormUtils } from 'antd/es/form/Form';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styles from './index.less';
 import LoginContext from './loginContext';
@@ -31,13 +30,6 @@ class Login extends Component<LoginProps, LoginState> {
   public static Mobile: React.FC<LoginItemProps>;
   public static Captcha: React.FC<LoginItemProps>;
   public static Submit: typeof LoginSubmit;
-
-  static propTypes = {
-    className: PropTypes.string,
-    defaultActiveKey: PropTypes.string,
-    onTabChange: PropTypes.func,
-    onSubmit: PropTypes.func,
-  };
 
   static defaultProps = {
     className: '',
