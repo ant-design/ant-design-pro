@@ -1,19 +1,11 @@
 import React from 'react';
 import * as H from 'history';
+import { BaseMenuProps } from './BaseMenu';
+import { SiderTheme } from 'antd/es/Layout/Sider';
 
-export declare type CollapseType = 'clickTrigger' | 'responsive';
-export declare type SiderTheme = 'light' | 'dark';
-
-export interface SiderMenuProps {
-  menuData: any[];
-  location?: H.Location;
-  flatMenuKeys?: any[];
+export interface SiderMenuProps extends BaseMenuProps {
   logo?: string;
-  collapsed: boolean;
-  onCollapse: (collapsed: boolean, type?: CollapseType) => void;
   fixSiderbar?: boolean;
-  theme?: SiderTheme;
-  isMobile: boolean;
 }
 
 export default class SiderMenu extends React.Component<SiderMenuProps, any> {}

@@ -1,8 +1,7 @@
 import React from 'react';
 import { DropDownProps } from 'antd/lib/dropdown';
 import { ClickParam } from 'antd/es/menu';
-
-export declare type SiderTheme = 'light' | 'dark';
+import { SiderTheme } from 'antd/es/Layout/Sider';
 
 export interface GlobalHeaderRightProps {
   notices?: any[];

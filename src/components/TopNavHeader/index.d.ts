@@ -1,15 +1,8 @@
 import React from 'react';
+import { SiderTheme, CollapseType } from 'antd/es/Layout/Sider';
+import { MenuMode } from 'antd/es/menu';
 
-export declare type CollapseType = 'clickTrigger' | 'responsive';
-export declare type SiderTheme = 'light' | 'dark';
-export declare type MenuMode =
-  | 'vertical'
-  | 'vertical-left'
-  | 'vertical-right'
-  | 'horizontal'
-  | 'inline';
-
-export interface ITopNavHeaderProps {
+export interface TopNavHeaderProps {
   theme: SiderTheme;
   contentWidth?: string;
   menuData?: any[];
@@ -29,4 +22,4 @@ export interface ITopNavHeaderProps {
   onNoticeVisibleChange?: (b: boolean) => void;
 }
 
-export default class TopNavHeader extends React.Component<ITopNavHeaderProps, any> {}
+export default class TopNavHeader extends React.Component<TopNavHeaderProps, any> {}

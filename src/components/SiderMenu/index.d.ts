@@ -1,8 +1,7 @@
 import React from 'react';
+import { SiderTheme } from 'antd/es/Layout/Sider';
 
-export declare type SiderTheme = 'light' | 'dark';
-
-export interface ISiderMenuProps {
+export interface SiderMenuProps {
   isMobile: boolean;
   menuData: any[];
   collapsed: boolean;
@@ -11,4 +10,4 @@ export interface ISiderMenuProps {
   onCollapse: (payload: boolean) => void;
 }
 
-export default class SiderMenuWrapper extends React.Component<ISiderMenuProps, any> {}
+export default class SiderMenuWrapper extends React.Component<SiderMenuProps, any> {}

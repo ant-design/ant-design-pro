@@ -1,14 +1,8 @@
 import React from 'react';
 import * as H from 'history';
+import { SiderTheme, CollapseType } from 'antd/es/Layout/Sider';
 
-export declare type CollapseType = 'clickTrigger' | 'responsive';
-export declare type SiderTheme = 'light' | 'dark';
-export declare type MenuMode =
-  | 'vertical'
-  | 'vertical-left'
-  | 'vertical-right'
-  | 'horizontal'
-  | 'inline';
+import { MenuMode } from 'antd/es/menu';
 
 export interface BaseMenuProps {
   flatMenuKeys?: any[];

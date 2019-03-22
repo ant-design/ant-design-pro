@@ -1,6 +1,5 @@
 import React from 'react';
-
-export declare type SiderTheme = 'light' | 'dark';
+import { SiderTheme } from 'antd/es/Layout/Sider';
 
 export interface SettingModelState {
   navTheme: string | SiderTheme;
