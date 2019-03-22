@@ -1,12 +1,11 @@
 import { Form, Tabs } from 'antd';
-import Button from 'antd/es/button';
 import { WrappedFormUtils } from 'antd/es/form/Form';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styles from './index.less';
 import LoginContext from './loginContext';
-import LoginItem from './LoginItem';
+import LoginItem, { LoginItemProps } from './LoginItem';
 import LoginSubmit from './LoginSubmit';
 import LoginTab from './LoginTab';
 
@@ -27,11 +26,11 @@ interface LoginState {
 
 class Login extends Component<LoginProps, LoginState> {
   public static Tab: typeof LoginTab;
-  public static UserName: typeof LoginItem;
-  public static Password: typeof LoginItem;
-  public static Mobile: typeof LoginItem;
-  public static Captcha: typeof LoginItem;
-  public static Submit: typeof LoginSubmit;
+  public static UserName: React.FC<LoginItemProps>;
+  public static Password: React.FC<LoginItemProps>;
+  public static Mobile: React.FC<LoginItemProps>;
+  public static Captcha: React.FC<LoginItemProps>;
+  public static Submit: React.FC<LoginItemProps>;
 
   static propTypes = {
     className: PropTypes.string,
@@ -47,7 +46,7 @@ class Login extends Component<LoginProps, LoginState> {
     onSubmit: () => {},
   };
 
-  constructor(props) {
+  constructor(props: LoginProps) {
     super(props);
     this.state = {
       type: props.defaultActiveKey,
@@ -153,4 +152,15 @@ Object.keys(LoginItem).forEach(item => {
   Login[item] = LoginItem[item];
 });
 
-export default Form.create()(Login);
+type WrappedLoginProps = { [P in Exclude<keyof LoginProps, 'form'>]?: LoginProps[P] };
+interface WrappedLogin extends WrappedFormUtils {}
+declare class WrappedLogin extends Component<WrappedLoginProps, LoginState> {
+  public static Tab: typeof LoginTab;
+  public static UserName: React.FC<LoginItemProps>;
+  public static Password: React.FC<LoginItemProps>;
+  public static Mobile: React.FC<LoginItemProps>;
+  public static Captcha: React.FC<LoginItemProps>;
+  public static Submit: React.FC<LoginItemProps>;
+}
+
+export default Form.create()(Login) as typeof WrappedLogin;

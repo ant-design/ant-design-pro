@@ -151,7 +151,7 @@ class WrapFormItem extends Component<LoginItemProps, WrapFormItemState> {
   }
 }
 
-const LoginItem = {};
+const LoginItem: { [key: string]: React.FC<LoginItemProps> } = {};
 Object.keys(ItemMap).forEach(key => {
   const item = ItemMap[key];
   LoginItem[key] = props => (
