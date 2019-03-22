@@ -38,7 +38,7 @@ export default {
   'menu.account.settings': 'Configurar Conta',
   'menu.account.trigger': 'Disparar Erro',
   'menu.account.logout': 'Sair',
-  'menu.editor': 'Editor',
+  'menu.editor': 'Graphic Editor',
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',

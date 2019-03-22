@@ -10,6 +10,8 @@ import styles from './index.less';
 import { FormattedMessage } from 'umi/locale';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
+GGEditor.setTrackable(false);
+
 const FlowPage = () => {
   return (
     <PageHeaderWrapper
