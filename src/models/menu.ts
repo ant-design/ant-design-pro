@@ -11,6 +11,9 @@ const { check } = Authorized;
 
 // Conversion router to menu.
 function formatter(data: any[], parentAuthority: string[], parentName: string): any[] {
+  if (!data) {
+    return undefined;
+  }
   return data
     .map(item => {
       if (!item.name || !item.path) {
@@ -18,7 +21,7 @@ function formatter(data: any[], parentAuthority: string[], parentName: string): 
       }
 
       let locale = 'menu';
-      if (parentName) {
+      if (parentName && parentName !== '/') {
         locale = `${parentName}.${item.name}`;
       } else {
         locale = `menu.${item.name}`;
@@ -84,9 +87,12 @@ const filterMenuData: (menuData: SubMenuItem[]) => SubMenuItem[] = menuData => {
 };
 /**
  * 获取面包屑映射
- * @param ISubMenuItem[] menuData 菜单配置
+ * @param SubMenuItem[] menuData 菜单配置
  */
 const getBreadcrumbNameMap: (menuData: SubMenuItem[]) => object = menuData => {
+  if (!menuData) {
+    return {};
+  }
   const routerMap = {};
 
   const flattenMenuData: (data: SubMenuItem[]) => void = data => {
@@ -131,8 +137,8 @@ const MenuModel: MenuModel = {
 
   effects: {
     *getMenuData({ payload }, { put }) {
-      const { routes, authority } = payload;
-      const originalMenuData = memoizeOneFormatter(routes, authority);
+      const { routes, authority, path } = payload;
+      const originalMenuData = memoizeOneFormatter(routes, authority, path);
       const menuData = filterMenuData(originalMenuData);
       const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(originalMenuData);
       yield put({

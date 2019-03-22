@@ -1,11 +1,12 @@
 import React, { createElement } from 'react';
 import { Button } from 'antd';
 import styles from './index.less';
+import Link from 'umi/link';
 
 interface EditableLinkGroupProps {
   links: any[];
-  onAdd: () => void;
-  linkElement: string;
+  onAdd?: () => void;
+  linkElement: typeof Link;
 }
 const EditableLinkGroup: React.FC<EditableLinkGroupProps> = props => {
   const { links = [], linkElement = 'a', onAdd = () => {} } = props;

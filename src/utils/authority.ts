@@ -12,7 +12,7 @@ export function getAuthority(str?: string): string[] {
   if (typeof authority === 'string') {
     return [authority];
   }
-  return authority || ['admin'];
+  return authority;
 }
 
 export function setAuthority(authority: string | string[]): void {

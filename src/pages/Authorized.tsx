@@ -31,6 +31,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
     });
     return authorities;
   };
+
   return (
     <Authorized
       authority={getRouteAuthority(location.pathname, routerData)}

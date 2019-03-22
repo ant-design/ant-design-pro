@@ -1,17 +1,17 @@
 import ActiveChart from '@/components/ActiveChart';
 import { Gauge, Pie, TagCloud, WaterWave } from '@/components/Charts';
 import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
-import CountDown from '@/components/CountDown';
+import React, { Component } from 'react';
+import { connect } from 'dva';
 import NumberInfo from '@/components/NumberInfo';
+import CountDown from '@/components/CountDown';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import Authorized from '@/utils/Authorized';
 import { Card, Col, Row, Tooltip } from 'antd';
-import { connect } from 'dva';
 import numeral from 'numeral';
-import React, { Component } from 'react';
 import { Dispatch } from 'redux';
 import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
-import { IMonitorState } from './models/monitor';
+import { MonitorState } from './models/monitor';
 import styles from './Monitor.less';
 
 const { Secured } = Authorized;
@@ -26,7 +26,7 @@ const havePermissionAsync = new Promise(resolve => {
 
 interface MonitorProps {
   dispatch: Dispatch<any>;
-  monitor: IMonitorState;
+  monitor: MonitorState;
   loading: boolean;
 }
 

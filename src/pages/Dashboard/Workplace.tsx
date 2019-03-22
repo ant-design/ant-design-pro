@@ -1,17 +1,16 @@
+import moment from 'moment';
+import { connect } from 'dva';
+import { Row, Col, Card, List, Avatar } from 'antd';
 import { Radar } from '@/components/Charts';
-import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import EditableLinkGroup from '@/components/EditableLinkGroup';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import { IProjectModelState } from '@/models/project';
-import { IUserModelState } from '@/models/user';
-import { Avatar, Card, Col, List, Row } from 'antd';
-import { connect } from 'dva';
-import moment from 'moment';
+import { ProjectModelState } from '@/models/project';
+import { UserModelState } from '@/models/user';
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
 import Link from 'umi/link';
-import { IActivitiesState } from './models/activities';
-import { IChartModelState } from './models/chart';
+import { ActivitiesState } from './models/activities';
+import { ChartModelState } from './models/chart';
 import styles from './Workplace.less';
 
 const links = [
@@ -43,10 +42,10 @@ const links = [
 
 interface WorkplaceProps {
   dispatch: Dispatch<any>;
-  activities: IActivitiesState;
-  currentUser: IUserModelState['currentUser'];
-  project: IProjectModelState;
-  chart: IChartModelState;
+  activities: ActivitiesState;
+  currentUser: UserModelState['currentUser'];
+  project: ProjectModelState;
+  chart: ChartModelState;
   currentUserLoading: boolean;
   projectLoading: boolean;
   activitiesLoading: boolean;
@@ -268,8 +267,4 @@ class Workplace extends Component<WorkplaceProps> {
   }
 }
 
-export default props => (
-  <AsyncLoadBizCharts>
-    <Workplace {...props} />
-  </AsyncLoadBizCharts>
-);
+export default Workplace;

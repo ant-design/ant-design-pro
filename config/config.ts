@@ -34,7 +34,7 @@ const plugins: IPlugin[] = [
               importWorkboxFrom: 'local',
             },
           }
-        : {},
+        : false,
       ...(!TEST && os.platform() === 'darwin'
         ? {
             dll: {
@@ -75,10 +75,6 @@ export default {
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': primaryColor,
-  },
-  externals: {
-    '@antv/data-set': 'DataSet',
-    bizcharts: 'BizCharts',
   },
   // proxy: {
   //   '/server/api/': {

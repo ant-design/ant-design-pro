@@ -7,7 +7,7 @@ import styles from './index.less';
 const { TabPane } = Tabs;
 
 export interface PageHeaderProps {
-  title?: string | number;
+  title?: React.ReactNode | string | number;
   logo?: React.ReactNode | string;
   action?: React.ReactNode | string;
   content?: React.ReactNode;
@@ -25,7 +25,7 @@ export interface PageHeaderProps {
   home?: React.ReactNode;
   wide?: boolean;
   hiddenBreadcrumb?: boolean;
-  itemRender?: (item: any) => string;
+  itemRender?: (item: any) => React.ReactNode;
   className?: string;
   loading?: boolean;
   location?: Location;

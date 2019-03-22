@@ -9,7 +9,7 @@ import * as H from 'history';
 import React, { Component, Suspense } from 'react';
 import { Dispatch } from 'redux';
 import styles from './Analysis.less';
-import { IChartModelState } from './models/chart';
+import { ChartModelState } from './models/chart';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const SalesCard = React.lazy(() => import('./SalesCard'));
@@ -20,7 +20,7 @@ const OfflineData = React.lazy(() => import('./OfflineData'));
 interface AnalysisProps {
   dispatch: Dispatch<any>;
   location: H.Location;
-  chart: IChartModelState;
+  chart: ChartModelState;
   loading: boolean;
 }
 

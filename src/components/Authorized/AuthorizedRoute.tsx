@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteProps } from 'react-router';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'umi';
 import Authorized from './Authorized';
 import { Authority } from './CheckPermissions';
 
