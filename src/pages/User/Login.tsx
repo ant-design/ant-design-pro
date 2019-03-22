@@ -31,7 +31,7 @@ class LoginPage extends Component<LoginPageProps, LoginPageState> {
     autoLogin: true,
   };
 
-  loginForm: typeof Login;
+  loginForm: InstanceType<typeof Login>;
 
   onTabChange = (type: string) => {
     this.setState({ type });

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { Component } from 'react';
 import styles from './index.less';
 import LoginContext from './loginContext';
-import LoginItem from './LoginItem';
+import LoginItem, { LoginItemProps } from './LoginItem';
 import LoginSubmit from './LoginSubmit';
 import LoginTab from './LoginTab';
 
@@ -25,10 +25,10 @@ interface LoginState {
 
 class Login extends Component<LoginProps, LoginState> {
   public static Tab: typeof LoginTab;
-  public static UserName: typeof LoginItem;
-  public static Password: typeof LoginItem;
-  public static Mobile: typeof LoginItem;
-  public static Captcha: typeof LoginItem;
+  public static UserName: React.FC<LoginItemProps>;
+  public static Password: React.FC<LoginItemProps>;
+  public static Mobile: React.FC<LoginItemProps>;
+  public static Captcha: React.FC<LoginItemProps>;
   public static Submit: typeof LoginSubmit;
 
   static defaultProps = {
@@ -144,4 +144,15 @@ Object.keys(LoginItem).forEach(item => {
   Login[item] = LoginItem[item];
 });
 
-export default Form.create()(Login) as typeof Login;
+type WrappedLoginProps = { [P in Exclude<keyof LoginProps, 'form'>]?: LoginProps[P] };
+interface WrappedLogin extends WrappedFormUtils {}
+declare class WrappedLogin extends Component<WrappedLoginProps, LoginState> {
+  public static Tab: typeof LoginTab;
+  public static UserName: React.FC<LoginItemProps>;
+  public static Password: React.FC<LoginItemProps>;
+  public static Mobile: React.FC<LoginItemProps>;
+  public static Captcha: React.FC<LoginItemProps>;
+  public static Submit: typeof LoginSubmit;
+}
+
+export default Form.create()(Login) as typeof WrappedLogin;
