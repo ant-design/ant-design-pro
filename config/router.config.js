@@ -265,28 +265,28 @@ export default [
               },
             ],
           },
-          //  editor
+        ],
+      },
+      //  editor
+      {
+        name: 'editor',
+        icon: 'highlight',
+        path: '/editor',
+        routes: [
           {
-            name: 'editor',
-            icon: 'highlight',
-            path: '/editor',
-            routes: [
-              {
-                path: '/editor/flow',
-                name: 'flow',
-                component: './Editor/GGEditor/Flow',
-              },
-              {
-                path: '/editor/mind',
-                name: 'mind',
-                component: './Editor/GGEditor/Mind',
-              },
-              {
-                path: '/editor/koni',
-                name: 'koni',
-                component: './Editor/GGEditor/Koni',
-              },
-            ],
+            path: '/editor/flow',
+            name: 'flow',
+            component: './Editor/GGEditor/Flow',
+          },
+          {
+            path: '/editor/mind',
+            name: 'mind',
+            component: './Editor/GGEditor/Mind',
+          },
+          {
+            path: '/editor/koni',
+            name: 'koni',
+            component: './Editor/GGEditor/Koni',
           },
         ],
       },
