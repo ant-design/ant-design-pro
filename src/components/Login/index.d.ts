@@ -13,7 +13,8 @@ export interface LoginProps {
   className?: string;
 }
 
-export default class Login extends React.Component<LoginProps, any> {
+interface Login extends WrappedFormUtils {}
+declare class Login extends React.Component<LoginProps, any> {
   public static Tab: typeof LoginTab;
   public static UserName: React.FC<LoginItemProps>;
   public static Password: React.FC<LoginItemProps>;
@@ -21,3 +22,4 @@ export default class Login extends React.Component<LoginProps, any> {
   public static Captcha: React.FC<LoginItemProps>;
   public static Submit: typeof LoginSubmit;
 }
+export default Login;
