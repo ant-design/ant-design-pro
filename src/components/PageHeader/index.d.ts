@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { Location } from 'history';
+
 export interface PageHeaderProps {
-  title?: string | number;
+  title?: React.ReactNode | string | number;
   logo?: React.ReactNode | string;
   action?: React.ReactNode | string;
   content?: React.ReactNode;
@@ -18,12 +20,12 @@ export interface PageHeaderProps {
   home?: React.ReactNode;
   wide?: boolean;
   hiddenBreadcrumb?: boolean;
-  itemRender?: (item: any) => string;
   className?: string;
   loading?: boolean;
-  location?: Location;
-  breadcrumbNameMap?: object;
   breadcrumbSeparator?: React.ReactNode;
+  location?: Location;
+  itemRender: (menuItem: any) => React.ReactNode;
+  breadcrumbNameMap?: any;
 }
 
 export default class PageHeader extends React.Component<PageHeaderProps, any> {}
