@@ -1,22 +1,20 @@
 import React from 'react';
 import { Card } from 'antd';
 import { NodePanel, EdgePanel, GroupPanel, MultiPanel, CanvasPanel, DetailPanel } from 'gg-editor';
-import NodeDetail from './NodeDetail';
-import EdgeDetail from './EdgeDetail';
-import GroupDetail from './GroupDetail';
+import DetailForm from './DetailForm';
 import styles from './index.less';
 
 const FlowDetailPanel = () => {
   return (
     <DetailPanel className={styles.detailPanel}>
       <NodePanel>
-        <NodeDetail />
+        <DetailForm type="node" />
       </NodePanel>
       <EdgePanel>
-        <EdgeDetail />
+        <DetailForm type="edge" />
       </EdgePanel>
       <GroupPanel>
-        <GroupDetail />
+        <DetailForm type="group" />
       </GroupPanel>
       <MultiPanel>
         <Card type="inner" size="small" title="Multi Select" bordered={false} />
