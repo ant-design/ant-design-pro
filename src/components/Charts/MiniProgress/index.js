@@ -1,11 +1,21 @@
 import React from 'react';
 import { Tooltip } from 'antd';
+import { formatMessage } from 'umi/locale';
 
 import styles from './index.less';
 
-const MiniProgress = ({ target, color = 'rgb(19, 194, 194)', strokeWidth, percent }) => (
+const MiniProgress = ({
+  targetLabel,
+  target,
+  color = 'rgb(19, 194, 194)',
+  strokeWidth,
+  percent,
+}) => (
   <div className={styles.miniProgress}>
-    <Tooltip title={`目标值: ${target}%`}>
+    <Tooltip
+      title={`${targetLabel ||
+        formatMessage({ id: 'component.miniProgress.tooltipDefault' }).concat(': ')} ${target}%`}
+    >
       <div className={styles.target} style={{ left: target ? `${target}%` : null }}>
         <span style={{ backgroundColor: color || null }} />
         <span style={{ backgroundColor: color || null }} />
