@@ -1,6 +1,6 @@
 import React from 'react';
 
-export declare type SizeType = number | 'small' | 'default' | 'large' | undefined;
+export declare type SizeType = number | 'small' | 'default' | 'large';
 
 export interface AvatarItemProps {
   tips: React.ReactNode;
