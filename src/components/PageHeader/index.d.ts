@@ -1,23 +1,29 @@
 import * as React from 'react';
-export interface IPageHeaderProps {
-  title?: React.ReactNode | string;
+export interface PageHeaderProps {
+  title?: string | number;
   logo?: React.ReactNode | string;
   action?: React.ReactNode | string;
   content?: React.ReactNode;
   extraContent?: React.ReactNode;
   routes?: any[];
   params?: any;
-  breadcrumbList?: Array<{ title: React.ReactNode; href?: string }>;
+  breadcrumbList?: Array<{ title: string | number; href?: string }>;
   tabList?: Array<{ key: string; tab: React.ReactNode }>;
   tabActiveKey?: string;
   tabDefaultActiveKey?: string;
   onTabChange?: (key: string) => void;
   tabBarExtraContent?: React.ReactNode;
-  linkElement?: React.ReactNode;
+  linkElement?: React.ReactNode | string;
   style?: React.CSSProperties;
   home?: React.ReactNode;
   wide?: boolean;
   hiddenBreadcrumb?: boolean;
+  itemRender?: (item: any) => string;
+  className?: string;
+  loading?: boolean;
+  location?: Location;
+  breadcrumbNameMap?: object;
+  breadcrumbSeparator?: React.ReactNode;
 }
 
-export default class PageHeader extends React.Component<IPageHeaderProps, any> {}
+export default class PageHeader extends React.Component<PageHeaderProps, any> {}
