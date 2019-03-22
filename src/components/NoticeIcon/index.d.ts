@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import NoticeIconTab, { NoticeIconData } from './NoticeIconTab';
 
 export interface NoticeIconProps {

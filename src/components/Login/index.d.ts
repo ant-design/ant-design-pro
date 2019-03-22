@@ -1,5 +1,5 @@
 import Button from 'antd/lib/button';
-import * as React from 'react';
+import React from 'react';
 import LoginItem, { LoginItemProps, LoginItemType } from './LoginItem';
 import LoginTab from './LoginTab';
 import { WrappedFormUtils } from 'antd/es/form/Form';

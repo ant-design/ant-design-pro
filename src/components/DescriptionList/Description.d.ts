@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { ColProps } from 'antd/es/col';
 
 export interface DescriptionProps extends ColProps {

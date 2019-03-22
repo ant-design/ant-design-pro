@@ -1,5 +1,5 @@
 import { SkeletonProps } from 'antd/lib/skeleton';
-import * as React from 'react';
+import React from 'react';
 
 export interface NoticeIconData {
   avatar?: string | React.ReactNode;

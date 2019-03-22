@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AuthorizedRoute, { authority } from './AuthorizedRoute';
 export type IReactComponent<P = any> =
   | React.StatelessComponent<P>

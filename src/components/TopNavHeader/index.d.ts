@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 export declare type CollapseType = 'clickTrigger' | 'responsive';
 export declare type SiderTheme = 'light' | 'dark';

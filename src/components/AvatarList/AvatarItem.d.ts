@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 export declare type SizeType = number | 'small' | 'default' | 'large' | undefined;
 

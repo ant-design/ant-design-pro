@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 export interface HeaderSearchProps {
   placeholder?: string;
   dataSource?: string[];

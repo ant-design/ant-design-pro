@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { PageHeaderProps } from './index';
 
 export default class BreadcrumbView extends React.Component<PageHeaderProps, any> {}

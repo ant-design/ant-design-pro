@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Description, { DescriptionProps } from './Description';
 
 export interface DescriptionListProps {

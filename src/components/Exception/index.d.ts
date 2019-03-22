@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as H from 'history';
 
 export interface ExceptionProps<

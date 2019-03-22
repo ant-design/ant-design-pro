@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { WrappedFormUtils } from 'antd/es/form/Form';
 import ItemMap from './map';
 import { Omit } from 'antd/es/_util/type';

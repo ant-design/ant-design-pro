@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { TooltipProps } from 'antd/lib/tooltip';
 
 export interface EllipsisTooltipProps extends TooltipProps {
