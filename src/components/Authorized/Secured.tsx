@@ -9,15 +9,26 @@ import { AnyComponent } from './PromiseRender';
  */
 const Exception403: React.FC = () => <Exception type="403" />;
 
+export const isComponentClass = (component: any) => {
+  if (!component) return false;
+  const proto = Object.getPrototypeOf(component);
+  if (proto === React.Component || proto === Function.prototype) return true;
+  return isComponentClass(proto);
+};
+
 // Determine whether the incoming component has been instantiated
 // AuthorizedRoute is already instantiated
 // Authorized  render is already instantiated, children is no instantiated
 // Secured is not instantiated
 const checkIsInstantiation = (target: AnyComponent | React.ReactNode): AnyComponent => {
-  if (!React.isValidElement(target)) {
-    return target as AnyComponent;
+  if (isComponentClass(target)) {
+    const Target: React.ComponentClass = target as any;
+    return (props: any) => <Target {...props} />;
   }
-  return () => target;
+  if (React.isValidElement(target)) {
+    return (props => React.cloneElement(target, props)) as React.FC;
+  }
+  return (() => target) as React.FC;
 };
 
 /**
@@ -46,9 +57,9 @@ const authorize = (authority: Authority, error?: React.ReactNode) => {
   if (!authority) {
     throw new Error('authority is required');
   }
-  return function decideAuthority(target: AnyComponent) {
+  return function decideAuthority<T>(target: AnyComponent | T): T {
     const component = CheckPermissions(authority, target, classError || Exception403);
-    return checkIsInstantiation(component);
+    return checkIsInstantiation(component) as any;
   };
 };
 

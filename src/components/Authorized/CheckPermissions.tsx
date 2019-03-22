@@ -41,7 +41,7 @@ const checkPermissions = (
     return Exception;
   }
   // string 处理
-  else if (typeof authority === 'string') {
+  if (typeof authority === 'string') {
     if (Array.isArray(currentAuthority)) {
       if (currentAuthority.some(item => authority === item)) {
         return target;
@@ -52,17 +52,18 @@ const checkPermissions = (
     return Exception;
   }
   // Promise 处理
-  else if (authority instanceof Promise) {
+  if (authority instanceof Promise) {
     return <PromiseRender ok={target} error={Exception} promise={authority} />;
   }
   // Function 处理
-  else if (typeof authority === 'function') {
+  if (typeof authority === 'function') {
     try {
       const bool = authority(currentAuthority);
       // 函数执行后返回值是 Promise
       if (bool instanceof Promise) {
         return <PromiseRender ok={target} error={Exception} promise={bool} />;
-      } else if (bool) {
+      }
+      if (bool) {
         return target;
       }
       return Exception;
