@@ -39,6 +39,7 @@
     "classnames": "^2.2.6",
     "dva": "^2.4.1",
     "enquire-js": "^0.2.1",
+    "gg-editor": "^2.0.2",
     "hash.js": "^1.1.7",
     "lodash": "^4.17.11",
     "lodash-decorators": "^6.0.1",
