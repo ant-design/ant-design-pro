@@ -34,6 +34,6 @@ module.exports = {
     'linebreak-style': 0,
   },
   settings: {
-    polyfills: ['fetch', 'Promise', 'url', 'object-assign'],
+    polyfills: ['fetch', 'promises', 'url', 'object-assign'],
   },
 };
