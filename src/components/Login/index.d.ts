@@ -10,7 +10,6 @@ export interface LoginProps {
   onTabChange?: (key: string) => void;
   style?: React.CSSProperties;
   onSubmit?: (error: any, values: any) => void;
-  form: WrappedFormUtils;
   className?: string;
 }
 
