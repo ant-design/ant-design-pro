@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import { formatMessage } from 'umi/locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 
 import styles from './index.less';
 
