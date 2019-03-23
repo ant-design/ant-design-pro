@@ -3,7 +3,7 @@ import Yuan from '@/utils/Yuan';
 import { Card, Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/es/radio/interface';
 import React, { memo } from 'react';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Analysis.less';
 
 interface ProportionSalesProps {

@@ -7,7 +7,7 @@ import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import moment from 'moment';
 import React, { Component } from 'react';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import { RuleModelState } from './models/rule';
 import styles from './Projects.less';
 

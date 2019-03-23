@@ -10,7 +10,7 @@ import Authorized from '@/utils/Authorized';
 import { Card, Col, Row, Tooltip } from 'antd';
 import numeral from 'numeral';
 import { Dispatch } from 'redux';
-import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import { MonitorState } from './models/monitor';
 import styles from './Monitor.less';
 

@@ -14,7 +14,7 @@ import {
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import React, { Component } from 'react';
-import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './style.less';
 
 const FormItem = Form.Item;

@@ -4,7 +4,7 @@ import Yuan from '@/utils/Yuan';
 import { Col, Icon, Row, Tooltip } from 'antd';
 import numeral from 'numeral';
 import React, { memo } from 'react';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Analysis.less';
 
 interface TopColResponsiveProps {

@@ -1,7 +1,7 @@
 import { Icon, Menu } from 'antd';
 import classNames from 'classnames';
 import React from 'react';
-import { formatMessage, getLocale, setLocale } from 'umi-plugin-locale';
+import { formatMessage, getLocale, setLocale } from 'umi-plugin-react/locale';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 

@@ -2,7 +2,7 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Result from '@/components/Result';
 import { Button, Card, Col, Icon, Row, Steps } from 'antd';
 import React, { Fragment } from 'react';
-import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
 const { Step } = Steps;
 

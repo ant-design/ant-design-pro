@@ -5,7 +5,7 @@ import { connect } from 'dva';
 import * as H from 'history';
 import React, { Component } from 'react';
 import { match } from 'react-router';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
 import styles from './Info.less';
 

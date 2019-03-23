@@ -6,7 +6,7 @@ import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import numeral from 'numeral';
 import React, { Component } from 'react';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Applications.less';
 import { RuleModelState } from './models/rule';
 

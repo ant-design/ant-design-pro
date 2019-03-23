@@ -2,7 +2,7 @@ import PageHeader from '@/components/PageHeader';
 import MenuContext from '@/layouts/MenuContext';
 import { connect } from 'dva';
 import React from 'react';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
 import GridContent from './GridContent';
 import styles from './index.less';

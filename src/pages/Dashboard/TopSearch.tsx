@@ -5,7 +5,7 @@ import { Card, Col, Icon, Row, Table, Tooltip } from 'antd';
 import { ColumnProps } from 'antd/es/table/interface';
 import numeral from 'numeral';
 import React, { memo } from 'react';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Analysis.less';
 
 const columns: Array<ColumnProps<any>> = [

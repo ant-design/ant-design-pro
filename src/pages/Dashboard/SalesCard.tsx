@@ -3,7 +3,7 @@ import { Card, Col, DatePicker, Row, Tabs } from 'antd';
 import { RangePickerValue } from 'antd/es/date-picker/interface';
 import numeral from 'numeral';
 import React, { memo } from 'react';
-import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Analysis.less';
 
 const { RangePicker } = DatePicker;

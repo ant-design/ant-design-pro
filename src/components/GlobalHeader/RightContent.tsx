@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage, formatMessage } from 'umi-plugin-locale';
+import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import moment from 'moment';

@@ -2,7 +2,7 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Result from '@/components/Result';
 import { Button, Card, Icon } from 'antd';
 import React, { Fragment } from 'react';
-import { formatMessage, FormattedMessage } from 'umi-plugin-locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
 const extra = (
   <Fragment>

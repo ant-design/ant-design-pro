@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 import { connect } from 'dva';
 import React, { Component, Fragment } from 'react';
 import DocumentTitle from 'react-document-title';
-import { formatMessage } from 'umi-plugin-locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';

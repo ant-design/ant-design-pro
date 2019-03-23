@@ -5,7 +5,7 @@ import { Button, Card, Col, Form, Icon, List, Row, Select, Tag } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import React, { Component, Fragment } from 'react';
-import { FormattedMessage } from 'umi-plugin-locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Articles.less';
 import { RuleModelState } from './models/rule';
 
