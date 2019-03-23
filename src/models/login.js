@@ -33,8 +33,7 @@ export default {
               redirect = redirect.substr(redirect.indexOf('#') + 1);
             }
           } else {
-            window.location.href = redirect;
-            return;
+            redirect = null;
           }
         }
         yield put(routerRedux.replace(redirect || '/'));
