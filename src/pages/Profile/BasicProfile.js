@@ -41,9 +41,9 @@ const progressColumns = [
   },
 ];
 
-@connect(({ profile, loading }) => ({
-  profile,
-  loading: loading.effects['profile/fetchBasic'],
+@connect(({ orderDetail, loading }) => ({
+  orderDetail,
+  loading: loading,
 }))
 class BasicProfile extends Component {
   componentDidMount() {
@@ -51,14 +51,14 @@ class BasicProfile extends Component {
     const { params } = match;
 
     dispatch({
-      type: 'profile/fetchBasic',
-      payload: params.id || '1000000000',
+      type: 'orderDetail/fetch',
+      payload:'1000000000',
     });
   }
 
   render() {
-    const { profile = {}, loading } = this.props;
-    const { basicGoods = [], basicProgress = [], userInfo = {}, application = {} } = profile;
+    const { orderDetail = {}, loading } = this.props;
+    const { basicGoods = [], basicProgress = [], userInfo = {}, application = {} } = orderDetail;
     let goodsData = [];
     if (basicGoods.length) {
       let num = 0;

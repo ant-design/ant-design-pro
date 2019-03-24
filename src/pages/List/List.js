@@ -25,7 +25,7 @@ class SearchList extends Component {
 
   handleFormSubmit = value => {
     // eslint-disable-next-line
-    console.log(value);
+    // console.log(value);
   };
 
   render() {

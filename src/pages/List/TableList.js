@@ -194,17 +194,17 @@ class UpdateForm extends PureComponent {
       ];
     }
     return [
-      <FormItem key="name" {...this.formLayout} label="规则名称">
+      <FormItem key="name" {...this.formLayout} label="Name">
         {form.getFieldDecorator('name', {
-          rules: [{ required: true, message: '请输入规则名称！' }],
+          rules: [{ required: true, message: 'Please enter your name' }],
           initialValue: formVals.name,
-        })(<Input placeholder="请输入" />)}
+        })(<Input placeholder="Name" />)}
       </FormItem>,
-      <FormItem key="desc" {...this.formLayout} label="规则描述">
+      <FormItem key="desc" {...this.formLayout} label="Description">
         {form.getFieldDecorator('desc', {
-          rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }],
+          rules: [{ required: true, message: 'Description', min: 5 }],
           initialValue: formVals.desc,
-        })(<TextArea rows={4} placeholder="请输入至少五个字符" />)}
+        })(<TextArea rows={4} placeholder="Description" />)}
       </FormItem>,
     ];
   };
@@ -274,9 +274,9 @@ class UpdateForm extends PureComponent {
 }
 
 /* eslint react/no-multi-comp:0 */
-@connect(({ rule, loading }) => ({
-  rule,
-  loading: loading.models.rule,
+@connect(({ product, loading }) => ({
+  product,
+  loading: loading.models.product,
 }))
 @Form.create()
 class TableList extends PureComponent {
@@ -291,60 +291,39 @@ class TableList extends PureComponent {
 
   columns = [
     {
-      title: '规则名称',
+      title: 'Product Code',
+      dataIndex: 'prd_code',
+    },
+    {
+      title: 'Product Name',
       dataIndex: 'name',
       render: text => <a onClick={() => this.previewItem(text)}>{text}</a>,
     },
+
     {
-      title: '描述',
-      dataIndex: 'desc',
-    },
-    {
-      title: '服务调用次数',
-      dataIndex: 'callNo',
+      title: 'DVT',
+      dataIndex: 'dvt',
       sorter: true,
-      render: val => `${val} 万`,
-      // mark to display a total number
+
       needTotal: true,
     },
     {
-      title: '状态',
-      dataIndex: 'status',
-      filters: [
-        {
-          text: status[0],
-          value: 0,
-        },
-        {
-          text: status[1],
-          value: 1,
-        },
-        {
-          text: status[2],
-          value: 2,
-        },
-        {
-          text: status[3],
-          value: 3,
-        },
-      ],
-      render(val) {
-        return <Badge status={statusMap[val]} text={status[val]} />;
-      },
+      title: 'Note',
+      dataIndex: 'note',
     },
     {
-      title: '上次调度时间',
+      title: 'Updated At',
       dataIndex: 'updatedAt',
       sorter: true,
       render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
     },
     {
-      title: '操作',
+      title: 'Action',
       render: (text, record) => (
         <Fragment>
-          <a onClick={() => this.handleUpdateModalVisible(true, record)}>配置</a>
+          <a onClick={() => this.handleUpdateModalVisible(true, record)}>Edit</a>
           <Divider type="vertical" />
-          <a href="">订阅警报</a>
+          <a href="">Delete</a>
         </Fragment>
       ),
     },
@@ -353,7 +332,7 @@ class TableList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'rule/fetch',
+      type: 'product/fetch',
     });
   }
 
@@ -378,7 +357,7 @@ class TableList extends PureComponent {
     }
 
     dispatch({
-      type: 'rule/fetch',
+      type: 'product/fetch',
       payload: params,
     });
   };
@@ -394,7 +373,7 @@ class TableList extends PureComponent {
       formValues: {},
     });
     dispatch({
-      type: 'rule/fetch',
+      type: 'product/fetch',
       payload: {},
     });
   };
@@ -414,7 +393,7 @@ class TableList extends PureComponent {
     switch (e.key) {
       case 'remove':
         dispatch({
-          type: 'rule/remove',
+          type: 'product/remove',
           payload: {
             key: selectedRows.map(row => row.key),
           },
@@ -454,7 +433,7 @@ class TableList extends PureComponent {
       });
 
       dispatch({
-        type: 'rule/fetch',
+        type: 'product/fetch',
         payload: values,
       });
     });
@@ -476,7 +455,7 @@ class TableList extends PureComponent {
   handleAdd = fields => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'rule/add',
+      type: 'product/add',
       payload: {
         desc: fields.desc,
       },
@@ -490,7 +469,7 @@ class TableList extends PureComponent {
     const { dispatch } = this.props;
     const { formValues } = this.state;
     dispatch({
-      type: 'rule/update',
+      type: 'product/update',
       payload: {
         query: formValues,
         body: {
@@ -513,16 +492,16 @@ class TableList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="规则名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
+            <FormItem label="Name">
+              {getFieldDecorator('name')(<Input placeholder="Name" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
+            <FormItem label="Status">
               {getFieldDecorator('status')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
+                <Select placeholder="hello" style={{ width: '100%' }}>
+                  <Option value="0">0</Option>
+                  <Option value="1">1</Option>
                 </Select>
               )}
             </FormItem>
@@ -530,13 +509,13 @@ class TableList extends PureComponent {
           <Col md={8} sm={24}>
             <span className={styles.submitButtons}>
               <Button type="primary" htmlType="submit">
-                查询
+                Search
               </Button>
               <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
-                重置
+                Reset
               </Button>
               <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-                展开 <Icon type="down" />
+                More <Icon type="down" />
               </a>
             </span>
           </Col>
@@ -553,12 +532,12 @@ class TableList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="规则名称">
+            <FormItem label="Name">
               {getFieldDecorator('name')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
+            <FormItem label="Status">
               {getFieldDecorator('status')(
                 <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
@@ -626,9 +605,13 @@ class TableList extends PureComponent {
 
   render() {
     const {
-      rule: { data },
+      product: { data },
       loading,
     } = this.props;
+    if (loading || data == undefined || data.length == 0) {
+      return [];
+    }
+    // console.log('ok', this.props);
     const { selectedRows, modalVisible, updateModalVisible, stepFormValues } = this.state;
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
@@ -646,13 +629,13 @@ class TableList extends PureComponent {
       handleUpdate: this.handleUpdate,
     };
     return (
-      <PageHeaderWrapper title="查询表格">
+      <PageHeaderWrapper title="Products">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
             <div className={styles.tableListOperator}>
               <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>
-                新建
+                New Product
               </Button>
               {selectedRows.length > 0 && (
                 <span>
@@ -668,7 +651,7 @@ class TableList extends PureComponent {
             <StandardTable
               selectedRows={selectedRows}
               loading={loading}
-              data={data}
+              data={data.data}
               columns={this.columns}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}

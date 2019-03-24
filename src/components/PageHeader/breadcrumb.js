@@ -59,6 +59,7 @@ export default class BreadcrumbView extends PureComponent {
     return (
       <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
         {breadcrumbList.map(item => {
+          
           const title = itemRender ? itemRender(item) : item.title;
           return (
             <Breadcrumb.Item key={item.title}>

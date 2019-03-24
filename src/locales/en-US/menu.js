@@ -38,4 +38,13 @@ export default {
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
+  'menu.sales':'Quản Lý Bán Hàng',
+  'menu.sales.product':'Sản Phẩm',
+  'menu.sales.orders':'Đơn Hàng',
+  'menu.sales.orderdetail':'Chi Tiết Đơn Hàng',
+  'menu.import':'Quản Lý Bán Hàng',
+  'menu.import.products':'Sản Phẩm',
+  'menu.import.orders':'Đơn Hàng',
+  'menu.sales.orders.orderdetail':'Chi Tiết Đơn Hàng',
+  'menu.sales.customers':'Khách Hàng',
 };

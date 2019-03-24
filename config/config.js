@@ -18,7 +18,7 @@ const plugins = [
       },
       locale: {
         enable: true, // default false
-        default: 'zh-CN', // default zh-CN
+        default: 'en-US', // default zh-CN
         baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
       },
       dynamicImport: {
@@ -53,7 +53,7 @@ if (APP_TYPE === 'site') {
   plugins.push([
     'umi-plugin-ga',
     {
-      code: 'UA-72788897-6',
+      // code: 'UA-72788897-6',
     },
   ]);
 }
@@ -75,13 +75,14 @@ export default {
   theme: {
     'primary-color': primaryColor,
   },
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
+  proxy: {
+    '/api': {
+      target: 'https://localhost:3009',
+      changeOrigin: true,
+      secure: false,
+      pathRewrite: { '^/api': '' },
+    },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,

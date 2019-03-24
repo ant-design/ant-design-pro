@@ -65,13 +65,14 @@ export default class GlobalHeaderRight extends PureComponent {
 
   render() {
     const {
-      currentUser,
       fetchingNotices,
       onNoticeVisibleChange,
       onMenuClick,
       onNoticeClear,
       theme,
     } = this.props;
+    
+    const currentUser = this.props.login.currentUser || {};
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="userCenter">

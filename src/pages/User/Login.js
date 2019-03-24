@@ -82,10 +82,12 @@ class LoginPage extends Component {
               !submitting &&
               this.renderMessage(formatMessage({ id: 'app.login.message-invalid-credentials' }))}
             <UserName
-              name="userName"
-              placeholder={`${formatMessage({ id: 'app.login.userName' })}: admin or user`}
+              name="email"
+              placeholder={`${formatMessage({ id: 'app.login.userName' })}: admin@thousandhands.com`}
+              defaultValue='admin@thousandhands.com'
               rules={[
                 {
+                  
                   required: true,
                   message: formatMessage({ id: 'validation.userName.required' }),
                 },
@@ -93,9 +95,11 @@ class LoginPage extends Component {
             />
             <Password
               name="password"
-              placeholder={`${formatMessage({ id: 'app.login.password' })}: ant.design`}
+              placeholder={`${formatMessage({ id: 'app.login.password' })}: 123456`}
+              defaultValue ='123456'
               rules={[
                 {
+                  initialValue: 'hello@123',
                   required: true,
                   message: formatMessage({ id: 'validation.password.required' }),
                 },

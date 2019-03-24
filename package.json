@@ -34,6 +34,7 @@
     "@antv/data-set": "^0.10.1",
     "@babel/runtime": "^7.3.1",
     "antd": "^3.13.0",
+    "atob": "^2.1.2",
     "bizcharts": "^3.4.3",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
@@ -58,11 +59,11 @@
     "react-dom": "^16.7.0",
     "react-fittext": "^1.0.0",
     "react-media": "^1.9.2",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "5.0.0"
   },
   "devDependencies": {
-    "@types/react": "^16.8.1",
-    "@types/react-dom": "^16.0.11",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.3",
     "antd-pro-merge-less": "^1.0.0",
     "antd-theme-webpack-plugin": "^1.2.0",
     "babel-eslint": "^10.0.1",
@@ -99,9 +100,9 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
-    "umi": "^2.4.4",
+    "umi": "^2.6.8",
     "umi-plugin-ga": "^1.1.3",
-    "umi-plugin-react": "^1.4.2"
+    "umi-plugin-react": "^1.7.2"
   },
   "optionalDependencies": {
     "puppeteer": "^1.12.1"
@@ -128,10 +129,5 @@
     "src/**/*.less",
     "config/**/*.js*",
     "scripts/**/*.js"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
-  }
+  ]
 }

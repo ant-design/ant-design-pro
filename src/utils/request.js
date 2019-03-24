@@ -3,6 +3,7 @@ import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
 import { isAntdPro } from './utils';
+import token from './token';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -81,6 +82,14 @@ export default function request(url, option) {
   const defaultOptions = {
     credentials: 'include',
   };
+  const accessToken = token.get();
+
+  if (options.headers === undefined) {
+    options.headers = {};
+  }
+  if (accessToken) {
+    options.headers.Authorization = `Bearer ${accessToken}`;
+  }
   const newOptions = { ...defaultOptions, ...options };
   if (
     newOptions.method === 'POST' ||
@@ -148,8 +157,8 @@ export default function request(url, option) {
         router.push('/exception/500');
         return;
       }
-      if (status >= 404 && status < 422) {
-        router.push('/exception/404');
-      }
+      // if (status >= 404 && status < 422) {
+      //   router.push('/exception/404');
+      // }
     });
 }

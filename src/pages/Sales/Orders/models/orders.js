@@ -1,25 +1,25 @@
-import { queryRule, removeRule, addRule, updateRule } from '@/services/api';
+import { querySaleOrders, querySaleOrderDetail, addSaleOrder, removeSaleOrder, updateSaleOrder } from '@/services/api';
 
 export default {
-  namespace: 'rule',
+  namespace: 'saleOrder',
 
   state: {
-    data: {
-      list: [],
-      pagination: {},
-    },
+    // data: {
+    //   list: [],
+    //   pagination: {},
+    // },
   },
 
   effects: {
     *fetch({ payload }, { call, put }) {
-      const response = yield call(queryRule, payload);
+      const response = yield call(querySaleOrders, payload);
       yield put({
         type: 'save',
         payload: response,
       });
     },
     *add({ payload, callback }, { call, put }) {
-      const response = yield call(addRule, payload);
+      const response = yield call(addSaleOrder, payload);
       yield put({
         type: 'save',
         payload: response,
@@ -27,7 +27,7 @@ export default {
       if (callback) callback();
     },
     *remove({ payload, callback }, { call, put }) {
-      const response = yield call(removeRule, payload);
+      const response = yield call(removeSaleOrder, payload);
       yield put({
         type: 'save',
         payload: response,
@@ -35,12 +35,20 @@ export default {
       if (callback) callback();
     },
     *update({ payload, callback }, { call, put }) {
-      const response = yield call(updateRule, payload);
+      const response = yield call(updateSaleOrder, payload);
       yield put({
         type: 'save',
         payload: response,
       });
       if (callback) callback();
+    },
+    *detail({ payload }, { call, put }) {
+      // console.log(payload)
+      const response = yield call(querySaleOrderDetail, payload);
+      yield put({
+        type: 'save',
+        payload: response,
+      });
     },
   },
 

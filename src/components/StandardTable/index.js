@@ -64,12 +64,13 @@ class StandardTable extends PureComponent {
   render() {
     const { selectedRowKeys, needTotalList } = this.state;
     const { data = {}, rowKey, ...rest } = this.props;
-    const { list = [], pagination } = data;
-
+    // const { pagination } = data;
+    const list = data;
+    // console.log(data);
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
-      ...pagination,
+      // ...pagination,
     };
 
     const rowSelection = {
@@ -86,18 +87,18 @@ class StandardTable extends PureComponent {
           <Alert
             message={
               <Fragment>
-                已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
+                Choose <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> in&nbsp;&nbsp;
                 {needTotalList.map(item => (
                   <span style={{ marginLeft: 8 }} key={item.dataIndex}>
                     {item.title}
-                    总计&nbsp;
+                    total&nbsp;
                     <span style={{ fontWeight: 600 }}>
                       {item.render ? item.render(item.total) : item.total}
                     </span>
                   </span>
                 ))}
                 <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>
-                  清空
+                  Clear
                 </a>
               </Fragment>
             }
