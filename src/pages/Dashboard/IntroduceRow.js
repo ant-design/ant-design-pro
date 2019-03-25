@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Row, Col, Icon, Tooltip } from 'antd';
-import { FormattedMessage } from 'umi/locale';
+import { FormattedMessage, formatMessage } from 'umi/locale';
 import styles from './Analysis.less';
 import { ChartCard, MiniArea, MiniBar, MiniProgress, Field } from '@/components/Charts';
 import Trend from '@/components/Trend';
@@ -135,7 +135,15 @@ const IntroduceRow = memo(({ loading, visitData }) => (
         }
         contentHeight={46}
       >
-        <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
+        <MiniProgress
+          percent={78}
+          strokeWidth={8}
+          target={80}
+          targetLabel={`${formatMessage({ id: 'component.miniProgress.tooltipDefault' }).concat(
+            ': '
+          )}80%`}
+          color="#13C2C2"
+        />
       </ChartCard>
     </Col>
   </Row>
