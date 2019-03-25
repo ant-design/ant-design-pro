@@ -1,12 +1,12 @@
 import ArticleListContent from '@/components/ArticleListContent';
-import { IListModelState } from '@/models/list';
+import { ListModelState } from '@/models/list';
 import { Icon, List, Tag } from 'antd';
 import { connect } from 'dva';
 import React from 'react';
 import styles from './Articles.less';
 
 interface ArticlesProps {
-  list: IListModelState;
+  list: ListModelState;
 }
 
 const Center: React.FC<ArticlesProps> = props => {

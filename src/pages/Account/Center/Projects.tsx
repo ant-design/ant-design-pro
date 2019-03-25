@@ -1,5 +1,5 @@
 import { AvatarList, AvatarListItem } from '@/components/AvatarList';
-import { IListModelState } from '@/models/list';
+import { ListModelState } from '@/models/list';
 import { Card, List } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
@@ -7,7 +7,7 @@ import React from 'react';
 import stylesProjects from './Projects.less';
 
 interface ProjectsProps {
-  list: IListModelState;
+  list: ListModelState;
 }
 
 const Projects: React.FC<ProjectsProps> = props => {

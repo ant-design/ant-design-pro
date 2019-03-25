@@ -1,5 +1,5 @@
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
-import { IProjectModelState } from '@/models/project';
+import { ProjectModelState } from '@/models/project';
 import { Avatar, Card, Col, Divider, Icon, Input, Row, Spin, Tag } from 'antd';
 import InputProps from 'antd/es/input';
 import { connect } from 'dva';
@@ -23,7 +23,7 @@ interface CenterProps {
     tags?: any[];
   };
   currentUserLoading: boolean;
-  project: IProjectModelState;
+  project: ProjectModelState;
   projectLoading: boolean;
   dispatch: Dispatch<any>;
   match: match;

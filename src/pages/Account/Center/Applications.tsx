@@ -1,4 +1,4 @@
-import { IListModelState } from '@/models/list';
+import { ListModelState } from '@/models/list';
 import { formatWan } from '@/utils/utils';
 import { Avatar, Card, Dropdown, Icon, List, Menu, Tooltip } from 'antd';
 import { connect } from 'dva';
@@ -7,7 +7,7 @@ import React from 'react';
 import stylesApplications from './Applications.less';
 
 interface ApplicationsProps {
-  list: IListModelState;
+  list: ListModelState;
 }
 
 const Center: React.FC<ApplicationsProps> = props => {
