@@ -1,8 +1,8 @@
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import Result from '@/components/Result';
-import { Button, Card, Col, Icon, Row, Steps } from 'antd';
 import React, { Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
+import { Button, Row, Col, Icon, Steps, Card } from 'antd';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Result from '@/components/Result';
 
 const { Step } = Steps;
 

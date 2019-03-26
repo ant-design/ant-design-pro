@@ -1,11 +1,11 @@
 import { MiniArea } from '@/components/Charts';
 import NumberInfo from '@/components/NumberInfo';
+import React, { memo } from 'react';
+import { Row, Col, Table, Tooltip, Card, Icon } from 'antd';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import Trend from '@/components/Trend';
-import { Card, Col, Icon, Row, Table, Tooltip } from 'antd';
 import { ColumnProps } from 'antd/es/table/interface';
 import numeral from 'numeral';
-import React, { memo } from 'react';
-import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Analysis.less';
 
 const columns: Array<ColumnProps<any>> = [

@@ -8,16 +8,18 @@ interface MiniProgressProps {
   strokeWidth?: number;
   percent?: number;
   style?: React.CSSProperties;
+  targetLabel?: string;
 }
 
 const MiniProgress: React.FC<MiniProgressProps> = ({
+  targetLabel,
   target,
   color = 'rgb(19, 194, 194)',
   strokeWidth,
   percent,
 }) => (
   <div className={styles.miniProgress}>
-    <Tooltip title={`目标值: ${target}%`}>
+    <Tooltip title={targetLabel}>
       <div className={styles.target} style={{ left: target ? `${target}%` : null }}>
         <span style={{ backgroundColor: color || null }} />
         <span style={{ backgroundColor: color || null }} />

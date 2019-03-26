@@ -1,21 +1,19 @@
 import Authorized from '@/utils/Authorized';
-import { connect } from 'dva';
 import pathToRegexp from 'path-to-regexp';
 import React from 'react';
 import Redirect from 'umi/redirect';
+import { connect } from 'dva';
+import { getAuthority } from '@/utils/authority';
+import Exception403 from '@/pages/Exception/403';
 
 interface AuthComponentProps {
   location: Location;
   routerData: any[];
   status: string;
 }
-const AuthComponent: React.FC<AuthComponentProps> = ({
-  children,
-  location,
-  routerData,
-  status,
-}) => {
-  const isLogin = status === 'ok';
+const AuthComponent: React.FC<AuthComponentProps> = ({ children, location, routerData }) => {
+  const auth = getAuthority();
+  const isLogin = auth && auth[0] !== 'guest';
   const getRouteAuthority = (path, routeData) => {
     let authorities;
     routeData.forEach(route => {
@@ -31,17 +29,16 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
     });
     return authorities;
   };
-
   return (
     <Authorized
       authority={getRouteAuthority(location.pathname, routerData)}
-      noMatch={isLogin ? <Redirect to="/exception/403" /> : <Redirect to="/user/login" />}
+      noMatch={isLogin ? <Exception403 /> : <Redirect to="/user/login" />}
     >
       {children}
     </Authorized>
   );
 };
-export default connect(({ menu: menuModel, login: loginModel }) => ({
+
+export default connect(({ menu: menuModel }) => ({
   routerData: menuModel.routerData,
-  status: loginModel.status,
 }))(AuthComponent);

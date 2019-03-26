@@ -1,12 +1,11 @@
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
 import { SettingModelState } from '@/models/setting';
-
+import React, { Component } from 'react';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { Layout, message } from 'antd';
 import { connect } from 'dva';
 import Animate from 'rc-animate';
-import React, { Component } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
 import styles from './Header.less';
 

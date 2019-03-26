@@ -1,9 +1,9 @@
+import memoizeOne from 'memoize-one';
+import isEqual from 'lodash/isEqual';
+import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import { Effect } from 'dva';
-import isEqual from 'lodash/isEqual';
-import memoizeOne from 'memoize-one';
 import { Reducer } from 'redux';
-import { formatMessage } from 'umi-plugin-react/locale';
 import defaultSettings from '../../config/defaultSettings';
 
 const { menu } = defaultSettings;

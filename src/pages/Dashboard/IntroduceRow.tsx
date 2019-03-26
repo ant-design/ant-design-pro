@@ -1,11 +1,11 @@
 import { ChartCard, Field, MiniArea, MiniBar, MiniProgress } from '@/components/Charts';
+import React, { memo } from 'react';
+import { Row, Col, Icon, Tooltip } from 'antd';
+import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
+import styles from './Analysis.less';
 import Trend from '@/components/Trend';
 import Yuan from '@/utils/Yuan';
-import { Col, Icon, Row, Tooltip } from 'antd';
 import numeral from 'numeral';
-import React, { memo } from 'react';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import styles from './Analysis.less';
 
 interface TopColResponsiveProps {
   xs: number;
@@ -150,7 +150,15 @@ const IntroduceRow: React.FC<IntroduceRowProps> = ({ loading, visitData }) => (
         }
         contentHeight={46}
       >
-        <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
+        <MiniProgress
+          percent={78}
+          strokeWidth={8}
+          target={80}
+          targetLabel={`${formatMessage({ id: 'component.miniProgress.tooltipDefault' }).concat(
+            ': ',
+          )}80%`}
+          color="#13C2C2"
+        />
       </ChartCard>
     </Col>
   </Row>

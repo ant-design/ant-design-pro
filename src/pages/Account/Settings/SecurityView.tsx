@@ -1,7 +1,6 @@
-import { List } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-// import { getTimeDistance } from '@/utils/utils';
+import { List } from 'antd';
 
 const passwordStrength = {
   strong: (

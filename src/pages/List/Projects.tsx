@@ -1,7 +1,7 @@
 import { AvatarList, AvatarListItem } from '@/components/AvatarList';
+import TagSelect from '@/components/TagSelect';
 import Ellipsis from '@/components/Ellipsis';
 import StandardFormRow from '@/components/StandardFormRow';
-import TagSelect from '@/components/TagSelect';
 import { Card, Col, Form, List, Row, Select } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';

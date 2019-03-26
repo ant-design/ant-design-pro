@@ -219,17 +219,22 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
           <Divider />
 
           <Body title={formatMessage({ id: 'app.setting.othersettings' })}>
-            <List.Item
-              actions={[
-                <Switch
-                  size="small"
-                  checked={!!colorWeak}
-                  onChange={checked => this.changeSetting('colorWeak', checked)}
-                />,
+            <List
+              split={false}
+              renderItem={this.renderLayoutSettingItem}
+              dataSource={[
+                {
+                  title: formatMessage({ id: 'app.setting.weakmode' }),
+                  action: (
+                    <Switch
+                      size="small"
+                      checked={!!colorWeak}
+                      onChange={checked => this.changeSetting('colorWeak', checked)}
+                    />
+                  ),
+                },
               ]}
-            >
-              {formatMessage({ id: 'app.setting.weakmode' })}
-            </List.Item>
+            />
           </Body>
           <Divider />
           <CopyToClipboard

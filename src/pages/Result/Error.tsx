@@ -1,5 +1,5 @@
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Result from '@/components/Result';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { Button, Card, Icon } from 'antd';
 import React, { Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';

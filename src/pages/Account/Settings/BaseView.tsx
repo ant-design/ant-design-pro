@@ -2,7 +2,6 @@ import { Button, Form, Input, Select, Upload } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import React, { Component, Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-
 import { connect } from 'dva';
 import styles from './BaseView.less';
 import GeographicView from './GeographicView';

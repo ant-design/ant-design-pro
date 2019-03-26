@@ -1,7 +1,7 @@
 import Exception from '@/components/Exception';
 import React from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
+import { formatMessage } from 'umi-plugin-react/locale';
 
 const Exception404: React.FC = () => (
   <Exception
