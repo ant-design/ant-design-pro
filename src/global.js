@@ -1,11 +1,11 @@
 import React from 'react';
 import { notification, Button, message } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
-import defaultSettings from './defaultSettings';
+import Settings from '@/utils/readSetting';
 
 window.React = React;
 
-const { pwa } = defaultSettings;
+const { pwa } = Settings;
 // if pwa is true
 if (pwa) {
   // Notify user if offline now

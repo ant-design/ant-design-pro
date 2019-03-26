@@ -4,7 +4,9 @@ import RightContent from '../GlobalHeader/RightContent';
 import BaseMenu from '../SiderMenu/BaseMenu';
 import { getFlatMenuKeys } from '../SiderMenu/SiderMenuUtils';
 import styles from './index.less';
-import { title } from '../../defaultSettings';
+import Setting from '@/utils/readSetting';
+
+const { title } = Setting;
 
 export default class TopNavHeader extends PureComponent {
   state = {

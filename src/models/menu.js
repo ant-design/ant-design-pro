@@ -2,8 +2,9 @@ import memoizeOne from 'memoize-one';
 import isEqual from 'lodash/isEqual';
 import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
-import { menu } from '../defaultSettings';
+import Setting from '@/utils/readSetting';
 
+const { menu } = Setting;
 const { check } = Authorized;
 
 // Conversion router to menu.
@@ -25,7 +26,7 @@ function formatter(data, parentAuthority, parentName) {
       }
       // if enableMenuLocale use item.name,
       // close menu international
-      const name = menu.disableLocal
+      const name = !menu.locale
         ? item.name
         : formatMessage({ id: locale, defaultMessage: item.name });
       const result = {

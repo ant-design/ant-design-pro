@@ -5,7 +5,9 @@ import Link from 'umi/link';
 import styles from './index.less';
 import PageLoading from '../PageLoading';
 import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
-import { title } from '../../defaultSettings';
+import Setting from '@/utils/readSetting';
+
+const { title } = Setting;
 
 const BaseMenu = React.lazy(() => import('./BaseMenu'));
 const { Sider } = Layout;

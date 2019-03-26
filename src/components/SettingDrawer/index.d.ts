@@ -9,7 +9,7 @@ export interface SettingModelState {
   fixedHeader: boolean;
   autoHideHeader: boolean;
   fixSiderbar: boolean;
-  menu: { disableLocal: boolean };
+  menu: { locale: boolean };
   title: string;
   pwa: boolean;
   iconfontUrl: string;

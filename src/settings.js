@@ -7,7 +7,7 @@ module.exports = {
   autoHideHeader: false, // auto hide header
   fixSiderbar: false, // sticky siderbar
   menu: {
-    disableLocal: false,
+    locale: true,
   },
   title: 'Ant Design Pro',
   pwa: true,

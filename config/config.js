@@ -2,10 +2,10 @@
 import os from 'os';
 import pageRoutes from './router.config';
 import webpackPlugin from './plugin.config';
-import defaultSettings from '../src/defaultSettings';
+import Settings from '../src/utils/readSetting';
 import slash from 'slash2';
 
-const { pwa, primaryColor } = defaultSettings;
+const { pwa, primaryColor } = Settings;
 const { APP_TYPE, TEST } = process.env;
 
 const plugins = [

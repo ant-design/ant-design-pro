@@ -244,7 +244,7 @@ class SettingDrawer extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  src/defaultSettings.js
+                  src/settings.js
                 </a>
               </div>
             }
