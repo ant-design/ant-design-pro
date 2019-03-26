@@ -7,7 +7,7 @@ import { MindToolbar } from '../components/EditorToolbar';
 import { MindDetailPanel } from '../components/EditorDetailPanel';
 import data from '../mock/worldCup2018.json';
 import styles from '../Flow/index.less';
-import { FormattedMessage } from 'umi/locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 GGEditor.setTrackable(false);

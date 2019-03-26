@@ -8,7 +8,7 @@ import { KoniItemPanel } from '../components/EditorItemPanel';
 import { KoniDetailPanel } from '../components/EditorDetailPanel';
 import KoniCustomNode from './shape/nodes/KoniCustomNode';
 import styles from '../Flow/index.less';
-import { FormattedMessage } from 'umi/locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 GGEditor.setTrackable(false);
