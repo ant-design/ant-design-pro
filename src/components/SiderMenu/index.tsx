@@ -5,7 +5,7 @@ import SiderMenu from './SiderMenu';
 import { getFlatMenuKeys } from './SiderMenuUtils';
 
 export { SiderMenuProps };
-export { MenuDataItem } from './BaseMenu';
+export { MenuDataItem, Route } from './BaseMenu';
 
 const SiderMenuWrapper: React.FC<SiderMenuProps> = props => {
   const { isMobile, menuData, collapsed, onCollapse } = props;

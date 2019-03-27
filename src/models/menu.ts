@@ -1,4 +1,4 @@
-import { MenuDataItem } from '@/components/SiderMenu';
+import { MenuDataItem, Route } from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
 import { Effect } from 'dva';
 import isEqual from 'lodash/isEqual';
@@ -10,7 +10,7 @@ import defaultSettings from '../../config/defaultSettings';
 
 // Conversion router to menu.
 function formatter(
-  data: MenuDataItem[],
+  data: Route[],
   parentAuthority?: string[] | string,
   parentName?: string,
 ): MenuDataItem[] {
@@ -27,6 +27,7 @@ function formatter(
         ...item,
         name,
         locale,
+        routes: void 0,
         authority: item.authority || parentAuthority,
       };
       if (item.routes) {
@@ -34,7 +35,6 @@ function formatter(
         // Reduce memory usage
         result.children = children;
       }
-      delete result.routes;
       return result;
     });
 }

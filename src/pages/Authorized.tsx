@@ -1,18 +1,17 @@
 import Authorized from '@/utils/Authorized';
+import { Route } from '@/components/SiderMenu';
 import { ConnectProps, ConnectState, UserModelState } from '@/models/connect';
 import { connect } from 'dva';
 import pathToRegexp from 'path-to-regexp';
 import React from 'react';
 import Redirect from 'umi/redirect';
-import { IRoute } from 'umi-types';
 
 interface AuthComponentProps extends ConnectProps {
-  location: Location;
-  routerData: IRoute[];
+  routerData: Route[];
   user: UserModelState;
 }
 
-const getRouteAuthority = (path: string, routeData: IRoute[]) => {
+const getRouteAuthority = (path: string, routeData: Route[]) => {
   let authorities: string[] | string | undefined = void 0;
   routeData.forEach(route => {
     // match prefix
@@ -32,7 +31,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({ children, location, route
   const isLogin = currentUser && currentUser.name;
   return (
     <Authorized
-      authority={getRouteAuthority(location.pathname, routerData)!}
+      authority={getRouteAuthority(location!.pathname, routerData)!}
       noMatch={isLogin ? <Redirect to="/exception/403" /> : <Redirect to="/user/login" />}
     >
       {children}

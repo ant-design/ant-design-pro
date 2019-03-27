@@ -51,13 +51,11 @@ export interface BasicLayoutProps
     HeaderViewProps,
     Partial<SettingModelState> {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
-  route: MenuDataItem;
 }
 
-export interface BasicLayoutContext {
-  location: Location;
+export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
-}
+};
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const {
@@ -71,8 +69,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     location,
     menuData,
     navTheme,
-    route: { routes, authority },
+    route,
   } = props;
+  const { routes, authority } = route!;
   /**
    * constructor
    */
@@ -127,10 +126,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   );
   return (
     <React.Fragment>
-      <DocumentTitle title={getPageTitle(location!.pathname, breadcrumbNameMap)}>
+      <DocumentTitle title={getPageTitle(location.pathname, breadcrumbNameMap)}>
         <ContainerQuery query={query}>
           {params => (
-            <Context.Provider value={{ location: location!, breadcrumbNameMap }}>
+            <Context.Provider value={{ location, breadcrumbNameMap }}>
               <div className={classNames(params)}>{layout}</div>
             </Context.Provider>
           )}
