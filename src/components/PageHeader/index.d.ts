@@ -24,7 +24,7 @@ export interface PageHeaderProps {
   loading?: boolean;
   breadcrumbSeparator?: React.ReactNode;
   location?: Location;
-  itemRender: (menuItem: any) => React.ReactNode;
+  itemRender?: (menuItem: any) => React.ReactNode;
   breadcrumbNameMap?: any;
 }
 
