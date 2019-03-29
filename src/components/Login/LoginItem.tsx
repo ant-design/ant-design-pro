@@ -10,7 +10,7 @@ import ItemMap from './map';
 const FormItem = Form.Item;
 
 export interface LoginItemProps {
-  name?: string;
+  name: string;
   rules?: any[];
   style?: React.CSSProperties;
   onGetCaptcha?: (event?: MouseEvent) => void;
@@ -37,7 +37,7 @@ class WrapFormItem extends Component<LoginItemProps, WrapFormItemState> {
     getCaptchaButtonText: 'captcha',
     getCaptchaSecondText: 'second',
   };
-  interval: NodeJS.Timeout;
+  interval!: NodeJS.Timeout;
 
   constructor(props: LoginItemProps) {
     super(props);
@@ -70,7 +70,7 @@ class WrapFormItem extends Component<LoginItemProps, WrapFormItemState> {
     }
   };
 
-  getFormItemOptions = props => {
+  getFormItemOptions = (props: LoginItemProps) => {
     const { onChange, defaultValue, customprops, rules } = props;
     const options: any = {
       rules: rules || customprops.rules,
@@ -160,7 +160,7 @@ Object.keys(ItemMap).forEach(key => {
   const item = ItemMap[key];
   LoginItem[key] = (props: WrappedLoginItemProps) => (
     <LoginContext.Consumer>
-      {context => (
+      {(context: any) => (
         <WrapFormItem
           customprops={item.props}
           rules={item.rules}

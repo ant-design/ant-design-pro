@@ -10,10 +10,10 @@ import LoginSubmit from './LoginSubmit';
 import LoginTab from './LoginTab';
 
 interface LoginProps {
-  defaultActiveKey?: string;
-  onTabChange?: (key: string) => void;
+  defaultActiveKey: string;
+  onTabChange: (key: string) => void;
   style?: React.CSSProperties;
-  onSubmit?: (error: any, values: any) => void;
+  onSubmit: (error: any, values: any) => void;
   form: WrappedFormUtils;
   className?: string;
 }
@@ -48,7 +48,7 @@ class Login extends Component<LoginProps, LoginState> {
     };
   }
 
-  onSwitch = type => {
+  onSwitch = (type: string) => {
     this.setState({
       type,
     });
@@ -61,19 +61,19 @@ class Login extends Component<LoginProps, LoginState> {
     const { form } = this.props;
     return {
       tabUtil: {
-        addTab: id => {
+        addTab: (id: any) => {
           this.setState({
             tabs: [...tabs, id],
           });
         },
-        removeTab: id => {
+        removeTab: (id: any) => {
           this.setState({
             tabs: tabs.filter(currentId => currentId !== id),
           });
         },
       },
       form,
-      updateActive: activeItem => {
+      updateActive: (activeItem: any) => {
         const { type, active } = this.state;
         if (active[type]) {
           active[type].push(activeItem);
@@ -87,7 +87,7 @@ class Login extends Component<LoginProps, LoginState> {
     };
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const { active, type } = this.state;
     const { form, onSubmit } = this.props;
@@ -100,8 +100,8 @@ class Login extends Component<LoginProps, LoginState> {
   render() {
     const { className, children } = this.props;
     const { type, tabs } = this.state;
-    const TabChildren = [];
-    const otherChildren = [];
+    const TabChildren: any[] = [];
+    const otherChildren: any[] = [];
     React.Children.forEach(children, (item: any) => {
       if (!item) {
         return;

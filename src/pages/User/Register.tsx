@@ -330,7 +330,7 @@ class Register extends Component<RegisterProps, RegisterState> {
               size="large"
               loading={submitting}
               className={styles.submit}
-              // type="primary"  https://github.com/ant-design/ant-design/pull/15702
+              type="primary"
               htmlType="submit"
             >
               <FormattedMessage id="app.register.register" />
