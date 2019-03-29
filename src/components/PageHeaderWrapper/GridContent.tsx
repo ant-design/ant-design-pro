@@ -1,6 +1,7 @@
 import { connect } from 'dva';
 import React from 'react';
 import styles from './GridContent.less';
+import { SettingModelState } from '@/models/setting';
 
 interface GridContentProps {
   contentWidth: string;
@@ -15,6 +16,6 @@ const GridContent: React.FC<GridContentProps> = props => {
   return <div className={className}>{children}</div>;
 };
 
-export default connect(({ setting }) => ({
+export default connect(({ setting }: { setting: SettingModelState }) => ({
   contentWidth: setting.contentWidth,
 }))(GridContent);
