@@ -40,13 +40,13 @@ interface PieState {
   legendBlock: boolean;
 }
 class Pie extends Component<PieProps, PieState> {
-  state = {
+  state: PieState = {
     legendData: [],
     legendBlock: false,
   };
-  requestRef: number;
+  requestRef: number | undefined;
   root: any;
-  chart: G2.Chart;
+  chart: G2.Chart | undefined;
   componentDidMount() {
     window.addEventListener(
       'resize',
@@ -57,7 +57,7 @@ class Pie extends Component<PieProps, PieState> {
     );
   }
 
-  componentDidUpdate(preProps) {
+  componentDidUpdate(preProps: PieProps) {
     const { data } = this.props;
     if (data !== preProps.data) {
       // because of charts data create when rendered
@@ -67,12 +67,12 @@ class Pie extends Component<PieProps, PieState> {
   }
 
   componentWillUnmount() {
-    window.cancelAnimationFrame(this.requestRef);
+    window.cancelAnimationFrame(this.requestRef as number);
     window.removeEventListener('resize', this.resize);
     this.resize.cancel();
   }
 
-  getG2Instance = chart => {
+  getG2Instance = (chart: G2.Chart) => {
     this.chart = chart;
     requestAnimationFrame(() => {
       this.getLegendData();
@@ -87,7 +87,7 @@ class Pie extends Component<PieProps, PieState> {
     if (!geom) return;
     const items = geom.get('dataArray') || []; // 获取图形对应的
 
-    const legendData = items.map(item => {
+    const legendData = items.map((item: any) => {
       /* eslint no-underscore-dangle:0 */
       const origin = item[0]._origin;
       origin.color = item[0].color;
@@ -100,11 +100,11 @@ class Pie extends Component<PieProps, PieState> {
     });
   };
 
-  handleRoot = n => {
+  handleRoot = (n: any) => {
     this.root = n;
   };
 
-  handleLegendClick = (item, i) => {
+  handleLegendClick = (item: any, i: string | number) => {
     const newItem = item;
     newItem.checked = !newItem.checked;
 
@@ -195,7 +195,7 @@ class Pie extends Component<PieProps, PieState> {
     if (percent || percent === 0) {
       selected = false;
       tooltip = false;
-      formatColor = value => {
+      formatColor = (value?: string): string => {
         if (value === '占比') {
           return color || 'rgba(24, 144, 255, 0.85)';
         }

@@ -60,7 +60,7 @@ const ProportionSales: React.FC<ProportionSalesProps> = ({
       subTitle={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
       total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
       data={salesPieData}
-      valueFormat={value => <Yuan>{value}</Yuan>}
+      valueFormat={(value: any) => <Yuan>{value}</Yuan>}
       height={270}
       lineWidth={4}
       style={{ padding: '8px 0' }}

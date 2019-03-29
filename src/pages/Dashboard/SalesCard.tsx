@@ -9,7 +9,7 @@ import styles from './Analysis.less';
 const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
 
-const rankingListData = [];
+const rankingListData: any[] = [];
 for (let i = 0; i < 7; i += 1) {
   rankingListData.push({
     title: formatMessage({ id: 'app.analysis.test' }, { no: i }),

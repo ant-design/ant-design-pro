@@ -23,13 +23,13 @@ const CustomTab: (obj: CustomTabProps) => JSX.Element = ({ data, currentTabKey: 
         }
         gap={2}
         total={`${data.cvr * 100}%`}
-        theme={currentKey !== data.name && 'light'}
+        theme={currentKey !== data.name ? 'light' : ''}
       />
     </Col>
     <Col span={12} style={{ paddingTop: 36 }}>
       <Pie
         animate={false}
-        color={currentKey !== data.name && '#BDE4FF'}
+        color={currentKey !== data.name ? '#BDE4FF' : ''}
         inner={0.55}
         tooltip={false}
         margin={[0, 0, 0, 0]}
