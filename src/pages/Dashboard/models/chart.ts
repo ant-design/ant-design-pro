@@ -1,5 +1,5 @@
 import { fakeChartData } from '@/services/api';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
 export interface ChartModelState {
@@ -24,8 +24,8 @@ export interface ChartModel {
     fetchSalesData: Effect;
   };
   reducers: {
-    save: Reducer<any>;
-    clear: Reducer<any>;
+    save: Reducer<ChartModelState>;
+    clear: Reducer<ChartModelState>;
   };
 }
 
@@ -84,6 +84,7 @@ const ChartModel: ChartModel = {
         salesTypeDataOnline: [],
         salesTypeDataOffline: [],
         radarData: [],
+        loading: false,
       };
     },
   },

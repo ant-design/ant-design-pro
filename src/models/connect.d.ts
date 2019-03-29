@@ -1,4 +1,7 @@
 import { Route } from '@/components/SiderMenu';
+import { ActivitiesState } from '@/pages/Dashboard/models/activities';
+import { ChartModelState } from '@/pages/Dashboard/models/chart';
+import { MonitorState } from '@/pages/Dashboard/models/monitor';
 import { EffectsCommandMap } from 'dva';
 import { AnyAction } from 'redux';
 import { RouterTypes } from 'umi';
@@ -11,6 +14,9 @@ import { SettingModelState } from './setting';
 import { UserModelState } from './user';
 
 export {
+  ActivitiesState,
+  ChartModelState,
+  MonitorState,
   GlobalModelState,
   ListModelState,
   LoginModelState,
@@ -40,10 +46,13 @@ export interface Loading {
   global: boolean;
   effects: { [key: string]: boolean | undefined };
   models: {
+    activities?: boolean;
+    chart?: boolean;
     global?: boolean;
     list?: boolean;
     login?: boolean;
     menu?: boolean;
+    monitor?: boolean;
     project?: boolean;
     setting?: boolean;
     user?: boolean;
@@ -51,12 +60,15 @@ export interface Loading {
 }
 
 export interface ConnectState {
+  activities?: ActivitiesState;
+  chart?: ChartModelState;
   global: GlobalModelState;
-  list?: ListModelState;
-  login?: LoginModelState;
+  list: ListModelState;
+  login: LoginModelState;
   loading: Loading;
   menu: MenuModelState;
-  project?: ProjectModelState;
+  monitor?: MonitorState;
+  project: ProjectModelState;
   setting: SettingModelState;
   user: UserModelState;
 }

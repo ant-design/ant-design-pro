@@ -1,29 +1,18 @@
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
+import { ConnectProps, ConnectState } from '@/models/connect';
+import { CurrentUser } from '@/models/user';
 import { Menu } from 'antd';
 import { MenuMode } from 'antd/es/menu';
 import { connect } from 'dva';
-import * as H from 'history';
 import React, { Component } from 'react';
-import { match } from 'react-router';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import router from 'umi/router';
 import styles from './Info.less';
 
 const { Item } = Menu;
 
-interface InfoProps {
-  currentUser: {
-    avatar?: string;
-    name?: string;
-    title?: string;
-    group?: string;
-    signature?: string;
-    geographic?: any;
-    tags?: any[];
-    userid?: string;
-  };
-  match: match;
-  location: H.Location;
+interface InfoProps extends Required<ConnectProps> {
+  currentUser: CurrentUser;
 }
 
 interface InfoState {
@@ -32,11 +21,11 @@ interface InfoState {
   selectKey: string;
 }
 
-@connect(({ user }) => ({
+@connect(({ user }: ConnectState) => ({
   currentUser: user.currentUser,
 }))
 class Info extends Component<InfoProps, InfoState> {
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props: InfoProps, state: InfoState) {
     const { match, location } = props;
     let selectKey = location.pathname.replace(`${match.path}/`, '');
     selectKey = state.menuMap[selectKey] ? selectKey : 'base';
@@ -47,7 +36,7 @@ class Info extends Component<InfoProps, InfoState> {
   }
 
   main: HTMLDivElement;
-  constructor(props) {
+  constructor(props: InfoProps) {
     super(props);
     const { match, location } = props;
     const menuMap = {

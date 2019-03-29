@@ -1,15 +1,13 @@
 import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import PageLoading from '@/components/PageLoading';
+import { ChartModelState, ConnectProps, ConnectState } from '@/models/connect';
 import { getTimeDistance } from '@/utils/utils';
 import { Col, Dropdown, Icon, Menu, Row } from 'antd';
 import { RangePickerValue } from 'antd/es/date-picker/interface';
 import { connect } from 'dva';
-import * as H from 'history';
 import React, { Component, Suspense } from 'react';
-import { Dispatch } from 'redux';
 import styles from './Analysis.less';
-import { ChartModelState } from './models/chart';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const SalesCard = React.lazy(() => import('./SalesCard'));
@@ -17,9 +15,7 @@ const TopSearch = React.lazy(() => import('./TopSearch'));
 const ProportionSales = React.lazy(() => import('./ProportionSales'));
 const OfflineData = React.lazy(() => import('./OfflineData'));
 
-interface AnalysisProps {
-  dispatch: Dispatch<any>;
-  location: H.Location;
+interface AnalysisProps extends Required<ConnectProps> {
   chart: ChartModelState;
   loading: boolean;
 }
@@ -30,7 +26,7 @@ interface AnalysisState {
   rangePickerValue: RangePickerValue;
 }
 
-@connect(({ chart, loading }) => ({
+@connect(({ chart, loading }: ConnectState) => ({
   chart,
   loading: loading.effects['chart/fetch'],
 }))

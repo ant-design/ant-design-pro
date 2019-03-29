@@ -1,52 +1,35 @@
 import { Button } from 'antd';
 import classNames from 'classnames';
-import * as H from 'history';
 import React, { createElement } from 'react';
 import styles from './index.less';
 import config from './typeConfig';
+import Link from 'umi/link';
 
-export interface ExceptionProps<
-  L = {
-    to: H.LocationDescriptor;
-    href?: H.LocationDescriptor;
-    replace?: boolean;
-    innerRef?: (node: HTMLAnchorElement | null) => void;
-  }
-> {
+export interface ExceptionProps {
   type?: '403' | '404' | '500';
   title?: React.ReactNode;
   desc?: React.ReactNode;
   img?: string;
   actions?: React.ReactNode;
-  linkElement?: string | React.ComponentType<L>;
+  linkElement?: string | typeof Link;
   style?: React.CSSProperties;
   className?: string;
   backText?: React.ReactNode;
   redirect?: string;
 }
 
-class Exception extends React.Component<ExceptionProps, any> {
-  static defaultProps = {
-    backText: 'back to home',
-    redirect: '/',
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+class Exception extends React.Component<ExceptionProps> {
   render() {
     const {
       className,
-      backText,
+      backText = 'back to home',
       linkElement = 'a',
-      type,
+      type = '404',
       title,
       desc,
       img,
       actions,
-      redirect,
+      redirect = '/',
       ...rest
     } = this.props;
     const pageType = type in config ? type : '404';
