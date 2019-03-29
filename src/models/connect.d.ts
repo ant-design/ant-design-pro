@@ -101,7 +101,7 @@ export interface ConnectProps<P extends { [K in keyof P]?: string } = {}>
   extends Partial<RouterTypes<Route>> {
   dispatch?: Dispatch;
   // https://github.com/umijs/umi/pull/2194
-  match: match<P>;
+  match?: match<P>;
 }
 
 export default ConnectState;
