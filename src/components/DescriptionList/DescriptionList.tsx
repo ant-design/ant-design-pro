@@ -38,7 +38,7 @@ const DescriptionList: IDescriptionListComponent = ({
     <div className={clsString} {...restProps}>
       {title ? <div className={styles.title}>{title}</div> : null}
       <Row gutter={gutter}>
-        {React.Children.map(children, (child: React.ReactElement<DescriptionProps>) =>
+        {React.Children.map(children as any, (child: React.ReactElement<DescriptionProps>) =>
           child ? React.cloneElement<DescriptionProps>(child, { column }) : child,
         )}
       </Row>
