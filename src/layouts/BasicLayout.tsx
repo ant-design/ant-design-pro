@@ -1,4 +1,3 @@
-import PageLoading from '@/components/PageLoading';
 import SiderMenu, { MenuDataItem, SiderMenuProps } from '@/components/SiderMenu';
 import { ConnectProps, ConnectState, SettingModelState } from '@/models/connect';
 import getPageTitle from '@/utils/getPageTitle';
@@ -135,7 +134,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           )}
         </ContainerQuery>
       </DocumentTitle>
-      <Suspense fallback={<PageLoading />}>{renderSettingDrawer()}</Suspense>
+      <Suspense fallback={null}>{renderSettingDrawer()}</Suspense>
     </React.Fragment>
   );
 };

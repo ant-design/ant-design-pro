@@ -106,7 +106,7 @@ export default class BaseMenu extends Component<BaseMenuProps> {
             item.icon ? (
               <span>
                 {getIcon(item.icon)}
-                <span>{name}</span>
+                <span>{item.name}</span>
               </span>
             ) : (
               item.name
