@@ -12,7 +12,7 @@ interface TriggerExceptionState {
   isloading: boolean;
 }
 
-@connect(state => ({
+@connect((state: any) => ({
   isloading: state.error.isloading,
 }))
 class TriggerException extends Component<TriggerExceptionProps, TriggerExceptionState> {
@@ -20,7 +20,7 @@ class TriggerException extends Component<TriggerExceptionProps, TriggerException
     isloading: false,
   };
 
-  triggerError = code => {
+  triggerError = (code: any) => {
     this.setState({
       isloading: true,
     });
