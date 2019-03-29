@@ -28,13 +28,13 @@ const Body: React.FC<BodyProps> = ({ children, title, style }) => (
 );
 
 interface SettingDrawerProps {
-  setting?: SettingModelState;
-  dispatch?: (args: any) => void;
+  setting: SettingModelState;
+  dispatch: (args: any) => void;
 }
 
 interface SettingDrawerState {}
 
-@connect(({ setting }) => ({ setting }))
+@connect(({ setting }: { setting: SettingModelState }) => ({ setting }))
 class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
   state = {
     collapse: false,
@@ -102,7 +102,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
     ];
   };
 
-  changeSetting = (key, value) => {
+  changeSetting = (key: string, value: any) => {
     const { setting } = this.props;
     const nextState = { ...setting };
     nextState[key] = value;
@@ -125,7 +125,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
     this.setState({ collapse: !collapse });
   };
 
-  renderLayoutSettingItem = item => {
+  renderLayoutSettingItem = (item: any) => {
     const action = React.cloneElement(item.action, {
       disabled: item.disabled,
     });
