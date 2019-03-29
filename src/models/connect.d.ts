@@ -3,11 +3,22 @@ import { EffectsCommandMap } from 'dva';
 import { AnyAction } from 'redux';
 import { RouterTypes } from 'umi';
 import { GlobalModelState } from './global';
+import { ListModelState } from './list';
+import { LoginModelState } from './login';
 import { MenuModelState } from './menu';
+import { ProjectModelState } from './project';
+import { SettingModelState } from './setting';
 import { UserModelState } from './user';
-import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
 
-export { GlobalModelState, MenuModelState, SettingModelState, UserModelState };
+export {
+  GlobalModelState,
+  ListModelState,
+  LoginModelState,
+  MenuModelState,
+  ProjectModelState,
+  SettingModelState,
+  UserModelState,
+};
 
 export type Effect = (
   action: AnyAction,
@@ -30,7 +41,10 @@ export interface Loading {
   effects: { [key: string]: boolean | undefined };
   models: {
     global?: boolean;
+    list?: boolean;
+    login?: boolean;
     menu?: boolean;
+    project?: boolean;
     setting?: boolean;
     user?: boolean;
   };
@@ -38,8 +52,11 @@ export interface Loading {
 
 export interface ConnectState {
   global: GlobalModelState;
+  list?: ListModelState;
+  login?: LoginModelState;
   loading: Loading;
   menu: MenuModelState;
+  project?: ProjectModelState;
   setting: SettingModelState;
   user: UserModelState;
 }

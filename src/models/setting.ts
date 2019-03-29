@@ -2,6 +2,8 @@ import { message } from 'antd';
 import { Reducer } from 'redux';
 import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
 
+export { DefaultSettings as SettingModelState };
+
 export interface SettingModelType {
   namespace: 'setting';
   state: DefaultSettings;
