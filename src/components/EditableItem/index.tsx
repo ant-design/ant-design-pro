@@ -4,6 +4,7 @@ import styles from './index.less';
 
 interface EditableItemProps {
   onChange: (value?: string | string[] | number) => void;
+  value?: string | string[] | number;
 }
 
 interface EditableItemState {
@@ -12,7 +13,7 @@ interface EditableItemState {
 }
 
 export default class EditableItem extends Component<EditableItemProps, EditableItemState> {
-  constructor(props) {
+  constructor(props: EditableItemProps) {
     super(props);
     this.state = {
       value: props.value,
@@ -20,7 +21,7 @@ export default class EditableItem extends Component<EditableItemProps, EditableI
     };
   }
 
-  handleChange = e => {
+  handleChange = (e: { target: { value: any } }) => {
     const { value } = e.target;
     this.setState({ value });
   };
