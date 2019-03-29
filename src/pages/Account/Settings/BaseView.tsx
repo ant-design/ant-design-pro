@@ -62,7 +62,7 @@ interface BaseProps extends FormComponentProps {
   currentUser: user.currentUser,
 }))
 class BaseView extends Component<BaseProps> {
-  view: HTMLDivElement = null!;
+  view!: HTMLDivElement;
 
   componentDidMount() {
     this.setBaseInfo();

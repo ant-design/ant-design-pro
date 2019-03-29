@@ -63,7 +63,7 @@ export default class NoticeIcon<T extends NoticeIconData = NoticeIconData> exten
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
 
-  popover: HTMLElement = null!;
+  popover!: HTMLElement;
   state = {
     visible: false,
   };

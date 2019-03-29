@@ -1,5 +1,5 @@
 import Login, { WrappedLogin } from '@/components/Login';
-import { LoginModelState } from '@/models/login';
+import { ConnectProps, ConnectState, LoginModelState } from '@/models/connect';
 import { Alert, Checkbox, Icon } from 'antd';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { connect } from 'dva';
@@ -10,9 +10,8 @@ import styles from './Login.less';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
-export interface LoginPageProps {
+export interface LoginPageProps extends Required<ConnectProps> {
   login: LoginModelState;
-  dispatch: (args: any) => Promise<any>;
   submitting: boolean;
 }
 
@@ -21,7 +20,7 @@ interface LoginPageState {
   autoLogin: boolean;
 }
 
-@connect(({ login, loading }: { login: LoginModelState; loading: any }) => ({
+@connect(({ login, loading }: ConnectState) => ({
   login,
   submitting: loading.effects['login/login'],
 }))

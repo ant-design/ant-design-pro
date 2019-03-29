@@ -1,5 +1,6 @@
 import DescriptionList from '@/components/DescriptionList';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { ConnectProps, ConnectState, ProfileModelState } from '@/models/connect';
 import {
   Badge,
   Button,
@@ -15,12 +16,12 @@ import {
   Table,
   Tooltip,
 } from 'antd';
+import { ColumnProps } from 'antd/es/table';
 import classNames from 'classnames';
 import { connect } from 'dva';
 import debounce from 'lodash/debounce';
 import React, { Component, Fragment } from 'react';
 import styles from './AdvancedProfile.less';
-import { ProfileModelState } from './models/profile';
 
 const { Step } = Steps;
 const { Description } = DescriptionList;
@@ -110,15 +111,11 @@ const desc2 = (
   </div>
 );
 
-// https://github.com/ant-design/ant-design/pull/1526  这个函数的as any
 const popoverContent = (
   <div style={{ width: 160 }}>
     吴加号
     <span className={styles.textSecondary} style={{ float: 'right' }}>
-      <Badge
-        status="default"
-        text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span> as any}
-      />
+      <Badge status="default" text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应</span>} />
     </span>
     <div className={styles.textSecondary} style={{ marginTop: 4 }}>
       耗时：2小时25分钟
@@ -149,8 +146,16 @@ const operationTabList = [
     tab: '操作日志三',
   },
 ];
+export interface AdvancedOperation {
+  key: string;
+  type: string;
+  name: string;
+  status: string;
+  updatedAt: string;
+  memo: string;
+}
 
-const columns = [
+const columns: ColumnProps<AdvancedOperation>[] = [
   {
     title: '操作类型',
     dataIndex: 'type',
@@ -165,7 +170,7 @@ const columns = [
     title: '执行结果',
     dataIndex: 'status',
     key: 'status',
-    render: (text: any) =>
+    render: text =>
       text === 'agree' ? (
         <Badge status="success" text="成功" />
       ) : (
@@ -184,9 +189,8 @@ const columns = [
   },
 ];
 
-interface AdvancedProfileProps {
+interface AdvancedProfileProps extends Required<ConnectProps> {
   profile: ProfileModelState;
-  dispatch: (args: any) => void;
   loading: boolean;
 }
 
@@ -195,14 +199,14 @@ interface AdvancedProfileState {
   stepDirection: 'horizontal' | 'vertical';
 }
 
-@connect(({ profile, loading }: { profile: ProfileModelState; loading: any }) => ({
+@connect(({ profile, loading }: ConnectState) => ({
   profile,
   loading: loading.effects['profile/fetchAdvanced'],
 }))
 class AdvancedProfile extends Component<AdvancedProfileProps, AdvancedProfileState> {
-  state = {
+  state: AdvancedProfileState = {
     operationkey: 'tab1',
-    stepDirection: 'horizontal' as ('horizontal' | 'vertical'),
+    stepDirection: 'horizontal',
   };
 
   setStepDirection = debounce(() => {
@@ -244,7 +248,7 @@ class AdvancedProfile extends Component<AdvancedProfileProps, AdvancedProfileSta
     const { advancedOperation1, advancedOperation2, advancedOperation3 } = profile;
     const contentList = {
       tab1: (
-        <Table
+        <Table<AdvancedOperation>
           pagination={false}
           loading={loading}
           dataSource={advancedOperation1}
@@ -252,7 +256,7 @@ class AdvancedProfile extends Component<AdvancedProfileProps, AdvancedProfileSta
         />
       ),
       tab2: (
-        <Table
+        <Table<AdvancedOperation>
           pagination={false}
           loading={loading}
           dataSource={advancedOperation2}
@@ -260,7 +264,7 @@ class AdvancedProfile extends Component<AdvancedProfileProps, AdvancedProfileSta
         />
       ),
       tab3: (
-        <Table
+        <Table<AdvancedOperation>
           pagination={false}
           loading={loading}
           dataSource={advancedOperation3}

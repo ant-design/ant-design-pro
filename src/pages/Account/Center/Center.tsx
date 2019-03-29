@@ -37,7 +37,7 @@ class Center extends Component<CenterProps, CenterState> {
     inputValue: '',
   };
 
-  input: Input = null!;
+  input!: Input;
 
   componentDidMount() {
     const { dispatch } = this.props;

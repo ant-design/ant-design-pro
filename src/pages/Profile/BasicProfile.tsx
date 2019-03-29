@@ -44,6 +44,39 @@ const progressColumns = [
   },
 ];
 
+export interface BasicGoodsItem {
+  id: string;
+  name: string;
+  barcode: string;
+  price: string;
+  num: string;
+  amount: string;
+}
+
+export interface BasicProgressItem {
+  key: string;
+  time: string;
+  rate: string;
+  status: string;
+  operator: string;
+  cost: string;
+}
+
+export interface UserInfo {
+  name: string;
+  tel: string;
+  delivery: string;
+  addr: string;
+  remark: string;
+}
+
+export interface Application {
+  id: string;
+  status: string;
+  orderNo: string;
+  childOrderNo: string;
+}
+
 interface BasicProfileProps {
   profile: ProfileModelState;
   dispatch: (args: any) => void;
@@ -102,12 +135,12 @@ class BasicProfile extends Component<BasicProfileProps> {
       }
       return obj;
     };
-    const goodsColumns: ColumnProps<any>[] = [
+    const goodsColumns: ColumnProps<BasicGoodsItem>[] = [
       {
         title: '商品编号',
         dataIndex: 'id',
         key: 'id',
-        render: (text, row, index) => {
+        render: (text, _, index) => {
           if (index < basicGoods.length) {
             return <a href="">{text}</a>;
           }
@@ -143,7 +176,7 @@ class BasicProfile extends Component<BasicProfileProps> {
         dataIndex: 'num',
         key: 'num',
         align: 'right',
-        render: (text, row, index) => {
+        render: (text, _, index) => {
           if (index < basicGoods.length) {
             return text;
           }
@@ -155,7 +188,7 @@ class BasicProfile extends Component<BasicProfileProps> {
         dataIndex: 'amount',
         key: 'amount',
         align: 'right',
-        render: (text, row, index) => {
+        render: (text, _, index) => {
           if (index < basicGoods.length) {
             return text;
           }

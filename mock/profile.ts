@@ -1,6 +1,13 @@
 import mockjs from 'mockjs';
+import { AdvancedOperation } from '../src/pages/Profile/AdvancedProfile';
+import {
+  Application,
+  BasicGoodsItem,
+  BasicProgressItem,
+  UserInfo,
+} from '../src/pages/Profile/BasicProfile';
 
-const basicGoods = [
+const basicGoods: BasicGoodsItem[] = [
   {
     id: '1234561',
     name: '矿泉水 550ml',
@@ -35,7 +42,7 @@ const basicGoods = [
   },
 ];
 
-const basicProgress = [
+const basicProgress: BasicProgressItem[] = [
   {
     key: '1',
     time: '2017-10-01 14:10',
@@ -78,7 +85,7 @@ const basicProgress = [
   },
 ];
 
-const advancedOperation1 = [
+const advancedOperation1: AdvancedOperation[] = [
   {
     key: 'op1',
     type: '订购关系生效',
@@ -121,7 +128,7 @@ const advancedOperation1 = [
   },
 ];
 
-const advancedOperation2 = [
+const advancedOperation2: AdvancedOperation[] = [
   {
     key: 'op1',
     type: '订购关系生效',
@@ -132,7 +139,7 @@ const advancedOperation2 = [
   },
 ];
 
-const advancedOperation3 = [
+const advancedOperation3: AdvancedOperation[] = [
   {
     key: 'op1',
     type: '创建订单',
@@ -154,13 +161,13 @@ export default {
   'GET /api/profile/advanced': getProfileAdvancedData,
   'GET /api/profile/basic': (req, res) => {
     const { id } = req.query;
-    const application = {
+    const application: Application = {
       id,
       status: '已取货',
       orderNo: Random.id(),
       childOrderNo: Random.id(),
     };
-    const userInfo = {
+    const userInfo: UserInfo = {
       name: Random.cname(),
       tel: '18100000000',
       delivery: '菜鸟物流',

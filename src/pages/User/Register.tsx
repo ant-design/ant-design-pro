@@ -1,3 +1,4 @@
+import { ConnectProps, ConnectState, RegisterModelState } from '@/models/connect';
 import { Button, Col, Form, Input, Popover, Progress, Row, Select } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
@@ -5,7 +6,6 @@ import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
 import router from 'umi/router';
-import { RegisterModelState } from './models/register';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
@@ -40,11 +40,11 @@ const passwordProgressMap: {
   poor: 'exception',
 };
 
-interface RegisterProps extends FormComponentProps {
+interface RegisterProps extends FormComponentProps, Required<ConnectProps> {
   register: RegisterModelState;
-  dispatch: (args: any) => void;
   submitting: boolean;
 }
+
 interface RegisterState {
   count: number;
   confirmDirty: boolean;
@@ -53,12 +53,12 @@ interface RegisterState {
   prefix: string;
 }
 
-@connect(({ register, loading }: { register: RegisterModelState; loading: any }) => ({
+@connect(({ register, loading }: ConnectState) => ({
   register,
   submitting: loading.effects['register/submit'],
 }))
 class Register extends Component<RegisterProps, RegisterState> {
-  state = {
+  state: RegisterState = {
     count: 0,
     confirmDirty: false,
     visible: false,
@@ -126,7 +126,7 @@ class Register extends Component<RegisterProps, RegisterState> {
     });
   };
 
-  checkConfirm = (rule: any, value: string, callback: Function) => {
+  checkConfirm = (_: any, value: string, callback: Function) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
       callback(formatMessage({ id: 'validation.password.twice' }));
@@ -135,7 +135,7 @@ class Register extends Component<RegisterProps, RegisterState> {
     }
   };
 
-  checkPassword = (rule: any, value: string, callback: Function) => {
+  checkPassword = (_: any, value: string, callback: Function) => {
     const { visible, confirmDirty } = this.state;
     if (!value) {
       this.setState({
@@ -215,7 +215,7 @@ class Register extends Component<RegisterProps, RegisterState> {
           </FormItem>
           <FormItem help={help}>
             <Popover
-              getPopupContainer={(node: any) => node.parentNode as HTMLElement}
+              getPopupContainer={node => node!.parentNode as HTMLElement}
               content={
                 <div style={{ padding: '4px 0' }}>
                   {passwordStatusMap[this.getPasswordStatus()]}

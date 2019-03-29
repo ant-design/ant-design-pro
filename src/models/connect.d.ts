@@ -4,6 +4,8 @@ import { ActivitiesModelState } from '@/pages/Dashboard/models/activities';
 import { ChartModelState } from '@/pages/Dashboard/models/chart';
 import { MonitorModelState } from '@/pages/Dashboard/models/monitor';
 import { FormModelState } from '@/pages/Forms/models/form';
+import { ProfileModelState } from '@/pages/Profile/models/profile';
+import { RegisterModelState } from '@/pages/User/models/register';
 import { EffectsCommandMap } from 'dva';
 import { AnyAction } from 'redux';
 import { RouterTypes } from 'umi';
@@ -21,6 +23,8 @@ export {
   ChartModelState,
   MonitorModelState,
   FormModelState,
+  ProfileModelState,
+  RegisterModelState,
   GlobalModelState,
   ListModelState,
   LoginModelState,
@@ -59,7 +63,9 @@ export interface Loading {
     login?: boolean;
     menu?: boolean;
     monitor?: boolean;
+    profile?: boolean;
     project?: boolean;
+    register?: boolean;
     setting?: boolean;
     user?: boolean;
   };
@@ -76,7 +82,9 @@ export interface ConnectState {
   loading: Loading;
   menu: MenuModelState;
   monitor?: MonitorModelState;
+  profile?: ProfileModelState;
   project: ProjectModelState;
+  register?: RegisterModelState;
   setting: SettingModelState;
   user: UserModelState;
 }

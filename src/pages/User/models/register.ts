@@ -5,7 +5,7 @@ import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
 export interface RegisterModelState {
-  status: undefined | string;
+  status?: string;
 }
 
 export interface RegisterModel {
@@ -22,9 +22,7 @@ export interface RegisterModel {
 const RegisterModel: RegisterModel = {
   namespace: 'register',
 
-  state: {
-    status: undefined,
-  },
+  state: {},
 
   effects: {
     *submit({ payload }, { call, put }) {

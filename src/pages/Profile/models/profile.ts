@@ -1,15 +1,17 @@
 import { queryBasicProfile, queryAdvancedProfile } from '@/services/api';
 import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
+import { AdvancedOperation } from '../AdvancedProfile';
+import { Application, BasicGoodsItem, BasicProgressItem, UserInfo } from '../BasicProfile';
 
 export interface ProfileModelState {
-  basicGoods: [];
-  advancedOperation1: [];
-  advancedOperation2: [];
-  advancedOperation3: [];
-  basicProgress: [];
-  userInfo: any;
-  application: any;
+  basicGoods: BasicGoodsItem[];
+  advancedOperation1: AdvancedOperation[];
+  advancedOperation2: AdvancedOperation[];
+  advancedOperation3: AdvancedOperation[];
+  basicProgress: BasicProgressItem[];
+  userInfo: Partial<UserInfo>;
+  application: Partial<Application>;
 }
 
 export interface ProfileModel {
@@ -40,6 +42,7 @@ const ProfileModel: ProfileModel = {
   effects: {
     *fetchBasic({ payload }, { call, put }) {
       const response = yield call(queryBasicProfile, payload);
+      console.log(response);
       yield put({
         type: 'show',
         payload: response,
