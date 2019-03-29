@@ -17,7 +17,7 @@ interface RouterData {
 
 export const matchParamsPath = (pathname: string, breadcrumbNameMap: object): RouterData => {
   const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
-  return breadcrumbNameMap[pathKey];
+  return pathKey ? breadcrumbNameMap[pathKey] : '';
 };
 
 const getPageTitle = (pathname: string, breadcrumbNameMap: object): string => {
