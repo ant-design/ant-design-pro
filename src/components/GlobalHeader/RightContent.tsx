@@ -170,7 +170,7 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
             title="notification"
             emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
             emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
-            showViewMore // todo:showViewMore?: boolean;  skeletonProps?: SkeletonProps;
+            showViewMore
           />
           <NoticeIcon.Tab
             count={unreadMsg.message}

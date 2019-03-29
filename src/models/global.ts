@@ -2,9 +2,9 @@ import { queryNotices } from '@/services/user';
 import { Subscription } from 'dva';
 import { Reducer } from 'redux';
 import { Effect } from './connect';
-import { INoticeIconData } from 'ant-design-pro/lib/NoticeIcon/NoticeIconTab';
+import { NoticeIconData } from 'ant-design-pro/lib/NoticeIcon/NoticeIconTab';
 
-export interface NoticeItem extends INoticeIconData {
+export interface NoticeItem extends NoticeIconData {
   id: string;
   type: string;
   [key: string]: any;

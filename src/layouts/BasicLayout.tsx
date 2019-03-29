@@ -126,7 +126,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   );
   return (
     <React.Fragment>
-      <DocumentTitle title={getPageTitle(location.pathname, breadcrumbNameMap)}>
+      <DocumentTitle title={getPageTitle(location!.pathname, breadcrumbNameMap)}>
         <ContainerQuery query={query}>
           {params => (
             <Context.Provider value={{ location, breadcrumbNameMap }}>

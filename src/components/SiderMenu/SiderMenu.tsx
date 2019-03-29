@@ -38,9 +38,9 @@ export default class SiderMenu extends Component<SiderMenuProps, SiderMenuState>
 
   static getDerivedStateFromProps(props: SiderMenuProps, state: SiderMenuState) {
     const { pathname, flatMenuKeysLen } = state;
-    if (props.location.pathname !== pathname || props.flatMenuKeys!.length !== flatMenuKeysLen) {
+    if (props.location!.pathname !== pathname || props.flatMenuKeys!.length !== flatMenuKeysLen) {
       return {
-        pathname: props.location.pathname,
+        pathname: props.location!.pathname,
         flatMenuKeysLen: props.flatMenuKeys!.length,
         openKeys: getDefaultCollapsedSubMenus(props),
       };
