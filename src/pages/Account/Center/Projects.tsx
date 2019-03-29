@@ -1,5 +1,6 @@
+import { ConnectState, ListModelState } from '@/models/connect';
 import { AvatarList, AvatarListItem } from '@/components/AvatarList';
-import { ListModelState } from '@/models/list';
+import { MockListItem } from '@/models/list';
 import { Card, List } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
@@ -20,7 +21,7 @@ const Projects: React.FC<ProjectsProps> = props => {
       rowKey="id"
       grid={{ gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
       dataSource={list}
-      renderItem={item => (
+      renderItem={(item: MockListItem) => (
         <List.Item>
           <Card
             className={stylesProjects.card}
@@ -49,6 +50,6 @@ const Projects: React.FC<ProjectsProps> = props => {
   );
 };
 
-export default connect(({ list }) => ({
+export default connect(({ list }: ConnectState) => ({
   list,
 }))(Projects);

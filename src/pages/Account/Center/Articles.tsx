@@ -1,5 +1,6 @@
+import { ConnectState, ListModelState } from '@/models/connect';
+import { MockListItem } from '@/models/list';
 import ArticleListContent from '@/components/ArticleListContent';
-import { ListModelState } from '@/models/list';
 import { Icon, List, Tag } from 'antd';
 import { connect } from 'dva';
 import React from 'react';
@@ -9,16 +10,17 @@ interface ArticlesProps {
   list: ListModelState;
 }
 
+const IconText: React.FC<{ type: string; text: React.ReactNode }> = ({ type, text }) => (
+  <span>
+    <Icon type={type} style={{ marginRight: 8 }} />
+    {text}
+  </span>
+);
+
 const Center: React.FC<ArticlesProps> = props => {
   const {
     list: { list },
   } = props;
-  const IconText = ({ type, text }) => (
-    <span>
-      <Icon type={type} style={{ marginRight: 8 }} />
-      {text}
-    </span>
-  );
   return (
     <List
       size="large"
@@ -26,7 +28,7 @@ const Center: React.FC<ArticlesProps> = props => {
       rowKey="id"
       itemLayout="vertical"
       dataSource={list}
-      renderItem={item => (
+      renderItem={(item: MockListItem) => (
         <List.Item
           key={item.id}
           actions={[
@@ -56,6 +58,6 @@ const Center: React.FC<ArticlesProps> = props => {
   );
 };
 
-export default connect(({ list }) => ({
+export default connect(({ list }: ConnectState) => ({
   list,
 }))(Center);

@@ -1,42 +1,29 @@
+import { ConnectProps, ConnectState, ProjectModelState } from '@/models/connect';
+import { CurrentUser } from '@/models/user';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
-import { ProjectModelState } from '@/models/project';
 import { Avatar, Card, Col, Divider, Icon, Input, Row, Spin, Tag } from 'antd';
-import InputProps from 'antd/es/input';
+import { CardTabListType } from 'antd/es/card';
 import { connect } from 'dva';
-import * as H from 'history';
 import React, { Component } from 'react';
-import { match } from 'react-router';
-import { Dispatch } from 'redux';
 import Link from 'umi/link';
 import router from 'umi/router';
 import styles from './Center.less';
 
-interface CenterProps {
+interface CenterProps extends Required<ConnectProps> {
   listLoading: boolean;
-  currentUser: {
-    avatar?: string;
-    name?: string;
-    title?: string;
-    group?: string;
-    signature?: string;
-    geographic?: any;
-    tags?: any[];
-  };
+  currentUser: CurrentUser;
   currentUserLoading: boolean;
   project: ProjectModelState;
   projectLoading: boolean;
-  dispatch: Dispatch<any>;
-  match: match;
-  location: H.Location;
 }
 
 interface CenterState {
-  newTags: any[];
+  newTags: { key: string; label: string }[];
   inputVisible: boolean;
   inputValue: string;
 }
 
-@connect(({ loading, user, project }) => ({
+@connect(({ loading, user, project }: ConnectState) => ({
   listLoading: loading.effects['list/fetch'],
   currentUser: user.currentUser,
   currentUserLoading: loading.effects['user/fetchCurrent'],
@@ -44,13 +31,13 @@ interface CenterState {
   projectLoading: loading.effects['project/fetchNotice'],
 }))
 class Center extends Component<CenterProps, CenterState> {
-  state = {
+  state: CenterState = {
     newTags: [],
     inputVisible: false,
     inputValue: '',
   };
 
-  input: InputProps;
+  input: Input = null!;
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -68,7 +55,7 @@ class Center extends Component<CenterProps, CenterState> {
     });
   }
 
-  onTabChange = key => {
+  onTabChange = (key: string) => {
     const { match } = this.props;
     switch (key) {
       case 'articles':
@@ -89,11 +76,11 @@ class Center extends Component<CenterProps, CenterState> {
     this.setState({ inputVisible: true }, () => this.input.focus());
   };
 
-  saveInputRef = input => {
+  saveInputRef = (input: Input) => {
     this.input = input;
   };
 
-  handleInputChange = e => {
+  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ inputValue: e.target.value });
   };
 
@@ -124,7 +111,7 @@ class Center extends Component<CenterProps, CenterState> {
       children,
     } = this.props;
 
-    const operationTabList = [
+    const operationTabList: CardTabListType[] = [
       {
         key: 'articles',
         tab: (
@@ -181,9 +168,10 @@ class Center extends Component<CenterProps, CenterState> {
                   <Divider dashed={true} />
                   <div className={styles.tags}>
                     <div className={styles.tagsTitle}>标签</div>
-                    {currentUser.tags.concat(newTags).map(item => (
-                      <Tag key={item.key}>{item.label}</Tag>
-                    ))}
+                    {currentUser.tags &&
+                      currentUser.tags
+                        .concat(newTags)
+                        .map(item => <Tag key={item.key}>{item.label}</Tag>)}
                     {inputVisible && (
                       <Input
                         ref={this.saveInputRef}

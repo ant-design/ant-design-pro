@@ -2,8 +2,35 @@ import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from '@/se
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
+export interface MockListItem {
+  id: string;
+  owner: string;
+  title: string;
+  avatar: string;
+  cover: string;
+  status: string;
+  percent: number;
+  logo: string;
+  href: string;
+  updatedAt: Date;
+  createdAt: Date;
+  subDescription: string;
+  description: string;
+  activeUser: number | string;
+  newUser: number | string;
+  star: number | string;
+  like: number | string;
+  message: number | string;
+  content: string;
+  members: {
+    avatar: string;
+    name: string;
+    id: string;
+  }[];
+}
+
 export interface ListModelState {
-  list: any[];
+  list: MockListItem[];
 }
 
 export interface ListModel {
