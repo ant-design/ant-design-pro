@@ -3,8 +3,8 @@ import { PaginationConfig, SorterResult, TableCurrentDataSource } from 'antd/lib
 import React, { Component, Fragment } from 'react';
 import styles from './index.less';
 
-function initTotalList(columns) {
-  const totalList = [];
+function initTotalList(columns: { forEach: (arg0: (column: any) => void) => void }) {
+  const totalList: any[] = [];
   columns.forEach(column => {
     if (column.needTotal) {
       totalList.push({ ...column, total: 0 });
@@ -33,7 +33,7 @@ interface StandardTableState {
   needTotalList: any[];
 }
 class StandardTable extends Component<StandardTableProps, StandardTableState> {
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps: StandardTableProps) {
     // clean state
     if (nextProps.selectedRows.length === 0) {
       const needTotalList = initTotalList(nextProps.columns);
@@ -44,7 +44,7 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
     }
     return null;
   }
-  constructor(props) {
+  constructor(props: StandardTableProps) {
     super(props);
     const { columns } = props;
     const needTotalList = initTotalList(columns);
@@ -55,7 +55,10 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
     };
   }
 
-  handleRowSelectChange = (selectedRowKeys, selectedRows) => {
+  handleRowSelectChange = (
+    selectedRowKeys: any,
+    selectedRows: { reduce: (arg0: (sum: any, val: any) => any, arg1: number) => void },
+  ) => {
     let { needTotalList } = this.state;
     needTotalList = needTotalList.map(item => ({
       ...item,
@@ -69,7 +72,11 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
     this.setState({ selectedRowKeys, needTotalList });
   };
 
-  handleTableChange = (pagination, filters, sorter) => {
+  handleTableChange = (
+    pagination: PaginationConfig,
+    filters: Record<string | number | symbol, string[]>,
+    sorter: SorterResult<any>,
+  ) => {
     const { onChange } = this.props;
     if (onChange) {
       onChange(pagination, filters, sorter);
@@ -94,7 +101,7 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
     const rowSelection = {
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
-      getCheckboxProps: record => ({
+      getCheckboxProps: (record: { disabled: any }) => ({
         disabled: record.disabled,
       }),
     };
