@@ -1,11 +1,11 @@
+import { ConnectProps } from '@/models/connect';
 import React, { Component } from 'react';
 import { Button, Spin, Card } from 'antd';
 import { connect } from 'dva';
 import styles from './style.less';
 
-interface TriggerExceptionProps {
+interface TriggerExceptionProps extends ConnectProps {
   isloading: boolean;
-  dispatch: (args: any) => Promise<any>;
 }
 
 interface TriggerExceptionState {
@@ -25,7 +25,7 @@ class TriggerException extends Component<TriggerExceptionProps, TriggerException
       isloading: true,
     });
     const { dispatch } = this.props;
-    dispatch({
+    dispatch!({
       type: 'error/query',
       payload: {
         code,

@@ -58,7 +58,6 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^16.8.3",
     "react-fittext": "^1.0.0",
-    "react-media": "^1.9.2",
     "react-media-hook2": "^1.0.2",
     "umi": "^2.6.10",
     "umi-plugin-react": "^1.7.2"

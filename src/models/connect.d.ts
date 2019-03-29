@@ -1,8 +1,9 @@
 import { Route } from '@/components/SiderMenu';
+import { GeographicModelState } from '@/pages/Account/Settings/models/geographic';
 import { ActivitiesModelState } from '@/pages/Dashboard/models/activities';
 import { ChartModelState } from '@/pages/Dashboard/models/chart';
 import { MonitorModelState } from '@/pages/Dashboard/models/monitor';
-import { GeographicModelState } from '@/pages/Account/Settings/models/geographic';
+import { FormModelState } from '@/pages/Forms/models/form';
 import { EffectsCommandMap } from 'dva';
 import { AnyAction } from 'redux';
 import { RouterTypes } from 'umi';
@@ -15,10 +16,11 @@ import { SettingModelState } from './setting';
 import { UserModelState } from './user';
 
 export {
+  GeographicModelState,
   ActivitiesModelState,
   ChartModelState,
   MonitorModelState,
-  GeographicModelState,
+  FormModelState,
   GlobalModelState,
   ListModelState,
   LoginModelState,
@@ -50,6 +52,7 @@ export interface Loading {
   models: {
     activities?: boolean;
     chart?: boolean;
+    form?: boolean;
     geographic?: boolean;
     global?: boolean;
     list?: boolean;
@@ -65,6 +68,7 @@ export interface Loading {
 export interface ConnectState {
   activities?: ActivitiesModelState;
   chart?: ChartModelState;
+  form?: FormModelState;
   geographic?: GeographicModelState;
   global: GlobalModelState;
   list: ListModelState;

@@ -1,17 +1,27 @@
 import { Button, Divider, Input, message, Popconfirm, Table } from 'antd';
+import { ColumnProps } from 'antd/es/table';
 import isEqual from 'lodash/isEqual';
 import React, { Fragment, Component } from 'react';
 import styles from './style.less';
 
+export interface TableFormValue {
+  department: string;
+  name: string;
+  key: string | number;
+  workId: string;
+  editable?: boolean;
+  isNew?: boolean;
+}
+
 interface TableFormProps {
-  onChange?: (data: any) => void;
-  value?: any[];
+  onChange?: (value: TableFormValue[]) => void;
+  value?: TableFormValue[];
 }
 
 interface TableFormState {
-  data?: any[];
-  loading?: boolean;
-  value?: any[];
+  data: TableFormValue[];
+  loading: boolean;
+  value: TableFormValue[];
 }
 
 class TableForm extends Component<TableFormProps, TableFormState> {
@@ -33,19 +43,19 @@ class TableForm extends Component<TableFormProps, TableFormState> {
     super(props);
 
     this.state = {
-      data: props.value,
+      data: props.value || [],
       loading: false,
       /* eslint-disable-next-line react/no-unused-state */
-      value: props.value,
+      value: props.value || [],
     };
   }
 
-  getRowByKey: (key: any, newData?: any) => any = (key, newData) => {
+  getRowByKey = (key: string | number, newData?: TableFormValue[]) => {
     const { data } = this.state;
-    return (newData || data).filter((item: any) => item.key === key)[0];
+    return (newData || data).filter(item => item.key === key)[0];
   };
 
-  toggleEditable = (e: { preventDefault: () => void }, key: string | number) => {
+  toggleEditable = (e: React.MouseEvent | React.KeyboardEvent, key: string | number) => {
     e.preventDefault();
     const { data = [] } = this.state;
     const newData = data.map(item => ({ ...item }));
@@ -75,7 +85,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
     this.setState({ data: newData });
   };
 
-  remove(key: any) {
+  remove(key: string | number) {
     const { data = [] } = this.state;
     const { onChange = () => {} } = this.props;
     const newData = data.filter(item => item.key !== key);
@@ -83,13 +93,11 @@ class TableForm extends Component<TableFormProps, TableFormState> {
     onChange(newData);
   }
 
-  handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>, key: any) {
-    if (e.key === 'Enter') {
-      this.saveRow(e, key);
-    }
-  }
-
-  handleFieldChange(e: React.ChangeEvent<HTMLInputElement>, fieldName: string, key: any) {
+  handleFieldChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    fieldName: string,
+    key: string | number,
+  ) {
     const { data = [] } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
@@ -99,7 +107,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
     }
   }
 
-  saveRow(e: any, key: React.Key) {
+  saveRow(e: React.MouseEvent | React.KeyboardEvent, key: React.Key) {
     e.persist();
     this.setState({
       loading: true,
@@ -112,7 +120,6 @@ class TableForm extends Component<TableFormProps, TableFormState> {
       const target = this.getRowByKey(key) || {};
       if (!target.workId || !target.name || !target.department) {
         message.error('请填写完整成员信息。');
-        e.target.focus();
         this.setState({
           loading: false,
         });
@@ -133,7 +140,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
     this.clickedCancel = true;
     e.preventDefault();
     const { data = [] } = this.state;
-    const newData = data.map((item: any) => ({ ...item }));
+    const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
     if (this.cacheOriginData[key]) {
       Object.assign(target, this.cacheOriginData[key]);
@@ -146,20 +153,20 @@ class TableForm extends Component<TableFormProps, TableFormState> {
 
   render() {
     const { loading, data } = this.state;
-    const columns = [
+    const columns: ColumnProps<TableFormValue>[] = [
       {
         title: '成员姓名',
         dataIndex: 'name',
         key: 'name',
         width: '20%',
-        render: (text: any, record: any) => {
+        render: (text: string, record) => {
           if (record.editable) {
             return (
               <Input
                 value={text}
                 autoFocus={true}
                 onChange={e => this.handleFieldChange(e, 'name', record.key)}
-                onKeyPress={e => this.handleKeyPress(e, record.key)}
+                onKeyPress={e => this.saveRow(e, record.key)}
                 placeholder="成员姓名"
               />
             );
@@ -172,13 +179,13 @@ class TableForm extends Component<TableFormProps, TableFormState> {
         dataIndex: 'workId',
         key: 'workId',
         width: '20%',
-        render: (text: any, record: any) => {
+        render: (text: string, record) => {
           if (record.editable) {
             return (
               <Input
                 value={text}
                 onChange={e => this.handleFieldChange(e, 'workId', record.key)}
-                onKeyPress={e => this.handleKeyPress(e, record.key)}
+                onPressEnter={e => this.saveRow(e, record.key)}
                 placeholder="工号"
               />
             );
@@ -191,13 +198,13 @@ class TableForm extends Component<TableFormProps, TableFormState> {
         dataIndex: 'department',
         key: 'department',
         width: '40%',
-        render: (text: any, record: any) => {
+        render: (text: string, record) => {
           if (record.editable) {
             return (
               <Input
                 value={text}
                 onChange={e => this.handleFieldChange(e, 'department', record.key)}
-                onKeyPress={e => this.handleKeyPress(e, record.key)}
+                onPressEnter={e => this.saveRow(e, record.key)}
                 placeholder="所属部门"
               />
             );
@@ -208,7 +215,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
       {
         title: '操作',
         key: 'action',
-        render: (_: any, record: any) => {
+        render: (_, record) => {
           if (!!record.editable && loading) {
             return null;
           }

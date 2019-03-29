@@ -22,7 +22,7 @@ export interface FormModel {
     submitAdvancedForm: Effect;
   };
   reducers: {
-    saveStepFormData: Reducer<any>;
+    saveStepFormData: Reducer<FormModelState>;
   };
 }
 

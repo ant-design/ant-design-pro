@@ -4,7 +4,7 @@ import React, { memo } from 'react';
 import { Row, Col, Table, Tooltip, Card, Icon } from 'antd';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import Trend from '@/components/Trend';
-import { ColumnProps } from 'antd/es/table/interface';
+import { ColumnProps } from 'antd/es/table';
 import numeral from 'numeral';
 import styles from './Analysis.less';
 import { VisitDataItem } from './IntroduceRow';
