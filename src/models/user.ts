@@ -1,16 +1,23 @@
 import { query as queryUsers, queryCurrent } from '@/services/user';
+import { LabeledValue } from 'antd/es/select';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
 export interface CurrentUser {
+  address?: string;
   avatar?: string;
-  name?: string;
-  title?: string;
+  country?: string;
+  email?: string;
+  geographic?: { province: LabeledValue; city: LabeledValue };
   group?: string;
+  notifyCount: number;
+  name?: string;
+  phone?: string;
   signature?: string;
-  geographic?: any;
-  tags?: { key: string; label: string }[];
+  tags?: LabeledValue[];
+  title?: string;
   unreadCount?: number;
+  userid?: string;
 }
 
 export interface UserModelState {

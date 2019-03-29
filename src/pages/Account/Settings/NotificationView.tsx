@@ -2,8 +2,14 @@ import { List, Switch } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 
+interface NotificationViewItem {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  actions?: React.ReactNode[];
+}
+
 class NotificationView extends Component {
-  getData = () => {
+  getData = (): NotificationViewItem[] => {
     const Action = (
       <Switch
         checkedChildren={formatMessage({ id: 'app.settings.open' })}
@@ -36,7 +42,7 @@ class NotificationView extends Component {
         <List
           itemLayout="horizontal"
           dataSource={this.getData()}
-          renderItem={item => (
+          renderItem={(item: NotificationViewItem) => (
             <List.Item actions={item.actions}>
               <List.Item.Meta title={item.title} description={item.description} />
             </List.Item>

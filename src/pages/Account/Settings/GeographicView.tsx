@@ -1,29 +1,31 @@
+import { ConnectProps, ConnectState, GeographicModelState } from '@/models/connect';
 import { Select, Spin } from 'antd';
 import { WrappedFormUtils } from 'antd/es/form/Form';
+import { LabeledValue } from 'antd/es/select';
 import { connect } from 'dva';
 import React, { Component } from 'react';
-import { Dispatch } from 'redux';
 import styles from './GeographicView.less';
 
 const { Option } = Select;
 
-const nullSlectItem = {
+const nullSelectItem: LabeledValue = {
   label: '',
   key: '',
 };
 
-interface GeographicProps {
-  province?: any[];
-  city?: any[];
-  isLoading?: boolean;
-  dispatch?: Dispatch<any>;
-  value?: any;
-  onChange?: ({ province: any, city: object }) => void;
+export interface GeographicValue {
+  province: LabeledValue;
+  city: LabeledValue;
+}
+
+interface GeographicProps extends ConnectProps, Partial<GeographicModelState> {
+  value?: GeographicValue;
+  onChange?: (value: GeographicValue) => void;
   form?: WrappedFormUtils;
 }
 
-@connect(({ geographic }) => {
-  const { province, isLoading, city } = geographic;
+@connect(({ geographic }: ConnectState) => {
+  const { province, isLoading, city } = geographic!;
   return {
     province,
     city,
@@ -31,18 +33,22 @@ interface GeographicProps {
   };
 })
 class GeographicView extends Component<GeographicProps> {
+  static defaultProps: GeographicProps = {
+    onChange: () => {},
+  };
+
   componentDidMount = () => {
     const { dispatch } = this.props;
-    dispatch({
+    dispatch!({
       type: 'geographic/fetchProvince',
     });
   };
 
-  componentDidUpdate(props) {
+  componentDidUpdate(props: GeographicProps) {
     const { dispatch, value } = this.props;
 
     if (!props.value && !!value && !!value.province) {
-      dispatch({
+      dispatch!({
         type: 'geographic/fetchCity',
         payload: value.province.key,
       });
@@ -59,7 +65,7 @@ class GeographicView extends Component<GeographicProps> {
     return this.getOption(city);
   };
 
-  getOption = list => {
+  getOption = (list?: { [key: string]: any }[]) => {
     if (!list || list.length < 1) {
       return (
         <Option key="0" value={0}>
@@ -74,38 +80,40 @@ class GeographicView extends Component<GeographicProps> {
     ));
   };
 
-  selectProvinceItem = item => {
+  selectProvinceItem = (item: LabeledValue) => {
     const { dispatch, onChange } = this.props;
-    dispatch({
+    dispatch!({
       type: 'geographic/fetchCity',
       payload: item.key,
     });
-    onChange({
-      province: item,
-      city: nullSlectItem,
-    });
+    if (onChange)
+      onChange({
+        province: item,
+        city: nullSelectItem,
+      });
   };
 
-  selectCityItem = item => {
+  selectCityItem = (item: LabeledValue) => {
     const { value, onChange } = this.props;
-    onChange({
-      province: value.province,
-      city: item,
-    });
+    if (onChange)
+      onChange({
+        province: value!.province,
+        city: item,
+      });
   };
 
-  conversionObject() {
+  conversionObject(): GeographicValue {
     const { value } = this.props;
     if (!value) {
       return {
-        province: nullSlectItem,
-        city: nullSlectItem,
+        province: nullSelectItem,
+        city: nullSelectItem,
       };
     }
     const { province, city } = value;
     return {
-      province: province || nullSlectItem,
-      city: city || nullSlectItem,
+      province: province || nullSelectItem,
+      city: city || nullSelectItem,
     };
   }
 
@@ -117,7 +125,7 @@ class GeographicView extends Component<GeographicProps> {
         <Select
           className={styles.item}
           value={province}
-          labelInValue={true}
+          labelInValue
           showSearch={true}
           onSelect={this.selectProvinceItem}
         >
@@ -126,7 +134,7 @@ class GeographicView extends Component<GeographicProps> {
         <Select
           className={styles.item}
           value={city}
-          labelInValue={true}
+          labelInValue
           showSearch={true}
           onSelect={this.selectCityItem}
         >
