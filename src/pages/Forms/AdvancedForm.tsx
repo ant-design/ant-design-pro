@@ -165,7 +165,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
         wrapperClassName={styles.advancedForm}
       >
         <Card title="仓库管理" className={styles.card} bordered={false}>
-          <Form layout="vertical" hideRequiredMark={true}>
+          <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
               <Col lg={6} md={12} sm={24}>
                 <Form.Item label={fieldLabels.name}>
@@ -242,7 +242,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
           </Form>
         </Card>
         <Card title="任务管理" className={styles.card} bordered={false}>
-          <Form layout="vertical" hideRequiredMark={true}>
+          <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
               <Col lg={6} md={12} sm={24}>
                 <Form.Item label={fieldLabels.name2}>

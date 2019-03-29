@@ -161,11 +161,11 @@ class Center extends Component<CenterProps, CenterState> {
                     </p>
                     <p>
                       <i className={styles.address} />
-                      {currentUser.geographic.province.label}
-                      {currentUser.geographic.city.label}
+                      {currentUser.geographic!.province.label}
+                      {currentUser.geographic!.city.label}
                     </p>
                   </div>
-                  <Divider dashed={true} />
+                  <Divider dashed />
                   <div className={styles.tags}>
                     <div className={styles.tagsTitle}>标签</div>
                     {currentUser.tags &&
@@ -193,7 +193,7 @@ class Center extends Component<CenterProps, CenterState> {
                       </Tag>
                     )}
                   </div>
-                  <Divider style={{ marginTop: 16 }} dashed={true} />
+                  <Divider style={{ marginTop: 16 }} dashed />
                   <div className={styles.team}>
                     <div className={styles.teamTitle}>团队</div>
                     <Spin spinning={projectLoading}>

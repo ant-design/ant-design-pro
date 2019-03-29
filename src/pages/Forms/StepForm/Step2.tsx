@@ -44,8 +44,8 @@ const Confirm: React.FC<ConfirmFormProps> = props => {
   return (
     <Form layout="horizontal" className={styles.stepForm}>
       <Alert
-        closable={true}
-        showIcon={true}
+        closable
+        showIcon
         message="确认转账后，资金将直接打入对方账户，无法退回。"
         style={{ marginBottom: 24 }}
       />

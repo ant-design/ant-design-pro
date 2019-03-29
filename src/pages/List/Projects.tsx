@@ -2,24 +2,23 @@ import { AvatarList, AvatarListItem } from '@/components/AvatarList';
 import TagSelect from '@/components/TagSelect';
 import Ellipsis from '@/components/Ellipsis';
 import StandardFormRow from '@/components/StandardFormRow';
+import { ConnectProps, ConnectState, ListModelState } from '@/models/connect';
+import { MockListItem } from '@/models/list';
 import { Card, Col, Form, List, Row, Select } from 'antd';
-import { FormComponentProps, FormCreateOption } from 'antd/es/form';
+import { FormComponentProps, FormCreateOption, FormItemProps } from 'antd/es/form';
 import { connect } from 'dva';
 import moment from 'moment';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'umi-plugin-react/locale';
-import { RuleModelState } from './models/rule';
 import styles from './Projects.less';
-import { ConnectState } from '@/models/connect';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 
 /* eslint react/no-array-index-key: 0 */
 
-interface CoverCardListProps extends FormComponentProps {
-  list: RuleModelState;
-  dispatch: (args: any) => void;
+interface CoverCardListProps extends FormComponentProps, Required<ConnectProps> {
+  list: ListModelState;
   loading: boolean;
 }
 
@@ -52,11 +51,11 @@ class CoverCardList extends Component<CoverCardListProps> {
         loading={loading}
         grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
         dataSource={list}
-        renderItem={(item: any) => (
+        renderItem={(item: MockListItem) => (
           <List.Item>
             <Card
               className={styles.card}
-              hoverable={true}
+              hoverable
               cover={<img alt={item.title} src={item.cover} />}
             >
               <Card.Meta
@@ -67,15 +66,13 @@ class CoverCardList extends Component<CoverCardListProps> {
                 <span>{moment(item.updatedAt).fromNow()}</span>
                 <div className={styles.avatarList}>
                   <AvatarList size="small">
-                    {item.members.map(
-                      (member: { avatar: string; name: React.ReactNode }, i: any) => (
-                        <AvatarListItem
-                          key={`${item.id}-avatar-${i}`}
-                          src={member.avatar}
-                          tips={member.name}
-                        />
-                      ),
-                    )}
+                    {item.members.map((member, i) => (
+                      <AvatarListItem
+                        key={`${item.id}-avatar-${i}`}
+                        src={member.avatar}
+                        tips={member.name}
+                      />
+                    ))}
                   </AvatarList>
                 </div>
               </div>
@@ -85,7 +82,7 @@ class CoverCardList extends Component<CoverCardListProps> {
       />
     ) : null;
 
-    const formItemLayout = {
+    const formItemLayout: FormItemProps = {
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 16 },
@@ -104,10 +101,10 @@ class CoverCardList extends Component<CoverCardListProps> {
       <div className={styles.coverCardList}>
         <Card bordered={false}>
           <Form layout="inline">
-            <StandardFormRow title="所属类目" block={true} style={{ paddingBottom: 11 }}>
+            <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
-                  <TagSelect expandable={true} actionsText={actionsTextMap}>
+                  <TagSelect expandable actionsText={actionsTextMap}>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
                     <TagSelect.Option value="cat3">类目三</TagSelect.Option>
@@ -124,7 +121,7 @@ class CoverCardList extends Component<CoverCardListProps> {
                 )}
               </FormItem>
             </StandardFormRow>
-            <StandardFormRow title="其它选项" grid={true} last={true}>
+            <StandardFormRow title="其它选项" grid last>
               <Row gutter={16}>
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem {...formItemLayout} label="作者">
@@ -168,4 +165,4 @@ export default Form.create({
       },
     });
   },
-} as FormCreateOption<any>)(CoverCardList);
+} as FormCreateOption<CoverCardListProps>)(CoverCardList);

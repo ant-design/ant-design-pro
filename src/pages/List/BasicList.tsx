@@ -1,5 +1,7 @@
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Result from '@/components/Result';
+import { ConnectProps, ConnectState, ListModelState } from '@/models/connect';
+import { MockListItem } from '@/models/list';
 import {
   Avatar,
   Button,
@@ -24,8 +26,6 @@ import moment from 'moment';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import styles from './BasicList.less';
-import { RuleModelState } from './models/rule';
-import { ConnectState } from '@/models/connect';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
@@ -33,16 +33,15 @@ const RadioGroup = Radio.Group;
 const SelectOption = Select.Option;
 const { Search, TextArea } = Input;
 
-interface BasicListProps extends FormComponentProps {
-  list: RuleModelState;
-  dispatch: (args: any) => void;
+interface BasicListProps extends FormComponentProps, Required<ConnectProps> {
+  list: ListModelState;
   loading: boolean;
 }
 
 interface BasicListState {
   visible: boolean;
   done: boolean;
-  current?: any;
+  current: Partial<MockListItem>;
 }
 
 @connect(({ list, loading }: ConnectState) => ({
@@ -50,7 +49,11 @@ interface BasicListState {
   loading: loading.models.list,
 }))
 class BasicList extends Component<BasicListProps, BasicListState> {
-  state: BasicListState = { visible: false, done: false, current: undefined };
+  state: BasicListState = {
+    visible: false,
+    done: false,
+    current: {},
+  };
 
   addBtn!: HTMLElement;
 
@@ -72,11 +75,11 @@ class BasicList extends Component<BasicListProps, BasicListState> {
   showModal = () => {
     this.setState({
       visible: true,
-      current: undefined,
+      current: {},
     });
   };
 
-  showEditModal = (item: any) => {
+  showEditModal = (item: MockListItem) => {
     this.setState({
       visible: true,
       current: item,
@@ -101,8 +104,9 @@ class BasicList extends Component<BasicListProps, BasicListState> {
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { dispatch, form } = this.props;
-    const { current } = this.state;
-    const id = current ? current.id : '';
+    const {
+      current: { id = '' },
+    } = this.state;
 
     setTimeout(() => this.addBtn.blur(), 0);
     form.validateFields((err, fieldsValue) => {
@@ -119,7 +123,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
     });
   };
 
-  deleteItem = (id: any) => {
+  deleteItem = (id: string) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'list/submit',
@@ -135,9 +139,9 @@ class BasicList extends Component<BasicListProps, BasicListState> {
     const {
       form: { getFieldDecorator },
     } = this.props;
-    const { visible, done, current = {} } = this.state;
+    const { visible, done, current } = this.state;
 
-    const editAndDelete = (key: string, currentItem: { id: any }) => {
+    const editAndDelete = (key: string, currentItem: MockListItem) => {
       if (key === 'edit') {
         this.showEditModal(currentItem);
       } else if (key === 'delete') {
@@ -155,15 +159,11 @@ class BasicList extends Component<BasicListProps, BasicListState> {
       ? { footer: null, onCancel: this.handleDone }
       : { okText: '保存', onOk: this.handleSubmit, onCancel: this.handleCancel };
 
-    const Info: ({
-      title,
-      value,
-      bordered,
-    }: {
+    const Info: React.FC<{
       title: string;
       value: string;
       bordered?: boolean;
-    }) => JSX.Element = ({ title, value, bordered }) => (
+    }> = ({ title, value, bordered }) => (
       <div className={styles.headerInfo}>
         <span>{title}</span>
         <p>{value}</p>
@@ -178,7 +178,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
           <RadioButton value="progress">进行中</RadioButton>
           <RadioButton value="waiting">等待中</RadioButton>
         </RadioGroup>
-        <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
+        <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => {}} />
       </div>
     );
 
@@ -189,7 +189,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
       total: 50,
     };
 
-    const ListContent: ({ data }: { data: any }) => JSX.Element = ({
+    const ListContent: React.FC<{ data: MockListItem }> = ({
       data: { owner, createdAt, percent, status },
     }) => (
       <div className={styles.listContent}>
@@ -202,12 +202,17 @@ class BasicList extends Component<BasicListProps, BasicListState> {
           <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
         </div>
         <div className={styles.listContentItem}>
-          <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />
+          <Progress
+            percent={percent}
+            status={status as any}
+            strokeWidth={6}
+            style={{ width: 180 }}
+          />
         </div>
       </div>
     );
 
-    const MoreBtn = (props: any) => (
+    const MoreBtn: React.FC<{ current: MockListItem }> = props => (
       <Dropdown
         overlay={
           <Menu onClick={({ key }) => editAndDelete(key, props.current)}>
@@ -252,7 +257,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
               initialValue: current.createdAt ? moment(current.createdAt) : null,
             })(
               <DatePicker
-                showTime={true}
+                showTime
                 placeholder="请选择"
                 format="YYYY-MM-DD HH:mm:ss"
                 style={{ width: '100%' }}
@@ -285,10 +290,10 @@ class BasicList extends Component<BasicListProps, BasicListState> {
           <Card bordered={false}>
             <Row>
               <Col sm={8} xs={24}>
-                <Info title="我的待办" value="8个任务" bordered={true} />
+                <Info title="我的待办" value="8个任务" bordered />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="本周任务平均处理时间" value="32分钟" bordered={true} />
+                <Info title="本周任务平均处理时间" value="32分钟" bordered />
               </Col>
               <Col sm={8} xs={24}>
                 <Info title="本周完成任务数" value="24个任务" />
@@ -323,7 +328,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
               loading={loading}
               pagination={paginationProps}
               dataSource={list}
-              renderItem={(item: any) => (
+              renderItem={(item: MockListItem) => (
                 <List.Item
                   actions={[
                     <a
@@ -354,7 +359,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
           className={styles.standardListForm}
           width={640}
           bodyStyle={done ? { padding: '72px 0' } : { padding: '28px 0 0' }}
-          destroyOnClose={true}
+          destroyOnClose
           visible={visible}
           {...modalFooter}
         >

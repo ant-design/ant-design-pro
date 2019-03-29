@@ -264,7 +264,7 @@ class Register extends Component<RegisterProps, RegisterState> {
             )}
           </FormItem>
           <FormItem>
-            <InputGroup compact={true}>
+            <InputGroup compact>
               <Select
                 size="large"
                 value={prefix}

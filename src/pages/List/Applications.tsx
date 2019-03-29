@@ -2,21 +2,20 @@ import { connect } from 'dva';
 import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
 import StandardFormRow from '@/components/StandardFormRow';
 import TagSelect from '@/components/TagSelect';
-import { ConnectState } from '@/models/connect';
+import { ConnectProps, ConnectState, ListModelState } from '@/models/connect';
+import { MockListItem } from '@/models/list';
 import { formatWan } from '@/utils/utils';
-import { FormComponentProps, FormCreateOption } from 'antd/es/form';
+import { FormComponentProps, FormCreateOption, FormItemProps } from 'antd/es/form';
 import numeral from 'numeral';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Applications.less';
-import { RuleModelState } from './models/rule';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 
-interface FilterCardListProps extends FormComponentProps {
-  list: RuleModelState;
-  dispatch: (args: any) => void;
+interface FilterCardListProps extends FormComponentProps, Required<ConnectProps> {
+  list: ListModelState;
   loading: boolean;
 }
 
@@ -43,7 +42,10 @@ class FilterCardList extends Component<FilterCardListProps> {
     } = this.props;
     const { getFieldDecorator } = form;
 
-    const CardInfo = ({ activeUser, newUser }: { activeUser: string; newUser: string }) => (
+    const CardInfo: React.FC<{ activeUser: string; newUser: string }> = ({
+      activeUser,
+      newUser,
+    }) => (
       <div className={styles.cardInfo}>
         <div>
           <p>活跃用户</p>
@@ -56,7 +58,7 @@ class FilterCardList extends Component<FilterCardListProps> {
       </div>
     );
 
-    const formItemLayout = {
+    const formItemLayout: FormItemProps = {
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 16 },
@@ -95,10 +97,10 @@ class FilterCardList extends Component<FilterCardListProps> {
       <div className={styles.filterCardList}>
         <Card bordered={false} style={{ marginBottom: 24 }}>
           <Form layout="inline">
-            <StandardFormRow title="所属类目" block={true} style={{ paddingBottom: 11 }}>
+            <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
-                  <TagSelect expandable={true} actionsText={actionsTextMap}>
+                  <TagSelect expandable actionsText={actionsTextMap}>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
                     <TagSelect.Option value="cat3">类目三</TagSelect.Option>
@@ -115,7 +117,7 @@ class FilterCardList extends Component<FilterCardListProps> {
                 )}
               </FormItem>
             </StandardFormRow>
-            <StandardFormRow title="其它选项" grid={true} last={true}>
+            <StandardFormRow title="其它选项" grid last>
               <Row gutter={16}>
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem {...formItemLayout} label="作者">
@@ -145,10 +147,10 @@ class FilterCardList extends Component<FilterCardListProps> {
           grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
           loading={loading}
           dataSource={list}
-          renderItem={(item: any) => (
+          renderItem={(item: MockListItem) => (
             <List.Item key={item.id}>
               <Card
-                hoverable={true}
+                hoverable
                 bodyStyle={{ paddingBottom: 20 }}
                 actions={[
                   <Tooltip title="下载">
@@ -194,4 +196,4 @@ export default Form.create({
       },
     });
   },
-} as FormCreateOption<any>)(FilterCardList);
+} as FormCreateOption<FilterCardListProps>)(FilterCardList);

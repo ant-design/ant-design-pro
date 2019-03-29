@@ -126,7 +126,7 @@ class GeographicView extends Component<GeographicProps> {
           className={styles.item}
           value={province}
           labelInValue
-          showSearch={true}
+          showSearch
           onSelect={this.selectProvinceItem}
         >
           {this.getProvinceOption()}
@@ -135,7 +135,7 @@ class GeographicView extends Component<GeographicProps> {
           className={styles.item}
           value={city}
           labelInValue
-          showSearch={true}
+          showSearch
           onSelect={this.selectCityItem}
         >
           {this.getCityOption()}

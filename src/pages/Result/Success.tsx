@@ -73,7 +73,7 @@ const extra = (
         2016-12-12 ~ 2017-12-12
       </Col>
     </Row>
-    <Steps style={{ marginLeft: -42, width: 'calc(100% + 84px)' }} progressDot={true} current={1}>
+    <Steps style={{ marginLeft: -42, width: 'calc(100% + 84px)' }} progressDot current={1}>
       <Step
         title={
           <span style={{ fontSize: 14 }}>

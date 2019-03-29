@@ -25,11 +25,11 @@ export interface StandardTableColumnProps<T> extends ColumnProps<T> {
 }
 
 interface StandardTableProps<T = any> {
-  columns: StandardTableColumnProps<T>[];
-  onSelectRow: (rows: T[]) => void;
-  data: any;
+  columns?: StandardTableColumnProps<T>[];
+  onSelectRow?: (rows: T[]) => void;
+  data: { list: T[]; pagination: PaginationConfig };
   rowKey?: string;
-  selectedRows: T[];
+  selectedRows?: T[];
   onChange?: (
     pagination: PaginationConfig,
     filters: Record<keyof T, string[]>,
@@ -45,10 +45,10 @@ interface StandardTableState<T = any> {
 }
 
 class StandardTable<T = any> extends Component<StandardTableProps<T>, StandardTableState<T>> {
-  static getDerivedStateFromProps(nextProps: StandardTableProps) {
+  static getDerivedStateFromProps({ selectedRows = [], columns = [] }: StandardTableProps) {
     // clean state
-    if (nextProps.selectedRows.length === 0) {
-      const needTotalList = initTotalList(nextProps.columns);
+    if (selectedRows.length === 0) {
+      const needTotalList = initTotalList(columns);
       return {
         selectedRowKeys: [],
         needTotalList,
@@ -58,7 +58,7 @@ class StandardTable<T = any> extends Component<StandardTableProps<T>, StandardTa
   }
   constructor(props: StandardTableProps) {
     super(props);
-    const { columns } = props;
+    const { columns = [] } = props;
     const needTotalList = initTotalList(columns);
 
     this.state = {
@@ -99,7 +99,7 @@ class StandardTable<T = any> extends Component<StandardTableProps<T>, StandardTa
 
   render() {
     const { selectedRowKeys, needTotalList } = this.state;
-    const { data = {}, rowKey, ...rest } = this.props;
+    const { data, rowKey, ...rest } = this.props;
     const { list = [], pagination } = data;
 
     const paginationProps = {

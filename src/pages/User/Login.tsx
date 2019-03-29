@@ -74,7 +74,7 @@ class LoginPage extends Component<LoginPageProps, LoginPageState> {
   };
 
   renderMessage = (content: string) => (
-    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon={true} />
+    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
   );
 
   render() {

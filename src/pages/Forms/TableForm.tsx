@@ -164,7 +164,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
             return (
               <Input
                 value={text}
-                autoFocus={true}
+                autoFocus
                 onChange={e => this.handleFieldChange(e, 'name', record.key)}
                 onKeyPress={e => this.saveRow(e, record.key)}
                 placeholder="成员姓名"

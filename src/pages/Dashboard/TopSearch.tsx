@@ -91,7 +91,7 @@ const TopSearch: React.FC<TopSearchProps> = ({
           status="up"
           subTotal={17.1}
         />
-        <MiniArea line={true} height={45} data={visitData2} />
+        <MiniArea line height={45} data={visitData2} />
       </Col>
       <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
         <NumberInfo
@@ -113,7 +113,7 @@ const TopSearch: React.FC<TopSearchProps> = ({
           subTotal={26.2}
           gap={8}
         />
-        <MiniArea line={true} height={45} data={visitData2} />
+        <MiniArea line height={45} data={visitData2} />
       </Col>
     </Row>
     <Table

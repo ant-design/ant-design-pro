@@ -25,7 +25,7 @@ const Projects: React.FC<ProjectsProps> = props => {
         <List.Item>
           <Card
             className={stylesProjects.card}
-            hoverable={true}
+            hoverable
             cover={<img alt={item.title} src={item.cover} />}
           >
             <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />

@@ -1,6 +1,6 @@
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import StandardTable, { StandardTableColumnProps } from '@/components/StandardTable';
-import { ConnectState, ConnectProps } from '@/models/connect';
+import { ConnectState, ConnectProps, RuleModelState } from '@/models/connect';
 import {
   Badge,
   Button,
@@ -29,7 +29,6 @@ import { connect } from 'dva';
 import moment from 'moment';
 import React, { Fragment, Component } from 'react';
 import router from 'umi/router';
-import { RuleModelState } from './models/rule';
 import styles from './TableList.less';
 
 const FormItem = Form.Item;
@@ -84,7 +83,7 @@ const CreateFormFunc: React.FC<CreateFormProps> = props => {
   };
   return (
     <Modal
-      destroyOnClose={true}
+      destroyOnClose
       title="新建规则"
       visible={modalVisible}
       onOk={okHandle}
@@ -218,7 +217,7 @@ class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
           })(
             <DatePicker
               style={{ width: '100%' }}
-              showTime={true}
+              showTime
               format="YYYY-MM-DD HH:mm:ss"
               placeholder="选择开始时间"
             />,
@@ -298,7 +297,7 @@ class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
       <Modal
         width={640}
         bodyStyle={{ padding: '32px 40px 48px' }}
-        destroyOnClose={true}
+        destroyOnClose
         title="规则配置"
         visible={updateModalVisible}
         footer={this.renderFooter(currentStep)}

@@ -14,7 +14,7 @@ class NotificationView extends Component {
       <Switch
         checkedChildren={formatMessage({ id: 'app.settings.open' })}
         unCheckedChildren={formatMessage({ id: 'app.settings.close' })}
-        defaultChecked={true}
+        defaultChecked
       />
     );
     return [

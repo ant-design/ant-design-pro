@@ -56,7 +56,7 @@ const Center: React.FC<ApplicationsProps> = props => {
       renderItem={(item: MockListItem) => (
         <List.Item key={item.id}>
           <Card
-            hoverable={true}
+            hoverable
             bodyStyle={{ paddingBottom: 20 }}
             actions={[
               <Tooltip title="下载">

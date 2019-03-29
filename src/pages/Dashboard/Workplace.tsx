@@ -240,7 +240,7 @@ class Workplace extends Component<WorkplaceProps> {
               loading={radarData.length === 0}
             >
               <div className={styles.chart}>
-                <Radar hasLegend={true} height={343} data={radarData} />
+                <Radar hasLegend height={343} data={radarData} />
               </div>
             </Card>
             <Card

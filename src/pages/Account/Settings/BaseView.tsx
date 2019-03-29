@@ -97,7 +97,7 @@ class BaseView extends Component<BaseProps> {
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
-          <Form layout="vertical" hideRequiredMark={true}>
+          <Form layout="vertical" hideRequiredMark>
             <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
               {getFieldDecorator('email', {
                 rules: [
