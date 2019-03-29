@@ -1,5 +1,6 @@
+import { Effect } from '@/models/connect';
 import { queryNotices } from '@/services/api';
-import { Effect, Subscription } from 'dva';
+import { Subscription } from 'dva';
 import { Reducer } from 'redux';
 
 export interface GlobalModelState {
