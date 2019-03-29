@@ -56,7 +56,17 @@ export const cutStrByFullLength: (str: string, maxLength: number) => string = (
   }, '');
 };
 
-const getTooltip = ({ tooltip, overlayStyle, title, children }) => {
+const getTooltip: ({
+  tooltip,
+  overlayStyle,
+  title,
+  children,
+}: {
+  tooltip: any;
+  overlayStyle: typeof TooltipOverlayStyle;
+  title: any;
+  children: any;
+}) => JSX.Element = ({ tooltip, overlayStyle, title, children }) => {
   if (tooltip) {
     const props = tooltip === true ? { overlayStyle, title } : { ...tooltip, overlayStyle, title };
     return <Tooltip {...props}>{children}</Tooltip>;
@@ -64,7 +74,20 @@ const getTooltip = ({ tooltip, overlayStyle, title, children }) => {
   return children;
 };
 
-const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other }) => {
+const EllipsisText: ({
+  text,
+  length,
+  tooltip,
+  fullWidthRecognition,
+  className,
+  ...other
+}: {
+  text: any;
+  length: number;
+  tooltip: any;
+  className?: string;
+  fullWidthRecognition: boolean;
+}) => JSX.Element = ({ text, length, tooltip, fullWidthRecognition, ...other }) => {
   if (typeof text !== 'string') {
     throw new Error('Ellipsis children must be string.');
   }
@@ -105,11 +128,11 @@ export default class Ellipsis extends Component<EllipsisProps, EllipsisState> {
     targetCount: 0,
   };
 
-  node: HTMLSpanElement;
-  root: HTMLDivElement;
-  content: HTMLDivElement;
-  shadow: HTMLDivElement;
-  shadowChildren: HTMLDivElement;
+  node!: HTMLSpanElement;
+  root!: HTMLDivElement;
+  content!: HTMLDivElement;
+  shadow!: HTMLDivElement;
+  shadowChildren!: HTMLDivElement;
 
   componentDidMount() {
     if (this.node) {
@@ -117,7 +140,7 @@ export default class Ellipsis extends Component<EllipsisProps, EllipsisState> {
     }
   }
 
-  componentDidUpdate(perProps) {
+  componentDidUpdate(perProps: EllipsisProps) {
     const { lines } = this.props;
     if (lines !== perProps.lines) {
       this.computeLine();
@@ -127,8 +150,8 @@ export default class Ellipsis extends Component<EllipsisProps, EllipsisState> {
   computeLine = () => {
     const { lines } = this.props;
     if (lines && !isSupportLineClamp) {
-      const text = this.shadowChildren.innerText || this.shadowChildren.textContent;
-      const lineHeight = parseInt(getComputedStyle(this.root).lineHeight, 10);
+      const text = this.shadowChildren.innerText || this.shadowChildren.textContent || '';
+      const lineHeight = parseInt(getComputedStyle(this.root).lineHeight || '', 10);
       const targetHeight = lines * lineHeight;
       this.content.style.height = `${targetHeight}px`;
       const totalHeight = this.shadowChildren.offsetHeight;
@@ -155,7 +178,14 @@ export default class Ellipsis extends Component<EllipsisProps, EllipsisState> {
     }
   };
 
-  bisection = (th, m, b, e, text, shadowNode) => {
+  bisection: (
+    th: number,
+    m: number,
+    b: number,
+    e: number,
+    text: string,
+    shadowNode: any,
+  ) => number = (th, m, b, e, text, shadowNode) => {
     const suffix = '...';
     let mid = m;
     let end = e;
@@ -190,23 +220,23 @@ export default class Ellipsis extends Component<EllipsisProps, EllipsisState> {
     return this.bisection(th, mid, begin, end, text, shadowNode);
   };
 
-  handleRoot = n => {
+  handleRoot = (n: HTMLDivElement) => {
     this.root = n;
   };
 
-  handleContent = n => {
+  handleContent = (n: HTMLDivElement) => {
     this.content = n;
   };
 
-  handleNode = n => {
+  handleNode = (n: HTMLSpanElement) => {
     this.node = n;
   };
 
-  handleShadow = n => {
+  handleShadow = (n: HTMLDivElement) => {
     this.shadow = n;
   };
 
-  handleShadowChildren = n => {
+  handleShadowChildren = (n: HTMLDivElement) => {
     this.shadowChildren = n;
   };
 
@@ -240,10 +270,10 @@ export default class Ellipsis extends Component<EllipsisProps, EllipsisState> {
       return (
         <EllipsisText
           className={cls}
-          length={length}
+          length={length!}
           text={children || ''}
           tooltip={tooltip}
-          fullWidthRecognition={fullWidthRecognition}
+          fullWidthRecognition={fullWidthRecognition!}
           {...restProps}
         />
       );
