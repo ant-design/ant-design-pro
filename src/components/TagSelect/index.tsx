@@ -17,8 +17,17 @@ interface TagSelectOptionType extends React.FC<TagSelectOptionProps> {
   isTagSelectOption?: boolean;
 }
 
-const TagSelectOption: TagSelectOptionType = ({ children, checked, onChange, value }) => (
-  <CheckableTag checked={checked} key={value} onChange={state => onChange(value, state)}>
+const TagSelectOption: TagSelectOptionType = ({
+  children,
+  checked = false,
+  onChange,
+  value = '',
+}) => (
+  <CheckableTag
+    checked={checked}
+    key={value}
+    onChange={state => onChange && onChange(value, state)}
+  >
     {children}
   </CheckableTag>
 );
@@ -29,6 +38,7 @@ interface TagSelectProps {
   onChange?: (value: string[]) => void;
   expandable?: boolean;
   value?: string[] | number[];
+  defaultValue?: string[] | number[];
   style?: React.CSSProperties;
   hideCheckAll?: boolean;
   actionsText?: {
@@ -57,14 +67,14 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
 
   public static Option: typeof TagSelectOption;
 
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps: TagSelectProps) {
     if ('value' in nextProps) {
       return { value: nextProps.value || [] };
     }
     return null;
   }
 
-  constructor(props) {
+  constructor(props: TagSelectProps) {
     super(props);
     this.state = {
       expand: false,
@@ -72,7 +82,7 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
     };
   }
 
-  onChange = value => {
+  onChange = (value: any[]) => {
     const { onChange } = this.props;
     if (!('value' in this.props)) {
       this.setState({ value });
@@ -82,8 +92,8 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
     }
   };
 
-  onSelectAll = checked => {
-    let checkedTags = [];
+  onSelectAll = (checked: boolean) => {
+    let checkedTags: any[] = [];
     if (checked) {
       checkedTags = this.getAllTags();
     }
@@ -99,7 +109,7 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
     return checkedTags || [];
   }
 
-  handleTagChange = (value, checked) => {
+  handleTagChange = (value: any, checked: any) => {
     const { value: StateValue } = this.state;
     const checkedTags = [...StateValue];
 
@@ -119,7 +129,7 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
     });
   };
 
-  isTagSelectOption = node =>
+  isTagSelectOption = (node: any) =>
     node &&
     node.type &&
     (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
@@ -128,8 +138,12 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
     const { value, expand } = this.state;
     const { children, hideCheckAll, className, style, expandable, actionsText } = this.props;
     const checkedAll = this.getAllTags().length === value.length;
-    const { expandText = 'Expand', collapseText = 'Collapse', selectAllText = 'All' } =
-      actionsText === null ? {} : actionsText;
+    const actionsTextObj: any = actionsText === null ? {} : actionsText;
+    const {
+      expandText = 'Expand',
+      collapseText = 'Collapse',
+      selectAllText = 'All',
+    } = actionsTextObj;
 
     const cls = classNames(styles.tagSelect, className, {
       [styles.hasExpandTag]: expandable,
