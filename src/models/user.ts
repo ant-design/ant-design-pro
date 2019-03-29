@@ -9,12 +9,17 @@ export interface CurrentUser {
   group?: string;
   signature?: string;
   geographic?: any;
-  tags?: any[];
+  tags?: { key: string; label: string }[];
   unreadCount?: number;
 }
 
 export interface UserModelState {
-  list: any[];
+  list: {
+    key: string;
+    name: string;
+    age: number;
+    address: string;
+  }[];
   currentUser: CurrentUser;
 }
 
