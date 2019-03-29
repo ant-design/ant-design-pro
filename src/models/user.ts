@@ -2,20 +2,23 @@ import { query as queryUsers, queryCurrent } from '@/services/user';
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
-export interface UserModelState {
-  list: any[];
-  currentUser: {
-    avatar?: string;
-    name?: string;
-    title?: string;
-    group?: string;
-    signature?: string;
-    geographic?: any;
-    tags?: any[];
-  };
+export interface CurrentUser {
+  avatar?: string;
+  name?: string;
+  title?: string;
+  group?: string;
+  signature?: string;
+  geographic?: any;
+  tags?: any[];
+  unreadCount?: number;
 }
 
-export interface UserModel {
+export interface UserModelState {
+  list: any[];
+  currentUser: CurrentUser;
+}
+
+export interface UserModelType {
   namespace: 'user';
   state: UserModelState;
   effects: {
@@ -23,13 +26,13 @@ export interface UserModel {
     fetchCurrent: Effect;
   };
   reducers: {
-    save: Reducer<any>;
-    saveCurrentUser: Reducer<any>;
-    changeNotifyCount: Reducer<any>;
+    save: Reducer<UserModelState>;
+    saveCurrentUser: Reducer<UserModelState>;
+    changeNotifyCount: Reducer<UserModelState>;
   };
 }
 
-const UserModel: UserModel = {
+const UserModel: UserModelType = {
   namespace: 'user',
 
   state: {

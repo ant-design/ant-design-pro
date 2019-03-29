@@ -14,7 +14,7 @@ export interface GlobalModelState {
   notices: NoticeItem[];
 }
 
-export interface GlobalModel {
+export interface GlobalModelType {
   namespace: 'global';
   state: GlobalModelState;
   effects: {
@@ -30,7 +30,7 @@ export interface GlobalModel {
   subscriptions: { setup: Subscription };
 }
 
-const GlobalModel: GlobalModel = {
+const GlobalModel: GlobalModelType = {
   namespace: 'global',
 
   state: {
