@@ -126,7 +126,7 @@ const popoverContent = (
   </div>
 );
 
-const customDot = (dot, { status }) =>
+const customDot: (dot: any, { status }: { status: string }) => JSX.Element = (dot, { status }) =>
   status === 'process' ? (
     <Popover placement="topLeft" arrowPointAtCenter content={popoverContent}>
       {dot}
@@ -165,7 +165,7 @@ const columns = [
     title: '执行结果',
     dataIndex: 'status',
     key: 'status',
-    render: text =>
+    render: (text: any) =>
       text === 'agree' ? (
         <Badge status="success" text="成功" />
       ) : (
@@ -195,7 +195,7 @@ interface AdvancedProfileState {
   stepDirection: 'horizontal' | 'vertical';
 }
 
-@connect(({ profile, loading }) => ({
+@connect(({ profile, loading }: { profile: ProfileModelState; loading: any }) => ({
   profile,
   loading: loading.effects['profile/fetchAdvanced'],
 }))

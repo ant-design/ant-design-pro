@@ -25,7 +25,7 @@ const progressColumns = [
     title: '状态',
     dataIndex: 'status',
     key: 'status',
-    render: text =>
+    render: (text: any) =>
       text === 'success' ? (
         <Badge status="success" text="成功" />
       ) : (
@@ -51,7 +51,7 @@ interface BasicProfileProps {
   match: match;
 }
 
-@connect(({ profile, loading }) => ({
+@connect(({ profile, loading }: { profile: ProfileModelState; loading: any }) => ({
   profile,
   loading: loading.effects['profile/fetchBasic'],
 }))
@@ -69,7 +69,7 @@ class BasicProfile extends Component<BasicProfileProps> {
   render() {
     const { profile = {}, loading } = this.props;
     const {
-      basicGoods = [],
+      basicGoods = [] as any[],
       basicProgress = [],
       userInfo = {},
       application = {},
@@ -78,7 +78,7 @@ class BasicProfile extends Component<BasicProfileProps> {
     if (basicGoods.length) {
       let num = 0;
       let amount = 0;
-      basicGoods.forEach(item => {
+      basicGoods.forEach((item: any) => {
         num += Number(item.num);
         amount += Number(item.amount);
       });
@@ -88,7 +88,11 @@ class BasicProfile extends Component<BasicProfileProps> {
         amount,
       });
     }
-    const renderContent = (value, row, index) => {
+    const renderContent: (text: any, record: any, index: number) => React.ReactNode = (
+      value,
+      row,
+      index,
+    ) => {
       const obj: { children: any; props: { colSpan?: number } } = {
         children: value,
         props: {},
