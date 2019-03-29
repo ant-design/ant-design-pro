@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import React, { Fragment } from 'react';
 import router from 'umi/router';
 import styles from './style.less';
+import { FormModelState } from '../models/form';
 
 const { Option } = Select;
 
@@ -119,7 +120,7 @@ const Info: React.FC<InfoFormProps> = props => {
 };
 
 export default Form.create()(
-  connect(({ form }) => ({
+  connect(({ form }: { form: FormModelState }) => ({
     data: form.step,
   }))(Info),
 );

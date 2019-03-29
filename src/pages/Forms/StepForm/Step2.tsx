@@ -5,6 +5,7 @@ import { connect } from 'dva';
 import React from 'react';
 import router from 'umi/router';
 import styles from './style.less';
+import { FormModelState } from '../models/form';
 
 const formItemLayout = {
   labelCol: {
@@ -32,7 +33,7 @@ const Confirm: React.FC<ConfirmFormProps> = props => {
   const onPrev = () => {
     router.push('/form/step-form/info');
   };
-  const onValidateForm = e => {
+  const onValidateForm = (e: any) => {
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
@@ -102,7 +103,7 @@ const Confirm: React.FC<ConfirmFormProps> = props => {
 };
 
 export default Form.create()(
-  connect(({ form, loading }) => ({
+  connect(({ form, loading }: { form: FormModelState; loading: any }) => ({
     submitting: loading.effects['form/submitStepForm'],
     data: form.step,
   }))(Confirm),

@@ -13,6 +13,7 @@ import {
   Select,
   TimePicker,
 } from 'antd';
+import { ConnectState } from '@/models/connect';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import React, { Component } from 'react';
@@ -64,7 +65,7 @@ interface AdvancedFormProps extends FormComponentProps {
   submitting: boolean;
 }
 
-@connect(({ loading }) => ({
+@connect(({ loading }: ConnectState) => ({
   submitting: loading.effects['form/submitAdvancedForm'],
 }))
 class AdvancedForm extends Component<AdvancedFormProps> {
@@ -89,7 +90,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
     if (!errors || errorCount === 0) {
       return null;
     }
-    const scrollToField = fieldKey => {
+    const scrollToField = (fieldKey: string) => {
       const labelNode = document.querySelector(`label[for="${fieldKey}"]`);
       if (labelNode) {
         labelNode.scrollIntoView(true);
@@ -114,7 +115,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
           content={errorList}
           overlayClassName={styles.errorPopover}
           trigger="click"
-          getPopupContainer={trigger => trigger.parentNode as HTMLElement}
+          getPopupContainer={(trigger: any) => trigger.parentNode as HTMLElement}
         >
           <Icon type="exclamation-circle" />
         </Popover>

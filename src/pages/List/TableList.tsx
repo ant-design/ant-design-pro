@@ -315,7 +315,7 @@ interface TableListState {
 
 /* eslint react/no-multi-comp:0 */
 /* tslint:disable-next-line */
-@connect(({ rule, loading }) => ({
+@connect(({ rule, loading }: { rule: RuleModelState; loading: any }) => ({
   rule,
   loading: loading.models.rule,
 }))

@@ -16,6 +16,7 @@ import { connect } from 'dva';
 import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './style.less';
+import { ConnectState } from '@/models/connect';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -28,11 +29,11 @@ interface BasicFormsProps extends FormComponentProps {
   submitting: boolean;
 }
 
-@connect(({ loading }) => ({
+@connect(({ loading }: ConnectState) => ({
   submitting: loading.effects['form/submitRegularForm'],
 }))
 class BasicForms extends Component<BasicFormsProps> {
-  handleSubmit = e => {
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const { dispatch, form } = this.props;
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {

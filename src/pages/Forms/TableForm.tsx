@@ -5,6 +5,7 @@ import styles from './style.less';
 
 interface TableFormProps {
   onChange?: (data: any) => void;
+  value?: any[];
 }
 
 interface TableFormState {
@@ -14,7 +15,7 @@ interface TableFormState {
 }
 
 class TableForm extends Component<TableFormProps, TableFormState> {
-  static getDerivedStateFromProps(nextProps, preState) {
+  static getDerivedStateFromProps(nextProps: TableFormProps, preState: TableFormState) {
     if (isEqual(nextProps.value, preState.value)) {
       return null;
     }
@@ -23,12 +24,12 @@ class TableForm extends Component<TableFormProps, TableFormState> {
       value: nextProps.value,
     };
   }
-  clickedCancel: boolean;
+  clickedCancel!: boolean;
   index = 0;
 
   cacheOriginData = {};
 
-  constructor(props) {
+  constructor(props: TableFormProps) {
     super(props);
 
     this.state = {
@@ -41,12 +42,12 @@ class TableForm extends Component<TableFormProps, TableFormState> {
 
   getRowByKey: (key: any, newData?: any) => any = (key, newData) => {
     const { data } = this.state;
-    return (newData || data).filter(item => item.key === key)[0];
+    return (newData || data).filter((item: any) => item.key === key)[0];
   };
 
-  toggleEditable = (e, key) => {
+  toggleEditable = (e: { preventDefault: () => void }, key: string | number) => {
     e.preventDefault();
-    const { data } = this.state;
+    const { data = [] } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
     if (target) {
@@ -60,7 +61,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
   };
 
   newMember = () => {
-    const { data } = this.state;
+    const { data = [] } = this.state;
     const newData = data.map(item => ({ ...item }));
     newData.push({
       key: `NEW_TEMP_ID_${this.index}`,
@@ -74,22 +75,22 @@ class TableForm extends Component<TableFormProps, TableFormState> {
     this.setState({ data: newData });
   };
 
-  remove(key) {
-    const { data } = this.state;
-    const { onChange } = this.props;
+  remove(key: any) {
+    const { data = [] } = this.state;
+    const { onChange = () => {} } = this.props;
     const newData = data.filter(item => item.key !== key);
     this.setState({ data: newData });
     onChange(newData);
   }
 
-  handleKeyPress(e, key) {
+  handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>, key: any) {
     if (e.key === 'Enter') {
       this.saveRow(e, key);
     }
   }
 
-  handleFieldChange(e, fieldName, key) {
-    const { data } = this.state;
+  handleFieldChange(e: React.ChangeEvent<HTMLInputElement>, fieldName: string, key: any) {
+    const { data = [] } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
     if (target) {
@@ -98,7 +99,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
     }
   }
 
-  saveRow(e, key) {
+  saveRow(e: any, key: React.Key) {
     e.persist();
     this.setState({
       loading: true,
@@ -120,7 +121,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
       delete target.isNew;
       this.toggleEditable(e, key);
       const { data } = this.state;
-      const { onChange } = this.props;
+      const { onChange = () => {} } = this.props;
       onChange(data);
       this.setState({
         loading: false,
@@ -128,11 +129,11 @@ class TableForm extends Component<TableFormProps, TableFormState> {
     }, 500);
   }
 
-  cancel(e, key) {
+  cancel(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, key: React.Key) {
     this.clickedCancel = true;
     e.preventDefault();
-    const { data } = this.state;
-    const newData = data.map(item => ({ ...item }));
+    const { data = [] } = this.state;
+    const newData = data.map((item: any) => ({ ...item }));
     const target = this.getRowByKey(key, newData);
     if (this.cacheOriginData[key]) {
       Object.assign(target, this.cacheOriginData[key]);
@@ -151,7 +152,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
         dataIndex: 'name',
         key: 'name',
         width: '20%',
-        render: (text, record) => {
+        render: (text: any, record: any) => {
           if (record.editable) {
             return (
               <Input
@@ -171,7 +172,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
         dataIndex: 'workId',
         key: 'workId',
         width: '20%',
-        render: (text, record) => {
+        render: (text: any, record: any) => {
           if (record.editable) {
             return (
               <Input
@@ -190,7 +191,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
         dataIndex: 'department',
         key: 'department',
         width: '40%',
-        render: (text, record) => {
+        render: (text: any, record: any) => {
           if (record.editable) {
             return (
               <Input
@@ -207,7 +208,7 @@ class TableForm extends Component<TableFormProps, TableFormState> {
       {
         title: '操作',
         key: 'action',
-        render: (_, record) => {
+        render: (_: any, record: any) => {
           if (!!record.editable && loading) {
             return null;
           }

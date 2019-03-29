@@ -5,6 +5,7 @@ import { connect } from 'dva';
 import React, { Fragment } from 'react';
 import router from 'umi/router';
 import styles from './style.less';
+import { FormModelState } from '../models/form';
 
 interface ResultFormProps extends FormComponentProps {
   data: {
@@ -75,6 +76,6 @@ const ResultPage: React.FC<ResultFormProps> = props => {
   );
 };
 
-export default connect(({ form }) => ({
+export default connect(({ form }: { form: FormModelState }) => ({
   data: form.step,
 }))(ResultPage);
