@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
 import { ClickParam } from 'antd/es/menu';
+import { NoticeIconData } from '@/components/NoticeIcon';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '@/components/NoticeIcon';
@@ -29,7 +30,7 @@ interface GlobalHeaderRightProps {
   fetchingNotices?: boolean;
   onNoticeVisibleChange?: (visible: boolean) => void;
   onMenuClick?: (param: ClickParam) => void;
-  onNoticeClear?: (tabName: string) => void;
+  onNoticeClear?: (tabName?: string) => void;
   theme?: SiderTheme;
 }
 export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
@@ -77,18 +78,19 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
     return unreadMsg;
   };
 
-  changeReadState = clickedItem => {
+  changeReadState = (clickedItem: NoticeIconData) => {
     const { id } = clickedItem;
     const { dispatch } = this.props;
-    dispatch({
-      type: 'global/changeNoticeReadState',
-      payload: id,
-    });
+    dispatch &&
+      dispatch({
+        type: 'global/changeNoticeReadState',
+        payload: id,
+      });
   };
 
   render() {
     const {
-      currentUser,
+      currentUser = {} as any,
       fetchingNotices,
       onNoticeVisibleChange,
       onMenuClick,
