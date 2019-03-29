@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "esnext",
-    "target": "es2016",
+    "target": "esnext",
     "lib": ["esnext", "dom"],
     "sourceMap": true,
     "baseUrl": ".",
@@ -16,11 +16,12 @@
     "noUnusedLocals": true,
     "allowJs": true,
     "experimentalDecorators": true,
+    "strict": true,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["./src"],
+  "include": ["./src", "config/defaultSettings.ts"],
   "exclude": [
     "node_modules",
     "build",
