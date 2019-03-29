@@ -10,8 +10,8 @@ export interface ProfileModelState {
   advancedOperation2: AdvancedOperation[];
   advancedOperation3: AdvancedOperation[];
   basicProgress: BasicProgressItem[];
-  userInfo: Partial<UserInfo>;
-  application: Partial<Application>;
+  userInfo: UserInfo;
+  application: Application;
 }
 
 export interface ProfileModel {

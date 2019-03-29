@@ -1,16 +1,49 @@
-import React, { Component } from 'react';
-import { connect } from 'dva';
-import { Card, Badge, Table, Divider } from 'antd';
-import { ColumnProps } from 'antd/es/table';
-import { match } from 'react-router';
 import DescriptionList from '@/components/DescriptionList';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { ConnectProps, ConnectState } from '@/models/connect';
+import { Card, Badge, Table, Divider } from 'antd';
+import { ColumnProps } from 'antd/es/table';
+import { connect } from 'dva';
+import React, { Component } from 'react';
 import styles from './BasicProfile.less';
 import { ProfileModelState } from './models/profile';
 
 const { Description } = DescriptionList;
 
-const progressColumns = [
+export interface BasicGoodsItem {
+  id: string | number;
+  name?: string;
+  barcode?: string;
+  price?: string | number;
+  num?: string | number;
+  amount?: string | number;
+}
+
+export interface BasicProgressItem {
+  key: string | number;
+  time?: string;
+  rate?: string;
+  status?: string;
+  operator?: string;
+  cost?: string;
+}
+
+export interface UserInfo {
+  name?: string;
+  tel?: string;
+  delivery?: string;
+  addr?: string;
+  remark?: string;
+}
+
+export interface Application {
+  id?: string | number;
+  status?: string;
+  orderNo?: string;
+  childOrderNo?: string;
+}
+
+const progressColumns: ColumnProps<BasicProgressItem>[] = [
   {
     title: '时间',
     dataIndex: 'time',
@@ -25,7 +58,7 @@ const progressColumns = [
     title: '状态',
     dataIndex: 'status',
     key: 'status',
-    render: (text: any) =>
+    render: text =>
       text === 'success' ? (
         <Badge status="success" text="成功" />
       ) : (
@@ -44,47 +77,12 @@ const progressColumns = [
   },
 ];
 
-export interface BasicGoodsItem {
-  id: string;
-  name: string;
-  barcode: string;
-  price: string;
-  num: string;
-  amount: string;
-}
-
-export interface BasicProgressItem {
-  key: string;
-  time: string;
-  rate: string;
-  status: string;
-  operator: string;
-  cost: string;
-}
-
-export interface UserInfo {
-  name: string;
-  tel: string;
-  delivery: string;
-  addr: string;
-  remark: string;
-}
-
-export interface Application {
-  id: string;
-  status: string;
-  orderNo: string;
-  childOrderNo: string;
-}
-
-interface BasicProfileProps {
+interface BasicProfileProps extends Required<ConnectProps<{ id: string }>> {
   profile: ProfileModelState;
-  dispatch: (args: any) => void;
   loading: boolean;
-  match: match;
 }
 
-@connect(({ profile, loading }: { profile: ProfileModelState; loading: any }) => ({
+@connect(({ profile, loading }: ConnectState) => ({
   profile,
   loading: loading.effects['profile/fetchBasic'],
 }))
@@ -95,23 +93,18 @@ class BasicProfile extends Component<BasicProfileProps> {
 
     dispatch({
       type: 'profile/fetchBasic',
-      payload: (params as { id: string }).id || '1000000000',
+      payload: params.id || '1000000000',
     });
   }
 
   render() {
-    const { profile = {}, loading } = this.props;
-    const {
-      basicGoods = [] as any[],
-      basicProgress = [],
-      userInfo = {},
-      application = {},
-    } = profile as ProfileModelState;
-    let goodsData = [];
+    const { profile, loading } = this.props;
+    const { basicGoods = [], basicProgress = [], userInfo = {}, application = {} } = profile;
+    let goodsData: BasicGoodsItem[] = [];
     if (basicGoods.length) {
       let num = 0;
       let amount = 0;
-      basicGoods.forEach((item: any) => {
+      basicGoods.forEach(item => {
         num += Number(item.num);
         amount += Number(item.amount);
       });
@@ -121,12 +114,8 @@ class BasicProfile extends Component<BasicProfileProps> {
         amount,
       });
     }
-    const renderContent: (text: any, record: any, index: number) => React.ReactNode = (
-      value,
-      row,
-      index,
-    ) => {
-      const obj: { children: any; props: { colSpan?: number } } = {
+    const renderContent = (value: any, _: BasicGoodsItem, index: number) => {
+      const obj: { children: any; props: ColumnProps<BasicGoodsItem> } = {
         children: value,
         props: {},
       };

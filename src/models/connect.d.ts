@@ -7,6 +7,7 @@ import { FormModelState } from '@/pages/Forms/models/form';
 import { ProfileModelState } from '@/pages/Profile/models/profile';
 import { RegisterModelState } from '@/pages/User/models/register';
 import { EffectsCommandMap } from 'dva';
+import { match } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import { RouterTypes } from 'umi';
 import { GlobalModelState } from './global';
@@ -90,11 +91,13 @@ export interface ConnectState {
 }
 
 /**
- * @type T: Params matched in dynamic routing
+ * @type P: Params matched in dynamic routing
  */
-export interface ConnectProps<T extends { [key: string]: any } = {}>
+export interface ConnectProps<P extends { [K in keyof P]?: string } = {}>
   extends Partial<RouterTypes<Route>> {
   dispatch?: Dispatch;
+  // https://github.com/umijs/umi/pull/2194
+  match: match<P>;
 }
 
 export default ConnectState;
