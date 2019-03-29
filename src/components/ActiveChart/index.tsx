@@ -3,7 +3,7 @@ import { MiniArea } from '../Charts';
 import NumberInfo from '../NumberInfo';
 import styles from './index.less';
 
-function fixedZero(val) {
+function fixedZero(val: number) {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
@@ -27,7 +27,7 @@ export default class ActiveChart extends Component<ActiveChartProps, ActiveChart
     activeData: getActiveData(),
   };
 
-  timer: NodeJS.Timeout;
+  timer!: NodeJS.Timeout;
 
   componentDidMount() {
     this.loopData();
