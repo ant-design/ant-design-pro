@@ -146,8 +146,8 @@ Object.keys(LoginItem).forEach(item => {
 });
 
 type WrappedLoginProps = Omit<LoginProps, 'form'>;
-interface WrappedLogin extends WrappedFormUtils {}
-declare class WrappedLogin extends Component<WrappedLoginProps, LoginState> {
+export interface WrappedLogin extends WrappedFormUtils {}
+export declare class WrappedLogin extends Component<WrappedLoginProps, LoginState> {
   public static Tab: typeof LoginTab;
   public static Submit: typeof LoginSubmit;
 }
