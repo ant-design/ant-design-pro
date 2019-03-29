@@ -9,6 +9,7 @@ import { RadioChangeEvent } from 'antd/es/radio/interface';
 import { connect } from 'dva';
 import React, { Component, Suspense } from 'react';
 import styles from './Analysis.less';
+import { SalesPieDataItem } from './ProportionSales';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const SalesCard = React.lazy(() => import('./SalesCard'));
@@ -119,7 +120,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
       salesTypeDataOnline,
       salesTypeDataOffline,
     } = chart;
-    let salesPieData;
+    let salesPieData: SalesPieDataItem[];
     if (salesType === 'all') {
       salesPieData = salesTypeData;
     } else {

@@ -2,8 +2,26 @@ import { queryActivities } from '@/services/api';
 import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
+export interface ActivitiesListItem {
+  id: string;
+  updatedAt: string;
+  user: {
+    name: string;
+    avatar: string;
+  };
+  group: {
+    name: string;
+    link: string;
+  };
+  project: {
+    name: string;
+    link: string;
+  };
+  template: string;
+}
+
 export interface ActivitiesModelState {
-  list: any[];
+  list: ActivitiesListItem[];
 }
 
 export interface ActivitiesModel {

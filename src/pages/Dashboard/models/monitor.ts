@@ -2,8 +2,14 @@ import { queryTags } from '@/services/api';
 import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
+export interface MonitorTagsItem {
+  name: string;
+  value: number;
+  type: number;
+}
+
 export interface MonitorModelState {
-  tags: any[];
+  tags: MonitorTagsItem[];
 }
 
 export interface MonitorModel {

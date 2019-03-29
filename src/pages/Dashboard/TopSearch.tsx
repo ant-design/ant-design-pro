@@ -7,8 +7,17 @@ import Trend from '@/components/Trend';
 import { ColumnProps } from 'antd/es/table/interface';
 import numeral from 'numeral';
 import styles from './Analysis.less';
+import { VisitDataItem } from './IntroduceRow';
 
-const columns: Array<ColumnProps<any>> = [
+export interface SearchDataItem {
+  count: number;
+  index: number;
+  keyword: string;
+  range: number;
+  status: number;
+}
+
+const columns: Array<ColumnProps<SearchDataItem>> = [
   {
     title: <FormattedMessage id="app.analysis.table.rank" defaultMessage="Rank" />,
     dataIndex: 'index',
@@ -45,8 +54,8 @@ const columns: Array<ColumnProps<any>> = [
 
 interface TopSearchProps {
   loading: boolean;
-  visitData2: any[];
-  searchData: any[];
+  visitData2: VisitDataItem[];
+  searchData: SearchDataItem[];
   dropdownGroup: JSX.Element;
 }
 const TopSearch: React.FC<TopSearchProps> = ({
@@ -108,7 +117,7 @@ const TopSearch: React.FC<TopSearchProps> = ({
       </Col>
     </Row>
     <Table
-      rowKey={record => record.index}
+      rowKey={record => `${record.index}`}
       size="small"
       columns={columns}
       dataSource={searchData}

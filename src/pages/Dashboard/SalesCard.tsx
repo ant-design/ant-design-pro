@@ -17,17 +17,20 @@ for (let i = 0; i < 7; i += 1) {
   });
 }
 
+export interface SalesDataItem {
+  x: string;
+  y: number;
+}
+
 interface SalesCard {
   rangePickerValue: RangePickerValue;
-  salesData: Array<{
-    x: string;
-    y: number;
-  }>;
+  salesData: SalesDataItem[];
   isActive: (type: string) => string;
   handleRangePickerChange: (dates: RangePickerValue, dateStrings: [string, string]) => void;
   loading: boolean;
   selectDate: (type: string) => void;
 }
+
 const SalesCard: React.FC<SalesCard> = ({
   rangePickerValue,
   salesData,

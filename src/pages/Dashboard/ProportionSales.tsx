@@ -6,11 +6,16 @@ import React, { memo } from 'react';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Analysis.less';
 
+export interface SalesPieDataItem {
+  x: string | number;
+  y: number;
+}
+
 interface ProportionSalesProps {
   dropdownGroup: JSX.Element;
   salesType: string;
   loading: boolean;
-  salesPieData: any[];
+  salesPieData: SalesPieDataItem[];
   handleChangeSalesType: (ev: RadioChangeEvent) => void;
 }
 

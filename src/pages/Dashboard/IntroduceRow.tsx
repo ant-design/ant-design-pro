@@ -18,7 +18,7 @@ const topColResponsiveProps: ColProps = {
 };
 
 export interface VisitDataItem {
-  x: number;
+  x: number | string;
   y: number;
 }
 

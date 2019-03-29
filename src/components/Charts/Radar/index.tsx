@@ -4,16 +4,18 @@ import { Row, Col } from 'antd';
 import autoHeight from '../autoHeight';
 import styles from './index.less';
 
+export interface RadarDataItem {
+  name: string;
+  label: string;
+  value: number;
+}
+
 interface RadarProps {
   title?: React.ReactNode;
   height: number;
   padding: [number, number, number, number];
   hasLegend?: boolean;
-  data: Array<{
-    name: string;
-    label: string;
-    value: string;
-  }>;
+  data: RadarDataItem[];
   style?: React.CSSProperties;
   forceFit: boolean;
   tickCount: number;

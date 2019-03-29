@@ -1,20 +1,24 @@
-import { fakeChartData } from '@/services/api';
+import { RadarDataItem } from '@/components/Charts/Radar';
 import { Effect } from '@/models/connect';
+import { fakeChartData } from '@/services/api';
 import { Reducer } from 'redux';
 import { VisitDataItem } from '../IntroduceRow';
 import { OfflineChartDataItem, OfflineDataItem } from '../OfflineData';
+import { SalesPieDataItem } from '../ProportionSales';
+import { SalesDataItem } from '../SalesCard';
+import { SearchDataItem } from '../TopSearch';
 
 export interface ChartModelState {
   visitData: VisitDataItem[];
-  visitData2: any[];
-  salesData: any[];
-  searchData: any[];
+  visitData2: VisitDataItem[];
+  salesData: SalesDataItem[];
+  searchData: SearchDataItem[];
   offlineData: OfflineDataItem[];
   offlineChartData: OfflineChartDataItem[];
-  salesTypeData: any[];
-  salesTypeDataOnline: any[];
-  salesTypeDataOffline: any[];
-  radarData: any[];
+  salesTypeData: SalesPieDataItem[];
+  salesTypeDataOnline: SalesPieDataItem[];
+  salesTypeDataOffline: SalesPieDataItem[];
+  radarData: RadarDataItem[];
   loading: boolean;
 }
 

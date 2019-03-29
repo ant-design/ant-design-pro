@@ -12,8 +12,8 @@ export interface MockListItem {
   percent: number;
   logo: string;
   href: string;
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt: string;
+  createdAt: string;
   subDescription: string;
   description: string;
   activeUser: number | string;
