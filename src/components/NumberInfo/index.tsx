@@ -45,7 +45,7 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
         {subTitle}
       </div>
     )}
-    <div className={styles.numberInfoValue} style={gap ? { marginTop: gap } : null}>
+    <div className={styles.numberInfoValue} style={gap ? ({ marginTop: gap } as any) : null}>
       <span>
         {total}
         {suffix && <em className={styles.suffix}>{suffix}</em>}
