@@ -1,4 +1,5 @@
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { ConnectProps } from '@/models/connect';
 import {
   Button,
   Card,
@@ -23,9 +24,7 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-interface BasicFormsProps extends FormComponentProps {
-  location: Location;
-  dispatch: (args: any) => void;
+interface BasicFormsProps extends FormComponentProps, Required<ConnectProps> {
   submitting: boolean;
 }
 

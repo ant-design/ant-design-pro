@@ -1,3 +1,4 @@
+import { ConnectProps, ConnectState, FormModelState } from '@/models/connect';
 import { digitUppercase } from '@/utils/utils';
 import { Alert, Button, Divider, Form, Input } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
@@ -5,7 +6,6 @@ import { connect } from 'dva';
 import React from 'react';
 import router from 'umi/router';
 import styles from './style.less';
-import { FormModelState } from '../models/form';
 
 const formItemLayout = {
   labelCol: {
@@ -16,14 +16,8 @@ const formItemLayout = {
   },
 };
 
-interface ConfirmFormProps extends FormComponentProps {
-  dispatch: (args: any) => void;
-  data: {
-    payAccount: string;
-    receiverAccount: string;
-    receiverName: string;
-    amount: string;
-  };
+interface ConfirmFormProps extends FormComponentProps, Required<ConnectProps> {
+  data: FormModelState['step'];
   submitting: boolean;
 }
 
@@ -33,7 +27,7 @@ const Confirm: React.FC<ConfirmFormProps> = props => {
   const onPrev = () => {
     router.push('/form/step-form/info');
   };
-  const onValidateForm = (e: any) => {
+  const onValidateForm = (e: React.MouseEvent) => {
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
@@ -103,8 +97,8 @@ const Confirm: React.FC<ConfirmFormProps> = props => {
 };
 
 export default Form.create()(
-  connect(({ form, loading }: { form: FormModelState; loading: any }) => ({
+  connect(({ form, loading }: ConnectState) => ({
     submitting: loading.effects['form/submitStepForm'],
-    data: form.step,
+    data: form!.step,
   }))(Confirm),
 );

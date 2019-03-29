@@ -13,7 +13,7 @@ import {
   Select,
   TimePicker,
 } from 'antd';
-import { ConnectState } from '@/models/connect';
+import { ConnectState, ConnectProps } from '@/models/connect';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import React, { Component } from 'react';
@@ -59,9 +59,7 @@ const tableData = [
   },
 ];
 
-interface AdvancedFormProps extends FormComponentProps {
-  location: Location;
-  dispatch: (args: any) => void;
+interface AdvancedFormProps extends FormComponentProps, Required<ConnectProps> {
   submitting: boolean;
 }
 
@@ -115,7 +113,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
           content={errorList}
           overlayClassName={styles.errorPopover}
           trigger="click"
-          getPopupContainer={(trigger: any) => trigger.parentNode as HTMLElement}
+          getPopupContainer={trigger => trigger!.parentNode as HTMLElement}
         >
           <Icon type="exclamation-circle" />
         </Popover>

@@ -1,10 +1,10 @@
+import { ConnectProps, ConnectState, FormModelState } from '@/models/connect';
 import { Button, Divider, Form, Input, Select } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import React, { Fragment } from 'react';
 import router from 'umi/router';
 import styles from './style.less';
-import { FormModelState } from '../models/form';
 
 const { Option } = Select;
 
@@ -17,15 +17,8 @@ const formItemLayout = {
   },
 };
 
-interface InfoFormProps extends FormComponentProps {
-  location: Location;
-  dispatch: (args: any) => void;
-  data: {
-    payAccount: string;
-    receiverAccount: string;
-    receiverName: string;
-    amount: string;
-  };
+interface InfoFormProps extends FormComponentProps, Required<ConnectProps> {
+  data: FormModelState['step'];
 }
 
 const Info: React.FC<InfoFormProps> = props => {
@@ -120,7 +113,7 @@ const Info: React.FC<InfoFormProps> = props => {
 };
 
 export default Form.create()(
-  connect(({ form }: { form: FormModelState }) => ({
-    data: form.step,
+  connect(({ form }: ConnectState) => ({
+    data: form!.step,
   }))(Info),
 );
