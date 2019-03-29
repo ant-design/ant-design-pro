@@ -2,7 +2,7 @@ import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { CurrentUser } from '@/models/user';
 import { Menu } from 'antd';
-import { MenuMode } from 'antd/es/menu';
+import { ClickParam as MenuClickParam, MenuMode } from 'antd/es/menu';
 import { connect } from 'dva';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'umi-plugin-react/locale';
@@ -35,7 +35,7 @@ class Info extends Component<InfoProps, InfoState> {
     return null;
   }
 
-  main: HTMLDivElement;
+  main: HTMLDivElement | null = null;
   constructor(props: InfoProps) {
     super(props);
     const { match, location } = props;
@@ -81,7 +81,7 @@ class Info extends Component<InfoProps, InfoState> {
     return menuMap[selectKey];
   };
 
-  selectKey = ({ key }) => {
+  selectKey = ({ key }: MenuClickParam) => {
     router.push(`/account/settings/${key}`);
     this.setState({
       selectKey: key,
@@ -94,16 +94,16 @@ class Info extends Component<InfoProps, InfoState> {
     }
     requestAnimationFrame(() => {
       let mode: MenuMode = 'inline';
-      const { offsetWidth } = this.main;
-      if (this.main.offsetWidth < 641 && offsetWidth > 400) {
-        mode = 'horizontal';
+      if (this.main) {
+        const { offsetWidth } = this.main;
+        if (offsetWidth < 641 && offsetWidth > 400) {
+          mode = 'horizontal';
+        }
+        if (window.innerWidth < 768 && offsetWidth > 400) {
+          mode = 'horizontal';
+        }
       }
-      if (window.innerWidth < 768 && offsetWidth > 400) {
-        mode = 'horizontal';
-      }
-      this.setState({
-        mode,
-      });
+      this.setState({ mode });
     });
   };
 

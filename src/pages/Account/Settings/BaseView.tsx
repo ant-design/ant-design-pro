@@ -1,10 +1,12 @@
+import { ConnectState } from '@/models/connect';
+import { CurrentUser } from '@/models/user';
 import { Button, Form, Input, Select, Upload } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import React, { Component, Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 import styles from './BaseView.less';
-import GeographicView from './GeographicView';
+import GeographicView, { GeographicValue } from './GeographicView';
 import PhoneView from './PhoneView';
 // import { getTimeDistance } from '@/utils/utils';
 
@@ -12,7 +14,7 @@ const FormItem = Form.Item;
 const { Option } = Select;
 
 // 头像组件 方便以后独立，增加裁剪之类的功能
-const AvatarView = ({ avatar }) => (
+const AvatarView: React.FC<{ avatar: string }> = ({ avatar }) => (
   <Fragment>
     <div className={styles.avatar_title}>
       <FormattedMessage id="app.settings.basic.avatar" defaultMessage="Avatar" />
@@ -30,7 +32,7 @@ const AvatarView = ({ avatar }) => (
   </Fragment>
 );
 
-const validatorGeographic = (rule, value, callback) => {
+const validatorGeographic = (_: any, value: GeographicValue, callback: Function) => {
   const { province, city } = value;
   if (!province.key) {
     callback('Please input your province!');
@@ -41,7 +43,7 @@ const validatorGeographic = (rule, value, callback) => {
   callback();
 };
 
-const validatorPhone = (rule, value, callback) => {
+const validatorPhone = (_: any, value: string, callback: Function) => {
   const values = value.split('-');
   if (!values[0]) {
     callback('Please input your area code!');
@@ -53,22 +55,15 @@ const validatorPhone = (rule, value, callback) => {
 };
 
 interface BaseProps extends FormComponentProps {
-  currentUser: {
-    avatar?: string;
-    name?: string;
-    title?: string;
-    group?: string;
-    signature?: string;
-    geographic?: any;
-    tags?: any[];
-  };
+  currentUser: CurrentUser;
 }
 
-@connect(({ user }) => ({
+@connect(({ user }: ConnectState) => ({
   currentUser: user.currentUser,
 }))
 class BaseView extends Component<BaseProps> {
-  view: HTMLDivElement;
+  view: HTMLDivElement = null!;
+
   componentDidMount() {
     this.setBaseInfo();
   }

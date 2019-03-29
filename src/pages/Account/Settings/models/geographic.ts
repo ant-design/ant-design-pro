@@ -1,10 +1,10 @@
 import { queryCity, queryProvince } from '@/services/geographic';
-import { Effect, Subscription } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
 export interface GeographicModelState {
-  province: any[];
-  city: any[];
+  province: { name: string; id: string }[];
+  city: { province: string; name: string; id: string }[];
   isLoading: boolean;
 }
 
@@ -16,9 +16,9 @@ export interface GeographicModel {
     fetchCity: Effect;
   };
   reducers: {
-    setProvince: Reducer<any>;
-    setCity: Reducer<any>;
-    changeLoading: Reducer<any>;
+    setProvince: Reducer<GeographicModelState>;
+    setCity: Reducer<GeographicModelState>;
+    changeLoading: Reducer<GeographicModelState>;
   };
 }
 

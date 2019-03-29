@@ -11,7 +11,7 @@ import { Card, Col, Row, Tooltip } from 'antd';
 import numeral from 'numeral';
 import { Dispatch } from 'redux';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { MonitorState } from './models/monitor';
+import { MonitorModelState } from './models/monitor';
 import styles from './Monitor.less';
 
 const { Secured } = Authorized;
@@ -26,7 +26,7 @@ const havePermissionAsync = new Promise(resolve => {
 
 interface MonitorProps {
   dispatch: Dispatch<any>;
-  monitor: MonitorState;
+  monitor: MonitorModelState;
   loading: boolean;
 }
 

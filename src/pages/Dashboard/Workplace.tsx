@@ -9,7 +9,7 @@ import { UserModelState } from '@/models/user';
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
 import Link from 'umi/link';
-import { ActivitiesState } from './models/activities';
+import { ActivitiesModelState } from './models/activities';
 import { ChartModelState } from './models/chart';
 import styles from './Workplace.less';
 
@@ -42,7 +42,7 @@ const links = [
 
 interface WorkplaceProps {
   dispatch: Dispatch<any>;
-  activities: ActivitiesState;
+  activities: ActivitiesModelState;
   currentUser: UserModelState['currentUser'];
   project: ProjectModelState;
   chart: ChartModelState;
