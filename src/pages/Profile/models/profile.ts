@@ -42,7 +42,6 @@ const ProfileModel: ProfileModel = {
   effects: {
     *fetchBasic({ payload }, { call, put }) {
       const response = yield call(queryBasicProfile, payload);
-      console.log(response);
       yield put({
         type: 'show',
         payload: response,
