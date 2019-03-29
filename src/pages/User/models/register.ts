@@ -15,7 +15,7 @@ export interface RegisterModel {
     submit: Effect;
   };
   reducers: {
-    registerHandle: Reducer<any>;
+    registerHandle: Reducer<RegisterModelState>;
   };
 }
 
