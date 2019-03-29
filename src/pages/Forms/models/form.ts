@@ -1,6 +1,6 @@
 import { fakeSubmitForm } from '@/services/api';
 import { message } from 'antd';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { routerRedux } from 'dva/router';
 import { Reducer } from 'redux';
 

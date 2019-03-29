@@ -2,7 +2,7 @@ import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { reloadAuthorized } from '@/utils/Authorized';
 import { getPageQuery } from '@/utils/utils';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
 import { Reducer } from 'redux';

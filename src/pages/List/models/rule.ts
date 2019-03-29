@@ -1,5 +1,5 @@
 import { addRule, queryRule, removeRule, updateRule } from '@/services/api';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
 export interface RuleModelState {

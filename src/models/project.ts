@@ -1,5 +1,5 @@
 import { queryProjectNotice } from '@/services/api';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
 export interface ProjectModelState {

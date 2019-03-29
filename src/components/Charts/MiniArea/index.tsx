@@ -3,6 +3,11 @@ import { Chart, Axis, AxisProps, Tooltip, Geom } from 'bizcharts';
 import autoHeight from '../autoHeight';
 import styles from '../index.less';
 
+export interface MiniAreaDataItem {
+  x: number | string;
+  y: number;
+}
+
 interface MiniAreaProps {
   forceFit: boolean;
   color?: string;
@@ -14,15 +19,12 @@ interface MiniAreaProps {
   yAxis?: AxisProps;
   borderWidth: number;
   scale: any;
-  data: Array<{
-    x: number | string;
-    y: number;
-  }>;
+  data: MiniAreaDataItem[];
 }
 
 const MiniArea: React.FC<MiniAreaProps> = props => {
   const {
-    height,
+    height = 0,
     data = [],
     forceFit = true,
     color = 'rgba(24, 144, 255, 0.2)',
@@ -83,7 +85,7 @@ const MiniArea: React.FC<MiniAreaProps> = props => {
             <Axis
               key="axis-y"
               name="y"
-              label={false} //https://github.com/alibaba/BizCharts/pull/756
+              label={false}
               line={false}
               tickLine={false}
               grid={false}

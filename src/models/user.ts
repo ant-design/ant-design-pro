@@ -1,6 +1,6 @@
 import { query as queryUsers, queryCurrent } from '@/services/user';
 import { LabeledValue } from 'antd/es/select';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
 export interface CurrentUser {

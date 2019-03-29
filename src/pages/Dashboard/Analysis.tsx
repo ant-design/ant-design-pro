@@ -5,6 +5,7 @@ import { ChartModelState, ConnectProps, ConnectState } from '@/models/connect';
 import { getTimeDistance } from '@/utils/utils';
 import { Col, Dropdown, Icon, Menu, Row } from 'antd';
 import { RangePickerValue } from 'antd/es/date-picker/interface';
+import { RadioChangeEvent } from 'antd/es/radio/interface';
 import { connect } from 'dva';
 import React, { Component, Suspense } from 'react';
 import styles from './Analysis.less';
@@ -37,7 +38,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     rangePickerValue: getTimeDistance('year'),
   };
 
-  reqRef: number;
+  reqRef: number = 0;
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -56,16 +57,12 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     cancelAnimationFrame(this.reqRef);
   }
 
-  handleChangeSalesType = e => {
-    this.setState({
-      salesType: e.target.value,
-    });
+  handleChangeSalesType = ({ target: { value } }: RadioChangeEvent) => {
+    this.setState({ salesType: value });
   };
 
-  handleTabChange = key => {
-    this.setState({
-      currentTabKey: key,
-    });
+  handleTabChange = (key: string) => {
+    this.setState({ currentTabKey: key });
   };
 
   handleRangePickerChange: (

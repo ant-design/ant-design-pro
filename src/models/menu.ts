@@ -1,6 +1,6 @@
 import { MenuDataItem, Route } from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import { Reducer } from 'redux';

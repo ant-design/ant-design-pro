@@ -1,14 +1,16 @@
 import { fakeChartData } from '@/services/api';
 import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
+import { VisitDataItem } from '../IntroduceRow';
+import { OfflineChartDataItem, OfflineDataItem } from '../OfflineData';
 
 export interface ChartModelState {
-  visitData: any[];
+  visitData: VisitDataItem[];
   visitData2: any[];
   salesData: any[];
   searchData: any[];
-  offlineData: any[];
-  offlineChartData: any[];
+  offlineData: OfflineDataItem[];
+  offlineChartData: OfflineChartDataItem[];
   salesTypeData: any[];
   salesTypeDataOnline: any[];
   salesTypeDataOffline: any[];

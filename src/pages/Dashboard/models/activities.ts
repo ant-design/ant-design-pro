@@ -1,5 +1,5 @@
 import { queryActivities } from '@/services/api';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
 export interface ActivitiesModelState {
@@ -13,11 +13,11 @@ export interface ActivitiesModel {
     fetchList: Effect;
   };
   reducers: {
-    saveList: Reducer<any>;
+    saveList: Reducer<ActivitiesModelState>;
   };
 }
 
-export default {
+const ActivitiesModel: ActivitiesModel = {
   namespace: 'activities',
 
   state: {
@@ -43,3 +43,5 @@ export default {
     },
   },
 };
+
+export default ActivitiesModel;
