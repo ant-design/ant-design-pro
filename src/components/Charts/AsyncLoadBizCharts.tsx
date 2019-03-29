@@ -8,8 +8,11 @@ const loadBizCharts = async () => {
     return Promise.resolve(true);
   }
   await Promise.all([
-    importCDN('//gw.alipayobjects.com/os/lib/bizcharts/3.4.3/umd/BizCharts.min.js'),
-    importCDN('//gw.alipayobjects.com/os/lib/antv/data-set/0.10.1/dist/data-set.min.js'),
+    importCDN('//gw.alipayobjects.com/os/lib/bizcharts/3.4.3/umd/BizCharts.min.js', 'BizCharts'),
+    importCDN(
+      '//gw.alipayobjects.com/os/lib/antv/data-set/0.10.1/dist/data-set.min.js',
+      'data-set',
+    ),
   ]);
   // eslint-disable-next-line no-console
   console.log('bizCharts load success');
