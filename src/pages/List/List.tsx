@@ -14,7 +14,7 @@ interface SearchListProps {
 
 @connect()
 class SearchList extends Component<SearchListProps> {
-  handleTabChange = key => {
+  handleTabChange = (key: string) => {
     const { match } = this.props;
     switch (key) {
       case 'articles':
@@ -31,7 +31,7 @@ class SearchList extends Component<SearchListProps> {
     }
   };
 
-  handleFormSubmit = value => {
+  handleFormSubmit = (value: string) => {
     // eslint-disable-next-line
     console.log(value);
   };

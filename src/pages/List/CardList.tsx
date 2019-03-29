@@ -5,6 +5,7 @@ import { connect } from 'dva';
 import React, { Component } from 'react';
 import styles from './CardList.less';
 import { RuleModelState } from './models/rule';
+import { ConnectState } from '@/models/connect';
 
 interface CardListProps {
   list: RuleModelState;
@@ -12,7 +13,7 @@ interface CardListProps {
   loading: boolean;
 }
 
-@connect(({ list, loading }) => ({
+@connect(({ list, loading }: ConnectState) => ({
   list,
   loading: loading.models.list,
 }))
@@ -29,7 +30,7 @@ class CardList extends Component<CardListProps> {
 
   render() {
     const {
-      list: { list },
+      list: { list = [] },
       loading,
     } = this.props;
 
@@ -73,7 +74,7 @@ class CardList extends Component<CardListProps> {
             loading={loading}
             grid={{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1 }}
             dataSource={['', ...list]}
-            renderItem={item =>
+            renderItem={(item: any) =>
               item ? (
                 <List.Item key={item.id}>
                   <Card

@@ -3,13 +3,14 @@ import TagSelect from '@/components/TagSelect';
 import Ellipsis from '@/components/Ellipsis';
 import StandardFormRow from '@/components/StandardFormRow';
 import { Card, Col, Form, List, Row, Select } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
+import { FormComponentProps, FormCreateOption } from 'antd/es/form';
 import { connect } from 'dva';
 import moment from 'moment';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import { RuleModelState } from './models/rule';
 import styles from './Projects.less';
+import { ConnectState } from '@/models/connect';
 
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -22,7 +23,7 @@ interface CoverCardListProps extends FormComponentProps {
   loading: boolean;
 }
 
-@connect(({ list, loading }) => ({
+@connect(({ list, loading }: ConnectState) => ({
   list,
   loading: loading.models.list,
 }))
@@ -51,7 +52,7 @@ class CoverCardList extends Component<CoverCardListProps> {
         loading={loading}
         grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
         dataSource={list}
-        renderItem={item => (
+        renderItem={(item: any) => (
           <List.Item>
             <Card
               className={styles.card}
@@ -66,13 +67,15 @@ class CoverCardList extends Component<CoverCardListProps> {
                 <span>{moment(item.updatedAt).fromNow()}</span>
                 <div className={styles.avatarList}>
                   <AvatarList size="small">
-                    {item.members.map((member, i) => (
-                      <AvatarListItem
-                        key={`${item.id}-avatar-${i}`}
-                        src={member.avatar}
-                        tips={member.name}
-                      />
-                    ))}
+                    {item.members.map(
+                      (member: { avatar: string; name: React.ReactNode }, i: any) => (
+                        <AvatarListItem
+                          key={`${item.id}-avatar-${i}`}
+                          src={member.avatar}
+                          tips={member.name}
+                        />
+                      ),
+                    )}
                   </AvatarList>
                 </div>
               </div>
@@ -165,4 +168,4 @@ export default Form.create({
       },
     });
   },
-})(CoverCardList);
+} as FormCreateOption<any>)(CoverCardList);

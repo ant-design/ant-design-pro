@@ -25,6 +25,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import styles from './BasicList.less';
 import { RuleModelState } from './models/rule';
+import { ConnectState } from '@/models/connect';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
@@ -41,17 +42,17 @@ interface BasicListProps extends FormComponentProps {
 interface BasicListState {
   visible: boolean;
   done: boolean;
-  current: object;
+  current?: any;
 }
 
-@connect(({ list, loading }) => ({
+@connect(({ list, loading }: ConnectState) => ({
   list,
   loading: loading.models.list,
 }))
 class BasicList extends Component<BasicListProps, BasicListState> {
-  state = { visible: false, done: false, current: undefined };
+  state: BasicListState = { visible: false, done: false, current: undefined };
 
-  addBtn: HTMLElement;
+  addBtn!: HTMLElement;
 
   formLayout = {
     labelCol: { span: 7 },
@@ -75,7 +76,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
     });
   };
 
-  showEditModal = item => {
+  showEditModal = (item: any) => {
     this.setState({
       visible: true,
       current: item,
@@ -97,7 +98,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { dispatch, form } = this.props;
     const { current } = this.state;
@@ -118,7 +119,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
     });
   };
 
-  deleteItem = id => {
+  deleteItem = (id: any) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'list/submit',
@@ -136,7 +137,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
     } = this.props;
     const { visible, done, current = {} } = this.state;
 
-    const editAndDelete = (key, currentItem) => {
+    const editAndDelete = (key: string, currentItem: { id: any }) => {
       if (key === 'edit') {
         this.showEditModal(currentItem);
       } else if (key === 'delete') {
@@ -188,7 +189,9 @@ class BasicList extends Component<BasicListProps, BasicListState> {
       total: 50,
     };
 
-    const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
+    const ListContent: ({ data }: { data: any }) => JSX.Element = ({
+      data: { owner, createdAt, percent, status },
+    }) => (
       <div className={styles.listContent}>
         <div className={styles.listContentItem}>
           <span>Owner</span>
@@ -204,7 +207,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
       </div>
     );
 
-    const MoreBtn = props => (
+    const MoreBtn = (props: any) => (
       <Dropdown
         overlay={
           <Menu onClick={({ key }) => editAndDelete(key, props.current)}>
@@ -320,7 +323,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
               loading={loading}
               pagination={paginationProps}
               dataSource={list}
-              renderItem={item => (
+              renderItem={(item: any) => (
                 <List.Item
                   actions={[
                     <a

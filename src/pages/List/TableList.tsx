@@ -23,6 +23,7 @@ import {
 import { FormComponentProps } from 'antd/es/form';
 import { PaginationConfig } from 'antd/es/pagination';
 import { SorterResult, TableCurrentDataSource } from 'antd/es/table';
+import { ClickParam } from 'antd/es/menu';
 import { connect } from 'dva';
 import moment from 'moment';
 import React, { Fragment, Component } from 'react';
@@ -35,7 +36,7 @@ const { Step } = Steps;
 const { TextArea } = Input;
 const { Option } = Select;
 const RadioGroup = Radio.Group;
-const getValue = obj =>
+const getValue = (obj: any) =>
   Object.keys(obj)
     .map(key => obj[key])
     .join(',');
@@ -82,7 +83,7 @@ interface UpdateFormProps extends FormComponentProps {
   handleUpdate: (e?: any) => void;
   handleUpdateModalVisible: (flag?: boolean, record?: any) => void;
   updateModalVisible: boolean;
-  values: {};
+  values: any;
 }
 
 interface UpdateFormState {
@@ -93,7 +94,7 @@ interface UpdateFormState {
 class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
   formLayout: object;
 
-  constructor(props) {
+  constructor(props: UpdateFormProps) {
     super(props);
 
     this.state = {
@@ -116,7 +117,7 @@ class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
     };
   }
 
-  handleNext = currentStep => {
+  handleNext = (currentStep: number) => {
     const { form, handleUpdate } = this.props;
     const { formVals: oldValue } = this.state;
     form.validateFields((err, fieldsValue) => {
@@ -153,7 +154,7 @@ class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
     });
   };
 
-  renderContent = (currentStep, formVals) => {
+  renderContent = (currentStep: number, formVals: any) => {
     const { form } = this.props;
     if (currentStep === 1) {
       return [
@@ -231,7 +232,7 @@ class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
     ];
   };
 
-  renderFooter = currentStep => {
+  renderFooter = (currentStep: number) => {
     const { handleUpdateModalVisible, values } = this.props;
     if (currentStep === 1) {
       return [
@@ -331,7 +332,7 @@ class TableList extends Component<TableListProps, TableListState> {
     {
       title: '规则名称',
       dataIndex: 'name',
-      render: text => <a onClick={() => this.previewItem(text)}>{text}</a>,
+      render: (text: any) => <a onClick={() => this.previewItem(text)}>{text}</a>,
     },
     {
       title: '描述',
@@ -341,7 +342,7 @@ class TableList extends Component<TableListProps, TableListState> {
       title: '服务调用次数',
       dataIndex: 'callNo',
       sorter: true,
-      render: val => `${val} 万`,
+      render: (text: any) => `${text} 万`,
       // mark to display a total number
       needTotal: true,
     },
@@ -366,19 +367,17 @@ class TableList extends Component<TableListProps, TableListState> {
           value: 3,
         },
       ],
-      render(val) {
-        return <Badge status={statusMap[val]} text={status[val]} />;
-      },
+      render: (text: any) => <Badge status={statusMap[text]} text={status[text]} />,
     },
     {
       title: '上次调度时间',
       dataIndex: 'updatedAt',
       sorter: true,
-      render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      render: (text: any) => <span>{moment(text).format('YYYY-MM-DD HH:mm:ss')}</span>,
     },
     {
       title: '操作',
-      render: (text, record) => (
+      render: (text: any, record: any) => (
         <Fragment>
           <a onClick={() => this.handleUpdateModalVisible(true, record)}>配置</a>
           <Divider type="vertical" />
@@ -388,7 +387,7 @@ class TableList extends Component<TableListProps, TableListState> {
     },
   ];
 
-  previewItem = id => {
+  previewItem = (id: string) => {
     router.push(`/profile/basic/${id}`);
   };
 
@@ -403,7 +402,7 @@ class TableList extends Component<TableListProps, TableListState> {
     pagination: PaginationConfig,
     filters: Record<any, any>,
     sorter: SorterResult<any>,
-    extra: TableCurrentDataSource<any>,
+    extra?: TableCurrentDataSource<any>,
   ) => void = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
@@ -450,7 +449,7 @@ class TableList extends Component<TableListProps, TableListState> {
     });
   };
 
-  handleMenuClick = e => {
+  handleMenuClick = (e: ClickParam) => {
     const { dispatch } = this.props;
     const { selectedRows } = this.state;
 
@@ -462,7 +461,7 @@ class TableList extends Component<TableListProps, TableListState> {
         dispatch({
           type: 'rule/remove',
           payload: {
-            key: selectedRows.map(row => row.key),
+            key: selectedRows.map((row: any) => row.key),
           },
           callback: () => {
             this.setState({
@@ -482,7 +481,7 @@ class TableList extends Component<TableListProps, TableListState> {
     });
   };
 
-  handleSearch = e => {
+  handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const { dispatch, form } = this.props;
@@ -521,7 +520,7 @@ class TableList extends Component<TableListProps, TableListState> {
     });
   };
 
-  handleAdd = fields => {
+  handleAdd = (fields: any) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'rule/add',
@@ -534,7 +533,7 @@ class TableList extends Component<TableListProps, TableListState> {
     this.handleModalVisible();
   };
 
-  handleUpdate = fields => {
+  handleUpdate = (fields: any) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
     dispatch({

@@ -2,8 +2,9 @@ import { connect } from 'dva';
 import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
 import StandardFormRow from '@/components/StandardFormRow';
 import TagSelect from '@/components/TagSelect';
+import { ConnectState } from '@/models/connect';
 import { formatWan } from '@/utils/utils';
-import { FormComponentProps } from 'antd/es/form';
+import { FormComponentProps, FormCreateOption } from 'antd/es/form';
 import numeral from 'numeral';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'umi-plugin-react/locale';
@@ -19,7 +20,7 @@ interface FilterCardListProps extends FormComponentProps {
   loading: boolean;
 }
 
-@connect(({ list, loading }) => ({
+@connect(({ list, loading }: ConnectState) => ({
   list,
   loading: loading.models.list,
 }))
@@ -42,7 +43,7 @@ class FilterCardList extends Component<FilterCardListProps> {
     } = this.props;
     const { getFieldDecorator } = form;
 
-    const CardInfo = ({ activeUser, newUser }) => (
+    const CardInfo = ({ activeUser, newUser }: { activeUser: string; newUser: string }) => (
       <div className={styles.cardInfo}>
         <div>
           <p>活跃用户</p>
@@ -144,7 +145,7 @@ class FilterCardList extends Component<FilterCardListProps> {
           grid={{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
           loading={loading}
           dataSource={list}
-          renderItem={item => (
+          renderItem={(item: any) => (
             <List.Item key={item.id}>
               <Card
                 hoverable={true}
@@ -193,4 +194,4 @@ export default Form.create({
       },
     });
   },
-})(FilterCardList);
+} as FormCreateOption<any>)(FilterCardList);

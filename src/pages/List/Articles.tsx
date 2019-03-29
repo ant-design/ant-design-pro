@@ -2,8 +2,9 @@ import ArticleListContent from '@/components/ArticleListContent';
 import StandardFormRow from '@/components/StandardFormRow';
 import TagSelect from '@/components/TagSelect';
 import { Button, Card, Col, Form, Icon, List, Row, Select, Tag } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
+import { FormComponentProps, FormCreateOption } from 'antd/es/form';
 import { connect } from 'dva';
+import { ConnectState } from '@/models/connect';
 import React, { Component, Fragment } from 'react';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Articles.less';
@@ -20,7 +21,7 @@ interface SearchListProps extends FormComponentProps {
   loading: boolean;
 }
 
-@connect(({ list, loading }) => ({
+@connect(({ list, loading }: ConnectState) => ({
   list,
   loading: loading.models.list,
 }))
@@ -55,7 +56,7 @@ class SearchList extends Component<SearchListProps> {
   render() {
     const {
       form,
-      list: { list },
+      list: { list = [] },
       loading,
     } = this.props;
     const { getFieldDecorator } = form;
@@ -83,7 +84,10 @@ class SearchList extends Component<SearchListProps> {
       },
     ];
 
-    const IconText = ({ type, text }) => (
+    const IconText: ({ type, text }: { type: string; text: string }) => JSX.Element = ({
+      type,
+      text,
+    }) => (
       <span>
         <Icon type={type} style={{ marginRight: 8 }} />
         {text}
@@ -207,7 +211,7 @@ class SearchList extends Component<SearchListProps> {
             itemLayout="vertical"
             loadMore={loadMore}
             dataSource={list}
-            renderItem={item => (
+            renderItem={(item: any) => (
               <List.Item
                 key={item.id}
                 actions={[
@@ -254,4 +258,4 @@ export default Form.create({
       },
     });
   },
-})(SearchList);
+} as FormCreateOption<any>)(SearchList);
