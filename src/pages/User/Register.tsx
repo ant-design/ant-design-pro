@@ -45,12 +45,19 @@ interface RegisterProps extends FormComponentProps {
   dispatch: (args: any) => void;
   submitting: boolean;
 }
+interface RegisterState {
+  count: number;
+  confirmDirty: boolean;
+  visible: boolean;
+  help: string;
+  prefix: string;
+}
 
-@connect(({ register, loading }) => ({
+@connect(({ register, loading }: { register: RegisterModelState; loading: any }) => ({
   register,
   submitting: loading.effects['register/submit'],
 }))
-class Register extends Component<RegisterProps> {
+class Register extends Component<RegisterProps, RegisterState> {
   state = {
     count: 0,
     confirmDirty: false,
@@ -59,7 +66,7 @@ class Register extends Component<RegisterProps> {
     prefix: '86',
   };
 
-  interval: NodeJS.Timeout;
+  interval!: NodeJS.Timeout;
 
   componentDidUpdate() {
     const { form, register } = this.props;
@@ -102,7 +109,7 @@ class Register extends Component<RegisterProps> {
     return 'poor';
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { form, dispatch } = this.props;
     form.validateFields({ force: true }, (err, values) => {
@@ -119,13 +126,7 @@ class Register extends Component<RegisterProps> {
     });
   };
 
-  handleConfirmBlur = e => {
-    const { value } = e.target;
-    const { confirmDirty } = this.state;
-    this.setState({ confirmDirty: confirmDirty || !!value });
-  };
-
-  checkConfirm = (rule, value, callback) => {
+  checkConfirm = (rule: any, value: string, callback: Function) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
       callback(formatMessage({ id: 'validation.password.twice' }));
@@ -134,7 +135,7 @@ class Register extends Component<RegisterProps> {
     }
   };
 
-  checkPassword = (rule, value, callback) => {
+  checkPassword = (rule: any, value: string, callback: Function) => {
     const { visible, confirmDirty } = this.state;
     if (!value) {
       this.setState({
@@ -163,7 +164,7 @@ class Register extends Component<RegisterProps> {
     }
   };
 
-  changePrefix = value => {
+  changePrefix = (value: string) => {
     this.setState({
       prefix: value,
     });
@@ -214,7 +215,7 @@ class Register extends Component<RegisterProps> {
           </FormItem>
           <FormItem help={help}>
             <Popover
-              getPopupContainer={node => node.parentNode as HTMLElement}
+              getPopupContainer={(node: any) => node.parentNode as HTMLElement}
               content={
                 <div style={{ padding: '4px 0' }}>
                   {passwordStatusMap[this.getPasswordStatus()]}
@@ -329,7 +330,7 @@ class Register extends Component<RegisterProps> {
               size="large"
               loading={submitting}
               className={styles.submit}
-              type="primary"
+              // type="primary"  https://github.com/ant-design/ant-design/pull/15702
               htmlType="submit"
             >
               <FormattedMessage id="app.register.register" />

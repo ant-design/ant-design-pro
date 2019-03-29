@@ -1,4 +1,4 @@
-import Login from '@/components/Login';
+import Login, { WrappedLogin } from '@/components/Login';
 import { LoginModelState } from '@/models/login';
 import { Alert, Checkbox, Icon } from 'antd';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
@@ -21,7 +21,7 @@ interface LoginPageState {
   autoLogin: boolean;
 }
 
-@connect(({ login, loading }) => ({
+@connect(({ login, loading }: { login: LoginModelState; loading: any }) => ({
   login,
   submitting: loading.effects['login/login'],
 }))
@@ -31,7 +31,7 @@ class LoginPage extends Component<LoginPageProps, LoginPageState> {
     autoLogin: true,
   };
 
-  loginForm: InstanceType<typeof Login>;
+  loginForm!: WrappedLogin;
 
   onTabChange = (type: string) => {
     this.setState({ type });
@@ -87,7 +87,7 @@ class LoginPage extends Component<LoginPageProps, LoginPageState> {
           defaultActiveKey={type}
           onTabChange={this.onTabChange}
           onSubmit={this.handleSubmit}
-          ref={form => (this.loginForm = form)}
+          ref={(form: WrappedLogin) => (this.loginForm = form)}
         >
           <Tab key="account" tab={formatMessage({ id: 'app.login.tab-login-credentials' })}>
             {login.status === 'error' &&
