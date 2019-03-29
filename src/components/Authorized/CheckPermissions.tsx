@@ -8,7 +8,7 @@ export type Authority =
   | Promise<any>
   | null
   | undefined
-  | ((current: string | string[]) => Promise<any> | boolean);
+  | ((current?: string | string[]) => Promise<any> | boolean);
 
 /**
  * 通用权限检查方法
@@ -35,7 +35,7 @@ const checkPermissions = (
       if (currentAuthority.some(item => authority.includes(item))) {
         return target;
       }
-    } else if (authority.includes(currentAuthority)) {
+    } else if (authority.includes(currentAuthority!)) {
       return target;
     }
     return Exception;
