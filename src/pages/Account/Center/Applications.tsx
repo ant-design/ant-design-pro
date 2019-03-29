@@ -33,7 +33,10 @@ const Center: React.FC<ApplicationsProps> = props => {
       </Menu.Item>
     </Menu>
   );
-  const CardInfo = ({ activeUser, newUser }) => (
+  const CardInfo: ({ activeUser, newUser }: { activeUser: any; newUser: any }) => JSX.Element = ({
+    activeUser,
+    newUser,
+  }) => (
     <div className={stylesApplications.cardInfo}>
       <div>
         <p>活跃用户</p>
@@ -51,7 +54,7 @@ const Center: React.FC<ApplicationsProps> = props => {
       className={stylesApplications.filterCardList}
       grid={{ gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
       dataSource={list}
-      renderItem={item => (
+      renderItem={(item: any) => (
         <List.Item key={item.id}>
           <Card
             hoverable={true}
@@ -85,6 +88,6 @@ const Center: React.FC<ApplicationsProps> = props => {
   );
 };
 
-export default connect(({ list }) => ({
+export default connect(({ list }: { list: ListModelState }) => ({
   list,
 }))(Center);
