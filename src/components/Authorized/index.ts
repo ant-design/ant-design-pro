@@ -1,6 +1,5 @@
 import Authorized from './Authorized';
-import renderAuthorize from './renderAuthorize';
+import renderAuthorize, { CurrentAuthority } from './renderAuthorize';
 
-export { CurrentAuthority } from './renderAuthorize';
-
+export { CurrentAuthority };
 export default renderAuthorize(Authorized);

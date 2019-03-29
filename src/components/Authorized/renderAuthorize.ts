@@ -3,7 +3,7 @@ import { AnyComponent } from './PromiseRender';
 /* eslint-disable import/no-mutable-exports */
 let CURRENT: string | string[] = 'NULL';
 
-export type CurrentAuthority = string | string[] | (() => string | string[]) | 'NULL';
+export declare type CurrentAuthority = string | string[] | (() => string | string[]) | 'NULL';
 
 /**
  * use authority or getAuthority

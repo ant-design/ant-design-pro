@@ -56,7 +56,7 @@ const ProportionSales: React.FC<ProportionSalesProps> = ({
       <FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />
     </h4>
     <Pie
-      hasLegend={true}
+      hasLegend
       subTitle={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
       total={() => <Yuan>{salesPieData.reduce((pre, now) => now.y + pre, 0)}</Yuan>}
       data={salesPieData}
