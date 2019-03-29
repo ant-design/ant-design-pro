@@ -4,6 +4,7 @@ import { ActivitiesModelState } from '@/pages/Dashboard/models/activities';
 import { ChartModelState } from '@/pages/Dashboard/models/chart';
 import { MonitorModelState } from '@/pages/Dashboard/models/monitor';
 import { FormModelState } from '@/pages/Forms/models/form';
+import { RuleModelState } from '@/pages/List/models/rule';
 import { ProfileModelState } from '@/pages/Profile/models/profile';
 import { RegisterModelState } from '@/pages/User/models/register';
 import { EffectsCommandMap } from 'dva';
@@ -24,6 +25,7 @@ export {
   ChartModelState,
   MonitorModelState,
   FormModelState,
+  RuleModelState,
   ProfileModelState,
   RegisterModelState,
   GlobalModelState,
@@ -67,6 +69,7 @@ export interface Loading {
     profile?: boolean;
     project?: boolean;
     register?: boolean;
+    rule?: boolean;
     setting?: boolean;
     user?: boolean;
   };
@@ -86,6 +89,7 @@ export interface ConnectState {
   profile?: ProfileModelState;
   project: ProjectModelState;
   register?: RegisterModelState;
+  rule?: RuleModelState;
   setting: SettingModelState;
   user: UserModelState;
 }

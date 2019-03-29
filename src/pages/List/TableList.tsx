@@ -1,5 +1,6 @@
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import StandardTable from '@/components/StandardTable';
+import StandardTable, { StandardTableColumnProps } from '@/components/StandardTable';
+import { ConnectState, ConnectProps } from '@/models/connect';
 import {
   Badge,
   Button,
@@ -20,9 +21,9 @@ import {
   Select,
   Steps,
 } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
+import { FormComponentProps, FormItemProps } from 'antd/es/form';
 import { PaginationConfig } from 'antd/es/pagination';
-import { SorterResult, TableCurrentDataSource } from 'antd/es/table';
+import { SorterResult } from 'antd/es/table';
 import { ClickParam } from 'antd/es/menu';
 import { connect } from 'dva';
 import moment from 'moment';
@@ -36,23 +37,44 @@ const { Step } = Steps;
 const { TextArea } = Input;
 const { Option } = Select;
 const RadioGroup = Radio.Group;
-const getValue = (obj: any) =>
+const getValue = (obj: { [key: string]: string; [key: number]: any }) =>
   Object.keys(obj)
     .map(key => obj[key])
     .join(',');
-const statusMap: any = ['default', 'processing', 'success', 'error'];
-const status = ['关闭', '运行中', '已上线', '异常'];
+const statusMap: any[] = ['default', 'processing', 'success', 'error'];
+const status: string[] = ['关闭', '运行中', '已上线', '异常'];
+
+export interface RuleItem {
+  avatar?: string;
+  callNo?: string | number;
+  createdAt?: string;
+  desc?: string;
+  disabled?: boolean;
+  frequency?: string;
+  href?: string;
+  name?: string;
+  key?: string | number;
+  owner?: string;
+  progress?: string | number;
+  target?: string;
+  template?: string;
+  time?: string;
+  title?: string;
+  type?: string;
+  status?: string;
+  updatedAt?: string;
+}
 
 interface CreateFormProps extends FormComponentProps {
   modalVisible: boolean;
-  handleAdd: (fields: any) => void;
+  handleAdd: (fields: { [K in 'desc']: RuleItem[K] }) => void;
   handleModalVisible: (flag?: boolean) => void;
 }
 
 const CreateFormFunc: React.FC<CreateFormProps> = props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
   const okHandle = () => {
-    form.validateFields((err, fieldsValue) => {
+    form.validateFields((err, fieldsValue: { [K in 'desc']: RuleItem[K] }) => {
       if (err) {
         return;
       }
@@ -80,19 +102,22 @@ const CreateFormFunc: React.FC<CreateFormProps> = props => {
 const CreateForm = Form.create()(CreateFormFunc);
 
 interface UpdateFormProps extends FormComponentProps {
-  handleUpdate: (e?: any) => void;
-  handleUpdateModalVisible: (flag?: boolean, record?: any) => void;
+  handleUpdate: (values: Partial<RuleItem>) => void;
+  handleUpdateModalVisible: (flag?: boolean, record?: Partial<RuleItem>) => void;
   updateModalVisible: boolean;
-  values: any;
+  values: Partial<RuleItem>;
 }
 
 interface UpdateFormState {
-  formVals: {};
+  formVals: RuleItem;
   currentStep: number;
 }
 
 class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
-  formLayout: object;
+  formLayout: FormItemProps = {
+    labelCol: { span: 7 },
+    wrapperCol: { span: 13 },
+  };
 
   constructor(props: UpdateFormProps) {
     super(props);
@@ -110,17 +135,12 @@ class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
       },
       currentStep: 0,
     };
-
-    this.formLayout = {
-      labelCol: { span: 7 },
-      wrapperCol: { span: 13 },
-    };
   }
 
   handleNext = (currentStep: number) => {
     const { form, handleUpdate } = this.props;
     const { formVals: oldValue } = this.state;
-    form.validateFields((err, fieldsValue) => {
+    form.validateFields((err, fieldsValue: RuleItem) => {
       if (err) {
         return;
       }
@@ -154,7 +174,7 @@ class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
     });
   };
 
-  renderContent = (currentStep: number, formVals: any) => {
+  renderContent = (currentStep: number, formVals: RuleItem) => {
     const { form } = this.props;
     if (currentStep === 1) {
       return [
@@ -298,8 +318,7 @@ class UpdateFormClass extends Component<UpdateFormProps, UpdateFormState> {
 
 const UpdateForm = Form.create()(UpdateFormClass);
 
-interface TableListProps extends FormComponentProps {
-  dispatch: (args: any) => void;
+interface TableListProps extends FormComponentProps, Required<ConnectProps> {
   rule: RuleModelState;
   loading: boolean;
 }
@@ -308,19 +327,19 @@ interface TableListState {
   modalVisible: boolean;
   updateModalVisible: boolean;
   expandForm: boolean;
-  selectedRows: any[];
-  formValues: object;
-  stepFormValues: object;
+  selectedRows: RuleItem[];
+  formValues: Partial<RuleItem>;
+  stepFormValues: Partial<RuleItem>;
 }
 
 /* eslint react/no-multi-comp:0 */
 /* tslint:disable-next-line */
-@connect(({ rule, loading }: { rule: RuleModelState; loading: any }) => ({
+@connect(({ rule, loading }: ConnectState) => ({
   rule,
   loading: loading.models.rule,
 }))
 class TableList extends Component<TableListProps, TableListState> {
-  state = {
+  state: TableListState = {
     modalVisible: false,
     updateModalVisible: false,
     expandForm: false,
@@ -328,11 +347,12 @@ class TableList extends Component<TableListProps, TableListState> {
     formValues: {},
     stepFormValues: {},
   };
-  columns = [
+
+  columns: StandardTableColumnProps<RuleItem>[] = [
     {
       title: '规则名称',
       dataIndex: 'name',
-      render: (text: any) => <a onClick={() => this.previewItem(text)}>{text}</a>,
+      render: text => <a onClick={() => this.previewItem(text)}>{text}</a>,
     },
     {
       title: '描述',
@@ -342,7 +362,7 @@ class TableList extends Component<TableListProps, TableListState> {
       title: '服务调用次数',
       dataIndex: 'callNo',
       sorter: true,
-      render: (text: any) => `${text} 万`,
+      render: text => `${text} 万`,
       // mark to display a total number
       needTotal: true,
     },
@@ -352,32 +372,32 @@ class TableList extends Component<TableListProps, TableListState> {
       filters: [
         {
           text: status[0],
-          value: 0,
+          value: '0',
         },
         {
           text: status[1],
-          value: 1,
+          value: '1',
         },
         {
           text: status[2],
-          value: 2,
+          value: '2',
         },
         {
           text: status[3],
-          value: 3,
+          value: '3',
         },
       ],
-      render: (text: any) => <Badge status={statusMap[text]} text={status[text]} />,
+      render: text => <Badge status={statusMap[text]} text={status[text]} />,
     },
     {
       title: '上次调度时间',
       dataIndex: 'updatedAt',
       sorter: true,
-      render: (text: any) => <span>{moment(text).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      render: text => <span>{moment(text).format('YYYY-MM-DD HH:mm:ss')}</span>,
     },
     {
       title: '操作',
-      render: (text: any, record: any) => (
+      render: (_, record) => (
         <Fragment>
           <a onClick={() => this.handleUpdateModalVisible(true, record)}>配置</a>
           <Divider type="vertical" />
@@ -398,12 +418,11 @@ class TableList extends Component<TableListProps, TableListState> {
     });
   }
 
-  handleStandardTableChange: (
+  handleStandardTableChange = (
     pagination: PaginationConfig,
-    filters: Record<any, any>,
-    sorter: SorterResult<any>,
-    extra?: TableCurrentDataSource<any>,
-  ) => void = (pagination, filtersArg, sorter) => {
+    filtersArg: Record<keyof RuleItem, string[]>,
+    sorter: SorterResult<RuleItem>,
+  ) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
 
@@ -461,7 +480,7 @@ class TableList extends Component<TableListProps, TableListState> {
         dispatch({
           type: 'rule/remove',
           payload: {
-            key: selectedRows.map((row: any) => row.key),
+            key: selectedRows.map(row => row.key),
           },
           callback: () => {
             this.setState({
@@ -475,7 +494,7 @@ class TableList extends Component<TableListProps, TableListState> {
     }
   };
 
-  handleSelectRows: (row: any) => void = rows => {
+  handleSelectRows = (rows: RuleItem[]) => {
     this.setState({
       selectedRows: rows,
     });
@@ -507,20 +526,20 @@ class TableList extends Component<TableListProps, TableListState> {
     });
   };
 
-  handleModalVisible: (flag?: boolean) => void = flag => {
+  handleModalVisible = (flag?: boolean) => {
     this.setState({
       modalVisible: !!flag,
     });
   };
 
-  handleUpdateModalVisible: (flag?: boolean, record?: any) => void = (flag, record) => {
+  handleUpdateModalVisible = (flag?: boolean, record?: RuleItem) => {
     this.setState({
       updateModalVisible: !!flag,
       stepFormValues: record || {},
     });
   };
 
-  handleAdd = (fields: any) => {
+  handleAdd = (fields: RuleItem) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'rule/add',
@@ -533,7 +552,7 @@ class TableList extends Component<TableListProps, TableListState> {
     this.handleModalVisible();
   };
 
-  handleUpdate = (fields: any) => {
+  handleUpdate = (fields: Partial<RuleItem>) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
     dispatch({

@@ -1,10 +1,11 @@
 import { addRule, queryRule, removeRule, updateRule } from '@/services/api';
 import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
+import { RuleItem } from '../TableList';
 
 export interface RuleModelState {
   data: {
-    list: any[];
+    list: RuleItem[];
     pagination: object;
   };
   list?: any[];
