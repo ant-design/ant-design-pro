@@ -12,7 +12,7 @@
     "analyze": "cross-env ANALYZE=1 umi build",
     "lint:style": "stylelint 'src/**/*.less' --syntax less",
     "lint:prettier": "check-prettier lint",
-    "lint": "eslint --ext .js src mock tests && npm run lint:style && npm run lint:prettier",
+    "lint": "eslint --ext .js src tests && npm run lint:style && npm run lint:prettier",
     "lint:fix": "eslint --fix --ext .js src mock tests && stylelint --fix 'src/**/*.less' --syntax less",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
