@@ -16,6 +16,8 @@ let firstMount: boolean = true;
 export interface SiderMenuProps extends BaseMenuProps {
   logo?: string;
   fixSiderbar?: boolean;
+  collapsed: boolean;
+  isMobile: boolean;
 }
 
 interface SiderMenuState {

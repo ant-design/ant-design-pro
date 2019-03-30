@@ -9,6 +9,7 @@ import getPageTitle from '@/utils/getPageTitle';
 import DocumentTitle from 'react-document-title';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
+import { ConnectState } from '@/models/connect';
 
 const links = [
   {
@@ -85,7 +86,7 @@ class UserLayout extends Component<UserLayoutProps> {
   }
 }
 
-export default connect(({ menu: menuModel }) => ({
+export default connect(({ menu: menuModel }: ConnectState) => ({
   menuData: menuModel.menuData,
   breadcrumbNameMap: menuModel.breadcrumbNameMap,
 }))(UserLayout);

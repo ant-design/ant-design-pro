@@ -45,10 +45,10 @@ const query = {
 };
 
 export interface BasicLayoutProps
-  extends ConnectProps,
+  extends Required<ConnectProps>,
     SiderMenuProps,
     HeaderViewProps,
-    Partial<SettingModelState> {
+    SettingModelState {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
 }
 

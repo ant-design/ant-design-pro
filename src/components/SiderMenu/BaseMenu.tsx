@@ -4,7 +4,7 @@ import { Icon, Menu } from 'antd';
 import { MenuMode, MenuTheme } from 'antd/es/menu';
 import classNames from 'classnames';
 import React, { Component } from 'react';
-import { RouterTypes } from 'umi';
+import { ConnectProps } from '@/models/connect';
 import Link from 'umi/link';
 import { urlToList } from '../_utils/pathTools';
 import styles from './index.less';
@@ -46,7 +46,7 @@ export interface Route extends MenuDataItem {
   routes?: Route[];
 }
 
-export interface BaseMenuProps extends Partial<RouterTypes<Route>> {
+export interface BaseMenuProps extends Required<ConnectProps> {
   className?: string;
   collapsed?: boolean;
   flatMenuKeys?: any[];

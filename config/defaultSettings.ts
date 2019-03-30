@@ -30,7 +30,7 @@ export interface DefaultSettings {
   /**
    * sticky siderbar
    */
-  fixSiderbar: boolean;
+  fixSiderbar?: boolean;
   menu: { disableLocal: boolean };
   title: string;
   pwa: boolean;
