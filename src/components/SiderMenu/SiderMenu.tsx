@@ -25,9 +25,8 @@ interface SiderMenuState {
 }
 
 export default class SiderMenu extends Component<SiderMenuProps, SiderMenuState> {
-  static defaultProps: SiderMenuProps = {
+  static defaultProps: Partial<SiderMenuProps> = {
     flatMenuKeys: [],
-    location: window.location,
     onCollapse: () => void 0,
     isMobile: false,
     openKeys: [],

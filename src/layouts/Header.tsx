@@ -25,7 +25,7 @@ interface HeaderViewState {
 }
 
 class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
-  static defaultProps: HeaderViewProps = {
+  static defaultProps: Partial<HeaderViewProps> = {
     handleMenuCollapse: () => void 0,
   };
 

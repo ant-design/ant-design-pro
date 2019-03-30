@@ -1,5 +1,7 @@
+import { Route } from '@/components/SiderMenu';
 import { EffectsCommandMap } from 'dva';
 import { AnyAction } from 'redux';
+import { RouterTypes } from 'umi';
 import { GlobalModelState } from './global';
 import { MenuModelState } from './menu';
 import { UserModelState } from './user';
@@ -44,18 +46,10 @@ export interface ConnectState {
 
 /**
  * @type T: Params matched in dynamic routing
- * @type R: Instance type of ref
  */
-export interface ConnectProps<T extends { [key: string]: any } = {}, R = any>
-  extends React.Props<R> {
+export interface ConnectProps<T extends { [key: string]: any } = {}>
+  extends Partial<RouterTypes<Route>> {
   dispatch?: Dispatch;
-  location?: Location;
-  match?: {
-    isExact: boolean;
-    params: T;
-    path: string;
-    url: string;
-  };
 }
 
 export default ConnectState;

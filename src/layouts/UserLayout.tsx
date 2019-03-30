@@ -37,17 +37,14 @@ const copyright = (
 );
 
 export interface UserLayoutProps extends ConnectProps {
-  route: MenuDataItem;
   breadcrumbNameMap: { [path: string]: MenuDataItem };
   navTheme: string;
 }
 
 class UserLayout extends Component<UserLayoutProps> {
   componentDidMount() {
-    const {
-      dispatch,
-      route: { routes, authority },
-    } = this.props;
+    const { dispatch, route } = this.props;
+    const { routes, authority } = route!;
     dispatch!({
       type: 'menu/getMenuData',
       payload: { routes, authority },

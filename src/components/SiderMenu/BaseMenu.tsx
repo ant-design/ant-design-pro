@@ -4,6 +4,7 @@ import { Icon, Menu } from 'antd';
 import { MenuMode, MenuTheme } from 'antd/es/menu';
 import classNames from 'classnames';
 import React, { Component } from 'react';
+import { RouterTypes } from 'umi';
 import Link from 'umi/link';
 import { urlToList } from '../_utils/pathTools';
 import styles from './index.less';
@@ -29,10 +30,7 @@ const getIcon = (icon?: string | React.ReactNode) => {
   return icon;
 };
 
-/**
- * @type R: is route
- */
-export interface MenuDataItem<R extends boolean = false> {
+export interface MenuDataItem {
   authority?: string[] | string;
   children?: MenuDataItem[];
   hideChildrenInMenu?: boolean;
@@ -41,17 +39,19 @@ export interface MenuDataItem<R extends boolean = false> {
   locale?: string;
   name?: string;
   path: string;
-  routes?: R extends true ? MenuDataItem<R>[] : never;
   [key: string]: any;
 }
 
-export interface BaseMenuProps {
+export interface Route extends MenuDataItem {
+  routes?: Route[];
+}
+
+export interface BaseMenuProps extends Partial<RouterTypes<Route>> {
   className?: string;
   collapsed?: boolean;
   flatMenuKeys?: any[];
   handleOpenChange?: (openKeys: string[]) => void;
   isMobile?: boolean;
-  location?: Location;
   menuData?: MenuDataItem[];
   mode?: MenuMode;
   onCollapse?: (collapsed: boolean) => void;
@@ -62,9 +62,8 @@ export interface BaseMenuProps {
 }
 
 export default class BaseMenu extends Component<BaseMenuProps> {
-  static defaultProps: BaseMenuProps = {
+  static defaultProps: Partial<BaseMenuProps> = {
     flatMenuKeys: [],
-    location: window.location,
     onCollapse: () => void 0,
     isMobile: false,
     openKeys: [],
@@ -107,7 +106,7 @@ export default class BaseMenu extends Component<BaseMenuProps> {
             item.icon ? (
               <span>
                 {getIcon(item.icon)}
-                <span>{name}</span>
+                <span>{item.name}</span>
               </span>
             ) : (
               item.name
