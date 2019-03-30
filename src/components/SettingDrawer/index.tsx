@@ -7,7 +7,7 @@ import omit from 'omit.js';
 import styles from './index.less';
 import ThemeColor from './ThemeColor';
 import BlockCheckbox from './BlockCheckbox';
-import { SettingModelState } from '@/models/setting';
+import { SettingModelState, ConnectProps } from '@/models/connect';
 
 const { Option } = Select;
 interface BodyProps {
@@ -27,9 +27,8 @@ const Body: React.FC<BodyProps> = ({ children, title, style }) => (
   </div>
 );
 
-interface SettingDrawerProps {
-  setting: SettingModelState;
-  dispatch: (args: any) => void;
+interface SettingDrawerProps extends ConnectProps {
+  setting?: SettingModelState;
 }
 
 interface SettingDrawerState {}
@@ -41,9 +40,8 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
   };
 
   getLayoutSetting = () => {
-    const {
-      setting: { contentWidth, fixedHeader, layout, autoHideHeader, fixSiderbar },
-    } = this.props;
+    const { setting } = this.props;
+    const { contentWidth, fixedHeader, layout, autoHideHeader, fixSiderbar } = setting!;
     return [
       {
         title: formatMessage({ id: 'app.setting.content-width' }),
@@ -104,7 +102,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
 
   changeSetting = (key: string, value: any) => {
     const { setting } = this.props;
-    const nextState = { ...setting };
+    const nextState: any = { ...setting };
     nextState[key] = value;
     if (key === 'layout') {
       nextState.contentWidth = value === 'topmenu' ? 'Fixed' : 'Fluid';
@@ -113,7 +111,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
     }
     this.setState(nextState, () => {
       const { dispatch } = this.props;
-      dispatch({
+      dispatch!({
         type: 'setting/changeSetting',
         payload: this.state,
       });
@@ -140,7 +138,7 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
 
   render() {
     const { setting } = this.props;
-    const { navTheme, primaryColor, layout, colorWeak } = setting;
+    const { navTheme, primaryColor, layout, colorWeak } = setting!;
     const { collapse } = this.state;
     return (
       <Drawer
