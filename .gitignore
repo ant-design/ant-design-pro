@@ -26,7 +26,7 @@ package-lock.json
 .history
 *.log
 
-functions/mock
+functions/mock/index.js
 .temp/**
 
 # umi
