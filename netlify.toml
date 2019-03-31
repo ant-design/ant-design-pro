@@ -1,5 +1,5 @@
 [build]
-  functions = "./dist"
+  functions = "./api"
 
 [[redirects]]
   from = "/*"
