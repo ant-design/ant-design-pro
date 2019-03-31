@@ -2,6 +2,15 @@
   functions = "./functions"
 
 [[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"
+    X-Api-Key = "some-api-key-string"
+    
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
