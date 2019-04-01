@@ -14,36 +14,49 @@ const formItemLayout = {
   },
 };
 
-@connect(({ apiCreateModel }) => ({
-  data: apiCreateModel.step,
+@connect(({ apiCreateModel,loading }) => ({
+  apiService: apiCreateModel.apiService,
+  detailLoading: loading.effects['apiGatewayModel/apiInfo'],
 }))
 @Form.create()
 class Step1 extends React.PureComponent {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'apiCreateModel/initDataForAdd',
+    });
+
+  }
+
   render() {
-    const { form, dispatch, data } = this.props;
+    const { form, dispatch, apiService } = this.props;
     const { getFieldDecorator, validateFields } = form;
     const onValidateForm = () => {
       validateFields((err, values) => {
         if (!err) {
           dispatch({
             type: 'apiCreateModel/saveStepFormData',
-            payload: values,
+            payload: {...values},
+            stepType:1,
           });
           router.push('/apiGateway/apiCreate/consumer');
         }
       });
     };
+    console.log("step1 data:",apiService);
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
           <Form.Item {...formItemLayout} label="分组">
             {getFieldDecorator('groupId', {
+              initialValue: apiService.groupId,
               rules: [{ required: true, message: '请选择分组' }],
             })(<GroupSelectView />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Api名称">
-            {getFieldDecorator('apiName', {
-              initialValue: data.apiName,
+            {getFieldDecorator('name', {
+              initialValue: apiService.name,
               rules: [{ required: true, message: '请输入Api名称' }],
             })(<Input placeholder="请输入Api名称" />)}
           </Form.Item>
@@ -57,7 +70,7 @@ class Step1 extends React.PureComponent {
             }}
             label=""
           >
-            <Button type="primary" onClick={onValidateForm} htmlType="submit">
+            <Button type="primary" onClick={onValidateForm}>
               下一步
             </Button>
           </Form.Item>
