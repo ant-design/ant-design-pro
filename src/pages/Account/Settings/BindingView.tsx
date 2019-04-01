@@ -2,8 +2,15 @@ import React, { Component, Fragment } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import { Icon, List } from 'antd';
 
+interface BindingViewItem {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  actions?: React.ReactNode[];
+  avatar?: React.ReactNode;
+}
+
 class BindingView extends Component {
-  getData = () => [
+  getData = (): BindingViewItem[] => [
     {
       title: formatMessage({ id: 'app.settings.binding.taobao' }, {}),
       description: formatMessage({ id: 'app.settings.binding.taobao-description' }, {}),
@@ -42,7 +49,7 @@ class BindingView extends Component {
         <List
           itemLayout="horizontal"
           dataSource={this.getData()}
-          renderItem={item => (
+          renderItem={(item: BindingViewItem) => (
             <List.Item actions={item.actions}>
               <List.Item.Meta
                 avatar={item.avatar}

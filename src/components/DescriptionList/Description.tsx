@@ -11,7 +11,12 @@ export interface DescriptionProps extends ColProps {
   term?: React.ReactNode;
 }
 
-const Description: React.FC<DescriptionProps> = ({ term = '', column, children, ...restProps }) => (
+const Description: React.FC<DescriptionProps> = ({
+  term = '',
+  column = '',
+  children,
+  ...restProps
+}) => (
   <Col {...responsive[column]} {...restProps}>
     {term && <div className={styles.term}>{term}</div>}
     {children !== null && children !== undefined && <div className={styles.detail}>{children}</div>}

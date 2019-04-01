@@ -10,8 +10,8 @@ interface GlobalHeaderProps {
   onCollapse?: (collapsed: boolean) => void;
   isMobile?: boolean;
   logo?: string;
-  onNoticeClear?: (type: string) => void;
-  onMenuClick?: ({ key: string }) => void;
+  onNoticeClear?: (type?: string) => void;
+  onMenuClick?: ({ key }: { key: string }) => void;
   onNoticeVisibleChange?: (b: boolean) => void;
 }
 
@@ -26,8 +26,8 @@ export default class GlobalHeader extends Component<GlobalHeaderProps> {
     window.dispatchEvent(event);
   });
   toggle = () => {
-    const { collapsed, onCollapse } = this.props;
-    onCollapse(!collapsed);
+    const { collapsed = false, onCollapse } = this.props;
+    onCollapse && onCollapse(!collapsed);
     this.triggerResizeEvent();
   };
   render() {

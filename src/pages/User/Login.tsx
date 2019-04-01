@@ -1,5 +1,5 @@
-import Login from '@/components/Login';
-import { LoginModelState } from '@/models/login';
+import Login, { WrappedLogin } from '@/components/Login';
+import { ConnectProps, ConnectState, LoginModelState } from '@/models/connect';
 import { Alert, Checkbox, Icon } from 'antd';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { connect } from 'dva';
@@ -10,9 +10,8 @@ import styles from './Login.less';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
-export interface LoginPageProps {
+export interface LoginPageProps extends Required<ConnectProps> {
   login: LoginModelState;
-  dispatch: (args: any) => Promise<any>;
   submitting: boolean;
 }
 
@@ -21,7 +20,7 @@ interface LoginPageState {
   autoLogin: boolean;
 }
 
-@connect(({ login, loading }) => ({
+@connect(({ login, loading }: ConnectState) => ({
   login,
   submitting: loading.effects['login/login'],
 }))
@@ -31,7 +30,7 @@ class LoginPage extends Component<LoginPageProps, LoginPageState> {
     autoLogin: true,
   };
 
-  loginForm: InstanceType<typeof Login>;
+  loginForm!: WrappedLogin;
 
   onTabChange = (type: string) => {
     this.setState({ type });
@@ -75,7 +74,7 @@ class LoginPage extends Component<LoginPageProps, LoginPageState> {
   };
 
   renderMessage = (content: string) => (
-    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon={true} />
+    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
   );
 
   render() {
@@ -87,7 +86,7 @@ class LoginPage extends Component<LoginPageProps, LoginPageState> {
           defaultActiveKey={type}
           onTabChange={this.onTabChange}
           onSubmit={this.handleSubmit}
-          ref={form => (this.loginForm = form)}
+          ref={(form: WrappedLogin) => (this.loginForm = form)}
         >
           <Tab key="account" tab={formatMessage({ id: 'app.login.tab-login-credentials' })}>
             {login.status === 'error' &&

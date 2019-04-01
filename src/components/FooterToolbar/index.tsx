@@ -36,7 +36,7 @@ export default class FooterToolbar extends Component<FooterToolbarProps, FooterT
       return;
     }
     const { isMobile } = this.context;
-    const width = isMobile ? null : `calc(100% - ${sider.style.width})`;
+    const width = isMobile ? undefined : `calc(100% - ${sider.style.width})`;
     const { width: stateWidth } = this.state;
     if (stateWidth !== width) {
       this.setState({ width });

@@ -4,28 +4,32 @@ import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import HeaderDropdown, { HeaderDropdownProps } from '../HeaderDropdown';
 import styles from './index.less';
-import NoticeList from './NoticeList';
+import NoticeList, { NoticeIconTabComponent, NoticeIconTabProps } from './NoticeList';
 
 const { TabPane } = Tabs;
 
 export interface NoticeIconData {
   avatar?: string | React.ReactNode;
-  title?: React.ReactNode;
+  clickClose?: boolean;
   description?: React.ReactNode;
   datetime?: React.ReactNode;
   extra?: React.ReactNode;
+  key?: string | number;
+  read?: boolean;
   style?: React.CSSProperties;
+  title?: React.ReactNode;
+  [key: string]: any;
 }
 
-interface NoticeIconProps {
+export interface NoticeIconProps<T extends NoticeIconData = NoticeIconData> {
   count?: number;
   bell?: React.ReactNode;
   className?: string;
   loading?: boolean;
-  onClear?: (tabName: string) => void;
-  onItemClick?: (item: NoticeIconData, tabProps: NoticeIconProps) => void;
-  onViewMore?: (tabProps: NoticeIconProps, e: MouseEvent) => void;
-  onTabChange?: (tabTile: string) => void;
+  onClear?: (tabTitle?: string) => void;
+  onItemClick?: (item: T, tabProps: NoticeIconProps<T>) => void;
+  onViewMore?: (tabProps: NoticeIconProps<T>, e: React.MouseEvent) => void;
+  onTabChange?: (tabTile?: string) => void;
   style?: React.CSSProperties;
   onPopupVisibleChange?: (visible: boolean) => void;
   popupVisible?: boolean;
@@ -38,8 +42,10 @@ interface NoticeIconProps {
   clearClose?: boolean;
 }
 
-export default class NoticeIcon extends Component<NoticeIconProps> {
-  static Tab = TabPane as any; // ？？！！？？
+export default class NoticeIcon<T extends NoticeIconData = NoticeIconData> extends Component<
+  NoticeIconProps<T>
+> {
+  static Tab: NoticeIconTabComponent = () => null;
 
   static defaultProps = {
     onItemClick: () => {},
@@ -57,70 +63,60 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
 
-  popover: any;
+  popover!: HTMLElement;
   state = {
     visible: false,
   };
 
-  onItemClick = (item, tabProps) => {
+  onItemClick = (item: T, tabProps: NoticeIconProps<T>) => {
     const { onItemClick } = this.props;
     const { clickClose } = item;
-    onItemClick(item, tabProps);
+    onItemClick!(item, tabProps);
     if (clickClose) {
       this.popover.click();
     }
   };
 
-  onClear = name => {
+  onClear = (title?: string) => {
     const { onClear, clearClose } = this.props;
-    onClear(name);
+    onClear!(title);
     if (clearClose) {
       this.popover.click();
     }
   };
 
-  onTabChange = tabType => {
-    const { onTabChange } = this.props;
-    onTabChange(tabType);
-  };
-
-  onViewMore = (tabProps, event) => {
-    const { onViewMore } = this.props;
-    onViewMore(tabProps, event);
-  };
-
   getNotificationBox() {
-    const { children, loading, locale } = this.props;
+    const { children, loading, locale, onTabChange, onViewMore } = this.props;
     if (!children) {
       return null;
     }
-    const panes = React.Children.map(children, (child: any) => {
-      const { list, title, count, emptyText, emptyImage, showClear, showViewMore } = child.props;
-      const len = list && list.length ? list.length : 0;
-      const msgCount = count || count === 0 ? count : len;
-      const localeTitle = locale[title] || title;
-      const tabTitle = msgCount > 0 ? `${localeTitle} (${msgCount})` : localeTitle;
-      return (
-        <TabPane tab={tabTitle} key={title}>
-          <NoticeList
-            data={list}
-            emptyImage={emptyImage}
-            emptyText={emptyText}
-            locale={locale}
-            onClear={() => this.onClear(title)}
-            onClick={item => this.onItemClick(item, child.props)}
-            onViewMore={event => this.onViewMore(child.props, event)}
-            showClear={showClear}
-            showViewMore={showViewMore}
-            title={title}
-          />
-        </TabPane>
-      );
-    });
+    const panes = React.Children.map(
+      children as React.FunctionComponentElement<NoticeIconTabProps<T>>,
+      child => {
+        const { list, title: tabTitle, count, className, style, ...restProps } = child.props;
+        const len = list && list.length ? list.length : 0;
+        const msgCount = count || count === 0 ? count : len;
+        const localeTitle = tabTitle && (locale![tabTitle] || tabTitle);
+        const tabTitleWithCount = msgCount > 0 ? `${localeTitle} (${msgCount})` : localeTitle;
+        return (
+          <TabPane className={className} key={tabTitle} style={style} tab={tabTitleWithCount}>
+            <NoticeList<T>
+              {...restProps}
+              list={list}
+              locale={locale!}
+              onClear={() => this.onClear(tabTitle)}
+              onClick={item => this.onItemClick(item, child.props)}
+              onViewMore={event => onViewMore!(child.props, event)}
+              title={tabTitle}
+            />
+          </TabPane>
+        );
+      },
+    );
     return (
       <Fragment>
         <Spin spinning={loading} delay={0}>
-          <Tabs className={styles.tabs} onChange={this.onTabChange}>
+          <Tabs className={styles.tabs} onChange={onTabChange}>
             {panes}
           </Tabs>
         </Spin>
@@ -128,10 +124,10 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
     );
   }
 
-  handleVisibleChange = visible => {
+  handleVisibleChange = (visible: boolean) => {
     const { onPopupVisibleChange } = this.props;
     this.setState({ visible });
-    onPopupVisibleChange(visible);
+    onPopupVisibleChange!(visible);
   };
 
   render() {
@@ -150,7 +146,7 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
     if (!notificationBox) {
       return trigger;
     }
-    const popoverProps: any = {};
+    const popoverProps: Partial<HeaderDropdownProps> = {};
     if ('popupVisible' in this.props) {
       popoverProps.visible = popupVisible;
     }
@@ -163,7 +159,7 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
         visible={visible}
         onVisibleChange={this.handleVisibleChange}
         {...popoverProps}
-        ref={node => (this.popover = ReactDOM.findDOMNode(node))} // eslint-disable-line
+        ref={node => (this.popover = ReactDOM.findDOMNode(node) as HTMLElement)} // eslint-disable-line
       >
         {trigger}
       </HeaderDropdown>

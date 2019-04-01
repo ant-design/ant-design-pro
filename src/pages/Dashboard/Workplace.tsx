@@ -1,16 +1,19 @@
-import moment from 'moment';
-import { connect } from 'dva';
-import { Row, Col, Card, List, Avatar } from 'antd';
 import { Radar } from '@/components/Charts';
 import EditableLinkGroup from '@/components/EditableLinkGroup';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import { ProjectModelState } from '@/models/project';
-import { UserModelState } from '@/models/user';
+import {
+  ActivitiesModelState,
+  ChartModelState,
+  ConnectProps,
+  ConnectState,
+  ProjectModelState,
+} from '@/models/connect';
+import { CurrentUser } from '@/models/user';
+import { Row, Col, Card, List, Avatar } from 'antd';
+import { connect } from 'dva';
+import moment from 'moment';
 import React, { Component } from 'react';
-import { Dispatch } from 'redux';
 import Link from 'umi/link';
-import { ActivitiesState } from './models/activities';
-import { ChartModelState } from './models/chart';
 import styles from './Workplace.less';
 
 const links = [
@@ -40,10 +43,9 @@ const links = [
   },
 ];
 
-interface WorkplaceProps {
-  dispatch: Dispatch<any>;
-  activities: ActivitiesState;
-  currentUser: UserModelState['currentUser'];
+interface WorkplaceProps extends ConnectProps {
+  activities: ActivitiesModelState;
+  currentUser: CurrentUser;
   project: ProjectModelState;
   chart: ChartModelState;
   currentUserLoading: boolean;
@@ -51,7 +53,7 @@ interface WorkplaceProps {
   activitiesLoading: boolean;
 }
 
-@connect(({ user, project, activities, chart, loading }) => ({
+@connect(({ user, project, activities, chart, loading }: ConnectState) => ({
   currentUser: user.currentUser,
   project,
   activities,
@@ -63,23 +65,23 @@ interface WorkplaceProps {
 class Workplace extends Component<WorkplaceProps> {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch({
+    dispatch!({
       type: 'user/fetchCurrent',
     });
-    dispatch({
+    dispatch!({
       type: 'project/fetchNotice',
     });
-    dispatch({
+    dispatch!({
       type: 'activities/fetchList',
     });
-    dispatch({
+    dispatch!({
       type: 'chart/fetch',
     });
   }
 
   componentWillUnmount() {
     const { dispatch } = this.props;
-    dispatch({
+    dispatch!({
       type: 'chart/clear',
     });
   }
@@ -238,7 +240,7 @@ class Workplace extends Component<WorkplaceProps> {
               loading={radarData.length === 0}
             >
               <div className={styles.chart}>
-                <Radar hasLegend={true} height={343} data={radarData} />
+                <Radar hasLegend height={343} data={radarData} />
               </div>
             </Card>
             <Card

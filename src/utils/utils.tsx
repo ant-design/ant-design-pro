@@ -191,7 +191,7 @@ export function isAntdPro(): boolean {
   return window.location.hostname === 'preview.pro.ant.design';
 }
 
-export const importCDN = (url: string, name?: string): Promise<number> =>
+export const importCDN = (url: string, name: string): Promise<number> =>
   new Promise<number>(resolve => {
     const dom = document.createElement('script');
     dom.src = url;

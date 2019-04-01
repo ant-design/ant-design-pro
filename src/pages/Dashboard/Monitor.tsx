@@ -1,17 +1,17 @@
 import ActiveChart from '@/components/ActiveChart';
 import { Gauge, Pie, TagCloud, WaterWave } from '@/components/Charts';
 import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
-import React, { Component } from 'react';
-import { connect } from 'dva';
+import { ConnectProps, ConnectState } from '@/models/connect';
 import NumberInfo from '@/components/NumberInfo';
 import CountDown from '@/components/CountDown';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import Authorized from '@/utils/Authorized';
 import { Card, Col, Row, Tooltip } from 'antd';
+import { connect } from 'dva';
 import numeral from 'numeral';
-import { Dispatch } from 'redux';
+import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { MonitorState } from './models/monitor';
+import { MonitorModelState } from './models/monitor';
 import styles from './Monitor.less';
 
 const { Secured } = Authorized;
@@ -24,23 +24,20 @@ const havePermissionAsync = new Promise(resolve => {
   setTimeout(() => resolve(), 300);
 });
 
-interface MonitorProps {
-  dispatch: Dispatch<any>;
-  monitor: MonitorState;
+interface MonitorProps extends ConnectProps {
+  monitor: MonitorModelState;
   loading: boolean;
 }
 
 @Secured(havePermissionAsync)
-@connect(({ monitor, loading }) => ({
+@connect(({ monitor, loading }: ConnectState) => ({
   monitor,
   loading: loading.models.monitor,
 }))
 class Monitor extends Component<MonitorProps> {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch({
-      type: 'monitor/fetchTags',
-    });
+    dispatch!({ type: 'monitor/fetchTags' });
   }
 
   render() {

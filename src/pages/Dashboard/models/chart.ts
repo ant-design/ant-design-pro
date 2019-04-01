@@ -1,18 +1,24 @@
+import { RadarDataItem } from '@/components/Charts/Radar';
+import { Effect } from '@/models/connect';
 import { fakeChartData } from '@/services/api';
-import { Effect } from 'dva';
 import { Reducer } from 'redux';
+import { VisitDataItem } from '../IntroduceRow';
+import { OfflineChartDataItem, OfflineDataItem } from '../OfflineData';
+import { SalesPieDataItem } from '../ProportionSales';
+import { SalesDataItem } from '../SalesCard';
+import { SearchDataItem } from '../TopSearch';
 
 export interface ChartModelState {
-  visitData: any[];
-  visitData2: any[];
-  salesData: any[];
-  searchData: any[];
-  offlineData: any[];
-  offlineChartData: any[];
-  salesTypeData: any[];
-  salesTypeDataOnline: any[];
-  salesTypeDataOffline: any[];
-  radarData: any[];
+  visitData: VisitDataItem[];
+  visitData2: VisitDataItem[];
+  salesData: SalesDataItem[];
+  searchData: SearchDataItem[];
+  offlineData: OfflineDataItem[];
+  offlineChartData: OfflineChartDataItem[];
+  salesTypeData: SalesPieDataItem[];
+  salesTypeDataOnline: SalesPieDataItem[];
+  salesTypeDataOffline: SalesPieDataItem[];
+  radarData: RadarDataItem[];
   loading: boolean;
 }
 
@@ -24,8 +30,8 @@ export interface ChartModel {
     fetchSalesData: Effect;
   };
   reducers: {
-    save: Reducer<any>;
-    clear: Reducer<any>;
+    save: Reducer<ChartModelState>;
+    clear: Reducer<ChartModelState>;
   };
 }
 
@@ -84,6 +90,7 @@ const ChartModel: ChartModel = {
         salesTypeDataOnline: [],
         salesTypeDataOffline: [],
         radarData: [],
+        loading: false,
       };
     },
   },

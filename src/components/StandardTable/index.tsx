@@ -1,11 +1,17 @@
 import { Alert, Table } from 'antd';
-import { PaginationConfig, SorterResult, TableCurrentDataSource } from 'antd/lib/table';
+import {
+  ColumnProps,
+  PaginationConfig,
+  SorterResult,
+  TableCurrentDataSource,
+  TableRowSelection,
+} from 'antd/lib/table';
 import React, { Component, Fragment } from 'react';
 import styles from './index.less';
 
-function initTotalList(columns) {
-  const totalList = [];
-  columns.forEach(column => {
+function initTotalList<T = any>(columns: ColumnProps<T>[]) {
+  const totalList: StandardTableColumnProps<T>[] = [];
+  columns.forEach((column: any) => {
     if (column.needTotal) {
       totalList.push({ ...column, total: 0 });
     }
@@ -13,30 +19,36 @@ function initTotalList(columns) {
   return totalList;
 }
 
-interface StandardTableProps {
-  columns: any;
-  onSelectRow: (row: any) => void;
-  data: any;
+export interface StandardTableColumnProps<T> extends ColumnProps<T> {
+  needTotal?: boolean;
+  total?: number;
+}
+
+interface StandardTableProps<T = any> {
+  columns?: StandardTableColumnProps<T>[];
+  onSelectRow?: (rows: T[]) => void;
+  data: { list: T[]; pagination: PaginationConfig };
   rowKey?: string;
-  selectedRows: any[];
+  selectedRows?: T[];
   onChange?: (
     pagination: PaginationConfig,
-    filters: Record<keyof any, string[]>,
-    sorter: SorterResult<any>,
-    extra?: TableCurrentDataSource<any>,
+    filters: Record<keyof T, string[]>,
+    sorter: SorterResult<T>,
+    extra?: TableCurrentDataSource<T>,
   ) => void;
   loading?: boolean;
 }
 
-interface StandardTableState {
-  selectedRowKeys: any[];
-  needTotalList: any[];
+interface StandardTableState<T = any> {
+  selectedRowKeys: string[] | number[];
+  needTotalList: StandardTableColumnProps<T>[];
 }
-class StandardTable extends Component<StandardTableProps, StandardTableState> {
-  static getDerivedStateFromProps(nextProps) {
+
+class StandardTable<T = any> extends Component<StandardTableProps<T>, StandardTableState<T>> {
+  static getDerivedStateFromProps({ selectedRows = [], columns = [] }: StandardTableProps) {
     // clean state
-    if (nextProps.selectedRows.length === 0) {
-      const needTotalList = initTotalList(nextProps.columns);
+    if (selectedRows.length === 0) {
+      const needTotalList = initTotalList(columns);
       return {
         selectedRowKeys: [],
         needTotalList,
@@ -44,9 +56,9 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
     }
     return null;
   }
-  constructor(props) {
+  constructor(props: StandardTableProps) {
     super(props);
-    const { columns } = props;
+    const { columns = [] } = props;
     const needTotalList = initTotalList(columns);
 
     this.state = {
@@ -55,11 +67,11 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
     };
   }
 
-  handleRowSelectChange = (selectedRowKeys, selectedRows) => {
+  handleRowSelectChange = (selectedRowKeys: string[] | number[], selectedRows: T[]) => {
     let { needTotalList } = this.state;
     needTotalList = needTotalList.map(item => ({
       ...item,
-      total: selectedRows.reduce((sum, val) => sum + parseFloat(val[item.dataIndex]), 0),
+      total: selectedRows.reduce((sum, val) => sum + parseFloat(val[item.dataIndex!]), 0),
     }));
     const { onSelectRow } = this.props;
     if (onSelectRow) {
@@ -69,7 +81,12 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
     this.setState({ selectedRowKeys, needTotalList });
   };
 
-  handleTableChange = (pagination, filters, sorter) => {
+  handleTableChange = (
+    pagination: PaginationConfig,
+    filters: Record<keyof T, string[]>,
+    sorter: SorterResult<T>,
+    extra: TableCurrentDataSource<T>,
+  ) => {
     const { onChange } = this.props;
     if (onChange) {
       onChange(pagination, filters, sorter);
@@ -82,7 +99,7 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
 
   render() {
     const { selectedRowKeys, needTotalList } = this.state;
-    const { data = {}, rowKey, ...rest } = this.props;
+    const { data, rowKey, ...rest } = this.props;
     const { list = [], pagination } = data;
 
     const paginationProps = {
@@ -91,10 +108,10 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
       ...pagination,
     };
 
-    const rowSelection = {
+    const rowSelection: TableRowSelection<T> = {
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
-      getCheckboxProps: record => ({
+      getCheckboxProps: (record: T & { disabled?: boolean }) => ({
         disabled: record.disabled,
       }),
     };
@@ -111,7 +128,7 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
                     {item.title}
                     总计&nbsp;
                     <span style={{ fontWeight: 600 }}>
-                      {item.render ? item.render(item.total) : item.total}
+                      {item.render ? item.render(item.total, null!, -1) : item.total}
                     </span>
                   </span>
                 ))}
@@ -124,7 +141,7 @@ class StandardTable extends Component<StandardTableProps, StandardTableState> {
             showIcon
           />
         </div>
-        <Table
+        <Table<T>
           rowKey={rowKey || 'key'}
           rowSelection={rowSelection}
           dataSource={list}

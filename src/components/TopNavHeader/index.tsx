@@ -32,7 +32,7 @@ interface TopNavHeaderProps {
   style?: React.CSSProperties;
   onOpenChange?: (openKeys: string[]) => void;
   onNoticeClear?: (type: string) => void;
-  onMenuClick?: ({ key: string }) => void;
+  onMenuClick?: ({ key }: { key: string }) => void;
   onNoticeVisibleChange?: (b: boolean) => void;
 }
 
@@ -45,9 +45,9 @@ export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHea
     maxWidth: undefined,
   };
 
-  maim: HTMLDivElement;
+  maim!: HTMLDivElement;
 
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps(props: TopNavHeaderProps) {
     return {
       maxWidth:
         (props.contentWidth === 'Fixed' && window.innerWidth > 1200 ? 1200 : window.innerWidth) -
@@ -65,7 +65,7 @@ export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHea
       <div className={`${styles.head} ${theme === 'light' ? styles.light : ''}`}>
         <div
           ref={ref => {
-            this.maim = ref;
+            this.maim = ref!;
           }}
           className={`${styles.main} ${contentWidth === 'Fixed' ? styles.wide : ''}`}
         >

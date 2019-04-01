@@ -1,4 +1,5 @@
 import Result from '@/components/Result';
+import { ConnectState, FormModelState } from '@/models/connect';
 import { Button, Col, Row } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
@@ -7,12 +8,7 @@ import router from 'umi/router';
 import styles from './style.less';
 
 interface ResultFormProps extends FormComponentProps {
-  data: {
-    payAccount: string;
-    receiverAccount: string;
-    receiverName: string;
-    amount: string;
-  };
+  data: FormModelState['step'];
 }
 const ResultPage: React.FC<ResultFormProps> = props => {
   const { data } = props;
@@ -75,6 +71,6 @@ const ResultPage: React.FC<ResultFormProps> = props => {
   );
 };
 
-export default connect(({ form }) => ({
-  data: form.step,
+export default connect(({ form }: ConnectState) => ({
+  data: form!.step,
 }))(ResultPage);

@@ -1,5 +1,5 @@
-import PageLoading from '@/components/PageLoading';
-import SiderMenu from '@/components/SiderMenu';
+import SiderMenu, { MenuDataItem, SiderMenuProps } from '@/components/SiderMenu';
+import { ConnectProps, ConnectState, SettingModelState } from '@/models/connect';
 import getPageTitle from '@/utils/getPageTitle';
 import { Layout } from 'antd';
 import classNames from 'classnames';
@@ -11,7 +11,7 @@ import useMedia from 'react-media-hook2';
 import logo from '../assets/logo.svg';
 import styles from './BasicLayout.less';
 import Footer from './Footer';
-import Header from './Header';
+import Header, { HeaderViewProps } from './Header';
 import Context from './MenuContext';
 
 // lazy load SettingDrawer
@@ -44,26 +44,17 @@ const query = {
   },
 };
 
-export declare type SiderTheme = 'light' | 'dark';
-
-interface BasicLayoutProps {
-  dispatch: (args: any) => void;
-  // wait for https://github.com/umijs/umi/pull/2036
-  route: any;
-  breadcrumbNameMap: object;
-  fixSiderbar: boolean;
-  layout: string;
-  navTheme: SiderTheme;
-  menuData: any[];
-  fixedHeader: boolean;
-  location: Location;
-  collapsed: boolean;
+export interface BasicLayoutProps
+  extends Required<ConnectProps>,
+    SiderMenuProps,
+    HeaderViewProps,
+    SettingModelState {
+  breadcrumbNameMap: { [path: string]: MenuDataItem };
 }
 
-interface BasicLayoutContext {
-  location: Location;
-  breadcrumbNameMap: object;
-}
+export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
+  breadcrumbNameMap: { [path: string]: MenuDataItem };
+};
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const {
@@ -77,20 +68,24 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     location,
     menuData,
     navTheme,
-    route: { routes, authority },
+    route,
   } = props;
+  const { routes, authority } = route!;
+  /**
+   * constructor
+   */
   useState(() => {
-    dispatch({ type: 'user/fetchCurrent' });
-    dispatch({ type: 'setting/getSetting' });
-    dispatch({ type: 'menu/getMenuData', payload: { routes, authority } });
+    dispatch!({ type: 'user/fetchCurrent' });
+    dispatch!({ type: 'setting/getSetting' });
+    dispatch!({ type: 'menu/getMenuData', payload: { routes, authority } });
   });
-  const isTop = PropsLayout === 'topmenu';
-  const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
+  /**
+   * init variables
+   */
   const isMobile = useMedia({ id: 'BasicLayout', query: '(max-width: 599px)' })[0];
   const hasLeftPadding = fixSiderbar && PropsLayout !== 'topmenu' && !isMobile;
-  const getContext = (): BasicLayoutContext => ({ location, breadcrumbNameMap });
   const handleMenuCollapse = (payload: boolean) =>
-    dispatch({ type: 'global/changeLayoutCollapsed', payload });
+    dispatch!({ type: 'global/changeLayoutCollapsed', payload });
   // Do not render SettingDrawer in production
   // unless it is deployed in preview.pro.ant.design as demo
   const renderSettingDrawer = () =>
@@ -98,7 +93,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
 
   const layout = (
     <Layout>
-      {isTop && !isMobile ? null : (
+      {PropsLayout === 'topmenu' && !isMobile ? null : (
         <SiderMenu
           logo={logo}
           theme={navTheme}
@@ -121,7 +116,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           isMobile={isMobile}
           {...props}
         />
-        <Content className={styles.content} style={contentStyle}>
+        <Content className={styles.content} style={!fixedHeader ? { paddingTop: 0 } : {}}>
           {children}
         </Content>
         <Footer />
@@ -130,21 +125,21 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   );
   return (
     <React.Fragment>
-      <DocumentTitle title={getPageTitle(location.pathname, breadcrumbNameMap)}>
+      <DocumentTitle title={getPageTitle(location!.pathname, breadcrumbNameMap)}>
         <ContainerQuery query={query}>
           {params => (
-            <Context.Provider value={getContext()}>
+            <Context.Provider value={{ location, breadcrumbNameMap }}>
               <div className={classNames(params)}>{layout}</div>
             </Context.Provider>
           )}
         </ContainerQuery>
       </DocumentTitle>
-      <Suspense fallback={<PageLoading />}>{renderSettingDrawer()}</Suspense>
+      <Suspense fallback={null}>{renderSettingDrawer()}</Suspense>
     </React.Fragment>
   );
 };
 
-export default connect(({ global, setting, menu: menuModel }) => ({
+export default connect(({ global, setting, menu: menuModel }: ConnectState) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   menuData: menuModel.menuData,

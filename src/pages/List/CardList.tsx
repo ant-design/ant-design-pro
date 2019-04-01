@@ -1,18 +1,18 @@
 import Ellipsis from '@/components/Ellipsis';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { ConnectProps, ConnectState, ListModelState } from '@/models/connect';
+import { MockListItem } from '@/models/list';
 import { Button, Card, Icon, List } from 'antd';
 import { connect } from 'dva';
 import React, { Component } from 'react';
 import styles from './CardList.less';
-import { RuleModelState } from './models/rule';
 
-interface CardListProps {
-  list: RuleModelState;
-  dispatch: (args: any) => void;
+interface CardListProps extends Required<ConnectProps> {
+  list: ListModelState;
   loading: boolean;
 }
 
-@connect(({ list, loading }) => ({
+@connect(({ list, loading }: ConnectState) => ({
   list,
   loading: loading.models.list,
 }))
@@ -29,7 +29,7 @@ class CardList extends Component<CardListProps> {
 
   render() {
     const {
-      list: { list },
+      list: { list = [] },
       loading,
     } = this.props;
 
@@ -73,11 +73,11 @@ class CardList extends Component<CardListProps> {
             loading={loading}
             grid={{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1 }}
             dataSource={['', ...list]}
-            renderItem={item =>
+            renderItem={(item: MockListItem) =>
               item ? (
                 <List.Item key={item.id}>
                   <Card
-                    hoverable={true}
+                    hoverable
                     className={styles.card}
                     actions={[<a key="0">操作一</a>, <a key="1">操作二</a>]}
                   >

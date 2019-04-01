@@ -1,4 +1,5 @@
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { ConnectProps } from '@/models/connect';
 import {
   Button,
   Card,
@@ -16,23 +17,22 @@ import { connect } from 'dva';
 import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './style.less';
+import { ConnectState } from '@/models/connect';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-interface BasicFormsProps extends FormComponentProps {
-  location: Location;
-  dispatch: (args: any) => void;
+interface BasicFormsProps extends FormComponentProps, Required<ConnectProps> {
   submitting: boolean;
 }
 
-@connect(({ loading }) => ({
+@connect(({ loading }: ConnectState) => ({
   submitting: loading.effects['form/submitRegularForm'],
 }))
 class BasicForms extends Component<BasicFormsProps> {
-  handleSubmit = e => {
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const { dispatch, form } = this.props;
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
@@ -76,7 +76,7 @@ class BasicForms extends Component<BasicFormsProps> {
         content={<FormattedMessage id="app.forms.basic.description" />}
       >
         <Card bordered={false}>
-          <Form onSubmit={this.handleSubmit} hideRequiredMark={true} style={{ marginTop: 8 }}>
+          <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
             <FormItem {...formItemLayout} label={<FormattedMessage id="form.title.label" />}>
               {getFieldDecorator('title', {
                 rules: [

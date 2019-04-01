@@ -1,26 +1,26 @@
 import ArticleListContent from '@/components/ArticleListContent';
 import StandardFormRow from '@/components/StandardFormRow';
 import TagSelect from '@/components/TagSelect';
+import { ConnectProps, ConnectState, ListModelState } from '@/models/connect';
+import { MockListItem } from '@/models/list';
 import { Button, Card, Col, Form, Icon, List, Row, Select, Tag } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
+import { FormComponentProps, FormCreateOption, FormItemProps } from 'antd/es/form';
 import { connect } from 'dva';
 import React, { Component, Fragment } from 'react';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Articles.less';
-import { RuleModelState } from './models/rule';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 
 const pageSize = 5;
 
-interface SearchListProps extends FormComponentProps {
-  list: RuleModelState;
-  dispatch: (args: any) => void;
+interface SearchListProps extends FormComponentProps, Required<ConnectProps> {
+  list: ListModelState;
   loading: boolean;
 }
 
-@connect(({ list, loading }) => ({
+@connect(({ list, loading }: ConnectState) => ({
   list,
   loading: loading.models.list,
 }))
@@ -55,7 +55,7 @@ class SearchList extends Component<SearchListProps> {
   render() {
     const {
       form,
-      list: { list },
+      list: { list = [] },
       loading,
     } = this.props;
     const { getFieldDecorator } = form;
@@ -83,14 +83,14 @@ class SearchList extends Component<SearchListProps> {
       },
     ];
 
-    const IconText = ({ type, text }) => (
+    const IconText: React.FC<{ type: string; text: string | number }> = ({ type, text }) => (
       <span>
         <Icon type={type} style={{ marginRight: 8 }} />
         {text}
       </span>
     );
 
-    const formItemLayout = {
+    const formItemLayout: FormItemProps = {
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 24 },
@@ -125,10 +125,10 @@ class SearchList extends Component<SearchListProps> {
       <Fragment>
         <Card bordered={false}>
           <Form layout="inline">
-            <StandardFormRow title="所属类目" block={true} style={{ paddingBottom: 11 }}>
+            <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
                 {getFieldDecorator('category')(
-                  <TagSelect expandable={true} actionsText={actionsTextMap}>
+                  <TagSelect expandable actionsText={actionsTextMap}>
                     <TagSelect.Option value="cat1">类目一</TagSelect.Option>
                     <TagSelect.Option value="cat2">类目二</TagSelect.Option>
                     <TagSelect.Option value="cat3">类目三</TagSelect.Option>
@@ -145,7 +145,7 @@ class SearchList extends Component<SearchListProps> {
                 )}
               </FormItem>
             </StandardFormRow>
-            <StandardFormRow title="owner" grid={true}>
+            <StandardFormRow title="owner" grid>
               <Row>
                 <Col>
                   <FormItem {...formItemLayout}>
@@ -171,11 +171,11 @@ class SearchList extends Component<SearchListProps> {
                 </Col>
               </Row>
             </StandardFormRow>
-            <StandardFormRow title="其它选项" grid={true} last={true}>
+            <StandardFormRow title="其它选项" grid last>
               <Row gutter={16}>
                 <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                   <FormItem {...formItemLayout} label="活跃用户">
-                    {getFieldDecorator('user', {})(
+                    {getFieldDecorator('user')(
                       <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="lisa">李三</Option>
                       </Select>,
@@ -184,7 +184,7 @@ class SearchList extends Component<SearchListProps> {
                 </Col>
                 <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                   <FormItem {...formItemLayout} label="好评度">
-                    {getFieldDecorator('rate', {})(
+                    {getFieldDecorator('rate')(
                       <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
                         <Option value="good">优秀</Option>
                       </Select>,
@@ -207,7 +207,7 @@ class SearchList extends Component<SearchListProps> {
             itemLayout="vertical"
             loadMore={loadMore}
             dataSource={list}
-            renderItem={item => (
+            renderItem={(item: MockListItem) => (
               <List.Item
                 key={item.id}
                 actions={[
@@ -254,4 +254,4 @@ export default Form.create({
       },
     });
   },
-})(SearchList);
+} as FormCreateOption<SearchListProps>)(SearchList);

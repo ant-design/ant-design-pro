@@ -1,20 +1,17 @@
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { ConnectProps } from '@/models/connect';
 import { Input } from 'antd';
 import { connect } from 'dva';
 import React, { Component } from 'react';
-import { match } from 'react-router';
 import router from 'umi/router';
 
-interface SearchListProps {
-  dispatch: (args: any) => void;
+interface SearchListProps extends Required<ConnectProps> {
   loading: boolean;
-  match: match;
-  location: Location;
 }
 
 @connect()
 class SearchList extends Component<SearchListProps> {
-  handleTabChange = key => {
+  handleTabChange = (key: string) => {
     const { match } = this.props;
     switch (key) {
       case 'articles':
@@ -31,7 +28,7 @@ class SearchList extends Component<SearchListProps> {
     }
   };
 
-  handleFormSubmit = value => {
+  handleFormSubmit = (value: string) => {
     // eslint-disable-next-line
     console.log(value);
   };

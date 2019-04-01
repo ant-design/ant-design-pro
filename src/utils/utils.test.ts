@@ -32,9 +32,9 @@ describe('isUrl tests', () => {
     expect(isUrl(false as any)).toBeFalsy();
     expect(isUrl(true as any)).toBeFalsy();
     expect(isUrl(NaN as any)).toBeFalsy();
-    expect(isUrl(null)).toBeFalsy();
-    expect(isUrl(undefined)).toBeFalsy();
-    expect(isUrl(void 0)).toBeFalsy();
+    expect(isUrl(null as any)).toBeFalsy();
+    expect(isUrl(undefined as any)).toBeFalsy();
+    expect(isUrl(void 0 as any)).toBeFalsy();
     expect(isUrl('')).toBeFalsy();
   });
 

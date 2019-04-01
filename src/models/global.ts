@@ -1,13 +1,20 @@
+import { NoticeIconData } from '@/components/NoticeIcon';
+import { Effect } from '@/models/connect';
 import { queryNotices } from '@/services/api';
-import { Effect, Subscription } from 'dva';
+import { Subscription } from 'dva';
 import { Reducer } from 'redux';
+
+export interface NoticeItem extends NoticeIconData {
+  id: string;
+  type: string;
+}
 
 export interface GlobalModelState {
   collapsed: boolean;
-  notices: any[];
+  notices: NoticeItem[];
 }
 
-export interface GlobalModel {
+export interface GlobalModelType {
   namespace: 'global';
   state: GlobalModelState;
   effects: {
@@ -16,14 +23,14 @@ export interface GlobalModel {
     changeNoticeReadState: Effect;
   };
   reducers: {
-    changeLayoutCollapsed: Reducer<any>;
-    saveNotices: Reducer<any>;
-    saveClearedNotices: Reducer<any>;
+    changeLayoutCollapsed: Reducer<GlobalModelState>;
+    saveNotices: Reducer<GlobalModelState>;
+    saveClearedNotices: Reducer<GlobalModelState>;
   };
   subscriptions: { setup: Subscription };
 }
 
-const GlobalModel: GlobalModel = {
+const GlobalModel: GlobalModelType = {
   namespace: 'global',
 
   state: {
@@ -67,12 +74,10 @@ const GlobalModel: GlobalModel = {
       });
     },
     *changeNoticeReadState({ payload }, { put, select }) {
-      const notices = yield select(state =>
+      const notices: NoticeItem[] = yield select(state =>
         state.global.notices.map(item => {
           const notice = { ...item };
-          if (notice.id === payload) {
-            notice.read = true;
-          }
+          if (notice.id === payload) notice.read = true;
           return notice;
         }),
       );

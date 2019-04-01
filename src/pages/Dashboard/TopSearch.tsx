@@ -4,11 +4,20 @@ import React, { memo } from 'react';
 import { Row, Col, Table, Tooltip, Card, Icon } from 'antd';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import Trend from '@/components/Trend';
-import { ColumnProps } from 'antd/es/table/interface';
+import { ColumnProps } from 'antd/es/table';
 import numeral from 'numeral';
 import styles from './Analysis.less';
+import { VisitDataItem } from './IntroduceRow';
 
-const columns: Array<ColumnProps<any>> = [
+export interface SearchDataItem {
+  count: number;
+  index: number;
+  keyword: string;
+  range: number;
+  status: number;
+}
+
+const columns: Array<ColumnProps<SearchDataItem>> = [
   {
     title: <FormattedMessage id="app.analysis.table.rank" defaultMessage="Rank" />,
     dataIndex: 'index',
@@ -45,8 +54,8 @@ const columns: Array<ColumnProps<any>> = [
 
 interface TopSearchProps {
   loading: boolean;
-  visitData2: any[];
-  searchData: any[];
+  visitData2: VisitDataItem[];
+  searchData: SearchDataItem[];
   dropdownGroup: JSX.Element;
 }
 const TopSearch: React.FC<TopSearchProps> = ({
@@ -82,7 +91,7 @@ const TopSearch: React.FC<TopSearchProps> = ({
           status="up"
           subTotal={17.1}
         />
-        <MiniArea line={true} height={45} data={visitData2} />
+        <MiniArea line height={45} data={visitData2} />
       </Col>
       <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
         <NumberInfo
@@ -104,11 +113,11 @@ const TopSearch: React.FC<TopSearchProps> = ({
           subTotal={26.2}
           gap={8}
         />
-        <MiniArea line={true} height={45} data={visitData2} />
+        <MiniArea line height={45} data={visitData2} />
       </Col>
     </Row>
     <Table
-      rowKey={record => record.index}
+      rowKey={record => `${record.index}`}
       size="small"
       columns={columns}
       dataSource={searchData}

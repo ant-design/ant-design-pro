@@ -1,11 +1,11 @@
 import { fakeRegister } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { reloadAuthorized } from '@/utils/Authorized';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
 export interface RegisterModelState {
-  status: undefined | string;
+  status?: string;
 }
 
 export interface RegisterModel {
@@ -15,16 +15,14 @@ export interface RegisterModel {
     submit: Effect;
   };
   reducers: {
-    registerHandle: Reducer<any>;
+    registerHandle: Reducer<RegisterModelState>;
   };
 }
 
 const RegisterModel: RegisterModel = {
   namespace: 'register',
 
-  state: {
-    status: undefined,
-  },
+  state: {},
 
   effects: {
     *submit({ payload }, { call, put }) {

@@ -1,40 +1,33 @@
-import memoizeOne from 'memoize-one';
-import isEqual from 'lodash/isEqual';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { MenuDataItem, Route } from '@/components/SiderMenu';
 import Authorized from '@/utils/Authorized';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
+import isEqual from 'lodash/isEqual';
+import memoizeOne from 'memoize-one';
 import { Reducer } from 'redux';
+import { formatMessage } from 'umi-plugin-locale';
+import { IRoute } from 'umi-types';
 import defaultSettings from '../../config/defaultSettings';
 
-const { menu } = defaultSettings;
-const { check } = Authorized;
-
 // Conversion router to menu.
-function formatter(data: any[], parentAuthority: string[], parentName: string): any[] {
-  if (!data) {
-    return undefined;
-  }
+function formatter(
+  data: Route[],
+  parentAuthority?: string[] | string,
+  parentName?: string,
+): MenuDataItem[] {
   return data
+    .filter(item => item.name && item.path)
     .map(item => {
-      if (!item.name || !item.path) {
-        return null;
-      }
-
-      let locale = 'menu';
-      if (parentName && parentName !== '/') {
-        locale = `${parentName}.${item.name}`;
-      } else {
-        locale = `menu.${item.name}`;
-      }
+      const locale = `${parentName || 'menu'}.${item.name!}`;
       // if enableMenuLocale use item.name,
       // close menu international
-      const name = menu.disableLocal
-        ? item.name
-        : formatMessage({ id: locale, defaultMessage: item.name });
-      const result = {
+      const name = defaultSettings.menu.disableLocal
+        ? item.name!
+        : formatMessage({ id: locale, defaultMessage: item.name! });
+      const result: MenuDataItem = {
         ...item,
         name,
         locale,
+        routes: void 0,
         authority: item.authority || parentAuthority,
       };
       if (item.routes) {
@@ -42,60 +35,44 @@ function formatter(data: any[], parentAuthority: string[], parentName: string): 
         // Reduce memory usage
         result.children = children;
       }
-      delete result.routes;
       return result;
-    })
-    .filter(item => item);
+    });
 }
 
 const memoizeOneFormatter = memoizeOne(formatter, isEqual);
 
-interface SubMenuItem {
-  children: SubMenuItem[];
-  hideChildrenInMenu?: boolean;
-  hideInMenu?: boolean;
-  name?: any;
-  component: any;
-  authority?: string[];
-  path: string;
-}
 /**
  * get SubMenu or Item
  */
-const getSubMenu: (item: SubMenuItem) => SubMenuItem = item => {
-  // doc: add hideChildrenInMenu
-  if (item.children && !item.hideChildrenInMenu && item.children.some(child => child.name)) {
-    return {
-      ...item,
-      children: filterMenuData(item.children), // eslint-disable-line
-    };
+const getSubMenu: (item: MenuDataItem) => MenuDataItem = item => {
+  if (
+    Array.isArray(item.children) &&
+    !item.hideChildrenInMenu &&
+    item.children.some(child => (child.name ? true : false))
+  ) {
+    const children = filterMenuData(item.children);
+    if (children.length) return { ...item, children };
   }
-  return item;
+  return { ...item, children: void 0 };
 };
 
 /**
  * filter menuData
  */
-const filterMenuData: (menuData: SubMenuItem[]) => SubMenuItem[] = menuData => {
-  if (!menuData) {
-    return [];
-  }
+const filterMenuData = (menuData: MenuDataItem[] = []): MenuDataItem[] => {
   return menuData
     .filter(item => item.name && !item.hideInMenu)
-    .map(item => check(item.authority, getSubMenu(item)))
-    .filter(item => item) as SubMenuItem[];
+    .map(item => Authorized.check(item.authority!, getSubMenu(item), null) as MenuDataItem)
+    .filter(item => item);
 };
+
 /**
  * 获取面包屑映射
- * @param SubMenuItem[] menuData 菜单配置
+ * @param MenuDataItem[] menuData 菜单配置
  */
-const getBreadcrumbNameMap: (menuData: SubMenuItem[]) => object = menuData => {
-  if (!menuData) {
-    return {};
-  }
-  const routerMap = {};
-
-  const flattenMenuData: (data: SubMenuItem[]) => void = data => {
+const getBreadcrumbNameMap = (menuData: MenuDataItem[]) => {
+  const routerMap: { [key: string]: MenuDataItem } = {};
+  const flattenMenuData: (data: MenuDataItem[]) => void = data => {
     data.forEach(menuItem => {
       if (menuItem.children) {
         flattenMenuData(menuItem.children);
@@ -111,22 +88,23 @@ const getBreadcrumbNameMap: (menuData: SubMenuItem[]) => object = menuData => {
 const memoizeOneGetBreadcrumbNameMap = memoizeOne(getBreadcrumbNameMap, isEqual);
 
 export interface MenuModelState {
-  menuData: any[];
-  routerData: any[];
+  menuData: MenuDataItem[];
+  routerData: IRoute[];
   breadcrumbNameMap: object;
 }
 
-export interface MenuModel {
+export interface MenuModelType {
   namespace: 'menu';
   state: MenuModelState;
   effects: {
     getMenuData: Effect;
   };
   reducers: {
-    save: Reducer<any>;
+    save: Reducer<MenuModelState>;
   };
 }
-const MenuModel: MenuModel = {
+
+const MenuModel: MenuModelType = {
   namespace: 'menu',
 
   state: {
@@ -137,8 +115,8 @@ const MenuModel: MenuModel = {
 
   effects: {
     *getMenuData({ payload }, { put }) {
-      const { routes, authority, path } = payload;
-      const originalMenuData = memoizeOneFormatter(routes, authority, path);
+      const { routes, authority } = payload;
+      const originalMenuData = memoizeOneFormatter(routes, authority);
       const menuData = filterMenuData(originalMenuData);
       const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(originalMenuData);
       yield put({

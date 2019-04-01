@@ -1,3 +1,4 @@
+import { ConnectProps, ConnectState, FormModelState } from '@/models/connect';
 import { Button, Divider, Form, Input, Select } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
@@ -16,15 +17,8 @@ const formItemLayout = {
   },
 };
 
-interface InfoFormProps extends FormComponentProps {
-  location: Location;
-  dispatch: (args: any) => void;
-  data: {
-    payAccount: string;
-    receiverAccount: string;
-    receiverName: string;
-    amount: string;
-  };
+interface InfoFormProps extends FormComponentProps, Required<ConnectProps> {
+  data: FormModelState['step'];
 }
 
 const Info: React.FC<InfoFormProps> = props => {
@@ -43,7 +37,7 @@ const Info: React.FC<InfoFormProps> = props => {
   };
   return (
     <Fragment>
-      <Form layout="horizontal" className={styles.stepForm} hideRequiredMark={true}>
+      <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
         <Form.Item {...formItemLayout} label="付款账户">
           {getFieldDecorator('payAccount', {
             initialValue: data.payAccount,
@@ -55,7 +49,7 @@ const Info: React.FC<InfoFormProps> = props => {
           )}
         </Form.Item>
         <Form.Item {...formItemLayout} label="收款账户">
-          <Input.Group compact={true}>
+          <Input.Group compact>
             <Select defaultValue="alipay" style={{ width: 100 }}>
               <Option value="alipay">支付宝</Option>
               <Option value="bank">银行账户</Option>
@@ -119,7 +113,7 @@ const Info: React.FC<InfoFormProps> = props => {
 };
 
 export default Form.create()(
-  connect(({ form }) => ({
-    data: form.step,
+  connect(({ form }: ConnectState) => ({
+    data: form!.step,
   }))(Info),
 );

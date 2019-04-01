@@ -13,6 +13,7 @@ import {
   Select,
   TimePicker,
 } from 'antd';
+import { ConnectState, ConnectProps } from '@/models/connect';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import React, { Component } from 'react';
@@ -58,13 +59,11 @@ const tableData = [
   },
 ];
 
-interface AdvancedFormProps extends FormComponentProps {
-  location: Location;
-  dispatch: (args: any) => void;
+interface AdvancedFormProps extends FormComponentProps, Required<ConnectProps> {
   submitting: boolean;
 }
 
-@connect(({ loading }) => ({
+@connect(({ loading }: ConnectState) => ({
   submitting: loading.effects['form/submitAdvancedForm'],
 }))
 class AdvancedForm extends Component<AdvancedFormProps> {
@@ -89,7 +88,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
     if (!errors || errorCount === 0) {
       return null;
     }
-    const scrollToField = fieldKey => {
+    const scrollToField = (fieldKey: string) => {
       const labelNode = document.querySelector(`label[for="${fieldKey}"]`);
       if (labelNode) {
         labelNode.scrollIntoView(true);
@@ -114,7 +113,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
           content={errorList}
           overlayClassName={styles.errorPopover}
           trigger="click"
-          getPopupContainer={trigger => trigger.parentNode as HTMLElement}
+          getPopupContainer={trigger => trigger!.parentNode as HTMLElement}
         >
           <Icon type="exclamation-circle" />
         </Popover>
@@ -166,7 +165,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
         wrapperClassName={styles.advancedForm}
       >
         <Card title="仓库管理" className={styles.card} bordered={false}>
-          <Form layout="vertical" hideRequiredMark={true}>
+          <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
               <Col lg={6} md={12} sm={24}>
                 <Form.Item label={fieldLabels.name}>
@@ -243,7 +242,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
           </Form>
         </Card>
         <Card title="任务管理" className={styles.card} bordered={false}>
-          <Form layout="vertical" hideRequiredMark={true}>
+          <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
               <Col lg={6} md={12} sm={24}>
                 <Form.Item label={fieldLabels.name2}>

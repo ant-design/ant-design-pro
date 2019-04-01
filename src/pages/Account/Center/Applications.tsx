@@ -1,4 +1,5 @@
-import { ListModelState } from '@/models/list';
+import { ConnectState, ListModelState } from '@/models/connect';
+import { MockListItem } from '@/models/list';
 import { formatWan } from '@/utils/utils';
 import { Avatar, Card, Dropdown, Icon, List, Menu, Tooltip } from 'antd';
 import { connect } from 'dva';
@@ -9,6 +10,19 @@ import stylesApplications from './Applications.less';
 interface ApplicationsProps {
   list: ListModelState;
 }
+
+const CardInfo: React.FC<Partial<MockListItem>> = ({ activeUser, newUser }) => (
+  <div className={stylesApplications.cardInfo}>
+    <div>
+      <p>活跃用户</p>
+      <p>{activeUser}</p>
+    </div>
+    <div>
+      <p>新增用户</p>
+      <p>{newUser}</p>
+    </div>
+  </div>
+);
 
 const Center: React.FC<ApplicationsProps> = props => {
   const {
@@ -33,31 +47,16 @@ const Center: React.FC<ApplicationsProps> = props => {
       </Menu.Item>
     </Menu>
   );
-  const CardInfo: ({ activeUser, newUser }: { activeUser: any; newUser: any }) => JSX.Element = ({
-    activeUser,
-    newUser,
-  }) => (
-    <div className={stylesApplications.cardInfo}>
-      <div>
-        <p>活跃用户</p>
-        <p>{activeUser}</p>
-      </div>
-      <div>
-        <p>新增用户</p>
-        <p>{newUser}</p>
-      </div>
-    </div>
-  );
   return (
     <List
       rowKey="id"
       className={stylesApplications.filterCardList}
       grid={{ gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
       dataSource={list}
-      renderItem={(item: any) => (
+      renderItem={(item: MockListItem) => (
         <List.Item key={item.id}>
           <Card
-            hoverable={true}
+            hoverable
             bodyStyle={{ paddingBottom: 20 }}
             actions={[
               <Tooltip title="下载">
@@ -88,6 +87,6 @@ const Center: React.FC<ApplicationsProps> = props => {
   );
 };
 
-export default connect(({ list }: { list: ListModelState }) => ({
+export default connect(({ list }: ConnectState) => ({
   list,
 }))(Center);

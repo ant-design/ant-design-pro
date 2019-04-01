@@ -1,30 +1,15 @@
 import { message } from 'antd';
 import { Reducer } from 'redux';
-import defaultSettings from '../../config/defaultSettings';
+import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
 
-export declare type SiderTheme = 'light' | 'dark';
+export { DefaultSettings as SettingModelState };
 
-export interface SettingModelState {
-  navTheme: string | SiderTheme;
-  primaryColor: string;
-  layout: string;
-  contentWidth: string;
-  fixedHeader: boolean;
-  autoHideHeader: boolean;
-  fixSiderbar: boolean;
-  menu: { disableLocal: boolean };
-  title: string;
-  pwa: boolean;
-  iconfontUrl: string;
-  colorWeak: boolean;
-}
-
-export interface SettingModel {
+export interface SettingModelType {
   namespace: 'setting';
-  state: SettingModelState;
+  state: DefaultSettings;
   reducers: {
-    getSetting: Reducer<any>;
-    changeSetting: Reducer<any>;
+    getSetting: Reducer<DefaultSettings>;
+    changeSetting: Reducer<DefaultSettings>;
   };
 }
 let lessNodesAppended: boolean;
@@ -41,8 +26,8 @@ const updateTheme: (primaryColor?: string) => void = primaryColor => {
   const hideMessage = message.loading('正在编译主题！', 0);
   function buildIt() {
     if (!(window as any).less) {
-      console.log('no less');
-      return;
+      // tslint:disable-next-line no-console
+      return console.log('no less');
     }
     setTimeout(() => {
       (window as any).less
@@ -91,7 +76,7 @@ const updateColorWeak: (colorWeak: string) => void = colorWeak => {
   document.body.className = colorWeak ? 'colorWeak' : '';
 };
 
-const SettingModel: SettingModel = {
+const SettingModel: SettingModelType = {
   namespace: 'setting',
   state: defaultSettings,
   reducers: {

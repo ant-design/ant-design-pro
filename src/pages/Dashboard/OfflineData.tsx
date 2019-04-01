@@ -5,15 +5,23 @@ import React, { memo } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Analysis.less';
 
+export interface OfflineChartDataItem {
+  x: number;
+  y1: number;
+  y2: number;
+}
+
+export interface OfflineDataItem {
+  name: string;
+  cvr: number;
+}
+
 interface CustomTabProps {
-  data: {
-    name: string;
-    cvr: number;
-  };
+  data: OfflineDataItem;
   currentTabKey: string;
 }
 
-const CustomTab: (obj: CustomTabProps) => JSX.Element = ({ data, currentTabKey: currentKey }) => (
+const CustomTab: React.FC<CustomTabProps> = ({ data, currentTabKey: currentKey }) => (
   <Row gutter={8} style={{ width: 138, margin: '8px 0' }}>
     <Col span={12}>
       <NumberInfo
@@ -44,8 +52,8 @@ const { TabPane } = Tabs;
 interface OfflineDataProps {
   activeKey: string;
   loading: boolean;
-  offlineData: any[];
-  offlineChartData: any[];
+  offlineData: OfflineDataItem[];
+  offlineChartData: OfflineChartDataItem[];
   handleTabChange: (activeKey: string) => void;
 }
 

@@ -1,14 +1,20 @@
 import { queryTags } from '@/services/api';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
-export interface MonitorState {
-  tags: any[];
+export interface MonitorTagsItem {
+  name: string;
+  value: number;
+  type: number;
+}
+
+export interface MonitorModelState {
+  tags: MonitorTagsItem[];
 }
 
 export interface MonitorModel {
   namespace: 'monitor';
-  state: MonitorState;
+  state: MonitorModelState;
   effects: {
     fetchTags: Effect;
   };
@@ -17,7 +23,7 @@ export interface MonitorModel {
   };
 }
 
-export default {
+const MonitorModel: MonitorModel = {
   namespace: 'monitor',
 
   state: {
@@ -43,3 +49,5 @@ export default {
     },
   },
 };
+
+export default MonitorModel;

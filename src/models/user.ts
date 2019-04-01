@@ -1,21 +1,36 @@
 import { query as queryUsers, queryCurrent } from '@/services/user';
-import { Effect } from 'dva';
+import { LabeledValue } from 'antd/es/select';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
-export interface UserModelState {
-  list: any[];
-  currentUser: {
-    avatar?: string;
-    name?: string;
-    title?: string;
-    group?: string;
-    signature?: string;
-    geographic?: any;
-    tags?: any[];
-  };
+export interface CurrentUser {
+  address?: string;
+  avatar?: string;
+  country?: string;
+  email?: string;
+  geographic?: { province: LabeledValue; city: LabeledValue };
+  group?: string;
+  notifyCount: number;
+  name?: string;
+  phone?: string;
+  signature?: string;
+  tags?: LabeledValue[];
+  title?: string;
+  unreadCount?: number;
+  userid?: string;
 }
 
-export interface UserModel {
+export interface UserModelState {
+  list: {
+    key: string;
+    name: string;
+    age: number;
+    address: string;
+  }[];
+  currentUser: CurrentUser;
+}
+
+export interface UserModelType {
   namespace: 'user';
   state: UserModelState;
   effects: {
@@ -23,13 +38,13 @@ export interface UserModel {
     fetchCurrent: Effect;
   };
   reducers: {
-    save: Reducer<any>;
-    saveCurrentUser: Reducer<any>;
-    changeNotifyCount: Reducer<any>;
+    save: Reducer<UserModelState>;
+    saveCurrentUser: Reducer<UserModelState>;
+    changeNotifyCount: Reducer<UserModelState>;
   };
 }
 
-const UserModel: UserModel = {
+const UserModel: UserModelType = {
   namespace: 'user',
 
   state: {

@@ -1,3 +1,4 @@
+import { ConnectProps, ConnectState, RegisterModelState } from '@/models/connect';
 import { Button, Col, Form, Input, Popover, Progress, Row, Select } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
@@ -5,7 +6,6 @@ import React, { Component } from 'react';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
 import router from 'umi/router';
-import { RegisterModelState } from './models/register';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
@@ -40,18 +40,25 @@ const passwordProgressMap: {
   poor: 'exception',
 };
 
-interface RegisterProps extends FormComponentProps {
+interface RegisterProps extends FormComponentProps, Required<ConnectProps> {
   register: RegisterModelState;
-  dispatch: (args: any) => void;
   submitting: boolean;
 }
 
-@connect(({ register, loading }) => ({
+interface RegisterState {
+  count: number;
+  confirmDirty: boolean;
+  visible: boolean;
+  help: string;
+  prefix: string;
+}
+
+@connect(({ register, loading }: ConnectState) => ({
   register,
   submitting: loading.effects['register/submit'],
 }))
-class Register extends Component<RegisterProps> {
-  state = {
+class Register extends Component<RegisterProps, RegisterState> {
+  state: RegisterState = {
     count: 0,
     confirmDirty: false,
     visible: false,
@@ -59,7 +66,7 @@ class Register extends Component<RegisterProps> {
     prefix: '86',
   };
 
-  interval: NodeJS.Timeout;
+  interval!: NodeJS.Timeout;
 
   componentDidUpdate() {
     const { form, register } = this.props;
@@ -102,7 +109,7 @@ class Register extends Component<RegisterProps> {
     return 'poor';
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { form, dispatch } = this.props;
     form.validateFields({ force: true }, (err, values) => {
@@ -119,13 +126,7 @@ class Register extends Component<RegisterProps> {
     });
   };
 
-  handleConfirmBlur = e => {
-    const { value } = e.target;
-    const { confirmDirty } = this.state;
-    this.setState({ confirmDirty: confirmDirty || !!value });
-  };
-
-  checkConfirm = (rule, value, callback) => {
+  checkConfirm = (_: any, value: string, callback: Function) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
       callback(formatMessage({ id: 'validation.password.twice' }));
@@ -134,7 +135,7 @@ class Register extends Component<RegisterProps> {
     }
   };
 
-  checkPassword = (rule, value, callback) => {
+  checkPassword = (_: any, value: string, callback: Function) => {
     const { visible, confirmDirty } = this.state;
     if (!value) {
       this.setState({
@@ -163,7 +164,7 @@ class Register extends Component<RegisterProps> {
     }
   };
 
-  changePrefix = value => {
+  changePrefix = (value: string) => {
     this.setState({
       prefix: value,
     });
@@ -214,7 +215,7 @@ class Register extends Component<RegisterProps> {
           </FormItem>
           <FormItem help={help}>
             <Popover
-              getPopupContainer={node => node.parentNode as HTMLElement}
+              getPopupContainer={node => node!.parentNode as HTMLElement}
               content={
                 <div style={{ padding: '4px 0' }}>
                   {passwordStatusMap[this.getPasswordStatus()]}
@@ -263,7 +264,7 @@ class Register extends Component<RegisterProps> {
             )}
           </FormItem>
           <FormItem>
-            <InputGroup compact={true}>
+            <InputGroup compact>
               <Select
                 size="large"
                 value={prefix}

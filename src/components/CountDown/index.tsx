@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-function fixedZero(val) {
+function fixedZero(val: number) {
   return val * 1 < 10 ? `0${val}` : val;
 }
-const initTime = props => {
+const initTime = (props: any) => {
   let lastTime = 0;
   let targetTime = 0;
   try {
@@ -33,11 +33,11 @@ interface CountDownState {
   lastTime: number;
 }
 class CountDown extends Component<CountDownProps, CountDownState> {
-  timer: NodeJS.Timeout;
+  timer!: NodeJS.Timeout;
 
   interval = 1000;
 
-  constructor(props) {
+  constructor(props: CountDownProps) {
     super(props);
     const { lastTime } = initTime(props);
     this.state = {
@@ -45,7 +45,7 @@ class CountDown extends Component<CountDownProps, CountDownState> {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, preState) {
+  static getDerivedStateFromProps(nextProps: CountDownProps, preState: CountDownState) {
     const { lastTime } = initTime(nextProps);
     if (preState.lastTime !== lastTime) {
       return {
@@ -59,7 +59,7 @@ class CountDown extends Component<CountDownProps, CountDownState> {
     this.tick();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: CountDownProps) {
     const { target } = this.props;
     if (target !== prevProps.target) {
       clearTimeout(this.timer);

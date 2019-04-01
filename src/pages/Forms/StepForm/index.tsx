@@ -1,15 +1,12 @@
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { Card, Steps } from 'antd';
 import React, { Fragment } from 'react';
+import { RouterTypes } from 'umi';
 import styles from '../style.less';
 
 const { Step } = Steps;
 
-interface StepFormProps {
-  location: Location;
-}
-
-const StepForm: React.FC<StepFormProps> = props => {
+const StepForm: React.FC<RouterTypes> = props => {
   const { location, children } = props;
   const getCurrentStep = () => {
     const { pathname } = location;
@@ -44,4 +41,5 @@ const StepForm: React.FC<StepFormProps> = props => {
     </PageHeaderWrapper>
   );
 };
+
 export default StepForm;

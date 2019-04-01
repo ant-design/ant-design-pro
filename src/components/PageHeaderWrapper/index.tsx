@@ -6,6 +6,7 @@ import { FormattedMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
 import GridContent from './GridContent';
 import styles from './index.less';
+import { SettingModelState } from '@/models/setting';
 
 interface PageHeaderWrapperProps {
   contentWidth: string;
@@ -47,6 +48,6 @@ const PageHeaderWrapper: React.FC<PageHeaderWrapperProps> = ({
   </div>
 );
 
-export default connect(({ setting }) => ({
+export default connect(({ setting }: { setting: SettingModelState }) => ({
   contentWidth: setting.contentWidth,
 }))(PageHeaderWrapper);

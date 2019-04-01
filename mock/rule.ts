@@ -16,7 +16,7 @@ for (let i = 0; i < 46; i += 1) {
     owner: '曲丽丽',
     desc: '这是一段描述',
     callNo: Math.floor(Math.random() * 1000),
-    status: Math.floor(Math.random() * 10) % 4,
+    status: `${Math.floor(Math.random() * 10) % 4}`,
     updatedAt: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
     createdAt: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
     progress: Math.ceil(Math.random() * 100),
@@ -33,7 +33,7 @@ function getRule(req, res, u) {
 
   let dataSource = tableListDataSource;
 
-  if (params.sorter) {
+  if (typeof params.sorter === 'string') {
     const s = params.sorter.split('_');
     dataSource = dataSource.sort((prev, next) => {
       if (s[1] === 'descend') {
@@ -43,7 +43,7 @@ function getRule(req, res, u) {
     });
   }
 
-  if (params.status) {
+  if (typeof params.status === 'string') {
     const status = params.status.split(',');
     let filterDataSource = [];
     status.forEach(s => {
@@ -60,7 +60,7 @@ function getRule(req, res, u) {
 
   let pageSize = 10;
   if (params.pageSize) {
-    pageSize = params.pageSize * 1;
+    pageSize = Number(params.pageSize) * 1;
   }
 
   const result = {
@@ -68,7 +68,7 @@ function getRule(req, res, u) {
     pagination: {
       total: dataSource.length,
       pageSize,
-      current: parseInt(params.currentPage, 10) || 1,
+      current: parseInt(params.currentPage as string, 10) || 1,
     },
   };
 
@@ -103,7 +103,7 @@ function postRule(req, res, u, b) {
         owner: '曲丽丽',
         desc,
         callNo: Math.floor(Math.random() * 1000),
-        status: Math.floor(Math.random() * 10) % 2,
+        status: `${Math.floor(Math.random() * 10) % 2}`,
         updatedAt: new Date(),
         createdAt: new Date(),
         progress: Math.ceil(Math.random() * 100),

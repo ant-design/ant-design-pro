@@ -11,7 +11,7 @@ interface SelectLangProps {
 const SelectLang: React.FC<SelectLangProps> = props => {
   const { className } = props;
   const selectedLang = getLocale();
-  const changeLang = ({ key }) => {
+  const changeLang = ({ key }: { key: any }) => {
     setLocale(key);
   };
   const locales = ['zh-CN', 'zh-TW', 'en-US', 'pt-BR'];

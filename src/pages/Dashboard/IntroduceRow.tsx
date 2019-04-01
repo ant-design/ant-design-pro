@@ -1,23 +1,14 @@
 import { ChartCard, Field, MiniArea, MiniBar, MiniProgress } from '@/components/Charts';
 import React, { memo } from 'react';
 import { Row, Col, Icon, Tooltip } from 'antd';
+import { ColProps } from 'antd/es/col';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import styles from './Analysis.less';
 import Trend from '@/components/Trend';
 import Yuan from '@/utils/Yuan';
 import numeral from 'numeral';
 
-interface TopColResponsiveProps {
-  xs: number;
-  sm: number;
-  md: number;
-  lg: number;
-  xl: number;
-  style: {
-    marginBottom: number;
-  };
-}
-const topColResponsiveProps: TopColResponsiveProps = {
+const topColResponsiveProps: ColProps = {
   xs: 24,
   sm: 12,
   md: 12,
@@ -26,8 +17,13 @@ const topColResponsiveProps: TopColResponsiveProps = {
   style: { marginBottom: 24 },
 };
 
+export interface VisitDataItem {
+  x: number | string;
+  y: number;
+}
+
 interface IntroduceRowProps {
-  visitData: any[];
+  visitData: VisitDataItem[];
   loading: boolean;
 }
 

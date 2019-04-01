@@ -1,23 +1,41 @@
 import { queryActivities } from '@/services/api';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
-export interface ActivitiesState {
-  list: any[];
+export interface ActivitiesListItem {
+  id: string;
+  updatedAt: string;
+  user: {
+    name: string;
+    avatar: string;
+  };
+  group: {
+    name: string;
+    link: string;
+  };
+  project: {
+    name: string;
+    link: string;
+  };
+  template: string;
+}
+
+export interface ActivitiesModelState {
+  list: ActivitiesListItem[];
 }
 
 export interface ActivitiesModel {
   namespace: 'activities';
-  state: ActivitiesState;
+  state: ActivitiesModelState;
   effects: {
     fetchList: Effect;
   };
   reducers: {
-    saveList: Reducer<any>;
+    saveList: Reducer<ActivitiesModelState>;
   };
 }
 
-export default {
+const ActivitiesModel: ActivitiesModel = {
   namespace: 'activities',
 
   state: {
@@ -43,3 +61,5 @@ export default {
     },
   },
 };
+
+export default ActivitiesModel;

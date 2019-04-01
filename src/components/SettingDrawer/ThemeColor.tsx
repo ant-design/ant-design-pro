@@ -29,42 +29,42 @@ interface ThemeColorProps {
 }
 
 const ThemeColor: React.FC<ThemeColorProps> = ({ colors, title, value, onChange }) => {
-  let colorList = colors;
-  if (!colors) {
-    colorList = [
-      {
-        key: 'dust',
-        color: '#F5222D',
-      },
-      {
-        key: 'volcano',
-        color: '#FA541C',
-      },
-      {
-        key: 'sunset',
-        color: '#FAAD14',
-      },
-      {
-        key: 'cyan',
-        color: '#13C2C2',
-      },
-      {
-        key: 'green',
-        color: '#52C41A',
-      },
-      {
-        key: 'daybreak',
-        color: '#1890FF',
-      },
-      {
-        key: 'geekblue',
-        color: '#2F54EB',
-      },
-      {
-        key: 'purple',
-        color: '#722ED1',
-      },
-    ];
+  let colorList = [
+    {
+      key: 'dust',
+      color: '#F5222D',
+    },
+    {
+      key: 'volcano',
+      color: '#FA541C',
+    },
+    {
+      key: 'sunset',
+      color: '#FAAD14',
+    },
+    {
+      key: 'cyan',
+      color: '#13C2C2',
+    },
+    {
+      key: 'green',
+      color: '#52C41A',
+    },
+    {
+      key: 'daybreak',
+      color: '#1890FF',
+    },
+    {
+      key: 'geekblue',
+      color: '#2F54EB',
+    },
+    {
+      key: 'purple',
+      color: '#722ED1',
+    },
+  ];
+  if (colors) {
+    colorList = colors;
   }
   return (
     <div className={styles.themeColor}>

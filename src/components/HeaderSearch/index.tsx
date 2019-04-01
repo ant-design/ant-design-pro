@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Input, Icon, AutoComplete } from 'antd';
 import InputProps from 'antd/es/input';
-
+import { SelectValue } from 'antd/es/select';
 import classNames from 'classnames';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
 import styles from './index.less';
 
 interface HeaderSearchProps {
-  onPressEnter: (value: string) => void;
-  onSearch: (value: string) => void;
-  onChange: (value: string) => void;
+  onPressEnter: (value: SelectValue) => void;
+  onSearch: (value: SelectValue) => void;
+  onChange: (value: SelectValue) => void;
   onVisibleChange: (b: boolean) => void;
   className: string;
   placeholder: string;
@@ -21,7 +21,7 @@ interface HeaderSearchProps {
 }
 
 interface HeaderSearchState {
-  value: string;
+  value: SelectValue;
   searchMode: boolean;
 }
 export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSearchState> {
@@ -37,7 +37,7 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     onVisibleChange: () => {},
   };
 
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps(props: HeaderSearchProps) {
     if ('open' in props) {
       return {
         searchMode: props.open,
@@ -46,9 +46,9 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     return null;
   }
 
-  timeout: NodeJS.Timeout;
-  input: InputProps;
-  constructor(props) {
+  timeout!: NodeJS.Timeout;
+  input!: InputProps;
+  constructor(props: HeaderSearchProps) {
     super(props);
     this.state = {
       searchMode: props.defaultOpen,
@@ -60,7 +60,7 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     clearTimeout(this.timeout);
   }
 
-  onKeyDown = e => {
+  onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       const { onPressEnter } = this.props;
       const { value } = this.state;
@@ -69,8 +69,7 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
       }, 0);
     }
   };
-
-  onChange = value => {
+  onChange = (value: SelectValue) => {
     const { onSearch, onChange } = this.props;
     this.setState({ value });
     if (onSearch) {
@@ -139,7 +138,7 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
         >
           <Input
             ref={node => {
-              this.input = node;
+              this.input = node!;
             }}
             aria-label={placeholder}
             placeholder={placeholder}

@@ -1,3 +1,4 @@
+import { ConnectProps, ConnectState, FormModelState } from '@/models/connect';
 import { digitUppercase } from '@/utils/utils';
 import { Alert, Button, Divider, Form, Input } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
@@ -15,14 +16,8 @@ const formItemLayout = {
   },
 };
 
-interface ConfirmFormProps extends FormComponentProps {
-  dispatch: (args: any) => void;
-  data: {
-    payAccount: string;
-    receiverAccount: string;
-    receiverName: string;
-    amount: string;
-  };
+interface ConfirmFormProps extends FormComponentProps, Required<ConnectProps> {
+  data: FormModelState['step'];
   submitting: boolean;
 }
 
@@ -32,7 +27,7 @@ const Confirm: React.FC<ConfirmFormProps> = props => {
   const onPrev = () => {
     router.push('/form/step-form/info');
   };
-  const onValidateForm = e => {
+  const onValidateForm = (e: React.MouseEvent) => {
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
@@ -49,8 +44,8 @@ const Confirm: React.FC<ConfirmFormProps> = props => {
   return (
     <Form layout="horizontal" className={styles.stepForm}>
       <Alert
-        closable={true}
-        showIcon={true}
+        closable
+        showIcon
         message="确认转账后，资金将直接打入对方账户，无法退回。"
         style={{ marginBottom: 24 }}
       />
@@ -102,8 +97,8 @@ const Confirm: React.FC<ConfirmFormProps> = props => {
 };
 
 export default Form.create()(
-  connect(({ form, loading }) => ({
+  connect(({ form, loading }: ConnectState) => ({
     submitting: loading.effects['form/submitStepForm'],
-    data: form.step,
+    data: form!.step,
   }))(Confirm),
 );

@@ -1,15 +1,15 @@
 import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import PageLoading from '@/components/PageLoading';
+import { ChartModelState, ConnectProps, ConnectState } from '@/models/connect';
 import { getTimeDistance } from '@/utils/utils';
 import { Col, Dropdown, Icon, Menu, Row } from 'antd';
 import { RangePickerValue } from 'antd/es/date-picker/interface';
+import { RadioChangeEvent } from 'antd/es/radio/interface';
 import { connect } from 'dva';
-import * as H from 'history';
 import React, { Component, Suspense } from 'react';
-import { Dispatch } from 'redux';
 import styles from './Analysis.less';
-import { ChartModelState } from './models/chart';
+import { SalesPieDataItem } from './ProportionSales';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const SalesCard = React.lazy(() => import('./SalesCard'));
@@ -17,9 +17,7 @@ const TopSearch = React.lazy(() => import('./TopSearch'));
 const ProportionSales = React.lazy(() => import('./ProportionSales'));
 const OfflineData = React.lazy(() => import('./OfflineData'));
 
-interface AnalysisProps {
-  dispatch: Dispatch<any>;
-  location: H.Location;
+interface AnalysisProps extends Required<ConnectProps> {
   chart: ChartModelState;
   loading: boolean;
 }
@@ -30,7 +28,7 @@ interface AnalysisState {
   rangePickerValue: RangePickerValue;
 }
 
-@connect(({ chart, loading }) => ({
+@connect(({ chart, loading }: ConnectState) => ({
   chart,
   loading: loading.effects['chart/fetch'],
 }))
@@ -41,7 +39,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     rangePickerValue: getTimeDistance('year'),
   };
 
-  reqRef: number;
+  reqRef: number = 0;
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -60,16 +58,12 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     cancelAnimationFrame(this.reqRef);
   }
 
-  handleChangeSalesType = e => {
-    this.setState({
-      salesType: e.target.value,
-    });
+  handleChangeSalesType = ({ target: { value } }: RadioChangeEvent) => {
+    this.setState({ salesType: value });
   };
 
-  handleTabChange = key => {
-    this.setState({
-      currentTabKey: key,
-    });
+  handleTabChange = (key: string) => {
+    this.setState({ currentTabKey: key });
   };
 
   handleRangePickerChange: (
@@ -126,7 +120,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
       salesTypeDataOnline,
       salesTypeDataOffline,
     } = chart;
-    let salesPieData;
+    let salesPieData: SalesPieDataItem[];
     if (salesType === 'all') {
       salesPieData = salesTypeData;
     } else {

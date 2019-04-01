@@ -1,9 +1,20 @@
 import { queryProjectNotice } from '@/services/api';
-import { Effect } from 'dva';
+import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 
+export interface ProjectNoticeItem {
+  description: string;
+  href: string;
+  id: string;
+  logo: string;
+  member: string;
+  memberLink: string;
+  title: string;
+  updatedAt: string;
+}
+
 export interface ProjectModelState {
-  notice: any[];
+  notice: ProjectNoticeItem[];
 }
 
 export interface ProjectModel {

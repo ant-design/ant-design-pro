@@ -1,6 +1,6 @@
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
-import { SettingModelState } from '@/models/setting';
+import { ConnectState, SettingModelState, ConnectProps } from '@/models/connect';
 import React, { Component } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { Layout, message } from 'antd';
@@ -13,11 +13,10 @@ const { Header } = Layout;
 
 export declare type SiderTheme = 'light' | 'dark';
 
-interface HeaderViewProps {
+export interface HeaderViewProps extends Required<ConnectProps> {
   isMobile: boolean;
   collapsed: boolean;
   setting: SettingModelState;
-  dispatch: (args: any) => void;
   autoHideHeader: boolean;
   handleMenuCollapse: (args: boolean) => void;
 }
@@ -40,9 +39,9 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
     visible: true,
   };
 
-  ticking: boolean;
+  ticking!: boolean;
 
-  oldScrollTop: number;
+  oldScrollTop!: number;
 
   componentDidMount() {
     document.addEventListener('scroll', this.handScroll, { passive: true });
@@ -61,7 +60,7 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
     return collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)';
   };
 
-  handleNoticeClear = type => {
+  handleNoticeClear = (type: any) => {
     message.success(
       `${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({
         id: `component.globalHeader.${type}`,
@@ -74,7 +73,7 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
     });
   };
 
-  handleMenuClick = ({ key }) => {
+  handleMenuClick = ({ key }: { key: string }) => {
     const { dispatch } = this.props;
     if (key === 'userCenter') {
       router.push('/account/center');
@@ -95,7 +94,7 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
     }
   };
 
-  handleNoticeVisibleChange = visible => {
+  handleNoticeVisibleChange = (visible: boolean) => {
     if (visible) {
       const { dispatch } = this.props;
       dispatch({
@@ -170,7 +169,7 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
   }
 }
 
-export default connect(({ user, global, setting, loading }) => ({
+export default connect(({ user, global, setting, loading }: ConnectState) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
   fetchingMoreNotices: loading.effects['global/fetchMoreNotices'],

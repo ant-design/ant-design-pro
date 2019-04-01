@@ -24,7 +24,7 @@ interface LoginTabProps {
 class LoginTab extends Component<LoginTabProps> {
   uniqueId: string;
 
-  constructor(props) {
+  constructor(props: LoginTabProps) {
     super(props);
     this.uniqueId = generateId('login-tab-');
   }
@@ -39,9 +39,9 @@ class LoginTab extends Component<LoginTabProps> {
   }
 }
 
-const wrapContext = props => (
+const wrapContext = (props: any) => (
   <LoginContext.Consumer>
-    {value => <LoginTab tabUtil={value.tabUtil} {...props} />}
+    {(value: any) => <LoginTab tabUtil={value.tabUtil} {...props} />}
   </LoginContext.Consumer>
 );
 
