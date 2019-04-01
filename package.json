@@ -53,7 +53,6 @@
     "@antv/data-set": "^0.10.1",
     "@babel/runtime": "^7.3.1",
     "antd": "^3.13.0",
-    "babel-loader": "^8.0.5",
     "bizcharts": "^3.4.3",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
