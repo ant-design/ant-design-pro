@@ -1,10 +1,8 @@
 // import { parse } from 'url';
 
-const DEL_ACT = 3;
-const ONLINE_ACT = 4;
-const OFFLINE_ACT = 5;
-const API_STATUS_0 = '0';
-const API_STATUS_2 = '2';
+import constants from '@/utils/constUtil';
+
+const { ACT, API_STATUS } = constants;
 
 // mock tableListDataSource
 let tableListDataSource = [];
@@ -13,7 +11,7 @@ for (let i = 0; i < 46; i += 1) {
     apiId: i,
     name: `Api Name ${i}`,
     actionName: `queryUser`,
-    serviceType: Math.floor(Math.random() * 10) % 4,
+    serviceType: `${Math.floor(Math.random() * 10) % 3 +1}`,
     groupId: (Math.floor(Math.random() * 10) % 4) + 1,
     status: `${Math.floor(Math.random() * 10) % 3}`,
     updateTime: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
@@ -21,15 +19,84 @@ for (let i = 0; i < 46; i += 1) {
     createUser: 'Alex',
   });
 }
-
+const apiInfoDetail={
+  "code": "200",
+  "msg": "SUCCESS",
+  "data": {
+    "apiId": 61,
+    "name": "语音识别0319",
+    "serviceNo": "ES15529769095510000000061",
+    "actionName": "",
+    "groupId": 1,
+    "securityType": "1",
+    "signature": "12121",
+    "remark": "aaaa",
+    "requestUrl": "//rest//voice",
+    "protocol": "HTTP",
+    "matchType": null,
+    "reqMethod": "2",
+    "status": "2",
+    "statusName": null,
+    "createTime": "2019-03-19T06:28:28.000+0000",
+    "apiType": null,
+    "createUser": "loginName",
+    "updateTime": "2019-03-19T06:28:28.000+0000",
+    "updateUser": "loginName",
+    "serviceType": "1",
+    "serviceTypeName": null,
+    "apiServiceMappings": null,
+    "apiServiceBackends": [
+      {
+        "backendId": 17,
+        "apiId": 61,
+        "serviceType": "1",
+        "protocol": 'HTTP',
+        "url": "http://test.com",
+        "reqPath": "2",
+        "reqMethod": "2",
+        "connectTimeout": 30000,
+        "callNumber": null,
+        "socketTimeout": 20000,
+        "trustStore": null,
+        "trustStorePassword": null,
+        "keyStore": null,
+        "keyStorePassword": null,
+        "status": "2",
+        "createTime": "2019-03-19T06:44:55.000+0000",
+        "createUser": null,
+        "updateTime": "2019-03-19T06:44:55.000+0000",
+        "updateUser": null,
+        "backendType": "endpoint",
+        "codeMethod": null,
+        "serviceSeq": 3
+      },
+      {
+        backEndId: '1',
+        serviceSeq: '1',
+        backendType: 'in',
+        url: 'com.ai.odc.changeParam',
+      },
+      {
+        backEndId: '2',
+        serviceSeq: '2',
+        backendType: 'in',
+        url: 'http://odc.ai.com/changeParam',
+      },
+      {
+        backEndId: '4',
+        serviceSeq: '4',
+        backendType: 'out',
+        url: 'com.ai.odc.changeParam',
+      },
+    ]
+  }
+}
 function apiList(req, res, u, b) {
   const payload = (b && b.body) || req.body;
-  console.log('payload in getApi :', payload);
   let dataSource = tableListDataSource;
   const params = payload && payload.data && payload.data.info ? payload.data.info : {};
   if (params.sorter) {
     const s = params.sorter.split('_');
-    console.log('sorter:', s);
     dataSource = dataSource.sort((prev, next) => {
       if (s[1] === 'descend') {
         return next[s[0]] - prev[s[0]];
@@ -62,13 +129,51 @@ function apiList(req, res, u, b) {
   }
 
   const result = {
-    list: dataSource,
-    pagination: {
-      total: dataSource.length,
-      pageSize,
-      pageNo: parseInt(params.pageNo, 10) || 1,
+    "code": "200",
+    "msg": null,
+    "data": {
+      records: dataSource,
+      page: {
+        total: dataSource.length,
+        pageSize,
+        pageNo: parseInt(params.pageNo, 10) || 1,
+      },
     },
   };
+
+  return res.json(result);
+}
+
+function saveApi(req, res, u, b) {
+  let url = u;
+  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+    url = req.url; // eslint-disable-line
+  }
+
+  const body = (b && b.body) || req.body;
+
+  const {
+    option,
+    data: { info },
+  } = body;
+  const {apiService,apiServiceBackends} = info;
+  if (option === ACT.ADD) {
+    tableListDataSource.push({...apiService,apiId:tableListDataSource.length});
+  } else if (option === ACT.UPDATE) {
+    const index = tableListDataSource.findIndex(item => apiService.appId !== item.apiId);
+    tableListDataSource.splice(index, 1, apiService);// 对列表模拟数据对更新
+    apiInfoDetail.data=apiService;
+    /* apiInfoDetail.data.apiServiceBackends数据对更新 */
+    let i = apiInfoDetail.data.apiServiceBackends.length;
+    console.log("11----------:",apiServiceBackends);
+    apiInfoDetail.data.apiServiceBackends = apiServiceBackends.map((item) => {
+      i += 1;
+      const newItem = item.backendId ? item : {...item, backendId: i};// 去掉key，增加backendId
+      return newItem;
+    });
+  }
+  console.log("12--------:",apiInfoDetail.data,apiInfoDetail.data.apiServiceBackends);
+  const result = apiInfoDetail;
 
   return res.json(result);
 }
@@ -88,22 +193,21 @@ function apiStatusBatch(req, res, u, b) {
 
   switch (option) {
     /* eslint no-case-declarations:0 */
-    case DEL_ACT:
+    case ACT.DEL:
       info.apiIds.forEach(key => {
         tableListDataSource = tableListDataSource.filter(item => key !== item.apiId);
       });
-      console.log('tableListDataSource', tableListDataSource[4]);
       break;
-    case ONLINE_ACT:
+    case ACT.ONLINE:
       info.apiIds.forEach(key => {
         const apiInfo = tableListDataSource.find(item => key === item.apiId);
-        apiInfo.status = API_STATUS_2;
+        apiInfo.status = API_STATUS.ONLINE;
       });
       break;
-    case OFFLINE_ACT:
+    case ACT.OFFLINE:
       info.apiIds.forEach(key => {
         const apiInfo = tableListDataSource.find(item => key === item.apiId);
-        apiInfo.status = API_STATUS_0;
+        apiInfo.status = API_STATUS.CLOSE;
       });
       break;
     default:
@@ -124,13 +228,34 @@ function apiStatusBatch(req, res, u, b) {
     msg: '',
   };
 
-  console.log('result', result);
   return res.json(result);
 }
 
+function apiInfoMock(req, res, u, b) {
+  let url = u;
+  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+    url = req.url; // eslint-disable-line
+  }
+
+  const body = (b && b.body) || req.body;
+
+  const {
+    data: { info },
+  } = body;
+
+  const apiInfo = tableListDataSource.find(item => item.apiId === info.apiId);
+  console.log("getApiInfo:",apiInfoDetail.data);
+  apiInfoDetail.data={...apiInfoDetail.data,...apiInfo}
+
+  return res.json(apiInfoDetail);
+}
+
 export default {
-  'POST /baseinfo/apiService/apiList': apiList,
-  'POST /baseinfo/apiService/apiStatusBatch': apiStatusBatch,
+  'POST /baseInfo/apiService/apiList': apiList,
+  'POST /baseInfo/apiService/apiBatch': apiStatusBatch,
+  'POST /baseInfo/apiService/apiInfo': apiInfoMock,
+  'POST /baseInfo/apiService/saveApi': saveApi,
+
   'POST /conf/forms': (req, res) => {
     res.send({ message: 'Ok' });
   },

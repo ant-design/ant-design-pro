@@ -30,5 +30,5 @@ const allResult = {
 };
 
 export default {
-  [`GET /baseinfo/api/allGroupList`]: allResult,
+  [`GET /baseInfo/api/allGroupList`]: allResult,
 };

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Select } from 'antd';
-import { getItems, getItemValue } from '../../utils/masterData';
+import { getItems, getItemValue } from '@/utils/masterData';
 
 const { Option } = Select;
 const nullSlectItem = {
@@ -11,6 +11,7 @@ class SelectView extends PureComponent {
   getOption() {
     const { javaCode, javaKey } = this.props;
     const items = getItems(javaCode, javaKey);
+    // console.log("items:",items);
     return this.getOptionWhithList(items);
   }
 
@@ -31,6 +32,7 @@ class SelectView extends PureComponent {
 
   selectChangeItem = item => {
     const { onChange } = this.props;
+    // console.log("item:",item);
     onChange(item);
   };
 
@@ -51,6 +53,7 @@ class SelectView extends PureComponent {
   render() {
     // const value = this.conversionObject();
     const { value } = this.props;
+    // console.log("value:",value);
     return (
       <Select value={value} onSelect={this.selectChangeItem}>
         {this.getOption()}

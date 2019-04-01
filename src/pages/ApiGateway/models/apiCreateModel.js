@@ -1,67 +1,113 @@
 import { routerRedux } from 'dva/router';
-import { saveApi } from '@/services/apiGatewayService';
+import { saveApi,apiInfo } from '@/services/apiGatewayService';
+
+import { message } from 'antd';
 
 export default {
   namespace: 'apiCreateModel',
 
   state: {
-    step: {
-      groupId: '0',
-      apiName: '语音转码',
-      userName: 'Admin',
-      consumerServiceType: '1',
-      consumerProtocol: 'HTTP',
-      consumerMethod: 'POST',
-      consumerPath: '/rest/voice',
-      producerServiceType: '1',
-      producerUrl: 'http://aliyun.com',
-      producerPath: '/api/voice',
-      producerProtocol: 'HTTP',
-      producerSocketTimeout: 20000,
-      producerConnectTimeout: 5000,
-      // apiService: {
-      //   apiId: 1,
-      //   name: '语音识别',
-      //   serviceType:'rest',
-      //   status: '2',
-      //   groupId: 2,
-      //   actionName: '',
-      //   requestUrl: '/rest/voice',
-      //   createTime: '2018-05-11 00:00:00',
-      //   updateTime: '2018-05-11 00:00:00',
-      //   createUser:'Alex',
-      // },
-      // apiServiceBackend: {
-      //   backendId: 1,
-      //   serviceType:'rest',
-      //   status: '2',
-      //   url: 'http://aliyun.com',
-      //   reqPath: '2',
-      //   socketTimeout: 20000,
-      //   connectTimeout: 30000,
-      // },
+    apiService: {
+      apiServiceBackends:[{},],
     },
   },
 
   effects: {
-    *submitStepForm({ payload }, { call, put }) {
-      yield call(saveApi, payload);
+    *apiInfo({ payload,callback }, { call, put }) {
+      console.log(payload);
+      const response = yield call(apiInfo, payload);
+      console.log(response);
       yield put({
-        type: 'saveStepFormData',
-        payload,
+        type: 'initData',
+        payload: response,
       });
-      yield put(routerRedux.push('/apiGateway/apiCreate/result'));
+      if (callback) callback(response);
+    },
+    *submitStepForm({ payload }, { call, put }) {
+      const response = yield call(saveApi, payload);
+      console.log("response:",response);
+      if(payload.option===1) {
+        yield put({
+          type: 'saveStepFormData3',
+          action:{payload,
+          response,},
+        });
+      }
+      if (response.code==="200"){
+        if(payload.option===1) {
+          yield put(routerRedux.push('/apiGateway/apiCreate/result'));
+        }
+        else{
+          yield put({
+            type: 'updateData',
+            payload:response,
+          });
+          const msg=response.msg||"success。"
+          message.success(msg);
+        }
+      }
+      else{
+        const msg=response.msg||"服务器内部错误。"
+        message.error(msg);
+      }
     },
   },
 
   reducers: {
     saveStepFormData(state, { payload }) {
+      const apiService={...state.apiService, ...payload,};
       return {
         ...state,
-        step: {
-          ...state.step,
-          ...payload,
+        apiService,
+      };
+    },
+    updateData(state, { payload }) {
+      console.log("updateData:",payload);
+      const apiService={...state.apiService, ...payload.data,};
+      return {
+        ...state,
+        apiService,
+      };
+    },
+    saveStepFormData3(state, { action }) {
+      console.log("action:",action);
+      const apiService=action.response&&action.response.code==="200"?{...state.apiService, ...action.response.data,}:{...state.apiService, ...action.payload.data.info.apiService,};
+      return {
+        ...state,
+        apiService,
+      };
+    },
+    initDataForAdd(){
+      // 创建的时候初始化数据
+      const apiService= {
+        name: '语音识别',
+          serviceType:'1',
+          groupId: 2,
+          requestUrl: '/rest/voice',
+          // createUser:'Alex',
+          protocol: 'HTTP',
+          reqMethod: '2',
+          apiServiceBackends:[{
+          serviceType:'1',
+          // url: 'http://aliyun.com',
+          // protocol: 'HTTP',
+          socketTimeout: 20000,
+          connectTimeout: 30000,
+          // backendType:'endpoint',
+          serviceSeq:1,
+          backendType:'endpoint',
         },
+        ],
+      };
+      return {
+        apiService,
+      };
+    },
+    initData(state, { payload }) {
+      const apiService = {...payload.data};
+      return {
+        ...state,
+        apiService,
       };
     },
   },

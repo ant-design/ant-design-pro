@@ -38,7 +38,8 @@ export function getItem(javaCode, javaKey, itemCode) {
 }
 
 export function getItemValue(javaCode, javaKey, itemCode) {
-  return getItem(javaCode, javaKey, itemCode).itemValue;
+  const item=getItem(javaCode, javaKey, itemCode);
+  return item?item.itemValue:'';
 }
 
 export function getItem2(rows, itemCode) {
@@ -48,7 +49,8 @@ export function getItem2(rows, itemCode) {
 }
 
 export function getItemValue2(items, itemCode) {
-  return getItem2(items, itemCode).itemValue;
+  const item=getItem2(items, itemCode);
+  return item?item.itemValue:"";
 }
 
 export function getName(list, val, keyName, titleName) {

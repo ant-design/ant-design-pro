@@ -1,4 +1,5 @@
-import { query, remove, add } from '../services/uniApi';
+import {list, save, statusBatch} from '../services/uniCompService';
+import {conversion, conversionReq} from "../pages/util";
 
 export default {
   namespace: 'uniComp',
@@ -11,23 +12,27 @@ export default {
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {
+    *list({ payload }, { call, put }) {
       console.log('payload:', payload);
-      const response = yield call(query, payload);
+      const req=conversionReq(payload);
+      const response = yield call(list, req);
       console.log('response:', response);
       yield put({
         type: 'save',
         payload: response,
       });
     },
-    *add({ payload, callback }, { call }) {
+    *save({ payload, callback }, { call }) {
       console.log('postinfo add:', payload);
-      const response = yield call(add, payload);
+      const req=conversionReq(payload);
+      const response = yield call(save, req);
       console.log('postinfo response add:', response);
       if (callback) callback(response);
     },
-    *remove({ payload, callback }, { call }) {
-      const response = yield call(remove, payload);
+    *statusBatch({ payload, callback }, { call }) {
+      console.log('sysdata statusBatch in Model:', payload);
+      const req=conversionReq(payload);
+      const response = yield call(statusBatch, req);
       // yield put({
       //   type: 'save',
       //   payload: response,
@@ -38,10 +43,12 @@ export default {
 
   reducers: {
     save(state, action) {
-      console.log('action:', action.payload, state);
+      console.log("--------3",action.payload);
+      const response = conversion(action.payload.data);
+      console.log("--------4",response);
       return {
         ...state,
-        data: action.payload,
+        data: response,
       };
     },
   },

@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
+import router from 'umi/router';
 import { connect } from 'dva';
 import moment from 'moment';
 import {
@@ -25,7 +26,7 @@ import constants from '@/utils/constUtil';
 import { getGroupName, getItems, getItemValue2 } from '@/utils/masterData';
 import SelectView from './SelectView';
 
-const { DEL_ACT, ONLINE_ACT, OFFLINE_ACT, API_STATUS_0, API_STATUS_1, API_STATUS_2 } = constants;
+const { ACT, API_STATUS } = constants;
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -35,6 +36,7 @@ const getValue = obj =>
     .join(',');
 const statusMap = ['default', 'processing', 'success', 'default', 'error'];
 const statusList = getItems('apiService', 'status');
+const serviceTypeList = getItems('apiService','service_type');
 const statusFilter = statusList.map(item => ({
   value: item.itemCode,
   text: item.itemValue,
@@ -51,7 +53,10 @@ class TableList extends PureComponent {
     expandForm: false,
     selectedRows: [],
     formValues: {},
-    pagination: {},
+    pagination: {
+      "pageNo":1,
+      "pageSize":10,
+    },
     filtersArg: {},
     sorter: {},
   };
@@ -61,15 +66,25 @@ class TableList extends PureComponent {
     dispatch({
       type: 'groupModel/allGroupList',
     });
+
+    const payload = {};
+    payload.data = {};
+    payload.data.info = {
+      "pageNo":1,"pageSize":10
+    };
     dispatch({
       type: 'apiGatewayModel/apiList',
-      payload: {},
+      payload,
     });
   }
 
   getColumns = () => {
     const { groupList } = this.props;
     const columns = [
+      {
+        title: 'API Id',
+        dataIndex: 'apiId',
+      },
       {
         title: 'API名称',
         dataIndex: 'name',
@@ -79,6 +94,13 @@ class TableList extends PureComponent {
         dataIndex: 'groupId',
         render(val) {
           return <Fragment>{getGroupName(groupList, val)} </Fragment>;
+        },
+      },
+      {
+        title: '服务类型',
+        dataIndex: 'serviceType',
+        render(val) {
+          return <Fragment>{getItemValue2(serviceTypeList, val)} </Fragment>;
         },
       },
       {
@@ -103,34 +125,34 @@ class TableList extends PureComponent {
               id="toOnline"
               style={{
                 display:
-                  record.status === API_STATUS_1 || record.status === API_STATUS_0
+                  record.status === API_STATUS.OFFLINE || record.status === API_STATUS.CLOSE
                     ? 'inline'
                     : 'none',
               }}
             >
-              <a onClick={() => this.handleStatusClick(ONLINE_ACT, record)}>发布</a>
+              <a onClick={() => this.handleStatusClick(ACT.ONLINE, record)}>发布</a>
               <Divider type="vertical" />
             </span>
             <span
               id="toOffline"
               style={{
-                display: record.status === API_STATUS_2 ? 'inline' : 'none',
+                display: record.status === API_STATUS.ONLINE ? 'inline' : 'none',
               }}
             >
-              <a onClick={() => this.handleStatusClick(OFFLINE_ACT, record)}>下线</a>
+              <a onClick={() => this.handleStatusClick(ACT.OFFLINE, record)}>下线</a>
               <Divider type="vertical" />
             </span>
 
             <span
               id="toOnline"
               style={{
-                display: record.status === API_STATUS_1 ? 'inline' : 'none',
+                display: record.status === API_STATUS.OFFLINE ? 'inline' : 'none',
               }}
             >
-              <a onClick={() => this.handleStatusClick(DEL_ACT, record)}>删除</a>
+              <a onClick={() => this.handleStatusClick(ACT.DEL, record)}>删除</a>
               <Divider type="vertical" />
             </span>
-            <a onClick={() => this.handleTest(true, record)}>调试</a>
+            <a onClick={() => this.handleUpdate(true, record)}>修改</a>
             <Divider type="vertical" />
             <a onClick={() => this.handleTest(true, record)}>授权</a>
           </Fragment>
@@ -163,7 +185,7 @@ class TableList extends PureComponent {
   respDeal = resp => {
     const { code } = resp;
     let { msg } = resp;
-    if (code === 200) {
+    if (code === '200') {
       if (!msg || msg === '') {
         msg = '操作成功';
       }
@@ -207,8 +229,9 @@ class TableList extends PureComponent {
 
     const payload = {};
     payload.data = {};
-    payload.data.info = params;
-
+    payload.data.info = {
+      "pageNo":1,"pageSize":10,...params};
+    payload.data.info.pageNo=payload.data.info.pageNo?payload.data.info.pageNo:1;
     dispatch({
       type: 'apiGatewayModel/apiList',
       payload,
@@ -293,7 +316,7 @@ class TableList extends PureComponent {
         ...fieldsValue,
         // updatedTime: fieldsValue.updatedTime && fieldsValue.updatedTime.valueOf(),
       };
-
+      console.log(fieldsValue,values);
       this.setState({
         formValues: values,
       });
@@ -302,7 +325,7 @@ class TableList extends PureComponent {
       const filters = this.conversionFilter(filtersArg);
       const payload = {};
       payload.data = {};
-      payload.data.info = { ...filters, ...values, ...sorter };
+      payload.data.info = {"pageNo":1,"pageSize":10,...filters, ...values, ...sorter };
       dispatch({
         type: 'apiGatewayModel/apiList',
         payload,
@@ -313,6 +336,19 @@ class TableList extends PureComponent {
   handleTest = (flag, record) => {
     console.log('handleTest', flag, record);
     message.success('下一个版本实现');
+  };
+
+  handleUpdate = (flag, record) => {
+
+    const {apiId} = record;
+    // router.push(`/apiGateway/apiCreate/${apiId}`);
+    router.push({
+      pathname: `/apiGateway/apiUpdate`, // 通过url参数传递
+      state: { // 通过对象传递
+        apiId,
+        record, // 表格某行的对象数据
+      },
+    });
   };
 
   renderSimpleForm() {

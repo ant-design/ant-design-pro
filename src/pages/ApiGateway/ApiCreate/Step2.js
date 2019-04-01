@@ -15,24 +15,10 @@ const formItemLayout = {
 };
 
 @connect(({ apiCreateModel }) => ({
-  data: apiCreateModel.step,
+  data: apiCreateModel.apiService,
 }))
 @Form.create()
 class Step2 extends React.PureComponent {
-  componentDidMount() {
-    this.setBaseInfo();
-  }
-
-  setBaseInfo = () => {
-    const { data, form } = this.props;
-    console.log('data:', data);
-    Object.keys(form.getFieldsValue()).forEach(key => {
-      const obj = {};
-      obj[key] = data[key] || null;
-      console.log('key:', key, 'currentUser key:', data[key], obj);
-      form.setFieldsValue(obj);
-    });
-  };
 
   render() {
     const { form, dispatch, data } = this.props;
@@ -45,34 +31,38 @@ class Step2 extends React.PureComponent {
         if (!err) {
           dispatch({
             type: 'apiCreateModel/saveStepFormData',
-            payload: values,
+            payload: {...values},
+            stepType:1,
           });
           router.push('/apiGateway/apiCreate/producer');
         }
       });
     };
+    // console.log("step2 data:",data);
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
           <Form.Item {...formItemLayout} label="服务类型">
-            {getFieldDecorator('consumerServiceType', {
+            {getFieldDecorator('serviceType', {
+              initialValue: data.serviceType,
               rules: [{ required: true, message: '请选择服务类型' }],
             })(<SelectView javaCode="apiService" javaKey="service_type" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求PATH">
-            {getFieldDecorator('consumerPath', {
-              initialValue: data.consumerPath,
+            {getFieldDecorator('requestUrl', {
+              initialValue: data.requestUrl,
               rules: [{ required: true, message: '请输入请求PATH' }],
             })(<Input placeholder="请输入请求PATH" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="协议">
-            {getFieldDecorator('consumerProtocol', {
+          <Form.Item {...formItemLayout} label="协议类型">
+            {getFieldDecorator('protocol', {
+              initialValue: data.protocol,
               rules: [{ required: true, message: '请选择协议' }],
             })(<SelectView javaCode="apiService" javaKey="protocol" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="HTTP Method">
-            {getFieldDecorator('consumerMethod', {
-              initialValue: data.consumerMethod,
+          <Form.Item {...formItemLayout} label="请求类型">
+            {getFieldDecorator('reqMethod', {
+              initialValue: data.reqMethod,
               rules: [{ required: true, message: '请选择HTTP Method' }],
             })(<SelectView javaCode="common" javaKey="req_mothod" />)}
           </Form.Item>
@@ -87,7 +77,7 @@ class Step2 extends React.PureComponent {
             }}
             label=""
           >
-            <Button type="primary" onClick={onValidateForm} htmlType="submit">
+            <Button type="primary" onClick={onValidateForm}>
               下一步
             </Button>
             <Button onClick={onPrev} style={{ marginLeft: 8 }} htmlType="button">

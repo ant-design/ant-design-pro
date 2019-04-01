@@ -48,8 +48,9 @@ const CreateForm = Form.create()(props => {
     columnSchemas: { tableName, key, name },
   } = props;
   const okHandle = () => {
-    console.log('okHandle');
+    console.log('okHandle1');
     form.validateFields((err, fieldsValue) => {
+      console.log('okHandle2',fieldsValue);
       if (err) return;
       handleAdd(fieldsValue, form);
     });
@@ -62,12 +63,14 @@ const CreateForm = Form.create()(props => {
     .filter(data => !(`${data.name}` === key && !selectedRow))
     .map(item => {
       const itemTemp = item;
-      itemTemp[name] === key ? (itemTemp.disabled = true) : (itemTemp.disabled = false);
+      // console.log("======:",itemTemp.name === key,key,itemTemp.name);
+      itemTemp.disabled=itemTemp.name === key ? true : false;
       return itemTemp;
     });
   console.log('addForm:', addForms);
+  const modalTitle=selectedRow?"update":"new";
   return (
-    <Modal title="新增" visible={modalVisible} onOk={okHandle} onCancel={() => cancelHandle()}>
+    <Modal title={modalTitle} visible={modalVisible} onOk={okHandle} onCancel={() => cancelHandle()}>
       {addForms.map(item => (
         <FormItem
           key={`addFormItem-${item.name}`}
@@ -80,7 +83,7 @@ const CreateForm = Form.create()(props => {
             rules:
               item[name] === key
                 ? []
-                : [{ required: true, message: 'Please input some description...' }],
+                : [{ required: true, message: `Please input ${item.title}` }],
           })(
             item.tag === 'select' ? (
               <BindDataSelect
@@ -103,6 +106,7 @@ const CreateForm = Form.create()(props => {
           )}
         </FormItem>
       ))}
+
     </Modal>
   );
 });
@@ -138,7 +142,7 @@ class BindDataStandardTable extends PureComponent {
     } = this.props;
     this.handleColumn();
     dispatch({
-      type: 'uniComp/fetch',
+      type: 'uniComp/list',
       payload: { tableName },
     });
   }
@@ -163,9 +167,11 @@ class BindDataStandardTable extends PureComponent {
         obj.render = val => <span>{moment(val).format(columnDetail.format)}</span>;
       }
       if (columnDetail.enumData != null) {
-        obj.render = val => (
-          <span>{columnDetail.enumData.find(d => d.itemCode === val).itemValue}</span>
-        );
+        obj.render = val => {
+          const item=columnDetail.enumData.find(d => d.itemCode === val);
+          const itemValue=item?item.itemValue:"";
+          return (<span>{itemValue}</span>);
+        }
       }
       columns.push(obj);
       return obj;
@@ -206,7 +212,7 @@ class BindDataStandardTable extends PureComponent {
     }
 
     dispatch({
-      type: 'uniComp/fetch',
+      type: 'uniComp/list',
       payload: params,
     });
   };
@@ -237,7 +243,7 @@ class BindDataStandardTable extends PureComponent {
       });
 
       dispatch({
-        type: 'uniComp/fetch',
+        type: 'uniComp/list',
         payload: values,
       });
     });
@@ -255,7 +261,7 @@ class BindDataStandardTable extends PureComponent {
       modalVisible: false,
     });
     dispatch({
-      type: 'uniComp/fetch',
+      type: 'uniComp/list',
       payload: { tableName },
     });
   };
@@ -275,14 +281,20 @@ class BindDataStandardTable extends PureComponent {
   };
 
   handleAdd = (fields, addForm) => {
-    console.log('handleAdd');
+    console.log('handleAdd:',fields);
     const {
       dispatch,
-      columnSchemas: { tableName },
+      columnSchemas: { tableName,key },
     } = this.props;
+
+    const { selectedRow } = this.state;
+    const option = selectedRow?2:1;
+    const keyValue = selectedRow?selectedRow[key]:null;
+    const payload= { option,tableName, ...fields };
+    payload[key]=keyValue;
     dispatch({
-      type: 'uniComp/add',
-      payload: { tableName, ...fields },
+      type: 'uniComp/save',
+      payload,
       callback: resp => {
         console.log('resp=======', resp);
         if (resp.code === 200) {
@@ -299,7 +311,7 @@ class BindDataStandardTable extends PureComponent {
     });
 
     dispatch({
-      type: 'uniComp/fetch',
+      type: 'uniComp/list',
       payload: { tableName },
     });
   };
@@ -311,32 +323,41 @@ class BindDataStandardTable extends PureComponent {
     });
   };
 
-  handleMenuClick = e => {
+  handleMenuClick = (e) => {
     const {
       dispatch,
       columnSchemas: { tableName },
     } = this.props;
     const { selectedRows } = this.state;
     if (!selectedRows) return;
-
+    const payload= {
+        tableName,
+        ids: selectedRows.map(row => row.id),// .join(','),
+    };
     switch (e.key) {
       case 'remove':
-        dispatch({
-          type: 'uniComp/remove',
-          payload: {
-            tableName,
-            id: selectedRows.map(row => row.id).join(','),
-          },
-          callback: () => {
-            this.setState({
-              selectedRows: [],
-            });
-          },
-        });
+        payload.option=3;
+        break;
+      case 'enable':
+        payload.option=4;
+        break;
+      case 'disable':
+        payload.option=5;
         break;
       default:
         break;
     }
+
+    console.log("========uniComp/statusBatch1====");
+    dispatch({
+      type: 'uniComp/statusBatch',
+      payload,
+      callback: () => {
+        this.setState({
+          selectedRows: [],
+        });
+      },
+    });
     this.handleSearch();
   };
 
@@ -472,8 +493,8 @@ class BindDataStandardTable extends PureComponent {
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
         <Menu.Item key="remove">删除</Menu.Item>
-        <Menu.Item key="exportRemove">导出删除脚本</Menu.Item>
-        <Menu.Item key="exportCreate">导出创建脚本</Menu.Item>
+        <Menu.Item key="enable">激活</Menu.Item>
+        <Menu.Item key="disable">停用</Menu.Item>
       </Menu>
     );
     const parentMethods = {

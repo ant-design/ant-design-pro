@@ -1,12 +1,12 @@
 import request from '@/utils/request';
-import '../utils/const';
+import constants from '@/utils/constUtil';
 
-const ConstUtil = global.const;
+const { PREFIX_PATH } = constants;
 
 export async function allGroupList() {
-  return request(`${ConstUtil.PREFIX_PATH}/baseinfo/api/allGroupList`);
+  return request(`${PREFIX_PATH}/baseInfo/api/allGroupList`);
 }
 
 export async function saveGroup() {
-  return request(`${ConstUtil.PREFIX_PATH}/baseinfo/api/saveGroup`);
+  return request(`${PREFIX_PATH}/baseInfo/api/saveGroup`);
 }

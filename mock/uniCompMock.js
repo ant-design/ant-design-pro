@@ -1,10 +1,10 @@
 /* eslint-disable eqeqeq */
-import { parse } from 'url';
+import {parse} from 'url';
 
 // mock tableListDataSource
-let tableListDataSource = [];
-let groupsDataSource = [];
-let componentDataSource = [];
+const tableListDataSource = [];
+const groupsDataSource = [];
+const componentDataSource = [];
 const serviceDataSource = [];
 
 function getList(innerTableName) {
@@ -26,34 +26,17 @@ function getList(innerTableName) {
   return dataSource;
 }
 function pushGroups() {
-  const groupId = ['语音识别', 'OCR识别', '身份识别', '文本识别'];
-  groupId.forEach((value, index) => {
+  const groups = ['语音识别', 'OCR识别', '身份识别', '文本识别'];
+  groups.forEach((value, index) => {
     groupsDataSource.push({
       disabled: false,
-      id: index,
+      groupId: index,
       name: value,
+      status:'A',
     });
   });
 }
 function pushOrg() {
-  tableListDataSource.push({
-    disabled: false,
-    id: `9191`,
-    orgCode: `9191`,
-    orgName: `letsgoOrg`,
-    appKey: `1001001`,
-    orgType: `1`,
-    stateTime: new Date(`2017-07-12`),
-  });
-  tableListDataSource.push({
-    disabled: false,
-    id: `9192`,
-    orgCode: `9192`,
-    orgName: `TDC`,
-    appKey: `1001002`,
-    orgType: `2`,
-    stateTime: new Date(`2017-07-12`),
-  });
   for (let i = 70000; i < 70026; i += 1) {
     tableListDataSource.push({
       disabled: i % 6 === 0,
@@ -63,6 +46,7 @@ function pushOrg() {
       appKey: `100${i}`,
       orgType: `${Math.floor(Math.random() * 10) % 3}`,
       createTime: new Date(`2017-07-${Math.floor((i - 70000) / 2) + 1}`),
+      status:'A',
     });
   }
 }
@@ -133,19 +117,19 @@ export function sug(req, res, u) {
   return result;
 }
 export function queryList(req, res, u, b) {
-  let url = u;
-  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    url = req.url; // eslint-disable-line
-  }
+  // let url = u;
+  // if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+  //   url = req.url; // eslint-disable-line
+  // }
 
   const params = (b && b.body) || req.body;
-
+  const{tableName,data:{info}} =params;
   // const params = parse(url, true).query;
 
-  let dataSource = [...getList(params.tableName)];
-  console.debug(url, params, dataSource.length);
-  if (params.sorter) {
-    const s = params.sorter.split('_');
+  let dataSource = [...getList(tableName)];
+  // console.debug(url, params, dataSource.length);
+  if (info.sorter) {
+    const s = info.sorter.split('_');
     dataSource = dataSource.sort((prev, next) => {
       if (s[1] === 'descend') {
         return next[s[0]] - prev[s[0]];
@@ -163,7 +147,7 @@ export function queryList(req, res, u, b) {
   //   });
   //   dataSource = filterDataSource;
   // }
-  const keys = Object.keys(params); // 根据查询条件（form表单）的参数，过滤列表
+  const keys = Object.keys(info); // 根据查询条件（form表单）的参数，过滤列表
   keys.forEach(key => {
     if (params[key]) {
       dataSource = dataSource.filter(data => {
@@ -183,11 +167,15 @@ export function queryList(req, res, u, b) {
   }
 
   const result = {
-    list: dataSource,
-    pagination: {
-      total: dataSource.length,
-      pageSize,
-      current: parseInt(params.currentPage, 10) || 1,
+    "code": "200",
+    "msg": null,
+    "data": {
+      "records": dataSource,
+      pagination: {
+        total: dataSource.length,
+        pageSize,
+        current: parseInt(params.currentPage, 10) || 1,
+      },
     },
   };
   if (res && res.json) {
@@ -195,44 +183,29 @@ export function queryList(req, res, u, b) {
   }
   return result;
 }
-export function postInfo(req, res, u, b) {
-  let url = u;
-  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    url = req.url; // eslint-disable-line
-  }
+export function save(req, res, u, b) {
+  // let url = u;
+  // if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+  //   url = req.url; // eslint-disable-line
+  // }
 
   const body = (b && b.body) || req.body;
-  const { tableName, method, orgCode, orgName, id, componentId, name } = body;
-  const { appKey, orgType } = body;
-  console.log('postInfo', body, id);
+  const { method, tableName, data:{info} } = body;
+  const {  orgType, orgName, id, componentId, name,appKey, groupId } = info;
+  console.log('save in mock:', body, id);
   const datasource = getList(tableName);
   switch (method) {
     /* eslint no-case-declarations:0 */
-    case 'delete':
-      switch (tableName) {
-        case 'org':
-          tableListDataSource = tableListDataSource.filter(item => id.indexOf(item.id) === -1);
-          console.log('delete :', tableListDataSource);
-          break;
-        case 'groups':
-          groupsDataSource = groupsDataSource.filter(item => id.indexOf(item.id) === -1);
-          console.log('delete :', groupsDataSource);
-          break;
-        default:
-          componentDataSource = componentDataSource.filter(item => id.indexOf(item.id) === -1);
-          break;
-      }
-      break;
     case 'post':
       switch (tableName) {
         case 'org':
-          const tmpOrgArray = datasource.filter(item => id && id == item.id);
+          const tmpOrgArray = datasource.filter(item => id && id === item.id);
           if (tmpOrgArray && tmpOrgArray.length > 0) {
             const tmpObj = tmpOrgArray.shift();
-            tmpObj.orgCode = orgCode;
             tmpObj.orgName = orgName;
             tmpObj.appKey = appKey;
             tmpObj.orgType = orgType;
+            tmpObj.status='A';
             if (id) {
               tmpObj.id = id;
             }
@@ -240,35 +213,36 @@ export function postInfo(req, res, u, b) {
             const newId = datasource.length + 1;
             datasource.unshift({
               id: newId,
-              orgCode,
+              orgCode:'1',
               orgName,
               appKey,
               orgType,
+              status:'A',
               createTime: new Date(),
             });
           }
           break;
         case 'groups':
-          const tmpGroupsArray = datasource.filter(item => id && id == item.id);
+          const tmpGroupsArray = datasource.filter(item => groupId && groupId === item.groupId);
           if (tmpGroupsArray && tmpGroupsArray.length > 0) {
             const tmpObj = tmpGroupsArray.shift();
             tmpObj.name = name;
-            if (id) {
-              tmpObj.id = id;
+            if (groupId) {
+              tmpObj.id = groupId;
             }
           } else {
             const newId = datasource.length + 1;
             datasource.unshift({
-              id: newId,
+              groupId: newId,
               name,
+              status:'A',
             });
           }
           break;
-        default:
-          const tmpArray = datasource.filter(item => componentId.indexOf(item.componentId) !== -1);
+        case 'component':
+          const tmpArray = datasource.filter(item => componentId&&componentId.indexOf(item.componentId) !== -1);
           if (tmpArray && tmpArray.length > 0) {
             const tmpObj = tmpArray.shift();
-            tmpObj.code = orgCode;
             tmpObj.name = orgName;
             tmpObj.id = id;
             if (componentId) {
@@ -277,12 +251,81 @@ export function postInfo(req, res, u, b) {
           } else {
             datasource.unshift({
               componentId,
-              orgCode,
               orgName,
               id,
               createTime: new Date(),
             });
           }
+          break;
+        default:
+          break;
+      }
+      break;
+    default:
+      break;
+  }
+  const result = {
+    code: 200,
+    list: datasource,
+    pagination: {
+      total: datasource.length,
+    },
+  };
+
+  if (res && res.json) {
+    return res.json(result);
+  }
+  return result;
+}
+export function statusBatch(req, res, u, b) {
+  // console.log('statusBatch======');
+  // let url = u;
+  // if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+  //   url = req.url; // eslint-disable-line
+  // }
+
+  const body = (b && b.body) || req.body;
+  const { method, tableName, data:{info},option } = body;
+  const {  ids } = info;
+  const datasource = getList(tableName);
+  console.log('statusBatch method:',method);
+  switch (method) {
+    /* eslint no-case-declarations:0 */
+    case 'delete':
+      let status='D';
+      switch (option) {
+        case 3:
+          status='D';
+          break;
+        case 4:
+          status='A';
+          break;
+        case 5:
+          status='S';
+          break;
+        default:
+          status='A';
+          break;
+      }
+      console.log("status batch method:",method,ids," status:",status);
+      switch (tableName) {
+        case 'groups':
+          ids.forEach((value) => {
+            const tmpObj = datasource.find(item => value && value === item.groupId);
+            if (tmpObj) {
+              tmpObj.status = status;
+            }
+            console.log('STATUS BATCH :', tmpObj);
+          });
+          break;
+        default:
+          ids.forEach( (value) => {
+            const tmpObj = datasource.find(item => value && value === item.id);
+            if (tmpObj) {
+              tmpObj.status = status;
+            }
+            console.log('STATUS BATCH in default:', tmpObj);
+          });
           break;
       }
       break;
@@ -304,7 +347,8 @@ export function postInfo(req, res, u, b) {
 }
 
 export default {
-  'POST /uniComp/queryList.do': queryList,
-  'POST /uniComp/postInfo.do': postInfo,
-  'GET /uniComp/sug.do': sug,
+  'POST /baseInfo/sysdata/list': queryList,
+  'POST /baseInfo/sysdata/save': save,
+  'POST /baseInfo/sysdata/statusBatch': statusBatch,
+  'GET /baseInfo/sysdata/sug': sug,
 };

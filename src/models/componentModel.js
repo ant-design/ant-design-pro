@@ -1,4 +1,4 @@
-import { sug } from '../services/uniApi';
+import { sug } from '../services/uniCompService';
 
 export default {
   namespace: 'componentModel',

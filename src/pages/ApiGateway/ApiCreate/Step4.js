@@ -1,54 +1,65 @@
-import React, { Fragment } from 'react';
-import { connect } from 'dva';
-import { Button, Row, Col } from 'antd';
+import React, {Fragment} from 'react';
+import {connect} from 'dva';
+import {Button, Col, Row} from 'antd';
 import router from 'umi/router';
 import Result from '@/components/Result';
+import {getItemValue} from '@/utils/masterData';
 import styles from './style.less';
 
 @connect(({ apiCreateModel }) => ({
-  data: apiCreateModel.step,
+  apiService: apiCreateModel.apiService,
 }))
 class Step4 extends React.PureComponent {
   render() {
-    const { data } = this.props;
+    const { apiService } = this.props;
+    const apiServiceBackend = apiService.apiServiceBackends?apiService.apiServiceBackends[0]:[{}];
     const onFinish = () => {
       router.push('/apiGateway/apiCreate/info');
     };
+
     const advance = () => {
-      router.push('/apiGateway/apiCreate/advance');
+      const {apiId} = apiService;
+      // router.push(`/apiGateway/apiCreate/${apiId}`);
+      router.push({
+        pathname: `/apiGateway/apiUpdate`, // 通过url参数传递
+        state: { // 通过对象传递
+          apiId,
+          apiService, // 表格某行的对象数据
+        },
+      });
     };
     const information = (
       <div className={styles.information}>
         <Row>
           <Col xs={24} sm={8} className={styles.label}>
-            api名称：
+            api name：
           </Col>
           <Col xs={24} sm={16}>
-            {data.apiName}
+            {apiService.name}
           </Col>
         </Row>
         <Row>
           <Col xs={24} sm={8} className={styles.label}>
-            请求Path：
+            api path：
           </Col>
           <Col xs={24} sm={16}>
-            {data.consumerPath}
+            {apiService.requestUrl}
           </Col>
         </Row>
         <Row>
           <Col xs={24} sm={8} className={styles.label}>
-            后端地址：
+            落地方地址：
           </Col>
           <Col xs={24} sm={16}>
-            {data.producerUrl}
+            {apiServiceBackend.url}
           </Col>
         </Row>
         <Row>
           <Col xs={24} sm={8} className={styles.label}>
-            后端Path：
+            落地方服务类型：
           </Col>
           <Col xs={24} sm={16}>
-            {data.producerPath}
+            {getItemValue('apiService','service_type',apiServiceBackend.serviceType)}
           </Col>
         </Row>
       </div>

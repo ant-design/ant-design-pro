@@ -17,23 +17,16 @@ const formItemLayout = {
 
 @connect(({ apiCreateModel, loading }) => ({
   submitting: loading.effects['apiCreateModel/submitStepForm'],
-  data: apiCreateModel.step,
+  apiService: apiCreateModel.apiService,
 }))
 @Form.create()
 class Step3 extends React.PureComponent {
-  setBaseInfo = () => {
-    const { data, form } = this.props;
-    console.log('data:', data);
-    Object.keys(form.getFieldsValue()).forEach(key => {
-      const obj = {};
-      obj[key] = data[key] || null;
-      console.log('key:', key, 'currentUser key:', data[key], obj);
-      form.setFieldsValue(obj);
-    });
-  };
+
 
   render() {
-    const { form, data, dispatch, submitting } = this.props;
+    const { form, apiService, dispatch, submitting } = this.props;
+    console.log("apiService.apiServiceBackends:",apiService.apiServiceBackends);
+    const data = apiService.apiServiceBackends?apiService.apiServiceBackends[0]:[{}];
     const { getFieldDecorator, validateFields } = form;
     const onPrev = () => {
       router.push('/apiGateway/apiCreate/consumer');
@@ -41,11 +34,11 @@ class Step3 extends React.PureComponent {
     const onValidateForm = e => {
       e.preventDefault();
       validateFields((err, values) => {
-        const apiInfo = getPayload({
-          ...data,
-          ...values,
-        });
-        console.log('create api commit:', apiInfo);
+        const apiServiceBackend={...data, ...values,};
+        const apiServiceBackends=[apiServiceBackend];
+        apiService.apiServiceBackends=apiServiceBackends;
+        console.log(apiService);
+        const apiInfo = getPayload(1,apiService,apiServiceBackends);
         if (!err) {
           dispatch({
             type: 'apiCreateModel/submitStepForm',
@@ -54,48 +47,43 @@ class Step3 extends React.PureComponent {
         }
       });
     };
+    // console.log("step3 data:",data);
     return (
       <Form layout="horizontal" className={styles.stepForm}>
         <Form.Item {...formItemLayout} className={styles.stepFormText} label="api名称：">
-          {data.apiName}
+          {apiService.name}
         </Form.Item>
         <Form.Item {...formItemLayout} className={styles.stepFormText} label="请求PATH：">
-          {data.consumerPath}
+          {apiService.requestUrl}
         </Form.Item>
         <Divider style={{ margin: '24px 0' }} />
         <Form.Item {...formItemLayout} label="后端服务类型">
-          {getFieldDecorator('producerServiceType', {
-            initialValue: data.producerServiceType,
+          {getFieldDecorator('serviceType', {
+            initialValue: data.serviceType,
             rules: [{ required: true, message: '请选择后端服务类型' }],
           })(<SelectView javaCode="apiService" javaKey="service_type" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="后端请求地址">
-          {getFieldDecorator('producerUrl', {
-            initialValue: data.producerUrl,
+          {getFieldDecorator('url', {
+            initialValue: data.url,
             rules: [{ required: true, message: '请输入后端请求地址' }],
           })(<Input placeholder="请输入后端请求地址" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="后端请求path">
-          {getFieldDecorator('producerPath', {
-            initialValue: data.producerPath,
-            rules: [{ required: true, message: '请输入后端请求path' }],
-          })(<Input placeholder="请输入后端请求path" />)}
-        </Form.Item>
         <Form.Item {...formItemLayout} label="后端协议">
-          {getFieldDecorator('producerProtocol', {
-            initialValue: data.producerProtocol,
+          {getFieldDecorator('protocol', {
+            initialValue: data.protocol,
             rules: [{ required: true, message: '请选择后端协议' }],
           })(<SelectView javaCode="apiService" javaKey="protocol" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="后端服务连接超时">
-          {getFieldDecorator('producerConnectTimeout', {
-            initialValue: data.producerConnectTimeout,
+          {getFieldDecorator('connectTimeout', {
+            initialValue: data.connectTimeout,
             rules: [{ required: true, message: '后端服务连接超时' }],
           })(<Input placeholder="请输入后端服务连接超时（ms）" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="后端服务请求超时">
-          {getFieldDecorator('producerSocketTimeout', {
-            initialValue: data.producerSocketTimeout,
+          {getFieldDecorator('socketTimeout', {
+            initialValue: data.socketTimeout,
             rules: [{ required: true, message: '后端服务请求超时' }],
           })(<Input placeholder="请输入后端服务请求超时（ms）" />)}
         </Form.Item>

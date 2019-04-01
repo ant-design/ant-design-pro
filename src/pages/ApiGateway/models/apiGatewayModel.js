@@ -1,4 +1,5 @@
-import { apiList, apiStatusBatch, addApi, updateApi } from '@/services/apiGatewayService';
+import { apiList, apiStatusBatch, } from '@/services/apiGatewayService';
+import {conversion} from "../../util";
 
 export default {
   namespace: 'apiGatewayModel',
@@ -12,48 +13,33 @@ export default {
 
   effects: {
     *apiList({ payload }, { call, put }) {
-      console.log('payload', payload);
+      console.log('payload', JSON.stringify(payload));
       const response = yield call(apiList, payload);
-
-      console.log('response', response);
       yield put({
         type: 'save',
         payload: response,
       });
-    },
-    *add({ payload, callback }, { call, put }) {
-      const response = yield call(addApi, payload);
-      yield put({
-        type: 'save',
-        payload: response,
-      });
-      if (callback) callback();
     },
     *apiStatusBatch({ payload, callback }, { call }) {
-      console.log('payload', payload);
+      console.log('payload-----------', payload);
       const response = yield call(apiStatusBatch, payload);
       // yield put({
       //   type: 'save',
       //   payload: response,
       // });
-      console.log('response', response);
+      console.log('response------------', response);
       if (callback) callback(response);
-    },
-    *update({ payload, callback }, { call, put }) {
-      const response = yield call(updateApi, payload);
-      yield put({
-        type: 'save',
-        payload: response,
-      });
-      if (callback) callback();
     },
   },
 
   reducers: {
     save(state, action) {
+      console.log("--------1",action.payload);
+      const response = conversion(action.payload.data);
+      console.log("--------2",response);
       return {
         ...state,
-        data: action.payload,
+        data: response,
       };
     },
   },

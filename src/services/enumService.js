@@ -4,12 +4,12 @@ import constants from '@/utils/constUtil';
 const { PREFIX_PATH } = constants;
 
 export async function allEnumList() {
-  return request(`${PREFIX_PATH}/baseinfo/sys/allEnumList`);
+  return request(`${PREFIX_PATH}/baseInfo/sys/allEnumList`);
 }
 
 // post
 export async function query(params) {
-  return request(`${PREFIX_PATH}/baseinfo/sys/enumList`, {
+  return request(`${PREFIX_PATH}/baseInfo/sys/enumList`, {
     method: 'POST',
     body: {
       ...params,

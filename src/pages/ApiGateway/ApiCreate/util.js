@@ -1,31 +1,30 @@
-export function getPayload(d) {
-  const payload = {
-    option: 1, // 1-新增记录 2-修改记录（预留，暂时不支持）
-
+export function getPayload(option,apiService,newApiServiceBackends) {
+  const {apiServiceBackends,...newApiService}=apiService;
+  return {
+    option, // 1-新增记录 2-修改记录
     data: {
       info: {
-        apiService: {
-          name: d.apiName,
-          serviceType: d.consumerServiceType,
-          groupId: parseInt(d.groupId, 10),
-          reqMethod: d.consumerMethod,
-          actionName: d.actionName,
-          requestUrl: d.consumerPath,
-          createUser: d.createUser,
-        },
-        apiServiceBackend: {
-          serviceType: d.producerServiceType,
-          url: d.producerUrl,
-          reqPath: d.producerPath,
-          socketTimeout: d.producerSocketTimeout,
-          connectTimeout: d.producerConnectTimeout,
-        },
+        apiService:newApiService,
+        apiServiceBackends:newApiServiceBackends,
       },
     },
   };
-  return payload;
 }
 
-export function test(payload) {
-  return payload;
+export function getPayloadForUpdate(oldApiService,values) {
+  const apiService1={...oldApiService,...values.front};
+  const {apiServiceBackends,...apiService}=apiService1;
+  const newApiServiceBackends = values.members.map((item) => {
+    const {key, ...newItem} = item.backendId==='endpoint'?{...item,...values.back}:item;
+    return newItem;
+  });
+  return {
+    option:2, // 1-新增记录 2-修改记录
+    data: {
+      info: {
+        apiService,
+        apiServiceBackends:newApiServiceBackends,
+      },
+    },
+  };
 }

@@ -19,6 +19,7 @@ export default {
   'menu.apiGateway': '服务管理',
   'menu.apiGateway.apiList': 'Api管理',
   'menu.apiGateway.apiCreate': '创建Api',
+  'menu.apiGateway.apiUpdate': '更新Api',
   'menu.apiGateway.apiCreate.info': '定义基本信息',
   'menu.apiGateway.apiCreate.consumer': '定义请求信息',
   'menu.apiGateway.apiCreate.producer': '定义Api后端服务',

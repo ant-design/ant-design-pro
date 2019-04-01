@@ -82,6 +82,13 @@ export default {
   //     pathRewrite: { '^/server': '' },
   //   },
   // },
+  proxy: {
+    '/server/': {
+      target: 'http://10.19.18.49:10401/',
+      changeOrigin: true,
+      pathRewrite: { '^/server/': '/' },
+    },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,

@@ -59,6 +59,11 @@ export default [
             component: './ApiGateway/ApiList',
           },
           {
+            path: '/apiGateway/apiUpdate',
+            name: 'apiUpdate',
+            component: './ApiGateway/ApiUpdate',
+          },
+          {
             path: '/apiGateway/apiCreate',
             name: 'apiCreate',
             component: './ApiGateway/ApiCreate',
@@ -87,11 +92,6 @@ export default [
                 path: '/apiGateway/apiCreate/result',
                 name: 'result',
                 component: './ApiGateway/ApiCreate/Step4',
-              },
-              {
-                path: '/apiGateway/apiCreate/advance',
-                name: 'advance',
-                component: './ApiGateway/ApiCreate/Step5',
               },
             ],
           },
