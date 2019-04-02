@@ -55,7 +55,16 @@ const PageHeaderWrapper = ({
             return (
               <PageHeader
                 wide={contentWidth === 'Fixed'}
-                title={<Title level={4}>{title}</Title>}
+                title={
+                  <Title
+                    level={4}
+                    style={{
+                      marginBottom: 0,
+                    }}
+                  >
+                    {title}
+                  </Title>
+                }
                 key="pageheader"
                 {...restProps}
                 breadcrumb={conversionBreadcrumbList({
