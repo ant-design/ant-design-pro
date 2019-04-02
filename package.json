@@ -78,7 +78,6 @@
     "react-dom": "^16.7.0",
     "react-fittext": "^1.0.0",
     "react-media": "^1.9.2",
-    "serverless-http": "^1.9.1",
     "umi": "^2.4.4",
     "umi-plugin-react": "^1.7.2",
     "umi-request": "^1.0.5"
@@ -123,7 +122,8 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
-    "umi-plugin-ga": "^1.1.3"
+    "umi-plugin-ga": "^1.1.3",
+    "serverless-http": "^1.9.1"
   },
   "optionalDependencies": {
     "puppeteer": "^1.12.1"
