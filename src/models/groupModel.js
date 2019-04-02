@@ -1,4 +1,4 @@
-import { allGroupList } from '../services/groupService';
+import { allGroupList } from '../services/sysDataService';
 
 export default {
   namespace: 'groupModel',

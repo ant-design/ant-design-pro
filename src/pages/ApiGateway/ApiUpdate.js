@@ -62,7 +62,7 @@ const fieldLabels = {
 
 @connect(({ apiCreateModel, loading }) => ({
   apiService:apiCreateModel.apiService,
-  submitting: loading.effects['form/submitAdvancedForm'],
+  submitting: loading.effects['apiCreateModel/submitStepForm'],
 }))
 @Form.create()
 class ApiUpdate extends PureComponent {
@@ -76,7 +76,7 @@ class ApiUpdate extends PureComponent {
     const { dispatch,location } = this.props;
     const {state}=location;
     // console.log("location state:",state);
-    const {apiId}=state || {apiId:17};
+    const {apiId}=state || {apiId:90};
     if (apiId!==-1){
       const payload = {};
       payload.data = {};
@@ -217,6 +217,7 @@ class ApiUpdate extends PureComponent {
       dispatch,
     } = this.props;
     validateFieldsAndScroll((error, values) => {
+      console.log("error in ui======:",error);
       if (!error) {
         console.log("api update submit values:",values);
         const apiInfo = getPayloadForUpdate(apiService,values);

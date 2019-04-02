@@ -2,7 +2,13 @@ import {mapKeys,} from 'lodash';
 
 export function conversion(responseData) {
   let retData=responseData;
-  if(responseData&&responseData.records){
+  if(!responseData){
+    retData= {
+      list: [],
+        pagination: {},
+    }
+  }
+  else if(responseData.records){
     retData = mapKeys(responseData, (value, key) => {
       if (key === 'records') return 'list';
       if (key === 'page'){

@@ -44,7 +44,7 @@ class Step1 extends React.PureComponent {
         }
       });
     };
-    console.log("step1 data:",apiService);
+    // console.log("step1 data:",apiService);
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>

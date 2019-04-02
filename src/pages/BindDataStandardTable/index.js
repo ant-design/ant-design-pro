@@ -43,14 +43,14 @@ const getFormItemArray = (currentProps, type) => {
 };
 const CreateForm = Form.create()(props => {
   const { selectedRow, modalVisible, form, handleAdd, handleModalVisible } = props;
-  console.log('1 selectedRow in CreateForm :', selectedRow);
+  // console.log('1 selectedRow in CreateForm :', selectedRow);
   const {
     columnSchemas: { tableName, key, name },
   } = props;
   const okHandle = () => {
-    console.log('okHandle1');
+    // console.log('okHandle1');
     form.validateFields((err, fieldsValue) => {
-      console.log('okHandle2',fieldsValue);
+      // console.log('okHandle2',fieldsValue);
       if (err) return;
       handleAdd(fieldsValue, form);
     });
@@ -63,11 +63,11 @@ const CreateForm = Form.create()(props => {
     .filter(data => !(`${data.name}` === key && !selectedRow))
     .map(item => {
       const itemTemp = item;
-      // console.log("======:",itemTemp.name === key,key,itemTemp.name);
-      itemTemp.disabled=itemTemp.name === key ? true : false;
+      // // console.log("======:",itemTemp.name === key,key,itemTemp.name);
+      itemTemp.disabled=itemTemp.name === key;
       return itemTemp;
     });
-  console.log('addForm:', addForms);
+  // console.log('addForm:', addForms);
   const modalTitle=selectedRow?"update":"new";
   return (
     <Modal title={modalTitle} visible={modalVisible} onOk={okHandle} onCancel={() => cancelHandle()}>
@@ -125,7 +125,7 @@ class BindDataStandardTable extends PureComponent {
   };
 
   componentWillMount() {
-    console.log('============1componentWillMount========', this.props);
+    // console.log('============1componentWillMount========', this.props);
     const {
       uniComp: { data },
     } = this.props;
@@ -135,7 +135,7 @@ class BindDataStandardTable extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('============2componentDidMount========');
+    // console.log('============2componentDidMount========');
     const {
       dispatch,
       columnSchemas: { tableName },
@@ -202,7 +202,7 @@ class BindDataStandardTable extends PureComponent {
 
     const params = {
       tableName,
-      currentPage: pagination.current,
+      pageNo: pagination.current,
       pageSize: pagination.pageSize,
       ...formValues,
       ...filters,
@@ -233,7 +233,7 @@ class BindDataStandardTable extends PureComponent {
     } = this.props;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
-      // console.log("handlesearch",fieldsValue);
+      // // console.log("handlesearch",fieldsValue);
       const values = {
         tableName,
         ...fieldsValue,
@@ -268,7 +268,7 @@ class BindDataStandardTable extends PureComponent {
 
   handleModify = (row, flag) => {
     const { form } = this.props;
-    console.log('modify===:', flag, this.props, form.getFieldsValue());
+    // console.log('modify===:', flag, this.props, form.getFieldsValue());
     // form.setFieldsValue({orgId: "f", orgCode: "f", name: "f"});
     this.handleModalVisible(row, flag);
   };
@@ -281,7 +281,7 @@ class BindDataStandardTable extends PureComponent {
   };
 
   handleAdd = (fields, addForm) => {
-    console.log('handleAdd:',fields);
+    // console.log('handleAdd:',fields);
     const {
       dispatch,
       columnSchemas: { tableName,key },
@@ -296,8 +296,8 @@ class BindDataStandardTable extends PureComponent {
       type: 'uniComp/save',
       payload,
       callback: resp => {
-        console.log('resp=======', resp);
-        if (resp.code === 200) {
+        // console.log('resp=======', resp);
+        if (resp.code === '200') {
           message.success('提交成功');
           addForm.resetFields();
           this.setState({
@@ -326,13 +326,13 @@ class BindDataStandardTable extends PureComponent {
   handleMenuClick = (e) => {
     const {
       dispatch,
-      columnSchemas: { tableName },
+      columnSchemas: { tableName,key },
     } = this.props;
     const { selectedRows } = this.state;
     if (!selectedRows) return;
     const payload= {
         tableName,
-        ids: selectedRows.map(row => row.id),// .join(','),
+        ids: selectedRows.map(row => row[key]),// .join(','),
     };
     switch (e.key) {
       case 'remove':
@@ -348,7 +348,7 @@ class BindDataStandardTable extends PureComponent {
         break;
     }
 
-    console.log("========uniComp/statusBatch1====");
+    // console.log("========uniComp/statusBatch1====");
     dispatch({
       type: 'uniComp/statusBatch',
       payload,
@@ -356,9 +356,9 @@ class BindDataStandardTable extends PureComponent {
         this.setState({
           selectedRows: [],
         });
+        this.handleSearch();
       },
     });
-    this.handleSearch();
   };
 
   renderForm() {
@@ -369,7 +369,7 @@ class BindDataStandardTable extends PureComponent {
   renderSimpleForm() {
     const { form, columnSchemas } = this.props;
     const { tableName, key, name } = columnSchemas;
-    console.log(tableName, key, name);
+    // console.log(tableName, key, name);
     const { getFieldDecorator } = form;
     const queryForms = getFormItemArray(this.props, 'query');
     const simpleQueryForms = queryForms.splice(

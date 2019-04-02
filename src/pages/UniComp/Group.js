@@ -6,12 +6,12 @@ import { getItems } from '@/utils/masterData';
 const statusList = getItems('common', 'status');
 
 const columnSchemas = {
-  tableName: 'groups',
+  tableName: 'api_group',
   key: 'groupId',
-  name: 'name',
+  name: 'groupName',
   columnDetails: [
     { name: 'groupId', title: 'Group ID', add: true, disabledAct:'true' }, // 第一列需要作为查询条件，新增时不需要采集
-    { name: 'name', title: 'Name', sorter: true, query: true, add: true }, //  需要排序，需要作为查询条件，新增时需要采集
+    { name: 'groupName', title: 'Group Name', sorter: true, query: true, add: true }, //  需要排序，需要作为查询条件，新增时需要采集
     {
       name: 'status',
       title: 'Status',

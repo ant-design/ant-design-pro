@@ -2,54 +2,191 @@
 import {parse} from 'url';
 
 // mock tableListDataSource
-const tableListDataSource = [];
-const groupsDataSource = [];
 const componentDataSource = [];
-const serviceDataSource = [];
 
-function getList(innerTableName) {
-  let dataSource = tableListDataSource;
-  switch (innerTableName) {
-    /* eslint no-case-declarations:0 */
-    case 'groups':
-      dataSource = groupsDataSource;
-      break;
-    case 'component':
-      dataSource = componentDataSource;
-      break;
-    case 'service':
-      dataSource = serviceDataSource;
-      break;
-    default:
-      break;
-  }
-  return dataSource;
-}
-function pushGroups() {
-  const groups = ['语音识别', 'OCR识别', '身份识别', '文本识别'];
-  groups.forEach((value, index) => {
-    groupsDataSource.push({
-      disabled: false,
-      groupId: index,
-      name: value,
-      status:'A',
-    });
-  });
-}
-function pushOrg() {
-  for (let i = 70000; i < 70026; i += 1) {
-    tableListDataSource.push({
-      disabled: i % 6 === 0,
-      id: `${i}`,
-      orgCode: `${i}`,
-      orgName: `Org ${i}`,
-      appKey: `100${i}`,
-      orgType: `${Math.floor(Math.random() * 10) % 3}`,
-      createTime: new Date(`2017-07-${Math.floor((i - 70000) / 2) + 1}`),
-      status:'A',
-    });
-  }
-}
+
+const groups =
+  {
+    "code": "200",
+    "msg": null,
+    "data": [
+      {
+        "groupId": 1,
+        "groupName": "语音识别",
+        "groupDesc": "分组1",
+        "groupApiDoc": "空",
+        "status": null
+      },
+      {
+        "groupId": 2,
+        "groupName": "OCR识别",
+        "groupDesc": "aaaaa",
+        "groupApiDoc": "bbbbbb",
+        "status": null
+      },
+      {
+        "groupId": 5,
+        "groupName": "身份识别",
+        "groupDesc": "aaaaa1",
+        "groupApiDoc": "bbbbbb1",
+        "status": null
+      },
+      {
+        "groupId": 6,
+        "groupName": "文本识别",
+        "groupDesc": null,
+        "groupApiDoc": null,
+        "status": null
+      }
+    ]
+  };
+const orgs={
+  "code": "200",
+  "msg": null,
+  "data": [
+    {
+      "orgType": "1",
+      "password": "StudySC",
+      "orgName": "crm",
+      "tokenExpireTime": 1800,
+      "createTime": "2019-04-02T01:27:14.000+0000",
+      "orgCode": "test21111",
+      "appkey": "bbbbbb2",
+      "id": 1,
+      "authType": 1,
+      "status": "D"
+    },
+    {
+      "orgType": "2",
+      "orgName": "billing",
+      "createTime": "2019-04-02T01:27:17.000+0000",
+      "orgCode": "test2",
+      "appkey": "bbbbbb2",
+      "id": 2,
+      "status": "D"
+    },
+    {
+      "orgType": "2",
+      "orgName": "ose",
+      "createTime": "2019-04-02T01:27:21.000+0000",
+      "orgCode": "test21111",
+      "appkey": "bbbbbb2",
+      "id": 3,
+      "status": "D"
+    },
+    {
+      "orgType": "0",
+      "orgName": "baidu",
+      "createTime": "2019-04-02T01:27:30.000+0000",
+      "orgCode": "abc",
+      "appkey": "bbbbbb2",
+      "id": 4,
+      "status": "D"
+    },
+    {
+      "orgType": "2",
+      "orgName": "facebook",
+      "createTime": "2019-04-02T01:27:38.000+0000",
+      "orgCode": "test2",
+      "appkey": "bbbbbb2",
+      "id": 5,
+      "status": "D"
+    },
+    {
+      "orgType": "0",
+      "orgName": "tdc",
+      "createTime": "2019-04-02T01:27:45.000+0000",
+      "orgCode": "test2",
+      "appkey": "bbbbbb2",
+      "id": 7,
+      "status": "D"
+    },
+    {
+      "orgType": "1",
+      "orgName": "telenor",
+      "createTime": "2019-04-02T01:27:48.000+0000",
+      "orgCode": "test2",
+      "appkey": "bbbbbb2",
+      "id": 8,
+      "status": "D"
+    },
+    {
+      "orgType": "2",
+      "orgName": "sp",
+      "createTime": "2019-04-02T01:27:51.000+0000",
+      "orgCode": "test2",
+      "appkey": "bbbbbb2",
+      "id": 9,
+      "status": "D"
+    },
+    {
+      "orgType": "1",
+      "orgName": "ant",
+      "createTime": "2019-04-02T01:27:57.000+0000",
+      "orgCode": "test111",
+      "appkey": "bbbbbb2",
+      "id": 10,
+      "status": "D"
+    },
+    {
+      "orgType": "2",
+      "orgName": "taobao",
+      "createTime": "2019-04-02T01:28:00.000+0000",
+      "orgCode": "2",
+      "appkey": "bbbbbb2",
+      "id": 11,
+      "status": "A"
+    },
+    {
+      "orgType": "1",
+      "orgName": "jingdong",
+      "createTime": "2019-04-02T01:28:04.000+0000",
+      "orgCode": "abc",
+      "appkey": "bbbbbb2",
+      "id": 12,
+      "status": "A"
+    },
+    {
+      "orgType": "2",
+      "orgName": "dog",
+      "createTime": "2019-04-02T01:28:10.000+0000",
+      "orgCode": "test2",
+      "appkey": "test1",
+      "id": 13,
+      "status": "A"
+    },
+    {
+      "orgType": "1",
+      "orgName": "och",
+      "createTime": "2019-04-02T01:28:38.000+0000",
+      "orgCode": "test2",
+      "appkey": "test1",
+      "id": 14,
+      "status": "A"
+    },
+    {
+      "orgType": "2",
+      "orgName": "tiger",
+      "createTime": "2019-04-02T01:28:22.000+0000",
+      "orgCode": "bbbbbb2_3",
+      "appkey": "bbbbbb2",
+      "id": 15,
+      "status": "A"
+    },
+    {
+      "orgType": "1",
+      "orgName": "stp",
+      "createTime": "2019-04-02T01:28:47.000+0000",
+      "orgCode": "test2",
+      "appkey": "test1",
+      "id": 16,
+      "status": "A"
+    }
+  ]
+};
+const tableListDataSource = orgs.data;
+const groupsDataSource = groups.data;
+
 function pushComponent() {
   componentDataSource.push({
     componentId: 919101,
@@ -81,9 +218,23 @@ function pushComponent() {
     });
   }
 }
-pushOrg();
 pushComponent();
-pushGroups();
+
+function getList(innerTableName) {
+  let dataSource = tableListDataSource;
+  switch (innerTableName) {
+    /* eslint no-case-declarations:0 */
+    case 'groups':
+      dataSource = groupsDataSource;
+      break;
+    case 'component':
+      dataSource = componentDataSource;
+      break;
+    default:
+      break;
+  }
+  return dataSource;
+}
 
 export function sug(req, res, u) {
   console.log('pushOrg');
@@ -346,9 +497,30 @@ export function statusBatch(req, res, u, b) {
   return result;
 }
 
+
+export function getOrgListByType(req, res, u) {
+  let url = u;
+  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+    url = req.url; // eslint-disable-line
+  }
+  const params = parse(url, true).query;
+
+  console.log("getOrgListByType in model", params);
+  const result={...orgs};
+  if (params.orgType) {
+    result.data=orgs.data.filter((item)=>params.orgType.indexOf(item.orgType)!==-1);
+  }
+
+  if (res && res.json) {
+    return res.json(result);
+  }
+  return result;
+}
 export default {
   'POST /baseInfo/sysdata/list': queryList,
   'POST /baseInfo/sysdata/save': save,
   'POST /baseInfo/sysdata/statusBatch': statusBatch,
   'GET /baseInfo/sysdata/sug': sug,
+  'GET /baseInfo/api/allGroupList': groups,
+  'GET /baseInfo/sysdata/orgList': getOrgListByType,
 };

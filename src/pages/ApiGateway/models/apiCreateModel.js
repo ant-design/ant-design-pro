@@ -8,7 +8,7 @@ export default {
 
   state: {
     apiService: {
-      apiServiceBackends:[{},],
+      apiServiceBackends:[{key:-1}],
     },
   },
 
@@ -24,11 +24,12 @@ export default {
       if (callback) callback(response);
     },
     *submitStepForm({ payload }, { call, put }) {
+      console.log("payload in submitStepForm model---:",JSON.stringify(payload));
       const response = yield call(saveApi, payload);
-      console.log("response:",response);
+      console.log("response in submitStepForm model---:",response);
       if(payload.option===1) {
         yield put({
-          type: 'saveStepFormData3',
+          type: 'saveForAddSubmit',
           action:{payload,
           response,},
         });
@@ -69,7 +70,7 @@ export default {
         apiService,
       };
     },
-    saveStepFormData3(state, { action }) {
+    saveForAddSubmit(state, { action }) {
       console.log("action:",action);
       const apiService=action.response&&action.response.code==="200"?{...state.apiService, ...action.response.data,}:{...state.apiService, ...action.payload.data.info.apiService,};
       return {
@@ -85,7 +86,7 @@ export default {
           groupId: 2,
           requestUrl: '/rest/voice',
           // createUser:'Alex',
-          protocol: 'HTTP',
+          protocol: 'http',
           reqMethod: '2',
           apiServiceBackends:[{
           serviceType:'1',

@@ -1,9 +1,13 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Divider } from 'antd';
+import { Form, Input, Button, Divider,Radio } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
 import SelectView from '../SelectView';
+import RadioView from '../RadioView';
+
+const  RadioGroup  = Radio.Group;
+
 
 const formItemLayout = {
   labelCol: {
@@ -38,7 +42,7 @@ class Step2 extends React.PureComponent {
         }
       });
     };
-    // console.log("step2 data:",data);
+    // // console.log("step2 data:",data);
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
@@ -65,6 +69,11 @@ class Step2 extends React.PureComponent {
               initialValue: data.reqMethod,
               rules: [{ required: true, message: '请选择HTTP Method' }],
             })(<SelectView javaCode="common" javaKey="req_mothod" />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="服务类型">
+            {getFieldDecorator('apiType', {
+              rules: [{ required: true, message: '请选择服务类型' }],
+            })(<RadioView javaCode="apiService" javaKey="api_type" />)}
           </Form.Item>
           <Form.Item
             style={{ marginBottom: 8 }}

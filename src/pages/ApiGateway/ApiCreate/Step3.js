@@ -5,6 +5,7 @@ import router from 'umi/router';
 import styles from './style.less';
 import { getPayload } from './util';
 import SelectView from '../SelectView';
+import OrgSelectView from "../OrgSelectView";
 
 const formItemLayout = {
   labelCol: {
@@ -25,7 +26,7 @@ class Step3 extends React.PureComponent {
 
   render() {
     const { form, apiService, dispatch, submitting } = this.props;
-    console.log("apiService.apiServiceBackends:",apiService.apiServiceBackends);
+    // console.log("apiService.apiServiceBackends:",apiService.apiServiceBackends);
     const data = apiService.apiServiceBackends?apiService.apiServiceBackends[0]:[{}];
     const { getFieldDecorator, validateFields } = form;
     const onPrev = () => {
@@ -37,8 +38,8 @@ class Step3 extends React.PureComponent {
         const apiServiceBackend={...data, ...values,};
         const apiServiceBackends=[apiServiceBackend];
         apiService.apiServiceBackends=apiServiceBackends;
-        console.log(apiService);
         const apiInfo = getPayload(1,apiService,apiServiceBackends);
+        // console.log(apiService);
         if (!err) {
           dispatch({
             type: 'apiCreateModel/submitStepForm',
@@ -47,7 +48,7 @@ class Step3 extends React.PureComponent {
         }
       });
     };
-    // console.log("step3 data:",data);
+    // // console.log("step3 data:",data);
     return (
       <Form layout="horizontal" className={styles.stepForm}>
         <Form.Item {...formItemLayout} className={styles.stepFormText} label="api名称：">
@@ -57,6 +58,11 @@ class Step3 extends React.PureComponent {
           {apiService.requestUrl}
         </Form.Item>
         <Divider style={{ margin: '24px 0' }} />
+        <Form.Item {...formItemLayout} label="服务提供者">
+          {getFieldDecorator('orgId', {
+            rules: [{ required: true, message: '请选择服务提供者' }],
+          })(<OrgSelectView orgType="0,2" />)}
+        </Form.Item>
         <Form.Item {...formItemLayout} label="后端服务类型">
           {getFieldDecorator('serviceType', {
             initialValue: data.serviceType,
@@ -65,7 +71,6 @@ class Step3 extends React.PureComponent {
         </Form.Item>
         <Form.Item {...formItemLayout} label="后端请求地址">
           {getFieldDecorator('url', {
-            initialValue: data.url,
             rules: [{ required: true, message: '请输入后端请求地址' }],
           })(<Input placeholder="请输入后端请求地址" />)}
         </Form.Item>
