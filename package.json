@@ -57,8 +57,6 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@types/classnames": "^2.2.7",
-    "@types/react-document-title": "^2.0.3",
     "ant-design-pro": "^2.3.0",
     "antd": "^3.15.0",
     "classnames": "^2.2.6",
@@ -82,8 +80,10 @@
     "umi-request": "^1.0.0"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
     "@types/react": "^16.8.1",
+    "@types/react-document-title": "^2.0.3",
     "@types/react-dom": "^16.0.11",
     "antd-pro-merge-less": "^1.0.0",
     "antd-theme-webpack-plugin": "^1.2.0",
