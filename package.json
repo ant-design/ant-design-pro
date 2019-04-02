@@ -121,7 +121,7 @@
     "stylelint-order": "^2.0.0",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
-    "tslint-react": "^3.6.0",
+    "tslint-react": "^4.0.0",
     "umi-plugin-ga": "^1.1.3",
     "serverless-http": "^1.9.1"
   },
