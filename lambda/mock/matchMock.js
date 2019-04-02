@@ -1,7 +1,7 @@
 const pathToRegexp = require('path-to-regexp');
 const bodyParser = require('body-parser');
 
-const mockFile = require('./mock/index');
+const mockFile = require('./index');
 
 const BODY_PARSED_METHODS = ['post', 'put', 'patch'];
 
@@ -10,13 +10,14 @@ function parseKey(key) {
   let method = 'get';
   let path = key;
   if (key.indexOf(' ') > -1) {
-    const splited = key.split(' ');
-    method = splited[0].toLowerCase();
-    path = splited[1]; // eslint-disable-line
+    const spliced = key.split(' ');
+    method = spliced[0].toLowerCase();
+    path = spliced[1]; // eslint-disable-line
   }
+  const routerBasePath = process.env.NODE_ENV === 'dev' ? `${path}` : `/.netlify/functions${path}`;
   return {
     method,
-    path,
+    path: routerBasePath,
   };
 }
 
