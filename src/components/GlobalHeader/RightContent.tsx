@@ -146,7 +146,7 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
         <NoticeIcon
           className={styles.action}
           count={currentUser && currentUser.unreadCount}
-          onItemClick={(item, tabProps) => {
+          onItemClick={(item: NoticeItem, tabProps: any) => {
             console.log(item, tabProps); // tslint:disable-line no-console
             this.changeReadState(item as NoticeItem);
           }}
