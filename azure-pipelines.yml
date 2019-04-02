@@ -55,6 +55,7 @@ jobs:
       - script: npm run test:all
         env:
           PROGRESS: none
+        displayName: test
       - script: npm run build
         env:
           PROGRESS: none
