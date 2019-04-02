@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'umi/link';
-import { formatMessage } from 'umi/locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import Exception from '@/components/Exception';
 
 export default () => (
