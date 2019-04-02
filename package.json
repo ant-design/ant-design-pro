@@ -67,6 +67,7 @@
     "lodash.isequal": "^4.5.0",
     "memoize-one": "^5.0.0",
     "moment": "^2.22.2",
+    "netlify-lambda": "^1.4.3",
     "omit.js": "^1.0.0",
     "path-to-regexp": "^2.4.0",
     "qs": "^6.7.0",
