@@ -27,7 +27,6 @@
     "lint:prettier": "check-prettier lint",
     "lint:style": "stylelint 'src/**/*.less' --syntax less",
     "lint:ts": "tslint -p . -c tslint.yml",
-    "presite": "cd functions && npm install",
     "prettier": "node ./scripts/prettier.js",
     "start": "cross-env APP_TYPE=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
