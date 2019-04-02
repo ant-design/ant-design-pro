@@ -16,7 +16,7 @@ export async function queryRule(params: any): Promise<any> {
 export async function removeRule(params: any): Promise<any> {
   return request('/api/rule', {
     method: 'POST',
-    body: {
+    data: {
       ...params,
       method: 'delete',
     },
@@ -26,7 +26,7 @@ export async function removeRule(params: any): Promise<any> {
 export async function addRule(params: any): Promise<any> {
   return request('/api/rule', {
     method: 'POST',
-    body: {
+    data: {
       ...params,
       method: 'post',
     },
@@ -36,7 +36,7 @@ export async function addRule(params: any): Promise<any> {
 export async function updateRule(params = {} as any): Promise<any> {
   return request(`/api/rule?${stringify(params.query)}`, {
     method: 'POST',
-    body: {
+    data: {
       ...params.body,
       method: 'update',
     },
@@ -46,7 +46,7 @@ export async function updateRule(params = {} as any): Promise<any> {
 export async function fakeSubmitForm(params: any): Promise<any> {
   return request('/api/forms', {
     method: 'POST',
-    body: params,
+    data: params,
   });
 }
 
@@ -74,7 +74,7 @@ export async function removeFakeList(params: any): Promise<any> {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
-    body: {
+    data: {
       ...restParams,
       method: 'delete',
     },
@@ -85,7 +85,7 @@ export async function addFakeList(params: any): Promise<any> {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
-    body: {
+    data: {
       ...restParams,
       method: 'post',
     },
@@ -96,7 +96,7 @@ export async function updateFakeList(params: any): Promise<any> {
   const { count = 5, ...restParams } = params;
   return request(`/api/fake_list?count=${count}`, {
     method: 'POST',
-    body: {
+    data: {
       ...restParams,
       method: 'update',
     },
@@ -106,14 +106,14 @@ export async function updateFakeList(params: any): Promise<any> {
 export async function fakeAccountLogin(params: any): Promise<any> {
   return request('/api/login/account', {
     method: 'POST',
-    body: params,
+    data: params,
   });
 }
 
 export async function fakeRegister(params: any): Promise<any> {
   return request('/api/register', {
     method: 'POST',
-    body: params,
+    data: params,
   });
 }
 

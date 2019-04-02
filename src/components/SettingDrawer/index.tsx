@@ -31,7 +31,9 @@ interface SettingDrawerProps extends ConnectProps {
   setting?: SettingModelState;
 }
 
-interface SettingDrawerState {}
+interface SettingDrawerState {
+  collapse: boolean;
+}
 
 @connect(({ setting }: { setting: SettingModelState }) => ({ setting }))
 class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {

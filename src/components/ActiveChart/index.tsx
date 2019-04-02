@@ -18,11 +18,10 @@ function getActiveData(): any[] {
   return activeData;
 }
 
-interface ActiveChartProps {}
 interface ActiveChartState {
   activeData: any[];
 }
-export default class ActiveChart extends Component<ActiveChartProps, ActiveChartState> {
+export default class ActiveChart extends Component<any, ActiveChartState> {
   state = {
     activeData: getActiveData(),
   };
