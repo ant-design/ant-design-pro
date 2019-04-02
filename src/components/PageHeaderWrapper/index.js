@@ -1,13 +1,15 @@
 import React from 'react';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
-import { PageHeader, Tabs } from 'antd';
+import { PageHeader, Tabs, Typography } from 'antd';
 import { connect } from 'dva';
 import classNames from 'classnames';
 import GridContent from './GridContent';
 import styles from './index.less';
 import MenuContext from '@/layouts/MenuContext';
 import { conversionBreadcrumbList } from './breadcrumb';
+
+const { Title } = Typography;
 
 /**
  * render Footer tabList
@@ -47,36 +49,38 @@ const PageHeaderWrapper = ({
   return (
     <div style={{ margin: '-24px -24px 0' }} className={classNames(classNames, styles.main)}>
       {top}
-      <MenuContext.Consumer>
-        {value => {
-          return (
-            <PageHeader
-              wide={contentWidth === 'Fixed'}
-              title={title}
-              key="pageheader"
-              {...restProps}
-              breadcrumb={conversionBreadcrumbList({
-                ...value,
-                ...restProps,
-                home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
-              })}
-              className={styles.pageHeader}
-              linkElement={Link}
-              footer={renderFooter(restProps)}
-            >
-              <div className={styles.detail}>
-                {logo && <div className={styles.logo}>{logo}</div>}
-                <div className={styles.main}>
-                  <div className={styles.row}>
-                    {content && <div className={styles.content}>{content}</div>}
-                    {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
+      {title && content && (
+        <MenuContext.Consumer>
+          {value => {
+            return (
+              <PageHeader
+                wide={contentWidth === 'Fixed'}
+                title={<Title level={4}>{title}</Title>}
+                key="pageheader"
+                {...restProps}
+                breadcrumb={conversionBreadcrumbList({
+                  ...value,
+                  ...restProps,
+                  home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
+                })}
+                className={styles.pageHeader}
+                linkElement={Link}
+                footer={renderFooter(restProps)}
+              >
+                <div className={styles.detail}>
+                  {logo && <div className={styles.logo}>{logo}</div>}
+                  <div className={styles.main}>
+                    <div className={styles.row}>
+                      {content && <div className={styles.content}>{content}</div>}
+                      {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </PageHeader>
-          );
-        }}
-      </MenuContext.Consumer>
+              </PageHeader>
+            );
+          }}
+        </MenuContext.Consumer>
+      )}
       {children ? (
         <div className={styles['children-content']}>
           <GridContent>{children}</GridContent>
