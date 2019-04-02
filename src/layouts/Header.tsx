@@ -1,12 +1,12 @@
 import GlobalHeader, { GlobalHeaderProps } from '@/components/GlobalHeader';
 import TopNavHeader, { TopNavHeaderProps } from '@/components/TopNavHeader';
 import { ConnectProps, ConnectState, SettingModelState } from '@/models/connect';
+import React, { Component } from 'react';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { Layout, message } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import { connect } from 'dva';
 import Animate from 'rc-animate';
-import React, { Component } from 'react';
-import { formatMessage } from 'umi-plugin-locale';
 import router from 'umi/router';
 import styles from './Header.less';
 
@@ -25,10 +25,6 @@ interface HeaderViewState {
 }
 
 class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
-  static defaultProps: Partial<HeaderViewProps> = {
-    handleMenuCollapse: () => void 0,
-  };
-
   static getDerivedStateFromProps(props: HeaderViewProps, state: HeaderViewState) {
     if (!props.autoHideHeader && !state.visible) {
       return {
@@ -37,12 +33,12 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
     }
     return null;
   }
+  state = {
+    visible: true,
+  };
 
   ticking: boolean = false;
   oldScrollTop: number = 0;
-  state: HeaderViewState = {
-    visible: true,
-  };
 
   componentDidMount() {
     document.addEventListener('scroll', this.handScroll, { passive: true });

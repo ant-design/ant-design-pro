@@ -4,7 +4,7 @@ import { Effect } from 'dva';
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import { Reducer } from 'redux';
-import { formatMessage } from 'umi-plugin-locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { IRoute } from 'umi-types';
 import defaultSettings from '../../config/defaultSettings';
 

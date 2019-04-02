@@ -1,7 +1,7 @@
 import { ConnectProps, ConnectState, SettingModelState } from '@/models/connect';
 import React, { Component } from 'react';
 import { Select, message, Drawer, List, Switch, Divider, Icon, Button, Alert, Tooltip } from 'antd';
-import { formatMessage } from 'umi-plugin-locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { connect } from 'dva';
 import omit from 'omit.js';
@@ -152,10 +152,18 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
         placement="right"
         handler={
           <div className={styles.handle} onClick={this.togglerContent}>
-            <Icon type={collapse ? 'close' : 'setting'} style={{ color: '#fff', fontSize: 20 }} />
+            <Icon
+              type={collapse ? 'close' : 'setting'}
+              style={{
+                color: '#fff',
+                fontSize: 20,
+              }}
+            />
           </div>
         }
-        style={{ zIndex: 999 }}
+        style={{
+          zIndex: 999,
+        }}
       >
         <div className={styles.content}>
           <Body title={formatMessage({ id: 'app.setting.pagestyle' })}>
@@ -213,18 +221,22 @@ class SettingDrawer extends Component<SettingDrawerProps, SettingDrawerState> {
           <Divider />
 
           <Body title={formatMessage({ id: 'app.setting.othersettings' })}>
-            <List.Item
-              actions={[
-                <Switch
-                  key="Switch"
-                  size="small"
-                  checked={!!colorWeak}
-                  onChange={checked => this.changeSetting('colorWeak', checked)}
-                />,
+            <List
+              split={false}
+              renderItem={this.renderLayoutSettingItem}
+              dataSource={[
+                {
+                  title: formatMessage({ id: 'app.setting.weakmode' }),
+                  action: (
+                    <Switch
+                      size="small"
+                      checked={!!colorWeak}
+                      onChange={checked => this.changeSetting('colorWeak', checked)}
+                    />
+                  ),
+                },
               ]}
-            >
-              {formatMessage({ id: 'app.setting.weakmode' })}
-            </List.Item>
+            />
           </Body>
           <Divider />
           <CopyToClipboard

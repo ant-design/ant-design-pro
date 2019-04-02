@@ -1,5 +1,5 @@
 // https://umijs.org/config/
-// import os from 'os';
+import os from 'os';
 import slash from 'slash2';
 import { IPlugin, IConfig } from 'umi-types';
 import defaultSettings from './defaultSettings';
@@ -26,12 +26,23 @@ const plugins: IPlugin[] = [
         webpackChunkName: true,
         level: 3,
       },
-      pwa: {
-        workboxPluginMode: 'InjectManifest',
-        workboxOptions: {
-          importWorkboxFrom: 'local',
-        },
-      },
+      pwa: pwa
+        ? {
+            workboxPluginMode: 'InjectManifest',
+            workboxOptions: {
+              importWorkboxFrom: 'local',
+            },
+          }
+        : false,
+      ...(!TEST && os.platform() === 'darwin'
+        ? {
+            dll: {
+              include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+              exclude: ['@babel/runtime'],
+            },
+            hardSource: false,
+          }
+        : {}),
     },
   ],
   [
@@ -102,10 +113,6 @@ export default {
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': primaryColor,
-  },
-  externals: {
-    '@antv/data-set': 'DataSet',
-    bizcharts: 'BizCharts',
   },
   // proxy: {
   //   '/server/api/': {

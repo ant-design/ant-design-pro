@@ -36,6 +36,7 @@ files.forEach(file => {
       console.log(chalk.green(`${file} is prettier`));
     }
   } catch (e) {
+    console.log(e);
     didError = true;
   }
 });
