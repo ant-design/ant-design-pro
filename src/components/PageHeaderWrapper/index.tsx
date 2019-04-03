@@ -7,7 +7,7 @@ import GridContent from './GridContent';
 import ConnectState from '@/models/connect';
 import { ContentWidth } from 'config/defaultSettings';
 import styles from './index.less';
-import { conversionBreadcrumbList } from './breadcrumb';
+import { conversionBreadcrumbList } from './Breadcrumb';
 import { MenuDataItem } from '../SiderMenu';
 import * as H from 'history';
 
@@ -81,7 +81,18 @@ class PageHeaderWrapper extends React.Component<PageHeaderWrapperProps> {
       extraContent,
       ...restProps
     } = this.mergePropsAndChildren();
-    if (!title && !content) {
+    let pageTitle = title;
+    const breadcrumb = conversionBreadcrumbList({
+      ...restProps,
+      home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
+    });
+    if (!title && breadcrumb.routes) {
+      const router = breadcrumb.routes[breadcrumb.routes.length - 1];
+      if (router) {
+        pageTitle = router.breadcrumbName;
+      }
+    }
+    if (!pageTitle && !content) {
       return;
     }
     return (
@@ -93,14 +104,11 @@ class PageHeaderWrapper extends React.Component<PageHeaderWrapperProps> {
               marginBottom: 0,
             }}
           >
-            {title}
+            {pageTitle}
           </Title>
         }
         {...restProps}
-        breadcrumb={conversionBreadcrumbList({
-          ...restProps,
-          home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
-        })}
+        breadcrumb={breadcrumb}
         className={styles.pageHeader}
         footer={renderFooter(restProps)}
       >
@@ -117,10 +125,9 @@ class PageHeaderWrapper extends React.Component<PageHeaderWrapperProps> {
     );
   };
   render() {
-    const { children, top } = this.mergePropsAndChildren();
+    const { children } = this.mergePropsAndChildren();
     return (
       <div style={{ margin: '-24px -24px 0' }} className={classNames(classNames, styles.main)}>
-        {top}
         {this.renderPageHeader()}
         {children ? (
           <div className={styles['children-content']}>
