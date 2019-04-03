@@ -5,7 +5,7 @@
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
-    "build": "umi build",
+    "build": "umi build && npm run functions:build",
     "dev": "cross-env APP_TYPE=site umi dev",
     "dev:no-mock": "cross-env MOCK=none umi dev",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
@@ -73,9 +73,13 @@
     "react-container-query": "^0.11.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",
+    "react-dom": "^16.7.0",
+    "react-fittext": "^1.0.0",
+    "react-media": "^1.9.2",
     "react-media-hook2": "^1.0.2",
     "umi": "^2.6.10",
-    "umi-request": "^1.0.0"
+    "umi-plugin-react": "^1.7.2",
+    "umi-request": "^1.0.5"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",
@@ -110,6 +114,7 @@
     "mockjs": "^1.0.1-beta3",
     "netlify-lambda": "^1.4.3",
     "prettier": "^1.16.4",
+    "serverless-http": "^1.9.1",
     "slash2": "^2.0.0",
     "stylelint": "^9.10.1",
     "stylelint-config-css-modules": "^1.3.0",
