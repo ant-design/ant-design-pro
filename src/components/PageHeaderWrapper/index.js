@@ -16,11 +16,11 @@ const { Title } = Typography;
  * In order to be compatible with the old version of the PageHeader
  * basically all the functions are implemented.
  */
-const renderFooter = ({ tabList, activeKeyProps, onTabChange, tabBarExtraContent }) => {
+const renderFooter = ({ tabList, tabActiveKey, onTabChange, tabBarExtraContent }) => {
   return tabList && tabList.length ? (
     <Tabs
       className={styles.tabs}
-      {...activeKeyProps}
+      activeKey={tabActiveKey}
       onChange={key => {
         if (onTabChange) {
           onTabChange(key);
