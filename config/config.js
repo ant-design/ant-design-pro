@@ -5,7 +5,7 @@ import defaultSettings from '../src/defaultSettings';
 import slash from 'slash2';
 
 const { pwa, primaryColor } = defaultSettings;
-const { NODE_ENV, APP_TYPE, TEST } = process.env;
+const { APP_TYPE, TEST } = process.env;
 
 const plugins = [
   [
@@ -37,12 +37,12 @@ const plugins = [
               importWorkboxFrom: 'local',
             },
           }
-        : {},
+        : false,
       ...(!TEST && os.platform() === 'darwin'
         ? {
             dll: {
               include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-              exclude: ['@babel/runtime'],
+              exclude: ['@babel/runtime', 'netlify-lambda'],
             },
             hardSource: false,
           }
@@ -90,10 +90,6 @@ export default {
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': primaryColor,
-  },
-  externals: {
-    '@antv/data-set': 'DataSet',
-    bizcharts: 'BizCharts',
   },
   // proxy: {
   //   '/server/api/': {

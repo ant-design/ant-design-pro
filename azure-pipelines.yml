@@ -52,6 +52,10 @@ jobs:
         displayName: install
       - script: npm run lint
         displayName: lint
+      - script: npm run test:all
+        env:
+          PROGRESS: none
+        displayName: test
       - script: npm run build
         env:
           PROGRESS: none

@@ -1,7 +1,9 @@
-import React from 'react';
 import { Spin } from 'antd';
+import isEqual from 'lodash/isEqual';
+import React from 'react';
+import { isComponentClass } from './Secured';
 
-export default class PromiseRender extends React.PureComponent {
+export default class PromiseRender extends React.Component {
   state = {
     component: null,
   };
@@ -10,10 +12,14 @@ export default class PromiseRender extends React.PureComponent {
     this.setRenderComponent(this.props);
   }
 
-  componentDidUpdate(nextProps) {
-    // new Props enter
-    this.setRenderComponent(nextProps);
-  }
+  shouldComponentUpdate = (nextProps, nextState) => {
+    const { component } = this.state;
+    if (!isEqual(nextProps, this.props)) {
+      this.setRenderComponent(nextProps);
+    }
+    if (nextState.component !== component) return true;
+    return false;
+  };
 
   // set render Component : ok or error
   setRenderComponent(props) {
@@ -37,8 +43,12 @@ export default class PromiseRender extends React.PureComponent {
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
   checkIsInstantiation = target => {
-    if (!React.isValidElement(target)) {
-      return target;
+    if (isComponentClass(target)) {
+      const Target = target;
+      return props => <Target {...props} />;
+    }
+    if (React.isValidElement(target)) {
+      return props => React.cloneElement(target, props);
     }
     return () => target;
   };

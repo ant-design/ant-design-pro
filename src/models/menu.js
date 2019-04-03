@@ -1,6 +1,6 @@
 import memoizeOne from 'memoize-one';
 import isEqual from 'lodash/isEqual';
-import { formatMessage } from 'umi/locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import { menu } from '../defaultSettings';
 import { queryMenu } from '@/services/user';
@@ -9,6 +9,9 @@ const { check } = Authorized;
 
 // Conversion router to menu.
 function formatter(data, parentAuthority, parentName) {
+  if (!data) {
+    return undefined;
+  }
   return data
     .map(item => {
       if (!item.name || !item.path) {
@@ -16,7 +19,7 @@ function formatter(data, parentAuthority, parentName) {
       }
 
       let locale = 'menu';
-      if (parentName) {
+      if (parentName && parentName !== '/') {
         locale = `${parentName}.${item.name}`;
       } else {
         locale = `menu.${item.name}`;
@@ -76,6 +79,9 @@ const filterMenuData = menuData => {
  * @param {Object} menuData 菜单配置
  */
 const getBreadcrumbNameMap = menuData => {
+  if (!menuData) {
+    return {};
+  }
   const routerMap = {};
 
   const flattenMenuData = data => {

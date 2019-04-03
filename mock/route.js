@@ -192,6 +192,25 @@ export default {
           },
         ],
       },
+      {
+        name: 'editor',
+        icon: 'highlight',
+        path: '/editor',
+        routes: [
+          {
+            path: '/editor/flow',
+            name: 'flow',
+          },
+          {
+            path: '/editor/mind',
+            name: 'mind',
+          },
+          {
+            path: '/editor/koni',
+            name: 'koni',
+          },
+        ],
+      },
     ],
   },
 };

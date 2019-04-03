@@ -53,5 +53,10 @@
     "path": "/account/settings",
     "exact": true,
     "redirect": "/account/settings/baseview"
+  },
+  {
+    "path": "/editor",
+    "exact": true,
+    "redirect": "/deitor/flow"
   }
 ]

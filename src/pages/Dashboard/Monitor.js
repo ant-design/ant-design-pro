@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { AsyncLoadBizCharts } from '@/components/Charts/AsyncLoadBizCharts';
 import { connect } from 'dva';
-import { formatMessage, FormattedMessage } from 'umi/locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import { Row, Col, Card, Tooltip } from 'antd';
 import { Pie, WaterWave, Gauge, TagCloud } from '@/components/Charts';
 import NumberInfo from '@/components/NumberInfo';
@@ -242,8 +241,4 @@ class Monitor extends Component {
   }
 }
 
-export default props => (
-  <AsyncLoadBizCharts>
-    <Monitor {...props} />
-  </AsyncLoadBizCharts>
-);
+export default Monitor;
