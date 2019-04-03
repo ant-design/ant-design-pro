@@ -93,7 +93,7 @@ export const conversionBreadcrumbList = props => {
   const { breadcrumbList } = props;
   const { routes, params, routerLocation, breadcrumbNameMap } = getBreadcrumbProps(props);
   if (breadcrumbList && breadcrumbList.length) {
-    return conversionFromProps();
+    return conversionFromProps(props);
   }
   // 如果传入 routes 和 params 属性
   // If pass routes and params attributes
