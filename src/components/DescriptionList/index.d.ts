@@ -1,15 +1,17 @@
-import * as React from 'react';
-import Description from './Description';
+import React from 'react';
+import Description, { DescriptionProps } from './Description';
 
-export interface IDescriptionListProps {
-  layout?: 'horizontal' | 'vertical';
+export interface DescriptionListProps {
+  className?: string;
   col?: number;
-  title: React.ReactNode;
+  description?: DescriptionProps[];
   gutter?: number;
+  layout?: 'horizontal' | 'vertical';
   size?: 'large' | 'small';
   style?: React.CSSProperties;
+  title?: React.ReactNode;
 }
 
-export default class DescriptionList extends React.Component<IDescriptionListProps, any> {
+export default class DescriptionList extends React.Component<DescriptionListProps, any> {
   public static Description: typeof Description;
 }

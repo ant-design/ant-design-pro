@@ -33,12 +33,12 @@ const plugins = [
               importWorkboxFrom: 'local',
             },
           }
-        : {},
+        : false,
       ...(!TEST && os.platform() === 'darwin'
         ? {
             dll: {
               include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-              exclude: ['@babel/runtime'],
+              exclude: ['@babel/runtime', 'netlify-lambda'],
             },
             hardSource: false,
           }

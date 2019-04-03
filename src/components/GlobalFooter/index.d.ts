@@ -1,5 +1,5 @@
-import * as React from 'react';
-export interface IGlobalFooterProps {
+import React from 'react';
+export interface GlobalFooterProps {
   links?: Array<{
     key?: string;
     title: React.ReactNode;
@@ -8,6 +8,7 @@ export interface IGlobalFooterProps {
   }>;
   copyright?: React.ReactNode;
   style?: React.CSSProperties;
+  className?: string;
 }
 
-export default class GlobalFooter extends React.Component<IGlobalFooterProps, any> {}
+export default class GlobalFooter extends React.Component<GlobalFooterProps, any> {}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { formatMessage } from 'umi/locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { Layout, message } from 'antd';
 import Animate from 'rc-animate';
 import { connect } from 'dva';
@@ -120,7 +120,10 @@ class HeaderView extends Component {
     const isTop = layout === 'topmenu';
     const width = this.getHeadWidth();
     const HeaderDom = visible ? (
-      <Header style={{ padding: 0, width }} className={fixedHeader ? styles.fixedHeader : ''}>
+      <Header
+        style={{ padding: 0, width, zIndex: 2 }}
+        className={fixedHeader ? styles.fixedHeader : ''}
+      >
         {isTop && !isMobile ? (
           <TopNavHeader
             theme={navTheme}
