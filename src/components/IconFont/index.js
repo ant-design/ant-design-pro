@@ -1,7 +1,8 @@
 import { Icon } from 'antd';
-import Setting from '@/utils/readSetting';
+import Settings from '@config/readSetting';
 
+const scriptUrl = Settings.get('iconfontUrl');
 // 使用：
 // import IconFont from '@/components/IconFont';
 // <IconFont type='icon-demo' className='xxx-xxx' />
-export default Icon.createFromIconfontCN({ scriptUrl: Setting.iconfontUrl });
+export default Icon.createFromIconfontCN({ scriptUrl });

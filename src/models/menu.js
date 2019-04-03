@@ -2,9 +2,10 @@ import memoizeOne from 'memoize-one';
 import isEqual from 'lodash/isEqual';
 import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
-import Setting from '@/utils/readSetting';
+import Settings from '@config/readSetting';
 
-const { menu } = Setting;
+const menu = Settings.get('menu');
+
 const { check } = Authorized;
 
 // Conversion router to menu.

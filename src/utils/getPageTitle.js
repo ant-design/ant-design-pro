@@ -2,9 +2,10 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import pathToRegexp from 'path-to-regexp';
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
-import Setting from './readSetting';
+import Settings from '@config/readSetting';
 
-const { title, menu } = Setting;
+const title = Settings.get('title');
+const menu = Settings.get('menu');
 
 export const matchParamsPath = (pathname, breadcrumbNameMap) => {
   const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));

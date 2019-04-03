@@ -1,11 +1,11 @@
 // https://umijs.org/config/
 import os from 'os';
+import path from 'path';
 import pageRoutes from './router.config';
 import webpackPlugin from './plugin.config';
-import Settings from '../src/utils/readSetting';
+import Setting from './readSetting';
 import slash from 'slash2';
 
-const { pwa, primaryColor } = Settings;
 const { APP_TYPE, TEST } = process.env;
 
 const plugins = [
@@ -26,7 +26,7 @@ const plugins = [
         webpackChunkName: true,
         level: 3,
       },
-      pwa: pwa
+      pwa: Setting.get('pwa')
         ? {
             workboxPluginMode: 'InjectManifest',
             workboxOptions: {
@@ -73,7 +73,7 @@ export default {
   // Theme for antd
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
-    'primary-color': primaryColor,
+    'primary-color': Setting.get('primaryColor'),
   },
   // proxy: {
   //   '/server/api/': {
@@ -85,6 +85,9 @@ export default {
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
+  },
+  alias: {
+    '@config': path.resolve(__dirname, './'),
   },
   disableRedirectHoist: true,
   cssLoaderOptions: {
