@@ -12,7 +12,7 @@ import logo from '../assets/logo.svg';
 import styles from './BasicLayout.less';
 import Footer from './Footer';
 import Header, { HeaderViewProps } from './Header';
-import Context from './MenuContext';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 // lazy load SettingDrawer
 const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
@@ -90,7 +90,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   // unless it is deployed in preview.pro.ant.design as demo
   const renderSettingDrawer = () =>
     !(process.env.NODE_ENV === 'production' && APP_TYPE !== 'site') && <SettingDrawer />;
-
   const layout = (
     <Layout>
       {PropsLayout === 'topmenu' && !isMobile ? null : (
@@ -117,7 +116,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           {...props}
         />
         <Content className={styles.content} style={!fixedHeader ? { paddingTop: 0 } : {}}>
-          {children}
+          <PageHeaderWrapper location={location} breadcrumbNameMap={breadcrumbNameMap}>
+            {children}
+          </PageHeaderWrapper>
         </Content>
         <Footer />
       </Layout>
@@ -127,11 +128,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     <React.Fragment>
       <DocumentTitle title={getPageTitle(location!.pathname, breadcrumbNameMap)}>
         <ContainerQuery query={query}>
-          {params => (
-            <Context.Provider value={{ location, breadcrumbNameMap }}>
-              <div className={classNames(params)}>{layout}</div>
-            </Context.Provider>
-          )}
+          {params => <div className={classNames(params)}>{layout}</div>}
         </ContainerQuery>
       </DocumentTitle>
       <Suspense fallback={null}>{renderSettingDrawer()}</Suspense>
