@@ -9,7 +9,7 @@ describe('Homepage', () => {
     const params = '/form/basic-form?navTheme=light&layout=topmenu';
     await page.goto(`${BASE_URL}${params}`);
     await page.waitForSelector('footer', {
-      timeout: 2000,
+      timeout: 3000,
     });
     const haveFooter = await page.evaluate(
       () => document.getElementsByTagName('footer').length > 0,
