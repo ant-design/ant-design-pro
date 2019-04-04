@@ -7,7 +7,7 @@ import GridContent from './GridContent';
 import ConnectState from '@/models/connect';
 import { ContentWidth } from 'config/defaultSettings';
 import styles from './index.less';
-import { conversionBreadcrumbList } from './Breadcrumb';
+import { conversionBreadcrumbList } from './breadcrumb';
 import { MenuDataItem } from '../SiderMenu';
 import * as H from 'history';
 
