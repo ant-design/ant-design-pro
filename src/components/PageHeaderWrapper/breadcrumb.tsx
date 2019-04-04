@@ -92,7 +92,8 @@ const conversionFromLocation = (
       return name && !hideInBreadcrumb
         ? {
             path: url,
-            breadcrumbName: name,
+            // wrong type definition from antd
+            breadcrumbName: name as string,
           }
         : { path: '', breadcrumbName: '' };
     })
@@ -101,7 +102,7 @@ const conversionFromLocation = (
   if (home) {
     extraBreadcrumbItems.unshift({
       path: '/',
-      breadcrumbName: home,
+      breadcrumbName: home as string,
     });
   }
   return extraBreadcrumbItems;

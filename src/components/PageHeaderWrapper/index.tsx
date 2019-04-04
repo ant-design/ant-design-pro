@@ -46,7 +46,7 @@ export interface PageHeaderWrapperProps {
   action?: React.ReactNode | string;
   content?: React.ReactNode;
   extraContent?: React.ReactNode;
-  breadcrumbList?: Array<{ title: string | number; href: string }>;
+  breadcrumbList?: Array<{ title: string; href: string }>;
   tabList?: Array<{ key: string; tab: React.ReactNode }>;
   tabActiveKey?: string;
   onTabChange?: (key: string) => void;
