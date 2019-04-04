@@ -12,6 +12,7 @@ export default {
   'menu.test.test2': '测试页面2',
   'menu.test.test3': '测试页面3',
   'menu.test.test4': '测试页面4',
+  'menu.test.orgTransfer': 'Transfer组件',
   'menu.uniComp': '基础配置',
   'menu.uniComp.org': '接入系统管理',
   'menu.uniComp.group': '分组管理',

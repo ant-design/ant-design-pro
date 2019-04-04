@@ -88,6 +88,14 @@ const apiInfoDetail={
         backendType: 'out',
         url: 'com.ai.odc.changeParam',
       },
+    ],
+    apiServiceOrgs:[
+      {
+        "id":1,
+        "apiId":90,
+        "appkey":"000001",
+        "status":"A"
+      }
     ]
   }
 }

@@ -8,13 +8,14 @@ export default {
   },
 
   effects: {
-    *allOrgList({ payload }, { call, put }) {
+    *allOrgList({ payload ,callback}, { call, put }) {
       const response = yield call(orgList, payload);
       console.log("response in org model:",response);
       yield put({
         type: 'save',
         payload: response,
       });
+      if (callback) callback(response);
     },
   },
   reducers: {

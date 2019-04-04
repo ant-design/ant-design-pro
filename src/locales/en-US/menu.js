@@ -12,6 +12,7 @@ export default {
   'menu.test.test2': 'Test Page2',
   'menu.test.test3': 'Test Page3',
   'menu.test.test4': 'Test Page4',
+  'menu.test.orgTransfer': 'Transfer Component',
   'menu.uniComp': 'Configuration',
   'menu.uniComp.org': 'System',
   'menu.uniComp.group': 'Group',

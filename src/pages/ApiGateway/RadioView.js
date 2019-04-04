@@ -15,6 +15,14 @@ class RadioView extends PureComponent {
     this.setState({innerValue: value});
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {value} = this.props;
+    const {value:nextValue} = nextProps;
+    if (nextValue&&value !== nextValue) {
+      this.setState({innerValue: nextValue});
+    }
+  }
+
   onChange = (e) => {
     console.log('radio checked', e.target.value);
     this.setState({
@@ -52,9 +60,9 @@ class RadioView extends PureComponent {
   render() {
     // const value = this.conversionObject();
     const {innerValue}=this.state;
-    // console.log("value:",value);
+    const {style}=this.props;
     return (
-      <RadioGroup onChange={this.onChange} value={innerValue}>
+      <RadioGroup onChange={this.onChange} value={innerValue} style={style}>
         {this.getRadio()}
       </RadioGroup>
     );

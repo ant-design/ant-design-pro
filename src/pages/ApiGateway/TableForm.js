@@ -214,7 +214,7 @@ class TableForm extends PureComponent {
         key: 'backendType',
         width: '20%',
         render: (text, record) => {
-          console.log("----------",text);
+          // console.log("----------",text);
           if (record.editable&&(text===null||text.toLowerCase()!=='endpoint')) {
             return (
               <Select
@@ -242,7 +242,7 @@ class TableForm extends PureComponent {
         dataIndex: 'serviceSeq',
         key: 'serviceSeq',
         defaultSortOrder: 'ascend',
-        sorter: (a, b) => a.serviceSeq > b.serviceSeq,
+        sorter: (a, b) => a.serviceSeq - b.serviceSeq,
         width: '20%',
         render: (text, record) => {
           if (record.editable) {
@@ -329,7 +329,7 @@ class TableForm extends PureComponent {
     ];
 
     const { loading, data } = this.state;
-
+    console.log("--------data in TableForm:",data);
     return (
       <Fragment>
         <Table

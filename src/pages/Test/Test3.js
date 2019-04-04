@@ -1,43 +1,82 @@
-/* 主数据测试 */
-// react页面必须引入的组件
 import React, { PureComponent } from 'react';
-// 引入面包屑导航组件
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import { setAllEnumData, getItem } from '@/utils/masterData';
+import { Transfer, Switch } from 'antd';
+import TableList from "./Test2";
 
-setAllEnumData();
-// const allEnum=getAllEnumData();
-const status = getItem('apiService', 'status', '1');
-class EnumTest extends PureComponent {
-  // state={
-  //   data: [],
-  // }
+const mockData = [];
+for (let i = 0; i < 20; i++) {
+  mockData.push({
+    key: i.toString(),
+    title: `content${i + 1}`,
+    description: `description of content${i + 1}`,
+    disabled: i % 3 < 1,
+  });
+}
 
-  componentWillMount() {
-    console.log('componentWillMount');
-    // this.setState({
-    //   data: allEnum
-    // });
+const oriTargetKeys = mockData
+  .filter(item => +item.key % 3 > 1)
+  .map(item => item.key);
+
+class OrgTransfer1 extends PureComponent {
+  state = {
+    targetKeys: oriTargetKeys,
+    selectedKeys: [],
+    disabled: false,
   }
 
-  componentDidMount() {
-    console.log('componentDidMount');
+  handleChange = (nextTargetKeys, direction, moveKeys) => {
+    this.setState({ targetKeys: nextTargetKeys });
 
-    // this.setState({
-    //   data: allEnum
-    // });
+    console.log('targetKeys: ', nextTargetKeys);
+    console.log('direction: ', direction);
+    console.log('moveKeys: ', moveKeys);
   }
+
+  handleSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
+    this.setState({ selectedKeys: [...sourceSelectedKeys, ...targetSelectedKeys] });
+
+    console.log('sourceSelectedKeys: ', sourceSelectedKeys);
+    console.log('targetSelectedKeys: ', targetSelectedKeys);
+  }
+
+  handleScroll = (direction, e) => {
+    console.log('direction:', direction);
+    console.log('target:', e.target);
+  }
+
+  handleDisable = (disabled) => {
+    this.setState({ disabled });
+  };
+
+  setKey = (record) => {
+    return record.title;
+  };
 
   render() {
-    console.log('render');
+    const { targetKeys, selectedKeys, disabled } = this.state;
     return (
-      <PageHeaderWrapper>
-        <div>
-          This is Test Table Page
-          <div id="data">获取缓存数据(apiService.statusName):{status.itemValue}</div>
-        </div>
-      </PageHeaderWrapper>
+      <div>
+        <Transfer
+          rowKey={this.setKey}
+          dataSource={mockData}
+          titles={['Source', 'Target']}
+          targetKeys={targetKeys}
+          selectedKeys={selectedKeys}
+          onChange={this.handleChange}
+          onSelectChange={this.handleSelectChange}
+          onScroll={this.handleScroll}
+          render={item => item.title}
+          disabled={disabled}
+        />
+        <Switch
+          unCheckedChildren="disabled"
+          checkedChildren="disabled"
+          checked={disabled}
+          onChange={this.handleDisable}
+          style={{ marginTop: 16 }}
+        />
+      </div>
     );
   }
 }
-export default EnumTest;
+
+export default OrgTransfer1;

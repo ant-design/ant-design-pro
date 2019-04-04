@@ -267,7 +267,6 @@ class BindDataStandardTable extends PureComponent {
   };
 
   handleModify = (row, flag) => {
-    const { form } = this.props;
     // console.log('modify===:', flag, this.props, form.getFieldsValue());
     // form.setFieldsValue({orgId: "f", orgCode: "f", name: "f"});
     this.handleModalVisible(row, flag);

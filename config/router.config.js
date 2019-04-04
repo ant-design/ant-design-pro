@@ -146,6 +146,11 @@ export default [
             name: 'test4',
             component: './Test/Test4',
           },
+          {
+            path: '/test/orgTransfer',
+            name: 'orgTransfer',
+            component: './Test/OrgTransfer',
+          },
         ],
       },
       // forms

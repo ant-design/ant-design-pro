@@ -28,3 +28,17 @@ export function getPayloadForUpdate(oldApiService,values) {
     },
   };
 }
+
+export function getPayloadForAccess(selectedRow,apiServiceOrgs) {
+  const {apiServiceBackends,apiServiceOrgs:oriApiServiceOrgs,...apiService} = {...selectedRow};
+  return {
+    option:8, // 1-新增记录 2-修改记录,8-授权
+    data: {
+      info: {
+        apiService,
+        apiServiceBackends,
+        apiServiceOrgs,
+      },
+    },
+  };
+}

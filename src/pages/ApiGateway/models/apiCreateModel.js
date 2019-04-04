@@ -8,7 +8,8 @@ export default {
 
   state: {
     apiService: {
-      apiServiceBackends:[{key:-1}],
+      apiServiceBackends:[],
+      apiServiceOrgs:[],
     },
   },
 
@@ -21,6 +22,13 @@ export default {
         type: 'initData',
         payload: response,
       });
+      if (callback) callback(response);
+    },
+    *submitAccess({ payload,callback }, { call }) {
+      console.log("-------------1");
+      const response = yield call(saveApi, payload);
+      console.log("-------------2");
+      console.log("response in submitAccess model---:",response);
       if (callback) callback(response);
     },
     *submitStepForm({ payload }, { call, put }) {

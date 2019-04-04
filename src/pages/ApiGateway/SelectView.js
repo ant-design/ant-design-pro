@@ -52,10 +52,10 @@ class SelectView extends PureComponent {
 
   render() {
     // const value = this.conversionObject();
-    const { value } = this.props;
+    const { value,style } = this.props;
     // console.log("value:",value);
     return (
-      <Select value={value} onSelect={this.selectChangeItem}>
+      <Select value={value} onSelect={this.selectChangeItem} style={style}>
         {this.getOption()}
       </Select>
     );

@@ -17,6 +17,7 @@ import {
   message,
   Badge,
   Divider,
+  Modal,
 } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -25,6 +26,8 @@ import styles from './ApiList.less';
 import constants from '@/utils/constUtil';
 import { getGroupName, getItems, getItemValue2 } from '@/utils/masterData';
 import SelectView from './SelectView';
+import OrgTransfer from "../Test/OrgTransfer";
+import {getPayloadForAccess} from "./ApiCreate/util";
 
 const { ACT, API_STATUS } = constants;
 
@@ -41,9 +44,10 @@ const statusFilter = statusList.map(item => ({
   value: item.itemCode,
   text: item.itemValue,
 }));
+
 /* eslint react/no-multi-comp:0 */
-@connect(({ apiGatewayModel, groupModel, loading }) => ({
-  apiGatewayModel,
+@connect(({ apiGatewayModel,apiCreateModel, groupModel, loading }) => ({
+  apiGatewayModel,apiCreateModel,
   groupList: groupModel.groupList,
   loading: loading.models.apiGatewayModel,
 }))
@@ -52,6 +56,8 @@ class TableList extends PureComponent {
   state = {
     expandForm: false,
     selectedRows: [],
+    selectedRow:{},
+    updateApiServiceOrg:[],
     formValues: {},
     pagination: {
       "pageNo":1,
@@ -59,6 +65,7 @@ class TableList extends PureComponent {
     },
     filtersArg: {},
     sorter: {},
+    modalVisible:false,
   };
 
   componentDidMount() {
@@ -154,7 +161,7 @@ class TableList extends PureComponent {
             </span>
             <a onClick={() => this.handleUpdate(true, record)}>修改</a>
             <Divider type="vertical" />
-            <a onClick={() => this.handleTest(true, record)}>授权</a>
+            <a onClick={() => this.handleAccess(true, record)}>授权</a>
           </Fragment>
         ),
       },
@@ -333,9 +340,24 @@ class TableList extends PureComponent {
     });
   };
 
-  handleTest = (flag, record) => {
+  handleAccess = (flag, record) => {
     console.log('handleTest', flag, record);
-    message.success('下一个版本实现');
+    this.setState({selectedRow:record});
+    const { dispatch } = this.props;
+    const payload = {};
+    payload.data = {};
+    payload.data.info = {};
+    payload.data.info.apiId = record.apiId;
+    dispatch({
+      type: 'apiCreateModel/apiInfo',
+      payload,
+      callback: (resp) => {
+        this.setState({selectedRow:resp.data});
+      },
+    });
+
+    this.handleModalVisible(record,flag);
+    // message.success('下一个版本实现');
   };
 
   handleUpdate = (flag, record) => {
@@ -348,6 +370,60 @@ class TableList extends PureComponent {
         apiId,
         record, // 表格某行的对象数据
       },
+    });
+  };
+
+  handleOrgTransfer =(updateApiServiceOrg) =>{
+
+    console.log("---updateApiServiceOrg＝＝＝＝3:",updateApiServiceOrg);
+    this.setState({updateApiServiceOrg});
+
+  };
+
+  okHandle = () => {
+    const {updateApiServiceOrg,selectedRow}=this.state;
+    const {dispatch}=this.props;
+    console.log("---updateApiServiceOrg＝＝＝＝4:",updateApiServiceOrg);
+
+    const apiInfo = getPayloadForAccess(selectedRow,updateApiServiceOrg);
+    console.log("api access submit apiInfo:",apiInfo);
+    // submit the values
+    dispatch({
+      type: 'apiCreateModel/submitAccess',
+      payload: apiInfo,
+      callback:(response)=>{
+        if (response.code==="200"){
+          const msg=response.msg||"success.";
+          this.setState({
+            modalVisible: false,
+            selectedRow: null,
+          });
+          message.success(msg);
+        }
+        else{
+          const msg=response.msg||"服务器内部错误。";
+          message.error(msg);
+        }
+      }
+    });
+    // console.log("submitAccess");
+    // this.setState({
+    //   modalVisible: false,
+    //   selectedRow: null,
+    // });
+  };
+
+  cancelHandle = () => {
+    this.setState({
+      modalVisible: false,
+      selectedRow: null,
+    });
+  };
+
+  handleModalVisible = (row, flag) => {
+    this.setState({
+      modalVisible: !!flag,
+      selectedRow: row,
     });
   };
 
@@ -439,12 +515,15 @@ class TableList extends PureComponent {
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
 
+
+
   render() {
     const {
       apiGatewayModel: { data },
       loading,
     } = this.props;
-    const { selectedRows } = this.state;
+    const { selectedRows,modalVisible,selectedRow } = this.state;
+    console.log(modalVisible);
     // const menu = (
     //   <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
     //     <Menu.Item key={DEL_ACT}>删除/下线</Menu.Item>
@@ -481,6 +560,17 @@ class TableList extends PureComponent {
               onChange={this.handleStandardTableChange}
             />
           </div>
+          <Modal title='授权' visible={modalVisible} onOk={()=>this.okHandle()} onCancel={() => this.cancelHandle()}>
+            {/* <Transfer */}
+            {/* dataSource={mockData} */}
+            {/* titles={['Source', 'Target']} */}
+            {/* targetKeys={[]} */}
+            {/* selectedKeys={[]} */}
+            {/* onScroll={this.handleScroll} */}
+            {/* render={item => item.title} */}
+            {/* /> */}
+            <OrgTransfer targetData={selectedRow} onOrgTransfer={this.handleOrgTransfer} />
+          </Modal>
         </Card>
       </PageHeaderWrapper>
     );

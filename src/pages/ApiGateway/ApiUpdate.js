@@ -18,24 +18,36 @@ import styles from './style.less';
 import SelectView from './SelectView';
 import GroupSelectView from './GroupSelectView';
 import {getPayloadForUpdate} from "./ApiCreate/util";
+import RadioView from "./RadioView";
+import OrgSelectView from "./OrgSelectView";
 
 
+const formItemLayout = {
+  labelCol: {
+    span: 5,
+  },
+  wrapperCol: {
+    span: 19,
+  },
+};
 const fieldLabels = {
   front:{
-    groupId: 'Group',
-    name: 'Api Name',
-    serviceType: 'serviceType',
-    requestUrl: 'requestUrl',
-    protocol: 'protocol',
-    reqMethod: 'reqMethod',
+    groupId: '分组',
+    name: '名称',
+    serviceType: '服务类型',
+    requestUrl: '请求地址',
+    protocol: '协议',
+    reqMethod: '请求Method',
+    apiType: 'Api范围',
   },
   back:{
-    serviceType: 'serviceType',
-    url: 'requestUrl',
-    protocol: 'protocol',
-    reqMethod: 'reqMethod',
-    connectTimeout: 'connectTimeout',
-    socketTimeout: 'socketTimeout',
+    serviceType: '服务类型',
+    url: '落地方地址',
+    protocol: '协议',
+    reqMethod: '请求Method',
+    connectTimeout: '连接超时时间（秒）',
+    socketTimeout: '处理超时时间（秒）',
+    orgId: '服务提供者',
   },
 };
 
@@ -75,7 +87,7 @@ class ApiUpdate extends PureComponent {
 
     const { dispatch,location } = this.props;
     const {state}=location;
-    // console.log("location state:",state);
+    console.log("location state:",state);
     const {apiId}=state || {apiId:90};
     if (apiId!==-1){
       const payload = {};
@@ -126,9 +138,9 @@ class ApiUpdate extends PureComponent {
               }
               // console.log('innerKey:', innerKey, );
             });
-            // console.log(innerObj);
             const obj = {};
             obj[key]=innerObj;
+            console.log("init Data in ApiUpdate2:",obj);
             form.setFieldsValue(obj);
           }
       }
@@ -170,7 +182,7 @@ class ApiUpdate extends PureComponent {
     };
     // console.log(errors);
     const errorList = Object.keys(errors).map(key => {
-      console.log(errors[key],fieldLabels.front[key]);
+      // console.log(errors[key],fieldLabels.front[key]);
       if (!errors[key]) {
         return null;
       }
@@ -245,52 +257,50 @@ class ApiUpdate extends PureComponent {
       <PageHeaderWrapper>
         <Card title="定义请求信息" className={styles.card} bordered={false}>
           <Form layout="vertical" hideRequiredMark>
-            <Row gutter={16}>
-              <Col lg={6} md={12} sm={24}>
+            <Row gutter={2}>
+              <Col lg={6} md={12} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.front.groupId}>
                   {getFieldDecorator('front.groupId', {
                     rules: [{ required: true, message: '请选择分组' }],
                   })(<GroupSelectView />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.front.name}>
                   {getFieldDecorator('front.name', {
                     rules: [{ required: true, message: 'Please input api name' }],
                   })(<Input placeholder="Please input api name" />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.front.requestUrl}>
                   {getFieldDecorator('front.requestUrl', {
                     rules: [{ required: true, message: '请选择' }],
                   })(
                     <Input
                       style={{ width: '100%' }}
-                      addonBefore="http://"
-                      addonAfter=".com"
                       placeholder="请输入"
                     />
                   )}
                 </Form.Item>
               </Col>
             </Row>
-            <Row gutter={16}>
-              <Col lg={6} md={12} sm={24}>
+            <Row gutter={2}>
+              <Col lg={6} md={12} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.front.serviceType}>
                   {getFieldDecorator('front.serviceType', {
                     rules: [{ required: true, message: '请选择serviceType' }],
                   })(<SelectView javaCode="apiService" javaKey="service_type" />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.front.reqMethod}>
                   {getFieldDecorator('front.reqMethod', {
                     rules: [{ required: true, message: '请选择HTTP Method' }],
                   })(<SelectView javaCode="common" javaKey="req_mothod" />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.front.protocol}>
                   {getFieldDecorator('front.protocol', {
                     rules: [{ required: true, message: '请选择协议' }],
@@ -298,26 +308,42 @@ class ApiUpdate extends PureComponent {
                 </Form.Item>
               </Col>
             </Row>
+            <Row gutter={2}>
+              <Col lg={6} md={12} sm={24} style={{height:50}}>
+                <Form.Item label={fieldLabels.front.apiType}>
+                  {getFieldDecorator('front.apiType', {
+                    initialValue: apiService.apiType,
+                    rules: [{ required: true, message: '请选择服务类型' }],
+                  })(<RadioView javaCode="apiService" javaKey="api_type" />)}
+                </Form.Item>
+              </Col>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                <span />
+              </Col>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+                <span />
+              </Col>
+            </Row>
           </Form>
         </Card>
         <Card title="落地方服务信息" className={styles.card} bordered={false}>
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
-              <Col lg={6} md={12} sm={24}>
+              <Col lg={6} md={12} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.back.serviceType}>
                   {getFieldDecorator('back.serviceType', {
                     rules: [{ required: true, message: '请选择后端服务类型' }],
                   })(<SelectView javaCode="apiService" javaKey="service_type" />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.back.url}>
                   {getFieldDecorator('back.url', {
                     rules: [{ required: true, message: '请输入后端请求地址' }],
                   })(<Input placeholder="请输入后端请求地址" />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.back.protocol}>
                   {getFieldDecorator('back.protocol', {
                     rules: [{ required: true, message: '请选择后端协议' }],
@@ -326,26 +352,41 @@ class ApiUpdate extends PureComponent {
               </Col>
             </Row>
             <Row gutter={16}>
-              <Col lg={6} md={12} sm={24}>
+              <Col lg={6} md={12} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.back.reqMethod}>
                   {getFieldDecorator('back.reqMethod', {
                     rules: [{ required: true, message: '请选择HTTP Method' }],
                   })(<SelectView javaCode="common" javaKey="req_mothod" />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.back.connectTimeout}>
                   {getFieldDecorator('back.connectTimeout', {
                     rules: [{ required: true, message: '后端服务连接超时' }],
                   })(<Input placeholder="请输入后端服务连接超时（ms）" />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.back.socketTimeout}>
                   {getFieldDecorator('back.socketTimeout', {
                     rules: [{ required: true, message: '后端服务请求超时' }],
                   })(<Input placeholder="请输入后端服务请求超时（ms）" />)}
                 </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col lg={6} md={12} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.back.orgId}>
+                  {getFieldDecorator('back.orgId', {
+                    rules: [{ required: true, message: '请选择服务提供者' }],
+                  })(<OrgSelectView orgType="0,2" />)}
+                </Form.Item>
+              </Col>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                <span />
+              </Col>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+                <span />
               </Col>
             </Row>
           </Form>

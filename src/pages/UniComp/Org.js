@@ -8,7 +8,8 @@ import {getItems} from '@/utils/masterData';
 //   { itemCode: '2', itemValue: '消费系统' },
 //   { itemCode: '0', itemValue: 'Both' },
 // ];
-const orgTypes = getItems('org', 'orgType');
+const orgTypes = getItems('org', 'org_type');
+const authTypes = getItems('org', 'auth_type');
 const statusList = getItems('org', 'status');
 const columnSchemas = {
   tableName: 'org',
@@ -19,7 +20,19 @@ const columnSchemas = {
     { name: 'orgCode', title: 'Code', query: true}, // 第二列需要作为查询条件，新增时需要采集
     { name: 'orgName', title: 'Name', sorter: true, query: true, add: true }, //  需要排序，需要作为查询条件，新增时需要采集
     { name: 'createTime', title: 'Create Date', query: true, format: 'YYYY-MM-DD HH:mm:ss' }, // 返回是日期类型，需要转换
-    { name: 'appKey', title: 'App Key', query: true, add: true },
+    { name: 'appkey', title: 'App Key', query: true},
+    { name: 'tel', title: 'tel',columnHidden: true, add: true },
+    { name: 'email', title: 'email', columnHidden: true, add: true },
+    { name: 'remark', title: 'remark', columnHidden: true, add: true },
+    {
+      name: 'authType',
+      title: 'Auth Type',
+      columnHidden: false,
+      add: true,
+      tag: 'commonSelect',
+      tableName: 'org',
+      enumData: authTypes,
+    },
     {
       name: 'orgType',
       title: 'Org Type',
