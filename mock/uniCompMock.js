@@ -15,28 +15,28 @@ const groups =
         "groupName": "语音识别",
         "groupDesc": "分组1",
         "groupApiDoc": "空",
-        "status": null
+        "status": "A"
       },
       {
         "groupId": 2,
         "groupName": "OCR识别",
         "groupDesc": "aaaaa",
         "groupApiDoc": "bbbbbb",
-        "status": null
+        "status": "A"
       },
       {
         "groupId": 5,
         "groupName": "身份识别",
         "groupDesc": "aaaaa1",
         "groupApiDoc": "bbbbbb1",
-        "status": null
+        "status": "A"
       },
       {
         "groupId": 6,
         "groupName": "文本识别",
         "groupDesc": null,
         "groupApiDoc": null,
-        "status": null
+        "status": "A"
       }
     ]
   };
@@ -45,141 +45,123 @@ const orgs={
   "msg": null,
   "data": [
     {
-      "orgType": "1",
-      "password": "StudySC",
-      "orgName": "crm",
+      "orgName": "111",
       "tokenExpireTime": 1800,
-      "createTime": "2019-04-02T01:27:14.000+0000",
-      "orgCode": "1000001",
+      "orgTypeName": "",
+      "orgType": "2",
+      "password": "StudySC",
+      "createTime": "2019-04-04T08:04:54.000+0000",
+      "orgCode": "test21111",
+      "statusName": "",
+      "tel": "1",
       "appkey": "000001",
       "id": 1,
-      "authType": 1,
-      "status": "D"
+      "authType": "1",
+      "email": "111",
+      "status": "A"
     },
     {
       "orgType": "2",
+      "password": "StudySC",
       "orgName": "billing",
-      "createTime": "2019-04-02T01:27:17.000+0000",
-      "orgCode": "1000002",
+      "createTime": "2019-04-03T09:02:21.000+0000",
+      "orgCode": "test2",
+      "orgTypeName": "",
+      "statusName": "",
       "appkey": "000002",
       "id": 2,
-      "status": "D"
+      "authType": "2",
+      "status": "A"
     },
     {
       "orgType": "2",
+      "password": "StudySC",
       "orgName": "ose",
-      "createTime": "2019-04-02T01:27:21.000+0000",
+      "createTime": "2019-04-03T09:02:22.000+0000",
       "orgCode": "test21111",
+      "orgTypeName": "",
+      "statusName": "",
       "appkey": "000003",
       "id": 3,
-      "status": "D"
+      "authType": "3",
+      "status": "A"
     },
     {
       "orgType": "0",
+      "password": "StudySC",
       "orgName": "baidu",
-      "createTime": "2019-04-02T01:27:30.000+0000",
+      "createTime": "2019-04-03T09:02:23.000+0000",
       "orgCode": "abc",
+      "orgTypeName": "",
+      "statusName": "",
       "appkey": "000004",
       "id": 4,
-      "status": "D"
+      "authType": "2",
+      "status": "A"
     },
     {
       "orgType": "2",
+      "password": "StudySC",
       "orgName": "facebook",
-      "createTime": "2019-04-02T01:27:38.000+0000",
+      "createTime": "2019-04-03T09:02:24.000+0000",
       "orgCode": "test2",
+      "orgTypeName": "",
+      "statusName": "",
       "appkey": "000005",
       "id": 5,
-      "status": "D"
+      "authType": "2",
+      "status": "A"
+    },
+    {
+      "orgType": "2",
+      "password": "StudySC",
+      "orgName": "google",
+      "createTime": "2019-04-03T09:02:25.000+0000",
+      "orgCode": "test2",
+      "orgTypeName": "",
+      "statusName": "",
+      "appkey": "000006",
+      "id": 6,
+      "authType": "2",
+      "status": "A"
     },
     {
       "orgType": "0",
+      "password": "StudySC",
       "orgName": "tdc",
-      "createTime": "2019-04-02T01:27:45.000+0000",
+      "createTime": "2019-04-03T09:02:29.000+0000",
       "orgCode": "test2",
-      "appkey": "000006",
-      "id": 7,
-      "status": "D"
-    },
-    {
-      "orgType": "1",
-      "orgName": "telenor",
-      "createTime": "2019-04-02T01:27:48.000+0000",
-      "orgCode": "test2",
+      "orgTypeName": "",
+      "statusName": "",
       "appkey": "000007",
-      "id": 8,
-      "status": "D"
-    },
-    {
-      "orgType": "2",
-      "orgName": "sp",
-      "createTime": "2019-04-02T01:27:51.000+0000",
-      "orgCode": "test2",
-      "appkey": "000008",
-      "id": 9,
-      "status": "D"
-    },
-    {
-      "orgType": "1",
-      "orgName": "ant",
-      "createTime": "2019-04-02T01:27:57.000+0000",
-      "orgCode": "test111",
-      "appkey": "000009",
-      "id": 10,
-      "status": "D"
-    },
-    {
-      "orgType": "2",
-      "orgName": "taobao",
-      "createTime": "2019-04-02T01:28:00.000+0000",
-      "orgCode": "2",
-      "appkey": "000010",
-      "id": 11,
+      "id": 7,
+      "authType": "2",
       "status": "A"
     },
     {
-      "orgType": "1",
-      "orgName": "jingdong",
-      "createTime": "2019-04-02T01:28:04.000+0000",
-      "orgCode": "abc",
-      "appkey": "000011",
-      "id": 12,
+      "orgType": "0",
+      "orgName": "let",
+      "createTime": "2019-04-04T07:15:24.000+0000",
+      "orgCode": "111_11",
+      "orgTypeName": "",
+      "statusName": "",
+      "appkey": "111",
+      "id": 24,
+      "authType": "1",
       "status": "A"
     },
     {
       "orgType": "2",
-      "orgName": "dog",
-      "createTime": "2019-04-02T01:28:10.000+0000",
-      "orgCode": "test2",
-      "appkey": "000012",
-      "id": 13,
-      "status": "A"
-    },
-    {
-      "orgType": "1",
-      "orgName": "och",
-      "createTime": "2019-04-02T01:28:38.000+0000",
-      "orgCode": "test2",
-      "appkey": "000013",
-      "id": 14,
-      "status": "A"
-    },
-    {
-      "orgType": "2",
-      "orgName": "tiger",
-      "createTime": "2019-04-02T01:28:22.000+0000",
-      "orgCode": "bbbbbb2_3",
-      "appkey": "000014",
-      "id": 15,
-      "status": "A"
-    },
-    {
-      "orgType": "1",
-      "orgName": "stp",
-      "createTime": "2019-04-02T01:28:47.000+0000",
-      "orgCode": "test2",
-      "appkey": "000015",
-      "id": 16,
+      "password": "h4J9d7R8N",
+      "orgName": "111",
+      "tokenExpireTime": 100,
+      "createTime": "2019-04-04T08:05:16.000+0000",
+      "orgCode": "10000000015",
+      "orgTypeName": "",
+      "statusName": "",
+      "appkey": "10000000015",
+      "id": 28,
+      "authType": "1",
       "status": "A"
     }
   ]
@@ -224,7 +206,7 @@ function getList(innerTableName) {
   let dataSource = tableListDataSource;
   switch (innerTableName) {
     /* eslint no-case-declarations:0 */
-    case 'groups':
+    case 'api_group':
       dataSource = groupsDataSource;
       break;
     case 'component':

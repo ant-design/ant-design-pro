@@ -16,6 +16,7 @@ import {
   message,
   DatePicker,
   Select,
+  InputNumber,
 } from 'antd';
 import moment from 'moment'; // 不能用｛moment｝
 import StandardTable from '@/components/StandardTable';
@@ -23,6 +24,7 @@ import BindDataSelect from '../UniComp/BindDataSelect';
 import styles from './index.less';
 
 const { Option } = Select;
+const {TextArea} = Input;
 const FormItem = Form.Item;
 const getValue = obj =>
   Object.keys(obj)
@@ -59,6 +61,42 @@ const CreateForm = Form.create()(props => {
     form.resetFields();
     handleModalVisible(row, flag);
   };
+  const renderAutoForm = (item)=>{
+    switch (item.tag) {
+      case 'select':
+        return (
+          <BindDataSelect
+            placeholder={`请输入${item.title}`}
+            tableName={tableName}
+            tableKey={key}
+            tableTitle={name}
+          />
+        )
+      case 'commonSelect':
+        return (
+          <Select style={{ width: '100%' }}>
+            {item.enumData.map(d => (
+              <Option key={`${item.name}_${d.itemCode}`} value={d.itemCode}>
+                {d.itemValue}
+              </Option>
+            ))}
+          </Select>
+        )
+      case 'textArea':
+        return (
+          <TextArea rows={item.rows} />
+        )
+      case 'inputNumber':
+        return (
+          <InputNumber style={{ width: '100%' }} />
+        )
+      default:
+        break;
+    }
+    return (
+      <Input disabled={item.disabled} placeholder={`请输入${item.title}`} />
+    )
+  }
   const addForms = getFormItemArray(props, 'add')
     .filter(data => !(`${data.name}` === key && !selectedRow))
     .map(item => {
@@ -77,32 +115,16 @@ const CreateForm = Form.create()(props => {
           labelCol={{ span: 5 }}
           wrapperCol={{ span: 15 }}
           label={item.title}
+          style={{ height: `${item.rows?20*item.rows:20}px` }}
         >
           {form.getFieldDecorator(item.name, {
             initialValue: selectedRow ? selectedRow[item.name] : '',
             rules:
-              item[name] === key
+              item.rules
                 ? []
                 : [{ required: true, message: `Please input ${item.title}` }],
           })(
-            item.tag === 'select' ? (
-              <BindDataSelect
-                placeholder={`请输入${item.title}`}
-                tableName={tableName}
-                tableKey={key}
-                tableTitle={name}
-              />
-            ) : item.tag === 'commonSelect' ? (
-              <Select style={{ width: 100 }}>
-                {item.enumData.map(d => (
-                  <Option key={`${item.name}_${d.itemCode}`} value={d.itemCode}>
-                    {d.itemValue}
-                  </Option>
-                ))}
-              </Select>
-            ) : (
-              <Input disabled={item.disabled} placeholder={`请输入${item.title}`} />
-            )
+            renderAutoForm(item)
           )}
         </FormItem>
       ))}

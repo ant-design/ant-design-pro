@@ -26,37 +26,23 @@ const allResult = {
       "itemValue": "已发布"
     },
     {
-      "id": 4,
-      "javaCode": "common",
-      "javaKey": "status",
-      "itemCode": "S",
-      "itemValue": "停用"
-    },
-    {
-      "id": 5,
-      "javaCode": "common",
-      "javaKey": "status",
-      "itemCode": "A",
-      "itemValue": "激活"
-    },
-    {
       "id": 6,
       "javaCode": "org",
-      "javaKey": "orgType",
+      "javaKey": "org_type",
       "itemCode": "1",
       "itemValue": "提供方"
     },
     {
       "id": 7,
       "javaCode": "org",
-      "javaKey": "orgType",
+      "javaKey": "org_type",
       "itemCode": "2",
       "itemValue": "消费方"
     },
     {
       "id": 8,
       "javaCode": "org",
-      "javaKey": "orgType",
+      "javaKey": "org_type",
       "itemCode": "0",
       "itemValue": "Both"
     },
@@ -230,21 +216,21 @@ const allResult = {
     },
     {
       "id": 33,
-      "javaCode": "org",
+      "javaCode": "common",
       "javaKey": "status",
       "itemCode": "A",
       "itemValue": "激活"
     },
     {
       "id": 34,
-      "javaCode": "org",
+      "javaCode": "common",
       "javaKey": "status",
       "itemCode": "D",
       "itemValue": "删除"
     },
     {
       "id": 35,
-      "javaCode": "org",
+      "javaCode": "common",
       "javaKey": "status",
       "itemCode": "S",
       "itemValue": "停用"
@@ -348,32 +334,32 @@ const allResult = {
       "itemValue": "删除"
     },
     {
-      "id": 53,
-      "javaCode": "apiGroup",
+      "id": 57,
+      "javaCode": "apiServiceBackend",
       "javaKey": "status",
-      "itemCode": "S",
-      "itemValue": "停用"
+      "itemCode": "0",
+      "itemValue": "关闭"
     },
     {
-      "id": 54,
-      "javaCode": "apiGroup",
+      "id": 58,
+      "javaCode": "apiServiceBackend",
       "javaKey": "status",
-      "itemCode": "D",
-      "itemValue": "删除"
+      "itemCode": "1",
+      "itemValue": "未发布"
     },
     {
-      "id": 55,
-      "javaCode": "apiGroup",
+      "id": 59,
+      "javaCode": "apiServiceBackend",
       "javaKey": "status",
-      "itemCode": "A",
-      "itemValue": "激活"
+      "itemCode": "2",
+      "itemValue": "已发布"
     },
     {
-      "id": 56,
-      "javaCode": "common",
-      "javaKey": "status",
-      "itemCode": "D",
-      "itemValue": "删除"
+      "id": 60,
+      "javaCode": "org",
+      "javaKey": "token_expire_time",
+      "itemCode": "defaultTime",
+      "itemValue": "100"
     }
   ]
 };

@@ -22,6 +22,7 @@ const columnSchemas = {
       tableName: 'group',
       enumData: statusList,
     }, // 需要作为查询条件，新增时需要采集，需要使用绑定的下拉标签
+    { name: 'groupDesc', title: 'Group Desc',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
   ],
 };
 export default () => (
