@@ -1,4 +1,6 @@
-const RouterConfig = [];
+import Config from '../../config/config';
+
+const RouterConfig = Config.routes;
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 
 function formatter(data) {
