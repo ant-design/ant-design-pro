@@ -1,6 +1,7 @@
-import Config from '../../config/config';
+jest.mock('antd-pro-merge-less');
 
-const RouterConfig = Config.routes;
+const RouterConfig = require('../../config/config').default.routes;
+
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 
 function formatter(data) {
