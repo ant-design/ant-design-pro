@@ -91,7 +91,7 @@ class OrgTransfer extends PureComponent {
   render() {
     const { orgList } = this.props;
     const { targetKeys, selectedKeys } = this.state;
-    console.log("=====1",targetKeys);
+    console.log("=====1",targetKeys,orgList);
     return (
       <div>
         <Transfer
