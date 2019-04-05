@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { PageHeader, Tabs, Typography } from 'antd';
 import { connect } from 'dva';
 import classNames from 'classnames';
@@ -46,13 +46,13 @@ export interface PageHeaderWrapperProps {
   action?: React.ReactNode | string;
   content?: React.ReactNode;
   extraContent?: React.ReactNode;
-  breadcrumbList?: Array<{ title: string | number; href: string }>;
+  breadcrumbList?: Array<{ title: string; href: string }>;
   tabList?: Array<{ key: string; tab: React.ReactNode }>;
   tabActiveKey?: string;
   onTabChange?: (key: string) => void;
   tabBarExtraContent?: React.ReactNode;
   style?: React.CSSProperties;
-  home?: React.ReactNode;
+  home?: string;
   wide?: boolean;
   contentWidth?: ContentWidth;
   className?: string;
@@ -84,7 +84,10 @@ class PageHeaderWrapper extends React.Component<PageHeaderWrapperProps> {
     let pageTitle = title;
     const breadcrumb = conversionBreadcrumbList({
       ...restProps,
-      home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
+      home: formatMessage({
+        id: 'menu.home',
+        defaultMessage: 'Home',
+      }),
     });
     if (!title && breadcrumb.routes) {
       const router = breadcrumb.routes[breadcrumb.routes.length - 1];
@@ -128,7 +131,6 @@ class PageHeaderWrapper extends React.Component<PageHeaderWrapperProps> {
     const { children } = this.mergePropsAndChildren();
     return (
       <div style={{ margin: '-24px -24px 0' }} className={classNames(classNames, styles.main)}>
-        {this.renderPageHeader()}
         {children ? (
           <div className={styles['children-content']}>
             <GridContent>{children}</GridContent>
