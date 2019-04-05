@@ -3,7 +3,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
+  to = "https://us-central1-antd-pro.cloudfunctions.net/api/api/:splat"
   status = 200
   force = true
   [redirects.headers]
