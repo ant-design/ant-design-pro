@@ -125,13 +125,13 @@ export default class BaseMenu extends PureComponent {
 
   getPopupContainer = (fixedHeader, layout) => {
     if (fixedHeader && layout === 'topmenu') {
-      return this.warp;
+      return this.wrap;
     }
     return document.body;
   };
 
   getRef = ref => {
-    this.warp = ref;
+    this.wrap = ref;
   };
 
   render() {
