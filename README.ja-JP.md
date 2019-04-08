@@ -17,12 +17,12 @@
 
 </div>
 
-- プレビュー: http://preview.pro.ant.design
-- ホームページ: http://pro.ant.design
-- ドキュメント: http://pro.ant.design/docs/getting-started
-- 変更ログ: http://pro.ant.design/docs/changelog
-- FAQ: http://pro.ant.design/docs/faq
-- 中国のミラーサイト: http://ant-design-pro.gitee.io
+  - プレビュー: http://preview.pro.ant.design
+  - ホームページ: http://pro.ant.design
+  - ドキュメント: http://pro.ant.design/docs/getting-started
+  - 変更ログ: http://pro.ant.design/docs/changelog
+  - FAQ: http://pro.ant.design/docs/faq
+  - 中国のミラーサイト: http://ant-design-pro.gitee.io
 
 ## 2.0がリリースされました 🎉🎉🎉
 [Announcing Ant Design Pro 2.0.0](https://medium.com/ant-design/beautiful-and-powerful-ant-design-pro-2-0-release-51358da5af95)
@@ -33,15 +33,15 @@
 
 ## 特徴
 
-- :gem: **きちんとしたデザイン**: [Ant Design specification](http://ant.design/) に従ってください。
-- :triangular_ruler: **共通のテンプレート**: 業務システム用のテンプレート
-- :rocket: **現状のアート開発**: `React/umi/dva/antd` の最新開発スタック
-- :iphone: **レスポンシブ**: さまざまな画面サイズ用の設計
-- :art: **テーマ**: シンプルな設定でカスタマイズ可能なテーマ
-- :globe_with_meridians: **国際化**: 国際化の解決策を内蔵
-- :gear: **ベストプラクティス**: コードを美しくするための正しいワークフロー
-- :1234: **モック開発**: 使いやすいモック開発
-- :white_check_mark: **UIテスト**: ユニットテストとe2eテスト
+  - :gem: **きちんとしたデザイン**: [Ant Design specification](http://ant.design/) に従ってくださ  い。
+  - :triangular_ruler: **共通のテンプレート**: 業務システム用のテンプレート
+  - :rocket: **現状のアート開発**: `React/umi/dva/antd` の最新開発スタック
+  - :iphone: **レスポンシブ**: さまざまな画面サイズ用の設計
+  - :art: **テーマ**: シンプルな設定でカスタマイズ可能なテーマ
+  - :globe_with_meridians: **国際化**: 国際化の解決策を内蔵
+  - :gear: **ベストプラクティス**: コードを美しくするための正しいワークフロー
+  - :1234: **モック開発**: 使いやすいモック開発
+  - :white_check_mark: **UIテスト**: ユニットテストとe2eテスト
 
 ## テンプレート
 
@@ -125,12 +125,12 @@ Gitpod（GitHub用の無料オンライン開発環境）でプロジェクト�
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --------- | --------- | --------- | --------- | --------- |
-| IE11, Edge| 最新版から2バージョン| 最新版から2バージョン| 最新版から2バージョン| 最新版から2バージョン
+| IE11, Edge| 最新版から2バージョン| 最新版から2バージョン| 最新版から2バージョン| 最新版から2バージョン|
 
 ## 貢献する
 
 どんな種類の貢献でも大歓迎です。あなたがこのプロジェクトに貢献できる方法のいくつかの例はここにあります。：
 
-- 毎日の仕事にAnt Design Proを使用すること。
-- 報告すること。 [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
-- 更新すること。 [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+  - 毎日の仕事にAnt Design Proを使用すること。
+  - 報告すること。 [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
+  - 更新すること。 [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
