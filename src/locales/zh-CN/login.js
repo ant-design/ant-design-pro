@@ -13,7 +13,7 @@ export default {
   'app.register.register': '注册',
   'app.register.get-verification-code': '获取验证码',
   'app.login.verification-code-warning':
-    '此项目为 demo 演示项目，并不会真的给您发送验证码。请切换到账户密码登录界面按提示登录。',
+    '此项目为演示项目，并不会真的给您发送验证码。请切换到账户密码登录界面按提示登录。',
   'app.register.sign-in': '使用已有账户登录',
   'app.register-result.msg': '你的账户：{email} 注册成功',
   'app.register-result.activation-email':
