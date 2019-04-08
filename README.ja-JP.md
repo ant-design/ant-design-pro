@@ -131,6 +131,6 @@ Gitpod（GitHub用の無料オンライン開発環境）でプロジェクト�
 
 どんな種類の貢献でも大歓迎です。あなたがこのプロジェクトに貢献できる方法のいくつかの例はここにあります。：
 
-- 毎日の仕事にAnt Design Proを使用すること。
-- 報告すること。 [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
-- 更新すること。 [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+  - 毎日の仕事にAnt Design Proを使用すること。
+  - 報告すること。 [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
+  - 更新すること。 [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
