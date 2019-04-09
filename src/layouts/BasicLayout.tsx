@@ -1,4 +1,5 @@
 import { ConnectState, ConnectProps } from '@/models/connect';
+import RightContent from '@/components/GlobalHeader/RightContent';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 import React, { useState } from 'react';
@@ -48,6 +49,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         })
       }
       onChangeLayoutCollapsed={handleMenuCollapse}
+      renderRightContent={RightProps => <RightContent {...RightProps} />}
       {...props}
     >
       {children}
