@@ -31,7 +31,7 @@ export default {
       console.log("response in submitAccess model---:",response);
       if (callback) callback(response);
     },
-    *submitStepForm({ payload }, { call, put }) {
+    *submitStepForm({ payload ,callback}, { call, put }) {
       console.log("payload in submitStepForm model---:",JSON.stringify(payload));
       const response = yield call(saveApi, payload);
       console.log("response in submitStepForm model---:",response);
@@ -52,6 +52,9 @@ export default {
             payload:response,
           });
           const msg=response.msg||"success。"
+          if(callback){
+            callback(response);
+          }
           message.success(msg);
         }
       }

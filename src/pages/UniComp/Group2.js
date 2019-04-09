@@ -1,5 +1,5 @@
 import React from 'react';
-import BindDataQueryTable from '../BindDataQueryTable';
+import BindDataStandardTable from '../BindDataStandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { getItems } from '@/utils/masterData';
 
@@ -27,6 +27,6 @@ const columnSchemas = {
 };
 export default () => (
   <PageHeaderWrapper title="分组系统管理">
-    <BindDataQueryTable columnSchemas={columnSchemas} />
+    <BindDataStandardTable columnSchemas={columnSchemas} />
   </PageHeaderWrapper>
 );

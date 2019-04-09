@@ -38,13 +38,13 @@ const apiInfoDetail={
     "status": "2",
     "statusName": null,
     "createTime": "2019-03-19T06:28:28.000+0000",
-    "apiType": null,
     "createUser": "loginName",
     "updateTime": "2019-03-19T06:28:28.000+0000",
     "updateUser": "loginName",
     "serviceType": "1",
     "serviceTypeName": null,
     "apiServiceMappings": null,
+    "apiType":"1",
     "apiServiceBackends": [
       {
         "backendId": 17,
@@ -68,7 +68,27 @@ const apiInfoDetail={
         "updateUser": null,
         "backendType": "endpoint",
         "codeMethod": null,
-        "serviceSeq": 3
+        "serviceSeq": 3,
+        "orgId":2,
+        apiServiceBackendAttrs:[{
+          attrId:1,
+          backendId:1,
+          attrSpecId:1,
+          attrSpecCode:'userName',
+          attrValue:'xxx',
+        },{
+          attrId:1,
+          backendId:1,
+          attrSpecId:2,
+          attrSpecCode:'userPassword',
+          attrValue:'xxx',
+        },{
+          attrId:1,
+          backendId:1,
+          attrSpecId:3,
+          attrSpecCode:'authType',
+          attrValue:'basicAuth',
+        }],
       },
       {
         backEndId: '1',
@@ -96,7 +116,7 @@ const apiInfoDetail={
         "appkey":"000001",
         "status":"A"
       }
-    ]
+    ],
   }
 }
 function apiList(req, res, u, b) {
@@ -165,22 +185,23 @@ function saveApi(req, res, u, b) {
     data: { info },
   } = body;
   const {apiService,apiServiceBackends} = info;
+  // console.log("111111111111----------:",option,ACT.UPDATE,option === ACT.UPDATE);
   if (option === ACT.ADD) {
     tableListDataSource.push({...apiService,apiId:tableListDataSource.length});
   } else if (option === ACT.UPDATE) {
-    const index = tableListDataSource.findIndex(item => apiService.appId !== item.apiId);
+    const index = tableListDataSource.findIndex(item => apiService.apiId === item.apiId);
     tableListDataSource.splice(index, 1, apiService);// 对列表模拟数据对更新
-    apiInfoDetail.data=apiService;
+    apiInfoDetail.data={...apiInfoDetail.data,...apiService};
     /* apiInfoDetail.data.apiServiceBackends数据对更新 */
     let i = apiInfoDetail.data.apiServiceBackends.length;
-    console.log("11----------:",apiServiceBackends);
+    // console.log("111111111111----------:",apiServiceBackends);
     apiInfoDetail.data.apiServiceBackends = apiServiceBackends.map((item) => {
       i += 1;
       const newItem = item.backendId ? item : {...item, backendId: i};// 去掉key，增加backendId
       return newItem;
     });
   }
-  console.log("12--------:",apiInfoDetail.data,apiInfoDetail.data.apiServiceBackends);
+  // console.log("12--------:",apiInfoDetail.data.apiServiceBackends);
   const result = apiInfoDetail;
 
   return res.json(result);

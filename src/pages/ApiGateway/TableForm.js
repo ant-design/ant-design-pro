@@ -12,7 +12,7 @@ class TableForm extends PureComponent {
 
   constructor(props) {
     super(props);
-    console.log("tableform props:",props);
+    // console.log("tableform props:",props);
     this.state = {
       data: props.value,
       loading: false,
@@ -85,7 +85,7 @@ class TableForm extends PureComponent {
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
-    console.log("e.target:",e,e.target);
+    // console.log("e.target:",e,e.target);
     if (target) {
       target[fieldName] = e.target.value;
       this.setState({ data: newData });
@@ -97,7 +97,7 @@ class TableForm extends PureComponent {
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
-    console.log("e.target:",e,e.target);
+    // console.log("e.target:",e,e.target);
     if (target) {
       target[fieldName] = e;
       this.setState({ data: newData });
@@ -106,7 +106,7 @@ class TableForm extends PureComponent {
 
   validateSeq(target){
     const { data } = this.state;
-    console.log("target:",target,"data:",data);
+    // console.log("target:",target,"data:",data);
     const foundItem=data.find((obj)=> {
       return obj.serviceSeq === target.serviceSeq && obj.key !== target.key;
     });
@@ -120,7 +120,7 @@ class TableForm extends PureComponent {
     if(!endpointItem){
       return errorResult;
     }
-    console.log(endpointItem);
+    // console.log(endpointItem);
     const {serviceSeq} = endpointItem;
     if(target.backendType.toLowerCase()==='out'&&target.serviceSeq<=serviceSeq){
       errorResult=true;
@@ -329,7 +329,7 @@ class TableForm extends PureComponent {
     ];
 
     const { loading, data } = this.state;
-    console.log("--------data in TableForm:",data);
+    // console.log("--------data in TableForm:",data);
     return (
       <Fragment>
         <Table

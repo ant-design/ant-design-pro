@@ -25,14 +25,14 @@ const groups =
         "status": "A"
       },
       {
-        "groupId": 5,
+        "groupId":3,
         "groupName": "身份识别",
         "groupDesc": "aaaaa1",
         "groupApiDoc": "bbbbbb1",
         "status": "A"
       },
       {
-        "groupId": 6,
+        "groupId": 4,
         "groupName": "文本识别",
         "groupDesc": null,
         "groupApiDoc": null,
@@ -219,7 +219,7 @@ function getList(innerTableName) {
 }
 
 export function sug(req, res, u) {
-  console.log('pushOrg');
+  // console.log('pushOrg');
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
     url = req.url; // eslint-disable-line
@@ -227,13 +227,13 @@ export function sug(req, res, u) {
   const params = parse(url, true).query;
   let dataSource = getList(params.t);
 
-  console.log(url, params, dataSource.length);
+  // console.log(url, params, dataSource.length);
   let no = 'code';
   const title = 'name';
   if (params.t === 'org') {
     no = 'orgCode';
   }
-  console.log('no:', no, title);
+  // console.log('no:', no, title);
   if (params.q) {
     dataSource = dataSource.filter(data => `${data[no]}:${data[title]}`.indexOf(params.q) > -1);
   }
@@ -282,18 +282,18 @@ export function queryList(req, res, u, b) {
   // }
   const keys = Object.keys(info); // 根据查询条件（form表单）的参数，过滤列表
   keys.forEach(key => {
-    if (params[key]) {
+    // console.log("----:",info[key]);
+    if (info[key]) {
       dataSource = dataSource.filter(data => {
         const value = data[key];
         if (value) {
-          return value.indexOf(params[key]) > -1;
+          return value.indexOf(info[key]) > -1;
         }
 
         return true;
       });
     }
   });
-
   let pageSize = 10;
   if (params.pageSize) {
     pageSize = params.pageSize * 1;
@@ -307,7 +307,7 @@ export function queryList(req, res, u, b) {
       pagination: {
         total: dataSource.length,
         pageSize,
-        current: parseInt(params.currentPage, 10) || 1,
+        pageNo: parseInt(params.pageNo, 10) || 1,
       },
     },
   };
@@ -324,8 +324,8 @@ export function save(req, res, u, b) {
 
   const body = (b && b.body) || req.body;
   const { method, tableName, data:{info} } = body;
-  const {  orgType, orgName, id, componentId, name,appKey, groupId } = info;
-  console.log('save in mock:', body, id);
+  const {  orgType, orgName, id, componentId, groupName,appKey, groupId } = info;
+  // console.log('save in mock:', body, id);
   const datasource = getList(tableName);
   switch (method) {
     /* eslint no-case-declarations:0 */
@@ -355,11 +355,11 @@ export function save(req, res, u, b) {
             });
           }
           break;
-        case 'groups':
+        case 'api_group':
           const tmpGroupsArray = datasource.filter(item => groupId && groupId === item.groupId);
           if (tmpGroupsArray && tmpGroupsArray.length > 0) {
             const tmpObj = tmpGroupsArray.shift();
-            tmpObj.name = name;
+            tmpObj.groupName = groupName;
             if (groupId) {
               tmpObj.id = groupId;
             }
@@ -367,9 +367,10 @@ export function save(req, res, u, b) {
             const newId = datasource.length + 1;
             datasource.unshift({
               groupId: newId,
-              name,
+              groupName,
               status:'A',
             });
+            console.log("datasource:",datasource);
           }
           break;
         case 'component':
@@ -397,12 +398,10 @@ export function save(req, res, u, b) {
     default:
       break;
   }
+  console.log(datasource.length);
+  console.log("---:",groupsDataSource.length);
   const result = {
-    code: 200,
-    list: datasource,
-    pagination: {
-      total: datasource.length,
-    },
+    code: "200",
   };
 
   if (res && res.json) {
@@ -421,7 +420,7 @@ export function statusBatch(req, res, u, b) {
   const { method, tableName, data:{info},option } = body;
   const {  ids } = info;
   const datasource = getList(tableName);
-  console.log('statusBatch method:',method);
+  // console.log('statusBatch method:',method);
   switch (method) {
     /* eslint no-case-declarations:0 */
     case 'delete':
@@ -440,15 +439,14 @@ export function statusBatch(req, res, u, b) {
           status='A';
           break;
       }
-      console.log("status batch method:",method,ids," status:",status);
+      // console.log("status batch method:",method,ids," status:",status);
       switch (tableName) {
-        case 'groups':
+        case 'api_group':
           ids.forEach((value) => {
             const tmpObj = datasource.find(item => value && value === item.groupId);
             if (tmpObj) {
               tmpObj.status = status;
             }
-            console.log('STATUS BATCH :', tmpObj);
           });
           break;
         default:
@@ -457,7 +455,7 @@ export function statusBatch(req, res, u, b) {
             if (tmpObj) {
               tmpObj.status = status;
             }
-            console.log('STATUS BATCH in default:', tmpObj);
+            // console.log('STATUS BATCH in default:', tmpObj);
           });
           break;
       }
@@ -466,7 +464,7 @@ export function statusBatch(req, res, u, b) {
       break;
   }
   const result = {
-    code: 200,
+    code: "200",
     list: datasource,
     pagination: {
       total: datasource.length,
@@ -487,7 +485,7 @@ export function getOrgListByType(req, res, u) {
   }
   const params = parse(url, true).query;
 
-  console.log("getOrgListByType in model", params);
+  // console.log("getOrgListByType in model", params);
   const result={...orgs};
   if (params.orgType) {
     result.data=orgs.data.filter((item)=>params.orgType.indexOf(item.orgType)!==-1);

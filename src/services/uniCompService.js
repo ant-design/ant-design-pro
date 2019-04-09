@@ -18,7 +18,6 @@ export async function list(params) {
 }
 
 export async function statusBatch(params) {
-  console.log("unicomp statusBatch in service:",params);
   return request(`${PREFIX_PATH}/baseInfo/sysdata/statusBatch`, {
     method: 'POST',
     body: {
@@ -29,7 +28,6 @@ export async function statusBatch(params) {
 }
 
 export async function save(params) {
-  console.log("unicomp postSave in service:",params);
   return request(`${PREFIX_PATH}/baseInfo/sysdata/save`, {
     method: 'POST',
     body: {

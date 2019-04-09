@@ -8,6 +8,7 @@ import {
   Row,
   Input,
   Popover,
+  Radio,
 } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
@@ -17,19 +18,12 @@ import TableForm from './TableForm';
 import styles from './style.less';
 import SelectView from './SelectView';
 import GroupSelectView from './GroupSelectView';
-import {getPayloadForUpdate} from "./ApiCreate/util";
+import {getPayloadForUpdate,conversionAttr} from "./ApiCreate/util";
 import RadioView from "./RadioView";
 import OrgSelectView from "./OrgSelectView";
 
+const forms=['front','back','backAttr'];
 
-const formItemLayout = {
-  labelCol: {
-    span: 5,
-  },
-  wrapperCol: {
-    span: 19,
-  },
-};
 const fieldLabels = {
   front:{
     groupId: '分组',
@@ -48,6 +42,20 @@ const fieldLabels = {
     connectTimeout: '连接超时时间（秒）',
     socketTimeout: '处理超时时间（秒）',
     orgId: '服务提供者',
+    authType: '安全认证',
+  },
+  backAttr:{
+    userName: 'user Name',
+    userPassword: 'user Password',
+    tokenStr: 'token Str',
+    tokenUser: 'token User',
+    tokenPassword: 'token Password',
+    tokenUrl: 'token Url',
+    trustStore: 'trustStore path',
+    trustStorePassword: 'trustStore Password',
+    keyStore: 'keyStore path',
+    keyStorePassword: 'keyStore Password',
+    ssl:'SSL证书校验',
   },
 };
 
@@ -85,10 +93,21 @@ class ApiUpdate extends PureComponent {
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
 
-    const { dispatch,location } = this.props;
+    const { location } = this.props;
     const {state}=location;
-    console.log("location state:",state);
+    // console.log("location state:",state);
     const {apiId}=state || {apiId:90};
+    this.getApi(apiId);
+  }
+
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeFooterToolbar);
+  }
+
+  getApi = (apiId)=>{
+
+    const { dispatch } = this.props;
     if (apiId!==-1){
       const payload = {};
       payload.data = {};
@@ -111,65 +130,66 @@ class ApiUpdate extends PureComponent {
     }
   }
 
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resizeFooterToolbar);
-  }
-
   setBaseInfo = (resp) => {
     const {  form } = this.props;
     const { data } = resp;
     const apiServiceBackend = data.apiServiceBackends.find((obj)=>obj.backendType==="endpoint");
+    const {apiServiceBackendAttrs}=apiServiceBackend;
+    const conversionAttrObj=conversionAttr(apiServiceBackendAttrs);
     const apiServiceBackendMembers  = data.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
 
-    // console.log(apiServiceBackend);
-    // console.log('setBaseInfo data:', data,form.getFieldValue("front"));
+    // console.log("====:",conversionAttrObj);
+    // // console.log('setBaseInfo data:', data,form.getFieldValue("front"));
     Object.keys(form.getFieldsValue()).forEach(key => {
-      // console.log('key:', key);
+      // // console.log('key:', key);
       if(key!=='members'){
-          if(key==='front' || key==='back') {
+          if(key==='front' || key==='back' || key==='backAttr') {
             const innerObj = {};
             Object.keys(form.getFieldValue(key)).forEach(innerKey => {
               if(key==='front'){
                 innerObj[innerKey] = data[innerKey] || null;
               }
+              else if(key==='backAttr'){
+                innerObj[innerKey] = conversionAttrObj[innerKey] || null;
+              }
               else{
                 innerObj[innerKey] = apiServiceBackend[innerKey] || null;
               }
-              // console.log('innerKey:', innerKey, );
+              // // console.log('innerKey:', innerKey, );
             });
             const obj = {};
             obj[key]=innerObj;
-            console.log("init Data in ApiUpdate2:",obj);
+            // console.log("init Data in ApiUpdate2:",obj);
             form.setFieldsValue(obj);
           }
       }
       else{
         const obj = {};
         obj[key] = apiServiceBackendMembers || [];
-        // console.log(form.getFieldValue("members"));
+        // // console.log(form.getFieldValue("members"));
         // form.setFieldsValue(obj);
       }
     });
   };
 
   getErrorInfo = () => {
-    const errorInfo=this.getErrorInfoByPrefix("front");
-    if (!errorInfo){
-      return this.getErrorInfoByPrefix("back");
-    }
+    const errorList=[];
+    forms.forEach((value)=>{
+      const subErrorList=this.getErrorInfoByPrefixList(value)||[];
+      errorList.push(...subErrorList);
+    })
+    const errorInfo=this.getErrorInfoByPrefix(errorList);
     return errorInfo;
   }
 
-  getErrorInfoByPrefix = (prefix) => {
+  getErrorInfoByPrefixList = (prefix) => {
     const {
       form: { getFieldError },
     } = this.props;
     // const errors = getFieldsError();
     const errors = getFieldError(prefix);
-
     const errorCount = Object.keys(errors).filter(key => errors[key]).length;
-    // console.log(errors,errorCount);
+    // // console.log(errors,errorCount);
     if (!errors || errorCount === 0) {
       return null;
     }
@@ -180,9 +200,9 @@ class ApiUpdate extends PureComponent {
         labelNode.scrollIntoView(true);
       }
     };
-    // console.log(errors);
+    // // console.log(errors);
     const errorList = Object.keys(errors).map(key => {
-      // console.log(errors[key],fieldLabels.front[key]);
+      // // console.log(errors[key],fieldLabels.front[key]);
       if (!errors[key]) {
         return null;
       }
@@ -193,7 +213,16 @@ class ApiUpdate extends PureComponent {
           <div className={styles.errorField}>{fieldLabels.front[key]}</div>
         </li>
       );
-    });
+    })||[];
+    return errorList.filter(item=>item!==null);
+  };
+
+  getErrorInfoByPrefix = (errorList) => {
+    // console.log(errorList);
+    const errorCount=errorList?errorList.length:0;
+    if(errorCount===0){
+      return null;
+    }
     return (
       <span className={styles.errorIcon}>
         <Popover
@@ -229,30 +258,34 @@ class ApiUpdate extends PureComponent {
       dispatch,
     } = this.props;
     validateFieldsAndScroll((error, values) => {
-      console.log("error in ui======:",error);
+      // console.log("error in ui======:",error);
       if (!error) {
-        console.log("api update submit values:",values);
+        // console.log("api update submit values:",values);
         const apiInfo = getPayloadForUpdate(apiService,values);
-        console.log("api update submit apiInfo:",apiInfo);
+        // console.log("api update submit apiInfo:",apiInfo);
         // submit the values
         dispatch({
           type: 'apiCreateModel/submitStepForm',
           payload: apiInfo,
+          callback:(resp)=>{
+            this.getApi(resp.apiId);
+          }
         });
+
       }
     });
   };
 
   render() {
     const {
-      form: { getFieldDecorator },
+      form: { getFieldDecorator,getFieldValue },
       submitting,apiService
     } = this.props;
     const { width } = this.state;
 
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
     const apiServiceBackendMembers  = apiService.apiServiceBackends.map((item)=>({...item,key:item.serviceSeq}));
-    // console.log("apiServiceBackendMembers:",apiServiceBackendMembers);
+    // // console.log("apiServiceBackendMembers:",apiServiceBackendMembers);
     return (
       <PageHeaderWrapper>
         <Card title="定义请求信息" className={styles.card} bordered={false}>
@@ -378,15 +411,151 @@ class ApiUpdate extends PureComponent {
               <Col lg={6} md={12} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.back.orgId}>
                   {getFieldDecorator('back.orgId', {
-                    rules: [{ required: true, message: '请选择服务提供者' }],
+                    rules: [{ required: true, message: `请选择${fieldLabels.back.orgId}` }],
                   })(<OrgSelectView orgType="0,2" />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                <span />
+              <Col xl={{ span: 16, offset: 2 }} lg={{ span: 18 }} md={{ span: 24 }} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.back.authType}>
+                  {getFieldDecorator('backAttr.authType', {
+                    rules: [{ required: true, message: `请选择${fieldLabels.backAttr.authType}` }],
+                  })(
+                    <Radio.Group>
+                      <Radio value="noneAuth">无认证</Radio>
+                      <Radio value="basicAuth">Basic认证</Radio>
+                      <Radio value="fixedToken">固定Token认证</Radio>
+                      <Radio value="dyncToken">动态Token认证</Radio>
+                    </Radio.Group>
+                  )}
+                </Form.Item>
               </Col>
-              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
-                <span />
+            </Row>
+            <Row
+              gutter={16}
+              style={{
+                background:'#fff7e6',
+                display: getFieldValue('backAttr.authType') === 'basicAuth' ? 'block' : 'none',
+              }}
+            >
+              <Col lg={6} md={12} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.userName}>
+                  {getFieldDecorator('backAttr.userName', {
+                    rules: [{ required: getFieldValue('backAttr.authType') === 'basicAuth', message: `请选择${fieldLabels.backAttr.userName}` }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+              <Col xl={{ span: 16, offset: 2 }} lg={{ span: 18 }} md={{ span: 12 }} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.userPassword}>
+                  {getFieldDecorator('backAttr.userPassword', {
+                    rules: [{ required: getFieldValue('backAttr.authType') === 'basicAuth', message: `请选择${fieldLabels.backAttr.userPassword}` }],
+                  })(<Input.Password />)}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row
+              gutter={16}
+              style={{
+                background:'#fff7e6',
+                display: getFieldValue('backAttr.authType') === 'fixedToken' ? 'block' : 'none',
+              }}
+            >
+              <Col lg={24} md={24} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.tokenStr}>
+                  {getFieldDecorator('backAttr.tokenStr', {
+                    rules: [{ required: getFieldValue('backAttr.authType') === 'fixedToken', message: `请选择${fieldLabels.backAttr.tokenStr}` }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row
+              gutter={16}
+              style={{
+                background:'#fff7e6',
+                display: getFieldValue('backAttr.authType') === 'dyncToken' ? 'block' : 'none',
+              }}
+            >
+              <Col lg={6} md={12} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.tokenUser}>
+                  {getFieldDecorator('backAttr.tokenUser', {
+                    rules: [{ required: getFieldValue('backAttr.authType') === 'dyncToken', message: `请选择${fieldLabels.backAttr.tokenUser}` }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.tokenPassword}>
+                  {getFieldDecorator('backAttr.tokenPassword', {
+                    rules: [{ required: getFieldValue('backAttr.authType') === 'dyncToken', message: `请选择${fieldLabels.backAttr.tokenPassword}` }],
+                  })(<Input.Password />)}
+                </Form.Item>
+              </Col>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 12 }} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.tokenUrl}>
+                  {getFieldDecorator('backAttr.tokenUrl', {
+                    rules: [{ required: getFieldValue('backAttr.authType') === 'dyncToken', message: `请选择${fieldLabels.backAttr.tokenUrl}` }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row
+              gutter={16}
+            >
+              <Col lg={6} md={12} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.ssl}>
+                  {getFieldDecorator('backAttr.ssl', {
+                    rules: [{ required: true, message: `请选择${fieldLabels.backAttr.ssl}` }],
+                  })(
+                    <Radio.Group>
+                      <Radio value="open">开</Radio>
+                      <Radio value="close">关</Radio>
+                    </Radio.Group>
+                  )}
+                </Form.Item>
+              </Col>
+              <Col
+                xl={{ span: 16, offset: 2 }}
+                lg={{ span: 18 }}
+                md={{ span: 24 }}
+                sm={24}
+                style={{
+                  height:80,
+                  display: getFieldValue('backAttr.ssl') === 'open' ? 'block' : 'none',
+               }}
+              >
+                <Form.Item label={fieldLabels.back.trustStore}>
+                  <Form.Item label={fieldLabels.backAttr.trustStore}>
+                    {getFieldDecorator('backAttr.tokenUser', {
+                      rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.trustStore}` }],
+                    })(<Input />)}
+                  </Form.Item>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row
+              gutter={16}
+              style={{
+                display: getFieldValue('backAttr.ssl') === 'open' ? 'block' : 'none',
+              }}
+            >
+              <Col lg={6} md={12} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.trustStorePassword}>
+                  {getFieldDecorator('backAttr.trustStorePassword', {
+                    rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.trustStorePassword}` }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.keyStore}>
+                  {getFieldDecorator('backAttr.keyStore', {
+                    rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.keyStore}` }],
+                  })(<Input.Password />)}
+                </Form.Item>
+              </Col>
+              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 12 }} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.backAttr.keyStorePassword}>
+                  {getFieldDecorator('backAttr.keyStorePassword', {
+                    rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.keyStorePassword}` }],
+                  })(<Input />)}
+                </Form.Item>
               </Col>
             </Row>
           </Form>

@@ -9,7 +9,7 @@ export function setAllEnumData() {
   const promise = allEnumList();
   promise.then(
     response => {
-      console.log('allEnumList response:', response);
+      // console.log('allEnumList response:', response);
       const allEnum = response && response.data ? response.data : [];
       // console.log("allEnum:", allEnum);
       localStorage.setItem('allEnum', JSON.stringify(allEnum));
