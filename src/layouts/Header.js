@@ -7,8 +7,10 @@ import router from 'umi/router';
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
 import styles from './Header.less';
+import { setAllEnumData } from '@/utils/masterData';
 
 const { Header } = Layout;
+setAllEnumData();
 
 class HeaderView extends Component {
   state = {

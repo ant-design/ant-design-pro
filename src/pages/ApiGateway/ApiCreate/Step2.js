@@ -1,0 +1,114 @@
+import React, { Fragment } from 'react';
+import { connect } from 'dva';
+import { Form, Input, Button, Divider,Radio } from 'antd';
+import router from 'umi/router';
+import styles from './style.less';
+import SelectView from '../SelectView';
+import RadioView from '../RadioView';
+
+const  RadioGroup  = Radio.Group;
+
+
+const formItemLayout = {
+  labelCol: {
+    span: 5,
+  },
+  wrapperCol: {
+    span: 19,
+  },
+};
+
+@connect(({ apiCreateModel }) => ({
+  data: apiCreateModel.apiService,
+}))
+@Form.create()
+class Step2 extends React.PureComponent {
+
+  render() {
+    const { form, dispatch, data } = this.props;
+    const { getFieldDecorator, validateFields } = form;
+    const onPrev = () => {
+      router.push('/apiGateway/apiCreate/info');
+    };
+    const onValidateForm = () => {
+      validateFields((err, values) => {
+        if (!err) {
+          dispatch({
+            type: 'apiCreateModel/saveStepFormData',
+            payload: {...values},
+            stepType:1,
+          });
+          router.push('/apiGateway/apiCreate/producer');
+        }
+      });
+    };
+    // // console.log("step2 data:",data);
+    return (
+      <Fragment>
+        <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
+          <Form.Item {...formItemLayout} label="服务类型">
+            {getFieldDecorator('serviceType', {
+              initialValue: data.serviceType,
+              rules: [{ required: true, message: '请选择服务类型' }],
+            })(<SelectView javaCode="apiService" javaKey="service_type" />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="请求PATH">
+            {getFieldDecorator('requestUrl', {
+              initialValue: data.requestUrl,
+              rules: [{ required: true, message: '请输入请求PATH' }],
+            })(<Input placeholder="请输入请求PATH" />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="协议类型">
+            {getFieldDecorator('protocol', {
+              initialValue: data.protocol,
+              rules: [{ required: true, message: '请选择协议' }],
+            })(<SelectView javaCode="apiService" javaKey="protocol" />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="请求类型">
+            {getFieldDecorator('reqMethod', {
+              initialValue: data.reqMethod,
+              rules: [{ required: true, message: '请选择HTTP Method' }],
+            })(<SelectView javaCode="common" javaKey="req_mothod" />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="服务类型">
+            {getFieldDecorator('apiType', {
+              rules: [{ required: true, message: '请选择服务类型' }],
+            })(<RadioView javaCode="apiService" javaKey="api_type" />)}
+          </Form.Item>
+          <Form.Item
+            style={{ marginBottom: 8 }}
+            wrapperCol={{
+              xs: { span: 24, offset: 0 },
+              sm: {
+                span: formItemLayout.wrapperCol.span,
+                offset: formItemLayout.labelCol.span,
+              },
+            }}
+            label=""
+          >
+            <Button type="primary" onClick={onValidateForm}>
+              下一步
+            </Button>
+            <Button onClick={onPrev} style={{ marginLeft: 8 }} htmlType="button">
+              上一步
+            </Button>
+          </Form.Item>
+        </Form>
+        <Divider style={{ margin: '40px 0 24px' }} />
+        <div className={styles.desc}>
+          <h3>说明</h3>
+          <h4>转账到支付宝账户</h4>
+          <p>
+            如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。
+          </p>
+          <h4>转账到银行卡</h4>
+          <p>
+            如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。
+          </p>
+        </div>
+      </Fragment>
+    );
+  }
+}
+
+export default Step2;

@@ -28,11 +28,11 @@ const plugins = [
       },
       pwa: pwa
         ? {
-            workboxPluginMode: 'InjectManifest',
-            workboxOptions: {
-              importWorkboxFrom: 'local',
-            },
-          }
+          workboxPluginMode: 'InjectManifest',
+          workboxOptions: {
+            importWorkboxFrom: 'local',
+          },
+        }
         : false,
       ...(!TEST && os.platform() === 'darwin'
         ? {
@@ -82,6 +82,13 @@ export default {
   //     pathRewrite: { '^/server': '' },
   //   },
   // },
+  proxy: {
+    '/server/': {
+      target: 'http://10.19.18.49:10401/',
+      changeOrigin: true,
+      pathRewrite: { '^/server/': '/' },
+    },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
