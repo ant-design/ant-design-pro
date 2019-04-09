@@ -97,17 +97,17 @@ $ docker pull antdesign/ant-design-pro
 $ docker run -p 80:80 antdesign/ant-design-pro
 # http://localhost を開く
 
-# 開発
+# dev
 $ npm run docker:dev
 
-# ビルド
+# build
 $ npm run docker:build
 
 
-# プロダクション開発
+# production dev
 $ npm run docker-prod:dev
 
-# プロダクションビルド
+# production build
 $ npm run docker-prod:build
 ```
 
