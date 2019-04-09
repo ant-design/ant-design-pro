@@ -1,4 +1,3 @@
-import { Route } from '@/components/SiderMenu';
 import { EffectsCommandMap } from 'dva';
 import { AnyAction } from 'redux';
 import { RouterTypes } from 'umi';
@@ -6,7 +5,7 @@ import { GlobalModelState } from './global';
 import { MenuModelState } from './menu';
 import { UserModelState } from './user';
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
-
+import { MenuDataItem } from '@ant-design/pro-layout';
 export { GlobalModelState, MenuModelState, SettingModelState, UserModelState };
 
 export type Effect = (
@@ -39,9 +38,13 @@ export interface Loading {
 export interface ConnectState {
   global: GlobalModelState;
   loading: Loading;
+  settings: SettingModelState;
   menu: MenuModelState;
-  setting: SettingModelState;
   user: UserModelState;
+}
+
+export interface Route extends MenuDataItem {
+  routes?: Route[];
 }
 
 /**
