@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
 import { Row, Col, Form, Card, Select, List } from 'antd';
-import { FormattedMessage } from 'umi/locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 
 import TagSelect from '@/components/TagSelect';
 import AvatarList from '@/components/AvatarList';

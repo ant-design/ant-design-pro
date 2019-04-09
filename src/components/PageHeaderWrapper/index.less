@@ -1,11 +1,110 @@
 @import '~antd/lib/style/themes/default.less';
 
-.content {
+.children-content {
   margin: 24px 24px 0;
 }
 
-@media screen and (max-width: @screen-sm) {
+.main {
+  :global {
+    .ant-page-header {
+      padding: 16px 32px 0;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+    }
+  }
+
+  .wide {
+    max-width: 1200px;
+    margin: auto;
+  }
+  .detail {
+    display: flex;
+  }
+
+  .row {
+    display: flex;
+    width: 100%;
+  }
+
+  .logo {
+    flex: 0 1 auto;
+    margin-right: 16px;
+    padding-top: 1px;
+    > img {
+      display: block;
+      width: 28px;
+      height: 28px;
+      border-radius: @border-radius-base;
+    }
+  }
+
+  .title-content {
+    margin-bottom: 16px;
+  }
+
+  @media screen and (max-width: @screen-sm) {
+    .content {
+      margin: 24px 0 0;
+    }
+  }
+
+  .title,
   .content {
-    margin: 24px 0 0;
+    flex: auto;
+  }
+
+  .extraContent,
+  .main {
+    flex: 0 1 auto;
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .title {
+    margin-bottom: 16px;
+  }
+
+  .logo,
+  .content,
+  .extraContent {
+    margin-bottom: 16px;
+  }
+
+  .extraContent {
+    min-width: 242px;
+    margin-left: 88px;
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: @screen-xl) {
+  .extraContent {
+    margin-left: 44px;
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .extraContent {
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .row {
+    display: block;
+  }
+
+  .action,
+  .extraContent {
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .detail {
+    display: block;
   }
 }

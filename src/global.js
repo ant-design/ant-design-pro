@@ -1,6 +1,6 @@
 import React from 'react';
 import { notification, Button, message } from 'antd';
-import { formatMessage } from 'umi/locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import defaultSettings from './defaultSettings';
 
 window.React = React;

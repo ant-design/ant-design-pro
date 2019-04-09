@@ -35,6 +35,6 @@ module.exports = {
     'no-console': 0, //禁止使用console
   },
   settings: {
-    polyfills: ['fetch', 'promises', 'url'],
+    polyfills: ['fetch', 'promises', 'url', 'object-assign'],
   },
 };

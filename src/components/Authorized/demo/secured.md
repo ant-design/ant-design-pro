@@ -17,7 +17,7 @@ const { Secured } = RenderAuthorized('user');
 class TestSecuredString extends React.Component {
   render() {
     return (
-      <Alert message="user Passed!" type="success" showIcon />;
+      <Alert message="user Passed!" type="success" showIcon />
     )
   }
 }
