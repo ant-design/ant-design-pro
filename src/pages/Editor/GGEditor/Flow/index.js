@@ -6,6 +6,7 @@ import { FlowContextMenu } from '../components/EditorContextMenu';
 import { FlowToolbar } from '../components/EditorToolbar';
 import { FlowItemPanel } from '../components/EditorItemPanel';
 import { FlowDetailPanel } from '../components/EditorDetailPanel';
+import Save from "../components/Save";
 import styles from './index.less';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -29,6 +30,7 @@ const FlowPage = () => {
             <FlowItemPanel />
           </Col>
           <Col span={16} className={styles.editorContent}>
+            <Save />
             <Flow className={styles.flow} />
           </Col>
           <Col span={4} className={styles.editorSidebar}>

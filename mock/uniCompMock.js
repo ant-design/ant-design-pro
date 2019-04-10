@@ -324,7 +324,7 @@ export function save(req, res, u, b) {
 
   const body = (b && b.body) || req.body;
   const { method, tableName, data:{info} } = body;
-  const {  orgType, orgName, id, componentId, groupName,appKey, groupId } = info;
+  const {  orgType, orgName, id, componentId, groupName,appKey, groupId,authType,tel,email,remark } = info;
   // console.log('save in mock:', body, id);
   const datasource = getList(tableName);
   switch (method) {
@@ -336,8 +336,12 @@ export function save(req, res, u, b) {
           if (tmpOrgArray && tmpOrgArray.length > 0) {
             const tmpObj = tmpOrgArray.shift();
             tmpObj.orgName = orgName;
-            tmpObj.appKey = appKey;
+            tmpObj.appkey = appKey;
             tmpObj.orgType = orgType;
+            tmpObj.tel=tel;
+            tmpObj.remark=remark;
+            tmpObj.email=email;
+            tmpObj.authType=authType;
             tmpObj.status='A';
             if (id) {
               tmpObj.id = id;
@@ -348,8 +352,12 @@ export function save(req, res, u, b) {
               id: newId,
               orgCode:'1',
               orgName,
-              appKey,
+              appkey:`appkey${newId}`,
+              authType,
+              tel,
+              email,
               orgType,
+              remark,
               status:'A',
               createTime: new Date(),
             });

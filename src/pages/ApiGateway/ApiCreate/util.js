@@ -1,11 +1,9 @@
-export function getPayload(option,apiService,newApiServiceBackends) {
-  const {apiServiceBackends,...newApiService}=apiService;
+export function getPayload(option,apiService) {
   return {
     option, // 1-新增记录 2-修改记录
     data: {
       info: {
-        apiService:newApiService,
-        apiServiceBackends:newApiServiceBackends,
+        apiService,
       },
     },
   };
@@ -47,12 +45,6 @@ const removeAttr=(oldApiServiceBackendAttrs,newApiServiceBackendAttrs) =>{
 export function getPayloadForUpdate(oldApiService,values) {
 
 
-  const apiService1={...oldApiService,...values.front};
-  const {apiServiceBackends,...apiService}=apiService1;
-  const newApiServiceBackends = values.members.map((item) => {
-    const {key, ...newItem} = item.backendType==='endpoint'?{...item,...values.back}:item;
-    return newItem;
-  });
 
   // －－－－－do attr start－－－－－－－－－－－－
   const {backAttr}=values;
@@ -88,17 +80,20 @@ export function getPayloadForUpdate(oldApiService,values) {
   //     newApiServiceBackendAttrs.push(attr);
   //   }
   // })
-  console.log("11111111newApiServiceBackends:",newApiServiceBackends);
 
   // －－－－－－－－－do attr end－－－－－－－－－
 
+  const apiService={...oldApiService,...values.front};
+  const newApiServiceBackends = values.members.map((item) => {
+    const {key, ...newItem} = item.backendType==='endpoint'?{...item,...values.back,...newApiServiceBackendAttrs}:item;
+    return newItem;
+  });
+  apiService.apiServiceBackends=newApiServiceBackends;
   const apiInfo= {
     option:2, // 1-新增记录 2-修改记录
     data: {
       info: {
         apiService,
-        apiServiceBackends:newApiServiceBackends,
-        apiServiceBackendAttrs:newApiServiceBackendAttrs
       },
     },
   };
@@ -106,15 +101,86 @@ export function getPayloadForUpdate(oldApiService,values) {
   return apiInfo;
 }
 
-export function getPayloadForAccess(selectedRow,apiServiceOrgs) {
-  const {apiServiceBackends,apiServiceOrgs:oriApiServiceOrgs,...apiService} = {...selectedRow};
+export function getApiFlowData(values) {
+
+  const apiFlowData={
+    "nodes": [{
+      "type": "node",
+      "size": "50*50",
+      "shape": "flow-circle",
+      "color": "#FA8C16",
+      "label": "start",
+      "x": 50,
+      "y": 150,
+      "id": "0",
+      "index": 0
+    }, ],
+    "edges": []
+  };
+  const {members}=values;
+  let index=0;
+  const sortMembers=members.sort((a,b) => {return a.serviceSeq-b.serviceSeq;});
+  console.log("==:",sortMembers)
+  sortMembers.forEach((item) => {
+    // if(item.backendType!=='endpoint'){
+    index+=1;
+    const preNode=apiFlowData.nodes[apiFlowData.nodes.length-1];
+    apiFlowData.nodes.push({
+      "type": "node",
+      "size": "60*40",
+      "shape": item.backendType==='endpoint'?"flow-rect":"flow-rect",
+      "color": item.backendType==='endpoint'?'#722ED1':"#1890FF",
+      "label": item.backendType,
+      "x": 100+60*index,
+      "y": 150,
+      "id": `${item.serviceSeq}`,
+      "index": index,
+    });
+    index+=1;
+    const nextNode=apiFlowData.nodes[apiFlowData.nodes.length-1];
+    apiFlowData.edges.push({
+      "source": preNode.id,
+      "sourceAnchor": 1,
+      "target": nextNode.id,
+      "targetAnchor": 3,
+      "id": `${preNode.id}${nextNode.id}`,
+      "index": index
+    });
+    // }
+  });
+  index+=1;
+  const preNode=apiFlowData.nodes[apiFlowData.nodes.length-1];
+  apiFlowData.nodes.push({
+    "type": "node",
+    "size": "50*50",
+    "shape": "flow-circle",
+    "color": "#FA8C16",
+    "label": "end",
+    "x": 100+60*index,
+    "y": 150,
+    "id": "999",
+    "index": index,
+  });
+  index+=1;
+  const nextNode=apiFlowData.nodes[apiFlowData.nodes.length-1];
+  apiFlowData.edges.push({
+    "source": preNode.id,
+    "sourceAnchor": 1,
+    "target": nextNode.id,
+    "targetAnchor": 3,
+    "id": `${preNode.id}${nextNode.id}`,
+    "index": index
+  });
+
+  return apiFlowData;
+}
+export function getPayloadForAccess(apiService) {
+  // const {apiServiceBackends,apiServiceOrgs:oriApiServiceOrgs,...apiService} = {...selectedRow};
   return {
     option:8, // 1-新增记录 2-修改记录,8-授权
     data: {
       info: {
-        apiService,
-        apiServiceBackends,
-        apiServiceOrgs,
+        apiService
       },
     },
   };

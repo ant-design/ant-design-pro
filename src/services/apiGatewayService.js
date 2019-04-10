@@ -8,7 +8,7 @@ export async function apiList(params) {
   console.log('params in queryApi:', params,`${PREFIX_PATH}/baseInfo/apiService/apiList`);
   return request(`${PREFIX_PATH}/baseInfo/apiService/apiList`, {
     method: 'POST',
-    body: {
+    data: {
       ...params,
       method: 'post',
     },
@@ -19,7 +19,7 @@ export async function apiStatusBatch(params) {
   // console.log('params:', params);
   return request(`${PREFIX_PATH}/baseInfo/apiService/apiBatch`, {
     method: 'POST',
-    body: {
+    data: {
       ...params,
       method: 'delete',
     },
@@ -29,7 +29,7 @@ export async function apiStatusBatch(params) {
 export async function addApi(params) {
   return request('/conf/apiGateway', {
     method: 'POST',
-    body: {
+    data: {
       ...params,
       method: 'post',
     },
@@ -39,7 +39,7 @@ export async function addApi(params) {
 export async function updateApi(params) {
   return request('/conf/apiGateway', {
     method: 'POST',
-    body: {
+    data: {
       ...params,
       method: 'update',
     },
@@ -50,7 +50,7 @@ export async function apiInfo(params) {
   console.log('params in queryApi:', params);
   return request(`${PREFIX_PATH}/baseInfo/apiService/apiInfo`, {
     method: 'POST',
-    body: {
+    data: {
       ...params,
       method: 'post',
     },
@@ -60,7 +60,7 @@ export async function apiInfo(params) {
 export async function saveApi(params) {
   return request(`${PREFIX_PATH}/baseInfo/apiService/saveApi`, {
     method: 'POST',
-    body: params,
+    data: params,
   });
 }
 

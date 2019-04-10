@@ -9,10 +9,10 @@ import OrgSelectView from "../OrgSelectView";
 
 const formItemLayout = {
   labelCol: {
-    span: 5,
+    span: 8,
   },
   wrapperCol: {
-    span: 19,
+    span: 16,
   },
 };
 
@@ -38,7 +38,7 @@ class Step3 extends React.PureComponent {
         const apiServiceBackend={...data, ...values,};
         const apiServiceBackends=[apiServiceBackend];
         apiService.apiServiceBackends=apiServiceBackends;
-        const apiInfo = getPayload(1,apiService,apiServiceBackends);
+        const apiInfo = getPayload(1,apiService);
         // console.log(apiService);
         if (!err) {
           dispatch({
@@ -63,34 +63,40 @@ class Step3 extends React.PureComponent {
             rules: [{ required: true, message: '请选择服务提供者' }],
           })(<OrgSelectView orgType="0,2" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="后端服务类型">
+        <Form.Item {...formItemLayout} label="提供方服务类型">
           {getFieldDecorator('serviceType', {
             initialValue: data.serviceType,
-            rules: [{ required: true, message: '请选择后端服务类型' }],
+            rules: [{ required: true, message: '请选择提供方服务类型' }],
           })(<SelectView javaCode="apiService" javaKey="service_type" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="后端请求地址">
+        <Form.Item {...formItemLayout} label="提供方请求地址">
           {getFieldDecorator('url', {
-            rules: [{ required: true, message: '请输入后端请求地址' }],
-          })(<Input placeholder="请输入后端请求地址" />)}
+            rules: [{ required: true, message: '请输入提供方请求地址' }],
+          })(<Input placeholder="请输入提供方请求地址" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="后端协议">
+        <Form.Item {...formItemLayout} label="提供方请求类型">
+          {getFieldDecorator('reqMethod', {
+            initialValue: data.reqMethod,
+            rules: [{ required: true, message: '请选择HTTP Method' }],
+          })(<SelectView javaCode="common" javaKey="req_method" />)}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="提供方协议">
           {getFieldDecorator('protocol', {
             initialValue: data.protocol,
-            rules: [{ required: true, message: '请选择后端协议' }],
+            rules: [{ required: true, message: '请选择提供方协议' }],
           })(<SelectView javaCode="apiService" javaKey="protocol" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="后端服务连接超时">
+        <Form.Item {...formItemLayout} label="提供方服务连接超时">
           {getFieldDecorator('connectTimeout', {
             initialValue: data.connectTimeout,
-            rules: [{ required: true, message: '后端服务连接超时' }],
-          })(<Input placeholder="请输入后端服务连接超时（ms）" />)}
+            rules: [{ required: true, message: '提供方服务连接超时' }],
+          })(<Input placeholder="请输入提供方服务连接超时（ms）" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="后端服务请求超时">
+        <Form.Item {...formItemLayout} label="提供方服务请求超时">
           {getFieldDecorator('socketTimeout', {
             initialValue: data.socketTimeout,
-            rules: [{ required: true, message: '后端服务请求超时' }],
-          })(<Input placeholder="请输入后端服务请求超时（ms）" />)}
+            rules: [{ required: true, message: '提供方服务请求超时' }],
+          })(<Input placeholder="请输入提供方服务请求超时（ms）" />)}
         </Form.Item>
         <Form.Item
           style={{ marginBottom: 8 }}

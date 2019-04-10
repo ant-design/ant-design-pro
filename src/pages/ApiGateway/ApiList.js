@@ -384,8 +384,8 @@ class TableList extends PureComponent {
     const {updateApiServiceOrg,selectedRow}=this.state;
     const {dispatch}=this.props;
     console.log("---updateApiServiceOrg＝＝＝＝4:",updateApiServiceOrg);
-
-    const apiInfo = getPayloadForAccess(selectedRow,updateApiServiceOrg);
+    selectedRow.apiServiceOrgs=updateApiServiceOrg;
+    const apiInfo = getPayloadForAccess(selectedRow);
     console.log("api access submit apiInfo:",apiInfo);
     // submit the values
     dispatch({

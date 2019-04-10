@@ -184,20 +184,23 @@ function saveApi(req, res, u, b) {
     option,
     data: { info },
   } = body;
-  const {apiService,apiServiceBackends} = info;
+  const {apiService} = info;
   // console.log("111111111111----------:",option,ACT.UPDATE,option === ACT.UPDATE);
   if (option === ACT.ADD) {
-    tableListDataSource.push({...apiService,apiId:tableListDataSource.length});
-  } else if (option === ACT.UPDATE) {
+    apiService.apiServiceBackends[0].backendId=tableListDataSource.length;
+    apiInfoDetail.data={...apiService,apiId:tableListDataSource.length};
+    tableListDataSource.push(apiInfoDetail.data);
+  }
+  else if (option === ACT.UPDATE) {
     const index = tableListDataSource.findIndex(item => apiService.apiId === item.apiId);
     tableListDataSource.splice(index, 1, apiService);// 对列表模拟数据对更新
     apiInfoDetail.data={...apiInfoDetail.data,...apiService};
     /* apiInfoDetail.data.apiServiceBackends数据对更新 */
     let i = apiInfoDetail.data.apiServiceBackends.length;
     // console.log("111111111111----------:",apiServiceBackends);
-    apiInfoDetail.data.apiServiceBackends = apiServiceBackends.map((item) => {
+    apiInfoDetail.data.apiServiceBackends = apiService.apiServiceBackends.map((item) => {
       i += 1;
-      const newItem = item.backendId ? item : {...item, backendId: i};// 去掉key，增加backendId
+      const newItem = item.backendId ? item : {...item, backendId: i};// 增加backendId
       return newItem;
     });
   }
@@ -253,8 +256,8 @@ function apiStatusBatch(req, res, u, b) {
   // return res.json(result);
 
   const result = {
-    code: 200,
-    msg: '',
+    code: '200',
+    msg: 'success',
   };
 
   return res.json(result);
@@ -267,7 +270,7 @@ function apiInfoMock(req, res, u, b) {
   }
 
   const body = (b && b.body) || req.body;
-
+  // console.log("==========:",req);
   const {
     data: { info },
   } = body;
@@ -284,8 +287,4 @@ export default {
   'POST /baseInfo/apiService/apiBatch': apiStatusBatch,
   'POST /baseInfo/apiService/apiInfo': apiInfoMock,
   'POST /baseInfo/apiService/saveApi': saveApi,
-
-  'POST /conf/forms': (req, res) => {
-    res.send({ message: 'Ok' });
-  },
 };

@@ -63,7 +63,7 @@ class BindDataSearch extends PureComponent {
     dispatch({
       type: 'componentModel/sug',
       payload: params,
-      callback: §
+      callback: resp => {
         if (resp.list) {
           const {
             showId,

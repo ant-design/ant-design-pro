@@ -15,9 +15,9 @@ export default {
 
   effects: {
     *apiInfo({ payload,callback }, { call, put }) {
-      console.log(payload);
+      // console.log(payload);
       const response = yield call(apiInfo, payload);
-      console.log(response);
+      // console.log(response);
       yield put({
         type: 'initData',
         payload: response,

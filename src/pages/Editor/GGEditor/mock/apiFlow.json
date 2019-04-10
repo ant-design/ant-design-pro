@@ -1,0 +1,48 @@
+{
+  "nodes": [{
+    "type": "node",
+    "size": "50*50",
+    "shape": "flow-circle",
+    "color": "#FA8C16",
+    "label": "apiName1",
+    "x": 150,
+    "y": 150,
+    "id": "1",
+    "index": 0
+  }, {
+    "type": "node",
+    "size": "50*24",
+    "shape": "flow-rect",
+    "color": "#1890FF",
+    "label": "in",
+    "x": 250,
+    "y": 150,
+    "id": "2",
+    "index": 1
+  }, {
+    "type": "node",
+    "size": "50*24",
+    "shape": "flow-capsule",
+    "color": "#722ED1",
+    "label": "endpoint",
+    "x": 350,
+    "y": 150,
+    "id": "3",
+    "index": 3
+  }],
+  "edges": [{
+    "source": "1",
+    "sourceAnchor": 2,
+    "target": "2",
+    "targetAnchor": 0,
+    "id": "12",
+    "index": 2
+  }, {
+    "source": "2",
+    "sourceAnchor": 2,
+    "target": "3",
+    "targetAnchor": 0,
+    "id": "23",
+    "index": 4
+  }]
+}

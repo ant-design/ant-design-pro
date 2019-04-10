@@ -133,28 +133,28 @@ const allResult = {
     {
       "id": 21,
       "javaCode": "common",
-      "javaKey": "req_mothod",
+      "javaKey": "req_method",
       "itemCode": "1",
       "itemValue": "get"
     },
     {
       "id": 22,
       "javaCode": "common",
-      "javaKey": "req_mothod",
+      "javaKey": "req_method",
       "itemCode": "2",
       "itemValue": "post"
     },
     {
       "id": 23,
       "javaCode": "common",
-      "javaKey": "req_mothod",
+      "javaKey": "req_method",
       "itemCode": "3",
       "itemValue": "delete"
     },
     {
       "id": 24,
       "javaCode": "common",
-      "javaKey": "req_mothod",
+      "javaKey": "req_method",
       "itemCode": "4",
       "itemValue": "put"
     },
@@ -203,14 +203,14 @@ const allResult = {
     {
       "id": 31,
       "javaCode": "common",
-      "javaKey": "req_mothod",
+      "javaKey": "req_method",
       "itemCode": "5",
       "itemValue": "patch"
     },
     {
       "id": 32,
       "javaCode": "common",
-      "javaKey": "req_mothod",
+      "javaKey": "req_method",
       "itemCode": "6",
       "itemValue": "options"
     },

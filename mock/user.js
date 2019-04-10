@@ -90,6 +90,14 @@ export default {
       });
       return;
     }
+    if (password === 'ant.design' && userName === 'admin_and_user') {
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: ['admin','manager','user'],
+      });
+      return;
+    }
     res.send({
       status: 'error',
       type,

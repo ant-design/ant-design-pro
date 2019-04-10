@@ -9,6 +9,7 @@ import {
   Input,
   Popover,
   Radio,
+  Tabs,
 } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
@@ -18,10 +19,13 @@ import TableForm from './TableForm';
 import styles from './style.less';
 import SelectView from './SelectView';
 import GroupSelectView from './GroupSelectView';
-import {getPayloadForUpdate,conversionAttr} from "./ApiCreate/util";
+import {getPayloadForUpdate,conversionAttr,getApiFlowData} from "./ApiCreate/util";
 import RadioView from "./RadioView";
 import OrgSelectView from "./OrgSelectView";
+import ApiFlow from "../Editor/GGEditor/ApiFlow"
+// import apiFlowData from '../Editor/GGEditor/mock/apiFlow.json';
 
+const {TabPane} = Tabs;
 const forms=['front','back','backAttr'];
 
 const fieldLabels = {
@@ -88,6 +92,7 @@ const fieldLabels = {
 class ApiUpdate extends PureComponent {
   state = {
     width: '100%',
+    apiFlowData:{},
   };
 
   componentDidMount() {
@@ -268,7 +273,8 @@ class ApiUpdate extends PureComponent {
           type: 'apiCreateModel/submitStepForm',
           payload: apiInfo,
           callback:(resp)=>{
-            this.getApi(resp.apiId);
+            // this.getApi(resp.data.apiId);
+            this.setBaseInfo(resp,dispatch);
           }
         });
 
@@ -276,15 +282,26 @@ class ApiUpdate extends PureComponent {
     });
   };
 
+  changeTab=(key)=> {
+    console.log(key);
+    if(key==='flow'){
+      const { form } = this.props;
+      const values=form.getFieldsValue();
+      const apiFlowData=getApiFlowData(values);
+      this.setState({apiFlowData});
+      console.log("====:",apiFlowData);
+    }
+  }
+
   render() {
     const {
       form: { getFieldDecorator,getFieldValue },
       submitting,apiService
     } = this.props;
-    const { width } = this.state;
+    const { width,apiFlowData } = this.state;
 
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
-    const apiServiceBackendMembers  = apiService.apiServiceBackends.map((item)=>({...item,key:item.serviceSeq}));
+    const apiServiceBackendMembers  = apiService&&apiService.apiServiceBackends?apiService.apiServiceBackends.map((item)=>({...item,key:item.serviceSeq})):[];
     // // console.log("apiServiceBackendMembers:",apiServiceBackendMembers);
     return (
       <PageHeaderWrapper>
@@ -330,7 +347,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.front.reqMethod}>
                   {getFieldDecorator('front.reqMethod', {
                     rules: [{ required: true, message: '请选择HTTP Method' }],
-                  })(<SelectView javaCode="common" javaKey="req_mothod" />)}
+                  })(<SelectView javaCode="common" javaKey="req_method" />)}
                 </Form.Item>
               </Col>
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
@@ -389,7 +406,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.back.reqMethod}>
                   {getFieldDecorator('back.reqMethod', {
                     rules: [{ required: true, message: '请选择HTTP Method' }],
-                  })(<SelectView javaCode="common" javaKey="req_mothod" />)}
+                  })(<SelectView javaCode="common" javaKey="req_method" />)}
                 </Form.Item>
               </Col>
               <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
@@ -521,9 +538,9 @@ class ApiUpdate extends PureComponent {
                   display: getFieldValue('backAttr.ssl') === 'open' ? 'block' : 'none',
                }}
               >
-                <Form.Item label={fieldLabels.back.trustStore}>
+                <Form.Item label={fieldLabels.backAttr.trustStore}>
                   <Form.Item label={fieldLabels.backAttr.trustStore}>
-                    {getFieldDecorator('backAttr.tokenUser', {
+                    {getFieldDecorator('backAttr.trustStore', {
                       rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.trustStore}` }],
                     })(<Input />)}
                   </Form.Item>
@@ -560,11 +577,20 @@ class ApiUpdate extends PureComponent {
             </Row>
           </Form>
         </Card>
-        <Card title="高级配置" bordered={false}>
-          {getFieldDecorator('members', {
-            initialValue: apiServiceBackendMembers,
-          })(<TableForm />)}
-        </Card>
+        <Tabs defaultActiveKey="1" onChange={this.changeTab}>
+          <TabPane tab="Table" key="table">
+            <Card title="高级配置" bordered={false}>
+              {getFieldDecorator('members', {
+                initialValue: apiServiceBackendMembers,
+              })(<TableForm />)}
+            </Card>
+          </TabPane>
+          <TabPane tab="Api Flow" key="flow">
+            <Card title="高级配置" bordered={false}>
+              <ApiFlow data={apiFlowData} />
+            </Card>
+          </TabPane>
+        </Tabs>,
         <FooterToolbar style={{ width }}>
           {this.getErrorInfo()}
           <Button type="primary" onClick={this.validate} loading={submitting}>

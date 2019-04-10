@@ -11,7 +11,7 @@ export async function allEnumList() {
 export async function query(params) {
   return request(`${PREFIX_PATH}/baseInfo/sys/enumList`, {
     method: 'POST',
-    body: {
+    data: {
       ...params,
       method: 'post',
     },
