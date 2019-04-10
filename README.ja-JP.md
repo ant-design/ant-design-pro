@@ -97,17 +97,17 @@ $ docker pull antdesign/ant-design-pro
 $ docker run -p 80:80 antdesign/ant-design-pro
 # http://localhost を開く
 
-# 開発
+# dev
 $ npm run docker:dev
 
-# ビルド
+# build
 $ npm run docker:build
 
 
-# プロダクション開発
+# production dev
 $ npm run docker-prod:dev
 
-# プロダクションビルド
+# production build
 $ npm run docker-prod:build
 ```
 
@@ -132,5 +132,7 @@ Gitpod（GitHub用の無料オンライン開発環境）でプロジェクト�
 どんな種類の貢献でも大歓迎です。あなたがこのプロジェクトに貢献できる方法のいくつかの例はここにあります。：
 
   - 毎日の仕事にAnt Design Proを使用すること。
-  - 報告すること。 [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
-  - 更新すること。 [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+  - 報告すること。 [issues](http://github.com/ant-design/ant-design-pro/issues) にバグ報告や質問をしてください。
+  - 更新すること。 改善を、[pull requests](http://github.com/ant-design/ant-design-pro/pulls) で送ってください。
+
+[![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro?type=dev)
