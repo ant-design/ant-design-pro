@@ -13,12 +13,12 @@ order: 13
 
 | 参数      | 说明                                      | 类型         | 默认值 |
 |----------|------------------------------------------|-------------|-------|
-| value    |选中的项              |string[] \| number[] | |
-| defaultValue    |默认选中的项   |string[] \| number[] | |
+| value    | 选中的项              | string[] \| number[] \|string \| number | |
+| defaultValue    |默认选中的项   | string[] \| number[] \|string \| number | |
 | onChange | 标签选择的回调函数 | Function(checkedTags) |  |
 | expandable | 是否展示 `展开/收起` 按钮，mode为single时不展示 | Boolean | false |
 | hideCheckAll | 隐藏 `全部` 按钮 | Boolean | false |
-| mode | 模式 `单选(single)、多选(默认)` | String |  |
+| mode         | 模式 `默认多选，单选传mode="single"` | String | - |
 
 ### TagSelectOption
 
