@@ -6,27 +6,23 @@ import { Tag, Icon } from 'antd';
 import styles from './index.less';
 
 const { CheckableTag } = Tag;
-
 const TagSelectOption = ({ children, checked, onChange, value }) => (
   <CheckableTag checked={checked} key={value} onChange={state => onChange(value, state)}>
     {children}
   </CheckableTag>
 );
-
-const emptyValue = isSingleSelect => (isSingleSelect ? '' : []);
-
+const SINGLE = 'single';
 TagSelectOption.isTagSelectOption = true;
-
 class TagSelect extends Component {
   static propTypes = {
     actionsText: PropTypes.object,
     hideCheckAll: PropTypes.bool,
-    isSingleSelect: PropTypes.bool,
+    mode: PropTypes.string,
   };
 
   static defaultProps = {
     hideCheckAll: false, // 单选情况下不显示
-    isSingleSelect: false, // 是否单选
+    mode: '', // 默认多选，单选传入 single
     actionsText: {
       expandText: 'Expand',
       collapseText: 'Collapse',
@@ -38,13 +34,16 @@ class TagSelect extends Component {
     super(props);
     this.state = {
       expand: false,
-      value: props.value || props.defaultValue || emptyValue(props.isSingleSelect),
+      value: props.value || props.defaultValue || this.emptyValue(),
+      emptyValue: this.emptyValue(),
     };
   }
 
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     if ('value' in nextProps) {
-      return { value: nextProps.value || emptyValue(nextProps.isSingleSelect) };
+      return {
+        value: nextProps.value || prevState.emptyValue,
+      };
     }
     return null;
   }
@@ -77,10 +76,9 @@ class TagSelect extends Component {
   }
 
   handleTagChange = (value, checked) => {
-    const { isSingleSelect } = this.props;
     const { value: StateValue } = this.state;
     let checkedTags = value;
-    if (!isSingleSelect) {
+    if (!this.isSingleMode()) {
       checkedTags = [...StateValue];
       const isInclude = checkedTags.includes(value);
       if (checked && !isInclude) {
@@ -92,6 +90,13 @@ class TagSelect extends Component {
 
     this.onChange(checkedTags);
   };
+
+  isSingleMode = () => {
+    const { mode } = this.props;
+    return mode === SINGLE;
+  };
+
+  emptyValue = () => (this.isSingleMode() ? '' : []);
 
   handleExpand = () => {
     const { expand } = this.state;
@@ -107,15 +112,7 @@ class TagSelect extends Component {
 
   render() {
     const { value, expand } = this.state;
-    const {
-      children,
-      hideCheckAll,
-      className,
-      style,
-      expandable,
-      actionsText,
-      isSingleSelect,
-    } = this.props;
+    const { children, hideCheckAll, className, style, expandable, actionsText } = this.props;
     const checkedAll = this.getAllTags().length === value.length;
     const { expandText = 'Expand', collapseText = 'Collapse', selectAllText = 'All' } =
       actionsText === null ? {} : actionsText;
@@ -127,7 +124,7 @@ class TagSelect extends Component {
 
     return (
       <div className={cls} style={style}>
-        {hideCheckAll || isSingleSelect ? null : (
+        {hideCheckAll || this.isSingleMode() ? null : (
           <CheckableTag checked={checkedAll} key="tag-select-__all__" onChange={this.onSelectAll}>
             {selectAllText}
           </CheckableTag>
@@ -141,7 +138,7 @@ class TagSelect extends Component {
               return React.cloneElement(child, {
                 key: `tag-select-${childValue}`,
                 value: childValue,
-                checked: isSingleSelect ? value === childValue : value.includes(childValue),
+                checked: this.isSingleMode() ? value === childValue : value.includes(childValue),
                 onChange: this.handleTagChange,
               });
             }

@@ -7,7 +7,7 @@ export interface ITagSelectProps {
   value?: string[] | number[];
   style?: React.CSSProperties;
   hideCheckAll?: boolean;
-  isSingleSelect?: boolean;
+  mode?: string;
   actionsText?: { expandText?: string; collapseText?: string; selectAllText?: string };
 }
 
