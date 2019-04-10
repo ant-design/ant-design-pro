@@ -57,6 +57,7 @@
   ],
   "dependencies": {
     "ant-design-pro": "^2.3.0",
+    "@ant-design/pro-layout": "^4.0.3",
     "antd": "^3.16.2",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",

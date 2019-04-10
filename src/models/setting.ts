@@ -3,7 +3,7 @@ import { Reducer } from 'redux';
 import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
 
 export interface SettingModelType {
-  namespace: 'setting';
+  namespace: 'settings';
   state: DefaultSettings;
   reducers: {
     getSetting: Reducer<any>;
@@ -75,7 +75,7 @@ const updateColorWeak: (colorWeak: string) => void = colorWeak => {
 };
 
 const SettingModel: SettingModelType = {
-  namespace: 'setting',
+  namespace: 'settings',
   state: defaultSettings,
   reducers: {
     getSetting(state) {

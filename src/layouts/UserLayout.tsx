@@ -1,8 +1,7 @@
 import SelectLang from '@/components/SelectLang';
-import { MenuDataItem } from '@/components/SiderMenu';
+import GlobalFooter from '@/components/GlobalFooter';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import getPageTitle from '@/utils/getPageTitle';
-import { GlobalFooter } from 'ant-design-pro';
 import { Icon } from 'antd';
 import { connect } from 'dva';
 import React, { Component, Fragment } from 'react';
@@ -11,6 +10,7 @@ import { formatMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
+import { MenuDataItem } from '@ant-design/pro-layout';
 
 const links = [
   {
@@ -79,6 +79,6 @@ class UserLayout extends Component<UserLayoutProps> {
 }
 
 export default connect(({ menu: menuModel }: ConnectState) => ({
-  menuData: menuModel.menuData,
+  menuDaDocumentTitleta: menuModel.menuData,
   breadcrumbNameMap: menuModel.breadcrumbNameMap,
 }))(UserLayout);

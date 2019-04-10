@@ -2,7 +2,7 @@ import { queryNotices } from '@/services/user';
 import { Subscription } from 'dva';
 import { Reducer } from 'redux';
 import { Effect } from './connect';
-import { NoticeIconData } from 'ant-design-pro/lib/NoticeIcon/NoticeIconTab';
+import { NoticeIconData } from '@/components/NoticeIcon';
 
 export interface NoticeItem extends NoticeIconData {
   id: string;
@@ -107,12 +107,14 @@ const GlobalModel: GlobalModelType = {
     },
     saveNotices(state, { payload }) {
       return {
+        collapsed: false,
         ...state,
         notices: payload,
       };
     },
     saveClearedNotices(state, { payload }) {
       return {
+        collapsed: false,
         ...state,
         notices: state.notices.filter(item => item.type !== payload),
       };

@@ -1,15 +1,15 @@
+import { MenuDataItem } from '@ant-design/pro-layout';
+import ConnectState from '@/models/connect';
 import { PageHeader, Tabs, Typography } from 'antd';
 import classNames from 'classnames';
+import { ContentWidth } from 'config/defaultSettings';
 import { connect } from 'dva';
 import React from 'react';
 import { RouterTypes } from 'umi';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import GridContent from './GridContent';
-import ConnectState from '@/models/connect';
-import { ContentWidth } from 'config/defaultSettings';
-import styles from './index.less';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { conversionBreadcrumbList } from './Breadcrumb';
-import { MenuDataItem } from '../SiderMenu';
+import GridContent from './GridContent';
+import styles from './index.less';
 
 const { Title } = Typography;
 
@@ -84,7 +84,10 @@ class PageHeaderWrapper extends React.Component<PageHeaderWrapperProps> {
     let pageTitle = title;
     const breadcrumb = conversionBreadcrumbList({
       ...restProps,
-      home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
+      home: formatMessage({
+        id: 'menu.home',
+        defaultMessage: 'Home',
+      }),
     });
     if (!title && breadcrumb.routes) {
       const router = breadcrumb.routes[breadcrumb.routes.length - 1];
@@ -128,7 +131,6 @@ class PageHeaderWrapper extends React.Component<PageHeaderWrapperProps> {
     const { children } = this.mergePropsAndChildren();
     return (
       <div style={{ margin: '-24px -24px 0' }} className={classNames(classNames, styles.main)}>
-        {this.renderPageHeader()}
         {children ? (
           <div className={styles['children-content']}>
             <GridContent>{children}</GridContent>

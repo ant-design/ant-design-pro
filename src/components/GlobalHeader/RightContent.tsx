@@ -1,4 +1,4 @@
-import { ConnectProps } from '@/models/connect';
+import { ConnectProps, ConnectState } from '@/models/connect';
 import { NoticeItem } from '@/models/global';
 import { CurrentUser } from '@/models/user';
 import React, { Component } from 'react';
@@ -7,11 +7,12 @@ import { ClickParam } from 'antd/es/menu';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
-import { NoticeIcon } from 'ant-design-pro';
+import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import HeaderDropdown from '../HeaderDropdown';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
+import { connect } from 'dva';
 
 export type SiderTheme = 'light' | 'dark';
 
@@ -21,11 +22,11 @@ export interface GlobalHeaderRightProps extends ConnectProps {
   fetchingNotices?: boolean;
   onNoticeVisibleChange?: (visible: boolean) => void;
   onMenuClick?: (param: ClickParam) => void;
-  onNoticeClear?: (tabName: string) => void;
+  onNoticeClear?: (tabName?: string) => void;
   theme?: SiderTheme;
 }
 
-export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
+class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
   getNoticeData = (): { [key: string]: NoticeItem[] } => {
     const { notices = [] } = this.props;
     if (notices.length === 0) {
@@ -78,16 +79,24 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
       payload: id,
     });
   };
-
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch!({
+      type: 'global/fetchNotices',
+    });
+  }
+  handleNoticeClear = (title: string, key: string) => {
+    const { dispatch } = this.props;
+    message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${title}`);
+    if (dispatch) {
+      dispatch({
+        type: 'global/clearNotices',
+        payload: key,
+      });
+    }
+  };
   render() {
-    const {
-      currentUser,
-      fetchingNotices,
-      onNoticeVisibleChange,
-      onMenuClick,
-      onNoticeClear,
-      theme,
-    } = this.props;
+    const { currentUser, fetchingNotices, onNoticeVisibleChange, onMenuClick, theme } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="userCenter">
@@ -146,46 +155,39 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
         <NoticeIcon
           className={styles.action}
           count={currentUser && currentUser.unreadCount}
-          onItemClick={(item: NoticeItem, tabProps: any) => {
-            console.log(item, tabProps); // tslint:disable-line no-console
+          onItemClick={item => {
             this.changeReadState(item as NoticeItem);
           }}
           loading={fetchingNotices}
-          locale={{
-            emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
-            clear: formatMessage({ id: 'component.noticeIcon.clear' }),
-            viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }),
-            notification: formatMessage({ id: 'component.globalHeader.notification' }),
-            message: formatMessage({ id: 'component.globalHeader.message' }),
-            event: formatMessage({ id: 'component.globalHeader.event' }),
-          }}
-          onClear={onNoticeClear}
+          clearText={formatMessage({ id: 'component.noticeIcon.clear' })}
+          viewMoreText={formatMessage({ id: 'component.noticeIcon.view-more' })}
+          onClear={this.handleNoticeClear}
           onPopupVisibleChange={onNoticeVisibleChange}
           onViewMore={() => message.info('Click on view more')}
           clearClose
         >
           <NoticeIcon.Tab
+            tabKey="notification"
             count={unreadMsg.notification}
             list={noticeData.notification}
-            title="notification"
+            title={formatMessage({ id: 'component.globalHeader.notification' })}
             emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
-            emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
             showViewMore
           />
           <NoticeIcon.Tab
+            tabKey="message"
             count={unreadMsg.message}
             list={noticeData.message}
-            title="message"
+            title={formatMessage({ id: 'component.globalHeader.message' })}
             emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
-            emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
             showViewMore
           />
           <NoticeIcon.Tab
+            tabKey="event"
+            title={formatMessage({ id: 'component.globalHeader.event' })}
+            emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
             count={unreadMsg.event}
             list={noticeData.event}
-            title="event"
-            emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
-            emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
             showViewMore
           />
         </NoticeIcon>
@@ -209,3 +211,11 @@ export default class GlobalHeaderRight extends Component<GlobalHeaderRightProps>
     );
   }
 }
+
+export default connect(({ user, global, loading }: ConnectState) => ({
+  currentUser: user.currentUser,
+  collapsed: global.collapsed,
+  fetchingMoreNotices: loading.effects['global/fetchMoreNotices'],
+  fetchingNotices: loading.effects['global/fetchNotices'],
+  notices: global.notices,
+}))(GlobalHeaderRight);

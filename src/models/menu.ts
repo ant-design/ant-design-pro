@@ -1,4 +1,4 @@
-import { MenuDataItem, Route } from '@/components/SiderMenu';
+import { MenuDataItem } from '@ant-design/pro-layout';
 import Authorized from '@/utils/Authorized';
 import { Effect } from 'dva';
 import isEqual from 'lodash/isEqual';
@@ -10,7 +10,7 @@ import defaultSettings from '../../config/defaultSettings';
 
 // Conversion router to menu.
 function formatter(
-  data: Route[],
+  data: MenuDataItem[],
   parentAuthority?: string[] | string,
   parentName?: string,
 ): MenuDataItem[] {

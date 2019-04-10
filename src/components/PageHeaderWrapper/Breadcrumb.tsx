@@ -1,11 +1,11 @@
+import { MenuDataItem } from '@ant-design/pro-layout';
 import React from 'react';
 import pathToRegexp from 'path-to-regexp';
 import Link from 'umi/link';
-import { FormattedMessage } from 'umi-plugin-react/locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { urlToList } from '../_utils/pathTools';
 import { PageHeaderWrapperProps } from '.';
-import { MenuDataItem } from '../SiderMenu';
-import { BreadcrumbProps as AntdBreadcrumbProps } from 'antd/lib/breadcrumb';
+import { BreadcrumbProps as AntdBreadcrumbProps } from 'antd/es/breadcrumb';
 
 type BreadcrumbProps = PageHeaderWrapperProps;
 
@@ -20,11 +20,14 @@ const itemRender: AntdBreadcrumbProps['itemRender'] = (route, params, routes, pa
   );
 };
 
-const renderItemLocal = (item: MenuDataItem): React.ReactNode => {
+const renderItemLocal = (item: MenuDataItem): string => {
   if (item.locale) {
-    return <FormattedMessage id={item.locale} defaultMessage={item.name} />;
+    return formatMessage({
+      id: item.locale,
+      defaultMessage: item.name,
+    });
   }
-  return item.name;
+  return item.name as string;
 };
 
 export const getBreadcrumb = (
