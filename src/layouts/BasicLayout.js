@@ -1,24 +1,16 @@
 import React, { Suspense } from 'react';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
-import isEqual from 'lodash/isEqual';
-import memoizeOne from 'memoize-one';
 import { connect } from 'dva';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
-import pathToRegexp from 'path-to-regexp';
 import Media from 'react-media';
-import { formatMessage } from 'umi/locale';
-import Authorized from '@/utils/Authorized';
 import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
-import Exception403 from '../pages/Exception/403';
-import PageLoading from '@/components/PageLoading';
 import SiderMenu from '@/components/SiderMenu';
-import { menu, title } from '../defaultSettings';
-
+import getPageTitle from '@/utils/getPageTitle';
 import styles from './BasicLayout.less';
 
 // lazy load SettingDrawer
@@ -52,16 +44,10 @@ const query = {
 };
 
 class BasicLayout extends React.Component {
-  constructor(props) {
-    super(props);
-    this.getPageTitle = memoizeOne(this.getPageTitle);
-    this.matchParamsPath = memoizeOne(this.matchParamsPath, isEqual);
-  }
-
   componentDidMount() {
     const {
       dispatch,
-      route: { routes, authority },
+      route: { routes, path, authority },
     } = this.props;
     dispatch({
       type: 'user/fetchCurrent',
@@ -71,7 +57,7 @@ class BasicLayout extends React.Component {
     });
     dispatch({
       type: 'menu/getMenuData',
-      payload: { routes, authority },
+      payload: { routes, path, authority },
     });
   }
 
@@ -82,50 +68,6 @@ class BasicLayout extends React.Component {
       breadcrumbNameMap,
     };
   }
-
-  matchParamsPath = (pathname, breadcrumbNameMap) => {
-    const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
-    return breadcrumbNameMap[pathKey];
-  };
-
-  getRouteAuthority = (pathname, routeData) => {
-    const routes = routeData.slice(); // clone
-
-    const getAuthority = (routeDatas, path) => {
-      let authorities;
-      routeDatas.forEach(route => {
-        // check partial route
-        if (pathToRegexp(`${route.path}(.*)`).test(path)) {
-          if (route.authority) {
-            authorities = route.authority;
-          }
-          // is exact route?
-          if (!pathToRegexp(route.path).test(path) && route.routes) {
-            authorities = getAuthority(route.routes, path);
-          }
-        }
-      });
-      return authorities;
-    };
-
-    return getAuthority(routes, pathname);
-  };
-
-  getPageTitle = (pathname, breadcrumbNameMap) => {
-    const currRouterData = this.matchParamsPath(pathname, breadcrumbNameMap);
-
-    if (!currRouterData) {
-      return title;
-    }
-    const pageName = menu.disableLocal
-      ? currRouterData.name
-      : formatMessage({
-          id: currRouterData.locale || currRouterData.name,
-          defaultMessage: currRouterData.name,
-        });
-
-    return `${pageName} - ${title}`;
-  };
 
   getLayoutStyle = () => {
     const { fixSiderbar, isMobile, collapsed, layout } = this.props;
@@ -163,12 +105,10 @@ class BasicLayout extends React.Component {
       isMobile,
       menuData,
       breadcrumbNameMap,
-      route: { routes },
       fixedHeader,
     } = this.props;
 
     const isTop = PropsLayout === 'topmenu';
-    const routerConfig = this.getRouteAuthority(pathname, routes);
     const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
     const layout = (
       <Layout>
@@ -196,9 +136,7 @@ class BasicLayout extends React.Component {
             {...this.props}
           />
           <Content className={styles.content} style={contentStyle}>
-            <Authorized authority={routerConfig} noMatch={<Exception403 />}>
-              {children}
-            </Authorized>
+            {children}
           </Content>
           <Footer />
         </Layout>
@@ -206,7 +144,7 @@ class BasicLayout extends React.Component {
     );
     return (
       <React.Fragment>
-        <DocumentTitle title={this.getPageTitle(pathname, breadcrumbNameMap)}>
+        <DocumentTitle title={getPageTitle(pathname, breadcrumbNameMap)}>
           <ContainerQuery query={query}>
             {params => (
               <Context.Provider value={this.getContext()}>
@@ -215,7 +153,7 @@ class BasicLayout extends React.Component {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        <Suspense fallback={<PageLoading />}>{this.renderSettingDrawer()}</Suspense>
+        <Suspense fallback={null}>{this.renderSettingDrawer()}</Suspense>
       </React.Fragment>
     );
   }

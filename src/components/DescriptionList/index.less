@@ -8,6 +8,14 @@
       overflow: hidden;
     }
   }
+  // fix margin top error of following descriptionList
+  & + & {
+    :global {
+      .ant-row {
+        margin-top: 16px;
+      }
+    }
+  }
 
   .title {
     margin-bottom: 16px;
@@ -45,6 +53,14 @@
     :global {
       .ant-row {
         margin-bottom: -8px;
+      }
+    }
+    // fix margin top error of following descriptionList
+    & + .descriptionList {
+      :global {
+        .ant-row {
+          margin-top: 8px;
+        }
       }
     }
     .title {

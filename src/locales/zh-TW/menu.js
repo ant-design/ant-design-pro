@@ -1,5 +1,8 @@
 export default {
   'menu.home': '首頁',
+  'menu.login': '登錄',
+  'menu.register': '註冊',
+  'menu.register.resultt': '註冊結果',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析頁',
   'menu.dashboard.monitor': '監控頁',
@@ -35,4 +38,8 @@ export default {
   'menu.exception.not-find': '404',
   'menu.exception.server-error': '500',
   'menu.exception.trigger': '触发错误',
+  'menu.editor': '圖形編輯器',
+  'menu.editor.flow': '流程編輯器',
+  'menu.editor.mind': '腦圖編輯器',
+  'menu.editor.koni': '拓撲編輯器',
 };

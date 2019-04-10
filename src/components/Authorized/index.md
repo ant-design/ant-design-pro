@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: Authorized
-  zh-CN: Authorized
+title: Authorized
 subtitle: 权限
 cols: 1
 order: 15

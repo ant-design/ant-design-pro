@@ -1,7 +1,5 @@
 ---
-title:
-  en-US: Result
-  zh-CN: Result
+title: Result
 subtitle: 处理结果
 cols: 1
 order: 12

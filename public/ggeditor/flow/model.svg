@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="88px" height="56px" viewBox="0 0 88 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="80" height="48" rx="24"></rect>
+        <filter x="-8.8%" y="-10.4%" width="117.5%" height="129.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.04 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Flow-01" transform="translate(-102.000000, -195.000000)">
+            <g id="Group-4" transform="translate(106.000000, 197.000000)">
+                <g id="Rectangle-15-Copy-35">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill-opacity="0.92" fill="#F9F0FF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <rect stroke="#B37FEB" stroke-width="1" x="0.5" y="0.5" width="79" height="47" rx="23.5"></rect>
+                </g>
+                <text id="model" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="12" fill="#000000" fill-opacity="0.65">
+                    <tspan x="24" y="29">Model</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

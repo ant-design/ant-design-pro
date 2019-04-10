@@ -1,5 +1,8 @@
 export default {
   'menu.home': 'Início',
+  'menu.login': 'Login',
+  'menu.register': 'Registro',
+  'menu.register.result': 'Resultado de registro',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': 'Análise',
   'menu.dashboard.monitor': 'Monitor',
@@ -35,4 +38,8 @@ export default {
   'menu.account.settings': 'Configurar Conta',
   'menu.account.trigger': 'Disparar Erro',
   'menu.account.logout': 'Sair',
+  'menu.editor': 'Graphic Editor',
+  'menu.editor.flow': 'Flow Editor',
+  'menu.editor.mind': 'Mind Editor',
+  'menu.editor.koni': 'Koni Editor',
 };

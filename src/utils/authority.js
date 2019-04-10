@@ -13,9 +13,11 @@ export function getAuthority(str) {
   if (typeof authority === 'string') {
     return [authority];
   }
-  return authority || ['admin'];
+  if (!authority && APP_TYPE === 'site') {
+    return ['admin'];
+  }
+  return authority;
 }
-
 export function setAuthority(authority) {
   const proAuthority = typeof authority === 'string' ? [authority] : authority;
   return localStorage.setItem('antd-pro-authority', JSON.stringify(proAuthority));
