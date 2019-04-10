@@ -1,15 +1,15 @@
-import React from 'react';
-import { FormattedMessage } from 'umi-plugin-react/locale';
 import { PageHeader, Tabs, Typography } from 'antd';
-import { connect } from 'dva';
 import classNames from 'classnames';
+import { connect } from 'dva';
+import React from 'react';
+import { RouterTypes } from 'umi';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import GridContent from './GridContent';
 import ConnectState from '@/models/connect';
 import { ContentWidth } from 'config/defaultSettings';
 import styles from './index.less';
 import { conversionBreadcrumbList } from './Breadcrumb';
 import { MenuDataItem } from '../SiderMenu';
-import * as H from 'history';
 
 const { Title } = Typography;
 
@@ -41,26 +41,26 @@ const renderFooter = ({
 };
 
 export interface PageHeaderWrapperProps {
-  title?: React.ReactNode | string | number;
-  logo?: React.ReactNode | string;
   action?: React.ReactNode | string;
-  content?: React.ReactNode;
-  extraContent?: React.ReactNode;
   breadcrumbList?: Array<{ title: string; href: string }>;
-  tabList?: Array<{ key: string; tab: React.ReactNode }>;
-  tabActiveKey?: string;
-  onTabChange?: (key: string) => void;
-  tabBarExtraContent?: React.ReactNode;
-  style?: React.CSSProperties;
-  home?: React.ReactNode;
-  wide?: boolean;
-  contentWidth?: ContentWidth;
-  className?: string;
-  children?: React.ReactNode;
-  wrapperClassName?: string;
-  top?: React.ReactNode;
-  location?: H.Location;
   breadcrumbNameMap?: { [path: string]: MenuDataItem };
+  children?: React.ReactNode;
+  className?: string;
+  content?: React.ReactNode;
+  contentWidth?: ContentWidth;
+  extraContent?: React.ReactNode;
+  home?: React.ReactNode;
+  location?: RouterTypes['location'];
+  logo?: React.ReactNode | string;
+  onTabChange?: (key: string) => void;
+  style?: React.CSSProperties;
+  tabActiveKey?: string;
+  tabBarExtraContent?: React.ReactNode;
+  tabList?: Array<{ key: string; tab: React.ReactNode }>;
+  title?: React.ReactNode | string | number;
+  top?: React.ReactNode;
+  wide?: boolean;
+  wrapperClassName?: string;
 }
 
 class PageHeaderWrapper extends React.Component<PageHeaderWrapperProps> {

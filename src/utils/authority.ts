@@ -1,6 +1,4 @@
 // use localStorage to store the authority info, which might be sent from server in actual project.
-const { NODE_ENV } = process.env;
-
 export function getAuthority(str?: string): any {
   // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
   const authorityString =
@@ -15,7 +13,7 @@ export function getAuthority(str?: string): any {
   if (typeof authority === 'string') {
     return [authority];
   }
-  if (!authority && NODE_ENV !== 'production') {
+  if (!authority && APP_TYPE === 'site') {
     return ['admin'];
   }
   return authority;
