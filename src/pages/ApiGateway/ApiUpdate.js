@@ -528,49 +528,49 @@ class ApiUpdate extends PureComponent {
                   )}
                 </Form.Item>
               </Col>
-              <Col
-                xl={{ span: 16, offset: 2 }}
-                lg={{ span: 18 }}
-                md={{ span: 24 }}
-                sm={24}
-                style={{
-                  height:80,
-                  display: getFieldValue('backAttr.ssl') === 'open' ? 'block' : 'none',
-               }}
-              >
-                <Form.Item label={fieldLabels.backAttr.trustStore}>
-                  <Form.Item label={fieldLabels.backAttr.trustStore}>
-                    {getFieldDecorator('backAttr.trustStore', {
-                      rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.trustStore}` }],
-                    })(<Input />)}
-                  </Form.Item>
-                </Form.Item>
-              </Col>
             </Row>
             <Row
               gutter={16}
               style={{
+                background:'#fff7e6',
                 display: getFieldValue('backAttr.ssl') === 'open' ? 'block' : 'none',
               }}
             >
-              <Col lg={6} md={12} sm={24} style={{height:80}}>
-                <Form.Item label={fieldLabels.backAttr.trustStorePassword}>
-                  {getFieldDecorator('backAttr.trustStorePassword', {
-                    rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.trustStorePassword}` }],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24} style={{height:80}}>
+              <Col xl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 12 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.backAttr.keyStore}>
                   {getFieldDecorator('backAttr.keyStore', {
                     rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.keyStore}` }],
                   })(<Input.Password />)}
                 </Form.Item>
               </Col>
-              <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 12 }} sm={24} style={{height:80}}>
+              <Col xl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 12 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.backAttr.keyStorePassword}>
                   {getFieldDecorator('backAttr.keyStorePassword', {
                     rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.keyStorePassword}` }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row
+              gutter={16}
+              style={{
+                background:'#fff7e6',
+                display: getFieldValue('backAttr.ssl') === 'open' ? 'block' : 'none',
+              }}
+            >
+              <Col xl={{ span: 12}} lg={{ span: 12 }} md={{ span: 12 }} sm={24} style={{height:80}}>
+
+                <Form.Item label={fieldLabels.backAttr.trustStore}>
+                  {getFieldDecorator('backAttr.trustStore', {
+                    rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.trustStore}` }],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+              <Col xl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 12 }} sm={24} style={{height:80}}>
+
+                <Form.Item label={fieldLabels.backAttr.trustStorePassword}>
+                  {getFieldDecorator('backAttr.trustStorePassword', {
+                    rules: [{ required: getFieldValue('backAttr.ssl') === 'open', message: `请选择${fieldLabels.backAttr.trustStorePassword}` }],
                   })(<Input />)}
                 </Form.Item>
               </Col>
