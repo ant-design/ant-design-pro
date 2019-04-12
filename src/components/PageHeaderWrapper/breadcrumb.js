@@ -16,6 +16,9 @@ const itemRender = (route, params, routes, paths) => {
 };
 
 const renderItemLocal = item => {
+  if (item.customBreadcrumbName) {
+    return item.customBreadcrumbName;
+  }
   if (item.locale) {
     return formatMessage({ id: item.locale, defaultMessage: item.name });
   }
@@ -87,12 +90,29 @@ const conversionFromLocation = (routerLocation, breadcrumbNameMap, props) => {
   return extraBreadcrumbItems;
 };
 
+const overrideBreadcrumbName = (breadcrumbNameMap, overrideMap) => {
+  if (!overrideMap) {
+    return breadcrumbNameMap;
+  }
+
+  return Object.keys(overrideMap).reduce(
+    (accum, key) => ({
+      ...accum,
+      [key]: {
+        ...accum[key],
+        customBreadcrumbName: overrideMap[key],
+      },
+    }),
+    breadcrumbNameMap
+  );
+};
+
 /**
  * 将参数转化为面包屑
  * Convert parameters into breadcrumbs
  */
 export const conversionBreadcrumbList = props => {
-  const { breadcrumbList } = props;
+  const { breadcrumbList, overrideBreadcrumbNameMap } = props;
   const { routes, params, routerLocation, breadcrumbNameMap } = getBreadcrumbProps(props);
   if (breadcrumbList && breadcrumbList.length) {
     return {
@@ -114,7 +134,11 @@ export const conversionBreadcrumbList = props => {
   // Generate breadcrumbs based on location
   if (routerLocation && routerLocation.pathname) {
     return {
-      routes: conversionFromLocation(routerLocation, breadcrumbNameMap, props),
+      routes: conversionFromLocation(
+        routerLocation,
+        overrideBreadcrumbName(breadcrumbNameMap, overrideBreadcrumbNameMap),
+        props
+      ),
       itemRender,
     };
   }
