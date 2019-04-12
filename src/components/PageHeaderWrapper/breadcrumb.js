@@ -74,7 +74,7 @@ const conversionFromLocation = (routerLocation, breadcrumbNameMap, props) => {
           breadcrumbName: name,
         }
       : null;
-  });
+  }).filter(item => item !== null);
   // Add home breadcrumbs to your head if defined
   if (home) {
     extraBreadcrumbItems.unshift({
