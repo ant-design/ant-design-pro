@@ -101,7 +101,7 @@ class ApiUpdate extends PureComponent {
     const { location } = this.props;
     const {state}=location;
     // console.log("location state:",state);
-    const {apiId}=state || {apiId:90};
+    const {apiId}=state || {apiId:105};
     this.getApi(apiId);
   }
 

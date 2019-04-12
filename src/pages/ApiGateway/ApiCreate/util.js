@@ -85,7 +85,7 @@ export function getPayloadForUpdate(oldApiService,values) {
 
   const apiService={...oldApiService,...values.front};
   const newApiServiceBackends = values.members.map((item) => {
-    const {key, ...newItem} = item.backendType==='endpoint'?{...item,...values.back,...newApiServiceBackendAttrs}:item;
+    const {key, ...newItem} = item.backendType==='endpoint'?{...item,...values.back,apiServiceBackendAttrs:newApiServiceBackendAttrs}:item;
     return newItem;
   });
   apiService.apiServiceBackends=newApiServiceBackends;

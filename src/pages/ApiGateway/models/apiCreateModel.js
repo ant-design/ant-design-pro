@@ -15,9 +15,9 @@ export default {
 
   effects: {
     *apiInfo({ payload,callback }, { call, put }) {
-      // console.log(payload);
+      console.log(payload);
       const response = yield call(apiInfo, payload);
-      // console.log(response);
+      console.log(response);
       yield put({
         type: 'initData',
         payload: response,
@@ -25,7 +25,8 @@ export default {
       if (callback) callback(response);
     },
     *submitAccess({ payload,callback }, { call }) {
-      console.log("-------------1");
+      console.log("-------------3");
+      console.log("payload in submitAccess model---:",JSON.stringify(payload));
       const response = yield call(saveApi, payload);
       console.log("-------------2");
       console.log("response in submitAccess model---:",response);
