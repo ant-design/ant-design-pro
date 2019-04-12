@@ -161,12 +161,11 @@ export function formatWan(val) {
       <span>
         {result}
         <span
-          styles={{
+          style={{
             position: 'relative',
             top: -2,
             fontSize: 14,
             fontStyle: 'normal',
-            lineHeight: 20,
             marginLeft: 2,
           }}
         >
@@ -182,3 +181,14 @@ export function formatWan(val) {
 export function isAntdPro() {
   return window.location.hostname === 'preview.pro.ant.design';
 }
+
+export const importCDN = (url, name) =>
+  new Promise(resolve => {
+    const dom = document.createElement('script');
+    dom.src = url;
+    dom.type = 'text/javascript';
+    dom.onload = () => {
+      resolve(window[name]);
+    };
+    document.head.appendChild(dom);
+  });

@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
-import { formatMessage, setLocale, getLocale } from 'umi/locale';
-import { Menu, Icon, Dropdown } from 'antd';
+import { formatMessage, setLocale, getLocale } from 'umi-plugin-react/locale';
+import { Menu, Icon } from 'antd';
 import classNames from 'classnames';
+import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 export default class SelectLang extends PureComponent {
@@ -12,42 +13,37 @@ export default class SelectLang extends PureComponent {
   render() {
     const { className } = this.props;
     const selectedLang = getLocale();
+    const locales = ['zh-CN', 'zh-TW', 'en-US', 'pt-BR'];
+    const languageLabels = {
+      'zh-CN': '简体中文',
+      'zh-TW': '繁体中文',
+      'en-US': 'English',
+      'pt-BR': 'Português',
+    };
+    const languageIcons = {
+      'zh-CN': '🇨🇳',
+      'zh-TW': '🇭🇰',
+      'en-US': '🇬🇧',
+      'pt-BR': '🇧🇷',
+    };
     const langMenu = (
       <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={this.changeLang}>
-        <Menu.Item key="zh-CN">
-          <span role="img" aria-label="简体中文">
-            🇨🇳
-          </span>{' '}
-          简体中文
-        </Menu.Item>
-        <Menu.Item key="zh-TW">
-          <span role="img" aria-label="繁体中文">
-            🇭🇰
-          </span>{' '}
-          繁体中文
-        </Menu.Item>
-        <Menu.Item key="en-US">
-          <span role="img" aria-label="English">
-            🇬🇧
-          </span>{' '}
-          English
-        </Menu.Item>
-        <Menu.Item key="pt-BR">
-          <span role="img" aria-label="Português">
-            🇵🇹
-          </span>{' '}
-          Português
-        </Menu.Item>
+        {locales.map(locale => (
+          <Menu.Item key={locale}>
+            <span role="img" aria-label={languageLabels[locale]}>
+              {languageIcons[locale]}
+            </span>{' '}
+            {languageLabels[locale]}
+          </Menu.Item>
+        ))}
       </Menu>
     );
     return (
-      <Dropdown overlay={langMenu} placement="bottomRight">
-        <Icon
-          type="global"
-          className={classNames(styles.dropDown, className)}
-          title={formatMessage({ id: 'navBar.lang' })}
-        />
-      </Dropdown>
+      <HeaderDropdown overlay={langMenu} placement="bottomRight">
+        <span className={classNames(styles.dropDown, className)}>
+          <Icon type="global" title={formatMessage({ id: 'navBar.lang' })} />
+        </span>
+      </HeaderDropdown>
     );
   }
 }

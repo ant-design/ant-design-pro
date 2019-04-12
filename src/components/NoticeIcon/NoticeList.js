@@ -11,7 +11,9 @@ export default function NoticeList({
   locale,
   emptyText,
   emptyImage,
+  onViewMore = null,
   showClear = true,
+  showViewMore = false,
 }) {
   if (data.length === 0) {
     return (
@@ -33,7 +35,7 @@ export default function NoticeList({
             typeof item.avatar === 'string' ? (
               <Avatar className={styles.avatar} src={item.avatar} />
             ) : (
-              item.avatar
+              <span className={styles.iconElement}>{item.avatar}</span>
             )
           ) : null;
 
@@ -41,7 +43,7 @@ export default function NoticeList({
             <List.Item className={itemCls} key={item.key || i} onClick={() => onClick(item)}>
               <List.Item.Meta
                 className={styles.meta}
-                avatar={<span className={styles.iconElement}>{leftIcon}</span>}
+                avatar={leftIcon}
                 title={
                   <div className={styles.title}>
                     {item.title}
@@ -61,11 +63,14 @@ export default function NoticeList({
           );
         })}
       </List>
-      {showClear ? (
-        <div className={styles.clear} onClick={onClear}>
-          {locale.clear} {title}
-        </div>
-      ) : null}
+      <div className={styles.bottomBar}>
+        {showClear ? (
+          <div onClick={onClear}>
+            {locale.clear} {locale[title] || title}
+          </div>
+        ) : null}
+        {showViewMore ? <div onClick={onViewMore}>{locale.viewMore}</div> : null}
+      </div>
     </div>
   );
 }

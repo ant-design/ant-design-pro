@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { RouteProps } from 'react-router';
 
 type authorityFN = (currentAuthority?: string) => boolean;
@@ -10,4 +10,4 @@ export interface IAuthorizedRouteProps extends RouteProps {
 }
 export { authority };
 
-export class AuthorizedRoute extends React.Component<IAuthorizedRouteProps, any> {}
+export default class AuthorizedRoute extends React.Component<IAuthorizedRouteProps, any> {}

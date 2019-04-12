@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { formatMessage, FormattedMessage } from 'umi/locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
-import { Checkbox, Alert, Icon } from 'antd';
+import { Checkbox, Alert, message, Icon } from 'antd';
 import Login from '@/components/Login';
 import styles from './Login.less';
 
@@ -35,6 +35,7 @@ class LoginPage extends Component {
           })
             .then(resolve)
             .catch(reject);
+          message.warning(formatMessage({ id: 'app.login.verification-code-warning' }));
         }
       });
     });
@@ -81,11 +82,29 @@ class LoginPage extends Component {
               login.type === 'account' &&
               !submitting &&
               this.renderMessage(formatMessage({ id: 'app.login.message-invalid-credentials' }))}
-            <UserName name="userName" placeholder="username: admin or user" />
+            <UserName
+              name="userName"
+              placeholder={`${formatMessage({ id: 'app.login.userName' })}: admin or user`}
+              rules={[
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.userName.required' }),
+                },
+              ]}
+            />
             <Password
               name="password"
-              placeholder="password: ant.design"
-              onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
+              placeholder={`${formatMessage({ id: 'app.login.password' })}: ant.design`}
+              rules={[
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.password.required' }),
+                },
+              ]}
+              onPressEnter={e => {
+                e.preventDefault();
+                this.loginForm.validateFields(this.handleSubmit);
+              }}
             />
           </Tab>
           <Tab key="mobile" tab={formatMessage({ id: 'app.login.tab-login-mobile' })}>
@@ -95,8 +114,34 @@ class LoginPage extends Component {
               this.renderMessage(
                 formatMessage({ id: 'app.login.message-invalid-verification-code' })
               )}
-            <Mobile name="mobile" />
-            <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
+            <Mobile
+              name="mobile"
+              placeholder={formatMessage({ id: 'form.phone-number.placeholder' })}
+              rules={[
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.phone-number.required' }),
+                },
+                {
+                  pattern: /^1\d{10}$/,
+                  message: formatMessage({ id: 'validation.phone-number.wrong-format' }),
+                },
+              ]}
+            />
+            <Captcha
+              name="captcha"
+              placeholder={formatMessage({ id: 'form.verification-code.placeholder' })}
+              countDown={120}
+              onGetCaptcha={this.onGetCaptcha}
+              getCaptchaButtonText={formatMessage({ id: 'form.get-captcha' })}
+              getCaptchaSecondText={formatMessage({ id: 'form.captcha.second' })}
+              rules={[
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.verification-code.required' }),
+                },
+              ]}
+            />
           </Tab>
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>

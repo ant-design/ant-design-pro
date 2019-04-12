@@ -1,24 +1,24 @@
 .ellipsis {
-  overflow: hidden;
   display: inline-block;
-  word-break: break-all;
   width: 100%;
+  overflow: hidden;
+  word-break: break-all;
 }
 
 .lines {
   position: relative;
   .shadow {
-    display: block;
     position: absolute;
+    z-index: -999;
+    display: block;
     color: transparent;
     opacity: 0;
-    z-index: -999;
   }
 }
 
 .lineClamp {
   position: relative;
+  display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
 }
