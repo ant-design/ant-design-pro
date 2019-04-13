@@ -61,20 +61,22 @@ const conversionFromLocation = (routerLocation, breadcrumbNameMap, props) => {
   // Convert the url to an array
   const pathSnippets = urlToList(routerLocation.pathname);
   // Loop data mosaic routing
-  const extraBreadcrumbItems = pathSnippets.map(url => {
-    const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
-    if (currentBreadcrumb.inherited) {
-      return null;
-    }
-    const name = renderItemLocal(currentBreadcrumb);
-    const { hideInBreadcrumb } = currentBreadcrumb;
-    return name && !hideInBreadcrumb
-      ? {
-          path: url,
-          breadcrumbName: name,
-        }
-      : null;
-  });
+  const extraBreadcrumbItems = pathSnippets
+    .map(url => {
+      const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
+      if (currentBreadcrumb.inherited) {
+        return null;
+      }
+      const name = renderItemLocal(currentBreadcrumb);
+      const { hideInBreadcrumb } = currentBreadcrumb;
+      return name && !hideInBreadcrumb
+        ? {
+            path: url,
+            breadcrumbName: name,
+          }
+        : null;
+    })
+    .filter(item => item !== null);
   // Add home breadcrumbs to your head if defined
   if (home) {
     extraBreadcrumbItems.unshift({
@@ -93,7 +95,11 @@ export const conversionBreadcrumbList = props => {
   const { breadcrumbList } = props;
   const { routes, params, routerLocation, breadcrumbNameMap } = getBreadcrumbProps(props);
   if (breadcrumbList && breadcrumbList.length) {
-    return conversionFromProps();
+    return {
+      routes: conversionFromProps(props),
+      params,
+      itemRender,
+    };
   }
   // 如果传入 routes 和 params 属性
   // If pass routes and params attributes
