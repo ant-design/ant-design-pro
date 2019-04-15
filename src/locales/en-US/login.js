@@ -12,6 +12,8 @@ export default {
   'app.login.login': 'Login',
   'app.register.register': 'Register',
   'app.register.get-verification-code': 'Get code',
+  'app.login.verification-code-warning':
+    'This project is a demo project and will not actually send you a verification code. Please switch to the account password login interface and log in as prompted.',
   'app.register.sign-in': 'Already have an account?',
   'app.register-result.msg': 'Account：registered at {email}',
   'app.register-result.activation-email':
