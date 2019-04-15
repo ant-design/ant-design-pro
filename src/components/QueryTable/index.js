@@ -15,6 +15,7 @@ import {
   DatePicker,
   Select,
   InputNumber,
+  Radio,
   // message,
   // Popconfirm,
 } from 'antd';
@@ -24,6 +25,7 @@ import styles from './index.less';
 
 const { Option } = Select;
 const {TextArea} = Input;
+const  RadioGroup  = Radio.Group;
 const FormItem = Form.Item;
 const getValue = obj =>
   Object.keys(obj)
@@ -47,6 +49,8 @@ const menuOption=[
   ['enable','激活'],
   ['disable','停用'],
 ];
+const QueryCommandChildren = [];
+const otherChildren = [];
 const CreateForm = Form.create()(props => {
   const { selectedRow, modalVisible, form, handleAdd, handleModalVisible } = props;
   // console.log('1 selectedRow in CreateForm :', selectedRow);
@@ -78,11 +82,21 @@ const CreateForm = Form.create()(props => {
         return (
           <Select style={{ width: '100%' }}>
             {item.enumData.map(d => (
-              <Option key={`${item.name}_${d.itemCode}`} value={d.itemCode}>
+              <Option key={`${item.javaCode}_${item.javaKey}_${d.itemCode}`} value={d.itemCode}>
                 {d.itemValue}
               </Option>
             ))}
           </Select>
+        )
+      case 'commonRadio':
+        return (
+          <RadioGroup style={{ width: '100%' }}>
+            {item.enumData.map(d => (
+              <Radio key={`${item.javaCode}_${item.javaKey}_${d.itemCode}`} value={d.itemCode}>
+                {d.itemValue}
+              </Radio>
+            ))}
+          </RadioGroup>
         )
       case 'textArea':
         return (
@@ -114,8 +128,8 @@ const CreateForm = Form.create()(props => {
       {addForms.map(item => (
         <FormItem
           key={`addFormItem-${item.name}`}
-          labelCol={{ span: 5 }}
-          wrapperCol={{ span: 15 }}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 12 }}
           label={item.title}
           style={{ height: `${item.rows?20*item.rows:20}px` }}
         >
@@ -147,15 +161,35 @@ class QueryTable extends PureComponent {
 
   componentDidMount() {
     console.log('============sub componentDidMount========');
+
+    const {children} = this.props;
+    QueryCommandChildren.splice(0,QueryCommandChildren.length);
+    React.Children.forEach(children, item => {
+      if (!item) {
+        return;
+      }
+      // eslint-disable-next-line
+      console.log("111110000:",item.type.name);
+      if (item.type.name === 'QueryCommand') {
+        QueryCommandChildren.push(item);
+        console.log("111110000:",QueryCommandChildren);
+      } else {
+        otherChildren.push(item);
+      }
+    });
+
     this.handleColumn();
+
   }
 
   // get columns
   handleColumn = () => {
     columns = [];
     const {
-      columnSchemas: { columnDetails },
+      columnSchemas: { columnDetails }
     } = this.props;
+
+    // const {commands} = columnDetails;
     columnDetails.map(columnDetail => {
       const obj = {};
       if (columnDetail && columnDetail.columnHidden) {
@@ -184,6 +218,7 @@ class QueryTable extends PureComponent {
       render: (text, row) => (
         <Fragment>
           <a onClick={() => this.handleModify(row, true)}>修改</a>
+          {QueryCommandChildren}
         </Fragment>
       ),
     });
@@ -229,6 +264,7 @@ class QueryTable extends PureComponent {
       onSelectRow(rows);
     }
   };
+
 
   handleSearch = (e) => {
     console.log('ddd---------2');
@@ -504,6 +540,7 @@ class QueryTable extends PureComponent {
       data ,
       loading,
       columnSchemas,
+      onRow,
     } = this.props;
     const { key } = columnSchemas;
     const { selectedRow, selectedRows, modalVisible } = this.state;
@@ -542,6 +579,7 @@ class QueryTable extends PureComponent {
             columns={columns}
             onSelectRow={this.handleSelectRows}
             onChange={this.handleTableChange}
+            onRow={onRow}
           />
         </div>
         <CreateForm

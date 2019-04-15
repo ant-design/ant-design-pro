@@ -45,12 +45,14 @@ class BindDataQueryTable extends PureComponent {
 
     const {
       dispatch,
+      onConversionData,
     } = this.props;
 
     console.log('ddd---------4');
     dispatch({
       type: 'uniComp/list',
       payload:params,
+      onConversionData,
     });
   };
 
@@ -95,6 +97,8 @@ class BindDataQueryTable extends PureComponent {
       uniComp: { data },
       loading,
       columnSchemas,
+      onRow,
+      children,
     } = this.props;
     const { key } = columnSchemas;
     const { selectedRows, } = this.state;
@@ -109,7 +113,11 @@ class BindDataQueryTable extends PureComponent {
         onAdd={this.handleAdd}
         columnSchemas={columnSchemas}
         onSearch={this.handleSearch}
-      />
+        onRow={onRow}
+
+      >
+        {children}
+      </QueryTable>
     );
   }
 }

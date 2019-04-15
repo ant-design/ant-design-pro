@@ -1,12 +1,11 @@
 /* eslint-disable eqeqeq */
 import {parse} from 'url';
-
+import {getRouteDatas,toSimulatePrivilege,allRoleList} from '../src/pages/UserManager/userUtil';
+import routeDatas from "../config/router.api.config";
 // mock tableListDataSource
-const componentDataSource = [];
 
 
-const groups =
-  {
+const groups = {
     "code": "200",
     "msg": null,
     "data": [
@@ -38,6 +37,67 @@ const groups =
         "groupApiDoc": null,
         "status": "A"
       }
+    ]
+  };
+const roles = {
+  "code": "200",
+  "msg": null,
+  "data": allRoleList,
+};
+
+const flatPrivileges=[];
+const routes=getRouteDatas(routeDatas);
+toSimulatePrivilege(flatPrivileges,routes,true,true);
+
+const privileges = {
+  "code": "200",
+  "msg": null,
+  "data": flatPrivileges,
+};
+const users = {
+    "code": "200",
+    "msg": null,
+    "data": [
+      {
+        "userId": 1,
+        "username": "admin",
+        "password": "xxx",
+        "email": "j1@163.com",
+        "tel":"18905926370",
+        "utype":"client",
+        "status": "A",
+        "sysUserRoles":[{"id":1,"userId":1,"roleId":1,"roleName":"admin"},],
+      },
+      {
+        "userId": 2,
+        "username": "user",
+        "password": "xxx",
+        "email": "j2@163.com",
+        "tel":"18905926371",
+        "utype":"client",
+        "status": "A",
+        "sysUserRoles":[{"id":1,"userId":2,"roleId":3,"roleName":"user"},],
+      },
+      {
+        "userId": 3,
+        "username": "crm",
+        "password": "xxx",
+        "email": "j3@163.com",
+        "tel":"18905926373",
+        "utype":"server",
+        "status": "A",
+        "sysUserRoles":[],
+      },
+      {
+        "userId": 4,
+        "username": "admin_manager_user",
+        "password": "xxx",
+        "email": "j4@163.com",
+        "tel":"18905926374",
+        "utype":"client",
+        "status": "A",
+        "sysUserRoles":[{"id":9,"userId":4,"roleId":1,"roleName":"admin"},{"id":10,"userId":4,"roleId":2,"roleName":"manager"},{"id":11,"userId":4,"roleId":3,"roleName":"user"},],
+      },
     ]
   };
 const orgs={
@@ -168,39 +228,9 @@ const orgs={
 };
 const tableListDataSource = orgs.data;
 const groupsDataSource = groups.data;
-
-function pushComponent() {
-  componentDataSource.push({
-    componentId: 919101,
-    disabled: false,
-    code: `919101`,
-    name: `letsgoComponent`,
-    orgId: `9191`,
-    orgName: `letsgoOrg`,
-    stateTime: new Date(`2017-07-23 14:23:12`),
-  });
-  componentDataSource.push({
-    componentId: 919102,
-    disabled: false,
-    code: `919102`,
-    name: `tdcComponent`,
-    orgId: `9192`,
-    orgName: `TDC`,
-    stateTime: new Date(`2017-07-23 14:23:12`),
-  });
-  for (let i = 70000; i < 70046; i += 1) {
-    componentDataSource.push({
-      componentId: i,
-      disabled: i % 6 === 0,
-      code: `${i}`,
-      name: `component ${i}`,
-      id: `${i}`,
-      orgName: `org ${i}`,
-      stateTime: new Date(`2017-07-${Math.floor((i - 70000) / 2) + 1}`),
-    });
-  }
-}
-pushComponent();
+const usersDataSource=users.data;
+const rolesDataSource=roles.data;
+const privilegesDataSource=privileges.data;
 
 function getList(innerTableName) {
   let dataSource = tableListDataSource;
@@ -209,8 +239,14 @@ function getList(innerTableName) {
     case 'api_group':
       dataSource = groupsDataSource;
       break;
-    case 'component':
-      dataSource = componentDataSource;
+    case 'sys_user':
+      dataSource = usersDataSource;
+      break;
+    case 'sys_role':
+      dataSource = rolesDataSource;
+      break;
+    case 'sys_privilege':
+      dataSource = privilegesDataSource;
       break;
     default:
       break;
@@ -259,8 +295,8 @@ export function queryList(req, res, u, b) {
   const{tableName,data:{info}} =params;
   // const params = parse(url, true).query;
 
-  let dataSource = [...getList(tableName)];
-  // console.debug(url, params, dataSource.length);
+  let dataSource = [...getList(tableName)];// 根据表明获取对应数据
+  console.log(params, dataSource.length);
   if (info.sorter) {
     const s = info.sorter.split('_');
     dataSource = dataSource.sort((prev, next) => {
@@ -270,16 +306,6 @@ export function queryList(req, res, u, b) {
       return prev[s[0]] - next[s[0]];
     });
   }
-  // if (params.status) {
-  //   const status = params.status.split(',');
-  //   let filterDataSource = [];
-  //   status.forEach(s => {
-  //     filterDataSource = filterDataSource.concat(
-  //       [...dataSource].filter(data => parseInt(data.status, 10) === parseInt(s[0], 10))
-  //     );
-  //   });
-  //   dataSource = filterDataSource;
-  // }
   const keys = Object.keys(info); // 根据查询条件（form表单）的参数，过滤列表
   keys.forEach(key => {
     // console.log("----:",info[key]);
@@ -324,7 +350,8 @@ export function save(req, res, u, b) {
 
   const body = (b && b.body) || req.body;
   const { method, tableName, data:{info} } = body;
-  const {  orgType, orgName, id, componentId, groupName,appKey, groupId,authType,tel,email,remark } = info;
+  const {  orgType, orgName, id, name,  groupName,appKey, groupId,authType,tel,email,remark } = info;
+  const {  userId,username,utype,roleId,roleName,privilegeId,path, icon,hideInMenu,hideChildrenInMenu,type, } = info;
   // console.log('save in mock:', body, id);
   const datasource = getList(tableName);
   switch (method) {
@@ -369,6 +396,9 @@ export function save(req, res, u, b) {
             const tmpObj = tmpGroupsArray.shift();
             tmpObj.groupName = groupName;
             if (groupId) {
+              tmpObj.tel=tel;
+              tmpObj.remark=remark;
+              tmpObj.email=email;
               tmpObj.id = groupId;
             }
           } else {
@@ -381,22 +411,66 @@ export function save(req, res, u, b) {
             console.log("datasource:",datasource);
           }
           break;
-        case 'component':
-          const tmpArray = datasource.filter(item => componentId&&componentId.indexOf(item.componentId) !== -1);
-          if (tmpArray && tmpArray.length > 0) {
-            const tmpObj = tmpArray.shift();
-            tmpObj.name = orgName;
-            tmpObj.id = id;
-            if (componentId) {
-              tmpObj.componentId = componentId;
+        case 'sys_user':
+          const tmpUsersArray = datasource.filter(item => userId && userId === item.userId);
+          if (tmpUsersArray && tmpUsersArray.length > 0) {
+            const tmpObj = tmpUsersArray.shift();
+            tmpObj.userName = username;
+            if (groupId) {
+              tmpObj.userId = userId;
             }
           } else {
+            const newId = datasource.length + 1;
             datasource.unshift({
-              componentId,
-              orgName,
-              id,
-              createTime: new Date(),
+              userId: newId,
+              username,
+              tel,
+              email,
+              utype,
+              remark,
+              status:'A',
             });
+            console.log("datasource:",datasource);
+          }
+          break;
+        case 'sys_role':
+          const tmpRolesArray = datasource.filter(item => roleId && roleId === item.roleId);
+          if (tmpRolesArray && tmpRolesArray.length > 0) {
+            const tmpObj = tmpRolesArray.shift();
+            tmpObj.roleName = roleName;
+            if (groupId) {
+              tmpObj.roleId = roleId;
+            }
+          } else {
+            const newId = datasource.length + 1;
+            datasource.unshift({
+              roleId: newId,
+              roleName,
+              remark,
+              status:'A',
+            });
+            console.log("datasource:",datasource);
+          }
+          break;
+        case 'sys_privilege':
+          const tmpPrivilegesArray = datasource.filter(item => privilegeId && privilegeId === item.privilegeId);
+          if (tmpPrivilegesArray && tmpPrivilegesArray.length > 0) {
+            const tmpObj = tmpPrivilegesArray.shift();
+            tmpObj.name = name;
+            if (groupId) {
+              tmpObj.privilegeId = privilegeId;
+            }
+          } else {
+            const newId = datasource.length + 1;
+            datasource.unshift({
+              privilegeId: newId,
+              roleName,
+              path, icon,hideInMenu,hideChildrenInMenu,type,
+
+              remark,
+              status:'A',
+            });
+            console.log("datasource:",datasource);
           }
           break;
         default:
@@ -448,25 +522,24 @@ export function statusBatch(req, res, u, b) {
           break;
       }
       // console.log("status batch method:",method,ids," status:",status);
+      let id="id";
       switch (tableName) {
         case 'api_group':
-          ids.forEach((value) => {
-            const tmpObj = datasource.find(item => value && value === item.groupId);
-            if (tmpObj) {
-              tmpObj.status = status;
-            }
-          });
+          id="groupId"
+          break;
+        case 'sys_user':
+          id="userId"
           break;
         default:
-          ids.forEach( (value) => {
-            const tmpObj = datasource.find(item => value && value === item.id);
-            if (tmpObj) {
-              tmpObj.status = status;
-            }
-            // console.log('STATUS BATCH in default:', tmpObj);
-          });
           break;
       }
+
+      ids.forEach((value) => {
+        const tmpObj = datasource.find(item => value && value === item[id]);
+        if (tmpObj) {
+          tmpObj.status = status;
+        }
+      });
       break;
     default:
       break;
@@ -479,6 +552,47 @@ export function statusBatch(req, res, u, b) {
     },
   };
 
+  if (res && res.json) {
+    return res.json(result);
+  }
+  return result;
+}
+export function detail(req, res, u, b) {
+  // console.log('statusBatch======');
+  // let url = u;
+  // if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+  //   url = req.url; // eslint-disable-line
+  // }
+
+  const body = (b && b.body) || req.body;
+  const { tableName, id } = body;
+  const datasource = getList(tableName);
+      let idName="id";
+      switch (tableName) {
+        case 'api_group':
+          idName="groupId";
+          break;
+        case 'sys_user':
+          idName="userId";
+          break;
+        case 'sys_role':
+          idName="roleId";
+          break;
+        case 'sys_privilege':
+          idName="privilegeId";
+          break;
+        default:
+          break;
+      }
+
+        const tmpObj = datasource.find(item => id && id === item[idName]);
+  const result = {
+    code: "200",
+    "msg": "SUCCESS",
+    data: tmpObj,
+  };
+
+  console.log("detail in unicomp mock:",id,result);
   if (res && res.json) {
     return res.json(result);
   }
@@ -507,6 +621,7 @@ export function getOrgListByType(req, res, u) {
 export default {
   'POST /baseInfo/sysdata/list': queryList,
   'POST /baseInfo/sysdata/save': save,
+  'POST /baseInfo/sysdata/detail': detail,
   'POST /baseInfo/sysdata/statusBatch': statusBatch,
   'GET /baseInfo/sysdata/sug': sug,
   'GET /baseInfo/api/allGroupList': groups,

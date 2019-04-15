@@ -4,6 +4,7 @@ export default {
   'form.optional': '（選填）',
   'form.submit': '提交',
   'form.save': '保存',
+  'form.userName.placeholder': '帳戶',
   'form.email.placeholder': '郵箱',
   'form.password.placeholder': '至少6位密碼，區分大小寫',
   'form.confirm-password.placeholder': '確認密碼',

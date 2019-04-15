@@ -49,7 +49,7 @@ class Step2 extends React.PureComponent {
             {getFieldDecorator('serviceType', {
               initialValue: data.serviceType,
               rules: [{ required: true, message: '请选择服务类型' }],
-            })(<SelectView javaCode="apiService" javaKey="service_type" />)}
+            })(<RadioView javaCode="apiService" javaKey="service_type" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求PATH">
             {getFieldDecorator('requestUrl', {
@@ -61,7 +61,7 @@ class Step2 extends React.PureComponent {
             {getFieldDecorator('protocol', {
               initialValue: data.protocol,
               rules: [{ required: true, message: '请选择协议' }],
-            })(<SelectView javaCode="apiService" javaKey="protocol" />)}
+            })(<RadioView javaCode="apiService" javaKey="protocol" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求类型">
             {getFieldDecorator('reqMethod', {

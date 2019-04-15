@@ -16,7 +16,7 @@ const columns = [
   },
   {
     title: 'title',
-    dataIndex: 'title',
+    dataIndex : 'title',
   },
 ];
 

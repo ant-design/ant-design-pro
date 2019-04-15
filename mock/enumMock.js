@@ -236,48 +236,6 @@ const allResult = {
       "itemValue": "停用"
     },
     {
-      "id": 36,
-      "javaCode": "apiServiceOrg",
-      "javaKey": "status",
-      "itemCode": "A",
-      "itemValue": "激活"
-    },
-    {
-      "id": 37,
-      "javaCode": "apiServiceOrg",
-      "javaKey": "status",
-      "itemCode": "S",
-      "itemValue": "停用"
-    },
-    {
-      "id": 38,
-      "javaCode": "apiServiceOrg",
-      "javaKey": "status",
-      "itemCode": "D",
-      "itemValue": "删除"
-    },
-    {
-      "id": 39,
-      "javaCode": "common",
-      "javaKey": "role_type",
-      "itemCode": "user",
-      "itemValue": "普通用户"
-    },
-    {
-      "id": 40,
-      "javaCode": "common",
-      "javaKey": "role_type",
-      "itemCode": "manager",
-      "itemValue": "管理员"
-    },
-    {
-      "id": 41,
-      "javaCode": "common",
-      "javaKey": "role_type",
-      "itemCode": "admin",
-      "itemValue": "系统管理员"
-    },
-    {
       "id": 42,
       "javaCode": "apiServiceBackend",
       "javaKey": "service_type",
@@ -323,8 +281,8 @@ const allResult = {
       "id": 50,
       "javaCode": "org",
       "javaKey": "auth_type",
-      "itemCode": "3",
-      "itemValue": "NoAuth"
+      "itemCode": "0",
+      "itemValue": "None Auth"
     },
     {
       "id": 51,
@@ -360,6 +318,111 @@ const allResult = {
       "javaKey": "token_expire_time",
       "itemCode": "defaultTime",
       "itemValue": "100"
+    },
+    {
+      "id": 63,
+      "javaCode": "apiServiceBackendAttr",
+      "javaKey": "auth_type",
+      "itemCode": "noneAuth",
+      "itemValue": "无认证"
+    },
+    {
+      "id": 64,
+      "javaCode": "apiServiceBackendAttr",
+      "javaKey": "auth_type",
+      "itemCode": "basicAuth",
+      "itemValue": "basic认证"
+    },
+    {
+      "id": 65,
+      "javaCode": "apiServiceBackendAttr",
+      "javaKey": "auth_type",
+      "itemCode": "fixedAuth",
+      "itemValue": "固定token"
+    },
+    {
+      "id": 66,
+      "javaCode": "apiServiceBackendAttr",
+      "javaKey": "auth_type",
+      "itemCode": "dyncAuth",
+      "itemValue": "动态token"
+    },
+    {
+      "id": 67,
+      "javaCode": "sysUser",
+      "javaKey": "utype",
+      "itemCode": "client",
+      "itemValue": "登录用户"
+    },
+    {
+      "id": 68,
+      "javaCode": "sysUser",
+      "javaKey": "utype",
+      "itemCode": "server",
+      "itemValue": "服务调用用户"
+    },
+    {
+      "id": 74,
+      "javaCode": "privilege",
+      "javaKey": "hide_children_in_menu",
+      "itemCode": "Y",
+      "itemValue": "是"
+    },
+    {
+      "id": 75,
+      "javaCode": "privilege",
+      "javaKey": "hide_children_in_menu",
+      "itemCode": "N",
+      "itemValue": "否"
+    },
+    {
+      "id": 76,
+      "javaCode": "privilege",
+      "javaKey": "hide_in_menu",
+      "itemCode": "Y",
+      "itemValue": "是"
+    },
+    {
+      "id": 77,
+      "javaCode": "privilege",
+      "javaKey": "hide_in_menu",
+      "itemCode": "N",
+      "itemValue": "否"
+    },
+    {
+      "id": 78,
+      "javaCode": "privilege",
+      "javaKey": "icon",
+      "itemCode": "table",
+      "itemValue": "table"
+    },
+    {
+      "id": 79,
+      "javaCode": "privilege",
+      "javaKey": "icon",
+      "itemCode": "dashboard",
+      "itemValue": "dashboard"
+    },
+    {
+      "id": 80,
+      "javaCode": "privilege",
+      "javaKey": "icon",
+      "itemCode": "form",
+      "itemValue": "form"
+    },
+    {
+      "id": 81,
+      "javaCode": "privilege",
+      "javaKey": "icon",
+      "itemCode": "user",
+      "itemValue": "user"
+    },
+    {
+      "id": 82,
+      "javaCode": "privilege",
+      "javaKey": "icon",
+      "itemCode": "gateway",
+      "itemValue": "gateway"
     }
   ]
 };

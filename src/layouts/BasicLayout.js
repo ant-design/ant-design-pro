@@ -12,6 +12,7 @@ import Context from './MenuContext';
 import SiderMenu from '@/components/SiderMenu';
 import getPageTitle from '@/utils/getPageTitle';
 import styles from './BasicLayout.less';
+import {flatToMenuTree} from '../pages/UserManager/userUtil'
 
 // lazy load SettingDrawer
 const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
@@ -55,9 +56,10 @@ class BasicLayout extends React.Component {
     dispatch({
       type: 'setting/getSetting',
     });
+
     dispatch({
       type: 'menu/getMenuData',
-      payload: { routes, path, authority },
+      payload: { routes, path, authority,flatToMenuTree },
     });
   }
 

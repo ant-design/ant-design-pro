@@ -184,6 +184,18 @@ class Register extends Component {
         </h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
+            {getFieldDecorator('username', {
+              rules: [
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.userName.required' }),
+                },
+              ],
+            })(
+              <Input size="large" placeholder={formatMessage({ id: 'form.userName.placeholder' })} />
+            )}
+          </FormItem>
+          <FormItem>
             {getFieldDecorator('mail', {
               rules: [
                 {
@@ -258,7 +270,6 @@ class Register extends Component {
                 style={{ width: '20%' }}
               >
                 <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
               </Select>
               {getFieldDecorator('mobile', {
                 rules: [

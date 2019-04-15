@@ -26,7 +26,7 @@ import styles from './ApiList.less';
 import constants from '@/utils/constUtil';
 import { getGroupName, getItems, getItemValue2 } from '@/utils/masterData';
 import SelectView from './SelectView';
-import OrgTransfer from "../Test/OrgTransfer";
+import OrgTransfer from "./OrgTransfer";
 import {getPayloadForAccess} from "./ApiCreate/util";
 
 const { ACT, API_STATUS } = constants;

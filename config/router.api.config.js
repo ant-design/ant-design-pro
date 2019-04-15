@@ -24,11 +24,11 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/apiGateway/apiList', authority: ['admin', 'user'] },
+      { path: '/', name: 'home',redirect: '/apiGateway/apiList', authority: ['admin', 'user'] },
       // apiGateWay
       {
         path: '/apiGateway',
-        icon: 'table',
+        icon: 'gateway',
         name: 'apiGateway',
         routes: [
           {
@@ -80,7 +80,7 @@ export default [
         path: '/uniComp',
         icon: 'table',
         name: 'uniComp',
-        authority: ['manager'],
+        authority: ['admin','manager'],
         routes: [
           {
             path: '/uniComp/org',
@@ -92,10 +92,29 @@ export default [
             name: 'group',
             component: './UniComp/Group',
           },
+        ],
+      },
+      // userManager
+      {
+        path: '/userManager',
+        icon: 'team',
+        name: 'userManager',
+        authority: ['admin'],
+        routes: [
           {
-            path: '/uniComp/component',
-            name: 'component',
-            component: './UniComp/Component',
+            path: '/userManager/user',
+            name: 'user',
+            component: './UserManager/User',
+          },
+          {
+            path: '/userManager/role',
+            name: 'role',
+            component: './UserManager/Role',
+          },
+          {
+            path: '/userManager/privilege',
+            name: 'privilege',
+            component: './UserManager/Privilege',
           },
         ],
       },
@@ -126,9 +145,71 @@ export default [
             component: './Test/Test4',
           },
           {
+            path: '/test/test5',
+            name: 'test5',
+            component: './Test/Test5',
+          },
+          {
             path: '/test/orgTransfer',
             name: 'orgTransfer',
-            component: './Test/OrgTransfer',
+            component: './ApiGateway/OrgTransfer',
+          },
+        ],
+      },
+      {
+        name: 'account',
+        icon: 'user',
+        path: '/account',
+        routes: [
+          {
+            path: '/account/center',
+            name: 'center',
+            component: './Account/Center/Center',
+            routes: [
+              {
+                path: '/account/center',
+                redirect: '/account/center/articles',
+              },
+              {
+                path: '/account/center/articles',
+                component: './Account/Center/Articles',
+              },
+              {
+                path: '/account/center/applications',
+                component: './Account/Center/Applications',
+              },
+              {
+                path: '/account/center/projects',
+                component: './Account/Center/Projects',
+              },
+            ],
+          },
+          {
+            path: '/account/settings',
+            name: 'settings',
+            component: './Account/Settings/Info',
+            routes: [
+              {
+                path: '/account/settings',
+                redirect: '/account/settings/base',
+              },
+              {
+                path: '/account/settings/base',
+                component: './Account/Settings/BaseView',
+              },
+              {
+                path: '/account/settings/security',
+                component: './Account/Settings/SecurityView',
+              },
+              {
+                path: '/account/settings/binding',
+                component: './Account/Settings/BindingView',
+              },
+              {
+                path: '/account/settings/notification',
+                component: './Account/Settings/NotificationView',
+              },
+            ],
           },
         ],
       },

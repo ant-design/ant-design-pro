@@ -1,6 +1,7 @@
 export default {
   'form.get-captcha': 'Get Captcha',
   'form.captcha.second': 'sec',
+  'form.userName.placeholder': 'nome de usuário',
   'form.email.placeholder': 'Email',
   'form.password.placeholder': 'Senha',
   'form.confirm-password.placeholder': 'Confirme a senha',

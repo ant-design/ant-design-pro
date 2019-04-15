@@ -1,4 +1,36 @@
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
+const roles={
+  "code": "200",
+  "msg": null,
+  "data": [
+    {
+      "roleName": "admin",
+      "roleId":1,
+    },
+    {
+      "roleName": "manager",
+      "roleId":2,
+    },
+    {
+      "roleName": "user",
+      "roleId":3,
+    },
+  ]
+};
+const loginResult={
+    "code": "200",
+    "msg": "",
+    "data": {
+      "info": {
+        "userId": 999,
+        "username": "admin",
+        "currentAuthority": ["admin","user"],
+        "email": "test@dsf.com",
+        "tel": "43765876",
+        "type": "account",
+      }
+    }
+  };
 export default {
   // 支持值为 Object 和 Array
   'GET /api/currentUser': {
@@ -72,28 +104,30 @@ export default {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
-  'POST /api/login/account': (req, res) => {
+  'POST /baseInfo/sys/login': (req, res) => {
+    console.log("login request====:",req.body);
     const { password, userName, type } = req.body;
+    loginResult.data.info.username=userName;
+    loginResult.data.info.type=type;
+    console.log("login response====:",req.body);
     if (password === 'ant.design' && userName === 'admin') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'admin',
-      });
+      loginResult.data.info.currentAuthority=["admin"];
+      console.log("dddd====:",loginResult);
+      res.send(loginResult);
       return;
     }
     if (password === 'ant.design' && userName === 'user') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'user',
-      });
+      loginResult.data.info.currentAuthority=["user"];
+      res.send(loginResult);
+      return;
+    }
+    if (password === 'ant.design' && userName === 'admin_manager_user') {
+      loginResult.data.info.currentAuthority=["admin",'manager','user'];
+      res.send(loginResult);
       return;
     }
     res.send({
-      status: 'error',
-      type,
-      currentAuthority: 'guest',
+      "code": "201",
     });
   },
   'POST /api/register': (req, res) => {
@@ -135,4 +169,5 @@ export default {
       path: '/base/category/list',
     });
   },
+  'GET /baseInfo/sysdata/allRoleList': roles,
 };

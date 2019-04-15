@@ -5,6 +5,7 @@ import router from 'umi/router';
 import styles from './style.less';
 import { getPayload } from './util';
 import SelectView from '../SelectView';
+import RadioView from '../RadioView';
 import OrgSelectView from "../OrgSelectView";
 
 const formItemLayout = {
@@ -27,7 +28,7 @@ class Step3 extends React.PureComponent {
   render() {
     const { form, apiService, dispatch, submitting } = this.props;
     // console.log("apiService.apiServiceBackends:",apiService.apiServiceBackends);
-    const data = apiService.apiServiceBackends?apiService.apiServiceBackends[0]:[{}];
+    const data = apiService.apiServiceBackends&&apiService.apiServiceBackends.length>0?apiService.apiServiceBackends[0]:{};
     const { getFieldDecorator, validateFields } = form;
     const onPrev = () => {
       router.push('/apiGateway/apiCreate/consumer');
@@ -67,7 +68,7 @@ class Step3 extends React.PureComponent {
           {getFieldDecorator('serviceType', {
             initialValue: data.serviceType,
             rules: [{ required: true, message: '请选择提供方服务类型' }],
-          })(<SelectView javaCode="apiService" javaKey="service_type" />)}
+          })(<RadioView javaCode="apiService" javaKey="service_type" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="提供方请求地址">
           {getFieldDecorator('url', {
@@ -84,7 +85,7 @@ class Step3 extends React.PureComponent {
           {getFieldDecorator('protocol', {
             initialValue: data.protocol,
             rules: [{ required: true, message: '请选择提供方协议' }],
-          })(<SelectView javaCode="apiService" javaKey="protocol" />)}
+          })(<RadioView javaCode="apiService" javaKey="protocol" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="提供方服务连接超时">
           {getFieldDecorator('connectTimeout', {

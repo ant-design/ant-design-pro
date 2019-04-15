@@ -27,6 +27,16 @@ export async function statusBatch(params) {
   });
 }
 
+export async function detail(params) {
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/detail`, {
+    method: 'POST',
+    data: {
+      ...params,
+      method: 'post',
+    },
+  });
+}
+
 export async function save(params) {
   return request(`${PREFIX_PATH}/baseInfo/sysdata/save`, {
     method: 'POST',

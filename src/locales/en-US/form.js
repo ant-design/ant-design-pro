@@ -4,6 +4,7 @@ export default {
   'form.optional': ' (optional) ',
   'form.submit': 'Submit',
   'form.save': 'Save',
+  'form.userName.placeholder': 'User Name',
   'form.email.placeholder': 'Email',
   'form.password.placeholder': 'Password',
   'form.confirm-password.placeholder': 'Confirm password',
