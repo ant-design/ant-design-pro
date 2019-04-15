@@ -49,47 +49,45 @@ const PageHeaderWrapper = ({
   return (
     <div style={{ margin: '-24px -24px 0' }} className={classNames(classNames, styles.main)}>
       {top}
-      {title && content && (
-        <MenuContext.Consumer>
-          {value => {
-            return (
-              <PageHeader
-                wide={contentWidth === 'Fixed'}
-                title={
-                  <Title
-                    level={4}
-                    style={{
-                      marginBottom: 0,
-                    }}
-                  >
-                    {title}
-                  </Title>
-                }
-                key="pageheader"
-                {...restProps}
-                breadcrumb={conversionBreadcrumbList({
-                  ...value,
-                  ...restProps,
-                  home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
-                })}
-                className={styles.pageHeader}
-                linkElement={Link}
-                footer={renderFooter(restProps)}
-              >
-                <div className={styles.detail}>
-                  {logo && <div className={styles.logo}>{logo}</div>}
-                  <div className={styles.main}>
-                    <div className={styles.row}>
-                      {content && <div className={styles.content}>{content}</div>}
-                      {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
-                    </div>
+      <MenuContext.Consumer>
+        {value => {
+          return (
+            <PageHeader
+              wide={contentWidth === 'Fixed'}
+              title={
+                <Title
+                  level={4}
+                  style={{
+                    marginBottom: 0,
+                  }}
+                >
+                  {title}
+                </Title>
+              }
+              key="pageheader"
+              {...restProps}
+              breadcrumb={conversionBreadcrumbList({
+                ...value,
+                ...restProps,
+                home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
+              })}
+              className={styles.pageHeader}
+              linkElement={Link}
+              footer={renderFooter(restProps)}
+            >
+              <div className={styles.detail}>
+                {logo && <div className={styles.logo}>{logo}</div>}
+                <div className={styles.main}>
+                  <div className={styles.row}>
+                    {content && <div className={styles.content}>{content}</div>}
+                    {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
                   </div>
                 </div>
-              </PageHeader>
-            );
-          }}
-        </MenuContext.Consumer>
-      )}
+              </div>
+            </PageHeader>
+          );
+        }}
+      </MenuContext.Consumer>
       {children ? (
         <div className={styles['children-content']}>
           <GridContent>{children}</GridContent>
