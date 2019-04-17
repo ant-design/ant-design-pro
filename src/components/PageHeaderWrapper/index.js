@@ -67,11 +67,14 @@ const PageHeaderWrapper = ({
               }
               key="pageheader"
               {...restProps}
-              breadcrumb={!hiddenBreadcrumb && conversionBreadcrumbList({
-                ...value,
-                ...restProps,
-                home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
-              })}
+              breadcrumb={
+                !hiddenBreadcrumb &&
+                conversionBreadcrumbList({
+                  ...value,
+                  ...restProps,
+                  home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
+                })
+              }
               className={styles.pageHeader}
               linkElement={Link}
               footer={renderFooter(restProps)}
