@@ -152,7 +152,7 @@ export function isUrl(path) {
 
 export function formatWan(val) {
   const v = val * 1;
-  if (!v || Number.isNaN(v)) return '';
+  if (!v) return '';
 
   let result = val;
   if (val > 10000) {
