@@ -262,7 +262,7 @@ class AdvancedProfile extends Component {
         logo={
           <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png" />
         }
-        action={action}
+        extra={action}
         content={description}
         extraContent={extra}
         tabList={tabList}
