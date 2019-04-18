@@ -1,6 +1,5 @@
 import React from 'react';
 export interface ResultProps {
-  actions?: React.ReactNode;
   className?: string;
   description?: React.ReactNode;
   extra?: React.ReactNode;
