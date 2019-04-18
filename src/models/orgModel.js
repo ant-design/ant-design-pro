@@ -1,5 +1,7 @@
 import { orgList } from '../services/sysDataService';
+import constants from '@/utils/constUtil';
 
+const { STATUS } = constants;
 export default {
   namespace: 'orgModel',
 
@@ -21,9 +23,11 @@ export default {
   reducers: {
     save(state, action) {
       console.log("response in org model reducers:",action.payload.data);
+      const data=action.payload ? action.payload.data : [];
+      const filterOrgList=data.filter((item)=>(item.status===STATUS.A));
       return {
         ...state,
-        orgList: action.payload ? action.payload.data : [],
+        orgList:filterOrgList,
       };
     },
   },
