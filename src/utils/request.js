@@ -33,6 +33,7 @@ const errorHandler = error => {
   const { status, url } = response;
 
   if (status === 401) {
+    console.log("----==",response.code,response.msg,response.body.toString());
     notification.error({
       message: '未登录或登录已过期，请重新登录。',
     });
@@ -61,12 +62,42 @@ const errorHandler = error => {
   }
 };
 
+
+// let token="";
 /**
  * 配置request请求时的默认参数
  */
 const request = extend({
   errorHandler, // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
+  // headers:{Authorization:token},
+});
+
+request.interceptors.response.use((response, options) => {
+  // response.headers.append('interceptors', 'yes');
+  // console.log("=====10",response.body);
+  // console.log("=====11",options.headers);
+  response.headers.forEach((value,key)=>{
+    // console.log("==============12:",key,":",value);
+    if(key.toLowerCase()==='RspToken'.toLowerCase()){
+      console.log("=====12",value);
+      localStorage.setItem("token",value);
+    }
+  });
+  // console.log("=====13",token);
+  return response;
+});
+
+request.interceptors.request.use((url, options) => {
+  const token=localStorage.getItem("token");
+  console.log("====1",`Bearer ${token}`);
+  const newOptions=token===""?{...options}:{ ...options, headers:{Authorization:`Bearer ${token}`}};
+  return (
+    {
+      url: `${url}`,
+      options: newOptions,
+    }
+  );
 });
 
 export default request;

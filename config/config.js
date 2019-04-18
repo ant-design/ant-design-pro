@@ -83,8 +83,14 @@ export default {
   //   },
   // },
   proxy: {
-    '/server/': {
-      target: 'http://192.168.2.104:10401/',
+    '/server/baseInfo': {
+      // target: 'http://10.19.18.49:10401/',
+      target: 'http://10.19.18.49:10401/',
+      changeOrigin: true,
+      pathRewrite: { '^/server/': '/' },
+    },
+    '/server/auth': {
+      target: 'http://10.19.18.49:10030/',
       changeOrigin: true,
       pathRewrite: { '^/server/': '/' },
     },

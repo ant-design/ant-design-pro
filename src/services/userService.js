@@ -12,14 +12,14 @@ export async function queryCurrent() {
 }
 
 export async function fakeAccountLogin(params) {
-  return request(`${PREFIX_PATH}/baseInfo/sys/login`, {
+  return request(`${PREFIX_PATH}/auth/login`, {
     method: 'POST',
     data: params,
   });
 }
 
 export async function fakeRegister(params) {
-  return request(`${PREFIX_PATH}/baseInfo/sys/register`, {
+  return request(`/baseInfo/sys/register`, {
     method: 'POST',
     data: params,
   });
@@ -30,5 +30,5 @@ export async function getFakeCaptcha(mobile) {
 }
 
 export async function roleList() {
-  return request(`${PREFIX_PATH}/baseInfo/sysdata/allRoleList`);
+  return request(`/baseInfo/sysdata/allRoleList`);
 }

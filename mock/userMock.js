@@ -104,7 +104,7 @@ export default {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
-  'POST /baseInfo/sys/login': (req, res) => {
+  'POST /auth/login': (req, res) => {
     console.log("login request====:",req.body);
     const { password, userName, type } = req.body;
     loginResult.data.info.username=userName;

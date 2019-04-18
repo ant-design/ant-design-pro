@@ -91,6 +91,7 @@ class LoginPage extends Component {
                   message: formatMessage({ id: 'validation.userName.required' }),
                 },
               ]}
+              defaultValue='admin'
             />
             <Password
               name="password"
@@ -105,6 +106,7 @@ class LoginPage extends Component {
                 e.preventDefault();
                 this.loginForm.validateFields(this.handleSubmit);
               }}
+              defaultValue='ant.design'
             />
           </Tab>
           <Tab key="mobile" tab={formatMessage({ id: 'app.login.tab-login-mobile' })}>

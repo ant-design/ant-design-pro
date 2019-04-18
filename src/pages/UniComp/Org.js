@@ -11,6 +11,7 @@ import {getItems} from '@/utils/masterData';
 const orgTypes = getItems('org', 'org_type');
 const authTypes = getItems('org', 'auth_type');
 const statusList = getItems('common', 'status');
+console.log(orgTypes,authTypes);
 const columnSchemas = {
   tableName: 'org',
   key: 'id',
