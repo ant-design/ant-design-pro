@@ -8,6 +8,10 @@ import { urlToList } from '../_utils/pathTools';
 // Render the Breadcrumb child node
 const itemRender = (route, params, routes, paths) => {
   const last = routes.indexOf(route) === routes.length - 1;
+  // if path is home, use Link。
+  if (route.path === '/') {
+    return <Link to={paths.join('/')}>{route.breadcrumbName}</Link>;
+  }
   return last || !route.component ? (
     <span>{route.breadcrumbName}</span>
   ) : (
