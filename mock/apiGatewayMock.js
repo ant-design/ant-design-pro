@@ -2,7 +2,7 @@
 
 import constants from '@/utils/constUtil';
 
-const { ACT, API_STATUS } = constants;
+const { ACT, API_STATUS,STATUS } = constants;
 
 // mock tableListDataSource
 let tableListDataSource = [];
@@ -114,7 +114,7 @@ const apiInfoDetail={
         "id":1,
         "apiId":90,
         "appkey":"000001",
-        "status":"A"
+        "status":STATUS.A
       }
     ],
   }

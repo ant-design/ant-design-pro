@@ -1,4 +1,7 @@
 // import { getLastPath } from './mockUtils';
+import constants from '@/utils/constUtil';
+
+const { STATUS } = constants;
 
 const allResult = {
   "code": "200",
@@ -218,21 +221,21 @@ const allResult = {
       "id": 33,
       "javaCode": "common",
       "javaKey": "status",
-      "itemCode": "A",
+      "itemCode": STATUS.A,
       "itemValue": "激活"
     },
     {
       "id": 34,
       "javaCode": "common",
       "javaKey": "status",
-      "itemCode": "D",
+      "itemCode": STATUS.D,
       "itemValue": "删除"
     },
     {
       "id": 35,
       "javaCode": "common",
       "javaKey": "status",
-      "itemCode": "S",
+      "itemCode": STATUS.S,
       "itemValue": "停用"
     },
     {

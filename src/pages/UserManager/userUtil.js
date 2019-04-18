@@ -1,3 +1,7 @@
+import constants from '@/utils/constUtil';
+
+const { STATUS } = constants;
+
 export function getRouteDatas(routes){
   return routes[1].routes;
 }
@@ -14,19 +18,19 @@ export const allRoleList=[
     "roleId": 1,
     "roleName": "admin",
     "remark": "admin",
-    "status": "A",
+    "status": STATUS.A,
   },
   {
     "roleId": 2,
     "roleName": "manager",
     "remark": "",
-    "status": "A",
+    "status": STATUS.A,
   },
   {
     "roleId": 3,
     "roleName": "user",
     "remark": "",
-    "status": "A",
+    "status": STATUS.A,
   },
 ];
 
@@ -48,7 +52,7 @@ export function toSimulatePrivilege(privileges,routes,isInit,isFlat,parentPrivil
       privilege.parentPrivilegeId = parentPrivilege?parentPrivilege.privilegeId:0;
       // privilege.level=parentPrivilege?parentPrivilege.level+1:1;
       privilege.orderSeq=orderSeq;
-      privilege.status='A';
+      privilege.status=STATUS.A;
       privilege.type='menu';
       const child = privilege.routes;
       delete privilege.routes;

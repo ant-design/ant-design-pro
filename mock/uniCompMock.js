@@ -2,6 +2,9 @@
 import {parse} from 'url';
 import {getRouteDatas,toSimulatePrivilege,allRoleList} from '../src/pages/UserManager/userUtil';
 import routeDatas from "../config/router.api.config";
+import constants from '@/utils/constUtil';
+
+const { STATUS } = constants;
 // mock tableListDataSource
 
 
@@ -14,28 +17,28 @@ const groups = {
         "groupName": "语音识别",
         "groupDesc": "分组1",
         "groupApiDoc": "空",
-        "status": "A"
+        "status": STATUS.A
       },
       {
         "groupId": 2,
         "groupName": "OCR识别",
         "groupDesc": "aaaaa",
         "groupApiDoc": "bbbbbb",
-        "status": "A"
+        "status": STATUS.A
       },
       {
         "groupId":3,
         "groupName": "身份识别",
         "groupDesc": "aaaaa1",
         "groupApiDoc": "bbbbbb1",
-        "status": "A"
+        "status": STATUS.A
       },
       {
         "groupId": 4,
         "groupName": "文本识别",
         "groupDesc": null,
         "groupApiDoc": null,
-        "status": "A"
+        "status": STATUS.A
       }
     ]
   };
@@ -65,7 +68,7 @@ const users = {
         "email": "j1@163.com",
         "tel":"18905926370",
         "utype":"client",
-        "status": "A",
+        "status": STATUS.A,
         "sysUserRoles":[{"id":1,"userId":1,"roleId":1,"roleName":"admin"},],
       },
       {
@@ -75,7 +78,7 @@ const users = {
         "email": "j2@163.com",
         "tel":"18905926371",
         "utype":"client",
-        "status": "A",
+        "status": STATUS.A,
         "sysUserRoles":[{"id":1,"userId":2,"roleId":3,"roleName":"user"},],
       },
       {
@@ -85,7 +88,7 @@ const users = {
         "email": "j3@163.com",
         "tel":"18905926373",
         "utype":"server",
-        "status": "A",
+        "status": STATUS.A,
         "sysUserRoles":[],
       },
       {
@@ -95,7 +98,7 @@ const users = {
         "email": "j4@163.com",
         "tel":"18905926374",
         "utype":"client",
-        "status": "A",
+        "status": STATUS.A,
         "sysUserRoles":[{"id":9,"userId":4,"roleId":1,"roleName":"admin"},{"id":10,"userId":4,"roleId":2,"roleName":"manager"},{"id":11,"userId":4,"roleId":3,"roleName":"user"},],
       },
     ]
@@ -118,7 +121,7 @@ const orgs={
       "id": 1,
       "authType": "1",
       "email": "111",
-      "status": "A"
+      "status": STATUS.A
     },
     {
       "orgType": "2",
@@ -131,7 +134,7 @@ const orgs={
       "appkey": "000002",
       "id": 2,
       "authType": "2",
-      "status": "A"
+      "status": STATUS.A
     },
     {
       "orgType": "2",
@@ -144,7 +147,7 @@ const orgs={
       "appkey": "000003",
       "id": 3,
       "authType": "3",
-      "status": "A"
+      "status": STATUS.A
     },
     {
       "orgType": "0",
@@ -157,7 +160,7 @@ const orgs={
       "appkey": "000004",
       "id": 4,
       "authType": "2",
-      "status": "A"
+      "status": STATUS.A
     },
     {
       "orgType": "2",
@@ -170,7 +173,7 @@ const orgs={
       "appkey": "000005",
       "id": 5,
       "authType": "2",
-      "status": "A"
+      "status": STATUS.A
     },
     {
       "orgType": "2",
@@ -183,7 +186,7 @@ const orgs={
       "appkey": "000006",
       "id": 6,
       "authType": "2",
-      "status": "A"
+      "status": STATUS.A
     },
     {
       "orgType": "0",
@@ -196,7 +199,7 @@ const orgs={
       "appkey": "000007",
       "id": 7,
       "authType": "2",
-      "status": "A"
+      "status": STATUS.A
     },
     {
       "orgType": "0",
@@ -208,7 +211,7 @@ const orgs={
       "appkey": "111",
       "id": 24,
       "authType": "1",
-      "status": "A"
+      "status": STATUS.A
     },
     {
       "orgType": "2",
@@ -222,7 +225,7 @@ const orgs={
       "appkey": "10000000015",
       "id": 28,
       "authType": "1",
-      "status": "A"
+      "status": STATUS.A
     }
   ]
 };
@@ -369,7 +372,7 @@ export function save(req, res, u, b) {
             tmpObj.remark=remark;
             tmpObj.email=email;
             tmpObj.authType=authType;
-            tmpObj.status='A';
+            tmpObj.status=STATUS.A;
             if (id) {
               tmpObj.id = id;
             }
@@ -385,7 +388,7 @@ export function save(req, res, u, b) {
               email,
               orgType,
               remark,
-              status:'A',
+              status:STATUS.A,
               createTime: new Date(),
             });
           }
@@ -406,7 +409,7 @@ export function save(req, res, u, b) {
             datasource.unshift({
               groupId: newId,
               groupName,
-              status:'A',
+              status:STATUS.A,
             });
             console.log("datasource:",datasource);
           }
@@ -428,7 +431,7 @@ export function save(req, res, u, b) {
               email,
               utype,
               remark,
-              status:'A',
+              status:STATUS.A,
             });
             console.log("datasource:",datasource);
           }
@@ -447,7 +450,7 @@ export function save(req, res, u, b) {
               roleId: newId,
               roleName,
               remark,
-              status:'A',
+              status:STATUS.A,
             });
             console.log("datasource:",datasource);
           }
@@ -468,7 +471,7 @@ export function save(req, res, u, b) {
               path, icon,hideInMenu,hideChildrenInMenu,type,
 
               remark,
-              status:'A',
+              status:STATUS.A,
             });
             console.log("datasource:",datasource);
           }
@@ -509,16 +512,16 @@ export function statusBatch(req, res, u, b) {
       let status='D';
       switch (option) {
         case 3:
-          status='D';
+          status=STATUS.D;
           break;
         case 4:
-          status='A';
+          status=STATUS.A;
           break;
         case 5:
-          status='S';
+          status=STATUS.S;
           break;
         default:
-          status='A';
+          status=STATUS.A;
           break;
       }
       // console.log("status batch method:",method,ids," status:",status);

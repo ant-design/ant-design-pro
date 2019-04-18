@@ -1,5 +1,7 @@
 import { allGroupList } from '../services/sysDataService';
+import constants from '@/utils/constUtil';
 
+const { STATUS } = constants;
 export default {
   namespace: 'groupModel',
 
@@ -18,9 +20,11 @@ export default {
   },
   reducers: {
     save(state, action) {
+      const data=action.payload ? action.payload.data : [];
+      const groupList=data.filter((item)=>(item.status===STATUS.A));
       return {
         ...state,
-        groupList: action.payload ? action.payload.data : [],
+        groupList,
       };
     },
   },

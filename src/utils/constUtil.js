@@ -24,6 +24,11 @@ const constants = {
     OFFLINE: '1',
     ONLINE: '2',
   },
+  STATUS:{
+    A: 'A',
+    S: 'S',
+    D: 'D',
+  },
 };
 
 

@@ -33,9 +33,17 @@ const errorHandler = error => {
   const { status, url } = response;
 
   if (status === 401) {
-    console.log("----==",response.code,response.msg,response.body.toString());
+    // response.body.getReader().read().then(function(result, done) {
+    //   if (!done) {
+    //     console.log(result);
+    //   }
+    // });
+    let message='未登录或登录已过期，请重新登录。';
+    response.json().then(function(json) {
+      message=`code=${json.code},${json.msg},${message}`
+    });;
     notification.error({
-      message: '未登录或登录已过期，请重新登录。',
+      message,
     });
     // @HACK
     /* eslint-disable no-underscore-dangle */
@@ -81,6 +89,7 @@ request.interceptors.response.use((response, options) => {
     // console.log("==============12:",key,":",value);
     if(key.toLowerCase()==='RspToken'.toLowerCase()){
       console.log("=====12",value);
+      // localStorage.removeItem("token");
       localStorage.setItem("token",value);
     }
   });
