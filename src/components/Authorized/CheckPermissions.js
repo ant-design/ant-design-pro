@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line import/no-cycle
 import PromiseRender from './PromiseRender';
 import { CURRENT } from './renderAuthorize';
 
