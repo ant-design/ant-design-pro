@@ -1,5 +1,4 @@
-import {message} from 'antd';
-import {list, save, statusBatch,detail} from '../services/uniCompService';
+import {list, save, statusBatch} from '../services/uniCompService';
 import {conversion, conversionReq} from "../pages/util";
 
 export default {
@@ -50,17 +49,17 @@ export default {
       console.log("response in submitRelation model---:",response);
       if (callback) callback(response);
     },
-    *detail({ payload, callback }, { call }) {
-      console.log('sysdata detail request in Model:', payload);
-      const response = yield call(detail, payload);
-      console.log('sysdata detail response in Model:', response,(!response||response.code!=="200"));
-      if(!response||response.code!=="200"){
-        response.data={};
-        const errorMsg=response.msg&&response.msg!==""?response.msg:`Sorry, the server is reporting an error,code=${response.code}`;
-        message.error(errorMsg);
-      }
-      if (callback) callback(response.data);
-    },
+    // *detail({ payload, callback }, { call }) {
+    //   console.log('sysdata detail request in Model:', payload);
+    //   const response = yield call(detail, payload);
+    //   console.log('sysdata detail response in Model:', response,(!response||response.code!=="200"));
+    //   if(!response||response.code!=="200"){
+    //     response.data={};
+    //     const errorMsg=response.msg&&response.msg!==""?response.msg:`Sorry, the server is reporting an error,code=${response.code}`;
+    //     message.error(errorMsg);
+    //   }
+    //   if (callback) callback(response.data);
+    // },
   },
 
   reducers: {

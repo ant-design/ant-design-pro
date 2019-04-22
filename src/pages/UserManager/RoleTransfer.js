@@ -33,26 +33,33 @@ class RoleTransfer extends PureComponent {
       this.setState({modalVisible: nextModalVisible});
     }
     if(nextModalVisible&&!modalVisible&&selectedRow){
-      const {dispatch,columnSchemas,relationName} = this.props;
+      const {columnSchemas,relationName} = this.props;
       console.log(selectedRow);
-      dispatch({
-        type: 'uniComp/detail',
-        payload: {tableName:columnSchemas.tableName,id:selectedRow[columnSchemas.key]},
-        callback: (resp) => {
-          const oriSelectedArray=selectedRow&&resp[relationName]?resp[relationName]:[];
-          const oriTargetKeys=oriSelectedArray
-            .map(item => item.roleId);
-          console.log("---oriSelectedArray:",oriSelectedArray,"=======id======",selectedRow[columnSchemas.key]);
-          this.setState({targetKeys:oriTargetKeys,oriSelectedArray});
-        },
-      });
+      // dispatch({
+      //   type: 'uniComp/detail',
+      //   payload: {tableName:columnSchemas.tableName,id:selectedRow[columnSchemas.key]},
+      //   callback: (resp) => {
+      //     const oriSelectedArray=selectedRow&&resp[relationName]?resp[relationName]:[];
+      //     const oriTargetKeys=oriSelectedArray
+      //       .map(item => item.roleId);
+      //     console.log("---oriSelectedArray:",oriSelectedArray,"=======id======",selectedRow[columnSchemas.key]);
+      //     this.setState({targetKeys:oriTargetKeys,oriSelectedArray});
+      //   },
+      // });
+
+
+      const oriSelectedArray=selectedRow&&selectedRow[relationName]?selectedRow[relationName]:[];
+      const oriTargetKeys=oriSelectedArray
+        .map(item => item.roleId);
+      console.log("---oriSelectedArray:",oriSelectedArray,"=======id======",selectedRow[columnSchemas.key]);
+      this.setState({targetKeys:oriTargetKeys,oriSelectedArray});
     }
   }
 
   okHandle = () => {
     const {targetKeys}=this.state;
     console.log(targetKeys);
-    const {dispatch,columnSchemas:{key,tableName},selectedRow,keyName}=this.props;
+    const {dispatch,columnSchemas:{key,tableName},selectedRow,keyName,relationName}=this.props;
 
     const {oriSelectedArray}=this.state;
     const willUpdateArray=[];
@@ -77,12 +84,12 @@ class RoleTransfer extends PureComponent {
       option:8, // 1-新增记录 2-修改记录,8-关联修改
       tableName,
       data: {
-        info: {...selectedRow,sysUserRoles:willUpdateArray},
+        info: {...selectedRow,[relationName]:willUpdateArray},
       },
     };
     console.log("request submitRelation:",info);
     dispatch({
-      type: 'uniComp/submitRelation',
+      type: 'uniComp/save',
       payload: info,
       callback:(response)=>{
         if (response.code==="200"){
