@@ -7,7 +7,7 @@ title:
 
 Support login with account and mobile number.
 
-````jsx
+```jsx
 import Login from 'ant-design-pro/lib/Login';
 import { Alert, Checkbox } from 'antd';
 
@@ -30,27 +30,23 @@ class LoginDemo extends React.Component {
           notice: '',
         },
         () => {
-          if (
-            !err &&
-            (values.username !== 'admin' || values.password !== '888888')
-          ) {
+          if (!err && (values.username !== 'admin' || values.password !== '888888')) {
             setTimeout(() => {
               this.setState({
-                notice:
-                  'The combination of username and password is incorrect!',
+                notice: 'The combination of username and password is incorrect!',
               });
             }, 500);
           }
-        },
+        }
       );
     }
   };
-  onTabChange = (key) => {
+  onTabChange = key => {
     this.setState({
       type: key,
     });
   };
-  changeAutoLogin = (e) => {
+  changeAutoLogin = e => {
     this.setState({
       autoLogin: e.target.checked,
     });
@@ -78,16 +74,10 @@ class LoginDemo extends React.Component {
           </Tab>
           <Tab key="tab2" tab="Mobile">
             <Mobile name="mobile" />
-            <Captcha
-              onGetCaptcha={() => console.log('Get captcha!')}
-              name="captcha"
-            />
+            <Captcha onGetCaptcha={() => console.log('Get captcha!')} name="captcha" />
           </Tab>
           <div>
-            <Checkbox
-              checked={this.state.autoLogin}
-              onChange={this.changeAutoLogin}
-            >
+            <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>
               Keep me logged in
             </Checkbox>
             <a style={{ float: 'right' }} href="">
@@ -111,7 +101,7 @@ class LoginDemo extends React.Component {
 }
 
 ReactDOM.render(<LoginDemo />, mountNode);
-````
+```
 
 <style>
 #scaffold-src-components-Login-demo-basic .login-warp{

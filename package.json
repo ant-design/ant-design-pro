@@ -111,7 +111,7 @@
     "lint-staged": "^8.1.1",
     "merge-umi-mock-data": "^1.0.4",
     "mockjs": "^1.0.1-beta3",
-    "prettier": "^1.16.4",
+    "prettier": "^1.17.0",
     "serverless-http": "^1.9.1",
     "slash2": "^2.0.0",
     "stylelint": "^9.10.1",

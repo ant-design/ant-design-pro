@@ -5,7 +5,7 @@ title: Classic
 
 典型结果页面。
 
-````jsx
+```jsx
 import Result from 'ant-design-pro/lib/Result';
 import { Button, Row, Col, Icon, Steps } from 'antd';
 
@@ -27,7 +27,9 @@ const desc2 = (
       周毛毛
       <Icon type="dingding" style={{ color: '#00A0E9', marginLeft: 8 }} />
     </div>
-    <div style={{ marginTop: 8, marginBottom: 4 }}><a href="">催一下</a></div>
+    <div style={{ marginTop: 8, marginBottom: 4 }}>
+      <a href="">催一下</a>
+    </div>
   </div>
 );
 
@@ -75,6 +77,7 @@ ReactDOM.render(
     extra={extra}
     actions={actions}
     style={{ width: '100%' }}
-  />
-, mountNode);
-````
+  />,
+  mountNode
+);
+```
