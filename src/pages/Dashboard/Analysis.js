@@ -30,6 +30,12 @@ class Analysis extends Component {
         type: 'chart/fetch',
       });
     });
+    setTimeout(() => {
+      console.log('run');
+    }, 0);
+    setTimeout(() => {
+      console.log('run');
+    }, 5000);
   }
 
   componentWillUnmount() {
