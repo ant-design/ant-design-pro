@@ -18,6 +18,7 @@ const OfflineData = React.lazy(() => import('./OfflineData'));
 }))
 class Analysis extends Component {
   state = {
+    loading: true,
     salesType: 'all',
     currentTabKey: '',
     rangePickerValue: getTimeDistance('year'),
@@ -31,11 +32,11 @@ class Analysis extends Component {
       });
     });
     setTimeout(() => {
+      this.setState({
+        loading: false,
+      });
       console.log('run');
-    }, 0);
-    setTimeout(() => {
-      console.log('run');
-    }, 5000);
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -96,8 +97,9 @@ class Analysis extends Component {
   };
 
   render() {
-    const { rangePickerValue, salesType, currentTabKey } = this.state;
-    const { chart, loading } = this.props;
+    const { rangePickerValue, salesType, currentTabKey, loading: stateLoading } = this.state;
+    const { chart, loading: propsLoading } = this.props;
+    const loading = stateLoading || propsLoading;
     const {
       visitData,
       visitData2,
