@@ -35,7 +35,6 @@ class Analysis extends Component {
       this.setState({
         loading: false,
       });
-      console.log('run');
     }, 2000);
   }
 
