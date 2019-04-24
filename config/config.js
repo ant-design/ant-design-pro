@@ -85,7 +85,7 @@ export default {
   proxy: {
     '/server/baseInfo': {
       // target: 'http://10.19.18.49:10401/',
-      target: 'http://10.19.18.49:10401/',
+      target: 'http://10.19.18.49:10041/',
       changeOrigin: true,
       pathRewrite: { '^/server/': '/' },
     },

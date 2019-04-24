@@ -21,14 +21,8 @@ const loginResult={
     "code": "200",
     "msg": "",
     "data": {
-      "info": {
-        "userId": 999,
-        "username": "admin",
-        "currentAuthority": ["admin","user"],
-        "email": "test@dsf.com",
-        "tel": "43765876",
-        "type": "account",
-      }
+      "currentAuthority": ["admin","user"],
+      "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTU1NjA3MjkxNCwiZXhwIjoxNTU2MDc0NzE0fQ.XDPBiHG_wnjEMzzM5UnagY8ttTzkJimTQ3fmYIAZnpj53mpvdZ9tzDkM_muOpUe1lQGQv8T4ScL-wy4ma0cNLA",
     }
   };
 export default {
@@ -106,23 +100,23 @@ export default {
   ],
   'POST /auth/login': (req, res) => {
     console.log("login request====:",req.body);
-    const { password, userName, type } = req.body;
-    loginResult.data.info.username=userName;
-    loginResult.data.info.type=type;
+    const { password, userName } = req.body;
+    // loginResult.data.info.username=userName;
+    // loginResult.data.info.type=type;
     console.log("login response====:",req.body);
     if (password === 'ant.design' && userName === 'admin') {
-      loginResult.data.info.currentAuthority=["admin"];
+      loginResult.data.currentAuthority=["admin"];
       console.log("dddd====:",loginResult);
       res.send(loginResult);
       return;
     }
     if (password === 'ant.design' && userName === 'user') {
-      loginResult.data.info.currentAuthority=["user"];
+      loginResult.data.currentAuthority=["user"];
       res.send(loginResult);
       return;
     }
     if (password === 'ant.design' && userName === 'admin_manager_user') {
-      loginResult.data.info.currentAuthority=["admin",'manager','user'];
+      loginResult.data.currentAuthority=["admin",'manager','user'];
       res.send(loginResult);
       return;
     }

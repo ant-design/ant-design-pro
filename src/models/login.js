@@ -82,9 +82,9 @@ export default {
     changeLoginStatus(state, { payload,loginType }) {
       const status=payload.code==='200'?'ok':'error';
       console.log(status,loginType,payload);
-      if(payload.code==='200'){
-        // setAuthority(payload.data.info.currentAuthority);
-        setAuthority(['admin','manager','user']);
+      if(payload.code==='200'&&payload.data&&payload.data.currentAuthority){
+        setAuthority(payload.data.currentAuthority);
+        // setAuthority(['admin','manager','user']);
       }
       else{
         setAuthority(['guest']);
