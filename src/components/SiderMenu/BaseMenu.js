@@ -123,6 +123,17 @@ export default class BaseMenu extends PureComponent {
     return `/${path || ''}`.replace(/\/+/g, '/');
   };
 
+  getPopupContainer = (fixedHeader, layout) => {
+    if (fixedHeader && layout === 'topmenu') {
+      return this.wrap;
+    }
+    return document.body;
+  };
+
+  getRef = ref => {
+    this.wrap = ref;
+  };
+
   render() {
     const {
       openKeys,
@@ -131,6 +142,8 @@ export default class BaseMenu extends PureComponent {
       location: { pathname },
       className,
       collapsed,
+      fixedHeader,
+      layout,
     } = this.props;
     // if pathname can't match, use the nearest parent's key
     let selectedKeys = this.getSelectedMenuKeys(pathname);
@@ -149,18 +162,22 @@ export default class BaseMenu extends PureComponent {
     });
 
     return (
-      <Menu
-        key="Menu"
-        mode={mode}
-        theme={theme}
-        onOpenChange={handleOpenChange}
-        selectedKeys={selectedKeys}
-        style={style}
-        className={cls}
-        {...props}
-      >
-        {this.getNavMenuItems(menuData)}
-      </Menu>
+      <>
+        <Menu
+          key="Menu"
+          mode={mode}
+          theme={theme}
+          onOpenChange={handleOpenChange}
+          selectedKeys={selectedKeys}
+          style={style}
+          className={cls}
+          {...props}
+          getPopupContainer={() => this.getPopupContainer(fixedHeader, layout)}
+        >
+          {this.getNavMenuItems(menuData)}
+        </Menu>
+        <div ref={this.getRef} />
+      </>
     );
   }
 }
