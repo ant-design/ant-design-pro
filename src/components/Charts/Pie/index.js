@@ -151,7 +151,6 @@ class Pie extends Component {
     let tooltip = propsTooltip;
 
     const defaultColors = colors;
-    data = data || [];
     selected = selected || true;
     tooltip = tooltip || true;
     let formatColor;

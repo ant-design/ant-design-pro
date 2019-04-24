@@ -70,6 +70,7 @@ export default {
   targets: {
     ie: 11,
   },
+  devtool: ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION ? 'source-map' : false,
   // 路由配置
   routes: pageRoutes,
   // Theme for antd
