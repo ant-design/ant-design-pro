@@ -17,7 +17,7 @@ const columnSchemas = {
       title: 'Status',
       columnHidden: false,
       query: false,
-      add: false,
+      add: true,
       tag: 'commonSelect',
       tableName: 'group',
       enumData: statusList,

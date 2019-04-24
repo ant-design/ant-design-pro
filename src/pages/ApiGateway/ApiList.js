@@ -111,6 +111,10 @@ class TableList extends PureComponent {
         },
       },
       {
+        title: '请求地址',
+        dataIndex: 'requestUrl',
+      },
+      {
         title: '状态',
         dataIndex: 'status',
         filters: statusFilter,
