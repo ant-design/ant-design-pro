@@ -10,7 +10,7 @@ module.exports = {
     disableLocal: false,
   },
   title: 'Ant Design Pro',
-  pwa: true,
+  pwa: false,
   // Your custom iconfont Symbol script Url
   // eg：//at.alicdn.com/t/font_1039637_btcrd5co4w.js
   // 注意：如果需要图标多色，Iconfont 图标项目里要进行批量去色处理
