@@ -10,6 +10,7 @@ import {
   BasicLayoutProps as BasicLayoutComponentsProps,
   MenuDataItem,
   Settings,
+  SettingDrawer,
 } from '@ant-design/pro-layout';
 
 export interface BasicLayoutProps extends BasicLayoutComponentsProps, ConnectProps {
@@ -39,21 +40,25 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     dispatch!({ type: 'global/changeLayoutCollapsed', payload });
 
   return (
-    <BasicLayoutComponents
-      formatMessage={formatMessage}
-      logo={logo}
-      onChangeSetting={settings =>
-        dispatch!({
-          type: 'settings/changeSetting',
-          payload: settings,
-        })
-      }
-      onChangeLayoutCollapsed={handleMenuCollapse}
-      renderRightContent={RightProps => <RightContent {...RightProps} />}
-      {...props}
-    >
-      {children}
-    </BasicLayoutComponents>
+    <>
+      <BasicLayoutComponents
+        logo={logo}
+        onCollapse={handleMenuCollapse}
+        rightContentRender={RightProps => <RightContent {...RightProps} />}
+        {...props}
+      >
+        {children}
+      </BasicLayoutComponents>
+      <SettingDrawer
+        settings={props.settings}
+        onSettingChange={settings =>
+          dispatch!({
+            type: 'settings/changeSetting',
+            payload: settings,
+          })
+        }
+      />
+    </>
   );
 };
 

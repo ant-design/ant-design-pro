@@ -54,15 +54,6 @@ const plugins: IPlugin[] = [
       autoAddMenu: true,
     },
   ],
-  // ...(!process.env.TEST && os.platform() === 'darwin'
-  //   ? {
-  //       dll: {
-  //         include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-  //         exclude: ['@babel/runtime'],
-  //       },
-  //       hardSource: true,
-  //     }
-  //   : {}),
 ];
 
 // 针对 preview.pro.ant.design 的 GA 统计代码
