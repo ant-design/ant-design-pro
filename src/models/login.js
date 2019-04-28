@@ -1,5 +1,5 @@
 import { routerRedux } from 'dva/router';
-import { stringify } from 'qs';
+import { stringify, parse } from 'qs';
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
@@ -54,7 +54,7 @@ export default {
       });
       reloadAuthorized();
       // redirect
-      if (window.location.pathname !== '/user/login') {
+      if (window.location.pathname !== '/user/login' && !parse(window.location.href.split('?')[1]).redirect) {
         yield put(
           routerRedux.replace({
             pathname: '/user/login',
