@@ -7,7 +7,6 @@ import styles from '../index.less';
 
 class Bar extends Component {
   state = {
-    width: 0,
     height: 0,
     autoHideXLabels: false,
   };
@@ -31,10 +30,9 @@ class Bar extends Component {
   resizeObserver() {
     const ro = new ResizeObserver(entries => {
       const { width, height } = entries[0].contentRect;
-      this.setState((preState, { hasLegend }) => {
+      this.setState(preState => {
         if (preState.width !== width || preState.height !== height) {
           return {
-            width: width - (hasLegend ? 240 : 0),
             height,
           };
         }
@@ -101,7 +99,7 @@ class Bar extends Component {
         value: y,
       }),
     ];
-    const { height: stateHeight, width } = this.state;
+    const { height: stateHeight } = this.state;
     const height = propsHeight || stateHeight;
     return (
       <div className={styles.chart} style={{ height }} ref={this.handleRoot}>
@@ -109,7 +107,6 @@ class Bar extends Component {
           {title && <h4 style={{ marginBottom: 20 }}>{title}</h4>}
           <Chart
             scale={scale}
-            width={width}
             height={title ? height - 41 : height}
             forceFit={forceFit}
             data={data}
