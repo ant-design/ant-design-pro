@@ -23,7 +23,7 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, route } = props;
+  const { dispatch, children, route, settings } = props;
   const { routes, authority } = route!;
   /**
    * constructor
@@ -38,7 +38,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
    */
   const handleMenuCollapse = (payload: boolean) =>
     dispatch!({ type: 'global/changeLayoutCollapsed', payload });
-
   return (
     <>
       <BasicLayoutComponents
@@ -46,15 +45,16 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         onCollapse={handleMenuCollapse}
         rightContentRender={RightProps => <RightContent {...RightProps} />}
         {...props}
+        {...settings}
       >
         {children}
       </BasicLayoutComponents>
       <SettingDrawer
-        settings={props.settings}
-        onSettingChange={settings =>
+        settings={settings}
+        onSettingChange={config =>
           dispatch!({
             type: 'settings/changeSetting',
-            payload: settings,
+            payload: config,
           })
         }
       />
