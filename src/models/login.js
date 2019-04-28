@@ -53,8 +53,9 @@ export default {
         },
       });
       reloadAuthorized();
+      const { redirect } = getPageQuery();
       // redirect
-      if (window.location.pathname !== '/user/login') {
+      if (window.location.pathname !== '/user/login' && !redirect) {
         yield put(
           routerRedux.replace({
             pathname: '/user/login',
