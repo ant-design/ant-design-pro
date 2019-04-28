@@ -1,9 +1,9 @@
-version: "3.5"
+version: '3.5'
 
 services:
   ant-design-pro_build:
     build: ../
-    container_name: "ant-design-pro_build"
+    container_name: 'ant-design-pro_build'
     volumes:
       - dist:/usr/src/app/dist
 
@@ -11,7 +11,7 @@ services:
     image: nginx
     ports:
       - 80:80
-    container_name: "ant-design-pro_web"
+    container_name: 'ant-design-pro_web'
     restart: unless-stopped
     volumes:
       - dist:/usr/share/nginx/html:ro
