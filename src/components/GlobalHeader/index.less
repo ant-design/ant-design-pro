@@ -2,14 +2,6 @@
 
 @pro-header-hover-bg: rgba(0, 0, 0, 0.025);
 
-.header {
-  position: relative;
-  height: @layout-header-height;
-  padding: 0;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-}
-
 .logo {
   display: inline-block;
   height: @layout-header-height;
@@ -100,30 +92,28 @@
 }
 
 @media only screen and (max-width: @screen-md) {
-  .header {
-    :global(.ant-divider-vertical) {
-      vertical-align: unset;
-    }
-    .name {
-      display: none;
-    }
-    i.trigger {
-      padding: 22px 12px;
-    }
-    .logo {
-      position: relative;
-      padding-right: 12px;
-      padding-left: 12px;
-    }
-    .right {
-      position: absolute;
-      top: 0;
-      right: 12px;
-      background: #fff;
-      .account {
-        .avatar {
-          margin-right: 0;
-        }
+  :global(.ant-divider-vertical) {
+    vertical-align: unset;
+  }
+  .name {
+    display: none;
+  }
+  i.trigger {
+    padding: 22px 12px;
+  }
+  .logo {
+    position: relative;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .right {
+    position: absolute;
+    top: 0;
+    right: 12px;
+    background: #fff;
+    .account {
+      .avatar {
+        margin-right: 0;
       }
     }
   }

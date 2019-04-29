@@ -1,6 +1,5 @@
 import { ConnectState, ConnectProps } from '@/models/connect';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 import React, { useState } from 'react';
 import logo from '../assets/logo.svg';
@@ -12,6 +11,7 @@ import {
   Settings,
   SettingDrawer,
 } from '@ant-design/pro-layout';
+import Link from 'umi/link';
 
 export interface BasicLayoutProps extends BasicLayoutComponentsProps, ConnectProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
@@ -43,7 +43,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       <BasicLayoutComponents
         logo={logo}
         onCollapse={handleMenuCollapse}
-        rightContentRender={RightProps => <RightContent {...RightProps} />}
+        menuItemRender={(menuItemProps, defaultDom) => {
+          return <Link to={menuItemProps.path}>{defaultDom}</Link>;
+        }}
+        rightContentRender={rightProps => <RightContent {...rightProps} />}
         {...props}
         {...settings}
       >
