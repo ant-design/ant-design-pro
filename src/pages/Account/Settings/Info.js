@@ -78,19 +78,21 @@ class Info extends Component {
     if (!this.main) {
       return;
     }
-    requestAnimationFrame(() => {
-      let mode = 'inline';
-      const { offsetWidth } = this.main;
-      if (offsetWidth < 641 && offsetWidth > 400) {
-        mode = 'horizontal';
-      }
-      if (window.innerWidth < 768 && offsetWidth > 400) {
-        mode = 'horizontal';
-      }
-      this.setState({
-        mode,
-      });
-    });
+    
+    let mode = 'inline';
+    const { offsetWidth } = this.main;
+    
+    if (offsetWidth > 400 && offsetWidth < 641) {
+      mode = 'horizontal';
+    }
+    
+    if (window.innerWidth < 768 && offsetWidth > 400) {
+      mode = 'horizontal';
+    }
+    
+    if(this.state.mode !== mode) {
+      requestAnimationFrame(() => this.setState({ mode }));
+    }
   };
 
   render() {
