@@ -75,7 +75,7 @@ class User extends PureComponent {
   render() {
     const {modalVisible,selectedRow}=this.state;
     return (
-      <PageHeaderWrapper title="账户管理">
+      <PageHeaderWrapper title="用户管理">
         <BindDataQueryTable
           columnSchemas={columnSchemas}
           onRow={(record) => {

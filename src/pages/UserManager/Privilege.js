@@ -11,6 +11,7 @@ import {flatToTree} from "./userUtil"
 const statusList = getItems('common', 'status');
 const iconList = getItems('privilege', 'icon');
 iconList.push({javaCode:'privilege',javaKey:'icon',itemCode:'',itemValue:'无'});
+const typeList = getItems('privilege', 'type');
 
 const hideChildrenInMenuList = getItems('privilege', 'hide_children_in_menu');
 const hideInMenuList = getItems('privilege', 'hide_in_menu');
@@ -23,6 +24,14 @@ const columnSchemas = {
   columnDetails: [
     { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true' },
     { name: 'name', title: 'Name', columnHidden: true, add: true },
+    {
+      name: 'type',
+      title: 'type',
+      query: true,
+      add: true,
+      tag: 'commonSelect',
+      enumData: typeList,
+    },
     { name: 'path', title: 'path', sorter: true, query: true, add: true },
     { name: 'shortRoleStr', title: 'role', },
     {
@@ -120,9 +129,10 @@ class Privilege extends PureComponent {
   render() {
     const {modalVisible,selectedRow}=this.state;
     return (
-      <PageHeaderWrapper title="账户管理">
+      <PageHeaderWrapper title="权限管理">
         <BindDataQueryTable
           columnSchemas={columnSchemas}
+          pageSize='999'
           onConversionData={this.handleConversionData}
           onRow={(record) => {
             return {
@@ -147,7 +157,6 @@ class Privilege extends PureComponent {
           selectedRow={selectedRow}
           keyName='roleId'
           relationName='sysPrivilegeRoles'
-          pageSize='999'
         />
       </PageHeaderWrapper>
     );

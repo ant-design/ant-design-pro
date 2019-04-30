@@ -99,7 +99,7 @@ request.interceptors.response.use((response, options) => {
 
 request.interceptors.request.use((url, options) => {
   const token=localStorage.getItem("token");
-  console.log("====1",`Bearer ${token}`);
+  // console.log("====1",`Bearer ${token}`);
   const newOptions=token===""?{...options}:{ ...options, headers:{Authorization:`Bearer ${token}`}};
   return (
     {

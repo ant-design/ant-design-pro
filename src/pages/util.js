@@ -34,10 +34,10 @@ export function conversion(responseData) {
 }
 
 export function conversionReq(requestData) {
-  const {tableName, option, ...info} = requestData;
+  const {tableName, option, pageSize,...info} = requestData;
   if (!info.pageNo) {
     info.pageNo=1;
-    info.pageSize=10;
+    info.pageSize=pageSize || 10;
   }
   return {tableName,option,data:{info}};
 }

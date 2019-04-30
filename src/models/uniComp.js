@@ -13,8 +13,9 @@ export default {
 
   effects: {
     *list({ payload,onConversionData }, { call, put }) {
-      console.log('payload:', onConversionData,JSON.stringify(payload));
+      console.log('payload:', JSON.stringify(payload));
       const req=conversionReq(payload);
+      console.log('req:', JSON.stringify(req));
       const response = yield call(list, req);
       console.log('response:', response);
       yield put({
