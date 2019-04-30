@@ -78,6 +78,7 @@ class User extends PureComponent {
       <PageHeaderWrapper title="用户管理">
         <BindDataQueryTable
           columnSchemas={columnSchemas}
+          size='middle'
           onRow={(record) => {
             return {
               // onClick: (event) => {message.success("1")},       // 点击行

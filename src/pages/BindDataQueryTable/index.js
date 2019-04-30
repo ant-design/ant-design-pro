@@ -99,6 +99,7 @@ class BindDataQueryTable extends PureComponent {
       columnSchemas,
       onRow,
       children,
+      size
     } = this.props;
     const { key } = columnSchemas;
     const { selectedRows, } = this.state;
@@ -114,6 +115,7 @@ class BindDataQueryTable extends PureComponent {
         columnSchemas={columnSchemas}
         onSearch={this.handleSearch}
         onRow={onRow}
+        size={size}
       >
         {children}
       </QueryTable>

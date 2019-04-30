@@ -22,8 +22,8 @@ const columnSchemas = {
   name: 'name',
   commands:[{action:'setRole',title:'角色'},],
   columnDetails: [
-    { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true' },
-    { name: 'name', title: 'Name', columnHidden: true, add: true },
+    { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:80 },
+    { name: 'name', title: 'Name', columnHidden: true, query: true, add: true },
     {
       name: 'type',
       title: 'type',
@@ -32,7 +32,7 @@ const columnSchemas = {
       tag: 'commonSelect',
       enumData: typeList,
     },
-    { name: 'path', title: 'path', sorter: true, query: true, add: true },
+    { name: 'path', title: 'path', sorter: true, query: true, add: true},
     { name: 'shortRoleStr', title: 'role', },
     {
       name: 'icon',
@@ -133,6 +133,7 @@ class Privilege extends PureComponent {
         <BindDataQueryTable
           columnSchemas={columnSchemas}
           pageSize='999'
+          size='small'
           onConversionData={this.handleConversionData}
           onRow={(record) => {
             return {

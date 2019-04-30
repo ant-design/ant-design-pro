@@ -200,6 +200,7 @@ class QueryTable extends PureComponent {
         return obj;
       }
       obj.title = columnDetail.title;
+      obj.width=columnDetail.width||undefined;
       obj.dataIndex = columnDetail.name;
       if (columnDetail.sorter != null) {
         obj.sorter = columnDetail.sorter;
@@ -219,6 +220,7 @@ class QueryTable extends PureComponent {
     });
     columns.push({
       title: '操作',
+      width: 130,
       render: (text, row) => (
         <Fragment>
           <a onClick={() => this.handleModify(row, true)}>修改</a>
@@ -545,6 +547,7 @@ class QueryTable extends PureComponent {
       loading,
       columnSchemas,
       onRow,
+      size,
     } = this.props;
     const { key } = columnSchemas;
     const { selectedRow, selectedRows, modalVisible } = this.state;
@@ -584,6 +587,7 @@ class QueryTable extends PureComponent {
             onSelectRow={this.handleSelectRows}
             onChange={this.handleTableChange}
             onRow={onRow}
+            size={size}
           />
         </div>
         <CreateForm
