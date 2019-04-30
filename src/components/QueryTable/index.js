@@ -24,7 +24,7 @@ import StandardTable from '@/components/StandardTable';
 import styles from './index.less';
 
 const { Option } = Select;
-const {TextArea} = Input;
+const {TextArea,Password} = Input;
 const  RadioGroup  = Radio.Group;
 const FormItem = Form.Item;
 const getValue = obj =>
@@ -101,6 +101,10 @@ const CreateForm = Form.create()(props => {
       case 'textArea':
         return (
           <TextArea rows={item.rows} />
+        )
+      case 'password':
+        return (
+          <Password style={{ width: '100%' }} />
         )
       case 'inputNumber':
         return (

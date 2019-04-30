@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {message,Divider} from 'antd';
+import {Divider} from 'antd';
 import {connect} from 'dva';
 import BindDataQueryTable from '../BindDataQueryTable';
 import QueryCommand from '@/components/QueryTable/QueryCommand';
@@ -12,11 +12,11 @@ const utypeList = getItems('sysUser', 'utype');
 
 const columnSchemas = {
   tableName: 'sys_user',
-  key: 'userId',
+  key: 'id',
   name: 'username',
   commands:[{action:'setRole',title:'角色'},],
   columnDetails: [
-    { name: 'userId', title: 'User ID', add: true, disabledAct:'true' },
+    { name: 'id', title: 'User ID', add: true, disabledAct:'true' },
     { name: 'username', title: 'User Name', sorter: true, query: true, add: true },
     {
       name: 'utype',
@@ -27,8 +27,9 @@ const columnSchemas = {
       tag: 'commonSelect',
       enumData: utypeList,
     },
-    { name: 'email', title: 'Email', sorter: true, query: true, add: true },
-    { name: 'tel', title: 'Mobile', sorter: true, query: true, add: true },
+    { name: 'password', title: 'Password',tag:'password', add: true },
+    { name: 'email', title: 'Email', query: true, add: true ,rules:[]},
+    { name: 'tel', title: 'Mobile', query: true, add: true ,rules:[]},
     {
       name: 'status',
       title: 'Status',

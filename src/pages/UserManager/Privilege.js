@@ -147,6 +147,7 @@ class Privilege extends PureComponent {
           selectedRow={selectedRow}
           keyName='roleId'
           relationName='sysPrivilegeRoles'
+          pageSize='999'
         />
       </PageHeaderWrapper>
     );

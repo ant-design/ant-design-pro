@@ -46,12 +46,13 @@ class BindDataQueryTable extends PureComponent {
     const {
       dispatch,
       onConversionData,
+      pageSize,
     } = this.props;
-
+    const newParams=pageSize?{...params,pageSize}:params;
     console.log('ddd---------4');
     dispatch({
       type: 'uniComp/list',
-      payload:params,
+      payload:newParams,
       onConversionData,
     });
   };
@@ -99,6 +100,7 @@ class BindDataQueryTable extends PureComponent {
       columnSchemas,
       onRow,
       children,
+      pageSize,
     } = this.props;
     const { key } = columnSchemas;
     const { selectedRows, } = this.state;
@@ -114,7 +116,7 @@ class BindDataQueryTable extends PureComponent {
         columnSchemas={columnSchemas}
         onSearch={this.handleSearch}
         onRow={onRow}
-
+        pageSize={pageSize}
       >
         {children}
       </QueryTable>
