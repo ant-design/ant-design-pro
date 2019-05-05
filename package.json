@@ -132,7 +132,7 @@
     "puppeteer": "^1.12.1"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "checkFiles": [
     "src/**/*.js*",
