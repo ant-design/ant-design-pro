@@ -16,6 +16,7 @@ declare module 'react-fittext';
 declare module '@antv/data-set';
 declare module 'nzh/cn';
 declare var APP_TYPE: string;
+
 declare module 'memoize-one' {
   function memoizeOne<T extends (...args: any[]) => any>(
     resultFn: T,
