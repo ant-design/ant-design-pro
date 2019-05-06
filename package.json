@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "2.3.1",
+  "version": "4.0.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
@@ -20,10 +20,10 @@
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
     "lint-staged:ts": "tslint",
-    "lint:fix": "eslint --fix --ext .js src tests && stylelint --fix 'src/**/*.less' --syntax less",
+    "lint:fix": "eslint --fix --ext .js src tests && npm run lint:style && npm run tslint:fix",
     "lint:js": "eslint --ext .js src tests",
     "lint:prettier": "check-prettier lint",
-    "lint:style": "stylelint 'src/**/*.less' --syntax less",
+    "lint:style": "stylelint --fix 'src/**/*.less' --syntax less",
     "lint:ts": "tslint -p . -c tslint.yml",
     "prettier": "node ./scripts/prettier.js",
     "site": "umi build && npm run functions:build",
@@ -32,7 +32,6 @@
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
-    "tslint": "npm run tslint:fix",
     "tslint:fix": "tslint --fix 'src/**/*.ts*'"
   },
   "husky": {
