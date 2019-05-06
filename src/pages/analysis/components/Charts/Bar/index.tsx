@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Chart, Axis, Tooltip, Geom } from 'bizcharts';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
-import autoHeight from '../autoHeight';
 import styles from '../index.less';
+import autoHeight from '../autoHeight';
 
 export interface IBarProps {
   title: React.ReactNode;
@@ -29,6 +29,7 @@ class Bar extends Component<
   node: HTMLDivElement | undefined;
 
   state = {
+    height: 0,
     autoHideXLabels: false,
   };
 
@@ -76,7 +77,7 @@ class Bar extends Component<
 
   render() {
     const {
-      height = 1,
+      height: propsHeight = 1,
       title,
       forceFit = true,
       data,
@@ -102,7 +103,8 @@ class Bar extends Component<
         value: y,
       }),
     ];
-
+    const { height: stateHeight } = this.state;
+    const height = propsHeight || stateHeight;
     return (
       <div className={styles.chart} style={{ height }} ref={this.handleRoot}>
         <div ref={this.handleRef}>

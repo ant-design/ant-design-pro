@@ -59,7 +59,7 @@
     "@antv/data-set": "^0.10.1",
     "ant-design-pro": "^2.1.1",
     "antd": "^3.16.1",
-    "bizcharts": "^3.4.3",
+    "bizcharts": "3.5.2-beta",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
@@ -81,7 +81,7 @@
     "react-fittext": "^1.0.0",
     "react-media": "^1.9.2",
     "react-media-hook2": "^1.0.2",
-    "umi": "^2.6.10",
+    "umi": "^2.6.17",
     "umi-plugin-pro-block": "^1.3.0",
     "umi-plugin-react": "^1.7.2",
     "umi-request": "^1.0.5"
@@ -111,7 +111,7 @@
     "eslint-plugin-markdown": "^1.0.0",
     "eslint-plugin-react": "^7.12.4",
     "gh-pages": "^2.0.1",
-    "husky": "^1.3.1",
+    "husky": "^2.2.0",
     "jest-puppeteer": "^4.1.0",
     "jsdom-global": "^3.0.2",
     "less": "^3.9.0",
@@ -139,7 +139,7 @@
     "puppeteer": "^1.12.1"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "checkFiles": [
     "src/**/*.js*",

@@ -57,6 +57,11 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
         type: 'analysis/fetch',
       });
     });
+    setTimeout(() => {
+      this.setState({
+        loading: false,
+      });
+    }, 2000);
   }
 
   componentWillUnmount() {

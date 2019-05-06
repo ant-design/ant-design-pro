@@ -1,5 +1,5 @@
 import Authorized from '@/utils/Authorized';
-import { Route } from '@/components/SiderMenu';
+import { Route } from '@/models/connect';
 import { ConnectProps, ConnectState, UserModelState } from '@/models/connect';
 import { connect } from 'dva';
 import pathToRegexp from 'path-to-regexp';

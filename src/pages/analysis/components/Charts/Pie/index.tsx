@@ -6,9 +6,8 @@ import classNames from 'classnames';
 import ReactFitText from 'react-fittext';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
-import autoHeight from '../autoHeight';
-
 import styles from './index.less';
+import autoHeight from '../autoHeight';
 export interface IPieProps {
   animate?: boolean;
   color?: string;
@@ -279,7 +278,6 @@ class Pie extends Component<IPieProps, IPieState> {
             )}
           </div>
         </ReactFitText>
-
         {hasLegend && (
           <ul className={styles.legend}>
             {legendData.map((item, i) => (
