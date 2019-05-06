@@ -59,7 +59,7 @@
     "@antv/data-set": "^0.10.1",
     "ant-design-pro": "^2.1.1",
     "antd": "^3.16.1",
-    "bizcharts": "3.5.2-beta",
+    "bizcharts": "3.5.2-beta.1",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
