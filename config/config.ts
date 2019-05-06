@@ -93,12 +93,11 @@ export default {
       Routes: ['src/pages/Authorized'],
       authority: ['admin', 'user'],
       routes: [
-        // dashboard
         {
-          path: '/',
-          name: 'welcome',
-          icon: 'smile',
-          component: './Welcome',
+          path: '/analysis',
+          name: 'Analysis',
+          icon: 'dashboard',
+          component: './analysis',
         },
       ],
     },
