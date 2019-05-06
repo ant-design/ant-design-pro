@@ -56,7 +56,6 @@
   "dependencies": {
     "@ant-design/pro-layout": "^4.1.0",
     "@antv/data-set": "^0.10.1",
-    "ant-design-pro": "^2.1.1",
     "antd": "^3.16.1",
     "bizcharts": "3.5.2-beta.1",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
@@ -79,11 +78,7 @@
     "react-dom": "^16.7.0",
     "react-fittext": "^1.0.0",
     "react-media": "^1.9.2",
-    "react-media-hook2": "^1.0.2",
-    "umi": "^2.6.17",
-    "umi-plugin-pro-block": "^1.3.0",
-    "umi-plugin-react": "^1.7.2",
-    "umi-request": "^1.0.5"
+    "react-media-hook2": "^1.0.2"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",
@@ -132,7 +127,11 @@
     "tslint-config-prettier": "^1.17.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
-    "umi-plugin-ga": "^1.1.3"
+    "umi": "^2.6.17",
+    "umi-plugin-ga": "^1.1.3",
+    "umi-plugin-pro-block": "^1.3.0",
+    "umi-plugin-react": "^1.7.2",
+    "umi-request": "^1.0.5"
   },
   "optionalDependencies": {
     "puppeteer": "^1.12.1"
