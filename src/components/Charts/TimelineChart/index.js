@@ -19,7 +19,7 @@ class TimelineChart extends React.Component {
       borderWidth = 2,
       data: sourceData,
     } = this.props;
-    
+
     const hasSourceData = Array.isArray(sourceData) && sourceData.length > 0;
     const data = hasSourceData ? sourceData : [{ x: 0, y1: 0, y2: 0 }];
 
