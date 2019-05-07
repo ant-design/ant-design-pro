@@ -1,6 +1,5 @@
 import { ConnectState, ConnectProps } from '@/models/connect';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 import React, { useState } from 'react';
 import logo from '../assets/logo.svg';
@@ -10,7 +9,9 @@ import {
   BasicLayoutProps as BasicLayoutComponentsProps,
   MenuDataItem,
   Settings,
+  SettingDrawer,
 } from '@ant-design/pro-layout';
+import Link from 'umi/link';
 
 export interface BasicLayoutProps extends BasicLayoutComponentsProps, ConnectProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
@@ -22,7 +23,7 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, route } = props;
+  const { dispatch, children, route, settings } = props;
   const { routes, authority } = route!;
   /**
    * constructor
@@ -37,23 +38,30 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
    */
   const handleMenuCollapse = (payload: boolean) =>
     dispatch!({ type: 'global/changeLayoutCollapsed', payload });
-
   return (
-    <BasicLayoutComponents
-      formatMessage={formatMessage}
-      logo={logo}
-      onChangeSetting={settings =>
-        dispatch!({
-          type: 'settings/changeSetting',
-          payload: settings,
-        })
-      }
-      onChangeLayoutCollapsed={handleMenuCollapse}
-      renderRightContent={RightProps => <RightContent {...RightProps} />}
-      {...props}
-    >
-      {children}
-    </BasicLayoutComponents>
+    <>
+      <BasicLayoutComponents
+        logo={logo}
+        onCollapse={handleMenuCollapse}
+        menuItemRender={(menuItemProps, defaultDom) => {
+          return <Link to={menuItemProps.path}>{defaultDom}</Link>;
+        }}
+        rightContentRender={rightProps => <RightContent {...rightProps} />}
+        {...props}
+        {...settings}
+      >
+        {children}
+      </BasicLayoutComponents>
+      <SettingDrawer
+        settings={settings}
+        onSettingChange={config =>
+          dispatch!({
+            type: 'settings/changeSetting',
+            payload: config,
+          })
+        }
+      />
+    </>
   );
 };
 

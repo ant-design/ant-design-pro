@@ -14,7 +14,9 @@ let lessNodesAppended: boolean;
 
 const updateTheme: (primaryColor?: string) => void = primaryColor => {
   // Don't compile less in production!
-  if (APP_TYPE !== 'site') {
+  // preview.pro.ant.design only do not use in your production;
+  // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+  if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION !== 'site') {
     return;
   }
   // Determine if the component is remounted
@@ -71,7 +73,10 @@ const updateTheme: (primaryColor?: string) => void = primaryColor => {
 };
 
 const updateColorWeak: (colorWeak: string) => void = colorWeak => {
-  document.body.className = colorWeak ? 'colorWeak' : '';
+  const root = document.getElementById('root');
+  if (root) {
+    root.className = colorWeak ? 'colorWeak' : '';
+  }
 };
 
 const SettingModel: SettingModelType = {
@@ -88,6 +93,7 @@ const SettingModel: SettingModelType = {
         }
       });
       const { primaryColor, colorWeak } = setting;
+
       if (state.primaryColor !== primaryColor) {
         updateTheme(primaryColor);
       }

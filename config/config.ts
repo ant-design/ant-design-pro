@@ -6,7 +6,8 @@ import defaultSettings from './defaultSettings';
 import webpackPlugin from './plugin.config';
 
 const { pwa, primaryColor } = defaultSettings;
-const { APP_TYPE, TEST } = process.env;
+// preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, TEST } = process.env;
 
 const plugins: IPlugin[] = [
   [
@@ -54,20 +55,11 @@ const plugins: IPlugin[] = [
       autoAddMenu: true,
     },
   ],
-  // ...(!process.env.TEST && os.platform() === 'darwin'
-  //   ? {
-  //       dll: {
-  //         include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-  //         exclude: ['@babel/runtime'],
-  //       },
-  //       hardSource: true,
-  //     }
-  //   : {}),
 ];
 
 // 针对 preview.pro.ant.design 的 GA 统计代码
-// 业务上不需要这个
-if (APP_TYPE === 'site') {
+// preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
   plugins.push([
     'umi-plugin-ga',
     {
@@ -80,12 +72,14 @@ export default {
   // add for transfer to umi
   plugins,
   define: {
-    APP_TYPE: APP_TYPE || '',
+    ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:
+      ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION || '', // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
   },
   treeShaking: true,
   targets: {
     ie: 11,
   },
+  devtool: ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION ? 'source-map' : false,
   // 路由配置
   routes: [
     {
@@ -99,12 +93,11 @@ export default {
       Routes: ['src/pages/Authorized'],
       authority: ['admin', 'user'],
       routes: [
-        // dashboard
         {
-          path: '/',
-          name: 'welcome',
-          icon: 'smile',
-          component: './Welcome',
+          path: '/analysis',
+          name: 'Analysis',
+          icon: 'dashboard',
+          component: './analysis',
         },
       ],
     },
