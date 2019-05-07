@@ -21,6 +21,7 @@ export default {
   'app.settings.basic.phone': '聯系電話',
   'app.settings.basic.phone-message': '請輸入您的聯系電話!',
   'app.settings.basic.update': '更新基本信息',
+  'app.settings.basic.updatesucc': '更新基本信息成功',
   'app.settings.security.strong': '強',
   'app.settings.security.medium': '中',
   'app.settings.security.weak': '弱',

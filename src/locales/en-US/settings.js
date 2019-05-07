@@ -21,6 +21,7 @@ export default {
   'app.settings.basic.phone': 'Phone Number',
   'app.settings.basic.phone-message': 'Please input your phone!',
   'app.settings.basic.update': 'Update Information',
+  'app.settings.basic.updatesucc': 'Update basic information successfully',
   'app.settings.security.strong': 'Strong',
   'app.settings.security.medium': 'Medium',
   'app.settings.security.weak': 'Weak',
