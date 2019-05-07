@@ -25,7 +25,7 @@
     "lint:prettier": "check-prettier lint",
     "lint:style": "stylelint --fix 'src/**/*.less' --syntax less",
     "lint:ts": "tslint -p . -c tslint.yml",
-    "prettier": "node ./scripts/prettier.js",
+    "prettier": " check-prettier write",
     "site": "umi build && npm run functions:build",
     "start": "cross-env ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION=site umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
@@ -42,8 +42,8 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx}": "npm run lint-staged:js",
-    "**/*.{js,ts,tsx,json,jsx,less}": [
-      "node ./scripts/lint-prettier.js",
+    "**/*.{js,ts,tsx,md,json,jsx,less}": [
+      "npm run prettier",
       "git add"
     ],
     "**/*.{ts,tsx}": "npm run lint-staged:ts"
