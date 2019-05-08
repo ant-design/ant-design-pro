@@ -24,7 +24,7 @@ const columnSchemas = {
       title: 'Account Type',
       columnHidden: false,
       query: false,
-      add: false,
+      add: true,
       tag: 'commonSelect',
       enumData: utypeList,
     },
