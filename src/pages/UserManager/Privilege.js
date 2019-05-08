@@ -23,7 +23,7 @@ const columnSchemas = {
   commands:[{action:'setRole',title:'角色'},],
   columnDetails: [
     { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:80 },
-    { name: 'name', title: 'Name', columnHidden: true, query: true, add: true },
+    { name: 'name', title: 'Name', columnHidden: false, query: true, add: true },
     {
       name: 'type',
       title: 'type',
