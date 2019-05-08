@@ -24,17 +24,19 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', name: 'home',redirect: '/apiGateway/apiList', authority: ['admin', 'user'] },
+      { path: '/', name: 'home',redirect: '/apiGateway/apiList' },
       // apiGateWay
       {
         path: '/apiGateway',
         icon: 'gateway',
         name: 'apiGateway',
+        authority: ['manager','user'],
         routes: [
           {
             path: '/apiGateway/apiList',
             name: 'apiList',
             component: './ApiGateway/ApiList',
+            authority: ['manager','user','admin'],
           },
           {
             path: '/apiGateway/apiUpdate',
@@ -80,7 +82,7 @@ export default [
         path: '/uniComp',
         icon: 'table',
         name: 'uniComp',
-        authority: ['admin','manager'],
+        authority: ['manager'],
         routes: [
           {
             path: '/uniComp/org',
@@ -118,11 +120,12 @@ export default [
           },
         ],
       },
-      // test
+      // admin
       {
         path: '/admin',
         icon: 'table',
         name: 'admin',
+        authority: ['admin'],
         routes: [
           {
             path: '/admin/logPage',
@@ -136,6 +139,7 @@ export default [
         path: '/test',
         icon: 'table',
         name: 'test',
+        authority: ['admin'],
         routes: [
           {
             path: '/test/test1',
@@ -231,6 +235,7 @@ export default [
         name: 'editor',
         icon: 'highlight',
         path: '/editor',
+        authority: ['admin'],
         routes: [
           {
             path: '/editor/flow',
