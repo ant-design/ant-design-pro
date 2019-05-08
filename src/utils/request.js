@@ -1,11 +1,17 @@
 /**
  * request 网络请求工具
  * 更详细的api文档: https://bigfish.alipay.com/doc/api#request
+ * http://npm.taobao.org/package/umi-request
  */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 import router from 'umi/router';
 
+import constants from '@/utils/constUtil';
+import {push,getLogInfo} from '@/utils/log';
+
+const {DEBUG} = constants;
+let logObj;
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -81,10 +87,7 @@ const request = extend({
   // headers:{Authorization:token},
 });
 
-request.interceptors.response.use((response, options) => {
-  // response.headers.append('interceptors', 'yes');
-  // console.log("=====10",response.body);
-  // console.log("=====11",options.headers);
+request.interceptors.response.use( (response) => {
   response.headers.forEach((value,key)=>{
     // console.log("==============12:",key,":",value);
     if(key.toLowerCase()==='RspToken'.toLowerCase()){
@@ -93,13 +96,40 @@ request.interceptors.response.use((response, options) => {
       localStorage.setItem("token",value);
     }
   });
-  // console.log("=====13",token);
   return response;
 });
 
+if(DEBUG){
+request.interceptors.response.use( (response, options) => {
+  // response.headers.append('interceptors', 'yes');
+  // console.log("=====10",JSON.stringify(response.body));
+  // console.log("=====11",options);
+  // console.log("=====13",token);
+  // const data = response.clone().json();
+  // if(data){
+  //   console.log("===10",data);
+  // }
+
+  logObj.request=options.data;
+  try{
+    response.clone().json().then((data)=>{
+      logObj.response=data;
+      return data;
+    });
+  } catch (e) {} // eslint-disable-line
+  push(logObj);
+  return response;
+});
+}
 request.interceptors.request.use((url, options) => {
   const token=localStorage.getItem("token");
   // console.log("====1",`Bearer ${token}`);
+  // console.log("====2",options.data);
+
+  if(DEBUG) {
+    logObj={};
+    logObj.url = url;
+  }
   const newOptions=token===""?{...options}:{ ...options, headers:{Authorization:`Bearer ${token}`}};
   return (
     {

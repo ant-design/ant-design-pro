@@ -167,16 +167,16 @@ function getInsertSql(item,tableName){
 }
 export function toInsertSql(privileges){
   const sqlArray=[];
-  sqlArray.push("delete from sys_role;");
-  sqlArray.push("delete from sys_privilege;");
-  sqlArray.push("delete from sys_privilege_role;");
+  sqlArray.push("delete from sys_role where role_id in(1,2,3);");
+  sqlArray.push("delete from sys_privilege where type='menu';");
+  sqlArray.push("delete from sys_privilege_role where privilege_id in (select privilege_id from sys_privilege where type='menu');");
   allRoleList.forEach((item)=>{
     sqlArray.push(getInsertSql(item,'sys_role'));
   });
   privileges.forEach((item)=>{
     // console.log("====:",item);
     const {sysPrivilegeRoles,children,...privilege}=item;
-    console.log("====:",privilege);
+    // console.log("====:",privilege);
     sqlArray.push(getInsertSql(privilege,'sys_privilege'));
     if(sysPrivilegeRoles&&sysPrivilegeRoles.length>0){
       sysPrivilegeRoles.forEach((item2)=>{

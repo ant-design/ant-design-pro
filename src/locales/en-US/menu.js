@@ -7,6 +7,8 @@ export default {
   'menu.dashboard.analysis': 'Analysis',
   'menu.dashboard.monitor': 'Monitor',
   'menu.dashboard.workplace': 'Workplace',
+  'menu.admin': 'Maintenance',
+  'menu.admin.logPage': 'Log',
   'menu.test': 'Test Page',
   'menu.test.test1': 'Test Page1',
   'menu.test.test2': 'Test Page2',

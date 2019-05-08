@@ -1,5 +1,6 @@
 const constants = {
   PREFIX_PATH: '/server',
+  DEBUG: true,
   SUCCESS_CODE: '200',
   UNAUTH_CODE: '1203',
   TOKEN_KEY: 'Accept-token',

@@ -7,6 +7,8 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {getRouteDatas,toSimulatePrivilege,toInsertSql,flatToMenuTree} from '../UserManager/userUtil';
 import routeDatas from "../../../config/router.api.config";
 
+import {getLogInfo} from '@/utils/log';
+
 const routes=getRouteDatas(routeDatas);
 const privileges=[];
 const flatPrivileges=[];
@@ -18,9 +20,16 @@ const sqlArray=toInsertSql(flatPrivileges);
 const sqlStr=sqlArray.join("\n");
 const {TextArea} = Input;
 
+const token=localStorage.getItem("token");
+// console.log("====1",`Bearer ${token}`);
+
 export default () => (
   <PageHeaderWrapper>
     <div>
+      Token:<TextArea rows={3} value={`Bearer ${token}`} />
+      <br />
+      log:<ReactJson src={getLogInfo()} collapsed='true' />
+      <br />
       ant框架的原始菜单数据:<ReactJson src={routes} collapsed='true' />
       <br />
       转换为树形表格格式:<ReactJson src={privileges} collapsed='true' />

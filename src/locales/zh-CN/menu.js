@@ -7,6 +7,8 @@ export default {
   'menu.dashboard.analysis': '分析页',
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
+  'menu.admin': '维护',
+  'menu.admin.logPage': '日志',
   'menu.test': '测试页面',
   'menu.test.test1': '测试页面1',
   'menu.test.test2': '测试页面2',

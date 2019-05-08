@@ -120,6 +120,19 @@ export default [
       },
       // test
       {
+        path: '/admin',
+        icon: 'table',
+        name: 'admin',
+        routes: [
+          {
+            path: '/admin/logPage',
+            name: 'logPage',
+            component: './Admin/LogPage',
+          },
+        ],
+      },
+      // test
+      {
         path: '/test',
         icon: 'table',
         name: 'test',
