@@ -167,9 +167,9 @@ function getInsertSql(item,tableName){
 }
 export function toInsertSql(privileges){
   const sqlArray=[];
+  sqlArray.push("delete from sys_privilege_role where privilege_id in (select privilege_id from sys_privilege where type='menu');");
   sqlArray.push("delete from sys_role where role_id in(1,2,3);");
   sqlArray.push("delete from sys_privilege where type='menu';");
-  sqlArray.push("delete from sys_privilege_role where privilege_id in (select privilege_id from sys_privilege where type='menu');");
   allRoleList.forEach((item)=>{
     sqlArray.push(getInsertSql(item,'sys_role'));
   });
