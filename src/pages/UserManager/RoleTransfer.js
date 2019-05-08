@@ -58,9 +58,9 @@ class RoleTransfer extends PureComponent {
 
   okHandle = () => {
     const {targetKeys}=this.state;
-    console.log(targetKeys);
-    const {dispatch,columnSchemas:{key,tableName},selectedRow,keyName,relationName}=this.props;
-
+    // console.log(targetKeys);
+    const {dispatch,columnSchemas:{key,relationKey,tableName},selectedRow,keyName,relationName}=this.props;
+    const relationKeyName=relationKey || key;
     const {oriSelectedArray}=this.state;
     const willUpdateArray=[];
     oriSelectedArray.forEach((item)=>{
@@ -75,10 +75,10 @@ class RoleTransfer extends PureComponent {
     targetKeys.forEach((value)=>{
       const role=oriSelectedArray.find((item)=>(item[keyName]===value));
       if(!role){
-        willUpdateArray.push({[key]:selectedRow[key],[keyName]:value,act:'A'});// 新增
+        willUpdateArray.push({[relationKeyName]:selectedRow[key],[keyName]:value,act:'A'});// 新增
       }
     });
-    console.log("---willUpdateArray2:",willUpdateArray);
+    // console.log("---willUpdateArray2:",willUpdateArray);
 
     const info = {
       option:8, // 1-新增记录 2-修改记录,8-关联修改
@@ -87,15 +87,17 @@ class RoleTransfer extends PureComponent {
         info: {...selectedRow,[relationName]:willUpdateArray},
       },
     };
-    console.log("request submitRelation:",info);
+    // console.log("request submitRelation:",info);
     dispatch({
       type: 'uniComp/save',
       payload: info,
       callback:(response)=>{
         if (response.code==="200"){
           const msg=response.msg||"success.";
-          const {onVisible}=this.props;
+          const {onVisible,onRefreshData}=this.props;
           onVisible(false);
+          console.log("----0000000");
+          onRefreshData();
           message.success(msg);
         }
         else{
@@ -117,9 +119,9 @@ class RoleTransfer extends PureComponent {
 
   handleChange = (nextTargetKeys, direction, moveKeys) => {
     this.setState({ targetKeys: nextTargetKeys });
-    console.log('targetKeys: ', nextTargetKeys);
-    console.log('direction: ', direction);
-    console.log('moveKeys: ', moveKeys);
+    // console.log('targetKeys: ', nextTargetKeys);
+    // console.log('direction: ', direction);
+    // console.log('moveKeys: ', moveKeys);
   }
 
   handleSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
@@ -136,7 +138,7 @@ class RoleTransfer extends PureComponent {
 
   setKey = (record) => {
     const {keyName}=this.props;
-    console.log("------11111aaaa--",keyName)
+    // console.log("------11111aaaa--",keyName)
     return record[keyName];
   };
 

@@ -14,6 +14,7 @@ const columnSchemas = {
   tableName: 'sys_user',
   key: 'id',
   name: 'username',
+  relationKey: 'userId',
   commands:[{action:'setRole',title:'角色'},],
   columnDetails: [
     { name: 'id', title: 'User ID', add: true, disabledAct:'true' },
@@ -27,7 +28,7 @@ const columnSchemas = {
       tag: 'commonSelect',
       enumData: utypeList,
     },
-    { name: 'password', title: 'Password',tag:'password', add: true },
+    { name: 'password', title: 'Password',tag:'passwordTag', add: true, columnHidden: true },
     { name: 'email', title: 'Email', query: true, add: true ,rules:[]},
     { name: 'tel', title: 'Mobile', query: true, add: true ,rules:[]},
     {
@@ -71,6 +72,14 @@ class User extends PureComponent {
     this.setState({modalVisible});
   }
 
+  handleRefreshData=()=>{
+    this.child.handleSearchDefault()
+  }
+
+  handleRef = (ref) => {
+    this.child = ref
+  }
+
 
   render() {
     const {modalVisible,selectedRow}=this.state;
@@ -78,6 +87,7 @@ class User extends PureComponent {
       <PageHeaderWrapper title="用户管理">
         <BindDataQueryTable
           columnSchemas={columnSchemas}
+          onRef={this.handleRef}
           size='middle'
           onRow={(record) => {
             return {
@@ -100,6 +110,7 @@ class User extends PureComponent {
           onVisible={this.handleVisible}
           columnSchemas={columnSchemas}
           selectedRow={selectedRow}
+          onRefreshData={this.handleRefreshData}
           keyName='roleId'
           relationName='sysUserRoles'
         />

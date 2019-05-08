@@ -29,17 +29,35 @@ class BindDataQueryTable extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('============2componentDidMount========');
-    const {columnSchemas: { tableName, },} = this.props;
-    this.handleSearch({tableName});
+    // console.log('============2componentDidMount========');
+    this.handleSearchDefault();
+    const {onRef} = this.props;
+    if(onRef){
+      onRef(this);
+    }
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   const { refreshData } = this.props;
+  //   if (nextProps.refreshData&&refreshData !== nextProps.refreshData) {
+  //     const {columnSchemas: { tableName, },} = this.props;
+  //     this.handleSearch({tableName});
+  //   }
+  // }
+
   handleSelectRows = rows => {
-    console.log("----:",rows);
+    // console.log("----:",rows);
     this.setState({
       selectedRows: rows,
     });
   };
+
+  handleSearchDefault = () => {
+
+    console.log("-------------------222222222");
+    const {columnSchemas: { tableName, }} = this.props;
+    this.handleSearch({tableName});
+  }
 
   handleSearch = (params) => {
 

@@ -8,7 +8,7 @@ import { notification } from 'antd';
 import router from 'umi/router';
 
 import constants from '@/utils/constUtil';
-import {push,getLogInfo} from '@/utils/log';
+import {push} from '@/utils/log';
 
 const {DEBUG} = constants;
 let logObj;
@@ -114,10 +114,11 @@ request.interceptors.response.use( (response, options) => {
   try{
     response.clone().json().then((data)=>{
       logObj.response=data;
+      push(logObj);
       return data;
     });
-  } catch (e) {} // eslint-disable-line
-  push(logObj);
+  } catch (e) {
+    push(logObj);} // eslint-disable-line
   return response;
 });
 }

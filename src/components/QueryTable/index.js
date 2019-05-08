@@ -87,7 +87,7 @@ const CreateForm = Form.create()(props => {
               </Option>
             ))}
           </Select>
-        )
+        );
       case 'commonRadio':
         return (
           <RadioGroup style={{ width: '100%' }}>
@@ -97,25 +97,24 @@ const CreateForm = Form.create()(props => {
               </Radio>
             ))}
           </RadioGroup>
-        )
+        );
       case 'textArea':
         return (
           <TextArea rows={item.rows} />
-        )
-      case 'password':
-        return (
-          <Password style={{ width: '100%' }} />
-        )
+        );
       case 'inputNumber':
         return (
           <InputNumber style={{ width: '100%' }} />
-        )
+        );
+      case 'passwordTag':
+        return (
+          <Password style={{ width: '100%' }} />
+        );
       default:
-        break;
+        return (
+          <Input disabled={item.disabled} placeholder={`请输入${item.title}`} />
+        );
     }
-    return (
-      <Input disabled={item.disabled} placeholder={`请输入${item.title}`} />
-    )
   }
   const addForms = getFormItemArray(props, 'add')
     .filter(data => !(`${data.name}` === key && !selectedRow))
@@ -281,10 +280,12 @@ class QueryTable extends PureComponent {
       columnSchemas: { tableName },
     } = this.props;
     form.validateFields((err, fieldsValue) => {
+      console.log("---fieldsValue:",fieldsValue);
       if (err) return;
+      const {searchForm}=fieldsValue;
       const values = {
         tableName,
-        ...fieldsValue,
+        ...searchForm,
       };
       this.setState({
         formValues: values,
@@ -337,7 +338,7 @@ class QueryTable extends PureComponent {
 
   handleAdd= (fields, addForm) => {
 
-    console.log('handleAdd:',fields);
+    // console.log('handleAdd:',fields);
     const {
       columnSchemas: { tableName,key },
     } = this.props;
@@ -458,12 +459,12 @@ class QueryTable extends PureComponent {
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           {simpleQueryForms.map(item => (
             <Col key={`col-${item.name}`} md={8} sm={24}>
-              <FormItem key={`formitem-${item.name}`} label={item.title}>
-                {getFieldDecorator(item.name)(
+              <FormItem key={`form-item-${item.name}`} label={item.title}>
+                {getFieldDecorator(`searchForm.${item.name}`)(
                   item.tag === 'date' ? (
-                    <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />
+                    <DatePicker key={`ele-${item.name}`} style={{ width: '100%' }} placeholder="请输入日期" />
                   ) : (
-                    <Input placeholder="请输入" />
+                    <Input key={`ele-${item.name}`} placeholder={`请输入${item.name}查询`} />
                   )
                 )}
               </FormItem>
@@ -493,10 +494,10 @@ class QueryTable extends PureComponent {
       <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
         {queryForms.splice(0, 3).map(item => (
           <Col key={`col-${item.name}`} md={8} sm={24}>
-            <FormItem key={`formitem-${item.name}`} label={item.title}>
+            <FormItem key={`form-item-${item.name}`} label={item.title}>
               {getFieldDecorator(item.name)(
                 item.tag === 'commonSelect' ? (
-                  <Select style={{ width: 100 }}>
+                  <Select key={`ele-${item.name}`} style={{ width: 100 }}>
                     {item.enumData.map(d => (
                       <Option key={`${item.name}_${d.itemCode}`} value={d.itemCode}>
                         {d.itemValue}
@@ -504,9 +505,9 @@ class QueryTable extends PureComponent {
                     ))}
                   </Select>
                 ) : item.tag === 'date' ? (
-                  <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />
+                  <DatePicker key={`ele-${item.name}`} style={{ width: '100%' }} placeholder="请输入更新日期" />
                 ) : (
-                  <Input placeholder="请输入" />
+                  <Input key={`ele-${item.name}`} placeholder="请输入" />
                 )
               )}
             </FormItem>

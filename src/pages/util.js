@@ -35,7 +35,9 @@ export function conversion(responseData) {
 
 export function conversionReq(requestData) {
   const {tableName, option, pageSize, ...info} = requestData;
-  info.pageNo=info.pageNo || 1;
-  info.pageSize=pageSize || 10;
+  if(!option){
+    info.pageNo=info.pageNo || 1;
+    info.pageSize=pageSize || 10;
+  }
   return {tableName,option,data:{info}};
 }

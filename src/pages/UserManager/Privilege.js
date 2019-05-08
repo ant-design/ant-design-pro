@@ -15,7 +15,7 @@ const typeList = getItems('privilege', 'type');
 
 const hideChildrenInMenuList = getItems('privilege', 'hide_children_in_menu');
 const hideInMenuList = getItems('privilege', 'hide_in_menu');
-console.log(hideChildrenInMenuList);
+// console.log(hideChildrenInMenuList);
 const columnSchemas = {
   tableName: 'sys_privilege',
   key: 'privilegeId',
@@ -117,13 +117,21 @@ class Privilege extends PureComponent {
       return item;
     });
     flatToTree(newList,newData,0);
-    console.log("-----flat to tree---5",newData);
+    // console.log("-----flat to tree---5",newData);
     return newData;
   }
 
   handleVisible=(modalVisible)=>{
     // console.log("---modalVisible＝＝＝＝3:",modalVisible);
     this.setState({modalVisible});
+  }
+  
+  handleRefreshData=()=>{
+    this.child.handleSearchDefault()
+  }
+
+  handleRef = (ref) => {
+    this.child = ref
   }
 
   render() {
@@ -141,7 +149,7 @@ class Privilege extends PureComponent {
               // onDoubleClick: (event) => {},
               // onContextMenu: (event) => {},
               onMouseEnter: () => {this.setState({selectedRow:record});},  // 鼠标移入行
-              // onMouseLeave: (event) => {console.log(12)}
+              // onMouseLeave: (event) => {// console.log(12)}
             };
           }}
         >
@@ -154,6 +162,7 @@ class Privilege extends PureComponent {
           title='授权'
           modalVisible={modalVisible}
           onVisible={this.handleVisible}
+          onRefreshData={this.handleRefreshData}
           columnSchemas={columnSchemas}
           selectedRow={selectedRow}
           keyName='roleId'
