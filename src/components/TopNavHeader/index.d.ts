@@ -1,6 +1,6 @@
-import React from 'react';
-import { SiderTheme, CollapseType } from 'antd/es/Layout/Sider';
+import { CollapseType, SiderTheme } from 'antd/es/Layout/Sider';
 import { MenuMode } from 'antd/es/menu';
+import React from 'react';
 
 export interface TopNavHeaderProps {
   theme: SiderTheme;

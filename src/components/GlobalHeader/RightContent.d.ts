@@ -1,7 +1,7 @@
-import React from 'react';
-import { DropDownProps } from 'antd/lib/dropdown';
-import { ClickParam } from 'antd/es/menu';
 import { SiderTheme } from 'antd/es/Layout/Sider';
+import { ClickParam } from 'antd/es/menu';
+import { DropDownProps } from 'antd/lib/dropdown';
+import React from 'react';
 
 export interface GlobalHeaderRightProps {
   notices?: any[];

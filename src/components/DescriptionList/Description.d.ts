@@ -1,5 +1,5 @@
-import React from 'react';
 import { ColProps } from 'antd/es/col';
+import React from 'react';
 
 export interface DescriptionProps extends ColProps {
   column?: number;

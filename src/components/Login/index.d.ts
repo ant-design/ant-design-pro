@@ -1,9 +1,9 @@
+import { WrappedFormUtils } from 'antd/es/form/Form';
 import Button from 'antd/lib/button';
 import React from 'react';
 import LoginItem, { LoginItemProps, LoginItemType } from './LoginItem';
-import LoginTab from './LoginTab';
-import { WrappedFormUtils } from 'antd/es/form/Form';
 import LoginSubmit from './LoginSubmit';
+import LoginTab from './LoginTab';
 
 export interface LoginProps {
   defaultActiveKey?: string;

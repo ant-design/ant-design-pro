@@ -1,5 +1,5 @@
-import React from 'react';
 import { SiderTheme } from 'antd/es/Layout/Sider';
+import React from 'react';
 
 export interface SettingModelState {
   navTheme: string | SiderTheme;

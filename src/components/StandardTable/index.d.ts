@@ -1,5 +1,5 @@
-import React from 'react';
 import { PaginationConfig, SorterResult, TableCurrentDataSource } from 'antd/lib/table';
+import React from 'react';
 
 export interface StandardTableProps {
   columns: any;
