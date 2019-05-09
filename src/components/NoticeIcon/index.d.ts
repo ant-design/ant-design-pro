@@ -1,14 +1,14 @@
 import React from 'react';
-import NoticeIconTab, { NoticeIconData } from './NoticeIconTab';
+import NoticeIconTab, { INoticeIconData } from './NoticeIconTab';
 
-export interface NoticeIconProps {
+export interface INoticeIconProps {
   count?: number;
   bell?: React.ReactNode;
   className?: string;
   loading?: boolean;
   onClear?: (tabName: string) => void;
-  onItemClick?: (item: NoticeIconData, tabProps: NoticeIconProps) => void;
-  onViewMore?: (tabProps: NoticeIconProps, e: MouseEvent) => void;
+  onItemClick?: (item: INoticeIconData, tabProps: INoticeIconProps) => void;
+  onViewMore?: (tabProps: INoticeIconProps, e: MouseEvent) => void;
   onTabChange?: (tabTile: string) => void;
   style?: React.CSSProperties;
   onPopupVisibleChange?: (visible: boolean) => void;

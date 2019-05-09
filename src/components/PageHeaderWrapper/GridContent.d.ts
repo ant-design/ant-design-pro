@@ -1,8 +1,8 @@
 import React from 'react';
 
-export interface GridContentProps {
+export interface IGridContentProps {
   contentWidth: string;
   children: React.ReactNode;
 }
 
-export default class GridContent extends React.Component<GridContentProps, any> {}
+export default class GridContent extends React.Component<IGridContentProps, any> {}

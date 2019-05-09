@@ -1,7 +1,7 @@
 import React from 'react';
 
-export interface SelectLangProps {
+export interface ISelectLangProps {
   className?: string;
 }
 
-export default class SelectLang extends React.Component<SelectLangProps, any> {}
+export default class SelectLang extends React.Component<ISelectLangProps, any> {}

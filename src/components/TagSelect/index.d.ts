@@ -1,7 +1,7 @@
 import React from 'react';
 import TagSelectOption, { TagSelectOptionProps } from './TagSelectOption';
 
-export interface TagSelectProps {
+export interface ITagSelectProps {
   onChange?: (value: string[]) => void;
   expandable?: boolean;
   value?: string[] | number[];
@@ -17,7 +17,7 @@ export interface TagSelectProps {
   children: React.ReactElement<TagSelectOption> | Array<React.ReactElement<TagSelectOption>>;
 }
 
-export default class TagSelect extends React.Component<TagSelectProps, any> {
+export default class TagSelect extends React.Component<ITagSelectProps, any> {
   public static Option: typeof TagSelectOption;
   private children:
     | React.ReactElement<TagSelectOption>

@@ -3,7 +3,7 @@ import { ClickParam } from 'antd/es/menu';
 import { DropDownProps } from 'antd/lib/dropdown';
 import React from 'react';
 
-export interface GlobalHeaderRightProps {
+export interface IGlobalHeaderRightProps {
   notices?: any[];
   dispatch?: (args: any) => void;
   currentUser?: {
@@ -23,4 +23,4 @@ export interface GlobalHeaderRightProps {
   theme?: SiderTheme;
 }
 
-export default class GlobalHeaderRight extends React.Component<GlobalHeaderRightProps, any> {}
+export default class GlobalHeaderRight extends React.Component<IGlobalHeaderRightProps, any> {}

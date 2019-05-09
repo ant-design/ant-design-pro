@@ -4,7 +4,7 @@ import React from 'react';
 
 import { MenuMode } from 'antd/es/menu';
 
-export interface BaseMenuProps {
+export interface IBaseMenuProps {
   flatMenuKeys?: any[];
   location?: H.Location;
   onCollapse?: (collapsed: boolean, type?: CollapseType) => void;
@@ -20,4 +20,4 @@ export interface BaseMenuProps {
   onOpenChange?: (openKeys: string[]) => void;
 }
 
-export default class BaseMenu extends React.Component<BaseMenuProps, any> {}
+export default class BaseMenu extends React.Component<IBaseMenuProps, any> {}

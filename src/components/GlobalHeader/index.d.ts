@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface GlobalHeaderProps {
+export interface IGlobalHeaderProps {
   collapsed?: boolean;
   onCollapse?: (collapsed: boolean) => void;
   isMobile?: boolean;
@@ -10,4 +10,4 @@ export interface GlobalHeaderProps {
   onNoticeVisibleChange?: (b: boolean) => void;
 }
 
-export default class GlobalHeader extends React.Component<GlobalHeaderProps, any> {}
+export default class GlobalHeader extends React.Component<IGlobalHeaderProps, any> {}

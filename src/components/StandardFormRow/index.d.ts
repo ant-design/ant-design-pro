@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface StandardFormRowProps {
+export interface IStandardFormRowProps {
   title: string;
   last?: boolean;
   block?: boolean;
@@ -8,4 +8,4 @@ export interface StandardFormRowProps {
   style?: React.CSSProperties;
 }
 
-export default class StandardFormRow extends React.Component<StandardFormRowProps, any> {}
+export default class StandardFormRow extends React.Component<IStandardFormRowProps, any> {}

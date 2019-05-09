@@ -1,7 +1,7 @@
 import React from 'react';
 
-export interface EditableItemProps {
+export interface IEditableItemProps {
   onChange?: (value?: string | string[] | number) => void;
 }
 
-export default class EditableItem extends React.Component<EditableItemProps, any> {}
+export default class EditableItem extends React.Component<IEditableItemProps, any> {}

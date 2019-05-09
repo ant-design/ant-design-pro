@@ -1,7 +1,7 @@
 import * as H from 'history';
 import React from 'react';
 
-export interface ExceptionProps<
+export interface IExceptionProps<
   L = {
     to: H.LocationDescriptor;
     href?: H.LocationDescriptor;
@@ -20,4 +20,4 @@ export interface ExceptionProps<
   backText?: React.ReactNode;
   redirect?: string;
 }
-export default class Exception extends React.Component<ExceptionProps, any> {}
+export default class Exception extends React.Component<IExceptionProps, any> {}

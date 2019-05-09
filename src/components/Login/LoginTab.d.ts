@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface LoginTabProps {
+export interface ILoginTabProps {
   key?: string;
   tab?: React.ReactNode;
   tabUtil: {
@@ -8,4 +8,4 @@ export interface LoginTabProps {
     removeTab: (id: any) => void;
   };
 }
-export default class LoginTab extends React.Component<LoginTabProps, any> {}
+export default class LoginTab extends React.Component<ILoginTabProps, any> {}

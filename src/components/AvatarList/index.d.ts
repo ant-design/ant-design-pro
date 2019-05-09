@@ -1,14 +1,14 @@
 import React from 'react';
-import AvatarItem, { AvatarItemProps, SizeType } from './AvatarItem';
+import AvatarItem, { IAvatarItemProps, SizeType } from './AvatarItem';
 
-export interface AvatarListProps {
-  Item?: React.ReactElement<AvatarItemProps>;
+export interface IAvatarListProps {
+  Item?: React.ReactElement<IAvatarItemProps>;
   size?: SizeType;
   maxLength?: number;
   excessItemsStyle?: React.CSSProperties;
   style?: React.CSSProperties;
-  children: React.ReactElement<AvatarItemProps> | Array<React.ReactElement<AvatarItemProps>>;
+  children: React.ReactElement<IAvatarItemProps> | Array<React.ReactElement<IAvatarItemProps>>;
 }
-export default class AvatarList extends React.Component<AvatarListProps, any> {
+export default class AvatarList extends React.Component<IAvatarListProps, any> {
   public static Item: typeof AvatarItem;
 }

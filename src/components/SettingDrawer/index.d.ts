@@ -1,7 +1,7 @@
 import { SiderTheme } from 'antd/es/Layout/Sider';
 import React from 'react';
 
-export interface SettingModelState {
+export interface ISettingModelState {
   navTheme: string | SiderTheme;
   primaryColor: string;
   layout: string;
@@ -16,9 +16,9 @@ export interface SettingModelState {
   colorWeak: boolean;
 }
 
-export interface SettingDrawerProps {
-  setting?: SettingModelState;
+export interface ISettingDrawerProps {
+  setting?: ISettingModelState;
   dispatch?: (args: any) => void;
 }
 
-export default class SettingDrawer extends React.Component<SettingDrawerProps, any> {}
+export default class SettingDrawer extends React.Component<ISettingDrawerProps, any> {}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface ApplicationsProps {
+export interface IApplicationsProps {
   data: {
     content?: string;
     updatedAt?: any;
@@ -10,4 +10,4 @@ export interface ApplicationsProps {
   };
 }
 
-export default class ArticleListContent extends React.Component<ApplicationsProps, any> {}
+export default class ArticleListContent extends React.Component<IApplicationsProps, any> {}

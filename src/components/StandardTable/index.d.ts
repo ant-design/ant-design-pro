@@ -1,7 +1,7 @@
 import { PaginationConfig, SorterResult, TableCurrentDataSource } from 'antd/lib/table';
 import React from 'react';
 
-export interface StandardTableProps {
+export interface IStandardTableProps {
   columns: any;
   onSelectRow: (row: any) => void;
   data: any;
@@ -16,4 +16,4 @@ export interface StandardTableProps {
   loading?: boolean;
 }
 
-export default class StandardTable extends React.Component<StandardTableProps, any> {}
+export default class StandardTable extends React.Component<IStandardTableProps, any> {}

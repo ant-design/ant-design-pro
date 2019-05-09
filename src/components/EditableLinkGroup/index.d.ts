@@ -1,9 +1,9 @@
 import React from 'react';
 
-export interface EditableLinkGroupProps {
+export interface IEditableLinkGroupProps {
   links: any[];
   onAdd: () => void;
   linkElement: string;
 }
 
-export default class EditableLinkGroup extends React.Component<EditableLinkGroupProps, any> {}
+export default class EditableLinkGroup extends React.Component<IEditableLinkGroupProps, any> {}

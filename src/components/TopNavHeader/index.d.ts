@@ -2,7 +2,7 @@ import { CollapseType, SiderTheme } from 'antd/es/Layout/Sider';
 import { MenuMode } from 'antd/es/menu';
 import React from 'react';
 
-export interface TopNavHeaderProps {
+export interface ITopNavHeaderProps {
   theme: SiderTheme;
   contentWidth?: string;
   menuData?: any[];
@@ -22,4 +22,4 @@ export interface TopNavHeaderProps {
   onNoticeVisibleChange?: (b: boolean) => void;
 }
 
-export default class TopNavHeader extends React.Component<TopNavHeaderProps, any> {}
+export default class TopNavHeader extends React.Component<ITopNavHeaderProps, any> {}

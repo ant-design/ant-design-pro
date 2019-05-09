@@ -1,7 +1,7 @@
 import { SkeletonProps } from 'antd/lib/skeleton';
 import React from 'react';
 
-export interface NoticeIconData {
+export interface INoticeIconData {
   avatar?: string | React.ReactNode;
   title?: React.ReactNode;
   description?: React.ReactNode;
@@ -10,11 +10,11 @@ export interface NoticeIconData {
   style?: React.CSSProperties;
 }
 
-export interface NoticeIconTabProps {
+export interface INoticeIconTabProps {
   count?: number;
   emptyText?: React.ReactNode;
   emptyImage?: string;
-  list?: NoticeIconData[];
+  list?: INoticeIconData[];
   name?: string;
   showClear?: boolean;
   showViewMore?: boolean;
@@ -27,4 +27,4 @@ export interface NoticeIconTabProps {
   onViewMore: (e: any) => void;
 }
 
-export default class NoticeIconTab extends React.Component<NoticeIconTabProps, any> {}
+export default class NoticeIconTab extends React.Component<INoticeIconTabProps, any> {}
