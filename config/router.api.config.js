@@ -79,20 +79,20 @@ export default [
       },
       // uniComp
       {
-        path: '/uniComp',
+        path: '/baseData',
         icon: 'table',
-        name: 'uniComp',
+        name: 'baseData',
         authority: ['manager'],
         routes: [
           {
-            path: '/uniComp/org',
+            path: '/baseData/org',
             name: 'org',
-            component: './UniComp/Org',
+            component: './BaseData/Org',
           },
           {
-            path: '/uniComp/group',
+            path: '/baseData/group',
             name: 'group',
-            component: './UniComp/Group',
+            component: './BaseData/Group',
           },
         ],
       },

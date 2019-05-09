@@ -110,26 +110,29 @@ export default {
 
   effects: {
     *getMenuData({ payload }, { call,put }) {
-      const { routes, authority, path } = payload;
-      // const { authority, path,flatToMenuTree } = payload;
-      // const params = {
-      //   tableName:'sys_privilege',
-      //   data:{
-      //     info:{
-      //       pageNo: 1,
-      //       pageSize: 999,
-      //     }
-      //   }
-      // };
-      //
-      // const response = yield call(list, params);
-      // console.log('======response in menu.js:', response);
-      // const routes=[];
-      // if(flatToMenuTree){
-      //   console.log('======flatToMenuTree in menu.js:');
-      //   flatToMenuTree(response.data.records,routes,0);
-      // }
-      // console.log('======routes in menu.js:', routes);
+      // const { routes, authority, path } = payload;
+      // ------ start ---
+      const { authority, path,flatToMenuTree } = payload;
+      const params = {
+        tableName:'sys_privilege',
+        data:{
+          info:{
+            pageNo: 1,
+            pageSize: 999,
+          }
+        }
+      };
+
+      const response = yield call(list, params);
+      console.log('======response in menu.js:', response);
+      const routes=[];
+      if(flatToMenuTree){
+        console.log('======flatToMenuTree in menu.js:');
+        flatToMenuTree(response.data.records,routes,0);
+      }
+      console.log('======routes in menu.js:', routes);
+      // ------ end ---
+
       const originalMenuData = memoizeOneFormatter(routes, authority, path);
       const menuData = filterMenuData(originalMenuData);
       const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(originalMenuData);

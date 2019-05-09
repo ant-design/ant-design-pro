@@ -345,7 +345,7 @@ class TableList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'UniComp/fetch',
+      type: 'BaseData/fetch',
     });
   }
 
@@ -370,7 +370,7 @@ class TableList extends PureComponent {
     }
 
     dispatch({
-      type: 'UniComp/fetch',
+      type: 'BaseData/fetch',
       payload: params,
     });
   };
@@ -382,7 +382,7 @@ class TableList extends PureComponent {
       formValues: {},
     });
     dispatch({
-      type: 'UniComp/fetch',
+      type: 'BaseData/fetch',
       payload: {},
     });
   };
@@ -402,7 +402,7 @@ class TableList extends PureComponent {
     switch (e.key) {
       case 'remove':
         dispatch({
-          type: 'UniComp/remove',
+          type: 'BaseData/remove',
           payload: {
             key: selectedRows.map(row => row.key),
           },
@@ -442,7 +442,7 @@ class TableList extends PureComponent {
       });
 
       dispatch({
-        type: 'UniComp/fetch',
+        type: 'BaseData/fetch',
         payload: values,
       });
     });
@@ -464,7 +464,7 @@ class TableList extends PureComponent {
   handleAdd = fields => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'UniComp/add',
+      type: 'BaseData/add',
       payload: {
         desc: fields.desc,
       },
@@ -477,7 +477,7 @@ class TableList extends PureComponent {
   handleUpdate = fields => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'UniComp/update',
+      type: 'BaseData/update',
       payload: {
         name: fields.name,
         desc: fields.desc,

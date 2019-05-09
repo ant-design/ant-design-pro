@@ -20,7 +20,7 @@ import {
 } from 'antd';
 import moment from 'moment'; // 不能用｛moment｝
 import StandardTable from '@/components/StandardTable';
-import BindDataSelect from '../UniComp/BindDataSelect';
+import BindDataSelect from '../BaseData/BindDataSelect';
 import styles from './index.less';
 
 const { Option } = Select;

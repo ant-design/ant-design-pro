@@ -127,6 +127,7 @@ class Privilege extends PureComponent {
   }
   
   handleRefreshData=()=>{
+    console.log("-----2222222---5");
     this.child.handleSearchDefault()
   }
 
@@ -143,6 +144,7 @@ class Privilege extends PureComponent {
           pageSize='999'
           size='small'
           onConversionData={this.handleConversionData}
+          onRef={this.handleRef}
           onRow={(record) => {
             return {
               // onClick: (event) => {message.success("1")},       // 点击行

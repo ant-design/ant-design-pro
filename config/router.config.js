@@ -106,17 +106,17 @@ export default [
           {
             path: '/uniComp/org',
             name: 'org',
-            component: './UniComp/Org',
+            component: './BaseData/Org',
           },
           {
             path: '/uniComp/group',
             name: 'group',
-            component: './UniComp/Group',
+            component: './BaseData/Group',
           },
           {
             path: '/uniComp/component',
             name: 'component',
-            component: './UniComp/Component',
+            component: './BaseData/Component',
           },
         ],
       },
