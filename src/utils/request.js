@@ -11,7 +11,6 @@ import constants from '@/utils/constUtil';
 import {push} from '@/utils/log';
 
 const {DEBUG} = constants;
-let logObj;
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -110,14 +109,27 @@ request.interceptors.response.use( (response, options) => {
   //   console.log("===10",data);
   // }
 
-  logObj.request=options.data;
   try{
-    response.clone().json().then((data)=>{
-      logObj.response=data;
-      push(logObj);
-      return data;
-    });
+    const cloneResponse=response.status===200?response.clone().json():response.clone().text();
+    cloneResponse.then((data)=>{
+        const logObj={};
+        logObj.request=options.data;
+        logObj.url=response.url;
+        logObj.date=new Date();
+        logObj.status=response.status;
+        logObj.statusText=response.statusText;
+        logObj.response=data;
+        push(logObj);
+        return data;
+      });
   } catch (e) {
+    const logObj={};
+    logObj.url=response.url;
+    logObj.date=new Date();
+    logObj.status=response.status;
+    logObj.statusText=response.statusText;
+    logObj.request=options.data;
+    logObj.response=e.toString();
     push(logObj);} // eslint-disable-line
   return response;
 });
@@ -126,11 +138,6 @@ request.interceptors.request.use((url, options) => {
   const token=localStorage.getItem("token");
   // console.log("====1",`Bearer ${token}`);
   // console.log("====2",options.data);
-
-  if(DEBUG) {
-    logObj={};
-    logObj.url = url;
-  }
   const newOptions=token===""?{...options}:{ ...options, headers:{Authorization:`Bearer ${token}`}};
   return (
     {
