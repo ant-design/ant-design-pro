@@ -16,7 +16,7 @@ const columnSchemas = {
       name: 'status',
       title: 'Status',
       columnHidden: false,
-      query: false,
+      query: true,
       add: false,
       tag: 'commonSelect',
       tableName: 'role',

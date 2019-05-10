@@ -22,9 +22,10 @@ const columnSchemas = {
   name: 'name',
   commands:[{action:'setRole',title:'角色'},],
   columnDetails: [
-    { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:80 },
+    { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:110 },
     { name: 'name', title: 'Name', columnHidden: false, query: true, add: true },
-    { name: 'path', title: 'path', sorter: true, query: true, add: true},
+    { name: 'shortPathStr', title: 'Path', },
+    { name: 'path', title: 'path', columnHidden: true, query: true, add: true},
     {
       name: 'type',
       title: 'type',
@@ -99,7 +100,7 @@ class Privilege extends PureComponent {
       });
     }
   }
-
+  // 轉換list裡面的value
   handleConversionData=(list)=>{
     const newData=[];
     const newList=list.map((item)=>{
@@ -112,7 +113,11 @@ class Privilege extends PureComponent {
         if(shortRoleStr.length>=16){
           shortRoleStr=`${shortRoleStr.substr(0,14)}...`;
         }
-        return {...item,roleStr,shortRoleStr};
+        let shortPathStr=item.path;
+        if(shortPathStr.length>=25){
+          shortPathStr=`${shortPathStr.substr(0,22)}...`;
+        }
+        return {...item,roleStr,shortRoleStr,shortPathStr};
       }
       return item;
     });

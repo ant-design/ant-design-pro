@@ -29,6 +29,6 @@ export async function getFakeCaptcha(mobile) {
   return request(`/baseInfo/sys/captcha?mobile=${mobile}`);
 }
 
-export async function roleList() {
-  return request(`/baseInfo/sysdata/allRoleList`);
-}
+// export async function roleList() {
+//   return request(`/baseInfo/sysdata/allRoleList`);
+// }

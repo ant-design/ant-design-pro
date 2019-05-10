@@ -21,7 +21,7 @@ class RoleTransfer extends PureComponent {
     this.setState({modalVisible});
     dispatch({
       type: 'roleModel/allRoleList',
-      payload: {},
+      payload: {setDisabled:false},
     });
   };
 
@@ -33,8 +33,8 @@ class RoleTransfer extends PureComponent {
       this.setState({modalVisible: nextModalVisible});
     }
     if(nextModalVisible&&!modalVisible&&selectedRow){
-      const {columnSchemas,relationName} = this.props;
-      console.log(selectedRow);
+      const {relationName} = this.props;
+      // console.log(selectedRow);
       // dispatch({
       //   type: 'uniComp/detail',
       //   payload: {tableName:columnSchemas.tableName,id:selectedRow[columnSchemas.key]},
@@ -51,7 +51,7 @@ class RoleTransfer extends PureComponent {
       const oriSelectedArray=selectedRow&&selectedRow[relationName]?selectedRow[relationName]:[];
       const oriTargetKeys=oriSelectedArray
         .map(item => item.roleId);
-      console.log("---oriSelectedArray:",oriSelectedArray,"=======id======",selectedRow[columnSchemas.key]);
+      // console.log("---oriSelectedArray:",oriSelectedArray,"=======id======",selectedRow[columnSchemas.key]);
       this.setState({targetKeys:oriTargetKeys,oriSelectedArray});
     }
   }

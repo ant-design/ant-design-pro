@@ -25,11 +25,11 @@ export default {
       if (callback) callback(response);
     },
     *submitAccess({ payload,callback }, { call }) {
-      console.log("-------------3");
-      console.log("payload in submitAccess model---:",JSON.stringify(payload));
+      // console.log("-------------3");
+      // console.log("payload in submitAccess model---:",JSON.stringify(payload));
       const response = yield call(saveApi, payload);
-      console.log("-------------2");
-      console.log("response in submitAccess model---:",response);
+      // console.log("-------------2");
+      // console.log("response in submitAccess model---:",response);
       if (callback) callback(response);
     },
     *submitStepForm({ payload ,callback}, { call, put }) {

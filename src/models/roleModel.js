@@ -1,4 +1,5 @@
-import { roleList } from '../services/userService';
+// import { roleList } from '../services/userService';
+import {list} from "../services/uniCompService";
 
 export default {
   namespace: 'roleModel',
@@ -9,21 +10,41 @@ export default {
 
   effects: {
     *allRoleList({ payload ,callback}, { call, put }) {
-      const response = yield call(roleList, payload);
+      const params = {
+        tableName:'sys_role',
+        data:{
+          info:{
+            // status: 'A',
+            pageNo: 1,
+            pageSize: 999,
+          }
+        }
+      };
+
+      const response = yield call(list, params);
       console.log("response in role model:",response);
       yield put({
         type: 'save',
-        payload: response,
+        action: {payload,response,}
       });
       if (callback) callback(response);
     },
   },
   reducers: {
-    save(state, action) {
-      console.log("response in role model reducers:",action.payload.data);
+    save(state, { action }) {
+      console.log("response in role model reducers:",action);
+      const oriRoleList=action.response&&action.response.data ? action.response.data.records : [];
+
+      const roleList=action.payload.setDisabled?oriRoleList.map(item => {
+        const itemTemp = item;
+        // // console.log("======:",itemTemp.name === key,key,itemTemp.name);
+        itemTemp.disabled=itemTemp.status !== 'A';
+        return itemTemp;
+      }):oriRoleList;
+
       return {
         ...state,
-        roleList: action.payload ? action.payload.data : [],
+        roleList,
       };
     },
   },

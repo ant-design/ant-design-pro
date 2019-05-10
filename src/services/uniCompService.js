@@ -8,7 +8,7 @@ export async function sug(params) {
   return request(`${PREFIX_PATH}/baseInfo/sysdata/sug?${stringify(params)}`);
 }
 export async function list(params) {
-  return request(`${PREFIX_PATH}/baseInfo/sysdata/list`, {
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/${params.tableName}/list`, {
     method: 'POST',
     data: {
       ...params,
@@ -18,7 +18,7 @@ export async function list(params) {
 }
 
 export async function statusBatch(params) {
-  return request(`${PREFIX_PATH}/baseInfo/sysdata/statusBatch`, {
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/${params.tableName}/statusBatch`, {
     method: 'POST',
     data: {
       ...params,
@@ -28,7 +28,7 @@ export async function statusBatch(params) {
 }
 
 export async function detail(params) {
-  return request(`${PREFIX_PATH}/baseInfo/sysdata/detail`, {
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/${params.tableName}/detail`, {
     method: 'POST',
     data: {
       ...params,
@@ -38,7 +38,7 @@ export async function detail(params) {
 }
 
 export async function save(params) {
-  return request(`${PREFIX_PATH}/baseInfo/sysdata/save`, {
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/${params.tableName}/save`, {
     method: 'POST',
     data: {
       ...params,
