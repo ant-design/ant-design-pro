@@ -37,6 +37,7 @@ const errorHandler = error => {
   const errortext = codeMessage[response.status] || response.statusText;
   const { status, url } = response;
 
+  console.log(status,url);
   if (status === 401) {
     // response.body.getReader().read().then(function(result, done) {
     //   if (!done) {
@@ -67,10 +68,12 @@ const errorHandler = error => {
     return;
   }
   if (status <= 504 && status >= 500) {
+    console.log(status);
     router.push('/exception/500');
     return;
   }
   if (status >= 404 && status < 422) {
+    console.log(status);
     router.push('/exception/404');
   }
 };
@@ -110,6 +113,12 @@ request.interceptors.response.use( (response, options) => {
   // }
 
   try{
+    const a='a';
+    JSON.parse(a);
+  } catch (e) {
+    console.log("dddd-----error11---ddddd",response.clone().text());
+  } // eslint-disable-line
+  try{
     const cloneResponse=response.status===200?response.clone().json():response.clone().text();
     cloneResponse.then((data)=>{
         const logObj={};
@@ -123,6 +132,7 @@ request.interceptors.response.use( (response, options) => {
         return data;
       });
   } catch (e) {
+    console.log("dddd-----error---ddddd");
     const logObj={};
     logObj.url=response.url;
     logObj.date=new Date();

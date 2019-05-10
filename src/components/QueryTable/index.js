@@ -461,10 +461,18 @@ class QueryTable extends PureComponent {
             <Col key={`col-${item.name}`} md={8} sm={24}>
               <FormItem key={`form-item-${item.name}`} label={item.title}>
                 {getFieldDecorator(`searchForm.${item.name}`)(
-                  item.tag === 'date' ? (
-                    <DatePicker key={`ele-${item.name}`} style={{ width: '100%' }} placeholder="请输入日期" />
+                  item.tag === 'commonSelect' ? (
+                    <Select key={`ele-${item.name}`} style={{ width: 100 }}>
+                      {item.enumData.map(d => (
+                        <Option key={`${item.name}_${d.itemCode}`} value={d.itemCode}>
+                          {d.itemValue}
+                        </Option>
+                      ))}
+                    </Select>
+                  ) : item.tag === 'date' ? (
+                    <DatePicker key={`ele-${item.name}`} style={{ width: '100%' }} placeholder="请输入更新日期" />
                   ) : (
-                    <Input key={`ele-${item.name}`} placeholder={`请输入${item.name}查询`} />
+                    <Input key={`ele-${item.name}`} placeholder="请输入" />
                   )
                 )}
               </FormItem>
@@ -495,7 +503,7 @@ class QueryTable extends PureComponent {
         {queryForms.splice(0, 3).map(item => (
           <Col key={`col-${item.name}`} md={8} sm={24}>
             <FormItem key={`form-item-${item.name}`} label={item.title}>
-              {getFieldDecorator(item.name)(
+              {getFieldDecorator(`searchForm.${item.name}`)(
                 item.tag === 'commonSelect' ? (
                   <Select key={`ele-${item.name}`} style={{ width: 100 }}>
                     {item.enumData.map(d => (

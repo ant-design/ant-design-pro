@@ -24,6 +24,7 @@ const columnSchemas = {
   columnDetails: [
     { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:80 },
     { name: 'name', title: 'Name', columnHidden: false, query: true, add: true },
+    { name: 'path', title: 'path', sorter: true, query: true, add: true},
     {
       name: 'type',
       title: 'type',
@@ -32,7 +33,6 @@ const columnSchemas = {
       tag: 'commonSelect',
       enumData: typeList,
     },
-    { name: 'path', title: 'path', sorter: true, query: true, add: true},
     { name: 'shortRoleStr', title: 'role', },
     {
       name: 'icon',
@@ -127,7 +127,7 @@ class Privilege extends PureComponent {
   }
   
   handleRefreshData=()=>{
-    console.log("-----2222222---5");
+    // console.log("-----2222222---5");
     this.child.handleSearchDefault()
   }
 

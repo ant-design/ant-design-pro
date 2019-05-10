@@ -77,7 +77,7 @@ export default [
           },
         ],
       },
-      // uniComp
+      // baseData
       {
         path: '/baseData',
         icon: 'table',
@@ -251,6 +251,35 @@ export default [
             path: '/editor/koni',
             name: 'koni',
             component: './Editor/GGEditor/Koni',
+          },
+        ],
+      },
+      {
+        name: 'exception',
+        icon: 'warning',
+        path: '/exception',
+        routes: [
+          // exception
+          {
+            path: '/exception/403',
+            name: 'not-permission',
+            component: './Exception/403',
+          },
+          {
+            path: '/exception/404',
+            name: 'not-find',
+            component: './Exception/404',
+          },
+          {
+            path: '/exception/500',
+            name: 'server-error',
+            component: './Exception/500',
+          },
+          {
+            path: '/exception/trigger',
+            name: 'trigger',
+            hideInMenu: true,
+            component: './Exception/TriggerException',
           },
         ],
       },
