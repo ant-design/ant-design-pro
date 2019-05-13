@@ -61,16 +61,19 @@ const PageHeaderWrapper = ({
                 })}
               >
                 <PageHeader
-                  wide={contentWidth === 'Fixed'}
                   title={
-                    <Title
-                      level={4}
-                      style={{
-                        marginBottom: 0,
-                      }}
-                    >
-                      {title}
-                    </Title>
+                    <>
+                      {logo && <span className={styles.logo}>{logo}</span>}
+                      <Title
+                        level={4}
+                        style={{
+                          marginBottom: 0,
+                          display: 'inline-block',
+                        }}
+                      >
+                        {title}
+                      </Title>
+                    </>
                   }
                   key="pageheader"
                   {...restProps}
@@ -87,7 +90,6 @@ const PageHeaderWrapper = ({
                   footer={renderFooter(restProps)}
                 >
                   <div className={styles.detail}>
-                    {logo && <div className={styles.logo}>{logo}</div>}
                     <div className={styles.main}>
                       <div className={styles.row}>
                         {content && <div className={styles.content}>{content}</div>}
