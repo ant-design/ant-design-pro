@@ -17,12 +17,12 @@ export type IAuthorityType =
  * @param { 通过的组件 | Passing components } target
  * @param { 未通过的组件 | no pass components } Exception
  */
-const checkPermissions = (
+const checkPermissions = <T, K>(
   authority: IAuthorityType,
   currentAuthority: string | string[],
-  target: React.ComponentClass<any, any> | React.ReactNode,
-  Exception: React.ReactNode,
-): React.ReactNode => {
+  target: T,
+  Exception: K,
+): T | K | React.ReactNode => {
   // 没有判定权限.默认查看所有
   // Retirement authority, return target;
   if (!authority) {
@@ -52,7 +52,7 @@ const checkPermissions = (
   }
   // Promise 处理
   if (authority instanceof Promise) {
-    return <PromiseRender ok={target} error={Exception} promise={authority} />;
+    return <PromiseRender<T, K> ok={target} error={Exception} promise={authority} />;
   }
   // Function 处理
   if (typeof authority === 'function') {
@@ -60,7 +60,7 @@ const checkPermissions = (
       const bool = authority(currentAuthority);
       // 函数执行后返回值是 Promise
       if (bool instanceof Promise) {
-        return <PromiseRender ok={target} error={Exception} promise={bool} />;
+        return <PromiseRender<T, K> ok={target} error={Exception} promise={bool} />;
       }
       if (bool) {
         return target;
@@ -75,10 +75,8 @@ const checkPermissions = (
 
 export { checkPermissions };
 
-const check = (
-  authority: IAuthorityType,
-  target: React.ComponentClass<any, any> | React.ReactNode,
-  Exception: React.ReactNode,
-): React.ReactNode => checkPermissions(authority, CURRENT, target, Exception);
+function check<T, K>(authority: IAuthorityType, target: T, Exception: K): T | K | React.ReactNode {
+  return checkPermissions<T, K>(authority, CURRENT, target, Exception);
+}
 
 export default check;

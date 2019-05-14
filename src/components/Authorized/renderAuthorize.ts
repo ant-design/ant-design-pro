@@ -1,11 +1,11 @@
-/* eslint-disable import/no-mutable-exports */
 let CURRENT: string | string[] = 'NULL';
+type CurrentAuthorityType = string | string[] | (() => typeof CURRENT);
 /**
  * use  authority or getAuthority
  * @param {string|()=>String} currentAuthority
  */
-const renderAuthorize = (Authorized: any) => (
-  currentAuthority: string | string[] | (() => typeof CURRENT),
+const renderAuthorize = <T>(Authorized: T): ((currentAuthority: CurrentAuthorityType) => T) => (
+  currentAuthority: CurrentAuthorityType,
 ) => {
   if (currentAuthority) {
     if (typeof currentAuthority === 'function') {
@@ -24,4 +24,4 @@ const renderAuthorize = (Authorized: any) => (
 };
 
 export { CURRENT };
-export default (Authorized: any) => renderAuthorize(Authorized);
+export default <T>(Authorized: T) => renderAuthorize<T>(Authorized);

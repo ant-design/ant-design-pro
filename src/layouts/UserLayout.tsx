@@ -1,16 +1,14 @@
 import SelectLang from '@/components/SelectLang';
 import GlobalFooter from '@/components/GlobalFooter';
-import { ConnectProps, ConnectState } from '@/models/connect';
-import getPageTitle from '@/utils/getPageTitle';
+import { ConnectProps } from '@/models/connect';
 import { Icon } from 'antd';
-import { connect } from 'dva';
 import React, { Component, Fragment } from 'react';
 import DocumentTitle from 'react-document-title';
 import { formatMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
-import { MenuDataItem } from '@ant-design/pro-layout';
+import { MenuDataItem, getPageTitle, getMenuData } from '@ant-design/pro-layout';
 
 const links = [
   {
@@ -42,19 +40,23 @@ export interface UserLayoutProps extends ConnectProps {
 }
 
 class UserLayout extends Component<UserLayoutProps> {
-  componentDidMount() {
-    const { dispatch, route } = this.props;
-    const { routes, authority } = route!;
-    dispatch!({
-      type: 'menu/getMenuData',
-      payload: { routes, authority },
-    });
-  }
-
   render() {
-    const { children, location, breadcrumbNameMap } = this.props;
+    const {
+      route = {
+        routes: [],
+      },
+    } = this.props;
+    const { routes = [] } = route;
+    const { children, location } = this.props;
+    const { breadcrumb } = getMenuData(routes, this.props);
     return (
-      <DocumentTitle title={getPageTitle(location!.pathname, breadcrumbNameMap)}>
+      <DocumentTitle
+        title={getPageTitle({
+          pathname: location!.pathname,
+          breadcrumb,
+          formatMessage,
+        })}
+      >
         <div className={styles.container}>
           <div className={styles.lang}>
             <SelectLang />
@@ -78,7 +80,4 @@ class UserLayout extends Component<UserLayoutProps> {
   }
 }
 
-export default connect(({ menu: menuModel }: ConnectState) => ({
-  menuDaDocumentTitleta: menuModel.menuData,
-  breadcrumbNameMap: menuModel.breadcrumbNameMap,
-}))(UserLayout);
+export default UserLayout;

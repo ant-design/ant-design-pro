@@ -121,7 +121,13 @@ export default {
   disableRedirectHoist: true,
   cssLoaderOptions: {
     modules: true,
-    getLocalIdent: (context, localIdentName, localName) => {
+    getLocalIdent: (
+      context: {
+        resourcePath: string;
+      },
+      localIdentName: string,
+      localName: string,
+    ) => {
       if (
         context.resourcePath.includes('node_modules') ||
         context.resourcePath.includes('ant.design.pro.less') ||
@@ -134,8 +140,8 @@ export default {
         const antdProPath = match[1].replace('.less', '');
         const arr = slash(antdProPath)
           .split('/')
-          .map(a => a.replace(/([A-Z])/g, '-$1'))
-          .map(a => a.toLowerCase());
+          .map((a: string) => a.replace(/([A-Z])/g, '-$1'))
+          .map((a: string) => a.toLowerCase());
         return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
       }
       return localName;

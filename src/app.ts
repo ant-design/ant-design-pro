@@ -5,7 +5,3 @@ export const dva = {
     },
   },
 };
-
-export function render(oldRender) {
-  oldRender();
-}

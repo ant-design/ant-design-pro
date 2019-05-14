@@ -7,7 +7,6 @@ import React from 'react';
 import Redirect from 'umi/redirect';
 
 interface AuthComponentProps extends ConnectProps {
-  routerData: Route[];
   user: UserModelState;
 }
 
@@ -26,12 +25,20 @@ const getRouteAuthority = (path: string, routeData: Route[]) => {
   return authorities;
 };
 
-const AuthComponent: React.FC<AuthComponentProps> = ({ children, location, routerData, user }) => {
+const AuthComponent: React.FC<AuthComponentProps> = ({
+  children,
+  route = {
+    routes: [],
+  },
+  location,
+  user,
+}) => {
   const { currentUser } = user;
+  const { routes = [] } = route;
   const isLogin = currentUser && currentUser.name;
   return (
     <Authorized
-      authority={getRouteAuthority(location!.pathname, routerData)!}
+      authority={getRouteAuthority(location!.pathname, routes)!}
       noMatch={isLogin ? <Redirect to="/exception/403" /> : <Redirect to="/user/login" />}
     >
       {children}
@@ -39,7 +46,6 @@ const AuthComponent: React.FC<AuthComponentProps> = ({ children, location, route
   );
 };
 
-export default connect(({ menu: menuModel, user }: ConnectState) => ({
-  routerData: menuModel.routerData,
+export default connect(({ user }: ConnectState) => ({
   user,
 }))(AuthComponent);

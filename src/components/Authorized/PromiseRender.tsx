@@ -4,9 +4,9 @@ import React from 'react';
 // eslint-disable-next-line import/no-cycle
 import { isComponentClass } from './Secured';
 
-interface IPromiseRenderProps {
-  ok: React.ReactNode;
-  error: React.ReactNode;
+interface IPromiseRenderProps<T, K> {
+  ok: T;
+  error: K;
   promise: Promise<any>;
 }
 
@@ -14,8 +14,8 @@ interface IPromiseRenderState {
   component: React.ComponentClass<any, any> | React.FunctionComponent<any>;
 }
 
-export default class PromiseRender extends React.Component<
-  IPromiseRenderProps,
+export default class PromiseRender<T, K> extends React.Component<
+  IPromiseRenderProps<T, K>,
   IPromiseRenderState
 > {
   state: IPromiseRenderState = {
@@ -26,7 +26,10 @@ export default class PromiseRender extends React.Component<
     this.setRenderComponent(this.props);
   }
 
-  shouldComponentUpdate = (nextProps: IPromiseRenderProps, nextState: IPromiseRenderState) => {
+  shouldComponentUpdate = (
+    nextProps: IPromiseRenderProps<T, K>,
+    nextState: IPromiseRenderState,
+  ) => {
     const { component } = this.state;
     if (!isEqual(nextProps, this.props)) {
       this.setRenderComponent(nextProps);
@@ -36,7 +39,7 @@ export default class PromiseRender extends React.Component<
   };
 
   // set render Component : ok or error
-  setRenderComponent(props: IPromiseRenderProps) {
+  setRenderComponent(props: IPromiseRenderProps<T, K>) {
     const ok = this.checkIsInstantiation(props.ok);
     const error = this.checkIsInstantiation(props.error);
     props.promise

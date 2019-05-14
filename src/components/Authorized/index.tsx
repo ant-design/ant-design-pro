@@ -9,4 +9,5 @@ Authorized.AuthorizedRoute = AuthorizedRoute;
 Authorized.check = check;
 
 const RenderAuthorize = renderAuthorize(Authorized);
+
 export default RenderAuthorize;

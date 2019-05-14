@@ -54,9 +54,9 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@ant-design/pro-layout": "^4.1.0",
+    "@ant-design/pro-layout": "^4.2.0",
     "@antv/data-set": "^0.10.1",
-    "antd": "^3.16.1",
+    "antd": "^3.18.1",
     "bizcharts": "3.5.2-beta.1",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",

@@ -3,7 +3,6 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import { connect } from 'dva';
 import React, { useState } from 'react';
 import logo from '../assets/logo.svg';
-
 import {
   BasicLayout as BasicLayoutComponents,
   BasicLayoutProps as BasicLayoutComponentsProps,
@@ -23,21 +22,20 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, route, settings } = props;
-  const { routes, authority } = route!;
+  const { dispatch, children, settings } = props;
   /**
    * constructor
    */
   useState(() => {
     dispatch!({ type: 'user/fetchCurrent' });
     dispatch!({ type: 'settings/getSetting' });
-    dispatch!({ type: 'menu/getMenuData', payload: { routes, authority } });
   });
   /**
    * init variables
    */
   const handleMenuCollapse = (payload: boolean) =>
     dispatch!({ type: 'global/changeLayoutCollapsed', payload });
+
   return (
     <>
       <BasicLayoutComponents
@@ -65,9 +63,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   );
 };
 
-export default connect(({ global, settings, menu: menuModel }: ConnectState) => ({
+export default connect(({ global, settings }: ConnectState) => ({
   collapsed: global.collapsed,
   settings,
-  menuData: menuModel.menuData,
-  breadcrumbNameMap: menuModel.breadcrumbNameMap,
 }))(BasicLayout);
