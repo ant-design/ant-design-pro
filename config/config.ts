@@ -83,18 +83,13 @@ export default {
   // 路由配置
   routes: [
     {
-      path: '/user',
-      components: ['../layouts/UserLayout'],
-      routes: [],
-    },
-    {
       path: '/',
       component: '../layouts/BasicLayout',
       Routes: ['src/pages/Authorized'],
       authority: ['admin', 'user'],
       routes: [
         {
-          path: '/analysis',
+          path: '/',
           name: 'Analysis',
           icon: 'dashboard',
           component: './analysis',
