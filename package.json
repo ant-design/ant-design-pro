@@ -61,7 +61,6 @@
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
-    "express": "^4.16.4",
     "lodash": "^4.17.10",
     "lodash-decorators": "^6.0.0",
     "memoize-one": "^5.0.0",
@@ -104,6 +103,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-markdown": "^1.0.0",
     "eslint-plugin-react": "^7.12.4",
+    "express": "^4.16.4",
     "gh-pages": "^2.0.1",
     "husky": "^2.2.0",
     "jest-puppeteer": "^4.1.0",
@@ -131,7 +131,7 @@
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-pro-block": "^1.3.0",
     "umi-plugin-react": "^1.7.2",
-    "umi-request": "^1.0.5"
+    "umi-request": "^1.0.0"
   },
   "optionalDependencies": {
     "puppeteer": "^1.12.1"
