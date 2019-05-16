@@ -20,15 +20,6 @@ rules:
   no-bitwise: true
   no-conditional-assignment: true
   no-consecutive-blank-lines: true
-  no-console:
-    - true
-    - debug
-    - info
-    - log
-    - time
-    - timeEnd
-    - trace
-    - warn
   no-construct: true
   no-debugger: true
   no-duplicate-variable: true
