@@ -41,6 +41,9 @@ class Pie extends Component {
     window.cancelAnimationFrame(this.requestRef);
     window.removeEventListener('resize', this.resize);
     this.resize.cancel();
+    if (this.chartDom) {
+      this.resizeObserverInstance.unobserve(this.chartDom);
+    }
   }
 
   getG2Instance = chart => {
@@ -94,7 +97,7 @@ class Pie extends Component {
   };
 
   resizeObserver() {
-    const ro = new ResizeObserver(entries => {
+    this.resizeObserverInstance = new ResizeObserver(entries => {
       const { height } = entries[0].contentRect;
       this.setState(preState => {
         if (preState.height !== height) {
@@ -106,7 +109,7 @@ class Pie extends Component {
       });
     });
     if (this.chartDom) {
-      ro.observe(this.chartDom);
+      this.resizeObserverInstance.observe(this.chartDom);
     }
   }
 
