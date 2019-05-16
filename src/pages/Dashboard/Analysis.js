@@ -33,10 +33,6 @@ class Analysis extends Component {
   }
 
   componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'chart/clear',
-    });
     cancelAnimationFrame(this.reqRef);
   }
 
