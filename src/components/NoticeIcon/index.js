@@ -19,6 +19,7 @@ export default class NoticeIcon extends PureComponent {
     onViewMore: () => {},
     loading: false,
     clearClose: false,
+    viewMoreClose: false,
     locale: {
       emptyText: 'No notifications',
       clear: 'Clear',
@@ -54,8 +55,11 @@ export default class NoticeIcon extends PureComponent {
   };
 
   onViewMore = (tabProps, event) => {
-    const { onViewMore } = this.props;
+    const { onViewMore, viewMoreClose } = this.props;
     onViewMore(tabProps, event);
+    if (viewMoreClose) {
+      this.popover.click();
+    }
   };
 
   getNotificationBox() {
