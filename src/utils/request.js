@@ -111,13 +111,6 @@ request.interceptors.response.use( (response, options) => {
   // if(data){
   //   console.log("===10",data);
   // }
-
-  try{
-    const a='a';
-    JSON.parse(a);
-  } catch (e) {
-    console.log("dddd-----error11---ddddd",response.clone().text());
-  } // eslint-disable-line
   try{
     const cloneResponse=response.status===200?response.clone().json():response.clone().text();
     cloneResponse.then((data)=>{

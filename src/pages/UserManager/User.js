@@ -7,8 +7,25 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { getItems } from '@/utils/masterData';
 import RoleTransfer from "./RoleTransfer";
 
-const statusList = getItems('common', 'status');
-const utypeList = getItems('sysUser', 'utype');
+import Authorized from '@/utils/Authorized';
+import { getAuth } from '@/utils/authority';
+
+const { check } = Authorized;
+
+const statusList = getItems('common', 'status');// 用户状态
+const utypeList = getItems('sysUser', 'utype');// 账户类型
+
+const auth=getAuth("user_save"); // 获取某个功能权的角色
+const saveAct = check(auth,'modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
+const commandAct = check(auth,'role');
+// 动作对象
+const actions=saveAct||commandAct?{
+  title:'action',
+  width:130,
+  saveAct,
+  commandAct,
+  havePermissions:true,
+}:{havePermissions:false};
 
 const columnSchemas = {
   tableName: 'sys_user',
@@ -42,6 +59,7 @@ const columnSchemas = {
     },
     { name: 'remark', title: 'remark',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
   ],
+  actions,
 };
 
 
@@ -101,7 +119,7 @@ class User extends PureComponent {
         >
           <QueryCommand>
             <Divider type="vertical" />
-            <a onClick={() => this.handleRole()}>角色</a>
+            <a onClick={() => this.handleRole()}>Role</a>
           </QueryCommand>
         </BindDataQueryTable>
         <RoleTransfer

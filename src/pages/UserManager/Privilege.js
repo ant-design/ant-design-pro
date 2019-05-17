@@ -6,16 +6,17 @@ import QueryCommand from '@/components/QueryTable/QueryCommand';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { getItems } from '@/utils/masterData';
 import RoleTransfer from "./RoleTransfer";
-import {flatToTree} from "./userUtil"
+import {flatToPrivilegeTreeSelect, flatToTree,} from "./userUtil"
 
-const statusList = getItems('common', 'status');
-const iconList = getItems('privilege', 'icon');
+const statusList = getItems('common', 'status'); // 状态主数据
+const iconList = getItems('privilege', 'icon');  // 菜单图标祝数据
 iconList.push({javaCode:'privilege',javaKey:'icon',itemCode:'',itemValue:'无'});
-const typeList = getItems('privilege', 'type');
+const typeList = getItems('privilege', 'type');  // 菜单类型主数据
 
-const hideChildrenInMenuList = getItems('privilege', 'hide_children_in_menu');
-const hideInMenuList = getItems('privilege', 'hide_in_menu');
-// console.log(hideChildrenInMenuList);
+const hideChildrenInMenuList = getItems('privilege', 'hide_children_in_menu'); // 子菜单是否隐藏主数据
+const hideInMenuList = getItems('privilege', 'hide_in_menu');// 菜单是否隐藏主数据
+
+// 表格信息、展现信息、动作信息等
 const columnSchemas = {
   tableName: 'sys_privilege',
   key: 'privilegeId',
@@ -26,6 +27,7 @@ const columnSchemas = {
     { name: 'name', title: 'Name', columnHidden: false, query: true, add: true },
     { name: 'shortPathStr', title: 'Path', },
     { name: 'path', title: 'path', columnHidden: true, query: true, add: true},
+    { name: 'parentPrivilegeId', title: 'parent', add: true, tag:'privilegeTreeSelect', columnHidden: true,rules:[]},
     {
       name: 'type',
       title: 'type',
@@ -90,6 +92,32 @@ class Privilege extends PureComponent {
     modalVisible:false,
   }
 
+  // componentDidMount() {
+  //   // console.log('============2componentDidMount========');
+  //   this.handlePrivilegeSearch();
+  // }
+  //
+  // handlePrivilegeSearch = () => {
+  //
+  //   const {
+  //     dispatch,
+  //   } = this.props;
+  //
+  //   const params = {
+  //     tableName:'sys_privilege',
+  //     data:{
+  //       info:{
+  //         pageNo: 1,
+  //         pageSize: 999,
+  //       }
+  //     }
+  //   };
+  //   dispatch({
+  //     type: 'uniComp/list',
+  //     payload:params,
+  //   });
+  // };
+
   handleRole=()=>{
     const {selectedRow}=this.state;
     // message.success(action);
@@ -100,6 +128,7 @@ class Privilege extends PureComponent {
       });
     }
   }
+
   // 轉換list裡面的value
   handleConversionData=(list)=>{
     const newData=[];
@@ -121,9 +150,19 @@ class Privilege extends PureComponent {
       }
       return item;
     });
-    flatToTree(newList,newData,0);
-    // console.log("-----flat to tree---5",newData);
-    return newData;
+    if(newList.length>50){
+      flatToTree(newList,newData,0);
+      // console.log("-----flat to tree---5",newData);
+      return newData;
+    }
+    return newList;
+  }
+
+  // 获取treeselect的数据
+  handleTreeSelectData=(list)=>{
+    const privilegeTreeDataForSelect=[];
+    flatToPrivilegeTreeSelect(list,privilegeTreeDataForSelect,0);
+    return privilegeTreeDataForSelect;
   }
 
   handleVisible=(modalVisible)=>{
@@ -142,6 +181,11 @@ class Privilege extends PureComponent {
 
   render() {
     const {modalVisible,selectedRow}=this.state;
+    // const {data:{list}}=this.props;
+    // const treeSelectData=[];
+    // if(list){
+    //   flatToPrivilegeTreeSelect(list,treeSelectData,0);
+    // }
     return (
       <PageHeaderWrapper title="权限管理">
         <BindDataQueryTable

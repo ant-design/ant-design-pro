@@ -3,62 +3,29 @@
 import React, { PureComponent } from 'react';
 // 引入面包屑导航组件
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import { Table } from 'antd';
-import { connect } from 'dva';
+import Authorized from '@/utils/Authorized';
+import { Alert } from 'antd';
+import { getAuth } from '@/utils/authority';
 
-const columns = [
-  {
-    title: 'userId',
-    dataIndex: 'userId',
-  },
-  {
-    title: 'id',
-    dataIndex: 'id',
-  },
-  {
-    title: 'title',
-    dataIndex: 'title',
-  },
-];
+const noMatch = <Alert message="No permission." type="error" showIcon />;
 
-/* eslint react/no-multi-comp:0 */
-@connect(({ testModel, loading }) => ({
-  testModel,
-  loading: loading.models.testModel,
-}))
-class TableList extends PureComponent {
-  state = {
-    data: {},
-  };
+const auth=getAuth("apiGateway1");
+console.log("auth=====:",auth);
 
-  componentDidMount() {
-    const { dispatch } = this.props;
-    // fetchEnumData(this, constants.API_STATE_KEY);
-    console.log('state1:', this.state);
-    dispatch({
-      type: 'testModel/fetch',
-    });
-  }
+class Test2 extends PureComponent {
 
   render() {
-    const {
-      loading,
-      testModel: { data },
-    } = this.props;
-    console.log(this.props);
-    console.log(this.state);
-    // const { data } = this.state;
-    //
-    // console.log('state2:', this.state);
 
+    console.log("a=---------------");
+    console.log("ddddabc:",localStorage.getItem("antd-pro-authority"));
     return (
       <PageHeaderWrapper>
-        <div>This is Test Table Page</div>
-
-        <Table rowKey="id" dataSource={data.list} loading={loading} columns={columns} />
+        <Authorized authority={auth} noMatch={noMatch}>
+          {console.log("ddddddfiweieur2939399043949390")}
+        </Authorized>
       </PageHeaderWrapper>
     );
   }
 }
 
-export default TableList;
+export default Test2;

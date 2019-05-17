@@ -23,6 +23,9 @@ import moment from 'moment'; // 不能用｛moment｝
 import StandardTable from '@/components/StandardTable';
 import styles from './index.less';
 
+import PrivilegeTreeSelectView from '@/pages/UserManager/PrivilegeTreeSelectView';
+
+
 const { Option } = Select;
 const {TextArea,Password} = Input;
 const  RadioGroup  = Radio.Group;
@@ -98,6 +101,12 @@ const CreateForm = Form.create()(props => {
             ))}
           </RadioGroup>
         );
+      case 'privilegeTreeSelect':
+        return (
+          <PrivilegeTreeSelectView
+            style={{ width: '100%' }}
+          />
+        );
       case 'textArea':
         return (
           <TextArea rows={item.rows} />
@@ -172,10 +181,8 @@ class QueryTable extends PureComponent {
         return;
       }
       // eslint-disable-next-line
-      console.log("111110000:",item.type.name);
       if (item.type.name === 'QueryCommand') {
         QueryCommandChildren.push(item);
-        console.log("111110000:",QueryCommandChildren);
       } else {
         otherChildren.push(item);
       }
@@ -189,7 +196,7 @@ class QueryTable extends PureComponent {
   handleColumn = () => {
     columns = [];
     const {
-      columnSchemas: { columnDetails }
+      columnSchemas: { columnDetails,actions }
     } = this.props;
 
     // const {commands} = columnDetails;
@@ -217,16 +224,33 @@ class QueryTable extends PureComponent {
       columns.push(obj);
       return obj;
     });
-    columns.push({
-      title: '操作',
-      width: 130,
-      render: (text, row) => (
-        <Fragment>
-          <a onClick={() => this.handleModify(row, true)}>修改</a>
-          {QueryCommandChildren}
-        </Fragment>
-      ),
-    });
+    if(actions){
+      if(actions.havePermissions){
+        const authQueryCommands=actions.commandAct?QueryCommandChildren:[];
+        columns.push({
+          title: actions.title||'action',
+          width: actions.width||130,
+          render: (text, row) => (
+            <Fragment>
+              <a onClick={() => this.handleModify(row, true)}>{actions.saveAct}</a>
+              {authQueryCommands}
+            </Fragment>
+          ),
+        });
+      }
+    }
+    else{
+      columns.push({
+        title: '操作',
+        width: 130,
+        render: (text, row) => (
+          <Fragment>
+            <a onClick={() => this.handleModify(row, true)}>修改</a>
+            {QueryCommandChildren}
+          </Fragment>
+        ),
+      });
+    }
     return columns;
   };
 
@@ -406,17 +430,11 @@ class QueryTable extends PureComponent {
   handleFormReset = () => {
     const {
       form,
-      dispatch,
-      columnSchemas: { tableName },
     } = this.props;
     form.resetFields();
     this.setState({
       formValues: {},
       modalVisible: false,
-    });
-    dispatch({
-      type: 'uniComp/list',
-      payload: { tableName },
     });
   };
 

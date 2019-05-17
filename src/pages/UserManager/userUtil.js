@@ -88,8 +88,59 @@ export function flatToTree(list, data, fatherId) {
       }
       data.push(child);
     }
-  })
+  });
 }
+
+export function flatToPrivilegeTreeSelect(list, data, fatherId) {
+  list.forEach(item => {
+    if (item.parentPrivilegeId === fatherId) {
+      const child = {treeNodeFilterProp:'title',title:`${item.privilegeId}-${item.name}`,value:item.privilegeId,key:item.privilegeId, children: []};
+      flatToPrivilegeTreeSelect(list, child.children, item.privilegeId);
+      if(child.children.length===0){
+        delete child.children;
+      }
+      data.push(child);
+    }
+  });
+}
+
+function push(arr,willAddArr) {
+  willAddArr.forEach(addEle=>{
+    const d=arr.find(ele=>ele===addEle);
+    if(!d){
+      arr.push(addEle);
+    }
+  });
+}
+
+function composeRole(list, preItem,newAuthority) {
+  const parentPrivilege = list.find((item) => (item.privilegeId === preItem.parentPrivilegeId));
+
+  if(parentPrivilege){// found parent privilege
+    const {sysPrivilegeRoles} = parentPrivilege;
+    const willAddAuthority=sysPrivilegeRoles?sysPrivilegeRoles.map(relItem=>(relItem.roleName)):[];
+
+    push(newAuthority,willAddAuthority);
+    if(parentPrivilege.parentPrivilegeId!==0){// parent Privilege Id does not equal 0
+      composeRole(list,parentPrivilege,newAuthority);
+    }
+  }
+}
+
+// 转换为ant pro容易识别的权限格式
+export function getFormatPrivilege(list) {
+  const newList=list.map(item => {
+      const {sysPrivilegeRoles} = item;
+      const authority=sysPrivilegeRoles?sysPrivilegeRoles.map(relItem=>(relItem.roleName)):[];
+      const newItem = {name:item.name,privilegeId:item.privilegeId,parentPrivilegeId:item.parentPrivilegeId, authority};
+      if (newItem.parentPrivilegeId!==0&&authority.length===0) {
+        composeRole(list,item,newItem.authority);
+      }
+      return newItem;
+  });
+  return newList;
+}
+
 
 export function filterAndConversionMenu(flatDatas) {
   const filterDatas=flatDatas.map((item)=>(item.type==='menu'&&item.status==='A'));
@@ -125,6 +176,7 @@ export function flatToMenuTree(list, data, fatherId) {
     }
   })
 }
+
 
 let array1 = [];
 function getIndex(reg, str) {

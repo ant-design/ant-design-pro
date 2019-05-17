@@ -28,6 +28,14 @@ import { getGroupName, getItems, getItemValue2 } from '@/utils/masterData';
 import SelectView from './SelectView';
 import OrgTransfer from "./OrgTransfer";
 import {getPayloadForAccess} from "./ApiCreate/util";
+import Authorized from '@/utils/Authorized';
+import { getAuth } from '@/utils/authority';
+
+const { check } = Authorized;
+
+const auth=getAuth("api_save"); // 获取某个功能权的角色
+const commandAct = check(auth,'commandAct'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
+
 
 const { ACT, API_STATUS } = constants;
 
@@ -128,7 +136,10 @@ class TableList extends PureComponent {
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
-      {
+    ];
+    if(commandAct){
+
+      const actions={
         title: '操作',
         render: (text, record) => (
           <Fragment>
@@ -168,8 +179,10 @@ class TableList extends PureComponent {
             <a onClick={() => this.handleAccess(true, record)}>授权</a>
           </Fragment>
         ),
-      },
-    ];
+      };
+      columns.push(actions);
+    }
+
     return columns;
   };
 
@@ -522,6 +535,7 @@ class TableList extends PureComponent {
 
 
   render() {
+    console.log("ddddabc--apilist====:",localStorage.getItem("antd-pro-authority"));
     const {
       apiGatewayModel: { data },
       loading,
@@ -545,7 +559,7 @@ class TableList extends PureComponent {
             <div className={styles.tableListOperator}>
               {selectedRows.length > 0 && (
                 <span>
-                  <Button htmlType="button">批量删除</Button>
+                  <Button htmlType="button">批量操作</Button>
                   {/* <Dropdown overlay={menu}> */}
                   {/* <Button> */}
                   {/* 更多操作 <Icon type="down" /> */}

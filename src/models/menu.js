@@ -4,6 +4,10 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import { menu } from '../defaultSettings';
 import {list} from "../services/uniCompService";
+import { getPrivileges,setPrivileges,setFormatPrivileges } from '@/utils/authority';
+import constants from '@/utils/constUtil';
+
+const {PREFIX_PATH} = constants;
 
 const { check } = Authorized;
 
@@ -110,35 +114,45 @@ export default {
 
   effects: {
     *getMenuData({ payload }, { call,put }) {
-      // const { routes, authority, path } = payload;
+      const { routes,authority, path } = payload;
+      let routesFromServer=[];
       // ------ start ---
-      const { authority, path,flatToMenuTree } = payload;
-      const params = {
-        tableName:'sys_privilege',
-        data:{
-          info:{
-            pageNo: 1,
-            pageSize: 999,
+      if(PREFIX_PATH!==""){
+        const {flatToMenuTree } = payload;
+        const params = {
+          tableName:'sys_privilege',
+          data:{
+            info:{
+              pageNo: 1,
+              pageSize: 999,
+            }
           }
+        };
+
+        const response = yield call(list, params);
+        console.log('======response in menu.js:', response);
+        if(flatToMenuTree){
+          console.log('======has flatToMenuTree function:');
+          flatToMenuTree(response.data.records,routes,0);
+          setPrivileges(response.data.records);
+          setFormatPrivileges(getPrivileges());
         }
-      };
-
-      const response = yield call(list, params);
-      console.log('======response in menu.js:', response);
-      const routes=[];
-      if(flatToMenuTree){
-        console.log('======flatToMenuTree in menu.js:');
-        flatToMenuTree(response.data.records,routes,0);
+        console.log('======routes in menu.js:', routes);
       }
-      console.log('======routes in menu.js:', routes);
+      else{
+        routesFromServer=routes;
+      }
       // ------ end ---
-
-      const originalMenuData = memoizeOneFormatter(routes, authority, path);
+      const originalMenuData = memoizeOneFormatter(routesFromServer, authority, path);
       const menuData = filterMenuData(originalMenuData);
       const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(originalMenuData);
+      console.log("authority:",authority);
+      console.log("originalMenuData:",originalMenuData);
+      console.log("menuData:",menuData);
+      console.log("breadcrumbNameMap:",breadcrumbNameMap);
       yield put({
         type: 'save',
-        payload: { menuData, breadcrumbNameMap, routerData: routes },
+        payload: { menuData, breadcrumbNameMap, routerData: routesFromServer },
       });
     },
   },
