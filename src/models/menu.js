@@ -133,11 +133,11 @@ export default {
         console.log('======response in menu.js:', response);
         if(flatToMenuTree){
           console.log('======has flatToMenuTree function:');
-          flatToMenuTree(response.data.records,routes,0);
+          flatToMenuTree(response.data.records,routesFromServer,0);
           setPrivileges(response.data.records);
           setFormatPrivileges(getPrivileges());
         }
-        console.log('======routes in menu.js:', routes);
+        console.log('======routes in menu.js:', routesFromServer);
       }
       else{
         routesFromServer=routes;
