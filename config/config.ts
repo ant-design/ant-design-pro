@@ -6,7 +6,8 @@ import defaultSettings from './defaultSettings';
 import webpackPlugin from './plugin.config';
 
 const { pwa, primaryColor } = defaultSettings;
-// preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+// preview.pro.ant.design only do not use in your production ;
+// preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, TEST, NODE_ENV } = process.env;
 
 const plugins: IPlugin[] = [
@@ -18,9 +19,12 @@ const plugins: IPlugin[] = [
         hmr: true,
       },
       locale: {
-        enable: true, // default false
-        default: 'zh-CN', // default zh-CN
-        baseNavigator: true, // default true, when it is true, will use `navigator.language` overwrite default
+        // default false
+        enable: true,
+        // default zh-CN
+        default: 'zh-CN',
+        // default true, when it is true, will use `navigator.language` overwrite default
+        baseNavigator: true,
       },
       dynamicImport: {
         loadingComponent: './components/PageLoading/index',
@@ -67,17 +71,19 @@ if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
     },
   ]);
 }
-const uglifyJSOptions = NODE_ENV === 'production'
-  ? {
-      uglifyOptions: {
-        // remove console.* except console.error
-        compress: {
-          drop_console: true,
-          pure_funcs: [ 'console.error' ],
+
+const uglifyJSOptions =
+  NODE_ENV === 'production'
+    ? {
+        uglifyOptions: {
+          // remove console.* except console.error
+          compress: {
+            drop_console: true,
+            pure_funcs: ['console.error'],
+          },
         },
-      },
-    }
-  : {};
+      }
+    : {};
 
 export default {
   // add for transfer to umi
