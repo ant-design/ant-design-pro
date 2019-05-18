@@ -19,11 +19,8 @@ class TagCloud extends Component {
   };
 
   componentDidMount() {
-    requestAnimationFrame(() => {
-      this.initTagCloud();
-      this.renderChart();
-    });
-    window.addEventListener('resize', this.resize, { passive: true });
+    this.initTagCloud();
+    this.renderChart();
   }
 
   componentDidUpdate(preProps) {
@@ -35,15 +32,7 @@ class TagCloud extends Component {
 
   componentWillUnmount() {
     this.isUnmount = true;
-    window.cancelAnimationFrame(this.requestRef);
-    window.removeEventListener('resize', this.resize);
   }
-
-  resize = () => {
-    this.requestRef = requestAnimationFrame(() => {
-      this.renderChart();
-    });
-  };
 
   saveRootRef = node => {
     this.root = node;
