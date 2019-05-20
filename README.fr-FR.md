@@ -107,7 +107,7 @@ $ npm run docker-prod:build
 
 ### Utilisation de Gitpod
 
-Ouvrez le projet avec Gitpod (environnement de développement gratuit poir GitHub) et commencez à coder immédiatement.
+Ouvrez le projet avec Gitpod (environnement de développement gratuit pour GitHub) et commencez à coder immédiatement.
 
 [![Ouvrir dans Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/ant-design-pro)
 
