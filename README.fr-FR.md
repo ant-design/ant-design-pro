@@ -121,7 +121,7 @@ Navigateurs modernes et IE11.
 | --- | --- | --- | --- | --- |
 | IE11, Edge | deux dernières versions | deux dernières versions | deux dernières versions | deux dernières versions |
 
-## Contribué
+## Contribution
 
 Toute forme de contribution est la bienvenue, voici quelques exemples de façons dont vous pouvez contribuer à ce projet:
 
