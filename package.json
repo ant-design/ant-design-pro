@@ -61,6 +61,7 @@
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
+    "hash.js": "^1.1.5",
     "lodash": "^4.17.10",
     "lodash-decorators": "^6.0.0",
     "memoize-one": "^5.0.0",
@@ -77,7 +78,8 @@
     "react-dom": "^16.7.0",
     "react-fittext": "^1.0.0",
     "react-media": "^1.9.2",
-    "react-media-hook2": "^1.0.2"
+    "react-media-hook2": "^1.0.2",
+    "umi": "^2.7.0-beta.2"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",

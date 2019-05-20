@@ -4,12 +4,10 @@ import slash from 'slash2';
 import { IPlugin, IConfig } from 'umi-types';
 import defaultSettings from './defaultSettings';
 import webpackPlugin from './plugin.config';
-
-const { pwa, primaryColor } = defaultSettings;
-// preview.pro.ant.design only do not use in your production ;
+const { pwa, primaryColor } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
-const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, TEST, NODE_ENV } = process.env;
 
+const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, TEST, NODE_ENV } = process.env;
 const plugins: IPlugin[] = [
   [
     'umi-plugin-react',
@@ -59,10 +57,9 @@ const plugins: IPlugin[] = [
       autoAddMenu: true,
     },
   ],
-];
-
-// 针对 preview.pro.ant.design 的 GA 统计代码
+]; // 针对 preview.pro.ant.design 的 GA 统计代码
 // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+
 if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
   plugins.push([
     'umi-plugin-ga',
@@ -84,7 +81,6 @@ const uglifyJSOptions =
         },
       }
     : {};
-
 export default {
   // add for transfer to umi
   plugins,
@@ -107,9 +103,9 @@ export default {
       routes: [
         {
           path: '/',
-          name: 'Analysis',
-          icon: 'dashboard',
-          component: './analysis',
+          name: 'welcome',
+          icon: 'smile',
+          component: './Welcome',
         },
       ],
     },
@@ -147,7 +143,9 @@ export default {
       ) {
         return localName;
       }
+
       const match = context.resourcePath.match(/src(.*)/);
+
       if (match && match[1]) {
         const antdProPath = match[1].replace('.less', '');
         const arr = slash(antdProPath)
@@ -156,6 +154,7 @@ export default {
           .map((a: string) => a.toLowerCase());
         return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
       }
+
       return localName;
     },
   },
