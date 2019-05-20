@@ -132,7 +132,7 @@
     "umi": "^2.6.17",
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-pro-block": "^1.3.0",
-    "umi-plugin-react": "^1.7.2",
+    "umi-plugin-react": "^1.8.0-beta.1",
     "umi-request": "^1.0.0"
   },
   "optionalDependencies": {

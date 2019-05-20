@@ -3,6 +3,8 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import { connect } from 'dva';
 import React, { useState } from 'react';
 import logo from '../assets/logo.svg';
+import Authorized from '@/utils/Authorized';
+import { formatMessage } from 'umi-plugin-react/locale';
 import {
   BasicLayout as BasicLayoutComponents,
   BasicLayoutProps as BasicLayoutComponentsProps,
@@ -21,6 +23,19 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
 };
 
+/**
+ * default menuLocal
+ */
+const filterMenuData = (menuList: MenuDataItem[], locale: boolean) => {
+  return menuList.map(item => {
+    const localItem = {
+      ...item,
+      name: item.locale && locale ? formatMessage({ id: item.locale }) : item.name,
+    };
+    return Authorized.check(item.authority, localItem, null) as MenuDataItem;
+  });
+};
+
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const { dispatch, children, settings } = props;
   /**
@@ -35,7 +50,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
    */
   const handleMenuCollapse = (payload: boolean) =>
     dispatch!({ type: 'global/changeLayoutCollapsed', payload });
-
+  const {
+    menu: { locale },
+  } = settings;
   return (
     <>
       <BasicLayoutComponents
@@ -44,6 +61,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         menuItemRender={(menuItemProps, defaultDom) => {
           return <Link to={menuItemProps.path}>{defaultDom}</Link>;
         }}
+        filterMenuData={menuList => filterMenuData(menuList, locale)}
         rightContentRender={rightProps => <RightContent {...rightProps} />}
         {...props}
         {...settings}

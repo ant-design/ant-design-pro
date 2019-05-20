@@ -4,6 +4,7 @@ import PromiseRender from './PromiseRender';
 import { CURRENT } from './renderAuthorize';
 
 export type IAuthorityType =
+  | undefined
   | string
   | string[]
   | Promise<any>
