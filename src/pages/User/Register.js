@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
 import router from 'umi/router';
-import { Form, Input, Button, Modal, Select, Row, Col, Popover, Progress } from 'antd';
+import { Button, Col, Form, Input, Modal, Popover, Progress, Row, Select } from 'antd';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
@@ -50,7 +50,7 @@ class Register extends Component {
 
   componentDidUpdate() {
     const { form, register } = this.props;
-    const account = form.getFieldValue('mail');
+    const account = form.getFieldValue('userName');
     if (register.status === 'ok') {
       router.push({
         pathname: '/user/register-result',
@@ -187,19 +187,18 @@ class Register extends Component {
         </h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('mail', {
+            {getFieldDecorator('userName', {
               rules: [
                 {
                   required: true,
-                  message: formatMessage({ id: 'validation.email.required' }),
-                },
-                {
-                  type: 'email',
-                  message: formatMessage({ id: 'validation.email.wrong-format' }),
+                  message: formatMessage({ id: 'validation.userName.required' }),
                 },
               ],
             })(
-              <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
+              <Input
+                size="large"
+                placeholder={formatMessage({ id: 'form.userName.placeholder' })}
+              />
             )}
           </FormItem>
           <FormItem help={help}>
@@ -250,6 +249,37 @@ class Register extends Component {
                 type="password"
                 placeholder={formatMessage({ id: 'form.confirm-password.placeholder' })}
               />
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('tenantName', {
+              rules: [
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.tenantName.required' }),
+                },
+              ],
+            })(
+              <Input
+                size="large"
+                placeholder={formatMessage({ id: 'form.tenantName.placeholder' })}
+              />
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('email', {
+              rules: [
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.email.required' }),
+                },
+                {
+                  type: 'email',
+                  message: formatMessage({ id: 'validation.email.wrong-format' }),
+                },
+              ],
+            })(
+              <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
             )}
           </FormItem>
           <FormItem>
