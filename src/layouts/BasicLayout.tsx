@@ -31,7 +31,9 @@ const filterMenuData = (menuList: MenuDataItem[], locale: boolean) => {
     const localItem = {
       ...item,
       name: item.locale && locale ? formatMessage({ id: item.locale }) : item.name,
+      children: item.children ? filterMenuData(item.children, locale) : [],
     };
+
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
 };
