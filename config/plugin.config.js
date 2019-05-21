@@ -47,7 +47,7 @@ export default config => {
         varFile: path.join(__dirname, '../node_modules/antd/lib/style/themes/default.less'),
         mainLessFile: outFile, //     themeVariables: ['@primary-color'],
         indexFileName: 'index.html',
-        generateOnce: false,
+        generateOnce: true,
         lessUrl: 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js',
       },
     ]);
