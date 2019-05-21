@@ -12,6 +12,9 @@ export default {
   effects: {
     *submit({ payload }, { call, put }) {
       const response = yield call(fakeRegister, payload);
+      if (response.code === 0) {
+        response.status = 'ok';
+      }
       yield put({
         type: 'registerHandle',
         payload: response,
