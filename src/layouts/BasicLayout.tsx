@@ -26,11 +26,14 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 /**
  * default menuLocal
  */
-const filterMenuData = (menuList: MenuDataItem[], locale: boolean) => {
+const filterMenuData = (menuList: MenuDataItem[], locale: boolean): MenuDataItem[] => {
   return menuList.map(item => {
     const localItem = {
       ...item,
-      name: item.locale && locale ? formatMessage({ id: item.locale }) : item.name,
+      name:
+        item.locale && locale
+          ? formatMessage({ id: item.locale, defaultMessage: item.name })
+          : item.name,
       children: item.children ? filterMenuData(item.children, locale) : [],
     };
 

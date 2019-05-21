@@ -120,6 +120,7 @@ const installRouters = findAllInstallRouter(router);
 let i = 0;
 const firstUpperCase = pathString => {
   return pathString
+    .replace('.', '')
     .split(/\/|\-/)
     .map(s => s.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase()))
     .filter(s => s)
@@ -132,12 +133,13 @@ const installBlock = () => {
     return;
   }
   console.log('install  ' + item.name + '   to:  ' + item.component);
-
   const cmd = `umi block add https://github.com/ant-design/pro-blocks/tree/master/${firstUpperCase(
     item.path,
-  )} --npm-client=cnpm   --path=${item.path}`;
+  )} --npm-client=cnpm  --path=${item.path}`;
+  console.log(cmd);
   exec(cmd, { encoding: 'utf8' }, (error, statusbar) => {
     if (error) console.log(error);
+    console.log(statusbar);
     i += 1;
     installBlock();
   });
