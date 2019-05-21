@@ -48,21 +48,894 @@ const roles = {
   "data": allRoleList,
 };
 
-const flatPrivileges=[];
-const routes=getRouteDatas(routeDatas);
-toSimulatePrivilege(flatPrivileges,routes,true,true);
+// const flatPrivileges=[];
+// const routes=getRouteDatas(routeDatas);
+// toSimulatePrivilege(flatPrivileges,routes,true,true);
 
 const privileges = {
   "code": "200",
   "msg": null,
-  "data": flatPrivileges,
+  "data": {
+    "records": [
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 1,
+        "name": "home",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 0,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 2,
+        "hideInMenu": "N",
+        "path": "/apiGateway",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 2,
+            "roleId": 2,
+            "roleName": "manager",
+            "id": 1
+          },
+          {
+            "privilegeId": 2,
+            "roleId": 3,
+            "roleName": "user",
+            "id": 2
+          }
+        ],
+        "privilegeId": 2,
+        "name": "apiGateway",
+        "icon": "gateway",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 0,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/apiGateway/apiList",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 3,
+            "roleId": 2,
+            "roleName": "manager",
+            "id": 3
+          },
+          {
+            "privilegeId": 3,
+            "roleId": 3,
+            "roleName": "user",
+            "id": 4
+          },
+          {
+            "privilegeId": 3,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 5
+          }
+        ],
+        "privilegeId": 3,
+        "name": "apiList",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 2,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 2,
+        "hideInMenu": "N",
+        "path": "/apiGateway/apiUpdate",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 4,
+        "name": "apiUpdate",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 2,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 3,
+        "hideInMenu": "N",
+        "path": "/apiGateway/apiCreate",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 5,
+        "name": "apiCreate",
+        "hideChildrenInMenu": "Y",
+        "parentPrivilegeId": 2,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/apiGateway/apiCreate/info",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 6,
+        "name": "info",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 5,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 2,
+        "hideInMenu": "N",
+        "path": "/apiGateway/apiCreate/consumer",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 7,
+        "name": "consumer",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 5,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 3,
+        "hideInMenu": "N",
+        "path": "/apiGateway/apiCreate/producer",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 8,
+        "name": "producer",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 5,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 4,
+        "hideInMenu": "N",
+        "path": "/apiGateway/apiCreate/result",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 9,
+        "name": "result",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 5,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 3,
+        "hideInMenu": "N",
+        "path": "/baseData",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 10,
+            "roleId": 2,
+            "roleName": "manager",
+            "id": 6
+          },
+          {
+            "privilegeId": 10,
+            "roleId": 3,
+            "roleName": "user",
+            "id": 40
+          }
+        ],
+        "privilegeId": 10,
+        "name": "baseData",
+        "icon": "table",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 0,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseData/org",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 11,
+        "name": "org",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 10,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 2,
+        "hideInMenu": "N",
+        "path": "/baseData/group",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 12,
+        "name": "group",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 10,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 4,
+        "hideInMenu": "N",
+        "path": "/userManager",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 13,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 7
+          }
+        ],
+        "privilegeId": 13,
+        "name": "userManager",
+        "icon": "team",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 0,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/userManager/user",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 14,
+        "name": "user",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 13,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 2,
+        "hideInMenu": "N",
+        "path": "/userManager/role",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 15,
+        "name": "role",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 13,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 3,
+        "hideInMenu": "N",
+        "path": "/userManager/privilege",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 16,
+        "name": "privilege",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 13,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 5,
+        "hideInMenu": "N",
+        "path": "/admin",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 17,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 8
+          }
+        ],
+        "privilegeId": 17,
+        "name": "admin",
+        "icon": "table",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 0,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/admin/logPage",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 18,
+        "name": "logPage",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 17,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 6,
+        "hideInMenu": "N",
+        "path": "/test",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 19,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 32
+          }
+        ],
+        "privilegeId": 19,
+        "name": "test",
+        "icon": "table",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 0,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/test/test1",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 20,
+        "name": "test1",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 19,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 2,
+        "hideInMenu": "N",
+        "path": "/test/test2",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 21,
+        "name": "test2",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 19,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 3,
+        "hideInMenu": "N",
+        "path": "/test/test3",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 22,
+        "name": "test3",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 19,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 4,
+        "hideInMenu": "N",
+        "path": "/test/test4",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 23,
+        "name": "test4",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 19,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 5,
+        "hideInMenu": "N",
+        "path": "/test/test5",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 24,
+        "name": "test5",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 19,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 6,
+        "hideInMenu": "N",
+        "path": "/test/orgTransfer",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 25,
+        "name": "orgTransfer",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 19,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 7,
+        "hideInMenu": "N",
+        "path": "/account",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 26,
+        "name": "account",
+        "icon": "user",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 0,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/account/center",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 27,
+        "name": "center",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 26,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 2,
+        "hideInMenu": "N",
+        "path": "/account/settings",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 28,
+        "name": "settings",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 26,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 8,
+        "hideInMenu": "N",
+        "path": "/editor",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 29,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 10
+          }
+        ],
+        "privilegeId": 29,
+        "name": "editor",
+        "icon": "highlight",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 0,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/editor/flow",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 30,
+        "name": "flow",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 29,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 2,
+        "hideInMenu": "N",
+        "path": "/editor/mind",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 31,
+        "name": "mind",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 29,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 3,
+        "hideInMenu": "N",
+        "path": "/editor/koni",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 32,
+        "name": "koni",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 29,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 9,
+        "hideInMenu": "N",
+        "path": "/exception",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 33,
+        "name": "exception",
+        "icon": "warning",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 0,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/exception/403",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 34,
+        "name": "not-permission",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 33,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 2,
+        "hideInMenu": "N",
+        "path": "/exception/404",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 35,
+        "name": "not-find",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 33,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 3,
+        "hideInMenu": "N",
+        "path": "/exception/500",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 36,
+        "name": "server-error",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 33,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "orderSeq": 4,
+        "hideInMenu": "Y",
+        "path": "/exception/trigger",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 37,
+        "name": "trigger",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 33,
+        "type": "menu",
+        "status": "A"
+      },
+      {
+        "hideInMenu": "",
+        "path": "***",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 54,
+        "name": "publicApi",
+        "icon": "",
+        "hideChildrenInMenu": "",
+        "parentPrivilegeId": 0,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sys/allEnumList",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 89,
+        "name": "allEnumList",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 54,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sys/enumList",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 90,
+        "name": "enumList",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 54,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sys/enumItemInfo",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 91,
+        "name": "enumItemInfo",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 54,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/api/allGroupList",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 92,
+        "name": "allGroupList",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 54,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/apiService/apiList",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 93,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 35
+          },
+          {
+            "privilegeId": 93,
+            "roleId": 2,
+            "roleName": "manager",
+            "id": 36
+          },
+          {
+            "privilegeId": 93,
+            "roleId": 3,
+            "roleName": "user",
+            "id": 37
+          }
+        ],
+        "privilegeId": 93,
+        "name": "apiList",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 2,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/apiService/apiInfo",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 94,
+        "name": "apiInfo",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 2,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/apiService/apiBatch",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 95,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 100
+          }
+        ],
+        "privilegeId": 95,
+        "name": "apiBatch",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 2,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/Org/getOrg",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 96,
+        "name": "getOrg",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 54,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/apiService/saveApi",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 108,
+            "roleId": 2,
+            "roleName": "manager",
+            "id": 38
+          }
+        ],
+        "privilegeId": 108,
+        "name": "api_save",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 4,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/org/save",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 109,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 104
+          }
+        ],
+        "privilegeId": 109,
+        "name": "org_save",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 11,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/api_group/save",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 110,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 105
+          }
+        ],
+        "privilegeId": 110,
+        "name": "group_save",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 12,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/sys_user/save",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 111,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 34
+          }
+        ],
+        "privilegeId": 111,
+        "name": "user_save",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 14,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/sys_privilege/save",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 112,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 107
+          }
+        ],
+        "privilegeId": 112,
+        "name": "privilege_save",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 16,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/sys_role/save",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 113,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 108
+          }
+        ],
+        "privilegeId": 113,
+        "name": "role_save",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 15,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/api_group/statusBatch",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 115,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 27
+          }
+        ],
+        "privilegeId": 115,
+        "name": "group_statusBatch",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 12,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/sys_user/statusBatch",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 116,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 28
+          }
+        ],
+        "privilegeId": 116,
+        "name": "user_statusBatch",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 14,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/sys_privilege/statusBatch",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 117,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 29
+          }
+        ],
+        "privilegeId": 117,
+        "name": "privilege_statusBatch",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 16,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/sys_role/statusBatch",
+        "sysPrivilegeRoles": [
+          {
+            "privilegeId": 118,
+            "roleId": 1,
+            "roleName": "admin",
+            "id": 30
+          }
+        ],
+        "privilegeId": 118,
+        "name": "role_statusBatch",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 15,
+        "type": "api",
+        "status": "A"
+      },
+      {
+        "orderSeq": 1,
+        "hideInMenu": "N",
+        "path": "/baseInfo/sysdata/org/statusBatch",
+        "sysPrivilegeRoles": [],
+        "privilegeId": 119,
+        "name": "org_statusBatch",
+        "hideChildrenInMenu": "N",
+        "parentPrivilegeId": 11,
+        "type": "api",
+        "status": "A"
+      }
+    ],
+    "pagination": {
+      "total": 57,
+      "pageSize": 999,
+      "pageNo": 1
+    },
+    "total": 57,
+    "current": 1,
+    "size": 999,
+    "pages": 1
+  }
 };
 const users = {
     "code": "200",
     "msg": null,
     "data": [
       {
-        "userId": 1,
+        "id": 1,
         "username": "admin",
         "password": "xxx",
         "email": "j1@163.com",
@@ -72,7 +945,7 @@ const users = {
         "sysUserRoles":[{"id":1,"userId":1,"roleId":1,"roleName":"admin"},],
       },
       {
-        "userId": 2,
+        "id": 2,
         "username": "user",
         "password": "xxx",
         "email": "j2@163.com",
@@ -82,7 +955,7 @@ const users = {
         "sysUserRoles":[{"id":1,"userId":2,"roleId":3,"roleName":"user"},],
       },
       {
-        "userId": 3,
+        "id": 3,
         "username": "crm",
         "password": "xxx",
         "email": "j3@163.com",
@@ -92,7 +965,7 @@ const users = {
         "sysUserRoles":[],
       },
       {
-        "userId": 4,
+        "id": 4,
         "username": "admin_manager_user",
         "password": "xxx",
         "email": "j4@163.com",
@@ -622,10 +1495,10 @@ export function getOrgListByType(req, res, u) {
   return result;
 }
 export default {
-  'POST /baseInfo/sysdata/list': queryList,
-  'POST /baseInfo/sysdata/save': save,
-  'POST /baseInfo/sysdata/detail': detail,
-  'POST /baseInfo/sysdata/statusBatch': statusBatch,
+  'POST /baseInfo/sysdata/(.*)/list': queryList,
+  'POST /baseInfo/sysdata/(.*)/save': save,
+  'POST /baseInfo/sysdata/(.*)//detail': detail,
+  'POST /baseInfo/sysdata/(.*)/statusBatch': statusBatch,
   'GET /baseInfo/sysdata/sug': sug,
   'GET /baseInfo/api/allGroupList': groups,
   'GET /baseInfo/sysdata/orgList': getOrgListByType,

@@ -94,23 +94,22 @@ export default {
       // 创建的时候初始化数据
       const apiService= {
         name: '语音识别',
+        serviceType:'1',
+        groupId: 2,
+        requestUrl: '/rest/voice',
+        // createUser:'Alex',
+        protocol: 'http',
+        reqMethod: 'POST',
+        apiType:'1',
+        apiServiceBackends:[{
           serviceType:'1',
-          groupId: 2,
-          requestUrl: '/rest/voice',
-          // createUser:'Alex',
-          protocol: 'http',
-          reqMethod: '2',
-          apiServiceBackends:[{
-          serviceType:'1',
-          // url: 'http://aliyun.com',
-          // protocol: 'HTTP',
+          url: 'http://',
+          protocol: 'HTTP',
           socketTimeout: 20000,
           connectTimeout: 30000,
-          // backendType:'endpoint',
           serviceSeq:1,
           backendType:'endpoint',
-        },
-        ],
+        },],
       };
       return {
         apiService,

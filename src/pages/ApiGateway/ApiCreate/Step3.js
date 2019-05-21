@@ -72,8 +72,15 @@ class Step3 extends React.PureComponent {
         </Form.Item>
         <Form.Item {...formItemLayout} label="提供方请求地址">
           {getFieldDecorator('url', {
+            initialValue: data.url,
             rules: [{ required: true, message: '请输入提供方请求地址' }],
           })(<Input placeholder="请输入提供方请求地址" />)}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="提供方请求地址">
+          {getFieldDecorator('reqPath', {
+            initialValue: data.reqPath,
+            rules: [],
+          })(<Input placeholder="请输入路径" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="提供方请求类型">
           {getFieldDecorator('reqMethod', {
@@ -87,17 +94,17 @@ class Step3 extends React.PureComponent {
             rules: [{ required: true, message: '请选择提供方协议' }],
           })(<RadioView javaCode="apiService" javaKey="protocol" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="提供方服务连接超时">
+        <Form.Item {...formItemLayout} label="服务连接超时（ms）">
           {getFieldDecorator('connectTimeout', {
             initialValue: data.connectTimeout,
-            rules: [{ required: true, message: '提供方服务连接超时' }],
-          })(<Input placeholder="请输入提供方服务连接超时（ms）" />)}
+            rules: [{ required: true, message: '服务连接超时（ms）' }],
+          })(<Input placeholder="请输入服务连接超时（ms）" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="提供方服务请求超时">
+        <Form.Item {...formItemLayout} label="服务请求超时（ms）">
           {getFieldDecorator('socketTimeout', {
             initialValue: data.socketTimeout,
-            rules: [{ required: true, message: '提供方服务请求超时' }],
-          })(<Input placeholder="请输入提供方服务请求超时（ms）" />)}
+            rules: [{ required: true, message: '服务请求超时（ms）' }],
+          })(<Input placeholder="请输入服务请求超时（ms）" />)}
         </Form.Item>
         <Form.Item
           style={{ marginBottom: 8 }}

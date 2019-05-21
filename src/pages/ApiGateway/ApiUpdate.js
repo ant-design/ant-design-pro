@@ -41,6 +41,7 @@ const fieldLabels = {
   back:{
     serviceType: '服务类型',
     url: '落地方地址',
+    reqPath: '落地方路径',
     protocol: '协议',
     reqMethod: '请求Method',
     connectTimeout: '连接超时时间（秒）',
@@ -394,10 +395,10 @@ class ApiUpdate extends PureComponent {
                 </Form.Item>
               </Col>
               <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24} style={{height:80}}>
-                <Form.Item label={fieldLabels.back.protocol}>
-                  {getFieldDecorator('back.protocol', {
-                    rules: [{ required: true, message: '请选择后端协议' }],
-                  })(<SelectView javaCode="apiService" javaKey="protocol" />)}
+                <Form.Item label={fieldLabels.back.reqPath}>
+                  {getFieldDecorator('back.reqPath', {
+                    rules: [],
+                  })(<Input placeholder="请输入后端请求路径" />)}
                 </Form.Item>
               </Col>
             </Row>
@@ -517,6 +518,13 @@ class ApiUpdate extends PureComponent {
               gutter={16}
             >
               <Col lg={6} md={12} sm={24} style={{height:80}}>
+                <Form.Item label={fieldLabels.back.protocol}>
+                  {getFieldDecorator('back.protocol', {
+                    rules: [{ required: true, message: '请选择后端协议' }],
+                  })(<SelectView javaCode="apiService" javaKey="protocol" />)}
+                </Form.Item>
+              </Col>
+              <Col xl={{ span: 16, offset: 2 }} lg={{ span: 18 }} md={{ span: 24 }} sm={24} style={{height:80}}>
                 <Form.Item label={fieldLabels.backAttr.ssl}>
                   {getFieldDecorator('backAttr.ssl', {
                     rules: [{ required: true, message: `请选择${fieldLabels.backAttr.ssl}` }],
