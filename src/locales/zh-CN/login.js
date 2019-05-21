@@ -21,6 +21,7 @@ export default {
   'app.register-result.back-home': '返回首页',
   'app.register-result.view-mailbox': '查看邮箱',
   'validation.email.required': '请输入邮箱地址！',
+  'validation.tenantName.required': '请输入企业名称！',
   'validation.email.wrong-format': '邮箱地址格式错误！',
   'validation.userName.required': '请输入用户名!',
   'validation.password.required': '请输入密码！',
