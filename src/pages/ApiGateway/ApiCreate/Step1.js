@@ -4,6 +4,7 @@ import { Form, Input, Button, Divider } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
 import GroupSelectView from '../GroupSelectView';
+import RadioView from '../RadioView';
 
 const formItemLayout = {
   labelCol: {
@@ -59,6 +60,12 @@ class Step1 extends React.PureComponent {
               initialValue: apiService.name,
               rules: [{ required: true, message: '请输入Api名称' }],
             })(<Input placeholder="请输入Api名称" />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="服务类型">
+            {getFieldDecorator('apiType', {
+              initialValue: apiService.apiType,
+              rules: [{ required: true, message: '请选择服务类型' }],
+            })(<RadioView javaCode="apiService" javaKey="api_type" />)}
           </Form.Item>
           <Form.Item
             wrapperCol={{

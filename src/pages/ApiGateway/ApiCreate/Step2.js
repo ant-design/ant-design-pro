@@ -69,12 +69,6 @@ class Step2 extends React.PureComponent {
               rules: [{ required: true, message: '请选择HTTP Method' }],
             })(<SelectView javaCode="common" javaKey="req_method" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="服务类型">
-            {getFieldDecorator('apiType', {
-              initialValue: data.apiType,
-              rules: [{ required: true, message: '请选择服务类型' }],
-            })(<RadioView javaCode="apiService" javaKey="api_type" />)}
-          </Form.Item>
           <Form.Item
             style={{ marginBottom: 8 }}
             wrapperCol={{
