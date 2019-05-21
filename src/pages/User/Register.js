@@ -182,7 +182,9 @@ class Register extends Component {
     const { count, prefix, help, visible } = this.state;
     return (
       <div className={styles.main}>
-        <h3>{/*<FormattedMessage id="app.register.register" />*/}</h3>
+        <h3>
+          <FormattedMessage id="app.register.register" />
+        </h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             {getFieldDecorator('userName', {
