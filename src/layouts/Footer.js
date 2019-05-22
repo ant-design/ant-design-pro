@@ -9,7 +9,7 @@ const FooterView = () => (
       links={[
         {
           key: 'Portal',
-          title: 'Portal',
+          title: 'O2P Lite Portal',
           href: 'http://10.19.18.49:8010',
           blankTarget: true,
         },
@@ -20,7 +20,7 @@ const FooterView = () => (
           blankTarget: true,
         },
         {
-          key: 'Api Configuration',
+          key: 'O2P Lite Config',
           title: 'Api Configuration',
           href: 'http://10.19.18.49:8000',
           blankTarget: true,
