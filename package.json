@@ -153,7 +153,7 @@
       "lambda",
       "LICENSE",
       "netlify.toml",
-      "*.md",
+      "README.*.md",
       "scripts",
       "azure-pipelines.yml",
       "docker"
