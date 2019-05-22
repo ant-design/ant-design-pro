@@ -156,7 +156,8 @@
       "README.*.md",
       "scripts",
       "azure-pipelines.yml",
-      "docker"
+      "docker",
+      "create-umi"
     ]
   }
 }
