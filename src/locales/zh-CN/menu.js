@@ -5,6 +5,8 @@ export default {
   'menu.register.result': '注册结果',
   'menu.system-management': '系统管理',
   'menu.system-management.user-list': '用户管理',
+  'menu.system-management.user-add': '用户新增',
+  'menu.system-management.user-edit': '用户编辑',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',
   'menu.dashboard.monitor': '监控页',

@@ -1,5 +1,13 @@
-import { query as queryUsers, queryCurrent } from '@/services/user';
-
+import {
+  query as queryUsers,
+  queryCurrent,
+  addUser,
+  updateUser,
+  deleteById,
+  queryById,
+} from '@/services/user';
+import { message } from 'antd';
+import router from 'umi/router';
 export default {
   namespace: 'user',
 
@@ -25,7 +33,7 @@ export default {
       console.log(response);
       if (response.code === 0) {
         message.success('保存成功', 2);
-        router.push('/settings/user/list');
+        router.push('/system-management/user/list');
       } else {
         message.error(response.msg);
       }
@@ -41,7 +49,7 @@ export default {
       const response = yield call(updateUser, payload);
       if (response.code === 0) {
         message.success('修改成功', 2);
-        router.push('/settings/user/list');
+        router.push('/system-management/user/list');
       } else {
         message.error(response.msg);
       }

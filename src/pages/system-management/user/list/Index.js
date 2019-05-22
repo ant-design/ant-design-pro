@@ -93,7 +93,6 @@ class UserList extends PureComponent {
     {
       title: '邮箱',
       dataIndex: 'email',
-      width: 150,
     },
     {
       title: '手机',
@@ -165,8 +164,7 @@ class UserList extends PureComponent {
   ];
 
   handleEdit = record => {
-    console.log(record);
-    router.push('/settings/user/edit/' + record.id);
+    router.push('/system-management/user/edit/' + record.id);
   };
 
   handleDelete = record => {
@@ -179,8 +177,7 @@ class UserList extends PureComponent {
   };
 
   handleAdd() {
-    console.log('handleAdd...');
-    router.push('/settings/user/add');
+    router.push('/system-management/user/add');
   }
 
   disableUserConfirm = () => {

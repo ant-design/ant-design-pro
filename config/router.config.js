@@ -34,6 +34,18 @@ export default [
             name: 'user-list',
             component: './system-management/user/list/Index',
           },
+          {
+            hideInMenu: true,
+            path: '/system-management/user/add',
+            name: 'user-add',
+            component: './system-management/user/add/Index',
+          },
+          {
+            hideInMenu: true,
+            path: '/system-management/user/edit/:id',
+            name: 'user-edit',
+            component: './system-management/user/edit/Index',
+          },
         ],
       },
       // dashboard
