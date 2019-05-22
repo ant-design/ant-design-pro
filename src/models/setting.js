@@ -62,6 +62,7 @@ const updateTheme = primaryColor => {
 
 const updateColorWeak = colorWeak => {
   document.body.className = colorWeak ? 'colorWeak' : '';
+  document.body.style.width = colorWeak ? '100%' : 'calc(100% - 17px)';
 };
 
 export default {
