@@ -141,6 +141,9 @@
   ],
   "create-umi": {
     "ignore": [
+      ".dockerignore",
+      ".git",
+      ".gitpod.yml",
       "CODE_OF_CONDUCT.md",
       "Dockerfile",
       "Dockerfile.*",
