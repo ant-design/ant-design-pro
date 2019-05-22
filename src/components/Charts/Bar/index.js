@@ -11,14 +11,6 @@ class Bar extends Component {
     autoHideXLabels: false,
   };
 
-  componentDidMount() {
-    window.addEventListener('resize', this.resize, { passive: true });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
-  }
-
   handleRoot = n => {
     this.root = n;
   };
@@ -30,6 +22,7 @@ class Bar extends Component {
   resizeObserver() {
     const ro = new ResizeObserver(entries => {
       const { width, height } = entries[0].contentRect;
+      this.resize();
       this.setState(preState => {
         if (preState.width !== width || preState.height !== height) {
           return {

@@ -62,13 +62,6 @@ class Workplace extends PureComponent {
     });
   }
 
-  componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'chart/clear',
-    });
-  }
-
   renderActivities() {
     const {
       activities: { list },
