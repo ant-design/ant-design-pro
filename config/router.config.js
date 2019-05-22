@@ -46,6 +46,23 @@ export default [
             name: 'user-edit',
             component: './system-management/user/edit/Index',
           },
+          {
+            path: '/system-management/menu/list',
+            name: 'menu-list',
+            component: './system-management/menu/list/Index',
+          },
+          {
+            hideInMenu: true,
+            path: '/system-management/menu/add',
+            name: 'menu-add',
+            component: './system-management/menu/add/Index',
+          },
+          {
+            hideInMenu: true,
+            path: '/system-management/menu/edit/:id',
+            name: 'menu-edit',
+            component: './system-management/menu/edit/Index',
+          },
         ],
       },
       // dashboard

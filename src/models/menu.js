@@ -3,7 +3,9 @@ import isEqual from 'lodash/isEqual';
 import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import { menu } from '../defaultSettings';
-import { queryMenus } from '@/services/menu';
+import { queryMenus, queryById, updateMenu, addMenu, deleteById } from '@/services/menu';
+import { message } from 'antd';
+import router from 'umi/router';
 
 const { check } = Authorized;
 
@@ -106,9 +108,59 @@ export default {
     menuData: [],
     routerData: [],
     breadcrumbNameMap: {},
+    menu: {},
+    data: {
+      list: [],
+      pagination: {},
+    },
   },
 
   effects: {
+    *fetch({ payload }, { call, put }) {
+      const response = yield call(queryMenus, payload);
+      yield put({
+        type: 'fetchSave',
+        payload: response,
+      });
+    },
+    *add({ payload }, { call, put }) {
+      const response = yield call(addMenu, payload);
+      console.log(response);
+      if (response.code === 0) {
+        message.success('保存成功', 2);
+        router.push('/system-management/menu/list');
+      } else {
+        message.error(response.msg);
+      }
+    },
+    *get({ payload }, { call, put }) {
+      const response = yield call(queryById, payload);
+      yield put({
+        type: 'getSave',
+        payload: response,
+      });
+    },
+    *update({ payload }, { call, put }) {
+      const response = yield call(updateMenu, payload);
+      if (response.code === 0) {
+        message.success('修改成功', 2);
+        router.push('/system-management/menu/list');
+      } else {
+        message.error(response.msg);
+      }
+    },
+    *delete({ payload }, { call, put }) {
+      const response = yield call(deleteById, payload);
+      if (response.code === 0) {
+        message.success('删除成功', 2);
+        yield put({
+          type: 'fetch',
+          payload: {},
+        });
+      } else {
+        message.error(response.msg);
+      }
+    },
     *getMenuData({ payload }, { call, put }) {
       const { routes, authority, path } = payload;
       const originalMenuData = memoizeOneFormatter(routes, authority, path);
@@ -124,6 +176,20 @@ export default {
   },
 
   reducers: {
+    fetchSave(state, action) {
+      return {
+        ...state,
+        data: {
+          list: action.payload.data,
+        },
+      };
+    },
+    getSave(state, action) {
+      return {
+        ...state,
+        menu: action.payload.data || {},
+      };
+    },
     save(state, action) {
       return {
         ...state,
