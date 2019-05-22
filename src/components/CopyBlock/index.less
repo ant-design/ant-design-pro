@@ -6,20 +6,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   font-size: 20px;
   background: #fff;
   border-radius: 40px;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12);
   cursor: pointer;
+}
 
+.copy-block-view {
+  position: relative;
+  :global {
+    .ant-typography-copy {
+      position: absolute;
+      right: 5px;
+      bottom: 0px;
+    }
+  }
+  .copy-block-code {
+    color: #fff;
+    margin: 0 0.2em;
+    padding: 0.2em 0.4em 0.1em;
+    font-size: 85%;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    display: inline-block;
+  }
   .copy-block-text {
     font-size: 12px;
+    margin: 0;
   }
-}
-.copy-block-code {
-  color: #fff;
-  background: #000;
 }

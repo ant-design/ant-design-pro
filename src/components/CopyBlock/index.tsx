@@ -17,9 +17,10 @@ const BlockCodeView: React.SFC<{
     url,
   )} --npm-client=cnpm  --path=${url}`;
   return (
-    <div>
+    <div className={styles['copy-block-view']}>
+      <p className={styles['copy-block-text']}>下载到项目中：</p>
       <Typography.Paragraph copyable>
-        <code className={styles['copy-block-code']}>{blockUrl}</code>
+        <div className={styles['copy-block-code']}>{blockUrl}</div>
       </Typography.Paragraph>
     </div>
   );
@@ -29,12 +30,7 @@ export default ({ url }: { url: string }) => {
   return (
     <Tooltip placement="topLeft" title={<BlockCodeView url={url} />} trigger="click">
       <div className={styles['copy-block']}>
-        <Icon type="code" />
-        <div className={styles['copy-block-text']}>
-          下载到
-          <br />
-          项目中
-        </div>
+        <Icon type="download" />
       </div>
     </Tooltip>
   );

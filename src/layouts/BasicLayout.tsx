@@ -14,6 +14,7 @@ import {
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import Link from 'umi/link';
+import { isAntDesignProOrDev } from '@/utils/utils';
 
 export interface BasicLayoutProps extends BasicLayoutComponentsProps, ConnectProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
@@ -81,7 +82,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       >
         {children}
       </BasicLayoutComponents>
-      {ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site' && (
+      {isAntDesignProOrDev() && (
         <SettingDrawer
           settings={settings}
           onSettingChange={config =>
@@ -92,7 +93,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           }
         />
       )}
-      <CopyBlock url={location!.pathname} />
+      {isAntDesignProOrDev() && <CopyBlock url={location!.pathname} />}
     </>
   );
 };
