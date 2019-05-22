@@ -3,7 +3,7 @@ import { NoticeItem } from '@/models/global';
 import { CurrentUser } from '@/models/user';
 import React, { Component } from 'react';
 import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
-import { ClickParam } from 'antd/es/menu';
+import { ClickParam } from 'antd/lib/menu';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
@@ -13,6 +13,7 @@ import HeaderDropdown from '../HeaderDropdown';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 import { connect } from 'dva';
+import router from 'umi/router';
 
 export type SiderTheme = 'light' | 'dark';
 
@@ -95,27 +96,32 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
       });
     }
   };
+  onMenuClick = (event: ClickParam) => {
+    const { onMenuClick } = this.props;
+    if (onMenuClick) {
+      onMenuClick(event);
+      return;
+    }
+    const { key } = event;
+    router.push(`/account/${key}`);
+  };
   render() {
-    const { currentUser, fetchingNotices, onNoticeVisibleChange, onMenuClick, theme } = this.props;
+    const { currentUser, fetchingNotices, onNoticeVisibleChange, theme } = this.props;
     const menu = (
-      <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-        <Menu.Item key="userCenter">
+      <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
+        <Menu.Item key="center">
           <Icon type="user" />
           <FormattedMessage id="menu.account.center" defaultMessage="account center" />
         </Menu.Item>
-        <Menu.Item key="userinfo">
+        <Menu.Item key="settings">
           <Icon type="setting" />
           <FormattedMessage id="menu.account.settings" defaultMessage="account settings" />
         </Menu.Item>
-        <Menu.Item key="triggerError">
-          <Icon type="close-circle" />
-          <FormattedMessage id="menu.account.trigger" defaultMessage="Trigger Error" />
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="logout">
+        {/* <Menu.Divider /> */}
+        {/* <Menu.Item key="logout">
           <Icon type="logout" />
           <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     );
     const noticeData = this.getNoticeData();

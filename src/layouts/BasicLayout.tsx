@@ -1,5 +1,6 @@
 import { ConnectState, ConnectProps } from '@/models/connect';
 import RightContent from '@/components/GlobalHeader/RightContent';
+import CopyBlock from '@/components/CopyBlock';
 import { connect } from 'dva';
 import React, { useState } from 'react';
 import logo from '../assets/logo.svg';
@@ -42,7 +43,7 @@ const filterMenuData = (menuList: MenuDataItem[], locale: boolean): MenuDataItem
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, settings } = props;
+  const { dispatch, children, settings, location } = props;
   /**
    * constructor
    */
@@ -73,15 +74,18 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       >
         {children}
       </BasicLayoutComponents>
-      <SettingDrawer
-        settings={settings}
-        onSettingChange={config =>
-          dispatch!({
-            type: 'settings/changeSetting',
-            payload: config,
-          })
-        }
-      />
+      {ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site' && (
+        <SettingDrawer
+          settings={settings}
+          onSettingChange={config =>
+            dispatch!({
+              type: 'settings/changeSetting',
+              payload: config,
+            })
+          }
+        />
+      )}
+      <CopyBlock url={location.pathname} />
     </>
   );
 };

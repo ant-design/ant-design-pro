@@ -57,12 +57,12 @@ module.exports = [
           {
             path: '/form/basic-form',
             name: 'basicform',
-            component: './Forms/BasicForm',
+            component: './Form/BasicForm',
           },
           {
             path: '/form/step-form',
             name: 'stepform',
-            component: './Forms/StepForm',
+            component: './Form/StepForm',
             hideChildrenInMenu: true,
             // routes: [
             //   {
@@ -72,17 +72,17 @@ module.exports = [
             //   {
             //     path: '/form/step-form/info',
             //     name: 'info',
-            //     component: './Forms/StepForm/Step1',
+            //     component: './Form/StepForm/Step1',
             //   },
             //   {
             //     path: '/form/step-form/confirm',
             //     name: 'confirm',
-            //     component: './Forms/StepForm/Step2',
+            //     component: './Form/StepForm/Step2',
             //   },
             //   {
             //     path: '/form/step-form/result',
             //     name: 'result',
-            //     component: './Forms/StepForm/Step3',
+            //     component: './Form/StepForm/Step3',
             //   },
             // ],
           },
@@ -90,7 +90,7 @@ module.exports = [
             path: '/form/advanced-form',
             name: 'advancedform',
             authority: ['admin'],
-            component: './Forms/AdvancedForm',
+            component: './Form/AdvancedForm',
           },
         ],
       },
@@ -103,22 +103,22 @@ module.exports = [
           {
             path: '/list/table-list',
             name: 'searchtable',
-            component: './List/TableList',
+            component: './list/Tablelist',
           },
           {
             path: '/list/basic-list',
             name: 'basiclist',
-            component: './List/BasicList',
+            component: './list/Basiclist',
           },
           {
             path: '/list/card-list',
             name: 'cardlist',
-            component: './List/CardList',
+            component: './list/Cardlist',
           },
           {
             path: '/list/search',
             name: 'search-list',
-            component: './List/List',
+            component: './list/search',
             routes: [
               {
                 path: '/list/search',
@@ -127,17 +127,17 @@ module.exports = [
               {
                 path: '/list/search/articles',
                 name: 'articles',
-                component: './List/Articles',
+                component: './list/Articles',
               },
               {
                 path: '/list/search/projects',
                 name: 'projects',
-                component: './List/Projects',
+                component: './list/Projects',
               },
               {
                 path: '/list/search/applications',
                 name: 'applications',
-                component: './List/Applications',
+                component: './list/Applications',
               },
             ],
           },
@@ -201,12 +201,6 @@ module.exports = [
             path: '/exception/500',
             name: 'server-error',
             component: './Exception/500',
-          },
-          {
-            path: '/exception/trigger',
-            name: 'trigger',
-            hideInMenu: true,
-            component: './Exception/TriggerException',
           },
         ],
       },
