@@ -30,7 +30,10 @@ import styles from '../../../List/TableList.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
-
+const getValue = obj =>
+  Object.keys(obj)
+    .map(key => obj[key])
+    .join(',');
 const statusMap = ['success', 'error'];
 const status = ['正常', '禁用'];
 
@@ -64,7 +67,7 @@ class UserList extends PureComponent {
     }, {});
 
     const params = {
-      currentPage: pagination.current,
+      page: pagination.current,
       pageSize: pagination.pageSize,
       ...formValues,
       ...filters,
@@ -276,12 +279,12 @@ class UserList extends PureComponent {
         <Row gutter={{ md: 6, lg: 24, xl: 48 }}>
           <Col md={6} sm={24}>
             <FormItem label="账号">
-              {getFieldDecorator('username')(<Input placeholder="请输入" size="large" />)}
+              {getFieldDecorator('userName')(<Input placeholder="请输入" size="large" />)}
             </FormItem>
           </Col>
           <Col md={6} sm={24}>
-            <FormItem label="姓名">
-              {getFieldDecorator('realname')(<Input placeholder="请输入" size="large" />)}
+            <FormItem label="邮箱">
+              {getFieldDecorator('email')(<Input placeholder="请输入" size="large" />)}
             </FormItem>
           </Col>
           <Col md={6} sm={24}>
@@ -322,12 +325,7 @@ class UserList extends PureComponent {
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="账号">
-              {getFieldDecorator('username')(<Input placeholder="请输入" size="large" />)}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="姓名">
-              {getFieldDecorator('realname')(<Input placeholder="请输入" size="large" />)}
+              {getFieldDecorator('userName')(<Input placeholder="请输入" size="large" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -335,25 +333,21 @@ class UserList extends PureComponent {
               {getFieldDecorator('email')(<Input placeholder="请输入" size="large" />)}
             </FormItem>
           </Col>
-        </Row>
-        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-          {/* <Col md={6} sm={24}>
-                        <FormItem label="注册日期">
-                            {getFieldDecorator('addOn')(
-                                <RangePicker format='YYYY-MM-DD' style={{ width: '100%' }} placeholder="请输入注册日期" size="large" />
-                            )}
-                        </FormItem>
-                    </Col>
-                    <Col md={6} sm={24}>
-                        <FormItem label="登陆日期">
-                            {getFieldDecorator('lastLogin')(
-                                <RangePicker style={{ width: '100%' }} placeholder="请输入登陆日期" size="large" />
-                            )}
-                        </FormItem>
-                    </Col> */}
           <Col md={8} sm={24}>
             <FormItem label="手机">
               {getFieldDecorator('mobile')(<Input placeholder="请输入" size="large" />)}
+            </FormItem>
+          </Col>
+        </Row>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="管理员">
+              {getFieldDecorator('isSuperAdmin')(
+                <Select placeholder="请选择" style={{ width: '100%' }} size="large">
+                  <Option value="0">否</Option>
+                  <Option value="1">是</Option>
+                </Select>
+              )}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>

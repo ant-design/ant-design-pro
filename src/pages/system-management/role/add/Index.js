@@ -51,7 +51,7 @@ class roleAdd extends PureComponent {
   };
 
   handleCancle = e => {
-    router.push('/settings/role/list');
+    router.push('/system-management/role/list');
   };
 
   render() {
