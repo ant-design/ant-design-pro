@@ -47,6 +47,23 @@ export default [
             component: './system-management/user/edit/Index',
           },
           {
+            path: '/system-management/role/list',
+            name: 'role-list',
+            component: './system-management/role/list/Index',
+          },
+          {
+            hideInMenu: true,
+            path: '/system-management/role/add',
+            name: 'role-add',
+            component: './system-management/role/add/Index',
+          },
+          {
+            hideInMenu: true,
+            path: '/system-management/role/edit/:id',
+            name: 'role-edit',
+            component: './system-management/role/edit/Index',
+          },
+          {
             path: '/system-management/menu/list',
             name: 'menu-list',
             component: './system-management/menu/list/Index',
