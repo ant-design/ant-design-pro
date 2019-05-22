@@ -8,7 +8,7 @@ const FooterView = () => (
     <GlobalFooter
       links={[
         {
-          key: 'Portal',
+          key: 'O2P Lite Portal',
           title: 'O2P Lite Portal',
           href: 'http://10.19.18.49:8010',
           blankTarget: true,
@@ -21,7 +21,7 @@ const FooterView = () => (
         },
         {
           key: 'O2P Lite Config',
-          title: 'Api Configuration',
+          title: 'O2P Lite Config',
           href: 'http://10.19.18.49:8000',
           blankTarget: true,
         },
