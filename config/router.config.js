@@ -155,7 +155,6 @@ export default [
           },
           {
             path: '/profile/basic/:id',
-            name: 'basic',
             hideInMenu: true,
             component: './Profile/BasicProfile',
           },
