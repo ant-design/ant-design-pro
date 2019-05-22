@@ -23,9 +23,22 @@ export default [
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
     routes: [
-      // dashboard
-      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
+      { path: '/', redirect: '/system-management/user/list', authority: ['admin', 'user'] },
       {
+        path: 'system-management',
+        name: 'system-management',
+        icon: 'table',
+        routes: [
+          {
+            path: '/system-management/user/list',
+            name: 'user-list',
+            component: './system-management/user/list/Index',
+          },
+        ],
+      },
+      // dashboard
+      {
+        authority: ['test'],
         path: '/dashboard',
         name: 'dashboard',
         icon: 'dashboard',
@@ -49,6 +62,7 @@ export default [
       },
       // forms
       {
+        authority: ['test'],
         path: '/form',
         icon: 'form',
         name: 'form',
@@ -95,6 +109,7 @@ export default [
       },
       // list
       {
+        authority: ['test'],
         path: '/list',
         icon: 'table',
         name: 'list',
@@ -142,7 +157,9 @@ export default [
           },
         ],
       },
+      // profile
       {
+        authority: ['test'],
         path: '/profile',
         name: 'profile',
         icon: 'profile',
@@ -166,7 +183,9 @@ export default [
           },
         ],
       },
+      // result
       {
+        authority: ['test'],
         name: 'result',
         icon: 'check-circle-o',
         path: '/result',
@@ -180,7 +199,9 @@ export default [
           { path: '/result/fail', name: 'fail', component: './Result/Error' },
         ],
       },
+      // exception
       {
+        hideInMenu: true,
         name: 'exception',
         icon: 'warning',
         path: '/exception',
@@ -209,7 +230,9 @@ export default [
           },
         ],
       },
+      // accont
       {
+        authority: ['test'],
         name: 'account',
         icon: 'user',
         path: '/account',
@@ -268,6 +291,7 @@ export default [
       },
       //  editor
       {
+        authority: ['test'],
         name: 'editor',
         icon: 'highlight',
         path: '/editor',
@@ -289,6 +313,7 @@ export default [
           },
         ],
       },
+      // 404
       {
         component: '404',
       },

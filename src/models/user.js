@@ -4,7 +4,10 @@ export default {
   namespace: 'user',
 
   state: {
-    list: [],
+    data: {
+      list: [],
+      pagination: {},
+    },
     currentUser: {},
   },
 
@@ -29,7 +32,14 @@ export default {
     save(state, action) {
       return {
         ...state,
-        list: action.payload,
+        data: {
+          list: action.payload.data.records,
+          pagination: {
+            total: action.payload.data.total,
+            pageSize: action.payload.data.size,
+            current: action.payload.data.current,
+          },
+        },
       };
     },
     saveCurrentUser(state, action) {

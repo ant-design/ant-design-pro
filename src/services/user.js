@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 
 export async function query() {
-  return request('/api/users');
+  return request('/api/v1/user/page');
 }
 
 export async function queryCurrent() {
