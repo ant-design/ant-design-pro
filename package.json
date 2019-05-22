@@ -13,7 +13,7 @@
     "docker:dev": "docker-compose -f ./docker/docker-compose.dev.yml up",
     "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
     "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
-    "fetch:blocks": "node ./script/fetch-block.js",
+    "fetch:blocks": "node ./scripts/fetch-block.js",
     "functions:build": "npm run generateMock && netlify-lambda build ./lambda",
     "functions:run": "npm run generateMock && cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
     "generateMock": "node ./scripts/generateMock",
