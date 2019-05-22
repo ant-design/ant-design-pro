@@ -4,7 +4,6 @@ module.exports = [
     path: '/user',
     component: '../layouts/UserLayout',
     routes: [
-      { path: '/user', redirect: '/user/login' },
       { path: '/user/login', name: 'login', component: './User/Login' },
       { path: '/user/register', name: 'register', component: './User/Register' },
       {
@@ -12,6 +11,7 @@ module.exports = [
         name: 'register.result',
         component: './User/RegisterResult',
       },
+      { path: '/user', redirect: '/user/login' },
       {
         component: '404',
       },
@@ -25,7 +25,6 @@ module.exports = [
     authority: ['admin', 'user'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -63,28 +62,6 @@ module.exports = [
             path: '/form/step-form',
             name: 'stepform',
             component: './Form/StepForm',
-            hideChildrenInMenu: true,
-            // routes: [
-            //   {
-            //     path: '/form/step-form',
-            //     redirect: '/form/step-form/info',
-            //   },
-            //   {
-            //     path: '/form/step-form/info',
-            //     name: 'info',
-            //     component: './Form/StepForm/Step1',
-            //   },
-            //   {
-            //     path: '/form/step-form/confirm',
-            //     name: 'confirm',
-            //     component: './Form/StepForm/Step2',
-            //   },
-            //   {
-            //     path: '/form/step-form/result',
-            //     name: 'result',
-            //     component: './Form/StepForm/Step3',
-            //   },
-            // ],
           },
           {
             path: '/form/advanced-form',
@@ -121,10 +98,6 @@ module.exports = [
             component: './list/search',
             routes: [
               {
-                path: '/list/search',
-                redirect: '/list/search/articles',
-              },
-              {
                 path: '/list/search/articles',
                 name: 'articles',
                 component: './list/Articles',
@@ -138,6 +111,10 @@ module.exports = [
                 path: '/list/search/applications',
                 name: 'applications',
                 component: './list/Applications',
+              },
+              {
+                path: '/list/search',
+                redirect: '/list/search/articles',
               },
             ],
           },
@@ -213,51 +190,11 @@ module.exports = [
             path: '/account/center',
             name: 'center',
             component: './Account/Center/Center',
-            // routes: [
-            //   {
-            //     path: '/account/center',
-            //     redirect: '/account/center/articles',
-            //   },
-            //   {
-            //     path: '/account/center/articles',
-            //     component: './Account/Center/Articles',
-            //   },
-            //   {
-            //     path: '/account/center/applications',
-            //     component: './Account/Center/Applications',
-            //   },
-            //   {
-            //     path: '/account/center/projects',
-            //     component: './Account/Center/Projects',
-            //   },
-            // ],
           },
           {
             path: '/account/settings',
             name: 'settings',
             component: './Account/Settings/Info',
-            // routes: [
-            //   {
-            //     path: '/account/settings',
-            //     redirect: '/account/settings/base',
-            //   },
-            //   {
-            //     path: '/account/settings/base',
-            //     component: './Account/Settings/BaseView',
-            //   },
-            //   {
-            //     path: '/account/settings/security',
-            //     component: './Account/Settings/SecurityView',
-            //   },
-            //   {
-            //     path: '/account/settings/binding',
-            //     component: './Account/Settings/BindingView',
-            //   },
-            //   {
-            //     path: '/account/settings/notification',
-            //     component: './Account/Settings/NotificationView',
-            //   },
-            // ],
           },
         ],
       },
@@ -284,6 +221,7 @@ module.exports = [
           },
         ],
       },
+      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
       {
         component: '404',
       },

@@ -37,11 +37,14 @@ const findAllInstallRouter = router => {
   return routers;
 };
 
-const filterParentRouter = router => {
+const filterParentRouter = (router, layout) => {
   return [...router]
     .map(item => {
-      if (item.routes) {
-        return { ...item, routes: filterParentRouter(item.routes) };
+      if (item.routes && (!router.component || layout)) {
+        return { ...item, routes: filterParentRouter(item.routes, false) };
+      }
+      if (item.redirect) {
+        return item;
       }
       return null;
     })
@@ -70,7 +73,7 @@ const execCmd = shell => {
 };
 
 // replace router config
-const parentRouter = filterParentRouter(router);
+const parentRouter = filterParentRouter(router, true);
 const { routesPath, code } = getNewRouteCode(relativePath, parentRouter);
 // write ParentRouter
 fs.writeFileSync(routesPath, code);
@@ -89,7 +92,7 @@ const installBlock = async () => {
     if (gitFiles.find(file => file.path === gitPath)) {
       console.log('install ' + chalk.green(item.name) + ' to: ' + chalk.yellow(item.path));
       gitFiles = gitFiles.filter(file => file.path !== gitPath);
-      const cmd = `umi block add https://github.com/ant-design/pro-blocks/tree/master/${gitPath} --path=${
+      const cmd = `umi block add https://github.com/ant-design/pro-blocks/tree/master/${gitPath} --npm-client=cnpm  --path=${
         item.path
       }`;
       try {

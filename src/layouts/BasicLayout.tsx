@@ -25,17 +25,13 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 };
 
 /**
- * default menuLocal
+ * use Authorized check all menu item
  */
-const filterMenuData = (menuList: MenuDataItem[], locale: boolean): MenuDataItem[] => {
+const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
   return menuList.map(item => {
     const localItem = {
       ...item,
-      name:
-        item.locale && locale
-          ? formatMessage({ id: item.locale, defaultMessage: item.name })
-          : item.name,
-      children: item.children ? filterMenuData(item.children, locale) : [],
+      children: item.children ? menuDataRender(item.children) : [],
     };
 
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
@@ -56,9 +52,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
    */
   const handleMenuCollapse = (payload: boolean) =>
     dispatch!({ type: 'global/changeLayoutCollapsed', payload });
-  const {
-    menu: { locale },
-  } = settings;
+
   return (
     <>
       <BasicLayoutComponents
@@ -67,7 +61,20 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         menuItemRender={(menuItemProps, defaultDom) => {
           return <Link to={menuItemProps.path}>{defaultDom}</Link>;
         }}
-        filterMenuData={menuList => filterMenuData(menuList, locale)}
+        breadcrumbRender={(routers = []) => {
+          return [
+            {
+              path: '/',
+              breadcrumbName: formatMessage({
+                id: 'menu.home',
+                defaultMessage: 'Home',
+              }),
+            },
+            ...routers,
+          ];
+        }}
+        menuDataRender={menuDataRender}
+        formatMessage={formatMessage}
         rightContentRender={rightProps => <RightContent {...rightProps} />}
         {...props}
         {...settings}
@@ -85,7 +92,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           }
         />
       )}
-      <CopyBlock url={location.pathname} />
+      <CopyBlock url={location!.pathname} />
     </>
   );
 };
