@@ -24,19 +24,31 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', name: 'home',redirect: '/apiGateway/apiList' },
+      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'manager','user'] },
+      {
+        path: '/dashboard',
+        name: 'dashboard',
+        icon: 'dashboard',
+        routes: [
+          {
+            path: '/dashboard/analysis',
+            name: 'analysis',
+            component: './Dashboard/Analysis',
+          },
+        ],
+      },
       // apiGateWay
       {
         path: '/apiGateway',
         icon: 'gateway',
         name: 'apiGateway',
-        authority: ['manager','user'],
+        authority: ['user'],
         routes: [
           {
             path: '/apiGateway/apiList',
             name: 'apiList',
             component: './ApiGateway/ApiList',
-            authority: ['manager','user','admin'],
+            authority: ['user'],
           },
           {
             path: '/apiGateway/apiUpdate',
