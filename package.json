@@ -140,6 +140,9 @@
     "scripts/**/*.js"
   ],
   "create-umi": {
+    "copy": [
+      ["create-umi/README.md", "README.md"]
+    ],
     "ignore": [
       ".dockerignore",
       ".git",
