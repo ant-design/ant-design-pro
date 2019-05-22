@@ -42,17 +42,10 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx}": "npm run lint-staged:js",
-    "**/*.{js,ts,tsx,md,json,jsx,less}": [
-      "npm run prettier",
-      "git add"
-    ],
+    "**/*.{js,ts,tsx,md,json,jsx,less}": [ "npm run prettier", "git add" ],
     "**/*.{ts,tsx}": "npm run lint-staged:ts"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 10"
-  ],
+  "browserslist": [ "> 1%", "last 2 versions", "not ie <= 10" ],
   "dependencies": {
     "@ant-design/pro-layout": "^4.2.0",
     "@antv/data-set": "^0.10.1",
@@ -145,5 +138,19 @@
     "src/**/*.less",
     "config/**/*.js*",
     "scripts/**/*.js"
-  ]
+  ],
+  "create-umi": {
+    "ignore": [
+      "CODE_OF_CONDUCT.md",
+      "Dockerfile",
+      "Dockerfile.*",
+      "lambda",
+      "LICENSE",
+      "netlify.toml",
+      "*.md",
+      "scripts",
+      "azure-pipelines.yml",
+      "docker"
+    ]
+  }
 }
