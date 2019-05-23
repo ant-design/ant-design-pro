@@ -1,5 +1,5 @@
 .copy-block {
-  position: absolute;
+  position: fixed;
   right: 80px;
   bottom: 40px;
   display: flex;
@@ -22,20 +22,20 @@
     .ant-typography-copy {
       position: absolute;
       right: 5px;
-      bottom: 0px;
+      bottom: 0;
     }
   }
   .copy-block-code {
-    color: #fff;
+    display: inline-block;
     margin: 0 0.2em;
     padding: 0.2em 0.4em 0.1em;
+    color: #fff;
     font-size: 85%;
     background: rgba(0, 0, 0, 0.06);
     border-radius: 3px;
-    display: inline-block;
   }
   .copy-block-text {
-    font-size: 12px;
     margin: 0;
+    font-size: 12px;
   }
 }
