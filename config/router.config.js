@@ -80,6 +80,11 @@ export default [
             name: 'menu-edit',
             component: './system-management/menu/edit/Index',
           },
+          {
+            path: '/system-management/dict/list',
+            name: 'dict-list',
+            component: './system-management/dict/list/Index',
+          },
         ],
       },
       // dashboard

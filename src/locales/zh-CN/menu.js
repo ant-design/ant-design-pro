@@ -13,6 +13,7 @@ export default {
   'menu.system-management.menu-list': '菜单管理',
   'menu.system-management.menu-add': '菜单新增',
   'menu.system-management.menu-edit': '菜单编辑',
+  'menu.system-management.dict-list': '字典管理',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',
   'menu.dashboard.monitor': '监控页',
