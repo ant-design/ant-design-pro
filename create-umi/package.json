@@ -6,15 +6,6 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
-    "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
-    "docker-prod:dev": "docker-compose -f ./docker/docker-compose.yml up",
-    "docker:build": "docker-compose -f ./docker/docker-compose.dev.yml build",
-    "docker:dev": "docker-compose -f ./docker/docker-compose.dev.yml up",
-    "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
-    "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
-    "functions:build": "npm run generateMock && netlify-lambda build ./lambda",
-    "functions:run": "npm run generateMock && cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
     "generateMock": "node ./scripts/generateMock",
     "lint": "npm run lint:js && npm run lint:ts && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
@@ -26,7 +17,6 @@
     "lint:style": "stylelint --fix 'src/**/*.less' --syntax less",
     "lint:ts": "tslint -p . -c tslint.yml",
     "prettier": " check-prettier write",
-    "site": "umi build && npm run functions:build",
     "start": "umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "test": "umi test",
@@ -105,7 +95,6 @@
     "lint-staged": "^8.1.1",
     "merge-umi-mock-data": "^1.0.4",
     "mockjs": "^1.0.1-beta3",
-    "netlify-lambda": "^1.4.3",
     "prettier": "^1.17.0",
     "serverless-http": "^2.0.1",
     "slash2": "^2.0.0",
@@ -138,27 +127,5 @@
     "src/**/*.less",
     "config/**/*.js*",
     "scripts/**/*.js"
-  ],
-  "create-umi": {
-    "copy": [
-      ["create-umi/README.md", "README.md"],
-      ["create-umi/package.json", "package.json"]
-    ],
-    "ignore": [
-      ".dockerignore",
-      ".git",
-      ".gitpod.yml",
-      "CODE_OF_CONDUCT.md",
-      "Dockerfile",
-      "Dockerfile.*",
-      "lambda",
-      "LICENSE",
-      "netlify.toml",
-      "README.*.md",
-      "scripts",
-      "azure-pipelines.yml",
-      "docker",
-      "create-umi"
-    ]
-  }
+  ]
 }
