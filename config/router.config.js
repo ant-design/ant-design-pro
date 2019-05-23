@@ -23,7 +23,7 @@ export default [
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
     routes: [
-      { path: '/', redirect: '/system-management/user/list', authority: ['admin', 'user'] },
+      { path: '/', redirect: '/system-management/user/list', authority: ['user'] },
       {
         path: 'system-management',
         name: 'system-management',
