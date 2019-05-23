@@ -1,3 +1,5 @@
+import zh_CN from './locales/zh-CN';
+
 declare module '*.css';
 declare module '*.less';
 declare module '*.scss';
@@ -23,4 +25,12 @@ declare module 'memoize-one' {
     isEqual?: (a: any, b: any, index: number) => boolean,
   ): T;
   export default memoizeOne;
+}
+
+declare module 'umi-plugin-react/locale' {
+  export default interface MessageDescriptor {
+    id: keyof (typeof zh_CN); // default using zh_CN
+    description?: string;
+    defaultMessage?: string;
+  }
 }
