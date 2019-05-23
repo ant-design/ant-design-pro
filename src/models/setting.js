@@ -1,5 +1,6 @@
 import { message } from 'antd';
 import defaultSettings from '../defaultSettings';
+import { getScrollbarWidth } from '../utils/utils';
 
 let lessNodesAppended;
 const updateTheme = primaryColor => {
@@ -62,7 +63,7 @@ const updateTheme = primaryColor => {
 
 const updateColorWeak = colorWeak => {
   document.body.className = colorWeak ? 'colorWeak' : '';
-  document.body.style.width = colorWeak ? '100%' : 'calc(100% - 17px)';
+  document.body.style.width = colorWeak ? '100%' : `calc(100% - ${getScrollbarWidth()}px)`;
 };
 
 export default {

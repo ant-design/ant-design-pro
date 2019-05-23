@@ -192,3 +192,20 @@ export const importCDN = (url, name) =>
     };
     document.head.appendChild(dom);
   });
+
+// 获取当前窗口滚动条宽度
+export function getScrollbarWidth() {
+  const oP = document.createElement('p');
+  const styles = {
+    width: '100px',
+    height: '100px',
+    overflowY: 'scroll',
+  };
+  Object.keys(styles).forEach(function(key) {
+    oP.style[key] = styles[key];
+  });
+  document.body.appendChild(oP);
+  const scrollbarWidth = oP.offsetWidth - oP.clientWidth;
+  oP.remove();
+  return scrollbarWidth;
+}
