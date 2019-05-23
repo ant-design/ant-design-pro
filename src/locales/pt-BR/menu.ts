@@ -1,6 +1,7 @@
 export default {
   'menu.welcome': 'Welcome',
   'menu.more-blocks': 'More Blocks',
+
   'menu.home': 'Início',
   'menu.login': 'Login',
   'menu.register': 'Registro',
@@ -9,6 +10,9 @@ export default {
   'menu.dashboard.analysis': 'Análise',
   'menu.dashboard.monitor': 'Monitor',
   'menu.dashboard.workplace': 'Ambiente de Trabalho',
+  'menu.exception.403': '403',
+  'menu.exception.404': '404',
+  'menu.exception.500': '500',
   'menu.form': 'Formulário',
   'menu.form.basic-form': 'Formulário Básico',
   'menu.form.step-form': 'Formulário Assistido',

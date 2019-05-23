@@ -4,6 +4,9 @@ export default {
 
   'menu.home': '首頁',
   'menu.login': '登錄',
+  'menu.exception.403': '403',
+  'menu.exception.404': '404',
+  'menu.exception.500': '500',
   'menu.register': '註冊',
   'menu.register.resultt': '註冊結果',
   'menu.dashboard': 'Dashboard',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Typography, Tooltip } from 'antd';
+import { Icon, Typography, Popover } from 'antd';
 import styles from './index.less';
 const firstUpperCase = (pathString: string) => {
   return pathString
@@ -12,15 +12,11 @@ const firstUpperCase = (pathString: string) => {
 const BlockCodeView: React.SFC<{
   url: string;
 }> = ({ url }) => {
-  console.log(url);
-  const blockUrl = `umi block add https://github.com/ant-design/pro-blocks/tree/master/${firstUpperCase(
-    url,
-  )} --npm-client=cnpm  --path=${url}`;
+  const blockUrl = `npx umi block add ant-design-pro/${firstUpperCase(url)}  --path=${url}`;
   return (
     <div className={styles['copy-block-view']}>
-      <p className={styles['copy-block-text']}>下载到项目中：</p>
       <Typography.Paragraph copyable>
-        <div className={styles['copy-block-code']}>{blockUrl}</div>
+        <code className={styles['copy-block-code']}>{blockUrl}</code>
       </Typography.Paragraph>
     </div>
   );
@@ -28,10 +24,15 @@ const BlockCodeView: React.SFC<{
 
 export default ({ url }: { url: string }) => {
   return (
-    <Tooltip placement="topLeft" title={<BlockCodeView url={url} />} trigger="click">
+    <Popover
+      title="下载此页面到本地项目"
+      placement="topLeft"
+      content={<BlockCodeView url={url} />}
+      trigger="click"
+    >
       <div className={styles['copy-block']}>
         <Icon type="download" />
       </div>
-    </Tooltip>
+    </Popover>
   );
 };
