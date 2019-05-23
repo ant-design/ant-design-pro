@@ -4,6 +4,7 @@ import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
 import { setAuthority, setToken } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
+import {message} from 'antd';
 
 export default {
   namespace: 'login',
@@ -23,6 +24,7 @@ export default {
       if (response.code === 1) {
         response.currentAuthority = 'guest';
         response.status = 'error';
+        message.error(response.msg);
       }
       yield put({
         type: 'changeLoginStatus',
