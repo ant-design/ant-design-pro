@@ -16,7 +16,7 @@ const itemRender = (route, params, routes, paths) => {
   return last || !route.component ? (
     <span>{route.breadcrumbName}</span>
   ) : (
-    <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
+    <Link to={`/${paths[paths.length - 1]}`>{route.breadcrumbName}</Link>
   );
 };
 
@@ -80,6 +80,7 @@ const conversionFromLocation = (routerLocation, breadcrumbNameMap, props) => {
       return name && !hideInBreadcrumb
         ? {
             path: url,
+            component: !!currentBreadcrumb.component,
             breadcrumbName: name,
           }
         : null;
