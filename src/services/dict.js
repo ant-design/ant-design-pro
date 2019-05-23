@@ -4,7 +4,7 @@ export async function query(params) {
   return request(`/api/v1/dict/all`);
 }
 
-export async function queryById(params) {
+export async function queryByCodeType(params) {
   return request('/api/v1/dict/get/' + params);
 }
 

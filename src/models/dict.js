@@ -1,4 +1,4 @@
-import { addDict, addDictItem, deleteById, deleteItemById, query, updateDict, updateDictItem } from '@/services/dict';
+import { addDict, addDictItem, deleteById, deleteItemById, query, updateDict, updateDictItem, queryByCodeType } from '@/services/dict';
 import { message } from 'antd';
 export default {
   namespace: 'dict',
@@ -7,7 +7,7 @@ export default {
       list: [],
       pagination: {},
     },
-    role: {},
+    dict: {},
   },
 
   effects: {
@@ -92,6 +92,13 @@ export default {
         message.error(response.msg);
       }
     },
+    *get({ payload }, { call, put }) {
+      const response = yield call(queryByCodeType, payload);
+      yield put({
+        type: 'getSave',
+        payload: response,
+      });
+    },
   },
   reducers: {
     fetchSave(state, action) {
@@ -105,7 +112,7 @@ export default {
     getSave(state, action) {
       return {
         ...state,
-        role: action.payload.data || {},
+        dict: action.payload.data || {},
       };
     },
   },
