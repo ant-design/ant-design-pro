@@ -103,6 +103,14 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
       return;
     }
     const { key } = event;
+
+    if (key === 'logout') {
+      const { dispatch } = this.props;
+      dispatch!({
+        type: 'login/logout',
+      });
+      return;
+    }
     router.push(`/account/${key}`);
   };
   render() {
@@ -117,11 +125,11 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
           <Icon type="setting" />
           <FormattedMessage id="menu.account.settings" defaultMessage="account settings" />
         </Menu.Item>
-        {/* <Menu.Divider /> */}
-        {/* <Menu.Item key="logout">
+        <Menu.Divider />
+        <Menu.Item key="logout">
           <Icon type="logout" />
           <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
-        </Menu.Item> */}
+        </Menu.Item>
       </Menu>
     );
     const noticeData = this.getNoticeData();
