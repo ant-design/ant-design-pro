@@ -1,6 +1,9 @@
 import { fakeRegister } from '@/services/api';
+import { getFakeCaptcha } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { reloadAuthorized } from '@/utils/Authorized';
+import {message} from 'antd';
+import router from 'umi/router';
 
 export default {
   namespace: 'register',
@@ -16,6 +19,21 @@ export default {
         type: 'registerHandle',
         payload: response,
       });
+      if (response.code === 0){
+        const account = payload.userName;
+        router.push({
+          pathname: '/user/register-result',
+          state: {
+            account,
+          },
+        });
+      }else{
+        message.error(response.msg);
+      }
+
+    },
+    *getCaptcha({ payload }, { call }) {
+      yield call(getFakeCaptcha, payload);
     },
   },
 

@@ -110,7 +110,7 @@ export async function fakeAccountLogin(params) {
 }
 
 export async function fakeRegister(params) {
-  return request('/api/register', {
+  return request('/api/v1/auth/regis', {
     method: 'POST',
     data: params,
   });
@@ -121,5 +121,5 @@ export async function queryNotices(params = {}) {
 }
 
 export async function getFakeCaptcha(mobile) {
-  return request(`/api/captcha?mobile=${mobile}`);
+  return request(`/api/v1/auth/captcha?mobile=${mobile}`);
 }

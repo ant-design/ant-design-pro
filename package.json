@@ -40,7 +40,6 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,ts,tsx,json,jsx,less}": [
-      "node ./scripts/lint-prettier.js",
       "git add"
     ]
   },

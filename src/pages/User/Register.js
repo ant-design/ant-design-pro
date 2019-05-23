@@ -49,16 +49,16 @@ class Register extends Component {
   };
 
   componentDidUpdate() {
-    const { form, register } = this.props;
-    const account = form.getFieldValue('mail');
-    if (register.status === 'ok') {
-      router.push({
-        pathname: '/user/register-result',
-        state: {
-          account,
-        },
-      });
-    }
+    // const { form, register } = this.props;
+    // const account = form.getFieldValue('userName');
+    // if (register.status === 'ok') {
+    //   router.push({
+    //     pathname: '/user/register-result',
+    //     state: {
+    //       account,
+    //     },
+    //   });
+    // }
   }
 
   componentWillUnmount() {
@@ -66,6 +66,20 @@ class Register extends Component {
   }
 
   onGetCaptcha = () => {
+    const { form, dispatch } = this.props;
+    form.validateFields(['mobile'], {}, (err, values) => {
+      if (!err) {
+        dispatch({
+          type: 'register/getCaptcha',
+          payload: values.mobile,
+        });
+        this.getCaptche()
+      }
+    });
+
+  };
+
+  getCaptche = () => {
     let count = 59;
     this.setState({ count });
     this.interval = setInterval(() => {
@@ -75,10 +89,7 @@ class Register extends Component {
         clearInterval(this.interval);
       }
     }, 1000);
-    Modal.info({
-      title: formatMessage({ id: 'app.login.verification-code-warning' }),
-    });
-  };
+  }
 
   getPasswordStatus = () => {
     const { form } = this.props;
@@ -187,21 +198,30 @@ class Register extends Component {
         </h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('mail', {
+            {getFieldDecorator('tenantName', {
               rules: [
                 {
                   required: true,
-                  message: formatMessage({ id: 'validation.email.required' }),
-                },
-                {
-                  type: 'email',
-                  message: formatMessage({ id: 'validation.email.wrong-format' }),
+                  message: formatMessage({ id: 'validation.tenantName.required' }),
                 },
               ],
             })(
-              <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
+              <Input size="large" placeholder={formatMessage({ id: 'form.tenantName.placeholder' })} />
             )}
           </FormItem>
+            <FormItem>
+              {getFieldDecorator('userName', {
+                rules: [
+                  {
+                    required: true,
+                    message: formatMessage({ id: 'validation.userName.required' }),
+                  },
+                ],
+              })(
+                <Input size="large" placeholder={formatMessage({ id: 'form.userName.placeholder' })} />
+              )}
+            </FormItem>
+
           <FormItem help={help}>
             <Popover
               getPopupContainer={node => node.parentNode}
@@ -250,6 +270,22 @@ class Register extends Component {
                 type="password"
                 placeholder={formatMessage({ id: 'form.confirm-password.placeholder' })}
               />
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('email', {
+              rules: [
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.email.required' }),
+                },
+                {
+                  type: 'email',
+                  message: formatMessage({ id: 'validation.email.wrong-format' }),
+                },
+              ],
+            })(
+              <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
             )}
           </FormItem>
           <FormItem>

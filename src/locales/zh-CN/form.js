@@ -4,6 +4,8 @@ export default {
   'form.optional': '（选填）',
   'form.submit': '提交',
   'form.save': '保存',
+  'form.tenantName.placeholder':'企业名称',
+  'form.userName.placeholder':'登录账号',
   'form.email.placeholder': '邮箱',
   'form.password.placeholder': '至少6位密码，区分大小写',
   'form.confirm-password.placeholder': '确认密码',
