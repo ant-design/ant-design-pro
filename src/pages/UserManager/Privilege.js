@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Divider} from 'antd';
+import {Divider,BackTop} from 'antd';
 import {connect} from 'dva';
 import BindDataQueryTable from '../BindDataQueryTable';
 import QueryCommand from '@/components/QueryTable/QueryCommand';
@@ -210,6 +210,7 @@ class Privilege extends PureComponent {
           keyName='roleId'
           relationName='sysPrivilegeRoles'
         />
+        <BackTop />
       </PageHeaderWrapper>
     );
   }

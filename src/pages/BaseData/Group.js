@@ -3,10 +3,6 @@ import BindDataQueryTable from '../BindDataQueryTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { getItems } from '@/utils/masterData';
 
-import Authorized from '@/utils/Authorized';
-
-const { check } = Authorized;
-
 const statusList = getItems('common', 'status');
 
 const columnSchemas = {
@@ -28,12 +24,7 @@ const columnSchemas = {
       enumData: statusList,
     }, // 需要作为查询条件，新增时需要采集，需要使用绑定的下拉标签
     { name: 'groupDesc', title: 'Group Desc',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
-  ],
-  actions:{
-    title:'action',
-    width:130,
-
-  },
+  ]
 };
 export default () => (
   <PageHeaderWrapper title="分组系统管理">

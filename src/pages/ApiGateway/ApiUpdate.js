@@ -10,6 +10,7 @@ import {
   Popover,
   Radio,
   Tabs,
+  BackTop,
 } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
@@ -23,6 +24,7 @@ import {getPayloadForUpdate,conversionAttr,getApiFlowData} from "./ApiCreate/uti
 import RadioView from "./RadioView";
 import OrgSelectView from "./OrgSelectView";
 import ApiFlow from "../Editor/GGEditor/ApiFlow"
+// import RoleTransfer from "../UserManager/Privilege";
 // import apiFlowData from '../Editor/GGEditor/mock/apiFlow.json';
 
 const {TabPane} = Tabs;
@@ -598,7 +600,9 @@ class ApiUpdate extends PureComponent {
               <ApiFlow data={apiFlowData} />
             </Card>
           </TabPane>
-        </Tabs>,
+        </Tabs>
+
+        <BackTop />
         <FooterToolbar style={{ width }}>
           {this.getErrorInfo()}
           <Button type="primary" onClick={this.validate} loading={submitting}>
