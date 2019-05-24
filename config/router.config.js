@@ -25,6 +25,30 @@ export default [
     routes: [
       { path: '/', redirect: '/system-management/user/list', authority: ['user'] },
       {
+        path:'basic-management',
+        name:'basic-management',
+        icon:'table',
+        routes:[
+          {
+            path: '/basic-management/depart/list',
+            name: 'depart-list',
+            component: './basic-management/depart/list/Index',
+          },
+          {
+            hideInMenu: true,
+            path: '/basic-management/depart/add',
+            name: 'depart-add',
+            component: './basic-management/depart/add/Index',
+          },
+          {
+            hideInMenu: true,
+            path: '/basic-management/depart/edit/:id',
+            name: 'depart-edit',
+            component: './basic-management/depart/edit/Index',
+          },
+        ]
+      },
+      {
         path: 'system-management',
         name: 'system-management',
         icon: 'table',

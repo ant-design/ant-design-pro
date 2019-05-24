@@ -105,6 +105,10 @@ class RoleList extends PureComponent {
       dataIndex: 'roleName',
     },
     {
+      title: '角色描述',
+      dataIndex: 'descr',
+    },
+    {
       title: '录入日期',
       dataIndex: 'addOn',
     },

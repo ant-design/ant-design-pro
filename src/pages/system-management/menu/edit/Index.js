@@ -1,29 +1,8 @@
-import React, { PureComponent, Fragment } from 'react';
-import { connect } from 'dva';
-import router from 'umi/router';
-import {
-  List,
-  Card,
-  Row,
-  Col,
-  Radio,
-  Input,
-  InputNumber,
-  Progress,
-  Button,
-  Icon,
-  Dropdown,
-  Menu,
-  Avatar,
-  Modal,
-  Form,
-  DatePicker,
-  Select,
-  message,
-  Cascader,
-  Divider,
-} from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import { Button, Card, Cascader, Form, Input, InputNumber, Select } from 'antd';
+import { connect } from 'dva';
+import React, { PureComponent } from 'react';
+import router from 'umi/router';
 import styles from '../../../List/TableList.less';
 
 const FormItem = Form.Item;

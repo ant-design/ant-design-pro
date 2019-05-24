@@ -140,32 +140,7 @@ class roleEdit extends PureComponent {
                   ],
                 })(<Input placeholder="角色编码" size="large" />)}
               </FormItem>
-              {/* <FormItem label="密码" hasFeedback>
-                                {getFieldDecorator('password', {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: '请输入密码'
-                                        },
-                                        {
-                                            validator: this.validateToNextPassword,
-                                        },
-                                    ]
-                                })(<Input.Password placeholder="密码" size="large" />)}
-                            </FormItem>
-                            <FormItem label="确认密码" hasFeedback>
-                                {getFieldDecorator('confirm', {
-                                    rules: [
-                                        {
-                                            required: true,
-                                            message: '请输入确认密码'
-                                        },
-                                        {
-                                            validator: this.compareToFirstPassword,
-                                        },
-                                    ]
-                                })(<Input.Password placeholder="确认密码" onBlur={this.handleConfirmBlur} size="large" />)}
-                            </FormItem> */}
+
               <FormItem label="角色名称">
                 {getFieldDecorator('roleName', {
                   initialValue: role.roleName,
@@ -177,30 +152,17 @@ class roleEdit extends PureComponent {
                   ],
                 })(<Input placeholder="角色名称" size="large" />)}
               </FormItem>
-              {/* <FormItem label="邮箱">
-                                {getFieldDecorator('email', {
-                                    rules: [
-                                        {
-                                            type: 'email',
-                                            message: '请输入正确的邮箱地址',
-                                        },
-                                        {
-                                            required: false,
-                                            message: '请输入邮箱'
-                                        }
-                                    ]
-                                })(<Input placeholder="邮箱" size="large" />)}
-                            </FormItem>
-                            <FormItem label="手机">
-                                {getFieldDecorator('mobile', {
-                                    rules: [
-                                        {
-                                            required: false,
-                                            message: '请输入手机'
-                                        }
-                                    ]
-                                })(<Input placeholder="手机" addonBefore={prefixSelector} style={{ width: '100%' }} size="large" />)}
-                            </FormItem> */}
+              <FormItem label="角色描述">
+                {getFieldDecorator('descr', {
+                  initialValue: role.descr,
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入角色描述',
+                    },
+                  ],
+                })(<Input placeholder="角色描述" size="large" />)}
+              </FormItem>
               <FormItem {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit" icon="check" size="large">
                   确定

@@ -105,6 +105,16 @@ class roleAdd extends PureComponent {
                   ],
                 })(<Input placeholder="角色名称" size="large" />)}
               </FormItem>
+              <FormItem label="角色描述">
+                {getFieldDecorator('descr', {
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入角色描述',
+                    },
+                  ],
+                })(<Input placeholder="角色描述" size="large" />)}
+              </FormItem>
               <FormItem {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit" icon="check" size="large">
                   确定

@@ -7,7 +7,7 @@ export default {
       list: [],
       pagination: {},
     },
-    dict: {},
+    departType: [],
   },
 
   effects: {
@@ -94,6 +94,7 @@ export default {
     },
     *get({ payload }, { call, put }) {
       const response = yield call(queryByCodeType, payload);
+      console.log(response);
       yield put({
         type: 'getSave',
         payload: response,
@@ -110,10 +111,18 @@ export default {
       };
     },
     getSave(state, action) {
-      return {
-        ...state,
-        dict: action.payload.data || {},
-      };
+      switch (action.payload.data.code) {
+        case 'departType':
+          return {
+            ...state,
+            departType: action.payload.data.children || {},
+          }
+          break;
+        case '':
+          break;
+        default:
+          break;
+      }
     },
   },
 };
