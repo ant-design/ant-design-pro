@@ -19,6 +19,7 @@ import {
   // message,
   // Popconfirm,
 } from 'antd';
+import Ellipsis from '@/components/Ellipsis';
 import moment from 'moment'; // 不能用｛moment｝
 import StandardTable from '@/components/StandardTable';
 import styles from './index.less';
@@ -208,13 +209,17 @@ class QueryTable extends PureComponent {
       obj.title = columnDetail.title;
       obj.width=columnDetail.width||undefined;
       obj.dataIndex = columnDetail.name;
+      obj.showLen = columnDetail.showLen||undefined;
       if (columnDetail.sorter != null) {
         obj.sorter = columnDetail.sorter;
       }
       if (columnDetail.format != null) {
         obj.render = val => <span>{moment(val).format(columnDetail.format)}</span>;
       }
-      if (columnDetail.enumData != null) {
+      else if (columnDetail.showLen !== undefined) {
+        obj.render = val => (<Ellipsis length={columnDetail.showLen} tooltip>{val}</Ellipsis>);
+      }
+      else if (columnDetail.enumData != null) {
         obj.render = val => {
           const item=columnDetail.enumData.find(d => d.itemCode === val);
           const itemValue=item?item.itemValue:"";

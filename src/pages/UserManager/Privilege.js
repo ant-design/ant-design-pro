@@ -25,8 +25,7 @@ const columnSchemas = {
   columnDetails: [
     { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:110 },
     { name: 'name', title: 'Name', columnHidden: false, query: true, add: true },
-    { name: 'shortPathStr', title: 'Path', },
-    { name: 'path', title: 'path', columnHidden: true, query: true, add: true},
+    { name: 'path', title: 'path', columnHidden: false, query: true, add: true,showLen:22},
     { name: 'parentPrivilegeId', title: 'parent', add: true, tag:'privilegeTreeSelect', columnHidden: true,rules:[]},
     {
       name: 'type',
@@ -36,7 +35,7 @@ const columnSchemas = {
       tag: 'commonSelect',
       enumData: typeList,
     },
-    { name: 'shortRoleStr', title: 'role', },
+    { name: 'roleStr', title: 'role',showLen:14 },
     {
       name: 'icon',
       title: 'icon',
@@ -138,15 +137,7 @@ class Privilege extends PureComponent {
           return arr.roleName;
         })
         const roleStr=roleArr.join(',');
-        let shortRoleStr=roleStr;
-        if(shortRoleStr.length>=16){
-          shortRoleStr=`${shortRoleStr.substr(0,14)}...`;
-        }
-        let shortPathStr=item.path;
-        if(shortPathStr.length>=25){
-          shortPathStr=`${shortPathStr.substr(0,22)}...`;
-        }
-        return {...item,roleStr,shortRoleStr,shortPathStr};
+        return {...item,roleStr};
       }
       return item;
     });
