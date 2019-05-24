@@ -5,6 +5,7 @@ const exec = require('child_process').exec;
 const getNewRouteCode = require('./repalceRouter');
 const router = require('./router.config');
 const chalk = require('chalk');
+const insertCode = require('./insertCode');
 
 const fetchGithubFiles = async () => {
   const ignoreFile = ['_scripts'];
@@ -123,3 +124,6 @@ const installBlock = async () => {
   installGitFile(0);
 };
 installBlock();
+
+// 插入 pro 需要的演示代码
+insertCode();

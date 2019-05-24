@@ -5,7 +5,7 @@ const t = require('@babel/types');
 const fs = require('fs');
 const prettier = require('prettier');
 
-const getNewRouteCode = (configPath, newRoute, absSrcPath) => {
+const getNewRouteCode = (configPath, newRoute) => {
   const ast = parser.parse(fs.readFileSync(configPath, 'utf-8'), {
     sourceType: 'module',
     plugins: ['typescript'],

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Icon, Typography, Popover } from 'antd';
 import styles from './index.less';
+import { connect } from 'dva';
+import * as H from 'history';
 const firstUpperCase = (pathString: string) => {
   return pathString
     .replace('.', '')
@@ -22,7 +24,12 @@ const BlockCodeView: React.SFC<{
   );
 };
 
-export default ({ url }: { url: string }) => {
+type RoutingType = { location: H.Location };
+
+export default connect(({ routing }: { routing: RoutingType }) => ({
+  location: routing.location,
+}))(({ location }: RoutingType) => {
+  const url = location.pathname;
   return (
     <Popover
       title="下载此页面到本地项目"
@@ -35,4 +42,4 @@ export default ({ url }: { url: string }) => {
       </div>
     </Popover>
   );
-};
+});
