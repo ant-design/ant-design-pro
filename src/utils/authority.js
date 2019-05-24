@@ -55,3 +55,19 @@ export function getAuth(name) {
   const authority=privilege?privilege.authority:[];
   return authority;
 }
+
+export function getUser() {
+  // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
+  const user = JSON.parse(localStorage.getItem('antd-pro-user')||{});
+  return user;
+}
+
+export function getUserId() {
+  // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
+  const user = getUser().id;
+  return user;
+}
+
+export function setUser(user) {
+  return localStorage.setItem('antd-pro-user', JSON.stringify(user));
+}
