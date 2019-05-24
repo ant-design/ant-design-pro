@@ -16,7 +16,7 @@ const itemRender = (route, params, routes, paths) => {
   return last || !route.component ? (
     <span>{route.breadcrumbName}</span>
   ) : (
-    <Link to={`/${paths[paths.length - 1]}`>{route.breadcrumbName}</Link>
+    <Link to={`/${paths[paths.length - 1]}`}>{route.breadcrumbName}</Link>
   );
 };
 
