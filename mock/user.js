@@ -7,10 +7,10 @@ export default {
     userid: '00000001',
     id:1,
     username:'admin',
-    email: 'antdesign@alipay.com',
+    email: 'liuyq6@asiainfo-int.com',
     signature: '海纳百川，有容乃大',
     title: '交互专家',
-    group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+    group: 'AsiaInfo－国际部－ODC－O2P－UI',
     tags: [
       {
         key: '0',
@@ -30,7 +30,7 @@ export default {
       },
       {
         key: '4',
-        label: '川妹子',
+        label: '小姐姐',
       },
       {
         key: '5',
@@ -42,16 +42,16 @@ export default {
     country: 'China',
     geographic: {
       province: {
-        label: '浙江省',
-        key: '330000',
+        label: '福建省',
+        key: '350000',
       },
       city: {
-        label: '杭州市',
-        key: '330100',
+        label: '福州市',
+        key: '350100',
       },
     },
-    address: '西湖区工专路 77 号',
-    phone: '0752-268888888',
+    address: '福州 77 号',
+    phone: '0591-268888888',
   },
   // GET POST 可省略
   'GET /api/users': [
