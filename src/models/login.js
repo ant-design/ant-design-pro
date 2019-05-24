@@ -18,7 +18,7 @@ export default {
       const response = yield call(fakeAccountLogin, payload);
       if (response.code === 0) {
         setToken(response.data);
-        response.currentAuthority = 'admin';
+        response.currentAuthority = 'user';
         response.status = 'ok';
       }
       if (response.code === 1) {
