@@ -1,5 +1,5 @@
 const constants = {
-  PREFIX_PATH: '',
+  PREFIX_PATH: '/server',
   DEBUG: true,
   SUCCESS_CODE: '200',
   UNAUTH_CODE: '1203',
