@@ -48,7 +48,7 @@ class menuEdit extends PureComponent {
   };
 
   handleCancle = e => {
-    router.push('/settings/menu/list');
+    router.push('/system-management/menu/list');
   };
 
   render() {

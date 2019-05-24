@@ -46,6 +46,23 @@ export default [
             name: 'depart-edit',
             component: './basic-management/depart/edit/Index',
           },
+          {
+            path: '/basic-management/employee/list',
+            name: 'employee-list',
+            component: './basic-management/employee/list/Index',
+          },
+          {
+            hideInMenu: true,
+            path: '/basic-management/employee/add',
+            name: 'employee-add',
+            component: './basic-management/employee/add/Index',
+          },
+          {
+            hideInMenu: true,
+            path: '/basic-management/employee/edit/:id',
+            name: 'employee-edit',
+            component: './basic-management/employee/edit/Index',
+          },
         ]
       },
       {
