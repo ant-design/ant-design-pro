@@ -1,6 +1,13 @@
 import { message } from 'antd';
 import defaultSettings from '../defaultSettings';
+import themeColorClient from '../components/SettingDrawer/themeColorClient'
 
+const updateTheme = newPrimaryColor => {
+  const hideMessage = message.loading('正在切换主题！', 0)
+  themeColorClient.changeColor(newPrimaryColor)
+    .finally(() => hideMessage())
+}
+/*
 let lessNodesAppended;
 const updateTheme = primaryColor => {
   // Don't compile less in production!
@@ -59,6 +66,7 @@ const updateTheme = primaryColor => {
     buildIt();
   }
 };
+*/
 
 const updateColorWeak = colorWeak => {
   document.body.className = colorWeak ? 'colorWeak' : '';

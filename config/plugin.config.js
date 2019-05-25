@@ -1,7 +1,8 @@
 // Change theme plugin
 
 import MergeLessPlugin from 'antd-pro-merge-less';
-import AntDesignThemePlugin from 'antd-theme-webpack-plugin';
+// import AntDesignThemePlugin from 'antd-theme-webpack-plugin';
+const ThemeColorReplacer = require('webpack-theme-color-replacer');
 import path from 'path';
 
 function getModulePackageName(module) {
@@ -39,18 +40,21 @@ export default config => {
         outFile,
       },
     ]);
-
-    config.plugin('ant-design-theme').use(AntDesignThemePlugin, [
-      {
-        antDir: path.join(__dirname, '../node_modules/antd'),
-        stylesDir,
-        varFile: path.join(__dirname, '../node_modules/antd/lib/style/themes/default.less'),
-        mainLessFile: outFile, //     themeVariables: ['@primary-color'],
-        indexFileName: 'index.html',
-        generateOne: true,
-        lessUrl: 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js',
-      },
-    ]);
+    config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [{
+      fileName: 'css/theme-colors.css',
+      matchColors: getAntdSerials('#1890ff'), // 主色系列
+    }]);
+    // config.plugin('ant-design-theme').use(AntDesignThemePlugin, [
+    //   {
+    //     antDir: path.join(__dirname, '../node_modules/antd'),
+    //     stylesDir,
+    //     varFile: path.join(__dirname, '../node_modules/antd/lib/style/themes/default.less'),
+    //     mainLessFile: outFile, //     themeVariables: ['@primary-color'],
+    //     indexFileName: 'index.html',
+    //     generateOne: true,
+    //     lessUrl: 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js',
+    //   },
+    // ]);
   }
   // optimize chunks
   config.optimization
@@ -81,3 +85,14 @@ export default config => {
       },
     });
 };
+
+function getAntdSerials(color) {
+  const lightens = new Array(9).fill().map((t, i) => {
+    return ThemeColorReplacer.varyColor.lighten(color, i / 10);
+  });
+  // 此处为了简化，采用了darken。实际按color.less需求可以引入tinycolor, colorPalette变换得到颜色值
+  const darkens = new Array(6).fill().map((t, i) => {
+    return ThemeColorReplacer.varyColor.darken(color, i / 10);
+  });
+  return lightens.concat(darkens);
+}
