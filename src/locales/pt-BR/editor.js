@@ -1,11 +1,11 @@
 export default {
-  'app.editor.flow.title': 'Editor de diagrama de flujo',
+  'app.editor.flow.title': 'Editor de diagrama de fluxo',
   'app.editor.flow.description':
-    'El diagrama de flujo es una excelente manera de representar la idea del algoritmo.',
+    'O diagrama de fluxo é uma excelente maneira de representar a ideia do algoritmo.',
   'app.editor.koni.title': 'Editor de topologia',
   'app.editor.koni.description':
-    'El diagrama de topología se refiere al diagrama de estructura de red compuesto por dispositivos de nodo de red y medios de comunicación.',
-  'app.editor.mind.title': 'Editor de mapas cerebrales',
+    'O diagrama de topologia se refere a um diagrama de estrutura de rede composto por dispositivos nós de rede e meios de comunicação.',
+  'app.editor.mind.title': 'Editor de mapas cerebrais',
   'app.editor.mind.description':
-    'El mapa cerebral es una herramienta de pensamiento gráfico eficaz para expresar el pensamiento divergente. Es simple pero efectivo y es una herramienta de pensamiento práctico.',
+    'O mapa cerebral é uma ferramenta de pensamento gráfico eficaz para expressar o pensamento divergente. É simples porém efetivo e é uma ferramenta de pensamento prático.',
 };
