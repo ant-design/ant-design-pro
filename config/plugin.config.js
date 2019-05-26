@@ -47,19 +47,16 @@ export default config => {
         matchColors: getAntdSerials('#1890ff'), // 主色系列
         // 改变样式选择器，解决样式覆盖问题
         changeSelector(selector) {
-          var fix = {
-            '.ant-calendar-today .ant-calendar-date':
-              ':not(.ant-calendar-selected-date)' + selector,
-            '.ant-btn:focus,.ant-btn:hover': selector
-              .split(',')
-              .map(s => s + ':not(.ant-btn-primary)')
-              .join(','),
-            '.ant-btn.active,.ant-btn:active': selector
-              .split(',')
-              .map(s => s + ':not(.ant-btn-primary)')
-              .join(','),
-          };
-          return fix[selector] || selector;
+          switch (selector) {
+            case '.ant-calendar-today .ant-calendar-date':
+              return ':not(.ant-calendar-selected-date)' + selector;
+            case '.ant-btn:focus,.ant-btn:hover':
+              return '.ant-btn:focus:not(.ant-btn-primary),.ant-btn:hover:not(.ant-btn-primary)';
+            case '.ant-btn.active,.ant-btn:active':
+              return '.ant-btn.active:not(.ant-btn-primary),.ant-btn:active:not(.ant-btn-primary)';
+            default:
+              return selector;
+          }
         },
       },
     ]);
@@ -106,10 +103,10 @@ export default config => {
 };
 
 function getAntdSerials(color) {
-  const colorPalettes = generate(color);
   // 淡化（即less的tint）
   const lightens = new Array(9).fill().map((t, i) => {
     return ThemeColorReplacer.varyColor.lighten(color, i / 10);
   });
-  return colorPalettes.concat(lightens);
+  const colorPalettes = generate(color);
+  return lightens.concat(colorPalettes);
 }
