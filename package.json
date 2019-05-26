@@ -111,7 +111,7 @@
     "jsdom-global": "^3.0.2",
     "less": "^3.9.0",
     "lint-staged": "^8.1.1",
-    "merge-umi-mock-data": "^1.0.4",
+    "merge-umi-mock-data": "^2.0.6",
     "mockjs": "^1.0.1-beta3",
     "prettier": "^1.17.0",
     "serverless-http": "^2.0.1",
