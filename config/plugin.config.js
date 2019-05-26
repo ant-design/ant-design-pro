@@ -2,8 +2,9 @@
 
 import MergeLessPlugin from 'antd-pro-merge-less';
 // import AntDesignThemePlugin from 'antd-theme-webpack-plugin';
-const ThemeColorReplacer = require('webpack-theme-color-replacer');
+import ThemeColorReplacer from 'webpack-theme-color-replacer';
 import path from 'path';
+import generate from '@ant-design/colors/lib/generate';
 
 function getModulePackageName(module) {
   if (!module.context) return null;
@@ -42,7 +43,7 @@ export default config => {
     ]);
     config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [{
       fileName: 'css/theme-colors.css',
-      matchColors: getAntdSerials('#1890ff'), // 主色系列
+      matchColors: generate('#1890ff'), // 主色系列
     }]);
     // config.plugin('ant-design-theme').use(AntDesignThemePlugin, [
     //   {
@@ -85,14 +86,3 @@ export default config => {
       },
     });
 };
-
-function getAntdSerials(color) {
-  const lightens = new Array(9).fill().map((t, i) => {
-    return ThemeColorReplacer.varyColor.lighten(color, i / 10);
-  });
-  // 此处为了简化，采用了darken。实际按color.less需求可以引入tinycolor, colorPalette变换得到颜色值
-  const darkens = new Array(6).fill().map((t, i) => {
-    return ThemeColorReplacer.varyColor.darken(color, i / 10);
-  });
-  return lightens.concat(darkens);
-}
