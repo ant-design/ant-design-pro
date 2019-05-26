@@ -1,12 +1,11 @@
 import { message } from 'antd';
 import defaultSettings from '../defaultSettings';
-import themeColorClient from '../components/SettingDrawer/themeColorClient'
+import themeColorClient from '../components/SettingDrawer/themeColorClient';
 
 const updateTheme = newPrimaryColor => {
-  const hideMessage = message.loading('正在切换主题！', 0)
-  themeColorClient.changeColor(newPrimaryColor)
-    .finally(() => hideMessage())
-}
+  const hideMessage = message.loading('正在切换主题！', 0);
+  themeColorClient.changeColor(newPrimaryColor).finally(() => hideMessage());
+};
 /*
 let lessNodesAppended;
 const updateTheme = primaryColor => {

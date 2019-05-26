@@ -41,10 +41,21 @@ export default config => {
         outFile,
       },
     ]);
-    config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [{
-      fileName: 'css/theme-colors.css',
-      matchColors: generate('#1890ff'), // 主色系列
-    }]);
+    config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [
+      {
+        fileName: 'css/theme-colors.css',
+        matchColors: generate('#1890ff'), // 主色系列
+        // 改变样式选择器，解决样式覆盖问题
+        changeSelector(selector) {
+          switch (selector) {
+            case '.ant-calendar-today .ant-calendar-date':
+              return ':not(.ant-calendar-selected-day)' + selector;
+            default:
+              return selector;
+          }
+        },
+      },
+    ]);
     // config.plugin('ant-design-theme').use(AntDesignThemePlugin, [
     //   {
     //     antDir: path.join(__dirname, '../node_modules/antd'),
