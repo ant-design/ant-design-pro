@@ -44,15 +44,22 @@ export default config => {
     config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [
       {
         fileName: 'css/theme-colors.css',
-        matchColors: generate('#1890ff'), // 主色系列
+        matchColors: getAntdSerials('#1890ff'), // 主色系列
         // 改变样式选择器，解决样式覆盖问题
         changeSelector(selector) {
-          switch (selector) {
-            case '.ant-calendar-today .ant-calendar-date':
-              return ':not(.ant-calendar-selected-day)' + selector;
-            default:
-              return selector;
-          }
+          var fix = {
+            '.ant-calendar-today .ant-calendar-date':
+              ':not(.ant-calendar-selected-date)' + selector,
+            '.ant-btn:focus,.ant-btn:hover': selector
+              .split(',')
+              .map(s => s + ':not(.ant-btn-primary)')
+              .join(','),
+            '.ant-btn.active,.ant-btn:active': selector
+              .split(',')
+              .map(s => s + ':not(.ant-btn-primary)')
+              .join(','),
+          };
+          return fix[selector] || selector;
         },
       },
     ]);
@@ -97,3 +104,12 @@ export default config => {
       },
     });
 };
+
+function getAntdSerials(color) {
+  const colorPalettes = generate(color);
+  // 淡化（即less的tint）
+  const lightens = new Array(9).fill().map((t, i) => {
+    return ThemeColorReplacer.varyColor.lighten(color, i / 10);
+  });
+  return colorPalettes.concat(lightens);
+}

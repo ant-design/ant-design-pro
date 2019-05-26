@@ -5,7 +5,12 @@ import client from 'webpack-theme-color-replacer/client';
 export default {
   primaryColor: '#1890ff',
   getAntdSerials(color) {
-    return generate(color);
+    // 淡化（即less的tint）
+    const lightens = new Array(9).fill().map((t, i) => {
+      return client.varyColor.lighten(color, i / 10);
+    });
+    const colorPalettes = generate(color);
+    return lightens.concat(colorPalettes);
   },
   changeColor(newColor) {
     const lastColor = this.lastColor || this.primaryColor;
