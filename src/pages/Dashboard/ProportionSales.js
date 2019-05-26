@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Card, Radio } from 'antd';
-import { FormattedMessage } from 'umi/locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import styles from './Analysis.less';
 import { Pie } from '@/components/Charts';
 import Yuan from '@/utils/Yuan';

@@ -2,22 +2,14 @@ import React, { Component } from 'react';
 import { Chart, Axis, Tooltip, Geom } from 'bizcharts';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
-import autoHeight from '../autoHeight';
+import ResizeObserver from 'resize-observer-polyfill';
 import styles from '../index.less';
 
-@autoHeight()
 class Bar extends Component {
   state = {
+    height: 0,
     autoHideXLabels: false,
   };
-
-  componentDidMount() {
-    window.addEventListener('resize', this.resize, { passive: true });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
-  }
 
   handleRoot = n => {
     this.root = n;
@@ -26,6 +18,24 @@ class Bar extends Component {
   handleRef = n => {
     this.node = n;
   };
+
+  resizeObserver() {
+    const ro = new ResizeObserver(entries => {
+      const { width, height } = entries[0].contentRect;
+      this.resize();
+      this.setState(preState => {
+        if (preState.width !== width || preState.height !== height) {
+          return {
+            height,
+          };
+        }
+        return null;
+      });
+    });
+    if (this.root) {
+      ro.observe(this.root);
+    }
+  }
 
   @Bind()
   @Debounce(400)
@@ -56,7 +66,7 @@ class Bar extends Component {
 
   render() {
     const {
-      height,
+      height: propsHeight,
       title,
       forceFit = true,
       data,
@@ -82,7 +92,8 @@ class Bar extends Component {
         value: y,
       }),
     ];
-
+    const { height: stateHeight } = this.state;
+    const height = propsHeight || stateHeight;
     return (
       <div className={styles.chart} style={{ height }} ref={this.handleRoot}>
         <div ref={this.handleRef}>

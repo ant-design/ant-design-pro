@@ -9,7 +9,7 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "rootDirs": ["/src", "/test", "/mock","./typings"],
+    "rootDirs": ["/src", "/test", "/mock", "./typings"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,

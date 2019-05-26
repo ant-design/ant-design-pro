@@ -10,8 +10,13 @@ import Trend from 'ant-design-pro/lib/Trend';
 
 ReactDOM.render(
   <div>
-    <Trend flag="up" reverseColor={true} >12%</Trend>
-    <Trend flag="down" reverseColor={true} style={{ marginLeft: 8 }}>11%</Trend>
-  </div>
-, mountNode);
+    <Trend flag="up" reverseColor={true}>
+      12%
+    </Trend>
+    <Trend flag="down" reverseColor={true} style={{ marginLeft: 8 }}>
+      11%
+    </Trend>
+  </div>,
+  mountNode
+);
 ```

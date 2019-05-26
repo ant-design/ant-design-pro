@@ -4,6 +4,13 @@
   position: relative;
   min-height: 100%;
   background: #fff;
+  :global {
+    .ant-list-item {
+      span {
+        flex: 1;
+      }
+    }
+  }
 }
 
 .blockChecbox {
@@ -56,8 +63,8 @@
   right: 300px;
   z-index: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 48px;
   height: 48px;
   font-size: 16px;

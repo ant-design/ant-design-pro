@@ -19,11 +19,8 @@ class TagCloud extends Component {
   };
 
   componentDidMount() {
-    requestAnimationFrame(() => {
-      this.initTagCloud();
-      this.renderChart();
-    });
-    window.addEventListener('resize', this.resize, { passive: true });
+    this.initTagCloud();
+    this.renderChart();
   }
 
   componentDidUpdate(preProps) {
@@ -35,15 +32,7 @@ class TagCloud extends Component {
 
   componentWillUnmount() {
     this.isUnmount = true;
-    window.cancelAnimationFrame(this.requestRef);
-    window.removeEventListener('resize', this.resize);
   }
-
-  resize = () => {
-    this.requestRef = requestAnimationFrame(() => {
-      this.renderChart();
-    });
-  };
 
   saveRootRef = node => {
     this.root = node;
@@ -51,20 +40,16 @@ class TagCloud extends Component {
 
   initTagCloud = () => {
     function getTextAttrs(cfg) {
-      return Object.assign(
-        {},
-        {
-          fillOpacity: cfg.opacity,
-          fontSize: cfg.origin._origin.size,
-          rotate: cfg.origin._origin.rotate,
-          text: cfg.origin._origin.text,
-          textAlign: 'center',
-          fontFamily: cfg.origin._origin.font,
-          fill: cfg.color,
-          textBaseline: 'Alphabetic',
-        },
-        cfg.style
-      );
+      return Object.assign({}, cfg.style, {
+        fillOpacity: cfg.opacity,
+        fontSize: cfg.origin._origin.size,
+        rotate: cfg.origin._origin.rotate,
+        text: cfg.origin._origin.text,
+        textAlign: 'center',
+        fontFamily: cfg.origin._origin.font,
+        fill: cfg.color,
+        textBaseline: 'Alphabetic',
+      });
     }
 
     // 给point注册一个词云的shape

@@ -205,7 +205,7 @@ class TableForm extends PureComponent {
             if (record.isNew) {
               return (
                 <span>
-                  <a onClick={e => this.saveRow(e, record.key)}>添加</a>
+                  <a onClick={e => this.saveRow(e, record.key)}>保存</a>
                   <Divider type="vertical" />
                   <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
                     <a>删除</a>

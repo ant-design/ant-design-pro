@@ -13,7 +13,11 @@ export default class TopNavHeader extends PureComponent {
 
   static getDerivedStateFromProps(props) {
     return {
-      maxWidth: (props.contentWidth === 'Fixed' ? 1200 : window.innerWidth) - 280 - 165 - 40,
+      maxWidth:
+        (props.contentWidth === 'Fixed' && window.innerWidth > 1200 ? 1200 : window.innerWidth) -
+        280 -
+        120 -
+        40,
     };
   }
 

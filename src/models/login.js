@@ -33,8 +33,7 @@ export default {
               redirect = redirect.substr(redirect.indexOf('#') + 1);
             }
           } else {
-            window.location.href = redirect;
-            return;
+            redirect = null;
           }
         }
         yield put(routerRedux.replace(redirect || '/'));
@@ -54,14 +53,18 @@ export default {
         },
       });
       reloadAuthorized();
-      yield put(
-        routerRedux.push({
-          pathname: '/user/login',
-          search: stringify({
-            redirect: window.location.href,
-          }),
-        })
-      );
+      const { redirect } = getPageQuery();
+      // redirect
+      if (window.location.pathname !== '/user/login' && !redirect) {
+        yield put(
+          routerRedux.replace({
+            pathname: '/user/login',
+            search: stringify({
+              redirect: window.location.href,
+            }),
+          })
+        );
+      }
     },
   },
 

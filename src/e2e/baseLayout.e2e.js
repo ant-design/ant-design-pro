@@ -5,13 +5,17 @@ const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 function formatter(data) {
   return data
     .reduce((pre, item) => {
-      pre.push(item.path);
+      if (item.routes) {
+        pre.push(item.routes[0].path);
+      } else {
+        pre.push(item.path);
+      }
       return pre;
     }, [])
     .filter(item => item);
 }
 
-describe('Homepage', async () => {
+describe('Homepage', () => {
   const testPage = path => async () => {
     await page.goto(`${BASE_URL}${path}`);
     await page.waitForSelector('footer', {

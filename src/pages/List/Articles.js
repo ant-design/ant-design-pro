@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'dva';
 import { Form, Card, Select, List, Tag, Icon, Row, Col, Button } from 'antd';
-import { FormattedMessage } from 'umi/locale';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 
 import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
@@ -154,8 +154,8 @@ class SearchList extends Component {
             </StandardFormRow>
             <StandardFormRow title="owner" grid>
               <Row>
-                <Col lg={16} md={24} sm={24} xs={24}>
-                  <FormItem>
+                <Col>
+                  <FormItem {...formItemLayout}>
                     {getFieldDecorator('owner', {
                       initialValue: ['wjh', 'zxx'],
                     })(

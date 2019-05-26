@@ -1,5 +1,5 @@
-import * as React from 'react';
-export interface IHeaderSearchProps {
+import React from 'react';
+export interface HeaderSearchProps {
   placeholder?: string;
   dataSource?: string[];
   defaultOpen?: boolean;
@@ -12,4 +12,4 @@ export interface IHeaderSearchProps {
   className?: string;
 }
 
-export default class HeaderSearch extends React.Component<IHeaderSearchProps, any> {}
+export default class HeaderSearch extends React.Component<HeaderSearchProps, any> {}

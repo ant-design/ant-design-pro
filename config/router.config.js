@@ -12,6 +12,9 @@ export default [
         name: 'register.result',
         component: './User/RegisterResult',
       },
+      {
+        component: '404',
+      },
     ],
   },
   // app
@@ -19,10 +22,9 @@ export default [
     path: '/',
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
-    authority: ['admin', 'user'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis' },
+      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -153,7 +155,6 @@ export default [
           },
           {
             path: '/profile/basic/:id',
-            name: 'basic',
             hideInMenu: true,
             component: './Profile/BasicProfile',
           },
@@ -262,6 +263,29 @@ export default [
                 component: './Account/Settings/NotificationView',
               },
             ],
+          },
+        ],
+      },
+      //  editor
+      {
+        name: 'editor',
+        icon: 'highlight',
+        path: '/editor',
+        routes: [
+          {
+            path: '/editor/flow',
+            name: 'flow',
+            component: './Editor/GGEditor/Flow',
+          },
+          {
+            path: '/editor/mind',
+            name: 'mind',
+            component: './Editor/GGEditor/Mind',
+          },
+          {
+            path: '/editor/koni',
+            name: 'koni',
+            component: './Editor/GGEditor/Koni',
           },
         ],
       },

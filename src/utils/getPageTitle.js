@@ -1,4 +1,4 @@
-import { formatMessage } from 'umi/locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import pathToRegexp from 'path-to-regexp';
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
@@ -8,6 +8,7 @@ export const matchParamsPath = (pathname, breadcrumbNameMap) => {
   const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
   return breadcrumbNameMap[pathKey];
 };
+
 const getPageTitle = (pathname, breadcrumbNameMap) => {
   const currRouterData = matchParamsPath(pathname, breadcrumbNameMap);
   if (!currRouterData) {

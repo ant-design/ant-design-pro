@@ -1,6 +1,6 @@
 ---
 order: 0
-title: 
+title:
   zh-CN: 演示
   en-US: Demo
 ---
@@ -13,7 +13,7 @@ title:
 
 Used for presenting various numerical data.
 
-````jsx
+```jsx
 import NumberInfo from 'ant-design-pro/lib/NumberInfo';
 import numeral from 'numeral';
 
@@ -25,6 +25,7 @@ ReactDOM.render(
       status="up"
       subTotal={17.1}
     />
-  </div>
-, mountNode);
-````
+  </div>,
+  mountNode
+);
+```

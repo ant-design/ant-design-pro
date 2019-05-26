@@ -6,27 +6,15 @@ import classNames from 'classnames';
 import ReactFitText from 'react-fittext';
 import Debounce from 'lodash-decorators/debounce';
 import Bind from 'lodash-decorators/bind';
-import autoHeight from '../autoHeight';
-
 import styles from './index.less';
 
 /* eslint react/no-danger:0 */
-@autoHeight()
 class Pie extends Component {
   state = {
+    height: 0,
     legendData: [],
     legendBlock: false,
   };
-
-  componentDidMount() {
-    window.addEventListener(
-      'resize',
-      () => {
-        this.requestRef = requestAnimationFrame(() => this.resize());
-      },
-      { passive: true }
-    );
-  }
 
   componentDidUpdate(preProps) {
     const { data } = this.props;
@@ -37,17 +25,10 @@ class Pie extends Component {
     }
   }
 
-  componentWillUnmount() {
-    window.cancelAnimationFrame(this.requestRef);
-    window.removeEventListener('resize', this.resize);
-    this.resize.cancel();
-  }
-
   getG2Instance = chart => {
     this.chart = chart;
     requestAnimationFrame(() => {
       this.getLegendData();
-      this.resize();
     });
   };
 
@@ -125,7 +106,6 @@ class Pie extends Component {
       className,
       style,
       height,
-      forceFit = true,
       percent,
       color,
       inner = 0.75,
@@ -134,7 +114,7 @@ class Pie extends Component {
       lineWidth = 1,
     } = this.props;
 
-    const { legendData, legendBlock } = this.state;
+    const { legendData, height: stateHeight, legendBlock } = this.state;
     const pieClassName = classNames(styles.pie, className, {
       [styles.hasLegend]: !!hasLegend,
       [styles.legendBlock]: legendBlock,
@@ -151,7 +131,6 @@ class Pie extends Component {
     let tooltip = propsTooltip;
 
     const defaultColors = colors;
-    data = data || [];
     selected = selected || true;
     tooltip = tooltip || true;
     let formatColor;
@@ -212,8 +191,7 @@ class Pie extends Component {
           <div className={styles.chart}>
             <Chart
               scale={scale}
-              height={height}
-              forceFit={forceFit}
+              height={height || stateHeight}
               data={dv}
               padding={padding}
               animate={animate}
@@ -242,7 +220,6 @@ class Pie extends Component {
             )}
           </div>
         </ReactFitText>
-
         {hasLegend && (
           <ul className={styles.legend}>
             {legendData.map((item, i) => (

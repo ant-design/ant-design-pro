@@ -1,11 +1,12 @@
-import * as React from 'react';
-export interface IResultProps {
-  type: 'success' | 'error';
-  title: React.ReactNode;
+import React from 'react';
+export interface ResultProps {
+  actions?: React.ReactNode;
+  className?: string;
   description?: React.ReactNode;
   extra?: React.ReactNode;
-  actions?: React.ReactNode;
   style?: React.CSSProperties;
+  title?: React.ReactNode;
+  type: 'success' | 'error';
 }
 
-export default class Result extends React.Component<IResultProps, any> {}
+export default class Result extends React.Component<ResultProps, any> {}

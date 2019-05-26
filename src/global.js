@@ -1,9 +1,7 @@
 import React from 'react';
 import { notification, Button, message } from 'antd';
-import { formatMessage } from 'umi/locale';
+import { formatMessage } from 'umi-plugin-react/locale';
 import defaultSettings from './defaultSettings';
-
-window.React = React;
 
 const { pwa } = defaultSettings;
 // if pwa is true
@@ -57,5 +55,10 @@ if (pwa) {
       key,
       onClose: async () => {},
     });
+  });
+} else if ('serviceWorker' in navigator) {
+  // eslint-disable-next-line compat/compat
+  navigator.serviceWorker.ready.then(registration => {
+    registration.unregister();
   });
 }

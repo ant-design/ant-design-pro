@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { formatMessage, FormattedMessage } from 'umi/locale';
+import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
 import router from 'umi/router';
-import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
+import { Form, Input, Button, Modal, Select, Row, Col, Popover, Progress } from 'antd';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
@@ -75,6 +75,9 @@ class Register extends Component {
         clearInterval(this.interval);
       }
     }, 1000);
+    Modal.info({
+      title: formatMessage({ id: 'app.login.verification-code-warning' }),
+    });
   };
 
   getPasswordStatus = () => {
