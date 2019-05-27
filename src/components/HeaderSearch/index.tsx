@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Input, Icon, AutoComplete } from 'antd';
 import { DataSourceItemType } from 'antd/es/auto-complete';
 import classNames from 'classnames';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
+import debounce from 'lodash/debounce';
 import styles from './index.less';
 
 export interface HeaderSearchProps {
@@ -55,6 +54,10 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
       searchMode: props.defaultOpen,
       value: '',
     };
+    this.debouncePressEnter = debounce(this.debouncePressEnter, 500, {
+      leading: true,
+      trailing: false,
+    });
   }
 
   componentWillUnmount() {
@@ -100,17 +103,11 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     });
   };
 
-  // NOTE: 不能小于500，如果长按某键，第一次触发auto repeat的间隔是500ms，小于500会导致触发2次
-  @Bind()
-  @Debounce(500, {
-    leading: true,
-    trailing: false,
-  })
-  debouncePressEnter() {
+  debouncePressEnter = () => {
     const { onPressEnter } = this.props;
     const { value } = this.state;
     onPressEnter(value);
-  }
+  };
 
   render() {
     const { className, placeholder, open, ...restProps } = this.props;

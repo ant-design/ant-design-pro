@@ -31,7 +31,7 @@ export interface DefaultSettings {
    * sticky siderbar
    */
   fixSiderbar: boolean;
-  menu: { disableLocal: boolean };
+  menu: { locale: boolean };
   title: string;
   pwa: boolean;
   // Your custom iconfont Symbol script Url
@@ -52,7 +52,7 @@ export default {
   fixSiderbar: false,
   colorWeak: false,
   menu: {
-    disableLocal: false,
+    locale: true,
   },
   title: 'Ant Design Pro',
   pwa: true,

@@ -1,9 +1,16 @@
+/**
+ * Ant Design Pro v4 use `@ant-design/pro-layout` to handle Layout.
+ * You can view component api by:
+ * https://github.com/ant-design/ant-design-pro-layout
+ */
+
 import { ConnectState, ConnectProps } from '@/models/connect';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { connect } from 'dva';
 import React, { useState } from 'react';
 import logo from '../assets/logo.svg';
-
+import Authorized from '@/utils/Authorized';
+import { formatMessage } from 'umi-plugin-react/locale';
 import {
   BasicLayout as BasicLayoutComponents,
   BasicLayoutProps as BasicLayoutComponentsProps,
@@ -22,22 +29,36 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
 };
 
+/**
+ * default menuLocal
+ */
+const filterMenuData = (menuList: MenuDataItem[], locale: boolean) => {
+  return menuList.map(item => {
+    const localItem = {
+      ...item,
+      name: item.locale && locale ? formatMessage({ id: item.locale }) : item.name,
+    };
+    return Authorized.check(item.authority, localItem, null) as MenuDataItem;
+  });
+};
+
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, route, settings } = props;
-  const { routes, authority } = route!;
+  const { dispatch, children, settings } = props;
   /**
    * constructor
    */
   useState(() => {
     dispatch!({ type: 'user/fetchCurrent' });
     dispatch!({ type: 'settings/getSetting' });
-    dispatch!({ type: 'menu/getMenuData', payload: { routes, authority } });
   });
   /**
    * init variables
    */
   const handleMenuCollapse = (payload: boolean) =>
     dispatch!({ type: 'global/changeLayoutCollapsed', payload });
+  const {
+    menu: { locale },
+  } = settings;
   return (
     <>
       <BasicLayoutComponents
@@ -46,6 +67,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         menuItemRender={(menuItemProps, defaultDom) => {
           return <Link to={menuItemProps.path}>{defaultDom}</Link>;
         }}
+        filterMenuData={menuList => filterMenuData(menuList, locale)}
         rightContentRender={rightProps => <RightContent {...rightProps} />}
         {...props}
         {...settings}
@@ -65,9 +87,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   );
 };
 
-export default connect(({ global, settings, menu: menuModel }: ConnectState) => ({
+export default connect(({ global, settings }: ConnectState) => ({
   collapsed: global.collapsed,
   settings,
-  menuData: menuModel.menuData,
-  breadcrumbNameMap: menuModel.breadcrumbNameMap,
 }))(BasicLayout);

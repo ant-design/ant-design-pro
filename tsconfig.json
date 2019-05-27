@@ -9,7 +9,6 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "rootDirs": ["/src", "/test", "/mock", "./typings"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
@@ -21,7 +20,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["./src", "config/defaultSettings.ts"],
   "exclude": [
     "node_modules",
     "build",
