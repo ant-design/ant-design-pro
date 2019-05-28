@@ -109,7 +109,7 @@ const insertBlankLayout = configPath => {
         if (id.name === `Layout`) {
           const JSXFragment = parseCode(`<></>`).expression;
           JSXFragment.children.push({ ...init.body });
-          JSXFragment.children.push(parseCode(` <CopyBlock />`).expression);
+          JSXFragment.children.push(parseCode(` <CopyBlock id={Date.now()}/>`).expression);
           init.body = JSXFragment;
         }
       }
@@ -146,14 +146,11 @@ const insertRightContent = configPath => {
   });
 };
 
-const blankLayoutPath = path.join(__dirname, '../src/layouts/BlankLayout.tsx');
-fs.writeFileSync(blankLayoutPath, insertBlankLayout(blankLayoutPath));
-console.log(`insert ${chalk.hex('#1890ff')('blankLayoutPath')} success`);
-
 module.exports = () => {
   const basicLayoutPath = path.join(__dirname, '../src/layouts/BasicLayout.tsx');
   fs.writeFileSync(basicLayoutPath, insertBasicLayout(basicLayoutPath));
   console.log(`insert ${chalk.hex('#1890ff')('BasicLayout')} success`);
+
   const rightContentPath = path.join(__dirname, '../src/components/GlobalHeader/RightContent.tsx');
   fs.writeFileSync(rightContentPath, insertRightContent(rightContentPath));
   console.log(`insert ${chalk.hex('#1890ff')('RightContent')} success`);

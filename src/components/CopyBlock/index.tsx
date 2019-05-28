@@ -3,6 +3,8 @@ import { Icon, Typography, Popover } from 'antd';
 import styles from './index.less';
 import { connect } from 'dva';
 import * as H from 'history';
+import { FormattedMessage } from 'umi-plugin-react/locale';
+
 const firstUpperCase = (pathString: string) => {
   return pathString
     .replace('.', '')
@@ -32,7 +34,7 @@ export default connect(({ routing }: { routing: RoutingType }) => ({
   const url = location.pathname;
   return (
     <Popover
-      title="下载此页面到本地项目"
+      title={<FormattedMessage id="app.preview.down.block" defaultMessage="下载此页面到本地项目" />}
       placement="topLeft"
       content={<BlockCodeView url={url} />}
       trigger="click"
