@@ -102,7 +102,7 @@ class User extends PureComponent {
   render() {
     const {modalVisible,selectedRow}=this.state;
     return (
-      <PageHeaderWrapper title="用户管理">
+      <PageHeaderWrapper title="用户管理" showBreadcrumb>
         <BindDataQueryTable
           columnSchemas={columnSchemas}
           onRef={this.handleRef}
