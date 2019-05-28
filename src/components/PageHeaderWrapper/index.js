@@ -43,13 +43,14 @@ const PageHeaderWrapper = ({
   title,
   content,
   logo,
+  showBreadcrumb,
   extraContent,
   ...restProps
 }) => {
   return (
     <div style={{ margin: '-24px -24px 0' }} className={classNames(classNames, styles.main)}>
       {top}
-      {title && content && (
+      {((title && content)||showBreadcrumb) && (
         <MenuContext.Consumer>
           {value => {
             return (
