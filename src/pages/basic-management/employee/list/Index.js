@@ -20,6 +20,7 @@ import {
     DatePicker,
     Select,
     Badge,
+    Cascader,
     Popconfirm,
     Divider,
 } from 'antd';
@@ -37,8 +38,9 @@ const getValue = obj =>
 const statusMap = ['success', 'error'];
 const status = ['在职', '离职'];
 
-@connect(({ employee, loading }) => ({
+@connect(({ employee, depart, loading }) => ({
     employee,
+    depart,
     loading: loading.models.employee,
 }))
 @Form.create()
@@ -54,6 +56,10 @@ class employeeList extends PureComponent {
             type: 'employee/fetch',
             payload: {},
         });
+        dispatch({
+            type: 'depart/fetch',
+            payload: {}
+        })
     }
 
     handleStandardTableChange = (pagination, filtersArg, sorter) => {
@@ -220,7 +226,7 @@ class employeeList extends PureComponent {
         console.log(record);
         const { dispatch } = this.props;
         dispatch({
-            type: 'user/delete',
+            type: 'employee/delete',
             payload: record.id,
         });
     };
@@ -229,48 +235,11 @@ class employeeList extends PureComponent {
         router.push('/basic-management/employee/add');
     };
 
-    disableUserConfirm = () => {
-        const that = this;
-        Modal.confirm({
-            title: '你确定要禁用此账号?',
-            content: '禁用账号后，此账号不可登陆系统!',
-            onOk() {
-                that.disableUser();
-            },
-            onCancel() {
-                console.log('Cancel');
-            },
-        });
-    };
-
-    disableUser = () => {
-        const { dispatch } = this.props;
-        const { selectedRows } = this.state;
-        const rows = [];
-        selectedRows.forEach(row => {
-            rows.push({
-                id: row.id,
-            });
-        });
-        console.log(rows);
-        dispatch({
-            type: 'user/disable',
-            payload: selectedRows,
-        });
-    };
-
     handleMenuClick = e => {
         console.log(e);
         const { selectedRows } = this.state;
         if (selectedRows.length === 0) return;
         switch (e.key) {
-            case 'roleAuth':
-                break;
-            case 'resetPassword':
-                break;
-            case 'disable':
-                this.disableUserConfirm();
-                break;
             case 'active':
                 break;
             default:
@@ -292,7 +261,7 @@ class employeeList extends PureComponent {
             formValues: {},
         });
         dispatch({
-            type: 'user/fetch',
+            type: 'employee/fetch',
             payload: {},
         });
     };
@@ -309,8 +278,12 @@ class employeeList extends PureComponent {
             this.setState({
                 formValues: values,
             });
+            if (!values.departId) {
+            } else {
+                values.departId = values.departId[values.departId.length - 1];
+            }
             dispatch({
-                type: 'user/fetch',
+                type: 'employee/fetch',
                 payload: values,
             });
         });
@@ -335,7 +308,12 @@ class employeeList extends PureComponent {
                     </Col>
                     <Col md={6} sm={24}>
                         <FormItem label="性别">
-                            {getFieldDecorator('sex')(<Input placeholder="请输入" size="large" />)}
+                            {getFieldDecorator('sex')(
+                                <Select placeholder="请选择" style={{ width: '100%' }} size="large">
+                                    <Option value="男">男</Option>
+                                    <Option value="女">女</Option>
+                                </Select>
+                            )}
                         </FormItem>
                     </Col>
                     <Col md={6} sm={24}>
@@ -365,6 +343,7 @@ class employeeList extends PureComponent {
     renderAdvancedForm() {
         const {
             form: { getFieldDecorator },
+            depart: { data }
         } = this.props;
         return (
             <Form onSubmit={this.handleSearch} layout="inline" labelAlign="right">
@@ -383,15 +362,14 @@ class employeeList extends PureComponent {
                         <FormItem label="性别">
                             {getFieldDecorator('sex')(
                                 <Select placeholder="请选择" style={{ width: '100%' }} size="large">
-                                    <Option value="0">男</Option>
-                                    <Option value="1">女</Option>
+                                    <Option value="男">男</Option>
+                                    <Option value="女">女</Option>
                                 </Select>
                             )}
                         </FormItem>
                     </Col>
                 </Row>
                 <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-
                     <Col md={8} sm={24}>
                         <FormItem label="状态">
                             {getFieldDecorator('status')(
@@ -399,6 +377,19 @@ class employeeList extends PureComponent {
                                     <Option value="0">在职</Option>
                                     <Option value="1">离职</Option>
                                 </Select>
+                            )}
+                        </FormItem>
+                    </Col>
+                    <Col md={8} sm={24}>
+                        <FormItem label="部门">
+                            {getFieldDecorator('departId')(
+                                <Cascader
+                                    fieldNames={{ label: 'name', value: 'id', children: 'children' }}
+                                    changeOnSelect
+                                    options={data.list}
+                                    placeholder="部门"
+                                    size="large"
+                                />
                             )}
                         </FormItem>
                     </Col>

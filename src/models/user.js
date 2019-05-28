@@ -5,12 +5,14 @@ import {
   updateUser,
   deleteById,
   queryById,
+  disableUser,
+  activeUser,
 } from '@/services/user';
 import { message } from 'antd';
 import router from 'umi/router';
 export default {
   namespace: 'user',
-
+  
   state: {
     data: {
       list: [],
@@ -78,6 +80,18 @@ export default {
         message.error(response.msg);
       }
     },
+    *active({ payload }, { call, put }) {
+      const response = yield call(activeUser, payload);
+      if (response.code === 0) {
+        message.success('操作成功', 2);
+        yield put({
+          type: 'fetch',
+          payload: {},
+        });
+      } else {
+        message.error(response.msg);
+      }
+    },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({
@@ -92,11 +106,11 @@ export default {
       return {
         ...state,
         data: {
-          list: action.payload.data.records,
+          list: action.payload.data.content,
           pagination: {
-            total: action.payload.data.total,
+            total: action.payload.data.totalElements,
             pageSize: action.payload.data.size,
-            current: action.payload.data.current,
+            current: action.payload.data.number,
           },
         },
       };

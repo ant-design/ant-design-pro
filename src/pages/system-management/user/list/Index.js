@@ -54,7 +54,7 @@ class UserList extends PureComponent {
       type: 'user/fetch',
       payload: {},
     });
-  }
+  };
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
@@ -67,7 +67,7 @@ class UserList extends PureComponent {
     }, {});
 
     const params = {
-      page: pagination.current,
+      page: pagination.current - 1,
       pageSize: pagination.pageSize,
       ...formValues,
       ...filters,
@@ -75,7 +75,6 @@ class UserList extends PureComponent {
     if (sorter.field) {
       params.sorter = `${sorter.field}_${sorter.order}`;
     }
-
     dispatch({
       type: 'user/fetch',
       payload: params,
@@ -105,8 +104,8 @@ class UserList extends PureComponent {
       title: '管理员',
       dataIndex: 'isSuperAdmin',
       render(val) {
-        if (val === 1) {
-          return <span style={{ color: 'green' }}>是</span>;
+        if (val === true) {
+          return <span style={{ color: 'red' }}>是</span>;
         } else {
           return '否';
         }
@@ -161,56 +160,6 @@ class UserList extends PureComponent {
     },
   ];
 
-  getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={node => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Button
-          type="primary"
-          onClick={() => this.handleSearch(selectedKeys, confirm)}
-          icon="search"
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          Search
-        </Button>
-        <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-          Reset
-        </Button>
-      </div>
-    ),
-    filterIcon: filtered => (
-      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase()),
-    onFilterDropdownVisibleChange: visible => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select());
-      }
-    },
-    render: text => (
-      <Highlighter
-        highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-        searchWords={[this.state.searchText]}
-        autoEscape
-        textToHighlight={text.toString()}
-      />
-    ),
-  });
-
   handleEdit = record => {
     router.push('/system-management/user/edit/' + record.id);
   };
@@ -242,6 +191,20 @@ class UserList extends PureComponent {
     });
   };
 
+  activeUserConfirm = () => {
+    const that = this;
+    Modal.confirm({
+      title: '你确定要激活此账号?',
+      content: '激活账号后，此账号可登陆系统!',
+      onOk() {
+        that.activeUser();
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
+
   disableUser = () => {
     const { dispatch } = this.props;
     const { selectedRows } = this.state;
@@ -258,6 +221,22 @@ class UserList extends PureComponent {
     });
   };
 
+  activeUser = () => {
+    const { dispatch } = this.props;
+    const { selectedRows } = this.state;
+    const rows = [];
+    selectedRows.forEach(row => {
+      rows.push({
+        id: row.id,
+      });
+    });
+    console.log(rows);
+    dispatch({
+      type: 'user/active',
+      payload: selectedRows,
+    });
+  }
+
   handleMenuClick = e => {
     console.log(e);
     const { selectedRows } = this.state;
@@ -271,6 +250,7 @@ class UserList extends PureComponent {
         this.disableUserConfirm();
         break;
       case 'active':
+        this.activeUserConfirm();
         break;
       default:
         break;

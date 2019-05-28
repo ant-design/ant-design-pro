@@ -1,4 +1,4 @@
-import { addEmployee, query, queryById } from '@/services/employee';
+import { addEmployee, query, queryById,deleteById } from '@/services/employee';
 import { message } from 'antd';
 import router from 'umi/router';
 export default {
@@ -65,11 +65,11 @@ export default {
             return {
                 ...state,
                 data: {
-                    list: action.payload.data.records,
+                    list: action.payload.data.content,
                     pagination: {
-                        total: action.payload.data.total,
+                        total: action.payload.data.totalElements,
                         pageSize: action.payload.data.size,
-                        current: action.payload.data.current,
+                        current: action.payload.data.number,
                     },
                 },
             };

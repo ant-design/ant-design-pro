@@ -63,11 +63,11 @@ export default {
       return {
         ...state,
         data: {
-          list: action.payload.data.records,
+          list: action.payload.data.content,
           pagination: {
-            total: action.payload.data.total,
+            total: action.payload.data.totalElements,
             pageSize: action.payload.data.size,
-            current: action.payload.data.current,
+            current: action.payload.data.number,
           },
         },
       };

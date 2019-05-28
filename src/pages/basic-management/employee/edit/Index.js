@@ -157,7 +157,7 @@ class employeeEdit extends PureComponent {
                             </FormItem>
                             <FormItem label="所属部门">
                                 {getFieldDecorator('departId', {
-                                    initialValue:[employee.departId],
+                                    initialValue: employee.departs,
                                     rules: [
                                         {
                                             required: true,
@@ -176,7 +176,7 @@ class employeeEdit extends PureComponent {
                             </FormItem>
                             <FormItem label="在职状态">
                                 {getFieldDecorator('status', {
-                                    initialValue: employee.status,
+                                    initialValue: employee.status + '',
                                     rules: [
                                         {
                                             required: true,
@@ -185,7 +185,7 @@ class employeeEdit extends PureComponent {
                                     ],
                                 })(
                                     <Select placeholder="请选择" style={{ width: '100%' }} size="large">
-                                        <Option value="0">在职</Option>
+                                        <Option value="0" >在职</Option>
                                         <Option value="1">离职</Option>
                                     </Select>
                                 )}
