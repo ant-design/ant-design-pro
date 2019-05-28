@@ -61,13 +61,7 @@ const insertBasicLayout = configPath => {
     const index = body.findIndex(item => {
       return item.type !== 'ImportDeclaration';
     });
-    // 从组件中导入 CopyBlock
-    body.splice(
-      index,
-      0,
-      parseCode(`import CopyBlock from '@/components/CopyBlock';
-    `),
-    );
+
     body.forEach(item => {
       // 从包中导出 SettingDrawer
       if (item.type === 'ImportDeclaration') {
@@ -87,7 +81,6 @@ const insertBasicLayout = configPath => {
               const JSXFragment = parseCode(`<></>`).expression;
               JSXFragment.children.push({ ...node.argument });
               JSXFragment.children.push(parseCode(SettingCodeString).expression);
-              JSXFragment.children.push(parseCode(` <CopyBlock />`).expression);
               node.argument = JSXFragment;
             }
           });
@@ -96,6 +89,34 @@ const insertBasicLayout = configPath => {
     });
   });
 };
+
+const insertBlankLayout = configPath => {
+  return mapAst(configPath, body => {
+    const index = body.findIndex(item => {
+      return item.type !== 'ImportDeclaration';
+    });
+    // 从组件中导入 CopyBlock
+    body.splice(
+      index,
+      0,
+      parseCode(`import CopyBlock from '@/components/CopyBlock';
+    `),
+    );
+    body.forEach(item => {
+      if (item.type === 'VariableDeclaration') {
+        const { id, init } = item.declarations[0];
+        // 给 BasicLayout 中插入 button 和 设置抽屉
+        if (id.name === `Layout`) {
+          const JSXFragment = parseCode(`<></>`).expression;
+          JSXFragment.children.push({ ...init.body });
+          JSXFragment.children.push(parseCode(` <CopyBlock />`).expression);
+          init.body = JSXFragment;
+        }
+      }
+    });
+  });
+};
+
 const insertRightContent = configPath => {
   return mapAst(configPath, body => {
     const index = body.findIndex(item => {
@@ -125,12 +146,19 @@ const insertRightContent = configPath => {
   });
 };
 
+const blankLayoutPath = path.join(__dirname, '../src/layouts/BlankLayout.tsx');
+fs.writeFileSync(blankLayoutPath, insertBlankLayout(blankLayoutPath));
+console.log(`insert ${chalk.hex('#1890ff')('blankLayoutPath')} success`);
+
 module.exports = () => {
   const basicLayoutPath = path.join(__dirname, '../src/layouts/BasicLayout.tsx');
   fs.writeFileSync(basicLayoutPath, insertBasicLayout(basicLayoutPath));
   console.log(`insert ${chalk.hex('#1890ff')('BasicLayout')} success`);
-
   const rightContentPath = path.join(__dirname, '../src/components/GlobalHeader/RightContent.tsx');
   fs.writeFileSync(rightContentPath, insertRightContent(rightContentPath));
   console.log(`insert ${chalk.hex('#1890ff')('RightContent')} success`);
+
+  const blankLayoutPath = path.join(__dirname, '../src/layouts/BlankLayout.tsx');
+  fs.writeFileSync(blankLayoutPath, insertBlankLayout(blankLayoutPath));
+  console.log(`insert ${chalk.hex('#1890ff')('blankLayoutPath')} success`);
 };
