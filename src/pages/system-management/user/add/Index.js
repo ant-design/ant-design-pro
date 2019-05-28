@@ -223,7 +223,7 @@ class UserAdd extends PureComponent {
         </Card>
       </PageHeaderWrapper>
     );
-  }
+  };
 }
 
 export default UserAdd;

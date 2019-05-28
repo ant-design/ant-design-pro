@@ -37,6 +37,59 @@ const getValue = obj =>
 const statusMap = ['success', 'error'];
 const status = ['正常', '禁用'];
 
+
+const CreateForm = Form.create()(props => {
+  const { modalVisible, confirmDirty, form, handleResetPassword, handleConfirmBlur, handleModalVisible } = props;
+  const okHandle = () => {
+    form.validateFields((err, fieldsValue) => {
+      if (err) return;
+      handleResetPassword(fieldsValue);
+    });
+  };
+
+  const validateToNextPassword = (rule, value, callback) => {
+    if (value && confirmDirty) {
+      form.validateFields(['confirm'], { force: true });
+    }
+    callback();
+  };
+
+  const compareToFirstPassword = (rule, value, callback) => {
+    if (value && value !== form.getFieldValue('password')) {
+      callback('确认密码不一致!');
+    } else {
+      callback();
+    }
+  };
+
+  const confirmBlur = e => {
+    const value = e.target.value;
+    handleConfirmBlur(value);
+  };
+
+  return (
+    <Modal
+      destroyOnClose
+      title="重置密码"
+      visible={modalVisible}
+      onOk={okHandle}
+      onCancel={() => handleModalVisible()}
+    >
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="密码">
+        {form.getFieldDecorator('password', {
+          rules: [{ required: true, message: '请输入密码' }, { validator: validateToNextPassword }],
+        })(<Input.Password size="large" placeholder="请输入" />)}
+      </FormItem>
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="确认密码">
+        {form.getFieldDecorator('confirm', {
+          rules: [{ required: true, message: '请输入确认密码' }, { validator: compareToFirstPassword }],
+        })(<Input.Password size="large" onBlur={confirmBlur} placeholder="请输入" />)}
+      </FormItem>
+    </Modal>
+  );
+});
+
+
 @connect(({ user, loading }) => ({
   user,
   loading: loading.models.user,
@@ -46,6 +99,8 @@ class UserList extends PureComponent {
   state = {
     selectedRows: [],
     expandForm: false,
+    modalVisible: false,
+    confirmDirty: false,
   };
 
   componentDidMount() {
@@ -54,6 +109,34 @@ class UserList extends PureComponent {
       type: 'user/fetch',
       payload: {},
     });
+  };
+
+  handleModalVisible = flag => {
+    this.setState({
+      modalVisible: !!flag,
+    });
+  };
+
+  handleConfirmBlur = value => {
+    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  };
+
+  handleResetPassword = values => {
+    const { dispatch } = this.props;
+    const { selectedRows } = this.state;
+    const rows = [];
+    selectedRows.forEach(row => {
+      rows.push({
+        id: row.id,
+        password:values.password,
+      });
+    });
+    console.log(rows);
+    dispatch({
+      type: 'user/modifyPassword',
+      payload: rows,
+    });
+    this.handleModalVisible()
   };
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
@@ -175,7 +258,7 @@ class UserList extends PureComponent {
 
   handleAdd() {
     router.push('/system-management/user/add');
-  }
+  };
 
   disableUserConfirm = () => {
     const that = this;
@@ -203,7 +286,7 @@ class UserList extends PureComponent {
         console.log('Cancel');
       },
     });
-  }
+  };
 
   disableUser = () => {
     const { dispatch } = this.props;
@@ -235,7 +318,7 @@ class UserList extends PureComponent {
       type: 'user/active',
       payload: selectedRows,
     });
-  }
+  };
 
   handleMenuClick = e => {
     console.log(e);
@@ -245,6 +328,7 @@ class UserList extends PureComponent {
       case 'roleAuth':
         break;
       case 'resetPassword':
+        this.handleModalVisible(true);
         break;
       case 'disable':
         this.disableUserConfirm();
@@ -339,7 +423,7 @@ class UserList extends PureComponent {
         </Row>
       </Form>
     );
-  }
+  };
 
   renderAdvancedForm() {
     const {
@@ -407,27 +491,32 @@ class UserList extends PureComponent {
         </Row>
       </Form>
     );
-  }
+  };
 
   renderForm() {
     const { expandForm } = this.state;
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
-  }
+  };
 
   render() {
     const {
       user: { data },
       loading,
     } = this.props;
-    const { selectedRows } = this.state;
+    const { selectedRows, modalVisible, confirmDirty } = this.state;
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
-        <Menu.Item key="roleAuth">角色分配</Menu.Item>
+        <Menu.Item key="roleAuth">角色授权</Menu.Item>
         <Menu.Item key="resetPassword">重置密码</Menu.Item>
         <Menu.Item key="disable">禁用</Menu.Item>
         <Menu.Item key="active">激活</Menu.Item>
       </Menu>
     );
+    const parentMethods = {
+      handleResetPassword: this.handleResetPassword,
+      handleConfirmBlur: this.handleConfirmBlur,
+      handleModalVisible: this.handleModalVisible,
+    };
     return (
       <PageHeaderWrapper>
         <Card bordered={false}>
@@ -461,9 +550,10 @@ class UserList extends PureComponent {
             />
           </div>
         </Card>
+        <CreateForm {...parentMethods} modalVisible={modalVisible} confirmDirty={confirmDirty} />
       </PageHeaderWrapper>
     );
-  }
+  };
 }
 
 export default UserList;

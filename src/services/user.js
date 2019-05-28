@@ -47,6 +47,13 @@ export async function activeUser(params) {
   });
 }
 
+export async function modifyPassword(params) {
+  return request('/api/v1/user/modifyPassword', {
+    method: 'POST',
+    data: params,
+  });
+}
+
 export async function queryCurrent() {
   return request('/api/v1/auth/currentUser');
 }

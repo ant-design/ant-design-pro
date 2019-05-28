@@ -7,12 +7,13 @@ import {
   queryById,
   disableUser,
   activeUser,
+  modifyPassword,
 } from '@/services/user';
 import { message } from 'antd';
 import router from 'umi/router';
 export default {
   namespace: 'user',
-  
+
   state: {
     data: {
       list: [],
@@ -82,6 +83,18 @@ export default {
     },
     *active({ payload }, { call, put }) {
       const response = yield call(activeUser, payload);
+      if (response.code === 0) {
+        message.success('操作成功', 2);
+        yield put({
+          type: 'fetch',
+          payload: {},
+        });
+      } else {
+        message.error(response.msg);
+      }
+    },
+    *modifyPassword({ payload }, { call, put }) {
+      const response = yield call(modifyPassword, payload);
       if (response.code === 0) {
         message.success('操作成功', 2);
         yield put({
