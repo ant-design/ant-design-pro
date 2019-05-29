@@ -19,6 +19,8 @@
 
 ## 特性
 
+- :bulb: **TypeScript**: 应用程序级 JavaScript 的语言
+- :scroll: **区块**: 通过区块模板快速构建页面
 - :gem: **优雅美观**：基于 Ant Design 体系精心设计
 - :triangular_ruler: **常见设计模式**：提炼自中后台应用的典型页面和场景
 - :rocket: **最新技术栈**：使用 React/umi/dva/antd 等前端前沿技术开发
