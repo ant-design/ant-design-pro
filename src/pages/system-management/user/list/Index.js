@@ -17,6 +17,7 @@ import {
   Avatar,
   Modal,
   Form,
+  message,
   DatePicker,
   Select,
   Badge,
@@ -35,7 +36,7 @@ const getValue = obj =>
     .map(key => obj[key])
     .join(',');
 const statusMap = ['success', 'error'];
-const status = ['正常', '禁用'];
+const status = ['启用', '禁用'];
 
 
 const CreateForm = Form.create()(props => {
@@ -128,7 +129,7 @@ class UserList extends PureComponent {
     selectedRows.forEach(row => {
       rows.push({
         id: row.id,
-        password:values.password,
+        password: values.password,
       });
     });
     console.log(rows);
@@ -326,6 +327,15 @@ class UserList extends PureComponent {
     if (selectedRows.length === 0) return;
     switch (e.key) {
       case 'roleAuth':
+        if (selectedRows.length === 1) {
+          if(selectedRows[0].isSuperAdmin === true){
+            message.error('不能对系统超级管理员进行角色授权!');
+          }else{
+            router.push('/system-management/user/roleAuth/' + selectedRows[0].id);
+          }
+        } else {
+          message.error('请选择一个用户进行角色授权!');
+        }
         break;
       case 'resetPassword':
         this.handleModalVisible(true);

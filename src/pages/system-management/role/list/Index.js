@@ -97,12 +97,12 @@ class RoleList extends PureComponent {
   };
   columns = [
     {
-      title: '角色编码',
-      dataIndex: 'roleCode',
-    },
-    {
       title: '角色名称',
       dataIndex: 'roleName',
+    },
+    {
+      title: '角色编码',
+      dataIndex: 'roleCode',
     },
     {
       title: '角色描述',

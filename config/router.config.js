@@ -88,6 +88,12 @@ export default [
             component: './system-management/user/edit/Index',
           },
           {
+            hideInMenu: true,
+            path: '/system-management/user/roleAuth/:userId',
+            name: 'user-roleAuth',
+            component: './system-management/user/roleAuth/Index',
+          },
+          {
             path: '/system-management/role/list',
             name: 'role-list',
             component: './system-management/role/list/Index',

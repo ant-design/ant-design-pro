@@ -14,6 +14,7 @@ export default {
   'menu.system-management.user-list': '用户管理',
   'menu.system-management.user-add': '用户新增',
   'menu.system-management.user-edit': '用户编辑',
+  'menu.system-management.user-roleAuth': '用户角色分配',
   'menu.system-management.role-list': '角色管理',
   'menu.system-management.role-add': '角色新增',
   'menu.system-management.role-edit': '角色编辑',
