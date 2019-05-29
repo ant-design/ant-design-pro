@@ -86,13 +86,13 @@ class TableList extends PureComponent {
     payload.data.info = {
       pageNo: 1,
       pageSize: 10,
-      userId: userId,
+      userId,
     };
     dispatch({
       type: 'apiGatewayModel/apiList',
       payload,
     });
-    //分组列表
+    // 分组列表
     dispatch({
       type: 'groupModel/allGroupList',
     });
@@ -254,6 +254,7 @@ class TableList extends PureComponent {
       },
     });
   };
+
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
@@ -374,7 +375,7 @@ class TableList extends PureComponent {
       payload.data.info = {
         pageNo: 1,
         pageSize: 10,
-        userId: userId,
+        userId,
         ...filters,
         ...values,
         ...sorter,
@@ -640,7 +641,7 @@ class TableList extends PureComponent {
             placement="right"
             closable={false}
             onClose={this.onClose}
-            visible={this.state.drawerVisible}
+            visible={drawerVisible}
           />
         </Card>
       </PageHeaderWrapper>
