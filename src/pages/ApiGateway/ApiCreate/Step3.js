@@ -6,7 +6,8 @@ import styles from './style.less';
 import { getPayload } from './util';
 import SelectView from '../SelectView';
 import RadioView from '../RadioView';
-import OrgSelectView from "../OrgSelectView";
+import OrgSelectView from '../OrgSelectView';
+import { getUserId } from '@/utils/authority';
 
 const formItemLayout = {
   labelCol: {
@@ -23,12 +24,13 @@ const formItemLayout = {
 }))
 @Form.create()
 class Step3 extends React.PureComponent {
-
-
   render() {
     const { form, apiService, dispatch, submitting } = this.props;
     // console.log("apiService.apiServiceBackends:",apiService.apiServiceBackends);
-    const data = apiService.apiServiceBackends&&apiService.apiServiceBackends.length>0?apiService.apiServiceBackends[0]:{};
+    const data =
+      apiService.apiServiceBackends && apiService.apiServiceBackends.length > 0
+        ? apiService.apiServiceBackends[0]
+        : {};
     const { getFieldDecorator, validateFields } = form;
     const onPrev = () => {
       router.push('/apiGateway/apiCreate/consumer');
@@ -36,10 +38,10 @@ class Step3 extends React.PureComponent {
     const onValidateForm = e => {
       e.preventDefault();
       validateFields((err, values) => {
-        const apiServiceBackend={...data, ...values,};
-        const apiServiceBackends=[apiServiceBackend];
-        apiService.apiServiceBackends=apiServiceBackends;
-        const apiInfo = getPayload(1,apiService);
+        const apiServiceBackend = { ...data, ...values };
+        const apiServiceBackends = [apiServiceBackend];
+        apiService.apiServiceBackends = apiServiceBackends;
+        const apiInfo = getPayload(1, apiService);
         // console.log(apiService);
         if (!err) {
           dispatch({
@@ -49,7 +51,9 @@ class Step3 extends React.PureComponent {
         }
       });
     };
+    const userId = getUserId(); // 获取当前登录用户编号
     // // console.log("step3 data:",data);
+    // console.log('userId',getUserId());
     return (
       <Form layout="horizontal" className={styles.stepForm}>
         <Form.Item {...formItemLayout} className={styles.stepFormText} label="api名称：">
@@ -62,7 +66,7 @@ class Step3 extends React.PureComponent {
         <Form.Item {...formItemLayout} label="服务提供者">
           {getFieldDecorator('orgId', {
             rules: [{ required: true, message: '请选择服务提供者' }],
-          })(<OrgSelectView orgType="0,2" />)}
+          })(<OrgSelectView orgType="0,1" userId={userId} />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="提供方服务类型">
           {getFieldDecorator('serviceType', {

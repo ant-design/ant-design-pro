@@ -9,10 +9,11 @@ const { Option } = Select;
 }))
 class OrgSelectView extends PureComponent {
   componentDidMount = () => {
-    const { dispatch,orgType } = this.props;
+    const { dispatch, orgType, userId } = this.props;
+    // console.log("userId",userId);
     dispatch({
       type: 'orgModel/allOrgList',
-      payload: {orgType},
+      payload: { orgType: orgType, userId: userId },
     });
   };
 

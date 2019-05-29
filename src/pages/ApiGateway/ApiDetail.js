@@ -16,8 +16,12 @@ import { getUserId } from '@/utils/authority';
 // import RoleTransfer from "../UserManager/Privilege";
 // import apiFlowData from '../Editor/GGEditor/mock/apiFlow.json';
 
+import DescriptionList from '@/components/DescriptionList';
+import { getGroupName, getItemValue, getItemValue2 } from '@/utils/masterData';
+
 const { TabPane } = Tabs;
 const forms = ['front', 'back', 'backAttr'];
+const { Description } = DescriptionList;
 
 const fieldLabels = {
   front: {
@@ -76,12 +80,13 @@ const fieldLabels = {
 //   },
 // ];
 
-@connect(({ apiCreateModel, loading }) => ({
+@connect(({ apiCreateModel, groupModel, loading }) => ({
   apiService: apiCreateModel.apiService,
+  groupList: groupModel.groupList,
   submitting: loading.effects['apiCreateModel/submitStepForm'],
 }))
 @Form.create()
-class ApiUpdate extends PureComponent {
+class ApiDetail extends PureComponent {
   state = {
     width: '100%',
     apiFlowData: {},
@@ -90,11 +95,15 @@ class ApiUpdate extends PureComponent {
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
 
-    const { location } = this.props;
+    const { location, dispatch } = this.props;
     const { state } = location;
     // console.log("location state:",state);
     const { apiId } = state || { apiId: 105 };
     this.getApi(apiId);
+    //分组列表
+    dispatch({
+      type: 'groupModel/allGroupList',
+    });
   }
 
   componentWillUnmount() {
@@ -287,9 +296,12 @@ class ApiUpdate extends PureComponent {
       form: { getFieldDecorator, getFieldValue },
       submitting,
       apiService,
+      groupList,
     } = this.props;
+    console.log('apidetails:render-this.props', this.props);
     const { width, apiFlowData } = this.state;
     const userId = getUserId();
+
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
     const apiServiceBackendMembers =
       apiService && apiService.apiServiceBackends
@@ -299,94 +311,23 @@ class ApiUpdate extends PureComponent {
     return (
       <PageHeaderWrapper>
         <Card title="定义请求信息" className={styles.card} bordered={false}>
-          <Form layout="vertical" hideRequiredMark>
-            <Row gutter={2}>
-              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
-                <Form.Item label={fieldLabels.front.groupId}>
-                  {getFieldDecorator('front.groupId', {
-                    rules: [{ required: true, message: '请选择分组' }],
-                  })(<GroupSelectView />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 6, offset: 2 }}
-                lg={{ span: 8 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.front.name}>
-                  {getFieldDecorator('front.name', {
-                    rules: [{ required: true, message: 'Please input api name' }],
-                  })(<Input placeholder="Please input api name" />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 6, offset: 2 }}
-                lg={{ span: 8 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.front.requestUrl}>
-                  {getFieldDecorator('front.requestUrl', {
-                    rules: [{ required: true, message: '请选择' }],
-                  })(<Input style={{ width: '100%' }} placeholder="请输入" />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={2}>
-              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
-                <Form.Item label={fieldLabels.front.serviceType}>
-                  {getFieldDecorator('front.serviceType', {
-                    rules: [{ required: true, message: '请选择serviceType' }],
-                  })(<SelectView javaCode="apiService" javaKey="service_type" />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 6, offset: 2 }}
-                lg={{ span: 8 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.front.reqMethod}>
-                  {getFieldDecorator('front.reqMethod', {
-                    rules: [{ required: true, message: '请选择HTTP Method' }],
-                  })(<SelectView javaCode="common" javaKey="req_method" />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 6, offset: 2 }}
-                lg={{ span: 8 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.front.protocol}>
-                  {getFieldDecorator('front.protocol', {
-                    rules: [{ required: true, message: '请选择协议' }],
-                  })(<SelectView javaCode="apiService" javaKey="protocol" />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={2}>
-              <Col lg={6} md={12} sm={24} style={{ height: 50 }}>
-                <Form.Item label={fieldLabels.front.apiType}>
-                  {getFieldDecorator('front.apiType', {
-                    initialValue: apiService.apiType,
-                    rules: [{ required: true, message: '请选择服务类型' }],
-                  })(<RadioView javaCode="apiService" javaKey="api_type" />)}
-                </Form.Item>
-              </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                <span />
-              </Col>
-              <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
-                <span />
-              </Col>
-            </Row>
-          </Form>
+          <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
+            <Description term={fieldLabels.front.groupId}>
+              {getGroupName(groupList, apiService.groupId)}
+            </Description>
+            <Description term={fieldLabels.front.name}>{apiService.name}</Description>
+            <Description term={fieldLabels.front.requestUrl}>{apiService.requestUrl}</Description>
+            <Description term={fieldLabels.front.serviceType}>
+              {getItemValue('apiService', 'service_type', apiService.serviceType)}
+            </Description>
+            <Description term={fieldLabels.front.reqMethod}>
+              {getItemValue('common', 'req_method', apiService.reqMethod)}
+            </Description>
+            <Description term={fieldLabels.front.protocol}>{apiService.protocol}</Description>
+            <Description term={fieldLabels.front.apiType}>
+              {getItemValue('apiService', 'api_type', apiService.apiType)}
+            </Description>
+          </DescriptionList>
         </Card>
         <Card title="落地方服务信息" className={styles.card} bordered={false}>
           <Form layout="vertical" hideRequiredMark>
@@ -465,7 +406,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.back.orgId}>
                   {getFieldDecorator('back.orgId', {
                     rules: [{ required: true, message: `请选择${fieldLabels.back.orgId}` }],
-                  })(<OrgSelectView orgType="0,1" userId={userId} />)}
+                  })(<OrgSelectView orgType="0,2" userId={userId} />)}
                 </Form.Item>
               </Col>
               <Col
@@ -737,9 +678,8 @@ class ApiUpdate extends PureComponent {
 
         <BackTop />
         <FooterToolbar style={{ width }}>
-          {this.getErrorInfo()}
-          <Button type="primary" onClick={this.validate} loading={submitting}>
-            提交
+          <Button type="primary" onClick={this.returnPage}>
+            返回
           </Button>
         </FooterToolbar>
       </PageHeaderWrapper>
@@ -747,4 +687,4 @@ class ApiUpdate extends PureComponent {
   }
 }
 
-export default ApiUpdate;
+export default ApiDetail;
