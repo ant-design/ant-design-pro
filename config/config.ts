@@ -4,6 +4,8 @@ import slash from 'slash2';
 import { IPlugin, IConfig } from 'umi-types';
 import defaultSettings from './defaultSettings';
 import webpackPlugin from './plugin.config';
+import dartTheme from './dartConfig';
+
 const { pwa, primaryColor } = defaultSettings;
 
 // preview.pro.ant.design only do not use in your production ;
@@ -116,6 +118,7 @@ export default {
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': primaryColor,
+    ...dartTheme,
   },
   // proxy: {
   //   '/server/api/': {
