@@ -65,7 +65,7 @@
     "memoize-one": "^5.0.0",
     "moment": "^2.22.2",
     "omit.js": "^1.0.0",
-    "path-to-regexp": "^2.4.0",
+    "path-to-regexp": "^3.0.0",
     "prop-types": "^15.7.2",
     "qs": "^6.7.0",
     "rc-animate": "^2.4.4",
