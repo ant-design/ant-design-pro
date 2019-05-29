@@ -55,6 +55,6 @@ export default {
     locale: true,
   },
   title: 'Ant Design Pro',
-  pwa: true,
+  pwa: false,
   iconfontUrl: '',
 } as DefaultSettings;
