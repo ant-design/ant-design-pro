@@ -94,7 +94,7 @@ const installBlock = async () => {
       console.log('install ' + chalk.green(item.name) + ' to: ' + chalk.yellow(item.path));
       gitFiles = gitFiles.filter(file => file.path !== gitPath);
       const skipModifyRouter = item.routes ? '--skip-modify-routes' : '';
-      const cmd = `umi block add https://github.com/ant-design/pro-blocks/tree/master/${gitPath}   --path=${
+      const cmd = `umi block add https://github.com/ant-design/pro-blocks/tree/master/${gitPath}  --path=${
         item.path
       } ${skipModifyRouter}`;
       try {
@@ -123,7 +123,7 @@ const installBlock = async () => {
   // 安装 router 中没有的剩余区块.
   installGitFile(0);
 };
-installBlock();
-
-// 插入 pro 需要的演示代码
-insertCode();
+installBlock().then(() => {
+  // 插入 pro 需要的演示代码
+  insertCode();
+});
