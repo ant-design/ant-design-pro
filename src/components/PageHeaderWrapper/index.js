@@ -43,7 +43,7 @@ const PageHeaderWrapper = ({
   title,
   content,
   logo,
-  showBreadcrumb,
+  showBreadcrumb, // 强制现实导航条
   extraContent,
   ...restProps
 }) => {
