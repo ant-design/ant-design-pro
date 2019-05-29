@@ -594,7 +594,7 @@ class TableList extends PureComponent {
     const rowKey = 'apiId';
     const columns = this.getColumns();
     return (
-      <PageHeaderWrapper>
+      <PageHeaderWrapper showBreadcrumb style={{height:'50px'}}>
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
