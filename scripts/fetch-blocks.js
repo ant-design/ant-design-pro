@@ -94,7 +94,7 @@ const installBlock = async () => {
       console.log('install ' + chalk.green(item.name) + ' to: ' + chalk.yellow(item.path));
       gitFiles = gitFiles.filter(file => file.path !== gitPath);
       const skipModifyRouter = item.routes ? '--skip-modify-routes' : '';
-      const cmd = `umi block add https://github.com/ant-design/pro-blocks/tree/master/${gitPath} --npm-client=cnpm  --path=${
+      const cmd = `umi block add https://github.com/ant-design/pro-blocks/tree/master/${gitPath}   --path=${
         item.path
       } ${skipModifyRouter}`;
       try {
