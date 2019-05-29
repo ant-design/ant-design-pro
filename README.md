@@ -27,6 +27,8 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 
 ## Features
 
+- :bulb: **TypeScript**: A language for application-scale JavaScript
+- :scroll: **Blocks**: Build page with block template
 - :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
 - :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd
