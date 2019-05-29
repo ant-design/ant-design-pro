@@ -24,7 +24,7 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'manager','user'] },
+      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'manager', 'user'] },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -54,6 +54,12 @@ export default [
             path: '/apiGateway/apiUpdate',
             name: 'apiUpdate',
             component: './ApiGateway/ApiUpdate',
+          },
+          {
+            path: '/apiGateway/apiDetail',
+            name: 'apiDetail',
+            hideInMenu: true,
+            component: './ApiGateway/ApiDetail',
           },
           {
             path: '/apiGateway/apiCreate',
