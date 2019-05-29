@@ -1,0 +1,29 @@
+.copy-block {
+  position: fixed;
+  right: 80px;
+  bottom: 40px;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  background: #fff;
+  border-radius: 40px;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.copy-block-view {
+  position: relative;
+  .copy-block-code {
+    display: inline-block;
+    margin: 0 0.2em;
+    padding: 0.2em 0.4em 0.1em;
+    font-size: 85%;
+    border-radius: 3px;
+  }
+}

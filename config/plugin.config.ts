@@ -4,7 +4,7 @@ import MergeLessPlugin from 'antd-pro-merge-less';
 import AntDesignThemePlugin from 'antd-theme-webpack-plugin';
 import path from 'path';
 
-function getModulePackageName(module) {
+function getModulePackageName(module: { context: string }) {
   if (!module.context) return null;
 
   const nodeModulesPath = path.join(__dirname, '../node_modules/');
@@ -14,16 +14,16 @@ function getModulePackageName(module) {
 
   const moduleRelativePath = module.context.substring(nodeModulesPath.length);
   const [moduleDirName] = moduleRelativePath.split(path.sep);
-  let packageName = moduleDirName;
+  let packageName: string | null = moduleDirName;
   // handle tree shaking
-  if (packageName.match('^_')) {
+  if (packageName && packageName.match('^_')) {
     // eslint-disable-next-line prefer-destructuring
-    packageName = packageName.match(/^_(@?[^@]+)/)[1];
+    packageName = packageName.match(/^_(@?[^@]+)/)![1];
   }
   return packageName;
 }
 
-export default config => {
+export default (config: any) => {
   // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
   if (
     process.env.ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site' ||
@@ -62,18 +62,19 @@ export default config => {
       minSize: 0,
       cacheGroups: {
         vendors: {
-          test: module => {
+          test: (module: { context: string }) => {
             const packageName = getModulePackageName(module);
             if (packageName) {
               return ['bizcharts', '@antv_data-set'].indexOf(packageName) >= 0;
             }
             return false;
           },
-          name(module) {
+          name(module: { context: string }) {
             const packageName = getModulePackageName(module);
-
-            if (['bizcharts', '@antv_data-set'].indexOf(packageName) >= 0) {
-              return 'viz'; // visualization package
+            if (packageName) {
+              if (['bizcharts', '@antv_data-set'].indexOf(packageName) >= 0) {
+                return 'viz'; // visualization package
+              }
             }
             return 'misc';
           },

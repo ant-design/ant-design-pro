@@ -33,7 +33,7 @@ describe('Homepage', () => {
     jest.setTimeout(1000000);
     await page.setCacheEnabled(false);
   });
-  const routers = formatter(RouterConfig[1].routes);
+  const routers = formatter(RouterConfig);
   routers.forEach(route => {
     it(`test pages ${route}`, testPage(route));
   });

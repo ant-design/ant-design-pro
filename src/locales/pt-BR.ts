@@ -10,7 +10,7 @@ export default {
   'layout.user.link.help': 'ajuda',
   'layout.user.link.privacy': 'política de privacidade',
   'layout.user.link.terms': 'termos de serviços',
-  'app.home.introduce': 'introduzir',
+  'app.preview.down.block': 'Download this page to your local project',
   ...globalHeader,
   ...menu,
   ...settingDrawer,
