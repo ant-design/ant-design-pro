@@ -6,8 +6,8 @@ export interface SettingModelType {
   namespace: 'settings';
   state: DefaultSettings;
   reducers: {
-    getSetting: Reducer<any>;
-    changeSetting: Reducer<any>;
+    getSetting: Reducer<DefaultSettings>;
+    changeSetting: Reducer<DefaultSettings>;
   };
 }
 let lessNodesAppended: boolean;
@@ -72,7 +72,7 @@ const updateTheme: (primaryColor?: string) => void = primaryColor => {
   }
 };
 
-const updateColorWeak: (colorWeak: string) => void = colorWeak => {
+const updateColorWeak: (colorWeak: boolean) => void = colorWeak => {
   const root = document.getElementById('root');
   if (root) {
     root.className = colorWeak ? 'colorWeak' : '';
@@ -83,8 +83,8 @@ const SettingModel: SettingModelType = {
   namespace: 'settings',
   state: defaultSettings,
   reducers: {
-    getSetting(state) {
-      const setting: any = {};
+    getSetting(state = defaultSettings) {
+      const setting: Partial<DefaultSettings> = {};
       const urlParams = new URL(window.location.href);
       Object.keys(state).forEach(key => {
         if (urlParams.searchParams.has(key)) {
@@ -97,13 +97,13 @@ const SettingModel: SettingModelType = {
       if (state.primaryColor !== primaryColor) {
         updateTheme(primaryColor);
       }
-      updateColorWeak(colorWeak);
+      updateColorWeak(!!colorWeak);
       return {
         ...state,
         ...setting,
       };
     },
-    changeSetting(state, { payload }) {
+    changeSetting(state = defaultSettings, { payload }) {
       const urlParams = new URL(window.location.href);
       Object.keys(defaultSettings).forEach(key => {
         if (urlParams.searchParams.has(key)) {

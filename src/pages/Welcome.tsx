@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Welcome = () => (
+export default () => (
   <p style={{ textAlign: 'center' }}>
     想要添加更多页面？请参考{' '}
     <a href="https://umijs.org/guide/block.html" target="_blank" rel="noopener noreferrer">
@@ -9,5 +9,3 @@ const Welcome = () => (
     。
   </p>
 );
-Welcome.title = '欢迎使用';
-export default Welcome;

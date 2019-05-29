@@ -1,28 +1,25 @@
 import { routerRedux } from 'dva/router';
-import { Reducer } from 'redux';
+import { Reducer, AnyAction } from 'redux';
 import { EffectsCommandMap } from 'dva';
-import { AnyAction } from 'redux';
 import { stringify, parse } from 'qs';
 
 export function getPageQuery() {
   return parse(window.location.href.split('?')[1]);
 }
 
-export interface IStateType {}
-
 export type Effect = (
   action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: IStateType) => T) => T },
+  effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
 ) => void;
 
 export interface ModelType {
   namespace: string;
-  state: IStateType;
+  state: {};
   effects: {
     logout: Effect;
   };
   reducers: {
-    changeLoginStatus: Reducer<IStateType>;
+    changeLoginStatus: Reducer<{}>;
   };
 }
 

@@ -33,7 +33,7 @@ const SettingCodeString = `
   <SettingDrawer
     settings={settings}
     onSettingChange={config =>
-    dispatch!({
+    dispatch({
         type: 'settings/changeSetting',
         payload: config,
     })

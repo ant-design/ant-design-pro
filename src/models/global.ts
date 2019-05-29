@@ -99,7 +99,7 @@ const GlobalModel: GlobalModelType = {
   },
 
   reducers: {
-    changeLayoutCollapsed(state, { payload }) {
+    changeLayoutCollapsed(state = { notices: [], collapsed: true }, { payload }) {
       return {
         ...state,
         collapsed: payload,
@@ -112,7 +112,7 @@ const GlobalModel: GlobalModelType = {
         notices: payload,
       };
     },
-    saveClearedNotices(state, { payload }) {
+    saveClearedNotices(state = { notices: [], collapsed: true }, { payload }) {
       return {
         collapsed: false,
         ...state,

@@ -41,25 +41,28 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { dispatch, children, settings, location } = props;
+  const { dispatch, children, settings } = props;
   /**
    * constructor
    */
 
   useState(() => {
-    dispatch!({
-      type: 'user/fetchCurrent',
-    });
-    dispatch!({
-      type: 'settings/getSetting',
-    });
+    if (dispatch) {
+      dispatch({
+        type: 'user/fetchCurrent',
+      });
+      dispatch({
+        type: 'settings/getSetting',
+      });
+    }
   });
+
   /**
    * init variables
    */
-
   const handleMenuCollapse = (payload: boolean) =>
-    dispatch!({
+    dispatch &&
+    dispatch({
       type: 'global/changeLayoutCollapsed',
       payload,
     });

@@ -9,13 +9,15 @@ export interface CurrentUser {
   group?: string;
   signature?: string;
   geographic?: any;
-  tags?: any[];
+  tags?: {
+    key: string;
+    label: string;
+  }[];
   unreadCount?: number;
 }
 
 export interface UserModelState {
-  list: any[];
-  currentUser: CurrentUser;
+  currentUser?: CurrentUser;
 }
 
 export interface UserModelType {
@@ -26,9 +28,8 @@ export interface UserModelType {
     fetchCurrent: Effect;
   };
   reducers: {
-    save: Reducer<any>;
-    saveCurrentUser: Reducer<any>;
-    changeNotifyCount: Reducer<any>;
+    saveCurrentUser: Reducer<UserModelState>;
+    changeNotifyCount: Reducer<UserModelState>;
   };
 }
 
@@ -36,7 +37,6 @@ const UserModel: UserModelType = {
   namespace: 'user',
 
   state: {
-    list: [],
     currentUser: {},
   },
 
@@ -58,19 +58,18 @@ const UserModel: UserModelType = {
   },
 
   reducers: {
-    save(state, action) {
-      return {
-        ...state,
-        list: action.payload,
-      };
-    },
     saveCurrentUser(state, action) {
       return {
         ...state,
         currentUser: action.payload || {},
       };
     },
-    changeNotifyCount(state, action) {
+    changeNotifyCount(
+      state = {
+        currentUser: {},
+      },
+      action,
+    ) {
       return {
         ...state,
         currentUser: {

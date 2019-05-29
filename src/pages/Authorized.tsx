@@ -1,6 +1,5 @@
 import Authorized from '@/utils/Authorized';
-import { Route } from '@/models/connect';
-import { ConnectProps, ConnectState, UserModelState } from '@/models/connect';
+import { ConnectProps, ConnectState, UserModelState, Route } from '@/models/connect';
 import { connect } from 'dva';
 import pathToRegexp from 'path-to-regexp';
 import React from 'react';
@@ -11,7 +10,7 @@ interface AuthComponentProps extends ConnectProps {
 }
 
 const getRouteAuthority = (path: string, routeData: Route[]) => {
-  let authorities: string[] | string | undefined = void 0;
+  let authorities: string[] | string | undefined = undefined;
   routeData.forEach(route => {
     // match prefix
     if (pathToRegexp(`${route.path}(.*)`).test(path)) {
