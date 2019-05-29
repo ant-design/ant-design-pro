@@ -27,7 +27,7 @@
     "lint:style": "stylelint --fix 'src/**/*.less' --syntax less",
     "lint:ts": "tslint -p . -c tslint.yml",
     "prettier": " check-prettier write",
-    "site": "npm run fetch:blocks && umi build",
+    "site": "npm run fetch:blocks && npm run functions:build && umi build",
     "start": "umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "test": "umi test",
