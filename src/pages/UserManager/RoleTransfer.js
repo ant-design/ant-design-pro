@@ -28,7 +28,6 @@ class RoleTransfer extends PureComponent {
   componentWillReceiveProps(nextProps) {
     const {modalVisible,selectedRow} = this.props;
     const {modalVisible:nextModalVisible} = nextProps;
-    console.log("modalVisible:",modalVisible,"nextModalVisible:",nextModalVisible);
     if(nextModalVisible!==modalVisible) {
       this.setState({modalVisible: nextModalVisible});
     }
@@ -51,7 +50,6 @@ class RoleTransfer extends PureComponent {
       const oriSelectedArray=selectedRow&&selectedRow[relationName]?selectedRow[relationName]:[];
       const oriTargetKeys=oriSelectedArray
         .map(item => item.roleId);
-      // console.log("---oriSelectedArray:",oriSelectedArray,"=======id======",selectedRow[columnSchemas.key]);
       this.setState({targetKeys:oriTargetKeys,oriSelectedArray});
     }
   }

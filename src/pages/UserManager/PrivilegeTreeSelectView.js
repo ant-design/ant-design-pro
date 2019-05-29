@@ -52,7 +52,7 @@ class PrivilegeTreeSelectView extends PureComponent {
     return (
       <TreeSelect
         style={style}
-        value={value}
+        value={value||'0'}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         treeData={treeSelectData}
         placeholder="Please select"

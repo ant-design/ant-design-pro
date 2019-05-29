@@ -1106,7 +1106,7 @@ const tableListDataSource = orgs.data;
 const groupsDataSource = groups.data;
 const usersDataSource=users.data;
 const rolesDataSource=roles.data;
-const privilegesDataSource=privileges.data;
+const privilegesDataSource=privileges.data.records;
 
 function getList(innerTableName) {
   let dataSource = tableListDataSource;
@@ -1449,7 +1449,7 @@ export function detail(req, res, u, b) {
           idName="groupId";
           break;
         case 'sys_user':
-          idName="userId";
+          idName="id";
           break;
         case 'sys_role':
           idName="roleId";
