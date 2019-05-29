@@ -6,7 +6,6 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "generateMock": "node ./scripts/generateMock",
     "lint": "npm run lint:js && npm run lint:ts && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
@@ -22,7 +21,8 @@
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
-    "tslint:fix": "tslint --fix 'src/**/*.ts*'"
+    "tslint:fix": "tslint --fix 'src/**/*.ts*'",
+    "fetch:blocks": "node ./scripts/fetch-blocks.js"
   },
   "husky": {
     "hooks": {
