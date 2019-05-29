@@ -6,16 +6,6 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
-    "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
-    "docker-prod:dev": "docker-compose -f ./docker/docker-compose.yml up",
-    "docker:build": "docker-compose -f ./docker/docker-compose.dev.yml build",
-    "docker:dev": "docker-compose -f ./docker/docker-compose.dev.yml up",
-    "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
-    "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
-    "fetch:blocks": "node ./scripts/fetch-blocks.js",
-    "functions:build": "netlify-lambda build ./lambda",
-    "functions:run": "cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
     "generateMock": "node ./scripts/generateMock",
     "lint": "npm run lint:js && npm run lint:ts && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
@@ -27,7 +17,6 @@
     "lint:style": "stylelint --fix 'src/**/*.less' --syntax less",
     "lint:ts": "tslint -p . -c tslint.yml",
     "prettier": " check-prettier write",
-    "site": "npm run fetch:blocks && npm run functions:build && umi build",
     "start": "umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "test": "umi test",
@@ -43,30 +32,25 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx}": "npm run lint-staged:js",
-    "**/*.{js,ts,tsx,md,json,jsx,less}": [
-      "npm run prettier",
-      "git add"
-    ],
+    "**/*.{js,ts,tsx,md,json,jsx,less}": [ "npm run prettier", "git add" ],
     "**/*.{ts,tsx}": "npm run lint-staged:ts"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 10"
-  ],
+  "browserslist": [ "> 1%", "last 2 versions", "not ie <= 10" ],
   "dependencies": {
     "@ant-design/pro-layout": "^4.2.0",
     "@antv/data-set": "^0.10.1",
     "antd": "^3.16.1",
+    "bizcharts": "^3.5.3-beta.0",
+    "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "lodash": "^4.17.10",
     "lodash-decorators": "^6.0.0",
     "memoize-one": "^5.0.0",
     "moment": "^2.22.2",
+    "numeral": "^2.0.6",
     "omit.js": "^1.0.0",
     "path-to-regexp": "^2.4.0",
-    "prop-types": "^15.7.2",
     "qs": "^6.7.0",
     "rc-animate": "^2.4.4",
     "react": "^16.8.5",
@@ -74,21 +58,14 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.7.0",
+    "react-fittext": "^1.0.0",
     "react-media": "^1.9.2",
-    "react-media-hook2": "^1.0.2",
-    "umi": "^2.7.0-beta.2",
-    "umi-plugin-ga": "^1.1.3",
-    "umi-plugin-locale": "^2.8.0-beta.1",
-    "umi-plugin-pro-block": "^1.3.0",
-    "umi-plugin-react": "^1.8.0-beta.1",
-    "umi-request": "^1.0.7"
+    "react-media-hook2": "^1.0.2"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
-    "@types/jest": "^24.0.13",
     "@types/lodash": "^4.14.123",
-    "@types/qs": "^6.5.3",
     "@types/react": "^16.8.1",
     "@types/react-document-title": "^2.0.3",
     "@types/react-dom": "^16.0.11",
@@ -118,8 +95,6 @@
     "lint-staged": "^8.1.1",
     "merge-umi-mock-data": "^1.0.4",
     "mockjs": "^1.0.1-beta3",
-    "netlify-lambda": "^1.4.3",
-    "node-fetch": "^2.6.0",
     "prettier": "^1.17.0",
     "serverless-http": "^2.0.1",
     "slash2": "^2.0.0",
@@ -133,7 +108,12 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
     "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^3.6.0"
+    "tslint-react": "^3.6.0",
+    "umi": "^2.7.0-beta.2",
+    "umi-plugin-ga": "^1.1.3",
+    "umi-plugin-pro-block": "^1.3.0",
+    "umi-plugin-react": "^1.8.0-beta.1",
+    "umi-request": "^1.0.0"
   },
   "optionalDependencies": {
     "puppeteer": "^1.12.1"
@@ -147,33 +127,5 @@
     "src/**/*.less",
     "config/**/*.js*",
     "scripts/**/*.js"
-  ],
-  "create-umi": {
-    "copy": [
-      [
-        "create-umi/README.md",
-        "README.md"
-      ],
-      [
-        "create-umi/package.json",
-        "package.json"
-      ]
-    ],
-    "ignore": [
-      ".dockerignore",
-      ".git",
-      ".gitpod.yml",
-      "CODE_OF_CONDUCT.md",
-      "Dockerfile",
-      "Dockerfile.*",
-      "lambda",
-      "LICENSE",
-      "netlify.toml",
-      "README.*.md",
-      "scripts",
-      "azure-pipelines.yml",
-      "docker",
-      "create-umi"
-    ]
-  }
+  ]
 }

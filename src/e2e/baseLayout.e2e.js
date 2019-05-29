@@ -1,4 +1,6 @@
-import RouterConfig from '../../config/router.config';
+jest.mock('antd-pro-merge-less');
+
+const RouterConfig = require('../../config/config').default.routes;
 
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 
@@ -22,7 +24,7 @@ describe('Homepage', () => {
       timeout: 2000,
     });
     const haveFooter = await page.evaluate(
-      () => document.getElementsByTagName('footer').length > 0
+      () => document.getElementsByTagName('footer').length > 0,
     );
     expect(haveFooter).toBeTruthy();
   };
@@ -31,7 +33,7 @@ describe('Homepage', () => {
     jest.setTimeout(1000000);
     await page.setCacheEnabled(false);
   });
-  const routers = formatter(RouterConfig[1].routes);
+  const routers = formatter(RouterConfig);
   routers.forEach(route => {
     it(`test pages ${route}`, testPage(route));
   });
