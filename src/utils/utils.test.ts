@@ -9,7 +9,7 @@ describe('isUrl tests', () => {
     expect(isUrl(true as any)).toBeFalsy();
     expect(isUrl(NaN as any)).toBeFalsy();
     expect(isUrl(null as any)).toBeFalsy();
-    expect(isUrl(void 0 as any)).toBeFalsy();
+    expect(isUrl(undefined as any)).toBeFalsy();
     expect(isUrl('')).toBeFalsy();
   });
 

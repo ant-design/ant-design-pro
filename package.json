@@ -43,10 +43,17 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx}": "npm run lint-staged:js",
-    "**/*.{js,ts,tsx,md,json,jsx,less}": [ "npm run prettier", "git add" ],
+    "**/*.{js,ts,tsx,md,json,jsx,less}": [
+      "npm run prettier",
+      "git add"
+    ],
     "**/*.{ts,tsx}": "npm run lint-staged:ts"
   },
-  "browserslist": [ "> 1%", "last 2 versions", "not ie <= 10" ],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "@ant-design/pro-layout": "^4.2.0",
     "@antv/data-set": "^0.10.1",
@@ -79,11 +86,12 @@
   "devDependencies": {
     "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
+    "@types/jest": "^24.0.13",
     "@types/lodash": "^4.14.123",
+    "@types/qs": "^6.5.3",
     "@types/react": "^16.8.1",
     "@types/react-document-title": "^2.0.3",
     "@types/react-dom": "^16.0.11",
-    "@types/qs": "^6.5.3",
     "antd-pro-merge-less": "^1.0.0",
     "antd-theme-webpack-plugin": "^1.2.0",
     "babel-eslint": "^10.0.1",
@@ -142,8 +150,14 @@
   ],
   "create-umi": {
     "copy": [
-      ["create-umi/README.md", "README.md"],
-      ["create-umi/package.json", "package.json"]
+      [
+        "create-umi/README.md",
+        "README.md"
+      ],
+      [
+        "create-umi/package.json",
+        "package.json"
+      ]
     ],
     "ignore": [
       ".dockerignore",
