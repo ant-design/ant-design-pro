@@ -28,6 +28,7 @@ export default {
   'menu.apiGateway.apiCreate.result': 'Finished',
   'menu.apiGateway.apiCreate.advance': 'Advance configuration',
   'menu.apiGateway.apiUpdate': 'Update Api',
+  'menu.apiGateway.apiDetail': 'Api Detail',
   'menu.userManager': 'Privilege Manager',
   'menu.userManager.user': 'User',
   'menu.userManager.role': 'Role',

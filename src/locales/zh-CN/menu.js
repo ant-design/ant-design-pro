@@ -28,6 +28,7 @@ export default {
   'menu.apiGateway.apiCreate.producer': '定义Api后端服务',
   'menu.apiGateway.apiCreate.result': '完成',
   'menu.apiGateway.apiCreate.advance': '高级配置',
+  'menu.apiGateway.apiDetail': 'Api详情',
   'menu.userManager': '权限管理',
   'menu.userManager.user': '用户',
   'menu.userManager.role': '角色',
