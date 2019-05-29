@@ -50,7 +50,6 @@
   "dependencies": {
     "@ant-design/pro-layout": "^4.2.0",
     "@antv/data-set": "^0.10.1",
-    "@types/qs": "^6.5.3",
     "antd": "^3.16.1",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
@@ -84,6 +83,7 @@
     "@types/react": "^16.8.1",
     "@types/react-document-title": "^2.0.3",
     "@types/react-dom": "^16.0.11",
+    "@types/qs": "^6.5.3",
     "antd-pro-merge-less": "^1.0.0",
     "antd-theme-webpack-plugin": "^1.2.0",
     "babel-eslint": "^10.0.1",

@@ -3996,7 +3996,7 @@
       signature: '海纳百川，有容乃大',
       title: '交互专家',
       group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
-      notices: [{
+      notice: [{
         id: '000000001',
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
         title: '你收到了 14 份新周报',
