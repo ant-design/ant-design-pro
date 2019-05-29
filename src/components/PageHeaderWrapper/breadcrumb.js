@@ -23,6 +23,7 @@ const renderItemLocal = item => {
 };
 
 export const getBreadcrumb = (breadcrumbNameMap, url) => {
+  console.log("breadcrumbNameMap:",breadcrumbNameMap);
   let breadcrumb = breadcrumbNameMap[url];
   if (!breadcrumb) {
     Object.keys(breadcrumbNameMap).forEach(item => {
@@ -57,24 +58,28 @@ const conversionFromProps = props => {
 };
 
 const conversionFromLocation = (routerLocation, breadcrumbNameMap, props) => {
+  console.log("routerLocation:",routerLocation);
   const { home } = props;
   // Convert the url to an array
   const pathSnippets = urlToList(routerLocation.pathname);
+  console.log("pathSnippets:",pathSnippets);
   // Loop data mosaic routing
   const extraBreadcrumbItems = pathSnippets.map(url => {
     const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
+    console.log("pathSnippets:",currentBreadcrumb,url);
     if (currentBreadcrumb.inherited) {
       return null;
     }
     const name = renderItemLocal(currentBreadcrumb);
     const { hideInBreadcrumb } = currentBreadcrumb;
+    console.log("hideInBreadcrumb:",name,hideInBreadcrumb);
     return name && !hideInBreadcrumb
       ? {
           path: url,
           breadcrumbName: name,
         }
       : null;
-  });
+  }).filter(item=>item!==null); // add filter null by jack,因为有可能后台还没返回breadcrumbNameMap数据，
   // Add home breadcrumbs to your head if defined
   if (home) {
     extraBreadcrumbItems.unshift({
@@ -82,6 +87,7 @@ const conversionFromLocation = (routerLocation, breadcrumbNameMap, props) => {
       breadcrumbName: home,
     });
   }
+  console.log("extraBreadcrumbItems:",extraBreadcrumbItems);
   return extraBreadcrumbItems;
 };
 
