@@ -77,7 +77,7 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 ### Use bash
 
 ```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
+$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1 -b v2
 $ cd ant-design-pro
 $ npm install
 $ npm start         # visit http://localhost:8000
