@@ -24,7 +24,7 @@
     "lint:fix": "eslint --fix --ext .js src tests && npm run lint:style && npm run tslint:fix",
     "lint:js": "eslint --ext .js src tests",
     "lint:prettier": "check-prettier lint",
-    "lint:style": "stylelint --fix 'src/**/*.less' --syntax less",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "lint:ts": "tslint -p . -c tslint.yml",
     "prettier": " check-prettier write",
     "site": "npm run fetch:blocks && npm run functions:build && umi build",
@@ -33,7 +33,7 @@
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
-    "tslint:fix": "tslint --fix 'src/**/*.ts*'"
+    "tslint:fix": "tslint --fix \"src/**/*.ts*\""
   },
   "husky": {
     "hooks": {
