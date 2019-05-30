@@ -98,13 +98,10 @@ export default {
         groupId: 2,
         requestUrl: '/rest/voice',
         // createUser:'Alex',
-        protocol: 'http',
         reqMethod: 'POST',
         apiType:'1',
         apiServiceBackends:[{
           serviceType:'1',
-          url: 'http://',
-          protocol: 'HTTP',
           socketTimeout: 20000,
           connectTimeout: 30000,
           serviceSeq:1,

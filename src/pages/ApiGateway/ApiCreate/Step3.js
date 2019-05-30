@@ -56,10 +56,10 @@ class Step3 extends React.PureComponent {
     // console.log('userId',getUserId());
     return (
       <Form layout="horizontal" className={styles.stepForm}>
-        <Form.Item {...formItemLayout} className={styles.stepFormText} label="api名称：">
-          {apiService.name}
-        </Form.Item>
-        <Form.Item {...formItemLayout} className={styles.stepFormText} label="请求PATH：">
+        {/* <Form.Item {...formItemLayout} className={styles.stepFormText} label="api名称："> */}
+        {/* {apiService.name} */}
+        {/* </Form.Item> */}
+        <Form.Item {...formItemLayout} className={styles.stepFormText} label="Api对外暴露的路径：">
           {apiService.requestUrl}
         </Form.Item>
         <Divider style={{ margin: '24px 0' }} />
@@ -68,35 +68,29 @@ class Step3 extends React.PureComponent {
             rules: [{ required: true, message: '请选择服务提供者' }],
           })(<OrgSelectView orgType="0,1" userId={userId} />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="提供方服务类型">
+        <Form.Item {...formItemLayout} label="服务类型">
           {getFieldDecorator('serviceType', {
             initialValue: data.serviceType,
             rules: [{ required: true, message: '请选择提供方服务类型' }],
           })(<RadioView javaCode="apiService" javaKey="service_type" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="提供方请求地址">
+        <Form.Item {...formItemLayout} label="服务地址">
           {getFieldDecorator('url', {
             initialValue: data.url,
-            rules: [{ required: true, message: '请输入提供方请求地址' }],
-          })(<Input placeholder="请输入提供方请求地址" />)}
+            rules: [{ required: true, message: '请输入提供方地址' }],
+          })(<Input placeholder="http://ip:port" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="提供方请求地址">
+        <Form.Item {...formItemLayout} label="服务路径">
           {getFieldDecorator('reqPath', {
             initialValue: data.reqPath,
             rules: [],
-          })(<Input placeholder="请输入路径" />)}
+          })(<Input placeholder="/xxx/xxx" />)}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="提供方请求类型">
+        <Form.Item {...formItemLayout} label="服务请求类型">
           {getFieldDecorator('reqMethod', {
             initialValue: data.reqMethod,
             rules: [{ required: true, message: '请选择HTTP Method' }],
           })(<SelectView javaCode="common" javaKey="req_method" />)}
-        </Form.Item>
-        <Form.Item {...formItemLayout} label="提供方协议">
-          {getFieldDecorator('protocol', {
-            initialValue: data.protocol,
-            rules: [{ required: true, message: '请选择提供方协议' }],
-          })(<RadioView javaCode="apiService" javaKey="protocol" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="服务连接超时（ms）">
           {getFieldDecorator('connectTimeout', {

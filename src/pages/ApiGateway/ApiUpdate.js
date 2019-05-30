@@ -25,7 +25,7 @@ const fieldLabels = {
     name: '名称',
     serviceType: '服务类型',
     requestUrl: '请求地址',
-    protocol: '协议',
+    // protocol: '协议',
     reqMethod: '请求Method',
     apiType: 'Api范围',
   },
@@ -33,7 +33,7 @@ const fieldLabels = {
     serviceType: '服务类型',
     url: '落地方地址',
     reqPath: '落地方路径',
-    protocol: '协议',
+    // protocol: '协议',
     reqMethod: '请求Method',
     connectTimeout: '连接超时时间（秒）',
     socketTimeout: '处理超时时间（秒）',
@@ -356,6 +356,7 @@ class ApiUpdate extends PureComponent {
                   })(<SelectView javaCode="common" javaKey="req_method" />)}
                 </Form.Item>
               </Col>
+              {/*
               <Col
                 xl={{ span: 6, offset: 2 }}
                 lg={{ span: 8 }}
@@ -369,6 +370,7 @@ class ApiUpdate extends PureComponent {
                   })(<SelectView javaCode="apiService" javaKey="protocol" />)}
                 </Form.Item>
               </Col>
+              */}
             </Row>
             <Row gutter={2}>
               <Col lg={6} md={12} sm={24} style={{ height: 50 }}>
@@ -604,6 +606,7 @@ class ApiUpdate extends PureComponent {
               </Col>
             </Row>
             <Row gutter={16}>
+              {/*
               <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.back.protocol}>
                   {getFieldDecorator('back.protocol', {
@@ -611,13 +614,8 @@ class ApiUpdate extends PureComponent {
                   })(<SelectView javaCode="apiService" javaKey="protocol" />)}
                 </Form.Item>
               </Col>
-              <Col
-                xl={{ span: 16, offset: 2 }}
-                lg={{ span: 18 }}
-                md={{ span: 24 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
+              */}
+              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.backAttr.ssl}>
                   {getFieldDecorator('backAttr.ssl', {
                     rules: [{ required: true, message: `请选择${fieldLabels.backAttr.ssl}` }],

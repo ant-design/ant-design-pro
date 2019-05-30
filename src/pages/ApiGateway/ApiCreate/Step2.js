@@ -45,23 +45,23 @@ class Step2 extends React.PureComponent {
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
-          <Form.Item {...formItemLayout} label="服务类型">
-            {getFieldDecorator('serviceType', {
-              initialValue: data.serviceType,
-              rules: [{ required: true, message: '请选择服务类型' }],
-            })(<RadioView javaCode="apiService" javaKey="service_type" />)}
+          <Form.Item {...formItemLayout} className={styles.stepFormText} label="Api名称：">
+            {data.name}
           </Form.Item>
+          <Divider style={{ margin: '24px 0' }} />
+          <span style={{display:'none'}}>
+            <Form.Item {...formItemLayout} label="服务类型">
+              {getFieldDecorator('serviceType', {
+                initialValue: data.serviceType,
+                rules: [{ required: true, message: '请选择服务类型' }],
+              })(<RadioView javaCode="apiService" javaKey="service_type" />)}
+            </Form.Item>
+          </span>
           <Form.Item {...formItemLayout} label="请求PATH">
             {getFieldDecorator('requestUrl', {
               initialValue: data.requestUrl,
               rules: [{ required: true, message: '请输入请求PATH' }],
             })(<Input placeholder="请输入请求PATH" />)}
-          </Form.Item>
-          <Form.Item {...formItemLayout} label="协议类型">
-            {getFieldDecorator('protocol', {
-              initialValue: data.protocol,
-              rules: [{ required: true, message: '请选择协议' }],
-            })(<RadioView javaCode="apiService" javaKey="protocol" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求类型">
             {getFieldDecorator('reqMethod', {

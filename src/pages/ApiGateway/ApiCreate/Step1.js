@@ -66,7 +66,7 @@ class Step1 extends React.PureComponent {
               initialValue: apiService.apiType,
               rules: [{ required: true, message: '请选择服务类型' }],
             })(<RadioView javaCode="apiService" javaKey="api_type" />)}
-          </Form.Item>
+            </Form.Item>
           <Form.Item
             wrapperCol={{
               xs: { span: 24, offset: 0 },
