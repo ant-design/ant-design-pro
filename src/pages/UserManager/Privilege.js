@@ -10,7 +10,7 @@ import {flatToPrivilegeTreeSelect, flatToTree,} from "./userUtil"
 
 const statusList = getItems('common', 'status'); // 状态主数据
 const iconList = getItems('privilege', 'icon');  // 菜单图标祝数据
-iconList.push({javaCode:'privilege',javaKey:'icon',itemCode:'',itemValue:'无'});
+iconList.push({javaCode:'privilege',javaKey:'icon',itemCode:'',itemValue:'None Icon'});
 const typeList = getItems('privilege', 'type');  // 菜单类型主数据
 
 const hideChildrenInMenuList = getItems('privilege', 'hide_children_in_menu'); // 子菜单是否隐藏主数据

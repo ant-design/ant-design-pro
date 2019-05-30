@@ -170,7 +170,8 @@ export function flatToMenuTree(list, data, fatherId) {
       // delete child.level;
       delete child.orderSeq;
       child.hideChildrenInMenu=!!(child.hideChildrenInMenu&&child.hideChildrenInMenu==='Y');
-      child.hideInMenu=!!(child.hideInMenu&&child.hideChildrenInMenu==='Y');
+      child.hideInMenu=!!(child.hideInMenu&&child.hideInMenu==='Y');
+      child.icon = child.icon===''?null:child.icon;// add by jack
       data.push(child);
     }
   })
