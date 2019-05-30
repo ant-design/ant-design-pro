@@ -133,7 +133,8 @@ export default {
         console.log('======response in menu.js:', response);
         if(flatToMenuTree){
           console.log('======has flatToMenuTree function:');
-          flatToMenuTree(response.data.records,routesFromServer,0);
+          const memoizeOneFlatToMenuTree = memoizeOne(flatToMenuTree, isEqual);
+          memoizeOneFlatToMenuTree(response.data.records,routesFromServer,0);
           setPrivileges(response.data.records);
           setFormatPrivileges(getPrivileges());
         }

@@ -23,7 +23,7 @@ const renderItemLocal = item => {
 };
 
 export const getBreadcrumb = (breadcrumbNameMap, url) => {
-  console.log("breadcrumbNameMap:",breadcrumbNameMap);
+  // console.log("breadcrumbNameMap:",breadcrumbNameMap);
   let breadcrumb = breadcrumbNameMap[url];
   if (!breadcrumb) {
     Object.keys(breadcrumbNameMap).forEach(item => {

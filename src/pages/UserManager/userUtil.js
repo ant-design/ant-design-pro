@@ -150,7 +150,6 @@ export function filterAndConversionMenu(flatDatas) {
   });
 }
 export function flatToMenuTree(list, data, fatherId) {
-  // console.log(list,fatherId);
   list.forEach(item => {
     if (item.parentPrivilegeId === fatherId&&item.type==='menu') {
       const child = {...item, routes: []};
