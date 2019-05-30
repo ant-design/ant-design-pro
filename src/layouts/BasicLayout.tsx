@@ -12,13 +12,13 @@ import logo from '../assets/logo.svg';
 import Authorized from '@/utils/Authorized';
 import { formatMessage } from 'umi-plugin-react/locale';
 import {
-  BasicLayout as BasicLayoutComponents,
-  BasicLayoutProps as BasicLayoutComponentsProps,
+  BasicLayout as ProLayoutComponents,
+  BasicLayoutProps as ProLayoutComponentsProps,
   MenuDataItem,
   Settings,
 } from '@ant-design/pro-layout';
 import Link from 'umi/link';
-export interface BasicLayoutProps extends BasicLayoutComponentsProps, ConnectProps {
+export interface BasicLayoutProps extends ProLayoutComponentsProps, ConnectProps {
   breadcrumbNameMap: {
     [path: string]: MenuDataItem;
   };
@@ -68,7 +68,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     });
 
   return (
-    <BasicLayoutComponents
+    <ProLayoutComponents
       logo={logo}
       onCollapse={handleMenuCollapse}
       menuItemRender={(menuItemProps, defaultDom) => {
@@ -93,7 +93,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       {...settings}
     >
       {children}
-    </BasicLayoutComponents>
+    </ProLayoutComponents>
   );
 };
 
