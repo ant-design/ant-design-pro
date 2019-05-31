@@ -54,6 +54,17 @@ export async function modifyPassword(params) {
   });
 }
 
+export async function roleAuth(params) {
+  return request('/api/v1/user/roleAuth', {
+    method: 'POST',
+    data: params,
+  });
+}
+
+export async function queryRolesByUserId(params) {
+  return request('/api/v1/user/roleAuth/get/'+params);
+}
+
 export async function queryCurrent() {
   return request('/api/v1/auth/currentUser');
 }

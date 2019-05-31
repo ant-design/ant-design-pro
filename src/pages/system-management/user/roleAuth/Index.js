@@ -20,6 +20,7 @@ import {
   DatePicker,
   Select,
   message,
+  Transfer,
   Divider,
 } from 'antd';
 import StandardTable from '@/components/StandardTable';
@@ -36,8 +37,10 @@ const { Option } = Select;
 }))
 @Form.create()
 class UserRoleAuth extends PureComponent {
+
   state = {
-    selectedRows: [],
+    targetKeys: [],
+    selectedKeys: [],
   };
 
   componentDidMount() {
@@ -46,16 +49,40 @@ class UserRoleAuth extends PureComponent {
       type: 'role/fetch',
       payload: {},
     });
-  }
-
-  handleSelectRows = rows => {
-    this.setState({
-      selectedRows: rows,
+    dispatch({
+      type: 'user/getRoles',
+      payload: this.props.match.params.userId,
     });
   };
 
+  componentWillReceiveProps() {
+    const { user: { userRoles } } = this.props;
+    this.setState({ targetKeys: userRoles.map(item => item.id) });
+  };
+
+  handleChange = (nextTargetKeys, direction, moveKeys) => {
+    this.setState({ targetKeys: nextTargetKeys });
+  };
+
+  handleSelectChange = (sourceSelectedKeys, targetSelectedKeys) => {
+    this.setState({ selectedKeys: [...sourceSelectedKeys, ...targetSelectedKeys] });
+  };
+
   handleSubmit = () => {
-    const { selectedRows } = this.state;
+    const userId = this.props.match.params.userId;
+    const { dispatch } = this.props;
+    const { targetKeys } = this.state;
+    const userRoles = [];
+    targetKeys.forEach(row => {
+      userRoles.push({
+        userId: userId,
+        roleId: row,
+      })
+    });
+    dispatch({
+      type: 'user/roleAuth',
+      payload: userRoles,
+    });
   };
 
   handleCancle = () => {
@@ -76,12 +103,16 @@ class UserRoleAuth extends PureComponent {
       dataIndex: 'descr',
     },
   ];
+
   render() {
     const {
-      role: { data },
+      role: { data: { list } },
       loading,
     } = this.props;
-    const { selectedRows } = this.state;
+    list.forEach(item => {
+      item.key = item.id
+    });
+    const { targetKeys, selectedKeys } = this.state;
     return (
       <PageHeaderWrapper>
         <Card bordered={false}>
@@ -94,16 +125,14 @@ class UserRoleAuth extends PureComponent {
                 取消
               </Button>
             </div>
-            <StandardTable
-              bordered
-              rowKey="id"
-              size="small"
-              selectedRows={selectedRows}
-              loading={loading}
-              data={data}
-              columns={this.columns}
-              onSelectRow={this.handleSelectRows}
-            // onChange={this.handleStandardTableChange}
+            <Transfer
+              dataSource={list}
+              titles={['系统角色', '用户角色']}
+              targetKeys={targetKeys}
+              selectedKeys={selectedKeys}
+              onChange={this.handleChange}
+              onSelectChange={this.handleSelectChange}
+              render={item => item.roleName}
             />
           </div>
         </Card>

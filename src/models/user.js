@@ -8,6 +8,8 @@ import {
   disableUser,
   activeUser,
   modifyPassword,
+  roleAuth,
+  queryRolesByUserId,
 } from '@/services/user';
 import { message } from 'antd';
 import router from 'umi/router';
@@ -21,6 +23,7 @@ export default {
     },
     currentUser: {},
     user: {},
+    userRoles: [],
   },
 
   effects: {
@@ -105,6 +108,22 @@ export default {
         message.error(response.msg);
       }
     },
+    *roleAuth({ payload }, { call, put }) {
+      const response = yield call(roleAuth, payload);
+      if (response.code === 0) {
+        message.success('操作成功', 2);
+        router.push('/system-management/user/list');
+      } else {
+        message.error(response.msg);
+      }
+    },
+    *getRoles({ payload }, { call, put }) {
+      const response = yield call(queryRolesByUserId, payload);
+      yield put({
+        type: 'getRolesSave',
+        payload: response,
+      });
+    },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({
@@ -138,6 +157,12 @@ export default {
       return {
         ...state,
         user: action.payload.data || {},
+      };
+    },
+    getRolesSave(state, action) {
+      return {
+        ...state,
+        userRoles: action.payload.data || [],
       };
     },
     changeNotifyCount(state, action) {
