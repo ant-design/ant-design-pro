@@ -1,9 +1,10 @@
-import React from 'react';
-import { Avatar, Menu, Spin, Icon } from 'antd';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import { ClickParam } from 'antd/lib/menu';
+import { Avatar, Icon, Menu, Spin } from 'antd';
 import { ConnectProps, ConnectState } from '@/models/connect';
+
+import { ClickParam } from 'antd/lib/menu';
 import { CurrentUser } from '@/models/user';
+import { FormattedMessage } from 'umi-plugin-react/locale';
+import React from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import HeaderDropdown from '../HeaderDropdown';

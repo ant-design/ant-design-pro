@@ -1,14 +1,15 @@
 import { ConnectProps, ConnectState } from '@/models/connect';
-import { NoticeItem } from '@/models/global';
-import { CurrentUser } from '@/models/user';
 import React, { Component } from 'react';
 import { Tag, message } from 'antd';
-import { formatMessage } from 'umi-plugin-react/locale';
-import moment from 'moment';
-import groupBy from 'lodash/groupBy';
+
+import { CurrentUser } from '@/models/user';
 import NoticeIcon from '../NoticeIcon';
-import styles from './index.less';
+import { NoticeItem } from '@/models/global';
 import { connect } from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
+import groupBy from 'lodash/groupBy';
+import moment from 'moment';
+import styles from './index.less';
 
 export interface GlobalHeaderRightProps extends ConnectProps {
   notices?: NoticeItem[];

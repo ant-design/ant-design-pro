@@ -1,7 +1,7 @@
 // Change theme plugin
 
-import MergeLessPlugin from 'antd-pro-merge-less';
 import AntDesignThemePlugin from 'antd-theme-webpack-plugin';
+import MergeLessPlugin from 'antd-pro-merge-less';
 import path from 'path';
 
 function getModulePackageName(module: { context: string }) {

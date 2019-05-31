@@ -4,20 +4,21 @@
  * https://github.com/ant-design/ant-design-pro-layout
  */
 
-import { ConnectState, ConnectProps } from '@/models/connect';
-import RightContent from '@/components/GlobalHeader/RightContent';
-import { connect } from 'dva';
-import React, { useState } from 'react';
-import logo from '../assets/logo.svg';
-import Authorized from '@/utils/Authorized';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { ConnectProps, ConnectState } from '@/models/connect';
 import {
+  MenuDataItem,
   BasicLayout as ProLayoutComponents,
   BasicLayoutProps as ProLayoutComponentsProps,
-  MenuDataItem,
   Settings,
 } from '@ant-design/pro-layout';
+import React, { useState } from 'react';
+
+import Authorized from '@/utils/Authorized';
 import Link from 'umi/link';
+import RightContent from '@/components/GlobalHeader/RightContent';
+import { connect } from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
+import logo from '../assets/logo.svg';
 
 export interface BasicLayoutProps extends ProLayoutComponentsProps, ConnectProps {
   breadcrumbNameMap: {

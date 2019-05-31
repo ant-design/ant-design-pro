@@ -1,7 +1,8 @@
-import React from 'react';
-import { Icon, Typography, Popover } from 'antd';
-import { connect } from 'dva';
+import { Icon, Popover, Typography } from 'antd';
+
 import { FormattedMessage } from 'umi-plugin-react/locale';
+import React from 'react';
+import { connect } from 'dva';
 import styles from './index.less';
 
 const firstUpperCase = (pathString: string): string => {

@@ -1,14 +1,15 @@
-import SelectLang from '@/components/SelectLang';
-import GlobalFooter from '@/components/GlobalFooter';
-import { ConnectProps } from '@/models/connect';
-import { Icon } from 'antd';
+import { MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
 import React, { Fragment } from 'react';
+
+import { ConnectProps } from '@/models/connect';
 import DocumentTitle from 'react-document-title';
-import { formatMessage } from 'umi-plugin-locale';
+import GlobalFooter from '@/components/GlobalFooter';
+import { Icon } from 'antd';
 import Link from 'umi/link';
+import SelectLang from '@/components/SelectLang';
+import { formatMessage } from 'umi-plugin-locale';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
-import { MenuDataItem, getPageTitle, getMenuData } from '@ant-design/pro-layout';
 
 const links = [
   {

@@ -1,7 +1,8 @@
 import React from 'react';
-import Secured from './Secured';
 import check, { IAuthorityType } from './CheckPermissions';
+
 import AuthorizedRoute from './AuthorizedRoute';
+import Secured from './Secured';
 
 interface AuthorizedProps {
   authority: IAuthorityType;

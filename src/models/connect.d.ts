@@ -1,10 +1,10 @@
-import { EffectsCommandMap } from 'dva';
 import { AnyAction } from 'redux';
-import { RouterTypes } from 'umi';
+import { EffectsCommandMap } from 'dva';
 import { MenuDataItem } from '@ant-design/pro-layout';
+import { RouterTypes } from 'umi';
 import { GlobalModelState } from './global';
-import { UserModelState } from './user';
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
+import { UserModelState } from './user';
 
 export { GlobalModelState, SettingModelState, UserModelState };
 

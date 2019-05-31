@@ -1,4 +1,5 @@
-import { query as queryUsers, queryCurrent } from '@/services/user';
+import { queryCurrent, query as queryUsers } from '@/services/user';
+
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 

@@ -1,8 +1,8 @@
-import { queryNotices } from '@/services/user';
-import { Subscription } from 'dva';
-import { Reducer } from 'redux';
-import { NoticeIconData } from '@/components/NoticeIcon';
 import { Effect } from './connect.d';
+import { NoticeIconData } from '@/components/NoticeIcon';
+import { Reducer } from 'redux';
+import { Subscription } from 'dva';
+import { queryNotices } from '@/services/user';
 
 export interface NoticeItem extends NoticeIconData {
   id: string;
