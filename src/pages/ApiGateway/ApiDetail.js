@@ -1,23 +1,15 @@
-import React, { PureComponent } from 'react';
-import { Card, Button, Form, Icon, Col, Row, Input, Popover, Radio, Tabs, BackTop } from 'antd';
+import React, { Fragment, PureComponent } from 'react';
+import { Card, Button, Form, Icon, Col, Row, Popover, Table, Tabs, BackTop } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import TableForm from './TableForm';
 import styles from './style.less';
-import SelectView from './SelectView';
-import GroupSelectView from './GroupSelectView';
-import { getPayloadForUpdate, conversionAttr, getApiFlowData } from './ApiCreate/util';
-import RadioView from './RadioView';
-import OrgSelectView from './OrgSelectView';
-import ApiFlow from '../Editor/GGEditor/ApiFlow';
+import { conversionAttr, getApiFlowData } from './ApiCreate/util';
 import { getUserId } from '@/utils/authority';
-// import RoleTransfer from "../UserManager/Privilege";
-// import apiFlowData from '../Editor/GGEditor/mock/apiFlow.json';
 
 import DescriptionList from '@/components/DescriptionList';
-import { getGroupName, getItemValue, getItemValue2 } from '@/utils/masterData';
+import { getGroupName, getItemValue, getName } from '@/utils/masterData';
 
 const { TabPane } = Tabs;
 const forms = ['front', 'back', 'backAttr'];
@@ -59,6 +51,32 @@ const fieldLabels = {
   },
 };
 
+const columns = [
+  {
+    title: '出／入参',
+    dataIndex: 'backendType',
+  },
+  {
+    title: '执行顺序',
+    dataIndex: 'serviceSeq',
+  },
+  {
+    title: 'url',
+    dataIndex: 'url',
+  },
+];
+
+const columnsOrg = [
+  {
+    title: '编号',
+    dataIndex: 'apiId',
+  },
+  {
+    title: '名称',
+    dataIndex: 'orgName',
+  },
+];
+
 // const tableData = [
 //   {
 //     backEndId: '1',
@@ -80,9 +98,10 @@ const fieldLabels = {
 //   },
 // ];
 
-@connect(({ apiCreateModel, groupModel, loading }) => ({
+@connect(({ apiCreateModel, groupModel, orgModel, loading }) => ({
   apiService: apiCreateModel.apiService,
   groupList: groupModel.groupList,
+  orgList: orgModel.orgList,
   submitting: loading.effects['apiCreateModel/submitStepForm'],
 }))
 @Form.create()
@@ -90,6 +109,9 @@ class ApiDetail extends PureComponent {
   state = {
     width: '100%',
     apiFlowData: {},
+    data: {
+      back: {},
+    },
   };
 
   componentDidMount() {
@@ -99,11 +121,17 @@ class ApiDetail extends PureComponent {
     const { state } = location;
     // console.log("location state:",state);
     const { apiId } = state || { apiId: 105 };
-    this.getApi(apiId);
-    //分组列表
+    // 分组列表
     dispatch({
       type: 'groupModel/allGroupList',
     });
+    const { userId } = getUserId();
+    dispatch({
+      type: 'orgModel/allOrgList',
+      payload: { orgType: '0,1', userId: userId },
+    });
+    // 请求获取apiInfo详情
+    this.getApi(apiId);
   }
 
   componentWillUnmount() {
@@ -133,45 +161,90 @@ class ApiDetail extends PureComponent {
     }
   };
 
+  //  设置apiInfo数据格式
   setBaseInfo = resp => {
-    const { form } = this.props;
     const { data } = resp;
+    const { groupList, orgList } = this.props;
+    console.log('setBaseInfo', groupList);
+    // 定义请求信息转化
+    data.groupIdTitle = data.groupId ? getGroupName(groupList, data.groupId) : null;
+    data.serviceTypeTitle = data.serviceType
+      ? getItemValue('apiService', 'service_type', data.serviceType)
+      : null;
+    data.reqMethodTitle = data.reqMethod
+      ? getItemValue('common', 'req_method', data.reqMethod)
+      : null;
+    data.apiTypeTitle = data.apiType ? getItemValue('apiService', 'api_type', data.apiType) : null;
+
+    // 落地方服务信息数组转为对象
     const apiServiceBackend = data.apiServiceBackends.find(obj => obj.backendType === 'endpoint');
     const { apiServiceBackendAttrs } = apiServiceBackend;
     const conversionAttrObj = conversionAttr(apiServiceBackendAttrs);
     const apiServiceBackendMembers = data.apiServiceBackends.filter(
       obj => obj.backendType !== 'endpoint'
     );
+    // 落地方服务信息转化
+    const apiServiceBackendFormat = { ...apiServiceBackend, ...conversionAttrObj };
+    apiServiceBackendFormat.serviceTypeTitle = apiServiceBackendFormat.serviceType
+      ? getItemValue('apiService', 'service_type', apiServiceBackendFormat.serviceType)
+      : null;
+    apiServiceBackendFormat.reqMethodTitle = apiServiceBackendFormat.reqMethod
+      ? getItemValue('common', 'req_method', apiServiceBackendFormat.reqMethod)
+      : null;
+    apiServiceBackendFormat.apiTypeTitle = apiServiceBackendFormat.apiType
+      ? getItemValue('apiService', 'api_type', apiServiceBackendFormat.apiType)
+      : null;
+    apiServiceBackendFormat.authTypeTitle = apiServiceBackendFormat.authType
+      ? getItemValue('apiServiceBackendAttr', 'auth_type', apiServiceBackendFormat.authType)
+      : null;
+    apiServiceBackendFormat.sslTitle = apiServiceBackendFormat.ssl === 1 ? '开' : '关';
+    apiServiceBackendFormat.orgIdTitle = apiServiceBackendFormat.orgId
+      ? getName(orgList, apiServiceBackendFormat.orgId, 'id', 'orgName')
+      : null;
 
-    // console.log("====:",conversionAttrObj);
-    // // console.log('setBaseInfo data:', data,form.getFieldValue("front"));
-    Object.keys(form.getFieldsValue()).forEach(key => {
-      // // console.log('key:', key);
-      if (key !== 'members') {
-        if (key === 'front' || key === 'back' || key === 'backAttr') {
-          const innerObj = {};
-          Object.keys(form.getFieldValue(key)).forEach(innerKey => {
-            if (key === 'front') {
-              innerObj[innerKey] = data[innerKey] || null;
-            } else if (key === 'backAttr') {
-              innerObj[innerKey] = conversionAttrObj[innerKey] || null;
-            } else {
-              innerObj[innerKey] = apiServiceBackend[innerKey] || null;
-            }
-            // // console.log('innerKey:', innerKey, );
-          });
-          const obj = {};
-          obj[key] = innerObj;
-          // console.log("init Data in ApiUpdate2:",obj);
-          form.setFieldsValue(obj);
-        }
-      } else {
-        const obj = {};
-        obj[key] = apiServiceBackendMembers || [];
-        // // console.log(form.getFieldValue("members"));
-        // form.setFieldsValue(obj);
-      }
-    });
+    // 设置安全认证下的信息
+    // Basic认证
+    if (apiServiceBackendFormat.authType === 'basicAuth') {
+      const nameAttr = apiServiceBackendFormat.apiServiceBackendAttrs.filter(
+        item => item.attrSpecCode === 'userName'
+      );
+      const nameObj = conversionAttr(nameAttr);
+      apiServiceBackendFormat.userName = nameObj.userName;
+      const passwordAttr = apiServiceBackendFormat.apiServiceBackendAttrs.filter(
+        item => item.attrSpecCode === 'userPassword'
+      );
+      const passwordObj = conversionAttr(passwordAttr);
+      apiServiceBackendFormat.userPassword = passwordObj.userPassword;
+    }
+    // 固定Token认证
+    if (apiServiceBackendFormat.authType === 'fixedToken') {
+      const nameAttr = apiServiceBackendFormat.apiServiceBackendAttrs.filter(
+        item => item.attrSpecCode === 'tokenStr'
+      );
+      const nameObj = conversionAttr(nameAttr);
+      apiServiceBackendFormat.tokenStr = nameObj.tokenStr;
+    }
+    // 动态Token认证
+    if (apiServiceBackendFormat.authType === 'dyncToken') {
+      const tokenUserAttr = apiServiceBackendFormat.apiServiceBackendAttrs.filter(
+        item => item.attrSpecCode === 'tokenUser'
+      );
+      const tokenUserObj = conversionAttr(tokenUserAttr);
+      apiServiceBackendFormat.tokenUser = tokenUserObj.tokenUser;
+      const tokenPasswordAttr = apiServiceBackendFormat.apiServiceBackendAttrs.filter(
+        item => item.attrSpecCode === 'tokenPassword'
+      );
+      const tokenPasswordObj = conversionAttr(tokenPasswordAttr);
+      apiServiceBackendFormat.tokenPassword = tokenPasswordObj.tokenPassword;
+      const tokenUrlAttr = apiServiceBackendFormat.apiServiceBackendAttrs.filter(
+        item => item.attrSpecCode === 'tokenUrl'
+      );
+      const tokenUrlObj = conversionAttr(tokenUrlAttr);
+      apiServiceBackendFormat.tokenUrl = tokenUrlObj.tokenUrl;
+    }
+
+    data.back = apiServiceBackendFormat;
+    this.setState({ data }); //  设置state中的resp的值
   };
 
   getErrorInfo = () => {
@@ -255,31 +328,6 @@ class ApiDetail extends PureComponent {
     });
   };
 
-  validate = () => {
-    const {
-      form: { validateFieldsAndScroll },
-      apiService,
-      dispatch,
-    } = this.props;
-    validateFieldsAndScroll((error, values) => {
-      // console.log("error in ui======:",error);
-      if (!error) {
-        // console.log("api update submit values:",values);
-        const apiInfo = getPayloadForUpdate(apiService, values);
-        // console.log("api update submit apiInfo:",apiInfo);
-        // submit the values
-        dispatch({
-          type: 'apiCreateModel/submitStepForm',
-          payload: apiInfo,
-          callback: resp => {
-            // this.getApi(resp.data.apiId);
-            this.setBaseInfo(resp, dispatch);
-          },
-        });
-      }
-    });
-  };
-
   changeTab = key => {
     console.log(key);
     if (key === 'flow') {
@@ -291,387 +339,96 @@ class ApiDetail extends PureComponent {
     }
   };
 
+  returnPage = () => {
+    router.push({
+      pathname: `/apiGateway/apiList`,
+    });
+  };
+
   render() {
     const {
       form: { getFieldDecorator, getFieldValue },
-      submitting,
       apiService,
-      groupList,
     } = this.props;
     console.log('apidetails:render-this.props', this.props);
-    const { width, apiFlowData } = this.state;
-    const userId = getUserId();
+    console.log('apidetails:render-this.state', this.state);
+    const { width, apiFlowData, data } = this.state;
+    const { back } = data;
 
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
     const apiServiceBackendMembers =
       apiService && apiService.apiServiceBackends
         ? apiService.apiServiceBackends.map(item => ({ ...item, key: item.serviceSeq }))
         : [];
-    // // console.log("apiServiceBackendMembers:",apiServiceBackendMembers);
+    const apiServiceEndPoint = apiServiceBackendMembers.filter(
+      obj => obj.backendType === 'endpoint'
+    );
+    console.log(
+      'apiServiceBackendMembers:',
+      apiServiceBackendMembers,
+      'apiServiceEndPoint:',
+      apiServiceEndPoint
+    );
     return (
       <PageHeaderWrapper>
         <Card title="定义请求信息" className={styles.card} bordered={false}>
           <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
-            <Description term={fieldLabels.front.groupId}>
-              {getGroupName(groupList, apiService.groupId)}
-            </Description>
+            <Description term={fieldLabels.front.groupId}>{data.groupIdTitle}</Description>
             <Description term={fieldLabels.front.name}>{apiService.name}</Description>
             <Description term={fieldLabels.front.requestUrl}>{apiService.requestUrl}</Description>
-            <Description term={fieldLabels.front.serviceType}>
-              {getItemValue('apiService', 'service_type', apiService.serviceType)}
-            </Description>
-            <Description term={fieldLabels.front.reqMethod}>
-              {getItemValue('common', 'req_method', apiService.reqMethod)}
-            </Description>
-            <Description term={fieldLabels.front.protocol}>{apiService.protocol}</Description>
-            <Description term={fieldLabels.front.apiType}>
-              {getItemValue('apiService', 'api_type', apiService.apiType)}
-            </Description>
+            <Description term={fieldLabels.front.serviceType}>{data.serviceTypeTitle}</Description>
+            <Description term={fieldLabels.front.reqMethod}>{data.reqMethodTitle}</Description>
+            <Description term={fieldLabels.front.apiType}>{data.apiTypeTitle}</Description>
           </DescriptionList>
         </Card>
         <Card title="落地方服务信息" className={styles.card} bordered={false}>
-          <Form layout="vertical" hideRequiredMark>
-            <Row gutter={16}>
-              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
-                <Form.Item label={fieldLabels.back.serviceType}>
-                  {getFieldDecorator('back.serviceType', {
-                    rules: [{ required: true, message: '请选择后端服务类型' }],
-                  })(<SelectView javaCode="apiService" javaKey="service_type" />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 6, offset: 2 }}
-                lg={{ span: 8 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.back.url}>
-                  {getFieldDecorator('back.url', {
-                    rules: [{ required: true, message: '请输入后端请求地址' }],
-                  })(<Input placeholder="请输入后端请求地址" />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 8, offset: 2 }}
-                lg={{ span: 10 }}
-                md={{ span: 24 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.back.reqPath}>
-                  {getFieldDecorator('back.reqPath', {
-                    rules: [],
-                  })(<Input placeholder="请输入后端请求路径" />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
-                <Form.Item label={fieldLabels.back.reqMethod}>
-                  {getFieldDecorator('back.reqMethod', {
-                    rules: [{ required: true, message: '请选择HTTP Method' }],
-                  })(<SelectView javaCode="common" javaKey="req_method" />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 6, offset: 2 }}
-                lg={{ span: 8 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.back.connectTimeout}>
-                  {getFieldDecorator('back.connectTimeout', {
-                    rules: [{ required: true, message: '后端服务连接超时' }],
-                  })(<Input placeholder="请输入后端服务连接超时（ms）" />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 8, offset: 2 }}
-                lg={{ span: 10 }}
-                md={{ span: 24 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.back.socketTimeout}>
-                  {getFieldDecorator('back.socketTimeout', {
-                    rules: [{ required: true, message: '后端服务请求超时' }],
-                  })(<Input placeholder="请输入后端服务请求超时（ms）" />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
-                <Form.Item label={fieldLabels.back.orgId}>
-                  {getFieldDecorator('back.orgId', {
-                    rules: [{ required: true, message: `请选择${fieldLabels.back.orgId}` }],
-                  })(<OrgSelectView orgType="0,2" userId={userId} />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 16, offset: 2 }}
-                lg={{ span: 18 }}
-                md={{ span: 24 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.back.authType}>
-                  {getFieldDecorator('backAttr.authType', {
-                    rules: [{ required: true, message: `请选择${fieldLabels.backAttr.authType}` }],
-                  })(
-                    <Radio.Group>
-                      <Radio value="noneAuth">无认证</Radio>
-                      <Radio value="basicAuth">Basic认证</Radio>
-                      <Radio value="fixedToken">固定Token认证</Radio>
-                      <Radio value="dyncToken">动态Token认证</Radio>
-                    </Radio.Group>
-                  )}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row
-              gutter={16}
-              style={{
-                background: '#fff7e6',
-                display: getFieldValue('backAttr.authType') === 'basicAuth' ? 'block' : 'none',
-              }}
-            >
-              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
-                <Form.Item label={fieldLabels.backAttr.userName}>
-                  {getFieldDecorator('backAttr.userName', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.authType') === 'basicAuth',
-                        message: `请选择${fieldLabels.backAttr.userName}`,
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 16, offset: 2 }}
-                lg={{ span: 18 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.backAttr.userPassword}>
-                  {getFieldDecorator('backAttr.userPassword', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.authType') === 'basicAuth',
-                        message: `请选择${fieldLabels.backAttr.userPassword}`,
-                      },
-                    ],
-                  })(<Input.Password />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row
-              gutter={16}
-              style={{
-                background: '#fff7e6',
-                display: getFieldValue('backAttr.authType') === 'fixedToken' ? 'block' : 'none',
-              }}
-            >
-              <Col lg={24} md={24} sm={24} style={{ height: 80 }}>
-                <Form.Item label={fieldLabels.backAttr.tokenStr}>
-                  {getFieldDecorator('backAttr.tokenStr', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.authType') === 'fixedToken',
-                        message: `请选择${fieldLabels.backAttr.tokenStr}`,
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row
-              gutter={16}
-              style={{
-                background: '#fff7e6',
-                display: getFieldValue('backAttr.authType') === 'dyncToken' ? 'block' : 'none',
-              }}
-            >
-              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
-                <Form.Item label={fieldLabels.backAttr.tokenUser}>
-                  {getFieldDecorator('backAttr.tokenUser', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.authType') === 'dyncToken',
-                        message: `请选择${fieldLabels.backAttr.tokenUser}`,
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 6, offset: 2 }}
-                lg={{ span: 8 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.backAttr.tokenPassword}>
-                  {getFieldDecorator('backAttr.tokenPassword', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.authType') === 'dyncToken',
-                        message: `请选择${fieldLabels.backAttr.tokenPassword}`,
-                      },
-                    ],
-                  })(<Input.Password />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 8, offset: 2 }}
-                lg={{ span: 10 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.backAttr.tokenUrl}>
-                  {getFieldDecorator('backAttr.tokenUrl', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.authType') === 'dyncToken',
-                        message: `请选择${fieldLabels.backAttr.tokenUrl}`,
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
-                <Form.Item label={fieldLabels.back.protocol}>
-                  {getFieldDecorator('back.protocol', {
-                    rules: [{ required: true, message: '请选择后端协议' }],
-                  })(<SelectView javaCode="apiService" javaKey="protocol" />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 16, offset: 2 }}
-                lg={{ span: 18 }}
-                md={{ span: 24 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.backAttr.ssl}>
-                  {getFieldDecorator('backAttr.ssl', {
-                    rules: [{ required: true, message: `请选择${fieldLabels.backAttr.ssl}` }],
-                  })(
-                    <Radio.Group>
-                      <Radio value="open">开</Radio>
-                      <Radio value="close">关</Radio>
-                    </Radio.Group>
-                  )}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row
-              gutter={16}
-              style={{
-                background: '#fff7e6',
-                display: getFieldValue('backAttr.ssl') === 'open' ? 'block' : 'none',
-              }}
-            >
-              <Col
-                xl={{ span: 12 }}
-                lg={{ span: 12 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.backAttr.keyStore}>
-                  {getFieldDecorator('backAttr.keyStore', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.ssl') === 'open',
-                        message: `请选择${fieldLabels.backAttr.keyStore}`,
-                      },
-                    ],
-                  })(<Input.Password />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 12 }}
-                lg={{ span: 12 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.backAttr.keyStorePassword}>
-                  {getFieldDecorator('backAttr.keyStorePassword', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.ssl') === 'open',
-                        message: `请选择${fieldLabels.backAttr.keyStorePassword}`,
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row
-              gutter={16}
-              style={{
-                background: '#fff7e6',
-                display: getFieldValue('backAttr.ssl') === 'open' ? 'block' : 'none',
-              }}
-            >
-              <Col
-                xl={{ span: 12 }}
-                lg={{ span: 12 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.backAttr.trustStore}>
-                  {getFieldDecorator('backAttr.trustStore', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.ssl') === 'open',
-                        message: `请选择${fieldLabels.backAttr.trustStore}`,
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-              <Col
-                xl={{ span: 12 }}
-                lg={{ span: 12 }}
-                md={{ span: 12 }}
-                sm={24}
-                style={{ height: 80 }}
-              >
-                <Form.Item label={fieldLabels.backAttr.trustStorePassword}>
-                  {getFieldDecorator('backAttr.trustStorePassword', {
-                    rules: [
-                      {
-                        required: getFieldValue('backAttr.ssl') === 'open',
-                        message: `请选择${fieldLabels.backAttr.trustStorePassword}`,
-                      },
-                    ],
-                  })(<Input />)}
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
+          <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
+            <Description term={fieldLabels.back.serviceType}>{back.serviceTypeTitle}</Description>
+            <Description term={fieldLabels.back.url}>{back.url}</Description>
+            <Description term={fieldLabels.back.reqPath}>{back.reqPath}</Description>
+            <Description term={fieldLabels.back.reqMethod}>{back.reqMethodTitle}</Description>
+            <Description term={fieldLabels.back.connectTimeout}>{back.connectTimeout}</Description>
+            <Description term={fieldLabels.back.connectTimeout}>{back.connectTimeout}</Description>
+            <Description term={fieldLabels.back.orgId}>{back.orgIdTitle}</Description>
+            <Description term={fieldLabels.backAttr.ssl}>{back.sslTitle}</Description>
+            <Description term={fieldLabels.back.authType}>{back.authTypeTitle}</Description>
+          </DescriptionList>
+          <DescriptionList
+            style={{
+              display: back.authType === 'basicAuth' ? 'block' : 'none',
+            }}
+          >
+            <Description term={fieldLabels.backAttr.userName}>{back.userName}</Description>
+            <Description term={fieldLabels.backAttr.userPassword}>{back.userPassword}</Description>
+          </DescriptionList>
+          <DescriptionList
+            style={{
+              display: back.authType === 'fixedToken' ? 'block' : 'none',
+            }}
+          >
+            <Description term={fieldLabels.backAttr.tokenStr}>{back.tokenStr}</Description>
+          </DescriptionList>
+          <DescriptionList
+            style={{
+              display: back.authType === 'dyncToken' ? 'block' : 'none',
+            }}
+          >
+            <Description term={fieldLabels.backAttr.tokenUser}>{back.tokenUser}</Description>
+            <Description term={fieldLabels.backAttr.tokenPassword}>
+              {back.tokenPassword}
+            </Description>
+            <Description term={fieldLabels.backAttr.tokenUrl}>{back.tokenUrl}</Description>
+          </DescriptionList>
         </Card>
         <Tabs defaultActiveKey="1" onChange={this.changeTab}>
           <TabPane tab="Table" key="table">
             <Card title="高级配置" bordered={false}>
-              {getFieldDecorator('members', {
-                initialValue: apiServiceBackendMembers,
-              })(<TableForm />)}
+              <Table columns={columns} dataSource={apiServiceBackendMembers} pagination={false} />
             </Card>
           </TabPane>
-          <TabPane tab="Api Flow" key="flow">
+          <TabPane tab="Org Table" key="flow">
             <Card title="高级配置" bordered={false}>
-              <ApiFlow data={apiFlowData} />
+              <Table columns={columnsOrg} dataSource={data.apiServiceOrgs} pagination={false} />
             </Card>
           </TabPane>
         </Tabs>
