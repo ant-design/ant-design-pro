@@ -45,12 +45,13 @@ const PageHeaderWrapper = ({
   logo,
   showBreadcrumb, // 强制现实导航条
   extraContent,
+  onBack,
   ...restProps
 }) => {
   return (
     <div style={{ margin: '-24px -24px 0' }} className={classNames(classNames, styles.main)}>
       {top}
-      {((title && content)||showBreadcrumb) && (
+      {((title && content)||onBack||showBreadcrumb) && (
         <MenuContext.Consumer>
           {value => {
             return (
@@ -67,8 +68,9 @@ const PageHeaderWrapper = ({
                   </Title>
                 }
                 key="pageheader"
+                onBack
                 {...restProps}
-                breadcrumb={conversionBreadcrumbList({
+                breadcrumb={onBack?[]:conversionBreadcrumbList({
                   ...value,
                   ...restProps,
                   home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
