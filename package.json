@@ -16,7 +16,6 @@
     "fetch:blocks": "node ./scripts/fetch-blocks.js",
     "functions:build": "netlify-lambda build ./lambda",
     "functions:run": "cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
-    "generateMock": "node ./scripts/generateMock",
     "lint": "npm run lint:js && npm run lint:ts && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
@@ -148,6 +147,17 @@
     "scripts/**/*.js"
   ],
   "create-umi": {
+    "ignoreScript": [
+      "docker*",
+      "functions*",
+      "site",
+      "generateMock"
+    ],
+    "ignoreDependencies": [
+      "netlify*",
+      "serverless",
+      "express"
+    ],
     "copy": [
       [
         "create-umi/README.md",
