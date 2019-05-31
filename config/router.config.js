@@ -111,6 +111,17 @@ export default [
             component: './system-management/role/edit/Index',
           },
           {
+            hideInMenu: true,
+            path: '/system-management/role/permissAuth/:roleId',
+            name: 'role-permissAuth',
+            component: './system-management/role/permissAuth/Index',
+          },
+          {
+            path: '/system-management/permission/list',
+            name: 'permission-list',
+            component: './system-management/permission/list/Index',
+          },
+          {
             path: '/system-management/menu/list',
             name: 'menu-list',
             component: './system-management/menu/list/Index',

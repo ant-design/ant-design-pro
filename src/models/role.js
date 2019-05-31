@@ -1,6 +1,6 @@
 import router from 'umi/router';
 import { message } from 'antd';
-import { query as queryRoles, addRole, queryById, updateRole, deleteById } from '@/services/role';
+import { query as queryRoles, addRole, queryById, updateRole, deleteById, menuAuth } from '@/services/role';
 export default {
   namespace: 'role',
   state: {
@@ -53,6 +53,14 @@ export default {
           type: 'fetch',
           payload: {},
         });
+      } else {
+        message.error(response.msg);
+      }
+    },
+    *menuAuth({ payload }, { call, put }) {
+      const response = yield call(menuAuth, payload);
+      if (response.code === 0) {
+        message.success('操作成功', 2);
       } else {
         message.error(response.msg);
       }

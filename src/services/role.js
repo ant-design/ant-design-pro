@@ -32,3 +32,10 @@ export async function updateRole(params) {
     },
   });
 }
+
+export async function menuAuth(params) {
+  return request('/api/v1/role/menuAuth', {
+    method: 'POST',
+    data: params,
+  });
+}

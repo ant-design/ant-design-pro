@@ -18,6 +18,8 @@ export default {
   'menu.system-management.role-list': '角色管理',
   'menu.system-management.role-add': '角色新增',
   'menu.system-management.role-edit': '角色编辑',
+  'menu.system-management.role-permissAuth': '权限配置',
+  'menu.system-management.permission-list': '权限管理',
   'menu.system-management.menu-list': '菜单管理',
   'menu.system-management.menu-add': '菜单新增',
   'menu.system-management.menu-edit': '菜单编辑',

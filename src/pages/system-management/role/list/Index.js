@@ -21,6 +21,7 @@ import {
   Select,
   Badge,
   Popconfirm,
+  message,
   Divider,
 } from 'antd';
 import StandardTable from '@/components/StandardTable';
@@ -95,6 +96,23 @@ class RoleList extends PureComponent {
       payload: record.id,
     });
   };
+
+  handleMenuClick = e => {
+    console.log(e);
+    const { selectedRows } = this.state;
+    if (selectedRows.length === 0) return;
+    switch (e.key) {
+      case 'permissAuth':
+        if (selectedRows.length === 1) {
+          router.push('/system-management/role/permissAuth/' + selectedRows[0].id);
+        } else {
+          message.error('请选择一个角色进行授权!');
+        }
+        break;
+      default:
+        break;
+    }
+  };
   columns = [
     {
       title: '角色名称',
@@ -134,6 +152,7 @@ class RoleList extends PureComponent {
       ),
     },
   ];
+
   render() {
     const {
       role: { data },
@@ -142,7 +161,7 @@ class RoleList extends PureComponent {
     const { selectedRows } = this.state;
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
-        <Menu.Item key="batchRemove">批量删除</Menu.Item>
+        <Menu.Item key="permissAuth">权限配置</Menu.Item>
       </Menu>
     );
     return (
