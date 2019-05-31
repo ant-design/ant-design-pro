@@ -12,7 +12,7 @@ import { getAuth } from '@/utils/authority';
 const { check } = Authorized;
 
 const auth = getAuth('org_save'); // 获取某个功能权的角色
-const saveAct = check(auth, 'modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
+const saveAct = check(auth, 'Modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
 const commandAct = check(auth, 'role');
 
 // 动作对象
@@ -20,7 +20,7 @@ const actions =
   saveAct || commandAct
     ? {
         title: 'action',
-        width: 130,
+        width: 160,
         saveAct,
         commandAct,
         havePermissions: true,
@@ -35,7 +35,7 @@ const actions =
 const orgTypes = getItems('org', 'org_type'); // 缓存取数据
 const authTypes = getItems('org', 'auth_type');
 const statusList = getItems('common', 'status');
-console.log(orgTypes, authTypes);
+
 const columnSchemas = {
   tableName: 'org',
   key: 'id',
@@ -43,7 +43,7 @@ const columnSchemas = {
   columnDetails: [
     { name: 'appkey', title: 'App Key', query: true }, // name  数据库属性 query查询是否显示 add 新增 ,disableAct修改, rules 输入规则 tag下拉框
     { name: 'id', title: 'ID', columnHidden: false, add: true, disabledAct: 'true' }, // 第一列需要作为查询条件，新增时不需要采集
-    { name: 'orgCode', title: 'Code' }, // 第二列需要作为查询条件，新增时需要采集
+    { name: 'orgCode', title: 'Code', columnHidden: true }, // 第二列需要作为查询条件，新增时需要采集
     { name: 'orgName', title: 'Name', sorter: true, query: true, add: true }, //  需要排序，需要作为查询条件，新增时需要采集
     { name: 'createTime', title: 'Create Date', format: 'YYYY-MM-DD HH:mm:ss' }, // 返回是日期类型，需要转换
     { name: 'tel', title: 'tel', columnHidden: true, add: true, rules: [] },
@@ -143,7 +143,9 @@ class Org extends PureComponent {
         >
           <QueryCommand>
             <Divider type="vertical" />
-            <a onClick={() => this.handleUser()}>Select User</a>
+            <a onClick={() => this.handleUser()} title="Set Data Access Permission">
+              Access
+            </a>
           </QueryCommand>
         </BindDataQueryTable>
         <UserTransfer
