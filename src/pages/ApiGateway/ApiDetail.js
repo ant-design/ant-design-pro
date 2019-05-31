@@ -364,12 +364,12 @@ class ApiDetail extends PureComponent {
           </DescriptionList>
         </Card>
         <Tabs defaultActiveKey="1" onChange={this.changeTab}>
-          <TabPane tab="Advance Org" key="org">
+          <TabPane tab="Access Org" key="org">
             <Card title="" bordered={false}>
               <Table columns={columnsOrg} dataSource={data.apiServiceOrgs} pagination={false} />
             </Card>
           </TabPane>
-          <TabPane tab="Access Config" key="table">
+          <TabPane tab="Advance Config" key="table">
             <Card title="" bordered={false}>
               <Table columns={columns} dataSource={apiServiceBackendMembers} pagination={false} />
             </Card>
