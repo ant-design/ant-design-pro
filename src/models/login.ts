@@ -3,7 +3,7 @@ import { Reducer, AnyAction } from 'redux';
 import { EffectsCommandMap } from 'dva';
 import { stringify, parse } from 'qs';
 
-export function getPageQuery() {
+export function getPageQuery(): string {
   return parse(window.location.href.split('?')[1]);
 }
 

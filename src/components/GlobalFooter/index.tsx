@@ -3,12 +3,12 @@ import classNames from 'classnames';
 import styles from './index.less';
 
 export interface GlobalFooterProps {
-  links?: Array<{
+  links?: {
     key?: string;
     title: React.ReactNode;
     href: string;
     blankTarget?: boolean;
-  }>;
+  }[];
   copyright?: React.ReactNode;
   style?: React.CSSProperties;
   className?: string;

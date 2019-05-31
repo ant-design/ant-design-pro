@@ -4,21 +4,21 @@ import React from 'react';
 // eslint-disable-next-line import/no-cycle
 import { isComponentClass } from './Secured';
 
-interface IPromiseRenderProps<T, K> {
+interface PromiseRenderProps<T, K> {
   ok: T;
   error: K;
   promise: Promise<any>;
 }
 
-interface IPromiseRenderState {
+interface PromiseRenderState {
   component: React.ComponentClass<any, any> | React.FunctionComponent<any>;
 }
 
 export default class PromiseRender<T, K> extends React.Component<
-  IPromiseRenderProps<T, K>,
-  IPromiseRenderState
+  PromiseRenderProps<T, K>,
+  PromiseRenderState
 > {
-  state: IPromiseRenderState = {
+  state: PromiseRenderState = {
     component: () => null,
   };
 
@@ -26,10 +26,7 @@ export default class PromiseRender<T, K> extends React.Component<
     this.setRenderComponent(this.props);
   }
 
-  shouldComponentUpdate = (
-    nextProps: IPromiseRenderProps<T, K>,
-    nextState: IPromiseRenderState,
-  ) => {
+  shouldComponentUpdate = (nextProps: PromiseRenderProps<T, K>, nextState: PromiseRenderState) => {
     const { component } = this.state;
     if (!isEqual(nextProps, this.props)) {
       this.setRenderComponent(nextProps);
@@ -39,7 +36,7 @@ export default class PromiseRender<T, K> extends React.Component<
   };
 
   // set render Component : ok or error
-  setRenderComponent(props: IPromiseRenderProps<T, K>) {
+  setRenderComponent(props: PromiseRenderProps<T, K>) {
     const ok = this.checkIsInstantiation(props.ok);
     const error = this.checkIsInstantiation(props.error);
     props.promise
@@ -47,6 +44,7 @@ export default class PromiseRender<T, K> extends React.Component<
         this.setState({
           component: ok,
         });
+        return true;
       })
       .catch(() => {
         this.setState({

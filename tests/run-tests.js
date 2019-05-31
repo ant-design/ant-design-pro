@@ -1,4 +1,6 @@
-/* eslint-disable no-console */
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable eslint-comments/no-unlimited-disable */
 const { spawn } = require('child_process');
 const { kill } = require('cross-port-killer');
 
@@ -37,7 +39,7 @@ startServer.stdout.on('data', data => {
       ['test', '--', '--maxWorkers=1', '--runInBand'],
       {
         stdio: 'inherit',
-      }
+      },
     );
     testCmd.on('exit', code => {
       startServer.kill();

@@ -35,3 +35,4 @@ functions/*
 # screenshot
 screenshot
 .firebase
+.eslintcache

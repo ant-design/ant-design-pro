@@ -10,7 +10,7 @@ interface AuthComponentProps extends ConnectProps {
 }
 
 const getRouteAuthority = (path: string, routeData: Route[]) => {
-  let authorities: string[] | string | undefined = undefined;
+  let authorities: string[] | string | undefined;
   routeData.forEach(route => {
     // match prefix
     if (pathToRegexp(`${route.path}(.*)`).test(path)) {
@@ -29,7 +29,9 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
   route = {
     routes: [],
   },
-  location,
+  location = {
+    pathname: '',
+  },
   user,
 }) => {
   const { currentUser } = user;
@@ -37,7 +39,7 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
   const isLogin = currentUser && currentUser.name;
   return (
     <Authorized
-      authority={getRouteAuthority(location!.pathname, routes)!}
+      authority={getRouteAuthority(location.pathname, routes) || ''}
       noMatch={isLogin ? <Redirect to="/exception/403" /> : <Redirect to="/user/login" />}
     >
       {children}

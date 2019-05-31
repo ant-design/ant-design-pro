@@ -18,6 +18,7 @@ import {
   Settings,
 } from '@ant-design/pro-layout';
 import Link from 'umi/link';
+
 export interface BasicLayoutProps extends ProLayoutComponentsProps, ConnectProps {
   breadcrumbNameMap: {
     [path: string]: MenuDataItem;
@@ -60,7 +61,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   /**
    * init variables
    */
-  const handleMenuCollapse = (payload: boolean) =>
+  const handleMenuCollapse = (payload: boolean): void =>
     dispatch &&
     dispatch({
       type: 'global/changeLayoutCollapsed',

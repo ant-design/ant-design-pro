@@ -2,7 +2,7 @@ import SelectLang from '@/components/SelectLang';
 import GlobalFooter from '@/components/GlobalFooter';
 import { ConnectProps } from '@/models/connect';
 import { Icon } from 'antd';
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import DocumentTitle from 'react-document-title';
 import { formatMessage } from 'umi-plugin-locale';
 import Link from 'umi/link';
@@ -36,48 +36,48 @@ const copyright = (
 
 export interface UserLayoutProps extends ConnectProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
-  navTheme: string;
+  navTheme: 'dark' | 'light';
 }
 
-class UserLayout extends Component<UserLayoutProps> {
-  render() {
-    const {
-      route = {
-        routes: [],
-      },
-    } = this.props;
-    const { routes = [] } = route;
-    const { children, location } = this.props;
-    const { breadcrumb } = getMenuData(routes, this.props);
-    return (
-      <DocumentTitle
-        title={getPageTitle({
-          pathname: location!.pathname,
-          breadcrumb,
-          formatMessage,
-        })}
-      >
-        <div className={styles.container}>
-          <div className={styles.lang}>
-            <SelectLang />
-          </div>
-          <div className={styles.content}>
-            <div className={styles.top}>
-              <div className={styles.header}>
-                <Link to="/">
-                  <img alt="logo" className={styles.logo} src={logo} />
-                  <span className={styles.title}>Ant Design</span>
-                </Link>
-              </div>
-              <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
-            </div>
-            {children}
-          </div>
-          <GlobalFooter links={links} copyright={copyright} />
+const UserLayout: React.SFC<UserLayoutProps> = props => {
+  const {
+    route = {
+      routes: [],
+    },
+    children,
+    location = {
+      pathname: '',
+    },
+  } = props;
+  const { routes = [] } = route;
+  const { breadcrumb } = getMenuData(routes, props);
+  return (
+    <DocumentTitle
+      title={getPageTitle({
+        pathname: location.pathname,
+        breadcrumb,
+        formatMessage,
+      })}
+    >
+      <div className={styles.container}>
+        <div className={styles.lang}>
+          <SelectLang />
         </div>
-      </DocumentTitle>
-    );
-  }
-}
-
+        <div className={styles.content}>
+          <div className={styles.top}>
+            <div className={styles.header}>
+              <Link to="/">
+                <img alt="logo" className={styles.logo} src={logo} />
+                <span className={styles.title}>Ant Design</span>
+              </Link>
+            </div>
+            <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+          </div>
+          {children}
+        </div>
+        <GlobalFooter links={links} copyright={copyright} />
+      </div>
+    </DocumentTitle>
+  );
+};
 export default UserLayout;

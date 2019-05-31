@@ -19,6 +19,37 @@ export interface GlobalHeaderRightProps extends ConnectProps {
 }
 
 class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'global/fetchNotices',
+      });
+    }
+  }
+
+  changeReadState = (clickedItem: NoticeItem): void => {
+    const { id } = clickedItem;
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'global/changeNoticeReadState',
+        payload: id,
+      });
+    }
+  };
+
+  handleNoticeClear = (title: string, key: string) => {
+    const { dispatch } = this.props;
+    message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${title}`);
+    if (dispatch) {
+      dispatch({
+        type: 'global/clearNotices',
+        payload: key,
+      });
+    }
+  };
+
   getNoticeData = (): { [key: string]: NoticeItem[] } => {
     const { notices = [] } = this.props;
     if (notices.length === 0) {
@@ -52,7 +83,8 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
 
   getUnreadData = (noticeData: { [key: string]: NoticeItem[] }) => {
     const unreadMsg: { [key: string]: number } = {};
-    Object.entries(noticeData).forEach(([key, value]) => {
+    Object.keys(noticeData).forEach(key => {
+      const value = noticeData[key];
       if (!unreadMsg[key]) {
         unreadMsg[key] = 0;
       }
@@ -63,34 +95,6 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
     return unreadMsg;
   };
 
-  changeReadState = (clickedItem: NoticeItem) => {
-    const { id } = clickedItem;
-    const { dispatch } = this.props;
-    if (dispatch) {
-      dispatch({
-        type: 'global/changeNoticeReadState',
-        payload: id,
-      });
-    }
-  };
-  componentDidMount() {
-    const { dispatch } = this.props;
-    if (dispatch) {
-      dispatch({
-        type: 'global/fetchNotices',
-      });
-    }
-  }
-  handleNoticeClear = (title: string, key: string) => {
-    const { dispatch } = this.props;
-    message.success(`${formatMessage({ id: 'component.noticeIcon.cleared' })} ${title}`);
-    if (dispatch) {
-      dispatch({
-        type: 'global/clearNotices',
-        payload: key,
-      });
-    }
-  };
   render() {
     const { currentUser, fetchingNotices, onNoticeVisibleChange } = this.props;
     const noticeData = this.getNoticeData();

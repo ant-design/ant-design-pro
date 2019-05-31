@@ -1,16 +1,15 @@
 import React from 'react';
 import { Icon, Typography, Popover } from 'antd';
-import styles from './index.less';
 import { connect } from 'dva';
-import * as H from 'history';
 import { FormattedMessage } from 'umi-plugin-react/locale';
+import styles from './index.less';
 
-const firstUpperCase = (pathString: string) => {
+const firstUpperCase = (pathString: string): string => {
   return pathString
     .replace('.', '')
-    .split(/\/|\-/)
-    .map(s => s.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase()))
-    .filter(s => s)
+    .split(/\/|-/)
+    .map((s): string => s.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase()))
+    .filter((s): boolean => !!s)
     .join('');
 };
 const BlockCodeView: React.SFC<{
@@ -26,7 +25,11 @@ const BlockCodeView: React.SFC<{
   );
 };
 
-type RoutingType = { location: H.Location };
+interface RoutingType {
+  location: {
+    pathname: string;
+  };
+}
 
 export default connect(({ routing }: { routing: RoutingType }) => ({
   location: routing.location,

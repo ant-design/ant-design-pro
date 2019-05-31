@@ -26,8 +26,8 @@ const updateTheme: (primaryColor?: string) => void = primaryColor => {
   const hideMessage = message.loading('正在编译主题！', 0);
   function buildIt() {
     if (!(window as any).less) {
-      // tslint:disable-next-line no-console
-      return console.log('no less');
+      console.log('no less');
+      return;
     }
     setTimeout(() => {
       (window as any).less
@@ -36,6 +36,7 @@ const updateTheme: (primaryColor?: string) => void = primaryColor => {
         })
         .then(() => {
           hideMessage();
+          return true;
         })
         .catch(() => {
           message.error('Failed to update theme');
