@@ -109,7 +109,7 @@ class TableList extends PureComponent {
         title: 'API名称',
         dataIndex: 'name',
         /*  执行函数 */
-        render: (text, record) => <a onClick={() => this.handleDetail(record.apiId)}>{text}</a>,
+        render: (text, record) => <a onClick={() => this.handleDetail(true, record)}>{text}</a>,
       },
       {
         title: '分组',
@@ -242,17 +242,6 @@ class TableList extends PureComponent {
       return newObj;
     }, {});
     return filters;
-  };
-
-  handleDetail = id => {
-    console.log(33333);
-    router.push({
-      pathname: `/apiGateway/apiDetail`, // 通过url参数传递
-      state: {
-        // 通过对象传递
-        id,
-      },
-    });
   };
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
@@ -431,6 +420,18 @@ class TableList extends PureComponent {
     });
   };
 
+  handleDetail = (flag, record) => {
+    const { apiId } = record;
+    router.push({
+      pathname: `/apiGateway/apiDetail`, // 通过url参数传递
+      state: {
+        // 通过对象传递
+        apiId, // 如果相同则简写 apiId : apiId
+        record, // 表格某行的对象数据
+      },
+    });
+  };
+
   handleOrgTransfer = updateApiServiceOrg => {
     console.log('---updateApiServiceOrg＝＝＝＝3:', updateApiServiceOrg);
     this.setState({ updateApiServiceOrg });
@@ -594,7 +595,7 @@ class TableList extends PureComponent {
     const rowKey = 'apiId';
     const columns = this.getColumns();
     return (
-      <PageHeaderWrapper showBreadcrumb style={{height:'50px'}}>
+      <PageHeaderWrapper showBreadcrumb style={{ height: '50px' }}>
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
