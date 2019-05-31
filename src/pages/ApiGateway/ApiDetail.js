@@ -298,7 +298,7 @@ class ApiDetail extends PureComponent {
       apiServiceEndPoint
     );
     return (
-      <PageHeaderWrapper>
+      <PageHeaderWrapper onBack={() => window.history.back()} style={{height:'50px'}} title='Api Detail'>
         <Card title="定义请求信息" className={styles.card} bordered={false}>
           <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
             <Description term={fieldLabels.front.groupId}>{data.groupIdTitle}</Description>
