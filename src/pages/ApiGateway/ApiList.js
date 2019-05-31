@@ -236,12 +236,11 @@ class TableList extends PureComponent {
    * {status: Array(2)} 转化为{status: "1,2"}
    */
   conversionFilter = filtersArg => {
-    const filters = Object.keys(filtersArg).reduce((obj, key) => {
+    return Object.keys(filtersArg).reduce((obj, key) => {
       const newObj = { ...obj };
       newObj[key] = getValue(filtersArg[key]);
       return newObj;
     }, {});
-    return filters;
   };
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
@@ -402,10 +401,10 @@ class TableList extends PureComponent {
     });
   };
 
-  handleVisible = drawerVisible => {
-    // console.log("---modalVisible＝＝＝＝3:",modalVisible);
-    this.setState({ drawerVisible });
-  };
+  // handleVisible = drawerVisible => {
+  //   // console.log("---modalVisible＝＝＝＝3:",modalVisible);
+  //   this.setState({ drawerVisible });
+  // };
 
   handleUpdate = (flag, record) => {
     const { apiId } = record;
@@ -483,12 +482,12 @@ class TableList extends PureComponent {
     });
   };
 
-  handleDrawerVisible = (row, flag) => {
-    this.setState({
-      drawerVisible: flag,
-      selectedRow: row,
-    });
-  };
+  // handleDrawerVisible = (row, flag) => {
+  //   this.setState({
+  //     drawerVisible: flag,
+  //     selectedRow: row,
+  //   });
+  // };
 
   renderSimpleForm() {
     const {
