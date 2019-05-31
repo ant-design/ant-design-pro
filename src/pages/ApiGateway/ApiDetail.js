@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Card, Button, Form, Table, Tabs, BackTop } from 'antd';
+import { Card, Button, Form, Table, Tabs, BackTop, Badge } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
@@ -23,6 +23,7 @@ const fieldLabels = {
     protocol: '协议',
     reqMethod: '请求Method',
     apiType: 'Api范围',
+    status:'状态'
   },
   back: {
     serviceType: '服务类型',
@@ -71,6 +72,10 @@ const columnsOrg = [
     dataIndex: 'apiId',
   },
   {
+    title: 'appkey',
+    dataIndex: 'appkey',
+  },
+  {
     title: '名称',
     dataIndex: 'orgName',
   },
@@ -96,6 +101,8 @@ const columnsOrg = [
 //     url: 'com.ai.odc.changeParam',
 //   },
 // ];
+
+const statusMap = ['default', 'processing', 'success', 'default', 'error'];
 
 @connect(({ apiCreateModel, groupModel, orgModel, loading }) => ({
   apiService: apiCreateModel.apiService,
@@ -174,6 +181,7 @@ class ApiDetail extends PureComponent {
       ? getItemValue('common', 'req_method', data.reqMethod)
       : null;
     data.apiTypeTitle = data.apiType ? getItemValue('apiService', 'api_type', data.apiType) : null;
+    data.statusTitle = data.status ? getItemValue('apiService', 'status', data.status) : null;
 
     // 落地方服务信息数组转为对象
     const apiServiceBackend = data.apiServiceBackends.find(obj => obj.backendType === 'endpoint');
@@ -303,6 +311,9 @@ class ApiDetail extends PureComponent {
           <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
             <Description term={fieldLabels.front.groupId}>{data.groupIdTitle}</Description>
             <Description term={fieldLabels.front.name}>{apiService.name}</Description>
+            <Description term={fieldLabels.front.status}>
+              <Badge status={statusMap[data.status]} text={data.statusTitle} />
+            </Description>
             <Description term={fieldLabels.front.requestUrl}>{apiService.requestUrl}</Description>
             <Description term={fieldLabels.front.serviceType}>{data.serviceTypeTitle}</Description>
             <Description term={fieldLabels.front.reqMethod}>{data.reqMethodTitle}</Description>
@@ -349,14 +360,14 @@ class ApiDetail extends PureComponent {
           </DescriptionList>
         </Card>
         <Tabs defaultActiveKey="1" onChange={this.changeTab}>
-          <TabPane tab="Table" key="table">
-            <Card title="高级配置" bordered={false}>
-              <Table columns={columns} dataSource={apiServiceBackendMembers} pagination={false} />
+          <TabPane tab="Advance Config" key="org">
+            <Card title="" bordered={false}>
+              <Table columns={columnsOrg} dataSource={data.apiServiceOrgs} pagination={false} />
             </Card>
           </TabPane>
-          <TabPane tab="Org Table" key="org">
-            <Card title="高级配置" bordered={false}>
-              <Table columns={columnsOrg} dataSource={data.apiServiceOrgs} pagination={false} />
+          <TabPane tab="Access Org" key="table">
+            <Card title="" bordered={false}>
+              <Table columns={columns} dataSource={apiServiceBackendMembers} pagination={false} />
             </Card>
           </TabPane>
         </Tabs>
