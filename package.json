@@ -30,7 +30,8 @@
     "start:no-mock": "cross-env MOCK=none umi dev",
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
-    "test:component": "umi test ./src/components"
+    "test:component": "umi test ./src/components",
+    "format-imports": "import-sort --write '**/*.{js,jsx,ts,tsx}'"
   },
   "husky": {
     "hooks": {
