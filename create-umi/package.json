@@ -6,7 +6,7 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "lint": "npm run lint:js && npm run lint:ts && npm run lint:style && npm run lint:prettier",
+    "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js",
     "lint-staged:ts": "tslint",
@@ -14,7 +14,6 @@
     "lint:js": "eslint --ext .js src tests",
     "lint:prettier": "check-prettier lint",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "lint:ts": "tslint -p . -c tslint.yml",
     "prettier": " check-prettier write",
     "start": "umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
