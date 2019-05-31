@@ -68,7 +68,7 @@ const PageHeaderWrapper = ({
                   </Title>
                 }
                 key="pageheader"
-                onBack
+                onBack={onBack}
                 {...restProps}
                 breadcrumb={onBack?[]:conversionBreadcrumbList({
                   ...value,
