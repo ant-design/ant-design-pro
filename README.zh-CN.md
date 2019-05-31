@@ -17,6 +17,10 @@
 - 常见问题：http://pro.ant.design/docs/faq-cn
 - 国内镜像：http://ant-design-pro.gitee.io
 
+## 现在我们发布了 4.0! 🎉🎉🎉
+
+[Announcing Ant Design Pro 4.0.0](https://zhuanlan.zhihu.com/p/67498559)
+
 ## 特性
 
 - :bulb: **TypeScript**: 应用程序级 JavaScript 的语言
