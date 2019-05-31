@@ -297,7 +297,11 @@ class ApiUpdate extends PureComponent {
         : [];
     // // console.log("apiServiceBackendMembers:",apiServiceBackendMembers);
     return (
-      <PageHeaderWrapper>
+      <PageHeaderWrapper
+        onBack={() => window.history.back()}
+        style={{ height: '50px' }}
+        title="Api Update"
+      >
         <Card title="定义请求信息" className={styles.card} bordered={false}>
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={2}>

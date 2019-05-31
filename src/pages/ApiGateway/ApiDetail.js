@@ -23,7 +23,7 @@ const fieldLabels = {
     protocol: '协议',
     reqMethod: '请求Method',
     apiType: 'Api范围',
-    status:'状态'
+    status: '状态',
   },
   back: {
     serviceType: '服务类型',
@@ -306,7 +306,11 @@ class ApiDetail extends PureComponent {
       apiServiceEndPoint
     );
     return (
-      <PageHeaderWrapper onBack={() => window.history.back()} style={{height:'50px'}} title='Api Detail'>
+      <PageHeaderWrapper
+        onBack={() => window.history.back()}
+        style={{ height: '50px' }}
+        title="Api Detail"
+      >
         <Card title="定义请求信息" className={styles.card} bordered={false}>
           <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
             <Description term={fieldLabels.front.groupId}>{data.groupIdTitle}</Description>
@@ -360,12 +364,12 @@ class ApiDetail extends PureComponent {
           </DescriptionList>
         </Card>
         <Tabs defaultActiveKey="1" onChange={this.changeTab}>
-          <TabPane tab="Advance Config" key="org">
+          <TabPane tab="Advance Org" key="org">
             <Card title="" bordered={false}>
               <Table columns={columnsOrg} dataSource={data.apiServiceOrgs} pagination={false} />
             </Card>
           </TabPane>
-          <TabPane tab="Access Org" key="table">
+          <TabPane tab="Access Config" key="table">
             <Card title="" bordered={false}>
               <Table columns={columns} dataSource={apiServiceBackendMembers} pagination={false} />
             </Card>
