@@ -719,8 +719,8 @@ class ApiUpdate extends PureComponent {
           </Form>
         </Card>
         <Tabs defaultActiveKey="1" onChange={this.changeTab}>
-          <TabPane tab="Table" key="table">
-            <Card title="高级配置" bordered={false}>
+          <TabPane tab="高级配置" key="table">
+            <Card bordered={false}>
               {getFieldDecorator('members', {
                 initialValue: apiServiceBackendMembers,
               })(<TableForm />)}
