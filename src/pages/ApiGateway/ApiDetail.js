@@ -1,5 +1,5 @@
-import React, { Fragment, PureComponent } from 'react';
-import { Card, Button, Form, Icon, Col, Row, Popover, Table, Tabs, BackTop } from 'antd';
+import React, { PureComponent } from 'react';
+import { Card, Button, Form, Table, Tabs, BackTop } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
@@ -12,7 +12,6 @@ import DescriptionList from '@/components/DescriptionList';
 import { getGroupName, getItemValue, getName } from '@/utils/masterData';
 
 const { TabPane } = Tabs;
-const forms = ['front', 'back', 'backAttr'];
 const { Description } = DescriptionList;
 
 const fieldLabels = {
@@ -128,7 +127,7 @@ class ApiDetail extends PureComponent {
     const { userId } = getUserId();
     dispatch({
       type: 'orgModel/allOrgList',
-      payload: { orgType: '0,1', userId: userId },
+      payload: { orgType: '0,1', userId },
     });
     // 请求获取apiInfo详情
     this.getApi(apiId);
@@ -180,9 +179,9 @@ class ApiDetail extends PureComponent {
     const apiServiceBackend = data.apiServiceBackends.find(obj => obj.backendType === 'endpoint');
     const { apiServiceBackendAttrs } = apiServiceBackend;
     const conversionAttrObj = conversionAttr(apiServiceBackendAttrs);
-    const apiServiceBackendMembers = data.apiServiceBackends.filter(
-      obj => obj.backendType !== 'endpoint'
-    );
+    // const apiServiceBackendMembers = data.apiServiceBackends.filter(
+    //   obj => obj.backendType !== 'endpoint'
+    // );
     // 落地方服务信息转化
     const apiServiceBackendFormat = { ...apiServiceBackend, ...conversionAttrObj };
     apiServiceBackendFormat.serviceTypeTitle = apiServiceBackendFormat.serviceType
@@ -247,74 +246,6 @@ class ApiDetail extends PureComponent {
     this.setState({ data }); //  设置state中的resp的值
   };
 
-  getErrorInfo = () => {
-    const errorList = [];
-    forms.forEach(value => {
-      const subErrorList = this.getErrorInfoByPrefixList(value) || [];
-      errorList.push(...subErrorList);
-    });
-    const errorInfo = this.getErrorInfoByPrefix(errorList);
-    return errorInfo;
-  };
-
-  getErrorInfoByPrefixList = prefix => {
-    const {
-      form: { getFieldError },
-    } = this.props;
-    // const errors = getFieldsError();
-    const errors = getFieldError(prefix);
-    const errorCount = Object.keys(errors).filter(key => errors[key]).length;
-    // // console.log(errors,errorCount);
-    if (!errors || errorCount === 0) {
-      return null;
-    }
-    const scrollToField = fieldKey => {
-      const realFieldKey = `${prefix}.${fieldKey}`;
-      const labelNode = document.querySelector(`label[for="${realFieldKey}"]`);
-      if (labelNode) {
-        labelNode.scrollIntoView(true);
-      }
-    };
-    // // console.log(errors);
-    const errorList =
-      Object.keys(errors).map(key => {
-        // // console.log(errors[key],fieldLabels.front[key]);
-        if (!errors[key]) {
-          return null;
-        }
-        return (
-          <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
-            <Icon type="cross-circle-o" className={styles.errorIcon} />
-            <div className={styles.errorMessage}>{errors[key][0]}</div>
-            <div className={styles.errorField}>{fieldLabels.front[key]}</div>
-          </li>
-        );
-      }) || [];
-    return errorList.filter(item => item !== null);
-  };
-
-  getErrorInfoByPrefix = errorList => {
-    // console.log(errorList);
-    const errorCount = errorList ? errorList.length : 0;
-    if (errorCount === 0) {
-      return null;
-    }
-    return (
-      <span className={styles.errorIcon}>
-        <Popover
-          title="表单校验信息"
-          content={errorList}
-          overlayClassName={styles.errorPopover}
-          trigger="click"
-          getPopupContainer={trigger => trigger.parentNode}
-        >
-          <Icon type="exclamation-circle" />
-        </Popover>
-        {errorCount}
-      </span>
-    );
-  };
-
   resizeFooterToolbar = () => {
     requestAnimationFrame(() => {
       const sider = document.querySelectorAll('.ant-layout-sider')[0];
@@ -346,13 +277,10 @@ class ApiDetail extends PureComponent {
   };
 
   render() {
-    const {
-      form: { getFieldDecorator, getFieldValue },
-      apiService,
-    } = this.props;
+    const { apiService } = this.props;
     console.log('apidetails:render-this.props', this.props);
     console.log('apidetails:render-this.state', this.state);
-    const { width, apiFlowData, data } = this.state;
+    const { width, data } = this.state;
     const { back } = data;
 
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
@@ -426,7 +354,7 @@ class ApiDetail extends PureComponent {
               <Table columns={columns} dataSource={apiServiceBackendMembers} pagination={false} />
             </Card>
           </TabPane>
-          <TabPane tab="Org Table" key="flow">
+          <TabPane tab="Org Table" key="org">
             <Card title="高级配置" bordered={false}>
               <Table columns={columnsOrg} dataSource={data.apiServiceOrgs} pagination={false} />
             </Card>
