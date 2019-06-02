@@ -46,7 +46,7 @@ export default (config: any) => {
         fileName: 'css/theme-colors.css',
         matchColors: getAntdSerials('#1890ff'), // 主色系列
         // 改变样式选择器，解决样式覆盖问题
-        changeSelector(selector: string) {
+        changeSelector(selector: string): string {
           switch (selector) {
             case '.ant-calendar-today .ant-calendar-date':
               return ':not(.ant-calendar-selected-date)' + selector;
