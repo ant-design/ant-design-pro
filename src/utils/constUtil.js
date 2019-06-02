@@ -1,5 +1,5 @@
 const constants = {
-  PREFIX_PATH: '/server',
+  PREFIX_PATH: '／server',
   DEBUG: true,
   SUCCESS_CODE: '200',
   UNAUTH_CODE: '1203',
@@ -19,6 +19,7 @@ const constants = {
     DEL: 3,
     ONLINE: 4,
     OFFLINE: 5,
+    API_DOC: 9,
   },
   API_STATUS:{
     CLOSE: '0',

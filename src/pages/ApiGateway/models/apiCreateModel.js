@@ -40,7 +40,7 @@ export default {
         yield put({
           type: 'saveForAddSubmit',
           action:{payload,
-          response,},
+            response,},
         });
       }
       if (response.code==="200"){
@@ -58,6 +58,26 @@ export default {
           }
           message.success(msg);
         }
+      }
+      else{
+        const msg=response.msg||"服务器内部错误。"
+        message.error(msg);
+      }
+    },
+    *submitApiDoc({ payload ,callback}, { call, put }) {
+      console.log("payload in submitApiDoc model---:",JSON.stringify(payload));
+      const response = yield call(saveApi, payload);
+      console.log("response in submitApiDoc model---:",response);
+      if (response.code==="200"){
+        yield put({
+          type: 'updateData',
+          payload:response,
+        });
+        const msg=response.msg||"success。"
+        if(callback){
+          callback(response);
+        }
+        message.success(msg);
       }
       else{
         const msg=response.msg||"服务器内部错误。"

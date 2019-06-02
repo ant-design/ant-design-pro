@@ -56,6 +56,11 @@ export default [
             component: './ApiGateway/ApiUpdate',
           },
           {
+            path: '/apiGateway/apiDocUpdate',
+            name: 'apiDocUpdate',
+            component: './ApiGateway/ApiDocUpdate',
+          },
+          {
             path: '/apiGateway/apiDetail',
             name: 'apiDetail',
             hideInMenu: true,

@@ -3,7 +3,7 @@
 import constants from '@/utils/constUtil';
 
 const { ACT, API_STATUS,STATUS } = constants;
-
+const reqMethodAtt=['get','post'];
 // mock tableListDataSource
 let tableListDataSource = [];
 for (let i = 0; i < 46; i += 1) {
@@ -14,11 +14,19 @@ for (let i = 0; i < 46; i += 1) {
     serviceType: `${Math.floor(Math.random() * 10) % 3 +1}`,
     groupId: (Math.floor(Math.random() * 10) % 4) + 1,
     status: `${Math.floor(Math.random() * 10) % 3}`,
+    reqMethod:reqMethodAtt[i%2],
     updateTime: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
     createTime: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
     createUser: 'Alex',
   });
 }
+const urlSample="/rest/{tableName}/voice/{id}";
+const urlSpecAttr="[{\"name\":\"tableName\",\"type\":\"string\",\"remark\":\"table name\",\"parent\":\"-\"},{\"name\":\"id\",\"type\":\"string\",\"remark\":\"id\",\"parent\":\"-\"}]";
+const headerSampleArr="[{\"key\":\"appkey\",\"value\":\"xxxx\"}]";
+const headerSpecArr="[{\"name\":\"appkey\",\"type\":\"string\",\"remark\":\"app key\",\"parent\":\"-\"}]";
+const bodySampleArr="{\"type\":1,\"name\":\"asia info\",\"rela\":{\"orgId\":1,\"orgName\":\"asia intl\"}}";
+const bodySpecArr="[{\"name\":\"type\",\"type\":\"integer\",\"remark\":\"type for query\",\"parent\":\"root\"},{\"name\":\"name\",\"type\":\"string\",\"remark\":\"name for query\",\"parent\":\"root\"}]";
+
 const apiInfoDetail={
   "code": "200",
   "msg": "SUCCESS",
@@ -31,10 +39,10 @@ const apiInfoDetail={
     "securityType": "1",
     "signature": "12121",
     "remark": "aaaa",
-    "requestUrl": "//rest//voice",
+    "requestUrl": "/rest/{tableName}/voice/{id}",
     "protocol": "HTTP",
     "matchType": null,
-    "reqMethod": "2",
+    "reqMethod": "get",
     "status": "2",
     "statusName": null,
     "createTime": "2019-03-19T06:28:28.000+0000",
@@ -53,7 +61,7 @@ const apiInfoDetail={
         "protocol": 'HTTP',
         "url": "http://test.com",
         "reqPath": "2",
-        "reqMethod": "2",
+        "reqMethod": "post",
         "connectTimeout": 30000,
         "callNumber": null,
         "socketTimeout": 20000,
@@ -109,7 +117,7 @@ const apiInfoDetail={
         url: 'com.ai.odc.changeParam',
       },
     ],
-    apiServiceOrgs:[
+    "apiServiceOrgs":[
       {
         "id":1,
         "apiId":90,
@@ -117,8 +125,23 @@ const apiInfoDetail={
         "status":STATUS.A
       }
     ],
+    "apiServiceDoc":{
+      apiServiceDocId: 1,
+      apiId:1,
+      urlSample,
+      urlSpec:urlSpecAttr,
+      requestHeaderSample: headerSampleArr,
+      requestHeaderSpec: headerSpecArr,
+      requestBodySample: bodySampleArr,
+      requestBodySpec: bodySpecArr,
+      responseHeaderSample: headerSampleArr,
+      responseHeaderSpec: headerSpecArr,
+      responseBodySample: bodySampleArr,
+      responseBodySpec: bodySpecArr,
+    },
   }
-}
+};
+
 function apiList(req, res, u, b) {
   const payload = (b && b.body) || req.body;
   let dataSource = tableListDataSource;
@@ -203,6 +226,13 @@ function saveApi(req, res, u, b) {
       const newItem = item.backendId ? item : {...item, backendId: i};// 增加backendId
       return newItem;
     });
+  }
+  else if (option === ACT.API_DOC) {
+    const index = tableListDataSource.findIndex(item => apiService.apiId === item.apiId);
+    tableListDataSource.splice(index, 1, apiService);// 对列表模拟数据对更新
+    apiInfoDetail.data={...apiInfoDetail.data,...apiService};
+    apiInfoDetail.data.apiServiceDoc.apiServiceDocId=23;
+    apiInfoDetail.data.apiServiceDoc.apiId=apiService.apiId;
   }
   // console.log("12--------:",apiInfoDetail.data.apiServiceBackends);
   const result = apiInfoDetail;

@@ -101,6 +101,35 @@ export function getPayloadForUpdate(oldApiService,values) {
   return apiInfo;
 }
 
+export function getPayloadForApiDoc(oldApiService,values) {
+
+
+
+  const apiService={...oldApiService};
+  const apiServiceDoc={...values,
+    requestBodySpec:JSON.stringify(values.requestBodySpec),
+    requestHeaderSpec:JSON.stringify(values.requestHeaderSpec),
+    responseHeaderSpec:JSON.stringify(values.responseHeaderSpec),
+    responseBodySpec:JSON.stringify(values.responseBodySpec),
+    urlSpec:JSON.stringify(values.urlSpec),
+    };
+  if(apiService.apiServiceDoc){
+    apiServiceDoc.apiId=apiService.apiServiceDoc.apiId;
+    apiServiceDoc.apiServiceDocId=apiService.apiServiceDoc.apiServiceDocId;
+  }
+  apiService.apiServiceDoc=apiServiceDoc;
+  const apiInfo= {
+    option:9, // 1-新增记录 2-修改记录,9-apiDoc
+    data: {
+      info: {
+        apiService,
+      },
+    },
+  };
+  console.log("=======:",apiInfo);
+  return apiInfo;
+}
+
 export function getApiFlowData(values) {
 
   const apiFlowData={

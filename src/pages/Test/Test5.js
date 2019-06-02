@@ -8,6 +8,7 @@ import {getRouteDatas,toSimulatePrivilege,toInsertSql,flatToMenuTree,flatToPrivi
 import routeDatas from "../../../config/router.api.config";
 import {getPrivileges} from '@/utils/authority';
 import {getLogInfo} from '@/utils/log';
+import {toType,parseInput,toApiSpecJson} from "../util";
 
 const routes=getRouteDatas(routeDatas);
 const privileges=[];
@@ -26,7 +27,18 @@ const formatPrivilegeData = getFormatPrivilege(privilegesFromStorage);
 
 const token=localStorage.getItem("token");
 // console.log("====1",`Bearer ${token}`);
+const d1=new Date();
+const obj=[{a1:'dd',b1:1,d1,d2:'2018-02-02',obj1:{b1:'11'},arr1:[{c1:2},{c2:3}]}];
+// console.log("a=====:",toType(obj),toType(obj.a1),toType(obj.b1),toType(obj.d1),toType(obj.d2),toType(obj.arr1));
 
+// const input = JSON.stringify(obj);
+// console.log("b=====:",parseInput("1"));
+const flatJsonArray=[{name:'root',type:toType(obj),remark:'root',parent:"-"}];
+
+const newObj=toType(obj)==='array'?obj[0]:obj;
+toApiSpecJson(newObj,flatJsonArray,'root');
+
+console.log(flatJsonArray);
 export default () => (
   <PageHeaderWrapper>
     <div>

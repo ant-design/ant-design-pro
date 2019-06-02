@@ -29,6 +29,7 @@ export default {
   'menu.apiGateway.apiCreate.advance': 'Advance configuration',
   'menu.apiGateway.apiUpdate': 'Update Api',
   'menu.apiGateway.apiDetail': 'Api Detail',
+  'menu.apiGateway.apiDocUpdate': 'Compile Api Spec',
   'menu.userManager': 'Privilege Manager',
   'menu.userManager.user': 'User',
   'menu.userManager.role': 'Role',
