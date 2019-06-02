@@ -12,9 +12,11 @@ export interface SettingModelType {
   };
 }
 
-const updateTheme = (newPrimaryColor:string) => {
-  const hideMessage = message.loading('正在切换主题！', 0);
-  themeColorClient.changeColor(newPrimaryColor).finally(() => hideMessage());
+const updateTheme = (newPrimaryColor?: string) => {
+  const timeOut = 0;
+  const hideMessage = message.loading('正在切换主题！', timeOut);
+  themeColorClient.changeColor(newPrimaryColor)
+    .finally(() => hideMessage());
 };
 
 /*

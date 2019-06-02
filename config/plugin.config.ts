@@ -46,7 +46,7 @@ export default (config: any) => {
         fileName: 'css/theme-colors.css',
         matchColors: getAntdSerials('#1890ff'), // 主色系列
         // 改变样式选择器，解决样式覆盖问题
-        changeSelector(selector) {
+        changeSelector(selector: string) {
           switch (selector) {
             case '.ant-calendar-today .ant-calendar-date':
               return ':not(.ant-calendar-selected-date)' + selector;
@@ -103,10 +103,12 @@ export default (config: any) => {
     });
 };
 
-function getAntdSerials(color) {
+const getAntdSerials = (color: string) => {
+  const lightNum = 9;
+  const devide10 = 10;
   // 淡化（即less的tint）
-  const lightens = new Array(9).fill().map((t, i) => {
-    return ThemeColorReplacer.varyColor.lighten(color, i / 10);
+  const lightens = new Array(lightNum).fill().map((t, i) => {
+    return ThemeColorReplacer.varyColor.lighten(color, i / devide10);
   });
   const colorPalettes = generate(color);
   return lightens.concat(colorPalettes);
