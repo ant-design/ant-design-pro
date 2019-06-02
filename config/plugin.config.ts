@@ -1,6 +1,6 @@
 // Change theme plugin
 
-import MergeLessPlugin from 'antd-pro-merge-less';
+// import MergeLessPlugin from 'antd-pro-merge-less';
 // import AntDesignThemePlugin from 'antd-theme-webpack-plugin';
 import ThemeColorReplacer from 'webpack-theme-color-replacer';
 import path from 'path';
@@ -32,15 +32,15 @@ export default (config: any) => {
     process.env.NODE_ENV !== 'production'
   ) {
     // 将所有 less 合并为一个供 themePlugin使用
-    const outFile = path.join(__dirname, '../.temp/ant-design-pro.less');
-    const stylesDir = path.join(__dirname, '../src/');
+    // const outFile = path.join(__dirname, '../.temp/ant-design-pro.less');
+    // const stylesDir = path.join(__dirname, '../src/');
 
-    config.plugin('merge-less').use(MergeLessPlugin, [
-      {
-        stylesDir,
-        outFile,
-      },
-    ]);
+    // config.plugin('merge-less').use(MergeLessPlugin, [
+    //   {
+    //     stylesDir,
+    //     outFile,
+    //   },
+    // ]);
     config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [
       {
         fileName: 'css/theme-colors.css',
