@@ -77,7 +77,7 @@ Nous avons besoin de votre aide: https://github.com/ant-design/ant-design-pro/is
 ### Utiliser bash
 
 ```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
+$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1 -b v2
 $ cd ant-design-pro
 $ npm install
 $ npm start         # visiter http://localhost:8000
@@ -111,7 +111,7 @@ Ouvrez le projet avec Gitpod (environnement de développement gratuit pour GitHu
 
 [![Ouvrir dans Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/ant-design-pro)
 
-Plus d'instructions dans la  [documentation](http://pro.ant.design/docs/getting-started).
+Plus d'instructions dans la [documentation](http://pro.ant.design/docs/getting-started).
 
 ## Support des navigateurs
 

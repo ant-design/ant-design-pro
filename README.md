@@ -17,9 +17,9 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 - FAQ: http://pro.ant.design/docs/faq
 - Mirror Site in China: http://ant-design-pro.gitee.io
 
-## 2.0 Released Now! 🎉🎉🎉
+## 4.0 Released Now! 🎉🎉🎉
 
-[Announcing Ant Design Pro 2.0.0](https://medium.com/ant-design/beautiful-and-powerful-ant-design-pro-2-0-release-51358da5af95)
+[Announcing Ant Design Pro 4.0.0](https://medium.com/ant-design/ant-design-pro-v4-is-here-6f23098ae9d9)
 
 ## Translation Recruitment :loudspeaker:
 
@@ -27,6 +27,8 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 
 ## Features
 
+- :bulb: **TypeScript**: A language for application-scale JavaScript
+- :scroll: **Blocks**: Build page with block template
 - :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
 - :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd
@@ -77,7 +79,7 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 ### Use bash
 
 ```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
+$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1 -b v2
 $ cd ant-design-pro
 $ npm install
 $ npm start         # visit http://localhost:8000

@@ -17,8 +17,14 @@
 - 常见问题：http://pro.ant.design/docs/faq-cn
 - 国内镜像：http://ant-design-pro.gitee.io
 
+## 现在我们发布了 4.0! 🎉🎉🎉
+
+[Announcing Ant Design Pro 4.0.0](https://zhuanlan.zhihu.com/p/67498559)
+
 ## 特性
 
+- :bulb: **TypeScript**: 应用程序级 JavaScript 的语言
+- :scroll: **区块**: 通过区块模板快速构建页面
 - :gem: **优雅美观**：基于 Ant Design 体系精心设计
 - :triangular_ruler: **常见设计模式**：提炼自中后台应用的典型页面和场景
 - :rocket: **最新技术栈**：使用 React/umi/dva/antd 等前端前沿技术开发
@@ -69,7 +75,7 @@
 ### 使用命令行
 
 ```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
+$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1 -b v2
 $ cd ant-design-pro
 $ npm install
 $ npm start         # 访问 http://localhost:8000

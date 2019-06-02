@@ -1,0 +1,88 @@
+defaultSeverity: error
+globals:
+  - ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: true
+extends:
+  - tslint-react
+  - tslint-eslint-rules
+  - tslint-config-prettier
+jsRules:
+rules:
+  class-name: true
+  eofline: true
+  forin: true
+  jsdoc-format: false
+  label-position: true
+  member-ordering:
+    - true
+    - order: statics-first
+  new-parens: true
+  no-arg: true
+  no-bitwise: true
+  no-conditional-assignment: true
+  no-consecutive-blank-lines: true
+  no-construct: true
+  no-debugger: true
+  no-duplicate-variable: true
+  no-eval: true
+  no-internal-module: true
+  no-multi-spaces: true
+  no-namespace: true
+  no-reference: true
+  no-shadowed-variable: true
+  no-string-literal: true
+  no-trailing-whitespace: true
+  no-unused-expression: true
+  no-var-keyword: true
+  one-variable-per-declaration:
+    - true
+    - ignore-for-loop
+  prefer-const:
+    - true
+    - destructuring: all
+  radix: true
+  space-in-parens: true
+  switch-default: true
+  trailing-comma:
+    - true
+    - singleline: never
+      multiline: always
+      esSpecCompliant: true
+  triple-equals:
+    - true
+    - allow-null-check
+  typedef-whitespace:
+    - true
+    - call-signature: nospace
+      index-signature: nospace
+      parameter: nospace
+      property-declaration: nospace
+      variable-declaration: nospace
+    - call-signature: onespace
+      index-signature: onespace
+      parameter: onespace
+      property-declaration: onespace
+      variable-declaration: onespace
+  use-isnan: true
+  variable-name:
+    - true
+    - allow-leading-underscore
+    - ban-keywords
+    - check-format
+    - allow-pascal-case
+  jsx-no-lambda: false
+  jsx-no-string-ref: false
+  jsx-boolean-value:
+    - true
+    - never
+  jsx-no-multiline-js: false
+  whitespace:
+    - true
+    - check-branch
+    - check-decl
+    - check-operator
+    - check-module
+    - check-separator
+    - check-rest-spread
+    - check-type
+    - check-type-operator
+    - check-preblock
