@@ -183,6 +183,8 @@ class TableList extends PureComponent {
             </span>
             <a onClick={() => this.handleUpdate(true, record)}>修改</a>
             <Divider type="vertical" />
+            <a onClick={() => this.handleUpdateDoc(true, record)}>文档</a>
+            <Divider type="vertical" />
             <a onClick={() => this.handleAccess(true, record)}>授权</a>
             <Divider type="vertical" />
           </Fragment>
@@ -411,6 +413,19 @@ class TableList extends PureComponent {
     // router.push(`/apiGateway/apiCreate/${apiId}`);
     router.push({
       pathname: `/apiGateway/apiUpdate`, // 通过url参数传递
+      state: {
+        // 通过对象传递
+        apiId,
+        record, // 表格某行的对象数据
+      },
+    });
+  };
+
+  handleUpdateDoc = (flag, record) => {
+    const { apiId } = record;
+    // router.push(`/apiGateway/apiCreate/${apiId}`);
+    router.push({
+      pathname: `/apiGateway/apiDocUpdate`, // 通过url参数传递
       state: {
         // 通过对象传递
         apiId,
