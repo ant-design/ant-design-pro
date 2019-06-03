@@ -27,6 +27,7 @@ import {
 const { TabPane } = Tabs;
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import MenuAuth from './menuAuth';
+import PermissAuth from './permissAuth';
 import styles from '../../../List/TableList.less';
 
 const FormItem = Form.Item;
@@ -41,71 +42,26 @@ const { Option } = Select;
 class RolePermissAuth extends PureComponent {
 
     state = {
-        selectedRows: [],
     };
 
     componentDidMount() {
-        const { dispatch } = this.props;
-        dispatch({
-            type: 'menu/fetch',
-            payload: {},
-        });
     };
 
     componentWillReceiveProps() {
     };
 
-    handleSubmit = () => {
-        const roleId = this.props.match.params.roleId;
-        const { dispatch } = this.props;
-        const { selectedRows } = this.state;
-        const roleMenus = [];
-        selectedRows.forEach(row => {
-            roleMenus.push({
-                roleId: roleId,
-                menuId: row.id,
-            })
-        });
-        dispatch({
-            type: 'role/menuAuth',
-            payload: roleMenus,
-        });
-    };
-
-    handleSelectRows = rows => {
-        this.setState({
-            selectedRows: rows,
-        });
-    };
-
-    handleCancle = () => {
-        router.push('/system-management/role/list');
-    };
-
-    columns = [
-        {
-            title: '菜单名称',
-            dataIndex: 'name',
-        },
-    ];
-
     render() {
-        const {
-            menu: { data },
-            loading,
-        } = this.props;
-        const { selectedRows } = this.state;
-        const {roleId} = this.props.match.params.roleId;
+        const { roleId } = this.props.match.params;
         return (
             <PageHeaderWrapper>
                 <Card bordered={false}>
                     <div className={styles.tableList}>
                         <Tabs defaultActiveKey="1">
                             <TabPane tab="菜单权限" key="1">
-                                <MenuAuth roleId={roleId}/>
+                                <MenuAuth roleId={roleId} />
                             </TabPane>
                             <TabPane tab="功能权限" key="2">
-                                Content of Tab Pane 2
+                                <PermissAuth roleId={roleId} />
                             </TabPane>
                         </Tabs>
                     </div>

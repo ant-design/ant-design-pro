@@ -1,6 +1,6 @@
 import router from 'umi/router';
 import { message } from 'antd';
-import { query as queryRoles, addRole, queryById, updateRole, deleteById, menuAuth } from '@/services/role';
+import { query as queryRoles, addRole, queryById, updateRole, deleteById, menuAuth, menuAuthGet, permissionAuth, permissionAuthGet } from '@/services/role';
 export default {
   namespace: 'role',
   state: {
@@ -9,6 +9,8 @@ export default {
       pagination: {},
     },
     role: {},
+    roleMenuAuths: [],
+    rolePermissAuths: [],
   },
 
   effects: {
@@ -61,6 +63,44 @@ export default {
       const response = yield call(menuAuth, payload);
       if (response.code === 0) {
         message.success('操作成功', 2);
+        yield put({
+          type: 'menuAuthGet',
+          payload: payload[0].roleId,
+        });
+      } else {
+        message.error(response.msg);
+      }
+    },
+    *menuAuthGet({ payload }, { call, put }) {
+      const response = yield call(menuAuthGet, payload);
+      if (response.code === 0) {
+        yield put({
+          type: 'getMenuAuthSave',
+          payload: response,
+        });
+      } else {
+        message.error(response.msg);
+      }
+    },
+    *permissionAuth({ payload }, { call, put }) {
+      const response = yield call(permissionAuth, payload);
+      if (response.code === 0) {
+        message.success('操作成功', 2);
+        yield put({
+          type: 'permissionAuthGet',
+          payload: payload[0].roleId,
+        });
+      } else {
+        message.error(response.msg);
+      }
+    },
+    *permissionAuthGet({ payload }, { call, put }) {
+      const response = yield call(permissionAuthGet, payload);
+      if (response.code === 0) {
+        yield put({
+          type: 'getPermissionAuthSave',
+          payload: response,
+        });
       } else {
         message.error(response.msg);
       }
@@ -84,6 +124,18 @@ export default {
       return {
         ...state,
         role: action.payload.data || {},
+      };
+    },
+    getMenuAuthSave(state, action) {
+      return {
+        ...state,
+        roleMenuAuths: action.payload.data || [],
+      };
+    },
+    getPermissionAuthSave(state, action) {
+      return {
+        ...state,
+        rolePermissAuths: action.payload.data || [],
       };
     },
   },

@@ -39,3 +39,18 @@ export async function menuAuth(params) {
     data: params,
   });
 }
+
+export async function menuAuthGet(params) {
+  return request('/api/v1/role/menuAuth/get/'+params);
+}
+
+export async function permissionAuth(params) {
+  return request('/api/v1/role/permissionAuth', {
+    method: 'POST',
+    data: params,
+  });
+}
+
+export async function permissionAuthGet(params) {
+  return request('/api/v1/role/permissionAuth/get/'+params);
+}

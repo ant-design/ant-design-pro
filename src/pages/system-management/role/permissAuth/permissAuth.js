@@ -31,13 +31,13 @@ import styles from '../../../List/TableList.less';
 const FormItem = Form.Item;
 const { Option } = Select;
 
-@connect(({ role, menu, loading }) => ({
+@connect(({ role, permission, loading }) => ({
     role,
-    menu,
+    permission,
     loading: loading.models.role,
 }))
 @Form.create()
-class MenuAuth extends PureComponent {
+class PermissAuth extends PureComponent {
 
     state = {
         selectedRowKeys: [],
@@ -47,20 +47,20 @@ class MenuAuth extends PureComponent {
     componentDidMount() {
         const { dispatch, roleId } = this.props;
         dispatch({
-            type: 'menu/fetch',
+            type: 'permission/fetch',
             payload: {},
         });
         dispatch({
-            type: 'role/menuAuthGet',
+            type: 'role/permissionAuthGet',
             payload: roleId,
         });
     };
 
     componentWillReceiveProps() {
-        const { role: { roleMenuAuths } } = this.props;
+        const { role: { rolePermissAuths } } = this.props;
         const selectedRowKeys = [];
-        roleMenuAuths.forEach(roleMenu => {
-            selectedRowKeys.push(roleMenu.id);
+        rolePermissAuths.forEach(rolePermiss => {
+            selectedRowKeys.push(rolePermiss.id);
         });
         this.setState({
             selectedRowKeys: selectedRowKeys
@@ -70,16 +70,16 @@ class MenuAuth extends PureComponent {
     handleSubmit = () => {
         const { dispatch, roleId } = this.props;
         const { selectedRows } = this.state;
-        const roleMenus = [];
+        const rolePermission = [];
         selectedRows.forEach(row => {
-            roleMenus.push({
+            rolePermission.push({
                 roleId: roleId,
-                menuId: row.id,
+                permissionId: row.id,
             })
         });
         dispatch({
-            type: 'role/menuAuth',
-            payload: roleMenus,
+            type: 'role/permissionAuth',
+            payload: rolePermission,
         });
     };
 
@@ -93,14 +93,14 @@ class MenuAuth extends PureComponent {
 
     columns = [
         {
-            title: '菜单名称',
+            title: '功能名称',
             dataIndex: 'name',
         },
     ];
 
     render() {
         const {
-            menu: { data },
+            permission: { data },
             loading,
         } = this.props;
         const { selectedRowKeys, selectedRows } = this.state;
@@ -135,4 +135,4 @@ class MenuAuth extends PureComponent {
         );
     };
 }
-export default MenuAuth;
+export default PermissAuth;
