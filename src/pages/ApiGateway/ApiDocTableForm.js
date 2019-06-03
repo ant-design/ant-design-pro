@@ -186,6 +186,30 @@ class ApiDocTableForm extends PureComponent {
     */
     const columns = [
       {
+        title: 'Parent Field',
+        dataIndex: 'parent',
+        key: 'parent',
+        width: '20%',
+        render: (text,record) => {
+          if (record.editable) {
+            return (
+              <Input
+                value={text}
+                onChange={e => this.handleFieldChange(e, 'parent', record)}
+                onKeyPress={e => this.handleKeyPress(e, record.key)}
+                placeholder="Parent Field"
+              />
+            );
+          }
+          /* eslint-disable no-nested-ternary */
+          if (text&&text!=="-"&&text!=="root"){
+            const color = 'volcano';
+            return <Tag color={color} key={text}>&nbsp;&nbsp;{text}&nbsp;&nbsp;</Tag>;
+          }
+          return text;
+        },
+      },
+      {
         title: 'Field Name',
         dataIndex: 'name',
         key: 'name',
@@ -245,30 +269,6 @@ class ApiDocTableForm extends PureComponent {
                 placeholder="remark"
               />
             );
-        },
-      },
-      {
-        title: 'Parent Field',
-        dataIndex: 'parent',
-        key: 'parent',
-        width: '20%',
-        render: (text,record) => {
-          if (record.editable) {
-            return (
-              <Input
-                value={text}
-                onChange={e => this.handleFieldChange(e, 'parent', record)}
-                onKeyPress={e => this.handleKeyPress(e, record.key)}
-                placeholder="Parent Field"
-              />
-            );
-          }
-          /* eslint-disable no-nested-ternary */
-          if (text&&text!=="-"&&text!=="root"){
-            const color = 'volcano';
-            return <Tag color={color} key={text}>&nbsp;&nbsp;{text}&nbsp;&nbsp;</Tag>;
-          }
-          return text;
         },
       },
       {

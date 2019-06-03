@@ -85,8 +85,10 @@ class ApiUpdate extends PureComponent {
     try {
       if(apiServiceDoc){
         const spec=apiServiceDoc[`${flag}Spec`];
+        console.log(flag,spec);
         if(spec&&spec.trim()!==""){
           const specArr=(JSON.parse(apiServiceDoc.requestHeaderSpec)||[]).map((item,index)=>({...item,key:`${requestHeaderFlag}-${index}`}));
+          console.log(flag,specArr);
           return specArr;
         }
       }
@@ -106,8 +108,6 @@ class ApiUpdate extends PureComponent {
     const responseBodySpec=this.convertDocObj(apiServiceDoc,responseBodyFlag);
     const stateCodeSpec=this.convertDocObj(apiServiceDoc,stateCodeFlag);
     const busiCodeSpec=this.convertDocObj(apiServiceDoc,busiCodeFlag);
-
-    console.log("start busiCodeSpec----",busiCodeSpec);
     // －－－－－初始化url spec数据－－－－－
     const urlSpec=(JSON.parse(apiServiceDoc.urlSpec)||[]).map((item,index)=>({...item,key:`url-${index}`}));
     console.log("urlSpec1:",urlSpec);
@@ -139,12 +139,10 @@ class ApiUpdate extends PureComponent {
     let retAttr=[];
     if(url&&url.trim()!==""&&url.indexOf("{")>-1){
       const flatJsonArray=getPlaceHolder(url);
-      console.log("ddd1:",flatJsonArray)
-      const mergeArr=flatJsonArray.map((spec)=>{
+      retAttr=flatJsonArray.map((spec)=>{
         const findObj=urlSpec.find((item)=>(item.name===spec.name&&item.parent===spec.parent));
         return findObj?{...spec,remark:findObj.remark}:spec;
       })
-      retAttr=mergeArr;
     }
     if(url&&url.trim()!==""&&url.indexOf("?")>-1){
       const flatJsonArray=getQueryArr(url);
@@ -185,10 +183,8 @@ class ApiUpdate extends PureComponent {
       default:
         break;
     };
-    console.log("typeParam:",typeParam,newValue);
     if(newValue&&newValue.trim()!==""){
       const isJsonResult=isJson(newValue);
-      console.log(isJsonResult);
       if(isJsonResult.result){
         const newValueJson=JSON.parse(newValue);
         const parentValue=typeParam===requestHeaderFlag?'-':'root';
@@ -415,7 +411,7 @@ class ApiUpdate extends PureComponent {
             </Card>
           </TabPane>
           <TabPane tab="Response Code" key="6">
-            <Card title="State" className={styles.card} bordered={false}>
+            <Card title="State Code" className={styles.card} bordered={false}>
               {getFieldDecorator('stateCodeSpec', {
                 initialValue: stateCodeSpec,
               })(<ApiDocTableForm />)}
