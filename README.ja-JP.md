@@ -130,3 +130,9 @@ Gitpod（GitHub 用の無料オンライン開発環境）でプロジェクト�
 - 更新すること。 改善を、[pull requests](http://github.com/ant-design/ant-design-pro/pulls) で送ってください。
 
 [![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro?type=dev)
+
+<div align="center">
+   <a href="https://www.netlify.com">
+    <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
+  </a>
+</div>
