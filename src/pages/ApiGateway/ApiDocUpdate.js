@@ -1,5 +1,5 @@
 import React, { PureComponent} from 'react';
-import { Card, Button, Form,  Input,  Tabs, BackTop,message,Row,Col, } from 'antd';
+import { Card, Button, Form,  Input,  Tabs, BackTop,message,Row,Col,Icon,Popover, } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
@@ -18,9 +18,15 @@ const { TextArea } = Input;
 const requestHeaderFlag="requestHeader";
 const requestBodyFlag="requestBody";
 const responseBodyFlag="responseBody";
-const responseHeaderFlag="responseHeader"
+const responseHeaderFlag="responseHeader";
+const stateCodeFlag="stateCode";
+const busiCodeFlag="busiCode";
 
 
+const fieldLabels = {
+  requestBodySample: 'request Body Sample',
+  responseBodySample: 'response Body Sample',
+};
 
 @connect(({ apiCreateModel, loading }) => ({
   apiService: apiCreateModel.apiService,
@@ -36,6 +42,8 @@ class ApiUpdate extends PureComponent {
     requestBodySpec: [],
     responseHeaderSpec: [],
     responseBodySpec: [],
+    stateCodeSpec:[],
+    busiCodeSpec:[],
   };
 
   componentDidMount() {
@@ -56,6 +64,8 @@ class ApiUpdate extends PureComponent {
     const { dispatch } = this.props;
     if (apiId !== -1) {
       const payload = {};
+      payload.option=4
+      payload.range=1;
       payload.data = {};
       payload.data.info = {};
       payload.data.info.apiId = apiId;
@@ -71,24 +81,42 @@ class ApiUpdate extends PureComponent {
     }
   };
 
+  convertDocObj = (apiServiceDoc,flag)=>{
+    try {
+      if(apiServiceDoc){
+        const spec=apiServiceDoc[`${flag}Spec`];
+        if(spec&&spec.trim()!==""){
+          const specArr=(JSON.parse(apiServiceDoc.requestHeaderSpec)||[]).map((item,index)=>({...item,key:`${requestHeaderFlag}-${index}`}));
+          return specArr;
+        }
+      }
+    }catch (e) {
+      console.log(e);
+    }
+    return [];
+  }
 
   setBaseInfo = resp => {
     const { data} = resp;
     const apiServiceDoc=data&&data.apiServiceDoc?data.apiServiceDoc:{};
-    // console.log("ddddd1111:",apiServiceDoc.apiServiceDocId);
     // 从db里面获取字符串数据，再转成json对象，在增加key字段，赋值给表格组件
-    const requestHeaderSpec=(JSON.parse(apiServiceDoc.requestHeaderSpec)||[]).map((item,index)=>({...item,key:`${requestHeaderFlag}-${index}`}));
-    const requestBodySpec=(JSON.parse(apiServiceDoc.requestBodySpec)||[]).map((item,index)=>({...item,key:`${requestBodyFlag}-${index}`}));
-    // apiServiceDoc.urlSample=apiServiceDoc.urlSample&&apiServiceDoc.urlSample.trim()!==""?apiServiceDoc.urlSample:apiService.requestUrl;
-    const responseHeaderSpec=(JSON.parse(apiServiceDoc.responseHeaderSpec)||[]).map((item,index)=>({...item,key:`${responseHeaderFlag}-${index}`}));
-    const responseBodySpec=(JSON.parse(apiServiceDoc.responseBodySpec)||[]).map((item,index)=>({...item,key:`${responseBodyFlag}-${index}`}));
+    const requestHeaderSpec=this.convertDocObj(apiServiceDoc,requestHeaderFlag);
+    const requestBodySpec=this.convertDocObj(apiServiceDoc,requestBodyFlag);
+    const responseHeaderSpec=this.convertDocObj(apiServiceDoc,responseHeaderFlag);
+    const responseBodySpec=this.convertDocObj(apiServiceDoc,responseBodyFlag);
+    const stateCodeSpec=this.convertDocObj(apiServiceDoc,stateCodeFlag);
+    const busiCodeSpec=this.convertDocObj(apiServiceDoc,busiCodeFlag);
+
+    console.log("start busiCodeSpec----",busiCodeSpec);
     // －－－－－初始化url spec数据－－－－－
     const urlSpec=(JSON.parse(apiServiceDoc.urlSpec)||[]).map((item,index)=>({...item,key:`url-${index}`}));
+    console.log("urlSpec1:",urlSpec);
     const newUrlSpec=urlSpec.length===0?this.handleUrlGenerate(urlSpec,false):urlSpec;
+    console.log("newUrlSpec:",newUrlSpec);
     // －－－－－初始化request header数据－－－－－
     this.handleBodyGenerate(requestHeaderFlag,requestHeaderSpec);
 
-    this.setState({apiServiceDoc,urlSpec:newUrlSpec,requestBodySpec,responseHeaderSpec,responseBodySpec});
+    this.setState({apiServiceDoc,urlSpec:newUrlSpec,requestBodySpec,responseHeaderSpec,responseBodySpec,stateCodeSpec,busiCodeSpec});
   };
 
   /**
@@ -120,7 +148,6 @@ class ApiUpdate extends PureComponent {
     }
     if(url&&url.trim()!==""&&url.indexOf("?")>-1){
       const flatJsonArray=getQueryArr(url);
-      console.log("ddd:",flatJsonArray)
       const mergeArr=flatJsonArray.map((spec)=>{
         const findObj=retAttr.find((item)=>(item.name===spec.name&&item.parent===spec.parent));
         return findObj?{...spec,remark:findObj.remark}:spec;
@@ -195,6 +222,50 @@ class ApiUpdate extends PureComponent {
     });
   };
 
+
+  getErrorInfo = () => {
+    const {
+      form: { getFieldsError },
+    } = this.props;
+    const errors = getFieldsError();
+    const errorCount = Object.keys(errors).filter(key => errors[key]).length;
+    if (!errors || errorCount === 0) {
+      return null;
+    }
+    const scrollToField = fieldKey => {
+      const labelNode = document.querySelector(`label[for="${fieldKey}"]`);
+      if (labelNode) {
+        labelNode.scrollIntoView(true);
+      }
+    };
+    const errorList = Object.keys(errors).map(key => {
+      if (!errors[key]) {
+        return null;
+      }
+      return (
+        <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
+          <Icon type="cross-circle-o" className={styles.errorIcon} />
+          <div className={styles.errorMessage}>{errors[key][0]}</div>
+          <div className={styles.errorField}>{fieldLabels[key]}</div>
+        </li>
+      );
+    });
+    return (
+      <span className={styles.errorIcon}>
+        <Popover
+          title="表单校验信息"
+          content={errorList}
+          overlayClassName={styles.errorPopover}
+          trigger="click"
+          getPopupContainer={trigger => trigger.parentNode}
+        >
+          <Icon type="exclamation-circle" />
+        </Popover>
+        {errorCount}
+      </span>
+    );
+  };
+
   validate = () => {
     const {
       form: { validateFieldsAndScroll },
@@ -204,7 +275,7 @@ class ApiUpdate extends PureComponent {
     validateFieldsAndScroll((error, values) => {
       // console.log("error in ui======:",error);
       if (!error) {
-        console.log("api update submit values:",values);
+        // console.log("api update submit values:",values);
         const apiInfo = getPayloadForApiDoc(apiService, values);
         // console.log("api doc update submit apiInfo:",apiInfo);
         // submit the values
@@ -227,7 +298,8 @@ class ApiUpdate extends PureComponent {
       submitting,
       apiService,
     } = this.props;
-    const { width, apiServiceDoc,urlSpec,requestBodySpec,requestHeaderSpec,responseHeaderSpec,responseBodySpec } = this.state;
+    const { width, apiServiceDoc,urlSpec,requestBodySpec,requestHeaderSpec,responseHeaderSpec,responseBodySpec,stateCodeSpec,busiCodeSpec } = this.state;
+    console.log("urlSpec:",urlSpec);
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
     const sampleText="sample for post:{\"type\":\"xxx\",\"name\":\"xxx\"}";
     return (
@@ -259,7 +331,7 @@ class ApiUpdate extends PureComponent {
                   <Form.Item label="Request Path" labelCol={{ span: 4 }} wrapperCol={{ span: 20 }}>
                     {getFieldDecorator('urlSample', {
                       initialValue: apiServiceDoc.urlSample&&apiServiceDoc.urlSample.trim()!==""?apiServiceDoc.urlSample:apiService.requestUrl,
-                      rules: [],
+                      rules: [{ required: false, message: 'urlSample must be between 2 and 500 characters！', min:2, max: 500 }],
                     })(<Input placeholder='request Url' />)}
                   </Form.Item>
                 </Col>
@@ -289,11 +361,12 @@ class ApiUpdate extends PureComponent {
           </TabPane>
           <TabPane tab="Request Body" key="3">
             <Card title="Request Parameter Body Sample" className={styles.card} bordered={false}>
-              {getFieldDecorator(`${requestBodyFlag}Sample`, {
-                initialValue: apiServiceDoc.requestBodySample,
-                rules: [],
-              })(<TextArea rows={4} placeholder={sampleText} />)}
-
+              <Form.Item>
+                {getFieldDecorator(`${requestBodyFlag}Sample`, {
+                  initialValue: apiServiceDoc.requestBodySample,
+                  rules: [{ required: false, message: '不能超过5000字符！', max: 5000 }],
+                })(<TextArea placeholder={sampleText} autosize={{ minRows: 4, maxRows: 15 }} />)}
+              </Form.Item>
               <Button
                 style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
                 type="dashed"
@@ -319,11 +392,12 @@ class ApiUpdate extends PureComponent {
           </TabPane>
           <TabPane tab="Response Body" key="5">
             <Card title="Response Parameter Body Sample" className={styles.card} bordered={false}>
-              {getFieldDecorator(`${responseBodyFlag}Sample`, {
-                initialValue: apiServiceDoc.responseBodySample,
-                rules: [],
-              })(<TextArea rows={4} placeholder={sampleText} />)}
-
+              <Form.Item>
+                {getFieldDecorator(`${responseBodyFlag}Sample`, {
+                  initialValue: apiServiceDoc.responseBodySample,
+                  rules: [{ required: false, message: '不能超过5000字符！', max: 5000 }],
+                })(<TextArea rows={4} placeholder={sampleText} autosize={{ minRows: 4, maxRows: 15 }} />)}
+              </Form.Item>
               <Button
                 style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
                 type="dashed"
@@ -340,10 +414,23 @@ class ApiUpdate extends PureComponent {
               })(<ApiDocTableForm />)}
             </Card>
           </TabPane>
+          <TabPane tab="Response Code" key="6">
+            <Card title="State" className={styles.card} bordered={false}>
+              {getFieldDecorator('stateCodeSpec', {
+                initialValue: stateCodeSpec,
+              })(<ApiDocTableForm />)}
+            </Card>
+            <Card title="Business Code" className={styles.card} bordered={false}>
+              {getFieldDecorator('busiCodeSpec', {
+                initialValue: busiCodeSpec,
+              })(<ApiDocTableForm />)}
+            </Card>
+          </TabPane>
         </Tabs>
 
         <BackTop />
         <FooterToolbar style={{ width }}>
+          {this.getErrorInfo()}
           <Button type="primary" onClick={this.validate} loading={submitting}>
             提交
           </Button>

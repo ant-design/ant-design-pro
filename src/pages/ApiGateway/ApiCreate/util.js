@@ -106,17 +106,33 @@ export function getPayloadForApiDoc(oldApiService,values) {
 
 
   const apiService={...oldApiService};
+  const {requestHeaderSpec,responseHeaderSpec}=values;
   const apiServiceDoc={...values,
+    stateCodeSpec:JSON.stringify(values.stateCodeSpec),
+    busiCodeSpec:JSON.stringify(values.busiCodeSpec),
     requestBodySpec:JSON.stringify(values.requestBodySpec),
     requestHeaderSpec:JSON.stringify(values.requestHeaderSpec),
     responseHeaderSpec:JSON.stringify(values.responseHeaderSpec),
     responseBodySpec:JSON.stringify(values.responseBodySpec),
     urlSpec:JSON.stringify(values.urlSpec),
     };
+
+  if(requestHeaderSpec&&requestHeaderSpec.length>0){
+    apiServiceDoc.requestHeaderSample=requestHeaderSpec.map(item=>{
+      return {key:item.name,value:'xxx'};
+    })
+  }
+  if(responseHeaderSpec&&responseHeaderSpec.length>0){
+    apiServiceDoc.responseHeaderSample=responseHeaderSpec.map(item=>{
+      return {key:item.name,value:'xxx'};
+    })
+  }
+
   if(apiService.apiServiceDoc){
     apiServiceDoc.apiId=apiService.apiServiceDoc.apiId;
     apiServiceDoc.apiServiceDocId=apiService.apiServiceDoc.apiServiceDocId;
   }
+
   apiService.apiServiceDoc=apiServiceDoc;
   const apiInfo= {
     option:9, // 1-新增记录 2-修改记录,9-apiDoc

@@ -26,6 +26,8 @@ const headerSampleArr="[{\"key\":\"appkey\",\"value\":\"xxxx\"}]";
 const headerSpecArr="[{\"name\":\"appkey\",\"type\":\"string\",\"remark\":\"app key\",\"parent\":\"-\"}]";
 const bodySampleArr="{\"type\":1,\"name\":\"asia info\",\"rela\":{\"orgId\":1,\"orgName\":\"asia intl\"}}";
 const bodySpecArr="[{\"name\":\"type\",\"type\":\"integer\",\"remark\":\"type for query\",\"parent\":\"root\"},{\"name\":\"name\",\"type\":\"string\",\"remark\":\"name for query\",\"parent\":\"root\"}]";
+const stateCodeSpecArr="[{\"name\":\"200\",\"type\":\"string\",\"remark\":\"success\",\"parent\":\"-\"},{\"name\":\"401\",\"type\":\"string\",\"remark\":\"用户没有权限（令牌、用户名、密码错误）。\",\"parent\":\"-\"}]";
+const busiCodeSpecArr="[{\"name\":\"200\",\"type\":\"string\",\"remark\":\"success\",\"parent\":\"-\"},{\"name\":\"999\",\"type\":\"string\",\"remark\":\"System Exception。\",\"parent\":\"-\"}]";
 
 const apiInfoDetail={
   "code": "200",
@@ -138,6 +140,8 @@ const apiInfoDetail={
       responseHeaderSpec: headerSpecArr,
       responseBodySample: bodySampleArr,
       responseBodySpec: bodySpecArr,
+      stateCodeSpec: stateCodeSpecArr,
+      busiCodeSpec: busiCodeSpecArr,
     },
   }
 };
