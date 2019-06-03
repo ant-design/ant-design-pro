@@ -158,16 +158,6 @@
       "serverless",
       "express"
     ],
-    "copy": [
-      [
-        "create-umi/README.md",
-        "README.md"
-      ],
-      [
-        "create-umi/package.json",
-        "package.json"
-      ]
-    ],
     "ignore": [
       ".dockerignore",
       ".git",
