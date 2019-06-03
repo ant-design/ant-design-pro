@@ -5,6 +5,10 @@ export async function queryMenus(params) {
   return request('/api/v1/menu/all');
 }
 
+export async function queryCurrentMenus(params) {
+  return request('/api/v1/menu/currentUserMenus');
+}
+
 export async function addMenu(params) {
   return request('/api/v1/menu/add', {
     method: 'POST',

@@ -109,6 +109,10 @@ export async function fakeAccountLogin(params) {
   });
 }
 
+export async function queryCurrentPermissions() {
+  return request(`/api/v1/auth/currentPermissions`);
+}
+
 export async function fakeRegister(params) {
   return request('/api/v1/auth/regis', {
     method: 'POST',

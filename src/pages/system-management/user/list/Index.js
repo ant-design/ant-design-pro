@@ -27,6 +27,7 @@ import {
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Authorized from '@/components/Authorized';
 import styles from '../../../List/TableList.less';
 
 const FormItem = Form.Item;
@@ -196,6 +197,14 @@ class UserList extends PureComponent {
       },
     },
     {
+      title: '角色',
+      render: (text, record) => (
+        <span>
+          {record.roles.map(role => role.roleName)}
+        </span>
+      ),
+    },
+    {
       title: '使用状态',
       dataIndex: 'status',
       filters: [
@@ -229,7 +238,7 @@ class UserList extends PureComponent {
       fixed: 'right',
       render: (text, record) => (
         <Fragment>
-          <a onClick={() => this.handleEdit(record)}>编辑</a>
+          <a onClick={() => this.handleEdit(record)} authority={['super_admin', 'user_edit']}>编辑</a>
           <Divider type="vertical" />
           <Popconfirm
             title="你确定要删除此记录吗?"
@@ -328,9 +337,9 @@ class UserList extends PureComponent {
     switch (e.key) {
       case 'roleAuth':
         if (selectedRows.length === 1) {
-          if(selectedRows[0].isSuperAdmin === true){
+          if (selectedRows[0].isSuperAdmin === true) {
             message.error('不能对系统超级管理员进行角色授权!');
-          }else{
+          } else {
             router.push('/system-management/user/roleAuth/' + selectedRows[0].id);
           }
         } else {
@@ -535,7 +544,7 @@ class UserList extends PureComponent {
             <div className={styles.tableListOperator}>
               <Button icon="plus" type="primary" size="large" onClick={() => this.handleAdd()}>
                 新增
-              </Button>
+                </Button>
               {selectedRows.length > 0 && (
                 <span>
                   <Dropdown overlay={menu}>

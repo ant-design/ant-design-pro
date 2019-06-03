@@ -238,6 +238,10 @@ class PermissionList extends PureComponent {
             dataIndex: 'url',
         },
         {
+            title: '序号',
+            dataIndex: 'sort',
+        },
+        {
             title: '操作',
             render: (text, record) => (
                 <Fragment>

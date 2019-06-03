@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
-import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
+import { fakeAccountLogin,queryCurrentPermissions, getFakeCaptcha } from '@/services/api';
 import { setAuthority, setToken } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
@@ -18,7 +18,9 @@ export default {
       const response = yield call(fakeAccountLogin, payload);
       if (response.code === 0) {
         setToken(response.data);
-        response.currentAuthority = 'user';
+        const resp = yield call(queryCurrentPermissions);
+        console.log(resp);
+        response.currentAuthority = resp.data;
         response.status = 'ok';
       }
       if (response.code === 1) {
