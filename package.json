@@ -179,7 +179,6 @@
       "LICENSE",
       "netlify.toml",
       "README.*.md",
-      "scripts",
       "azure-pipelines.yml",
       "docker",
       "create-umi"
