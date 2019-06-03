@@ -17,6 +17,10 @@
 - 常见问题：http://pro.ant.design/docs/faq-cn
 - 国内镜像：http://ant-design-pro.gitee.io
 
+## 现在我们发布了 4.0! 🎉🎉🎉
+
+[Announcing Ant Design Pro 4.0.0](https://zhuanlan.zhihu.com/p/67498559)
+
 ## 特性
 
 - :bulb: **TypeScript**: 应用程序级 JavaScript 的语言
@@ -116,3 +120,9 @@ $ npm run docker-prod:build
 - 在你的公司或个人项目中使用 Ant Design Pro。
 - 通过 [Issue](http://github.com/ant-design/ant-design-pro/issues) 报告 bug 或进行咨询。
 - 提交 [Pull Request](http://github.com/ant-design/ant-design-pro/pulls) 改进 Pro 的代码。
+
+<div align="center">
+   <a href="https://www.netlify.com">
+    <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
+  </a>
+</div>
