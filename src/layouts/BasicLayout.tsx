@@ -54,9 +54,10 @@ const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) => {
           padding: '0px 20px 20px',
         }}
       >
-        <a href="https://www.netlify.com">
+        <a href="https://www.netlify.com" target="_blank">
           <img
-            src="https://www.netlify.com/img/global/badges/netlify-dark.svg"
+            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
+            width={82}
             alt="netlify logo"
           />
         </a>
