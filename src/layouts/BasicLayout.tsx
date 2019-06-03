@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 import logo from '../assets/logo.svg';
 import Authorized from '@/utils/Authorized';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { isAntDesignProOrDev } from '@/utils/utils';
 import {
   BasicLayout as ProLayoutComponents,
   BasicLayoutProps as ProLayoutComponentsProps,
@@ -38,6 +39,30 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
+};
+
+const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) => {
+  if (!isAntDesignProOrDev()) {
+    return defaultDom;
+  }
+  return (
+    <>
+      {defaultDom}
+      <div
+        style={{
+          textAlign: 'center',
+          padding: '0px 20px 20px',
+        }}
+      >
+        <a href="https://www.netlify.com">
+          <img
+            src="https://www.netlify.com/img/global/badges/netlify-dark.svg"
+            alt="netlify logo"
+          />
+        </a>
+      </div>
+    </>
+  );
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
@@ -86,6 +111,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
           ...routers,
         ];
       }}
+      footerRender={footerRender}
       menuDataRender={menuDataRender}
       formatMessage={formatMessage}
       rightContentRender={rightProps => <RightContent {...rightProps} />}
