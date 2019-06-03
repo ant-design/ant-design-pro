@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import logo from '../assets/logo.svg';
 import Authorized from '@/utils/Authorized';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { isAntDesignProOrDev } from '@/utils/utils';
+import { isAntDesignPro } from '@/utils/utils';
 import {
   BasicLayout as ProLayoutComponents,
   BasicLayoutProps as ProLayoutComponentsProps,
@@ -42,7 +42,7 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
 };
 
 const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) => {
-  if (!isAntDesignProOrDev()) {
+  if (!isAntDesignPro()) {
     return defaultDom;
   }
   return (
@@ -51,7 +51,7 @@ const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) => {
       <div
         style={{
           textAlign: 'center',
-          padding: '0px 20px 20px',
+          padding: '0px 24px 24px',
         }}
       >
         <a href="https://www.netlify.com" target="_blank">
