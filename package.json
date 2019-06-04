@@ -92,7 +92,7 @@
     "@types/react-document-title": "^2.0.3",
     "@types/react-dom": "^16.8.4",
     "antd-pro-merge-less": "^1.0.0",
-    "antd-theme-webpack-plugin": "^1.2.0",
+    "@ant-design/colors": "^3.1.0",
     "babel-eslint": "^10.0.1",
     "chalk": "^2.4.2",
     "check-prettier": "^1.0.3",
@@ -131,7 +131,8 @@
     "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^4.0.0"
+    "tslint-react": "^4.0.0",
+    "webpack-theme-color-replacer": "^1.1.5"
   },
   "optionalDependencies": {
     "puppeteer": "^1.17.0"
