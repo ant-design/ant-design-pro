@@ -14,9 +14,9 @@
     "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
     "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
     "fetch:blocks": "node ./scripts/fetch-blocks.js",
+    "format-imports": "import-sort --write '**/*.{js,jsx,ts,tsx}'",
     "functions:build": "netlify-lambda build ./lambda",
     "functions:run": "cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
-    "generateMock": "node ./scripts/generateMock",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
@@ -30,8 +30,7 @@
     "start:no-mock": "cross-env MOCK=none umi dev",
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
-    "test:component": "umi test ./src/components",
-    "format-imports": "import-sort --write '**/*.{js,jsx,ts,tsx}'"
+    "test:component": "umi test ./src/components"
   },
   "husky": {
     "hooks": {
@@ -40,11 +39,11 @@
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
-    "**/*.{js,ts,tsx}": "npm run lint-staged:js",
     "**/*.{js,ts,tsx,md,json,jsx,less}": [
       "npm run prettier",
       "git add"
-    ]
+    ],
+    "**/*.{js,ts,tsx}": "npm run lint-staged:js"
   },
   "browserslist": [
     "> 1%",
@@ -82,6 +81,7 @@
     "umi-request": "^1.0.7"
   },
   "devDependencies": {
+    "@ant-design/colors": "^3.1.0",
     "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
     "@types/jest": "^24.0.13",
@@ -92,7 +92,6 @@
     "@types/react-dom": "^16.8.4",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "antd-pro-merge-less": "^1.0.0",
-    "antd-theme-webpack-plugin": "^1.2.0",
     "babel-eslint": "^10.0.1",
     "chalk": "^2.4.2",
     "check-prettier": "^1.0.3",
@@ -137,7 +136,12 @@
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^18.3.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.1.0",
-    "stylelint-order": "^3.0.0"
+    "stylelint-order": "^3.0.0",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-react": "^4.0.0",
+    "webpack-theme-color-replacer": "^1.1.5"
   },
   "optionalDependencies": {
     "puppeteer": "^1.17.0"
@@ -153,15 +157,16 @@
     "scripts/**/*.js"
   ],
   "create-umi": {
-    "copy": [
-      [
-        "create-umi/README.md",
-        "README.md"
-      ],
-      [
-        "create-umi/package.json",
-        "package.json"
-      ]
+    "ignoreScript": [
+      "docker*",
+      "functions*",
+      "site",
+      "generateMock"
+    ],
+    "ignoreDependencies": [
+      "netlify*",
+      "serverless",
+      "express"
     ],
     "ignore": [
       ".dockerignore",
@@ -174,7 +179,6 @@
       "LICENSE",
       "netlify.toml",
       "README.*.md",
-      "scripts",
       "azure-pipelines.yml",
       "docker",
       "create-umi"

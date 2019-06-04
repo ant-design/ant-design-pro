@@ -1,7 +1,8 @@
 // Change theme plugin
-
-import AntDesignThemePlugin from 'antd-theme-webpack-plugin';
-import MergeLessPlugin from 'antd-pro-merge-less';
+// eslint-disable-next-line eslint-comments/abdeils - enable - pair;
+/* eslint-disable import/no-extraneous-dependencies */
+import ThemeColorReplacer from 'webpack-theme-color-replacer';
+import generate from '@ant-design/colors/lib/generate';
 import path from 'path';
 
 function getModulePackageName(module: { context: string }) {
@@ -30,27 +31,45 @@ export default (config: any) => {
     process.env.NODE_ENV !== 'production'
   ) {
     // 将所有 less 合并为一个供 themePlugin使用
-    const outFile = path.join(__dirname, '../.temp/ant-design-pro.less');
-    const stylesDir = path.join(__dirname, '../src/');
+    // const outFile = path.join(__dirname, '../.temp/ant-design-pro.less');
+    // const stylesDir = path.join(__dirname, '../src/');
 
-    config.plugin('merge-less').use(MergeLessPlugin, [
+    // config.plugin('merge-less').use(MergeLessPlugin, [
+    //   {
+    //     stylesDir,
+    //     outFile,
+    //   },
+    // ]);
+    config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [
       {
-        stylesDir,
-        outFile,
+        fileName: 'css/theme-colors.css',
+        matchColors: getAntdSerials('#1890ff'), // 主色系列
+        // 改变样式选择器，解决样式覆盖问题
+        changeSelector(selector: string): string {
+          switch (selector) {
+            case '.ant-calendar-today .ant-calendar-date':
+              return ':not(.ant-calendar-selected-date)' + selector;
+            case '.ant-btn:focus,.ant-btn:hover':
+              return '.ant-btn:focus:not(.ant-btn-primary),.ant-btn:hover:not(.ant-btn-primary)';
+            case '.ant-btn.active,.ant-btn:active':
+              return '.ant-btn.active:not(.ant-btn-primary),.ant-btn:active:not(.ant-btn-primary)';
+            default:
+              return selector;
+          }
+        },
       },
     ]);
-
-    config.plugin('ant-design-theme').use(AntDesignThemePlugin, [
-      {
-        antDir: path.join(__dirname, '../node_modules/antd'),
-        stylesDir,
-        varFile: path.join(__dirname, '../node_modules/antd/lib/style/themes/default.less'),
-        mainLessFile: outFile, //     themeVariables: ['@primary-color'],
-        indexFileName: 'index.html',
-        generateOne: true,
-        lessUrl: 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js',
-      },
-    ]);
+    // config.plugin('ant-design-theme').use(AntDesignThemePlugin, [
+    //   {
+    //     antDir: path.join(__dirname, '../node_modules/antd'),
+    //     stylesDir,
+    //     varFile: path.join(__dirname, '../node_modules/antd/lib/style/themes/default.less'),
+    //     mainLessFile: outFile, //     themeVariables: ['@primary-color'],
+    //     indexFileName: 'index.html',
+    //     generateOne: true,
+    //     lessUrl: 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js',
+    //   },
+    // ]);
   }
   // optimize chunks
   config.optimization
@@ -81,4 +100,15 @@ export default (config: any) => {
         },
       },
     });
+};
+
+const getAntdSerials = (color: string) => {
+  const lightNum = 9;
+  const devide10 = 10;
+  // 淡化（即less的tint）
+  const lightens = new Array(lightNum).fill(undefined).map((_, i: number) => {
+    return ThemeColorReplacer.varyColor.lighten(color, i / devide10);
+  });
+  const colorPalettes = generate(color);
+  return lightens.concat(colorPalettes);
 };

@@ -1,6 +1,9 @@
-import { Reducer } from 'redux';
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable promise/catch-or-return */
 import { message } from 'antd';
+import { Reducer } from 'redux';
 import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
+import themeColorClient from '../components/SettingDrawer/themeColorClient';
 
 export interface SettingModelType {
   namespace: 'settings';
@@ -10,6 +13,14 @@ export interface SettingModelType {
     changeSetting: Reducer<DefaultSettings>;
   };
 }
+
+const updateTheme = (newPrimaryColor?: string) => {
+  const timeOut = 0;
+  const hideMessage = message.loading('正在切换主题！', timeOut);
+  themeColorClient.changeColor(newPrimaryColor).finally(() => hideMessage());
+};
+
+/*
 let lessNodesAppended: boolean;
 
 const updateTheme: (primaryColor?: string) => void = primaryColor => {
@@ -72,6 +83,7 @@ const updateTheme: (primaryColor?: string) => void = primaryColor => {
     buildIt();
   }
 };
+*/
 
 const updateColorWeak: (colorWeak: boolean) => void = colorWeak => {
   const root = document.getElementById('root');
