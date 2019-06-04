@@ -3,7 +3,7 @@ import isEqual from 'lodash/isEqual';
 import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import { menu } from '../defaultSettings';
-import { queryMenus,queryCurrentMenus, queryById, updateMenu, addMenu, deleteById } from '@/services/menu';
+import { queryMenus, queryCurrentMenus, queryById, updateMenu, addMenu, deleteById } from '@/services/menu';
 import { message } from 'antd';
 import router from 'umi/router';
 
@@ -128,7 +128,10 @@ export default {
       console.log(response);
       if (response.code === 0) {
         message.success('保存成功', 2);
-        router.push('/system-management/menu/list');
+        yield put({
+          type: 'fetch',
+          payload: {},
+        });
       } else {
         message.error(response.msg);
       }
@@ -144,7 +147,10 @@ export default {
       const response = yield call(updateMenu, payload);
       if (response.code === 0) {
         message.success('修改成功', 2);
-        router.push('/system-management/menu/list');
+        yield put({
+          type: 'fetch',
+          payload: {},
+        });
       } else {
         message.error(response.msg);
       }

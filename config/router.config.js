@@ -145,20 +145,6 @@ export default [
             component: './system-management/menu/list/Index',
           },
           {
-            // authority:['menu_add'],
-            hideInMenu: true,
-            path: '/system-management/menu/add',
-            name: 'menu-add',
-            component: './system-management/menu/add/Index',
-          },
-          {
-            // authority:['menu_edit'],
-            hideInMenu: true,
-            path: '/system-management/menu/edit/:id',
-            name: 'menu-edit',
-            component: './system-management/menu/edit/Index',
-          },
-          {
             // authority:['permission_list'],
             path: '/system-management/permission/list',
             name: 'system-list',
