@@ -77,32 +77,18 @@ Nous avons besoin de votre aide: https://github.com/ant-design/ant-design-pro/is
 ### Utiliser bash
 
 ```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1 -b v2
-$ cd ant-design-pro
+$ yarn create umi  # or npm create umi
+
+# Choose ant-design-pro:
+ Select the boilerplate type (Use arrow keys)
+❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
+  app             - Create project with a simple boilerplate, support typescript.
+  block           - Create a umi block.
+  library         - Create a library with umi.
+  plugin          - Create a umi plugin.
+
 $ npm install
-$ npm start         # visiter http://localhost:8000
-```
-
-### Utilisation par docker
-
-```bash
-# aperçu
-$ docker pull antdesign/ant-design-pro
-$ docker run -p 80:80 antdesign/ant-design-pro
-# ouvrir http://localhost
-
-# développement
-$ npm run docker:dev
-
-# construction
-$ npm run docker:build
-
-
-# développement en production
-$ npm run docker-prod:dev
-
-# construction en production
-$ npm run docker-prod:build
+$ npm start         # visit http://localhost:8000
 ```
 
 ### Utilisation de Gitpod

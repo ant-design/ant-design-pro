@@ -72,35 +72,19 @@
 
 ## 使用
 
-### 使用命令行
-
 ```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1 -b v2
-$ cd ant-design-pro
+$ yarn create umi  # or npm create umi
+
+# Choose ant-design-pro:
+ Select the boilerplate type (Use arrow keys)
+❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
+  app             - Create project with a simple boilerplate, support typescript.
+  block           - Create a umi block.
+  library         - Create a library with umi.
+  plugin          - Create a umi plugin.
+
 $ npm install
-$ npm start         # 访问 http://localhost:8000
-```
-
-### 使用 docker
-
-```bash
-# preview
-$ docker pull antdesign/ant-design-pro
-$ docker run -p 80:80 antdesign/ant-design-pro
-# open http://localhost
-
-# dev
-$ npm run docker:dev
-
-# build
-$ npm run docker:build
-
-
-# production dev
-$ npm run docker-prod:dev
-
-// production build
-$ npm run docker-prod:build
+$ npm start         # visit http://localhost:8000
 ```
 
 更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。

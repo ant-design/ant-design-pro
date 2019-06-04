@@ -77,32 +77,18 @@
 ### bash を使う方法
 
 ```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1
-$ cd ant-design-pro
+$ yarn create umi  # or npm create umi
+
+# Choose ant-design-pro:
+ Select the boilerplate type (Use arrow keys)
+❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
+  app             - Create project with a simple boilerplate, support typescript.
+  block           - Create a umi block.
+  library         - Create a library with umi.
+  plugin          - Create a umi plugin.
+
 $ npm install
 $ npm start         # http://localhost:8000 を開く
-```
-
-### Docker を使う方法
-
-```bash
-# プレビュー
-$ docker pull antdesign/ant-design-pro
-$ docker run -p 80:80 antdesign/ant-design-pro
-# http://localhost を開く
-
-# dev
-$ npm run docker:dev
-
-# build
-$ npm run docker:build
-
-
-# production dev
-$ npm run docker-prod:dev
-
-# production build
-$ npm run docker-prod:build
 ```
 
 ### Gitpod を使う方法

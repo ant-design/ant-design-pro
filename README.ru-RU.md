@@ -71,8 +71,16 @@ UI-решение "из коробки" для корпоративных при
 ## Использование
 
 ```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1 -b v2
-$ cd ant-design-pro
+$ yarn create umi  # or npm create umi
+
+# Choose ant-design-pro:
+ Select the boilerplate type (Use arrow keys)
+❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
+  app             - Create project with a simple boilerplate, support typescript.
+  block           - Create a umi block.
+  library         - Create a library with umi.
+  plugin          - Create a umi plugin.
+
 $ npm install
 $ npm start         # visit http://localhost:8000
 ```

@@ -74,35 +74,19 @@ React ile kurumsal uygulamalar için taslak olarak geliştirilmiş kullanıma ha
 
 ## Kullanım
 
-### bash ile kullanım
-
 ```bash
-$ git clone https://github.com/ant-design/ant-design-pro.git --depth=1 -b v2
-$ cd ant-design-pro
+$ yarn create umi  # or npm create umi
+
+# Choose ant-design-pro:
+ Select the boilerplate type (Use arrow keys)
+❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
+  app             - Create project with a simple boilerplate, support typescript.
+  block           - Create a umi block.
+  library         - Create a library with umi.
+  plugin          - Create a umi plugin.
+
 $ npm install
 $ npm start         # visit http://localhost:8000
-```
-
-### Docker ile kullanım
-
-```bash
-# preview
-$ docker pull chenshuai2144/ant-design-pro
-$ docker run -p 80:80 chenshuai2144/ant-design-pro
-# open http://localhost
-
-# dev
-$ npm run docker:dev
-
-# build
-$ npm run docker:build
-
-
-# production dev
-$ npm run docker-prod:dev
-
-# production build
-$ npm run docker-prod:build
 ```
 
 Daha fazla talimat için [dokümantasyon](http://pro.ant.design/docs/getting-started) sayfasına göz atın.
