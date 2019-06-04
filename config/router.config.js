@@ -147,7 +147,7 @@ export default [
           {
             // authority:['permission_list'],
             path: '/system-management/permission/list',
-            name: 'system-list',
+            name: 'permission-list',
             component: './system-management/permission/list/Index',
           },
           {

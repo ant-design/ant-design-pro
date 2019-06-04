@@ -147,7 +147,7 @@ class PermissionList extends PureComponent {
         }, {});
 
         const params = {
-            currentPage: pagination.current,
+            page: pagination.current - 1,
             pageSize: pagination.pageSize,
             ...formValues,
             ...filters,
@@ -157,7 +157,7 @@ class PermissionList extends PureComponent {
         }
 
         dispatch({
-            type: 'role/fetch',
+            type: 'permission/fetch',
             payload: params,
         });
     };

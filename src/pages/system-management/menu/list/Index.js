@@ -307,7 +307,7 @@ class MenuList extends PureComponent {
       dataIndex: 'name',
     },
     {
-      title: '地址',
+      title: '路由',
       dataIndex: 'path',
     },
     {

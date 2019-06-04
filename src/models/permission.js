@@ -1,6 +1,6 @@
 import router from 'umi/router';
 import { message } from 'antd';
-import { query, addPermission,updatePermission,deleteById } from '@/services/permission';
+import { query, addPermission, updatePermission, deleteById } from '@/services/permission';
 export default {
     namespace: 'permission',
     state: {
@@ -71,7 +71,7 @@ export default {
                     pagination: {
                         total: action.payload.data.totalElements,
                         pageSize: action.payload.data.size,
-                        current: action.payload.data.number,
+                        current: action.payload.data.number + 1,
                     },
                 },
             };
