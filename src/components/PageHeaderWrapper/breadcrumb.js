@@ -8,7 +8,7 @@ import { menu } from '../../defaultSettings';
 // 渲染Breadcrumb 子节点
 // Render the Breadcrumb child node
 const itemRender = (route, params, routes, paths) => {
-  const last = routes.indexOf(route) === routes.length - 1;
+  const last = route.path === routes[routes.length - 1].path;
   // if path is home, use Link。
   if (route.path === '/') {
     return <Link to={paths.join('/')}>{route.breadcrumbName}</Link>;
@@ -81,6 +81,7 @@ const conversionFromLocation = (routerLocation, breadcrumbNameMap, props) => {
         ? {
             path: url,
             breadcrumbName: name,
+            component: currentBreadcrumb.component || null
           }
         : null;
     })
