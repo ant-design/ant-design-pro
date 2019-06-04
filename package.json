@@ -27,7 +27,7 @@
     "lint:ts": "tslint -p . -c tslint.yml",
     "prettier": " check-prettier write",
     "site": "npm run fetch:blocks && npm run functions:build && umi build",
-    "start": "umi dev",
+    "start": "BABEL_CACHE=none umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
@@ -54,7 +54,7 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@ant-design/pro-layout": "^4.4.2",
+    "@ant-design/pro-layout": "^4.5.0",
     "@antv/data-set": "^0.10.2",
     "antd": "^3.19.1",
     "classnames": "^2.2.6",
