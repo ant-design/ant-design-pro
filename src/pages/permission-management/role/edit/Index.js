@@ -28,12 +28,12 @@ import styles from '../../../List/TableList.less';
 const FormItem = Form.Item;
 const { Option } = Select;
 
-@connect(({ user, loading }) => ({
-  user,
-  loading: loading.models.user,
+@connect(({ role, loading }) => ({
+  role,
+  loading: loading.models.role,
 }))
 @Form.create()
-class UserEdit extends PureComponent {
+class roleEdit extends PureComponent {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
@@ -43,7 +43,7 @@ class UserEdit extends PureComponent {
     console.log(this.props.match.params.id);
     const { dispatch } = this.props;
     dispatch({
-      type: 'user/get',
+      type: 'role/get',
       payload: this.props.match.params.id,
     });
   }
@@ -74,10 +74,11 @@ class UserEdit extends PureComponent {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        values.id = this.props.match.params.id;
+        console.log('Received values of form: ', values);
         const { dispatch } = this.props;
+        values.id = this.props.match.params.id;
         dispatch({
-          type: 'user/update',
+          type: 'role/update',
           payload: values,
         });
       }
@@ -85,13 +86,13 @@ class UserEdit extends PureComponent {
   };
 
   handleCancle = e => {
-    router.push('/system-management/user/list');
+    router.push('/permission-management/role/list');
   };
 
   render() {
     const {
       form: { getFieldDecorator },
-      user: { user },
+      role: { role },
     } = this.props;
     const formItemLayout = {
       labelCol: {
@@ -128,53 +129,39 @@ class UserEdit extends PureComponent {
         <Card bordered={false}>
           <div className={styles.tableList}>
             <Form {...formItemLayout} onSubmit={this.handleSubmit} labelAlign="right">
-              <FormItem label="账号">
-                {getFieldDecorator('userName', {
-                  initialValue: user.userName,
+              <FormItem label="角色编码">
+                {getFieldDecorator('roleCode', {
+                  initialValue: role.roleCode,
                   rules: [
                     {
                       required: true,
-                      message: '请输入账号',
+                      message: '请输入角色编码',
                     },
                   ],
-                })(<Input placeholder="账号" size="large" disabled />)}
+                })(<Input placeholder="角色编码" size="large" />)}
               </FormItem>
-              <FormItem label="邮箱">
-                {getFieldDecorator('email', {
-                  initialValue: user.email,
+
+              <FormItem label="角色名称">
+                {getFieldDecorator('roleName', {
+                  initialValue: role.roleName,
                   rules: [
                     {
-                      type: 'email',
-                      message: '请输入正确的邮箱地址',
-                    },
-                    {
-                      required: false,
-                      message: '请输入邮箱',
+                      required: true,
+                      message: '请输入角色名称',
                     },
                   ],
-                })(<Input placeholder="邮箱" size="large" />)}
+                })(<Input placeholder="角色名称" size="large" />)}
               </FormItem>
-              <FormItem label="手机">
-                {getFieldDecorator('mobile', {
-                  initialValue: user.mobile,
+              <FormItem label="角色描述">
+                {getFieldDecorator('descr', {
+                  initialValue: role.descr,
                   rules: [
                     {
-                      required: false,
-                      message: '请输入手机',
-                    },
-                    {
-                      pattern: /^1\d{10}$/,
-                      message: '请输入正确的手机号',
+                      required: true,
+                      message: '请输入角色描述',
                     },
                   ],
-                })(
-                  <Input
-                    placeholder="手机"
-                    addonBefore={prefixSelector}
-                    style={{ width: '100%' }}
-                    size="large"
-                  />
-                )}
+                })(<Input placeholder="角色描述" size="large" />)}
               </FormItem>
               <FormItem {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit" icon="check" size="large">
@@ -198,4 +185,4 @@ class UserEdit extends PureComponent {
   }
 }
 
-export default UserEdit;
+export default roleEdit;

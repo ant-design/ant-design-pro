@@ -26,7 +26,7 @@ export default {
       console.log(response);
       if (response.code === 0) {
         message.success('保存成功', 2);
-        router.push('/system-management/role/list');
+        router.push('/permission-management/role/list');
       } else {
         message.error(response.msg);
       }
@@ -42,7 +42,7 @@ export default {
       const response = yield call(updateRole, payload);
       if (response.code === 0) {
         message.success('修改成功', 2);
-        router.push('/system-management/role/list');
+        router.push('/permission-management/role/list');
       } else {
         message.error(response.msg);
       }

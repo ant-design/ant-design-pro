@@ -259,7 +259,7 @@ class UserList extends PureComponent {
   ];
 
   handleEdit = record => {
-    router.push('/system-management/user/edit/' + record.id);
+    router.push('/permission-management/user/edit/' + record.id);
   };
 
   handleDelete = record => {
@@ -272,7 +272,7 @@ class UserList extends PureComponent {
   };
 
   handleAdd() {
-    router.push('/system-management/user/add');
+    router.push('/permission-management/user/add');
   };
 
   handleRoleAuth = () => {

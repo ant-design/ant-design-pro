@@ -33,13 +33,20 @@ const { Option } = Select;
   loading: loading.models.user,
 }))
 @Form.create()
-class UserAdd extends PureComponent {
+class UserEdit extends PureComponent {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
   };
 
-  componentDidUpdate() {}
+  componentDidMount() {
+    console.log(this.props.match.params.id);
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'user/get',
+      payload: this.props.match.params.id,
+    });
+  }
 
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
@@ -67,9 +74,10 @@ class UserAdd extends PureComponent {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        values.id = this.props.match.params.id;
         const { dispatch } = this.props;
         dispatch({
-          type: 'user/add',
+          type: 'user/update',
           payload: values,
         });
       }
@@ -77,13 +85,13 @@ class UserAdd extends PureComponent {
   };
 
   handleCancle = e => {
-    router.push('/system-management/user/list');
+    router.push('/permission-management/user/list');
   };
 
   render() {
     const {
       form: { getFieldDecorator },
-      user: { currentUser },
+      user: { user },
     } = this.props;
     const formItemLayout = {
       labelCol: {
@@ -122,55 +130,18 @@ class UserAdd extends PureComponent {
             <Form {...formItemLayout} onSubmit={this.handleSubmit} labelAlign="right">
               <FormItem label="账号">
                 {getFieldDecorator('userName', {
+                  initialValue: user.userName,
                   rules: [
                     {
                       required: true,
                       message: '请输入账号',
                     },
                   ],
-                })(
-                  <Input
-                    prefix="@"
-                    addonBefore={currentUser.tenantId}
-                    placeholder="账号"
-                    size="large"
-                  />
-                )}
-              </FormItem>
-              <FormItem label="密码" hasFeedback>
-                {getFieldDecorator('password', {
-                  rules: [
-                    {
-                      required: true,
-                      message: '请输入密码',
-                    },
-                    {
-                      validator: this.validateToNextPassword,
-                    },
-                  ],
-                })(<Input.Password placeholder="密码" size="large" />)}
-              </FormItem>
-              <FormItem label="确认密码" hasFeedback>
-                {getFieldDecorator('confirm', {
-                  rules: [
-                    {
-                      required: true,
-                      message: '请输入确认密码',
-                    },
-                    {
-                      validator: this.compareToFirstPassword,
-                    },
-                  ],
-                })(
-                  <Input.Password
-                    placeholder="确认密码"
-                    onBlur={this.handleConfirmBlur}
-                    size="large"
-                  />
-                )}
+                })(<Input placeholder="账号" size="large" disabled />)}
               </FormItem>
               <FormItem label="邮箱">
                 {getFieldDecorator('email', {
+                  initialValue: user.email,
                   rules: [
                     {
                       type: 'email',
@@ -185,6 +156,7 @@ class UserAdd extends PureComponent {
               </FormItem>
               <FormItem label="手机">
                 {getFieldDecorator('mobile', {
+                  initialValue: user.mobile,
                   rules: [
                     {
                       required: false,
@@ -223,7 +195,7 @@ class UserAdd extends PureComponent {
         </Card>
       </PageHeaderWrapper>
     );
-  };
+  }
 }
 
-export default UserAdd;
+export default UserEdit;

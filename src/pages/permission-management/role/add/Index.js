@@ -33,42 +33,8 @@ const { Option } = Select;
   loading: loading.models.role,
 }))
 @Form.create()
-class roleEdit extends PureComponent {
-  state = {
-    confirmDirty: false,
-    autoCompleteResult: [],
-  };
-
-  componentDidMount() {
-    console.log(this.props.match.params.id);
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'role/get',
-      payload: this.props.match.params.id,
-    });
-  }
-
-  compareToFirstPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('确认密码不一致!');
-    } else {
-      callback();
-    }
-  };
-
-  validateToNextPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
-    }
-    callback();
-  };
-
-  handleConfirmBlur = e => {
-    const value = e.target.value;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  };
+class roleAdd extends PureComponent {
+  state = {};
 
   handleSubmit = e => {
     e.preventDefault();
@@ -76,9 +42,8 @@ class roleEdit extends PureComponent {
       if (!err) {
         console.log('Received values of form: ', values);
         const { dispatch } = this.props;
-        values.id = this.props.match.params.id;
         dispatch({
-          type: 'role/update',
+          type: 'role/add',
           payload: values,
         });
       }
@@ -86,13 +51,12 @@ class roleEdit extends PureComponent {
   };
 
   handleCancle = e => {
-    router.push('/system-management/role/list');
+    router.push('/permission-management/role/list');
   };
 
   render() {
     const {
       form: { getFieldDecorator },
-      role: { role },
     } = this.props;
     const formItemLayout = {
       labelCol: {
@@ -116,14 +80,6 @@ class roleEdit extends PureComponent {
         },
       },
     };
-    const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '86',
-    })(
-      <Select style={{ width: 70 }}>
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    );
     return (
       <PageHeaderWrapper>
         <Card bordered={false}>
@@ -131,7 +87,6 @@ class roleEdit extends PureComponent {
             <Form {...formItemLayout} onSubmit={this.handleSubmit} labelAlign="right">
               <FormItem label="角色编码">
                 {getFieldDecorator('roleCode', {
-                  initialValue: role.roleCode,
                   rules: [
                     {
                       required: true,
@@ -140,10 +95,8 @@ class roleEdit extends PureComponent {
                   ],
                 })(<Input placeholder="角色编码" size="large" />)}
               </FormItem>
-
               <FormItem label="角色名称">
                 {getFieldDecorator('roleName', {
-                  initialValue: role.roleName,
                   rules: [
                     {
                       required: true,
@@ -154,7 +107,6 @@ class roleEdit extends PureComponent {
               </FormItem>
               <FormItem label="角色描述">
                 {getFieldDecorator('descr', {
-                  initialValue: role.descr,
                   rules: [
                     {
                       required: true,
@@ -185,4 +137,4 @@ class roleEdit extends PureComponent {
   }
 }
 
-export default roleEdit;
+export default roleAdd;

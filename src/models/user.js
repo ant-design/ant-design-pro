@@ -39,7 +39,7 @@ export default {
       console.log(response);
       if (response.code === 0) {
         message.success('保存成功', 2);
-        router.push('/system-management/user/list');
+        router.push('/permission-management/user/list');
       } else {
         message.error(response.msg);
       }
@@ -55,7 +55,7 @@ export default {
       const response = yield call(updateUser, payload);
       if (response.code === 0) {
         message.success('修改成功', 2);
-        router.push('/system-management/user/list');
+        router.push('/permission-management/user/list');
       } else {
         message.error(response.msg);
       }
@@ -112,7 +112,7 @@ export default {
       const response = yield call(roleAuth, payload);
       if (response.code === 0) {
         message.success('操作成功', 2);
-        router.push('/system-management/user/list');
+        router.push('/permission-management/user/list');
       } else {
         message.error(response.msg);
       }

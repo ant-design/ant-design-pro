@@ -82,11 +82,11 @@ class RoleList extends PureComponent {
   };
 
   handleAdd = () => {
-    router.push('/system-management/role/add');
+    router.push('/permission-management/role/add');
   };
 
   handleEdit = record => {
-    router.push('/system-management/role/edit/' + record.id);
+    router.push('/permission-management/role/edit/' + record.id);
   };
 
   handleDelete = record => {
@@ -104,7 +104,7 @@ class RoleList extends PureComponent {
     switch (e.key) {
       case 'permissAuth':
         if (selectedRows.length === 1) {
-          router.push('/system-management/role/permissAuth/' + selectedRows[0].id);
+          router.push('/permission-management/role/permissAuth/' + selectedRows[0].id);
         } else {
           message.error('请选择一个角色进行授权!');
         }
