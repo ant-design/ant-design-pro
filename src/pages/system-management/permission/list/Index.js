@@ -41,24 +41,24 @@ const CreateForm = Form.create()(props => {
     return (
         <Modal
             destroyOnClose
-            title="新建权限"
+            title="新建功能"
             visible={modalVisible}
             onOk={okHandle}
             onCancel={() => handleModalVisible()}
         >
-            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="权限名称">
+            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="名称">
                 {form.getFieldDecorator('name', {
-                    rules: [{ required: true, message: '请输入权限名称' }],
+                    rules: [{ required: true, message: '请输入名称' }],
                 })(<Input size="large" placeholder="请输入" />)}
             </FormItem>
-            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="权限编码">
+            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="编码">
                 {form.getFieldDecorator('code', {
-                    rules: [{ required: true, message: '请输入权限编码' }],
+                    rules: [{ required: true, message: '请输入编码' }],
                 })(<Input size="large" placeholder="请输入" />)}
             </FormItem>
-            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="权限地址">
+            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="地址">
                 {form.getFieldDecorator('url', {
-                    rules: [{ required: true, message: '请输入权限地址' }],
+                    rules: [{ required: true, message: '请输入地址' }],
                 })(<Input size="large" placeholder="请输入" />)}
             </FormItem>
             <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="序号">
@@ -82,27 +82,27 @@ const UpdateForm = Form.create()(props => {
     return (
         <Modal
             destroyOnClose
-            title="编辑权限"
+            title="编辑功能"
             visible={modalVisible}
             onOk={okHandle}
             onCancel={() => handleModalVisible()}
         >
-            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="权限名称">
+            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="名称">
                 {form.getFieldDecorator('name', {
                     initialValue: permission.name,
-                    rules: [{ required: true, message: '请输入权限名称' }],
+                    rules: [{ required: true, message: '请输入名称' }],
                 })(<Input size="large" placeholder="请输入" />)}
             </FormItem>
-            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="权限编码">
+            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="编码">
                 {form.getFieldDecorator('code', {
                     initialValue: permission.code,
-                    rules: [{ required: true, message: '请输入权限编码' }],
+                    rules: [{ required: true, message: '请输入编码' }],
                 })(<Input size="large" placeholder="请输入" />)}
             </FormItem>
-            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="权限地址">
+            <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="地址">
                 {form.getFieldDecorator('url', {
                     initialValue: permission.url,
-                    rules: [{ required: true, message: '请输入权限地址' }],
+                    rules: [{ required: true, message: '请输入地址' }],
                 })(<Input size="large" placeholder="请输入" />)}
             </FormItem>
             <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="序号">
@@ -226,15 +226,15 @@ class PermissionList extends PureComponent {
 
     columns = [
         {
-            title: '权限名称',
+            title: '名称',
             dataIndex: 'name',
         },
         {
-            title: '权限编码',
+            title: '编码',
             dataIndex: 'code',
         },
         {
-            title: '权限地址',
+            title: '地址',
             dataIndex: 'url',
         },
         {

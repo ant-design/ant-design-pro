@@ -97,7 +97,7 @@ export default [
             component: './system-management/user/edit/Index',
           },
           {
-            authority: ['super_admin', 'user_roleAuth'],
+            authority: ['super_admin', 'user_role_auth'],
             hideInMenu: true,
             path: '/system-management/user/roleAuth/:userId',
             name: 'user-roleAuth',

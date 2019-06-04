@@ -27,9 +27,10 @@ import {
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import Authorized from '@/components/Authorized';
+import RenderAuthorized from '@/components/Authorized';
+import { getAuthority } from '@/utils/authority';
 import styles from '../../../List/TableList.less';
-
+const Authorized = RenderAuthorized(getAuthority());
 const FormItem = Form.Item;
 const { Option } = Select;
 const getValue = obj =>
@@ -238,16 +239,20 @@ class UserList extends PureComponent {
       fixed: 'right',
       render: (text, record) => (
         <Fragment>
-          <a onClick={() => this.handleEdit(record)} authority={['super_admin', 'user_edit']}>编辑</a>
-          <Divider type="vertical" />
-          <Popconfirm
-            title="你确定要删除此记录吗?"
-            onConfirm={() => this.handleDelete(record)}
-            okText="确定"
-            cancelText="取消"
-          >
-            <a>删除</a>
-          </Popconfirm>
+          <Authorized authority={['super_admin', 'user_edit']}>
+            <a onClick={() => this.handleEdit(record)}>编辑</a>
+            <Divider type="vertical" />
+          </Authorized>
+          <Authorized authority={['super_admin', 'user_delete']}>
+            <Popconfirm
+              title="你确定要删除此记录吗?"
+              onConfirm={() => this.handleDelete(record)}
+              okText="确定"
+              cancelText="取消"
+            >
+              <a>删除</a>
+            </Popconfirm>
+          </Authorized>
         </Fragment>
       ),
     },
@@ -268,6 +273,23 @@ class UserList extends PureComponent {
 
   handleAdd() {
     router.push('/system-management/user/add');
+  };
+
+  handleRoleAuth = () => {
+    const { selectedRows } = this.state;
+    if (selectedRows.length === 1) {
+      if (selectedRows[0].isSuperAdmin === true) {
+        message.error('不能对系统超级管理员进行角色授权!');
+      } else {
+        router.push('/system-management/user/roleAuth/' + selectedRows[0].id);
+      }
+    } else {
+      message.error('请选择一个用户进行角色授权!');
+    }
+  };
+
+  handleResetPwd = () => {
+    this.handleModalVisible(true);
   };
 
   disableUserConfirm = () => {
@@ -328,36 +350,6 @@ class UserList extends PureComponent {
       type: 'user/active',
       payload: selectedRows,
     });
-  };
-
-  handleMenuClick = e => {
-    console.log(e);
-    const { selectedRows } = this.state;
-    if (selectedRows.length === 0) return;
-    switch (e.key) {
-      case 'roleAuth':
-        if (selectedRows.length === 1) {
-          if (selectedRows[0].isSuperAdmin === true) {
-            message.error('不能对系统超级管理员进行角色授权!');
-          } else {
-            router.push('/system-management/user/roleAuth/' + selectedRows[0].id);
-          }
-        } else {
-          message.error('请选择一个用户进行角色授权!');
-        }
-        break;
-      case 'resetPassword':
-        this.handleModalVisible(true);
-        break;
-      case 'disable':
-        this.disableUserConfirm();
-        break;
-      case 'active':
-        this.activeUserConfirm();
-        break;
-      default:
-        break;
-    }
   };
 
   toggleForm = () => {
@@ -523,14 +515,6 @@ class UserList extends PureComponent {
       loading,
     } = this.props;
     const { selectedRows, modalVisible, confirmDirty } = this.state;
-    const menu = (
-      <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
-        <Menu.Item key="roleAuth">角色授权</Menu.Item>
-        <Menu.Item key="resetPassword">重置密码</Menu.Item>
-        <Menu.Item key="disable">禁用</Menu.Item>
-        <Menu.Item key="active">激活</Menu.Item>
-      </Menu>
-    );
     const parentMethods = {
       handleResetPassword: this.handleResetPassword,
       handleConfirmBlur: this.handleConfirmBlur,
@@ -540,20 +524,45 @@ class UserList extends PureComponent {
       <PageHeaderWrapper>
         <Card bordered={false}>
           <div className={styles.tableList}>
-            <div className={styles.tableListForm}>{this.renderForm()}</div>
+            <div className={styles.tableListForm}>
+              <Authorized authority={['super_admin', 'user_search']}>
+                {this.renderForm()}
+              </Authorized>
+            </div>
             <div className={styles.tableListOperator}>
-              <Button icon="plus" type="primary" size="large" onClick={() => this.handleAdd()}>
-                新增
+              <Authorized authority={['super_admin', 'user_add']}>
+                <Button icon="plus" type="primary" size="large" onClick={() => this.handleAdd()}>
+                  新增
                 </Button>
-              {selectedRows.length > 0 && (
-                <span>
-                  <Dropdown overlay={menu}>
-                    <Button icon="more" type="primary" size="large">
-                      更多操作 <Icon type="down" />
-                    </Button>
-                  </Dropdown>
-                </span>
-              )}
+              </Authorized>
+              <Authorized authority={['super_admin', 'user_role_auth']}>
+                {selectedRows.length > 0 && (
+                  <Button type="primary" size="large" onClick={() => this.handleRoleAuth()}>
+                    角色授权
+                  </Button>
+                )}
+              </Authorized>
+              <Authorized authority={['super_admin', 'user_reset_pwd']}>
+                {selectedRows.length > 0 && (
+                  <Button type="primary" size="large" onClick={() => this.handleResetPwd()}>
+                    重置密码
+                  </Button>
+                )}
+              </Authorized>
+              <Authorized authority={['super_admin', 'user_disable']}>
+                {selectedRows.length > 0 && (
+                  <Button type="primary" size="large" onClick={() => this.disableUserConfirm()}>
+                    禁用
+                  </Button>
+                )}
+              </Authorized>
+              <Authorized authority={['super_admin', 'user_active']}>
+                {selectedRows.length > 0 && (
+                  <Button type="primary" size="large" onClick={() => this.activeUserConfirm()}>
+                    激活
+                  </Button>
+                )}
+              </Authorized>
             </div>
             <StandardTable
               bordered
