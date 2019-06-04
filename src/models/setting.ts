@@ -104,7 +104,7 @@ const SettingModel: SettingModelType = {
       });
       const { primaryColor, colorWeak } = setting;
 
-      if (state.primaryColor !== primaryColor) {
+      if (primaryColor && state.primaryColor !== primaryColor) {
         updateTheme(primaryColor);
       }
       updateColorWeak(!!colorWeak);
@@ -133,13 +133,13 @@ const SettingModel: SettingModelType = {
         }
       });
       const { primaryColor, colorWeak, contentWidth } = payload;
-      if (state.primaryColor !== primaryColor) {
+      if (primaryColor && state.primaryColor !== primaryColor) {
         updateTheme(primaryColor);
       }
       if (state.contentWidth !== contentWidth && window.dispatchEvent) {
         window.dispatchEvent(new Event('resize'));
       }
-      updateColorWeak(colorWeak);
+      updateColorWeak(!!colorWeak);
       window.history.replaceState(null, 'setting', urlParams.href);
       return {
         ...state,
