@@ -5,7 +5,7 @@ export function isUrl(path: string) {
   return reg.test(path);
 }
 
-export function isAntDesignPro() {
+export function isAntDesignPro(): boolean {
   if (ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
     return true;
   }
@@ -13,7 +13,7 @@ export function isAntDesignPro() {
 }
 
 // 给官方演示站点用，用于关闭真实开发环境不需要使用的特性
-export function isAntDesignProOrDev() {
+export function isAntDesignProOrDev(): boolean {
   const { NODE_ENV } = process.env;
   if (NODE_ENV === 'development') {
     return true;
