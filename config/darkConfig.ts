@@ -36,4 +36,6 @@ export default {
   '@input-disabled-bg': '#404C56',
 
   '@background-color-light': '#001529',
+
+  '@popover-bg': '#08121C',
 };
