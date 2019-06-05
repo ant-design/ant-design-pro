@@ -137,10 +137,6 @@
     "stylelint-config-standard": "^18.3.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.1.0",
     "stylelint-order": "^3.0.0",
-    "tslint": "^5.17.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^4.0.0",
     "webpack-theme-color-replacer": "^1.1.5"
   },
   "optionalDependencies": {
