@@ -115,7 +115,6 @@ Toute forme de contribution est la bienvenue, voici quelques exemples de façons
 - Soumettre des [issues](http://github.com/ant-design/ant-design-pro/issues) pour reporter les bugs ou poser des questions.
 - Proposer des [pull requests](http://github.com/ant-design/ant-design-pro/pulls) pour améliorer notre code.
 
-
 <div align="center">
    <a href="https://www.netlify.com">
     <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>

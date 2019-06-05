@@ -112,4 +112,4 @@ const getAntdSerials = (color: string) => {
   });
   const colorPalettes = generate(color);
   return lightens.concat(colorPalettes);
-}
+};
