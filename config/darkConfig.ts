@@ -21,7 +21,7 @@ export default {
 
   '@table-header-bg': '#0A1A2B',
   '@table-row-hover-bg': '#3a3a3b',
-  '@table-selected-row-bg': '#3a3a3a',
+  '@table-selected-row-bg': '#0F2239',
 
   '@tag-default-bg': '#13222E',
   '@alert-info-bg-color': '#102134',
