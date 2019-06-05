@@ -20,7 +20,7 @@ export default {
   '@btn-default-border': '#13222E',
 
   '@table-header-bg': '#0A1A2B',
-  '@table-row-hover-bg': '#3a3a3b',
+  '@table-row-hover-bg': '#0F2239',
   '@table-selected-row-bg': '#0F2239',
 
   '@tag-default-bg': '#13222E',
