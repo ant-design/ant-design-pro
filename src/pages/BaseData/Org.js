@@ -35,13 +35,11 @@ const actions =
 const orgTypes = getItems('org', 'org_type'); // 缓存取数据
 const authTypes = getItems('org', 'auth_type');
 const statusList = getItems('common', 'status');
-const userName = getUserName();
 
 const columnSchemas = {
   tableName: 'org',
   key: 'id',
   name: 'orgName',
-  userName,
   columnDetails: [
     { name: 'appkey', title: 'App Key', query: true }, // name  数据库属性 query查询是否显示 add 新增 ,disableAct修改, rules 输入规则 tag下拉框
     { name: 'id', title: 'ID', columnHidden: false, add: true, disabledAct: 'true' }, // 第一列需要作为查询条件，新增时不需要采集
@@ -127,6 +125,8 @@ class Org extends PureComponent {
 
   render() {
     const { modalVisible, selectedRow } = this.state;
+    const userName = getUserName();
+    columnSchemas.userName = userName;
     return (
       <PageHeaderWrapper title="权限管理">
         <BindDataQueryTable
