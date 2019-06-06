@@ -2,7 +2,7 @@
 import React, {PureComponent} from 'react';
 // 引入面包屑导航组件
 import ReactJson from 'react-json-view'
-import {Input} from 'antd';
+import {Input,Button} from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import {getLogInfo,getFirstLog,getSecondLog} from '@/utils/log';
@@ -21,6 +21,7 @@ class LogPage extends PureComponent {
   }
 
   componentDidMount() {
+    this.tick();
     this.interval = setInterval(() => this.tick(), 2000);
   }
 
@@ -47,7 +48,12 @@ class LogPage extends PureComponent {
     return (
       <PageHeaderWrapper>
         <div>
-          Seconds Elapsed: {secondsElapsed}<br />
+          Seconds Elapsed: {secondsElapsed}
+          <span>&nbsp;&nbsp;</span>
+          <Button type="primary" onClick={()=>(clearInterval(this.interval))}>停止</Button>
+          <span>&nbsp;&nbsp;</span>
+          <Button type="primary" onClick={()=>{this.interval = setInterval(() => this.tick(), 2000)}}>启动</Button>
+          <br />
           Token:<TextArea rows={3} value={token} />
           <br />
           log:<ReactJson src={logArray} collapsed='true' />
