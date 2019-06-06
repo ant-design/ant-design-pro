@@ -34,8 +34,6 @@ export default {
         const params = getPageQuery();
         console.log('login response in loginModel:', 14);
 
-        const currentUser = yield call(queryCurrent);
-        setUser(currentUser.data);
 
         let { redirect } = params;
         if (redirect) {
@@ -52,6 +50,9 @@ export default {
         }
         console.log('login response in loginModel:', 16);
         yield put(routerRedux.replace(redirect || '/'));
+        const currentUser = yield call(queryCurrent);
+        // console.log("-----ddd,",currentUser);
+        setUser(currentUser.data);
       }
     },
 
