@@ -1,6 +1,7 @@
 const constants = {
-  PREFIX_PATH: '／server',
+  PREFIX_PATH: '／server', // '/server'为后台真实服务器，''为模拟服务
   DEBUG: true,
+  GLOBAL_COLLAPSE: true, // true侧边栏默认折叠
   SUCCESS_CODE: '200',
   UNAUTH_CODE: '1203',
   TOKEN_KEY: 'Accept-token',
