@@ -52,14 +52,19 @@ class BindDataQueryTable extends PureComponent {
   handleSearchDefault = () => {
     console.log('-------------------222222222');
     const {
-      columnSchemas: { tableName, userName },
+      columnSchemas: { tableName },
     } = this.props;
-    this.handleSearch({ tableName, userName });
+    this.handleSearch({ tableName });
   };
 
   handleSearch = params => {
-    const { dispatch, onConversionData, pageSize } = this.props;
-    const newParams = pageSize ? { ...params, pageSize } : params;
+    const {
+      dispatch,
+      onConversionData,
+      pageSize,
+      columnSchemas: { userName },
+    } = this.props;
+    const newParams = pageSize ? { ...params, userName, pageSize } : { ...params, userName };
     console.log('binddata', newParams);
     dispatch({
       type: 'uniComp/list',
@@ -130,4 +135,5 @@ class BindDataQueryTable extends PureComponent {
     );
   }
 }
+
 export default BindDataQueryTable;
