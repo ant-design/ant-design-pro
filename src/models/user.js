@@ -1,5 +1,4 @@
 import { query as queryUsers, queryCurrent } from '@/services/user';
-import { setUser } from '@/utils/authority';
 
 export default {
   namespace: 'user',
@@ -77,7 +76,7 @@ export default {
         response.name=response.username;
         // console.log('----22222--',response);
       }
-      setUser(response);
+      // setUser(response); // 这里设置会太晚了，不要设置
       yield put({
         type: 'saveCurrentUser',
         payload: response,

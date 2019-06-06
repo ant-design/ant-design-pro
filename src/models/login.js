@@ -26,6 +26,9 @@ export default {
       const status = response.code && response.code === '200' ? 'ok' : 'error';
       // Login successfully
       if (status === 'ok') {
+        const {id,username}=response.data;
+        const user={id,username};
+        setUser(user);
         console.log('login response in loginModel:', 1);
         reloadAuthorized();
         console.log('login response in loginModel:', 12);
@@ -50,9 +53,6 @@ export default {
         }
         console.log('login response in loginModel:', 16);
         yield put(routerRedux.replace(redirect || '/'));
-        const currentUser = yield call(queryCurrent);
-        // console.log("-----ddd,",currentUser);
-        setUser(currentUser.data);
       }
     },
 

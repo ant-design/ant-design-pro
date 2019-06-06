@@ -91,7 +91,7 @@ class LoginPage extends Component {
                   message: formatMessage({ id: 'validation.userName.required' }),
                 },
               ]}
-              defaultValue='admin_manager_user'
+              defaultValue='super_admin'
             />
             <Password
               name="password"

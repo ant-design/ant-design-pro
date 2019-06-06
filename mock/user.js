@@ -5,7 +5,7 @@ export default {
     name: 'Serati Ma',
     avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
     userid: '00000001',
-    id:1,
+    id:4,
     username:'admin',
     email: 'liuyq6@asiainfo-int.com',
     signature: '海纳百川，有容乃大',
