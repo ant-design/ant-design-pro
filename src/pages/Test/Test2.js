@@ -21,7 +21,7 @@ class Test2 extends PureComponent {
     return (
       <PageHeaderWrapper>
         <Authorized authority={auth} noMatch={noMatch}>
-          {console.log("ddddddfiweieur2939399043949390")}
+          {console.log("ddddddfiweieur29393990439 49390")}
         </Authorized>
       </PageHeaderWrapper>
     );
