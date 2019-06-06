@@ -26,10 +26,9 @@ import styles from './index.less';
 
 import PrivilegeTreeSelectView from '@/pages/UserManager/PrivilegeTreeSelectView';
 
-
 const { Option } = Select;
-const {TextArea,Password} = Input;
-const  RadioGroup  = Radio.Group;
+const { TextArea, Password } = Input;
+const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 const getValue = obj =>
   Object.keys(obj)
@@ -48,18 +47,14 @@ const getFormItemArray = (currentProps, type) => {
   } = currentProps;
   return columnDetails.filter(columnDetail => columnDetail[type]);
 };
-const menuOption=[
-  ['remove','删除'],
-  ['enable','激活'],
-  ['disable','停用'],
-];
+const menuOption = [['remove', '删除'], ['enable', '激活'], ['disable', '停用']];
 const QueryCommandChildren = [];
 const otherChildren = [];
 const CreateForm = Form.create()(props => {
   const { selectedRow, modalVisible, form, handleAdd, handleModalVisible } = props;
   // console.log('1 selectedRow in CreateForm :', selectedRow);
   const {
-    columnSchemas: { key, },
+    columnSchemas: { key },
   } = props;
   const okHandle = () => {
     // console.log('okHandle1');
@@ -71,7 +66,7 @@ const CreateForm = Form.create()(props => {
         content: '确定提交该记录吗？',
         okText: '确认',
         cancelText: '取消',
-        onOk: () => handleAdd(fieldsValue,form),
+        onOk: () => handleAdd(fieldsValue, form),
       });
       // handleAdd(fieldsValue, form);
     });
@@ -80,7 +75,7 @@ const CreateForm = Form.create()(props => {
     form.resetFields();
     handleModalVisible(row, flag);
   };
-  const renderAutoForm = (item)=>{
+  const renderAutoForm = item => {
     switch (item.tag) {
       case 'commonSelect':
         return (
@@ -103,61 +98,48 @@ const CreateForm = Form.create()(props => {
           </RadioGroup>
         );
       case 'privilegeTreeSelect':
-        return (
-          <PrivilegeTreeSelectView
-            style={{ width: '100%' }}
-          />
-        );
+        return <PrivilegeTreeSelectView style={{ width: '100%' }} />;
       case 'textArea':
-        return (
-          <TextArea rows={item.rows} />
-        );
+        return <TextArea rows={item.rows} />;
       case 'inputNumber':
-        return (
-          <InputNumber style={{ width: '100%' }} />
-        );
+        return <InputNumber style={{ width: '100%' }} />;
       case 'passwordTag':
-        return (
-          <Password style={{ width: '100%' }} />
-        );
+        return <Password style={{ width: '100%' }} />;
       default:
-        return (
-          <Input disabled={item.disabled} placeholder={`请输入${item.title}`} />
-        );
+        return <Input disabled={item.disabled} placeholder={`请输入${item.title}`} />;
     }
-  }
+  };
   const addForms = getFormItemArray(props, 'add')
     .filter(data => !(`${data.name}` === key && !selectedRow))
     .map(item => {
       const itemTemp = item;
       // // console.log("======:",itemTemp.name === key,key,itemTemp.name);
-      itemTemp.disabled=itemTemp.name === key;
+      itemTemp.disabled = itemTemp.name === key;
       return itemTemp;
     });
   // console.log('addForm:', addForms);
-  const modalTitle=selectedRow?"update":"new";
+  const modalTitle = selectedRow ? 'update' : 'new';
   return (
-    <Modal title={modalTitle} visible={modalVisible} onOk={okHandle} onCancel={() => cancelHandle()}>
+    <Modal
+      title={modalTitle}
+      visible={modalVisible}
+      onOk={okHandle}
+      onCancel={() => cancelHandle()}
+    >
       {addForms.map(item => (
         <FormItem
           key={`addFormItem-${item.name}`}
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 12 }}
           label={item.title}
-          style={{ height: `${item.rows?20*item.rows:20}px` }}
+          style={{ height: `${item.rows ? 20 * item.rows : 20}px` }}
         >
           {form.getFieldDecorator(item.name, {
             initialValue: selectedRow ? selectedRow[item.name] : '',
-            rules:
-              item.rules
-                ? []
-                : [{ required: true, message: `Please input ${item.title}` }],
-          })(
-            renderAutoForm(item)
-          )}
+            rules: item.rules ? [] : [{ required: true, message: `Please input ${item.title}` }],
+          })(renderAutoForm(item))}
         </FormItem>
       ))}
-
     </Modal>
   );
 });
@@ -171,12 +153,11 @@ class QueryTable extends PureComponent {
     formValues: {},
   };
 
-
   componentDidMount() {
     console.log('============sub componentDidMount========');
 
-    const {children} = this.props;
-    QueryCommandChildren.splice(0,QueryCommandChildren.length);
+    const { children } = this.props;
+    QueryCommandChildren.splice(0, QueryCommandChildren.length);
     React.Children.forEach(children, item => {
       if (!item) {
         return;
@@ -190,14 +171,13 @@ class QueryTable extends PureComponent {
     });
 
     this.handleColumn();
-
   }
 
   // get columns
   handleColumn = () => {
     columns = [];
     const {
-      columnSchemas: { columnDetails,actions }
+      columnSchemas: { columnDetails, actions },
     } = this.props;
 
     // const {commands} = columnDetails;
@@ -207,34 +187,36 @@ class QueryTable extends PureComponent {
         return obj;
       }
       obj.title = columnDetail.title;
-      obj.width=columnDetail.width||undefined;
+      obj.width = columnDetail.width || undefined;
       obj.dataIndex = columnDetail.name;
-      obj.showLen = columnDetail.showLen||undefined;
+      obj.showLen = columnDetail.showLen || undefined;
       if (columnDetail.sorter != null) {
         obj.sorter = columnDetail.sorter;
       }
       if (columnDetail.format != null) {
         obj.render = val => <span>{moment(val).format(columnDetail.format)}</span>;
-      }
-      else if (columnDetail.showLen !== undefined) {
-        obj.render = val => (<Ellipsis length={columnDetail.showLen} tooltip>{val}</Ellipsis>);
-      }
-      else if (columnDetail.enumData != null) {
+      } else if (columnDetail.showLen !== undefined) {
+        obj.render = val => (
+          <Ellipsis length={columnDetail.showLen} tooltip>
+            {val}
+          </Ellipsis>
+        );
+      } else if (columnDetail.enumData != null) {
         obj.render = val => {
-          const item=columnDetail.enumData.find(d => d.itemCode === val);
-          const itemValue=item?item.itemValue:"";
-          return (<span>{itemValue}</span>);
-        }
+          const item = columnDetail.enumData.find(d => d.itemCode === val);
+          const itemValue = item ? item.itemValue : '';
+          return <span>{itemValue}</span>;
+        };
       }
       columns.push(obj);
       return obj;
     });
-    if(actions){
-      if(actions.havePermissions){
-        const authQueryCommands=actions.commandAct?QueryCommandChildren:[];
+    if (actions) {
+      if (actions.havePermissions) {
+        const authQueryCommands = actions.commandAct ? QueryCommandChildren : [];
         columns.push({
-          title: actions.title||'action',
-          width: actions.width||130,
+          title: actions.title || 'action',
+          width: actions.width || 130,
           render: (text, row) => (
             <Fragment>
               <a onClick={() => this.handleModify(row, true)}>{actions.saveAct}</a>
@@ -243,8 +225,7 @@ class QueryTable extends PureComponent {
           ),
         });
       }
-    }
-    else{
+    } else {
       columns.push({
         title: '操作',
         width: 130,
@@ -299,19 +280,18 @@ class QueryTable extends PureComponent {
     }
   };
 
-
-  handleSearch = (e) => {
+  handleSearch = e => {
     console.log('ddd---------2');
-    const { onSearch,form } = this.props;
+    const { onSearch, form } = this.props;
     if (e) e.preventDefault();
 
     const {
       columnSchemas: { tableName },
     } = this.props;
     form.validateFields((err, fieldsValue) => {
-      console.log("---fieldsValue:",fieldsValue);
+      console.log('---fieldsValue:', fieldsValue);
       if (err) return;
-      const {searchForm}=fieldsValue;
+      const { searchForm } = fieldsValue;
       const values = {
         tableName,
         ...searchForm,
@@ -347,45 +327,44 @@ class QueryTable extends PureComponent {
     if (sorter.field) {
       params.sorter = `${sorter.field}_${sorter.order}`;
     }
-    console.log("---params:",params);
+    console.log('---params:', params);
     const { onSearch } = this.props;
     if (onSearch) {
       onSearch(params);
     }
   };
 
-  handleCallback= (addForm) => {
+  handleCallback = addForm => {
     // console.log('resp=======', resp);
-      addForm.resetFields();
-      this.setState({
-        modalVisible: false,
-        selectedRow: null,
-      });
-      console.log('ddd---------1');
-      this.handleSearch();
-  }
+    addForm.resetFields();
+    this.setState({
+      modalVisible: false,
+      selectedRow: null,
+    });
+    console.log('ddd---------1');
+    this.handleSearch();
+  };
 
-  handleAdd= (fields, addForm) => {
-
+  handleAdd = (fields, addForm) => {
     // console.log('handleAdd:',fields);
     const {
-      columnSchemas: { tableName,key },
+      columnSchemas: { tableName, key },
     } = this.props;
 
     const { selectedRow } = this.state;
-    const option = selectedRow?2:1;
-    const keyValue = selectedRow?selectedRow[key]:null;
-    const payload= { option,tableName, ...fields };
-    payload[key]=keyValue;
+    const option = selectedRow ? 2 : 1;
+    const keyValue = selectedRow ? selectedRow[key] : null;
+    const payload = { option, tableName, ...fields };
+    payload[key] = keyValue;
 
     const { onAdd } = this.props;
     if (onAdd) {
-      onAdd(payload,addForm,this.handleCallback);
+      onAdd(payload, addForm, this.handleCallback);
     }
   };
 
-  handleMenuClick =(e)=>{
-    const value=new Map(menuOption).get(e.key);
+  handleMenuClick = e => {
+    const value = new Map(menuOption).get(e.key);
     Modal.confirm({
       title: '',
       content: `确定${value}该记录吗？`,
@@ -393,53 +372,69 @@ class QueryTable extends PureComponent {
       cancelText: '取消',
       onOk: () => this.subHandleMenuClick(e),
     });
-  }
+  };
 
-  subHandleMenuClick= (e) => {
-
-      const {
-        onMenuClick,
-        columnSchemas: { tableName,key },
-      } = this.props;
-      // console.log(tableName);
-      const { selectedRows } = this.state;
-      console.log("-----:",selectedRows);
-      if (!selectedRows) return;
-      const payload= {
-        tableName,
-        ids: selectedRows.map(row => row[key]),// .join(','),
-      };
-      switch (e.key) {
-        case 'remove':
-          payload.option=3;
-          break;
-        case 'enable':
-          payload.option=4;
-          break;
-        case 'disable':
-          payload.option=5;
-          break;
-        default:
-          break;
-      }
+  subHandleMenuClick = e => {
+    const {
+      onMenuClick,
+      columnSchemas: { tableName, key },
+    } = this.props;
+    // console.log(tableName);
+    const { selectedRows } = this.state;
+    console.log('-----:', selectedRows);
+    if (!selectedRows) return;
+    const payload = {
+      tableName,
+      ids: selectedRows.map(row => row[key]), // .join(','),
+    };
+    switch (e.key) {
+      case 'remove':
+        payload.option = 3;
+        break;
+      case 'enable':
+        payload.option = 4;
+        break;
+      case 'disable':
+        payload.option = 5;
+        break;
+      default:
+        break;
+    }
     if (onMenuClick) {
-      onMenuClick(payload,()=>{
+      onMenuClick(payload, () => {
         this.setState({
-        selectedRows: [],
+          selectedRows: [],
+        });
+        this.handleSearch();
       });
-      this.handleSearch();}
-      );
     }
   };
 
   handleFormReset = () => {
-    const {
-      form,
-    } = this.props;
+    const { form, onSearch } = this.props;
     form.resetFields();
     this.setState({
       formValues: {},
       modalVisible: false,
+    });
+
+    const {
+      columnSchemas: { tableName },
+    } = this.props;
+    form.validateFields((err, fieldsValue) => {
+      console.log('---fieldsValue:', fieldsValue);
+      if (err) return;
+      const { searchForm } = fieldsValue;
+      const values = {
+        tableName,
+        ...searchForm,
+      };
+      this.setState({
+        formValues: values,
+      });
+      if (onSearch) {
+        onSearch(values);
+      }
     });
   };
 
@@ -456,14 +451,14 @@ class QueryTable extends PureComponent {
     });
   };
 
- toggleForm = () => {
+  toggleForm = () => {
     const { expandForm } = this.state;
     this.setState({
       expandForm: !expandForm,
     });
   };
 
- renderForm() {
+  renderForm() {
     const { expandForm } = this.state;
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
@@ -493,7 +488,11 @@ class QueryTable extends PureComponent {
                       ))}
                     </Select>
                   ) : item.tag === 'date' ? (
-                    <DatePicker key={`ele-${item.name}`} style={{ width: '100%' }} placeholder="请输入更新日期" />
+                    <DatePicker
+                      key={`ele-${item.name}`}
+                      style={{ width: '100%' }}
+                      placeholder="请输入更新日期"
+                    />
                   ) : (
                     <Input key={`ele-${item.name}`} placeholder="请输入" />
                   )
@@ -536,7 +535,11 @@ class QueryTable extends PureComponent {
                     ))}
                   </Select>
                 ) : item.tag === 'date' ? (
-                  <DatePicker key={`ele-${item.name}`} style={{ width: '100%' }} placeholder="请输入更新日期" />
+                  <DatePicker
+                    key={`ele-${item.name}`}
+                    style={{ width: '100%' }}
+                    placeholder="请输入更新日期"
+                  />
                 ) : (
                   <Input key={`ele-${item.name}`} placeholder="请输入" />
                 )
@@ -574,18 +577,14 @@ class QueryTable extends PureComponent {
   }
 
   render() {
-    const {
-      data ,
-      loading,
-      columnSchemas,
-      onRow,
-      size,
-    } = this.props;
+    const { data, loading, columnSchemas, onRow, size } = this.props;
     const { key } = columnSchemas;
     const { selectedRow, selectedRows, modalVisible } = this.state;
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
-        {menuOption.map((item)=>(<Menu.Item key={item[0]}>{item[1]}</Menu.Item>))}
+        {menuOption.map(item => (
+          <Menu.Item key={item[0]}>{item[1]}</Menu.Item>
+        ))}
       </Menu>
     );
     const parentMethods = {
