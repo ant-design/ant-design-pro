@@ -422,7 +422,6 @@ class QueryTable extends PureComponent {
       columnSchemas: { tableName },
     } = this.props;
     form.validateFields((err, fieldsValue) => {
-      console.log('---fieldsValue:', fieldsValue);
       if (err) return;
       const { searchForm } = fieldsValue;
       const values = {
