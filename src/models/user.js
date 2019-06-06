@@ -74,6 +74,7 @@ export default {
           phone: '0591-268888888',
         };
         response = { ...simulateUser, ...response.data };
+        response.name=response.username;
         // console.log('----22222--',response);
       }
       setUser(response);
