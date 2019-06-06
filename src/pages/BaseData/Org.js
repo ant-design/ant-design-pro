@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Divider } from 'antd';
+import { Divider, message } from 'antd';
 import BindDataQueryTable from '../BindDataQueryTable';
 import QueryCommand from '@/components/QueryTable/QueryCommand';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -7,7 +7,7 @@ import { getItems } from '@/utils/masterData';
 import UserTransfer from './UserTransfer';
 
 import Authorized from '@/utils/Authorized';
-import { getAuth } from '@/utils/authority';
+import { getAuth, getUserName } from '@/utils/authority';
 
 const { check } = Authorized;
 
@@ -35,11 +35,13 @@ const actions =
 const orgTypes = getItems('org', 'org_type'); // 缓存取数据
 const authTypes = getItems('org', 'auth_type');
 const statusList = getItems('common', 'status');
+const userName = getUserName();
 
 const columnSchemas = {
   tableName: 'org',
   key: 'id',
   name: 'orgName',
+  userName,
   columnDetails: [
     { name: 'appkey', title: 'App Key', query: true }, // name  数据库属性 query查询是否显示 add 新增 ,disableAct修改, rules 输入规则 tag下拉框
     { name: 'id', title: 'ID', columnHidden: false, add: true, disabledAct: 'true' }, // 第一列需要作为查询条件，新增时不需要采集
@@ -99,12 +101,14 @@ class Org extends PureComponent {
 
   handleUser = () => {
     const { selectedRow } = this.state;
-    // message.success(selectedRow);
-    if (selectedRow) {
+    console.log('112213', selectedRow);
+    if (selectedRow && selectedRow.orgType !== '2') {
       // message.success(selectedRow.username);
       this.setState({
         modalVisible: true,
       });
+    } else {
+      message.error('消费方无法选择用户！');
     }
   };
 
@@ -155,7 +159,7 @@ class Org extends PureComponent {
           columnSchemas={columnSchemas}
           selectedRow={selectedRow}
           onRefreshData={this.handleRefreshData}
-          keyName="id"
+          keyName="userId"
           relationName="sysUserOrgs" // 选中的关联表
         />
       </PageHeaderWrapper>

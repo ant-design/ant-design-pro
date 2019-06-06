@@ -76,12 +76,14 @@ class TableList extends PureComponent {
     sorter: {},
     modalVisible: false,
     drawerVisible: false,
+    userId: null,
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     const payload = {};
     const userId = getUserId();
+    this.setState({ userId });
     payload.data = {};
     payload.data.info = {
       pageNo: 1,
@@ -247,7 +249,7 @@ class TableList extends PureComponent {
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
-    const { formValues } = this.state;
+    const { formValues, userId } = this.state;
     this.setState({ pagination, filtersArg, sorter });
     const filters = this.conversionFilter(filtersArg);
     const params = {
@@ -266,6 +268,7 @@ class TableList extends PureComponent {
       pageNo: 1,
       pageSize: 10,
       ...params,
+      userId,
     };
     payload.data.info.pageNo = payload.data.info.pageNo ? payload.data.info.pageNo : 1;
     dispatch({
@@ -280,9 +283,18 @@ class TableList extends PureComponent {
     this.setState({
       formValues: {},
     });
+
+    const { userId } = this.state;
+    const payload = {};
+    payload.data = {};
+    payload.data.info = {
+      pageNo: 1,
+      pageSize: 10,
+      userId,
+    };
     dispatch({
       type: 'apiGatewayModel/apiList',
-      payload: {},
+      payload,
     });
   };
 
@@ -357,9 +369,8 @@ class TableList extends PureComponent {
         formValues: values,
       });
 
-      const { filtersArg, sorter } = this.state;
+      const { filtersArg, sorter, userId } = this.state;
       const filters = this.conversionFilter(filtersArg);
-      const userId = getUserId();
       const payload = {};
       payload.data = {};
       payload.data.info = {

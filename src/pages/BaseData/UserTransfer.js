@@ -114,7 +114,7 @@ class UserTransfer extends PureComponent {
     // });
   };
 
-  handleChange = (nextTargetKeys, direction, moveKeys) => {
+  handleChange = nextTargetKeys => {
     this.setState({ targetKeys: nextTargetKeys });
     // console.log('targetKeys: ', nextTargetKeys);
     // console.log('direction: ', direction);
@@ -143,6 +143,7 @@ class UserTransfer extends PureComponent {
     const { userList } = this.props;
     const { targetKeys, selectedKeys, modalVisible } = this.state;
     console.log('userList:', userList);
+    console.log('targetKeys----:', targetKeys);
     return (
       <Modal
         title="授权"
@@ -160,7 +161,7 @@ class UserTransfer extends PureComponent {
           onChange={this.handleChange}
           onSelectChange={this.handleSelectChange}
           onScroll={this.handleScroll}
-          render={item => `${item.id}-${item.username}`}
+          render={item => `${item.userId}-${item.username}`}
           listStyle={{
             width: 200,
             height: 300,

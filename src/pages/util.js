@@ -1,18 +1,17 @@
 /* eslint-disable */
-import {mapKeys,} from 'lodash';
+import { mapKeys } from 'lodash';
 
 export function conversion(responseData) {
-  let retData=responseData;
-  if(!responseData){
-    retData= {
+  let retData = responseData;
+  if (!responseData) {
+    retData = {
       list: [],
-        pagination: {},
-    }
-  }
-  else if(responseData.records){
+      pagination: {},
+    };
+  } else if (responseData.records) {
     retData = mapKeys(responseData, (value, key) => {
       if (key === 'records') return 'list';
-      if (key === 'page'){
+      if (key === 'page') {
         // mapKeys(responseData.page, (value1, key1) => {
         //   if (key1 === 'totalNesponseData.page, (value1, key1) => {
         //         //   if (key1 === 'totalNum'){
@@ -30,17 +29,16 @@ export function conversion(responseData) {
     });
   }
 
-
   return retData;
 }
 
 export function conversionReq(requestData) {
-  const {tableName, option, pageSize, ...info} = requestData;
-  if(!option){
-    info.pageNo=info.pageNo || 1;
-    info.pageSize=pageSize || 10;
+  const { tableName, userName, option, pageSize, ...info } = requestData;
+  if (!option) {
+    info.pageNo = info.pageNo || 1;
+    info.pageSize = pageSize || 10;
   }
-  return {tableName,option,data:{info}};
+  return { tableName, userName, option, data: { info } };
 }
 
 // source: http://stackoverflow.com/questions/7390426/better-way-to-get-type-of-a-javascript-variable/7390612#7390612
@@ -70,56 +68,54 @@ export function toType(obj) {
   return type;
 }
 
-const toCamelCaseVar = (variable) =>
-  variable.replace(/\_+[a-zA-Z]/g,
-    (str,index) => index ? str.substr(-1).toUpperCase() : str
-  )
+const toCamelCaseVar = variable =>
+  variable.replace(/\_+[a-zA-Z]/g, (str, index) => (index ? str.substr(-1).toUpperCase() : str));
 
 function camelToSpace(name) {
-  return name.replace(/([A-Z])/g," $1").toLowerCase();
+  return name.replace(/([A-Z])/g, ' $1').toLowerCase();
 }
 
-export function toApiSpecJson(obj,arr,parent){
-  Object.keys(obj).forEach((key,index)=> {
-    const value=obj[key];
+export function toApiSpecJson(obj, arr, parent) {
+  Object.keys(obj).forEach((key, index) => {
+    const value = obj[key];
     // console.log(key, value,toType(obj),parent);
-    arr.push({name:key,type:toType(value),remark:camelToSpace(key),parent});
-    if(toType(value)==='object'){
-      toApiSpecJson(value,arr,key)
+    arr.push({ name: key, type: toType(value), remark: camelToSpace(key), parent });
+    if (toType(value) === 'object') {
+      toApiSpecJson(value, arr, key);
     }
-    if(toType(value)==='array'){
-      if(value.length>0) {
-        toApiSpecJson(value[0], arr,key);
+    if (toType(value) === 'array') {
+      if (value.length > 0) {
+        toApiSpecJson(value[0], arr, key);
       }
     }
-  })
+  });
 }
 
 export function getPlaceHolder(str) {
-  const arrTmp = str.split("{");
-  const retArr=[];
-  arrTmp.forEach((val)=>{
-    const dIntPos = val.indexOf("}");
-    if(dIntPos>0){
+  const arrTmp = str.split('{');
+  const retArr = [];
+  arrTmp.forEach(val => {
+    const dIntPos = val.indexOf('}');
+    if (dIntPos > 0) {
       const paraName = val.substr(0, dIntPos);
-      retArr.push({name:paraName,type:'string',remark:camelToSpace(paraName),parent:'-'});
+      retArr.push({ name: paraName, type: 'string', remark: camelToSpace(paraName), parent: '-' });
     }
-  })
+  });
   return retArr;
 }
 
 export function isJson(str) {
   try {
     JSON.parse(str);
-  } catch(ex) {
-    return {result:false,msg:ex.message};
+  } catch (ex) {
+    return { result: false, msg: ex.message };
   }
-  return {result:true};
+  return { result: true };
 }
 
 export function getQueryArr(str) {
-  const retArr=[];
-  if(str) {
+  const retArr = [];
+  if (str) {
     const queryString = str.split('?')[1] || '';
     const arr = queryString.split('&') || [];
     arr.forEach(val => {
@@ -127,10 +123,14 @@ export function getQueryArr(str) {
       if (keyValue.length == 2) {
         const keyString = decodeURIComponent(keyValue[0]);
         const valueString = toType(decodeURIComponent(keyValue[1]));
-        retArr.push({name:keyString,type: toType(valueString),remark:camelToSpace(keyString),parent:'-'});
+        retArr.push({
+          name: keyString,
+          type: toType(valueString),
+          remark: camelToSpace(keyString),
+          parent: '-',
+        });
       }
     });
     return retArr;
   }
 }
-

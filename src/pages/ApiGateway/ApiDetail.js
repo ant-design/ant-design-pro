@@ -9,10 +9,18 @@ import { conversionAttr, getApiFlowData } from './ApiCreate/util';
 import { getUserId } from '@/utils/authority';
 
 import DescriptionList from '@/components/DescriptionList';
-import { getGroupName, getItemValue, getName } from '@/utils/masterData';
+import { getGroupName, getItemValue, getName, getItems } from '@/utils/masterData';
 
 const { TabPane } = Tabs;
 const { Description } = DescriptionList;
+const { Column, ColumnGroup } = Table;
+
+const requestHeaderFlag = 'requestHeader';
+const requestBodyFlag = 'requestBody';
+const responseBodyFlag = 'responseBody';
+const responseHeaderFlag = 'responseHeader';
+const stateCodeFlag = 'stateCode';
+const busiCodeFlag = 'busiCode';
 
 const fieldLabels = {
   front: {
@@ -49,6 +57,12 @@ const fieldLabels = {
     keyStorePassword: 'keyStore Password',
     ssl: 'SSL证书校验',
   },
+  doc: {
+    protocol: '协议',
+    encodeFormat: '编码格式',
+    contentType: 'Content-Type',
+    url: 'URL',
+  },
 };
 
 const columns = [
@@ -78,6 +92,17 @@ const columnsOrg = [
   {
     title: '名称',
     dataIndex: 'orgName',
+  },
+];
+
+const columnsApi = [
+  {
+    title: '名称',
+    dataIndex: 'name',
+  },
+  {
+    title: '说明',
+    dataIndex: 'remark',
   },
 ];
 
@@ -118,6 +143,15 @@ class ApiDetail extends PureComponent {
     data: {
       back: {},
     },
+    apiServiceDoc: {},
+    urlSpec: [],
+    requestHeaderSpec: [],
+    requestBodySpec: [],
+    responseHeaderSpec: [],
+    responseBodySpec: [],
+    stateCodeSpec: [],
+    busiCodeSpec: [],
+    apiAttr: [],
   };
 
   componentDidMount() {
@@ -167,11 +201,31 @@ class ApiDetail extends PureComponent {
     }
   };
 
+  // 将数据转为对象
+  convertDocObj = (apiServiceDoc, flag) => {
+    try {
+      if (apiServiceDoc) {
+        const spec = apiServiceDoc[`${flag}Spec`];
+        console.log(flag, spec);
+        if (spec && spec.trim() !== '') {
+          const specArr = (JSON.parse(spec) || []).map((item, index) => ({
+            ...item,
+            key: `${requestHeaderFlag}-${index}`,
+          }));
+          console.log(flag, specArr);
+          return specArr;
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    return [];
+  };
+
   //  设置apiInfo数据格式
   setBaseInfo = resp => {
     const { data } = resp;
     const { groupList, orgList } = this.props;
-    console.log('setBaseInfo', groupList);
     // 定义请求信息转化
     data.groupIdTitle = data.groupId ? getGroupName(groupList, data.groupId) : null;
     data.serviceTypeTitle = data.serviceType
@@ -249,9 +303,48 @@ class ApiDetail extends PureComponent {
       const tokenUrlObj = conversionAttr(tokenUrlAttr);
       apiServiceBackendFormat.tokenUrl = tokenUrlObj.tokenUrl;
     }
-
     data.back = apiServiceBackendFormat;
-    this.setState({ data }); //  设置state中的resp的值
+
+    // 定义接口文档请求header和body参数说明
+    const apiServiceDoc = data && data.apiServiceDoc ? data.apiServiceDoc : {};
+    // 从db里面获取字符串数据，再转成json对象，在增加key字段，赋值给表格组件
+    const requestHeaderSpec = this.convertDocObj(apiServiceDoc, requestHeaderFlag);
+    const requestBodySpec = this.convertDocObj(apiServiceDoc, requestBodyFlag);
+    const responseHeaderSpec = this.convertDocObj(apiServiceDoc, responseHeaderFlag);
+    const responseBodySpec = this.convertDocObj(apiServiceDoc, responseBodyFlag);
+    console.log('this.setBaseInfo-responseBodySpec', responseBodySpec);
+    const stateCodeSpec = this.convertDocObj(apiServiceDoc, stateCodeFlag);
+    const busiCodeSpec = this.convertDocObj(apiServiceDoc, busiCodeFlag);
+    // －－－－－初始化url spec数据－－－－－
+    const urlSpec = (JSON.parse(apiServiceDoc.urlSpec) || []).map((item, index) => ({
+      ...item,
+      key: `url-${index}`,
+    }));
+    console.log('urlSpec1:', urlSpec);
+    const newUrlSpec = urlSpec.length === 0 ? this.handleUrlGenerate(urlSpec, false) : urlSpec;
+    console.log('newUrlSpec:', newUrlSpec);
+
+    // 定义接口文档协议说明
+    const protocol = `${data.serviceTypeTitle}   ${data.reqMethod.toUpperCase()}`;
+    const url = getItems('env', 'localhost') + apiServiceDoc.urlSample;
+    const apiAttr = [
+      { name: fieldLabels.doc.protocol, remark: protocol },
+      { name: fieldLabels.doc.encodeFormat, remark: 'UTF8' },
+      { name: fieldLabels.doc.contentType, remark: 'application/json' },
+      { name: fieldLabels.doc.url, remark: url },
+    ];
+
+    this.setState({
+      data,
+      apiAttr,
+      urlSpec: newUrlSpec,
+      requestHeaderSpec,
+      requestBodySpec,
+      responseHeaderSpec,
+      responseBodySpec,
+      stateCodeSpec,
+      busiCodeSpec,
+    }); //  设置state中的resp的值
   };
 
   resizeFooterToolbar = () => {
@@ -288,7 +381,17 @@ class ApiDetail extends PureComponent {
     const { apiService } = this.props;
     console.log('apidetails:render-this.props', this.props);
     console.log('apidetails:render-this.state', this.state);
-    const { width, data } = this.state;
+    const {
+      width,
+      data,
+      requestBodySpec,
+      requestHeaderSpec,
+      responseHeaderSpec,
+      responseBodySpec,
+      stateCodeSpec,
+      busiCodeSpec,
+      apiAttr,
+    } = this.state;
     const { back } = data;
 
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
@@ -311,19 +414,79 @@ class ApiDetail extends PureComponent {
         style={{ height: '50px' }}
         title="Api Detail"
       >
-        <Card title="定义请求信息" className={styles.card} bordered={false}>
-          <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
-            <Description term={fieldLabels.front.groupId}>{data.groupIdTitle}</Description>
-            <Description term={fieldLabels.front.name}>{apiService.name}</Description>
-            <Description term={fieldLabels.front.status}>
-              <Badge status={statusMap[data.status]} text={data.statusTitle} />
-            </Description>
-            <Description term={fieldLabels.front.requestUrl}>{apiService.requestUrl}</Description>
-            <Description term={fieldLabels.front.serviceType}>{data.serviceTypeTitle}</Description>
-            <Description term={fieldLabels.front.reqMethod}>{data.reqMethodTitle}</Description>
-            <Description term={fieldLabels.front.apiType}>{data.apiTypeTitle}</Description>
-          </DescriptionList>
-        </Card>
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="定义请求信息" key="info">
+            <Card title="" bordered={false}>
+              <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
+                <Description term={fieldLabels.front.groupId}>{data.groupIdTitle}</Description>
+                <Description term={fieldLabels.front.name}>{apiService.name}</Description>
+                <Description term={fieldLabels.front.status}>
+                  <Badge status={statusMap[data.status]} text={data.statusTitle} />
+                </Description>
+                <Description term={fieldLabels.front.requestUrl}>
+                  {apiService.requestUrl}
+                </Description>
+                <Description term={fieldLabels.front.serviceType}>
+                  {data.serviceTypeTitle}
+                </Description>
+                <Description term={fieldLabels.front.reqMethod}>{data.reqMethod}</Description>
+                <Description term={fieldLabels.front.apiType}>{data.apiTypeTitle}</Description>
+              </DescriptionList>
+            </Card>
+          </TabPane>
+          <TabPane tab="接口文档" key="api">
+            <Card title="1.协议说明" bordered={false}>
+              <Table columns={columnsApi} dataSource={apiAttr} pagination={false} />
+            </Card>
+            <Card title="2.请求参数说明" bordered={false}>
+              <Table dataSource={requestHeaderSpec} pagination={false}>
+                <ColumnGroup title="请求报文头（Request Header）">
+                  <Column title="参数名" dataIndex="name" />
+                  <Column title="说明" dataIndex="remark" />
+                </ColumnGroup>
+              </Table>
+              <Table dataSource={requestBodySpec} pagination={false}>
+                <ColumnGroup title="请求报文体（Request Body）">
+                  <Column title="参数名" dataIndex="name" />
+                  <Column title="说明" dataIndex="remark" />
+                </ColumnGroup>
+              </Table>
+            </Card>
+            <Card title="3.响应参数说明" bordered={false}>
+              <Table dataSource={responseHeaderSpec} pagination={false}>
+                <ColumnGroup title="响应报文头（Response Header）">
+                  <Column title="参数名" dataIndex="name" />
+                  <Column title="类型" dataIndex="type" />
+                  <Column title="说明" dataIndex="remark" />
+                </ColumnGroup>
+              </Table>
+              <Table dataSource={responseBodySpec} pagination={false}>
+                <ColumnGroup title="响应报文体（Response Body）">
+                  <Column title="参数名" dataIndex="name" />
+                  <Column title="类型" dataIndex="type" />
+                  <Column title="说明" dataIndex="remark" />
+                </ColumnGroup>
+              </Table>
+            </Card>
+          </TabPane>
+          <TabPane tab="状态码" key="code">
+            <Card title="" bordered={false}>
+              <Table dataSource={stateCodeSpec} pagination={false}>
+                <ColumnGroup title="状态码（State Code）">
+                  <Column title="状态码" dataIndex="name" />
+                  <Column title="描述" dataIndex="remark" />
+                </ColumnGroup>
+              </Table>
+              <Table dataSource={busiCodeSpec} pagination={false}>
+                <ColumnGroup title="业务状态码（Business Code）">
+                  <Column title="状态码" dataIndex="name" />
+                  <Column title="描述" dataIndex="remark" />
+                </ColumnGroup>
+              </Table>
+            </Card>
+          </TabPane>
+        </Tabs>
+        <br />
         <Card title="落地方服务信息" className={styles.card} bordered={false}>
           <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
             <Description term={fieldLabels.back.serviceType}>{back.serviceTypeTitle}</Description>

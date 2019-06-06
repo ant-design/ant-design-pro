@@ -20,8 +20,9 @@ export default {
   },
   reducers: {
     save(state, action) {
-      const data=action.payload ? action.payload.data : [];
-      const groupList=data.filter((item)=>(item.status===STATUS.A));
+      const data = action.payload ? action.payload.data : [];
+      const groupList = data.filter(item => item.status === STATUS.A);
+      // groupList.unshift({"groupId": null, "groupName": "All"});
       return {
         ...state,
         groupList,

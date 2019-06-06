@@ -1,5 +1,5 @@
 // use localStorage to store the authority info, which might be sent from server in actual project.
-import {getFormatPrivilege} from "@/pages/UserManager/userUtil"
+import { getFormatPrivilege } from '@/pages/UserManager/userUtil';
 
 const { NODE_ENV } = process.env;
 
@@ -50,24 +50,31 @@ export function getFormatPrivileges() {
 }
 
 export function getAuth(name) {
-  const privileges=getFormatPrivileges();
-  const privilege=privileges.find(item=>item.name===name);
-  const authority=privilege?privilege.authority:[];
+  const privileges = getFormatPrivileges();
+  const privilege = privileges.find(item => item.name === name);
+  const authority = privilege ? privilege.authority : [];
   return authority;
 }
 
 export function getUser() {
   // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
-  const user = JSON.parse(localStorage.getItem('antd-pro-user')||{});
+  const user = JSON.parse(localStorage.getItem('antd-pro-user') || {});
   return user;
 }
 
 export function getUserId() {
   // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
   const user = getUser().id;
+  console.log('authority----', user);
   return user;
+}
+export function getUserName() {
+  // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
+  const name = getUser().username;
+  return name;
 }
 
 export function setUser(user) {
+  console.log('-----setUser', JSON.stringify(user));
   return localStorage.setItem('antd-pro-user', JSON.stringify(user));
 }

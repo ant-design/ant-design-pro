@@ -22,6 +22,7 @@ export default {
 
       const response = yield call(list, params);
       console.log('response in user model:', response);
+
       yield put({
         type: 'save',
         action: { payload, response },
@@ -44,9 +45,11 @@ export default {
           })
         : oriUserList;
 
+      const formmatUserList = userList.map(item => ({ ...item, userId: item.id }));
+
       return {
         ...state,
-        userList,
+        userList: formmatUserList,
       };
     },
   },

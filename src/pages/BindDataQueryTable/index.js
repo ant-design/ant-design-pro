@@ -2,12 +2,9 @@
 /* eslint-disable no-nested-ternary */
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import {
-  message,
-} from 'antd';
+import { message } from 'antd';
 
 import QueryTable from '@/components/QueryTable';
-
 
 @connect(({ uniComp, loading }) => ({
   uniComp,
@@ -31,8 +28,8 @@ class BindDataQueryTable extends PureComponent {
   componentDidMount() {
     // console.log('============2componentDidMount========');
     this.handleSearchDefault();
-    const {onRef} = this.props;
-    if(onRef){
+    const { onRef } = this.props;
+    if (onRef) {
       onRef(this);
     }
   }
@@ -53,37 +50,32 @@ class BindDataQueryTable extends PureComponent {
   };
 
   handleSearchDefault = () => {
-
-    console.log("-------------------222222222");
-    const {columnSchemas: { tableName, }} = this.props;
-    this.handleSearch({tableName});
-  }
-
-  handleSearch = (params) => {
-
+    console.log('-------------------222222222');
     const {
-      dispatch,
-      onConversionData,
-      pageSize,
+      columnSchemas: { tableName, userName },
     } = this.props;
-    const newParams=pageSize?{...params,pageSize}:params;
+    this.handleSearch({ tableName, userName });
+  };
+
+  handleSearch = params => {
+    const { dispatch, onConversionData, pageSize } = this.props;
+    const newParams = pageSize ? { ...params, pageSize } : params;
+    console.log('binddata', newParams);
     dispatch({
       type: 'uniComp/list',
-      payload:newParams,
+      payload: newParams,
       onConversionData,
     });
   };
 
-  handleAdd = (payload,addForm,callback2) => {
+  handleAdd = (payload, addForm, callback2) => {
     // console.log('handleAdd:',fields);
-    const {
-      dispatch,
-    } = this.props;
+    const { dispatch } = this.props;
 
     dispatch({
       type: 'uniComp/save',
       payload,
-      callback:(resp) => {
+      callback: resp => {
         // console.log('resp=======', resp);
         if (resp.code === '200') {
           message.success('提交成功');
@@ -95,10 +87,8 @@ class BindDataQueryTable extends PureComponent {
     });
   };
 
-  handleMenuClick = (payload,callback2) => {
-    const {
-      dispatch,
-    } = this.props;
+  handleMenuClick = (payload, callback2) => {
+    const { dispatch } = this.props;
 
     // console.log("========uniComp/statusBatch1====");
     dispatch({
@@ -117,10 +107,10 @@ class BindDataQueryTable extends PureComponent {
       columnSchemas,
       onRow,
       children,
-      size
+      size,
     } = this.props;
     const { key } = columnSchemas;
-    const { selectedRows, } = this.state;
+    const { selectedRows } = this.state;
     return (
       <QueryTable
         selectedRows={selectedRows}

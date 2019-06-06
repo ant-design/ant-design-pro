@@ -1,5 +1,5 @@
-import { apiList, apiStatusBatch, } from '@/services/apiGatewayService';
-import {conversion} from "../../util";
+import { apiList, apiStatusBatch } from '@/services/apiGatewayService';
+import { conversion } from '../../util';
 
 export default {
   namespace: 'apiGatewayModel',
@@ -14,7 +14,8 @@ export default {
   effects: {
     *apiList({ payload }, { call, put }) {
       console.log('payload', JSON.stringify(payload));
-      const response = yield call(apiList, payload);
+      const newPayload = { ...payload, newTime: new Date() };
+      const response = yield call(apiList, newPayload);
       yield put({
         type: 'save',
         payload: response,
@@ -34,9 +35,9 @@ export default {
 
   reducers: {
     save(state, action) {
-      console.log("--------1",action.payload);
+      console.log('--------1', action.payload);
       const response = conversion(action.payload.data);
-      console.log("--------2",response);
+      console.log('--------2', response);
       return {
         ...state,
         data: response,
