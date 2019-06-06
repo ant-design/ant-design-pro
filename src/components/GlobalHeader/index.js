@@ -4,8 +4,22 @@ import Link from 'umi/link';
 import Debounce from 'lodash-decorators/debounce';
 import styles from './index.less';
 import RightContent from './RightContent';
+import constants from '@/utils/constUtil';
+
+const {GLOBAL_COLLAPSE} = constants;
 
 export default class GlobalHeader extends PureComponent {
+
+  componentDidMount() {
+    if(GLOBAL_COLLAPSE){// 默认隐藏
+      const { collapsed, onCollapse } = this.props;
+      if(collapsed===false){
+        onCollapse(true);
+        this.triggerResizeEvent();
+      }
+    }
+  }
+
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
   }

@@ -6,9 +6,11 @@ import styles from './index.less';
 import PageLoading from '../PageLoading';
 import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
 import { title } from '../../defaultSettings';
+import constants from '@/utils/constUtil';
 
 const BaseMenu = React.lazy(() => import('./BaseMenu'));
 const { Sider } = Layout;
+const {GLOBAL_COLLAPSE} = constants;
 
 let firstMount = true;
 
@@ -69,7 +71,7 @@ export default class SiderMenu extends PureComponent {
         collapsed={collapsed}
         breakpoint="lg"
         onCollapse={collapse => {
-          if (firstMount || !isMobile) {
+          if ((firstMount || !isMobile)&&!GLOBAL_COLLAPSE) {
             onCollapse(collapse);
           }
         }}
