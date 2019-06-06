@@ -130,15 +130,15 @@ export default {
         };
 
         const response = yield call(list, params);
-        console.log('======response in menu.js:', response);
+        // console.log('======response in menu.js:', response);
         if(flatToMenuTree){
-          console.log('======has flatToMenuTree function:');
+          // console.log('======has flatToMenuTree function:');
           const memoizeOneFlatToMenuTree = memoizeOne(flatToMenuTree, isEqual);
           memoizeOneFlatToMenuTree(response.data.records,routesFromServer,0);
           setPrivileges(response.data.records);
           setFormatPrivileges(getPrivileges());
         }
-        console.log('======routes in menu.js:', routesFromServer);
+        // console.log('======routes in menu.js:', routesFromServer);
       }
       else{
         routesFromServer=routes;
@@ -147,10 +147,10 @@ export default {
       const originalMenuData = memoizeOneFormatter(routesFromServer, authority, path);
       const menuData = filterMenuData(originalMenuData);
       const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(originalMenuData);
-      console.log("authority:",authority);
-      console.log("originalMenuData:",originalMenuData);
-      console.log("menuData:",menuData);
-      console.log("breadcrumbNameMap:",breadcrumbNameMap);
+      // console.log("authority:",authority);
+      // console.log("originalMenuData:",originalMenuData);
+      // console.log("menuData:",menuData);
+      // console.log("breadcrumbNameMap:",breadcrumbNameMap);
       yield put({
         type: 'save',
         payload: { menuData, breadcrumbNameMap, routerData: routesFromServer },
