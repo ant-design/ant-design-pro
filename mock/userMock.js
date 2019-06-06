@@ -105,27 +105,32 @@ export default {
     // loginResult.data.info.type=type;
     console.log("login response====:",req.body);
     res.set('RspUserName', userName);
+    loginResult.data.username=userName;
     if (password === 'ant.design' && userName === 'admin') {
       loginResult.data.currentAuthority=["admin"];
       console.log("dddd====:",loginResult);
+      loginResult.data.id=1;
       res.set('RspUserId', '1');
       res.send(loginResult);
       return;
     }
     if (password === 'ant.design' && userName === 'user') {
       loginResult.data.currentAuthority=["user"];
+      loginResult.data.id=2;
       res.set('RspUserId', '2');
       res.send(loginResult);
       return;
     }
     if (password === 'ant.design' && userName === 'manager') {
       loginResult.data.currentAuthority=["manager"];
+      loginResult.data.id=3;
       res.set('RspUserId', '3');
       res.send(loginResult);
       return;
     }
     if (password === 'ant.design' && userName === 'super_admin') {
       loginResult.data.currentAuthority=["admin",'manager','user'];
+      loginResult.data.id=4;
       res.set('RspUserId', '4');
       res.send(loginResult);
       return;
