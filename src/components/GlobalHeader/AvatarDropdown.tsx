@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Menu, Spin, Icon } from 'antd';
 import { FormattedMessage } from 'umi-plugin-react/locale';
-import { ClickParam } from 'antd/lib/menu';
+import { ClickParam } from 'antd/es/menu';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { CurrentUser } from '@/models/user';
 import { connect } from 'dva';
