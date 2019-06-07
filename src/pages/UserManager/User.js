@@ -45,7 +45,7 @@ const columnSchemas = {
       tag: 'commonSelect',
       enumData: utypeList,
     },
-    { name: 'password', title: 'Password',tag:'passwordTag', add: true, columnHidden: true },
+    { name: 'password', title: 'Password',tag:'passwordTag', add: true, columnHidden: true,detail:false },
     { name: 'email', title: 'Email', query: false, add: true ,rules:[]},
     { name: 'tel', title: 'Mobile', query: false, add: true ,rules:[]},
     {

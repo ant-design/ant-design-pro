@@ -650,7 +650,7 @@ class QueryTable extends PureComponent {
         <Drawer
           width={640}
           placement="right"
-          closable={false}
+          closable
           onClose={this.onDrawerClose}
           visible={drawerVisible}
         >
