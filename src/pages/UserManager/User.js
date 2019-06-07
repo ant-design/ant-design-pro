@@ -35,7 +35,7 @@ const columnSchemas = {
   commands:[{action:'setRole',title:'角色'},],
   columnDetails: [
     { name: 'id', title: 'User ID', add: true, disabledAct:'true' },
-    { name: 'username', title: 'User Name', sorter: true, query: true, add: true },
+    { name: 'username', title: 'User Name', sorter: true, query: true, add: true, detailFlag:1 },
     {
       name: 'utype',
       title: 'Account Type',
@@ -59,6 +59,12 @@ const columnSchemas = {
     },
     { name: 'remark', title: 'remark',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
   ],
+  relations:[{
+    name:'sysUserRoles',
+    key: 'id',
+    title:'Role List of this User',
+    columnDetails:[{name: 'id',title:'Relation Id'},{name: 'roleId',title:'Role Id'},{name: 'roleName',title:'Role Name'}]
+  }],
   actions,
 };
 

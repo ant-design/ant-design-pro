@@ -24,9 +24,9 @@ const columnSchemas = {
   commands:[{action:'setRole',title:'角色'},],
   columnDetails: [
     { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:110 },
-    { name: 'name', title: 'Name', columnHidden: false, query: true, add: true },
+    { name: 'name', title: 'Name', columnHidden: false, query: true, add: true, detailFlag:1 },
     { name: 'path', title: 'path', columnHidden: false, query: true, add: true,showLen:22},
-    { name: 'parentPrivilegeId', title: 'parent', add: true, tag:'privilegeTreeSelect', columnHidden: true,rules:[]},
+    { name: 'parentPrivilegeId', title: 'parent', add: true, tag:'privilegeTreeSelect', detail:false, columnHidden: true,rules:[]},
     {
       name: 'type',
       title: 'type',
@@ -35,7 +35,7 @@ const columnSchemas = {
       tag: 'commonSelect',
       enumData: typeList,
     },
-    { name: 'roleStr', title: 'role',showLen:14 },
+    { name: 'roleStr', title: 'role', showLen:14, detail:true },
     {
       name: 'icon',
       title: 'icon',
@@ -77,6 +77,12 @@ const columnSchemas = {
     },
     { name: 'remark', title: 'remark',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
   ],
+  relations:[{
+    name:'sysPrivilegeRoles',
+    key: 'id',
+    title:'Role List for Access this One',
+    columnDetails:[{name: 'id',title:'Relation Id'},{name: 'roleId',title:'Role Id'},{name: 'roleName',title:'Role Name'}]
+  }],
 };
 
 

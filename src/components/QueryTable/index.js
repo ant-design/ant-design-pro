@@ -16,12 +16,14 @@ import {
   Select,
   InputNumber,
   Radio,
-  // message,
+  message,
   // Popconfirm,
+  Drawer,
 } from 'antd';
 import Ellipsis from '@/components/Ellipsis';
 import moment from 'moment'; // 不能用｛moment｝
 import StandardTable from '@/components/StandardTable';
+import Detail from './Detail';
 import styles from './index.less';
 
 import PrivilegeTreeSelectView from '@/pages/UserManager/PrivilegeTreeSelectView';
@@ -147,6 +149,7 @@ const CreateForm = Form.create()(props => {
 class QueryTable extends PureComponent {
   state = {
     modalVisible: false,
+    drawerVisible: false,
     expandForm: false,
     selectedRows: [],
     selectedRow: {},
@@ -173,11 +176,19 @@ class QueryTable extends PureComponent {
     this.handleColumn();
   }
 
+  handleDetail=(record)=>{
+    this.handleDrawerVisible(record,true);
+  }
+
+  onDrawerClose=()=>{
+    this.handleDrawerVisible(null,false);
+  }
+
   // get columns
   handleColumn = () => {
     columns = [];
     const {
-      columnSchemas: { columnDetails, actions },
+      columnSchemas: { columnDetails, actions,name },
     } = this.props;
 
     // const {commands} = columnDetails;
@@ -193,7 +204,10 @@ class QueryTable extends PureComponent {
       if (columnDetail.sorter != null) {
         obj.sorter = columnDetail.sorter;
       }
-      if (columnDetail.format != null) {
+      if(columnDetail.detailFlag){
+        obj.render = (val,record) => (<a onClick={() => this.handleDetail(record)}>{val}</a>);
+      }
+      else if (columnDetail.format != null) {
         obj.render = val => <span>{moment(val).format(columnDetail.format)}</span>;
       } else if (columnDetail.showLen !== undefined) {
         obj.render = val => (
@@ -450,6 +464,13 @@ class QueryTable extends PureComponent {
     });
   };
 
+  handleDrawerVisible = (row, flag) => {
+    this.setState({
+      drawerVisible: !!flag,
+      selectedRow: row,
+    });
+  };
+
   toggleForm = () => {
     const { expandForm } = this.state;
     this.setState({
@@ -578,7 +599,7 @@ class QueryTable extends PureComponent {
   render() {
     const { data, loading, columnSchemas, onRow, size } = this.props;
     const { key } = columnSchemas;
-    const { selectedRow, selectedRows, modalVisible } = this.state;
+    const { selectedRow, selectedRows, modalVisible,drawerVisible } = this.state;
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
         {menuOption.map(item => (
@@ -626,6 +647,18 @@ class QueryTable extends PureComponent {
           selectedRow={selectedRow}
           columnSchemas={columnSchemas}
         />
+        <Drawer
+          width={640}
+          placement="right"
+          closable={false}
+          onClose={this.onDrawerClose}
+          visible={drawerVisible}
+        >
+          <Detail
+            selectedRow={selectedRow}
+            columnSchemas={columnSchemas}
+          />
+        </Drawer>
       </Card>
     );
   }

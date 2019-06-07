@@ -994,7 +994,8 @@ const orgs={
       "id": 1,
       "authType": "1",
       "email": "111",
-      "status": STATUS.A
+      "status": STATUS.A,
+      "sysUserOrgs":[{"id":1,"orgId":1,"userId":1,"username":"admin"},],
     },
     {
       "orgType": "2",

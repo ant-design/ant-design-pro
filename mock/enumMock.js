@@ -1,8 +1,4 @@
 // import { getLastPath } from './mockUtils';
-import constants from '@/utils/constUtil';
-
-const { STATUS } = constants;
-
 const allResult = {
   "code": "200",
   "msg": null,
@@ -137,28 +133,28 @@ const allResult = {
       "id": 21,
       "javaCode": "common",
       "javaKey": "req_method",
-      "itemCode": "1",
+      "itemCode": "get",
       "itemValue": "get"
     },
     {
       "id": 22,
       "javaCode": "common",
       "javaKey": "req_method",
-      "itemCode": "2",
+      "itemCode": "post",
       "itemValue": "post"
     },
     {
       "id": 23,
       "javaCode": "common",
       "javaKey": "req_method",
-      "itemCode": "3",
+      "itemCode": "delete",
       "itemValue": "delete"
     },
     {
       "id": 24,
       "javaCode": "common",
       "javaKey": "req_method",
-      "itemCode": "4",
+      "itemCode": "put",
       "itemValue": "put"
     },
     {
@@ -201,41 +197,41 @@ const allResult = {
       "javaCode": "apiServiceBackend",
       "javaKey": "service_type",
       "itemCode": "4",
-      "itemValue": "Javacall"
+      "itemValue": "Java BeanShell"
     },
     {
       "id": 31,
       "javaCode": "common",
       "javaKey": "req_method",
-      "itemCode": "5",
+      "itemCode": "patch",
       "itemValue": "patch"
     },
     {
       "id": 32,
       "javaCode": "common",
       "javaKey": "req_method",
-      "itemCode": "6",
+      "itemCode": "options",
       "itemValue": "options"
     },
     {
       "id": 33,
       "javaCode": "common",
       "javaKey": "status",
-      "itemCode": STATUS.A,
+      "itemCode": "A",
       "itemValue": "激活"
     },
     {
       "id": 34,
       "javaCode": "common",
       "javaKey": "status",
-      "itemCode": STATUS.D,
+      "itemCode": "D",
       "itemValue": "删除"
     },
     {
       "id": 35,
       "javaCode": "common",
       "javaKey": "status",
-      "itemCode": STATUS.S,
+      "itemCode": "S",
       "itemValue": "停用"
     },
     {
@@ -320,7 +316,7 @@ const allResult = {
       "javaCode": "org",
       "javaKey": "token_expire_time",
       "itemCode": "defaultTime",
-      "itemValue": "100"
+      "itemValue": "3600"
     },
     {
       "id": 63,
@@ -340,28 +336,28 @@ const allResult = {
       "id": 65,
       "javaCode": "apiServiceBackendAttr",
       "javaKey": "auth_type",
-      "itemCode": "fixedAuth",
+      "itemCode": "fixedToken",
       "itemValue": "固定token"
     },
     {
       "id": 66,
       "javaCode": "apiServiceBackendAttr",
       "javaKey": "auth_type",
-      "itemCode": "dyncAuth",
+      "itemCode": "dyncToken",
       "itemValue": "动态token"
     },
     {
       "id": 67,
       "javaCode": "sysUser",
       "javaKey": "utype",
-      "itemCode": "client",
+      "itemCode": "web",
       "itemValue": "登录用户"
     },
     {
       "id": 68,
       "javaCode": "sysUser",
       "javaKey": "utype",
-      "itemCode": "server",
+      "itemCode": "client",
       "itemValue": "服务调用用户"
     },
     {
@@ -426,6 +422,69 @@ const allResult = {
       "javaKey": "icon",
       "itemCode": "gateway",
       "itemValue": "gateway"
+    },
+    {
+      "id": 88,
+      "javaCode": "privilege",
+      "javaKey": "type",
+      "itemCode": "menu",
+      "itemValue": "menu"
+    },
+    {
+      "id": 89,
+      "javaCode": "privilege",
+      "javaKey": "type",
+      "itemCode": "api",
+      "itemValue": "api"
+    },
+    {
+      "id": 90,
+      "javaCode": "privilege",
+      "javaKey": "type",
+      "itemCode": "function",
+      "itemValue": "function"
+    },
+    {
+      "id": 91,
+      "javaCode": "common",
+      "javaKey": "req_method",
+      "itemCode": "trace",
+      "itemValue": "trace"
+    },
+    {
+      "id": 92,
+      "javaCode": "common",
+      "javaKey": "req_method",
+      "itemCode": "head",
+      "itemValue": "head"
+    },
+    {
+      "id": 93,
+      "javaCode": "env",
+      "javaKey": "test",
+      "itemCode": "angentHost",
+      "itemValue": "http://10.19.18.49:10060/serviceAngent"
+    },
+    {
+      "id": 94,
+      "javaCode": "env",
+      "javaKey": "localhost",
+      "itemCode": "angentHost",
+      "itemValue": "http://localhost:10060/serviceAngent"
+    },
+    {
+      "id": 95,
+      "javaCode": "sysIpLimit",
+      "javaKey": "type",
+      "itemCode": "black",
+      "itemValue": "黑名单"
+    },
+    {
+      "id": 96,
+      "javaCode": "sysIpLimit",
+      "javaKey": "type",
+      "itemCode": "white",
+      "itemValue": "白名单"
     }
   ]
 };
