@@ -115,7 +115,7 @@ const CreateForm = Form.create()(props => {
     .filter(data => !(`${data.name}` === key && !selectedRow))
     .map(item => {
       const itemTemp = item;
-      // // console.log("======:",itemTemp.name === key,key,itemTemp.name);
+      // console.log("======:",itemTemp.name === key,key,itemTemp.name);
       itemTemp.disabled = itemTemp.name === key;
       return itemTemp;
     });
@@ -157,7 +157,7 @@ class QueryTable extends PureComponent {
   };
 
   componentDidMount() {
-    console.log('============sub componentDidMount========');
+    // console.log('============sub componentDidMount========');
 
     const { children } = this.props;
     QueryCommandChildren.splice(0, QueryCommandChildren.length);
@@ -295,7 +295,7 @@ class QueryTable extends PureComponent {
   };
 
   handleSearch = e => {
-    console.log('ddd---------2');
+    // console.log('ddd---------2');
     const { onSearch, form } = this.props;
     if (e) e.preventDefault();
 
@@ -303,7 +303,7 @@ class QueryTable extends PureComponent {
       columnSchemas: { tableName },
     } = this.props;
     form.validateFields((err, fieldsValue) => {
-      console.log('---fieldsValue:', fieldsValue);
+      // console.log('---fieldsValue:', fieldsValue);
       if (err) return;
       const { searchForm } = fieldsValue;
       const values = {
@@ -341,7 +341,7 @@ class QueryTable extends PureComponent {
     if (sorter.field) {
       params.sorter = `${sorter.field}_${sorter.order}`;
     }
-    console.log('---params:', params);
+    // console.log('---params:', params);
     const { onSearch } = this.props;
     if (onSearch) {
       onSearch(params);
@@ -355,7 +355,7 @@ class QueryTable extends PureComponent {
       modalVisible: false,
       selectedRow: null,
     });
-    console.log('ddd---------1');
+    // console.log('ddd---------1');
     this.handleSearch();
   };
 
@@ -395,7 +395,7 @@ class QueryTable extends PureComponent {
     } = this.props;
     // console.log(tableName);
     const { selectedRows } = this.state;
-    console.log('-----:', selectedRows);
+    // console.log('-----:', selectedRows);
     if (!selectedRows) return;
     const payload = {
       tableName,
