@@ -1,6 +1,6 @@
 // import { parse } from 'url';
 
-import constants from '@/utils/constUtil';
+import constants from './constUtil';
 
 const { ACT, API_STATUS,STATUS } = constants;
 const reqMethodAtt=['get','post'];

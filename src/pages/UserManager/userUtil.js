@@ -13,27 +13,6 @@ export function conversion(item){
   return privilege;
 }
 
-export const allRoleList=[
-  {
-    "roleId": 1,
-    "roleName": "admin",
-    "remark": "admin",
-    "status": STATUS.A,
-  },
-  {
-    "roleId": 2,
-    "roleName": "manager",
-    "remark": "",
-    "status": STATUS.A,
-  },
-  {
-    "roleId": 3,
-    "roleName": "user",
-    "remark": "",
-    "status": STATUS.A,
-  },
-];
-
 let innerStartIndex=0;
 let innerPrivilegeRoleId=0;
 

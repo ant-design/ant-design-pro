@@ -1,11 +1,30 @@
 /* eslint-disable eqeqeq */
 import {parse} from 'url';
-import {getRouteDatas,toSimulatePrivilege,allRoleList} from '../src/pages/UserManager/userUtil';
-import routeDatas from "../config/router.api.config";
-import constants from '@/utils/constUtil';
+import constants from './constUtil';
 
 const { STATUS } = constants;
 // mock tableListDataSource
+
+const allRoleList=[
+  {
+    "roleId": 1,
+    "roleName": "admin",
+    "remark": "admin",
+    "status": STATUS.A,
+  },
+  {
+    "roleId": 2,
+    "roleName": "manager",
+    "remark": "",
+    "status": STATUS.A,
+  },
+  {
+    "roleId": 3,
+    "roleName": "user",
+    "remark": "",
+    "status": STATUS.A,
+  },
+];
 
 
 const groups = {
