@@ -18,7 +18,7 @@ export default {
     },
     *fetchCurrent(_, { call, put }) {
       let response = yield call(queryCurrent);
-      // console.log("------------",response);
+      console.log("------------",response);
       if (response.data && !response.data.avatar) {
         const simulateUser = {
           name: 'Serati Ma',
