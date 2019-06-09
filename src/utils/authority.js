@@ -20,7 +20,8 @@ export function getAuthority(str) {
   if (!authority && NODE_ENV !== 'production') {
     return ['admin'];
   }
-  return authority;
+  return ['admin'];
+  // return authority;
 }
 
 export function setAuthority(authority) {
