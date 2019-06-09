@@ -2,6 +2,15 @@
   functions = "./functions"
 
 [[redirects]]
+  from = "/baseinfo/*"
+  to = "/.netlify/functions/baseinfo/:splat"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"
+    X-Api-Key = "some-api-key-string"
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
@@ -9,7 +18,16 @@
   [redirects.headers]
     X-From = "Netlify"
     X-Api-Key = "some-api-key-string"
-    
+
+[[redirects]]
+  from = "/auth/*"
+  to = "/.netlify/functions/auth/:splat"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"
+    X-Api-Key = "some-api-key-string"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
