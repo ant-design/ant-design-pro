@@ -122,7 +122,6 @@
     "import-sort-style-module": "^6.0.0",
     "jest-puppeteer": "^4.2.0",
     "jsdom-global": "^3.0.2",
-    "less": "^3.9.0",
     "lint-staged": "^8.1.7",
     "mockjs": "^1.0.1-beta3",
     "netlify-lambda": "^1.4.13",
@@ -137,6 +136,7 @@
     "stylelint-config-standard": "^18.3.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.1.0",
     "stylelint-order": "^3.0.0",
+    "umi-lint": "^2.0.1",
     "webpack-theme-color-replacer": "^1.1.5"
   },
   "optionalDependencies": {
