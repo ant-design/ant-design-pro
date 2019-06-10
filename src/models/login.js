@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
-import { fakeAccountLogin, getFakeCaptcha, queryCurrent } from '@/services/userService';
+import { fakeAccountLogin, getFakeCaptcha } from '@/services/userService';
 import { setAuthority, setUser } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
@@ -14,10 +14,7 @@ export default {
 
   effects: {
     *login({ payload }, { call, put }) {
-      console.log('====', payload);
       const response = yield call(fakeAccountLogin, payload);
-      console.log('=====login response in loginModel:', response);
-      response.code = '200';
       yield put({
         type: 'changeLoginStatus',
         payload: response,
@@ -29,13 +26,9 @@ export default {
         const {id,username}=response.data;
         const user={id,username};
         setUser(user);
-        console.log('login response in loginModel:', 1);
         reloadAuthorized();
-        console.log('login response in loginModel:', 12);
         const urlParams = new URL(window.location.href);
-        console.log('login response in loginModel:', 13);
         const params = getPageQuery();
-        console.log('login response in loginModel:', 14);
 
 
         let { redirect } = params;
@@ -45,15 +38,16 @@ export default {
             redirect = redirect.substr(urlParams.origin.length);
             if (redirect.match(/^\/.*#/)) {
               redirect = redirect.substr(redirect.indexOf('#') + 1);
-              console.log('login response in loginModel:', 15);
             }
           } else {
             redirect = null;
           }
         }
-        console.log('login response in loginModel:', 16);
         yield put(routerRedux.replace(redirect || '/'));
       }
+      // else{
+      //   message.error(response.msg);
+      // }
     },
 
     *getCaptcha({ payload }, { call }) {
@@ -86,7 +80,7 @@ export default {
   reducers: {
     changeLoginStatus(state, { payload, loginType }) {
       const status = payload.code === '200' ? 'ok' : 'error';
-      console.log(status, loginType, payload);
+      // console.log(status, loginType, payload);
       if (payload.code === '200' && payload.data && payload.data.currentAuthority) {
         setAuthority(payload.data.currentAuthority);
         // setAuthority(['admin','manager','user']);
