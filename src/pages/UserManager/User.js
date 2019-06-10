@@ -39,7 +39,9 @@ class User extends PureComponent {
       saveAct,
       commandAct,
       havePermissions:true,
-    }:{havePermissions:false};
+      haveAddPermissions:true,
+    }:{havePermissions:false,
+      haveAddPermissions:false,};
 
     const columnSchemas = {
       tableName: 'sys_user',
