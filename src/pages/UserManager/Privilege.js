@@ -8,83 +8,6 @@ import { getItems } from '@/utils/masterData';
 import RoleTransfer from "./RoleTransfer";
 import {flatToPrivilegeTreeSelect, flatToTree,} from "./userUtil"
 
-const statusList = getItems('common', 'status'); // 状态主数据
-const iconList = getItems('privilege', 'icon');  // 菜单图标祝数据
-iconList.push({javaCode:'privilege',javaKey:'icon',itemCode:'',itemValue:'None Icon'});
-const typeList = getItems('privilege', 'type');  // 菜单类型主数据
-
-const hideChildrenInMenuList = getItems('privilege', 'hide_children_in_menu'); // 子菜单是否隐藏主数据
-const hideInMenuList = getItems('privilege', 'hide_in_menu');// 菜单是否隐藏主数据
-
-// 表格信息、展现信息、动作信息等
-const columnSchemas = {
-  tableName: 'sys_privilege',
-  key: 'privilegeId',
-  name: 'name',
-  commands:[{action:'setRole',title:'角色'},],
-  columnDetails: [
-    { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:110 },
-    { name: 'name', title: 'Name', columnHidden: false, query: true, add: true, detailFlag:1 },
-    { name: 'path', title: 'path', columnHidden: false, query: true, add: true,showLen:22},
-    { name: 'parentPrivilegeId', title: 'parent', add: true, tag:'privilegeTreeSelect', detail:false, columnHidden: true,rules:[]},
-    {
-      name: 'type',
-      title: 'type',
-      query: true,
-      add: true,
-      tag: 'commonSelect',
-      enumData: typeList,
-    },
-    { name: 'roleStr', title: 'role', showLen:14, detail:true },
-    {
-      name: 'icon',
-      title: 'icon',
-      columnHidden: true,
-      query: false,
-      add: true,
-      tag: 'commonSelect',
-      enumData: iconList,
-      rules:[],
-    },
-    {
-      name: 'hideChildrenInMenu',
-      title: 'hideChildrenInMenu',
-      columnHidden: true,
-      query: false,
-      add: true,
-      tag: 'commonRadio',
-      enumData: hideChildrenInMenuList,
-      rules:[],
-    },
-    {
-      name: 'hideInMenu',
-      title: 'hideInMenu',
-      columnHidden: true,
-      query: false,
-      add: true,
-      tag: 'commonRadio',
-      enumData: hideInMenuList,
-      rules:[],
-    },
-    {
-      name: 'status',
-      title: 'Status',
-      columnHidden: false,
-      query: false,
-      add: false,
-      tag: 'commonSelect',
-      enumData: statusList,
-    },
-    { name: 'remark', title: 'remark',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
-  ],
-  relations:[{
-    name:'sysPrivilegeRoles',
-    key: 'id',
-    title:'Role List for Access this One',
-    columnDetails:[{name: 'id',title:'Relation Id'},{name: 'roleId',title:'Role Id'},{name: 'roleName',title:'Role Name'}]
-  }],
-};
-
 
 @connect(({ uniComp, loading }) => ({
   uniComp,
@@ -95,6 +18,88 @@ class Privilege extends PureComponent {
   state={
     selectedRow:undefined,
     modalVisible:false,
+    columnSchemas:{},
+  }
+
+  componentWillMount() {
+
+    const statusList = getItems('common', 'status'); // 状态主数据
+    const iconList = getItems('privilege', 'icon');  // 菜单图标祝数据
+    iconList.push({javaCode:'privilege',javaKey:'icon',itemCode:'',itemValue:'None Icon'});
+    const typeList = getItems('privilege', 'type');  // 菜单类型主数据
+
+    const hideChildrenInMenuList = getItems('privilege', 'hide_children_in_menu'); // 子菜单是否隐藏主数据
+    const hideInMenuList = getItems('privilege', 'hide_in_menu');// 菜单是否隐藏主数据
+
+// 表格信息、展现信息、动作信息等
+    const columnSchemas = {
+      tableName: 'sys_privilege',
+      key: 'privilegeId',
+      name: 'name',
+      commands:[{action:'setRole',title:'角色'},],
+      columnDetails: [
+        { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:110 },
+        { name: 'name', title: 'Name', columnHidden: false, query: true, add: true, detailFlag:1 },
+        { name: 'path', title: 'path', columnHidden: false, query: true, add: true,showLen:22},
+        { name: 'parentPrivilegeId', title: 'parent', add: true, tag:'privilegeTreeSelect', detail:false, columnHidden: true,rules:[]},
+        {
+          name: 'type',
+          title: 'type',
+          query: true,
+          add: true,
+          tag: 'commonSelect',
+          enumData: typeList,
+        },
+        { name: 'roleStr', title: 'role', showLen:14, detail:true },
+        {
+          name: 'icon',
+          title: 'icon',
+          columnHidden: true,
+          query: false,
+          add: true,
+          tag: 'commonSelect',
+          enumData: iconList,
+          rules:[],
+        },
+        {
+          name: 'hideChildrenInMenu',
+          title: 'hideChildrenInMenu',
+          columnHidden: true,
+          query: false,
+          add: true,
+          tag: 'commonRadio',
+          enumData: hideChildrenInMenuList,
+          rules:[],
+        },
+        {
+          name: 'hideInMenu',
+          title: 'hideInMenu',
+          columnHidden: true,
+          query: false,
+          add: true,
+          tag: 'commonRadio',
+          enumData: hideInMenuList,
+          rules:[],
+        },
+        {
+          name: 'status',
+          title: 'Status',
+          columnHidden: false,
+          query: false,
+          add: false,
+          tag: 'commonSelect',
+          enumData: statusList,
+        },
+        { name: 'remark', title: 'remark',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
+      ],
+      relations:[{
+        name:'sysPrivilegeRoles',
+        key: 'id',
+        title:'Role List for Access this One',
+        columnDetails:[{name: 'id',title:'Relation Id'},{name: 'roleId',title:'Role Id'},{name: 'roleName',title:'Role Name'}]
+      }],
+    };
+    this.setState({columnSchemas});
   }
 
   // componentDidMount() {
@@ -177,7 +182,7 @@ class Privilege extends PureComponent {
   }
 
   render() {
-    const {modalVisible,selectedRow}=this.state;
+    const {modalVisible,selectedRow,columnSchemas}=this.state;
     // const {data:{list}}=this.props;
     // const treeSelectData=[];
     // if(list){

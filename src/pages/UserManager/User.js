@@ -12,63 +12,6 @@ import { getAuth } from '@/utils/authority';
 
 const { check } = Authorized;
 
-const statusList = getItems('common', 'status');// 用户状态
-const utypeList = getItems('sysUser', 'utype');// 账户类型
-
-const auth=getAuth("user_save"); // 获取某个功能权的角色
-const saveAct = check(auth,'modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
-const commandAct = check(auth,'role');
-// 动作对象
-const actions=saveAct||commandAct?{
-  title:'action',
-  width:130,
-  saveAct,
-  commandAct,
-  havePermissions:true,
-}:{havePermissions:false};
-
-const columnSchemas = {
-  tableName: 'sys_user',
-  key: 'id',
-  name: 'username',
-  relationKey: 'userId',
-  commands:[{action:'setRole',title:'角色'},],
-  columnDetails: [
-    { name: 'id', title: 'User ID', add: true, disabledAct:'true' },
-    { name: 'username', title: 'User Name', sorter: true, query: true, add: true, detailFlag:1 },
-    {
-      name: 'utype',
-      title: 'Account Type',
-      columnHidden: false,
-      query: true,
-      add: true,
-      tag: 'commonSelect',
-      enumData: utypeList,
-    },
-    { name: 'password', title: 'Password',tag:'passwordTag', add: true, columnHidden: true,detail:false },
-    { name: 'email', title: 'Email', query: false, add: true ,rules:[]},
-    { name: 'tel', title: 'Mobile', query: false, add: true ,rules:[]},
-    {
-      name: 'status',
-      title: 'Status',
-      columnHidden: false,
-      query: false,
-      add: false,
-      tag: 'commonSelect',
-      enumData: statusList,
-    },
-    { name: 'remark', title: 'remark',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
-  ],
-  relations:[{
-    name:'sysUserRoles',
-    key: 'id',
-    title:'Role List of this User',
-    columnDetails:[{name: 'id',title:'Relation Id'},{name: 'roleId',title:'Role Id'},{name: 'roleName',title:'Role Name'}]
-  }],
-  actions,
-};
-
-
 @connect(({ uniComp, loading }) => ({
   uniComp,
   loading: loading.models.uniComp,
@@ -78,6 +21,67 @@ class User extends PureComponent {
   state={
     selectedRow:undefined,
     modalVisible:false,
+    columnSchemas:{},
+  }
+
+  componentWillMount() {
+
+    const statusList = getItems('common', 'status');// 用户状态
+    const utypeList = getItems('sysUser', 'utype');// 账户类型
+
+    const auth=getAuth("user_save"); // 获取某个功能权的角色
+    const saveAct = check(auth,'modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
+    const commandAct = check(auth,'role');
+// 动作对象
+    const actions=saveAct||commandAct?{
+      title:'action',
+      width:130,
+      saveAct,
+      commandAct,
+      havePermissions:true,
+    }:{havePermissions:false};
+
+    const columnSchemas = {
+      tableName: 'sys_user',
+      key: 'id',
+      name: 'username',
+      relationKey: 'userId',
+      commands:[{action:'setRole',title:'角色'},],
+      columnDetails: [
+        { name: 'id', title: 'User ID', add: true, disabledAct:'true' },
+        { name: 'username', title: 'User Name', sorter: true, query: true, add: true, detailFlag:1 },
+        {
+          name: 'utype',
+          title: 'Account Type',
+          columnHidden: false,
+          query: true,
+          add: true,
+          tag: 'commonSelect',
+          enumData: utypeList,
+        },
+        { name: 'password', title: 'Password',tag:'passwordTag', add: true, columnHidden: true,detail:false },
+        { name: 'email', title: 'Email', query: false, add: true ,rules:[]},
+        { name: 'tel', title: 'Mobile', query: false, add: true ,rules:[]},
+        {
+          name: 'status',
+          title: 'Status',
+          columnHidden: false,
+          query: false,
+          add: false,
+          tag: 'commonSelect',
+          enumData: statusList,
+        },
+        { name: 'remark', title: 'remark',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
+      ],
+      relations:[{
+        name:'sysUserRoles',
+        key: 'id',
+        title:'Role List of this User',
+        columnDetails:[{name: 'id',title:'Relation Id'},{name: 'roleId',title:'Role Id'},{name: 'roleName',title:'Role Name'}]
+      }],
+      actions,
+    };
+    this.setState({columnSchemas});
   }
 
   handleRole=()=>{
@@ -106,7 +110,7 @@ class User extends PureComponent {
 
 
   render() {
-    const {modalVisible,selectedRow}=this.state;
+    const {modalVisible,selectedRow,columnSchemas}=this.state;
     return (
       <PageHeaderWrapper title="用户管理" showBreadcrumb>
         <BindDataQueryTable
