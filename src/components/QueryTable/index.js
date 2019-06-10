@@ -599,7 +599,7 @@ class QueryTable extends PureComponent {
     const { data, loading, columnSchemas, onRow, size } = this.props;
     const { key,actions } = columnSchemas;
     const { selectedRow, selectedRows, modalVisible,drawerVisible } = this.state;
-    console.log("-----:",actions,actions&&!actions.haveAddPermissions);
+    // console.log("-----:",actions,actions&&!actions.haveAddPermissions);
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
         {menuOption.map(item => (

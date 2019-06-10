@@ -11,99 +11,105 @@ import { getAuth, getUserName } from '@/utils/authority';
 
 const { check } = Authorized;
 
-const auth = getAuth('org_save'); // 获取某个功能权的角色
-const saveAct = check(auth, 'Modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
-const commandAct = check(auth, 'role');
 
-// 动作对象
-const actions =
-  saveAct || commandAct
-    ? {
-        title: 'action',
-        width: 160,
-        saveAct,
-        commandAct,
-        havePermissions: true,
-        haveAddPermissions: true,
-      }
-    : { havePermissions: false,
-      haveAddPermissions: false,};
-
-// const orgTypes = [
-//   { itemCode: '1', itemValue: '生产系统' },
-//   { itemCode: '2', itemValue: '消费系统' },
-//   { itemCode: '0', itemValue: 'Both' },
-// ];
-const orgTypes = getItems('org', 'org_type'); // 缓存取数据
-const authTypes = getItems('org', 'auth_type');
-const statusList = getItems('common', 'status');
-
-const columnSchemas = {
-  tableName: 'org',
-  key: 'id',
-  name: 'orgName',
-  columnDetails: [
-    { name: 'appkey', title: 'App Key', query: true , detailFlag:1 }, // name  数据库属性 query查询是否显示 add 新增 ,disableAct修改, rules 输入规则 tag下拉框
-    { name: 'id', title: 'ID', columnHidden: false, add: true, disabledAct: 'true' }, // 第一列需要作为查询条件，新增时不需要采集
-    { name: 'orgCode', title: 'Code', columnHidden: true }, // 第二列需要作为查询条件，新增时需要采集
-    { name: 'orgName', title: 'Name', sorter: true, query: true, add: true }, //  需要排序，需要作为查询条件，新增时需要采集
-    { name: 'createTime', title: 'Create Date', format: 'YYYY-MM-DD HH:mm:ss' }, // 返回是日期类型，需要转换
-    { name: 'tel', title: 'tel', columnHidden: true, add: true, rules: [] },
-    { name: 'email', title: 'email', columnHidden: true, add: true, rules: [] },
-    {
-      name: 'authType',
-      title: 'Auth Type',
-      columnHidden: false,
-      add: true,
-      tag: 'commonSelect',
-      tableName: 'org',
-      query: true,
-      enumData: authTypes,
-    },
-    {
-      name: 'orgType',
-      title: 'Org Type',
-      columnHidden: false,
-      query: true,
-      add: true,
-      tag: 'commonSelect',
-      tableName: 'org',
-      enumData: orgTypes,
-    }, // 需要作为查询条件，新增时需要采集，需要使用绑定的下拉标签
-    {
-      name: 'status',
-      title: 'Status',
-      columnHidden: false,
-      query: false,
-      add: true,
-      tag: 'commonSelect',
-      tableName: 'org',
-      enumData: statusList,
-    }, // 需要作为查询条件，新增时需要采集，需要使用绑定的下拉标签
-    {
-      name: 'remark',
-      title: 'remark',
-      tag: 'textArea',
-      columnHidden: true,
-      add: true,
-      rows: 3,
-      rules: [],
-    },
-  ],
-  relations:[{
-    name:'sysUserOrgs',
-    key: 'id',
-    title:'User List for Managing Provider\'s Api',
-    columnDetails:[{name: 'id',title:'Relation Id'},{name: 'userId',title:'User Id'},{name: 'username',title:'User Name'}]
-  }],
-  actions,
-};
 
 class Org extends PureComponent {
   state = {
     selectedRow: undefined,
     modalVisible: false,
+    columnSchemas:{},
   };
+
+  componentWillMount() {
+
+    const auth = getAuth('org_save'); // 获取某个功能权的角色
+    const saveAct = check(auth, 'Modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
+    const commandAct = check(auth, 'role');
+
+
+// 动作对象
+    const actions =
+      saveAct || commandAct
+        ? {
+          title: 'action',
+          width: 160,
+          saveAct,
+          commandAct,
+          havePermissions: true,
+          haveAddPermissions: true,
+        }
+        : { havePermissions: false,
+          haveAddPermissions: false,};
+
+
+    const orgTypes = getItems('org', 'org_type'); // 缓存取数据
+    const authTypes = getItems('org', 'auth_type');
+    const statusList = getItems('common', 'status');
+
+    const columnSchemas = {
+      tableName: 'org',
+      key: 'id',
+      name: 'orgName',
+      columnDetails: [
+        { name: 'appkey', title: 'App Key', query: true , detailFlag:1 }, // name  数据库属性 query查询是否显示 add 新增 ,disableAct修改, rules 输入规则 tag下拉框
+        { name: 'id', title: 'ID', columnHidden: false, add: true, disabledAct: 'true' }, // 第一列需要作为查询条件，新增时不需要采集
+        { name: 'orgCode', title: 'Code', columnHidden: true }, // 第二列需要作为查询条件，新增时需要采集
+        { name: 'orgName', title: 'Name', sorter: true, query: true, add: true }, //  需要排序，需要作为查询条件，新增时需要采集
+        { name: 'createTime', title: 'Create Date', format: 'YYYY-MM-DD HH:mm:ss' }, // 返回是日期类型，需要转换
+        { name: 'tel', title: 'tel', columnHidden: true, add: true, rules: [] },
+        { name: 'email', title: 'email', columnHidden: true, add: true, rules: [] },
+        {
+          name: 'authType',
+          title: 'Auth Type',
+          columnHidden: false,
+          add: true,
+          tag: 'commonSelect',
+          tableName: 'org',
+          query: true,
+          enumData: authTypes,
+        },
+        {
+          name: 'orgType',
+          title: 'Org Type',
+          columnHidden: false,
+          query: true,
+          add: true,
+          tag: 'commonSelect',
+          tableName: 'org',
+          enumData: orgTypes,
+        }, // 需要作为查询条件，新增时需要采集，需要使用绑定的下拉标签
+        {
+          name: 'status',
+          title: 'Status',
+          columnHidden: false,
+          query: false,
+          add: true,
+          tag: 'commonSelect',
+          tableName: 'org',
+          enumData: statusList,
+        }, // 需要作为查询条件，新增时需要采集，需要使用绑定的下拉标签
+        {
+          name: 'remark',
+          title: 'remark',
+          tag: 'textArea',
+          columnHidden: true,
+          add: true,
+          rows: 3,
+          rules: [],
+        },
+      ],
+      relations:[{
+        name:'sysUserOrgs',
+        key: 'id',
+        title:'User List for Managing Provider\'s Api',
+        columnDetails:[{name: 'id',title:'Relation Id'},{name: 'userId',title:'User Id'},{name: 'username',title:'User Name'}]
+      }],
+      actions,
+    };
+    const userName = getUserName();
+    columnSchemas.userName = userName;
+    this.setState({columnSchemas})
+  }
 
   handleUser = () => {
     const { selectedRow } = this.state;
@@ -132,9 +138,7 @@ class Org extends PureComponent {
   };
 
   render() {
-    const { modalVisible, selectedRow } = this.state;
-    const userName = getUserName();
-    columnSchemas.userName = userName;
+    const { modalVisible, selectedRow,columnSchemas } = this.state;
     return (
       <PageHeaderWrapper title="权限管理">
         <BindDataQueryTable

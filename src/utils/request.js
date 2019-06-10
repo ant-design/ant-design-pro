@@ -37,7 +37,7 @@ const errorHandler = error => {
   const errortext = codeMessage[response.status] || response.statusText;
   const { status, url } = response;
 
-  console.log(status,url);
+  // console.log(status,url);
   if (status === 401) {
     // response.body.getReader().read().then(function(result, done) {
     //   if (!done) {
@@ -93,7 +93,7 @@ request.interceptors.response.use( (response) => {
   response.headers.forEach((value,key)=>{
     // console.log("==============12:",key,":",value);
     if(key.toLowerCase()==='RspToken'.toLowerCase()){
-      console.log("=====12",value);
+      // console.log("=====12",value);
       // localStorage.removeItem("token");
       localStorage.setItem("token",value);
     }
