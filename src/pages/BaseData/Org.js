@@ -11,8 +11,6 @@ import { getAuth, getUserName } from '@/utils/authority';
 
 const { check } = Authorized;
 
-
-
 class Org extends PureComponent {
   state = {
     selectedRow: undefined,
