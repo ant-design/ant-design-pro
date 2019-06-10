@@ -4,6 +4,7 @@ import styles from './index.less';
 import { connect } from 'dva';
 import * as H from 'history';
 import { FormattedMessage } from 'umi-plugin-react/locale';
+import { isAntDesignPro } from '@/utils/utils';
 
 const firstUpperCase = (pathString: string) => {
   return pathString
@@ -13,13 +14,34 @@ const firstUpperCase = (pathString: string) => {
     .filter(s => s)
     .join('');
 };
+
+// when  click block copy, send block url to  ga
+const onBlockCopy = (label: string) => {
+  if (!isAntDesignPro()) {
+    return;
+  }
+  const ga = window && (window as any).ga;
+  if (ga) {
+    ga('send', 'event', {
+      eventCategory: 'block',
+      eventAction: 'copy',
+      eventLabel: label,
+    });
+  }
+};
+
 const BlockCodeView: React.SFC<{
   url: string;
 }> = ({ url }) => {
   const blockUrl = `npx umi block add ${firstUpperCase(url)}  --path=${url}`;
   return (
     <div className={styles['copy-block-view']}>
-      <Typography.Paragraph copyable={{ text: blockUrl }}>
+      <Typography.Paragraph
+        copyable={{
+          text: blockUrl,
+          onCopy: () => onBlockCopy(url),
+        }}
+      >
         <code className={styles['copy-block-code']}>{blockUrl}</code>
       </Typography.Paragraph>
     </div>
