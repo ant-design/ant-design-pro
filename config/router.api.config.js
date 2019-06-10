@@ -105,7 +105,7 @@ export default [
         path: '/baseData',
         icon: 'table',
         name: 'baseData',
-        authority: ['manager'],
+        authority: ['manager','user'],
         routes: [
           {
             path: '/baseData/org',

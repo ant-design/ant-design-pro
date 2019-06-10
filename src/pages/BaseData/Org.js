@@ -24,8 +24,10 @@ const actions =
         saveAct,
         commandAct,
         havePermissions: true,
+        haveAddPermissions: true,
       }
-    : { havePermissions: false };
+    : { havePermissions: false,
+      haveAddPermissions: false,};
 
 // const orgTypes = [
 //   { itemCode: '1', itemValue: '生产系统' },

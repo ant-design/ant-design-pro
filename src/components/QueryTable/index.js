@@ -16,7 +16,6 @@ import {
   Select,
   InputNumber,
   Radio,
-  message,
   // Popconfirm,
   Drawer,
 } from 'antd';
@@ -188,7 +187,7 @@ class QueryTable extends PureComponent {
   handleColumn = () => {
     columns = [];
     const {
-      columnSchemas: { columnDetails, actions,name },
+      columnSchemas: { columnDetails, actions },
     } = this.props;
 
     // const {commands} = columnDetails;
@@ -598,8 +597,9 @@ class QueryTable extends PureComponent {
 
   render() {
     const { data, loading, columnSchemas, onRow, size } = this.props;
-    const { key } = columnSchemas;
+    const { key,actions } = columnSchemas;
     const { selectedRow, selectedRows, modalVisible,drawerVisible } = this.state;
+    console.log("-----:",actions,actions&&!actions.haveAddPermissions);
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
         {menuOption.map(item => (
@@ -615,7 +615,7 @@ class QueryTable extends PureComponent {
       <Card bordered={false}>
         <div className={styles.tableList}>
           <div className={styles.tableListForm}>{this.renderForm()}</div>
-          <div className={styles.tableListOperator}>
+          <div className={styles.tableListOperator} style={actions&&!actions.haveAddPermissions?{display:'none'}:{}}>
             <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(null, true)}>
               新建
             </Button>
