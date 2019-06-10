@@ -82,7 +82,7 @@ class StandardTable extends PureComponent {
 
     return (
       <div className={styles.standardTable}>
-        <div className={styles.tableAlert}>
+        <div className={styles.tableAlert} style={selectedRowKeys.length===0?{display:'none'}:{}}>
           <Alert
             message={
               <Fragment>
