@@ -1,15 +1,16 @@
 import React, { PureComponent } from 'react';
-import { Card, Button, Form, Table, Tabs, BackTop, Badge } from 'antd';
+import { Card, Button, Form, Table, Tabs, BackTop, Badge, Tag, Icon } from 'antd';
 import router from 'umi/router';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './style.less';
 import { conversionAttr, getApiFlowData } from './ApiCreate/util';
+import { getPlaceHolder, getQueryArr } from '../util';
 import { getUserId } from '@/utils/authority';
 
 import DescriptionList from '@/components/DescriptionList';
-import { getGroupName, getItemValue, getName, getItems } from '@/utils/masterData';
+import { getGroupName, getItemValue, getName } from '@/utils/masterData';
 
 const { TabPane } = Tabs;
 const { Description } = DescriptionList;
@@ -102,6 +103,32 @@ const columnsApi = [
   },
   {
     title: '说明',
+    dataIndex: 'remark',
+  },
+];
+
+const columnsResp = [
+  {
+    title: '参数名',
+    dataIndex: 'name',
+  },
+  {
+    title: '类型',
+    dataIndex: 'type',
+  },
+  {
+    title: '说明',
+    dataIndex: 'remark',
+  },
+];
+
+const columnsCode = [
+  {
+    title: '状态码',
+    dataIndex: 'name',
+  },
+  {
+    title: '描述',
     dataIndex: 'remark',
   },
 ];
@@ -222,6 +249,50 @@ class ApiDetail extends PureComponent {
     return [];
   };
 
+  /**
+   * 处理占位符和get参数的说明文档
+   * @param urlSpec
+   * @param manualFlag
+   * @returns {Array}
+   */
+  handleUrlGenerate = (urlSpec, manualFlag) => {
+    const { apiService } = this.props;
+    const { requestUrl } = apiService;
+    let url = requestUrl;
+    if (manualFlag) {
+      const { form } = this.props;
+      const fieldsValue = form.getFieldsValue();
+      const { urlSample } = fieldsValue;
+      url = urlSample;
+    }
+    let retAttr = [];
+    if (url && url.trim() !== '' && url.indexOf('{') > -1) {
+      const flatJsonArray = getPlaceHolder(url);
+      retAttr = flatJsonArray.map(spec => {
+        const findObj = urlSpec.find(
+          item => item.name === spec.name && item.parent === spec.parent
+        );
+        return findObj ? { ...spec, remark: findObj.remark } : spec;
+      });
+    }
+    if (url && url.trim() !== '' && url.indexOf('?') > -1) {
+      const flatJsonArray = getQueryArr(url);
+      const mergeArr = flatJsonArray.map(spec => {
+        const findObj = retAttr.find(
+          item => item.name === spec.name && item.parent === spec.parent
+        );
+        return findObj ? { ...spec, remark: findObj.remark } : spec;
+      });
+      retAttr = retAttr.concat(mergeArr);
+    }
+
+    retAttr = retAttr.map((item, index) => ({ ...item, key: `url-${index}` }));
+    if (manualFlag) {
+      this.setState({ urlSpec: retAttr });
+    }
+    return retAttr;
+  };
+
   //  设置apiInfo数据格式
   setBaseInfo = resp => {
     const { data } = resp;
@@ -262,7 +333,6 @@ class ApiDetail extends PureComponent {
     apiServiceBackendFormat.orgIdTitle = apiServiceBackendFormat.orgId
       ? getName(orgList, apiServiceBackendFormat.orgId, 'id', 'orgName')
       : null;
-
     // 设置安全认证下的信息
     // Basic认证
     if (apiServiceBackendFormat.authType === 'basicAuth') {
@@ -312,28 +382,30 @@ class ApiDetail extends PureComponent {
     const requestBodySpec = this.convertDocObj(apiServiceDoc, requestBodyFlag);
     const responseHeaderSpec = this.convertDocObj(apiServiceDoc, responseHeaderFlag);
     const responseBodySpec = this.convertDocObj(apiServiceDoc, responseBodyFlag);
-    console.log('this.setBaseInfo-responseBodySpec', responseBodySpec);
+    // console.log('this.setBaseInfo-responseBodySpec', responseBodySpec);
     const stateCodeSpec = this.convertDocObj(apiServiceDoc, stateCodeFlag);
     const busiCodeSpec = this.convertDocObj(apiServiceDoc, busiCodeFlag);
+
     // －－－－－初始化url spec数据－－－－－
-    const urlSpec = (JSON.parse(apiServiceDoc.urlSpec) || []).map((item, index) => ({
-      ...item,
-      key: `url-${index}`,
-    }));
-    console.log('urlSpec1:', urlSpec);
-    const newUrlSpec = urlSpec.length === 0 ? this.handleUrlGenerate(urlSpec, false) : urlSpec;
-    console.log('newUrlSpec:', newUrlSpec);
+    const urlSpec = apiServiceDoc.urlSpec
+      ? (JSON.parse(apiServiceDoc.urlSpec) || []).map((item, index) => ({
+          ...item,
+          key: `url-${index}`,
+        }))
+      : null;
+    const newUrlSpec =
+      urlSpec && urlSpec.length === 0 ? this.handleUrlGenerate(urlSpec, false) : urlSpec;
 
     // 定义接口文档协议说明
     const protocol = `${data.serviceTypeTitle}   ${data.reqMethod.toUpperCase()}`;
-    const url = getItems('env', 'localhost') + apiServiceDoc.urlSample;
+    const urlSample = apiServiceDoc.urlSample ? apiServiceDoc.urlSample : '';
+    const url = getItemValue('env', 'localhost', 'angentHost') + urlSample;
     const apiAttr = [
       { name: fieldLabels.doc.protocol, remark: protocol },
       { name: fieldLabels.doc.encodeFormat, remark: 'UTF8' },
       { name: fieldLabels.doc.contentType, remark: 'application/json' },
       { name: fieldLabels.doc.url, remark: url },
     ];
-
     this.setState({
       data,
       apiAttr,
@@ -361,7 +433,7 @@ class ApiDetail extends PureComponent {
   };
 
   changeTab = key => {
-    console.log(key);
+    // console.log(key);
     if (key === 'flow') {
       const { form } = this.props;
       const values = form.getFieldsValue();
@@ -399,24 +471,24 @@ class ApiDetail extends PureComponent {
       apiService && apiService.apiServiceBackends
         ? apiService.apiServiceBackends.map(item => ({ ...item, key: item.serviceSeq }))
         : [];
-    const apiServiceEndPoint = apiServiceBackendMembers.filter(
-      obj => obj.backendType === 'endpoint'
-    );
-    console.log(
-      'apiServiceBackendMembers:',
-      apiServiceBackendMembers,
-      'apiServiceEndPoint:',
-      apiServiceEndPoint
-    );
+    // const apiServiceEndPoint = apiServiceBackendMembers.filter(
+    //   obj => obj.backendType === 'endpoint'
+    // );
+    // console.log(
+    //   'apiServiceBackendMembers:',
+    //   apiServiceBackendMembers,
+    //   'apiServiceEndPoint:',
+    //   apiServiceEndPoint
+    // );
     return (
       <PageHeaderWrapper
         onBack={() => window.history.back()}
         style={{ height: '50px' }}
         title="Api Detail"
       >
-        <Tabs defaultActiveKey="1">
-          <TabPane tab="定义请求信息" key="info">
-            <Card title="" bordered={false}>
+        <Tabs defaultActiveKey="info">
+          <TabPane tab="Api配置信息" key="info">
+            <Card title="定义请求信息" bordered={false}>
               <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
                 <Description term={fieldLabels.front.groupId}>{data.groupIdTitle}</Description>
                 <Description term={fieldLabels.front.name}>{apiService.name}</Description>
@@ -433,111 +505,103 @@ class ApiDetail extends PureComponent {
                 <Description term={fieldLabels.front.apiType}>{data.apiTypeTitle}</Description>
               </DescriptionList>
             </Card>
+            <Card title="落地方服务信息" className={styles.card} bordered={false}>
+              <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
+                <Description term={fieldLabels.back.serviceType}>
+                  {back.serviceTypeTitle}
+                </Description>
+                <Description term={fieldLabels.back.url}>{back.url}</Description>
+                <Description term={fieldLabels.back.reqPath}>{back.reqPath}</Description>
+                <Description term={fieldLabels.back.reqMethod}>{back.reqMethodTitle}</Description>
+                <Description term={fieldLabels.back.connectTimeout}>
+                  {back.connectTimeout}
+                </Description>
+                <Description term={fieldLabels.back.connectTimeout}>
+                  {back.connectTimeout}
+                </Description>
+                <Description term={fieldLabels.back.orgId}>{back.orgIdTitle}</Description>
+                <Description term={fieldLabels.backAttr.ssl}>{back.sslTitle}</Description>
+                <Description term={fieldLabels.back.authType}>{back.authTypeTitle}</Description>
+              </DescriptionList>
+              <DescriptionList
+                style={{
+                  display: back.authType === 'basicAuth' ? 'block' : 'none',
+                }}
+              >
+                <Description term={fieldLabels.backAttr.userName}>{back.userName}</Description>
+                <Description term={fieldLabels.backAttr.userPassword}>
+                  {back.userPassword}
+                </Description>
+              </DescriptionList>
+              <DescriptionList
+                style={{
+                  display: back.authType === 'fixedToken' ? 'block' : 'none',
+                }}
+              >
+                <Description term={fieldLabels.backAttr.tokenStr}>{back.tokenStr}</Description>
+              </DescriptionList>
+              <DescriptionList
+                style={{
+                  display: back.authType === 'dyncToken' ? 'block' : 'none',
+                }}
+              >
+                <Description term={fieldLabels.backAttr.tokenUser}>{back.tokenUser}</Description>
+                <Description term={fieldLabels.backAttr.tokenPassword}>
+                  {back.tokenPassword}
+                </Description>
+                <Description term={fieldLabels.backAttr.tokenUrl}>{back.tokenUrl}</Description>
+              </DescriptionList>
+            </Card>
+            <Tabs defaultActiveKey="org" onChange={this.changeTab}>
+              <TabPane tab="Access Org" key="org">
+                <Card title="" bordered={false}>
+                  <Table columns={columnsOrg} dataSource={data.apiServiceOrgs} pagination={false} />
+                </Card>
+              </TabPane>
+              <TabPane tab="Advance Config" key="table">
+                <Card title="" bordered={false}>
+                  <Table
+                    columns={columns}
+                    dataSource={apiServiceBackendMembers}
+                    pagination={false}
+                  />
+                </Card>
+              </TabPane>
+            </Tabs>
           </TabPane>
           <TabPane tab="接口文档" key="api">
             <Card title="1.协议说明" bordered={false}>
               <Table columns={columnsApi} dataSource={apiAttr} pagination={false} />
             </Card>
             <Card title="2.请求参数说明" bordered={false}>
-              <Table dataSource={requestHeaderSpec} pagination={false}>
-                <ColumnGroup title="请求报文头（Request Header）">
-                  <Column title="参数名" dataIndex="name" />
-                  <Column title="说明" dataIndex="remark" />
-                </ColumnGroup>
-              </Table>
-              <Table dataSource={requestBodySpec} pagination={false}>
-                <ColumnGroup title="请求报文体（Request Body）">
-                  <Column title="参数名" dataIndex="name" />
-                  <Column title="说明" dataIndex="remark" />
-                </ColumnGroup>
-              </Table>
+              <Icon type="info" />
+              <span style={{ fontSize: 15 }}>请求报文头（Request Header）</span>
+              <Table columns={columnsApi} dataSource={requestHeaderSpec} pagination={false} />
+              <Icon type="info" />
+              <span style={{ fontSize: 15 }}>请求报文体（Request Body）</span>
+              <Table columns={columnsApi} dataSource={requestBodySpec} pagination={false} />
             </Card>
             <Card title="3.响应参数说明" bordered={false}>
-              <Table dataSource={responseHeaderSpec} pagination={false}>
-                <ColumnGroup title="响应报文头（Response Header）">
-                  <Column title="参数名" dataIndex="name" />
-                  <Column title="类型" dataIndex="type" />
-                  <Column title="说明" dataIndex="remark" />
-                </ColumnGroup>
-              </Table>
-              <Table dataSource={responseBodySpec} pagination={false}>
-                <ColumnGroup title="响应报文体（Response Body）">
-                  <Column title="参数名" dataIndex="name" />
-                  <Column title="类型" dataIndex="type" />
-                  <Column title="说明" dataIndex="remark" />
-                </ColumnGroup>
-              </Table>
+              <Icon type="info" />
+              <span style={{ fontSize: 15 }}>响应报文头（Response Header）</span>
+              <Table columns={columnsResp} dataSource={responseHeaderSpec} pagination={false} />
+              <Icon type="info" />
+              <span style={{ fontSize: 15 }}>响应报文体（Response Body）</span>
+              <Table columns={columnsResp} dataSource={responseBodySpec} pagination={false} />
             </Card>
           </TabPane>
           <TabPane tab="状态码" key="code">
             <Card title="" bordered={false}>
-              <Table dataSource={stateCodeSpec} pagination={false}>
-                <ColumnGroup title="状态码（State Code）">
-                  <Column title="状态码" dataIndex="name" />
-                  <Column title="描述" dataIndex="remark" />
-                </ColumnGroup>
-              </Table>
-              <Table dataSource={busiCodeSpec} pagination={false}>
-                <ColumnGroup title="业务状态码（Business Code）">
-                  <Column title="状态码" dataIndex="name" />
-                  <Column title="描述" dataIndex="remark" />
-                </ColumnGroup>
-              </Table>
+              <Icon type="info" />
+              <span style={{ fontSize: 15 }}>状态码（State Code）</span>
+              <Table columns={columnsCode} dataSource={stateCodeSpec} pagination={false} />
+              <Icon type="info" />
+              <span style={{ fontSize: 15 }}>业务状态码（Business Code）</span>
+              <Table columns={columnsCode} dataSource={busiCodeSpec} pagination={false} />
             </Card>
           </TabPane>
         </Tabs>
         <br />
-        <Card title="落地方服务信息" className={styles.card} bordered={false}>
-          <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
-            <Description term={fieldLabels.back.serviceType}>{back.serviceTypeTitle}</Description>
-            <Description term={fieldLabels.back.url}>{back.url}</Description>
-            <Description term={fieldLabels.back.reqPath}>{back.reqPath}</Description>
-            <Description term={fieldLabels.back.reqMethod}>{back.reqMethodTitle}</Description>
-            <Description term={fieldLabels.back.connectTimeout}>{back.connectTimeout}</Description>
-            <Description term={fieldLabels.back.connectTimeout}>{back.connectTimeout}</Description>
-            <Description term={fieldLabels.back.orgId}>{back.orgIdTitle}</Description>
-            <Description term={fieldLabels.backAttr.ssl}>{back.sslTitle}</Description>
-            <Description term={fieldLabels.back.authType}>{back.authTypeTitle}</Description>
-          </DescriptionList>
-          <DescriptionList
-            style={{
-              display: back.authType === 'basicAuth' ? 'block' : 'none',
-            }}
-          >
-            <Description term={fieldLabels.backAttr.userName}>{back.userName}</Description>
-            <Description term={fieldLabels.backAttr.userPassword}>{back.userPassword}</Description>
-          </DescriptionList>
-          <DescriptionList
-            style={{
-              display: back.authType === 'fixedToken' ? 'block' : 'none',
-            }}
-          >
-            <Description term={fieldLabels.backAttr.tokenStr}>{back.tokenStr}</Description>
-          </DescriptionList>
-          <DescriptionList
-            style={{
-              display: back.authType === 'dyncToken' ? 'block' : 'none',
-            }}
-          >
-            <Description term={fieldLabels.backAttr.tokenUser}>{back.tokenUser}</Description>
-            <Description term={fieldLabels.backAttr.tokenPassword}>
-              {back.tokenPassword}
-            </Description>
-            <Description term={fieldLabels.backAttr.tokenUrl}>{back.tokenUrl}</Description>
-          </DescriptionList>
-        </Card>
-        <Tabs defaultActiveKey="1" onChange={this.changeTab}>
-          <TabPane tab="Access Org" key="org">
-            <Card title="" bordered={false}>
-              <Table columns={columnsOrg} dataSource={data.apiServiceOrgs} pagination={false} />
-            </Card>
-          </TabPane>
-          <TabPane tab="Advance Config" key="table">
-            <Card title="" bordered={false}>
-              <Table columns={columns} dataSource={apiServiceBackendMembers} pagination={false} />
-            </Card>
-          </TabPane>
-        </Tabs>
 
         <BackTop />
         <FooterToolbar style={{ width }}>

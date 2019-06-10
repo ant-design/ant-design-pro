@@ -62,9 +62,11 @@ class BindDataQueryTable extends PureComponent {
       dispatch,
       onConversionData,
       pageSize,
-      columnSchemas: { userName },
+      columnSchemas: { userName, userId },
     } = this.props;
-    const newParams = pageSize ? { ...params, userName, pageSize } : { ...params, userName };
+    const newParams = pageSize
+      ? { ...params, userName, userId, pageSize }
+      : { ...params, userName, userId };
     console.log('binddata', newParams);
     dispatch({
       type: 'uniComp/list',
