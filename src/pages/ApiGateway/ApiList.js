@@ -34,9 +34,6 @@ import { getAuth, getUserId } from '@/utils/authority';
 
 const { check } = Authorized;
 
-const auth = getAuth('api_save'); // 获取某个功能权的角色
-const commandAct = check(auth, 'commandAct'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
-
 const { ACT, API_STATUS } = constants;
 
 const FormItem = Form.Item;
@@ -77,7 +74,13 @@ class TableList extends PureComponent {
     modalVisible: false,
     drawerVisible: false,
     userId: null,
+    columns:[],
   };
+
+  componentWillMount() {
+    const columns = this.getColumns();
+    this.setState({columns});
+  }
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -101,6 +104,10 @@ class TableList extends PureComponent {
   }
 
   getColumns = () => {
+
+    const auth = getAuth('api_save'); // 获取某个功能权的角色
+    const commandAct = check(auth, 'commandAct'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
+
     const { groupList } = this.props;
     const columns = [
       {
@@ -609,7 +616,7 @@ class TableList extends PureComponent {
       apiGatewayModel: { data },
       loading,
     } = this.props;
-    const { selectedRows, modalVisible, selectedRow, drawerVisible } = this.state;
+    const { selectedRows, modalVisible, selectedRow, drawerVisible,columns } = this.state;
     // const menu = (
     //   <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
     //     <Menu.Item key={DEL_ACT}>删除/下线</Menu.Item>
@@ -618,7 +625,6 @@ class TableList extends PureComponent {
     // );
 
     const rowKey = 'apiId';
-    const columns = this.getColumns();
     return (
       <PageHeaderWrapper showBreadcrumb style={{ height: '50px' }}>
         <Card bordered={false}>
