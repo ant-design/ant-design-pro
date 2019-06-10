@@ -49,7 +49,7 @@ export interface Route extends MenuDataItem {
  * @type T: Params matched in dynamic routing
  */
 export interface ConnectProps<T extends { [key: string]: any } = {}>
-  extends Partial<RouterTypes<Route>> {
+  extends Partial<RouterTypes<Route, T>> {
   dispatch?: Dispatch;
 }
 
