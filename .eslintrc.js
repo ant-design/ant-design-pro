@@ -1,4 +1,5 @@
 const eslintConfig = require('umi-lint/config/.eslintrc.js');
+
 module.exports = {
   ...eslintConfig,
   globals: {

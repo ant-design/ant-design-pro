@@ -20,11 +20,11 @@
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
-    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style && npm run tslint:fix",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "check-prettier lint",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "prettier": " check-prettier write",
+    "prettier": "prettier -c --write '**/*'",
     "site": "npm run fetch:blocks && npm run functions:build && umi build",
     "start": "umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
@@ -39,10 +39,11 @@
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
-    "**/*.{js,ts,tsx,md,json,jsx,less}": [
-      "npm run prettier",
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write",
       "git add"
     ],
+    "**/*.{js,jsx}": "npm run lint-staged:js",
     "**/*.{js,ts,tsx}": "npm run lint-staged:js"
   },
   "browserslist": [
@@ -73,11 +74,10 @@
     "react-media": "^1.9.2",
     "react-media-hook2": "^1.0.5",
     "redux": "^4.0.1",
-    "umi": "^2.7.0-beta.2",
+    "umi": "^2.7.2",
     "umi-plugin-ga": "^1.1.3",
-    "umi-plugin-locale": "^2.8.0-beta.1",
     "umi-plugin-pro-block": "^1.3.2",
-    "umi-plugin-react": "^1.8.0-beta.1",
+    "umi-plugin-react": "^1.8.2",
     "umi-request": "^1.0.7"
   },
   "devDependencies": {

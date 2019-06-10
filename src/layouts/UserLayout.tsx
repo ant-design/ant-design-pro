@@ -1,43 +1,17 @@
-import { MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
-import React, { Fragment } from 'react';
+import { ConnectProps, ConnectState } from '@/models/connect';
+import { DefaultFooter, MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
 
-import { ConnectProps } from '@/models/connect';
 import DocumentTitle from 'react-document-title';
-import GlobalFooter from '@/components/GlobalFooter';
-import { Icon } from 'antd';
 import Link from 'umi/link';
+import React from 'react';
 import SelectLang from '@/components/SelectLang';
-import { formatMessage } from 'umi-plugin-locale';
+import { connect } from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
 
-const links = [
-  {
-    key: 'help',
-    title: formatMessage({ id: 'layout.user.link.help' }),
-    href: '',
-  },
-  {
-    key: 'privacy',
-    title: formatMessage({ id: 'layout.user.link.privacy' }),
-    href: '',
-  },
-  {
-    key: 'terms',
-    title: formatMessage({ id: 'layout.user.link.terms' }),
-    href: '',
-  },
-];
-
-const copyright = (
-  <Fragment>
-    Copyright <Icon type="copyright" /> 2019 蚂蚁金服体验技术部出品
-  </Fragment>
-);
-
 export interface UserLayoutProps extends ConnectProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
-  navTheme: 'dark' | 'light';
 }
 
 const UserLayout: React.SFC<UserLayoutProps> = props => {
@@ -45,19 +19,23 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
     route = {
       routes: [],
     },
+  } = props;
+  const { routes = [] } = route;
+  const {
     children,
     location = {
       pathname: '',
     },
   } = props;
-  const { routes = [] } = route;
   const { breadcrumb } = getMenuData(routes, props);
+
   return (
     <DocumentTitle
       title={getPageTitle({
         pathname: location.pathname,
         breadcrumb,
         formatMessage,
+        ...props,
       })}
     >
       <div className={styles.container}>
@@ -76,9 +54,12 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
           </div>
           {children}
         </div>
-        <GlobalFooter links={links} copyright={copyright} />
+        <DefaultFooter />
       </div>
     </DocumentTitle>
   );
 };
-export default UserLayout;
+
+export default connect(({ settings }: ConnectState) => ({
+  ...settings,
+}))(UserLayout);

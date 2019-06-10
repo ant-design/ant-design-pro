@@ -3,6 +3,7 @@ import { Icon, Popover, Typography } from 'antd';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import React from 'react';
 import { connect } from 'dva';
+import { isAntDesignPro } from '@/utils/utils';
 import styles from './index.less';
 
 const firstUpperCase = (pathString: string): string => {
@@ -13,13 +14,38 @@ const firstUpperCase = (pathString: string): string => {
     .filter((s): boolean => !!s)
     .join('');
 };
+
+// when  click block copy, send block url to  ga
+const onBlockCopy = (label: string) => {
+  if (!isAntDesignPro()) {
+    return;
+  }
+  const ga =
+    window &&
+    (window as {
+      ga: Function;
+    }).ga;
+  if (ga) {
+    ga('send', 'event', {
+      eventCategory: 'block',
+      eventAction: 'copy',
+      eventLabel: label,
+    });
+  }
+};
+
 const BlockCodeView: React.SFC<{
   url: string;
 }> = ({ url }) => {
   const blockUrl = `npx umi block add ${firstUpperCase(url)}  --path=${url}`;
   return (
     <div className={styles['copy-block-view']}>
-      <Typography.Paragraph copyable={{ text: blockUrl }}>
+      <Typography.Paragraph
+        copyable={{
+          text: blockUrl,
+          onCopy: () => onBlockCopy(url),
+        }}
+      >
         <code className={styles['copy-block-code']}>{blockUrl}</code>
       </Typography.Paragraph>
     </div>

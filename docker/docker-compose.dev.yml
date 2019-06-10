@@ -1,4 +1,4 @@
-version: "3.5"
+version: '3.5'
 
 services:
   ant-design-pro_dev:
@@ -7,7 +7,7 @@ services:
     build:
       context: ../
       dockerfile: Dockerfile.dev
-    container_name: "ant-design-pro_dev"
+    container_name: 'ant-design-pro_dev'
     volumes:
       - ../src:/usr/src/app/src
       - ../config:/usr/src/app/config
