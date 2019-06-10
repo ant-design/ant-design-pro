@@ -633,7 +633,7 @@ class TableList extends PureComponent {
             <div className={styles.tableListOperator}>
               {selectedRows.length > 0 && (
                 <span>
-                  <Button htmlType="button">批量操作</Button>
+                  {/* <Button htmlType="button">批量操作</Button> */}
                   {/* <Dropdown overlay={menu}> */}
                   {/* <Button> */}
                   {/* 更多操作 <Icon type="down" /> */}
