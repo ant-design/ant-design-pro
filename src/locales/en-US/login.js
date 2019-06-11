@@ -1,7 +1,7 @@
 export default {
   'app.login.userName': 'userName',
   'app.login.password': 'password',
-  'app.login.message-invalid-credentials': 'Invalid username or password（admin/ant.design）',
+  'app.login.message-invalid-credentials': 'Invalid username or password',
   'app.login.message-invalid-verification-code': 'Invalid verification code',
   'app.login.tab-login-credentials': 'Credentials',
   'app.login.tab-login-mobile': 'Mobile number',
