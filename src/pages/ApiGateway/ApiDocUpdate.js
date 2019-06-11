@@ -117,7 +117,8 @@ class ApiUpdate extends PureComponent {
     const newUrlSpec = urlSpec.length === 0 ? this.handleUrlGenerate(urlSpec, false) : urlSpec;
     // －－－－－初始化request header数据－－－－－
     if(apiServiceDoc.apiServiceDocId===undefined){
-      requestHeaderSpec.push({key: `${requestHeaderFlag}-0`,parent:'-',name:'appkey',type:'string',remark:'A authorization code for Access Api'});
+      requestHeaderSpec.push({key: `${requestHeaderFlag}-0`,parent:'-',name:'appkey',type:'string',remark:'A unique app key of the caller accessing Api Gateway'});
+      requestHeaderSpec.push({key: `${requestHeaderFlag}-1`,parent:'-',name:'Authorization',type:'string',remark:'Set a token, if must use token authentication'});
     }
     this.setState({
       apiServiceDoc,
