@@ -50,7 +50,6 @@ class ApiUpdate extends PureComponent {
 
     const { location } = this.props;
     const { state } = location;
-    // console.log("location state:",state);
     const { apiId } = state || { apiId: 105 };
     this.getApi(apiId);
   }
@@ -84,13 +83,11 @@ class ApiUpdate extends PureComponent {
     try {
       if (apiServiceDoc) {
         const spec = apiServiceDoc[`${flag}Spec`];
-        console.log(flag, spec);
         if (spec && spec.trim() !== '') {
           const specArr = (JSON.parse(spec) || []).map((item, index) => ({
             ...item,
             key: `${requestHeaderFlag}-${index}`,
           }));
-          console.log(flag, specArr);
           return specArr;
         }
       }
@@ -102,7 +99,7 @@ class ApiUpdate extends PureComponent {
 
   setBaseInfo = resp => {
     const { data } = resp;
-    const apiServiceDoc = data && data.apiServiceDoc ? data.apiServiceDoc : {};
+    const apiServiceDoc = data && data.apiServiceDoc ? data.apiServiceDoc : {urlSpec:'[]'};
     // 从db里面获取字符串数据，再转成json对象，在增加key字段，赋值给表格组件
     const requestHeaderSpec = this.convertDocObj(apiServiceDoc, requestHeaderFlag);
     const requestBodySpec = this.convertDocObj(apiServiceDoc, requestBodyFlag);
@@ -110,26 +107,29 @@ class ApiUpdate extends PureComponent {
     const responseBodySpec = this.convertDocObj(apiServiceDoc, responseBodyFlag);
     const stateCodeSpec = this.convertDocObj(apiServiceDoc, stateCodeFlag);
     const busiCodeSpec = this.convertDocObj(apiServiceDoc, busiCodeFlag);
+    // console.log("------------------------1",apiServiceDoc.urlSpec);
+    // console.log("------------------------2",JSON.parse(apiServiceDoc.urlSpec));
     // －－－－－初始化url spec数据－－－－－
     const urlSpec = (JSON.parse(apiServiceDoc.urlSpec) || []).map((item, index) => ({
       ...item,
       key: `url-${index}`,
     }));
-    console.log('urlSpec1:', urlSpec);
     const newUrlSpec = urlSpec.length === 0 ? this.handleUrlGenerate(urlSpec, false) : urlSpec;
-    console.log('newUrlSpec:', newUrlSpec);
     // －－－－－初始化request header数据－－－－－
-    this.handleBodyGenerate(requestHeaderFlag, requestHeaderSpec);
-
+    if(apiServiceDoc.apiServiceDocId===undefined){
+      requestHeaderSpec.push({key: `${requestHeaderFlag}-0`,parent:'-',name:'appkey',type:'string',remark:'A authorization code for Access Api'});
+    }
     this.setState({
       apiServiceDoc,
       urlSpec: newUrlSpec,
+      requestHeaderSpec,
       requestBodySpec,
       responseHeaderSpec,
       responseBodySpec,
       stateCodeSpec,
       busiCodeSpec,
     });
+
   };
 
   /**
@@ -187,7 +187,7 @@ class ApiUpdate extends PureComponent {
     let newValue = '';
     switch (typeParam) {
       case requestHeaderFlag:
-        newValue = '[{"appkey":"xxxx"}]';
+        newValue = '[{"appkey":"A authorization code for Access Api"}]';
         break;
       case requestBodyFlag:
         newValue = fieldsValue[`${requestBodyFlag}Sample`];
@@ -322,7 +322,6 @@ class ApiUpdate extends PureComponent {
       stateCodeSpec,
       busiCodeSpec,
     } = this.state;
-    console.log('urlSpec:', urlSpec);
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
     const sampleText = 'sample for post:{"type":"xxx","name":"xxx"}';
     return (
@@ -331,7 +330,7 @@ class ApiUpdate extends PureComponent {
         style={{ height: '50px' }}
         title="Compile Api Specification"
       >
-        <Tabs defaultActiveKey="1">
+        <Tabs defaultActiveKey="2">
           <TabPane tab="Url" key="1">
             <Card title="" className={styles.card} bordered={false}>
               <Row gutter={2}>
