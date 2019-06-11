@@ -32,8 +32,9 @@ class Org extends PureComponent {
             saveAct,
             commandAct,
             havePermissions: true,
+            haveAddPermissions: true,
           }
-        : { havePermissions: false };
+        : { havePermissions: false, haveAddPermissions: false };
 
     const orgTypes = getItems('org', 'org_type'); // 缓存取数据
     const authTypes = getItems('org', 'auth_type');
