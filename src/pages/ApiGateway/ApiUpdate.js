@@ -43,7 +43,8 @@ const fieldLabels = {
   backAttr: {
     userName: 'user Name',
     userPassword: 'user Password',
-    tokenStr: 'token Str',
+    tokenKey: 'token Key',
+    tokenStr: 'token String',
     tokenUser: 'token User',
     tokenPassword: 'token Password',
     tokenUrl: 'token Url',
@@ -540,7 +541,19 @@ class ApiUpdate extends PureComponent {
                 display: getFieldValue('backAttr.authType') === 'fixedToken' ? 'block' : 'none',
               }}
             >
-              <Col lg={24} md={24} sm={24} style={{ height: 80 }}>
+              <Col lg={8} md={12} sm={24} style={{ height: 80 }}>
+                <Form.Item label={fieldLabels.backAttr.tokenKey}>
+                  {getFieldDecorator('backAttr.tokenKey', {
+                    rules: [
+                      {
+                        required: getFieldValue('backAttr.authType') === 'fixedToken',
+                        message: `请选择${fieldLabels.backAttr.tokenKey}`,
+                      },
+                    ],
+                  })(<Input />)}
+                </Form.Item>
+              </Col>
+              <Col lg={16} md={12} sm={24} style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.backAttr.tokenStr}>
                   {getFieldDecorator('backAttr.tokenStr', {
                     rules: [

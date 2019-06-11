@@ -113,12 +113,10 @@ export default {
     initDataForAdd(){
       // 创建的时候初始化数据
       const apiService= {
-        name: '语音识别',
         serviceType:'1',
         groupId: 2,
-        requestUrl: '/rest/voice',
+        requestUrl: '/rest',
         // createUser:'Alex',
-        reqMethod: 'POST',
         apiType:'1',
         apiServiceBackends:[{
           serviceType:'1',
