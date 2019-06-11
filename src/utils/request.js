@@ -9,6 +9,7 @@ import router from 'umi/router';
 
 import constants from '@/utils/constUtil';
 import {push} from '@/utils/log';
+import moment from 'moment';
 
 const {DEBUG} = constants;
 const codeMessage = {
@@ -117,7 +118,7 @@ request.interceptors.response.use( (response, options) => {
         const logObj={};
         logObj.request=options.data;
         logObj.url=response.url;
-        logObj.date=new Date();
+        logObj.callTime=moment(new Date()).format('HH:mm:ss');
         logObj.status=response.status;
         logObj.statusText=response.statusText;
         logObj.response=data;
@@ -128,7 +129,7 @@ request.interceptors.response.use( (response, options) => {
     console.log("dddd-----error---ddddd");
     const logObj={};
     logObj.url=response.url;
-    logObj.date=new Date();
+    logObj.callTime=moment(new Date()).format('HH:mm:ss');
     logObj.status=response.status;
     logObj.statusText=response.statusText;
     logObj.request=options.data;

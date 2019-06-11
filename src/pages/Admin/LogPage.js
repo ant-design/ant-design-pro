@@ -9,6 +9,7 @@ import {getLogInfo,getFirstLog,getSecondLog} from '@/utils/log';
 
 const {TextArea} = Input;
 // console.log("====1",`Bearer ${token}`);
+const timeout=3000;
 
 class LogPage extends PureComponent {
 
@@ -17,12 +18,13 @@ class LogPage extends PureComponent {
     logArray:[],
     firstLog:{},
     secondLog:{},
-    secondsElapsed: 0
+    secondsElapsed: 0,
+    isStop:false,
   }
 
   componentDidMount() {
     this.tick();
-    this.interval = setInterval(() => this.tick(), 2000);
+    this.interval = setInterval(() => this.tick(), timeout);
   }
 
   componentWillUnmount() {
@@ -37,33 +39,51 @@ class LogPage extends PureComponent {
       secondLog:getSecondLog(),
     });
     this.setState((prevState) => ({
-      secondsElapsed: prevState.secondsElapsed + 2
+      secondsElapsed: prevState.secondsElapsed + timeout/1000,
     }));
-
+    const {secondsElapsed}= this.state;
+    if(secondsElapsed>10){
+      this.setState({secondsElapsed:0,isStop:true});
+      clearInterval(this.interval);
+    }
   }
 
+  actLog=()=>{
+    const {isStop}=this.state;
+    if(!isStop){
+      clearInterval(this.interval);
+    }
+    else{
+      this.interval = setInterval(() => this.tick(), timeout);
+    }
+    this.setState({secondsElapsed: 0, isStop:!isStop});
+  }
 
   render() {
-    const {token,logArray,firstLog,secondLog,secondsElapsed}=this.state;
+
+    const {token,logArray,secondsElapsed,isStop}=this.state;
     return (
       <PageHeaderWrapper>
         <div>
           Seconds Elapsed: {secondsElapsed}
           <span>&nbsp;&nbsp;</span>
-          <Button type="primary" onClick={()=>(clearInterval(this.interval))}>停止</Button>
-          <span>&nbsp;&nbsp;</span>
-          <Button type="primary" onClick={()=>{this.interval = setInterval(() => this.tick(), 2000)}}>启动</Button>
+          <Button type="primary" onClick={this.actLog}>{!isStop?'停止':'启动'}</Button>
           <br />
           Token:<TextArea rows={3} value={token} />
+          <br /><br />
+          <ReactJson
+            src={logArray}
+            name="rest log list for ui"
+            // style={{backgroundColor: '#444'}}
+            collapsed={2}
+            iconStyle='circle'
+            theme='monokai'
+          />
           <br />
-          log:<ReactJson src={logArray} collapsed='true' />
-          <br />
-          first log:<ReactJson src={firstLog} />
-          <br />
-          second log:<ReactJson src={secondLog} />
         </div>
       </PageHeaderWrapper>
     );
   }
 }
+
 export default LogPage;

@@ -20,7 +20,7 @@ export function push(obj) {
   const logArray=getLogInfo();
   // console.log(obj.url,"-1-1-",logArray.findIndex(item => item.url === obj.url));
   // logArray.splice(logArray.findIndex(item => item.url === obj.url), 1);
-  if(obj.url&&obj.url.indexOf("currentUser")<0){
+  if(obj.url&&obj.url.indexOf("currentUser")<0&&obj.url.indexOf("allEnumList")<0&&obj.url.indexOf("sys_privilege/list")<0){
     logArray.unshift(obj);
     if(logArray.length>10){
       logArray.splice(10,logArray.length-10)
