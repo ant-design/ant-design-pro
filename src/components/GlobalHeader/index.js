@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { Icon } from 'antd';
+import React, {PureComponent} from 'react';
+import {Icon} from 'antd';
 import Link from 'umi/link';
 import Debounce from 'lodash-decorators/debounce';
 import styles from './index.less';
@@ -31,11 +31,13 @@ export default class GlobalHeader extends PureComponent {
     event.initEvent('resize', true, false);
     window.dispatchEvent(event);
   }
+
   toggle = () => {
     const { collapsed, onCollapse } = this.props;
     onCollapse(!collapsed);
     this.triggerResizeEvent();
   };
+
   render() {
     const { collapsed, isMobile, logo } = this.props;
     return (
