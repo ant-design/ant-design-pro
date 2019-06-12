@@ -62,8 +62,16 @@ class TableList extends PureComponent {
   };
 
   componentWillMount() {
-    const columns = this.getColumns();
-    this.setState({columns});
+    console.log("-----will mount")
+    const {dispatch} = this.props;
+    // 分组列表
+    dispatch({
+      type: 'groupModel/allGroupList',
+      callback: (groupList) => {
+        const columns = this.getColumns(groupList);
+        this.setState({columns});
+      },
+    });
   }
 
   componentDidMount() {
@@ -81,18 +89,22 @@ class TableList extends PureComponent {
       type: 'apiGatewayModel/apiList',
       payload,
     });
-    // 分组列表
-    dispatch({
-      type: 'groupModel/allGroupList',
-    });
+    console.log("----did mount")
   }
 
-  getColumns = () => {
+  getColumns = (groupList) => {
 
     const auth = getAuth('api_save'); // 获取某个功能权的角色
     const commandAct = check(auth, 'commandAct'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
 
-    const { groupList } = this.props;
+    console.log("---", groupList)
+    // {
+    //   title: '服务类型',
+    //     dataIndex: 'serviceType',
+    //   render(val) {
+    //     return <Fragment>{getItemValue2(serviceTypeList, val)} </Fragment>;
+    //   },
+    // },
     const columns = [
       {
         title: 'API Id',
@@ -104,7 +116,7 @@ class TableList extends PureComponent {
         /*  执行函数 */
         render: (text, record) =>
           <a onClick={() => this.handleDetail(true, record)}>
-            <Ellipsis length={10} tooltip>
+            <Ellipsis length={15} tooltip>
               {text}
             </Ellipsis>
           </a>,
@@ -118,17 +130,10 @@ class TableList extends PureComponent {
         },
       },
       {
-        title: '服务类型',
-        dataIndex: 'serviceType',
-        render(val) {
-          return <Fragment>{getItemValue2(serviceTypeList, val)} </Fragment>;
-        },
-      },
-      {
         title: '请求地址',
         dataIndex: 'requestUrl',
         render(val) {
-          return <Ellipsis length={10} tooltip>{val}</Ellipsis>;
+          return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
         },
       },
       {

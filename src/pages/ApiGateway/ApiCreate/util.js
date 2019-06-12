@@ -119,14 +119,14 @@ export function getPayloadForApiDoc(oldApiService,values) {
     };
 
   if(requestHeaderSpec&&requestHeaderSpec.length>0){
-    apiServiceDoc.requestHeaderSample=requestHeaderSpec.map(item=>{
+    apiServiceDoc.requestHeaderSample = JSON.stringify(requestHeaderSpec.map(item => {
       return {key:item.name,value:'xxx'};
-    })
+    }));
   }
   if(responseHeaderSpec&&responseHeaderSpec.length>0){
-    apiServiceDoc.responseHeaderSample=responseHeaderSpec.map(item=>{
+    apiServiceDoc.responseHeaderSample = JSON.stringify(responseHeaderSpec.map(item => {
       return {key:item.name,value:'xxx'};
-    })
+    }));
   }
 
   if(apiService.apiServiceDoc){

@@ -1,4 +1,4 @@
-import { allGroupList } from '../services/sysDataService';
+import {allGroupList} from '../services/sysDataService';
 import constants from '@/utils/constUtil';
 
 const { STATUS } = constants;
@@ -10,8 +10,14 @@ export default {
   },
 
   effects: {
-    *allGroupList({ payload }, { call, put }) {
-      const response = yield call(allGroupList, payload);
+    * allGroupList({callback}, {call, put}) {
+      const response = yield call(allGroupList);
+      if (callback) {
+        const data = response && response.data ? response.data : [];
+        const groupList = data.filter(item => item.status === STATUS.A);
+        callback(groupList);
+      }
+      ;
       yield put({
         type: 'save',
         payload: response,
