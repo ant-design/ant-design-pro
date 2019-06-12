@@ -49,7 +49,7 @@ class TableList extends PureComponent {
 
     return (
       <PageHeaderWrapper>
-        <div>This is Test Table Page</div>
+        <div>This is a Test Table Page</div>
 
         <Button onClick={this.handleRequest}>call</Button>
       </PageHeaderWrapper>
