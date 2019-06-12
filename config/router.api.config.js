@@ -155,6 +155,11 @@ export default [
             name: 'logPage',
             component: './Admin/LogPage',
           },
+          {
+            path: '/admin/refreshCache',
+            name: 'refreshCache',
+            component: './Admin/RefreshCache',
+          },
         ],
       },
       // test
