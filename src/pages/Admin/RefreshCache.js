@@ -1,6 +1,6 @@
-import React,{PureComponent} from 'react';
-import { connect } from 'dva';
-import {Button,Alert,Card} from 'antd';
+import React, {PureComponent} from 'react';
+import {connect} from 'dva';
+import {Alert, Button, Card} from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 
@@ -34,7 +34,6 @@ class RefreshCache extends PureComponent{
       <PageHeaderWrapper>
         <Card title='Refresh Cache for Agent Service'>
           <div>
-            <Button style={{ marginLeft: 8 }} onClick={this.handelRefreshCacth} htmlType="button">Refresh Cache</Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handelRefreshCacth} htmlType="button">Refresh Cache</Button>
             {adminModel.status !== undefined &&
             !submitting &&
