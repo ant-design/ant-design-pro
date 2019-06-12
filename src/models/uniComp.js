@@ -12,12 +12,15 @@ export default {
   },
 
   effects: {
-    *list({ payload,onConversionData }, { call, put }) {
+    * list({payload, onConversionData, callback}, {call, put}) {
       // console.log('payload:', JSON.stringify(payload));
       const req=conversionReq(payload);
       // console.log('req:', JSON.stringify(req));
       const response = yield call(list, req);
       // console.log('response:', response);
+      if (callback) {
+        callback(response);
+      }
       yield put({
         type: 'saveData',
         payload: response,
