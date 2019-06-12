@@ -1,23 +1,22 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-nested-ternary */
-import React, { PureComponent, Fragment } from 'react';
+import React, {Fragment, PureComponent} from 'react';
 import {
-  Row,
-  Col,
-  Card,
-  Form,
-  Input,
-  Icon,
   Button,
+  Card,
+  Col,
+  DatePicker,
+  Drawer,
   Dropdown,
+  Form,
+  Icon,
+  Input,
+  InputNumber,
   Menu,
   Modal,
-  DatePicker,
-  Select,
-  InputNumber,
   Radio,
-  // Popconfirm,
-  Drawer,
+  Row,
+  Select,
 } from 'antd';
 import Ellipsis from '@/components/Ellipsis';
 import moment from 'moment'; // 不能用｛moment｝
@@ -107,7 +106,7 @@ const CreateForm = Form.create()(props => {
       case 'passwordTag':
         return <Password style={{ width: '100%' }} />;
       default:
-        return <Input disabled={item.disabled} placeholder={`Please input ${item.title}`} value={item.defaultValue} />;
+        return <Input disabled={item.disabled} placeholder={`Please input ${item.title}`}/>;
     }
   };
   const addForms = getFormItemArray(props, 'add')
