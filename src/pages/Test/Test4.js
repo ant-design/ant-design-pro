@@ -1,49 +1,17 @@
 /* 多个model的测试 */
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 // 引入面包屑导航组件
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import { Table } from 'antd';
-import { connect } from 'dva';
+import {Button} from 'antd';
+import request from '@/utils/request';
 
-const columns = [
-  {
-    title: 'userId',
-    dataIndex: 'userId',
-  },
-  {
-    title: 'id',
-    dataIndex: 'id',
-  },
-  {
-    title: 'title',
-    dataIndex : 'title',
-  },
-];
-
-/* eslint react/no-multi-comp:0 */
-
-@connect(({ loading, testModel, project }) => ({
-  listLoading: loading.effects['list/fetch'],
-  testModelList: testModel.list,
-  project,
-  testData: testModel.data,
-  testLoading: loading.effects['testModel/fetch'],
-  projectLoading: loading.effects['project/fetchNotice'],
-}))
 class TableList extends PureComponent {
+
   componentWillMount() {
     console.log('Component WILL MOUNT!');
   }
 
   componentDidMount() {
-    console.log('Component DID MOUNT!');
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'testModel/fetch',
-    });
-    dispatch({
-      type: 'project/fetchNotice',
-    });
   }
 
   // componentWillReceiveProps(newProps) {
@@ -68,18 +36,22 @@ class TableList extends PureComponent {
     console.log('Component WILL UNMOUNT!');
   }
 
+  handleRequest = () => {
+    console.log("start request");
+    request('http://jsonplaceholder.typicode.com/posts').then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
   render() {
-    const { testLoading, testData } = this.props;
-    console.log('this.props3:', this.props);
-    // const { data } = this.state;
-    //
-    // console.log('state2:', this.state);
 
     return (
       <PageHeaderWrapper>
         <div>This is Test Table Page</div>
 
-        <Table rowKey="id" dataSource={testData.list} loading={testLoading} columns={columns} />
+        <Button onClick={this.handleRequest}>call</Button>
       </PageHeaderWrapper>
     );
   }
