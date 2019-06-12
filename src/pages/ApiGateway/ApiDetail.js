@@ -49,6 +49,7 @@ const fieldLabels = {
     userName: 'user Name',
     userPassword: 'user Password',
     tokenStr: 'token Str',
+    tokenKey: 'token Key',
     tokenUser: 'token User',
     tokenPassword: 'token Password',
     tokenUrl: 'token Url',
@@ -546,6 +547,7 @@ class ApiDetail extends PureComponent {
                 }}
               >
                 <Description term={fieldLabels.backAttr.tokenUser}>{back.tokenUser}</Description>
+                <Description term={fieldLabels.backAttr.tokenKey}>{back.tokenKey}</Description>
                 <Description term={fieldLabels.backAttr.tokenPassword}>
                   {back.tokenPassword}
                 </Description>
