@@ -144,12 +144,12 @@ class RoleTransfer extends PureComponent {
     const { roleList } = this.props;
     const { targetKeys, selectedKeys,modalVisible } = this.state;
     return (
-      <Modal title='授权' visible={modalVisible} onOk={()=>this.okHandle()} onCancel={() => this.cancelHandle()}>
+      <Modal title='Grant Authorization' visible={modalVisible} onOk={()=>this.okHandle()} onCancel={() => this.cancelHandle()}>
         <Transfer
           showSearch
           rowKey={this.setKey}
           dataSource={roleList}
-          titles={['未选择', '已选择']}
+          titles={['Unselect', 'Selected']}
           targetKeys={targetKeys}
           selectedKeys={selectedKeys}
           onChange={this.handleChange}

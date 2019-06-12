@@ -53,16 +53,6 @@ class Org extends PureComponent {
         { name: 'tel', title: 'tel', columnHidden: true, add: true, rules: [] },
         { name: 'email', title: 'email', columnHidden: true, add: true, rules: [] },
         {
-          name: 'authType',
-          title: 'Auth Type',
-          columnHidden: false,
-          add: true,
-          tag: 'commonSelect',
-          tableName: 'org',
-          query: true,
-          enumData: authTypes,
-        },
-        {
           name: 'orgType',
           title: 'Org Type',
           columnHidden: false,
@@ -82,6 +72,24 @@ class Org extends PureComponent {
           tableName: 'org',
           enumData: statusList,
         }, // 需要作为查询条件，新增时需要采集，需要使用绑定的下拉标签
+        {
+          name: 'authType',
+          title: 'Auth Type of Consumer',
+          columnHidden: false,
+          add: true,
+          tag: 'commonSelect',
+          tableName: 'org',
+          query: true,
+          enumData: authTypes,
+        },
+        {
+          name: 'validDay',
+          title: 'Token Valid Day',
+          columnHidden: true,
+          add: true,
+          query: true,
+          defaultValue:'30',
+        },
         {
           name: 'remark',
           title: 'remark',

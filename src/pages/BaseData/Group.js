@@ -27,7 +27,7 @@ const columnSchemas = {
   ]
 };
 export default () => (
-  <PageHeaderWrapper title="分组系统管理">
+  <PageHeaderWrapper title="Group Management">
     <BindDataQueryTable columnSchemas={columnSchemas} />
   </PageHeaderWrapper>
 );

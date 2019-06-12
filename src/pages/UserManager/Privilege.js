@@ -189,7 +189,7 @@ class Privilege extends PureComponent {
     //   flatToPrivilegeTreeSelect(list,treeSelectData,0);
     // }
     return (
-      <PageHeaderWrapper title="权限管理" showBreadcrumb>
+      <PageHeaderWrapper showBreadcrumb style={{height:50}}>
         <BindDataQueryTable
           columnSchemas={columnSchemas}
           pageSize='999'
@@ -208,11 +208,11 @@ class Privilege extends PureComponent {
         >
           <QueryCommand>
             <Divider type="vertical" />
-            <a onClick={() => this.handleRole()}>角色</a>
+            <a onClick={() => this.handleRole()}>Role</a>
           </QueryCommand>
         </BindDataQueryTable>
         <RoleTransfer
-          title='授权'
+          title='Grant authorization'
           modalVisible={modalVisible}
           onVisible={this.handleVisible}
           onRefreshData={this.handleRefreshData}

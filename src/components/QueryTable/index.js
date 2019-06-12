@@ -48,7 +48,7 @@ const getFormItemArray = (currentProps, type) => {
   } = currentProps;
   return columnDetails.filter(columnDetail => columnDetail[type]);
 };
-const menuOption = [['remove', '删除'], ['enable', '激活'], ['disable', '停用']];
+const menuOption = [['remove', 'Remove'], ['enable', 'Enable'], ['disable', 'Disable']];
 const QueryCommandChildren = [];
 const otherChildren = [];
 const CreateForm = Form.create()(props => {
@@ -64,9 +64,9 @@ const CreateForm = Form.create()(props => {
       if (err) return;
       Modal.confirm({
         title: '',
-        content: '确定提交该记录吗？',
-        okText: '确认',
-        cancelText: '取消',
+        content: 'Do you submit？',
+        okText: 'Confirm',
+        cancelText: 'Cancel',
         onOk: () => handleAdd(fieldsValue, form),
       });
       // handleAdd(fieldsValue, form);
@@ -107,7 +107,7 @@ const CreateForm = Form.create()(props => {
       case 'passwordTag':
         return <Password style={{ width: '100%' }} />;
       default:
-        return <Input disabled={item.disabled} placeholder={`请输入${item.title}`} />;
+        return <Input disabled={item.disabled} placeholder={`Please input ${item.title}`} value={item.defaultValue} />;
     }
   };
   const addForms = getFormItemArray(props, 'add')
@@ -136,7 +136,7 @@ const CreateForm = Form.create()(props => {
           style={{ height: `${item.rows ? 20 * item.rows : 20}px` }}
         >
           {form.getFieldDecorator(item.name, {
-            initialValue: selectedRow ? selectedRow[item.name] : '',
+            initialValue: selectedRow ? selectedRow[item.name] : item.defaultValue||'',
             rules: item.rules ? [] : [{ required: true, message: `Please input ${item.title}` }],
           })(renderAutoForm(item))}
         </FormItem>
@@ -244,7 +244,7 @@ class QueryTable extends PureComponent {
         width: 130,
         render: (text, row) => (
           <Fragment>
-            <a onClick={() => this.handleModify(row, true)}>修改</a>
+            <a onClick={() => this.handleModify(row, true)}>Modify</a>
             {QueryCommandChildren}
           </Fragment>
         ),
@@ -380,9 +380,9 @@ class QueryTable extends PureComponent {
     const value = new Map(menuOption).get(e.key);
     Modal.confirm({
       title: '',
-      content: `确定${value}该记录吗？`,
-      okText: '确认',
-      cancelText: '取消',
+      content: `Do you confirm ${value}？`,
+      okText: 'Confirm',
+      cancelText: 'Cancel',
       onOk: () => this.subHandleMenuClick(e),
     });
   };
@@ -510,10 +510,10 @@ class QueryTable extends PureComponent {
                     <DatePicker
                       key={`ele-${item.name}`}
                       style={{ width: '100%' }}
-                      placeholder="请输入更新日期"
+                      placeholder="Please input"
                     />
                   ) : (
-                    <Input key={`ele-${item.name}`} placeholder="请输入" />
+                    <Input key={`ele-${item.name}`} placeholder="Please input" />
                   )
                 )}
               </FormItem>
@@ -522,13 +522,13 @@ class QueryTable extends PureComponent {
           <Col md={8} sm={24}>
             <span className={styles.submitButtons}>
               <Button type="primary" htmlType="submit">
-                查询
+                Query
               </Button>
               <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
-                重置
+                Reset
               </Button>
               <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-                展开 <Icon type="down" />
+                Unfold <Icon type="down" />
               </a>
             </span>
           </Col>
@@ -557,10 +557,10 @@ class QueryTable extends PureComponent {
                   <DatePicker
                     key={`ele-${item.name}`}
                     style={{ width: '100%' }}
-                    placeholder="请输入更新日期"
+                    placeholder="Please input"
                   />
                 ) : (
-                  <Input key={`ele-${item.name}`} placeholder="请输入" />
+                  <Input key={`ele-${item.name}`} placeholder="Please input" />
                 )
               )}
             </FormItem>
@@ -581,13 +581,13 @@ class QueryTable extends PureComponent {
         <div style={{ overflow: 'hidden' }}>
           <span style={{ float: 'right', marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">
-              查询
+              Query
             </Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
-              重置
+              Reset
             </Button>
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-              收起 <Icon type="up" />
+              Fold <Icon type="up" />
             </a>
           </span>
         </div>
@@ -617,13 +617,13 @@ class QueryTable extends PureComponent {
           <div className={styles.tableListForm}>{this.renderForm()}</div>
           <div className={styles.tableListOperator} style={actions&&!actions.haveAddPermissions?{display:'none'}:{}}>
             <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(null, true)}>
-              新建
+              New
             </Button>
             {selectedRows.length > 0 && (
               <span>
                 <Dropdown overlay={menu}>
                   <Button>
-                    更多操作 <Icon type="down" />
+                    More <Icon type="down" />
                   </Button>
                 </Dropdown>
               </span>

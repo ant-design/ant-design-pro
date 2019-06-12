@@ -30,8 +30,8 @@ class User extends PureComponent {
     const utypeList = getItems('sysUser', 'utype');// 账户类型
 
     const auth=getAuth("user_save"); // 获取某个功能权的角色
-    const saveAct = check(auth,'modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
-    const commandAct = check(auth,'role');
+    const saveAct = check(auth,'Modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
+    const commandAct = check(auth,'Role');
 // 动作对象
     const actions=saveAct||commandAct?{
       title:'action',
@@ -114,7 +114,7 @@ class User extends PureComponent {
   render() {
     const {modalVisible,selectedRow,columnSchemas}=this.state;
     return (
-      <PageHeaderWrapper title="用户管理" showBreadcrumb>
+      <PageHeaderWrapper title="User Management" showBreadcrumb>
         <BindDataQueryTable
           columnSchemas={columnSchemas}
           onRef={this.handleRef}
@@ -135,7 +135,7 @@ class User extends PureComponent {
           </QueryCommand>
         </BindDataQueryTable>
         <RoleTransfer
-          title='授权'
+          title='Grant authorization'
           modalVisible={modalVisible}
           onVisible={this.handleVisible}
           columnSchemas={columnSchemas}
