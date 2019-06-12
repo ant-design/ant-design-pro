@@ -3,8 +3,8 @@
  * 更详细的api文档: https://bigfish.alipay.com/doc/api#request
  * http://npm.taobao.org/package/umi-request
  */
-import { extend } from 'umi-request';
-import { notification } from 'antd';
+import {extend} from 'umi-request';
+import {notification} from 'antd';
 import router from 'umi/router';
 
 import constants from '@/utils/constUtil';
@@ -142,6 +142,14 @@ request.interceptors.request.use((url, options) => {
   const token=localStorage.getItem("token");
   // console.log("====1",`Bearer ${token}`);
   // console.log("====2",options.data);
+  if (url.indexOf("serviceAgent") > -1) {
+    return (
+      {
+        url: `${url}`,
+        options,
+      }
+    );
+  }
   const newOptions=token===""?{...options}:{ ...options, headers:{Authorization:`Bearer ${token}`}};
   return (
     {

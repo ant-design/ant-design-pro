@@ -3,45 +3,35 @@ import React, {PureComponent} from 'react';
 // 引入面包屑导航组件
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {Button} from 'antd';
-import request from '@/utils/request';
+import {extend as requestExtend} from 'umi-request';
+
+
+/**
+ * 配置request请求时的默认参数
+ */
+const request = requestExtend({
+  // credentials: 'include', // 默认请求是否带上cookie
+});
 
 class TableList extends PureComponent {
 
-  componentWillMount() {
-    console.log('Component WILL MOUNT!');
-  }
 
-  componentDidMount() {
-  }
-
-  // componentWillReceiveProps(newProps) {
-  //   console.log('Component WILL RECEIVE PROPS!');
+  // handleRequest = () => {
+  //   console.log("start request");
+  //   request('http://jsonplaceholder.typicode.com/posts').then(res => {
+  //   // request('/server/serviceAgent/rest/baseInfo/sys/allEnumList').then(res => {
+  //     console.log(res);
+  //   }).catch(err => {
+  //     console.log(err);
+  //   });
   // }
-  /*
-   * shouldComponentUpdate should not be used when extending React.PureComponent. Please extend React.Component if shouldComponentUpdate is used.
-   */
-  // shouldComponentUpdate(newProps, newState) {
-  //   return true;
-  // }
-
-  // componentWillUpdate(nextProps, nextState) {
-  //   console.log('Component WILL UPDATE!');
-  // }
-  //
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log('Component DID UPDATE!');
-  // }
-
-  componentWillUnmount() {
-    console.log('Component WILL UNMOUNT!');
-  }
 
   handleRequest = () => {
     console.log("start request");
-    request('http://jsonplaceholder.typicode.com/posts').then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
+    request('/server/serviceAgent/rest/baseInfo/sys/allEnumList',
+      {method: 'get', getResponse: true, headers: {'AppKey': '10000000017', 'testHeadder1': 'test'}})
+      .then(({data, response}) => {
+        console.log(data, response, response.headers);
     });
   }
 

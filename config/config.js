@@ -94,6 +94,11 @@ export default {
       changeOrigin: true,
       pathRewrite: { '^/server/': '/' },
     },
+    '/server/serviceAgent': {
+      target: 'http://10.19.18.49:10010/',
+      changeOrigin: true,
+      pathRewrite: {'^/server/': '/'},
+    },
   },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
