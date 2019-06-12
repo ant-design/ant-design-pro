@@ -14,6 +14,7 @@ const constants = {
   ITEM_CODE: 'itemCode',
   ITEM_VALUE: 'itemValue',
   ROLE: 'role',
+  TOKEN_PREFIX: 'Bearer ',
   ACT:{
     ADD: 1,
     UPDATE: 2,

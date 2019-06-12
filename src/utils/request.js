@@ -11,7 +11,7 @@ import constants from '@/utils/constUtil';
 import {push} from '@/utils/log';
 import moment from 'moment';
 
-const {DEBUG} = constants;
+const {DEBUG, TOKEN_PREFIX} = constants;
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -150,7 +150,7 @@ request.interceptors.request.use((url, options) => {
       }
     );
   }
-  const newOptions=token===""?{...options}:{ ...options, headers:{Authorization:`Bearer ${token}`}};
+  const newOptions = token === "" ? {...options} : {...options, headers: {Authorization: `${TOKEN_PREFIX}${token}`}};
   return (
     {
       url: `${url}`,

@@ -1,36 +1,20 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, {Fragment, PureComponent} from 'react';
 import router from 'umi/router';
-import { connect } from 'dva';
+import {connect} from 'dva';
 import moment from 'moment';
-import {
-  Row,
-  Col,
-  Card,
-  Form,
-  Input,
-  Select,
-  Icon,
-  Button,
-  // Dropdown,
-  // Menu,
-  // DatePicker,
-  message,
-  Badge,
-  Divider,
-  Modal,
-  Drawer,
-} from 'antd';
+import {Badge, Button, Card, Col, Divider, Drawer, Form, Icon, Input, message, Modal, Row, Select,} from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Ellipsis from '@/components/Ellipsis';
 
 import styles from './ApiList.less';
 import constants from '@/utils/constUtil';
-import { getGroupName, getItems, getItemValue2 } from '@/utils/masterData';
+import {getGroupName, getItems, getItemValue2} from '@/utils/masterData';
 import SelectView from './SelectView';
 import OrgTransfer from './OrgTransfer';
-import { getPayloadForAccess } from './ApiCreate/util';
+import {getPayloadForAccess} from './ApiCreate/util';
 import Authorized from '@/utils/Authorized';
-import { getAuth, getUserId } from '@/utils/authority';
+import {getAuth, getUserId} from '@/utils/authority';
 
 const { check } = Authorized;
 
@@ -118,7 +102,12 @@ class TableList extends PureComponent {
         title: 'API名称',
         dataIndex: 'name',
         /*  执行函数 */
-        render: (text, record) => <a onClick={() => this.handleDetail(true, record)}>{text}</a>,
+        render: (text, record) =>
+          <a onClick={() => this.handleDetail(true, record)}>
+            <Ellipsis length={10} tooltip>
+              {text}
+            </Ellipsis>
+          </a>,
       },
       {
         title: '分组',
@@ -138,6 +127,9 @@ class TableList extends PureComponent {
       {
         title: '请求地址',
         dataIndex: 'requestUrl',
+        render(val) {
+          return <Ellipsis length={10} tooltip>{val}</Ellipsis>;
+        },
       },
       {
         title: '状态',
