@@ -2,7 +2,23 @@ import React, {Fragment, PureComponent} from 'react';
 import router from 'umi/router';
 import {connect} from 'dva';
 import moment from 'moment';
-import {Badge, Button, Card, Col, Divider, Drawer, Form, Icon, Input, message, Modal, Row, Select,} from 'antd';
+import {
+  Badge,
+  Button,
+  Card,
+  Col,
+  Divider,
+  Drawer,
+  Dropdown,
+  Form,
+  Icon,
+  Input,
+  Menu,
+  message,
+  Modal,
+  Row,
+  Select
+} from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Ellipsis from '@/components/Ellipsis';
@@ -28,7 +44,7 @@ const getValue = obj =>
     .join(',');
 const statusMap = ['default', 'processing', 'success', 'default', 'error'];
 const statusList = getItems('apiService', 'status');
-const serviceTypeList = getItems('apiService', 'service_type');
+// const serviceTypeList = getItems('apiService', 'service_type');
 const statusFilter = statusList.map(item => ({
   value: item.itemCode,
   text: item.itemValue,
@@ -91,6 +107,46 @@ class TableList extends PureComponent {
     });
     console.log("----did mount")
   }
+
+  getGroupOption() {
+    const {groupList} = this.props;
+    return this.getOption(groupList, 'groupId', 'groupName');
+  }
+
+  moreHandle = (key, record) => {
+    if (key === 'handleUpdate') this.handleUpdate(true, record);
+    else if (key === 'handleUpdateDoc') {
+      this.handleUpdateDoc(true, record);
+    } else if (key === 'handleDebug') {
+      this.handleDebug(true, record);
+    } else if (key === 'handleOffline') {
+      this.handleStatusClick(ACT.OFFLINE, record);
+    } else if (key === 'handleDelete') {
+      this.handleStatusClick(ACT.DEL, record);
+    }
+  };
+
+  renderMoreBtn = props => {
+    const {current} = props;
+    const {status} = current;
+    return (
+      <Dropdown
+        overlay={
+          <Menu onClick={({key}) => this.moreHandle(key, current)}>
+            <Menu.Item key="handleUpdate">修改</Menu.Item>
+            <Menu.Item key="handleUpdateDoc">文档</Menu.Item>
+            <Menu.Item key="handleDebug">调试</Menu.Item>
+            {status === API_STATUS.ONLINE ? <Menu.Item key="handleOffline">下线</Menu.Item> : null}
+            {status === API_STATUS.OFFLINE ? <Menu.Item key="handleDelete">删除</Menu.Item> : null}
+          </Menu>
+        }
+      >
+        <a>
+          更多 <Icon type="down"/>
+        </a>
+      </Dropdown>
+    );
+  };
 
   getColumns = (groupList) => {
 
@@ -168,33 +224,9 @@ class TableList extends PureComponent {
               <a onClick={() => this.handleStatusClick(ACT.ONLINE, record)}>发布</a>
               <Divider type="vertical" />
             </span>
-            <span
-              id="toOffline"
-              style={{
-                display: record.status === API_STATUS.ONLINE ? 'inline' : 'none',
-              }}
-            >
-              <a onClick={() => this.handleStatusClick(ACT.OFFLINE, record)}>下线</a>
-              <Divider type="vertical" />
-            </span>
-
-            <span
-              id="toOnline"
-              style={{
-                display: record.status === API_STATUS.OFFLINE ? 'inline' : 'none',
-              }}
-            >
-              <a onClick={() => this.handleStatusClick(ACT.DEL, record)}>删除</a>
-              <Divider type="vertical" />
-            </span>
-            <a onClick={() => this.handleUpdate(true, record)}>修改</a>
-            <Divider type="vertical" />
-            <a onClick={() => this.handleUpdateDoc(true, record)}>文档</a>
-            <Divider type="vertical" />
             <a onClick={() => this.handleAccess(true, record)}>授权</a>
             <Divider type="vertical" />
-            <a onClick={() => this.handleDebug(true, record)}>调试</a>
-            <Divider type="vertical" />
+            {this.renderMoreBtn({current: record})}
           </Fragment>
         ),
       };
@@ -204,10 +236,6 @@ class TableList extends PureComponent {
     return columns;
   };
 
-  getGroupOption() {
-    const { groupList } = this.props;
-    return this.getOption(groupList, 'groupId', 'groupName');
-  }
 
   getOption = (list, keyName, titleName) => {
     if (!list || list.length < 1) {
