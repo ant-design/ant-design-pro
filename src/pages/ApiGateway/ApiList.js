@@ -196,6 +196,8 @@ class TableList extends PureComponent {
             <Divider type="vertical" />
             <a onClick={() => this.handleAccess(true, record)}>授权</a>
             <Divider type="vertical" />
+            <a onClick={() => this.handleDebug(true, record)}>调试</a>
+            <Divider type="vertical" />
           </Fragment>
         ),
       };
@@ -397,6 +399,10 @@ class TableList extends PureComponent {
 
   handleAccess = (flag, record) => {
     console.log('handleTest', flag, record);
+    if(  record.status === API_STATUS.OFFLINE || record.status === API_STATUS.CLOSE ) {
+      message.error("Api还未发布无法授权！");
+      return ;
+    }
     this.setState({ selectedRow: record });
     const { dispatch } = this.props;
     const payload = {};
@@ -413,6 +419,21 @@ class TableList extends PureComponent {
 
     this.handleModalVisible(record, flag);
     // message.success('下一个版本实现');
+  };
+
+  handleDebug = (flag, record) => {
+
+    const { apiId } = record;
+    // router.push(`/apiGateway/apiCreate/${apiId}`);
+    router.push({
+      pathname: `/apiGateway/apiDebug`, // 通过url参数传递
+      state: {
+        // 通过对象传递
+        apiId,
+        record, // 表格某行的对象数据
+      },
+    });
+
   };
 
   onClose = () => {
