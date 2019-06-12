@@ -59,6 +59,7 @@ export function getPayloadForUpdate(oldApiService,values) {
   }
   else if(backAttr.authType==='fixedToken'){
     newApiServiceBackendAttrs.push(doAttr(oldApiServiceBackendAttrs,backAttr,'tokenStr'));
+    newApiServiceBackendAttrs.push(doAttr(oldApiServiceBackendAttrs, backAttr, 'tokenKey'));
   }
   else if(backAttr.authType==='dyncToken'){
     newApiServiceBackendAttrs.push(doAttr(oldApiServiceBackendAttrs,backAttr,'tokenUser'));
