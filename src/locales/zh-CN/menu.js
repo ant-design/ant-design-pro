@@ -9,6 +9,7 @@ export default {
   'menu.dashboard.workplace': '工作台',
   'menu.admin': '维护',
   'menu.admin.logPage': '日志',
+  'menu.admin.refreshCache': '刷新缓存',
   'menu.test': '测试页面',
   'menu.test.test1': '测试页面1',
   'menu.test.test2': '测试页面2',
