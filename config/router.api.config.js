@@ -162,7 +162,7 @@ export default [
           },
         ],
       },
-      // test
+      // test1
       {
         path: '/test',
         icon: 'table',
