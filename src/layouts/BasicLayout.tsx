@@ -37,7 +37,7 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
   return menuList.map(item => {
     const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
-    return Authorized.check(item.authority, localItem, null) as MenuDataItem;
+    return Authorized.check(item.authority, localItem, {}) as MenuDataItem;
   });
 };
 
