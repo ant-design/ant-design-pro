@@ -31,10 +31,10 @@
     "test:component": "umi test ./src/components",
     "tslint": "npm run tslint:fix",
     "tslint:fix": "tslint --fix 'src/**/*.ts*'",
-    "icon": "npm run icon:svgr && npm run icon:tsc && npm run icon:create-index",
+    "icon": "npm run icon:svgr && npm run icon:create-index",
     "icon:svgr": "svgr --icon -d ./src/svg/icon/es ./src/svg/icon",
     "icon:tsc": "tsc -p src/svg",
-    "icon:create-index": "create-index ./src/svg/icon/es ./src/svg/icon/js"
+    "icon:create-index": "create-index ./src/svg/icon/es"
   },
   "husky": {
     "hooks": {
