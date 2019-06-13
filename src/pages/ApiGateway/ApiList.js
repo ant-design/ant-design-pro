@@ -22,7 +22,8 @@ import {
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Ellipsis from '@/components/Ellipsis';
-
+import memoizeOne from 'memoize-one';
+import isEqual from 'lodash/isEqual';
 import styles from './ApiList.less';
 import constants from '@/utils/constUtil';
 import {getGroupName, getItems, getItemValue2} from '@/utils/masterData';
@@ -74,7 +75,7 @@ class TableList extends PureComponent {
     modalVisible: false,
     drawerVisible: false,
     userId: null,
-    columns:[],
+    // columns:[],
   };
 
   componentWillMount() {
@@ -83,10 +84,10 @@ class TableList extends PureComponent {
     // 分组列表
     dispatch({
       type: 'groupModel/allGroupList',
-      callback: (groupList) => {
-        const columns = this.getColumns(groupList);
-        this.setState({columns});
-      },
+      // callback: (groupList) => {
+      //   const columns = this.getColumns(groupList);
+      //   this.setState({columns});
+      // },
     });
   }
 
@@ -148,8 +149,9 @@ class TableList extends PureComponent {
     );
   };
 
-  getColumns = (groupList) => {
+  getColumns = memoizeOne((groupList) => {
 
+    console.log("---render^^^^^^^^^^^^^^^^");
     const auth = getAuth('api_save'); // 获取某个功能权的角色
     const commandAct = check(auth, 'commandAct'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
 
@@ -234,8 +236,7 @@ class TableList extends PureComponent {
     }
 
     return columns;
-  };
-
+  }, isEqual);
 
   getOption = (list, keyName, titleName) => {
     if (!list || list.length < 1) {
@@ -661,8 +662,9 @@ class TableList extends PureComponent {
     const {
       apiGatewayModel: { data },
       loading,
+      groupList,
     } = this.props;
-    const { selectedRows, modalVisible, selectedRow, drawerVisible,columns } = this.state;
+    const {selectedRows, modalVisible, selectedRow, drawerVisible} = this.state;
     // const menu = (
     //   <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
     //     <Menu.Item key={DEL_ACT}>删除/下线</Menu.Item>
@@ -671,6 +673,9 @@ class TableList extends PureComponent {
     // );
 
     const rowKey = 'apiId';
+
+    const columns = groupList && groupList.length > 0 ? this.getColumns(groupList) : [];
+    console.log("---render#$%$$$$$$", columns);
     return (
       <PageHeaderWrapper showBreadcrumb style={{ height: '50px' }}>
         <Card bordered={false}>

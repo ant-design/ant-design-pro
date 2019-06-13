@@ -1,6 +1,5 @@
-import React, { PureComponent } from 'react';
-import { Transfer, Switch } from 'antd';
-import TableList from "./Test2";
+import React, {PureComponent} from 'react';
+import {Switch, Transfer} from 'antd';
 
 const mockData = [];
 for (let i = 0; i < 20; i++) {
