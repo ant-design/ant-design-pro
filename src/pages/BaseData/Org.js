@@ -87,7 +87,6 @@ class Org extends PureComponent {
           title: 'Token Valid Day',
           columnHidden: true,
           add: true,
-          query: true,
           defaultValue:'30',
         },
         {
