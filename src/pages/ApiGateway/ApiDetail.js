@@ -14,7 +14,6 @@ import { getGroupName, getItemValue, getName } from '@/utils/masterData';
 
 const { TabPane } = Tabs;
 const { Description } = DescriptionList;
-const { Column, ColumnGroup } = Table;
 
 const requestHeaderFlag = 'requestHeader';
 const requestBodyFlag = 'requestBody';
@@ -296,6 +295,7 @@ class ApiDetail extends PureComponent {
 
   //  设置apiInfo数据格式
   setBaseInfo = resp => {
+    console.log("setBaseInfo",resp);
     const { data } = resp;
     const { groupList, orgList } = this.props;
     // 定义请求信息转化
@@ -351,10 +351,11 @@ class ApiDetail extends PureComponent {
     // 固定Token认证
     if (apiServiceBackendFormat.authType === 'fixedToken') {
       const nameAttr = apiServiceBackendFormat.apiServiceBackendAttrs.filter(
-        item => item.attrSpecCode === 'tokenStr'
+        item => item.attrSpecCode === 'tokenStr' || item.attrSpecCode === 'tokenKey'
       );
       const nameObj = conversionAttr(nameAttr);
       apiServiceBackendFormat.tokenStr = nameObj.tokenStr;
+      apiServiceBackendFormat.tokenKey = nameObj.tokenKey;
     }
     // 动态Token认证
     if (apiServiceBackendFormat.authType === 'dyncToken') {
@@ -452,8 +453,6 @@ class ApiDetail extends PureComponent {
 
   render() {
     const { apiService } = this.props;
-    console.log('apidetails:render-this.props', this.props);
-    console.log('apidetails:render-this.state', this.state);
     const {
       width,
       data,
@@ -539,6 +538,7 @@ class ApiDetail extends PureComponent {
                   display: back.authType === 'fixedToken' ? 'block' : 'none',
                 }}
               >
+                <Description term={fieldLabels.backAttr.tokenKey}>{back.tokenKey}</Description>
                 <Description term={fieldLabels.backAttr.tokenStr}>{back.tokenStr}</Description>
               </DescriptionList>
               <DescriptionList
@@ -547,7 +547,6 @@ class ApiDetail extends PureComponent {
                 }}
               >
                 <Description term={fieldLabels.backAttr.tokenUser}>{back.tokenUser}</Description>
-                <Description term={fieldLabels.backAttr.tokenKey}>{back.tokenKey}</Description>
                 <Description term={fieldLabels.backAttr.tokenPassword}>
                   {back.tokenPassword}
                 </Description>
