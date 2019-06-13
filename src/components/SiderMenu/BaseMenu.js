@@ -4,9 +4,10 @@ import { Menu, Icon } from 'antd';
 import Link from 'umi/link';
 import { urlToList } from '../_utils/pathTools';
 import { getMenuMatches } from './SiderMenuUtils';
-import { isUrl } from '@/utils/utils';
+import { isUrl, isComponent } from '@/utils/utils';
 import styles from './index.less';
 import IconFont from '@/components/IconFont';
+import * as SvgIcons from '@/svg/icon/es';
 
 const { SubMenu } = Menu;
 
@@ -15,6 +16,7 @@ const { SubMenu } = Menu;
 //   icon: 'icon-geren' #For Iconfont ,
 //   icon: 'http://demo.com/icon.png',
 //   icon: <Icon type="setting" />,
+//   icon: '@/IconThumbnail' #For Icon in '@/svg/icon/es',
 const getIcon = icon => {
   if (typeof icon === 'string') {
     if (isUrl(icon)) {
@@ -22,6 +24,17 @@ const getIcon = icon => {
     }
     if (icon.startsWith('icon-')) {
       return <IconFont type={icon} />;
+    }
+    /**
+     * 使用本地的@/svg/icon/es/中的icon，格式`@/图标名`
+     */
+    if (isComponent(icon)) {
+      const iconComponent = icon.substring(icon.indexOf('@/') + 2);
+      // SvgIcon，使用`@/svg/icon/es下的图标`
+      const DynamicIcon = SvgIcons[`${iconComponent}`];
+      if (DynamicIcon) {
+        return <Icon component={DynamicIcon} />;
+      }
     }
     return <Icon type={icon} />;
   }

@@ -11,6 +11,7 @@ import settings from './zh-TW/settings';
 import pwa from './zh-TW/pwa';
 import component from './zh-TW/component';
 import editor from './zh-TW/editor';
+import svgicon from './zh-TW/svgicon';
 
 export default {
   'navBar.lang': '語言',
@@ -34,4 +35,5 @@ export default {
   ...pwa,
   ...component,
   ...editor,
+  ...svgicon,
 };

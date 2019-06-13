@@ -11,6 +11,7 @@ import settings from './pt-BR/settings';
 import pwa from './pt-BR/pwa';
 import component from './pt-BR/component';
 import editor from './pt-BR/editor';
+import svgicon from './pt-BR/svgicon';
 
 export default {
   'navBar.lang': 'Idiomas',
@@ -34,4 +35,5 @@ export default {
   ...pwa,
   ...component,
   ...editor,
+  ...svgicon,
 };

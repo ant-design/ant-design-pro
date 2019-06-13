@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "keyofStringsOnly": true,
+    "baseUrl": "./icon/es",
+    "lib": ["es2015", "dom"],
+    "jsx": "react",
+    "outDir": "./icon/js",
+    "typeRoots": ["./src/types", "./node_modules/@types", "./node_modules/antd/es/**"]
+  }
+}

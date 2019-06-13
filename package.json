@@ -6,7 +6,7 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
+    "docker-hub:build": "docker build -f Dockerfile.hub -t ant-design-pro ./",
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
     "docker-prod:dev": "docker-compose -f ./docker/docker-compose.yml up",
     "docker:build": "docker-compose -f ./docker/docker-compose.dev.yml build",
@@ -30,7 +30,11 @@
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
     "tslint": "npm run tslint:fix",
-    "tslint:fix": "tslint --fix 'src/**/*.ts*'"
+    "tslint:fix": "tslint --fix 'src/**/*.ts*'",
+    "icon": "npm run icon:svgr && npm run icon:tsc && npm run icon:create-index",
+    "icon:svgr": "svgr --icon -d ./src/svg/icon/es ./src/svg/icon",
+    "icon:tsc": "tsc -p src/svg",
+    "icon:create-index": "create-index ./src/svg/icon/es ./src/svg/icon/js"
   },
   "husky": {
     "hooks": {
@@ -85,6 +89,7 @@
     "umi-request": "^1.0.5"
   },
   "devDependencies": {
+    "@svgr/cli": "^4.2.0",
     "@types/history": "^4.7.2",
     "@types/react": "^16.8.1",
     "@types/react-dom": "^16.0.11",
@@ -93,6 +98,7 @@
     "babel-eslint": "^10.0.1",
     "chalk": "^2.4.2",
     "check-prettier": "^1.0.1",
+    "create-index": "^2.4.0",
     "cross-env": "^5.2.0",
     "cross-port-killer": "^1.0.1",
     "enzyme": "^3.9.0",

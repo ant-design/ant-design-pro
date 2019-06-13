@@ -1,0 +1,38 @@
+@import '~antd/lib/style/themes/default.less';
+
+.ul {
+  margin: 0;
+  padding: 0;
+
+  & .li {
+    position: relative;
+    float: left;
+    width: 16.66%;
+    height: 100px;
+    margin: 3px 0;
+    padding: 10px 0 0;
+    overflow: hidden;
+    color: @text-color;
+    text-align: center;
+    list-style: none;
+    background-color: @white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  :global(.anticon) {
+    margin: 12px 0 8px;
+    font-size: 24px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: @primary-color;
+    }
+  }
+
+  :global(.anticon-class) {
+    display: block;
+  }
+}

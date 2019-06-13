@@ -150,6 +150,13 @@ export function isUrl(path) {
   return reg.test(path);
 }
 
+/* eslint no-useless-escape:0 */
+const componentReg = /^@(?:\/[\+~%\/.\w-_]*)?$/;
+
+export function isComponent(path) {
+  return componentReg.test(path);
+}
+
 export function formatWan(val) {
   const v = val * 1;
   if (!v) return '';

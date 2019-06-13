@@ -289,6 +289,13 @@ export default [
           },
         ],
       },
+      // SvgIcon
+      {
+        name: 'svgicon',
+        icon: '@/IconMoon', // 图标相对@/svg/icon/es的路径
+        path: '/svgicon',
+        component: './SvgIcon/SvgIcon',
+      },
       {
         component: '404',
       },
