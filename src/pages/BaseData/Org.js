@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import { Divider, message } from 'antd';
+import React, {PureComponent} from 'react';
+import {Divider, message} from 'antd';
 import BindDataQueryTable from '../BindDataQueryTable';
 import QueryCommand from '@/components/QueryTable/QueryCommand';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import { getItems } from '@/utils/masterData';
+import {getItems} from '@/utils/masterData';
 import UserTransfer from './UserTransfer';
 
 import Authorized from '@/utils/Authorized';
-import { getAuth, getUserName, getUserId } from '@/utils/authority';
+import {getAuth, getUserId, getUserName} from '@/utils/authority';
 
 const { check } = Authorized;
 
@@ -83,7 +83,7 @@ class Org extends PureComponent {
           enumData: authTypes,
         },
         {
-          name: 'validDay',
+          name: 'tokenExpireTime',
           title: 'Token Valid Day',
           columnHidden: true,
           add: true,
