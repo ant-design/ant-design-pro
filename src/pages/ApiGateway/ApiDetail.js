@@ -5,8 +5,7 @@ import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './style.less';
-import { conversionAttr, getApiFlowData } from './ApiCreate/util';
-import { getPlaceHolder, getQueryArr } from '../util';
+import { conversionAttr } from './ApiCreate/util';
 import { getUserId } from '@/utils/authority';
 
 import DescriptionList from '@/components/DescriptionList';
@@ -156,22 +155,18 @@ const columnsCode = [
 
 const statusMap = ['default', 'processing', 'success', 'default', 'error'];
 
-@connect(({ apiCreateModel, groupModel, orgModel, loading }) => ({
+@connect(({ apiCreateModel, groupModel, orgModel }) => ({
   apiService: apiCreateModel.apiService,
   groupList: groupModel.groupList,
-  orgList: orgModel.orgList,
-  submitting: loading.effects['apiCreateModel/submitStepForm'],
+  orgList: orgModel.orgList
 }))
 @Form.create()
 class ApiDetail extends PureComponent {
   state = {
     width: '100%',
-    apiFlowData: {},
     data: {
       back: {},
     },
-    apiServiceDoc: {},
-    urlSpec: [],
     requestHeaderSpec: [],
     requestBodySpec: [],
     responseHeaderSpec: [],
@@ -180,6 +175,11 @@ class ApiDetail extends PureComponent {
     busiCodeSpec: [],
     apiAttr: [],
   };
+
+  componentWillMount() {
+
+
+  }
 
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
@@ -209,6 +209,7 @@ class ApiDetail extends PureComponent {
     const { dispatch } = this.props;
     if (apiId !== -1) {
       const payload = {};
+      payload.range = 1;
       payload.data = {};
       payload.data.info = {};
       payload.data.info.apiId = apiId;
@@ -249,55 +250,12 @@ class ApiDetail extends PureComponent {
     return [];
   };
 
-  /**
-   * 处理占位符和get参数的说明文档
-   * @param urlSpec
-   * @param manualFlag
-   * @returns {Array}
-   */
-  handleUrlGenerate = (urlSpec, manualFlag) => {
-    const { apiService } = this.props;
-    const { requestUrl } = apiService;
-    let url = requestUrl;
-    if (manualFlag) {
-      const { form } = this.props;
-      const fieldsValue = form.getFieldsValue();
-      const { urlSample } = fieldsValue;
-      url = urlSample;
-    }
-    let retAttr = [];
-    if (url && url.trim() !== '' && url.indexOf('{') > -1) {
-      const flatJsonArray = getPlaceHolder(url);
-      retAttr = flatJsonArray.map(spec => {
-        const findObj = urlSpec.find(
-          item => item.name === spec.name && item.parent === spec.parent
-        );
-        return findObj ? { ...spec, remark: findObj.remark } : spec;
-      });
-    }
-    if (url && url.trim() !== '' && url.indexOf('?') > -1) {
-      const flatJsonArray = getQueryArr(url);
-      const mergeArr = flatJsonArray.map(spec => {
-        const findObj = retAttr.find(
-          item => item.name === spec.name && item.parent === spec.parent
-        );
-        return findObj ? { ...spec, remark: findObj.remark } : spec;
-      });
-      retAttr = retAttr.concat(mergeArr);
-    }
-
-    retAttr = retAttr.map((item, index) => ({ ...item, key: `url-${index}` }));
-    if (manualFlag) {
-      this.setState({ urlSpec: retAttr });
-    }
-    return retAttr;
-  };
-
   //  设置apiInfo数据格式
   setBaseInfo = resp => {
-    console.log("setBaseInfo",resp);
+
     const { data } = resp;
     const { groupList, orgList } = this.props;
+    console.log("setBaseInfo",resp);
     // 定义请求信息转化
     data.groupIdTitle = data.groupId ? getGroupName(groupList, data.groupId) : null;
     data.serviceTypeTitle = data.serviceType
@@ -388,16 +346,6 @@ class ApiDetail extends PureComponent {
     const stateCodeSpec = this.convertDocObj(apiServiceDoc, stateCodeFlag);
     const busiCodeSpec = this.convertDocObj(apiServiceDoc, busiCodeFlag);
 
-    // －－－－－初始化url spec数据－－－－－
-    const urlSpec = apiServiceDoc.urlSpec
-      ? (JSON.parse(apiServiceDoc.urlSpec) || []).map((item, index) => ({
-          ...item,
-          key: `url-${index}`,
-        }))
-      : null;
-    const newUrlSpec =
-      urlSpec && urlSpec.length === 0 ? this.handleUrlGenerate(urlSpec, false) : urlSpec;
-
     // 定义接口文档协议说明
     const protocol = `${data.serviceTypeTitle}   ${data.reqMethod.toUpperCase()}`;
     const urlSample = apiServiceDoc.urlSample ? apiServiceDoc.urlSample : '';
@@ -411,7 +359,6 @@ class ApiDetail extends PureComponent {
     this.setState({
       data,
       apiAttr,
-      urlSpec: newUrlSpec,
       requestHeaderSpec,
       requestBodySpec,
       responseHeaderSpec,
@@ -437,11 +384,11 @@ class ApiDetail extends PureComponent {
   changeTab = key => {
     // console.log(key);
     if (key === 'flow') {
-      const { form } = this.props;
-      const values = form.getFieldsValue();
-      const apiFlowData = getApiFlowData(values);
-      this.setState({ apiFlowData });
-      console.log('====:', apiFlowData);
+      // const { form } = this.props;
+      // const values = form.getFieldsValue();
+      // const apiFlowData = getApiFlowData(values);
+      // this.setState({ apiFlowData });
+      // console.log('====:', apiFlowData);
     }
   };
 
