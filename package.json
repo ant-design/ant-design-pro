@@ -131,7 +131,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^4.0.0",
-    "webpack-theme-color-replacer": "^1.2.12"
+    "webpack-theme-color-replacer": "^1.2.13"
   },
   "optionalDependencies": {
     "puppeteer": "^1.17.0"
