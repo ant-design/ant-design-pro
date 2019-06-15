@@ -107,7 +107,7 @@ const getAntdSerials = (color: string) => {
   const lightNum = 9;
   const devide10 = 10;
   // 淡化（即less的tint）
-  const lightens = new Array(lightNum).fill().map((t, i) => {
+  const lightens = new Array(lightNum).fill({}).map((t: any, i: number) => {
     return ThemeColorReplacer.varyColor.lighten(color, i / devide10);
   });
   const colorPalettes = generate(color);
