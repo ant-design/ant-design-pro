@@ -58,7 +58,7 @@ export default (config: any) => {
               return selector;
           }
         },
-        isJsUgly: true,
+        // isJsUgly: true,
       },
     ]);
     // config.plugin('ant-design-theme').use(AntDesignThemePlugin, [
