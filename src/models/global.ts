@@ -7,7 +7,6 @@ import { queryNotices } from '@/services/user';
 export interface NoticeItem extends NoticeIconData {
   id: string;
   type: string;
-  [key: string]: any;
 }
 
 export interface GlobalModelState {
@@ -84,10 +83,12 @@ const GlobalModel: GlobalModelType = {
           return notice;
         }),
       );
+
       yield put({
         type: 'saveNotices',
         payload: notices,
       });
+
       yield put({
         type: 'user/changeNotifyCount',
         payload: {

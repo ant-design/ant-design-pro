@@ -6,25 +6,21 @@ import { connect } from 'dva';
 import { isAntDesignPro } from '@/utils/utils';
 import styles from './index.less';
 
-const firstUpperCase = (pathString: string): string => {
-  return pathString
+const firstUpperCase = (pathString: string): string =>
+  pathString
     .replace('.', '')
     .split(/\/|-/)
     .map((s): string => s.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase()))
     .filter((s): boolean => !!s)
     .join('');
-};
 
 // when  click block copy, send block url to  ga
 const onBlockCopy = (label: string) => {
   if (!isAntDesignPro()) {
     return;
   }
-  const ga =
-    window &&
-    (window as {
-      ga: Function;
-    }).ga;
+
+  const ga = window && (window as any).ga;
   if (ga) {
     ga('send', 'event', {
       eventCategory: 'block',

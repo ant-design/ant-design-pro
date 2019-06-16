@@ -1,5 +1,4 @@
 import { ConnectProps, ConnectState, Route, UserModelState } from '@/models/connect';
-
 import Authorized from '@/utils/Authorized';
 import React from 'react';
 import Redirect from 'umi/redirect';

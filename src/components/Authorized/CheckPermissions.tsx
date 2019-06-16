@@ -7,7 +7,7 @@ export type IAuthorityType =
   | undefined
   | string
   | string[]
-  | Promise<any>
+  | Promise<boolean>
   | ((currentAuthority: string | string[]) => IAuthorityType);
 
 /**

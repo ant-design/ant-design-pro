@@ -9,7 +9,6 @@ export interface CurrentUser {
   title?: string;
   group?: string;
   signature?: string;
-  geographic?: any;
   tags?: {
     key: string;
     label: string;

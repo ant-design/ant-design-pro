@@ -1,6 +1,5 @@
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { DefaultFooter, MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
-
 import DocumentTitle from 'react-document-title';
 import Link from 'umi/link';
 import React from 'react';

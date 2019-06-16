@@ -32,19 +32,18 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
     [path: string]: MenuDataItem;
   };
 };
+
 /**
  * use Authorized check all menu item
  */
-
-const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
-  return menuList.map(item => {
+const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
+  menuList.map(item => {
     const localItem = {
       ...item,
       children: item.children ? menuDataRender(item.children) : [],
     };
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
-};
 
 const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) => {
   if (!isAntDesignPro()) {
@@ -102,21 +101,19 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     <ProLayoutComponents
       logo={logo}
       onCollapse={handleMenuCollapse}
-      menuItemRender={(menuItemProps, defaultDom) => {
-        return <Link to={menuItemProps.path}>{defaultDom}</Link>;
-      }}
-      breadcrumbRender={(routers = []) => {
-        return [
-          {
-            path: '/',
-            breadcrumbName: formatMessage({
-              id: 'menu.home',
-              defaultMessage: 'Home',
-            }),
-          },
-          ...routers,
-        ];
-      }}
+      menuItemRender={(menuItemProps, defaultDom) => (
+        <Link to={menuItemProps.path}>{defaultDom}</Link>
+      )}
+      breadcrumbRender={(routers = []) => [
+        {
+          path: '/',
+          breadcrumbName: formatMessage({
+            id: 'menu.home',
+            defaultMessage: 'Home',
+          }),
+        },
+        ...routers,
+      ]}
       footerRender={footerRender}
       menuDataRender={menuDataRender}
       formatMessage={formatMessage}

@@ -7,11 +7,11 @@ import { isComponentClass } from './Secured';
 interface PromiseRenderProps<T, K> {
   ok: T;
   error: K;
-  promise: Promise<any>;
+  promise: Promise<boolean>;
 }
 
 interface PromiseRenderState {
-  component: React.ComponentClass<any, any> | React.FunctionComponent<any>;
+  component: React.ComponentClass | React.FunctionComponent;
 }
 
 export default class PromiseRender<T, K> extends React.Component<
@@ -58,10 +58,10 @@ export default class PromiseRender<T, K> extends React.Component<
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
   checkIsInstantiation = (
-    target: React.ReactNode | React.ComponentClass<any, any>,
-  ): React.FunctionComponent<any> => {
+    target: React.ReactNode | React.ComponentClass,
+  ): React.FunctionComponent => {
     if (isComponentClass(target)) {
-      const Target = target as React.ComponentClass<any, any>;
+      const Target = target as React.ComponentClass;
       return (props: any) => <Target {...props} />;
     }
     if (React.isValidElement(target)) {
@@ -73,6 +73,7 @@ export default class PromiseRender<T, K> extends React.Component<
   render() {
     const { component: Component } = this.state;
     const { ok, error, promise, ...rest } = this.props;
+
     return Component ? (
       <Component {...rest} />
     ) : (

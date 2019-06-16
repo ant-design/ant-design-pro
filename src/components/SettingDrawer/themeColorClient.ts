@@ -4,21 +4,23 @@ import client from 'webpack-theme-color-replacer/client';
 import generate from '@ant-design/colors/lib/generate';
 
 export default {
+  lastColor: '#1890ff',
   primaryColor: '#1890ff',
-  getAntdSerials(color) {
+  getAntdSerials(color: string) {
     // 淡化（即less的tint）
-    const lightens = new Array(9).fill().map((t, i) => {
-      return client.varyColor.lighten(color, i / 10);
-    });
+    const lightens = new Array(9).fill(0).map((_, i) => client.varyColor.lighten(color, i / 10));
     const colorPalettes = generate(color);
     return lightens.concat(colorPalettes);
   },
-  changeColor(newColor) {
+  changeColor(newColor: string) {
     const lastColor = this.lastColor || this.primaryColor;
     const options = {
-      cssUrl: '/css/theme-colors.css', // hash模式下用相对路径
-      oldColors: this.getAntdSerials(lastColor), // current colors array. The same as `matchColors`
-      newColors: this.getAntdSerials(newColor || this.primaryColor), // new colors array, one-to-one corresponde with `oldColors`
+      // hash模式下用相对路径
+      cssUrl: '/css/theme-colors.css',
+      // current colors array. The same as `matchColors`
+      oldColors: this.getAntdSerials(lastColor),
+      // new colors array, one-to-one corresponde with `oldColors`
+      newColors: this.getAntdSerials(newColor || this.primaryColor),
     };
     const promise = client.changer.changeColor(options, Promise);
     this.lastColor = lastColor;
