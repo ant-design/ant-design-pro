@@ -59,6 +59,7 @@ class TableForm extends PureComponent {
       serviceSeq: '',
       backendType: '',
       url: '',
+      reqPath: '',
       editable: true,
       isNew: true,
     });
@@ -146,7 +147,7 @@ class TableForm extends PureComponent {
         return;
       }
       const target = this.getRowByKey(key) || {};
-      if (!target.serviceSeq || !target.backendType || !target.url) {
+      if (!target.serviceSeq || !target.backendType || (!target.url&&!target.reqPath)) {
         message.error('请填写完整信息。');
         e.target.focus();
         this.setState({
@@ -212,7 +213,7 @@ class TableForm extends PureComponent {
         title: '出／入参',
         dataIndex: 'backendType',
         key: 'backendType',
-        width: '20%',
+        width: '10%',
         render: (text, record) => {
           // console.log("----------",text);
           if (record.editable&&(text===null||text.toLowerCase()!=='endpoint')) {
@@ -238,12 +239,12 @@ class TableForm extends PureComponent {
         },
       },
       {
-        title: '执行顺序',
+        title: '顺序',
         dataIndex: 'serviceSeq',
         key: 'serviceSeq',
         defaultSortOrder: 'ascend',
         sorter: (a, b) => a.serviceSeq - b.serviceSeq,
-        width: '20%',
+        width: '10%',
         render: (text, record) => {
           if (record.editable) {
             return (
@@ -262,7 +263,7 @@ class TableForm extends PureComponent {
         title: 'url',
         dataIndex: 'url',
         key: 'url',
-        width: '40%',
+        width: '30%',
         render: (text, record) => {
           const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
           if (record.editable&&lowerCaseBackendType!=='endpoint') {
@@ -279,8 +280,29 @@ class TableForm extends PureComponent {
         },
       },
       {
-        title: '操作',
+        title: 'Request Path',
+        dataIndex: 'reqPath',
+        key: 'reqPath',
+        width: '30%',
+        render: (text, record) => {
+          const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
+          if (record.editable&&lowerCaseBackendType!=='endpoint') {
+            return (
+              <Input
+                value={text}
+                onChange={e => this.handleFieldChange(e, 'reqPath', record)}
+                onKeyPress={e => this.handleKeyPress(e, record.key)}
+                placeholder="request path or java call"
+              />
+            );
+          }
+          return text;
+        },
+      },
+      {
+        title: 'action',
         key: 'action',
+        width: '15%',
         render: (text, record) => {
           const { loading } = this.state;
           if (!!record.editable && loading) {
