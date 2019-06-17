@@ -112,7 +112,7 @@ class ApiDocTableForm extends PureComponent {
     this.setState({
       loading: true,
     });
-    const {showParent, showType} = this.props;
+    const {hideParent, hideType} = this.props;
     setTimeout(() => {
       if (this.clickedCancel) {
         this.clickedCancel = false;
@@ -120,7 +120,7 @@ class ApiDocTableForm extends PureComponent {
       }
       const target = this.getRowByKey(key) || {};
 
-      if (!target.name || !target.remark || (showParent && !target.type) || (showType && target.parent)) {
+      if (!target.name || !target.remark || (!hideParent && !target.type) || (!hideType && !target.parent)) {
         message.error('请填写完整信息。');
         e.target.focus();
         this.setState({
@@ -129,7 +129,7 @@ class ApiDocTableForm extends PureComponent {
         return;
       }
 
-      if (showType && target.type !== 'integer'
+      if (!hideType && target.type !== 'integer'
         && target.type !=='string'
         && target.type !=='nan'
         && target.type !=='flow'
@@ -216,7 +216,7 @@ class ApiDocTableForm extends PureComponent {
               value={text}
               onChange={e => this.handleFieldChange(e, 'name', record)}
               onKeyPress={e => this.handleKeyPress(e, record.key)}
-              placeholder="Field Name"
+              placeholder={nameTitle || 'Field Name'}
             />
           );
         }
@@ -319,12 +319,12 @@ class ApiDocTableForm extends PureComponent {
       };
 
     const { loading, data } = this.state;
-    const {showParent, showType} = this.props;
+    const {hideParent, hideType} = this.props;
     const columns = [];
-    if (showParent) {
+    if (!hideParent) {
       columns.push(parentCol);
     }
-    if (showType) {
+    if (!hideType) {
       columns.push(typeCol);
     }
     columns.push(nameCol);

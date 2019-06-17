@@ -384,7 +384,7 @@ class ApiUpdate extends PureComponent {
               <Form.Item label="Url PlaceHolders Specification">
                 {getFieldDecorator('urlSpec', {
                   initialValue: urlSpec,
-                })(<ApiDocTableForm showParent={false}/>)}
+                })(<ApiDocTableForm hideParent/>)}
               </Form.Item>
             </Card>
           </TabPane>
@@ -392,7 +392,7 @@ class ApiUpdate extends PureComponent {
             <Card title="" className={styles.card} bordered={false}>
               {getFieldDecorator('requestHeaderSpec', {
                 initialValue: requestHeaderSpec,
-              })(<ApiDocTableForm showParent={false} showType={false} nameTitle='Key' remarkTitle='Remark'/>)}
+              })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='Remark'/>)}
             </Card>
           </TabPane>
           <TabPane tab="Request Body" key="3">
@@ -427,7 +427,7 @@ class ApiUpdate extends PureComponent {
             <Card title="" className={styles.card} bordered={false}>
               {getFieldDecorator('responseHeaderSpec', {
                 initialValue: responseHeaderSpec,
-              })(<ApiDocTableForm showParent={false} showType={false} nameTitle='Key' remarkTitle='Remark'/>)}
+              })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='Remark'/>)}
             </Card>
           </TabPane>
           <TabPane tab="Response Body" key="5">
@@ -468,12 +468,12 @@ class ApiUpdate extends PureComponent {
             <Card title="State Code" className={styles.card} bordered={false}>
               {getFieldDecorator('stateCodeSpec', {
                 initialValue: stateCodeSpec,
-              })(<ApiDocTableForm showParent={false} showType={false} nameTitle='Code'/>)}
+              })(<ApiDocTableForm hideParent hideType nameTitle='Code'/>)}
             </Card>
             <Card title="Business Code" className={styles.card} bordered={false}>
               {getFieldDecorator('busiCodeSpec', {
                 initialValue: busiCodeSpec,
-              })(<ApiDocTableForm showParent={false} showType={false} nameTitle='Code'/>)}
+              })(<ApiDocTableForm hideParent hideType nameTitle='Code'/>)}
             </Card>
           </TabPane>
         </Tabs>
