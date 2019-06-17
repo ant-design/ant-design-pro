@@ -312,6 +312,8 @@ class ApiUpdate extends PureComponent {
       submitting,
       apiService,
     } = this.props;
+    const extra=(<span style={{marginLeft: '60px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please click Submit For save Api Doc</span>);
+    const operations=(<Button type="primary" block onClick={this.validate} loading={submitting}>Submit</Button>);
     const {
       width,
       apiServiceDoc,
@@ -331,7 +333,7 @@ class ApiUpdate extends PureComponent {
         style={{ height: '50px' }}
         title="Compile Api Specification"
       >
-        <Tabs defaultActiveKey="2">
+        <Tabs defaultActiveKey="1" tabBarExtraContent={operations}>
           <TabPane tab="Url" key="1">
             <Card title="" className={styles.card} bordered={false}>
               <Row gutter={2}>
@@ -479,11 +481,9 @@ class ApiUpdate extends PureComponent {
         </Tabs>
 
         <BackTop />
-        <FooterToolbar style={{ width }}>
+        <FooterToolbar style={{ width }} extra={extra}>
           {this.getErrorInfo()}
-          <Button type="primary" onClick={this.validate} loading={submitting}>
-            提交
-          </Button>
+          {operations}
         </FooterToolbar>
       </PageHeaderWrapper>
     );

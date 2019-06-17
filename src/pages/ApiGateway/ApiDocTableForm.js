@@ -120,8 +120,8 @@ class ApiDocTableForm extends PureComponent {
       }
       const target = this.getRowByKey(key) || {};
 
-      if (!target.name || !target.remark || (!hideParent && !target.type) || (!hideType && !target.parent)) {
-        message.error('请填写完整信息。');
+      if (!target.name || !target.remark || (!hideParent && !target.parent) || (!hideType && !target.type)) {
+        message.error('Please fill in the full description.');
         e.target.focus();
         this.setState({
           loading: false,
@@ -135,7 +135,7 @@ class ApiDocTableForm extends PureComponent {
         && target.type !=='flow'
         && target.type !=='array'
         && target.type !=='date'){
-        message.error(`不能输入${target.type}只能输入各种类型，如string,nan,integer,flow,array,date。`);
+        message.error(`You cannot fill in ${target. type} ,only fill in string,nan,integer,flow,array,date.`);
         e.target.focus();
         this.setState({
           loading: false,
@@ -281,19 +281,19 @@ class ApiDocTableForm extends PureComponent {
             if (record.isNew) {
               return (
                 <span>
-                  <a onClick={e => this.saveRow(e, record.key)}>添加</a>
+                  <a onClick={e => this.saveRow(e, record.key)}>Add</a>
                   <Divider type="vertical" />
-                  <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
-                    <a>删除</a>
+                  <Popconfirm title="Do you delete this row?？" onConfirm={() => this.remove(record.key)}>
+                    <a>Del</a>
                   </Popconfirm>
                 </span>
               );
             }
             return (
               <span>
-                <a onClick={e => this.saveRow(e, record.key)}>保存</a>
+                <a onClick={e => this.saveRow(e, record.key)}>Save</a>
                 <Divider type="vertical" />
-                <a onClick={e => this.cancel(e, record.key)}>取消</a>
+                <a onClick={e => this.cancel(e, record.key)}>Cancel</a>
               </span>
             );
           }
@@ -302,16 +302,16 @@ class ApiDocTableForm extends PureComponent {
           if (lowerCaseBackendType==='endpoint') {
             return (
               <span>
-                <a onClick={e => this.toggleEditable(e, record.key)}>编辑</a>
+                <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>
               </span>
             );
           }
           return (
             <span>
-              <a onClick={e => this.toggleEditable(e, record.key)}>编辑</a>
+              <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>
               <Divider type="vertical" />
-              <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
-                <a>删除</a>
+              <Popconfirm title="Do you delete this row?" onConfirm={() => this.remove(record.key)}>
+                <a>Del</a>
               </Popconfirm>
             </span>
           );
