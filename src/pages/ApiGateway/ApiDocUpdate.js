@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import { Card, Button, Form, Input, Tabs, BackTop, message, Row, Col, Icon, Popover } from 'antd';
+import React, {PureComponent} from 'react';
+import {BackTop, Button, Card, Col, Form, Icon, Input, message, Popover, Row, Tabs} from 'antd';
 import router from 'umi/router';
-import { connect } from 'dva';
+import {connect} from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import ApiDocTableForm from './ApiDocTableForm';
 import styles from './style.less';
-import { getPayloadForApiDoc } from './ApiCreate/util';
-import { getPlaceHolder, getQueryArr, isJson, toApiSpecJson, toType } from '../util';
+import {getPayloadForApiDoc} from './ApiCreate/util';
+import {getPlaceHolder, getQueryArr, isJson, toApiSpecJson, toType} from '../util';
 
 // import RoleTransfer from "../UserManager/Privilege";
 // import apiFlowData from '../Editor/GGEditor/mock/apiFlow.json';
@@ -384,7 +384,7 @@ class ApiUpdate extends PureComponent {
               <Form.Item label="Url PlaceHolders Specification">
                 {getFieldDecorator('urlSpec', {
                   initialValue: urlSpec,
-                })(<ApiDocTableForm />)}
+                })(<ApiDocTableForm showParent={false}/>)}
               </Form.Item>
             </Card>
           </TabPane>
@@ -392,7 +392,7 @@ class ApiUpdate extends PureComponent {
             <Card title="" className={styles.card} bordered={false}>
               {getFieldDecorator('requestHeaderSpec', {
                 initialValue: requestHeaderSpec,
-              })(<ApiDocTableForm />)}
+              })(<ApiDocTableForm showParent={false} showType={false} nameTitle='Key' remarkTitle='Remark'/>)}
             </Card>
           </TabPane>
           <TabPane tab="Request Body" key="3">
@@ -427,7 +427,7 @@ class ApiUpdate extends PureComponent {
             <Card title="" className={styles.card} bordered={false}>
               {getFieldDecorator('responseHeaderSpec', {
                 initialValue: responseHeaderSpec,
-              })(<ApiDocTableForm />)}
+              })(<ApiDocTableForm showParent={false} showType={false} nameTitle='Key' remarkTitle='Remark'/>)}
             </Card>
           </TabPane>
           <TabPane tab="Response Body" key="5">
@@ -468,12 +468,12 @@ class ApiUpdate extends PureComponent {
             <Card title="State Code" className={styles.card} bordered={false}>
               {getFieldDecorator('stateCodeSpec', {
                 initialValue: stateCodeSpec,
-              })(<ApiDocTableForm />)}
+              })(<ApiDocTableForm showParent={false} showType={false} nameTitle='Code'/>)}
             </Card>
             <Card title="Business Code" className={styles.card} bordered={false}>
               {getFieldDecorator('busiCodeSpec', {
                 initialValue: busiCodeSpec,
-              })(<ApiDocTableForm />)}
+              })(<ApiDocTableForm showParent={false} showType={false} nameTitle='Code'/>)}
             </Card>
           </TabPane>
         </Tabs>

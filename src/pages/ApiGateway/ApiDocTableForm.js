@@ -112,13 +112,15 @@ class ApiDocTableForm extends PureComponent {
     this.setState({
       loading: true,
     });
+    const {showParent, showType} = this.props;
     setTimeout(() => {
       if (this.clickedCancel) {
         this.clickedCancel = false;
         return;
       }
       const target = this.getRowByKey(key) || {};
-      if (!target.name || !target.type || !target.remark || !target.parent) {
+
+      if (!target.name || !target.remark || (showParent && !target.type) || (showType && target.parent)) {
         message.error('请填写完整信息。');
         e.target.focus();
         this.setState({
@@ -127,7 +129,7 @@ class ApiDocTableForm extends PureComponent {
         return;
       }
 
-      if(target.type !=='integer'
+      if (showType && target.type !== 'integer'
         && target.type !=='string'
         && target.type !=='nan'
         && target.type !=='flow'
@@ -175,18 +177,10 @@ class ApiDocTableForm extends PureComponent {
   }
 
   render() {
-/*
-    <Input
-      value={text}
-      autoFocus
-      onChange={e => this.handleFieldChange(e, 'backendType', record)}
-      onKeyPress={e => this.handleKeyPress(e, record.key)}
-      placeholder="backendType"
-    />
-    */
-    const columns = [
-      {
-        title: 'Parent Field',
+
+    const {nameTitle, remarkTitle} = this.props;
+    const parentCol = {
+      title: 'Parent Field',
         dataIndex: 'parent',
         key: 'parent',
         width: '20%',
@@ -202,75 +196,79 @@ class ApiDocTableForm extends PureComponent {
             );
           }
           /* eslint-disable no-nested-ternary */
-          if (text&&text!=="-"&&text!=="root"){
+          if (text && text !== "-" && text !== "root") {
             const color = 'volcano';
             return <Tag color={color} key={text}>&nbsp;&nbsp;{text}&nbsp;&nbsp;</Tag>;
           }
           return text;
         },
+    };
+
+    const nameCol = {
+      title: nameTitle || 'Field Name',
+      dataIndex: 'name',
+      key: 'name',
+      width: '20%',
+      render: (text, record) => {
+        if (record.editable) {
+          return (
+            <Input
+              value={text}
+              onChange={e => this.handleFieldChange(e, 'name', record)}
+              onKeyPress={e => this.handleKeyPress(e, record.key)}
+              placeholder="Field Name"
+            />
+          );
+        }
+        return text;
       },
-      {
-        title: 'Field Name',
-        dataIndex: 'name',
-        key: 'name',
-        width: '20%',
-        render: (text,record) => {
-          if (record.editable) {
-            return (
-              <Input
-                value={text}
-                onChange={e => this.handleFieldChange(e, 'name', record)}
-                onKeyPress={e => this.handleKeyPress(e, record.key)}
-                placeholder="Field Name"
-              />
-            );
-          }
+    };
+
+    const typeCol = {
+      title: 'Field Type',
+      dataIndex: 'type',
+      key: 'type',
+      width: '10%',
+      render: (text, record) => {
+        /* eslint-disable no-nested-ternary */
+        if (record.editable) {
+          return (
+            <Input
+              value={text}
+              onChange={e => this.handleFieldChange(e, 'type', record)}
+              onKeyPress={e => this.handleKeyPress(e, record.key)}
+              placeholder="Field Type"
+            />
+          );
+        }
+        if (text === "string") {
           return text;
-        },
+        }
+        if (text) {
+          const color = text && text.length !== 4 ? text && text.length === 6 ? 'green' : 'volcano' : 'geekblue';
+          return <Tag color={color} key={text}>&nbsp;&nbsp;{text}&nbsp;&nbsp;</Tag>;
+        }
+        return <span>&nbsp;</span>
       },
+    }
+    const remarkCol =
       {
-        title: 'Field Type',
-        dataIndex: 'type',
-        key: 'type',
-        width: '10%',
-        render: (text,record) => {
-          /* eslint-disable no-nested-ternary */
-          if (record.editable) {
-            return (
-              <Input
-                value={text}
-                onChange={e => this.handleFieldChange(e, 'type', record)}
-                onKeyPress={e => this.handleKeyPress(e, record.key)}
-                placeholder="Field Type"
-              />
-            );
-          }
-          if(text==="string"){
-            return text;
-          }
-          if (text){
-            const color = text&&text.length !== 4 ? text&&text.length === 6 ? 'green' : 'volcano' : 'geekblue';
-            return <Tag color={color} key={text}>&nbsp;&nbsp;{text}&nbsp;&nbsp;</Tag>;
-          }
-          return <span>&nbsp;</span>
-        },
-      },
-      {
-        title: 'remark',
+        title: remarkTitle || 'remark',
         dataIndex: 'remark',
         key: 'remark',
         width: '40%',
         render: (text, record) => {
-            return (
-              <Input
-                value={text}
-                onChange={e => this.handleFieldChange(e, 'remark', record)}
-                onKeyPress={e => this.handleKeyPress(e, record.key)}
-                placeholder="remark"
-              />
-            );
+          return (
+            <Input
+              value={text}
+              onChange={e => this.handleFieldChange(e, 'remark', record)}
+              onKeyPress={e => this.handleKeyPress(e, record.key)}
+              placeholder="remark"
+            />
+          );
         },
-      },
+      };
+    const actionCol =
       {
         title: '操作',
         key: 'action',
@@ -318,10 +316,21 @@ class ApiDocTableForm extends PureComponent {
             </span>
           );
         },
-      },
-    ];
+      };
 
     const { loading, data } = this.state;
+    const {showParent, showType} = this.props;
+    const columns = [];
+    if (showParent) {
+      columns.push(parentCol);
+    }
+    if (showType) {
+      columns.push(typeCol);
+    }
+    columns.push(nameCol);
+    columns.push(remarkCol);
+    columns.push(actionCol);
+
     // console.log("--------data in TableForm:",data);
     return (
       <Fragment>
@@ -339,7 +348,7 @@ class ApiDocTableForm extends PureComponent {
           icon="plus"
           htmlType="button"
         >
-          新增
+          NEW
         </Button>
       </Fragment>
     );
