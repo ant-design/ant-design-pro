@@ -50,7 +50,7 @@ class ApiUpdate extends PureComponent {
 
     const { location } = this.props;
     const { state } = location;
-    const { apiId } = state || { apiId: 105 };
+    const { apiId } = state || { apiId: 0 };
     this.getApi(apiId);
   }
 
@@ -92,7 +92,7 @@ class ApiUpdate extends PureComponent {
         }
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
     return [];
   };
@@ -107,8 +107,8 @@ class ApiUpdate extends PureComponent {
     const responseBodySpec = this.convertDocObj(apiServiceDoc, responseBodyFlag);
     const stateCodeSpec = this.convertDocObj(apiServiceDoc, stateCodeFlag);
     const busiCodeSpec = this.convertDocObj(apiServiceDoc, busiCodeFlag);
-    // console.log("------------------------1",apiServiceDoc.urlSpec);
-    // console.log("------------------------2",JSON.parse(apiServiceDoc.urlSpec));
+    // // console.log("------------------------1",apiServiceDoc.urlSpec);
+    // // console.log("------------------------2",JSON.parse(apiServiceDoc.urlSpec));
     // －－－－－初始化url spec数据－－－－－
     const urlSpec = (JSON.parse(apiServiceDoc.urlSpec) || []).map((item, index) => ({
       ...item,
@@ -182,42 +182,38 @@ class ApiUpdate extends PureComponent {
    * @param typeParam
    * @param oldSpec
    */
-  handleBodyGenerate = (typeParam, oldSpec) => {
+  handleBodyGenerate = (typeParam) => {
     const { form } = this.props;
-    const fieldsValue = form.getFieldsValue();
-    let newValue = '';
-    switch (typeParam) {
-      case requestHeaderFlag:
-        newValue = '[{"appkey":"A authorization code for Access Api"}]';
-        break;
-      case requestBodyFlag:
-        newValue = fieldsValue[`${requestBodyFlag}Sample`];
-        break;
-      case responseBodyFlag:
-        newValue = fieldsValue[`${responseBodyFlag}Sample`];
-        break;
-      default:
-        break;
-    }
+    const fieldsValues = form.getFieldsValue();
+    const newValue =fieldsValues[`${typeParam}Sample`];// 获取reqeust，response文本框的新值
+    const oldSpec =fieldsValues[`${typeParam}Spec`];
+    // console.log("=========0",typeParam,newValue,oldSpec);
     if (newValue && newValue.trim() !== '') {
       const isJsonResult = isJson(newValue);
       if (isJsonResult.result) {
         const newValueJson = JSON.parse(newValue);
-        const parentValue = typeParam === requestHeaderFlag ? '-' : 'root';
-        const flatJsonArray =
-          typeParam === requestHeaderFlag
-            ? []
-            : [{ name: 'root', type: toType(newValueJson), remark: 'root element', parent: '-' }];
+        const flatJsonArray = [{ name: 'root', type: toType(newValueJson), remark: 'root element', parent: '-' }];// 初始化首行
         const requestBodySampleJsonOne =
-          toType(newValueJson) === 'array' ? newValueJson[0] : newValueJson;
-        toApiSpecJson(requestBodySampleJsonOne, flatJsonArray, parentValue);
-        const mergeArr = flatJsonArray.map(spec => {
+          toType(newValueJson) === 'array' ? newValueJson[0] : newValueJson;// 如果sample是array，取其中第一行json对象
+
+        toApiSpecJson(requestBodySampleJsonOne, flatJsonArray, 'root');// 生成数据到flatJsonArray
+
+        // console.log("=========1",flatJsonArray,oldSpec);
+        const mergeArr = flatJsonArray.map(spec => { // 过滤重复数据
           const findObj = oldSpec.find(
             item => item.name === spec.name && item.parent === spec.parent
           );
           return findObj ? { ...spec, remark: findObj.remark } : spec;
         });
+
+        // console.log("=========3",mergeArr);
         const specArr = mergeArr.map((item, index) => ({ ...item, key: `${typeParam}-${index}` }));
+        // console.log("=========4",specArr);
+        form.setFieldsValue({
+          [`${typeParam}Spec`]: specArr,
+        });
+
+        // console.log("=========5",specArr);
         this.setState({ [`${typeParam}Spec`]: specArr });
       } else {
         message.error(isJsonResult.msg);
@@ -288,18 +284,18 @@ class ApiUpdate extends PureComponent {
       dispatch,
     } = this.props;
     validateFieldsAndScroll((error, values) => {
-      // console.log("error in ui======:",error);
+      // // console.log("error in ui======:",error);
       if (!error) {
-        // console.log("api update submit values:",values);
+        // // console.log("api update submit values:",values);
         const apiInfo = getPayloadForApiDoc(apiService, values);
-        // console.log("api doc update submit apiInfo:",apiInfo);
+        // // console.log("api doc update submit apiInfo:",apiInfo);
         // submit the values
         dispatch({
           type: 'apiCreateModel/submitApiDoc',
           payload: apiInfo,
-          callback: resp => {
-            // this.getApi(resp.data.apiId);
-            this.setBaseInfo(resp, dispatch);
+          callback: () => {
+            this.getApi(apiService.apiId);
+            // this.setBaseInfo(resp, dispatch);
           },
         });
       }
@@ -327,6 +323,7 @@ class ApiUpdate extends PureComponent {
     } = this.state;
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
     const sampleText = 'sample for post:{"type":"xxx","name":"xxx"}';
+    // console.log("--render----:",requestBodySpec);
     return (
       <PageHeaderWrapper
         onBack={() => window.history.back()}
@@ -410,7 +407,7 @@ class ApiUpdate extends PureComponent {
                 type="dashed"
                 icon="arrow-down"
                 htmlType="button"
-                onClick={() => this.handleBodyGenerate(requestBodyFlag, requestBodySpec)}
+                onClick={() => this.handleBodyGenerate(requestBodyFlag)}
               >
                 Generate Specification By Sample
               </Button>
@@ -451,7 +448,7 @@ class ApiUpdate extends PureComponent {
                 type="dashed"
                 icon="arrow-down"
                 htmlType="button"
-                onClick={() => this.handleBodyGenerate(responseBodyFlag, responseBodySpec)}
+                onClick={() => this.handleBodyGenerate(responseBodyFlag)}
               >
                 Generate Specification By Sample
               </Button>
