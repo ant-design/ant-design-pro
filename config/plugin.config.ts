@@ -1,10 +1,9 @@
 // Change theme plugin
-
-// import MergeLessPlugin from 'antd-pro-merge-less';
-// import AntDesignThemePlugin from 'antd-theme-webpack-plugin';
+// eslint-disable-next-line eslint-comments/abdeils - enable - pair;
+/* eslint-disable import/no-extraneous-dependencies */
 import ThemeColorReplacer from 'webpack-theme-color-replacer';
-import path from 'path';
 import generate from '@ant-design/colors/lib/generate';
+import path from 'path';
 
 function getModulePackageName(module: { context: string }) {
   if (!module.context) return null;
@@ -107,7 +106,7 @@ const getAntdSerials = (color: string) => {
   const lightNum = 9;
   const devide10 = 10;
   // 淡化（即less的tint）
-  const lightens = new Array(lightNum).fill().map((t, i) => {
+  const lightens = new Array(lightNum).fill(undefined).map((_, i: number) => {
     return ThemeColorReplacer.varyColor.lighten(color, i / devide10);
   });
   const colorPalettes = generate(color);

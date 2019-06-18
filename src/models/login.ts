@@ -1,9 +1,10 @@
-import { routerRedux } from 'dva/router';
-import { Reducer, AnyAction } from 'redux';
-import { EffectsCommandMap } from 'dva';
-import { stringify, parse } from 'qs';
+import { AnyAction, Reducer } from 'redux';
+import { parse, stringify } from 'qs';
 
-export function getPageQuery() {
+import { EffectsCommandMap } from 'dva';
+import { routerRedux } from 'dva/router';
+
+export function getPageQuery(): string {
   return parse(window.location.href.split('?')[1]);
 }
 

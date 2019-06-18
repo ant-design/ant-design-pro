@@ -1,25 +1,25 @@
-import React from 'react';
-import { Icon, Typography, Popover } from 'antd';
-import styles from './index.less';
-import { connect } from 'dva';
-import * as H from 'history';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import { isAntDesignPro } from '@/utils/utils';
+import { Icon, Popover, Typography } from 'antd';
 
-const firstUpperCase = (pathString: string) => {
-  return pathString
+import { FormattedMessage } from 'umi-plugin-react/locale';
+import React from 'react';
+import { connect } from 'dva';
+import { isAntDesignPro } from '@/utils/utils';
+import styles from './index.less';
+
+const firstUpperCase = (pathString: string): string =>
+  pathString
     .replace('.', '')
-    .split(/\/|\-/)
-    .map(s => s.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase()))
-    .filter(s => s)
+    .split(/\/|-/)
+    .map((s): string => s.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase()))
+    .filter((s): boolean => !!s)
     .join('');
-};
 
 // when  click block copy, send block url to  ga
 const onBlockCopy = (label: string) => {
   if (!isAntDesignPro()) {
     return;
   }
+
   const ga = window && (window as any).ga;
   if (ga) {
     ga('send', 'event', {
@@ -48,7 +48,11 @@ const BlockCodeView: React.SFC<{
   );
 };
 
-type RoutingType = { location: H.Location };
+interface RoutingType {
+  location: {
+    pathname: string;
+  };
+}
 
 export default connect(({ routing }: { routing: RoutingType }) => ({
   location: routing.location,

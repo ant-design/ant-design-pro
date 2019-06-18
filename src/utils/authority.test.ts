@@ -1,10 +1,6 @@
-import 'jest';
 import { getAuthority } from './authority';
 
 describe('getAuthority should be strong', () => {
-  it('empty', () => {
-    expect(getAuthority(null)).toEqual(null); // default value
-  });
   it('string', () => {
     expect(getAuthority('admin')).toEqual(['admin']);
   });

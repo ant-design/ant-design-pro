@@ -1,13 +1,13 @@
-import SelectLang from '@/components/SelectLang';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import { connect } from 'dva';
-import React from 'react';
+import { DefaultFooter, MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
 import DocumentTitle from 'react-document-title';
-import { formatMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
+import React from 'react';
+import SelectLang from '@/components/SelectLang';
+import { connect } from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
-import { MenuDataItem, getPageTitle, getMenuData, DefaultFooter } from '@ant-design/pro-layout';
 
 export interface UserLayoutProps extends ConnectProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };

@@ -1,5 +1,7 @@
-import { message } from 'antd';
 import { Reducer } from 'redux';
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable promise/catch-or-return */
+import { message } from 'antd';
 import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
 import themeColorClient from '../components/SettingDrawer/themeColorClient';
 
@@ -35,8 +37,8 @@ const updateTheme: (primaryColor?: string) => void = primaryColor => {
   const hideMessage = message.loading('正在编译主题！', 0);
   function buildIt() {
     if (!(window as any).less) {
-      // tslint:disable-next-line no-console
-      return console.log('no less');
+      console.log('no less');
+      return;
     }
     setTimeout(() => {
       (window as any).less
@@ -45,6 +47,7 @@ const updateTheme: (primaryColor?: string) => void = primaryColor => {
         })
         .then(() => {
           hideMessage();
+          return true;
         })
         .catch(() => {
           message.error('Failed to update theme');

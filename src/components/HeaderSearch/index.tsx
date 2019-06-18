@@ -1,6 +1,7 @@
+import { AutoComplete, Icon, Input } from 'antd';
 import React, { Component } from 'react';
-import { Input, Icon, AutoComplete } from 'antd';
-import { DataSourceItemType } from 'antd/es/auto-complete';
+
+import { DataSourceItemType, AutoCompleteProps } from 'antd/es/auto-complete';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import styles from './index.less';
@@ -45,7 +46,8 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     return null;
   }
 
-  private timeout: NodeJS.Timeout = null!;
+  private timeout: number | undefined = undefined;
+
   private inputRef: Input | null = null;
 
   constructor(props: HeaderSearchProps) {
@@ -68,20 +70,22 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     if (e.key === 'Enter') {
       const { onPressEnter } = this.props;
       const { value } = this.state;
-      this.timeout = setTimeout(() => {
+      this.timeout = window.setTimeout(() => {
         onPressEnter(value); // Fix duplicate onPressEnter
       }, 0);
     }
   };
 
-  onChange = (value: string) => {
-    const { onSearch, onChange } = this.props;
-    this.setState({ value });
-    if (onSearch) {
-      onSearch(value);
-    }
-    if (onChange) {
-      onChange(value);
+  onChange: AutoCompleteProps['onChange'] = value => {
+    if (typeof value === 'string') {
+      const { onSearch, onChange } = this.props;
+      this.setState({ value });
+      if (onSearch) {
+        onSearch(value);
+      }
+      if (onChange) {
+        onChange(value);
+      }
     }
   };
 
@@ -116,6 +120,7 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     const inputClass = classNames(styles.input, {
       [styles.show]: searchMode,
     });
+
     return (
       <span
         className={classNames(className, styles.headerSearch)}
@@ -133,7 +138,7 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
           {...restProps}
           className={inputClass}
           value={value}
-          onChange={this.onChange as any}
+          onChange={this.onChange}
         >
           <Input
             ref={node => {

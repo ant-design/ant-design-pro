@@ -1,9 +1,11 @@
+import { IConfig, IPlugin } from 'umi-types';
+
+import defaultSettings from './defaultSettings';
 // https://umijs.org/config/
 import os from 'os';
 import slash from 'slash2';
-import { IPlugin, IConfig } from 'umi-types';
-import defaultSettings from './defaultSettings';
 import webpackPlugin from './plugin.config';
+
 const { pwa, primaryColor } = defaultSettings;
 
 // preview.pro.ant.design only do not use in your production ;

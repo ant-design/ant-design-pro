@@ -1,7 +1,7 @@
-import React from 'react';
-import { formatMessage, setLocale, getLocale } from 'umi-plugin-react/locale';
-import { Menu, Icon } from 'antd';
+import { Icon, Menu } from 'antd';
+import { formatMessage, getLocale, setLocale } from 'umi-plugin-react/locale';
 import { ClickParam } from 'antd/es/menu';
+import React from 'react';
 import classNames from 'classnames';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
@@ -12,7 +12,7 @@ interface SelectLangProps {
 const SelectLang: React.FC<SelectLangProps> = props => {
   const { className } = props;
   const selectedLang = getLocale();
-  const changeLang = ({ key }: ClickParam) => setLocale(key, false);
+  const changeLang = ({ key }: ClickParam): void => setLocale(key, false);
   const locales = ['zh-CN', 'zh-TW', 'en-US', 'pt-BR'];
   const languageLabels = {
     'zh-CN': '简体中文',
