@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import router from 'umi/router';
-import {Menu, Icon, Button} from 'antd';
+import {Menu, Button} from 'antd';
 import {getUserId} from '@/utils/authority';
 
 import {connect} from "dva";

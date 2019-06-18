@@ -6,10 +6,11 @@ import {extend as requestExtend} from 'umi-request';
 import ApiDocTableForm from './ApiDocTableForm';
 import styles from './style.less';
 import {getPayloadForApiDebug,getPayloadForReq} from './ApiCreate/util';
-import {getPlaceHolder, getQueryArr, isJson, toApiSpecJson, toType} from '../util';
+import { isJson, toApiSpecJson, toType} from '../util';
 import {getItemValue} from '@/utils/masterData';
 import {getUserId} from '@/utils/authority';
 
+const { Option } = Select;
 
 const {TabPane} = Tabs;
 const {TextArea} = Input;
@@ -50,9 +51,6 @@ class ApiDebug extends PureComponent {
 
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, {passive: true});
-
-    const {apiId, apiService} = this.props;
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,10 +62,10 @@ class ApiDebug extends PureComponent {
       const apiServiceDoc = nextProps.selectedRow;
       // 从db里面获取字符串数据，再转成json对象，在增加key字段，赋值给表格组件
       const requestHeaderSample = this.convertDocObj(apiServiceDoc, requestHeaderFlag);
-      const {requestBodySample,responseBodySample,userDebugId, debugName} = apiServiceDoc;
+      const {requestBodySample,responseBodySample,userDebugId, debugName,urlSample} = apiServiceDoc;
       const responseHeaderSample = this.convertDocObj(apiServiceDoc, responseHeaderFlag);
-      const urlSamplePre = getItemValue('env', 'localhost', 'angentHost');
-      const urlSample = apiServiceDoc.urlSample ? apiServiceDoc.urlSample : `${urlSamplePre}${apiServiceDoc.urlSample}`;
+      // const urlSamplePre = getItemValue('env', 'localhost', 'angentHost');
+      // const urlSample = apiServiceDoc.urlSample ? apiServiceDoc.urlSample : `${urlSamplePre}${apiServiceDoc.urlSample}`;
       this.setState({
         userDebugId,
         debugName,
@@ -85,25 +83,6 @@ class ApiDebug extends PureComponent {
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeFooterToolbar);
   }
-
-  convertDocObj = (apiServiceDoc, flag) => {
-    try {
-      if (apiServiceDoc) {
-        const spec = apiServiceDoc[`${flag}Sample`];
-        if (spec && spec.trim() !== '') {
-          const specArr = (JSON.parse(spec) || []).map((item) => ({
-            ...item,
-            // key: `${requestHeaderFlag}-${index}`,
-          }));
-          return specArr;
-        }
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    return [];
-  };
-
 
   getOption = (list, keyName, titleName) => {
     if (!list || list.length < 1) {
@@ -127,49 +106,24 @@ class ApiDebug extends PureComponent {
     return this.getOption(apiServiceOrgs, 'id', 'appkey');
   }
 
-  /**
-   * 处理占位符和get参数的说明文档
-   * @param urlSpec
-   * @param manualFlag
-   * @returns {Array}
-   */
-  handleUrlGenerate = (urlSpec, manualFlag) => {
-    const {apiService} = this.props;
-    const {requestUrl} = apiService;
-    let url = requestUrl;
-    if (manualFlag) {
-      const {form} = this.props;
-      const fieldsValue = form.getFieldsValue();
-      const {urlSample} = fieldsValue;
-      url = urlSample;
+  convertDocObj = (apiServiceDoc, flag) => {
+    try {
+      if (apiServiceDoc) {
+        const spec = apiServiceDoc[`${flag}Sample`];
+        if (spec && spec.trim() !== '') {
+          const specArr = (JSON.parse(spec) || []).map((item) => ({
+            ...item,
+            // key: `${requestHeaderFlag}-${index}`,
+          }));
+          return specArr;
+        }
+      }
+    } catch (e) {
+      console.log(e);
     }
-    let retAttr = [];
-    if (url && url.trim() !== '' && url.indexOf('{') > -1) {
-      const flatJsonArray = getPlaceHolder(url);
-      retAttr = flatJsonArray.map(spec => {
-        const findObj = urlSpec.find(
-          item => item.name === spec.name && item.parent === spec.parent
-        );
-        return findObj ? {...spec, remark: findObj.remark} : spec;
-      });
-    }
-    if (url && url.trim() !== '' && url.indexOf('?') > -1) {
-      const flatJsonArray = getQueryArr(url);
-      const mergeArr = flatJsonArray.map(spec => {
-        const findObj = retAttr.find(
-          item => item.name === spec.name && item.parent === spec.parent
-        );
-        return findObj ? {...spec, remark: findObj.remark} : spec;
-      });
-      retAttr = retAttr.concat(mergeArr);
-    }
-
-    retAttr = retAttr.map((item, index) => ({...item, key: `url-${index}`}));
-    if (manualFlag) {
-      this.setState({urlSpec: retAttr});
-    }
-    return retAttr;
+    return [];
   };
+
 
   /**
    * 处理header和body的说明文档
@@ -505,7 +459,7 @@ class ApiDebug extends PureComponent {
             <Col lg={9} md={6} sm={24} style={{height: 50}}>
               <Form.Item>
                 {getFieldDecorator('urlSample', {
-                  initialValue: urlSample,
+                  initialValue: urlSample !== null && urlSample !== "" ? urlSample : apiService.requestUrl,
                   rules: [
                     {
                       required: true,
