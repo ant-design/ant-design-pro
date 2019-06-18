@@ -33,12 +33,12 @@ export function conversion(responseData) {
 }
 
 export function conversionReq(requestData) {
-  const { tableName, userName, option, pageSize, ...info } = requestData;
+  const { tableName, userName,userId,apiId, option, pageSize, ...info } = requestData;
   if (!option) {
     info.pageNo = info.pageNo || 1;
     info.pageSize = pageSize || 10;
   }
-  return { tableName, userName, option, data: { info } };
+  return { tableName, userName,userId,apiId, option, data: { info } };
 }
 
 // source: http://stackoverflow.com/questions/7390426/better-way-to-get-type-of-a-javascript-variable/7390612#7390612

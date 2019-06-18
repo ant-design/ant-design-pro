@@ -147,6 +147,72 @@ export function getPayloadForApiDoc(oldApiService,values) {
   return apiInfo;
 }
 
+export function getPayloadForApiDebug(apiService,values) {
+
+  const apiServiceDebug={...values,
+    requestBodySample:values.requestBodySample,
+    requestHeaderSample:JSON.stringify(values.requestHeaderSample),
+    responseHeaderSample:JSON.stringify(values.responseHeaderSample),
+    responseBodySample:values.responseBodySample,
+    urlSample:values.urlSample,
+    debugName:values.debugName,
+    apiId:apiService.apiId,
+    userId:apiService.userId,
+    };
+  console.log("apiServiceDebug",apiServiceDebug);
+  // if(requestHeaderSample&&requestHeaderSample.length>0){
+  //   apiServiceDebug.requestHeaderSample = JSON.stringify(requestHeaderSample.map(item => {
+  //     return {key:item.name,value:'xxx'};
+  //   }));
+  // }
+  // if(responseHeaderSample&&responseHeaderSample.length>0){
+  //   apiServiceDebug.responseHeaderSample = JSON.stringify(responseHeaderSample.map(item => {
+  //     return {key:item.name,value:'xxx'};
+  //   }));
+  // }
+
+  let option = 1;
+  if(apiServiceDebug.userDebugId){
+    option = 2;
+  }
+  const tableName = "api_user_debug";
+  const apiInfo= {
+    option, // 1-新增记录 2-修改记录,9-apiDoc
+    tableName,
+    data: {
+      info: {
+        ...apiServiceDebug,
+      },
+    },
+  };
+  console.log("=======:",apiInfo);
+  return apiInfo;
+}
+
+export function getPayloadForReq(urlSamplePre,values) {
+
+  const {urlSample} = values;
+  const serviceUrl =  '/server/serviceAgent';
+  const newUrlSample = serviceUrl + urlSample.replace(urlSamplePre, '');
+  const requestHeaders={};
+  values.requestHeaderSample.forEach((item) => {
+    requestHeaders[item.name]=item.remark;
+  });
+  const apiServiceReq={...values,
+    requestBodySample:values.requestBodySample,
+    requestHeaderSample:requestHeaders,
+    responseHeaderSample:JSON.stringify(values.responseHeaderSample),
+    responseBodySample:values.responseBodySample,
+    urlSample:newUrlSample,
+    debugName:values.debugName
+  };
+
+  console.log("apiServiceReq",apiServiceReq);
+
+  return apiServiceReq;
+}
+
+
 export function getApiFlowData(values) {
 
   const apiFlowData={
