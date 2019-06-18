@@ -1,7 +1,7 @@
 import { Icon, Popover, Typography } from 'antd';
 
 import { FormattedMessage } from 'umi-plugin-react/locale';
-import React from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'dva';
 import { isAntDesignPro } from '@/utils/utils';
 import styles from './index.less';
@@ -41,8 +41,13 @@ const BlockCodeView: React.SFC<{
           text: blockUrl,
           onCopy: () => onBlockCopy(url),
         }}
+        style={{
+          display: 'flex',
+        }}
       >
-        <code className={styles['copy-block-code']}>{blockUrl}</code>
+        <pre>
+          <code className={styles['copy-block-code']}>{blockUrl}</code>
+        </pre>
       </Typography.Paragraph>
     </div>
   );
@@ -58,14 +63,16 @@ export default connect(({ routing }: { routing: RoutingType }) => ({
   location: routing.location,
 }))(({ location }: RoutingType) => {
   const url = location.pathname;
+  const divDom = useRef<HTMLDivElement>(null);
   return (
     <Popover
       title={<FormattedMessage id="app.preview.down.block" defaultMessage="下载此页面到本地项目" />}
       placement="topLeft"
       content={<BlockCodeView url={url} />}
       trigger="click"
+      getPopupContainer={dom => (divDom.current ? divDom.current : dom)}
     >
-      <div className={styles['copy-block']}>
+      <div className={styles['copy-block']} ref={divDom}>
         <Icon type="download" />
       </div>
     </Popover>
