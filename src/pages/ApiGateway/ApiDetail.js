@@ -4,6 +4,7 @@ import router from 'umi/router';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Ellipsis from '@/components/Ellipsis';
 import styles from './style.less';
 import { conversionAttr } from './ApiCreate/util';
 import { getUserId } from '@/utils/authority';
@@ -97,17 +98,6 @@ const columnsOrg = [
 
 const columnsApi = [
   {
-    title: '名称',
-    dataIndex: 'name',
-  },
-  {
-    title: '说明',
-    dataIndex: 'remark',
-  },
-];
-
-const columnsResp = [
-  {
     title: '父节点',
     dataIndex: 'parent',
     render: (text) => {
@@ -137,6 +127,17 @@ const columnsResp = [
       }
       return <span>&nbsp;</span>
     },
+  },
+  {
+    title: '说明',
+    dataIndex: 'remark',
+  },
+];
+
+const columnsBase = [
+  {
+    title: '名称',
+    dataIndex: 'name',
   },
   {
     title: '说明',
@@ -480,7 +481,9 @@ class ApiDetail extends PureComponent {
                 <Description term={fieldLabels.back.serviceType}>
                   {back.serviceTypeTitle}
                 </Description>
-                <Description term={fieldLabels.back.url}>{back.url}</Description>
+                <Description term={fieldLabels.back.url}>
+                  <Ellipsis length={40} tooltip>{back.url}</Ellipsis>
+                </Description>
                 <Description term={fieldLabels.back.reqPath}>{back.reqPath}</Description>
                 <Description term={fieldLabels.back.reqMethod}>{back.reqMethodTitle}</Description>
                 <Description term={fieldLabels.back.connectTimeout}>
@@ -542,13 +545,13 @@ class ApiDetail extends PureComponent {
           </TabPane>
           <TabPane tab="接口文档" key="api">
             <Card title="1.协议说明" bordered={false}>
-              <Table columns={columnsApi} dataSource={apiAttr} pagination={false} />
+              <Table columns={columnsBase} dataSource={apiAttr} pagination={false} />
             </Card>
             <Card title="2.请求参数说明" bordered={false}>
               <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 请求报文头（Request Header）
               </div>
-              <Table columns={columnsApi} dataSource={requestHeaderSpec} pagination={false} />
+              <Table columns={columnsBase} dataSource={requestHeaderSpec} pagination={false} />
               <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 请求报文体（Request Body）
               </div>
@@ -558,17 +561,18 @@ class ApiDetail extends PureComponent {
               <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 响应报文头（Response Header）
               </div>
-              <Table columns={columnsResp} dataSource={responseHeaderSpec} pagination={false} />
+              <Table columns={columnsBase} dataSource={responseHeaderSpec} pagination={false} />
               <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 响应报文体（Response Body）
               </div>
-              <Table columns={columnsResp} dataSource={responseBodySpec} pagination={false} />
+              <Table columns={columnsApi} dataSource={responseBodySpec} pagination={false} />
             </Card>
           </TabPane>
           <TabPane tab="状态码" key="code">
             <Card title="" bordered={false}>
               <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
-                <Icon type="info-circle" theme="twoTone" /> 状态码（State Code）</div>
+                <Icon type="info-circle" theme="twoTone" /> 状态码（State Code）
+              </div>
               <Table columns={columnsCode} dataSource={stateCodeSpec} pagination={false} />
               <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 业务状态码（Business Code）
