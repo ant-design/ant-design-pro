@@ -5,10 +5,9 @@
  */
 
 import { ConnectProps, ConnectState } from '@/models/connect';
-import {
+import ProLayout, {
   MenuDataItem,
-  BasicLayout as ProLayoutComponents,
-  BasicLayoutProps as ProLayoutComponentsProps,
+  BasicLayoutProps as ProLayoutProps,
   Settings,
 } from '@ant-design/pro-layout';
 import React, { useState } from 'react';
@@ -21,7 +20,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import { isAntDesignPro } from '@/utils/utils';
 import logo from '../assets/logo.svg';
 
-export interface BasicLayoutProps extends ProLayoutComponentsProps, ConnectProps {
+export interface BasicLayoutProps extends ProLayoutProps, ConnectProps {
   breadcrumbNameMap: {
     [path: string]: MenuDataItem;
   };
@@ -98,7 +97,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     });
 
   return (
-    <ProLayoutComponents
+    <ProLayout
       logo={logo}
       onCollapse={handleMenuCollapse}
       menuItemRender={(menuItemProps, defaultDom) => (
@@ -122,7 +121,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       {...settings}
     >
       {children}
-    </ProLayoutComponents>
+    </ProLayout>
   );
 };
 
