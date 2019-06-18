@@ -83,22 +83,27 @@ export default {
   //   },
   // },
   proxy: {
-    '/server/baseInfo': {
-      // target: 'http://10.19.18.49:10401/',
-      target: 'http://10.19.18.49:10041/',
-      changeOrigin: true,
-      pathRewrite: { '^/server/': '/' },
-    },
-    '/server/auth': {
-      target: 'http://10.19.18.49:10030/',
-      changeOrigin: true,
-      pathRewrite: { '^/server/': '/' },
-    },
-    '/server/serviceAgent': {
+    '/server': {
       target: 'http://10.19.18.49:10010/',
       changeOrigin: true,
       pathRewrite: {'^/server/': '/'},
     },
+    // '/server/baseInfo': {
+    //   // target: 'http://10.19.18.49:10401/',
+    //   target: 'http://10.19.18.49:10041/',
+    //   changeOrigin: true,
+    //   pathRewrite: { '^/server/': '/' },
+    // },
+    // '/server/auth': {
+    //   target: 'http://10.19.18.49:10030/',
+    //   changeOrigin: true,
+    //   pathRewrite: { '^/server/': '/' },
+    // },
+    // '/server/serviceAgent': {
+    //   target: 'http://10.19.18.49:10010/',
+    //   changeOrigin: true,
+    //   pathRewrite: {'^/server/': '/'},
+    // },
   },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
