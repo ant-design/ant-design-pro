@@ -44,8 +44,9 @@ class Org extends PureComponent {
       tableName: 'org',
       key: 'id',
       name: 'orgName',
+      reCallDetail: true,
       columnDetails: [
-        { name: 'appkey', title: 'App Key', query: true, detailFlag: 1 }, // name  数据库属性 query查询是否显示 add 新增 ,disableAct修改, rules 输入规则 tag下拉框
+        { name: 'appkey', title: 'App Key', query: true, detailFlag: true }, // name  数据库属性 query查询是否显示 add 新增 ,disableAct修改, rules 输入规则 tag下拉框
         { name: 'id', title: 'ID', columnHidden: false, add: true, disabledAct: 'true' }, // 第一列需要作为查询条件，新增时不需要采集
         { name: 'orgCode', title: 'Code', columnHidden: true }, // 第二列需要作为查询条件，新增时需要采集
         { name: 'orgName', title: 'Name', sorter: true, query: true, add: true }, //  需要排序，需要作为查询条件，新增时需要采集
@@ -103,11 +104,33 @@ class Org extends PureComponent {
         {
           name: 'sysUserOrgs',
           key: 'id',
-          title: "User List for Managing Provider's Api",
+          title: "Access User List",
           columnDetails: [
             { name: 'id', title: 'Relation Id' },
             { name: 'userId', title: 'User Id' },
             { name: 'username', title: 'User Name' },
+          ],
+        },
+        {
+          name: 'consumerApis',
+          key: 'apiId',
+          title: "Consumer Api List",
+          columnDetails: [
+            { name: 'apiId', title: 'Api Id' },
+            { name: 'name', title: 'Name' },
+            { name: 'requestUrl', title: 'Path' },
+            { name: 'statusName', title: 'Status' },
+          ],
+        },
+        {
+          name: 'producerApis',
+          key: 'apiId',
+          title: "Producer Api List",
+          columnDetails: [
+            { name: 'apiId', title: 'Api Id' },
+            { name: 'name', title: 'Name' },
+            { name: 'requestUrl', title: 'Path' },
+            { name: 'statusName', title: 'Status' },
           ],
         },
       ],

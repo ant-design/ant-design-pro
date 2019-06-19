@@ -252,35 +252,35 @@ class QueryTable extends PureComponent {
     return columns;
   };
 
-  handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const {
-      dispatch,
-      columnSchemas: { tableName },
-    } = this.props;
-    const { formValues } = this.state;
-
-    const filters = Object.keys(filtersArg).reduce((obj, key) => {
-      const newObj = { ...obj };
-      newObj[key] = getValue(filtersArg[key]);
-      return newObj;
-    }, {});
-
-    const params = {
-      tableName,
-      pageNo: pagination.current,
-      pageSize: pagination.pageSize,
-      ...formValues,
-      ...filters,
-    };
-    if (sorter.field) {
-      params.sorter = `${sorter.field}_${sorter.order}`;
-    }
-
-    dispatch({
-      type: 'uniComp/list',
-      payload: params,
-    });
-  };
+  // handleStandardTableChange = (pagination, filtersArg, sorter) => {
+  //   const {
+  //     dispatch,
+  //     columnSchemas: { tableName },
+  //   } = this.props;
+  //   const { formValues } = this.state;
+  //
+  //   const filters = Object.keys(filtersArg).reduce((obj, key) => {
+  //     const newObj = { ...obj };
+  //     newObj[key] = getValue(filtersArg[key]);
+  //     return newObj;
+  //   }, {});
+  //
+  //   const params = {
+  //     tableName,
+  //     pageNo: pagination.current,
+  //     pageSize: pagination.pageSize,
+  //     ...formValues,
+  //     ...filters,
+  //   };
+  //   if (sorter.field) {
+  //     params.sorter = `${sorter.field}_${sorter.order}`;
+  //   }
+  //
+  //   dispatch({
+  //     type: 'uniComp/list',
+  //     payload: params,
+  //   });
+  // };
 
   handleSelectRows = rows => {
     this.setState({
@@ -464,8 +464,8 @@ class QueryTable extends PureComponent {
 
   handleDrawerVisible = (row, flag) => {
     this.setState({
-      drawerVisible: !!flag,
       selectedRow: row,
+      drawerVisible: !!flag,
     });
   };
 

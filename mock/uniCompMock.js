@@ -1181,15 +1181,91 @@ export function sug(req, res, u) {
   }
   return result;
 }
-export function queryList(req, res, u, b) {
-  // let url = u;
-  // if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-  //   url = req.url; // eslint-disable-line
-  // }
 
+export function detail(req, res, u) {
+  console.log('detail===------');
+  let url = u;
+  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+    url = req.url; // eslint-disable-line
+  }
+  const tableName=url.split("/")[3];
+  const dataSource = getList(tableName);
+  let idName="id";
+  switch (tableName) {
+    case 'api_group':
+      idName="groupId";
+      break;
+    case 'sys_user':
+      idName="id";
+      break;
+    case 'sys_role':
+      idName="roleId";
+      break;
+    case 'sys_privilege':
+      idName="privilegeId";
+      break;
+    default:
+      break;
+  }
+  const params = parse(url, true).query;
+  const obj = dataSource.find(data => data[idName]===parseInt(params.id,10));
+
+  const result = {
+    "code": "200",
+    "msg": null,
+    "data": {
+      ...obj,
+      "sysUserOrgs": [
+        {
+          "orgId": 34,
+          "orgName": "AsiaInfo O2p",
+          "userId": 7,
+          "username": "o2p_conf",
+          "id": 465
+        }
+      ],
+      "consumerApis": [
+        {
+          "apiId": 160,
+          "name": "Get Api Detail",
+          "groupId": 19,
+          "requestUrl": "/baseInfo/apiService/apiInfo",
+          "reqMethod": "post",
+          "status": "2",
+          "statusName": "已发布",
+          "createTime": "2019-06-17T21:50:23.000+0000",
+          "apiType": "1",
+          "updateTime": "2019-06-17T08:49:27.000+0000",
+          "serviceType": "1",
+          "serviceTypeName": "Rest"
+        }
+      ],
+      "producerApis": [
+        {
+          "apiId": 161,
+          "name": "Get Api List",
+          "groupId": 19,
+          "requestUrl": "/baseInfo/apiService/apiList",
+          "reqMethod": "post",
+          "status": "2",
+          "statusName": "已发布",
+          "createTime": "2019-06-17T21:50:23.000+0000",
+          "apiType": "1",
+          "updateTime": "2019-06-17T08:49:27.000+0000",
+          "serviceType": "1",
+          "serviceTypeName": "Rest"
+        }
+      ]
+    }
+  }
+  if (res && res.json) {
+    return res.json(result);
+  }
+  return result;
+}
+export function queryList(req, res, u, b) {
   const params = (b && b.body) || req.body;
   const{tableName,data:{info}} =params;
-  // const params = parse(url, true).query;
 
   let dataSource = [...getList(tableName)];// 根据表明获取对应数据
   console.log(params, dataSource.length);
@@ -1453,47 +1529,6 @@ export function statusBatch(req, res, u, b) {
   }
   return result;
 }
-export function detail(req, res, u, b) {
-  // console.log('statusBatch======');
-  // let url = u;
-  // if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-  //   url = req.url; // eslint-disable-line
-  // }
-
-  const body = (b && b.body) || req.body;
-  const { tableName, id } = body;
-  const datasource = getList(tableName);
-      let idName="id";
-      switch (tableName) {
-        case 'api_group':
-          idName="groupId";
-          break;
-        case 'sys_user':
-          idName="id";
-          break;
-        case 'sys_role':
-          idName="roleId";
-          break;
-        case 'sys_privilege':
-          idName="privilegeId";
-          break;
-        default:
-          break;
-      }
-
-        const tmpObj = datasource.find(item => id && id === item[idName]);
-  const result = {
-    code: "200",
-    "msg": "SUCCESS",
-    data: tmpObj,
-  };
-
-  console.log("detail in unicomp mock:",id,result);
-  if (res && res.json) {
-    return res.json(result);
-  }
-  return result;
-}
 
 
 export function getOrgListByType(req, res, u) {
@@ -1517,7 +1552,7 @@ export function getOrgListByType(req, res, u) {
 export default {
   'POST /baseInfo/sysdata/(.*)/list': queryList,
   'POST /baseInfo/sysdata/(.*)/save': save,
-  'POST /baseInfo/sysdata/(.*)//detail': detail,
+  'GET /baseInfo/sysdata/(.*)/detail': detail,
   'POST /baseInfo/sysdata/(.*)/statusBatch': statusBatch,
   'GET /baseInfo/sysdata/sug': sug,
   'GET /baseInfo/api/allGroupList': groups,
