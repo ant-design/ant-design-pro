@@ -1,5 +1,5 @@
 import message from 'antd';
-import {list, save, statusBatch, token, del} from '../services/uniCompService';
+import {list, save, statusBatch, detail, token, del} from '../services/uniCompService';
 import {conversion, conversionReq} from "../pages/util";
 
 export default {
