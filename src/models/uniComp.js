@@ -1,4 +1,4 @@
-import message from 'antd';
+import {message} from 'antd';
 import {list, save, statusBatch, detail, token, del} from '../services/uniCompService';
 import {conversion, conversionReq} from "../pages/util";
 
