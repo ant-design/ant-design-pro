@@ -197,7 +197,7 @@ class ApiDocTableForm extends PureComponent {
           }
           /* eslint-disable no-nested-ternary */
           if (text && text !== "-" && text !== "root") {
-            const color = 'volcano';
+            const color = text && text.length<9 ? text && text.length>18 ? 'green' : 'volcano' : 'geekblue';
             return <Tag color={color} key={text}>&nbsp;&nbsp;{text}&nbsp;&nbsp;</Tag>;
           }
           return text;
@@ -241,11 +241,11 @@ class ApiDocTableForm extends PureComponent {
             />
           );
         }
-        if (text === "string") {
+        if (text !== "object"&&text !== "array"&&text !== "integer") {
           return text;
         }
         if (text) {
-          const color = text && text.length !== 4 ? text && text.length === 6 ? 'green' : 'volcano' : 'geekblue';
+          const color = text && text.toLowerCase()==='integer' ? text && text.toLowerCase()==='object' ? 'green' : 'volcano' : 'geekblue';
           return <Tag color={color} key={text}>&nbsp;&nbsp;{text}&nbsp;&nbsp;</Tag>;
         }
         return <span>&nbsp;</span>

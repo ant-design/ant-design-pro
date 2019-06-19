@@ -114,8 +114,8 @@ export default {
       // 创建的时候初始化数据
       const apiService= {
         serviceType:'1',
-        groupId: 2,
-        requestUrl: '/rest',
+        // groupId: 2,
+        // requestUrl: '/rest',
         // createUser:'Alex',
         apiType:'1',
         apiServiceBackends:[{

@@ -28,7 +28,7 @@ class User extends PureComponent {
 
     const statusList = getItems('common', 'status');// 用户状态
     const utypeList = getItems('sysUser', 'utype');// 账户类型
-
+    console.log("------utypeList",utypeList,statusList);
     const auth=getAuth("user_save"); // 获取某个功能权的角色
     const saveAct = check(auth,'Modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
     const commandAct = check(auth,'Role');

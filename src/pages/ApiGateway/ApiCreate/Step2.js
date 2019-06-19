@@ -61,7 +61,7 @@ class Step2 extends React.PureComponent {
             {getFieldDecorator('requestUrl', {
               initialValue: data.requestUrl,
               rules: [{ required: true, message: '请输入请求PATH' }],
-            })(<Input placeholder="请输入请求PATH" />)}
+            })(<Input addonBefore="/rest" placeholder="请输入请求PATH" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求类型">
             {getFieldDecorator('reqMethod', {
