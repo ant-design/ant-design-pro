@@ -41,3 +41,35 @@ export async function save(params) {
     },
   });
 }
+
+export async function token(params){
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/generateToken?appkey=${params.appkey}`, {
+    method: 'GET',
+    data: {
+      ...params,
+      method: 'get',
+    },
+  });
+}
+export async function del(params){
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/${params.tableName}/delete?id=${params.id}`, {
+    method: 'GET',
+    data: {
+      ...params,
+      method: 'get',
+    },
+  });
+}
+
+export async function req(params){
+  return request(`${params.url}`, {
+    method: `${params.reqMethod}`,
+    headers:{
+      ...params.header
+    },
+    data: {
+      ...params,
+      method: `${params.reqMethod}`,
+    },
+  });
+}

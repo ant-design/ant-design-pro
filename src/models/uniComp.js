@@ -1,5 +1,4 @@
-import {message} from 'antd';
-import {list, save, statusBatch,detail} from '../services/uniCompService';
+import {list, save, statusBatch, detail, token, del, req} from '../services/uniCompService';
 import {conversion, conversionReq} from "../pages/util";
 
 export default {
@@ -19,19 +18,41 @@ export default {
       // console.log('req:', JSON.stringify(req));
       const response = yield call(list, req);
       // console.log('response:', response);
-      if (callback) {
-        callback(response);
-      }
       yield put({
         type: 'saveData',
         payload: response,
         onConversionData,
       });
+      if (callback) callback(response);
     },
     *save({ payload, callback }, { call }) {
       // console.log('postinfo add:', payload);
       const req=payload.option&&payload.option===8?payload:conversionReq(payload);
       const response = yield call(save, req);
+      // console.log('postinfo response add1:', response);
+      if (callback) callback(response);
+      // console.log('postinfo response add3:');
+    },
+    *saveDebug({ payload, callback }, { call }) {
+      const response = yield call(save, payload);
+      // console.log('postinfo response add1:', response);
+      if (callback) callback(response);
+      // console.log('postinfo response add3:');
+    },
+    *token({ payload, callback }, { call }) {
+      const response = yield call(token, payload);
+      // console.log('postinfo response add1:', response);
+      if (callback) callback(response);
+      // console.log('postinfo response add3:');
+    },
+    *del({ payload, callback }, { call }) {
+      const response = yield call(del, payload);
+      // console.log('postinfo response add1:', response);
+      if (callback) callback(response);
+      // console.log('postinfo response add3:');
+    },
+    *req({ payload, callback }, { call }) {
+      const response = yield call(req, payload);
       // console.log('postinfo response add1:', response);
       if (callback) callback(response);
       // console.log('postinfo response add3:');

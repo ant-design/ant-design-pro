@@ -5,6 +5,14 @@ import constants from './constUtil';
 const { STATUS } = constants;
 // mock tableListDataSource
 
+
+const urlSample="/rest/{tableName}/voice/{id}";
+const urlSample1="/rest/{tableName}/voice/123123";
+const requestHeaderSample="[{\"key\":\"appkey\",\"value\":\"xxxx\"}]";
+const requestBodySample="[{\"name\":\"appkey\",\"type\":\"string\",\"remark\":\"app key\",\"parent\":\"-\"}]";
+const responseHeaderSample="{\"type\":1,\"name\":\"asia info\",\"rela\":{\"orgId\":1,\"orgName\":\"asia intl\"}}";
+const responseBodySample="[{\"name\":\"type\",\"type\":\"integer\",\"remark\":\"type for query\",\"parent\":\"root\"},{\"name\":\"name\",\"type\":\"string\",\"remark\":\"name for query\",\"parent\":\"root\"}]";
+
 const allRoleList=[
   {
     "roleId": 1,
@@ -1122,11 +1130,41 @@ const orgs={
     }
   ]
 };
+const debugs = {
+  "code": "200",
+  "msg": null,
+  "data": [
+    {
+      "userDebugId": 1,
+      "userId": 4,
+      "apiId": 152,
+      "debugName": "测试一",
+      "urlSample":urlSample,
+      "requestHeaderSample":requestHeaderSample,
+      "requestBodySample": requestBodySample,
+      "responseHeaderSample":responseHeaderSample,
+      "responseBodySample":responseBodySample
+    },
+    {
+      "userDebugId": 2,
+      "userId": 4,
+      "apiId": 152,
+      "debugName": "测试二",
+      "urlSample":urlSample1,
+      "requestHeaderSample":requestHeaderSample,
+      "requestBodySample": requestBodySample,
+      "responseHeaderSample":responseHeaderSample,
+      "responseBodySample":responseBodySample
+    }
+  ]
+};
+
 const tableListDataSource = orgs.data;
 const groupsDataSource = groups.data;
 const usersDataSource=users.data;
 const rolesDataSource=roles.data;
 const privilegesDataSource=privileges.data.records;
+const debugDataSource = debugs.data;
 
 function getList(innerTableName) {
   let dataSource = tableListDataSource;
@@ -1143,6 +1181,9 @@ function getList(innerTableName) {
       break;
     case 'sys_privilege':
       dataSource = privilegesDataSource;
+      break;
+    case 'api_user_debug':
+      dataSource = debugDataSource;
       break;
     default:
       break;
@@ -1280,14 +1321,14 @@ export function queryList(req, res, u, b) {
   }
   const keys = Object.keys(info); // 根据查询条件（form表单）的参数，过滤列表
   keys.forEach(key => {
-    // console.log("----:",info[key]);
+    console.log("----:",info[key]);
     if (info[key]) {
       dataSource = dataSource.filter(data => {
         const value = data[key];
+        console.log("value",value);
         if (value) {
-          return value.indexOf(info[key]) > -1;
+          return value.toString().indexOf(info[key]) > -1;
         }
-
         return true;
       });
     }
