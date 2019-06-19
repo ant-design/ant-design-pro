@@ -1,4 +1,4 @@
-import {list, save, statusBatch, token, del, req} from '../services/uniCompService';
+import {list, save, statusBatch, token, del} from '../services/uniCompService';
 import {conversion, conversionReq} from "../pages/util";
 
 export default {
@@ -47,12 +47,6 @@ export default {
     },
     *del({ payload, callback }, { call }) {
       const response = yield call(del, payload);
-      // console.log('postinfo response add1:', response);
-      if (callback) callback(response);
-      // console.log('postinfo response add3:');
-    },
-    *req({ payload, callback }, { call }) {
-      const response = yield call(req, payload);
       // console.log('postinfo response add1:', response);
       if (callback) callback(response);
       // console.log('postinfo response add3:');

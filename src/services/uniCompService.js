@@ -65,16 +65,3 @@ export async function del(params){
     },
   });
 }
-
-export async function req(params){
-  return request(`${params.url}`, {
-    method: `${params.reqMethod}`,
-    headers:{
-      ...params.header
-    },
-    data: {
-      ...params,
-      method: `${params.reqMethod}`,
-    },
-  });
-}
