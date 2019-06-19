@@ -28,13 +28,8 @@ export async function statusBatch(params) {
 }
 
 export async function detail(params) {
-  return request(`${PREFIX_PATH}/baseInfo/sysdata/${params.tableName}/detail`, {
-    method: 'POST',
-    data: {
-      ...params,
-      method: 'post',
-    },
-  });
+  // console.log(`${PREFIX_PATH}/baseInfo/sysdata/${params.tableName}/detail?id=${params.id}`);
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/${params.tableName}/detail?id=${params.id}`);
 }
 
 export async function save(params) {
@@ -62,6 +57,19 @@ export async function del(params){
     data: {
       ...params,
       method: 'get',
+    },
+  });
+}
+
+export async function req(params){
+  return request(`${params.url}`, {
+    method: `${params.reqMethod}`,
+    headers:{
+      ...params.header
+    },
+    data: {
+      ...params,
+      method: `${params.reqMethod}`,
     },
   });
 }
