@@ -8,8 +8,8 @@ import RadioView from "../ApiGateway/RadioView";
 
 
 
-// 111111ssssssssdddfff
-// 111111222ddddddddfff
+// 111111ssssssssdddffffff
+// 111111222ddddddddffffff
 export default () => (
   <PageHeaderWrapper>
     <RadioView javaCode="apiService" javaKey="api_type" />
