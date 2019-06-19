@@ -1,6 +1,6 @@
 import {list, save, statusBatch, token, del} from '../services/uniCompService';
 import {conversion, conversionReq} from "../pages/util";
-
+// ddd
 export default {
   namespace: 'uniComp',
 
