@@ -10,7 +10,7 @@ import { getAuth } from '@/utils/authority';
 const noMatch = <Alert message="No permission." type="error" showIcon />;
 
 const auth=getAuth("apiGateway1");
-console.log("auth=====:",auth);
+console.log("auth=====:",auth);// 1ddd
 
 class Test2 extends PureComponent {
 
