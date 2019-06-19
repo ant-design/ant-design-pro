@@ -114,6 +114,7 @@
     "prettier": "^1.17.1",
     "serverless-http": "^2.0.2",
     "slash2": "^2.0.0",
+    "stylelint": "^10.1.0",
     "webpack-theme-color-replacer": "^1.1.5"
   },
   "optionalDependencies": {
