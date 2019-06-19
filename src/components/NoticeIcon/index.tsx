@@ -1,5 +1,5 @@
 import { Badge, Icon, Spin, Tabs } from 'antd';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import NoticeList, { NoticeIconTabProps } from './NoticeList';
 
@@ -117,13 +117,13 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
       },
     );
     return (
-      <Fragment>
+      <>
         <Spin spinning={loading} delay={0}>
           <Tabs className={styles.tabs} onChange={this.onTabChange}>
             {panes}
           </Tabs>
         </Spin>
-      </Fragment>
+      </>
     );
   }
 
