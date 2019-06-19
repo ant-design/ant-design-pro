@@ -3,13 +3,13 @@ import React from 'react';
 // 引入面包屑导航组件
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import RadioView from "../ApiGateway/RadioView";
-// aaaasssuuuuuuuoooooottt3333
-// aaaasssffoooootttt3333
+// aaaasssuuuuuuuoooooottt
+// aaaasssffoooootttt
 
 
 
-// 111111ssssssssdddffffffsssskkkkk33
-// 111111222ddddddddffffffsss11111133
+// 111111ssssssssdddffffffssss
+// 111111222ddddddddffffffsss
 export default () => (
   <PageHeaderWrapper>
     <RadioView javaCode="apiService" javaKey="api_type" />
