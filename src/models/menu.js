@@ -113,30 +113,15 @@ export default {
   },
 
   effects: {
-    *getMenuData({ payload }, { call,put }) {
+    *getMenuData({ payload }, { put }) {
       const { routes,authority, path } = payload;
       let routesFromServer=[];
       // ------ start ---
       if(PREFIX_PATH!==""){
         const {flatToMenuTree } = payload;
-        const params = {
-          tableName:'sys_privilege',
-          data:{
-            info:{
-              pageNo: 1,
-              pageSize: 999,
-            }
-          }
-        };
-
-        const response = yield call(list, params);
-        // console.log('======response in menu.js:', response);
         if(flatToMenuTree){
-          // console.log('======has flatToMenuTree function:');
           const memoizeOneFlatToMenuTree = memoizeOne(flatToMenuTree, isEqual);
-          memoizeOneFlatToMenuTree(response.data.records,routesFromServer,0);
-          setPrivileges(response.data.records);
-          setFormatPrivileges(getPrivileges());
+          memoizeOneFlatToMenuTree(getPrivileges(),routesFromServer,0);
         }
         // console.log('======routes in menu.js:', routesFromServer);
       }

@@ -27,23 +27,16 @@ export default {
         const user={id,username};
         setUser(user);
         reloadAuthorized();
-        const urlParams = new URL(window.location.href);
+        let url="/user/loading";
         const params = getPageQuery();
 
 
-        let { redirect } = params;
+        const { redirect } = params;
+        console.log(redirect);
         if (redirect) {
-          const redirectUrlParams = new URL(redirect);
-          if (redirectUrlParams.origin === urlParams.origin) {
-            redirect = redirect.substr(urlParams.origin.length);
-            if (redirect.match(/^\/.*#/)) {
-              redirect = redirect.substr(redirect.indexOf('#') + 1);
-            }
-          } else {
-            redirect = null;
-          }
+          url+=`?redirect=${redirect}`;
         }
-        yield put(routerRedux.replace(redirect || '/'));
+        yield put(routerRedux.replace(url));
       }
       // else{
       //   message.error(response.msg);
