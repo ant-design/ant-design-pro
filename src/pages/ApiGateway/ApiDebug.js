@@ -25,7 +25,7 @@ const fieldLabels = {
   responseBodySample: 'response Body Sample',
 };
 const request = requestExtend({
-  // credentials: 'include', // 默认请求是否带上cookie
+  // credentials: 'include', //  默认请求是否带上cookie
 });
 
 @connect(({uniComp, loading}) => ({
