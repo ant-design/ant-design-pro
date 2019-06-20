@@ -1,6 +1,6 @@
 export function getPayload(option,apiService) {
   return {
-    option, // 1-新增记录 2-修改记录
+    option, // 1- 新增记录 2- 修改记录
     data: {
       info: {
         apiService,
