@@ -482,7 +482,7 @@ class ApiDetail extends PureComponent {
                   {back.serviceTypeTitle}
                 </Description>
                 <Description term={fieldLabels.back.url}>
-                  <Ellipsis length={40} tooltip>{back.url}</Ellipsis>
+                  <Ellipsis length={30} tooltip style={{overflow:"inherit"}}>{back.url}</Ellipsis>
                 </Description>
                 <Description term={fieldLabels.back.reqPath}>{back.reqPath}</Description>
                 <Description term={fieldLabels.back.reqMethod}>{back.reqMethodTitle}</Description>
