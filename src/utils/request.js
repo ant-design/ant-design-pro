@@ -90,6 +90,16 @@ const request = extend({
   // headers:{Authorization:token},
 });
 
+
+function safeJsonParse(data) {
+  try {
+    return JSON.parse(data);
+  } catch (e) {} // eslint-disable-line
+
+
+  return data;
+}
+
 request.interceptors.response.use( (response) => {
   response.headers.forEach((value,key)=>{
     // console.log("==============12:",key,":",value);
@@ -113,8 +123,11 @@ request.interceptors.response.use( (response, options) => {
   //   console.log("===10",data);
   // }
   try{
-    const cloneResponse=response.status===200?response.clone().json():response.clone().text();
-    cloneResponse.then((data)=>{
+    const cloneResponseObj=response.clone();
+    console.log(cloneResponseObj)
+    cloneResponseObj.text().then(safeJsonParse)
+    // const cloneResponse=response.status===200?cloneResponseObj.json():cloneResponseObj.text();
+      .then((data)=>{
         const logObj={};
         logObj.request=options.data;
         logObj.url=response.url;
