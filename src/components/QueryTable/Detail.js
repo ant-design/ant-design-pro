@@ -1,5 +1,5 @@
 import React,{PureComponent} from 'react';
-import { Card, Table } from 'antd';
+import { Card, Table, Spin } from 'antd';
 import DescriptionList from '@/components/DescriptionList';
 import isEqual from 'lodash/isEqual';
 import moment from 'moment';
@@ -20,6 +20,7 @@ class Detail extends PureComponent {
     super(props);
     // console.log("tableform props:",props);
     this.state = {
+      loading:false,
       row: undefined,
     };
   }
@@ -29,15 +30,24 @@ class Detail extends PureComponent {
     const {selectedRow} = this.props;
     const {row:preRow} = this.state;
     console.log("componentDidMount88888:",selectedRow,preRow);
+
+    const {columnSchemas} = this.props;
+    const {reCallDetail}= columnSchemas;
+    if(reCallDetail){
+      this.setState({loading:true})
+    }
     this.callDetail(selectedRow);
   }
 
   componentWillReceiveProps(nextProps) {
-    const {selectedRow} = this.props;
+    const {selectedRow,columnSchemas} = this.props;
     const {selectedRow:nextSelectedRow} = nextProps;
     const {row:preRow} = this.state;
-    console.log("componentWillReceiveProps 0000000:",selectedRow,nextSelectedRow,preRow);
-    if (!preRow&&isEqual(preRow,nextSelectedRow)) {
+    console.log("componentWillReceiveProps 0000000:",selectedRow);
+    console.log("componentWillReceiveProps 0000000:",nextSelectedRow);
+    console.log("componentWillReceiveProps 0000000:",preRow);
+    console.log(!preRow,!isEqual(preRow,nextSelectedRow))
+    if (nextSelectedRow&&(!preRow||!isEqual(preRow[columnSchemas.key],nextSelectedRow[columnSchemas.key]))) {
       this.callDetail(nextSelectedRow);
     }
   }
@@ -46,14 +56,15 @@ class Detail extends PureComponent {
 
     const {columnSchemas,dispatch} = this.props;
     const {reCallDetail}= columnSchemas;
-    console.log("reCallDetail2222222:",reCallDetail);
+    console.log("reCallDetail2222222:",reCallDetail,row);
     if(reCallDetail&&row){
+      this.setState({loading:true})
       dispatch({
         type: 'uniComp/detail',
         payload: {tableName:columnSchemas.tableName,id:row[columnSchemas.key]},
         callback: (resp) => {
           console.log("resp000000:",resp);
-          this.setState({row:resp});
+          this.setState({row:resp,loading:false});
         },
       });
     }
@@ -120,12 +131,13 @@ class Detail extends PureComponent {
     const {
       columnSchemas,selectedRow
     } = this.props;
-    const {row}  = this.state;
+    const {row,loading}  = this.state;
     console.log("-----render in detail ------:",row);
     const myRow=row||selectedRow;
     const {columnDetails, relations} = columnSchemas;
     return (
       <div key='detail'>
+        <Spin tip="Loading..." spinning={loading} />
         {this.descList(myRow, columnDetails)}
         {this.handleRelation(relations, myRow)}
       </div>

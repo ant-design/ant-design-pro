@@ -5,7 +5,7 @@ import ReactJson from 'react-json-view'
 import {Input,Button} from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
-import {getLogInfo,getFirstLog,getSecondLog} from '@/utils/log';
+import {getLogInfo} from '@/utils/log';
 
 const {TextArea} = Input;
 // console.log("====1",`Bearer ${token}`);
@@ -16,8 +16,6 @@ class LogPage extends PureComponent {
   state={
     token:"",
     logArray:[],
-    firstLog:{},
-    secondLog:{},
     secondsElapsed: 0,
     isStop:false,
   }
@@ -35,8 +33,6 @@ class LogPage extends PureComponent {
     this.setState({
       token: `Bearer ${localStorage.getItem("token")}`,
       logArray: getLogInfo(),
-      firstLog:getFirstLog(),
-      secondLog:getSecondLog(),
     });
     this.setState((prevState) => ({
       secondsElapsed: prevState.secondsElapsed + timeout/1000,

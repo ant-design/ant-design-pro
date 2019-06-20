@@ -6,6 +6,7 @@ export default [
     routes: [
       { path: '/user', redirect: '/user/login' },
       { path: '/user/login', name: 'login', component: './User/Login' },
+      { path: '/user/loading', name: 'loading', component: './User/Loading' },
       { path: '/user/register', name: 'register', component: './User/Register' },
       {
         path: '/user/register-result',
