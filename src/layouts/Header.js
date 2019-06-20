@@ -10,7 +10,7 @@ import styles from './Header.less';
 import { setAllEnumData } from '@/utils/masterData';
 
 const { Header } = Layout;
-setAllEnumData();
+// setAllEnumData();
 
 class HeaderView extends Component {
   state = {
