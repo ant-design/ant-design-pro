@@ -32,7 +32,7 @@ class Test4 extends PureComponent {
       responseBody:undefined,
       responseStatus:undefined,
       responseStatusText:undefined,
-      url:'/server/baseInfo/sys/allEnumList'
+      url:'/server/serviceAgent/rest/baseInfo/sys/allEnumList'
     };
   }
 
