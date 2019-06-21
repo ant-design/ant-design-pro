@@ -57,7 +57,9 @@ class ApiDebug extends PureComponent {
     responseBodySample: null,
     responseCode:{
       status:null,
-      statusText:null
+      statusText:null,
+      respTime:0,
+      respSize:0
     },
     visible: false
   };
@@ -330,7 +332,6 @@ class ApiDebug extends PureComponent {
       form,
       apiService
     } = this.props;
-    const {validateFields} = form;
     const values = form.getFieldsValue();
 
     form.validateFields(['urlSample'], {}, (error, value) => {
@@ -342,45 +343,49 @@ class ApiDebug extends PureComponent {
         const apiInfo = getPayloadForReq(urlSamplePre, values);
         // console.log("send----",apiInfo);
         const reqMethod = apiService && apiService.reqMethod ? apiService.reqMethod : 'get';
-
+        const beforeTime  = new Date().getMilliseconds();
         request( apiInfo.urlSample,
           {method: reqMethod, data:apiInfo.requestBodySample,getResponse: true, headers: apiInfo.requestHeaderSample})
           .then(({data,response}) => {
 
             console.log("success",data,response);
-
+            const afterTime  = new Date().getMilliseconds();
 
             if (response.status === 200 ) {
-              message.success('Send Success');
-
               form.setFieldsValue({
                 responseBodySample:JSON.stringify(data),
                 responseHeaderSample:JSON.stringify(response.headers)
               });
-
-            }else{
-              message.success('Send Fail');
             }
+            const respTime = Math.abs(afterTime - beforeTime);
+            const responseCode = {};
+            responseCode.status = response.status;
+            responseCode.statusText = response.statusText;
+            responseCode.respTime = respTime;
+            this.setState({responseCode});
 
-            this.setState({
-              responseCode : response
-            });
+            if (response.status === 200 ) {
+              message.success('Send Success');
+            }else{
+              message.error('Send Fail');
+            }
 
           }).catch(err => {
-
             console.log("err:",err);
+            const afterTime  = new Date().getMilliseconds();
+            const respTime =  Math.abs(afterTime - beforeTime);
+            let status = '500';
+            let statusText = err;
+            const responseCode = {};
             if (err.response){
-              this.setState({responseCode : err.response});
+              status = err.response.status;
+              statusText = err.response.statusText;
             }
-            else {
-              const {responseCode} = this.state;
-              responseCode.status = '500';
-              responseCode.statusText = err;
-              this.setState({responseCode});
-            }
-            // if (err.data){
-            //   this.setState({responseBody:err.data});
-            // }
+            responseCode.status = status;
+            responseCode.statusText = statusText;
+            responseCode.respTime = respTime;
+            this.setState({responseCode});
+            message.error('Send Fail');
         });
       }
     });
@@ -528,7 +533,7 @@ class ApiDebug extends PureComponent {
       responseBodySample,
       responseCode
     } = this.state;
-    console.log("render---123---", this.state);
+    // console.log("render---123---", this.state);
     const sampleText = 'sample for post:{"type":"xxx","name":"xxx"}';
     const userDeubgIdNew = (userDebugId !== null && userDebugId !== "") ? userDebugId : form.getFieldValue('userDebugId');
     let delIcon = (
@@ -538,6 +543,7 @@ class ApiDebug extends PureComponent {
       delIcon = "";
     }
     let tabResp = "";
+    console.log("render",responseCode);
     if( responseCode.status !== null ){
       const contentStatus = (
         <div>
@@ -548,8 +554,8 @@ class ApiDebug extends PureComponent {
         (
           <div>
             <Popover content={contentStatus} title={responseCode.status}>Status： {responseCode.status} </Popover>
-            <Popover content="prompt text">Time： </Popover>
-            <Popover content="prompt text">Size: </Popover>
+            <Popover>Time：{responseCode.respTime}ms </Popover>
+            <Popover>Size: {responseCode.respSize}Kb</Popover>
           </div>
         );
     }
