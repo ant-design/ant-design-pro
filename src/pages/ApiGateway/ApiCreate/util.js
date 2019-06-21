@@ -150,26 +150,11 @@ export function getPayloadForApiDoc(oldApiService,values) {
 export function getPayloadForApiDebug(apiService,values) {
 
   const apiServiceDebug={...values,
-    requestBodySample:values.requestBodySample,
     requestHeaderSample:JSON.stringify(values.requestHeaderSample),
-    responseHeaderSample:JSON.stringify(values.responseHeaderSample),
-    responseBodySample:values.responseBodySample,
-    urlSample:values.urlSample,
-    debugName:values.debugName,
     apiId:apiService.apiId,
     userId:apiService.userId,
     };
   console.log("apiServiceDebug",apiServiceDebug);
-  // if(requestHeaderSample&&requestHeaderSample.length>0){
-  //   apiServiceDebug.requestHeaderSample = JSON.stringify(requestHeaderSample.map(item => {
-  //     return {key:item.name,value:'xxx'};
-  //   }));
-  // }
-  // if(responseHeaderSample&&responseHeaderSample.length>0){
-  //   apiServiceDebug.responseHeaderSample = JSON.stringify(responseHeaderSample.map(item => {
-  //     return {key:item.name,value:'xxx'};
-  //   }));
-  // }
 
   let option = 1;
   if(apiServiceDebug.userDebugId){

@@ -212,6 +212,11 @@ export default [
             component: './Test/Test5',
           },
           {
+            path: '/test/test6',
+            name: 'test6',
+            component: './Test/Test6',
+          },
+          {
             path: '/test/orgTransfer',
             name: 'orgTransfer',
             component: './ApiGateway/OrgTransfer',
