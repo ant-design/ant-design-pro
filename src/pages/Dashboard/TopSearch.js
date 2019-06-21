@@ -14,22 +14,20 @@ const columns = [
     key: 'index',
   },
   {
-    title: (
-      <FormattedMessage id="app.analysis.table.search-keyword" defaultMessage="Search keyword" />
-    ),
+    title: "Api Name",
     dataIndex: 'keyword',
     key: 'keyword',
     render: text => <a href="/">{text}</a>,
   },
   {
-    title: <FormattedMessage id="app.analysis.table.users" defaultMessage="Users" />,
+    title: "Call Count",
     dataIndex: 'count',
     key: 'count',
     sorter: (a, b) => a.count - b.count,
     className: styles.alignRight,
   },
   {
-    title: <FormattedMessage id="app.analysis.table.weekly-range" defaultMessage="Weekly Range" />,
+    title: "Weekly Range",
     dataIndex: 'range',
     key: 'range',
     sorter: (a, b) => a.range - b.range,
@@ -46,9 +44,7 @@ const TopSearch = memo(({ loading, visitData2, searchData, dropdownGroup }) => (
   <Card
     loading={loading}
     bordered={false}
-    title={
-      <FormattedMessage id="app.analysis.online-top-search" defaultMessage="Online Top Search" />
-    }
+    title="Online Top Api"
     extra={dropdownGroup}
     style={{ marginTop: 24 }}
   >
@@ -57,9 +53,9 @@ const TopSearch = memo(({ loading, visitData2, searchData, dropdownGroup }) => (
         <NumberInfo
           subTitle={
             <span>
-              <FormattedMessage id="app.analysis.search-users" defaultMessage="search users" />
+              Calls
               <Tooltip
-                title={<FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />}
+                title="introduce"
               >
                 <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
               </Tooltip>
@@ -76,12 +72,9 @@ const TopSearch = memo(({ loading, visitData2, searchData, dropdownGroup }) => (
         <NumberInfo
           subTitle={
             <span>
-              <FormattedMessage
-                id="app.analysis.per-capita-search"
-                defaultMessage="Per Capita Search"
-              />
+              Per Api Calls
               <Tooltip
-                title={<FormattedMessage id="app.analysis.introduce" defaultMessage="introduce" />}
+                title="introduce"
               >
                 <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
               </Tooltip>

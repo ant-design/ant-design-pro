@@ -7,10 +7,9 @@ import styles from './Analysis.less';
 import PageLoading from '@/components/PageLoading';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
-const SalesCard = React.lazy(() => import('./SalesCard'));
+const OrgCard = React.lazy(() => import('./OrgCard'));
 const TopSearch = React.lazy(() => import('./TopSearch'));
-const ProportionSales = React.lazy(() => import('./ProportionSales'));
-const OfflineData = React.lazy(() => import('./OfflineData'));
+const ProportionGroups = React.lazy(() => import('./ProportionGroups'));
 
 @connect(({ chart, loading }) => ({
   chart,
@@ -19,7 +18,6 @@ const OfflineData = React.lazy(() => import('./OfflineData'));
 class Analysis extends Component {
   state = {
     salesType: 'all',
-    currentTabKey: '',
     rangePickerValue: getTimeDistance('year'),
   };
 
@@ -43,12 +41,6 @@ class Analysis extends Component {
   handleChangeSalesType = e => {
     this.setState({
       salesType: e.target.value,
-    });
-  };
-
-  handleTabChange = key => {
-    this.setState({
-      currentTabKey: key,
     });
   };
 
@@ -90,24 +82,18 @@ class Analysis extends Component {
   };
 
   render() {
-    const { rangePickerValue, salesType, currentTabKey } = this.state;
+    const { rangePickerValue, salesType } = this.state;
     const { chart, loading } = this.props;
     const {
       visitData,
       visitData2,
       salesData,
       searchData,
-      offlineData,
-      offlineChartData,
       salesTypeData,
-      salesTypeDataOnline,
-      salesTypeDataOffline,
     } = chart;
     let salesPieData;
     if (salesType === 'all') {
       salesPieData = salesTypeData;
-    } else {
-      salesPieData = salesType === 'online' ? salesTypeDataOnline : salesTypeDataOffline;
     }
     const menu = (
       <Menu>
@@ -124,7 +110,6 @@ class Analysis extends Component {
       </span>
     );
 
-    const activeKey = currentTabKey || (offlineData[0] && offlineData[0].name);
 
     return (
       <GridContent>
@@ -132,7 +117,7 @@ class Analysis extends Component {
           <IntroduceRow loading={loading} visitData={visitData} />
         </Suspense>
         <Suspense fallback={null}>
-          <SalesCard
+          <OrgCard
             rangePickerValue={rangePickerValue}
             salesData={salesData}
             isActive={this.isActive}
@@ -156,7 +141,7 @@ class Analysis extends Component {
             </Col>
             <Col xl={12} lg={24} md={24} sm={24} xs={24}>
               <Suspense fallback={null}>
-                <ProportionSales
+                <ProportionGroups
                   dropdownGroup={dropdownGroup}
                   salesType={salesType}
                   loading={loading}
@@ -167,15 +152,6 @@ class Analysis extends Component {
             </Col>
           </Row>
         </div>
-        <Suspense fallback={null}>
-          <OfflineData
-            activeKey={activeKey}
-            loading={loading}
-            offlineData={offlineData}
-            offlineChartData={offlineChartData}
-            handleTabChange={this.handleTabChange}
-          />
-        </Suspense>
       </GridContent>
     );
   }
