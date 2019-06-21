@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Card, Button, Form, Input, Tabs, BackTop, message, Row, Col, Icon, Popover, Select} from 'antd';
+import {Card, Button, Form, Input, Tabs, BackTop, message, Row, Col, Icon, Popover, Select, Modal} from 'antd';
 import {connect} from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {extend as requestExtend} from 'umi-request';
@@ -25,14 +25,26 @@ const fieldLabels = {
   responseBodySample: 'response Body Sample',
 };
 const request = requestExtend({
-  // credentials: 'include', //  默认请求是否带上cookie
+  // credentials: 'include', // 默认请求是否带上cookie
 });
+
+// let formChange = 0;// 全局变化值
 
 @connect(({uniComp, loading}) => ({
   uniComp,
   loading: loading.models.uniComp
 }))
-@Form.create()
+@Form.create({})
+// @Form.create({
+//   onValuesChange({ dispatch }, changedValues, allValues) {
+//
+//     formChange +=1;
+//     // 表单项变化时请求数据
+//     // eslint-disable-next-line
+//     console.log("onValuesChange",changedValues, allValues, formChange);
+//     // 发送改变将值返回给父组件
+//   },
+// })
 class ApiDebug extends PureComponent {
   state = {
     width: '100%',
@@ -41,8 +53,13 @@ class ApiDebug extends PureComponent {
     urlSample: null,
     requestHeaderSample: [],
     requestBodySample: null,
-    responseHeaderSample: [],
+    responseHeaderSample: null,
     responseBodySample: null,
+    responseCode:{
+      status:null,
+      statusText:null
+    },
+    visible: false
   };
 
   componentWillMount() {
@@ -51,30 +68,43 @@ class ApiDebug extends PureComponent {
 
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, {passive: true});
+    const {onRef} = this.props;
+    onRef(this);
   }
 
   componentWillReceiveProps(nextProps) {
 
-    const {selectedRow} = this.props;
+    const { selectedRow, form, apiService} = this.props;
     console.log("componentWillReceiveProps", nextProps.selectedRow);
     if (nextProps.selectedRow && selectedRow !== nextProps.selectedRow) {
 
       const apiServiceDoc = nextProps.selectedRow;
       // 从db里面获取字符串数据，再转成json对象，在增加key字段，赋值给表格组件
       const requestHeaderSample = this.convertDocObj(apiServiceDoc, requestHeaderFlag);
-      const {requestBodySample,responseBodySample,userDebugId, debugName,urlSample} = apiServiceDoc;
-      const responseHeaderSample = this.convertDocObj(apiServiceDoc, responseHeaderFlag);
+      const {requestBodySample,responseBodySample,userDebugId, debugName,urlSample,responseHeaderSample} = apiServiceDoc;
+      // const responseHeaderSample = this.convertDocObj(apiServiceDoc, responseHeaderFlag);
       // const urlSamplePre = getItemValue('env', 'localhost', 'angentHost');
       // const urlSample = apiServiceDoc.urlSample ? apiServiceDoc.urlSample : `${urlSamplePre}${apiServiceDoc.urlSample}`;
-      this.setState({
+      const urlSampleNew = urlSample !== null && urlSample !== "" ? urlSample : apiService?apiService.requestUrl:"";
+      form.setFieldsValue({
         userDebugId,
         debugName,
-        urlSample,
+        urlSample:urlSampleNew,
         requestHeaderSample,
         requestBodySample,
         responseHeaderSample,
         responseBodySample,
       });
+      //
+      // this.setState({
+      //   userDebugId,
+      //   debugName,
+      //   urlSample,
+      //   requestHeaderSample,
+      //   requestBodySample,
+      //   responseHeaderSample,
+      //   responseBodySample,
+      // });
 
     }
   }
@@ -176,9 +206,9 @@ class ApiDebug extends PureComponent {
   };
 
   getToken = (key, value) => {
-    console.log(key, value);
+
     const {
-      dispatch,
+      dispatch,form
     } = this.props;
     const payload = {};
     payload.appkey = value.props.children;
@@ -196,17 +226,40 @@ class ApiDebug extends PureComponent {
           const tokenKey = getItemValue('serviceAgent', 'req_header', 'tokenKey');
           const tokenPre = getItemValue('serviceAgent', 'req_header', 'tokenPre');
           const token = `${tokenPre}${data.token}`;
-          const {requestHeaderSample} = this.state;
-          const newRequestHeaderSample = requestHeaderSample.filter(item => item.name !== 'appkey' && item.name !== tokenKey);
-          newRequestHeaderSample.push({
-            name: 'appkey',
-            remark: appkey
+          const requestHeaderSample = form.getFieldValue('requestHeaderSample');
+          // const {requestHeaderSample} = this.state;
+
+          const newRequestHeaderSample=[];
+          requestHeaderSample.forEach((item) => {
+
+            if (item.name !== 'appkey') {
+              if (item.name === tokenKey) {
+                item.remark = token;
+                newRequestHeaderSample.push(item);
+              } else {
+                newRequestHeaderSample.push(item);
+              }
+            } else {
+              item.remark = appkey;
+              newRequestHeaderSample.push(item);
+            }
           });
-          newRequestHeaderSample.push({
-            name: tokenKey,
-            remark: token
-          });
-          this.setState({
+          const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey' );
+          const tokenAttr = newRequestHeaderSample.filter(item => item.name === tokenKey );
+          if(!appKeyAttr||appKeyAttr.length === 0){
+            newRequestHeaderSample.push({
+              name: 'appkey',
+              remark: appkey
+            });
+          }
+          if(!tokenAttr||tokenAttr.length === 0){
+            newRequestHeaderSample.push({
+              name: tokenKey,
+                remark: token
+            });
+          }
+
+          form.setFieldsValue({
             requestHeaderSample: newRequestHeaderSample
           });
         }
@@ -274,50 +327,96 @@ class ApiDebug extends PureComponent {
   send = () => {
 
     const {
-      form: {validateFieldsAndScroll},
+      form,
       apiService
     } = this.props;
-    validateFieldsAndScroll((error, values) => {
-      if (!error) {
+    const {validateFields} = form;
+    const values = form.getFieldsValue();
+
+    form.validateFields(['urlSample'], {}, (error, value) => {
+      if (error) {
+          console.log("form",error,value);
+      } else {
+
         const urlSamplePre = getItemValue('env', 'localhost', 'angentHost');
         const apiInfo = getPayloadForReq(urlSamplePre, values);
         // console.log("send----",apiInfo);
-        try{
-          const reqMethod = apiService && apiService.reqMethod ? apiService.reqMethod : 'get';
-          request( apiInfo.urlSample,
-            {method: reqMethod, data:apiInfo.requestBodySample,getResponse: true, headers: apiInfo.requestHeaderSample })
-            .then(({data, response}) => {
-              if (data.code === '200') {
-                message.success('Send Success');
-                this.setState({
-                  responseBodySample:response.body,
-                  responseHeaderSample:response.headers
-                })
-              }else{
-                message.success('Send Fail');
-              }
-              console.log("req----",data, response, response.headers);
-            });
-        }catch (e){
-          message.success('Send Fail');
-        }
+        const reqMethod = apiService && apiService.reqMethod ? apiService.reqMethod : 'get';
 
-        // console.log("api doc update submit apiInfo:", apiInfo);
-        // // submit the values
-        // dispatch({
-        //   type: 'uniComp/req',
-        //   payload: apiInfo,
-        //   callback: resp => {
-        //     console.log('resp=======', resp);
-        //     if (resp.code === '200') {
-        //       message.success('提交成功');
-        //     } else {
-        //       message.error('提交失败');
-        //     }
-        //   },
-        // });
+        request( apiInfo.urlSample,
+          {method: reqMethod, data:apiInfo.requestBodySample,getResponse: true, headers: apiInfo.requestHeaderSample})
+          .then(({data,response}) => {
+
+            console.log("success",data,response);
+
+
+            if (response.status === 200 ) {
+              message.success('Send Success');
+
+              form.setFieldsValue({
+                responseBodySample:JSON.stringify(data),
+                responseHeaderSample:JSON.stringify(response.headers)
+              });
+
+            }else{
+              message.success('Send Fail');
+            }
+
+            this.setState({
+              responseCode : response
+            });
+
+          }).catch(err => {
+
+            console.log("err:",err);
+            if (err.response){
+              this.setState({responseCode : err.response});
+            }
+            else {
+              const {responseCode} = this.state;
+              responseCode.status = '500';
+              responseCode.statusText = err;
+              this.setState({responseCode});
+            }
+            // if (err.data){
+            //   this.setState({responseBody:err.data});
+            // }
+        });
       }
     });
+    // const checkStatus = (response) => {
+    //   console.log("checkStatus",response);
+    //   const codeMessage = {
+    //     200: '服务器成功返回请求的数据。',
+    //     201: '新建或修改数据成功。',
+    //     202: '一个请求已经进入后台排队（异步任务）。',
+    //     204: '删除数据成功。',
+    //     400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
+    //     401: '用户没有权限（令牌、用户名、密码错误）。',
+    //     403: '用户得到授权，但是访问是被禁止的。',
+    //     404: '发出的请求针对的是不存在的记录，服务器没有进行操作。',
+    //     406: '请求的格式不可得。',
+    //     410: '请求的资源被永久删除，且不会再得到的。',
+    //     422: '当创建一个对象时，发生一个验证错误。',
+    //     500: '服务器发生错误，请检查服务器。',
+    //     502: '网关错误。',
+    //     503: '服务不可用，服务器暂时过载或维护。',
+    //     504: '网关超时。',
+    //   };
+    //   if (response.status >= 200 && response.status < 300) {
+    //     return response;
+    //   }
+    //   const errortext = codeMessage[response.status] || response.statusText;
+    //   notification.error({
+    //     message: `请求错误 ${response.status}: ${response.url}`,
+    //     description: errortext,
+    //   });
+    //   const err = new Error(errortext);
+    //   err.name = response.status;
+    //   err.response = response;
+    //   console.log("checkStatus",err);
+    //   throw err;
+    // };
   }
 
   save = () => {
@@ -343,6 +442,7 @@ class ApiDebug extends PureComponent {
             // console.log('resp=======', resp);
             if (resp.code === '200') {
               message.success('提交成功');
+              this.getDebugList('save');
             } else {
               message.error('提交失败');
             }
@@ -352,10 +452,36 @@ class ApiDebug extends PureComponent {
     });
   };
 
-  handleDel = (id) => {
+  getDebugList = (sign) =>{
+    console.log("-----getDebugList");
+    const {apiId, dispatch,onApiDebug} = this.props;
+    /* 获取apiDebug数据 */
+    const userId = getUserId();
+    const tableName = "api_user_debug";
+    const pageSize = 9999;
+    const params = {userId, tableName, pageSize, apiId};
+    console.log('binddata', params);
+    dispatch({
+      type: 'uniComp/list',
+      payload: params,
+      onConversionData: undefined,
+      callback: resp => {
+        console.log("---123---", resp);
+        const {data} = resp;
+        const {records} = data;
+        const key = records ? records[0].userDebugId.toString() : null;
+        console.log("----22222---", key);
+        const selectKey = sign=== 'del'? key: -1;
+        onApiDebug(records,selectKey);
+      }
+    });
+
+  }
+
+  deleteItem = (id) => {
+
     console.log("handleDel", id);
     const {dispatch} = this.props;
-
     const payload = {};
     payload.tableName = 'api_user_debug';
     payload.id = id;
@@ -365,19 +491,33 @@ class ApiDebug extends PureComponent {
       callback: resp => {
         console.log('resp=======', resp);
         message.success('删除成功');
-      },
+        /* 重新获取列表信息  */
+        this.getDebugList('del');
+      }
     });
+  }
+
+  handleDel = (id) => {
+
+    Modal.confirm({
+      title: 'Delete Api Debug',
+      content: 'Are you sure delete this Api Debug？',
+      okText: 'Yes',
+      cancelText: 'No',
+      onOk: () => this.deleteItem(id),
+    });
+
   };
 
   render() {
     const {
-      form: {getFieldDecorator},
+      form,
       submitting,
       apiService,
-      apiId,
       selectedRow
     } = this.props;
-    console.log("render---this.props---", this.props, apiId);
+    const {getFieldDecorator} = form;
+    // console.log("render---this.props---", this.props, apiId);
     const {
       userDebugId,
       debugName,
@@ -386,15 +526,34 @@ class ApiDebug extends PureComponent {
       requestBodySample,
       responseHeaderSample,
       responseBodySample,
+      responseCode
     } = this.state;
-    // console.log("render---123---", this.state);
+    console.log("render---123---", this.state);
     const sampleText = 'sample for post:{"type":"xxx","name":"xxx"}';
+    const userDeubgIdNew = (userDebugId !== null && userDebugId !== "") ? userDebugId : form.getFieldValue('userDebugId');
     let delIcon = (
-      <Icon type="delete" onClick={() => this.handleDel(userDebugId)} />
+      <Icon type="delete" onClick={() => this.handleDel(userDeubgIdNew)} />
     );
-    if (!userDebugId || selectedRow.isNew ) {
+    if (!userDeubgIdNew || selectedRow.isNew ) {
       delIcon = "";
     }
+    let tabResp = "";
+    if( responseCode.status !== null ){
+      const contentStatus = (
+        <div>
+          <p>{responseCode.statusText}</p>
+        </div>
+      );
+      tabResp =
+        (
+          <div>
+            <Popover content={contentStatus} title={responseCode.status}>Status： {responseCode.status} </Popover>
+            <Popover content="prompt text">Time： </Popover>
+            <Popover content="prompt text">Size: </Popover>
+          </div>
+        );
+    }
+
     return (
       <PageHeaderWrapper>
         <Card title="" className={styles.card} bordered={false} extra={delIcon}>
@@ -459,7 +618,7 @@ class ApiDebug extends PureComponent {
             <Col lg={9} md={6} sm={24} style={{height: 50}}>
               <Form.Item>
                 {getFieldDecorator('urlSample', {
-                  initialValue: urlSample !== null && urlSample !== "" ? urlSample : apiService.requestUrl,
+                  initialValue: urlSample !== null && urlSample !== "" ? urlSample : apiService?apiService.requestUrl:"",
                   rules: [
                     {
                       required: true,
@@ -485,7 +644,7 @@ class ApiDebug extends PureComponent {
             </Col>
           </Row>
         </Card>
-        <Tabs defaultActiveKey="1">
+        <Tabs defaultActiveKey="1" tabBarExtraContent={tabResp}>
           <TabPane tab="Request Header" key="1">
             <Card title="" className={styles.card} bordered={false}>
               {getFieldDecorator('requestHeaderSample', {
@@ -507,18 +666,19 @@ class ApiDebug extends PureComponent {
 
         <Tabs defaultActiveKey="3">
           <TabPane tab="Response Header" key="3">
-            <Card title="" className={styles.card} bordered={false}>
-              {getFieldDecorator('responseHeaderSample', {
+            <Card title="Response Parameter Header Sample" className={styles.card} bordered={false}>
+              {getFieldDecorator(`${responseHeaderFlag}Sample`, {
                 initialValue: responseHeaderSample,
-              })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='value' />)}
+                rules: [{required: false, message: '不能超过5000字符！', max: 5000}],
+              })(<TextArea placeholder={sampleText} autosize={{minRows: 4, maxRows: 15}} />)}
             </Card>
           </TabPane>
           <TabPane tab="Response Body" key="4">
             <Card title="Response Parameter Body Sample" className={styles.card} bordered={false}>
               <Form.Item>
                 {getFieldDecorator(`${responseBodyFlag}Sample`, {
-                  initialValue: (responseBodySample),
-                  rules: [{required: false, message: '不能超过5000字符！', max: 5000}],
+                  initialValue: responseBodySample,
+                  rules: [],
                 })(
                   <TextArea
                     rows={4}

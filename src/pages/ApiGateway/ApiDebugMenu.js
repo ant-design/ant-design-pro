@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import router from 'umi/router';
-import {Menu, Button} from 'antd';
+import {Menu, Button, message} from 'antd';
 import {getUserId} from '@/utils/authority';
 
 import {connect} from "dva";
 import styles from "../Account/Settings/Info.less";
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import ApiDebug from "./ApiDebug";
 
 const {Item} = Menu;
@@ -16,14 +17,14 @@ const {Item} = Menu;
 }))
 
 class ApiDebugMenu extends Component {
-  index = 0;
 
   state = {
     mode: 'inline',
     selectKey: null,
     selectedRow: {},
     apiService: {},
-    menuList : []
+    menuList : [],
+    newItem : false
   };
 
   componentWillMount() {
@@ -100,7 +101,7 @@ class ApiDebugMenu extends Component {
     // const {
     //   uniComp: {data}
     // } = this.props;
-    // console.log("getmenu", data);
+    // console.log("getMenu", data);
     // const list = data && data.list ? data.list : [];
     const {menuList} = this.state;
     const selectList = menuList.filter(item => key && key.indexOf(item.userDebugId) !== -1);
@@ -111,27 +112,34 @@ class ApiDebugMenu extends Component {
     });
   };
 
-  getmenu = () => {
+  handleMenuClick = (e) => {
+    console.log(e);
+    /* 父组件调用子组件方法 */
+    // this.child.childClick();
+  };
+
+  getMenu = () => {
 
     const {menuList} = this.state;
-    // const {uniComp} = this.props;
-    // const data = uniComp && uniComp.data ? uniComp.data : {};
-    // const list = data && data.list ? data.list : [];
-    return menuList.map(item => <Item key={item.userDebugId}>{item.debugName} </Item>);
+    console.log("getMenu",menuList);
+    return menuList.map(item => <Item key={item.userDebugId} onClick={this.handleMenuClick}>{item.debugName} </Item>);
   };
 
   newMenu = () => {
-    const { menuList } = this.state;
-    const newData = menuList.map(item => ({ ...item }));
-    newData.push({
-      debugName: '',
-      requestBodySample: '',
-      urlSample: '',
-      userDebugId:``,
-      isNew: true,
-    });
-    this.index += 1;
-    this.setState({ menuList: newData });
+    const { menuList,newItem } = this.state;
+    if( newItem ){
+      message.error('Now,you have a new item.Please first save,then new item.');
+    }else{
+      const newData = menuList.map(item => ({ ...item }));
+      newData.push({
+        debugName: '',
+        requestBodySample: '',
+        urlSample: '',
+        userDebugId:``,
+        isNew: true,
+      });
+      this.setState({ menuList: newData, newItem:true });
+    }
   }
 
   // getRightTitle = () => {
@@ -168,6 +176,27 @@ class ApiDebugMenu extends Component {
     });
   };
 
+  onRef = (ref) => {
+    this.child = ref
+  }
+
+  click = (e) => {
+    console.log(e);
+    this.child.myName();
+  }
+
+  handelMenu = (menuList,selectKey) => {
+    console.log('---handelMenu＝＝＝＝3:', menuList);
+    if(selectKey !== -1){
+      /*  删除 */
+      this.setState({ menuList ,selectKey});
+    }else{
+      /* 保存 */
+      this.setState({ menuList ,newItem:false});
+    }
+   
+  }
+
   render() {
 
     const {location} = this.props;
@@ -175,36 +204,44 @@ class ApiDebugMenu extends Component {
     const {apiId} = state || {apiId: 105};
     const {mode, selectKey, selectedRow, apiService} = this.state;
     return (
-      <GridContent>
-        <div
-          className={styles.main}
-          ref={ref => {
-            this.main = ref;
-          }}
-        >
-          <div className={styles.leftmenu}>
-            <Menu mode={mode} selectedKeys={[selectKey]} onClick={this.selectKey}>
-              {this.getmenu()}
-            </Menu>
-            <Button
-              style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
-              type="dashed"
-              onClick={this.newMenu}
-              icon="plus"
-              htmlType="button"
-            >
-              NEW
-            </Button>
+      <PageHeaderWrapper
+        onBack={() => window.history.back()}
+        style={{ height: '50px' }}
+        title="Api Update"
+      >
+        <GridContent>
+          <div
+            className={styles.main}
+            ref={ref => {
+              this.main = ref;
+            }}
+          >
+            <div className={styles.leftmenu}>
+              <Menu mode={mode} selectedKeys={[selectKey]} onClick={this.selectKey}>
+                {this.getMenu()}
+              </Menu>
+              <Button
+                style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
+                type="dashed"
+                onClick={this.newMenu}
+                icon="plus"
+                htmlType="button"
+              >
+                NEW
+              </Button>
+            </div>
+            <div className={styles.right}>
+              <ApiDebug
+                apiId={apiId}
+                selectedRow={selectedRow}
+                apiService={apiService}
+                onRef={this.onRef}
+                onApiDebug={this.handelMenu}
+              />
+            </div>
           </div>
-          <div className={styles.right}>
-            <ApiDebug
-              apiId={apiId}
-              selectedRow={selectedRow}
-              apiService={apiService}
-            />
-          </div>
-        </div>
-      </GridContent>
+        </GridContent>
+      </PageHeaderWrapper>
     );
   }
 }
