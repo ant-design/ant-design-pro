@@ -33,7 +33,7 @@ const onBlockCopy = (label: string) => {
 const BlockCodeView: React.SFC<{
   url: string;
 }> = ({ url }) => {
-  const blockUrl = `npx umi block add ${firstUpperCase(url)}  --path=${url}`;
+  const blockUrl = `npx umi block add ${firstUpperCase(url)} --path=${url}`;
   return (
     <div className={styles['copy-block-view']}>
       <Typography.Paragraph
