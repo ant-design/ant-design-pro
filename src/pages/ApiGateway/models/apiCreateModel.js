@@ -110,7 +110,7 @@ export default {
         apiService,
       };
     },
-    initDataForAdd(){
+    initDataForAdd(state){
       // 创建的时候初始化数据
       const apiService= {
         serviceType:'1',
@@ -127,6 +127,7 @@ export default {
         },],
       };
       return {
+        ...state,
         apiService,
       };
     },

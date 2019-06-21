@@ -23,10 +23,12 @@ const formItemLayout = {
 class Step1 extends React.PureComponent {
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'apiCreateModel/initDataForAdd',
-    });
+    const { dispatch,apiService} = this.props;
+    if(!apiService||!apiService.serviceType){
+      dispatch({
+        type: 'apiCreateModel/initDataForAdd',
+      });
+    }
 
   }
 
