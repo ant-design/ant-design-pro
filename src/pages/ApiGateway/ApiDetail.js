@@ -512,7 +512,9 @@ class ApiDetail extends PureComponent {
                 }}
               >
                 <Description term={fieldLabels.backAttr.tokenKey}>{back.tokenKey}</Description>
-                <Description term={fieldLabels.backAttr.tokenStr}>{back.tokenStr}</Description>
+                <Description term={fieldLabels.backAttr.tokenStr}>
+                  <Ellipsis length={80} tooltip style={{overflow:"inherit"}}>{back.tokenStr}</Ellipsis>
+                </Description>
               </DescriptionList>
               <DescriptionList
                 style={{
