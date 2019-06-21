@@ -310,7 +310,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.front.groupId}>
                   {getFieldDecorator('front.groupId', {
                     rules: [{ required: true, message: '请选择分组' }],
-                  })(<GroupSelectView />)}
+                  })(<GroupSelectView showSearch optionFilterProp="children" />)}
                 </Form.Item>
               </Col>
               <Col

@@ -9,7 +9,7 @@ import { MiniArea } from '@/components/Charts';
 
 const columns = [
   {
-    title: <FormattedMessage id="app.analysis.table.rank" defaultMessage="Rank" />,
+    title: "Rank",
     dataIndex: 'index',
     key: 'index',
   },

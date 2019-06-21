@@ -42,9 +42,9 @@ class GroupSelectView extends PureComponent {
 
   render() {
     // const value = this.conversionObject();
-    const { value,style } = this.props;
+    const { value,style, ...restProps} = this.props;
     return (
-      <Select value={value} onSelect={this.selectChangeItem} style={style}>
+      <Select value={value} onSelect={this.selectChangeItem} style={style} {...restProps}>
         {this.getOption()}
       </Select>
     );

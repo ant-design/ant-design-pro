@@ -53,7 +53,7 @@ class Step1 extends React.PureComponent {
             {getFieldDecorator('groupId', {
               initialValue: apiService.groupId,
               rules: [{ required: true, message: '请选择分组' }],
-            })(<GroupSelectView />)}
+            })(<GroupSelectView showSearch optionFilterProp="children" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Api名称">
             {getFieldDecorator('name', {

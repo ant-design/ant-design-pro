@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
-import { Card, Radio } from 'antd';
+import { Card } from 'antd';
 import numeral from 'numeral';
 import styles from './Analysis.less';
 import { Pie } from '@/components/Charts';
 
 const ProportionGroups = memo(
-  ({ dropdownGroup, salesType, loading, salesPieData, handleChangeSalesType }) => (
+  ({  loading, salesPieData }) => (
     <Card
       loading={loading}
       className={styles.salesCard}
