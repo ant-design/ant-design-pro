@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Row, Col, Card, Tabs, DatePicker } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
+
 import numeral from 'numeral';
 import styles from './Analysis.less';
 import { Bar } from '@/components/Charts';
@@ -8,15 +8,12 @@ import { Bar } from '@/components/Charts';
 const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
 
-const rankingListData = [];
-for (let i = 0; i < 7; i += 1) {
-  rankingListData.push({
-    title: formatMessage({ id: 'app.analysis.test' }, { no: i }),
-    total: 323234,
-  });
-}
+const rankingListData = [{title:'crm',total:323234},
+  {title:'billing',total:263234},{title:'ose',total:223234},
+  {title:'tdc',total:173234},{title:'och',total:113234},
+  {title:'mvno',total:3234},{title:'ali',total:234},];
 
-const SalesCard = memo(
+const OrgCard = memo(
   ({ rangePickerValue, salesData, isActive, handleRangePickerChange, loading, selectDate }) => (
     <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
       <div className={styles.salesCard}>
@@ -25,16 +22,16 @@ const SalesCard = memo(
             <div className={styles.salesExtraWrap}>
               <div className={styles.salesExtra}>
                 <a className={isActive('today')} onClick={() => selectDate('today')}>
-                  <FormattedMessage id="app.analysis.all-day" defaultMessage="All Day" />
+                  All Day
                 </a>
                 <a className={isActive('week')} onClick={() => selectDate('week')}>
-                  <FormattedMessage id="app.analysis.all-week" defaultMessage="All Week" />
+                  All Week
                 </a>
                 <a className={isActive('month')} onClick={() => selectDate('month')}>
-                  <FormattedMessage id="app.analysis.all-month" defaultMessage="All Month" />
+                  All Month
                 </a>
                 <a className={isActive('year')} onClick={() => selectDate('year')}>
-                  <FormattedMessage id="app.analysis.all-year" defaultMessage="All Year" />
+                  All Year
                 </a>
               </div>
               <RangePicker
@@ -48,20 +45,15 @@ const SalesCard = memo(
           tabBarStyle={{ marginBottom: 24 }}
         >
           <TabPane
-            tab={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
-            key="sales"
+            tab="Consumer Calls"
+            key="calls"
           >
             <Row>
               <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                 <div className={styles.salesBar}>
                   <Bar
                     height={295}
-                    title={
-                      <FormattedMessage
-                        id="app.analysis.sales-trend"
-                        defaultMessage="Sales Trend"
-                      />
-                    }
+                    title="Calls Trend"
                     data={salesData}
                   />
                 </div>
@@ -69,10 +61,7 @@ const SalesCard = memo(
               <Col xl={8} lg={12} md={12} sm={24} xs={24}>
                 <div className={styles.salesRank}>
                   <h4 className={styles.rankingTitle}>
-                    <FormattedMessage
-                      id="app.analysis.sales-ranking"
-                      defaultMessage="Sales Ranking"
-                    />
+                    Consumer Ranking of Call
                   </h4>
                   <ul className={styles.rankingList}>
                     {rankingListData.map((item, i) => (
@@ -96,20 +85,15 @@ const SalesCard = memo(
             </Row>
           </TabPane>
           <TabPane
-            tab={<FormattedMessage id="app.analysis.visits" defaultMessage="Visits" />}
-            key="views"
+            tab="Producer Calleds"
+            key="calleds"
           >
             <Row>
               <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                 <div className={styles.salesBar}>
                   <Bar
                     height={292}
-                    title={
-                      <FormattedMessage
-                        id="app.analysis.visits-trend"
-                        defaultMessage="Visits Trend"
-                      />
-                    }
+                    title="Called Trend"
                     data={salesData}
                   />
                 </div>
@@ -117,10 +101,7 @@ const SalesCard = memo(
               <Col xl={8} lg={12} md={12} sm={24} xs={24}>
                 <div className={styles.salesRank}>
                   <h4 className={styles.rankingTitle}>
-                    <FormattedMessage
-                      id="app.analysis.visits-ranking"
-                      defaultMessage="Visits Ranking"
-                    />
+                    Producer Ranking of Called
                   </h4>
                   <ul className={styles.rankingList}>
                     {rankingListData.map((item, i) => (
@@ -147,4 +128,4 @@ const SalesCard = memo(
   )
 );
 
-export default SalesCard;
+export default OrgCard;

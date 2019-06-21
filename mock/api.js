@@ -328,7 +328,7 @@ export default {
     res.send({ message: 'Ok' });
   },
   'GET /api/tags': mockjs.mock({
-    'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }],
+    'list|100': [{ name: '@name', 'value|1-100': 150, 'type|0-2': 1 }],
   }),
   'GET /api/fake_list': getFakeList,
   'POST /api/fake_list': postFakeList,
