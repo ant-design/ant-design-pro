@@ -47,7 +47,9 @@ const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
 });
 
+//
+window.oldFetch = window.fetch;
 window.fetch = (url, option) =>
-  window.fetch(`https://deploy-preview-4576--ant-design-pro.netlify.com${url}`, option);
+  window.oldFetch(`https://5d0c8b8dfee8cf0008c984e4--ant-design-pro.netlify.com${url}`, option);
 
 export default request;
