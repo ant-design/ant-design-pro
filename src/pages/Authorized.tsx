@@ -14,7 +14,10 @@ const getRouteAuthority = (path: string, routeData: Route[]) => {
   routeData.forEach(route => {
     // match prefix
     if (pathToRegexp(`${route.path}(.*)`).test(path)) {
-      authorities = route.authority || authorities;
+      // exact match
+      if (route.path === path) {
+        authorities = route.authority || authorities;
+      }
       // get children authority recursively
       if (route.routes) {
         authorities = getRouteAuthority(path, route.routes) || authorities;
