@@ -41,6 +41,9 @@ const findAllInstallRouter = router => {
 const filterParentRouter = (router, layout) => {
   return [...router]
     .map(item => {
+      if (!item.path && item.component === '404') {
+        return item;
+      }
       if (item.routes && (!router.component || layout)) {
         return { ...item, routes: filterParentRouter(item.routes, false) };
       }

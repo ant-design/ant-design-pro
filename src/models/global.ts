@@ -7,6 +7,7 @@ import { queryNotices } from '@/services/user';
 export interface NoticeItem extends NoticeIconData {
   id: string;
   type: string;
+  status: string;
 }
 
 export interface GlobalModelState {

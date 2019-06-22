@@ -117,7 +117,7 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
       },
     );
     return (
-      <Spin spinning={loading} delay={0}>
+      <Spin spinning={loading} delay={300}>
         <Tabs className={styles.tabs} onChange={this.onTabChange}>
           {panes}
         </Tabs>
