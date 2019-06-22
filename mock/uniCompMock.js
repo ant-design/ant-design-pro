@@ -958,51 +958,91 @@ const privileges = {
   }
 };
 const users = {
-    "code": "200",
-    "msg": null,
-    "data": [
-      {
-        "id": 1,
-        "username": "admin",
-        "password": "ant.design",
-        "email": "j1@163.com",
-        "tel":"18905926370",
-        "utype":"client",
-        "status": STATUS.A,
-        "sysUserRoles":[{"id":1,"userId":1,"roleId":1,"roleName":"admin"},],
-      },
-      {
-        "id": 2,
-        "username": "user",
-        "password": "ant.design",
-        "email": "j2@163.com",
-        "tel":"18905926371",
-        "utype":"client",
-        "status": STATUS.A,
-        "sysUserRoles":[{"id":1,"userId":2,"roleId":3,"roleName":"user"},],
-      },
-      {
-        "id": 3,
-        "username": "manager",
-        "password": "ant.design",
-        "email": "j3@163.com",
-        "tel":"18905926373",
-        "utype":"client",
-        "status": STATUS.A,
-        "sysUserRoles":[],
-      },
-      {
-        "id": 4,
-        "username": "super_admin",
-        "password": "ant.design",
-        "email": "j4@163.com",
-        "tel":"18905926374",
-        "utype":"client",
-        "status": STATUS.A,
-        "sysUserRoles":[{"id":9,"userId":4,"roleId":1,"roleName":"admin"},{"id":10,"userId":4,"roleId":2,"roleName":"manager"},{"id":11,"userId":4,"roleId":3,"roleName":"user"},],
-      },
-    ]
-  };
+  "code": "200",
+  "msg": null,
+  "data": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "ant.design",
+      "email": "j1@163.com",
+      "tel":"18905926370",
+      "utype":"client",
+      "status": STATUS.A,
+      "sysUserRoles":[{"id":1,"userId":1,"roleId":1,"roleName":"admin"},],
+    },
+    {
+      "id": 2,
+      "username": "user",
+      "password": "ant.design",
+      "email": "j2@163.com",
+      "tel":"18905926371",
+      "utype":"client",
+      "status": STATUS.A,
+      "sysUserRoles":[{"id":1,"userId":2,"roleId":3,"roleName":"user"},],
+    },
+    {
+      "id": 3,
+      "username": "manager",
+      "password": "ant.design",
+      "email": "j3@163.com",
+      "tel":"18905926373",
+      "utype":"client",
+      "status": STATUS.A,
+      "sysUserRoles":[],
+    },
+    {
+      "id": 4,
+      "username": "super_admin",
+      "password": "ant.design",
+      "email": "j4@163.com",
+      "tel":"18905926374",
+      "utype":"client",
+      "status": STATUS.A,
+      "sysUserRoles":[{"id":9,"userId":4,"roleId":1,"roleName":"admin"},{"id":10,"userId":4,"roleId":2,"roleName":"manager"},{"id":11,"userId":4,"roleId":3,"roleName":"user"},],
+    },
+  ]
+};
+const adapterSpecs = {
+  "code": "200",
+  "msg": null,
+  "data": [
+    {
+      "id": 1,
+      "name": "ootb_adapter_in",
+      "techType": "url",
+      "pointType": "in",
+      "url": "http://333",
+      "reqPath":"/rest/111",
+      "code":"String a=\"dd\";",
+      "status":"A",
+      "attrSpecs":[{"attrSpecId":151,"attrSpecCode":"busi_code","desc":"business Code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1},
+        {"attrSpecId":151,"attrSpecCode":"operation_code","desc":"operation code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1},],
+    },
+    {
+      "id": 2,
+      "name": "token_adapter_in",
+      "techType": "code",
+      "pointType": "in",
+      "url": "http://token",
+      "reqPath":"/rest/token",
+      "code":"String a=\"123\";",
+      "status":"A",
+      "remark":"good",
+      "attrSpecs":[{"attrSpecId":152,"attrSpecCode":"token","desc":"token","default_value":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","up_id":0,"adapterSpecId":2},],
+    },
+  ]
+};
+const attrSpecs = {
+  "code": "200",
+  "msg": null,
+  "data": [
+    {"attrSpecId":150,"attrSpecCode":"busi_code","desc":"business Code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
+    {"attrSpecId":151,"attrSpecCode":"operation_code","desc":"operation code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
+    {"attrSpecId":152,"attrSpecCode":"token","desc":"token","defaultValue":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","upId":0,"adapterSpecId":2,"status":"A"},
+  ],
+
+};
 const orgs={
   "code": "200",
   "msg": null,
@@ -1162,6 +1202,8 @@ const debugs = {
 const tableListDataSource = orgs.data;
 const groupsDataSource = groups.data;
 const usersDataSource=users.data;
+const adapterSpecSource=adapterSpecs.data;
+const attrSpecSource=attrSpecs.data;
 const rolesDataSource=roles.data;
 const privilegesDataSource=privileges.data.records;
 const debugDataSource = debugs.data;
@@ -1175,6 +1217,12 @@ function getList(innerTableName) {
       break;
     case 'sys_user':
       dataSource = usersDataSource;
+      break;
+    case 'adapter_spec':
+      dataSource = adapterSpecSource;
+      break;
+    case 'attr_spec':
+      dataSource = attrSpecSource;
       break;
     case 'sys_role':
       dataSource = rolesDataSource;
@@ -1244,6 +1292,9 @@ export function detail(req, res, u) {
       break;
     case 'sys_privilege':
       idName="privilegeId";
+      break;
+    case 'attr_spec':
+      id="attrSpecId";
       break;
     default:
       break;
@@ -1538,10 +1589,13 @@ export function statusBatch(req, res, u, b) {
       let id="id";
       switch (tableName) {
         case 'api_group':
-          id="groupId"
+          id="groupId";
           break;
         case 'sys_user':
-          id="userId"
+          id="userId";
+          break;
+        case 'attr_spec':
+          id="attrSpecId";
           break;
         default:
           break;

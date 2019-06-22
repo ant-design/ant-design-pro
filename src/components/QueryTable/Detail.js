@@ -94,6 +94,7 @@ class Detail extends PureComponent {
   }
 
   handleRelation=(relations,row)=>{
+    console.log("handleRelation row:",row);
     if(row&&relations){
       return relations.map(relation=>{
         if(row[relation.name]) {

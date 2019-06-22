@@ -25,6 +25,7 @@ import Detail from './Detail';
 import styles from './index.less';
 
 import PrivilegeTreeSelectView from '@/pages/UserManager/PrivilegeTreeSelectView';
+import AdapterSelectView from '@/pages/ApiGateway/AdapterSelectView';
 
 const { Option } = Select;
 const { TextArea, Password } = Input;
@@ -99,6 +100,8 @@ const CreateForm = Form.create()(props => {
         );
       case 'privilegeTreeSelect':
         return <PrivilegeTreeSelectView style={{ width: '100%' }} />;
+      case 'AdapterSelectView':
+        return <AdapterSelectView style={{ width: '100%' }} showSearch optionFilterProp="children" />;
       case 'textArea':
         return <TextArea rows={item.rows} />;
       case 'inputNumber':
@@ -114,7 +117,7 @@ const CreateForm = Form.create()(props => {
     .map(item => {
       const itemTemp = item;
       // console.log("======:",itemTemp.name === key,key,itemTemp.name);
-      itemTemp.disabled = itemTemp.name === key;
+      itemTemp.disabled = itemTemp.name === key||itemTemp.disabledAct==='true';
       return itemTemp;
     });
   // console.log('addForm:', addForms);

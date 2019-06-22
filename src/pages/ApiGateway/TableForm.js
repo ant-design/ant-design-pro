@@ -2,6 +2,7 @@ import React, {Fragment, PureComponent} from 'react';
 import {Button, Divider, Input, message, Popconfirm, Select, Table, Tag} from 'antd';
 import isEqual from 'lodash/isEqual';
 import styles from './style.less';
+import AdapterSelectView from './AdapterSelectView';
 
 const {Option} = Select;
 
@@ -105,6 +106,19 @@ class TableForm extends PureComponent {
     }
   }
 
+  handleAdapterFieldChange(e, adapterSpecName, record) {
+    const {key}=record;
+    const { data } = this.state;
+    const newData = data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
+    console.log("e.target:",e,adapterSpecName);
+    if (target) {
+      target.adapterSpecId = e;
+      target.adapterSpecName = adapterSpecName;
+      this.setState({ data: newData });
+    }
+  }
+
   validateSeq(target){
     const { data } = this.state;
     // console.log("target:",target,"data:",data);
@@ -147,7 +161,7 @@ class TableForm extends PureComponent {
         return;
       }
       const target = this.getRowByKey(key) || {};
-      if (!target.serviceSeq || !target.backendType || (!target.url&&!target.reqPath)) {
+      if (!target.serviceSeq || !target.adapterSpecId) {
         message.error('请填写完整信息。');
         e.target.focus();
         this.setState({
@@ -210,7 +224,7 @@ class TableForm extends PureComponent {
     */
     const columns = [
       {
-        title: '出／入参',
+        title: 'in／out',
         dataIndex: 'backendType',
         key: 'backendType',
         width: '10%',
@@ -227,7 +241,6 @@ class TableForm extends PureComponent {
                 <Option key='out' value='out'>out</Option>
                 <Option key='endpoint' value='endpoint' disabled>endpoint</Option>
               </Select>
-
             );
           }
           /* eslint-disable no-nested-ternary */
@@ -239,7 +252,7 @@ class TableForm extends PureComponent {
         },
       },
       {
-        title: '顺序',
+        title: 'Order Seq',
         dataIndex: 'serviceSeq',
         key: 'serviceSeq',
         defaultSortOrder: 'ascend',
@@ -260,45 +273,71 @@ class TableForm extends PureComponent {
         },
       },
       {
-        title: 'url',
-        dataIndex: 'url',
-        key: 'url',
+        title: 'Adapter',
+        dataIndex: 'adapterSpecId',
+        key: 'adapterSpecId',
         width: '30%',
         render: (text, record) => {
-          const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
-          if (record.editable&&lowerCaseBackendType!=='endpoint') {
+          // console.log("----------",text);
+          if (record.editable&&(text===null||record.backendType.toLowerCase()!=='endpoint')) {
             return (
-              <Input
+              <AdapterSelectView
                 value={text}
-                onChange={e => this.handleFieldChange(e, 'url', record)}
-                onKeyPress={e => this.handleKeyPress(e, record.key)}
-                placeholder="url or java call"
+                record={record}
+                style={{ width: 300 }}
+                onMyChange={(e,adapterSpecName) => this.handleAdapterFieldChange(e, adapterSpecName,record)}
               />
+
             );
           }
-          return text;
-        },
-      },
-      {
-        title: 'Request Path',
-        dataIndex: 'reqPath',
-        key: 'reqPath',
-        width: '30%',
-        render: (text, record) => {
-          const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
-          if (record.editable&&lowerCaseBackendType!=='endpoint') {
-            return (
-              <Input
-                value={text}
-                onChange={e => this.handleFieldChange(e, 'reqPath', record)}
-                onKeyPress={e => this.handleKeyPress(e, record.key)}
-                placeholder="request path or java call"
-              />
-            );
+          /* eslint-disable no-nested-ternary */
+          if (text){
+            const {adapterSpecName}=record
+            return adapterSpecName;
           }
-          return text;
+          return <span>None</span>
         },
       },
+      // {
+      //   title: 'url',
+      //   dataIndex: 'url',
+      //   key: 'url',
+      //   width: '30%',
+      //   render: (text, record) => {
+      //     const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
+      //     if (record.editable&&lowerCaseBackendType!=='endpoint') {
+      //       return (
+      //         <Input
+      //           value={text}
+      //           onChange={e => this.handleFieldChange(e, 'url', record)}
+      //           onKeyPress={e => this.handleKeyPress(e, record.key)}
+      //           placeholder="url or java call"
+      //         />
+      //       );
+      //     }
+      //     return text;
+      //   },
+      // },
+      // {
+      //   title: 'Request Path',
+      //   dataIndex: 'reqPath',
+      //   key: 'reqPath',
+      //   width: '30%',
+      //   render: (text, record) => {
+      //     const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
+      //     if (record.editable&&lowerCaseBackendType!=='endpoint') {
+      //       return (
+      //         <Input
+      //           value={text}
+      //           onChange={e => this.handleFieldChange(e, 'reqPath', record)}
+      //           onKeyPress={e => this.handleKeyPress(e, record.key)}
+      //           placeholder="request path or java call"
+      //         />
+      //       );
+      //     }
+      //     return text;
+      //   },
+      // },
       {
         title: 'action',
         key: 'action',

@@ -134,6 +134,22 @@ export default [
             name: 'group',
             component: './BaseData/Group',
           },
+          {
+            path: '/baseData/adapterSpec',
+            name: 'adapterSpec',
+            component: './BaseData/AdapterSpec',
+          },
+          {
+            path: '/baseData/attrSpec',
+            name: 'attrSpec',
+            component: './BaseData/AttrSpec',
+          },
+          {
+            path: '/baseData/attrSpecFromAdapter',
+            name: 'attrSpecFromAdapter',
+            component: './BaseData/AttrSpecFromAdapter',
+            hideInMenu: true,
+          },
         ],
       },
       // userManager

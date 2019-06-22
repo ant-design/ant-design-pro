@@ -114,41 +114,6 @@ class TableList extends PureComponent {
     return this.getOption(groupList, 'groupId', 'groupName');
   }
 
-  moreHandle = (key, record) => {
-    if (key === 'handleUpdate') this.handleUpdate(true, record);
-    else if (key === 'handleUpdateDoc') {
-      this.handleUpdateDoc(true, record);
-    } else if (key === 'handleDebug') {
-      this.handleDebug(true, record);
-    } else if (key === 'handleOffline') {
-      this.handleStatusClick(ACT.OFFLINE, record);
-    } else if (key === 'handleDelete') {
-      this.handleStatusClick(ACT.DEL, record);
-    }
-  };
-
-  renderMoreBtn = props => {
-    const {current} = props;
-    const {status} = current;
-    return (
-      <Dropdown
-        overlay={
-          <Menu onClick={({key}) => this.moreHandle(key, current)}>
-            <Menu.Item key="handleUpdate">修改</Menu.Item>
-            <Menu.Item key="handleUpdateDoc">文档</Menu.Item>
-            <Menu.Item key="handleDebug">调试</Menu.Item>
-            {status === API_STATUS.ONLINE ? <Menu.Item key="handleOffline">下线</Menu.Item> : null}
-            {status === API_STATUS.OFFLINE ? <Menu.Item key="handleDelete">删除</Menu.Item> : null}
-          </Menu>
-        }
-      >
-        <a>
-          更多 <Icon type="down"/>
-        </a>
-      </Dropdown>
-    );
-  };
-
   getColumns = memoizeOne((groupList) => {
 
     console.log("---render^^^^^^^^^^^^^^^^");
@@ -237,6 +202,41 @@ class TableList extends PureComponent {
 
     return columns;
   }, isEqual);
+
+  moreHandle = (key, record) => {
+    if (key === 'handleUpdate') this.handleUpdate(true, record);
+    else if (key === 'handleUpdateDoc') {
+      this.handleUpdateDoc(true, record);
+    } else if (key === 'handleDebug') {
+      this.handleDebug(true, record);
+    } else if (key === 'handleOffline') {
+      this.handleStatusClick(ACT.OFFLINE, record);
+    } else if (key === 'handleDelete') {
+      this.handleStatusClick(ACT.DEL, record);
+    }
+  };
+
+  renderMoreBtn = props => {
+    const {current} = props;
+    const {status} = current;
+    return (
+      <Dropdown
+        overlay={
+          <Menu onClick={({key}) => this.moreHandle(key, current)}>
+            <Menu.Item key="handleUpdate">修改</Menu.Item>
+            <Menu.Item key="handleUpdateDoc">文档</Menu.Item>
+            <Menu.Item key="handleDebug">调试</Menu.Item>
+            {status === API_STATUS.ONLINE ? <Menu.Item key="handleOffline">下线</Menu.Item> : null}
+            {status === API_STATUS.OFFLINE ? <Menu.Item key="handleDelete">删除</Menu.Item> : null}
+          </Menu>
+        }
+      >
+        <a>
+          更多 <Icon type="down" />
+        </a>
+      </Dropdown>
+    );
+  };
 
   getOption = (list, keyName, titleName) => {
     if (!list || list.length < 1) {

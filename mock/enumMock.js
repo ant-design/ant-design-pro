@@ -316,7 +316,7 @@ const allResult = {
       "javaCode": "org",
       "javaKey": "token_expire_time",
       "itemCode": "defaultTime",
-      "itemValue": "3600"
+      "itemValue": "30"
     },
     {
       "id": 63,
@@ -485,6 +485,76 @@ const allResult = {
       "javaKey": "type",
       "itemCode": "white",
       "itemValue": "白名单"
+    },
+    {
+      "id": 97,
+      "javaCode": "privilege",
+      "javaKey": "icon",
+      "itemCode": "codepen",
+      "itemValue": "codepen"
+    },
+    {
+      "id": 98,
+      "javaCode": "privilege",
+      "javaKey": "icon",
+      "itemCode": "api",
+      "itemValue": "api"
+    },
+    {
+      "id": 99,
+      "javaCode": "privilege",
+      "javaKey": "icon",
+      "itemCode": "deployment-unit",
+      "itemValue": "deployment-unit"
+    },
+    {
+      "id": 100,
+      "javaCode": "privilege",
+      "javaKey": "icon",
+      "itemCode": "file-add",
+      "itemValue": "file-add"
+    },
+    {
+      "id": 101,
+      "javaCode": "serviceAgent",
+      "javaKey": "req_header",
+      "itemCode": "tokenKey",
+      "itemValue": "Authorization"
+    },
+    {
+      "id": 102,
+      "javaCode": "serviceAgent",
+      "javaKey": "req_header",
+      "itemCode": "tokenPre",
+      "itemValue": "Bearer "
+    },
+    {
+      "id": 103,
+      "javaCode": "adapterSpec",
+      "javaKey": "point_type",
+      "itemCode": "in",
+      "itemValue": "in"
+    },
+    {
+      "id": 104,
+      "javaCode": "adapterSpec",
+      "javaKey": "point_type",
+      "itemCode": "out",
+      "itemValue": "out"
+    },
+    {
+      "id": 105,
+      "javaCode": "adapterSpec",
+      "javaKey": "tech_type",
+      "itemCode": "url",
+      "itemValue": "url"
+    },
+    {
+      "id": 106,
+      "javaCode": "adapterSpec",
+      "javaKey": "tech_type",
+      "itemCode": "code",
+      "itemValue": "code"
     }
   ]
 };

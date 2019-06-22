@@ -218,17 +218,18 @@ export function getApiFlowData(values) {
   let index=0;
   const sortMembers=members.sort((a,b) => {return a.serviceSeq-b.serviceSeq;});
   console.log("==:",sortMembers)
+  const width=120;
   sortMembers.forEach((item) => {
     // if(item.backendType!=='endpoint'){
     index+=1;
     const preNode=apiFlowData.nodes[apiFlowData.nodes.length-1];
     apiFlowData.nodes.push({
       "type": "node",
-      "size": "60*40",
+      "size": `${width}*40`,
       "shape": item.backendType==='endpoint'?"flow-rect":"flow-rect",
       "color": item.backendType==='endpoint'?'#722ED1':"#1890FF",
-      "label": item.backendType,
-      "x": 100+60*index,
+      "label": item.adapterSpecName||item.backendType,
+      "x": 100+80*index,
       "y": 150,
       "id": `${item.serviceSeq}`,
       "index": index,
@@ -253,7 +254,7 @@ export function getApiFlowData(values) {
     "shape": "flow-circle",
     "color": "#FA8C16",
     "label": "end",
-    "x": 100+60*index,
+    "x": 100+80*index,
     "y": 150,
     "id": "999",
     "index": index,
