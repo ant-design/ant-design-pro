@@ -3,25 +3,24 @@ import { Select } from 'antd';
 import { connect } from 'dva';
 
 const { Option } = Select;
-@connect(({ uniComp, loading }) => ({
-  list: uniComp.adapterList,
+@connect(({ adapterModel, loading }) => ({
+  adapterList: adapterModel.adapterList,
   loading: loading.models.adapterList,
 }))
 class AdapterSelectView extends PureComponent {
   componentDidMount = () => {
-    const { dispatch } = this.props;
-    const payload={
-      "tableName": "adapter_spec",
-    }
+    const { dispatch,record } = this.props;
+    const payload=record?{pointType:record.backendType}:{pointType:'in,out'};
+
     dispatch({
-      type: 'uniComp/selectList',
+      type: 'adapterModel/getAdapterList',
       payload,
     });
   };
 
   getOption() {
-    const { list } = this.props;
-    return this.getOptionWhithList(list);
+    const { adapterList } = this.props;
+    return this.getOptionWhithList(adapterList);
   }
 
   getOptionWhithList = list => {
@@ -40,13 +39,13 @@ class AdapterSelectView extends PureComponent {
   };
 
   selectChangeItem = item => {
-    const { onChange,list } = this.props;
+    const { onChange,adapterList } = this.props;
     if(onChange){
       onChange(item);
     }
     const { onMyChange } = this.props;
     if(onMyChange){
-      const cur=list.find(obj=>obj.id===item);
+      const cur=adapterList.find(obj=>obj.id===item);
       onMyChange(item,cur.name);
     }
   };

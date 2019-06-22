@@ -13,7 +13,7 @@ class OrgSelectView extends PureComponent {
     // console.log("userId",userId);
     dispatch({
       type: 'orgModel/allOrgList',
-      payload: { orgType: orgType, userId: userId },
+      payload: { orgType, userId },
     });
   };
 

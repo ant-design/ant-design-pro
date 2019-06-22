@@ -6,7 +6,6 @@ import BindDataQueryTable from '../BindDataQueryTable';
 import QueryCommand from '@/components/QueryTable/QueryCommand';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { getItems } from '@/utils/masterData';
-import RoleTransfer from "../UserManager/RoleTransfer";
 
 import Authorized from '@/utils/Authorized';
 import { getAuth } from '@/utils/authority';
@@ -21,7 +20,6 @@ class Adapter extends PureComponent {
 
   state={
     selectedRow:undefined,
-    modalVisible:false,
     columnSchemas:{},
   }
 
@@ -101,45 +99,22 @@ class Adapter extends PureComponent {
     this.setState({columnSchemas});
   }
 
-  handleRole=()=>{
+  handleAttr = () => {
     const {selectedRow}=this.state;
-    // message.success(selectedRow);
-    if(selectedRow) {
-      // message.success(selectedRow.username);
-      this.setState({
-        modalVisible: true,
-      });
-    }
-  }
-
-  handleVisible=(modalVisible)=>{
-    // console.log("---modalVisible＝＝＝＝3:",modalVisible);
-    this.setState({modalVisible});
-  }
-
-  handleRefreshData=()=>{
-    this.child.handleSearchDefault()
-  }
-
-  handleRef = (ref) => {
-    this.child = ref
-  }
-
-  handleUpdate = (flag, record) => {
-    const { apiId } = record;
+    const { id } = selectedRow;
     // router.push(`/apiGateway/apiCreate/${apiId}`);
     router.push({
-      pathname: `/apiGateway/apiUpdate`, // 通过url参数传递
+      pathname: `/baseData/attrSpecFromAdapter`, // 通过url参数传递
       state: {
         // 通过对象传递
-        apiId,
-        record, // 表格某行的对象数据
+        adapterSpecId:id,
+        record:selectedRow, // 表格某行的对象数据
       },
     });
   };
 
   render() {
-    const {modalVisible,selectedRow,columnSchemas}=this.state;
+    const {columnSchemas}=this.state;
     return (
       <PageHeaderWrapper title="Adapter Management" showBreadcrumb>
         <BindDataQueryTable
@@ -158,19 +133,9 @@ class Adapter extends PureComponent {
         >
           <QueryCommand>
             <Divider type="vertical" />
-            <a onClick={() => this.handleRole()}>Attr</a>
+            <a onClick={() => this.handleAttr()}>Attr</a>
           </QueryCommand>
         </BindDataQueryTable>
-        <RoleTransfer
-          title='Grant authorization'
-          modalVisible={modalVisible}
-          onVisible={this.handleVisible}
-          columnSchemas={columnSchemas}
-          selectedRow={selectedRow}
-          onRefreshData={this.handleRefreshData}
-          keyName='roleId'
-          relationName='sysAdapterRoles'
-        />
       </PageHeaderWrapper>
     );
   }

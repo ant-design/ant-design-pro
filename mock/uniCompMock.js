@@ -1031,6 +1031,16 @@ const adapterSpecs = {
       "remark":"good",
       "attrSpecs":[{"attrSpecId":152,"attrSpecCode":"token","desc":"token","default_value":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","up_id":0,"adapterSpecId":2},],
     },
+    {
+      "id": 1,
+      "name": "ootb_adapter_out",
+      "techType": "url",
+      "pointType": "out",
+      "url": "http://333",
+      "reqPath":"/rest/111",
+      "code":"String a=\"dd\";",
+      "status":"A",
+    },
   ]
 };
 const attrSpecs = {
@@ -1294,7 +1304,7 @@ export function detail(req, res, u) {
       idName="privilegeId";
       break;
     case 'attr_spec':
-      id="attrSpecId";
+      idName="attrSpecId";
       break;
     default:
       break;
@@ -1626,6 +1636,25 @@ export function statusBatch(req, res, u, b) {
 }
 
 
+
+export function getAdapterListByType(req, res, u) {
+  let url = u;
+  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+    url = req.url; // eslint-disable-line
+  }
+  const params = parse(url, true).query;
+
+  const result={...adapterSpecs};
+  if (params.pointType) {
+    result.data=adapterSpecs.data.filter((item)=>params.pointType.indexOf(item.pointType)!==-1);
+  }
+
+  if (res && res.json) {
+    return res.json(result);
+  }
+  return result;
+}
+
 export function getOrgListByType(req, res, u) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
@@ -1652,4 +1681,5 @@ export default {
   'GET /baseInfo/sysdata/sug': sug,
   'GET /baseInfo/api/allGroupList': groups,
   'GET /baseInfo/sysdata/orgList': getOrgListByType,
+  'GET /baseInfo/sysdata/adapterList': getAdapterListByType,
 };

@@ -10,28 +10,9 @@ export default {
       list: [],
       pagination: {},
     },
-    adapterList:[],
   },
 
   effects: {
-    * selectList({payload, callback}, {call, put}) {
-
-      const req={
-        "data": {
-          "info": {
-            "pageNo": 1,
-            "pageSize": 999
-          }
-        },...payload,
-      }
-      const response = yield call(list, req);
-      // console.log('response:', response);
-      yield put({
-        type: 'saveSelectList',
-        payload: response,
-      });
-      if (callback) callback(response);
-    },
 
     * list({payload, onConversionData, callback}, {call, put}) {
       // console.log('payload:', JSON.stringify(payload));
@@ -47,7 +28,7 @@ export default {
       if (callback) callback(response);
     },
     *save({ payload, callback }, { call }) {
-      // console.log('postinfo add:', payload);
+      console.log('postinfo add:', payload);
       const req=payload.option&&payload.option===8?payload:conversionReq(payload);
       const response = yield call(save, req);
       // console.log('postinfo response add1:', response);
@@ -121,15 +102,6 @@ export default {
       return {
         ...state,
         data: response,
-      };
-    },
-    saveSelectList(state, action) {
-      const {data}=action.payload;
-      const adapterList = data&&data.records?data.records:[];
-      console.log(action,data,adapterList)
-      return {
-        ...state,
-        adapterList,
       };
     },
   },

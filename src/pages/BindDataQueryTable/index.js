@@ -62,11 +62,16 @@ class BindDataQueryTable extends PureComponent {
       dispatch,
       onConversionData,
       pageSize,
-      columnSchemas: { userName, userId },
+      columnSchemas: { userName, userId,relationKeyForMasterTable,masterTableKey },
+      masterRecord,
     } = this.props;
-    const newParams = pageSize
-      ? { ...params, userName, userId, pageSize }
-      : { ...params, userName, userId };
+    const newParams={ ...params, userName, userId };
+    if(pageSize){
+      newParams.pageSize=pageSize;
+    }
+    if(masterRecord&&relationKeyForMasterTable&&masterTableKey){
+      newParams[relationKeyForMasterTable]=masterRecord[masterTableKey];
+    }
     console.log('binddata', newParams);
     dispatch({
       type: 'uniComp/list',
@@ -77,11 +82,19 @@ class BindDataQueryTable extends PureComponent {
 
   handleAdd = (payload, addForm, callback2) => {
     // console.log('handleAdd:',fields);
-    const { dispatch } = this.props;
+    const {
+      dispatch,
+      columnSchemas: { relationKeyForMasterTable,masterTableKey },
+      masterRecord,
+    } = this.props;
+    const newPayload=payload;
+    if(masterRecord&&relationKeyForMasterTable&&masterTableKey){
+      newPayload[relationKeyForMasterTable]=masterRecord[masterTableKey];
+    }
 
     dispatch({
       type: 'uniComp/save',
-      payload,
+      payload:newPayload,
       callback: resp => {
         // console.log('resp=======', resp);
         if (resp.code === '200') {
@@ -115,6 +128,7 @@ class BindDataQueryTable extends PureComponent {
       onRow,
       children,
       size,
+      masterRecord,
     } = this.props;
     const { key } = columnSchemas;
     const { selectedRows } = this.state;
@@ -131,6 +145,7 @@ class BindDataQueryTable extends PureComponent {
         onSearch={this.handleSearch}
         onRow={onRow}
         size={size}
+        masterRecord={masterRecord}
       >
         {children}
       </QueryTable>
