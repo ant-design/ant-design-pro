@@ -4,11 +4,11 @@ import { Button } from 'antd';
 // 这里应该使用 antd 的 404 result 组件，
 // 但是还没发布，先来个简单的。
 
-export default (): React.ReactNode => (
+const NoFoundPage: React.FC<{}> = () => (
   <div
     style={{
-      padding: 80,
       height: '100vh',
+      padding: 80,
       textAlign: 'center',
     }}
   >
@@ -20,3 +20,5 @@ export default (): React.ReactNode => (
     <Button type="primary">Back Home</Button>
   </div>
 );
+
+export default NoFoundPage;
