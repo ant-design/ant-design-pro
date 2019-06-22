@@ -11,12 +11,12 @@ const columnSchemas = {
   name: 'attrSpecCode',
   privileges:['attrSpec_save','attrSpec_statusBatch'],
   columnDetails: [
-    { name: 'attrSpecId', title: 'ID', add: true, disabledAct:'true' },
+    { name: 'attrSpecId', title: 'ID', columnHidden: true, add: true, disabledAct:'true' },
     { name: 'adapterSpecId', title: 'Adapter', tag:'AdapterSelectView', sorter: false, add: true },
-    { name: 'attrSpecCode', title: 'Attr Code', sorter: false, query: true, add: true },
-    { name: 'desc', title: 'Attr Name', sorter: false, add: true },
-    { name: 'defaultValue', title: 'Default Value', sorter: false, add: true ,rules:[]},
-    { name: 'tableName', title: 'Table Name', defaultValue:'api_service_backend', disabledAct:'true',add: true },
+    { name: 'attrSpecCode', title: 'Attr Code', sorter: false, query: true, add: true,detailFlag:true },
+    { name: 'desc', title: 'Attr Name',sorter: false, add: true },
+    { name: 'defaultValue', title: 'Default Value', query: true,sorter: false, add: true ,rules:[],showLen:22},
+    { name: 'tableName', title: 'Table Name',  columnHidden: true, defaultValue:'api_service_backend', disabledAct:'true',add: true },
     { name: 'upId', title: 'Up Id', sorter: false, add: true,defaultValue:'0',},
     {
       name: 'status',

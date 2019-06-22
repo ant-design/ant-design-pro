@@ -1032,7 +1032,7 @@ const adapterSpecs = {
       "attrSpecs":[{"attrSpecId":152,"attrSpecCode":"token","desc":"token","default_value":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","up_id":0,"adapterSpecId":2},],
     },
     {
-      "id": 1,
+      "id": 3,
       "name": "ootb_adapter_out",
       "techType": "url",
       "pointType": "out",

@@ -49,7 +49,7 @@ class Adapter extends PureComponent {
       relationKey: 'adapterSpecId',
       commands:[{action:'setRole',title:'角色'},],
       columnDetails: [
-        { name: 'id', title: 'Adapter ID', add: true, disabledAct:'true' },
+        { name: 'id', title: 'Adapter ID', columnHidden: true, add: true, disabledAct:'true' },
         { name: 'name', title: 'Adapter Name', sorter: true, query: true, add: true, detailFlag:true },
         {
           name: 'pointType',
@@ -69,9 +69,9 @@ class Adapter extends PureComponent {
           tag: 'commonSelect',
           enumData: techTypeList,
         },
-        { name: 'url', title: 'Adapter URL', query: false, add: true ,rules:[]},
-        { name: 'reqPath', title: 'Adapter Path', query: false, add: true ,rules:[]},
-        { name: 'code', title: 'Adapter Java Code', query: false, add: true ,rules:[]},
+        { name: 'url', title: 'Adapter URL', showLen:15,query: false, add: true ,rules:[]},
+        { name: 'reqPath', title: 'Adapter Path', showLen:15,query: false, add: true ,rules:[]},
+        { name: 'code', title: 'Adapter Java Code', showLen:15, query: false, add: true ,rules:[]},
         {
           name: 'status',
           title: 'Status',
