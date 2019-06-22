@@ -93,7 +93,13 @@ export default {
           icon: 'smile',
           component: './Welcome',
         },
+        {
+          component: './404',
+        },
       ],
+    },
+    {
+      component: './404',
     },
   ],
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
