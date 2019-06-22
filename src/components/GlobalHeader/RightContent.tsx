@@ -8,7 +8,6 @@ import SelectLang from '../SelectLang';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import styles from './index.less';
-import NoticeIconView from './NoticeIconView';
 
 export type SiderTheme = 'light' | 'dark';
 export interface GlobalHeaderRightProps extends ConnectProps {
