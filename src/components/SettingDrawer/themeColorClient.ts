@@ -5,9 +5,11 @@ import generate from '@ant-design/colors/lib/generate';
 
 export default {
   getAntdSerials(color: string) {
+    const lightCount = 9;
+    const devide = 10;
     // 淡化（即less的tint）
-    let lightens = new Array(9).fill(0);
-    lightens = lightens.map((_, i) => client.varyColor.lighten(color, i / 10));
+    let lightens = new Array(lightCount).fill(0);
+    lightens = lightens.map((_, i) => client.varyColor.lighten(color, i / devide));
     const colorPalettes = generate(color);
     return lightens.concat(colorPalettes);
   },
