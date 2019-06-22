@@ -4,22 +4,23 @@
  * https://github.com/ant-design/ant-design-pro-layout
  */
 
-import { ConnectState, ConnectProps } from '@/models/connect';
-import RightContent from '@/components/GlobalHeader/RightContent';
-import { connect } from 'dva';
-import React, { useState } from 'react';
-import logo from '../assets/logo.svg';
-import Authorized from '@/utils/Authorized';
-import { formatMessage } from 'umi-plugin-react/locale';
-import { isAntDesignPro } from '@/utils/utils';
-import {
-  BasicLayout as ProLayoutComponents,
-  BasicLayoutProps as ProLayoutComponentsProps,
+import { ConnectProps, ConnectState } from '@/models/connect';
+import ProLayout, {
   MenuDataItem,
+  BasicLayoutProps as ProLayoutProps,
   Settings,
 } from '@ant-design/pro-layout';
+import React, { useState } from 'react';
+
+import Authorized from '@/utils/Authorized';
 import Link from 'umi/link';
-export interface BasicLayoutProps extends ProLayoutComponentsProps, ConnectProps {
+import RightContent from '@/components/GlobalHeader/RightContent';
+import { connect } from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
+import { isAntDesignPro } from '@/utils/utils';
+import logo from '../assets/logo.svg';
+
+export interface BasicLayoutProps extends ProLayoutProps, ConnectProps {
   breadcrumbNameMap: {
     [path: string]: MenuDataItem;
   };
@@ -30,16 +31,18 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
     [path: string]: MenuDataItem;
   };
 };
+
 /**
  * use Authorized check all menu item
  */
-
-const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
-  return menuList.map(item => {
-    const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
+const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
+  menuList.map(item => {
+    const localItem = {
+      ...item,
+      children: item.children ? menuDataRender(item.children) : [],
+    };
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
-};
 
 const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) => {
   if (!isAntDesignPro()) {
@@ -54,7 +57,7 @@ const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) => {
           textAlign: 'center',
         }}
       >
-        <a href="https://www.netlify.com" target="_blank">
+        <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
           <img
             src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
             width="82px"
@@ -86,7 +89,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   /**
    * init variables
    */
-  const handleMenuCollapse = (payload: boolean) =>
+  const handleMenuCollapse = (payload: boolean): void =>
     dispatch &&
     dispatch({
       type: 'global/changeLayoutCollapsed',
@@ -94,24 +97,22 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     });
 
   return (
-    <ProLayoutComponents
+    <ProLayout
       logo={logo}
       onCollapse={handleMenuCollapse}
-      menuItemRender={(menuItemProps, defaultDom) => {
-        return <Link to={menuItemProps.path}>{defaultDom}</Link>;
-      }}
-      breadcrumbRender={(routers = []) => {
-        return [
-          {
-            path: '/',
-            breadcrumbName: formatMessage({
-              id: 'menu.home',
-              defaultMessage: 'Home',
-            }),
-          },
-          ...routers,
-        ];
-      }}
+      menuItemRender={(menuItemProps, defaultDom) => (
+        <Link to={menuItemProps.path}>{defaultDom}</Link>
+      )}
+      breadcrumbRender={(routers = []) => [
+        {
+          path: '/',
+          breadcrumbName: formatMessage({
+            id: 'menu.home',
+            defaultMessage: 'Home',
+          }),
+        },
+        ...routers,
+      ]}
       footerRender={footerRender}
       menuDataRender={menuDataRender}
       formatMessage={formatMessage}
@@ -120,7 +121,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       {...settings}
     >
       {children}
-    </ProLayoutComponents>
+    </ProLayout>
   );
 };
 

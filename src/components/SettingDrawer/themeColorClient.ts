@@ -1,17 +1,16 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable import/no-extraneous-dependencies */
-import generate from '@ant-design/colors/lib/generate';
 import client from 'webpack-theme-color-replacer/client';
+import generate from '@ant-design/colors/lib/generate';
 
 export default {
   getAntdSerials(color) {
     // 淡化（即less的tint）
-    const lightens = new Array(9).fill().map((t, i) => {
-      return client.varyColor.lighten(color, i / 10);
-    });
+    const lightens = new Array(9).fill(0).map((_, i) => client.varyColor.lighten(color, i / 10));
     const colorPalettes = generate(color);
     return lightens.concat(colorPalettes);
   },
-  changeColor(newColor) {
+  changeColor(newColor: string) {
     const options = {
       newColors: this.getAntdSerials(newColor), // new colors array, one-to-one corresponde with `matchColors`
       changeUrl(cssUrl) {

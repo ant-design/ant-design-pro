@@ -1,8 +1,7 @@
-import 'jest';
 import { isUrl } from './utils';
 
-describe('isUrl tests', () => {
-  it('should return false for invalid and corner case inputs', () => {
+describe('isUrl tests', (): void => {
+  it('should return false for invalid and corner case inputs', (): void => {
     expect(isUrl([] as any)).toBeFalsy();
     expect(isUrl({} as any)).toBeFalsy();
     expect(isUrl(false as any)).toBeFalsy();
@@ -13,7 +12,7 @@ describe('isUrl tests', () => {
     expect(isUrl('')).toBeFalsy();
   });
 
-  it('should return false for invalid URLs', () => {
+  it('should return false for invalid URLs', (): void => {
     expect(isUrl('foo')).toBeFalsy();
     expect(isUrl('bar')).toBeFalsy();
     expect(isUrl('bar/test')).toBeFalsy();
@@ -21,7 +20,7 @@ describe('isUrl tests', () => {
     expect(isUrl('ttp://example.com/')).toBeFalsy();
   });
 
-  it('should return true for valid URLs', () => {
+  it('should return true for valid URLs', (): void => {
     expect(isUrl('http://example.com/')).toBeTruthy();
     expect(isUrl('https://example.com/')).toBeTruthy();
     expect(isUrl('http://example.com/test/123')).toBeTruthy();

@@ -1,21 +1,21 @@
-import React from 'react';
 import { Avatar, List } from 'antd';
+
+import React from 'react';
 import classNames from 'classnames';
-import styles from './NoticeList.less';
 import { NoticeIconData } from './index';
+import styles from './NoticeList.less';
 
 export interface NoticeIconTabProps {
   count?: number;
-  list?: NoticeIconData[];
   name?: string;
   showClear?: boolean;
   showViewMore?: boolean;
   style?: React.CSSProperties;
   title: string;
   tabKey: string;
-  data?: any[];
-  onClick?: (item: any) => void;
-  onClear?: (item: any) => void;
+  data?: NoticeIconData[];
+  onClick?: (item: NoticeIconData) => void;
+  onClear?: () => void;
   emptyText?: string;
   clearText?: string;
   viewMoreText?: string;

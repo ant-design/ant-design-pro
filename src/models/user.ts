@@ -1,4 +1,5 @@
-import { query as queryUsers, queryCurrent } from '@/services/user';
+import { queryCurrent, query as queryUsers } from '@/services/user';
+
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
@@ -8,7 +9,6 @@ export interface CurrentUser {
   title?: string;
   group?: string;
   signature?: string;
-  geographic?: any;
   tags?: {
     key: string;
     label: string;

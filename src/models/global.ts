@@ -1,13 +1,12 @@
-import { queryNotices } from '@/services/user';
-import { Subscription } from 'dva';
-import { Reducer } from 'redux';
-import { Effect } from './connect';
+import { Effect } from './connect.d';
 import { NoticeIconData } from '@/components/NoticeIcon';
+import { Reducer } from 'redux';
+import { Subscription } from 'dva';
+import { queryNotices } from '@/services/user';
 
 export interface NoticeItem extends NoticeIconData {
   id: string;
   type: string;
-  [key: string]: any;
 }
 
 export interface GlobalModelState {
@@ -84,10 +83,12 @@ const GlobalModel: GlobalModelType = {
           return notice;
         }),
       );
+
       yield put({
         type: 'saveNotices',
         payload: notices,
       });
+
       yield put({
         type: 'user/changeNotifyCount',
         payload: {
@@ -99,32 +100,32 @@ const GlobalModel: GlobalModelType = {
   },
 
   reducers: {
-    changeLayoutCollapsed(state = { notices: [], collapsed: true }, { payload }) {
+    changeLayoutCollapsed(state = { notices: [], collapsed: true }, { payload }): GlobalModelState {
       return {
         ...state,
         collapsed: payload,
       };
     },
-    saveNotices(state, { payload }) {
+    saveNotices(state, { payload }): GlobalModelState {
       return {
         collapsed: false,
         ...state,
         notices: payload,
       };
     },
-    saveClearedNotices(state = { notices: [], collapsed: true }, { payload }) {
+    saveClearedNotices(state = { notices: [], collapsed: true }, { payload }): GlobalModelState {
       return {
         collapsed: false,
         ...state,
-        notices: state.notices.filter(item => item.type !== payload),
+        notices: state.notices.filter((item): boolean => item.type !== payload),
       };
     },
   },
 
   subscriptions: {
-    setup({ history }) {
+    setup({ history }): void {
       // Subscribe history(url) change, trigger `load` action if pathname is `/`
-      return history.listen(({ pathname, search }) => {
+      history.listen(({ pathname, search }): void => {
         if (typeof (window as any).ga !== 'undefined') {
           (window as any).ga('send', 'pageview', pathname + search);
         }

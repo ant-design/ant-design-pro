@@ -126,8 +126,8 @@ const insertRightContent = configPath => {
     body.splice(index, 0, parseCode(`import NoticeIconView from './NoticeIconView';`));
 
     body.forEach(item => {
-      if (item.type === 'ClassDeclaration') {
-        const classBody = item.body.body[0].body;
+      if (item.type === 'VariableDeclaration') {
+        const classBody = item.declarations[0].init.body;
         classBody.body.forEach(node => {
           if (node.type === 'ReturnStatement') {
             const index = node.argument.children.findIndex(item => {
