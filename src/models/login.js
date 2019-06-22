@@ -43,8 +43,12 @@ export default {
       // }
     },
 
-    *getCaptcha({ payload }, { call }) {
-      yield call(getFakeCaptcha, payload);
+    // *getCaptcha({ payload }, { call }) {
+    //   yield call(getFakeCaptcha, payload);
+    // },
+
+    *getCaptcha() {
+      yield '111';
     },
 
     *logout(_, { put }) {

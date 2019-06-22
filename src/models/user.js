@@ -1,4 +1,4 @@
-import { query as queryUsers, queryCurrent } from '@/services/user';
+import { queryCurrent } from '@/services/userService';
 
 export default {
   namespace: 'user',
@@ -9,13 +9,6 @@ export default {
   },
 
   effects: {
-    *fetch(_, { call, put }) {
-      const response = yield call(queryUsers);
-      yield put({
-        type: 'save',
-        payload: response,
-      });
-    },
     *fetchCurrent(_, { call, put }) {
       let response = yield call(queryCurrent);
       // console.log("------------",response);
