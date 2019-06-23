@@ -1,4 +1,4 @@
-import { AnyAction } from 'redux';
+import { AnyAction, Action } from 'redux';
 import { EffectsCommandMap } from 'dva';
 import { MenuDataItem } from '@ant-design/pro-layout';
 import { RouterTypes } from 'umi';
@@ -53,3 +53,8 @@ export interface ConnectProps<T extends { [key: string]: any } = {}>
   extends Partial<RouterTypes<Route, T>> {
   dispatch?: Dispatch;
 }
+
+export type ImmerReducer<S = any, A extends Action = AnyAction> = (
+  state: S | undefined,
+  action: A,
+) => void;

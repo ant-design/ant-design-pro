@@ -1,8 +1,9 @@
-import { AnyAction, Reducer } from 'redux';
+import { AnyAction } from 'redux';
 import { parse, stringify } from 'qs';
 
 import { EffectsCommandMap } from 'dva';
 import { routerRedux } from 'dva/router';
+import { ImmerReducer } from './connect.d';
 
 export function getPageQuery(): string {
   return parse(window.location.href.split('?')[1]);
@@ -13,14 +14,19 @@ export type Effect = (
   effects: EffectsCommandMap & { select: <T>(func: (state: {}) => T) => T },
 ) => void;
 
+export interface IState {
+  status: undefined | string;
+  type: undefined | string;
+}
+
 export interface ModelType {
   namespace: string;
-  state: {};
+  state: IState;
   effects: {
     logout: Effect;
   };
   reducers: {
-    changeLoginStatus: Reducer<{} | void>;
+    changeLoginStatus: ImmerReducer<IState>;
   };
 }
 
@@ -29,6 +35,7 @@ const Model: ModelType = {
 
   state: {
     status: undefined,
+    type: undefined,
   },
 
   effects: {
@@ -49,7 +56,7 @@ const Model: ModelType = {
   },
 
   reducers: {
-    changeLoginStatus(state = {}, { payload }) {
+    changeLoginStatus(state, { payload }) {
       state!.status = payload.status;
       state!.type = payload.type;
     },

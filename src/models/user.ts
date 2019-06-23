@@ -1,7 +1,6 @@
 import { queryCurrent, query as queryUsers } from '@/services/user';
-
+import { ImmerReducer } from './connect.d';
 import { Effect } from 'dva';
-import { Reducer } from 'redux';
 
 export interface CurrentUser {
   avatar?: string;
@@ -29,8 +28,8 @@ export interface UserModelType {
     fetchCurrent: Effect;
   };
   reducers: {
-    saveCurrentUser: Reducer<UserModelState | void>;
-    changeNotifyCount: Reducer<UserModelState | void>;
+    saveCurrentUser: ImmerReducer<UserModelState>;
+    changeNotifyCount: ImmerReducer<UserModelState>;
   };
 }
 
@@ -59,7 +58,7 @@ const UserModel: UserModelType = {
   },
 
   reducers: {
-    saveCurrentUser(state = {}, action) {
+    saveCurrentUser(state, action) {
       state!.currentUser = action.payload || {};
     },
     changeNotifyCount(

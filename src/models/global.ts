@@ -1,6 +1,5 @@
-import { Effect } from './connect.d';
+import { Effect, ImmerReducer } from './connect.d';
 import { NoticeIconData } from '@/components/NoticeIcon';
-import { Reducer } from 'redux';
 import { Subscription } from 'dva';
 import { queryNotices } from '@/services/user';
 
@@ -24,9 +23,9 @@ export interface GlobalModelType {
     changeNoticeReadState: Effect;
   };
   reducers: {
-    changeLayoutCollapsed: Reducer<GlobalModelState | void>;
-    saveNotices: Reducer<GlobalModelState | void>;
-    saveClearedNotices: Reducer<GlobalModelState | void>;
+    changeLayoutCollapsed: ImmerReducer<GlobalModelState>;
+    saveNotices: ImmerReducer<GlobalModelState>;
+    saveClearedNotices: ImmerReducer<GlobalModelState>;
   };
   subscriptions: { setup: Subscription };
 }
@@ -107,7 +106,7 @@ const GlobalModel: GlobalModelType = {
     ): GlobalModelState | void {
       state.collapsed = payload;
     },
-    saveNotices(state: any, { payload }): GlobalModelState | void {
+    saveNotices(state, { payload }) {
       state!.collapsed = false;
       state!.notices = payload;
     },
