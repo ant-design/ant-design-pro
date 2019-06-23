@@ -4,7 +4,7 @@ import client from 'webpack-theme-color-replacer/client';
 import generate from '@ant-design/colors/lib/generate';
 
 export default {
-  getAntdSerials(color: string): Array<string> {
+  getAntdSerials(color: string): string[] {
     const lightCount = 9;
     const divide = 10;
     // 淡化（即less的tint）
