@@ -14,6 +14,7 @@ export interface CurrentUser {
     label: string;
   }[];
   unreadCount?: number;
+  notifyCount?: number;
 }
 
 export interface UserModelState {
@@ -28,8 +29,8 @@ export interface UserModelType {
     fetchCurrent: Effect;
   };
   reducers: {
-    saveCurrentUser: Reducer<UserModelState>;
-    changeNotifyCount: Reducer<UserModelState>;
+    saveCurrentUser: Reducer<UserModelState | void>;
+    changeNotifyCount: Reducer<UserModelState | void>;
   };
 }
 
@@ -58,11 +59,8 @@ const UserModel: UserModelType = {
   },
 
   reducers: {
-    saveCurrentUser(state, action) {
-      return {
-        ...state,
-        currentUser: action.payload || {},
-      };
+    saveCurrentUser(state = {}, action) {
+      state!.currentUser = action.payload || {};
     },
     changeNotifyCount(
       state = {
@@ -70,14 +68,8 @@ const UserModel: UserModelType = {
       },
       action,
     ) {
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          notifyCount: action.payload.totalCount,
-          unreadCount: action.payload.unreadCount,
-        },
-      };
+      state.currentUser!.notifyCount = action.payload.totalCount;
+      state.currentUser!.unreadCount = action.payload.unreadCount;
     },
   },
 };

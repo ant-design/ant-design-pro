@@ -24,9 +24,9 @@ export interface GlobalModelType {
     changeNoticeReadState: Effect;
   };
   reducers: {
-    changeLayoutCollapsed: Reducer<GlobalModelState>;
-    saveNotices: Reducer<GlobalModelState>;
-    saveClearedNotices: Reducer<GlobalModelState>;
+    changeLayoutCollapsed: Reducer<GlobalModelState | void>;
+    saveNotices: Reducer<GlobalModelState | void>;
+    saveClearedNotices: Reducer<GlobalModelState | void>;
   };
   subscriptions: { setup: Subscription };
 }
@@ -101,28 +101,24 @@ const GlobalModel: GlobalModelType = {
   },
 
   reducers: {
-    changeLayoutCollapsed(state = { notices: [], collapsed: true }, { payload }): GlobalModelState {
-      return {
-        ...state,
-        collapsed: payload,
-      };
+    changeLayoutCollapsed(
+      state = { notices: [], collapsed: true },
+      { payload },
+    ): GlobalModelState | void {
+      state.collapsed = payload;
     },
-    saveNotices(state, { payload }): GlobalModelState {
-      return {
-        collapsed: false,
-        ...state,
-        notices: payload,
-      };
+    saveNotices(state: any, { payload }): GlobalModelState | void {
+      state!.collapsed = false;
+      state!.notices = payload;
     },
-    saveClearedNotices(state = { notices: [], collapsed: true }, { payload }): GlobalModelState {
-      return {
-        collapsed: false,
-        ...state,
-        notices: state.notices.filter((item): boolean => item.type !== payload),
-      };
+    saveClearedNotices(
+      state = { notices: [], collapsed: true },
+      { payload },
+    ): GlobalModelState | void {
+      state.collapsed = false;
+      state.notices = state.notices.filter((item): boolean => item.type !== payload);
     },
   },
-
   subscriptions: {
     setup({ history }): void {
       // Subscribe history(url) change, trigger `load` action if pathname is `/`

@@ -20,6 +20,7 @@ const plugins: IPlugin[] = [
       antd: true,
       dva: {
         hmr: true,
+        immer: true,
       },
       locale: {
         // default false

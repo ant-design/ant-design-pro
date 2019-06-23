@@ -20,7 +20,7 @@ export interface ModelType {
     logout: Effect;
   };
   reducers: {
-    changeLoginStatus: Reducer<{}>;
+    changeLoginStatus: Reducer<{} | void>;
   };
 }
 
@@ -49,12 +49,9 @@ const Model: ModelType = {
   },
 
   reducers: {
-    changeLoginStatus(state, { payload }) {
-      return {
-        ...state,
-        status: payload.status,
-        type: payload.type,
-      };
+    changeLoginStatus(state = {}, { payload }) {
+      state!.status = payload.status;
+      state!.type = payload.type;
     },
   },
 };
