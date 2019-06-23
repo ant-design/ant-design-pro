@@ -4,16 +4,16 @@ import client from 'webpack-theme-color-replacer/client';
 import generate from '@ant-design/colors/lib/generate';
 
 export default {
-  getAntdSerials(color: string) {
+  getAntdSerials(color: string): Array<string> {
     const lightCount = 9;
-    const devide = 10;
+    const divide = 10;
     // 淡化（即less的tint）
     let lightens = new Array(lightCount).fill(0);
-    lightens = lightens.map((_, i) => client.varyColor.lighten(color, i / devide));
+    lightens = lightens.map((_, i) => client.varyColor.lighten(color, i / divide));
     const colorPalettes = generate(color);
     return lightens.concat(colorPalettes);
   },
-  changeColor(newColor: string) {
+  changeColor(newColor: string): Promise<void> {
     const options = {
       // new colors array, one-to-one corresponde with `matchColors`
       newColors: this.getAntdSerials(newColor),
