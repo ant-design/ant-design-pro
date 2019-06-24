@@ -13,7 +13,8 @@ export default {
     const colorPalettes = generate(color);
     return lightens.concat(colorPalettes);
   },
-  changeColor(newColor: string): Promise<void> {
+  changeColor(newColor?: string): Promise<void>  {
+    const lastColor = this.lastColor || this.primaryColor;
     const options = {
       // new colors array, one-to-one corresponde with `matchColors`
       newColors: this.getAntdSerials(newColor),

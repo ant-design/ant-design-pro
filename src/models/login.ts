@@ -4,7 +4,9 @@ import { parse, stringify } from 'qs';
 import { EffectsCommandMap } from 'dva';
 import { routerRedux } from 'dva/router';
 
-export function getPageQuery(): string {
+export function getPageQuery(): {
+  [key: string]: string;
+} {
   return parse(window.location.href.split('?')[1]);
 }
 

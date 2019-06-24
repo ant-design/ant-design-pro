@@ -67,6 +67,12 @@ if (isAntDesignProPreview) {
       code: 'UA-72788897-6',
     },
   ]);
+  plugins.push([
+    'umi-plugin-pro',
+    {
+      serverUrl: 'https://ant-design-pro.netlify.com',
+    },
+  ]);
 }
 
 export default {
@@ -93,7 +99,13 @@ export default {
           icon: 'smile',
           component: './Welcome',
         },
+        {
+          component: './404',
+        },
       ],
+    },
+    {
+      component: './404',
     },
   ],
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
