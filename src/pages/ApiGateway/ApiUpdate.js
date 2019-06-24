@@ -56,26 +56,6 @@ const fieldLabels = {
   },
 };
 
-// const tableData = [
-//   {
-//     backEndId: '1',
-//     serviceSeq: '1',
-//     backendType: 'in',
-//     url: 'com.ai.odc.changeParam',
-//   },
-//   {
-//     backEndId: '2',
-//     serviceSeq: '2',
-//     backendType: 'in',
-//     url: 'http://odc.ai.com/changeParam',
-//   },
-//   {
-//     backEndId: '3',
-//     serviceSeq: '4',
-//     backendType: 'out',
-//     url: 'com.ai.odc.changeParam',
-//   },
-// ];
 
 @connect(({ apiCreateModel, loading }) => ({
   apiService: apiCreateModel.apiService,
@@ -402,7 +382,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.back.serviceType}>
                   {getFieldDecorator('back.serviceType', {
                     rules: [{ required: true, message: '请选择后端服务类型' }],
-                  })(<SelectView javaCode="apiService" javaKey="service_type" />)}
+                  })(<SelectView javaCode="apiServiceBackend" javaKey="service_type" />)}
                 </Form.Item>
               </Col>
               <Col

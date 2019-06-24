@@ -158,19 +158,19 @@ const columnsCode = [
 
 // const tableData = [
 //   {
-//     backEndId: '1',
+//     backendId: '1',
 //     serviceSeq: '1',
 //     backendType: 'in',
 //     url: 'com.ai.odc.changeParam',
 //   },
 //   {
-//     backEndId: '2',
+//     backendId: '2',
 //     serviceSeq: '2',
 //     backendType: 'in',
 //     url: 'http://odc.ai.com/changeParam',
 //   },
 //   {
-//     backEndId: '3',
+//     backendId: '3',
 //     serviceSeq: '4',
 //     backendType: 'out',
 //     url: 'com.ai.odc.changeParam',
