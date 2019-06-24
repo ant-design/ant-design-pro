@@ -120,7 +120,7 @@
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-pro": "^1.0.2",
     "umi-types": "^0.3.8",
-    "webpack-theme-color-replacer": "^1.1.5"
+    "webpack-theme-color-replacer": "^1.2.15"
   },
   "optionalDependencies": {
     "puppeteer": "^1.17.0"
