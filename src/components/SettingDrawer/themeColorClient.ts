@@ -13,11 +13,13 @@ export default {
     const colorPalettes = generate(color);
     return lightens.concat(colorPalettes);
   },
-  changeColor(newColor?: string): Promise<void>  {
-    const lastColor = this.lastColor || this.primaryColor;
+  changeColor(color?: string): Promise<void> {
+    if (!color) {
+      return Promise.resolve();
+    }
     const options = {
       // new colors array, one-to-one corresponde with `matchColors`
-      newColors: this.getAntdSerials(newColor),
+      newColors: this.getAntdSerials(color),
       changeUrl(cssUrl: string) {
         // while router is not `hash` mode, it needs absolute path
         return `/${cssUrl}`;
