@@ -20,7 +20,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import { isAntDesignPro } from '@/utils/utils';
 import logo from '../assets/logo.svg';
 
-export interface BasicLayoutProps extends ProLayoutProps, ConnectProps {
+export interface BasicLayoutProps extends ProLayoutProps, Omit<ConnectProps, 'location'> {
   breadcrumbNameMap: {
     [path: string]: MenuDataItem;
   };

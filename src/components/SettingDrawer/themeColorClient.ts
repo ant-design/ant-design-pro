@@ -12,7 +12,7 @@ export default {
     const colorPalettes = generate(color);
     return lightens.concat(colorPalettes);
   },
-  changeColor(newColor: string) {
+  changeColor(newColor?: string) {
     const lastColor = this.lastColor || this.primaryColor;
     const options = {
       // hash模式下用相对路径

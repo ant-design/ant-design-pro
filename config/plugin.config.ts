@@ -25,21 +25,11 @@ function getModulePackageName(module: { context: string }) {
 }
 
 export default (config: any) => {
-  // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+  // preview.pro.ant.design only do not use in your production;
   if (
     process.env.ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site' ||
     process.env.NODE_ENV !== 'production'
   ) {
-    // 将所有 less 合并为一个供 themePlugin使用
-    // const outFile = path.join(__dirname, '../.temp/ant-design-pro.less');
-    // const stylesDir = path.join(__dirname, '../src/');
-
-    // config.plugin('merge-less').use(MergeLessPlugin, [
-    //   {
-    //     stylesDir,
-    //     outFile,
-    //   },
-    // ]);
     config.plugin('webpack-theme-color-replacer').use(ThemeColorReplacer, [
       {
         fileName: 'css/theme-colors.css',
@@ -59,21 +49,12 @@ export default (config: any) => {
         },
       },
     ]);
-    // config.plugin('ant-design-theme').use(AntDesignThemePlugin, [
-    //   {
-    //     antDir: path.join(__dirname, '../node_modules/antd'),
-    //     stylesDir,
-    //     varFile: path.join(__dirname, '../node_modules/antd/es/style/themes/default.less'),
-    //     mainLessFile: outFile, //     themeVariables: ['@primary-color'],
-    //     indexFileName: 'index.html',
-    //     generateOne: true,
-    //     lessUrl: 'https://gw.alipayobjects.com/os/lib/less.js/3.8.1/less.min.js',
-    //   },
-    // ]);
   }
+
   // optimize chunks
   config.optimization
-    .runtimeChunk(false) // share the same chunks across different modules
+    // share the same chunks across different modules
+    .runtimeChunk(false)
     .splitChunks({
       chunks: 'async',
       name: 'vendors',
