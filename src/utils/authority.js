@@ -65,7 +65,6 @@ export function getUser() {
 export function getUserId() {
   // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
   const user = getUser().id;
-  console.log('authority----', user);
   return user;
 }
 export function getUserName() {
@@ -75,6 +74,5 @@ export function getUserName() {
 }
 
 export function setUser(user) {
-  console.log('-----setUser', JSON.stringify(user));
   return localStorage.setItem('antd-pro-user', JSON.stringify(user));
 }

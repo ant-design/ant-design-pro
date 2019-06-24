@@ -111,9 +111,11 @@ class AdapterAttrTableForm extends PureComponent {
       delete target.isNew;
       this.toggleEditable(e, key);
       const { data } = this.state;
-      const { onChange } = this.props;
-      if(onChange){
-        onChange(data);
+      const { onMyChange } = this.props;
+      console.log("-------onMyChange in AdatperAtttrTableForm1",this.props)
+      if(onMyChange){
+        console.log("-------onMyChange in AdatperAtttrTableForm")
+        onMyChange(data);
       }
       this.setState({
         loading: false,

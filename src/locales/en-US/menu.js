@@ -17,6 +17,7 @@ export default {
   'menu.test.test3': 'Test Page3',
   'menu.test.test4': 'Test Page4',
   'menu.test.test5': 'conversion',
+  'menu.test.test6': 'Test Page6',
   'menu.test.orgTransfer': 'Transfer Component',
   'menu.baseData': 'Configuration',
   'menu.baseData.org': 'Org',

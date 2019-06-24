@@ -84,7 +84,14 @@ class TableForm extends PureComponent {
     console.log("---",record,data);
     const keyData= data?data.map((item,index)=>({...item,key:index})):[];
     const keyRecord={...record,adapterAttrs:keyData};
-    return <AdapterAttrTableForm record={keyRecord} dataSource={keyData} pagination={false} />;
+    return (
+      <AdapterAttrTableForm
+        record={keyRecord}
+        onMyChange={(adapterAttrs)=>this.adapterAttrChange(record,adapterAttrs)}
+        dataSource={keyData}
+        pagination={false}
+      />
+    );
   };
 
   remove(key) {
@@ -122,6 +129,21 @@ class TableForm extends PureComponent {
     if (target) {
       target[fieldName] = e;
       this.setState({ data: newData });
+    }
+  }
+
+  adapterAttrChange=(record,adapterAttrs)=>{
+    console.log("-------adapterAttrChange")
+    const {key}=record;
+    const { data } = this.state;
+    const newData = data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
+    target.adapterAttrs=adapterAttrs;
+    this.setState({ data: newData });
+    console.log("-------adapterAttrChange1",newData);
+    const { onChange } = this.props;
+    if(onChange){
+      onChange(newData);
     }
   }
 

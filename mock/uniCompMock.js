@@ -1016,8 +1016,8 @@ const adapterSpecs = {
       "reqPath":"/rest/111",
       "code":"String a=\"dd\";",
       "status":"A",
-      "attrSpecs":[{"attrSpecId":151,"attrSpecCode":"busi_code","desc":"business Code","tableName":"api_service_backend","upId":0,"adapterSpecId":1},
-        {"attrSpecId":152,"attrSpecCode":"operation_code","desc":"operation code","defaultValue":"","tableName":"api_service_backend","upId":0,"adapterSpecId":1},],
+      "attrSpecs":[{"attrSpecId":151,"attrSpecCode":"busi_code","attrSpecName":"business Code","tableName":"api_service_backend","upId":0,"adapterSpecId":1},
+        {"attrSpecId":152,"attrSpecCode":"operation_code","attrSpecName":"operation code","defaultValue":"","tableName":"api_service_backend","upId":0,"adapterSpecId":1},],
     },
     {
       "id": 2,
@@ -1029,7 +1029,7 @@ const adapterSpecs = {
       "code":"String a=\"123\";",
       "status":"A",
       "remark":"good",
-      "attrSpecs":[{"attrSpecId":153,"attrSpecCode":"token","desc":"token","default_value":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","up_id":0,"adapterSpecId":2},],
+      "attrSpecs":[{"attrSpecId":153,"attrSpecCode":"token","attrSpecName":"token","default_value":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","up_id":0,"adapterSpecId":2},],
     },
     {
       "id": 3,
@@ -1047,9 +1047,9 @@ const attrSpecs = {
   "code": "200",
   "msg": null,
   "data": [
-    {"attrSpecId":150,"attrSpecCode":"busi_code","desc":"business Code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
-    {"attrSpecId":151,"attrSpecCode":"operation_code","desc":"operation code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
-    {"attrSpecId":152,"attrSpecCode":"token","desc":"token","defaultValue":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","upId":0,"adapterSpecId":2,"status":"A"},
+    {"attrSpecId":150,"attrSpecCode":"busi_code","attrSpecName":"business Code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
+    {"attrSpecId":151,"attrSpecCode":"operation_code","attrSpecName":"operation code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
+    {"attrSpecId":152,"attrSpecCode":"token","attrSpecName":"token","defaultValue":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","upId":0,"adapterSpecId":2,"status":"A"},
   ],
 
 };

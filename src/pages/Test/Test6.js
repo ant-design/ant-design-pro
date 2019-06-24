@@ -15,7 +15,7 @@ export default class Test6 extends Component {
     return(
       <div>
         <Child onRef={this.onRef} />
-        <button onClick={this.click} >click</button>
+        <button onClick={this.click}>click</button>
       </div>
     )
   }

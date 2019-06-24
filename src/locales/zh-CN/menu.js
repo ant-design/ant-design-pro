@@ -17,6 +17,7 @@ export default {
   'menu.test.test3': '测试页面3',
   'menu.test.test4': '测试页面4',
   'menu.test.test5': '对象转换',
+  'menu.test.test6': '测试页面6',
   'menu.test.orgTransfer': 'Transfer组件',
   'menu.baseData': '基础配置',
   'menu.baseData.org': '接入系统管理',

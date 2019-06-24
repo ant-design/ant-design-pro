@@ -90,7 +90,7 @@ class Adapter extends PureComponent {
         columnDetails:[
           {name: 'attrSpecId',title:'Attr Spec Id'},
           {name: 'attrSpecCode',title:'Code'},
-          {name: 'desc',title:'Name'},
+          {name: 'attrSpecName',title:'Name'},
           {name: 'defaultValue',title:'Default Value'},
         ]
       }],

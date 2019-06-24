@@ -14,7 +14,7 @@ const columnSchemas = {
   columnDetails: [
     { name: 'attrSpecId', title: 'ID', add: true, disabledAct:'true' },
     { name: 'attrSpecCode', title: 'Attr Code', sorter: false, query: true, add: true,detailFlag:true },
-    { name: 'desc', title: 'Attr Name', sorter: false, query: true, add: true },
+    { name: 'attrSpecName', title: 'Attr Name', sorter: false, query: true, add: true },
     { name: 'defaultValue', title: 'Default Value', sorter: false, add: true ,rules:[],showLen:22},
     { name: 'tableName', title: 'Table Name', columnHidden:true, defaultValue:'api_service_backend', disabledAct:'true',add: true },
     { name: 'upId', title: 'Up Id', sorter: false, add: true,defaultValue:'0',},
