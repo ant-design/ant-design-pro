@@ -20,7 +20,7 @@ export default {
     const options = {
       // new colors array, one-to-one corresponde with `matchColors`
       newColors: this.getAntdSerials(color),
-      changeUrl(cssUrl: string) {
+      changeUrl(cssUrl: string): string {
         // while router is not `hash` mode, it needs absolute path
         return `/${cssUrl}`;
       },
