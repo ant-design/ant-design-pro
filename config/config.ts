@@ -70,7 +70,7 @@ if (isAntDesignProPreview) {
   plugins.push([
     'umi-plugin-pro',
     {
-      serverUrl: 'https://5d0c93555deb4b00081f56e2--ant-design-pro.netlify.com',
+      serverUrl: 'https://ant-design-pro.netlify.com',
     },
   ]);
 }
