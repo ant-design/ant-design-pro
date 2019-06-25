@@ -5,12 +5,11 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {extend as requestExtend} from 'umi-request';
 import ApiDocTableForm from './ApiDocTableForm';
 import styles from './style.less';
-import {getPayloadForApiDebug,getPayloadForReq} from './ApiCreate/util';
-import { isJson, toApiSpecJson, toType} from '../util';
+import {getPayloadForApiDebug, getPayloadForReq} from './ApiCreate/util';
 import {getItemValue} from '@/utils/masterData';
 import {getUserId} from '@/utils/authority';
 
-const { Option } = Select;
+const {Option} = Select;
 
 const {TabPane} = Tabs;
 const {TextArea} = Input;
@@ -48,20 +47,12 @@ const request = requestExtend({
 class ApiDebug extends PureComponent {
   state = {
     width: '100%',
-    userDebugId: null,
-    debugName: null,
-    urlSample: null,
-    requestHeaderSample: [],
-    requestBodySample: null,
-    responseHeaderSample: null,
-    responseBodySample: null,
-    responseCode:{
-      status:null,
-      statusText:null,
-      respTime:0,
-      respSize:0
-    },
-    visible: false
+    responseCode: {
+      status: null,
+      statusText: null,
+      respTime: 0,
+      respSize: 0
+    }
   };
 
   componentWillMount() {
@@ -76,38 +67,28 @@ class ApiDebug extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
 
-    const { selectedRow, form, apiService} = this.props;
+    const {selectedRow, form, apiService} = this.props;
     console.log("componentWillReceiveProps", nextProps.selectedRow);
     if (nextProps.selectedRow && selectedRow !== nextProps.selectedRow) {
+
+      console.log("change111111");
 
       const apiServiceDoc = nextProps.selectedRow;
       // 从db里面获取字符串数据，再转成json对象，在增加key字段，赋值给表格组件
       const requestHeaderSample = this.convertDocObj(apiServiceDoc, requestHeaderFlag);
-      const {requestBodySample,responseBodySample,userDebugId, debugName,urlSample,responseHeaderSample} = apiServiceDoc;
+      const {requestBodySample, responseBodySample, userDebugId, debugName, urlSample, responseHeaderSample} = apiServiceDoc;
       // const responseHeaderSample = this.convertDocObj(apiServiceDoc, responseHeaderFlag);
       // const urlSamplePre = getItemValue('env', 'localhost', 'angentHost');
       // const urlSample = apiServiceDoc.urlSample ? apiServiceDoc.urlSample : `${urlSamplePre}${apiServiceDoc.urlSample}`;
-      const urlSampleNew = urlSample !== null && urlSample !== "" ? urlSample : apiService?apiService.requestUrl:"";
       form.setFieldsValue({
         userDebugId,
         debugName,
-        urlSample:urlSampleNew,
+        urlSample,
         requestHeaderSample,
         requestBodySample,
         responseHeaderSample,
         responseBodySample,
       });
-      //
-      // this.setState({
-      //   userDebugId,
-      //   debugName,
-      //   urlSample,
-      //   requestHeaderSample,
-      //   requestBodySample,
-      //   responseHeaderSample,
-      //   responseBodySample,
-      // });
-
     }
   }
 
@@ -156,61 +137,10 @@ class ApiDebug extends PureComponent {
     return [];
   };
 
-
-  /**
-   * 处理header和body的说明文档
-   * @param typeParam
-   * @param oldSpec
-   */
-  handleBodyGenerate = (typeParam, oldSpec) => {
-    const {form} = this.props;
-    const fieldsValue = form.getFieldsValue();
-    let newValue = '';
-    switch (typeParam) {
-      case requestHeaderFlag:
-        newValue = '[{"appkey":"xxxx"}]';
-        break;
-      case requestBodyFlag:
-        newValue = fieldsValue[`${requestBodyFlag}Sample`];
-        break;
-      case responseBodyFlag:
-        newValue = fieldsValue[`${responseBodyFlag}Sample`];
-        break;
-      default:
-        break;
-    }
-    console.log('handleBodyGenerate', newValue);
-    if (newValue) {
-      const isJsonResult = isJson(newValue);
-      console.log("isJsonResult", isJsonResult);
-      if (isJsonResult.result) {
-        const newValueJson = JSON.parse(newValue);
-        const parentValue = typeParam === requestHeaderFlag ? '-' : 'root';
-        const flatJsonArray =
-          typeParam === requestHeaderFlag
-            ? []
-            : [{name: 'root', type: toType(newValueJson), remark: 'root element', parent: '-'}];
-        const requestBodySampleJsonOne =
-          toType(newValueJson) === 'array' ? newValueJson[0] : newValueJson;
-        toApiSpecJson(requestBodySampleJsonOne, flatJsonArray, parentValue);
-        const mergeArr = flatJsonArray.map(spec => {
-          const findObj = oldSpec.find(
-            item => item.name === spec.name && item.parent === spec.parent
-          );
-          return findObj ? {...spec, remark: findObj.remark} : spec;
-        });
-        const specArr = mergeArr.map((item, index) => ({...item, key: `${typeParam}-${index}`}));
-        this.setState({[`${typeParam}Spec`]: specArr});
-      } else {
-        message.error(isJsonResult.msg);
-      }
-    }
-  };
-
   getToken = (key, value) => {
 
     const {
-      dispatch,form
+      dispatch, form
     } = this.props;
     const payload = {};
     payload.appkey = value.props.children;
@@ -231,33 +161,35 @@ class ApiDebug extends PureComponent {
           const requestHeaderSample = form.getFieldValue('requestHeaderSample');
           // const {requestHeaderSample} = this.state;
 
-          const newRequestHeaderSample=[];
+          const newRequestHeaderSample = [];
           requestHeaderSample.forEach((item) => {
 
             if (item.name !== 'appkey') {
               if (item.name === tokenKey) {
+                // eslint-disable-next-line no-param-reassign
                 item.remark = token;
                 newRequestHeaderSample.push(item);
               } else {
                 newRequestHeaderSample.push(item);
               }
             } else {
+              // eslint-disable-next-line no-param-reassign
               item.remark = appkey;
               newRequestHeaderSample.push(item);
             }
           });
-          const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey' );
-          const tokenAttr = newRequestHeaderSample.filter(item => item.name === tokenKey );
-          if(!appKeyAttr||appKeyAttr.length === 0){
+          const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
+          const tokenAttr = newRequestHeaderSample.filter(item => item.name === tokenKey);
+          if (!appKeyAttr || appKeyAttr.length === 0) {
             newRequestHeaderSample.push({
               name: 'appkey',
               remark: appkey
             });
           }
-          if(!tokenAttr||tokenAttr.length === 0){
+          if (!tokenAttr || tokenAttr.length === 0) {
             newRequestHeaderSample.push({
               name: tokenKey,
-                remark: token
+              remark: token
             });
           }
 
@@ -304,7 +236,7 @@ class ApiDebug extends PureComponent {
       }
       return (
         <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
-          <Icon type="cross-circle-o" className={styles.errorIcon} />
+          <Icon type="cross-circle-o" className={styles.errorIcon}/>
           <div className={styles.errorMessage}>{errors[key][0]}</div>
           <div className={styles.errorField}>{fieldLabels[key]}</div>
         </li>
@@ -326,6 +258,22 @@ class ApiDebug extends PureComponent {
     );
   };
 
+  strToSize = (str) =>{
+
+    let len = 0 ;
+    for(let i=0;i < str.length;){
+      const ch = str.charAt(i);
+      if(ch.codePointAt(0) > 0xFFFF){
+        len += 4;
+      }else{
+        len += 2 ;
+      }
+      i += 1;
+    }
+    const size = (len/1024).toFixed(2);
+    return size;
+  }
+
   send = () => {
 
     const {
@@ -336,25 +284,28 @@ class ApiDebug extends PureComponent {
 
     form.validateFields(['urlSample'], {}, (error, value) => {
       if (error) {
-          console.log("form",error,value);
+        console.log("form", error, value);
       } else {
 
         const urlSamplePre = getItemValue('env', 'localhost', 'angentHost');
         const apiInfo = getPayloadForReq(urlSamplePre, values);
         // console.log("send----",apiInfo);
         const reqMethod = apiService && apiService.reqMethod ? apiService.reqMethod : 'get';
-        const beforeTime  = new Date().getMilliseconds();
-        request( apiInfo.urlSample,
-          {method: reqMethod, data:apiInfo.requestBodySample,getResponse: true, headers: apiInfo.requestHeaderSample})
-          .then(({data,response}) => {
+        const beforeTime = new Date().getMilliseconds();
+        request(apiInfo.urlSample,
+          {method: reqMethod, data: apiInfo.requestBodySample, getResponse: true, headers: apiInfo.requestHeaderSample})
+          .then(({data, response}) => {
 
-            console.log("success",data,response);
-            const afterTime  = new Date().getMilliseconds();
+            console.log("success", data, response);
+            const afterTime = new Date().getMilliseconds();
 
-            if (response.status === 200 ) {
+            const responseBodyStr =  JSON.stringify(data).substr(0,5000);
+            const responseStr =  JSON.stringify(data) + JSON.stringify(response);
+            const respSize =  this.strToSize(responseStr);
+            if (response.status === 200) {
               form.setFieldsValue({
-                responseBodySample:JSON.stringify(data),
-                responseHeaderSample:JSON.stringify(response.headers)
+                responseBodySample: responseBodyStr,
+                responseHeaderSample: JSON.stringify(response.headers)
               });
             }
             const respTime = Math.abs(afterTime - beforeTime);
@@ -362,28 +313,34 @@ class ApiDebug extends PureComponent {
             responseCode.status = response.status;
             responseCode.statusText = response.statusText;
             responseCode.respTime = respTime;
+            responseCode.respSize = respSize;
             this.setState({responseCode});
 
-            if (response.status === 200 ) {
+            if (response.status === 200) {
               message.success('Send Success');
-            }else{
+            } else {
               message.error('Send Fail');
             }
 
           }).catch(err => {
-            console.log("err:",err);
-            const afterTime  = new Date().getMilliseconds();
-            const respTime =  Math.abs(afterTime - beforeTime);
+            console.log("err:", err);
+            const afterTime = new Date().getMilliseconds();
+            const respTime = Math.abs(afterTime - beforeTime);
             let status = '500';
             let statusText = err;
             const responseCode = {};
-            if (err.response){
+            if (err.response) {
+              // eslint-disable-next-line prefer-destructuring
               status = err.response.status;
+              // eslint-disable-next-line prefer-destructuring
               statusText = err.response.statusText;
             }
+            const responseStr =  JSON.stringify(err.response);
+            const respSize =  this.strToSize(responseStr);
             responseCode.status = status;
             responseCode.statusText = statusText;
             responseCode.respTime = respTime;
+            responseCode.respSize = respSize;
             this.setState({responseCode});
             message.error('Send Fail');
         });
@@ -447,7 +404,11 @@ class ApiDebug extends PureComponent {
             // console.log('resp=======', resp);
             if (resp.code === '200') {
               message.success('提交成功');
-              this.getDebugList('save');
+              if(apiInfo.option === 1){
+                this.getDebugList('save','');
+              }else{
+                this.getDebugList('update',values.userDebugId);
+              }
             } else {
               message.error('提交失败');
             }
@@ -457,9 +418,9 @@ class ApiDebug extends PureComponent {
     });
   };
 
-  getDebugList = (sign) =>{
-    console.log("-----getDebugList");
-    const {apiId, dispatch,onApiDebug} = this.props;
+  getDebugList = (sign,id) => {
+
+    const {apiId, dispatch, onApiDebug} = this.props;
     /* 获取apiDebug数据 */
     const userId = getUserId();
     const tableName = "api_user_debug";
@@ -471,13 +432,34 @@ class ApiDebug extends PureComponent {
       payload: params,
       onConversionData: undefined,
       callback: resp => {
-        console.log("---123---", resp);
+
         const {data} = resp;
         const {records} = data;
-        const key = records ? records[0].userDebugId.toString() : null;
-        console.log("----22222---", key);
-        const selectKey = sign=== 'del'? key: -1;
-        onApiDebug(records,selectKey);
+        const menuList = records.map(item => ({ ...item, userDebugId: `u${item.userDebugId}` }));
+        const lastKey = (menuList && menuList.length > 0) ? menuList[menuList.length - 1].userDebugId : null;
+        const lastRecord = (menuList && menuList.length > 0) ? menuList[menuList.length - 1]: null;
+        let selectKey = 0;
+        let selectedRow = {};
+        let idNew = id;
+        /* 删除  */
+        if(sign === 'del' ){
+          selectKey = id;
+        }
+        /* 更新 */
+        if(sign === 'update' ){
+          selectKey = id;
+          // eslint-disable-next-line prefer-destructuring
+          selectedRow = menuList.filter(item => id &&  item.userDebugId  === id )[0];
+          idNew = '';
+        }
+        /* 保存 */
+        if(sign === 'save' ){
+          selectKey = lastKey;
+          selectedRow = lastRecord;
+          idNew = '';
+        }
+        console.log("---getDebugList----",sign,id,selectedRow);
+        onApiDebug(menuList, selectKey,selectedRow,idNew);
       }
     });
 
@@ -489,15 +471,19 @@ class ApiDebug extends PureComponent {
     const {dispatch} = this.props;
     const payload = {};
     payload.tableName = 'api_user_debug';
-    payload.id = id;
+    payload.id = id.replace('u','');
     dispatch({
       type: 'uniComp/del',
       payload,
       callback: resp => {
         console.log('resp=======', resp);
-        message.success('删除成功');
-        /* 重新获取列表信息  */
-        this.getDebugList('del');
+        if (resp.code === '200') {
+          message.success('删除成功');
+          /* 重新获取列表信息  */
+          this.getDebugList('del',id);
+        }else{
+          message.error('删除失败');
+        }
       }
     });
   }
@@ -522,29 +508,28 @@ class ApiDebug extends PureComponent {
       selectedRow
     } = this.props;
     const {getFieldDecorator} = form;
-    // console.log("render---this.props---", this.props, apiId);
+    console.log("render---this.props---", this.props);
     const {
       userDebugId,
       debugName,
       urlSample,
-      requestHeaderSample,
       requestBodySample,
       responseHeaderSample,
       responseBodySample,
-      responseCode
-    } = this.state;
+    } = selectedRow;
+    const {responseCode}= this.state;
+    const requestHeaderSample = this.convertDocObj(selectedRow, requestHeaderFlag);
     // console.log("render---123---", this.state);
     const sampleText = 'sample for post:{"type":"xxx","name":"xxx"}';
-    const userDeubgIdNew = (userDebugId !== null && userDebugId !== "") ? userDebugId : form.getFieldValue('userDebugId');
     let delIcon = (
-      <Icon type="delete" onClick={() => this.handleDel(userDeubgIdNew)} />
+      <Button type="danger" shape="circle" icon="delete" onClick={() => this.handleDel(userDebugId)} />
     );
-    if (!userDeubgIdNew || selectedRow.isNew ) {
+    if (selectedRow.isNew) {
       delIcon = "";
     }
     let tabResp = "";
-    console.log("render",responseCode);
-    if( responseCode.status !== null ){
+    console.log("render", responseCode);
+    if (responseCode.status !== null) {
       const contentStatus = (
         <div>
           <p>{responseCode.statusText}</p>
@@ -554,24 +539,24 @@ class ApiDebug extends PureComponent {
         (
           <div>
             <Popover content={contentStatus} title={responseCode.status}>Status： {responseCode.status} </Popover>
-            <Popover>Time：{responseCode.respTime}ms </Popover>
-            <Popover>Size: {responseCode.respSize}Kb</Popover>
+            <span>Time：{responseCode.respTime}ms </span>
+            <span>Size: {responseCode.respSize}KB</span>
           </div>
         );
     }
-
+    const formItemLayout = {
+      labelCol: { span: 10 },
+      wrapperCol: { span: 14 },
+    };
     return (
       <PageHeaderWrapper>
-        <Card title="" className={styles.card} bordered={false} extra={delIcon}>
-          <Row gutter={2}>
+        <Card title="" className={styles.card} bordered={false}>
+          <Row>
             <Col
-              xl={{span: 6}}
-              lg={{span: 8}}
-              md={{span: 12}}
-              sm={24}
-              style={{height: 80}}
+              xl={{span: 8}}
+              style={{height: 60}}
             >
-              <Form.Item label="Debug Name">
+              <Form.Item label="DebugName" {...formItemLayout}>
                 {getFieldDecorator('debugName', {
                   initialValue: debugName,
                   rules: [
@@ -582,13 +567,14 @@ class ApiDebug extends PureComponent {
                       max: 80,
                     },
                   ],
-                })(<Input placeholder="request debugName" />)}
+                })(<Input placeholder="Please input request debugName" />)}
               </Form.Item>
             </Col>
+            <Col xl={{span: 10}} style={{textAlign: 'right'}}>
+              {delIcon}
+            </Col>
           </Row>
-        </Card>
-        <Card title="" className={styles.card} bordered={false}>
-          <Row gutter={2}>
+          <Row>
             <Col
               xl={{span: 4}}
               lg={{span: 3}}
@@ -624,7 +610,7 @@ class ApiDebug extends PureComponent {
             <Col lg={9} md={6} sm={24} style={{height: 50}}>
               <Form.Item>
                 {getFieldDecorator('urlSample', {
-                  initialValue: urlSample !== null && urlSample !== "" ? urlSample : apiService?apiService.requestUrl:"",
+                  initialValue: urlSample,
                   rules: [
                     {
                       required: true,
@@ -649,53 +635,50 @@ class ApiDebug extends PureComponent {
               </Form.Item>
             </Col>
           </Row>
-        </Card>
-        <Tabs defaultActiveKey="1" tabBarExtraContent={tabResp}>
-          <TabPane tab="Request Header" key="1">
-            <Card title="" className={styles.card} bordered={false}>
-              {getFieldDecorator('requestHeaderSample', {
-                initialValue: requestHeaderSample,
-              })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='value' />)}
-            </Card>
-          </TabPane>
-          <TabPane tab="Request Body" key="2">
-            <Card title="Request Parameter Body Sample" className={styles.card} bordered={false}>
-              <Form.Item>
-                {getFieldDecorator(`${requestBodyFlag}Sample`, {
-                  initialValue: (requestBodySample),
+          <Row>
+            <Tabs defaultActiveKey="1" tabBarExtraContent={tabResp}>
+              <TabPane tab="Request Header" key="1">
+                <Card title="" className={styles.card} bordered={false}>
+                  {getFieldDecorator('requestHeaderSample', {
+                    initialValue: requestHeaderSample,
+                  })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='value' />)}
+                </Card>
+              </TabPane>
+              <TabPane tab="Request Body" key="2">
+                <Form.Item>
+                  {getFieldDecorator(`${requestBodyFlag}Sample`, {
+                    initialValue: (requestBodySample),
+                    rules: [{required: false, message: '不能超过5000字符！', max: 5000}],
+                  })(<TextArea placeholder={sampleText} autosize={{minRows: 4, maxRows: 15}} />)}
+                </Form.Item>
+              </TabPane>
+            </Tabs>
+          </Row>
+          <Row>
+            <Tabs defaultActiveKey="3">
+              <TabPane tab="Response Header" key="3">
+                {getFieldDecorator(`${responseHeaderFlag}Sample`, {
+                  initialValue: responseHeaderSample,
                   rules: [{required: false, message: '不能超过5000字符！', max: 5000}],
                 })(<TextArea placeholder={sampleText} autosize={{minRows: 4, maxRows: 15}} />)}
-              </Form.Item>
-            </Card>
-          </TabPane>
-        </Tabs>
-
-        <Tabs defaultActiveKey="3">
-          <TabPane tab="Response Header" key="3">
-            <Card title="Response Parameter Header Sample" className={styles.card} bordered={false}>
-              {getFieldDecorator(`${responseHeaderFlag}Sample`, {
-                initialValue: responseHeaderSample,
-                rules: [{required: false, message: '不能超过5000字符！', max: 5000}],
-              })(<TextArea placeholder={sampleText} autosize={{minRows: 4, maxRows: 15}} />)}
-            </Card>
-          </TabPane>
-          <TabPane tab="Response Body" key="4">
-            <Card title="Response Parameter Body Sample" className={styles.card} bordered={false}>
-              <Form.Item>
-                {getFieldDecorator(`${responseBodyFlag}Sample`, {
-                  initialValue: responseBodySample,
-                  rules: [],
-                })(
-                  <TextArea
-                    rows={4}
-                    placeholder={sampleText}
-                    autosize={{minRows: 4, maxRows: 15}}
-                  />
-                )}
-              </Form.Item>
-            </Card>
-          </TabPane>
-        </Tabs>
+              </TabPane>
+              <TabPane tab="Response Body" key="4">
+                <Form.Item>
+                  {getFieldDecorator(`${responseBodyFlag}Sample`, {
+                    initialValue: responseBodySample,
+                    rules: [],
+                  })(
+                    <TextArea
+                      rows={4}
+                      placeholder={sampleText}
+                      autosize={{minRows: 4, maxRows: 15}}
+                    />
+                  )}
+                </Form.Item>
+              </TabPane>
+            </Tabs>
+          </Row>
+        </Card>
 
         <BackTop />
       </PageHeaderWrapper>

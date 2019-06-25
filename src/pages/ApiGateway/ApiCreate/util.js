@@ -149,15 +149,17 @@ export function getPayloadForApiDoc(oldApiService,values) {
 
 export function getPayloadForApiDebug(apiService,values) {
 
+  const { userDebugId } = values;
   const apiServiceDebug={...values,
     requestHeaderSample:JSON.stringify(values.requestHeaderSample),
     apiId:apiService.apiId,
     userId:apiService.userId,
+    userDebugId:userDebugId.replace('u','')
     };
   console.log("apiServiceDebug",apiServiceDebug);
 
   let option = 1;
-  if(apiServiceDebug.userDebugId){
+  if( parseInt(apiServiceDebug.userDebugId,10) > 0){
     option = 2;
   }
   const tableName = "api_user_debug";
