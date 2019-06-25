@@ -1,7 +1,7 @@
 import { AutoComplete, Icon, Input } from 'antd';
+import { AutoCompleteProps, DataSourceItemType } from 'antd/es/auto-complete';
 import React, { Component } from 'react';
 
-import { DataSourceItemType, AutoCompleteProps } from 'antd/es/auto-complete';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import styles from './index.less';

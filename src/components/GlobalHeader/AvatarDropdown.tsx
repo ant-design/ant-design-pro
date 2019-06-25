@@ -1,5 +1,6 @@
 import { Avatar, Icon, Menu, Spin } from 'antd';
 import { ConnectProps, ConnectState } from '@/models/connect';
+
 import { ClickParam } from 'antd/es/menu';
 import { CurrentUser } from '@/models/user';
 import { FormattedMessage } from 'umi-plugin-react/locale';

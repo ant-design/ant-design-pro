@@ -1,5 +1,5 @@
-import React from 'react';
 import { Button } from 'antd';
+import React from 'react';
 import router from 'umi/router';
 
 // 这里应该使用 antd 的 404 result 组件，
