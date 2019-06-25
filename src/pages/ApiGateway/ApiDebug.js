@@ -545,8 +545,8 @@ class ApiDebug extends PureComponent {
         );
     }
     const formItemLayout = {
-      labelCol: { span: 10 },
-      wrapperCol: { span: 14 },
+      labelCol: { span: 8 },
+      wrapperCol: { span: 16 },
     };
     return (
       <PageHeaderWrapper>
@@ -556,7 +556,7 @@ class ApiDebug extends PureComponent {
               xl={{span: 8}}
               style={{height: 60}}
             >
-              <Form.Item label="DebugName" {...formItemLayout}>
+              <Form.Item label="Debug Name" {...formItemLayout}>
                 {getFieldDecorator('debugName', {
                   initialValue: debugName,
                   rules: [
@@ -570,7 +570,7 @@ class ApiDebug extends PureComponent {
                 })(<Input placeholder="Please input request debugName" />)}
               </Form.Item>
             </Col>
-            <Col xl={{span: 10}} style={{textAlign: 'right'}}>
+            <Col xl={{span: 16}} style={{textAlign: 'left'}}>
               {delIcon}
             </Col>
           </Row>
