@@ -1,11 +1,17 @@
 import React, {Fragment, PureComponent} from 'react';
 import {Button, Divider, Input, message, Popconfirm, Select, Table, Tag} from 'antd';
+import { connect } from 'dva';
 import isEqual from 'lodash/isEqual';
 import styles from './style.less';
 import AdapterSelectView from './AdapterSelectView';
+import AdapterAttrTableForm from './AdapterAttrTableForm';
 
 const {Option} = Select;
 
+
+@connect(({ adapterModel }) => ({
+  adapterModel,
+}))
 class TableForm extends PureComponent {
   index = 0;
 
@@ -23,9 +29,11 @@ class TableForm extends PureComponent {
   }
 
   static getDerivedStateFromProps(nextProps, preState) {
+    console.log("----toggleEditable000:",nextProps.value, preState.value);
     if (isEqual(nextProps.value, preState.value)) {
       return null;
     }
+    console.log("----toggleEditable111:");
     return {
       data: nextProps.value,
       value: nextProps.value,
@@ -48,7 +56,10 @@ class TableForm extends PureComponent {
         this.cacheOriginData[key] = { ...target };
       }
       target.editable = !target.editable;
+      console.log("----toggleEditable:",newData);
       this.setState({ data: newData });
+
+      console.log("----toggleEditable333:",this.state.data);
     }
   };
 
@@ -66,6 +77,21 @@ class TableForm extends PureComponent {
     });
     this.index += 1;
     this.setState({ data: newData });
+  };
+
+  expandedRowRender = (record) => {
+    const data=record.adapterAttrs;
+    console.log("---",record,data);
+    const keyData= data?data.map((item,index)=>({...item,key:index})):[];
+    const keyRecord={...record,adapterAttrs:keyData};
+    return (
+      <AdapterAttrTableForm
+        record={keyRecord}
+        onMyChange={(adapterAttrs)=>this.adapterAttrChange(record,adapterAttrs)}
+        dataSource={keyData}
+        pagination={false}
+      />
+    );
   };
 
   remove(key) {
@@ -106,16 +132,55 @@ class TableForm extends PureComponent {
     }
   }
 
+  adapterAttrChange=(record,adapterAttrs)=>{
+    console.log("-------adapterAttrChange")
+    const {key}=record;
+    const { data } = this.state;
+    const newData = data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
+    target.adapterAttrs=adapterAttrs;
+    this.setState({ data: newData });
+    console.log("-------adapterAttrChange1",newData);
+    const { onChange } = this.props;
+    if(onChange){
+      onChange(newData);
+    }
+  }
+
   handleAdapterFieldChange(e, adapterSpecName, record) {
     const {key}=record;
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
-    console.log("e.target:",e,adapterSpecName);
+    console.log("000000e.target:",e,adapterSpecName);
     if (target) {
       target.adapterSpecId = e;
       target.adapterSpecName = adapterSpecName;
-      this.setState({ data: newData });
+      const payload={
+        "tableName": "adapter_spec",
+        "id": target.adapterSpecId,
+      }
+
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'adapterModel/detail',
+        payload,
+        callback:(resp)=>{
+          console.log("1111111.resp:",resp);
+          if(resp){
+            const {attrSpecs}=resp;
+            const adapterAttrs=attrSpecs?attrSpecs.map(item=>({
+              "backendId": target.backendId,
+              "attrSpecId": item.attrSpecId,
+              "attrValue": item.defaultValue,
+              "attrSpecCode": item.attrSpecCode,
+            })):[];
+            target.adapterAttrs=adapterAttrs;
+            console.log("----newData:",newData);
+            this.setState({ data: newData });
+          }
+        }
+      });
     }
   }
 
@@ -212,6 +277,7 @@ class TableForm extends PureComponent {
     this.clickedCancel = false;
   }
 
+
   render() {
 /*
     <Input
@@ -227,7 +293,7 @@ class TableForm extends PureComponent {
         title: 'in／out',
         dataIndex: 'backendType',
         key: 'backendType',
-        width: '10%',
+        // width: '10%',
         render: (text, record) => {
           // console.log("----------",text);
           if (record.editable&&(text===null||text.toLowerCase()!=='endpoint')) {
@@ -257,7 +323,7 @@ class TableForm extends PureComponent {
         key: 'serviceSeq',
         defaultSortOrder: 'ascend',
         sorter: (a, b) => a.serviceSeq - b.serviceSeq,
-        width: '10%',
+        // width: '10%',
         render: (text, record) => {
           if (record.editable) {
             return (
@@ -276,7 +342,7 @@ class TableForm extends PureComponent {
         title: 'Adapter',
         dataIndex: 'adapterSpecId',
         key: 'adapterSpecId',
-        width: '30%',
+        // width: '50%',
         render: (text, record) => {
           // console.log("----------",text);
           if (record.editable&&(text===null||record.backendType.toLowerCase()!=='endpoint')) {
@@ -341,7 +407,7 @@ class TableForm extends PureComponent {
       {
         title: 'action',
         key: 'action',
-        width: '15%',
+        // width: '20%',
         render: (text, record) => {
           const { loading } = this.state;
           if (!!record.editable && loading) {
@@ -351,19 +417,19 @@ class TableForm extends PureComponent {
             if (record.isNew) {
               return (
                 <span>
-                  <a onClick={e => this.saveRow(e, record.key)}>添加</a>
+                  <a onClick={e => this.saveRow(e, record.key)}>Add</a>
                   <Divider type="vertical" />
-                  <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
-                    <a>删除</a>
+                  <Popconfirm title="Do you remove？" onConfirm={() => this.remove(record.key)}>
+                    <a>Remove</a>
                   </Popconfirm>
                 </span>
               );
             }
             return (
               <span>
-                <a onClick={e => this.saveRow(e, record.key)}>保存</a>
+                <a onClick={e => this.saveRow(e, record.key)}>Hold</a>
                 <Divider type="vertical" />
-                <a onClick={e => this.cancel(e, record.key)}>取消</a>
+                <a onClick={e => this.cancel(e, record.key)}>Cancel</a>
               </span>
             );
           }
@@ -372,16 +438,16 @@ class TableForm extends PureComponent {
           if (lowerCaseBackendType==='endpoint') {
             return (
               <span>
-                <a onClick={e => this.toggleEditable(e, record.key)}>编辑</a>
+                <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>
               </span>
             );
           }
           return (
             <span>
-              <a onClick={e => this.toggleEditable(e, record.key)}>编辑</a>
+              <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>
               <Divider type="vertical" />
-              <Popconfirm title="是否要删除此行？" onConfirm={() => this.remove(record.key)}>
-                <a>删除</a>
+              <Popconfirm title="Do you remove？" onConfirm={() => this.remove(record.key)}>
+                <a>Remove</a>
               </Popconfirm>
             </span>
           );
@@ -398,6 +464,7 @@ class TableForm extends PureComponent {
           columns={columns}
           dataSource={data}
           pagination={false}
+          expandedRowRender={(record)=>this.expandedRowRender(record)}
           rowClassName={record => (record.editable ? styles.editable : '')}
         />
         <Button

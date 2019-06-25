@@ -102,23 +102,48 @@ const apiInfoDetail={
         }],
       },
       {
-        backEndId: '1',
+        backendId: '1',
         serviceSeq: '1',
         backendType: 'in',
         adapterSpecId:1,
         adapterSpecName:'ootb_adapter_in',
         url: 'com.ai.odc.changeParam',
+        "adapterAttrs": [
+          {
+            "attrId": 117,
+            "backendId": 1,
+            "attrSpecId": "1",
+            "attrValue": "1234",
+            "attrSpecCode": "busi_code"
+          },
+          {
+            "attrId": 118,
+            "backendId": 1,
+            "attrSpecId": "2",
+            "attrValue": "queryUser",
+            "attrSpecCode": "operationCode"
+          },
+        ]
       },
       {
-        backEndId: '2',
+        backendId: '2',
         serviceSeq: '2',
         backendType: 'in',
         adapterSpecId:2,
         adapterSpecName:'token_adapter_in',
         url: 'http://odc.ai.com/changeParam',
+        "adapterAttrs": [
+          {
+            "attrId": 119,
+            "backendId": 2,
+            "attrSpecId": "3",
+            "attrValue": "Beria 123234324324324324",
+            "attrSpecCode": "token",
+          },
+        ]
       },
       {
-        backEndId: '4',
+        backendId: '4',
         serviceSeq: '4',
         backendType: 'out',
         url: 'com.ai.odc.changeParam',

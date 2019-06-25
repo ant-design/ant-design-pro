@@ -1,4 +1,6 @@
+import {message} from 'antd';
 import {getAdapterList} from '../services/sysDataService';
+import {detail} from '../services/uniCompService';
 import constants from '@/utils/constUtil';
 
 const { STATUS } = constants;
@@ -7,6 +9,7 @@ export default {
 
   state: {
     adapterList: [],
+    adapter:{},
   },
 
   effects: {
@@ -23,6 +26,17 @@ export default {
         type: 'save',
         payload: response,
       });
+    },
+    *detail({ payload, callback }, { call }) {
+      // console.log('sysdata detail request in Model:', payload);
+      const response = yield call(detail, payload);
+      // console.log('sysdata detail response in Model:', response,(!response||response.code!=="200"));
+      if(!response||response.code!=="200"){
+        response.data={};
+        const errorMsg=response.msg&&response.msg!==""?response.msg:`Sorry, the server is reporting an error,code=${response.code}`;
+        message.error(errorMsg);
+      }
+      if (callback) callback(response.data);
     },
   },
   reducers: {

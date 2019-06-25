@@ -1016,8 +1016,8 @@ const adapterSpecs = {
       "reqPath":"/rest/111",
       "code":"String a=\"dd\";",
       "status":"A",
-      "attrSpecs":[{"attrSpecId":151,"attrSpecCode":"busi_code","desc":"business Code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1},
-        {"attrSpecId":151,"attrSpecCode":"operation_code","desc":"operation code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1},],
+      "attrSpecs":[{"attrSpecId":151,"attrSpecCode":"busi_code","attrSpecName":"business Code","tableName":"api_service_backend","upId":0,"adapterSpecId":1},
+        {"attrSpecId":152,"attrSpecCode":"operation_code","attrSpecName":"operation code","defaultValue":"","tableName":"api_service_backend","upId":0,"adapterSpecId":1},],
     },
     {
       "id": 2,
@@ -1029,7 +1029,7 @@ const adapterSpecs = {
       "code":"String a=\"123\";",
       "status":"A",
       "remark":"good",
-      "attrSpecs":[{"attrSpecId":152,"attrSpecCode":"token","desc":"token","default_value":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","up_id":0,"adapterSpecId":2},],
+      "attrSpecs":[{"attrSpecId":153,"attrSpecCode":"token","attrSpecName":"token","default_value":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","up_id":0,"adapterSpecId":2},],
     },
     {
       "id": 3,
@@ -1047,9 +1047,9 @@ const attrSpecs = {
   "code": "200",
   "msg": null,
   "data": [
-    {"attrSpecId":150,"attrSpecCode":"busi_code","desc":"business Code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
-    {"attrSpecId":151,"attrSpecCode":"operation_code","desc":"operation code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
-    {"attrSpecId":152,"attrSpecCode":"token","desc":"token","defaultValue":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","upId":0,"adapterSpecId":2,"status":"A"},
+    {"attrSpecId":150,"attrSpecCode":"busi_code","attrSpecName":"business Code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
+    {"attrSpecId":151,"attrSpecCode":"operation_code","attrSpecName":"operation code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
+    {"attrSpecId":152,"attrSpecCode":"token","attrSpecName":"token","defaultValue":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","upId":0,"adapterSpecId":2,"status":"A"},
   ],
 
 };
@@ -1073,6 +1073,38 @@ const orgs={
       "email": "111",
       "status": STATUS.A,
       "sysUserOrgs":[{"id":1,"orgId":1,"userId":1,"username":"admin"},],
+      "consumerApis": [
+        {
+          "apiId": 160,
+          "name": "Get Api Detail",
+          "groupId": 19,
+          "requestUrl": "/baseInfo/apiService/apiInfo",
+          "reqMethod": "post",
+          "status": "2",
+          "statusName": "已发布",
+          "createTime": "2019-06-17T21:50:23.000+0000",
+          "apiType": "1",
+          "updateTime": "2019-06-17T08:49:27.000+0000",
+          "serviceType": "1",
+          "serviceTypeName": "Rest"
+        }
+      ],
+      "producerApis": [
+        {
+          "apiId": 161,
+          "name": "Get Api List",
+          "groupId": 19,
+          "requestUrl": "/baseInfo/apiService/apiList",
+          "reqMethod": "post",
+          "status": "2",
+          "statusName": "已发布",
+          "createTime": "2019-06-17T21:50:23.000+0000",
+          "apiType": "1",
+          "updateTime": "2019-06-17T08:49:27.000+0000",
+          "serviceType": "1",
+          "serviceTypeName": "Rest"
+        }
+      ]
     },
     {
       "orgType": "2",
@@ -1085,7 +1117,40 @@ const orgs={
       "appkey": "000002",
       "id": 2,
       "authType": "2",
-      "status": STATUS.A
+      "status": STATUS.A,
+      "sysUserOrgs":[{"id":1,"orgId":1,"userId":1,"username":"admin"},],
+      "consumerApis": [
+        {
+          "apiId": 160,
+          "name": "Get Api Detail",
+          "groupId": 19,
+          "requestUrl": "/baseInfo/apiService/apiInfo",
+          "reqMethod": "post",
+          "status": "2",
+          "statusName": "已发布",
+          "createTime": "2019-06-17T21:50:23.000+0000",
+          "apiType": "1",
+          "updateTime": "2019-06-17T08:49:27.000+0000",
+          "serviceType": "1",
+          "serviceTypeName": "Rest"
+        }
+      ],
+      "producerApis": [
+        {
+          "apiId": 161,
+          "name": "Get Api List",
+          "groupId": 19,
+          "requestUrl": "/baseInfo/apiService/apiList",
+          "reqMethod": "post",
+          "status": "2",
+          "statusName": "已发布",
+          "createTime": "2019-06-17T21:50:23.000+0000",
+          "apiType": "1",
+          "updateTime": "2019-06-17T08:49:27.000+0000",
+          "serviceType": "1",
+          "serviceTypeName": "Rest"
+        }
+      ]
     },
     {
       "orgType": "2",
@@ -1098,7 +1163,40 @@ const orgs={
       "appkey": "000003",
       "id": 3,
       "authType": "3",
-      "status": STATUS.A
+      "status": STATUS.A,
+      "sysUserOrgs":[{"id":1,"orgId":1,"userId":1,"username":"admin"},],
+      "consumerApis": [
+        {
+          "apiId": 160,
+          "name": "Get Api Detail",
+          "groupId": 19,
+          "requestUrl": "/baseInfo/apiService/apiInfo",
+          "reqMethod": "post",
+          "status": "2",
+          "statusName": "已发布",
+          "createTime": "2019-06-17T21:50:23.000+0000",
+          "apiType": "1",
+          "updateTime": "2019-06-17T08:49:27.000+0000",
+          "serviceType": "1",
+          "serviceTypeName": "Rest"
+        }
+      ],
+      "producerApis": [
+        {
+          "apiId": 161,
+          "name": "Get Api List",
+          "groupId": 19,
+          "requestUrl": "/baseInfo/apiService/apiList",
+          "reqMethod": "post",
+          "status": "2",
+          "statusName": "已发布",
+          "createTime": "2019-06-17T21:50:23.000+0000",
+          "apiType": "1",
+          "updateTime": "2019-06-17T08:49:27.000+0000",
+          "serviceType": "1",
+          "serviceTypeName": "Rest"
+        }
+      ]
     },
     {
       "orgType": "0",
@@ -1317,47 +1415,6 @@ export function detail(req, res, u) {
     "msg": null,
     "data": {
       ...obj,
-      "sysUserOrgs": [
-        {
-          "orgId": 34,
-          "orgName": "AsiaInfo O2p",
-          "userId": 7,
-          "username": "o2p_conf",
-          "id": 465
-        }
-      ],
-      "consumerApis": [
-        {
-          "apiId": 160,
-          "name": "Get Api Detail",
-          "groupId": 19,
-          "requestUrl": "/baseInfo/apiService/apiInfo",
-          "reqMethod": "post",
-          "status": "2",
-          "statusName": "已发布",
-          "createTime": "2019-06-17T21:50:23.000+0000",
-          "apiType": "1",
-          "updateTime": "2019-06-17T08:49:27.000+0000",
-          "serviceType": "1",
-          "serviceTypeName": "Rest"
-        }
-      ],
-      "producerApis": [
-        {
-          "apiId": 161,
-          "name": "Get Api List",
-          "groupId": 19,
-          "requestUrl": "/baseInfo/apiService/apiList",
-          "reqMethod": "post",
-          "status": "2",
-          "statusName": "已发布",
-          "createTime": "2019-06-17T21:50:23.000+0000",
-          "apiType": "1",
-          "updateTime": "2019-06-17T08:49:27.000+0000",
-          "serviceType": "1",
-          "serviceTypeName": "Rest"
-        }
-      ]
     }
   }
   if (res && res.json) {

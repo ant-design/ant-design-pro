@@ -56,27 +56,6 @@ const fieldLabels = {
   },
 };
 
-// const tableData = [
-//   {
-//     backEndId: '1',
-//     serviceSeq: '1',
-//     backendType: 'in',
-//     url: 'com.ai.odc.changeParam',
-//   },
-//   {
-//     backEndId: '2',
-//     serviceSeq: '2',
-//     backendType: 'in',
-//     url: 'http://odc.ai.com/changeParam',
-//   },
-//   {
-//     backEndId: '3',
-//     serviceSeq: '4',
-//     backendType: 'out',
-//     url: 'com.ai.odc.changeParam',
-//   },
-// ];
-
 @connect(({ apiCreateModel, loading }) => ({
   apiService: apiCreateModel.apiService,
   submitting: loading.effects['apiCreateModel/submitStepForm'],
@@ -90,6 +69,11 @@ class ApiUpdate extends PureComponent {
 
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
+    window.onbeforeunload = function()
+    {
+      console.log("1111111111111111111111111111111111111111111111111dddd------------");
+      return "真的离222开?";
+    };
 
     const { location } = this.props;
     const { state } = location;
@@ -100,6 +84,11 @@ class ApiUpdate extends PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeFooterToolbar);
+    window.onbeforeunload = function()
+    {
+      console.log("2221111111111111111111111111111111111111111111111111dddd------------");
+      return "dddd";
+    }
   }
 
   getApi = apiId => {
@@ -402,7 +391,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.back.serviceType}>
                   {getFieldDecorator('back.serviceType', {
                     rules: [{ required: true, message: '请选择后端服务类型' }],
-                  })(<SelectView javaCode="apiService" javaKey="service_type" />)}
+                  })(<SelectView javaCode="apiServiceBackend" javaKey="service_type" />)}
                 </Form.Item>
               </Col>
               <Col

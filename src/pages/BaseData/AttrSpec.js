@@ -14,7 +14,7 @@ const columnSchemas = {
     { name: 'attrSpecId', title: 'ID', columnHidden: true, add: true, disabledAct:'true' },
     { name: 'adapterSpecId', title: 'Adapter', tag:'AdapterSelectView', sorter: false, add: true },
     { name: 'attrSpecCode', title: 'Attr Code', sorter: false, query: true, add: true,detailFlag:true },
-    { name: 'desc', title: 'Attr Name',sorter: false, add: true },
+    { name: 'attrSpecName', title: 'Attr Name',sorter: false, add: true },
     { name: 'defaultValue', title: 'Default Value', query: true,sorter: false, add: true ,rules:[],showLen:22},
     { name: 'tableName', title: 'Table Name',  columnHidden: true, defaultValue:'api_service_backend', disabledAct:'true',add: true },
     { name: 'upId', title: 'Up Id', sorter: false, add: true,defaultValue:'0',},

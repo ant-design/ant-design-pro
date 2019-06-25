@@ -72,7 +72,7 @@ class Step3 extends React.PureComponent {
           {getFieldDecorator('serviceType', {
             initialValue: data.serviceType,
             rules: [{ required: true, message: '请选择提供方服务类型' }],
-          })(<RadioView javaCode="apiService" javaKey="service_type" />)}
+          })(<RadioView javaCode="apiServiceBackend" javaKey="service_type" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="服务地址">
           {getFieldDecorator('url', {
