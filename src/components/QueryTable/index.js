@@ -20,6 +20,7 @@ import {
 } from 'antd';
 import Ellipsis from '@/components/Ellipsis';
 import moment from 'moment'; // 不能用｛moment｝
+import { formatMessage } from 'umi-plugin-react/locale';
 import StandardTable from '@/components/StandardTable';
 import Detail from './Detail';
 import styles from './index.less';
@@ -185,13 +186,45 @@ class QueryTable extends PureComponent {
     this.handleDrawerVisible(null,false);
   }
 
+  handleRenderColumn = (val,record,columnDetail)=>{
+    let a=val;
+    if (columnDetail.enumData != null) {
+      const item = columnDetail.enumData.find(d => d.itemCode === val);
+      const itemValue = item ? item.itemValue : '';
+      a = itemValue;
+    }
+    if (columnDetail.format != null) {
+      a = moment(a).format(columnDetail.format);
+    }
+
+    if(columnDetail.formatMessagePrivilege&&record.type==='menu'&&record.path){
+      const formatMessageId=`menu${record.path.replace(/\//g,".")}`;
+      a=formatMessage({ id: formatMessageId });
+    }
+
+    if (columnDetail.showLen !== undefined) {
+      a = (
+        <Ellipsis length={columnDetail.showLen} tooltip>
+          {a}
+        </Ellipsis>
+      );
+    }
+    if (columnDetail.showIcon !== undefined) {
+      a = (<span><Icon type={record[columnDetail.showIcon]} />&nbsp;&nbsp;{a}</span>);
+    }
+    if(columnDetail.detailFlag){
+      a=<a onClick={() => this.handleDetail(record)}>{a}</a>;
+    }
+    return a;
+  }
+
   // get columns
   handleColumn = () => {
     columns = [];
     const {
-      columnSchemas: { columnDetails, actions },
+      columnSchemas,
     } = this.props;
-
+    const { columnDetails, actions } = columnSchemas;
     // const {commands} = columnDetails;
     columnDetails.map(columnDetail => {
       const obj = {};
@@ -205,24 +238,32 @@ class QueryTable extends PureComponent {
       if (columnDetail.sorter != null) {
         obj.sorter = columnDetail.sorter;
       }
-      if(columnDetail.detailFlag){
-        obj.render = (val,record) => (<a onClick={() => this.handleDetail(record)}>{val}</a>);
-      }
-      else if (columnDetail.format != null) {
-        obj.render = val => <span>{moment(val).format(columnDetail.format)}</span>;
-      } else if (columnDetail.showLen !== undefined) {
-        obj.render = val => (
-          <Ellipsis length={columnDetail.showLen} tooltip>
-            {val}
-          </Ellipsis>
-        );
-      } else if (columnDetail.enumData != null) {
-        obj.render = val => {
-          const item = columnDetail.enumData.find(d => d.itemCode === val);
-          const itemValue = item ? item.itemValue : '';
-          return <span>{itemValue}</span>;
-        };
-      }
+      obj.render = (val,record) => (this.handleRenderColumn(val,record,columnDetail));
+      // if(columnDetail.detailFlag){
+      //   obj.render = (val,record) => (<a onClick={() => this.handleDetail(record)}>{columnDetail.showIcon?(<span><Icon type={record[columnDetail.showIcon]} />&nbsp;&nbsp;{val}</span>):val}</a>);
+      // }
+      // else if (columnDetail.format != null) {
+      //   obj.render = val => <span>{moment(val).format(columnDetail.format)}</span>;
+      // } else if (columnDetail.showIcon !== undefined) {
+      //   obj.render = (val,record) => (
+      //     <span>
+      //       <Icon type={record[columnDetail.showIcon]} />
+      //       {val}
+      //     </span>
+      //   );
+      // } else if (columnDetail.showLen !== undefined) {
+      //   obj.render = val => (
+      //     <Ellipsis length={columnDetail.showLen} tooltip>
+      //       {val}
+      //     </Ellipsis>
+      //   );
+      // } else if (columnDetail.enumData != null) {
+      //   obj.render = val => {
+      //     const item = columnDetail.enumData.find(d => d.itemCode === val);
+      //     const itemValue = item ? item.itemValue : '';
+      //     return <span>{itemValue}</span>;
+      //   };
+      // }
       columns.push(obj);
       return obj;
     });

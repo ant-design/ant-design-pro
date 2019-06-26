@@ -39,8 +39,8 @@ class Privilege extends PureComponent {
       commands:[{action:'setRole',title:'角色'},],
       columnDetails: [
         { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:110 },
-        { name: 'name', title: 'Name', columnHidden: false, query: true, add: true, detailFlag:1 },
-        { name: 'path', title: 'path', columnHidden: false, query: true, add: true,showLen:22},
+        { name: 'name', title: 'Name', query: true, add: true, detailFlag:1, showIcon:'icon',formatMessagePrivilege:true},
+        { name: 'path', title: 'path', query: true, add: true,showLen:22},
         { name: 'parentPrivilegeId', title: 'parent', add: true, tag:'privilegeTreeSelect', detail:false, columnHidden: true,rules:[]},
         {
           name: 'type',
