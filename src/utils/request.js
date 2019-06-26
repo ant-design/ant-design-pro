@@ -124,7 +124,7 @@ request.interceptors.response.use( (response, options) => {
   // }
   try{
     const cloneResponseObj=response.clone();
-    console.log(cloneResponseObj)
+    // console.log(cloneResponseObj)
     cloneResponseObj.text().then(safeJsonParse)
     // const cloneResponse=response.status===200?cloneResponseObj.json():cloneResponseObj.text();
       .then((data)=>{

@@ -24,13 +24,13 @@ class Test2 extends PureComponent {
 
   handlePrompt = location => {
     if (!this.isSave) {
-      this.showModalSave(location);
+      this.showModalGo(location);
       return false;
     }
     return true;
   };
 
-  showModalSave = location => {
+  showModalGo = location => {
     this.setState({
       modalVisible: true,
       location,
@@ -38,7 +38,7 @@ class Test2 extends PureComponent {
   };
 
 
-  closeModalSave = () => {
+  handleNoGo = () => {
     // const { location } = this.state;
     // const { history } = this.props;
     this.setState({
@@ -51,7 +51,7 @@ class Test2 extends PureComponent {
 
   handlePrompt = location => {
     if (!this.isSave) {
-      this.showModalSave(location);
+      this.showModalGo(location);
       return false;
     }
     return true;
@@ -71,11 +71,11 @@ class Test2 extends PureComponent {
       back: false,
     });
     console.log(this.isSave,'ddddd');
-    window.history.back();
+    // window.history.back();
     return true;
   }
 
-  handleSave = () => {
+  handleGo = () => {
     const { location,back } = this.state;
     const { history } = this.props;
     this.isSave = true;
@@ -92,7 +92,6 @@ class Test2 extends PureComponent {
       modalVisible: false,
       back:false,
     });
-    console.log("=====save]=====")
   };
 
   render() {
@@ -112,8 +111,8 @@ class Test2 extends PureComponent {
         <Prompt message={this.handlePrompt} />
         <Modal
           visible={modalVisible}
-          onOk={this.handleSave}
-          onCancel={() => this.closeModalSave()}
+          onOk={this.handleGo}
+          onCancel={() => this.handleNoGo()}
           title="提示"
         >
           <div>离开页面之前，你没有提交修改，确定是否离开本页面？</div>

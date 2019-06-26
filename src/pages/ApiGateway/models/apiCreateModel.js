@@ -33,9 +33,9 @@ export default {
       if (callback) callback(response);
     },
     *submitStepForm({ payload ,callback}, { call, put }) {
-      console.log("payload in submitStepForm model---:",JSON.stringify(payload));
+      // console.log("payload in submitStepForm model---:",JSON.stringify(payload));
       const response = yield call(saveApi, payload);
-      console.log("response in submitStepForm model---:",response);
+      // console.log("response in submitStepForm model---:",response);
       if(payload.option===1) {
         yield put({
           type: 'saveForAddSubmit',
@@ -52,16 +52,19 @@ export default {
             type: 'updateData',
             payload:response,
           });
-          const msg=response.msg||"success。"
+          const msg=response.msg||"success."
+          console.log("==",callback,msg)
           if(callback){
             callback(response);
           }
-          message.success(msg);
+          else{
+            message.success(msg,10);
+          }
         }
       }
       else{
         const msg=response.msg||"服务器内部错误。"
-        message.error(msg);
+        message.error(msg,10);
       }
     },
     *submitApiDoc({ payload ,callback}, { call, put }) {
@@ -73,11 +76,13 @@ export default {
           type: 'updateData',
           payload:response,
         });
-        const msg=response.msg||"success。"
+        const msg=response.msg||"success."
         if(callback){
           callback(response);
         }
-        message.success(msg);
+        else{
+          message.success(msg);
+        }
       }
       else{
         const msg=response.msg||"服务器内部错误。"
