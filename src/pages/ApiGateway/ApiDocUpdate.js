@@ -296,6 +296,7 @@ class ApiUpdate extends PureComponent {
           callback: () => {
             this.getApi(apiService.apiId);
             // this.setBaseInfo(resp, dispatch);
+            message.success("Submit finished!",10);
           },
         });
       }

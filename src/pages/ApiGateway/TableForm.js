@@ -17,9 +17,12 @@ class TableForm extends PureComponent {
 
   cacheOriginData = {};
 
+  originData={}
+
   constructor(props) {
     super(props);
     // console.log("tableform props:",props);
+    this.originData=props.value;
     this.state = {
       data: props.value,
       loading: false,
@@ -29,11 +32,11 @@ class TableForm extends PureComponent {
   }
 
   static getDerivedStateFromProps(nextProps, preState) {
-    console.log("----toggleEditable000:",nextProps.value, preState.value);
+    // console.log("----toggleEditable000:",nextProps.value, preState.value);
     if (isEqual(nextProps.value, preState.value)) {
       return null;
     }
-    console.log("----toggleEditable111:");
+    // console.log("----toggleEditable111:");
     return {
       data: nextProps.value,
       value: nextProps.value,
@@ -56,10 +59,16 @@ class TableForm extends PureComponent {
         this.cacheOriginData[key] = { ...target };
       }
       target.editable = !target.editable;
-      console.log("----toggleEditable:",newData);
+      // console.log("----toggleEditable:",newData);
       this.setState({ data: newData });
 
-      console.log("----toggleEditable333:",this.state.data);
+      if (target.editable) {
+        const {onChange} = this.props;
+        if (onChange) {
+          onChange(newData);// 保存editable=true的状态，提交的时候判断
+        }
+      }
+      // console.log("----toggleEditable333:",this.state.data);
     }
   };
 
@@ -84,27 +93,29 @@ class TableForm extends PureComponent {
     console.log("---",record,data);
     const keyData= data?data.map((item,index)=>({...item,key:index})):[];
     const keyRecord={...record,adapterAttrs:keyData};
-    return (
+
+    return record.backendType&&record.backendType.toLowerCase()!=='endpoint'?(
       <AdapterAttrTableForm
         record={keyRecord}
         onMyChange={(adapterAttrs)=>this.adapterAttrChange(record,adapterAttrs)}
         dataSource={keyData}
-        pagination={false}
       />
-    );
+    ):(<span>Call endpoints do not need to configure properties</span>);
   };
 
-  remove(key) {
-    const { data } = this.state;
-    const { onChange } = this.props;
-    const newData = data.filter(item => item.key !== key);
-    this.setState({ data: newData });
-    onChange(newData);
-  }
 
-  handleKeyPress(e, key) {
-    if (e.key === 'Enter') {
-      this.saveRow(e, key);
+  adapterAttrChange=(record,adapterAttrs)=>{
+    console.log("-------adapterAttrChange")
+    const {key}=record;
+    const { data } = this.state;
+    const newData = data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
+    target.adapterAttrs=adapterAttrs;
+    this.setState({ data: newData });
+    console.log("-------adapterAttrChange1",newData);
+    const { onChange } = this.props;
+    if(onChange){
+      onChange(newData);
     }
   }
 
@@ -132,56 +143,66 @@ class TableForm extends PureComponent {
     }
   }
 
-  adapterAttrChange=(record,adapterAttrs)=>{
-    console.log("-------adapterAttrChange")
-    const {key}=record;
-    const { data } = this.state;
-    const newData = data.map(item => ({ ...item }));
-    const target = this.getRowByKey(key, newData);
-    target.adapterAttrs=adapterAttrs;
-    this.setState({ data: newData });
-    console.log("-------adapterAttrChange1",newData);
-    const { onChange } = this.props;
-    if(onChange){
-      onChange(newData);
-    }
-  }
 
   handleAdapterFieldChange(e, adapterSpecName, record) {
     const {key}=record;
     const { data } = this.state;
     const newData = data.map(item => ({ ...item }));
     const target = this.getRowByKey(key, newData);
-    console.log("000000e.target:",e,adapterSpecName);
     if (target) {
+      const originTarget=this.originData.find(item=>item.key===record.key&&e===item.adapterSpecId);// 获取数据库中的数据
+      const originTargetAttr=originTarget?originTarget.adapterAttrs:[];
+      console.log("===== origin in handleAdapterFieldChange:",record.key,originTarget,originTargetAttr)
       target.adapterSpecId = e;
       target.adapterSpecName = adapterSpecName;
-      const payload={
-        "tableName": "adapter_spec",
-        "id": target.adapterSpecId,
+      if(originTargetAttr.length>0){
+        target.adapterAttrs=originTargetAttr;// 如果切换到数据库中的adatper，则还原adapter属性为数据库的数据
+        this.setState({ data: newData });
+        console.log("=====in changeAdapter:",record.key,originTarget,originTargetAttr)
+      }
+      else{
+        const payload={
+          "tableName": "adapter_spec",
+          "id": target.adapterSpecId,
+        }
+
+        const { dispatch } = this.props;
+        console.log("----newData in callback in changeAdapter.");
+        dispatch({
+          type: 'adapterModel/detail',
+          payload,
+          callback:(resp)=>{
+            if(resp){
+              const {attrSpecs}=resp;
+              const adapterAttrs=attrSpecs?attrSpecs.map(item=>({
+                "backendId": target.backendId,
+                "attrSpecId": item.attrSpecId,
+                "attrValue": item.defaultValue||'',
+                "attrSpecCode": item.attrSpecCode,
+              })):[];
+              target.adapterAttrs=adapterAttrs;
+              this.setState({ data: newData });
+              console.log("----newData in callback in changeAdapter:",newData);
+            }
+          }
+        });
       }
 
-      const { dispatch } = this.props;
-      dispatch({
-        type: 'adapterModel/detail',
-        payload,
-        callback:(resp)=>{
-          console.log("1111111.resp:",resp);
-          if(resp){
-            const {attrSpecs}=resp;
-            const adapterAttrs=attrSpecs?attrSpecs.map(item=>({
-              "backendId": target.backendId,
-              "attrSpecId": item.attrSpecId,
-              "attrValue": item.defaultValue,
-              "attrSpecCode": item.attrSpecCode,
-            })):[];
-            target.adapterAttrs=adapterAttrs;
-            console.log("----newData:",newData);
-            this.setState({ data: newData });
-          }
-        }
-      });
     }
+  }
+
+  handleKeyPress(e, key) {
+    if (e.key === 'Enter') {
+      this.saveRow(e, key);
+    }
+  }
+
+  remove(key) {
+    const { data } = this.state;
+    const { onChange } = this.props;
+    const newData = data.filter(item => item.key !== key);
+    this.setState({ data: newData });
+    onChange(newData);
   }
 
   validateSeq(target){
@@ -275,6 +296,10 @@ class TableForm extends PureComponent {
     target.editable = false;
     this.setState({ data: newData });
     this.clickedCancel = false;
+    const {onChange} = this.props;
+    if (onChange) {
+      onChange(newData);// 保存editable=true的状态，提交的时候判断
+    }
   }
 
 
@@ -464,6 +489,7 @@ class TableForm extends PureComponent {
           columns={columns}
           dataSource={data}
           pagination={false}
+          defaultExpandAllRows
           expandedRowRender={(record)=>this.expandedRowRender(record)}
           rowClassName={record => (record.editable ? styles.editable : '')}
         />

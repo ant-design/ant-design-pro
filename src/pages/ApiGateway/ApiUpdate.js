@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Card, Button, Form, Icon, Col, Row, Input, Popover, Radio, Tabs, BackTop } from 'antd';
+import { Card, Button, Form, Icon, Col, Row, Input, Popover, Radio, Tabs, BackTop,message } from 'antd';
 import router from 'umi/router';
+import Prompt from 'umi/prompt';
 import { connect } from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -13,8 +14,6 @@ import RadioView from './RadioView';
 import OrgSelectView from './OrgSelectView';
 import ApiFlow from '../Editor/GGEditor/ApiFlow';
 import { getUserId } from '@/utils/authority';
-// import RoleTransfer from "../UserManager/Privilege";
-// import apiFlowData from '../Editor/GGEditor/mock/apiFlow.json';
 
 const { TabPane } = Tabs;
 const forms = ['front', 'back', 'backAttr'];
@@ -67,14 +66,15 @@ class ApiUpdate extends PureComponent {
     apiFlowData: {},
   };
 
+  isBlock=true;
+
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
-    window.onbeforeunload = function()
-    {
-      console.log("1111111111111111111111111111111111111111111111111dddd------------");
-      return "真的离222开?";
-    };
-
+    message.config({
+      top: 400,
+      duration: 10,
+      maxCount: 2,
+    });
     const { location } = this.props;
     const { state } = location;
     // console.log("location state:",state);
@@ -84,11 +84,6 @@ class ApiUpdate extends PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeFooterToolbar);
-    window.onbeforeunload = function()
-    {
-      console.log("2221111111111111111111111111111111111111111111111111dddd------------");
-      return "dddd";
-    }
   }
 
   getApi = apiId => {
@@ -245,7 +240,23 @@ class ApiUpdate extends PureComponent {
     validateFieldsAndScroll((error, values) => {
       // console.log("error in ui======:",error);
       if (!error) {
-        // console.log("api update submit values:",values);
+        console.log("==========api update submit values:",values.members);
+        const editArray=[];
+        values.members.forEach(item => {
+          if(item.type!=='endpoint'&&item.editable){
+            if(item.adapterAttrs){
+              item.adapterAttrs.forEach(attr=>{
+                if(attr.editable){
+                  editArray.push(item);
+                }
+              });
+            }
+            editArray.push(item);
+          }
+        });
+        if(editArray.length>0){
+          message.warn("Before submitting, please hold or cancel the data in the table that is being modified!",10);
+        }
         const apiInfo = getPayloadForUpdate(apiService, values);
         // console.log("api update submit apiInfo:",apiInfo);
         // submit the values
@@ -254,7 +265,9 @@ class ApiUpdate extends PureComponent {
           payload: apiInfo,
           callback: resp => {
             // this.getApi(resp.data.apiId);
+            message.success("Submit finished!",10,)
             this.setBaseInfo(resp, dispatch);
+            this.isBlock=false;
           },
         });
       }
@@ -268,7 +281,6 @@ class ApiUpdate extends PureComponent {
       const values = form.getFieldsValue();
       const apiFlowData = getApiFlowData(values);
       this.setState({ apiFlowData });
-      console.log('====:', apiFlowData);
     }
   };
 
@@ -283,7 +295,7 @@ class ApiUpdate extends PureComponent {
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
     const apiServiceBackendMembers =
       apiService && apiService.apiServiceBackends
-        ? apiService.apiServiceBackends.map(item => ({ ...item, key: item.serviceSeq }))
+        ? apiService.apiServiceBackends.map(item => ({ ...item, key: item.key||item.backendId }))
         : [];
     // // console.log("apiServiceBackendMembers:",apiServiceBackendMembers);
     return (
@@ -292,6 +304,7 @@ class ApiUpdate extends PureComponent {
         style={{ height: '50px' }}
         title="Api Update"
       >
+        <Prompt when={this.isBlock} message='You do not commit data, are you sure you want to leave?' />
         <Card title="定义请求信息" className={styles.card} bordered={false}>
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={2}>
@@ -740,9 +753,8 @@ class ApiUpdate extends PureComponent {
         </Tabs>
 
         <BackTop />
-        <FooterToolbar style={{ width }}>
-          {this.getErrorInfo()}
-          <Button type="primary" onClick={this.validate} loading={submitting}>
+        <FooterToolbar style={{ width }} extra={this.getErrorInfo()} extra2=''>
+          <Button type="primary" block onClick={this.validate} loading={submitting}>
             提交
           </Button>
         </FooterToolbar>

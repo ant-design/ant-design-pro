@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
-import {Switch, Transfer} from 'antd';
+import {Switch, Transfer,Modal} from 'antd';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Prompt from 'umi/prompt';
 
 const mockData = [];
 for (let i = 0; i < 20; i++) {
@@ -50,30 +52,51 @@ class OrgTransfer1 extends PureComponent {
     return record.title;
   };
 
+  handlePrompt = location => {
+    console.log(location);
+    if (!this.isSave) {
+      console.log("1",location);
+      return false;
+    }
+    return true;
+  };
+
+  goBack=()=>{
+    window.history.back();
+  }
+
   render() {
     const { targetKeys, selectedKeys, disabled } = this.state;
     return (
-      <div>
-        <Transfer
-          rowKey={this.setKey}
-          dataSource={mockData}
-          titles={['Source', 'Target']}
-          targetKeys={targetKeys}
-          selectedKeys={selectedKeys}
-          onChange={this.handleChange}
-          onSelectChange={this.handleSelectChange}
-          onScroll={this.handleScroll}
-          render={item => item.title}
-          disabled={disabled}
-        />
-        <Switch
-          unCheckedChildren="disabled"
-          checkedChildren="disabled"
-          checked={disabled}
-          onChange={this.handleDisable}
-          style={{ marginTop: 16 }}
-        />
-      </div>
+      <PageHeaderWrapper
+        onBack={this.goBack}
+        style={{ height: '50px' }}
+        title='test2'
+      >
+        <div>
+
+          <Prompt when message={location => `Are you sure you want to go to ${location.pathname}`} />
+          <Transfer
+            rowKey={this.setKey}
+            dataSource={mockData}
+            titles={['Source', 'Target']}
+            targetKeys={targetKeys}
+            selectedKeys={selectedKeys}
+            onChange={this.handleChange}
+            onSelectChange={this.handleSelectChange}
+            onScroll={this.handleScroll}
+            render={item => item.title}
+            disabled={disabled}
+          />
+          <Switch
+            unCheckedChildren="disabled"
+            checkedChildren="disabled"
+            checked={disabled}
+            onChange={this.handleDisable}
+            style={{ marginTop: 16 }}
+          />
+        </div>
+      </PageHeaderWrapper>
     );
   }
 }

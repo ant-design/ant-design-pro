@@ -14,7 +14,6 @@ class AdapterAttrTableForm extends PureComponent {
     // console.log("tableform props:",props);
     this.state = {
       data: props.dataSource,
-      parentRecord: props.record,
       loading: false,
     };
   }
@@ -35,7 +34,6 @@ class AdapterAttrTableForm extends PureComponent {
     console.log("22222")
     return {
       data: nextProps.dataSource,
-      parentRecord: nextProps.record,
     };
   }
 
@@ -63,7 +61,6 @@ class AdapterAttrTableForm extends PureComponent {
       newAttrData[key]=target;
       console.log("------toggleEditable2:",target)
       this.setState({ data: newAttrData });
-      console.log("------toggleEditable3:",this.state.data)
     }
   };
 
@@ -154,6 +151,10 @@ class AdapterAttrTableForm extends PureComponent {
         title: 'Attr Spec Code',
         dataIndex: 'attrSpecCode',
         key: 'attrSpecCode',
+        width:'20%',
+        render:(text)=>{
+          return (<div style={{textAlign:'left',fontWeight: 'bold'}}>{text}:</div>);
+        }
       },
       {
         title: 'Attr Value',
@@ -176,7 +177,7 @@ class AdapterAttrTableForm extends PureComponent {
       {
         title: 'action',
         key: 'action',
-        // width: '20%',
+        width: '15%',
         render: (text, record) => {
           const { loading } = this.state;
           if (!!record.editable && loading) {
@@ -210,6 +211,7 @@ class AdapterAttrTableForm extends PureComponent {
           columns={columns}
           dataSource={data}
           pagination={false}
+          showHeader={false}
           size='small'
           rowClassName={record => (record.editable ? styles.editable : '')}
         />

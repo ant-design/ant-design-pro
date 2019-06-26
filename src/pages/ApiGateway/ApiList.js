@@ -258,7 +258,7 @@ class TableList extends PureComponent {
     let { msg } = resp;
     if (code === '200') {
       if (!msg || msg === '') {
-        msg = '操作成功';
+        msg = 'Success.';
       }
       message.success(msg);
       this.setState({

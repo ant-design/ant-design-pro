@@ -32,7 +32,7 @@ const busiCodeSpecArr="[{\"name\":\"200\",\"type\":\"string\",\"remark\":\"succe
 
 const apiInfoDetail={
   "code": "200",
-  "msg": "SUCCESS",
+  "msg": "Success!",
   "data": {
     "apiId": 61,
     "name": "语音识别0319",

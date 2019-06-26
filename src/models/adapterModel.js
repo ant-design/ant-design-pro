@@ -14,7 +14,7 @@ export default {
 
   effects: {
     * getAdapterList({payload ,callback}, {call, put}) {
-      console.log("---",getAdapterList)
+      // console.log("---",getAdapterList)
       const response = yield call(getAdapterList,payload);
       if (callback) {
         const data = response && response.data ? response.data : [];
