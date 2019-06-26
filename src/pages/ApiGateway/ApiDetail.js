@@ -65,6 +65,28 @@ const fieldLabels = {
     url: 'URL',
   },
 };
+const expandedRowRender = (record) => {
+  const {backendType,apiServiceBackendAttrs} = record;
+
+  const columns = [
+    { title: 'Attr Spec Code', dataIndex: 'attrSpecCode' },
+    { title: 'Attr Value', dataIndex: 'attrValue' },
+  ];
+  if(backendType !== 'endpoint'){
+    return (
+      <Table
+        showHeader={false}
+        columns={columns}
+        size="small"
+        dataSource={apiServiceBackendAttrs}
+        pagination={false}
+      />
+    );
+  }
+
+  return "Call endpoints has not the configure properties";
+
+};
 
 const columns = [
   {
@@ -78,7 +100,7 @@ const columns = [
   {
     title: 'url',
     dataIndex: 'url',
-  },
+  }
 ];
 
 const columnsOrg = [
@@ -540,6 +562,7 @@ class ApiDetail extends PureComponent {
                     columns={columns}
                     dataSource={apiServiceBackendMembers}
                     pagination={false}
+                    expandedRowRender={expandedRowRender}
                   />
                 </Card>
               </TabPane>
