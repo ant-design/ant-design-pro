@@ -18,7 +18,7 @@ class OrgTransfer extends PureComponent {
 
   componentDidMount = () => {
     const { dispatch,targetData } = this.props;
-    const orgType="0,1";
+    const orgType="0,2";
     dispatch({
       type: 'orgModel/allOrgList',
       payload: {orgType},

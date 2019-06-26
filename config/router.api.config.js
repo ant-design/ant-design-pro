@@ -67,17 +67,17 @@ export default [
             hideInMenu: true,
             component: './ApiGateway/ApiDetail',
           },
-          // {
-          //   path: '/apiGateway/apiDebug',
-          //   name: 'apiDebug',
-          //   component: './ApiGateway/ApiDebugMenu',
-          //   routes: [
-          //     {
-          //       path: '/apiGateway/apiDebug',
-          //       component: './ApiGateway/ApiDebug',
-          //     }
-          //   ]
-          // },
+          {
+            path: '/apiGateway/apiDebug',
+            name: 'apiDebug',
+            component: './ApiGateway/ApiDebugMenu',
+            routes: [
+              {
+                path: '/apiGateway/apiDebug',
+                component: './ApiGateway/ApiDebug',
+              }
+            ]
+          },
           // {
           //   path: '/apiGateway/apiDebugAdd',
           //   name: 'apiDebugAdd',

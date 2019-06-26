@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import router from 'umi/router';
-import {Menu, Button, message} from 'antd';
+import {message, Tabs, Modal} from 'antd';
 import {getUserId} from '@/utils/authority';
 
 import {connect} from "dva";
-import styles from "../Account/Settings/Info.less";
-import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import ApiDebug from "./ApiDebug";
 
-const {Item} = Menu;
+const {TabPane} = Tabs;
 
 @connect(({uniComp, loading}) => ({
   uniComp,
@@ -19,7 +17,6 @@ const {Item} = Menu;
 class ApiDebugMenu extends Component {
 
   state = {
-    mode: 'inline',
     selectKey: null,
     selectedRow: {},
     apiService: {},
@@ -37,6 +34,7 @@ class ApiDebugMenu extends Component {
     const {state} = location;
     // console.log("location state:",state);
     const {apiId} = state || {apiId: 105};
+
     /* 获取apiDebug数据 */
     const userId = getUserId();
     const tableName = "api_user_debug";
@@ -51,19 +49,19 @@ class ApiDebugMenu extends Component {
         console.log("---123---", resp);
         const {data} = resp;
         const {records} = data;
-        const key = records ? records[0].userDebugId.toString() : null;
+        const menuList = records.map(item => ({ ...item, userDebugId: `u${item.userDebugId}` }));
+        const key = (menuList && menuList.length >0) ? menuList[0].userDebugId : null;
         console.log("----22222---", key);
         this.setState({
           selectKey: key,
-          selectedRow: records[0],
-          menuList:records
+          selectedRow: menuList[0],
+          menuList
         });
       }
     });
 
     /* 获取apiInfo数据 */
     this.getApi(apiId);
-
 
   }
 
@@ -88,159 +86,190 @@ class ApiDebugMenu extends Component {
     }
   };
 
+  addTag = (menuList,apiService,sign) =>{
+    if( sign === 1 || menuList.length === 0 ){
+
+      const userDebugId = 'u0';
+      const newData = {
+        debugName: '',
+        requestBodySample: '',
+        urlSample: apiService?apiService.requestUrl:'',
+        responseHeaderSample:'',
+        responseBodySample:'',
+        userDebugId,
+        isNew: true,
+      };
+      menuList.push(newData);
+      this.setState({ menuList, newItem:true,selectKey: userDebugId,selectedRow:newData});
+    }
+  }
+
   setBaseInfo = resp => {
 
     const {data} = resp;
+    const {menuList} = this.state;
     console.log("setBaseInfo", data);
     this.setState({
       apiService: data
-    })
+    });
+    this.addTag(menuList,data,0);
   }
 
-  selectKey = ({key}) => {
-    // const {
-    //   uniComp: {data}
-    // } = this.props;
-    // console.log("getMenu", data);
-    // const list = data && data.list ? data.list : [];
+  onChange = key => {
+    console.log("onChange",key);
     const {menuList} = this.state;
-    const selectList = menuList.filter(item => key && key.indexOf(item.userDebugId) !== -1);
-    const selectedRow = selectList.shift();
+    const selectList = menuList.filter(item => key &&  item.userDebugId  === key );
+    const selectedRow = selectList[0];
     this.setState({
       selectKey: key,
       selectedRow
     });
   };
 
-  handleMenuClick = (e) => {
-    console.log(e);
-    /* 父组件调用子组件方法 */
-    // this.child.childClick();
+  // handleMenuClick = (e) => {
+  //   console.log(e);
+  //   /* 父组件调用子组件方法 */
+  //   // this.child.childClick();
+  // };
+
+  onEdit = (targetKey, action) => {
+    this[action](targetKey);
   };
 
-  getMenu = () => {
+  add = () => {
+    const { menuList,newItem,apiService } = this.state;
 
-    const {menuList} = this.state;
-    console.log("getMenu",menuList);
-    return menuList.map(item => <Item key={item.userDebugId} onClick={this.handleMenuClick}>{item.debugName} </Item>);
-  };
-
-  newMenu = () => {
-    const { menuList,newItem } = this.state;
     if( newItem ){
       message.error('Now,you have a new item.Please first save,then new item.');
     }else{
-      const newData = menuList.map(item => ({ ...item }));
-      newData.push({
-        debugName: '',
-        requestBodySample: '',
-        urlSample: '',
-        userDebugId:``,
-        isNew: true,
-      });
-      this.setState({ menuList: newData, newItem:true });
+      this.addTag(menuList,apiService,1);
     }
-  }
-
-  // getRightTitle = () => {
-  //   const {selectKey} = this.state;
-  //   const {uniComp} = this.props;
-  //   const data = uniComp && uniComp.data ? uniComp.data : {};
-  //
-  //   const list = data && data.list ? data.list : [];
-  //   const selectList = list.filter(item => selectKey && selectKey.indexOf(item.userDebugId) !== -1);
-  //
-  //   if (selectList && selectList.length > 0) {
-  //     const selObj = selectList.shift();
-  //     return selObj.debugName;
-  //   }
-  //   return " ";
-  // };
-
-  resize = () => {
-    if (!this.main) {
-      return;
-    }
-    requestAnimationFrame(() => {
-      let mode = 'inline';
-      const {offsetWidth} = this.main;
-      if (this.main.offsetWidth < 641 && offsetWidth > 400) {
-        mode = 'horizontal';
-      }
-      if (window.innerWidth < 768 && offsetWidth > 400) {
-        mode = 'horizontal';
-      }
-      this.setState({
-        mode,
-      });
-    });
   };
 
-  onRef = (ref) => {
-    this.child = ref
-  }
+  resetMenuList = (id) =>{
 
-  click = (e) => {
-    console.log(e);
-    this.child.myName();
-  }
+    let lastIndex = 0;
+    const {menuList,selectKey,apiService} = this.state;
+    const targetKey = id;
+    console.log("resetMenuList",targetKey,menuList);
+    menuList.forEach((pane, i) => {
+      if (pane.userDebugId === targetKey) {
+        lastIndex = i - 1;
+      }
+    });
 
-  handelMenu = (menuList,selectKey) => {
-    console.log('---handelMenu＝＝＝＝3:', menuList);
-    if(selectKey !== -1){
-      /*  删除 */
-      this.setState({ menuList ,selectKey});
-    }else{
-      /* 保存 */
-      this.setState({ menuList ,newItem:false});
+    const panes = menuList.filter(pane => targetKey && pane.userDebugId !== targetKey );
+    let selectedRowNew = {};
+    let selectKeyNew = selectKey;
+    console.log('ddddd-----',lastIndex,panes);
+    if (panes.length>0 && selectKey === targetKey) {
+      if (selectKey >= 0) {
+        selectKeyNew = panes[lastIndex].userDebugId;
+        selectedRowNew = panes[lastIndex];
+      } else {
+        selectKeyNew = panes[0].userDebugId;
+        // eslint-disable-next-line prefer-destructuring
+        selectedRowNew = panes[0];
+      }
     }
-   
+    this.setState({ menuList:panes, selectKey:selectKeyNew ,selectedRow:selectedRowNew});
+    this.addTag(panes,apiService,0);
   }
 
-  render() {
+  deleteTab = (targetKey) =>{
+
+    const {dispatch} = this.props;
+    const payload = {};
+    payload.tableName = 'api_user_debug';
+    payload.id = targetKey.replace('u','');
+    dispatch({
+      type: 'uniComp/del',
+      payload,
+      callback: resp => {
+        if (resp.code === '200') {
+          message.success('删除成功');
+          /* 重新获取列表信息  */
+          this.resetMenuList(targetKey);
+        }else{
+          message.error('删除失败');
+        }
+      }
+    });
+
+  }
+
+  remove = targetKey => {
+
+    Modal.confirm({
+      title: 'Delete Api Debug',
+      content: 'Are you sure delete this Api Debug？',
+      okText: 'Yes',
+      cancelText: 'No',
+      onOk: () => this.deleteTab(targetKey),
+    });
+
+  };
+
+  getTabs = () => {
+
+    const {menuList,apiService, selectedRow} = this.state;
 
     const {location} = this.props;
     const {state} = location;
     const {apiId} = state || {apiId: 105};
-    const {mode, selectKey, selectedRow, apiService} = this.state;
+    console.log("getMenu",menuList);
+    return menuList.map(item =>
+      <TabPane key={item.userDebugId} tab={item.debugName} closable={!item.isNew}>
+        <ApiDebug
+          apiId={apiId}
+          selectedRow={selectedRow}
+          apiService={apiService}
+          onRef={this.onRef}
+          onApiDebug={this.handelMenu}
+        />
+      </TabPane>
+    );
+  };
+
+  onRef = (ref) => {
+    this.child = ref;
+  }
+
+  handelMenu = (menuList,selectKey,selectedRow,sign) => {
+
+    console.log('---handelMenu＝＝＝＝3:', menuList);
+    if (menuList) {
+      if (sign !== '') {// 删除
+        console.log(selectKey);
+        this.resetMenuList(selectKey);
+      } else {
+        this.setState({menuList, selectKey, newItem: false, selectedRow});
+      }
+    } else {
+      this.setState({menuList: null, selectKey: null, newItem: false, selectedRow: null});
+    }
+
+  }
+
+  render() {
+
+    const {selectKey} = this.state;
     return (
       <PageHeaderWrapper
         onBack={() => window.history.back()}
-        style={{ height: '50px' }}
-        title="Api Update"
+        style={{height: '50px'}}
+        title="Api Debug"
       >
-        <GridContent>
-          <div
-            className={styles.main}
-            ref={ref => {
-              this.main = ref;
-            }}
-          >
-            <div className={styles.leftmenu}>
-              <Menu mode={mode} selectedKeys={[selectKey]} onClick={this.selectKey}>
-                {this.getMenu()}
-              </Menu>
-              <Button
-                style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
-                type="dashed"
-                onClick={this.newMenu}
-                icon="plus"
-                htmlType="button"
-              >
-                NEW
-              </Button>
-            </div>
-            <div className={styles.right}>
-              <ApiDebug
-                apiId={apiId}
-                selectedRow={selectedRow}
-                apiService={apiService}
-                onRef={this.onRef}
-                onApiDebug={this.handelMenu}
-              />
-            </div>
-          </div>
-        </GridContent>
+        <Tabs
+          tabPosition="left"
+          defaultActiveKey={selectKey}
+          onChange={this.onChange}
+          activeKey={selectKey}
+          type="editable-card"
+          onEdit={this.onEdit}
+        >
+          {this.getTabs()}
+        </Tabs>
       </PageHeaderWrapper>
     );
   }
