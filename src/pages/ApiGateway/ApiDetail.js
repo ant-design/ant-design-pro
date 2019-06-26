@@ -84,7 +84,7 @@ const expandedRowRender = (record) => {
     );
   }
 
-  return "No";
+  return "Call endpoints has not the configure properties";
 
 };
 
