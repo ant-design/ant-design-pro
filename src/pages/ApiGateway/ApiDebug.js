@@ -97,7 +97,7 @@ class ApiDebug extends PureComponent {
     window.removeEventListener('resize', this.resizeFooterToolbar);
   }
 
-  getOption = (list, keyName, titleName) => {
+  getOption = (list, keyName, titleName,valueName) => {
     if (!list || list.length < 1) {
       return (
         <Option key={0} value={0}>
@@ -106,8 +106,8 @@ class ApiDebug extends PureComponent {
       );
     }
     return list.map(item => (
-      <Option key={item[keyName]} value={item[keyName]}>
-        {item[titleName]}
+      <Option key={item[keyName]} value={item[keyName]} ss={item[valueName]}>
+        {item[titleName]}-{item[keyName]}
       </Option>
     ));
   };
@@ -116,7 +116,7 @@ class ApiDebug extends PureComponent {
     const {apiService} = this.props;
     const {apiServiceOrgs} = apiService || {apiServiceOrgs: null};
     console.log("getOrgOption", this.props);
-    return this.getOption(apiServiceOrgs, 'id', 'appkey');
+    return this.getOption(apiServiceOrgs, 'appkey','orgName','authType');
   }
 
   convertDocObj = (apiServiceDoc, flag) => {
@@ -139,67 +139,104 @@ class ApiDebug extends PureComponent {
 
   getToken = (key, value) => {
 
-    const {
-      dispatch, form
-    } = this.props;
-    const payload = {};
-    payload.appkey = value.props.children;
-    dispatch({
-      type: 'uniComp/token',
-      payload,
-      callback: resp => {
-        console.log('resp=======', resp);
-        /* 设置请求Header */
-        const {data} = resp;
-        if (resp.code === '200') {
-          /* appkey */
-          const appkey = value.props.children;
-          /* token  */
-          const tokenKey = getItemValue('serviceAgent', 'req_header', 'tokenKey');
-          const tokenPre = getItemValue('serviceAgent', 'req_header', 'tokenPre');
-          const token = `${tokenPre}${data.token}`;
-          const requestHeaderSample = form.getFieldValue('requestHeaderSample');
-          // const {requestHeaderSample} = this.state;
+    if( key !== 0){
+      const {form} = this.props;
 
-          const newRequestHeaderSample = [];
-          requestHeaderSample.forEach((item) => {
+      console.log("getToken",key,value);
 
-            if (item.name !== 'appkey') {
-              if (item.name === tokenKey) {
-                // eslint-disable-next-line no-param-reassign
-                item.remark = token;
-                newRequestHeaderSample.push(item);
-              } else {
-                newRequestHeaderSample.push(item);
-              }
-            } else {
-              // eslint-disable-next-line no-param-reassign
-              item.remark = appkey;
-              newRequestHeaderSample.push(item);
-            }
-          });
-          const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
-          const tokenAttr = newRequestHeaderSample.filter(item => item.name === tokenKey);
-          if (!appKeyAttr || appKeyAttr.length === 0) {
-            newRequestHeaderSample.push({
-              name: 'appkey',
-              remark: appkey
-            });
+      if( value.props.ss === '0'){
+        /* appKey */
+        const appKey = key;
+        /* token  */
+        const tokenKey = getItemValue('serviceAgent', 'req_header', 'tokenKey');
+        let requestHeaderSample = form.getFieldValue('requestHeaderSample');
+        requestHeaderSample = requestHeaderSample.filter(item => item.name !== tokenKey);
+        const newRequestHeaderSample = [];
+        requestHeaderSample.forEach((item) => {
+
+          if (item.name !== 'appkey') {
+            newRequestHeaderSample.push(item);
+          } else {
+            // eslint-disable-next-line no-param-reassign
+            item.remark = appKey;
+            newRequestHeaderSample.push(item);
           }
-          if (!tokenAttr || tokenAttr.length === 0) {
-            newRequestHeaderSample.push({
-              name: tokenKey,
-              remark: token
-            });
-          }
-
-          form.setFieldsValue({
-            requestHeaderSample: newRequestHeaderSample
+        });
+        const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
+        if (!appKeyAttr || appKeyAttr.length === 0) {
+          newRequestHeaderSample.push({
+            key:'appkey',
+            name: 'appkey',
+            remark: appKey
           });
         }
+        form.setFieldsValue({
+          requestHeaderSample: newRequestHeaderSample
+        });
+      }
+      else{
+        const {dispatch} = this.props;
+        const payload = {};
+        payload.appkey = key;
+        dispatch({
+          type: 'uniComp/token',
+          payload,
+          callback: resp => {
+            console.log('resp=======', resp);
+            /* 设置请求Header */
+            const {data} = resp;
+            if (resp.code === '200') {
+              /* appKey */
+              const appKey = key;
+              /* token  */
+              const tokenKey = getItemValue('serviceAgent', 'req_header', 'tokenKey');
+              const {token} = data;
+              const requestHeaderSample = form.getFieldValue('requestHeaderSample');
 
-      },
-    });
+              const newRequestHeaderSample = [];
+              requestHeaderSample.forEach((item) => {
+
+                if (item.name !== 'appkey') {
+                  if (item.name === tokenKey) {
+                    // eslint-disable-next-line no-param-reassign
+                    item.remark = token;
+                    newRequestHeaderSample.push(item);
+                  } else {
+                    newRequestHeaderSample.push(item);
+                  }
+                } else {
+                  // eslint-disable-next-line no-param-reassign
+                  item.remark = appKey;
+                  newRequestHeaderSample.push(item);
+                }
+              });
+              const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
+              const tokenAttr = newRequestHeaderSample.filter(item => item.name === tokenKey);
+              if (!appKeyAttr || appKeyAttr.length === 0) {
+                newRequestHeaderSample.push({
+                  key:'appkey',
+                  name: 'appkey',
+                  remark: appKey
+                });
+              }
+              if (!tokenAttr || tokenAttr.length === 0) {
+                newRequestHeaderSample.push({
+                  key: tokenKey,
+                  name: tokenKey,
+                  remark: token
+                });
+              }
+
+              form.setFieldsValue({
+                requestHeaderSample: newRequestHeaderSample
+              });
+            }
+
+          },
+        });
+      }
+    }
+
   }
 
   resizeFooterToolbar = () => {
@@ -576,7 +613,7 @@ class ApiDebug extends PureComponent {
           </Row>
           <Row>
             <Col
-              xl={{span: 4}}
+              xl={{span: 5}}
               lg={{span: 3}}
               md={{span: 6}}
               sm={24}
