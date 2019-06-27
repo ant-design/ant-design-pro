@@ -248,7 +248,7 @@ class TableForm extends PureComponent {
         return;
       }
       const target = this.getRowByKey(key) || {};
-      if (!target.serviceSeq || !target.adapterSpecId) {
+      if (!target.serviceSeq || (target.backendType !=='endpoint'&&!target.adapterSpecId)) {
         message.error('请填写完整信息。');
         e.target.focus();
         this.setState({
