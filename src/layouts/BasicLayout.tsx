@@ -4,19 +4,19 @@
  * https://github.com/ant-design/ant-design-pro-layout
  */
 
-import { ConnectProps, ConnectState } from '@/models/connect';
 import ProLayout, {
   MenuDataItem,
   BasicLayoutProps as ProLayoutProps,
   Settings,
 } from '@ant-design/pro-layout';
-import React, { useState } from 'react';
-
-import Authorized from '@/utils/Authorized';
+import React, { useEffect } from 'react';
 import Link from 'umi/link';
-import RightContent from '@/components/GlobalHeader/RightContent';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
+
+import Authorized from '@/utils/Authorized';
+import RightContent from '@/components/GlobalHeader/RightContent';
+import { ConnectProps, ConnectState } from '@/models/connect';
 import { isAntDesignPro } from '@/utils/utils';
 import logo from '../assets/logo.svg';
 
@@ -75,7 +75,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
    * constructor
    */
 
-  useState(() => {
+  useEffect(() => {
     if (dispatch) {
       dispatch({
         type: 'user/fetchCurrent',
@@ -84,7 +84,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         type: 'settings/getSetting',
       });
     }
-  });
+  }, []);
 
   /**
    * init variables
