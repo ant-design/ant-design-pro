@@ -1,24 +1,24 @@
+import React from 'react';
 import { Spin } from 'antd';
 import isEqual from 'lodash/isEqual';
-import React from 'react';
-// eslint-disable-next-line import/no-cycle
 import { isComponentClass } from './Secured';
+// eslint-disable-next-line import/no-cycle
 
-interface IPromiseRenderProps<T, K> {
+interface PromiseRenderProps<T, K> {
   ok: T;
   error: K;
-  promise: Promise<any>;
+  promise: Promise<boolean>;
 }
 
-interface IPromiseRenderState {
-  component: React.ComponentClass<any, any> | React.FunctionComponent<any>;
+interface PromiseRenderState {
+  component: React.ComponentClass | React.FunctionComponent;
 }
 
 export default class PromiseRender<T, K> extends React.Component<
-  IPromiseRenderProps<T, K>,
-  IPromiseRenderState
+  PromiseRenderProps<T, K>,
+  PromiseRenderState
 > {
-  state: IPromiseRenderState = {
+  state: PromiseRenderState = {
     component: () => null,
   };
 
@@ -26,10 +26,7 @@ export default class PromiseRender<T, K> extends React.Component<
     this.setRenderComponent(this.props);
   }
 
-  shouldComponentUpdate = (
-    nextProps: IPromiseRenderProps<T, K>,
-    nextState: IPromiseRenderState,
-  ) => {
+  shouldComponentUpdate = (nextProps: PromiseRenderProps<T, K>, nextState: PromiseRenderState) => {
     const { component } = this.state;
     if (!isEqual(nextProps, this.props)) {
       this.setRenderComponent(nextProps);
@@ -39,7 +36,7 @@ export default class PromiseRender<T, K> extends React.Component<
   };
 
   // set render Component : ok or error
-  setRenderComponent(props: IPromiseRenderProps<T, K>) {
+  setRenderComponent(props: PromiseRenderProps<T, K>) {
     const ok = this.checkIsInstantiation(props.ok);
     const error = this.checkIsInstantiation(props.error);
     props.promise
@@ -47,6 +44,7 @@ export default class PromiseRender<T, K> extends React.Component<
         this.setState({
           component: ok,
         });
+        return true;
       })
       .catch(() => {
         this.setState({
@@ -60,10 +58,10 @@ export default class PromiseRender<T, K> extends React.Component<
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
   checkIsInstantiation = (
-    target: React.ReactNode | React.ComponentClass<any, any>,
-  ): React.FunctionComponent<any> => {
+    target: React.ReactNode | React.ComponentClass,
+  ): React.FunctionComponent => {
     if (isComponentClass(target)) {
-      const Target = target as React.ComponentClass<any, any>;
+      const Target = target as React.ComponentClass;
       return (props: any) => <Target {...props} />;
     }
     if (React.isValidElement(target)) {
@@ -75,6 +73,7 @@ export default class PromiseRender<T, K> extends React.Component<
   render() {
     const { component: Component } = this.state;
     const { ok, error, promise, ...rest } = this.props;
+
     return Component ? (
       <Component {...rest} />
     ) : (

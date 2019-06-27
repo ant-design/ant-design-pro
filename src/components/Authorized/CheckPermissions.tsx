@@ -1,13 +1,13 @@
 import React from 'react';
+import { CURRENT } from './renderAuthorize';
 // eslint-disable-next-line import/no-cycle
 import PromiseRender from './PromiseRender';
-import { CURRENT } from './renderAuthorize';
 
 export type IAuthorityType =
   | undefined
   | string
   | string[]
-  | Promise<any>
+  | Promise<boolean>
   | ((currentAuthority: string | string[]) => IAuthorityType);
 
 /**

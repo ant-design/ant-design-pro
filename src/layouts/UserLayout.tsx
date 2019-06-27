@@ -1,39 +1,14 @@
-import SelectLang from '@/components/SelectLang';
-import GlobalFooter from '@/components/GlobalFooter';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import { connect } from 'dva';
-import { Icon } from 'antd';
-import React from 'react';
+import { DefaultFooter, MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
+
 import DocumentTitle from 'react-document-title';
-import { formatMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
+import React from 'react';
+import SelectLang from '@/components/SelectLang';
+import { connect } from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
-import { MenuDataItem, getPageTitle, getMenuData } from '@ant-design/pro-layout';
-
-const links = [
-  {
-    key: 'help',
-    title: formatMessage({ id: 'layout.user.link.help' }),
-    href: '',
-  },
-  {
-    key: 'privacy',
-    title: formatMessage({ id: 'layout.user.link.privacy' }),
-    href: '',
-  },
-  {
-    key: 'terms',
-    title: formatMessage({ id: 'layout.user.link.terms' }),
-    href: '',
-  },
-];
-
-const copyright = (
-  <>
-    Copyright <Icon type="copyright" /> 2019 蚂蚁金服体验技术部出品
-  </>
-);
 
 export interface UserLayoutProps extends ConnectProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
@@ -52,7 +27,7 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
       pathname: '',
     },
   } = props;
-  const { breadcrumb } = getMenuData(routes, props);
+  const { breadcrumb } = getMenuData(routes);
 
   return (
     <DocumentTitle
@@ -79,7 +54,7 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
           </div>
           {children}
         </div>
-        <GlobalFooter links={links} copyright={copyright} />
+        <DefaultFooter />
       </div>
     </DocumentTitle>
   );
