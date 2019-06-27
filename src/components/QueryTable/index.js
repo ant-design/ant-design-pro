@@ -410,7 +410,7 @@ class QueryTable extends PureComponent {
     const { selectedRow } = this.state;
     const option = selectedRow ? 2 : 1;
     const keyValue = selectedRow ? selectedRow[key] : null;
-    const payload = { option, tableName, ...fields };
+    const payload = { option, tableName, data:{info:{...fields}} };
     payload[key] = keyValue;
 
     const { onAdd } = this.props;

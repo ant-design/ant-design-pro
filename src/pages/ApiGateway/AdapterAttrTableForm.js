@@ -11,7 +11,7 @@ class AdapterAttrTableForm extends PureComponent {
 
   constructor(props) {
     super(props);
-    // console.log("tableform props:",props);
+    console.log("AdapterAttrTableForm props:",props.dataSource);
     this.state = {
       data: props.dataSource,
       loading: false,
@@ -148,9 +148,9 @@ class AdapterAttrTableForm extends PureComponent {
         */
     const columns = [
       {
-        title: 'Attr Spec Code',
-        dataIndex: 'attrSpecCode',
-        key: 'attrSpecCode',
+        title: 'Attr Spec Name',
+        dataIndex: 'attrSpecName',
+        key: 'attrSpecName',
         width:'20%',
         render:(text)=>{
           return (<div style={{textAlign:'left',fontWeight: 'bold'}}>{text}:</div>);
@@ -203,7 +203,6 @@ class AdapterAttrTableForm extends PureComponent {
     ];
 
     const { loading, data } = this.state;
-    console.log("--------data in TableForm:",data,columns);
     return (
       <Fragment>
         <Table
