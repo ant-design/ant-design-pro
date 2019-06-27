@@ -371,6 +371,11 @@ class ApiDebug extends PureComponent {
               status = err.response.status;
               // eslint-disable-next-line prefer-destructuring
               statusText = err.response.statusText;
+
+              form.setFieldsValue({
+                responseHeaderSample: JSON.stringify(err.response.headers),
+                responseBodySample: statusText
+              });
             }
             const responseStr =  JSON.stringify(err.response);
             const respSize =  this.strToSize(responseStr);
@@ -575,8 +580,12 @@ class ApiDebug extends PureComponent {
       tabResp =
         (
           <div>
-            <Popover content={contentStatus} title={responseCode.status}>Status： {responseCode.status} </Popover>
-            <span>Time：{responseCode.respTime}ms </span>
+            <Popover content={contentStatus} title={responseCode.status}>Status：
+              <span style={{ color:responseCode.status !== 200? 'red':''}}>
+              {responseCode.status}
+              </span>
+            </Popover>
+            <span>&nbsp;Time：{responseCode.respTime}ms </span>
             <span>Size: {responseCode.respSize}KB</span>
           </div>
         );
@@ -692,7 +701,7 @@ class ApiDebug extends PureComponent {
             </Tabs>
           </Row>
           <Row>
-            <Tabs defaultActiveKey="3">
+            <Tabs defaultActiveKey="4">
               <TabPane tab="Response Header" key="3">
                 {getFieldDecorator(`${responseHeaderFlag}Sample`, {
                   initialValue: responseHeaderSample,
