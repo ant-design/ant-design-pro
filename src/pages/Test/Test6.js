@@ -28,7 +28,7 @@ class Child extends Component {
     onRef(this);
   }
 
-  myName = () => alert('xiaohesong')
+  myName = () => alert('xiaohesong1')
 
   render() {
     return ('woqu')
