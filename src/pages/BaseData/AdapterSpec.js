@@ -28,9 +28,9 @@ class Adapter extends PureComponent {
     const statusList = getItems('common', 'status');// 状态
     const pointTypeList = getItems('adapterSpec', 'point_type');
     const techTypeList = getItems('adapterSpec', 'tech_type');
-    const auth=getAuth("adapter_save"); // 获取某个功能权的角色
+    const auth=getAuth("adapter_spec_save"); // 获取某个功能权的角色
     const saveAct = check(auth,'Modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
-    const commandAct = check(auth,'Attr');
+    const commandAct = check(auth,'Properties');
 // 动作对象
     const actions=saveAct||commandAct?{
       title:'action',
@@ -47,7 +47,6 @@ class Adapter extends PureComponent {
       key: 'id',
       name: 'name',
       relationKey: 'adapterSpecId',
-      commands:[{action:'setRole',title:'角色'},],
       columnDetails: [
         { name: 'id', title: 'Adapter ID', columnHidden: true, add: true, disabledAct:'true' },
         { name: 'name', title: 'Adapter Name', sorter: true, query: true, add: true, detailFlag:true },
@@ -77,7 +76,7 @@ class Adapter extends PureComponent {
           title: 'Status',
           columnHidden: false,
           query: false,
-          add: false,
+          add: true,
           tag: 'commonSelect',
           enumData: statusList,
         },

@@ -29,8 +29,7 @@ export default {
     },
     *save({ payload, callback }, { call }) {
       console.log('postinfo add:', payload);
-      const req=payload.option&&payload.option===8?payload:conversionReq(payload);
-      const response = yield call(save, req);
+      const response = yield call(save, payload);
       // console.log('postinfo response add1:', response);
       if (callback) callback(response);
       // console.log('postinfo response add3:');

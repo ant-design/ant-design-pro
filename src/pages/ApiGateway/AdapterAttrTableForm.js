@@ -148,9 +148,27 @@ class AdapterAttrTableForm extends PureComponent {
         */
     const columns = [
       {
+        title: 'Attr Spec Id',
+        dataIndex: 'attrSpeId',
+        key: 'attrSpecId',
+        width:'20%',
+        render:(text)=>{
+          return (<div style={{textAlign:'left',fontWeight: 'bold'}}>{text}:</div>);
+        }
+      },
+      {
         title: 'Attr Spec Code',
-        dataIndex: 'attrSpecCode',
+        dataIndex: 'attrSpeCode',
         key: 'attrSpecCode',
+        width:'20%',
+        render:(text)=>{
+          return (<div style={{textAlign:'left',fontWeight: 'bold'}}>{text}:</div>);
+        }
+      },
+      {
+        title: 'Attr Spec Name',
+        dataIndex: 'attrSpeName',
+        key: 'attrSpecName',
         width:'20%',
         render:(text)=>{
           return (<div style={{textAlign:'left',fontWeight: 'bold'}}>{text}:</div>);

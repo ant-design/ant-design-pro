@@ -179,6 +179,7 @@ class TableForm extends PureComponent {
                 "attrSpecId": item.attrSpecId,
                 "attrValue": item.defaultValue||'',
                 "attrSpecCode": item.attrSpecCode,
+                "attrSpecName": item.attrSpecName,
               })):[];
               target.adapterAttrs=adapterAttrs;
               this.setState({ data: newData });
