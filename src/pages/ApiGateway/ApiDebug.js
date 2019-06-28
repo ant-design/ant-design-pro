@@ -1,8 +1,9 @@
 import React, {PureComponent} from 'react';
 import {Card, Button, Form, Input, Tabs, BackTop, message, Row, Col, Icon, Popover, Select, Modal} from 'antd';
 import {connect} from 'dva';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import ReactJson from 'react-json-view'
 import {extend as requestExtend} from 'umi-request';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import ApiDocTableForm from './ApiDocTableForm';
 import styles from './style.less';
 import {getPayloadForApiDebug, getPayloadForReq} from './ApiCreate/util';
@@ -46,6 +47,7 @@ const request = requestExtend({
 // })
 class ApiDebug extends PureComponent {
   state = {
+    responseBodySampleJson:[],
     width: '100%',
     responseCode: {
       status: null,
@@ -89,6 +91,10 @@ class ApiDebug extends PureComponent {
         responseHeaderSample,
         responseBodySample,
       });
+      const newResponseBodySample = responseBodySample == "" ?{}:responseBodySample;
+      this.setState({
+        responseBodySampleJson:newResponseBodySample
+      });
     }
   }
 
@@ -115,7 +121,7 @@ class ApiDebug extends PureComponent {
   getOrgOption() {
     const {apiService} = this.props;
     const {apiServiceOrgs} = apiService || {apiServiceOrgs: null};
-    console.log("getOrgOption", this.props);
+    // console.log("getOrgOption", this.props);
     return this.getOption(apiServiceOrgs, 'appkey','orgName','authType');
   }
 
@@ -124,9 +130,9 @@ class ApiDebug extends PureComponent {
       if (apiServiceDoc) {
         const spec = apiServiceDoc[`${flag}Sample`];
         if (spec && spec.trim() !== '') {
-          const specArr = (JSON.parse(spec) || []).map((item) => ({
+          const specArr = (JSON.parse(spec) || []).map((item,index) => ({
             ...item,
-            // key: `${requestHeaderFlag}-${index}`,
+            key: `${requestHeaderFlag}-${index}`,
           }));
           return specArr;
         }
@@ -142,16 +148,22 @@ class ApiDebug extends PureComponent {
     if( key !== 0){
       const {form} = this.props;
 
-      console.log("getToken",key,value);
+      // console.log("getToken",key,value);
+
 
       if( value.props.ss === '0'){
+
         /* appKey */
         const appKey = key;
         /* token  */
         const tokenKey = getItemValue('serviceAgent', 'req_header', 'tokenKey');
         let requestHeaderSample = form.getFieldValue('requestHeaderSample');
+        form.setFieldsValue({
+          requestHeaderSample: {}
+        });
         requestHeaderSample = requestHeaderSample.filter(item => item.name !== tokenKey);
         const newRequestHeaderSample = [];
+        // console.log("requestHeaderSample",requestHeaderSample);
         requestHeaderSample.forEach((item) => {
 
           if (item.name !== 'appkey') {
@@ -162,14 +174,14 @@ class ApiDebug extends PureComponent {
             newRequestHeaderSample.push(item);
           }
         });
-        const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
-        if (!appKeyAttr || appKeyAttr.length === 0) {
-          newRequestHeaderSample.push({
-            key:'appkey',
-            name: 'appkey',
-            remark: appKey
-          });
-        }
+        // const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
+        // if (!appKeyAttr || appKeyAttr.length === 0) {
+        //   newRequestHeaderSample.push({
+        //     key:'appkey',
+        //     name: 'appkey',
+        //     remark: appKey
+        //   });
+        // }
         form.setFieldsValue({
           requestHeaderSample: newRequestHeaderSample
         });
@@ -273,7 +285,7 @@ class ApiDebug extends PureComponent {
       }
       return (
         <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
-          <Icon type="cross-circle-o" className={styles.errorIcon}/>
+          <Icon type="cross-circle-o" className={styles.errorIcon} />
           <div className={styles.errorMessage}>{errors[key][0]}</div>
           <div className={styles.errorField}>{fieldLabels[key]}</div>
         </li>
@@ -339,12 +351,15 @@ class ApiDebug extends PureComponent {
             const responseBodyStr =  JSON.stringify(data).substr(0,5000);
             const responseStr =  JSON.stringify(data) + JSON.stringify(response);
             const respSize =  this.strToSize(responseStr);
-            if (response.status === 200) {
-              form.setFieldsValue({
-                responseBodySample: responseBodyStr,
-                responseHeaderSample: JSON.stringify(response.headers)
-              });
-            }
+            form.setFieldsValue({
+              responseBodySample: responseBodyStr,
+              responseHeaderSample: JSON.stringify(response.headers)
+            });
+
+            this.setState({
+              responseBodySampleJson:data
+            });
+
             const respTime = Math.abs(afterTime - beforeTime);
             const responseCode = {};
             responseCode.status = response.status;
@@ -367,6 +382,9 @@ class ApiDebug extends PureComponent {
             let statusText = err;
             const responseCode = {};
             if (err.response) {
+
+
+              console.log("err",err.response);
               // eslint-disable-next-line prefer-destructuring
               status = err.response.status;
               // eslint-disable-next-line prefer-destructuring
@@ -374,8 +392,13 @@ class ApiDebug extends PureComponent {
 
               form.setFieldsValue({
                 responseHeaderSample: JSON.stringify(err.response.headers),
-                responseBodySample: statusText
+                responseBodySample: JSON.stringify(err.data)
               });
+
+              this.setState({
+                responseBodySampleJson:err.data
+              });
+
             }
             const responseStr =  JSON.stringify(err.response);
             const respSize =  this.strToSize(responseStr);
@@ -550,7 +573,7 @@ class ApiDebug extends PureComponent {
       selectedRow
     } = this.props;
     const {getFieldDecorator} = form;
-    console.log("render---this.props---", this.props);
+    // console.log("render---this.props---", this.props);
     const {
       userDebugId,
       debugName,
@@ -559,9 +582,9 @@ class ApiDebug extends PureComponent {
       responseHeaderSample,
       responseBodySample,
     } = selectedRow;
-    const {responseCode}= this.state;
+    const {responseCode,responseBodySampleJson}= this.state;
     const requestHeaderSample = this.convertDocObj(selectedRow, requestHeaderFlag);
-    // console.log("render---123---", this.state);
+    console.log("render---123---", this.state);
     const sampleText = 'sample for post:{"type":"xxx","name":"xxx"}';
     let delIcon = (
       <Button type="danger" shape="circle" icon="delete" onClick={() => this.handleDel(userDebugId)} />
@@ -570,7 +593,7 @@ class ApiDebug extends PureComponent {
       delIcon = "";
     }
     let tabResp = "";
-    console.log("render", responseCode);
+    // console.log("render", responseCode);
     if (responseCode.status !== null) {
       const contentStatus = (
         <div>
@@ -582,7 +605,7 @@ class ApiDebug extends PureComponent {
           <div>
             <Popover content={contentStatus} title={responseCode.status}>Status：
               <span style={{ color:responseCode.status !== 200? 'red':''}}>
-              {responseCode.status}
+                {responseCode.status}
               </span>
             </Popover>
             <span>&nbsp;Time：{responseCode.respTime}ms </span>
@@ -684,11 +707,13 @@ class ApiDebug extends PureComponent {
           <Row>
             <Tabs defaultActiveKey="1" tabBarExtraContent={tabResp}>
               <TabPane tab="Request Header" key="1">
+                <Form.Item>
                 <Card title="" className={styles.card} bordered={false}>
                   {getFieldDecorator('requestHeaderSample', {
                     initialValue: requestHeaderSample,
-                  })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='value' />)}
+                  })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='value' disableEdit='1' />)}
                 </Card>
+                </Form.Item>
               </TabPane>
               <TabPane tab="Request Body" key="2">
                 <Form.Item>
@@ -706,7 +731,7 @@ class ApiDebug extends PureComponent {
                 {getFieldDecorator(`${responseHeaderFlag}Sample`, {
                   initialValue: responseHeaderSample,
                   rules: [{required: false, message: '不能超过5000字符！', max: 5000}],
-                })(<TextArea placeholder={sampleText} autosize={{minRows: 4, maxRows: 15}} />)}
+                })(<TextArea placeholder="" autosize={{minRows: 4, maxRows: 15}} />)}
               </TabPane>
               <TabPane tab="Response Body" key="4">
                 <Form.Item>
@@ -716,11 +741,19 @@ class ApiDebug extends PureComponent {
                   })(
                     <TextArea
                       rows={4}
-                      placeholder={sampleText}
+                      placeholder=""
                       autosize={{minRows: 4, maxRows: 15}}
+                      hidden
                     />
                   )}
                 </Form.Item>
+                <ReactJson
+                  src={responseBodySampleJson}
+                  name="response body sample"
+                  // style={{backgroundColor: '#444'}}
+                  collapsed={false}
+                  iconStyle='circle'
+                />
               </TabPane>
             </Tabs>
           </Row>

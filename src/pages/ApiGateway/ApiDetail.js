@@ -66,11 +66,21 @@ const fieldLabels = {
   },
 };
 const expandedRowRender = (record) => {
-  const {backendType,apiServiceBackendAttrs} = record;
+  const {backendType,adapterAttrs} = record;
 
   const columns = [
-    { title: 'Attr Spec Code', dataIndex: 'attrSpecCode' },
-    { title: 'Attr Value', dataIndex: 'attrValue' },
+    {
+      title: 'Attr Spec Code',
+      dataIndex: 'attrSpecCode',
+      width:'20%',
+      render:(text)=>{
+        return (<div style={{textAlign:'left',fontWeight: 'bold'}}>{text}:</div>);
+      }
+    },
+    {
+      title: 'Attr Value',
+      dataIndex: 'attrValue',
+    },
   ];
   if(backendType !== 'endpoint'){
     return (
@@ -78,7 +88,7 @@ const expandedRowRender = (record) => {
         showHeader={false}
         columns={columns}
         size="small"
-        dataSource={apiServiceBackendAttrs}
+        dataSource={adapterAttrs}
         pagination={false}
       />
     );
@@ -96,6 +106,8 @@ const columns = [
   {
     title: '执行顺序',
     dataIndex: 'serviceSeq',
+    defaultSortOrder: 'ascend',
+    sorter: (a, b) => a.serviceSeq - b.serviceSeq,
   },
   {
     title: 'url',
