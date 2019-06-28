@@ -174,14 +174,14 @@ class ApiDebug extends PureComponent {
             newRequestHeaderSample.push(item);
           }
         });
-        // const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
-        // if (!appKeyAttr || appKeyAttr.length === 0) {
-        //   newRequestHeaderSample.push({
-        //     key:'appkey',
-        //     name: 'appkey',
-        //     remark: appKey
-        //   });
-        // }
+        const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
+        if (!appKeyAttr || appKeyAttr.length === 0) {
+          newRequestHeaderSample.push({
+            key:'appkey',
+            name: 'appkey',
+            remark: appKey
+          });
+        }
         form.setFieldsValue({
           requestHeaderSample: newRequestHeaderSample
         });
