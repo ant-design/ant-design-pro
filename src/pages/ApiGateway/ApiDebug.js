@@ -166,7 +166,7 @@ class ApiDebug extends PureComponent {
         // console.log("requestHeaderSample",requestHeaderSample);
         requestHeaderSample.forEach((item) => {
 
-          if (item.name !== 'appkey') {
+          if (item.name !== 'AppKey') {
             newRequestHeaderSample.push(item);
           } else {
             // eslint-disable-next-line no-param-reassign
@@ -174,11 +174,11 @@ class ApiDebug extends PureComponent {
             newRequestHeaderSample.push(item);
           }
         });
-        const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
+        const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'AppKey');
         if (!appKeyAttr || appKeyAttr.length === 0) {
           newRequestHeaderSample.push({
-            key:'appkey',
-            name: 'appkey',
+            key:'AppKey',
+            name: 'AppKey',
             remark: appKey
           });
         }
@@ -208,7 +208,7 @@ class ApiDebug extends PureComponent {
               const newRequestHeaderSample = [];
               requestHeaderSample.forEach((item) => {
 
-                if (item.name !== 'appkey') {
+                if (item.name !== 'AppKey') {
                   if (item.name === tokenKey) {
                     // eslint-disable-next-line no-param-reassign
                     item.remark = token;
@@ -222,12 +222,12 @@ class ApiDebug extends PureComponent {
                   newRequestHeaderSample.push(item);
                 }
               });
-              const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
+              const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'AppKey');
               const tokenAttr = newRequestHeaderSample.filter(item => item.name === tokenKey);
               if (!appKeyAttr || appKeyAttr.length === 0) {
                 newRequestHeaderSample.push({
-                  key:'appkey',
-                  name: 'appkey',
+                  key:'AppKey',
+                  name: 'AppKey',
                   remark: appKey
                 });
               }
