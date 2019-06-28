@@ -114,14 +114,16 @@ const apiInfoDetail={
             "backendId": 1,
             "attrSpecId": "1",
             "attrValue": "1234",
-            "attrSpecCode": "busi_code"
+            "attrSpecCode": "busi_code",
+            "attrSpecName": "busi Code",
           },
           {
             "attrId": 118,
             "backendId": 1,
             "attrSpecId": "2",
             "attrValue": "queryUser",
-            "attrSpecCode": "operationCode"
+            "attrSpecCode": "operationCode",
+            "attrSpecName": "operation Code",
           },
         ]
       },
@@ -139,6 +141,7 @@ const apiInfoDetail={
             "attrSpecId": "3",
             "attrValue": "Beria 123234324324324324",
             "attrSpecCode": "token",
+            "attrSpecName": "token",
           },
         ]
       },
