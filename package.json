@@ -114,6 +114,7 @@
     "netlify-lambda": "^1.4.13",
     "node-fetch": "^2.6.0",
     "prettier": "^1.17.1",
+    "pro-download": "1.0.1",
     "serverless-http": "^2.0.2",
     "slash2": "^2.0.0",
     "stylelint": "^10.1.0",
