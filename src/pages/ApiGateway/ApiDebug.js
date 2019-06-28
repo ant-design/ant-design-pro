@@ -238,7 +238,6 @@ class ApiDebug extends PureComponent {
                   remark: token
                 });
               }
-
               form.setFieldsValue({
                 requestHeaderSample: newRequestHeaderSample
               });
