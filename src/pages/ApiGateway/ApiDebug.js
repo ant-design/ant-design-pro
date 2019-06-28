@@ -69,7 +69,7 @@ class ApiDebug extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
 
-    const {selectedRow, form, apiService} = this.props;
+    const {selectedRow, form} = this.props;
     console.log("componentWillReceiveProps", nextProps.selectedRow);
     if (nextProps.selectedRow && selectedRow !== nextProps.selectedRow) {
 
@@ -91,7 +91,7 @@ class ApiDebug extends PureComponent {
         responseHeaderSample,
         responseBodySample,
       });
-      const newResponseBodySample = responseBodySample == "" ?{}:responseBodySample;
+      const newResponseBodySample = responseBodySample === "" ?{}:responseBodySample;
       this.setState({
         responseBodySampleJson:newResponseBodySample
       });
@@ -707,11 +707,11 @@ class ApiDebug extends PureComponent {
             <Tabs defaultActiveKey="1" tabBarExtraContent={tabResp}>
               <TabPane tab="Request Header" key="1">
                 <Form.Item>
-                <Card title="" className={styles.card} bordered={false}>
-                  {getFieldDecorator('requestHeaderSample', {
-                    initialValue: requestHeaderSample,
-                  })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='value' disableEdit='1' />)}
-                </Card>
+                  <Card title="" className={styles.card} bordered={false}>
+                    {getFieldDecorator('requestHeaderSample', {
+                      initialValue: requestHeaderSample,
+                    })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='value' disableEdit='1' />)}
+                  </Card>
                 </Form.Item>
               </TabPane>
               <TabPane tab="Request Body" key="2">
