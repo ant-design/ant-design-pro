@@ -1,12 +1,12 @@
-import { ConnectProps, ConnectState } from '@/models/connect';
 import { Icon, Tooltip } from 'antd';
+import React from 'react';
+import { connect } from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
+import { ConnectProps, ConnectState } from '@/models/connect';
 
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
-import React from 'react';
 import SelectLang from '../SelectLang';
-import { connect } from 'dva';
-import { formatMessage } from 'umi-plugin-react/locale';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';

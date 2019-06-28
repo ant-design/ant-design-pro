@@ -1,10 +1,9 @@
-import { ConnectProps, ConnectState, Route, UserModelState } from '@/models/connect';
-
-import Authorized from '@/utils/Authorized';
 import React from 'react';
 import Redirect from 'umi/redirect';
 import { connect } from 'dva';
 import pathToRegexp from 'path-to-regexp';
+import Authorized from '@/utils/Authorized';
+import { ConnectProps, ConnectState, Route, UserModelState } from '@/models/connect';
 
 interface AuthComponentProps extends ConnectProps {
   user: UserModelState;
