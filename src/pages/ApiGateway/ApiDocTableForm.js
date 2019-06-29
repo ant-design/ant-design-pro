@@ -207,7 +207,7 @@ class ApiDocTableForm extends PureComponent {
 
   render() {
 
-    const {nameTitle, remarkTitle,disableEdit} = this.props;
+    const {nameTitle, remarkTitle} = this.props;
     const parentCol = {
       title: 'Parent Field',
         dataIndex: 'parent',
