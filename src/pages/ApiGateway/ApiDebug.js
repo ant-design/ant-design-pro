@@ -69,7 +69,7 @@ class ApiDebug extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
 
-    const {selectedRow, form, apiService} = this.props;
+    const {selectedRow, form} = this.props;
     console.log("componentWillReceiveProps", nextProps.selectedRow);
     if (nextProps.selectedRow && selectedRow !== nextProps.selectedRow) {
 
@@ -91,7 +91,7 @@ class ApiDebug extends PureComponent {
         responseHeaderSample,
         responseBodySample,
       });
-      const newResponseBodySample = responseBodySample == "" ?{}:responseBodySample;
+      const newResponseBodySample = responseBodySample === "" ?{}:responseBodySample;
       this.setState({
         responseBodySampleJson:newResponseBodySample
       });
@@ -166,7 +166,7 @@ class ApiDebug extends PureComponent {
         // console.log("requestHeaderSample",requestHeaderSample);
         requestHeaderSample.forEach((item) => {
 
-          if (item.name !== 'appkey') {
+          if (item.name !== 'AppKey') {
             newRequestHeaderSample.push(item);
           } else {
             // eslint-disable-next-line no-param-reassign
@@ -174,14 +174,14 @@ class ApiDebug extends PureComponent {
             newRequestHeaderSample.push(item);
           }
         });
-        // const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
-        // if (!appKeyAttr || appKeyAttr.length === 0) {
-        //   newRequestHeaderSample.push({
-        //     key:'appkey',
-        //     name: 'appkey',
-        //     remark: appKey
-        //   });
-        // }
+        const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'AppKey');
+        if (!appKeyAttr || appKeyAttr.length === 0) {
+          newRequestHeaderSample.push({
+            key:'AppKey',
+            name: 'AppKey',
+            remark: appKey
+          });
+        }
         form.setFieldsValue({
           requestHeaderSample: newRequestHeaderSample
         });
@@ -208,7 +208,7 @@ class ApiDebug extends PureComponent {
               const newRequestHeaderSample = [];
               requestHeaderSample.forEach((item) => {
 
-                if (item.name !== 'appkey') {
+                if (item.name !== 'AppKey') {
                   if (item.name === tokenKey) {
                     // eslint-disable-next-line no-param-reassign
                     item.remark = token;
@@ -222,12 +222,12 @@ class ApiDebug extends PureComponent {
                   newRequestHeaderSample.push(item);
                 }
               });
-              const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'appkey');
+              const appKeyAttr = newRequestHeaderSample.filter(item => item.name === 'AppKey');
               const tokenAttr = newRequestHeaderSample.filter(item => item.name === tokenKey);
               if (!appKeyAttr || appKeyAttr.length === 0) {
                 newRequestHeaderSample.push({
-                  key:'appkey',
-                  name: 'appkey',
+                  key:'AppKey',
+                  name: 'AppKey',
                   remark: appKey
                 });
               }
@@ -238,7 +238,6 @@ class ApiDebug extends PureComponent {
                   remark: token
                 });
               }
-
               form.setFieldsValue({
                 requestHeaderSample: newRequestHeaderSample
               });
@@ -708,11 +707,11 @@ class ApiDebug extends PureComponent {
             <Tabs defaultActiveKey="1" tabBarExtraContent={tabResp}>
               <TabPane tab="Request Header" key="1">
                 <Form.Item>
-                <Card title="" className={styles.card} bordered={false}>
-                  {getFieldDecorator('requestHeaderSample', {
-                    initialValue: requestHeaderSample,
-                  })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='value' disableEdit='1' />)}
-                </Card>
+                  <Card title="" className={styles.card} bordered={false}>
+                    {getFieldDecorator('requestHeaderSample', {
+                      initialValue: requestHeaderSample,
+                    })(<ApiDocTableForm hideParent hideType nameTitle='Key' remarkTitle='value' disableEdit='1' />)}
+                  </Card>
                 </Form.Item>
               </TabPane>
               <TabPane tab="Request Body" key="2">
