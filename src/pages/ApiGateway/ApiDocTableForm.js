@@ -19,14 +19,6 @@ class ApiDocTableForm extends PureComponent {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { data } = this.state;
-    console.log("componentWillReceiveProps1111", data,nextProps.data);
-    if (data !== nextProps.data) {
-      console.log("xxxxxxx",data)
-    }
-  }
-
 
   static getDerivedStateFromProps(nextProps, preState) {
     if (isEqual(nextProps.value, preState.value)) {
@@ -102,6 +94,30 @@ class ApiDocTableForm extends PureComponent {
     }
   }
 
+  handleFieldBlur(e, key, fieldName) {
+    e.persist();
+    const target = this.getRowByKey(key) || {};
+    if(target.editable){
+      return;
+    }
+    console.log("in handleFieldBlur",fieldName);
+    const { data } = this.state;
+    this.setState({
+      loading: true,
+    });
+    if(fieldName==="remark"){
+      setTimeout(() => {
+        const {onChange} = this.props;
+        if (onChange) {
+          onChange(data);
+        }
+        this.setState({
+          loading: false,
+        });
+      },0);
+    }
+  }
+
   // handleSelectFieldChange(e, fieldName, record) {
   //   const {key}=record;
   //   const { data } = this.state;
@@ -162,7 +178,9 @@ class ApiDocTableForm extends PureComponent {
       //   return;
       // }
       delete target.isNew;
-      this.toggleEditable(e, key);
+      if(target.editable){
+        this.toggleEditable(e, key);
+      }
       const { data } = this.state;
       const { onChange } = this.props;
       onChange(data);
@@ -269,32 +287,15 @@ class ApiDocTableForm extends PureComponent {
         key: 'remark',
         width: '40%',
         render: (text, record) => {
-
-          if(disableEdit){
-
-            if (record.editable) {
-              return (
-                <Input
-                  value={text}
-                  onChange={e => this.handleFieldChange(e, 'remark', record)}
-                  onKeyPress={e => this.handleKeyPress(e, record.key)}
-                  placeholder="remark"
-                />
-              );
-            }
-            return text;
-
-          }else{
-            
             return (
               <Input
                 value={text}
                 onChange={e => this.handleFieldChange(e, 'remark', record)}
                 onKeyPress={e => this.handleKeyPress(e, record.key)}
+                onBlur={e=>this.handleFieldBlur(e,record.key,'remark')}
                 placeholder="remark"
               />
             );
-          }
 
         },
       };
@@ -362,8 +363,8 @@ class ApiDocTableForm extends PureComponent {
     columns.push(remarkCol);
     columns.push(actionCol);
 
-    console.log("--------data in TableForm:",data);
-    console.log("this.props",this.props.value);
+    // console.log("--------data in TableForm:",data);
+    // console.log("this.props",this.props.value);
     return (
       <Fragment>
         <Table
