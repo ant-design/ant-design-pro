@@ -1,5 +1,3 @@
 const fabric = require('@umijs/fabric');
 
-module.exports = {
-  ...fabric.stylelint,
-};
+module.exports = Object.assign({}, fabric.stylelint);

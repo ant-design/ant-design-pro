@@ -1,5 +1,3 @@
 const fabric = require('@umijs/fabric');
 
-module.exports = {
-  ...fabric.prettier,
-};
+module.exports = Object.assign({}, fabric.prettier);
