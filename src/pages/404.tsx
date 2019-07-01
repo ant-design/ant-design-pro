@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Result } from 'antd';
 import React from 'react';
 import router from 'umi/router';
 
@@ -6,22 +6,16 @@ import router from 'umi/router';
 // 但是还没发布，先来个简单的。
 
 const NoFoundPage: React.FC<{}> = () => (
-  <div
-    style={{
-      height: '100vh',
-      padding: 80,
-      textAlign: 'center',
-    }}
-  >
-    <img src="https://gw.alipayobjects.com/zos/antfincdn/wsE2Pw%243%26L/noFound.svg" alt="404" />
-    <br />
-    <br />
-    <h1>404</h1>
-    <p>Sorry, the page you visited does not exist.</p>
-    <Button type="primary" onClick={() => router.push('/')}>
-      Back Home
-    </Button>
-  </div>
+  <Result
+    status="404"
+    title="404"
+    subTitle="Sorry, the page you visited does not exist."
+    extra={
+      <Button type="primary" onClick={() => router.push('/')}>
+        Back Home
+      </Button>
+    }
+  ></Result>
 );
 
 export default NoFoundPage;
