@@ -70,7 +70,7 @@ class Adapter extends PureComponent {
         },
         { name: 'url', title: 'Adapter URL', showLen:15,query: false, add: true ,rules:[]},
         { name: 'reqPath', title: 'Adapter Path', showLen:15,query: false, add: true ,rules:[]},
-        { name: 'code', title: 'Adapter Java Code', showLen:15, query: false, add: true ,rules:[]},
+        { name: 'code', title: 'Adapter Java Code', showLen:15, tag:'textArea',rows:5,query: false, add: true ,rules:[]},
         {
           name: 'status',
           title: 'Status',
