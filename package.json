@@ -56,7 +56,7 @@
   "dependencies": {
     "@ant-design/pro-layout": "^4.5.7",
     "@antv/data-set": "^0.10.2",
-    "antd": "^3.19.1",
+    "antd": "^3.20.0",
     "classnames": "^2.2.6",
     "dva": "^2.4.1",
     "lodash": "^4.17.11",
