@@ -20,7 +20,7 @@ const onBlockCopy = (label: string) => {
     return;
   }
 
-  const ga = window && (window as any).ga;
+  const ga = window && window.ga;
   if (ga) {
     ga('send', 'event', {
       eventCategory: 'block',

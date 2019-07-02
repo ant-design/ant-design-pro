@@ -20,6 +20,22 @@ declare module 'nzh/cn';
 declare module 'webpack-theme-color-replacer';
 declare module 'webpack-theme-color-replacer/client';
 
+// google analytics interface
+interface GAFieldsObject {
+  eventCategory: string;
+  eventAction: string;
+  eventLabel?: string;
+  eventValue?: number;
+  nonInteraction?: boolean;
+}
+interface Window {
+  ga: (
+    command: 'send',
+    hitType: 'event' | 'pageview',
+    fieldsObject: GAFieldsObject | string,
+  ) => void;
+}
+
 declare let ga: Function;
 
 // preview.pro.ant.design only do not use in your production ;
