@@ -562,7 +562,7 @@ class ApiDetail extends PureComponent {
                 <Description term={fieldLabels.backAttr.tokenUrl}>{back.tokenUrl}</Description>
               </DescriptionList>
             </Card>
-            <Tabs defaultActiveKey="org" onChange={this.changeTab}>
+            <Tabs defaultActiveKey="table" onChange={this.changeTab}>
               <TabPane tab="Access Org" key="org">
                 <Card title="" bordered={false}>
                   <Table columns={columnsOrg} dataSource={data.apiServiceOrgs} pagination={false} />
