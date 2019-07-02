@@ -70,11 +70,11 @@ class ApiUpdate extends PureComponent {
 
   componentDidMount() {
     window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
-    message.config({
-      top: 400,
-      duration: 10,
-      maxCount: 2,
-    });
+    // message.config({
+    //   top: 400,
+    //   duration: 6,
+    //   maxCount: 2,
+    // });
     const { location } = this.props;
     const { state } = location;
     // console.log("location state:",state);
@@ -84,6 +84,7 @@ class ApiUpdate extends PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeFooterToolbar);
+    // message.destroy();
   }
 
   getApi = apiId => {
@@ -255,7 +256,7 @@ class ApiUpdate extends PureComponent {
           }
         });
         if(editArray.length>0){
-          message.warn("Before submitting, please hold or cancel the data in the table that is being modified!",10);
+          message.warn("Before submitting, please hold or cancel the data in the table that is being modified!",6);
         }
         const apiInfo = getPayloadForUpdate(apiService, values);
         // console.log("api update submit apiInfo:",apiInfo);
@@ -265,7 +266,7 @@ class ApiUpdate extends PureComponent {
           payload: apiInfo,
           callback: resp => {
             // this.getApi(resp.data.apiId);
-            message.success("Submit finished!",10,)
+            message.success("Submit finished!",6,)
             this.setBaseInfo(resp, dispatch);
             this.isBlock=false;
           },
