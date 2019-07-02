@@ -16,15 +16,16 @@ import { formatMessage } from 'umi-plugin-react/locale';
 
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import { ConnectProps, ConnectState } from '@/models/connect';
+import { ConnectState, Dispatch } from '@/models/connect';
 import { isAntDesignPro } from '@/utils/utils';
 import logo from '../assets/logo.svg';
 
-export interface BasicLayoutProps extends ProLayoutProps, Omit<ConnectProps, 'location'> {
+export interface BasicLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: {
     [path: string]: MenuDataItem;
   };
   settings: Settings;
+  dispatch: Dispatch;
 }
 export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
   breadcrumbNameMap: {
@@ -100,9 +101,12 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     <ProLayout
       logo={logo}
       onCollapse={handleMenuCollapse}
-      menuItemRender={(menuItemProps, defaultDom) => (
-        <Link to={menuItemProps.path}>{defaultDom}</Link>
-      )}
+      menuItemRender={(menuItemProps, defaultDom) => {
+        if (menuItemProps.isUrl) {
+          return defaultDom;
+        }
+        return <Link to={menuItemProps.path}>{defaultDom}</Link>;
+      }}
       breadcrumbRender={(routers = []) => [
         {
           path: '/',
