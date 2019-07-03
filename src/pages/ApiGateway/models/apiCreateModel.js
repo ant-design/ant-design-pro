@@ -2,6 +2,9 @@ import { routerRedux } from 'dva/router';
 import { saveApi,apiInfo } from '@/services/apiGatewayService';
 
 import { message } from 'antd';
+import constants from '@/utils/constUtil';
+
+const {CALL_POINT} = constants;
 
 export default {
   namespace: 'apiCreateModel',
@@ -128,7 +131,7 @@ export default {
           socketTimeout: 20000,
           connectTimeout: 30000,
           serviceSeq:1,
-          backendType:'endpoint',
+          backendType:CALL_POINT,
         },],
       };
       return {

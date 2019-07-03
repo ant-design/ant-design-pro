@@ -7,6 +7,7 @@ const constants = {
   TOKEN_KEY: 'Accept-token',
   PROXY_URL: 'http://10.1.241.42:8090/conf-service/',
   MANAGER_ROLE: ['admin', 'manager'],
+  CALL_POINT:'call',
   ADMIN_ROLE: 'admin',
   ROLE_TYPE_KEY: 'roleType',
   API_STATE_KEY: 'apiState',

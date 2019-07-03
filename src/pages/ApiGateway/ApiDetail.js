@@ -11,6 +11,9 @@ import { getUserId } from '@/utils/authority';
 
 import DescriptionList from '@/components/DescriptionList';
 import { getGroupName, getItemValue, getName } from '@/utils/masterData';
+import constants from '@/utils/constUtil';
+
+const {CALL_POINT} = constants;
 
 const { TabPane } = Tabs;
 const { Description } = DescriptionList;
@@ -24,25 +27,25 @@ const busiCodeFlag = 'busiCode';
 
 const fieldLabels = {
   front: {
-    groupId: '分组',
-    name: '名称',
-    serviceType: '服务类型',
-    requestUrl: '请求地址',
-    protocol: '协议',
-    reqMethod: '请求Method',
-    apiType: 'Api范围',
-    status: '状态',
+    groupId: 'Group',
+    name: 'Name',
+    serviceType: 'Service Type',
+    requestUrl: 'url',
+    protocol: 'protocol',
+    reqMethod: 'Request Method',
+    apiType: 'Api Range',
+    status: 'status',
   },
   back: {
-    serviceType: '服务类型',
-    url: '落地方地址',
-    reqPath: '落地方路径',
-    protocol: '协议',
-    reqMethod: '请求Method',
-    connectTimeout: '连接超时时间（秒）',
-    socketTimeout: '处理超时时间（秒）',
-    orgId: '服务提供者',
-    authType: '安全认证',
+    serviceType: 'Service Type',
+    url: 'url',
+    reqPath: 'Request Path',
+    protocol: 'protocol',
+    reqMethod: 'Request Method',
+    connectTimeout: 'Connect Timeout（s）',
+    socketTimeout: 'Socket Timeout（s）',
+    orgId: 'Org',
+    authType: 'Auth type',
   },
   backAttr: {
     userName: 'user Name',
@@ -59,8 +62,8 @@ const fieldLabels = {
     ssl: 'SSL证书校验',
   },
   doc: {
-    protocol: '协议',
-    encodeFormat: '编码格式',
+    protocol: 'protocol',
+    encodeFormat: 'Encode Format',
     contentType: 'Content-Type',
     url: 'URL',
   },
@@ -82,7 +85,7 @@ const expandedRowRender = (record) => {
       dataIndex: 'attrValue',
     },
   ];
-  if(backendType !== 'endpoint'){
+  if(backendType !== CALL_POINT){
     return (
       <Table
         showHeader={false}
@@ -100,11 +103,11 @@ const expandedRowRender = (record) => {
 
 const columns = [
   {
-    title: '出／入参',
+    title: 'Backend Type',
     dataIndex: 'backendType',
   },
   {
-    title: '执行顺序',
+    title: 'Seq',
     dataIndex: 'serviceSeq',
     defaultSortOrder: 'ascend',
     sorter: (a, b) => a.serviceSeq - b.serviceSeq,
@@ -117,7 +120,7 @@ const columns = [
 
 const columnsOrg = [
   {
-    title: '编号',
+    title: 'Api Id',
     dataIndex: 'apiId',
   },
   {
@@ -125,7 +128,7 @@ const columnsOrg = [
     dataIndex: 'appkey',
   },
   {
-    title: '名称',
+    title: 'Org Name',
     dataIndex: 'orgName',
   },
 ];
@@ -170,22 +173,22 @@ const columnsApi = [
 
 const columnsBase = [
   {
-    title: '名称',
+    title: 'Name',
     dataIndex: 'name',
   },
   {
-    title: '说明',
+    title: 'Remark',
     dataIndex: 'remark',
   },
 ];
 
 const columnsCode = [
   {
-    title: '状态码',
+    title: 'Status Code',
     dataIndex: 'name',
   },
   {
-    title: '描述',
+    title: 'remark',
     dataIndex: 'remark',
   },
 ];
@@ -326,11 +329,11 @@ class ApiDetail extends PureComponent {
     data.statusTitle = data.status ? getItemValue('apiService', 'status', data.status) : null;
 
     // 落地方服务信息数组转为对象
-    const apiServiceBackend = data.apiServiceBackends.find(obj => obj.backendType === 'endpoint');
+    const apiServiceBackend = data.apiServiceBackends.find(obj => obj.backendType === CALL_POINT);
     const { apiServiceBackendAttrs } = apiServiceBackend;
     const conversionAttrObj = conversionAttr(apiServiceBackendAttrs);
     // const apiServiceBackendMembers = data.apiServiceBackends.filter(
-    //   obj => obj.backendType !== 'endpoint'
+    //   obj => obj.backendType !== CALL_POINT
     // );
     // 落地方服务信息转化
     const apiServiceBackendFormat = { ...apiServiceBackend, ...conversionAttrObj };
@@ -471,13 +474,13 @@ class ApiDetail extends PureComponent {
     } = this.state;
     const { back } = data;
 
-    // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
+    // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!==CALL_POINT);
     const apiServiceBackendMembers =
       apiService && apiService.apiServiceBackends
         ? apiService.apiServiceBackends.map(item => ({ ...item, key: item.serviceSeq }))
         : [];
     // const apiServiceEndPoint = apiServiceBackendMembers.filter(
-    //   obj => obj.backendType === 'endpoint'
+    //   obj => obj.backendType === CALL_POINT
     // );
     // console.log(
     //   'apiServiceBackendMembers:',

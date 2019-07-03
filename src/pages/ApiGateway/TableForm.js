@@ -5,6 +5,9 @@ import isEqual from 'lodash/isEqual';
 import styles from './style.less';
 import AdapterSelectView from './AdapterSelectView';
 import AdapterAttrTableForm from './AdapterAttrTableForm';
+import constants from '@/utils/constUtil';
+
+const {CALL_POINT} = constants;
 
 const {Option} = Select;
 
@@ -94,7 +97,7 @@ class TableForm extends PureComponent {
     const keyData= data?data.map((item,index)=>({...item,key:index})):[];
     const keyRecord={...record,adapterAttrs:keyData};
 
-    return record.backendType&&record.backendType.toLowerCase()!=='endpoint'?(
+    return record.backendType&&record.backendType.toLowerCase()!==CALL_POINT?(
       <AdapterAttrTableForm
         record={keyRecord}
         onMyChange={(adapterAttrs)=>this.adapterAttrChange(record,adapterAttrs)}
@@ -218,7 +221,7 @@ class TableForm extends PureComponent {
       message.error(`service seq跟${foundItem.url}的service seq冲突，请重新更改。`);
       return errorResult;
     }
-    const endpointItem=data.find((item)=>(item.backendType.toLowerCase()==='endpoint'&&item.key!==target.key));
+    const endpointItem=data.find((item)=>(item.backendType.toLowerCase()===CALL_POINT&&item.key!==target.key));
     if(!endpointItem){
       return errorResult;
     }
@@ -248,7 +251,7 @@ class TableForm extends PureComponent {
         return;
       }
       const target = this.getRowByKey(key) || {};
-      if (!target.serviceSeq || (target.backendType !=='endpoint'&&!target.adapterSpecId)) {
+      if (!target.serviceSeq || (target.backendType !==CALL_POINT&&!target.adapterSpecId)) {
         message.error('请填写完整信息。');
         e.target.focus();
         this.setState({
@@ -257,7 +260,7 @@ class TableForm extends PureComponent {
         return;
       }
 
-      if(target.backendType !=='in' && target.backendType !=='out' && target.backendType !=='endpoint'){
+      if(target.backendType !=='in' && target.backendType !=='out' && target.backendType !==CALL_POINT){
         message.error(`不能输入${target.backendType}只能输入in 或者 out。`);
         e.target.focus();
         this.setState({
@@ -322,7 +325,7 @@ class TableForm extends PureComponent {
         // width: '10%',
         render: (text, record) => {
           // console.log("----------",text);
-          if (record.editable&&(text===null||text.toLowerCase()!=='endpoint')) {
+          if (record.editable&&(text===null||text.toLowerCase()!==CALL_POINT)) {
             return (
               <Select
                 value={text}
@@ -331,7 +334,7 @@ class TableForm extends PureComponent {
               >
                 <Option key='in' value='in'>in</Option>
                 <Option key='out' value='out'>out</Option>
-                <Option key='endpoint' value='endpoint' disabled>endpoint</Option>
+                <Option key={CALL_POINT} value={CALL_POINT} disabled>{CALL_POINT}</Option>
               </Select>
             );
           }
@@ -371,7 +374,7 @@ class TableForm extends PureComponent {
         // width: '50%',
         render: (text, record) => {
           // console.log("----------",text);
-          if (record.editable&&(text===null||record.backendType.toLowerCase()!=='endpoint')) {
+          if (record.editable&&(text===null||record.backendType.toLowerCase()!==CALL_POINT)) {
             return (
               <AdapterSelectView
                 value={text}
@@ -397,7 +400,7 @@ class TableForm extends PureComponent {
       //   width: '30%',
       //   render: (text, record) => {
       //     const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
-      //     if (record.editable&&lowerCaseBackendType!=='endpoint') {
+      //     if (record.editable&&lowerCaseBackendType!==CALL_POINT) {
       //       return (
       //         <Input
       //           value={text}
@@ -417,7 +420,7 @@ class TableForm extends PureComponent {
       //   width: '30%',
       //   render: (text, record) => {
       //     const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
-      //     if (record.editable&&lowerCaseBackendType!=='endpoint') {
+      //     if (record.editable&&lowerCaseBackendType!==CALL_POINT) {
       //       return (
       //         <Input
       //           value={text}
@@ -461,7 +464,7 @@ class TableForm extends PureComponent {
           }
 
           const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
-          if (lowerCaseBackendType==='endpoint') {
+          if (lowerCaseBackendType===CALL_POINT) {
             return (
               <span>
                 <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>

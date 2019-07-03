@@ -245,7 +245,7 @@ const allResult = {
       "id": 45,
       "javaCode": "apiServiceBackend",
       "javaKey": "backend_type",
-      "itemCode": "endpoint",
+      "itemCode": "call",
       "itemValue": "落地方的backend"
     },
     {
