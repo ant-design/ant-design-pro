@@ -117,11 +117,13 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
       },
     );
     return (
-      <Spin spinning={loading} delay={300}>
-        <Tabs className={styles.tabs} onChange={this.onTabChange}>
-          {panes}
-        </Tabs>
-      </Spin>
+      <>
+        <Spin spinning={loading} delay={300}>
+          <Tabs className={styles.tabs} onChange={this.onTabChange}>
+            {panes}
+          </Tabs>
+        </Spin>
+      </>
     );
   }
 
@@ -155,6 +157,7 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
     if ('popupVisible' in this.props) {
       popoverProps.visible = popupVisible;
     }
+
     return (
       <HeaderDropdown
         placement="bottomRight"
