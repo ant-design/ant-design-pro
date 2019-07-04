@@ -5,15 +5,16 @@ import router from 'umi/router';
 import BindDataQueryTable from '../BindDataQueryTable';
 import QueryCommand from '@/components/QueryTable/QueryCommand';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import { getItems } from '@/utils/masterData';
+import { getItems, getName } from '@/utils/masterData';
 
 import Authorized from '@/utils/Authorized';
-import { getAuth } from '@/utils/authority';
+import { getAuth, getUserId } from '@/utils/authority';
 
 const { check } = Authorized;
 
 @connect(({ uniComp, loading }) => ({
   uniComp,
+  orgList: uniComp.orgList,
   loading: loading.models.uniComp,
 }))
 class Adapter extends PureComponent {
@@ -30,6 +31,11 @@ class Adapter extends PureComponent {
     const techTypeList = getItems('adapterSpec', 'tech_type');
     const auth=getAuth("adapter_spec_save"); // 获取某个功能权的角色
     const saveAct = check(auth,'Modify'); // 检查某个功能权的权限，如果有权限，返回第二个参数的值作为展现内容
+    // 获取userId
+    const userId = getUserId();
+    const orgType = "0,1";
+    const tagAttr ={ userId,orgType };
+
     const commandAct = check(auth,'Properties');
 // 动作对象
     const actions=saveAct||commandAct?{
@@ -67,6 +73,22 @@ class Adapter extends PureComponent {
           add: true,
           tag: 'commonSelect',
           enumData: techTypeList,
+        },
+        {
+          name: 'rang',
+          title: 'Org Name',
+          columnHidden: true,
+          query: false,
+          add: true,
+          tag: 'OrgSelectView',
+          tagAttr
+        },
+        {
+          name: 'orgName',
+          title: 'Org Name',
+          columnHidden: false,
+          query: false,
+          add: false
         },
         { name: 'url', title: 'Adapter URL', showLen:15,query: false, add: true ,rules:[]},
         { name: 'reqPath', title: 'Adapter Path', showLen:15,query: false, add: true ,rules:[]},
