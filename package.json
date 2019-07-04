@@ -107,7 +107,7 @@
     "import-sort-style-module": "^6.0.0",
     "jest-puppeteer": "^4.2.0",
     "jsdom-global": "^3.0.2",
-    "lint-staged": "^8.1.7",
+    "lint-staged": "^9.0.0",
     "mockjs": "^1.0.1-beta3",
     "netlify-lambda": "^1.4.13",
     "node-fetch": "^2.6.0",
