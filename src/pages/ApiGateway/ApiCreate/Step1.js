@@ -24,7 +24,9 @@ class Step1 extends React.PureComponent {
 
   componentDidMount() {
     const { dispatch,apiService} = this.props;
-    if(!apiService||!apiService.serviceType){
+    console.log("step1 componentDidMount:",apiService,apiService.apiId);
+    if(apiService.apiId!==undefined||apiService.name===undefined){
+      console.log("step1 componentDidMount2:",apiService.apiId,apiService.apiId!==undefined);
       dispatch({
         type: 'apiCreateModel/initDataForAdd',
       });
@@ -47,7 +49,7 @@ class Step1 extends React.PureComponent {
         }
       });
     };
-    // console.log("step1 data:",apiService);
+    console.log("step1 data in render:",apiService);
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
