@@ -212,10 +212,15 @@ class TableForm extends PureComponent {
   validateSeq(target){
     const { data } = this.state;
     // console.log("target:",target,"data:",data);
+    let errorResult=false;
+    if(target.serviceSeq<=0){
+      errorResult=true;
+      message.error(`service seq必须大于0，请重新更改。`);
+      return errorResult;
+    }
     const foundItem=data.find((obj)=> {
       return obj.serviceSeq === target.serviceSeq && obj.key !== target.key;
     });
-    let errorResult=false;
     if (foundItem) {
       errorResult=true;
       message.error(`service seq跟${foundItem.url}的service seq冲突，请重新更改。`);
