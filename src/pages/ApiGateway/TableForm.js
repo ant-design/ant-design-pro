@@ -103,7 +103,7 @@ class TableForm extends PureComponent {
         onMyChange={(adapterAttrs)=>this.adapterAttrChange(record,adapterAttrs)}
         dataSource={keyData}
       />
-    ):(<span>Call endpoints do not need to configure properties</span>);
+    ):(<span>Call endpoint do not need to configure properties</span>);
   };
 
 
