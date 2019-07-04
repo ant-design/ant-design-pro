@@ -1,1 +1,0 @@
-import 'jsdom-global/register';
