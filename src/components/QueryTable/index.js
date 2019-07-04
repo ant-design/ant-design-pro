@@ -27,6 +27,7 @@ import styles from './index.less';
 
 import PrivilegeTreeSelectView from '@/pages/UserManager/PrivilegeTreeSelectView';
 import AdapterSelectView from '@/pages/ApiGateway/AdapterSelectView';
+import OrgSelectView from "../../pages/ApiGateway/OrgSelectView";
 
 const { Option } = Select;
 const { TextArea, Password } = Input;
@@ -103,6 +104,8 @@ const CreateForm = Form.create()(props => {
         return <PrivilegeTreeSelectView style={{ width: '100%' }} />;
       case 'AdapterSelectView':
         return <AdapterSelectView style={{ width: '100%' }} showSearch optionFilterProp="children" />;
+      case 'OrgSelectView':
+        return <OrgSelectView style={{ width: '100%' }} userId={item.tagAttr.userId} orgType={item.tagAttr.orgType} />;
       case 'textArea':
         return <TextArea rows={item.rows} />;
       case 'inputNumber':

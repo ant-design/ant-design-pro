@@ -113,8 +113,8 @@ const columns = [
     sorter: (a, b) => a.serviceSeq - b.serviceSeq,
   },
   {
-    title: 'url',
-    dataIndex: 'url',
+    title: 'Adapter',
+    dataIndex: 'adapterSpecName',
   }
 ];
 

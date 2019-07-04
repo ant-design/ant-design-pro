@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Select } from 'antd';
 import { connect } from 'dva';
+import { getUserId } from '@/utils/authority';
 
 const { Option } = Select;
 @connect(({ adapterModel, loading }) => ({
@@ -8,19 +9,58 @@ const { Option } = Select;
   loading: loading.models.adapterList,
 }))
 class AdapterSelectView extends PureComponent {
+
+  state = {
+    adapter: []
+  };
+
   componentDidMount = () => {
     const { dispatch,record } = this.props;
     const payload=record?{pointType:record.backendType}:{pointType:'in,out'};
-
+    const userId = getUserId();
+    payload.userId = userId;
+    console.log("AdapterSelectView",this.props);
     dispatch({
       type: 'adapterModel/getAdapterList',
       payload,
+      callback: resp => {
+        this.setState({ adapter:resp});
+      },
     });
   };
 
+  componentWillReceiveProps(nextProps) {
+
+    console.log("comsss",nextProps);
+    const { record,dispatch } = this.props;
+
+    if (record !== nextProps.record) {
+
+      const payload=nextProps.record?{pointType:nextProps.record.backendType}:{pointType:'in,out'};
+      const userId = getUserId();
+      payload.userId = userId;
+      dispatch({
+        type: 'adapterModel/getAdapterList',
+        payload,
+        callback: resp => {
+
+          this.setState({
+            adapter: resp
+          });
+
+          if(record.backendType !== nextProps.record.backendType){
+            this.selectChangeItem(resp[0].id);
+          }
+
+        }
+      });
+    }
+  }
+
   getOption() {
-    const { adapterList } = this.props;
-    return this.getOptionWhithList(adapterList);
+    // const { adapterList } = this.props;
+    const { adapter } = this.state;
+    return this.getOptionWhithList(adapter);
   }
 
   getOptionWhithList = list => {
@@ -39,13 +79,14 @@ class AdapterSelectView extends PureComponent {
   };
 
   selectChangeItem = item => {
-    const { onChange,adapterList } = this.props;
+    const { onChange } = this.props;
+    const { adapter } = this.state;
     if(onChange){
       onChange(item);
     }
     const { onMyChange } = this.props;
     if(onMyChange){
-      const cur=adapterList.find(obj=>obj.id===item);
+      const cur=adapter.find(obj=>obj.id===item);
       onMyChange(item,cur.name);
     }
   };
@@ -53,6 +94,7 @@ class AdapterSelectView extends PureComponent {
   render() {
     // const value = this.conversionObject();
     const { value,style, ...restProps} = this.props;
+    // const valueSel = valueState  !== null ?  valueState  : value;
     return (
       <Select value={value} onSelect={this.selectChangeItem} style={style} {...restProps}>
         {this.getOption()}

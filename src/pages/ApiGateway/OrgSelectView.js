@@ -46,7 +46,7 @@ class OrgSelectView extends PureComponent {
     // const value = this.conversionObject();
     const { value } = this.props;
     return (
-      <Select value={value} onSelect={this.selectChangeItem}>
+      <Select style={{ width: '100%' }} value={value} onSelect={this.selectChangeItem}>
         {this.getOption()}
       </Select>
     );
