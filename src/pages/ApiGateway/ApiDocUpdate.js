@@ -8,6 +8,9 @@ import ApiDocTableForm from './ApiDocTableForm';
 import styles from './style.less';
 import {getPayloadForApiDoc} from './ApiCreate/util';
 import {getPlaceHolder, getQueryArr, isJson, toApiSpecJson, toType} from '../util';
+import constants from '@/utils/constUtil';
+
+const {CALL_POINT} = constants;
 
 // import RoleTransfer from "../UserManager/Privilege";
 // import apiFlowData from '../Editor/GGEditor/mock/apiFlow.json';
@@ -322,7 +325,7 @@ class ApiUpdate extends PureComponent {
       stateCodeSpec,
       busiCodeSpec,
     } = this.state;
-    // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
+    // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!==CALL_POINT);
     const sampleText = 'sample for post:{"type":"xxx","name":"xxx"}';
     // console.log("--render----:",requestBodySpec);
     return (

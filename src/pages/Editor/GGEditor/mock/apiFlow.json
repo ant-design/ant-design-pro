@@ -24,7 +24,7 @@
     "size": "50*24",
     "shape": "flow-capsule",
     "color": "#722ED1",
-    "label": "endpoint",
+    "label": "call",
     "x": 350,
     "y": 150,
     "id": "3",

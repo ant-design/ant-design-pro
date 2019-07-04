@@ -14,6 +14,9 @@ import RadioView from './RadioView';
 import OrgSelectView from './OrgSelectView';
 import ApiFlow from '../Editor/GGEditor/ApiFlow';
 import { getUserId } from '@/utils/authority';
+import constants from '@/utils/constUtil';
+
+const {CALL_POINT} = constants;
 
 const { TabPane } = Tabs;
 const forms = ['front', 'back', 'backAttr'];
@@ -113,11 +116,11 @@ class ApiUpdate extends PureComponent {
   setBaseInfo = resp => {
     const { form } = this.props;
     const { data } = resp;
-    const apiServiceBackend = data.apiServiceBackends.find(obj => obj.backendType === 'endpoint');
+    const apiServiceBackend = data.apiServiceBackends.find(obj => obj.backendType === CALL_POINT);
     const { apiServiceBackendAttrs } = apiServiceBackend;
     const conversionAttrObj = conversionAttr(apiServiceBackendAttrs);
     const apiServiceBackendMembers = data.apiServiceBackends.filter(
-      obj => obj.backendType !== 'endpoint'
+      obj => obj.backendType !== CALL_POINT
     );
 
     // console.log("====:",conversionAttrObj);
@@ -244,7 +247,7 @@ class ApiUpdate extends PureComponent {
         console.log("==========api update submit values:",values.members);
         const editArray=[];
         values.members.forEach(item => {
-          if(item.type!=='endpoint'&&item.editable){
+          if(item.type!==CALL_POINT&&item.editable){
             if(item.adapterAttrs){
               item.adapterAttrs.forEach(attr=>{
                 if(attr.editable){
@@ -293,7 +296,7 @@ class ApiUpdate extends PureComponent {
     } = this.props;
     const { width, apiFlowData } = this.state;
     const userId = getUserId();
-    // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!=="endpoint");
+    // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!==CALL_POINT);
     const apiServiceBackendMembers =
       apiService && apiService.apiServiceBackends
         ? apiService.apiServiceBackends.map(item => ({ ...item, key: item.key||item.backendId }))

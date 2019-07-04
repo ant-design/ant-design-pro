@@ -3,6 +3,7 @@
 import constants from './constUtil';
 
 const { ACT, API_STATUS,STATUS } = constants;
+
 const reqMethodAtt=['get','post'];
 // mock tableListDataSource
 let tableListDataSource = [];
@@ -77,7 +78,7 @@ const apiInfoDetail={
         "createUser": null,
         "updateTime": "2019-03-19T06:44:55.000+0000",
         "updateUser": null,
-        "backendType": "endpoint",
+        "backendType": 'call',
         "codeMethod": null,
         "serviceSeq": 3,
         "orgId":2,

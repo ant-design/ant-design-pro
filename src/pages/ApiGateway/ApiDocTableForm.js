@@ -2,6 +2,9 @@ import React, {Fragment, PureComponent} from 'react';
 import {Button, Divider, Input, message, Popconfirm, Table, Tag} from 'antd';
 import isEqual from 'lodash/isEqual';
 import styles from './style.less';
+import constants from '@/utils/constUtil';
+
+const {CALL_POINT} = constants;
 
 class ApiDocTableForm extends PureComponent {
   index = 0;
@@ -330,7 +333,7 @@ class ApiDocTableForm extends PureComponent {
           }
 
           const lowerCaseBackendType=record.backendType?record.backendType.toLowerCase():"";
-          if (lowerCaseBackendType==='endpoint') {
+          if (lowerCaseBackendType===CALL_POINT) {
             return (
               <span>
                 <a onClick={e => this.toggleEditable(e, record.key)}>Edit</a>

@@ -1,3 +1,7 @@
+import constants from '@/utils/constUtil';
+
+const {CALL_POINT} = constants;
+
 export function getPayload(option,apiService) {
   return {
     option, // 1- 新增记录 2- 修改记录
@@ -49,7 +53,7 @@ export function getPayloadForUpdate(oldApiService,values) {
   // －－－－－do attr start－－－－－－－－－－－－
   const {backAttr}=values;
   const newApiServiceBackendAttrs=[];
-  const oldApiServiceBackend = oldApiService.apiServiceBackends.find((item)=>(item.backendType==='endpoint'));
+  const oldApiServiceBackend = oldApiService.apiServiceBackends.find((item)=>(item.backendType===CALL_POINT));
   const oldApiServiceBackendAttrs=oldApiServiceBackend.apiServiceBackendAttrs||[];
   newApiServiceBackendAttrs.push(doAttr(oldApiServiceBackendAttrs,backAttr,'authType'));
   newApiServiceBackendAttrs.push(doAttr(oldApiServiceBackendAttrs,backAttr,'ssl'));
@@ -86,7 +90,7 @@ export function getPayloadForUpdate(oldApiService,values) {
 
   const apiService={...oldApiService,...values.front};
   const newApiServiceBackends = values.members.map((item) => {
-    const {key, ...newItem} = item.backendType==='endpoint'?{...item,...values.back,apiServiceBackendAttrs:newApiServiceBackendAttrs}:item;
+    const {key, ...newItem} = item.backendType===CALL_POINT?{...item,...values.back,apiServiceBackendAttrs:newApiServiceBackendAttrs}:item;
     return newItem;
   });
   apiService.apiServiceBackends=newApiServiceBackends;
@@ -222,14 +226,14 @@ export function getApiFlowData(values) {
   console.log("==:",sortMembers)
   const width=120;
   sortMembers.forEach((item) => {
-    // if(item.backendType!=='endpoint'){
+    // if(item.backendType!==CALL_POINT){
     index+=1;
     const preNode=apiFlowData.nodes[apiFlowData.nodes.length-1];
     apiFlowData.nodes.push({
       "type": "node",
       "size": `${width}*40`,
-      "shape": item.backendType==='endpoint'?"flow-rect":"flow-rect",
-      "color": item.backendType==='endpoint'?'#722ED1':"#1890FF",
+      "shape": item.backendType===CALL_POINT?"flow-rect":"flow-rect",
+      "color": item.backendType===CALL_POINT?'#722ED1':"#1890FF",
       "label": item.adapterSpecName||item.backendType,
       "x": 100+80*index,
       "y": 150,
