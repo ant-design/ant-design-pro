@@ -14,7 +14,6 @@ const { check } = Authorized;
 
 @connect(({ uniComp, loading }) => ({
   uniComp,
-  orgList: uniComp.orgList,
   loading: loading.models.uniComp,
 }))
 class Adapter extends PureComponent {
@@ -76,7 +75,7 @@ class Adapter extends PureComponent {
         },
         {
           name: 'rang',
-          title: 'Org Name',
+          title: 'Rang',
           columnHidden: true,
           query: false,
           add: true,
@@ -85,7 +84,7 @@ class Adapter extends PureComponent {
         },
         {
           name: 'orgName',
-          title: 'Org Name',
+          title: 'Rang',
           columnHidden: false,
           query: false,
           add: false
@@ -117,6 +116,7 @@ class Adapter extends PureComponent {
       }],
       actions,
     };
+    columnSchemas.userId = userId;
     this.setState({columnSchemas});
   }
 

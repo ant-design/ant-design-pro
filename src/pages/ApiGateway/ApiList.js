@@ -92,15 +92,16 @@ class TableList extends PureComponent {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    const payload = {};
+
     const userId = getUserId();
     this.setState({ userId });
+
+    const { dispatch } = this.props;
+    const payload = {userId};
     payload.data = {};
     payload.data.info = {
       pageNo: 1,
-      pageSize: 10,
-      userId,
+      pageSize: 10
     };
     dispatch({
       type: 'apiGatewayModel/apiList',
@@ -297,13 +298,12 @@ class TableList extends PureComponent {
       params.sorter = `${sorter.field}_${sorter.order}`;
     }
 
-    const payload = {};
+    const payload = {userId};
     payload.data = {};
     payload.data.info = {
       pageNo: 1,
       pageSize: 10,
-      ...params,
-      userId,
+      ...params
     };
     payload.data.info.pageNo = payload.data.info.pageNo ? payload.data.info.pageNo : 1;
     dispatch({
@@ -320,12 +320,11 @@ class TableList extends PureComponent {
     });
 
     const { userId } = this.state;
-    const payload = {};
+    const payload = {userId};
     payload.data = {};
     payload.data.info = {
       pageNo: 1,
-      pageSize: 10,
-      userId,
+      pageSize: 10
     };
     dispatch({
       type: 'apiGatewayModel/apiList',
@@ -406,12 +405,11 @@ class TableList extends PureComponent {
 
       const { filtersArg, sorter, userId } = this.state;
       const filters = this.conversionFilter(filtersArg);
-      const payload = {};
+      const payload = {userId};
       payload.data = {};
       payload.data.info = {
         pageNo: 1,
         pageSize: 10,
-        userId,
         ...filters,
         ...values,
         ...sorter,
