@@ -105,7 +105,7 @@ const CreateForm = Form.create()(props => {
       case 'AdapterSelectView':
         return <AdapterSelectView style={{ width: '100%' }} showSearch optionFilterProp="children" />;
       case 'OrgSelectView':
-        return <OrgSelectView style={{ width: '100%' }} userId={item.tagAttr.userId} orgType={item.tagAttr.orgType} />;
+        return <OrgSelectView style={{ width: '100%' }} userId={item.tagAttr.userId} orgType={item.tagAttr.orgType} sign="1" />;
       case 'textArea':
         return <TextArea rows={item.rows} />;
       case 'inputNumber':

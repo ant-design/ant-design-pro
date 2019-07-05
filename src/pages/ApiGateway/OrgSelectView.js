@@ -17,20 +17,33 @@ class OrgSelectView extends PureComponent {
     });
   };
 
-  getOption() {
+  getOption(sign) {
     const { orgList } = this.props;
-    return this.getOptionWhithList(orgList);
+    return this.getOptionWhithList(orgList,sign);
   }
 
-  getOptionWhithList = list => {
-    if (!list || list.length < 1) {
+  getOptionWhithList = (list,sign) => {
+
+    let newList = list;
+
+    if(sign){
+
+      const comItem ={
+        id : 0,
+        orgName : "Common"
+      };
+      newList = newList.filter(item=>item.id !== 0);
+      newList.unshift(comItem);
+    }
+    else if(!list || list.length < 1){
       return (
         <Option key={0} value={0}>
           没有找到选项
         </Option>
       );
     }
-    return list.map(item => (
+
+    return newList.map(item => (
       <Option key={item.id} value={item.id}>
         {item.orgName}
       </Option>
@@ -44,10 +57,10 @@ class OrgSelectView extends PureComponent {
 
   render() {
     // const value = this.conversionObject();
-    const { value } = this.props;
+    const { value,sign } = this.props;
     return (
       <Select style={{ width: '100%' }} value={value} onSelect={this.selectChangeItem}>
-        {this.getOption()}
+        {this.getOption(sign)}
       </Select>
     );
   }

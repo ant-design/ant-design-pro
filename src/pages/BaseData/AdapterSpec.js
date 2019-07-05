@@ -75,7 +75,7 @@ class Adapter extends PureComponent {
         },
         {
           name: 'rang',
-          title: 'Org Name',
+          title: 'Rang',
           columnHidden: true,
           query: false,
           add: true,
@@ -84,7 +84,7 @@ class Adapter extends PureComponent {
         },
         {
           name: 'orgName',
-          title: 'Org Name',
+          title: 'Rang',
           columnHidden: false,
           query: false,
           add: false
