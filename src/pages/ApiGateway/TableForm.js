@@ -1,5 +1,5 @@
 import React, {Fragment, PureComponent} from 'react';
-import {Button, Divider, Input, message, Popconfirm, Select, Table, Tag} from 'antd';
+import {Button, Divider, Input, message, Popconfirm, Select, Table, Tag,Row,Col,Icon} from 'antd';
 import { connect } from 'dva';
 import isEqual from 'lodash/isEqual';
 import styles from './style.less';
@@ -75,13 +75,52 @@ class TableForm extends PureComponent {
     }
   };
 
-  newMember = () => {
+  newMember = (backendType) => {
     const { data } = this.state;
-    const newData = data.map(item => ({ ...item }));
+    let maxSeqForIn=0;
+    let maxSeqForOut=0;
+    let seqForCall=1;
+    data.forEach(item=>{
+      if(item.backendType==="in"){
+        if(parseInt(item.serviceSeq,10)>maxSeqForIn){
+          maxSeqForIn=parseInt(item.serviceSeq,10);
+        }
+      }
+      else if(item.backendType==="out"){
+        if(parseInt(item.serviceSeq,10)>maxSeqForOut){
+          maxSeqForOut=parseInt(item.serviceSeq,10);
+        }
+      }
+      else{
+        seqForCall=parseInt(item.serviceSeq,10);
+      }
+    });
+
+    const newData=data.map(item=>{
+      const newItem={...item};
+      if(backendType==="in"){
+        if(item.backendType==="out"){
+          newItem.serviceSeq+=1;
+        }
+        else if(item.backendType===CALL_POINT){
+          newItem.serviceSeq+=1;
+        }
+      }
+      return newItem;
+    });
+
+    let serviceSeq=1;
+    if(backendType==='in'){
+      serviceSeq=maxSeqForIn+1;
+    }
+    else if(backendType==='out'){
+      serviceSeq=maxSeqForOut>0?maxSeqForOut+1:seqForCall+1;
+    }
+
     newData.push({
       key: `NEW_TEMP_ID_${this.index}`,
-      serviceSeq: '',
-      backendType: '',
+      serviceSeq,
+      backendType,
       url: '',
       reqPath: '',
       editable: true,
@@ -103,7 +142,7 @@ class TableForm extends PureComponent {
         onMyChange={(adapterAttrs)=>this.adapterAttrChange(record,adapterAttrs)}
         dataSource={keyData}
       />
-    ):(<span>Call endpoints do not need to configure properties</span>);
+    ):(<span>Call endpoint do not need to configure properties</span>);
   };
 
 
@@ -121,6 +160,7 @@ class TableForm extends PureComponent {
       onChange(newData);
     }
   }
+
 
   handleFieldChange(e, fieldName, record) {
     const {key}=record;
@@ -212,10 +252,15 @@ class TableForm extends PureComponent {
   validateSeq(target){
     const { data } = this.state;
     // console.log("target:",target,"data:",data);
+    let errorResult=false;
+    if(target.serviceSeq<=0){
+      errorResult=true;
+      message.error(`service seq必须大于0，请重新更改。`);
+      return errorResult;
+    }
     const foundItem=data.find((obj)=> {
       return obj.serviceSeq === target.serviceSeq && obj.key !== target.key;
     });
-    let errorResult=false;
     if (foundItem) {
       errorResult=true;
       message.error(`service seq跟${foundItem.url}的service seq冲突，请重新更改。`);
@@ -497,15 +542,42 @@ class TableForm extends PureComponent {
           expandedRowRender={(record)=>this.expandedRowRender(record)}
           rowClassName={record => (record.editable ? styles.editable : '')}
         />
-        <Button
-          style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
-          type="dashed"
-          onClick={this.newMember}
-          icon="plus"
-          htmlType="button"
-        >
-          新增成员
-        </Button>
+        <Row gutter={16}>
+          <Col
+            xl={{ span: 12 }}
+            lg={{ span: 12 }}
+            md={{ span: 12 }}
+            sm={12}
+            style={{ height: 50 }}
+          >
+            <Button
+              style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
+              type="dashed"
+              onClick={()=>this.newMember('in')}
+              icon="plus-circle"
+              htmlType="button"
+            >
+              Add Adapter (in)
+            </Button>
+          </Col>
+          <Col
+            xl={{ span: 12 }}
+            lg={{ span: 12 }}
+            md={{ span: 12 }}
+            sm={12}
+            style={{ height: 50 }}
+          >
+            <Button
+              style={{ width: '100%', marginTop: 16, marginBottom: 8 }}
+              type="dashed"
+              onClick={()=>this.newMember('out')}
+              icon="plus-square"
+              htmlType="button"
+            >
+              Add Adapter (out)
+            </Button>
+          </Col>
+        </Row>
       </Fragment>
     );
   }
