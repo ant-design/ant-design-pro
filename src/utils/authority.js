@@ -51,14 +51,15 @@ export function getFormatPrivileges() {
 
 export function getAuth(name) {
   const privileges = getFormatPrivileges();
-  const privilege = privileges.find(item => item.name === name);
+  const privilege = privileges?privileges.find(item => item.name === name):undefined;
   const authority = privilege ? privilege.authority : [];
   return authority;
 }
 
 export function getUser() {
   // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
-  const user = JSON.parse(localStorage.getItem('antd-pro-user') || {});
+  const userJsonStr=localStorage.getItem('antd-pro-user');
+  const user = userJsonStr?JSON.parse(userJsonStr):{};
   return user;
 }
 

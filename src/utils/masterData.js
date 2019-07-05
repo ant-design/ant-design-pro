@@ -27,7 +27,7 @@ export function getAllEnumData() {
 
 export function getItems(javaCode, javaKey) {
   const allEnum = getAllEnumData();
-  return allEnum.filter(obj => obj.javaCode === javaCode && obj.javaKey === javaKey);
+  return allEnum?allEnum.filter(obj => obj.javaCode === javaCode && obj.javaKey === javaKey):[];
 }
 
 export function getItem(javaCode, javaKey, itemCode) {
