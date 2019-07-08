@@ -131,7 +131,7 @@ class TableList extends PureComponent {
     // },
     const columns = [
       {
-        title: 'API Id',
+        title: 'Id',
         dataIndex: 'apiId',
       },
       {
