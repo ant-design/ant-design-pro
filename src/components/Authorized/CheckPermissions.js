@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line import/no-cycle
 import PromiseRender from './PromiseRender';
 import { CURRENT } from './renderAuthorize';
 
@@ -18,13 +19,7 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
   }
   // 数组处理
   if (Array.isArray(authority)) {
-    if (authority.length===0){
-      return target;
-    }
     if (Array.isArray(currentAuthority)) {
-      if(currentAuthority.length===0){
-        return Exception;
-      }
       if (currentAuthority.some(item => authority.includes(item))) {
         return target;
       }

@@ -12,7 +12,7 @@ It is fixed at the bottom of the content area and does not move along with the s
 
 ## API
 
-Property | Description | Type | Default
----------|-------------|------|--------
-children | toolbar content, align to the right | ReactNode | -
-extra | extra information, align to the left | ReactNode | -
+| Property | Description                          | Type      | Default |
+| -------- | ------------------------------------ | --------- | ------- |
+| children | toolbar content, align to the right  | ReactNode | -       |
+| extra    | extra information, align to the left | ReactNode | -       |

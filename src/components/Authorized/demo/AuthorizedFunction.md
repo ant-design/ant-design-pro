@@ -1,6 +1,6 @@
 ---
 order: 2
-title: 
+title:
   zh-CN: 使用方法作为参数
   en-US: Use function as a parameter
 ---
@@ -20,12 +20,8 @@ const havePermission = () => {
 
 ReactDOM.render(
   <Authorized authority={havePermission} noMatch={noMatch}>
-    <Alert
-      message="Use Function as a parameter passed!"
-      type="success"
-      showIcon
-    />
+    <Alert message="Use Function as a parameter passed!" type="success" showIcon />
   </Authorized>,
-  mountNode,
+  mountNode
 );
 ```

@@ -38,13 +38,16 @@ const renderFooter = ({ tabList, tabActiveKey, onTabChange, tabBarExtraContent }
 const PageHeaderWrapper = ({
   children,
   contentWidth,
+  fluid,
   wrapperClassName,
+  home,
   top,
   title,
   content,
   logo,
   showBreadcrumb, // 强制现实导航条
   extraContent,
+  hiddenBreadcrumb,
   onBack,
   ...restProps
 }) => {

@@ -5,7 +5,7 @@ title: 可展开和收起
 
 使用 `expandable` 属性，让标签组可以收起，避免过高。
 
-````jsx
+```jsx
 import TagSelect from 'ant-design-pro/lib/TagSelect';
 
 function handleFormSubmit(checkedValue) {
@@ -26,6 +26,7 @@ ReactDOM.render(
     <TagSelect.Option value="cat10">类目十</TagSelect.Option>
     <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
     <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
-  </TagSelect>
-, mountNode);
-````
+  </TagSelect>,
+  mountNode
+);
+```

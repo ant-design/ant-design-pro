@@ -5,11 +5,20 @@
 }
 
 .main {
-  :global {
-    .ant-page-header {
-      padding: 16px 32px 0;
-      background: #fff;
-      border-bottom: 1px solid #e8e8e8;
+  .wrapper {
+    padding: 16px 24px 0;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+
+    :global {
+      .ant-page-header {
+        padding: 0;
+      }
+
+      .ant-page-header-title-view-extra {
+        top: 0;
+        right: 0;
+      }
     }
   }
 
@@ -27,9 +36,10 @@
   }
 
   .logo {
-    flex: 0 1 auto;
+    display: inline-block;
+    margin-top: -1px;
     margin-right: 16px;
-    padding-top: 1px;
+    vertical-align: middle;
     > img {
       display: block;
       width: 28px;
@@ -43,7 +53,7 @@
   }
 
   @media screen and (max-width: @screen-sm) {
-    .content {
+    .children-content {
       margin: 24px 0 0;
     }
   }
@@ -66,7 +76,6 @@
     margin-bottom: 16px;
   }
 
-  .logo,
   .content,
   .extraContent {
     margin-bottom: 16px;
@@ -77,34 +86,34 @@
     margin-left: 88px;
     text-align: right;
   }
-}
 
-@media screen and (max-width: @screen-xl) {
-  .extraContent {
-    margin-left: 44px;
-  }
-}
-
-@media screen and (max-width: @screen-lg) {
-  .extraContent {
-    margin-left: 20px;
-  }
-}
-
-@media screen and (max-width: @screen-md) {
-  .row {
-    display: block;
+  @media screen and (max-width: @screen-xl) {
+    .extraContent {
+      margin-left: 44px;
+    }
   }
 
-  .action,
-  .extraContent {
-    margin-left: 0;
-    text-align: left;
+  @media screen and (max-width: @screen-lg) {
+    .extraContent {
+      margin-left: 20px;
+    }
   }
-}
 
-@media screen and (max-width: @screen-sm) {
-  .detail {
-    display: block;
+  @media screen and (max-width: @screen-md) {
+    .row {
+      display: block;
+    }
+
+    .action,
+    .extraContent {
+      margin-left: 0;
+      text-align: left;
+    }
+  }
+
+  @media screen and (max-width: @screen-sm) {
+    .detail {
+      display: block;
+    }
   }
 }

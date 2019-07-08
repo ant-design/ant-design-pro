@@ -14,7 +14,7 @@ function parseKey(key) {
     method = spliced[0].toLowerCase();
     path = spliced[1]; // eslint-disable-line
   }
-  const routerBasePath = process.env.NODE_ENV === 'dev' ? `${path}` : `/.netlify/functions${path}`;
+  const routerBasePath = `${path}`;
   return {
     method,
     path: routerBasePath,

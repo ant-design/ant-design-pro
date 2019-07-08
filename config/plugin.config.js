@@ -24,8 +24,11 @@ function getModulePackageName(module) {
 }
 
 export default config => {
-  // pro 和 开发环境再添加这个插件
-  if (process.env.APP_TYPE === 'site' || process.env.NODE_ENV !== 'production') {
+  // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+  if (
+    process.env.ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site' ||
+    process.env.NODE_ENV !== 'production'
+  ) {
     // 将所有 less 合并为一个供 themePlugin使用
     const outFile = path.join(__dirname, '../.temp/ant-design-pro.less');
     const stylesDir = path.join(__dirname, '../src/');

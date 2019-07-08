@@ -1,5 +1,6 @@
 import React from 'react';
 import Exception from '../Exception';
+// eslint-disable-next-line import/no-cycle
 import CheckPermissions from './CheckPermissions';
 
 /**

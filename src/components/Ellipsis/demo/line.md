@@ -1,6 +1,6 @@
 ---
 order: 1
-title: 
+title:
   zh-CN: 按照行数省略
   en-US: Truncate according to the number of rows
 ---
@@ -17,15 +17,23 @@ title:
 
 Also note that, in this mode, the outer container needs to have a specified width (or set its own width).
 
-
-````jsx
+```jsx
 import Ellipsis from 'ant-design-pro/lib/Ellipsis';
 
-const article = <p>There were injuries alleged in three <a href="#cover">cases in 2015</a>, and a fourth incident in September, according to the safety recall report. After meeting with US regulators in October, the firm decided to issue a voluntary recall.</p>;
+const article = (
+  <p>
+    There were injuries alleged in three <a href="#cover">cases in 2015</a>, and a fourth incident
+    in September, according to the safety recall report. After meeting with US regulators in
+    October, the firm decided to issue a voluntary recall.
+  </p>
+);
 
 ReactDOM.render(
   <div style={{ width: 200 }}>
-    <Ellipsis tooltip lines={3}>{article}</Ellipsis>
-  </div>
-, mountNode);
-````
+    <Ellipsis tooltip lines={3}>
+      {article}
+    </Ellipsis>
+  </div>,
+  mountNode
+);
+```

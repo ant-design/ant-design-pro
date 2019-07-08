@@ -1,8 +1,8 @@
-import React, {Component, Fragment} from 'react';
-import {formatMessage} from 'umi-plugin-react/locale';
-import {connect} from 'dva';
+import React, { Component, Fragment } from 'react';
+import { formatMessage } from 'umi-plugin-react/locale';
+import { connect } from 'dva';
 import Link from 'umi/link';
-import {Icon} from 'antd';
+import { Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
 import DocumentTitle from 'react-document-title';
 import SelectLang from '@/components/SelectLang';

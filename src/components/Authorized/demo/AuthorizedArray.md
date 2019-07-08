@@ -1,6 +1,6 @@
 ---
 order: 1
-title: 
+title:
   zh-CN: 使用数组作为参数
   en-US: Use Array as a parameter
 ---
@@ -18,6 +18,6 @@ ReactDOM.render(
   <Authorized authority={['user', 'admin']} noMatch={noMatch}>
     <Alert message="Use Array as a parameter passed!" type="success" showIcon />
   </Authorized>,
-  mountNode,
+  mountNode
 );
 ```

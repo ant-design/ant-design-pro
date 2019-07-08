@@ -1,8 +1,6 @@
 // use localStorage to store the authority info, which might be sent from server in actual project.
 import { getFormatPrivilege } from '@/pages/UserManager/userUtil';
 
-const { NODE_ENV } = process.env;
-
 export function getAuthority(str) {
   // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
   const authorityString =
@@ -17,7 +15,8 @@ export function getAuthority(str) {
   if (typeof authority === 'string') {
     return [authority];
   }
-  if (!authority && NODE_ENV !== 'production') {
+  // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+  if (!authority && ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
     return ['admin'];
   }
   return authority;

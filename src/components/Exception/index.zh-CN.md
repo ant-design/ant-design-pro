@@ -9,13 +9,13 @@ order: 5
 
 ## API
 
-| 参数 | 说明| 类型 | 默认值 |
-|-------------|------------------------------------------|-------------|-------|
-| backText| 默认的返回按钮文本 | ReactNode| back to home |
-| type| 页面类型，若配置，则自带对应类型默认的 `title`，`desc`，`img`，此默认设置可以被 `title`，`desc`，`img` 覆盖 | Enum {'403', '404', '500'} | - |
-| title | 标题 | ReactNode| -|
-| desc| 补充描述| ReactNode| -|
-| img | 背景图片地址 | string| -|
-| actions | 建议操作，配置此属性时默认的『返回首页』按钮不生效| ReactNode| -|
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| backText | 默认的返回按钮文本 | ReactNode | back to home |
+| type | 页面类型，若配置，则自带对应类型默认的 `title`，`desc`，`img`，此默认设置可以被 `title`，`desc`，`img` 覆盖 | Enum {'403', '404', '500'} | - |
+| title | 标题 | ReactNode | - |
+| desc | 补充描述 | ReactNode | - |
+| img | 背景图片地址 | string | - |
+| actions | 建议操作，配置此属性时默认的『返回首页』按钮不生效 | ReactNode | - |
 | linkElement | 定义链接的元素 | string\|ReactElement | 'a' |
-| redirect | 返回按钮的跳转地址 | string | '/'
+| redirect | 返回按钮的跳转地址 | string | '/' |
