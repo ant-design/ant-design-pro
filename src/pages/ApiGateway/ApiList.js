@@ -19,11 +19,11 @@ import {
   Row,
   Select
 } from 'antd';
+import memoizeOne from 'memoize-one';
+import isEqual from 'lodash/isEqual';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Ellipsis from '@/components/Ellipsis';
-import memoizeOne from 'memoize-one';
-import isEqual from 'lodash/isEqual';
 import styles from './ApiList.less';
 import constants from '@/utils/constUtil';
 import {getGroupName, getItems, getItemValue2} from '@/utils/masterData';
@@ -96,18 +96,20 @@ class TableList extends PureComponent {
     const userId = getUserId();
     this.setState({ userId });
 
-    const { dispatch } = this.props;
-    const payload = {userId};
-    payload.data = {};
-    payload.data.info = {
-      pageNo: 1,
-      pageSize: 10
-    };
-    dispatch({
-      type: 'apiGatewayModel/apiList',
-      payload,
-    });
-    console.log("----did mount")
+    const { dispatch,apiGatewayModel } = this.props;
+    const {data:{list}}=apiGatewayModel;
+    if(!list||list.length===0) {
+      const payload = {userId};
+      payload.data = {};
+      payload.data.info = {
+        pageNo: 1,
+        pageSize: 10
+      };
+      dispatch({
+        type: 'apiGatewayModel/apiList',
+        payload,
+      });
+    }
   }
 
   getGroupOption() {
@@ -673,7 +675,6 @@ class TableList extends PureComponent {
     const rowKey = 'apiId';
 
     const columns = groupList && groupList.length > 0 ? this.getColumns(groupList) : [];
-    console.log("---render#$%$$$$$$", columns);
     return (
       <PageHeaderWrapper showBreadcrumb style={{ height: '50px' }}>
         <Card bordered={false}>

@@ -11,24 +11,10 @@ export function conversion(responseData) {
   } else if (responseData.records) {
     retData = mapKeys(responseData, (value, key) => {
       if (key === 'records') return 'list';
-      if (key === 'page') {
-        // mapKeys(responseData.page, (value1, key1) => {
-        //   if (key1 === 'totalNesponseData.page, (value1, key1) => {
-        //         //   if (key1 === 'totalNum'){
-        //         //     return 'total';
-        //         //   }
-        //         //   return key1;
-        //         // });um'){
-        //     return 'total';
-        //   }
-        //   return key1;
-        // });
-        return 'pagination';
-      }
       return key;
     });
   }
-
+  retData.pagination={...retData.pagination,current:retData.pagination.pageNo}
   return retData;
 }
 
