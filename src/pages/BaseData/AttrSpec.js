@@ -30,7 +30,7 @@ const columnSchemas = {
   ]
 };
 export default () => (
-  <PageHeaderWrapper title="Attr Spec Management">
+  <PageHeaderWrapper>
     <BindDataQueryTable columnSchemas={columnSchemas} />
   </PageHeaderWrapper>
 );

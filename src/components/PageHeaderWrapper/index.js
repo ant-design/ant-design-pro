@@ -45,57 +45,67 @@ const PageHeaderWrapper = ({
   title,
   content,
   logo,
-  showBreadcrumb, // 强制现实导航条
   extraContent,
   hiddenBreadcrumb,
   onBack,
+  style,
   ...restProps
 }) => {
+  /* eslint-disable no-nested-ternary */
+  const newStyle=!style?(!title?(hiddenBreadcrumb?{display:'none'}:{height:'50px'}):{height:'90px'}):style;
   return (
     <div style={{ margin: '-24px -24px 0' }} className={classNames(classNames, styles.main)}>
       {top}
-      {((title && content)||onBack||showBreadcrumb) && (
-        <MenuContext.Consumer>
-          {value => {
-            return (
-              <PageHeader
-                wide={contentWidth === 'Fixed'}
-                title={
+      <MenuContext.Consumer>
+        {value => {
+          return (
+            <PageHeader
+              wide={contentWidth === 'Fixed'}
+              title={
+                <>
+                  {logo && <span className={styles.logo}>{logo}</span>}
                   <Title
                     level={4}
                     style={{
                       marginBottom: 0,
+                      display: 'inline-block',
                     }}
                   >
                     {title}
                   </Title>
+                </>
                 }
-                key="pageheader"
-                onBack={onBack}
-                {...restProps}
-                breadcrumb={onBack?[]:conversionBreadcrumbList({
+              key="pageheader"
+              onBack={onBack}
+              style={newStyle}
+              {...restProps}
+              breadcrumb={onBack?[]:
+                !hiddenBreadcrumb &&
+                conversionBreadcrumbList({
                   ...value,
                   ...restProps,
-                  home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
-                })}
-                className={styles.pageHeader}
-                linkElement={Link}
-                footer={renderFooter(restProps)}
-              >
-                <div className={styles.detail}>
-                  {logo && <div className={styles.logo}>{logo}</div>}
-                  <div className={styles.main}>
-                    <div className={styles.row}>
-                      {content && <div className={styles.content}>{content}</div>}
-                      {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
-                    </div>
+                  ...(home !== null && {
+                    home: <FormattedMessage id="menu.home" defaultMessage="Home" />,
+                  }),
+                })
+              }
+              className={styles.pageHeader}
+              linkElement={Link}
+              footer={renderFooter(restProps)}
+            >
+              <div className={styles.detail}>
+                {logo && <div className={styles.logo}>{logo}</div>}
+                <div className={styles.main}>
+                  <div className={styles.row}>
+                    {content && <div className={styles.content}>{content}</div>}
+                    {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
                   </div>
                 </div>
-              </PageHeader>
-            );
-          }}
-        </MenuContext.Consumer>
-      )}
+              </div>
+            </PageHeader>
+          );
+        }}
+      </MenuContext.Consumer>
       {children ? (
         <div className={styles['children-content']}>
           <GridContent>{children}</GridContent>

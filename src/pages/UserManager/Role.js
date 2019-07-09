@@ -26,7 +26,7 @@ const columnSchemas = {
   ],
 };
 export default () => (
-  <PageHeaderWrapper title="Role Management" showBreadcrumb>
+  <PageHeaderWrapper>
     <BindDataQueryTable columnSchemas={columnSchemas} />
   </PageHeaderWrapper>
 );

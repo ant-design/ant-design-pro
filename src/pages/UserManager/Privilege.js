@@ -189,7 +189,7 @@ class Privilege extends PureComponent {
     //   flatToPrivilegeTreeSelect(list,treeSelectData,0);
     // }
     return (
-      <PageHeaderWrapper showBreadcrumb style={{height:50}}>
+      <PageHeaderWrapper>
         <BindDataQueryTable
           columnSchemas={columnSchemas}
           pageSize='999'

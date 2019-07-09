@@ -172,7 +172,7 @@ class Org extends PureComponent {
   render() {
     const { modalVisible, selectedRow, columnSchemas } = this.state;
     return (
-      <PageHeaderWrapper title="权限管理">
+      <PageHeaderWrapper>
         <BindDataQueryTable
           columnSchemas={columnSchemas}
           onRef={this.handleRef}

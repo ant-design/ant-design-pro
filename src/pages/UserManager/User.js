@@ -114,7 +114,7 @@ class User extends PureComponent {
   render() {
     const {modalVisible,selectedRow,columnSchemas}=this.state;
     return (
-      <PageHeaderWrapper title="User Management" showBreadcrumb>
+      <PageHeaderWrapper>
         <BindDataQueryTable
           columnSchemas={columnSchemas}
           onRef={this.handleRef}

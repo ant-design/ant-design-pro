@@ -137,7 +137,7 @@ class Adapter extends PureComponent {
   render() {
     const {columnSchemas}=this.state;
     return (
-      <PageHeaderWrapper title="Adapter Management" showBreadcrumb>
+      <PageHeaderWrapper title="Adapter Management">
         <BindDataQueryTable
           columnSchemas={columnSchemas}
           onRef={this.handleRef}
