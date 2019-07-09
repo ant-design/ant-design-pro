@@ -1,6 +1,6 @@
 module.exports = {
   navTheme: 'dark', // theme for nav menu
-  primaryColor: '#1890FF', // primary color of ant design
+  primaryColor: '#FA541C', // primary color of ant design
   layout: 'sidemenu', // nav menu position: sidemenu or topmenu
   contentWidth: 'Fluid', // layout of content: Fluid or Fixed, only works when layout is topmenu
   fixedHeader: true, // sticky header
@@ -10,7 +10,7 @@ module.exports = {
     disableLocal: false,
   },
   title: 'O2P',
-  pwa: true,
+  pwa: false,
   // Your custom iconfont Symbol script Url
   // eg：//at.alicdn.com/t/font_1039637_btcrd5co4w.js
   // 注意：如果需要图标多色，Iconfont 图标项目里要进行批量去色处理

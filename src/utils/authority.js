@@ -15,7 +15,7 @@ export function getAuthority(str) {
   if (typeof authority === 'string') {
     return [authority];
   }
-  // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design ×¨ÓÃ»·¾³±äÁ¿£¬Çë²»ÒªÔÚÄãµÄÏîÄ¿ÖĞÊ¹ÓÃËü¡£
+  // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design ä¸“ç”¨ç¯å¢ƒå˜é‡ï¼Œè¯·ä¸è¦åœ¨ä½ çš„é¡¹ç›®ä¸­ä½¿ç”¨å®ƒã€‚
   if (!authority && ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
     return ['admin'];
   }

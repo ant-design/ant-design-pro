@@ -90,9 +90,10 @@ class BasicLayout extends React.Component {
   };
 
   renderSettingDrawer = () => {
+    console.log("dddd-----",ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION);
     // Do not render SettingDrawer in production
     // unless it is deployed in preview.pro.ant.design as demo
-    // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design ×¨ÓÃ»·¾³±äÁ¿£¬Çë²»ÒªÔÚÄãµÄÏîÄ¿ÖĞÊ¹ÓÃËü¡£
+    // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design ä¸“ç”¨ç¯å¢ƒå˜é‡ï¼Œè¯·ä¸è¦åœ¨ä½ çš„é¡¹ç›®ä¸­ä½¿ç”¨å®ƒã€‚
     if (
       process.env.NODE_ENV === 'production' &&
       ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION !== 'site'
