@@ -180,6 +180,40 @@ export function getPayloadForApiDebug(apiService,values) {
   return apiInfo;
 }
 
+
+export function getPayloadForApiLog(oldApiService,values) {
+
+  const apiService={...oldApiService};
+  const {apiOrderExt}=values;
+  const {extReqOnePrefix,extReqTwoPrefix,extReqThreePrefix,extRspOnePrefix,extRspTwoPrefix,extRspThreePrefix}= apiOrderExt;
+  const apiOrderExtAdd={...apiOrderExt};
+
+  apiOrderExtAdd.extReq1 = `${extReqOnePrefix}::${apiOrderExt.extReqOne}`;
+  apiOrderExtAdd.extReq2 = `${extReqTwoPrefix}::${apiOrderExt.extReqTwo}`;
+  apiOrderExtAdd.extReq3 = `${extReqThreePrefix}::${apiOrderExt.extReqThree}`;
+  apiOrderExtAdd.extRsp1 = `${extRspOnePrefix}::${apiOrderExt.extRspOne}`;
+  apiOrderExtAdd.extRsp2 = `${extRspTwoPrefix}::${apiOrderExt.extRspTwo}`;
+  apiOrderExtAdd.extRsp3 = `${extRspThreePrefix}::${apiOrderExt.extReqThree}`;
+
+  if(apiService.apiOrderExt){
+    apiOrderExtAdd.apiId=apiService.apiOrderExt.apiId;
+    apiOrderExtAdd.apiOrderExtId=apiService.apiOrderExt.apiOrderExtId;
+  }
+
+  apiService.apiOrderExt=apiOrderExtAdd;
+  const apiInfo= {
+    option:10, // 1-新增记录 2-修改记录,9-apiDoc,10-apiLog
+    data: {
+      info: {
+        apiService,
+      },
+    },
+  };
+  // console.log("=======:",apiInfo);
+  return apiInfo;
+}
+
+
 export function getPayloadForReq(urlSamplePre,values) {
 
   const {urlSample} = values;

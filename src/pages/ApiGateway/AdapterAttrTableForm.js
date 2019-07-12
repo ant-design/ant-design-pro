@@ -201,18 +201,23 @@ class AdapterAttrTableForm extends PureComponent {
         },
       },
     ];
-
     const { loading, data } = this.state;
+    const { record } = this.props;
+    const { url,reqPath } = record;
+    const reqUrl = `${url}${reqPath}`;
+    console.log("reqUrl",record);
+    const title = () => reqUrl;
     return (
       <Fragment>
         <Table
+          title={title}
           loading={loading}
           columns={columns}
           dataSource={data}
           pagination={false}
           showHeader={false}
           size='small'
-          rowClassName={record => (record.editable ? styles.editable : '')}
+          rowClassName={records => (records.editable ? styles.editable : '')}
         />
       </Fragment>
     );

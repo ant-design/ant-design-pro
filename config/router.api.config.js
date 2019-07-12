@@ -78,6 +78,12 @@ export default [
               }
             ]
           },
+          {
+            path: '/apiGateway/apiLog',
+            name: 'apiLog',
+            hideInMenu: true,
+            component: './ApiGateway/ApiLog',
+          },
           // {
           //   path: '/apiGateway/apiDebugAdd',
           //   name: 'apiDebugAdd',
@@ -145,9 +151,9 @@ export default [
             component: './BaseData/AttrSpec',
           },
           {
-            path: '/baseData/attrSpecFromAdapter',
-            name: 'attrSpecFromAdapter',
-            component: './BaseData/AttrSpecFromAdapter',
+            path: '/baseData/adapterAttrSpec',
+            name: 'adapterAttrSpec',
+            component: './BaseData/AdapterAttrSpec',
             hideInMenu: true,
           },
         ],

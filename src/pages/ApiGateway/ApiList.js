@@ -212,6 +212,8 @@ class TableList extends PureComponent {
       this.handleUpdateDoc(true, record);
     } else if (key === 'handleDebug') {
       this.handleDebug(true, record);
+    } else if (key === 'handleLog') {
+      this.handleLog(true, record);
     } else if (key === 'handleOffline') {
       this.handleStatusClick(ACT.OFFLINE, record);
     } else if (key === 'handleDelete') {
@@ -229,6 +231,7 @@ class TableList extends PureComponent {
             <Menu.Item key="handleUpdate">修改</Menu.Item>
             <Menu.Item key="handleUpdateDoc">文档</Menu.Item>
             <Menu.Item key="handleDebug">调试</Menu.Item>
+            <Menu.Item key="handleLog">日志</Menu.Item>
             {status === API_STATUS.ONLINE ? <Menu.Item key="handleOffline">下线</Menu.Item> : null}
             {status === API_STATUS.OFFLINE ? <Menu.Item key="handleDelete">删除</Menu.Item> : null}
           </Menu>
@@ -453,6 +456,21 @@ class TableList extends PureComponent {
     // router.push(`/apiGateway/apiCreate/${apiId}`);
     router.push({
       pathname: `/apiGateway/apiDebug`, // 通过url参数传递
+      state: {
+        // 通过对象传递
+        apiId,
+        record, // 表格某行的对象数据
+      },
+    });
+
+  };
+
+  handleLog = (flag, record) => {
+
+    const { apiId } = record;
+    // router.push(`/apiGateway/apiCreate/${apiId}`);
+    router.push({
+      pathname: `/apiGateway/apiLog`, // 通过url参数传递
       state: {
         // 通过对象传递
         apiId,

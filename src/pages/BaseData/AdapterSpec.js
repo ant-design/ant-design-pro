@@ -125,7 +125,7 @@ class Adapter extends PureComponent {
     const { id } = selectedRow;
     // router.push(`/apiGateway/apiCreate/${apiId}`);
     router.push({
-      pathname: `/baseData/attrSpecFromAdapter`, // 通过url参数传递
+      pathname: `/baseData/adapterAttrSpec`, // 通过url参数传递
       state: {
         // 通过对象传递
         adapterSpecId:id,

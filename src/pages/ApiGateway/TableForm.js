@@ -132,10 +132,10 @@ class TableForm extends PureComponent {
 
   expandedRowRender = (record) => {
     const data=record.adapterAttrs;
-    console.log("---",record,data);
+
     const keyData= data?data.map((item,index)=>({...item,key:index})):[];
     const keyRecord={...record,adapterAttrs:keyData};
-
+    console.log("--expandedRowRender-",record,keyRecord);
     return record.backendType&&record.backendType.toLowerCase()!==CALL_POINT?(
       <AdapterAttrTableForm
         record={keyRecord}

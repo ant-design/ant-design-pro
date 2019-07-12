@@ -6,7 +6,7 @@ import { getItems } from '@/utils/masterData';
 const statusList = getItems('common', 'status');
 
 const columnSchemas = {
-  tableName: 'attr_spec',
+  tableName: 'adapater_attr_spec',
   key: 'attrSpecId',
   name: 'attrSpecCode',
   relationKeyForMasterTable:'adapterSpecId',
@@ -16,8 +16,6 @@ const columnSchemas = {
     { name: 'attrSpecCode', title: 'Attr Code', sorter: false, query: true, add: true,detailFlag:true },
     { name: 'attrSpecName', title: 'Attr Name', sorter: false, query: true, add: true },
     { name: 'defaultValue', title: 'Default Value', sorter: false, add: true ,rules:[],showLen:22},
-    { name: 'tableName', title: 'Table Name', columnHidden:true, defaultValue:'adapter_attr', disabledAct:'true',add: true },
-    { name: 'upId', title: 'Up Id', sorter: false, add: true,defaultValue:'5',disabledAct:'true'},
     {
       name: 'status',
       title: 'Status',

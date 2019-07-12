@@ -37,8 +37,8 @@ const fieldLabels = {
     reqPath: '落地方路径',
     // protocol: '协议',
     reqMethod: '请求Method',
-    connectTimeout: '连接超时时间（秒）',
-    socketTimeout: '处理超时时间（秒）',
+    connectTimeout: '连接超时时间（ms）',
+    socketTimeout: '处理超时时间（ms）',
     orgId: '服务提供者',
     authType: '安全认证',
   },
@@ -94,6 +94,7 @@ class ApiUpdate extends PureComponent {
     const { dispatch } = this.props;
     if (apiId !== -1) {
       const payload = {};
+      payload.option = 4;
       payload.data = {};
       payload.data.info = {};
       payload.data.info.apiId = apiId;
@@ -347,7 +348,9 @@ class ApiUpdate extends PureComponent {
               </Col>
             </Row>
             <Row gutter={2}>
-              <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
+              <Col
+                lg={6} md={12} sm={24}
+                style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.front.serviceType}>
                   {getFieldDecorator('front.serviceType', {
                     rules: [{ required: true, message: '请选择serviceType' }],

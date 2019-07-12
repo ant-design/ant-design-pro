@@ -617,7 +617,7 @@ class ApiDebug extends PureComponent {
       wrapperCol: { span: 16 },
     };
     return (
-      <PageHeaderWrapper>
+      <div>
         <Card title="" className={styles.card} bordered={false}>
           <Row>
             <Col
@@ -759,7 +759,7 @@ class ApiDebug extends PureComponent {
         </Card>
 
         <BackTop />
-      </PageHeaderWrapper>
+      </div>
     );
   }
 }

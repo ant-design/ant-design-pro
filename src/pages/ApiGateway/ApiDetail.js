@@ -42,8 +42,8 @@ const fieldLabels = {
     reqPath: 'Request Path',
     protocol: 'protocol',
     reqMethod: 'Request Method',
-    connectTimeout: 'Connect Timeout（s）',
-    socketTimeout: 'Socket Timeout（s）',
+    connectTimeout: 'Connect Timeout（ms）',
+    socketTimeout: 'Socket Timeout（ms）',
     orgId: 'Org',
     authType: 'Auth type',
   },
@@ -115,6 +115,15 @@ const columns = [
   {
     title: 'Adapter',
     dataIndex: 'adapterSpecName',
+  },
+  {
+    title:'Request Url',
+    dataIndex: 'url',
+    render: (value, row) => {
+      return (
+        `${row.url}${row.reqPath}`
+      )
+    }
   }
 ];
 
@@ -271,6 +280,7 @@ class ApiDetail extends PureComponent {
     if (apiId !== -1) {
       const payload = {};
       payload.range = 1;
+      payload.option = 4;
       payload.data = {};
       payload.data.info = {};
       payload.data.info.apiId = apiId;
