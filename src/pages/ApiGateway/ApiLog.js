@@ -225,7 +225,7 @@ class ApiUpdate extends PureComponent {
     let extReqThreePrefix='';
     let extReqThree='';
     let extRspOnePrefix='';
-    let   extRspOne='';
+    let extRspOne='';
     let extRspTwoPrefix='';
     let extRspTwo='';
     let extRspThreePrefix='';
