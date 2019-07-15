@@ -212,6 +212,16 @@ const columnsCode = [
     dataIndex: 'remark',
   },
 ];
+const columnsLog = [
+  {
+    title: 'Log Name',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Value',
+    dataIndex: 'remark',
+  },
+];
 
 // const tableData = [
 //   {
@@ -454,8 +464,8 @@ class ApiDetail extends PureComponent {
       extRspTwo = apiOrderExt.extRsp2 ? apiOrderExt.extRsp2.split('::', ' ') : "";
       extRspThree = apiOrderExt.extRsp3 ? apiOrderExt.extRsp3.split('::', ' ') : "";
     }
-    const logLevel = getItemValue('apiOrderExt', 'log_level', apiOrderExt.logLevel);
-    const secretFlag = getItemValue('apiOrderExt', 'secret_flag', apiOrderExt.secretFlag);
+    const logLevel = apiOrderExt?getItemValue('apiOrderExt', 'log_level', apiOrderExt.logLevel):"";
+    const secretFlag = apiOrderExt?getItemValue('apiOrderExt', 'secret_flag', apiOrderExt.secretFlag):"";
     const apiOrderExtAttr = [
       {name: fieldLabels.log.extReqOne, remark: extReqOne},
       {name: fieldLabels.log.extReqTwo, remark: extReqTwo},
@@ -674,7 +684,7 @@ class ApiDetail extends PureComponent {
 
           <TabPane tab="日志配置" key="log">
             <Card title="" bordered={false}>
-              <Table columns={columnsBase} dataSource={apiOrderExtAttr} pagination={false} />
+              <Table columns={columnsLog} dataSource={apiOrderExtAttr} pagination={false} />
             </Card>
           </TabPane>
         </Tabs>
