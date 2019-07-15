@@ -302,7 +302,7 @@ class ApiDetail extends PureComponent {
     if (apiId !== -1) {
       const payload = {};
       payload.range = 1;
-      payload.option = 10;
+      payload.option = 4;
       payload.data = {};
       payload.data.info = {};
       payload.data.info.apiId = apiId;
@@ -449,7 +449,7 @@ class ApiDetail extends PureComponent {
       {name: fieldLabels.doc.contentType, remark: 'application/json'},
       {name: fieldLabels.doc.url, remark: url},
     ];
-    const {apiOrderExt} = apiServiceDoc;
+    const {apiOrderExt} = data;
     let extReqOne = '';
     let extReqTwo = '';
     let extReqThree = '';
@@ -458,11 +458,11 @@ class ApiDetail extends PureComponent {
     let extRspThree = '';
     if (apiOrderExt) {
       extReqOne = apiOrderExt.extReq1 ? apiOrderExt.extReq1.replace('::', ' ') : "";
-      extReqTwo = apiOrderExt.extReq2 ? apiOrderExt.extReq2.split('::', ' ') : "";
-      extReqThree = apiOrderExt.extReq3 ? apiOrderExt.extReq3.split('::', ' ') : "";
-      extRspOne = apiOrderExt.extRsp1 ? apiOrderExt.extRsp1.split('::', ' ') : "";
-      extRspTwo = apiOrderExt.extRsp2 ? apiOrderExt.extRsp2.split('::', ' ') : "";
-      extRspThree = apiOrderExt.extRsp3 ? apiOrderExt.extRsp3.split('::', ' ') : "";
+      extReqTwo = apiOrderExt.extReq2 ? apiOrderExt.extReq2.replace('::', ' ') : "";
+      extReqThree = apiOrderExt.extReq3 ? apiOrderExt.extReq3.replace('::', ' ') : "";
+      extRspOne = apiOrderExt.extRsp1 ? apiOrderExt.extRsp1.replace('::', ' ') : "";
+      extRspTwo = apiOrderExt.extRsp2 ? apiOrderExt.extRsp2.replace('::', ' ') : "";
+      extRspThree = apiOrderExt.extRsp3 ? apiOrderExt.extRsp3.replace('::', ' ') : "";
     }
     const logLevel = apiOrderExt?getItemValue('apiOrderExt', 'log_level', apiOrderExt.logLevel):"";
     const secretFlag = apiOrderExt?getItemValue('apiOrderExt', 'secret_flag', apiOrderExt.secretFlag):"";
