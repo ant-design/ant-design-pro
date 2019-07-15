@@ -26,7 +26,7 @@
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "check-prettier lint",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "prettier": "prettier -c --write **/*",
+    "prettier": "prettier -c --write ’**/*‘",
     "site": "npm run fetch:blocks && npm run build && npm run functions:build",
     "start": "umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
