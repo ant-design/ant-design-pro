@@ -6,7 +6,7 @@ import { getItems } from '@/utils/masterData';
 const statusList = getItems('common', 'status');
 
 const columnSchemas = {
-  tableName: 'adapater_attr_spec',
+  tableName: 'adapter_attr_spec',
   key: 'attrSpecId',
   name: 'attrSpecCode',
   relationKeyForMasterTable:'adapterSpecId',

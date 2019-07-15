@@ -216,8 +216,8 @@ class TableForm extends PureComponent {
           payload,
           callback:(resp)=>{
             if(resp){
-              const {attrSpecs}=resp;
-              const adapterAttrs=attrSpecs?attrSpecs.map(item=>({
+              const {adapterAttrSpecs}=resp;
+              const adapterAttrs=adapterAttrSpecs?adapterAttrSpecs.map(item=>({
                 "backendId": target.backendId,
                 "attrSpecId": item.attrSpecId,
                 "attrValue": item.defaultValue||'',
@@ -225,6 +225,9 @@ class TableForm extends PureComponent {
                 "attrSpecName": item.attrSpecName,
               })):[];
               target.adapterAttrs=adapterAttrs;
+              // 覆盖当前节点的url和reqPath
+              target.url = resp.url;
+              target.reqPath = resp.reqPath;
               this.setState({ data: newData });
               console.log("----newData in callback in changeAdapter:",newData);
             }
