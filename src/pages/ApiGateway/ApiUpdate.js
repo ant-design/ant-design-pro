@@ -349,8 +349,11 @@ class ApiUpdate extends PureComponent {
             </Row>
             <Row gutter={2}>
               <Col
-                lg={6} md={12} sm={24}
-                style={{ height: 80 }}>
+                lg={6}
+                md={12}
+                sm={24}
+                style={{ height: 80 }}
+              >
                 <Form.Item label={fieldLabels.front.serviceType}>
                   {getFieldDecorator('front.serviceType', {
                     rules: [{ required: true, message: '请选择serviceType' }],
