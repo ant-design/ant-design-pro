@@ -33,7 +33,7 @@
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
-    "uni18n": "uni18n --locale=zh-CN --write"
+    "i18n-remove": "uni18n --locale=zh-CN --write"
   },
   "husky": {
     "hooks": {
