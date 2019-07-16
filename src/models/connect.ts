@@ -69,4 +69,4 @@ type ConnectType = <S>(
     : Omit<P, keyof ConnectProps | keyof S>
 >;
 
-export const connect: ConnectType = DvaConnect as any;
+export const connect = (DvaConnect as unknown) as ConnectType;
