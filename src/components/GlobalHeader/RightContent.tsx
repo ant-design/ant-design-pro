@@ -1,8 +1,7 @@
 import { Icon, Tooltip } from 'antd';
 import React from 'react';
-import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { ConnectProps, ConnectState } from '@/models/connect';
+import { connect, ConnectProps } from '@/models/connect';
 
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
@@ -68,7 +67,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
   );
 };
 
-export default connect(({ settings }: ConnectState) => ({
+export default connect(({ settings }) => ({
   theme: settings.navTheme,
   layout: settings.layout,
-}))(GlobalHeaderRight);
+}))<GlobalHeaderRightProps>(GlobalHeaderRight);

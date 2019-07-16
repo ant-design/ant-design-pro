@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Tag, message } from 'antd';
-import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import groupBy from 'lodash/groupBy';
 import moment from 'moment';
@@ -8,7 +7,7 @@ import moment from 'moment';
 import { NoticeItem } from '@/models/global';
 import NoticeIcon from '../NoticeIcon';
 import { CurrentUser } from '@/models/user';
-import { ConnectProps, ConnectState } from '@/models/connect';
+import { connect, ConnectProps } from '@/models/connect';
 import styles from './index.less';
 
 export interface GlobalHeaderRightProps extends ConnectProps {
@@ -145,10 +144,10 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
   }
 }
 
-export default connect(({ user, global, loading }: ConnectState) => ({
+export default connect(({ user, global, loading }) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
   fetchingMoreNotices: loading.effects['global/fetchMoreNotices'],
   fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
-}))(GlobalHeaderRight);
+}))<GlobalHeaderRightProps>(GlobalHeaderRight);

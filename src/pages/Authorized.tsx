@@ -1,11 +1,11 @@
 import React from 'react';
 import Redirect from 'umi/redirect';
-import { connect } from 'dva';
 import pathToRegexp from 'path-to-regexp';
 import Authorized from '@/utils/Authorized';
-import { ConnectProps, ConnectState, Route, UserModelState } from '@/models/connect';
+import { connect, ConnectProps, Route, UserModelState } from '@/models/connect';
 
 interface AuthComponentProps extends ConnectProps {
+  test: number;
   user: UserModelState;
 }
 
@@ -50,6 +50,6 @@ const AuthComponent: React.FC<AuthComponentProps> = ({
   );
 };
 
-export default connect(({ user }: ConnectState) => ({
+export default connect(({ user }) => ({
   user,
-}))(AuthComponent);
+}))<AuthComponentProps>(AuthComponent);

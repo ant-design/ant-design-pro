@@ -2,11 +2,10 @@ import { DefaultFooter, MenuDataItem, getMenuData, getPageTitle } from '@ant-des
 import DocumentTitle from 'react-document-title';
 import Link from 'umi/link';
 import React from 'react';
-import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 
 import SelectLang from '@/components/SelectLang';
-import { ConnectProps, ConnectState } from '@/models/connect';
+import { connect, ConnectProps } from '@/models/connect';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
 
@@ -60,6 +59,6 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
   );
 };
 
-export default connect(({ settings }: ConnectState) => ({
+export default connect(({ settings }) => ({
   ...settings,
-}))(UserLayout);
+}))<UserLayoutProps>(UserLayout);

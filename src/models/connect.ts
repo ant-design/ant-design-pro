@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { EffectsCommandMap } from 'dva';
+import { connect as DvaConnect, EffectsCommandMap } from 'dva';
 import { MenuDataItem } from '@ant-design/pro-layout';
 import { RouterTypes } from 'umi';
 import { GlobalModelState } from './global';
@@ -52,3 +52,21 @@ export interface Route extends MenuDataItem {
 export interface ConnectProps<T = {}> extends Partial<RouterTypes<Route, T>> {
   dispatch?: Dispatch;
 }
+
+type AnyComponentClass<P = {}, S = any> = React.ComponentClass<P, S> | React.FunctionComponent<P>;
+
+/**
+ * @type P: props
+ * @type R: without `Partial<>`
+ */
+type ConnectType = <S>(
+  f: (state: ConnectState) => S,
+) => <P, R extends boolean = true>(
+  c: AnyComponentClass<any>,
+) => React.FunctionComponent<
+  R extends false
+    ? Partial<Omit<P, keyof ConnectProps | keyof S>>
+    : Omit<P, keyof ConnectProps | keyof S>
+>;
+
+export const connect: ConnectType = DvaConnect as any;

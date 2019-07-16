@@ -11,12 +11,11 @@ import ProLayout, {
 } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
 import Link from 'umi/link';
-import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import { ConnectState, Dispatch } from '@/models/connect';
+import { connect, Dispatch } from '@/models/connect';
 import { isAntDesignPro } from '@/utils/utils';
 import logo from '../assets/logo.svg';
 
@@ -137,7 +136,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   );
 };
 
-export default connect(({ global, settings }: ConnectState) => ({
+export default connect(({ global, settings }) => ({
   collapsed: global.collapsed,
   settings,
-}))(BasicLayout);
+}))<BasicLayoutProps>(BasicLayout);

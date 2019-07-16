@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { Subscription } from 'dva';
 
-import { Effect } from './connect.d';
+import { Effect } from './connect';
 import { NoticeIconData } from '@/components/NoticeIcon';
 import { queryNotices } from '@/services/user';
 
