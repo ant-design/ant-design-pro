@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Card, Button, Form, Icon, Input, Popover, BackTop, message, Select} from 'antd';
+import {Card, Button, Form, Icon, Input, Popover, message, Select} from 'antd';
 import router from 'umi/router';
 import {connect} from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
@@ -150,18 +150,6 @@ class ApiUpdate extends PureComponent {
     );
   };
 
-  resizeFooterToolbar = () => {
-    requestAnimationFrame(() => {
-      const sider = document.querySelectorAll('.ant-layout-sider')[0];
-      if (sider) {
-        const width = `calc(100% - ${sider.style.width})`;
-        const {width: stateWidth} = this.state;
-        if (stateWidth !== width) {
-          this.setState({width});
-        }
-      }
-    });
-  };
 
   validate = () => {
     const {
@@ -209,6 +197,20 @@ class ApiUpdate extends PureComponent {
         {item.itemValue}
       </Option>
     ));
+  };
+
+
+  resizeFooterToolbar = () => {
+    requestAnimationFrame(() => {
+      const sider = document.querySelectorAll('.ant-layout-sider')[0];
+      if (sider) {
+        const width = `calc(100% - ${sider.style.width})`;
+        const {width: stateWidth} = this.state;
+        if (stateWidth !== width) {
+          this.setState({width});
+        }
+      }
+    });
   };
 
   render() {
@@ -313,38 +315,32 @@ class ApiUpdate extends PureComponent {
             <Form.Item label={fieldLabels.extReqOne} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extReqOne', {
                 initialValue: extReqOne,
-                rules: [{required: true, message: 'Please input extReqOne'}],
               })(<Input addonBefore={orderExtSel} placeholder="Please input extReqOne" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.extReqTwo} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extReqTwo', {
                 initialValue: extReqTwo,
-                rules: [{required: true, message: 'Please input extReqTwo'}],
               })(<Input addonBefore={orderExtSelTwo} placeholder="Please input extReqTwo" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.extReqThree} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extReqThree', {
                 initialValue: extReqThree,
-                rules: [{required: true, message: 'Please input extReqThree'}],
               })(<Input addonBefore={orderExtSelThree} placeholder="Please input extReqThree" />)}
             </Form.Item>
 
             <Form.Item label={fieldLabels.extRspOne} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extRspOne', {
                 initialValue: extRspOne,
-                rules: [{required: true, message: 'Please input extRspOne'}],
               })(<Input addonBefore={orderExtRspSelOne} placeholder="Please input extRspOne" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.extRspTwo} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extRspTwo', {
                 initialValue: extRspTwo,
-                rules: [{required: true, message: 'Please input extRspTwo'}],
               })(<Input addonBefore={orderExtRspSelTwo} placeholder="Please input extRspTwo" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.extRspThree} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extRspThree', {
                 initialValue: extRspThree,
-                rules: [{required: true, message: 'Please input extRspThree'}],
               })(<Input addonBefore={orderExtRspSelThree} placeholder="Please input extRspThree" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.logLevel} {...tailFormItemLayout}>
@@ -356,7 +352,7 @@ class ApiUpdate extends PureComponent {
 
             <Form.Item label={fieldLabels.secretFlag} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.secretFlag', {
-                initialValue: apiOrderExt?apiOrderExt.secretFlag:"0",
+                initialValue: apiOrderExt?apiOrderExt.secretFlag:"1",
                 rules: [{required: true, message: 'Please select secret flag.'}],
               })(<SelectView javaCode="apiOrderExt" javaKey="secret_flag" />)}
             </Form.Item>
