@@ -347,17 +347,16 @@ class ApiUpdate extends PureComponent {
                 rules: [{required: true, message: 'Please input extRspThree'}],
               })(<Input addonBefore={orderExtRspSelThree} placeholder="Please input extRspThree" />)}
             </Form.Item>
-
             <Form.Item label={fieldLabels.logLevel} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.logLevel', {
-                initialValue: apiOrderExt?apiOrderExt.logLevel:null,
+                initialValue: apiOrderExt?apiOrderExt.logLevel:"1",
                 rules: [{required: true, message: 'Please select log level.'}],
               })(<SelectView javaCode="apiOrderExt" javaKey="log_level" />)}
             </Form.Item>
 
             <Form.Item label={fieldLabels.secretFlag} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.secretFlag', {
-                initialValue: apiOrderExt?apiOrderExt.secretFlag:null,
+                initialValue: apiOrderExt?apiOrderExt.secretFlag:"0",
                 rules: [{required: true, message: 'Please select secret flag.'}],
               })(<SelectView javaCode="apiOrderExt" javaKey="secret_flag" />)}
             </Form.Item>
