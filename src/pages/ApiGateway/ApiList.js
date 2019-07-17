@@ -229,9 +229,9 @@ class TableList extends PureComponent {
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
             <Menu.Item key="handleUpdate">修改</Menu.Item>
-            <Menu.Item key="handleUpdateDoc">文档</Menu.Item>
+            <Menu.Item key="handleUpdateDoc">文档编辑</Menu.Item>
             <Menu.Item key="handleDebug">调试</Menu.Item>
-            <Menu.Item key="handleLog">日志</Menu.Item>
+            <Menu.Item key="handleLog">日志配置</Menu.Item>
             {status === API_STATUS.ONLINE ? <Menu.Item key="handleOffline">下线</Menu.Item> : null}
             {status === API_STATUS.OFFLINE ? <Menu.Item key="handleDelete">删除</Menu.Item> : null}
           </Menu>
