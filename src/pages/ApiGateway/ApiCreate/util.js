@@ -188,12 +188,12 @@ export function getPayloadForApiLog(oldApiService,values) {
   const {extReqOnePrefix,extReqTwoPrefix,extReqThreePrefix,extRspOnePrefix,extRspTwoPrefix,extRspThreePrefix}= apiOrderExt;
   const apiOrderExtAdd={...apiOrderExt};
 
-  apiOrderExtAdd.extReq1 = `${extReqOnePrefix}::${apiOrderExt.extReqOne}`;
-  apiOrderExtAdd.extReq2 = `${extReqTwoPrefix}::${apiOrderExt.extReqTwo}`;
-  apiOrderExtAdd.extReq3 = `${extReqThreePrefix}::${apiOrderExt.extReqThree}`;
-  apiOrderExtAdd.extRsp1 = `${extRspOnePrefix}::${apiOrderExt.extRspOne}`;
-  apiOrderExtAdd.extRsp2 = `${extRspTwoPrefix}::${apiOrderExt.extRspTwo}`;
-  apiOrderExtAdd.extRsp3 = `${extRspThreePrefix}::${apiOrderExt.extReqThree}`;
+  apiOrderExtAdd.extReq1 = apiOrderExt.extReqOne?`${extReqOnePrefix}::${apiOrderExt.extReqOne}`:'';
+  apiOrderExtAdd.extReq2 = apiOrderExt.extReqTwo?`${extReqTwoPrefix}::${apiOrderExt.extReqTwo}`:'';
+  apiOrderExtAdd.extReq3 = apiOrderExt.extReqThree?`${extReqThreePrefix}::${apiOrderExt.extReqThree}`:'';
+  apiOrderExtAdd.extRsp1 = apiOrderExt.extRspOne?`${extRspOnePrefix}::${apiOrderExt.extRspOne}`:'';
+  apiOrderExtAdd.extRsp2 = apiOrderExt.extRspTwo?`${extRspTwoPrefix}::${apiOrderExt.extRspTwo}`:'';
+  apiOrderExtAdd.extRsp3 = apiOrderExt.extRspThree?`${extRspThreePrefix}::${apiOrderExt.extRspThree}`:'';
 
   if(apiService.apiOrderExt){
     apiOrderExtAdd.apiId=apiService.apiOrderExt.apiId;

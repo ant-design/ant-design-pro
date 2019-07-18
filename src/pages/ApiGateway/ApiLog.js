@@ -220,30 +220,30 @@ class ApiUpdate extends PureComponent {
     } = this.props;
     const {width, apiOrderExt} = this.state;
 
-    let extReqOnePrefix='';
+    let extReqOnePrefix='body';
     let extReqOne='';
-    let extReqTwoPrefix='';
+    let extReqTwoPrefix='body';
     let extReqTwo='';
-    let extReqThreePrefix='';
+    let extReqThreePrefix='body';
     let extReqThree='';
-    let extRspOnePrefix='';
+    let extRspOnePrefix='body';
     let extRspOne='';
-    let extRspTwoPrefix='';
+    let extRspTwoPrefix='body';
     let extRspTwo='';
-    let extRspThreePrefix='';
+    let extRspThreePrefix='body';
     let extRspThree='';
     if (apiOrderExt) {
-      extReqOnePrefix = apiOrderExt.extReq1 ? apiOrderExt.extReq1.split('::')[0] : "";
+      extReqOnePrefix = apiOrderExt.extReq1 ? apiOrderExt.extReq1.split('::')[0] : extReqOnePrefix;
       extReqOne = apiOrderExt.extReq1 ? apiOrderExt.extReq1.split('::')[1] : "";
-      extReqTwoPrefix = apiOrderExt.extReq2 ? apiOrderExt.extReq2.split('::')[0] : "";
+      extReqTwoPrefix = apiOrderExt.extReq2 ? apiOrderExt.extReq2.split('::')[0] :extReqTwoPrefix;
       extReqTwo = apiOrderExt.extReq2 ? apiOrderExt.extReq2.split('::')[1] : "";
-      extReqThreePrefix = apiOrderExt.extReq3 ? apiOrderExt.extReq3.split('::')[0] : "";
+      extReqThreePrefix = apiOrderExt.extReq3 ? apiOrderExt.extReq3.split('::')[0] : extReqThreePrefix;
       extReqThree = apiOrderExt.extReq3 ? apiOrderExt.extReq3.split('::')[1] : "";
-      extRspOnePrefix = apiOrderExt.extRsp1 ? apiOrderExt.extRsp1.split('::')[0] : "";
+      extRspOnePrefix = apiOrderExt.extRsp1 ? apiOrderExt.extRsp1.split('::')[0] : extRspOnePrefix;
       extRspOne = apiOrderExt.extRsp1 ? apiOrderExt.extRsp1.split('::')[1] : "";
-      extRspTwoPrefix = apiOrderExt.extRsp2 ? apiOrderExt.extRsp2.split('::')[0] : "";
+      extRspTwoPrefix = apiOrderExt.extRsp2 ? apiOrderExt.extRsp2.split('::')[0] : extRspTwoPrefix;
       extRspTwo = apiOrderExt.extRsp2 ? apiOrderExt.extRsp2.split('::')[1] : "";
-      extRspThreePrefix = apiOrderExt.extRsp3 ? apiOrderExt.extRsp3.split('::')[0] : "";
+      extRspThreePrefix = apiOrderExt.extRsp3 ? apiOrderExt.extRsp3.split('::')[0] : extRspThreePrefix;
       extRspThree = apiOrderExt.extRsp3 ? apiOrderExt.extRsp3.split('::')[1] : "";
     }
 
