@@ -233,6 +233,7 @@ class ApiUpdate extends PureComponent {
     let extRspThreePrefix='body';
     let extRspThree='';
     if (apiOrderExt) {
+
       extReqOnePrefix = apiOrderExt.extReq1 ? apiOrderExt.extReq1.split('::')[0] : extReqOnePrefix;
       extReqOne = apiOrderExt.extReq1 ? apiOrderExt.extReq1.split('::')[1] : "";
       extReqTwoPrefix = apiOrderExt.extReq2 ? apiOrderExt.extReq2.split('::')[0] :extReqTwoPrefix;

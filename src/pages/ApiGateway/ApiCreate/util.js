@@ -196,6 +196,7 @@ export function getPayloadForApiLog(oldApiService,values) {
   apiOrderExtAdd.extRsp3 = apiOrderExt.extRspThree?`${extRspThreePrefix}::${apiOrderExt.extRspThree}`:'';
 
   if(apiService.apiOrderExt){
+
     apiOrderExtAdd.apiId=apiService.apiOrderExt.apiId;
     apiOrderExtAdd.apiOrderExtId=apiService.apiOrderExt.apiOrderExtId;
   }
