@@ -8,11 +8,12 @@ export const dva = {
   },
 };
 
-let authRoutes = null;
+let authRoutes = {};
 
 function ergodicRoutes(routes, authKey, authority) {
   routes.forEach(element => {
     if (element.path === authKey) {
+      if (!element.authority) element.authority = []; // eslint-disable-line
       Object.assign(element.authority, authority || []);
     } else if (element.routes) {
       ergodicRoutes(element.routes, authKey, authority);
@@ -28,11 +29,17 @@ export function patchRoutes(routes) {
   window.g_routes = routes;
 }
 
+// https://umijs.org/zh/guide/runtime-config.html#render
 export function render(oldRender) {
   fetch('/api/auth_routes')
     .then(res => res.json())
-    .then(ret => {
-      authRoutes = ret;
-      oldRender();
-    });
+    .then(
+      ret => {
+        authRoutes = ret;
+        oldRender();
+      },
+      () => {
+        oldRender();
+      }
+    );
 }
