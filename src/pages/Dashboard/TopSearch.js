@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import { Row, Col, Table, Tooltip, Card, Icon } from 'antd';
 import { FormattedMessage } from 'umi-plugin-react/locale';
-import Trend from '@/components/Trend';
 import numeral from 'numeral';
+import Trend from '@/components/Trend';
 import styles from './Analysis.less';
 import NumberInfo from '@/components/NumberInfo';
 import { MiniArea } from '@/components/Charts';
