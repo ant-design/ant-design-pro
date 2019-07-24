@@ -16,6 +16,27 @@ export function conversion(item){
 let innerStartIndex=0;
 let innerPrivilegeRoleId=0;
 
+export const allRoleList=[
+  {
+    "roleId": 1,
+    "roleName": "admin",
+    "remark": "admin",
+    "status": STATUS.A,
+  },
+  {
+    "roleId": 2,
+    "roleName": "manager",
+    "remark": "",
+    "status": STATUS.A,
+  },
+  {
+    "roleId": 3,
+    "roleName": "user",
+    "remark": "",
+    "status": STATUS.A,
+  },
+];
+
 export function toSimulatePrivilege(privileges,routes,isInit,isFlat,parentPrivilege){
   if(isInit){
     innerStartIndex=0;
