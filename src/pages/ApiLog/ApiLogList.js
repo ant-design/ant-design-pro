@@ -81,11 +81,13 @@ class TableList extends PureComponent {
       payload: params,
       onConversionData: undefined,
       callback: resp => {
+
         const {data}= resp;
         const {records}= data;
         const targetOrgs = records.map(
           (item)=>(item.id)
         );
+        console.log("targetOrgs",targetOrgs);
         this.setState({targetOrgs});
       }
     });
@@ -292,7 +294,7 @@ class TableList extends PureComponent {
     e.preventDefault();
 
     const {dispatch, form} = this.props;
-    const {targetOrgs} = this.props;
+    const {targetOrgs} = this.state;
 
     form.validateFields((err, fieldsValue) => {
       if (err) return;
