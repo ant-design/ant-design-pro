@@ -3,7 +3,6 @@ import {Card, Button, Form, Input, Tabs, BackTop, message, Row, Col, Icon, Popov
 import {connect} from 'dva';
 import ReactJson from 'react-json-view'
 import {extend as requestExtend} from 'umi-request';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import ApiDocTableForm from './ApiDocTableForm';
 import styles from './style.less';
 import {getPayloadForApiDebug, getPayloadForReq} from './ApiCreate/util';
@@ -617,7 +616,7 @@ class ApiDebug extends PureComponent {
       wrapperCol: { span: 16 },
     };
     return (
-      <PageHeaderWrapper>
+      <div>
         <Card title="" className={styles.card} bordered={false}>
           <Row>
             <Col
@@ -759,7 +758,7 @@ class ApiDebug extends PureComponent {
         </Card>
 
         <BackTop />
-      </PageHeaderWrapper>
+      </div>
     );
   }
 }

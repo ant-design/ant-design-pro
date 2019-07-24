@@ -1,0 +1,654 @@
+import React, { PureComponent} from 'react';
+import {connect} from 'dva';
+import moment from 'moment';
+import {
+  Button,
+  Card,
+  Col,
+  Drawer,
+  Form,
+  Icon,
+  Input,
+  Row,
+  Select,
+  Table,
+  Spin,
+  DatePicker
+} from 'antd';
+import debounce from 'lodash/debounce';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import styles from '../ApiGateway/ApiList.less';
+import {getItems } from '@/utils/masterData';
+import Detail from './Detail';
+import {getUserId} from "../../utils/authority";
+import { getTimeDistance } from '@/utils/utils';
+
+const { RangePicker } = DatePicker;
+const FormItem = Form.Item;
+const { Option } = Select;
+const getValue = obj =>
+  Object.keys(obj)
+    .map(key => obj[key])
+    .join(',');
+
+/* eslint react/no-multi-comp:0 */
+@connect(({ apiLogModel, apiGatewayModel,loading }) => ({
+  apiLogModel,
+  apiGatewayModel,
+  loading: loading.models.apiLogModel,
+}))
+@Form.create()
+class TableList extends PureComponent {
+
+  constructor(props){
+    super(props);
+    this.lastFetchId = 0;
+    this.fetchApi = debounce(this.fetchApi, 800);
+  }
+
+
+  state = {
+    expandForm: false,
+    selectedRow: {},
+    formValues: {},
+    pagination: {
+      pageNo: 1,
+      pageSize: 10,
+    },
+    filtersArg: {},
+    sorter: {},
+    drawerVisible: false,
+    logList :[],
+    data: [],
+    value: [],
+    fetching: false,
+    rangePickerValue: getTimeDistance('today')
+  };
+
+  componentWillMount() {
+    const { dispatch } = this.props;
+    const payload = {};
+    payload.data = {};
+    payload.data.info = {
+      pageNo: 1,
+      pageSize: 10
+    };
+    dispatch({
+      type: 'apiLogModel/logList',
+      payload,
+      callback:resp=>{
+        const {data} = resp;
+        const {records,pagination} = data;
+        this.setState({
+          logList:records,
+          pagination
+        });
+      }
+    });
+
+  }
+
+  getOptionMaster(javaCode, javaKey) {
+    const items = getItems(javaCode, javaKey);
+    return this.getOptionWhithList(items);
+  }
+
+  getOptionWhithList = list => {
+    if (!list || list.length < 1) {
+      return (
+        <Option key={0} value={0}>
+          没有找到选项
+        </Option>
+      );
+    }
+    return list.map(item => (
+      <Option key={item.itemCode} value={item.itemCode}>
+        {item.itemValue}
+      </Option>
+    ));
+  };
+
+  getRowByKey(key, newData) {
+    const { logList } = this.state;
+    return (newData || logList).filter(item => item.orderId === key)[0];
+  }
+
+
+  onExpand = (expanded,record) =>{
+    console.log("onExpand1111",record);
+    const { dispatch } = this.props;
+    const { orderId,orderCode } = record;
+    const { logList } = this.state;
+    const newData = logList.map(item => ({ ...item }));
+
+    const target = this.getRowByKey(orderId, newData);
+    // console.log("onExpand",target);
+    if (target && expanded) {
+
+      if( target.expanded ){
+        console.log("");
+      }else{
+        const payload = {};
+        payload.orderCode = orderCode;
+        dispatch({
+          type: 'apiLogModel/logItemList',
+          payload,
+          callback :resp=>{
+            // console.log("onExpand",resp);
+            const {data} = resp;
+            const {intfOrderItems} = data;
+            target.logItemList= intfOrderItems;
+            target.expanded = true;
+            this.setState({ logList: newData });
+          }
+        });
+      }
+
+    }
+
+  }
+
+  expandedRowRender = (exRecord) => {
+
+    console.log("expandedRowRender",exRecord);
+    const {logItemList} = exRecord;
+    const columns = [
+      {
+        title: 'orderItemCode',
+        dataIndex: 'orderItemCode',
+        render: (text, record) =>
+          <a onClick={() => this.handleDetail(record)}>{text}</a>,
+      },
+      {
+        title: 'reqTime',
+        dataIndex: 'reqTime',
+        sorter: true,
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      },
+      {
+        title: 'respTime',
+        dataIndex: 'respTime',
+        sorter: true,
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      },
+    ];
+
+    return (<Table columns={columns} size="small" dataSource={logItemList} pagination={false} />);
+
+  };
+
+  /**
+   * {status: Array(2)} 转化为{status: "1,2"}
+   */
+  conversionFilter = filtersArg => {
+    return Object.keys(filtersArg).reduce((obj, key) => {
+      const newObj = { ...obj };
+      newObj[key] = getValue(filtersArg[key]);
+      return newObj;
+    }, {});
+  };
+
+  handleFormReset = () => {
+    const { form, dispatch } = this.props;
+    form.resetFields();
+    this.setState({
+      formValues: {},
+    });
+
+    const payload = {};
+    payload.data = {};
+    payload.data.info = {
+      pageNo: 1,
+      pageSize: 10
+    };
+    dispatch({
+      type: 'apiLogModel/logList',
+      payload,
+      callback:resp=>{
+        const {data} = resp;
+        const {records,pagination} = data;
+        this.setState({
+          logList:records,
+          pagination
+        });
+      }
+    });
+  };
+
+  toggleForm = () => {
+    const { expandForm } = this.state;
+    this.setState({
+      expandForm: !expandForm,
+    });
+  };
+
+  handleChange = value => {
+    this.setState({
+      value,
+      data: [],
+      fetching: false,
+    });
+  };
+
+  fetchApi = (value) => {
+    this.lastFetchId += 1;
+    this.setState({ data: [], fetching: true });
+    const {dispatch} = this.props;
+    const userId = getUserId();
+    const payload = {userId};
+    payload.data = {};
+    payload.data.info = {
+      pageNo: 1,
+      pageSize: 10,
+      name:value
+    };
+    dispatch({
+      type: 'apiLogModel/apiListBySearch',
+      payload,
+      callback: resp => {
+        if(resp.code === '200'){
+          const {data} = resp;
+          const {records} = data;
+          const newData = records.map(api => ({
+            text: `${api.name}`,
+            value: api.apiId,
+          }));
+          this.setState({ data:newData, fetching: false });
+        }
+      }
+    });
+  };
+
+  handleSearch = e => {
+    e.preventDefault();
+
+    const { dispatch, form } = this.props;
+
+    form.validateFields((err, fieldsValue) => {
+      if (err) return;
+
+      const values = {
+        ...fieldsValue,
+        // updatedTime: fieldsValue.updatedTime && fieldsValue.updatedTime.valueOf(),
+      };
+      console.log(fieldsValue, values);
+      this.setState({
+        formValues: values,
+      });
+
+      const {requestTime} = values;
+      const requestStartTime = requestTime[0].format('YYYY-MM-DD HH:mm:ss');
+      const requestEndTime = requestTime[1].format('YYYY-MM-DD HH:mm:ss');
+      const { filtersArg, sorter } = this.state;
+      const filters = this.conversionFilter(filtersArg);
+      const payload = {};
+      payload.data = {};
+      payload.data.info = {
+        pageNo: 1,
+        pageSize: 10,
+        ...filters,
+        ...values,
+        ...sorter,
+        requestStartTime,
+        requestEndTime
+      };
+      dispatch({
+        type: 'apiLogModel/logList',
+        payload,
+        callback:resp=>{
+          const {data} = resp;
+          const {records,pagination} = data;
+          this.setState({
+            logList:records,
+            pagination
+          });
+        }
+      });
+    });
+  };
+
+  handleTableChange = (paginations, filtersArg, sorter) => {
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
+
+    const {requestTime} = formValues;
+    const requestStartTime = requestTime[0].format('YYYY-MM-DD HH:mm:ss');
+    const requestEndTime = requestTime[1].format('YYYY-MM-DD HH:mm:ss');
+
+    this.setState({ pagination:paginations, filtersArg, sorter });
+    const filters = this.conversionFilter(filtersArg);
+    const params = {
+      pageNo: paginations.current,
+      pageSize: paginations.pageSize,
+      ...formValues,
+      ...filters,
+      requestStartTime,
+      requestEndTime
+    };
+    if (sorter.field) {
+      params.sorter = `${sorter.field}_${sorter.order}`;
+    }
+
+    const payload = {};
+    payload.data = {};
+    payload.data.info = {
+      pageNo: 1,
+      pageSize: 10,
+      ...params
+    };
+    payload.data.info.pageNo = payload.data.info.pageNo ? payload.data.info.pageNo : 1;
+    dispatch({
+      type: 'apiLogModel/logList',
+      payload,
+      callback:resp=>{
+        const {data} = resp;
+        const {records,pagination} = data;
+        this.setState({
+          logList:records,
+          pagination
+        });
+      }
+    });
+  };
+
+  handleDrawerVisible = (row, flag) => {
+    this.setState({
+      selectedRow: row,
+      drawerVisible: !!flag,
+    });
+  };
+
+  handleDetail=(record)=>{
+    this.handleDrawerVisible(record,true);
+  }
+
+  onDrawerClose=()=>{
+    this.handleDrawerVisible(null,false);
+  }
+
+
+  isActive = type => {
+    const { rangePickerValue } = this.state;
+    const value = getTimeDistance(type);
+    if (!rangePickerValue[0] || !rangePickerValue[1]) {
+      return '';
+    }
+    if (
+      rangePickerValue[0].isSame(value[0], 'day') &&
+      rangePickerValue[1].isSame(value[1], 'day')
+    ) {
+      return styles.currentDate;
+    }
+    return '';
+  };
+
+  selectDate = type => {
+    this.setState({
+      rangePickerValue: getTimeDistance(type),
+    });
+  };
+
+  handleRangePickerChange = rangePickerValue => {
+    this.setState({
+      rangePickerValue,
+    });
+  };
+
+  renderSimpleForm() {
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
+    const { fetching, data, value, rangePickerValue } = this.state;
+    return (
+      <Form onSubmit={this.handleSearch} layout="inline">
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="transactionId">
+              {getFieldDecorator('transactionId')(<Input placeholder="请输入" />)}
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="appKey">
+              {getFieldDecorator('appKey')(<Input placeholder="请输入" />)}
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="apiName">
+              {getFieldDecorator('apiId')(
+                <Select
+                  showSearch="true"
+                  labelInValue
+                  value={value}
+                  placeholder="Select users"
+                  notFoundContent={fetching ? <Spin size="small" /> : null}
+                  filterOption={false}
+                  onSearch={this.fetchApi}
+                  onChange={this.handleChange}
+                  style={{ width: '100%' }}
+                >
+                  {data.map(d => (
+                    <Option key={d.value}>{d.text}</Option>
+                  ))}
+                </Select>
+              )}
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="requestTime">
+              <div className={styles.salesExtraWrap}>
+                <div className={styles.salesExtra}>
+                  <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
+                    All Day
+                  </a>
+                  <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
+                    All Week
+                  </a>
+                  <a className={this.isActive('month')} onClick={() => this.selectDate('month')}>
+                    All Month
+                  </a>
+                  <a className={this.isActive('year')} onClick={() => this.selectDate('year')}>
+                    All Year
+                  </a>
+                </div>
+                {getFieldDecorator('requestTime',{
+                  initialValue:rangePickerValue
+                })(<RangePicker
+                  onChange={this.handleRangePickerChange}
+                  style={{ width: 256 }}
+                />)}
+              </div>
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <span className={styles.submitButtons}>
+              <Button type="primary" htmlType="submit">
+                查询
+              </Button>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset} htmlType="button">
+                重置
+              </Button>
+              <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+                展开 <Icon type="down" />
+              </a>
+            </span>
+          </Col>
+        </Row>
+      </Form>
+    );
+  }
+
+  renderAdvancedForm() {
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
+    const { fetching, data, value,rangePickerValue } = this.state;
+
+    const orderExtSel =
+      getFieldDecorator('extFlag', {
+      })(<Select style={{width: 95}}>{this.getOptionMaster("apiOrderExt", "ext_flag")}</Select>);
+    return (
+      <Form onSubmit={this.handleSearch} layout="inline">
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="transactionId">
+              {getFieldDecorator('transactionId')(<Input placeholder="请输入" />)}
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="appKey">
+              {getFieldDecorator('appKey')(<Input placeholder="请输入" />)}
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="apiName">
+              {getFieldDecorator('apiId')(
+                <Select
+                  showSearch="true"
+                  labelInValue
+                  value={value}
+                  placeholder="Select users"
+                  notFoundContent={fetching ? <Spin size="small" /> : null}
+                  filterOption={false}
+                  onSearch={this.fetchApi}
+                  onChange={this.handleChange}
+                  style={{ width: '100%' }}
+                >
+                  {data.map(d => (
+                    <Option key={d.value}>{d.text}</Option>
+                  ))}
+                </Select>
+              )}
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="requestTime">
+              <div className={styles.salesExtraWrap}>
+                <div className={styles.salesExtra}>
+                  <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
+                    All Day
+                  </a>
+                  <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
+                    All Week
+                  </a>
+                  <a className={this.isActive('month')} onClick={() => this.selectDate('month')}>
+                    All Month
+                  </a>
+                  <a className={this.isActive('year')} onClick={() => this.selectDate('year')}>
+                    All Year
+                  </a>
+                </div>
+                {getFieldDecorator('requestTime',{
+                  initialValue:rangePickerValue
+                })(<RangePicker
+                  onChange={this.handleRangePickerChange}
+                  style={{ width: 256 }}
+                />)}
+              </div>
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="extSelect">
+              {getFieldDecorator('extInput', {
+              })(<Input addonBefore={orderExtSel} placeholder="Please input extInput" />)}
+            </FormItem>
+          </Col>
+        </Row>
+        <div style={{ overflow: 'hidden' }}>
+          <div style={{ float: 'right', marginBottom: 24 }}>
+            <Button type="primary" htmlType="submit">
+              查询
+            </Button>
+            <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset} htmlType="button">
+              重置
+            </Button>
+            <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+              收起 <Icon type="up" />
+            </a>
+          </div>
+        </div>
+      </Form>
+    );
+  }
+
+  renderForm() {
+    const { expandForm } = this.state;
+    return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
+  }
+
+  render() {
+
+    const {loading} = this.props;
+    const {logList,pagination,drawerVisible,selectedRow} = this.state;
+    const intfOrderItemMessages = selectedRow?selectedRow.intfOrderItemMessages:[];
+    const paginationProps = {
+      showSizeChanger: true,
+      showQuickJumper: true,
+      ...pagination,
+    };
+
+    const columns = [
+      {
+        title: 'orderCode',
+        dataIndex: 'orderCode',
+      },
+      {
+        title: 'transactionId',
+        dataIndex: 'transactionId',
+      },
+      {
+        title: 'status',
+        dataIndex: 'statusName',
+      },
+      {
+        title: 'sourceType',
+        dataIndex: 'sourceTypeName',
+      },
+      {
+        title: 'apiId',
+        dataIndex: 'apiId',
+      },
+      {
+        title: 'appKey',
+        dataIndex: 'appKey',
+      },
+      {
+        title: 'requestTime',
+        dataIndex: 'requestTime',
+        sorter: true,
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      },
+    ];
+
+    return (
+      <PageHeaderWrapper showBreadcrumb style={{ height: '50px' }}>
+        <Card bordered={false}>
+          <div className={styles.tableList}>
+            <div className={styles.tableListForm}>{this.renderForm()}</div>
+            <Table
+              loading={loading}
+              size="small"
+              columns={columns}
+              expandedRowRender={(record)=>this.expandedRowRender(record)}
+              onExpand={(expanded, record)=>this.onExpand(expanded,record)}
+              dataSource={logList}
+              pagination={paginationProps}
+              onChange={this.handleTableChange}
+              defaultExpandAllRows={false}
+            />
+            <Drawer
+              width={750}
+              placement="right"
+              closable
+              onClose={this.onDrawerClose}
+              visible={drawerVisible}
+            >
+              <Detail orderItem={intfOrderItemMessages} />
+            </Drawer>
+          </div>
+        </Card>
+      </PageHeaderWrapper>
+    );
+  }
+}
+
+export default TableList;

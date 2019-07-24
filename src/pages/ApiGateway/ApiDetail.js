@@ -1,22 +1,22 @@
-import React, { PureComponent } from 'react';
-import { Card, Button, Form, Table, Tabs, BackTop, Badge, Tag, Icon } from 'antd';
+import React, {PureComponent} from 'react';
+import {Card, Button, Form, Table, Tabs, BackTop, Badge, Tag, Icon} from 'antd';
 import router from 'umi/router';
-import { connect } from 'dva';
+import {connect} from 'dva';
 import FooterToolbar from '@/components/FooterToolbar';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Ellipsis from '@/components/Ellipsis';
 import styles from './style.less';
-import { conversionAttr } from './ApiCreate/util';
-import { getUserId } from '@/utils/authority';
+import {conversionAttr} from './ApiCreate/util';
+import {getUserId} from '@/utils/authority';
 
 import DescriptionList from '@/components/DescriptionList';
-import { getGroupName, getItemValue, getName } from '@/utils/masterData';
+import {getGroupName, getItemValue, getName} from '@/utils/masterData';
 import constants from '@/utils/constUtil';
 
 const {CALL_POINT} = constants;
 
-const { TabPane } = Tabs;
-const { Description } = DescriptionList;
+const {TabPane} = Tabs;
+const {Description} = DescriptionList;
 
 const requestHeaderFlag = 'requestHeader';
 const requestBodyFlag = 'requestBody';
@@ -42,8 +42,8 @@ const fieldLabels = {
     reqPath: 'Request Path',
     protocol: 'protocol',
     reqMethod: 'Request Method',
-    connectTimeout: 'Connect Timeout（s）',
-    socketTimeout: 'Socket Timeout（s）',
+    connectTimeout: 'Connect Timeout（ms）',
+    socketTimeout: 'Socket Timeout（ms）',
     orgId: 'Org',
     authType: 'Auth type',
   },
@@ -67,17 +67,28 @@ const fieldLabels = {
     contentType: 'Content-Type',
     url: 'URL',
   },
+  log: {
+    pathType: 'pathType',
+    extReqOne: 'extReqOne',
+    extReqTwo: 'extReqTwo',
+    extReqThree: 'extReqThree',
+    extRspOne: 'extRspOne',
+    extRspTwo: 'extRspTwo',
+    extRspThree: 'extRspThree',
+    logLevel: 'logLevel',
+    secretFlag: 'secretFlag',
+  }
 };
 const expandedRowRender = (record) => {
-  const {backendType,adapterAttrs} = record;
+  const {backendType, adapterAttrs} = record;
 
   const columns = [
     {
       title: 'Attr Spec Code',
       dataIndex: 'attrSpecCode',
-      width:'20%',
-      render:(text)=>{
-        return (<div style={{textAlign:'left',fontWeight: 'bold'}}>{text}:</div>);
+      width: '20%',
+      render: (text) => {
+        return (<div style={{textAlign: 'left', fontWeight: 'bold'}}>{text}:</div>);
       }
     },
     {
@@ -85,7 +96,7 @@ const expandedRowRender = (record) => {
       dataIndex: 'attrValue',
     },
   ];
-  if(backendType !== CALL_POINT){
+  if (backendType !== CALL_POINT) {
     return (
       <Table
         showHeader={false}
@@ -115,6 +126,15 @@ const columns = [
   {
     title: 'Adapter',
     dataIndex: 'adapterSpecName',
+  },
+  {
+    title: 'Request Url',
+    dataIndex: 'url',
+    render: (value, row) => {
+      return (
+        `${row.url}${row.reqPath}`
+      )
+    }
   }
 ];
 
@@ -192,6 +212,16 @@ const columnsCode = [
     dataIndex: 'remark',
   },
 ];
+const columnsLog = [
+  {
+    title: 'Log Name',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Value',
+    dataIndex: 'remark',
+  },
+];
 
 // const tableData = [
 //   {
@@ -216,7 +246,7 @@ const columnsCode = [
 
 const statusMap = ['default', 'processing', 'success', 'default', 'error'];
 
-@connect(({ apiCreateModel, groupModel, orgModel }) => ({
+@connect(({apiCreateModel, groupModel, orgModel}) => ({
   apiService: apiCreateModel.apiService,
   groupList: groupModel.groupList,
   orgList: orgModel.orgList
@@ -235,6 +265,7 @@ class ApiDetail extends PureComponent {
     stateCodeSpec: [],
     busiCodeSpec: [],
     apiAttr: [],
+    apiOrderExtAttr: []
   };
 
   componentWillMount() {
@@ -243,20 +274,20 @@ class ApiDetail extends PureComponent {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resizeFooterToolbar, { passive: true });
+    window.addEventListener('resize', this.resizeFooterToolbar, {passive: true});
 
-    const { location, dispatch } = this.props;
-    const { state } = location;
+    const {location, dispatch} = this.props;
+    const {state} = location;
     // console.log("location state:",state);
-    const { apiId } = state || { apiId: 105 };
+    const {apiId} = state || {apiId: 105};
     // 分组列表
     dispatch({
       type: 'groupModel/allGroupList',
     });
-    const { userId } = getUserId();
+    const {userId} = getUserId();
     dispatch({
       type: 'orgModel/allOrgList',
-      payload: { orgType: '0,1', userId },
+      payload: {orgType: '0,1', userId},
     });
     // 请求获取apiInfo详情
     this.getApi(apiId);
@@ -267,10 +298,11 @@ class ApiDetail extends PureComponent {
   }
 
   getApi = apiId => {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     if (apiId !== -1) {
       const payload = {};
       payload.range = 1;
+      payload.option = 4;
       payload.data = {};
       payload.data.info = {};
       payload.data.info.apiId = apiId;
@@ -314,9 +346,9 @@ class ApiDetail extends PureComponent {
   //  设置apiInfo数据格式
   setBaseInfo = resp => {
 
-    const { data } = resp;
-    const { groupList, orgList } = this.props;
-    console.log("setBaseInfo",resp);
+    const {data} = resp;
+    const {groupList, orgList} = this.props;
+    console.log("setBaseInfo", resp);
     // 定义请求信息转化
     data.groupIdTitle = data.groupId ? getGroupName(groupList, data.groupId) : null;
     data.serviceTypeTitle = data.serviceType
@@ -330,13 +362,13 @@ class ApiDetail extends PureComponent {
 
     // 落地方服务信息数组转为对象
     const apiServiceBackend = data.apiServiceBackends.find(obj => obj.backendType === CALL_POINT);
-    const { apiServiceBackendAttrs } = apiServiceBackend;
+    const {apiServiceBackendAttrs} = apiServiceBackend;
     const conversionAttrObj = conversionAttr(apiServiceBackendAttrs);
     // const apiServiceBackendMembers = data.apiServiceBackends.filter(
     //   obj => obj.backendType !== CALL_POINT
     // );
     // 落地方服务信息转化
-    const apiServiceBackendFormat = { ...apiServiceBackend, ...conversionAttrObj };
+    const apiServiceBackendFormat = {...apiServiceBackend, ...conversionAttrObj};
     apiServiceBackendFormat.serviceTypeTitle = apiServiceBackendFormat.serviceType
       ? getItemValue('apiService', 'service_type', apiServiceBackendFormat.serviceType)
       : null;
@@ -412,10 +444,37 @@ class ApiDetail extends PureComponent {
     const urlSample = apiServiceDoc.urlSample ? apiServiceDoc.urlSample : '';
     const url = getItemValue('env', 'localhost', 'angentHost') + urlSample;
     const apiAttr = [
-      { name: fieldLabels.doc.protocol, remark: protocol },
-      { name: fieldLabels.doc.encodeFormat, remark: 'UTF8' },
-      { name: fieldLabels.doc.contentType, remark: 'application/json' },
-      { name: fieldLabels.doc.url, remark: url },
+      {name: fieldLabels.doc.protocol, remark: protocol},
+      {name: fieldLabels.doc.encodeFormat, remark: 'UTF8'},
+      {name: fieldLabels.doc.contentType, remark: 'application/json'},
+      {name: fieldLabels.doc.url, remark: url},
+    ];
+    const {apiOrderExt} = data;
+    let extReqOne = '';
+    let extReqTwo = '';
+    let extReqThree = '';
+    let extRspOne = '';
+    let extRspTwo = '';
+    let extRspThree = '';
+    if (apiOrderExt) {
+      extReqOne = apiOrderExt.extReq1 ? apiOrderExt.extReq1.replace('::', ' ') : "";
+      extReqTwo = apiOrderExt.extReq2 ? apiOrderExt.extReq2.replace('::', ' ') : "";
+      extReqThree = apiOrderExt.extReq3 ? apiOrderExt.extReq3.replace('::', ' ') : "";
+      extRspOne = apiOrderExt.extRsp1 ? apiOrderExt.extRsp1.replace('::', ' ') : "";
+      extRspTwo = apiOrderExt.extRsp2 ? apiOrderExt.extRsp2.replace('::', ' ') : "";
+      extRspThree = apiOrderExt.extRsp3 ? apiOrderExt.extRsp3.replace('::', ' ') : "";
+    }
+    const logLevel = apiOrderExt?getItemValue('apiOrderExt', 'log_level', apiOrderExt.logLevel):"";
+    const secretFlag = apiOrderExt?getItemValue('apiOrderExt', 'secret_flag', apiOrderExt.secretFlag):"";
+    const apiOrderExtAttr = [
+      {name: fieldLabels.log.extReqOne, remark: extReqOne},
+      {name: fieldLabels.log.extReqTwo, remark: extReqTwo},
+      {name: fieldLabels.log.extReqThree, remark: extReqThree},
+      {name: fieldLabels.log.extRspOne, remark: extRspOne},
+      {name: fieldLabels.log.extRspTwo, remark: extRspTwo},
+      {name: fieldLabels.log.extRspThree, remark: extRspThree},
+      {name: fieldLabels.log.logLevel, remark: logLevel},
+      {name: fieldLabels.log.secretFlag, remark: secretFlag},
     ];
     this.setState({
       data,
@@ -426,6 +485,7 @@ class ApiDetail extends PureComponent {
       responseBodySpec,
       stateCodeSpec,
       busiCodeSpec,
+      apiOrderExtAttr
     }); //  设置state中的resp的值
   };
 
@@ -434,9 +494,9 @@ class ApiDetail extends PureComponent {
       const sider = document.querySelectorAll('.ant-layout-sider')[0];
       if (sider) {
         const width = `calc(100% - ${sider.style.width})`;
-        const { width: stateWidth } = this.state;
+        const {width: stateWidth} = this.state;
         if (stateWidth !== width) {
-          this.setState({ width });
+          this.setState({width});
         }
       }
     });
@@ -460,7 +520,7 @@ class ApiDetail extends PureComponent {
   };
 
   render() {
-    const { apiService } = this.props;
+    const {apiService} = this.props;
     const {
       width,
       data,
@@ -471,13 +531,14 @@ class ApiDetail extends PureComponent {
       stateCodeSpec,
       busiCodeSpec,
       apiAttr,
+      apiOrderExtAttr
     } = this.state;
-    const { back } = data;
+    const {back} = data;
 
     // const apiServiceBackendMembers1  = apiService.apiServiceBackends.filter((obj)=>obj.backendType!==CALL_POINT);
     const apiServiceBackendMembers =
       apiService && apiService.apiServiceBackends
-        ? apiService.apiServiceBackends.map(item => ({ ...item, key: item.serviceSeq }))
+        ? apiService.apiServiceBackends.map(item => ({...item, key: item.serviceSeq}))
         : [];
     // const apiServiceEndPoint = apiServiceBackendMembers.filter(
     //   obj => obj.backendType === CALL_POINT
@@ -491,13 +552,13 @@ class ApiDetail extends PureComponent {
     return (
       <PageHeaderWrapper
         onBack={() => window.history.back()}
-        style={{ height: '50px' }}
+        style={{height: '50px'}}
         title="Api Detail"
       >
         <Tabs defaultActiveKey="info">
           <TabPane tab="Api配置信息" key="info">
             <Card title="定义请求信息" bordered={false}>
-              <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
+              <DescriptionList size="large" title="" style={{marginBottom: 32}}>
                 <Description term={fieldLabels.front.groupId}>{data.groupIdTitle}</Description>
                 <Description term={fieldLabels.front.name}>{apiService.name}</Description>
                 <Description term={fieldLabels.front.status}>
@@ -514,12 +575,12 @@ class ApiDetail extends PureComponent {
               </DescriptionList>
             </Card>
             <Card title="落地方服务信息" className={styles.card} bordered={false}>
-              <DescriptionList size="large" title="" style={{ marginBottom: 32 }}>
+              <DescriptionList size="large" title="" style={{marginBottom: 32}}>
                 <Description term={fieldLabels.back.serviceType}>
                   {back.serviceTypeTitle}
                 </Description>
                 <Description term={fieldLabels.back.url}>
-                  <Ellipsis length={30} tooltip style={{overflow:"inherit"}}>{back.url}</Ellipsis>
+                  <Ellipsis length={30} tooltip style={{overflow: "inherit"}}>{back.url}</Ellipsis>
                 </Description>
                 <Description term={fieldLabels.back.reqPath}>{back.reqPath}</Description>
                 <Description term={fieldLabels.back.reqMethod}>{back.reqMethodTitle}</Description>
@@ -550,7 +611,7 @@ class ApiDetail extends PureComponent {
               >
                 <Description term={fieldLabels.backAttr.tokenKey}>{back.tokenKey}</Description>
                 <Description term={fieldLabels.backAttr.tokenStr}>
-                  <Ellipsis length={80} tooltip style={{overflow:"inherit"}}>{back.tokenStr}</Ellipsis>
+                  <Ellipsis length={80} tooltip style={{overflow: "inherit"}}>{back.tokenStr}</Ellipsis>
                 </Description>
               </DescriptionList>
               <DescriptionList
@@ -588,21 +649,21 @@ class ApiDetail extends PureComponent {
               <Table columns={columnsBase} dataSource={apiAttr} pagination={false} />
             </Card>
             <Card title="2.请求参数说明" bordered={false}>
-              <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
+              <div style={{fontSize: 15, margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 请求报文头（Request Header）
               </div>
               <Table columns={columnsBase} dataSource={requestHeaderSpec} pagination={false} />
-              <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
+              <div style={{fontSize: 15, margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 请求报文体（Request Body）
               </div>
               <Table columns={columnsApi} dataSource={requestBodySpec} pagination={false} />
             </Card>
             <Card title="3.响应参数说明" bordered={false}>
-              <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
+              <div style={{fontSize: 15, margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 响应报文头（Response Header）
               </div>
               <Table columns={columnsBase} dataSource={responseHeaderSpec} pagination={false} />
-              <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
+              <div style={{fontSize: 15, margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 响应报文体（Response Body）
               </div>
               <Table columns={columnsApi} dataSource={responseBodySpec} pagination={false} />
@@ -610,21 +671,27 @@ class ApiDetail extends PureComponent {
           </TabPane>
           <TabPane tab="状态码" key="code">
             <Card title="" bordered={false}>
-              <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
+              <div style={{fontSize: 15, margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 状态码（State Code）
               </div>
               <Table columns={columnsCode} dataSource={stateCodeSpec} pagination={false} />
-              <div style={{ fontSize: 15 ,margin: '12px 8px'}}>
+              <div style={{fontSize: 15, margin: '12px 8px'}}>
                 <Icon type="info-circle" theme="twoTone" /> 业务状态码（Business Code）
               </div>
               <Table columns={columnsCode} dataSource={busiCodeSpec} pagination={false} />
+            </Card>
+          </TabPane>
+
+          <TabPane tab="日志配置" key="log">
+            <Card title="" bordered={false}>
+              <Table columns={columnsLog} dataSource={apiOrderExtAttr} pagination={false} />
             </Card>
           </TabPane>
         </Tabs>
         <br />
 
         <BackTop />
-        <FooterToolbar style={{ width }}>
+        <FooterToolbar style={{width}}>
           <Button type="primary" onClick={this.returnPage}>
             返回
           </Button>

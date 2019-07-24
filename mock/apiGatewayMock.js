@@ -22,6 +22,8 @@ for (let i = 0; i < 46; i += 1) {
     createUser: 'Alex',
   });
 }
+
+
 const urlSample="/rest/{tableName}/voice/{id}";
 const urlSpecAttr="[{\"name\":\"tableName\",\"type\":\"string\",\"remark\":\"table name\",\"parent\":\"-\"},{\"name\":\"id\",\"type\":\"string\",\"remark\":\"id\",\"parent\":\"-\"}]";
 const headerSampleArr="[{\"key\":\"appkey\",\"value\":\"xxxx\"}]";
@@ -233,6 +235,60 @@ function apiList(req, res, u, b) {
   return res.json(result);
 }
 
+function apiListBySearch(req, res, u, b) {
+  const payload = (b && b.body) || req.body;
+  let dataSource = tableListDataSource;
+  const params = payload && payload.data && payload.data.info ? payload.data.info : {};
+  if (params.sorter) {
+    const s = params.sorter.split('_');
+    dataSource = dataSource.sort((prev, next) => {
+      if (s[1] === 'descend') {
+        return next[s[0]] - prev[s[0]];
+      }
+      return prev[s[0]] - next[s[0]];
+    });
+  }
+
+  if (params.status) {
+    const status = params.status.split(',');
+    let filterDataSource = [];
+    status.forEach(s => {
+      filterDataSource = filterDataSource.concat(
+        dataSource.filter(data => parseInt(data.status, 10) === parseInt(s[0], 10))
+      );
+    });
+    dataSource = filterDataSource;
+  }
+
+  if (params.groupId) {
+    dataSource = dataSource.filter(data => data.groupId === parseInt(params.groupId, 10));
+  }
+  if (params.name) {
+    dataSource = dataSource.filter(data => data.name.indexOf(params.name) > -1);
+  }
+
+  let pageSize = 10;
+  if (params.pageSize) {
+    pageSize = params.pageSize * 1;
+  }
+
+  const result = {
+    "code": "200",
+    "msg": null,
+    "data": {
+      records: dataSource,
+      page: {
+        total: dataSource.length,
+        pageSize,
+        pageNo: parseInt(params.pageNo, 10) || 1,
+      },
+    },
+  };
+
+  return res.json(result);
+}
+
+
 function saveApi(req, res, u, b) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
@@ -355,4 +411,5 @@ export default {
   'POST /baseInfo/apiService/apiBatch': apiStatusBatch,
   'POST /baseInfo/apiService/apiInfo': apiInfoMock,
   'POST /baseInfo/apiService/saveApi': saveApi,
+  'POST /baseInfo/apiService/apiListBySearch': apiListBySearch,
 };
