@@ -1,4 +1,4 @@
-import { apiList, apiStatusBatch } from '@/services/apiGatewayService';
+import { apiList,apiListBySearch, apiStatusBatch } from '@/services/apiGatewayService';
 import { conversion } from '../../util';
 
 export default {
@@ -21,6 +21,16 @@ export default {
         payload: response,
       });
     },
+    *apiListBySearch({ payload ,callback}, { call, put }) {
+      console.log('payload', JSON.stringify(payload));
+      const newPayload = { ...payload, newTime: new Date() };
+      const response = yield call(apiListBySearch, newPayload);
+      yield put({
+        type: 'list',
+        payload: response,
+      });
+      if (callback) callback(response);
+    },
     *apiStatusBatch({ payload, callback }, { call }) {
       console.log('payload-----------', payload);
       const response = yield call(apiStatusBatch, payload);
@@ -41,6 +51,14 @@ export default {
       return {
         ...state,
         data: response,
+      };
+    },
+    list(state, action) {
+      const data = action.payload ? action.payload.data : [];
+      // groupList.unshift({"groupId": null, "groupName": "All"});
+      return {
+        ...state,
+        data,
       };
     },
   },

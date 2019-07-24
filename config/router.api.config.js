@@ -190,6 +190,11 @@ export default [
         authority: ['admin'],
         routes: [
           {
+            path: '/admin/apiLogList',
+            name: 'apiLogList',
+            component: './ApiLog/ApiLogList',
+          },
+          {
             path: '/admin/logPage',
             name: 'logPage',
             component: './Admin/LogPage',
