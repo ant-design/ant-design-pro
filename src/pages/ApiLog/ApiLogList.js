@@ -754,7 +754,7 @@ class TableList extends PureComponent {
               defaultExpandAllRows={false}
             />
             <Drawer
-              width={750}
+              width={850}
               placement="right"
               closable
               onClose={this.onDrawerClose}

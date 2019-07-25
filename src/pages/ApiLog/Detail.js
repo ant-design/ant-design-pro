@@ -35,20 +35,14 @@ class Detail extends PureComponent {
             </DescriptionList>
             <DescriptionList>
               <Description>
-                <ReactJson
-                  src={item.reqMessage}
-                  name="reqMessage"
-                  collapsed={false}
-                  iconStyle='circle'
-                />
+                <div style={{width:250}}>
+                  <Ellipsis tooltip length={280} style={{overflow: "inherit"}}>{`reqMessage: ${item.reqMessage}`}</Ellipsis>
+                </div>
               </Description>
               <Description>
-                <ReactJson
-                  src={item.respMessage}
-                  name="reqMessage"
-                  collapsed={false}
-                  iconStyle='circle'
-                />
+                <div style={{width:250}}>
+                  <Ellipsis tooltip length={300} style={{overflow: "inherit"}}>{`respMessage: ${item.respMessage}`}</Ellipsis>
+                </div>
               </Description>
             </DescriptionList>
           </Card>
