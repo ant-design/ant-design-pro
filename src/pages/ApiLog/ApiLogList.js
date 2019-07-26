@@ -706,10 +706,6 @@ class TableList extends PureComponent {
 
     const columns = [
       {
-        title: 'orderCode',
-        dataIndex: 'orderCode',
-      },
-      {
         title: 'transactionId',
         dataIndex: 'transactionId',
       },
@@ -730,8 +726,18 @@ class TableList extends PureComponent {
         dataIndex: 'appKey',
       },
       {
+        title: 'orderCode',
+        dataIndex: 'orderCode'
+      },
+      {
         title: 'requestTime',
         dataIndex: 'requestTime',
+        sorter: true,
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      },
+      {
+        title: 'responseTime',
+        dataIndex: 'responseTime',
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },

@@ -17,14 +17,14 @@ const fieldLabels = {
 
 class Detail extends PureComponent {
 
+
   getOrderItem = () => {
 
     const {orderItem} = this.props;
-    console.log("detail",orderItem);
     return orderItem.map(item =>
       <Row>
         <Col>
-          <Card title={`${item.orderItemCode}`} bordered={false}>
+          <Card title={`${item.orderItemCode}`} bordered={false} extra={`${item.createTime}`}>
             <DescriptionList>
               <Description term={fieldLabels.seq}>
                 <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${item.seq}`}</Ellipsis>
