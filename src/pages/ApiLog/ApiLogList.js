@@ -531,6 +531,7 @@ class TableList extends PureComponent {
                   initialValue: rangePickerValue
                 })(<RangePicker
                   onChange={this.handleRangePickerChange}
+                  showTime={{ format: 'HH:mm' }}
                   style={{width: 256}}
                 />)}
               </div>
