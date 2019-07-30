@@ -513,7 +513,7 @@ class TableList extends PureComponent {
           <Col md={8} sm={24}>
             <FormItem label="requestTime">
               <div className={styles.salesExtraWrap}>
-                <div className={styles.salesExtra}>
+                {/*<div className={styles.salesExtra}>
                   <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
                     All Day
                   </a>
@@ -526,7 +526,7 @@ class TableList extends PureComponent {
                   <a className={this.isActive('year')} onClick={() => this.selectDate('year')}>
                     All Year
                   </a>
-                </div>
+                </div>*/}
                 {getFieldDecorator('requestTime', {
                   initialValue: rangePickerValue
                 })(<RangePicker
@@ -612,7 +612,7 @@ class TableList extends PureComponent {
           <Col md={8} sm={24}>
             <FormItem label="requestTime">
               <div className={styles.salesExtraWrap}>
-                <div className={styles.salesExtra}>
+                {/*<div className={styles.salesExtra}>
                   <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
                     All Day
                   </a>
@@ -625,11 +625,12 @@ class TableList extends PureComponent {
                   <a className={this.isActive('year')} onClick={() => this.selectDate('year')}>
                     All Year
                   </a>
-                </div>
+                </div>*/}
                 {getFieldDecorator('requestTime', {
                   initialValue: rangePickerValue
                 })(<RangePicker
                   onChange={this.handleRangePickerChange}
+                  showTime={{ format: 'HH:mm' }}
                   style={{width: 256}}
                 />)}
               </div>
@@ -669,6 +670,13 @@ class TableList extends PureComponent {
             <FormItem label="extSelect">
               {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel}
                                                         placeholder="Please input extInput" />)}
+            </FormItem>
+          </Col>
+        </Row>
+        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+          <Col md={8} sm={24}>
+            <FormItem label="keyValue">
+              {getFieldDecorator('keyValue')(<Input placeholder="Please input keyValue" />)}
             </FormItem>
           </Col>
         </Row>
