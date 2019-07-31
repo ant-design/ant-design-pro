@@ -23,24 +23,25 @@ const forms = ['front', 'back', 'backAttr'];
 
 const fieldLabels = {
   front: {
-    groupId: '分组',
-    name: '名称',
-    serviceType: '服务类型',
-    requestUrl: '请求地址',
+    groupId: 'group',
+    name: 'name',
+    serviceType: 'service type',
+    requestUrl: 'request url',
     // protocol: '协议',
-    reqMethod: '请求Method',
-    apiType: 'Api范围',
+    reqMethod: 'request method',
+    apiType: 'api range',
+    actionName:'action name'
   },
   back: {
-    serviceType: '服务类型',
-    url: '落地方地址',
-    reqPath: '落地方路径',
+    serviceType: 'service type',
+    url: 'url',
+    reqPath: 'path',
     // protocol: '协议',
-    reqMethod: '请求Method',
-    connectTimeout: '连接超时时间（ms）',
-    socketTimeout: '处理超时时间（ms）',
-    orgId: '服务提供者',
-    authType: '安全认证',
+    reqMethod: 'request method',
+    connectTimeout: 'connect timeout（ms）',
+    socketTimeout: 'socket timeout（ms）',
+    orgId: 'provider',
+    authType: 'secret',
   },
   backAttr: {
     userName: 'user Name',
@@ -54,7 +55,7 @@ const fieldLabels = {
     trustStorePassword: 'trustStore Password',
     keyStore: 'keyStore path',
     keyStorePassword: 'keyStore Password',
-    ssl: 'SSL证书校验',
+    ssl: 'SSL',
   },
 };
 
@@ -373,7 +374,6 @@ class ApiUpdate extends PureComponent {
                   })(<SelectView javaCode="common" javaKey="req_method" />)}
                 </Form.Item>
               </Col>
-              {/*
               <Col
                 xl={{ span: 6, offset: 2 }}
                 lg={{ span: 8 }}
@@ -381,13 +381,12 @@ class ApiUpdate extends PureComponent {
                 sm={24}
                 style={{ height: 80 }}
               >
-                <Form.Item label={fieldLabels.front.protocol}>
-                  {getFieldDecorator('front.protocol', {
-                    rules: [{ required: true, message: '请选择协议' }],
-                  })(<SelectView javaCode="apiService" javaKey="protocol" />)}
+                <Form.Item label={fieldLabels.front.actionName}>
+                  {getFieldDecorator('front.actionName', {
+                    rules: [{ required: getFieldValue('front.serviceType') === '2', message: 'Please input action name' }],
+                  })(<Input placeholder="Please input action name" />)}
                 </Form.Item>
               </Col>
-              */}
             </Row>
             <Row gutter={2}>
               <Col lg={6} md={12} sm={24} style={{ height: 50 }}>

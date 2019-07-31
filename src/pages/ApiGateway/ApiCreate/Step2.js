@@ -20,12 +20,6 @@ const formItemLayout = {
     span: 16,
   },
 };
-const selectBefore = (
-  <Select defaultValue="/rest" style={{ width: 90 }}>
-    <Option value="/rest">/rest</Option>
-    <Option value="/ws">/ws</Option>
-  </Select>
-);
 
 @connect(({ apiCreateModel }) => ({
   data: apiCreateModel.apiService,
@@ -33,15 +27,56 @@ const selectBefore = (
 @Form.create()
 class Step2 extends React.PureComponent {
 
+  handleChange = e => {
+    const { dispatch } = this.props;
+    const {value}=e.target;
+    console.log("value:",value);
+    const payload= {
+      serviceType:value
+    };
+    if(value==='2'){
+      dispatch({
+        type: 'apiCreateModel/saveStepFormData',
+        payload: {
+          ...payload,
+          reqMethod:'post',
+          pathPrefix:'/ws/',
+        },
+        stepType:1,
+      });
+    }
+    else if(value==='1'){
+      dispatch({
+        type: 'apiCreateModel/saveStepFormData',
+        payload: {
+          ...payload,
+          pathPrefix:'/rest/',
+        },
+        stepType:1,
+      });
+    }
+    else if(value==='3'){
+      dispatch({
+        type: 'apiCreateModel/saveStepFormData',
+        payload: {
+          ...payload,
+          pathPrefix:'/http/',
+        },
+        stepType:1,
+      });
+    }
+  };
+
   render() {
     const { form, dispatch, data } = this.props;
-    const { getFieldDecorator, validateFields } = form;
+    const { getFieldDecorator, validateFields,getFieldValue } = form;
     const onPrev = () => {
       router.push('/apiGateway/apiCreate/info');
     };
     const onValidateForm = () => {
       validateFields((err, values) => {
         if (!err) {
+          console.log("values:",values);
           dispatch({
             type: 'apiCreateModel/saveStepFormData',
             payload: {...values},
@@ -51,7 +86,11 @@ class Step2 extends React.PureComponent {
         }
       });
     };
+    const display=data.serviceType!=='2'?{display:'none'}:null;
+    const displayForRest=data.serviceType==='2'?{display:'none'}:null;
+    const rulesForWs=data.serviceType==='2'?[{ required: true, message: 'please input' }]:[];
 
+    console.log(display,data.serviceType,data);
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
@@ -62,32 +101,33 @@ class Step2 extends React.PureComponent {
           <span>
             <Form.Item {...formItemLayout} label="服务类型">
               {getFieldDecorator('serviceType', {
-                initialValue: '1',
+                initialValue: data.serviceType,
                 rules: [{ required: true, message: '请选择服务类型' }],
-              })(<RadioView javaCode="apiService" javaKey="service_type" />)}
+              })(<RadioView javaCode="apiService" javaKey="service_type" onChange={this.handleChange} />)}
             </Form.Item>
           </span>
           <Form.Item {...formItemLayout} label="请求PATH">
             {getFieldDecorator('requestUrl', {
               initialValue: data.requestUrl,
               rules: [{ required: true, message: '请输入请求PATH' }],
-            })(<Input addonBefore={selectBefore} placeholder="请输入请求PATH" />)}
+            })(<Input addonBefore={data.pathPrefix} placeholder="请输入请求PATH" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="请求类型">
+          <Form.Item {...formItemLayout} label="请求类型" style={displayForRest}>
             {getFieldDecorator('reqMethod', {
               initialValue: data.reqMethod,
               rules: [{ required: true, message: '请选择HTTP Method' }],
             })(<SelectView javaCode="common" javaKey="req_method" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="WSDL">
+          <Form.Item {...formItemLayout} label="WSDL" style={display}>
             {getFieldDecorator('wsdlId', {
-              rules: [],
+              initialValue: data.wsdlId,
+              rules: [{ required: getFieldValue('serviceType') === '2', message: 'please select' }],
             })(<WsdlSelectView userId={userId} />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Action Name">
+          <Form.Item {...formItemLayout} label="Action Name" style={display}>
             {getFieldDecorator('actionName', {
               initialValue: data.actionName,
-              rules: [{ required: true, message: '请选择Action Name' }],
+              rules: rulesForWs,
             })(<Input placeholder="请选择Action Name" />)}
           </Form.Item>
           <Form.Item
