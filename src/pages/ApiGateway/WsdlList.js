@@ -5,9 +5,7 @@ import {
   Button,
   Card,
   Col,
-  Drawer,
   Form,
-  Icon,
   Input,
   Row,
   Select,
@@ -22,7 +20,6 @@ import {getItems} from '@/utils/masterData';
 import {getUserId, getUserName} from "../../utils/authority";
 import {getTimeDistance} from '@/utils/utils';
 
-const {RangePicker} = DatePicker;
 const FormItem = Form.Item;
 const {Option} = Select;
 const getValue = obj =>
@@ -32,10 +29,9 @@ const getValue = obj =>
 
 
 /* eslint react/no-multi-comp:0 */
-@connect(({apiLogModel, uniComp, loading}) => ({
-  apiLogModel,
-  uniComp,
-  loading: loading.models.apiLogModel,
+@connect(({wsdlModel, loading}) => ({
+  wsdlModel,
+  loading: loading.models.wsdlModel,
 }))
 @Form.create()
 class WsdlList extends PureComponent {
@@ -48,7 +44,6 @@ class WsdlList extends PureComponent {
 
 
   state = {
-    expandForm: false,
     selectedRow: {},
     formValues: {},
     pagination: {
@@ -62,7 +57,6 @@ class WsdlList extends PureComponent {
     data: [],
     value: [],
     fetching: false,
-    rangePickerValue: getTimeDistance('today'),
     targetOrgs:[]
   };
 
@@ -70,13 +64,18 @@ class WsdlList extends PureComponent {
     const {dispatch} = this.props;
     /* 获取apiDebug数据 */
     const userId = getUserId();
-    const tableName = "org";
-    const pageSize = 9999;
-    const userName = getUserName();
-    const params = {userId, tableName, pageSize, userName};
+    const range = "all";
+    const params = {
+      userId,
+      range,
+      info:{
+        pageNo: 1,
+        pageSize: 10
+      }
+    };
     console.log('binddata', params);
     dispatch({
-      type: 'uniComp/list',
+      type: 'wsdlModel/wsdlList',
       payload: params,
       onConversionData: undefined,
       callback: resp => {
@@ -245,13 +244,6 @@ class WsdlList extends PureComponent {
     });
   };
 
-  toggleForm = () => {
-    const {expandForm} = this.state;
-    this.setState({
-      expandForm: !expandForm,
-    });
-  };
-
   handleChange = value => {
     this.setState({
       value,
@@ -367,33 +359,6 @@ class WsdlList extends PureComponent {
     const {dispatch} = this.props;
     const {formValues,targetOrgs} = this.state;
 
-    const {requestTime,extFlag ,extInput } = formValues;
-    const requestStartTime = requestTime[0].format('YYYY-MM-DD HH:mm:ss');
-    const requestEndTime = requestTime[1].format('YYYY-MM-DD HH:mm:ss');
-
-    switch (extFlag) {
-      case "1":
-        formValues.extReq1 = extInput;
-        break;
-      case "2":
-        formValues.extReq2 = extInput;
-        break;
-      case "3":
-        formValues.extReq3 = extInput;
-        break;
-      case "4":
-        formValues.extRsp1 = extInput;
-        break;
-      case "5":
-        formValues.extRsp2 = extInput;
-        break;
-      case "6":
-        formValues.extRsp3 = extInput;
-        break;
-      default:
-        break;
-    }
-
     this.setState({pagination: paginations, filtersArg, sorter});
     const filters = this.conversionFilter(filtersArg);
     const params = {
@@ -401,9 +366,6 @@ class WsdlList extends PureComponent {
       pageSize: paginations.pageSize,
       ...formValues,
       ...filters,
-      requestStartTime,
-      requestEndTime,
-      targetOrgs
     };
     if (sorter.field) {
       params.sorter = `${sorter.field}_${sorter.order}`;
@@ -449,36 +411,6 @@ class WsdlList extends PureComponent {
     this.handleDrawerVisible(null, false);
   }
 
-
-  isActive = type => {
-    const {rangePickerValue} = this.state;
-    const value = getTimeDistance(type);
-    if (!rangePickerValue[0] || !rangePickerValue[1]) {
-      return '';
-    }
-    if (
-      rangePickerValue[0].isSame(value[0], 'day') &&
-      rangePickerValue[1].isSame(value[1], 'day')
-    ) {
-      return styles.currentDate;
-    }
-    return '';
-  };
-
-  selectDate = type => {
-
-    const {form} = this.props;
-
-    form.setFieldsValue({
-      requestTime: getTimeDistance(type)
-    });
-
-    this.setState({
-      rangePickerValue: getTimeDistance(type)
-    });
-
-  };
-
   handleRangePickerChange = rangePickerValue => {
 
     const {form} = this.props;
@@ -500,72 +432,13 @@ class WsdlList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="transactionId">
-              {getFieldDecorator('transactionId')(<Input placeholder="Please input consumer transactionId" />)}
+            <FormItem label="wsdlName">
+              {getFieldDecorator('wsdlName')(<Input placeholder="Please input wsdlName" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="appKey">
-              {getFieldDecorator('appKey')(<Input placeholder="Please input consumer appKey" />)}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="requestTime">
-              <div className={styles.salesExtraWrap}>
-                {/*<div className={styles.salesExtra}>
-                  <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
-                    All Day
-                  </a>
-                  <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
-                    All Week
-                  </a>
-                  <a className={this.isActive('month')} onClick={() => this.selectDate('month')}>
-                    All Month
-                  </a>
-                  <a className={this.isActive('year')} onClick={() => this.selectDate('year')}>
-                    All Year
-                  </a>
-                </div>*/}
-                {getFieldDecorator('requestTime', {
-                  initialValue: rangePickerValue
-                })(<RangePicker
-                  onChange={this.handleRangePickerChange}
-                  showTime={{ format: 'HH:mm' }}
-                  style={{width: 256}}
-                />)}
-              </div>
-            </FormItem>
-          </Col>
-        </Row>
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
-          <Col md={8} sm={24}>
-            <FormItem label="apiName">
-              {getFieldDecorator('apiId')(
-                <Select
-                  showSearch="true"
-                  labelInValue
-                  value={value}
-                  placeholder="Select apiName"
-                  notFoundContent={fetching ? <Spin size="small" /> : null}
-                  filterOption={false}
-                  onSearch={this.fetchApi}
-                  onChange={this.handleChange}
-                  style={{width: '100%'}}
-                >
-                  {data.map(d => (
-                    <Option key={d.value}>{d.text}</Option>
-                  ))}
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="status">
-              {getFieldDecorator('status', {})(
-                <Select placeholder="请选择" style={{width: '100%'}}>
-                  {this.getOption("intfOrder", "status")}
-                </Select>
-              )}
+            <FormItem label="wsdlUrl">
+              {getFieldDecorator('wsdlUrl')(<Input placeholder="Please input wsdlUrl" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -576,9 +449,6 @@ class WsdlList extends PureComponent {
               <Button style={{marginLeft: 8}} onClick={this.handleFormReset} htmlType="button">
                 重置
               </Button>
-              <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-                展开 <Icon type="down" />
-              </a>
             </span>
           </Col>
         </Row>
@@ -586,112 +456,18 @@ class WsdlList extends PureComponent {
     );
   }
 
-  renderAdvancedForm() {
-    const {
-      form: {getFieldDecorator},
-    } = this.props;
-    const {fetching, data, value, rangePickerValue} = this.state;
-
-    const orderExtSel =
-      getFieldDecorator('extFlag', {})(<Select
-        style={{width: 110}}>{this.getOptionMaster("apiOrderExt", "ext_flag")}</Select>);
-    return (
-      <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
-          <Col md={8} sm={24}>
-            <FormItem label="transactionId">
-              {getFieldDecorator('transactionId')(<Input placeholder="Please input transactionId" />)}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="appKey">
-              {getFieldDecorator('appKey')(<Input placeholder="Please input consumer appKey" />)}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="requestTime">
-              <div className={styles.salesExtraWrap}>
-                {getFieldDecorator('requestTime', {
-                  initialValue: rangePickerValue
-                })(<RangePicker
-                  onChange={this.handleRangePickerChange}
-                  showTime={{ format: 'HH:mm' }}
-                  style={{width: 256}}
-                />)}
-              </div>
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="apiName">
-              {getFieldDecorator('apiId')(
-                <Select
-                  showSearch="true"
-                  labelInValue
-                  value={value}
-                  placeholder="Select apiName"
-                  notFoundContent={fetching ? <Spin size="small"/> : null}
-                  filterOption={false}
-                  onSearch={this.fetchApi}
-                  onChange={this.handleChange}
-                  style={{width: '100%'}}
-                >
-                  {data.map(d => (
-                    <Option key={d.value}>{d.text}</Option>
-                  ))}
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="status">
-              {getFieldDecorator('status', {})(
-                <Select placeholder="请选择" style={{width: '100%'}}>
-                  {this.getOption("intfOrder", "status")}
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="extSelect">
-              {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel}
-                                                        placeholder="Please input extInput" />)}
-            </FormItem>
-          </Col>
-        </Row>
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
-          <Col md={8} sm={24}>
-            <FormItem label="keyValue">
-              {getFieldDecorator('keyValue')(<Input placeholder="Please input keyValue" />)}
-            </FormItem>
-          </Col>
-        </Row>
-        <div style={{overflow: 'hidden'}}>
-          <div style={{float: 'right', marginBottom: 24}}>
-            <Button type="primary" htmlType="submit">
-              查询
-            </Button>
-            <Button style={{marginLeft: 8}} onClick={this.handleFormReset} htmlType="button">
-              重置
-            </Button>
-            <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-              收起 <Icon type="up" />
-            </a>
-          </div>
-        </div>
-      </Form>
-    );
-  }
-
   renderForm() {
-    const {expandForm} = this.state;
-    return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
+    return this.renderSimpleForm();
   }
 
   render() {
 
-    const {loading} = this.props;
-    const {logList, pagination, drawerVisible, selectedRow} = this.state;
-    const intfOrderItemMessages = selectedRow ? selectedRow.intfOrderItemMessages : [];
+    const {
+      loading,
+      wsdlModel: { data }
+    } = this.props;
+    console.log("this.props",this.props);
+    const { pagination, selectedRow} = this.state;
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
@@ -700,38 +476,22 @@ class WsdlList extends PureComponent {
 
     const columns = [
       {
-        title: 'transactionId',
-        dataIndex: 'transactionId',
+        title: 'wsdlName',
+        dataIndex: 'wsdlName',
       },
       {
-        title: 'status',
-        dataIndex: 'statusName',
+        title: 'wsdlUrl',
+        dataIndex: 'wsdlUrl',
       },
       {
-        title: 'sourceType',
-        dataIndex: 'sourceTypeName',
-      },
-      {
-        title: 'apiName',
-        dataIndex: 'apiName',
-      },
-      {
-        title: 'appKey',
-        dataIndex: 'appKey',
-      },
-      {
-        title: 'orderCode',
-        dataIndex: 'orderCode'
-      },
-      {
-        title: 'requestTime',
-        dataIndex: 'requestTime',
+        title: 'createTime',
+        dataIndex: 'createTime',
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
       {
-        title: 'responseTime',
-        dataIndex: 'responseTime',
+        title: 'updateTime',
+        dataIndex: 'updateTime',
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
@@ -746,21 +506,11 @@ class WsdlList extends PureComponent {
               loading={loading}
               size="small"
               columns={columns}
-              expandedRowRender={(record) => this.expandedRowRender(record)}
-              onExpand={(expanded, record) => this.onExpand(expanded, record)}
-              dataSource={logList}
+              dataSource={data}
               pagination={paginationProps}
               onChange={this.handleTableChange}
               defaultExpandAllRows={false}
             />
-            <Drawer
-              width={850}
-              placement="right"
-              closable
-              onClose={this.onDrawerClose}
-              visible={drawerVisible}
-            >
-            </Drawer>
           </div>
         </Card>
       </PageHeaderWrapper>
