@@ -1,123 +1,112 @@
-/* 简单model测试 */
-// react页面必须引入的组件
-import React, { PureComponent } from 'react';
-// 引入面包屑导航组件
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import Authorized from '@/utils/Authorized';
-import { Alert,Modal } from 'antd';
-import Prompt from 'umi/prompt';
-import { getAuth } from '@/utils/authority';
-
-const noMatch = <Alert message="No permission." type="error" showIcon />;
-
-const auth=getAuth("apiGateway1");
-// console.log("auth=====:",auth);// 1ddd
-
+import React, {PureComponent} from 'react';
+import { Upload, Button, Icon, message } from 'antd';
+import reqwest from 'reqwest';
 
 class Test2 extends PureComponent {
-
-  state={
-    modalVisible:false,
-  }
-
-  isSave=false;
-
-  handlePrompt = location => {
-    if (!this.isSave) {
-      this.showModalGo(location);
-      return false;
-    }
-    return true;
+  state = {
+    fileList: [],
+    uploading: false,
   };
 
-  showModalGo = location => {
-    this.setState({
-      modalVisible: true,
-      location,
+  handleUpload = () => {
+    const { fileList } = this.state;
+    const formData = new FormData();
+    fileList.forEach(file => {
+      formData.append('files[]', file);
     });
-  };
 
-
-  handleNoGo = () => {
-    // const { location } = this.state;
-    // const { history } = this.props;
     this.setState({
-      modalVisible: false,
+      uploading: true,
     });
-    // history.push({
-    //   pathname: `..${location.pathname}`,
-    // });
-  };
 
-  handlePrompt = location => {
-    if (!this.isSave) {
-      this.showModalGo(location);
-      return false;
-    }
-    return true;
-  };
-
-  goBack=(e)=>{
-
-  console.log(this.isSave,e);
-    if (!this.isSave) {
-      this.setState({
-        modalVisible: true,
-        back: true,
-      });
-      return false;
-    }
-    this.setState({
-      back: false,
-    });
-    console.log(this.isSave,'ddddd');
-    // window.history.back();
-    return true;
-  }
-
-  handleGo = () => {
-    const { location,back } = this.state;
-    const { history } = this.props;
-    this.isSave = true;
-    if(back){
-      window.history.back();
-    }
-    else{
-      console.log(location.pathname, 'pathname75');
-      history.push({
-        pathname: `..${location.pathname}`,
-      });
-    }
-    this.setState({
-      modalVisible: false,
-      back:false,
+    // You can use any AJAX library you like
+    reqwest({
+      url: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+      method: 'post',
+      contentType: 'application/json',
+      headers: {
+      'X-My-Custom-Header': 'SomethingImportant'
+      },
+      processData: false,
+      data: formData,
+      success: () => {
+        this.setState({
+          fileList: [],
+          uploading: false,
+        });
+        message.success('upload successfully.');
+      },
+      error: () => {
+        this.setState({
+          uploading: false,
+        });
+        message.error('upload failed.');
+      },
     });
   };
 
   render() {
+    const { uploading, fileList } = this.state;
+    const props = {
+      onRemove: file => {
+        this.setState(state => {
+          const index = state.fileList.indexOf(file);
+          const newFileList = state.fileList.slice();
+          newFileList.splice(index, 1);
+          return {
+            fileList: newFileList,
+          };
+        });
+      },
+      beforeUpload: file => {
+        this.setState(state => ({
+          fileList: [...state.fileList, file],
+        }));
+        return false;
+      },
+      multiple:true,
+      defaultFileList: [
+        {
+          uid: '1',
+          name: 'xxx.png',
+          status: 'done',
+          response: 'Server Error 500', // custom error message to show
+          url: 'http://www.baidu.com/xxx.png',
+        },
+        {
+          uid: '2',
+          name: 'yyy.png',
+          status: 'done',
+          url: 'http://www.baidu.com/yyy.png',
+        },
+        {
+          uid: '3',
+          name: 'zzz.png',
+          status: 'error',
+          response: 'Server Error 500', // custom error message to show
+          url: 'http://www.baidu.com/zzz.png',
+        },
+      ],
+      // fileList,
+    };
 
-    const {modalVisible} = this.state;
-    // console.log("ddddabc:",localStorage.getItem("antd-pro-authority"));
     return (
-      <PageHeaderWrapper
-        onBack={this.goBack}
-        style={{ height: '50px' }}
-        title='test2'
-      >
-        <Authorized authority={auth} noMatch={noMatch}>
-          {console.log("ddddddfiweieur29393990439 49390")}
-          ddd
-        </Authorized>
-        <Prompt message={this.handlePrompt} />
-        <Modal
-          visible={modalVisible}
-          onOk={this.handleGo}
-          onCancel={() => this.handleNoGo()}
-          title="提示"
+      <div>
+        <Upload {...props}>
+          <Button>
+            <Icon type="upload" /> Select File
+          </Button>
+        </Upload>
+        <Button
+          type="primary"
+          onClick={this.handleUpload}
+          disabled={fileList.length === 0}
+          loading={uploading}
+          style={{ marginTop: 16 }}
         >
-          <div>离开页面之前，你没有提交修改，确定是否离开本页面？</div>
-        </Modal>
-      </PageHeaderWrapper>
+          {uploading ? 'Uploading' : 'Start Upload'}
+        </Button>
+      </div>
     );
   }
 }
