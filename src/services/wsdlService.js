@@ -4,7 +4,7 @@ import constants from '@/utils/constUtil';
 
 const { PREFIX_PATH } = constants;
 
-export async function wsdlList(params) {
+export async function queryWsdlList(params) {
   console.log('params in queryApi:', params,`${PREFIX_PATH}/baseInfo/wsdl/wsdlList`);
   return request(`${PREFIX_PATH}/baseInfo/wsdl/wsdlList`, {
     method: 'POST',

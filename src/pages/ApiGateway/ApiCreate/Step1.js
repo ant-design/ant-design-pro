@@ -65,10 +65,10 @@ class Step1 extends React.PureComponent {
               rules: [{ required: true, message: '请输入Api名称' }],
             })(<Input placeholder="请输入Api名称" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="服务类型">
+          <Form.Item {...formItemLayout} label="Api Range">
             {getFieldDecorator('apiType', {
               initialValue: apiService.apiType,
-              rules: [{ required: true, message: '请选择服务类型' }],
+              rules: [{ required: true, message: 'Please Select Api Range' }],
             })(<RadioView javaCode="apiService" javaKey="api_type" />)}
           </Form.Item>
           <Form.Item

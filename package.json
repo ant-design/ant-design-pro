@@ -80,6 +80,7 @@
     "react-fittext": "^1.0.0",
     "react-json-view": "latest",
     "react-media": "^1.9.2",
+    "reqwest": "^2.0.5",
     "resize-observer-polyfill": "^1.5.1",
     "umi": "^2.4.4",
     "umi-plugin-react": "^1.7.2",

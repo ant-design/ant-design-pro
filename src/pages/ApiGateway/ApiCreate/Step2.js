@@ -1,12 +1,16 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Divider } from 'antd';
+import { Form, Input, Button, Divider,Select } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
 import SelectView from '../SelectView';
 import RadioView from '../RadioView';
+import WsdlSelectView from "../WsdlSelectView";
+import { getUserId } from '@/utils/authority';
 
+const { Option } = Select;
 
+const userId = getUserId(); // 获取当前登录用户编号
 
 const formItemLayout = {
   labelCol: {
@@ -16,6 +20,12 @@ const formItemLayout = {
     span: 16,
   },
 };
+const selectBefore = (
+  <Select defaultValue="/rest" style={{ width: 90 }}>
+    <Option value="/rest">/rest</Option>
+    <Option value="/ws">/ws</Option>
+  </Select>
+);
 
 @connect(({ apiCreateModel }) => ({
   data: apiCreateModel.apiService,
@@ -41,7 +51,7 @@ class Step2 extends React.PureComponent {
         }
       });
     };
-    // // console.log("step2 data:",data);
+
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
@@ -49,7 +59,7 @@ class Step2 extends React.PureComponent {
             {data.name}
           </Form.Item>
           <Divider style={{ margin: '24px 0' }} />
-          <span style={{display:'none'}}>
+          <span>
             <Form.Item {...formItemLayout} label="服务类型">
               {getFieldDecorator('serviceType', {
                 initialValue: '1',
@@ -61,13 +71,24 @@ class Step2 extends React.PureComponent {
             {getFieldDecorator('requestUrl', {
               initialValue: data.requestUrl,
               rules: [{ required: true, message: '请输入请求PATH' }],
-            })(<Input addonBefore="/rest" placeholder="请输入请求PATH" />)}
+            })(<Input addonBefore={selectBefore} placeholder="请输入请求PATH" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求类型">
             {getFieldDecorator('reqMethod', {
               initialValue: data.reqMethod,
               rules: [{ required: true, message: '请选择HTTP Method' }],
             })(<SelectView javaCode="common" javaKey="req_method" />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="WSDL">
+            {getFieldDecorator('wsdlId', {
+              rules: [],
+            })(<WsdlSelectView userId={userId} />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="Action Name">
+            {getFieldDecorator('actionName', {
+              initialValue: data.actionName,
+              rules: [{ required: true, message: '请选择Action Name' }],
+            })(<Input placeholder="请选择Action Name" />)}
           </Form.Item>
           <Form.Item
             style={{ marginBottom: 8 }}
