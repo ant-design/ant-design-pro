@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Card, Col, Row} from 'antd';
 
-import ReactJson from 'react-json-view';
 import Ellipsis from '@/components/Ellipsis';
 import DescriptionList from '@/components/DescriptionList';
 
@@ -17,38 +16,34 @@ const fieldLabels = {
 
 class Detail extends PureComponent {
 
+
   getOrderItem = () => {
 
     const {orderItem} = this.props;
-    console.log("detail",orderItem);
     return orderItem.map(item =>
       <Row>
         <Col>
-          <Card title={`${item.orderItemCode}`} bordered={false}>
+          <Card title={`${item.orderItemCode}`} bordered={false} extra={`${item.createTime}`}>
             <DescriptionList>
-              <Description term={fieldLabels.seq}>
-                <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${item.seq}`}</Ellipsis>
+              <Description style={{width:350}} term={fieldLabels.seq}>
+                <div style={{width:330}}>
+                  <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${item.seq}`}</Ellipsis>
+                </div>
               </Description>
               <Description term={fieldLabels.address}>
                 <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${item.address}`}</Ellipsis>
               </Description>
             </DescriptionList>
             <DescriptionList>
-              <Description>
-                <ReactJson
-                  src={item.reqMessage}
-                  name="reqMessage"
-                  collapsed={false}
-                  iconStyle='circle'
-                />
+              <Description style={{width:350}}>
+                <div style={{width:330}}>
+                  <Ellipsis tooltip length={280} style={{overflow: "inherit",width:1000}}>{`reqMessage: ${item.reqMessage}`}</Ellipsis>
+                </div>
               </Description>
               <Description>
-                <ReactJson
-                  src={item.respMessage}
-                  name="reqMessage"
-                  collapsed={false}
-                  iconStyle='circle'
-                />
+                <div style={{width:300}}>
+                  <Ellipsis tooltip length={300} style={{overflow: "inherit"}}>{`respMessage: ${item.respMessage}`}</Ellipsis>
+                </div>
               </Description>
             </DescriptionList>
           </Card>

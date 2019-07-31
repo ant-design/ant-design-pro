@@ -17,9 +17,8 @@ import {
 } from 'antd';
 import debounce from 'lodash/debounce';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import styles from '../ApiGateway/ApiList.less';
+import styles from './ApiList.less';
 import {getItems} from '@/utils/masterData';
-import Detail from './Detail';
 import {getUserId, getUserName} from "../../utils/authority";
 import {getTimeDistance} from '@/utils/utils';
 
@@ -39,7 +38,7 @@ const getValue = obj =>
   loading: loading.models.apiLogModel,
 }))
 @Form.create()
-class TableList extends PureComponent {
+class WsdlList extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -611,6 +610,7 @@ class TableList extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="requestTime">
+              <div className={styles.salesExtraWrap}>
                 {getFieldDecorator('requestTime', {
                   initialValue: rangePickerValue
                 })(<RangePicker
@@ -618,10 +618,9 @@ class TableList extends PureComponent {
                   showTime={{ format: 'HH:mm' }}
                   style={{width: 256}}
                 />)}
+              </div>
             </FormItem>
           </Col>
-        </Row>
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
             <FormItem label="apiName">
               {getFieldDecorator('apiId')(
@@ -761,7 +760,6 @@ class TableList extends PureComponent {
               onClose={this.onDrawerClose}
               visible={drawerVisible}
             >
-              <Detail orderItem={intfOrderItemMessages}/>
             </Drawer>
           </div>
         </Card>
@@ -770,4 +768,4 @@ class TableList extends PureComponent {
   }
 }
 
-export default TableList;
+export default WsdlList;

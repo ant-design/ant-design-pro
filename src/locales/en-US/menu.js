@@ -37,6 +37,7 @@ export default {
   'menu.apiGateway.apiUpdate': 'Update Api',
   'menu.apiGateway.apiDetail': 'Api Detail',
   'menu.apiGateway.apiDocUpdate': 'Compile Api Spec',
+  'menu.apiGateway.wsdlList': 'Wsdl List',
   'menu.userManager': 'Privilege Manager',
   'menu.userManager.user': 'User',
   'menu.userManager.role': 'Role',
