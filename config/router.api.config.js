@@ -84,11 +84,11 @@ export default [
             hideInMenu: true,
             component: './ApiGateway/ApiLog',
           },
-          // {
-          //   path: '/apiGateway/apiDebugAdd',
-          //   name: 'apiDebugAdd',
-          //   component: './ApiGateway/ApiDebug'
-          // },
+          {
+            path: '/apiGateway/wsdlList',
+            name: 'wsdlList',
+            component: './ApiGateway/WsdlList',
+          },
           {
             path: '/apiGateway/apiCreate',
             name: 'apiCreate',
