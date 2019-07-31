@@ -1,18 +1,34 @@
-import { wsdlList,saveWsdl,saveAuth,saveBatchApi,authDetail,parseWsdl } from '@/services/wsdlService';
+import { queryWsdlList,saveWsdl,saveAuth,saveBatchApi,authDetail,parseWsdl } from '@/services/wsdlService';
+import constants from '@/utils/constUtil';
+
+const { STATUS } = constants;
 
 export default {
   namespace: 'wsdlModel',
 
   state: {
-    logList:{},
-    logItemList:{}
+    data: {
+      list: [],
+      pagination: {},
+    },
+    wsdlList:[],
+    wsdl:{},
   },
 
   effects: {
-    *wsdlList({ payload ,callback}, { call, put }) {
-      const response = yield call(wsdlList, payload);
+    *fetchWsdlList({ payload ,callback}, { call, put }) {
+      const response = yield call(queryWsdlList, payload);
       yield put({
         type: 'save',
+        payload: response,
+      });
+      if (callback) callback(response);
+    },
+    *fetchWsdlListForSelectView({ payload ,callback}, { call, put }) {
+      const response = yield call(queryWsdlList, payload);
+      // console.log("fetchWsdlListForSelectView:",response);
+      yield put({
+        type: 'saveForSelectView',
         payload: response,
       });
       if (callback) callback(response);
@@ -46,11 +62,19 @@ export default {
 
   reducers: {
     save(state, action) {
-      const data = action.payload ? action.payload.data : [];
-      // groupList.unshift({"groupId": null, "groupName": "All"});
+      const data = action.payload ? action.payload.data : {};;
       return {
         ...state,
-        logItemList:data,
+        wsdlList:data,
+      };
+    },
+    saveForSelectView(state, action) {
+      const data = action.payload ? action.payload.data : {};
+      const records=data.records||[];
+      const wsdlList = records.filter(item => item.status === STATUS.A);
+      return {
+        ...state,
+        wsdlList,
       };
     },
   },

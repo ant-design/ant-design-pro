@@ -1,13 +1,16 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Upload, message, Icon, Form, Input, Button, Divider,Select } from 'antd';
+import { Form, Input, Button, Divider,Select } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
 import SelectView from '../SelectView';
 import RadioView from '../RadioView';
+import WsdlSelectView from "../WsdlSelectView";
+import { getUserId } from '@/utils/authority';
 
 const { Option } = Select;
 
+const userId = getUserId(); // 获取当前登录用户编号
 
 const formItemLayout = {
   labelCol: {
@@ -48,30 +51,6 @@ class Step2 extends React.PureComponent {
         }
       });
     };
-    // // console.log("step2 data:",data);
-
-    const props = {
-      name: 'files',
-      // action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-      action: '/server/baseInfo/file/uploadFiles',
-      headers: {
-        // authorization: 'authorization-text',
-        Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcl9hZG1pbiIsImlhdCI6MTU2MDMwNzQwOCwiZXhwIjoyNTA2Mzg3NDA4fQ.hgDNGH-0HWtD9vd1QAJC0yIbzXqldv6HyyO5q70q0kC09ypGSuPo-usnWl2WSWpwTBy1aq1VqfO87RDwv8IF-A',
-      },
-      data:{folder:"40e1e280-433a-4fae-bd92-dade83788698-20190726154914"},
-      accept: ".xsd,.wsdl",
-      onChange(info) {
-        console.log("upload....:",info);
-        if (info.file.status !== 'uploading') {
-          console.log(info.file, info.fileList);
-        }
-        if (info.file.status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`);
-        }
-      },
-    };
 
     return (
       <Fragment>
@@ -103,11 +82,7 @@ class Step2 extends React.PureComponent {
           <Form.Item {...formItemLayout} label="WSDL">
             {getFieldDecorator('wsdlId', {
               rules: [],
-            })(
-              <Select style={{ maxWidth: 220 }}>
-                <Option value="1">wsdl1</Option>
-                <Option value="2">wsdl2</Option>
-              </Select>)}
+            })(<WsdlSelectView userId={userId} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Action Name">
             {getFieldDecorator('actionName', {
