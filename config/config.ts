@@ -96,7 +96,7 @@ export default {
       authority: ['admin', 'user'],
       routes: [
         {
-          path: '/',
+          path: '/welcome',
           name: 'welcome',
           icon: 'smile',
           component: './Welcome',
