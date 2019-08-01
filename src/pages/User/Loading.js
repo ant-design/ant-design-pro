@@ -6,13 +6,13 @@ import { Spin,Alert } from 'antd';
 import styles from './Login.less';
 import { setAllEnumData } from '@/utils/masterData';
 import { getPageQuery } from '@/utils/utils';
-import {flatToMenuTree} from '../UserManager/userUtil'
 
 
 const timeout=400;
 
-@connect(({ loadingModel, loading }) => ({
+@connect(({ apiGatewayModel, loadingModel, loading }) => ({
   loadingModel,
+  apiGatewayModel,
   submitting: loading.effects['loadingModel/getMenuData'],
 }))
 class LoadingPage extends Component {
@@ -28,6 +28,9 @@ class LoadingPage extends Component {
     } = this.props;
     dispatch({
       type: 'loadingModel/getMenuData',
+    });
+    dispatch({
+      type: 'apiGatewayModel/initData',
     });
     this.interval = setInterval(() => this.monitor(), timeout);
 
