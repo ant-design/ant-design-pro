@@ -102,6 +102,62 @@ export default {
           component: './Welcome',
         },
         {
+          path: '/access',
+          name: '模块接入',
+          component: './Welcome',
+          routes: [
+            {
+              path: '/access/package',
+              name: '安装包管理',
+              component: './404',
+            },
+            {
+              path: '/acess/module',
+              name: '模块管理',
+              component: './404',
+            },
+            {
+              path: '/access/deployment',
+              name: 'deployment管理',
+              component: './404',
+            },
+          ],
+        },
+        {
+          path: '/image',
+          name: '镜像构建',
+          // component: './image/creation',
+          routes: [
+            {
+              path: '/image/creation',
+              name: '镜像构建',
+              // component: '/image/Creation',
+            },
+            {
+              path: '/image/list',
+              name: '镜像列表',
+              // component: './image/List',
+            },
+          ],
+        },
+        {
+          path: '/service',
+          name: '应用管理',
+          component: './404',
+          routes: [
+            {
+              path: '/service/creation',
+              name: '创建应用',
+              // component: './service/Creation',
+            },
+            {
+              path: '/service/list',
+              name: '应用列表',
+              // component: './service/List',
+            },
+          ],
+        },
+        {
           component: './404',
         },
       ],
