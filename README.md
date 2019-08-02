@@ -124,3 +124,7 @@ Any type of contribution is welcome, here are some examples of how you may contr
     <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
   </a>
 </div>
+
+## debug
+
+npm install -g umi umi block list umi block add [block url]
