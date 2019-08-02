@@ -63,7 +63,7 @@ class TableList extends PureComponent {
     data: [],
     value: [],
     fetching: false,
-    rangePickerValue: getTimeDistance('today'),
+    rangePickerValue: getTimeDistance('year'),
     targetOrgs:[]
   };
 
@@ -688,6 +688,10 @@ class TableList extends PureComponent {
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
 
+  handleExpandedRowsChange = (record)=>{
+    console.log("1:",record)
+  }
+
   render() {
 
     const {loading} = this.props;
@@ -752,7 +756,9 @@ class TableList extends PureComponent {
               dataSource={logList}
               pagination={paginationProps}
               onChange={this.handleTableChange}
+              onExpandedRowsChange={this.handleExpandedRowsChange}
               defaultExpandAllRows={false}
+              expandedRowKeys={['1','2','3']}
             />
             <Drawer
               width={850}

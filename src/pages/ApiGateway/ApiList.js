@@ -32,6 +32,7 @@ import OrgTransfer from './OrgTransfer';
 import {getPayloadForAccess} from './ApiCreate/util';
 import Authorized from '@/utils/Authorized';
 import {getAuth, getUserId} from '@/utils/authority';
+import GroupMutiTreeSelectView from "./GroupMutiTreeSelectView";
 
 const { check } = Authorized;
 
@@ -437,6 +438,7 @@ class TableList extends PureComponent {
     const payload = {};
     payload.data = {};
     payload.data.info = {};
+    payload.option=4;
     payload.data.info.apiId = record.apiId;
     dispatch({
       type: 'apiCreateModel/apiInfo',
@@ -538,7 +540,7 @@ class TableList extends PureComponent {
     const { updateApiServiceOrg, selectedRow } = this.state;
     const { dispatch } = this.props;
     console.log('---updateApiServiceOrg＝＝＝＝4:', updateApiServiceOrg);
-    selectedRow.apiServiceOrgs = updateApiServiceOrg;
+    selectedRow.apiServiceOrgs = updateApiServiceOrg||[];
     const apiInfo = getPayloadForAccess(selectedRow);
     console.log('api access submit apiInfo:', apiInfo);
     // submit the values
@@ -601,10 +603,8 @@ class TableList extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="分组">
-              {getFieldDecorator('groupId')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  {this.getGroupOption()}
-                </Select>
+              {getFieldDecorator('groupIds')(
+                <GroupMutiTreeSelectView style={{ width: '100%' }} />
               )}
             </FormItem>
           </Col>

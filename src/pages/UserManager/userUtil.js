@@ -91,6 +91,20 @@ export function flatToTree(list, data, fatherId) {
   });
 }
 
+
+export function flatToGroupTree(list, data, fatherId) {
+  list.forEach(item => {
+    if (item.parentGroupId === fatherId) {
+      const child = {...item, children: []};
+      flatToGroupTree(list, child.children, item.groupId);
+      if(child.children.length===0){
+        delete child.children;
+      }
+      data.push(child);
+    }
+  });
+}
+
 export function flatToPrivilegeTreeSelect(list, data, fatherId) {
   list.forEach(item => {
     if (item.parentPrivilegeId === fatherId) {
@@ -104,6 +118,21 @@ export function flatToPrivilegeTreeSelect(list, data, fatherId) {
   });
 }
 
+export function flatToGroupTreeSelect(list, data, fatherId) {
+  // console.log(list);
+  list.forEach(item => {
+    // if(fatherId===1)
+    //   console.log("fatherid=1,",fatherId,item.parentGroupId,item.groupName);
+    if (item.parentGroupId === fatherId) {
+      const child = {treeNodeFilterProp:'title',title:`${item.groupId}-${item.groupName}`,value:item.groupId,key:item.groupId, children: []};
+      flatToGroupTreeSelect(list, child.children, item.groupId);
+      if(child.children.length===0){
+        delete child.children;
+      }
+      data.push(child);
+    }
+  });
+}
 function push(arr,willAddArr) {
   willAddArr.forEach(addEle=>{
     const d=arr.find(ele=>ele===addEle);

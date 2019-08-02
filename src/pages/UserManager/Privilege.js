@@ -6,7 +6,7 @@ import QueryCommand from '@/components/QueryTable/QueryCommand';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { getItems } from '@/utils/masterData';
 import RoleTransfer from "./RoleTransfer";
-import {flatToPrivilegeTreeSelect, flatToTree,} from "./userUtil"
+import {flatToTree,} from "./userUtil"
 
 
 @connect(({ uniComp, loading }) => ({
@@ -160,12 +160,12 @@ class Privilege extends PureComponent {
     return newList;
   }
 
-  // 获取treeselect的数据
-  handleTreeSelectData=(list)=>{
-    const privilegeTreeDataForSelect=[];
-    flatToPrivilegeTreeSelect(list,privilegeTreeDataForSelect,0);
-    return privilegeTreeDataForSelect;
-  }
+  // // 获取treeselect的数据
+  // handleTreeSelectData=(list)=>{
+  //   const privilegeTreeDataForSelect=[];
+  //   flatToPrivilegeTreeSelect(list,privilegeTreeDataForSelect,0);
+  //   return privilegeTreeDataForSelect;
+  // }
 
   handleVisible=(modalVisible)=>{
     // console.log("---modalVisible＝＝＝＝3:",modalVisible);

@@ -18,14 +18,15 @@ import {
   Row,
   Select,
 } from 'antd';
-import Ellipsis from '@/components/Ellipsis';
 import moment from 'moment'; // 不能用｛moment｝
 import { formatMessage } from 'umi-plugin-react/locale';
+import Ellipsis from '@/components/Ellipsis';
 import StandardTable from '@/components/StandardTable';
 import Detail from './Detail';
 import styles from './index.less';
 
 import PrivilegeTreeSelectView from '@/pages/UserManager/PrivilegeTreeSelectView';
+import GroupTreeSelectView from '@/pages/ApiGateway/GroupTreeSelectView';
 import AdapterSelectView from '@/pages/ApiGateway/AdapterSelectView';
 import OrgSelectView from "../../pages/ApiGateway/OrgSelectView";
 
@@ -100,6 +101,8 @@ const CreateForm = Form.create()(props => {
             ))}
           </RadioGroup>
         );
+      case 'groupTreeSelect':
+        return <GroupTreeSelectView style={{ width: '100%' }} />;
       case 'privilegeTreeSelect':
         return <PrivilegeTreeSelectView style={{ width: '100%' }} />;
       case 'AdapterSelectView':
