@@ -63,7 +63,7 @@ class TableList extends PureComponent {
     data: [],
     value: [],
     fetching: false,
-    rangePickerValue: getTimeDistance('year'),
+    rangePickerValue: getTimeDistance('today'),
     targetOrgs:[]
   };
 
