@@ -611,13 +611,13 @@ class TableList extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="requestTime">
-                {getFieldDecorator('requestTime', {
-                  initialValue: rangePickerValue
-                })(<RangePicker
-                  onChange={this.handleRangePickerChange}
-                  showTime={{ format: 'HH:mm' }}
-                  style={{width: 256}}
-                />)}
+              {getFieldDecorator('requestTime', {
+                initialValue: rangePickerValue
+              })(<RangePicker
+                onChange={this.handleRangePickerChange}
+                showTime={{ format: 'HH:mm' }}
+                style={{width: 256}}
+              />)}
             </FormItem>
           </Col>
         </Row>
@@ -688,10 +688,6 @@ class TableList extends PureComponent {
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
 
-  handleExpandedRowsChange = (record)=>{
-    console.log("1:",record)
-  }
-
   render() {
 
     const {loading} = this.props;
@@ -756,9 +752,7 @@ class TableList extends PureComponent {
               dataSource={logList}
               pagination={paginationProps}
               onChange={this.handleTableChange}
-              onExpandedRowsChange={this.handleExpandedRowsChange}
               defaultExpandAllRows={false}
-              expandedRowKeys={['1','2','3']}
             />
             <Drawer
               width={850}
