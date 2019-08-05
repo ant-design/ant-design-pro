@@ -15,7 +15,7 @@ const getRouteAuthority = (path: string, routeData: Route[]) => {
     // match prefix
     if (pathToRegexp(`${route.path}(.*)`).test(path)) {
       // exact match
-      if (route.path === path) {
+      if ((route.path === path || route.path + '/' === path) {
         authorities = route.authority || authorities;
       }
       // get children authority recursively
