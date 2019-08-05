@@ -1,10 +1,11 @@
 import React, {PureComponent} from 'react';
-import {Card, Col, Row} from 'antd';
+import {Card, Col, Row, Input} from 'antd';
 
 import Ellipsis from '@/components/Ellipsis';
 import DescriptionList from '@/components/DescriptionList';
 
 const {Description} = DescriptionList;
+const { TextArea } = Input;
 
 
 const fieldLabels = {
@@ -31,18 +32,18 @@ class Detail extends PureComponent {
                 </div>
               </Description>
               <Description term={fieldLabels.address}>
-                <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${item.address}`}</Ellipsis>
+                <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${item.address?item.address:''}`}</Ellipsis>
               </Description>
             </DescriptionList>
             <DescriptionList>
               <Description style={{width:350}}>
                 <div style={{width:330}}>
-                  <Ellipsis tooltip length={280} style={{overflow: "inherit",width:1000}}>{`reqMessage: ${item.reqMessage}`}</Ellipsis>
+                  <TextArea rows={20} value={item.reqMessage} />
                 </div>
               </Description>
               <Description>
-                <div style={{width:300}}>
-                  <Ellipsis tooltip length={300} style={{overflow: "inherit"}}>{`respMessage: ${item.respMessage}`}</Ellipsis>
+                <div style={{width:400}}>
+                  <TextArea rows={20} value={item.respMessage} />
                 </div>
               </Description>
             </DescriptionList>
