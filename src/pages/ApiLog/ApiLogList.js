@@ -611,13 +611,13 @@ class TableList extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="requestTime">
-                {getFieldDecorator('requestTime', {
-                  initialValue: rangePickerValue
-                })(<RangePicker
-                  onChange={this.handleRangePickerChange}
-                  showTime={{ format: 'HH:mm' }}
-                  style={{width: 256}}
-                />)}
+              {getFieldDecorator('requestTime', {
+                initialValue: rangePickerValue
+              })(<RangePicker
+                onChange={this.handleRangePickerChange}
+                showTime={{ format: 'HH:mm' }}
+                style={{width: 256}}
+              />)}
             </FormItem>
           </Col>
         </Row>

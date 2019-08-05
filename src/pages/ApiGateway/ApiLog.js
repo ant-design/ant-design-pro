@@ -150,7 +150,6 @@ class ApiUpdate extends PureComponent {
     );
   };
 
-
   validate = () => {
     const {
       form: {validateFieldsAndScroll},

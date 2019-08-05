@@ -1,7 +1,6 @@
 import { routerRedux } from 'dva/router';
-import { saveApi,apiInfo } from '@/services/apiGatewayService';
-
 import { message } from 'antd';
+import { saveApi,apiInfo } from '@/services/apiGatewayService';
 import constants from '@/utils/constUtil';
 
 const {CALL_POINT} = constants;
@@ -126,6 +125,7 @@ export default {
         // requestUrl: '/rest',
         // createUser:'Alex',
         apiType:'1',
+        pathPrefix:'/rest/',
         apiServiceBackends:[{
           serviceType:'1',
           socketTimeout: 20000,

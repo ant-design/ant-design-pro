@@ -84,7 +84,7 @@ class Step3 extends React.PureComponent {
           {getFieldDecorator('reqPath', {
             initialValue: data.reqPath,
             rules: [],
-          })(<Input placeholder="/xxx/xxx" />)}
+          })(<Input placeholder="Only For Rest:/xxx/xxx" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="服务请求类型">
           {getFieldDecorator('reqMethod', {
@@ -95,7 +95,13 @@ class Step3 extends React.PureComponent {
         <Form.Item {...formItemLayout} label="服务连接超时（ms）">
           {getFieldDecorator('connectTimeout', {
             initialValue: data.connectTimeout,
-            rules: [{ required: true, message: '服务连接超时（ms）' }],
+            rules: [
+              { required: true, message: '服务连接超时（ms）' },
+              {
+                pattern: /^[0-9]*[1-9][0-9]*$/,
+                message: 'Malformed number',
+              },
+            ],
           })(<Input placeholder="请输入服务连接超时（ms）" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="服务请求超时（ms）">

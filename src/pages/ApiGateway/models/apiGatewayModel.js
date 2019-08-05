@@ -61,5 +61,15 @@ export default {
         data,
       };
     },
+    initData(state){
+      const data= {
+        list: [],
+          pagination: {},
+      };
+      return {
+        ...state,
+        data,
+      };
+    },
   },
 };
