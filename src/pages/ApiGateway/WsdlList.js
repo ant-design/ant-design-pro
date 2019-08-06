@@ -764,30 +764,6 @@ class WsdlList extends PureComponent {
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
 
-            <div className={styles.tableAlert} style={selectedRowKeys.length===0?{display:'none'}:{}}>
-              <Alert
-                message={
-                  <Fragment>
-                    已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
-                    {needTotalList.map(item => (
-                      <span style={{ marginLeft: 8 }} key={item.dataIndex}>
-                    {item.title}
-                        总计&nbsp;
-                        <span style={{ fontWeight: 600 }}>
-                      {item.render ? item.render(item.total) : item.total}
-                    </span>
-                  </span>
-                    ))}
-                    <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>
-                      清空
-                    </a>
-                  </Fragment>
-                }
-                type="info"
-                showIcon
-              />
-            </div>
-
             <Table
               rowKey={rowKey || 'key'}
               loading={loading}
