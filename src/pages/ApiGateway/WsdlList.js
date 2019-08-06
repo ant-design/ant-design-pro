@@ -21,6 +21,7 @@ import {
 } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Ellipsis from '@/components/Ellipsis';
 import WsdlUpload from "./WsdlUpload";
 
 import styles from './ApiList.less';
@@ -716,6 +717,9 @@ class WsdlList extends PureComponent {
       {
         title: 'wsdlUrl',
         dataIndex: 'wsdlUrl',
+        render(val) {
+          return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
+        },
       },
       {
         title: 'wsdlFileName',
