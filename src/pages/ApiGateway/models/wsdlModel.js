@@ -1,5 +1,6 @@
-import { queryWsdlList,saveWsdl,saveAuth,saveBatchApi,authDetail,parseWsdl } from '@/services/wsdlService';
+import { queryWsdlList,saveWsdl,saveAuth,saveBatchApi,authDetail,parseWsdl,fileWsdl,removeFile } from '@/services/wsdlService';
 import constants from '@/utils/constUtil';
+import { conversionWsdl } from '../../util';
 
 const { STATUS } = constants;
 
@@ -13,6 +14,7 @@ export default {
     },
     wsdlList:[],
     wsdl:{},
+    fileList:[]
   },
 
   effects: {
@@ -58,14 +60,32 @@ export default {
       const response = yield call(parseWsdl, payload);
       if (callback) callback(response);
     },
+    *fileWsdl({ payload , callback}, { call, put }) {
+      // console.log('payload', JSON.stringify(payload));
+      const response = yield call(fileWsdl, payload);
+      yield put({
+        type: 'saveForUpload',
+        payload: response,
+      });
+      if (callback) callback(response);
+    },
+    *removeFile({ payload , callback}, { call, put }) {
+      // console.log('payload', JSON.stringify(payload));
+      const response = yield call(removeFile, payload);
+      yield put({
+        type: 'saveForUpload',
+        payload: response,
+      });
+      if (callback) callback(response);
+    },
   },
 
   reducers: {
     save(state, action) {
-      const data = action.payload ? action.payload.data : {};;
+      const data = conversionWsdl(action.payload.data);
       return {
         ...state,
-        wsdlList:data,
+        data,
       };
     },
     saveForSelectView(state, action) {
@@ -75,6 +95,13 @@ export default {
       return {
         ...state,
         wsdlList,
+      };
+    },
+    saveForUpload(state, action) {
+      const fileList = action.payload ? action.payload.data : [];
+      return {
+        ...state,
+        fileList
       };
     },
   },

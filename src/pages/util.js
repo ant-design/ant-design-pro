@@ -18,6 +18,24 @@ export function conversion(responseData) {
   return retData;
 }
 
+export function conversionWsdl(responseData) {
+  let retData = responseData;
+  if (!responseData) {
+    retData = {
+      list: [],
+      pagination: {},
+    };
+  } else if (responseData.records) {
+    retData = mapKeys(responseData, (value, key) => {
+      if (key === 'records') return 'list';
+      if (key === 'page') return 'pagination';
+      return key;
+    });
+  }
+  retData.pagination={...retData.pagination,current:retData.pagination.pageNo};
+  return retData;
+}
+
 export function conversionReq(requestData) {
   const { tableName, userName,userId,apiId, option, pageSize, ...info } = requestData;
   if (!option) {

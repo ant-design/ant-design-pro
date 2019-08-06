@@ -39,7 +39,7 @@ const getValue = obj =>
   loading: loading.models.apiLogModel,
 }))
 @Form.create()
-class TableList extends PureComponent {
+class ApiLogList extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -64,7 +64,8 @@ class TableList extends PureComponent {
     value: [],
     fetching: false,
     rangePickerValue: getTimeDistance('today'),
-    targetOrgs:[]
+    targetOrgs:[],
+    expandAllFlag:false,
   };
 
   componentWillMount() {
@@ -200,7 +201,7 @@ class TableList extends PureComponent {
       },
     ];
 
-    return (<Table columns={columns} size="small" dataSource={logItemList} pagination={false}/>);
+    return (<Table columns={columns} size="small" dataSource={logItemList} pagination={false} />);
 
   };
 
@@ -594,8 +595,8 @@ class TableList extends PureComponent {
     const {fetching, data, value, rangePickerValue} = this.state;
 
     const orderExtSel =
-      getFieldDecorator('extFlag', {})(<Select
-        style={{width: 110}}>{this.getOptionMaster("apiOrderExt", "ext_flag")}</Select>);
+      getFieldDecorator('extFlag', {})(
+        <Select style={{width: 110}}>{this.getOptionMaster("apiOrderExt", "ext_flag")}</Select>);
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
@@ -630,7 +631,7 @@ class TableList extends PureComponent {
                   labelInValue
                   value={value}
                   placeholder="Select apiName"
-                  notFoundContent={fetching ? <Spin size="small"/> : null}
+                  notFoundContent={fetching ? <Spin size="small" /> : null}
                   filterOption={false}
                   onSearch={this.fetchApi}
                   onChange={this.handleChange}
@@ -654,8 +655,7 @@ class TableList extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="extSelect">
-              {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel}
-                                                        placeholder="Please input extInput" />)}
+              {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel} placeholder="Please input extInput" />)}
             </FormItem>
           </Col>
         </Row>
@@ -689,7 +689,7 @@ class TableList extends PureComponent {
   }
 
   render() {
-
+    const {expandAllFlag}= this.state;
     const {loading} = this.props;
     const {logList, pagination, drawerVisible, selectedRow} = this.state;
     const intfOrderItemMessages = selectedRow ? selectedRow.intfOrderItemMessages : [];
@@ -752,7 +752,7 @@ class TableList extends PureComponent {
               dataSource={logList}
               pagination={paginationProps}
               onChange={this.handleTableChange}
-              defaultExpandAllRows={false}
+              defaultExpandAllRows={expandAllFlag}
             />
             <Drawer
               width={850}
@@ -761,7 +761,7 @@ class TableList extends PureComponent {
               onClose={this.onDrawerClose}
               visible={drawerVisible}
             >
-              <Detail orderItem={intfOrderItemMessages}/>
+              <Detail orderItem={intfOrderItemMessages} />
             </Drawer>
           </div>
         </Card>
@@ -770,4 +770,4 @@ class TableList extends PureComponent {
   }
 }
 
-export default TableList;
+export default ApiLogList;

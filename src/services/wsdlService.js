@@ -56,3 +56,13 @@ export async function parseWsdl(params) {
   console.log('params in queryApi:', params,`${PREFIX_PATH}/baseInfo/wsdl/parseWsdl?wsdlId=${params.wsdlId}`);
   return request(`${PREFIX_PATH}/baseInfo/wsdl/parseWsdl?wsdlId=${params.wsdlId}`);
 }
+
+export async function fileWsdl(params) {
+  console.log('params in queryApi:', params,`${PREFIX_PATH}/baseInfo/file/${params.folder}/list`);
+  return request(`${PREFIX_PATH}/baseInfo/file/${params.folder}/list`);
+}
+
+export async function removeFile(params) {
+  console.log('params in queryApi:', params,`${PREFIX_PATH}/baseInfo/file/removeFile?fileName=${params.fileName}&folder=${params.folder}`);
+  return request(`${PREFIX_PATH}/baseInfo/file/removeFile?fileName=${params.fileName}&folder=${params.folder}`);
+}
