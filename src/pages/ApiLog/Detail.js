@@ -3,6 +3,7 @@ import {Card, Col, Row, Input} from 'antd';
 
 import Ellipsis from '@/components/Ellipsis';
 import DescriptionList from '@/components/DescriptionList';
+import {getItemValue} from '@/utils/masterData';
 
 const {Description} = DescriptionList;
 const { TextArea } = Input;
@@ -12,16 +13,20 @@ const fieldLabels = {
   reqMessage: 'reqMessage',
   respMessage: 'respMessage',
   seq: 'seq',
-  address: 'address',
+  encryptFlag: 'encryptFlag',
 }
 
 class Detail extends PureComponent {
 
+  getSecretFlag = (secretFlag) =>{
+    return secretFlag?getItemValue('apiOrderExt', 'secret_flag', secretFlag):"";
+  }
 
-  getOrderItem = (reqTarget) => {
+  getOrderItem = () => {
 
     const {orderItem} = this.props;
-    return orderItem.map(item =>
+
+    return orderItem?orderItem.map(item =>
       <Row>
         <Col>
           <Card title={`${item.orderItemCode}`} bordered={false} extra={`${item.createTime}`}>
@@ -31,8 +36,8 @@ class Detail extends PureComponent {
                   <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${item.seq}`}</Ellipsis>
                 </div>
               </Description>
-              <Description term={fieldLabels.address}>
-                <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${reqTarget}`}</Ellipsis>
+              <Description style={{width:350}} term={fieldLabels.encryptFlag}>
+                <Ellipsis tooltip length={40} style={{overflow: "inherit"}}>{this.getSecretFlag(`${item.encryptFlag}`)}</Ellipsis>
               </Description>
             </DescriptionList>
             <DescriptionList>
@@ -50,17 +55,16 @@ class Detail extends PureComponent {
           </Card>
         </Col>
       </Row>
-    );
+    ):'The order item has not order message';
 
   }
 
 
   render() {
-    const {reqTarget} = this.props;
-    return (
 
+    return (
       <div>
-        {this.getOrderItem(reqTarget)}
+        {this.getOrderItem()}
       </div>
 
     );

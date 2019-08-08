@@ -378,8 +378,8 @@ class ApiLogList extends PureComponent {
     const {formValues,targetOrgs} = this.state;
 
     const {requestTime,extFlag ,extInput } = formValues;
-    const requestStartTime = requestTime[0].format('YYYY-MM-DD HH:mm:ss');
-    const requestEndTime = requestTime[1].format('YYYY-MM-DD HH:mm:ss');
+    const requestStartTime = requestTime[0].format('YYYY-MM-DD HH:mm:ss.SSS');
+    const requestEndTime = requestTime[1].format('YYYY-MM-DD HH:mm:ss.SSS');
 
     switch (extFlag) {
       case "1":
