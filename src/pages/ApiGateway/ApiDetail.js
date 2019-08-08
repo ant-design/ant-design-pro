@@ -131,8 +131,11 @@ const columns = [
     title: 'Request Url',
     dataIndex: 'url',
     render: (value, row) => {
+      let {reqPath,url} = row;
+      reqPath = reqPath || '';
+      url = url || '';
       return (
-        `${row.url}${row.reqPath}`
+        `${url}${reqPath}`
       )
     }
   }
