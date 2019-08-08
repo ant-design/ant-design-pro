@@ -17,6 +17,7 @@ import {
 } from 'antd';
 import debounce from 'lodash/debounce';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Ellipsis from '@/components/Ellipsis';
 import styles from '../ApiGateway/ApiList.less';
 import {getItems} from '@/utils/masterData';
 import Detail from './Detail';
@@ -188,15 +189,22 @@ class ApiLogList extends PureComponent {
           <a onClick={() => this.handleDetail(record)}>{text}</a>,
       },
       {
+        title: 'implType',
+        dataIndex: 'implType',
+      },
+      {
+        title: 'reqTarget',
+        dataIndex: 'reqTarget',
+        render : val =>  <Ellipsis tooltip length={40} style={{overflow: "inherit"}}>{`${val}`}</Ellipsis>
+      },
+      {
         title: 'reqTime',
         dataIndex: 'reqTime',
-        sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
       {
         title: 'respTime',
         dataIndex: 'respTime',
-        sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
     ];
@@ -332,8 +340,8 @@ class ApiLogList extends PureComponent {
         default:
           break;
       }
-      const requestStartTime = requestTime[0].format('YYYY-MM-DD HH:mm:ss');
-      const requestEndTime = requestTime[1].format('YYYY-MM-DD HH:mm:ss');
+      const requestStartTime = requestTime[0].format('YYYY-MM-DD HH:mm:ss.SSS');
+      const requestEndTime = requestTime[1].format('YYYY-MM-DD HH:mm:ss.SSS');
       const {filtersArg, sorter} = this.state;
       const filters = this.conversionFilter(filtersArg);
       const userName = getUserName();
@@ -693,7 +701,6 @@ class ApiLogList extends PureComponent {
     const {loading} = this.props;
     const {logList, pagination, drawerVisible, selectedRow} = this.state;
     const intfOrderItemMessages = selectedRow ? selectedRow.intfOrderItemMessages : [];
-    const reqTarget = selectedRow ? selectedRow.reqTarget : '';
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
@@ -738,7 +745,7 @@ class ApiLogList extends PureComponent {
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
     ];
-
+    const defaultExpandedRowKeys=[];
     return (
       <PageHeaderWrapper showBreadcrumb style={{height: '50px'}}>
         <Card bordered={false}>
@@ -754,6 +761,7 @@ class ApiLogList extends PureComponent {
               pagination={paginationProps}
               onChange={this.handleTableChange}
               defaultExpandAllRows={expandAllFlag}
+              defaultExpandedRowKeys={defaultExpandedRowKeys}
             />
             <Drawer
               width={850}
@@ -762,7 +770,7 @@ class ApiLogList extends PureComponent {
               onClose={this.onDrawerClose}
               visible={drawerVisible}
             >
-              <Detail orderItem={intfOrderItemMessages} reqTarget={reqTarget} />
+              <Detail orderItem={intfOrderItemMessages} />
             </Drawer>
           </div>
         </Card>
