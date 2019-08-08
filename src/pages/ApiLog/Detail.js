@@ -18,7 +18,7 @@ const fieldLabels = {
 class Detail extends PureComponent {
 
 
-  getOrderItem = () => {
+  getOrderItem = (reqTarget) => {
 
     const {orderItem} = this.props;
     return orderItem.map(item =>
@@ -32,7 +32,7 @@ class Detail extends PureComponent {
                 </div>
               </Description>
               <Description term={fieldLabels.address}>
-                <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${item.address?item.address:''}`}</Ellipsis>
+                <Ellipsis tooltip length={20} style={{overflow: "inherit"}}>{`${reqTarget}`}</Ellipsis>
               </Description>
             </DescriptionList>
             <DescriptionList>
@@ -56,11 +56,11 @@ class Detail extends PureComponent {
 
 
   render() {
-
+    const {reqTarget} = this.props;
     return (
 
       <div>
-        {this.getOrderItem()}
+        {this.getOrderItem(reqTarget)}
       </div>
 
     );

@@ -693,6 +693,7 @@ class ApiLogList extends PureComponent {
     const {loading} = this.props;
     const {logList, pagination, drawerVisible, selectedRow} = this.state;
     const intfOrderItemMessages = selectedRow ? selectedRow.intfOrderItemMessages : [];
+    const reqTarget = selectedRow ? selectedRow.reqTarget : '';
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
@@ -761,7 +762,7 @@ class ApiLogList extends PureComponent {
               onClose={this.onDrawerClose}
               visible={drawerVisible}
             >
-              <Detail orderItem={intfOrderItemMessages} />
+              <Detail orderItem={intfOrderItemMessages} reqTarget={reqTarget} />
             </Drawer>
           </div>
         </Card>
