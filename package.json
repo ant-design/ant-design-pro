@@ -145,7 +145,7 @@
     "ignoreDependencies": [
       "netlify*",
       "serverless",
-      "express"
+      "^express$"
     ],
     "ignore": [
       ".dockerignore",
