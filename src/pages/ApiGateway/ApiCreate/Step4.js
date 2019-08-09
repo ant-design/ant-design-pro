@@ -28,6 +28,9 @@ class Step4 extends React.PureComponent {
         },
       });
     };
+    const apiList = () => {
+      router.push('/apiGateway/apiList');
+    };
     const information = (
       <div className={styles.information}>
         <Row>
@@ -71,6 +74,9 @@ class Step4 extends React.PureComponent {
         </Button>
         <Button onClick={advance} htmlType="button">
           高级配置
+        </Button>
+        <Button onClick={apiList} htmlType="button">
+          返回列表
         </Button>
       </Fragment>
     );
