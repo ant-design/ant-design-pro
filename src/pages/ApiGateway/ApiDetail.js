@@ -695,7 +695,7 @@ class ApiDetail extends PureComponent {
 
         <BackTop />
         <FooterToolbar style={{width}}>
-          <Button type="primary" onClick={this.returnPage}>
+          <Button type="primary" block onClick={this.returnPage}>
             返回
           </Button>
         </FooterToolbar>
