@@ -90,6 +90,11 @@ export default [
             component: './ApiGateway/WsdlList',
           },
           {
+            path: '/apiGateway/wsdlAuth',
+            name: 'wsdlAuth',
+            component: './ApiGateway/WsdlAuth',
+          },
+          {
             path: '/apiGateway/apiCreate',
             name: 'apiCreate',
             component: './ApiGateway/ApiCreate',
