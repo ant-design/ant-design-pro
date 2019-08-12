@@ -763,8 +763,11 @@ class ApiUpdate extends PureComponent {
 
         <BackTop />
         <FooterToolbar style={{ width }} extra={this.getErrorInfo()} extra2=''>
-          <Button type="primary" block onClick={this.validate} loading={submitting}>
+          <Button style={{width:220}} type="primary" onClick={this.validate} loading={submitting}>
             提交
+          </Button>
+          <Button style={{width:220}} onClick={() => window.history.back()}>
+            返回
           </Button>
         </FooterToolbar>
       </PageHeaderWrapper>
