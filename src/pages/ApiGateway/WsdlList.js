@@ -390,6 +390,12 @@ class WsdlList extends PureComponent {
 
   };
 
+  handleRefreshData = () =>{
+    console.log("onRefreshData");
+    const { pagination, filtersArg, sorter } = this.state;
+    this.handleTableChange(pagination, filtersArg, sorter);
+  }
+
   handleModalVisible = (row, flag) => {
     this.setState({
       modalVisible: flag,
@@ -717,7 +723,7 @@ class WsdlList extends PureComponent {
               selectedRow={selectedRow}
               apiVisible={apiVisible}
               onVisible={this.handleApiVisible}
-              onRefreshData={this.handleSearch}
+              onRefreshData={this.handleRefreshData}
             />
           </div>
         </Card>

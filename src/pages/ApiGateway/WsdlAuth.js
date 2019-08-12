@@ -31,6 +31,7 @@ class WsdlAuth extends PureComponent {
     selectedRow:{},
     modalVisible:false,
     filtersArg: {},
+    sorter:{}
   };
 
   componentDidMount() {
@@ -207,8 +208,8 @@ class WsdlAuth extends PureComponent {
   }
 
   handleRefreshData = () =>{
-    const {wsdlId} = this.state;
-    this.getWsdl(wsdlId);
+    const { pagination, filtersArg, sorter } = this.state;
+    this.handleTableChange(pagination, filtersArg, sorter);
   }
 
   handleAccess = ( record ) =>{
