@@ -1,4 +1,5 @@
-import React, {PureComponent,Fragment} from 'react';
+import React, {PureComponent} from 'react';
+import router from 'umi/router';
 import {connect} from 'dva';
 import moment from 'moment';
 import {
@@ -10,26 +11,23 @@ import {
   Row,
   Select,
   Table,
-  Alert,
-  Upload,
   Icon,
   Modal,
   Divider,
   message,
   Dropdown,
-  Menu
+  Menu,
 } from 'antd';
-import pathToRegexp from 'path-to-regexp';
+import reqwest from 'reqwest';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Ellipsis from '@/components/Ellipsis';
 import WsdlUpload from "./WsdlUpload";
+import WsdlApi from "./WsdlApi";
 
 import styles from './ApiList.less';
-import {getItems} from '@/utils/masterData';
+import {getItems,getItemValue2} from '@/utils/masterData';
 import {getUserId} from "../../utils/authority";
 import constants from '@/utils/constUtil';
-
-import reqwest from 'reqwest';
 
 const { PREFIX_PATH,TOKEN_PREFIX,ACT,STATUS } = constants;
 
@@ -39,7 +37,11 @@ const getValue = obj =>
   Object.keys(obj)
     .map(key => obj[key])
     .join(',');
-
+const statusList = getItems('common', 'status');
+const statusFilter = statusList.map(item => ({
+  value: item.itemCode,
+  text: item.itemValue,
+}));
 
 /**
  * get form item array for query condition form and add(modify) form
@@ -132,14 +134,6 @@ const CreateForm = Form.create()(props => {
 
 });
 
-function initTotalList(columns) {
-  const totalList = [];
-  columns.forEach(column => {
-    totalList.push({ ...column, total: 0 });
-  });
-  return totalList;
-}
-
 /* eslint react/no-multi-comp:0 */
 @connect(({wsdlModel, loading}) => ({
   wsdlModel,
@@ -161,8 +155,8 @@ class WsdlList extends PureComponent {
     sorter: {},
     logList: [],
     selectedRows: [],
-    needTotalList:[],
     modalVisible:false,
+    apiVisible:false,
     fileList: [],
     columnSchemas:{},
   };
@@ -185,10 +179,8 @@ class WsdlList extends PureComponent {
     this.setState({columnSchemas});
 
     const userId = getUserId();
-    const range = "all";
     const payload = {
       userId,
-      range,
       data:{
         info:{
           pageNo: 1,
@@ -200,12 +192,9 @@ class WsdlList extends PureComponent {
       type: 'wsdlModel/fetchWsdlList',
       payload,
       callback: resp => {
-        console.log("callback",resp)
         const {data} = resp;
         const { page,records } = data;
-        const needTotalList = initTotalList(records);
         this.setState({
-          needTotalList,
           pagination:page,
           list:records
         });
@@ -273,17 +262,13 @@ class WsdlList extends PureComponent {
 
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
-    let { needTotalList } = this.state;
-    needTotalList = needTotalList.map(item => ({
-      ...item,
-      total: selectedRows.reduce((sum, val) => sum + parseFloat(val[item.dataIndex], 10), 0),
-    }));
+
     const { onSelectRow } = this.props;
     if (onSelectRow) {
       onSelectRow(selectedRows);
     }
 
-    this.setState({ selectedRowKeys, needTotalList });
+    this.setState({ selectedRowKeys });
   };
 
   cleanSelectedKeys = () => {
@@ -299,10 +284,8 @@ class WsdlList extends PureComponent {
     });
 
     const userId = getUserId();
-    const range = "all";
     const payload = {
       userId,
-      range,
       data: {
         info: {
           pageNo: 1,
@@ -316,21 +299,11 @@ class WsdlList extends PureComponent {
       callback: resp => {
         const {data} = resp;
         const { page,records } = data;
-        const needTotalList = initTotalList(records);
         this.setState({
-          needTotalList,
           pagination:page,
           list:records
         });
       }
-    });
-  };
-
-  handleChange = value => {
-    this.setState({
-      value,
-      data: [],
-      fetching: false,
     });
   };
 
@@ -351,10 +324,8 @@ class WsdlList extends PureComponent {
       const {filtersArg, sorter} = this.state;
       const filters = this.conversionFilter(filtersArg);
       const userId = getUserId();
-      const range = "all";
       const payload = {
         userId,
-        range,
         data: {
           info: {
             pageNo: 1,
@@ -369,12 +340,9 @@ class WsdlList extends PureComponent {
         type: 'wsdlModel/fetchWsdlList',
         payload,
         callback: resp => {
-          console.log("callback",resp)
           const {data} = resp;
           const { page,records } = data;
-          const needTotalList = initTotalList(records);
           this.setState({
-            needTotalList,
             pagination:page,
             list:records
           });
@@ -392,10 +360,8 @@ class WsdlList extends PureComponent {
     const filters = this.conversionFilter(filtersArg);
 
     const userId = getUserId();
-    const range = "all";
     const payload = {
       userId,
-      range,
       data: {
         info: {
           pageNo: paginations.current,
@@ -406,7 +372,6 @@ class WsdlList extends PureComponent {
         }
       }
     };
-    console.log("sorter",sorter);
     if (sorter.field) {
       payload.data.info.sorter = `${sorter.field}_${sorter.order}`;
     }
@@ -414,12 +379,9 @@ class WsdlList extends PureComponent {
       type: 'wsdlModel/fetchWsdlList',
       payload,
       callback: resp => {
-        console.log("callback",resp)
         const {data} = resp;
         const { page,records } = data;
-        const needTotalList = initTotalList(records);
         this.setState({
-          needTotalList,
           pagination:page,
           list:records
         });
@@ -437,35 +399,37 @@ class WsdlList extends PureComponent {
   };
 
 
-  handleDrawerVisible = (row, flag) => {
+  handleApiVisible = (row, flag) => {
     this.setState({
       selectedRow: row,
-      drawerVisible: !!flag,
+      apiVisible: flag,
     });
   };
 
-  handleCallback = addForm => {
-    // console.log('resp=======', resp);
-    addForm.resetFields();
-    this.setState({
-      modalVisible: false,
-      selectedRow: null,
+  handleApi = ( record ) =>{
+    this.handleApiVisible(record,true);
+  }
+
+  handleAccess = ( record ) =>{
+    const { wsdlId } = record;
+    router.push({
+      pathname: `/apiGateway/wsdlAuth`, // 通过url参数传递
+      state: {
+        // 通过对象传递
+        wsdlId,
+        record, // 表格某行的对象数据
+      },
     });
-    // console.log('ddd---------1');
-    this.handleSearch();
-  };
+  }
 
   handleFile = (fileList)=>{
 
 
     const newFileList = fileList.filter(item=> item.old !== 1);
-    this.setState({fileList:newFileList})
-    console.log("handleFile",newFileList);
+    this.setState({fileList:newFileList});
   }
 
-  handleAdd = (fields, addForm) => {
-
-    console.log('handleAdd:',fields);
+  handleAdd = (fields) => {
 
     const { selectedRow,columnSchemas } = this.state;
     const { key } = columnSchemas;
@@ -474,7 +438,7 @@ class WsdlList extends PureComponent {
 
     // 上传数据
     const { fileList } = this.state;
-    console.log("handleAdd",fileList);
+    // console.log("handleAdd",fileList);
     const formData = new FormData();
     fileList.forEach(file => {
       formData.append('files', file.originFileObj);
@@ -487,14 +451,12 @@ class WsdlList extends PureComponent {
 
     const token = localStorage.getItem("token");
     const tokenStr =  `${TOKEN_PREFIX}${token}`;
-    console.log("tokenStr",tokenStr);
-    // You can use any AJAX library you like
     reqwest({
       url: `${PREFIX_PATH}/baseInfo/wsdl/upload`,
       method: 'post',
       contentType: 'application/json',
       headers: {
-        Authorization :  `${TOKEN_PREFIX}${token}`
+        Authorization :  tokenStr
       },
       processData: false,
       data: formData,
@@ -518,7 +480,6 @@ class WsdlList extends PureComponent {
     payload.data.info = {};
     payload.option = parseInt(act, 10);
     payload.data.info.wsdlId = record.wsdlId;
-    console.log('-----:', payload, act);
     dispatch({
       type: 'wsdlModel/saveWsdl',
       payload,
@@ -547,25 +508,6 @@ class WsdlList extends PureComponent {
 
   }
 
-  handleApi = ( record ) =>{
-
-    const { dispatch } = this.props;
-    const {wsdlId,apiService,apiServiceBackends} = record;
-
-    const payload = {};
-    const wsdl = {wsdlId};
-    payload.data = {};
-    payload.data.info = {wsdl,apiService,apiServiceBackends};
-    dispatch({
-      type: 'wsdlModel/saveBatchApi',
-      payload,
-      callback: resp => {
-        this.respDeal(resp);
-      },
-    });
-
-  }
-
   respDeal = resp => {
     const { code } = resp;
     let { msg } = resp;
@@ -584,26 +526,48 @@ class WsdlList extends PureComponent {
     }
   };
 
-  handleDetail = (record) => {
-    this.handleDrawerVisible(record, true);
-  }
-
-  onDrawerClose = () => {
-    this.handleDrawerVisible(null, false);
-  }
-
-  cancelHandle = () => {
-    this.setState({
-      modalVisible: false,
-      selectedRow: null,
-    });
+  renderMoreBtn = props => {
+    const {current} = props;
+    const {status} = current;
+    return (
+      <Dropdown
+        overlay={
+          <Menu onClick={({key}) => this.moreHandle(key, current)}>
+            {status === STATUS.D ? <Menu.Item key="handleActivate">Activate</Menu.Item> : null}
+            {status !== STATUS.A ? <Menu.Item key="handleParse">Parse</Menu.Item> : null}
+            {status === STATUS.A ? <Menu.Item key="handleApi">Set Api</Menu.Item> : null}
+            {status === STATUS.A ? <Menu.Item key="handleAccess">Access</Menu.Item> : null}
+            {status !== STATUS.D ? <Menu.Item key="handleDelete">Delete</Menu.Item> : null}
+          </Menu>
+        }
+      >
+        <a>
+           More <Icon type="down" />
+        </a>
+      </Dropdown>
+    );
   };
 
-  okHandle = () => {
-
+  moreHandle = (key, record) => {
+    if (key === 'handleOffline') {
+      this.handleStatusClick(ACT.OFFLINE, record);
+    } else if (key === 'handleDelete') {
+      this.handleStatusClick(ACT.DEL, record);
+    } else if (key === 'handleActivate') {
+      this.handleStatusClick(ACT.ONLINE, record);
+    } else if (key === 'handleParse'){
+      // 先解析
+      this.handleParse(record);
+    } else if (key === 'handleApi'){
+      // 批量设置Api
+      this.handleApi(record);
+    } else if (key === 'handleAccess'){
+      // 批量授权Api
+      this.handleAccess(record);
+    }
   };
 
-  renderSimpleForm() {
+  renderForm() {
     const {
       form: {getFieldDecorator},
     } = this.props;
@@ -642,55 +606,12 @@ class WsdlList extends PureComponent {
     );
   }
 
-  renderForm() {
-    return this.renderSimpleForm();
-  }
-
-  renderMoreBtn = props => {
-    const {current} = props;
-    const {status,apiService} = current;
-    return (
-      <Dropdown
-        overlay={
-          <Menu onClick={({key}) => this.moreHandle(key, current)}>
-            {status === STATUS.A ? <Menu.Item key="handleOffline">Offline</Menu.Item> : null}
-            {status === STATUS.S ? <Menu.Item key="handleActivate">Activate</Menu.Item> : null}
-            { !apiService        ? <Menu.Item key="handleParse">Parse</Menu.Item> : null}
-            {status === STATUS.S ? <Menu.Item key="handleApi">Set Api</Menu.Item> : null}
-            {status !== STATUS.D ? <Menu.Item key="handleDelete">Delete</Menu.Item> : null}
-          </Menu>
-        }
-      >
-        <a>
-           More <Icon type="down" />
-        </a>
-      </Dropdown>
-    );
-  };
-
-  moreHandle = (key, record) => {
-    if (key === 'handleOffline') {
-      this.handleStatusClick(ACT.ONLINE, record);
-    } else if (key === 'handleDelete') {
-      this.handleStatusClick(ACT.DEL, record);
-    } else if (key === 'handleActivate') {
-      this.handleStatusClick(ACT.ONLINE, record);
-    } else if (key === 'handleParse'){
-      // 先解析
-      this.handleParse(record);
-    } else if (key === 'handleApi'){
-      // 批量设置Api
-      this.handleApi(record);
-    }
-  };
-
   render() {
 
     const {
       loading
     } = this.props;
-    const { pagination, selectedRow,selectedRowKeys,needTotalList,list,modalVisible,fileList,columnSchemas,selectedRows} = this.state;
-
+    const { pagination, selectedRow,selectedRowKeys,list,modalVisible,apiVisible,columnSchemas,selectedRows} = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
@@ -704,6 +625,8 @@ class WsdlList extends PureComponent {
       showQuickJumper: true,
       ...pagination,
     };
+
+    // const auth = getAuth('wsdl_save'); // 获取某个功能权的角色
 
     const columns = [
       {
@@ -719,6 +642,14 @@ class WsdlList extends PureComponent {
         dataIndex: 'wsdlUrl',
         render(val) {
           return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
+        },
+      },
+      {
+        title: 'status',
+        dataIndex: 'status',
+        filters: statusFilter,
+        render(val) {
+          return <span>{getItemValue2(statusList, val)}</span>
         },
       },
       {
@@ -782,7 +713,12 @@ class WsdlList extends PureComponent {
               selectedRow={selectedRow}
               columnSchemas={columnSchemas}
             />
-
+            <WsdlApi
+              selectedRow={selectedRow}
+              apiVisible={apiVisible}
+              onVisible={this.handleApiVisible}
+              onRefreshData={this.handleSearch}
+            />
           </div>
         </Card>
       </PageHeaderWrapper>

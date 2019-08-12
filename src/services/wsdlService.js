@@ -48,8 +48,14 @@ export async function saveBatchApi(params) {
 }
 
 export async function authDetail(params) {
-  console.log('params in queryApi:', params,`${PREFIX_PATH}/baseInfo/wsdl/authDetail?wsdlId=${params.wsdlId}`);
-  return request(`${PREFIX_PATH}/baseInfo/wsdl/authDetail?wsdlId=${params.wsdlId}`);
+  console.log('params in queryApi:', params,`${PREFIX_PATH}/baseInfo/wsdl/authDetail`);
+  return request(`${PREFIX_PATH}/baseInfo/wsdl/authDetail`, {
+    method: 'POST',
+    data: {
+      ...params,
+      method: 'post',
+    },
+  });
 }
 
 export async function parseWsdl(params) {

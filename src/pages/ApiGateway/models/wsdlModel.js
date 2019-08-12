@@ -14,7 +14,7 @@ export default {
     },
     wsdlList:[],
     wsdl:{},
-    fileList:[]
+    fileList:[],
   },
 
   effects: {
@@ -53,6 +53,10 @@ export default {
     *authDetail({ payload , callback}, { call, put }) {
       // console.log('payload', JSON.stringify(payload));
       const response = yield call(authDetail, payload);
+      yield put({
+        type: 'saveForWsdl',
+        payload: response,
+      });
       if (callback) callback(response);
     },
     *parseWsdl({ payload , callback}, { call, put }) {
@@ -102,6 +106,13 @@ export default {
       return {
         ...state,
         fileList
+      };
+    },
+    saveForWsdl(state, action) {
+      const wsdl = action.payload ? action.payload.data :{};
+      return {
+        ...state,
+        wsdl
       };
     },
   },
