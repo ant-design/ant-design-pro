@@ -149,6 +149,7 @@ class WsdlList extends PureComponent {
     pagination: {
       pageNo: 1,
       pageSize: 10,
+      current:1
     },
     list:[],
     filtersArg: {},
@@ -353,6 +354,7 @@ class WsdlList extends PureComponent {
   };
 
   handleTableChange = (paginations, filtersArg, sorter) => {
+    console.log("handleTableChange",paginations);
     const {dispatch} = this.props;
     const {formValues} = this.state;
 
@@ -364,8 +366,8 @@ class WsdlList extends PureComponent {
       userId,
       data: {
         info: {
-          pageNo: paginations.current,
-          pageSize: paginations.pageSize,
+          pageNo: paginations&&paginations.current?paginations.current:1,
+          pageSize: paginations&&paginations.pageSize?paginations.pageSize:10,
           ...formValues,
           ...filters,
           ...sorter,
@@ -470,6 +472,10 @@ class WsdlList extends PureComponent {
         this.setState({
           fileList: []
         });
+
+        this.handleModalVisible(null,false);
+        this.handleRefreshData();
+
         message.success('upload successfully.');
       },
       error: () => {

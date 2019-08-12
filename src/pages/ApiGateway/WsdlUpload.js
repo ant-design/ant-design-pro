@@ -78,7 +78,7 @@ class WsdlUpload extends PureComponent {
 
     console.log("handleChange",fileList);
     // const newFileList = fileList.slice(-6);
-    if(fileList.length > 2){
+    if(fileList.length > 9){
       message.error('upload file size must less than 9.');
     }else{
       const {handleFile} = this.props;

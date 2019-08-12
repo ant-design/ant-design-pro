@@ -172,8 +172,8 @@ class WsdlAuth extends PureComponent {
       data: {
         info: {
           wsdlId,
-          pageNo: paginations.current,
-          pageSize: paginations.pageSize,
+          pageNo: paginations&&paginations.current?paginations.current:1,
+          pageSize: paginations&&paginations.pageSize?paginations.pageSize:10,
           ...formValues,
           ...filters,
           ...sorter,
