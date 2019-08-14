@@ -18,8 +18,8 @@ class WsdlUpload extends PureComponent {
     const {dispatch,selectedRow} = this.props;
 
     if( selectedRow ){
-      const {wsdlPath} = selectedRow;
-      const payload = {folder:wsdlPath};
+      const {folder} = selectedRow;
+      const payload = {folder};
       dispatch({
         type: 'wsdlModel/fileWsdl',
         payload,
@@ -49,8 +49,8 @@ class WsdlUpload extends PureComponent {
     if (selectedRow !== nextProps.selectedRow) {
       const nextSelectedRow = nextProps.selectedRow;
       if( nextSelectedRow ){
-        const {wsdlPath} = nextSelectedRow;
-        const payload = {folder:wsdlPath};
+        const {folder} = nextSelectedRow;
+        const payload = {folder};
         dispatch({
           type: 'wsdlModel/fileWsdl',
           payload,
@@ -97,8 +97,8 @@ class WsdlUpload extends PureComponent {
     // 旧文件删除
     if( old ){
 
-      const {wsdlPath} = selectedRow;
-      const payload = {folder:wsdlPath,fileName:name};
+      const {folder} = selectedRow;
+      const payload = {folder,fileName:name};
 
       let result = false;
       dispatch({

@@ -47,6 +47,7 @@ const request = requestExtend({
 class ApiDebug extends PureComponent {
   state = {
     responseBodySampleJson:[],
+    responseBodySampleStr:"",
     width: '100%',
     responseCode: {
       status: null,
@@ -90,9 +91,10 @@ class ApiDebug extends PureComponent {
         responseHeaderSample,
         responseBodySample,
       });
-      const newResponseBodySample = responseBodySample === "" ?{}:responseBodySample;
+      const newResponseBodySample = responseBodySample === "" ?[]:responseBodySample;
       this.setState({
-        responseBodySampleJson:newResponseBodySample
+        responseBodySampleJson:newResponseBodySample,
+        responseBodySampleStr:responseBodySample
       });
     }
   }
@@ -355,7 +357,8 @@ class ApiDebug extends PureComponent {
             });
 
             this.setState({
-              responseBodySampleJson:data
+              responseBodySampleJson:data,
+              responseBodySampleStr:JSON.stringify(data)
             });
 
             const respTime = Math.abs(afterTime - beforeTime);
@@ -394,7 +397,8 @@ class ApiDebug extends PureComponent {
               });
 
               this.setState({
-                responseBodySampleJson:err.data
+                responseBodySampleJson:err.data,
+                responseBodySampleStr: JSON.stringify(err.data)
               });
 
             }
@@ -580,7 +584,7 @@ class ApiDebug extends PureComponent {
       responseHeaderSample,
       responseBodySample,
     } = selectedRow;
-    const {responseCode,responseBodySampleJson}= this.state;
+    const {responseCode,responseBodySampleJson,responseBodySampleStr}= this.state;
     const requestHeaderSample = this.convertDocObj(selectedRow, requestHeaderFlag);
     console.log("render---123---", this.state);
     const sampleText = 'sample for post:{"type":"xxx","name":"xxx"}';
@@ -591,7 +595,8 @@ class ApiDebug extends PureComponent {
       delIcon = "";
     }
     let tabResp = "";
-    // console.log("render", responseCode);
+    const isJson = responseBodySampleStr?responseBodySampleStr.startsWith('{'):false;
+    console.log("render", responseBodySampleStr,isJson);
     if (responseCode.status !== null) {
       const contentStatus = (
         <div>
@@ -745,12 +750,28 @@ class ApiDebug extends PureComponent {
                     />
                   )}
                 </Form.Item>
+
+
+                <Form.Item style={{display:isJson?'none':''}}>
+                  {getFieldDecorator(`responseBodySampleStr`, {
+                    initialValue: responseBodySampleStr,
+                    rules: [],
+                  })(
+                    <TextArea
+                      rows={4}
+                      placeholder=""
+                      autosize={{minRows: 4, maxRows: 15}}
+                    />
+                  )}
+                </Form.Item>
+
                 <ReactJson
                   src={responseBodySampleJson}
                   name="response body sample"
                   // style={{backgroundColor: '#444'}}
                   collapsed={false}
                   iconStyle='circle'
+                  style={{display:isJson?'':'none'}}
                 />
               </TabPane>
             </Tabs>
