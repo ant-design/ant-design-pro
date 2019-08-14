@@ -5,7 +5,6 @@ import router from 'umi/router';
 import styles from './style.less';
 import GroupTreeSelectView from '../GroupTreeSelectView';
 import RadioView from '../RadioView';
-import GroupMutiTreeSelectView from "../ApiList";
 
 const formItemLayout = {
   labelCol: {
