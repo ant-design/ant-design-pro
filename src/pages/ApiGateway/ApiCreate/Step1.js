@@ -3,8 +3,9 @@ import { connect } from 'dva';
 import { Form, Input, Button, Divider } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
-import GroupSelectView from '../GroupSelectView';
+import GroupTreeSelectView from '../GroupTreeSelectView';
 import RadioView from '../RadioView';
+import GroupMutiTreeSelectView from "../ApiList";
 
 const formItemLayout = {
   labelCol: {
@@ -57,7 +58,7 @@ class Step1 extends React.PureComponent {
             {getFieldDecorator('groupId', {
               initialValue: apiService.groupId,
               rules: [{ required: true, message: '请选择分组' }],
-            })(<GroupSelectView showSearch optionFilterProp="children" />)}
+            })(<GroupTreeSelectView hideRoot />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Api名称">
             {getFieldDecorator('name', {

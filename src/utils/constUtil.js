@@ -8,6 +8,18 @@ const constants = {
   PROXY_URL: 'http://10.1.241.42:8090/conf-service/',
   MANAGER_ROLE: ['admin', 'manager'],
   CALL_POINT:'call',
+  WS:{
+    PATH_PREFIX:'/ws/',
+    SERVICE_TYPE:'2',
+  },
+  REST:{
+    PATH_PREFIX:'/rest/',
+    SERVICE_TYPE:'1',
+  },
+  HTTP:{
+    PATH_PREFIX:'/http/',
+    SERVICE_TYPE:'3',
+  },
   ADMIN_ROLE: 'admin',
   ROLE_TYPE_KEY: 'roleType',
   API_STATE_KEY: 'apiState',

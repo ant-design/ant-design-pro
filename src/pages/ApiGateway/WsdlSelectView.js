@@ -53,6 +53,12 @@ class WsdlSelectView extends PureComponent {
   selectChangeItem = item => {
     const { onChange } = this.props;
     onChange(item);
+    const { onSetUrl } = this.props;
+    if(onSetUrl){
+      const { wsdlList } = this.props;
+      const wsdlObj=wsdlList.find((obj)=>obj.wsdlId===item);
+      onSetUrl(wsdlObj);
+    }
   };
 
   render() {
