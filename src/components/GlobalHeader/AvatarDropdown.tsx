@@ -33,7 +33,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
   };
 
   render(): React.ReactNode {
-    const { currentUser = {}, menu } = this.props;
+    const { currentUser = { avatar: '', name: '' }, menu } = this.props;
     if (!menu) {
       return (
         <span className={`${styles.action} ${styles.account}`}>
