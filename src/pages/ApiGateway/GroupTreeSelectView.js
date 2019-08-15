@@ -29,12 +29,14 @@ class GroupTreeSelectView extends PureComponent {
   };
 
   render() {
+
     // const value = this.conversionObject();
-    const { value,style,groupList } = this.props;
+    const { value,style,groupList,firstTitle,hideRoot } = this.props;
+    const defalultValue=hideRoot?value:value||'0';
     // console.log("data:",groupList);
-    const treeSelectData=[{title:`0-root group`,value:0,key:0, children: []}];
+    const treeSelectData=hideRoot?[]:[{title:firstTitle||`0-root group`,value:0,key:0, children: []}];
     if(groupList){
-      console.log("groupList:",groupList)
+      console.log("groupList:",groupList);
       flatToGroupTreeSelect(groupList,treeSelectData,0);
     }
     // console.log("data:",groupList);
@@ -42,10 +44,10 @@ class GroupTreeSelectView extends PureComponent {
     return (
       <TreeSelect
         style={style}
-        value={value||'0'}
+        value={defalultValue}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         treeData={treeSelectData}
-        placeholder="Please select"
+        placeholder="Please choose a group"
         showSearch
         treeNodeFilterProp='title'
         onChange={this.selectChangeItem}

@@ -282,15 +282,16 @@ class WsdlAuth extends PureComponent {
       }
     ];
     const { pagination, apiServices, records, selectedRow, modalVisible, wsdlId} = this.state;
-    const {loading} = this.props;
-    const rowSelection = {};
+    const {loading, location} = this.props;
     const rowKey = '';
-
+    const {state} = location;
+    const {record} = state || {};
+    const {wsdlName} = record;
     return (
       <PageHeaderWrapper
         onBack={() => window.history.back()}
         style={{height: '50px'}}
-        title="Wsdl Auth"
+        title={`Wsdl Auth：（${wsdlName}）`}
       >
         <Card bordered={false}>
           <div className={styles.tableListForm}>{this.renderForm()}</div>
@@ -302,7 +303,6 @@ class WsdlAuth extends PureComponent {
             dataSource={records}
             pagination={pagination}
             onChange={this.handleTableChange}
-            rowSelection={rowSelection}
           />
           <ApiTransfer
             title="Access Api"

@@ -83,11 +83,6 @@ const CreateForm = Form.create()(props => {
 
   const renderAutoForm = (item) => {
 
-    // let folder = '';
-    // if( selectedRow ){
-    //   folder = selectedRow.wsdlPath;
-    // }
-
     switch (item.tag) {
       case 'fileUpload':
         return (
@@ -171,8 +166,8 @@ class WsdlList extends PureComponent {
       commands:[{action:'setRole',title:'角色'},],
       columnDetails: [
         { name: 'wsdlId', title: 'Wsdl Id', add: true, disabledAct:'true' },
-        { name: 'wsdlUrl', title: 'Wsdl Url', sorter: true, query: true, add: true, detailFlag:1 },
-        { name: 'wsdlPath', title: 'Wsdl Path', sorter: true, query: true, detailFlag:1 },
+        { name: 'folder', title: 'Folder', sorter: true, query: true, detailFlag:1 },
+        { name: 'wsdlUrlPath', title: 'Wsdl Url Path', sorter: true, query: true, add: true, detailFlag:1 },
         { name: 'wsdlFileName', title: 'Wsdl File Name',tag:'fileUpload',columnHidden: true, add: true,rows:3,rules:[] },
       ]
 
@@ -430,6 +425,18 @@ class WsdlList extends PureComponent {
     });
   }
 
+  handleList = ( record ) =>{
+    const { wsdlId } = record;
+    router.push({
+      pathname: `/apiGateway/apiList`, // 通过url参数传递
+      state: {
+        // 通过对象传递
+        wsdlId,
+        record, // 表格某行的对象数据
+      },
+    });
+  }
+
   handleFile = (fileList)=>{
 
 
@@ -545,10 +552,10 @@ class WsdlList extends PureComponent {
       <Dropdown
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
-            {status === STATUS.D ? <Menu.Item key="handleActivate">Activate</Menu.Item> : null}
+            {status === STATUS.A ? <Menu.Item key="handleModify">Modify</Menu.Item> : null}
             {status === STATUS.A ? <Menu.Item key="handleParse">Parse</Menu.Item> : null}
             {status === STATUS.A ? <Menu.Item key="handleApi">Set Api</Menu.Item> : null}
-            {status === STATUS.A ? <Menu.Item key="handleAccess">Access</Menu.Item> : null}
+            <Menu.Item key="handleList">Api List</Menu.Item>
             {status !== STATUS.D ? <Menu.Item key="handleDelete">Delete</Menu.Item> : null}
           </Menu>
         }
@@ -561,8 +568,8 @@ class WsdlList extends PureComponent {
   };
 
   moreHandle = (key, record) => {
-    if (key === 'handleOffline') {
-      this.handleStatusClick(ACT.OFFLINE, record);
+    if (key === 'handleModify') {
+      this.handleModalVisible(record, true);
     } else if (key === 'handleDelete') {
       this.handleStatusClick(ACT.DEL, record);
     } else if (key === 'handleActivate') {
@@ -573,9 +580,9 @@ class WsdlList extends PureComponent {
     } else if (key === 'handleApi'){
       // 批量设置Api
       this.handleApi(record);
-    } else if (key === 'handleAccess'){
-      // 批量授权Api
-      this.handleAccess(record);
+    } else if (key === 'handleList'){
+      // 查询列表
+      this.handleList(record);
     }
   };
 
@@ -592,8 +599,8 @@ class WsdlList extends PureComponent {
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="wsdlUrl">
-              {getFieldDecorator('wsdlUrl')(<Input placeholder="Please input wsdlUrl" />)}
+            <FormItem label="wsdlUrlPath">
+              {getFieldDecorator('wsdlUrlPath')(<Input placeholder="Please input wsdlUrlPath" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -646,12 +653,15 @@ class WsdlList extends PureComponent {
         dataIndex: 'wsdlName',
       },
       {
-        title: 'wsdlPath',
-        dataIndex: 'wsdlPath',
+        title: 'Folder',
+        dataIndex: 'folder',
+        render(val) {
+          return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
+        },
       },
       {
-        title: 'wsdlUrl',
-        dataIndex: 'wsdlUrl',
+        title: 'wsdlUrlPath',
+        dataIndex: 'wsdlUrlPath',
         render(val) {
           return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
         },
@@ -683,10 +693,18 @@ class WsdlList extends PureComponent {
       {
         title: 'Action',
         key: 'action',
+        fixed: 'right',
+        width: 100,
         render: (text, record) => (
           <span>
-            <a onClick={()=>this.handleModalVisible(record, true)}>Modify</a>
-            <Divider type="vertical" />
+            <div style={{display:record.status === 'A'?'':'none'}}>
+              <a onClick={()=>this.handleAccess(record, true)}>Access</a>
+              <Divider type="vertical" />
+            </div>
+            <div style={{display:record.status === 'D'?'':'none'}}>
+              <a onClick={()=> this.handleStatusClick(ACT.ONLINE, record)}>Activate</a>
+              <Divider type="vertical" />
+            </div>
             {this.renderMoreBtn({current:record})}
           </span>
         ),
