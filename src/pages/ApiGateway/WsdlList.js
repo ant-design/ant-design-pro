@@ -594,22 +594,22 @@ class WsdlList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="wsdlName">
-              {getFieldDecorator('wsdlName')(<Input placeholder="Please input wsdlName" />)}
+            <FormItem label="WSDL Name">
+              {getFieldDecorator('wsdlName')(<Input placeholder="Please input WSDL Name" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="wsdlUrlPath">
-              {getFieldDecorator('wsdlUrlPath')(<Input placeholder="Please input wsdlUrlPath" />)}
+            <FormItem label="WSDL URL Path">
+              {getFieldDecorator('wsdlUrlPath')(<Input placeholder="Please input WSDL URL Path" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <span className={styles.submitButtons}>
               <Button type="primary" htmlType="submit">
-                查询
+                Query
               </Button>
               <Button style={{marginLeft: 8}} onClick={this.handleFormReset} htmlType="button">
-                重置
+                Reset
               </Button>
             </span>
           </Col>
@@ -617,7 +617,7 @@ class WsdlList extends PureComponent {
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
             <Button style={{marginBottom:16}} icon="plus" type="primary" onClick={() => this.handleModalVisible(null, true)}>
-              New
+              Upload WSDL
             </Button>
           </Col>
         </Row>
@@ -649,8 +649,29 @@ class WsdlList extends PureComponent {
 
     const columns = [
       {
-        title: 'wsdlName',
+        title: 'WSDL Name',
         dataIndex: 'wsdlName',
+        fixed: 'left',
+        width: 150,
+      },
+      {
+        title: 'WSDL URL Path',
+        dataIndex: 'wsdlUrlPath',
+        render(val) {
+          return <Ellipsis length={40} tooltip>{val}</Ellipsis>;
+        },
+      },
+      {
+        title: 'Status',
+        dataIndex: 'status',
+        filters: statusFilter,
+        render(val) {
+          return <span>{getItemValue2(statusList, val)}</span>
+        },
+      },
+      {
+        title: 'WSDL File Name',
+        dataIndex: 'wsdlFileName',
       },
       {
         title: 'Folder',
@@ -660,33 +681,16 @@ class WsdlList extends PureComponent {
         },
       },
       {
-        title: 'wsdlUrlPath',
-        dataIndex: 'wsdlUrlPath',
-        render(val) {
-          return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
-        },
-      },
-      {
-        title: 'status',
-        dataIndex: 'status',
-        filters: statusFilter,
-        render(val) {
-          return <span>{getItemValue2(statusList, val)}</span>
-        },
-      },
-      {
-        title: 'wsdlFileName',
-        dataIndex: 'wsdlFileName',
-      },
-      {
-        title: 'createTime',
+        title: 'Create Time',
         dataIndex: 'createTime',
+        width: 180,
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
       {
-        title: 'updateTime',
+        title: 'Update Time',
         dataIndex: 'updateTime',
+        width: 180,
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
@@ -694,17 +698,17 @@ class WsdlList extends PureComponent {
         title: 'Action',
         key: 'action',
         fixed: 'right',
-        width: 100,
+        width: 150,
         render: (text, record) => (
           <span>
-            <div style={{display:record.status === 'A'?'':'none'}}>
+            <span style={{display:record.status === 'A'?'':'none'}}>
               <a onClick={()=>this.handleAccess(record, true)}>Access</a>
               <Divider type="vertical" />
-            </div>
-            <div style={{display:record.status === 'D'?'':'none'}}>
+            </span>
+            <span style={{display:record.status === 'D'?'':'none'}}>
               <a onClick={()=> this.handleStatusClick(ACT.ONLINE, record)}>Activate</a>
               <Divider type="vertical" />
-            </div>
+            </span>
             {this.renderMoreBtn({current:record})}
           </span>
         ),
@@ -735,6 +739,7 @@ class WsdlList extends PureComponent {
               pagination={paginationProps}
               onChange={this.handleTableChange}
               rowSelection={rowSelection}
+              scroll={{ x: 1500 }}
             />
 
             <CreateForm
