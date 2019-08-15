@@ -12,6 +12,8 @@ export default {
   'menu.admin.logPage': 'UI Log',
   'menu.admin.apiLogList': 'Api Log',
   'menu.admin.refreshCache': 'Refresh Cache',
+  'menu.resourcesDistribute': 'Resources Distribute',
+  'menu.resourcesDistribute.configuration': 'Configuration',
   'menu.test': 'Test Page',
   'menu.test.test1': 'Test Page1',
   'menu.test.test2': 'Test Page2',

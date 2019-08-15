@@ -48,7 +48,7 @@ class ApiLogList extends PureComponent {
     this.fetchApi = debounce(this.fetchApi, 800);
   }
 
-
+  //数据存放
   state = {
     expandForm: false,
     selectedRow: {},
@@ -66,9 +66,9 @@ class ApiLogList extends PureComponent {
     fetching: false,
     rangePickerValue: getTimeDistance('today'),
     targetOrgs:[],
-    expandAllFlag:false,
+    expandAllFlag:false,//初始时是否展开
   };
-
+  //调用基础配置获取列表接口
   componentWillMount() {
     const {dispatch} = this.props;
     /* 获取apiDebug数据 */
@@ -142,7 +142,7 @@ class ApiLogList extends PureComponent {
     ));
   };
 
-
+  //Table的配置，点击图标触发
   onExpand = (expanded, record) => {
     console.log("onExpand1111", record);
     const {dispatch} = this.props;
@@ -176,7 +176,7 @@ class ApiLogList extends PureComponent {
     }
 
   }
-
+  //额外的展开行
   expandedRowRender = (exRecord) => {
 
     console.log("expandedRowRender", exRecord);
@@ -224,6 +224,7 @@ class ApiLogList extends PureComponent {
     }, {});
   };
 
+  //重置按钮
   handleFormReset = () => {
     const {form, dispatch} = this.props;
     const {targetOrgs} = this.state;
@@ -254,7 +255,7 @@ class ApiLogList extends PureComponent {
       }
     });
   };
-
+  //切换按钮
   toggleForm = () => {
     const {expandForm} = this.state;
     this.setState({
@@ -270,6 +271,7 @@ class ApiLogList extends PureComponent {
     });
   };
 
+  //根据条件查询api数据
   fetchApi = (value) => {
     this.lastFetchId += 1;
     this.setState({data: [], fetching: true});
@@ -298,9 +300,9 @@ class ApiLogList extends PureComponent {
       }
     });
   };
-
+  //调用日志订单查询接口
   handleSearch = e => {
-    e.preventDefault();
+    e.preventDefault();//组织默认行为
 
     const {dispatch, form} = this.props;
     const {targetOrgs} = this.state;
@@ -373,6 +375,7 @@ class ApiLogList extends PureComponent {
     });
   };
 
+  //当分页、排序、筛选变化时触发
   handleTableChange = (paginations, filtersArg, sorter) => {
     const {dispatch} = this.props;
     const {formValues,targetOrgs} = this.state;
@@ -501,6 +504,7 @@ class ApiLogList extends PureComponent {
     });
   };
 
+  //面板收起
   renderSimpleForm() {
     const {
       form: {getFieldDecorator},
@@ -595,7 +599,7 @@ class ApiLogList extends PureComponent {
       </Form>
     );
   }
-
+  //面板展开
   renderAdvancedForm() {
     const {
       form: {getFieldDecorator},
@@ -690,7 +694,7 @@ class ApiLogList extends PureComponent {
       </Form>
     );
   }
-
+  //决定展现形式，默认是收起
   renderForm() {
     const {expandForm} = this.state;
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();

@@ -723,7 +723,7 @@ class WsdlList extends PureComponent {
               {...parentMethods}
               modalVisible={modalVisible}
               selectedRow={selectedRow}
-              columnSchemas={columnSchemas}
+              renderAutoForm
             />
             <WsdlApi
               selectedRow={selectedRow}

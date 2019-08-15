@@ -1,19 +1,19 @@
 /* eslint-disable eqeqeq */
-import {parse} from 'url';
+import { parse } from 'url';
 import constants from './constUtil';
 
 const { STATUS } = constants;
 // mock tableListDataSource
 
 
-const urlSample="/rest/{tableName}/voice/{id}";
-const urlSample1="/rest/{tableName}/voice/123123";
-const requestHeaderSample="[{\"key\":\"appkey\",\"value\":\"xxxx\"}]";
-const requestBodySample="[{\"name\":\"appkey\",\"type\":\"string\",\"remark\":\"app key\",\"parent\":\"-\"}]";
-const responseHeaderSample="{\"type\":1,\"name\":\"asia info\",\"rela\":{\"orgId\":1,\"orgName\":\"asia intl\"}}";
-const responseBodySample="[{\"name\":\"type\",\"type\":\"integer\",\"remark\":\"type for query\",\"parent\":\"root\"},{\"name\":\"name\",\"type\":\"string\",\"remark\":\"name for query\",\"parent\":\"root\"}]";
+const urlSample = "/rest/{tableName}/voice/{id}";
+const urlSample1 = "/rest/{tableName}/voice/123123";
+const requestHeaderSample = "[{\"key\":\"appkey\",\"value\":\"xxxx\"}]";
+const requestBodySample = "[{\"name\":\"appkey\",\"type\":\"string\",\"remark\":\"app key\",\"parent\":\"-\"}]";
+const responseHeaderSample = "{\"type\":1,\"name\":\"asia info\",\"rela\":{\"orgId\":1,\"orgName\":\"asia intl\"}}";
+const responseBodySample = "[{\"name\":\"type\",\"type\":\"integer\",\"remark\":\"type for query\",\"parent\":\"root\"},{\"name\":\"name\",\"type\":\"string\",\"remark\":\"name for query\",\"parent\":\"root\"}]";
 
-const allRoleList=[
+const allRoleList = [
   {
     "roleId": 1,
     "roleName": "admin",
@@ -34,41 +34,157 @@ const allRoleList=[
   },
 ];
 
+const configlist = {
+  "code": "200",
+  "msg": null,
+  "data": [
+    {
+      "envId": 1,
+      "publicGatewayUrl": 'pb_gwl0',
+      "privateGatewayUrl": 'pr_gwl0',
+      "agentUrl": 'agent_url0',
+      "envName": 'env_name0',
+      "status": STATUS.A,
+      "fileServerUrl": '/f/fsul0',
+      "ifSelected": 'T',
+    },
+    {
+      "envId": 2,
+      "publicGatewayUrl": 'pb_gwl1',
+      "privateGatewayUrl": 'pr_gwl1',
+      "agentUrl": 'agent_url1',
+      "envName": 'env_name1',
+      "status": STATUS.D,
+      "fileServerUrl": '/f/fsul1',
+      "ifSelected": 'T',
+    },
+    {
+      "envId": 3,
+      "publicGatewayUrl": 'pb_gwl2',
+      "privateGatewayUrl": 'pr_gwl2',
+      "agentUrl": 'agent_url2',
+      "envName": 'env_name2',
+      "status": STATUS.A,
+      "fileServerUrl": '/f/fsul2',
+      "ifSelected": 'F',
+    },
+    {
+      "envId": 4,
+      "publicGatewayUrl": 'pb_gwl3',
+      "privateGatewayUrl": 'pr_gwl3',
+      "agentUrl": 'agent_url3',
+      "envName": 'env_name3',
+      "status": STATUS.A,
+      "fileServerUrl": '/f/fsul3',
+      "ifSelected": 'T',
+    },
+    {
+      "envId": 5,
+      "publicGatewayUrl": 'pb_gwl4',
+      "privateGatewayUrl": 'pr_gwl4',
+      "agentUrl": 'agent_url4',
+      "envName": 'env_name4',
+      "status": STATUS.A,
+      "fileServerUrl": '/f/fsul4',
+      "ifSelected": 'T',
+    },
+    {
+      "envId": 6,
+      "publicGatewayUrl": 'pb_gwl5',
+      "privateGatewayUrl": 'pr_gwl5',
+      "agentUrl": 'agent_url5',
+      "envName": 'env_name5',
+      "status": STATUS.D,
+      "fileServerUrl": '/f/fsul5',
+      "ifSelected": 'T',
+    },
+    {
+      "envId": 7,
+      "publicGatewayUrl": 'pb_gwl6',
+      "privateGatewayUrl": 'pr_gwl6',
+      "agentUrl": 'agent_url6',
+      "envName": 'env_name6',
+      "status": STATUS.A,
+      "fileServerUrl": '/f/fsul6',
+      "ifSelected": 'F',
+    },
+    {
+      "envId": 8,
+      "publicGatewayUrl": 'pb_gwl7',
+      "privateGatewayUrl": 'pr_gwl7',
+      "agentUrl": 'agent_url07',
+      "envName": 'env_name7',
+      "status": STATUS.D,
+      "fileServerUrl": '/f/fsul7',
+      "ifSelected": 'F',
+    },
+    {
+      "envId": 9,
+      "publicGatewayUrl": 'pb_gwl8',
+      "privateGatewayUrl": 'pr_gwl8',
+      "agentUrl": 'agent_url8',
+      "envName": 'env_name8',
+      "status": STATUS.A,
+      "fileServerUrl": '/f/fsul8',
+      "ifSelected": 'T',
+    },
+    {
+      "envId": 10,
+      "publicGatewayUrl": 'pb_gwl9',
+      "privateGatewayUrl": 'pr_gwl9',
+      "agentUrl": 'agent_url9',
+      "envName": 'env_name9',
+      "status": STATUS.A,
+      "fileServerUrl": '/f/fsul9',
+      "ifSelected": 'T',
+    },
+    {
+      "envId": '11',
+      "publicGatewayUrl": 'pb_gwl10',
+      "privateGatewayUrl": 'pr_gwl10',
+      "agentUrl": 'agent_url10',
+      "envName": 'env_name10',
+      "status": STATUS.A,
+      "fileServerUrl": '/f/fsul10',
+      "ifSelected": 'T',
+    },
+  ]
+}
 
 const groups = {
-    "code": "200",
-    "msg": null,
-    "data": [
-      {
-        "groupId": 1,
-        "groupName": "语音识别",
-        "groupDesc": "分组1",
-        "groupApiDoc": "空",
-        "status": STATUS.A
-      },
-      {
-        "groupId": 2,
-        "groupName": "OCR识别",
-        "groupDesc": "aaaaa",
-        "groupApiDoc": "bbbbbb",
-        "status": STATUS.A
-      },
-      {
-        "groupId":3,
-        "groupName": "身份识别",
-        "groupDesc": "aaaaa1",
-        "groupApiDoc": "bbbbbb1",
-        "status": STATUS.A
-      },
-      {
-        "groupId": 4,
-        "groupName": "文本识别",
-        "groupDesc": null,
-        "groupApiDoc": null,
-        "status": STATUS.A
-      }
-    ]
-  };
+  "code": "200",
+  "msg": null,
+  "data": [
+    {
+      "groupId": 1,
+      "groupName": "语音识别",
+      "groupDesc": "分组1",
+      "groupApiDoc": "空",
+      "status": STATUS.A
+    },
+    {
+      "groupId": 2,
+      "groupName": "OCR识别",
+      "groupDesc": "aaaaa",
+      "groupApiDoc": "bbbbbb",
+      "status": STATUS.A
+    },
+    {
+      "groupId": 3,
+      "groupName": "身份识别",
+      "groupDesc": "aaaaa1",
+      "groupApiDoc": "bbbbbb1",
+      "status": STATUS.A
+    },
+    {
+      "groupId": 4,
+      "groupName": "文本识别",
+      "groupDesc": null,
+      "groupApiDoc": null,
+      "status": STATUS.A
+    }
+  ]
+};
 const roles = {
   "code": "200",
   "msg": null,
@@ -966,40 +1082,40 @@ const users = {
       "username": "admin",
       "password": "ant.design",
       "email": "j1@163.com",
-      "tel":"18905926370",
-      "utype":"client",
+      "tel": "18905926370",
+      "utype": "client",
       "status": STATUS.A,
-      "sysUserRoles":[{"id":1,"userId":1,"roleId":1,"roleName":"admin"},],
+      "sysUserRoles": [{ "id": 1, "userId": 1, "roleId": 1, "roleName": "admin" },],
     },
     {
       "id": 2,
       "username": "user",
       "password": "ant.design",
       "email": "j2@163.com",
-      "tel":"18905926371",
-      "utype":"client",
+      "tel": "18905926371",
+      "utype": "client",
       "status": STATUS.A,
-      "sysUserRoles":[{"id":1,"userId":2,"roleId":3,"roleName":"user"},],
+      "sysUserRoles": [{ "id": 1, "userId": 2, "roleId": 3, "roleName": "user" },],
     },
     {
       "id": 3,
       "username": "manager",
       "password": "ant.design",
       "email": "j3@163.com",
-      "tel":"18905926373",
-      "utype":"client",
+      "tel": "18905926373",
+      "utype": "client",
       "status": STATUS.A,
-      "sysUserRoles":[],
+      "sysUserRoles": [],
     },
     {
       "id": 4,
       "username": "super_admin",
       "password": "ant.design",
       "email": "j4@163.com",
-      "tel":"18905926374",
-      "utype":"client",
+      "tel": "18905926374",
+      "utype": "client",
       "status": STATUS.A,
-      "sysUserRoles":[{"id":9,"userId":4,"roleId":1,"roleName":"admin"},{"id":10,"userId":4,"roleId":2,"roleName":"manager"},{"id":11,"userId":4,"roleId":3,"roleName":"user"},],
+      "sysUserRoles": [{ "id": 9, "userId": 4, "roleId": 1, "roleName": "admin" }, { "id": 10, "userId": 4, "roleId": 2, "roleName": "manager" }, { "id": 11, "userId": 4, "roleId": 3, "roleName": "user" },],
     },
   ]
 };
@@ -1013,11 +1129,11 @@ const adapterSpecs = {
       "techType": "url",
       "pointType": "in",
       "url": "http://333",
-      "reqPath":"/rest/111",
-      "code":"String a=\"dd\";",
-      "status":"A",
-      "attrSpecs":[{"attrSpecId":151,"attrSpecCode":"busi_code","attrSpecName":"business Code","tableName":"api_service_backend","upId":0,"adapterSpecId":1},
-        {"attrSpecId":152,"attrSpecCode":"operation_code","attrSpecName":"operation code","defaultValue":"","tableName":"api_service_backend","upId":0,"adapterSpecId":1},],
+      "reqPath": "/rest/111",
+      "code": "String a=\"dd\";",
+      "status": "A",
+      "attrSpecs": [{ "attrSpecId": 151, "attrSpecCode": "busi_code", "attrSpecName": "business Code", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 1 },
+      { "attrSpecId": 152, "attrSpecCode": "operation_code", "attrSpecName": "operation code", "defaultValue": "", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 1 },],
     },
     {
       "id": 2,
@@ -1025,11 +1141,11 @@ const adapterSpecs = {
       "techType": "code",
       "pointType": "in",
       "url": "http://token",
-      "reqPath":"/rest/token",
-      "code":"String a=\"123\";",
-      "status":"A",
-      "remark":"good",
-      "attrSpecs":[{"attrSpecId":153,"attrSpecCode":"token","attrSpecName":"token","default_value":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","up_id":0,"adapterSpecId":2},],
+      "reqPath": "/rest/token",
+      "code": "String a=\"123\";",
+      "status": "A",
+      "remark": "good",
+      "attrSpecs": [{ "attrSpecId": 153, "attrSpecCode": "token", "attrSpecName": "token", "default_value": "Beare dadjf9iojsdfdsdj", "tableName": "api_service_backend", "up_id": 0, "adapterSpecId": 2 },],
     },
     {
       "id": 3,
@@ -1037,9 +1153,9 @@ const adapterSpecs = {
       "techType": "url",
       "pointType": "out",
       "url": "http://333",
-      "reqPath":"/rest/111",
-      "code":"String a=\"dd\";",
-      "status":"A",
+      "reqPath": "/rest/111",
+      "code": "String a=\"dd\";",
+      "status": "A",
     },
   ]
 };
@@ -1047,13 +1163,13 @@ const attrSpecs = {
   "code": "200",
   "msg": null,
   "data": [
-    {"attrSpecId":150,"attrSpecCode":"busi_code","attrSpecName":"business Code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
-    {"attrSpecId":151,"attrSpecCode":"operation_code","attrSpecName":"operation code","defaultValue":"1123","tableName":"api_service_backend","upId":0,"adapterSpecId":1,"status":"A"},
-    {"attrSpecId":152,"attrSpecCode":"token","attrSpecName":"token","defaultValue":"Beare dadjf9iojsdfdsdj","tableName":"api_service_backend","upId":0,"adapterSpecId":2,"status":"A"},
+    { "attrSpecId": 150, "attrSpecCode": "busi_code", "attrSpecName": "business Code", "defaultValue": "1123", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 1, "status": "A" },
+    { "attrSpecId": 151, "attrSpecCode": "operation_code", "attrSpecName": "operation code", "defaultValue": "1123", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 1, "status": "A" },
+    { "attrSpecId": 152, "attrSpecCode": "token", "attrSpecName": "token", "defaultValue": "Beare dadjf9iojsdfdsdj", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 2, "status": "A" },
   ],
 
 };
-const orgs={
+const orgs = {
   "code": "200",
   "msg": null,
   "data": [
@@ -1072,7 +1188,7 @@ const orgs={
       "authType": "1",
       "email": "111",
       "status": STATUS.A,
-      "sysUserOrgs":[{"id":1,"orgId":1,"userId":1,"username":"admin"},],
+      "sysUserOrgs": [{ "id": 1, "orgId": 1, "userId": 1, "username": "admin" },],
       "consumerApis": [
         {
           "apiId": 160,
@@ -1118,7 +1234,7 @@ const orgs={
       "id": 2,
       "authType": "2",
       "status": STATUS.A,
-      "sysUserOrgs":[{"id":1,"orgId":1,"userId":1,"username":"admin"},],
+      "sysUserOrgs": [{ "id": 1, "orgId": 1, "userId": 1, "username": "admin" },],
       "consumerApis": [
         {
           "apiId": 160,
@@ -1164,7 +1280,7 @@ const orgs={
       "id": 3,
       "authType": "3",
       "status": STATUS.A,
-      "sysUserOrgs":[{"id":1,"orgId":1,"userId":1,"username":"admin"},],
+      "sysUserOrgs": [{ "id": 1, "orgId": 1, "userId": 1, "username": "admin" },],
       "consumerApis": [
         {
           "apiId": 160,
@@ -1287,34 +1403,35 @@ const debugs = {
       "userId": 4,
       "apiId": 152,
       "debugName": "测试一",
-      "urlSample":urlSample,
-      "requestHeaderSample":requestHeaderSample,
+      "urlSample": urlSample,
+      "requestHeaderSample": requestHeaderSample,
       "requestBodySample": requestBodySample,
-      "responseHeaderSample":responseHeaderSample,
-      "responseBodySample":responseBodySample
+      "responseHeaderSample": responseHeaderSample,
+      "responseBodySample": responseBodySample
     },
     {
       "userDebugId": 2,
       "userId": 4,
       "apiId": 152,
       "debugName": "测试二",
-      "urlSample":urlSample1,
-      "requestHeaderSample":requestHeaderSample,
+      "urlSample": urlSample1,
+      "requestHeaderSample": requestHeaderSample,
       "requestBodySample": requestBodySample,
-      "responseHeaderSample":responseHeaderSample,
-      "responseBodySample":responseBodySample
+      "responseHeaderSample": responseHeaderSample,
+      "responseBodySample": responseBodySample
     }
   ]
 };
 
 const tableListDataSource = orgs.data;
 const groupsDataSource = groups.data;
-const usersDataSource=users.data;
-const adapterSpecSource=adapterSpecs.data;
-const attrSpecSource=attrSpecs.data;
-const rolesDataSource=roles.data;
-const privilegesDataSource=privileges.data.records;
+const usersDataSource = users.data;
+const adapterSpecSource = adapterSpecs.data;
+const attrSpecSource = attrSpecs.data;
+const rolesDataSource = roles.data;
+const privilegesDataSource = privileges.data.records;
 const debugDataSource = debugs.data;
+const configlistDataSource = configlist.data;
 
 function getList(innerTableName) {
   let dataSource = tableListDataSource;
@@ -1338,9 +1455,13 @@ function getList(innerTableName) {
     case 'sys_privilege':
       dataSource = privilegesDataSource;
       break;
+    case 'config':
+      dataSource = configlistDataSource;
+      break;
     case 'api_user_debug':
       dataSource = debugDataSource;
       break;
+
     default:
       break;
   }
@@ -1373,6 +1494,7 @@ export function sug(req, res, u) {
   const result = {
     list: dataSource,
   };
+
   if (res && res.json) {
     return res.json(result);
   }
@@ -1385,30 +1507,30 @@ export function detail(req, res, u) {
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
     url = req.url; // eslint-disable-line
   }
-  const tableName=url.split("/")[3];
+  const tableName = url.split("/")[3];
   const dataSource = getList(tableName);
-  let idName="id";
+  let idName = "id";
   switch (tableName) {
     case 'api_group':
-      idName="groupId";
+      idName = "groupId";
       break;
     case 'sys_user':
-      idName="id";
+      idName = "id";
       break;
     case 'sys_role':
-      idName="roleId";
+      idName = "roleId";
       break;
     case 'sys_privilege':
-      idName="privilegeId";
+      idName = "privilegeId";
       break;
     case 'attr_spec':
-      idName="attrSpecId";
+      idName = "attrSpecId";
       break;
     default:
       break;
   }
   const params = parse(url, true).query;
-  const obj = dataSource.find(data => data[idName]===parseInt(params.id,10));
+  const obj = dataSource.find(data => data[idName] === parseInt(params.id, 10));
 
   const result = {
     "code": "200",
@@ -1424,7 +1546,7 @@ export function detail(req, res, u) {
 }
 export function queryList(req, res, u, b) {
   const params = (b && b.body) || req.body;
-  const{tableName,data:{info}} =params;
+  const { tableName, data: { info } } = params;
 
   let dataSource = [...getList(tableName)];// 根据表明获取对应数据
   console.log(params, dataSource.length);
@@ -1452,10 +1574,9 @@ export function queryList(req, res, u, b) {
     }
   });
   let pageSize = 10;
-  if (params.pageSize) {
-    pageSize = params.pageSize * 1;
+  if (info.pageSize) {
+    pageSize = info.pageSize * 1;
   }
-
   const result = {
     "code": "200",
     "msg": null,
@@ -1464,7 +1585,7 @@ export function queryList(req, res, u, b) {
       pagination: {
         total: dataSource.length,
         pageSize,
-        pageNo: parseInt(params.pageNo, 10) || 1,
+        pageNo: parseInt(info.pageNo, 10) || 1,
       },
     },
   };
@@ -1480,9 +1601,10 @@ export function save(req, res, u, b) {
   // }
 
   const body = (b && b.body) || req.body;
-  const { method, tableName, data:{info} } = body;
-  const {  orgType, orgName, id, name,  groupName,appKey, groupId,authType,tel,email,remark } = info;
-  const {  userId,username,utype,roleId,roleName,privilegeId,path, icon,hideInMenu,hideChildrenInMenu,type, } = info;
+  const { method, tableName, data: { info } } = body;
+  const { orgType, orgName, id, name, groupName, appKey, groupId, authType, tel, email, remark } = info;
+  const { userId, username, utype, roleId, roleName, privilegeId, path, icon, hideInMenu, hideChildrenInMenu, type, } = info;
+  const { envId, envName, ifSelected, publicGatewayUrl, privateGatewayUrl, agentUrl, status, fileServerUrl } = info;
   // console.log('save in mock:', body, id);
   const datasource = getList(tableName);
   switch (method) {
@@ -1496,11 +1618,11 @@ export function save(req, res, u, b) {
             tmpObj.orgName = orgName;
             tmpObj.appkey = appKey;
             tmpObj.orgType = orgType;
-            tmpObj.tel=tel;
-            tmpObj.remark=remark;
-            tmpObj.email=email;
-            tmpObj.authType=authType;
-            tmpObj.status=STATUS.A;
+            tmpObj.tel = tel;
+            tmpObj.remark = remark;
+            tmpObj.email = email;
+            tmpObj.authType = authType;
+            tmpObj.status = STATUS.A;
             if (id) {
               tmpObj.id = id;
             }
@@ -1508,15 +1630,15 @@ export function save(req, res, u, b) {
             const newId = datasource.length + 1;
             datasource.unshift({
               id: newId,
-              orgCode:'1',
+              orgCode: '1',
               orgName,
-              appkey:`appkey${newId}`,
+              appkey: `appkey${newId}`,
               authType,
               tel,
               email,
               orgType,
               remark,
-              status:STATUS.A,
+              status: STATUS.A,
               createTime: new Date(),
             });
           }
@@ -1527,9 +1649,9 @@ export function save(req, res, u, b) {
             const tmpObj = tmpGroupsArray.shift();
             tmpObj.groupName = groupName;
             if (groupId) {
-              tmpObj.tel=tel;
-              tmpObj.remark=remark;
-              tmpObj.email=email;
+              tmpObj.tel = tel;
+              tmpObj.remark = remark;
+              tmpObj.email = email;
               tmpObj.id = groupId;
             }
           } else {
@@ -1537,9 +1659,9 @@ export function save(req, res, u, b) {
             datasource.unshift({
               groupId: newId,
               groupName,
-              status:STATUS.A,
+              status: STATUS.A,
             });
-            console.log("datasource:",datasource);
+            console.log("datasource:", datasource);
           }
           break;
         case 'sys_user':
@@ -1559,9 +1681,9 @@ export function save(req, res, u, b) {
               email,
               utype,
               remark,
-              status:STATUS.A,
+              status: STATUS.A,
             });
-            console.log("datasource:",datasource);
+            console.log("datasource:", datasource);
           }
           break;
         case 'sys_role':
@@ -1578,9 +1700,31 @@ export function save(req, res, u, b) {
               roleId: newId,
               roleName,
               remark,
-              status:STATUS.A,
+              status: STATUS.A,
             });
-            console.log("datasource:",datasource);
+            console.log("datasource:", datasource);
+          }
+          break;
+        case 'config':
+          const tmpConfiglistArray = datasource.filter(item => envId && envId === item.envId);
+          if (tmpConfiglistArray && tmpConfiglistArray.length > 0) {
+            const tmpObj = tmpConfiglistArray.shift();
+            tmpObj.envName = envName;
+            tmpObj.ifSelected = ifSelected;
+            console.log('sage1');
+          } else {
+            const newId = datasource.length + 1;
+            datasource.unshift({
+              envId: newId,
+              publicGatewayUrl,
+              privateGatewayUrl,
+              agentUrl,
+              envName,
+              status,
+              fileServerUrl,
+              ifSelected,
+            });
+            console.log("datasource:", datasource);
           }
           break;
         case 'sys_privilege':
@@ -1596,12 +1740,12 @@ export function save(req, res, u, b) {
             datasource.unshift({
               privilegeId: newId,
               roleName,
-              path, icon,hideInMenu,hideChildrenInMenu,type,
+              path, icon, hideInMenu, hideChildrenInMenu, type,
 
               remark,
-              status:STATUS.A,
+              status: STATUS.A,
             });
-            console.log("datasource:",datasource);
+            console.log("datasource:", datasource);
           }
           break;
         default:
@@ -1612,7 +1756,7 @@ export function save(req, res, u, b) {
       break;
   }
   console.log(datasource.length);
-  console.log("---:",groupsDataSource.length);
+  console.log("---:", groupsDataSource.length);
   const result = {
     code: "200",
   };
@@ -1630,40 +1774,42 @@ export function statusBatch(req, res, u, b) {
   // }
 
   const body = (b && b.body) || req.body;
-  const { method, tableName, data:{info},option } = body;
-  const {  ids } = info;
+  const { method, tableName, data: { info }, option } = body;
+  const { ids } = info;
   const datasource = getList(tableName);
   // console.log('statusBatch method:',method);
   switch (method) {
     /* eslint no-case-declarations:0 */
     case 'delete':
-      let status='D';
+      let status = 'D';
       switch (option) {
         case 3:
-          status=STATUS.D;
+          status = STATUS.D;
           break;
         case 4:
-          status=STATUS.A;
+          status = STATUS.A;
           break;
         case 5:
-          status=STATUS.S;
+          status = STATUS.S;
           break;
         default:
-          status=STATUS.A;
+          status = STATUS.A;
           break;
       }
       // console.log("status batch method:",method,ids," status:",status);
-      let id="id";
+      let id = "id";
       switch (tableName) {
         case 'api_group':
-          id="groupId";
+          id = "groupId";
           break;
         case 'sys_user':
-          id="userId";
+          id = "userId";
           break;
         case 'attr_spec':
-          id="attrSpecId";
+          id = "attrSpecId";
           break;
+        case 'config':
+          id = "envId"
         default:
           break;
       }
@@ -1701,9 +1847,9 @@ export function getAdapterListByType(req, res, u) {
   }
   const params = parse(url, true).query;
 
-  const result={...adapterSpecs};
+  const result = { ...adapterSpecs };
   if (params.pointType) {
-    result.data=adapterSpecs.data.filter((item)=>params.pointType.indexOf(item.pointType)!==-1);
+    result.data = adapterSpecs.data.filter((item) => params.pointType.indexOf(item.pointType) !== -1);
   }
 
   if (res && res.json) {
@@ -1720,9 +1866,9 @@ export function getOrgListByType(req, res, u) {
   const params = parse(url, true).query;
 
   // console.log("getOrgListByType in model", params);
-  const result={...orgs};
+  const result = { ...orgs };
   if (params.orgType) {
-    result.data=orgs.data.filter((item)=>params.orgType.indexOf(item.orgType)!==-1);
+    result.data = orgs.data.filter((item) => params.orgType.indexOf(item.orgType) !== -1);
   }
 
   if (res && res.json) {
