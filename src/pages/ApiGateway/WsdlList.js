@@ -658,7 +658,7 @@ class WsdlList extends PureComponent {
         title: 'WSDL URL Path',
         dataIndex: 'wsdlUrlPath',
         render(val) {
-          return <Ellipsis length={40} tooltip>{val}</Ellipsis>;
+          return <Ellipsis length={36} tooltip>{val}</Ellipsis>;
         },
       },
       {
@@ -667,17 +667,6 @@ class WsdlList extends PureComponent {
         filters: statusFilter,
         render(val) {
           return <span>{getItemValue2(statusList, val)}</span>
-        },
-      },
-      {
-        title: 'WSDL File Name',
-        dataIndex: 'wsdlFileName',
-      },
-      {
-        title: 'Folder',
-        dataIndex: 'folder',
-        render(val) {
-          return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
         },
       },
       {
@@ -693,6 +682,17 @@ class WsdlList extends PureComponent {
         width: 180,
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      },
+      {
+        title: 'WSDL File Name',
+        dataIndex: 'wsdlFileName',
+      },
+      {
+        title: 'Folder',
+        dataIndex: 'folder',
+        render(val) {
+          return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
+        },
       },
       {
         title: 'Action',
