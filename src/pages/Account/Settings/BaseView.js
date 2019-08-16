@@ -32,10 +32,10 @@ const AvatarView = ({ avatar }) => (
 const validatorGeographic = (rule, value, callback) => {
   const { province, city } = value;
   if (!province.key) {
-    callback('Please input your province!');
+    callback('please enter your province!');
   }
   if (!city.key) {
-    callback('Please input your city!');
+    callback('please enter your city!');
   }
   callback();
 };
@@ -43,10 +43,10 @@ const validatorGeographic = (rule, value, callback) => {
 const validatorPhone = (rule, value, callback) => {
   const values = value.split('-');
   if (!values[0]) {
-    callback('Please input your area code!');
+    callback('please enter your area code!');
   }
   if (!values[1]) {
-    callback('Please input your phone number!');
+    callback('please enter your phone number!');
   }
   callback();
 };

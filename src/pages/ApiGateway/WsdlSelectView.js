@@ -30,7 +30,7 @@ class WsdlSelectView extends PureComponent {
 
       const comItem ={
         wsdlId : 0,
-        wsdlName : "Please select one wsdl"
+        wsdlName : "please choose one wsdl"
       };
       newList = newList.filter(item=>item.wsdlId !== 0);
       newList.unshift(comItem);

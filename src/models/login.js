@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
-import { fakeAccountLogin, getFakeCaptcha } from '@/services/userService';
+import { fakeAccountLogin } from '@/services/userService';
 import { setAuthority, setUser } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
@@ -25,10 +25,14 @@ export default {
       if (status === 'ok') {
         const {id,username}=response.data;
         const user={id,username};
+        console.log("4:",user);
         setUser(user);
+        console.log("3:",user);
         reloadAuthorized();
+        console.log("2:");
         let url="/user/loading";
         const params = getPageQuery();
+        console.log("1:",params);
 
 
         const { redirect } = params;

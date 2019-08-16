@@ -33,7 +33,7 @@ export default {
   'validation.phone-number.wrong-format': 'Malformed phone number!',
   'validation.verification-code.required': 'Please enter the verification code!',
   'validation.title.required': 'Please enter a title',
-  'validation.date.required': 'Please select the start and end date',
+  'validation.date.required': 'please choose the start and end date',
   'validation.goal.required': 'Please enter a description of the goal',
   'validation.standard.required': 'Please enter a metric',
 };

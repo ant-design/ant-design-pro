@@ -26,7 +26,7 @@ import WsdlApi from "./WsdlApi";
 
 import styles from './ApiList.less';
 import {getItems,getItemValue2} from '@/utils/masterData';
-import {getUserId} from "../../utils/authority";
+import {getUserId,getToken} from "../../utils/authority";
 import constants from '@/utils/constUtil';
 
 const { PREFIX_PATH,TOKEN_PREFIX,ACT,STATUS } = constants;
@@ -89,7 +89,7 @@ const CreateForm = Form.create()(props => {
           <WsdlUpload selectedRow={selectedRow} handleFile={handleFile} />
         );
       default:
-        return <Input disabled={item.disabled} placeholder={`Please input ${item.title}`} />;
+        return <Input disabled={item.disabled} placeholder={`please enter ${item.title}`} />;
     }
   };
   const addForms = getFormItemArray(props, 'add')
@@ -119,7 +119,7 @@ const CreateForm = Form.create()(props => {
           >
             {form.getFieldDecorator(item.name, {
               initialValue: selectedRow ? selectedRow[item.name] : item.defaultValue||'',
-              rules: item.rules ? [] : [{ required: true, message: `Please input ${item.title}` }],
+              rules: item.rules ? [] : [{ required: true, message: `please enter ${item.title}` }],
             })(renderAutoForm(item))}
           </FormItem>
       ))}
@@ -496,7 +496,7 @@ class WsdlList extends PureComponent {
     formData.append('userId',userId);
     formData.append(key,keyValue);
 
-    const token = localStorage.getItem("token");
+    const token = getToken();
     const tokenStr =  `${TOKEN_PREFIX}${token}`;
     reqwest({
       url: `${PREFIX_PATH}/baseInfo/wsdl/upload`,
@@ -624,12 +624,12 @@ class WsdlList extends PureComponent {
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
             <FormItem label="WSDL Name">
-              {getFieldDecorator('wsdlName')(<Input placeholder="Please input WSDL Name" />)}
+              {getFieldDecorator('wsdlName')(<Input placeholder="please enter WSDL Name" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="WSDL URL Path">
-              {getFieldDecorator('wsdlUrlPath')(<Input placeholder="Please input WSDL URL Path" />)}
+              {getFieldDecorator('wsdlUrlPath')(<Input placeholder="please enter WSDL URL Path" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>

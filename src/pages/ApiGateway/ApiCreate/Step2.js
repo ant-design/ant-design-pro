@@ -31,7 +31,7 @@ class Step2 extends React.PureComponent {
     console.log(wsdlObj);
     const { form } = this.props;
     const {wsdlUrlPath}=wsdlObj;
-    const requestUrl=wsdlUrlPath.replace("/ws/","");
+    const requestUrl=wsdlUrlPath.replace(WS.PATH_PREFIX,"");
     console.log(requestUrl);
     const obj = {requestUrl};
     form.setFieldsValue(obj);
@@ -104,7 +104,7 @@ class Step2 extends React.PureComponent {
     };
     const display=data.serviceType!==WS.SERVICE_TYPE?{display:'none'}:null;
     const displayForRest=data.serviceType===WS.SERVICE_TYPE?{display:'none'}:null;
-    const rulesForWs=data.serviceType===WS.SERVICE_TYPE?[{ required: true, message: 'please input' }]:[];
+    const rulesForWs=data.serviceType===WS.SERVICE_TYPE?[{ required: true, message: 'please enter' }]:[];
 
     console.log(display,data.serviceType,data);
     return (
@@ -118,33 +118,33 @@ class Step2 extends React.PureComponent {
             <Form.Item {...formItemLayout} label="服务类型">
               {getFieldDecorator('serviceType', {
                 initialValue: data.serviceType,
-                rules: [{ required: true, message: '请选择服务类型' }],
+                rules: [{ required: true, message: 'please choose服务类型' }],
               })(<RadioView javaCode="apiService" javaKey="service_type" onChange={this.handleChange} />)}
             </Form.Item>
           </span>
           <Form.Item {...formItemLayout} label="WSDL" style={display}>
             {getFieldDecorator('wsdlId', {
               initialValue: data.wsdlId,
-              rules: [{ required: getFieldValue('serviceType') === '2', message: 'please select' }],
+              rules: [{ required: getFieldValue('serviceType') === '2', message: 'please choose' }],
             })(<WsdlSelectView userId={userId} onSetUrl={this.setUrl} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求PATH">
             {getFieldDecorator('requestUrl', {
               initialValue: data.requestUrl,
-              rules: [{ required: true, message: '请输入请求PATH' }],
-            })(<Input addonBefore={data.pathPrefix} placeholder="请输入请求PATH" />)}
+              rules: [{ required: true, message: 'please enter请求PATH' }],
+            })(<Input addonBefore={data.pathPrefix} placeholder="please enter请求PATH" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求类型" style={displayForRest}>
             {getFieldDecorator('reqMethod', {
               initialValue: data.reqMethod,
-              rules: [{ required: true, message: '请选择HTTP Method' }],
+              rules: [{ required: true, message: 'please chooseHTTP Method' }],
             })(<SelectView javaCode="common" javaKey="req_method" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Action Name" style={display}>
             {getFieldDecorator('actionName', {
               initialValue: data.actionName,
               rules: rulesForWs,
-            })(<Input placeholder="请选择Action Name" />)}
+            })(<Input placeholder="please chooseAction Name" />)}
           </Form.Item>
           <Form.Item
             style={{ marginBottom: 8 }}
