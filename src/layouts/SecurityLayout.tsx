@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { router, Redirect } from 'umi';
+import { Redirect } from 'umi';
 import { ConnectState, ConnectProps } from '@/models/connect';
 import { CurrentUser } from '@/models/user';
 import PageLoading from '@/components/PageLoading';
