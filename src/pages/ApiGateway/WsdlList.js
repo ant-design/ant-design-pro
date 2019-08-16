@@ -184,6 +184,7 @@ class WsdlList extends PureComponent {
     const userId = getUserId();
     const payload = {
       userId,
+      range:'all',
       data:{
         info:{
           pageNo: 1,
@@ -289,6 +290,7 @@ class WsdlList extends PureComponent {
     const userId = getUserId();
     const payload = {
       userId,
+      range:'all',
       data: {
         info: {
           pageNo: 1,
@@ -329,6 +331,7 @@ class WsdlList extends PureComponent {
       const userId = getUserId();
       const payload = {
         userId,
+        range:'all',
         data: {
           info: {
             pageNo: 1,
@@ -366,6 +369,7 @@ class WsdlList extends PureComponent {
     const userId = getUserId();
     const payload = {
       userId,
+      range:'all',
       data: {
         info: {
           pageNo: paginations&&paginations.current?paginations.current:1,
@@ -594,14 +598,15 @@ class WsdlList extends PureComponent {
 
   renderMoreBtn = props => {
     const {current} = props;
-    const {status} = current;
+    const {status,apiServices} = current;
+    const apiSize = apiServices ? apiServices.length:0;
     return (
       <Dropdown
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
             {status === STATUS.A ? <Menu.Item key="handleModify">Modify</Menu.Item> : null}
             {status === STATUS.A ? <Menu.Item key="handleParse">Validate</Menu.Item> : null}
-            {status === STATUS.A ? <Menu.Item key="handleApi">Generate Api</Menu.Item> : null}
+            {apiSize === 0       ? <Menu.Item key="handleApi">Generate Api</Menu.Item> : null}
             <Menu.Item key="handleList">Action List</Menu.Item>
             {status !== STATUS.D ? <Menu.Item key="handleDelete">Remove</Menu.Item> : null}
           </Menu>
