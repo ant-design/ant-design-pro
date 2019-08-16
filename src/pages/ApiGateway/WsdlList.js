@@ -410,7 +410,39 @@ class WsdlList extends PureComponent {
   };
 
   handleApi = ( record ) =>{
-    this.handleApiVisible(record,true);
+    // this.handleApiVisible(record,true);
+
+
+    /**
+     * 解析数据后，成功跳转
+     */
+    const { dispatch } = this.props;
+    const {wsdlId} = record;
+    const payload = {wsdlId};
+    dispatch({
+      type: 'wsdlModel/parseWsdl',
+      payload,
+      callback: resp => {
+        console.log("resp",resp);
+        const {code,data,msg} = resp;
+        if(code === '200'){
+          const {actionNames} = data;
+          router.push({
+            pathname: `/apiGateway/wsdl/info`, // 通过url参数传递
+            state: {
+              // 通过对象传递
+              wsdlId,
+              record, // 表格某行的对象数据
+              actionNames // actionName列表数据
+            },
+          });
+        }else{
+          message.error(`error:${msg}`);
+        }
+
+      },
+    });
+
   }
 
   handleAccess = ( record ) =>{
@@ -512,11 +544,8 @@ class WsdlList extends PureComponent {
   handleParse = ( record ) =>{
 
     const { dispatch } = this.props;
-
-    const payload = {};
-    payload.data = {};
-    payload.data.info = {};
-    payload.data.info.wsdlId = record.wsdlId;
+    const {wsdlId} = record;
+    const payload = {wsdlId};
     dispatch({
       type: 'wsdlModel/parseWsdl',
       payload,

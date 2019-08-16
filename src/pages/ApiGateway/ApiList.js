@@ -98,14 +98,17 @@ class TableList extends PureComponent {
     const userId = getUserId();
     this.setState({ userId });
 
-    const { dispatch,apiGatewayModel } = this.props;
+    const { dispatch,apiGatewayModel,location } = this.props;
+    const {state} = location;
+    const {wsdlId} = state;
     const {data:{list}}=apiGatewayModel;
-    if(!list||list.length===0) {
+    if(!list||list.length===0||wsdlId) {
       const payload = {userId};
       payload.data = {};
       payload.data.info = {
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
+        wsdlId
       };
       dispatch({
         type: 'apiGatewayModel/apiList',
@@ -325,7 +328,9 @@ class TableList extends PureComponent {
     this.setState({
       formValues: {},
     });
-
+    form.setFieldsValue({
+      wsdlId:null
+    });
     const { userId } = this.state;
     const payload = {userId};
     payload.data = {};
@@ -641,8 +646,12 @@ class TableList extends PureComponent {
 
   renderAdvancedForm() {
     const {
-      form: { getFieldDecorator },
+      form: { getFieldDecorator,getFieldValue },
+      location
     } = this.props;
+    const userId = getUserId();
+    const {state} = location;
+    const {wsdlId} = state || {wsdlId: ''};
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
@@ -660,6 +669,16 @@ class TableList extends PureComponent {
               )}
             </FormItem>
           </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="Wsdl">
+              {getFieldDecorator('wsdlId', {
+                initialValue: wsdlId,
+                rules: [{ required: getFieldValue('serviceType') === '2', message: 'please select' }],
+              })(<WsdlSelectView userId={userId} />)}
+            </FormItem>
+          </Col>
+        </Row>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="使用状态">
               {getFieldDecorator('status')(<SelectView javaCode="apiService" javaKey="status" />)}
