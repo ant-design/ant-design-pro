@@ -10,7 +10,8 @@ import { connect } from 'dva';
 class WsdlUpload extends PureComponent {
 
   state = {
-    fileList: []
+    fileList: [],
+    removeFiles:[]
   };
 
   componentDidMount() {
@@ -77,13 +78,17 @@ class WsdlUpload extends PureComponent {
   handleChange = ({ fileList }) => {
 
     console.log("handleChange",fileList);
+
     // const newFileList = fileList.slice(-6);
     if(fileList.length > 9){
       message.error('upload file size must less than 9.');
     }else{
       const {handleFile} = this.props;
+      const {removeFiles} = this.state;
       this.setState({fileList});
-      handleFile(fileList);
+
+      console.log("removeFilesUpload",removeFiles);
+      handleFile(fileList,removeFiles);
     }
 
 
@@ -91,47 +96,52 @@ class WsdlUpload extends PureComponent {
 
   deleteFile = (file) =>{
 
+    const {removeFiles} = this.state;
+    const {handleFile} = this.props;
     const { name,old } = file;
-    const { selectedRow,dispatch } = this.props;
+    let newFileList = [];
+    let newRemoveFiles = [];
+    newRemoveFiles = removeFiles;
+    this.setState(state => {
+      const index = state.fileList.indexOf(file);
+      newFileList = state.fileList.slice();
+      newFileList.splice(index, 1);
+      return {
+        fileList : newFileList
+      };
+    });
 
     // 旧文件删除
     if( old ){
 
-      const {folder} = selectedRow;
-      const payload = {folder,fileName:name};
+      newRemoveFiles.push(name);
+      this.setState({removeFiles:newRemoveFiles});
+      // const {folder} = selectedRow;
+      // const payload = {folder,fileName:name};
+      //
+      // let result = false;
+      // dispatch({
+      //   type: 'wsdlModel/removeFile',
+      //   payload,
+      //   callback: resp => {
+      //     if(resp.code === '200'){
+      //       result = true;
+      //       this.setState(state => {
+      //         const index = state.fileList.indexOf(file);
+      //         const newFileList = state.fileList.slice();
+      //         newFileList.splice(index, 1);
+      //         return {
+      //           fileList: newFileList,
+      //         };
+      //       });
+      //     }
+      //   }
+      // });
+      // return result;
 
-      let result = false;
-      dispatch({
-        type: 'wsdlModel/removeFile',
-        payload,
-        callback: resp => {
-          if(resp.code === '200'){
-            result = true;
-            this.setState(state => {
-              const index = state.fileList.indexOf(file);
-              const newFileList = state.fileList.slice();
-              newFileList.splice(index, 1);
-              return {
-                fileList: newFileList,
-              };
-            });
-          }
-        }
-      });
-      return result;
-
-    }else{
-      this.setState(state => {
-        const index = state.fileList.indexOf(file);
-        const newFileList = state.fileList.slice();
-        newFileList.splice(index, 1);
-        return {
-          fileList: newFileList,
-        };
-      });
-      return true;
     }
-
+    handleFile(newFileList,newRemoveFiles);
+    return true;
   }
 
   render() {
@@ -140,7 +150,7 @@ class WsdlUpload extends PureComponent {
 
     const propsUpload = {
       onRemove: file => {
-        console.log("onRemove",file);
+        // console.log("onRemove",file);
         return this.deleteFile(file);
         // Modal.confirm({
         //   title: 'Delete this file',
