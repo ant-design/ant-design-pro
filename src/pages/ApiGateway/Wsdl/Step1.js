@@ -6,7 +6,7 @@ import styles from './style.less';
 import SelectView from '../SelectView';
 import RadioView from '../RadioView';
 import WsdlSelectView from "../WsdlSelectView";
-import GroupSelectView from '../GroupSelectView';
+import GroupTreeSelectView from '../GroupTreeSelectView';
 import {getUserId, getUserName} from "../../../utils/authority";
 
 const formItemLayout = {
@@ -30,17 +30,17 @@ class Step1 extends React.PureComponent {
     const  apiWsdlId = apiCreateWsdlModel.wsdlId;
     const {apiService} = apiCreateWsdlModel;
     const {state} = location;
-    const {wsdlId,record,actionNames} = state || {wsdlId: null,record:{},actionNames:[]};
+    const {wsdlId,record,actionNames} = state || {wsdlId: apiWsdlId,record:{},actionNames:[]};
     const payload = {wsdlId,record,actionNames};
     // console.log("did",apiCreateWsdlModel, apiWsdlId,"--------",wsdlId);
+    if( !wsdlId ){
+      router.push('/apiGateway/wsdlList');
+    }
     if(apiService.groupId===undefined || ( apiWsdlId !== wsdlId && wsdlId ) ){
       dispatch({
         type: 'apiCreateWsdlModel/initDataForAdd',
         payload
       });
-    }
-    if( !wsdlId ){
-      router.push('/apiGateway/wsdlList');
     }
 
   }
@@ -71,7 +71,7 @@ class Step1 extends React.PureComponent {
             {getFieldDecorator('groupId', {
               initialValue: apiService.groupId,
               rules: [{ required: true, message: '请选择分组' }],
-            })(<GroupSelectView showSearch optionFilterProp="children" />)}
+            })(<GroupTreeSelectView hideRoot />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Api Range">
             {getFieldDecorator('apiType', {

@@ -582,10 +582,10 @@ class WsdlList extends PureComponent {
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
             {status === STATUS.A ? <Menu.Item key="handleModify">Modify</Menu.Item> : null}
-            {status === STATUS.A ? <Menu.Item key="handleParse">Parse</Menu.Item> : null}
-            {status === STATUS.A ? <Menu.Item key="handleApi">Set Api</Menu.Item> : null}
-            <Menu.Item key="handleList">Api List</Menu.Item>
-            {status !== STATUS.D ? <Menu.Item key="handleDelete">Delete</Menu.Item> : null}
+            {status === STATUS.A ? <Menu.Item key="handleParse">Validate</Menu.Item> : null}
+            {status === STATUS.A ? <Menu.Item key="handleApi">Generate Api</Menu.Item> : null}
+            <Menu.Item key="handleList">Action List</Menu.Item>
+            {status !== STATUS.D ? <Menu.Item key="handleDelete">Remove</Menu.Item> : null}
           </Menu>
         }
       >
