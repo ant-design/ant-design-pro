@@ -137,7 +137,6 @@ class WsdlUpload extends PureComponent {
       //   }
       // });
       // return result;
-
     }
     handleFile(newFileList,newRemoveFiles);
     return true;
