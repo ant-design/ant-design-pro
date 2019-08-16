@@ -10,8 +10,19 @@ interface SecurityLayoutProps extends ConnectProps {
   currentUser: CurrentUser;
 }
 
-class SecurityLayout extends React.Component<SecurityLayoutProps> {
+interface SecurityLayoutState {
+  isReady: boolean;
+}
+
+class SecurityLayout extends React.Component<SecurityLayoutProps, SecurityLayoutState> {
+  state: SecurityLayoutState = {
+    isReady: false,
+  };
+
   componentDidMount() {
+    this.setState({
+      isReady: true,
+    });
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({
@@ -21,8 +32,9 @@ class SecurityLayout extends React.Component<SecurityLayoutProps> {
   }
 
   render() {
+    const { isReady } = this.state;
     const { children, loading, currentUser } = this.props;
-    if (!currentUser.userid && loading) {
+    if ((!currentUser.userid && loading) || !isReady) {
       return <PageLoading />;
     }
     if (!currentUser.userid) {
