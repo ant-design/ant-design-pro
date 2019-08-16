@@ -461,7 +461,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.back.connectTimeout}>
                   {getFieldDecorator('back.connectTimeout', {
                     rules: [{ required: true, message: '后端服务连接超时' }],
-                  })(<Input placeholder="please enter后端服务连接超时（ms）" />)}
+                  })(<Input placeholder="please enter timeout（ms）" />)}
                 </Form.Item>
               </Col>
               <Col
