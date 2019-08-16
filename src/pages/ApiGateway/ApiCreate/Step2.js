@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import { connect } from 'dva';
-import { Form, Input, Button, Divider,Select } from 'antd';
+import { Form, Input, Button, Divider } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
 import SelectView from '../SelectView';
 import RadioView from '../RadioView';
 import WsdlSelectView from "../WsdlSelectView";
 import { getUserId } from '@/utils/authority';
+import constants from '@/utils/constUtil';
 
-const { Option } = Select;
-
+const {WS,REST,HTTP} = constants;
 const userId = getUserId(); // 获取当前登录用户编号
 
 const formItemLayout = {
@@ -27,6 +27,22 @@ const formItemLayout = {
 @Form.create()
 class Step2 extends React.PureComponent {
 
+  setUrl = wsdlObj =>{
+    console.log(wsdlObj);
+    const { form } = this.props;
+    const {wsdlUrlPath}=wsdlObj;
+    const requestUrl=wsdlUrlPath.replace("/ws/","");
+    console.log(requestUrl);
+    const obj = {requestUrl};
+    form.setFieldsValue(obj);
+    // dispatch({
+    //   type: 'apiCreateModel/saveStepFormData',
+    //   payload: {requestUrl},
+    //   stepType:1,
+    // });
+
+  }
+
   handleChange = e => {
     const { dispatch } = this.props;
     const {value}=e.target;
@@ -40,7 +56,7 @@ class Step2 extends React.PureComponent {
         payload: {
           ...payload,
           reqMethod:'post',
-          pathPrefix:'/ws/',
+          pathPrefix:WS.PATH_PREFIX,
         },
         stepType:1,
       });
@@ -50,7 +66,7 @@ class Step2 extends React.PureComponent {
         type: 'apiCreateModel/saveStepFormData',
         payload: {
           ...payload,
-          pathPrefix:'/rest/',
+          pathPrefix:REST.PATH_PREFIX,
         },
         stepType:1,
       });
@@ -60,7 +76,7 @@ class Step2 extends React.PureComponent {
         type: 'apiCreateModel/saveStepFormData',
         payload: {
           ...payload,
-          pathPrefix:'/http/',
+          pathPrefix:HTTP.PATH_PREFIX,
         },
         stepType:1,
       });
@@ -86,9 +102,9 @@ class Step2 extends React.PureComponent {
         }
       });
     };
-    const display=data.serviceType!=='2'?{display:'none'}:null;
-    const displayForRest=data.serviceType==='2'?{display:'none'}:null;
-    const rulesForWs=data.serviceType==='2'?[{ required: true, message: 'please input' }]:[];
+    const display=data.serviceType!==WS.SERVICE_TYPE?{display:'none'}:null;
+    const displayForRest=data.serviceType===WS.SERVICE_TYPE?{display:'none'}:null;
+    const rulesForWs=data.serviceType===WS.SERVICE_TYPE?[{ required: true, message: 'please input' }]:[];
 
     console.log(display,data.serviceType,data);
     return (
@@ -106,6 +122,12 @@ class Step2 extends React.PureComponent {
               })(<RadioView javaCode="apiService" javaKey="service_type" onChange={this.handleChange} />)}
             </Form.Item>
           </span>
+          <Form.Item {...formItemLayout} label="WSDL" style={display}>
+            {getFieldDecorator('wsdlId', {
+              initialValue: data.wsdlId,
+              rules: [{ required: getFieldValue('serviceType') === '2', message: 'please select' }],
+            })(<WsdlSelectView userId={userId} onSetUrl={this.setUrl} />)}
+          </Form.Item>
           <Form.Item {...formItemLayout} label="请求PATH">
             {getFieldDecorator('requestUrl', {
               initialValue: data.requestUrl,
@@ -117,12 +139,6 @@ class Step2 extends React.PureComponent {
               initialValue: data.reqMethod,
               rules: [{ required: true, message: '请选择HTTP Method' }],
             })(<SelectView javaCode="common" javaKey="req_method" />)}
-          </Form.Item>
-          <Form.Item {...formItemLayout} label="WSDL" style={display}>
-            {getFieldDecorator('wsdlId', {
-              initialValue: data.wsdlId,
-              rules: [{ required: getFieldValue('serviceType') === '2', message: 'please select' }],
-            })(<WsdlSelectView userId={userId} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Action Name" style={display}>
             {getFieldDecorator('actionName', {
