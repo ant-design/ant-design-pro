@@ -52,10 +52,11 @@ class SelectView extends PureComponent {
 
   render() {
     // const value = this.conversionObject();
-    const { value,style, ...restProps } = this.props;
-    // console.log("value:",value);
+    const { value,style,isDisable, ...restProps} = this.props;
+    console.log("value:",value,restProps);
+    const disable = isDisable?'disabled':'';
     return (
-      <Select value={value} onSelect={this.selectChangeItem} style={style} {...restProps}>
+      <Select value={value} onSelect={this.selectChangeItem} style={style} {...restProps} disabled={disable}>
         {this.getOption()}
       </Select>
     );

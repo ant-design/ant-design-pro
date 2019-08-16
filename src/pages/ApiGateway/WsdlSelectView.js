@@ -63,9 +63,10 @@ class WsdlSelectView extends PureComponent {
 
   render() {
     // const value = this.conversionObject();
-    const { value,sign } = this.props;
+    const { value,sign,isDisable } = this.props;
+    const disable = isDisable?'disabled':'';
     return (
-      <Select style={{ width: '100%' }} value={value} onSelect={this.selectChangeItem}>
+      <Select style={{ width: '100%' }} value={value} onSelect={this.selectChangeItem} disabled={disable}>
         {this.getOption(sign)}
       </Select>
     );
