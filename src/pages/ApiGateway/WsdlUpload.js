@@ -120,7 +120,7 @@ class WsdlUpload extends PureComponent {
       });
       return result;
 
-    }else{
+    }
       this.setState(state => {
         const index = state.fileList.indexOf(file);
         const newFileList = state.fileList.slice();
@@ -130,7 +130,7 @@ class WsdlUpload extends PureComponent {
         };
       });
       return true;
-    }
+    
 
   }
 
@@ -165,7 +165,8 @@ class WsdlUpload extends PureComponent {
 
     return (
       <div>
-        <Upload {...propsUpload}
+        <Upload
+          {...propsUpload}
           onChange={this.handleChange}
         >
           <Button>
