@@ -86,7 +86,7 @@ class WsdlUpload extends PureComponent {
       const {removeFiles} = this.state;
       this.setState({fileList});
 
-      console.log("removeFilesUpload",removeFiles);
+      console.log("fileList",fileList);
       handleFile(fileList,removeFiles);
     }
 
@@ -95,22 +95,22 @@ class WsdlUpload extends PureComponent {
 
   deleteFile = (file) =>{
 
-    const {removeFiles} = this.state;
+    const {removeFiles,fileList} = this.state;
     const {handleFile} = this.props;
     const { name,old } = file;
     let newFileList = [];
     let newRemoveFiles = [];
     newRemoveFiles = removeFiles;
-    this.setState(state => {
-      const index = state.fileList.indexOf(file);
-      newFileList = state.fileList.slice();
-      newFileList.splice(index, 1);
-      return {
-        fileList : newFileList
-      };
+
+    // 删除fileList文件数据
+    const index = fileList.indexOf(file);
+    newFileList = fileList.slice();
+    newFileList.splice(index, 1);
+    this.setState({
+      fileList : newFileList
     });
 
-    // 旧文件删除
+    // 旧文件删除---添加删除文件数组
     if( old ){
 
       newRemoveFiles.push(name);
@@ -139,6 +139,7 @@ class WsdlUpload extends PureComponent {
       // return result;
     }
     handleFile(newFileList,newRemoveFiles);
+
     return true;
   }
 
