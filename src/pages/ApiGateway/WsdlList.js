@@ -29,7 +29,8 @@ import {getItems,getItemValue2} from '@/utils/masterData';
 import {getUserId,getToken} from "../../utils/authority";
 import constants from '@/utils/constUtil';
 
-const { PREFIX_PATH,TOKEN_PREFIX,ACT,STATUS } = constants;
+const { PREFIX_PATH,TOKEN_PREFIX,ACT,STATUS,WS } = constants;
+const { PATH_PREFIX } = WS;
 
 const FormItem = Form.Item;
 const {Option} = Select;
@@ -88,6 +89,10 @@ const CreateForm = Form.create()(props => {
         return (
           <WsdlUpload selectedRow={selectedRow} handleFile={handleFile} />
         );
+      case 'prefix':
+        return (
+          <Input addonBefore={item.prefix} disabled={item.disabled} placeholder={`Please input ${item.title}`} />
+        );
       default:
         return <Input disabled={item.disabled} placeholder={`please enter ${item.title}`} />;
     }
@@ -118,7 +123,8 @@ const CreateForm = Form.create()(props => {
             label={item.title}
           >
             {form.getFieldDecorator(item.name, {
-              initialValue: selectedRow ? selectedRow[item.name] : item.defaultValue||'',
+              /* eslint-disable no-nested-ternary */
+              initialValue: selectedRow?(item.prefix&&selectedRow[item.name]?(selectedRow[item.name]).replace(item.prefix,""):selectedRow[item.name]) : item.defaultValue||'',
               rules: item.rules ? [] : [{ required: true, message: `please enter ${item.title}` }],
             })(renderAutoForm(item))}
           </FormItem>
@@ -155,6 +161,7 @@ class WsdlList extends PureComponent {
     apiVisible:false,
     fileList: [],
     columnSchemas:{},
+    removeFiles:[]
   };
 
   componentWillMount() {
@@ -165,9 +172,9 @@ class WsdlList extends PureComponent {
       name: 'wsdlId',
       commands:[{action:'setRole',title:'角色'},],
       columnDetails: [
-        { name: 'wsdlId', title: 'Wsdl Id', add: true, disabledAct:'true' },
+        { name: 'wsdlId', title: 'Wsdl Id'},
         { name: 'folder', title: 'Folder', sorter: true, query: true, detailFlag:1 },
-        { name: 'wsdlUrlPath', title: 'Wsdl Url Path', sorter: true, query: true, add: true, detailFlag:1 },
+        { name: 'wsdlUrlPath', title: 'Wsdl Url Path',tag:'prefix', prefix: PATH_PREFIX , sorter: true, query: true, add: true, detailFlag:1 },
         { name: 'wsdlFileName', title: 'Wsdl File Name',tag:'fileUpload',columnHidden: true, add: true,rows:3,rules:[] },
       ]
 
@@ -177,6 +184,7 @@ class WsdlList extends PureComponent {
     const userId = getUserId();
     const payload = {
       userId,
+      range:'all',
       data:{
         info:{
           pageNo: 1,
@@ -282,6 +290,7 @@ class WsdlList extends PureComponent {
     const userId = getUserId();
     const payload = {
       userId,
+      range:'all',
       data: {
         info: {
           pageNo: 1,
@@ -322,6 +331,7 @@ class WsdlList extends PureComponent {
       const userId = getUserId();
       const payload = {
         userId,
+        range:'all',
         data: {
           info: {
             pageNo: 1,
@@ -359,6 +369,7 @@ class WsdlList extends PureComponent {
     const userId = getUserId();
     const payload = {
       userId,
+      range:'all',
       data: {
         info: {
           pageNo: paginations&&paginations.current?paginations.current:1,
@@ -469,16 +480,18 @@ class WsdlList extends PureComponent {
     });
   }
 
-  handleFile = (fileList)=>{
-
+  handleFile = (fileList,removeFiles)=>{
 
     const newFileList = fileList.filter(item=> item.old !== 1);
-    this.setState({fileList:newFileList});
+    this.setState({
+      fileList:newFileList,
+      removeFiles
+    });
   }
 
   handleAdd = (fields) => {
 
-    const { selectedRow,columnSchemas } = this.state;
+    const { selectedRow,columnSchemas,removeFiles } = this.state;
     const { key } = columnSchemas;
     const userId = getUserId();
     const keyValue = selectedRow ? selectedRow[key] : "";
@@ -491,10 +504,18 @@ class WsdlList extends PureComponent {
       formData.append('files', file.originFileObj);
     });
     Object.keys(fields).forEach( keyField => {
-      formData.append(keyField, fields[keyField]);
+
+      if( keyField === 'wsdlUrlPath' ){
+        formData.append(keyField, PATH_PREFIX + fields[keyField]);
+      }else{
+        formData.append(keyField, fields[keyField]);
+      }
     });
     formData.append('userId',userId);
     formData.append(key,keyValue);
+    formData.append('removeFiles',removeFiles);
+    // console.log("removeFiles",removeFiles);
+    // console.log("fileList",fileList);
 
     const token = getToken();
     const tokenStr =  `${TOKEN_PREFIX}${token}`;
@@ -509,7 +530,8 @@ class WsdlList extends PureComponent {
       data: formData,
       success: () => {
         this.setState({
-          fileList: []
+          fileList: [],
+          removeFiles:[]
         });
 
         this.handleModalVisible(null,false);
