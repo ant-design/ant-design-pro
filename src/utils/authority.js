@@ -77,6 +77,7 @@ export function setUser(user) {
   return sessionStorage.setItem('antd-pro-user', JSON.stringify(user));
 }
 
+
 export function setToken(token) {
   return sessionStorage.setItem('token', token);
 }
