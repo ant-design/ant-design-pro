@@ -100,7 +100,7 @@ class TableList extends PureComponent {
 
     const { dispatch,apiGatewayModel,location } = this.props;
     const {state} = location;
-    const {wsdlId} = state;
+    const {wsdlId} = state || {wsdlId:''};
     const {data:{list}}=apiGatewayModel;
     if(!list||list.length===0||wsdlId) {
       const payload = {userId};
