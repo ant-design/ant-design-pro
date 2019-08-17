@@ -8,6 +8,12 @@ import styles from './index.less';
 
 @autoHeight()
 class WaterWave extends PureComponent {
+  circleLock = true;
+
+  postRenderChart = false;
+
+  currData = 0;
+
   state = {
     radio: 1,
   };
@@ -27,8 +33,11 @@ class WaterWave extends PureComponent {
   componentDidUpdate(props) {
     const { percent } = this.props;
     if (props.percent !== percent) {
-      // 不加这个会造成绘制缓慢
-      this.renderChart('update');
+      if (this.circleLock) {
+        this.postRenderChart = true;
+      } else {
+        this.renderChart();
+      }
     }
   }
 
@@ -50,7 +59,7 @@ class WaterWave extends PureComponent {
     }
   };
 
-  renderChart(type) {
+  renderChart() {
     const { percent, color = '#1890FF' } = this.props;
     const data = percent / 100;
     const self = this;
@@ -77,13 +86,11 @@ class WaterWave extends PureComponent {
     let currRange = range;
     const xOffset = lineWidth;
     let sp = 0; // 周期偏移量
-    let currData = 0;
     const waveupsp = 0.005; // 水波上涨速度
 
     let arcStack = [];
     const bR = radius - lineWidth;
     const circleOffset = -(Math.PI / 2);
-    let circleLock = true;
 
     for (let i = circleOffset; i < circleOffset + 2 * Math.PI; i += 1 / (8 * Math.PI)) {
       arcStack.push([radius + bR * Math.cos(i), radius + bR * Math.sin(i)]);
@@ -102,7 +109,7 @@ class WaterWave extends PureComponent {
         const x = sp + (xOffset + i) / unit;
         const y = Math.sin(x) * currRange;
         const dx = i;
-        const dy = 2 * cR * (1 - currData) + (radius - cR) - unit * y;
+        const dy = 2 * cR * (1 - self.currData) + (radius - cR) - unit * y;
 
         ctx.lineTo(dx, dy);
         sinStack.push([dx, dy]);
@@ -124,13 +131,13 @@ class WaterWave extends PureComponent {
 
     function render() {
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-      if (circleLock && type !== 'update') {
+      if (self.circleLock) {
         if (arcStack.length) {
           const temp = arcStack.shift();
           ctx.lineTo(temp[0], temp[1]);
           ctx.stroke();
         } else {
-          circleLock = false;
+          self.circleLock = false;
           ctx.lineTo(cStartPoint[0], cStartPoint[1]);
           ctx.stroke();
           arcStack = null;
@@ -147,6 +154,10 @@ class WaterWave extends PureComponent {
           ctx.restore();
           ctx.clip();
           ctx.fillStyle = color;
+          if (self.postRenderChart) {
+            setTimeout(() => self.renderChart());
+            self.postRenderChart = false;
+          }
         }
       } else {
         if (data >= 0.85) {
@@ -169,11 +180,11 @@ class WaterWave extends PureComponent {
             currRange -= t;
           }
         }
-        if (data - currData > 0) {
-          currData += waveupsp;
+        if (data - self.currData > 0) {
+          self.currData += waveupsp;
         }
-        if (data - currData < 0) {
-          currData -= waveupsp;
+        if (data - self.currData < 0) {
+          self.currData -= waveupsp;
         }
 
         sp += 0.07;
