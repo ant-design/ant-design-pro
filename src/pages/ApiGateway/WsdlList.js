@@ -408,7 +408,8 @@ class WsdlList extends PureComponent {
     this.setState({
       modalVisible: flag,
       selectedRow: row,
-      fileList:[]
+      fileList:[],
+      removeFiles:[]
     });
   };
 
