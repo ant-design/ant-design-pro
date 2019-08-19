@@ -79,7 +79,7 @@ class BindDataSelect extends PureComponent {
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder="请输入"
+        placeholder="please enter"
         optionFilterProp="children"
         onChange={this.handleChange}
         onFocus={this.handleFocus}

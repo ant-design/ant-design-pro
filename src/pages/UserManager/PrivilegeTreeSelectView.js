@@ -55,7 +55,7 @@ class PrivilegeTreeSelectView extends PureComponent {
         value={value||'0'}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         treeData={treeSelectData}
-        placeholder="Please select"
+        placeholder="please choose"
         showSearch
         treeNodeFilterProp='title'
         onSelect={this.selectChangeItem}

@@ -26,7 +26,7 @@ import WsdlApi from "./WsdlApi";
 
 import styles from './ApiList.less';
 import {getItems,getItemValue2} from '@/utils/masterData';
-import {getUserId} from "../../utils/authority";
+import {getUserId,getToken} from "../../utils/authority";
 import constants from '@/utils/constUtil';
 
 const { PREFIX_PATH,TOKEN_PREFIX,ACT,STATUS,WS } = constants;
@@ -94,7 +94,7 @@ const CreateForm = Form.create()(props => {
           <Input addonBefore={item.prefix} disabled={item.disabled} placeholder={`Please input ${item.title}`} />
         );
       default:
-        return <Input disabled={item.disabled} placeholder={`Please input ${item.title}`} />;
+        return <Input disabled={item.disabled} placeholder={`please enter ${item.title}`} />;
     }
   };
   const addForms = getFormItemArray(props, 'add')
@@ -125,7 +125,7 @@ const CreateForm = Form.create()(props => {
             {form.getFieldDecorator(item.name, {
               /* eslint-disable no-nested-ternary */
               initialValue: selectedRow?(item.prefix&&selectedRow[item.name]?(selectedRow[item.name]).replace(item.prefix,""):selectedRow[item.name]) : item.defaultValue||'',
-              rules: item.rules ? [] : [{ required: true, message: `Please input ${item.title}` }],
+              rules: item.rules ? [] : [{ required: true, message: `please enter ${item.title}` }],
             })(renderAutoForm(item))}
           </FormItem>
       ))}
@@ -518,7 +518,7 @@ class WsdlList extends PureComponent {
     // console.log("removeFiles",removeFiles);
     // console.log("fileList",fileList);
 
-    const token = localStorage.getItem("token");
+    const token = getToken();
     const tokenStr =  `${TOKEN_PREFIX}${token}`;
     reqwest({
       url: `${PREFIX_PATH}/baseInfo/wsdl/upload`,
@@ -599,15 +599,14 @@ class WsdlList extends PureComponent {
 
   renderMoreBtn = props => {
     const {current} = props;
-    const {status,apiServices} = current;
-    const apiSize = apiServices ? apiServices.length:0;
+    const {status} = current;
     return (
       <Dropdown
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
             {status === STATUS.A ? <Menu.Item key="handleModify">Modify</Menu.Item> : null}
             {status === STATUS.A ? <Menu.Item key="handleParse">Validate</Menu.Item> : null}
-            {apiSize === 0       ? <Menu.Item key="handleApi">Generate Api</Menu.Item> : null}
+            {status === STATUS.A ? <Menu.Item key="handleApi">Generate Api</Menu.Item> : null}
             <Menu.Item key="handleList">Action List</Menu.Item>
             {status !== STATUS.D ? <Menu.Item key="handleDelete">Remove</Menu.Item> : null}
           </Menu>
@@ -648,12 +647,12 @@ class WsdlList extends PureComponent {
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
             <FormItem label="WSDL Name">
-              {getFieldDecorator('wsdlName')(<Input placeholder="Please input WSDL Name" />)}
+              {getFieldDecorator('wsdlName')(<Input placeholder="please enter WSDL Name" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="WSDL URL Path">
-              {getFieldDecorator('wsdlUrlPath')(<Input placeholder="Please input WSDL URL Path" />)}
+              {getFieldDecorator('wsdlUrlPath')(<Input placeholder="please enter WSDL URL Path" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>

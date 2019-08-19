@@ -39,13 +39,13 @@ class Step2 extends React.PureComponent {
         <Form.Item {...formItemLayout} label="Action Name">
           {getFieldDecorator(`actionName${index}`, {
             initialValue: item,
-            rules: [{required: true, message: 'Please input'}],
-          })(<Input placeholder="Please input Action Name" />)}
+            rules: [{required: true, message: 'please enter'}],
+          })(<Input placeholder="please enter Action Name" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="Action Name">
           {getFieldDecorator('serviceType', {
             initialValue: apiService.serviceType,
-            rules: [{required: true, message: '请选择服务类型'}],
+            rules: [{required: true, message: 'please choose服务类型'}],
           })(<RadioView javaCode="apiService" javaKey="service_type" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="服务连接超时（ms）">
@@ -58,13 +58,13 @@ class Step2 extends React.PureComponent {
                 message: 'Malformed number',
               },
             ],
-          })(<Input placeholder="请输入服务连接超时（ms）" />)}
+          })(<Input placeholder="please enter服务连接超时（ms）" />)}
         </Form.Item>
         <Form.Item {...formItemLayout} label="服务请求超时（ms）">
           {getFieldDecorator('socketTimeout', {
             initialValue: apiService.socketTimeout,
             rules: [{required: true, message: '服务请求超时（ms）'}],
-          })(<Input placeholder="请输入服务请求超时（ms）" />)}
+          })(<Input placeholder="please enter服务请求超时（ms）" />)}
         </Form.Item>
       </div>
     ));
@@ -116,19 +116,19 @@ class Step2 extends React.PureComponent {
           <Divider style={{ margin: '24px 0' }} />
           <Form.Item {...formItemLayout} label="服务提供者">
             {getFieldDecorator('orgId', {
-              rules: [{ required: true, message: '请选择服务提供者' }],
+              rules: [{ required: true, message: 'please choose服务提供者' }],
             })(<OrgSelectView orgType="0,1" userId={userId} value={data.orgId} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="服务类型">
             {getFieldDecorator('serviceType', {
               initialValue: data.serviceType,
-              rules: [{ required: true, message: '请选择提供方服务类型' }],
+              rules: [{ required: true, message: 'please choose提供方服务类型' }],
             })(<RadioView javaCode="apiServiceBackend" javaKey="service_type" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="服务地址">
             {getFieldDecorator('url', {
               initialValue: data.url,
-              rules: [{ required: true, message: '请输入提供方地址' }],
+              rules: [{ required: true, message: 'please enter提供方地址' }],
             })(<Input placeholder="http://ip:port" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="服务路径">
@@ -140,7 +140,7 @@ class Step2 extends React.PureComponent {
           <Form.Item {...formItemLayout} label="服务请求类型">
             {getFieldDecorator('reqMethod', {
               initialValue: data.reqMethod,
-              rules: [{ required: true, message: '请选择HTTP Method' }],
+              rules: [{ required: true, message: 'please chooseHTTP Method' }],
             })(<SelectView javaCode="common" javaKey="req_method" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="服务连接超时（ms）">
@@ -153,13 +153,13 @@ class Step2 extends React.PureComponent {
                   message: 'Malformed number',
                 },
               ],
-            })(<Input placeholder="请输入服务连接超时（ms）" />)}
+            })(<Input placeholder="please enter服务连接超时（ms）" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="服务请求超时（ms）">
             {getFieldDecorator('socketTimeout', {
               initialValue: data.socketTimeout,
               rules: [{ required: true, message: '服务请求超时（ms）' }],
-            })(<Input placeholder="请输入服务请求超时（ms）" />)}
+            })(<Input placeholder="please enter服务请求超时（ms）" />)}
           </Form.Item>
           <Form.Item
             style={{marginBottom: 8}}

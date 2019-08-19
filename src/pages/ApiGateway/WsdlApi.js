@@ -116,13 +116,13 @@ class WsdlApi extends PureComponent {
           <Form layout="horizontal" style={{maxWidth: 500}}>
             <Form.Item {...formItemLayout} label="groups">
               {getFieldDecorator('apiService.groupId', {
-                rules: [{ required: true, message: 'Please select groups' }],
+                rules: [{ required: true, message: 'please choose groups' }],
               })(<GroupSelectView showSearch optionFilterProp="children" />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Api Range">
               {getFieldDecorator('apiService.apiType', {
                 initialValue: '1',
-                rules: [{ required: true, message: 'Please Select Api Range' }],
+                rules: [{ required: true, message: 'please choose Api Range' }],
               })(<RadioView javaCode="apiService" javaKey="api_type" />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="connect timeout（ms）">
@@ -135,7 +135,7 @@ class WsdlApi extends PureComponent {
                     message: 'Malformed number',
                   },
                 ],
-              })(<Input placeholder="Please input connect timeout（ms）" />)}
+              })(<Input placeholder="please enter connect timeout（ms）" />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="socket timeout（ms）">
               {getFieldDecorator('apiServiceBackend.socketTimeout', {
@@ -147,7 +147,7 @@ class WsdlApi extends PureComponent {
                     message: 'Malformed number',
                   },
                 ],
-              })(<Input placeholder="Please input socket timeout（ms）" />)}
+              })(<Input placeholder="please enter socket timeout（ms）" />)}
             </Form.Item>
           </Form>
         </Modal>

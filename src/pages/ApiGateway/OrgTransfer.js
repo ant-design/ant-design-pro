@@ -98,7 +98,7 @@ class OrgTransfer extends PureComponent {
           showSearch
           rowKey={this.setKey}
           dataSource={orgList}
-          titles={['未授权', '已授权']}
+          titles={['Unauthorized org', 'Authorized org']}
           targetKeys={targetKeys}
           selectedKeys={selectedKeys}
           onChange={this.handleChange}
@@ -106,7 +106,7 @@ class OrgTransfer extends PureComponent {
           onScroll={this.handleScroll}
           render={item => `${item.orgName}-${item.appkey}`}
           listStyle={{
-            width: 200,
+            width: 280,
             height: 300,
           }}
         />

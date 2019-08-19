@@ -70,39 +70,39 @@ class Step1 extends React.PureComponent {
           <Form.Item {...formItemLayout} label="分组">
             {getFieldDecorator('groupId', {
               initialValue: apiService.groupId,
-              rules: [{ required: true, message: '请选择分组' }],
+              rules: [{ required: true, message: 'please choose分组' }],
             })(<GroupTreeSelectView hideRoot />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Api Range">
             {getFieldDecorator('apiType', {
               initialValue: apiService.apiType,
-              rules: [{ required: true, message: 'Please Select Api Range' }],
+              rules: [{ required: true, message: 'please choose Api Range' }],
             })(<RadioView javaCode="apiService" javaKey="api_type" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="服务类型">
             Web Service
             {getFieldDecorator('serviceType', {
               initialValue: apiService.serviceType,
-              rules: [{ required: true, message: '请选择服务类型' }],
+              rules: [{ required: true, message: 'please choose服务类型' }],
             })(<RadioView javaCode="apiService" javaKey="service_type" onChange={this.handleChange} style={{display:'none'}} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求PATH">
             {record.wsdlUrlPath}
             {getFieldDecorator('requestUrl', {
               initialValue: record.wsdlUrlPath,
-              rules: [{ required: true, message: '请输入请求PATH' }],
-            })(<Input placeholder="请输入请求PATH" hidden />)}
+              rules: [{ required: true, message: 'please enter请求PATH' }],
+            })(<Input placeholder="please enter请求PATH" hidden />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求类型">
             {getFieldDecorator('reqMethod', {
               initialValue: apiService.reqMethod,
-              rules: [{ required: true, message: '请选择HTTP Method' }],
+              rules: [{ required: true, message: 'please chooseHTTP Method' }],
             })(<SelectView javaCode="common" javaKey="req_method" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="WSDL">
             {getFieldDecorator('wsdlId', {
               initialValue: wsdlId,
-              rules: [{ required: true, message: 'please select' }],
+              rules: [{ required: true, message: 'please choose' }],
             })(<WsdlSelectView userId={userId} isDisable={1} />)}
           </Form.Item>
           <Form.Item

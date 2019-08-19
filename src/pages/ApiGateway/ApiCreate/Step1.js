@@ -56,19 +56,19 @@ class Step1 extends React.PureComponent {
           <Form.Item {...formItemLayout} label="分组">
             {getFieldDecorator('groupId', {
               initialValue: apiService.groupId,
-              rules: [{ required: true, message: '请选择分组' }],
+              rules: [{ required: true, message: 'please choose分组' }],
             })(<GroupTreeSelectView hideRoot />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Api名称">
             {getFieldDecorator('name', {
               initialValue: apiService.name,
-              rules: [{ required: true, message: '请输入Api名称' }],
-            })(<Input placeholder="请输入Api名称" />)}
+              rules: [{ required: true, message: 'please enterApi名称' }],
+            })(<Input placeholder="please enterApi名称" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Api Range">
             {getFieldDecorator('apiType', {
               initialValue: apiService.apiType,
-              rules: [{ required: true, message: 'Please Select Api Range' }],
+              rules: [{ required: true, message: 'please choose Api Range' }],
             })(<RadioView javaCode="apiService" javaKey="api_type" />)}
           </Form.Item>
           <Form.Item

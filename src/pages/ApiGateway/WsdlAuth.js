@@ -225,13 +225,13 @@ class WsdlAuth extends PureComponent {
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
             <FormItem label="orgName">
-              {getFieldDecorator('orgName')(<Input placeholder="Please input orgName" />)}
+              {getFieldDecorator('orgName')(<Input placeholder="please enter orgName" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="status">
               {getFieldDecorator('wsdlAuthType', {})(
-                <Select placeholder="请选择" style={{width: '100%'}}>
+                <Select placeholder="please choose" style={{width: '100%'}}>
                   {this.getOption("wsdl", "wsdlAuthType")}
                 </Select>
               )}

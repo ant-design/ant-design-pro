@@ -51,7 +51,7 @@ class GroupTreeSelectView extends PureComponent {
         value={value||null}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         treeData={treeSelectData}
-        placeholder="Please select"
+        placeholder="please choose"
         showSearch
         treeNodeFilterProp='title'
         onChange={this.onChange}

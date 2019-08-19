@@ -561,14 +561,11 @@ class ApiDetail extends PureComponent {
         <Tabs defaultActiveKey="info">
           <TabPane tab="Api配置信息" key="info">
             <Card title="定义请求信息" bordered={false}>
-              <DescriptionList size="large" title="" style={{marginBottom: 32}}>
+              <DescriptionList size="large" title="" style={{marginBottom: 0}}>
                 <Description term={fieldLabels.front.groupId}>{data.groupIdTitle}</Description>
                 <Description term={fieldLabels.front.name}>{apiService.name}</Description>
                 <Description term={fieldLabels.front.status}>
                   <Badge status={statusMap[data.status]} text={data.statusTitle} />
-                </Description>
-                <Description term={fieldLabels.front.requestUrl}>
-                  {apiService.requestUrl}
                 </Description>
                 <Description term={fieldLabels.front.serviceType}>
                   {data.serviceTypeTitle}
@@ -576,9 +573,15 @@ class ApiDetail extends PureComponent {
                 <Description term={fieldLabels.front.reqMethod}>{data.reqMethod}</Description>
                 <Description term={fieldLabels.front.apiType}>{data.apiTypeTitle}</Description>
               </DescriptionList>
+              <DescriptionList size="large" title="" style={{marginBottom: 0}}>
+                <Description term={fieldLabels.front.requestUrl}>
+                  {apiService.requestUrl}
+                </Description>
+              </DescriptionList>
             </Card>
+            <div style={{height:16}}>&nbsp;</div>
             <Card title="落地方服务信息" className={styles.card} bordered={false}>
-              <DescriptionList size="large" title="" style={{marginBottom: 32}}>
+              <DescriptionList size="large" title="" style={{marginBottom: 0}}>
                 <Description term={fieldLabels.back.serviceType}>
                   {back.serviceTypeTitle}
                 </Description>

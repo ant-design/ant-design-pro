@@ -57,7 +57,7 @@ export function getAuth(name) {
 
 export function getUser() {
   // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
-  const userJsonStr=localStorage.getItem('antd-pro-user');
+  const userJsonStr=sessionStorage.getItem('antd-pro-user');
   const user = userJsonStr?JSON.parse(userJsonStr):{};
   return user;
 }
@@ -74,5 +74,14 @@ export function getUserName() {
 }
 
 export function setUser(user) {
-  return localStorage.setItem('antd-pro-user', JSON.stringify(user));
+  return sessionStorage.setItem('antd-pro-user', JSON.stringify(user));
+}
+
+
+export function setToken(token) {
+  return sessionStorage.setItem('token', token);
+}
+
+export function getToken() {
+  return sessionStorage.getItem('token');
 }

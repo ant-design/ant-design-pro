@@ -308,52 +308,52 @@ class ApiUpdate extends PureComponent {
             <Form.Item label={fieldLabels.pathType} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.pathType', {
                 initialValue: apiOrderExt?apiOrderExt.pathType:null,
-                rules: [{required: true, message: 'Please select path type.'}],
+                rules: [{required: true, message: 'please choose path type.'}],
               })(<SelectView javaCode="apiOrderExt" javaKey="path_type" />)}
             </Form.Item>
 
             <Form.Item label={fieldLabels.extReqOne} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extReqOne', {
                 initialValue: extReqOne,
-              })(<Input addonBefore={orderExtSel} placeholder="Please input extReqOne" />)}
+              })(<Input addonBefore={orderExtSel} placeholder="please enter extReqOne" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.extReqTwo} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extReqTwo', {
                 initialValue: extReqTwo,
-              })(<Input addonBefore={orderExtSelTwo} placeholder="Please input extReqTwo" />)}
+              })(<Input addonBefore={orderExtSelTwo} placeholder="please enter extReqTwo" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.extReqThree} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extReqThree', {
                 initialValue: extReqThree,
-              })(<Input addonBefore={orderExtSelThree} placeholder="Please input extReqThree" />)}
+              })(<Input addonBefore={orderExtSelThree} placeholder="please enter extReqThree" />)}
             </Form.Item>
 
             <Form.Item label={fieldLabels.extRspOne} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extRspOne', {
                 initialValue: extRspOne,
-              })(<Input addonBefore={orderExtRspSelOne} placeholder="Please input extRspOne" />)}
+              })(<Input addonBefore={orderExtRspSelOne} placeholder="please enter extRspOne" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.extRspTwo} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extRspTwo', {
                 initialValue: extRspTwo,
-              })(<Input addonBefore={orderExtRspSelTwo} placeholder="Please input extRspTwo" />)}
+              })(<Input addonBefore={orderExtRspSelTwo} placeholder="please enter extRspTwo" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.extRspThree} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.extRspThree', {
                 initialValue: extRspThree,
-              })(<Input addonBefore={orderExtRspSelThree} placeholder="Please input extRspThree" />)}
+              })(<Input addonBefore={orderExtRspSelThree} placeholder="please enter extRspThree" />)}
             </Form.Item>
             <Form.Item label={fieldLabels.logLevel} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.logLevel', {
                 initialValue: apiOrderExt?apiOrderExt.logLevel:"1",
-                rules: [{required: true, message: 'Please select log level.'}],
+                rules: [{required: true, message: 'please choose log level.'}],
               })(<SelectView javaCode="apiOrderExt" javaKey="log_level" />)}
             </Form.Item>
 
             <Form.Item label={fieldLabels.secretFlag} {...tailFormItemLayout}>
               {getFieldDecorator('apiOrderExt.secretFlag', {
                 initialValue: apiOrderExt?apiOrderExt.secretFlag:"1",
-                rules: [{required: true, message: 'Please select secret flag.'}],
+                rules: [{required: true, message: 'please choose secret flag.'}],
               })(<SelectView javaCode="apiOrderExt" javaKey="secret_flag" />)}
             </Form.Item>
 
