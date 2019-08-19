@@ -2,7 +2,7 @@ import React,{PureComponent} from "react";
 import {connect} from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import BindDataQueryTable from '../BindDataQueryTable';
-import {getItems} from '@/utils/masterData';
+import {getItems,getAllEnumData} from '@/utils/masterData';
 
 
 @connect(({uniComp}) => ({
@@ -18,6 +18,7 @@ class Configuration extends PureComponent {
   // render之前调用接口得到响应结果存在state的list中
   componentWillMount() {
     const statusList = getItems('common', 'status');// 状态
+    const selectList = getItems('env', 'ifSelected');// 选择
     const columnSchemas = {
       tableName: 'env',
       key: 'envId',
@@ -28,9 +29,9 @@ class Configuration extends PureComponent {
         {name: 'privateGatewayUrl', title: 'privateGatewayUrl', add: true,},
         {name: 'agentUrl', title: 'agentUrl', add: true,},
         {name: 'envName', title: 'envName', add: true, query: true,},
-        {name: 'status', title: 'status', add: true, enumData: statusList, query: true,},
+        {name: 'status', title: 'status', tag:'commonSelect', add: true, enumData: statusList, query: true,},
         {name: 'fileServerUrl', title: 'fileServerUrl', add: true,},
-        {name: 'ifSelected', title: 'ifSelected', add: true,},
+        {name: 'ifSelected', title: 'ifSelected', tag:'commonSelect', add: true,enumData: selectList},
       ]
 
     };
@@ -46,7 +47,8 @@ class Configuration extends PureComponent {
 
   render() {
 
-    const {selectedRow, columnSchemas} = this.state
+    const {selectedRow, columnSchemas} = this.state;
+    console.log(selectedRow);
     return (
       <PageHeaderWrapper showBreadcrumb style={{height: '50px'}}>
         <BindDataQueryTable
