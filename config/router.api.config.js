@@ -126,6 +126,39 @@ export default [
               },
             ],
           },
+          {
+            path: '/apiGateway/wsdl',
+            name: 'wsdl',
+            component: './ApiGateway/Wsdl',
+            hideInMenu: true,
+            hideChildrenInMenu: true,
+            routes: [
+              {
+                path: '/apiGateway/wsdl',
+                redirect: '/apiGateway/wsdl/info',
+              },
+              {
+                path: '/apiGateway/wsdl/info',
+                name: 'info',
+                component: './ApiGateway/Wsdl/Step1',
+              },
+              {
+                path: '/apiGateway/wsdl/consumer',
+                name: 'consumer',
+                component: './ApiGateway/Wsdl/Step2',
+              },
+              {
+                path: '/apiGateway/wsdl/producer',
+                name: 'producer',
+                component: './ApiGateway/Wsdl/Step3',
+              },
+              {
+                path: '/apiGateway/wsdl/result',
+                name: 'result',
+                component: './ApiGateway/Wsdl/Step4',
+              },
+            ],
+          },
         ],
       },
       // baseData

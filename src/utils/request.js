@@ -6,10 +6,11 @@
 import {extend} from 'umi-request';
 import {notification} from 'antd';
 import router from 'umi/router';
+import moment from 'moment';
 
 import constants from '@/utils/constUtil';
 import {push} from '@/utils/log';
-import moment from 'moment';
+import { setToken,getToken } from '@/utils/authority';
 
 const {DEBUG, TOKEN_PREFIX} = constants;
 const codeMessage = {
@@ -45,13 +46,15 @@ const errorHandler = error => {
     //     console.log(result);
     //   }
     // });
-    let message='未登录或登录已过期，请重新登录。';
-    response.json().then(function(json) {
-      message=`code=${json.code},${json.msg},${message}`
-    });;
-    notification.error({
-      message,
-    });
+    if(getToken()){
+      let message='未登录或登录已过期，请重新登录。';
+      response.json().then(function(json) {
+        message=`code=${json.code},${json.msg},${message}`
+      });;
+      notification.error({
+        message,
+      });
+    }
     // @HACK
     /* eslint-disable no-underscore-dangle */
     window.g_app._store.dispatch({
@@ -106,7 +109,8 @@ request.interceptors.response.use( (response) => {
     if(key.toLowerCase()==='RspToken'.toLowerCase()){
       // console.log("=====12",value);
       // localStorage.removeItem("token");
-      localStorage.setItem("token",value);
+      // localStorage.setItem("token",value);
+      setToken(value);
     }
   });
   return response;
@@ -152,7 +156,7 @@ request.interceptors.response.use( (response, options) => {
 });
 }
 request.interceptors.request.use((url, options) => {
-  const token=localStorage.getItem("token");
+  const token=getToken(); // localStorage.getItem("token");
   // console.log("====1",`Bearer ${token}`);
   // console.log("====2",options.data);
   if (url.indexOf("serviceAgent") > -1) {

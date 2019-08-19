@@ -98,14 +98,17 @@ class TableList extends PureComponent {
     const userId = getUserId();
     this.setState({ userId });
 
-    const { dispatch,apiGatewayModel } = this.props;
+    const { dispatch,apiGatewayModel,location } = this.props;
+    const {state} = location;
+    const {wsdlId} = state || {wsdlId:''};
     const {data:{list}}=apiGatewayModel;
-    if(!list||list.length===0) {
+    if(!list||list.length===0||wsdlId) {
       const payload = {userId};
       payload.data = {};
       payload.data.info = {
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
+        wsdlId
       };
       dispatch({
         type: 'apiGatewayModel/apiList',
@@ -139,7 +142,7 @@ class TableList extends PureComponent {
         dataIndex: 'apiId',
       },
       {
-        title: 'API名称',
+        title: 'API Name',
         dataIndex: 'name',
         /*  执行函数 */
         render: (text, record) =>
@@ -150,7 +153,7 @@ class TableList extends PureComponent {
           </a>,
       },
       {
-        title: '分组',
+        title: 'Group',
         dataIndex: 'groupId',
         /* 返回数据 */
         render(val) {
@@ -158,14 +161,14 @@ class TableList extends PureComponent {
         },
       },
       {
-        title: '请求地址',
+        title: 'URL Path',
         dataIndex: 'requestUrl',
         render(val) {
           return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
         },
       },
       {
-        title: '状态',
+        title: 'Status',
         dataIndex: 'status',
         filters: statusFilter,
         render(val) {
@@ -173,7 +176,7 @@ class TableList extends PureComponent {
         },
       },
       {
-        title: '更新时间',
+        title: 'Update time',
         dataIndex: 'updatedTime',
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
@@ -181,7 +184,7 @@ class TableList extends PureComponent {
     ];
     if (commandAct) {
       const actions = {
-        title: '操作',
+        title: 'Action',
         render: (text, record) => (
           <Fragment>
             <span
@@ -193,10 +196,10 @@ class TableList extends PureComponent {
                     : 'none',
               }}
             >
-              <a onClick={() => this.handleStatusClick(ACT.ONLINE, record)}>发布</a>
+              <a onClick={() => this.handleStatusClick(ACT.ONLINE, record)}>Online</a>
               <Divider type="vertical" />
             </span>
-            <a onClick={() => this.handleAccess(true, record)}>授权</a>
+            <a onClick={() => this.handleAccess(true, record)}>Authorization</a>
             <Divider type="vertical" />
             {this.renderMoreBtn({current: record})}
           </Fragment>
@@ -230,17 +233,17 @@ class TableList extends PureComponent {
       <Dropdown
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
-            <Menu.Item key="handleUpdate">修改</Menu.Item>
-            <Menu.Item key="handleUpdateDoc">文档编辑</Menu.Item>
-            <Menu.Item key="handleDebug">调试</Menu.Item>
-            <Menu.Item key="handleLog">日志配置</Menu.Item>
-            {status === API_STATUS.ONLINE ? <Menu.Item key="handleOffline">下线</Menu.Item> : null}
-            {status === API_STATUS.OFFLINE ? <Menu.Item key="handleDelete">删除</Menu.Item> : null}
+            <Menu.Item key="handleUpdate">Modify</Menu.Item>
+            <Menu.Item key="handleUpdateDoc">API doc</Menu.Item>
+            <Menu.Item key="handleDebug">Debug</Menu.Item>
+            <Menu.Item key="handleLog">Set Log</Menu.Item>
+            {status === API_STATUS.ONLINE ? <Menu.Item key="handleOffline">Offline</Menu.Item> : null}
+            {status === API_STATUS.OFFLINE ? <Menu.Item key="handleDelete">Remove</Menu.Item> : null}
           </Menu>
         }
       >
         <a>
-          更多 <Icon type="down" />
+          More <Icon type="down" />
         </a>
       </Dropdown>
     );
@@ -325,7 +328,9 @@ class TableList extends PureComponent {
     this.setState({
       formValues: {},
     });
-
+    form.setFieldsValue({
+      wsdlId:null
+    });
     const { userId } = this.state;
     const payload = {userId};
     payload.data = {};
@@ -598,16 +603,17 @@ class TableList extends PureComponent {
     const userId = getUserId();
     const {state} = location;
     const {wsdlId} = state || {wsdlId: ''};
+    const {selectedRows} = this.state;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="Api名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
+            <FormItem label="Api Name">
+              {getFieldDecorator('name')(<Input placeholder="please enter" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="分组">
+            <FormItem label="Group">
               {getFieldDecorator('groupIds')(
                 <GroupMutiTreeSelectView style={{ width: '100%' }} />
               )}
@@ -617,21 +623,24 @@ class TableList extends PureComponent {
             <FormItem label="Wsdl">
               {getFieldDecorator('wsdlId', {
                 initialValue: wsdlId,
-                rules: [{ required: getFieldValue('serviceType') === '2', message: 'please select' }],
+                rules: [{ required: getFieldValue('serviceType') === '2', message: 'please choose' }],
               })(<WsdlSelectView userId={userId} />)}
             </FormItem>
           </Col>
         </Row>
         <div style={{ overflow: 'hidden' }}>
-          <div style={{ float: 'right', marginBottom: 24 }}>
+          <div style={{ float: 'right', marginBottom: 8 }}>
+            {selectedRows.length > 0 && (
+              <Button htmlType="button" style={{ marginRight: 8 }}>Export script</Button>
+            )}
             <Button type="primary" htmlType="submit">
-              查询
+              Query
             </Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset} htmlType="button">
-              重置
+              Reset
             </Button>
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-              展开 <Icon type="down" />
+              UnFold <Icon type="down" />
             </a>
           </div>
         </div>
@@ -641,27 +650,41 @@ class TableList extends PureComponent {
 
   renderAdvancedForm() {
     const {
-      form: { getFieldDecorator },
+      form: { getFieldDecorator,getFieldValue },
+      location
     } = this.props;
+    const userId = getUserId();
+    const {state} = location;
+    const {wsdlId} = state || {wsdlId: ''};
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="Api名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
+            <FormItem label="API Name">
+              {getFieldDecorator('name')(<Input placeholder="please enter" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="分组">
+            <FormItem label="Group">
               {getFieldDecorator('groupId')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
+                <Select placeholder="please choose" style={{ width: '100%' }}>
                   {this.getGroupOption()}
                 </Select>
               )}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="使用状态">
+            <FormItem label="Wsdl">
+              {getFieldDecorator('wsdlId', {
+                initialValue: wsdlId,
+                rules: [{ required: getFieldValue('serviceType') === '2', message: 'please choose' }],
+              })(<WsdlSelectView userId={userId} />)}
+            </FormItem>
+          </Col>
+        </Row>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="Status">
               {getFieldDecorator('status')(<SelectView javaCode="apiService" javaKey="status" />)}
             </FormItem>
           </Col>
@@ -669,13 +692,13 @@ class TableList extends PureComponent {
         <div style={{ overflow: 'hidden' }}>
           <div style={{ float: 'right', marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">
-              查询
+              Query
             </Button>
             <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset} htmlType="button">
-              重置
+              Reset
             </Button>
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-              收起 <Icon type="up" />
+              Fold <Icon type="up" />
             </a>
           </div>
         </div>
@@ -711,31 +734,21 @@ class TableList extends PureComponent {
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
-            <div className={styles.tableListOperator}>
-              {selectedRows.length > 0 && (
-                <span>
-                  {/* <Button htmlType="button">批量操作</Button> */}
-                  {/* <Dropdown overlay={menu}> */}
-                  {/* <Button> */}
-                  {/* 更多操作 <Icon type="down" /> */}
-                  {/* </Button> */}
-                  {/* </Dropdown> */}
-                </span>
-              )}
-            </div>
             <StandardTable
               rowKey={rowKey}
               selectedRows={selectedRows}
               loading={loading}
               data={data}
               columns={columns}
+              size="small"
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}
             />
           </div>
           <Modal
-            title="授权"
+            title="Authorization to call this API"
             visible={modalVisible}
+            width={680}
             onOk={() => this.okHandle()}
             onCancel={() => this.cancelHandle()}
           >

@@ -6,9 +6,9 @@ import {Input} from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {getRouteDatas,toSimulatePrivilege,toInsertSql,flatToMenuTree,flatToPrivilegeTreeSelect,getFormatPrivilege} from '../UserManager/userUtil';
 import routeDatas from "../../../config/router.api.config";
-import {getPrivileges} from '@/utils/authority';
+import {getPrivileges,getToken} from '@/utils/authority';
 import {getLogInfo} from '@/utils/log';
-import {toType,parseInput,toApiSpecJson} from "../util";
+import {toType,toApiSpecJson} from "../util";
 
 const routes=getRouteDatas(routeDatas);
 const privileges=[];
@@ -25,7 +25,7 @@ const {TextArea} = Input;
 const privilegesFromStorage=getPrivileges();
 const formatPrivilegeData = getFormatPrivilege(privilegesFromStorage);
 
-const token=localStorage.getItem("token");
+const token=getToken();
 // console.log("====1",`Bearer ${token}`);
 const d1=new Date();
 const obj=[{a1:'dd',b1:1,d1,d2:'2018-02-02',obj1:{b1:'11'},arr1:[{c1:2},{c2:3}]}];

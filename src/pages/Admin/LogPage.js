@@ -6,6 +6,7 @@ import {Input,Button} from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import {getLogInfo} from '@/utils/log';
+import { getToken } from '@/utils/authority';
 
 const {TextArea} = Input;
 // console.log("====1",`Bearer ${token}`);
@@ -31,7 +32,7 @@ class LogPage extends PureComponent {
 
   tick=() => {
     this.setState({
-      token: `Bearer ${localStorage.getItem("token")}`,
+      token: `Bearer ${getToken()}`,
       logArray: getLogInfo(),
     });
     this.setState((prevState) => ({

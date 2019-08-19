@@ -116,7 +116,7 @@ const CreateForm = Form.create()(props => {
       case 'passwordTag':
         return <Password style={{ width: '100%' }} />;
       default:
-        return <Input disabled={item.disabled} placeholder={`Please input ${item.title}`} />;
+        return <Input disabled={item.disabled} placeholder={`please enter ${item.title}`} />;
     }
   };
   const addForms = getFormItemArray(props, 'add')
@@ -146,7 +146,7 @@ const CreateForm = Form.create()(props => {
         >
           {form.getFieldDecorator(item.name, {
             initialValue: selectedRow ? selectedRow[item.name] : item.defaultValue||'',
-            rules: item.rules ? [] : [{ required: true, message: `Please input ${item.title}` }],
+            rules: item.rules ? [] : [{ required: true, message: `please enter ${item.title}` }],
           })(renderAutoForm(item))}
         </FormItem>
       ))}
@@ -559,10 +559,10 @@ class QueryTable extends PureComponent {
                     <DatePicker
                       key={`ele-${item.name}`}
                       style={{ width: '100%' }}
-                      placeholder="Please input"
+                      placeholder="please enter"
                     />
                   ) : (
-                    <Input key={`ele-${item.name}`} placeholder="Please input" />
+                    <Input key={`ele-${item.name}`} placeholder="please enter" />
                   )
                 )}
               </FormItem>
@@ -606,10 +606,10 @@ class QueryTable extends PureComponent {
                   <DatePicker
                     key={`ele-${item.name}`}
                     style={{ width: '100%' }}
-                    placeholder="Please input"
+                    placeholder="please enter"
                   />
                 ) : (
-                  <Input key={`ele-${item.name}`} placeholder="Please input" />
+                  <Input key={`ele-${item.name}`} placeholder="please enter" />
                 )
               )}
             </FormItem>

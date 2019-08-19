@@ -30,7 +30,7 @@ class WsdlSelectView extends PureComponent {
 
       const comItem ={
         wsdlId : 0,
-        wsdlName : "Please select one wsdl"
+        wsdlName : "please choose one wsdl"
       };
       newList = newList.filter(item=>item.wsdlId !== 0);
       newList.unshift(comItem);
@@ -63,9 +63,10 @@ class WsdlSelectView extends PureComponent {
 
   render() {
     // const value = this.conversionObject();
-    const { value,sign } = this.props;
+    const { value,sign,isDisable } = this.props;
+    const disable = isDisable?'disabled':'';
     return (
-      <Select style={{ width: '100%' }} value={value} onSelect={this.selectChangeItem}>
+      <Select style={{ width: '100%' }} value={value} onSelect={this.selectChangeItem} disabled={disable}>
         {this.getOption(sign)}
       </Select>
     );

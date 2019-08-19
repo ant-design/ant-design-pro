@@ -317,7 +317,7 @@ class ApiUpdate extends PureComponent {
               <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.front.groupId}>
                   {getFieldDecorator('front.groupId', {
-                    rules: [{ required: true, message: '请选择分组' }],
+                    rules: [{ required: true, message: 'please choose分组' }],
                   })(<GroupSelectView showSearch optionFilterProp="children" />)}
                 </Form.Item>
               </Col>
@@ -330,8 +330,8 @@ class ApiUpdate extends PureComponent {
               >
                 <Form.Item label={fieldLabels.front.name}>
                   {getFieldDecorator('front.name', {
-                    rules: [{ required: true, message: 'Please input api name' }],
-                  })(<Input placeholder="Please input api name" />)}
+                    rules: [{ required: true, message: 'please enter api name' }],
+                  })(<Input placeholder="please enter api name" />)}
                 </Form.Item>
               </Col>
               <Col
@@ -343,8 +343,8 @@ class ApiUpdate extends PureComponent {
               >
                 <Form.Item label={fieldLabels.front.requestUrl}>
                   {getFieldDecorator('front.requestUrl', {
-                    rules: [{ required: true, message: '请选择' }],
-                  })(<Input style={{ width: '100%' }} placeholder="请输入" />)}
+                    rules: [{ required: true, message: 'please choose' }],
+                  })(<Input style={{ width: '100%' }} placeholder="please enter" />)}
                 </Form.Item>
               </Col>
             </Row>
@@ -357,7 +357,7 @@ class ApiUpdate extends PureComponent {
               >
                 <Form.Item label={fieldLabels.front.serviceType}>
                   {getFieldDecorator('front.serviceType', {
-                    rules: [{ required: true, message: '请选择serviceType' }],
+                    rules: [{ required: true, message: 'please chooseserviceType' }],
                   })(<SelectView javaCode="apiService" javaKey="service_type" />)}
                 </Form.Item>
               </Col>
@@ -370,7 +370,7 @@ class ApiUpdate extends PureComponent {
               >
                 <Form.Item label={fieldLabels.front.reqMethod}>
                   {getFieldDecorator('front.reqMethod', {
-                    rules: [{ required: true, message: '请选择HTTP Method' }],
+                    rules: [{ required: true, message: 'please chooseHTTP Method' }],
                   })(<SelectView javaCode="common" javaKey="req_method" />)}
                 </Form.Item>
               </Col>
@@ -383,8 +383,8 @@ class ApiUpdate extends PureComponent {
               >
                 <Form.Item label={fieldLabels.front.actionName}>
                   {getFieldDecorator('front.actionName', {
-                    rules: [{ required: getFieldValue('front.serviceType') === '2', message: 'Please input action name' }],
-                  })(<Input placeholder="Please input action name" />)}
+                    rules: [{ required: getFieldValue('front.serviceType') === '2', message: 'please enter action name' }],
+                  })(<Input placeholder="please enter action name" />)}
                 </Form.Item>
               </Col>
             </Row>
@@ -393,7 +393,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.front.apiType}>
                   {getFieldDecorator('front.apiType', {
                     initialValue: apiService.apiType,
-                    rules: [{ required: true, message: '请选择服务类型' }],
+                    rules: [{ required: true, message: 'please choose服务类型' }],
                   })(<RadioView javaCode="apiService" javaKey="api_type" />)}
                 </Form.Item>
               </Col>
@@ -412,7 +412,7 @@ class ApiUpdate extends PureComponent {
               <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.back.serviceType}>
                   {getFieldDecorator('back.serviceType', {
-                    rules: [{ required: true, message: '请选择后端服务类型' }],
+                    rules: [{ required: true, message: 'please choose后端服务类型' }],
                   })(<SelectView javaCode="apiServiceBackend" javaKey="service_type" />)}
                 </Form.Item>
               </Col>
@@ -425,8 +425,8 @@ class ApiUpdate extends PureComponent {
               >
                 <Form.Item label={fieldLabels.back.url}>
                   {getFieldDecorator('back.url', {
-                    rules: [{ required: true, message: '请输入后端请求地址' }],
-                  })(<Input placeholder="请输入后端请求地址" />)}
+                    rules: [{ required: true, message: 'please enter后端请求地址' }],
+                  })(<Input placeholder="please enter后端请求地址" />)}
                 </Form.Item>
               </Col>
               <Col
@@ -439,7 +439,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.back.reqPath}>
                   {getFieldDecorator('back.reqPath', {
                     rules: [],
-                  })(<Input placeholder="请输入后端请求路径" />)}
+                  })(<Input placeholder="please enter后端请求路径" />)}
                 </Form.Item>
               </Col>
             </Row>
@@ -447,7 +447,7 @@ class ApiUpdate extends PureComponent {
               <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.back.reqMethod}>
                   {getFieldDecorator('back.reqMethod', {
-                    rules: [{ required: true, message: '请选择HTTP Method' }],
+                    rules: [{ required: true, message: 'please chooseHTTP Method' }],
                   })(<SelectView javaCode="common" javaKey="req_method" />)}
                 </Form.Item>
               </Col>
@@ -461,7 +461,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.back.connectTimeout}>
                   {getFieldDecorator('back.connectTimeout', {
                     rules: [{ required: true, message: '后端服务连接超时' }],
-                  })(<Input placeholder="请输入后端服务连接超时（ms）" />)}
+                  })(<Input placeholder="please enter timeout（ms）" />)}
                 </Form.Item>
               </Col>
               <Col
@@ -474,7 +474,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.back.socketTimeout}>
                   {getFieldDecorator('back.socketTimeout', {
                     rules: [{ required: true, message: '后端服务请求超时' }],
-                  })(<Input placeholder="请输入后端服务请求超时（ms）" />)}
+                  })(<Input placeholder="please enter后端服务请求超时（ms）" />)}
                 </Form.Item>
               </Col>
             </Row>
@@ -482,7 +482,7 @@ class ApiUpdate extends PureComponent {
               <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.back.orgId}>
                   {getFieldDecorator('back.orgId', {
-                    rules: [{ required: true, message: `请选择${fieldLabels.back.orgId}` }],
+                    rules: [{ required: true, message: `please choose${fieldLabels.back.orgId}` }],
                   })(<OrgSelectView orgType="0,1" userId={userId} />)}
                 </Form.Item>
               </Col>
@@ -495,13 +495,13 @@ class ApiUpdate extends PureComponent {
               >
                 <Form.Item label={fieldLabels.back.authType}>
                   {getFieldDecorator('backAttr.authType', {
-                    rules: [{ required: true, message: `请选择${fieldLabels.backAttr.authType}` }],
+                    rules: [{ required: true, message: `please choose${fieldLabels.backAttr.authType}` }],
                   })(
                     <Radio.Group>
-                      <Radio value="noneAuth">无认证</Radio>
-                      <Radio value="basicAuth">Basic认证</Radio>
-                      <Radio value="fixedToken">固定Token认证</Radio>
-                      <Radio value="dyncToken">动态Token认证</Radio>
+                      <Radio value="noneAuth">No authentication</Radio>
+                      <Radio value="basicAuth">Basic authentication</Radio>
+                      <Radio value="fixedToken">fixed token authentication</Radio>
+                      <Radio value="dyncToken">dynamic token authentication</Radio>
                     </Radio.Group>
                   )}
                 </Form.Item>
@@ -520,7 +520,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.authType') === 'basicAuth',
-                        message: `请选择${fieldLabels.backAttr.userName}`,
+                        message: `please choose${fieldLabels.backAttr.userName}`,
                       },
                     ],
                   })(<Input />)}
@@ -538,7 +538,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.authType') === 'basicAuth',
-                        message: `请选择${fieldLabels.backAttr.userPassword}`,
+                        message: `please choose${fieldLabels.backAttr.userPassword}`,
                       },
                     ],
                   })(<Input.Password />)}
@@ -558,7 +558,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.authType') === 'fixedToken',
-                        message: `请选择${fieldLabels.backAttr.tokenKey}`,
+                        message: `please choose${fieldLabels.backAttr.tokenKey}`,
                       },
                     ],
                   })(<Input />)}
@@ -570,7 +570,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.authType') === 'fixedToken',
-                        message: `请选择${fieldLabels.backAttr.tokenStr}`,
+                        message: `please choose${fieldLabels.backAttr.tokenStr}`,
                       },
                     ],
                   })(<Input />)}
@@ -590,7 +590,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.authType') === 'dyncToken',
-                        message: `请选择${fieldLabels.backAttr.tokenUser}`,
+                        message: `please choose${fieldLabels.backAttr.tokenUser}`,
                       },
                     ],
                   })(<Input />)}
@@ -608,7 +608,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.authType') === 'dyncToken',
-                        message: `请选择${fieldLabels.backAttr.tokenPassword}`,
+                        message: `please choose${fieldLabels.backAttr.tokenPassword}`,
                       },
                     ],
                   })(<Input.Password />)}
@@ -626,7 +626,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.authType') === 'dyncToken',
-                        message: `请选择${fieldLabels.backAttr.tokenUrl}`,
+                        message: `please choose${fieldLabels.backAttr.tokenUrl}`,
                       },
                     ],
                   })(<Input />)}
@@ -638,7 +638,7 @@ class ApiUpdate extends PureComponent {
               <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.back.protocol}>
                   {getFieldDecorator('back.protocol', {
-                    rules: [{ required: true, message: '请选择后端协议' }],
+                    rules: [{ required: true, message: 'please choose后端协议' }],
                   })(<SelectView javaCode="apiService" javaKey="protocol" />)}
                 </Form.Item>
               </Col>
@@ -646,7 +646,7 @@ class ApiUpdate extends PureComponent {
               <Col lg={6} md={12} sm={24} style={{ height: 80 }}>
                 <Form.Item label={fieldLabels.backAttr.ssl}>
                   {getFieldDecorator('backAttr.ssl', {
-                    rules: [{ required: true, message: `请选择${fieldLabels.backAttr.ssl}` }],
+                    rules: [{ required: true, message: `please choose${fieldLabels.backAttr.ssl}` }],
                   })(
                     <Radio.Group>
                       <Radio value="open">开</Radio>
@@ -675,7 +675,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.ssl') === 'open',
-                        message: `请选择${fieldLabels.backAttr.keyStore}`,
+                        message: `please choose${fieldLabels.backAttr.keyStore}`,
                       },
                     ],
                   })(<Input.Password />)}
@@ -693,7 +693,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.ssl') === 'open',
-                        message: `请选择${fieldLabels.backAttr.keyStorePassword}`,
+                        message: `please choose${fieldLabels.backAttr.keyStorePassword}`,
                       },
                     ],
                   })(<Input />)}
@@ -719,7 +719,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.ssl') === 'open',
-                        message: `请选择${fieldLabels.backAttr.trustStore}`,
+                        message: `please choose${fieldLabels.backAttr.trustStore}`,
                       },
                     ],
                   })(<Input />)}
@@ -737,7 +737,7 @@ class ApiUpdate extends PureComponent {
                     rules: [
                       {
                         required: getFieldValue('backAttr.ssl') === 'open',
-                        message: `请选择${fieldLabels.backAttr.trustStorePassword}`,
+                        message: `please choose${fieldLabels.backAttr.trustStorePassword}`,
                       },
                     ],
                   })(<Input />)}

@@ -515,12 +515,12 @@ class ApiLogList extends PureComponent {
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
             <FormItem label="transactionId">
-              {getFieldDecorator('transactionId')(<Input placeholder="Please input consumer transactionId" />)}
+              {getFieldDecorator('transactionId')(<Input placeholder="please enter consumer transactionId" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="appKey">
-              {getFieldDecorator('appKey')(<Input placeholder="Please input consumer appKey" />)}
+              {getFieldDecorator('appKey')(<Input placeholder="please enter consumer appKey" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -576,7 +576,7 @@ class ApiLogList extends PureComponent {
           <Col md={8} sm={24}>
             <FormItem label="status">
               {getFieldDecorator('status', {})(
-                <Select placeholder="请选择" style={{width: '100%'}}>
+                <Select placeholder="please choose" style={{width: '100%'}}>
                   {this.getOption("intfOrder", "status")}
                 </Select>
               )}
@@ -614,12 +614,12 @@ class ApiLogList extends PureComponent {
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
             <FormItem label="transactionId">
-              {getFieldDecorator('transactionId')(<Input placeholder="Please input transactionId" />)}
+              {getFieldDecorator('transactionId')(<Input placeholder="please enter transactionId" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="appKey">
-              {getFieldDecorator('appKey')(<Input placeholder="Please input consumer appKey" />)}
+              {getFieldDecorator('appKey')(<Input placeholder="please enter consumer appKey" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -659,7 +659,7 @@ class ApiLogList extends PureComponent {
           <Col md={8} sm={24}>
             <FormItem label="status">
               {getFieldDecorator('status', {})(
-                <Select placeholder="请选择" style={{width: '100%'}}>
+                <Select placeholder="please choose" style={{width: '100%'}}>
                   {this.getOption("intfOrder", "status")}
                 </Select>
               )}
@@ -667,14 +667,14 @@ class ApiLogList extends PureComponent {
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="extSelect">
-              {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel} placeholder="Please input extInput" />)}
+              {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel} placeholder="please enter extInput" />)}
             </FormItem>
           </Col>
         </Row>
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
             <FormItem label="keyValue">
-              {getFieldDecorator('keyValue')(<Input placeholder="Please input keyValue" />)}
+              {getFieldDecorator('keyValue')(<Input placeholder="please enter keyValue" />)}
             </FormItem>
           </Col>
         </Row>

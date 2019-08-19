@@ -639,7 +639,7 @@ class ApiDebug extends PureComponent {
                       max: 80,
                     },
                   ],
-                })(<Input placeholder="Please input request debugName" />)}
+                })(<Input placeholder="please enter request debugName" />)}
               </Form.Item>
             </Col>
             <Col xl={{span: 16}} style={{textAlign: 'left'}}>
@@ -656,7 +656,7 @@ class ApiDebug extends PureComponent {
             >
               <Form.Item>
                 {getFieldDecorator('orgId')(
-                  <Select placeholder="请选择" style={{width: '100%'}} onChange={this.getToken}>
+                  <Select placeholder="please choose" style={{width: '100%'}} onChange={this.getToken}>
                     {this.getOrgOption()}
                   </Select>
                 )}

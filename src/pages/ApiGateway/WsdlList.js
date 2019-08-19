@@ -26,10 +26,11 @@ import WsdlApi from "./WsdlApi";
 
 import styles from './ApiList.less';
 import {getItems,getItemValue2} from '@/utils/masterData';
-import {getUserId} from "../../utils/authority";
+import {getUserId,getToken} from "../../utils/authority";
 import constants from '@/utils/constUtil';
 
-const { PREFIX_PATH,TOKEN_PREFIX,ACT,STATUS } = constants;
+const { PREFIX_PATH,TOKEN_PREFIX,ACT,STATUS,WS } = constants;
+const { PATH_PREFIX } = WS;
 
 const FormItem = Form.Item;
 const {Option} = Select;
@@ -88,8 +89,12 @@ const CreateForm = Form.create()(props => {
         return (
           <WsdlUpload selectedRow={selectedRow} handleFile={handleFile} />
         );
+      case 'prefix':
+        return (
+          <Input addonBefore={item.prefix} disabled={item.disabled} placeholder={`Please input ${item.title}`} />
+        );
       default:
-        return <Input disabled={item.disabled} placeholder={`Please input ${item.title}`} />;
+        return <Input disabled={item.disabled} placeholder={`please enter ${item.title}`} />;
     }
   };
   const addForms = getFormItemArray(props, 'add')
@@ -118,8 +123,9 @@ const CreateForm = Form.create()(props => {
             label={item.title}
           >
             {form.getFieldDecorator(item.name, {
-              initialValue: selectedRow ? selectedRow[item.name] : item.defaultValue||'',
-              rules: item.rules ? [] : [{ required: true, message: `Please input ${item.title}` }],
+              /* eslint-disable no-nested-ternary */
+              initialValue: selectedRow?(item.prefix&&selectedRow[item.name]?(selectedRow[item.name]).replace(item.prefix,""):selectedRow[item.name]) : item.defaultValue||'',
+              rules: item.rules ? [] : [{ required: true, message: `please enter ${item.title}` }],
             })(renderAutoForm(item))}
           </FormItem>
       ))}
@@ -155,6 +161,7 @@ class WsdlList extends PureComponent {
     apiVisible:false,
     fileList: [],
     columnSchemas:{},
+    removeFiles:[]
   };
 
   componentWillMount() {
@@ -165,9 +172,9 @@ class WsdlList extends PureComponent {
       name: 'wsdlId',
       commands:[{action:'setRole',title:'角色'},],
       columnDetails: [
-        { name: 'wsdlId', title: 'Wsdl Id', add: true, disabledAct:'true' },
+        { name: 'wsdlId', title: 'Wsdl Id'},
         { name: 'folder', title: 'Folder', sorter: true, query: true, detailFlag:1 },
-        { name: 'wsdlUrlPath', title: 'Wsdl Url Path', sorter: true, query: true, add: true, detailFlag:1 },
+        { name: 'wsdlUrlPath', title: 'Wsdl Url Path',tag:'prefix', prefix: PATH_PREFIX , sorter: true, query: true, add: true, detailFlag:1 },
         { name: 'wsdlFileName', title: 'Wsdl File Name',tag:'fileUpload',columnHidden: true, add: true,rows:3,rules:[] },
       ]
 
@@ -177,6 +184,7 @@ class WsdlList extends PureComponent {
     const userId = getUserId();
     const payload = {
       userId,
+      range:'all',
       data:{
         info:{
           pageNo: 1,
@@ -282,6 +290,7 @@ class WsdlList extends PureComponent {
     const userId = getUserId();
     const payload = {
       userId,
+      range:'all',
       data: {
         info: {
           pageNo: 1,
@@ -322,6 +331,7 @@ class WsdlList extends PureComponent {
       const userId = getUserId();
       const payload = {
         userId,
+        range:'all',
         data: {
           info: {
             pageNo: 1,
@@ -359,6 +369,7 @@ class WsdlList extends PureComponent {
     const userId = getUserId();
     const payload = {
       userId,
+      range:'all',
       data: {
         info: {
           pageNo: paginations&&paginations.current?paginations.current:1,
@@ -397,7 +408,8 @@ class WsdlList extends PureComponent {
     this.setState({
       modalVisible: flag,
       selectedRow: row,
-      fileList:[]
+      fileList:[],
+      removeFiles:[]
     });
   };
 
@@ -410,7 +422,39 @@ class WsdlList extends PureComponent {
   };
 
   handleApi = ( record ) =>{
-    this.handleApiVisible(record,true);
+    // this.handleApiVisible(record,true);
+
+
+    /**
+     * 解析数据后，成功跳转
+     */
+    const { dispatch } = this.props;
+    const {wsdlId} = record;
+    const payload = {wsdlId};
+    dispatch({
+      type: 'wsdlModel/parseWsdl',
+      payload,
+      callback: resp => {
+        console.log("resp",resp);
+        const {code,data,msg} = resp;
+        if(code === '200'){
+          const {actionNames} = data;
+          router.push({
+            pathname: `/apiGateway/wsdl/info`, // 通过url参数传递
+            state: {
+              // 通过对象传递
+              wsdlId,
+              record, // 表格某行的对象数据
+              actionNames // actionName列表数据
+            },
+          });
+        }else{
+          message.error(`error:${msg}`);
+        }
+
+      },
+    });
+
   }
 
   handleAccess = ( record ) =>{
@@ -437,16 +481,18 @@ class WsdlList extends PureComponent {
     });
   }
 
-  handleFile = (fileList)=>{
-
+  handleFile = (fileList,removeFiles)=>{
 
     const newFileList = fileList.filter(item=> item.old !== 1);
-    this.setState({fileList:newFileList});
+    this.setState({
+      fileList:newFileList,
+      removeFiles
+    });
   }
 
   handleAdd = (fields) => {
 
-    const { selectedRow,columnSchemas } = this.state;
+    const { selectedRow,columnSchemas,removeFiles } = this.state;
     const { key } = columnSchemas;
     const userId = getUserId();
     const keyValue = selectedRow ? selectedRow[key] : "";
@@ -459,12 +505,20 @@ class WsdlList extends PureComponent {
       formData.append('files', file.originFileObj);
     });
     Object.keys(fields).forEach( keyField => {
-      formData.append(keyField, fields[keyField]);
+
+      if( keyField === 'wsdlUrlPath' ){
+        formData.append(keyField, PATH_PREFIX + fields[keyField]);
+      }else{
+        formData.append(keyField, fields[keyField]);
+      }
     });
     formData.append('userId',userId);
     formData.append(key,keyValue);
+    formData.append('removeFiles',removeFiles);
+    // console.log("removeFiles",removeFiles);
+    // console.log("fileList",fileList);
 
-    const token = localStorage.getItem("token");
+    const token = getToken();
     const tokenStr =  `${TOKEN_PREFIX}${token}`;
     reqwest({
       url: `${PREFIX_PATH}/baseInfo/wsdl/upload`,
@@ -477,7 +531,8 @@ class WsdlList extends PureComponent {
       data: formData,
       success: () => {
         this.setState({
-          fileList: []
+          fileList: [],
+          removeFiles:[]
         });
 
         this.handleModalVisible(null,false);
@@ -512,11 +567,8 @@ class WsdlList extends PureComponent {
   handleParse = ( record ) =>{
 
     const { dispatch } = this.props;
-
-    const payload = {};
-    payload.data = {};
-    payload.data.info = {};
-    payload.data.info.wsdlId = record.wsdlId;
+    const {wsdlId} = record;
+    const payload = {wsdlId};
     dispatch({
       type: 'wsdlModel/parseWsdl',
       payload,
@@ -553,10 +605,10 @@ class WsdlList extends PureComponent {
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
             {status === STATUS.A ? <Menu.Item key="handleModify">Modify</Menu.Item> : null}
-            {status === STATUS.A ? <Menu.Item key="handleParse">Parse</Menu.Item> : null}
-            {status === STATUS.A ? <Menu.Item key="handleApi">Set Api</Menu.Item> : null}
-            <Menu.Item key="handleList">Api List</Menu.Item>
-            {status !== STATUS.D ? <Menu.Item key="handleDelete">Delete</Menu.Item> : null}
+            {status === STATUS.A ? <Menu.Item key="handleParse">Validate</Menu.Item> : null}
+            {status === STATUS.A ? <Menu.Item key="handleApi">Generate Api</Menu.Item> : null}
+            <Menu.Item key="handleList">Action List</Menu.Item>
+            {status !== STATUS.D ? <Menu.Item key="handleDelete">Remove</Menu.Item> : null}
           </Menu>
         }
       >
@@ -594,22 +646,22 @@ class WsdlList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="wsdlName">
-              {getFieldDecorator('wsdlName')(<Input placeholder="Please input wsdlName" />)}
+            <FormItem label="WSDL Name">
+              {getFieldDecorator('wsdlName')(<Input placeholder="please enter WSDL Name" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="wsdlUrlPath">
-              {getFieldDecorator('wsdlUrlPath')(<Input placeholder="Please input wsdlUrlPath" />)}
+            <FormItem label="WSDL URL Path">
+              {getFieldDecorator('wsdlUrlPath')(<Input placeholder="please enter WSDL URL Path" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <span className={styles.submitButtons}>
               <Button type="primary" htmlType="submit">
-                查询
+                Query
               </Button>
               <Button style={{marginLeft: 8}} onClick={this.handleFormReset} htmlType="button">
-                重置
+                Reset
               </Button>
             </span>
           </Col>
@@ -617,7 +669,7 @@ class WsdlList extends PureComponent {
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
             <Button style={{marginBottom:16}} icon="plus" type="primary" onClick={() => this.handleModalVisible(null, true)}>
-              New
+              Upload WSDL
             </Button>
           </Col>
         </Row>
@@ -649,8 +701,43 @@ class WsdlList extends PureComponent {
 
     const columns = [
       {
-        title: 'wsdlName',
+        title: 'WSDL Name',
         dataIndex: 'wsdlName',
+        fixed: 'left',
+        width: 150,
+      },
+      {
+        title: 'WSDL URL Path',
+        dataIndex: 'wsdlUrlPath',
+        render(val) {
+          return <Ellipsis length={36} tooltip>{val}</Ellipsis>;
+        },
+      },
+      {
+        title: 'Status',
+        dataIndex: 'status',
+        filters: statusFilter,
+        render(val) {
+          return <span>{getItemValue2(statusList, val)}</span>
+        },
+      },
+      {
+        title: 'Create Time',
+        dataIndex: 'createTime',
+        width: 180,
+        sorter: true,
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      },
+      {
+        title: 'Update Time',
+        dataIndex: 'updateTime',
+        width: 180,
+        sorter: true,
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      },
+      {
+        title: 'WSDL File Name',
+        dataIndex: 'wsdlFileName',
       },
       {
         title: 'Folder',
@@ -660,51 +747,20 @@ class WsdlList extends PureComponent {
         },
       },
       {
-        title: 'wsdlUrlPath',
-        dataIndex: 'wsdlUrlPath',
-        render(val) {
-          return <Ellipsis length={20} tooltip>{val}</Ellipsis>;
-        },
-      },
-      {
-        title: 'status',
-        dataIndex: 'status',
-        filters: statusFilter,
-        render(val) {
-          return <span>{getItemValue2(statusList, val)}</span>
-        },
-      },
-      {
-        title: 'wsdlFileName',
-        dataIndex: 'wsdlFileName',
-      },
-      {
-        title: 'createTime',
-        dataIndex: 'createTime',
-        sorter: true,
-        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
-      },
-      {
-        title: 'updateTime',
-        dataIndex: 'updateTime',
-        sorter: true,
-        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
-      },
-      {
         title: 'Action',
         key: 'action',
         fixed: 'right',
-        width: 100,
+        width: 150,
         render: (text, record) => (
           <span>
-            <div style={{display:record.status === 'A'?'':'none'}}>
+            <span style={{display:record.status === 'A'?'':'none'}}>
               <a onClick={()=>this.handleAccess(record, true)}>Access</a>
               <Divider type="vertical" />
-            </div>
-            <div style={{display:record.status === 'D'?'':'none'}}>
+            </span>
+            <span style={{display:record.status === 'D'?'':'none'}}>
               <a onClick={()=> this.handleStatusClick(ACT.ONLINE, record)}>Activate</a>
               <Divider type="vertical" />
-            </div>
+            </span>
             {this.renderMoreBtn({current:record})}
           </span>
         ),
@@ -735,6 +791,7 @@ class WsdlList extends PureComponent {
               pagination={paginationProps}
               onChange={this.handleTableChange}
               rowSelection={rowSelection}
+              scroll={{ x: 1500 }}
             />
 
             <CreateForm
