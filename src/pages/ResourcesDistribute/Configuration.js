@@ -19,7 +19,7 @@ import QueryCommand from '@/components/QueryTable/QueryCommand';
 class Configuration extends PureComponent {
     state = {
         selectedRow: {},
-        modalVisible: false,
+        modalVisible: false, 
         columnSchemas: {},
         configList:{}
     }
