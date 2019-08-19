@@ -53,7 +53,7 @@ export async function token(params){
 }
 
 export async function config(){
-  return request(`${PREFIX_PATH}/baseInfo/sysdata/configList`);
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/env`);
 }
 
 export async function del(params){

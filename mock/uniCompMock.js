@@ -1,8 +1,8 @@
 /* eslint-disable eqeqeq */
-import { parse } from 'url';
+import {parse} from 'url';
 import constants from './constUtil';
 
-const { STATUS } = constants;
+const {STATUS} = constants;
 // mock tableListDataSource
 
 
@@ -1086,7 +1086,7 @@ const users = {
       "tel": "18905926370",
       "utype": "client",
       "status": STATUS.A,
-      "sysUserRoles": [{ "id": 1, "userId": 1, "roleId": 1, "roleName": "admin" },],
+      "sysUserRoles": [{"id": 1, "userId": 1, "roleId": 1, "roleName": "admin"},],
     },
     {
       "id": 2,
@@ -1096,7 +1096,7 @@ const users = {
       "tel": "18905926371",
       "utype": "client",
       "status": STATUS.A,
-      "sysUserRoles": [{ "id": 1, "userId": 2, "roleId": 3, "roleName": "user" },],
+      "sysUserRoles": [{"id": 1, "userId": 2, "roleId": 3, "roleName": "user"},],
     },
     {
       "id": 3,
@@ -1116,7 +1116,12 @@ const users = {
       "tel": "18905926374",
       "utype": "client",
       "status": STATUS.A,
-      "sysUserRoles": [{ "id": 9, "userId": 4, "roleId": 1, "roleName": "admin" }, { "id": 10, "userId": 4, "roleId": 2, "roleName": "manager" }, { "id": 11, "userId": 4, "roleId": 3, "roleName": "user" },],
+      "sysUserRoles": [{"id": 9, "userId": 4, "roleId": 1, "roleName": "admin"}, {
+        "id": 10,
+        "userId": 4,
+        "roleId": 2,
+        "roleName": "manager"
+      }, {"id": 11, "userId": 4, "roleId": 3, "roleName": "user"},],
     },
   ]
 };
@@ -1133,8 +1138,23 @@ const adapterSpecs = {
       "reqPath": "/rest/111",
       "code": "String a=\"dd\";",
       "status": "A",
-      "attrSpecs": [{ "attrSpecId": 151, "attrSpecCode": "busi_code", "attrSpecName": "business Code", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 1 },
-      { "attrSpecId": 152, "attrSpecCode": "operation_code", "attrSpecName": "operation code", "defaultValue": "", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 1 },],
+      "attrSpecs": [{
+        "attrSpecId": 151,
+        "attrSpecCode": "busi_code",
+        "attrSpecName": "business Code",
+        "tableName": "api_service_backend",
+        "upId": 0,
+        "adapterSpecId": 1
+      },
+        {
+          "attrSpecId": 152,
+          "attrSpecCode": "operation_code",
+          "attrSpecName": "operation code",
+          "defaultValue": "",
+          "tableName": "api_service_backend",
+          "upId": 0,
+          "adapterSpecId": 1
+        },],
     },
     {
       "id": 2,
@@ -1146,7 +1166,15 @@ const adapterSpecs = {
       "code": "String a=\"123\";",
       "status": "A",
       "remark": "good",
-      "attrSpecs": [{ "attrSpecId": 153, "attrSpecCode": "token", "attrSpecName": "token", "default_value": "Beare dadjf9iojsdfdsdj", "tableName": "api_service_backend", "up_id": 0, "adapterSpecId": 2 },],
+      "attrSpecs": [{
+        "attrSpecId": 153,
+        "attrSpecCode": "token",
+        "attrSpecName": "token",
+        "default_value": "Beare dadjf9iojsdfdsdj",
+        "tableName": "api_service_backend",
+        "up_id": 0,
+        "adapterSpecId": 2
+      },],
     },
     {
       "id": 3,
@@ -1164,9 +1192,36 @@ const attrSpecs = {
   "code": "200",
   "msg": null,
   "data": [
-    { "attrSpecId": 150, "attrSpecCode": "busi_code", "attrSpecName": "business Code", "defaultValue": "1123", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 1, "status": "A" },
-    { "attrSpecId": 151, "attrSpecCode": "operation_code", "attrSpecName": "operation code", "defaultValue": "1123", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 1, "status": "A" },
-    { "attrSpecId": 152, "attrSpecCode": "token", "attrSpecName": "token", "defaultValue": "Beare dadjf9iojsdfdsdj", "tableName": "api_service_backend", "upId": 0, "adapterSpecId": 2, "status": "A" },
+    {
+      "attrSpecId": 150,
+      "attrSpecCode": "busi_code",
+      "attrSpecName": "business Code",
+      "defaultValue": "1123",
+      "tableName": "api_service_backend",
+      "upId": 0,
+      "adapterSpecId": 1,
+      "status": "A"
+    },
+    {
+      "attrSpecId": 151,
+      "attrSpecCode": "operation_code",
+      "attrSpecName": "operation code",
+      "defaultValue": "1123",
+      "tableName": "api_service_backend",
+      "upId": 0,
+      "adapterSpecId": 1,
+      "status": "A"
+    },
+    {
+      "attrSpecId": 152,
+      "attrSpecCode": "token",
+      "attrSpecName": "token",
+      "defaultValue": "Beare dadjf9iojsdfdsdj",
+      "tableName": "api_service_backend",
+      "upId": 0,
+      "adapterSpecId": 2,
+      "status": "A"
+    },
   ],
 
 };
@@ -1189,7 +1244,7 @@ const orgs = {
       "authType": "1",
       "email": "111",
       "status": STATUS.A,
-      "sysUserOrgs": [{ "id": 1, "orgId": 1, "userId": 1, "username": "admin" },],
+      "sysUserOrgs": [{"id": 1, "orgId": 1, "userId": 1, "username": "admin"},],
       "consumerApis": [
         {
           "apiId": 160,
@@ -1235,7 +1290,7 @@ const orgs = {
       "id": 2,
       "authType": "2",
       "status": STATUS.A,
-      "sysUserOrgs": [{ "id": 1, "orgId": 1, "userId": 1, "username": "admin" },],
+      "sysUserOrgs": [{"id": 1, "orgId": 1, "userId": 1, "username": "admin"},],
       "consumerApis": [
         {
           "apiId": 160,
@@ -1281,7 +1336,7 @@ const orgs = {
       "id": 3,
       "authType": "3",
       "status": STATUS.A,
-      "sysUserOrgs": [{ "id": 1, "orgId": 1, "userId": 1, "username": "admin" },],
+      "sysUserOrgs": [{"id": 1, "orgId": 1, "userId": 1, "username": "admin"},],
       "consumerApis": [
         {
           "apiId": 160,
@@ -1456,7 +1511,7 @@ function getList(innerTableName) {
     case 'sys_privilege':
       dataSource = privilegesDataSource;
       break;
-    case 'config':
+    case 'env':
       dataSource = configlistDataSource;
       break;
     case 'api_user_debug':
@@ -1545,9 +1600,10 @@ export function detail(req, res, u) {
   }
   return result;
 }
+
 export function queryList(req, res, u, b) {
   const params = (b && b.body) || req.body;
-  const { tableName, data: { info } } = params;
+  const {tableName, data: {info}} = params;
 
   let dataSource = [...getList(tableName)];// 根据表明获取对应数据
   console.log(params, dataSource.length);
@@ -1595,6 +1651,7 @@ export function queryList(req, res, u, b) {
   }
   return result;
 }
+
 export function save(req, res, u, b) {
   // let url = u;
   // if (!url || Object.prototype.toString.call(url) !== '[object String]') {
@@ -1602,10 +1659,10 @@ export function save(req, res, u, b) {
   // }
 
   const body = (b && b.body) || req.body;
-  const { method, tableName, data: { info } } = body;
-  const { orgType, orgName, id, name, groupName, appKey, groupId, authType, tel, email, remark } = info;
-  const { userId, username, utype, roleId, roleName, privilegeId, path, icon, hideInMenu, hideChildrenInMenu, type, } = info;
-  const { envId, envName, ifSelected, publicGatewayUrl, privateGatewayUrl, agentUrl, status, fileServerUrl } = info;
+  const {method, tableName, data: {info}} = body;
+  const {orgType, orgName, id, name, groupName, appKey, groupId, authType, tel, email, remark} = info;
+  const {userId, username, utype, roleId, roleName, privilegeId, path, icon, hideInMenu, hideChildrenInMenu, type,} = info;
+  const {envId, envName, ifSelected, publicGatewayUrl, privateGatewayUrl, agentUrl, status, fileServerUrl} = info;
   // console.log('save in mock:', body, id);
   const datasource = getList(tableName);
   switch (method) {
@@ -1706,7 +1763,7 @@ export function save(req, res, u, b) {
             console.log("datasource:", datasource);
           }
           break;
-        case 'config':
+        case 'env':
           const tmpConfiglistArray = datasource.filter(item => envId && envId === item.envId);
           if (tmpConfiglistArray && tmpConfiglistArray.length > 0) {
             const tmpObj = tmpConfiglistArray.shift();
@@ -1767,6 +1824,7 @@ export function save(req, res, u, b) {
   }
   return result;
 }
+
 export function statusBatch(req, res, u, b) {
   // console.log('statusBatch======');
   // let url = u;
@@ -1775,8 +1833,8 @@ export function statusBatch(req, res, u, b) {
   // }
 
   const body = (b && b.body) || req.body;
-  const { method, tableName, data: { info }, option } = body;
-  const { ids } = info;
+  const {method, tableName, data: {info}, option} = body;
+  const {ids} = info;
   const datasource = getList(tableName);
   // console.log('statusBatch method:',method);
   switch (method) {
@@ -1809,7 +1867,7 @@ export function statusBatch(req, res, u, b) {
         case 'attr_spec':
           id = "attrSpecId";
           break;
-        case 'config':
+        case 'env':
           id = "envId"
         default:
           break;
@@ -1840,7 +1898,6 @@ export function statusBatch(req, res, u, b) {
 }
 
 
-
 export function getAdapterListByType(req, res, u) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
@@ -1848,7 +1905,7 @@ export function getAdapterListByType(req, res, u) {
   }
   const params = parse(url, true).query;
 
-  const result = { ...adapterSpecs };
+  const result = {...adapterSpecs};
   if (params.pointType) {
     result.data = adapterSpecs.data.filter((item) => params.pointType.indexOf(item.pointType) !== -1);
   }
@@ -1867,7 +1924,7 @@ export function getOrgListByType(req, res, u) {
   const params = parse(url, true).query;
 
   // console.log("getOrgListByType in model", params);
-  const result = { ...orgs };
+  const result = {...orgs};
   if (params.orgType) {
     result.data = orgs.data.filter((item) => params.orgType.indexOf(item.orgType) !== -1);
   }
@@ -1877,6 +1934,7 @@ export function getOrgListByType(req, res, u) {
   }
   return result;
 }
+
 export default {
   'POST /baseInfo/sysdata/(.*)/list': queryList,
   'POST /baseInfo/sysdata/(.*)/save': save,

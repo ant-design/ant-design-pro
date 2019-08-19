@@ -88,7 +88,7 @@ export default {
         const errorMsg = response.msg && response.msg !== "" ? response.msg : `Sorry, the server is reporting an error,code=${response.code}`;
         message.error(errorMsg);
       }
-      //console.log("response.data",response.data);
+      // console.log("response.data",response.data);
       if (callback) callback(response.data);
     }
   },
