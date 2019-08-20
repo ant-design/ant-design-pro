@@ -24,14 +24,14 @@ class Configuration extends PureComponent {
       key: 'envId',
       name: 'envId',
       columnDetails: [
-        {name: 'envId', title: 'envId', add: true},
-        {name: 'envName', title: 'envName', add: true, query: true,},
-        {name: 'publicGatewayUrl', title: 'publicGatewayUrl', add: true, detailFlag: 1},
-        {name: 'privateGatewayUrl', title: 'privateGatewayUrl', add: true,},
-        {name: 'agentUrl', title: 'agentUrl', add: true,},
-        {name: 'status', title: 'status', tag:'commonSelect', add: true, enumData: statusList, query: true,},
-        {name: 'fileServerUrl', title: 'fileServerUrl', add: true,},
-        {name: 'ifSelected', title: 'ifSelected', tag:'commonSelect', add: true,enumData: selectList},
+        {name: 'envId', title: 'Env Id', add: true},
+        {name: 'envName', title: 'Env Name', add: true, query: true,},
+        {name: 'publicGatewayUrl', title: 'Public Gateway Url', add: true, detailFlag: 1},
+        {name: 'privateGatewayUrl', title: 'Private Gateway Url', add: true,},
+        {name: 'agentUrl', title: 'Agent Url', add: true,},
+        {name: 'status', title: 'Status', tag:'Common Select', add: true, enumData: statusList, query: true,},
+        {name: 'fileServerUrl', title: 'File Server Url', add: true,},
+        {name: 'ifSelected', title: 'If Selected', tag:'commonSelect', add: true,enumData: selectList},
       ]
 
     };

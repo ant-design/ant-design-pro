@@ -186,6 +186,7 @@ class Org extends PureComponent {
                 this.setState({ selectedRow: record });
               }, // 鼠标移入行
               // onMouseLeave: (event) => {console.log(12)}
+
             };
           }}
         >
