@@ -2,7 +2,7 @@ import React,{PureComponent} from "react";
 import {connect} from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import BindDataQueryTable from '../BindDataQueryTable';
-import {getItems,getAllEnumData} from '@/utils/masterData';
+import {getItems} from '@/utils/masterData';
 
 
 @connect(({uniComp}) => ({
@@ -25,10 +25,10 @@ class Configuration extends PureComponent {
       name: 'envId',
       columnDetails: [
         {name: 'envId', title: 'envId', add: true},
+        {name: 'envName', title: 'envName', add: true, query: true,},
         {name: 'publicGatewayUrl', title: 'publicGatewayUrl', add: true, detailFlag: 1},
         {name: 'privateGatewayUrl', title: 'privateGatewayUrl', add: true,},
         {name: 'agentUrl', title: 'agentUrl', add: true,},
-        {name: 'envName', title: 'envName', add: true, query: true,},
         {name: 'status', title: 'status', tag:'commonSelect', add: true, enumData: statusList, query: true,},
         {name: 'fileServerUrl', title: 'fileServerUrl', add: true,},
         {name: 'ifSelected', title: 'ifSelected', tag:'commonSelect', add: true,enumData: selectList},
