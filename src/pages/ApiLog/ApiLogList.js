@@ -185,27 +185,27 @@ class ApiLogList extends PureComponent {
     const {logItemList} = exRecord;
     const columns = [
       {
-        title: 'orderItemCode',
+        title: 'OrderItem Code',
         dataIndex: 'orderItemCode',
         render: (text, record) =>
           <a onClick={() => this.handleDetail(record)}>{text}</a>,
       },
       {
-        title: 'implType',
+        title: 'Impl Type',
         dataIndex: 'implType',
       },
       {
-        title: 'reqTarget',
+        title: 'Request Target',
         dataIndex: 'reqTarget',
         render : val =>  <Ellipsis tooltip length={40} style={{overflow: "inherit"}}>{`${val}`}</Ellipsis>
       },
       {
-        title: 'reqTime',
+        title: 'Request Time',
         dataIndex: 'reqTime',
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
       {
-        title: 'respTime',
+        title: 'Response Time',
         dataIndex: 'respTime',
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },

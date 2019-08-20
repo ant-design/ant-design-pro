@@ -13,7 +13,7 @@ const fieldLabels = {
   reqMessage: 'reqMessage',
   respMessage: 'respMessage',
   seq: 'seq',
-  encryptFlag: 'encryptFlag',
+  encryptFlag: 'Encrypt Flag',
 }
 
 class Detail extends PureComponent {
