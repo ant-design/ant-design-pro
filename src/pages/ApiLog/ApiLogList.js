@@ -589,13 +589,13 @@ class ApiLogList extends PureComponent {
           <Col md={8} sm={24}>
             <span className={styles.submitButtons}>
               <Button type="primary" htmlType="submit">
-                查询
+                Query
               </Button>
               <Button style={{marginLeft: 8}} onClick={this.handleFormReset} htmlType="button">
-                重置
+                Reset
               </Button>
               <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-                展开 <Icon type="down" />
+                UnFold <Icon type="down" />
               </a>
             </span>
           </Col>
@@ -686,13 +686,13 @@ class ApiLogList extends PureComponent {
         <div style={{overflow: 'hidden'}}>
           <div style={{float: 'right', marginBottom: 24}}>
             <Button type="primary" htmlType="submit">
-              查询
+              Query
             </Button>
             <Button style={{marginLeft: 8}} onClick={this.handleFormReset} htmlType="button">
-              重置
+              Reset
             </Button>
             <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-              收起 <Icon type="up" />
+              Fold <Icon type="up" />
             </a>
           </div>
         </div>
