@@ -48,7 +48,7 @@ class ApiLogList extends PureComponent {
     this.fetchApi = debounce(this.fetchApi, 800);
   }
 
-  //数据存放
+  // 数据存放
   state = {
     expandForm: false,
     selectedRow: {},
@@ -66,9 +66,10 @@ class ApiLogList extends PureComponent {
     fetching: false,
     rangePickerValue: getTimeDistance('today'),
     targetOrgs:[],
-    expandAllFlag:false,//初始时是否展开
+    expandAllFlag:false,// 初始时是否展开
   };
-  //调用基础配置获取列表接口
+
+  // 调用基础配置获取列表接口
   componentWillMount() {
     const {dispatch} = this.props;
     /* 获取apiDebug数据 */
@@ -142,7 +143,7 @@ class ApiLogList extends PureComponent {
     ));
   };
 
-  //Table的配置，点击图标触发
+  // Table的配置，点击图标触发
   onExpand = (expanded, record) => {
     console.log("onExpand1111", record);
     const {dispatch} = this.props;
@@ -176,7 +177,8 @@ class ApiLogList extends PureComponent {
     }
 
   }
-  //额外的展开行
+
+  // 额外的展开行
   expandedRowRender = (exRecord) => {
 
     console.log("expandedRowRender", exRecord);
@@ -224,7 +226,7 @@ class ApiLogList extends PureComponent {
     }, {});
   };
 
-  //重置按钮
+  // 重置按钮
   handleFormReset = () => {
     const {form, dispatch} = this.props;
     const {targetOrgs} = this.state;
@@ -255,7 +257,8 @@ class ApiLogList extends PureComponent {
       }
     });
   };
-  //切换按钮
+
+  // 切换按钮
   toggleForm = () => {
     const {expandForm} = this.state;
     this.setState({
@@ -271,7 +274,7 @@ class ApiLogList extends PureComponent {
     });
   };
 
-  //根据条件查询api数据
+  // 根据条件查询api数据
   fetchApi = (value) => {
     this.lastFetchId += 1;
     this.setState({data: [], fetching: true});
@@ -300,9 +303,10 @@ class ApiLogList extends PureComponent {
       }
     });
   };
-  //调用日志订单查询接口
+
+  // 调用日志订单查询接口
   handleSearch = e => {
-    e.preventDefault();//组织默认行为
+    e.preventDefault();// 组织默认行为
 
     const {dispatch, form} = this.props;
     const {targetOrgs} = this.state;
@@ -375,7 +379,7 @@ class ApiLogList extends PureComponent {
     });
   };
 
-  //当分页、排序、筛选变化时触发
+  // 当分页、排序、筛选变化时触发
   handleTableChange = (paginations, filtersArg, sorter) => {
     const {dispatch} = this.props;
     const {formValues,targetOrgs} = this.state;
@@ -504,7 +508,7 @@ class ApiLogList extends PureComponent {
     });
   };
 
-  //面板收起
+  // 面板收起
   renderSimpleForm() {
     const {
       form: {getFieldDecorator},
@@ -514,17 +518,17 @@ class ApiLogList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="transactionId">
-              {getFieldDecorator('transactionId')(<Input placeholder="please enter consumer transactionId" />)}
+            <FormItem label="Transaction Id">
+              {getFieldDecorator('transactionId')(<Input placeholder="please enter consumer Transaction Id" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="appKey">
-              {getFieldDecorator('appKey')(<Input placeholder="please enter consumer appKey" />)}
+            <FormItem label="App Key">
+              {getFieldDecorator('appKey')(<Input placeholder="please enter consumer App Key" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="requestTime">
+            <FormItem label="Request Time">
               <div className={styles.salesExtraWrap}>
                 {/*<div className={styles.salesExtra}>
                   <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
@@ -553,13 +557,13 @@ class ApiLogList extends PureComponent {
         </Row>
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="apiName">
+            <FormItem label="Api Name">
               {getFieldDecorator('apiId')(
                 <Select
                   showSearch="true"
                   labelInValue
                   value={value}
-                  placeholder="Select apiName"
+                  placeholder="Select Api Name"
                   notFoundContent={fetching ? <Spin size="small" /> : null}
                   filterOption={false}
                   onSearch={this.fetchApi}
@@ -599,7 +603,8 @@ class ApiLogList extends PureComponent {
       </Form>
     );
   }
-  //面板展开
+
+  // 面板展开
   renderAdvancedForm() {
     const {
       form: {getFieldDecorator},
@@ -613,17 +618,17 @@ class ApiLogList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="transactionId">
-              {getFieldDecorator('transactionId')(<Input placeholder="please enter transactionId" />)}
+            <FormItem label="Transaction Id">
+              {getFieldDecorator('transactionId')(<Input placeholder="please enter Transaction Id" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="appKey">
-              {getFieldDecorator('appKey')(<Input placeholder="please enter consumer appKey" />)}
+            <FormItem label="App Key">
+              {getFieldDecorator('appKey')(<Input placeholder="please enter consumer App Key" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="requestTime">
+            <FormItem label="Request Time">
               {getFieldDecorator('requestTime', {
                 initialValue: rangePickerValue
               })(<RangePicker
@@ -636,13 +641,13 @@ class ApiLogList extends PureComponent {
         </Row>
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="apiName">
+            <FormItem label="Api Name">
               {getFieldDecorator('apiId')(
                 <Select
                   showSearch="true"
                   labelInValue
                   value={value}
-                  placeholder="Select apiName"
+                  placeholder="Select Api Name"
                   notFoundContent={fetching ? <Spin size="small" /> : null}
                   filterOption={false}
                   onSearch={this.fetchApi}
@@ -666,15 +671,15 @@ class ApiLogList extends PureComponent {
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="extSelect">
-              {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel} placeholder="please enter extInput" />)}
+            <FormItem label="Ext Select">
+              {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel} placeholder="please enter Ext Select" />)}
             </FormItem>
           </Col>
         </Row>
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="keyValue">
-              {getFieldDecorator('keyValue')(<Input placeholder="please enter keyValue" />)}
+            <FormItem label="KeyValue">
+              {getFieldDecorator('keyValue')(<Input placeholder="please enter KeyValue" />)}
             </FormItem>
           </Col>
         </Row>
@@ -694,7 +699,8 @@ class ApiLogList extends PureComponent {
       </Form>
     );
   }
-  //决定展现形式，默认是收起
+
+  // 决定展现形式，默认是收起
   renderForm() {
     const {expandForm} = this.state;
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
@@ -713,7 +719,7 @@ class ApiLogList extends PureComponent {
 
     const columns = [
       {
-        title: 'transactionId',
+        title: 'Transaction Id',
         dataIndex: 'transactionId',
       },
       {
@@ -721,29 +727,29 @@ class ApiLogList extends PureComponent {
         dataIndex: 'statusName',
       },
       {
-        title: 'sourceType',
+        title: 'Source Type',
         dataIndex: 'sourceTypeName',
       },
       {
-        title: 'apiName',
+        title: 'Api Name',
         dataIndex: 'apiName',
       },
       {
-        title: 'appKey',
+        title: 'App Key',
         dataIndex: 'appKey',
       },
       {
-        title: 'orderCode',
+        title: 'Order Code',
         dataIndex: 'orderCode'
       },
       {
-        title: 'requestTime',
+        title: 'Request Time',
         dataIndex: 'requestTime',
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
       {
-        title: 'responseTime',
+        title: 'Response Time',
         dataIndex: 'responseTime',
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
