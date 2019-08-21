@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {Divider} from 'antd';
 import {connect} from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
 import BindDataQueryTable from '../BindDataQueryTable';
 import QueryCommand from '@/components/QueryTable/QueryCommand';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -50,36 +51,38 @@ class User extends PureComponent {
       relationKey: 'userId',
       commands:[{action:'setRole',title:'角色'},],
       columnDetails: [
-        { name: 'id', title: 'User ID', add: true, disabledAct:'true' },
-        { name: 'username', title: 'User Name', sorter: true, query: true, add: true, detailFlag:1 },
+        { name: 'id', title: formatMessage({'id':'app.user.sys_user.id'}), add: true, disabledAct:'true' },
+        { name: 'username', title: formatMessage({'id':'app.user.sys_user.username'}), sorter: true, query: true, add: true, detailFlag:1 },
         {
           name: 'utype',
-          title: 'Account Type',
+          title: formatMessage({'id':'app.user.sys_user.utype'}),
           columnHidden: false,
           query: true,
           add: true,
           tag: 'commonSelect',
           enumData: utypeList,
         },
-        { name: 'password', title: 'Password',tag:'passwordTag', add: true, columnHidden: true,detail:false },
-        { name: 'email', title: 'Email', query: false, add: true ,rules:[]},
-        { name: 'tel', title: 'Mobile', query: false, add: true ,rules:[]},
+        { name: 'password', title: formatMessage({'id':'app.user.sys_user.password'}),tag:'passwordTag', add: true, columnHidden: true,detail:false },
+        { name: 'email', title: formatMessage({'id':'app.user.sys_user.email'}), query: false, add: true ,rules:[]},
+        { name: 'tel', title: formatMessage({'id':'app.user.sys_user.tel'}), query: false, add: true ,rules:[]},
         {
           name: 'status',
-          title: 'Status',
+          title: formatMessage({'id':'app.user.sys_user.status'}),
           columnHidden: false,
           query: false,
           add: false,
           tag: 'commonSelect',
           enumData: statusList,
         },
-        { name: 'remark', title: 'remark',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
+        { name: 'remark', title: formatMessage({'id':'app.user.sys_user.remark'}),tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
       ],
       relations:[{
         name:'sysUserRoles',
         key: 'id',
-        title:'Role List of this User',
-        columnDetails:[{name: 'id',title:'Relation Id'},{name: 'roleId',title:'Role Id'},{name: 'roleName',title:'Role Name'}]
+        title:formatMessage({'id':'app.user.sys_user.sysUserRoles'}),
+        columnDetails:[{name: 'id',title:formatMessage({'id':'app.user.sys_role.id'})},
+          {name: 'roleId',title:formatMessage({'id':'app.user.sys_user.roleId'})},
+          {name: 'roleName',title:formatMessage({'id':'app.user.sys_user.roleName'})}]
       }],
       actions,
     };

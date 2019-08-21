@@ -1,0 +1,17 @@
+export default {
+  'app.apiLogList.log.transactionId':'Transaction Id',
+  'app.apiLogList.log.statusName':'Status',
+  'app.apiLogList.log.sourceTypeName':'Source Type',
+  'app.apiLogList.log.apiName':'Api Name',
+  'app.apiLogList.log.appKey':'App Key',
+  'app.apiLogList.log.orderCode':'Order Code',
+  'app.apiLogList.log.requestTime':'Request Time',
+  'app.apiLogList.log.responseTime':'Response Time',
+  'app.apiLogList.log.orderItemCode':'Order Item Code',
+  'app.apiLogList.log.implType':'Impl Type',
+  'app.apiLogList.log.reqTarget':'Request Target',
+  'app.apiLogList.log.reqTime':'Request Time',
+  'app.apiLogList.log.respTime':'Response Time',
+  'app.apiLogList.log.keyValue':'Key Value',
+  'app.apiLogList.log.extInput':'Ext Select',
+}

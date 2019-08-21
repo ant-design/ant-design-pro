@@ -1,0 +1,15 @@
+export default {
+  'app.user.sys_user.id':'User ID',
+  'app.user.sys_user.username':'User Name',
+  'app.user.sys_user.utype':'Account Type',
+  'app.user.sys_user.password':'Password',
+  'app.user.sys_user.email':'Email',
+  'app.user.sys_user.tel':'Mobile',
+  'app.user.sys_user.status':'Status',
+  'app.user.sys_user.remark':'Remark',
+  'app.user.sys_user.sysUserRoles':'Role List Of This User',
+  'app.user.sys_user.roleId':'Role Id',
+  'app.user.sys_user.roleName':'Role Name',
+  'app.user.sys_role.id':'Relation Id',
+  'app.user.sys_role.sysUserRoles':'Role List Of This User',
+}

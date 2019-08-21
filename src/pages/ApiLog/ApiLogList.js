@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import { formatMessage } from 'umi-plugin-react/locale';
 import {connect} from 'dva';
 import moment from 'moment';
 import {
@@ -185,27 +186,27 @@ class ApiLogList extends PureComponent {
     const {logItemList} = exRecord;
     const columns = [
       {
-        title: 'OrderItem Code',
+        title: formatMessage({'id':'app.apiLogList.log.orderItemCode'}),
         dataIndex: 'orderItemCode',
         render: (text, record) =>
           <a onClick={() => this.handleDetail(record)}>{text}</a>,
       },
       {
-        title: 'Impl Type',
+        title: formatMessage({'id':'app.apiLogList.log.implType'}),
         dataIndex: 'implType',
       },
       {
-        title: 'Request Target',
+        title: formatMessage({'id':'app.apiLogList.log.reqTarget'}),
         dataIndex: 'reqTarget',
         render : val =>  <Ellipsis tooltip length={40} style={{overflow: "inherit"}}>{`${val}`}</Ellipsis>
       },
       {
-        title: 'Request Time',
+        title: formatMessage({'id':'app.apiLogList.log.reqTime'}),
         dataIndex: 'reqTime',
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
       {
-        title: 'Response Time',
+        title: formatMessage({'id':'app.apiLogList.log.respTime'}),
         dataIndex: 'respTime',
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
@@ -518,17 +519,17 @@ class ApiLogList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="Transaction Id">
-              {getFieldDecorator('transactionId')(<Input placeholder="please enter consumer Transaction Id" />)}
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.transactionId'})}>
+              {getFieldDecorator('transactionId')(<Input placeholder={formatMessage({'id':'app.noteTips.log.transactionId'})} />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="App Key">
-              {getFieldDecorator('appKey')(<Input placeholder="please enter consumer App Key" />)}
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.appKey'})}>
+              {getFieldDecorator('appKey')(<Input placeholder={formatMessage({'id':'app.noteTips.log.appKey'})} />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="Request Time">
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.reqTime'})}>
               <div className={styles.salesExtraWrap}>
                 {/*<div className={styles.salesExtra}>
                   <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
@@ -557,13 +558,13 @@ class ApiLogList extends PureComponent {
         </Row>
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="Api Name">
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.apiName'})}>
               {getFieldDecorator('apiId')(
                 <Select
                   showSearch="true"
                   labelInValue
                   value={value}
-                  placeholder="Select Api Name"
+                  placeholder={formatMessage({'id':'app.noteTips.log.apiName'})}
                   notFoundContent={fetching ? <Spin size="small" /> : null}
                   filterOption={false}
                   onSearch={this.fetchApi}
@@ -578,9 +579,9 @@ class ApiLogList extends PureComponent {
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="status">
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.statusName'})}>
               {getFieldDecorator('status', {})(
-                <Select placeholder="please choose" style={{width: '100%'}}>
+                <Select placeholder={formatMessage({'id':'app.noteTips.log.statusName'})} style={{width: '100%'}}>
                   {this.getOption("intfOrder", "status")}
                 </Select>
               )}
@@ -618,17 +619,17 @@ class ApiLogList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="Transaction Id">
-              {getFieldDecorator('transactionId')(<Input placeholder="please enter Transaction Id" />)}
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.transactionId'})}>
+              {getFieldDecorator('transactionId')(<Input placeholder={formatMessage({'id':'app.noteTips.log.transactionId'})} />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="App Key">
-              {getFieldDecorator('appKey')(<Input placeholder="please enter consumer App Key" />)}
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.appKey'})}>
+              {getFieldDecorator('appKey')(<Input placeholder={formatMessage({'id':'app.noteTips.log.appKey'})} />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="Request Time">
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.reqTime'})}>
               {getFieldDecorator('requestTime', {
                 initialValue: rangePickerValue
               })(<RangePicker
@@ -641,13 +642,13 @@ class ApiLogList extends PureComponent {
         </Row>
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="Api Name">
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.apiName'})}>
               {getFieldDecorator('apiId')(
                 <Select
                   showSearch="true"
                   labelInValue
                   value={value}
-                  placeholder="Select Api Name"
+                  placeholder={formatMessage({'id':'app.noteTips.log.apiName'})}
                   notFoundContent={fetching ? <Spin size="small" /> : null}
                   filterOption={false}
                   onSearch={this.fetchApi}
@@ -662,24 +663,24 @@ class ApiLogList extends PureComponent {
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="status">
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.statusName'})}>
               {getFieldDecorator('status', {})(
-                <Select placeholder="please choose" style={{width: '100%'}}>
+                <Select placeholder={formatMessage({'id':'app.noteTips.log.statusName'})} style={{width: '100%'}}>
                   {this.getOption("intfOrder", "status")}
                 </Select>
               )}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="Ext Select">
-              {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel} placeholder="please enter Ext Select" />)}
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.extInput'})}>
+              {getFieldDecorator('extInput', {})(<Input addonBefore={orderExtSel} placeholder={formatMessage({'id':'app.noteTips.log.extInput'})} />)}
             </FormItem>
           </Col>
         </Row>
         <Row gutter={{md: 8, lg: 24, xl: 48}}>
           <Col md={8} sm={24}>
-            <FormItem label="KeyValue">
-              {getFieldDecorator('keyValue')(<Input placeholder="please enter KeyValue" />)}
+            <FormItem label={formatMessage({'id':'app.apiLogList.log.keyValue'})}>
+              {getFieldDecorator('keyValue')(<Input placeholder={formatMessage({'id':'app.noteTips.log.keyValue'})} />)}
             </FormItem>
           </Col>
         </Row>
@@ -719,37 +720,37 @@ class ApiLogList extends PureComponent {
 
     const columns = [
       {
-        title: 'Transaction Id',
+        title: formatMessage({'id':'app.apiLogList.log.transactionId'}),
         dataIndex: 'transactionId',
       },
       {
-        title: 'status',
+        title: formatMessage({'id':'app.apiLogList.log.statusName'}),
         dataIndex: 'statusName',
       },
       {
-        title: 'Source Type',
+        title: formatMessage({'id':'app.apiLogList.log.sourceTypeName'}),
         dataIndex: 'sourceTypeName',
       },
       {
-        title: 'Api Name',
+        title: formatMessage({'id':'app.apiLogList.log.apiName'}),
         dataIndex: 'apiName',
       },
       {
-        title: 'App Key',
+        title: formatMessage({'id':'app.apiLogList.log.appKey'}),
         dataIndex: 'appKey',
       },
       {
-        title: 'Order Code',
+        title: formatMessage({'id':'app.apiLogList.log.orderCode'}),
         dataIndex: 'orderCode'
       },
       {
-        title: 'Request Time',
+        title: formatMessage({'id':'app.apiLogList.log.requestTime'}),
         dataIndex: 'requestTime',
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
       {
-        title: 'Response Time',
+        title: formatMessage({'id':'app.apiLogList.log.responseTime'}),
         dataIndex: 'responseTime',
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,

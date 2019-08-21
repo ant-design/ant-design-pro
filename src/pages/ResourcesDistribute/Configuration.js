@@ -1,5 +1,6 @@
 import React,{PureComponent} from "react";
 import {connect} from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import BindDataQueryTable from '../BindDataQueryTable';
 import {getItems} from '@/utils/masterData';
@@ -24,14 +25,14 @@ class Configuration extends PureComponent {
       key: 'envId',
       name: 'envId',
       columnDetails: [
-        {name: 'envId', title: 'Env Id', add: true},
-        {name: 'envName', title: 'Env Name', add: true, query: true,},
-        {name: 'publicGatewayUrl', title: 'Public Gateway Url', add: true, detailFlag: 1},
-        {name: 'privateGatewayUrl', title: 'Private Gateway Url', add: true,},
-        {name: 'agentUrl', title: 'Agent Url', add: true,},
-        {name: 'status', title: 'Status', tag:'Common Select', add: true, enumData: statusList, query: true,},
-        {name: 'fileServerUrl', title: 'File Server Url', add: true,},
-        {name: 'ifSelected', title: 'If Selected', tag:'commonSelect', add: true,enumData: selectList},
+        {name: 'envId', title: formatMessage({'id':'app.configuration.env.envId'}), add: true},
+        {name: 'envName', title: formatMessage({'id':'app.configuration.env.envName'}), add: true, query: true,},
+        {name: 'publicGatewayUrl', title: formatMessage({'id':'app.configuration.env.publicGatewayUrl'}), add: true, detailFlag: 1},
+        {name: 'privateGatewayUrl', title: formatMessage({'id':'app.configuration.env.privateGatewayUrl'}), add: true,},
+        {name: 'agentUrl', title: formatMessage({'id':'app.configuration.env.agentUrl'}), add: true,},
+        {name: 'status', title: formatMessage({'id':'app.configuration.env.status'}), tag:'Common Select', add: true, enumData: statusList, query: true,},
+        {name: 'fileServerUrl', title: formatMessage({'id':'app.configuration.env.fileServerUrl'}), add: true,},
+        {name: 'ifSelected', title: formatMessage({'id':'app.configuration.env.ifSelected'}), tag:'commonSelect', add: true,enumData: selectList},
       ]
 
     };

@@ -1,0 +1,17 @@
+export default {
+  'app.noteTips.log.transactionId':'Please Enter Transaction Id',
+  'app.noteTips.log.statusName':'Please Choice Status',
+  'app.noteTips.log.sourceTypeName':'Please Enter Source Type',
+  'app.noteTips.log.apiName':'Select Api Name',
+  'app.noteTips.log.appKey':'Please Enter Consumer App Key',
+  'app.noteTips.log.orderCode':'Please Enter Order Code',
+  'app.noteTips.log.requestTime':'Request Time',
+  'app.noteTips.log.responseTime':'Response Time',
+  'app.noteTips.log.orderItemCode':'Please Enter Order Item Code',
+  'app.noteTips.log.implType':'Please Enter Impl Type',
+  'app.noteTips.log.reqTarget':'Please Enter Request Target',
+  'app.noteTips.log.reqTime':'Request Time',
+  'app.noteTips.log.respTime':'Response Time',
+  'app.noteTips.log.keyValue':'Please Enter Key Value',
+  'app.noteTips.log.extInput':'Please Enter Ext Select',
+}

@@ -11,6 +11,12 @@ import settings from './zh-CN/settings';
 import pwa from './zh-CN/pwa';
 import component from './zh-CN/component';
 import editor from './zh-CN/editor';
+import configuration from './zh-CN/configuration';
+import privilege from './zh-CN/privilege';
+import role from './zh-CN/role';
+import user from './zh-CN/user';
+import apiLogList from './zh-CN/apiLogList';
+import noteTips from './zh-CN/noteTips';
 
 export default {
   'navBar.lang': '语言',
@@ -34,4 +40,10 @@ export default {
   ...pwa,
   ...component,
   ...editor,
+  ...configuration,
+  ...privilege,
+  ...role,
+  ...user,
+  ...apiLogList,
+  ...noteTips,
 };
