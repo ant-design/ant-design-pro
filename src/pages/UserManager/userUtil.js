@@ -129,6 +129,7 @@ export function flatToGroupTreeSelect(list, data, fatherId) {
       if(child.children.length===0){
         delete child.children;
       }
+      child.disabled=child.children&&child.children.length>0;
       data.push(child);
     }
   });

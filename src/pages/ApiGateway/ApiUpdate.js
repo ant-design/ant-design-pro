@@ -8,7 +8,7 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import TableForm from './TableForm';
 import styles from './style.less';
 import SelectView from './SelectView';
-import GroupSelectView from './GroupSelectView';
+import GroupTreeSelectView from './GroupTreeSelectView';
 import { getPayloadForUpdate, conversionAttr, getApiFlowData } from './ApiCreate/util';
 import RadioView from './RadioView';
 import OrgSelectView from './OrgSelectView';
@@ -177,6 +177,7 @@ class ApiUpdate extends PureComponent {
     if (!errors || errorCount === 0) {
       return null;
     }
+
     const scrollToField = fieldKey => {
       const realFieldKey = `${prefix}.${fieldKey}`;
       const labelNode = document.querySelector(`label[for="${realFieldKey}"]`);
@@ -318,7 +319,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.front.groupId}>
                   {getFieldDecorator('front.groupId', {
                     rules: [{ required: true, message: 'please choose分组' }],
-                  })(<GroupSelectView showSearch optionFilterProp="children" />)}
+                  })(<GroupTreeSelectView hideRoot treeDefaultExpandAll />)}
                 </Form.Item>
               </Col>
               <Col
