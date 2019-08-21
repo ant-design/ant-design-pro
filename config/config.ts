@@ -81,7 +81,7 @@ export default {
   plugins,
   block: {
     // 国内用户可以使用码云
-    // defaultGitUrl: 'https://github.com/ant-design/pro-blocks',
+    // defaultGitUrl: 'https://gitee.com/ant-design/pro-blocks',
     defaultGitUrl: 'https://github.com/ant-design/pro-blocks',
   },
   hash: true,
