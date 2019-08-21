@@ -604,11 +604,11 @@ class WsdlList extends PureComponent {
       <Dropdown
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
-            {status === STATUS.A ? <Menu.Item key="handleModify">Modify</Menu.Item> : null}
-            {status === STATUS.A ? <Menu.Item key="handleParse">Validate</Menu.Item> : null}
-            {status === STATUS.A ? <Menu.Item key="handleApi">Generate Api</Menu.Item> : null}
-            {status === STATUS.A ? <Menu.Item key="handleList">Action List</Menu.Item> : null}
-            {status !== STATUS.D ? <Menu.Item key="handleDelete">Remove</Menu.Item> : null}
+            <Menu.Item key="handleModify">Modify</Menu.Item>
+            <Menu.Item key="handleParse">Validate</Menu.Item>
+            <Menu.Item key="handleApi">Generate Api</Menu.Item>
+            <Menu.Item key="handleList">Action List</Menu.Item>
+            <Menu.Item key="handleDelete">Remove</Menu.Item>
           </Menu>
         }
       >
@@ -755,13 +755,15 @@ class WsdlList extends PureComponent {
           <span>
             <span style={{display:record.status === 'A'?'':'none'}}>
               <a onClick={()=>this.handleAccess(record, true)}>Access</a>
-              <Divider type="vertical" />
             </span>
             <span style={{display:record.status === 'D'?'':'none'}}>
-              <a onClick={()=> this.handleStatusClick(ACT.ONLINE, record)}>Activate</a>
               <Divider type="vertical" />
+              <a onClick={()=> this.handleStatusClick(ACT.ONLINE, record)}>Activate</a>
             </span>
-            {this.renderMoreBtn({current:record})}
+            <span style={{display:record.status === 'A'?'':'none'}}>
+              <Divider type="vertical" />
+              {this.renderMoreBtn({current:record})}
+            </span>
           </span>
         ),
       }
