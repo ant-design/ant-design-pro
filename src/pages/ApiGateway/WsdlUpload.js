@@ -46,7 +46,6 @@ class WsdlUpload extends PureComponent {
   componentWillReceiveProps(nextProps) {
 
     const { selectedRow,dispatch } = this.props;
-
     if (selectedRow !== nextProps.selectedRow) {
       const nextSelectedRow = nextProps.selectedRow;
       if( nextSelectedRow ){
@@ -72,6 +71,7 @@ class WsdlUpload extends PureComponent {
       }else{
         this.setState({fileList:[]});
       }
+      this.setState({removeFiles:[]});
     }
   }
 

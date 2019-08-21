@@ -51,6 +51,11 @@ export async function token(params){
     },
   });
 }
+
+export async function config(){
+  return request(`${PREFIX_PATH}/baseInfo/sysdata/env`);
+}
+
 export async function del(params){
   return request(`${PREFIX_PATH}/baseInfo/sysdata/${params.tableName}/delete?id=${params.id}`, {
     method: 'GET',

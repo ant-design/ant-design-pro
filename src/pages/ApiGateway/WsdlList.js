@@ -408,7 +408,8 @@ class WsdlList extends PureComponent {
     this.setState({
       modalVisible: flag,
       selectedRow: row,
-      fileList:[]
+      fileList:[],
+      removeFiles:[]
     });
   };
 
@@ -797,6 +798,7 @@ class WsdlList extends PureComponent {
               {...parentMethods}
               modalVisible={modalVisible}
               selectedRow={selectedRow}
+              renderAutoForm
               columnSchemas={columnSchemas}
             />
             <WsdlApi

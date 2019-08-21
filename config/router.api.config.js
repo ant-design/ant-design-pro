@@ -244,6 +244,20 @@ export default [
           },
         ],
       },
+      // resource
+      {
+        path: '/resourcesDistribute',
+        icon: 'table',
+        name: 'resourcesDistribute',
+        authority: ['admin'],
+        routes: [
+          {
+            path: '/resourcesDistribute/configuration',
+            name: 'configuration',
+            component: './ResourcesDistribute/Configuration',
+          }
+        ],
+      },
       // test2
       {
         path: '/test',

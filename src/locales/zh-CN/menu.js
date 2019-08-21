@@ -12,6 +12,8 @@ export default {
   'menu.admin.logPage': 'UI日志',
   'menu.admin.apiLogList': 'Api日志',
   'menu.admin.refreshCache': '刷新缓存',
+  'menu.resourcesDistribute': '资源配置',
+  'menu.resourcesDistribute.configuration': '环境配置',
   'menu.test': '测试页面',
   'menu.test.test1': '测试页面1',
   'menu.test.test2': '测试页面2',
