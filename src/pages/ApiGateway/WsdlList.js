@@ -607,7 +607,7 @@ class WsdlList extends PureComponent {
             {status === STATUS.A ? <Menu.Item key="handleModify">Modify</Menu.Item> : null}
             {status === STATUS.A ? <Menu.Item key="handleParse">Validate</Menu.Item> : null}
             {status === STATUS.A ? <Menu.Item key="handleApi">Generate Api</Menu.Item> : null}
-            <Menu.Item key="handleList">Action List</Menu.Item>
+            {status === STATUS.A ? <Menu.Item key="handleList">Action List</Menu.Item> : null}
             {status !== STATUS.D ? <Menu.Item key="handleDelete">Remove</Menu.Item> : null}
           </Menu>
         }
