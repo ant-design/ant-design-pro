@@ -11,6 +11,12 @@ import settings from './en-US/settings';
 import pwa from './en-US/pwa';
 import component from './en-US/component';
 import editor from './en-US/editor';
+import configuration from './en-US/configuration';
+import privilege from './en-US/privilege';
+import role from './en-US/role';
+import user from './en-US/user';
+import apiLogList from './en-US/apiLogList';
+import noteTips from './en-US/noteTips';
 
 export default {
   'navBar.lang': 'Languages',
@@ -34,4 +40,10 @@ export default {
   ...pwa,
   ...component,
   ...editor,
+  ...configuration,
+  ...privilege,
+  ...role,
+  ...user,
+  ...apiLogList,
+  ...noteTips,
 };

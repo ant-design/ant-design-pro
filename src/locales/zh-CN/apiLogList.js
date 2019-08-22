@@ -1,0 +1,17 @@
+export default {
+  'app.apiLogList.log.transactionId':'关系编号',
+  'app.apiLogList.log.statusName':'状态',
+  'app.apiLogList.log.sourceTypeName':'资源类型',
+  'app.apiLogList.log.apiName':'接口名称',
+  'app.apiLogList.log.appKey':'接口密钥',
+  'app.apiLogList.log.orderCode':'订单代码',
+  'app.apiLogList.log.requestTime':'请求时间',
+  'app.apiLogList.log.responseTime':'响应时间',
+  'app.apiLogList.log.orderItemCode':'订单码',
+  'app.apiLogList.log.implType':'调用端点',
+  'app.apiLogList.log.reqTarget':'请求目标',
+  'app.apiLogList.log.reqTime':'请求时间',
+  'app.apiLogList.log.respTime':'响应时间',
+  'app.apiLogList.log.keyValue':'键值',
+  'app.apiLogList.log.extInput':'选择扩展',
+}

@@ -1,0 +1,17 @@
+export default {
+  'app.privilege.sys_privilege.privilegeId':'ID',
+  'app.privilege.sys_privilege.name':'Name',
+  'app.privilege.sys_privilege.path':'Path',
+  'app.privilege.sys_privilege.parentPrivilegeId':'Parent',
+  'app.privilege.sys_privilege.type':'Type',
+  'app.privilege.sys_privilege.roleStr':'Role',
+  'app.privilege.sys_privilege.icon':'Icon',
+  'app.privilege.sys_privilege.hideChildrenInMenu':'Hide Children In Menu',
+  'app.privilege.sys_privilege.hideInMenu':'Hide In Menu',
+  'app.privilege.sys_privilege.status':'Status',
+  'app.privilege.sys_privilege.remark':'Remark',
+  'app.privilege.sys_privilege.sysPrivilegeRoles':'Role List for Access this One',
+  'app.privilege.sys_privilege.id':'Relation Id',
+  'app.privilege.sys_privilege.roleId':'Role Id',
+  'app.privilege.sys_privilege.roleName':'Role Name',
+};

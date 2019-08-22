@@ -1,0 +1,17 @@
+export default {
+  'app.noteTips.log.transactionId':'请输入关系编号',
+  'app.noteTips.log.statusName':'请选择状态',
+  'app.noteTips.log.sourceTypeName':'请输入资源类型',
+  'app.noteTips.log.apiName':'选择接口名称',
+  'app.noteTips.log.appKey':'请输入接口密钥',
+  'app.noteTips.log.orderCode':'请输入订单代码',
+  'app.noteTips.log.requestTime':'请求时间',
+  'app.noteTips.log.responseTime':'响应时间',
+  'app.noteTips.log.orderItemCode':'请输入订单码',
+  'app.noteTips.log.implType':'请输入Impl Type',
+  'app.noteTips.log.reqTarget':'请输入请求目标',
+  'app.noteTips.log.reqTime':'请求时间',
+  'app.noteTips.log.respTime':'响应时间',
+  'app.noteTips.log.keyValue':'请输入键值',
+  'app.noteTips.log.extInput':'请选择扩展',
+}

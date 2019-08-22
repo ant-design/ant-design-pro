@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {Divider,BackTop} from 'antd';
 import {connect} from 'dva';
+import { formatMessage } from 'umi-plugin-react/locale';
 import BindDataQueryTable from '../BindDataQueryTable';
 import QueryCommand from '@/components/QueryTable/QueryCommand';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -38,22 +39,22 @@ class Privilege extends PureComponent {
       name: 'name',
       commands:[{action:'setRole',title:'角色'},],
       columnDetails: [
-        { name: 'privilegeId', title: 'ID', add: true, disabledAct:'true', width:110 },
-        { name: 'name', title: 'Name', query: true, add: true, detailFlag:1, showIcon:'icon',formatMessagePrivilege:true},
-        { name: 'path', title: 'path', query: true, add: true,showLen:22},
-        { name: 'parentPrivilegeId', title: 'parent', add: true, tag:'privilegeTreeSelect', detail:false, columnHidden: true,rules:[]},
+        { name: 'privilegeId', title: formatMessage({'id':'app.privilege.sys_privilege.privilegeId'}), add: true, disabledAct:'true', width:110 },
+        { name: 'name', title: formatMessage({'id':'app.privilege.sys_privilege.name'}), query: true, add: true, detailFlag:1, showIcon:'icon',formatMessagePrivilege:true},
+        { name: 'path', title: formatMessage({'id':'app.privilege.sys_privilege.path'}), query: true, add: true,showLen:22},
+        { name: 'parentPrivilegeId', title: formatMessage({'id':'app.privilege.sys_privilege.parentPrivilegeId'}), add: true, tag:'privilegeTreeSelect', detail:false, columnHidden: true,rules:[]},
         {
           name: 'type',
-          title: 'type',
+          title: formatMessage({'id':'app.privilege.sys_privilege.type'}),
           query: true,
           add: true,
           tag: 'commonSelect',
           enumData: typeList,
         },
-        { name: 'roleStr', title: 'role', showLen:14, detail:true },
+        { name: 'roleStr', title: formatMessage({'id':'app.privilege.sys_privilege.roleStr'}), showLen:14, detail:true },
         {
           name: 'icon',
-          title: 'icon',
+          title: formatMessage({'id':'app.privilege.sys_privilege.icon'}),
           columnHidden: true,
           query: false,
           add: true,
@@ -63,7 +64,7 @@ class Privilege extends PureComponent {
         },
         {
           name: 'hideChildrenInMenu',
-          title: 'hideChildrenInMenu',
+          title: formatMessage({'id':'app.privilege.sys_privilege.hideChildrenInMenu'}),
           columnHidden: true,
           query: false,
           add: true,
@@ -73,7 +74,7 @@ class Privilege extends PureComponent {
         },
         {
           name: 'hideInMenu',
-          title: 'hideInMenu',
+          title: formatMessage({'id':'app.privilege.sys_privilege.hideInMenu'}),
           columnHidden: true,
           query: false,
           add: true,
@@ -83,20 +84,22 @@ class Privilege extends PureComponent {
         },
         {
           name: 'status',
-          title: 'Status',
+          title: formatMessage({'id':'app.privilege.sys_privilege.status'}),
           columnHidden: false,
           query: false,
           add: false,
           tag: 'commonSelect',
           enumData: statusList,
         },
-        { name: 'remark', title: 'remark',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
+        { name: 'remark', title: formatMessage({'id':'app.privilege.sys_privilege.remark'}),tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
       ],
       relations:[{
         name:'sysPrivilegeRoles',
         key: 'id',
-        title:'Role List for Access this One',
-        columnDetails:[{name: 'id',title:'Relation Id'},{name: 'roleId',title:'Role Id'},{name: 'roleName',title:'Role Name'}]
+        title:formatMessage({'id':'app.privilege.sys_privilege.sysPrivilegeRoles'}),
+        columnDetails:[{name: 'id',title:formatMessage({'id':'app.privilege.sys_privilege.id'})},
+          {name: 'roleId',title:formatMessage({'id':'app.privilege.sys_privilege.roleId'})},
+          {name: 'roleName',title:formatMessage({'id':'app.privilege.sys_privilege.roleName'})}]
       }],
     };
     this.setState({columnSchemas});

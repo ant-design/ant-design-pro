@@ -1,0 +1,17 @@
+export default {
+  'app.privilege.sys_privilege.privilegeId':'编号',
+  'app.privilege.sys_privilege.name':'名称',
+  'app.privilege.sys_privilege.path':'路径',
+  'app.privilege.sys_privilege.parentPrivilegeId':'父级',
+  'app.privilege.sys_privilege.type':'类型',
+  'app.privilege.sys_privilege.roleStr':'角色',
+  'app.privilege.sys_privilege.icon':'图标',
+  'app.privilege.sys_privilege.hideChildrenInMenu':'菜单中隐藏子项',
+  'app.privilege.sys_privilege.hideInMenu':'菜单中隐藏',
+  'app.privilege.sys_privilege.status':'状态',
+  'app.privilege.sys_privilege.remark':'备注',
+  'app.privilege.sys_privilege.sysPrivilegeRoles':'用于访问此角色的角色列表',
+  'app.privilege.sys_privilege.id':'关系编号',
+  'app.privilege.sys_privilege.roleId':'角色编号',
+  'app.privilege.sys_privilege.roleName':'角色名',
+};
