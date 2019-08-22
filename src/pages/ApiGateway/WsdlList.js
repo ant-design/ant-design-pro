@@ -599,16 +599,17 @@ class WsdlList extends PureComponent {
 
   renderMoreBtn = props => {
     const {current} = props;
-    const {status} = current;
+    const {apiServices} = current;
     return (
       <Dropdown
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
             <Menu.Item key="handleModify">Modify</Menu.Item>
             <Menu.Item key="handleParse">Validate</Menu.Item>
-            <Menu.Item key="handleApi">Generate Api</Menu.Item>
+            { !apiServices ? <Menu.Item key="handleApi">Generate Api</Menu.Item>: null}
             <Menu.Item key="handleList">Action List</Menu.Item>
             <Menu.Item key="handleDelete">Remove</Menu.Item>
+
           </Menu>
         }
       >
