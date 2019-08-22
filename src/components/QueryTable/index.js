@@ -140,6 +140,7 @@ const CreateForm = Form.create()(props => {
       {addForms.map(item => (
         <Form layout="vertical">
           <FormItem
+            style={{ margin: 0 }}
             key={`addFormItem-${item.name}`}
             label={item.title}
           >
