@@ -129,6 +129,7 @@ const CreateForm = Form.create()(props => {
     });
   // console.log('addForm:', addForms);
   const modalTitle = selectedRow ? 'update' : 'new';
+
   return (
     <Modal
       title={modalTitle}
@@ -137,18 +138,17 @@ const CreateForm = Form.create()(props => {
       onCancel={() => cancelHandle()}
     >
       {addForms.map(item => (
-        <FormItem
-          key={`addFormItem-${item.name}`}
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 12 }}
-          label={item.title}
-          style={{ height: `${item.rows ? 20 * item.rows : 20}px` }}
-        >
-          {form.getFieldDecorator(item.name, {
+        <Form layout="vertical">
+          <FormItem
+            key={`addFormItem-${item.name}`}
+            label={item.title}
+          >
+            {form.getFieldDecorator(item.name, {
             initialValue: selectedRow ? selectedRow[item.name] : item.defaultValue||'',
             rules: item.rules ? [] : [{ required: true, message: `please enter ${item.title}` }],
           })(renderAutoForm(item))}
-        </FormItem>
+          </FormItem>
+        </Form>
       ))}
     </Modal>
   );
