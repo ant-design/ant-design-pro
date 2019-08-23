@@ -102,6 +102,10 @@ class TableList extends PureComponent {
     const {state} = location;
     const {wsdlId} = state || {wsdlId:''};
     const {data:{list}}=apiGatewayModel;
+
+    const formValues = {wsdlId};
+    this.setState({formValues});
+
     if(!list||list.length===0||wsdlId) {
       const payload = {userId};
       payload.data = {};

@@ -122,6 +122,7 @@ class ApiTransfer extends PureComponent {
         visible={modalVisible}
         onOk={() => this.okHandle()}
         onCancel={() => this.cancelHandle()}
+        width={700}
       >
         <Transfer
           showSearch
@@ -135,7 +136,7 @@ class ApiTransfer extends PureComponent {
           onScroll={this.handleScroll}
           render={item => `${item.apiId}-${item.name}`}
           listStyle={{
-            width: 200,
+            width: 300,
             height: 300,
           }}
         />

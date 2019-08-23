@@ -40,6 +40,7 @@ const constants = {
     CLOSE: '0',
     OFFLINE: '1',
     ONLINE: '2',
+    REMOVE: '1X',
   },
   STATUS:{
     A: 'A',

@@ -97,11 +97,9 @@ export default {
   },
 
   reducers: {
-    saveStepFormData(state, { payload }) {
-      const apiService={...state.apiService, ...payload,};
+    saveStepFormData(state) {
       return {
         ...state,
-        apiService,
       };
     },
     updateData(state, { payload }) {

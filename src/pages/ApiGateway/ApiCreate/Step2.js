@@ -30,7 +30,7 @@ class Step2 extends React.PureComponent {
   setUrl = wsdlObj =>{
     console.log(wsdlObj);
     const { form } = this.props;
-    const {wsdlUrlPath}=wsdlObj;
+    const {wsdlUrlPath}=wsdlObj||{wsdlUrlPath:''};
     const requestUrl=wsdlUrlPath.replace(WS.PATH_PREFIX,"");
     console.log(requestUrl);
     const obj = {requestUrl};
@@ -126,7 +126,7 @@ class Step2 extends React.PureComponent {
             {getFieldDecorator('wsdlId', {
               initialValue: data.wsdlId,
               rules: [{ required: getFieldValue('serviceType') === '2', message: 'please choose' }],
-            })(<WsdlSelectView userId={userId} onSetUrl={this.setUrl} />)}
+            })(<WsdlSelectView userId={userId} onSetUrl={this.setUrl} status={1} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求PATH">
             {getFieldDecorator('requestUrl', {

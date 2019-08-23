@@ -17,19 +17,21 @@ import {
   message,
   Dropdown,
   Menu,
+  Drawer,
 } from 'antd';
 import reqwest from 'reqwest';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Ellipsis from '@/components/Ellipsis';
 import WsdlUpload from "./WsdlUpload";
 import WsdlApi from "./WsdlApi";
+import Detail from "./Wsdl/Detail";
 
 import styles from './ApiList.less';
 import {getItems,getItemValue2} from '@/utils/masterData';
 import {getUserId,getToken} from "../../utils/authority";
 import constants from '@/utils/constUtil';
 
-const { PREFIX_PATH,TOKEN_PREFIX,ACT,STATUS,WS } = constants;
+const { PREFIX_PATH,TOKEN_PREFIX,ACT,API_STATUS,WS } = constants;
 const { PATH_PREFIX } = WS;
 
 const FormItem = Form.Item;
@@ -38,7 +40,7 @@ const getValue = obj =>
   Object.keys(obj)
     .map(key => obj[key])
     .join(',');
-const statusList = getItems('common', 'status');
+const statusList = getItems('apiService', 'status');
 const statusFilter = statusList.map(item => ({
   value: item.itemCode,
   text: item.itemValue,
@@ -161,7 +163,9 @@ class WsdlList extends PureComponent {
     apiVisible:false,
     fileList: [],
     columnSchemas:{},
-    removeFiles:[]
+    removeFiles:[],
+    drawerVisible: false,
+    parseList:{}
   };
 
   componentWillMount() {
@@ -529,16 +533,25 @@ class WsdlList extends PureComponent {
       },
       processData: false,
       data: formData,
-      success: () => {
-        this.setState({
-          fileList: [],
-          removeFiles:[]
-        });
+      success: (resp) => {
 
-        this.handleModalVisible(null,false);
-        this.handleRefreshData();
+        const {code} = resp;
+        let { msg } = resp;
+        if (code === '200') {
+          if (!msg || msg === '') {
+            msg = 'Success.';
+          }
+          this.setState({
+            fileList: [],
+            removeFiles:[]
+          });
 
-        message.success('upload successfully.');
+          this.handleModalVisible(null,false);
+          this.handleRefreshData();
+        } else {
+          message.error(`error:${msg}`);
+        }
+
       },
       error: () => {
         message.error('upload failed.');
@@ -563,8 +576,7 @@ class WsdlList extends PureComponent {
     });
   };
 
-
-  handleParse = ( record ) =>{
+  handleParse = ( record,act ) =>{
 
     const { dispatch } = this.props;
     const {wsdlId} = record;
@@ -573,10 +585,38 @@ class WsdlList extends PureComponent {
       type: 'wsdlModel/parseWsdl',
       payload,
       callback: resp => {
-        this.respDeal(resp);
+
+        const {code,data} = resp;
+        const { msg } = resp;
+        if (code === '200') {
+          // 设置action数据
+          this.setState({parseList:data});
+          if( act > 0){
+            this.handleDrawerVisible(record,true);
+          }
+        }else {
+          message.error(`error:${msg}`);
+        }
       },
     });
 
+  }
+
+  handleDrawerVisible = (row, flag) => {
+    this.setState({
+      selectedRow: row,
+      drawerVisible: !!flag,
+    });
+  };
+
+  onDetail = () => {
+    const {selectedRow} = this.state;
+    // 重新设置详情
+    this.handleParse(selectedRow,0);
+  }
+
+  onDrawerClose = () => {
+    this.handleDrawerVisible(null, false);
   }
 
   respDeal = resp => {
@@ -599,17 +639,17 @@ class WsdlList extends PureComponent {
 
   renderMoreBtn = props => {
     const {current} = props;
-    const {apiServices} = current;
+    const {apiServices,status} = current;
     return (
       <Dropdown
         overlay={
           <Menu onClick={({key}) => this.moreHandle(key, current)}>
+
             <Menu.Item key="handleModify">Modify</Menu.Item>
             <Menu.Item key="handleParse">Validate</Menu.Item>
             { !apiServices ? <Menu.Item key="handleApi">Generate Api</Menu.Item>: null}
             <Menu.Item key="handleList">Action List</Menu.Item>
-            <Menu.Item key="handleDelete">Remove</Menu.Item>
-
+            {status === API_STATUS.OFFLINE ?  <Menu.Item key="handleDelete">Remove</Menu.Item>:null}
           </Menu>
         }
       >
@@ -629,7 +669,7 @@ class WsdlList extends PureComponent {
       this.handleStatusClick(ACT.ONLINE, record);
     } else if (key === 'handleParse'){
       // 先解析
-      this.handleParse(record);
+      this.handleParse(record,1);
     } else if (key === 'handleApi'){
       // 批量设置Api
       this.handleApi(record);
@@ -683,7 +723,18 @@ class WsdlList extends PureComponent {
     const {
       loading
     } = this.props;
-    const { pagination, selectedRow,selectedRowKeys,list,modalVisible,apiVisible,columnSchemas,selectedRows} = this.state;
+    const {
+      pagination,
+      selectedRow,
+      selectedRowKeys,
+      list,
+      modalVisible,
+      apiVisible,
+      columnSchemas,
+      selectedRows,
+      drawerVisible,
+      parseList
+    } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
@@ -751,17 +802,17 @@ class WsdlList extends PureComponent {
         title: 'Action',
         key: 'action',
         fixed: 'right',
+        align:'center',
         width: 150,
         render: (text, record) => (
           <span>
-            <span style={{display:record.status === 'A'?'':'none'}}>
+            <span style={{display:record.status === API_STATUS.ONLINE ?'':'none'}}>
               <a onClick={()=>this.handleAccess(record, true)}>Access</a>
             </span>
-            <span style={{display:record.status === 'D'?'':'none'}}>
-              <Divider type="vertical" />
-              <a onClick={()=> this.handleStatusClick(ACT.ONLINE, record)}>Activate</a>
+            <span style={{display:record.status === API_STATUS.OFFLINE?'':'none',width:100}}>
+              <a onClick={()=> this.handleStatusClick(ACT.ONLINE, record)}>Online</a>
             </span>
-            <span style={{display:record.status === 'A'?'':'none'}}>
+            <span style={{display:record.status !== API_STATUS.REMOVE ?'':'none'}}>
               <Divider type="vertical" />
               {this.renderMoreBtn({current:record})}
             </span>
@@ -810,6 +861,17 @@ class WsdlList extends PureComponent {
               onVisible={this.handleApiVisible}
               onRefreshData={this.handleRefreshData}
             />
+
+            <Drawer
+              width={850}
+              placement="right"
+              closable
+              onClose={this.onDrawerClose}
+              visible={drawerVisible}
+            >
+              <Detail selectedRow={selectedRow} parseList={parseList} onDetail={this.onDetail} />
+            </Drawer>
+
           </div>
         </Card>
       </PageHeaderWrapper>

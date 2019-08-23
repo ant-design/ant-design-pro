@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Select } from 'antd';
 import { connect } from 'dva';
+import constants from '@/utils/constUtil';
+
+const { API_STATUS } = constants;
 
 const { Option } = Select;
 @connect(({ wsdlModel, loading }) => ({
@@ -17,12 +20,12 @@ class WsdlSelectView extends PureComponent {
     });
   };
 
-  getOption(sign) {
+  getOption(sign,status) {
     const { wsdlList } = this.props;
-    return this.getOptionWhithList(wsdlList,sign);
+    return this.getOptionWhithList(wsdlList,sign,status);
   }
 
-  getOptionWhithList = (list,sign) => {
+  getOptionWhithList = (list,sign,status) => {
 
     let newList = list;
 
@@ -41,6 +44,10 @@ class WsdlSelectView extends PureComponent {
           没有找到选项
         </Option>
       );
+    }
+
+    if( status > 0 ){
+      newList = newList.filter(item=>item.status === API_STATUS.ONLINE);
     }
 
     return newList.map(item => (
@@ -63,11 +70,11 @@ class WsdlSelectView extends PureComponent {
 
   render() {
     // const value = this.conversionObject();
-    const { value,sign,isDisable } = this.props;
+    const { value,sign,isDisable,status } = this.props;
     const disable = isDisable?'disabled':'';
     return (
       <Select style={{ width: '100%' }} value={value} onSelect={this.selectChangeItem} disabled={disable}>
-        {this.getOption(sign)}
+        {this.getOption(sign,status)}
       </Select>
     );
   }

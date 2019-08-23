@@ -1,4 +1,4 @@
-import { apiList,apiListBySearch, apiStatusBatch } from '@/services/apiGatewayService';
+import { apiList,apiListBySearch, apiStatusBatch, removeApis } from '@/services/apiGatewayService';
 import { conversion } from '../../util';
 
 export default {
@@ -41,6 +41,12 @@ export default {
       console.log('response------------', response);
       if (callback) callback(response);
     },
+    *removeApis({ payload, callback }, { call }) {
+      console.log('payload-----------', payload);
+      const response = yield call(removeApis, payload);
+      console.log('response------------', response);
+      if (callback) callback(response);
+    }
   },
 
   reducers: {

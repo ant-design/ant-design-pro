@@ -79,3 +79,10 @@ export async function saveApi(params) {
 export async function getMasterData(params) {
   return request(`${PREFIX_PATH}enum/${params.key}`);
 }
+
+export async function removeApis(params){
+  return request(`${PREFIX_PATH}/baseInfo/apiService/removeApis`, {
+    method: 'POST',
+    data: params,
+  });
+}

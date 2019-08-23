@@ -10,7 +10,7 @@ import OrgSelectView from '../OrgSelectView';
 import Ellipsis from '@/components/Ellipsis';
 
 
-const {CALL_POINT} = constants;
+const {CALL_POINT,WS} = constants;
 
 class ApiWsdlTableForm extends PureComponent {
   index = 0;
@@ -140,7 +140,7 @@ class ApiWsdlTableForm extends PureComponent {
       }
       const target = this.getRowByKey(key) || {};
 
-      if (!target.socketTimeout || !target.connectTimeout || !target.url || !target.reqPath ) {
+      if (!target.socketTimeout || !target.connectTimeout || !target.url ) {
         message.error('Please fill in the full description.');
         e.target.focus();
         this.setState({
@@ -191,7 +191,6 @@ class ApiWsdlTableForm extends PureComponent {
 
   render() {
 
-    // const ,,,,orgId,,,,serviceType
     const userId = getUserId();
 
     const actionNameCol = {
@@ -284,7 +283,7 @@ class ApiWsdlTableForm extends PureComponent {
       key: 'reqPath',
       width: '10%',
       render: (text, record) => {
-        if (record.editable) {
+        if (record.editable && record.serviceType !== WS.SERVICE_TYPE) {
           return (
             <Input
               value={text}

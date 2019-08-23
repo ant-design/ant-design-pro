@@ -7,7 +7,9 @@ import SelectView from '../SelectView';
 import RadioView from '../RadioView';
 import OrgSelectView from '../OrgSelectView';
 import {getUserId} from '@/utils/authority';
+import constants from '@/utils/constUtil';
 
+const {WS} = constants;
 const userId = getUserId(); // 获取当前登录用户编号
 
 const formItemLayout = {
@@ -26,59 +28,81 @@ const formItemLayout = {
 @Form.create()
 class Step2 extends React.PureComponent {
 
-  getActionList = () => {
+  // getActionList = () => {
+  //
+  //   const {form, apiCreateWsdlModel} = this.props;
+  //   const {apiService, actionNames} = apiCreateWsdlModel;
+  //   const {getFieldDecorator,} = form;
+  //
+  //
+  //   return actionNames.map((item, index) => (
+  //     <div>
+  //       <Divider style={{margin: '24px 0'}} />
+  //       <Form.Item {...formItemLayout} label="Action Name">
+  //         {getFieldDecorator(`actionName${index}`, {
+  //           initialValue: item,
+  //           rules: [{required: true, message: 'please enter'}],
+  //         })(<Input placeholder="please enter Action Name" />)}
+  //       </Form.Item>
+  //       <Form.Item {...formItemLayout} label="Action Name">
+  //         {getFieldDecorator('serviceType', {
+  //           initialValue: apiService.serviceType,
+  //           rules: [{required: true, message: 'please choose服务类型'}],
+  //         })(<RadioView javaCode="apiService" javaKey="service_type" />)}
+  //       </Form.Item>
+  //       <Form.Item {...formItemLayout} label="服务连接超时（ms）">
+  //         {getFieldDecorator('connectTimeout', {
+  //           initialValue: apiService.connectTimeout,
+  //           rules: [
+  //             {required: true, message: '服务连接超时（ms）'},
+  //             {
+  //               pattern: /^[0-9]*[1-9][0-9]*$/,
+  //               message: 'Malformed number',
+  //             },
+  //           ],
+  //         })(<Input placeholder="please enter服务连接超时（ms）" />)}
+  //       </Form.Item>
+  //       <Form.Item {...formItemLayout} label="服务请求超时（ms）">
+  //         {getFieldDecorator('socketTimeout', {
+  //           initialValue: apiService.socketTimeout,
+  //           rules: [{required: true, message: '服务请求超时（ms）'}],
+  //         })(<Input placeholder="please enter服务请求超时（ms）" />)}
+  //       </Form.Item>
+  //     </div>
+  //   ));
+  //
+  // }
 
-    const {form, apiCreateWsdlModel} = this.props;
-    const {apiService, actionNames} = apiCreateWsdlModel;
-    const {getFieldDecorator,} = form;
 
-
-    return actionNames.map((item, index) => (
-      <div>
-        <Divider style={{margin: '24px 0'}} />
-        <Form.Item {...formItemLayout} label="Action Name">
-          {getFieldDecorator(`actionName${index}`, {
-            initialValue: item,
-            rules: [{required: true, message: 'please enter'}],
-          })(<Input placeholder="please enter Action Name" />)}
-        </Form.Item>
-        <Form.Item {...formItemLayout} label="Action Name">
-          {getFieldDecorator('serviceType', {
-            initialValue: apiService.serviceType,
-            rules: [{required: true, message: 'please choose服务类型'}],
-          })(<RadioView javaCode="apiService" javaKey="service_type" />)}
-        </Form.Item>
-        <Form.Item {...formItemLayout} label="服务连接超时（ms）">
-          {getFieldDecorator('connectTimeout', {
-            initialValue: apiService.connectTimeout,
-            rules: [
-              {required: true, message: '服务连接超时（ms）'},
-              {
-                pattern: /^[0-9]*[1-9][0-9]*$/,
-                message: 'Malformed number',
-              },
-            ],
-          })(<Input placeholder="please enter服务连接超时（ms）" />)}
-        </Form.Item>
-        <Form.Item {...formItemLayout} label="服务请求超时（ms）">
-          {getFieldDecorator('socketTimeout', {
-            initialValue: apiService.socketTimeout,
-            rules: [{required: true, message: '服务请求超时（ms）'}],
-          })(<Input placeholder="please enter服务请求超时（ms）" />)}
-        </Form.Item>
-      </div>
-    ));
-
-  }
+  handleChange = e => {
+    const { dispatch,apiCreateWsdlModel } = this.props;
+    const {value}=e.target;
+    console.log("value:",value);
+    const payload= {
+      serviceType:value
+    };
+    const {apiService} = apiCreateWsdlModel;
+    let data =
+      apiService.apiServiceBackends && apiService.apiServiceBackends.length > 0
+        ? apiService.apiServiceBackends[0]
+        : {};
+    data = {...data,...payload};
+    apiService.apiServiceBackends[0] = data;
+    dispatch({
+      type: 'apiCreateWsdlModel/saveStepFormData',
+      stepType:1,
+    });
+  };
 
   render() {
     const {form, dispatch, apiCreateWsdlModel} = this.props;
-    const {apiService,record,actionNames} = apiCreateWsdlModel;
+    const {apiService,actionNames} = apiCreateWsdlModel;
     const {validateFields, getFieldDecorator} = form;
     const data =
       apiService.apiServiceBackends && apiService.apiServiceBackends.length > 0
         ? apiService.apiServiceBackends[0]
         : {};
+    console.log("apiServiceBackends",data);
     const onPrev = () => {
       router.push('/apiGateway/wsdl/info');
     };
@@ -92,21 +116,19 @@ class Step2 extends React.PureComponent {
           ...values,
           key:item
         }));
-        console.log("step2",apiServiceBackends);
         apiService.apiServiceBackends = apiServiceBackends;
 
         if (!err) {
-          console.log("values:", values);
           dispatch({
             type: 'apiCreateWsdlModel/saveStepFormData',
-            payload: {...values},
             stepType: 1,
           });
           router.push('/apiGateway/wsdl/producer');
         }
       });
     };
-
+    const display = data.serviceType===WS.SERVICE_TYPE?{display:'none'}:null;
+    console.log('display', data.serviceType);
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
@@ -123,7 +145,7 @@ class Step2 extends React.PureComponent {
             {getFieldDecorator('serviceType', {
               initialValue: data.serviceType,
               rules: [{ required: true, message: 'please choose提供方服务类型' }],
-            })(<RadioView javaCode="apiServiceBackend" javaKey="service_type" />)}
+            })(<RadioView javaCode="apiService" javaKey="service_type" onChange={this.handleChange} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="服务地址">
             {getFieldDecorator('url', {
@@ -131,9 +153,9 @@ class Step2 extends React.PureComponent {
               rules: [{ required: true, message: 'please enter提供方地址' }],
             })(<Input placeholder="http://ip:port" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="服务路径">
+          <Form.Item {...formItemLayout} label="服务路径" style={display}>
             {getFieldDecorator('reqPath', {
-              initialValue: record.wsdlUrlPath,
+              initialValue: data.reqPath,
               rules: [],
             })(<Input placeholder="Only For Rest:/xxx/xxx" />)}
           </Form.Item>

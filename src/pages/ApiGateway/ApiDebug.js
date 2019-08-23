@@ -721,7 +721,7 @@ class ApiDebug extends PureComponent {
               <TabPane tab="Request Body" key="2">
                 <Form.Item>
                   {getFieldDecorator(`${requestBodyFlag}Sample`, {
-                    initialValue: (requestBodySample),
+                    initialValue: requestBodySample,
                     rules: [{required: false, message: '不能超过5000字符！', max: 5000}],
                   })(<TextArea placeholder={sampleText} autosize={{minRows: 4, maxRows: 15}} />)}
                 </Form.Item>

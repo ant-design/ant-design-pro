@@ -2,7 +2,7 @@ import { queryWsdlList,saveWsdl,saveAuth,saveBatchApi,authDetail,parseWsdl,fileW
 import constants from '@/utils/constUtil';
 import { conversionWsdl } from '../../util';
 
-const { STATUS } = constants;
+const { API_STATUS } = constants;
 
 export default {
   namespace: 'wsdlModel',
@@ -95,7 +95,7 @@ export default {
     saveForSelectView(state, action) {
       const data = action.payload ? action.payload.data : {};
       const records=data.records||[];
-      const wsdlList = records.filter(item => item.status === STATUS.A);
+      const wsdlList = records.filter(item => item.status !== API_STATUS.REMOVE);
       return {
         ...state,
         wsdlList,
