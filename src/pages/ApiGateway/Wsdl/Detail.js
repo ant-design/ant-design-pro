@@ -84,15 +84,15 @@ class Detail extends PureComponent {
       actionNames: []
     };
     const addActions = addActionNames.map((item) => ({
-      'apiName': item
+      'actionName': item
     }));
     const actions = actionNames.map((item) => ({
-      'apiName': item
+      'actionName': item
     }));
     const addColumns = [
       {
-        title: 'Api Name',
-        dataIndex: 'apiName',
+        title: 'Action Name',
+        dataIndex: 'actionName',
         width: 600,
       },
     ];
@@ -103,7 +103,7 @@ class Detail extends PureComponent {
         width: 300,
       },
       {
-        title: 'Api Name',
+        title: 'Action Name',
         dataIndex: 'name',
         width: 300,
       },

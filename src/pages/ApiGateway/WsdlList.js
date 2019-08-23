@@ -649,6 +649,7 @@ class WsdlList extends PureComponent {
             <Menu.Item key="handleParse">Validate</Menu.Item>
             { !apiServices ? <Menu.Item key="handleApi">Generate Api</Menu.Item>: null}
             <Menu.Item key="handleList">Action List</Menu.Item>
+            {status === API_STATUS.ONLINE ? <Menu.Item key="handleOffline">Offline</Menu.Item>:null}
             {status === API_STATUS.OFFLINE ?  <Menu.Item key="handleDelete">Remove</Menu.Item>:null}
           </Menu>
         }
@@ -665,8 +666,8 @@ class WsdlList extends PureComponent {
       this.handleModalVisible(record, true);
     } else if (key === 'handleDelete') {
       this.handleStatusClick(ACT.DEL, record);
-    } else if (key === 'handleActivate') {
-      this.handleStatusClick(ACT.ONLINE, record);
+    } else if (key === 'handleOffline') {
+      this.handleStatusClick(ACT.OFFLINE, record);
     } else if (key === 'handleParse'){
       // 先解析
       this.handleParse(record,1);
