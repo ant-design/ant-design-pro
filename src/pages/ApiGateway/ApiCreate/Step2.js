@@ -1,15 +1,16 @@
-import React, { Fragment } from 'react';
-import { connect } from 'dva';
-import { Form, Input, Button, Divider } from 'antd';
+import React, {Fragment} from 'react';
+import {connect} from 'dva';
+import {Form, Input, Button, Divider,} from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
 import SelectView from '../SelectView';
 import RadioView from '../RadioView';
 import WsdlSelectView from "../WsdlSelectView";
-import { getUserId } from '@/utils/authority';
+import {getUserId} from '@/utils/authority';
 import constants from '@/utils/constUtil';
+import ActionNameSelectView from "../ActionNameSelectView";
 
-const {WS,REST,HTTP} = constants;
+const {WS, REST, HTTP} = constants;
 const userId = getUserId(); // 获取当前登录用户编号
 
 const formItemLayout = {
@@ -21,17 +22,21 @@ const formItemLayout = {
   },
 };
 
-@connect(({ apiCreateModel }) => ({
+@connect(({apiCreateModel}) => ({
   data: apiCreateModel.apiService,
 }))
 @Form.create()
 class Step2 extends React.PureComponent {
 
-  setUrl = wsdlObj =>{
+  state = {
+    wsdlId:null
+  }
+
+  setUrl = wsdlObj => {
     console.log(wsdlObj);
-    const { form } = this.props;
-    const {wsdlUrlPath}=wsdlObj||{wsdlUrlPath:''};
-    const requestUrl=wsdlUrlPath.replace(WS.PATH_PREFIX,"");
+    const {form} = this.props;
+    const {wsdlUrlPath} = wsdlObj || {wsdlUrlPath: ''};
+    const requestUrl = wsdlUrlPath.replace(WS.PATH_PREFIX, "");
     console.log(requestUrl);
     const obj = {requestUrl};
     form.setFieldsValue(obj);
@@ -44,112 +49,119 @@ class Step2 extends React.PureComponent {
   }
 
   handleChange = e => {
-    const { dispatch } = this.props;
-    const {value}=e.target;
-    console.log("value:",value);
-    const payload= {
-      serviceType:value
+    const {dispatch} = this.props;
+    const {value} = e.target;
+    console.log("value:", value);
+    const payload = {
+      serviceType: value
     };
-    if(value==='2'){
+    if (value === '2') {
       dispatch({
         type: 'apiCreateModel/saveStepFormData',
         payload: {
           ...payload,
-          reqMethod:'post',
-          pathPrefix:WS.PATH_PREFIX,
+          reqMethod: 'post',
+          pathPrefix: WS.PATH_PREFIX,
         },
-        stepType:1,
+        stepType: 1,
       });
     }
-    else if(value==='1'){
+    else if (value === '1') {
       dispatch({
         type: 'apiCreateModel/saveStepFormData',
         payload: {
           ...payload,
-          pathPrefix:REST.PATH_PREFIX,
+          pathPrefix: REST.PATH_PREFIX,
         },
-        stepType:1,
+        stepType: 1,
       });
     }
-    else if(value==='3'){
+    else if (value === '3') {
       dispatch({
         type: 'apiCreateModel/saveStepFormData',
         payload: {
           ...payload,
-          pathPrefix:HTTP.PATH_PREFIX,
+          pathPrefix: HTTP.PATH_PREFIX,
         },
-        stepType:1,
+        stepType: 1,
       });
     }
   };
 
+  handleWsdl = item => {
+    const {form} = this.props;
+    const actionName = null;
+    form.setFieldsValue({actionName});
+    this.setState({wsdlId:item});
+  };
+
   render() {
-    const { form, dispatch, data } = this.props;
-    const { getFieldDecorator, validateFields,getFieldValue } = form;
+    const {form, dispatch, data,} = this.props;
+    const {getFieldDecorator, validateFields, getFieldValue} = form;
     const onPrev = () => {
       router.push('/apiGateway/apiCreate/info');
     };
     const onValidateForm = () => {
       validateFields((err, values) => {
         if (!err) {
-          console.log("values:",values);
+          console.log("values:", values);
           dispatch({
             type: 'apiCreateModel/saveStepFormData',
             payload: {...values},
-            stepType:1,
+            stepType: 1,
           });
           router.push('/apiGateway/apiCreate/producer');
         }
       });
     };
-    const display=data.serviceType!==WS.SERVICE_TYPE?{display:'none'}:null;
-    const displayForRest=data.serviceType===WS.SERVICE_TYPE?{display:'none'}:null;
-    const rulesForWs=data.serviceType===WS.SERVICE_TYPE?[{ required: true, message: 'please enter' }]:[];
+    const display = data.serviceType !== WS.SERVICE_TYPE ? {display: 'none'} : null;
+    const displayForRest = data.serviceType === WS.SERVICE_TYPE ? {display: 'none'} : null;
+    const rulesForWs = data.serviceType === WS.SERVICE_TYPE ? [{required: true, message: 'please operate'}] : [];
+    const {wsdlId} = this.state;
 
-    console.log(display,data.serviceType,data);
+    console.log(display, data.serviceType, data);
     return (
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
           <Form.Item {...formItemLayout} className={styles.stepFormText} label="Api名称：">
             {data.name}
           </Form.Item>
-          <Divider style={{ margin: '24px 0' }} />
+          <Divider style={{margin: '24px 0'}} />
           <span>
             <Form.Item {...formItemLayout} label="服务类型">
               {getFieldDecorator('serviceType', {
                 initialValue: data.serviceType,
-                rules: [{ required: true, message: 'please choose服务类型' }],
+                rules: [{required: true, message: 'please choose服务类型'}],
               })(<RadioView javaCode="apiService" javaKey="service_type" onChange={this.handleChange} />)}
             </Form.Item>
           </span>
           <Form.Item {...formItemLayout} label="WSDL" style={display}>
             {getFieldDecorator('wsdlId', {
               initialValue: data.wsdlId,
-              rules: [{ required: getFieldValue('serviceType') === '2', message: 'please choose' }],
-            })(<WsdlSelectView userId={userId} onSetUrl={this.setUrl} status={1} />)}
+              rules: [{required: getFieldValue('serviceType') === '2', message: 'please choose'}],
+            })(<WsdlSelectView userId={userId} onSetUrl={this.setUrl} status={1} onChange={this.handleWsdl} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求PATH">
             {getFieldDecorator('requestUrl', {
               initialValue: data.requestUrl,
-              rules: [{ required: true, message: 'please enter请求PATH' }],
+              rules: [{required: true, message: 'please enter请求PATH'}],
             })(<Input addonBefore={data.pathPrefix} placeholder="please enter请求PATH" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="请求类型" style={displayForRest}>
             {getFieldDecorator('reqMethod', {
               initialValue: data.reqMethod,
-              rules: [{ required: true, message: 'please chooseHTTP Method' }],
+              rules: [{required: true, message: 'please chooseHTTP Method'}],
             })(<SelectView javaCode="common" javaKey="req_method" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Action Name" style={display}>
             {getFieldDecorator('actionName', {
-              initialValue: data.actionName,
               rules: rulesForWs,
-            })(<Input placeholder="please chooseAction Name" />)}
+            })(<ActionNameSelectView wsdlId={wsdlId} />)}
           </Form.Item>
           <Form.Item
-            style={{ marginBottom: 8 }}
+            style={{marginBottom: 8}}
             wrapperCol={{
-              xs: { span: 24, offset: 0 },
+              xs: {span: 24, offset: 0},
               sm: {
                 span: formItemLayout.wrapperCol.span,
                 offset: formItemLayout.labelCol.span,
@@ -160,12 +172,12 @@ class Step2 extends React.PureComponent {
             <Button type="primary" onClick={onValidateForm}>
               下一步
             </Button>
-            <Button onClick={onPrev} style={{ marginLeft: 8 }} htmlType="button">
+            <Button onClick={onPrev} style={{marginLeft: 8}} htmlType="button">
               上一步
             </Button>
           </Form.Item>
         </Form>
-        <Divider style={{ margin: '40px 0 24px' }} />
+        <Divider style={{margin: '40px 0 24px'}} />
         <div className={styles.desc}>
           <h3>说明</h3>
           <h4>路径</h4>

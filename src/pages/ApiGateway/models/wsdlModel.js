@@ -15,6 +15,7 @@ export default {
     wsdlList:[],
     wsdl:{},
     fileList:[],
+    parse :{}
   },
 
   effects: {
@@ -62,6 +63,10 @@ export default {
     *parseWsdl({ payload , callback}, { call, put }) {
       // console.log('payload', JSON.stringify(payload));
       const response = yield call(parseWsdl, payload);
+      yield put({
+        type: 'saveForParse',
+        payload: response,
+      });
       if (callback) callback(response);
     },
     *fileWsdl({ payload , callback}, { call, put }) {
@@ -113,6 +118,13 @@ export default {
       return {
         ...state,
         wsdl
+      };
+    },
+    saveForParse(state, action) {
+      const parse = action.payload ? action.payload.data :{};
+      return {
+        ...state,
+        parse
       };
     },
   },
