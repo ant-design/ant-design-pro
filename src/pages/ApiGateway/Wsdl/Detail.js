@@ -78,16 +78,16 @@ class Detail extends PureComponent {
     const {modalVisible} = this.state;
     const {selectedRow, parseList} = this.props;
     const {wsdlName} = selectedRow || {wsdlName: ''};
-    const {addActionNames, delActionNames, actionNames} = parseList || {
+    const {addActionNames, delActions, apiActions} = parseList || {
       addActionNames: [],
-      delActionNames: [],
-      actionNames: []
+      delActions: [],
+      apiActions: []
     };
     const addActions = addActionNames.map((item) => ({
       'actionName': item
     }));
-    const actions = actionNames.map((item) => ({
-      'actionName': item
+    const actions = delActions.map((item) => ({
+      'actionName': item.name
     }));
     const addColumns = [
       {
@@ -131,7 +131,7 @@ class Detail extends PureComponent {
             <Table
               size="small"
               columns={delColumns}
-              dataSource={delActionNames}
+              dataSource={apiActions}
               pagination={false}
               scroll={{y: 240}}
             />
