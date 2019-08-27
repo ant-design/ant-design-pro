@@ -24,7 +24,7 @@
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
-    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "check-prettier lint",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "prettier": "prettier -c --write \"**/*\"",
@@ -138,8 +138,7 @@
     ],
     "ignoreDependencies": [
       "netlify*",
-      "serverless",
-      "^express$"
+      "serverless"
     ],
     "ignore": [
       ".dockerignore",
@@ -158,4 +157,3 @@
     ]
   }
 }
-
