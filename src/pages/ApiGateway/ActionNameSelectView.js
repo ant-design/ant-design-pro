@@ -21,9 +21,10 @@ class ActionNameSelectView extends PureComponent {
   componentWillReceiveProps = (nextProps) => {
     const { wsdlId,dispatch } = this.props;
     if(wsdlId !== nextProps.wsdlId){
+      const nextWsdlId = nextProps.wsdlId;
       dispatch({
         type: 'wsdlModel/parseWsdl',
-        payload: { wsdlId },
+        payload: { wsdlId:nextWsdlId },
       });
     }
   };
