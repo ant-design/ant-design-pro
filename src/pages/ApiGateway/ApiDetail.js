@@ -284,13 +284,14 @@ class ApiDetail extends PureComponent {
     // console.log("location state:",state);
     const {apiId} = state || {apiId: 105};
     // 分组列表
-    dispatch({
-      type: 'groupModel/allGroupList',
-    });
     const {userId} = getUserId();
     dispatch({
       type: 'orgModel/allOrgList',
       payload: {orgType: '0,1', userId},
+    });
+    dispatch({
+      type: 'groupModel/allGroupList',
+      payload: {userId},
     });
     // 请求获取apiInfo详情
     this.getApi(apiId);

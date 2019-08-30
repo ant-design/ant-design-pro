@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { TreeSelect } from 'antd';
 import { connect } from 'dva';
 import {flatToGroupTreeSelect,} from "../UserManager/userUtil"
+import {getUserId} from "../../utils/authority";
 
 @connect(({ groupModel, loading }) => ({
   groupModel,
@@ -14,12 +15,11 @@ class GroupTreeSelectView extends PureComponent {
     console.log("-----will mount")
     const {dispatch} = this.props;
     // 分组列表
+    const userId = getUserId();
+    const payload = {userId};
     dispatch({
       type: 'groupModel/allGroupList',
-      // callback: (groupList) => {
-      //   const columns = this.getColumns(groupList);
-      //   this.setState({columns});
-      // },
+      payload
     });
   }
 

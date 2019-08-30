@@ -10,8 +10,8 @@ export default {
   },
 
   effects: {
-    * allGroupList({callback}, {call, put}) {
-      const response = yield call(allGroupList);
+    * allGroupList({payload,callback}, {call, put}) {
+      const response = yield call(allGroupList,payload);
       if (callback) {
         const data = response && response.data ? response.data : [];
         const groupList = data.filter(item => item.status === STATUS.A);

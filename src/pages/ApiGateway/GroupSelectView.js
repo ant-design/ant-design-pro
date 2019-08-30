@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Select } from 'antd';
 import { connect } from 'dva';
+import {getUserId} from "../../utils/authority";
 
 const { Option } = Select;
 @connect(({ groupModel, loading }) => ({
@@ -10,8 +11,11 @@ const { Option } = Select;
 class GroupSelectView extends PureComponent {
   componentDidMount = () => {
     const { dispatch } = this.props;
+    const userId = getUserId();
+    const payload = {userId};
     dispatch({
       type: 'groupModel/allGroupList',
+      payload
     });
   };
 

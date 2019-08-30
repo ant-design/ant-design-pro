@@ -84,12 +84,11 @@ class TableList extends PureComponent {
     console.log("-----will mount")
     const {dispatch} = this.props;
     // 分组列表
+    const userId = getUserId();
+    const payload = {userId};
     dispatch({
       type: 'groupModel/allGroupList',
-      // callback: (groupList) => {
-      //   const columns = this.getColumns(groupList);
-      //   this.setState({columns});
-      // },
+      payload
     });
   }
 

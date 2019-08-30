@@ -16,6 +16,8 @@ class Group extends PureComponent {
 
     const statusList = getItems('common', 'status'); // 状态主数据
     const userId = getUserId();
+    const orgType = "0,1";
+    const tagAttr ={ userId,orgType };
     const columnSchemas = {
       tableName: 'api_group',
       key: 'groupId',
@@ -37,6 +39,8 @@ class Group extends PureComponent {
           enumData: statusList,
         }, // 需要作为查询条件，新增时需要采集，需要使用绑定的下拉标签
         { name: 'groupDesc', title: 'Group Desc',tag:'textArea',columnHidden: true, add: true,rows:3,rules:[] },
+        { name: 'org', title: 'Org Name',tag:'OrgSelectView',columnHidden: true, add: true,rows:3,rules:[],tagAttr },
+        { name: 'orgName', title: 'Org Name' },
       ]
     };
     this.setState({columnSchemas});
