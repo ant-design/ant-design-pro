@@ -319,7 +319,7 @@ class ApiUpdate extends PureComponent {
                 <Form.Item label={fieldLabels.front.groupId}>
                   {getFieldDecorator('front.groupId', {
                     rules: [{ required: true, message: 'please choose分组' }],
-                  })(<GroupTreeSelectView hideRoot treeDefaultExpandAll />)}
+                  })(<GroupTreeSelectView hideRoot treeDefaultExpandAll isDisabled={1} />)}
                 </Form.Item>
               </Col>
               <Col

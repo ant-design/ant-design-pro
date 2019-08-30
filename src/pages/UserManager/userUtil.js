@@ -118,18 +118,20 @@ export function flatToPrivilegeTreeSelect(list, data, fatherId) {
   });
 }
 
-export function flatToGroupTreeSelect(list, data, fatherId) {
+export function flatToGroupTreeSelect(list, data, fatherId, isDisabled) {
   // console.log(list);
   list.forEach(item => {
     // if(fatherId===1)
     //   console.log("fatherid=1,",fatherId,item.parentGroupId,item.groupName);
     if (item.parentGroupId === fatherId) {
       const child = {treeNodeFilterProp:'title',title:`${item.groupId}-${item.groupName}`,value:item.groupId,key:item.groupId, children: []};
-      flatToGroupTreeSelect(list, child.children, item.groupId);
+      flatToGroupTreeSelect(list, child.children, item.groupId, isDisabled);
       if(child.children.length===0){
         delete child.children;
       }
-      child.disabled=child.children&&child.children.length>0;
+      if(isDisabled === 1){
+        child.disabled=child.children&&child.children.length>0;
+      }
       data.push(child);
     }
   });

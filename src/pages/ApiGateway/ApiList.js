@@ -619,7 +619,7 @@ class TableList extends PureComponent {
           <Col md={8} sm={24}>
             <FormItem label="Group">
               {getFieldDecorator('groupIds')(
-                <GroupMutiTreeSelectView style={{ width: '100%' }} />
+                <GroupMutiTreeSelectView style={{ width: '100%' }} isDisabled={1} />
               )}
             </FormItem>
           </Col>

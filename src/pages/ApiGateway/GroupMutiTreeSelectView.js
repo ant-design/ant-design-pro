@@ -38,10 +38,10 @@ class GroupTreeSelectView extends PureComponent {
     // const value = this.conversionObject();
 
     const { value } = this.state;
-    const { style,groupList } = this.props;
+    const { style,groupList,isDisabled } = this.props;
     const treeSelectData=[];
     if(groupList){
-      flatToGroupTreeSelect(groupList,treeSelectData,0);
+      flatToGroupTreeSelect(groupList,treeSelectData,0,isDisabled);
     }
     // console.log("data:",groupList);
     // console.log("treeSelectData:",treeSelectData);

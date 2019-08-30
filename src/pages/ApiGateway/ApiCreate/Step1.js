@@ -57,7 +57,7 @@ class Step1 extends React.PureComponent {
             {getFieldDecorator('groupId', {
               initialValue: apiService.groupId,
               rules: [{ required: true, message: 'please choose分组' }],
-            })(<GroupTreeSelectView hideRoot />)}
+            })(<GroupTreeSelectView hideRoot isDisabled={1} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Api名称">
             {getFieldDecorator('name', {

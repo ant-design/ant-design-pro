@@ -4,6 +4,7 @@ import BindDataQueryTable from '../BindDataQueryTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { getItems } from '@/utils/masterData';
 import { flatToGroupTree,} from "../UserManager/userUtil"
+import {getUserId} from "../../utils/authority";
 
 class Group extends PureComponent {
 
@@ -14,11 +15,13 @@ class Group extends PureComponent {
   componentWillMount() {
 
     const statusList = getItems('common', 'status'); // 状态主数据
+    const userId = getUserId();
     const columnSchemas = {
       tableName: 'api_group',
       key: 'groupId',
       name: 'groupName',
       privileges:['group_save','group_statusBatch'],
+      userId,
       columnDetails: [
         { name: 'groupId', title: 'Group ID', add: true, disabledAct:'true' }, // 第一列需要作为查询条件，新增时不需要采集
         { name: 'groupName', title: 'Group Name', sorter: true, query: true, add: true }, //  需要排序，需要作为查询条件，新增时需要采集

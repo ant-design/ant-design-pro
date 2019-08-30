@@ -31,13 +31,13 @@ class GroupTreeSelectView extends PureComponent {
   render() {
 
     // const value = this.conversionObject();
-    const { value,style,groupList,firstTitle,hideRoot,...restProps } = this.props;
+    const { value,style,groupList,firstTitle,hideRoot,isDisabled,...restProps } = this.props;
     const defalultValue=hideRoot?value:value||'0';
     // console.log("data:",groupList);
     const treeSelectData=hideRoot?[]:[{title:firstTitle||`0-root group`,value:0,key:0, children: []}];
     if(groupList){
       console.log("groupList:",groupList);
-      flatToGroupTreeSelect(groupList,treeSelectData,0);
+      flatToGroupTreeSelect(groupList,treeSelectData,0,isDisabled);
     }
     // console.log("data:",groupList);
     // console.log("treeSelectData:",treeSelectData);
