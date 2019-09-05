@@ -48,10 +48,6 @@ export default class HeaderSearch extends PureComponent {
     };
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
-
   onKeyDown = e => {
     if (e.key === 'Enter') {
       this.debouncePressEnter();
