@@ -154,6 +154,7 @@
       "README.*.md",
       "azure-pipelines.yml",
       "docker",
+      "CNAME",
       "create-umi"
     ]
   }
