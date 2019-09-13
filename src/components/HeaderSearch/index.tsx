@@ -60,7 +60,6 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     });
   }
 
-
   onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       this.debouncePressEnter();
