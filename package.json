@@ -6,7 +6,7 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "ui":"umi ui",
+    "ui": "umi ui",
     "deploy": "cross-env ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION=site npm run site && npm run gh-pages",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
@@ -94,7 +94,7 @@
     "cross-env": "^5.2.0",
     "cross-port-killer": "^1.1.1",
     "enzyme": "^3.9.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.4.0",
     "express": "^4.17.1",
     "gh-pages": "^2.0.1",
     "husky": "^3.0.0",
