@@ -24,7 +24,7 @@ const SelectLang: React.FC<SelectLangProps> = props => {
   const languageIcons = {
     'zh-CN': '🇨🇳',
     'zh-TW': '🇭🇰',
-    'en-US': '🇬🇧',
+    'en-US': '🇺🇸',
     'pt-BR': '🇧🇷',
   };
   const langMenu = (

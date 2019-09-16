@@ -46,8 +46,6 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     return null;
   }
 
-  private timeout: number | undefined = undefined;
-
   private inputRef: Input | null = null;
 
   constructor(props: HeaderSearchProps) {
@@ -62,17 +60,9 @@ export default class HeaderSearch extends Component<HeaderSearchProps, HeaderSea
     });
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
-
   onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      const { onPressEnter } = this.props;
-      const { value } = this.state;
-      this.timeout = window.setTimeout(() => {
-        onPressEnter(value); // Fix duplicate onPressEnter
-      }, 0);
+      this.debouncePressEnter();
     }
   };
 

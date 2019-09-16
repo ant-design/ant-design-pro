@@ -33,26 +33,24 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
   };
 
   render(): React.ReactNode {
-    const { currentUser = {}, menu } = this.props;
-    if (!menu) {
-      return (
-        <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-          <span className={styles.name}>{currentUser.name}</span>
-        </span>
-      );
-    }
+    const { currentUser = { avatar: '', name: '' }, menu } = this.props;
+
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        <Menu.Item key="center">
-          <Icon type="user" />
-          <FormattedMessage id="menu.account.center" defaultMessage="account center" />
-        </Menu.Item>
-        <Menu.Item key="settings">
-          <Icon type="setting" />
-          <FormattedMessage id="menu.account.settings" defaultMessage="account settings" />
-        </Menu.Item>
-        <Menu.Divider />
+        {menu && (
+          <Menu.Item key="center">
+            <Icon type="user" />
+            <FormattedMessage id="menu.account.center" defaultMessage="account center" />
+          </Menu.Item>
+        )}
+        {menu && (
+          <Menu.Item key="settings">
+            <Icon type="setting" />
+            <FormattedMessage id="menu.account.settings" defaultMessage="account settings" />
+          </Menu.Item>
+        )}
+        {menu && <Menu.Divider />}
+
         <Menu.Item key="logout">
           <Icon type="logout" />
           <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
