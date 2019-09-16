@@ -11,7 +11,11 @@ let authRoutes = {};
 function ergodicRoutes(routes, authKey, authority) {
   routes.forEach(element => {
     if (element.path === authKey) {
-      if (!element.authority) element.authority = [];
+      if (!element.authority) {
+        // eslint-disable-next-line no-param-reassign
+        element.authority = [];
+      }
+      // eslint-disable-next-line compat/compat
       Object.assign(element.authority, authority || []);
     } else if (element.routes) {
       ergodicRoutes(element.routes, authKey, authority);
