@@ -6,7 +6,7 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "ui":"umi ui",
+    "ui": "umi ui",
     "deploy": "cross-env ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION=site npm run site && npm run gh-pages",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
@@ -56,6 +56,7 @@
     "not ie <= 10"
   ],
   "dependencies": {
+    "@ant-design/dark-theme": "1.0.3",
     "@ant-design/pro-layout": "^4.5.9",
     "@antv/data-set": "^0.10.2",
     "antd": "^3.20.0",
