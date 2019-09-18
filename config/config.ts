@@ -1,9 +1,9 @@
 import { IConfig, IPlugin } from 'umi-types';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
-
 import slash from 'slash2';
-import webpackPlugin from './plugin.config';
-import darkTheme from '@ant-design/dark-theme';
+import themePluginConfig from './themePluginConfig';
+
+// import darkTheme from '@ant-design/dark-theme';
 
 const { pwa, primaryColor } = defaultSettings;
 
@@ -48,23 +48,7 @@ const plugins: IPlugin[] = [
       // },
     },
   ],
-  [
-    'umi-plugin-antd-theme',
-    {
-      theme: [
-        {
-          theme: 'dark',
-          fileName: './dark.css',
-        },
-        {
-          fileName: './mingQing.css',
-          modifyVars: {
-            '@primary-color': '#13C2C2',
-          },
-        },
-      ],
-    },
-  ],
+  ['umi-plugin-antd-theme', themePluginConfig],
   [
     'umi-plugin-pro-block',
     {
@@ -152,7 +136,7 @@ export default {
   ],
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
-    ...darkTheme,
+    // ...darkTheme,
     'primary-color': primaryColor,
   },
   define: {
@@ -198,14 +182,12 @@ export default {
   manifest: {
     basePath: '/',
   },
-  chainWebpack: webpackPlugin,
-  /*
-  proxy: {
-    '/server/api/': {
-      target: 'https://preview.pro.ant.design/',
-      changeOrigin: true,
-      pathRewrite: { '^/server': '' },
-    },
-  },
-  */
+  // chainWebpack: webpackPlugin,
+  // proxy: {
+  //   '/server/api/': {
+  //     target: 'https://preview.pro.ant.design/',
+  //     changeOrigin: true,
+  //     pathRewrite: { '^/server': '' },
+  //   },
+  // },
 } as IConfig;
