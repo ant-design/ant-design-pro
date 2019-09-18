@@ -49,6 +49,23 @@ const plugins: IPlugin[] = [
     },
   ],
   [
+    'umi-plugin-antd-theme',
+    {
+      theme: [
+        {
+          theme: 'dark',
+          fileName: './dark.css',
+        },
+        {
+          fileName: './mingQing.css',
+          modifyVars: {
+            '@primary-color': '#13C2C2',
+          },
+        },
+      ],
+    },
+  ],
+  [
     'umi-plugin-pro-block',
     {
       moveMock: false,
