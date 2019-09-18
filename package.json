@@ -91,7 +91,7 @@
     "@umijs/fabric": "^1.1.0",
     "chalk": "^2.4.2",
     "check-prettier": "^1.0.3",
-    "cross-env": "^5.2.0",
+    "cross-env": "^6.0.0",
     "cross-port-killer": "^1.1.1",
     "enzyme": "^3.9.0",
     "eslint": "^5.16.0",
