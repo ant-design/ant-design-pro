@@ -1,0 +1,18 @@
+export default {
+  'accountsettings.monitor.trading-activity': '活动实时交易情况',
+  'accountsettings.monitor.total-transactions': '今日交易总额',
+  'accountsettings.monitor.sales-target': '销售目标完成率',
+  'accountsettings.monitor.remaining-time': '活动剩余时间',
+  'accountsettings.monitor.total-transactions-per-second': '每秒交易总额',
+  'accountsettings.monitor.activity-forecast': '活动情况预测',
+  'accountsettings.monitor.efficiency': '券核效率',
+  'accountsettings.monitor.ratio': '跳出率',
+  'accountsettings.monitor.proportion-per-category': '各品类占比',
+  'accountsettings.monitor.fast-food': '中式快餐',
+  'accountsettings.monitor.western-food': '西餐',
+  'accountsettings.monitor.hot-pot': '火锅',
+  'accountsettings.monitor.waiting-for-implementation': 'Waiting for implementation',
+  'accountsettings.monitor.popular-searches': '热门搜索',
+  'accountsettings.monitor.resource-surplus': '资源剩余',
+  'accountsettings.monitor.fund-surplus': '补贴资金剩余',
+};
