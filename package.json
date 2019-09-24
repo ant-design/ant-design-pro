@@ -6,7 +6,7 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "ui":"umi ui",
+    "ui": "umi ui",
     "deploy": "cross-env ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION=site npm run site && npm run gh-pages",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
@@ -114,7 +114,7 @@
     "stylelint": "^10.1.0",
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-pro": "^1.0.2",
-    "umi-types": "^0.3.8",
+    "umi-types": "^0.4.1",
     "webpack-theme-color-replacer": "^1.2.15"
   },
   "optionalDependencies": {
