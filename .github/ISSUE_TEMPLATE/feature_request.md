@@ -1,6 +1,6 @@
 ---
 name: '功能需求 ✨'
-about: 对 remax 的需求或建议
+about: 对 Ant Design Pro 的需求或建议
 title: '[需求]'
 labels: feature
 assignees: ''
