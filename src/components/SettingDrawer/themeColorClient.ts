@@ -11,7 +11,8 @@ export default {
     let lightens = new Array(lightCount).fill(0);
     lightens = lightens.map((_, i) => client.varyColor.lighten(color, i / divide));
     const colorPalettes = generate(color);
-    return lightens.concat(colorPalettes);
+    const rgb = client.varyColor.toNum3(color.replace('#', '')).join(',');
+    return lightens.concat(colorPalettes).concat(rgb);
   },
   changeColor(color?: string): Promise<void> {
     if (!color) {
