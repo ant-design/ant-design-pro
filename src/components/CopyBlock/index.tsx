@@ -1,7 +1,7 @@
 import { Icon, Popover, Typography } from 'antd';
+import React, { useRef } from 'react';
 
 import { FormattedMessage } from 'umi-plugin-react/locale';
-import React, { useRef } from 'react';
 import { connect } from 'dva';
 import { isAntDesignPro } from '@/utils/utils';
 import styles from './index.less';
@@ -20,7 +20,7 @@ const onBlockCopy = (label: string) => {
     return;
   }
 
-  const ga = window && (window as any).ga;
+  const ga = window && window.ga;
   if (ga) {
     ga('send', 'event', {
       eventCategory: 'block',

@@ -85,8 +85,22 @@
     &:global(.opened) {
       background: @primary-color;
     }
-    :global(.ant-badge) {
-      color: rgba(255, 255, 255, 0.85);
+  }
+}
+
+:global(.ant-pro-global-header) {
+  .dark {
+    .action {
+      color: @text-color;
+      > i {
+        color: @text-color;
+      }
+      &:hover {
+        color: rgba(255, 255, 255, 0.85);
+        > i {
+          color: rgba(255, 255, 255, 0.85);
+        }
+      }
     }
   }
 }
@@ -110,7 +124,6 @@
     position: absolute;
     top: 0;
     right: 12px;
-    background: #fff;
     .account {
       .avatar {
         margin-right: 0;

@@ -1,5 +1,6 @@
 import { Icon, Menu } from 'antd';
 import { formatMessage, getLocale, setLocale } from 'umi-plugin-react/locale';
+
 import { ClickParam } from 'antd/es/menu';
 import React from 'react';
 import classNames from 'classnames';
@@ -23,7 +24,7 @@ const SelectLang: React.FC<SelectLangProps> = props => {
   const languageIcons = {
     'zh-CN': '🇨🇳',
     'zh-TW': '🇭🇰',
-    'en-US': '🇬🇧',
+    'en-US': '🇺🇸',
     'pt-BR': '🇧🇷',
   };
   const langMenu = (
