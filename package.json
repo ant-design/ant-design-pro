@@ -114,7 +114,7 @@
     "stylelint": "^10.1.0",
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-pro": "^1.0.2",
-    "umi-types": "^0.4.1",
+    "umi-types": "^0.5.0",
     "webpack-theme-color-replacer": "^1.2.15"
   },
   "optionalDependencies": {
