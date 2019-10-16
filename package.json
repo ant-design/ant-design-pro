@@ -15,7 +15,7 @@
     "docker:dev": "docker-compose -f ./docker/docker-compose.dev.yml up",
     "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
     "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
-    "fetch:blocks": "pro fetch-blocks",
+    "fetch:blocks": "pro fetch-blocks && npm run prettier",
     "format-imports": "cross-env import-sort --write '**/*.{js,jsx,ts,tsx}'",
     "functions:build": "netlify-lambda build ./lambda",
     "functions:run": "cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
