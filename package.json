@@ -32,6 +32,7 @@
     "site": "npm run fetch:blocks && npm run build && npm run functions:build",
     "start": "umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
+    "start:no-ui": "cross-env UMI_UI=none  umi dev",
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components"
