@@ -67,7 +67,7 @@ if (isAntDesignProPreview) {
   plugins.push([
     'umi-plugin-pro',
     {
-      serverUrl: 'https://ant-design-pro.netlify.com',
+      serverUrl: 'https://us-central1-antd-pro.cloudfunctions.net/api',
     },
   ]);
 }
