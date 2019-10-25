@@ -1,4 +1,5 @@
 import React from 'react';
+import { Result } from 'antd';
 import check, { IAuthorityType } from './CheckPermissions';
 
 import AuthorizedRoute from './AuthorizedRoute';
@@ -18,7 +19,13 @@ type IAuthorizedType = React.FunctionComponent<AuthorizedProps> & {
 const Authorized: React.FunctionComponent<AuthorizedProps> = ({
   children,
   authority,
-  noMatch = null,
+  noMatch = (
+    <Result
+      status="403"
+      title="403"
+      subTitle="Sorry, you are not authorized to access this page."
+    />
+  ),
 }) => {
   const childrenRender: React.ReactNode = typeof children === 'undefined' ? null : children;
   const dom = check(authority, childrenRender, noMatch);
