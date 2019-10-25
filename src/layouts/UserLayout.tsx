@@ -1,5 +1,5 @@
 import { DefaultFooter, MenuDataItem, getMenuData, getPageTitle } from '@ant-design/pro-layout';
-import DocumentTitle from 'react-document-title';
+import { Helmet } from 'react-helmet';
 import Link from 'umi/link';
 import React from 'react';
 import { connect } from 'dva';
@@ -28,16 +28,19 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
     },
   } = props;
   const { breadcrumb } = getMenuData(routes);
-
+  const title = getPageTitle({
+    pathname: location.pathname,
+    breadcrumb,
+    formatMessage,
+    ...props,
+  });
   return (
-    <DocumentTitle
-      title={getPageTitle({
-        pathname: location.pathname,
-        breadcrumb,
-        formatMessage,
-        ...props,
-      })}
-    >
+    <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={title} />
+      </Helmet>
+
       <div className={styles.container}>
         <div className={styles.lang}>
           <SelectLang />
@@ -56,7 +59,7 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
         </div>
         <DefaultFooter />
       </div>
-    </DocumentTitle>
+    </>
   );
 };
 
