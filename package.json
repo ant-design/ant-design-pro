@@ -6,7 +6,6 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "ui": "umi ui",
     "deploy": "npm run site && npm run gh-pages",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
@@ -35,7 +34,8 @@
     "start:no-ui": "cross-env UMI_UI=none umi dev",
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
-    "test:component": "umi test ./src/components"
+    "test:component": "umi test ./src/components",
+    "ui": "umi ui"
   },
   "husky": {
     "hooks": {
@@ -89,7 +89,6 @@
     "@types/lodash": "^4.14.144",
     "@types/qs": "^6.5.3",
     "@types/react": "^16.8.19",
-    "@types/react-document-title": "^2.0.3",
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.13",
     "@umijs/fabric": "^1.2.0",
