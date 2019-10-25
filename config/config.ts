@@ -64,12 +64,6 @@ if (isAntDesignProPreview) {
       code: 'UA-72788897-6',
     },
   ]);
-  plugins.push([
-    'umi-plugin-pro',
-    {
-      serverUrl: 'https://us-central1-antd-pro.cloudfunctions.net/api',
-    },
-  ]);
 }
 
 export default {
