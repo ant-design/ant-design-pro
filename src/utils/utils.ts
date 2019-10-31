@@ -24,6 +24,11 @@ export const isAntDesignProOrDev = (): boolean => {
 
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 
+interface Router {
+  path: string;
+  routes?: Router[];
+}
+
 /**
  * props.route.routes
  * @param router [{}]
@@ -33,7 +38,23 @@ export const getAuthorityFromRouter = <T extends { path: string }>(
   router: T[] = [],
   pathname: string,
 ): T | undefined => {
-  const authority = router.find(({ path }) => path && pathRegexp(path).exec(pathname));
+  const authority = getAuthorityRecursion(router, pathname);
   if (authority) return authority;
   return undefined;
 };
+
+function getAuthorityRecursion(router: Router[], pathname: string): any {
+  for (let route of router) {
+    const { path, routes } = route;
+
+    if (path && pathRegexp(path).exec(pathname)) {
+      return route;
+    } else {
+      if (!routes) {
+        continue;
+      }
+      const authority = getAuthorityRecursion(routes, pathname);
+      if (authority) return authority;
+    }
+  }
+}
