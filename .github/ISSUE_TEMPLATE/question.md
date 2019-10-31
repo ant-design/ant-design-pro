@@ -2,7 +2,7 @@
 name: '疑问或需要帮助 ❓'
 about: 对 Ant Design Pro 使用的疑问或需要帮助
 title: '🧐[问题]'
-labels: '🧐FAQ'
+labels: '🧐question'
 assignees: ''
 ---
 
