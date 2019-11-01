@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { routerRedux } from 'dva/router';
+import { routerRedux } from 'dva';
 import { Effect } from 'dva';
 import { stringify } from 'querystring';
 
