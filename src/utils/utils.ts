@@ -43,18 +43,18 @@ export const getAuthorityFromRouter = <T extends { path: string }>(
   return undefined;
 };
 
+// eslint-disable-next-line consistent-return
 function getAuthorityRecursion(router: Router[], pathname: string): any {
+  // eslint-disable-next-line no-restricted-syntax
   for (let route of router) {
     const { path, routes } = route;
 
     if (path && pathRegexp(path).exec(pathname)) {
       return route;
-    } else {
-      if (!routes) {
-        continue;
-      }
-      const authority = getAuthorityRecursion(routes, pathname);
-      if (authority) return authority;
+    }
+    if (routes) {
+      route = getAuthorityRecursion(routes, pathname);
+      if (route) return route;
     }
   }
 }
