@@ -18,7 +18,7 @@ export interface LoginProps {
   className?: string;
   form: FormComponentProps['form'];
   onCreate?: (form?: FormComponentProps['form']) => void;
-  children: React.ReactElement<typeof LoginTab>[];
+  children: React.ReactElement<LoginTab>[];
 }
 
 interface LoginState {
@@ -28,18 +28,6 @@ interface LoginState {
 }
 
 class Login extends Component<LoginProps, LoginState> {
-  public static Tab = LoginTab;
-
-  public static Submit = LoginSubmit;
-
-  public static UserName: React.FunctionComponent<LoginItemProps>;
-
-  public static Password: React.FunctionComponent<LoginItemProps>;
-
-  public static Mobile: React.FunctionComponent<LoginItemProps>;
-
-  public static Captcha: React.FunctionComponent<LoginItemProps>;
-
   static defaultProps = {
     className: '',
     defaultActiveKey: '',
@@ -122,19 +110,31 @@ class Login extends Component<LoginProps, LoginState> {
     }
   };
 
+  public static Tab = LoginTab;
+
+  public static Submit = LoginSubmit;
+
+  public static UserName: React.FunctionComponent<LoginItemProps>;
+
+  public static Password: React.FunctionComponent<LoginItemProps>;
+
+  public static Mobile: React.FunctionComponent<LoginItemProps>;
+
+  public static Captcha: React.FunctionComponent<LoginItemProps>;
+
   render() {
     const { className, children } = this.props;
     const { type, tabs = [] } = this.state;
-    const TabChildren: React.ReactComponentElement<typeof LoginTab>[] = [];
+    const TabChildren: React.ReactComponentElement<LoginTab>[] = [];
     const otherChildren: React.ReactElement<unknown>[] = [];
     React.Children.forEach(
       children,
-      (child: React.ReactComponentElement<typeof LoginTab> | React.ReactElement<unknown>) => {
+      (child: React.ReactComponentElement<LoginTab> | React.ReactElement<unknown>) => {
         if (!child) {
           return;
         }
-        if ((child.type as { typeName: string }).typeName === 'LoginTab') {
-          TabChildren.push(child as React.ReactComponentElement<typeof LoginTab>);
+        if (child.type.typeName === 'LoginTab') {
+          TabChildren.push(child as React.ReactComponentElement<LoginTab>);
         } else {
           otherChildren.push(child);
         }
