@@ -17,3 +17,4 @@ LICENSE
 .eslintcache
 *.lock
 yarn-error.log
+.history

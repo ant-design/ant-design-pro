@@ -2,20 +2,6 @@
 
 @pro-header-hover-bg: rgba(0, 0, 0, 0.025);
 
-.logo {
-  display: inline-block;
-  height: @layout-header-height;
-  padding: 0 0 0 24px;
-  font-size: 20px;
-  line-height: @layout-header-height;
-  vertical-align: top;
-  cursor: pointer;
-  img {
-    display: inline-block;
-    vertical-align: middle;
-  }
-}
-
 .menu {
   :global(.anticon) {
     margin-right: 8px;
@@ -25,20 +11,10 @@
   }
 }
 
-.trigger {
-  height: @layout-header-height;
-  padding: ~'calc((@{layout-header-height} - 20px) / 2)' 24px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: all 0.3s, padding 0s;
-  &:hover {
-    background: @pro-header-hover-bg;
-  }
-}
-
 .right {
   float: right;
   height: 100%;
+  margin-left: auto;
   overflow: hidden;
   .action {
     display: inline-block;
@@ -111,14 +87,6 @@
   }
   .name {
     display: none;
-  }
-  i.trigger {
-    padding: 22px 12px;
-  }
-  .logo {
-    position: relative;
-    padding-right: 12px;
-    padding-left: 12px;
   }
   .right {
     position: absolute;
