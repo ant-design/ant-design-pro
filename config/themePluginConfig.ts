@@ -41,13 +41,6 @@ export default {
       },
     },
     {
-      key: 'daybreak',
-      fileName: 'daybreak.css',
-      modifyVars: {
-        '@primary-color': '#1890FF',
-      },
-    },
-    {
       key: 'geekblue',
       fileName: 'geekblue.css',
       modifyVars: {
@@ -63,7 +56,7 @@ export default {
     },
 
     {
-      key: 'dark-dust',
+      key: 'dust',
       theme: 'dark',
       fileName: 'dark-dust.css',
       modifyVars: {
@@ -71,7 +64,7 @@ export default {
       },
     },
     {
-      key: 'dark-volcano',
+      key: 'volcano',
       theme: 'dark',
       fileName: 'dark-volcano.css',
       modifyVars: {
@@ -79,7 +72,7 @@ export default {
       },
     },
     {
-      key: 'dark-sunset',
+      key: 'sunset',
       theme: 'dark',
       fileName: 'dark-sunset.css',
       modifyVars: {
@@ -87,7 +80,7 @@ export default {
       },
     },
     {
-      key: 'dark-cyan',
+      key: 'cyan',
       theme: 'dark',
       fileName: 'dark-cyan.css',
       modifyVars: {
@@ -95,7 +88,7 @@ export default {
       },
     },
     {
-      key: 'dark-green',
+      key: 'green',
       theme: 'dark',
       fileName: 'dark-green.css',
       modifyVars: {
@@ -103,15 +96,7 @@ export default {
       },
     },
     {
-      key: 'dark-daybreak',
-      theme: 'dark',
-      fileName: 'dark-daybreak.css',
-      modifyVars: {
-        '@primary-color': '#1890FF',
-      },
-    },
-    {
-      key: 'dark-geekblue',
+      key: 'geekblue',
       theme: 'dark',
       fileName: 'dark-geekblue.css',
       modifyVars: {
@@ -119,7 +104,7 @@ export default {
       },
     },
     {
-      key: 'dark-purple',
+      key: 'purple',
       theme: 'dark',
       fileName: 'dark-purple.css',
       modifyVars: {
