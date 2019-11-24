@@ -28,6 +28,18 @@ interface LoginState {
 }
 
 class Login extends Component<LoginProps, LoginState> {
+  public static Tab = LoginTab;
+
+  public static Submit = LoginSubmit;
+
+  public static UserName: React.FunctionComponent<LoginItemProps>;
+
+  public static Password: React.FunctionComponent<LoginItemProps>;
+
+  public static Mobile: React.FunctionComponent<LoginItemProps>;
+
+  public static Captcha: React.FunctionComponent<LoginItemProps>;
+
   static defaultProps = {
     className: '',
     defaultActiveKey: '',
@@ -109,18 +121,6 @@ class Login extends Component<LoginProps, LoginState> {
       });
     }
   };
-
-  public static Tab = LoginTab;
-
-  public static Submit = LoginSubmit;
-
-  public static UserName: React.FunctionComponent<LoginItemProps>;
-
-  public static Password: React.FunctionComponent<LoginItemProps>;
-
-  public static Mobile: React.FunctionComponent<LoginItemProps>;
-
-  public static Captcha: React.FunctionComponent<LoginItemProps>;
 
   render() {
     const { className, children } = this.props;

@@ -38,6 +38,8 @@ export interface NoticeIconProps {
 }
 
 export default class NoticeIcon extends Component<NoticeIconProps> {
+  public static Tab: typeof NoticeList = NoticeList;
+
   static defaultProps = {
     onItemClick: (): void => {},
     onPopupVisibleChange: (): void => {},
@@ -132,8 +134,6 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
       onPopupVisibleChange(visible);
     }
   };
-
-  public static Tab: typeof NoticeList = NoticeList;
 
   render(): React.ReactNode {
     const { className, count, popupVisible, bell } = this.props;
