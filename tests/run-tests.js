@@ -8,6 +8,8 @@ const { kill } = require('cross-port-killer');
 const env = Object.create(process.env);
 env.BROWSER = 'none';
 env.TEST = true;
+env.UMI_UI = 'none';
+env.PROGRESS = 'none';
 // flag to prevent multiple test
 let once = false;
 
