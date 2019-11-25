@@ -38,7 +38,8 @@ jobs:
         displayName: install
       - script: npm run test:all
         env:
-          PROGRESS: none
+           PROGRESS: none
+           UMI_UI: none
         displayName: test
 
   - job: Windows
@@ -55,6 +56,7 @@ jobs:
       - script: npm run test:all
         env:
           PROGRESS: none
+          UMI_UI: none
         displayName: test
       - script: npm run build
         env:
@@ -75,4 +77,5 @@ jobs:
       - script: npm run
         env:
           PROGRESS: none
+          UMI_UI: none
         displayName: build

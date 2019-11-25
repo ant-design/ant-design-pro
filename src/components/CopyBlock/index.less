@@ -1,3 +1,5 @@
+@import '~antd/es/style/themes/default.less';
+
 .copy-block {
   position: fixed;
   right: 80px;
@@ -10,10 +12,9 @@
   width: 40px;
   height: 40px;
   font-size: 20px;
-  background: #fff;
+  background: @input-bg;
   border-radius: 40px;
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: @card-shadow;
   cursor: pointer;
 }
 

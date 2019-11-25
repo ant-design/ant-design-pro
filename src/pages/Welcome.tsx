@@ -1,16 +1,12 @@
 import React from 'react';
-import { Card, Typography, Alert } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { FormattedMessage } from 'umi-plugin-react/locale';
+import { Card, Typography, Alert } from 'antd';
+
+import styles from './Welcome.less';
 
 const CodePreview: React.FC<{}> = ({ children }) => (
-  <pre
-    style={{
-      background: '#f2f4f5',
-      padding: '12px 20px',
-      margin: '12px 0',
-    }}
-  >
+  <pre className={styles.pre}>
     <code>
       <Typography.Text copyable>{children}</Typography.Text>
     </code>
