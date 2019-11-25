@@ -70,7 +70,7 @@ if (isAntDesignProPreview) {
   plugins.push(['umi-plugin-antd-theme', themePluginConfig]);
 }
 
-if (!TEST) {
+if (!TEST && !isAntDesignProPreview) {
   plugins.push([
     'umi-plugin-antd-theme',
     {
