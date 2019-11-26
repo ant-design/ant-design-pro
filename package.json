@@ -96,7 +96,7 @@
     "cross-env": "^6.0.0",
     "cross-port-killer": "^1.1.1",
     "enzyme": "^3.9.0",
-    "eslint": "5.16.0",
+    "eslint": "6.7.1",
     "express": "^4.17.1",
     "gh-pages": "^2.0.1",
     "husky": "^3.0.0",
