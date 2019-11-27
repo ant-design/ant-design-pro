@@ -56,8 +56,14 @@ addEventListener('message', event => {
   if (replyPort && message && message.type === 'skip-waiting') {
     event.waitUntil(
       self.skipWaiting().then(
-        () => replyPort.postMessage({ error: null }),
-        error => replyPort.postMessage({ error }),
+        () =>
+          replyPort.postMessage({
+            error: null,
+          }),
+        error =>
+          replyPort.postMessage({
+            error,
+          }),
       ),
     );
   }
