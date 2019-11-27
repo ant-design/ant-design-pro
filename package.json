@@ -58,7 +58,7 @@
   ],
   "dependencies": {
     "@ant-design/dark-theme": "1.0.3",
-    "@ant-design/pro-layout": "4.8.0",
+    "@ant-design/pro-layout": "4.8.3",
     "@antv/data-set": "^0.10.2",
     "antd": "^3.23.6",
     "classnames": "^2.2.6",
@@ -80,7 +80,7 @@
     "umi-request": "^1.0.8"
   },
   "devDependencies": {
-    "@ant-design/pro-cli": "^1.0.13",
+    "@ant-design/pro-cli": "^1.0.14",
     "@types/classnames": "^2.2.7",
     "@types/express": "^4.17.0",
     "@types/history": "^4.7.2",

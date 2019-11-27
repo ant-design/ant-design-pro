@@ -5,7 +5,6 @@ export interface SettingModelType {
   namespace: 'settings';
   state: DefaultSettings;
   reducers: {
-    getSetting: Reducer<DefaultSettings>;
     changeSetting: Reducer<DefaultSettings>;
   };
 }
@@ -21,23 +20,6 @@ const SettingModel: SettingModelType = {
   namespace: 'settings',
   state: defaultSettings,
   reducers: {
-    getSetting(state = defaultSettings) {
-      const setting: Partial<DefaultSettings> = {};
-      const urlParams = new URL(window.location.href);
-      Object.keys(state).forEach(key => {
-        if (urlParams.searchParams.has(key)) {
-          const value = urlParams.searchParams.get(key);
-          setting[key] = value;
-        }
-      });
-      const { colorWeak } = setting;
-
-      updateColorWeak(!!colorWeak);
-      return {
-        ...state,
-        ...setting,
-      };
-    },
     changeSetting(state = defaultSettings, { payload }) {
       const { colorWeak, contentWidth } = payload;
 
