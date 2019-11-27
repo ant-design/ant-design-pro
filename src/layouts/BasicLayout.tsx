@@ -14,7 +14,8 @@ import React, { useEffect } from 'react';
 import Link from 'umi/link';
 import { Dispatch } from 'redux';
 import { connect } from 'dva';
-import { Icon, Result, Button } from 'antd';
+import { Result, Button } from 'antd';
+import { Github } from '@ant-design/icons';
 import { formatMessage } from 'umi-plugin-react/locale';
 
 import Authorized from '@/utils/Authorized';
@@ -76,7 +77,7 @@ const defaultFooterDom = (
       },
       {
         key: 'github',
-        title: <Icon type="github" />,
+        title: <Github />,
         href: 'https://github.com/ant-design/ant-design-pro',
         blankTarget: true,
       },

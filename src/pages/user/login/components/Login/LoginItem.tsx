@@ -1,7 +1,5 @@
 import { Button, Col, Form, Input, Row } from 'antd';
 import React, { Component } from 'react';
-import { FormComponentProps } from 'antd/es/form';
-import { GetFieldDecoratorOptions } from 'antd/es/form/Form';
 
 import omit from 'omit.js';
 import ItemMap from './map';
@@ -19,7 +17,7 @@ export interface LoginItemType {
   Captcha: React.FC<WrappedLoginItemProps>;
 }
 
-export interface LoginItemProps extends GetFieldDecoratorOptions {
+export interface LoginItemProps {
   name?: string;
   style?: React.CSSProperties;
   onGetCaptcha?: (event?: MouseEvent) => void | Promise<boolean> | false;
@@ -137,7 +135,6 @@ class WrapFormItem extends Component<LoginItemProps, LoginItemState> {
     if (!form) {
       return null;
     }
-    const { getFieldDecorator } = form;
     // get getFieldDecorator props
     const options = this.getFormItemOptions(this.props);
     const otherProps = restProps || {};
@@ -149,7 +146,9 @@ class WrapFormItem extends Component<LoginItemProps, LoginItemState> {
         <FormItem>
           <Row gutter={8}>
             <Col span={16}>
-              {getFieldDecorator(name, options)(<Input {...customProps} {...inputProps} />)}
+              <FormItem name={name} {...options}>
+                <Input {...customProps} {...inputProps} />
+              </FormItem>
             </Col>
             <Col span={8}>
               <Button
@@ -166,8 +165,8 @@ class WrapFormItem extends Component<LoginItemProps, LoginItemState> {
       );
     }
     return (
-      <FormItem>
-        {getFieldDecorator(name, options)(<Input {...customProps} {...otherProps} />)}
+      <FormItem name={name} {...options}>
+        <Input {...customProps} {...otherProps} />
       </FormItem>
     );
   }

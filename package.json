@@ -58,9 +58,10 @@
   ],
   "dependencies": {
     "@ant-design/dark-theme": "1.0.3",
-    "@ant-design/pro-layout": "4.8.3",
+    "@ant-design/icons": "^4.0.0-alpha.8",
+    "@ant-design/pro-layout": "^4.9.0-0",
     "@antv/data-set": "^0.10.2",
-    "antd": "^3.23.6",
+    "antd": "^4.0.0-alpha.9",
     "classnames": "^2.2.6",
     "dva": "^2.4.1",
     "lodash": "^4.17.11",

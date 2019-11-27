@@ -1,10 +1,9 @@
-import { Alert, Checkbox, Icon } from 'antd';
+import { Alert, Checkbox } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Component } from 'react';
-
+import { AlipayCircle, TaobaoCircle, WeiboCircle } from '@ant-design/icons';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { Dispatch, AnyAction } from 'redux';
-import { FormComponentProps } from 'antd/es/form';
 import Link from 'umi/link';
 import { connect } from 'dva';
 import { StateType } from '@/models/login';
@@ -30,7 +29,7 @@ interface LoginState {
   submitting: loading.effects['login/login'],
 }))
 class Login extends Component<LoginProps, LoginState> {
-  loginForm: FormComponentProps['form'] | undefined | null = undefined;
+  loginForm: undefined | null = undefined;
 
   state: LoginState = {
     type: 'account',
@@ -102,7 +101,7 @@ class Login extends Component<LoginProps, LoginState> {
           defaultActiveKey={type}
           onTabChange={this.onTabChange}
           onSubmit={this.handleSubmit}
-          onCreate={(form?: FormComponentProps['form']) => {
+          onCreate={form => {
             this.loginForm = form;
           }}
         >
@@ -189,9 +188,9 @@ class Login extends Component<LoginProps, LoginState> {
           </Submit>
           <div className={styles.other}>
             <FormattedMessage id="user-login.login.sign-in-with" />
-            <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
-            <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
-            <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
+            <AlipayCircle className={styles.icon} />
+            <TaobaoCircle className={styles.icon} />
+            <WeiboCircle className={styles.icon} />
             <Link className={styles.register} to="/user/register">
               <FormattedMessage id="user-login.login.signup" />
             </Link>
