@@ -1,5 +1,7 @@
-import { Form, Tabs } from 'antd';
+import { Tabs } from 'antd';
+import { Form } from '@ant-design/compatible';
 import React, { Component } from 'react';
+import { FormComponentProps } from 'antd/es/form';
 import classNames from 'classnames';
 import LoginContext, { LoginContextProps } from './LoginContext';
 import LoginItem, { LoginItemProps, LoginItemType } from './LoginItem';
@@ -27,7 +29,6 @@ interface LoginState {
 }
 
 class Login extends Component<LoginProps, LoginState> {
-  formRef = React.createRef();
   public static Tab = LoginTab;
 
   public static Submit = LoginSubmit;
@@ -57,9 +58,9 @@ class Login extends Component<LoginProps, LoginState> {
   }
 
   componentDidMount() {
-    const { onCreate } = this.props;
-    if (onCreate && this.formRef.current) {
-      onCreate(this.formRef.current);
+    const { form, onCreate } = this.props;
+    if (onCreate) {
+      onCreate(form);
     }
   }
 
@@ -78,6 +79,7 @@ class Login extends Component<LoginProps, LoginState> {
   };
 
   getContext: () => LoginContextProps = () => {
+    const { form } = this.props;
     const { tabs = [] } = this.state;
     return {
       tabUtil: {
@@ -92,7 +94,7 @@ class Login extends Component<LoginProps, LoginState> {
           });
         },
       },
-      form: { ...this.formRef.current },
+      form: { ...form },
       updateActive: activeItem => {
         const { type = '', active = {} } = this.state;
         if (active[type]) {
@@ -110,18 +112,14 @@ class Login extends Component<LoginProps, LoginState> {
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const { active = {}, type = '' } = this.state;
-    const { onSubmit } = this.props;
+    const { form, onSubmit } = this.props;
     const activeFields = active[type] || [];
-    if (this.formRef.current) {
-      this.formRef.current.validateFields(
-        activeFields as string[],
-        { force: true },
-        (err, values) => {
-          if (onSubmit) {
-            onSubmit(err, values);
-          }
-        },
-      );
+    if (form) {
+      form.validateFields(activeFields as string[], { force: true }, (err, values) => {
+        if (onSubmit) {
+          onSubmit(err, values);
+        }
+      });
     }
   };
 
@@ -146,7 +144,7 @@ class Login extends Component<LoginProps, LoginState> {
     return (
       <LoginContext.Provider value={this.getContext()}>
         <div className={classNames(className, styles.login)}>
-          <Form ref={this.formRef} onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit}>
             {tabs.length ? (
               <React.Fragment>
                 <Tabs
@@ -173,4 +171,4 @@ class Login extends Component<LoginProps, LoginState> {
   Login[item] = LoginItem[item];
 });
 
-export default Login;
+export default Form.create<LoginProps>()(Login);
