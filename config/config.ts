@@ -1,8 +1,8 @@
 import { IConfig, IPlugin } from 'umi-types';
+import slash from 'slash2';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
 
-import slash from 'slash2';
-import themePluginConfig from './themePluginConfig'; // import darkTheme from '@ant-design/dark-theme';
+import theme from './dark';
 
 const { pwa, primaryColor } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
@@ -64,7 +64,6 @@ if (isAntDesignProPreview) {
       code: 'UA-72788897-6',
     },
   ]);
-  plugins.push(['umi-plugin-antd-theme', themePluginConfig]);
 }
 
 export default {
@@ -347,9 +346,7 @@ export default {
     },
   ],
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
-  theme: {
-    // ...darkTheme,
-  },
+  theme,
   define: {
     ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:
       ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION || '', // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
