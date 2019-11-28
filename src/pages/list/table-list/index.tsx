@@ -14,10 +14,11 @@ import {
   message,
 } from 'antd';
 import React, { Component, Fragment } from 'react';
+import { PlusOutlined, UpOutlined, DownOutlined } from '@ant-design/icons';
 
 import { Dispatch, Action } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
-import { Icon as LegacyIcon, Form } from '@ant-design/compatible';
+import { Form } from '@ant-design/compatible';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { SorterResult } from 'antd/es/table';
 import { connect } from 'dva';
@@ -332,7 +333,7 @@ class TableList extends Component<TableListProps, TableListState> {
                 重置
               </Button>
               <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-                展开 <LegacyIcon type="down" />
+                展开 <DownOutlined />
               </a>
             </span>
           </Col>
@@ -407,7 +408,7 @@ class TableList extends Component<TableListProps, TableListState> {
               重置
             </Button>
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-              收起 <LegacyIcon type="up" />
+              收起 <UpOutlined />
             </a>
           </div>
         </div>
@@ -448,7 +449,8 @@ class TableList extends Component<TableListProps, TableListState> {
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>
             <div className={styles.tableListOperator}>
-              <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>
+              <Button type="primary" onClick={() => this.handleModalVisible(true)}>
+                <PlusOutlined />
                 新建
               </Button>
               {selectedRows.length > 0 && (
@@ -456,7 +458,7 @@ class TableList extends Component<TableListProps, TableListState> {
                   <Button>批量操作</Button>
                   <Dropdown overlay={menu}>
                     <Button>
-                      更多操作 <LegacyIcon type="down" />
+                      更多操作 <DownOutlined />
                     </Button>
                   </Dropdown>
                 </span>

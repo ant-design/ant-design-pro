@@ -1,8 +1,7 @@
 import { Button, Card, List, Typography } from 'antd';
 import React, { Component } from 'react';
-
+import { PlusOutlined } from '@ant-design/icons';
 import { Dispatch } from 'redux';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
 import { StateType } from './model';
@@ -118,7 +117,7 @@ class CardList extends Component<CardListProps, CardListState> {
               return (
                 <List.Item>
                   <Button type="dashed" className={styles.newButton}>
-                    <LegacyIcon type="plus" /> 新增产品
+                    <PlusOutlined /> 新增产品
                   </Button>
                 </List.Item>
               );

@@ -7,7 +7,7 @@ const { join } = require('path');
 // Read the less file in as string
 const antdColorLess = fs.readFileSync(require.resolve('antd/lib/style/color/colors.less'), 'utf8');
 const defaultLess = fs.readFileSync(require.resolve('antd/lib/style/themes/default.less'), 'utf8');
-const darkLess = fs.readFileSync(require.resolve('antd/lib/style/themes/dark.less'), 'utf8');
+const darkLess = fs.readFileSync(join(__dirname, 'dark.less'), 'utf8');
 
 const paletteLess = `
 ${antdColorLess}
