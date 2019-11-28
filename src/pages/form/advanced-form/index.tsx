@@ -1,20 +1,9 @@
-import {
-  Button,
-  Card,
-  Col,
-  DatePicker,
-  Form,
-  Icon,
-  Input,
-  Popover,
-  Row,
-  Select,
-  TimePicker,
-} from 'antd';
+import { Button, Card, Col, DatePicker, Input, Popover, Row, Select, TimePicker } from 'antd';
 import React, { Component } from 'react';
 
 import { Dispatch } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
+import { Icon as LegacyIcon, Form } from '@ant-design/compatible';
 import { PageHeaderWrapper, RouteContext } from '@ant-design/pro-layout';
 import { connect } from 'dva';
 import TableForm from './components/TableForm';
@@ -91,7 +80,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
       const errorMessage = errors[key] || [];
       return (
         <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
-          <Icon type="cross-circle-o" className={styles.errorIcon} />
+          <LegacyIcon type="cross-circle-o" className={styles.errorIcon} />
           <div className={styles.errorMessage}>{errorMessage[0]}</div>
           <div className={styles.errorField}>{fieldLabels[key]}</div>
         </li>
@@ -111,7 +100,7 @@ class AdvancedForm extends Component<AdvancedFormProps> {
             return trigger;
           }}
         >
-          <Icon type="exclamation-circle" />
+          <LegacyIcon type="exclamation-circle" />
         </Popover>
         {errorCount}
       </span>

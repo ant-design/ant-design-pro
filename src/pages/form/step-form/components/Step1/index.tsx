@@ -1,4 +1,5 @@
-import { Button, Divider, Form, Input, Select } from 'antd';
+import { Form } from '@ant-design/compatible';
+import { Button, Divider, Input, Select } from 'antd';
 import React, { Fragment } from 'react';
 
 import { Dispatch } from 'redux';

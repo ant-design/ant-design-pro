@@ -1,6 +1,8 @@
-import { Button, Card, Icon, Result } from 'antd';
+import { Button, Card, Result } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Fragment } from 'react';
+
+import { Icon as LegacyIcon } from '@ant-design/compatible';
 
 import { GridContent } from '@ant-design/pro-layout';
 import styles from './index.less';
@@ -14,25 +16,25 @@ const Content = (
       />
     </div>
     <div style={{ marginBottom: 16 }}>
-      <Icon style={{ marginRight: 8 }} className={styles.error_icon} type="close-circle-o" />
+      <LegacyIcon style={{ marginRight: 8 }} className={styles.error_icon} type="close-circle-o" />
       <FormattedMessage
         id="resultandfail.error.hint-text1"
         defaultMessage="Your account has been frozen"
       />
       <a style={{ marginLeft: 16 }}>
         <FormattedMessage id="resultandfail.error.hint-btn1" defaultMessage="Thaw immediately" />
-        <Icon type="right" />
+        <LegacyIcon type="right" />
       </a>
     </div>
     <div>
-      <Icon style={{ marginRight: 8 }} className={styles.error_icon} type="close-circle-o" />
+      <LegacyIcon style={{ marginRight: 8 }} className={styles.error_icon} type="close-circle-o" />
       <FormattedMessage
         id="resultandfail.error.hint-text2"
         defaultMessage="Your account is not yet eligible to apply"
       />
       <a style={{ marginLeft: 16 }}>
         <FormattedMessage id="resultandfail.error.hint-btn2" defaultMessage="Upgrade immediately" />
-        <Icon type="right" />
+        <LegacyIcon type="right" />
       </a>
     </div>
   </Fragment>

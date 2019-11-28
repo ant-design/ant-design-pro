@@ -1,6 +1,6 @@
-import { Avatar, Card, Col, Divider, Icon, Input, Row, Tag } from 'antd';
+import { Avatar, Card, Col, Divider, Input, Row, Tag } from 'antd';
 import React, { PureComponent } from 'react';
-
+import { PlusOutlined } from '@ant-design/icons';
 import { Dispatch } from 'redux';
 import { GridContent } from '@ant-design/pro-layout';
 import Link from 'umi/link';
@@ -204,7 +204,7 @@ class Center extends PureComponent<CenterProps, CenterState> {
                         onClick={this.showInput}
                         style={{ background: '#fff', borderStyle: 'dashed' }}
                       >
-                        <Icon type="plus" />
+                        <PlusOutlined />
                       </Tag>
                     )}
                   </div>

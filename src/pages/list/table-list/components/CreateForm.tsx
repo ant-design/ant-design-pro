@@ -1,4 +1,5 @@
-import { Form, Input, Modal } from 'antd';
+import { Form } from '@ant-design/compatible';
+import { Input, Modal } from 'antd';
 
 import { FormComponentProps } from 'antd/es/form';
 import React from 'react';

@@ -1,4 +1,10 @@
-import { Avatar, Card, Dropdown, Icon, List, Menu, Tooltip } from 'antd';
+import { Avatar, Card, Dropdown, List, Menu, Tooltip } from 'antd';
+import {
+  DownloadOutlined,
+  EditOutlined,
+  ShareAltOutlined,
+  EllipsisOutlined,
+} from '@ant-design/icons';
 import React, { Component } from 'react';
 
 import { connect } from 'dva';
@@ -85,16 +91,16 @@ class Applications extends Component<Partial<ModalState>> {
               bodyStyle={{ paddingBottom: 20 }}
               actions={[
                 <Tooltip key="download" title="下载">
-                  <Icon type="download" />
+                  <DownloadOutlined />
                 </Tooltip>,
                 <Tooltip title="编辑" key="edit">
-                  <Icon type="edit" />
+                  <EditOutlined />
                 </Tooltip>,
                 <Tooltip title="分享" key="share">
-                  <Icon type="share-alt" />
+                  <ShareAltOutlined />
                 </Tooltip>,
                 <Dropdown overlay={itemMenu} key="ellipsis">
-                  <Icon type="ellipsis" />
+                  <EllipsisOutlined />
                 </Dropdown>,
               ]}
             >

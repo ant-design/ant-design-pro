@@ -6,8 +6,6 @@ import {
   DatePicker,
   Divider,
   Dropdown,
-  Form,
-  Icon,
   Input,
   InputNumber,
   Menu,
@@ -19,6 +17,7 @@ import React, { Component, Fragment } from 'react';
 
 import { Dispatch, Action } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
+import { Icon as LegacyIcon, Form } from '@ant-design/compatible';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { SorterResult } from 'antd/es/table';
 import { connect } from 'dva';
@@ -333,7 +332,7 @@ class TableList extends Component<TableListProps, TableListState> {
                 重置
               </Button>
               <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-                展开 <Icon type="down" />
+                展开 <LegacyIcon type="down" />
               </a>
             </span>
           </Col>
@@ -408,7 +407,7 @@ class TableList extends Component<TableListProps, TableListState> {
               重置
             </Button>
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-              收起 <Icon type="up" />
+              收起 <LegacyIcon type="up" />
             </a>
           </div>
         </div>
@@ -457,7 +456,7 @@ class TableList extends Component<TableListProps, TableListState> {
                   <Button>批量操作</Button>
                   <Dropdown overlay={menu}>
                     <Button>
-                      更多操作 <Icon type="down" />
+                      更多操作 <LegacyIcon type="down" />
                     </Button>
                   </Dropdown>
                 </span>

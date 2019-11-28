@@ -1,4 +1,5 @@
-import { Card, Col, Icon, Row, Table, Tooltip } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Card, Col, Row, Table, Tooltip } from 'antd';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import React from 'react';
 import numeral from 'numeral';
@@ -93,7 +94,7 @@ const TopSearch = ({
                   />
                 }
               >
-                <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
+                <LegacyIcon style={{ marginLeft: 8 }} type="info-circle-o" />
               </Tooltip>
             </span>
           }
@@ -120,7 +121,7 @@ const TopSearch = ({
                   />
                 }
               >
-                <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
+                <LegacyIcon style={{ marginLeft: 8 }} type="info-circle-o" />
               </Tooltip>
             </span>
           }

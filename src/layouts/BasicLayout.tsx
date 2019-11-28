@@ -9,20 +9,21 @@ import ProLayout, {
   Settings,
   DefaultFooter,
   SettingDrawer,
-  SettingDrawer,
 } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
 import Link from 'umi/link';
 import { Dispatch } from 'redux';
 import { connect } from 'dva';
 import { Result, Button } from 'antd';
-import { Github } from '@ant-design/icons';
+import { GithubOutlined } from '@ant-design/icons';
 import { formatMessage } from 'umi-plugin-react/locale';
+import '@ant-design/compatible/assets/index.css';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import { isAntDesignPro, getAuthorityFromRouter } from '@/utils/utils';
 import logo from '../assets/logo.svg';
+
 const noMatch = (
   <Result
     status="403"
@@ -72,7 +73,7 @@ const defaultFooterDom = (
       },
       {
         key: 'github',
-        title: <Github />,
+        title: <GithubOutlined />,
         href: 'https://github.com/ant-design/ant-design-pro',
         blankTarget: true,
       },

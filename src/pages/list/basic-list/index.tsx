@@ -5,8 +5,6 @@ import {
   Col,
   DatePicker,
   Dropdown,
-  Form,
-  Icon,
   Input,
   List,
   Menu,
@@ -21,6 +19,8 @@ import React, { Component } from 'react';
 
 import { Dispatch } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
+import { Form } from '@ant-design/compatible';
+import { PlusOutlined, DownloadOutlined } from '@ant-design/icons';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
 import { findDOMNode } from 'react-dom';
@@ -225,7 +225,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
         }
       >
         <a>
-          更多 <Icon type="down" />
+          更多 <DownloadOutlined />
         </a>
       </Dropdown>
     );
@@ -316,13 +316,13 @@ class BasicList extends Component<BasicListProps, BasicListState> {
               <Button
                 type="dashed"
                 style={{ width: '100%', marginBottom: 8 }}
-                icon="plus"
                 onClick={this.showModal}
                 ref={component => {
                   // eslint-disable-next-line  react/no-find-dom-node
                   this.addBtn = findDOMNode(component) as HTMLButtonElement;
                 }}
               >
+                <PlusOutlined />
                 添加
               </Button>
               <List

@@ -1,4 +1,5 @@
-import { Avatar, Card, Col, Dropdown, Form, Icon, List, Menu, Row, Select, Tooltip } from 'antd';
+import { Icon as LegacyIcon, Form } from '@ant-design/compatible';
+import { Avatar, Card, Col, Dropdown, List, Menu, Row, Select, Tooltip } from 'antd';
 import React, { Component } from 'react';
 
 import { Dispatch } from 'redux';
@@ -176,16 +177,16 @@ class Applications extends Component<ApplicationsProps> {
                 bodyStyle={{ paddingBottom: 20 }}
                 actions={[
                   <Tooltip key="download" title="下载">
-                    <Icon type="download" />
+                    <LegacyIcon type="download" />
                   </Tooltip>,
                   <Tooltip key="edit" title="编辑">
-                    <Icon type="edit" />
+                    <LegacyIcon type="edit" />
                   </Tooltip>,
                   <Tooltip title="分享" key="share">
-                    <Icon type="share-alt" />
+                    <LegacyIcon type="share-alt" />
                   </Tooltip>,
                   <Dropdown key="ellipsis" overlay={itemMenu}>
-                    <Icon type="ellipsis" />
+                    <LegacyIcon type="ellipsis" />
                   </Dropdown>,
                 ]}
               >

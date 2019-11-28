@@ -1,4 +1,5 @@
-import { Alert, Checkbox, Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Alert, Checkbox } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Component } from 'react';
 
@@ -199,9 +200,9 @@ class Login extends Component<LoginProps, LoginState> {
           </Submit>
           <div className={styles.other}>
             <FormattedMessage id="userandlogin.login.sign-in-with" />
-            <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
-            <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
-            <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
+            <LegacyIcon type="alipay-circle" className={styles.icon} theme="outlined" />
+            <LegacyIcon type="taobao-circle" className={styles.icon} theme="outlined" />
+            <LegacyIcon type="weibo-circle" className={styles.icon} theme="outlined" />
             <Link className={styles.register} to="/user/register">
               <FormattedMessage id="userandlogin.login.signup" />
             </Link>

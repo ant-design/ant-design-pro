@@ -6,7 +6,6 @@ import {
   Descriptions,
   Divider,
   Dropdown,
-  Icon,
   Menu,
   Popover,
   Steps,
@@ -14,6 +13,7 @@ import {
   Tooltip,
   Empty,
 } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { GridContent, PageHeaderWrapper, RouteContext } from '@ant-design/pro-layout';
 import React, { Component, Fragment } from 'react';
 
@@ -51,7 +51,7 @@ const action = (
         return (
           <Dropdown.Button
             type="primary"
-            icon={<Icon type="down" />}
+            icon={<LegacyIcon type="down" />}
             overlay={mobileMenu}
             placement="bottomRight"
           >
@@ -66,7 +66,7 @@ const action = (
             <Button>操作二</Button>
             <Dropdown overlay={menu} placement="bottomRight">
               <Button>
-                <Icon type="ellipsis" />
+                <LegacyIcon type="ellipsis" />
               </Button>
             </Dropdown>
           </ButtonGroup>
@@ -105,7 +105,7 @@ const desc1 = (
   <div className={classNames(styles.textSecondary, styles.stepDescription)}>
     <Fragment>
       曲丽丽
-      <Icon type="dingding-o" style={{ marginLeft: 8 }} />
+      <LegacyIcon type="dingding-o" style={{ marginLeft: 8 }} />
     </Fragment>
     <div>2016-12-12 12:32</div>
   </div>
@@ -115,7 +115,7 @@ const desc2 = (
   <div className={styles.stepDescription}>
     <Fragment>
       周毛毛
-      <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
+      <LegacyIcon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
     </Fragment>
     <div>
       <a href="">催一下</a>
@@ -331,7 +331,7 @@ class Advanced extends Component<
                     <span>
                       某某数据
                       <Tooltip title="数据说明">
-                        <Icon
+                        <LegacyIcon
                           style={{ color: 'rgba(0, 0, 0, 0.43)', marginLeft: 4 }}
                           type="info-circle-o"
                         />

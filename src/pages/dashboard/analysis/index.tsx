@@ -1,7 +1,8 @@
-import { Col, Dropdown, Icon, Menu, Row } from 'antd';
+import { Col, Dropdown, Menu, Row } from 'antd';
 import React, { Component, Suspense } from 'react';
 
 import { Dispatch } from 'redux';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { GridContent } from '@ant-design/pro-layout';
 import { RadioChangeEvent } from 'antd/es/radio';
 import { RangePickerValue } from 'antd/es/date-picker/interface';
@@ -151,7 +152,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     const dropdownGroup = (
       <span className={styles.iconGroup}>
         <Dropdown overlay={menu} placement="bottomRight">
-          <Icon type="ellipsis" />
+          <LegacyIcon type="ellipsis" />
         </Dropdown>
       </span>
     );

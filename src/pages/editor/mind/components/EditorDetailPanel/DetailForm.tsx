@@ -1,4 +1,5 @@
-import { Card, Form, Input, Select } from 'antd';
+import { Form } from '@ant-design/compatible';
+import { Card, Input, Select } from 'antd';
 import React, { Fragment } from 'react';
 
 import { FormComponentProps } from 'antd/es/form';

@@ -1,4 +1,5 @@
-import { Icon, List, Tag } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { List, Tag } from 'antd';
 import React, { Component } from 'react';
 
 import { connect } from 'dva';
@@ -18,7 +19,7 @@ class Articles extends Component<Partial<ModalState>> {
       text: React.ReactNode;
     }> = ({ type, text }) => (
       <span>
-        <Icon type={type} style={{ marginRight: 8 }} />
+        <LegacyIcon type={type} style={{ marginRight: 8 }} />
         {text}
       </span>
     );
