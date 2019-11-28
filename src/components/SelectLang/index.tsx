@@ -1,6 +1,6 @@
 import { Menu } from 'antd';
 import { formatMessage, getLocale, setLocale } from 'umi-plugin-react/locale';
-import { Global } from '@ant-design/icons';
+import { GlobalOutlined } from '@ant-design/icons';
 
 import { ClickParam } from 'antd/es/menu';
 import React from 'react';
@@ -43,7 +43,7 @@ const SelectLang: React.FC<SelectLangProps> = props => {
   return (
     <HeaderDropdown overlay={langMenu} placement="bottomRight">
       <span className={classNames(styles.dropDown, className)}>
-        <Global title={formatMessage({ id: 'navBar.lang' })} />
+        <GlobalOutlined title={formatMessage({ id: 'navBar.lang' })} />
       </span>
     </HeaderDropdown>
   );

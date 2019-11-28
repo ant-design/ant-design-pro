@@ -1,0 +1,28 @@
+@import '~antd/es/style/themes/default.less';
+
+.waterWave {
+  position: relative;
+  display: inline-block;
+  transform-origin: left;
+  .text {
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    span {
+      color: @text-color-secondary;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    h4 {
+      color: @heading-color;
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+  .waterWaveCanvasWrapper {
+    transform: scale(0.5);
+    transform-origin: 0 0;
+  }
+}
