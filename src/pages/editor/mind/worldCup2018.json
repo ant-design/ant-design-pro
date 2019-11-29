@@ -2,33 +2,42 @@
   "roots": [
     {
       "label": "法国",
+      "color": "#A2A2A2",
       "children": [
         {
           "label": "克罗地亚",
+          "color": "#A2A2A2",
           "side": "left",
           "children": [
             {
               "label": "克罗地亚",
+              "color": "#A2A2A2",
               "children": [
                 {
                   "label": "克罗地亚",
+                  "color": "#A2A2A2",
                   "children": [
                     {
-                      "label": "克罗地亚"
+                      "label": "克罗地亚",
+                      "color": "#A2A2A2"
                     },
                     {
-                      "label": "丹麦"
+                      "label": "丹麦",
+                      "color": "#A2A2A2"
                     }
                   ]
                 },
                 {
                   "label": "俄罗斯",
+                  "color": "#A2A2A2",
                   "children": [
                     {
-                      "label": "俄罗斯"
+                      "label": "俄罗斯",
+                      "color": "#A2A2A2"
                     },
                     {
-                      "label": "西班牙"
+                      "label": "西班牙",
+                      "color": "#A2A2A2"
                     }
                   ]
                 }
@@ -36,26 +45,33 @@
             },
             {
               "label": "英格兰",
+              "color": "#A2A2A2",
               "children": [
                 {
                   "label": "英格兰",
+                  "color": "#A2A2A2",
                   "children": [
                     {
-                      "label": "英格兰"
+                      "label": "英格兰",
+                      "color": "#A2A2A2"
                     },
                     {
-                      "label": "哥伦比亚"
+                      "label": "哥伦比亚",
+                      "color": "#A2A2A2"
                     }
                   ]
                 },
                 {
                   "label": "瑞典",
+                  "color": "#A2A2A2",
                   "children": [
                     {
-                      "label": "瑞士"
+                      "label": "瑞士",
+                      "color": "#A2A2A2"
                     },
                     {
-                      "label": "瑞典"
+                      "label": "瑞典",
+                      "color": "#A2A2A2"
                     }
                   ]
                 }
@@ -65,30 +81,38 @@
         },
         {
           "label": "法国",
+          "color": "#A2A2A2",
           "side": "right",
           "children": [
             {
               "label": "法国",
+              "color": "#A2A2A2",
               "children": [
                 {
                   "label": "法国",
+                  "color": "#A2A2A2",
                   "children": [
                     {
-                      "label": "法国"
+                      "label": "法国",
+                      "color": "#A2A2A2"
                     },
                     {
-                      "label": "阿根廷"
+                      "label": "阿根廷",
+                      "color": "#A2A2A2"
                     }
                   ]
                 },
                 {
                   "label": "乌拉圭",
+                  "color": "#A2A2A2",
                   "children": [
                     {
-                      "label": "乌拉圭"
+                      "label": "乌拉圭",
+                      "color": "#A2A2A2"
                     },
                     {
-                      "label": "葡萄牙"
+                      "label": "葡萄牙",
+                      "color": "#A2A2A2"
                     }
                   ]
                 }
@@ -96,26 +120,33 @@
             },
             {
               "label": "比利时",
+              "color": "#A2A2A2",
               "children": [
                 {
                   "label": "比利时",
+                  "color": "#A2A2A2",
                   "children": [
                     {
-                      "label": "比利时"
+                      "label": "比利时",
+                      "color": "#A2A2A2"
                     },
                     {
-                      "label": "日本"
+                      "label": "日本",
+                      "color": "#A2A2A2"
                     }
                   ]
                 },
                 {
                   "label": "巴西",
+                  "color": "#A2A2A2",
                   "children": [
                     {
-                      "label": "巴西"
+                      "label": "巴西",
+                      "color": "#A2A2A2"
                     },
                     {
-                      "label": "墨西哥"
+                      "label": "墨西哥",
+                      "color": "#A2A2A2"
                     }
                   ]
                 }

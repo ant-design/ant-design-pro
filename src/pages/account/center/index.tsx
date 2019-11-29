@@ -202,7 +202,7 @@ class Center extends PureComponent<CenterProps, CenterState> {
                     {!inputVisible && (
                       <Tag
                         onClick={this.showInput}
-                        style={{ background: '#fff', borderStyle: 'dashed' }}
+                        style={{ borderStyle: 'dashed' }}
                       >
                         <PlusOutlined />
                       </Tag>

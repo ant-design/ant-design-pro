@@ -54,7 +54,7 @@ class Projects extends Component<ProjectsProps> {
           <List.Item>
             <Card
               className={styles.card}
-              hoverable
+              bordered={false}
               cover={<img alt={item.title} src={item.cover} />}
             >
               <Card.Meta

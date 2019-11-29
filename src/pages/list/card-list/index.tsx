@@ -98,6 +98,7 @@ class CardList extends Component<CardListProps, CardListState> {
                   <List.Item key={item.id}>
                     <Card
                       hoverable
+                      bordered={false}
                       className={styles.card}
                       actions={[<a key="option1">操作一</a>, <a key="option2">操作二</a>]}
                     >

@@ -173,7 +173,7 @@ class Applications extends Component<ApplicationsProps> {
           renderItem={item => (
             <List.Item key={item.id}>
               <Card
-                hoverable
+                bordered={false}
                 bodyStyle={{ paddingBottom: 20 }}
                 actions={[
                   <Tooltip key="download" title="下载">

@@ -22,7 +22,7 @@
     padding: 0 12px;
     cursor: pointer;
     transition: all 0.3s;
-    > i {
+    :global(.anticon) {
       color: @text-color;
       vertical-align: middle;
     }
@@ -68,7 +68,7 @@
   .dark {
     .action {
       color: @text-color;
-      > i {
+      > i{
         color: @text-color;
       }
       &:hover {

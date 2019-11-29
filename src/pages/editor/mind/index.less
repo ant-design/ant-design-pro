@@ -9,7 +9,8 @@
 
 .editorHd {
   padding: 8px;
-  border: 1px solid #e6e9ed;
+  border: 1px solid @border-color-split;
+  background-color: @component-background;
 }
 
 .editorBd {
@@ -23,14 +24,14 @@
 }
 
 .editorSidebar {
-  background: #fafafa;
+  background: @component-background;
 
   &:first-child {
-    border-right: 1px solid #e6e9ed;
+    border-right: 1px solid @border-color-split;
   }
 
   &:last-child {
-    border-left: 1px solid #e6e9ed;
+    border-left: 1px solid @border-color-split;
   }
 }
 
@@ -38,4 +39,5 @@
 .mind,
 .koni {
   flex: 1;
+  background-color: @component-background;
 }
