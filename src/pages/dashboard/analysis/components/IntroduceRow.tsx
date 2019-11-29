@@ -10,6 +10,11 @@ import Trend from './Trend';
 import Yuan from '../utils/Yuan';
 import styles from '../style.less';
 
+const { Global } = window.G2;
+Global.setTheme('dark');
+Global.background = 'transparent';
+Global.plotBackground = 'transparent';
+
 const topColResponsiveProps = {
   xs: 24,
   sm: 12,
