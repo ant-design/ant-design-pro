@@ -209,7 +209,6 @@ class BasicList extends Component<BasicListProps, BasicListState> {
         </div>
         <div className={styles.listContentItem}>
           <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />
-          <Progress type="circle" percent={75} />
         </div>
       </div>
     );

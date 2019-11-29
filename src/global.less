@@ -1,4 +1,4 @@
-@import '~antd/es/style/themes/default.less';
+@import './legacy.less';
 
 html,
 body,
@@ -33,15 +33,375 @@ ol {
   .ant-table {
     width: 100%;
     overflow-x: auto;
+
     &-thead > tr,
     &-tbody > tr {
       > th,
       > td {
         white-space: pre;
+
         > span {
           display: block;
         }
       }
+    }
+  }
+}
+
+@ant-pro-setting-drawer: ~'@{ant-prefix}-pro-setting-drawer';
+
+.@{ant-pro-setting-drawer} {
+  &-content {
+    background: @drawer-bg;
+  }
+
+  &-block-checbox {
+    background: @drawer-bg;
+  }
+}
+
+:global {
+  .color {
+    & > div > div {
+      width: 512px;
+      height: 96px;
+      display: block;
+      color: @text-color;
+    }
+  }
+  .blue {
+    &-1 {
+      background: @blue-1;
+    }
+
+    &-2 {
+      background: @blue-2;
+    }
+
+    &-3 {
+      background: @blue-3;
+    }
+
+    &-4 {
+      background: @blue-4;
+    }
+
+    &-5 {
+      background: @blue-5;
+    }
+
+    &-6 {
+      background: @blue-6;
+    }
+
+    &-7 {
+      background: @blue-7;
+    }
+
+    &-8 {
+      background: @blue-8;
+    }
+
+    &-9 {
+      background: @blue-9;
+    }
+
+    &-10 {
+      background: @blue-10;
+    }
+  }
+
+  .red {
+    &-1 {
+      background: @red-1;
+    }
+
+    &-2 {
+      background: @red-2;
+    }
+
+    &-3 {
+      background: @red-3;
+    }
+
+    &-4 {
+      background: @red-4;
+    }
+
+    &-5 {
+      background: @red-5;
+    }
+
+    &-6 {
+      background: @red-6;
+    }
+
+    &-7 {
+      background: @red-7;
+    }
+
+    &-8 {
+      background: @red-8;
+    }
+
+    &-9 {
+      background: @red-9;
+    }
+
+    &-10 {
+      background: @red-10;
+    }
+  }
+
+  .green {
+    &-1 {
+      background: @green-1;
+    }
+
+    &-2 {
+      background: @green-2;
+    }
+
+    &-3 {
+      background: @green-3;
+    }
+
+    &-4 {
+      background: @green-4;
+    }
+
+    &-5 {
+      background: @green-5;
+    }
+
+    &-6 {
+      background: @green-6;
+    }
+
+    &-7 {
+      background: @green-7;
+    }
+
+    &-8 {
+      background: @green-8;
+    }
+
+    &-9 {
+      background: @green-9;
+    }
+
+    &-10 {
+      background: @green-10;
+    }
+  }
+
+  .geekblue {
+    &-1 {
+      background: @geekblue-1;
+    }
+
+    &-2 {
+      background: @geekblue-2;
+    }
+
+    &-3 {
+      background: @geekblue-3;
+    }
+
+    &-4 {
+      background: @geekblue-4;
+    }
+
+    &-5 {
+      background: @geekblue-5;
+    }
+
+    &-6 {
+      background: @geekblue-6;
+    }
+
+    &-7 {
+      background: @geekblue-7;
+    }
+
+    &-8 {
+      background: @geekblue-8;
+    }
+
+    &-9 {
+      background: @geekblue-9;
+    }
+
+    &-10 {
+      background: @geekblue-10;
+    }
+  }
+
+  .orange {
+    &-1 {
+      background: @orange-1;
+    }
+
+    &-2 {
+      background: @orange-2;
+    }
+
+    &-3 {
+      background: @orange-3;
+    }
+
+    &-4 {
+      background: @orange-4;
+    }
+
+    &-5 {
+      background: @orange-5;
+    }
+
+    &-6 {
+      background: @orange-6;
+    }
+
+    &-7 {
+      background: @orange-7;
+    }
+
+    &-8 {
+      background: @orange-8;
+    }
+
+    &-9 {
+      background: @orange-9;
+    }
+
+    &-10 {
+      background: @orange-10;
+    }
+  }
+
+  .yellow {
+    &-1 {
+      background: @yellow-1;
+    }
+
+    &-2 {
+      background: @yellow-2;
+    }
+
+    &-3 {
+      background: @yellow-3;
+    }
+
+    &-4 {
+      background: @yellow-4;
+    }
+
+    &-5 {
+      background: @yellow-5;
+    }
+
+    &-6 {
+      background: @yellow-6;
+    }
+
+    &-7 {
+      background: @yellow-7;
+    }
+
+    &-8 {
+      background: @yellow-8;
+    }
+
+    &-9 {
+      background: @yellow-9;
+    }
+
+    &-10 {
+      background: @yellow-10;
+    }
+  }
+
+  .gold {
+    &-1 {
+      background: @gold-1;
+    }
+
+    &-2 {
+      background: @gold-2;
+    }
+
+    &-3 {
+      background: @gold-3;
+    }
+
+    &-4 {
+      background: @gold-4;
+    }
+
+    &-5 {
+      background: @gold-5;
+    }
+
+    &-6 {
+      background: @gold-6;
+    }
+
+    &-7 {
+      background: @gold-7;
+    }
+
+    &-8 {
+      background: @gold-8;
+    }
+
+    &-9 {
+      background: @gold-9;
+    }
+
+    &-10 {
+      background: @gold-10;
+    }
+  }
+
+  .purple {
+    &-1 {
+      background: @purple-1;
+    }
+
+    &-2 {
+      background: @purple-2;
+    }
+
+    &-3 {
+      background: @purple-3;
+    }
+
+    &-4 {
+      background: @purple-4;
+    }
+
+    &-5 {
+      background: @purple-5;
+    }
+
+    &-6 {
+      background: @purple-6;
+    }
+
+    &-7 {
+      background: @purple-7;
+    }
+
+    &-8 {
+      background: @purple-8;
+    }
+
+    &-9 {
+      background: @purple-9;
+    }
+
+    &-10 {
+      background: @purple-10;
     }
   }
 }

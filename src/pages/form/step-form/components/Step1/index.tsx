@@ -44,7 +44,7 @@ const Step1: React.FC<Step1Props> = props => {
     });
   };
   return (
-    <Fragment>
+    <div className={styles['stepForm-wrapper']}>
       <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
         <Form.Item {...formItemLayout} label="付款账户">
           {getFieldDecorator('payAccount', {
@@ -116,7 +116,7 @@ const Step1: React.FC<Step1Props> = props => {
           如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。
         </p>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

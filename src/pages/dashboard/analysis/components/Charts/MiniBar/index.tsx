@@ -16,7 +16,7 @@ export interface MiniBarProps {
 }
 
 const MiniBar: React.FC<MiniBarProps> = props => {
-  const { height = 0, forceFit = true, color = '#1890FF', data = [] } = props;
+  const { height = 0, forceFit = true, color = '#167CDB', data = [] } = props;
 
   const scale = {
     x: {

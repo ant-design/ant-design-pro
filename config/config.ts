@@ -122,6 +122,12 @@ export default {
           authority: ['admin', 'user'],
           routes: [
             {
+              path: '/color',
+              name: 'Color',
+              icon: 'dashboard',
+              component: './color',
+            },
+            {
               path: '/dashboard',
               name: 'dashboard',
               icon: 'dashboard',
