@@ -58,7 +58,7 @@
   "dependencies": {
     "@ant-design/compatible": "^0.0.1-alpha.4",
     "@ant-design/icons": "^4.0.0-alpha.8",
-    "@ant-design/pro-layout": "^4.9.0-1",
+    "@ant-design/pro-layout": "4.9.0-1",
     "@antv/data-set": "^0.10.2",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.isequal": "^4.5.5",
