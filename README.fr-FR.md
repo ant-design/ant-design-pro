@@ -79,6 +79,8 @@ Nous avons besoin de votre aide: https://github.com/ant-design/ant-design-pro/is
 ### Utiliser bash
 
 ```bash
+$ mkdir <your-project-name>
+$ cd <your-project-name>
 $ yarn create umi  # or npm create umi
 
 # Choose ant-design-pro:
@@ -89,6 +91,7 @@ $ yarn create umi  # or npm create umi
   library         - Create a library with umi.
   plugin          - Create a umi plugin.
 
+$ git init
 $ npm install
 $ npm start         # visit http://localhost:8000
 ```
