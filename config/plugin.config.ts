@@ -1,5 +1,7 @@
 import path from 'path';
 
+import * as IWebpackChainConfig from 'webpack-chain';
+
 function getModulePackageName(module: { context: string }) {
   if (!module.context) return null;
 
@@ -19,7 +21,7 @@ function getModulePackageName(module: { context: string }) {
   return packageName;
 }
 
-export default (config: any) => {
+export default (config: IWebpackChainConfig) => {
   // optimize chunks
   config.optimization
     // share the same chunks across different modules
