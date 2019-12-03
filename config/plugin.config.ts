@@ -21,7 +21,7 @@ function getModulePackageName(module: { context: string }) {
   return packageName;
 }
 
-export default (config: IWebpackChainConfig) => {
+export const webpackPlugin = (config: IWebpackChainConfig) => {
   // optimize chunks
   config.optimization
     // share the same chunks across different modules
