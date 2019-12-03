@@ -86,6 +86,51 @@ const Color = () => {
           </Col>
         ))}
       </Row>
+      <br />
+      <Row className="cyan">
+        {colors.map((item, i) => (
+          <Col onMouseEnter={handleColor} className={`cyan-${i + 1}`}>
+            @cyan-{i + 1}
+            <p />
+          </Col>
+        ))}
+      </Row>
+      <br />
+      <Row className="magenta">
+        {colors.map((item, i) => (
+          <Col onMouseEnter={handleColor} className={`magenta-${i + 1}`}>
+            @magenta-{i + 1}
+            <p />
+          </Col>
+        ))}
+      </Row>
+      <br />
+      <Row className="pink">
+        {colors.map((item, i) => (
+          <Col onMouseEnter={handleColor} className={`pink-${i + 1}`}>
+            @pink-{i + 1}
+            <p />
+          </Col>
+        ))}
+      </Row>
+      <br />
+      <Row className="volcano">
+        {colors.map((item, i) => (
+          <Col onMouseEnter={handleColor} className={`volcano-${i + 1}`}>
+            @volcano-{i + 1}
+            <p />
+          </Col>
+        ))}
+      </Row>
+      <br />
+      <Row className="lime">
+        {colors.map((item, i) => (
+          <Col onMouseEnter={handleColor} className={`lime-${i + 1}`}>
+            @lime-{i + 1}
+            <p />
+          </Col>
+        ))}
+      </Row>
     </div>
   );
 };

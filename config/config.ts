@@ -1,8 +1,9 @@
 import { IConfig, IPlugin } from 'umi-types';
 import slash from 'slash2';
+import LessThemePlugin from 'webpack-less-theme-plugin';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
 
-import theme from './dark';
+const theme = require('antd/dist/antd-dark');
 
 const { pwa, primaryColor } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
@@ -395,7 +396,15 @@ export default {
   },
   manifest: {
     basePath: '/',
-  }, // chainWebpack: webpackPlugin,
+  },
+  chainWebpack(config, { webpack }) {
+    config.plugin('webpack-less-theme').use(
+      new LessThemePlugin({
+        theme: require.resolve('antd/lib/style/themes/default.less'),
+      }),
+    );
+  },
+  // chainWebpack: webpackPlugin,
   // proxy: {
   //   '/server/api/': {
   //     target: 'https://preview.pro.ant.design/',
