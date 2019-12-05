@@ -63,7 +63,7 @@
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.isequal": "^4.5.5",
     "@types/react-router": "^5.0.2",
-    "antd": "^4.0.0-alpha.12",
+    "antd": "^4.0.0-alpha.13",
     "bizcharts": "^3.5.3-beta.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",

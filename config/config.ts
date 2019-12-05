@@ -3,7 +3,7 @@ import slash from 'slash2';
 import LessThemePlugin from 'webpack-less-theme-plugin';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
 
-const theme = require('antd/dist/antd-dark');
+const theme = require('antd/dist/dark');
 
 const { pwa, primaryColor } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
