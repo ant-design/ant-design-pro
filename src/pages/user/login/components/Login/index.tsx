@@ -8,23 +8,21 @@ import LoginItem, { LoginItemProps, LoginItemType } from './LoginItem';
 import LoginSubmit from './LoginSubmit';
 import LoginTab from './LoginTab';
 import styles from './index.less';
-import { LoginParamsType } from '@/services/login';
 
 export interface LoginProps {
   defaultActiveKey?: string;
   onTabChange?: (key: string) => void;
   style?: React.CSSProperties;
-  onSubmit?: (error: unknown, values: LoginParamsType) => void;
+  onSubmit?: (error: any, values: any) => void;
   className?: string;
   form: FormComponentProps['form'];
-  onCreate?: (form?: FormComponentProps['form']) => void;
   children: React.ReactElement<typeof LoginTab>[];
 }
 
 interface LoginState {
   tabs?: string[];
   type?: string;
-  active?: { [key: string]: unknown[] };
+  active?: { [key: string]: any[] };
 }
 
 class Login extends Component<LoginProps, LoginState> {
@@ -54,13 +52,6 @@ class Login extends Component<LoginProps, LoginState> {
       tabs: [],
       active: {},
     };
-  }
-
-  componentDidMount() {
-    const { form, onCreate } = this.props;
-    if (onCreate) {
-      onCreate(form);
-    }
   }
 
   onSwitch = (type: string) => {
@@ -114,7 +105,7 @@ class Login extends Component<LoginProps, LoginState> {
     const { form, onSubmit } = this.props;
     const activeFields = active[type] || [];
     if (form) {
-      form.validateFields(activeFields as string[], { force: true }, (err, values) => {
+      form.validateFields(activeFields, { force: true }, (err, values) => {
         if (onSubmit) {
           onSubmit(err, values);
         }
@@ -125,21 +116,18 @@ class Login extends Component<LoginProps, LoginState> {
   render() {
     const { className, children } = this.props;
     const { type, tabs = [] } = this.state;
-    const TabChildren: React.ReactComponentElement<typeof LoginTab>[] = [];
-    const otherChildren: React.ReactElement<unknown>[] = [];
-    React.Children.forEach(
-      children,
-      (child: React.ReactComponentElement<typeof LoginTab> | React.ReactElement<unknown>) => {
-        if (!child) {
-          return;
-        }
-        if ((child.type as { typeName: string }).typeName === 'LoginTab') {
-          TabChildren.push(child as React.ReactComponentElement<typeof LoginTab>);
-        } else {
-          otherChildren.push(child);
-        }
-      },
-    );
+    const TabChildren: any[] = [];
+    const otherChildren: any[] = [];
+    React.Children.forEach(children, (child: any) => {
+      if (!child) {
+        return;
+      }
+      if (child.type.typeName === 'LoginTab') {
+        TabChildren.push(child);
+      } else {
+        otherChildren.push(child);
+      }
+    });
     return (
       <LoginContext.Provider value={this.getContext()}>
         <div className={classNames(className, styles.login)}>

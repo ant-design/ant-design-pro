@@ -38,8 +38,8 @@ jobs:
         displayName: install
       - script: npm run test:all
         env:
-           PROGRESS: none
-           UMI_UI: none
+          PROGRESS: none
+          UMI_UI: none
         displayName: test
 
   - job: Windows

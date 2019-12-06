@@ -3,32 +3,48 @@ import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Component } from 'react';
 
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { Dispatch, AnyAction } from 'redux';
+import { Dispatch } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
 import Link from 'umi/link';
 import { connect } from 'dva';
-import { StateType } from '@/models/login';
+import { StateType } from './model';
 import LoginComponents from './components/Login';
 import styles from './style.less';
-import { LoginParamsType } from '@/services/login';
-import { ConnectState } from '@/models/connect';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginComponents;
 
 interface LoginProps {
-  dispatch: Dispatch<AnyAction>;
-  userLogin: StateType;
+  dispatch: Dispatch<any>;
+  userAndlogin: StateType;
   submitting: boolean;
 }
 interface LoginState {
   type: string;
   autoLogin: boolean;
 }
+export interface FormDataType {
+  userName: string;
+  password: string;
+  mobile: string;
+  captcha: string;
+}
 
-@connect(({ login, loading }: ConnectState) => ({
-  userLogin: login,
-  submitting: loading.effects['login/login'],
-}))
+@connect(
+  ({
+    userAndlogin,
+    loading,
+  }: {
+    userAndlogin: StateType;
+    loading: {
+      effects: {
+        [key: string]: string;
+      };
+    };
+  }) => ({
+    userAndlogin,
+    submitting: loading.effects['userAndlogin/login'],
+  }),
+)
 class Login extends Component<LoginProps, LoginState> {
   loginForm: FormComponentProps['form'] | undefined | null = undefined;
 
@@ -43,12 +59,12 @@ class Login extends Component<LoginProps, LoginState> {
     });
   };
 
-  handleSubmit = (err: unknown, values: LoginParamsType) => {
+  handleSubmit = (err: any, values: FormDataType) => {
     const { type } = this.state;
     if (!err) {
       const { dispatch } = this.props;
       dispatch({
-        type: 'login/login',
+        type: 'userAndlogin/login',
         payload: {
           ...values,
           type,
@@ -62,30 +78,23 @@ class Login extends Component<LoginProps, LoginState> {
   };
 
   onGetCaptcha = () =>
-    new Promise<boolean>((resolve, reject) => {
+    new Promise((resolve, reject) => {
       if (!this.loginForm) {
         return;
       }
-      this.loginForm.validateFields(
-        ['mobile'],
-        {},
-        async (err: unknown, values: LoginParamsType) => {
-          if (err) {
-            reject(err);
-          } else {
-            const { dispatch } = this.props;
-            try {
-              const success = await ((dispatch({
-                type: 'login/getCaptcha',
-                payload: values.mobile,
-              }) as unknown) as Promise<unknown>);
-              resolve(!!success);
-            } catch (error) {
-              reject(error);
-            }
-          }
-        },
-      );
+      this.loginForm.validateFields(['mobile'], {}, (err: any, values: FormDataType) => {
+        if (err) {
+          reject(err);
+        } else {
+          const { dispatch } = this.props;
+          ((dispatch({
+            type: 'userAndlogin/getCaptcha',
+            payload: values.mobile,
+          }) as unknown) as Promise<any>)
+            .then(resolve)
+            .catch(reject);
+        }
+      });
     });
 
   renderMessage = (content: string) => (
@@ -93,8 +102,8 @@ class Login extends Component<LoginProps, LoginState> {
   );
 
   render() {
-    const { userLogin, submitting } = this.props;
-    const { status, type: loginType } = userLogin;
+    const { userAndlogin, submitting } = this.props;
+    const { status, type: loginType } = userAndlogin;
     const { type, autoLogin } = this.state;
     return (
       <div className={styles.main}>
@@ -102,98 +111,99 @@ class Login extends Component<LoginProps, LoginState> {
           defaultActiveKey={type}
           onTabChange={this.onTabChange}
           onSubmit={this.handleSubmit}
-          onCreate={(form?: FormComponentProps['form']) => {
+          ref={(form: any) => {
             this.loginForm = form;
           }}
         >
-          <Tab key="account" tab={formatMessage({ id: 'user-login.login.tab-login-credentials' })}>
+          <Tab
+            key="account"
+            tab={formatMessage({ id: 'userandlogin.login.tab-login-credentials' })}
+          >
             {status === 'error' &&
               loginType === 'account' &&
               !submitting &&
               this.renderMessage(
-                formatMessage({ id: 'user-login.login.message-invalid-credentials' }),
+                formatMessage({ id: 'userandlogin.login.message-invalid-credentials' }),
               )}
             <UserName
               name="userName"
-              placeholder={`${formatMessage({ id: 'user-login.login.userName' })}: admin or user`}
+              placeholder={`${formatMessage({ id: 'userandlogin.login.userName' })}: admin or user`}
               rules={[
                 {
                   required: true,
-                  message: formatMessage({ id: 'user-login.userName.required' }),
+                  message: formatMessage({ id: 'userandlogin.userName.required' }),
                 },
               ]}
             />
             <Password
               name="password"
-              placeholder={`${formatMessage({ id: 'user-login.login.password' })}: ant.design`}
+              placeholder={`${formatMessage({ id: 'userandlogin.login.password' })}: ant.design`}
               rules={[
                 {
                   required: true,
-                  message: formatMessage({ id: 'user-login.password.required' }),
+                  message: formatMessage({ id: 'userandlogin.password.required' }),
                 },
               ]}
               onPressEnter={e => {
                 e.preventDefault();
-                if (this.loginForm) {
-                  this.loginForm.validateFields(this.handleSubmit);
-                }
+                this.loginForm.validateFields(this.handleSubmit);
               }}
             />
           </Tab>
-          <Tab key="mobile" tab={formatMessage({ id: 'user-login.login.tab-login-mobile' })}>
+          <Tab key="mobile" tab={formatMessage({ id: 'userandlogin.login.tab-login-mobile' })}>
             {status === 'error' &&
               loginType === 'mobile' &&
               !submitting &&
               this.renderMessage(
-                formatMessage({ id: 'user-login.login.message-invalid-verification-code' }),
+                formatMessage({ id: 'userandlogin.login.message-invalid-verification-code' }),
               )}
             <Mobile
               name="mobile"
-              placeholder={formatMessage({ id: 'user-login.phone-number.placeholder' })}
+              placeholder={formatMessage({ id: 'userandlogin.phone-number.placeholder' })}
               rules={[
                 {
                   required: true,
-                  message: formatMessage({ id: 'user-login.phone-number.required' }),
+                  message: formatMessage({ id: 'userandlogin.phone-number.required' }),
                 },
                 {
                   pattern: /^1\d{10}$/,
-                  message: formatMessage({ id: 'user-login.phone-number.wrong-format' }),
+                  message: formatMessage({ id: 'userandlogin.phone-number.wrong-format' }),
                 },
               ]}
             />
             <Captcha
               name="captcha"
-              placeholder={formatMessage({ id: 'user-login.verification-code.placeholder' })}
+              placeholder={formatMessage({ id: 'userandlogin.verification-code.placeholder' })}
               countDown={120}
               onGetCaptcha={this.onGetCaptcha}
-              getCaptchaButtonText={formatMessage({ id: 'user-login.form.get-captcha' })}
-              getCaptchaSecondText={formatMessage({ id: 'user-login.captcha.second' })}
+              getCaptchaButtonText={formatMessage({ id: 'userandlogin.form.get-captcha' })}
+              getCaptchaSecondText={formatMessage({ id: 'userandlogin.captcha.second' })}
               rules={[
                 {
                   required: true,
-                  message: formatMessage({ id: 'user-login.verification-code.required' }),
+                  message: formatMessage({ id: 'userandlogin.verification-code.required' }),
                 },
               ]}
             />
           </Tab>
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
-              <FormattedMessage id="user-login.login.remember-me" />
+              <FormattedMessage id="userandlogin.login.remember-me" />
             </Checkbox>
             <a style={{ float: 'right' }} href="">
-              <FormattedMessage id="user-login.login.forgot-password" />
+              <FormattedMessage id="userandlogin.login.forgot-password" />
             </a>
           </div>
           <Submit loading={submitting}>
-            <FormattedMessage id="user-login.login.login" />
+            <FormattedMessage id="userandlogin.login.login" />
           </Submit>
           <div className={styles.other}>
-            <FormattedMessage id="user-login.login.sign-in-with" />
+            <FormattedMessage id="userandlogin.login.sign-in-with" />
             <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
             <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
             <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
             <Link className={styles.register} to="/user/register">
-              <FormattedMessage id="user-login.login.signup" />
+              <FormattedMessage id="userandlogin.login.signup" />
             </Link>
           </div>
         </LoginComponents>

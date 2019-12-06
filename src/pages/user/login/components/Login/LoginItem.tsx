@@ -1,8 +1,7 @@
 import { Button, Col, Form, Input, Row } from 'antd';
 import React, { Component } from 'react';
-import { FormComponentProps } from 'antd/es/form';
-import { GetFieldDecoratorOptions } from 'antd/es/form/Form';
 
+import { FormComponentProps } from 'antd/es/form';
 import omit from 'omit.js';
 import ItemMap from './map';
 import LoginContext, { LoginContextProps } from './LoginContext';
@@ -19,13 +18,14 @@ export interface LoginItemType {
   Captcha: React.FC<WrappedLoginItemProps>;
 }
 
-export interface LoginItemProps extends GetFieldDecoratorOptions {
+export interface LoginItemProps {
   name?: string;
+  rules?: any[];
   style?: React.CSSProperties;
-  onGetCaptcha?: (event?: MouseEvent) => void | Promise<boolean> | false;
+  onGetCaptcha?: (event?: MouseEvent) => void | Promise<any> | false;
   placeholder?: string;
   buttonText?: React.ReactNode;
-  onPressEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onPressEnter?: (e: any) => void;
   countDown?: number;
   getCaptchaButtonText?: string;
   getCaptchaSecondText?: string;
@@ -33,9 +33,9 @@ export interface LoginItemProps extends GetFieldDecoratorOptions {
   type?: string;
   defaultValue?: string;
   form?: FormComponentProps['form'];
-  customProps?: { [key: string]: unknown };
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  tabUtil?: LoginContextProps['tabUtil'];
+  customProps?: { [key: string]: any };
+  onChange?: (e: any) => void;
+  tabUtil?: any;
 }
 
 interface LoginItemState {
@@ -85,11 +85,11 @@ class WrapFormItem extends Component<LoginItemProps, LoginItemState> {
 
   getFormItemOptions = ({ onChange, defaultValue, customProps = {}, rules }: LoginItemProps) => {
     const options: {
-      rules?: LoginItemProps['rules'];
+      rules?: any[];
       onChange?: LoginItemProps['onChange'];
       initialValue?: LoginItemProps['defaultValue'];
     } = {
-      rules: rules || (customProps.rules as LoginItemProps['rules']),
+      rules: rules || customProps.rules,
     };
     if (onChange) {
       options.onChange = onChange;
