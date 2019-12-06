@@ -112,7 +112,7 @@ export default {
         updateTheme(primaryColor);
       }
       if (state.contentWidth !== contentWidth) {
-        window.dispatchEvent ? window.dispatchEvent(new Event('resize')) : null;
+        window.dispatchEvent && window.dispatchEvent(new Event('resize'));
       }
       updateColorWeak(colorWeak);
       window.history.replaceState(null, 'setting', urlParams.href);

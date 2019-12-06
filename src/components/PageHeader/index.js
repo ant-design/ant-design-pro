@@ -227,7 +227,7 @@ export default class PageHeader extends PureComponent {
                 </div>
               </div>
             </div>
-            {tabList && tabList.length ? (
+            {tabList && tabList.length > 0 && (
               <Tabs
                 className={styles.tabs}
                 {...activeKeyProps}
@@ -238,7 +238,7 @@ export default class PageHeader extends PureComponent {
                   <TabPane tab={item.tab} key={item.key} />
                 ))}
               </Tabs>
-            ) : null}
+            )}
           </Skeleton>
         </div>
       </div>

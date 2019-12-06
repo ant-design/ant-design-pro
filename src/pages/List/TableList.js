@@ -660,13 +660,13 @@ class TableList extends PureComponent {
           </div>
         </Card>
         <CreateForm {...parentMethods} modalVisible={modalVisible} />
-        {stepFormValues && Object.keys(stepFormValues).length ? (
+        {stepFormValues && Object.keys(stepFormValues).length > 0 && (
           <UpdateForm
             {...updateMethods}
             updateModalVisible={updateModalVisible}
             values={stepFormValues}
           />
-        ) : null}
+        )}
       </PageHeaderWrapper>
     );
   }
