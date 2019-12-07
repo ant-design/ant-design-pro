@@ -1,4 +1,10 @@
 import {
+  DingdingOutlined,
+  DownOutlined,
+  EllipsisOutlined,
+  InfoCircleOutlined,
+} from '@ant-design/icons';
+import {
   Badge,
   Button,
   Card,
@@ -6,7 +12,6 @@ import {
   Descriptions,
   Divider,
   Dropdown,
-  Icon,
   Menu,
   Popover,
   Steps,
@@ -51,7 +56,7 @@ const action = (
         return (
           <Dropdown.Button
             type="primary"
-            icon={<Icon type="down" />}
+            icon={<DownOutlined />}
             overlay={mobileMenu}
             placement="bottomRight"
           >
@@ -66,7 +71,7 @@ const action = (
             <Button>操作二</Button>
             <Dropdown overlay={menu} placement="bottomRight">
               <Button>
-                <Icon type="ellipsis" />
+                <EllipsisOutlined />
               </Button>
             </Dropdown>
           </ButtonGroup>
@@ -105,7 +110,7 @@ const desc1 = (
   <div className={classNames(styles.textSecondary, styles.stepDescription)}>
     <Fragment>
       曲丽丽
-      <Icon type="dingding-o" style={{ marginLeft: 8 }} />
+      <DingdingOutlined style={{ marginLeft: 8 }} />
     </Fragment>
     <div>2016-12-12 12:32</div>
   </div>
@@ -115,7 +120,7 @@ const desc2 = (
   <div className={styles.stepDescription}>
     <Fragment>
       周毛毛
-      <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
+      <DingdingOutlined style={{ color: '#00A0E9', marginLeft: 8 }} />
     </Fragment>
     <div>
       <a href="">催一下</a>
@@ -331,9 +336,8 @@ class Advanced extends Component<
                     <span>
                       某某数据
                       <Tooltip title="数据说明">
-                        <Icon
+                        <InfoCircleOutlined
                           style={{ color: 'rgba(0, 0, 0, 0.43)', marginLeft: 4 }}
-                          type="info-circle-o"
                         />
                       </Tooltip>
                     </span>

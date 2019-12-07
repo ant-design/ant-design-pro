@@ -1,4 +1,5 @@
-import { Button, Card, Icon, List, Typography } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, Card, List, Typography } from 'antd';
 import React, { Component } from 'react';
 
 import { Dispatch } from 'redux';
@@ -117,7 +118,7 @@ class CardList extends Component<CardListProps, CardListState> {
               return (
                 <List.Item>
                   <Button type="dashed" className={styles.newButton}>
-                    <Icon type="plus" /> 新增产品
+                    <PlusOutlined /> 新增产品
                   </Button>
                 </List.Item>
               );

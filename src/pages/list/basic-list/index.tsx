@@ -1,3 +1,6 @@
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { DownOutlined } from '@ant-design/icons';
 import {
   Avatar,
   Button,
@@ -5,8 +8,6 @@ import {
   Col,
   DatePicker,
   Dropdown,
-  Form,
-  Icon,
   Input,
   List,
   Menu,
@@ -225,7 +226,7 @@ class BasicList extends Component<BasicListProps, BasicListState> {
         }
       >
         <a>
-          更多 <Icon type="down" />
+          更多 <DownOutlined />
         </a>
       </Dropdown>
     );

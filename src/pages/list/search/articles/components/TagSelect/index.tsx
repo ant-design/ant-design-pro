@@ -1,4 +1,5 @@
-import { Icon, Tag } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Tag } from 'antd';
 import React, { Component } from 'react';
 
 import classNames from 'classnames';
@@ -161,7 +162,7 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
           })}
         {expandable && (
           <a className={styles.trigger} onClick={this.handleExpand}>
-            {expand ? collapseText : expandText} <Icon type={expand ? 'up' : 'down'} />
+            {expand ? collapseText : expandText} <LegacyIcon type={expand ? 'up' : 'down'} />
           </a>
         )}
       </div>

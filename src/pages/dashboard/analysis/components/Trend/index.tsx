@@ -1,4 +1,4 @@
-import { Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
 import React from 'react';
 import classNames from 'classnames';
 import styles from './index.less';
@@ -32,7 +32,7 @@ const Trend: React.FC<TrendProps> = ({
       <span>{children}</span>
       {flag && (
         <span className={styles[flag]}>
-          <Icon type={`caret-${flag}`} />
+          <LegacyIcon type={`caret-${flag}`} />
         </span>
       )}
     </div>

@@ -1,4 +1,5 @@
-import { Button, Card, Icon, Result } from 'antd';
+import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
+import { Button, Card, Result } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Fragment } from 'react';
 
@@ -14,25 +15,25 @@ const Content = (
       />
     </div>
     <div style={{ marginBottom: 16 }}>
-      <Icon style={{ marginRight: 8 }} className={styles.error_icon} type="close-circle-o" />
+      <CloseCircleOutlined style={{ marginRight: 8 }} className={styles.error_icon} />
       <FormattedMessage
         id="resultandfail.error.hint-text1"
         defaultMessage="Your account has been frozen"
       />
       <a style={{ marginLeft: 16 }}>
         <FormattedMessage id="resultandfail.error.hint-btn1" defaultMessage="Thaw immediately" />
-        <Icon type="right" />
+        <RightOutlined />
       </a>
     </div>
     <div>
-      <Icon style={{ marginRight: 8 }} className={styles.error_icon} type="close-circle-o" />
+      <CloseCircleOutlined style={{ marginRight: 8 }} className={styles.error_icon} />
       <FormattedMessage
         id="resultandfail.error.hint-text2"
         defaultMessage="Your account is not yet eligible to apply"
       />
       <a style={{ marginLeft: 16 }}>
         <FormattedMessage id="resultandfail.error.hint-btn2" defaultMessage="Upgrade immediately" />
-        <Icon type="right" />
+        <RightOutlined />
       </a>
     </div>
   </Fragment>

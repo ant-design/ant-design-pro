@@ -1,4 +1,5 @@
-import { Button, Card, Icon, Steps, Result, Descriptions } from 'antd';
+import { DingdingOutlined } from '@ant-design/icons';
+import { Button, Card, Steps, Result, Descriptions } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import React, { Fragment } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
@@ -11,7 +12,7 @@ const desc1 = (
   <div className={styles.title}>
     <div style={{ margin: '8px 0 4px' }}>
       <FormattedMessage id="resultandsuccess.success.step1-operator" defaultMessage="Qu Lili" />
-      <Icon style={{ marginLeft: 8, color: '#00A0E9' }} type="dingding-o" />
+      <DingdingOutlined style={{ marginLeft: 8, color: '#00A0E9' }} />
     </div>
     <div>2016-12-12 12:32</div>
   </div>
@@ -22,7 +23,7 @@ const desc2 = (
     <div style={{ margin: '8px 0 4px' }}>
       <FormattedMessage id="resultandsuccess.success.step2-operator" defaultMessage="Zhou Maomao" />
       <a href="">
-        <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
+        <DingdingOutlined style={{ color: '#00A0E9', marginLeft: 8 }} />
         <FormattedMessage id="resultandsuccess.success.step2-extra" defaultMessage="Urge" />
       </a>
     </div>

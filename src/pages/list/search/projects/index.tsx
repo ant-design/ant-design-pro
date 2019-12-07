@@ -1,4 +1,6 @@
-import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Card, Col, List, Row, Select, Typography } from 'antd';
 import React, { Component } from 'react';
 
 import { Dispatch } from 'redux';

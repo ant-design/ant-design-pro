@@ -1,4 +1,6 @@
-import { Alert, Button, Descriptions, Divider, Statistic, Form, Input } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Alert, Button, Descriptions, Divider, Statistic, Input } from 'antd';
 
 import { Dispatch } from 'redux';
 import { FormComponentProps } from 'antd/es/form';

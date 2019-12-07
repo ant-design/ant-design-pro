@@ -1,3 +1,6 @@
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import {
   Badge,
   Button,
@@ -6,8 +9,6 @@ import {
   DatePicker,
   Divider,
   Dropdown,
-  Form,
-  Icon,
   Input,
   InputNumber,
   Menu,
@@ -333,7 +334,7 @@ class TableList extends Component<TableListProps, TableListState> {
                 重置
               </Button>
               <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-                展开 <Icon type="down" />
+                展开 <DownOutlined />
               </a>
             </span>
           </Col>
@@ -408,7 +409,7 @@ class TableList extends Component<TableListProps, TableListState> {
               重置
             </Button>
             <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
-              收起 <Icon type="up" />
+              收起 <UpOutlined />
             </a>
           </div>
         </div>
@@ -457,7 +458,7 @@ class TableList extends Component<TableListProps, TableListState> {
                   <Button>批量操作</Button>
                   <Dropdown overlay={menu}>
                     <Button>
-                      更多操作 <Icon type="down" />
+                      更多操作 <DownOutlined />
                     </Button>
                   </Dropdown>
                 </span>

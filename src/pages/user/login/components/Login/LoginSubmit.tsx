@@ -1,4 +1,6 @@
-import { Button, Form } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Button } from 'antd';
 
 import { ButtonProps } from 'antd/es/button';
 import React from 'react';

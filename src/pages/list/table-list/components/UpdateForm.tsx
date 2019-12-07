@@ -1,4 +1,6 @@
-import { Button, DatePicker, Form, Input, Modal, Radio, Select, Steps } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Button, DatePicker, Input, Modal, Radio, Select, Steps } from 'antd';
 import React, { Component } from 'react';
 
 import { FormComponentProps } from 'antd/es/form';

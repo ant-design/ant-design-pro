@@ -1,4 +1,7 @@
-import { Button, Card, Col, Form, Icon, List, Row, Select, Tag } from 'antd';
+import { Form, Icon as LegacyIcon } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Button, Card, Col, List, Row, Select, Tag } from 'antd';
 import React, { Component } from 'react';
 
 import { Dispatch } from 'redux';
@@ -86,7 +89,7 @@ class Articles extends Component<ArticlesProps> {
       text: React.ReactNode;
     }> = ({ type, text }) => (
       <span>
-        <Icon type={type} style={{ marginRight: 8 }} />
+        <LegacyIcon type={type} style={{ marginRight: 8 }} />
         {text}
       </span>
     );
@@ -104,7 +107,7 @@ class Articles extends Component<ArticlesProps> {
         <Button onClick={this.fetchMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
           {loading ? (
             <span>
-              <Icon type="loading" /> 加载中...
+              <LoadingOutlined /> 加载中...
             </span>
           ) : (
             '加载更多'
