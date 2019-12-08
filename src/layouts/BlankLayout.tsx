@@ -3,7 +3,7 @@ import React from 'react';
 const Layout: React.FC = ({ children }) => (
   <div
     style={{
-      width: '100vh',
+      width: '100vw',
       height: '100vh',
     }}
   >
