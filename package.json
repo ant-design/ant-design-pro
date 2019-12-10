@@ -143,6 +143,7 @@
     "ignore": [
       ".dockerignore",
       ".git",
+      ".github",
       ".gitpod.yml",
       "CODE_OF_CONDUCT.md",
       "Dockerfile",
