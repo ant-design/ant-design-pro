@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
-import { routerRedux } from 'dva/router';
 import { Effect } from 'dva';
 import { stringify } from 'querystring';
+import router from 'umi/router';
 
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
@@ -57,25 +57,24 @@ const Model: LoginModelType = {
             return;
           }
         }
-        yield put(routerRedux.replace(redirect || '/'));
+        router.replace(redirect || '/');
       }
     },
 
     *getCaptcha({ payload }, { call }) {
       yield call(getFakeCaptcha, payload);
     },
-    *logout(_, { put }) {
+
+    logout() {
       const { redirect } = getPageQuery();
-      // redirect
+      // Note: There may be security issues, please note
       if (window.location.pathname !== '/user/login' && !redirect) {
-        yield put(
-          routerRedux.replace({
-            pathname: '/user/login',
-            search: stringify({
-              redirect: window.location.href,
-            }),
+        router.replace({
+          pathname: '/user/login',
+          search: stringify({
+            redirect: window.location.href,
           }),
-        );
+        });
       }
     },
   },
