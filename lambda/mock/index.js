@@ -4036,12 +4036,10 @@
     }
 
     const result = {
-      list: dataSource,
-      pagination: {
-        total: dataSource.length,
-        pageSize,
-        current: parseInt(params.currentPage, 10) || 1,
-      },
+      data: dataSource,
+      total: dataSource.length,
+      pageSize,
+      current: parseInt(params.currentPage, 10) || 1,
     };
     return res.json(result);
   }
