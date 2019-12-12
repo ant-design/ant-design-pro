@@ -33,9 +33,9 @@
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
     "test": "umi test",
-    "tsc": "tsc",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
+    "tsc": "tsc",
     "ui": "umi ui"
   },
   "husky": {
@@ -45,11 +45,11 @@
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
+    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write",
       "git add"
-    ],
-    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js"
+    ]
   },
   "browserslist": [
     "> 1%",
@@ -60,6 +60,8 @@
     "@ant-design/compatible": "^0.0.1-rc.0",
     "@ant-design/icons": "^4.0.0-alpha.19",
     "@ant-design/pro-layout": "4.11.0-1",
+    "@ant-design/pro-layout": "^4.8.7",
+    "@ant-design/pro-table": "^1.0.16",
     "@antv/data-set": "^0.10.2",
     "antd": "^4.0.0-rc.1",
     "classnames": "^2.2.6",
