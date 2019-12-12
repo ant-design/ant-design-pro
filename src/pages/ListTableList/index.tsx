@@ -9,8 +9,6 @@ import UpdateForm, { FormValueType } from './components/UpdateForm';
 import { TableListItem } from './data.d';
 import { queryRule, updateRule, addRule, removeRule } from './service';
 
-interface TableListProps extends FormComponentProps {}
-
 /**
  * 添加节点
  * @param fields
@@ -75,7 +73,7 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
   }
 };
 
-const TableList: React.FC<TableListProps> = () => {
+const TableList: React.FC<FormComponentProps> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
@@ -211,4 +209,4 @@ const TableList: React.FC<TableListProps> = () => {
   );
 };
 
-export default Form.create<TableListProps>()(TableList);
+export default Form.create<FormComponentProps>()(TableList);
