@@ -18,17 +18,13 @@ const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginComponents;
 interface LoginProps {
   dispatch: Dispatch<AnyAction>;
   userLogin: StateType;
-  submitting: boolean;
+  submitting?: boolean;
 }
 interface LoginState {
   type: string;
   autoLogin: boolean;
 }
 
-@connect(({ login, loading }: ConnectState) => ({
-  userLogin: login,
-  submitting: loading.effects['login/login'],
-}))
 class Login extends Component<LoginProps, LoginState> {
   loginForm: FormComponentProps['form'] | undefined | null = undefined;
 
@@ -202,4 +198,7 @@ class Login extends Component<LoginProps, LoginState> {
   }
 }
 
-export default Login;
+export default connect(({ login, loading }: ConnectState) => ({
+  userLogin: login.state,
+  submitting: loading.effects['login/login'],
+}))(Login);
