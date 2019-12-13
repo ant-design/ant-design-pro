@@ -25,7 +25,7 @@ export interface ConnectState {
   loading: Loading;
   settings: SettingModelState;
   user: UserModelState;
-  login: LoginModelType;
+  login: LoginModelType['state'];
 }
 
 export interface Route extends MenuDataItem {

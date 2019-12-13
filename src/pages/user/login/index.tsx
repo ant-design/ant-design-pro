@@ -89,7 +89,7 @@ class Login extends Component<LoginProps, LoginState> {
   );
 
   render() {
-    const { userLogin, submitting } = this.props;
+    const { userLogin = {}, submitting } = this.props;
     const { status, type: loginType } = userLogin;
     const { type, autoLogin } = this.state;
     return (
@@ -199,6 +199,6 @@ class Login extends Component<LoginProps, LoginState> {
 }
 
 export default connect(({ login, loading }: ConnectState) => ({
-  userLogin: login.state,
+  userLogin: login,
   submitting: loading.effects['login/login'],
 }))(Login);
