@@ -14,7 +14,7 @@ export interface UserLayoutProps extends ConnectProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
 }
 
-const UserLayout: React.SFC<UserLayoutProps> = props => {
+const UserLayout: React.FC<UserLayoutProps> = props => {
   const {
     route = {
       routes: [],
