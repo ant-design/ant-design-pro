@@ -7,8 +7,8 @@ import { CurrentUser } from '@/models/user';
 import PageLoading from '@/components/PageLoading';
 
 interface SecurityLayoutProps extends ConnectProps {
-  loading: boolean;
-  currentUser: CurrentUser;
+  loading?: boolean;
+  currentUser?: CurrentUser;
 }
 
 interface SecurityLayoutState {
