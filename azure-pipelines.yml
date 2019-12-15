@@ -46,12 +46,12 @@ jobs:
 
   - job: Windows
     pool:
-      vmImage: "vs2017-win2016"
+      vmImage: "win1803"
     steps:
       - task: NodeTool@0
         inputs:
           versionSpec: "11.x"
-      - script: yarn install
+      - script: npm install
         displayName: install
       - script: npm run lint
         displayName: lint
@@ -69,7 +69,7 @@ jobs:
 
   - job: MacOS
     pool:
-      vmImage: "macOS-10.13"
+      vmImage: "macOS-latest"
     steps:
       - task: NodeTool@0
         inputs:
