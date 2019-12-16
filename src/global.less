@@ -24,11 +24,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ant-pro-basicLayout {
-  width: 100%;
-  height: 100%;
-}
-
 ul,
 ol {
   list-style: none;
@@ -48,5 +43,12 @@ ol {
         }
       }
     }
+  }
+}
+
+// 兼容IE11
+@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
+  body .ant-design-pro > .ant-layout {
+    min-height: 100vh;
   }
 }
