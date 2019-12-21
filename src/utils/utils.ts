@@ -34,7 +34,7 @@ export const getAuthorityFromRouter = <T extends { path?: string }>(
   router: T[] = [],
   pathname: string,
 ): T | undefined => {
-  const authority = router.find(({ path }) => path && pathRegexp(path).exec(pathname));
+  const authority = router.find(({ path = '/' }) => path && pathRegexp(path).exec(pathname));
   if (authority) return authority;
   return undefined;
 };
