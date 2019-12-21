@@ -115,7 +115,7 @@ export default {
               authority: ['admin'],
             },
             {
-              name: '查询表格',
+              name: 'list.table-list',
               icon: 'table',
               path: '/list',
               component: './ListTableList',
