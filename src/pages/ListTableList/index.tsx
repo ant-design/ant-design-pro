@@ -138,7 +138,7 @@ const TableList: React.FC<FormComponentProps> = () => {
         headerTitle="查询表格"
         onInit={setActionRef}
         rowKey="key"
-        renderToolBar={(action, { selectedRows }) => [
+        toolBarRender={(action, { selectedRows }) => [
           <Button icon="plus" type="primary" onClick={() => handleModalVisible(true)}>
             新建
           </Button>,
@@ -165,7 +165,7 @@ const TableList: React.FC<FormComponentProps> = () => {
             </Dropdown>
           ),
         ]}
-        renderTableAlert={(selectedRowKeys, selectedRows) => (
+        tableAlertRender={(selectedRowKeys, selectedRows) => (
           <div>
             已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
             <span>
