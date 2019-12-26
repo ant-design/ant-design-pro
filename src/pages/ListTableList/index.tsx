@@ -77,6 +77,7 @@ const TableList: React.FC<FormComponentProps> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
+  const [sorter, setSorter] = useState({});
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
     {
@@ -137,6 +138,12 @@ const TableList: React.FC<FormComponentProps> = () => {
         headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="key"
+        onChange={(_, _filter, _sorter) => {
+          setSorter(`${_sorter.field}_${_sorter.order}`);
+        }}
+        params={{
+          sorter,
+        }}
         toolBarRender={(action, { selectedRows }) => [
           <Button icon="plus" type="primary" onClick={() => handleModalVisible(true)}>
             新建
