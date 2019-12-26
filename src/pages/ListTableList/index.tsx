@@ -1,9 +1,9 @@
 import { Button, Divider, Dropdown, Form, Icon, Menu, message } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { FormComponentProps } from 'antd/es/form';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import ProTable, { ProColumns, UseFetchDataAction } from '@ant-design/pro-table';
+import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
 import CreateForm from './components/CreateForm';
 import UpdateForm, { FormValueType } from './components/UpdateForm';
 import { TableListItem } from './data.d';
@@ -77,8 +77,7 @@ const TableList: React.FC<FormComponentProps> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
-
-  const [actionRef, setActionRef] = useState<UseFetchDataAction<{ data: TableListItem[] }>>();
+  const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
     {
       title: '规则名称',
@@ -136,7 +135,7 @@ const TableList: React.FC<FormComponentProps> = () => {
     <PageHeaderWrapper content="查询表格是每一个项目都需要的基本页面">
       <ProTable<TableListItem>
         headerTitle="查询表格"
-        onInit={setActionRef}
+        actionRef={actionRef}
         rowKey="key"
         toolBarRender={(action, { selectedRows }) => [
           <Button icon="plus" type="primary" onClick={() => handleModalVisible(true)}>
@@ -181,7 +180,9 @@ const TableList: React.FC<FormComponentProps> = () => {
           const success = await handleAdd(value);
           if (success) {
             handleModalVisible(false);
-            actionRef!.reload();
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
           }
         }}
         onCancel={() => handleModalVisible(false)}
@@ -194,7 +195,9 @@ const TableList: React.FC<FormComponentProps> = () => {
             if (success) {
               handleModalVisible(false);
               setStepFormValues({});
-              actionRef!.reload();
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
             }
           }}
           onCancel={() => {
