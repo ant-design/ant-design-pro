@@ -88,34 +88,32 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
     if (!children) {
       return null;
     }
-    const panes = React.Children.map(
-      children,
-      (child: React.ReactElement<NoticeIconTabProps>): React.ReactNode => {
-        if (!child) {
-          return null;
-        }
-        const { list, title, count, tabKey, showClear, showViewMore } = child.props;
-        const len = list && list.length ? list.length : 0;
-        const msgCount = count || count === 0 ? count : len;
-        const tabTitle: string = msgCount > 0 ? `${title} (${msgCount})` : title;
-        return (
-          <TabPane tab={tabTitle} key={title}>
-            <NoticeList
-              clearText={clearText}
-              viewMoreText={viewMoreText}
-              data={list}
-              onClear={(): void => this.onClear(title, tabKey)}
-              onClick={(item): void => this.onItemClick(item, child.props)}
-              onViewMore={(event): void => this.onViewMore(child.props, event)}
-              showClear={showClear}
-              showViewMore={showViewMore}
-              title={title}
-              {...child.props}
-            />
-          </TabPane>
-        );
-      },
-    );
+    const panes: ReactNodeArray = [];
+    React.Children.forEach(children, (child: React.ReactElement<NoticeIconTabProps>): void => {
+      if (!child) {
+        return;
+      }
+      const { list, title, count, tabKey, showClear, showViewMore } = child.props;
+      const len = list && list.length ? list.length : 0;
+      const msgCount = count || count === 0 ? count : len;
+      const tabTitle: string = msgCount > 0 ? `${title} (${msgCount})` : title;
+      panes.push(
+        <TabPane tab={tabTitle} key={tabKey}>
+          <NoticeList
+            clearText={clearText}
+            viewMoreText={viewMoreText}
+            data={list}
+            onClear={(): void => this.onClear(title, tabKey)}
+            onClick={(item): void => this.onItemClick(item, child.props)}
+            onViewMore={(event): void => this.onViewMore(child.props, event)}
+            showClear={showClear}
+            showViewMore={showViewMore}
+            title={title}
+            {...child.props}
+          />
+        </TabPane>,
+      );
+    });
     return (
       <>
         <Spin spinning={loading} delay={300}>
