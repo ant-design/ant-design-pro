@@ -88,7 +88,7 @@ export default class NoticeIcon extends Component<NoticeIconProps> {
     if (!children) {
       return null;
     }
-    const panes: ReactNodeArray = [];
+    const panes: React.ReactNode[] = [];
     React.Children.forEach(children, (child: React.ReactElement<NoticeIconTabProps>): void => {
       if (!child) {
         return;
