@@ -49,8 +49,7 @@
       "prettier --write",
       "git add"
     ],
-    "**/*.{js,jsx}": "npm run lint-staged:js",
-    "**/*.{js,ts,tsx}": "npm run lint-staged:js"
+    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js"
   },
   "browserslist": [
     "> 1%",
