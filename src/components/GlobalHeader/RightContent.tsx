@@ -3,6 +3,7 @@ import { Tooltip } from 'antd';
 import React from 'react';
 import { connect } from 'dva';
 import { ConnectProps, ConnectState } from '@/models/connect';
+import NoticeIconView from './NoticeIconView';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import SelectLang from '../SelectLang';
@@ -28,14 +29,26 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
         className={`${styles.action} ${styles.search}`}
         placeholder="站内搜索"
         defaultValue="umi ui"
-        dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
-        onSearch={value => {
-          console.log('input', value);
-        }}
-        onPressEnter={value => {
-          console.log('enter', value);
-        }}
+        options={[
+          { label: <a href="https://umijs.org/zh/guide/umi-ui.html">umi ui</a>, value: 'umi ui' },
+          {
+            label: <a href="next.ant.design">Ant Design</a>,
+            value: 'Ant Design',
+          },
+          {
+            label: <a href="https://protable.ant.design/">Pro Table</a>,
+            value: 'Pro Table',
+          },
+          {
+            label: <a href="https://prolayout.ant.design/">Pro Layout</a>,
+            value: 'Pro Layout',
+          },
+        ]}
+        // onSearch={value => {
+        //   //console.log('input', value);
+        // }}
       />
+      <NoticeIconView />
       <Tooltip title="使用文档">
         <a
           target="_blank"
