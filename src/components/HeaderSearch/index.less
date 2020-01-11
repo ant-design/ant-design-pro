@@ -1,12 +1,10 @@
 @import '~antd/es/style/themes/default.less';
 
 .headerSearch {
-  :global(.anticon-search) {
-    font-size: 16px;
-    cursor: pointer;
-  }
   .input {
     width: 0;
+    min-width: 0;
+    overflow: hidden;
     background: transparent;
     border-radius: 0;
     transition: width 0.3s, margin-left 0.3s;
