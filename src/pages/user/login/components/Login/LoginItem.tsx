@@ -1,16 +1,14 @@
-import { Button, Col, Form, Input, Row } from 'antd';
+import { Button, Col, Input, Row, Form, message } from 'antd';
 import React, { Component } from 'react';
-import { FormComponentProps } from 'antd/es/form';
-import { GetFieldDecoratorOptions } from 'antd/es/form/Form';
 
 import omit from 'omit.js';
+import { FormItemProps } from 'antd/es/form/FormItem';
 import ItemMap from './map';
 import LoginContext, { LoginContextProps } from './LoginContext';
 import styles from './index.less';
+import { getFakeCaptcha } from '@/services/login';
 
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
-export type WrappedLoginItemProps = Omit<LoginItemProps, 'form' | 'type' | 'updateActive'>;
+export type WrappedLoginItemProps = LoginItemProps;
 export type LoginItemKeyType = keyof typeof ItemMap;
 export interface LoginItemType {
   UserName: React.FC<WrappedLoginItemProps>;
@@ -19,10 +17,9 @@ export interface LoginItemType {
   Captcha: React.FC<WrappedLoginItemProps>;
 }
 
-export interface LoginItemProps extends GetFieldDecoratorOptions {
+export interface LoginItemProps extends Partial<FormItemProps> {
   name?: string;
   style?: React.CSSProperties;
-  onGetCaptcha?: (event?: MouseEvent) => void | Promise<boolean> | false;
   placeholder?: string;
   buttonText?: React.ReactNode;
   onPressEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -32,7 +29,6 @@ export interface LoginItemProps extends GetFieldDecoratorOptions {
   updateActive?: LoginContextProps['updateActive'];
   type?: string;
   defaultValue?: string;
-  form?: FormComponentProps['form'];
   customProps?: { [key: string]: unknown };
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   tabUtil?: LoginContextProps['tabUtil'];
@@ -70,17 +66,13 @@ class WrapFormItem extends Component<LoginItemProps, LoginItemState> {
     clearInterval(this.interval);
   }
 
-  onGetCaptcha = () => {
-    const { onGetCaptcha } = this.props;
-    const result = onGetCaptcha ? onGetCaptcha() : null;
+  onGetCaptcha = async (mobile: string) => {
+    const result = await getFakeCaptcha(mobile);
     if (result === false) {
       return;
     }
-    if (result instanceof Promise) {
-      result.then(this.runGetCaptchaCountDown);
-    } else {
-      this.runGetCaptchaCountDown();
-    }
+    message.success('获取验证码成功！验证码为：1234');
+    this.runGetCaptchaCountDown();
   };
 
   getFormItemOptions = ({ onChange, defaultValue, customProps = {}, rules }: LoginItemProps) => {
@@ -127,17 +119,12 @@ class WrapFormItem extends Component<LoginItemProps, LoginItemState> {
       getCaptchaSecondText,
       updateActive,
       type,
-      form,
       tabUtil,
       ...restProps
     } = this.props;
     if (!name) {
       return null;
     }
-    if (!form) {
-      return null;
-    }
-    const { getFieldDecorator } = form;
     // get getFieldDecorator props
     const options = this.getFormItemOptions(this.props);
     const otherProps = restProps || {};
@@ -146,28 +133,35 @@ class WrapFormItem extends Component<LoginItemProps, LoginItemState> {
       const inputProps = omit(otherProps, ['onGetCaptcha', 'countDown']);
 
       return (
-        <FormItem>
-          <Row gutter={8}>
-            <Col span={16}>
-              {getFieldDecorator(name, options)(<Input {...customProps} {...inputProps} />)}
-            </Col>
-            <Col span={8}>
-              <Button
-                disabled={!!count}
-                className={styles.getCaptcha}
-                size="large"
-                onClick={this.onGetCaptcha}
-              >
-                {count ? `${count} ${getCaptchaSecondText}` : getCaptchaButtonText}
-              </Button>
-            </Col>
-          </Row>
+        <FormItem shouldUpdate>
+          {({ getFieldValue }) => (
+            <Row gutter={8}>
+              <Col span={16}>
+                <FormItem name={name} {...options}>
+                  <Input {...customProps} {...inputProps} />
+                </FormItem>
+              </Col>
+              <Col span={8}>
+                <Button
+                  disabled={!!count}
+                  className={styles.getCaptcha}
+                  size="large"
+                  onClick={() => {
+                    const value = getFieldValue('mobile');
+                    this.onGetCaptcha(value);
+                  }}
+                >
+                  {count ? `${count} ${getCaptchaSecondText}` : getCaptchaButtonText}
+                </Button>
+              </Col>
+            </Row>
+          )}
         </FormItem>
       );
     }
     return (
-      <FormItem>
-        {getFieldDecorator(name, options)(<Input {...customProps} {...otherProps} />)}
+      <FormItem name={name} {...options}>
+        <Input {...customProps} {...otherProps} />
       </FormItem>
     );
   }
