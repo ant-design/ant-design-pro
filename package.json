@@ -57,9 +57,11 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@ant-design/pro-layout": "^4.10.0",
+    "@ant-design/compatible": "^0.0.1-rc.0",
+    "@ant-design/icons": "^4.0.0-alpha.19",
+    "@ant-design/pro-layout": "4.11.0-0",
     "@antv/data-set": "^0.10.2",
-    "antd": "^3.23.6",
+    "antd": "^4.0.0-rc.0",
     "classnames": "^2.2.6",
     "dva": "^2.6.0-beta.16",
     "lodash": "^4.17.11",
