@@ -4,7 +4,6 @@ import { ClickParam } from 'antd/es/menu';
 import React from 'react';
 import { connect } from 'dva';
 import { router } from 'umi';
-
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { CurrentUser } from '@/models/user';
 import HeaderDropdown from '../HeaderDropdown';
