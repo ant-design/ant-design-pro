@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { Dispatch, AnyAction } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
-import Link from 'umi/link';
+import { Link } from 'umi';
 import { connect } from 'dva';
 import { StateType } from '@/models/login';
 import LoginComponents from './components/Login';

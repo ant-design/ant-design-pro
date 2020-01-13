@@ -11,7 +11,7 @@ import ProLayout, {
   DefaultFooter,
 } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
-import Link from 'umi/link';
+import { Link } from 'umi';
 import { Dispatch } from 'redux';
 import { connect } from 'dva';
 import { Icon, Result, Button } from 'antd';

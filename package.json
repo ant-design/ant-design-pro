@@ -72,7 +72,7 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "redux": "^4.0.1",
-    "umi": "^2.8.7",
+    "umi": "^2.13.0",
     "umi-plugin-antd-theme": "^1.0.1",
     "umi-plugin-pro-block": "^1.3.2",
     "umi-plugin-react": "^1.9.5",
