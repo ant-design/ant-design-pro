@@ -97,7 +97,7 @@
     "enzyme": "^3.9.0",
     "express": "^4.17.1",
     "gh-pages": "^2.0.1",
-    "husky": "^3.0.0",
+    "husky": "^4.0.7",
     "import-sort-cli": "^6.0.0",
     "import-sort-parser-babylon": "^6.0.0",
     "import-sort-parser-typescript": "^6.0.0",
