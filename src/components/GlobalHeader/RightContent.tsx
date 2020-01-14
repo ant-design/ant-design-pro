@@ -3,7 +3,6 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import { connect } from 'dva';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import NoticeIconView from './NoticeIconView';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import SelectLang from '../SelectLang';
@@ -54,7 +53,6 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
         //   //console.log('input', value);
         // }}
       />
-      <NoticeIconView />
       <Tooltip title="使用文档">
         <a
           target="_blank"
