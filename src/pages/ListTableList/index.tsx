@@ -1,19 +1,24 @@
-import { Button, Divider, Dropdown, Form, Icon, Menu, message } from 'antd';
+import { Button, Divider, Dropdown, Menu, message } from 'antd';
 import React, { useState, useRef } from 'react';
-
-import { FormComponentProps } from 'antd/es/form';
+import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
-import CreateForm from './components/CreateForm';
-import UpdateForm, { FormValueType } from './components/UpdateForm';
 import { TableListItem } from './data.d';
-import { queryRule, updateRule, addRule, removeRule } from './service';
+import { queryRule, addRule, removeRule } from './service';
+
+export interface FormValueType extends Partial<TableListItem> {
+  target?: string;
+  template?: string;
+  type?: string;
+  time?: string;
+  frequency?: string;
+}
 
 /**
  * 添加节点
  * @param fields
  */
-const handleAdd = async (fields: FormValueType) => {
+export const handleAdd = async (fields: FormValueType) => {
   const hide = message.loading('正在添加');
   try {
     await addRule({
@@ -25,29 +30,6 @@ const handleAdd = async (fields: FormValueType) => {
   } catch (error) {
     hide();
     message.error('添加失败请重试！');
-    return false;
-  }
-};
-
-/**
- * 更新节点
- * @param fields
- */
-const handleUpdate = async (fields: FormValueType) => {
-  const hide = message.loading('正在配置');
-  try {
-    await updateRule({
-      name: fields.name,
-      desc: fields.desc,
-      key: fields.key,
-    });
-    hide();
-
-    message.success('配置成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('配置失败请重试！');
     return false;
   }
 };
@@ -73,10 +55,7 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
   }
 };
 
-const TableList: React.FC<FormComponentProps> = () => {
-  const [createModalVisible, handleModalVisible] = useState<boolean>(false);
-  const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
-  const [stepFormValues, setStepFormValues] = useState({});
+const TableList: React.FC<{}> = () => {
   const [sorter, setSorter] = useState({});
   const actionRef = useRef<ActionType>();
   const columns: ProColumns<TableListItem>[] = [
@@ -115,16 +94,9 @@ const TableList: React.FC<FormComponentProps> = () => {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
-      render: (_, record) => (
+      render: () => (
         <>
-          <a
-            onClick={() => {
-              handleUpdateModalVisible(true);
-              setStepFormValues(record);
-            }}
-          >
-            配置
-          </a>
+          <a onClick={() => {}}>配置</a>
           <Divider type="vertical" />
           <a href="">订阅警报</a>
         </>
@@ -145,8 +117,8 @@ const TableList: React.FC<FormComponentProps> = () => {
           sorter,
         }}
         toolBarRender={(action, { selectedRows }) => [
-          <Button icon="plus" type="primary" onClick={() => handleModalVisible(true)}>
-            新建
+          <Button type="primary" onClick={() => {}}>
+            <PlusOutlined /> 新建
           </Button>,
           selectedRows && selectedRows.length > 0 && (
             <Dropdown
@@ -166,7 +138,7 @@ const TableList: React.FC<FormComponentProps> = () => {
               }
             >
               <Button>
-                批量操作 <Icon type="down" />
+                批量操作 <DownOutlined />
               </Button>
             </Dropdown>
           ),
@@ -182,41 +154,8 @@ const TableList: React.FC<FormComponentProps> = () => {
         request={params => queryRule(params)}
         columns={columns}
       />
-      <CreateForm
-        onSubmit={async value => {
-          const success = await handleAdd(value);
-          if (success) {
-            handleModalVisible(false);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
-          }
-        }}
-        onCancel={() => handleModalVisible(false)}
-        modalVisible={createModalVisible}
-      />
-      {stepFormValues && Object.keys(stepFormValues).length ? (
-        <UpdateForm
-          onSubmit={async value => {
-            const success = await handleUpdate(value);
-            if (success) {
-              handleModalVisible(false);
-              setStepFormValues({});
-              if (actionRef.current) {
-                actionRef.current.reload();
-              }
-            }
-          }}
-          onCancel={() => {
-            handleUpdateModalVisible(false);
-            setStepFormValues({});
-          }}
-          updateModalVisible={updateModalVisible}
-          values={stepFormValues}
-        />
-      ) : null}
     </PageHeaderWrapper>
   );
 };
 
-export default Form.create<FormComponentProps>()(TableList);
+export default TableList;
