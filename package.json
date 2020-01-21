@@ -112,6 +112,7 @@
     "pro-download": "1.0.1",
     "serverless-http": "^2.0.2",
     "stylelint": "^13.0.0",
+    "umi-plugin-antd-icon-config": "^1.0.2",
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-pro": "^1.0.2",
     "umi-types": "^0.5.0"

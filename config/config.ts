@@ -11,6 +11,7 @@ const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
 const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
 
 const plugins: IPlugin[] = [
+  ['umi-plugin-antd-icon-config', {}],
   [
     'umi-plugin-react',
     {
