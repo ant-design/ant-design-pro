@@ -1,5 +1,6 @@
 import { IConfig, IPlugin } from 'umi-types';
 import defaultSettings from './defaultSettings'; // https://umijs.org/config/
+
 import slash from 'slash2';
 import themePluginConfig from './themePluginConfig';
 import proxy from './proxy';
@@ -11,7 +12,6 @@ const { pwa } = defaultSettings;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, REACT_APP_ENV } = process.env;
 const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
-
 const plugins: IPlugin[] = [
   ['umi-plugin-antd-icon-config', {}],
   [
@@ -127,6 +127,12 @@ export default {
               ],
             },
             {
+              name: 'list.table-list',
+              icon: 'table',
+              path: '/list',
+              component: './ListTableList',
+            },
+            {
               component: './404',
             },
           ],
@@ -136,7 +142,6 @@ export default {
         },
       ],
     },
-
     {
       component: './404',
     },
