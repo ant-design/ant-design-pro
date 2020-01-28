@@ -2,7 +2,6 @@ import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from 
 import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
 import { Dispatch, AnyAction } from 'redux';
-import { FormComponentProps } from 'antd/es/form';
 import { Link } from 'umi';
 import { connect } from 'dva';
 import { StateType } from '@/models/login';
