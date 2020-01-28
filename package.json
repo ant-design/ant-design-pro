@@ -60,7 +60,7 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0-alpha.19",
-    "@ant-design/pro-layout": "4.11.0-1",
+    "@ant-design/pro-layout": "^5.0.0",
     "@ant-design/pro-table": "^1.0.16",
     "@antv/data-set": "^0.10.2",
     "antd": "^4.0.0-rc.1",
