@@ -30,7 +30,7 @@ export const getPageQuery = () => parse(window.location.href.split('?')[1]);
  * @param router [{}]
  * @param pathname string
  */
-export const getAuthorityFromRouter = <T extends { routes: []; path?: string }>(
+export const getAuthorityFromRouter = <T extends Route>(
   router: T[] = [],
   pathname: string,
 ): T | undefined => {
