@@ -56,7 +56,7 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@ant-design/pro-layout": "^4.10.0",
+    "@ant-design/pro-layout": "^4.10.13",
     "@antv/data-set": "^0.10.2",
     "antd": "^3.23.6",
     "classnames": "^2.2.6",
