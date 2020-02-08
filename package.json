@@ -30,15 +30,16 @@
     "prettier": "prettier -c --write \"**/*\"",
     "site": "npm run fetch:blocks && npm run build && npm run functions:build",
     "start": "umi dev",
+    "dev": "npm run start:dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
-    "start:test": "cross-env REACT_APP_ENV=test MOCK=none umi dev",
-    "start:pre": "cross-env REACT_APP_ENV=pre MOCK=none umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
+    "start:pre": "cross-env REACT_APP_ENV=pre MOCK=none umi dev",
+    "start:test": "cross-env REACT_APP_ENV=test MOCK=none umi dev",
     "test": "umi test",
-    "tsc": "tsc",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
+    "tsc": "tsc",
     "ui": "umi ui"
   },
   "husky": {
@@ -48,10 +49,10 @@
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
+    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
-    ],
-    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js"
+    ]
   },
   "browserslist": [
     "> 1%",
