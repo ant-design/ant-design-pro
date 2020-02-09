@@ -3,6 +3,8 @@ import { Button, Divider, Dropdown, Menu, message } from 'antd';
 import React, { useState, useRef } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
+import { SorterResult } from 'antd/es/table/interface';
+
 import CreateForm from './components/CreateForm';
 import UpdateForm, { FormValueType } from './components/UpdateForm';
 import { TableListItem } from './data.d';
@@ -137,7 +139,8 @@ const TableList: React.FC<{}> = () => {
         actionRef={actionRef}
         rowKey="key"
         onChange={(_, _filter, _sorter) => {
-          setSorter(`${_sorter.field}_${_sorter.order}`);
+          const sorterResult = _sorter as SorterResult<TableListItem>;
+          setSorter(`${sorterResult.field}_${sorterResult.order}`);
         }}
         params={{
           sorter,
