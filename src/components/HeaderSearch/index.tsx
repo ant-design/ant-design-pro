@@ -83,7 +83,6 @@ const HeaderSearch: React.FC<HeaderSearchProps> = props => {
       >
         <Input
           ref={inputRef}
-          size="middle"
           defaultValue={defaultValue}
           aria-label={placeholder}
           placeholder={placeholder}
