@@ -4,9 +4,9 @@ import { connect } from 'dva';
 import groupBy from 'lodash/groupBy';
 import moment from 'moment';
 import { NoticeItem } from '@/models/global';
-import NoticeIcon from '../NoticeIcon';
 import { CurrentUser } from '@/models/user';
 import { ConnectProps, ConnectState } from '@/models/connect';
+import NoticeIcon from '../NoticeIcon';
 import styles from './index.less';
 
 export interface GlobalHeaderRightProps extends ConnectProps {
