@@ -14,8 +14,20 @@
     <noscript>Out-of-the-box mid-stage front/design solution!</noscript>
     <div id="root">
       <style>
+        html,
+        body,
+        #root {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+        #root {
+          background-image: url('/home_bg.png');
+          background-repeat: no-repeat;
+          background-size: 100% auto;
+        }
         .page-loading-warp {
-          padding: 120px;
+          padding: 98px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -155,12 +167,25 @@
           }
         }
       </style>
-      <div class="page-loading-warp">
-        <div class="ant-spin ant-spin-lg ant-spin-spinning">
-          <span class="ant-spin-dot ant-spin-dot-spin"
-            ><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i
-            ><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i
-          ></span>
+      <div
+        style="display: flex;justify-content: center;align-items: center;flex-direction: column;min-height: 420px;height: 100%;"
+      >
+        <img src="/pro_icon.svg" alt="logo" width="256" />
+        <div class="page-loading-warp">
+          <div class="ant-spin ant-spin-lg ant-spin-spinning">
+            <span class="ant-spin-dot ant-spin-dot-spin"
+              ><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i
+              ><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i
+            ></span>
+          </div>
+        </div>
+        <div style="display: flex;justify-content: center;align-items: center;">
+          <img
+            src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+            width="32"
+            style="margin-right: 8px;"
+          />
+          Ant Design
         </div>
       </div>
     </div>
