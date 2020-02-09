@@ -15,7 +15,7 @@
     "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
     "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
     "fetch:blocks": "pro fetch-blocks && npm run prettier",
-    "format-imports": "cross-env import-sort --write '**/*.{js,jsx,ts,tsx}'",
+    "format-imports": "import-sort --write '**/*.{js,jsx,ts,tsx}'",
     "functions:build": "netlify-lambda build ./lambda",
     "functions:run": "cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
     "gh-pages": "cp CNAME ./dist/ && gh-pages -d dist",
@@ -30,12 +30,16 @@
     "prettier": "prettier -c --write \"**/*\"",
     "site": "npm run fetch:blocks && npm run build && npm run functions:build",
     "start": "umi dev",
+    "dev": "npm run start:dev",
+    "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
+    "start:pre": "cross-env REACT_APP_ENV=pre MOCK=none umi dev",
+    "start:test": "cross-env REACT_APP_ENV=test MOCK=none umi dev",
     "test": "umi test",
-    "tsc": "tsc",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
+    "tsc": "tsc",
     "ui": "umi ui"
   },
   "husky": {
@@ -45,10 +49,10 @@
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
+    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
-    ],
-    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js"
+    ]
   },
   "browserslist": [
     "> 1%",
@@ -78,7 +82,7 @@
     "umi-request": "^1.0.8"
   },
   "devDependencies": {
-    "@ant-design/pro-cli": "^1.0.14",
+    "@ant-design/pro-cli": "^1.0.18",
     "@types/classnames": "^2.2.7",
     "@types/express": "^4.17.0",
     "@types/history": "^4.7.2",
