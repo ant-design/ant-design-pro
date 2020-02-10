@@ -48,12 +48,8 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
             id: 'component.globalHeader.search.example3',
           }),
         ]}
-        onSearch={value => {
-          console.log('input', value);
-        }}
-        onPressEnter={value => {
-          console.log('enter', value);
-        }}
+        onSearch={() => {}}
+        onPressEnter={() => {}}
       />
       <Tooltip
         title={formatMessage({
