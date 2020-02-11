@@ -49,9 +49,14 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
             value: 'Pro Layout',
           },
         ]}
+<<<<<<< HEAD
         // onSearch={value => {
         //   //console.log('input', value);
         // }}
+=======
+        onSearch={() => {}}
+        onPressEnter={() => {}}
+>>>>>>> bugfix: fix SecurityLayout error (ant-design#5640) (#5956)
       />
       <Tooltip title="使用文档">
         <a
