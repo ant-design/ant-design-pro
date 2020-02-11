@@ -15,6 +15,7 @@ const generateId = (() => {
 
 interface LoginTabProps extends TabPaneProps {
   tabUtil: LoginContextProps['tabUtil'];
+  active?: boolean;
 }
 
 const LoginTab: React.FC<LoginTabProps> = props => {
@@ -25,9 +26,8 @@ const LoginTab: React.FC<LoginTabProps> = props => {
       tabUtil.addTab(uniqueId);
     }
   }, []);
-
   const { children } = props;
-  return <TabPane {...props}>{children}</TabPane>;
+  return <TabPane {...props}>{props.active && children}</TabPane>;
 };
 
 const WrapContext: React.FC<TabPaneProps> & {
