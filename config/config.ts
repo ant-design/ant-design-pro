@@ -93,10 +93,9 @@ export default {
               path: '/list',
               component: './ListTableList',
             },
-            // not convert path
-            // {
-            //   component: './404',
-            // },
+            {
+              component: './404',
+            },
           ],
         },
         {
