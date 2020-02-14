@@ -3,6 +3,7 @@ import defaultSettings from './defaultSettings'; // https://umijs.org/config/
 import slash from 'slash2';
 import themePluginConfig from './themePluginConfig';
 import proxy from './proxy';
+import webpackPlugin from './plugin.config';
 
 const { pwa } = defaultSettings;
 
@@ -186,4 +187,5 @@ export default {
     basePath: '/',
   },
   proxy: proxy[REACT_APP_ENV || 'dev'],
+  chainWebpack: webpackPlugin,
 } as IConfig;
