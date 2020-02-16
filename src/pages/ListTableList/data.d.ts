@@ -4,7 +4,6 @@ export interface TableListItem {
   href: string;
   avatar: string;
   name: string;
-  title: string;
   owner: string;
   desc: string;
   callNo: number;

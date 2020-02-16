@@ -14,12 +14,10 @@ import { queryRule, updateRule, addRule, removeRule } from './service';
  * 添加节点
  * @param fields
  */
-const handleAdd = async (fields: FormValueType) => {
+const handleAdd = async (fields: TableListItem) => {
   const hide = message.loading('正在添加');
   try {
-    await addRule({
-      desc: fields.desc,
-    });
+    await addRule({ ...fields });
     hide();
     message.success('添加成功');
     return true;
@@ -75,7 +73,7 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
 };
 
 const TableList: React.FC<{}> = () => {
-  const [sorter, setSorter] = useState({});
+  const [sorter, setSorter] = useState<string>('');
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
@@ -84,20 +82,29 @@ const TableList: React.FC<{}> = () => {
     {
       title: '规则名称',
       dataIndex: 'name',
+      rules: [
+        {
+          required: true,
+          message: '规则名称为必填项',
+        },
+      ],
     },
     {
       title: '描述',
       dataIndex: 'desc',
+      valueType: 'textarea',
     },
     {
       title: '服务调用次数',
       dataIndex: 'callNo',
       sorter: true,
+      hideInForm: true,
       renderText: (val: string) => `${val} 万`,
     },
     {
       title: '状态',
       dataIndex: 'status',
+      hideInForm: true,
       valueEnum: {
         0: { text: '关闭', status: 'Default' },
         1: { text: '运行中', status: 'Processing' },
@@ -110,6 +117,7 @@ const TableList: React.FC<{}> = () => {
       dataIndex: 'updatedAt',
       sorter: true,
       valueType: 'dateTime',
+      hideInForm: true,
     },
     {
       title: '操作',
@@ -140,7 +148,9 @@ const TableList: React.FC<{}> = () => {
         rowKey="key"
         onChange={(_, _filter, _sorter) => {
           const sorterResult = _sorter as SorterResult<TableListItem>;
-          setSorter(`${sorterResult.field}_${sorterResult.order}`);
+          if (sorterResult.field) {
+            setSorter(`${sorterResult.field}_${sorterResult.order}`);
+          }
         }}
         params={{
           sorter,
@@ -184,19 +194,23 @@ const TableList: React.FC<{}> = () => {
         columns={columns}
         rowSelection={{}}
       />
-      <CreateForm
-        onSubmit={async value => {
-          const success = await handleAdd(value);
-          if (success) {
-            handleModalVisible(false);
-            if (actionRef.current) {
-              actionRef.current.reload();
+      <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
+        <ProTable<TableListItem, TableListItem>
+          onSubmit={async value => {
+            const success = await handleAdd(value);
+            if (success) {
+              handleModalVisible(false);
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
             }
-          }
-        }}
-        onCancel={() => handleModalVisible(false)}
-        modalVisible={createModalVisible}
-      />
+          }}
+          rowKey="key"
+          type="form"
+          columns={columns}
+          rowSelection={{}}
+        />
+      </CreateForm>
       {stepFormValues && Object.keys(stepFormValues).length ? (
         <UpdateForm
           onSubmit={async value => {
