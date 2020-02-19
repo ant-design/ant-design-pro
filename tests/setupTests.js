@@ -1,13 +1,22 @@
-/* eslint-disable import/first */
-import '../src/polyfill';
-import { jsdom } from 'jsdom';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import 'jsdom-global/register';
 
-Enzyme.configure({ adapter: new Adapter() });
+// browserMocks.js
+const localStorageMock = (() => {
+  let store = {};
 
-// fixed jsdom miss
-const documentHTML = '<!doctype html><html><body><div id="root"></div></body></html>';
-global.document = jsdom(documentHTML);
-global.window = document.defaultView;
-global.navigator = global.window.navigator;
+  return {
+    getItem(key) {
+      return store[key] || null;
+    },
+    setItem(key, value) {
+      store[key] = value.toString();
+    },
+    clear() {
+      store = {};
+    },
+  };
+})();
+
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock,
+});

@@ -1,108 +1,165 @@
 {
   "name": "ant-design-pro",
-  "version": "0.2.0",
-  "description": "An out-of-box UI solution for enterprise applications",
+  "version": "4.0.0",
   "private": true,
+  "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
-    "precommit": "npm run lint-staged",
-    "start": "roadhog server",
-    "start:no-proxy": "NO_PROXY=true roadhog server",
-    "build": "roadhog build",
-    "site": "roadhog-api-doc static",
-    "analyze": "roadhog build --analyze",
-    "lint:style": "stylelint \"src/**/*.less\" --syntax less",
-    "lint": "eslint --ext .js src mock tests && npm run lint:style",
-    "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
+    "analyze": "cross-env ANALYZE=1 umi build",
+    "build": "umi build",
+    "deploy": "npm run site && npm run gh-pages",
+    "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
+    "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
+    "docker-prod:dev": "docker-compose -f ./docker/docker-compose.yml up",
+    "docker:build": "docker-compose -f ./docker/docker-compose.dev.yml build",
+    "docker:dev": "docker-compose -f ./docker/docker-compose.dev.yml up",
+    "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
+    "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
+    "fetch:blocks": "pro fetch-blocks && npm run prettier",
+    "format-imports": "import-sort --write '**/*.{js,jsx,ts,tsx}'",
+    "functions:build": "netlify-lambda build ./lambda",
+    "functions:run": "cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
+    "gh-pages": "cp CNAME ./dist/ && gh-pages -d dist",
+    "i18n-remove": "pro i18n-remove --locale=zh-CN --write",
+    "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
-    "lint-staged:js": "eslint --ext .js",
-    "test": "jest",
-    "test:all": "node ./tests/run-tests.js"
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:prettier": "check-prettier lint",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "prettier": "prettier -c --write \"**/*\"",
+    "site": "npm run fetch:blocks && npm run build && npm run functions:build",
+    "start": "umi dev",
+    "dev": "npm run start:dev",
+    "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
+    "start:no-mock": "cross-env MOCK=none umi dev",
+    "start:no-ui": "cross-env UMI_UI=none umi dev",
+    "start:pre": "cross-env REACT_APP_ENV=pre MOCK=none umi dev",
+    "start:test": "cross-env REACT_APP_ENV=test MOCK=none umi dev",
+    "test": "umi test",
+    "test:all": "node ./tests/run-tests.js",
+    "test:component": "umi test ./src/components",
+    "tsc": "tsc",
+    "ui": "umi ui"
   },
-  "dependencies": {
-    "antd": "^3.0.0-beta.1",
-    "classnames": "^2.2.5",
-    "core-js": "^2.5.1",
-    "dva": "^2.0.3",
-    "g-cloud": "^1.0.2-beta",
-    "g2": "^2.3.13",
-    "g2-plugin-slider": "^1.2.1",
-    "lodash": "^4.17.4",
-    "lodash-decorators": "^4.4.1",
-    "lodash.clonedeep": "^4.5.0",
-    "moment": "^2.19.1",
-    "numeral": "^2.0.6",
-    "prop-types": "^15.5.10",
-    "qs": "^6.5.0",
-    "react": "^16.0.0",
-    "react-document-title": "^2.0.3",
-    "react-dom": "^16.0.0",
-    "react-fittext": "^1.0.0"
-  },
-  "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "babel-jest": "^21.0.0",
-    "babel-plugin-dva-hmr": "^0.3.2",
-    "babel-plugin-import": "^1.2.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-runtime": "^6.9.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-runtime": "^6.9.2",
-    "cross-port-killer": "^1.0.1",
-    "enzyme": "^3.1.0",
-    "enzyme-adapter-react-16": "^1.0.2",
-    "eslint": "^4.8.0",
-    "eslint-config-airbnb": "^16.0.0",
-    "eslint-plugin-babel": "^4.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^6.0.0",
-    "eslint-plugin-markdown": "^1.0.0-beta.6",
-    "eslint-plugin-react": "^7.0.1",
-    "gh-pages": "^1.0.0",
-    "husky": "^0.14.3",
-    "jest": "^21.0.1",
-    "lint-staged": "^4.3.0",
-    "mockjs": "^1.0.1-beta3",
-    "react-container-query": "^0.9.1",
-    "react-test-renderer": "^16.0.0",
-    "redbox-react": "^1.3.2",
-    "roadhog": "^1.3.1",
-    "roadhog-api-doc": "^0.2.0",
-    "stylelint": "^8.1.0",
-    "stylelint-config-standard": "^17.0.0"
-  },
-  "optionalDependencies": {
-    "nightmare": "^2.10.0"
-  },
-  "babel": {
-    "presets": [
-      "env",
-      "react"
-    ],
-    "plugins": [
-      "transform-decorators-legacy",
-      "transform-class-properties"
-    ]
-  },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/tests/setupTests.js"
-    ],
-    "testMatch": [
-      "**/?(*.)(spec|test|e2e).js?(x)"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/tests/jasmine.js",
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|less)$": "<rootDir>/tests/styleMock.js"
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx}": "lint-staged:js",
-    "**/*.less": "stylelint --syntax less"
+    "**/*.less": "stylelint --syntax less",
+    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
+  "dependencies": {
+    "@ant-design/pro-layout": "^4.10.13",
+    "@antv/data-set": "^0.11.0",
+    "antd": "^3.23.6",
+    "classnames": "^2.2.6",
+    "dva": "^2.6.0-beta.16",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "omit.js": "^1.0.2",
+    "path-to-regexp": "2.4.0",
+    "qs": "^6.9.0",
+    "react": "^16.8.6",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1",
+    "redux": "^4.0.1",
+    "umi": "^2.13.0",
+    "umi-plugin-antd-theme": "^1.0.1",
+    "umi-plugin-pro-block": "^1.3.2",
+    "umi-plugin-react": "^1.9.5",
+    "umi-request": "^1.0.8"
+  },
+  "devDependencies": {
+    "@ant-design/pro-cli": "^1.0.18",
+    "@types/classnames": "^2.2.7",
+    "@types/express": "^4.17.0",
+    "@types/history": "^4.7.2",
+    "@types/jest": "^25.1.0",
+    "@types/lodash": "^4.14.144",
+    "@types/qs": "^6.5.3",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-helmet": "^5.0.13",
+    "@umijs/fabric": "^2.0.2",
+    "chalk": "^3.0.0",
+    "check-prettier": "^1.0.3",
+    "cross-env": "^7.0.0",
+    "cross-port-killer": "^1.1.1",
+    "enzyme": "^3.9.0",
+    "express": "^4.17.1",
+    "gh-pages": "^2.0.1",
+    "husky": "^4.0.7",
+    "import-sort-cli": "^6.0.0",
+    "import-sort-parser-babylon": "^6.0.0",
+    "import-sort-parser-typescript": "^6.0.0",
+    "import-sort-style-module": "^6.0.0",
+    "jest-puppeteer": "^4.2.0",
+    "jsdom-global": "^3.0.2",
+    "lint-staged": "^10.0.0",
+    "mockjs": "^1.0.1-beta3",
+    "netlify-lambda": "^1.4.13",
+    "node-fetch": "^2.6.0",
+    "prettier": "^1.19.1",
+    "pro-download": "1.0.1",
+    "serverless-http": "^2.0.2",
+    "stylelint": "^13.0.0",
+    "umi-plugin-antd-icon-config": "^1.0.2",
+    "umi-plugin-ga": "^1.1.3",
+    "umi-plugin-pro": "^1.0.2",
+    "umi-types": "^0.5.0"
+  },
+  "optionalDependencies": {
+    "puppeteer": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "checkFiles": [
+    "src/**/*.js*",
+    "src/**/*.ts*",
+    "src/**/*.less",
+    "config/**/*.js*",
+    "scripts/**/*.js"
+  ],
+  "create-umi": {
+    "ignoreScript": [
+      "docker*",
+      "functions*",
+      "site",
+      "generateMock"
+    ],
+    "ignoreDependencies": [
+      "netlify*",
+      "serverless"
+    ],
+    "ignore": [
+      ".dockerignore",
+      ".git",
+      ".github",
+      ".gitpod.yml",
+      "CODE_OF_CONDUCT.md",
+      "Dockerfile",
+      "Dockerfile.*",
+      "lambda",
+      "LICENSE",
+      "netlify.toml",
+      "README.*.md",
+      "azure-pipelines.yml",
+      "docker",
+      "CNAME",
+      "create-umi"
+    ]
   }
 }
