@@ -4,7 +4,6 @@ import slash from 'slash2';
 import themePluginConfig from './themePluginConfig';
 import proxy from './proxy';
 import webpackPlugin from './plugin.config';
-import { primaryColor } from './defaultSettings';
 
 const { pwa } = defaultSettings;
 
@@ -145,7 +144,7 @@ export default {
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     // ...darkTheme,
-    primaryColor,
+    primaryColor: defaultSettings.primaryColor,
   },
   define: {
     REACT_APP_ENV: REACT_APP_ENV || false,
