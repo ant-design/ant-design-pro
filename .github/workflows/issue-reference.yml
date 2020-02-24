@@ -1,9 +1,9 @@
 name: Add an issue reference
 on: [pull_request]
-
 jobs:
   reference:
     name: reference
+    runs-on: ubuntu-latest
     steps:
       - name: Add an issue reference
         uses: kentaro-m/add-an-issue-reference-action@v1.0.0
