@@ -19,10 +19,9 @@ jobs:
       - run: yarn run lint
       - run: yarn run tsc
       - run: yarn run build
-      - run: yarn run test
+      - run: yarn run test:all
         env:
           CI: true
-          HEADLESS: true
           PROGRESS: none
           NODE_ENV: test
           NODE_OPTIONS: --max_old_space_size=4096
