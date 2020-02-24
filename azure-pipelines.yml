@@ -11,12 +11,12 @@ jobs:
   - job: lintAndBuild
 
     pool:
-      vmImage: 'Ubuntu-16.04'
+      vmImage: "Ubuntu-16.04"
 
     steps:
       - checkout: self
         clean: false
-      - script: npm install
+      - script: yarn
         displayName: install
       - script: npm run lint
         displayName: lint
@@ -29,14 +29,14 @@ jobs:
 
   - job: test
     pool:
-      vmImage: 'Ubuntu-16.04'
+      vmImage: "Ubuntu-16.04"
 
     container:
       image: circleci/node:latest-browsers
-      options: '-u root'
+      options: "-u root"
 
     steps:
-      - script: npm install
+      - script: yarn
         displayName: install
       - script: npm run test:all
         env:
@@ -46,12 +46,12 @@ jobs:
 
   - job: Windows
     pool:
-      vmImage: 'win1803'
+      vmImage: "win1803"
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '11.x'
-      - script: npm install
+          versionSpec: "11.x"
+      - script: yarn
         displayName: install
       - script: npm run lint
         displayName: lint
@@ -69,12 +69,12 @@ jobs:
 
   - job: MacOS
     pool:
-      vmImage: 'macOS-latest'
+      vmImage: "macOS-latest"
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '11.x'
-      - script: npm install
+          versionSpec: "11.x"
+      - script: yarn
         displayName: install
       - script: npm run lint
         displayName: lint
