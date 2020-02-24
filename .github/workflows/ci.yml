@@ -22,7 +22,7 @@ jobs:
       - run: yarn run test
         env:
           CI: true
-          HEADLESS: false
+          HEADLESS: true
           PROGRESS: none
           NODE_ENV: test
           NODE_OPTIONS: --max_old_space_size=4096
