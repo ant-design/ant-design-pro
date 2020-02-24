@@ -1,4 +1,5 @@
 name: Deploy to GitHub Pages
+on: [push]
 uses: maxheld83/ghpages@v0.2.1
 if: success() && github.event == 'push' && github.ref == 'master'
 env:
