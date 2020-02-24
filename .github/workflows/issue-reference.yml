@@ -4,6 +4,8 @@ on: [pull_request]
 jobs:
   reference:
     name: reference
-    uses: kentaro-m/add-an-issue-reference-action@v1.0.0
-    env:
-      GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
+    steps:
+      - name: Add an issue reference
+        uses: kentaro-m/add-an-issue-reference-action@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
