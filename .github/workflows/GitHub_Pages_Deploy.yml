@@ -1,0 +1,6 @@
+- name: Deploy to GitHub Pages
+  uses: maxheld83/ghpages@v0.2.1
+  if: success() && github.event == 'push' && github.ref == 'master'
+  env:
+    BUILD_DIR: 'dist/'
+    GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
