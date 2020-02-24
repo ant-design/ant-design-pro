@@ -18,3 +18,4 @@ LICENSE
 *.lock
 yarn-error.log
 .history
+CNAME

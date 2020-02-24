@@ -20,7 +20,7 @@
     "gh-pages": "cp CNAME ./dist/ && gh-pages -d dist",
     "i18n-remove": "pro i18n-remove --locale=zh-CN --write",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint:prettier": "prettier --check \"**/*\"",
+    "lint:prettier": "prettier --check \"**/*\" --end-of-line auto",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
