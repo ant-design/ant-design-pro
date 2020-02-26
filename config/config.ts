@@ -144,7 +144,7 @@ export default {
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     // ...darkTheme,
-    primaryColor: defaultSettings.primaryColor,
+    'primary-color': defaultSettings.primaryColor,
   },
   define: {
     REACT_APP_ENV: REACT_APP_ENV || false,
