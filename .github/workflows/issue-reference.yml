@@ -1,11 +1,13 @@
-name: Add an issue reference
-on: [pull_request]
+name: 'Issue ref'
+
+on:
+  pull_request:
+    types: [opened]
+
 jobs:
-  reference:
-    name: reference
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Add an issue reference
-        uses: kentaro-m/add-an-issue-reference-action@v1.0.0
-        env:
+      - uses: estrada9166/issue-ref@v1
+        with:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
