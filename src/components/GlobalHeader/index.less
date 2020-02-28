@@ -12,17 +12,19 @@
 }
 
 .right {
+  display: flex;
   float: right;
   height: @layout-header-height;
   margin-left: auto;
   overflow: hidden;
   .action {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     height: 100%;
     padding: 0 12px;
     cursor: pointer;
     transition: all 0.3s;
-    > i {
+    > span {
       color: @text-color;
       vertical-align: middle;
     }
@@ -53,7 +55,7 @@
 .dark {
   .action {
     color: rgba(255, 255, 255, 0.85);
-    > i {
+    > span {
       color: rgba(255, 255, 255, 0.85);
     }
     &:hover,
@@ -67,12 +69,12 @@
   .dark {
     .action {
       color: @text-color;
-      > i {
+      > span {
         color: @text-color;
       }
       &:hover {
         color: rgba(255, 255, 255, 0.85);
-        > i {
+        > span {
           color: rgba(255, 255, 255, 0.85);
         }
       }

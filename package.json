@@ -14,7 +14,7 @@
     "docker:dev": "docker-compose -f ./docker/docker-compose.dev.yml up",
     "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
     "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
-    "fetch:blocks": "pro fetch-blocks && npm run prettier",
+    "fetch:blocks": "pro fetch-blocks --branch antd@4 && npm run prettier",
     "functions:build": "netlify-lambda build ./lambda",
     "functions:run": "cross-env NODE_ENV=dev netlify-lambda serve ./lambda",
     "gh-pages": "cp CNAME ./dist/ && gh-pages -d dist",
@@ -33,7 +33,7 @@
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
-    "start:pre": "cross-env REACT_APP_ENV=pre MOCK=none umi dev",
+    "start:pre": "cross-env REACT_APP_ENV=pre umi dev",
     "start:test": "cross-env REACT_APP_ENV=test MOCK=none umi dev",
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
@@ -59,9 +59,11 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@ant-design/pro-layout": "^4.10.13",
-    "@antv/data-set": "^0.11.0",
-    "antd": "^3.23.6",
+    "@ant-design/icons": "^4.0.0-alpha.19",
+    "@ant-design/pro-layout": "^5.0.0",
+    "@ant-design/pro-table": "^2.0.0",
+    "@antv/data-set": "^0.10.2",
+    "antd": "^4.0.0-rc.1",
     "classnames": "^2.2.6",
     "dva": "^2.6.0-beta.16",
     "lodash": "^4.17.11",
@@ -75,10 +77,12 @@
     "react-helmet": "^5.2.1",
     "redux": "^4.0.1",
     "umi": "^2.13.0",
+    "umi-plugin-antd-icon-config": "^1.0.2",
     "umi-plugin-antd-theme": "^1.0.1",
     "umi-plugin-pro-block": "^1.3.2",
-    "umi-plugin-react": "^1.9.5",
-    "umi-request": "^1.0.8"
+    "umi-plugin-react": "^1.14.10",
+    "umi-request": "^1.0.8",
+    "use-merge-value": "^1.0.1"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^1.0.18",
@@ -88,14 +92,14 @@
     "@types/jest": "^25.1.0",
     "@types/lodash": "^4.14.144",
     "@types/qs": "^6.5.3",
-    "@types/react": "^16.8.19",
+    "@types/react": "^16.9.17",
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.13",
     "@umijs/fabric": "^2.0.2",
     "chalk": "^3.0.0",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
-    "enzyme": "^3.9.0",
+    "enzyme": "^3.11.0",
     "express": "^4.17.1",
     "gh-pages": "^2.0.1",
     "husky": "^4.0.7",
@@ -112,7 +116,7 @@
     "umi-plugin-antd-icon-config": "^1.0.2",
     "umi-plugin-ga": "^1.1.3",
     "umi-plugin-pro": "^1.0.2",
-    "umi-types": "^0.5.0"
+    "umi-types": "^0.5.9"
   },
   "optionalDependencies": {
     "puppeteer": "^2.0.0"
