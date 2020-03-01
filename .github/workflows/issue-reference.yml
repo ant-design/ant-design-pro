@@ -1,4 +1,4 @@
-name: "Issue ref"
+name: 'Issue ref'
 
 on:
   pull_request:

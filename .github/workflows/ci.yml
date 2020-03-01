@@ -37,5 +37,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: "dist/"
+          FOLDER: 'dist/'
           BUILD_SCRIPT: npm install && npm run deploy
