@@ -1,0 +1,22 @@
+name: Deploy CI
+
+on: [push]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    if: github.event == 'push' && github.ref == 'master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - run: yarn
+      - run: yarn run lint
+      - run: yarn run tsc
+      - name: Build and Deploy
+        uses: JamesIves/github-pages-deploy-action@master
+        env:
+          ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: site
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: 'dist/'
+          BUILD_SCRIPT: yarn && npm run deploy

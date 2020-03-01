@@ -25,17 +25,3 @@ jobs:
           PROGRESS: none
           NODE_ENV: test
           NODE_OPTIONS: --max_old_space_size=4096
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    if: github.event == 'push' && github.ref == 'master'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-
-      - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: 'dist/'
-          BUILD_SCRIPT: npm install && npm run deploy
