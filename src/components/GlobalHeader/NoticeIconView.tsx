@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'umi';
 import { Tag, message } from 'antd';
-import { connect } from 'dva';
 import groupBy from 'lodash/groupBy';
 import moment from 'moment';
 import { NoticeItem } from '@/models/global';
