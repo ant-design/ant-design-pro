@@ -15,6 +15,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
+      - run: echo ${{github.ref}}
       - run: yarn
       - run: yarn run lint
       - run: yarn run tsc

@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'master'
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@master
