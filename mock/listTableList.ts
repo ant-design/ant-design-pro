@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Request, Response } from 'express';
 import { parse } from 'url';
-import { TableListItem, TableListParams } from './data.d';
+import { TableListItem, TableListParams } from '../src/pages/ListTableList/data';
 
 // mock tableListDataSource
 const genList = (current: number, pageSize: number) => {
