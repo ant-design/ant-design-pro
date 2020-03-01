@@ -90,6 +90,7 @@
     "@umijs/fabric": "^2.0.2",
     "@umijs/plugin-analytics": "^0.1.0",
     "@umijs/preset-react": "^1.2.2",
+    "@umijs/preset-ui": "^2.0.0-beta.5",
     "chalk": "^3.0.0",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
