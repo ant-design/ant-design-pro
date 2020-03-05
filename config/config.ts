@@ -73,7 +73,7 @@ if (isAntDesignProPreview) {
   plugins.push([
     'umi-plugin-pro',
     {
-      serverUrl: 'https://us-central1-antd-pro.cloudfunctions.net/api/',
+      serverUrl: 'https://us-central1-antd-pro.cloudfunctions.net/api',
     },
   ]);
 
