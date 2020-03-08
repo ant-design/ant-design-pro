@@ -117,7 +117,7 @@ const LoginItem: React.FC<LoginItemProps> = props => {
         {({ getFieldValue }) => (
           <Row gutter={8}>
             <Col span={16}>
-              <FormItem name={name} {...options}>
+              <FormItem name={name} {...options} style={{ marginBottom: 0 }}>
                 <Input {...customProps} {...inputProps} />
               </FormItem>
             </Col>
