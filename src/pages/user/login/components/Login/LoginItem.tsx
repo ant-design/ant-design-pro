@@ -113,7 +113,7 @@ const LoginItem: React.FC<LoginItemProps> = props => {
     const inputProps = omit(otherProps, ['onGetCaptcha', 'countDown']);
 
     return (
-      <FormItem shouldUpdate>
+      <FormItem shouldUpdate noStyle>
         {({ getFieldValue }) => (
           <Row gutter={8}>
             <Col span={16}>

@@ -1,4 +1,4 @@
-name: 'Issue ref'
+name: "Issue ref"
 
 on:
   pull_request:
@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: estrada9166/issue-ref@v1
-        with:
+        env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
