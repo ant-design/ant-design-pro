@@ -8,7 +8,7 @@ const { winPath } = utils;
 // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
 const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, REACT_APP_ENV } = process.env;
-const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site';
+const GA_KEY = process.env.GA_KEY;
 
 // TODO:
 // umi-plugin-pro-block umi-plugin-antd-theme umi-plugin-antd-icon-config 需要加
@@ -18,11 +18,8 @@ const isAntDesignProPreview = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION 
 export default defineConfig({
   hash: true,
   antd: {},
-  analytics: isAntDesignProPreview
-    ? {
-        ga: 'UA-72788897-6',
-      }
-    : false,
+  plugins: ['umi-plugin-antd-icon-config', 'umi-plugin-antd-theme', '@umijs/plugin-block-devtool'],
+  analytics: GA_KEY ? { ga: GA_KEY } : false,
   dva: {
     hmr: true,
   },
