@@ -18,7 +18,6 @@ const GA_KEY = process.env.GA_KEY;
 export default defineConfig({
   hash: true,
   antd: {},
-  plugins: ['umi-plugin-antd-icon-config', 'umi-plugin-antd-theme', '@umijs/plugin-block-devtool'],
   analytics: GA_KEY ? { ga: GA_KEY } : false,
   dva: {
     hmr: true,
