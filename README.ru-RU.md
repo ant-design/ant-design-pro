@@ -107,9 +107,3 @@ $ npm start         # visit http://localhost:8000
 - Использовать Ant Design Pro в ежедневной работе.
 - Создавать [задачи](http://github.com/ant-design/ant-design-pro/issues) заводить баги или отвечать на вопросы.
 - Делать [pull-реквесты](http://github.com/ant-design/ant-design-pro/pulls) для совершенствования нашего кода.
-
-<div align="center">
-   <a href="https://www.netlify.com">
-    <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
-  </a>
-</div>

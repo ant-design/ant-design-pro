@@ -109,9 +109,3 @@ $ npm start         # visit http://localhost:8000
 - 在你的公司或个人项目中使用 Ant Design Pro。
 - 通过 [Issue](http://github.com/ant-design/ant-design-pro/issues) 报告 bug 或进行咨询。
 - 提交 [Pull Request](http://github.com/ant-design/ant-design-pro/pulls) 改进 Pro 的代码。
-
-<div align="center">
-   <a href="https://www.netlify.com">
-    <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
-  </a>
-</div>

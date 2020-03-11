@@ -121,9 +121,3 @@ Her türlü desteğinize açığız, bu projeye nasıl katkıda bulunabileceğin
 - Günlük işinizde Ant Design Pro kullanın.
 - Hataları bildirmek veya soru sormak için [issues](http://github.com/ant-design/ant-design-pro/issues) gönderin.
 - Kodumuzu geliştirmek için [pull requests](http://github.com/ant-design/ant-design-pro/pulls) gönderin.
-
-<div align="center">
-   <a href="https://www.netlify.com">
-    <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
-  </a>
-</div>

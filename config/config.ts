@@ -46,7 +46,7 @@ const plugins: IPlugin[] = [
       // dll features https://webpack.js.org/plugins/dll-plugin/
       // dll: {
       //   include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-      //   exclude: ['@babel/runtime', 'netlify-lambda'],
+      //   exclude: ['@babel/runtime'],
       // },
     },
   ],
