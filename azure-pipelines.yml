@@ -46,7 +46,7 @@ jobs:
 
   - job: Windows
     pool:
-      vmImage: 'win1803'
+      vmImage: 'windows-latest'
     steps:
       - task: NodeTool@0
         inputs:
