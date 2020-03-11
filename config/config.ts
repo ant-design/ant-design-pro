@@ -7,8 +7,11 @@ const { winPath } = utils;
 
 // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
-const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, REACT_APP_ENV } = process.env;
-const GA_KEY = process.env.GA_KEY;
+const {
+  ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION,
+  REACT_APP_ENV,
+  GA_KEY,
+} = process.env;
 
 // TODO:
 // umi-plugin-pro-block umi-plugin-antd-theme umi-plugin-antd-icon-config 需要加
@@ -26,6 +29,7 @@ export default defineConfig({
     // default zh-CN
     default: 'zh-CN',
     // default true, when it is true, will use `navigator.language` overwrite default
+    antd: true,
     baseNavigator: true,
   },
   dynamicImport: {
