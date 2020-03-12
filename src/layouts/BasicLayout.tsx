@@ -142,7 +142,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       breadcrumbRender={(routers = []) => [
         {
           path: '/',
-          breadcrumbName: '首页',
+          breadcrumbName: formatMessage({ id: 'menu.home' }),
         },
         ...routers,
       ]}
