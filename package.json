@@ -98,6 +98,7 @@
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
     "enzyme": "^3.11.0",
+    "express": "^4.17.1",
     "gh-pages": "^2.0.1",
     "husky": "^4.0.7",
     "jest-puppeteer": "^4.2.0",
