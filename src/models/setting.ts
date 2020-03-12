@@ -1,4 +1,4 @@
-import { Reducer } from 'redux';
+import { Reducer } from 'umi';
 import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
 
 export interface SettingModelType {
