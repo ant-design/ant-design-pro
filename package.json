@@ -61,7 +61,7 @@
     "@ant-design/pro-layout": "^5.0.0",
     "@ant-design/pro-table": "^2.0.0",
     "@antv/data-set": "^0.11.1",
-    "antd": "^4.0.0-rc.1",
+    "antd": "^4.0.2",
     "classnames": "^2.2.6",
     "dva": "^2.6.0-beta.16",
     "lodash": "^4.17.11",
