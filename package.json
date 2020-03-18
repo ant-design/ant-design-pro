@@ -96,7 +96,6 @@
     "express": "^4.17.1",
     "gh-pages": "^2.0.1",
     "husky": "^4.0.7",
-    "jest-puppeteer": "^4.2.0",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.0",
     "mockjs": "^1.0.1-beta3",
