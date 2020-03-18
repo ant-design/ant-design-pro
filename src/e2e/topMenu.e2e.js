@@ -30,3 +30,7 @@ describe('Homepage', () => {
     expect(haveFooter).toBeTruthy();
   });
 });
+
+afterAll(() => {
+  browser.close();
+});

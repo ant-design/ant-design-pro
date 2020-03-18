@@ -53,3 +53,7 @@ describe('Ant Design Pro E2E test', () => {
     it(`test pages ${route}`, testPage(route));
   });
 });
+
+afterAll(() => {
+  browser.close();
+});
