@@ -70,7 +70,7 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "umi": "^3.0.0",
-    "umi-plugin-antd-icon-config": "^2.0.0",
+ 
     "umi-request": "^1.0.8",
     "use-merge-value": "^1.0.1"
   },
@@ -86,7 +86,8 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.13",
     "@umijs/fabric": "^2.0.2",
-    "@umijs/plugin-blocks": "^2.0.3",
+    "@umijs/plugin-blocks": "^2.0.5",
+    "umi-plugin-antd-icon-config": "^2.0.0",
     "@umijs/preset-ant-design-pro": "^1.0.1",
     "@umijs/preset-react": "^1.3.0",
     "@umijs/preset-ui": "^2.0.9",
