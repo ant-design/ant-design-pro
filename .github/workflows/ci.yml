@@ -18,7 +18,7 @@ jobs:
       - run: echo ${{github.ref}}
       - run: yarn
       - run: yarn run lint
-      # - run: yarn run tsc
+      - run: yarn run tsc
       - run: yarn run build
       - run: yarn run test:all
         env:
