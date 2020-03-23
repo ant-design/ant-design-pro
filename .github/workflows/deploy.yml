@@ -16,6 +16,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@master
         env:
           CI: true
+          GA_KEY: UA-72788897-6
           PROGRESS: none
           GIT_CONFIG_NAME: qixian.cs
           GIT_CONFIG_EMAIL: qixian.cs@outlook.com
