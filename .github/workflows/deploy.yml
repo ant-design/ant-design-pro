@@ -11,11 +11,12 @@ jobs:
         uses: actions/checkout@master
       - run: yarn
       - run: yarn run lint
-      - run: yarn run tsc
+      # - run: yarn run tsc
       - name: Build and Deploy
         uses: JamesIves/github-pages-deploy-action@master
         env:
           CI: true
+          GA_KEY: UA-72788897-6
           PROGRESS: none
           GIT_CONFIG_NAME: qixian.cs
           GIT_CONFIG_EMAIL: qixian.cs@outlook.com
@@ -24,4 +25,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
           BRANCH: gh-pages
           FOLDER: 'dist/'
-          BUILD_SCRIPT: yarn && npm uninstall husky && npm run site && git checkout . && git clean -df
+          BUILD_SCRIPT: yarn && npm uninstall husky && yarn add umi-plugin-antd-theme umi-plugin-pro  && npm run site && git checkout . && git clean -df

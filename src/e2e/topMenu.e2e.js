@@ -1,4 +1,21 @@
+const getBrowser = require('./getBrowser');
+
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
+
+let browser;
+let page;
+
+beforeAll(async () => {
+  browser = await getBrowser();
+});
+
+beforeEach(async () => {
+  page = await browser.newPage();
+  await page.goto(`${BASE_URL}`);
+  await page.evaluate(() => {
+    localStorage.setItem('antd-pro-authority', '["admin"]');
+  });
+});
 
 describe('Homepage', () => {
   it('topmenu should have footer', async () => {
@@ -12,4 +29,8 @@ describe('Homepage', () => {
     );
     expect(haveFooter).toBeTruthy();
   });
+});
+
+afterAll(() => {
+  browser.close();
 });

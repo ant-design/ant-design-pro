@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Request, Response } from 'express';
 import { parse } from 'url';
-import { TableListItem, TableListParams } from './data.d';
+import { TableListItem, TableListParams } from '@/pages/ListTableList/data';
 
 // mock tableListDataSource
 const genList = (current: number, pageSize: number) => {
@@ -34,13 +34,12 @@ const genList = (current: number, pageSize: number) => {
 let tableListDataSource = genList(1, 100);
 
 function getRule(req: Request, res: Response, u: string) {
-  let url = u;
-  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    // eslint-disable-next-line prefer-destructuring
-    url = req.url;
+  let realUrl = u;
+  if (!realUrl || Object.prototype.toString.call(realUrl) !== '[object String]') {
+    realUrl = req.url;
   }
   const { current = 1, pageSize = 10 } = req.query;
-  const params = (parse(url, true).query as unknown) as TableListParams;
+  const params = (parse(realUrl, true).query as unknown) as TableListParams;
 
   let dataSource = [...tableListDataSource].slice((current - 1) * pageSize, current * pageSize);
   if (params.sorter) {
@@ -84,10 +83,9 @@ function getRule(req: Request, res: Response, u: string) {
 }
 
 function postRule(req: Request, res: Response, u: string, b: Request) {
-  let url = u;
-  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
-    // eslint-disable-next-line prefer-destructuring
-    url = req.url;
+  let realUrl = u;
+  if (!realUrl || Object.prototype.toString.call(realUrl) !== '[object String]') {
+    realUrl = req.url;
   }
 
   const body = (b && b.body) || req.body;
