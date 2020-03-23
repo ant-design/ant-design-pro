@@ -99,7 +99,7 @@
     "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.0",
     "mockjs": "^1.0.1-beta3",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.1",
     "pro-download": "1.0.1",
     "stylelint": "^13.0.0"
   },
