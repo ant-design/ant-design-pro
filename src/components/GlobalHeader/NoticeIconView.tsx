@@ -61,7 +61,7 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
       return {};
     }
 
-    const newNotices = notices.map(notice => {
+    const newNotices = notices.map((notice) => {
       const newNotice = { ...notice };
 
       if (newNotice.datetime) {
@@ -100,7 +100,7 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
     const unreadMsg: {
       [key: string]: number;
     } = {};
-    Object.keys(noticeData).forEach(key => {
+    Object.keys(noticeData).forEach((key) => {
       const value = noticeData[key];
 
       if (!unreadMsg[key]) {
@@ -108,7 +108,7 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
       }
 
       if (Array.isArray(value)) {
-        unreadMsg[key] = value.filter(item => !item.read).length;
+        unreadMsg[key] = value.filter((item) => !item.read).length;
       }
     });
     return unreadMsg;
@@ -122,7 +122,7 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
       <NoticeIcon
         className={styles.action}
         count={currentUser && currentUser.unreadCount}
-        onItemClick={item => {
+        onItemClick={(item) => {
           this.changeReadState(item as NoticeItem);
         }}
         loading={fetchingNotices}

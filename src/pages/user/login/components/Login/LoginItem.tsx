@@ -57,7 +57,7 @@ const getFormItemOptions = ({
   return options;
 };
 
-const LoginItem: React.FC<LoginItemProps> = props => {
+const LoginItem: React.FC<LoginItemProps> = (props) => {
   const [count, setCount] = useState<number>(props.countDown || 0);
   const [timing, setTiming] = useState(false);
   // 这么写是为了防止restProps中 带入 onChange, defaultValue, rules props tabUtil
@@ -89,7 +89,7 @@ const LoginItem: React.FC<LoginItemProps> = props => {
     const { countDown } = props;
     if (timing) {
       interval = window.setInterval(() => {
-        setCount(preSecond => {
+        setCount((preSecond) => {
           if (preSecond <= 1) {
             setTiming(false);
             clearInterval(interval);
@@ -148,11 +148,11 @@ const LoginItem: React.FC<LoginItemProps> = props => {
 
 const LoginItems: Partial<LoginItemType> = {};
 
-Object.keys(ItemMap).forEach(key => {
+Object.keys(ItemMap).forEach((key) => {
   const item = ItemMap[key];
   LoginItems[key] = (props: LoginItemProps) => (
     <LoginContext.Consumer>
-      {context => (
+      {(context) => (
         <LoginItem
           customProps={item.props}
           rules={item.rules}

@@ -42,7 +42,7 @@ export interface NoticeIconProps {
 
 const NoticeIcon: React.FC<NoticeIconProps> & {
   Tab: typeof NoticeList;
-} = props => {
+} = (props) => {
   const getNotificationBox = (): React.ReactNode => {
     const {
       children,
