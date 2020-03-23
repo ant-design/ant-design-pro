@@ -30,7 +30,7 @@ interface LoginType extends React.FC<LoginProps> {
   Captcha: React.FunctionComponent<LoginItemProps>;
 }
 
-const Login: LoginType = props => {
+const Login: LoginType = (props) => {
   const { className } = props;
   const [tabs, setTabs] = useState<string[]>([]);
   const [active, setActive] = useState({});
@@ -57,14 +57,14 @@ const Login: LoginType = props => {
     <LoginContext.Provider
       value={{
         tabUtil: {
-          addTab: id => {
+          addTab: (id) => {
             setTabs([...tabs, id]);
           },
-          removeTab: id => {
-            setTabs(tabs.filter(currentId => currentId !== id));
+          removeTab: (id) => {
+            setTabs(tabs.filter((currentId) => currentId !== id));
           },
         },
-        updateActive: activeItem => {
+        updateActive: (activeItem) => {
           if (!active) return;
           if (active[type]) {
             active[type].push(activeItem);
@@ -78,7 +78,7 @@ const Login: LoginType = props => {
       <div className={classNames(className, styles.login)}>
         <Form
           form={props.from}
-          onFinish={values => {
+          onFinish={(values) => {
             if (props.onSubmit) {
               props.onSubmit(values as LoginParamsType);
             }
@@ -90,7 +90,7 @@ const Login: LoginType = props => {
                 animated={false}
                 className={styles.tabs}
                 activeKey={type}
-                onChange={activeKey => {
+                onChange={(activeKey) => {
                   setType(activeKey);
                 }}
               >

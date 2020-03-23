@@ -25,7 +25,7 @@ if (pwa) {
       // Send skip-waiting event to waiting SW with MessageChannel
       await new Promise((resolve, reject) => {
         const channel = new MessageChannel();
-        channel.port1.onmessage = msgEvent => {
+        channel.port1.onmessage = (msgEvent) => {
           if (msgEvent.data.error) {
             reject(msgEvent.data.error);
           } else {
@@ -62,20 +62,20 @@ if (pwa) {
   // unregister service worker
   const { serviceWorker } = navigator;
   if (serviceWorker.getRegistrations) {
-    serviceWorker.getRegistrations().then(sws => {
-      sws.forEach(sw => {
+    serviceWorker.getRegistrations().then((sws) => {
+      sws.forEach((sw) => {
         sw.unregister();
       });
     });
   }
-  serviceWorker.getRegistration().then(sw => {
+  serviceWorker.getRegistration().then((sw) => {
     if (sw) sw.unregister();
   });
 
   // remove all caches
   if (window.caches && window.caches.keys) {
-    caches.keys().then(keys => {
-      keys.forEach(key => {
+    caches.keys().then((keys) => {
+      keys.forEach((key) => {
         caches.delete(key);
       });
     });

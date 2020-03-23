@@ -32,7 +32,7 @@ const checkPermissions = <T, K>(
   // 数组处理
   if (Array.isArray(authority)) {
     if (Array.isArray(currentAuthority)) {
-      if (currentAuthority.some(item => authority.includes(item))) {
+      if (currentAuthority.some((item) => authority.includes(item))) {
         return target;
       }
     } else if (authority.includes(currentAuthority)) {
@@ -43,7 +43,7 @@ const checkPermissions = <T, K>(
   // string 处理
   if (typeof authority === 'string') {
     if (Array.isArray(currentAuthority)) {
-      if (currentAuthority.some(item => authority === item)) {
+      if (currentAuthority.some((item) => authority === item)) {
         return target;
       }
     } else if (authority === currentAuthority) {
