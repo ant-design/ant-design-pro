@@ -186,8 +186,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       title="规则配置"
       visible={updateModalVisible}
       footer={renderFooter()}
-      onCancel={() => handleUpdateModalVisible(false, values)}
-      afterClose={() => handleUpdateModalVisible()}
+      onCancel={() => handleUpdateModalVisible()}
     >
       <Steps style={{ marginBottom: 28 }} size="small" current={currentStep}>
         <Step title="基本信息" />
