@@ -59,6 +59,7 @@
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-layout": "^5.0.8",
     "@ant-design/pro-table": "^2.1.11",
+    "@umijs/server": "^3.0.14",
     "antd": "^4.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
@@ -89,6 +90,7 @@
     "@umijs/preset-ant-design-pro": "^1.0.1",
     "@umijs/preset-react": "^1.4.8",
     "@umijs/preset-ui": "^2.0.9",
+    "carlo": "^0.9.46",
     "chalk": "^3.0.0",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
@@ -101,10 +103,8 @@
     "mockjs": "^1.0.1-beta3",
     "prettier": "^2.0.1",
     "pro-download": "1.0.1",
+    "puppeteer-core": "^2.1.1",
     "stylelint": "^13.0.0"
-  },
-  "optionalDependencies": {
-    "puppeteer": "^2.0.0"
   },
   "engines": {
     "node": ">=10.0.0"
