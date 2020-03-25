@@ -216,7 +216,7 @@ const TableList: React.FC<{}> = () => {
           onSubmit={async (value) => {
             const success = await handleUpdate(value);
             if (success) {
-              handleModalVisible(false);
+              handleUpdateModalVisible(false);
               setStepFormValues({});
               if (actionRef.current) {
                 actionRef.current.reload();
