@@ -33,7 +33,7 @@ const getBrowser = async () => {
     });
     return browser;
   } catch (error) {
-    await installPuppeteer();
+    // await installPuppeteer();
   }
   await installPuppeteer();
   // eslint-disable-next-line import/no-unresolved
