@@ -30,7 +30,7 @@ export default defineConfig({
   targets: {
     ie: 11,
   },
-  // umi routes: https://umijs.org/zh/guide/router.html
+  // umi routes: https://umijs.org/docs/routing
   routes: [
     {
       path: '/user',
