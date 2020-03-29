@@ -1,0 +1,39 @@
+.contextMenu {
+  display: none;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  .item {
+    display: flex;
+    align-items: center;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+
+    &:hover {
+      background: #e6f7ff;
+    }
+
+    .anticon {
+      margin-right: 8px;
+    }
+  }
+
+  :global {
+    .disable {
+      :local {
+        .item {
+          color: rgba(0, 0, 0, 0.25);
+          cursor: auto;
+
+          &:hover {
+            background: #fff;
+          }
+        }
+      }
+    }
+  }
+}

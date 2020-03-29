@@ -1,18 +1,16 @@
 import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from '@ant-design/icons';
 import { Alert, Checkbox } from 'antd';
 import React, { useState } from 'react';
-import { Link, connect, Dispatch } from 'umi';
-import { StateType } from '@/models/login';
-import { LoginParamsType } from '@/services/login';
-import { ConnectState } from '@/models/connect';
-import LoginFrom from './components/Login';
-
+import { Dispatch, AnyAction, Link, connect } from 'umi';
+import { StateType } from './model';
 import styles from './style.less';
+import { LoginParamsType } from './service';
+import LoginFrom from './components/Login';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginFrom;
 interface LoginProps {
-  dispatch: Dispatch;
-  userLogin: StateType;
+  dispatch: Dispatch<AnyAction>;
+  userAndlogin: StateType;
   submitting?: boolean;
 }
 
@@ -30,16 +28,19 @@ const LoginMessage: React.FC<{
 );
 
 const Login: React.FC<LoginProps> = (props) => {
-  const { userLogin = {}, submitting } = props;
-  const { status, type: loginType } = userLogin;
+  const { userAndlogin = {}, submitting } = props;
+  const { status, type: loginType } = userAndlogin;
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState<string>('account');
 
   const handleSubmit = (values: LoginParamsType) => {
     const { dispatch } = props;
     dispatch({
-      type: 'login/login',
-      payload: { ...values, type },
+      type: 'userAndlogin/login',
+      payload: {
+        ...values,
+        type,
+      },
     });
   };
   return (
@@ -130,7 +131,19 @@ const Login: React.FC<LoginProps> = (props) => {
   );
 };
 
-export default connect(({ login, loading }: ConnectState) => ({
-  userLogin: login,
-  submitting: loading.effects['login/login'],
-}))(Login);
+export default connect(
+  ({
+    userAndlogin,
+    loading,
+  }: {
+    userAndlogin: StateType;
+    loading: {
+      effects: {
+        [key: string]: boolean;
+      };
+    };
+  }) => ({
+    userAndlogin,
+    submitting: loading.effects['userAndlogin/login'],
+  }),
+)(Login);
