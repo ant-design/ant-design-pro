@@ -31,6 +31,10 @@ class PuppeteerEnvironment extends NodeEnvironment {
     if (browser) {
       await browser.disconnect();
     }
+
+    if (browser) {
+      await browser.close();
+    }
   }
 }
 
