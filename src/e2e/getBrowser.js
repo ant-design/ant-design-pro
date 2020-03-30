@@ -1,26 +1,27 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-extraneous-dependencies */
-const { spawn } = require('child_process');
+const { execSync } = require('child_process');
+const { join } = require('path');
 const findChrome = require('carlo/lib/find_chrome');
+const detectInstaller = require('detect-installer');
 
 const installPuppeteer = () => {
-  return new Promise((resolve) => {
-    const testCmd = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['i', 'puppeteer'], {
-      stdio: 'inherit',
-    });
-    testCmd.on('exit', (code) => {
-      resolve(code);
-    });
+  const packages = detectInstaller(join(__dirname, '../../'));
+  const package = packages.find(detectInstaller.hasPackageCommand);
+  console.log(`🤖 will use ${package} install puppeteer`);
+  const command = `${package} ${package.includes('yarn') ? 'add' : 'i'} puppeteer`;
+  execSync(command, {
+    stdio: 'inherit',
   });
 };
-
+installPuppeteer();
 const getBrowser = async () => {
   try {
     // eslint-disable-next-line import/no-unresolved
     const puppeteer = require('puppeteer-core');
     const findChromePath = await findChrome({});
     const { executablePath } = findChromePath;
-    console.log(`你的浏览器安装在：${executablePath}`);
+    console.log(`🧲 find you browser in ${executablePath}`);
     const browser = await puppeteer.launch({
       executablePath,
       args: [
