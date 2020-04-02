@@ -92,7 +92,7 @@
     "@umijs/preset-react": "^1.4.8",
     "@umijs/preset-ui": "^2.0.9",
     "carlo": "^0.9.46",
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
     "detect-installer": "^1.0.1",
