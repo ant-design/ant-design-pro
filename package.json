@@ -60,7 +60,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-layout": "^5.0.8",
-    "@ant-design/pro-table": "^2.1.11",
+    "@ant-design/pro-table": "^2.2.0",
     "antd": "^4.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
