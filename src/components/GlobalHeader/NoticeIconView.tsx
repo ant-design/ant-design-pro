@@ -57,7 +57,7 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
   } => {
     const { notices = [] } = this.props;
 
-    if (!notices || notices.length === 0) {
+    if (!notices || notices.length === 0 || !Array.isArray(notices)) {
       return {};
     }
 
