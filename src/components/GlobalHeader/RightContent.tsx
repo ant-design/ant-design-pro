@@ -10,6 +10,7 @@ import styles from './index.less';
 import NoticeIconView from './NoticeIconView';
 
 export type SiderTheme = 'light' | 'dark';
+
 export interface GlobalHeaderRightProps extends Partial<ConnectProps> {
   theme?: SiderTheme;
   layout: 'sidemenu' | 'topmenu';

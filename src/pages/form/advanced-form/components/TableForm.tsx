@@ -25,11 +25,11 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
   const [data, setData] = useState(value);
 
   const getRowByKey = (key: string, newData?: TableFormDateType[]) =>
-    (newData || data || []).filter((item) => item.key === key)[0];
+    (newData || data)?.filter((item) => item.key === key)[0];
 
   const toggleEditable = (e: React.MouseEvent | React.KeyboardEvent, key: string) => {
     e.preventDefault();
-    const newData = (data || []).map((item) => ({ ...item }));
+    const newData = data?.map((item) => ({ ...item }));
     const target = getRowByKey(key, newData);
     if (target) {
       // 进入编辑状态时保存原始数据
@@ -42,8 +42,9 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
     }
   };
   const newMember = () => {
-    const newData = (data || []).map((item) => ({ ...item })) || [];
-    newData.push({
+    const newData = data?.map((item) => ({ ...item })) || [];
+    // eslint-disable-next-line no-unused-expressions
+    newData?.push({
       key: `NEW_TEMP_ID_${index}`,
       workId: '',
       name: '',
@@ -56,7 +57,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
   };
 
   const remove = (key: string) => {
-    const newData = (data || []).filter((item) => item.key !== key) as TableFormDateType[];
+    const newData = data?.filter((item) => item.key !== key) as TableFormDateType[];
     setData(newData);
     if (onChange) {
       onChange(newData);

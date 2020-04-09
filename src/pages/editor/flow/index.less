@@ -1,15 +1,18 @@
+@import '~antd/es/style/themes/default.less';
+
 .editor {
   display: flex;
   flex: 1;
   flex-direction: column;
   width: 100%;
   height: calc(100vh - 250px);
-  background: #fff;
+  background: @component-background;
 }
 
 .editorHd {
   padding: 8px;
-  border: 1px solid #e6e9ed;
+  background: @descriptions-bg;
+  border: 1px solid @item-active-bg;
 }
 
 .editorBd {
@@ -23,14 +26,18 @@
 }
 
 .editorSidebar {
-  background: #fafafa;
-
+  background: @descriptions-bg;
+  :global {
+    .g6-editor-minimap-container {
+      background: none !important ;
+    }
+  }
   &:first-child {
-    border-right: 1px solid #e6e9ed;
+    border-right: 1px solid @item-active-bg;
   }
 
   &:last-child {
-    border-left: 1px solid #e6e9ed;
+    border-left: 1px solid @item-active-bg;
   }
 }
 

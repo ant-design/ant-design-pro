@@ -1,7 +1,6 @@
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
 import { Avatar, Card, Col, Divider, Input, Row, Tag } from 'antd';
-import React, { Component } from 'react';
-
+import React, { Component, useState, useRef } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import { Link, connect, Dispatch } from 'umi';
 import { RouteChildrenProps } from 'react-router';
@@ -45,11 +44,63 @@ interface CenterProps extends RouteChildrenProps {
   currentUserLoading: boolean;
 }
 interface CenterState {
-  newTags: TagType[];
   tabKey?: 'articles' | 'applications' | 'projects';
-  inputVisible?: boolean;
-  inputValue?: string;
 }
+
+const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
+  const ref = useRef<Input | null>(null);
+  const [newTags, setNewTags] = useState<TagType[]>([]);
+  const [inputVisible, setInputVisible] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const showInput = () => {
+    setInputVisible(true);
+    if (ref.current) {
+      // eslint-disable-next-line no-unused-expressions
+      ref.current?.focus();
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleInputConfirm = () => {
+    let tempsTags = [...newTags];
+    if (inputValue && tempsTags.filter((tag) => tag.label === inputValue).length === 0) {
+      tempsTags = [...tempsTags, { key: `new-${tempsTags.length}`, label: inputValue }];
+    }
+    setNewTags(tempsTags);
+    setInputVisible(false);
+    setInputValue('');
+  };
+
+  return (
+    <div className={styles.tags}>
+      <div className={styles.tagsTitle}>标签</div>
+      {(tags || []).concat(newTags).map((item) => (
+        <Tag key={item.key}>{item.label}</Tag>
+      ))}
+      {inputVisible && (
+        <Input
+          ref={ref}
+          type="text"
+          size="small"
+          style={{ width: 78 }}
+          value={inputValue}
+          onChange={handleInputChange}
+          onBlur={handleInputConfirm}
+          onPressEnter={handleInputConfirm}
+        />
+      )}
+      {!inputVisible && (
+        <Tag onClick={showInput} style={{ borderStyle: 'dashed' }}>
+          <PlusOutlined />
+        </Tag>
+      )}
+    </div>
+  );
+};
 
 class Center extends Component<CenterProps, CenterState> {
   // static getDerivedStateFromProps(
@@ -71,9 +122,6 @@ class Center extends Component<CenterProps, CenterState> {
   // }
 
   state: CenterState = {
-    newTags: [],
-    inputVisible: false,
-    inputValue: '',
     tabKey: 'articles',
   };
 
@@ -98,32 +146,6 @@ class Center extends Component<CenterProps, CenterState> {
     });
   };
 
-  showInput = () => {
-    this.setState({ inputVisible: true }, () => this.input && this.input.focus());
-  };
-
-  saveInputRef = (input: Input | null) => {
-    this.input = input;
-  };
-
-  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ inputValue: e.target.value });
-  };
-
-  handleInputConfirm = () => {
-    const { state } = this;
-    const { inputValue } = state;
-    let { newTags } = state;
-    if (inputValue && newTags.filter((tag) => tag.label === inputValue).length === 0) {
-      newTags = [...newTags, { key: `new-${newTags.length}`, label: inputValue }];
-    }
-    this.setState({
-      newTags,
-      inputVisible: false,
-      inputValue: '',
-    });
-  };
-
   renderChildrenByTabKey = (tabKey: CenterState['tabKey']) => {
     if (tabKey === 'projects') {
       return <Projects />;
@@ -137,8 +159,46 @@ class Center extends Component<CenterProps, CenterState> {
     return null;
   };
 
+  renderUserInfo = (currentUser: Partial<CurrentUser>) => (
+    <div className={styles.detail}>
+      <p>
+        <ContactsOutlined
+          style={{
+            marginRight: 8,
+          }}
+        />
+        {currentUser.title}
+      </p>
+      <p>
+        <ClusterOutlined
+          style={{
+            marginRight: 8,
+          }}
+        />
+        {currentUser.group}
+      </p>
+      <p>
+        <HomeOutlined
+          style={{
+            marginRight: 8,
+          }}
+        />
+        {(currentUser.geographic || { province: { label: '' } }).province.label}
+        {
+          (
+            currentUser.geographic || {
+              city: {
+                label: '',
+              },
+            }
+          ).city.label
+        }
+      </p>
+    </div>
+  );
+
   render() {
-    const { newTags = [], inputVisible, inputValue, tabKey } = this.state;
+    const { tabKey } = this.state;
     const { currentUser = {}, currentUserLoading } = this.props;
     const dataLoading = currentUserLoading || !(currentUser && Object.keys(currentUser).length);
     return (
@@ -153,56 +213,9 @@ class Center extends Component<CenterProps, CenterState> {
                     <div className={styles.name}>{currentUser.name}</div>
                     <div>{currentUser.signature}</div>
                   </div>
-                  <div className={styles.detail}>
-                    <p>
-                      <i className={styles.title} />
-                      {currentUser.title}
-                    </p>
-                    <p>
-                      <i className={styles.group} />
-                      {currentUser.group}
-                    </p>
-                    <p>
-                      <i className={styles.address} />
-                      {(currentUser.geographic || { province: { label: '' } }).province.label}
-                      {
-                        (
-                          currentUser.geographic || {
-                            city: {
-                              label: '',
-                            },
-                          }
-                        ).city.label
-                      }
-                    </p>
-                  </div>
+                  {this.renderUserInfo(currentUser)}
                   <Divider dashed />
-                  <div className={styles.tags}>
-                    <div className={styles.tagsTitle}>标签</div>
-                    {(currentUser.tags || []).concat(newTags).map((item) => (
-                      <Tag key={item.key}>{item.label}</Tag>
-                    ))}
-                    {inputVisible && (
-                      <Input
-                        ref={(ref) => this.saveInputRef(ref)}
-                        type="text"
-                        size="small"
-                        style={{ width: 78 }}
-                        value={inputValue}
-                        onChange={this.handleInputChange}
-                        onBlur={this.handleInputConfirm}
-                        onPressEnter={this.handleInputConfirm}
-                      />
-                    )}
-                    {!inputVisible && (
-                      <Tag
-                        onClick={this.showInput}
-                        style={{ background: '#fff', borderStyle: 'dashed' }}
-                      >
-                        <PlusOutlined />
-                      </Tag>
-                    )}
-                  </div>
+                  <TagList tags={currentUser.tags || []} />
                   <Divider style={{ marginTop: 16 }} dashed />
                   <div className={styles.team}>
                     <div className={styles.teamTitle}>团队</div>

@@ -1,3 +1,5 @@
+@import '~antd/es/style/themes/default.less';
+
 .miniChart {
   position: relative;
   width: 100%;
@@ -15,5 +17,11 @@
     top: 16px;
     left: 50%;
     margin-left: -7px;
+  }
+}
+
+:global {
+  body .l7-popup-content {
+    background: @component-background;
   }
 }

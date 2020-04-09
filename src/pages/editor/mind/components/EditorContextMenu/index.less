@@ -1,10 +1,11 @@
+@import '~antd/es/style/themes/default.less';
+
 .contextMenu {
   display: none;
   overflow: hidden;
-  background: #fff;
+  background: @component-background;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-
+  box-shadow: @box-shadow-base;
   .item {
     display: flex;
     align-items: center;
@@ -14,7 +15,7 @@
     user-select: none;
 
     &:hover {
-      background: #e6f7ff;
+      background: @select-item-selected-bg;
     }
 
     .anticon {
@@ -26,11 +27,11 @@
     .disable {
       :local {
         .item {
-          color: rgba(0, 0, 0, 0.25);
+          color: @disabled-color;
           cursor: auto;
 
           &:hover {
-            background: #fff;
+            background: @item-hover-bg;
           }
         }
       }

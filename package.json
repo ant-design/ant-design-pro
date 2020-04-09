@@ -18,6 +18,7 @@
     "fetch:blocks": "pro fetch-blocks --branch=umi@3 && npm run prettier",
     "gh-pages": "cp CNAME ./dist/ && gh-pages -d dist",
     "i18n-remove": "pro i18n-remove --locale=zh-CN --write",
+    "postinstall": "umi g tmp",
     "lint": "umi g tmp && npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
@@ -33,6 +34,7 @@
     "start:no-ui": "cross-env UMI_UI=none umi dev",
     "start:pre": "cross-env REACT_APP_ENV=pre umi dev",
     "start:test": "cross-env REACT_APP_ENV=test MOCK=none umi dev",
+    "pretest": "node ./tests/beforeTest",
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
@@ -68,6 +70,7 @@
     "bizcharts": "^3.5.3-beta.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
+    "dva": "^2.4.0",
     "gg-editor": "^2.0.2",
     "lodash": "^4.17.11",
     "lodash-decorators": "^6.0.0",
@@ -106,9 +109,11 @@
     "@umijs/preset-ant-design-pro": "^1.0.1",
     "@umijs/preset-react": "^1.4.8",
     "@umijs/preset-ui": "^2.0.9",
-    "chalk": "^3.0.0",
+    "carlo": "^0.9.46",
+    "chalk": "^4.0.0",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
+    "detect-installer": "^1.0.1",
     "enzyme": "^3.11.0",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
@@ -119,10 +124,8 @@
     "mockjs": "^1.0.1-beta3",
     "prettier": "^2.0.1",
     "pro-download": "1.0.1",
+    "puppeteer-core": "^2.1.1",
     "stylelint": "^13.0.0"
-  },
-  "optionalDependencies": {
-    "puppeteer": "^2.0.0"
   },
   "engines": {
     "node": ">=10.0.0"

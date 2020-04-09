@@ -290,7 +290,7 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
       </PageHeaderWrapper>
       <FooterToolbar>
         {getErrorInfo(error)}
-        <Button type="primary" onClick={() => form && form.submit()} loading={submitting}>
+        <Button type="primary" onClick={() => form?.submit()} loading={submitting}>
           提交
         </Button>
       </FooterToolbar>
