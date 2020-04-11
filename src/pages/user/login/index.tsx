@@ -1,19 +1,14 @@
 import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from '@ant-design/icons';
-import { Alert, Checkbox } from 'antd';
+import { Alert, Checkbox, message } from 'antd';
 import React, { useState } from 'react';
-import { Link } from 'umi';
-import { StateType } from '@/models/login';
-import { LoginParamsType } from '@/services/login';
-import { ConnectState } from '@/models/connect';
+import { Link, history, useModel } from 'umi';
+import { getPageQuery } from '@/utils/utils';
+import { LoginParamsType, fakeAccountLogin } from '@/services/login';
 import LoginFrom from './components/Login';
 
 import styles from './style.less';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginFrom;
-interface LoginProps {
-  userLogin: StateType;
-  submitting?: boolean;
-}
 
 const LoginMessage: React.FC<{
   content: string;
@@ -28,18 +23,51 @@ const LoginMessage: React.FC<{
   />
 );
 
-const Login: React.FC<LoginProps> = (props) => {
-  const { userLogin = {}, submitting } = props;
-  const { status, type: loginType } = userLogin;
+/**
+ * 此方法会跳转到 redirect 参数所在的位置
+ */
+const replaceGoto = () => {
+  const urlParams = new URL(window.location.href);
+  const params = getPageQuery();
+  let { redirect } = params as { redirect: string };
+  if (redirect) {
+    const redirectUrlParams = new URL(redirect);
+    if (redirectUrlParams.origin === urlParams.origin) {
+      redirect = redirect.substr(urlParams.origin.length);
+      if (redirect.match(/^\/.*#/)) {
+        redirect = redirect.substr(redirect.indexOf('#') + 1);
+      }
+    } else {
+      window.location.href = '/';
+      return;
+    }
+  }
+  history.replace(redirect || '/');
+};
+
+const Login: React.FC<{}> = () => {
+  const [userLoginState, setUserLoginState] = useState<API.LoginStateType>({});
+  const [submitting, setSubmitting] = useState(false);
+  const { status, type: loginType } = userLoginState;
+  const { refresh } = useModel('@@initialState');
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState<string>('account');
 
-  const handleSubmit = (values: LoginParamsType) => {
-    const { dispatch } = props;
-    dispatch({
-      type: 'login/login',
-      payload: { ...values, type },
-    });
+  const handleSubmit = async (values: LoginParamsType) => {
+    setSubmitting(true);
+    try {
+      const msg = await fakeAccountLogin({ ...values, type });
+      setUserLoginState(msg);
+      if (msg.status === 'ok') {
+        message.success('登陆成功！');
+        refresh();
+        replaceGoto();
+      }
+    } catch (error) {
+      message.error('登陆失败，请重试！');
+    }
+
+    setSubmitting(false);
   };
   return (
     <div className={styles.main}>

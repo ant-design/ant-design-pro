@@ -3,6 +3,12 @@ import { Request, Response } from 'express';
 function getFakeCaptcha(req: Request, res: Response) {
   return res.json('captcha-xxx');
 }
+
+let access = 'user';
+
+const getAccess = () => {
+  return access;
+};
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
   // 支持值为 Object 和 Array
@@ -43,6 +49,7 @@ export default {
     notifyCount: 12,
     unreadCount: 11,
     country: 'China',
+    access: getAccess(),
     geographic: {
       province: {
         label: '浙江省',
@@ -93,6 +100,7 @@ export default {
         type,
         currentAuthority: 'user',
       });
+      access = 'user';
       return;
     }
     if (type === 'mobile') {
@@ -109,6 +117,7 @@ export default {
       type,
       currentAuthority: 'guest',
     });
+    access = 'guest';
   },
   'POST /api/register': (req: Request, res: Response) => {
     res.send({ status: 'ok', currentAuthority: 'user' });

@@ -5,10 +5,11 @@ export interface LoginParamsType {
   password: string;
   mobile: string;
   captcha: string;
+  type: string;
 }
 
 export async function fakeAccountLogin(params: LoginParamsType) {
-  return request('/api/login/account', {
+  return request<API.LoginStateType>('/api/login/account', {
     method: 'POST',
     data: params,
   });

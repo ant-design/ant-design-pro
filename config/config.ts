@@ -54,15 +54,14 @@ export default defineConfig({
       path: '/admin',
       name: 'admin',
       icon: 'crown',
+      access: 'canAdmin',
       component: './Admin',
-      authority: ['admin'],
       routes: [
         {
           path: '/admin/sub-page',
           name: 'sub-page',
           icon: 'smile',
           component: './Welcome',
-          authority: ['admin'],
         },
       ],
     },

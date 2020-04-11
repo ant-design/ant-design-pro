@@ -2,9 +2,12 @@ import React from 'react';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { queryCurrent } from './services/user';
-import defaultSettings from '../config/defaultSettings';
+import defaultSettings, { DefaultSettings } from '../config/defaultSettings';
 
-export async function getInitialState() {
+export async function getInitialState(): Promise<{
+  currentUser?: API.CurrentUser;
+  settings?: DefaultSettings;
+}> {
   const currentUser = await queryCurrent();
   return {
     currentUser,
