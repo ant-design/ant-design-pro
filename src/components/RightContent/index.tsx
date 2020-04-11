@@ -1,18 +1,13 @@
 import { Tooltip, Tag } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
-import { connect, ConnectProps } from 'umi';
-import { ConnectState } from '@/models/connect';
+import { useModel } from 'umi';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';
-export interface GlobalHeaderRightProps extends Partial<ConnectProps> {
-  theme?: SiderTheme;
-  layout: 'sidemenu' | 'topmenu';
-}
 
 const ENVTagColor = {
   dev: 'orange',
@@ -20,11 +15,17 @@ const ENVTagColor = {
   pre: '#87d068',
 };
 
-const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
-  const { theme, layout } = props;
+const GlobalHeaderRight: React.FC<{}> = () => {
+  const { initialState } = useModel('@@initialState');
+
+  if (!initialState) {
+    return null;
+  }
+
+  const { navTheme, layout } = initialState.settings;
   let className = styles.right;
 
-  if (theme === 'dark' && layout === 'topmenu') {
+  if (navTheme === 'dark' && layout === 'topmenu') {
     className = `${styles.right}  ${styles.dark}`;
   }
 
@@ -73,8 +74,4 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
     </div>
   );
 };
-
-export default connect(({ settings }: ConnectState) => ({
-  theme: settings.navTheme,
-  layout: settings.layout,
-}))(GlobalHeaderRight);
+export default GlobalHeaderRight;
