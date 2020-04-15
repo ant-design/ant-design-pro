@@ -1,4 +1,5 @@
 import React from 'react';
+import { history } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { queryCurrent } from './services/user';
@@ -8,9 +9,19 @@ export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
   settings?: DefaultSettings;
 }> {
-  const currentUser = await queryCurrent();
+  // 如果是登录页面，不执行
+  if (history.location.pathname !== '/user/login') {
+    try {
+      const currentUser = await queryCurrent();
+      return {
+        currentUser,
+        settings: defaultSettings,
+      };
+    } catch (error) {
+      history.push('/user/login');
+    }
+  }
   return {
-    currentUser,
     settings: defaultSettings,
   };
 }

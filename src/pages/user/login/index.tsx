@@ -49,7 +49,7 @@ const replaceGoto = () => {
 const Login: React.FC<{}> = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginStateType>({});
   const [submitting, setSubmitting] = useState(false);
-  const { status, type: loginType } = userLoginState;
+
   const { refresh } = useModel('@@initialState');
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState<string>('account');
@@ -57,19 +57,26 @@ const Login: React.FC<{}> = () => {
   const handleSubmit = async (values: LoginParamsType) => {
     setSubmitting(true);
     try {
+      // 登录
       const msg = await fakeAccountLogin({ ...values, type });
-      setUserLoginState(msg);
       if (msg.status === 'ok') {
         message.success('登陆成功！');
-        refresh();
         replaceGoto();
+        setTimeout(() => {
+          refresh();
+        }, 0);
+        return;
       }
+      // 如果失败去设置用户错误信息
+      setUserLoginState(msg);
     } catch (error) {
       message.error('登陆失败，请重试！');
     }
-
     setSubmitting(false);
   };
+
+  const { status, type: loginType } = userLoginState;
+
   return (
     <div className={styles.container}>
       <div className={styles.lang}>
