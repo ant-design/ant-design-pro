@@ -1,5 +1,7 @@
 import { Reducer } from 'umi';
-import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
+import defaultSettings, {
+  Settings as DefaultSettings,
+} from '@ant-design/pro-layout/es/defaultSettings';
 
 export interface SettingModelType {
   namespace: 'settings';
