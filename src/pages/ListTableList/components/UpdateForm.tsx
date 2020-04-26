@@ -62,13 +62,14 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
   const handleNext = async () => {
     const fieldsValue = await form.validateFields();
+    const newFormValue = {...formVals, ...fieldsValue};
 
-    setFormVals({ ...formVals, ...fieldsValue });
+    setFormVals(newFormValue);
 
     if (currentStep < 2) {
       forward();
     } else {
-      handleUpdate(formVals);
+      handleUpdate(newFormValue);
     }
   };
 
