@@ -28,7 +28,7 @@ export interface DefaultSettings {
    */
   autoHideHeader: boolean;
   /**
-   * sticky siderbar
+   * sticky sidebar
    */
   fixedSidebar: boolean;
   menu: { locale: boolean };
