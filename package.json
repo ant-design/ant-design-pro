@@ -16,7 +16,7 @@
     "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
     "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
     "fetch:blocks": "pro fetch-blocks --branch=umi@3 && npm run prettier",
-    "gh-pages": "cp CNAME ./dist/ && gh-pages -d dist",
+    "gh-pages": "gh-pages -d dist",
     "i18n-remove": "pro i18n-remove --locale=zh-CN --write",
     "lint": "umi g tmp && npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint:prettier": "prettier --check \"**/*\" --end-of-line auto",
@@ -57,6 +57,9 @@
     "last 2 versions",
     "not ie <= 10"
   ],
+  "resolutions": {
+    "moment": "2.24.0"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-layout": "^5.0.8",
