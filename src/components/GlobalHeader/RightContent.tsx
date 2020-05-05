@@ -10,7 +10,7 @@ import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';
 export interface GlobalHeaderRightProps extends Partial<ConnectProps> {
-  theme?: SiderTheme;
+  theme?: SiderTheme | 'realDark';
   layout: 'sidemenu' | 'topmenu';
 }
 
