@@ -67,7 +67,7 @@
     "antd": "^4.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
-    "moment": "^2.24.0",
+    "moment": "~2.24.0",
     "omit.js": "^1.0.2",
     "path-to-regexp": "2.4.0",
     "qs": "^6.9.0",
