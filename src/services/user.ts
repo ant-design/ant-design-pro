@@ -9,5 +9,5 @@ export async function queryCurrent() {
 }
 
 export async function queryNotices(): Promise<any> {
-  return request('/api/notices');
+  return request<{ data: API.NoticeIconData[] }>('/api/notices');
 }

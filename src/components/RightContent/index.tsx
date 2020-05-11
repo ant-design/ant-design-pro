@@ -5,6 +5,7 @@ import { useModel } from 'umi';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import SelectLang from '../SelectLang';
+import NoticeIcon from '../NoticeIcon';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';
@@ -64,6 +65,7 @@ const GlobalHeaderRight: React.FC<{}> = () => {
           <QuestionCircleOutlined />
         </a>
       </Tooltip>
+      <NoticeIcon />
       <Avatar />
       {REACT_APP_ENV && (
         <span>
