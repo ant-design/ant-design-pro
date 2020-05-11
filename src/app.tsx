@@ -26,9 +26,12 @@ export async function getInitialState(): Promise<{
   };
 }
 
-export const layout = {
-  rightRender: () => {
-    return <RightContent />;
-  },
-  footerRender: () => <Footer />,
+export const layout = ({ initialState }: { initialState: { settings?: DefaultSettings } }) => {
+  return {
+    rightRender: () => {
+      return <RightContent />;
+    },
+    footerRender: () => <Footer />,
+    ...initialState?.settings,
+  };
 };
