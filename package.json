@@ -62,6 +62,8 @@
     "@ant-design/pro-table": "^2.2.0",
     "antd": "^4.0.0",
     "classnames": "^2.2.6",
+    "lodash": "^4.17.15",
+    "moment": "^2.25.3",
     "omit.js": "^1.0.2",
     "qs": "^6.9.0",
     "react": "^16.8.6",
