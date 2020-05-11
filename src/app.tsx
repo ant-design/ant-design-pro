@@ -1,5 +1,6 @@
 import React from 'react';
 import { history } from 'umi';
+import { BasicLayoutProps } from '@ant-design/pro-layout';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { queryCurrent } from './services/user';
@@ -26,11 +27,14 @@ export async function getInitialState(): Promise<{
   };
 }
 
-export const layout = ({ initialState }: { initialState: { settings?: DefaultSettings } }) => {
+export const layout = ({
+  initialState,
+}: {
+  initialState: { settings?: DefaultSettings };
+}): BasicLayoutProps => {
   return {
-    rightRender: () => {
-      return <RightContent />;
-    },
+    rightContentRender: () => <RightContent />,
+    disableContentMargin: false,
     footerRender: () => <Footer />,
     ...initialState?.settings,
   };
