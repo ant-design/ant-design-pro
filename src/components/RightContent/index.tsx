@@ -1,4 +1,4 @@
-import { Tooltip, Tag } from 'antd';
+import { Tooltip, Tag, Space } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useModel } from 'umi';
@@ -25,12 +25,11 @@ const GlobalHeaderRight: React.FC<{}> = () => {
   const { navTheme, layout } = initialState.settings;
   let className = styles.right;
 
-  if (navTheme === 'dark' && layout === 'topmenu') {
+  if ((navTheme === 'dark' && layout === 'top') || layout === 'mix') {
     className = `${styles.right}  ${styles.dark}`;
   }
-
   return (
-    <div className={className}>
+    <Space className={className}>
       <HeaderSearch
         className={`${styles.action} ${styles.search}`}
         placeholder="站内搜索"
@@ -55,14 +54,14 @@ const GlobalHeaderRight: React.FC<{}> = () => {
         // }}
       />
       <Tooltip title="使用文档">
-        <a
-          target="_blank"
-          href="https://pro.ant.design/docs/getting-started"
-          rel="noopener noreferrer"
+        <span
           className={styles.action}
+          onClick={() => {
+            window.location.href = 'https://pro.ant.design/docs/getting-started';
+          }}
         >
           <QuestionCircleOutlined />
-        </a>
+        </span>
       </Tooltip>
       <Avatar />
       {REACT_APP_ENV && (
@@ -71,7 +70,7 @@ const GlobalHeaderRight: React.FC<{}> = () => {
         </span>
       )}
       <SelectLang className={styles.action} />
-    </div>
+    </Space>
   );
 };
 export default GlobalHeaderRight;

@@ -1,14 +1,14 @@
 import React from 'react';
 import { history } from 'umi';
-import { BasicLayoutProps } from '@ant-design/pro-layout';
+import { BasicLayoutProps, Settings as ProSettings } from '@ant-design/pro-layout';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { queryCurrent } from './services/user';
-import defaultSettings, { DefaultSettings } from '../config/defaultSettings';
+import defaultSettings from '../config/defaultSettings';
 
 export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
-  settings?: DefaultSettings;
+  settings?: ProSettings;
 }> {
   // 如果是登录页面，不执行
   if (history.location.pathname !== '/user/login') {
@@ -30,12 +30,13 @@ export async function getInitialState(): Promise<{
 export const layout = ({
   initialState,
 }: {
-  initialState: { settings?: DefaultSettings };
+  initialState: { settings?: ProSettings };
 }): BasicLayoutProps => {
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     footerRender: () => <Footer />,
+    menuHeaderRender: false,
     ...initialState?.settings,
   };
 };
