@@ -13,7 +13,9 @@ const reloadAuthorized = (): void => {
  * hard code
  * block need it。
  */
-window.reloadAuthorized = reloadAuthorized;
+if (typeof window !== 'undefined') {
+  window.reloadAuthorized = reloadAuthorized;
+}
 
 export { reloadAuthorized };
 export default Authorized;
