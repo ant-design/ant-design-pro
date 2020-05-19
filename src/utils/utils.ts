@@ -35,8 +35,8 @@ export const getAuthorityFromRouter = <T extends Route>(
   pathname: string,
 ): T | undefined => {
   const authority = router.find(
-    ({ routes, path = '/' }) =>
-      (path && pathRegexp(path).exec(pathname)) ||
+    ({ routes, path = '/', target = '_self' }) =>
+      (path && target !== '_blank' && pathRegexp(path).exec(pathname)) ||
       (routes && getAuthorityFromRouter(routes, pathname)),
   );
   if (authority) return authority;
