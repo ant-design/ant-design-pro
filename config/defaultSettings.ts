@@ -1,4 +1,4 @@
-import { Settings as ProSettings } from '@ant-design/pro-layout';
+import { Settings as LayoutSettings } from '@ant-design/pro-layout';
 
 export default {
   navTheme: 'light',
@@ -16,4 +16,6 @@ export default {
   title: 'Ant Design Pro',
   pwa: false,
   iconfontUrl: '',
-} as ProSettings;
+} as LayoutSettings & {
+  pwa: boolean;
+};

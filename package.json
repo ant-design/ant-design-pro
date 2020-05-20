@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "5.0.0",
+  "version": "5.0.0-alpha.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {

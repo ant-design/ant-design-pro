@@ -1,5 +1,5 @@
 import React from 'react';
-import { BasicLayoutProps, Settings as ProSettings } from '@ant-design/pro-layout';
+import { BasicLayoutProps, Settings as LayoutSettings } from '@ant-design/pro-layout';
 
 import { notification } from 'antd';
 import { history, RequestConfig } from 'umi';
@@ -11,7 +11,7 @@ import defaultSettings from '../config/defaultSettings';
 
 export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
-  settings?: ProSettings;
+  settings?: LayoutSettings;
 }> {
   // 如果是登录页面，不执行
   if (history.location.pathname !== '/user/login') {
@@ -33,7 +33,7 @@ export async function getInitialState(): Promise<{
 export const layout = ({
   initialState,
 }: {
-  initialState: { settings?: ProSettings };
+  initialState: { settings?: LayoutSettings };
 }): BasicLayoutProps => {
   return {
     rightContentRender: () => <RightContent />,
