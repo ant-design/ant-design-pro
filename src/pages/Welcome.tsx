@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-layout';
 import { Card, Typography, Alert } from 'antd';
 import styles from './Welcome.less';
 
@@ -12,7 +12,7 @@ const CodePreview: React.FC<{}> = ({ children }) => (
 );
 
 export default (): React.ReactNode => (
-  <PageHeaderWrapper>
+  <PageContainer>
     <Card>
       <Alert
         message="umi ui 现已发布，点击右下角 umi 图标即可使用"
@@ -58,5 +58,5 @@ export default (): React.ReactNode => (
       </a>
       。
     </p>
-  </PageHeaderWrapper>
+  </PageContainer>
 );
