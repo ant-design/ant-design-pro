@@ -69,6 +69,7 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
       panes.push(
         <TabPane tab={tabTitle} key={tabKey}>
           <NoticeList
+            {...child.props}
             clearText={clearText}
             viewMoreText={viewMoreText}
             data={list}
@@ -78,7 +79,6 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
             showClear={showClear}
             showViewMore={showViewMore}
             title={title}
-            {...child.props}
           />
         </TabPane>,
       );
