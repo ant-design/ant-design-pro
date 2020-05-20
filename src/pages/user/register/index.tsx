@@ -53,10 +53,10 @@ export interface UserRegisterParams {
 }
 
 const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) => {
-  const [count, setcount]: [number, any] = useState(0);
-  const [visible, setvisible]: [boolean, any] = useState(false);
-  const [prefix, setprefix]: [string, any] = useState('86');
-  const [popover, setpopover]: [boolean, any] = useState(false);
+  const [count, setCount]: [number, any] = useState(0);
+  const [visible, setVisible]: [boolean, any] = useState(false);
+  const [prefix, setPrefix]: [string, any] = useState('86');
+  const [popover, setPopover]: [boolean, any] = useState(false);
   const confirmDirty = false;
   let interval: number | undefined;
   const [form] = Form.useForm();
@@ -83,10 +83,10 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
   );
   const onGetCaptcha = () => {
     let counts = 59;
-    setcount(counts);
+    setCount(counts);
     interval = window.setInterval(() => {
       counts -= 1;
-      setcount(counts);
+      setCount(counts);
       if (counts === 0) {
         clearInterval(interval);
       }
@@ -122,14 +122,14 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
     const promise = Promise;
     // 没有值的情况
     if (!value) {
-      setvisible(!!value);
+      setVisible(!!value);
       return promise.reject(formatMessage({ id: 'userandregister.password.required' }));
     }
     // 有值的情况
     if (!visible) {
-      setvisible(!!value);
+      setVisible(!!value);
     }
-    setpopover(!popover);
+    setPopover(!popover);
     if (value.length < 6) {
       return promise.reject('');
     }
@@ -139,7 +139,7 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
     return promise.resolve();
   };
   const changePrefix = (value: string) => {
-    setprefix(value);
+    setPrefix(value);
   };
   const renderPasswordProgress = () => {
     const value = form.getFieldValue('password');
