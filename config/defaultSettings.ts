@@ -16,4 +16,6 @@ export default {
   title: 'Ant Design Pro',
   pwa: false,
   iconfontUrl: '',
-} as ProSettings;
+} as ProSettings & {
+  pwa: boolean;
+};
