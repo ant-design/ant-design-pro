@@ -8,6 +8,7 @@
     "build": "umi build",
     "deploy": "npm run site && npm run gh-pages",
     "dev": "npm run start:dev",
+    "fetch:blocks": "pro fetch-blocks --branch antd@4 && npm run prettier",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
     "docker-prod:dev": "docker-compose -f ./docker/docker-compose.yml up",
