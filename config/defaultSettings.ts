@@ -8,7 +8,7 @@ export default {
   contentWidth: 'Fluid',
   fixedHeader: false,
   autoHideHeader: false,
-  fixSiderbar: false,
+  fixSiderbar: true,
   colorWeak: false,
   menu: {
     locale: true,
