@@ -61,7 +61,7 @@
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-layout": "^5.0.8",
     "@ant-design/pro-table": "2.2.7",
-    "antd": "4.2.2",
+    "antd": "4.2.5",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
