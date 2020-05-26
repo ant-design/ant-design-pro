@@ -56,9 +56,6 @@
     "last 2 versions",
     "not ie <= 10"
   ],
-  "resolutions": {
-    "@ant-design/pro-layout": "6.0.0-3"
-  },
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-layout": "6.0.0-3",
