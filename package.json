@@ -57,11 +57,11 @@
     "not ie <= 10"
   ],
   "resolutions": {
-    "@ant-design/pro-layout": "6.0.0-1"
+    "@ant-design/pro-layout": "6.0.0-3"
   },
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
-    "@ant-design/pro-layout": "6.0.0-2",
+    "@ant-design/pro-layout": "6.0.0-3",
     "@ant-design/pro-table": "^2.2.0",
     "antd": "^4.0.0",
     "classnames": "^2.2.6",

@@ -8,7 +8,7 @@ import { LoginParamsType, fakeAccountLogin } from '@/services/login';
 import LoginFrom from './components/Login';
 import styles from './style.less';
 
-const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginFrom;
+const { Tab, Username, Password, Mobile, Captcha, Submit } = LoginFrom;
 
 const LoginMessage: React.FC<{
   content: string;
@@ -99,8 +99,8 @@ const Login: React.FC<{}> = () => {
                 <LoginMessage content="账户或密码错误（admin/ant.design）" />
               )}
 
-              <UserName
-                name="userName"
+              <Username
+                name="username"
                 placeholder="用户名: admin or user"
                 rules={[
                   {
