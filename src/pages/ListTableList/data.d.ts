@@ -25,7 +25,12 @@ export interface TableListData {
 }
 
 export interface TableListParams {
-  sorter?: string;
+  sorter?: {
+    [key: string]: string;
+  };
+  filter?: {
+    [key: string]: React.ReactText[];
+  };
   status?: string;
   name?: string;
   desc?: string;
