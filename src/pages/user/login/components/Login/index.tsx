@@ -87,6 +87,7 @@ const Login: LoginType = (props) => {
           {tabs.length ? (
             <React.Fragment>
               <Tabs
+                destroyInactiveTabPane
                 animated={false}
                 className={styles.tabs}
                 activeKey={type}
