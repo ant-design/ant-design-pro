@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { TabPaneProps } from 'antd/es/tabs';
 import { Tabs } from 'antd';
 import LoginContext, { LoginContextProps } from './LoginContext';
 
@@ -13,9 +12,11 @@ const generateId = (() => {
   };
 })();
 
+type TabPaneProps = Parameters<typeof Tabs.TabPane>[0];
+
 interface LoginTabProps extends TabPaneProps {
   tabUtil: LoginContextProps['tabUtil'];
-  active?: boolean;
+  key?: string;
 }
 
 const LoginTab: React.FC<LoginTabProps> = (props) => {
@@ -26,8 +27,8 @@ const LoginTab: React.FC<LoginTabProps> = (props) => {
       tabUtil.addTab(uniqueId);
     }
   }, []);
-  const { children } = props;
-  return <TabPane {...props}>{props.active && children}</TabPane>;
+  const { children, ...rest } = props;
+  return <TabPane {...rest}>{children}</TabPane>;
 };
 
 const WrapContext: React.FC<TabPaneProps> & {

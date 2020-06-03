@@ -102,6 +102,7 @@ const LoginItem: React.FC<LoginItemProps> = (props) => {
     }
     return () => clearInterval(interval);
   }, [timing]);
+
   if (!name) {
     return null;
   }

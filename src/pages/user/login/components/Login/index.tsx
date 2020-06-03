@@ -32,9 +32,10 @@ interface LoginType extends React.FC<LoginProps> {
 
 const Login: LoginType = (props) => {
   const { className } = props;
+  const [form] = Form.useForm();
   const [tabs, setTabs] = useState<string[]>([]);
   const [active, setActive] = useState({});
-  const [type, setType] = useMergeValue('', {
+  const [tabActiveType, setType] = useMergeValue('', {
     value: props.activeKey,
     onChange: props.onTabChange,
   });
@@ -66,10 +67,10 @@ const Login: LoginType = (props) => {
         },
         updateActive: (activeItem) => {
           if (!active) return;
-          if (active[type]) {
-            active[type].push(activeItem);
+          if (active[tabActiveType]) {
+            active[tabActiveType].push(activeItem);
           } else {
-            active[type] = [activeItem];
+            active[tabActiveType] = [activeItem];
           }
           setActive(active);
         },
@@ -77,7 +78,7 @@ const Login: LoginType = (props) => {
     >
       <div className={classNames(className, styles.login)}>
         <Form
-          form={props.from}
+          form={props.from || form}
           onFinish={(values) => {
             if (props.onSubmit) {
               props.onSubmit(values as LoginParamsType);
@@ -87,9 +88,10 @@ const Login: LoginType = (props) => {
           {tabs.length ? (
             <React.Fragment>
               <Tabs
+                destroyInactiveTabPane
                 animated={false}
                 className={styles.tabs}
-                activeKey={type}
+                activeKey={tabActiveType}
                 onChange={(activeKey) => {
                   setType(activeKey);
                 }}
