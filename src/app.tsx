@@ -30,19 +30,15 @@ export async function getInitialState(): Promise<{
   };
 }
 
-export const layout = ({
-  initialState,
-}: {
-  initialState: { settings?: LayoutSettings };
-}): BasicLayoutProps => {
-  return {
-    rightContentRender: () => <RightContent />,
-    disableContentMargin: false,
-    footerRender: () => <Footer />,
-    menuHeaderRender: undefined,
-    ...initialState?.settings,
-  };
-};
+export const accessLayout: BasicLayoutProps = {
+  title: 'Ant Design Pro',
+  siderWidth: 208,
+  rightContentRender: () => <RightContent />,
+  disableContentMargin: false,
+  footerRender: () => <Footer />,
+  menuHeaderRender: undefined,
+  ...defaultSettings,
+}
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',

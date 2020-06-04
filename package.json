@@ -60,6 +60,7 @@
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-layout": "6.0.0-3",
     "@ant-design/pro-table": "^2.3.0",
+    "@umijs/plugin-access-layout": "^1.1.0",
     "antd": "^4.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
@@ -84,10 +85,18 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.13",
     "@umijs/fabric": "^2.0.5",
+    "@umijs/plugin-analytics": "0.2.2",
+    "@umijs/plugin-antd": "0.5.1",
     "@umijs/plugin-blocks": "^2.0.5",
+    "@umijs/plugin-crossorigin": "1.1.0",
+    "@umijs/plugin-dva": "0.7.2",
     "@umijs/plugin-esbuild": "^1.0.0-beta.2",
-    "@umijs/preset-ant-design-pro": "^1.2.0",
-    "@umijs/preset-react": "^1.4.24",
+    "@umijs/plugin-helmet": "1.0.2",
+    "@umijs/plugin-initial-state": "2.2.1",
+    "@umijs/plugin-locale": "0.7.0",
+    "@umijs/plugin-model": "2.3.1",
+    "@umijs/plugin-request": "2.3.2",
+    "@umijs/plugin-test": "1.0.0",
     "@umijs/preset-ui": "^2.1.11",
     "carlo": "^0.9.46",
     "cross-env": "^7.0.0",
@@ -102,7 +111,8 @@
     "prettier": "^2.0.1",
     "pro-download": "1.0.1",
     "puppeteer-core": "^2.1.1",
-    "stylelint": "^13.0.0"
+    "stylelint": "^13.0.0",
+    "umi-plugin-pro-block": "^2.0.1"
   },
   "engines": {
     "node": ">=10.0.0"

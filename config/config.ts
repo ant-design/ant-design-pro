@@ -11,10 +11,13 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
-  layout: {
-    name: 'Ant Design Pro',
-    locale: true,
-    siderWidth: 208,
+  accessLayout: {
+    useModel: true
+  },
+  // 这里的逻辑会在 pro-reset 中实现，先放这里防止程序运行出错
+  define:{
+    ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: '',
+    REACT_APP_ENV: REACT_APP_ENV || false,
   },
   locale: {
     // default zh-CN
@@ -33,7 +36,7 @@ export default defineConfig({
   routes: [
     {
       path: '/user',
-      layout: false,
+      hideLayout: true,
       routes: [
         {
           name: 'login',
@@ -42,7 +45,6 @@ export default defineConfig({
         },
       ],
     },
-
     {
       path: '/welcome',
       name: 'welcome',
