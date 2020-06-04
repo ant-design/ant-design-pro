@@ -38,7 +38,7 @@ export const accessLayout: BasicLayoutProps = {
   footerRender: () => <Footer />,
   menuHeaderRender: undefined,
   ...defaultSettings,
-}
+};
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
