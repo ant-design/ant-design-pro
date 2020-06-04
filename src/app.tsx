@@ -31,6 +31,7 @@ export async function getInitialState(): Promise<{
 }
 
 export const accessLayout: BasicLayoutProps = {
+  // @ts-ignore
   title: 'Ant Design Pro',
   siderWidth: 208,
   rightContentRender: () => <RightContent />,
