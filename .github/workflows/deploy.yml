@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - run: yarn
-      - run: yarn run lint
+      - run: npm install
+      - run: npm run lint
       # - run: yarn run tsc
       - name: Build and Deploy
         uses: JamesIves/github-pages-deploy-action@master
@@ -25,4 +25,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
           BRANCH: gh-pages
           FOLDER: 'dist/'
-          BUILD_SCRIPT: yarn && npm uninstall husky && yarn add umi-plugin-antd-theme umi-plugin-pro  && npm run site && git checkout . && git clean -df
+          BUILD_SCRIPT: npm install && npm uninstall husky && yarn add umi-plugin-antd-theme umi-plugin-pro  && npm run site && git checkout . && git clean -df

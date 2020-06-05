@@ -52,13 +52,16 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
   menuList.map((item) => {
-    const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
+    const localItem = {
+      ...item,
+      children: item.children ? menuDataRender(item.children) : undefined,
+    };
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright={`${(new Date()).getFullYear()} 蚂蚁金服体验技术部出品`}
+    copyright={`${new Date().getFullYear()} 蚂蚁金服体验技术部出品`}
     links={[
       {
         key: 'Ant Design Pro',
@@ -132,11 +135,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       )}
       onCollapse={handleMenuCollapse}
       menuItemRender={(menuItemProps, defaultDom) => {
-        if (menuItemProps.isUrl || !menuItemProps.path
-          || menuItemProps.children?.length) {
+        if (menuItemProps.isUrl || !menuItemProps.path) {
           return defaultDom;
         }
-
         return <Link to={menuItemProps.path}>{defaultDom}</Link>;
       }}
       breadcrumbRender={(routers = []) => [
