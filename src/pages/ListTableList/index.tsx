@@ -1,9 +1,8 @@
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Divider, Dropdown, Menu, message, Input } from 'antd';
 import React, { useState, useRef } from 'react';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
-import { SorterResult } from 'antd/es/table/interface';
 
 import CreateForm from './components/CreateForm';
 import UpdateForm, { FormValueType } from './components/UpdateForm';
@@ -73,7 +72,6 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
 };
 
 const TableList: React.FC<{}> = () => {
-  const [sorter, setSorter] = useState<string>('');
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
@@ -151,20 +149,11 @@ const TableList: React.FC<{}> = () => {
   ];
 
   return (
-    <PageHeaderWrapper>
+    <PageContainer>
       <ProTable<TableListItem>
         headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="key"
-        onChange={(_, _filter, _sorter) => {
-          const sorterResult = _sorter as SorterResult<TableListItem>;
-          if (sorterResult.field) {
-            setSorter(`${sorterResult.field}_${sorterResult.order}`);
-          }
-        }}
-        params={{
-          sorter,
-        }}
         toolBarRender={(action, { selectedRows }) => [
           <Button type="primary" onClick={() => handleModalVisible(true)}>
             <PlusOutlined /> 新建
@@ -200,7 +189,7 @@ const TableList: React.FC<{}> = () => {
             </span>
           </div>
         )}
-        request={(params) => queryRule(params)}
+        request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
         rowSelection={{}}
       />
@@ -241,7 +230,7 @@ const TableList: React.FC<{}> = () => {
           values={stepFormValues}
         />
       ) : null}
-    </PageHeaderWrapper>
+    </PageContainer>
   );
 };
 

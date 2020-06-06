@@ -45,30 +45,45 @@ function getRule(req: Request, res: Response, u: string) {
     ((current as number) - 1) * (pageSize as number),
     (current as number) * (pageSize as number),
   );
-  if (params.sorter) {
-    const s = params.sorter.split('_');
+  const sorter = JSON.parse(params.sorter as any);
+  if (sorter) {
     dataSource = dataSource.sort((prev, next) => {
-      if (s[1] === 'descend') {
-        return next[s[0]] - prev[s[0]];
-      }
-      return prev[s[0]] - next[s[0]];
+      let sortNumber = 0;
+      Object.keys(sorter).forEach((key) => {
+        if (sorter[key] === 'descend') {
+          if (prev[key] - next[key] > 0) {
+            sortNumber += -1;
+          } else {
+            sortNumber += 1;
+          }
+          return;
+        }
+        if (prev[key] - next[key] > 0) {
+          sortNumber += 1;
+        } else {
+          sortNumber += -1;
+        }
+      });
+      return sortNumber;
     });
   }
-
-  if (params.status) {
-    const status = params.status.split(',');
-    let filterDataSource: TableListItem[] = [];
-    status.forEach((s: string) => {
-      filterDataSource = filterDataSource.concat(
-        dataSource.filter((item) => {
-          if (parseInt(`${item.status}`, 10) === parseInt(s.split('')[0], 10)) {
+  if (params.filter) {
+    const filter = JSON.parse(params.filter as any) as {
+      [key: string]: string[];
+    };
+    if (Object.keys(filter).length > 0) {
+      dataSource = dataSource.filter((item) => {
+        return Object.keys(filter).some((key) => {
+          if (!filter[key]) {
+            return true;
+          }
+          if (filter[key].includes(`${item[key]}`)) {
             return true;
           }
           return false;
-        }),
-      );
-    });
-    dataSource = filterDataSource;
+        });
+      });
+    }
   }
 
   if (params.name) {
