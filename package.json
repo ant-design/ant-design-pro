@@ -59,7 +59,7 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
-    "@ant-design/pro-layout": "^5.0.8",
+    "@ant-design/pro-layout": "^5.0.16",
     "@ant-design/pro-table": "2.3.4",
     "antd": "4.3.3",
     "classnames": "^2.2.6",
