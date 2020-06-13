@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout: self
         clean: false
-      - script: yarn
+      - script: npm install
         displayName: install
       - script: npm run lint
         displayName: lint
@@ -36,7 +36,7 @@ jobs:
       options: '-u root'
 
     steps:
-      - script: yarn
+      - script: npm install
         displayName: install
       - script: npm run test:all
         env:
@@ -50,8 +50,8 @@ jobs:
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '11.x'
-      - script: yarn
+          versionSpec: '12.x'
+      - script: npm install
         displayName: install
       - script: npm run lint
         displayName: lint
@@ -73,8 +73,8 @@ jobs:
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '11.x'
-      - script: yarn
+          versionSpec: '12.x'
+      - script: npm install
         displayName: install
       - script: npm run lint
         displayName: lint
