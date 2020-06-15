@@ -11,6 +11,9 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
+  accessLayout: {
+    useModel: true,
+  },
   // 这里的逻辑会在 pro-reset 中实现，先放这里防止程序运行出错
   define: {
     ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: '',

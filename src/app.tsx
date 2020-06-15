@@ -1,7 +1,8 @@
 import React from 'react';
-import { Settings as LayoutSettings, MenuDataItem } from '@ant-design/pro-layout';
+import { BasicLayoutProps, Settings as LayoutSettings } from '@ant-design/pro-layout';
+
 import { notification } from 'antd';
-import { history, RequestConfig, LayoutConfigProps } from 'umi';
+import { history, RequestConfig } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { queryCurrent } from './services/user';
@@ -29,7 +30,7 @@ export async function getInitialState(): Promise<{
   };
 }
 
-export const accessLayout: LayoutConfigProps = {
+export const accessLayout: BasicLayoutProps = {
   // @ts-ignore
   title: 'Ant Design Pro',
   siderWidth: 208,
@@ -37,16 +38,6 @@ export const accessLayout: LayoutConfigProps = {
   disableContentMargin: false,
   footerRender: () => <Footer />,
   menuHeaderRender: undefined,
-  renderMenuData: (menu: MenuDataItem[], serveMenu: MenuDataItem[]) => {
-    console.log(11111)
-    menu.push({
-      path: '/welcome',
-      name: 'welcome1',
-      icon: 'smile',
-    })
-    return menu;
-  },
-
   ...defaultSettings,
 };
 
