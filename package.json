@@ -60,7 +60,7 @@
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-layout": "6.0.0-8",
     "@ant-design/pro-table": "^2.3.0",
-    "@umijs/plugin-access-layout": "^1.1.0",
+    "@umijs/plugin-access-layout": "^1.2.0",
     "antd": "^4.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
