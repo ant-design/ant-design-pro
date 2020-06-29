@@ -57,19 +57,15 @@ const checkPermissions = <T, K>(
   }
   // Function 处理
   if (typeof authority === 'function') {
-    try {
-      const bool = authority(currentAuthority);
-      // 函数执行后返回值是 Promise
-      if (bool instanceof Promise) {
-        return <PromiseRender<T, K> ok={target} error={Exception} promise={bool} />;
-      }
-      if (bool) {
-        return target;
-      }
-      return Exception;
-    } catch (error) {
-      throw error;
+    const bool = authority(currentAuthority);
+    // 函数执行后返回值是 Promise
+    if (bool instanceof Promise) {
+      return <PromiseRender<T, K> ok={target} error={Exception} promise={bool} />;
     }
+    if (bool) {
+      return target;
+    }
+    return Exception;
   }
   throw new Error('unsupported parameters');
 };
