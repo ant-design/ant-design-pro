@@ -1,4 +1,5 @@
 import { Tooltip, Tag } from 'antd';
+import { Settings as ProSettings } from '@ant-design/pro-layout';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import { connect, ConnectProps } from 'umi';
@@ -8,10 +9,8 @@ import HeaderSearch from '../HeaderSearch';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 
-export type SiderTheme = 'light' | 'dark';
-export interface GlobalHeaderRightProps extends Partial<ConnectProps> {
-  theme?: SiderTheme | 'realDark';
-  layout: 'sidemenu' | 'topmenu';
+export interface GlobalHeaderRightProps extends Partial<ConnectProps>, Partial<ProSettings> {
+  theme?: ProSettings['navTheme'] | 'realDark';
 }
 
 const ENVTagColor = {
@@ -24,7 +23,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
   const { theme, layout } = props;
   let className = styles.right;
 
-  if (theme === 'dark' && layout === 'topmenu') {
+  if (theme === 'dark' && layout === 'top') {
     className = `${styles.right}  ${styles.dark}`;
   }
 
