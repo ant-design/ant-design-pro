@@ -84,7 +84,6 @@ const errorHandler = (error: { response: Response }) => {
       message: '网络异常',
     });
   }
-  throw error;
 };
 
 export const request: RequestConfig = {
