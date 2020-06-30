@@ -9,7 +9,7 @@ import HeaderSearch from '../HeaderSearch';
 import SelectLang from '../SelectLang';
 import styles from './index.less';
 
-export interface GlobalHeaderRightProps extends Partial<ConnectProps>, ProSettings {
+export interface GlobalHeaderRightProps extends Partial<ConnectProps>, Partial<ProSettings> {
   theme?: ProSettings['navTheme'] | 'realDark';
 }
 
