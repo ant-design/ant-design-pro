@@ -11,7 +11,6 @@ export default {
   colorWeak: false,
   menu: {
     locale: true,
-    defaultOpenAll: true,
   },
   title: 'Ant Design Pro',
   pwa: false,
