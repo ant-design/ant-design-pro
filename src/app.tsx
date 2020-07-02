@@ -1,8 +1,8 @@
 import React from 'react';
-import { BasicLayoutProps, Settings as LayoutSettings } from '@ant-design/pro-layout';
+import { Settings as LayoutSettings } from '@ant-design/pro-layout';
 
 import { notification } from 'antd';
-import { history, RequestConfig } from 'umi';
+import { history, RequestConfig, LayoutConfigProps } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { queryCurrent } from './services/user';
@@ -11,18 +11,27 @@ import defaultSettings from '../config/defaultSettings';
 
 export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
+  menu?: any[];
   settings?: LayoutSettings;
 }> {
   // 如果是登录页面，不执行
   if (history.location.pathname !== '/user/login') {
     try {
       const currentUser = await queryCurrent();
+
       if (!currentUser) {
         throw new Error('未登录！');
       }
       return {
         currentUser,
         settings: defaultSettings,
+        // 设置要追加的权限，也可以全部替换，配置 renderMenuData
+        menu: [{
+          path: '/welcome',
+          name: 'welcome',
+          icon: 'smile',
+          access: 'canAdmin',
+        },]
       };
     } catch (error) {
       history.push('/user/login');
@@ -33,7 +42,7 @@ export async function getInitialState(): Promise<{
   };
 }
 
-export const accessLayout: BasicLayoutProps = {
+export const accessLayout: LayoutConfigProps = {
   // @ts-ignore
   title: 'Ant Design Pro',
   siderWidth: 208,
@@ -41,6 +50,19 @@ export const accessLayout: BasicLayoutProps = {
   disableContentMargin: false,
   footerRender: () => <Footer />,
   menuHeaderRender: undefined,
+  // 配置服务端菜单的使用方式，默认是全部替换
+  renderMenuData: (localMenu, serverMenu) => {
+    return localMenu.map(item => {
+      let trueItem = item;
+      for (let key = 0; key < serverMenu.length; key++) {
+        if (item.path === serverMenu[key].path) {
+          trueItem = serverMenu[key];
+          break;
+        }
+      }
+      return trueItem;
+    })
+  },
   ...defaultSettings,
 };
 
