@@ -17,6 +17,9 @@ export async function getInitialState(): Promise<{
   if (history.location.pathname !== '/user/login') {
     try {
       const currentUser = await queryCurrent();
+      if (!currentUser) {
+        throw new Error('未登录！');
+      }
       return {
         currentUser,
         settings: defaultSettings,
@@ -81,7 +84,6 @@ const errorHandler = (error: { response: Response }) => {
       message: '网络异常',
     });
   }
-  throw error;
 };
 
 export const request: RequestConfig = {
