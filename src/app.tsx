@@ -17,6 +17,9 @@ export async function getInitialState(): Promise<{
   if (history.location.pathname !== '/user/login') {
     try {
       const currentUser = await queryCurrent();
+      if (!currentUser) {
+        throw new Error('未登录！');
+      }
       return {
         currentUser,
         settings: defaultSettings,
