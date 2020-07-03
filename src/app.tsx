@@ -1,12 +1,11 @@
 import React from 'react';
 import { BasicLayoutProps, Settings as LayoutSettings } from '@ant-design/pro-layout';
-
 import { notification } from 'antd';
 import { history, RequestConfig } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
+import { ResponseError } from 'umi-request';
 import { queryCurrent } from './services/user';
-
 import defaultSettings from '../config/defaultSettings';
 
 export async function getInitialState(): Promise<{
@@ -17,9 +16,6 @@ export async function getInitialState(): Promise<{
   if (history.location.pathname !== '/user/login') {
     try {
       const currentUser = await queryCurrent();
-      if (!currentUser) {
-        throw new Error('未登录！');
-      }
       return {
         currentUser,
         settings: defaultSettings,
@@ -69,7 +65,7 @@ const codeMessage = {
 /**
  * 异常处理程序
  */
-const errorHandler = (error: { response: Response }) => {
+const errorHandler = (error: ResponseError) => {
   const { response } = error;
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
@@ -87,6 +83,7 @@ const errorHandler = (error: { response: Response }) => {
       message: '网络异常',
     });
   }
+  throw error;
 };
 
 export const request: RequestConfig = {
