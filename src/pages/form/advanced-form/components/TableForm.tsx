@@ -43,8 +43,8 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
   };
   const newMember = () => {
     const newData = data?.map((item) => ({ ...item })) || [];
-    // eslint-disable-next-line no-unused-expressions
-    newData?.push({
+
+    newData.push({
       key: `NEW_TEMP_ID_${index}`,
       workId: '',
       name: '',
@@ -52,6 +52,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
       editable: true,
       isNew: true,
     });
+
     setIndex(index + 1);
     setData(newData);
   };

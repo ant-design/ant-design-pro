@@ -68,7 +68,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     if (currentStep < 2) {
       forward();
     } else {
-      handleUpdate(formVals);
+      handleUpdate({ ...formVals, ...fieldsValue });
     }
   };
 

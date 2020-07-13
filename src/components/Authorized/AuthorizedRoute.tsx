@@ -4,7 +4,7 @@ import React from 'react';
 import Authorized from './Authorized';
 import { IAuthorityType } from './CheckPermissions';
 
-interface AuthorizedRoutePops {
+interface AuthorizedRouteProps {
   currentAuthority: string;
   component: React.ComponentClass<any, any>;
   render: (props: any) => React.ReactNode;
@@ -12,7 +12,7 @@ interface AuthorizedRoutePops {
   authority: IAuthorityType;
 }
 
-const AuthorizedRoute: React.SFC<AuthorizedRoutePops> = ({
+const AuthorizedRoute: React.SFC<AuthorizedRouteProps> = ({
   component: Component,
   render,
   authority,

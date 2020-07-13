@@ -1,8 +1,9 @@
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Divider, Dropdown, Menu, message } from 'antd';
+import { Button, Divider, Dropdown, Menu, message, Input } from 'antd';
 import React, { useState, useRef } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
+
 import CreateForm from './components/CreateForm';
 import UpdateForm, { FormValueType } from './components/UpdateForm';
 import { TableListItem } from './data.d';
@@ -12,12 +13,10 @@ import { queryRule, updateRule, addRule, removeRule } from './service';
  * 添加节点
  * @param fields
  */
-const handleAdd = async (fields: FormValueType) => {
+const handleAdd = async (fields: TableListItem) => {
   const hide = message.loading('正在添加');
   try {
-    await addRule({
-      desc: fields.desc,
-    });
+    await addRule({ ...fields });
     hide();
     message.success('添加成功');
     return true;
@@ -81,20 +80,29 @@ const TableList: React.FC<{}> = () => {
     {
       title: '规则名称',
       dataIndex: 'name',
+      rules: [
+        {
+          required: true,
+          message: '规则名称为必填项',
+        },
+      ],
     },
     {
       title: '描述',
       dataIndex: 'desc',
+      valueType: 'textarea',
     },
     {
       title: '服务调用次数',
       dataIndex: 'callNo',
       sorter: true,
+      hideInForm: true,
       renderText: (val: string) => `${val} 万`,
     },
     {
       title: '状态',
       dataIndex: 'status',
+      hideInForm: true,
       valueEnum: {
         0: { text: '关闭', status: 'Default' },
         1: { text: '运行中', status: 'Processing' },
@@ -107,6 +115,17 @@ const TableList: React.FC<{}> = () => {
       dataIndex: 'updatedAt',
       sorter: true,
       valueType: 'dateTime',
+      hideInForm: true,
+      renderFormItem: (item, { defaultRender, ...rest }, form) => {
+        const status = form.getFieldValue('status');
+        if (`${status}` === '0') {
+          return false;
+        }
+        if (`${status}` === '3') {
+          return <Input {...rest} placeholder="请输入异常原因！" />;
+        }
+        return defaultRender(item);
+      },
     },
     {
       title: '操作',
@@ -136,8 +155,8 @@ const TableList: React.FC<{}> = () => {
         actionRef={actionRef}
         rowKey="key"
         toolBarRender={(action, { selectedRows }) => [
-          <Button icon={<PlusOutlined />} type="primary" onClick={() => handleModalVisible(true)}>
-            新建
+          <Button type="primary" onClick={() => handleModalVisible(true)}>
+            <PlusOutlined /> 新建
           </Button>,
           selectedRows && selectedRows.length > 0 && (
             <Dropdown
@@ -170,29 +189,33 @@ const TableList: React.FC<{}> = () => {
             </span>
           </div>
         )}
-        request={(params) => queryRule(params)}
+        request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
         rowSelection={{}}
       />
-      <CreateForm
-        onSubmit={async (value) => {
-          const success = await handleAdd(value);
-          if (success) {
-            handleModalVisible(false);
-            if (actionRef.current) {
-              actionRef.current.reload();
+      <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
+        <ProTable<TableListItem, TableListItem>
+          onSubmit={async (value) => {
+            const success = await handleAdd(value);
+            if (success) {
+              handleModalVisible(false);
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
             }
-          }
-        }}
-        onCancel={() => handleModalVisible(false)}
-        modalVisible={createModalVisible}
-      />
+          }}
+          rowKey="key"
+          type="form"
+          columns={columns}
+          rowSelection={{}}
+        />
+      </CreateForm>
       {stepFormValues && Object.keys(stepFormValues).length ? (
         <UpdateForm
           onSubmit={async (value) => {
             const success = await handleUpdate(value);
             if (success) {
-              handleModalVisible(false);
+              handleUpdateModalVisible(false);
               setStepFormValues({});
               if (actionRef.current) {
                 actionRef.current.reload();

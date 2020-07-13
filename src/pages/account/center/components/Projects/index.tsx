@@ -14,7 +14,15 @@ const Projects: React.FC<Partial<ModalState>> = (props) => {
     <List<ListItemDataType>
       className={styles.coverCardList}
       rowKey="id"
-      grid={{ gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
+      grid={{
+        gutter: 16,
+        xs: 1,
+        sm: 2,
+        md: 3,
+        lg: 3,
+        xl: 4,
+        xxl: 4,
+      }}
       dataSource={list}
       renderItem={(item) => (
         <List.Item>

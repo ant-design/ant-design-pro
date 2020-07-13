@@ -13,7 +13,7 @@ import styles from './style.less';
 const { Item } = Menu;
 
 interface SettingsProps {
-  dispatch: Dispatch<any>;
+  dispatch: Dispatch;
   currentUser: CurrentUser;
 }
 

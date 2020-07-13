@@ -116,7 +116,6 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
     setError(errorInfo.errorFields);
   };
 

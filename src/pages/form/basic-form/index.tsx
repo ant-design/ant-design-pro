@@ -47,6 +47,7 @@ const BasicForm: FC<BasicFormProps> = (props) => {
   };
 
   const onFinishFailed = (errorInfo: any) => {
+    // eslint-disable-next-line no-console
     console.log('Failed:', errorInfo);
   };
 

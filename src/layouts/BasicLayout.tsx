@@ -11,7 +11,7 @@ import ProLayout, {
   SettingDrawer,
 } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
-import { Link, useIntl, connect, Dispatch } from 'umi';
+import { Link, useIntl, connect, Dispatch, history } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
@@ -53,13 +53,16 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
 
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
   menuList.map((item) => {
-    const localItem = { ...item, children: item.children ? menuDataRender(item.children) : [] };
+    const localItem = {
+      ...item,
+      children: item.children ? menuDataRender(item.children) : undefined,
+    };
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright="2019 蚂蚁金服体验技术部出品"
+    copyright={`${new Date().getFullYear()} 蚂蚁金服体验技术部出品`}
     links={[
       {
         key: 'Ant Design Pro',
@@ -125,15 +128,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       <ProLayout
         logo={logo}
         formatMessage={formatMessage}
-        menuHeaderRender={(logoDom, titleDom) => (
-          <Link to="/">
-            {logoDom}
-            {titleDom}
-          </Link>
-        )}
         onCollapse={handleMenuCollapse}
+        onMenuHeaderClick={() => history.push('/')}
         menuItemRender={(menuItemProps, defaultDom) => {
-          if (menuItemProps.isUrl || menuItemProps.children || !menuItemProps.path) {
+          if (menuItemProps.isUrl || !menuItemProps.path) {
             return defaultDom;
           }
 

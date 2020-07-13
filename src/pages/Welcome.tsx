@@ -1,6 +1,6 @@
 import React from 'react';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Card, Typography, Alert } from 'antd';
+import { PageContainer } from '@ant-design/pro-layout';
+import { Card, Alert, Typography } from 'antd';
 import styles from './Welcome.less';
 
 const CodePreview: React.FC<{}> = ({ children }) => (
@@ -12,10 +12,10 @@ const CodePreview: React.FC<{}> = ({ children }) => (
 );
 
 export default (): React.ReactNode => (
-  <PageHeaderWrapper>
+  <PageContainer>
     <Card>
       <Alert
-        message="umi ui 现已发布，点击右下角 umi 图标即可使用"
+        message="更快更强的重型组件，已经发布。"
         type="success"
         showIcon
         banner
@@ -25,38 +25,24 @@ export default (): React.ReactNode => (
         }}
       />
       <Typography.Text strong>
-        <a target="_blank" rel="noopener noreferrer" href="https://pro.ant.design/docs/block">
-          基于 block 开发，快速构建标准页面
+        高级表格{' '}
+        <a href="https://protable.ant.design/" rel="noopener noreferrer" target="__blank">
+          欢迎使用
         </a>
       </Typography.Text>
-      <CodePreview> npm run ui</CodePreview>
+      <CodePreview>yarn add @ant-design/pro-table</CodePreview>
       <Typography.Text
         strong
         style={{
           marginBottom: 12,
         }}
       >
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://pro.ant.design/docs/available-script#npm-run-fetchblocks"
-        >
-          获取全部区块
+        高级布局{' '}
+        <a href="https://prolayout.ant.design/" rel="noopener noreferrer" target="__blank">
+          欢迎使用
         </a>
       </Typography.Text>
-      <CodePreview> npm run fetch:blocks</CodePreview>
+      <CodePreview>yarn add @ant-design/pro-layout</CodePreview>
     </Card>
-    <p
-      style={{
-        textAlign: 'center',
-        marginTop: 24,
-      }}
-    >
-      Want to add more pages? Please refer to{' '}
-      <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
-        use block
-      </a>
-      。
-    </p>
-  </PageHeaderWrapper>
+  </PageContainer>
 );

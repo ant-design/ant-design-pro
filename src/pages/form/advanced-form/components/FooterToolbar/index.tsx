@@ -24,7 +24,7 @@ export default class FooterToolbar extends Component<FooterToolbarProps> {
     if (!sider) {
       return undefined;
     }
-    return isMobile ? undefined : `calc(100% - ${collapsed ? 80 : siderWidth || 256}px)`;
+    return isMobile ? undefined : `calc(100% - ${collapsed ? 48 : siderWidth || 256}px)`;
   };
 
   render() {
