@@ -67,6 +67,8 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
     return null;
   }
 
+  static Option: TagSelectOption = TagSelectOption;
+
   constructor(props: TagSelectProps) {
     super(props);
     this.state = {
@@ -126,8 +128,6 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
     node &&
     node.type &&
     (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
-
-  static Option: TagSelectOption = TagSelectOption;
 
   render() {
     const { value, expand } = this.state;

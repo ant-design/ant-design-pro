@@ -4,9 +4,9 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './index.less';
 
-type totalType = () => React.ReactNode;
+type TotalType = () => React.ReactNode;
 
-const renderTotal = (total?: number | totalType | React.ReactNode) => {
+const renderTotal = (total?: number | TotalType | React.ReactNode) => {
   if (!total && total !== 0) {
     return null;
   }
