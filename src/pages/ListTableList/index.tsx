@@ -181,7 +181,10 @@ const TableList: React.FC<{}> = () => {
             onClick={async () => {
               await handleRemove(selectedRowsState);
               setSelectedRows([]);
-              actionRef.current?.reloadAndRest();
+              const reloadAndRest = actionRef.current?.reloadAndRest;
+              if (reloadAndRest) {
+                reloadAndRest();
+              }
             }}
           >
             批量删除

@@ -6,13 +6,12 @@ import { TableFormDateType } from '../../data';
 import styles from '../style.less';
 
 interface TableFormProps {
-  value?: TableFormDateType[];
   onChange?: (value: TableFormDateType[]) => void;
   data?: TableFormDateType[];
   setData?: (value: TableFormDateType[]) => void;
 }
 
-const TableForm: FC<TableFormProps> = ({ value, onChange, data, setData }) => {
+const TableForm: FC<TableFormProps> = ({ onChange, data, setData }) => {
   const [clickedCancel, setClickedCancel] = useState(false);
   const [loading, setLoading] = useState(false);
   const [index, setIndex] = useState(0);
@@ -32,7 +31,9 @@ const TableForm: FC<TableFormProps> = ({ value, onChange, data, setData }) => {
         setCacheOriginData(cacheOriginData);
       }
       target.editable = !target.editable;
-      setData?.(newData);
+      if (setData) {
+        setData(newData);
+      }
     }
   };
   const newMember = () => {
@@ -48,12 +49,16 @@ const TableForm: FC<TableFormProps> = ({ value, onChange, data, setData }) => {
     });
 
     setIndex(index + 1);
-    setData?.(newData);
+    if (setData) {
+      setData(newData);
+    }
   };
 
   const remove = (key: string) => {
     const newData = data?.filter((item) => item.key !== key) as TableFormDateType[];
-    setData?.(newData);
+    if (setData) {
+      setData(newData);
+    }
     if (onChange) {
       onChange(newData);
     }
@@ -68,7 +73,9 @@ const TableForm: FC<TableFormProps> = ({ value, onChange, data, setData }) => {
     const target = getRowByKey(key, newData);
     if (target) {
       target[fieldName] = e.target.value;
-      setData?.(newData);
+      if (setData) {
+        setData(newData);
+      }
     }
   };
 
@@ -123,7 +130,9 @@ const TableForm: FC<TableFormProps> = ({ value, onChange, data, setData }) => {
       }
       return item;
     });
-    setData?.(cacheData);
+    if (setData) {
+      setData(cacheData);
+    }
     setClickedCancel(false);
   };
 

@@ -124,12 +124,14 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
 
   const onFinish = (values: { [key: string]: any }) => {
     setError([]);
-    for (const item of data ?? []) {
-      if (item.editable) {
+
+    for (let i = 0; i < data.length; i += 1) {
+      if (data[i].editable) {
         message.error('请在提交前保存数据。');
         return;
       }
     }
+
     dispatch({
       type: 'formAndadvancedForm/submitAdvancedForm',
       payload: values,
