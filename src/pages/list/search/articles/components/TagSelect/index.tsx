@@ -60,14 +60,14 @@ class TagSelect extends Component<TagSelectProps, TagSelectState> {
     },
   };
 
+  static Option: TagSelectOption = TagSelectOption;
+
   static getDerivedStateFromProps(nextProps: TagSelectProps) {
     if ('value' in nextProps) {
       return { value: nextProps.value || [] };
     }
     return null;
   }
-
-  static Option: TagSelectOption = TagSelectOption;
 
   constructor(props: TagSelectProps) {
     super(props);
