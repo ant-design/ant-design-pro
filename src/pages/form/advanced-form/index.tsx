@@ -1,5 +1,17 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
-import { Button, Card, Col, DatePicker, Form, Input, Popover, Row, Select, TimePicker } from 'antd';
+import {
+  Button,
+  Card,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  Popover,
+  Row,
+  Select,
+  TimePicker,
+  message,
+} from 'antd';
 
 import React, { FC, useState } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
@@ -7,6 +19,7 @@ import { connect, Dispatch } from 'umi';
 import TableForm from './components/TableForm';
 import FooterToolbar from './components/FooterToolbar';
 import styles from './style.less';
+import { TableFormDateType } from '../data';
 
 type InternalNamePath = (string | number)[];
 
@@ -62,6 +75,8 @@ interface ErrorField {
 const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
   const [form] = Form.useForm();
   const [error, setError] = useState<ErrorField[]>([]);
+  const [data, setData] = useState<TableFormDateType[]>(tableData);
+
   const getErrorInfo = (errors: ErrorField[]) => {
     const errorCount = errors.filter((item) => item.errors.length > 0).length;
     if (!errors || errorCount === 0) {
@@ -109,6 +124,12 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
 
   const onFinish = (values: { [key: string]: any }) => {
     setError([]);
+    for (const item of data ?? []) {
+      if (item.editable) {
+        message.error('请在提交前保存数据。');
+        return;
+      }
+    }
     dispatch({
       type: 'formAndadvancedForm/submitAdvancedForm',
       payload: values,
@@ -283,7 +304,7 @@ const AdvancedForm: FC<AdvancedFormProps> = ({ submitting, dispatch }) => {
         </Card>
         <Card title="成员管理" bordered={false}>
           <Form.Item name="members">
-            <TableForm />
+            <TableForm data={data} setData={setData} />
           </Form.Item>
         </Card>
       </PageHeaderWrapper>

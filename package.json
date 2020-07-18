@@ -59,10 +59,10 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
-    "@ant-design/pro-layout": "^6.0.0",
-    "@ant-design/pro-table": "^2.4.0",
+    "@ant-design/pro-layout": "^6.2.4",
+    "@ant-design/pro-table": "^2.4.2",
     "@antv/data-set": "^0.11.0",
-    "@antv/l7-react": "^2.1.9",
+    "@antv/l7-react": "^2.2.22",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.isequal": "^4.5.5",
     "antd": "^4.4.0",

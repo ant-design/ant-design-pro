@@ -1,35 +1,29 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Divider, Input, Popconfirm, Table, message } from 'antd';
 import React, { FC, useState } from 'react';
+import { TableFormDateType } from '../../data';
 
 import styles from '../style.less';
 
-interface TableFormDateType {
-  key: string;
-  workId?: string;
-  name?: string;
-  department?: string;
-  isNew?: boolean;
-  editable?: boolean;
-}
 interface TableFormProps {
   value?: TableFormDateType[];
   onChange?: (value: TableFormDateType[]) => void;
+  data?: TableFormDateType[];
+  setData?: (value: TableFormDateType[]) => void;
 }
 
-const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
+const TableForm: FC<TableFormProps> = ({ value, onChange, data, setData }) => {
   const [clickedCancel, setClickedCancel] = useState(false);
   const [loading, setLoading] = useState(false);
   const [index, setIndex] = useState(0);
   const [cacheOriginData, setCacheOriginData] = useState({});
-  const [data, setData] = useState(value);
 
   const getRowByKey = (key: string, newData?: TableFormDateType[]) =>
     (newData || data)?.filter((item) => item.key === key)[0];
 
   const toggleEditable = (e: React.MouseEvent | React.KeyboardEvent, key: string) => {
     e.preventDefault();
-    const newData = data?.map((item) => ({ ...item }));
+    const newData = data?.map((item) => ({ ...item })) || [];
     const target = getRowByKey(key, newData);
     if (target) {
       // 进入编辑状态时保存原始数据
@@ -38,7 +32,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
         setCacheOriginData(cacheOriginData);
       }
       target.editable = !target.editable;
-      setData(newData);
+      setData?.(newData);
     }
   };
   const newMember = () => {
@@ -54,12 +48,12 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
     });
 
     setIndex(index + 1);
-    setData(newData);
+    setData?.(newData);
   };
 
   const remove = (key: string) => {
     const newData = data?.filter((item) => item.key !== key) as TableFormDateType[];
-    setData(newData);
+    setData?.(newData);
     if (onChange) {
       onChange(newData);
     }
@@ -74,7 +68,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
     const target = getRowByKey(key, newData);
     if (target) {
       target[fieldName] = e.target.value;
-      setData(newData);
+      setData?.(newData);
     }
   };
 
@@ -129,7 +123,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
       }
       return item;
     });
-    setData(cacheData);
+    setData?.(cacheData);
     setClickedCancel(false);
   };
 
