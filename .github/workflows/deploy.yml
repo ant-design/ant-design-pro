@@ -1,8 +1,6 @@
 name: Deploy CI
 
 on: push
-  branches:
-      - master
 
 jobs:
   build-and-deploy:
