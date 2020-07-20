@@ -21,6 +21,7 @@ jobs:
           GA_KEY: UA-72788897-6
           ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: site
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTION_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./dist
         with:
