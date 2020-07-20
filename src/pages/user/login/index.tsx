@@ -1,7 +1,7 @@
 import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from '@ant-design/icons';
 import { Alert, Checkbox, message } from 'antd';
 import React, { useState } from 'react';
-import { Link, SelectLang, history, useModel } from 'umi';
+import { Link, SelectLang, useModel } from 'umi';
 import { getPageQuery } from '@/utils/utils';
 import logo from '@/assets/logo.svg';
 import { LoginParamsType, fakeAccountLogin } from '@/services/login';
@@ -43,7 +43,7 @@ const replaceGoto = () => {
       return;
     }
   }
-  history.replace(redirect || '/');
+  window.location.href = urlParams.href.split(urlParams.pathname)[0] + (redirect || '/');
 };
 
 const Login: React.FC<{}> = () => {
