@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
@@ -20,7 +20,7 @@
     "i18n-remove": "pro i18n-remove --locale=zh-CN --write",
     "lint": "umi g tmp && npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint:prettier": "prettier --check \"**/*\" --end-of-line auto",
-    "lint-staged": "lint-staged",
+    "precommit": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
@@ -39,11 +39,6 @@
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
     "tsc": "tsc"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
@@ -91,6 +86,7 @@
     "@umijs/preset-ant-design-pro": "^1.2.0",
     "@umijs/preset-react": "^1.4.8",
     "@umijs/preset-ui": "^2.0.9",
+    "@umijs/yorkie": "^2.0.3",
     "carlo": "^0.9.46",
     "chalk": "^4.0.0",
     "cross-env": "^7.0.0",
@@ -100,7 +96,6 @@
     "eslint": "^7.1.0",
     "express": "^4.17.1",
     "gh-pages": "^3.0.0",
-    "husky": "^4.0.7",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.0",
     "mockjs": "^1.0.1-beta3",
