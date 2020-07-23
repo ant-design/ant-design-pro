@@ -36,7 +36,7 @@ const replaceGoto = () => {
     if (redirectUrlParams.origin === urlParams.origin) {
       redirect = redirect.substr(urlParams.origin.length);
       if (redirect.match(/^\/.*#/)) {
-        redirect = redirect.substr(redirect.indexOf('#') + 1);
+        redirect = redirect.substr(redirect.indexOf('#'));
       }
     } else {
       window.location.href = '/';
