@@ -39,11 +39,6 @@
     "test:component": "umi test ./src/components",
     "tsc": "tsc"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
-  },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
@@ -58,18 +53,19 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
-    "@ant-design/pro-layout": "^6.0.0",
+    "@ant-design/pro-layout": "^6.2.5",
     "@ant-design/pro-table": "^2.4.0",
     "antd": "^4.4.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
     "omit.js": "^2.0.2",
+    "path-to-regexp": "2.4.0",
     "qs": "^6.9.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet-async": "^1.0.4",
-    "umi": "^3.1.2",
+    "umi": "^3.2.0",
     "umi-request": "^1.0.8",
     "use-merge-value": "^1.0.1"
   },
@@ -88,8 +84,9 @@
     "@umijs/plugin-blocks": "^2.0.5",
     "@umijs/plugin-esbuild": "^1.0.0-beta.2",
     "@umijs/preset-ant-design-pro": "^1.2.0",
-    "@umijs/preset-react": "^1.4.24",
-    "@umijs/preset-ui": "^2.1.11",
+    "@umijs/preset-react": "^1.4.8",
+    "@umijs/preset-ui": "^2.0.9",
+    "@umijs/yorkie": "^2.0.3",
     "carlo": "^0.9.46",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
@@ -99,11 +96,12 @@
     "express": "^4.17.1",
     "gh-pages": "^3.0.0",
     "husky": "^4.0.7",
+    "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.0",
     "mockjs": "^1.0.1-beta3",
     "prettier": "^2.0.1",
     "pro-download": "1.0.1",
-    "puppeteer-core": "^4.0.1",
+    "puppeteer-core": "^5.0.0",
     "stylelint": "^13.0.0"
   },
   "engines": {

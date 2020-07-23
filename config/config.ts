@@ -42,7 +42,6 @@ export default defineConfig({
         },
       ],
     },
-
     {
       path: '/welcome',
       name: 'welcome',
