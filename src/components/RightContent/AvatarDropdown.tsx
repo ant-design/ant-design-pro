@@ -32,20 +32,23 @@ const loginOut = async () => {
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   const { initialState, setInitialState } = useModel('@@initialState');
 
-  const onMenuClick = useCallback((event: {
-    key: React.Key;
-    keyPath: React.Key[];
-    item: React.ReactInstance;
-    domEvent: React.MouseEvent<HTMLElement>;
-  }) => {
-    const { key } = event;
-    if (key === 'logout') {
-      setInitialState({ ...initialState, currentUser: undefined });
-      loginOut();
-      return;
-    }
-    history.push(`/account/${key}`);
-  }, []);
+  const onMenuClick = useCallback(
+    (event: {
+      key: React.Key;
+      keyPath: React.Key[];
+      item: React.ReactInstance;
+      domEvent: React.MouseEvent<HTMLElement>;
+    }) => {
+      const { key } = event;
+      if (key === 'logout') {
+        setInitialState({ ...initialState, currentUser: undefined });
+        loginOut();
+        return;
+      }
+      history.push(`/account/${key}`);
+    },
+    [],
+  );
 
   const loading = (
     <span className={`${styles.action} ${styles.account}`}>
