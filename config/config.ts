@@ -11,9 +11,6 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
-  history: {
-    type: 'hash',
-  },
   layout: {
     name: 'Ant Design Pro',
     locale: true,
