@@ -32,12 +32,18 @@ export async function getInitialState(): Promise<{
 export const layout = ({
   initialState,
 }: {
-  initialState: { settings?: LayoutSettings };
+  initialState: { settings?: LayoutSettings; currentUser?: API.CurrentUser };
 }): BasicLayoutProps => {
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     footerRender: () => <Footer />,
+    onPageChange: () => {
+      // 如果没有登录，重定向到 login
+      if (!initialState?.currentUser?.userid) {
+        history.push('/user/login');
+      }
+    },
     menuHeaderRender: undefined,
     ...initialState?.settings,
   };
