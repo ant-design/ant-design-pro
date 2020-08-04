@@ -80,7 +80,7 @@
     "@types/qs": "^6.5.3",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.8.4",
-    "@types/react-helmet": "^5.0.13",
+    "@types/react-helmet": "^6.1.0",
     "@umijs/fabric": "^2.2.0",
     "@umijs/plugin-blocks": "^2.0.5",
     "@umijs/preset-ant-design-pro": "^1.2.0",
