@@ -1,9 +1,9 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Divider, message, Input } from 'antd';
+import { Button, Divider, message, Input, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
-
+import ProDescriptions from '@ant-design/pro-descriptions';
 import CreateForm from './components/CreateForm';
 import UpdateForm, { FormValueType } from './components/UpdateForm';
 import { TableListItem } from './data.d';
@@ -76,6 +76,7 @@ const TableList: React.FC<{}> = () => {
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [stepFormValues, setStepFormValues] = useState({});
   const actionRef = useRef<ActionType>();
+  const [row, setRow] = useState<TableListItem>();
   const [selectedRowsState, setSelectedRows] = useState<TableListItem[]>([]);
   const columns: ProColumns<TableListItem>[] = [
     {
@@ -88,6 +89,9 @@ const TableList: React.FC<{}> = () => {
           message: '规则名称为必填项',
         },
       ],
+      render: (dom, entity) => {
+        return <a onClick={() => setRow(entity)}>{dom}</a>;
+      },
     },
     {
       title: '描述',
@@ -182,7 +186,7 @@ const TableList: React.FC<{}> = () => {
             onClick={async () => {
               await handleRemove(selectedRowsState);
               setSelectedRows([]);
-              actionRef.current?.reloadAndRest();
+              actionRef.current?.reloadAndRest?.();
             }}
           >
             批量删除
@@ -204,7 +208,6 @@ const TableList: React.FC<{}> = () => {
           rowKey="key"
           type="form"
           columns={columns}
-          rowSelection={{}}
         />
       </CreateForm>
       {stepFormValues && Object.keys(stepFormValues).length ? (
@@ -227,6 +230,29 @@ const TableList: React.FC<{}> = () => {
           values={stepFormValues}
         />
       ) : null}
+
+      <Drawer
+        width={600}
+        visible={!!row}
+        onClose={() => {
+          setRow(undefined);
+        }}
+        closable={false}
+      >
+        {row?.name && (
+          <ProDescriptions<TableListItem>
+            column={2}
+            title={row?.name}
+            request={async () => ({
+              data: row || {},
+            })}
+            params={{
+              id: row?.name,
+            }}
+            columns={columns}
+          />
+        )}
+      </Drawer>
     </PageContainer>
   );
 };
