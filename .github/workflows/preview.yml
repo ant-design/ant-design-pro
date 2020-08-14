@@ -1,0 +1,17 @@
+name: 🔂 Surge PR Preview
+
+on: [push]
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: afc163/surge-preview@v1
+        with:
+          surge_token: ${{ secrets.SURGE_TOKEN }}
+          github_token: ${{ secrets.gatsby --help }}
+          build: |
+            yarn install
+            npm run build
+          dist: dist
