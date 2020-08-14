@@ -1,13 +1,13 @@
 {
   "name": "ant-design-pro",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
-    "postinstall": "umi g tmp",
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
     "deploy": "npm run site && npm run gh-pages",
+    "dev": "npm run start:dev",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
     "docker-prod:dev": "docker-compose -f ./docker/docker-compose.yml up",
@@ -18,17 +18,17 @@
     "fetch:blocks": "pro fetch-blocks && npm run prettier",
     "gh-pages": "gh-pages -d dist",
     "i18n-remove": "pro i18n-remove --locale=zh-CN --write",
+    "postinstall": "umi g tmp",
     "lint": "umi g tmp && npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint:prettier": "prettier --check \"**/*\" --end-of-line auto",
-    "precommit": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:prettier": "prettier --check \"**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "precommit": "lint-staged",
     "prettier": "prettier -c --write \"**/*\"",
     "site": "npm run fetch:blocks && npm run build",
     "start": "umi dev",
-    "dev": "npm run start:dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
@@ -38,7 +38,7 @@
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
-    "tsc": "tsc"
+    "tsc": "tsc --noEmit"
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
@@ -54,6 +54,7 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
+    "@ant-design/pro-descriptions": "^1.0.4",
     "@ant-design/pro-layout": "^6.4.1",
     "@ant-design/pro-table": "^2.5.3",
     "antd": "^4.5.3",
@@ -102,7 +103,8 @@
     "prettier": "^2.0.1",
     "pro-download": "1.0.1",
     "puppeteer-core": "^5.0.0",
-    "stylelint": "^13.0.0"
+    "stylelint": "^13.0.0",
+    "typescript": "^3.9.7"
   },
   "engines": {
     "node": ">=10.0.0"
