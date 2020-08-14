@@ -1,10 +1,11 @@
-English | [简体中文](./README.zh-CN.md) | [Русский](./README.ru-RU.md) | [Türkçe](./README.tr-TR.md) | [日本語](./README.ja-JP.md) | [Français](./README.fr-FR.md) | [Português](./README.pt-BR.md) | [العربية](./README.ar-DZ.md)
+[English](./README.zh-CN.md) | [简体中文](./README.zh-CN.md) | [Русский](./README.ru-RU.md) | [Türkçe](./README.tr-TR.md) | [日本語](./README.ja-JP.md) | [Français](./README.fr-FR.md) | [Português](./README.pt-BR.md) | العربية
 
 <h1 align="center">Ant Design Pro</h1>
+<div dir="rtl">
 
 <div align="center">
 
-An out-of-box UI solution for enterprise applications as a React boilerplate.
+حل UI جاهز لتطبيقات المؤسسات كنموذج معياري لـ React.  
 
 [![Build Status](https://dev.azure.com/ant-design/ant-design-pro/_apis/build/status/ant-design.ant-design-pro?branchName=master)](https://dev.azure.com/ant-design/ant-design-pro/_build/latest?definitionId=1?branchName=master) ![Github Action](https://github.com/ant-design/ant-design-pro/workflows/Node%20CI/badge.svg) ![Deploy](https://github.com/ant-design/ant-design-pro/workflows/Deploy%20CI/badge.svg) [![Dependencies](https://img.shields.io/david/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro) [![DevDependencies](https://img.shields.io/david/dev/ant-design/ant-design-pro.svg)](https://david-dm.org/ant-design/ant-design-pro?type=dev)
 
@@ -14,73 +15,76 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 
 </div>
 
-- Preview: http://preview.pro.ant.design
-- Home Page: http://pro.ant.design
-- Documentation: http://pro.ant.design/docs/getting-started
-- ChangeLog: http://pro.ant.design/docs/changelog
-- FAQ: http://pro.ant.design/docs/faq
-- Mirror Site in China: http://ant-design-pro.gitee.io
+- معاينة: http://preview.pro.ant.design
+- الصفحة الرئيسية: http://pro.ant.design
+- توثيق: http://pro.ant.design/docs/getting-started
+- سجل التغيير: http://pro.ant.design/docs/changelog
+- الأسئلة الشائعة: http://pro.ant.design/docs/faq
+- مرآة الموقع بالصينية: http://ant-design-pro.gitee.io
 
-## 4.0 Released Now! 🎉🎉🎉
+## 4.0 صدر الآن! 🎉🎉🎉
 
-[Announcing Ant Design Pro 4.0.0](https://medium.com/ant-design/ant-design-pro-v4-is-here-6f23098ae9d9)
+[الإعلان عن Ant Design Pro 4.0.0](https://medium.com/ant-design/ant-design-pro-v4-is-here-6f23098ae9d9)
 
-## Translation Recruitment :loudspeaker:
+## توظيف الترجمة :loudspeaker:
 
-We need your help: https://github.com/ant-design/ant-design-pro/issues/120
+نحن نحتاج مساعدتك: https://github.com/ant-design/ant-design-pro/issues/120
 
-## Features
+## الميزات
 
-- :bulb: **TypeScript**: A language for application-scale JavaScript
-- :scroll: **Blocks**: Build page with block template
-- :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
-- :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd
-- :iphone: **Responsive**: Designed for variable screen sizes
-- :art: **Theming**: Customizable theme with simple config
-- :globe_with_meridians: **International**: Built-in i18n solution
-- :gear: **Best Practices**: Solid workflow to make your code healthy
-- :1234: **Mock development**: Easy to use mock development solution
-- :white_check_mark: **UI Test**: Fly safely with unit and e2e tests
+- :bulb: **تايب سكريبت**: جافا سكريبت لتطوير التطبيقات
+- :scroll: **الكتل**: بناء الصفحة مع قالب كتلة
+- :gem: **تصميم أنيق**: يتبع [مواصفات تصميم النمل](http://ant.design/)
+- :triangular_ruler: **القوالب المشتركة**: قوالب نموذجية لتطبيقات المؤسسة
+- :rocket: **حالة التطور الفني**: أحدث حزمة تطوير لـ React/umi/dva/antd
+- :iphone: **متجاوب**: مصممة لأحجام الشاشات المتغيرة
+- :art: **تصميم**: تصميم قابل للتخصيص مع تكوين بسيط
+- :globe_with_meridians: **عالمي**: تم بناؤه بواسطة i18n solution
+- :gear: **أفضل الممارسات**: سير عمل قوي لجعل الكود سليم
+- :1234: **تطوير وهمي**: سهولة استخدام حل التطوير الوهمي
+- :white_check_mark: **اختبار واجهة المستخدم**: يمكنك الطيران بأمان مع اختبارات الوحدة و e2e
 
-## Templates
+## القوالب
 
 ```
-- Dashboard
-  - Analytic
-  - Monitor
-  - Workspace
-- Form
-  - Basic Form
-  - Step Form
-  - Advanced From
-- List
-  - Standard Table
-  - Standard List
-  - Card List
-  - Search List (Project/Applications/Article)
-- Profile
-  - Simple Profile
-  - Advanced Profile
-- Account
-  - Account Center
-  - Account Settings
-- Result
-  - Success
-  - Failed
-- Exception
+- لوحة القيادة
+  - تحليلي
+  - مراقب
+  - مساحة العمل
+- نموذج
+  - النموذج الأساسي
+  - نموذج الخطوة
+  - نموذج متقدم
+- القائمة
+  - الجدول القياسي
+  - القائمة القياسية
+  - قائمة البطاقات
+  - قائمة البحث (Project/Applications/Article)
+- الملف الشخصي
+  - ملف شخصي بسيط
+  - ملف شخصي متقدم
+- الحساب
+  - مركز الحساب
+  - اعدادات الحساب
+- النتيجة
+  - نجاح
+  - فشل
+- استثناء
   - 403
   - 404
   - 500
-- User
-  - Login
-  - Register
-  - Register Result
+- المستخدم
+  - تسجيل الدخول
+  - تسجيل
+  - تسجيل النتائج
 ```
 
-## Usage
+## الإستخدام
 
-### Use bash
+### استخدام ال bash
+</div>
+
+<div dir="ltr">
 
 ```bash
 $ mkdir <your-project-name>
@@ -100,26 +104,32 @@ $ npm install
 $ npm start         # visit http://localhost:8000
 ```
 
-### Use Gitpod
+</div>
 
-Open the project in Gitpod (free online dev environment for GitHub) and start coding immediately.
+<div dir="rtl">
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/ant-design-pro)
+### استخدام ال Gitpod
 
-More instructions at [documentation](http://pro.ant.design/docs/getting-started).
+افتح المشروع في Gitpod (بيئة تطوير مجانية عبر الإنترنت لـ GitHub) وابدأ بكتابة الكود على الفور.
 
-## Browsers support
+[![افتح في Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/ant-design-pro)
 
-Modern browsers and IE11.
+المزيد من التعليمات في [توثيق](http://pro.ant.design/docs/getting-started).
+
+## دعم المتصفحات
+
+المتصفحات الحديثة و IE11.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --- | --- | --- | --- | --- |
 | IE11, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
-## Contributing
+## المساهمة
 
-Any type of contribution is welcome, here are some examples of how you may contribute to this project:
+نرحب بأي نوع من المساهمات ، وإليك بعض الأمثلة عن كيفية المساهمة في هذا المشروع:
 
-- Use Ant Design Pro in your daily work.
-- Submit [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
-- Propose [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code.
+- استخدم Ant Design Pro في عملك اليومي.
+- إرسال [القضايا](http://github.com/ant-design/ant-design-pro/issues) للإبلاغ عن مشكل أو لطرح أسئلة
+- اقترح [طلبات السحب](http://github.com/ant-design/ant-design-pro/pulls) لتحسين الكود الخاص بنا.
+
+</div>
