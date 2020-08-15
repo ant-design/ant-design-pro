@@ -14,4 +14,4 @@ jobs:
           build: |
             npm install
             npm run build
-          dist: public
+          dist: dist
