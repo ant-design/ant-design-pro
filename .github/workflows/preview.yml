@@ -1,6 +1,6 @@
 name: 🔂 Surge PR Preview
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   preview:
