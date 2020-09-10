@@ -9,14 +9,14 @@ import ProLayout, {
   Settings,
   DefaultFooter,
 } from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Link, useIntl, connect, Dispatch, history } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
-import { getAuthorityFromRouter } from '@/utils/utils';
+import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
 
 const noMatch = (
@@ -94,9 +94,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       pathname: '/',
     },
   } = props;
-  /**
-   * constructor
-   */
+
+  const menuDataRef = useRef<MenuDataItem[]>([]);
 
   useEffect(() => {
     if (dispatch) {
@@ -116,11 +115,16 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         payload,
       });
     }
-  }; // get children authority
-
-  const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
-    authority: undefined,
   };
+  // get children authority
+  const authorized = useMemo(
+    () =>
+      getMatchMenu(location.pathname || '/', menuDataRef.current).pop() || {
+        authority: undefined,
+      },
+    [location.pathname],
+  );
+
   const { formatMessage } = useIntl();
 
   return (
@@ -153,6 +157,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       footerRender={() => defaultFooterDom}
       menuDataRender={menuDataRender}
       rightContentRender={() => <RightContent />}
+      postMenuData={(menuData) => {
+        menuDataRef.current = menuData || [];
+        return menuData || [];
+      }}
       {...props}
       {...settings}
     >
