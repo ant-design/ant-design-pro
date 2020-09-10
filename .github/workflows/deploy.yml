@@ -1,11 +1,13 @@
 name: Deploy CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -25,4 +27,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
           BRANCH: gh-pages
           FOLDER: 'dist/'
-          BUILD_SCRIPT: yarn && npm uninstall husky && yarn add umi-plugin-setting-drawer umi-plugin-antd-theme umi-plugin-pro  && yarn run pro fetch-blocks && npm run site && git checkout . && git clean -df
+          BUILD_SCRIPT: yarn && npm uninstall husky && yarn add umi-plugin-setting-drawer umi-plugin-antd-theme umi-plugin-pro && yarn run pro fetch-blocks && npm run site && git checkout . && git clean -df

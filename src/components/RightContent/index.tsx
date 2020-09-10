@@ -49,7 +49,7 @@ const GlobalHeaderRight: React.FC<{}> = () => {
           },
         ]}
         // onSearch={value => {
-        //   //console.log('input', value);
+        //   console.log('input', value);
         // }}
       />
       <Tooltip title="使用文档">

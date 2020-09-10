@@ -23,9 +23,10 @@
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
-    "lint:prettier": "prettier --check \"**/*\" --end-of-line auto",
+    "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "prettier": "prettier -c --write \"**/*\"",
+    "precommit": "lint-staged",
+    "prettier": "prettier -c --write \"src/**/*\"",
     "site": "npm run fetch:blocks && npm run build",
     "start": "umi dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
@@ -37,7 +38,7 @@
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
-    "tsc": "tsc"
+    "tsc": "tsc --noEmit"
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
@@ -53,9 +54,10 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
-    "@ant-design/pro-layout": "^6.2.5",
-    "@ant-design/pro-table": "^2.4.0",
-    "antd": "^4.4.0",
+    "@ant-design/pro-descriptions": "^1.0.16",
+    "@ant-design/pro-layout": "^6.4.16",
+    "@ant-design/pro-table": "^2.7.2",
+    "antd": "^4.6.3",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
@@ -65,7 +67,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet-async": "^1.0.4",
-    "umi": "^3.2.0",
+    "umi": "^3.2.14",
     "umi-request": "^1.0.8",
     "use-merge-value": "^1.0.1"
   },
@@ -79,7 +81,7 @@
     "@types/qs": "^6.5.3",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.8.4",
-    "@types/react-helmet": "^5.0.13",
+    "@types/react-helmet": "^6.1.0",
     "@umijs/fabric": "^2.2.0",
     "@umijs/plugin-blocks": "^2.0.5",
     "@umijs/plugin-esbuild": "^1.0.0-beta.2",
@@ -95,14 +97,14 @@
     "eslint": "^7.1.0",
     "express": "^4.17.1",
     "gh-pages": "^3.0.0",
-    "husky": "^4.0.7",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.0",
     "mockjs": "^1.0.1-beta3",
     "prettier": "^2.0.1",
     "pro-download": "1.0.1",
     "puppeteer-core": "^5.0.0",
-    "stylelint": "^13.0.0"
+    "stylelint": "^13.0.0",
+    "typescript": "^3.9.7"
   },
   "engines": {
     "node": ">=10.0.0"

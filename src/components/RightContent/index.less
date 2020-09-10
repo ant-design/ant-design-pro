@@ -24,6 +24,9 @@
     padding: 0 12px;
     cursor: pointer;
     transition: all 0.3s;
+    > span {
+      vertical-align: middle;
+    }
     &:hover {
       background: @pro-header-hover-bg;
     }
@@ -54,28 +57,6 @@
     }
     &:global(.opened) {
       background: #252a3d;
-    }
-  }
-}
-
-@media only screen and (max-width: @screen-md) {
-  :global(.ant-divider-vertical) {
-    vertical-align: unset;
-  }
-  .name {
-    display: none;
-  }
-  .right {
-    position: absolute;
-    top: 0;
-    right: 12px;
-    .account {
-      .avatar {
-        margin-right: 0;
-      }
-    }
-    .search {
-      display: none;
     }
   }
 }
