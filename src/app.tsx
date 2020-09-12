@@ -9,22 +9,30 @@ import { queryCurrent } from './services/user';
 import defaultSettings from '../config/defaultSettings';
 
 export async function getInitialState(): Promise<{
-  currentUser?: API.CurrentUser;
   settings?: LayoutSettings;
+  currentUser?: API.CurrentUser;
+  fetchUserInfo: () => Promise<API.CurrentUser | undefined>;
 }> {
-  // 如果是登录页面，不执行
-  if (history.location.pathname !== '/user/login') {
+  const fetchUserInfo = async () => {
     try {
       const currentUser = await queryCurrent();
-      return {
-        currentUser,
-        settings: defaultSettings,
-      };
+      return currentUser;
     } catch (error) {
       history.push('/user/login');
     }
+    return undefined;
+  };
+  // 如果是登录页面，不执行
+  if (history.location.pathname !== '/user/login') {
+    const currentUser = await fetchUserInfo();
+    return {
+      fetchUserInfo,
+      currentUser,
+      settings: defaultSettings,
+    };
   }
   return {
+    fetchUserInfo,
     settings: defaultSettings,
   };
 }
@@ -39,8 +47,10 @@ export const layout = ({
     disableContentMargin: false,
     footerRender: () => <Footer />,
     onPageChange: () => {
+      const { currentUser } = initialState;
+      const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser?.userid && history.location.pathname !== '/user/login') {
+      if (!currentUser?.userid && location.pathname !== '/user/login') {
         history.push('/user/login');
       }
     },
