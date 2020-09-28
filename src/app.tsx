@@ -50,7 +50,7 @@ export const layout = ({
       const { currentUser } = initialState;
       const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!currentUser?.userid && location.pathname !== '/user/login') {
+      if (!currentUser && location.pathname !== '/user/login') {
         history.push('/user/login');
       }
     },
