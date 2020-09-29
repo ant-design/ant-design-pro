@@ -14,6 +14,7 @@ export default defineConfig({
   layout: {
     name: 'Ant Design Pro',
     locale: true,
+    ...defaultSettings,
   },
   locale: {
     // default zh-CN
