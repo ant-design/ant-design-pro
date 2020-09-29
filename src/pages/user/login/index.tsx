@@ -36,7 +36,8 @@ const Login: React.FC<LoginProps> = (props) => {
   const [type, setType] = useState<string>('account');
 
   const handleSubmit = (values: LoginParamsType) => {
-    const { dispatch } = props;
+    const { dispatch, submitting } = props;
+    if(submitting) return;
     dispatch({
       type: 'login/login',
       payload: { ...values, type },
