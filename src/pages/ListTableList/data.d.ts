@@ -32,5 +32,5 @@ export interface TableListParams {
   pageSize?: number;
   currentPage?: number;
   filter?: { [key: string]: any[] };
-  sort?: { [key: string]: any };
+  sorter?: { [key: string]: any };
 }

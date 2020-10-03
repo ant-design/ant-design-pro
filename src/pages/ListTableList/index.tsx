@@ -170,7 +170,7 @@ const TableList: React.FC<{}> = () => {
             <PlusOutlined /> 新建
           </Button>,
         ]}
-        request={(params, sort, filter) => queryRule({ ...params, sort, filter })}
+        request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => setSelectedRows(selectedRows),
