@@ -55,7 +55,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-descriptions": "^1.0.19",
-    "@ant-design/pro-form": "^1.0.1",
+    "@ant-design/pro-form": "^1.0.2",
     "@ant-design/pro-layout": "^6.4.19",
     "@ant-design/pro-table": "^2.8.1",
     "@umijs/route-utils": "^1.0.33",
