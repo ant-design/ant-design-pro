@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "5.0.0-alpha.0",
+  "version": "5.0.0-beta.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
@@ -54,10 +54,12 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
-    "@ant-design/pro-descriptions": "^1.0.16",
-    "@ant-design/pro-layout": "^6.4.16",
-    "@ant-design/pro-table": "^2.7.2",
-    "antd": "^4.6.3",
+    "@ant-design/pro-descriptions": "^1.0.19",
+    "@ant-design/pro-form": "^1.0.1",
+    "@ant-design/pro-layout": "^6.4.19",
+    "@ant-design/pro-table": "^2.8.1",
+    "@umijs/route-utils": "^1.0.33",
+    "antd": "^4.7.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
@@ -103,7 +105,7 @@
     "pro-download": "1.0.1",
     "puppeteer-core": "^5.0.0",
     "stylelint": "^13.0.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.3"
   },
   "engines": {
     "node": ">=10.0.0"
