@@ -108,7 +108,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => (
     <StepsForm.StepForm
       initialValues={{
         type: '1',
-        time: '',
         frequency: 'month',
       }}
       title="设定调度周期"
