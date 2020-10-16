@@ -1,4 +1,4 @@
-import { Subscription, Reducer, Effect } from 'umi';
+import { Reducer, Effect } from 'umi';
 
 import { NoticeIconData } from '@/components/NoticeIcon';
 import { queryNotices } from '@/services/user';
@@ -28,7 +28,6 @@ export interface GlobalModelType {
     saveNotices: Reducer<GlobalModelState>;
     saveClearedNotices: Reducer<GlobalModelState>;
   };
-  subscriptions: { setup: Subscription };
 }
 
 const GlobalModel: GlobalModelType = {
@@ -120,17 +119,6 @@ const GlobalModel: GlobalModelType = {
         collapsed: false,
         notices: state.notices.filter((item): boolean => item.type !== payload),
       };
-    },
-  },
-
-  subscriptions: {
-    setup({ history }): void {
-      // Subscribe history(url) change, trigger `load` action if pathname is `/`
-      history.listen(({ pathname, search }): void => {
-        if (typeof window.ga !== 'undefined') {
-          window.ga('send', 'pageview', pathname + search);
-        }
-      });
     },
   },
 };
