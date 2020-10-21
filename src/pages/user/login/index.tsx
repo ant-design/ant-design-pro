@@ -1,7 +1,7 @@
 import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from '@ant-design/icons';
 import { Alert, Checkbox, message } from 'antd';
 import React, { useState } from 'react';
-import { Link, SelectLang, useModel, history, History } from 'umi';
+import { Link, SelectLang, history } from 'umi';
 import logo from '@/assets/logo.svg';
 import { LoginParamsType, fakeAccountLogin } from '@/services/login';
 import Footer from '@/components/Footer';
@@ -26,22 +26,15 @@ const LoginMessage: React.FC<{
 /**
  * 此方法会跳转到 redirect 参数所在的位置
  */
-const replaceGoto = () => {
-  setTimeout(() => {
-    const { query } = history.location;
-    const { redirect } = query as { redirect: string };
-    if (!redirect) {
-      history.replace('/');
-      return;
-    }
-    (history as History).replace(redirect);
-  }, 10);
+const goto = () => {
+  const { query } = history.location;
+  const { redirect } = query as { redirect: string };
+  window.location.href = redirect || '/';
 };
 
 const Login: React.FC<{}> = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginStateType>({});
   const [submitting, setSubmitting] = useState(false);
-  const { initialState, setInitialState } = useModel('@@initialState');
   const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState<string>('account');
   const handleSubmit = async (values: LoginParamsType) => {
@@ -49,14 +42,9 @@ const Login: React.FC<{}> = () => {
     try {
       // 登录
       const msg = await fakeAccountLogin({ ...values, type });
-      if (msg.status === 'ok' && initialState) {
+      if (msg.status === 'ok') {
         message.success('登录成功！');
-        const currentUser = await initialState?.fetchUserInfo();
-        setInitialState({
-          ...initialState,
-          currentUser,
-        });
-        replaceGoto();
+        goto();
         return;
       }
       // 如果失败去设置用户错误信息
