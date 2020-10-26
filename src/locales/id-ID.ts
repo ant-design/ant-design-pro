@@ -11,8 +11,9 @@ export default {
   'layout.user.link.privacy': 'Privasi',
   'layout.user.link.terms': 'Ketentuan',
   'app.preview.down.block': 'Unduh halaman ini dalam projek lokal anda',
-  'app.welcome.link.fetch-blocks': 'Dapatkan semua blok', //'app.welcome.link.fetch-blocks': 'Get all block',
-  'app.welcome.link.block-list': 'Buat standar dengan cepat, halaman-halaman berdasarkan pengembangan `block`',
+  'app.welcome.link.fetch-blocks': 'Dapatkan semua blok',
+  'app.welcome.link.block-list':
+    'Buat standar dengan cepat, halaman-halaman berdasarkan pengembangan `block`',
   ...globalHeader,
   ...menu,
   ...settingDrawer,
