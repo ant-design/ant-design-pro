@@ -4,6 +4,7 @@ import { history, Reducer, Effect } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
+import { message } from 'antd';
 
 export interface StateType {
   status?: 'ok' | 'error';
@@ -41,6 +42,7 @@ const Model: LoginModelType = {
       if (response.status === 'ok') {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
+        message.success('🎉 🎉 🎉  登录成功！');
         let { redirect } = params as { redirect: string };
         if (redirect) {
           const redirectUrlParams = new URL(redirect);

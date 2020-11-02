@@ -1,15 +1,23 @@
-import { AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined } from '@ant-design/icons';
-import { Alert, Checkbox } from 'antd';
+import {
+  AlipayCircleOutlined,
+  LockTwoTone,
+  MailTwoTone,
+  MobileTwoTone,
+  TaobaoCircleOutlined,
+  UserOutlined,
+  WeiboCircleOutlined,
+} from '@ant-design/icons';
+import { Alert, Space, message, Tabs } from 'antd';
 import React, { useState } from 'react';
-import { Link, connect, Dispatch } from 'umi';
+import { connect, Dispatch } from 'umi';
+import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
+
 import { StateType } from '@/models/login';
-import { LoginParamsType } from '@/services/login';
+import { getFakeCaptcha, LoginParamsType } from '@/services/login';
 import { ConnectState } from '@/models/connect';
-import LoginForm from './components/Login';
 
-import styles from './style.less';
+import styles from './index.less';
 
-const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginForm;
 interface LoginProps {
   dispatch: Dispatch;
   userLogin: StateType;
@@ -32,7 +40,6 @@ const LoginMessage: React.FC<{
 const Login: React.FC<LoginProps> = (props) => {
   const { userLogin = {}, submitting } = props;
   const { status, type: loginType } = userLogin;
-  const [autoLogin, setAutoLogin] = useState(true);
   const [type, setType] = useState<string>('account');
 
   const handleSubmit = (values: LoginParamsType) => {
@@ -44,69 +51,122 @@ const Login: React.FC<LoginProps> = (props) => {
   };
   return (
     <div className={styles.main}>
-      <LoginForm activeKey={type} onTabChange={setType} onSubmit={handleSubmit}>
-        <Tab key="account" tab="账户密码登录">
-          {status === 'error' && loginType === 'account' && !submitting && (
-            <LoginMessage content="账户或密码错误（admin/ant.design）" />
-          )}
+      <ProForm
+        initialValues={{
+          autoLogin: true,
+        }}
+        submitter={{
+          render: (_, dom) => dom.pop(),
+          submitButtonProps: {
+            loading: submitting,
+            size: 'large',
+            style: {
+              width: '100%',
+            },
+          },
+        }}
+        onFinish={async (values) => {
+          handleSubmit(values);
+        }}
+      >
+        <Tabs activeKey={type} onChange={setType}>
+          <Tabs.TabPane key="account" tab="账户密码登录" />
+          <Tabs.TabPane key="mobile" tab="手机号登录" />
+        </Tabs>
 
-          <UserName
-            name="userName"
-            placeholder="用户名: admin or user"
-            rules={[
-              {
-                required: true,
-                message: '请输入用户名!',
-              },
-            ]}
-          />
-          <Password
-            name="password"
-            placeholder="密码: ant.design"
-            rules={[
-              {
-                required: true,
-                message: '请输入密码！',
-              },
-            ]}
-          />
-        </Tab>
-        <Tab key="mobile" tab="手机号登录">
-          {status === 'error' && loginType === 'mobile' && !submitting && (
-            <LoginMessage content="验证码错误" />
-          )}
-          <Mobile
-            name="mobile"
-            placeholder="手机号"
-            rules={[
-              {
-                required: true,
-                message: '请输入手机号！',
-              },
-              {
-                pattern: /^1\d{10}$/,
-                message: '手机号格式错误！',
-              },
-            ]}
-          />
-          <Captcha
-            name="captcha"
-            placeholder="验证码"
-            countDown={120}
-            getCaptchaButtonText=""
-            getCaptchaSecondText="秒"
-            rules={[
-              {
-                required: true,
-                message: '请输入验证码！',
-              },
-            ]}
-          />
-        </Tab>
-        <div>
-          <Checkbox checked={autoLogin} onChange={(e) => setAutoLogin(e.target.checked)}>
+        {status === 'error' && loginType === 'account' && !submitting && (
+          <LoginMessage content="账户或密码错误（admin/ant.design）" />
+        )}
+        {type === 'account' && (
+          <>
+            <ProFormText
+              name="userName"
+              fieldProps={{
+                size: 'large',
+                prefix: <UserOutlined className={styles.prefixIcon} />,
+              }}
+              placeholder="用户名: admin or user"
+              rules={[
+                {
+                  required: true,
+                  message: '请输入用户名!',
+                },
+              ]}
+            />
+            <ProFormText.Password
+              name="password"
+              fieldProps={{
+                size: 'large',
+                prefix: <LockTwoTone className={styles.prefixIcon} />,
+              }}
+              placeholder="密码: ant.design"
+              rules={[
+                {
+                  required: true,
+                  message: '请输入密码！',
+                },
+              ]}
+            />
+          </>
+        )}
+
+        {status === 'error' && loginType === 'mobile' && !submitting && (
+          <LoginMessage content="验证码错误" />
+        )}
+        {type === 'mobile' && (
+          <>
+            <ProFormText
+              fieldProps={{
+                size: 'large',
+                prefix: <MobileTwoTone className={styles.prefixIcon} />,
+              }}
+              name="mobile"
+              placeholder="请输入手机号"
+              rules={[
+                {
+                  required: true,
+                  message: '请输入手机号!',
+                },
+                {
+                  pattern: /^1\d{10}$/,
+                  message: '不合法的手机号格式!',
+                },
+              ]}
+            />
+            <ProFormCaptcha
+              fieldProps={{
+                size: 'large',
+                prefix: <MailTwoTone className={styles.prefixIcon} />,
+              }}
+              captchaProps={{
+                size: 'large',
+              }}
+              name="captcha"
+              rules={[
+                {
+                  required: true,
+                  message: '请输入验证码！',
+                },
+              ]}
+              placeholder="请输入验证码"
+              onGetCaptcha={async (mobile) => {
+                const result = await getFakeCaptcha(mobile);
+                if (result === false) {
+                  return;
+                }
+                message.success('获取验证码成功！验证码为：1234');
+              }}
+            />
+          </>
+        )}
+        <div
+          style={{
+            marginBottom: 24,
+          }}
+        >
+          <ProFormCheckbox noStyle name="autoLogin">
             自动登录
-          </Checkbox>
+          </ProFormCheckbox>
           <a
             style={{
               float: 'right',
@@ -115,17 +175,13 @@ const Login: React.FC<LoginProps> = (props) => {
             忘记密码
           </a>
         </div>
-        <Submit loading={submitting}>登录</Submit>
-        <div className={styles.other}>
-          其他登录方式
-          <AlipayCircleOutlined className={styles.icon} />
-          <TaobaoCircleOutlined className={styles.icon} />
-          <WeiboCircleOutlined className={styles.icon} />
-          <Link className={styles.register} to="/user/register">
-            注册账户
-          </Link>
-        </div>
-      </LoginForm>
+      </ProForm>
+      <Space className={styles.other}>
+        其他登录方式
+        <AlipayCircleOutlined className={styles.icon} />
+        <TaobaoCircleOutlined className={styles.icon} />
+        <WeiboCircleOutlined className={styles.icon} />
+      </Space>
     </div>
   );
 };
