@@ -1,8 +1,18 @@
 import { Request, Response } from 'express';
 
-function getFakeCaptcha(req: Request, res: Response) {
+const waitTime = (time: number = 100) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, time);
+  });
+};
+
+async function getFakeCaptcha(req: Request, res: Response) {
+  await waitTime(2000);
   return res.json('captcha-xxx');
 }
+
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
   // 支持值为 Object 和 Array
@@ -77,8 +87,9 @@ export default {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
-  'POST /api/login/account': (req: Request, res: Response) => {
+  'POST /api/login/account': async (req: Request, res: Response) => {
     const { password, userName, type } = req.body;
+    await waitTime(2000);
     if (password === 'ant.design' && userName === 'admin') {
       res.send({
         status: 'ok',
