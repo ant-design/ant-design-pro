@@ -3,6 +3,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import omit from 'omit.js';
 import { FormItemProps } from 'antd/es/form/FormItem';
 import { getFakeCaptcha } from '@/services/login';
+import { FormattedMessage } from 'umi';
 
 import ItemMap from './map';
 import LoginContext, { LoginContextProps } from './LoginContext';
@@ -131,7 +132,14 @@ const LoginItem: React.FC<LoginItemProps> = (props) => {
                   onGetCaptcha(value);
                 }}
               >
-                {timing ? `${count} 秒` : '获取验证码'}
+                {timing ? (
+                  `${count} 秒`
+                ) : (
+                  <FormattedMessage
+                    id="pages.login.phoneLogin.getVerificationCode"
+                    defaultMessage="获取验证码"
+                  />
+                )}
               </Button>
             </Col>
           </Row>
