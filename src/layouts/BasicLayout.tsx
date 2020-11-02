@@ -131,6 +131,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
     <ProLayout
       logo={logo}
       formatMessage={formatMessage}
+      {...props}
+      {...settings}
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
       menuItemRender={(menuItemProps, defaultDom) => {
@@ -161,8 +163,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         menuDataRef.current = menuData || [];
         return menuData || [];
       }}
-      {...props}
-      {...settings}
     >
       <Authorized authority={authorized!.authority} noMatch={noMatch}>
         {children}
