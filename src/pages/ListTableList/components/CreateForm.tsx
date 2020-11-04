@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal } from 'antd';
+import { useIntl } from 'umi';
 
 interface CreateFormProps {
   modalVisible: boolean;
@@ -8,11 +9,15 @@ interface CreateFormProps {
 
 const CreateForm: React.FC<CreateFormProps> = (props) => {
   const { modalVisible, onCancel } = props;
+  const intl = useIntl();
 
   return (
     <Modal
       destroyOnClose
-      title="新建规则"
+      title={intl.formatMessage({
+        id: 'pages.searchTable.createForm.newRule',
+        defaultMessage: '新建规则',
+      })}
       visible={modalVisible}
       onCancel={() => onCancel()}
       footer={null}
