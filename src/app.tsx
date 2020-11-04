@@ -11,7 +11,7 @@ import defaultSettings from '../config/defaultSettings';
 export async function getInitialState(): Promise<{
   settings?: LayoutSettings;
   currentUser?: API.CurrentUser;
-  fetchUserInfo: () => Promise<API.CurrentUser | undefined>;
+  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
     try {
