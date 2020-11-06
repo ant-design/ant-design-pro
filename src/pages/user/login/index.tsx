@@ -7,7 +7,6 @@ import {
   UserOutlined,
   WeiboCircleOutlined,
 } from '@ant-design/icons';
-import logo from '@/assets/logo.svg';
 import { Alert, Space, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
@@ -66,14 +65,12 @@ const Login: React.FC<{}> = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.lang}>
-        <SelectLang />
-      </div>
+      <div className={styles.lang}>{SelectLang && <SelectLang />}</div>
       <div className={styles.content}>
         <div className={styles.top}>
           <div className={styles.header}>
             <Link to="/">
-              <img alt="logo" className={styles.logo} src={logo} />
+              <img alt="logo" className={styles.logo} src="/logo.svg" />
               <span className={styles.title}>Ant Design</span>
             </Link>
           </div>
