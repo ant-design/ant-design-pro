@@ -83,6 +83,12 @@ const Login: React.FC<{}> = () => {
               autoLogin: true,
             }}
             submitter={{
+              searchConfig: {
+                submitText: intl.formatMessage({
+                  id: 'pages.login.submit',
+                  defaultMessage: '登录',
+                }),
+              },
               render: (_, dom) => dom.pop(),
               submitButtonProps: {
                 loading: submitting,
