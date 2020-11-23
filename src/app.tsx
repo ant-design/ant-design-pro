@@ -48,7 +48,9 @@ export const layout = ({
   initialState,
 }: {
   initialState: { settings?: LayoutSettings; currentUser?: API.CurrentUser };
-}): BasicLayoutProps => {
+}): BasicLayoutProps & {
+  childrenRender?: (dom: JSX.Element) => React.ReactNode;
+} => {
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
