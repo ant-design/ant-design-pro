@@ -58,10 +58,12 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => (
       <ProFormText
         name="name"
         label="规则名称"
+        width="m"
         rules={[{ required: true, message: '请输入规则名称！' }]}
       />
       <ProFormTextArea
         name="desc"
+        width="m"
         label="规则描述"
         placeholder="请输入至少五个字符"
         rules={[{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }]}

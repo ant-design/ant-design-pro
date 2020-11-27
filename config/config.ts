@@ -44,5 +44,8 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
+  history: {
+    type: 'hash',
+  },
   exportStatic: {},
 });
