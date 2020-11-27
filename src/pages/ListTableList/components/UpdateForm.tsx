@@ -78,6 +78,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => (
     >
       <ProFormSelect
         name="target"
+        width="m"
         label="监控对象"
         valueEnum={{
           0: '表一',
@@ -85,6 +86,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => (
         }}
       />
       <ProFormSelect
+        width="m"
         name="template"
         label="规则模板"
         valueEnum={{
