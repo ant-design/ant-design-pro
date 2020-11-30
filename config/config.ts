@@ -45,7 +45,7 @@ export default defineConfig({
     basePath: '/',
   },
   history: {
-    type: 'hash',
+    type: 'browser',
   },
   exportStatic: {},
 });
