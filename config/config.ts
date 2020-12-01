@@ -47,5 +47,4 @@ export default defineConfig({
   history: {
     type: 'browser',
   },
-  exportStatic: {},
 });
