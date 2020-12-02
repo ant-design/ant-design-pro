@@ -87,7 +87,7 @@
     "@umijs/plugin-blocks": "^2.0.5",
     "@umijs/plugin-esbuild": "^1.0.1",
     "@umijs/preset-ant-design-pro": "^1.2.0",
-    "@umijs/preset-react": "^1.4.8",
+    "@umijs/preset-react": "^1.7.4",
     "@umijs/yorkie": "^2.0.3",
     "carlo": "^0.9.46",
     "cross-env": "^7.0.0",
