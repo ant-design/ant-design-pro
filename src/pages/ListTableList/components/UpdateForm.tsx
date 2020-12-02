@@ -70,6 +70,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             id: 'pages.searchTable.updateForm.ruleName.nameLabel',
             defaultMessage: '规则名称',
           })}
+          width="m"
           rules={[
             {
               required: true,
@@ -84,6 +85,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         />
         <ProFormTextArea
           name="desc"
+          width="m"
           label={intl.formatMessage({
             id: 'pages.searchTable.updateForm.ruleDesc.descLabel',
             defaultMessage: '规则描述',
@@ -118,6 +120,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       >
         <ProFormSelect
           name="target"
+          width="m"
           label={intl.formatMessage({
             id: 'pages.searchTable.updateForm.object',
             defaultMessage: '监控对象',
@@ -129,6 +132,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         />
         <ProFormSelect
           name="template"
+          width="m"
           label={intl.formatMessage({
             id: 'pages.searchTable.updateForm.ruleProps.templateLabel',
             defaultMessage: '规则模板',
@@ -168,6 +172,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       >
         <ProFormDateTimePicker
           name="time"
+          width="m"
           label={intl.formatMessage({
             id: 'pages.searchTable.updateForm.schedulingPeriod.timeLabel',
             defaultMessage: '开始时间',
@@ -190,6 +195,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             id: 'pages.searchTable.updateForm.object',
             defaultMessage: '监控对象',
           })}
+          width="m"
           width="xs"
           valueEnum={{
             month: '月',
