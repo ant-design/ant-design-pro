@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
@@ -65,8 +65,8 @@
     "moment": "^2.25.3",
     "omit.js": "^2.0.2",
     "qs": "^6.9.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-helmet-async": "^1.0.4",
     "umi": "^3.2.14",
     "umi-request": "^1.0.8",
@@ -81,7 +81,7 @@
     "@types/lodash": "^4.14.144",
     "@types/qs": "^6.5.3",
     "@types/react": "^17.0.0",
-    "@types/react-dom": "^16.8.4",
+    "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
     "@umijs/fabric": "^2.3.0",
     "@umijs/plugin-blocks": "^2.0.5",
