@@ -196,7 +196,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             defaultMessage: '监控对象',
           })}
           width="m"
-          width="xs"
           valueEnum={{
             month: '月',
             week: '周',
