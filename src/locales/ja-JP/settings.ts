@@ -29,13 +29,11 @@ export default {
   'app.settings.security.phone': '',
   'app.settings.security.phone-description': '',
   'app.settings.security.question': '秘密の質問',
-  'app.settings.security.question-description':
-    '',
+  'app.settings.security.question-description': '',
   'app.settings.security.email': '',
   'app.settings.security.email-description': '',
   'app.settings.security.mfa': '',
-  'app.settings.security.mfa-description':
-    '',
+  'app.settings.security.mfa-description': '',
   'app.settings.security.modify': '',
   'app.settings.security.set': '',
   'app.settings.security.bind': '',
@@ -47,14 +45,11 @@ export default {
   'app.settings.binding.dingding-description': '',
   'app.settings.binding.bind': '',
   'app.settings.notification.password': 'アカウントパスワード',
-  'app.settings.notification.password-description':
-    '',
+  'app.settings.notification.password-description': '',
   'app.settings.notification.messages': '',
-  'app.settings.notification.messages-description':
-    '',
+  'app.settings.notification.messages-description': '',
   'app.settings.notification.todo': '',
-  'app.settings.notification.todo-description':
-    '',
+  'app.settings.notification.todo-description': '',
   'app.settings.open': '',
   'app.settings.close': '',
 };

@@ -26,6 +26,5 @@ export default {
   'app.setting.weakmode': '',
   'app.setting.copy': '',
   'app.setting.copyinfo': '',
-  'app.setting.production.hint':
-    '',
+  'app.setting.production.hint': '',
 };

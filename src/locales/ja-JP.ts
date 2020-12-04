@@ -1,9 +1,9 @@
-import globalHeader from "./ja-JP/globalHeader";
-import menu from "./ja-JP/menu";
-import settingDrawer from "./ja-JP/settingDrawer";
-import settings from "./ja-JP/settings";
-import pwa from "./ja-JP/pwa";
-import component from "./ja-JP/component";
+import globalHeader from './ja-JP/globalHeader';
+import menu from './ja-JP/menu';
+import settingDrawer from './ja-JP/settingDrawer';
+import settings from './ja-JP/settings';
+import pwa from './ja-JP/pwa';
+import component from './ja-JP/component';
 
 export default {
   'navBar.lang': '言語',
