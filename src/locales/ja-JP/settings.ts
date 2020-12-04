@@ -29,7 +29,8 @@ export default {
   'app.settings.security.phone': '',
   'app.settings.security.phone-description': '',
   'app.settings.security.question': '秘密の質問',
-  'app.settings.security.question-description': 'セキュリティの質問が設定されてません。セキュリティポリシーはアカウントのセキュリティを効果的に保護できます',
+  'app.settings.security.question-description':
+    'セキュリティの質問が設定されてません。セキュリティポリシーはアカウントのセキュリティを効果的に保護できます',
   'app.settings.security.email': 'バックアップメール',
   'app.settings.security.email-description': '',
   'app.settings.security.mfa': '',

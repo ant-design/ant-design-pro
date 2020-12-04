@@ -25,6 +25,7 @@ export default {
   'app.setting.othersettings': 'その他の設定',
   'app.setting.weakmode': 'ウィークモード',
   'app.setting.copy': 'コピー設定',
-  'app.setting.copyinfo': 'コピーが成功しました。src/models/setting.jsのdefaultSettingsを置き換えてください',
+  'app.setting.copyinfo':
+    'コピーが成功しました。src/models/setting.jsのdefaultSettingsを置き換えてください',
   'app.setting.production.hint': '設定パネルは開発環境でのみ表示されます。手動で変更してください',
 };
