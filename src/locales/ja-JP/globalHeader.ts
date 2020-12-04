@@ -1,0 +1,17 @@
+export default {
+  'component.globalHeader.search': '検索',
+  'component.globalHeader.search.example1': '検索例1',
+  'component.globalHeader.search.example2': '検索例2',
+  'component.globalHeader.search.example3': '検索例3',
+  'component.globalHeader.help': 'ヘルプ',
+  'component.globalHeader.notification': 'お知らせ',
+  'component.globalHeader.notification.empty': '',
+  'component.globalHeader.message': 'メッセージ',
+  'component.globalHeader.message.empty': '',
+  'component.globalHeader.event': 'イベント',
+  'component.globalHeader.event.empty': '',
+  'component.noticeIcon.clear': 'クリア',
+  'component.noticeIcon.cleared': '',
+  'component.noticeIcon.empty': '通知なし',
+  'component.noticeIcon.view-more': 'もっと見る',
+};
