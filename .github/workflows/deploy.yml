@@ -24,7 +24,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         env:
           github_token: ${{ secrets.ACTION_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./dist
-        with:
-          emptyCommits: false
+          publish_dir: ./dist
+          allow_empty_commit: true
