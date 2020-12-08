@@ -20,9 +20,9 @@ jobs:
       - name: site
         run: npm run site
 
-      - name: deploy
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        env:
+        with:
           github_token: ${{ secrets.ACTION_TOKEN }}
-          publish_dir: ./dist
-          allow_empty_commit: true
+          publish_dir: ./public
+          force_orphan: true
