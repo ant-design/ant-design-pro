@@ -50,7 +50,7 @@ jobs:
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '12.x'
+          versionSpec: '14.x'
       - script: npm install
         displayName: install
       - script: npm run lint
@@ -73,7 +73,7 @@ jobs:
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '12.x'
+          versionSpec: '14.x'
       - script: npm install
         displayName: install
       - script: npm run lint
