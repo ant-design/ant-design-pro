@@ -44,10 +44,6 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
-<<<<<<< HEAD
-=======
-  esbuild: {},
->>>>>>> 818926f4... ✨ feat: add react-dev-inspector plugins
   // https://github.com/zthxxx/react-dev-inspector
   plugins: ['react-dev-inspector/plugins/umi/react-inspector'],
   inspectorConfig: {
@@ -56,10 +52,7 @@ export default defineConfig({
     babelPlugins: [],
     babelOptions: {},
   },
-<<<<<<< HEAD
   resolve: {
     includes: ['src/components'],
   },
-=======
->>>>>>> 818926f4... ✨ feat: add react-dev-inspector plugins
 });
