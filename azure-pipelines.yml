@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout: self
         clean: false
-      - script: npm install
+      - script: npm install --force
         displayName: install
       - script: npm run lint
         displayName: lint
@@ -31,12 +31,13 @@ jobs:
     pool:
       vmImage: 'Ubuntu-16.04'
 
-    container:
-      image: circleci/node:latest-browsers
-      options: '-u root'
-
     steps:
-      - script: npm install
+      - checkout: self
+        clean: false
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '14.x'
+      - script: npm install --force
         displayName: install
       - script: npm run test:all
         env:
@@ -50,8 +51,8 @@ jobs:
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '12.x'
-      - script: npm install
+          versionSpec: '14.x'
+      - script: npm install --force
         displayName: install
       - script: npm run lint
         displayName: lint
@@ -73,8 +74,8 @@ jobs:
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '12.x'
-      - script: npm install
+          versionSpec: '14.x'
+      - script: npm install --force
         displayName: install
       - script: npm run lint
         displayName: lint

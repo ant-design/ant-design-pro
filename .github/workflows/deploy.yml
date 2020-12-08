@@ -16,12 +16,14 @@ jobs:
 
       - name: plugins
         run: yarn add umi-plugin-antd-theme umi-plugin-pro
+
       - name: site
         run: npm run site
+
       - name: deploy
-        uses: peaceiris/actions-gh-pages@v2
+        uses: peaceiris/actions-gh-pages@v3
         env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTION_TOKEN }}
+          github_token: ${{ secrets.ACTION_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./dist
         with:
