@@ -1,8 +1,9 @@
-import { Tooltip, Tag, Space } from 'antd';
+import { Tag, Space, Menu } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useModel, SelectLang } from 'umi';
 import Avatar from './AvatarDropdown';
+import HeaderDropdown from '../HeaderDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
 
@@ -52,16 +53,30 @@ const GlobalHeaderRight: React.FC<{}> = () => {
         //   console.log('input', value);
         // }}
       />
-      <Tooltip title="使用文档">
-        <span
-          className={styles.action}
-          onClick={() => {
-            window.location.href = 'https://pro.ant.design/docs/getting-started';
-          }}
-        >
+      <HeaderDropdown
+        overlay={
+          <Menu>
+            <Menu.Item
+              onClick={() => {
+                window.open('/~docs');
+              }}
+            >
+              组件文档
+            </Menu.Item>
+            <Menu.Item
+              onClick={() => {
+                window.open('https://pro.ant.design/docs/getting-started');
+              }}
+            >
+              Ant Design Pro 文档
+            </Menu.Item>
+          </Menu>
+        }
+      >
+        <span className={styles.action}>
           <QuestionCircleOutlined />
         </span>
-      </Tooltip>
+      </HeaderDropdown>
       <Avatar />
       {REACT_APP_ENV && (
         <span>
