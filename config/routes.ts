@@ -4,9 +4,15 @@
     layout: false,
     routes: [
       {
-        name: 'login',
-        path: '/user/login',
-        component: './user/login',
+        path: '/user',
+        component: '../layouts/UserLayout',
+        routes: [
+          {
+            name: 'login',
+            path: '/user/login',
+            component: './user/login',
+          },
+        ],
       },
     ],
   },
