@@ -6,7 +6,6 @@ import styles from './NoticeList.less';
 
 export interface NoticeIconTabProps {
   count?: number;
-  name?: string;
   showClear?: boolean;
   showViewMore?: boolean;
   style?: React.CSSProperties;

@@ -52,4 +52,7 @@ export default defineConfig({
     babelPlugins: [],
     babelOptions: {},
   },
+  resolve: {
+    includes: ['src/components'],
+  },
 });
