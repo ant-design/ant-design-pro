@@ -1,5 +1,4 @@
 name: Deploy CI
-
 on:
   push:
     branches:
@@ -9,22 +8,21 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@master
-      - run: npm install
-      - run: npm run lint
-      # - run: yarn run tsc
-      - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@master
+
+      - name: install
+        run: npm install
+
+      - name: plugins
+        run: yarn add umi-plugin-antd-theme umi-plugin-pro
+      - name: site
+        run: npm run site
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v2
         env:
-          CI: true
-          GA_KEY: UA-72788897-6
-          PROGRESS: none
-          GIT_CONFIG_NAME: qixian.cs
-          GIT_CONFIG_EMAIL: qixian.cs@outlook.com
-          NODE_OPTIONS: --max_old_space_size=4096
-          ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: site
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: 'dist/'
-          BUILD_SCRIPT: npm install && npm uninstall husky && yarn add umi-plugin-antd-theme umi-plugin-pro  && npm run site && git checkout . && git clean -df
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTION_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./dist
+        with:
+          emptyCommits: false
