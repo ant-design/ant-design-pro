@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "4.4.0",
+  "version": "4.5.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
@@ -66,6 +66,7 @@
     "omit.js": "^2.0.2",
     "qs": "^6.9.0",
     "react": "^17.0.0",
+    "react-dev-inspector": "^1.1.1",
     "react-dom": "^17.0.0",
     "react-helmet-async": "^1.0.4",
     "umi": "^3.2.14",
