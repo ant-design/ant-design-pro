@@ -1,11 +1,11 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Divider, message, Input, Drawer } from 'antd';
+import { Button, message, Input, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
+import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions, { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
-import CreateForm from './components/CreateForm';
 import UpdateForm, { FormValueType } from './components/UpdateForm';
 import { TableListItem } from './data.d';
 import { queryRule, updateRule, addRule, removeRule } from './service';
@@ -73,13 +73,26 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
 };
 
 const TableList: React.FC<{}> = () => {
+  /**
+   * 新建窗口的弹窗
+   */
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
+  /**
+   * 分布更新窗口的弹窗
+   */
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
-  const [stepFormValues, setStepFormValues] = useState({});
+
+  const [showDetail, setShowDetail] = useState<boolean>(false);
+
   const actionRef = useRef<ActionType>();
-  const [row, setRow] = useState<TableListItem>();
+  const [currentRow, setCurrentRow] = useState<TableListItem>();
   const [selectedRowsState, setSelectedRows] = useState<TableListItem[]>([]);
+
+  /**
+   * 国际化配置
+   */
   const intl = useIntl();
+
   const columns: ProColumns<TableListItem>[] = [
     {
       title: (
@@ -90,18 +103,17 @@ const TableList: React.FC<{}> = () => {
       ),
       dataIndex: 'name',
       tip: '规则名称是唯一的 key',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: (
-              <FormattedMessage id="pages.searchTable.ruleName" defaultMessage="规则名称为必填项" />
-            ),
-          },
-        ],
-      },
       render: (dom, entity) => {
-        return <a onClick={() => setRow(entity)}>{dom}</a>;
+        return (
+          <a
+            onClick={() => {
+              setCurrentRow(entity);
+              setShowDetail(true);
+            }}
+          >
+            {dom}
+          </a>
+        );
       },
     },
     {
@@ -155,10 +167,9 @@ const TableList: React.FC<{}> = () => {
       title: (
         <FormattedMessage id="pages.searchTable.titleUpdatedAt" defaultMessage="上次调度时间" />
       ),
-      dataIndex: 'updatedAt',
       sorter: true,
+      dataIndex: 'updatedAt',
       valueType: 'dateTime',
-      hideInForm: true,
       renderFormItem: (item, { defaultRender, ...rest }, form) => {
         const status = form.getFieldValue('status');
         if (`${status}` === '0') {
@@ -182,22 +193,19 @@ const TableList: React.FC<{}> = () => {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
       dataIndex: 'option',
       valueType: 'option',
-      render: (_, record) => (
-        <>
-          <a
-            onClick={() => {
-              handleUpdateModalVisible(true);
-              setStepFormValues(record);
-            }}
-          >
-            <FormattedMessage id="pages.searchTable.config" defaultMessage="配置" />
-          </a>
-          <Divider type="vertical" />
-          <a href="">
-            <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
-          </a>
-        </>
-      ),
+      render: (_, record) => [
+        <a
+          onClick={() => {
+            handleUpdateModalVisible(true);
+            setCurrentRow(record);
+          }}
+        >
+          <FormattedMessage id="pages.searchTable.config" defaultMessage="配置" />
+        </a>,
+        <a href="https://procomponents.ant.design/">
+          <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
+        </a>,
+      ],
     },
   ];
 
@@ -257,60 +265,78 @@ const TableList: React.FC<{}> = () => {
           </Button>
         </FooterToolbar>
       )}
-      <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
-        <ProTable<TableListItem, TableListItem>
-          onSubmit={async (value) => {
-            const success = await handleAdd(value);
-            if (success) {
-              handleModalVisible(false);
-              if (actionRef.current) {
-                actionRef.current.reload();
-              }
+      <ModalForm
+        title={intl.formatMessage({
+          id: 'pages.searchTable.createForm.newRule',
+          defaultMessage: '新建规则',
+        })}
+        width="400px"
+        visible={createModalVisible}
+        onVisibleChange={handleModalVisible}
+        onFinish={async (value) => {
+          const success = await handleAdd(value as TableListItem);
+          if (success) {
+            handleModalVisible(false);
+            if (actionRef.current) {
+              actionRef.current.reload();
             }
-          }}
-          rowKey="key"
-          type="form"
-          columns={columns}
+          }
+        }}
+      >
+        <ProFormText
+          rules={[
+            {
+              required: true,
+              message: (
+                <FormattedMessage
+                  id="pages.searchTable.ruleName"
+                  defaultMessage="规则名称为必填项"
+                />
+              ),
+            },
+          ]}
+          width="m"
+          name="name"
         />
-      </CreateForm>
-      {stepFormValues && Object.keys(stepFormValues).length ? (
-        <UpdateForm
-          onSubmit={async (value) => {
-            const success = await handleUpdate(value);
-            if (success) {
-              handleUpdateModalVisible(false);
-              setStepFormValues({});
-              if (actionRef.current) {
-                actionRef.current.reload();
-              }
-            }
-          }}
-          onCancel={() => {
+        <ProFormTextArea width="m" name="desc" />
+      </ModalForm>
+      <UpdateForm
+        onSubmit={async (value) => {
+          const success = await handleUpdate(value);
+          if (success) {
             handleUpdateModalVisible(false);
-            setStepFormValues({});
-          }}
-          updateModalVisible={updateModalVisible}
-          values={stepFormValues}
-        />
-      ) : null}
+            setCurrentRow(undefined);
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
+          }
+        }}
+        onCancel={() => {
+          handleUpdateModalVisible(false);
+          setCurrentRow(undefined);
+        }}
+        updateModalVisible={updateModalVisible}
+        values={currentRow || {}}
+      />
 
       <Drawer
         width={600}
-        visible={!!row}
+        visible={showDetail}
         onClose={() => {
-          setRow(undefined);
+          setCurrentRow(undefined);
+          setShowDetail(false);
         }}
         closable={false}
       >
-        {row?.name && (
+        {currentRow?.name && (
           <ProDescriptions<TableListItem>
             column={2}
-            title={row?.name}
+            title={currentRow?.name}
             request={async () => ({
-              data: row || {},
+              data: currentRow || {},
             })}
             params={{
-              id: row?.name,
+              id: currentRow?.name,
             }}
             columns={columns as ProDescriptionsItemProps<TableListItem>[]}
           />
