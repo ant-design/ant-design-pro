@@ -15,16 +15,17 @@ jobs:
         run: npm install
 
       - name: plugins
-        run: yarn add umi-plugin-setting-drawer umi-plugin-antd-theme umi-plugin-pro
+        run: yarn add umi-plugin-antd-theme umi-plugin-pro umi-plugin-setting-drawer
+
       - name: fetch-blocks
         run: yarn run pro fetch-blocks
-      - name: build
+
+      - name: site
         run: npm run site
-      - name: deploy
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTION_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./dist
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          emptyCommits: false
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./dist
+          force_orphan: true
