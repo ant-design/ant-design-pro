@@ -195,6 +195,7 @@ const TableList: React.FC<{}> = () => {
       valueType: 'option',
       render: (_, record) => [
         <a
+          key="config"
           onClick={() => {
             handleUpdateModalVisible(true);
             setCurrentRow(record);
@@ -202,7 +203,7 @@ const TableList: React.FC<{}> = () => {
         >
           <FormattedMessage id="pages.searchTable.config" defaultMessage="配置" />
         </a>,
-        <a href="https://procomponents.ant.design/">
+        <a key="subscribeAlert" href="https://procomponents.ant.design/">
           <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
         </a>,
       ],
