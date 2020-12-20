@@ -1,18 +1,19 @@
 import { stringify } from 'querystring';
-import { history, Reducer, Effect } from 'umi';
+import type { Reducer, Effect } from 'umi';
+import { history } from 'umi';
 
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { message } from 'antd';
 
-export interface StateType {
+export type StateType = {
   status?: 'ok' | 'error';
   type?: string;
   currentAuthority?: 'user' | 'guest' | 'admin';
-}
+};
 
-export interface LoginModelType {
+export type LoginModelType = {
   namespace: string;
   state: StateType;
   effects: {
@@ -22,7 +23,7 @@ export interface LoginModelType {
   reducers: {
     changeLoginStatus: Reducer<StateType>;
   };
-}
+};
 
 const Model: LoginModelType = {
   namespace: 'login',

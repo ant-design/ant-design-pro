@@ -4,15 +4,15 @@ import isEqual from 'lodash/isEqual';
 import { isComponentClass } from './Secured';
 // eslint-disable-next-line import/no-cycle
 
-interface PromiseRenderProps<T, K> {
+type PromiseRenderProps<T, K> = {
   ok: T;
   error: K;
   promise: Promise<boolean>;
-}
+};
 
-interface PromiseRenderState {
+type PromiseRenderState = {
   component: React.ComponentClass | React.FunctionComponent;
-}
+};
 
 export default class PromiseRender<T, K> extends React.Component<
   PromiseRenderProps<T, K>,
@@ -22,11 +22,14 @@ export default class PromiseRender<T, K> extends React.Component<
     component: () => null,
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.setRenderComponent(this.props);
   }
 
-  shouldComponentUpdate = (nextProps: PromiseRenderProps<T, K>, nextState: PromiseRenderState) => {
+  shouldComponentUpdate = (
+    nextProps: PromiseRenderProps<T, K>,
+    nextState: PromiseRenderState,
+  ): boolean => {
     const { component } = this.state;
     if (!isEqual(nextProps, this.props)) {
       this.setRenderComponent(nextProps);
@@ -36,7 +39,7 @@ export default class PromiseRender<T, K> extends React.Component<
   };
 
   // set render Component : ok or error
-  setRenderComponent(props: PromiseRenderProps<T, K>) {
+  setRenderComponent(props: PromiseRenderProps<T, K>): void {
     const ok = this.checkIsInstantiation(props.ok);
     const error = this.checkIsInstantiation(props.error);
     props.promise
