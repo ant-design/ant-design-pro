@@ -10,22 +10,22 @@ import {
 } from '@ant-design/pro-form';
 import { useIntl, FormattedMessage } from 'umi';
 
-import { TableListItem } from '../data.d';
+import type { TableListItem } from '../data.d';
 
-export interface FormValueType extends Partial<TableListItem> {
+export type FormValueType = {
   target?: string;
   template?: string;
   type?: string;
   time?: string;
   frequency?: string;
-}
+} & Partial<TableListItem>;
 
-export interface UpdateFormProps {
+export type UpdateFormProps = {
   onCancel: (flag?: boolean, formVals?: FormValueType) => void;
   onSubmit: (values: FormValueType) => Promise<void>;
   updateModalVisible: boolean;
   values: Partial<TableListItem>;
-}
+};
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const intl = useIntl();
@@ -46,7 +46,9 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             })}
             visible={props.updateModalVisible}
             footer={submitter}
-            onCancel={() => props.onCancel()}
+            onCancel={() => {
+              props.onCancel();
+            }}
           >
             {dom}
           </Modal>

@@ -8,6 +8,12 @@ import { queryNotices } from '@/services/user';
 import NoticeIcon from './NoticeIcon';
 import styles from './index.less';
 
+export type GlobalHeaderRightProps = {
+  fetchingNotices?: boolean;
+  onNoticeVisibleChange?: (visible: boolean) => void;
+  onNoticeClear?: (tabName?: string) => void;
+};
+
 const getNoticeData = (
   notices: API.NoticeIconData[],
 ): {
@@ -69,12 +75,6 @@ const getUnreadData = (noticeData: { [key: string]: API.NoticeIconData[] }) => {
   });
   return unreadMsg;
 };
-
-export interface GlobalHeaderRightProps {
-  fetchingNotices?: boolean;
-  onNoticeVisibleChange?: (visible: boolean) => void;
-  onNoticeClear?: (tabName?: string) => void;
-}
 
 const NoticeIconView = () => {
   const { initialState } = useModel('@@initialState');

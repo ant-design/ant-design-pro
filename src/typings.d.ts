@@ -13,13 +13,14 @@ declare module '*.tiff';
 declare module 'omit.js';
 
 // google analytics interface
-interface GAFieldsObject {
+type GAFieldsObject = {
   eventCategory: string;
   eventAction: string;
   eventLabel?: string;
   eventValue?: number;
   nonInteraction?: boolean;
-}
+};
+
 interface Window {
   ga: (
     command: 'send',
@@ -29,7 +30,7 @@ interface Window {
   reloadAuthorized: () => void;
 }
 
-declare let ga: Function;
+declare let ga: () => void;
 
 // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
