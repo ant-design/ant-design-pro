@@ -84,7 +84,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
-    "@umijs/fabric": "^2.3.0",
+    "@umijs/fabric": "^2.4.0",
     "@umijs/plugin-blocks": "^2.0.5",
     "@umijs/plugin-esbuild": "^1.0.1",
     "@umijs/preset-ant-design-pro": "^1.2.0",

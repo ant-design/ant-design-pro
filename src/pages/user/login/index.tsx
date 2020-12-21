@@ -12,7 +12,8 @@ import React, { useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
-import { fakeAccountLogin, getFakeCaptcha, LoginParamsType } from '@/services/login';
+import type { LoginParamsType } from '@/services/login';
+import { fakeAccountLogin, getFakeCaptcha } from '@/services/login';
 
 import styles from './index.less';
 
@@ -41,7 +42,7 @@ const goto = () => {
   }, 10);
 };
 
-const Login: React.FC<{}> = () => {
+const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [userLoginState, setUserLoginState] = useState<API.LoginStateType>({});
   const [type, setType] = useState<string>('account');
@@ -238,17 +239,18 @@ const Login: React.FC<{}> = () => {
                     id: 'pages.login.captcha.placeholder',
                     defaultMessage: '请输入验证码',
                   })}
-                  captchaTextRender={(timing, count) =>
-                    timing
-                      ? `${count} ${intl.formatMessage({
-                          id: 'pages.getCaptchaSecondText',
-                          defaultMessage: '获取验证码',
-                        })}`
-                      : intl.formatMessage({
-                          id: 'pages.login.phoneLogin.getVerificationCode',
-                          defaultMessage: '获取验证码',
-                        })
-                  }
+                  captchaTextRender={(timing, count) => {
+                    if (timing) {
+                      return `${count} ${intl.formatMessage({
+                        id: 'pages.getCaptchaSecondText',
+                        defaultMessage: '获取验证码',
+                      })}`;
+                    }
+                    return intl.formatMessage({
+                      id: 'pages.login.phoneLogin.getVerificationCode',
+                      defaultMessage: '获取验证码',
+                    });
+                  }}
                   name="captcha"
                   rules={[
                     {

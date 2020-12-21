@@ -15,7 +15,7 @@ const ENVTagColor = {
   pre: '#87d068',
 };
 
-const GlobalHeaderRight: React.FC<{}> = () => {
+const GlobalHeaderRight: React.FC = () => {
   const { initialState } = useModel('@@initialState');
 
   if (!initialState || !initialState.settings) {

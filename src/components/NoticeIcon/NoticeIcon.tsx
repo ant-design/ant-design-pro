@@ -3,13 +3,14 @@ import { Badge, Spin, Tabs } from 'antd';
 import useMergeValue from 'use-merge-value';
 import React from 'react';
 import classNames from 'classnames';
-import NoticeList, { NoticeIconTabProps } from './NoticeList';
+import type { NoticeIconTabProps } from './NoticeList';
+import NoticeList from './NoticeList';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 const { TabPane } = Tabs;
 
-export interface NoticeIconProps {
+export type NoticeIconProps = {
   count?: number;
   bell?: React.ReactNode;
   className?: string;
@@ -26,7 +27,7 @@ export interface NoticeIconProps {
   clearClose?: boolean;
   emptyImage?: string;
   children?: React.ReactElement<NoticeIconTabProps>[];
-}
+};
 
 const NoticeIcon: React.FC<NoticeIconProps> & {
   Tab: typeof NoticeList;

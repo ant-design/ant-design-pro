@@ -1,5 +1,5 @@
 declare namespace API {
-  export interface CurrentUser {
+  export type CurrentUser = {
     avatar?: string;
     name?: string;
     title?: string;
@@ -12,14 +12,14 @@ declare namespace API {
     userid?: string;
     access?: 'user' | 'guest' | 'admin';
     unreadCount?: number;
-  }
+  };
 
-  export interface LoginStateType {
+  export type LoginStateType = {
     status?: 'ok' | 'error';
     type?: string;
-  }
+  };
 
-  export interface NoticeIconData {
+  export type NoticeIconData = {
     id: string;
     key: string;
     avatar: string;
@@ -31,5 +31,5 @@ declare namespace API {
     clickClose?: boolean;
     extra: any;
     status: string;
-  }
+  };
 }

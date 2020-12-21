@@ -21,14 +21,14 @@ type GAFieldsObject = {
   nonInteraction?: boolean;
 };
 
-interface Window {
+type Window = {
   ga: (
     command: 'send',
     hitType: 'event' | 'pageview',
     fieldsObject: GAFieldsObject | string,
   ) => void;
   reloadAuthorized: () => void;
-}
+};
 
 declare let ga: () => void;
 
