@@ -3,14 +3,15 @@ import { Badge, Spin, Tabs } from 'antd';
 import useMergeValue from 'use-merge-value';
 import React from 'react';
 import classNames from 'classnames';
-import NoticeList, { NoticeIconTabProps } from './NoticeList';
+import type { NoticeIconTabProps } from './NoticeList';
+import NoticeList from './NoticeList';
 
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 const { TabPane } = Tabs;
 
-export interface NoticeIconData {
+export type NoticeIconData = {
   avatar?: string | React.ReactNode;
   title?: React.ReactNode;
   description?: React.ReactNode;
@@ -19,9 +20,9 @@ export interface NoticeIconData {
   style?: React.CSSProperties;
   key?: string | number;
   read?: boolean;
-}
+};
 
-export interface NoticeIconProps {
+export type NoticeIconProps = {
   count?: number;
   bell?: React.ReactNode;
   className?: string;
@@ -38,7 +39,7 @@ export interface NoticeIconProps {
   clearClose?: boolean;
   emptyImage?: string;
   children: React.ReactElement<NoticeIconTabProps>[];
-}
+};
 
 const NoticeIcon: React.FC<NoticeIconProps> & {
   Tab: typeof NoticeList;
@@ -73,9 +74,15 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
             clearText={clearText}
             viewMoreText={viewMoreText}
             data={list}
-            onClear={(): void => onClear && onClear(title, tabKey)}
-            onClick={(item): void => onItemClick && onItemClick(item, child.props)}
-            onViewMore={(event): void => onViewMore && onViewMore(child.props, event)}
+            onClear={(): void => {
+              onClear?.(title, tabKey);
+            }}
+            onClick={(item): void => {
+              onItemClick?.(item, child.props);
+            }}
+            onViewMore={(event): void => {
+              onViewMore?.(child.props, event);
+            }}
             showClear={showClear}
             showViewMore={showViewMore}
             title={title}

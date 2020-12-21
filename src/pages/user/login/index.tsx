@@ -10,18 +10,20 @@ import {
 import { Alert, Space, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
-import { connect, Dispatch, useIntl, FormattedMessage } from 'umi';
-import { StateType } from '@/models/login';
-import { getFakeCaptcha, LoginParamsType } from '@/services/login';
-import { ConnectState } from '@/models/connect';
+import { useIntl, connect, FormattedMessage } from 'umi';
+import { getFakeCaptcha } from '@/services/login';
+import type { Dispatch } from 'umi';
+import type { StateType } from '@/models/login';
+import type { LoginParamsType } from '@/services/login';
+import type { ConnectState } from '@/models/connect';
 
 import styles from './index.less';
 
-interface LoginProps {
+export type LoginProps = {
   dispatch: Dispatch;
   userLogin: StateType;
   submitting?: boolean;
-}
+};
 
 const LoginMessage: React.FC<{
   content: string;
@@ -65,8 +67,9 @@ const Login: React.FC<LoginProps> = (props) => {
             },
           },
         }}
-        onFinish={async (values) => {
+        onFinish={(values) => {
           handleSubmit(values);
+          return Promise.resolve();
         }}
       >
         <Tabs activeKey={type} onChange={setType}>
@@ -191,17 +194,18 @@ const Login: React.FC<LoginProps> = (props) => {
                 id: 'pages.login.captcha.placeholder',
                 defaultMessage: '请输入验证码',
               })}
-              captchaTextRender={(timing, count) =>
-                timing
-                  ? `${count} ${intl.formatMessage({
-                      id: 'pages.getCaptchaSecondText',
-                      defaultMessage: '获取验证码',
-                    })}`
-                  : intl.formatMessage({
-                      id: 'pages.login.phoneLogin.getVerificationCode',
-                      defaultMessage: '获取验证码',
-                    })
-              }
+              captchaTextRender={(timing, count) => {
+                if (timing) {
+                  return `${count} ${intl.formatMessage({
+                    id: 'pages.getCaptchaSecondText',
+                    defaultMessage: '获取验证码',
+                  })}`;
+                }
+                return intl.formatMessage({
+                  id: 'pages.login.phoneLogin.getVerificationCode',
+                  defaultMessage: '获取验证码',
+                });
+              }}
               name="captcha"
               rules={[
                 {

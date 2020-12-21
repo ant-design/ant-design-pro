@@ -1,13 +1,14 @@
-import { Reducer } from 'umi';
-import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
+import type { Reducer } from 'umi';
+import type { DefaultSettings } from '../../config/defaultSettings';
+import defaultSettings from '../../config/defaultSettings';
 
-export interface SettingModelType {
+export type SettingModelType = {
   namespace: 'settings';
   state: DefaultSettings;
   reducers: {
     changeSetting: Reducer<DefaultSettings>;
   };
-}
+};
 
 const updateColorWeak: (colorWeak: boolean) => void = (colorWeak) => {
   const root = document.getElementById('root');
