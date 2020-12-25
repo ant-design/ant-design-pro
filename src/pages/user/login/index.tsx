@@ -68,7 +68,7 @@ const Login: React.FC<LoginProps> = (props) => {
           },
         }}
         onFinish={(values) => {
-          handleSubmit(values);
+          handleSubmit(values as LoginParamsType);
           return Promise.resolve();
         }}
       >
