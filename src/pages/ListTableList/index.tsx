@@ -307,10 +307,10 @@ const TableList: React.FC = () => {
               ),
             },
           ]}
-          width="m"
+          width="md"
           name="name"
         />
-        <ProFormTextArea width="m" name="desc" />
+        <ProFormTextArea width="md" name="desc" />
       </ModalForm>
       <UpdateForm
         onSubmit={async (value) => {
