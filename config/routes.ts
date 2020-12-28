@@ -10,7 +10,7 @@
           {
             name: 'login',
             path: '/user/login',
-            component: './user/login',
+            component: './User/login',
           },
         ],
       },
@@ -53,7 +53,7 @@
                 name: 'list.table-list',
                 icon: 'table',
                 path: '/list',
-                component: './ListTableList',
+                component: './TableList',
               },
               {
                 component: './404',
