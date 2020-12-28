@@ -1,6 +1,6 @@
 import { BellOutlined } from '@ant-design/icons';
 import { Badge, Spin, Tabs } from 'antd';
-import useMergeValue from 'use-merge-value';
+import useMergedState from 'rc-util/es/hooks/useMergedState';
 import React from 'react';
 import classNames from 'classnames';
 import type { NoticeIconTabProps } from './NoticeList';
@@ -101,7 +101,7 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
 
   const { className, count, bell } = props;
 
-  const [visible, setVisible] = useMergeValue<boolean>(false, {
+  const [visible, setVisible] = useMergedState<boolean>(false, {
     value: props.popupVisible,
     onChange: props.onPopupVisibleChange,
   });
