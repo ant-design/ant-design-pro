@@ -41,5 +41,4 @@ export default defineConfig({
     basePath: '/',
   },
   esbuild: {},
-  plugins: [],
 });
