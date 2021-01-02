@@ -44,15 +44,4 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
-  // https://github.com/zthxxx/react-dev-inspector
-  plugins: ['react-dev-inspector/plugins/umi/react-inspector'],
-  inspectorConfig: {
-    // loader options type and docs see below
-    exclude: [],
-    babelPlugins: [],
-    babelOptions: {},
-  },
-  resolve: {
-    includes: ['src/components'],
-  },
 });
