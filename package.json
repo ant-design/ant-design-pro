@@ -73,7 +73,7 @@
     "umi-request": "^1.0.8"
   },
   "devDependencies": {
-    "@ant-design/pro-cli": "^1.0.18",
+    "@ant-design/pro-cli": "^1.0.26",
     "@types/classnames": "^2.2.7",
     "@types/express": "^4.17.0",
     "@types/history": "^4.7.2",
