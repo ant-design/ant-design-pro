@@ -40,7 +40,7 @@ const checkPermissions = <T, K>(
     }
     return Exception;
   }
-  // Deal with string 
+  // Deal with string
   if (typeof authority === 'string') {
     if (Array.isArray(currentAuthority)) {
       if (currentAuthority.some((item) => authority === item)) {
