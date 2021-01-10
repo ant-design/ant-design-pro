@@ -20,7 +20,7 @@ export default (): React.ReactNode => {
         <Alert
           message={intl.formatMessage({
             id: 'pages.welcome.alertMessage',
-            defaultMessage: '更快更强的重型组件，已经发布。',
+            defaultMessage: 'Faster and stronger heavy-duty components have been released.',
           })}
           type="success"
           showIcon
@@ -31,13 +31,13 @@ export default (): React.ReactNode => {
           }}
         />
         <Typography.Text strong>
-          <FormattedMessage id="pages.welcome.advancedComponent" defaultMessage="高级表格" />{' '}
+          <FormattedMessage id="pages.welcome.advancedComponent" defaultMessage="Advanced Form" />{' '}
           <a
             href="https://procomponents.ant.design/components/table"
             rel="noopener noreferrer"
             target="__blank"
           >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
+            <FormattedMessage id="pages.welcome.link" defaultMessage="Welcome" />
           </a>
         </Typography.Text>
         <CodePreview>yarn add @ant-design/pro-table</CodePreview>
@@ -47,13 +47,13 @@ export default (): React.ReactNode => {
             marginBottom: 12,
           }}
         >
-          <FormattedMessage id="pages.welcome.advancedLayout" defaultMessage="高级布局" />{' '}
+          <FormattedMessage id="pages.welcome.advancedLayout" defaultMessage="Advanced layout" />{' '}
           <a
             href="https://procomponents.ant.design/components/layout"
             rel="noopener noreferrer"
             target="__blank"
           >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
+            <FormattedMessage id="pages.welcome.link" defaultMessage="Welcome" />
           </a>
         </Typography.Text>
         <CodePreview>yarn add @ant-design/pro-layout</CodePreview>
