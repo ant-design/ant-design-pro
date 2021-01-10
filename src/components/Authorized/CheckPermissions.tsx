@@ -11,12 +11,12 @@ export type IAuthorityType =
   | ((currentAuthority: string | string[]) => IAuthorityType);
 
 /**
- * 通用权限检查方法
+ * General permission check method
  * Common check permissions method
- * @param { 权限判定 | Permission judgment } authority
- * @param { 你的权限 | Your permission description } currentAuthority
- * @param { 通过的组件 | Passing components } target
- * @param { 未通过的组件 | no pass components } Exception
+ * @param {Permission judgment} authority
+ * @param {Your permission | Your permission description} currentAuthority
+ * @param {Passing components} target
+ * @param {no pass components | no pass components} Exception
  */
 const checkPermissions = <T, K>(
   authority: IAuthorityType,
@@ -24,12 +24,12 @@ const checkPermissions = <T, K>(
   target: T,
   Exception: K,
 ): T | K | React.ReactNode => {
-  // 没有判定权限.默认查看所有
+  // No judgment permission. View all by default
   // Retirement authority, return target;
   if (!authority) {
     return target;
   }
-  // 数组处理
+  // Array processing
   if (Array.isArray(authority)) {
     if (Array.isArray(currentAuthority)) {
       if (currentAuthority.some((item) => authority.includes(item))) {
@@ -40,7 +40,7 @@ const checkPermissions = <T, K>(
     }
     return Exception;
   }
-  // string 处理
+  // Deal with string 
   if (typeof authority === 'string') {
     if (Array.isArray(currentAuthority)) {
       if (currentAuthority.some((item) => authority === item)) {
@@ -51,14 +51,14 @@ const checkPermissions = <T, K>(
     }
     return Exception;
   }
-  // Promise 处理
+  // Deal with promise
   if (authority instanceof Promise) {
     return <PromiseRender<T, K> ok={target} error={Exception} promise={authority} />;
   }
-  // Function 处理
+  // Deal with function
   if (typeof authority === 'function') {
     const bool = authority(currentAuthority);
-    // 函数执行后返回值是 Promise
+    // The return value after the function is executed is Promise
     if (bool instanceof Promise) {
       return <PromiseRender<T, K> ok={target} error={Exception} promise={bool} />;
     }
