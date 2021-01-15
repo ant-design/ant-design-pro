@@ -1,7 +1,7 @@
 /**
  * Ant Design Pro v4 use `@ant-design/pro-layout` to handle Layout.
- * You can view component api by:
- * https://github.com/ant-design/ant-design-pro-layout
+ *
+ * @see You can view component api by: https://github.com/ant-design/ant-design-pro-layout
  */
 import type {
   MenuDataItem,
@@ -43,9 +43,7 @@ export type BasicLayoutProps = {
 export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
   breadcrumbNameMap: Record<string, MenuDataItem>;
 };
-/**
- * use Authorized check all menu item
- */
+/** Use Authorized check all menu item */
 
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
   menuList.map((item) => {
@@ -101,9 +99,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       });
     }
   }, []);
-  /**
-   * init variables
-   */
+  /** Init variables */
 
   const handleMenuCollapse = (payload: boolean): void => {
     if (dispatch) {
