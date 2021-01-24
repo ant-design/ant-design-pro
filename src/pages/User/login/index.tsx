@@ -1,8 +1,7 @@
 import {
   AlipayCircleOutlined,
-  LockTwoTone,
-  MailTwoTone,
-  MobileTwoTone,
+  LockOutlined,
+  MobileOutlined,
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
@@ -30,9 +29,7 @@ const LoginMessage: React.FC<{
   />
 );
 
-/**
- * 此方法会跳转到 redirect 参数所在的位置
- */
+/** 此方法会跳转到 redirect 参数所在的位置 */
 const goto = () => {
   if (!history) return;
   setTimeout(() => {
@@ -172,7 +169,7 @@ const Login: React.FC = () => {
                   name="password"
                   fieldProps={{
                     size: 'large',
-                    prefix: <LockTwoTone className={styles.prefixIcon} />,
+                    prefix: <LockOutlined className={styles.prefixIcon} />,
                   }}
                   placeholder={intl.formatMessage({
                     id: 'pages.login.password.placeholder',
@@ -199,7 +196,7 @@ const Login: React.FC = () => {
                 <ProFormText
                   fieldProps={{
                     size: 'large',
-                    prefix: <MobileTwoTone className={styles.prefixIcon} />,
+                    prefix: <MobileOutlined className={styles.prefixIcon} />,
                   }}
                   name="mobile"
                   placeholder={intl.formatMessage({
@@ -230,7 +227,7 @@ const Login: React.FC = () => {
                 <ProFormCaptcha
                   fieldProps={{
                     size: 'large',
-                    prefix: <MailTwoTone className={styles.prefixIcon} />,
+                    prefix: <LockOutlined className={styles.prefixIcon} />,
                   }}
                   captchaProps={{
                     size: 'large',

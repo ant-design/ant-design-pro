@@ -8,17 +8,14 @@ import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import type { ResponseError } from 'umi-request';
 import { queryCurrent } from './services/user';
-import defaultSettings from '../config/defaultSettings';
 
-/**
- * 获取用户信息比较慢的时候会展示一个 loading
- */
+/** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
   loading: <PageLoading />,
 };
 
 export async function getInitialState(): Promise<{
-  settings?: LayoutSettings;
+  settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
@@ -37,12 +34,12 @@ export async function getInitialState(): Promise<{
     return {
       fetchUserInfo,
       currentUser,
-      settings: defaultSettings,
+      settings: {},
     };
   }
   return {
     fetchUserInfo,
-    settings: defaultSettings,
+    settings: {},
   };
 }
 
@@ -84,9 +81,7 @@ const codeMessage = {
   504: '网关超时。',
 };
 
-/**
- * 异常处理程序
- */
+/** 异常处理程序 */
 const errorHandler = (error: ResponseError) => {
   const { response } = error;
   if (response && response.status) {

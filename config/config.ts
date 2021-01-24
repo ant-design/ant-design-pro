@@ -13,7 +13,6 @@ export default defineConfig({
     hmr: true,
   },
   layout: {
-    name: 'Ant Design Pro',
     locale: true,
     siderWidth: 208,
     ...defaultSettings,
@@ -37,6 +36,8 @@ export default defineConfig({
   theme: {
     'primary-color': defaultSettings.primaryColor,
   },
+  // esbuild is father build tools
+  // https://umijs.org/plugins/plugin-esbuild
   esbuild: {},
   title: false,
   ignoreMomentLocale: true,
