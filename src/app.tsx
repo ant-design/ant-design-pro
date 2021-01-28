@@ -7,7 +7,7 @@ import { history } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import type { ResponseError } from 'umi-request';
-import { queryCurrent } from './services/user';
+import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
@@ -21,7 +21,7 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const currentUser = await queryCurrent();
+      const currentUser = await queryCurrentUser();
       return currentUser;
     } catch (error) {
       history.push('/user/login');

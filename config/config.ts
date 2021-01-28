@@ -1,5 +1,6 @@
 // https://umijs.org/config/
 import { defineConfig } from 'umi';
+import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
@@ -47,7 +48,7 @@ export default defineConfig({
   },
   openAPI: {
     requestLibPath: "import { request } from 'umi'",
-    schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/Zd7dLTHUjE/ant-design-pro.json',
-    mock: true,
+    schemaPath: join(__dirname, 'oneapi.json'),
+    mock: false,
   },
 });

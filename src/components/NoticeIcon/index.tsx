@@ -3,7 +3,7 @@ import { Tag, message } from 'antd';
 import { groupBy } from 'lodash';
 import moment from 'moment';
 import { useModel } from 'umi';
-import { queryNotices } from '@/services/user';
+import { getNotices } from '@/services/ant-design-pro/api';
 
 import NoticeIcon from './NoticeIcon';
 import styles from './index.less';
@@ -14,7 +14,7 @@ export type GlobalHeaderRightProps = {
   onNoticeClear?: (tabName?: string) => void;
 };
 
-const getNoticeData = (notices: API.NoticeIconData[]): Record<string, API.NoticeIconData[]> => {
+const getNoticeData = (notices: API.NoticeIconItem[]): Record<string, API.NoticeIconItem[]> => {
   if (!notices || notices.length === 0 || !Array.isArray(notices)) {
     return {};
   }
@@ -46,7 +46,7 @@ const getNoticeData = (notices: API.NoticeIconData[]): Record<string, API.Notice
         >
           {newNotice.extra}
         </Tag>
-      );
+      ) as any;
     }
 
     return newNotice;
@@ -54,7 +54,7 @@ const getNoticeData = (notices: API.NoticeIconData[]): Record<string, API.Notice
   return groupBy(newNotices, 'type');
 };
 
-const getUnreadData = (noticeData: Record<string, API.NoticeIconData[]>) => {
+const getUnreadData = (noticeData: Record<string, API.NoticeIconItem[]>) => {
   const unreadMsg: Record<string, number> = {};
   Object.keys(noticeData).forEach((key) => {
     const value = noticeData[key];
@@ -73,10 +73,10 @@ const getUnreadData = (noticeData: Record<string, API.NoticeIconData[]>) => {
 const NoticeIconView = () => {
   const { initialState } = useModel('@@initialState');
   const { currentUser } = initialState || {};
-  const [notices, setNotices] = useState<API.NoticeIconData[]>([]);
+  const [notices, setNotices] = useState<API.NoticeIconItem[]>([]);
 
   useEffect(() => {
-    queryNotices().then(({ data }) => setNotices(data));
+    getNotices().then(({ data }) => setNotices(data || []));
   }, []);
 
   const noticeData = getNoticeData(notices);
@@ -112,7 +112,7 @@ const NoticeIconView = () => {
       className={styles.action}
       count={currentUser && currentUser.unreadCount}
       onItemClick={(item) => {
-        changeReadState(item.id);
+        changeReadState(item.id!);
       }}
       onClear={(title: string, key: string) => clearReadState(title, key)}
       loading={false}
