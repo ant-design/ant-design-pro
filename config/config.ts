@@ -45,4 +45,9 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
+  openAPI: {
+    requestLibPath: "import { request } from 'umi'",
+    schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/Zd7dLTHUjE/ant-design-pro.json',
+    mock: true,
+  },
 });
