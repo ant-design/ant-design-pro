@@ -15,6 +15,9 @@ export const initialStateConfig = {
   loading: <PageLoading />,
 };
 
+/**
+ * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
+ * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
@@ -44,6 +47,7 @@ export async function getInitialState(): Promise<{
   };
 }
 
+// https://umijs.org/zh-CN/plugins/plugin-layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
     rightContentRender: () => <RightContent />,
@@ -104,7 +108,9 @@ const codeMessage = {
   504: '网关超时。',
 };
 
-/** 异常处理程序 */
+/** 异常处理程序
+ * @see https://beta-pro.ant.design/docs/request-cn
+ */
 const errorHandler = (error: ResponseError) => {
   const { response } = error;
   if (response && response.status) {
@@ -126,6 +132,7 @@ const errorHandler = (error: ResponseError) => {
   throw error;
 };
 
+// https://umijs.org/zh-CN/plugins/plugin-request
 export const request: RequestConfig = {
   errorHandler,
 };
