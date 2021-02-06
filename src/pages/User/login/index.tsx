@@ -1,8 +1,8 @@
 import {
   AlipayCircleOutlined,
-  LockTwoTone,
-  MailTwoTone,
-  MobileTwoTone,
+  LockOutlined,
+  MailOutlined,
+  MobileOutlined,
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
@@ -125,7 +125,7 @@ const Login: React.FC<LoginProps> = (props) => {
               name="password"
               fieldProps={{
                 size: 'large',
-                prefix: <LockTwoTone className={styles.prefixIcon} />,
+                prefix: <LockOutlined className={styles.prefixIcon} />,
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.password.placeholder',
@@ -154,7 +154,7 @@ const Login: React.FC<LoginProps> = (props) => {
             <ProFormText
               fieldProps={{
                 size: 'large',
-                prefix: <MobileTwoTone className={styles.prefixIcon} />,
+                prefix: <MobileOutlined className={styles.prefixIcon} />,
               }}
               name="mobile"
               placeholder={intl.formatMessage({
@@ -185,7 +185,7 @@ const Login: React.FC<LoginProps> = (props) => {
             <ProFormCaptcha
               fieldProps={{
                 size: 'large',
-                prefix: <MailTwoTone className={styles.prefixIcon} />,
+                prefix: <MailOutlined className={styles.prefixIcon} />,
               }}
               captchaProps={{
                 size: 'large',
