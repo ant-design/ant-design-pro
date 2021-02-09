@@ -10,6 +10,8 @@ import type { ResponseError } from 'umi-request';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 
+const isDev = process.env.NODE_ENV === 'development';
+
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
   loading: <PageLoading />,
@@ -60,28 +62,30 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
         history.push('/user/login');
       }
     },
-    links: [
-      <>
-        <LinkOutlined />
-        <span
-          onClick={() => {
-            window.open('/umi/plugin/openapi');
-          }}
-        >
-          openAPI 文档
-        </span>
-      </>,
-      <>
-        <BookOutlined />
-        <span
-          onClick={() => {
-            window.open('/~docs');
-          }}
-        >
-          业务组件文档
-        </span>
-      </>,
-    ],
+    links: isDev
+      ? [
+          <>
+            <LinkOutlined />
+            <span
+              onClick={() => {
+                window.open('/umi/plugin/openapi');
+              }}
+            >
+              openAPI 文档
+            </span>
+          </>,
+          <>
+            <BookOutlined />
+            <span
+              onClick={() => {
+                window.open('/~docs');
+              }}
+            >
+              业务组件文档
+            </span>
+          </>,
+        ]
+      : [],
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
