@@ -6,7 +6,6 @@ import settingDrawer from './pt-BR/settingDrawer';
 import settings from './pt-BR/settings';
 import pages from './pt-BR/pages';
 
-
 export default {
   'navBar.lang': 'Idiomas',
   'layout.user.link.help': 'ajuda',
