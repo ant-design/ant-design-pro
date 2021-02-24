@@ -1,6 +1,4 @@
 import { Button, message, notification } from 'antd';
-
-import React from 'react';
 import { useIntl } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 
@@ -75,6 +73,7 @@ if (pwa) {
   });
 
   // remove all caches
+  // @ts-ignore
   if (window.caches && window.caches.keys) {
     caches.keys().then((keys) => {
       keys.forEach((key) => {

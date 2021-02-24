@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import type { ConnectProps } from 'umi';
 import { connect } from 'umi';
 import { Tag, message } from 'antd';
