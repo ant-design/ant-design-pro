@@ -75,11 +75,11 @@ const reply = async () => {
     closeIssue(issueId);
     return;
   }
-  const markdown = await queryIssue({
-    title: issue.title,
-    id: issue.id,
-  });
-  replyCommit(issueId, markdown);
+  // const markdown = await queryIssue({
+  //   title: issue.title,
+  //   id: issue.id,
+  // });
+  // replyCommit(issueId, markdown);
 };
 
 reply();
