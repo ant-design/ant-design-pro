@@ -33,6 +33,7 @@ interface Window {
     fieldsObject: GAFieldsObject | string,
   ) => void;
   reloadAuthorized: () => void;
+  routerBase: string;
 }
 
 declare let ga: () => void;
