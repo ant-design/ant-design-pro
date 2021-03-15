@@ -1,10 +1,3 @@
-/*
- * @Author       : 李才人
- * @Date         : 2021-03-15 16:04:11
- * @LastEditors  : 李才人(7737841@qq.com)
- * @LastEditTime : 2021-03-15 16:06:07
- * @FilePath     : /ant-design-pro/config/proxy.ts
- */
 /**
  * 在生产环境 代理是无法生效的，所以这里没有生产环境的配置
  * The agent cannot take effect in the production environment
