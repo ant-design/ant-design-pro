@@ -40,7 +40,7 @@ export async function findPetsByStatus(
     params: {
       ...params,
     },
-    responseType: 'application/xml',
+
     ...(options || {}),
   });
 }
@@ -59,7 +59,7 @@ export async function findPetsByTags(
     params: {
       ...params,
     },
-    responseType: 'application/xml',
+
     ...(options || {}),
   });
 }
@@ -77,7 +77,7 @@ export async function getPetById(
   return request<API.Pet>(`/pet/${param0}`, {
     method: 'GET',
     params: { ...params },
-    responseType: 'application/xml',
+
     ...(options || {}),
   });
 }
@@ -89,7 +89,7 @@ export async function updatePetWithForm(
     /** ID of pet that needs to be updated */
     petId: number;
   },
-  body?: { name?: string; status?: string },
+  body: { name?: string; status?: string },
   options?: { [key: string]: any },
 ) {
   const { petId: param0 } = params;
@@ -99,7 +99,7 @@ export async function updatePetWithForm(
     const item = (body as any)[ele];
 
     if (item !== undefined && item !== null) {
-      form.append(ele, typeof item === 'object' ? JSON.stringify(item) : item);
+      formData.append(ele, typeof item === 'object' ? JSON.stringify(item) : item);
     }
   });
 
@@ -128,9 +128,6 @@ export async function deletePet(
   const { petId: param0 } = params;
   return request<any>(`/pet/${param0}`, {
     method: 'DELETE',
-    headers: {
-      api_key: params['api_key'],
-    },
     params: { ...params },
     ...(options || {}),
   });
@@ -143,7 +140,7 @@ export async function uploadFile(
     /** ID of pet to update */
     petId: number;
   },
-  body?: { additionalMetadata?: string; file?: string },
+  body: { additionalMetadata?: string; file?: string },
   options?: { [key: string]: any },
 ) {
   const { petId: param0 } = params;
@@ -153,7 +150,7 @@ export async function uploadFile(
     const item = (body as any)[ele];
 
     if (item !== undefined && item !== null) {
-      form.append(ele, typeof item === 'object' ? JSON.stringify(item) : item);
+      formData.append(ele, typeof item === 'object' ? JSON.stringify(item) : item);
     }
   });
 
