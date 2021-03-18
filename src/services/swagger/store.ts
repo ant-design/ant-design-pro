@@ -15,7 +15,7 @@ export async function placeOrder(body: API.Order, options?: { [key: string]: any
   return request<API.Order>('/store/order', {
     method: 'POST',
     data: body,
-    responseType: 'application/xml',
+
     ...(options || {}),
   });
 }
@@ -33,7 +33,7 @@ export async function getOrderById(
   return request<API.Order>(`/store/order/${param0}`, {
     method: 'GET',
     params: { ...params },
-    responseType: 'application/xml',
+
     ...(options || {}),
   });
 }
