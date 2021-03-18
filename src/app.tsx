@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import type { ResponseError } from 'umi-request';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
-import { Link } from '@umijs/preset-dumi/lib/theme';
+import { Link } from 'umi';
 
 const isDev = process.env.NODE_ENV === 'development';
 
