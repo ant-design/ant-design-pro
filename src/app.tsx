@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import type { ResponseError } from 'umi-request';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import { Link } from '@umijs/preset-dumi/lib/theme';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -68,23 +69,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       ? [
           <>
             <LinkOutlined />
-            <span
-              onClick={() => {
-                window.open('/umi/plugin/openapi');
-              }}
-            >
-              openAPI 文档
-            </span>
+            <Link to="/umi/plugin/openapi" target="_blank">
+              OpenAPI 文档
+            </Link>
           </>,
           <>
             <BookOutlined />
-            <span
-              onClick={() => {
-                window.open('/~docs');
-              }}
-            >
+            <Link to="/~docs" target="_blank">
               业务组件文档
-            </span>
+            </Link>
           </>,
         ]
       : [],
