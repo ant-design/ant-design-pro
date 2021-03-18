@@ -73,7 +73,6 @@ export async function getUserByName(
   return request<API.User>(`/user/${param0}`, {
     method: 'GET',
     params: { ...params },
-
     ...(options || {}),
   });
 }

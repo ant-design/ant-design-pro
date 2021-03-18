@@ -40,7 +40,7 @@ export async function findPetsByStatus(
     params: {
       ...params,
     },
-
+    responseType: 'application/xml',
     ...(options || {}),
   });
 }
@@ -59,7 +59,7 @@ export async function findPetsByTags(
     params: {
       ...params,
     },
-
+    responseType: 'application/xml',
     ...(options || {}),
   });
 }
@@ -77,7 +77,7 @@ export async function getPetById(
   return request<API.Pet>(`/pet/${param0}`, {
     method: 'GET',
     params: { ...params },
-
+    responseType: 'application/xml',
     ...(options || {}),
   });
 }
