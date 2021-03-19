@@ -2,7 +2,7 @@ import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
 import { notification } from 'antd';
 import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
-import { history } from 'umi';
+import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import type { ResponseError } from 'umi-request';
@@ -10,6 +10,7 @@ import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 
 const isDev = process.env.NODE_ENV === 'development';
+const loginPath = '/user/login';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
@@ -29,12 +30,12 @@ export async function getInitialState(): Promise<{
       const currentUser = await queryCurrentUser();
       return currentUser;
     } catch (error) {
-      history.push('/user/login');
+      history.push(loginPath);
     }
     return undefined;
   };
   // 如果是登录页面，不执行
-  if (history.location.pathname !== '/user/login') {
+  if (history.location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,
@@ -60,31 +61,23 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     onPageChange: () => {
       const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== '/user/login') {
-        history.push('/user/login');
+      if (!initialState?.currentUser && location.pathname !== loginPath) {
+        history.push(loginPath);
       }
     },
     links: isDev
       ? [
           <>
             <LinkOutlined />
-            <span
-              onClick={() => {
-                window.open('/umi/plugin/openapi');
-              }}
-            >
-              openAPI 文档
-            </span>
+            <Link to="/umi/plugin/openapi" target="_blank">
+              OpenAPI 文档
+            </Link>
           </>,
           <>
             <BookOutlined />
-            <span
-              onClick={() => {
-                window.open('/~docs');
-              }}
-            >
+            <Link to="/~docs" target="_blank">
               业务组件文档
-            </span>
+            </Link>
           </>,
         ]
       : [],

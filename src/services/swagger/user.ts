@@ -48,7 +48,6 @@ export async function loginUser(
     params: {
       ...params,
     },
-    responseType: 'application/xml',
     ...(options || {}),
   });
 }
@@ -74,7 +73,6 @@ export async function getUserByName(
   return request<API.User>(`/user/${param0}`, {
     method: 'GET',
     params: { ...params },
-    responseType: 'application/xml',
     ...(options || {}),
   });
 }
