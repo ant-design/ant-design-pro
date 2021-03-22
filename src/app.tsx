@@ -2,7 +2,7 @@ import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
 import { notification } from 'antd';
 import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
-import { history } from 'umi';
+import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import type { ResponseError } from 'umi-request';
@@ -67,26 +67,14 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     },
     links: isDev
       ? [
-          <>
+          <Link to="/umi/plugin/openapi" target="_blank">
             <LinkOutlined />
-            <span
-              onClick={() => {
-                window.open('/umi/plugin/openapi');
-              }}
-            >
-              openAPI 文档
-            </span>
-          </>,
-          <>
+            <span>openAPI 文档</span>
+          </Link>,
+          <Link to="/~docs">
             <BookOutlined />
-            <span
-              onClick={() => {
-                window.open('/~docs');
-              }}
-            >
-              业务组件文档
-            </span>
-          </>,
+            <span>业务组件文档</span>
+          </Link>,
         ]
       : [],
     menuHeaderRender: undefined,
