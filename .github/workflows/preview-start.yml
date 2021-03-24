@@ -1,0 +1,18 @@
+name: Preview Start
+
+on: pull_request_target
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create
+        uses: actions-cool/maintain-one-comment@v1.2.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            ⚡️ Deploying PR Preview...
+            <img src="https://user-images.githubusercontent.com/507615/90240294-8d2abd00-de5b-11ea-8140-4840a0b2d571.gif" width="300" />
+
+            <!-- Sticky Pull Request Comment -->
+          body-include: '<!-- Sticky Pull Request Comment -->'
