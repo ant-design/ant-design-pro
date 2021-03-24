@@ -27,13 +27,11 @@ jobs:
           workflow: ${{ github.event.workflow_run.workflow_id }}
           workflow_conclusion: success
           name: dist
-      
-      - run: rm -rf CNAME
 
       - name: upload surge service
         id: deploy
         run: |
-          export DEPLOY_DOMAIN=https://antd-pro-preview-pr-${{ steps.pr.outputs.id }}.surge.sh
+          export DEPLOY_DOMAIN=https://ant-design-pro-preview-pr-${{ steps.pr.outputs.id }}.surge.sh
           npx surge --project ./ --domain DEPLOYDOMAIN−−token{{ secrets.SURGE_TOKEN }}
 
       - name: update status comment
@@ -41,7 +39,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
-            🎊 PR Preview has been successfully built and deployed to https://antd-pro-preview-pr-${{ steps.pr.outputs.id }}.surge.sh
+            🎊 PR Preview has been successfully built and deployed to https://ant-design-pro-preview-pr-${{ steps.pr.outputs.id }}.surge.sh
             
             <img width="300" src="https://user-images.githubusercontent.com/507615/90250366-88233900-de6e-11ea-95a5-84f0762ffd39.png">
 
