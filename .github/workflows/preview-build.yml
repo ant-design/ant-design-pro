@@ -16,8 +16,8 @@ jobs:
       - name: build
         run: |
           npm install
-            npm install umi-plugin-pro --save
-            npm run build
+          npm install umi-plugin-pro --save
+          npm run build
 
       - name: upload dist artifact
         uses: actions/upload-artifact@v2
