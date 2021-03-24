@@ -1,6 +1,6 @@
 name: Preview Build
 
-on: 
+on:
   pull_request:
     types: [opened, synchronize, reopened]
 
