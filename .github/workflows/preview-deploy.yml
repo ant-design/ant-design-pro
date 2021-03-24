@@ -27,6 +27,8 @@ jobs:
           workflow: ${{ github.event.workflow_run.workflow_id }}
           workflow_conclusion: success
           name: dist
+      
+      - run: rm -rf CNAME
 
       - name: upload surge service
         id: deploy
