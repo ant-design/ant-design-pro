@@ -32,7 +32,7 @@ jobs:
         id: deploy
         run: |
           export DEPLOY_DOMAIN=https://ant-design-pro-preview-pr-${{ steps.pr.outputs.id }}.surge.sh
-          npx surge --project ./ --domain DEPLOYDOMAIN−−token{{ secrets.SURGE_TOKEN }}
+          npx surge --project ./dist --domain DEPLOYDOMAIN−−token{{ secrets.SURGE_TOKEN }}
 
       - name: update status comment
         uses: actions-cool/maintain-one-comment@v1.2.1
