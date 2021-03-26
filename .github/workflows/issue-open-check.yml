@@ -26,9 +26,9 @@ jobs:
             The title of the current issue is not detected, please fill in according to the specifications, thank you!
 
       - if: steps.check.outputs.check-result == 'true'
-        uses: actions-cool/issues-similarity-analysis@v1.0.0
+        uses: actions-cool/issues-similarity-analysis@v1.1.0
         with:
-          filter-threshold: 0.7
+          filter-threshold: 0.6
           title-excludes: '🐛[BUG], 👑 [需求], 🧐[问题]'
           comment-title: '### 以下的 Issues 可能会帮助到你 / The following issues may help you'
           show-footer: false
