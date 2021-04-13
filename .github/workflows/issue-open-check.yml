@@ -15,7 +15,7 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           title-excludes: '🐛[BUG], 👑 [需求], 🧐[问题]'
 
-      - if: steps.check.outputs.check-result == 'false'
+      - if: steps.check.outputs.check-result == 'false' && github.event.issue.state == 'open'
         uses: actions-cool/issues-helper@v2.2.0
         with:
           actions: 'create-comment, close-issue'
