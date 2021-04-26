@@ -11,12 +11,21 @@ export type IAuthorityType =
   | ((currentAuthority: string | string[]) => IAuthorityType);
 
 /**
+ * @en-US
  * General permission check method
  * Common check permissions method
  * @param {Permission judgment} authority
  * @param {Your permission | Your permission description} currentAuthority
  * @param {Passing components} target
  * @param {no pass components | no pass components} Exception
+ * -------------------------------------------------------
+ * @zh-CN
+ * 通用权限检查方法 Common check permissions method
+ *
+ * @param { 权限判定 | Permission judgment } authority
+ * @param { 你的权限 | Your permission description } currentAuthority
+ * @param { 通过的组件 | Passing components } target
+ * @param { 未通过的组件 | no pass components } Exception
  */
 const checkPermissions = <T, K>(
   authority: IAuthorityType,

@@ -4,7 +4,8 @@ let CURRENT: string | string[] = 'NULL';
 
 type CurrentAuthorityType = string | string[] | (() => typeof CURRENT);
 /**
- * use  authority or getAuthority
+ * Use authority or getAuthority
+ *
  * @param {string|()=>String} currentAuthority
  */
 const renderAuthorize = <T>(Authorized: T): ((currentAuthority: CurrentAuthorityType) => T) => (

@@ -14,7 +14,8 @@ import type { TableListItem } from './data.d';
 import { queryRule, updateRule, addRule, removeRule } from './service';
 
 /**
- * Add node
+ * @en-US Add node
+ * @zh-CN 添加节点
  * @param fields
  */
 const handleAdd = async (fields: TableListItem) => {
@@ -32,7 +33,9 @@ const handleAdd = async (fields: TableListItem) => {
 };
 
 /**
- * Update node
+ * @en-US Update node
+ * @zh-CN 更新节点
+ *
  * @param fields
  */
 const handleUpdate = async (fields: FormValueType) => {
@@ -56,6 +59,8 @@ const handleUpdate = async (fields: FormValueType) => {
 
 /**
  *  Delete node
+ * @zh-CN 删除节点
+ *
  * @param selectedRows
  */
 const handleRemove = async (selectedRows: TableListItem[]) => {
@@ -77,12 +82,14 @@ const handleRemove = async (selectedRows: TableListItem[]) => {
 
 const TableList: React.FC = () => {
   /**
-   * Pop-up window of new window
-   */
+   * @en-US Pop-up window of new window
+   * @zh-CN 新建窗口的弹窗
+   *  */
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   /**
-   * The pop-up window of the distribution update window
-   */
+   * @en-US The pop-up window of the distribution update window
+   * @zh-CN 分布更新窗口的弹窗
+   * */
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
 
   const [showDetail, setShowDetail] = useState<boolean>(false);
@@ -92,8 +99,9 @@ const TableList: React.FC = () => {
   const [selectedRowsState, setSelectedRows] = useState<TableListItem[]>([]);
 
   /**
-   * International configuration
-   */
+   * @en-US International configuration
+   * @zh-CN 国际化配置
+   * */
   const intl = useIntl();
 
   const columns: ProColumns<TableListItem>[] = [
