@@ -21,7 +21,7 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 - FAQ: http://pro.ant.design/docs/faq
 - Mirror Site in China: http://ant-design-pro.gitee.io
 
-## 5.0 is ready for trial! 🎉🎉🎉
+## 5.0 is ready for preview! 🎉🎉🎉
 
 [Try Ant Design Pro 5.0.0](https://beta-pro.ant.design/docs/upgrade-v5-cn)
 

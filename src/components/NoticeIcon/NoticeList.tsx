@@ -10,13 +10,13 @@ export type NoticeIconTabProps = {
   showViewMore?: boolean;
   style?: React.CSSProperties;
   title: string;
-  tabKey: string;
-  onClick?: (item: API.NoticeIconData) => void;
+  tabKey: API.NoticeIconItemType;
+  onClick?: (item: API.NoticeIconItem) => void;
   onClear?: () => void;
   emptyText?: string;
   clearText?: string;
   viewMoreText?: string;
-  list: API.NoticeIconData[];
+  list: API.NoticeIconItem[];
   onViewMore?: (e: any) => void;
 };
 const NoticeList: React.FC<NoticeIconTabProps> = ({
@@ -44,7 +44,7 @@ const NoticeList: React.FC<NoticeIconTabProps> = ({
   }
   return (
     <div>
-      <List<API.NoticeIconData>
+      <List<API.NoticeIconItem>
         className={styles.list}
         dataSource={list}
         renderItem={(item, i) => {

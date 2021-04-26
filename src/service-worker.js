@@ -29,14 +29,10 @@ workbox.routing.registerNavigationRoute('/index.html');
  * https://developers.google.com/web/tools/workbox/reference-docs/latest/workbox.strategies
  */
 
-/**
- * Handle API requests
- */
+/** Handle API requests */
 workbox.routing.registerRoute(/\/api\//, workbox.strategies.networkFirst());
 
-/**
- * Handle third party requests
- */
+/** Handle third party requests */
 workbox.routing.registerRoute(
   /^https:\/\/gw\.alipayobjects\.com\//,
   workbox.strategies.networkFirst(),
@@ -47,9 +43,7 @@ workbox.routing.registerRoute(
 );
 workbox.routing.registerRoute(/\/color.less/, workbox.strategies.networkFirst());
 
-/**
- * Response to client after skipping waiting with MessageChannel
- */
+/** Response to client after skipping waiting with MessageChannel */
 addEventListener('message', (event) => {
   const replyPort = event.ports[0];
   const message = event.data;

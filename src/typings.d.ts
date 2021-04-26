@@ -11,6 +11,11 @@ declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
 declare module 'omit.js';
+declare module 'numeral';
+declare module '@antv/data-set';
+declare module 'mockjs';
+declare module 'react-fittext';
+declare module 'bizcharts-plugin-slider';
 
 // google analytics interface
 type GAFieldsObject = {
@@ -28,6 +33,7 @@ type Window = {
     fieldsObject: GAFieldsObject | string,
   ) => void;
   reloadAuthorized: () => void;
+  routerBase: string;
 };
 
 declare let ga: () => void;

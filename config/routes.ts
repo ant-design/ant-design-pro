@@ -9,7 +9,7 @@
           {
             name: 'login',
             path: '/user/login',
-            component: './User/login',
+            component: './user/Login',
           },
         ],
       },
