@@ -63,7 +63,11 @@ const Login: React.FC = () => {
       // 登录
       const msg = await login({ ...values, type });
       if (msg.status === 'ok') {
-        message.success('登录成功！');
+        const defaultloginSuccessMessage = intl.formatMessage({
+          id: 'pages.login.success',
+          defaultMessage: '登录成功！',
+        });
+        message.success(defaultloginSuccessMessage);
         await fetchUserInfo();
         goto();
         return;
@@ -71,7 +75,12 @@ const Login: React.FC = () => {
       // 如果失败去设置用户错误信息
       setUserLoginState(msg);
     } catch (error) {
-      message.error('登录失败，请重试！');
+      const defaultloginFailureMessage = intl.formatMessage({
+        id: 'pages.login.failure',
+        defaultMessage: '登录失败，请重试！',
+      });
+
+      message.error(defaultloginFailureMessage);
     }
     setSubmitting(false);
   };
@@ -88,7 +97,9 @@ const Login: React.FC = () => {
               <span className={styles.title}>Ant Design</span>
             </Link>
           </div>
-          <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+          <div className={styles.desc}>
+            {intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
+          </div>
         </div>
 
         <div className={styles.main}>

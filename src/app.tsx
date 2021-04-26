@@ -2,7 +2,7 @@ import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
 import { notification } from 'antd';
 import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
-import { history, Link } from 'umi';
+import { getIntl, getLocale, history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import type { ResponseError } from 'umi-request';
@@ -84,6 +84,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   };
 };
 
+/**
+ * 异常处理程序
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -107,14 +109,18 @@ const codeMessage = {
  * @see https://beta-pro.ant.design/docs/request-cn
  */
 const errorHandler = (error: ResponseError) => {
+  const { messages } = getIntl(getLocale());
   const { response } = error;
+
   if (response && response.status) {
-    const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
+    const { status, statusText, url } = response;
+    const requestErrorMessage = messages['app.request.error'];
+    const errorMessage = `${requestErrorMessage} ${status}: ${url}`;
+    const errorDescription = messages[`app.request.${status}`] || statusText;
 
     notification.error({
-      message: `请求错误 ${status}: ${url}`,
-      description: errorText,
+      message: errorMessage,
+      description: errorDescription,
     });
   }
 
