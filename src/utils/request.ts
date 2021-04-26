@@ -2,7 +2,7 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 
-const codeMessage: { [status: number]: string } = {
+const codeMessage: Record<number, string> = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）。',
@@ -20,7 +20,10 @@ const codeMessage: { [status: number]: string } = {
   504: '网关超时。',
 };
 
-/** 异常处理程序 */
+/**
+ * @zh-CN 异常处理程序
+ * @en-US Exception handler
+ */
 const errorHandler = (error: { response: Response }): Response => {
   const { response } = error;
   if (response && response.status) {
@@ -28,22 +31,25 @@ const errorHandler = (error: { response: Response }): Response => {
     const { status, url } = response;
 
     notification.error({
-      message: `请求错误 ${status}: ${url}`,
+      message: `Request error ${status}: ${url}`,
       description: errorText,
     });
   } else if (!response) {
     notification.error({
-      description: '您的网络发生异常，无法连接服务器',
-      message: '网络异常',
+      description: 'Your network is abnormal and cannot connect to the server',
+      message: 'Network anomaly',
     });
   }
   return response;
 };
 
-/** 配置request请求时的默认参数 */
+/**
+ * @en-US Configure the default parameters for request
+ * @zh-CN 配置request请求时的默认参数
+ */
 const request = extend({
-  errorHandler, // 默认错误处理
-  credentials: 'include', // 默认请求是否带上cookie
+  errorHandler, // default error handling
+  credentials: 'include', // Does the default request bring cookies
 });
 
 export default request;
