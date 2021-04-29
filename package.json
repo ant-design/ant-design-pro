@@ -48,6 +48,9 @@
       "prettier --write"
     ]
   },
+  "gitHooks": {
+    "commit-msg": "node ./node_modules/@umijs/fabric/dist/verifyCommit.js"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
