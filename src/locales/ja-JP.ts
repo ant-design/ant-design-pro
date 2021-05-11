@@ -12,6 +12,7 @@ export default {
   'layout.user.link.privacy': 'プライバシー',
   'layout.user.link.terms': '利用規約',
   'app.preview.down.block': 'このページをローカルプロジェクトにダウンロードしてください',
+  'app.copyright.produced': 'Ant Financial ExperienceTechnologyDepartmentによって作成されました',
   'app.welcome.link.fetch-blocks': '',
   'app.welcome.link.block-list': '',
   ...globalHeader,

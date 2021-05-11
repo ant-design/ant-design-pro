@@ -11,6 +11,7 @@ export default {
   'layout.user.link.help': 'کمک',
   'layout.user.link.privacy': 'حریم خصوصی',
   'layout.user.link.terms': 'مقررات',
+  'app.copyright.produced': 'تولید شده توسط گروه فناوری تجربه مالی مورچه',
   'app.preview.down.block': 'این صفحه را در پروژه محلی خود بارگیری کنید',
   'app.welcome.link.fetch-blocks': 'دریافت تمام بلوک',
   'app.welcome.link.block-list': 'به سرعت صفحات استاندارد مبتنی بر توسعه "بلوک" را بسازید',

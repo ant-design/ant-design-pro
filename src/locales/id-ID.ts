@@ -11,6 +11,7 @@ export default {
   'layout.user.link.help': 'Bantuan',
   'layout.user.link.privacy': 'Privasi',
   'layout.user.link.terms': 'Ketentuan',
+  'app.copyright.produced': 'Diproduksi oleh Departemen Teknologi Pengalaman Keuangan Ant',
   'app.preview.down.block': 'Unduh halaman ini dalam projek lokal anda',
   'app.welcome.link.fetch-blocks': 'Dapatkan semua blok',
   'app.welcome.link.block-list':

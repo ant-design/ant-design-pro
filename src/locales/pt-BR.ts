@@ -11,6 +11,7 @@ export default {
   'layout.user.link.help': 'ajuda',
   'layout.user.link.privacy': 'política de privacidade',
   'layout.user.link.terms': 'termos de serviços',
+  'app.copyright.produced': 'Produzido pelo Departamento de Tecnologia da Ant Financial Experience',
   'app.preview.down.block': 'Download this page to your local project',
   ...globalHeader,
   ...menu,
