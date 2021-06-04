@@ -14,12 +14,7 @@ export type GlobalHeaderRightProps = {
 } & Partial<ConnectProps>;
 
 class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
-  onMenuClick = (event: {
-    key: React.Key;
-    keyPath: React.Key[];
-    item: React.ReactInstance;
-    domEvent: React.MouseEvent<HTMLElement>;
-  }) => {
+  onMenuClick = (event: { key: React.Key; keyPath: React.Key[]; item: React.ReactInstance }) => {
     const { key } = event;
 
     if (key === 'logout') {
