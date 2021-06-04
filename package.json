@@ -139,6 +139,6 @@
     ]
   },
   "gitHooks": {
-    "commit-msg": "node ./node_modules/@umijs/fabric/dist/verifyCommit.js"
+    "commit-msg": "fabric verify-commit"
   }
 }
