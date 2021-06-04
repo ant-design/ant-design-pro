@@ -12,7 +12,8 @@ export default defineConfig({
     babelPlugins: [],
     babelOptions: {},
   },
-  webpack5: {
-    // lazyCompilation: {},
-  },
+  // mfsu: {},
+  // webpack5: {
+  //   // lazyCompilation: {},
+  // },
 });

@@ -1,4 +1,4 @@
-import { Tag, Space } from 'antd';
+import { Space } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useModel, SelectLang } from 'umi';
@@ -7,12 +7,6 @@ import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';
-
-const ENVTagColor = {
-  dev: 'orange',
-  test: 'green',
-  pre: '#87d068',
-};
 
 const GlobalHeaderRight: React.FC = () => {
   const { initialState } = useModel('@@initialState');
@@ -61,11 +55,6 @@ const GlobalHeaderRight: React.FC = () => {
         <QuestionCircleOutlined />
       </span>
       <Avatar />
-      {REACT_APP_ENV && (
-        <span>
-          <Tag color={ENVTagColor[REACT_APP_ENV]}>{REACT_APP_ENV}</Tag>
-        </span>
-      )}
       <SelectLang className={styles.action} />
     </Space>
   );
