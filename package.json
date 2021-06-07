@@ -81,7 +81,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
-    "@umijs/fabric": "^2.5.2",
+    "@umijs/fabric": "^2.6.2",
     "@umijs/openapi": "^1.1.14",
     "@umijs/plugin-blocks": "^2.0.5",
     "@umijs/plugin-esbuild": "^1.0.1",
