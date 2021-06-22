@@ -6,9 +6,9 @@ const findChrome = require('carlo/lib/find_chrome');
 const detectInstaller = require('detect-installer');
 
 const installPuppeteer = () => {
-  // find can use package manger
-  const packages = detectInstaller(join(__dirname, '../../'));
-  // get installed package manger
+  // find can use package manager
+  const packages = detectInstaller(join(__dirname, '../'));
+  // get installed package manager
   const packageName = packages.find(detectInstaller.hasPackageCommand) || 'npm';
   console.log(`🤖 will use ${packageName} install puppeteer`);
   const command = `${packageName} ${packageName.includes('yarn') ? 'add' : 'i'} puppeteer`;
