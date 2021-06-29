@@ -46,10 +46,11 @@ describe('Ant Design Pro E2E test', () => {
     it(`test pages ${route}`, testPage(route));
   });
 
-  it('topmenu should have footer', async () => {
+  fit('topmenu should have footer', async () => {
     const params = '?navTheme=light&layout=topmenu';
     await page.goto(`${BASE_URL}${params}`);
-
+    const con = await page.content();
+    console.log(con);
     await page.waitForSelector('footer', {
       timeout: 2000,
     });
