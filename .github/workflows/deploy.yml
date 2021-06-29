@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: install
-        run: npm install
+        run: yarn
 
       - name: plugins
         run: yarn add umi-plugin-antd-theme umi-plugin-pro umi-plugin-setting-drawer
