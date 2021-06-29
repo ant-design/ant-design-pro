@@ -23,7 +23,7 @@
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
-    "lint:prettier": "prettier \"src/**/*\" --end-of-line auto",
+    "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "openapi": "umi openapi",
     "precommit": "lint-staged",
