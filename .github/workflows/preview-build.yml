@@ -15,7 +15,7 @@ jobs:
 
       - name: build
         run: |
-          yarn 
+          yarn
           yarn add umi-plugin-pro --save
           yarn build
 
