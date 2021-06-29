@@ -6,6 +6,7 @@ import { stringify } from 'querystring';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import { outLogin } from '@/services/ant-design-pro/api';
+import { MenuInfo } from 'rc-menu/lib/interface';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -33,12 +34,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   const { initialState, setInitialState } = useModel('@@initialState');
 
   const onMenuClick = useCallback(
-    (event: {
-      key: React.Key;
-      keyPath: React.Key[];
-      item: React.ReactInstance;
-      domEvent: React.MouseEvent<HTMLElement>;
-    }) => {
+    (event: MenuInfo) => {
       const { key } = event;
       if (key === 'logout' && initialState) {
         setInitialState({ ...initialState, currentUser: undefined });
