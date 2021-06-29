@@ -39,6 +39,7 @@
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
+    "serve": "umi-serve",
     "tsc": "tsc --noEmit"
   },
   "lint-staged": {
@@ -69,7 +70,8 @@
     "react-dev-inspector": "^1.1.1",
     "react-dom": "^17.0.0",
     "react-helmet-async": "^1.0.4",
-    "umi": "^3.5.0-beta.20"
+    "umi": "^3.5.0-beta.20",
+    "umi-serve": "^1.9.10"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^2.0.2",
