@@ -29,11 +29,9 @@ beforeEach(async () => {
 describe('Ant Design Pro E2E test', () => {
   const testPage = (path) => async () => {
     await page.goto(`${BASE_URL}${path}`);
-    const con = await page.content();
-    console.log(con);
-    // await page.waitForSelector('footer', {
-    //   timeout: 2000,
-    // });
+    await page.waitForSelector('footer', {
+      timeout: 20000,
+    });
 
     const haveFooter = await page.evaluate(
       () => document.getElementsByTagName('footer').length > 0,
@@ -49,10 +47,8 @@ describe('Ant Design Pro E2E test', () => {
   fit('topmenu should have footer', async () => {
     const params = '?navTheme=light&layout=topmenu';
     await page.goto(`${BASE_URL}${params}`);
-    const con = await page.content();
-    console.log(con);
     await page.waitForSelector('footer', {
-      timeout: 2000,
+      timeout: 20000,
     });
     const haveFooter = await page.evaluate(
       () => document.getElementsByTagName('footer').length > 0,
