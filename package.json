@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "4.5.0",
+  "version": "5.0.0-beta.3",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
@@ -15,16 +15,17 @@
     "docker:dev": "docker-compose -f ./docker/docker-compose.dev.yml up",
     "docker:push": "npm run docker-hub:build && npm run docker:tag && docker push antdesign/ant-design-pro",
     "docker:tag": "docker tag ant-design-pro antdesign/ant-design-pro",
-    "fetch:blocks": "pro fetch-blocks && npm run prettier",
     "gh-pages": "gh-pages -d dist",
     "i18n-remove": "pro i18n-remove --locale=zh-CN --write",
     "postinstall": "umi g tmp",
     "lint": "umi g tmp && npm run lint:js && npm run lint:style && npm run lint:prettier",
+    "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
-    "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
+    "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "openapi": "umi openapi",
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
     "site": "npm run fetch:blocks && npm run build",
@@ -38,6 +39,7 @@
     "test": "umi test",
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
+    "serve": "umi-serve",
     "tsc": "tsc --noEmit"
   },
   "lint-staged": {
@@ -53,26 +55,26 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@ant-design/icons": "^4.0.0",
-    "@ant-design/pro-descriptions": "^1.2.0",
-    "@ant-design/pro-form": "^1.3.0",
-    "@ant-design/pro-layout": "^6.9.0",
-    "@ant-design/pro-table": "^2.17.0",
-    "@umijs/route-utils": "^1.0.33",
-    "antd": "^4.15.0",
+    "@ant-design/icons": "^4.5.0",
+    "@ant-design/pro-descriptions": "^1.6.8",
+    "@ant-design/pro-form": "^1.18.3",
+    "@ant-design/pro-layout": "^6.15.3",
+    "@ant-design/pro-table": "^2.30.8",
+    "@umijs/route-utils": "^1.0.36",
+    "antd": "^4.14.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
     "omit.js": "^2.0.2",
-    "react": "^16.14.0",
+    "react": "^17.0.0",
     "react-dev-inspector": "^1.1.1",
     "react-dom": "^17.0.0",
     "react-helmet-async": "^1.0.4",
-    "umi": "^3.4.1",
-    "umi-request": "^1.0.8"
+    "umi": "^3.5.0",
+    "umi-serve": "^1.9.10"
   },
   "devDependencies": {
-    "@ant-design/pro-cli": "^1.0.28",
+    "@ant-design/pro-cli": "^2.0.2",
     "@types/classnames": "^2.2.7",
     "@types/express": "^4.17.0",
     "@types/history": "^4.7.2",
@@ -81,14 +83,16 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
-    "@umijs/fabric": "^2.5.1",
+    "@umijs/fabric": "^2.6.2",
+    "@umijs/openapi": "^1.1.14",
     "@umijs/plugin-blocks": "^2.0.5",
     "@umijs/plugin-esbuild": "^1.0.1",
+    "@umijs/plugin-openapi": "^1.2.0",
     "@umijs/preset-ant-design-pro": "^1.2.0",
-    "@umijs/preset-react": "^1.4.8",
+    "@umijs/preset-dumi": "^1.1.7",
+    "@umijs/preset-react": "^1.7.4",
     "@umijs/yorkie": "^2.0.3",
     "carlo": "^0.9.46",
-    "chalk": "^4.0.0",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
     "detect-installer": "^1.0.1",
@@ -99,21 +103,14 @@
     "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.0",
     "mockjs": "^1.0.1-beta3",
-    "prettier": "^2.0.1",
+    "prettier": "^2.3.2",
     "puppeteer-core": "^8.0.0",
     "stylelint": "^13.0.0",
-    "typescript": "^4.0.3"
+    "typescript": "^4.2.2"
   },
   "engines": {
     "node": ">=10.0.0"
   },
-  "checkFiles": [
-    "src/**/*.js*",
-    "src/**/*.ts*",
-    "src/**/*.less",
-    "config/**/*.js*",
-    "scripts/**/*.js"
-  ],
   "create-umi": {
     "ignoreScript": [
       "docker*",
@@ -142,5 +139,8 @@
       "CNAME",
       "create-umi"
     ]
+  },
+  "gitHooks": {
+    "commit-msg": "fabric verify-commit"
   }
 }
