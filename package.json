@@ -75,7 +75,6 @@
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^2.0.2",
-    "@types/classnames": "^2.2.7",
     "@types/express": "^4.17.0",
     "@types/history": "^4.7.2",
     "@types/jest": "^26.0.0",
