@@ -6,7 +6,7 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
-    "deploy": "npm run site && npm run gh-pages",
+    "deploy": "npm run build && npm run gh-pages",
     "dev": "npm run start:dev",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
     "docker-prod:build": "docker-compose -f ./docker/docker-compose.yml build",
@@ -28,7 +28,6 @@
     "openapi": "umi openapi",
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
-    "site": "npm run fetch:blocks && npm run build",
     "start": "cross-env UMI_ENV=dev umi dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev",
     "start:no-mock": "cross-env MOCK=none UMI_ENV=dev umi dev",

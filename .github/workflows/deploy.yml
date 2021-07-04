@@ -21,7 +21,7 @@ jobs:
         run: yarn run pro fetch-blocks
 
       - name: site
-        run: npm run site
+        run: npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
