@@ -76,7 +76,7 @@ const basicProgress = [
   },
 ];
 
-function getProfileBasic(_: Request, res: Response) {
+function getProfileBasic(_: Request, res: any) {
   return res.json({
     data: {
       basicProgress,

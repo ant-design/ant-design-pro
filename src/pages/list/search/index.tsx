@@ -1,7 +1,6 @@
 import { PageContainer } from '@ant-design/pro-layout';
 import { Input } from 'antd';
 import type { FC } from 'react';
-import React from 'react';
 import { history } from 'umi';
 
 type SearchProps = {

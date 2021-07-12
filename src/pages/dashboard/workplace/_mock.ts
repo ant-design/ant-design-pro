@@ -1,6 +1,6 @@
 import moment from 'moment';
 import type { Request, Response } from 'express';
-import type { SearchDataType, OfflineDataType, OfflineChartData, DataItem } from './data.d';
+import type { SearchDataType, OfflineDataType, DataItem } from './data.d';
 
 // mock data
 const visitData: DataItem[] = [];
@@ -124,7 +124,7 @@ for (let i = 0; i < 10; i += 1) {
     cvr: Math.ceil(Math.random() * 9) / 10,
   });
 }
-const offlineChartData: OfflineChartData[] = [];
+const offlineChartData: DataItem[] = [];
 for (let i = 0; i < 20; i += 1) {
   offlineChartData.push({
     x: new Date().getTime() + 1000 * 60 * 30 * i,

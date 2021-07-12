@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
 import type { Store } from 'antd/es/form/interface';
 import { Link, useRequest, history } from 'umi';

@@ -1,7 +1,6 @@
 import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
 import moment from 'moment';
 import type { FC } from 'react';
-import React from 'react';
 import { useRequest } from 'umi';
 import AvatarList from './components/AvatarList';
 import StandardFormRow from './components/StandardFormRow';

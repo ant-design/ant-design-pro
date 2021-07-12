@@ -2,7 +2,7 @@ import { CloseCircleOutlined } from '@ant-design/icons';
 import { Card, Col, Popover, Row, message } from 'antd';
 
 import type { FC } from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ProForm, {
   ProFormDateRangePicker,
   ProFormSelect,
@@ -64,7 +64,7 @@ const tableData = [
 interface ErrorField {
   name: InternalNamePath;
   errors: string[];
-};
+}
 
 const AdvancedForm: FC<Record<string, any>> = () => {
   const [error, setError] = useState<ErrorField[]>([]);
@@ -155,7 +155,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
           <a
             key="eidit"
             onClick={() => {
-              action.startEditable(record.key);
+              action?.startEditable(record.key);
             }}
           >
             编辑

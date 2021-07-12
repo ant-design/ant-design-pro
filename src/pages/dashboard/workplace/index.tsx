@@ -7,7 +7,7 @@ import { PageContainer } from '@ant-design/pro-layout';
 import moment from 'moment';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
-import type { ActivitiesType, CurrentUser } from './data.d';
+import type { ActivitiesType } from './data.d';
 import { queryProjectNotice, queryActivities, fakeChartData } from './service';
 
 const links = [
@@ -37,7 +37,7 @@ const links = [
   },
 ];
 
-const PageHeaderContent: FC<{ currentUser: CurrentUser }> = ({ currentUser }) => {
+const PageHeaderContent: FC<{ currentUser: API.CurrentUser }> = ({ currentUser }) => {
   const loading = currentUser && Object.keys(currentUser).length;
   if (!loading) {
     return <Skeleton avatar paragraph={{ rows: 1 }} active />;
@@ -116,7 +116,7 @@ const Workplace: FC = () => {
 
   return (
     <PageContainer
-      content={<PageHeaderContent currentUser={currentUser || ({} as CurrentUser)} />}
+      content={<PageHeaderContent currentUser={currentUser || ({} as API.CurrentUser)} />}
       extraContent={<ExtraContent />}
     >
       <Row gutter={24}>

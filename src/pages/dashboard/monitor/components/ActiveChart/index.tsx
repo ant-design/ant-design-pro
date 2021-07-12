@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { TinyArea } from '@ant-design/charts';
 
 import { Statistic } from 'antd';

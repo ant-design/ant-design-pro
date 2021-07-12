@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { Suspense, useState } from 'react';
+import { Suspense, useState } from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Col, Dropdown, Menu, Row } from 'antd';
 import { GridContent } from '@ant-design/pro-layout';

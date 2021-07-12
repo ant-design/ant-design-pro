@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Select, Spin } from 'antd';
 import type { LabeledValue } from 'antd/es/select';
 import type { Dispatch } from 'umi';

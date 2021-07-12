@@ -3,7 +3,6 @@ import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
 import type moment from 'moment';
 import { Column } from '@ant-design/charts';
 
-import React from 'react';
 import numeral from 'numeral';
 import type { DataItem } from '../data.d';
 import styles from '../style.less';

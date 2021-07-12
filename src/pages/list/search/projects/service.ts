@@ -1,5 +1,5 @@
 import { request } from 'umi';
-import type { Params, ListItemDataType } from 'ListSearchArticles/src/data';
+import type { Params, ListItemDataType } from './data';
 
 export async function queryFakeList(
   params: Params,

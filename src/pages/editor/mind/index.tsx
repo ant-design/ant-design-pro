@@ -2,7 +2,6 @@ import { Col, Row } from 'antd';
 import GGEditor, { Mind } from 'gg-editor';
 
 import { PageContainer } from '@ant-design/pro-layout';
-import React from 'react';
 import EditorMinimap from './components/EditorMinimap';
 import { MindContextMenu } from './components/EditorContextMenu';
 import { MindDetailPanel } from './components/EditorDetailPanel';

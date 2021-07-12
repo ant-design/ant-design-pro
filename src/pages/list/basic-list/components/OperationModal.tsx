@@ -1,5 +1,4 @@
 import type { FC } from 'react';
-import React from 'react';
 import {
   ModalForm,
   ProFormSelect,
@@ -17,7 +16,7 @@ type OperationModalProps = {
   current: Partial<BasicListItemDataType> | undefined;
   onDone: () => void;
   onSubmit: (values: BasicListItemDataType) => void;
-}
+};
 
 const OperationModal: FC<OperationModalProps> = (props) => {
   const { done, visible, current, onDone, onSubmit, children } = props;

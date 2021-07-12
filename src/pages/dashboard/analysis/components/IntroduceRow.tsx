@@ -2,7 +2,6 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { TinyArea, TinyColumn, Progress } from '@ant-design/charts';
 import { Col, Row, Tooltip } from 'antd';
 
-import React from 'react';
 import numeral from 'numeral';
 import { ChartCard, Field } from './Charts';
 import type { DataItem } from '../data.d';

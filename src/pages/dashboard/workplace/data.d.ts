@@ -24,7 +24,7 @@ export interface RadarData {
   name: string;
   label: string;
   value: number;
-};
+}
 
 export type AnalysisData = {
   visitData: VisitDataType[];
@@ -37,7 +37,7 @@ export type AnalysisData = {
   salesTypeDataOnline: VisitDataType[];
   salesTypeDataOffline: VisitDataType[];
   radarData: DataItem[];
-}
+};
 
 export type GeographicType = {
   province: {
