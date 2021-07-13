@@ -88,7 +88,7 @@
     "@umijs/plugin-openapi": "^1.2.0",
     "@umijs/preset-ant-design-pro": "^1.2.0",
     "@umijs/preset-dumi": "^1.1.7",
-    "@umijs/preset-react": "^1.7.4",
+    "@umijs/preset-react": "^1.8.17",
     "@umijs/yorkie": "^2.0.3",
     "carlo": "^0.9.46",
     "cross-env": "^7.0.0",
