@@ -74,7 +74,7 @@ const NoticeIconView = () => {
   const { initialState } = useModel('@@initialState');
   const { currentUser } = initialState || {};
   const [notices, setNotices] = useState<API.NoticeIconItem[]>([]);
-  const { data } = useRequest(getNotices());
+  const { data } = useRequest(getNotices);
 
   useEffect(() => {
     setNotices(data || []);
