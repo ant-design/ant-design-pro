@@ -12,7 +12,7 @@ export async function getFakeCaptcha(
   options?: { [key: string]: any },
 ) {
   return request<API.FakeCaptcha>('/api/login/captcha', {
-    method: 'POST',
+    method: 'GET',
     params: {
       ...params,
     },
