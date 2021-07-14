@@ -31,7 +31,7 @@ const BasicForm: FC<Record<string, any>> = () => {
       <Card bordered={false}>
         <ProForm
           hideRequiredMark
-          style={{ marginTop: 8 }}
+          style={{ margin: 'auto', marginTop: 8, maxWidth: 600 }}
           name="basic"
           layout="vertical"
           initialValues={{ public: '1' }}

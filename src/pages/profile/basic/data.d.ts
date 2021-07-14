@@ -14,4 +14,4 @@ export type BasicProgress = {
   status: string;
   operator: string;
   cost: string;
-}
+};

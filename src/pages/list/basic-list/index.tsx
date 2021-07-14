@@ -65,7 +65,11 @@ export const BasicList: FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [current, setCurrent] = useState<Partial<BasicListItemDataType> | undefined>(undefined);
 
-  const { data: listData, loading, mutate } = useRequest(() => {
+  const {
+    data: listData,
+    loading,
+    mutate,
+  } = useRequest(() => {
     return queryFakeList({
       count: 50,
     });

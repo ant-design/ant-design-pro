@@ -1,3 +1,5 @@
+import type { Request, Response } from 'express';
+
 const basicGoods = [
   {
     id: '1234561',
@@ -76,7 +78,7 @@ const basicProgress = [
   },
 ];
 
-function getProfileBasic(_: Request, res: any) {
+function getProfileBasic(_: Request, res: Response) {
   return res.json({
     data: {
       basicProgress,

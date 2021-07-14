@@ -78,6 +78,7 @@ export type CurrentUser = {
   address: string;
   phone: string;
 };
+
 export type Member = {
   avatar: string;
   name: string;

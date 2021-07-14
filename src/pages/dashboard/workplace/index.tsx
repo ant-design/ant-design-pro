@@ -2,12 +2,12 @@ import type { FC } from 'react';
 import { Avatar, Card, Col, List, Skeleton, Row, Statistic } from 'antd';
 import { Radar } from '@ant-design/charts';
 
-import { Link, useModel, useRequest } from 'umi';
+import { Link, useRequest } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
 import moment from 'moment';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
-import type { ActivitiesType } from './data.d';
+import type { ActivitiesType, CurrentUser } from './data.d';
 import { queryProjectNotice, queryActivities, fakeChartData } from './service';
 
 const links = [
@@ -37,7 +37,7 @@ const links = [
   },
 ];
 
-const PageHeaderContent: FC<{ currentUser: API.CurrentUser }> = ({ currentUser }) => {
+const PageHeaderContent: FC<{ currentUser: Partial<CurrentUser> }> = ({ currentUser }) => {
   const loading = currentUser && Object.keys(currentUser).length;
   if (!loading) {
     return <Skeleton avatar paragraph={{ rows: 1 }} active />;
@@ -76,8 +76,6 @@ const ExtraContent: FC<Record<string, any>> = () => (
 );
 
 const Workplace: FC = () => {
-  const { initialState } = useModel('@@initialState');
-  const { currentUser } = initialState || {};
   const { loading: projectLoading, data: projectNotice = [] } = useRequest(queryProjectNotice);
   const { loading: activitiesLoading, data: activities = [] } = useRequest(queryActivities);
   const { data } = useRequest(fakeChartData);
@@ -116,7 +114,19 @@ const Workplace: FC = () => {
 
   return (
     <PageContainer
-      content={<PageHeaderContent currentUser={currentUser || ({} as API.CurrentUser)} />}
+      content={
+        <PageHeaderContent
+          currentUser={{
+            avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+            name: '吴彦祖',
+            userid: '00000001',
+            email: 'antdesign@alipay.com',
+            signature: '海纳百川，有容乃大',
+            title: '交互专家',
+            group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+          }}
+        />
+      }
       extraContent={<ExtraContent />}
     >
       <Row gutter={24}>

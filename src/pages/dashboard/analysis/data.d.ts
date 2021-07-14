@@ -5,7 +5,7 @@ export { DataItem };
 export interface VisitDataType {
   x: string;
   y: number;
-};
+}
 
 export type SearchDataType = {
   index: number;
@@ -43,4 +43,4 @@ export interface AnalysisData {
   salesTypeDataOnline: DataItem[];
   salesTypeDataOffline: DataItem[];
   radarData: RadarData[];
-};
+}
