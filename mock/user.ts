@@ -184,8 +184,8 @@ export default {
     res.status(403).send({
       timestamp: 1513932555104,
       status: 403,
-      error: 'Unauthorized',
-      message: 'Unauthorized',
+      error: 'Forbidden',
+      message: 'Forbidden',
       path: '/base/category/list',
     });
   },
