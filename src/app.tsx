@@ -7,6 +7,7 @@ import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import { authorization } from '@/utils/token';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -98,6 +99,11 @@ export const request: RequestConfig = {
     }
     throw error;
   },
+  requestInterceptors: [
+    (url, options) => {
+      return { url, options: { ...options, headers: authorization() } };
+    },
+  ],
 };
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout

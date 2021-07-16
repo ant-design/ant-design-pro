@@ -13,6 +13,7 @@ import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from '
 import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
+import { setToken } from '@/utils/token';
 
 import styles from './index.less';
 
@@ -53,6 +54,9 @@ const Login: React.FC = () => {
       // 登录
       const msg = await login({ ...values, type });
       if (msg.status === 'ok') {
+        if (msg.token) {
+          setToken(msg.token);
+        }
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
           defaultMessage: '登录成功！',
