@@ -125,6 +125,7 @@ export default {
         status: 'ok',
         type,
         currentAuthority: 'admin',
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnQtZGVzaWduLXBybyIsIm5hbWUiOiJhZG1pbiIsImlhdCI6MTUxNjIzOTAyMn0.AEDyc8dYXWOIsPUy2bIZT59XyBG5KoQGkXjWC5pG4Fo',
       });
       access = 'admin';
       return;
@@ -134,6 +135,7 @@ export default {
         status: 'ok',
         type,
         currentAuthority: 'user',
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnQtZGVzaWduLXBybyIsIm5hbWUiOiJ1c2VyIiwiaWF0IjoxNTE2MjM5MDIyfQ.n2sljYuWapX_9I00f1DZecL73pGefQLN7ub0bfTXaJA',
       });
       access = 'user';
       return;
@@ -143,6 +145,7 @@ export default {
         status: 'ok',
         type,
         currentAuthority: 'admin',
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbnQtZGVzaWduLXByby1tb2JpbGUiLCJuYW1lIjoiYWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.ZfEkaboQgF-T0MEXR8lAxXlYeFhw8S_RE-Hs4dWJ_Bc',
       });
       access = 'admin';
       return;
