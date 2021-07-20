@@ -137,8 +137,5 @@
       "CNAME",
       "create-umi"
     ]
-  },
-  "gitHooks": {
-    "commit-msg": "fabric verify-commit"
   }
 }

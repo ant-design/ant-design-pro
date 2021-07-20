@@ -355,7 +355,9 @@ const TableList: React.FC = () => {
         }}
         onCancel={() => {
           handleUpdateModalVisible(false);
-          setCurrentRow(undefined);
+          if (!showDetail) {
+            setCurrentRow(undefined);
+          }
         }}
         updateModalVisible={updateModalVisible}
         values={currentRow || {}}
