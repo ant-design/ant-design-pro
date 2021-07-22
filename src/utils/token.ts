@@ -1,15 +1,15 @@
-const antdpro = 'ant-design-pro';
+const name = 'ant-design-pro';
 
 export function setToken(token: string) {
-  localStorage.setItem(antdpro, token);
+  localStorage.setItem(name, token);
 }
 
 export function removeToken() {
-  localStorage.removeItem(antdpro);
+  localStorage.removeItem(name);
 }
 
 export function getToken() {
-  return localStorage.getItem(antdpro);
+  return localStorage.getItem(name);
 }
 
 export function authorization() {
