@@ -1,7 +1,7 @@
 export default {
   'pages.layouts.userLayout.title': 'طراحی مورچه تأثیرگذارترین مشخصات طراحی وب در منطقه Xihu است',
   'pages.login.accountLogin.tab': 'ورود به حساب کاربری',
-  'pages.login.accountLogin.errorMessage': 'نام کاربری / رمزعبور نادرست （مدیر / ant.design)',
+  'pages.login.accountLogin.errorMessage': 'نام کاربری / رمزعبور نادرست (مدیر / ant.design)',
   'pages.login.username.placeholder': 'نام کاربری: مدیر یا کاربر',
   'pages.login.username.required': 'لطفا نام کاربری خود را وارد کنید!',
   'pages.login.password.placeholder': 'رمز عبور: ant.design',
