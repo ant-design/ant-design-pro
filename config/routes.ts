@@ -13,6 +13,9 @@
           },
         ],
       },
+      {
+        component: './404',
+      },
     ],
   },
   {
@@ -33,6 +36,9 @@
         name: 'sub-page',
         icon: 'smile',
         component: './Welcome',
+      },
+      {
+        component: './404',
       },
     ],
   },
