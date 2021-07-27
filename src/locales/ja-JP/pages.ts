@@ -2,7 +2,7 @@ export default {
   'pages.layouts.userLayout.title': 'Ant Designは、西湖区で最も影響力のあるWebデザイン仕様です。',
   'pages.login.accountLogin.tab': 'アカウントログイン',
   'pages.login.accountLogin.errorMessage':
-    'ユーザー名/パスワードが正しくありません（admin/ant.design)',
+    'ユーザー名/パスワードが正しくありません(admin/ant.design)',
   'pages.login.username.placeholder': 'ユーザー名：adminまたはuser',
   'pages.login.username.required': 'ユーザー名を入力してください！',
   'pages.login.password.placeholder': 'パスワード：ant.design',
