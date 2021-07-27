@@ -1,7 +1,6 @@
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
-import { notification } from 'antd';
-import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
+import type { RunTimeLayoutConfig } from 'umi';
 import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
@@ -84,21 +83,21 @@ export async function getInitialState(): Promise<{
     502: Gateway error. ',
     503: The service is unavailable. ',
     504: The gateway timed out. ',
- * @see https://beta-pro.ant.design/docs/request-cn
+ * @see https://pro.ant.design/docs/request/
  */
-export const request: RequestConfig = {
-  errorHandler: (error: any) => {
-    const { response } = error;
+// export const request: RequestConfig = {
+//   errorHandler: (error: any) => {
+//     const { response } = error;
 
-    if (!response) {
-      notification.error({
-        description: '您的网络发生异常，无法连接服务器',
-        message: '网络异常',
-      });
-    }
-    throw error;
-  },
-};
+//     if (!response) {
+//       notification.error({
+//         description: '您的网络发生异常，无法连接服务器',
+//         message: '网络异常',
+//       });
+//     }
+//     throw error;
+//   },
+// };
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
