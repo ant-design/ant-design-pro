@@ -12,5 +12,4 @@ export default defineConfig({
     babelPlugins: [],
     babelOptions: {},
   },
-  webpack5: {},
 });

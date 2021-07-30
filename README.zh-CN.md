@@ -19,10 +19,9 @@ Language : [🇺🇸](./README.md) | 🇨🇳 | [🇷🇺](./README.ru-RU.md) | 
 - 常见问题：http://pro.ant.design/docs/faq-cn
 - 国内镜像：http://ant-design-pro.gitee.io
 
-## 5.0 已经可以试用了 ! 🎉🎉🎉
+## 5.0 已经发布! 🎉🎉🎉
 
-[尝试 Ant Design Pro 5.0.0](https://beta-pro.ant.design/docs/upgrade-v5-cn)
-
+[Ant Design Pro 5.0.0](https://github.com/ant-design/ant-design-pro/issues/8656)
 ## 特性
 
 - :bulb: **TypeScript**: 应用程序级 JavaScript 的语言

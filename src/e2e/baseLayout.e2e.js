@@ -1,14 +1,17 @@
 const { uniq } = require('lodash');
 const RouterConfig = require('../../config/config').default.routes;
 
-const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
+const BASE_URL = `http://localhost:${process.env.PORT || 8001}`;
 
 function formatter(routes, parentPath = '') {
   const fixedParentPath = parentPath.replace(/\/{1,}/g, '/');
   let result = [];
   routes.forEach((item) => {
-    if (item.path) {
+    if (item.path && !item.path.startsWith('/')) {
       result.push(`${fixedParentPath}/${item.path}`.replace(/\/{1,}/g, '/'));
+    }
+    if (item.path && item.path.startsWith('/')) {
+      result.push(`${item.path}`.replace(/\/{1,}/g, '/'));
     }
     if (item.routes) {
       result = result.concat(
@@ -49,6 +52,7 @@ describe('Ant Design Pro E2E test', () => {
     await page.waitForSelector('footer', {
       timeout: 2000,
     });
+
     const haveFooter = await page.evaluate(
       () => document.getElementsByTagName('footer').length > 0,
     );

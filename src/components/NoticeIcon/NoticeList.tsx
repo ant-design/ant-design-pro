@@ -2,28 +2,25 @@ import { Avatar, List } from 'antd';
 
 import React from 'react';
 import classNames from 'classnames';
-import type { NoticeIconData } from './index';
 import styles from './NoticeList.less';
 
 export type NoticeIconTabProps = {
   count?: number;
-  name?: string;
   showClear?: boolean;
   showViewMore?: boolean;
   style?: React.CSSProperties;
   title: string;
-  tabKey: string;
-  data?: NoticeIconData[];
-  onClick?: (item: NoticeIconData) => void;
+  tabKey: API.NoticeIconItemType;
+  onClick?: (item: API.NoticeIconItem) => void;
   onClear?: () => void;
   emptyText?: string;
   clearText?: string;
   viewMoreText?: string;
-  list: NoticeIconData[];
+  list: API.NoticeIconItem[];
   onViewMore?: (e: any) => void;
 };
-const NoticeList: React.SFC<NoticeIconTabProps> = ({
-  data = [],
+const NoticeList: React.FC<NoticeIconTabProps> = ({
+  list = [],
   onClick,
   onClear,
   title,
@@ -34,7 +31,7 @@ const NoticeList: React.SFC<NoticeIconTabProps> = ({
   viewMoreText,
   showViewMore = false,
 }) => {
-  if (!data || data.length === 0) {
+  if (!list || list.length === 0) {
     return (
       <div className={styles.notFound}>
         <img
@@ -47,9 +44,9 @@ const NoticeList: React.SFC<NoticeIconTabProps> = ({
   }
   return (
     <div>
-      <List<NoticeIconData>
+      <List<API.NoticeIconItem>
         className={styles.list}
-        dataSource={data}
+        dataSource={list}
         renderItem={(item, i) => {
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,

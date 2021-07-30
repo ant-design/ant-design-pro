@@ -73,8 +73,7 @@ if (pwa) {
   });
 
   // remove all caches
-  // @ts-ignore
-  if (window.caches && window.caches.keys) {
+  if (window.caches && window.caches.keys()) {
     caches.keys().then((keys) => {
       keys.forEach((key) => {
         caches.delete(key);

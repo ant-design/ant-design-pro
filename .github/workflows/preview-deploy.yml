@@ -2,7 +2,7 @@ name: Preview Deploy
 
 on:
   workflow_run:
-    workflows: ["Preview Build"]
+    workflows: ['Preview Build']
     types:
       - completed
 
