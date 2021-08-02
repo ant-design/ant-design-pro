@@ -25,7 +25,17 @@
     <link rel="icon" href="<%= context.config.publicPath +'favicon.ico'%>" type="image/x-icon" />
   </head>
   <body>
-    <noscript>Out-of-the-box mid-stage front/design solution!</noscript>
+    <noscript>
+      <div class="noscript-container">
+        Hi there! Please
+        <div class="noscript-enableJS">
+          <a href="https://www.enablejavascript.io/en" target="_blank" rel="noopener noreferrer">
+            <b>enable Javascript</b>
+          </a>
+        </div>
+        in your browser to use Ant Deisgn, Out-of-the-box mid-stage front/design solution!
+      </div>
+    </noscript>
     <div id="root">
       <style>
         html,
@@ -38,6 +48,19 @@
         #root {
           background-repeat: no-repeat;
           background-size: 100% auto;
+        }
+        .noscript-container {
+          display: flex;
+          align-content: center;
+          justify-content: center;
+          margin-top: 90px;
+          font-size: 20px;
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',
+            Geneva, Verdana, sans-serif;
+        }
+        .noscript-enableJS {
+          padding-right: 3px;
+          padding-left: 3px;
         }
         .page-loading-warp {
           display: flex;
