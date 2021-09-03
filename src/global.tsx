@@ -5,6 +5,20 @@ import defaultSettings from '../config/defaultSettings';
 const { pwa } = defaultSettings;
 const isHttps = document.location.protocol === 'https:';
 
+const clearCache = () => {
+  // remove all caches
+  if (window.caches) {
+    caches
+      .keys()
+      .then((keys) => {
+        keys.forEach((key) => {
+          caches.delete(key);
+        });
+      })
+      .catch((e) => console.log(e));
+  }
+};
+
 // if pwa is true
 if (pwa) {
   // Notify user if offline now
@@ -35,13 +49,7 @@ if (pwa) {
         worker.postMessage({ type: 'skip-waiting' }, [channel.port2]);
       });
 
-      if ('caches' in window) {
-        caches.keys().then((names) => {
-          names.forEach(async (name) => {
-            await caches.delete(name);
-          });
-        });
-      }
+      clearCache();
       window.location.reload();
       return true;
     };
@@ -79,12 +87,5 @@ if (pwa) {
     if (sw) sw.unregister();
   });
 
-  // remove all caches
-  if (window.caches && window.caches.keys()) {
-    caches.keys().then((keys) => {
-      keys.forEach((key) => {
-        caches.delete(key);
-      });
-    });
-  }
+  clearCache();
 }
