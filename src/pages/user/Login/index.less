@@ -36,79 +36,15 @@
   }
 }
 
-.top {
-  text-align: center;
-}
+.icon {
+  margin-left: 8px;
+  color: rgba(0, 0, 0, 0.2);
+  font-size: 24px;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: color 0.3s;
 
-.header {
-  height: 44px;
-  line-height: 44px;
-  a {
-    text-decoration: none;
-  }
-}
-
-.logo {
-  height: 44px;
-  margin-right: 16px;
-  vertical-align: top;
-}
-
-.title {
-  position: relative;
-  top: 2px;
-  color: @heading-color;
-  font-weight: 600;
-  font-size: 33px;
-  font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
-
-.desc {
-  margin-top: 12px;
-  margin-bottom: 40px;
-  color: @text-color-secondary;
-  font-size: @font-size-base;
-}
-
-.main {
-  width: 328px;
-  margin: 0 auto;
-  @media screen and (max-width: @screen-sm) {
-    width: 95%;
-    max-width: 328px;
-  }
-
-  :global {
-    .@{ant-prefix}-tabs-nav-list {
-      margin: auto;
-      font-size: 16px;
-    }
-  }
-
-  .icon {
-    margin-left: 16px;
-    color: rgba(0, 0, 0, 0.2);
-    font-size: 24px;
-    vertical-align: middle;
-    cursor: pointer;
-    transition: color 0.3s;
-
-    &:hover {
-      color: @primary-color;
-    }
-  }
-
-  .other {
-    margin-top: 24px;
-    line-height: 22px;
-    text-align: left;
-    .register {
-      float: right;
-    }
-  }
-
-  .prefixIcon {
+  &:hover {
     color: @primary-color;
-    font-size: @font-size-base;
   }
 }
