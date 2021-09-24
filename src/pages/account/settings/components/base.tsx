@@ -14,12 +14,11 @@ import { queryProvince, queryCity } from '../service';
 
 import styles from './BaseView.less';
 
-const validatorPhone = (rule: any, value: string, callback: (message?: string) => void) => {
-  const values = value.split('-');
-  if (!values[0]) {
+const validatorPhone = (rule: any, value: string[], callback: (message?: string) => void) => {
+  if (!value[0]) {
     callback('Please input your area code!');
   }
-  if (!values[1]) {
+  if (!value[1]) {
     callback('Please input your phone number!');
   }
   callback();
