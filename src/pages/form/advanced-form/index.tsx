@@ -242,7 +242,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
                     value: 'mao',
                   },
                 ]}
-                placeholder="请选择管理员"
+                placeholder="请选择审批员"
               />
             </Col>
             <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
