@@ -70,4 +70,11 @@ export default defineConfig({
   mfsu: {},
   webpack5: {},
   exportStatic: {},
+  terserOptions: {
+    compress: {
+      drop_console: true,
+      drop_debugger: true,
+      pure_funcs: ['console.log'],
+    },
+  },
 });
