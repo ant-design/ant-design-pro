@@ -59,7 +59,7 @@
     "@ant-design/pro-form": "^1.43.0",
     "@ant-design/pro-layout": "^6.26.0",
     "@ant-design/pro-table": "^2.56.0",
-    "@umijs/route-utils": "^1.0.36",
+    "@umijs/route-utils": "2.0.2",
     "antd": "^4.14.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
