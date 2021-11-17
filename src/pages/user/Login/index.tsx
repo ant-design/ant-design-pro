@@ -100,6 +100,21 @@ const Login: React.FC = () => {
             <TaobaoCircleOutlined key="TaobaoCircleOutlined" className={styles.icon} />,
             <WeiboCircleOutlined key="WeiboCircleOutlined" className={styles.icon} />,
           ]}
+          submitter={{
+            searchConfig: {
+              submitText: intl.formatMessage({
+                id: 'menu.login',
+                defaultMessage: '登录',
+              }),
+            },
+            render: (_, dom) => dom.pop(),
+            submitButtonProps: {
+              size: 'large',
+              style: {
+                width: '100%',
+              },
+            },
+          }}
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);
           }}
