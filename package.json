@@ -143,6 +143,6 @@
     ]
   },
   "gitHooks": {
-    "commit-msg": "fabric verify-commit"
+    "commit-msg": "fabric --no-verify-commit"
   }
 }
