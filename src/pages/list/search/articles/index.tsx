@@ -144,7 +144,7 @@ const Articles: FC = () => {
           </StandardFormRow>
           <StandardFormRow title="owner" grid>
             <FormItem name="owner" noStyle>
-              <Select mode="multiple" placeholder="选择 owner">
+              <Select mode="multiple" placeholder="选择 owner" style={{'minWidth': '6rem'}}>
                 {owners.map((owner) => (
                   <Option key={owner.id} value={owner.id}>
                     {owner.name}
