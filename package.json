@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
@@ -26,19 +26,19 @@
     "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "openapi": "umi openapi",
+    "playwright": "playwright install && playwright test",
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
+    "serve": "umi-serve",
     "start": "cross-env UMI_ENV=dev umi dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev",
     "start:no-mock": "cross-env MOCK=none UMI_ENV=dev umi dev",
     "start:no-ui": "cross-env UMI_UI=none UMI_ENV=dev umi dev",
     "start:pre": "cross-env REACT_APP_ENV=pre UMI_ENV=dev umi dev",
     "start:test": "cross-env REACT_APP_ENV=test MOCK=none UMI_ENV=dev umi dev",
-    "pretest": "node ./tests/beforeTest",
     "test": "umi test",
-    "test:all": "node ./tests/run-tests.js",
+    "test:e2e": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
-    "serve": "umi-serve",
     "tsc": "tsc --noEmit"
   },
   "lint-staged": {
@@ -76,6 +76,7 @@
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^2.0.2",
+    "@playwright/test": "^1.16.3",
     "@types/express": "^4.17.0",
     "@types/history": "^4.7.2",
     "@types/jest": "^26.0.0",
