@@ -20,7 +20,7 @@ jobs:
       - run: yarn run lint
       - run: yarn run tsc
       - run: yarn run build
-      - run: yarn run test:all
+      - run: yarn run test:e2e
         env:
           CI: true
           PROGRESS: none
