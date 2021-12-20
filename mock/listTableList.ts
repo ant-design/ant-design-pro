@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Request, Response } from 'express';
 import moment from 'moment';
 import { parse } from 'url';
