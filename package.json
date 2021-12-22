@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
@@ -57,10 +57,10 @@
     "@ant-design/icons": "^4.5.0",
     "@ant-design/pro-descriptions": "^1.9.0",
     "@ant-design/pro-form": "^1.43.0",
-    "@ant-design/pro-layout": "^6.26.0",
+    "@ant-design/pro-layout": "^6.32.0-beta.4",
     "@ant-design/pro-table": "^2.56.0",
-    "@umijs/route-utils": "^2.0.3",
-    "antd": "4.16.13",
+    "@umijs/route-utils": "^2.0.4",
+    "antd": "^4.17.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",

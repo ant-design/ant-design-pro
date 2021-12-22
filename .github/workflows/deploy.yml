@@ -15,7 +15,7 @@ jobs:
         run: yarn
 
       - name: plugins
-        run: yarn add umi-plugin-antd-theme umi-plugin-pro umi-plugin-setting-drawer
+        run: yarn add umi-plugin-pro
 
       - name: fetch-blocks
         run: yarn run pro fetch-blocks
