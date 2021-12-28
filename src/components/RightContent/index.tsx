@@ -4,6 +4,7 @@ import React from 'react';
 import { useModel, SelectLang } from 'umi';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
+import NoticeIconView from '../NoticeIcon';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';
@@ -46,6 +47,8 @@ const GlobalHeaderRight: React.FC = () => {
         //   console.log('input', value);
         // }}
       />
+      {/* 表示消息提示的icon */}
+      <NoticeIconView />
       <span
         className={styles.action}
         onClick={() => {
@@ -54,7 +57,7 @@ const GlobalHeaderRight: React.FC = () => {
       >
         <QuestionCircleOutlined />
       </span>
-      <Avatar />
+      <Avatar menu />
       <SelectLang className={styles.action} />
     </Space>
   );

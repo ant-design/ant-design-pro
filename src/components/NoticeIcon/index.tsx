@@ -13,7 +13,7 @@ export type GlobalHeaderRightProps = {
   onNoticeVisibleChange?: (visible: boolean) => void;
   onNoticeClear?: (tabName?: string) => void;
 };
-
+// 对消息进行分类处理 并对一些字段也进行处理
 const getNoticeData = (notices: API.NoticeIconItem[]): Record<string, API.NoticeIconItem[]> => {
   if (!notices || notices.length === 0 || !Array.isArray(notices)) {
     return {};
@@ -21,7 +21,6 @@ const getNoticeData = (notices: API.NoticeIconItem[]): Record<string, API.Notice
 
   const newNotices = notices.map((notice) => {
     const newNotice = { ...notice };
-
     if (newNotice.datetime) {
       newNotice.datetime = moment(notice.datetime as string).fromNow();
     }
@@ -53,7 +52,7 @@ const getNoticeData = (notices: API.NoticeIconItem[]): Record<string, API.Notice
   });
   return groupBy(newNotices, 'type');
 };
-
+// 获取到每一个分类中未读的信息苏联
 const getUnreadData = (noticeData: Record<string, API.NoticeIconItem[]>) => {
   const unreadMsg: Record<string, number> = {};
   Object.keys(noticeData).forEach((key) => {
@@ -82,7 +81,11 @@ const NoticeIconView: React.FC = () => {
 
   const noticeData = getNoticeData(notices);
   const unreadMsg = getUnreadData(noticeData || {});
-
+  
+  // 计算当前未读的消息
+  const unreadCount = Object.values(unreadMsg).length && Object.values(unreadMsg).reduce((prev, next) => prev + next) || 0
+  console.log(unreadCount)
+  // 将指定项变成已读状态
   const changeReadState = (id: string) => {
     setNotices(
       notices.map((item) => {
@@ -94,8 +97,9 @@ const NoticeIconView: React.FC = () => {
       }),
     );
   };
-
+  // 清空指定类型的未读
   const clearReadState = (title: string, key: string) => {
+    console.log(title, key)
     setNotices(
       notices.map((item) => {
         const notice = { ...item };
@@ -111,7 +115,8 @@ const NoticeIconView: React.FC = () => {
   return (
     <NoticeIcon
       className={styles.action}
-      count={currentUser && currentUser.unreadCount}
+      // 但用用户不存在的时候 此时就是不会有数字 用户存在 此时就肯定能够读取到最后一位
+      count={currentUser && currentUser.unreadCount && unreadCount}
       onItemClick={(item) => {
         changeReadState(item.id!);
       }}

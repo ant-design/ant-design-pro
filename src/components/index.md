@@ -94,15 +94,15 @@ export default () => {
 
 ### API
 
-| 参数            | 说明                               | 类型                         | 默认值 |
+| 参数            | 说明                                | 类型                         | 默认值 |
 | --------------- | ---------------------------------- | ---------------------------- | ------ |
-| value           | 输入框的值                         | `string`                     | -      |
-| onChange        | 值修改后触发                       | `(value?: string) => void`   | -      |
-| onSearch        | 查询后触发                         | `(value?: string) => void`   | -      |
-| options         | 选项菜单的的列表                   | `{label,value}[]`            | -      |
-| defaultVisible  | 输入框默认是否显示，只有第一次生效 | `boolean`                    | -      |
-| visible         | 输入框是否显示                     | `boolean`                    | -      |
-| onVisibleChange | 输入框显示隐藏的回调函数           | `(visible: boolean) => void` | -      |
+| value           | 输入框的值                           | `string`                     | -      |
+| onChange        | 值修改后触发                         | `(value?: string) => void`   | -      |
+| onSearch        | 查询后触发                           | `(value?: string) => void`   | -      |
+| options         | 选项菜单的的列表                      | `{label,value}[]`            | -      |
+| defaultVisible  | 输入框默认是否显示，只有第一次生效       | `boolean`                    | -      |
+| visible         | 输入框是否显示                        | `boolean`                    | -      |
+| onVisibleChange | 输入框显示隐藏的回调函数               | `(visible: boolean) => void` | -      |
 
 ## NoticeIcon 通知工具
 

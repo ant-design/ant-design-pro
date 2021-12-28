@@ -6,7 +6,7 @@ import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import { BookOutlined, LinkOutlined, StepBackwardOutlined } from '@ant-design/icons';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -17,13 +17,15 @@ export const initialStateConfig = {
 };
 
 /**
- * 会在一开始的时候 就执行
+ * 会在一开始的时候
+ * 在其他界面进行使用的时候 就是需要配合 useModel('@@initialState')进行使用
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
   loading?: boolean;
+  // 获取当前用户信息
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   /**
@@ -54,14 +56,19 @@ export async function getInitialState(): Promise<{
   };
 }
 
+// 整体的界面布局
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
+    // 就是侧边栏对应的logo
+    logo: <StepBackwardOutlined style={{ color: 'red' }} />,
+    // 表示右侧头部的区域
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
-    waterMarkProps: {
-      content: initialState?.currentUser?.name,
-    },
+    // 配置界面水印
+    // waterMarkProps: {
+    //   content: 'fuck',
+    // },
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;
@@ -70,6 +77,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         history.push(loginPath);
       }
     },
+    // 此时就是
     links: isDev
       ? [
           <Link to="/umi/plugin/openapi" target="_blank">
