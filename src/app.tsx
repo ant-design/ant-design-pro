@@ -17,6 +17,7 @@ export const initialStateConfig = {
 };
 
 /**
+ * 会在一开始的时候 就执行
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<{
@@ -25,7 +26,6 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
-  console.log(111);
   /**
    * 获取当前用户信息
    * @returns
