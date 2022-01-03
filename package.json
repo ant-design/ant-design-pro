@@ -37,8 +37,8 @@
     "start:pre": "cross-env REACT_APP_ENV=pre UMI_ENV=dev umi dev",
     "start:test": "cross-env REACT_APP_ENV=test MOCK=none UMI_ENV=dev umi dev",
     "test": "umi test",
-    "test:e2e": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
+    "test:e2e": "node ./tests/run-tests.js",
     "tsc": "tsc --noEmit"
   },
   "lint-staged": {
@@ -71,8 +71,7 @@
     "react-dev-inspector": "^1.7.0",
     "react-dom": "^17.0.0",
     "react-helmet-async": "^1.2.0",
-    "umi": "^3.5.0",
-    "umi-serve": "^1.9.10"
+    "umi": "^3.5.0"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^2.1.0",
@@ -108,7 +107,8 @@
     "puppeteer-core": "^8.0.0",
     "stylelint": "^13.0.0",
     "swagger-ui-react": "^3.52.0",
-    "typescript": "^4.5.0"
+    "typescript": "^4.5.0",
+    "umi-serve": "^1.9.10"
   },
   "engines": {
     "node": ">=10.0.0"
