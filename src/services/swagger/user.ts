@@ -1,9 +1,10 @@
 // @ts-ignore
 /* eslint-disable */
 import { request } from 'umi';
+import type { RequestOptionsInit } from 'umi-request';
 
 /** Create user This can only be done by the logged in user. POST /user */
-export async function createUser(body: API.User, options: { [key: string]: any } = {}) {
+export async function createUser(body: API.User, options: RequestOptionsInit = {}) {
   return request<any>('/user', {
     method: 'POST',
     data: body,
@@ -14,7 +15,7 @@ export async function createUser(body: API.User, options: { [key: string]: any }
 /** Creates list of users with given input array POST /user/createWithArray */
 export async function createUsersWithArrayInput(
   body: API.User[],
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   return request<any>('/user/createWithArray', {
     method: 'POST',
@@ -24,10 +25,7 @@ export async function createUsersWithArrayInput(
 }
 
 /** Creates list of users with given input array POST /user/createWithList */
-export async function createUsersWithListInput(
-  body: API.User[],
-  options: { [key: string]: any } = {},
-) {
+export async function createUsersWithListInput(body: API.User[], options: RequestOptionsInit = {}) {
   return request<any>('/user/createWithList', {
     method: 'POST',
     data: body,
@@ -44,7 +42,7 @@ export async function loginUser(
     /** The password for login in clear text */
     password: string;
   },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   return request<string>('/user/login', {
     method: 'GET',
@@ -56,7 +54,7 @@ export async function loginUser(
 }
 
 /** Logs out current logged in user session GET /user/logout */
-export async function logoutUser(options: { [key: string]: any } = {}) {
+export async function logoutUser(options: RequestOptionsInit = {}) {
   return request<any>('/user/logout', {
     method: 'GET',
     ...options,
@@ -70,7 +68,7 @@ export async function getUserByName(
     /** The name that needs to be fetched. Use user1 for testing.  */
     username: string;
   },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   const { username: param0 } = params;
   return request<API.User>(`/user/${param0}`, {
@@ -88,7 +86,7 @@ export async function updateUser(
     username: string;
   },
   body: API.User,
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   const { username: param0 } = params;
   return request<any>(`/user/${param0}`, {
@@ -106,7 +104,7 @@ export async function deleteUser(
     /** The name that needs to be deleted */
     username: string;
   },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   const { username: param0 } = params;
   return request<any>(`/user/${param0}`, {

@@ -1,9 +1,10 @@
 // @ts-ignore
 /* eslint-disable */
 import { request } from 'umi';
+import type { RequestOptionsInit } from 'umi-request';
 
 /** Returns pet inventories by status Returns a map of status codes to quantities GET /store/inventory */
-export async function getInventory(options: { [key: string]: any } = {}) {
+export async function getInventory(options: RequestOptionsInit = {}) {
   return request<Record<string, any>>('/store/inventory', {
     method: 'GET',
     ...options,
@@ -11,7 +12,7 @@ export async function getInventory(options: { [key: string]: any } = {}) {
 }
 
 /** Place an order for a pet POST /store/order */
-export async function placeOrder(body: API.Order, options: { [key: string]: any } = {}) {
+export async function placeOrder(body: API.Order, options: RequestOptionsInit = {}) {
   return request<API.Order>('/store/order', {
     method: 'POST',
     data: body,
@@ -26,7 +27,7 @@ export async function getOrderById(
     /** ID of pet that needs to be fetched */
     orderId: number;
   },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   const { orderId: param0 } = params;
   return request<API.Order>(`/store/order/${param0}`, {
@@ -43,7 +44,7 @@ export async function deleteOrder(
     /** ID of the order that needs to be deleted */
     orderId: number;
   },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   const { orderId: param0 } = params;
   return request<any>(`/store/order/${param0}`, {

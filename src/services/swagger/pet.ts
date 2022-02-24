@@ -1,9 +1,10 @@
 // @ts-ignore
 /* eslint-disable */
 import { request } from 'umi';
+import type { RequestOptionsInit } from 'umi-request';
 
 /** Update an existing pet PUT /pet */
-export async function updatePet(body: API.Pet, options: { [key: string]: any } = {}) {
+export async function updatePet(body: API.Pet, options: RequestOptionsInit = {}) {
   return request<any>('/pet', {
     method: 'PUT',
     headers: {
@@ -15,7 +16,7 @@ export async function updatePet(body: API.Pet, options: { [key: string]: any } =
 }
 
 /** Add a new pet to the store POST /pet */
-export async function addPet(body: API.Pet, options: { [key: string]: any } = {}) {
+export async function addPet(body: API.Pet, options: RequestOptionsInit = {}) {
   return request<any>('/pet', {
     method: 'POST',
     headers: {
@@ -33,7 +34,7 @@ export async function findPetsByStatus(
     /** Status values that need to be considered for filter */
     status: 'available' | 'pending' | 'sold'[];
   },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   return request<API.Pet[]>('/pet/findByStatus', {
     method: 'GET',
@@ -52,7 +53,7 @@ export async function findPetsByTags(
     /** Tags to filter by */
     tags: string[];
   },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   return request<API.Pet[]>('/pet/findByTags', {
     method: 'GET',
@@ -71,7 +72,7 @@ export async function getPetById(
     /** ID of pet to return */
     petId: number;
   },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   const { petId: param0 } = params;
   return request<API.Pet>(`/pet/${param0}`, {
@@ -90,7 +91,7 @@ export async function updatePetWithForm(
     petId: number;
   },
   body: { name?: string; status?: string },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   const { petId: param0 } = params;
   const formData = new FormData();
@@ -123,7 +124,7 @@ export async function deletePet(
     /** Pet id to delete */
     petId: number;
   },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   const { petId: param0 } = params;
   return request<any>(`/pet/${param0}`, {
@@ -141,7 +142,7 @@ export async function uploadFile(
     petId: number;
   },
   body: { additionalMetadata?: string; file?: string },
-  options: { [key: string]: any } = {},
+  options: RequestOptionsInit = {},
 ) {
   const { petId: param0 } = params;
   const formData = new FormData();
