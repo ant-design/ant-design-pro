@@ -55,10 +55,11 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@ant-design/pro-card": "^1.19.0",
     "@ant-design/pro-descriptions": "^1.10.0",
-    "@ant-design/pro-form": "^1.53.0",
-    "@ant-design/pro-layout": "^6.32.0",
-    "@ant-design/pro-table": "^2.63.0",
+    "@ant-design/pro-form": "^1.60.0",
+    "@ant-design/pro-layout": "^6.34.0",
+    "@ant-design/pro-table": "^2.69.0",
     "@umijs/route-utils": "^2.0.0",
     "antd": "^4.18.0",
     "classnames": "^2.3.0",
@@ -92,26 +93,22 @@
     "@umijs/preset-dumi": "^1.1.0",
     "@umijs/preset-react": "^1.8.17",
     "@umijs/yorkie": "^2.0.5",
-    "carlo": "^0.9.46",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.3.0",
     "detect-installer": "^1.0.0",
-    "enzyme": "^3.11.0",
     "eslint": "^7.32.0",
-    "express": "^4.17.0",
     "gh-pages": "^3.2.0",
     "jsdom-global": "^3.0.0",
     "lint-staged": "^10.0.0",
     "mockjs": "^1.1.0",
     "prettier": "^2.5.0",
-    "puppeteer-core": "^8.0.0",
     "stylelint": "^13.0.0",
     "swagger-ui-react": "^3.52.0",
     "typescript": "^4.5.0",
     "umi-serve": "^1.9.10"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "create-umi": {
     "ignoreScript": [
