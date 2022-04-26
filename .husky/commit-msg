@@ -1,0 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Export Git hook params
+export GIT_PARAMS=$*
+
+npx --no-install fabric verify-commit

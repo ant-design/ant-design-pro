@@ -2,7 +2,7 @@ import { useIntl } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-layout';
 
-export default () => {
+const Footer: React.FC = () => {
   const intl = useIntl();
   const defaultMessage = intl.formatMessage({
     id: 'app.copyright.produced',
@@ -37,3 +37,5 @@ export default () => {
     />
   );
 };
+
+export default Footer;

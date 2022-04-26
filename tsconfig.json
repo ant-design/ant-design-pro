@@ -26,6 +26,7 @@
   "include": [
     "mock/**/*",
     "src/**/*",
+    "playwright.config.ts",
     "tests/**/*",
     "test/**/*",
     "__test__/**/*",

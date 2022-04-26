@@ -316,9 +316,13 @@ export default defineConfig({
       component: '404',
     },
   ],
+  access: {},
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
-    'primary-color': defaultSettings.primaryColor,
+    // 如果不想要 configProvide 动态设置主题需要把这个设置为 default
+    // 只有设置为 variable， 才能使用 configProvide 动态设置主色调
+    // https://ant.design/docs/react/customize-theme-variable-cn
+    'root-entry-name': 'variable',
   },
   // esbuild is father build tools
   // https://umijs.org/plugins/plugin-esbuild
