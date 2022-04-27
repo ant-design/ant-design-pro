@@ -61,7 +61,7 @@
     "@ant-design/pro-layout": "^6.35.0",
     "@ant-design/pro-table": "^2.71.0",
     "@umijs/route-utils": "^2.0.0",
-    "antd": "^4.19.0",
+    "antd": "^4.20.0",
     "classnames": "^2.3.0",
     "lodash": "^4.17.0",
     "moment": "^2.29.0",
