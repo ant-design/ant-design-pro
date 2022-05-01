@@ -1,0 +1,29 @@
+// 自定义全局样式
+
+/* .ant-card {
+  margin-top: 10px !important;
+  border-radius: 7px !important;
+}
+
+.ant-pro-setting-drawer-handle {
+  top: 300px !important;
+  width: 32px !important;
+  height: 32px !important;
+} */
+
+// 滚动条样式,仅在基于 Blink 或 WebKit 的浏览器(例如:Chrome、Edge、Opera、Safari、iOS 上所有的浏览器,以及其它基于 WebKit 的浏览器)上可用
+// 参考链接:https://developer.mozilla.org/zh-CN/docs/Web/CSS/::-webkit-scrollbar  https://mdbootstrap.com/snippets/standard/marveluck/3498209/?utm_source=GitHub&utm_medium=PerfectScrollbar
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: @primary-color;
+  border-radius: 6px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
