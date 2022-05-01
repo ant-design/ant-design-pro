@@ -1,12 +1,13 @@
-import React, { useCallback } from 'react';
+import { Avatar, Menu, MenuProps, Spin } from 'antd';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Menu, Spin } from 'antd';
+import React, { useCallback } from 'react';
 import { history, useModel } from 'umi';
-import { stringify } from 'querystring';
+
 import HeaderDropdown from '../HeaderDropdown';
-import styles from './index.less';
-import { outLogin } from '@/services/ant-design-pro/api';
 import type { MenuInfo } from 'rc-menu/lib/interface';
+import { outLogin } from '@/services/ant-design-pro/api';
+import { stringify } from 'querystring';
+import styles from './index.less';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -24,8 +25,8 @@ const loginOut = async () => {
     history.replace({
       pathname: '/user/login',
       search: stringify({
-        redirect: pathname + search,
-      }),
+        redirect: pathname + search
+      })
     });
   }
 };
@@ -37,13 +38,13 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
     (event: MenuInfo) => {
       const { key } = event;
       if (key === 'logout') {
-        setInitialState((s) => ({ ...s, currentUser: undefined }));
+        setInitialState(s => ({ ...s, currentUser: undefined }));
         loginOut();
         return;
       }
       history.push(`/account/${key}`);
     },
-    [setInitialState],
+    [setInitialState]
   );
 
   const loading = (
@@ -52,7 +53,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
         size="small"
         style={{
           marginLeft: 8,
-          marginRight: 8,
+          marginRight: 8
         }}
       />
     </span>
@@ -68,28 +69,34 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
     return loading;
   }
 
-  const menuHeaderDropdown = (
-    <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-      {menu && (
-        <Menu.Item key="center">
-          <UserOutlined />
-          个人中心
-        </Menu.Item>
-      )}
-      {menu && (
-        <Menu.Item key="settings">
-          <SettingOutlined />
-          个人设置
-        </Menu.Item>
-      )}
-      {menu && <Menu.Divider />}
+  const dynamicItems: MenuProps['items'] = menu
+    ? [
+        {
+          key: 'center',
+          icon: <UserOutlined />,
+          label: '个人中心'
+        },
+        {
+          key: 'settings',
+          icon: <SettingOutlined />,
+          label: '个人设置'
+        },
+        {
+          type: 'divider'
+        }
+      ]
+    : [];
 
-      <Menu.Item key="logout">
-        <LogoutOutlined />
-        退出登录
-      </Menu.Item>
-    </Menu>
-  );
+  const menuItems: MenuProps['items'] = [
+    ...dynamicItems,
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: '退出登录'
+    }
+  ];
+
+  const menuHeaderDropdown = <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick} items={menuItems} />;
   return (
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
