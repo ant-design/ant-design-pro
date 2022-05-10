@@ -69,14 +69,10 @@ const BaseView: React.FC = () => {
               layout="vertical"
               onFinish={handleFinish}
               submitter={{
-                resetButtonProps: {
-                  style: {
-                    display: 'none',
-                  },
+                searchConfig: {
+                  submitText: '更新基本信息',
                 },
-                submitButtonProps: {
-                  children: '更新基本信息',
-                },
+                render: (_, dom) => dom[1],
               }}
               initialValues={{
                 ...currentUser,
