@@ -72,6 +72,7 @@
     "react-dev-inspector": "^1.7.0",
     "react-dom": "^17.0.0",
     "react-helmet-async": "^1.2.0",
+    "swagger-ui-react": "^4.11.0",
     "umi": "^3.5.0"
   },
   "devDependencies": {
