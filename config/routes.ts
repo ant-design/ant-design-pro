@@ -24,7 +24,6 @@
     name: 'admin',
     icon: 'crown',
     access: 'canAdmin',
-    component: './Admin',
     routes: [
       {
         path: '/admin/sub-page',
