@@ -72,7 +72,6 @@
     "react-dev-inspector": "^1.7.0",
     "react-dom": "^17.0.0",
     "react-helmet-async": "^1.2.0",
-    "swagger-ui-react": "^4.11.0",
     "umi": "^3.5.0"
   },
   "devDependencies": {
@@ -104,7 +103,7 @@
     "mockjs": "^1.1.0",
     "prettier": "^2.5.0",
     "stylelint": "^13.0.0",
-    "swagger-ui-react": "^3.52.0",
+    "swagger-ui-react": "^4.11.0",
     "typescript": "^4.5.0",
     "umi-serve": "^1.9.10"
   },
