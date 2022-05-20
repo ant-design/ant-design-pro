@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react';
+import { outLogin } from '@/services/ant-design-pro/api';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
-import { history, useModel } from 'umi';
+import type { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { stringify } from 'querystring';
+import type { MenuInfo } from 'rc-menu/lib/interface';
+import React, { useCallback } from 'react';
+import { history, useModel } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
-import { outLogin } from '@/services/ant-design-pro/api';
-import type { MenuInfo } from 'rc-menu/lib/interface';
-import type { ItemType } from 'antd/lib/menu/hooks/useItems';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;

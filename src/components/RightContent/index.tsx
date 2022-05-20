@@ -1,9 +1,9 @@
-import { Space } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Space } from 'antd';
 import React from 'react';
-import { useModel, SelectLang } from 'umi';
-import Avatar from './AvatarDropdown';
+import { SelectLang, useModel } from 'umi';
 import HeaderSearch from '../HeaderSearch';
+import Avatar from './AvatarDropdown';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';
