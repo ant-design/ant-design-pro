@@ -21,9 +21,7 @@ export default {
   'pages.login.submit': 'ログイン',
   'pages.login.loginWith': 'その他のログイン方法：',
   'pages.login.registerAccount': 'アカウント登録',
-  'pages.welcome.advancedComponent': '高度なコンポーネント',
   'pages.welcome.link': 'ようこそ',
-  'pages.welcome.advancedLayout': '高度なレイアウト',
   'pages.welcome.alertMessage': 'より高速で強力な頑丈なコンポーネントがリリースされました。',
   'pages.admin.subPage.title': 'このページは管理者のみが表示できます',
   'pages.admin.subPage.alertMessage':

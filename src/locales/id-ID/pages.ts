@@ -21,9 +21,7 @@ export default {
   'pages.login.submit': 'Masuk',
   'pages.login.loginWith': 'Masuk dengan :',
   'pages.login.registerAccount': 'Daftar Akun',
-  'pages.welcome.advancedComponent': 'Formulir Lanjutan',
   'pages.welcome.link': 'Selamat datang',
-  'pages.welcome.advancedLayout': 'Tata letak Lanjutan',
   'pages.welcome.alertMessage':
     'Komponen heavy-duty yang lebih cepat dan lebih kuat telah dirilis.',
   'pages.admin.subPage.title': 'Halaman ini hanya dapat dilihat oleh admin',

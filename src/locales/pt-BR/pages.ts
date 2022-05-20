@@ -21,9 +21,7 @@ export default {
   'pages.login.submit': 'Enviar',
   'pages.login.loginWith': 'Login com :',
   'pages.login.registerAccount': 'Registra Conta',
-  'pages.welcome.advancedComponent': 'Componente Avançado',
   'pages.welcome.link': 'Bem-vindo',
-  'pages.welcome.advancedLayout': 'Layout Avançado',
   'pages.welcome.alertMessage': 'Componentes pesados mais rápidos e mais fortes foram lançados.',
   'pages.admin.subPage.title': 'Esta página só pode ser vista pelo Admin',
   'pages.admin.subPage.alertMessage':

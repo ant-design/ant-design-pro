@@ -23,9 +23,7 @@ export default {
   'pages.login.submit': 'প্রবেশ করুন',
   'pages.login.loginWith': 'লগইন করতে পারেন:',
   'pages.login.registerAccount': 'অ্যাকাউন্ট নিবন্ধন করুন',
-  'pages.welcome.advancedComponent': 'অ্যাডভান্সড কম্পোনেন্ট',
   'pages.welcome.link': 'স্বাগতম',
-  'pages.welcome.advancedLayout': 'অ্যাডভান্সড লেআউট',
   'pages.welcome.alertMessage': 'দ্রুত এবং শক্তিশালী ভারী শুল্ক উপাদান প্রকাশ করা হয়েছে।',
   'pages.admin.subPage.title': 'এই পৃষ্ঠাটি কেবল অ্যাডমিন দ্বারা দেখা যাবে',
   'pages.admin.subPage.alertMessage':

@@ -20,9 +20,7 @@ export default {
   'pages.login.submit': 'ارسال',
   'pages.login.loginWith': 'وارد شوید با :',
   'pages.login.registerAccount': 'ثبت نام',
-  'pages.welcome.advancedComponent': 'مولفه پیشرفته',
   'pages.welcome.link': 'خوش آمدید',
-  'pages.welcome.advancedLayout': 'چیدمان پیشرفته',
   'pages.welcome.alertMessage': 'اجزای سنگین تر سریعتر و قوی تر آزاد شده اند.',
   'pages.admin.subPage.title': 'این صفحه فقط توسط مدیر قابل مشاهده است',
   'pages.admin.subPage.alertMessage':

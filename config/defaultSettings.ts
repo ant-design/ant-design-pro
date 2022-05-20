@@ -1,4 +1,4 @@
-import { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import { Settings as LayoutSettings } from '@ant-design/pro-components';
 
 const Settings: LayoutSettings & {
   pwa?: boolean;
