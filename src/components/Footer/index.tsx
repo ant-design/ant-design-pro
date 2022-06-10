@@ -1,6 +1,6 @@
 import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-components';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 
 const Footer: React.FC = () => {
   const intl = useIntl();
