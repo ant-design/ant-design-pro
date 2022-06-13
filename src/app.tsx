@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
@@ -66,10 +66,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
           <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
             <LinkOutlined />
             <span>OpenAPI 文档</span>
-          </Link>,
-          <Link to="/~docs" key="docs">
-            <BookOutlined />
-            <span>业务组件文档</span>
           </Link>,
         ]
       : [],
