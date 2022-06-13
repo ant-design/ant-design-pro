@@ -4,8 +4,8 @@
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
-    "analyze": "cross-env ANALYZE=1 max  build",
-    "build": "max  build",
+    "analyze": "cross-env ANALYZE=1 max build",
+    "build": "max build",
     "deploy": "npm run build && npm run gh-pages",
     "dev": "npm run start:dev",
     "docker-hub:build": "docker build  -f Dockerfile.hub -t  ant-design-pro ./",
@@ -24,7 +24,7 @@
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "openapi": "max  openapi",
+    "openapi": "max openapi",
     "playwright": "playwright install && playwright test",
     "prettier": "prettier -c --write \"src/**/*\"",
     "serve": "umi-serve",
@@ -34,8 +34,8 @@
     "start:no-ui": "cross-env UMI_UI=none UMI_ENV=dev max dev",
     "start:pre": "cross-env REACT_APP_ENV=pre UMI_ENV=dev max dev",
     "start:test": "cross-env REACT_APP_ENV=test MOCK=none UMI_ENV=dev max dev",
-    "test": "max  test",
-    "test:component": "max  test ./src/components",
+    "test": "max test",
+    "test:component": "max test ./src/components",
     "test:e2e": "node ./tests/run-tests.js",
     "tsc": "tsc --noEmit",
     "prepare": "husky install"
@@ -66,10 +66,10 @@
     "react": "^17.0.0",
     "react-dev-inspector": "^1.7.0",
     "react-dom": "^17.0.0",
-    "react-helmet-async": "^1.2.0"
+    "react-helmet-async": "^1.2.0",
+    "umi-presets-pro": "1.0.1"
   },
   "devDependencies": {
-    "@umijs/max": "^4.0.0-rc.22",
     "@ant-design/pro-cli": "^2.1.0",
     "@playwright/test": "^1.17.0",
     "@types/classnames": "^2.3.1",
@@ -81,6 +81,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
     "@umijs/fabric": "^2.11.1",
+    "@umijs/max": "^4.0.0-rc.22",
     "@umijs/openapi": "^1.3.0",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.3.0",
