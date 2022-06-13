@@ -98,14 +98,6 @@ $ npm install
 $ npm start         # visit http://localhost:8000
 ```
 
-### Use Gitpod
-
-Abra o projeto no Gitpod (ambiente gratuito de desenvolvimento online para o GitHub) e comece a codificar imediatamente.
-
-[![Abra no Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/ant-design-pro)
-
-Mais instruções na [documentação](http://pro.ant.design/docs/getting-started).
-
 ## Suporte a navegadores
 
 Navegadores modernos e IE11.

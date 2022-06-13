@@ -109,14 +109,6 @@ $ npm start         # visit http://localhost:8000
 
 <div dir="rtl">
 
-### استخدام ال Gitpod
-
-افتح المشروع في Gitpod (بيئة تطوير مجانية عبر الإنترنت لـ GitHub) وابدأ بكتابة الكود على الفور.
-
-[![افتح في Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/ant-design-pro)
-
-المزيد من التعليمات في [توثيق](http://pro.ant.design/docs/getting-started).
-
 ## دعم المتصفحات
 
 المتصفحات الحديثة و IE11.

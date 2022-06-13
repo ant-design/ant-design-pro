@@ -96,14 +96,6 @@ $ npm install
 $ npm start         # http://localhost:8000 を開く
 ```
 
-### Gitpod を使う方法
-
-Gitpod（GitHub 用の無料オンライン開発環境）でプロジェクトを開き、すぐにコーディングを開始できます。
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/ant-design-pro)
-
-その他の指示は [ドキュメント](http://pro.ant.design/docs/getting-started) を確認してください。
-
 ## サポートするブラウザー
 
 モダンなブラウザと IE11。

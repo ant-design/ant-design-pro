@@ -98,14 +98,6 @@ $ npm install
 $ npm start         # visit http://localhost:8000
 ```
 
-### Gitpod ile
-
-Projeyi Gitpod'da (GitHub için ücretsiz geliştirme ortamı) açın ve anında kodlamaya başlayın.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ant-design/ant-design-pro)
-
-Daha fazla talimat için [dokümantasyon](http://pro.ant.design/docs/getting-started) sayfasına göz atın.
-
 ## Tarayıcı desteği
 
 Modern internet tarayıcıları ve IE11.
