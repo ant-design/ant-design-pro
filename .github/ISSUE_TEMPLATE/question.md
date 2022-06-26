@@ -1,25 +1,7 @@
 ---
-name: '疑问或需要帮助 ❓'
-about: 对 Ant Design Pro 使用的疑问或需要帮助
-title: '🧐[问题]'
-labels: '🧐question'
+name: unit testing
+about:  unit test full component including umi , redux , store
+title: Can you give example of unit testing of a full component including umi , redux , store?
+labels: unit testing
 assignees: ''
----
 
-### 🧐 问题描述
-
-<!--
-详细地描述问题，让大家都能理解
--->
-
-### 💻 示例代码
-
-<!--
-如果你有解决方案，在这里清晰地阐述
--->
-
-### 🚑 其他信息
-
-<!--
-如截图等其他信息可以贴在这里
--->
