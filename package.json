@@ -4,6 +4,7 @@
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
+    "postinstall": "max setup",
     "analyze": "cross-env ANALYZE=1 max build",
     "build": "max build",
     "deploy": "npm run build && npm run gh-pages",
