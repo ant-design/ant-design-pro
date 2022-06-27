@@ -1,7 +1,6 @@
 // https://umijs.org/config/
-import { defineConfig } from 'umi';
+import { defineConfig } from '@umijs/max';
 import { join } from 'path';
-
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
@@ -11,9 +10,9 @@ const { REACT_APP_ENV } = process.env;
 export default defineConfig({
   hash: true,
   antd: {},
-  dva: {
-    hmr: true,
-  },
+  request: {},
+  initialState: {},
+  model: {},
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
     locale: true,
@@ -28,9 +27,7 @@ export default defineConfig({
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,
   },
-  dynamicImport: {
-    loading: '@ant-design/pro-layout/es/PageLoading',
-  },
+
   targets: {
     ie: 11,
   },
@@ -44,33 +41,26 @@ export default defineConfig({
     // https://ant.design/docs/react/customize-theme-variable-cn
     'root-entry-name': 'variable',
   },
-  // esbuild is father build tools
-  // https://umijs.org/plugins/plugin-esbuild
-  esbuild: {},
-  title: false,
   ignoreMomentLocale: true,
   proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
   },
   // Fast Refresh 热更新
-  fastRefresh: {},
+  fastRefresh: true,
+  presets: ['umi-presets-pro'],
   openAPI: [
     {
-      requestLibPath: "import { request } from 'umi'",
+      requestLibPath: "import { request } from '@umijs/max'",
       // 或者使用在线的版本
       // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
       schemaPath: join(__dirname, 'oneapi.json'),
       mock: false,
     },
     {
-      requestLibPath: "import { request } from 'umi'",
+      requestLibPath: "import { request } from '@umijs/max'",
       schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
       projectName: 'swagger',
     },
   ],
-  nodeModulesTransform: { type: 'none' },
-  mfsu: {},
-  webpack5: {},
-  exportStatic: {},
 });

@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import { request } from 'umi';
+import { request } from '@umijs/max';
 
 /** Returns pet inventories by status Returns a map of status codes to quantities GET /store/inventory */
 export async function getInventory(options?: { [key: string]: any }) {
@@ -21,34 +21,28 @@ export async function placeOrder(body: API.Order, options?: { [key: string]: any
 
 /** Find purchase order by ID For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions GET /store/order/${param0} */
 export async function getOrderById(
-  params: {
-    // path
-    /** ID of pet that needs to be fetched */
-    orderId: number;
-  },
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getOrderByIdParams,
   options?: { [key: string]: any },
 ) {
-  const { orderId: param0 } = params;
+  const { orderId: param0, ...queryParams } = params;
   return request<API.Order>(`/store/order/${param0}`, {
     method: 'GET',
-    params: { ...params },
+    params: { ...queryParams },
     ...(options || {}),
   });
 }
 
 /** Delete purchase order by ID For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors DELETE /store/order/${param0} */
 export async function deleteOrder(
-  params: {
-    // path
-    /** ID of the order that needs to be deleted */
-    orderId: number;
-  },
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.deleteOrderParams,
   options?: { [key: string]: any },
 ) {
-  const { orderId: param0 } = params;
+  const { orderId: param0, ...queryParams } = params;
   return request<any>(`/store/order/${param0}`, {
     method: 'DELETE',
-    params: { ...params },
+    params: { ...queryParams },
     ...(options || {}),
   });
 }
