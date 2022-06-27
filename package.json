@@ -33,7 +33,6 @@
     "tsc": "tsc --noEmit"
   },
   "lint-staged": {
-    "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
@@ -84,7 +83,6 @@
     "lint-staged": "^10.0.0",
     "mockjs": "^1.1.0",
     "prettier": "^2.5.0",
-    "stylelint": "^13.0.0",
     "swagger-ui-dist": "^4.12.0",
     "typescript": "^4.5.0",
     "umi-presets-pro": "1.0.1",
