@@ -85,7 +85,7 @@
     "prettier": "^2.5.0",
     "swagger-ui-dist": "^4.12.0",
     "typescript": "^4.5.0",
-    "umi-presets-pro": "1.0.1",
+    "umi-presets-pro": "^1.0.1",
     "umi-serve": "^1.9.10"
   },
   "engines": {
