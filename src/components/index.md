@@ -206,7 +206,7 @@ export default () => {
 ### NoticeIconData
 
 ```tsx | pure
-export interface NoticeIconData {
+export type NoticeIconData {
   id: string;
   key: string;
   avatar: string;
