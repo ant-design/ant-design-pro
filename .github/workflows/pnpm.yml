@@ -20,6 +20,7 @@ jobs:
           node-version: ${{ matrix.node_version }}
       - run: echo ${{github.ref}}
       - run: npm install pnpm -g
+      - run: pnpm -i
       - run: pnpm run lint
       - run: pnpm run tsc
       - run: pnpm run build
