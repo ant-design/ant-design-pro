@@ -12,9 +12,9 @@ permissions:
 jobs:
   success:
     permissions:
-      actions: read  # for dawidd6/action-download-artifact to query and download artifacts
-      issues: write  # for actions-cool/maintain-one-comment to modify or create issue comments
-      pull-requests: write  # for actions-cool/maintain-one-comment to modify or create PR comments
+      actions: read # for dawidd6/action-download-artifact to query and download artifacts
+      issues: write # for actions-cool/maintain-one-comment to modify or create issue comments
+      pull-requests: write # for actions-cool/maintain-one-comment to modify or create PR comments
     runs-on: ubuntu-latest
     if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
     steps:
@@ -70,9 +70,9 @@ jobs:
 
   failed:
     permissions:
-      actions: read  # for dawidd6/action-download-artifact to query and download artifacts
-      issues: write  # for actions-cool/maintain-one-comment to modify or create issue comments
-      pull-requests: write  # for actions-cool/maintain-one-comment to modify or create PR comments
+      actions: read # for dawidd6/action-download-artifact to query and download artifacts
+      issues: write # for actions-cool/maintain-one-comment to modify or create issue comments
+      pull-requests: write # for actions-cool/maintain-one-comment to modify or create PR comments
     runs-on: ubuntu-latest
     if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'failure'
     steps:
