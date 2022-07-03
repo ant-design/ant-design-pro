@@ -20,6 +20,10 @@ export default {
       changeOrigin: true,
     },
   },
+  /**
+   * @name 详细的代理配置
+   * @doc https://github.com/chimurai/http-proxy-middleware
+   */
   test: {
     '/api/': {
       target: 'https://proapi.azurewebsites.net',
