@@ -3,6 +3,8 @@ export default {
     'Ant Design é a especificação de web design mais influente no distrito de Xihu',
   'pages.login.accountLogin.tab': 'Login da conta',
   'pages.login.accountLogin.errorMessage': 'usuário/senha incorreto(admin/ant.design)',
+  'pages.login.failure': 'Login falhou, por favor tente novamente!',
+  'pages.login.success': 'Login efetuado com sucesso!',
   'pages.login.username.placeholder': 'Usuário: admin or user',
   'pages.login.username.required': 'Por favor insira seu usuário!',
   'pages.login.password.placeholder': 'Senha: ant.design',
