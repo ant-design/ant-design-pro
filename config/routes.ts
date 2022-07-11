@@ -18,9 +18,6 @@ export default [
         path: '/user/login',
         component: './User/Login',
       },
-      {
-        component: './404',
-      },
     ],
   },
   {
@@ -41,9 +38,6 @@ export default [
         icon: 'smile',
         component: './Welcome',
       },
-      {
-        component: './404',
-      },
     ],
   },
   {
@@ -57,6 +51,7 @@ export default [
     redirect: '/welcome',
   },
   {
+    path: '*',
     component: './404',
   },
 ];
