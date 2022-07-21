@@ -18,7 +18,7 @@ export type GlobalHeaderRightProps = {
  */
 const loginOut = async () => {
   await outLogin();
-  const { search, pathname } = history.location;
+  const { search, pathname } = window.location;
   const urlParams = new URL(window.location.href).searchParams;
   /** 此方法会跳转到 redirect 参数所在的位置 */
   const redirect = urlParams.get('redirect');
