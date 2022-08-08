@@ -1,6 +1,5 @@
-﻿import type { Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-const { uniq } = require('lodash');
 const RouterConfig = require('../../config/routes').default;
 
 const BASE_URL = `http://localhost:${process.env.PORT || 8001}`;
@@ -21,7 +20,7 @@ function formatter(routes: any, parentPath = ''): string[] {
       );
     }
   });
-  return uniq(result.filter((item) => !!item));
+  return [...new Set(result.filter((item) => !!item))];
 }
 
 const testPage = (path: string, page: Page) => async () => {
