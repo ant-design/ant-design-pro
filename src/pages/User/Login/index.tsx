@@ -108,7 +108,7 @@ const Login: React.FC = () => {
             await handleSubmit(values as API.LoginParams);
           }}
         >
-          <Tabs activeKey={type} onChange={setType}>
+          <Tabs activeKey={type} onChange={setType} centered>
             <Tabs.TabPane
               key="account"
               tab={intl.formatMessage({
