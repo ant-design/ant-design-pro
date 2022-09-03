@@ -17,6 +17,15 @@
   height: 48px;
   margin-left: auto;
   overflow: hidden;
+
+  .name {
+    width: 40px;
+    height: 48px;
+    overflow: hidden;
+    line-height: 48px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
   .action {
     display: flex;
     align-items: center;
@@ -46,17 +55,6 @@
       color: @primary-color;
       vertical-align: top;
       background: rgba(255, 255, 255, 0.85);
-    }
-  }
-}
-
-.dark {
-  .action {
-    &:hover {
-      background: #252a3d;
-    }
-    &:global(.opened) {
-      background: #252a3d;
     }
   }
 }

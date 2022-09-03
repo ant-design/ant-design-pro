@@ -39,7 +39,7 @@ startServer.stdout.on('data', (data) => {
       },
     );
     testCmd.on('exit', (code) => {
-      console.log(code);
+      console.log('服务已经退出，退出码：', code);
       startServer.kill();
       process.exit(code);
     });

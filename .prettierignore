@@ -1,5 +1,4 @@
 **/*.svg
-package.json
 .umi
 .umi-production
 /dist

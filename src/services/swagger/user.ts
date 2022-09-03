@@ -1,12 +1,56 @@
 // @ts-ignore
 /* eslint-disable */
-import { request } from 'umi';
+import { request } from '@umijs/max';
 
 /** Create user This can only be done by the logged in user. POST /user */
 export async function createUser(body: API.User, options?: { [key: string]: any }) {
   return request<any>('/user', {
     method: 'POST',
     data: body,
+    ...(options || {}),
+  });
+}
+
+/** Get user by user name GET /user/${param0} */
+export async function getUserByName(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getUserByNameParams,
+  options?: { [key: string]: any },
+) {
+  const { username: param0, ...queryParams } = params;
+  return request<API.User>(`/user/${param0}`, {
+    method: 'GET',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
+}
+
+/** Updated user This can only be done by the logged in user. PUT /user/${param0} */
+export async function updateUser(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.updateUserParams,
+  body: API.User,
+  options?: { [key: string]: any },
+) {
+  const { username: param0, ...queryParams } = params;
+  return request<any>(`/user/${param0}`, {
+    method: 'PUT',
+    params: { ...queryParams },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** Delete user This can only be done by the logged in user. DELETE /user/${param0} */
+export async function deleteUser(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.deleteUserParams,
+  options?: { [key: string]: any },
+) {
+  const { username: param0, ...queryParams } = params;
+  return request<any>(`/user/${param0}`, {
+    method: 'DELETE',
+    params: { ...queryParams },
     ...(options || {}),
   });
 }
@@ -34,13 +78,8 @@ export async function createUsersWithListInput(body: API.User[], options?: { [ke
 
 /** Logs user into the system GET /user/login */
 export async function loginUser(
-  params: {
-    // query
-    /** The user name for login */
-    username: string;
-    /** The password for login in clear text */
-    password: string;
-  },
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.loginUserParams,
   options?: { [key: string]: any },
 ) {
   return request<string>('/user/login', {
@@ -56,59 +95,6 @@ export async function loginUser(
 export async function logoutUser(options?: { [key: string]: any }) {
   return request<any>('/user/logout', {
     method: 'GET',
-    ...(options || {}),
-  });
-}
-
-/** Get user by user name GET /user/${param0} */
-export async function getUserByName(
-  params: {
-    // path
-    /** The name that needs to be fetched. Use user1 for testing.  */
-    username: string;
-  },
-  options?: { [key: string]: any },
-) {
-  const { username: param0 } = params;
-  return request<API.User>(`/user/${param0}`, {
-    method: 'GET',
-    params: { ...params },
-    ...(options || {}),
-  });
-}
-
-/** Updated user This can only be done by the logged in user. PUT /user/${param0} */
-export async function updateUser(
-  params: {
-    // path
-    /** name that need to be updated */
-    username: string;
-  },
-  body: API.User,
-  options?: { [key: string]: any },
-) {
-  const { username: param0 } = params;
-  return request<any>(`/user/${param0}`, {
-    method: 'PUT',
-    params: { ...params },
-    data: body,
-    ...(options || {}),
-  });
-}
-
-/** Delete user This can only be done by the logged in user. DELETE /user/${param0} */
-export async function deleteUser(
-  params: {
-    // path
-    /** The name that needs to be deleted */
-    username: string;
-  },
-  options?: { [key: string]: any },
-) {
-  const { username: param0 } = params;
-  return request<any>(`/user/${param0}`, {
-    method: 'DELETE',
-    params: { ...params },
     ...(options || {}),
   });
 }

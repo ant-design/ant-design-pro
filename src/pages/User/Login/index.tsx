@@ -1,3 +1,6 @@
+import Footer from '@/components/Footer';
+import { login } from '@/services/ant-design-pro/api';
+import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 import {
   AlipayCircleOutlined,
   LockOutlined,
@@ -6,28 +9,31 @@ import {
   UserOutlined,
   WeiboCircleOutlined,
 } from '@ant-design/icons';
+import {
+  LoginForm,
+  ProFormCaptcha,
+  ProFormCheckbox,
+  ProFormText,
+} from '@ant-design/pro-components';
+import { FormattedMessage, history, SelectLang, useIntl, useModel } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
-import { ProFormCaptcha, ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
-import { useIntl, history, FormattedMessage, SelectLang, useModel } from 'umi';
-import Footer from '@/components/Footer';
-import { login } from '@/services/ant-design-pro/api';
-import { getFakeCaptcha } from '@/services/ant-design-pro/login';
-
 import styles from './index.less';
 
 const LoginMessage: React.FC<{
   content: string;
-}> = ({ content }) => (
-  <Alert
-    style={{
-      marginBottom: 24,
-    }}
-    message={content}
-    type="error"
-    showIcon
-  />
-);
+}> = ({ content }) => {
+  return (
+    <Alert
+      style={{
+        marginBottom: 24,
+      }}
+      message={content}
+      type="error"
+      showIcon
+    />
+  );
+};
 
 const Login: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
@@ -57,11 +63,8 @@ const Login: React.FC = () => {
         });
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
-        /** 此方法会跳转到 redirect 参数所在的位置 */
-        if (!history) return;
-        const { query } = history.location;
-        const { redirect } = query as { redirect: string };
-        history.push(redirect || '/');
+        const urlParams = new URL(window.location.href).searchParams;
+        history.push(urlParams.get('redirect') || '/');
         return;
       }
       console.log(msg);
@@ -72,6 +75,7 @@ const Login: React.FC = () => {
         id: 'pages.login.failure',
         defaultMessage: '登录失败，请重试！',
       });
+      console.log(error);
       message.error(defaultLoginFailureMessage);
     }
   };
@@ -104,7 +108,7 @@ const Login: React.FC = () => {
             await handleSubmit(values as API.LoginParams);
           }}
         >
-          <Tabs activeKey={type} onChange={setType}>
+          <Tabs activeKey={type} onChange={setType} centered>
             <Tabs.TabPane
               key="account"
               tab={intl.formatMessage({

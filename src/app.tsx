@@ -1,21 +1,16 @@
-import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
-import { SettingDrawer } from '@ant-design/pro-layout';
-import { PageLoading } from '@ant-design/pro-layout';
-import type { RunTimeLayoutConfig } from 'umi';
-import { history, Link } from 'umi';
-import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+import RightContent from '@/components/RightContent';
+import { LinkOutlined } from '@ant-design/icons';
+import type { Settings as LayoutSettings } from '@ant-design/pro-components';
+import { SettingDrawer } from '@ant-design/pro-components';
+import type { RunTimeLayoutConfig } from '@umijs/max';
+import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
+import { errorConfig } from './requestErrorConfig';
+import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
-
-/** 获取用户信息比较慢的时候会展示一个 loading */
-export const initialStateConfig = {
-  loading: <PageLoading />,
-};
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
@@ -28,15 +23,17 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const msg = await queryCurrentUser();
+      const msg = await queryCurrentUser({
+        skipErrorHandler: true,
+      });
       return msg.data;
     } catch (error) {
       history.push(loginPath);
     }
     return undefined;
   };
-  // 如果是登录页面，不执行
-  if (history.location.pathname !== loginPath) {
+  // 如果不是登录页面，执行
+  if (window.location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,
@@ -52,9 +49,9 @@ export async function getInitialState(): Promise<{
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+  console.log(initialState?.settings);
   return {
     rightContentRender: () => <RightContent />,
-    disableContentMargin: false,
     waterMarkProps: {
       content: initialState?.currentUser?.name,
     },
@@ -66,15 +63,31 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         history.push(loginPath);
       }
     },
+    layoutBgImgList: [
+      {
+        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/D2LWSqNny4sAAAAAAAAAAAAAFl94AQBr',
+        left: 85,
+        bottom: 100,
+        height: '303px',
+      },
+      {
+        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/C2TWRpJpiC0AAAAAAAAAAAAAFl94AQBr',
+        bottom: -68,
+        right: -45,
+        height: '303px',
+      },
+      {
+        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/F6vSTbj8KpYAAAAAAAAAAAAAFl94AQBr',
+        bottom: 0,
+        left: 0,
+        width: '331px',
+      },
+    ],
     links: isDev
       ? [
           <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
             <LinkOutlined />
             <span>OpenAPI 文档</span>
-          </Link>,
-          <Link to="/~docs" key="docs">
-            <BookOutlined />
-            <span>业务组件文档</span>
           </Link>,
         ]
       : [],
@@ -105,4 +118,13 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     ...initialState?.settings,
   };
+};
+
+/**
+ * @name request 配置，可以配置错误处理
+ * 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
+ * @doc https://umijs.org/docs/max/request#配置
+ */
+export const request = {
+  ...errorConfig,
 };

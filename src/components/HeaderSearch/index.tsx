@@ -1,10 +1,10 @@
 import { SearchOutlined } from '@ant-design/icons';
+import type { InputRef } from 'antd';
 import { AutoComplete, Input } from 'antd';
-import useMergedState from 'rc-util/es/hooks/useMergedState';
 import type { AutoCompleteProps } from 'antd/es/auto-complete';
-import React, { useRef } from 'react';
-
 import classNames from 'classnames';
+import useMergedState from 'rc-util/es/hooks/useMergedState';
+import React, { useRef } from 'react';
 import styles from './index.less';
 
 export type HeaderSearchProps = {
@@ -31,7 +31,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     ...restProps
   } = props;
 
-  const inputRef = useRef<Input | null>(null);
+  const inputRef = useRef<InputRef | null>(null);
 
   const [value, setValue] = useMergedState<string | undefined>(defaultValue, {
     value: props.value,
@@ -51,7 +51,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
       className={classNames(className, styles.headerSearch)}
       onClick={() => {
         setSearchMode(true);
-        if (searchMode && inputRef.current) {
+        if (inputRef.current) {
           inputRef.current.focus();
         }
       }}
@@ -74,7 +74,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         className={inputClass}
         value={value}
         options={restProps.options}
-        onChange={setValue}
+        onChange={(completeValue) => setValue(completeValue)}
       >
         <Input
           size="small"
