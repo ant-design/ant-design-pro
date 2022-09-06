@@ -33,10 +33,13 @@ export default [
     access: 'canAdmin',
     routes: [
       {
+        path: '/admin',
+        redirect: '/admin/sub-page',
+      },
+      {
         path: '/admin/sub-page',
         name: 'sub-page',
-        icon: 'smile',
-        component: './Welcome',
+        component: './Admin',
       },
     ],
   },
@@ -52,6 +55,7 @@ export default [
   },
   {
     path: '*',
+    layout: false,
     component: './404',
   },
 ];
