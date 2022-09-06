@@ -92,6 +92,17 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         ]
       : [],
     menuHeaderRender: undefined,
+    //临时解决权限失效，菜单无法隐藏的bug
+    menu: {
+      onLoadingChange: (loading: any) => {
+        if (!loading) {
+          setInitialState((preInitialState: any) => ({
+            ...preInitialState,
+            loading: false,
+          }));
+        }
+      },
+    },
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
