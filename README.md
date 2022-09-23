@@ -82,22 +82,38 @@ We need your help: https://github.com/ant-design/ant-design-pro/issues/120
 
 ### Use bash
 
+We provide pro-cli to quickly initialize scaffolding.
+
 ```bash
-$ mkdir <your-project-name>
-$ cd <your-project-name>
-$ yarn create umi  # or npm create umi
+# use npm
+npm i @ant-design/pro-cli -g
+pro create myapp
+```
 
-# Choose ant-design-pro:
- Select the boilerplate type (Use arrow keys)
-❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
-  app             - Create project with a simple boilerplate, support typescript.
-  block           - Create a umi block.
-  library         - Create a library with umi.
-  plugin          - Create a umi plugin.
+select umi version
 
-$ git init
-$ npm install
-$ npm start         # visit http://localhost:8000
+```shell
+🐂 Use umi@4 or umi@3 ? (Use arrow keys)
+❯ umi@4
+  umi@3
+```
+
+> If the umi@4 version is selected, full blocks are not yet supported.
+
+If you choose umi@3, you can also choose the pro template. Pro is the basic template, which only provides the basic content of the framework operation. Complete contains all blocks, which is not suitable for secondary development as a basic template.
+
+```shell
+? 🚀 Full or a simple scaffold? (Use arrow keys)
+❯ simple
+  complete
+```
+
+Install dependencies:
+
+```shell
+$ cd myapp && tyarn
+// or
+$ cd myapp && npm install
 ```
 
 ## Browsers support

@@ -74,22 +74,38 @@ Language : [🇺🇸](./README.md) | 🇨🇳 | [🇷🇺](./README.ru-RU.md) | 
 
 ## 使用
 
+我们提供了 pro-cli 来快速的初始化脚手架。
+
 ```bash
-$ mkdir <your-project-name>
-$ cd <your-project-name>
-$ yarn create umi  # or npm create umi
+# 使用 npm
+npm i @ant-design/pro-cli -g
+pro create myapp
+```
 
-# Choose ant-design-pro:
- Select the boilerplate type (Use arrow keys)
-❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
-  app             - Create project with a simple boilerplate, support typescript.
-  block           - Create a umi block.
-  library         - Create a library with umi.
-  plugin          - Create a umi plugin.
+选择 umi 的版本
 
-$ git init
-$ npm install
-$ npm start         # visit http://localhost:8000
+```shell
+? 🐂 使用 umi@4 还是 umi@3 ? (Use arrow keys)
+❯ umi@4
+  umi@3
+```
+
+> 如果选择了 umi@4 版本，暂时还不支持全量区块。
+
+如果选择了 umi@3，还可以选择 pro 的模板，pro 是基础模板，只提供了框架运行的基本内容，complete 包含所有区块，不太适合当基础模板来进行二次开发
+
+```shell
+? 🚀 要全量的还是一个简单的脚手架? (Use arrow keys)
+❯ simple
+  complete
+```
+
+安装依赖：
+
+```shell
+$ cd myapp && tyarn
+// 或
+$ cd myapp && npm install
 ```
 
 更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。
