@@ -13,7 +13,7 @@ jobs:
         with:
           actions: 'check-issue'
           issue-number: ${{ github.event.issue.number }}
-          title-excludes: '🐛[BUG], 👑 [需求], 🧐[问题]'
+          title-excludes: '🐛 [BUG], 👑 [需求 | Feature], 🧐[问题 | question]'
 
       - if: steps.check.outputs.check-result == 'false' && github.event.issue.state == 'open'
         uses: actions-cool/issues-helper@v2.2.0
@@ -28,7 +28,7 @@ jobs:
       - if: steps.check.outputs.check-result == 'true'
         uses: actions-cool/issues-similarity-analysis@v1
         with:
-          filter-threshold: 0.5
-          title-excludes: '🐛[BUG], 👑 [需求], 🧐[问题]'
+          filter-threshold: 0.8
+          title-excludes: '🐛[BUG], 👑 [需求 | Feature], 🧐[问题 | question]'
           comment-title: '### 以下的 Issues 可能会帮助到你 / The following issues may help you'
           show-footer: false
