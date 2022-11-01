@@ -109,6 +109,14 @@ export default defineConfig({
    * @doc https://umijs.org/docs/max/access
    */
   access: {},
+  /**
+   * @name 额外的 script 标签
+   * @description 配置 <body> 中额外的 script 标签
+   */
+  scripts: [
+    // 解决首次加载白屏的问题
+    '/scripts/loading.js',
+  ],
   //================ pro 插件配置 =================
   presets: ['umi-presets-pro'],
   /**
