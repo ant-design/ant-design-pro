@@ -67,7 +67,7 @@ describe('Login Page', () => {
     expect(!!messageAlert).toBe(true);
   });
 
-  fit('should login success', async () => {
+  it('should login success', async () => {
     const historyRef = React.createRef<any>();
     const rootContainer = render(
       <TestBrowser

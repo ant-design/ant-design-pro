@@ -1,4 +1,4 @@
-name: Node pnpm CI
+name: coverage CI
 
 on: [push, pull_request]
 
@@ -25,9 +25,10 @@ jobs:
       - run: pnpm run lint
       - run: pnpm run tsc
       - run: pnpm run build
-      - run: pnpm run test
+      - run: yarn run test:coverage -w=1
         env:
           CI: true
           PROGRESS: none
           NODE_ENV: test
           NODE_OPTIONS: --max_old_space_size=4096
+      - run: bash <(curl -s https://codecov.io/bash)

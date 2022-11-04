@@ -2,6 +2,10 @@
 
 exports[`Login Page should login success 1`] = `
 <body>
+  <style
+    data-rc-order="append"
+    rc-util-key="antd-wave"
+  />
   <div>
     <div
       class="ant-pro"
@@ -693,15 +697,6 @@ exports[`Login Page should login success 1`] = `
       </div>
     </div>
   </div>
-  <style
-    data-rc-order="append"
-    rc-util-key="antd-wave"
-  >
-    
-      [ant-click-animating-without-extra-node='true']::after, .ant-click-animating-node {
-        --antd-wave-shadow-color: buttonface;
-      }
-  </style>
   <div>
     <div
       class="ant-message"
