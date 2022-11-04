@@ -6,6 +6,7 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import styles from './index.less';
 import NoticeIcon from './NoticeIcon';
+import React from 'react';
 
 export type GlobalHeaderRightProps = {
   fetchingNotices?: boolean;
