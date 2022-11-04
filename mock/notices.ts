@@ -5,21 +5,24 @@ const getNotices = (req: Request, res: Response) => {
     data: [
       {
         id: '000000001',
-        avatar: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/MSbDR4FR2MUAAAAAAAAAAAAAFl94AQBr',
+        avatar:
+          'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/MSbDR4FR2MUAAAAAAAAAAAAAFl94AQBr',
         title: '你收到了 14 份新周报',
         datetime: '2017-08-09',
         type: 'notification',
       },
       {
         id: '000000002',
-        avatar: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/hX-PTavYIq4AAAAAAAAAAAAAFl94AQBr',
+        avatar:
+          'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/hX-PTavYIq4AAAAAAAAAAAAAFl94AQBr',
         title: '你推荐的 曲妮妮 已通过第三轮面试',
         datetime: '2017-08-08',
         type: 'notification',
       },
       {
         id: '000000003',
-        avatar: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/jHX5R5l3QjQAAAAAAAAAAAAAFl94AQBr',
+        avatar:
+          'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/jHX5R5l3QjQAAAAAAAAAAAAAFl94AQBr',
         title: '这种模板可以区分多种通知类型',
         datetime: '2017-08-07',
         read: true,
@@ -27,21 +30,24 @@ const getNotices = (req: Request, res: Response) => {
       },
       {
         id: '000000004',
-        avatar: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/Wr4mQqx6jfwAAAAAAAAAAAAAFl94AQBr',
+        avatar:
+          'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/Wr4mQqx6jfwAAAAAAAAAAAAAFl94AQBr',
         title: '左侧图标用于区分不同的类型',
         datetime: '2017-08-07',
         type: 'notification',
       },
       {
         id: '000000005',
-        avatar: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/Mzj_TbcWUj4AAAAAAAAAAAAAFl94AQBr',
+        avatar:
+          'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/Mzj_TbcWUj4AAAAAAAAAAAAAFl94AQBr',
         title: '内容不要超过两行字，超出时自动截断',
         datetime: '2017-08-07',
         type: 'notification',
       },
       {
         id: '000000006',
-        avatar: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/eXLzRbPqQE4AAAAAAAAAAAAAFl94AQBr',
+        avatar:
+          'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/eXLzRbPqQE4AAAAAAAAAAAAAFl94AQBr',
         title: '曲丽丽 评论了你',
         description: '描述信息描述信息描述信息',
         datetime: '2017-08-07',
@@ -50,7 +56,8 @@ const getNotices = (req: Request, res: Response) => {
       },
       {
         id: '000000007',
-        avatar: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/w5mRQY2AmEEAAAAAAAAAAAAAFl94AQBr',
+        avatar:
+          'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/w5mRQY2AmEEAAAAAAAAAAAAAFl94AQBr',
         title: '朱偏右 回复了你',
         description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
         datetime: '2017-08-07',
@@ -59,7 +66,8 @@ const getNotices = (req: Request, res: Response) => {
       },
       {
         id: '000000008',
-        avatar: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/wPadR5M9918AAAAAAAAAAAAAFl94AQBr',
+        avatar:
+          'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/wPadR5M9918AAAAAAAAAAAAAFl94AQBr',
         title: '标题',
         description: '这种模板用于提醒谁与你发生了互动，左侧放『谁』的头像',
         datetime: '2017-08-07',
