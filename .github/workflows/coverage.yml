@@ -22,7 +22,7 @@ jobs:
       - run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
       - run: pnpm config set store-dir ~/.pnpm-store
       - run: pnpm install  --strict-peer-dependencies=false
-      - run: yarn run test:coverage -w=1
+      - run: yarn run test:coverage
         env:
           CI: true
           PROGRESS: none
