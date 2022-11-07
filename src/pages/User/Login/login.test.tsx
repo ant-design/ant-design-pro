@@ -29,7 +29,7 @@ describe('Login Page', () => {
       'Ant Design is the most influential web design specification in Xihu district',
     );
 
-    expect(rootContainer.baseElement).toMatchSnapshot();
+    expect(rootContainer.asFragment()).toMatchSnapshot();
   });
 
   it("should show error message when username doesn't exist", async () => {
@@ -100,6 +100,6 @@ describe('Login Page', () => {
 
     await rootContainer.findAllByText('Ant Design Pro');
 
-    expect(rootContainer.baseElement).toMatchSnapshot();
+    expect(rootContainer.asFragment()).toMatchSnapshot();
   });
 });
