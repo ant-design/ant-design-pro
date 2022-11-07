@@ -109,6 +109,14 @@ export default defineConfig({
    * @doc https://umijs.org/docs/max/access
    */
   access: {},
+  /**
+   * @name <head> 中额外的 script
+   * @description 配置 <head> 中额外的 script
+   */
+  headScripts: [
+    // 解决首次加载时白屏的问题
+    { src: '/scripts/loading.js', async: true },
+  ],
   //================ pro 插件配置 =================
   presets: ['umi-presets-pro'],
   /**
@@ -131,6 +139,6 @@ export default defineConfig({
     },
   ],
   mfsu: {
-    exclude :['@playwright/test']
+    exclude: ['@playwright/test'],
   },
 });
