@@ -1,14 +1,12 @@
 import { outLogin } from '@/services/ant-design-pro/api';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { history, useModel } from '@umijs/max';
-import { Avatar, Menu, Spin } from 'antd';
-import type { ItemType } from 'antd/es/menu/hooks/useItems';
+import { Avatar, Spin } from 'antd';
 import { stringify } from 'querystring';
-import type { MenuInfo } from 'rc-menu/lib/interface';
-import React, { useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
+import type { MenuProps } from 'antd';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -36,21 +34,6 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   };
   const { initialState, setInitialState } = useModel('@@initialState');
 
-  const onMenuClick = useCallback(
-    (event: MenuInfo) => {
-      const { key } = event;
-      if (key === 'logout') {
-        flushSync(() => {
-          setInitialState((s) => ({ ...s, currentUser: undefined }));
-        });
-        loginOut();
-        return;
-      }
-      history.push(`/account/${key}`);
-    },
-    [setInitialState],
-  );
-
   const loading = (
     <span className={`${styles.action} ${styles.account}`}>
       <Spin
@@ -72,8 +55,19 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   if (!currentUser || !currentUser.name) {
     return loading;
   }
+  
+  const onClick: MenuProps['onClick'] = ({ key }) => {
+    if (key === 'logout') {
+      flushSync(() => {
+        setInitialState((s) => ({ ...s, currentUser: undefined }));
+      });
+      loginOut();
+      return;
+    }
+    history.push(`/account/${key}`);
+  }
 
-  const menuItems: ItemType[] = [
+  const items: MenuProps['items'] = [
     ...(menu
       ? [
           {
@@ -98,12 +92,8 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
     },
   ];
 
-  const menuHeaderDropdown = (
-    <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick} items={menuItems} />
-  );
-
   return (
-    <HeaderDropdown overlay={menuHeaderDropdown}>
+    <HeaderDropdown menu={{ items, onClick }} placement="bottomRight">
       <span className={`${styles.action} ${styles.account}`}>
         <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
         <span className={`${styles.name} anticon`}>{currentUser.name}</span>
