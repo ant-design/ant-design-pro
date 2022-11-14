@@ -6,7 +6,6 @@ import styles from './index.less';
 
 export type HeaderDropdownProps = {
   overlayClassName?: string;
-  overlay: React.ReactNode | (() => React.ReactNode) | any;
   placement?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topCenter' | 'topRight' | 'bottomCenter';
 } & Omit<DropDownProps, 'overlay'>;
 
