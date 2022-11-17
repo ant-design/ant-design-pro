@@ -1,6 +1,5 @@
 ﻿import { render, fireEvent, act } from '@testing-library/react';
 import React from 'react';
-//@ts-ignore
 import { TestBrowser } from '@@/testBrowser';
 
 const waitTime = (time: number = 100) => {
