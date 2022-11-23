@@ -20,7 +20,6 @@ import { FormattedMessage, history, SelectLang, useIntl, useModel } from '@umijs
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
-import styles from './index.less';
 
 const ActionIcons = () => {
   const langClassName = useEmotionCss(({ token }) => {
@@ -47,8 +46,18 @@ const ActionIcons = () => {
 };
 
 const Lang = () => {
-  const langClassName = useEmotionCss(() => {
-    return { width: '100%', height: '40px', lineHeight: '44px', textAlign: 'right' };
+  const langClassName = useEmotionCss(({ token }) => {
+    return {
+      width: 42,
+      height: 42,
+      lineHeight: '42px',
+      position: 'fixed',
+      right: 16,
+      borderRadius: token.borderRadius,
+      ':hover': {
+        backgroundColor: token.colorBgTextHover,
+      },
+    };
   });
 
   return (
@@ -201,7 +210,7 @@ const Login: React.FC = () => {
                 name="username"
                 fieldProps={{
                   size: 'large',
-                  prefix: <UserOutlined className={styles.prefixIcon} />,
+                  prefix: <UserOutlined />,
                 }}
                 placeholder={intl.formatMessage({
                   id: 'pages.login.username.placeholder',
@@ -223,7 +232,7 @@ const Login: React.FC = () => {
                 name="password"
                 fieldProps={{
                   size: 'large',
-                  prefix: <LockOutlined className={styles.prefixIcon} />,
+                  prefix: <LockOutlined />,
                 }}
                 placeholder={intl.formatMessage({
                   id: 'pages.login.password.placeholder',
@@ -250,7 +259,7 @@ const Login: React.FC = () => {
               <ProFormText
                 fieldProps={{
                   size: 'large',
-                  prefix: <MobileOutlined className={styles.prefixIcon} />,
+                  prefix: <MobileOutlined />,
                 }}
                 name="mobile"
                 placeholder={intl.formatMessage({
@@ -281,7 +290,7 @@ const Login: React.FC = () => {
               <ProFormCaptcha
                 fieldProps={{
                   size: 'large',
-                  prefix: <LockOutlined className={styles.prefixIcon} />,
+                  prefix: <LockOutlined />,
                 }}
                 captchaProps={{
                   size: 'large',
