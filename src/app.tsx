@@ -4,11 +4,13 @@ import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
+import { getIntl } from '@umijs/max';
+import { matchRoutes } from '@umijs/max';
+import type { RouteObject } from 'react-router';
 import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -119,6 +121,34 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     ...initialState?.settings,
   };
 };
+
+// 解决 routes.ts 路由配置 layout: false ，页面不显示 title 的 bug
+interface CustomRouteObject extends RouteObject {
+  parentId: string;
+  redirect?: string;
+  name: string;
+}
+export function onRouteChange({
+  clientRoutes,
+  location,
+}: {
+  clientRoutes: CustomRouteObject[];
+  location: Location;
+}) {
+  const route = matchRoutes(clientRoutes, location.pathname)?.pop()?.route as CustomRouteObject;
+  if (!route) {
+    return;
+  }
+  if (route.parentId !== 'ant-design-pro-layout' && !route.redirect) {
+    // 通过 parentId 判断页面是否被 ProLayout 包裹，如果没有，添加页面 title
+    const title = getIntl().formatMessage({ id: `menu.${route.name}` });
+    if (title) {
+      document.title = `${title} - Ant Design Pro`;
+    } else {
+      document.title = 'Ant Design Pro';
+    }
+  }
+}
 
 /**
  * @name request 配置，可以配置错误处理
