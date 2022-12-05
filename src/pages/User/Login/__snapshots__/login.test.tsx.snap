@@ -265,147 +265,77 @@ exports[`Login Page should login success 1`] = `
                     style="display: flex; align-items: center; height: 100%; justify-content: flex-end;"
                   >
                     <div
-                      class="ant-space ant-space-horizontal ant-space-align-center right  dark"
+                      class="css-1doylhz"
                     >
-                      <div
-                        class="ant-space-item"
-                        style="margin-right: 8px;"
-                      >
-                        <div
-                          class="action search headerSearch"
-                        >
-                          <span
-                            aria-label="search"
-                            class="anticon anticon-search"
-                            role="img"
-                            style="cursor: pointer;"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              data-icon="search"
-                              fill="currentColor"
-                              focusable="false"
-                              height="1em"
-                              viewBox="64 64 896 896"
-                              width="1em"
-                            >
-                              <path
-                                d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
-                              />
-                            </svg>
-                          </span>
-                          <div
-                            class="ant-select ant-select-auto-complete input ant-select-single ant-select-customize-input ant-select-show-search"
-                          >
-                            <div
-                              class="ant-select-selector"
-                            >
-                              <span
-                                class="ant-select-selection-search"
-                              >
-                                <input
-                                  aria-activedescendant="rc_select_TEST_OR_SSR_list_0"
-                                  aria-autocomplete="list"
-                                  aria-controls="rc_select_TEST_OR_SSR_list"
-                                  aria-haspopup="listbox"
-                                  aria-label="站内搜索"
-                                  aria-owns="rc_select_TEST_OR_SSR_list"
-                                  autocomplete="off"
-                                  class="ant-input ant-input-sm ant-select-selection-search-input"
-                                  id="rc_select_TEST_OR_SSR"
-                                  placeholder="站内搜索"
-                                  role="combobox"
-                                  type="search"
-                                  value="umi ui"
-                                />
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        class="ant-space-item"
-                        style="margin-right: 8px;"
+                      <span
+                        class="css-lye32u"
                       >
                         <span
-                          class="action"
+                          aria-label="question-circle"
+                          class="anticon anticon-question-circle"
+                          role="img"
                         >
-                          <span
-                            aria-label="question-circle"
-                            class="anticon anticon-question-circle"
-                            role="img"
+                          <svg
+                            aria-hidden="true"
+                            data-icon="question-circle"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
                           >
-                            <svg
-                              aria-hidden="true"
-                              data-icon="question-circle"
-                              fill="currentColor"
-                              focusable="false"
-                              height="1em"
-                              viewBox="64 64 896 896"
-                              width="1em"
-                            >
-                              <path
-                                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                              />
-                              <path
-                                d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z"
-                              />
-                            </svg>
-                          </span>
-                        </span>
-                      </div>
-                      <div
-                        class="ant-space-item"
-                        style="margin-right: 8px;"
-                      >
-                        <span
-                          class="ant-dropdown-trigger action account"
-                        >
-                          <span
-                            class="ant-avatar ant-avatar-sm ant-avatar-circle ant-avatar-image avatar"
-                          >
-                            <img
-                              alt="avatar"
-                              src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
+                            <path
+                              d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
                             />
-                          </span>
-                          <span
-                            class="name anticon"
-                          >
-                            Serati Ma
-                          </span>
+                            <path
+                              d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z"
+                            />
+                          </svg>
                         </span>
-                      </div>
-                      <div
-                        class="ant-space-item"
+                      </span>
+                      <span
+                        class="ant-dropdown-trigger css-19fba91"
                       >
                         <span
-                          class="ant-dropdown-trigger action"
-                          style="cursor: pointer; padding: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; vertical-align: middle;"
+                          class="ant-avatar ant-avatar-sm ant-avatar-circle ant-avatar-image css-10ti6ek"
                         >
-                          <i
-                            class="anticon"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              fill="currentColor"
-                              focusable="false"
-                              height="1em"
-                              viewBox="0 0 24 24"
-                              width="1em"
-                            >
-                              <path
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <path
-                                class="css-c4d79v"
-                                d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z "
-                              />
-                            </svg>
-                          </i>
+                          <img
+                            alt="avatar"
+                            src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
+                          />
                         </span>
-                      </div>
+                        <span
+                          class="css-15vbrjz anticon"
+                        >
+                          Serati Ma
+                        </span>
+                      </span>
+                      <span
+                        class="ant-dropdown-trigger css-lye32u"
+                        style="cursor: pointer; padding: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; vertical-align: middle;"
+                      >
+                        <i
+                          class="anticon"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="0 0 24 24"
+                            width="1em"
+                          >
+                            <path
+                              d="M0 0h24v24H0z"
+                              fill="none"
+                            />
+                            <path
+                              class="css-c4d79v"
+                              d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z "
+                            />
+                          </svg>
+                        </i>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -460,7 +390,7 @@ exports[`Login Page should login success 1`] = `
                             style="background-position: 100% -30%; background-repeat: no-repeat; background-size: 274px auto; background-image: url(https://gw.alipayobjects.com/mdn/rms_a9745b/afts/img/A*BuFmQqsB2iAAAAAAAAAAAAAAARQnAQ);"
                           >
                             <div
-                              style="font-size: 20px; color: rgb(26, 26, 26);"
+                              style="font-size: 20px; color: rgba(0, 0, 0, 0.88);"
                             >
                               欢迎使用 Ant Design Pro
                             </div>
@@ -470,10 +400,12 @@ exports[`Login Page should login success 1`] = `
                               Ant Design Pro 是一个整合了 umi，Ant Design 和 ProComponents 的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
                             </p>
                             <div
-                              style="display: flex; gap: 16px;"
+                              style="display: flex; flex-wrap: wrap; gap: 16px;"
                             >
                               <div
-                                style="background-color: rgb(255, 255, 255); box-shadow: 0 2px 4px 0 rgba(35,49,128,0.02), 0 4px 8px 0 rgba(49,69,179,0.02); border-radius: 8px; font-size: 14px; color: rgba(0, 0, 0, 0.65); text-align: justify; line-height: 22px; padding: 16px 19px; flex: 1;"
+                                style="background-color: rgb(255, 255, 255); box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
+      0 1px 6px -1px rgba(0, 0, 0, 0.02),
+      0 2px 4px 0 rgba(0, 0, 0, 0.02); border-radius: 8px; font-size: 14px; color: rgba(0, 0, 0, 0.65); line-height: 22px; padding: 16px 19px; min-width: 220px; flex: 1;"
                               >
                                 <div
                                   style="display: flex; gap: 4px; align-items: center;"
@@ -484,7 +416,7 @@ exports[`Login Page should login success 1`] = `
                                     1
                                   </div>
                                   <div
-                                    style="font-size: 16px; color: rgba(0, 0, 0, 0.85); padding-bottom: 8px;"
+                                    style="font-size: 16px; color: rgba(0, 0, 0, 0.88); padding-bottom: 8px;"
                                   >
                                     了解 umi
                                   </div>
@@ -503,7 +435,9 @@ exports[`Login Page should login success 1`] = `
                                 </a>
                               </div>
                               <div
-                                style="background-color: rgb(255, 255, 255); box-shadow: 0 2px 4px 0 rgba(35,49,128,0.02), 0 4px 8px 0 rgba(49,69,179,0.02); border-radius: 8px; font-size: 14px; color: rgba(0, 0, 0, 0.65); text-align: justify; line-height: 22px; padding: 16px 19px; flex: 1;"
+                                style="background-color: rgb(255, 255, 255); box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
+      0 1px 6px -1px rgba(0, 0, 0, 0.02),
+      0 2px 4px 0 rgba(0, 0, 0, 0.02); border-radius: 8px; font-size: 14px; color: rgba(0, 0, 0, 0.65); line-height: 22px; padding: 16px 19px; min-width: 220px; flex: 1;"
                               >
                                 <div
                                   style="display: flex; gap: 4px; align-items: center;"
@@ -514,7 +448,7 @@ exports[`Login Page should login success 1`] = `
                                     2
                                   </div>
                                   <div
-                                    style="font-size: 16px; color: rgba(0, 0, 0, 0.85); padding-bottom: 8px;"
+                                    style="font-size: 16px; color: rgba(0, 0, 0, 0.88); padding-bottom: 8px;"
                                   >
                                     了解 ant design
                                   </div>
@@ -533,7 +467,9 @@ exports[`Login Page should login success 1`] = `
                                 </a>
                               </div>
                               <div
-                                style="background-color: rgb(255, 255, 255); box-shadow: 0 2px 4px 0 rgba(35,49,128,0.02), 0 4px 8px 0 rgba(49,69,179,0.02); border-radius: 8px; font-size: 14px; color: rgba(0, 0, 0, 0.65); text-align: justify; line-height: 22px; padding: 16px 19px; flex: 1;"
+                                style="background-color: rgb(255, 255, 255); box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
+      0 1px 6px -1px rgba(0, 0, 0, 0.02),
+      0 2px 4px 0 rgba(0, 0, 0, 0.02); border-radius: 8px; font-size: 14px; color: rgba(0, 0, 0, 0.65); line-height: 22px; padding: 16px 19px; min-width: 220px; flex: 1;"
                               >
                                 <div
                                   style="display: flex; gap: 4px; align-items: center;"
@@ -544,7 +480,7 @@ exports[`Login Page should login success 1`] = `
                                     3
                                   </div>
                                   <div
-                                    style="font-size: 16px; color: rgba(0, 0, 0, 0.85); padding-bottom: 8px;"
+                                    style="font-size: 16px; color: rgba(0, 0, 0, 0.88); padding-bottom: 8px;"
                                   >
                                     了解 Pro Components
                                   </div>
@@ -693,10 +629,10 @@ exports[`Login Page should login success 1`] = `
 exports[`Login Page should show login form 1`] = `
 <DocumentFragment>
   <div
-    class="container"
+    class="css-trkbkn"
   >
     <div
-      class="lang"
+      class="css-15lsw8v"
       data-lang="true"
     >
       <span
@@ -727,7 +663,7 @@ exports[`Login Page should show login form 1`] = `
       </span>
     </div>
     <div
-      class="content"
+      style="flex: 1; padding: 32px 0px;"
     >
       <div
         class="ant-pro-form-login-container "
@@ -760,7 +696,7 @@ exports[`Login Page should show login form 1`] = `
         </div>
         <div
           class="ant-pro-form-login-main "
-          style="width: 328px;"
+          style="width: 328px; min-width: 280px; max-width: 75vw;"
         >
           <div
             class="ant-pro"
@@ -890,7 +826,7 @@ exports[`Login Page should show login form 1`] = `
                           >
                             <span
                               aria-label="user"
-                              class="anticon anticon-user prefixIcon"
+                              class="anticon anticon-user"
                               role="img"
                             >
                               <svg
@@ -973,7 +909,7 @@ exports[`Login Page should show login form 1`] = `
                           >
                             <span
                               aria-label="lock"
-                              class="anticon anticon-lock prefixIcon"
+                              class="anticon anticon-lock"
                               role="img"
                             >
                               <svg
@@ -1078,7 +1014,7 @@ exports[`Login Page should show login form 1`] = `
             Login with :
             <span
               aria-label="alipay-circle"
-              class="anticon anticon-alipay-circle icon"
+              class="anticon anticon-alipay-circle css-18yqg2u"
               role="img"
             >
               <svg
@@ -1097,7 +1033,7 @@ exports[`Login Page should show login form 1`] = `
             </span>
             <span
               aria-label="taobao-circle"
-              class="anticon anticon-taobao-circle icon"
+              class="anticon anticon-taobao-circle css-18yqg2u"
               role="img"
             >
               <svg
@@ -1116,7 +1052,7 @@ exports[`Login Page should show login form 1`] = `
             </span>
             <span
               aria-label="weibo-circle"
-              class="anticon anticon-weibo-circle icon"
+              class="anticon anticon-weibo-circle css-18yqg2u"
               role="img"
             >
               <svg

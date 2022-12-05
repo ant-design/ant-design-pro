@@ -94,24 +94,22 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
-    childrenRender: (children, props) => {
+    childrenRender: (children) => {
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>
           {children}
-          {!props.location?.pathname?.includes('/login') && (
-            <SettingDrawer
-              disableUrlParams
-              enableDarkTheme
-              settings={initialState?.settings}
-              onSettingChange={(settings) => {
-                setInitialState((preInitialState) => ({
-                  ...preInitialState,
-                  settings,
-                }));
-              }}
-            />
-          )}
+          <SettingDrawer
+            disableUrlParams
+            enableDarkTheme
+            settings={initialState?.settings}
+            onSettingChange={(settings) => {
+              setInitialState((preInitialState) => ({
+                ...preInitialState,
+                settings,
+              }));
+            }}
+          />
         </>
       );
     },
