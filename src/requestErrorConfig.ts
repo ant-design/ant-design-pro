@@ -51,7 +51,7 @@ export const errorConfig: RequestConfig = {
               // do nothing
               break;
             case ErrorShowType.WARN_MESSAGE:
-              message.warn(errorMessage);
+              message.warning(errorMessage);
               break;
             case ErrorShowType.ERROR_MESSAGE:
               message.error(errorMessage);
