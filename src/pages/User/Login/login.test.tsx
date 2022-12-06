@@ -1,7 +1,8 @@
 ﻿import { render, fireEvent, act } from '@testing-library/react';
 import React from 'react';
-//@ts-ignore
 import { TestBrowser } from '@@/testBrowser';
+
+import { startMock } from '@@/requestRecordMock';
 
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
@@ -11,7 +12,22 @@ const waitTime = (time: number = 100) => {
   });
 };
 
+let server: {
+  close: () => void;
+};
+
 describe('Login Page', () => {
+  beforeAll(async () => {
+    server = await startMock({
+      port: 8000,
+      scene: 'login',
+    });
+  });
+
+  afterAll(() => {
+    server?.close();
+  });
+
   it('should show login form', async () => {
     const historyRef = React.createRef<any>();
     const rootContainer = render(
@@ -30,42 +46,8 @@ describe('Login Page', () => {
     );
 
     expect(rootContainer.asFragment()).toMatchSnapshot();
-  });
 
-  it("should show error message when username doesn't exist", async () => {
-    const historyRef = React.createRef<any>();
-    const rootContainer = render(
-      <TestBrowser
-        historyRef={historyRef}
-        location={{
-          pathname: '/user/login',
-        }}
-      />,
-    );
-
-    await rootContainer.findAllByText('Ant Design');
-
-    const userNameInput = await rootContainer.findByPlaceholderText('Username: admin or user');
-
-    act(() => {
-      fireEvent.change(userNameInput, { target: { value: 'wrong' } });
-    });
-
-    const passwordInput = await rootContainer.findByPlaceholderText('Password: ant.design');
-
-    act(() => {
-      fireEvent.change(passwordInput, { target: { value: 'wrong' } });
-    });
-
-    await (await rootContainer.findByText('Login')).click();
-
-    // 等待接口返回结果
-    await waitTime(2000);
-
-    const messageAlert = await rootContainer.findByText(
-      'Incorrect username/password(admin/ant.design)',
-    );
-    expect(!!messageAlert).toBe(true);
+    rootContainer.unmount();
   });
 
   it('should login success', async () => {
@@ -101,5 +83,7 @@ describe('Login Page', () => {
     await rootContainer.findAllByText('Ant Design Pro');
 
     expect(rootContainer.asFragment()).toMatchSnapshot();
+
+    rootContainer.unmount();
   });
 });
