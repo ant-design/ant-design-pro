@@ -133,4 +133,8 @@ export default defineConfig({
   mfsu: {
     strategy: 'normal',
   },
+  plugins: ['@umijs/request-record'],
+  requestRecord: {
+    fromProxy: '/api/',
+  },
 });
