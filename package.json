@@ -29,8 +29,8 @@
     "start:pre": "cross-env REACT_APP_ENV=pre UMI_ENV=dev max dev",
     "start:test": "cross-env REACT_APP_ENV=test MOCK=none UMI_ENV=dev max dev",
     "test": "jest",
-    "test:coverage": "start-server-and-test preview http://127.0.0.1:8000/__umi/api/status  \\\"npm run jest -- --coverage\\\"",
-    "test:update": "start-server-and-test preview http://127.0.0.1:8000/__umi/api/status  \\\"npm run jest -- -u\\\"",
+    "test:coverage": "npm run jest -- --coverage",
+    "test:update": "npm run jest -- -u",
     "tsc": "tsc --noEmit",
     "record": "cross-env NODE_ENV=development REACT_APP_ENV=test max record --scene=login"
   },
