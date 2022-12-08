@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro",
-  "version": "6.0.0-beta.1",
+  "version": "6.0.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
@@ -76,7 +76,7 @@
     "@umijs/lint": "^4.0.34",
     "@umijs/max": "^4.0.33",
     "@umijs/openapi": "^1.7.0",
-    "@umijs/request-record": "^1.0.1",
+    "@umijs/request-record": "1.1.2",
     "cross-env": "^7.0.3",
     "eslint": "^8.0.0",
     "gh-pages": "^3.2.0",
