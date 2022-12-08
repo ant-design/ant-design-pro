@@ -134,7 +134,5 @@ export default defineConfig({
     strategy: 'normal',
   },
   plugins: ['@umijs/request-record'],
-  requestRecord: {
-    fromProxy: '/api/',
-  },
+  requestRecord: {},
 });
