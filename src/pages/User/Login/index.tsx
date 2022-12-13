@@ -16,8 +16,9 @@ import {
   ProFormText,
 } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
-import { FormattedMessage, history, SelectLang, useIntl, useModel } from '@umijs/max';
+import { FormattedMessage, history, SelectLang, useIntl, useModel, Helmet } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
+import Settings from '../../../../config/defaultSettings';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
 
@@ -144,6 +145,15 @@ const Login: React.FC = () => {
 
   return (
     <div className={containerClassName}>
+      <Helmet>
+        <title>
+          {intl.formatMessage({
+            id: 'menu.login',
+            defaultMessage: '登录页',
+          })}
+          - {Settings.title}
+        </title>
+      </Helmet>
       <Lang />
       <div
         style={{
