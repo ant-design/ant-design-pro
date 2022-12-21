@@ -27,27 +27,27 @@ export type UpdateFormProps = {
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   return (
-    <StepsForm
+    (<StepsForm
       stepsProps={{
         size: 'small',
       }}
       stepsFormRender={(dom, submitter) => {
         return (
-          <Modal
+          (<Modal
             width={640}
             bodyStyle={{
               padding: '32px 40px 48px',
             }}
             destroyOnClose
             title="规则配置"
-            visible={props.updateModalVisible}
+            open={props.updateModalVisible}
             footer={submitter}
             onCancel={() => {
               props.onCancel();
             }}
           >
             {dom}
-          </Modal>
+          </Modal>)
         );
       }}
       onFinish={props.onSubmit}
@@ -152,7 +152,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           }}
         />
       </StepsForm.StepForm>
-    </StepsForm>
+    </StepsForm>)
   );
 };
 

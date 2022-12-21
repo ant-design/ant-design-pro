@@ -184,7 +184,7 @@ const TableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    (<PageContainer>
       <ProTable<TableListItem, TableListPagination>
         headerTitle="查询表格"
         actionRef={actionRef}
@@ -289,10 +289,9 @@ const TableList: React.FC = () => {
         updateModalVisible={updateModalVisible}
         values={currentRow || {}}
       />
-
       <Drawer
         width={600}
-        visible={showDetail}
+        open={showDetail}
         onClose={() => {
           setCurrentRow(undefined);
           setShowDetail(false);
@@ -313,7 +312,7 @@ const TableList: React.FC = () => {
           />
         )}
       </Drawer>
-    </PageContainer>
+    </PageContainer>)
   );
 };
 

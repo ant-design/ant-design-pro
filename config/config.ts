@@ -3,15 +3,22 @@ import { defineConfig } from 'umi';
 import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
+import { v4Token } from './antd4-token';
 
 const { REACT_APP_ENV } = process.env;
 
 export default defineConfig({
   hash: true,
-  antd: {},
+  antd: false,
   dva: {
     hmr: true,
   },
+  lessLoader: {
+    lessOptions: {
+      modifyVars: v4Token,
+    },
+  },
+  theme: v4Token,
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
     locale: true,

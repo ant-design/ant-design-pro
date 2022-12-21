@@ -1,5 +1,6 @@
 // https://umijs.org/config/
 import { defineConfig } from 'umi';
+import { v4Token } from './antd4-token';
 
 export default defineConfig({
   plugins: [
