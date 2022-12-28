@@ -15,6 +15,7 @@ export default defineConfig({
   },
   lessLoader: {
     lessOptions: {
+      javascriptEnabled: true,
       modifyVars: v4Token,
     },
   },
