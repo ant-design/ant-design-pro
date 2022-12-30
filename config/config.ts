@@ -14,12 +14,8 @@ export default defineConfig({
     hmr: true,
   },
   lessLoader: {
-    lessOptions: {
-      javascriptEnabled: true,
-      modifyVars: v4Token,
-    },
+    modifyVars: v4Token,
   },
-  theme: v4Token,
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
     locale: true,
@@ -360,7 +356,7 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  mfsu: {},
+  mfsu: false,
   webpack5: {},
   exportStatic: {},
 });
