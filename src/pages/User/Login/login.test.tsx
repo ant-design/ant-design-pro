@@ -2,6 +2,7 @@
 import React from 'react';
 import { TestBrowser } from '@@/testBrowser';
 
+// @ts-ignore
 import { startMock } from '@@/requestRecordMock';
 
 const waitTime = (time: number = 100) => {
