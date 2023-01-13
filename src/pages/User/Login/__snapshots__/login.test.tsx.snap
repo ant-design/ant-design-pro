@@ -31,6 +31,7 @@ exports[`Login Page should login success 1`] = `
               <ul
                 class="ant-menu ant-menu-root ant-menu-inline ant-menu-light ant-pro-sider-menu  ant-pro-base-menu"
                 data-menu-list="true"
+                dir="ltr"
                 role="menu"
                 style="background-color: transparent; width: 100%;"
                 tabindex="0"
@@ -141,6 +142,7 @@ exports[`Login Page should login success 1`] = `
               <ul
                 class="ant-menu ant-menu-root ant-menu-inline ant-menu-light ant-pro-sider-link-menu "
                 data-menu-list="true"
+                dir="ltr"
                 role="menu"
                 tabindex="0"
               />
@@ -559,7 +561,7 @@ exports[`Login Page should login success 1`] = `
                     />
                   </svg>
                 </span>
-                 2022 Produced by Ant Financial Experience Department
+                 2023 Produced by Ant Financial Experience Department
               </div>
             </div>
           </footer>
@@ -669,6 +671,7 @@ exports[`Login Page should show login form 1`] = `
                     >
                       <div
                         class="ant-tabs-tab ant-tabs-tab-active"
+                        data-node-key="account"
                       >
                         <div
                           aria-controls="rc-tabs-test-panel-account"
@@ -683,6 +686,7 @@ exports[`Login Page should show login form 1`] = `
                       </div>
                       <div
                         class="ant-tabs-tab"
+                        data-node-key="mobile"
                       >
                         <div
                           aria-controls="rc-tabs-test-panel-mobile"
@@ -1101,7 +1105,7 @@ exports[`Login Page should show login form 1`] = `
               />
             </svg>
           </span>
-           2022 Produced by Ant Financial Experience Department
+           2023 Produced by Ant Financial Experience Department
         </div>
       </div>
     </footer>

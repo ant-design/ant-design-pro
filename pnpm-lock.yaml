@@ -86,7 +86,7 @@ devDependencies:
   swagger-ui-dist: 4.15.5
   ts-node: 10.9.1_typescript@4.9.4
   typescript: 4.9.4
-  umi-presets-pro: 2.0.0_aegj6e4bshbj2ek6a2qagy3lt4
+  umi-presets-pro: 2.0.2_aegj6e4bshbj2ek6a2qagy3lt4
 
 packages:
 
@@ -4653,8 +4653,8 @@ packages:
       - typescript
     dev: true
 
-  /@umijs/max-plugin-openapi/2.0.0:
-    resolution: {integrity: sha512-yLyLvNT5wr8fMaSeSKY5HcS53chCKR8RtQnV8OcYwz4tCpSaWLVA0aRK9L4TkFEHxYf6MebhKrHV96Xeeqyk/Q==}
+  /@umijs/max-plugin-openapi/2.0.2:
+    resolution: {integrity: sha512-CwFv9zVTPVUAYOyrlmo6AwaxFGFFDOY3w31yKURmM0/F08v9QRAOl3UkL47FDOLoQbhwlYJV8hgakzwxRAAV2Q==}
     dependencies:
       '@umijs/openapi': 1.8.1
       rimraf: 3.0.2
@@ -5000,8 +5000,8 @@ packages:
       react-router-dom: 6.3.0_ef5jwxihqo6n7gxfmzogljlgcm
     dev: true
 
-  /@umijs/request-record/1.1.2:
-    resolution: {integrity: sha512-PFwaIn/D/ZbDacWkeRF7/uVpysxrVKCVnwdutxz+FY8KHw/S5M5BcwRu7qfJFC3xDSJLDtaL48IHVMe9djN1Tw==}
+  /@umijs/request-record/1.1.3:
+    resolution: {integrity: sha512-2dpqQC2gcHiYx1d3KYuIIbjKP1kdE4qCkldvcZotSKB0QNyp6p0mL6eLwyIpN2+n/tGVqPkThX4dPL2Ikob3Fw==}
     peerDependencies:
       umi: '>=3'
     dependencies:
@@ -5606,7 +5606,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001443
+      caniuse-lite: 1.0.30001444
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -5621,7 +5621,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001443
+      caniuse-lite: 1.0.30001444
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -5634,7 +5634,7 @@ packages:
     hasBin: true
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001443
+      caniuse-lite: 1.0.30001444
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       picocolors: 0.2.1
@@ -6030,7 +6030,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001443
+      caniuse-lite: 1.0.30001444
       electron-to-chromium: 1.4.284
       node-releases: 2.0.8
       update-browserslist-db: 1.0.10_browserslist@4.21.4
@@ -6122,8 +6122,8 @@ packages:
     resolution: {integrity: sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==}
     dev: true
 
-  /caniuse-lite/1.0.30001443:
-    resolution: {integrity: sha512-jUo8svymO8+Mkj3qbUbVjR8zv8LUGpGkUM/jKvc9SO2BvjCI980dp9fQbf/dyLs6RascPzgR4nhAKFA4OHeSaA==}
+  /caniuse-lite/1.0.30001444:
+    resolution: {integrity: sha512-ecER9xgJQVMqcrxThKptsW0pPxSae8R2RB87LNa+ivW9ppNWRHEplXcDzkCOP4LYWGj8hunXLqaiC41iBATNyg==}
 
   /carlo/0.9.46:
     resolution: {integrity: sha512-FwZ/wxjqe+5RgzF2SRsPSWsVB9+McAVRWW0tRkmbh7fBjrf3HFZZbcr8vr61p1K+NBaAPv57DRjxgIyfbHmd7g==}
@@ -6866,7 +6866,7 @@ packages:
     resolution: {integrity: sha512-RdpzE0Hv4lhowpIUKKMJfeH6C1pXdtT1/it80ubgWqwI3qpuxUBpC1S4hnHg+zjnuOoDkzUtUCEEkG+XG5l3Mw==}
     dependencies:
       call-bind: 1.0.2
-      es-get-iterator: 1.1.2
+      es-get-iterator: 1.1.3
       get-intrinsic: 1.1.3
       is-arguments: 1.1.1
       is-array-buffer: 3.0.1
@@ -7284,8 +7284,8 @@ packages:
       which-typed-array: 1.1.9
     dev: true
 
-  /es-get-iterator/1.1.2:
-    resolution: {integrity: sha512-+DTO8GYwbMCwbywjimwZMHp8AuYXOS2JZFWoi2AlPOS3ebnII9w/NLpNZtA7A0YLaVDw+O7KFCeoIV7OPvM7hQ==}
+  /es-get-iterator/1.1.3:
+    resolution: {integrity: sha512-sPZmqHBe6JIiTfN5q2pEi//TwxmAFHwj/XEuYjTuse78i8KxaqMTTzxPoFKuzRpDpTJ+0NAbpfenkmH2rePtuw==}
     dependencies:
       call-bind: 1.0.2
       get-intrinsic: 1.1.3
@@ -7295,6 +7295,7 @@ packages:
       is-set: 2.0.2
       is-string: 1.0.7
       isarray: 2.0.5
+      stop-iteration-iterator: 1.0.0
     dev: true
 
   /es-set-tostringtag/2.0.1:
@@ -9328,7 +9329,7 @@ packages:
     resolution: {integrity: sha512-NiPOTBb5ahmIOYkJ7mVTvvB1bydnTzixvfO+59AjJKBpyjPBIULL3EHGxySyZijlVpewveJyhiLQThcivkkAtw==}
     engines: {node: '>= 0.4'}
     dependencies:
-      es-get-iterator: 1.1.2
+      es-get-iterator: 1.1.3
       functions-have-names: 1.2.3
       has: 1.0.3
       has-bigints: 1.0.2
@@ -14752,6 +14753,13 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
+  /stop-iteration-iterator/1.0.0:
+    resolution: {integrity: sha512-iCGQj+0l0HOdZ2AEeBADlsRC+vsnDsZsbdSiH1yNSjcfKM7fdpCMfqAL/dwF5BLiw/XhRft/Wax6zQbhq2BcjQ==}
+    engines: {node: '>= 0.4'}
+    dependencies:
+      internal-slot: 1.0.4
+    dev: true
+
   /stream-browserify/2.0.2:
     resolution: {integrity: sha512-nX6hmklHs/gr2FuxYDltq8fJA1GDlxKQCz8O/IM4atRqBH8OORmBNgfvW5gG10GT/qQ9u0CzIvr2X5Pkt6ntqg==}
     dependencies:
@@ -15594,13 +15602,13 @@ packages:
     resolution: {integrity: sha512-f9BESNVhzlhEFf2CHMSj40NWOjYPl1YKYbrvIr/hFTDEmLq7SRbWvm7FcdcpCYT95zrOhC7gZSxjdnnTpBcwVw==}
     dev: true
 
-  /umi-presets-pro/2.0.0_aegj6e4bshbj2ek6a2qagy3lt4:
-    resolution: {integrity: sha512-x/aQygHQlRl9TcHQf90thEfJaDaZjAVeh/R3iYnj9SZAZmZT9vzkvmjVGHanppYiA6yAo1MJtxI6zgDETv3tUA==}
+  /umi-presets-pro/2.0.2_aegj6e4bshbj2ek6a2qagy3lt4:
+    resolution: {integrity: sha512-qP4mM0DdQHGLDFQuO/ek95jHDQ7hnCqWwAMaYjCGroxVQWUV+GHt5cyU39bLkHQ3dPS8OWVen1Bjz2/JBF0nHw==}
     dependencies:
       '@alita/plugins': 3.2.7_aegj6e4bshbj2ek6a2qagy3lt4
-      '@umijs/max-plugin-openapi': 2.0.0
+      '@umijs/max-plugin-openapi': 2.0.2
       '@umijs/plugins': 4.0.44_aegj6e4bshbj2ek6a2qagy3lt4
-      '@umijs/request-record': 1.1.2
+      '@umijs/request-record': 1.1.3
       swagger-ui-dist: 4.15.5
     transitivePeerDependencies:
       - '@babel/helper-module-imports'
