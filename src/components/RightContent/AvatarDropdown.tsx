@@ -2,8 +2,7 @@ import { outLogin } from '@/services/ant-design-pro/api';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { history, useModel } from '@umijs/max';
-import { Avatar, Spin } from 'antd';
-import { setAlpha } from '@ant-design/pro-components';
+import { Spin } from 'antd';
 import { stringify } from 'querystring';
 import type { MenuInfo } from 'rc-menu/lib/interface';
 import React, { useCallback } from 'react';
@@ -12,49 +11,16 @@ import HeaderDropdown from '../HeaderDropdown';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
+  children?: React.ReactNode;
 };
 
-const Name = () => {
+export const AvatarName = () => {
   const { initialState } = useModel('@@initialState');
   const { currentUser } = initialState || {};
-
-  const nameClassName = useEmotionCss(({ token }) => {
-    return {
-      width: '70px',
-      height: '48px',
-      overflow: 'hidden',
-      lineHeight: '48px',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-      [`@media only screen and (max-width: ${token.screenMD}px)`]: {
-        display: 'none',
-      },
-    };
-  });
-
-  return <span className={`${nameClassName} anticon`}>{currentUser?.name}</span>;
+  return <span className="anticon">{currentUser?.name}</span>;
 };
 
-const AvatarLogo = () => {
-  const { initialState } = useModel('@@initialState');
-  const { currentUser } = initialState || {};
-
-  const avatarClassName = useEmotionCss(({ token }) => {
-    return {
-      marginRight: '8px',
-      color: token.colorPrimary,
-      verticalAlign: 'top',
-      background: setAlpha(token.colorBgContainer, 0.85),
-      [`@media only screen and (max-width: ${token.screenMD}px)`]: {
-        margin: 0,
-      },
-    };
-  });
-
-  return <Avatar size="small" className={avatarClassName} src={currentUser?.avatar} alt="avatar" />;
-};
-
-const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
+export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, children }) => {
   /**
    * 退出登录，并且将当前的 url 保存
    */
@@ -161,12 +127,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
         items: menuItems,
       }}
     >
-      <span className={actionClassName}>
-        <AvatarLogo />
-        <Name />
-      </span>
+      {children}
     </HeaderDropdown>
   );
 };
-
-export default AvatarDropdown;
