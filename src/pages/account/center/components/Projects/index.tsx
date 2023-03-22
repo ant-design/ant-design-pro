@@ -5,7 +5,7 @@ import moment from 'moment';
 import { queryFakeList } from '../../service';
 import AvatarList from '../AvatarList';
 import type { ListItemDataType } from '../../data.d';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 const Projects: React.FC = () => {
   // 获取tab列表数据

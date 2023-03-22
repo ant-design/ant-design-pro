@@ -9,7 +9,7 @@ import numeral from 'numeral';
 import Map from './components/Map';
 import ActiveChart from './components/ActiveChart';
 import { queryTags } from './service';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const { Countdown } = Statistic;
 

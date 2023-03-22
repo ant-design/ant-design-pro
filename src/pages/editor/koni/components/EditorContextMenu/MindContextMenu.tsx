@@ -1,7 +1,7 @@
 import { CanvasMenu, ContextMenu, NodeMenu } from 'gg-editor';
 
 import MenuItem from './MenuItem';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 const MindContextMenu = () => (
   <ContextMenu className={styles.contextMenu}>

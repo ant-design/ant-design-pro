@@ -9,7 +9,7 @@ import Articles from './components/Articles';
 import Applications from './components/Applications';
 import type { CurrentUser, TagType, tabKeyType } from './data.d';
 import { queryCurrent } from './service';
-import styles from './Center.style.ts';
+import styles from './Center.less';
 
 const operationTabList = [
   {

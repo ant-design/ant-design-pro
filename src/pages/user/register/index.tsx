@@ -6,7 +6,7 @@ import { Link, useRequest, history } from '@umijs/max';
 import type { StateType } from './service';
 import { fakeRegister } from './service';
 
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;

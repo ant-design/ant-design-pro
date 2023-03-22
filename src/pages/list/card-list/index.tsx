@@ -4,7 +4,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
 import { queryFakeList } from './service';
 import type { CardListItemDataType } from './data.d';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const { Paragraph } = Typography;
 

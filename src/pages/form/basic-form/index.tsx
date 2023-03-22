@@ -13,7 +13,7 @@ import { useRequest } from '@umijs/max';
 import type { FC } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { fakeSubmitForm } from './service';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const BasicForm: FC<Record<string, any>> = () => {
   const { run } = useRequest(fakeSubmitForm, {

@@ -10,7 +10,7 @@ import {
   StepsForm,
 } from '@ant-design/pro-components';
 import type { StepDataType } from './data.d';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const StepDescriptions: React.FC<{
   stepData: StepDataType;

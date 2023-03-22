@@ -5,7 +5,7 @@ import { List, Tag } from 'antd';
 import ArticleListContent from '../ArticleListContent';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 const Articles: React.FC = () => {
   const IconText: React.FC<{

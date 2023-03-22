@@ -6,7 +6,7 @@ import { Link, useRequest } from '@umijs/max';
 import { PageContainer } from '@ant-design/pro-components';
 import moment from 'moment';
 import EditableLinkGroup from './components/EditableLinkGroup';
-import styles from './style.style.ts';
+import styles from './style.less';
 import type { ActivitiesType, CurrentUser } from './data.d';
 import { queryProjectNotice, queryActivities, fakeChartData } from './service';
 

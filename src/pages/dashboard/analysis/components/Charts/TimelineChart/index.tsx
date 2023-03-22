@@ -4,7 +4,7 @@ import DataSet from '@antv/data-set';
 import React from 'react';
 import Slider from 'bizcharts-plugin-slider';
 import autoHeight from '../autoHeight';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 export type TimelineChartProps = {
   data: {

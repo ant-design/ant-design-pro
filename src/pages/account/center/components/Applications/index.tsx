@@ -10,7 +10,7 @@ import React from 'react';
 import numeral from 'numeral';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
-import stylesApplications from './index.style.ts';
+import stylesApplications from './index.less';
 
 export function formatWan(val: number) {
   const v = val * 1;

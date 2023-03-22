@@ -7,7 +7,7 @@ import { MindContextMenu } from './components/EditorContextMenu';
 import { MindDetailPanel } from './components/EditorDetailPanel';
 import { MindToolbar } from './components/EditorToolbar';
 import data from './worldCup2018.json';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 GGEditor.setTrackable(false);
 

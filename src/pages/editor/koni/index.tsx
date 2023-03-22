@@ -7,7 +7,7 @@ import { KoniContextMenu } from './components/EditorContextMenu';
 import { KoniDetailPanel } from './components/EditorDetailPanel';
 import { KoniItemPanel } from './components/EditorItemPanel';
 import { KoniToolbar } from './components/EditorToolbar';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 GGEditor.setTrackable(false);
 

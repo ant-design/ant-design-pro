@@ -5,7 +5,7 @@ import BaseView from './components/base';
 import BindingView from './components/binding';
 import NotificationView from './components/notification';
 import SecurityView from './components/security';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const { Item } = Menu;
 

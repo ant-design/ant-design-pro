@@ -3,7 +3,7 @@ import { RingProgress, Line } from '@ant-design/charts';
 import type { OfflineDataType, DataItem } from '../data.d';
 
 import NumberInfo from './NumberInfo';
-import styles from '../style.style.ts';
+import styles from '../style.less';
 
 const CustomTab = ({
   data,

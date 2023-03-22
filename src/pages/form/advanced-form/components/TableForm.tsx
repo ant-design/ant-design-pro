@@ -3,7 +3,7 @@ import { Button, Divider, Input, Popconfirm, Table, message } from 'antd';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
-import styles from '../style.style.ts';
+import styles from '../style.less';
 
 type TableFormDateType = {
   key: string;

@@ -3,7 +3,7 @@ import { Link } from '@umijs/max';
 import React from 'react';
 import type { RouteChildrenProps } from 'react-router';
 
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const actions = (
   <div className={styles.actions}>

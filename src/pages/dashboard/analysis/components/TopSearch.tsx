@@ -7,7 +7,7 @@ import type { DataItem } from '../data.d';
 
 import NumberInfo from './NumberInfo';
 import Trend from './Trend';
-import styles from '../style.style.ts';
+import styles from '../style.less';
 
 const columns = [
   {

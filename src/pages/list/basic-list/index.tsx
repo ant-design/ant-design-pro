@@ -22,7 +22,7 @@ import moment from 'moment';
 import OperationModal from './components/OperationModal';
 import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
 import type { BasicListItemDataType } from './data.d';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;

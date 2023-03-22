@@ -3,7 +3,7 @@ import { Button, Card, Result } from 'antd';
 import { Fragment } from 'react';
 
 import { GridContent } from '@ant-design/pro-components';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 const Content = (
   <Fragment>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import autoHeight from '../autoHeight';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 /* eslint no-return-assign: 0 */
 /* eslint no-mixed-operators: 0 */

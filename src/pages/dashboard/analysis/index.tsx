@@ -18,7 +18,7 @@ import PageLoading from './components/PageLoading';
 import type { TimeType } from './components/SalesCard';
 import { getTimeDistance } from './utils/utils';
 import type { AnalysisData } from './data.d';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 

@@ -27,7 +27,7 @@ import classNames from 'classnames';
 import { useRequest } from '@umijs/max';
 import type { AdvancedProfileData } from './data.d';
 import { queryAdvancedProfile } from './service';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const { Step } = Steps;
 const ButtonGroup = Button.Group;

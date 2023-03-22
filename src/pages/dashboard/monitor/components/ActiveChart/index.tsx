@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { TinyArea } from '@ant-design/charts';
 
 import { Statistic } from 'antd';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 function fixedZero(val: number) {
   return val * 1 < 10 ? `0${val}` : val;

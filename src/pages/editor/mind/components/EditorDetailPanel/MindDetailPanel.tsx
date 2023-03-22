@@ -2,7 +2,7 @@ import { CanvasPanel, DetailPanel, NodePanel } from 'gg-editor';
 
 import { Card } from 'antd';
 import DetailForm from './DetailForm';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 const MindDetailPanel = () => (
   <DetailPanel className={styles.detailPanel}>

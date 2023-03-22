@@ -14,7 +14,7 @@ import type { ProColumnType } from '@ant-design/pro-components';
 import { EditableProTable } from '@ant-design/pro-components';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-components';
 import { fakeSubmitForm } from './service';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 interface TableFormDateType {
   key: string;

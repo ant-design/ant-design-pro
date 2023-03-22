@@ -7,7 +7,7 @@ import React from 'react';
 import { useRequest } from '@umijs/max';
 import type { BasicGood, BasicProgress } from './data.d';
 import { queryBasicProfile } from './service';
-import styles from './style.style.ts';
+import styles from './style.less';
 
 const progressColumns: ProColumns<BasicProgress>[] = [
   {

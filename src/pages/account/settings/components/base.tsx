@@ -13,7 +13,7 @@ import { useRequest } from '@umijs/max';
 import { queryCurrent } from '../service';
 import { queryProvince, queryCity } from '../service';
 
-import styles from './BaseView.style.ts';
+import styles from './BaseView.less';
 
 const validatorPhone = (rule: any, value: string[], callback: (message?: string) => void) => {
   if (!value[0]) {

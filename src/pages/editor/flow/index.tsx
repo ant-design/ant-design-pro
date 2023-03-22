@@ -7,7 +7,7 @@ import { FlowContextMenu } from './components/EditorContextMenu';
 import { FlowDetailPanel } from './components/EditorDetailPanel';
 import { FlowItemPanel } from './components/EditorItemPanel';
 import { FlowToolbar } from './components/EditorToolbar';
-import styles from './index.style.ts';
+import styles from './index.less';
 
 GGEditor.setTrackable(false);
 
