@@ -1,33 +1,28 @@
-import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
-import type { FC } from 'react';
-import { useRequest } from '@umijs/max';
-import AvatarList from './components/AvatarList';
-import StandardFormRow from './components/StandardFormRow';
-import TagSelect from './components/TagSelect';
-import type { ListItemDataType } from './data.d';
-import { queryFakeList } from './service';
-import styles from './style.less';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-
+import { Card, Col, Form, List, Row, Select, Typography } from "antd";
+import type { FC } from "react";
+import { useRequest } from "@umijs/max";
+import AvatarList from "./components/AvatarList";
+import StandardFormRow from "./components/StandardFormRow";
+import TagSelect from "./components/TagSelect";
+import type { ListItemDataType } from "./data.d";
+import { queryFakeList } from "./service";
+import useStyles from "./style.style";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
-
 const { Option } = Select;
 const FormItem = Form.Item;
 const { Paragraph } = Typography;
-
 const getKey = (id: string, index: number) => `${id}-${index}`;
-
 const Projects: FC = () => {
+  const { styles } = useStyles();
   const { data, loading, run } = useRequest((values: any) => {
-    console.log('form data', values);
+    console.log("form data", values);
     return queryFakeList({
       count: 8,
     });
   });
-
   const list = data?.list || [];
-
   const cardList = list && (
     <List<ListItemDataType>
       rowKey="id"
@@ -44,11 +39,20 @@ const Projects: FC = () => {
       dataSource={list}
       renderItem={(item) => (
         <List.Item>
-          <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
+          <Card
+            className={styles.card}
+            hoverable
+            cover={<img alt={item.title} src={item.cover} />}
+          >
             <Card.Meta
               title={<a>{item.title}</a>}
               description={
-                <Paragraph className={styles.item} ellipsis={{ rows: 2 }}>
+                <Paragraph
+                  className={styles.item}
+                  ellipsis={{
+                    rows: 2,
+                  }}
+                >
                   {item.subDescription}
                 </Paragraph>
               }
@@ -72,14 +76,16 @@ const Projects: FC = () => {
       )}
     />
   );
-
   const formItemLayout = {
     wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 16 },
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 16,
+      },
     },
   };
-
   return (
     <div className={styles.coverCardList}>
       <Card bordered={false}>
@@ -91,7 +97,13 @@ const Projects: FC = () => {
             run(values);
           }}
         >
-          <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
+          <StandardFormRow
+            title="所属类目"
+            block
+            style={{
+              paddingBottom: 11,
+            }}
+          >
             <FormItem name="category">
               <TagSelect expandable>
                 <TagSelect.Option value="cat1">类目一</TagSelect.Option>
@@ -113,14 +125,26 @@ const Projects: FC = () => {
             <Row gutter={16}>
               <Col lg={8} md={10} sm={10} xs={24}>
                 <FormItem {...formItemLayout} label="作者" name="author">
-                  <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
+                  <Select
+                    placeholder="不限"
+                    style={{
+                      maxWidth: 200,
+                      width: "100%",
+                    }}
+                  >
                     <Option value="lisa">王昭君</Option>
                   </Select>
                 </FormItem>
               </Col>
               <Col lg={8} md={10} sm={10} xs={24}>
                 <FormItem {...formItemLayout} label="好评度" name="rate">
-                  <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
+                  <Select
+                    placeholder="不限"
+                    style={{
+                      maxWidth: 200,
+                      width: "100%",
+                    }}
+                  >
                     <Option value="good">优秀</Option>
                     <Option value="normal">普通</Option>
                   </Select>
@@ -134,5 +158,4 @@ const Projects: FC = () => {
     </div>
   );
 };
-
 export default Projects;

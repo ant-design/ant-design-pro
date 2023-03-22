@@ -1,13 +1,13 @@
-import React from 'react';
-import { StarTwoTone, LikeOutlined, MessageFilled } from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
-import { List, Tag } from 'antd';
-import ArticleListContent from '../ArticleListContent';
-import type { ListItemDataType } from '../../data.d';
-import { queryFakeList } from '../../service';
-import styles from './index.less';
-
+import React from "react";
+import { StarTwoTone, LikeOutlined, MessageFilled } from "@ant-design/icons";
+import { useRequest } from "@umijs/max";
+import { List, Tag } from "antd";
+import ArticleListContent from "../ArticleListContent";
+import type { ListItemDataType } from "../../data.d";
+import { queryFakeList } from "../../service";
+import useStyles from "./index.style";
 const Articles: React.FC = () => {
+  const { styles } = useStyles();
   const IconText: React.FC<{
     icon: React.ReactNode;
     text: React.ReactNode;
@@ -36,7 +36,11 @@ const Articles: React.FC = () => {
           actions={[
             <IconText key="star" icon={<StarTwoTone />} text={item.star} />,
             <IconText key="like" icon={<LikeOutlined />} text={item.like} />,
-            <IconText key="message" icon={<MessageFilled />} text={item.message} />,
+            <IconText
+              key="message"
+              icon={<MessageFilled />}
+              text={item.message}
+            />,
           ]}
         >
           <List.Item.Meta
@@ -59,5 +63,4 @@ const Articles: React.FC = () => {
     />
   );
 };
-
 export default Articles;

@@ -1,15 +1,14 @@
-import type { FC } from 'react';
+import type { FC } from "react";
 import {
   ModalForm,
   ProFormSelect,
   ProFormDateTimePicker,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-components';
-import type { BasicListItemDataType } from '../data.d';
-import styles from '../style.less';
-import { Button, Result } from 'antd';
-
+} from "@ant-design/pro-components";
+import type { BasicListItemDataType } from "../data.d";
+import useStyles from "../style.style";
+import { Button, Result } from "antd";
 type OperationModalProps = {
   done: boolean;
   visible: boolean;
@@ -18,8 +17,8 @@ type OperationModalProps = {
   onSubmit: (values: BasicListItemDataType) => void;
   children?: React.ReactNode;
 };
-
 const OperationModal: FC<OperationModalProps> = (props) => {
+  const { styles } = useStyles();
   const { done, visible, current, onDone, onSubmit, children } = props;
   if (!visible) {
     return null;
@@ -27,7 +26,7 @@ const OperationModal: FC<OperationModalProps> = (props) => {
   return (
     <ModalForm<BasicListItemDataType>
       visible={visible}
-      title={done ? null : `任务${current ? '编辑' : '添加'}`}
+      title={done ? null : `任务${current ? "编辑" : "添加"}`}
       className={styles.standardListForm}
       width={640}
       onFinish={async (values) => {
@@ -41,7 +40,11 @@ const OperationModal: FC<OperationModalProps> = (props) => {
       modalProps={{
         onCancel: () => onDone(),
         destroyOnClose: true,
-        bodyStyle: done ? { padding: '72px 0' } : {},
+        bodyStyle: done
+          ? {
+              padding: "72px 0",
+            }
+          : {},
       }}
     >
       {!done ? (
@@ -49,16 +52,26 @@ const OperationModal: FC<OperationModalProps> = (props) => {
           <ProFormText
             name="title"
             label="任务名称"
-            rules={[{ required: true, message: '请输入任务名称' }]}
+            rules={[
+              {
+                required: true,
+                message: "请输入任务名称",
+              },
+            ]}
             placeholder="请输入"
           />
           <ProFormDateTimePicker
             name="createdAt"
             label="开始时间"
-            rules={[{ required: true, message: '请选择开始时间' }]}
+            rules={[
+              {
+                required: true,
+                message: "请选择开始时间",
+              },
+            ]}
             fieldProps={{
               style: {
-                width: '100%',
+                width: "100%",
               },
             }}
             placeholder="请选择"
@@ -66,15 +79,20 @@ const OperationModal: FC<OperationModalProps> = (props) => {
           <ProFormSelect
             name="owner"
             label="任务负责人"
-            rules={[{ required: true, message: '请选择任务负责人' }]}
+            rules={[
+              {
+                required: true,
+                message: "请选择任务负责人",
+              },
+            ]}
             options={[
               {
-                label: '付晓晓',
-                value: 'xiao',
+                label: "付晓晓",
+                value: "xiao",
               },
               {
-                label: '周毛毛',
-                value: 'mao',
+                label: "周毛毛",
+                value: "mao",
               },
             ]}
             placeholder="请选择管理员"
@@ -82,7 +100,12 @@ const OperationModal: FC<OperationModalProps> = (props) => {
           <ProFormTextArea
             name="subDescription"
             label="产品描述"
-            rules={[{ message: '请输入至少五个字符的产品描述！', min: 5 }]}
+            rules={[
+              {
+                message: "请输入至少五个字符的产品描述！",
+                min: 5,
+              },
+            ]}
             placeholder="请输入至少五个字符"
           />
         </>
@@ -102,5 +125,4 @@ const OperationModal: FC<OperationModalProps> = (props) => {
     </ModalForm>
   );
 };
-
 export default OperationModal;

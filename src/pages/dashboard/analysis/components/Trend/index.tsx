@@ -1,17 +1,15 @@
-import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
-import React from 'react';
-import classNames from 'classnames';
-import styles from './index.less';
-
+import { CaretUpOutlined, CaretDownOutlined } from "@ant-design/icons";
+import React from "react";
+import classNames from "classnames";
+import useStyles from "./index.style";
 export type TrendProps = {
   colorful?: boolean;
-  flag: 'up' | 'down';
+  flag: "up" | "down";
   style?: React.CSSProperties;
   reverseColor?: boolean;
   className?: string;
   children?: React.ReactNode;
 };
-
 const Trend: React.FC<TrendProps> = ({
   colorful = true,
   reverseColor = false,
@@ -20,24 +18,28 @@ const Trend: React.FC<TrendProps> = ({
   className,
   ...rest
 }) => {
+  const { styles } = useStyles();
   const classString = classNames(
     styles.trendItem,
     {
       [styles.trendItemGrey]: !colorful,
       [styles.reverseColor]: reverseColor && colorful,
     },
-    className,
+    className
   );
   return (
-    <div {...rest} className={classString} title={typeof children === 'string' ? children : ''}>
+    <div
+      {...rest}
+      className={classString}
+      title={typeof children === "string" ? children : ""}
+    >
       <span>{children}</span>
       {flag && (
         <span className={styles[flag]}>
-          {flag === 'up' ? <CaretUpOutlined /> : <CaretDownOutlined />}
+          {flag === "up" ? <CaretUpOutlined /> : <CaretDownOutlined />}
         </span>
       )}
     </div>
   );
 };
-
 export default Trend;

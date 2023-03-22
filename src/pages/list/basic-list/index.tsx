@@ -1,6 +1,6 @@
-import type { FC } from 'react';
-import React, { useState } from 'react';
-import { DownOutlined, PlusOutlined } from '@ant-design/icons';
+import type { FC } from "react";
+import React, { useState } from "react";
+import { DownOutlined, PlusOutlined } from "@ant-design/icons";
 import {
   Avatar,
   Button,
@@ -14,57 +14,72 @@ import {
   Progress,
   Radio,
   Row,
-} from 'antd';
-
-import { PageContainer } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
-import dayjs from 'dayjs';
-import OperationModal from './components/OperationModal';
-import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
-import type { BasicListItemDataType } from './data.d';
-import styles from './style.less';
-
+} from "antd";
+import { PageContainer } from "@ant-design/pro-components";
+import { useRequest } from "@umijs/max";
+import dayjs from "dayjs";
+import OperationModal from "./components/OperationModal";
+import {
+  addFakeList,
+  queryFakeList,
+  removeFakeList,
+  updateFakeList,
+} from "./service";
+import type { BasicListItemDataType } from "./data.d";
+import useStyles from "./style.style";
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Search } = Input;
-
 const Info: FC<{
   title: React.ReactNode;
   value: React.ReactNode;
   bordered?: boolean;
-}> = ({ title, value, bordered }) => (
-  <div className={styles.headerInfo}>
-    <span>{title}</span>
-    <p>{value}</p>
-    {bordered && <em />}
-  </div>
-);
-
+}> = ({ title, value, bordered }) => {
+  const { styles } = useStyles();
+  return (
+    <div className={styles.headerInfo}>
+      <span>{title}</span>
+      <p>{value}</p>
+      {bordered && <em />}
+    </div>
+  );
+};
 const ListContent = ({
   data: { owner, createdAt, percent, status },
 }: {
   data: BasicListItemDataType;
-}) => (
-  <div className={styles.listContent}>
-    <div className={styles.listContentItem}>
-      <span>Owner</span>
-      <p>{owner}</p>
+}) => {
+  const { styles } = useStyles();
+  return (
+    <div className={styles.listContent}>
+      <div className={styles.listContentItem}>
+        <span>Owner</span>
+        <p>{owner}</p>
+      </div>
+      <div className={styles.listContentItem}>
+        <span>开始时间</span>
+        <p>{dayjs(createdAt).format("YYYY-MM-DD HH:mm")}</p>
+      </div>
+      <div className={styles.listContentItem}>
+        <Progress
+          percent={percent}
+          status={status}
+          strokeWidth={6}
+          style={{
+            width: 180,
+          }}
+        />
+      </div>
     </div>
-    <div className={styles.listContentItem}>
-      <span>开始时间</span>
-      <p>{dayjs(createdAt).format('YYYY-MM-DD HH:mm')}</p>
-    </div>
-    <div className={styles.listContentItem}>
-      <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />
-    </div>
-  </div>
-);
-
+  );
+};
 export const BasicList: FC = () => {
+  const { styles } = useStyles();
   const [done, setDone] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
-  const [current, setCurrent] = useState<Partial<BasicListItemDataType> | undefined>(undefined);
-
+  const [current, setCurrent] = useState<
+    Partial<BasicListItemDataType> | undefined
+  >(undefined);
   const {
     data: listData,
     loading,
@@ -76,10 +91,10 @@ export const BasicList: FC = () => {
   });
   const { run: postRun } = useRequest(
     (method, params) => {
-      if (method === 'remove') {
+      if (method === "remove") {
         return removeFakeList(params);
       }
-      if (method === 'update') {
+      if (method === "update") {
         return updateFakeList(params);
       }
       return addFakeList(params);
@@ -89,40 +104,39 @@ export const BasicList: FC = () => {
       onSuccess: (result) => {
         mutate(result);
       },
-    },
+    }
   );
-
   const list = listData?.list || [];
-
   const paginationProps = {
     showSizeChanger: true,
     showQuickJumper: true,
     pageSize: 5,
     total: list.length,
   };
-
   const showEditModal = (item: BasicListItemDataType) => {
     setVisible(true);
     setCurrent(item);
   };
-
   const deleteItem = (id: string) => {
-    postRun('remove', { id });
+    postRun("remove", {
+      id,
+    });
   };
-
-  const editAndDelete = (key: string | number, currentItem: BasicListItemDataType) => {
-    if (key === 'edit') showEditModal(currentItem);
-    else if (key === 'delete') {
+  const editAndDelete = (
+    key: string | number,
+    currentItem: BasicListItemDataType
+  ) => {
+    if (key === "edit") showEditModal(currentItem);
+    else if (key === "delete") {
       Modal.confirm({
-        title: '删除任务',
-        content: '确定删除该任务吗？',
-        okText: '确认',
-        cancelText: '取消',
+        title: "删除任务",
+        content: "确定删除该任务吗？",
+        okText: "确认",
+        cancelText: "取消",
         onOk: () => deleteItem(currentItem.id),
       });
     }
   };
-
   const extraContent = (
     <div className={styles.extraContent}>
       <RadioGroup defaultValue="all">
@@ -130,10 +144,13 @@ export const BasicList: FC = () => {
         <RadioButton value="progress">进行中</RadioButton>
         <RadioButton value="waiting">等待中</RadioButton>
       </RadioGroup>
-      <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
+      <Search
+        className={styles.extraContentSearch}
+        placeholder="请输入"
+        onSearch={() => ({})}
+      />
     </div>
   );
-
   const MoreBtn: React.FC<{
     item: BasicListItemDataType;
   }> = ({ item }) => (
@@ -150,19 +167,16 @@ export const BasicList: FC = () => {
       </a>
     </Dropdown>
   );
-
   const handleDone = () => {
     setDone(false);
     setVisible(false);
     setCurrent({});
   };
-
   const handleSubmit = (values: BasicListItemDataType) => {
     setDone(true);
-    const method = values?.id ? 'update' : 'add';
+    const method = values?.id ? "update" : "add";
     postRun(method, values);
   };
-
   return (
     <div>
       <PageContainer>
@@ -185,8 +199,12 @@ export const BasicList: FC = () => {
             className={styles.listCard}
             bordered={false}
             title="基本列表"
-            style={{ marginTop: 24 }}
-            bodyStyle={{ padding: '0 32px 40px 32px' }}
+            style={{
+              marginTop: 24,
+            }}
+            bodyStyle={{
+              padding: "0 32px 40px 32px",
+            }}
             extra={extraContent}
           >
             <List
@@ -211,7 +229,9 @@ export const BasicList: FC = () => {
                   ]}
                 >
                   <List.Item.Meta
-                    avatar={<Avatar src={item.logo} shape="square" size="large" />}
+                    avatar={
+                      <Avatar src={item.logo} shape="square" size="large" />
+                    }
                     title={<a href={item.href}>{item.title}</a>}
                     description={item.subDescription}
                   />
@@ -227,7 +247,10 @@ export const BasicList: FC = () => {
         onClick={() => {
           setVisible(true);
         }}
-        style={{ width: '100%', marginBottom: 8 }}
+        style={{
+          width: "100%",
+          marginBottom: 8,
+        }}
       >
         <PlusOutlined />
         添加
@@ -242,5 +265,4 @@ export const BasicList: FC = () => {
     </div>
   );
 };
-
 export default BasicList;

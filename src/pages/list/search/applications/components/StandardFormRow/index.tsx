@@ -1,7 +1,6 @@
-import React from 'react';
-import classNames from 'classnames';
-import styles from './index.less';
-
+import React from "react";
+import classNames from "classnames";
+import useStyles from "./index.style";
 type StandardFormRowProps = {
   title?: string;
   last?: boolean;
@@ -10,7 +9,6 @@ type StandardFormRowProps = {
   style?: React.CSSProperties;
   children?: React.ReactNode;
 };
-
 const StandardFormRow: React.FC<StandardFormRowProps> = ({
   title,
   children,
@@ -19,12 +17,12 @@ const StandardFormRow: React.FC<StandardFormRowProps> = ({
   grid,
   ...rest
 }) => {
+  const { styles } = useStyles();
   const cls = classNames(styles.standardFormRow, {
     [styles.standardFormRowBlock]: block,
     [styles.standardFormRowLast]: last,
     [styles.standardFormRowGrid]: grid,
   });
-
   return (
     <div className={cls} {...rest}>
       {title && (
@@ -36,5 +34,4 @@ const StandardFormRow: React.FC<StandardFormRowProps> = ({
     </div>
   );
 };
-
 export default StandardFormRow;

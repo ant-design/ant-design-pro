@@ -1,21 +1,19 @@
-import { CloseCircleOutlined } from '@ant-design/icons';
-import { Card, Col, Popover, Row, message } from 'antd';
-
-import type { FC } from 'react';
-import { useState } from 'react';
+import { CloseCircleOutlined } from "@ant-design/icons";
+import { Card, Col, Popover, Row, message } from "antd";
+import type { FC } from "react";
+import { useState } from "react";
 import {
   ProForm,
   ProFormDateRangePicker,
   ProFormSelect,
   ProFormText,
   ProFormTimePicker,
-} from '@ant-design/pro-components';
-import type { ProColumnType } from '@ant-design/pro-components';
-import { EditableProTable } from '@ant-design/pro-components';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-components';
-import { fakeSubmitForm } from './service';
-import styles from './style.less';
-
+} from "@ant-design/pro-components";
+import type { ProColumnType } from "@ant-design/pro-components";
+import { EditableProTable } from "@ant-design/pro-components";
+import { PageContainer, FooterToolbar } from "@ant-design/pro-components";
+import { fakeSubmitForm } from "./service";
+import useStyles from "./style.style";
 interface TableFormDateType {
   key: string;
   workId?: string;
@@ -25,49 +23,46 @@ interface TableFormDateType {
   editable?: boolean;
 }
 type InternalNamePath = (string | number)[];
-
 const fieldLabels = {
-  name: '仓库名',
-  url: '仓库域名',
-  owner: '仓库管理员',
-  approver: '审批人',
-  dateRange: '生效日期',
-  type: '仓库类型',
-  name2: '任务名',
-  url2: '任务描述',
-  owner2: '执行人',
-  approver2: '责任人',
-  dateRange2: '生效日期',
-  type2: '任务类型',
+  name: "仓库名",
+  url: "仓库域名",
+  owner: "仓库管理员",
+  approver: "审批人",
+  dateRange: "生效日期",
+  type: "仓库类型",
+  name2: "任务名",
+  url2: "任务描述",
+  owner2: "执行人",
+  approver2: "责任人",
+  dateRange2: "生效日期",
+  type2: "任务类型",
 };
-
 const tableData = [
   {
-    key: '1',
-    workId: '00001',
-    name: 'John Brown',
-    department: 'New York No. 1 Lake Park',
+    key: "1",
+    workId: "00001",
+    name: "John Brown",
+    department: "New York No. 1 Lake Park",
   },
   {
-    key: '2',
-    workId: '00002',
-    name: 'Jim Green',
-    department: 'London No. 1 Lake Park',
+    key: "2",
+    workId: "00002",
+    name: "Jim Green",
+    department: "London No. 1 Lake Park",
   },
   {
-    key: '3',
-    workId: '00003',
-    name: 'Joe Black',
-    department: 'Sidney No. 1 Lake Park',
+    key: "3",
+    workId: "00003",
+    name: "Joe Black",
+    department: "Sidney No. 1 Lake Park",
   },
 ];
-
 interface ErrorField {
   name: InternalNamePath;
   errors: string[];
 }
-
 const AdvancedForm: FC<Record<string, any>> = () => {
+  const { styles } = useStyles();
   const [error, setError] = useState<ErrorField[]>([]);
   const getErrorInfo = (errors: ErrorField[]) => {
     const errorCount = errors.filter((item) => item.errors.length > 0).length;
@@ -84,9 +79,19 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       if (!err || err.errors.length === 0) {
         return null;
       }
-      const key = err.name[0] as 'name' | 'url' | 'owner' | 'approver' | 'dateRange' | 'type';
+      const key = err.name[0] as
+        | "name"
+        | "url"
+        | "owner"
+        | "approver"
+        | "dateRange"
+        | "type";
       return (
-        <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
+        <li
+          key={key}
+          className={styles.errorListItem}
+          onClick={() => scrollToField(key)}
+        >
           <CloseCircleOutlined className={styles.errorIcon} />
           <div className={styles.errorMessage}>{err.errors[0]}</div>
           <div className={styles.errorField}>{fieldLabels[key]}</div>
@@ -113,44 +118,41 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       </span>
     );
   };
-
   const onFinish = async (values: Record<string, any>) => {
     setError([]);
     try {
       await fakeSubmitForm(values);
-      message.success('提交成功');
+      message.success("提交成功");
     } catch {
       // console.log
     }
   };
-
   const onFinishFailed = (errorInfo: any) => {
     setError(errorInfo.errorFields);
   };
-
   const columns: ProColumnType<TableFormDateType>[] = [
     {
-      title: '成员姓名',
-      dataIndex: 'name',
-      key: 'name',
-      width: '20%',
+      title: "成员姓名",
+      dataIndex: "name",
+      key: "name",
+      width: "20%",
     },
     {
-      title: '工号',
-      dataIndex: 'workId',
-      key: 'workId',
-      width: '20%',
+      title: "工号",
+      dataIndex: "workId",
+      key: "workId",
+      width: "20%",
     },
     {
-      title: '所属部门',
-      dataIndex: 'department',
-      key: 'department',
-      width: '40%',
+      title: "所属部门",
+      dataIndex: "department",
+      key: "department",
+      width: "40%",
     },
     {
-      title: '操作',
-      key: 'action',
-      valueType: 'option',
+      title: "操作",
+      key: "action",
+      valueType: "option",
       render: (_, record: TableFormDateType, index, action) => {
         return [
           <a
@@ -165,7 +167,6 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       },
     },
   ];
-
   return (
     <ProForm
       layout="vertical"
@@ -180,7 +181,9 @@ const AdvancedForm: FC<Record<string, any>> = () => {
           );
         },
       }}
-      initialValues={{ members: tableData }}
+      initialValues={{
+        members: tableData,
+      }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
@@ -191,36 +194,77 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               <ProFormText
                 label={fieldLabels.name}
                 name="name"
-                rules={[{ required: true, message: '请输入仓库名称' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请输入仓库名称",
+                  },
+                ]}
                 placeholder="请输入仓库名称"
               />
             </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+            <Col
+              xl={{
+                span: 6,
+                offset: 2,
+              }}
+              lg={{
+                span: 8,
+              }}
+              md={{
+                span: 12,
+              }}
+              sm={24}
+            >
               <ProFormText
                 label={fieldLabels.url}
                 name="url"
-                rules={[{ required: true, message: '请选择' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择",
+                  },
+                ]}
                 fieldProps={{
-                  style: { width: '100%' },
-                  addonBefore: 'http://',
-                  addonAfter: '.com',
+                  style: {
+                    width: "100%",
+                  },
+                  addonBefore: "http://",
+                  addonAfter: ".com",
                 }}
                 placeholder="请输入"
               />
             </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+            <Col
+              xl={{
+                span: 8,
+                offset: 2,
+              }}
+              lg={{
+                span: 10,
+              }}
+              md={{
+                span: 24,
+              }}
+              sm={24}
+            >
               <ProFormSelect
                 label={fieldLabels.owner}
                 name="owner"
-                rules={[{ required: true, message: '请选择管理员' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择管理员",
+                  },
+                ]}
                 options={[
                   {
-                    label: '付晓晓',
-                    value: 'xiao',
+                    label: "付晓晓",
+                    value: "xiao",
                   },
                   {
-                    label: '周毛毛',
-                    value: 'mao',
+                    label: "周毛毛",
+                    value: "mao",
                   },
                 ]}
                 placeholder="请选择管理员"
@@ -232,45 +276,84 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               <ProFormSelect
                 label={fieldLabels.approver}
                 name="approver"
-                rules={[{ required: true, message: '请选择审批员' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择审批员",
+                  },
+                ]}
                 options={[
                   {
-                    label: '付晓晓',
-                    value: 'xiao',
+                    label: "付晓晓",
+                    value: "xiao",
                   },
                   {
-                    label: '周毛毛',
-                    value: 'mao',
+                    label: "周毛毛",
+                    value: "mao",
                   },
                 ]}
                 placeholder="请选择审批员"
               />
             </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+            <Col
+              xl={{
+                span: 6,
+                offset: 2,
+              }}
+              lg={{
+                span: 8,
+              }}
+              md={{
+                span: 12,
+              }}
+              sm={24}
+            >
               <ProFormDateRangePicker
                 label={fieldLabels.dateRange}
                 name="dateRange"
                 fieldProps={{
                   style: {
-                    width: '100%',
+                    width: "100%",
                   },
                 }}
-                rules={[{ required: true, message: '请选择生效日期' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择生效日期",
+                  },
+                ]}
               />
             </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+            <Col
+              xl={{
+                span: 8,
+                offset: 2,
+              }}
+              lg={{
+                span: 10,
+              }}
+              md={{
+                span: 24,
+              }}
+              sm={24}
+            >
               <ProFormSelect
                 label={fieldLabels.type}
                 name="type"
-                rules={[{ required: true, message: '请选择仓库类型' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择仓库类型",
+                  },
+                ]}
                 options={[
                   {
-                    label: '私密',
-                    value: 'private',
+                    label: "私密",
+                    value: "private",
                   },
                   {
-                    label: '公开',
-                    value: 'public',
+                    label: "公开",
+                    value: "public",
                   },
                 ]}
                 placeholder="请选择仓库类型"
@@ -284,29 +367,68 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               <ProFormText
                 label={fieldLabels.name2}
                 name="name2"
-                rules={[{ required: true, message: '请输入' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请输入",
+                  },
+                ]}
               />
             </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+            <Col
+              xl={{
+                span: 6,
+                offset: 2,
+              }}
+              lg={{
+                span: 8,
+              }}
+              md={{
+                span: 12,
+              }}
+              sm={24}
+            >
               <ProFormText
                 label={fieldLabels.url2}
                 name="url2"
-                rules={[{ required: true, message: '请选择' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择",
+                  },
+                ]}
               />
             </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+            <Col
+              xl={{
+                span: 8,
+                offset: 2,
+              }}
+              lg={{
+                span: 10,
+              }}
+              md={{
+                span: 24,
+              }}
+              sm={24}
+            >
               <ProFormSelect
                 label={fieldLabels.owner2}
                 name="owner2"
-                rules={[{ required: true, message: '请选择管理员' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择管理员",
+                  },
+                ]}
                 options={[
                   {
-                    label: '付晓晓',
-                    value: 'xiao',
+                    label: "付晓晓",
+                    value: "xiao",
                   },
                   {
-                    label: '周毛毛',
-                    value: 'mao',
+                    label: "周毛毛",
+                    value: "mao",
                   },
                 ]}
               />
@@ -317,46 +439,85 @@ const AdvancedForm: FC<Record<string, any>> = () => {
               <ProFormSelect
                 label={fieldLabels.approver2}
                 name="approver2"
-                rules={[{ required: true, message: '请选择审批员' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择审批员",
+                  },
+                ]}
                 options={[
                   {
-                    label: '付晓晓',
-                    value: 'xiao',
+                    label: "付晓晓",
+                    value: "xiao",
                   },
                   {
-                    label: '周毛毛',
-                    value: 'mao',
+                    label: "周毛毛",
+                    value: "mao",
                   },
                 ]}
                 placeholder="请选择审批员"
               />
             </Col>
-            <Col xl={{ span: 6, offset: 2 }} lg={{ span: 8 }} md={{ span: 12 }} sm={24}>
+            <Col
+              xl={{
+                span: 6,
+                offset: 2,
+              }}
+              lg={{
+                span: 8,
+              }}
+              md={{
+                span: 12,
+              }}
+              sm={24}
+            >
               <ProFormTimePicker
                 label={fieldLabels.dateRange2}
                 name="dateRange2"
-                rules={[{ required: true, message: '请输入' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请输入",
+                  },
+                ]}
                 placeholder="提醒时间"
                 fieldProps={{
                   style: {
-                    width: '100%',
+                    width: "100%",
                   },
                 }}
               />
             </Col>
-            <Col xl={{ span: 8, offset: 2 }} lg={{ span: 10 }} md={{ span: 24 }} sm={24}>
+            <Col
+              xl={{
+                span: 8,
+                offset: 2,
+              }}
+              lg={{
+                span: 10,
+              }}
+              md={{
+                span: 24,
+              }}
+              sm={24}
+            >
               <ProFormSelect
                 label={fieldLabels.type2}
                 name="type2"
-                rules={[{ required: true, message: '请选择仓库类型' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "请选择仓库类型",
+                  },
+                ]}
                 options={[
                   {
-                    label: '私密',
-                    value: 'private',
+                    label: "私密",
+                    value: "private",
                   },
                   {
-                    label: '公开',
-                    value: 'public',
+                    label: "公开",
+                    value: "public",
                   },
                 ]}
                 placeholder="请选择仓库类型"
@@ -383,5 +544,4 @@ const AdvancedForm: FC<Record<string, any>> = () => {
     </ProForm>
   );
 };
-
 export default AdvancedForm;

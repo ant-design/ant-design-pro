@@ -1,10 +1,8 @@
-import type { AxisProps } from 'bizcharts';
-import { Axis, Chart, Geom, Tooltip } from 'bizcharts';
-
-import React from 'react';
-import autoHeight from '../autoHeight';
-import styles from '../index.less';
-
+import type { AxisProps } from "bizcharts";
+import { Axis, Chart, Geom, Tooltip } from "bizcharts";
+import React from "react";
+import autoHeight from "../autoHeight";
+import useStyles from "../index.style";
 export type MiniAreaProps = {
   color?: string;
   height?: number;
@@ -28,27 +26,28 @@ export type MiniAreaProps = {
     y: number;
   }[];
 };
-
 const MiniArea: React.FC<MiniAreaProps> = (props) => {
+  const { styles } = useStyles();
   const {
     height = 1,
     data = [],
     forceFit = true,
-    color = 'rgba(24, 144, 255, 0.2)',
-    borderColor = '#1089ff',
-    scale = { x: {}, y: {} },
+    color = "rgba(24, 144, 255, 0.2)",
+    borderColor = "#1089ff",
+    scale = {
+      x: {},
+      y: {},
+    },
     borderWidth = 2,
     line,
     xAxis,
     yAxis,
     animate = true,
   } = props;
-
   const padding: [number, number, number, number] = [36, 5, 30, 5];
-
   const scaleProps = {
     x: {
-      type: 'cat',
+      type: "cat",
       range: [0, 1],
       ...scale.x,
     },
@@ -57,19 +56,27 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
       ...scale.y,
     },
   };
-
-  const tooltip: [string, (...args: any[]) => { name?: string; value: string }] = [
-    'x*y',
+  const tooltip: [
+    string,
+    (...args: any[]) => {
+      name?: string;
+      value: string;
+    }
+  ] = [
+    "x*y",
     (x: string, y: string) => ({
       name: x,
       value: y,
     }),
   ];
-
   const chartHeight = height + 54;
-
   return (
-    <div className={styles.miniChart} style={{ height }}>
+    <div
+      className={styles.miniChart}
+      style={{
+        height,
+      }}
+    >
       <div className={styles.chartContent}>
         {height > 0 && (
           <Chart
@@ -119,7 +126,11 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
                 tooltip={false}
               />
             ) : (
-              <span style={{ display: 'none' }} />
+              <span
+                style={{
+                  display: "none",
+                }}
+              />
             )}
           </Chart>
         )}
@@ -127,5 +138,4 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
     </div>
   );
 };
-
 export default autoHeight()(MiniArea);

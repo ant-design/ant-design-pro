@@ -1,6 +1,6 @@
-import React from 'react';
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, Input, Upload, message } from 'antd';
+import React from "react";
+import { UploadOutlined } from "@ant-design/icons";
+import { Button, Input, Upload, message } from "antd";
 import {
   ProForm,
   ProFormDependency,
@@ -8,19 +8,21 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
-import { queryCurrent } from '../service';
-import { queryProvince, queryCity } from '../service';
-
-import styles from './BaseView.less';
-
-const validatorPhone = (rule: any, value: string[], callback: (message?: string) => void) => {
+} from "@ant-design/pro-components";
+import { useRequest } from "@umijs/max";
+import { queryCurrent } from "../service";
+import { queryProvince, queryCity } from "../service";
+import useStyles from "./BaseView.style";
+const validatorPhone = (
+  rule: any,
+  value: string[],
+  callback: (message?: string) => void
+) => {
   if (!value[0]) {
-    callback('Please input your area code!');
+    callback("Please input your area code!");
   }
   if (!value[1]) {
-    callback('Please input your phone number!');
+    callback("Please input your phone number!");
   }
   callback();
 };
@@ -41,25 +43,24 @@ const AvatarView = ({ avatar }: { avatar: string }) => (
     </Upload>
   </>
 );
-
 const BaseView: React.FC = () => {
+  const { styles } = useStyles();
   const { data: currentUser, loading } = useRequest(() => {
     return queryCurrent();
   });
-
   const getAvatarURL = () => {
     if (currentUser) {
       if (currentUser.avatar) {
         return currentUser.avatar;
       }
-      const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
+      const url =
+        "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png";
       return url;
     }
-    return '';
+    return "";
   };
-
   const handleFinish = async () => {
-    message.success('更新基本信息成功');
+    message.success("更新基本信息成功");
   };
   return (
     <div className={styles.baseView}>
@@ -71,13 +72,13 @@ const BaseView: React.FC = () => {
               onFinish={handleFinish}
               submitter={{
                 searchConfig: {
-                  submitText: '更新基本信息',
+                  submitText: "更新基本信息",
                 },
                 render: (_, dom) => dom[1],
               }}
               initialValues={{
                 ...currentUser,
-                phone: currentUser?.phone.split('-'),
+                phone: currentUser?.phone.split("-"),
               }}
               hideRequiredMark
             >
@@ -88,7 +89,7 @@ const BaseView: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的邮箱!',
+                    message: "请输入您的邮箱!",
                   },
                 ]}
               />
@@ -99,7 +100,7 @@ const BaseView: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的昵称!',
+                    message: "请输入您的昵称!",
                   },
                 ]}
               />
@@ -109,7 +110,7 @@ const BaseView: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: '请输入个人简介!',
+                    message: "请输入个人简介!",
                   },
                 ]}
                 placeholder="个人简介"
@@ -121,13 +122,13 @@ const BaseView: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的国家或地区!',
+                    message: "请输入您的国家或地区!",
                   },
                 ]}
                 options={[
                   {
-                    label: '中国',
-                    value: 'China',
+                    label: "中国",
+                    value: "China",
                   },
                 ]}
               />
@@ -137,7 +138,7 @@ const BaseView: React.FC = () => {
                   rules={[
                     {
                       required: true,
-                      message: '请输入您的所在省!',
+                      message: "请输入您的所在省!",
                     },
                   ]}
                   width="sm"
@@ -157,7 +158,7 @@ const BaseView: React.FC = () => {
                     });
                   }}
                 />
-                <ProFormDependency name={['province']}>
+                <ProFormDependency name={["province"]}>
                   {({ province }) => {
                     return (
                       <ProFormSelect
@@ -169,7 +170,7 @@ const BaseView: React.FC = () => {
                         rules={[
                           {
                             required: true,
-                            message: '请输入您的所在城市!',
+                            message: "请输入您的所在城市!",
                           },
                         ]}
                         disabled={!province}
@@ -178,14 +179,16 @@ const BaseView: React.FC = () => {
                           if (!province?.key) {
                             return [];
                           }
-                          return queryCity(province.key || '').then(({ data }) => {
-                            return data.map((item) => {
-                              return {
-                                label: item.name,
-                                value: item.id,
-                              };
-                            });
-                          });
+                          return queryCity(province.key || "").then(
+                            ({ data }) => {
+                              return data.map((item) => {
+                                return {
+                                  label: item.name,
+                                  value: item.id,
+                                };
+                              });
+                            }
+                          );
                         }}
                       />
                     );
@@ -199,7 +202,7 @@ const BaseView: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的街道地址!',
+                    message: "请输入您的街道地址!",
                   },
                 ]}
               />
@@ -209,9 +212,11 @@ const BaseView: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: '请输入您的联系电话!',
+                    message: "请输入您的联系电话!",
                   },
-                  { validator: validatorPhone },
+                  {
+                    validator: validatorPhone,
+                  },
                 ]}
               >
                 <Input className={styles.area_code} />
@@ -227,5 +232,4 @@ const BaseView: React.FC = () => {
     </div>
   );
 };
-
 export default BaseView;

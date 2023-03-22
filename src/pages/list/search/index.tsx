@@ -1,7 +1,7 @@
 import { PageContainer } from '@ant-design/pro-components';
 import { Input } from 'antd';
 import type { FC } from 'react';
-import { history } from '@umijs/max';
+import { history, useMatch, useLocation } from '@umijs/max';
 
 type SearchProps = {
   children?: React.ReactNode;
@@ -23,9 +23,10 @@ const tabList = [
 ];
 
 const Search: FC<SearchProps> = (props) => {
+  const location = useLocation();
+  let match = useMatch(location.pathname);
   const handleTabChange = (key: string) => {
-    const { match } = props;
-    const url = match.url === '/' ? '' : match.url;
+    const url = match?.pathname === '/' ? '' : match?.pathname;
     switch (key) {
       case 'articles':
         history.push(`${url}/articles`);
@@ -47,8 +48,7 @@ const Search: FC<SearchProps> = (props) => {
   };
 
   const getTabKey = () => {
-    const { match, location } = props;
-    const url = match.path === '/' ? '' : match.path;
+    const url = match?.pathname === '/' ? '' : match?.pathname;
     const tabKey = location.pathname.replace(`${url}/`, '');
     if (tabKey && tabKey !== '/') {
       return tabKey;

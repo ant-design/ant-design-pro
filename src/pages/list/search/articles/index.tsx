@@ -1,23 +1,25 @@
-import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
-import type { FC } from 'react';
-import React from 'react';
-import { useRequest } from '@umijs/max';
-import ArticleListContent from './components/ArticleListContent';
-import StandardFormRow from './components/StandardFormRow';
-import TagSelect from './components/TagSelect';
-import type { ListItemDataType } from './data.d';
-import { queryFakeList } from './service';
-import styles from './style.less';
-
+import {
+  LikeOutlined,
+  LoadingOutlined,
+  MessageOutlined,
+  StarOutlined,
+} from "@ant-design/icons";
+import { Button, Card, Col, Form, List, Row, Select, Tag } from "antd";
+import type { FC } from "react";
+import React from "react";
+import { useRequest } from "@umijs/max";
+import ArticleListContent from "./components/ArticleListContent";
+import StandardFormRow from "./components/StandardFormRow";
+import TagSelect from "./components/TagSelect";
+import type { ListItemDataType } from "./data.d";
+import { queryFakeList } from "./service";
+import useStyles from "./style.style";
 const { Option } = Select;
 const FormItem = Form.Item;
-
 const pageSize = 5;
-
 const Articles: FC = () => {
+  const { styles } = useStyles();
   const [form] = Form.useForm();
-
   const { data, reload, loading, loadMore, loadingMore } = useRequest(
     () => {
       return queryFakeList({
@@ -26,63 +28,71 @@ const Articles: FC = () => {
     },
     {
       loadMore: true,
-    },
+    }
   );
-
   const list = data?.list || [];
-
   const setOwner = () => {
     form.setFieldsValue({
-      owner: ['wzj'],
+      owner: ["wzj"],
     });
   };
-
   const owners = [
     {
-      id: 'wzj',
-      name: '我自己',
+      id: "wzj",
+      name: "我自己",
     },
     {
-      id: 'wjh',
-      name: '吴家豪',
+      id: "wjh",
+      name: "吴家豪",
     },
     {
-      id: 'zxx',
-      name: '周星星',
+      id: "zxx",
+      name: "周星星",
     },
     {
-      id: 'zly',
-      name: '赵丽颖',
+      id: "zly",
+      name: "赵丽颖",
     },
     {
-      id: 'ym',
-      name: '姚明',
+      id: "ym",
+      name: "姚明",
     },
   ];
-
   const IconText: React.FC<{
     type: string;
     text: React.ReactNode;
   }> = ({ type, text }) => {
     switch (type) {
-      case 'star-o':
+      case "star-o":
         return (
           <span>
-            <StarOutlined style={{ marginRight: 8 }} />
+            <StarOutlined
+              style={{
+                marginRight: 8,
+              }}
+            />
             {text}
           </span>
         );
-      case 'like-o':
+      case "like-o":
         return (
           <span>
-            <LikeOutlined style={{ marginRight: 8 }} />
+            <LikeOutlined
+              style={{
+                marginRight: 8,
+              }}
+            />
             {text}
           </span>
         );
-      case 'message':
+      case "message":
         return (
           <span>
-            <MessageOutlined style={{ marginRight: 8 }} />
+            <MessageOutlined
+              style={{
+                marginRight: 8,
+              }}
+            />
             {text}
           </span>
         );
@@ -90,29 +100,43 @@ const Articles: FC = () => {
         return null;
     }
   };
-
   const formItemLayout = {
     wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 24 },
-      md: { span: 12 },
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 24,
+      },
+      md: {
+        span: 12,
+      },
     },
   };
-
   const loadMoreDom = list.length > 0 && (
-    <div style={{ textAlign: 'center', marginTop: 16 }}>
-      <Button onClick={loadMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
+    <div
+      style={{
+        textAlign: "center",
+        marginTop: 16,
+      }}
+    >
+      <Button
+        onClick={loadMore}
+        style={{
+          paddingLeft: 48,
+          paddingRight: 48,
+        }}
+      >
         {loadingMore ? (
           <span>
             <LoadingOutlined /> 加载中...
           </span>
         ) : (
-          '加载更多'
+          "加载更多"
         )}
       </Button>
     </div>
   );
-
   return (
     <>
       <Card bordered={false}>
@@ -120,11 +144,17 @@ const Articles: FC = () => {
           layout="inline"
           form={form}
           initialValues={{
-            owner: ['wjh', 'zxx'],
+            owner: ["wjh", "zxx"],
           }}
           onValuesChange={reload}
         >
-          <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
+          <StandardFormRow
+            title="所属类目"
+            block
+            style={{
+              paddingBottom: 11,
+            }}
+          >
             <FormItem name="category">
               <TagSelect expandable>
                 <TagSelect.Option value="cat1">类目一</TagSelect.Option>
@@ -144,7 +174,13 @@ const Articles: FC = () => {
           </StandardFormRow>
           <StandardFormRow title="owner" grid>
             <FormItem name="owner" noStyle>
-              <Select mode="multiple" placeholder="选择 owner" style={{ minWidth: '6rem' }}>
+              <Select
+                mode="multiple"
+                placeholder="选择 owner"
+                style={{
+                  minWidth: "6rem",
+                }}
+              >
                 {owners.map((owner) => (
                   <Option key={owner.id} value={owner.id}>
                     {owner.name}
@@ -160,14 +196,26 @@ const Articles: FC = () => {
             <Row gutter={16}>
               <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                 <FormItem {...formItemLayout} label="活跃用户" name="user">
-                  <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
+                  <Select
+                    placeholder="不限"
+                    style={{
+                      maxWidth: 200,
+                      width: "100%",
+                    }}
+                  >
                     <Option value="lisa">李三</Option>
                   </Select>
                 </FormItem>
               </Col>
               <Col xl={8} lg={10} md={12} sm={24} xs={24}>
                 <FormItem {...formItemLayout} label="好评度" name="rate">
-                  <Select placeholder="不限" style={{ maxWidth: 200, width: '100%' }}>
+                  <Select
+                    placeholder="不限"
+                    style={{
+                      maxWidth: 200,
+                      width: "100%",
+                    }}
+                  >
                     <Option value="good">优秀</Option>
                   </Select>
                 </FormItem>
@@ -177,9 +225,13 @@ const Articles: FC = () => {
         </Form>
       </Card>
       <Card
-        style={{ marginTop: 24 }}
+        style={{
+          marginTop: 24,
+        }}
         bordered={false}
-        bodyStyle={{ padding: '8px 32px 32px 32px' }}
+        bodyStyle={{
+          padding: "8px 32px 32px 32px",
+        }}
       >
         <List<ListItemDataType>
           size="large"
@@ -220,5 +272,4 @@ const Articles: FC = () => {
     </>
   );
 };
-
 export default Articles;

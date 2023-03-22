@@ -2,27 +2,8 @@ import { Card } from 'antd';
 import type { CardProps } from 'antd/es/card';
 import React from 'react';
 import classNames from 'classnames';
-import styles from './index.less';
-
+import useStyles from './index.style';
 type totalType = () => React.ReactNode;
-
-const renderTotal = (total?: number | totalType | React.ReactNode) => {
-  if (!total && total !== 0) {
-    return null;
-  }
-  let totalDom;
-  switch (typeof total) {
-    case 'undefined':
-      totalDom = null;
-      break;
-    case 'function':
-      totalDom = <div className={styles.total}>{total()}</div>;
-      break;
-    default:
-      totalDom = <div className={styles.total}>{total}</div>;
-  }
-  return totalDom;
-};
 
 export type ChartCardProps = {
   title: React.ReactNode;
@@ -34,9 +15,27 @@ export type ChartCardProps = {
   style?: React.CSSProperties;
 } & CardProps;
 
-class ChartCard extends React.Component<ChartCardProps> {
-  renderContent = () => {
-    const { contentHeight, title, avatar, action, total, footer, children, loading } = this.props;
+const ChartCard: React.FC<ChartCardProps> = (props) => {
+  const { styles } = useStyles();
+  const renderTotal = (total?: number | totalType | React.ReactNode) => {
+    if (!total && total !== 0) {
+      return null;
+    }
+    let totalDom;
+    switch (typeof total) {
+      case 'undefined':
+        totalDom = null;
+        break;
+      case 'function':
+        totalDom = <div className={styles.total}>{total()}</div>;
+        break;
+      default:
+        totalDom = <div className={styles.total}>{total}</div>;
+    }
+    return totalDom;
+  };
+  const renderContent = () => {
+    const { contentHeight, title, avatar, action, total, footer, children, loading } = props;
     if (loading) {
       return false;
     }
@@ -50,14 +49,19 @@ class ChartCard extends React.Component<ChartCardProps> {
           <div className={styles.avatar}>{avatar}</div>
           <div className={styles.metaWrap}>
             <div className={styles.meta}>
-              <span className={styles.title}>{title}</span>
+              <span>{title}</span>
               <span className={styles.action}>{action}</span>
             </div>
             {renderTotal(total)}
           </div>
         </div>
         {children && (
-          <div className={styles.content} style={{ height: contentHeight || 'auto' }}>
+          <div
+            className={styles.content}
+            style={{
+              height: contentHeight || 'auto',
+            }}
+          >
             <div className={contentHeight && styles.contentFixed}>{children}</div>
           </div>
         )}
@@ -74,24 +78,27 @@ class ChartCard extends React.Component<ChartCardProps> {
     );
   };
 
-  render() {
-    const {
-      loading = false,
-      contentHeight,
-      title,
-      avatar,
-      action,
-      total,
-      footer,
-      children,
-      ...rest
-    } = this.props;
-    return (
-      <Card loading={loading} bodyStyle={{ padding: '20px 24px 8px 24px' }} {...rest}>
-        {this.renderContent()}
-      </Card>
-    );
-  }
-}
-
+  const {
+    loading = false,
+    contentHeight,
+    title,
+    avatar,
+    action,
+    total,
+    footer,
+    children,
+    ...rest
+  } = props;
+  return (
+    <Card
+      loading={loading}
+      bodyStyle={{
+        padding: '20px 24px 8px 24px',
+      }}
+      {...rest}
+    >
+      {renderContent()}
+    </Card>
+  );
+};
 export default ChartCard;

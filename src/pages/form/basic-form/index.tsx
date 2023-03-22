@@ -1,4 +1,4 @@
-import { Card, message } from 'antd';
+import { Card, message } from "antd";
 import {
   ProForm,
   ProFormDateRangePicker,
@@ -8,34 +8,38 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
-import type { FC } from 'react';
-import { PageContainer } from '@ant-design/pro-components';
-import { fakeSubmitForm } from './service';
-import styles from './style.less';
-
+} from "@ant-design/pro-components";
+import { useRequest } from "@umijs/max";
+import type { FC } from "react";
+import { PageContainer } from "@ant-design/pro-components";
+import { fakeSubmitForm } from "./service";
+import useStyles from "./style.style";
 const BasicForm: FC<Record<string, any>> = () => {
+  const { styles } = useStyles();
   const { run } = useRequest(fakeSubmitForm, {
     manual: true,
     onSuccess: () => {
-      message.success('提交成功');
+      message.success("提交成功");
     },
   });
-
   const onFinish = async (values: Record<string, any>) => {
     run(values);
   };
-
   return (
     <PageContainer content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。">
       <Card bordered={false}>
         <ProForm
           hideRequiredMark
-          style={{ margin: 'auto', marginTop: 8, maxWidth: 600 }}
+          style={{
+            margin: "auto",
+            marginTop: 8,
+            maxWidth: 600,
+          }}
           name="basic"
           layout="vertical"
-          initialValues={{ public: '1' }}
+          initialValues={{
+            public: "1",
+          }}
           onFinish={onFinish}
         >
           <ProFormText
@@ -45,7 +49,7 @@ const BasicForm: FC<Record<string, any>> = () => {
             rules={[
               {
                 required: true,
-                message: '请输入标题',
+                message: "请输入标题",
               },
             ]}
             placeholder="给目标起个名字"
@@ -57,10 +61,10 @@ const BasicForm: FC<Record<string, any>> = () => {
             rules={[
               {
                 required: true,
-                message: '请选择起止日期',
+                message: "请选择起止日期",
               },
             ]}
-            placeholder={['开始日期', '结束日期']}
+            placeholder={["开始日期", "结束日期"]}
           />
           <ProFormTextArea
             label="目标描述"
@@ -69,7 +73,7 @@ const BasicForm: FC<Record<string, any>> = () => {
             rules={[
               {
                 required: true,
-                message: '请输入目标描述',
+                message: "请输入目标描述",
               },
             ]}
             placeholder="请输入你的阶段性工作目标"
@@ -82,7 +86,7 @@ const BasicForm: FC<Record<string, any>> = () => {
             rules={[
               {
                 required: true,
-                message: '请输入衡量标准',
+                message: "请输入衡量标准",
               },
             ]}
             placeholder="请输入衡量标准"
@@ -127,30 +131,30 @@ const BasicForm: FC<Record<string, any>> = () => {
             width="xs"
             fieldProps={{
               formatter: (value) => `${value || 0}%`,
-              parser: (value) => Number(value ? value.replace('%', '') : '0'),
+              parser: (value) => Number(value ? value.replace("%", "") : "0"),
             }}
           />
 
           <ProFormRadio.Group
             options={[
               {
-                value: '1',
-                label: '公开',
+                value: "1",
+                label: "公开",
               },
               {
-                value: '2',
-                label: '部分公开',
+                value: "2",
+                label: "部分公开",
               },
               {
-                value: '3',
-                label: '不公开',
+                value: "3",
+                label: "不公开",
               },
             ]}
             label="目标公开"
             help="客户、邀评人默认被分享"
             name="publicType"
           />
-          <ProFormDependency name={['publicType']}>
+          <ProFormDependency name={["publicType"]}>
             {({ publicType }) => {
               return (
                 <ProFormSelect
@@ -158,22 +162,23 @@ const BasicForm: FC<Record<string, any>> = () => {
                   name="publicUsers"
                   fieldProps={{
                     style: {
-                      margin: '8px 0',
-                      display: publicType && publicType === '2' ? 'block' : 'none',
+                      margin: "8px 0",
+                      display:
+                        publicType && publicType === "2" ? "block" : "none",
                     },
                   }}
                   options={[
                     {
-                      value: '1',
-                      label: '同事甲',
+                      value: "1",
+                      label: "同事甲",
                     },
                     {
-                      value: '2',
-                      label: '同事乙',
+                      value: "2",
+                      label: "同事乙",
                     },
                     {
-                      value: '3',
-                      label: '同事丙',
+                      value: "3",
+                      label: "同事丙",
                     },
                   ]}
                 />
@@ -185,5 +190,4 @@ const BasicForm: FC<Record<string, any>> = () => {
     </PageContainer>
   );
 };
-
 export default BasicForm;

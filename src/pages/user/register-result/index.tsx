@@ -1,9 +1,7 @@
-import { Button, Result } from 'antd';
-import { Link, useSearchParams } from '@umijs/max';
-import React from 'react';
-
-import styles from './style.less';
-
+import { Button, Result } from "antd";
+import { Link, useSearchParams } from "@umijs/max";
+import React from "react";
+import useStyles from "./style.style";
 const actions = (
   <div className={styles.actions}>
     <a href="">
@@ -16,10 +14,10 @@ const actions = (
     </Link>
   </div>
 );
-
 const RegisterResult: React.FC<Record<string, unknown>> = () => {
+  const { styles } = useStyles();
   const [params] = useSearchParams();
-  const email = params?.get('account') || 'AntDesign@example.com';
+  const email = params?.get("account") || "AntDesign@example.com";
   return (
     <Result
       className={styles.registerResult}
@@ -34,5 +32,4 @@ const RegisterResult: React.FC<Record<string, unknown>> = () => {
     />
   );
 };
-
 export default RegisterResult;

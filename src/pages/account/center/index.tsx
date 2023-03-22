@@ -1,48 +1,74 @@
-import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
-import { Avatar, Card, Col, Divider, Input, InputRef, Row, Tag } from 'antd';
-import React, { useState, useRef } from 'react';
-import { GridContent } from '@ant-design/pro-components';
-import { Link, useRequest } from '@umijs/max';
-import Projects from './components/Projects';
-import Articles from './components/Articles';
-import Applications from './components/Applications';
-import type { CurrentUser, TagType, tabKeyType } from './data.d';
-import { queryCurrent } from './service';
-import styles from './Center.less';
-
+import {
+  PlusOutlined,
+  HomeOutlined,
+  ContactsOutlined,
+  ClusterOutlined,
+} from "@ant-design/icons";
+import { Avatar, Card, Col, Divider, Input, InputRef, Row, Tag } from "antd";
+import React, { useState, useRef } from "react";
+import { GridContent } from "@ant-design/pro-components";
+import { Link, useRequest } from "@umijs/max";
+import Projects from "./components/Projects";
+import Articles from "./components/Articles";
+import Applications from "./components/Applications";
+import type { CurrentUser, TagType, tabKeyType } from "./data.d";
+import { queryCurrent } from "./service";
+import useStyles from "./Center.style";
 const operationTabList = [
   {
-    key: 'articles',
+    key: "articles",
     tab: (
       <span>
-        文章 <span style={{ fontSize: 14 }}>(8)</span>
+        文章{" "}
+        <span
+          style={{
+            fontSize: 14,
+          }}
+        >
+          (8)
+        </span>
       </span>
     ),
   },
   {
-    key: 'applications',
+    key: "applications",
     tab: (
       <span>
-        应用 <span style={{ fontSize: 14 }}>(8)</span>
+        应用{" "}
+        <span
+          style={{
+            fontSize: 14,
+          }}
+        >
+          (8)
+        </span>
       </span>
     ),
   },
   {
-    key: 'projects',
+    key: "projects",
     tab: (
       <span>
-        项目 <span style={{ fontSize: 14 }}>(8)</span>
+        项目{" "}
+        <span
+          style={{
+            fontSize: 14,
+          }}
+        >
+          (8)
+        </span>
       </span>
     ),
   },
 ];
-
-const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
+const TagList: React.FC<{
+  tags: CurrentUser["tags"];
+}> = ({ tags }) => {
+  const { styles } = useStyles();
   const ref = useRef<InputRef | null>(null);
   const [newTags, setNewTags] = useState<TagType[]>([]);
   const [inputVisible, setInputVisible] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>('');
-
+  const [inputValue, setInputValue] = useState<string>("");
   const showInput = () => {
     setInputVisible(true);
     if (ref.current) {
@@ -50,21 +76,27 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
       ref.current?.focus();
     }
   };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
-
   const handleInputConfirm = () => {
     let tempsTags = [...newTags];
-    if (inputValue && tempsTags.filter((tag) => tag.label === inputValue).length === 0) {
-      tempsTags = [...tempsTags, { key: `new-${tempsTags.length}`, label: inputValue }];
+    if (
+      inputValue &&
+      tempsTags.filter((tag) => tag.label === inputValue).length === 0
+    ) {
+      tempsTags = [
+        ...tempsTags,
+        {
+          key: `new-${tempsTags.length}`,
+          label: inputValue,
+        },
+      ];
     }
     setNewTags(tempsTags);
     setInputVisible(false);
-    setInputValue('');
+    setInputValue("");
   };
-
   return (
     <div className={styles.tags}>
       <div className={styles.tagsTitle}>标签</div>
@@ -76,7 +108,9 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
           ref={ref}
           type="text"
           size="small"
-          style={{ width: 78 }}
+          style={{
+            width: 78,
+          }}
           value={inputValue}
           onChange={handleInputChange}
           onBlur={handleInputConfirm}
@@ -84,16 +118,21 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
         />
       )}
       {!inputVisible && (
-        <Tag onClick={showInput} style={{ borderStyle: 'dashed' }}>
+        <Tag
+          onClick={showInput}
+          style={{
+            borderStyle: "dashed",
+          }}
+        >
           <PlusOutlined />
         </Tag>
       )}
     </div>
   );
 };
-
 const Center: React.FC = () => {
-  const [tabKey, setTabKey] = useState<tabKeyType>('articles');
+  const { styles } = useStyles();
+  const [tabKey, setTabKey] = useState<tabKeyType>("articles");
 
   //  获取用户信息
   const { data: currentUser, loading } = useRequest(() => {
@@ -101,7 +140,11 @@ const Center: React.FC = () => {
   });
 
   //  渲染用户信息
-  const renderUserInfo = ({ title, group, geographic }: Partial<CurrentUser>) => {
+  const renderUserInfo = ({
+    title,
+    group,
+    geographic,
+  }: Partial<CurrentUser>) => {
     return (
       <div className={styles.detail}>
         <p>
@@ -126,12 +169,20 @@ const Center: React.FC = () => {
               marginRight: 8,
             }}
           />
-          {(geographic || { province: { label: '' } }).province.label}
+          {
+            (
+              geographic || {
+                province: {
+                  label: "",
+                },
+              }
+            ).province.label
+          }
           {
             (
               geographic || {
                 city: {
-                  label: '',
+                  label: "",
                 },
               }
             ).city.label
@@ -143,23 +194,28 @@ const Center: React.FC = () => {
 
   // 渲染tab切换
   const renderChildrenByTabKey = (tabValue: tabKeyType) => {
-    if (tabValue === 'projects') {
+    if (tabValue === "projects") {
       return <Projects />;
     }
-    if (tabValue === 'applications') {
+    if (tabValue === "applications") {
       return <Applications />;
     }
-    if (tabValue === 'articles') {
+    if (tabValue === "articles") {
       return <Articles />;
     }
     return null;
   };
-
   return (
     <GridContent>
       <Row gutter={24}>
         <Col lg={7} md={24}>
-          <Card bordered={false} style={{ marginBottom: 24 }} loading={loading}>
+          <Card
+            bordered={false}
+            style={{
+              marginBottom: 24,
+            }}
+            loading={loading}
+          >
             {!loading && currentUser && (
               <div>
                 <div className={styles.avatarHolder}>
@@ -170,7 +226,12 @@ const Center: React.FC = () => {
                 {renderUserInfo(currentUser)}
                 <Divider dashed />
                 <TagList tags={currentUser.tags || []} />
-                <Divider style={{ marginTop: 16 }} dashed />
+                <Divider
+                  style={{
+                    marginTop: 16,
+                  }}
+                  dashed
+                />
                 <div className={styles.team}>
                   <div className={styles.teamTitle}>团队</div>
                   <Row gutter={36}>

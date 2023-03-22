@@ -1,14 +1,12 @@
-import { Chart, Coord, Geom, Tooltip } from 'bizcharts';
-import React, { Component } from 'react';
-
-import { DataView } from '@antv/data-set';
-import Debounce from 'lodash.debounce';
-import { Divider } from 'antd';
-import ReactFitText from 'react-fittext';
-import classNames from 'classnames';
-import autoHeight from '../autoHeight';
-import styles from './index.less';
-
+import { Chart, Coord, Geom, Tooltip } from "bizcharts";
+import React, { Component } from "react";
+import { DataView } from "@antv/data-set";
+import Debounce from "lodash.debounce";
+import { Divider } from "antd";
+import ReactFitText from "react-fittext";
+import classNames from "classnames";
+import autoHeight from "../autoHeight";
+import useStyles from "./index.style";
 export type PieProps = {
   animate?: boolean;
   color?: string;
@@ -35,7 +33,13 @@ export type PieProps = {
   subTitle?: React.ReactNode;
 };
 type PieState = {
-  legendData: { checked: boolean; x: string; color: string; percent: number; y: string }[];
+  legendData: {
+    checked: boolean;
+    x: string;
+    color: string;
+    percent: number;
+    y: string;
+  }[];
   legendBlock: boolean;
 };
 class Pie extends Component<PieProps, PieState> {
@@ -43,11 +47,8 @@ class Pie extends Component<PieProps, PieState> {
     legendData: [],
     legendBlock: false,
   };
-
   chart: G2.Chart | undefined = undefined;
-
   root: HTMLDivElement | undefined = undefined;
-
   requestRef: number | undefined = 0;
 
   // for window resize auto responsive legend
@@ -55,7 +56,7 @@ class Pie extends Component<PieProps, PieState> {
     const { hasLegend } = this.props;
     const { legendBlock } = this.state;
     if (!hasLegend || !this.root) {
-      window.removeEventListener('resize', this.resize);
+      window.removeEventListener("resize", this.resize);
       return;
     }
     if (
@@ -74,17 +75,17 @@ class Pie extends Component<PieProps, PieState> {
       });
     }
   }, 300);
-
   componentDidMount() {
     window.addEventListener(
-      'resize',
+      "resize",
       () => {
         this.requestRef = requestAnimationFrame(() => this.resize());
       },
-      { passive: true },
+      {
+        passive: true,
+      }
     );
   }
-
   componentDidUpdate(preProps: PieProps) {
     const { data } = this.props;
     if (data !== preProps.data) {
@@ -93,17 +94,15 @@ class Pie extends Component<PieProps, PieState> {
       this.getLegendData();
     }
   }
-
   componentWillUnmount() {
     if (this.requestRef) {
       window.cancelAnimationFrame(this.requestRef);
     }
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener("resize", this.resize);
     if (this.resize) {
       (this.resize as any).cancel();
     }
   }
-
   getG2Instance = (chart: G2.Chart) => {
     this.chart = chart;
     requestAnimationFrame(() => {
@@ -118,43 +117,54 @@ class Pie extends Component<PieProps, PieState> {
     const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
     if (!geom) return;
     // g2 的类型有问题
-    const items = (geom as any).get('dataArray') || []; // 获取图形对应的
+    const items = (geom as any).get("dataArray") || []; // 获取图形对应的
 
-    const legendData = items.map((item: { color: any; _origin: any }[]) => {
-      /* eslint no-underscore-dangle:0 */
-      const origin = item[0]._origin;
-      origin.color = item[0].color;
-      origin.checked = true;
-      return origin;
-    });
-
+    const legendData = items.map(
+      (
+        item: {
+          color: any;
+          _origin: any;
+        }[]
+      ) => {
+        /* eslint no-underscore-dangle:0 */
+        const origin = item[0]._origin;
+        origin.color = item[0].color;
+        origin.checked = true;
+        return origin;
+      }
+    );
     this.setState({
       legendData,
     });
   };
-
   handleRoot = (n: HTMLDivElement) => {
     this.root = n;
   };
-
-  handleLegendClick = (item: { checked: boolean }, i: string | number) => {
-    const newItem = { ...item };
+  handleLegendClick = (
+    item: {
+      checked: boolean;
+    },
+    i: string | number
+  ) => {
+    const newItem = {
+      ...item,
+    };
     newItem.checked = !newItem.checked;
-
     const { legendData } = this.state;
     legendData[i as unknown as number] = newItem as any;
-
-    const filteredLegendData = legendData.filter((l) => l.checked).map((l) => l.x);
-
+    const filteredLegendData = legendData
+      .filter((l) => l.checked)
+      .map((l) => l.x);
     if (this.chart) {
-      this.chart.filter('x', (val) => filteredLegendData.indexOf(`${val}`) > -1);
+      this.chart.filter(
+        "x",
+        (val) => filteredLegendData.indexOf(`${val}`) > -1
+      );
     }
-
     this.setState({
       legendData,
     });
   };
-
   render() {
     const {
       valueFormat,
@@ -172,79 +182,74 @@ class Pie extends Component<PieProps, PieState> {
       colors,
       lineWidth = 1,
     } = this.props;
-
     const { legendData, legendBlock } = this.state;
     const pieClassName = classNames(styles.pie, className, {
       [styles.hasLegend]: !!hasLegend,
       [styles.legendBlock]: legendBlock,
     });
-
     const {
       data: propsData,
       selected: propsSelected = true,
       tooltip: propsTooltip = true,
     } = this.props;
-
     let data = propsData || [];
     let selected = propsSelected;
     let tooltip = propsTooltip;
-
     const defaultColors = colors;
     data = data || [];
     selected = selected || true;
     tooltip = tooltip || true;
     let formatColor;
-
     const scale = {
       x: {
-        type: 'cat',
+        type: "cat",
         range: [0, 1],
       },
       y: {
         min: 0,
       },
     };
-
     if (percent || percent === 0) {
       selected = false;
       tooltip = false;
       formatColor = (value: string) => {
-        if (value === '占比') {
-          return color || 'rgba(24, 144, 255, 0.85)';
+        if (value === "占比") {
+          return color || "rgba(24, 144, 255, 0.85)";
         }
-        return '#F0F2F5';
+        return "#F0F2F5";
       };
-
       data = [
         {
-          x: '占比',
+          x: "占比",
           y: parseFloat(`${percent}`),
         },
         {
-          x: '反比',
+          x: "反比",
           y: 100 - parseFloat(`${percent}`),
         },
       ];
     }
-
-    const tooltipFormat: [string, (...args: any[]) => { name?: string; value: string }] = [
-      'x*percent',
+    const tooltipFormat: [
+      string,
+      (...args: any[]) => {
+        name?: string;
+        value: string;
+      }
+    ] = [
+      "x*percent",
       (x: string, p: number) => ({
         name: x,
         value: `${(p * 100).toFixed(2)}%`,
       }),
     ];
-
     const padding = [12, 0, 12, 0] as [number, number, number, number];
-
     const dv = new DataView();
     dv.source(data).transform({
-      type: 'percent',
-      field: 'y',
-      dimension: 'x',
-      as: 'percent',
+      type: "percent",
+      field: "y",
+      dimension: "x",
+      as: "percent",
     });
-
     return (
       <div ref={this.handleRoot} className={pieClassName} style={style}>
         <ReactFitText maxFontSize={25}>
@@ -261,11 +266,19 @@ class Pie extends Component<PieProps, PieState> {
               {!!tooltip && <Tooltip showTitle={false} />}
               <Coord type="theta" innerRadius={inner} />
               <Geom
-                style={{ lineWidth, stroke: '#fff' }}
+                style={{
+                  lineWidth,
+                  stroke: "#fff",
+                }}
                 tooltip={tooltip ? tooltipFormat : undefined}
                 type="intervalStack"
                 position="percent"
-                color={['x', percent || percent === 0 ? formatColor : defaultColors] as any}
+                color={
+                  [
+                    "x",
+                    percent || percent === 0 ? formatColor : defaultColors,
+                  ] as any
+                }
                 selected={selected}
               />
             </Chart>
@@ -275,7 +288,9 @@ class Pie extends Component<PieProps, PieState> {
                 {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
                 {/* eslint-disable-next-line */}
                 {total && (
-                  <div className="pie-stat">{typeof total === 'function' ? total() : total}</div>
+                  <div className="pie-stat">
+                    {typeof total === "function" ? total() : total}
+                  </div>
                 )}
               </div>
             )}
@@ -289,15 +304,20 @@ class Pie extends Component<PieProps, PieState> {
                 <span
                   className={styles.dot}
                   style={{
-                    backgroundColor: !item.checked ? '#aaa' : item.color,
+                    backgroundColor: !item.checked ? "#aaa" : item.color,
                   }}
                 />
                 <span className={styles.legendTitle}>{item.x}</span>
                 <Divider type="vertical" />
                 <span className={styles.percent}>
-                  {`${(Number.isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}
+                  {`${(Number.isNaN(item.percent)
+                    ? 0
+                    : item.percent * 100
+                  ).toFixed(2)}%`}
                 </span>
-                <span className={styles.value}>{valueFormat ? valueFormat(item.y) : item.y}</span>
+                <span className={styles.value}>
+                  {valueFormat ? valueFormat(item.y) : item.y}
+                </span>
               </li>
             ))}
           </ul>
@@ -306,5 +326,4 @@ class Pie extends Component<PieProps, PieState> {
     );
   }
 }
-
 export default autoHeight()(Pie);
