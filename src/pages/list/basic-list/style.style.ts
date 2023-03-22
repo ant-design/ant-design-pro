@@ -86,7 +86,7 @@ const useStyles = createStyles(({ token }) => {
       listCard: {},
       ".ant-card-head-title": { overflow: "visible" },
     },
-    [`@media screen and (max-width: token.screen-sm)`]: {
+    [`@media screen and (max-width: ${token.screenSM})`]: {
       standardList: {},
       extraContentSearch: { width: "100%", marginLeft: "0" },
       headerInfo: {
@@ -123,7 +123,7 @@ const useStyles = createStyles(({ token }) => {
           },
         },
       },
-    [`@media screen and (max-width: token.screen-xl)`]: {
+    [`@media screen and (max-width: ${token.screenXL})`]: {
       standardList: {},
       listContent: {
         "& > div": {

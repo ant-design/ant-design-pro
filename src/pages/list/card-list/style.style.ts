@@ -65,7 +65,7 @@ const useStyles = createStyles(({ token }) => {
     [`@media screen and (max-width: ${token.screenMD})`]: {
       extraImg: { display: "none" },
     },
-    [`@media screen and (max-width: token.screen-sm)`]: {
+    [`@media screen and (max-width: ${token.screenSM})`]: {
       pageHeaderContent: { paddingBottom: "30px" },
       contentLink: {
         position: "absolute",

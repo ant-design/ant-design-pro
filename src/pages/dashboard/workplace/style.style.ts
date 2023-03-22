@@ -169,7 +169,7 @@ const useStyles = createStyles(({ token }) => {
     datetime: {
       color: token.colorTextDisabled,
     },
-    [`@media screen and (max-width: token.screen-xl) and (min-width: token.screen-lg)`]:
+    [`@media screen and (max-width: ${token.screenXL}) and (min-width: @screen-lg)`]:
       {
         activeCard: { marginBottom: "24px" },
         members: { marginBottom: "0" },
@@ -193,7 +193,7 @@ const useStyles = createStyles(({ token }) => {
       projectList: {},
       projectGrid: { width: "50%" },
     },
-    [`@media screen and (max-width: token.screen-sm)`]: {
+    [`@media screen and (max-width: ${token.screenSM})`]: {
       pageHeaderContent: { display: "block" },
       content: { marginLeft: "0" },
       extraContent: {},

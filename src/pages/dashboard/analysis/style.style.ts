@@ -139,7 +139,7 @@ const useStyles = createStyles(({ token }) => {
       salesCard: { padding: "16px" },
       salesBar: { padding: "16px" },
     },
-    [`@media screen and (max-width: token.screen-sm)`]: {
+    [`@media screen and (max-width: ${token.screenSM})`]: {
       salesExtraWrap: { display: "none" },
       salesCard: {},
       ".ant-tabs-content": { paddingTop: "30px" },

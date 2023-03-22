@@ -32,7 +32,7 @@ const useStyles = createStyles(({ token }) => {
       justifyContent: "space-between",
       width: "200px",
     },
-    [`@media screen and (max-width: token.screen-sm)`]: {
+    [`@media screen and (max-width: ${token.screenSM})`]: {
       stepDescription: { left: "8px" },
       pageHeader: {},
       ".ant-pro-page-header-wrap-row": { flexDirection: "column" },
