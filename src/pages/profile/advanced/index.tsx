@@ -202,7 +202,7 @@ const columns = [
 ];
 
 type AdvancedState = {
-  operationKey: string;
+  operationKey: 'tab1' | 'tab2' | 'tab3';
   tabActiveKey: string;
 };
 
@@ -243,7 +243,7 @@ const Advanced: FC = () => {
     seTabStatus({ ...tabStatus, tabActiveKey });
   };
   const onOperationTabChange = (key: string) => {
-    seTabStatus({ ...tabStatus, operationKey: key });
+    seTabStatus({ ...tabStatus, operationKey: key as 'tab1' });
   };
 
   return (
@@ -345,7 +345,7 @@ const Advanced: FC = () => {
             tabList={operationTabList}
             onTabChange={onOperationTabChange}
           >
-            {contentList[tabStatus.operationKey]}
+            {contentList[tabStatus.operationKey] as React.ReactNode}
           </Card>
         </GridContent>
       </div>

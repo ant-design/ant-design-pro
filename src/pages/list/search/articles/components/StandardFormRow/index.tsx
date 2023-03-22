@@ -7,6 +7,7 @@ type StandardFormRowProps = {
   last?: boolean;
   block?: boolean;
   grid?: boolean;
+  children?: React.ReactNode;
   style?: React.CSSProperties;
 };
 

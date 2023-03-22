@@ -127,7 +127,7 @@ const BasicForm: FC<Record<string, any>> = () => {
             width="xs"
             fieldProps={{
               formatter: (value) => `${value || 0}%`,
-              parser: (value) => (value ? value.replace('%', '') : '0'),
+              parser: (value) => Number(value ? value.replace('%', '') : '0'),
             }}
           />
 

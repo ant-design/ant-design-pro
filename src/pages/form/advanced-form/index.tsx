@@ -84,7 +84,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       if (!err || err.errors.length === 0) {
         return null;
       }
-      const key = err.name[0] as string;
+      const key = err.name[0] as 'name' | 'url' | 'owner' | 'approver' | 'dateRange' | 'type';
       return (
         <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
           <CloseCircleOutlined className={styles.errorIcon} />

@@ -1,7 +1,6 @@
 import { Button, Result } from 'antd';
-import { Link } from '@umijs/max';
+import { Link, useSearchParams } from '@umijs/max';
 import React from 'react';
-import type { RouteChildrenProps } from 'react-router';
 
 import styles from './style.less';
 
@@ -18,12 +17,9 @@ const actions = (
   </div>
 );
 
-export type LocationState = Record<string, unknown>;
-
-const RegisterResult: React.FC<RouteChildrenProps> = ({ location }) => {
-  const email = location.state
-    ? (location.state as LocationState).account
-    : 'AntDesign@example.com';
+const RegisterResult: React.FC<Record<string, unknown>> = () => {
+  const [params] = useSearchParams();
+  const email = params?.get('account') || 'AntDesign@example.com';
   return (
     <Result
       className={styles.registerResult}

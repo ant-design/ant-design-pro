@@ -85,10 +85,7 @@ const Register: FC = () => {
       if (data.status === 'ok') {
         message.success('注册成功！');
         history.push({
-          pathname: '/user/register-result',
-          state: {
-            account: params.email,
-          },
+          pathname: '/user/register-result?account=' + params.email,
         });
       }
     },

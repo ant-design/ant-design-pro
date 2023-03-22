@@ -18,7 +18,7 @@ import {
 
 import { PageContainer } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import OperationModal from './components/OperationModal';
 import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
 import type { BasicListItemDataType } from './data.d';
@@ -52,7 +52,7 @@ const ListContent = ({
     </div>
     <div className={styles.listContentItem}>
       <span>开始时间</span>
-      <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
+      <p>{dayjs(createdAt).format('YYYY-MM-DD HH:mm')}</p>
     </div>
     <div className={styles.listContentItem}>
       <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />

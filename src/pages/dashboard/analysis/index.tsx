@@ -5,7 +5,7 @@ import { Col, Dropdown, Menu, Row } from 'antd';
 import { GridContent } from '@ant-design/pro-components';
 import type { RadioChangeEvent } from 'antd/es/radio';
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
-import type moment from 'moment';
+import type dayjs from 'dayjs';
 import IntroduceRow from './components/IntroduceRow';
 import SalesCard from './components/SalesCard';
 import TopSearch from './components/TopSearch';
@@ -20,7 +20,7 @@ import { getTimeDistance } from './utils/utils';
 import type { AnalysisData } from './data.d';
 import styles from './style.less';
 
-type RangePickerValue = RangePickerProps<moment.Moment>['value'];
+type RangePickerValue = RangePickerProps<dayjs.Dayjs>['value'];
 
 type AnalysisProps = {
   dashboardAndanalysis: AnalysisData;
@@ -58,8 +58,8 @@ const Analysis: FC<AnalysisProps> = () => {
       return '';
     }
     if (
-      rangePickerValue[0].isSame(value[0] as moment.Moment, 'day') &&
-      rangePickerValue[1].isSame(value[1] as moment.Moment, 'day')
+      rangePickerValue[0].isSame(value[0] as dayjs.Dayjs, 'day') &&
+      rangePickerValue[1].isSame(value[1] as dayjs.Dayjs, 'day')
     ) {
       return styles.currentDate;
     }

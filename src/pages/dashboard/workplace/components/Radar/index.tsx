@@ -95,7 +95,7 @@ class Radar extends Component<RadarProps, RadarState> {
     newItem.checked = !newItem.checked;
 
     const { legendData } = this.state;
-    legendData[i] = newItem;
+    legendData[i as number] = newItem as any;
 
     const filteredLegendData = legendData.filter((l) => l.checked).map((l) => l.name);
 

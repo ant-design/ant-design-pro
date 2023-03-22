@@ -12,6 +12,7 @@ export interface TagSelectOptionProps {
   value: string | number;
   style?: React.CSSProperties;
   checked?: boolean;
+  children?: React.ReactNode;
   onChange?: (value: string | number, state: boolean) => void;
 }
 

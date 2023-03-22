@@ -3,6 +3,7 @@ import { Modal } from 'antd';
 
 type CreateFormProps = {
   modalVisible: boolean;
+  children?: React.ReactNode;
   onCancel: () => void;
 };
 

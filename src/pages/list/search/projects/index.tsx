@@ -1,5 +1,4 @@
 import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
-import moment from 'moment';
 import type { FC } from 'react';
 import { useRequest } from '@umijs/max';
 import AvatarList from './components/AvatarList';
@@ -8,6 +7,10 @@ import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import styles from './style.less';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -51,7 +54,7 @@ const Projects: FC = () => {
               }
             />
             <div className={styles.cardItemContent}>
-              <span>{moment(item.updatedAt).fromNow()}</span>
+              <span>{dayjs(item.updatedAt).fromNow()}</span>
               <div className={styles.avatarList}>
                 <AvatarList size="small">
                   {item.members.map((member, i) => (

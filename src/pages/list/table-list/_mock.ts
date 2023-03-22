@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import type { Request, Response } from 'express';
 import { parse } from 'url';
 import type { TableListItem, TableListParams } from './data.d';
@@ -47,7 +46,7 @@ function getRule(req: Request, res: Response, u: string) {
   );
   if (params.sorter) {
     const sorter = JSON.parse(params.sorter as any);
-    dataSource = dataSource.sort((prev, next) => {
+    dataSource = dataSource.sort((prev: any, next: any) => {
       let sortNumber = 0;
       Object.keys(sorter).forEach((key) => {
         if (sorter[key] === 'descend') {
@@ -75,7 +74,7 @@ function getRule(req: Request, res: Response, u: string) {
           if (!filter[key]) {
             return true;
           }
-          if (filter[key].includes(`${item[key]}`)) {
+          if (filter[key].includes(`${item[key as 'status']}`)) {
             return true;
           }
           return false;

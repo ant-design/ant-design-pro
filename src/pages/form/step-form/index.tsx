@@ -43,6 +43,7 @@ const StepDescriptions: React.FC<{
 
 const StepResult: React.FC<{
   onFinish: () => Promise<void>;
+  children?: React.ReactNode;
 }> = (props) => {
   return (
     <Result

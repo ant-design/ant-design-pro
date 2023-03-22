@@ -9,6 +9,7 @@ export type TrendProps = {
   style?: React.CSSProperties;
   reverseColor?: boolean;
   className?: string;
+  children?: React.ReactNode;
 };
 
 const Trend: React.FC<TrendProps> = ({

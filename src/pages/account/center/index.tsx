@@ -1,9 +1,8 @@
 import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
-import { Avatar, Card, Col, Divider, Input, Row, Tag } from 'antd';
+import { Avatar, Card, Col, Divider, Input, InputRef, Row, Tag } from 'antd';
 import React, { useState, useRef } from 'react';
 import { GridContent } from '@ant-design/pro-components';
 import { Link, useRequest } from '@umijs/max';
-import type { RouteChildrenProps } from 'react-router';
 import Projects from './components/Projects';
 import Articles from './components/Articles';
 import Applications from './components/Applications';
@@ -39,7 +38,7 @@ const operationTabList = [
 ];
 
 const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
-  const ref = useRef<Input | null>(null);
+  const ref = useRef<InputRef | null>(null);
   const [newTags, setNewTags] = useState<TagType[]>([]);
   const [inputVisible, setInputVisible] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
@@ -93,7 +92,7 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
   );
 };
 
-const Center: React.FC<RouteChildrenProps> = () => {
+const Center: React.FC = () => {
   const [tabKey, setTabKey] = useState<tabKeyType>('articles');
 
   //  获取用户信息

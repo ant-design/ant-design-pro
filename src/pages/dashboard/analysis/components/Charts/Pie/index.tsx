@@ -141,7 +141,8 @@ class Pie extends Component<PieProps, PieState> {
     newItem.checked = !newItem.checked;
 
     const { legendData } = this.state;
-    legendData[i] = newItem;
+    const key = i as unknown as number;
+    legendData[key] = newItem;
 
     const filteredLegendData = legendData.filter((l) => l.checked).map((l) => l.x);
 

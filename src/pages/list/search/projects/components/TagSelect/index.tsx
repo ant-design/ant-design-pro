@@ -10,6 +10,7 @@ const { CheckableTag } = Tag;
 
 export interface TagSelectOptionProps {
   value: string | number;
+  children?: React.ReactNode;
   style?: React.CSSProperties;
   checked?: boolean;
   onChange?: (value: string | number, state: boolean) => void;

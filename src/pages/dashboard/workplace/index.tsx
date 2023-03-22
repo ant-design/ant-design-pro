@@ -4,11 +4,14 @@ import { Radar } from '@ant-design/charts';
 
 import { Link, useRequest } from '@umijs/max';
 import { PageContainer } from '@ant-design/pro-components';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
 import type { ActivitiesType, CurrentUser } from './data.d';
 import { queryProjectNotice, queryActivities, fakeChartData } from './service';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 const links = [
   {
@@ -82,10 +85,11 @@ const Workplace: FC = () => {
 
   const renderActivities = (item: ActivitiesType) => {
     const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
-      if (item[key]) {
+      if (item[key as keyof ActivitiesType]) {
+        const value = item[key as 'user'];
         return (
-          <a href={item[key].link} key={item[key].name}>
-            {item[key].name}
+          <a href={value?.link} key={value?.name}>
+            {value.name}
           </a>
         );
       }
@@ -104,7 +108,7 @@ const Workplace: FC = () => {
           }
           description={
             <span className={styles.datetime} title={item.updatedAt}>
-              {moment(item.updatedAt).fromNow()}
+              {dayjs(item.updatedAt).fromNow()}
             </span>
           }
         />
@@ -156,7 +160,7 @@ const Workplace: FC = () => {
                     <Link to={item.memberLink}>{item.member || ''}</Link>
                     {item.updatedAt && (
                       <span className={styles.datetime} title={item.updatedAt}>
-                        {moment(item.updatedAt).fromNow()}
+                        {dayjs(item.updatedAt).fromNow()}
                       </span>
                     )}
                   </div>

@@ -22,7 +22,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
   const [clickedCancel, setClickedCancel] = useState(false);
   const [loading, setLoading] = useState(false);
   const [index, setIndex] = useState(0);
-  const [cacheOriginData, setCacheOriginData] = useState({});
+  const [cacheOriginData, setCacheOriginData] = useState<Record<string, any>>({});
   const [data, setData] = useState(value);
 
   const getRowByKey = (key: string, newData?: TableFormDateType[]) =>
@@ -68,13 +68,13 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
 
   const handleFieldChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    fieldName: string,
+    fieldName: keyof TableFormDateType,
     key: string,
   ) => {
     const newData = [...(data as TableFormDateType[])];
     const target = getRowByKey(key, newData);
-    if (target) {
-      target[fieldName] = e.target.value;
+    if (target && target[fieldName]) {
+      target[fieldName as 'key'] = e.target.value;
       setData(newData);
     }
   };

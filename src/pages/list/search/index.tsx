@@ -4,13 +4,7 @@ import type { FC } from 'react';
 import { history } from '@umijs/max';
 
 type SearchProps = {
-  match: {
-    url: string;
-    path: string;
-  };
-  location: {
-    pathname: string;
-  };
+  children?: React.ReactNode;
 };
 
 const tabList = [

@@ -138,11 +138,11 @@ class Pie extends Component<PieProps, PieState> {
   };
 
   handleLegendClick = (item: { checked: boolean }, i: string | number) => {
-    const newItem = item;
+    const newItem = { ...item };
     newItem.checked = !newItem.checked;
 
     const { legendData } = this.state;
-    legendData[i] = newItem;
+    legendData[i as unknown as number] = newItem as any;
 
     const filteredLegendData = legendData.filter((l) => l.checked).map((l) => l.x);
 

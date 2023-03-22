@@ -1,11 +1,14 @@
 import { Card, List } from 'antd';
 import { useRequest } from '@umijs/max';
 import React from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { queryFakeList } from '../../service';
 import AvatarList from '../AvatarList';
 import type { ListItemDataType } from '../../data.d';
 import styles from './index.less';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 const Projects: React.FC = () => {
   // 获取tab列表数据
@@ -26,7 +29,7 @@ const Projects: React.FC = () => {
           <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
             <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />
             <div className={styles.cardItemContent}>
-              <span>{moment(item.updatedAt).fromNow()}</span>
+              <span>{dayjs(item.updatedAt).fromNow()}</span>
               <div className={styles.avatarList}>
                 <AvatarList size="small">
                   {item.members.map((member) => (
