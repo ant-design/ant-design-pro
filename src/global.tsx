@@ -1,5 +1,5 @@
+import { useIntl } from '@umijs/max';
 import { Button, message, notification } from 'antd';
-import { useIntl } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 
 const { pwa } = defaultSettings;
@@ -58,7 +58,7 @@ if (pwa) {
       <Button
         type="primary"
         onClick={() => {
-          notification.close(key);
+          notification.destroy(key);
           reloadSW();
         }}
       >

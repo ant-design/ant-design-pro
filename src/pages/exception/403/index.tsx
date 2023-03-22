@@ -1,4 +1,4 @@
-import { Link } from 'umi';
+import { Link } from '@umijs/max';
 import { Result, Button } from 'antd';
 
 export default () => (

@@ -2,7 +2,7 @@ import React, { createElement } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
-import styles from './index.less';
+import styles from './index.style.ts';
 
 export type EditableLink = {
   title: string;

@@ -2,11 +2,11 @@ import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
 import type { Store } from 'antd/es/form/interface';
-import { Link, useRequest, history } from 'umi';
+import { Link, useRequest, history } from '@umijs/max';
 import type { StateType } from './service';
 import { fakeRegister } from './service';
 
-import styles from './style.less';
+import styles from './style.style.ts';
 
 const FormItem = Form.Item;
 const { Option } = Select;

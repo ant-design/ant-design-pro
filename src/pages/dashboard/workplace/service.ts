@@ -1,4 +1,4 @@
-import { request } from 'umi';
+import { request } from '@umijs/max';
 import type { NoticeType, ActivitiesType, AnalysisData } from './data';
 
 export async function queryProjectNotice(): Promise<{ data: NoticeType[] }> {

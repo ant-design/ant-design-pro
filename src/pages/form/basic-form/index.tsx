@@ -1,5 +1,6 @@
 import { Card, message } from 'antd';
-import ProForm, {
+import {
+  ProForm,
   ProFormDateRangePicker,
   ProFormDependency,
   ProFormDigit,
@@ -7,12 +8,12 @@ import ProForm, {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-form';
-import { useRequest } from 'umi';
+} from '@ant-design/pro-components';
+import { useRequest } from '@umijs/max';
 import type { FC } from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-components';
 import { fakeSubmitForm } from './service';
-import styles from './style.less';
+import styles from './style.style.ts';
 
 const BasicForm: FC<Record<string, any>> = () => {
   const { run } = useRequest(fakeSubmitForm, {

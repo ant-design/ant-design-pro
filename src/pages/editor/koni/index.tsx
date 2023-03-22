@@ -1,13 +1,13 @@
 import { Col, Row } from 'antd';
 import GGEditor, { Koni } from 'gg-editor';
 
-import { PageContainer } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-components';
 import EditorMinimap from './components/EditorMinimap';
 import { KoniContextMenu } from './components/EditorContextMenu';
 import { KoniDetailPanel } from './components/EditorDetailPanel';
 import { KoniItemPanel } from './components/EditorItemPanel';
 import { KoniToolbar } from './components/EditorToolbar';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 GGEditor.setTrackable(false);
 

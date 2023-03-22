@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 type StandardFormRowProps = {
   title?: string;

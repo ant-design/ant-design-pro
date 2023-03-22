@@ -2,7 +2,7 @@ import { Avatar, Tooltip } from 'antd';
 
 import React from 'react';
 import classNames from 'classnames';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 export declare type SizeType = number | 'small' | 'default' | 'large';
 

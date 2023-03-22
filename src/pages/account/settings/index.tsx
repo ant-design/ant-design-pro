@@ -1,11 +1,11 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
-import { GridContent } from '@ant-design/pro-layout';
+import { GridContent } from '@ant-design/pro-components';
 import { Menu } from 'antd';
 import BaseView from './components/base';
 import BindingView from './components/binding';
 import NotificationView from './components/notification';
 import SecurityView from './components/security';
-import styles from './style.less';
+import styles from './style.style.ts';
 
 const { Item } = Menu;
 

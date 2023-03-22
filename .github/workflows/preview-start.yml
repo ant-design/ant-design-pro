@@ -2,8 +2,14 @@ name: Preview Start
 
 on: pull_request_target
 
+permissions:
+  contents: read
+
 jobs:
   preview:
+    permissions:
+      issues: write # for actions-cool/maintain-one-comment to modify or create issue comments
+      pull-requests: write # for actions-cool/maintain-one-comment to modify or create PR comments
     runs-on: ubuntu-latest
     steps:
       - name: create

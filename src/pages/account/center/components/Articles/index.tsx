@@ -1,11 +1,11 @@
 import React from 'react';
 import { StarTwoTone, LikeOutlined, MessageFilled } from '@ant-design/icons';
-import { useRequest } from 'umi';
+import { useRequest } from '@umijs/max';
 import { List, Tag } from 'antd';
 import ArticleListContent from '../ArticleListContent';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 const Articles: React.FC = () => {
   const IconText: React.FC<{

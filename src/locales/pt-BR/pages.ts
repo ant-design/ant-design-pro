@@ -3,6 +3,8 @@ export default {
     'Ant Design é a especificação de web design mais influente no distrito de Xihu',
   'pages.login.accountLogin.tab': 'Login da conta',
   'pages.login.accountLogin.errorMessage': 'usuário/senha incorreto(admin/ant.design)',
+  'pages.login.failure': 'Login falhou, por favor tente novamente!',
+  'pages.login.success': 'Login efetuado com sucesso!',
   'pages.login.username.placeholder': 'Usuário: admin or user',
   'pages.login.username.required': 'Por favor insira seu usuário!',
   'pages.login.password.placeholder': 'Senha: ant.design',
@@ -21,9 +23,7 @@ export default {
   'pages.login.submit': 'Enviar',
   'pages.login.loginWith': 'Login com :',
   'pages.login.registerAccount': 'Registra Conta',
-  'pages.welcome.advancedComponent': 'Componente Avançado',
   'pages.welcome.link': 'Bem-vindo',
-  'pages.welcome.advancedLayout': 'Layout Avançado',
   'pages.welcome.alertMessage': 'Componentes pesados mais rápidos e mais fortes foram lançados.',
   'pages.admin.subPage.title': 'Esta página só pode ser vista pelo Admin',
   'pages.admin.subPage.alertMessage':

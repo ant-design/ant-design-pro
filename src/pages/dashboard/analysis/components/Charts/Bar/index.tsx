@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import Debounce from 'lodash.debounce';
 import autoHeight from '../autoHeight';
-import styles from '../index.less';
+import styles from '../index.style.ts';
 
 export type BarProps = {
   title: React.ReactNode;

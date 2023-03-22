@@ -3,7 +3,7 @@ import { Col, Row } from 'antd';
 import React, { Component } from 'react';
 
 import autoHeight from './autoHeight';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 export type RadarProps = {
   title?: React.ReactNode;

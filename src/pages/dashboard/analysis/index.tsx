@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Suspense, useState } from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Col, Dropdown, Menu, Row } from 'antd';
-import { GridContent } from '@ant-design/pro-layout';
+import { GridContent } from '@ant-design/pro-components';
 import type { RadioChangeEvent } from 'antd/es/radio';
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
 import type moment from 'moment';
@@ -11,14 +11,14 @@ import SalesCard from './components/SalesCard';
 import TopSearch from './components/TopSearch';
 import ProportionSales from './components/ProportionSales';
 import OfflineData from './components/OfflineData';
-import { useRequest } from 'umi';
+import { useRequest } from '@umijs/max';
 
 import { fakeChartData } from './service';
 import PageLoading from './components/PageLoading';
 import type { TimeType } from './components/SalesCard';
 import { getTimeDistance } from './utils/utils';
 import type { AnalysisData } from './data.d';
-import styles from './style.less';
+import styles from './style.style.ts';
 
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 

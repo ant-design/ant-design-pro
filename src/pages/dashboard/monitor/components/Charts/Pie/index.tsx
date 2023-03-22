@@ -7,7 +7,7 @@ import { Divider } from 'antd';
 import ReactFitText from 'react-fittext';
 import classNames from 'classnames';
 import autoHeight from '../autoHeight';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 export type PieProps = {
   animate?: boolean;

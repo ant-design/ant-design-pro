@@ -2,13 +2,13 @@ import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@a
 import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
 import type { FC } from 'react';
 import React from 'react';
-import { useRequest } from 'umi';
+import { useRequest } from '@umijs/max';
 import ArticleListContent from './components/ArticleListContent';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
-import styles from './style.less';
+import styles from './style.style.ts';
 
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -144,7 +144,7 @@ const Articles: FC = () => {
           </StandardFormRow>
           <StandardFormRow title="owner" grid>
             <FormItem name="owner" noStyle>
-              <Select mode="multiple" placeholder="选择 owner" style={{'minWidth': '6rem'}}>
+              <Select mode="multiple" placeholder="选择 owner" style={{ minWidth: '6rem' }}>
                 {owners.map((owner) => (
                   <Option key={owner.id} value={owner.id}>
                     {owner.name}

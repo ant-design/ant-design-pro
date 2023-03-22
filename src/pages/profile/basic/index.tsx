@@ -1,13 +1,13 @@
-import { PageContainer } from '@ant-design/pro-layout';
-import type { ProColumns } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
+import { PageContainer } from '@ant-design/pro-components';
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import { Badge, Card, Descriptions, Divider } from 'antd';
 import type { FC } from 'react';
 import React from 'react';
-import { useRequest } from 'umi';
+import { useRequest } from '@umijs/max';
 import type { BasicGood, BasicProgress } from './data.d';
 import { queryBasicProfile } from './service';
-import styles from './style.less';
+import styles from './style.style.ts';
 
 const progressColumns: ProColumns<BasicProgress>[] = [
   {

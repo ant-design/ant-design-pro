@@ -1,4 +1,4 @@
-import { request } from 'umi';
+import { request } from '@umijs/max';
 import type { BasicGood, BasicProgress } from './data.d';
 
 export async function queryBasicProfile(): Promise<{

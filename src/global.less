@@ -1,11 +1,3 @@
-@import '~antd/es/style/variable.less';
-
-html,
-body,
-#root {
-  height: 100%;
-}
-
 .colorWeak {
   filter: invert(80%);
 }
@@ -32,7 +24,7 @@ ol {
   list-style: none;
 }
 
-@media (max-width: @screen-xs) {
+@media (max-width: 768px) {
   .ant-table {
     width: 100%;
     overflow-x: auto;
@@ -46,12 +38,5 @@ ol {
         }
       }
     }
-  }
-}
-
-// Compatible with IE11
-@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
-  body .ant-design-pro > .ant-layout {
-    min-height: 100vh;
   }
 }

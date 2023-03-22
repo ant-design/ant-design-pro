@@ -1,7 +1,7 @@
-import { PageContainer } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-components';
 import { Input } from 'antd';
 import type { FC } from 'react';
-import { history } from 'umi';
+import { history } from '@umijs/max';
 
 type SearchProps = {
   match: {

@@ -2,11 +2,11 @@ import type { FC } from 'react';
 import { Avatar, Card, Col, List, Skeleton, Row, Statistic } from 'antd';
 import { Radar } from '@ant-design/charts';
 
-import { Link, useRequest } from 'umi';
-import { PageContainer } from '@ant-design/pro-layout';
+import { Link, useRequest } from '@umijs/max';
+import { PageContainer } from '@ant-design/pro-components';
 import moment from 'moment';
 import EditableLinkGroup from './components/EditableLinkGroup';
-import styles from './style.less';
+import styles from './style.style.ts';
 import type { ActivitiesType, CurrentUser } from './data.d';
 import { queryProjectNotice, queryActivities, fakeChartData } from './service';
 

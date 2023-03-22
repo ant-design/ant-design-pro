@@ -5,7 +5,7 @@ import { Column } from '@ant-design/charts';
 
 import numeral from 'numeral';
 import type { DataItem } from '../data.d';
-import styles from '../style.less';
+import styles from '../style.style.ts';
 
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 export type TimeType = 'today' | 'week' | 'month' | 'year';

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 export type FieldProps = {
   label: React.ReactNode;

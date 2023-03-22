@@ -1,7 +1,7 @@
 import { CanvasMenu, ContextMenu, EdgeMenu, GroupMenu, MultiMenu, NodeMenu } from 'gg-editor';
 
 import MenuItem from './MenuItem';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 const FlowContextMenu = () => (
   <ContextMenu className={styles.contextMenu}>

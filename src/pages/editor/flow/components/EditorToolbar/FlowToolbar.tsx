@@ -1,7 +1,7 @@
 import { Divider } from 'antd';
 import { Toolbar } from 'gg-editor';
 import ToolbarButton from './ToolbarButton';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 const FlowToolbar = () => (
   <Toolbar className={styles.toolbar}>

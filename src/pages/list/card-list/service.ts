@@ -1,4 +1,4 @@
-import { request } from 'umi';
+import { request } from '@umijs/max';
 import type { CardListItemDataType } from './data.d';
 
 export async function queryFakeList(params: {

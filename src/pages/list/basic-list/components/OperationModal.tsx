@@ -5,9 +5,9 @@ import {
   ProFormDateTimePicker,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-form';
+} from '@ant-design/pro-components';
 import type { BasicListItemDataType } from '../data.d';
-import styles from '../style.less';
+import styles from '../style.style.ts';
 import { Button, Result } from 'antd';
 
 type OperationModalProps = {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
-import { PageLoading } from '@ant-design/pro-layout';
+import { PageLoading } from '@ant-design/pro-components';
 
 const colors = ['#eff3ff', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#084594'];
 export default class Map extends React.Component {

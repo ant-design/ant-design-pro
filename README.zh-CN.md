@@ -22,6 +22,7 @@ Language : [🇺🇸](./README.md) | 🇨🇳 | [🇷🇺](./README.ru-RU.md) | 
 ## 5.0 已经发布! 🎉🎉🎉
 
 [Ant Design Pro 5.0.0](https://github.com/ant-design/ant-design-pro/issues/8656)
+
 ## 特性
 
 - :bulb: **TypeScript**: 应用程序级 JavaScript 的语言
@@ -73,33 +74,49 @@ Language : [🇺🇸](./README.md) | 🇨🇳 | [🇷🇺](./README.ru-RU.md) | 
 
 ## 使用
 
+我们提供了 pro-cli 来快速的初始化脚手架。
+
 ```bash
-$ mkdir <your-project-name>
-$ cd <your-project-name>
-$ yarn create umi  # or npm create umi
+# 使用 npm
+npm i @ant-design/pro-cli -g
+pro create myapp
+```
 
-# Choose ant-design-pro:
- Select the boilerplate type (Use arrow keys)
-❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
-  app             - Create project with a simple boilerplate, support typescript.
-  block           - Create a umi block.
-  library         - Create a library with umi.
-  plugin          - Create a umi plugin.
+选择 umi 的版本
 
-$ git init
-$ npm install
-$ npm start         # visit http://localhost:8000
+```shell
+? 🐂 使用 umi@4 还是 umi@3 ? (Use arrow keys)
+❯ umi@4
+  umi@3
+```
+
+> 如果选择了 umi@4 版本，暂时还不支持全量区块。
+
+如果选择了 umi@3，还可以选择 pro 的模板，simple 是基础模板，只提供了框架运行的基本内容，complete 包含所有区块，不太适合当基础模板来进行二次开发
+
+```shell
+? 🚀 要全量的还是一个简单的脚手架? (Use arrow keys)
+❯ simple
+  complete
+```
+
+安装依赖：
+
+```shell
+$ cd myapp && tyarn
+// 或
+$ cd myapp && npm install
 ```
 
 更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。
 
 ## 支持环境
 
-现代浏览器及 IE11。
+现代浏览器。
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --- | --- | --- | --- | --- |
-| IE11, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
+| Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
 ## 参与贡献
 

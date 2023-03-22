@@ -19,15 +19,15 @@ import {
   Tooltip,
   Empty,
 } from 'antd';
-import { GridContent, PageContainer, RouteContext } from '@ant-design/pro-layout';
+import { GridContent, PageContainer, RouteContext } from '@ant-design/pro-components';
 import type { FC } from 'react';
 import React, { Fragment, useState } from 'react';
 
 import classNames from 'classnames';
-import { useRequest } from 'umi';
+import { useRequest } from '@umijs/max';
 import type { AdvancedProfileData } from './data.d';
 import { queryAdvancedProfile } from './service';
-import styles from './style.less';
+import styles from './style.style.ts';
 
 const { Step } = Steps;
 const ButtonGroup = Button.Group;

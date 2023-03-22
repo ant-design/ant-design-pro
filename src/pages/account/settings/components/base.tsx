@@ -1,18 +1,19 @@
 import React from 'react';
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Input, Upload, message } from 'antd';
-import ProForm, {
+import {
+  ProForm,
   ProFormDependency,
   ProFormFieldSet,
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-} from '@ant-design/pro-form';
-import { useRequest } from 'umi';
+} from '@ant-design/pro-components';
+import { useRequest } from '@umijs/max';
 import { queryCurrent } from '../service';
 import { queryProvince, queryCity } from '../service';
 
-import styles from './BaseView.less';
+import styles from './BaseView.style.ts';
 
 const validatorPhone = (rule: any, value: string[], callback: (message?: string) => void) => {
   if (!value[0]) {

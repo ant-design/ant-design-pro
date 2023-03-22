@@ -4,13 +4,13 @@ import {
   EllipsisOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons';
-import { useRequest } from 'umi';
+import { useRequest } from '@umijs/max';
 import { Avatar, Card, Dropdown, List, Menu, Tooltip } from 'antd';
 import React from 'react';
 import numeral from 'numeral';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
-import stylesApplications from './index.less';
+import stylesApplications from './index.style.ts';
 
 export function formatWan(val: number) {
   const v = val * 1;

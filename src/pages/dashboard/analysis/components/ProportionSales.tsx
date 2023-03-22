@@ -5,7 +5,7 @@ import { Donut } from '@ant-design/charts';
 import type { DonutConfig } from '@ant-design/charts/es/donut';
 import React from 'react';
 import type { DataItem } from '../data.d';
-import styles from '../style.less';
+import styles from '../style.style.ts';
 
 const { Text } = Typography;
 

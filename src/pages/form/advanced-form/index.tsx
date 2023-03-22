@@ -3,17 +3,18 @@ import { Card, Col, Popover, Row, message } from 'antd';
 
 import type { FC } from 'react';
 import { useState } from 'react';
-import ProForm, {
+import {
+  ProForm,
   ProFormDateRangePicker,
   ProFormSelect,
   ProFormText,
   ProFormTimePicker,
-} from '@ant-design/pro-form';
-import type { ProColumnType } from '@ant-design/pro-table';
-import { EditableProTable } from '@ant-design/pro-table';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+} from '@ant-design/pro-components';
+import type { ProColumnType } from '@ant-design/pro-components';
+import { EditableProTable } from '@ant-design/pro-components';
+import { PageContainer, FooterToolbar } from '@ant-design/pro-components';
 import { fakeSubmitForm } from './service';
-import styles from './style.less';
+import styles from './style.style.ts';
 
 interface TableFormDateType {
   key: string;

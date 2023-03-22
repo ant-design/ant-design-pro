@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import { request } from 'umi';
+import { request } from '@umijs/max';
 import { TableListItem } from './data';
 
 /** 获取规则列表 GET /api/rule */

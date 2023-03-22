@@ -1,7 +1,7 @@
 import { Avatar } from 'antd';
 import React from 'react';
 import moment from 'moment';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 export type ApplicationsProps = {
   data: {

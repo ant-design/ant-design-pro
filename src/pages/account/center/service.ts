@@ -1,4 +1,4 @@
-import { request } from 'umi';
+import { request } from '@umijs/max';
 import type { CurrentUser, ListItemDataType } from './data.d';
 
 export async function queryCurrent(): Promise<{ data: CurrentUser }> {

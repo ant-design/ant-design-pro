@@ -3,7 +3,7 @@ import { Axis, Chart, Geom, Tooltip } from 'bizcharts';
 
 import React from 'react';
 import autoHeight from '../autoHeight';
-import styles from '../index.less';
+import styles from '../index.style.ts';
 
 export type MiniAreaProps = {
   color?: string;

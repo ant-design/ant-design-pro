@@ -1,10 +1,10 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Card, List, Typography } from 'antd';
-import { PageContainer } from '@ant-design/pro-layout';
-import { useRequest } from 'umi';
+import { PageContainer } from '@ant-design/pro-components';
+import { useRequest } from '@umijs/max';
 import { queryFakeList } from './service';
 import type { CardListItemDataType } from './data.d';
-import styles from './style.less';
+import styles from './style.style.ts';
 
 const { Paragraph } = Typography;
 

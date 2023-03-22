@@ -1,13 +1,13 @@
 import { Col, Row } from 'antd';
 import GGEditor, { Mind } from 'gg-editor';
 
-import { PageContainer } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-components';
 import EditorMinimap from './components/EditorMinimap';
 import { MindContextMenu } from './components/EditorContextMenu';
 import { MindDetailPanel } from './components/EditorDetailPanel';
 import { MindToolbar } from './components/EditorToolbar';
 import data from './worldCup2018.json';
-import styles from './index.less';
+import styles from './index.style.ts';
 
 GGEditor.setTrackable(false);
 

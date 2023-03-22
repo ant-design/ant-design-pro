@@ -16,13 +16,13 @@ import {
   Row,
 } from 'antd';
 
-import { PageContainer } from '@ant-design/pro-layout';
-import { useRequest } from 'umi';
+import { PageContainer } from '@ant-design/pro-components';
+import { useRequest } from '@umijs/max';
 import moment from 'moment';
 import OperationModal from './components/OperationModal';
 import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
 import type { BasicListItemDataType } from './data.d';
-import styles from './style.less';
+import styles from './style.style.ts';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
