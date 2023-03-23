@@ -1,35 +1,35 @@
-import type { FC } from "react";
-import { Suspense, useState } from "react";
-import { EllipsisOutlined } from "@ant-design/icons";
-import { Col, Dropdown, Menu, Row } from "antd";
-import { GridContent } from "@ant-design/pro-components";
-import type { RadioChangeEvent } from "antd/es/radio";
-import type { RangePickerProps } from "antd/es/date-picker/generatePicker";
-import type dayjs from "dayjs";
-import IntroduceRow from "./components/IntroduceRow";
-import SalesCard from "./components/SalesCard";
-import TopSearch from "./components/TopSearch";
-import ProportionSales from "./components/ProportionSales";
-import OfflineData from "./components/OfflineData";
-import { useRequest } from "@umijs/max";
-import { fakeChartData } from "./service";
-import PageLoading from "./components/PageLoading";
-import type { TimeType } from "./components/SalesCard";
-import { getTimeDistance } from "./utils/utils";
-import type { AnalysisData } from "./data.d";
-import useStyles from "./style.style";
-type RangePickerValue = RangePickerProps<dayjs.Dayjs>["value"];
+import type { FC } from 'react';
+import { Suspense, useState } from 'react';
+import { EllipsisOutlined } from '@ant-design/icons';
+import { Col, Dropdown, Menu, Row } from 'antd';
+import { GridContent } from '@ant-design/pro-components';
+import type { RadioChangeEvent } from 'antd/es/radio';
+import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
+import type dayjs from 'dayjs';
+import IntroduceRow from './components/IntroduceRow';
+import SalesCard from './components/SalesCard';
+import TopSearch from './components/TopSearch';
+import ProportionSales from './components/ProportionSales';
+import OfflineData from './components/OfflineData';
+import { useRequest } from '@umijs/max';
+import { fakeChartData } from './service';
+import PageLoading from './components/PageLoading';
+import type { TimeType } from './components/SalesCard';
+import { getTimeDistance } from './utils/utils';
+import type { AnalysisData } from './data.d';
+import useStyles from './style.style';
+type RangePickerValue = RangePickerProps<dayjs.Dayjs>['value'];
 type AnalysisProps = {
   dashboardAndanalysis: AnalysisData;
   loading: boolean;
 };
-type SalesType = "all" | "online" | "stores";
+type SalesType = 'all' | 'online' | 'stores';
 const Analysis: FC<AnalysisProps> = () => {
   const { styles } = useStyles();
-  const [salesType, setSalesType] = useState<SalesType>("all");
-  const [currentTabKey, setCurrentTabKey] = useState<string>("");
+  const [salesType, setSalesType] = useState<SalesType>('all');
+  const [currentTabKey, setCurrentTabKey] = useState<string>('');
   const [rangePickerValue, setRangePickerValue] = useState<RangePickerValue>(
-    getTimeDistance("year")
+    getTimeDistance('year'),
   );
   const { loading, data } = useRequest(fakeChartData);
   const selectDate = (type: TimeType) => {
@@ -40,31 +40,28 @@ const Analysis: FC<AnalysisProps> = () => {
   };
   const isActive = (type: TimeType) => {
     if (!rangePickerValue) {
-      return "";
+      return '';
     }
     const value = getTimeDistance(type);
     if (!value) {
-      return "";
+      return '';
     }
     if (!rangePickerValue[0] || !rangePickerValue[1]) {
-      return "";
+      return '';
     }
     if (
-      rangePickerValue[0].isSame(value[0] as dayjs.Dayjs, "day") &&
-      rangePickerValue[1].isSame(value[1] as dayjs.Dayjs, "day")
+      rangePickerValue[0].isSame(value[0] as dayjs.Dayjs, 'day') &&
+      rangePickerValue[1].isSame(value[1] as dayjs.Dayjs, 'day')
     ) {
       return styles.currentDate;
     }
-    return "";
+    return '';
   };
   let salesPieData;
-  if (salesType === "all") {
+  if (salesType === 'all') {
     salesPieData = data?.salesTypeData;
   } else {
-    salesPieData =
-      salesType === "online"
-        ? data?.salesTypeDataOnline
-        : data?.salesTypeDataOffline;
+    salesPieData = salesType === 'online' ? data?.salesTypeDataOnline : data?.salesTypeDataOffline;
   }
   const menu = (
     <Menu>
@@ -85,8 +82,7 @@ const Analysis: FC<AnalysisProps> = () => {
   const handleTabChange = (key: string) => {
     setCurrentTabKey(key);
   };
-  const activeKey =
-    currentTabKey || (data?.offlineData[0] && data?.offlineData[0].name) || "";
+  const activeKey = currentTabKey || (data?.offlineData[0] && data?.offlineData[0].name) || '';
   return (
     <GridContent>
       <>

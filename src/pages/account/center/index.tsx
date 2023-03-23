@@ -1,25 +1,20 @@
-import {
-  PlusOutlined,
-  HomeOutlined,
-  ContactsOutlined,
-  ClusterOutlined,
-} from "@ant-design/icons";
-import { Avatar, Card, Col, Divider, Input, InputRef, Row, Tag } from "antd";
-import React, { useState, useRef } from "react";
-import { GridContent } from "@ant-design/pro-components";
-import { Link, useRequest } from "@umijs/max";
-import Projects from "./components/Projects";
-import Articles from "./components/Articles";
-import Applications from "./components/Applications";
-import type { CurrentUser, TagType, tabKeyType } from "./data.d";
-import { queryCurrent } from "./service";
-import useStyles from "./Center.style";
+import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
+import { Avatar, Card, Col, Divider, Input, InputRef, Row, Tag } from 'antd';
+import React, { useState, useRef } from 'react';
+import { GridContent } from '@ant-design/pro-components';
+import { Link, useRequest } from '@umijs/max';
+import Projects from './components/Projects';
+import Articles from './components/Articles';
+import Applications from './components/Applications';
+import type { CurrentUser, TagType, tabKeyType } from './data.d';
+import { queryCurrent } from './service';
+import useStyles from './Center.style';
 const operationTabList = [
   {
-    key: "articles",
+    key: 'articles',
     tab: (
       <span>
-        文章{" "}
+        文章{' '}
         <span
           style={{
             fontSize: 14,
@@ -31,10 +26,10 @@ const operationTabList = [
     ),
   },
   {
-    key: "applications",
+    key: 'applications',
     tab: (
       <span>
-        应用{" "}
+        应用{' '}
         <span
           style={{
             fontSize: 14,
@@ -46,10 +41,10 @@ const operationTabList = [
     ),
   },
   {
-    key: "projects",
+    key: 'projects',
     tab: (
       <span>
-        项目{" "}
+        项目{' '}
         <span
           style={{
             fontSize: 14,
@@ -62,13 +57,13 @@ const operationTabList = [
   },
 ];
 const TagList: React.FC<{
-  tags: CurrentUser["tags"];
+  tags: CurrentUser['tags'];
 }> = ({ tags }) => {
   const { styles } = useStyles();
   const ref = useRef<InputRef | null>(null);
   const [newTags, setNewTags] = useState<TagType[]>([]);
   const [inputVisible, setInputVisible] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>('');
   const showInput = () => {
     setInputVisible(true);
     if (ref.current) {
@@ -81,10 +76,7 @@ const TagList: React.FC<{
   };
   const handleInputConfirm = () => {
     let tempsTags = [...newTags];
-    if (
-      inputValue &&
-      tempsTags.filter((tag) => tag.label === inputValue).length === 0
-    ) {
+    if (inputValue && tempsTags.filter((tag) => tag.label === inputValue).length === 0) {
       tempsTags = [
         ...tempsTags,
         {
@@ -95,7 +87,7 @@ const TagList: React.FC<{
     }
     setNewTags(tempsTags);
     setInputVisible(false);
-    setInputValue("");
+    setInputValue('');
   };
   return (
     <div className={styles.tags}>
@@ -121,7 +113,7 @@ const TagList: React.FC<{
         <Tag
           onClick={showInput}
           style={{
-            borderStyle: "dashed",
+            borderStyle: 'dashed',
           }}
         >
           <PlusOutlined />
@@ -132,7 +124,7 @@ const TagList: React.FC<{
 };
 const Center: React.FC = () => {
   const { styles } = useStyles();
-  const [tabKey, setTabKey] = useState<tabKeyType>("articles");
+  const [tabKey, setTabKey] = useState<tabKeyType>('articles');
 
   //  获取用户信息
   const { data: currentUser, loading } = useRequest(() => {
@@ -140,11 +132,7 @@ const Center: React.FC = () => {
   });
 
   //  渲染用户信息
-  const renderUserInfo = ({
-    title,
-    group,
-    geographic,
-  }: Partial<CurrentUser>) => {
+  const renderUserInfo = ({ title, group, geographic }: Partial<CurrentUser>) => {
     return (
       <div className={styles.detail}>
         <p>
@@ -173,7 +161,7 @@ const Center: React.FC = () => {
             (
               geographic || {
                 province: {
-                  label: "",
+                  label: '',
                 },
               }
             ).province.label
@@ -182,7 +170,7 @@ const Center: React.FC = () => {
             (
               geographic || {
                 city: {
-                  label: "",
+                  label: '',
                 },
               }
             ).city.label
@@ -194,13 +182,13 @@ const Center: React.FC = () => {
 
   // 渲染tab切换
   const renderChildrenByTabKey = (tabValue: tabKeyType) => {
-    if (tabValue === "projects") {
+    if (tabValue === 'projects') {
       return <Projects />;
     }
-    if (tabValue === "applications") {
+    if (tabValue === 'applications') {
       return <Applications />;
     }
-    if (tabValue === "articles") {
+    if (tabValue === 'articles') {
       return <Articles />;
     }
     return null;

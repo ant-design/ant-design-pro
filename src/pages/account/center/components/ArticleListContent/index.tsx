@@ -1,7 +1,7 @@
-import { Avatar } from "antd";
-import React from "react";
-import dayjs from "dayjs";
-import useStyles from "./index.style";
+import { Avatar } from 'antd';
+import React from 'react';
+import dayjs from 'dayjs';
+import useStyles from './index.style';
 export type ApplicationsProps = {
   data: {
     content?: string;
@@ -21,7 +21,7 @@ const ArticleListContent: React.FC<ApplicationsProps> = ({
       <div className={styles.extra}>
         <Avatar src={avatar} size="small" />
         <a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
-        <em>{dayjs(updatedAt).format("YYYY-MM-DD HH:mm")}</em>
+        <em>{dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
       </div>
     </div>
   );

@@ -1,30 +1,30 @@
-import { createStyles } from "antd-style";
+import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token }) => {
   return {
     main: {
-      width: "368px",
-      margin: "0 auto",
+      width: '368px',
+      margin: '0 auto',
     },
     h3: {
-      marginBottom: "20px",
-      fontSize: "16px",
+      marginBottom: '20px',
+      fontSize: '16px',
     },
     password: {
-      marginBottom: "24px",
+      marginBottom: '24px',
     },
-    ".ant-form-item-explain": {
-      display: "none",
+    '.ant-form-item-explain': {
+      display: 'none',
     },
     getCaptcha: {
-      display: "block",
-      width: "100%",
+      display: 'block',
+      width: '100%',
     },
     submit: {
-      width: "50%",
+      width: '50%',
     },
     login: {
-      float: "right",
+      float: 'right',
       lineHeight: token.controlHeight,
     },
     success: {
@@ -36,8 +36,8 @@ const useStyles = createStyles(({ token }) => {
     error: {
       color: token.colorError,
     },
-    ".progress-pass > .progress": {},
-    ".ant-progress-bg": {
+    '.progress-pass > .progress': {},
+    '.ant-progress-bg': {
       backgroundColor: token.colorWarning,
     },
   };

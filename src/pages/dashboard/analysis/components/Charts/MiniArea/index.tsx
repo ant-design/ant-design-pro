@@ -1,8 +1,8 @@
-import type { AxisProps } from "bizcharts";
-import { Axis, Chart, Geom, Tooltip } from "bizcharts";
-import React from "react";
-import autoHeight from "../autoHeight";
-import useStyles from "../index.style";
+import type { AxisProps } from 'bizcharts';
+import { Axis, Chart, Geom, Tooltip } from 'bizcharts';
+import React from 'react';
+import autoHeight from '../autoHeight';
+import useStyles from '../index.style';
 export type MiniAreaProps = {
   color?: string;
   height?: number;
@@ -32,8 +32,8 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
     height = 1,
     data = [],
     forceFit = true,
-    color = "rgba(24, 144, 255, 0.2)",
-    borderColor = "#1089ff",
+    color = 'rgba(24, 144, 255, 0.2)',
+    borderColor = '#1089ff',
     scale = {
       x: {},
       y: {},
@@ -47,7 +47,7 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
   const padding: [number, number, number, number] = [36, 5, 30, 5];
   const scaleProps = {
     x: {
-      type: "cat",
+      type: 'cat',
       range: [0, 1],
       ...scale.x,
     },
@@ -61,9 +61,9 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
     (...args: any[]) => {
       name?: string;
       value: string;
-    }
+    },
   ] = [
-    "x*y",
+    'x*y',
     (x: string, y: string) => ({
       name: x,
       value: y,
@@ -128,7 +128,7 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
             ) : (
               <span
                 style={{
-                  display: "none",
+                  display: 'none',
                 }}
               />
             )}

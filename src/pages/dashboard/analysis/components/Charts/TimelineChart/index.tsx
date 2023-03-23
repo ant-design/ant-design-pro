@@ -1,9 +1,9 @@
-import { Axis, Chart, Geom, Legend, Tooltip } from "bizcharts";
-import DataSet from "@antv/data-set";
-import React from "react";
-import Slider from "bizcharts-plugin-slider";
-import autoHeight from "../autoHeight";
-import useStyles from "./index.style";
+import { Axis, Chart, Geom, Legend, Tooltip } from 'bizcharts';
+import DataSet from '@antv/data-set';
+import React from 'react';
+import Slider from 'bizcharts-plugin-slider';
+import autoHeight from '../autoHeight';
+import useStyles from './index.style';
 export type TimelineChartProps = {
   data: {
     x: number;
@@ -27,8 +27,8 @@ const TimelineChart: React.FC<TimelineChartProps> = (props) => {
     height = 400,
     padding = [60, 20, 40, 40] as [number, number, number, number],
     titleMap = {
-      y1: "y1",
-      y2: "y2",
+      y1: 'y1',
+      y2: 'y2',
     },
     borderWidth = 2,
     data: sourceData,
@@ -47,7 +47,7 @@ const TimelineChart: React.FC<TimelineChartProps> = (props) => {
   if (data[0] && data[0].y1 && data[0].y2) {
     max = Math.max(
       [...data].sort((a, b) => b.y1 - a.y1)[0].y1,
-      [...data].sort((a, b) => b.y2 - a.y2)[0].y2
+      [...data].sort((a, b) => b.y2 - a.y2)[0].y2,
     );
   }
   const ds = new DataSet({
@@ -59,36 +59,36 @@ const TimelineChart: React.FC<TimelineChartProps> = (props) => {
   const dv = ds.createView();
   dv.source(data)
     .transform({
-      type: "filter",
+      type: 'filter',
       callback: (obj: { x: string }) => {
         const date = obj.x;
         return date <= ds.state.end && date >= ds.state.start;
       },
     })
     .transform({
-      type: "map",
+      type: 'map',
       callback(row: { y1: string; y2: string }) {
         const newRow = {
           ...row,
         };
-        newRow[titleMap.y1 as "y1"] = row.y1;
-        newRow[titleMap.y2 as "y2"] = row.y2;
+        newRow[titleMap.y1 as 'y1'] = row.y1;
+        newRow[titleMap.y2 as 'y2'] = row.y2;
         return newRow;
       },
     })
     .transform({
-      type: "fold",
+      type: 'fold',
       fields: [titleMap.y1, titleMap.y2],
       // 展开字段集
-      key: "key",
+      key: 'key',
       // key字段
-      value: "value", // value字段
+      value: 'value', // value字段
     });
 
   const timeScale = {
-    type: "time",
+    type: 'time',
     tickInterval: 60 * 60 * 1000,
-    mask: "HH:mm",
+    mask: 'HH:mm',
     range: [0, 1],
   };
   const cols = {
@@ -112,17 +112,11 @@ const TimelineChart: React.FC<TimelineChartProps> = (props) => {
       start={ds.state.start}
       end={ds.state.end}
       backgroundChart={{
-        type: "line",
+        type: 'line',
       }}
-      onChange={({
-        startValue,
-        endValue,
-      }: {
-        startValue: string;
-        endValue: string;
-      }) => {
-        ds.setState("start", startValue);
-        ds.setState("end", endValue);
+      onChange={({ startValue, endValue }: { startValue: string; endValue: string }) => {
+        ds.setState('start', startValue);
+        ds.setState('end', endValue);
       }}
     />
   );
@@ -135,13 +129,7 @@ const TimelineChart: React.FC<TimelineChartProps> = (props) => {
     >
       <div>
         {title && <h4>{title}</h4>}
-        <Chart
-          height={height}
-          padding={padding}
-          data={dv}
-          scale={cols}
-          forceFit
-        >
+        <Chart height={height} padding={padding} data={dv} scale={cols} forceFit>
           <Axis name="x" />
           <Tooltip />
           <Legend name="key" position="top" />

@@ -1,11 +1,11 @@
-import { Card, Col, DatePicker, Row, Tabs } from "antd";
-import type { RangePickerProps } from "antd/es/date-picker/generatePicker";
-import type dayjs from "dayjs";
-import { Column } from "@ant-design/charts";
-import numeral from "numeral";
-import type { DataItem } from "../data.d";
-import useStyles from "../style.style";
-export type TimeType = "today" | "week" | "month" | "year";
+import { Card, Col, DatePicker, Row, Tabs } from 'antd';
+import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
+import type dayjs from 'dayjs';
+import { Column } from '@ant-design/charts';
+import numeral from 'numeral';
+import type { DataItem } from '../data.d';
+import useStyles from '../style.style';
+export type TimeType = 'today' | 'week' | 'month' | 'year';
 const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
 const rankingListData: {
@@ -26,11 +26,11 @@ const SalesCard = ({
   loading,
   selectDate,
 }: {
-  rangePickerValue: RangePickerProps<dayjs.Dayjs>["value"];
+  rangePickerValue: RangePickerProps<dayjs.Dayjs>['value'];
   isActive: (key: TimeType) => string;
   salesData: DataItem[];
   loading: boolean;
-  handleRangePickerChange: RangePickerProps<dayjs.Dayjs>["onChange"];
+  handleRangePickerChange: RangePickerProps<dayjs.Dayjs>['onChange'];
   selectDate: (key: TimeType) => void;
 }) => {
   const { styles } = useStyles();
@@ -47,28 +47,16 @@ const SalesCard = ({
           tabBarExtraContent={
             <div className={styles.salesExtraWrap}>
               <div className={styles.salesExtra}>
-                <a
-                  className={isActive("today")}
-                  onClick={() => selectDate("today")}
-                >
+                <a className={isActive('today')} onClick={() => selectDate('today')}>
                   今日
                 </a>
-                <a
-                  className={isActive("week")}
-                  onClick={() => selectDate("week")}
-                >
+                <a className={isActive('week')} onClick={() => selectDate('week')}>
                   本周
                 </a>
-                <a
-                  className={isActive("month")}
-                  onClick={() => selectDate("month")}
-                >
+                <a className={isActive('month')} onClick={() => selectDate('month')}>
                   本月
                 </a>
-                <a
-                  className={isActive("year")}
-                  onClick={() => selectDate("year")}
-                >
+                <a className={isActive('year')} onClick={() => selectDate('year')}>
                   本年
                 </a>
               </div>
@@ -110,14 +98,14 @@ const SalesCard = ({
                     }}
                     title={{
                       visible: true,
-                      text: "销售趋势",
+                      text: '销售趋势',
                       style: {
                         fontSize: 14,
                       },
                     }}
                     meta={{
                       y: {
-                        alias: "销售量",
+                        alias: '销售量',
                       },
                     }}
                   />
@@ -130,20 +118,15 @@ const SalesCard = ({
                     {rankingListData.map((item, i) => (
                       <li key={item.title}>
                         <span
-                          className={`${styles.rankingItemNumber} ${
-                            i < 3 ? styles.active : ""
-                          }`}
+                          className={`${styles.rankingItemNumber} ${i < 3 ? styles.active : ''}`}
                         >
                           {i + 1}
                         </span>
-                        <span
-                          className={styles.rankingItemTitle}
-                          title={item.title}
-                        >
+                        <span className={styles.rankingItemTitle} title={item.title}>
                           {item.title}
                         </span>
                         <span className={styles.rankingItemValue}>
-                          {numeral(item.total).format("0,0")}
+                          {numeral(item.total).format('0,0')}
                         </span>
                       </li>
                     ))}
@@ -176,14 +159,14 @@ const SalesCard = ({
                     }}
                     title={{
                       visible: true,
-                      text: "访问量趋势",
+                      text: '访问量趋势',
                       style: {
                         fontSize: 14,
                       },
                     }}
                     meta={{
                       y: {
-                        alias: "访问量",
+                        alias: '访问量',
                       },
                     }}
                   />
@@ -196,19 +179,14 @@ const SalesCard = ({
                     {rankingListData.map((item, i) => (
                       <li key={item.title}>
                         <span
-                          className={`${styles.rankingItemNumber} ${
-                            i < 3 ? styles.active : ""
-                          }`}
+                          className={`${styles.rankingItemNumber} ${i < 3 ? styles.active : ''}`}
                         >
                           {i + 1}
                         </span>
-                        <span
-                          className={styles.rankingItemTitle}
-                          title={item.title}
-                        >
+                        <span className={styles.rankingItemTitle} title={item.title}>
                           {item.title}
                         </span>
-                        <span>{numeral(item.total).format("0,0")}</span>
+                        <span>{numeral(item.total).format('0,0')}</span>
                       </li>
                     ))}
                   </ul>

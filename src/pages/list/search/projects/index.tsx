@@ -1,14 +1,14 @@
-import { Card, Col, Form, List, Row, Select, Typography } from "antd";
-import type { FC } from "react";
-import { useRequest } from "@umijs/max";
-import AvatarList from "./components/AvatarList";
-import StandardFormRow from "./components/StandardFormRow";
-import TagSelect from "./components/TagSelect";
-import type { ListItemDataType } from "./data.d";
-import { queryFakeList } from "./service";
-import useStyles from "./style.style";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
+import type { FC } from 'react';
+import { useRequest } from '@umijs/max';
+import AvatarList from './components/AvatarList';
+import StandardFormRow from './components/StandardFormRow';
+import TagSelect from './components/TagSelect';
+import type { ListItemDataType } from './data.d';
+import { queryFakeList } from './service';
+import useStyles from './style.style';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -17,7 +17,7 @@ const getKey = (id: string, index: number) => `${id}-${index}`;
 const Projects: FC = () => {
   const { styles } = useStyles();
   const { data, loading, run } = useRequest((values: any) => {
-    console.log("form data", values);
+    console.log('form data', values);
     return queryFakeList({
       count: 8,
     });
@@ -39,11 +39,7 @@ const Projects: FC = () => {
       dataSource={list}
       renderItem={(item) => (
         <List.Item>
-          <Card
-            className={styles.card}
-            hoverable
-            cover={<img alt={item.title} src={item.cover} />}
-          >
+          <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
             <Card.Meta
               title={<a>{item.title}</a>}
               description={
@@ -129,7 +125,7 @@ const Projects: FC = () => {
                     placeholder="不限"
                     style={{
                       maxWidth: 200,
-                      width: "100%",
+                      width: '100%',
                     }}
                   >
                     <Option value="lisa">王昭君</Option>
@@ -142,7 +138,7 @@ const Projects: FC = () => {
                     placeholder="不限"
                     style={{
                       maxWidth: 200,
-                      width: "100%",
+                      width: '100%',
                     }}
                   >
                     <Option value="good">优秀</Option>

@@ -1,6 +1,6 @@
-import React from "react";
-import { Input } from "antd";
-import useStyles from "./PhoneView.style";
+import React from 'react';
+import { Input } from 'antd';
+import useStyles from './PhoneView.style';
 type PhoneViewProps = {
   value?: string;
   onChange?: (value: string) => void;
@@ -8,9 +8,9 @@ type PhoneViewProps = {
 const PhoneView: React.FC<PhoneViewProps> = (props) => {
   const { styles } = useStyles();
   const { value, onChange } = props;
-  let values = ["", ""];
+  let values = ['', ''];
   if (value) {
-    values = value.split("-");
+    values = value.split('-');
   }
   return (
     <>

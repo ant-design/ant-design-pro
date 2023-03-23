@@ -3,32 +3,21 @@ import {
   EditOutlined,
   EllipsisOutlined,
   ShareAltOutlined,
-} from "@ant-design/icons";
-import {
-  Avatar,
-  Card,
-  Col,
-  Dropdown,
-  Form,
-  List,
-  Menu,
-  Row,
-  Select,
-  Tooltip,
-} from "antd";
-import numeral from "numeral";
-import type { FC } from "react";
-import React from "react";
-import { useRequest } from "@umijs/max";
-import StandardFormRow from "./components/StandardFormRow";
-import TagSelect from "./components/TagSelect";
-import type { ListItemDataType } from "./data.d";
-import { queryFakeList } from "./service";
-import useStyles from "./style.style";
+} from '@ant-design/icons';
+import { Avatar, Card, Col, Dropdown, Form, List, Menu, Row, Select, Tooltip } from 'antd';
+import numeral from 'numeral';
+import type { FC } from 'react';
+import React from 'react';
+import { useRequest } from '@umijs/max';
+import StandardFormRow from './components/StandardFormRow';
+import TagSelect from './components/TagSelect';
+import type { ListItemDataType } from './data.d';
+import { queryFakeList } from './service';
+import useStyles from './style.style';
 const { Option } = Select;
 export function formatWan(val: number) {
   const v = val * 1;
-  if (!v || Number.isNaN(v)) return "";
+  if (!v || Number.isNaN(v)) return '';
   let result: React.ReactNode = val;
   if (val > 10000) {
     result = (
@@ -36,10 +25,10 @@ export function formatWan(val: number) {
         {Math.floor(val / 10000)}
         <span
           style={{
-            position: "relative",
+            position: 'relative',
             top: -2,
             fontSize: 14,
-            fontStyle: "normal",
+            fontStyle: 'normal',
             marginLeft: 2,
           }}
         >
@@ -81,7 +70,7 @@ const CardInfo: React.FC<{
 export const Applications: FC<Record<string, any>> = () => {
   const { styles } = useStyles();
   const { data, loading, run } = useRequest((values: any) => {
-    console.log("form data", values);
+    console.log('form data', values);
     return queryFakeList({
       count: 8,
     });
@@ -90,29 +79,17 @@ export const Applications: FC<Record<string, any>> = () => {
   const itemMenu = (
     <Menu>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.alipay.com/"
-        >
+        <a target="_blank" rel="noopener noreferrer" href="https://www.alipay.com/">
           1st menu item
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.taobao.com/"
-        >
+        <a target="_blank" rel="noopener noreferrer" href="https://www.taobao.com/">
           2nd menu item
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.tmall.com/"
-        >
+        <a target="_blank" rel="noopener noreferrer" href="https://www.tmall.com/">
           3d menu item
         </a>
       </Menu.Item>
@@ -158,7 +135,7 @@ export const Applications: FC<Record<string, any>> = () => {
                     placeholder="不限"
                     style={{
                       maxWidth: 200,
-                      width: "100%",
+                      width: '100%',
                     }}
                   >
                     <Option value="lisa">王昭君</Option>
@@ -171,7 +148,7 @@ export const Applications: FC<Record<string, any>> = () => {
                     placeholder="不限"
                     style={{
                       maxWidth: 200,
-                      width: "100%",
+                      width: '100%',
                     }}
                   >
                     <Option value="good">优秀</Option>
@@ -219,14 +196,11 @@ export const Applications: FC<Record<string, any>> = () => {
                 </Dropdown>,
               ]}
             >
-              <Card.Meta
-                avatar={<Avatar size="small" src={item.avatar} />}
-                title={item.title}
-              />
+              <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
               <div className={styles.cardItemContent}>
                 <CardInfo
                   activeUser={formatWan(item.activeUser)}
-                  newUser={numeral(item.newUser).format("0,0")}
+                  newUser={numeral(item.newUser).format('0,0')}
                 />
               </div>
             </Card>

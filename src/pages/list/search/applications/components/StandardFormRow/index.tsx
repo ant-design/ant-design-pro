@@ -1,6 +1,6 @@
-import React from "react";
-import classNames from "classnames";
-import useStyles from "./index.style";
+import React from 'react';
+import classNames from 'classnames';
+import useStyles from './index.style';
 type StandardFormRowProps = {
   title?: string;
   last?: boolean;

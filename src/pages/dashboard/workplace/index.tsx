@@ -1,39 +1,39 @@
-import type { FC } from "react";
-import { Avatar, Card, Col, List, Skeleton, Row, Statistic } from "antd";
-import { Radar } from "@ant-design/charts";
-import { Link, useRequest } from "@umijs/max";
-import { PageContainer } from "@ant-design/pro-components";
-import dayjs from "dayjs";
-import EditableLinkGroup from "./components/EditableLinkGroup";
-import useStyles from "./style.style";
-import type { ActivitiesType, CurrentUser } from "./data.d";
-import { queryProjectNotice, queryActivities, fakeChartData } from "./service";
-import relativeTime from "dayjs/plugin/relativeTime";
+import type { FC } from 'react';
+import { Avatar, Card, Col, List, Skeleton, Row, Statistic } from 'antd';
+import { Radar } from '@ant-design/charts';
+import { Link, useRequest } from '@umijs/max';
+import { PageContainer } from '@ant-design/pro-components';
+import dayjs from 'dayjs';
+import EditableLinkGroup from './components/EditableLinkGroup';
+import useStyles from './style.style';
+import type { ActivitiesType, CurrentUser } from './data.d';
+import { queryProjectNotice, queryActivities, fakeChartData } from './service';
+import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 const links = [
   {
-    title: "操作一",
-    href: "",
+    title: '操作一',
+    href: '',
   },
   {
-    title: "操作二",
-    href: "",
+    title: '操作二',
+    href: '',
   },
   {
-    title: "操作三",
-    href: "",
+    title: '操作三',
+    href: '',
   },
   {
-    title: "操作四",
-    href: "",
+    title: '操作四',
+    href: '',
   },
   {
-    title: "操作五",
-    href: "",
+    title: '操作五',
+    href: '',
   },
   {
-    title: "操作六",
-    href: "",
+    title: '操作六',
+    href: '',
   },
 ];
 const PageHeaderContent: FC<{
@@ -88,15 +88,13 @@ const ExtraContent: FC<Record<string, any>> = () => {
 };
 const Workplace: FC = () => {
   const { styles } = useStyles();
-  const { loading: projectLoading, data: projectNotice = [] } =
-    useRequest(queryProjectNotice);
-  const { loading: activitiesLoading, data: activities = [] } =
-    useRequest(queryActivities);
+  const { loading: projectLoading, data: projectNotice = [] } = useRequest(queryProjectNotice);
+  const { loading: activitiesLoading, data: activities = [] } = useRequest(queryActivities);
   const { data } = useRequest(fakeChartData);
   const renderActivities = (item: ActivitiesType) => {
     const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
       if (item[key as keyof ActivitiesType]) {
-        const value = item[key as "user"];
+        const value = item[key as 'user'];
         return (
           <a href={value?.link} key={value?.name}>
             {value.name}
@@ -130,14 +128,13 @@ const Workplace: FC = () => {
       content={
         <PageHeaderContent
           currentUser={{
-            avatar:
-              "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png",
-            name: "吴彦祖",
-            userid: "00000001",
-            email: "antdesign@alipay.com",
-            signature: "海纳百川，有容乃大",
-            title: "交互专家",
-            group: "蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED",
+            avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+            name: '吴彦祖',
+            userid: '00000001',
+            email: 'antdesign@alipay.com',
+            signature: '海纳百川，有容乃大',
+            title: '交互专家',
+            group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
           }}
         />
       }
@@ -176,7 +173,7 @@ const Workplace: FC = () => {
                     description={item.description}
                   />
                   <div className={styles.projectItemContent}>
-                    <Link to={item.memberLink}>{item.member || ""}</Link>
+                    <Link to={item.memberLink}>{item.member || ''}</Link>
                     {item.updatedAt && (
                       <span className={styles.datetime} title={item.updatedAt}>
                         {dayjs(item.updatedAt).fromNow()}
@@ -216,11 +213,7 @@ const Workplace: FC = () => {
               padding: 0,
             }}
           >
-            <EditableLinkGroup
-              onAdd={() => {}}
-              links={links}
-              linkElement={Link}
-            />
+            <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
           </Card>
           <Card
             style={{
@@ -244,7 +237,7 @@ const Workplace: FC = () => {
                   visible: true,
                 }}
                 legend={{
-                  position: "bottom-center",
+                  position: 'bottom-center',
                 }}
               />
             </div>

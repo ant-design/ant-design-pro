@@ -3,17 +3,17 @@ import {
   EditOutlined,
   EllipsisOutlined,
   ShareAltOutlined,
-} from "@ant-design/icons";
-import { useRequest } from "@umijs/max";
-import { Avatar, Card, Dropdown, List, Menu, Tooltip } from "antd";
-import React from "react";
-import numeral from "numeral";
-import type { ListItemDataType } from "../../data.d";
-import { queryFakeList } from "../../service";
-import useStyles from "./index.style";
+} from '@ant-design/icons';
+import { useRequest } from '@umijs/max';
+import { Avatar, Card, Dropdown, List, Menu, Tooltip } from 'antd';
+import React from 'react';
+import numeral from 'numeral';
+import type { ListItemDataType } from '../../data.d';
+import { queryFakeList } from '../../service';
+import useStyles from './index.style';
 export function formatWan(val: number) {
   const v = val * 1;
-  if (!v || Number.isNaN(v)) return "";
+  if (!v || Number.isNaN(v)) return '';
   let result: React.ReactNode = val;
   if (val > 10000) {
     result = (
@@ -21,10 +21,10 @@ export function formatWan(val: number) {
         {Math.floor(val / 10000)}
         <span
           style={{
-            position: "relative",
+            position: 'relative',
             top: -2,
             fontSize: 14,
-            fontStyle: "normal",
+            fontStyle: 'normal',
             marginLeft: 2,
           }}
         >
@@ -46,29 +46,17 @@ const Applications: React.FC = () => {
   const itemMenu = (
     <Menu>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.alipay.com/"
-        >
+        <a target="_blank" rel="noopener noreferrer" href="https://www.alipay.com/">
           1st menu item
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.taobao.com/"
-        >
+        <a target="_blank" rel="noopener noreferrer" href="https://www.taobao.com/">
           2nd menu item
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.tmall.com/"
-        >
+        <a target="_blank" rel="noopener noreferrer" href="https://www.tmall.com/">
           3d menu item
         </a>
       </Menu.Item>
@@ -125,14 +113,11 @@ const Applications: React.FC = () => {
               </Dropdown>,
             ]}
           >
-            <Card.Meta
-              avatar={<Avatar size="small" src={item.avatar} />}
-              title={item.title}
-            />
+            <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
             <div className={stylesApplications.cardItemContent}>
               <CardInfo
                 activeUser={formatWan(item.activeUser)}
-                newUser={numeral(item.newUser).format("0,0")}
+                newUser={numeral(item.newUser).format('0,0')}
               />
             </div>
           </Card>

@@ -1,24 +1,16 @@
-import React, { useRef, useState } from "react";
-import type { FormInstance } from "antd";
-import {
-  Card,
-  Result,
-  Button,
-  Descriptions,
-  Divider,
-  Alert,
-  Statistic,
-} from "antd";
-import { PageContainer } from "@ant-design/pro-components";
+import React, { useRef, useState } from 'react';
+import type { FormInstance } from 'antd';
+import { Card, Result, Button, Descriptions, Divider, Alert, Statistic } from 'antd';
+import { PageContainer } from '@ant-design/pro-components';
 import {
   ProForm,
   ProFormDigit,
   ProFormSelect,
   ProFormText,
   StepsForm,
-} from "@ant-design/pro-components";
-import type { StepDataType } from "./data.d";
-import useStyles from "./style.style";
+} from '@ant-design/pro-components';
+import type { StepDataType } from './data.d';
+import useStyles from './style.style';
 const StepDescriptions: React.FC<{
   stepData: StepDataType;
   bordered?: boolean;
@@ -74,11 +66,11 @@ const StepResult: React.FC<{
 const StepForm: React.FC<Record<string, any>> = () => {
   const { styles } = useStyles();
   const [stepData, setStepData] = useState<StepDataType>({
-    payAccount: "ant-design@alipay.com",
-    receiverAccount: "test@example.com",
-    receiverName: "Alex",
-    amount: "500",
-    receiverMode: "alipay",
+    payAccount: 'ant-design@alipay.com',
+    receiverAccount: 'test@example.com',
+    receiverName: 'Alex',
+    amount: '500',
+    receiverMode: 'alipay',
   });
   const [current, setCurrent] = useState(0);
   const formRef = useRef<FormInstance>();
@@ -113,11 +105,11 @@ const StepForm: React.FC<Record<string, any>> = () => {
               rules={[
                 {
                   required: true,
-                  message: "请选择付款账户",
+                  message: '请选择付款账户',
                 },
               ]}
               valueEnum={{
-                "ant-design@alipay.com": "ant-design@alipay.com",
+                'ant-design@alipay.com': 'ant-design@alipay.com',
               }}
             />
 
@@ -127,12 +119,12 @@ const StepForm: React.FC<Record<string, any>> = () => {
                 rules={[
                   {
                     required: true,
-                    message: "请选择付款账户",
+                    message: '请选择付款账户',
                   },
                 ]}
                 valueEnum={{
-                  alipay: "支付宝",
-                  bank: "银行账户",
+                  alipay: '支付宝',
+                  bank: '银行账户',
                 }}
               />
               <ProFormText
@@ -140,11 +132,11 @@ const StepForm: React.FC<Record<string, any>> = () => {
                 rules={[
                   {
                     required: true,
-                    message: "请输入收款人账户",
+                    message: '请输入收款人账户',
                   },
                   {
-                    type: "email",
-                    message: "账户名应为邮箱格式",
+                    type: 'email',
+                    message: '账户名应为邮箱格式',
                   },
                 ]}
                 placeholder="test@example.com"
@@ -157,7 +149,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
               rules={[
                 {
                   required: true,
-                  message: "请输入收款人姓名",
+                  message: '请输入收款人姓名',
                 },
               ]}
               placeholder="请输入收款人姓名"
@@ -169,16 +161,16 @@ const StepForm: React.FC<Record<string, any>> = () => {
               rules={[
                 {
                   required: true,
-                  message: "请输入转账金额",
+                  message: '请输入转账金额',
                 },
                 {
                   pattern: /^(\d+)((?:\.\d+)?)$/,
-                  message: "请输入合法金额数字",
+                  message: '请输入合法金额数字',
                 },
               ]}
               placeholder="请输入金额"
               fieldProps={{
-                prefix: "￥",
+                prefix: '￥',
               }}
             />
           </StepsForm.StepForm>
@@ -196,7 +188,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
               <StepDescriptions stepData={stepData} bordered />
               <Divider
                 style={{
-                  margin: "24px 0",
+                  margin: '24px 0',
                 }}
               />
               <ProFormText.Password
@@ -207,7 +199,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
                 rules={[
                   {
                     required: true,
-                    message: "需要支付密码才能进行支付",
+                    message: '需要支付密码才能进行支付',
                   },
                 ]}
               />
@@ -226,7 +218,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
         </StepsForm>
         <Divider
           style={{
-            margin: "40px 0 24px",
+            margin: '40px 0 24px',
           }}
         />
         <div className={styles.desc}>

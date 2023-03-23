@@ -1,7 +1,7 @@
-import { Chart, Geom, Tooltip } from "bizcharts";
-import React from "react";
-import autoHeight from "../autoHeight";
-import useStyles from "../index.style";
+import { Chart, Geom, Tooltip } from 'bizcharts';
+import React from 'react';
+import autoHeight from '../autoHeight';
+import useStyles from '../index.style';
 export type MiniBarProps = {
   color?: string;
   height?: number;
@@ -14,10 +14,10 @@ export type MiniBarProps = {
 };
 const MiniBar: React.FC<MiniBarProps> = (props) => {
   const { styles } = useStyles();
-  const { height = 0, forceFit = true, color = "#1890FF", data = [] } = props;
+  const { height = 0, forceFit = true, color = '#1890FF', data = [] } = props;
   const scale = {
     x: {
-      type: "cat",
+      type: 'cat',
     },
     y: {
       min: 0,
@@ -29,9 +29,9 @@ const MiniBar: React.FC<MiniBarProps> = (props) => {
     (...args: any[]) => {
       name?: string;
       value: string;
-    }
+    },
   ] = [
-    "x*y",
+    'x*y',
     (x: string, y: string) => ({
       name: x,
       value: y,
@@ -48,20 +48,9 @@ const MiniBar: React.FC<MiniBarProps> = (props) => {
       }}
     >
       <div className={styles.chartContent}>
-        <Chart
-          scale={scale}
-          height={chartHeight}
-          forceFit={forceFit}
-          data={data}
-          padding={padding}
-        >
+        <Chart scale={scale} height={chartHeight} forceFit={forceFit} data={data} padding={padding}>
           <Tooltip showTitle={false} crosshairs={false} />
-          <Geom
-            type="interval"
-            position="x*y"
-            color={color}
-            tooltip={tooltip}
-          />
+          <Geom type="interval" position="x*y" color={color} tooltip={tooltip} />
         </Chart>
       </div>
     </div>

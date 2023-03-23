@@ -1,12 +1,12 @@
-import { Chart, Coord, Geom, Tooltip } from "bizcharts";
-import React, { Component } from "react";
-import { DataView } from "@antv/data-set";
-import Debounce from "lodash.debounce";
-import { Divider } from "antd";
-import ReactFitText from "react-fittext";
-import classNames from "classnames";
-import autoHeight from "../autoHeight";
-import useStyles from "./index.style";
+import { Chart, Coord, Geom, Tooltip } from 'bizcharts';
+import React, { Component } from 'react';
+import { DataView } from '@antv/data-set';
+import Debounce from 'lodash.debounce';
+import { Divider } from 'antd';
+import ReactFitText from 'react-fittext';
+import classNames from 'classnames';
+import autoHeight from '../autoHeight';
+import useStyles from './index.style';
 export type PieProps = {
   animate?: boolean;
   color?: string;
@@ -56,7 +56,7 @@ class Pie extends Component<PieProps, PieState> {
     const { hasLegend } = this.props;
     const { legendBlock } = this.state;
     if (!hasLegend || !this.root) {
-      window.removeEventListener("resize", this.resize);
+      window.removeEventListener('resize', this.resize);
       return;
     }
     if (
@@ -77,13 +77,13 @@ class Pie extends Component<PieProps, PieState> {
   }, 300);
   componentDidMount() {
     window.addEventListener(
-      "resize",
+      'resize',
       () => {
         this.requestRef = requestAnimationFrame(() => this.resize());
       },
       {
         passive: true,
-      }
+      },
     );
   }
   componentDidUpdate(preProps: PieProps) {
@@ -98,7 +98,7 @@ class Pie extends Component<PieProps, PieState> {
     if (this.requestRef) {
       window.cancelAnimationFrame(this.requestRef);
     }
-    window.removeEventListener("resize", this.resize);
+    window.removeEventListener('resize', this.resize);
     if (this.resize) {
       (this.resize as any).cancel();
     }
@@ -117,21 +117,21 @@ class Pie extends Component<PieProps, PieState> {
     const geom = this.chart.getAllGeoms()[0]; // 获取所有的图形
     if (!geom) return;
     // g2 的类型有问题
-    const items = (geom as any).get("dataArray") || []; // 获取图形对应的
+    const items = (geom as any).get('dataArray') || []; // 获取图形对应的
 
     const legendData = items.map(
       (
         item: {
           color: any;
           _origin: any;
-        }[]
+        }[],
       ) => {
         /* eslint no-underscore-dangle:0 */
         const origin = item[0]._origin;
         origin.color = item[0].color;
         origin.checked = true;
         return origin;
-      }
+      },
     );
     this.setState({
       legendData,
@@ -144,7 +144,7 @@ class Pie extends Component<PieProps, PieState> {
     item: {
       checked: boolean;
     },
-    i: string | number
+    i: string | number,
   ) => {
     const newItem = {
       ...item,
@@ -152,14 +152,9 @@ class Pie extends Component<PieProps, PieState> {
     newItem.checked = !newItem.checked;
     const { legendData } = this.state;
     legendData[i as unknown as number] = newItem as any;
-    const filteredLegendData = legendData
-      .filter((l) => l.checked)
-      .map((l) => l.x);
+    const filteredLegendData = legendData.filter((l) => l.checked).map((l) => l.x);
     if (this.chart) {
-      this.chart.filter(
-        "x",
-        (val) => filteredLegendData.indexOf(`${val}`) > -1
-      );
+      this.chart.filter('x', (val) => filteredLegendData.indexOf(`${val}`) > -1);
     }
     this.setState({
       legendData,
@@ -202,7 +197,7 @@ class Pie extends Component<PieProps, PieState> {
     let formatColor;
     const scale = {
       x: {
-        type: "cat",
+        type: 'cat',
         range: [0, 1],
       },
       y: {
@@ -213,18 +208,18 @@ class Pie extends Component<PieProps, PieState> {
       selected = false;
       tooltip = false;
       formatColor = (value: string) => {
-        if (value === "占比") {
-          return color || "rgba(24, 144, 255, 0.85)";
+        if (value === '占比') {
+          return color || 'rgba(24, 144, 255, 0.85)';
         }
-        return "#F0F2F5";
+        return '#F0F2F5';
       };
       data = [
         {
-          x: "占比",
+          x: '占比',
           y: parseFloat(`${percent}`),
         },
         {
-          x: "反比",
+          x: '反比',
           y: 100 - parseFloat(`${percent}`),
         },
       ];
@@ -234,9 +229,9 @@ class Pie extends Component<PieProps, PieState> {
       (...args: any[]) => {
         name?: string;
         value: string;
-      }
+      },
     ] = [
-      "x*percent",
+      'x*percent',
       (x: string, p: number) => ({
         name: x,
         value: `${(p * 100).toFixed(2)}%`,
@@ -245,10 +240,10 @@ class Pie extends Component<PieProps, PieState> {
     const padding = [12, 0, 12, 0] as [number, number, number, number];
     const dv = new DataView();
     dv.source(data).transform({
-      type: "percent",
-      field: "y",
-      dimension: "x",
-      as: "percent",
+      type: 'percent',
+      field: 'y',
+      dimension: 'x',
+      as: 'percent',
     });
     return (
       <div ref={this.handleRoot} className={pieClassName} style={style}>
@@ -268,17 +263,12 @@ class Pie extends Component<PieProps, PieState> {
               <Geom
                 style={{
                   lineWidth,
-                  stroke: "#fff",
+                  stroke: '#fff',
                 }}
                 tooltip={tooltip ? tooltipFormat : undefined}
                 type="intervalStack"
                 position="percent"
-                color={
-                  [
-                    "x",
-                    percent || percent === 0 ? formatColor : defaultColors,
-                  ] as any
-                }
+                color={['x', percent || percent === 0 ? formatColor : defaultColors] as any}
                 selected={selected}
               />
             </Chart>
@@ -288,9 +278,7 @@ class Pie extends Component<PieProps, PieState> {
                 {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
                 {/* eslint-disable-next-line */}
                 {total && (
-                  <div className="pie-stat">
-                    {typeof total === "function" ? total() : total}
-                  </div>
+                  <div className="pie-stat">{typeof total === 'function' ? total() : total}</div>
                 )}
               </div>
             )}
@@ -304,20 +292,15 @@ class Pie extends Component<PieProps, PieState> {
                 <span
                   className={styles.dot}
                   style={{
-                    backgroundColor: !item.checked ? "#aaa" : item.color,
+                    backgroundColor: !item.checked ? '#aaa' : item.color,
                   }}
                 />
                 <span className={styles.legendTitle}>{item.x}</span>
                 <Divider type="vertical" />
                 <span className={styles.percent}>
-                  {`${(Number.isNaN(item.percent)
-                    ? 0
-                    : item.percent * 100
-                  ).toFixed(2)}%`}
+                  {`${(Number.isNaN(item.percent) ? 0 : item.percent * 100).toFixed(2)}%`}
                 </span>
-                <span className={styles.value}>
-                  {valueFormat ? valueFormat(item.y) : item.y}
-                </span>
+                <span className={styles.value}>{valueFormat ? valueFormat(item.y) : item.y}</span>
               </li>
             ))}
           </ul>

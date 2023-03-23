@@ -1,11 +1,11 @@
-import { Card, Radio, Typography } from "antd";
-import numeral from "numeral";
-import type { RadioChangeEvent } from "antd/es/radio";
-import { Donut } from "@ant-design/charts";
-import type { DonutConfig } from "@ant-design/charts/es/donut";
-import React from "react";
-import type { DataItem } from "../data.d";
-import useStyles from "../style.style";
+import { Card, Radio, Typography } from 'antd';
+import numeral from 'numeral';
+import type { RadioChangeEvent } from 'antd/es/radio';
+import { Donut } from '@ant-design/charts';
+import type { DonutConfig } from '@ant-design/charts/es/donut';
+import React from 'react';
+import type { DataItem } from '../data.d';
+import useStyles from '../style.style';
 const { Text } = Typography;
 const ProportionSales = ({
   dropdownGroup,
@@ -16,7 +16,7 @@ const ProportionSales = ({
 }: {
   loading: boolean;
   dropdownGroup: React.ReactNode;
-  salesType: "all" | "online" | "stores";
+  salesType: 'all' | 'online' | 'stores';
   salesPieData: DataItem[];
   handleChangeSalesType?: (e: RadioChangeEvent) => void;
 }) => {
@@ -28,7 +28,7 @@ const ProportionSales = ({
       bordered={false}
       title="销售额类别占比"
       style={{
-        height: "100%",
+        height: '100%',
       }}
       extra={
         <div className={styles.salesCardExtra}>
@@ -57,18 +57,16 @@ const ProportionSales = ({
           }}
           label={{
             visible: true,
-            type: "spider",
+            type: 'spider',
             formatter: (text, item) => {
               // eslint-disable-next-line no-underscore-dangle
-              return `${item._origin.x}: ${numeral(item._origin.y).format(
-                "0,0"
-              )}`;
+              return `${item._origin.x}: ${numeral(item._origin.y).format('0,0')}`;
             },
           }}
           statistic={
             {
-              totalLabel: "销售额",
-            } as DonutConfig["statistic"]
+              totalLabel: '销售额',
+            } as DonutConfig['statistic']
           }
         />
       </div>

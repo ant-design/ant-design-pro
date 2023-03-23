@@ -1,12 +1,12 @@
-import { InfoCircleOutlined } from "@ant-design/icons";
-import { TinyArea, TinyColumn, Progress } from "@ant-design/charts";
-import { Col, Row, Tooltip } from "antd";
-import numeral from "numeral";
-import { ChartCard, Field } from "./Charts";
-import type { DataItem } from "../data.d";
-import Trend from "./Trend";
-import Yuan from "../utils/Yuan";
-import useStyles from "../style.style";
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { TinyArea, TinyColumn, Progress } from '@ant-design/charts';
+import { Col, Row, Tooltip } from 'antd';
+import numeral from 'numeral';
+import { ChartCard, Field } from './Charts';
+import type { DataItem } from '../data.d';
+import Trend from './Trend';
+import Yuan from '../utils/Yuan';
+import useStyles from '../style.style';
 const topColResponsiveProps = {
   xs: 24,
   sm: 12,
@@ -17,13 +17,7 @@ const topColResponsiveProps = {
     marginBottom: 24,
   },
 };
-const IntroduceRow = ({
-  loading,
-  visitData,
-}: {
-  loading: boolean;
-  visitData: DataItem[];
-}) => {
+const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: DataItem[] }) => {
   const { styles } = useStyles();
   return (
     <Row gutter={24}>
@@ -38,12 +32,7 @@ const IntroduceRow = ({
           }
           loading={loading}
           total={() => <Yuan>126560</Yuan>}
-          footer={
-            <Field
-              label="日销售额"
-              value={`￥${numeral(12423).format("0,0")}`}
-            />
-          }
+          footer={<Field label="日销售额" value={`￥${numeral(12423).format('0,0')}`} />}
           contentHeight={46}
         >
           <Trend
@@ -72,10 +61,8 @@ const IntroduceRow = ({
               <InfoCircleOutlined />
             </Tooltip>
           }
-          total={numeral(8846).format("0,0")}
-          footer={
-            <Field label="日访问量" value={numeral(1234).format("0,0")} />
-          }
+          total={numeral(8846).format('0,0')}
+          footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
           contentHeight={46}
         >
           <TinyArea
@@ -99,17 +86,11 @@ const IntroduceRow = ({
               <InfoCircleOutlined />
             </Tooltip>
           }
-          total={numeral(6560).format("0,0")}
+          total={numeral(6560).format('0,0')}
           footer={<Field label="转化率" value="60%" />}
           contentHeight={46}
         >
-          <TinyColumn
-            xField="x"
-            height={46}
-            forceFit
-            yField="y"
-            data={visitData}
-          />
+          <TinyColumn xField="x" height={46} forceFit yField="y" data={visitData} />
         </ChartCard>
       </Col>
       <Col {...topColResponsiveProps}>
@@ -126,8 +107,8 @@ const IntroduceRow = ({
           footer={
             <div
               style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
               }}
             >
               <Trend
@@ -157,7 +138,7 @@ const IntroduceRow = ({
               {
                 value: 0.8,
                 style: {
-                  stroke: "#13C2C2",
+                  stroke: '#13C2C2',
                 },
               },
             ]}

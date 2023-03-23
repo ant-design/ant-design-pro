@@ -1,47 +1,47 @@
-import { createStyles } from "antd-style";
+import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token }) => {
   return {
     coverCardList: {},
     card: {
-      "&:hover": {},
+      '&:hover': {},
     },
-    ".ant-card-meta-title": {
-      marginBottom: "4px",
-      "& > a": {
-        display: "inline-block",
-        maxWidth: "100%",
+    '.ant-card-meta-title': {
+      marginBottom: '4px',
+      '& > a': {
+        display: 'inline-block',
+        maxWidth: '100%',
         color: token.colorTextHeading,
       },
     },
-    ".ant-card-meta-description": {
-      height: "44px",
-      overflow: "hidden",
-      lineHeight: "22px",
+    '.ant-card-meta-description': {
+      height: '44px',
+      overflow: 'hidden',
+      lineHeight: '22px',
     },
-    ".ant-card-meta-title > a": {
+    '.ant-card-meta-title > a': {
       color: token.colorPrimary,
     },
     cardItemContent: {
-      display: "flex",
-      height: "20px",
-      marginTop: "16px",
-      marginBottom: "-4px",
-      lineHeight: "20px",
-      "& > span": {
-        flex: "1",
+      display: 'flex',
+      height: '20px',
+      marginTop: '16px',
+      marginBottom: '-4px',
+      lineHeight: '20px',
+      '& > span': {
+        flex: '1',
         color: token.colorTextSecondary,
-        fontSize: "12px",
+        fontSize: '12px',
       },
     },
     avatarList: {
-      flex: "0 1 auto",
+      flex: '0 1 auto',
     },
     cardList: {
-      marginTop: "24px",
+      marginTop: '24px',
     },
-    ".ant-list .ant-list-item-content-single": {
-      maxWidth: "100%",
+    '.ant-list .ant-list-item-content-single': {
+      maxWidth: '100%',
     },
   };
 });

@@ -1,6 +1,6 @@
-import type { FC } from "react";
-import React, { useState } from "react";
-import { DownOutlined, PlusOutlined } from "@ant-design/icons";
+import type { FC } from 'react';
+import React, { useState } from 'react';
+import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import {
   Avatar,
   Button,
@@ -14,19 +14,14 @@ import {
   Progress,
   Radio,
   Row,
-} from "antd";
-import { PageContainer } from "@ant-design/pro-components";
-import { useRequest } from "@umijs/max";
-import dayjs from "dayjs";
-import OperationModal from "./components/OperationModal";
-import {
-  addFakeList,
-  queryFakeList,
-  removeFakeList,
-  updateFakeList,
-} from "./service";
-import type { BasicListItemDataType } from "./data.d";
-import useStyles from "./style.style";
+} from 'antd';
+import { PageContainer } from '@ant-design/pro-components';
+import { useRequest } from '@umijs/max';
+import dayjs from 'dayjs';
+import OperationModal from './components/OperationModal';
+import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
+import type { BasicListItemDataType } from './data.d';
+import useStyles from './style.style';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Search } = Input;
@@ -58,7 +53,7 @@ const ListContent = ({
       </div>
       <div className={styles.listContentItem}>
         <span>开始时间</span>
-        <p>{dayjs(createdAt).format("YYYY-MM-DD HH:mm")}</p>
+        <p>{dayjs(createdAt).format('YYYY-MM-DD HH:mm')}</p>
       </div>
       <div className={styles.listContentItem}>
         <Progress
@@ -77,9 +72,7 @@ export const BasicList: FC = () => {
   const { styles } = useStyles();
   const [done, setDone] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
-  const [current, setCurrent] = useState<
-    Partial<BasicListItemDataType> | undefined
-  >(undefined);
+  const [current, setCurrent] = useState<Partial<BasicListItemDataType> | undefined>(undefined);
   const {
     data: listData,
     loading,
@@ -91,10 +84,10 @@ export const BasicList: FC = () => {
   });
   const { run: postRun } = useRequest(
     (method, params) => {
-      if (method === "remove") {
+      if (method === 'remove') {
         return removeFakeList(params);
       }
-      if (method === "update") {
+      if (method === 'update') {
         return updateFakeList(params);
       }
       return addFakeList(params);
@@ -104,7 +97,7 @@ export const BasicList: FC = () => {
       onSuccess: (result) => {
         mutate(result);
       },
-    }
+    },
   );
   const list = listData?.list || [];
   const paginationProps = {
@@ -118,21 +111,18 @@ export const BasicList: FC = () => {
     setCurrent(item);
   };
   const deleteItem = (id: string) => {
-    postRun("remove", {
+    postRun('remove', {
       id,
     });
   };
-  const editAndDelete = (
-    key: string | number,
-    currentItem: BasicListItemDataType
-  ) => {
-    if (key === "edit") showEditModal(currentItem);
-    else if (key === "delete") {
+  const editAndDelete = (key: string | number, currentItem: BasicListItemDataType) => {
+    if (key === 'edit') showEditModal(currentItem);
+    else if (key === 'delete') {
       Modal.confirm({
-        title: "删除任务",
-        content: "确定删除该任务吗？",
-        okText: "确认",
-        cancelText: "取消",
+        title: '删除任务',
+        content: '确定删除该任务吗？',
+        okText: '确认',
+        cancelText: '取消',
         onOk: () => deleteItem(currentItem.id),
       });
     }
@@ -144,11 +134,7 @@ export const BasicList: FC = () => {
         <RadioButton value="progress">进行中</RadioButton>
         <RadioButton value="waiting">等待中</RadioButton>
       </RadioGroup>
-      <Search
-        className={styles.extraContentSearch}
-        placeholder="请输入"
-        onSearch={() => ({})}
-      />
+      <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
     </div>
   );
   const MoreBtn: React.FC<{
@@ -174,7 +160,7 @@ export const BasicList: FC = () => {
   };
   const handleSubmit = (values: BasicListItemDataType) => {
     setDone(true);
-    const method = values?.id ? "update" : "add";
+    const method = values?.id ? 'update' : 'add';
     postRun(method, values);
   };
   return (
@@ -203,7 +189,7 @@ export const BasicList: FC = () => {
               marginTop: 24,
             }}
             bodyStyle={{
-              padding: "0 32px 40px 32px",
+              padding: '0 32px 40px 32px',
             }}
             extra={extraContent}
           >
@@ -229,9 +215,7 @@ export const BasicList: FC = () => {
                   ]}
                 >
                   <List.Item.Meta
-                    avatar={
-                      <Avatar src={item.logo} shape="square" size="large" />
-                    }
+                    avatar={<Avatar src={item.logo} shape="square" size="large" />}
                     title={<a href={item.href}>{item.title}</a>}
                     description={item.subDescription}
                   />
@@ -248,7 +232,7 @@ export const BasicList: FC = () => {
           setVisible(true);
         }}
         style={{
-          width: "100%",
+          width: '100%',
           marginBottom: 8,
         }}
       >

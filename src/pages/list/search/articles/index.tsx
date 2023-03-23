@@ -1,19 +1,14 @@
-import {
-  LikeOutlined,
-  LoadingOutlined,
-  MessageOutlined,
-  StarOutlined,
-} from "@ant-design/icons";
-import { Button, Card, Col, Form, List, Row, Select, Tag } from "antd";
-import type { FC } from "react";
-import React from "react";
-import { useRequest } from "@umijs/max";
-import ArticleListContent from "./components/ArticleListContent";
-import StandardFormRow from "./components/StandardFormRow";
-import TagSelect from "./components/TagSelect";
-import type { ListItemDataType } from "./data.d";
-import { queryFakeList } from "./service";
-import useStyles from "./style.style";
+import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
+import type { FC } from 'react';
+import React from 'react';
+import { useRequest } from '@umijs/max';
+import ArticleListContent from './components/ArticleListContent';
+import StandardFormRow from './components/StandardFormRow';
+import TagSelect from './components/TagSelect';
+import type { ListItemDataType } from './data.d';
+import { queryFakeList } from './service';
+import useStyles from './style.style';
 const { Option } = Select;
 const FormItem = Form.Item;
 const pageSize = 5;
@@ -28,34 +23,34 @@ const Articles: FC = () => {
     },
     {
       loadMore: true,
-    }
+    },
   );
   const list = data?.list || [];
   const setOwner = () => {
     form.setFieldsValue({
-      owner: ["wzj"],
+      owner: ['wzj'],
     });
   };
   const owners = [
     {
-      id: "wzj",
-      name: "我自己",
+      id: 'wzj',
+      name: '我自己',
     },
     {
-      id: "wjh",
-      name: "吴家豪",
+      id: 'wjh',
+      name: '吴家豪',
     },
     {
-      id: "zxx",
-      name: "周星星",
+      id: 'zxx',
+      name: '周星星',
     },
     {
-      id: "zly",
-      name: "赵丽颖",
+      id: 'zly',
+      name: '赵丽颖',
     },
     {
-      id: "ym",
-      name: "姚明",
+      id: 'ym',
+      name: '姚明',
     },
   ];
   const IconText: React.FC<{
@@ -63,7 +58,7 @@ const Articles: FC = () => {
     text: React.ReactNode;
   }> = ({ type, text }) => {
     switch (type) {
-      case "star-o":
+      case 'star-o':
         return (
           <span>
             <StarOutlined
@@ -74,7 +69,7 @@ const Articles: FC = () => {
             {text}
           </span>
         );
-      case "like-o":
+      case 'like-o':
         return (
           <span>
             <LikeOutlined
@@ -85,7 +80,7 @@ const Articles: FC = () => {
             {text}
           </span>
         );
-      case "message":
+      case 'message':
         return (
           <span>
             <MessageOutlined
@@ -116,7 +111,7 @@ const Articles: FC = () => {
   const loadMoreDom = list.length > 0 && (
     <div
       style={{
-        textAlign: "center",
+        textAlign: 'center',
         marginTop: 16,
       }}
     >
@@ -132,7 +127,7 @@ const Articles: FC = () => {
             <LoadingOutlined /> 加载中...
           </span>
         ) : (
-          "加载更多"
+          '加载更多'
         )}
       </Button>
     </div>
@@ -144,7 +139,7 @@ const Articles: FC = () => {
           layout="inline"
           form={form}
           initialValues={{
-            owner: ["wjh", "zxx"],
+            owner: ['wjh', 'zxx'],
           }}
           onValuesChange={reload}
         >
@@ -178,7 +173,7 @@ const Articles: FC = () => {
                 mode="multiple"
                 placeholder="选择 owner"
                 style={{
-                  minWidth: "6rem",
+                  minWidth: '6rem',
                 }}
               >
                 {owners.map((owner) => (
@@ -200,7 +195,7 @@ const Articles: FC = () => {
                     placeholder="不限"
                     style={{
                       maxWidth: 200,
-                      width: "100%",
+                      width: '100%',
                     }}
                   >
                     <Option value="lisa">李三</Option>
@@ -213,7 +208,7 @@ const Articles: FC = () => {
                     placeholder="不限"
                     style={{
                       maxWidth: 200,
-                      width: "100%",
+                      width: '100%',
                     }}
                   >
                     <Option value="good">优秀</Option>
@@ -230,7 +225,7 @@ const Articles: FC = () => {
         }}
         bordered={false}
         bodyStyle={{
-          padding: "8px 32px 32px 32px",
+          padding: '8px 32px 32px 32px',
         }}
       >
         <List<ListItemDataType>

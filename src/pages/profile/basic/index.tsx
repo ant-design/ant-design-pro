@@ -1,44 +1,44 @@
-import { PageContainer } from "@ant-design/pro-components";
-import type { ProColumns } from "@ant-design/pro-components";
-import { ProTable } from "@ant-design/pro-components";
-import { Badge, Card, Descriptions, Divider } from "antd";
-import type { FC } from "react";
-import React from "react";
-import { useRequest } from "@umijs/max";
-import type { BasicGood, BasicProgress } from "./data.d";
-import { queryBasicProfile } from "./service";
-import useStyles from "./style.style";
+import { PageContainer } from '@ant-design/pro-components';
+import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
+import { Badge, Card, Descriptions, Divider } from 'antd';
+import type { FC } from 'react';
+import React from 'react';
+import { useRequest } from '@umijs/max';
+import type { BasicGood, BasicProgress } from './data.d';
+import { queryBasicProfile } from './service';
+import useStyles from './style.style';
 const progressColumns: ProColumns<BasicProgress>[] = [
   {
-    title: "时间",
-    dataIndex: "time",
-    key: "time",
+    title: '时间',
+    dataIndex: 'time',
+    key: 'time',
   },
   {
-    title: "当前进度",
-    dataIndex: "rate",
-    key: "rate",
+    title: '当前进度',
+    dataIndex: 'rate',
+    key: 'rate',
   },
   {
-    title: "状态",
-    dataIndex: "status",
-    key: "status",
+    title: '状态',
+    dataIndex: 'status',
+    key: 'status',
     render: (text: React.ReactNode) => {
-      if (text === "success") {
+      if (text === 'success') {
         return <Badge status="success" text="成功" />;
       }
       return <Badge status="processing" text="进行中" />;
     },
   },
   {
-    title: "操作员ID",
-    dataIndex: "operator",
-    key: "operator",
+    title: '操作员ID',
+    dataIndex: 'operator',
+    key: 'operator',
   },
   {
-    title: "耗时",
-    dataIndex: "cost",
-    key: "cost",
+    title: '耗时',
+    dataIndex: 'cost',
+    key: 'cost',
   },
 ];
 const Basic: FC = () => {
@@ -59,7 +59,7 @@ const Basic: FC = () => {
       amount += Number(item.amount);
     });
     goodsData = basicGoods.concat({
-      id: "总计",
+      id: '总计',
       num,
       amount,
     });
@@ -81,9 +81,9 @@ const Basic: FC = () => {
   };
   const goodsColumns: ProColumns<BasicGood>[] = [
     {
-      title: "商品编号",
-      dataIndex: "id",
-      key: "id",
+      title: '商品编号',
+      dataIndex: 'id',
+      key: 'id',
       render: (text: React.ReactNode, _: any, index: number) => {
         if (index < basicGoods.length) {
           return <span>{text}</span>;
@@ -105,29 +105,29 @@ const Basic: FC = () => {
       },
     },
     {
-      title: "商品名称",
-      dataIndex: "name",
-      key: "name",
+      title: '商品名称',
+      dataIndex: 'name',
+      key: 'name',
       render: renderContent,
     },
     {
-      title: "商品条码",
-      dataIndex: "barcode",
-      key: "barcode",
+      title: '商品条码',
+      dataIndex: 'barcode',
+      key: 'barcode',
       render: renderContent,
     },
     {
-      title: "单价",
-      dataIndex: "price",
-      key: "price",
-      align: "right" as "left" | "right" | "center",
+      title: '单价',
+      dataIndex: 'price',
+      key: 'price',
+      align: 'right' as 'left' | 'right' | 'center',
       render: renderContent,
     },
     {
-      title: "数量（件）",
-      dataIndex: "num",
-      key: "num",
-      align: "right" as "left" | "right" | "center",
+      title: '数量（件）',
+      dataIndex: 'num',
+      key: 'num',
+      align: 'right' as 'left' | 'right' | 'center',
       render: (text: React.ReactNode, _: any, index: number) => {
         if (index < basicGoods.length) {
           return text;
@@ -144,10 +144,10 @@ const Basic: FC = () => {
       },
     },
     {
-      title: "金额",
-      dataIndex: "amount",
-      key: "amount",
-      align: "right" as "left" | "right" | "center",
+      title: '金额',
+      dataIndex: 'amount',
+      key: 'amount',
+      align: 'right' as 'left' | 'right' | 'center',
       render: (text: React.ReactNode, _: any, index: number) => {
         if (index < basicGoods.length) {
           return text;
@@ -192,9 +192,7 @@ const Basic: FC = () => {
           <Descriptions.Item label="用户姓名">付小小</Descriptions.Item>
           <Descriptions.Item label="联系电话">18100000000</Descriptions.Item>
           <Descriptions.Item label="常用快递">菜鸟仓储</Descriptions.Item>
-          <Descriptions.Item label="取货地址">
-            浙江省杭州市西湖区万塘路18号
-          </Descriptions.Item>
+          <Descriptions.Item label="取货地址">浙江省杭州市西湖区万塘路18号</Descriptions.Item>
           <Descriptions.Item label="备注">无</Descriptions.Item>
         </Descriptions>
         <Divider

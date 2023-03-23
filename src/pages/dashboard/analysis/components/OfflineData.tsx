@@ -1,8 +1,8 @@
-import { Card, Col, Row, Tabs } from "antd";
-import { RingProgress, Line } from "@ant-design/charts";
-import type { OfflineDataType, DataItem } from "../data.d";
-import NumberInfo from "./NumberInfo";
-import useStyles from "../style.style";
+import { Card, Col, Row, Tabs } from 'antd';
+import { RingProgress, Line } from '@ant-design/charts';
+import type { OfflineDataType, DataItem } from '../data.d';
+import NumberInfo from './NumberInfo';
+import useStyles from '../style.style';
 const CustomTab = ({
   data,
   currentTabKey: currentKey,
@@ -14,7 +14,7 @@ const CustomTab = ({
     gutter={8}
     style={{
       width: 138,
-      margin: "8px 0",
+      margin: '8px 0',
     }}
   >
     <Col span={12}>
@@ -23,7 +23,7 @@ const CustomTab = ({
         subTitle="转化率"
         gap={2}
         total={`${data.cvr * 100}%`}
-        theme={currentKey !== data.name ? "light" : undefined}
+        theme={currentKey !== data.name ? 'light' : undefined}
       />
     </Col>
     <Col
@@ -62,13 +62,10 @@ const OfflineData = ({
     >
       <Tabs activeKey={activeKey} onChange={handleTabChange}>
         {offlineData.map((shop) => (
-          <TabPane
-            tab={<CustomTab data={shop} currentTabKey={activeKey} />}
-            key={shop.name}
-          >
+          <TabPane tab={<CustomTab data={shop} currentTabKey={activeKey} />} key={shop.name}>
             <div
               style={{
-                padding: "0 24px",
+                padding: '0 24px',
               }}
             >
               <Line
@@ -81,12 +78,12 @@ const OfflineData = ({
                 seriesField="type"
                 interactions={[
                   {
-                    type: "slider",
+                    type: 'slider',
                     cfg: {},
                   },
                 ]}
                 legend={{
-                  position: "top-center",
+                  position: 'top-center',
                 }}
               />
             </div>
