@@ -12,7 +12,9 @@ const useStyles = createStyles(({ token }) => {
       fontWeight: "normal",
     },
     pageHeaderContent: {
-      display: "flex",
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        display: "block",
+      },
     },
     avatar: {
       flex: "0 1 72px",
@@ -24,12 +26,9 @@ const useStyles = createStyles(({ token }) => {
       },
     },
     content: {
-      position: "relative",
-      top: "4px",
-      flex: "1 1 auto",
-      marginLeft: "24px",
-      color: token.colorTextSecondary,
-      lineHeight: "22px",
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        marginLeft: "0",
+      },
     },
     contentTitle: {
       marginBottom: "12px",
@@ -39,36 +38,10 @@ const useStyles = createStyles(({ token }) => {
       lineHeight: "28px",
     },
     extraContent: {
-      zoom: "1",
-      "&::before, &::after": { display: "table", content: "' '" },
-      "&::after": {
-        clear: "both",
-        height: "0",
-        fontSize: "0",
-        visibility: "hidden",
-      },
-      float: "right",
-      whiteSpace: "nowrap",
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {},
     },
     statItem: {
-      position: "relative",
-      display: "inline-block",
-      padding: "0 32px",
-      "&::after": {
-        position: "absolute",
-        top: "8px",
-        right: "0",
-        width: "1px",
-        height: "40px",
-        backgroundColor: token.colorSplit,
-        content: "''",
-      },
-      "&:last-child": {
-        paddingRight: "0",
-        "&::after": {
-          display: "none",
-        },
-      },
+      [`@media screen and (max-width: ${token.screenSM}px)`]: { float: "none" },
     },
     "> p:first-child": {
       marginBottom: "4px",
@@ -86,7 +59,11 @@ const useStyles = createStyles(({ token }) => {
       color: token.colorTextSecondary,
       fontSize: "20px",
     },
-    members: {},
+    members: {
+      [`@media screen and (max-width: ${token.screenLG}px)`]: {
+        marginBottom: "0",
+      },
+    },
     a: {
       display: "inline-block",
       flex: "1 1 0",
@@ -123,7 +100,9 @@ const useStyles = createStyles(({ token }) => {
       lineHeight: "24px",
       verticalAlign: "top",
     },
-    projectList: {},
+    projectList: {
+      [`@media screen and (max-width: ${token.screenXS}px)`]: {},
+    },
     ".ant-card-meta-description": {
       height: "44px",
       overflow: "hidden",
@@ -134,7 +113,7 @@ const useStyles = createStyles(({ token }) => {
       fontSize: "0",
     },
     projectGrid: {
-      width: "33.33%",
+      [`@media screen and (max-width: ${token.screenXS}px)`]: { width: "100%" },
     },
     projectItemContent: {
       display: "flex",
@@ -169,39 +148,10 @@ const useStyles = createStyles(({ token }) => {
     datetime: {
       color: token.colorTextDisabled,
     },
-    [`@media screen and (max-width: ${token.screenXL}) and (min-width: @screen-lg)`]:
-      {
-        activeCard: { marginBottom: "24px" },
-        members: { marginBottom: "0" },
-        extraContent: { marginLeft: "-44px" },
-        statItem: { padding: "0 16px" },
+    activeCard: {
+      [`@media screen and (max-width: ${token.screenLG}px)`]: {
+        marginBottom: "24px",
       },
-    [`@media screen and (max-width: ${token.screenLG})`]: {
-      activeCard: { marginBottom: "24px" },
-      members: { marginBottom: "0" },
-      extraContent: { float: "none", marginRight: "0" },
-      statItem: {
-        padding: "0 16px",
-        textAlign: "left",
-        "&::after": {
-          display: "none",
-        },
-      },
-    },
-    [`@media screen and (max-width: ${token.screenMD})`]: {
-      extraContent: { marginLeft: "-16px" },
-      projectList: {},
-      projectGrid: { width: "50%" },
-    },
-    [`@media screen and (max-width: ${token.screenSM})`]: {
-      pageHeaderContent: { display: "block" },
-      content: { marginLeft: "0" },
-      extraContent: {},
-      statItem: { float: "none" },
-    },
-    [`@media screen and (max-width: ${token.screenXS})`]: {
-      projectList: {},
-      projectGrid: { width: "100%" },
     },
   };
 });

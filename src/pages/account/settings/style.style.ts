@@ -3,16 +3,15 @@ import { createStyles } from "antd-style";
 const useStyles = createStyles(({ token }) => {
   return {
     main: {
-      display: "flex",
-      width: "100%",
-      height: "100%",
-      paddingTop: "16px",
-      paddingBottom: "16px",
-      backgroundColor: token.colorBgContainer,
+      [`@media screen and (max-width: ${token.screenMD}px)`]: {
+        flexDirection: "column",
+      },
     },
     leftMenu: {
-      width: "224px",
-      borderRight: `${token.lineWidth} ${token.borderStyle} ${token.colorSplit}`,
+      [`@media screen and (max-width: ${token.screenMD}px)`]: {
+        width: "100%",
+        border: "none",
+      },
     },
     ".ant-menu-inline": {
       border: "none",
@@ -21,8 +20,9 @@ const useStyles = createStyles(({ token }) => {
       fontWeight: "bold",
     },
     right: {
-      flex: "1",
-      padding: "8px 40px",
+      [`@media screen and (max-width: ${token.screenMD}px)`]: {
+        padding: "40px",
+      },
     },
     title: {
       marginBottom: "12px",
@@ -69,11 +69,6 @@ const useStyles = createStyles(({ token }) => {
     },
     "font.weak": {
       color: token.colorError,
-    },
-    [`@media screen and (max-width: ${token.screenMD})`]: {
-      main: { flexDirection: "column" },
-      leftMenu: { width: "100%", border: "none" },
-      right: { padding: "40px" },
     },
   };
 });

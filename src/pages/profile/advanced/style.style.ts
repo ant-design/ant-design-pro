@@ -13,17 +13,15 @@ const useStyles = createStyles(({ token }) => {
       marginBottom: "4px",
     },
     stepDescription: {
-      position: "relative",
-      left: "38px",
-      paddingTop: "8px",
-      fontSize: "14px",
-      textAlign: "left",
+      [`@media screen and (max-width: ${token.screenSM}px)`]: { left: "8px" },
     },
     "> div": {
       marginTop: "8px",
       marginBottom: "4px",
     },
-    pageHeader: {},
+    pageHeader: {
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {},
+    },
     ".ant-page-header-heading-extra > * + *": {
       marginLeft: "8px",
     },
@@ -32,10 +30,10 @@ const useStyles = createStyles(({ token }) => {
       justifyContent: "space-between",
       width: "200px",
     },
-    [`@media screen and (max-width: ${token.screenSM})`]: {
-      stepDescription: { left: "8px" },
-      pageHeader: {},
-      ".ant-pro-page-header-wrap-row": { flexDirection: "column" },
+    ".ant-pro-page-header-wrap-row": {
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        flexDirection: "column",
+      },
     },
   };
 });

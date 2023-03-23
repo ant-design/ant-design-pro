@@ -11,22 +11,10 @@ const useStyles = createStyles(({ token }) => {
       "&:hover": { color: token.colorText },
     },
     rankingList: {
-      margin: "25px 0 0",
-      padding: "0",
-      listStyle: "none",
+      [`@media screen and (max-width: ${token.screenLG}px)`]: {},
     },
     li: {
-      display: "flex",
-      alignItems: "center",
-      marginTop: "16px",
-      zoom: "1",
-      "&::before, &::after": { display: "table", content: "' '" },
-      "&::after": {
-        clear: "both",
-        height: "0",
-        fontSize: "0",
-        visibility: "hidden",
-      },
+      [`@media screen and (max-width: ${token.screenLG}px)`]: {},
     },
     span: {
       color: token.colorText,
@@ -58,8 +46,9 @@ const useStyles = createStyles(({ token }) => {
       textOverflow: "ellipsis",
     },
     salesExtra: {
-      display: "inline-block",
-      marginRight: "24px",
+      [`@media screen and (max-width: ${token.screenLG}px)`]: {
+        display: "none",
+      },
     },
     a: {
       marginLeft: "24px",
@@ -69,9 +58,13 @@ const useStyles = createStyles(({ token }) => {
     currentDate: {
       color: token.colorPrimary,
     },
-    salesCard: {},
+    salesCard: {
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {},
+    },
     salesBar: {
-      padding: "0 0 32px 32px",
+      [`@media screen and (max-width: ${token.screenMD}px)`]: {
+        padding: "16px",
+      },
     },
     salesRank: {
       padding: "0 32px 32px 72px",
@@ -128,21 +121,25 @@ const useStyles = createStyles(({ token }) => {
       marginLeft: "8px",
       color: token.colorTextHeading,
     },
-    [`@media screen and (max-width: ${token.screenLG})`]: {
-      salesExtra: { display: "none" },
-      rankingList: {},
-      li: {},
-      "span:first-child": { marginRight: "8px" },
+    "span:first-child": {
+      [`@media screen and (max-width: ${token.screenLG}px)`]: {
+        marginRight: "8px",
+      },
     },
-    [`@media screen and (max-width: ${token.screenMD})`]: {
-      rankingTitle: { marginTop: "16px" },
-      salesCard: { padding: "16px" },
-      salesBar: { padding: "16px" },
+    rankingTitle: {
+      [`@media screen and (max-width: ${token.screenMD}px)`]: {
+        marginTop: "16px",
+      },
     },
-    [`@media screen and (max-width: ${token.screenSM})`]: {
-      salesExtraWrap: { display: "none" },
-      salesCard: {},
-      ".ant-tabs-content": { paddingTop: "30px" },
+    salesExtraWrap: {
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        display: "none",
+      },
+    },
+    ".ant-tabs-content": {
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        paddingTop: "30px",
+      },
     },
   };
 });

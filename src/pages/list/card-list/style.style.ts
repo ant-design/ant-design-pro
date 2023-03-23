@@ -23,13 +23,14 @@ const useStyles = createStyles(({ token }) => {
       maxWidth: "100%",
     },
     extraImg: {
-      width: "155px",
-      marginTop: "-20px",
-      textAlign: "center",
+      [`@media screen and (max-width: ${token.screenMD}px)`]: {
+        display: "none",
+      },
     },
     img: {
-      marginRight: "8px",
-      verticalAlign: "middle",
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        marginRight: "4px",
+      },
     },
     newButton: {
       width: "100%",
@@ -50,31 +51,22 @@ const useStyles = createStyles(({ token }) => {
       wordBreak: "break-all",
     },
     pageHeaderContent: {
-      position: "relative",
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        paddingBottom: "30px",
+      },
     },
     contentLink: {
-      marginTop: "16px",
-    },
-    a: {
-      marginRight: "32px",
-    },
-    [`@media screen and (max-width: ${token.screenLG})`]: {
-      contentLink: {},
-      a: { marginRight: "16px" },
-    },
-    [`@media screen and (max-width: ${token.screenMD})`]: {
-      extraImg: { display: "none" },
-    },
-    [`@media screen and (max-width: ${token.screenSM})`]: {
-      pageHeaderContent: { paddingBottom: "30px" },
-      contentLink: {
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
         position: "absolute",
         bottom: "-4px",
         left: "0",
         width: "1000px",
       },
-      a: { marginRight: "16px" },
-      img: { marginRight: "4px" },
+    },
+    a: {
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        marginRight: "16px",
+      },
     },
   };
 });

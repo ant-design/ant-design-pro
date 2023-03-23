@@ -2,13 +2,16 @@ import { createStyles } from "antd-style";
 
 const useStyles = createStyles(({ token }) => {
   return {
-    standardList: {},
+    standardList: {
+      "@media screen and (max-width: 1400px)": {},
+    },
     ".ant-card-head": {
       borderBottom: "none",
     },
     ".ant-card-head-title": {
-      padding: "24px 0",
-      lineHeight: "32px",
+      [`@media screen and (max-width: ${token.screenXS}px)`]: {
+        overflow: "visible",
+      },
     },
     ".ant-card-extra": {
       padding: "24px 0",
@@ -23,32 +26,20 @@ const useStyles = createStyles(({ token }) => {
       lineHeight: "48px",
     },
     headerInfo: {
-      position: "relative",
-      textAlign: "center",
-      "& > span": {
-        display: "inline-block",
-        marginBottom: "4px",
-        color: token.colorTextSecondary,
-        fontSize: token.fontSize,
-        lineHeight: "22px",
-      },
-      "& > p": {
-        margin: "0",
-        color: token.colorTextHeading,
-        fontSize: "24px",
-        lineHeight: "32px",
-      },
-      "& > em": {
-        position: "absolute",
-        top: "0",
-        right: "0",
-        width: "1px",
-        height: "56px",
-        backgroundColor: token.colorSplit,
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        marginBottom: "16px",
+        "& > em": {
+          display: "none",
+        },
       },
     },
     listContent: {
-      fontSize: "0",
+      "@media screen and (max-width: 1400px)": {
+        textAlign: "right",
+        "& > div:last-child": {
+          top: "0",
+        },
+      },
     },
     listContentItem: {
       display: "inline-block",
@@ -66,81 +57,30 @@ const useStyles = createStyles(({ token }) => {
       lineHeight: "22px",
     },
     extraContentSearch: {
-      width: "272px",
-      marginLeft: "16px",
+      [`@media screen and (max-width: ${token.screenSM}px)`]: {
+        width: "100%",
+        marginLeft: "0",
+      },
     },
-    [`@media screen and (max-width: ${token.screenXS})`]: {
-      standardList: {},
-      ".ant-list-item-content": {
+    ".ant-list-item-content": {
+      [`@media screen and (max-width: ${token.screenXS}px)`]: {
         display: "block",
         flex: "none",
         width: "100%",
       },
-      ".ant-list-item-action": { marginLeft: "0" },
-      listContent: {
+    },
+    ".ant-list-item-action": {
+      [`@media screen and (max-width: ${token.screenXS}px)`]: {
         marginLeft: "0",
-        "& > div": {
-          marginLeft: "0",
-        },
-      },
-      listCard: {},
-      ".ant-card-head-title": { overflow: "visible" },
-    },
-    [`@media screen and (max-width: ${token.screenSM})`]: {
-      standardList: {},
-      extraContentSearch: { width: "100%", marginLeft: "0" },
-      headerInfo: {
-        marginBottom: "16px",
-        "& > em": {
-          display: "none",
-        },
       },
     },
-    [`@media screen and (max-width: ${token.screenMD})`]: {
-      standardList: {},
-      listContent: {
-        "& > div": {
-          display: "block",
-        },
-        "& > div:last-child": {
-          top: "0",
-          width: "100%",
-        },
-      },
-      listCard: {},
-      ".ant-radio-group": { display: "block", marginBottom: "8px" },
+    listCard: {
+      [`@media screen and (max-width: ${token.screenMD}px)`]: {},
     },
-    [`@media screen and (max-width: ${token.screenLG}) and (min-width: @screen-md)`]:
-      {
-        standardList: {},
-        listContent: {
-          "& > div": {
-            display: "block",
-          },
-          "& > div:last-child": {
-            top: "0",
-            width: "100%",
-          },
-        },
-      },
-    [`@media screen and (max-width: ${token.screenXL})`]: {
-      standardList: {},
-      listContent: {
-        "& > div": {
-          marginLeft: "24px",
-        },
-        "& > div:last-child": {
-          top: "0",
-        },
-      },
-    },
-    "@media screen and (max-width: 1400px)": {
-      standardList: {},
-      listContent: {
-        textAlign: "right",
-        "& > div:last-child": {
-          top: "0",
-        },
+    ".ant-radio-group": {
+      [`@media screen and (max-width: ${token.screenMD}px)`]: {
+        display: "block",
+        marginBottom: "8px",
       },
     },
     standardListForm: {},
