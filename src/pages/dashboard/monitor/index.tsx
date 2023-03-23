@@ -114,14 +114,6 @@ const Monitor: FC = () => {
               >
                 <Col span={8}>
                   <RingProgress forceFit height={128} percent={0.28} />
-                  {/* <Pie
-                    animate={false}
-                    percent={28}
-                    title="中式快餐"
-                    total="28%"
-                    height={128}
-                    lineWidth={2}
-                   /> */}
                 </Col>
                 <Col span={8}>
                   <RingProgress color="#5DDECF" forceFit height={128} percent={0.22} />

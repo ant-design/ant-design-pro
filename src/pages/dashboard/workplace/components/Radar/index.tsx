@@ -1,7 +1,6 @@
 import { Axis, Chart, Coord, Geom, Tooltip } from 'bizcharts';
 import { Col, Row } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
-import autoHeight from './autoHeight';
 
 export type RadarProps = {
   title?: React.ReactNode;
@@ -172,4 +171,4 @@ const Radar: React.FC<RadarProps> = (props) => {
   );
 };
 
-export default autoHeight()(Radar);
+export default Radar;

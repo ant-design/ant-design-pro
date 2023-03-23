@@ -10,6 +10,7 @@ import type { ActivitiesType, CurrentUser } from './data.d';
 import { queryProjectNotice, queryActivities, fakeChartData } from './service';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
+
 const links = [
   {
     title: '操作一',
@@ -223,7 +224,7 @@ const Workplace: FC = () => {
             title="XX 指数"
             loading={data?.radarData?.length === 0}
           >
-            <div className={styles.chart}>
+            <div>
               <Radar
                 height={343}
                 data={data?.radarData || []}
