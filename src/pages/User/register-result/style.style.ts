@@ -9,7 +9,7 @@ const useStyles = createStyles(() => {
       padding: '80px',
       background: 'none',
     },
-    '.anticon': {
+    anticon: {
       fontSize: '64px',
     },
     title: {
@@ -19,9 +19,7 @@ const useStyles = createStyles(() => {
     },
     actions: {
       marginTop: '40px',
-    },
-    'a + a': {
-      marginLeft: '8px',
+      'a + a': { marginLeft: '8px' },
     },
   };
 });

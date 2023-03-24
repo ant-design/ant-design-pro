@@ -1,10 +1,10 @@
-import { createStyles } from 'antd-style';
+import { createStyles } from "antd-style";
 
 const useStyles = createStyles(({ token }) => {
   return {
     optional: {
       color: token.colorTextSecondary,
-      fontStyle: 'normal',
+      fontStyle: "normal",
     },
   };
 });

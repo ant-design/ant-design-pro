@@ -5,13 +5,9 @@ const useStyles = createStyles(() => {
     activeChart: {
       position: 'relative',
     },
-    activeChartGrid: {},
-    p: {
-      position: 'absolute',
-      top: '80px',
-    },
-    'p:last-child': {
-      top: '115px',
+    activeChartGrid: {
+      p: { position: 'absolute', top: '80px' },
+      'p:last-child': { top: '115px' },
     },
     activeChartLegend: {
       position: 'relative',
@@ -19,18 +15,9 @@ const useStyles = createStyles(() => {
       marginTop: '8px',
       fontSize: '0',
       lineHeight: '20px',
-    },
-    span: {
-      display: 'inline-block',
-      width: '33.33%',
-      fontSize: '12px',
-      textAlign: 'center',
-    },
-    'span:first-child': {
-      textAlign: 'left',
-    },
-    'span:last-child': {
-      textAlign: 'right',
+      span: { display: 'inline-block', width: '33.33%', fontSize: '12px', textAlign: 'center' },
+      'span:first-child': { textAlign: 'left' },
+      'span:last-child': { textAlign: 'right' },
     },
     dashedLine: {
       position: 'relative',
