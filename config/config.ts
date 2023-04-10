@@ -9,12 +9,20 @@ const { REACT_APP_ENV = 'dev' } = process.env;
 
 export default defineConfig({
   /**
+   * @name 设置路由history类型
+   * @description 用于在路由上加上#，因为hash默认值为true，避免打包上线后页面加载白屏，访问不到路由
+   * @doc https://umijs.org/docs/api/config#history
+   */
+  history: {
+    type: 'hash',
+  },
+
+  /**
    * @name 开启 hash 模式
    * @description 让 build 之后的产物包含 hash 后缀。通常用于增量发布和避免浏览器加载缓存。
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
-
   /**
    * @name 兼容性设置
    * @description 设置 ie11 不一定完美兼容，需要检查自己使用的所有依赖
