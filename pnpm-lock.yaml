@@ -33,6 +33,7 @@ specifiers:
   moment: ^2.29.4
   omit.js: ^2.0.2
   prettier: ^2.8.4
+  querystring: ^0.2.1
   rc-menu: ^9.8.2
   rc-util: ^5.27.2
   react: ^18.2.0
@@ -54,6 +55,7 @@ dependencies:
   lodash: 4.17.21
   moment: 2.29.4
   omit.js: 2.0.2
+  querystring: 0.2.1
   rc-menu: 9.8.2_biqbaboplfbrettd7655fr4n2y
   rc-util: 5.27.2_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
