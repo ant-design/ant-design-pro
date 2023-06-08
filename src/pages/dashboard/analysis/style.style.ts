@@ -37,10 +37,6 @@ const useStyles = createStyles(({ token }) => {
           fontSize: "14px",
           lineHeight: "22px",
         },
-        active: {
-          color: "#fff",
-          backgroundColor: "#314659",
-        },
       },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
         li: {
@@ -58,7 +54,7 @@ const useStyles = createStyles(({ token }) => {
       fontSize: "12px",
       lineHeight: "20px",
       textAlign: "center",
-      backgroundColor: token.tagDefaultBg,
+      backgroundColor: "#F9F9F9",
       borderRadius: "20px",
     },
     rankingItemTitle: {
@@ -67,6 +63,10 @@ const useStyles = createStyles(({ token }) => {
       overflow: "hidden",
       whiteSpace: "nowrap",
       textOverflow: "ellipsis",
+    },
+    active: {
+      color: "#fff",
+      backgroundColor: "#314659",
     },
     salesExtra: {
       display: "inline-block",
@@ -78,10 +78,12 @@ const useStyles = createStyles(({ token }) => {
           color: token.colorPrimary,
         },
       },
-      currentDate: { color: token.colorPrimary },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
         display: "none",
       },
+    },
+    currentDate: {
+      color: token.colorPrimary,
     },
     salesBar: {
       padding: "0 0 32px 32px",

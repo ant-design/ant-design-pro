@@ -5,13 +5,7 @@ import React from 'react';
 export type SiderTheme = 'light' | 'dark';
 
 export const SelectLang = () => {
-  return (
-    <UmiSelectLang
-      style={{
-        padding: 4,
-      }}
-    />
-  );
+  return <UmiSelectLang />;
 };
 
 export const Question = () => {

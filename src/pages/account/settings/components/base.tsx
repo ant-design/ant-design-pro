@@ -12,7 +12,8 @@ import {
 import { useRequest } from '@umijs/max';
 import { queryCurrent } from '../service';
 import { queryProvince, queryCity } from '../service';
-import useStyles from './BaseView.style';
+import useStyles from './index.style';
+
 const validatorPhone = (rule: any, value: string[], callback: (message?: string) => void) => {
   if (!value[0]) {
     callback('Please input your area code!');

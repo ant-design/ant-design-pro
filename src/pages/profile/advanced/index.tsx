@@ -155,7 +155,7 @@ const Advanced: FC = () => {
     </RouteContext.Consumer>
   );
   const desc1 = (
-    <div className={classNames(styles.textSecondary, styles.stepDescription)}>
+    <div className={classNames(styles.stepDescription)}>
       <Fragment>
         曲丽丽
         <DingdingOutlined
@@ -205,7 +205,6 @@ const Advanced: FC = () => {
       >
         吴加号
         <span
-          className={styles.textSecondary}
           style={{
             float: 'right',
           }}
@@ -224,7 +223,6 @@ const Advanced: FC = () => {
           />
         </span>
         <div
-          className={styles.textSecondary}
           style={{
             marginTop: 4,
           }}
@@ -434,12 +432,7 @@ const Advanced: FC = () => {
           >
             <Empty />
           </Card>
-          <Card
-            className={styles.tabsCard}
-            bordered={false}
-            tabList={operationTabList}
-            onTabChange={onOperationTabChange}
-          >
+          <Card bordered={false} tabList={operationTabList} onTabChange={onOperationTabChange}>
             {contentList[tabStatus.operationKey] as React.ReactNode}
           </Card>
         </GridContent>

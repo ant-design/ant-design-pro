@@ -197,7 +197,7 @@ export const Applications: FC<Record<string, any>> = () => {
               ]}
             >
               <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
-              <div className={styles.cardItemContent}>
+              <div>
                 <CardInfo
                   activeUser={formatWan(item.activeUser)}
                   newUser={numeral(item.newUser).format('0,0')}

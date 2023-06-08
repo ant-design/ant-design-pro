@@ -28,7 +28,7 @@ const useStyles = createStyles(({ token }) => {
     errorListItem: {
       padding: "8px 16px",
       listStyle: "none",
-      borderBottom: "1px solid @border-color-split",
+      borderBottom: `1px solid ${token.colorSplit}`,
       cursor: "pointer",
       transition: "all 0.3s",
       "&:hover": { background: token.colorBgTextActive },

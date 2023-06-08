@@ -12,7 +12,7 @@ const useStyles = createStyles(({ token }) => {
       height: token.controlHeight,
       marginLeft: "-8px",
       fontSize: token.fontSize,
-      ".ant-avatar": { border: "1px solid @border-color-base" },
+      ".ant-avatar": { border: `1px solid ${token.colorBorder}` },
     },
     avatarItemLarge: {
       width: token.controlHeightLG,

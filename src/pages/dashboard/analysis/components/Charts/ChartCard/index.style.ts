@@ -65,7 +65,7 @@ const useStyles = createStyles(({ token }) => {
     footer: {
       marginTop: "8px",
       paddingTop: "9px",
-      borderTop: "1px solid @border-color-split",
+      borderTop: `1px solid ${token.colorSplit}`,
       "& > *": { position: "relative" },
     },
     footerMargin: {

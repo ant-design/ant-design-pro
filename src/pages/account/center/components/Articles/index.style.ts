@@ -1,11 +1,11 @@
-import { createStyles } from "antd-style";
+import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token }) => {
   return {
     articleList: {
-      ".ant-list-item:first-child": { paddingTop: "0" },
+      '.ant-list-item:first-child': { paddingTop: '0' },
     },
-    "a.listItemMetaTitle": {
+    listItemMetaTitle: {
       color: token.colorTextHeading,
     },
   };

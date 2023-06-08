@@ -6,26 +6,11 @@ import { Link, useRequest, history } from '@umijs/max';
 import type { StateType } from './service';
 import { fakeRegister } from './service';
 import useStyles from './style.style';
+
 const FormItem = Form.Item;
 const { Option } = Select;
 const InputGroup = Input.Group;
-const passwordStatusMap = {
-  ok: (
-    <div className={styles.success}>
-      <span>强度：强</span>
-    </div>
-  ),
-  pass: (
-    <div className={styles.warning}>
-      <span>强度：中</span>
-    </div>
-  ),
-  poor: (
-    <div className={styles.error}>
-      <span>强度：太短</span>
-    </div>
-  ),
-};
+
 const passwordProgressMap: {
   ok: 'success';
   pass: 'normal';
@@ -43,6 +28,25 @@ const Register: FC = () => {
   const [popover, setPopover]: [boolean, any] = useState(false);
   const confirmDirty = false;
   let interval: number | undefined;
+
+  const passwordStatusMap = {
+    ok: (
+      <div className={styles.success}>
+        <span>强度：强</span>
+      </div>
+    ),
+    pass: (
+      <div className={styles.warning}>
+        <span>强度：中</span>
+      </div>
+    ),
+    poor: (
+      <div className={styles.error}>
+        <span>强度：太短</span>
+      </div>
+    ),
+  };
+
   const [form] = Form.useForm();
   useEffect(
     () => () => {
@@ -124,7 +128,6 @@ const Register: FC = () => {
       <div className={styles[`progress-${passwordStatus}`]}>
         <Progress
           status={passwordProgressMap[passwordStatus]}
-          className={styles.progress}
           strokeWidth={6}
           percent={value.length * 10 > 100 ? 100 : value.length * 10}
           showInfo={false}

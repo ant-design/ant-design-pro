@@ -1,27 +1,27 @@
-import { createStyles } from "antd-style";
+import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token }) => {
   return {
-    "a.listItemMetaTitle": {
+    listItemMetaTitle: {
       color: token.colorTextHeading,
     },
     listItemExtra: {
-      width: "272px",
-      height: "1px",
+      width: '272px',
+      height: '1px',
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
-        width: "0",
-        height: "1px",
+        width: '0',
+        height: '1px',
       },
     },
     selfTrigger: {
-      marginLeft: "12px",
+      marginLeft: '12px',
       [`@media screen and (max-width: ${token.screenXS}px)`]: {
-        display: "block",
-        marginLeft: "0",
+        display: 'block',
+        marginLeft: '0',
       },
       [`@media screen and (max-width: ${token.screenMD}px)`]: {
-        display: "block",
-        marginLeft: "0",
+        display: 'block',
+        marginLeft: '0',
       },
     },
   };

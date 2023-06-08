@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
-import useStyles from './PhoneView.style';
+import useStyles from './index.style';
+
 type PhoneViewProps = {
   value?: string;
   onChange?: (value: string) => void;

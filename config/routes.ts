@@ -19,23 +19,23 @@ export default [
         path: '/user/login',
         layout: false,
         name: 'login',
-        component: './User/Login',
+        component: './user/Login',
       },
       {
         path: '/user',
-        redirect: '/User/login',
+        redirect: '/user/login',
       },
       {
         name: 'register-result',
         icon: 'smile',
         path: '/user/register-result',
-        component: './User/register-result',
+        component: './user/register-result',
       },
       {
         name: 'register',
         icon: 'smile',
         path: '/user/register',
-        component: './User/register',
+        component: './user/register',
       },
       {
         component: '404',

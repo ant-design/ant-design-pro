@@ -16,15 +16,15 @@ const useStyles = createStyles(({ token }) => {
         fontSize: token.fontSize,
       },
     },
-    expanded: {
-      maxHeight: "200px",
-      transition: "all 0.3s",
-    },
     trigger: {
       position: "absolute",
       top: "0",
       right: "0",
       "span.anticon": { fontSize: "12px" },
+    },
+    expanded: {
+      maxHeight: "200px",
+      transition: "all 0.3s",
     },
     hasExpandTag: {
       paddingRight: "50px",

@@ -46,7 +46,7 @@ const ListContent = ({
 }) => {
   const { styles } = useStyles();
   return (
-    <div className={styles.listContent}>
+    <div>
       <div className={styles.listContentItem}>
         <span>Owner</span>
         <p>{owner}</p>
@@ -128,7 +128,7 @@ export const BasicList: FC = () => {
     }
   };
   const extraContent = (
-    <div className={styles.extraContent}>
+    <div>
       <RadioGroup defaultValue="all">
         <RadioButton value="all">全部</RadioButton>
         <RadioButton value="progress">进行中</RadioButton>

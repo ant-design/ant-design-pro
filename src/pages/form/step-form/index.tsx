@@ -221,7 +221,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
             margin: '40px 0 24px',
           }}
         />
-        <div className={styles.desc}>
+        <div>
           <h3>说明</h3>
           <h4>转账到支付宝账户</h4>
           <p>

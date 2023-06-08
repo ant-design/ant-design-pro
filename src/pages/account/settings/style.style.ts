@@ -10,7 +10,7 @@ const useStyles = createStyles(({ token }) => {
       paddingBottom: "16px",
       backgroundColor: token.colorBgContainer,
       ".ant-list-split .ant-list-item:last-child": {
-        borderBottom: "1px solid @border-color-split",
+        borderBottom: `1px solid ${token.colorSplit}`,
       },
       ".ant-list-item": { paddingTop: "14px", paddingBottom: "14px" },
       [`@media screen and (max-width: ${token.screenMD}px)`]: {
@@ -19,7 +19,7 @@ const useStyles = createStyles(({ token }) => {
     },
     leftMenu: {
       width: "224px",
-      borderRight: `${token.lineWidth} ${token.borderStyle} ${token.colorSplit}`,
+      borderRight: `${token.lineWidth}px solid ${token.colorSplit}`,
       ".ant-menu-inline": { border: "none" },
       ".ant-menu-horizontal": { fontWeight: "bold" },
       [`@media screen and (max-width: ${token.screenMD}px)`]: {

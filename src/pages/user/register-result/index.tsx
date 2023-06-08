@@ -2,21 +2,24 @@ import { Button, Result } from 'antd';
 import { Link, useSearchParams } from '@umijs/max';
 import React from 'react';
 import useStyles from './style.style';
-const actions = (
-  <div className={styles.actions}>
-    <a href="">
-      <Button size="large" type="primary">
-        <span>查看邮箱</span>
-      </Button>
-    </a>
-    <Link to="/">
-      <Button size="large">返回首页</Button>
-    </Link>
-  </div>
-);
+
 const RegisterResult: React.FC<Record<string, unknown>> = () => {
   const { styles } = useStyles();
   const [params] = useSearchParams();
+
+  const actions = (
+    <div className={styles.actions}>
+      <a href="">
+        <Button size="large" type="primary">
+          <span>查看邮箱</span>
+        </Button>
+      </a>
+      <Link to="/">
+        <Button size="large">返回首页</Button>
+      </Link>
+    </div>
+  );
+
   const email = params?.get('account') || 'AntDesign@example.com';
   return (
     <Result

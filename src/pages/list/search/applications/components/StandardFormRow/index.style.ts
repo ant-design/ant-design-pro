@@ -6,7 +6,7 @@ const useStyles = createStyles(({ token }) => {
       display: "flex",
       marginBottom: "16px",
       paddingBottom: "16px",
-      borderBottom: "1px dashed @border-color-split",
+      borderBottom: `1px dashed ${token.colorSplit}`,
       ".ant-form-item, .ant-legacy-form-item": { marginRight: "24px" },
       ".ant-form-item-label, .ant-legacy-form-item-label": {
         label: {

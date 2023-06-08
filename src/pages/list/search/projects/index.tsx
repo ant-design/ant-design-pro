@@ -44,7 +44,6 @@ const Projects: FC = () => {
               title={<a>{item.title}</a>}
               description={
                 <Paragraph
-                  className={styles.item}
                   ellipsis={{
                     rows: 2,
                   }}
