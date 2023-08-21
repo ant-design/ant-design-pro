@@ -24,7 +24,7 @@ import UpdateForm from './components/UpdateForm';
 const handleAdd = async (fields: API.RuleListItem) => {
   const hide = message.loading('正在添加');
   try {
-    await addRule({ ...fields });
+    await addRule({data:{ ...fields }});
     hide();
     message.success('Added successfully');
     return true;
