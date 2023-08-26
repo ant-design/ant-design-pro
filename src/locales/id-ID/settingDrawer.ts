@@ -26,7 +26,7 @@ export default {
   'app.setting.weakmode': 'Mode Lemah',
   'app.setting.copy': 'Salin Pengaturan',
   'app.setting.copyinfo':
-    'Berhasil disalin，tolong ubah defaultSettings pada src/models/setting.js',
+    'Berhasil disalin, tolong ubah defaultSettings pada src/models/setting.js',
   'app.setting.production.hint':
     'Panel pengaturan hanya muncul pada lingkungan pengembangan, silahkan modifikasi secara menual',
 };
