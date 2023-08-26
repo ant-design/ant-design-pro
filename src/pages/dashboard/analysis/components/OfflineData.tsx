@@ -1,8 +1,8 @@
+import { Line, RingProgress } from '@ant-design/charts';
 import { Card, Col, Row, Tabs } from 'antd';
-import { RingProgress, Line } from '@ant-design/charts';
-import type { OfflineDataType, DataItem } from '../data.d';
-import NumberInfo from './NumberInfo';
+import type { DataItem, OfflineDataType } from '../data.d';
 import useStyles from '../style.style';
+import NumberInfo from './NumberInfo';
 const CustomTab = ({
   data,
   currentTabKey: currentKey,
@@ -36,7 +36,7 @@ const CustomTab = ({
     </Col>
   </Row>
 );
-const { TabPane } = Tabs;
+
 const OfflineData = ({
   activeKey,
   loading,
@@ -60,9 +60,13 @@ const OfflineData = ({
         marginTop: 32,
       }}
     >
-      <Tabs activeKey={activeKey} onChange={handleTabChange}>
-        {offlineData.map((shop) => (
-          <TabPane tab={<CustomTab data={shop} currentTabKey={activeKey} />} key={shop.name}>
+      <Tabs
+        activeKey={activeKey}
+        onChange={handleTabChange}
+        items={offlineData.map((shop) => ({
+          key: shop.name,
+          label: <CustomTab data={shop} currentTabKey={activeKey} />,
+          children: (
             <div
               style={{
                 padding: '0 24px',
@@ -87,9 +91,9 @@ const OfflineData = ({
                 }}
               />
             </div>
-          </TabPane>
-        ))}
-      </Tabs>
+          ),
+        }))}
+      />
     </Card>
   );
 };

@@ -1,5 +1,5 @@
-import React from 'react';
 import { Modal } from 'antd';
+import React from 'react';
 
 type CreateFormProps = {
   modalVisible: boolean;

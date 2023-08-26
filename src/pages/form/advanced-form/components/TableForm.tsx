@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Divider, Input, Popconfirm, Table, message } from 'antd';
+import { Button, Divider, Input, message, Popconfirm, Table } from 'antd';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import useStyles from '../style.style';

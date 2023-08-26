@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import type { Request, Response } from 'express';
-import type { SearchDataType, OfflineDataType, DataItem } from './data.d';
+import type { DataItem, OfflineDataType, SearchDataType } from './data.d';
 
 // mock data
 const visitData: DataItem[] = [];

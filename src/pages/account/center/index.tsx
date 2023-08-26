@@ -1,14 +1,14 @@
-import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
-import { Avatar, Card, Col, Divider, Input, InputRef, Row, Tag } from 'antd';
-import React, { useState, useRef } from 'react';
+import { ClusterOutlined, ContactsOutlined, HomeOutlined, PlusOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
 import { Link, useRequest } from '@umijs/max';
-import Projects from './components/Projects';
-import Articles from './components/Articles';
-import Applications from './components/Applications';
-import type { CurrentUser, TagType, tabKeyType } from './data.d';
-import { queryCurrent } from './service';
+import { Avatar, Card, Col, Divider, Input, InputRef, Row, Tag } from 'antd';
+import React, { useRef, useState } from 'react';
 import useStyles from './Center.style';
+import Applications from './components/Applications';
+import Articles from './components/Articles';
+import Projects from './components/Projects';
+import type { CurrentUser, tabKeyType, TagType } from './data.d';
+import { queryCurrent } from './service';
 const operationTabList = [
   {
     key: 'articles',

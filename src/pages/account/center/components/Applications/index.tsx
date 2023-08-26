@@ -5,9 +5,9 @@ import {
   ShareAltOutlined,
 } from '@ant-design/icons';
 import { useRequest } from '@umijs/max';
-import { Avatar, Card, Dropdown, List, Menu, Tooltip } from 'antd';
-import React from 'react';
+import { Avatar, Card, Dropdown, List, Tooltip } from 'antd';
 import numeral from 'numeral';
+import React from 'react';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import useStyles from './index.style';
@@ -43,25 +43,7 @@ const Applications: React.FC = () => {
       count: 30,
     });
   });
-  const itemMenu = (
-    <Menu>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.alipay.com/">
-          1st menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.taobao.com/">
-          2nd menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.tmall.com/">
-          3d menu item
-        </a>
-      </Menu.Item>
-    </Menu>
-  );
+
   const CardInfo: React.FC<{
     activeUser: React.ReactNode;
     newUser: React.ReactNode;
@@ -108,7 +90,19 @@ const Applications: React.FC = () => {
               <Tooltip title="分享" key="share">
                 <ShareAltOutlined />
               </Tooltip>,
-              <Dropdown overlay={itemMenu} key="ellipsis">
+              <Dropdown
+                items={[
+                  {
+                    key: '1',
+                    title: '1st menu item',
+                  },
+                  {
+                    key: '2',
+                    title: '2nd menu item',
+                  },
+                ]}
+                key="ellipsis"
+              >
                 <EllipsisOutlined />
               </Dropdown>,
             ]}

@@ -1,5 +1,5 @@
-import dayjs from 'dayjs';
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
+import dayjs from 'dayjs';
 
 type RangePickerValue = RangePickerProps<dayjs.Dayjs>['value'];
 

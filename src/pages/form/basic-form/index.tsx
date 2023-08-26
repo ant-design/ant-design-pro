@@ -1,5 +1,5 @@
-import { Card, message } from 'antd';
 import {
+  PageContainer,
   ProForm,
   ProFormDateRangePicker,
   ProFormDependency,
@@ -10,8 +10,8 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
+import { Card, message } from 'antd';
 import type { FC } from 'react';
-import { PageContainer } from '@ant-design/pro-components';
 import { fakeSubmitForm } from './service';
 import useStyles from './style.style';
 const BasicForm: FC<Record<string, any>> = () => {

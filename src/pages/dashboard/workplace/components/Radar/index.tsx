@@ -1,5 +1,5 @@
-import { Axis, Chart, Coord, Geom, Tooltip } from 'bizcharts';
 import { Col, Row } from 'antd';
+import { Axis, Chart, Coord, Geom, Tooltip } from 'bizcharts';
 import React, { useEffect, useRef, useState } from 'react';
 
 export type RadarProps = {

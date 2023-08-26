@@ -4,11 +4,11 @@ import {
   EllipsisOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons';
-import { Avatar, Card, Col, Dropdown, Form, List, Menu, Row, Select, Tooltip } from 'antd';
+import { useRequest } from '@umijs/max';
+import { Avatar, Card, Col, Dropdown, Form, List, Row, Select, Tooltip } from 'antd';
 import numeral from 'numeral';
 import type { FC } from 'react';
 import React from 'react';
-import { useRequest } from '@umijs/max';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
@@ -75,26 +75,9 @@ export const Applications: FC<Record<string, any>> = () => {
       count: 8,
     });
   });
+
   const list = data?.list || [];
-  const itemMenu = (
-    <Menu>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.alipay.com/">
-          1st menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.taobao.com/">
-          2nd menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.tmall.com/">
-          3d menu item
-        </a>
-      </Menu.Item>
-    </Menu>
-  );
+
   return (
     <div className={styles.filterCardList}>
       <Card bordered={false}>
@@ -191,7 +174,21 @@ export const Applications: FC<Record<string, any>> = () => {
                 <Tooltip title="分享" key="share">
                   <ShareAltOutlined />
                 </Tooltip>,
-                <Dropdown key="ellipsis" overlay={itemMenu}>
+                <Dropdown
+                  key="ellipsis"
+                  menu={{
+                    items: [
+                      {
+                        key: '1',
+                        title: '1st menu item',
+                      },
+                      {
+                        key: '2',
+                        title: '2st menu item',
+                      },
+                    ],
+                  }}
+                >
                   <EllipsisOutlined />
                 </Dropdown>,
               ]}

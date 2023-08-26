@@ -1,5 +1,5 @@
 import { request } from '@umijs/max';
-import type { Params, ListItemDataType } from './data';
+import type { ListItemDataType, Params } from './data';
 
 export async function queryFakeList(
   params: Params,

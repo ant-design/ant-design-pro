@@ -1,10 +1,9 @@
-import { Chart, Coord, Geom, Shape, Tooltip } from 'bizcharts';
-import React, { Component } from 'react';
 import DataSet from '@antv/data-set';
-import Debounce from 'lodash.debounce';
+import { Chart, Coord, Geom, Shape, Tooltip } from 'bizcharts';
 import classNames from 'classnames';
+import Debounce from 'lodash.debounce';
+import React, { Component } from 'react';
 import autoHeight from '../autoHeight';
-import useStyles from './index.style';
 
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-param-reassign: 0 */

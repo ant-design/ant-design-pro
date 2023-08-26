@@ -1,6 +1,6 @@
 import { Axis, Chart, Geom, Tooltip } from 'bizcharts';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Debounce from 'lodash.debounce';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import useStyles from '../index.style';
 
 export type BarProps = {

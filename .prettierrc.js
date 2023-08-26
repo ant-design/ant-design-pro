@@ -18,4 +18,9 @@ module.exports = {
       },
     },
   ],
+  plugins: [
+    'prettier-plugin-organize-imports',
+    'prettier-plugin-packagejson',
+    'prettier-plugin-two-style-order',
+  ],
 };

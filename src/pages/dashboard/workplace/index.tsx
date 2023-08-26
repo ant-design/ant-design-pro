@@ -1,14 +1,14 @@
-import type { FC } from 'react';
-import { Avatar, Card, Col, List, Skeleton, Row, Statistic } from 'antd';
 import { Radar } from '@ant-design/charts';
-import { Link, useRequest } from '@umijs/max';
 import { PageContainer } from '@ant-design/pro-components';
+import { Link, useRequest } from '@umijs/max';
+import { Avatar, Card, Col, List, Row, Skeleton, Statistic } from 'antd';
 import dayjs from 'dayjs';
-import EditableLinkGroup from './components/EditableLinkGroup';
-import useStyles from './style.style';
-import type { ActivitiesType, CurrentUser } from './data.d';
-import { queryProjectNotice, queryActivities, fakeChartData } from './service';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import type { FC } from 'react';
+import EditableLinkGroup from './components/EditableLinkGroup';
+import type { ActivitiesType, CurrentUser } from './data.d';
+import { fakeChartData, queryActivities, queryProjectNotice } from './service';
+import useStyles from './style.style';
 dayjs.extend(relativeTime);
 
 const links = [

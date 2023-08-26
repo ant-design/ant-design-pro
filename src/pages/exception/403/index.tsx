@@ -1,5 +1,5 @@
 import { Link } from '@umijs/max';
-import { Result, Button } from 'antd';
+import { Button, Result } from 'antd';
 
 export default () => (
   <Result

@@ -1,12 +1,12 @@
-import { Card, Col, Row, Statistic } from 'antd';
-import { useRequest } from '@umijs/max';
-import type { FC } from 'react';
-import { Gauge, WordCloud, Liquid, RingProgress } from '@ant-design/charts';
-import type { WordCloudData } from '@antv/g2plot/esm/plots/word-cloud/layer';
+import { Gauge, Liquid, RingProgress, WordCloud } from '@ant-design/charts';
 import { GridContent } from '@ant-design/pro-components';
+import type { WordCloudData } from '@antv/g2plot/esm/plots/word-cloud/layer';
+import { useRequest } from '@umijs/max';
+import { Card, Col, Row, Statistic } from 'antd';
 import numeral from 'numeral';
-import Map from './components/Map';
+import type { FC } from 'react';
 import ActiveChart from './components/ActiveChart';
+import Map from './components/Map';
 import { queryTags } from './service';
 import useStyles from './style.style';
 const { Countdown } = Statistic;

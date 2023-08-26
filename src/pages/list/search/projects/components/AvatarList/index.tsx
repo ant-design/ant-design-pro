@@ -1,6 +1,6 @@
 import { Avatar, Tooltip } from 'antd';
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 import useStyles from './index.style';
 export declare type SizeType = number | 'small' | 'default' | 'large';
 export type AvatarItemProps = {

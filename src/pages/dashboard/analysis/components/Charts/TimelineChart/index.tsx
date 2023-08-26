@@ -1,7 +1,7 @@
-import { Axis, Chart, Geom, Legend, Tooltip } from 'bizcharts';
 import DataSet from '@antv/data-set';
-import React from 'react';
+import { Axis, Chart, Geom, Legend, Tooltip } from 'bizcharts';
 import Slider from 'bizcharts-plugin-slider';
+import React from 'react';
 import autoHeight from '../autoHeight';
 import useStyles from './index.style';
 export type TimelineChartProps = {

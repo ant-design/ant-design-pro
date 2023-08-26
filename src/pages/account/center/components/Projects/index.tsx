@@ -1,12 +1,12 @@
-import { Card, List } from 'antd';
 import { useRequest } from '@umijs/max';
-import React from 'react';
+import { Card, List } from 'antd';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import React from 'react';
+import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import AvatarList from '../AvatarList';
-import type { ListItemDataType } from '../../data.d';
 import useStyles from './index.style';
-import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 const Projects: React.FC = () => {
   const { styles } = useStyles();

@@ -1,5 +1,5 @@
-import React from 'react';
 import { Tooltip } from 'antd';
+import React from 'react';
 import useStyles from './index.style';
 export type MiniProgressProps = {
   target: number;

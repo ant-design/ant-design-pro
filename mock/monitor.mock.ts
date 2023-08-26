@@ -1,5 +1,5 @@
-import mockjs from 'mockjs';
 import type { Request, Response } from 'express';
+import mockjs from 'mockjs';
 
 const getTags = (_: Request, res: Response) => {
   return res.json({

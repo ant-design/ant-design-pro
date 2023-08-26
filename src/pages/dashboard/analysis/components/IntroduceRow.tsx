@@ -1,12 +1,12 @@
+import { Progress, TinyArea, TinyColumn } from '@ant-design/charts';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { TinyArea, TinyColumn, Progress } from '@ant-design/charts';
 import { Col, Row, Tooltip } from 'antd';
 import numeral from 'numeral';
-import { ChartCard, Field } from './Charts';
 import type { DataItem } from '../data.d';
-import Trend from './Trend';
-import Yuan from '../utils/Yuan';
 import useStyles from '../style.style';
+import Yuan from '../utils/Yuan';
+import { ChartCard, Field } from './Charts';
+import Trend from './Trend';
 const topColResponsiveProps = {
   xs: 24,
   sm: 12,

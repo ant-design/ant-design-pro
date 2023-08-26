@@ -1,12 +1,12 @@
+import { TinyArea } from '@ant-design/charts';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Card, Col, Row, Table, Tooltip } from 'antd';
-import { TinyArea } from '@ant-design/charts';
-import React from 'react';
 import numeral from 'numeral';
+import React from 'react';
 import type { DataItem } from '../data.d';
+import useStyles from '../style.style';
 import NumberInfo from './NumberInfo';
 import Trend from './Trend';
-import useStyles from '../style.style';
 
 const TopSearch = ({
   loading,

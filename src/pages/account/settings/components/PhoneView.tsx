@@ -1,5 +1,5 @@
-import React from 'react';
 import { Input } from 'antd';
+import React from 'react';
 import useStyles from './index.style';
 
 type PhoneViewProps = {

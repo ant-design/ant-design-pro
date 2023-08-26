@@ -1,6 +1,6 @@
-import type { FC } from 'react';
-import React, { useState } from 'react';
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
+import { PageContainer } from '@ant-design/pro-components';
+import { useRequest } from '@umijs/max';
 import {
   Avatar,
   Button,
@@ -9,18 +9,17 @@ import {
   Dropdown,
   Input,
   List,
-  Menu,
   Modal,
   Progress,
   Radio,
   Row,
 } from 'antd';
-import { PageContainer } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
 import dayjs from 'dayjs';
+import type { FC } from 'react';
+import React, { useState } from 'react';
 import OperationModal from './components/OperationModal';
-import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
 import type { BasicListItemDataType } from './data.d';
+import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
 import useStyles from './style.style';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -141,12 +140,19 @@ export const BasicList: FC = () => {
     item: BasicListItemDataType;
   }> = ({ item }) => (
     <Dropdown
-      overlay={
-        <Menu onClick={({ key }) => editAndDelete(key, item)}>
-          <Menu.Item key="edit">编辑</Menu.Item>
-          <Menu.Item key="delete">删除</Menu.Item>
-        </Menu>
-      }
+      menu={{
+        onClick: ({ key }) => editAndDelete(key, item),
+        items: [
+          {
+            key: 'edit',
+            name: '编辑',
+          },
+          {
+            key: 'delete',
+            name: '删除',
+          },
+        ],
+      }}
     >
       <a>
         更多 <DownOutlined />

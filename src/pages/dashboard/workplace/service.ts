@@ -1,5 +1,5 @@
 import { request } from '@umijs/max';
-import type { NoticeType, ActivitiesType, AnalysisData } from './data';
+import type { ActivitiesType, AnalysisData, NoticeType } from './data';
 
 export async function queryProjectNotice(): Promise<{ data: NoticeType[] }> {
   return request('/api/project/notice');

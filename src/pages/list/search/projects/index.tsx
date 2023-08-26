@@ -1,14 +1,14 @@
-import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
-import type { FC } from 'react';
 import { useRequest } from '@umijs/max';
+import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import type { FC } from 'react';
 import AvatarList from './components/AvatarList';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import useStyles from './style.style';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 const { Option } = Select;
 const FormItem = Form.Item;

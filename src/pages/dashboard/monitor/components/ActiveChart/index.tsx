@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
 import { TinyArea } from '@ant-design/charts';
 import { Statistic } from 'antd';
+import { useEffect, useRef, useState } from 'react';
 import useStyles from './index.style';
 function fixedZero(val: number) {
   return val * 1 < 10 ? `0${val}` : val;

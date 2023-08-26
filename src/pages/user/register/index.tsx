@@ -1,8 +1,8 @@
-import type { FC } from 'react';
-import { useState, useEffect } from 'react';
-import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
+import { history, Link, useRequest } from '@umijs/max';
+import { Button, Col, Form, Input, message, Popover, Progress, Row, Select } from 'antd';
 import type { Store } from 'antd/es/form/interface';
-import { Link, useRequest, history } from '@umijs/max';
+import type { FC } from 'react';
+import { useEffect, useState } from 'react';
 import type { StateType } from './service';
 import { fakeRegister } from './service';
 import useStyles from './style.style';
