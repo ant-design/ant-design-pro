@@ -142,7 +142,7 @@ export default [
         name: 'table-list',
         icon: 'smile',
         path: '/list/table-list',
-        component: './list/table-list',
+        component: './TableList',
       },
       {
         name: 'basic-list',
