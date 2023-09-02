@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import type { Request, Response } from 'express';
 
 const city = require('./geographic/city.json');
