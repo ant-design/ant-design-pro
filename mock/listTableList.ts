@@ -44,10 +44,7 @@ function getRule(req: Request, res: Response, u: string) {
       filter: any;
     };
 
-  let dataSource = [...tableListDataSource].slice(
-    ((current as number) - 1) * (pageSize as number),
-    (current as number) * (pageSize as number),
-  );
+  let dataSource = [...tableListDataSource];
   if (params.sorter) {
     const sorter = JSON.parse(params.sorter);
     dataSource = dataSource.sort((prev, next) => {
@@ -94,9 +91,14 @@ function getRule(req: Request, res: Response, u: string) {
   if (params.name) {
     dataSource = dataSource.filter((data) => data?.name?.includes(params.name || ''));
   }
+  const total = dataSource.length;
+  dataSource = dataSource.slice(
+    ((current as number) - 1) * (pageSize as number),
+    (current as number) * (pageSize as number),
+  );
   const result = {
     data: dataSource,
-    total: tableListDataSource.length,
+    total,
     success: true,
     pageSize,
     current: parseInt(`${params.current}`, 10) || 1,
