@@ -126,7 +126,6 @@ const Login: React.FC = () => {
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
-        // history.push(urlParams.get('redirect') || '/');
         window.location.href = urlParams.get('redirect') || '/';
         return;
       }
