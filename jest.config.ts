@@ -7,7 +7,6 @@ export default async () => {
     }),
   });
 
-  console.log();
   return {
     ...config,
     testEnvironmentOptions: {
