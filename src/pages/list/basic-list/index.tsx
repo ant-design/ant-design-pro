@@ -145,11 +145,11 @@ export const BasicList: FC = () => {
         items: [
           {
             key: 'edit',
-            name: '编辑',
+            label: '编辑',
           },
           {
             key: 'delete',
-            name: '删除',
+            label: '删除',
           },
         ],
       }}
