@@ -15,6 +15,7 @@ import {
   Dropdown,
   Empty,
   Popover,
+  Space,
   Statistic,
   Steps,
   Table,
@@ -61,7 +62,7 @@ const action = (
         );
       }
       return (
-        <Fragment>
+        <Space>
           <ButtonGroup>
             <Button>操作一</Button>
             <Button>操作二</Button>
@@ -90,7 +91,7 @@ const action = (
             </Dropdown>
           </ButtonGroup>
           <Button type="primary">主操作</Button>
-        </Fragment>
+        </Space>
       );
     }}
   </RouteContext.Consumer>
