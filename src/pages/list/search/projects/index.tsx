@@ -9,14 +9,9 @@ import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import useStyles from './style.style';
-import { DefaultOptionType } from 'antd/es/select';
+import { categoryOptions } from '../../mock';
 
 dayjs.extend(relativeTime);
-
-const categoryOptions: DefaultOptionType[] = Array.from({length: 12}).map((_, index) => ({
-  value: `cat${index + 1}`,
-  label: `类目${index + 1}`,
-}));
 
 const FormItem = Form.Item;
 const { Paragraph } = Typography;
