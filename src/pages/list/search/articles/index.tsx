@@ -12,7 +12,6 @@ import useStyles from './style.style';
 import { categoryOptions } from '../../mock';
 import { DefaultOptionType } from 'antd/es/select';
 
-const { Option } = Select;
 const FormItem = Form.Item;
 
 const pageSize = 5;

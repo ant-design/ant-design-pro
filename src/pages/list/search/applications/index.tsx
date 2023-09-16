@@ -15,7 +15,6 @@ import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import useStyles from './style.style';
 import { categoryOptions } from '../../mock';
-const { Option } = Select;
 export function formatWan(val: number) {
   const v = val * 1;
   if (!v || Number.isNaN(v)) return '';
