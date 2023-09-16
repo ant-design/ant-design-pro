@@ -9,10 +9,15 @@ import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import useStyles from './style.style';
+import { DefaultOptionType } from 'antd/es/select';
 
 dayjs.extend(relativeTime);
 
-const { Option } = Select;
+const categoryOptions: DefaultOptionType[] = Array.from({length: 12}).map((_, index) => ({
+  value: `cat${index + 1}`,
+  label: `类目${index + 1}`,
+}));
+
 const FormItem = Form.Item;
 const { Paragraph } = Typography;
 const getKey = (id: string, index: number) => `${id}-${index}`;
@@ -103,18 +108,9 @@ const Projects: FC = () => {
           >
             <FormItem name="category">
               <TagSelect expandable>
-                <TagSelect.Option value="cat1">类目一</TagSelect.Option>
-                <TagSelect.Option value="cat2">类目二</TagSelect.Option>
-                <TagSelect.Option value="cat3">类目三</TagSelect.Option>
-                <TagSelect.Option value="cat4">类目四</TagSelect.Option>
-                <TagSelect.Option value="cat5">类目五</TagSelect.Option>
-                <TagSelect.Option value="cat6">类目六</TagSelect.Option>
-                <TagSelect.Option value="cat7">类目七</TagSelect.Option>
-                <TagSelect.Option value="cat8">类目八</TagSelect.Option>
-                <TagSelect.Option value="cat9">类目九</TagSelect.Option>
-                <TagSelect.Option value="cat10">类目十</TagSelect.Option>
-                <TagSelect.Option value="cat11">类目十一</TagSelect.Option>
-                <TagSelect.Option value="cat12">类目十二</TagSelect.Option>
+                {categoryOptions.map((category) => (
+                  <TagSelect.Option value={category.value!} key={category.value}>{category.label}</TagSelect.Option>
+                ))}
               </TagSelect>
             </FormItem>
           </StandardFormRow>
@@ -128,9 +124,13 @@ const Projects: FC = () => {
                       maxWidth: 200,
                       width: '100%',
                     }}
-                  >
-                    <Option value="lisa">王昭君</Option>
-                  </Select>
+                    options={[
+                      {
+                        label: '王昭君',
+                        value: 'lisa',
+                      }
+                    ]}
+                  />
                 </FormItem>
               </Col>
               <Col lg={8} md={10} sm={10} xs={24}>
@@ -141,10 +141,17 @@ const Projects: FC = () => {
                       maxWidth: 200,
                       width: '100%',
                     }}
-                  >
-                    <Option value="good">优秀</Option>
-                    <Option value="normal">普通</Option>
-                  </Select>
+                    options={[
+                      {
+                        label: '优秀',
+                        value: 'good',
+                      },
+                      {
+                        label: '普通',
+                        value: 'normal',
+                      }
+                    ]}
+                  />
                 </FormItem>
               </Col>
             </Row>
