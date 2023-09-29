@@ -126,7 +126,7 @@ exports[`Login Page should login success 1`] = `
                     </div>
                     <div
                       class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"
-                      style="left: 0px; width: 0px;"
+                      style="left: 0px; transform: translateX(-50%); width: 0px;"
                     />
                   </div>
                 </div>
@@ -453,7 +453,7 @@ exports[`Login Page should login success 1`] = `
       </div>
     </div>
     <footer
-      class="ant-layout-footer css-dev-only-do-not-override-190m0jy"
+      class="ant-layout-footer css-dev-only-do-not-override-pr0fja"
       style="padding: 0px; background: none;"
     >
       <div
@@ -990,7 +990,7 @@ exports[`Login Page should show login form 1`] = `
       </div>
     </div>
     <footer
-      class="ant-layout-footer css-dev-only-do-not-override-190m0jy"
+      class="ant-layout-footer css-dev-only-do-not-override-pr0fja"
       style="padding: 0px; background: none;"
     >
       <div
