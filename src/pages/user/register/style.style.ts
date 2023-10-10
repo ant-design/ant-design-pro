@@ -15,12 +15,15 @@ const useStyles = createStyles(({ token }) => {
       display: 'block',
       width: '100%',
     },
+
+    footer: {
+      width: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
     submit: {
       width: '50%',
-    },
-    login: {
-      float: 'right',
-      lineHeight: token.controlHeight,
     },
     success: {
       transition: 'color 0.3s',

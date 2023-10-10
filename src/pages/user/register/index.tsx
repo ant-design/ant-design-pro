@@ -1,5 +1,5 @@
 import { history, Link, useRequest } from '@umijs/max';
-import { Button, Col, Form, Input, message, Popover, Progress, Row, Select } from 'antd';
+import { Button, Col, Form, Input, message, Popover, Progress, Row, Select, Space } from 'antd';
 import type { Store } from 'antd/es/form/interface';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
@@ -9,7 +9,6 @@ import useStyles from './style.style';
 
 const FormItem = Form.Item;
 const { Option } = Select;
-const InputGroup = Input.Group;
 
 const passwordProgressMap: {
   ok: 'success';
@@ -83,7 +82,7 @@ const Register: FC = () => {
       if (data.status === 'ok') {
         message.success('注册成功！');
         history.push({
-          pathname: '/user/register-result?account=' + params.email,
+          pathname: `/user/register-result?account=${params[0].email}`,
         });
       }
     },
@@ -140,7 +139,7 @@ const Register: FC = () => {
       <h3>注册</h3>
       <Form form={form} name="UserRegister" onFinish={onFinish}>
         <FormItem
-          name="mail"
+          name="email"
           rules={[
             {
               required: true,
@@ -216,37 +215,35 @@ const Register: FC = () => {
         >
           <Input size="large" type="password" placeholder="确认密码" />
         </FormItem>
-        <InputGroup compact>
-          <Select
-            size="large"
-            value={prefix}
-            onChange={changePrefix}
-            style={{
-              width: '20%',
-            }}
-          >
-            <Option value="86">+86</Option>
-            <Option value="87">+87</Option>
-          </Select>
-          <FormItem
-            style={{
-              width: '80%',
-            }}
-            name="mobile"
-            rules={[
-              {
-                required: true,
-                message: '请输入手机号!',
-              },
-              {
-                pattern: /^\d{11}$/,
-                message: '手机号格式错误!',
-              },
-            ]}
-          >
+        <FormItem
+          name="mobile"
+          rules={[
+            {
+              required: true,
+              message: '请输入手机号!',
+            },
+            {
+              pattern: /^\d{11}$/,
+              message: '手机号格式错误!',
+            },
+          ]}
+        >
+          <Space.Compact style={{ width: '100%' }}>
+            <Select
+              size="large"
+              value={prefix}
+              onChange={changePrefix}
+              style={{
+                width: '30%',
+              }}
+            >
+              <Option value="86">+86</Option>
+              <Option value="87">+87</Option>
+            </Select>
+
             <Input size="large" placeholder="手机号" />
-          </FormItem>
-        </InputGroup>
+          </Space.Compact>
+        </FormItem>
         <Row gutter={8}>
           <Col span={16}>
             <FormItem
@@ -273,18 +270,20 @@ const Register: FC = () => {
           </Col>
         </Row>
         <FormItem>
-          <Button
-            size="large"
-            loading={submitting}
-            className={styles.submit}
-            type="primary"
-            htmlType="submit"
-          >
-            <span>注册</span>
-          </Button>
-          <Link className={styles.login} to="/user/login">
-            <span>使用已有账户登录</span>
-          </Link>
+          <div className={styles.footer}>
+            <Button
+              size="large"
+              loading={submitting}
+              className={styles.submit}
+              type="primary"
+              htmlType="submit"
+            >
+              <span>注册</span>
+            </Button>
+            <Link to="/user/login">
+              <span>使用已有账户登录</span>
+            </Link>
+          </div>
         </FormItem>
       </Form>
     </div>
