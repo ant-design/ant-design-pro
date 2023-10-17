@@ -1,4 +1,4 @@
-import { Column } from '@ant-design/charts';
+import { Column } from '@ant-design/plots';
 import { Card, Col, DatePicker, Row, Tabs } from 'antd';
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
 import type dayjs from 'dayjs';
@@ -86,33 +86,26 @@ const SalesCard = ({
                     <div className={styles.salesBar}>
                       <Column
                         height={300}
-                        forceFit
-                        data={salesData as any}
+                        data={salesData}
                         xField="x"
                         yField="y"
-                        xAxis={{
-                          visible: true,
-                          title: {
-                            visible: false,
+                        paddingBottom={12}
+                        axis={{
+                          x: {
+                            title: false,
                           },
-                        }}
-                        yAxis={{
-                          visible: true,
-                          title: {
-                            visible: false,
-                          },
-                        }}
-                        title={{
-                          visible: true,
-                          text: '销售趋势',
-                          style: {
-                            fontSize: 14,
-                          },
-                        }}
-                        meta={{
                           y: {
-                            alias: '销售量',
+                            title: false,
+                            gridLineDash: null,
+                            gridStroke: '#ccc',
                           },
+                        }}
+                        scale={{
+                          x: { paddingInner: 0.4 },
+                        }}
+                        tooltip={{
+                          name: '销售量',
+                          channel: 'y',
                         }}
                       />
                     </div>
@@ -153,33 +146,24 @@ const SalesCard = ({
                     <div className={styles.salesBar}>
                       <Column
                         height={300}
-                        forceFit
-                        data={salesData as any}
+                        data={salesData}
                         xField="x"
                         yField="y"
-                        xAxis={{
-                          visible: true,
-                          title: {
-                            visible: false,
+                        paddingBottom={12}
+                        axis={{
+                          x: {
+                            title: false,
                           },
-                        }}
-                        yAxis={{
-                          visible: true,
-                          title: {
-                            visible: false,
-                          },
-                        }}
-                        title={{
-                          visible: true,
-                          text: '访问量趋势',
-                          style: {
-                            fontSize: 14,
-                          },
-                        }}
-                        meta={{
                           y: {
-                            alias: '访问量',
+                            title: false,
                           },
+                        }}
+                        scale={{
+                          x: { paddingInner: 0.4 },
+                        }}
+                        tooltip={{
+                          name: '访问量',
+                          channel: 'y',
                         }}
                       />
                     </div>

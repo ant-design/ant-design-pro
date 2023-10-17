@@ -1,5 +1,4 @@
-import { Donut } from '@ant-design/charts';
-import type { DonutConfig } from '@ant-design/charts/es/donut';
+import { Pie } from '@ant-design/plots';
 import { Card, Radio, Typography } from 'antd';
 import type { RadioChangeEvent } from 'antd/es/radio';
 import numeral from 'numeral';
@@ -45,29 +44,20 @@ const ProportionSales = ({
     >
       <div>
         <Text>销售额</Text>
-        <Donut
-          forceFit
+        <Pie
           height={340}
           radius={0.8}
+          innerRadius={0.5}
           angleField="y"
           colorField="x"
           data={salesPieData as any}
-          legend={{
-            visible: false,
-          }}
+          legend={false}
           label={{
-            visible: true,
-            type: 'spider',
-            formatter: (text, item) => {
-              // eslint-disable-next-line no-underscore-dangle
-              return `${item._origin.x}: ${numeral(item._origin.y).format('0,0')}`;
+            position: 'spider',
+            text: (item: { x: number; y: number }) => {
+              return `${item.x}: ${numeral(item.y).format('0,0')}`;
             },
           }}
-          statistic={
-            {
-              totalLabel: '销售额',
-            } as DonutConfig['statistic']
-          }
         />
       </div>
     </Card>

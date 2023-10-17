@@ -1,5 +1,5 @@
-import { TinyArea } from '@ant-design/charts';
 import { InfoCircleOutlined } from '@ant-design/icons';
+import { Tiny } from '@ant-design/plots';
 import { Card, Col, Row, Table, Tooltip } from 'antd';
 import numeral from 'numeral';
 import React from 'react';
@@ -112,7 +112,15 @@ const TopSearch = ({
             status="up"
             subTotal={17.1}
           />
-          <TinyArea xField="x" height={45} forceFit yField="y" smooth data={visitData2} />
+          <Tiny.Area
+            xField="x"
+            yField="y"
+            shapeField="smooth"
+            height={45}
+            style={{ fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)', fillOpacity: 0.4 }}
+            data={visitData2}
+            line={{ style: { stroke: '#6294FA' } }}
+          />
         </Col>
         <Col
           sm={12}
@@ -139,7 +147,15 @@ const TopSearch = ({
             subTotal={26.2}
             gap={8}
           />
-          <TinyArea xField="x" height={45} forceFit yField="y" smooth data={visitData2} />
+          <Tiny.Area
+            xField="x"
+            yField="y"
+            shapeField="smooth"
+            height={45}
+            style={{ fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)', fillOpacity: 0.4 }}
+            data={visitData2}
+            line={{ style: { stroke: '#6294FA' } }}
+          />
         </Col>
       </Row>
       <Table<any>
