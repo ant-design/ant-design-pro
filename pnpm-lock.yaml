@@ -337,7 +337,7 @@ packages:
       '@babel/core': 7.23.0
       '@babel/generator': 7.23.0
       '@babel/parser': 7.23.0
-      '@babel/traverse': 7.23.0
+      '@babel/traverse': 7.23.2
       '@babel/types': 7.23.0
       '@umijs/fabric': 2.14.1
       babel-types: 6.26.0
@@ -914,7 +914,7 @@ packages:
       '@babel/helpers': 7.23.1
       '@babel/parser': 7.23.0
       '@babel/template': 7.22.15
-      '@babel/traverse': 7.23.0
+      '@babel/traverse': 7.23.2
       '@babel/types': 7.23.0
       convert-source-map: 1.9.0
       debug: 4.3.4
@@ -937,7 +937,7 @@ packages:
       '@babel/helpers': 7.23.1
       '@babel/parser': 7.23.0
       '@babel/template': 7.22.15
-      '@babel/traverse': 7.23.0
+      '@babel/traverse': 7.23.2
       '@babel/types': 7.23.0
       convert-source-map: 2.0.0
       debug: 4.3.4
@@ -1205,7 +1205,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/template': 7.22.15
-      '@babel/traverse': 7.23.0
+      '@babel/traverse': 7.23.2
       '@babel/types': 7.23.0
     transitivePeerDependencies:
       - supports-color
@@ -2293,8 +2293,8 @@ packages:
       '@babel/parser': 7.23.0
       '@babel/types': 7.23.0
 
-  /@babel/traverse@7.23.0:
-    resolution: {integrity: sha512-t/QaEvyIoIkwzpiZ7aoSKK8kObQYeF7T2v+dazAYCb8SXtp58zEVkWW7zAnju8FNKNdr4ScAOEDmMItbyOmEYw==}
+  /@babel/traverse@7.23.2:
+    resolution: {integrity: sha512-azpe59SQ48qG6nu2CzcMLbxUudtN+dOM9kDbUqGq3HXUJRlo7i8fvPoxQUzYgLZ4cMVmuZgm8vvBpNeRhd6XSw==}
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.22.13
@@ -4215,7 +4215,7 @@ packages:
       '@types/history': 4.7.11
       '@types/react': 18.2.25
       '@types/react-router': 5.1.20
-      redux: 3.7.2
+      redux: 4.2.1
     dev: true
 
   /@types/react-router@5.1.20:
@@ -12261,6 +12261,7 @@ packages:
   /pify@4.0.1:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
+    requiresBuild: true
     dev: true
 
   /pinkie-promise@2.0.1:
@@ -14264,7 +14265,7 @@ packages:
       '@babel/core': 7.23.0
       '@babel/generator': 7.23.0
       '@babel/parser': 7.23.0
-      '@babel/traverse': 7.23.0
+      '@babel/traverse': 7.23.2
       '@babel/types': 7.23.0
       hotkeys-js: 3.12.0
       loader-utils: 2.0.4
@@ -15889,7 +15890,7 @@ packages:
       '@babel/preset-env': 7.22.20(@babel/core@7.23.0)
       '@babel/preset-react': 7.22.15(@babel/core@7.23.0)
       '@babel/preset-typescript': 7.23.0(@babel/core@7.23.0)
-      '@babel/traverse': 7.23.0
+      '@babel/traverse': 7.23.2
       '@emotion/unitless': 0.8.1
       css-to-react-native: 3.2.0
       react: 18.2.0
@@ -15921,7 +15922,7 @@ packages:
       '@babel/preset-env': 7.22.20(@babel/core@7.23.0)
       '@babel/preset-react': 7.22.15(@babel/core@7.23.0)
       '@babel/preset-typescript': 7.23.0(@babel/core@7.23.0)
-      '@babel/traverse': 7.23.0
+      '@babel/traverse': 7.23.2
       '@emotion/is-prop-valid': 1.2.1
       '@emotion/unitless': 0.8.1
       '@types/stylis': 4.2.1
