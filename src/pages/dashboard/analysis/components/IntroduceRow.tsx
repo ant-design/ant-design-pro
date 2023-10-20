@@ -1,5 +1,5 @@
-import { Progress, TinyArea, TinyColumn } from '@ant-design/charts';
 import { InfoCircleOutlined } from '@ant-design/icons';
+import { Tiny } from '@ant-design/plots';
 import { Col, Row, Tooltip } from 'antd';
 import numeral from 'numeral';
 import type { DataItem } from '../data.d';
@@ -65,14 +65,14 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
           footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
           contentHeight={46}
         >
-          <TinyArea
-            color="#975FE4"
+          <Tiny.Area
             xField="x"
-            height={46}
-            forceFit
             yField="y"
-            smooth
+            shapeField="smooth"
+            height={46}
+            style={{ fill: 'linear-gradient(-90deg, white 0%, #975FE4 100%)', fillOpacity: 0.6 }}
             data={visitData}
+            line={{ style: { stroke: '#975FE4' } }}
           />
         </ChartCard>
       </Col>
@@ -90,7 +90,13 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
           footer={<Field label="转化率" value="60%" />}
           contentHeight={46}
         >
-          <TinyColumn xField="x" height={46} forceFit yField="y" data={visitData} />
+          <Tiny.Column
+            xField="x"
+            yField="y"
+            height={46}
+            data={visitData}
+            scale={{ x: { paddingInner: 0.4 } }}
+          />
         </ChartCard>
       </Col>
       <Col {...topColResponsiveProps}>
@@ -128,18 +134,15 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
           }
           contentHeight={46}
         >
-          <Progress
-            height={46}
+          <Tiny.Progress
+            height={12}
+            color={['#E9EEF4', '#13C2C2']}
             percent={0.78}
-            color="#13C2C2"
-            forceFit
-            size={8}
-            marker={[
+            annotations={[
               {
-                value: 0.8,
-                style: {
-                  stroke: '#13C2C2',
-                },
+                type: 'lineY',
+                data: [0.8],
+                style: { stroke: '#13C2C2', strokeOpacity: 1 },
               },
             ]}
           />

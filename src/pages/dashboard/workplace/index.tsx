@@ -1,4 +1,4 @@
-import { Radar } from '@ant-design/charts';
+import { Radar } from '@ant-design/plots';
 import { PageContainer } from '@ant-design/pro-components';
 import { Link, useRequest } from '@umijs/max';
 import { Avatar, Card, Col, List, Row, Skeleton, Statistic } from 'antd';
@@ -228,17 +228,25 @@ const Workplace: FC = () => {
               <Radar
                 height={343}
                 data={data?.radarData || []}
-                angleField="label"
-                seriesField="name"
-                radiusField="value"
+                xField="label"
+                colorField="name"
+                yField="value"
+                shapeField="smooth"
                 area={{
-                  visible: false,
+                  style: {
+                    fillOpacity: 0.4
+                  }
                 }}
-                point={{
-                  visible: true,
+                axis={{
+                  y: {
+                    gridStrokeOpacity: 0.5,
+                  }
                 }}
                 legend={{
-                  position: 'bottom-center',
+                  color: {
+                    position: 'bottom',
+                    layout: { justifyContent: 'center' },
+                  },
                 }}
               />
             </div>

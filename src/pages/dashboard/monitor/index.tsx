@@ -1,6 +1,5 @@
-import { Gauge, Liquid, RingProgress, WordCloud } from '@ant-design/charts';
+import { Gauge, Liquid, Tiny, WordCloud } from '@ant-design/plots';
 import { GridContent } from '@ant-design/pro-components';
-import type { WordCloudData } from '@antv/g2plot/esm/plots/word-cloud/layer';
 import { useRequest } from '@umijs/max';
 import { Card, Col, Row, Statistic } from 'antd';
 import numeral from 'numeral';
@@ -12,10 +11,24 @@ import useStyles from './style.style';
 const { Countdown } = Statistic;
 const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Moment is also OK
 
+const getAnnotations = (value: number) => [
+  {
+    type: 'text',
+    style: {
+      text: `${value * 100}%`,
+      x: '50%',
+      y: '50%',
+      textAlign: 'center',
+      fontSize: 16,
+      fontStyle: 'bold',
+    },
+  },
+];
+
 const Monitor: FC = () => {
   const { styles } = useStyles();
   const { loading, data } = useRequest(queryTags);
-  const wordCloudData: WordCloudData[] = (data?.list || []).map((item) => {
+  const wordCloudData = (data?.list || []).map((item) => {
     return {
       id: +Date.now(),
       word: item.name,
@@ -82,15 +95,19 @@ const Monitor: FC = () => {
             >
               <Gauge
                 height={180}
-                min={0}
-                max={100}
-                forceFit
-                value={87}
-                range={[0, 25, 50, 75, 100]}
-                statistic={{
-                  visible: true,
-                  text: '优',
-                  color: '#30bf78',
+                data={{
+                  target: 80,
+                  total: 100,
+                  name: 'score',
+                  thresholds: [20, 40, 60, 80, 100],
+                }}
+                style={{
+                  textContent: () => `优`,
+                }}
+                meta={{
+                  color: {
+                    range: ['#6395FA', '#62DAAB', '#657798', '#F7C128', '#1F8718'],
+                  },
                 }}
               />
             </Card>
@@ -113,13 +130,28 @@ const Monitor: FC = () => {
                 }}
               >
                 <Col span={8}>
-                  <RingProgress forceFit height={128} percent={0.28} />
+                  <Tiny.Ring
+                    height={128}
+                    percent={0.3}
+                    color={['#E8EEF4', '#5FABF4']}
+                    annotations={getAnnotations(0.3)}
+                  />
                 </Col>
                 <Col span={8}>
-                  <RingProgress color="#5DDECF" forceFit height={128} percent={0.22} />
+                  <Tiny.Ring
+                    height={128}
+                    percent={0.22}
+                    color={['#E8EEF4', '#5DDECF']}
+                    annotations={getAnnotations(0.22)}
+                  />
                 </Col>
                 <Col span={8}>
-                  <RingProgress color="#2FC25B" forceFit height={128} percent={0.32} />
+                  <Tiny.Ring
+                    height={128}
+                    percent={0.32}
+                    color={['#E8EEF4', '#2FC25B']}
+                    annotations={getAnnotations(0.32)}
+                  />
                 </Col>
               </Row>
             </Card>
@@ -143,14 +175,11 @@ const Monitor: FC = () => {
             >
               <WordCloud
                 data={wordCloudData}
-                forceFit
                 height={162}
-                wordStyle={{
-                  fontSize: [10, 20],
-                }}
-                shape="triangle"
+                textField="word"
+                colorField="word"
+                layout={{ spiral: 'rectangular', fontSize: [10, 20] }}
               />
-              {/* <TagCloud data={data?.list || []} height={161} /> */}
             </Card>
           </Col>
           <Col
@@ -170,17 +199,7 @@ const Monitor: FC = () => {
               }}
               bordered={false}
             >
-              <Liquid
-                height={161}
-                min={0}
-                max={10000}
-                value={5639}
-                forceFit
-                padding={[0, 0, 0, 0]}
-                statistic={{
-                  formatter: (value) => `${((100 * value) / 10000).toFixed(1)}%`,
-                }}
-              />
+              <Liquid height={160} percent={0.35} />
             </Card>
           </Col>
         </Row>

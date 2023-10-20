@@ -1,4 +1,4 @@
-import { Line, RingProgress } from '@ant-design/charts';
+import { Line, Tiny } from '@ant-design/plots';
 import { Card, Col, Row, Tabs } from 'antd';
 import type { DataItem, OfflineDataType } from '../data.d';
 import useStyles from '../style.style';
@@ -32,7 +32,7 @@ const CustomTab = ({
         paddingTop: 36,
       }}
     >
-      <RingProgress forceFit height={60} width={60} percent={data.cvr} />
+      <Tiny.Ring height={60} width={60} percent={data.cvr} color={['#E8EEF4', '#5FABF4']} />
     </Col>
   </Row>
 );
@@ -73,21 +73,20 @@ const OfflineData = ({
               }}
             >
               <Line
-                forceFit
                 height={400}
                 data={offlineChartData}
-                responsive
                 xField="date"
                 yField="value"
-                seriesField="type"
-                interactions={[
-                  {
-                    type: 'slider',
-                    cfg: {},
-                  },
-                ]}
+                colorField="type"
+                slider={{ x: true }}
+                axis={{
+                  x: { title: false },
+                  y: { title: false, gridLineDash: null, gridStroke: '#ccc', gridStrokeOpacity: 1 },
+                }}
                 legend={{
-                  position: 'top-center',
+                  color: {
+                    layout: { justifyContent: 'center' },
+                  },
                 }}
               />
             </div>
