@@ -108,6 +108,12 @@ If you choose umi@3, you can also choose the pro template. Pro is the basic temp
   complete
 ```
 
+Initialized Git repository:
+
+```shell
+$ git init myapp
+```
+
 Install dependencies:
 
 ```shell
