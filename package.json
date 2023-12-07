@@ -90,7 +90,7 @@
     "swagger-ui-dist": "^4.19.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
-    "umi-presets-pro": "^2.0.3"
+    "umi-presets-pro": "^2.0.3",
     "umi-serve": "^1.9.11"
   },
   "engines": {
