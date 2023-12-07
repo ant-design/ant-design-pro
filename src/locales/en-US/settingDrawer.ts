@@ -23,9 +23,9 @@ export default {
   'app.setting.hideheader': 'Hidden Header when scrolling',
   'app.setting.hideheader.hint': 'Works when Hidden Header is enabled',
   'app.setting.othersettings': 'Other Settings',
-  'app.setting.weakmode': 'Weak Mode',
+  'app.setting.weakmode': 'Color Blind Friendly Mode',
   'app.setting.copy': 'Copy Setting',
-  'app.setting.copyinfo': 'copy success，please replace defaultSettings in src/models/setting.js',
+  'app.setting.copyinfo': 'copy success, please replace defaultSettings in src/models/setting.js',
   'app.setting.production.hint':
     'Setting panel shows in development environment only, please manually modify',
 };
