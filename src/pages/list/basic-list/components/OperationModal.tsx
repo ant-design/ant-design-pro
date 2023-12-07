@@ -11,7 +11,7 @@ import type { BasicListItemDataType } from '../data.d';
 import useStyles from '../style.style';
 type OperationModalProps = {
   done: boolean;
-  visible: boolean;
+  open: boolean;
   current: Partial<BasicListItemDataType> | undefined;
   onDone: () => void;
   onSubmit: (values: BasicListItemDataType) => void;
@@ -19,13 +19,13 @@ type OperationModalProps = {
 };
 const OperationModal: FC<OperationModalProps> = (props) => {
   const { styles } = useStyles();
-  const { done, visible, current, onDone, onSubmit, children } = props;
-  if (!visible) {
+  const { done, open, current, onDone, onSubmit, children } = props;
+  if (!open) {
     return null;
   }
   return (
     <ModalForm<BasicListItemDataType>
-      visible={visible}
+      open={open}
       title={done ? null : `任务${current ? '编辑' : '添加'}`}
       className={styles.standardListForm}
       width={640}

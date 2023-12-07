@@ -111,7 +111,7 @@ const useStyles = createStyles(({ token }) => {
     listCard: {
       [`@media screen and (max-width: ${token.screenXS}px)`]: {
         '.ant-card-head-title': {
-          overflow: 'visible',
+          overflow: 'open',
         },
       },
       [`@media screen and (max-width: ${token.screenMD}px)`]: {

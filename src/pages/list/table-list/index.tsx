@@ -249,7 +249,7 @@ const TableList: React.FC = () => {
       <ModalForm
         title="新建规则"
         width="400px"
-        visible={createModalVisible}
+        open={createModalVisible}
         onVisibleChange={handleModalVisible}
         onFinish={async (value) => {
           const success = await handleAdd(value as TableListItem);
@@ -296,7 +296,7 @@ const TableList: React.FC = () => {
 
       <Drawer
         width={600}
-        visible={showDetail}
+        open={showDetail}
         onClose={() => {
           setCurrentRow(undefined);
           setShowDetail(false);

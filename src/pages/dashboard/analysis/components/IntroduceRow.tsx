@@ -1,6 +1,6 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Tiny } from '@ant-design/plots';
-import { Col, Row, Tooltip } from 'antd';
+import { Col, Progress, Row, Tooltip } from 'antd';
 import numeral from 'numeral';
 import type { DataItem } from '../data.d';
 import useStyles from '../style.style';
@@ -70,7 +70,11 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
             yField="y"
             shapeField="smooth"
             height={46}
-            style={{ fill: 'linear-gradient(-90deg, white 0%, #975FE4 100%)', fillOpacity: 0.6 }}
+            style={{
+              fill: 'linear-gradient(-90deg, white 0%, #975FE4 100%)',
+              fillOpacity: 0.6,
+              width: '100%',
+            }}
             data={visitData}
             line={{ style: { stroke: '#975FE4' } }}
           />
@@ -134,18 +138,7 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
           }
           contentHeight={46}
         >
-          <Tiny.Progress
-            height={12}
-            color={['#E9EEF4', '#13C2C2']}
-            percent={0.78}
-            annotations={[
-              {
-                type: 'lineY',
-                data: [0.8],
-                style: { stroke: '#13C2C2', strokeOpacity: 1 },
-              },
-            ]}
-          />
+          <Progress percent={78} strokeColor={{ from: '#108ee9', to: '#87d068' }} status="active" />
         </ChartCard>
       </Col>
     </Row>

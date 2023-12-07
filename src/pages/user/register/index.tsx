@@ -22,7 +22,7 @@ const passwordProgressMap: {
 const Register: FC = () => {
   const { styles } = useStyles();
   const [count, setCount]: [number, any] = useState(0);
-  const [visible, setVisible]: [boolean, any] = useState(false);
+  const [open, setVisible]: [boolean, any] = useState(false);
   const [prefix, setPrefix]: [string, any] = useState('86');
   const [popover, setPopover]: [boolean, any] = useState(false);
   const confirmDirty = false;
@@ -105,7 +105,7 @@ const Register: FC = () => {
       return promise.reject('请输入密码!');
     }
     // 有值的情况
-    if (!visible) {
+    if (!open) {
       setVisible(!!value);
     }
     setPopover(!popover);
@@ -161,7 +161,7 @@ const Register: FC = () => {
             return node;
           }}
           content={
-            visible && (
+            open && (
               <div
                 style={{
                   padding: '4px 0',
@@ -183,7 +183,7 @@ const Register: FC = () => {
             width: 240,
           }}
           placement="right"
-          visible={visible}
+          open={open}
         >
           <FormItem
             name="password"

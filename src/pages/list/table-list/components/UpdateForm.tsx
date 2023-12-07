@@ -40,7 +40,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             }}
             destroyOnClose
             title="规则配置"
-            visible={props.updateModalVisible}
+            open={props.updateModalVisible}
             footer={submitter}
             onCancel={() => {
               props.onCancel();

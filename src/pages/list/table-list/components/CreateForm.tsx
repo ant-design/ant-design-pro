@@ -14,7 +14,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
     <Modal
       destroyOnClose
       title="新建规则"
-      visible={modalVisible}
+      open={modalVisible}
       onCancel={() => onCancel()}
       footer={null}
     >

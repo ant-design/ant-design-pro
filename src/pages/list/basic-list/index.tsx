@@ -70,7 +70,7 @@ const ListContent = ({
 export const BasicList: FC = () => {
   const { styles } = useStyles();
   const [done, setDone] = useState<boolean>(false);
-  const [visible, setVisible] = useState<boolean>(false);
+  const [open, setVisible] = useState<boolean>(false);
   const [current, setCurrent] = useState<Partial<BasicListItemDataType> | undefined>(undefined);
   const {
     data: listData,
@@ -247,7 +247,7 @@ export const BasicList: FC = () => {
       </Button>
       <OperationModal
         done={done}
-        visible={visible}
+        open={open}
         current={current}
         onDone={handleDone}
         onSubmit={handleSubmit}
