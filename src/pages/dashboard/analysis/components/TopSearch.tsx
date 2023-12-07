@@ -1,5 +1,5 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { Tiny } from '@ant-design/plots';
+import { Area } from '@ant-design/plots';
 import { Card, Col, Row, Table, Tooltip } from 'antd';
 import numeral from 'numeral';
 import React from 'react';
@@ -44,7 +44,6 @@ const TopSearch = ({
           count: number;
         },
       ) => a.count - b.count,
-      className: styles.alignRight,
     },
     {
       title: '周涨幅',
@@ -112,14 +111,14 @@ const TopSearch = ({
             status="up"
             subTotal={17.1}
           />
-          <Tiny.Area
+          <Area
             xField="x"
             yField="y"
             shapeField="smooth"
             height={45}
+            axis={false}
             style={{ fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)', fillOpacity: 0.4 }}
             data={visitData2}
-            line={{ style: { stroke: '#6294FA' } }}
           />
         </Col>
         <Col
@@ -147,14 +146,14 @@ const TopSearch = ({
             subTotal={26.2}
             gap={8}
           />
-          <Tiny.Area
+          <Area
             xField="x"
             yField="y"
             shapeField="smooth"
             height={45}
             style={{ fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)', fillOpacity: 0.4 }}
             data={visitData2}
-            line={{ style: { stroke: '#6294FA' } }}
+            axis={false}
           />
         </Col>
       </Row>

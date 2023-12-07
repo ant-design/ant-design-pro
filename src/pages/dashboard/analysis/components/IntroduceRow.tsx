@@ -1,5 +1,5 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { Tiny } from '@ant-design/plots';
+import { Area, Column } from '@ant-design/plots';
 import { Col, Progress, Row, Tooltip } from 'antd';
 import numeral from 'numeral';
 import type { DataItem } from '../data.d';
@@ -65,18 +65,19 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
           footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
           contentHeight={46}
         >
-          <Tiny.Area
+          <Area
             xField="x"
             yField="y"
             shapeField="smooth"
             height={46}
+            axis={false}
             style={{
               fill: 'linear-gradient(-90deg, white 0%, #975FE4 100%)',
               fillOpacity: 0.6,
               width: '100%',
             }}
+            padding={[0, 0, 0, 0]}
             data={visitData}
-            line={{ style: { stroke: '#975FE4' } }}
           />
         </ChartCard>
       </Col>
@@ -94,9 +95,10 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
           footer={<Field label="转化率" value="60%" />}
           contentHeight={46}
         >
-          <Tiny.Column
+          <Column
             xField="x"
             yField="y"
+            axis={false}
             height={46}
             data={visitData}
             scale={{ x: { paddingInner: 0.4 } }}

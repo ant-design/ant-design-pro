@@ -1,29 +1,16 @@
-import { Gauge, Liquid, Tiny, WordCloud } from '@ant-design/plots';
+import { Gauge, Liquid, WordCloud } from '@ant-design/plots';
 import { GridContent } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
-import { Card, Col, Row, Statistic } from 'antd';
+import { Card, Col, Progress, Row, Statistic } from 'antd';
 import numeral from 'numeral';
 import type { FC } from 'react';
 import ActiveChart from './components/ActiveChart';
 import Map from './components/Map';
 import { queryTags } from './service';
 import useStyles from './style.style';
+
 const { Countdown } = Statistic;
 const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Moment is also OK
-
-const getAnnotations = (value: number) => [
-  {
-    type: 'text',
-    style: {
-      text: `${value * 100}%`,
-      x: '50%',
-      y: '50%',
-      textAlign: 'center',
-      fontSize: 16,
-      fontStyle: 'bold',
-    },
-  },
-];
 
 const Monitor: FC = () => {
   const { styles } = useStyles();
@@ -95,12 +82,15 @@ const Monitor: FC = () => {
             >
               <Gauge
                 height={180}
-                data={{
-                  target: 80,
-                  total: 100,
-                  name: 'score',
-                  thresholds: [20, 40, 60, 80, 100],
-                }}
+                data={
+                  {
+                    target: 80,
+                    total: 100,
+                    name: 'score',
+                    thresholds: [20, 40, 60, 80, 100],
+                  } as any
+                }
+                padding={[0, 0, 0, 0]}
                 style={{
                   textContent: () => `优`,
                 }}
@@ -123,35 +113,20 @@ const Monitor: FC = () => {
               marginBottom: 24,
             }}
           >
-            <Card title="各品类占比" bordered={false} className={styles.pieCard}>
+            <Card title="各品类占比" bordered={false}>
               <Row
                 style={{
                   padding: '16px 0',
                 }}
               >
                 <Col span={8}>
-                  <Tiny.Ring
-                    height={128}
-                    percent={0.3}
-                    color={['#E8EEF4', '#5FABF4']}
-                    annotations={getAnnotations(0.3)}
-                  />
+                  <Progress type="dashboard" percent={75} />
                 </Col>
                 <Col span={8}>
-                  <Tiny.Ring
-                    height={128}
-                    percent={0.22}
-                    color={['#E8EEF4', '#5DDECF']}
-                    annotations={getAnnotations(0.22)}
-                  />
+                  <Progress type="dashboard" percent={48} />
                 </Col>
                 <Col span={8}>
-                  <Tiny.Ring
-                    height={128}
-                    percent={0.32}
-                    color={['#E8EEF4', '#2FC25B']}
-                    annotations={getAnnotations(0.32)}
-                  />
+                  <Progress type="dashboard" percent={33} />
                 </Col>
               </Row>
             </Card>

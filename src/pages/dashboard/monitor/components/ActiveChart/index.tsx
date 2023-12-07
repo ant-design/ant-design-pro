@@ -1,4 +1,4 @@
-import { Tiny } from '@ant-design/plots';
+import { Area } from '@ant-design/plots';
 import { Statistic } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import useStyles from './index.style';
@@ -48,13 +48,14 @@ const ActiveChart = () => {
           marginTop: 32,
         }}
       >
-        <Tiny.Area
+        <Area
+          padding={[0, 0, 0, 0]}
           xField="x"
+          axis={false}
           yField="y"
           height={84}
           style={{ fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)', fillOpacity: 0.6 }}
           data={activeData}
-          line={{ style: { stroke: '#6294FA' } }}
         />
       </div>
       {activeData && (
