@@ -118,7 +118,7 @@ const SalesCard = ({
                           <li key={item.title}>
                             <span
                               className={`${styles.rankingItemNumber} ${
-                                i < 3 ? styles.active : ''
+                                i < 3 ? styles.rankingItemNumberActive : ''
                               }`}
                             >
                               {i + 1}
@@ -126,9 +126,7 @@ const SalesCard = ({
                             <span className={styles.rankingItemTitle} title={item.title}>
                               {item.title}
                             </span>
-                            <span className={styles.rankingItemValue}>
-                              {numeral(item.total).format('0,0')}
-                            </span>
+                            <span>{numeral(item.total).format('0,0')}</span>
                           </li>
                         ))}
                       </ul>

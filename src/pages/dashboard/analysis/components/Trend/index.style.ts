@@ -14,8 +14,13 @@ const useStyles = createStyles(({ token }) => {
       top: '-1px',
       color: token['green-6'],
     },
-    'trendItemGrey .up, trendItemGrey .down': {
-      color: token.colorText,
+    trendItemGrey: {
+      up: {
+        color: token.colorText,
+      },
+      down: {
+        color: token.colorText,
+      },
     },
     'reverseColor .up': {
       color: token['green-6'],

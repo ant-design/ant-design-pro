@@ -32,11 +32,6 @@ const useStyles = createStyles(({ token }) => {
           fontSize: '0',
           visibility: 'hidden',
         },
-        span: {
-          color: token.colorText,
-          fontSize: '14px',
-          lineHeight: '22px',
-        },
       },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
         li: {
@@ -54,8 +49,8 @@ const useStyles = createStyles(({ token }) => {
       fontSize: '12px',
       lineHeight: '20px',
       textAlign: 'center',
-      backgroundColor: '#F9F9F9',
       borderRadius: '20px',
+      backgroundColor: token.colorBgContainerDisabled,
     },
     rankingItemTitle: {
       flex: '1',
@@ -64,9 +59,9 @@ const useStyles = createStyles(({ token }) => {
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
     },
-    active: {
+    rankingItemNumberActive: {
       color: '#fff',
-      backgroundColor: '#314659',
+      backgroundColor: token.colorBgSpotlight,
     },
     salesExtra: {
       display: 'inline-block',
