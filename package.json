@@ -48,9 +48,9 @@
   "dependencies": {
     "@ant-design/icons": "^4.8.1",
     "@ant-design/pro-components": "^2.6.28",
-    "@ant-design/use-emotion-css": "1.0.4",
     "@umijs/route-utils": "^2.2.2",
     "antd": "^5.9.4",
+    "antd-style": "^3.5.2",
     "classnames": "^2.3.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",

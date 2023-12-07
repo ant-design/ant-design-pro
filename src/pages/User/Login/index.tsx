@@ -15,16 +15,16 @@ import {
   ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
-import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { FormattedMessage, history, SelectLang, useIntl, useModel, Helmet } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
 import Settings from '../../../../config/defaultSettings';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
+import { createStyles } from 'antd-style';
 
-const ActionIcons = () => {
-  const langClassName = useEmotionCss(({ token }) => {
-    return {
+const useStyles = createStyles(({ token }) => {
+  return {
+    action: {
       marginLeft: '8px',
       color: 'rgba(0, 0, 0, 0.2)',
       fontSize: '24px',
@@ -34,21 +34,8 @@ const ActionIcons = () => {
       '&:hover': {
         color: token.colorPrimaryActive,
       },
-    };
-  });
-
-  return (
-    <>
-      <AlipayCircleOutlined key="AlipayCircleOutlined" className={langClassName} />
-      <TaobaoCircleOutlined key="TaobaoCircleOutlined" className={langClassName} />
-      <WeiboCircleOutlined key="WeiboCircleOutlined" className={langClassName} />
-    </>
-  );
-};
-
-const Lang = () => {
-  const langClassName = useEmotionCss(({ token }) => {
-    return {
+    },
+    lang: {
       width: 42,
       height: 42,
       lineHeight: '42px',
@@ -58,11 +45,36 @@ const Lang = () => {
       ':hover': {
         backgroundColor: token.colorBgTextHover,
       },
-    };
-  });
+    },
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      overflow: 'auto',
+      backgroundImage:
+        "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
+      backgroundSize: '100% 100%',
+    },
+  };
+});
+
+const ActionIcons = () => {
+  const { styles } = useStyles();
 
   return (
-    <div className={langClassName} data-lang>
+    <>
+      <AlipayCircleOutlined key="AlipayCircleOutlined" className={styles.action} />
+      <TaobaoCircleOutlined key="TaobaoCircleOutlined" className={styles.action} />
+      <WeiboCircleOutlined key="WeiboCircleOutlined" className={styles.action} />
+    </>
+  );
+};
+
+const Lang = () => {
+  const { styles } = useStyles();
+
+  return (
+    <div className={styles.lang} data-lang>
       {SelectLang && <SelectLang />}
     </div>
   );
@@ -87,19 +99,7 @@ const Login: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
-
-  const containerClassName = useEmotionCss(() => {
-    return {
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100vh',
-      overflow: 'auto',
-      backgroundImage:
-        "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
-      backgroundSize: '100% 100%',
-    };
-  });
-
+  const { styles } = useStyles();
   const intl = useIntl();
 
   const fetchUserInfo = async () => {
@@ -144,7 +144,7 @@ const Login: React.FC = () => {
   const { status, type: loginType } = userLoginState;
 
   return (
-    <div className={containerClassName}>
+    <div className={styles.container}>
       <Helmet>
         <title>
           {intl.formatMessage({
