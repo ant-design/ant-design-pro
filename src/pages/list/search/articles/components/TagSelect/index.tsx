@@ -1,17 +1,16 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
-import { useBoolean, useControllableValue } from 'ahooks';
 import { Tag } from 'antd';
 import classNames from 'classnames';
-import type { FC } from 'react';
-import React from 'react';
+import { useMergedState } from 'rc-util';
+import React, { FC, useState } from 'react';
 import useStyles from './index.style';
 const { CheckableTag } = Tag;
 export interface TagSelectOptionProps {
   value: string | number;
   style?: React.CSSProperties;
   checked?: boolean;
-  children?: React.ReactNode;
   onChange?: (value: string | number, state: boolean) => void;
+  children?: React.ReactNode;
 }
 const TagSelectOption: React.FC<TagSelectOptionProps> & {
   isTagSelectOption: boolean;
@@ -24,8 +23,11 @@ const TagSelectOption: React.FC<TagSelectOptionProps> & {
     {children}
   </CheckableTag>
 );
+
 TagSelectOption.isTagSelectOption = true;
+
 type TagSelectOptionElement = React.ReactElement<TagSelectOptionProps, typeof TagSelectOption>;
+
 export interface TagSelectProps {
   onChange?: (value: (string | number)[]) => void;
   expandable?: boolean;
@@ -47,8 +49,14 @@ const TagSelect: FC<TagSelectProps> & {
 } = (props) => {
   const { styles } = useStyles();
   const { children, hideCheckAll = false, className, style, expandable, actionsText = {} } = props;
-  const [expand, { toggle }] = useBoolean();
-  const [value, setValue] = useControllableValue<(string | number)[]>(props);
+  const [expand, setExpand] = useState<boolean>(false);
+
+  const [value, setValue] = useMergedState<(string | number)[]>(props.defaultValue || [], {
+    value: props.value,
+    defaultValue: props.defaultValue,
+    onChange: props.onChange,
+  });
+
   const isTagSelectOption = (node: TagSelectOptionElement) =>
     node &&
     node.type &&
@@ -106,7 +114,7 @@ const TagSelect: FC<TagSelectProps> & {
         <a
           className={styles.trigger}
           onClick={() => {
-            toggle();
+            setExpand(!expand);
           }}
         >
           {expand ? (

@@ -22,11 +22,9 @@ const useStyles = createStyles(({ token }) => {
         color: token.colorText,
       },
     },
-    'reverseColor .up': {
-      color: token['green-6'],
-    },
-    'reverseColor .down': {
-      color: token['red-6'],
+    reverseColor: {
+      up: { color: token['green-6'] },
+      down: { color: token['red-6'] },
     },
   };
 });
