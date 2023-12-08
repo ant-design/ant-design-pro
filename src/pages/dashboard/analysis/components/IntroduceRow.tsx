@@ -76,7 +76,7 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
               fillOpacity: 0.6,
               width: '100%',
             }}
-            padding={[0, 0, 0, 0]}
+            padding={-20}
             data={visitData}
           />
         </ChartCard>
@@ -98,6 +98,7 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Dat
           <Column
             xField="x"
             yField="y"
+            padding={-20}
             axis={false}
             height={46}
             data={visitData}

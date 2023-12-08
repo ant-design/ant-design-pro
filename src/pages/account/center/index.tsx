@@ -1,6 +1,6 @@
 import { ClusterOutlined, ContactsOutlined, HomeOutlined, PlusOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
-import { Link, useRequest } from '@umijs/max';
+import { useRequest } from '@umijs/max';
 import { Avatar, Card, Col, Divider, Input, InputRef, Row, Tag } from 'antd';
 import React, { useRef, useState } from 'react';
 import useStyles from './Center.style';
@@ -226,10 +226,10 @@ const Center: React.FC = () => {
                     {currentUser.notice &&
                       currentUser.notice.map((item) => (
                         <Col key={item.id} lg={24} xl={12}>
-                          <Link to={item.href}>
+                          <a href={item.href}>
                             <Avatar size="small" src={item.logo} />
                             {item.member}
-                          </Link>
+                          </a>
                         </Col>
                       ))}
                   </Row>

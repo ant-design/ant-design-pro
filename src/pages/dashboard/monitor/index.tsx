@@ -90,9 +90,9 @@ const Monitor: FC = () => {
                     thresholds: [20, 40, 60, 80, 100],
                   } as any
                 }
-                padding={[0, 0, 0, 0]}
+                padding={-16}
                 style={{
-                  textContent: () => `优`,
+                  textContent: () => '优',
                 }}
                 meta={{
                   color: {

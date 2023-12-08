@@ -124,6 +124,7 @@ const Workplace: FC = () => {
       </List.Item>
     );
   };
+
   return (
     <PageContainer
       content={
@@ -168,13 +169,13 @@ const Workplace: FC = () => {
                     title={
                       <div className={styles.cardTitle}>
                         <Avatar size="small" src={item.logo} />
-                        <Link to={item.href}>{item.title}</Link>
+                        <Link to={item.href || '/'}>{item.title}</Link>
                       </div>
                     }
                     description={item.description}
                   />
                   <div className={styles.projectItemContent}>
-                    <Link to={item.memberLink}>{item.member || ''}</Link>
+                    <Link to={item.memberLink || '/'}>{item.member || ''}</Link>
                     {item.updatedAt && (
                       <span className={styles.datetime} title={item.updatedAt}>
                         {dayjs(item.updatedAt).fromNow()}
@@ -234,13 +235,13 @@ const Workplace: FC = () => {
                 shapeField="smooth"
                 area={{
                   style: {
-                    fillOpacity: 0.4
-                  }
+                    fillOpacity: 0.4,
+                  },
                 }}
                 axis={{
                   y: {
                     gridStrokeOpacity: 0.5,
-                  }
+                  },
                 }}
                 legend={{
                   color: {
@@ -262,14 +263,16 @@ const Workplace: FC = () => {
           >
             <div className={styles.members}>
               <Row gutter={48}>
-                {projectNotice.map((item) => (
-                  <Col span={12} key={`members-item-${item.id}`}>
-                    <Link to={item.href}>
-                      <Avatar src={item.logo} size="small" />
-                      <span className={styles.member}>{item.member}</span>
-                    </Link>
-                  </Col>
-                ))}
+                {projectNotice.map((item) => {
+                  return (
+                    <Col span={12} key={`members-item-${item.id}`}>
+                      <a>
+                        <Avatar src={item.logo} size="small" />
+                        <span className={styles.member}>{item.member.substring(0, 3)}</span>
+                      </a>
+                    </Col>
+                  );
+                })}
               </Row>
             </div>
           </Card>
