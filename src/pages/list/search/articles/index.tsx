@@ -1,16 +1,16 @@
 import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { useRequest } from '@umijs/max';
 import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
+import { DefaultOptionType } from 'antd/es/select';
 import type { FC } from 'react';
 import React, { useMemo } from 'react';
+import { categoryOptions } from '../../mock';
 import ArticleListContent from './components/ArticleListContent';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import useStyles from './style.style';
-import { categoryOptions } from '../../mock';
-import { DefaultOptionType } from 'antd/es/select';
 
 const FormItem = Form.Item;
 
@@ -116,10 +116,14 @@ const Articles: FC = () => {
     </div>
   );
 
-  const ownerOptions = useMemo<DefaultOptionType[]>(() => owners.map(item => ({
-    label: item.name,
-    value: item.id,
-  })), [owners]);
+  const ownerOptions = useMemo<DefaultOptionType[]>(
+    () =>
+      owners.map((item) => ({
+        label: item.name,
+        value: item.id,
+      })),
+    [owners],
+  );
 
   return (
     <>
@@ -136,7 +140,9 @@ const Articles: FC = () => {
             <FormItem name="category">
               <TagSelect expandable>
                 {categoryOptions.map((category) => (
-                  <TagSelect.Option value={category.value!} key={category.value}>{category.label}</TagSelect.Option>
+                  <TagSelect.Option value={category.value!} key={category.value}>
+                    {category.label}
+                  </TagSelect.Option>
                 ))}
               </TagSelect>
             </FormItem>
@@ -165,7 +171,7 @@ const Articles: FC = () => {
                       {
                         label: '李三',
                         value: 'lisa',
-                      }
+                      },
                     ]}
                   />
                 </FormItem>
@@ -179,7 +185,7 @@ const Articles: FC = () => {
                       {
                         label: '优秀',
                         value: 'good',
-                      }
+                      },
                     ]}
                   />
                 </FormItem>

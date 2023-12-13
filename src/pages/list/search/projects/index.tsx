@@ -3,13 +3,13 @@ import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import type { FC } from 'react';
+import { categoryOptions } from '../../mock';
 import AvatarList from './components/AvatarList';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import useStyles from './style.style';
-import { categoryOptions } from '../../mock';
 
 dayjs.extend(relativeTime);
 
@@ -104,7 +104,9 @@ const Projects: FC = () => {
             <FormItem name="category">
               <TagSelect expandable>
                 {categoryOptions.map((category) => (
-                  <TagSelect.Option value={category.value!} key={category.value}>{category.label}</TagSelect.Option>
+                  <TagSelect.Option value={category.value!} key={category.value}>
+                    {category.label}
+                  </TagSelect.Option>
                 ))}
               </TagSelect>
             </FormItem>
@@ -123,7 +125,7 @@ const Projects: FC = () => {
                       {
                         label: '王昭君',
                         value: 'lisa',
-                      }
+                      },
                     ]}
                   />
                 </FormItem>
@@ -144,7 +146,7 @@ const Projects: FC = () => {
                       {
                         label: '普通',
                         value: 'normal',
-                      }
+                      },
                     ]}
                   />
                 </FormItem>

@@ -26,7 +26,8 @@ const Search: FC<SearchProps> = () => {
   const location = useLocation();
   let match = useMatch(location.pathname);
   const handleTabChange = (key: string) => {
-    const url = match?.pathname === '/' ? '' : match?.pathname.substring(0, match.pathname.lastIndexOf('/'));
+    const url =
+      match?.pathname === '/' ? '' : match?.pathname.substring(0, match.pathname.lastIndexOf('/'));
     switch (key) {
       case 'articles':
         history.push(`${url}/articles`);

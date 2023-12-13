@@ -18,7 +18,7 @@ export type AvatarListProps = {
   style?: React.CSSProperties;
   children: React.ReactElement<AvatarItemProps> | React.ReactElement<AvatarItemProps>[];
 };
-const Item: React.FC<AvatarItemProps> = ({ src, size, tips, onClick = () => { } }) => {
+const Item: React.FC<AvatarItemProps> = ({ src, size, tips, onClick = () => {} }) => {
   const { styles } = useStyles();
   const avatarSizeToClassName = (size?: SizeType | 'mini') =>
     classNames(styles.avatarItem, {

@@ -9,12 +9,12 @@ import { Avatar, Card, Col, Dropdown, Form, List, Row, Select, Tooltip } from 'a
 import numeral from 'numeral';
 import type { FC } from 'react';
 import React from 'react';
+import { categoryOptions } from '../../mock';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import useStyles from './style.style';
-import { categoryOptions } from '../../mock';
 export function formatWan(val: number) {
   const v = val * 1;
   if (!v || Number.isNaN(v)) return '';
@@ -96,7 +96,9 @@ export const Applications: FC<Record<string, any>> = () => {
             <Form.Item name="category">
               <TagSelect expandable>
                 {categoryOptions.map((category) => (
-                  <TagSelect.Option value={category.value!} key={category.value}>{category.label}</TagSelect.Option>
+                  <TagSelect.Option value={category.value!} key={category.value}>
+                    {category.label}
+                  </TagSelect.Option>
                 ))}
               </TagSelect>
             </Form.Item>
@@ -115,7 +117,7 @@ export const Applications: FC<Record<string, any>> = () => {
                       {
                         label: '王昭君',
                         value: 'lisa',
-                      }
+                      },
                     ]}
                   />
                 </Form.Item>

@@ -17,10 +17,10 @@ import {
 } from '@ant-design/pro-components';
 import { FormattedMessage, Helmet, SelectLang, useIntl, useModel } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
+import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
-import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token }) => {
   return {
