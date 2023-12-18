@@ -39,6 +39,7 @@ export default [
       },
       {
         component: '404',
+        path: '/*',
       },
     ],
   },
@@ -262,5 +263,6 @@ export default [
   },
   {
     component: '404',
+    path: '/*',
   },
 ];
