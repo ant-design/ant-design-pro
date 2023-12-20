@@ -6,6 +6,7 @@ const NoFoundPage: React.FC = () => (
   <Result
     status="404"
     title="404"
+    icon={<img src="/images/404.webp" />}
     subTitle={useIntl().formatMessage({ id: 'pages.404.subTitle' })}
     extra={
       <Button type="primary" onClick={() => history.push('/')}>

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { request } from '@umijs/max';
 
-/** Create user This can only be done by the logged in user. POST /user */
+/** Create user This can only be done by the logged in user. 返回值: successful operation POST /user */
 export async function createUser(body: API.User, options?: { [key: string]: any }) {
   return request<any>('/user', {
     method: 'POST',
@@ -55,7 +55,7 @@ export async function deleteUser(
   });
 }
 
-/** Creates list of users with given input array POST /user/createWithArray */
+/** Creates list of users with given input array 返回值: successful operation POST /user/createWithArray */
 export async function createUsersWithArrayInput(
   body: API.User[],
   options?: { [key: string]: any },
@@ -67,7 +67,7 @@ export async function createUsersWithArrayInput(
   });
 }
 
-/** Creates list of users with given input array POST /user/createWithList */
+/** Creates list of users with given input array 返回值: successful operation POST /user/createWithList */
 export async function createUsersWithListInput(body: API.User[], options?: { [key: string]: any }) {
   return request<any>('/user/createWithList', {
     method: 'POST',
@@ -91,7 +91,7 @@ export async function loginUser(
   });
 }
 
-/** Logs out current logged in user session GET /user/logout */
+/** Logs out current logged in user session 返回值: successful operation GET /user/logout */
 export async function logoutUser(options?: { [key: string]: any }) {
   return request<any>('/user/logout', {
     method: 'GET',

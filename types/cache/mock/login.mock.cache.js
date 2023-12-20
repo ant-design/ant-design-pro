@@ -315,7 +315,7 @@ module.exports = {
     pageSize: 20,
     current: 1,
   },
-  'POST /api/login/outLogin': { data: {}, success: true },
+  'POST /api/login/outLogin': { data: {}, code: 200 },
   'POST /api/login/account': {
     status: 'ok',
     type: 'account',

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Ant Design Pro",
+    "title": "Evil Pro Cli",
     "version": "1.0.0"
   },
   "servers": [

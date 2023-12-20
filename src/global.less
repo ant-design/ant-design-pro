@@ -51,3 +51,16 @@ ol {
     }
   }
 }
+
+// 在使用浏览器保存的数据时 输入框的样式
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  // 背景颜色
+  background-color: transparent !important;
+  // 背景图片
+  background-image: none !important;
+  //设置input输入框的背景颜色为透明色
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  transition: background-color 50000s ease-in-out 0s;
+}
