@@ -172,32 +172,9 @@ export const queryOptions = async <U>(
   return [];
 };
 
-/**
- *  计算税率
- * @param amount 金额
- * @param rate 税率
- * @returns taxInclusiveAmount 税额  taxExclusiveAmount 不含税金额
- */
-export const calcTaxRate = (amount: number, rate: number) => {
-  if (!amount || !rate)
-    return {
-      taxInclusiveAmount: 0,
-      taxExclusiveAmount: 0,
-    };
-
-  // 不含税金额 = 含税金额 / (1+税率）
-  const taxExclusiveAmount = Number((amount / (1 + rate / 100)).toFixed(2));
-
-  return {
-    // 税额 = 不含税金额 * 税率
-    taxInclusiveAmount: (taxExclusiveAmount * (rate / 100)).toFixed(2),
-    taxExclusiveAmount,
-  };
-};
-
 // 查询审批分页
 export const queryApprovalTable = async <U>(
-  params: AntTableParams1 & { [k: string]: any },
+  params: { [k: string]: any },
   api?: (data: U) => Promise<Record<string, any>>,
 ) => {
   if (!api)

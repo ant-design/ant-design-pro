@@ -6,5 +6,5 @@ export GIT_PARAMS=$*
 
 # Run lint before the commit
 npx --no-install lint-staged
-
+yarn lint
 npx --no-install fabric verify-commit

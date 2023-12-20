@@ -8,6 +8,12 @@ import routes from './routes';
 const { REACT_APP_ENV = 'dev' } = process.env;
 
 export default defineConfig({
+  // 解决刷新 404 找不到该页面的情况。
+  exportStatic: {
+    // 忽略预渲染失败的错误
+    ignorePreRenderError: true,
+  },
+  clickToComponent: {},
   /**
    * @name 开启 hash 模式
    * @description 让 build 之后的产物包含 hash 后缀。通常用于增量发布和避免浏览器加载缓存。
@@ -105,7 +111,19 @@ export default defineConfig({
    * @description 内置了 babel import 插件
    * @doc https://umijs.org/docs/max/antd#antd
    */
-  antd: {},
+  antd: {
+    theme: {
+      // 主题相关配置
+      token: {
+        borderRadiusLG: 4,
+        borderRadius: 4,
+        borderRadiusXS: 4,
+        colorPrimary: '#13c2c2',
+        colorBgContainerDisabled: 'rgba(0, 0, 0, 0.02)',
+        colorTextDisabled: 'rgba(0, 0, 0, 0.45)',
+      },
+    },
+  },
   /**
    * @name 网络请求配置
    * @description 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
@@ -141,15 +159,18 @@ export default defineConfig({
       schemaPath: join(__dirname, 'oneapi.json'),
       mock: true,
     },
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
-      projectName: 'swagger',
-    },
   ],
   mfsu: {
     strategy: 'normal',
   },
   esbuildMinifyIIFE: true,
   requestRecord: {},
+  chainWebpack: (config, { webpack }) => {
+    config.plugin('define').use(webpack.DefinePlugin, [
+      {
+        'process.env.FRONTEND_BRANCH_NAME': JSON.stringify(process.env.FRONTEND_BRANCH_NAME),
+        'process.env.COMMIT_HASH': JSON.stringify(process.env.VERSION),
+      },
+    ]);
+  },
 });

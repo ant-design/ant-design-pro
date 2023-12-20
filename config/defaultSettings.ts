@@ -19,7 +19,16 @@ const defaultSettings: ProLayoutProps & {
   pwa: true,
   logo: '/images/logo.png',
   iconfontUrl: '',
-  token: {},
+  token: {
+    sider: {
+      colorTextMenuSelected: '#13c2c2',
+      colorTextMenuActive: '#13c2c2',
+      colorTextMenuItemHover: '#13c2c2',
+    },
+    header: {
+      colorTextRightActionsItem: 'rgba(0, 0, 0, 0.88)',
+    },
+  },
 };
 
 export default defaultSettings;
