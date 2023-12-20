@@ -197,7 +197,7 @@ export const calcTaxRate = (amount: number, rate: number) => {
 
 // 查询审批分页
 export const queryApprovalTable = async <U>(
-  params: AntTableParams & { [k: string]: any },
+  params: AntTableParams1 & { [k: string]: any },
   api?: (data: U) => Promise<Record<string, any>>,
 ) => {
   if (!api)
