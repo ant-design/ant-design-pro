@@ -1,4 +1,3 @@
-import { RequestOptionsType } from '@ant-design/pro-components';
 import { message } from 'antd';
 import dayjs from 'dayjs';
 import { Key, SyntheticEvent } from 'react';
@@ -16,12 +15,12 @@ export function renderEmpty(value: string | number | undefined) {
 }
 
 /**
- * Key[] 转antd option
+ * Key[] 转ant option
  * @param arr Key[]
  * @returns option
  */
 
-export const getOptions = (arr?: Key[]): RequestOptionsType[] => {
+export const getOptions = (arr?: Key[]) => {
   if (!arr || !arr.length) return [];
   return arr.map((item) => ({
     value: item,
@@ -35,7 +34,7 @@ export const getOptions = (arr?: Key[]): RequestOptionsType[] => {
  * @returns 分页表格所需参数
  */
 
-export const getTableParams = (params: Record<string, any>): BaseListRequest => {
+export const getTableParams = (params: Record<string, any>) => {
   const { current, pageSize, restProps } = params;
   return {
     pageNum: current,
@@ -45,7 +44,7 @@ export const getTableParams = (params: Record<string, any>): BaseListRequest => 
 };
 
 // 接口修改、新增成功 回调返回上一级
-export const onSuccessAndGoBack = (res: API.ResultAuthResp) => {
+export const onSuccessAndGoBack = (res: Record<string, any>) => {
   if (res.code === 200) {
     message.success('操作成功！');
     history.go(-1);
@@ -54,7 +53,7 @@ export const onSuccessAndGoBack = (res: API.ResultAuthResp) => {
 
 // 接口修改、新增成功 刷新页面
 export const onSuccessAndRefresh = (
-  res: API.ResultAuthResp,
+  res: Record<string, any>,
   refresh: ((delta?: number | undefined) => void) | any,
 ) => {
   if (res.code === 200) {
@@ -64,7 +63,7 @@ export const onSuccessAndRefresh = (
 };
 
 // option2enum
-export const option2enum = (options: { value: React.Key; label: string }[]) => {
+export const option2enum = (options: { value: string; label: string }[]) => {
   const obj: Record<string, any> = {};
   options.forEach((item) => {
     const { value, label } = item;
@@ -85,7 +84,7 @@ export const formatDate = (text: string | number) => {
 };
 
 export const queryPagingTable = async <U>(
-  params: AntTableParams & { [k: string]: any },
+  params: { [k: string]: any },
   api?: (data: U) => Promise<Record<string, any>>,
 ) => {
   if (!api)

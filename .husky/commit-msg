@@ -4,4 +4,7 @@
 # Export Git hook params
 export GIT_PARAMS=$*
 
+# Run lint before the commit
+npx --no-install lint-staged
+
 npx --no-install fabric verify-commit
