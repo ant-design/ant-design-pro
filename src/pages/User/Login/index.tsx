@@ -5,10 +5,9 @@ import { Helmet, history } from '@umijs/max';
 import classNames from 'classnames/bind';
 import React from 'react';
 
-import defaultSettings from '../../../../config/defaultSettings';
-
 import { login } from '@/services/evil-pro-cli/login';
 import { message } from 'antd';
+import defaultSettings from 'config/defaultSettings';
 import styles from './index.less';
 
 const cx = classNames.bind(styles);
@@ -47,7 +46,7 @@ const Login: React.FC = () => {
               maxWidth: '75vw',
             }}
             logo={<img alt="logo" src="/images/logo_simple.png" />}
-            title="Evil Pro Cli"
+            title={defaultSettings?.title}
             onFinish={async (values) => {
               await handleSubmit(values as any);
             }}

@@ -8,6 +8,9 @@ import routes from './routes';
 const { REACT_APP_ENV = 'dev' } = process.env;
 
 export default defineConfig({
+  alias: {
+    config: '/config',
+  },
   // 解决刷新 404 找不到该页面的情况。
   exportStatic: {
     // 忽略预渲染失败的错误
@@ -82,7 +85,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Evil Pro Cli',
+  title: defaultSettings?.title,
   layout: {
     locale: true,
     ...defaultSettings,
