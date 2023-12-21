@@ -1,6 +1,6 @@
 {
   "name": "evil-pro-cli",
-  "version": "1.4.0",
+  "version": "6.6.0",
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
     "analyze": "cross-env ANALYZE=1 max build",
