@@ -26,7 +26,7 @@ const defaultSettings: ProLayoutProps & {
       colorTextMenuItemHover: '#13c2c2',
     },
     header: {
-      colorTextRightActionsItem: 'red',
+      colorTextRightActionsItem: 'rgba(0, 0, 0, 0.88)',
     },
   },
 };
