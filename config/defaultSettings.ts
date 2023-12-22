@@ -28,6 +28,10 @@ const defaultSettings: ProLayoutProps & {
     header: {
       colorTextRightActionsItem: 'rgba(0, 0, 0, 0.88)',
     },
+    pageContainer: {
+      paddingBlockPageContainerContent: 36,
+      paddingInlinePageContainerContent: 36,
+    },
   },
 };
 
