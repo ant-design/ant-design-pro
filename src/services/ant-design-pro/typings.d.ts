@@ -27,6 +27,7 @@ declare namespace API {
     status?: string;
     type?: string;
     currentAuthority?: string;
+    token?: string;
   };
 
   type PageParams = {
@@ -36,12 +37,15 @@ declare namespace API {
 
   type RuleListItem = {
     key?: number;
+    id?: number;
+    guid?: string;
     disabled?: boolean;
     href?: string;
     avatar?: string;
     name?: string;
     owner?: string;
     desc?: string;
+    group_id?: number;
     callNo?: number;
     status?: number;
     updatedAt?: string;

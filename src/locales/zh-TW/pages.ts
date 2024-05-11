@@ -4,7 +4,7 @@ export default {
   'pages.login.accountLogin.errorMessage': '錯誤的用戶名和密碼(admin/ant.design)',
   'pages.login.failure': '登錄失敗，請重試！',
   'pages.login.success': '登錄成功！',
-  'pages.login.username.placeholder': '用戶名: admin or user',
+  'pages.login.username.placeholder': '用戶名',
   'pages.login.username.required': '用戶名是必填項！',
   'pages.login.password.placeholder': '密碼: ant.design',
   'pages.login.password.required': '密碼是必填項！',

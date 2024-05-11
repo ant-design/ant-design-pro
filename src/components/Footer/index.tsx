@@ -9,22 +9,22 @@ const Footer: React.FC = () => {
         background: 'none',
       }}
       links={[
+        // {
+        //   key: 'Pro',
+        //   title: 'Pro',
+        //   href: '',
+        //   blankTarget: true,
+        // },
+        // {
+        //   key: '@@@',
+        //   title: <GithubOutlined />,
+        //   href: '',
+        //   blankTarget: true,
+        // },
         {
-          key: 'Ant Design Pro',
-          title: 'Ant Design Pro',
-          href: 'https://pro.ant.design',
-          blankTarget: true,
-        },
-        {
-          key: 'github',
-          title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
-          blankTarget: true,
-        },
-        {
-          key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
+          key: 'copyright',
+          title: "2024",
+          href: '',
           blankTarget: true,
         },
       ]}

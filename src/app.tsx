@@ -1,13 +1,12 @@
-import { Footer, Question, SelectLang, AvatarDropdown, AvatarName } from '@/components';
+import { AvatarDropdown, AvatarName, Footer, Question } from '@/components';
+import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
-import { history, Link } from '@umijs/max';
+import { Link, history } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
-import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
-import React from 'react';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -50,7 +49,7 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
-    actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
+    actionsRender: () => [<Question key="doc" />],
     avatarProps: {
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,
@@ -131,6 +130,26 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
  * 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
  * @doc https://umijs.org/docs/max/request#配置
  */
+/**
+ *
+ * 对request进行运行时配置，并且该配置会直接透传到umi-request的全局配置。
+ * 后续直接从umi中引入request或者useRequest直接使用，可以说是非常方便。
+ */
+
+/** 请求拦截 */
+const requestInterceptor = (url: any, options: any): any => {
+  const headers = {
+    ...options.headers,
+    //此处需要修改一下逻辑判断
+    Authorization: localStorage.getItem('authToken') || '1213',
+  };
+  return {
+    url: url,
+    options: { ...options, headers: headers },
+  };
+};
+
 export const request = {
   ...errorConfig,
+  requestInterceptors: [requestInterceptor], //请求拦截
 };
