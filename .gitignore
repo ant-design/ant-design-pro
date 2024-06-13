@@ -8,7 +8,6 @@ _roadhog-api-doc
 
 # production
 /dist
-/.vscode
 
 # misc
 .DS_Store
@@ -22,6 +21,7 @@ package-lock.json
 *bak
 .vscode
 
+
 # visual studio code
 .history
 *.log
@@ -31,6 +31,7 @@ functions/*
 # umi
 .umi
 .umi-production
+.umi-test
 
 # screenshot
 screenshot

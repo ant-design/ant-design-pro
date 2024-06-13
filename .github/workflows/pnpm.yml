@@ -1,0 +1,33 @@
+name: Node pnpm CI
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: [16.x]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+      - run: echo ${{github.ref}}
+      - run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+      - run: pnpm config set store-dir ~/.pnpm-store
+      - run: pnpm install  --strict-peer-dependencies=false
+      - run: pnpm run lint
+      - run: pnpm run tsc
+      - run: pnpm run build
+      - run: pnpm run test
+        env:
+          CI: true
+          PROGRESS: none
+          NODE_ENV: test
+          NODE_OPTIONS: --max_old_space_size=4096

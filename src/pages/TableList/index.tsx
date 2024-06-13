@@ -1,25 +1,28 @@
+import { addRule, removeRule, rule, updateRule } from '@/services/ant-design-pro/api';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer } from 'antd';
-import React, { useState, useRef } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable from '@ant-design/pro-table';
-import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
-import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
-import ProDescriptions from '@ant-design/pro-descriptions';
+import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
+import {
+  FooterToolbar,
+  ModalForm,
+  PageContainer,
+  ProDescriptions,
+  ProFormText,
+  ProFormTextArea,
+  ProTable,
+} from '@ant-design/pro-components';
+import { FormattedMessage, useIntl } from '@umijs/max';
+import { Button, Drawer, Input, message } from 'antd';
+import React, { useRef, useState } from 'react';
 import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
-import type { TableListItem } from './data.d';
-import { queryRule, updateRule, addRule, removeRule } from './service';
 
 /**
  * @en-US Add node
  * @zh-CN 添加节点
  * @param fields
  */
-const handleAdd = async (fields: TableListItem) => {
-  const hide = message.loading('Adding');
+const handleAdd = async (fields: API.RuleListItem) => {
+  const hide = message.loading('正在添加');
   try {
     await addRule({ ...fields });
     hide();
@@ -63,8 +66,8 @@ const handleUpdate = async (fields: FormValueType) => {
  *
  * @param selectedRows
  */
-const handleRemove = async (selectedRows: TableListItem[]) => {
-  const hide = message.loading('Deleting');
+const handleRemove = async (selectedRows: API.RuleListItem[]) => {
+  const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
     await removeRule({
@@ -85,18 +88,18 @@ const TableList: React.FC = () => {
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
    *  */
-  const [createModalVisible, handleModalVisible] = useState<boolean>(false);
+  const [createModalOpen, handleModalOpen] = useState<boolean>(false);
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
    * */
-  const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
+  const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
 
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<TableListItem>();
-  const [selectedRowsState, setSelectedRows] = useState<TableListItem[]>([]);
+  const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
+  const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
 
   /**
    * @en-US International configuration
@@ -104,7 +107,7 @@ const TableList: React.FC = () => {
    * */
   const intl = useIntl();
 
-  const columns: ProColumns<TableListItem>[] = [
+  const columns: ProColumns<API.RuleListItem>[] = [
     {
       title: (
         <FormattedMessage
@@ -222,7 +225,7 @@ const TableList: React.FC = () => {
         <a
           key="config"
           onClick={() => {
-            handleUpdateModalVisible(true);
+            handleUpdateModalOpen(true);
             setCurrentRow(record);
           }}
         >
@@ -240,7 +243,7 @@ const TableList: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProTable<TableListItem>
+      <ProTable<API.RuleListItem, API.PageParams>
         headerTitle={intl.formatMessage({
           id: 'pages.searchTable.title',
           defaultMessage: 'Enquiry form',
@@ -255,13 +258,13 @@ const TableList: React.FC = () => {
             type="primary"
             key="primary"
             onClick={() => {
-              handleModalVisible(true);
+              handleModalOpen(true);
             }}
           >
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
           </Button>,
         ]}
-        request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
+        request={rule}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
@@ -282,7 +285,7 @@ const TableList: React.FC = () => {
                   id="pages.searchTable.totalServiceCalls"
                   defaultMessage="Total number of service calls"
                 />{' '}
-                {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)}{' '}
+                {selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)}{' '}
                 <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万" />
               </span>
             </div>
@@ -314,12 +317,12 @@ const TableList: React.FC = () => {
           defaultMessage: 'New rule',
         })}
         width="400px"
-        visible={createModalVisible}
-        onVisibleChange={handleModalVisible}
+        open={createModalOpen}
+        onOpenChange={handleModalOpen}
         onFinish={async (value) => {
-          const success = await handleAdd(value as TableListItem);
+          const success = await handleAdd(value as API.RuleListItem);
           if (success) {
-            handleModalVisible(false);
+            handleModalOpen(false);
             if (actionRef.current) {
               actionRef.current.reload();
             }
@@ -347,7 +350,7 @@ const TableList: React.FC = () => {
         onSubmit={async (value) => {
           const success = await handleUpdate(value);
           if (success) {
-            handleUpdateModalVisible(false);
+            handleUpdateModalOpen(false);
             setCurrentRow(undefined);
             if (actionRef.current) {
               actionRef.current.reload();
@@ -355,16 +358,18 @@ const TableList: React.FC = () => {
           }
         }}
         onCancel={() => {
-          handleUpdateModalVisible(false);
-          setCurrentRow(undefined);
+          handleUpdateModalOpen(false);
+          if (!showDetail) {
+            setCurrentRow(undefined);
+          }
         }}
-        updateModalVisible={updateModalVisible}
+        updateModalOpen={updateModalOpen}
         values={currentRow || {}}
       />
 
       <Drawer
         width={600}
-        visible={showDetail}
+        open={showDetail}
         onClose={() => {
           setCurrentRow(undefined);
           setShowDetail(false);
@@ -372,7 +377,7 @@ const TableList: React.FC = () => {
         closable={false}
       >
         {currentRow?.name && (
-          <ProDescriptions<TableListItem>
+          <ProDescriptions<API.RuleListItem>
             column={2}
             title={currentRow?.name}
             request={async () => ({
@@ -381,7 +386,7 @@ const TableList: React.FC = () => {
             params={{
               id: currentRow?.name,
             }}
-            columns={columns as ProDescriptionsItemProps<TableListItem>[]}
+            columns={columns as ProDescriptionsItemProps<API.RuleListItem>[]}
           />
         )}
       </Drawer>

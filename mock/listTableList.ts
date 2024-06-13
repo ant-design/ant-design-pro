@@ -1,11 +1,10 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Request, Response } from 'express';
+import dayjs from 'dayjs';
 import { parse } from 'url';
-import { TableListItem, TableListParams } from '@/pages/TableList/data';
 
 // mock tableListDataSource
 const genList = (current: number, pageSize: number) => {
-  const tableListDataSource: TableListItem[] = [];
+  const tableListDataSource: API.RuleListItem[] = [];
 
   for (let i = 0; i < pageSize; i += 1) {
     const index = (current - 1) * 10 + i;
@@ -22,8 +21,8 @@ const genList = (current: number, pageSize: number) => {
       desc: '这是一段描述',
       callNo: Math.floor(Math.random() * 1000),
       status: Math.floor(Math.random() * 10) % 4,
-      updatedAt: new Date(),
-      createdAt: new Date(),
+      updatedAt: dayjs().format('YYYY-MM-DD'),
+      createdAt: dayjs().format('YYYY-MM-DD'),
       progress: Math.ceil(Math.random() * 100),
     });
   }
@@ -39,26 +38,32 @@ function getRule(req: Request, res: Response, u: string) {
     realUrl = req.url;
   }
   const { current = 1, pageSize = 10 } = req.query;
-  const params = (parse(realUrl, true).query as unknown) as TableListParams;
+  const params = parse(realUrl, true).query as unknown as API.PageParams &
+    API.RuleListItem & {
+      sorter: any;
+      filter: any;
+    };
 
   let dataSource = [...tableListDataSource].slice(
     ((current as number) - 1) * (pageSize as number),
     (current as number) * (pageSize as number),
   );
-  const sorter = JSON.parse(params.sorter as any);
-  if (sorter) {
+  if (params.sorter) {
+    const sorter = JSON.parse(params.sorter);
     dataSource = dataSource.sort((prev, next) => {
       let sortNumber = 0;
-      Object.keys(sorter).forEach((key) => {
+      (Object.keys(sorter) as Array<keyof API.RuleListItem>).forEach((key) => {
+        let nextSort = next?.[key] as number;
+        let preSort = prev?.[key] as number;
         if (sorter[key] === 'descend') {
-          if (prev[key] - next[key] > 0) {
+          if (preSort - nextSort > 0) {
             sortNumber += -1;
           } else {
             sortNumber += 1;
           }
           return;
         }
-        if (prev[key] - next[key] > 0) {
+        if (preSort - nextSort > 0) {
           sortNumber += 1;
         } else {
           sortNumber += -1;
@@ -73,7 +78,7 @@ function getRule(req: Request, res: Response, u: string) {
     };
     if (Object.keys(filter).length > 0) {
       dataSource = dataSource.filter((item) => {
-        return Object.keys(filter).some((key) => {
+        return (Object.keys(filter) as Array<keyof API.RuleListItem>).some((key) => {
           if (!filter[key]) {
             return true;
           }
@@ -87,14 +92,14 @@ function getRule(req: Request, res: Response, u: string) {
   }
 
   if (params.name) {
-    dataSource = dataSource.filter((data) => data.name.includes(params.name || ''));
+    dataSource = dataSource.filter((data) => data?.name?.includes(params.name || ''));
   }
   const result = {
     data: dataSource,
     total: tableListDataSource.length,
     success: true,
     pageSize,
-    current: parseInt(`${params.currentPage}`, 10) || 1,
+    current: parseInt(`${params.current}`, 10) || 1,
   };
 
   return res.json(result);
@@ -117,7 +122,7 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
     case 'post':
       (() => {
         const i = Math.ceil(Math.random() * 10000);
-        const newRule = {
+        const newRule: API.RuleListItem = {
           key: tableListDataSource.length,
           href: 'https://ant.design',
           avatar: [
@@ -129,8 +134,8 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
           desc,
           callNo: Math.floor(Math.random() * 1000),
           status: Math.floor(Math.random() * 10) % 2,
-          updatedAt: new Date(),
-          createdAt: new Date(),
+          updatedAt: dayjs().format('YYYY-MM-DD'),
+          createdAt: dayjs().format('YYYY-MM-DD'),
           progress: Math.ceil(Math.random() * 100),
         };
         tableListDataSource.unshift(newRule);

@@ -6,7 +6,7 @@ export default {
   'menu.admin.sub-page': 'Sub-Halaman',
   'menu.login': 'Masuk',
   'menu.register': 'Pendaftaran',
-  'menu.register.result': 'Hasil Pendaftaran',
+  'menu.register-result': 'Hasil Pendaftaran',
   'menu.dashboard': 'Dasbor',
   'menu.dashboard.analysis': 'Analisis',
   'menu.dashboard.monitor': 'Monitor',

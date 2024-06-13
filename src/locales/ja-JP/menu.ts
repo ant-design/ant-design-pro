@@ -6,7 +6,7 @@ export default {
   'menu.admin.sub-page': 'サブページ',
   'menu.login': 'ログイン',
   'menu.register': '登録',
-  'menu.register.result': '登録結果',
+  'menu.register-result': '登録結果',
   'menu.dashboard': 'ダッシュボード',
   'menu.dashboard.analysis': '分析',
   'menu.dashboard.monitor': 'モニター',
