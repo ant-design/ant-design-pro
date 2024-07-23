@@ -173,6 +173,9 @@ const Workplace: FC = () => {
                       </div>
                     }
                     description={item.description}
+                    style={{
+                      width: '100%',
+                    }}
                   />
                   <div className={styles.projectItemContent}>
                     <Link to={item.memberLink || '/'}>{item.member || ''}</Link>
