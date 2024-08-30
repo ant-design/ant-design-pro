@@ -87,6 +87,7 @@ Proporcionamos `pro-cli` para inicializar rápidamente la estructura del proyect
 npm i @ant-design/pro-cli -g
 pro create myapp
 ```
+
 Selecciona la versión de umi
 
 ```
@@ -95,6 +96,7 @@ Selecciona la versión de umi
   umi@3
 
 ```
+
 > Si seleccionas la versión umi@4, los bloques completos aún no son compatibles.
 
 Si eliges umi@3, también puedes elegir la plantilla "pro". "Pro" es la plantilla básica, que solo proporciona el contenido básico de la operación del marco. "Complete" contiene todos los bloques, lo cual no es adecuado para el desarrollo secundario como una plantilla básica.

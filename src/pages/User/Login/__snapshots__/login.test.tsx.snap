@@ -26,11 +26,11 @@ exports[`Login Page should login success 1`] = `
       style="min-height: 100%; flex-direction: row;"
     >
       <div
-        style="width: 256px; overflow: hidden; max-width: 256px; min-width: 256px; transition: all 0.2s ease 0s; flex: 0 0 256px;"
+        style="width: 256px; overflow: hidden; flex: 0 0 256px; max-width: 256px; min-width: 256px; transition: all 0.2s ease 0s;"
       />
       <aside
         class="ant-layout-sider ant-layout-sider-dark ant-pro-sider ant-pro-sider-fixed ant-pro-sider-fixed-mix ant-pro-sider-layout-mix ant-pro-sider-light ant-pro-sider-mix"
-        style="max-width: 256px; min-width: 256px; width: 256px; flex: 0 0 256px;"
+        style="flex: 0 0 256px; max-width: 256px; min-width: 256px; width: 256px;"
       >
         <div
           class="ant-layout-sider-children"
@@ -60,7 +60,7 @@ exports[`Login Page should login success 1`] = `
                     class="ant-pro-base-menu-inline-item-title"
                   >
                     <span
-                      class="ant-pro-base-menu-inline-item-icon "
+                      class="ant-pro-base-menu-inline-item-icon"
                     >
                       <span
                         aria-label="smile"
@@ -107,7 +107,7 @@ exports[`Login Page should login success 1`] = `
                       class="ant-pro-base-menu-inline-item-title"
                     >
                       <span
-                        class="ant-pro-base-menu-inline-item-icon "
+                        class="ant-pro-base-menu-inline-item-icon"
                       >
                         <span
                           aria-label="table"
@@ -289,7 +289,7 @@ exports[`Login Page should login success 1`] = `
                       >
                         <span
                           class="ant-avatar ant-avatar-circle ant-avatar-image"
-                          style="width: 28px; height: 28px; line-height: 28px; font-size: 18px;"
+                          style="width: 28px; height: 28px; font-size: 18px;"
                         >
                           <img
                             src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
@@ -560,7 +560,7 @@ exports[`Login Page should login success 1`] = `
                   />
                 </svg>
               </span>
-               2023 Produced by Ant Financial Experience Department
+               
             </div>
           </div>
         </footer>
@@ -573,10 +573,10 @@ exports[`Login Page should login success 1`] = `
 exports[`Login Page should show login form 1`] = `
 <DocumentFragment>
   <div
-    class="css-trkbkn"
+    class="acss-trkbkn"
   >
     <div
-      class="css-15lsw8v"
+      class="acss-15lsw8v"
       data-lang="true"
     >
       <span
@@ -610,16 +610,16 @@ exports[`Login Page should show login form 1`] = `
       style="flex: 1; padding: 32px 0px;"
     >
       <div
-        class="ant-pro-form-login-container "
+        class="ant-pro-form-login-container css-dev-only-do-not-override-11lehqq css-dev-only-do-not-override-11lehqq"
       >
         <div
-          class="ant-pro-form-login-top"
+          class="ant-pro-form-login-top css-dev-only-do-not-override-11lehqq css-dev-only-do-not-override-11lehqq"
         >
           <div
-            class="ant-pro-form-login-header "
+            class="ant-pro-form-login-header css-dev-only-do-not-override-11lehqq"
           >
             <span
-              class="ant-pro-form-login-logo "
+              class="ant-pro-form-login-logo css-dev-only-do-not-override-11lehqq"
             >
               <img
                 alt="logo"
@@ -627,24 +627,24 @@ exports[`Login Page should show login form 1`] = `
               />
             </span>
             <span
-              class="ant-pro-form-login-title "
+              class="ant-pro-form-login-title css-dev-only-do-not-override-11lehqq"
             >
               Ant Design
             </span>
           </div>
           <div
-            class="ant-pro-form-login-desc "
+            class="ant-pro-form-login-desc css-dev-only-do-not-override-11lehqq"
           >
             Ant Design is the most influential web design specification in Xihu district
           </div>
         </div>
         <div
-          class="ant-pro-form-login-main "
+          class="ant-pro-form-login-main css-dev-only-do-not-override-11lehqq"
           style="width: 328px; min-width: 280px; max-width: 75vw;"
         >
           <form
             autocomplete="off"
-            class="ant-form ant-form-vertical ant-pro-form"
+            class="ant-form ant-form-vertical ant-pro-form css-dev-only-do-not-override-11lehqq"
           >
             <input
               style="display: none;"
@@ -696,6 +696,7 @@ exports[`Login Page should show login form 1`] = `
                     </div>
                     <div
                       class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"
+                      style="width: 0px; left: 0px; transform: translateX(-50%);"
                     />
                   </div>
                 </div>
@@ -768,7 +769,7 @@ exports[`Login Page should show login form 1`] = `
                       class="ant-form-item-control-input-content"
                     >
                       <span
-                        class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+                        class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined"
                       >
                         <span
                           class="ant-input-prefix"
@@ -852,7 +853,7 @@ exports[`Login Page should show login form 1`] = `
                       class="ant-form-item-control-input-content"
                     >
                       <span
-                        class="ant-input-affix-wrapper ant-input-password ant-input-password-large ant-input-affix-wrapper-lg"
+                        class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-password ant-input-password-large"
                       >
                         <span
                           class="ant-input-prefix"
@@ -882,7 +883,6 @@ exports[`Login Page should show login form 1`] = `
                           id="password"
                           placeholder="Password: ant.design"
                           type="password"
-                          value=""
                         />
                         <span
                           class="ant-input-suffix"
@@ -957,31 +957,32 @@ exports[`Login Page should show login form 1`] = `
             </button>
           </form>
           <div
-            class="ant-pro-form-login-main-other "
+            class="ant-pro-form-login-main-other css-dev-only-do-not-override-11lehqq"
           >
             Login with :
             <span
               aria-label="alipay-circle"
-              class="anticon anticon-alipay-circle css-18yqg2u"
+              class="anticon anticon-alipay-circle acss-18yqg2u"
               role="img"
             >
               <svg
                 aria-hidden="true"
                 data-icon="alipay-circle"
                 fill="currentColor"
+                fill-rule="evenodd"
                 focusable="false"
                 height="1em"
                 viewBox="64 64 896 896"
                 width="1em"
               >
                 <path
-                  d="M308.6 545.7c-19.8 2-57.1 10.7-77.4 28.6-61 53-24.5 150 99 150 71.8 0 143.5-45.7 199.8-119-80.2-38.9-148.1-66.8-221.4-59.6zm460.5 67c100.1 33.4 154.7 43 166.7 44.8A445.9 445.9 0 00960 512c0-247.4-200.6-448-448-448S64 264.6 64 512s200.6 448 448 448c155.9 0 293.2-79.7 373.5-200.5-75.6-29.8-213.6-85-286.8-120.1-69.9 85.7-160.1 137.8-253.7 137.8-158.4 0-212.1-138.1-137.2-229 16.3-19.8 44.2-38.7 87.3-49.4 67.5-16.5 175 10.3 275.7 43.4 18.1-33.3 33.4-69.9 44.7-108.9H305.1V402h160v-56.2H271.3v-31.3h193.8v-80.1s0-13.5 13.7-13.5H557v93.6h191.7v31.3H557.1V402h156.4c-15 61.1-37.7 117.4-66.2 166.8 47.5 17.1 90.1 33.3 121.8 43.9z"
+                  d="M512 64c247.42 0 448 200.58 448 448S759.42 960 512 960 64 759.42 64 512 264.58 64 512 64m32.5 168c-69.67 0-86.06 16.84-86.72 39.08l-.02 1.43v46.62H291.45c-9.92 0-14.28 23.05-14.27 39.3 0 2.7 2.08 4.93 4.77 4.93h175.81v58.3h-116.5c-9.96 0-14.3 23.76-14.27 39.47a4.77 4.77 0 004.77 4.76h233.45c-4.53 41.06-15.43 77.59-30.72 109.32l-1.22 2.5-.32-.28c-60.24-28.47-120.43-52.57-194.4-52.57l-2.62.01c-84.98 1.11-144.71 56.5-145.91 127.04l-.02 1.22.02 2.13c1.24 70.4 63.56 126.45 148.52 126.45 61.25 0 116.38-16.85 163.46-45.02a138.58 138.58 0 0014.07-7.96 345.6 345.6 0 0050.3-41.16l9.45 6.35 12.46 8.32c57.53 38.26 113.76 72.62 169.86 79.27a142.62 142.62 0 0018.31 1.16c43.02 0 55-52.68 57.39-95.51l.14-2.84c.4-8.46-6.2-15.6-14.65-15.86-75.46-2.37-136.45-22.05-192-46.11l-6.27-2.75c35.15-56.8 56.66-121.81 57.15-186.66l.09-1.08c.4-5.51-4-10.2-9.52-10.2H549.33v-58.3h165.73c9.92 0 14.28-22.12 14.27-39.31a4.85 4.85 0 00-4.78-4.92H549.32v-82.35a4.8 4.8 0 00-4.83-4.78M328 583.85c54.63 0 107.08 22.41 158.1 52.19l5.76 3.4c-103.57 119.84-247.17 95.9-261.72 26.37a66.89 66.89 0 01-1.14-9.83l-.06-2.34.02-.9c.97-40.12 45.33-68.9 99.04-68.9"
                 />
               </svg>
             </span>
             <span
               aria-label="taobao-circle"
-              class="anticon anticon-taobao-circle css-18yqg2u"
+              class="anticon anticon-taobao-circle acss-18yqg2u"
               role="img"
             >
               <svg
@@ -1000,7 +1001,7 @@ exports[`Login Page should show login form 1`] = `
             </span>
             <span
               aria-label="weibo-circle"
-              class="anticon anticon-weibo-circle css-18yqg2u"
+              class="anticon anticon-weibo-circle acss-18yqg2u"
               role="img"
             >
               <svg
@@ -1022,17 +1023,17 @@ exports[`Login Page should show login form 1`] = `
       </div>
     </div>
     <footer
-      class="ant-layout-footer css-dev-only-do-not-override-17a39f8"
+      class="ant-layout-footer css-dev-only-do-not-override-11lehqq"
       style="padding: 0px; background: none;"
     >
       <div
-        class="ant-pro-global-footer"
+        class="ant-pro-global-footer css-dev-only-do-not-override-11lehqq"
       >
         <div
-          class="ant-pro-global-footer-list"
+          class="ant-pro-global-footer-list css-dev-only-do-not-override-11lehqq"
         >
           <a
-            class="ant-pro-global-footer-list-link"
+            class="ant-pro-global-footer-list-link css-dev-only-do-not-override-11lehqq"
             href="https://pro.ant.design"
             rel="noreferrer"
             target="_blank"
@@ -1041,7 +1042,7 @@ exports[`Login Page should show login form 1`] = `
             Ant Design Pro
           </a>
           <a
-            class="ant-pro-global-footer-list-link"
+            class="ant-pro-global-footer-list-link css-dev-only-do-not-override-11lehqq"
             href="https://github.com/ant-design/ant-design-pro"
             rel="noreferrer"
             target="_blank"
@@ -1068,7 +1069,7 @@ exports[`Login Page should show login form 1`] = `
             </span>
           </a>
           <a
-            class="ant-pro-global-footer-list-link"
+            class="ant-pro-global-footer-list-link css-dev-only-do-not-override-11lehqq"
             href="https://ant.design"
             rel="noreferrer"
             target="_blank"
@@ -1078,7 +1079,7 @@ exports[`Login Page should show login form 1`] = `
           </a>
         </div>
         <div
-          class="ant-pro-global-footer-copyright"
+          class="ant-pro-global-footer-copyright css-dev-only-do-not-override-11lehqq"
         >
           <span
             aria-label="copyright"
@@ -1099,7 +1100,7 @@ exports[`Login Page should show login form 1`] = `
               />
             </svg>
           </span>
-           2023 Produced by Ant Financial Experience Department
+           
         </div>
       </div>
     </footer>
