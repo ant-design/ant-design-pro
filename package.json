@@ -63,7 +63,7 @@
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^3.3.0",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^16.0.1",
     "@types/classnames": "^2.3.1",
     "@types/express": "^4.17.21",
     "@types/history": "^4.7.11",
