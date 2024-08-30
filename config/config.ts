@@ -14,7 +14,6 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
-
   /**
    * @name 兼容性设置
    * @description 设置 ie11 不一定完美兼容，需要检查自己使用的所有依赖
@@ -148,9 +147,12 @@ export default defineConfig({
       projectName: 'swagger',
     },
   ],
-  mfsu: {
-    strategy: 'normal',
-  },
+  /**
+   * @name 是否开启 mako
+   * @description 使用 mako 极速研发
+   * @doc https://umijs.org/docs/api/config#mako
+   */
+  mako: {},
   esbuildMinifyIIFE: true,
   requestRecord: {},
 });
