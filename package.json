@@ -49,6 +49,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.8.3",
     "@ant-design/pro-components": "^2.7.9",
+    "@testing-library/dom": "^10.4.0",
     "antd": "^5.18.0",
     "antd-style": "^3.6.2",
     "classnames": "^2.5.1",

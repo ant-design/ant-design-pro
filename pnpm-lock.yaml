@@ -14,6 +14,9 @@ importers:
       '@ant-design/pro-components':
         specifier: ^2.7.9
         version: 2.7.15(antd@5.20.3(date-fns@2.30.0)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(rc-field-form@2.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@testing-library/dom':
+        specifier: ^10.4.0
+        version: 10.4.0
       antd:
         specifier: ^5.18.0
         version: 5.20.3(date-fns@2.30.0)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -13168,7 +13171,7 @@ snapshots:
 
   '@loadable/component@5.15.2(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.25.6
       hoist-non-react-statics: 3.3.2
       react: 18.3.1
       react-is: 16.13.1
@@ -14414,7 +14417,7 @@ snapshots:
 
   '@umijs/history@5.3.1':
     dependencies:
-      '@babel/runtime': 7.23.6
+      '@babel/runtime': 7.25.6
       query-string: 6.14.1
 
   '@umijs/lint@4.3.18(eslint@8.35.0)(jest@29.7.0(@types/node@22.5.1)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@22.5.1)(typescript@5.5.4)))(stylelint@14.8.2)(typescript@5.5.4)':
