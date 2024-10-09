@@ -76,7 +76,7 @@
     "lint-staged": "^15.2.10",
     "mockjs": "^1.1.0",
     "prettier": "^3.3.3",
-    "swagger-ui-dist": "^4.19.1",
+    "swagger-ui-dist": "^5.17.14",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
     "umi-presets-pro": "^2.0.3",
