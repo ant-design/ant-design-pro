@@ -18,7 +18,6 @@ Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](
 - توثيق: http://pro.ant.design/docs/getting-started
 - سجل التغيير: http://pro.ant.design/docs/changelog
 - الأسئلة الشائعة: http://pro.ant.design/docs/faq
-- مرآة الموقع بالصينية: http://ant-design-pro.gitee.io
 
 ## 4.0 صدر الآن! 🎉🎉🎉
 

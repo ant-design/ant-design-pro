@@ -17,7 +17,6 @@ Une solution UI prête à l'emploi pour des applications d'entreprise en tant qu
 - Documentation: http://pro.ant.design/docs/getting-started
 - ChangeLog: http://pro.ant.design/docs/changelog
 - FAQ: http://pro.ant.design/docs/faq
-- Site mirroir en Chine: http://ant-design-pro.gitee.io
 
 ## 2.0 Sorti maintenant! 🎉🎉🎉
 

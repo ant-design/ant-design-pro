@@ -17,7 +17,6 @@ Una solución de IU listo para usar para aplicaciones empresariales como plantil
 - Documentación: http://pro.ant.design/docs/getting-started
 - Registro de cambios: http://pro.ant.design/docs/changelog
 - Preguntas frecuentes: http://pro.ant.design/docs/faq
-- Sitio espejo en China: http://ant-design-pro.gitee.io
 
 ## ¡La versión 5.0 ya está disponible! 🎉🎉🎉
 

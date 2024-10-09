@@ -17,7 +17,6 @@ React ile kurumsal uygulamalar için taslak olarak geliştirilmiş kullanıma ha
 - Dokümantasyon: http://pro.ant.design/docs/getting-started
 - ChangeLog: http://pro.ant.design/docs/changelog
 - SSS: http://pro.ant.design/docs/faq
-- Çinde barındırılan site: http://ant-design-pro.gitee.io
 
 ## 5.0 Versiyonu Şimdi Yayında! 🎉🎉🎉
 

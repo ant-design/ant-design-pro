@@ -17,7 +17,6 @@ UI-решение "из коробки" для корпоративных при
 - Документация: http://pro.ant.design/docs/getting-started
 - История изменений: http://pro.ant.design/docs/changelog
 - FAQ: http://pro.ant.design/docs/faq
-- Китайское зеркало сайта: http://ant-design-pro.gitee.io
 
 ## Поиск переводчиков :loudspeaker:
 

@@ -17,7 +17,6 @@ Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](
 - ドキュメント: http://pro.ant.design/docs/getting-started
 - 変更ログ: http://pro.ant.design/docs/changelog
 - FAQ: http://pro.ant.design/docs/faq
-- 中国のミラーサイト: http://ant-design-pro.gitee.io
 
 ## 2.0 がリリースされました 🎉🎉🎉
 

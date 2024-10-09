@@ -17,7 +17,6 @@ Uma solução de UI pronta para aplicações corporativos na forma de um boilerp
 - Documentação: http://pro.ant.design/docs/getting-started
 - Mudanças: http://pro.ant.design/docs/changelog
 - FAQ: http://pro.ant.design/docs/faq
-- Site Alternativo na China: http://ant-design-pro.gitee.io
 
 ## 4.0 Lançado! 🎉🎉🎉
 
