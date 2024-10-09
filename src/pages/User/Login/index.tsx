@@ -151,7 +151,7 @@ const Login: React.FC = () => {
             id: 'menu.login',
             defaultMessage: '登录页',
           })}
-          - {Settings.title}
+          {Settings.title && ` - ${Settings.title}`}
         </title>
       </Helmet>
       <Lang />
