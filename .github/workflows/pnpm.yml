@@ -19,7 +19,9 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
       - run: echo ${{github.ref}}
-      - run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - run: pnpm config set store-dir ~/.pnpm-store
       - run: pnpm install --strict-peer-dependencies=false
       - run: pnpm run lint
