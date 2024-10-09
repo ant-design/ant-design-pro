@@ -1,4 +1,4 @@
-name: Node CI
+name: CI
 
 on: [push, pull_request]
 
@@ -19,10 +19,11 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
       - run: echo ${{github.ref}}
-      - run: npm install
-      - run: yarn run lint
-      - run: yarn run tsc
-      - run: yarn run build
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bun run lint
+      - run: bun run tsc
+      - run: bun run build
         env:
           CI: true
           PROGRESS: none
