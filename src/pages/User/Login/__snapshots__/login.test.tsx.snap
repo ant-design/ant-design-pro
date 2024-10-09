@@ -610,16 +610,16 @@ exports[`Login Page should show login form 1`] = `
       style="flex: 1; padding: 32px 0px;"
     >
       <div
-        class="ant-pro-form-login-container css-dev-only-do-not-override-11lehqq css-dev-only-do-not-override-11lehqq"
+        class="ant-pro-form-login-container css-dev-only-do-not-override-ccdg5a css-dev-only-do-not-override-ccdg5a"
       >
         <div
-          class="ant-pro-form-login-top css-dev-only-do-not-override-11lehqq css-dev-only-do-not-override-11lehqq"
+          class="ant-pro-form-login-top css-dev-only-do-not-override-ccdg5a css-dev-only-do-not-override-ccdg5a"
         >
           <div
-            class="ant-pro-form-login-header css-dev-only-do-not-override-11lehqq"
+            class="ant-pro-form-login-header css-dev-only-do-not-override-ccdg5a"
           >
             <span
-              class="ant-pro-form-login-logo css-dev-only-do-not-override-11lehqq"
+              class="ant-pro-form-login-logo css-dev-only-do-not-override-ccdg5a"
             >
               <img
                 alt="logo"
@@ -627,24 +627,24 @@ exports[`Login Page should show login form 1`] = `
               />
             </span>
             <span
-              class="ant-pro-form-login-title css-dev-only-do-not-override-11lehqq"
+              class="ant-pro-form-login-title css-dev-only-do-not-override-ccdg5a"
             >
               Ant Design
             </span>
           </div>
           <div
-            class="ant-pro-form-login-desc css-dev-only-do-not-override-11lehqq"
+            class="ant-pro-form-login-desc css-dev-only-do-not-override-ccdg5a"
           >
             Ant Design is the most influential web design specification in Xihu district
           </div>
         </div>
         <div
-          class="ant-pro-form-login-main css-dev-only-do-not-override-11lehqq"
+          class="ant-pro-form-login-main css-dev-only-do-not-override-ccdg5a"
           style="width: 328px; min-width: 280px; max-width: 75vw;"
         >
           <form
             autocomplete="off"
-            class="ant-form ant-form-vertical ant-pro-form css-dev-only-do-not-override-11lehqq"
+            class="ant-form ant-form-vertical ant-pro-form css-dev-only-do-not-override-ccdg5a"
           >
             <input
               style="display: none;"
@@ -947,7 +947,7 @@ exports[`Login Page should show login form 1`] = `
               </a>
             </div>
             <button
-              class="ant-btn ant-btn-primary ant-btn-lg"
+              class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
               style="width: 100%;"
               type="button"
             >
@@ -957,7 +957,7 @@ exports[`Login Page should show login form 1`] = `
             </button>
           </form>
           <div
-            class="ant-pro-form-login-main-other css-dev-only-do-not-override-11lehqq"
+            class="ant-pro-form-login-main-other css-dev-only-do-not-override-ccdg5a"
           >
             Login with :
             <span
@@ -1023,17 +1023,17 @@ exports[`Login Page should show login form 1`] = `
       </div>
     </div>
     <footer
-      class="ant-layout-footer css-dev-only-do-not-override-11lehqq"
+      class="ant-layout-footer css-dev-only-do-not-override-ccdg5a"
       style="padding: 0px; background: none;"
     >
       <div
-        class="ant-pro-global-footer css-dev-only-do-not-override-11lehqq"
+        class="ant-pro-global-footer css-dev-only-do-not-override-ccdg5a"
       >
         <div
-          class="ant-pro-global-footer-list css-dev-only-do-not-override-11lehqq"
+          class="ant-pro-global-footer-list css-dev-only-do-not-override-ccdg5a"
         >
           <a
-            class="ant-pro-global-footer-list-link css-dev-only-do-not-override-11lehqq"
+            class="ant-pro-global-footer-list-link css-dev-only-do-not-override-ccdg5a"
             href="https://pro.ant.design"
             rel="noreferrer"
             target="_blank"
@@ -1042,7 +1042,7 @@ exports[`Login Page should show login form 1`] = `
             Ant Design Pro
           </a>
           <a
-            class="ant-pro-global-footer-list-link css-dev-only-do-not-override-11lehqq"
+            class="ant-pro-global-footer-list-link css-dev-only-do-not-override-ccdg5a"
             href="https://github.com/ant-design/ant-design-pro"
             rel="noreferrer"
             target="_blank"
@@ -1069,7 +1069,7 @@ exports[`Login Page should show login form 1`] = `
             </span>
           </a>
           <a
-            class="ant-pro-global-footer-list-link css-dev-only-do-not-override-11lehqq"
+            class="ant-pro-global-footer-list-link css-dev-only-do-not-override-ccdg5a"
             href="https://ant.design"
             rel="noreferrer"
             target="_blank"
@@ -1079,7 +1079,7 @@ exports[`Login Page should show login form 1`] = `
           </a>
         </div>
         <div
-          class="ant-pro-global-footer-copyright css-dev-only-do-not-override-11lehqq"
+          class="ant-pro-global-footer-copyright css-dev-only-do-not-override-ccdg5a"
         >
           <span
             aria-label="copyright"
