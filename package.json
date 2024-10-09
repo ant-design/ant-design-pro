@@ -57,7 +57,7 @@
     "@testing-library/react": "^16.0.1",
     "@types/classnames": "^2.3.1",
     "@types/express": "^4.17.21",
-    "@types/history": "^4.7.11",
+    "@types/history": "^5.0.0",
     "@types/jest": "^29.5.13",
     "@types/lodash": "^4.17.10",
     "@types/react": "^18.3.11",
