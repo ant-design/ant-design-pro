@@ -76,7 +76,6 @@
     "lint-staged": "^15.2.10",
     "mockjs": "^1.1.0",
     "prettier": "^3.3.3",
-    "react-dev-inspector": "^1.9.0",
     "swagger-ui-dist": "^4.19.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
