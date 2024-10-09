@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@4
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node_version }}
       - run: echo ${{github.ref}}
