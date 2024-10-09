@@ -23,7 +23,7 @@ jobs:
           yarn build
 
       - name: upload dist artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
@@ -35,7 +35,7 @@ jobs:
 
       - name: Upload PR number
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: pr
           path: ./pr-id.txt

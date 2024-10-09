@@ -20,7 +20,7 @@
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier -c --write \"**/**.{js,jsx,tsx,ts,less,md,json}\" --end-of-line auto",
     "openapi": "max openapi",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prettier": "prettier -c --write \"**/**.{js,jsx,tsx,ts,less,md,json}\"",
     "preview": "npm run build && max preview --port 8000",
     "record": "cross-env NODE_ENV=development REACT_APP_ENV=test max record --scene=login",
@@ -42,9 +42,7 @@
     ]
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 10"
+    "defaults"
   ],
   "dependencies": {
     "@ant-design/icons": "^4.8.3",
@@ -60,6 +58,8 @@
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^3.3.0",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@testing-library/react": "^16.0.1",
     "@types/classnames": "^2.3.1",
     "@types/express": "^4.17.21",
@@ -76,12 +76,12 @@
     "eslint": "^8.57.0",
     "express": "^4.19.2",
     "gh-pages": "^3.2.3",
-    "husky": "^7.0.4",
+    "husky": "^9.1.6",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "lint-staged": "^10.5.4",
+    "lint-staged": "^15.2.10",
     "mockjs": "^1.1.0",
-    "prettier": "^2.8.8",
+    "prettier": "^3.3.3",
     "react-dev-inspector": "^1.9.0",
     "swagger-ui-dist": "^4.19.1",
     "ts-node": "^10.9.2",
