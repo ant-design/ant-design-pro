@@ -4,7 +4,6 @@ import { history, useModel } from '@umijs/max';
 import { Spin } from 'antd';
 import type { MenuProps } from 'antd';
 import { createStyles } from 'antd-style';
-import { stringify } from 'querystring';
 import React from 'react';
 import { flushSync } from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
@@ -46,15 +45,16 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
     await outLogin();
     const { search, pathname } = window.location;
     const urlParams = new URL(window.location.href).searchParams;
+    const searchParams = new URLSearchParams({
+      redirect: pathname + search,
+    });
     /** 此方法会跳转到 redirect 参数所在的位置 */
     const redirect = urlParams.get('redirect');
     // Note: There may be security issues, please note
     if (window.location.pathname !== '/user/login' && !redirect) {
       history.replace({
         pathname: '/user/login',
-        search: stringify({
-          redirect: pathname + search,
-        }),
+        search: searchParams.toString(),
       });
     }
   };
