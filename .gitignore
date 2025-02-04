@@ -39,3 +39,4 @@ screenshot
 .eslintcache
 
 build
+bun.lock

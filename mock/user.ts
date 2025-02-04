@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 
-const waitTime = (time: number = 100) => {
+const waitTime = (time = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(true);

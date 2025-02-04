@@ -4,8 +4,7 @@ import { history, useModel } from '@umijs/max';
 import { Spin } from 'antd';
 import type { MenuProps } from 'antd';
 import { createStyles } from 'antd-style';
-import { stringify } from 'querystring';
-import React from 'react';
+import type React from 'react';
 import { flushSync } from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
 
@@ -52,9 +51,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
     if (window.location.pathname !== '/user/login' && !redirect) {
       history.replace({
         pathname: '/user/login',
-        search: stringify({
-          redirect: pathname + search,
-        }),
+        search: new URLSearchParams(`redirect=${pathname}${search}`).toString(),
       });
     }
   };
