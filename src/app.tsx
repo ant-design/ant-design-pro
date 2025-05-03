@@ -115,7 +115,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
               onSettingChange={(settings) => {
                 setInitialState((preInitialState) => ({
                   ...preInitialState,
-                  settings,
+                  ...settings,
                 }));
               }}
             />
