@@ -1,4 +1,8 @@
-﻿const localStorageMock = {
+﻿import { defaultConfig } from 'antd/lib/theme/internal';
+
+defaultConfig.hashed = false;
+
+const localStorageMock = {
   getItem: jest.fn(),
   setItem: jest.fn(),
   removeItem: jest.fn(),
