@@ -41,7 +41,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 padding: '32px 40px 48px',
               },
             }}
-            destroyOnClose
+            destroyOnHidden
             title={intl.formatMessage({
               id: 'pages.searchTable.updateForm.ruleConfig',
               defaultMessage: '规则配置',
