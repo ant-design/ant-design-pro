@@ -8,7 +8,7 @@ const NotificationView: React.FC = () => {
     const Action = <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked />;
     return [
       {
-        title: '账户密码',
+        title: '用户消息',
         description: '其他用户的消息将以站内信的形式通知',
         actions: [Action],
       },
