@@ -39,7 +39,7 @@
     "defaults"
   ],
   "dependencies": {
-    "@ant-design/icons": "^5.6.1",
+    "@ant-design/icons": "^6.0.0",
     "@ant-design/pro-components": "^2.7.19",
     "antd": "^5.25.4",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
