@@ -24,7 +24,7 @@ Language : [🇺🇸](./README.md) | 🇨🇳 | [🇷🇺](./README.ru-RU.md) | 
 
 ## 5.0 已经发布! 🎉🎉🎉
 
-[Ant Design Pro 5.0.0](https://github.com/ant-design/ant-design-pro/issues/8656)
+[Ant Design Pro 5.0](https://github.com/ant-design/ant-design-pro/issues/8656)
 
 ## 特性
 

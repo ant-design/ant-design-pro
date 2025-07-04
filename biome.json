@@ -6,6 +6,7 @@
       "**",
       ".github/**",
       "!**/.umi/**",
+      "**/*.md",
       "!**/.umi-production/**",
       "!**/.umi-test/**",
       "!**/.umi-test-production/**",
