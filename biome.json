@@ -10,9 +10,10 @@
       "!**/.umi-test-production",
       "!**/src/services",
       "!**/mock",
-      "!dist",
-      "!server",
-      "!public"
+
+      "!**/dist/**",
+      "!**/server/**",
+      "!**/public/**"
     ]
   },
   "formatter": {
