@@ -2,6 +2,7 @@ import { AvatarDropdown, AvatarName, Footer, Question, SelectLang } from '@/comp
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
+import { App } from 'antd';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
@@ -136,3 +137,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 export const request = {
   ...errorConfig,
 };
+
+export function rootContainer(container: React.ReactNode) {
+  return <App>{container}</App>;
+}
