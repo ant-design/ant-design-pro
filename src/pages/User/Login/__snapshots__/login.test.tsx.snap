@@ -229,8 +229,11 @@ exports[`Login Page should login success 1`] = `
                       <div
                         class="ant-pro-global-header-header-actions-item  ant-pro-global-header-header-actions-hover"
                       >
-                        <div
-                          style="display: flex; height: 26px;"
+                        <a
+                          href="https://pro.ant.design/docs/getting-started"
+                          rel="noreferrer"
+                          style="display: inline-flex; padding: 4px; font-size: 18px;"
+                          target="_blank"
                         >
                           <span
                             aria-label="question-circle"
@@ -254,7 +257,7 @@ exports[`Login Page should login success 1`] = `
                               />
                             </svg>
                           </span>
-                        </div>
+                        </a>
                       </div>
                       <div
                         class="ant-pro-global-header-header-actions-item  ant-pro-global-header-header-actions-hover"
