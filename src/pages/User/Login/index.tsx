@@ -20,7 +20,7 @@ import {
   useIntl,
   useModel,
 } from '@umijs/max';
-import { App, Alert, Tabs } from 'antd';
+import { Alert, App, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
