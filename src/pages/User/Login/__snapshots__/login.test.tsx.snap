@@ -3,7 +3,7 @@
 exports[`Login Page should login success 1`] = `
 <DocumentFragment>
   <div
-    class="ant-app"
+    class="ant-app css-var-«r7»"
   >
     <div
       class="ant-design-pro ant-pro-layout screen-md ant-pro-layout-fix-siderbar ant-pro-layout-mix"
@@ -25,14 +25,14 @@ exports[`Login Page should login success 1`] = `
         />
       </div>
       <div
-        class="ant-layout ant-layout-has-sider"
+        class="ant-layout ant-layout-has-sider css-var-«re»"
         style="min-height: 100%; flex-direction: row;"
       >
         <div
           style="width: 256px; overflow: hidden; flex: 0 0 256px; max-width: 256px; min-width: 256px; transition: all 0.2s ease 0s;"
         />
         <aside
-          class="ant-layout-sider ant-layout-sider-dark ant-pro-sider ant-pro-sider-fixed ant-pro-sider-fixed-mix ant-pro-sider-layout-mix ant-pro-sider-light ant-pro-sider-mix"
+          class="ant-layout-sider ant-layout-sider-dark ant-pro-sider ant-pro-sider-fixed ant-pro-sider-fixed-mix ant-pro-sider-layout-mix ant-pro-sider-light ant-pro-sider-mix css-var-«rh»"
           style="flex: 0 0 256px; max-width: 256px; min-width: 256px; width: 256px;"
         >
           <div
@@ -42,7 +42,7 @@ exports[`Login Page should login success 1`] = `
               style="flex: 1; overflow-y: auto; overflow-x: hidden;"
             >
               <ul
-                class="ant-menu ant-menu-root ant-menu-inline ant-menu-light ant-pro-sider-menu ant-pro-base-menu-inline"
+                class="ant-menu ant-menu-root ant-menu-inline ant-menu-light ant-pro-sider-menu ant-pro-base-menu-inline css-var-«rh» ant-menu-css-var"
                 data-menu-list="true"
                 dir="ltr"
                 role="menu"
@@ -153,7 +153,7 @@ exports[`Login Page should login success 1`] = `
               class="ant-pro-sider-links"
             >
               <ul
-                class="ant-menu ant-menu-root ant-menu-inline ant-menu-light ant-pro-sider-link-menu"
+                class="ant-menu ant-menu-root ant-menu-inline ant-menu-light ant-pro-sider-link-menu css-var-«rh» ant-menu-css-var"
                 data-menu-list="true"
                 dir="ltr"
                 role="menu"
@@ -186,11 +186,11 @@ exports[`Login Page should login success 1`] = `
           style="position: relative;"
         >
           <header
-            class="ant-layout-header"
+            class="ant-layout-header css-var-«rm»"
             style="height: 56px; line-height: 56px; background-color: transparent; z-index: 19;"
           />
           <header
-            class="ant-layout-header ant-pro-layout-header ant-pro-layout-header-fixed-header ant-pro-layout-header-mix ant-pro-layout-header-fixed-header-action ant-pro-layout-header-header"
+            class="ant-layout-header ant-pro-layout-header ant-pro-layout-header-fixed-header ant-pro-layout-header-mix ant-pro-layout-header-fixed-header-action ant-pro-layout-header-header css-var-«rm»"
           >
             <div
               class="ant-pro-global-header"
@@ -296,7 +296,7 @@ exports[`Login Page should login success 1`] = `
                           class="ant-dropdown-trigger"
                         >
                           <span
-                            class="ant-avatar ant-avatar-circle ant-avatar-image"
+                            class="ant-avatar ant-avatar-circle ant-avatar-image css-var-«rm» ant-avatar-css-var"
                             style="width: 28px; height: 28px; font-size: 18px;"
                           >
                             <img
@@ -321,7 +321,7 @@ exports[`Login Page should login success 1`] = `
             </div>
           </header>
           <main
-            class="ant-layout-content ant-pro-layout-content ant-pro-layout-has-header ant-pro-layout-content-has-page-container"
+            class="ant-layout-content ant-pro-layout-content ant-pro-layout-has-header ant-pro-layout-content-has-page-container css-var-«re»"
           >
             <div
               class="ant-pro-page-container"
@@ -358,7 +358,7 @@ exports[`Login Page should login success 1`] = `
                       class="ant-pro-page-container-children-container"
                     >
                       <div
-                        class="ant-card ant-card-bordered"
+                        class="ant-card ant-card-bordered css-var-«re»"
                         style="border-radius: 8px;"
                       >
                         <div
@@ -491,7 +491,7 @@ exports[`Login Page should login success 1`] = `
             </div>
           </main>
           <footer
-            class="ant-layout-footer"
+            class="ant-layout-footer css-var-«re»"
             style="padding: 0px; background: none;"
           >
             <div
@@ -582,7 +582,7 @@ exports[`Login Page should login success 1`] = `
 exports[`Login Page should show login form 1`] = `
 <DocumentFragment>
   <div
-    class="ant-app"
+    class="ant-app css-var-«r0»"
   >
     <div
       class="acss-trkbkn"
@@ -656,14 +656,14 @@ exports[`Login Page should show login form 1`] = `
           >
             <form
               autocomplete="off"
-              class="ant-form ant-form-vertical ant-pro-form"
+              class="ant-form ant-form-vertical css-var-«r0» ant-form-css-var ant-pro-form"
             >
               <input
                 style="display: none;"
                 type="text"
               />
               <div
-                class="ant-tabs ant-tabs-top ant-tabs-centered"
+                class="ant-tabs ant-tabs-top ant-tabs-centered css-var-«r0» ant-tabs-css-var"
               >
                 <div
                   aria-orientation="horizontal"
@@ -765,13 +765,13 @@ exports[`Login Page should show login form 1`] = `
                 </div>
               </div>
               <div
-                class="ant-form-item"
+                class="ant-form-item css-var-«r0» ant-form-css-var"
               >
                 <div
-                  class="ant-row ant-form-item-row"
+                  class="ant-row ant-form-item-row css-var-«r0»"
                 >
                   <div
-                    class="ant-col ant-form-item-control"
+                    class="ant-col ant-form-item-control css-var-«r0»"
                   >
                     <div
                       class="ant-form-item-control-input"
@@ -780,7 +780,7 @@ exports[`Login Page should show login form 1`] = `
                         class="ant-form-item-control-input-content"
                       >
                         <span
-                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined"
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined css-var-«r0» ant-input-css-var"
                         >
                           <span
                             class="ant-input-prefix"
@@ -849,13 +849,13 @@ exports[`Login Page should show login form 1`] = `
                 </div>
               </div>
               <div
-                class="ant-form-item"
+                class="ant-form-item css-var-«r0» ant-form-css-var"
               >
                 <div
-                  class="ant-row ant-form-item-row"
+                  class="ant-row ant-form-item-row css-var-«r0»"
                 >
                   <div
-                    class="ant-col ant-form-item-control"
+                    class="ant-col ant-form-item-control css-var-«r0»"
                   >
                     <div
                       class="ant-form-item-control-input"
@@ -864,7 +864,7 @@ exports[`Login Page should show login form 1`] = `
                         class="ant-form-item-control-input-content"
                       >
                         <span
-                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-password ant-input-password-large"
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-password ant-input-password-large css-var-«r0» ant-input-css-var"
                         >
                           <span
                             class="ant-input-prefix"
@@ -932,7 +932,7 @@ exports[`Login Page should show login form 1`] = `
                 style="margin-bottom: 24px;"
               >
                 <label
-                  class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"
+                  class="ant-checkbox-wrapper ant-checkbox-wrapper-checked css-var-«r0» ant-checkbox-css-var"
                 >
                   <span
                     class="ant-checkbox ant-wave-target ant-checkbox-checked"
@@ -960,7 +960,7 @@ exports[`Login Page should show login form 1`] = `
                 </a>
               </div>
               <button
-                class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
+                class="ant-btn css-var-«r0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
                 style="width: 100%;"
                 type="button"
               >
@@ -1036,7 +1036,7 @@ exports[`Login Page should show login form 1`] = `
         </div>
       </div>
       <footer
-        class="ant-layout-footer"
+        class="ant-layout-footer css-var-«r0»"
         style="padding: 0px; background: none;"
       >
         <div
