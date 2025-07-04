@@ -4,6 +4,7 @@
     "ignoreUnknown": true,
     "includes": [
       "**",
+      ".github/**",
       "!**/.umi/**",
       "!**/.umi-production/**",
       "!**/.umi-test/**",
