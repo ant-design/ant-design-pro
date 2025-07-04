@@ -32,7 +32,7 @@ if (pwa) {
     const reloadSW = async () => {
       // Check if there is sw whose state is waiting in ServiceWorkerRegistration
       // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration
-      const worker = e.detail && e.detail.waiting;
+      const worker = e.detail?.waiting;
       if (!worker) {
         return true;
       }
@@ -67,7 +67,9 @@ if (pwa) {
     );
     notification.open({
       message: useIntl().formatMessage({ id: 'app.pwa.serviceworker.updated' }),
-      description: useIntl().formatMessage({ id: 'app.pwa.serviceworker.updated.hint' }),
+      description: useIntl().formatMessage({
+        id: 'app.pwa.serviceworker.updated.hint',
+      }),
       btn,
       key,
       onClose: async () => null,

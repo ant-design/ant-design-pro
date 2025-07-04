@@ -2,7 +2,8 @@ export default {
   'pages.layouts.userLayout.title':
     'পিঁপড়া ডিজাইন হচ্ছে সিহু জেলার সবচেয়ে প্রভাবশালী ওয়েব ডিজাইনের স্পেসিফিকেশন',
   'pages.login.accountLogin.tab': 'অ্যাকাউন্টে লগইন',
-  'pages.login.accountLogin.errorMessage': 'ভুল ব্যবহারকারীর নাম/পাসওয়ার্ড(admin/ant.design)',
+  'pages.login.accountLogin.errorMessage':
+    'ভুল ব্যবহারকারীর নাম/পাসওয়ার্ড(admin/ant.design)',
   'pages.login.failure': 'লগইন ব্যর্থ হয়েছে। আবার চেষ্টা করুন!',
   'pages.login.success': 'সফল লগইন!',
   'pages.login.username.placeholder': 'ব্যবহারকারীর নাম: admin or user',
@@ -36,7 +37,8 @@ export default {
   'pages.searchTable.updateForm.ruleName.nameLabel': 'বিধি নাম',
   'pages.searchTable.updateForm.ruleName.nameRules': 'বিধির নাম লিখুন!',
   'pages.searchTable.updateForm.ruleDesc.descLabel': 'বিধির বিবরণ',
-  'pages.searchTable.updateForm.ruleDesc.descPlaceholder': 'কমপক্ষে পাঁচটি অক্ষর লিখুন',
+  'pages.searchTable.updateForm.ruleDesc.descPlaceholder':
+    'কমপক্ষে পাঁচটি অক্ষর লিখুন',
   'pages.searchTable.updateForm.ruleDesc.descRules':
     'কমপক্ষে পাঁচটি অক্ষরের একটি বিধান বিবরণ লিখুন!',
   'pages.searchTable.updateForm.ruleProps.title': 'বৈশিষ্ট্য কনফিগার করুন',
@@ -45,7 +47,8 @@ export default {
   'pages.searchTable.updateForm.ruleProps.typeLabel': 'বিধি প্রকার',
   'pages.searchTable.updateForm.schedulingPeriod.title': 'সময়সূচী নির্ধারণ করুন',
   'pages.searchTable.updateForm.schedulingPeriod.timeLabel': 'শুরুর সময়',
-  'pages.searchTable.updateForm.schedulingPeriod.timeRules': 'একটি শুরুর সময় চয়ন করুন!',
+  'pages.searchTable.updateForm.schedulingPeriod.timeRules':
+    'একটি শুরুর সময় চয়ন করুন!',
   'pages.searchTable.titleDesc': 'বর্ণনা',
   'pages.searchTable.ruleName': 'বিধি নাম প্রয়োজন',
   'pages.searchTable.titleCallNo': 'পরিষেবা কল সংখ্যা',
