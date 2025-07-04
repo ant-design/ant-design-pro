@@ -20,7 +20,7 @@ import {
   useIntl,
   useModel,
 } from '@umijs/max';
-import { Alert, message, Tabs } from 'antd';
+import { App, Alert, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
@@ -116,6 +116,7 @@ const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
   const { styles } = useStyles();
+  const { message } = App.useApp();
   const intl = useIntl();
 
   const fetchUserInfo = async () => {
