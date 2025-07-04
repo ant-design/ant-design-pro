@@ -1,10 +1,5 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
-  "vcs": {
-    "enabled": false,
-    "clientKind": "git",
-    "useIgnoreFile": false
-  },
   "files": {
     "ignoreUnknown": false,
     "includes": [
@@ -14,6 +9,7 @@
       "!**/.umi-test",
       "!**/.umi-test-production",
       "!**/src/services",
+      "!**/mock",
       "!dist",
       "!server",
       "!public"
