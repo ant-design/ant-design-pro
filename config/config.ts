@@ -117,8 +117,14 @@ export default defineConfig({
    * @doc https://umijs.org/docs/max/antd#antd
    */
   antd: {
-    styleProvider: {
-      cssVar: true,
+    appConfig: {},
+    configProvider: {
+      theme: {
+        cssVar: true,
+        token: {
+          fontFamily: 'AlibabaSans, sans-serif',
+        },
+      },
     },
   },
   /**

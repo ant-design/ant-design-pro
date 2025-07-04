@@ -3,7 +3,6 @@ import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
-import { App } from 'antd';
 import React from 'react';
 import {
   AvatarDropdown,
@@ -149,7 +148,3 @@ export const layout: RunTimeLayoutConfig = ({
 export const request = {
   ...errorConfig,
 };
-
-export function rootContainer(container: React.ReactNode) {
-  return <App>{container}</App>;
-}
