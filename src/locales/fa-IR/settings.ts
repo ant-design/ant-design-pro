@@ -15,7 +15,8 @@ export default {
   'app.settings.basic.country': 'کشور / منطقه',
   'app.settings.basic.country-message': 'لطفاً کشور خود را وارد کنید!',
   'app.settings.basic.geographic': 'استان یا شهر',
-  'app.settings.basic.geographic-message': 'لطفاً اطلاعات جغرافیایی خود را وارد کنید!',
+  'app.settings.basic.geographic-message':
+    'لطفاً اطلاعات جغرافیایی خود را وارد کنید!',
   'app.settings.basic.address': 'آدرس خیابان',
   'app.settings.basic.address-message': 'لطفا آدرس خود را وارد کنید!',
   'app.settings.basic.phone': 'شماره تلفن',
@@ -40,11 +41,14 @@ export default {
   'app.settings.security.set': 'تنظیم',
   'app.settings.security.bind': 'بستن',
   'app.settings.binding.taobao': 'اتصال Taobao',
-  'app.settings.binding.taobao-description': 'حساب Taobao در حال حاضر بسته نشده است',
+  'app.settings.binding.taobao-description':
+    'حساب Taobao در حال حاضر بسته نشده است',
   'app.settings.binding.alipay': 'اتصال Alipay',
-  'app.settings.binding.alipay-description': 'حساب Alipay در حال حاضر بسته نشده است',
+  'app.settings.binding.alipay-description':
+    'حساب Alipay در حال حاضر بسته نشده است',
   'app.settings.binding.dingding': 'اتصال DingTalk',
-  'app.settings.binding.dingding-description': 'حساب DingTalk در حال حاضر محدود نشده است',
+  'app.settings.binding.dingding-description':
+    'حساب DingTalk در حال حاضر محدود نشده است',
   'app.settings.binding.bind': 'بستن',
   'app.settings.notification.password': 'رمز عبور حساب کاربری',
   'app.settings.notification.password-description':

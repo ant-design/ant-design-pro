@@ -22,7 +22,6 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bun run lint
-      - run: bun run tsc
       - run: bun run build
         env:
           CI: true

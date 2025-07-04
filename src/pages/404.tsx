@@ -1,6 +1,6 @@
 import { history, useIntl } from '@umijs/max';
 import { Button, Result } from 'antd';
-import React from 'react';
+import type React from 'react';
 
 const NoFoundPage: React.FC = () => (
   <Result
