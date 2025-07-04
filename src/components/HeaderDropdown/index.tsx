@@ -2,7 +2,7 @@ import { Dropdown } from 'antd';
 import type { DropDownProps } from 'antd/es/dropdown';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import type React from 'react';
+import React from 'react';
 
 const useStyles = createStyles(({ token }) => {
   return {

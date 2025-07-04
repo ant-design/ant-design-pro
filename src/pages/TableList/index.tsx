@@ -15,8 +15,7 @@ import {
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Button, Drawer, Input, message } from 'antd';
-import type React from 'react';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   addRule,
   removeRule,

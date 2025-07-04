@@ -8,7 +8,7 @@ import {
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Modal } from 'antd';
-import type React from 'react';
+import React from 'react';
 
 export type FormValueType = {
   target?: string;

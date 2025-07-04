@@ -1,6 +1,6 @@
 import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-components';
-import type React from 'react';
+import React from 'react';
 
 const Footer: React.FC = () => {
   return (

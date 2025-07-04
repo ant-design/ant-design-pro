@@ -10,10 +10,10 @@
       "!**/.umi-test-production",
       "!**/src/services",
       "!**/mock",
-
       "!**/dist/**",
       "!**/server/**",
-      "!**/public/**"
+      "!**/public/**",
+      "!biome.json"
     ]
   },
   "formatter": {
@@ -34,16 +34,9 @@
     }
   },
   "javascript": {
+    "jsxRuntime": "reactClassic",
     "formatter": {
       "quoteStyle": "single"
-    }
-  },
-  "assist": {
-    "enabled": true,
-    "actions": {
-      "source": {
-        "organizeImports": "on"
-      }
     }
   }
 }
