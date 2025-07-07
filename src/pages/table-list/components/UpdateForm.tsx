@@ -20,7 +20,7 @@ export type FormValueType = {
 } & Partial<API.RuleListItem>;
 
 export type UpdateFormProps = {
-  trigger?: JSX.Element;
+  trigger?: React.ReactElement<any>;
   onOk?: () => void;
   values: Partial<API.RuleListItem>;
 };

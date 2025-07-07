@@ -16,7 +16,7 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import type { StateType } from './service';
 import { fakeRegister } from './service';
-import useStyles from './style.style';
+import useStyles from './styles';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -135,7 +135,9 @@ const Register: FC = () => {
     const value = form.getFieldValue('password');
     const passwordStatus = getPasswordStatus();
     return value?.length ? (
-      <div className={styles[`progress-${passwordStatus}`]}>
+      <div
+        className={styles[`progress-${passwordStatus}` as keyof typeof styles]}
+      >
         <Progress
           status={passwordProgressMap[passwordStatus]}
           strokeWidth={6}

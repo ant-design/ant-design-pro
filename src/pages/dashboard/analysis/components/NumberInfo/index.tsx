@@ -27,8 +27,8 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
   const { styles } = useStyles();
   return (
     <div
-      className={classNames(styles.numberInfo, {
-        [styles[`numberInfo${theme}`]]: theme,
+      className={classNames({
+        [styles[`numberInfo${theme}` as keyof typeof styles]]: !!theme,
       })}
       {...rest}
     >

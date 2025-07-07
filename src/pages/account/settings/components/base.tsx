@@ -147,7 +147,6 @@ const BaseView: React.FC = () => {
                     labelInValue: true,
                   }}
                   name="province"
-                  className={styles.item}
                   request={async () => {
                     return queryProvince().then(({ data }) => {
                       return data.map((item) => {
@@ -175,7 +174,6 @@ const BaseView: React.FC = () => {
                           },
                         ]}
                         disabled={!province}
-                        className={styles.item}
                         request={async () => {
                           if (!province?.key) {
                             return [];

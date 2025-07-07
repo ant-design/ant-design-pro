@@ -20,6 +20,14 @@ export type AvatarListProps = {
     | React.ReactElement<AvatarItemProps>
     | React.ReactElement<AvatarItemProps>[];
 };
+
+const avatarSizeToClassName = (styles: any, size?: SizeType | 'mini') =>
+  classNames(styles.avatarItem, {
+    [styles.avatarItemLarge]: size === 'large',
+    [styles.avatarItemSmall]: size === 'small',
+    [styles.avatarItemMini]: size === 'mini',
+  });
+
 const Item: React.FC<AvatarItemProps> = ({
   src,
   size,
@@ -27,13 +35,7 @@ const Item: React.FC<AvatarItemProps> = ({
   onClick = () => {},
 }) => {
   const { styles } = useStyles();
-  const avatarSizeToClassName = (size?: SizeType | 'mini') =>
-    classNames(styles.avatarItem, {
-      [styles.avatarItemLarge]: size === 'large',
-      [styles.avatarItemSmall]: size === 'small',
-      [styles.avatarItemMini]: size === 'mini',
-    });
-  const cls = avatarSizeToClassName(size);
+  const cls = avatarSizeToClassName(styles, size);
   return (
     <li className={cls} onClick={onClick}>
       {tips ? (
@@ -67,7 +69,7 @@ const AvatarList: React.FC<AvatarListProps> & {
     }),
   );
   if (numToShow < numOfChildren) {
-    const cls = avatarSizeToClassName(size);
+    const cls = avatarSizeToClassName(styles, size);
     childrenWithProps.push(
       <li key="exceed" className={cls}>
         <Avatar
