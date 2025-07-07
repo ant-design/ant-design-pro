@@ -3,7 +3,7 @@ import { createStyles } from 'antd-style';
 const useStyles = createStyles(({ token }) => {
   return {
     activitiesList: {
-      padding: '0 24px 8px 24px',
+      padding: 0,
     },
     username: {
       color: token.colorText,
@@ -198,7 +198,6 @@ const useStyles = createStyles(({ token }) => {
     },
     datetime: {
       flex: '0 0 auto',
-      float: 'right',
       color: token.colorTextDisabled,
     },
     activeCard: {
