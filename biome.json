@@ -28,6 +28,9 @@
       "suspicious": {
         "noExplicitAny": "off"
       },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      },
       "a11y": {
         "noStaticElementInteractions": "off",
         "useValidAnchor": "off",

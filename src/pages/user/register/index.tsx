@@ -1,5 +1,16 @@
 import { history, Link, useRequest } from '@umijs/max';
-import { Button, Col, Form, Input, message, Popover, Progress, Row, Select, Space } from 'antd';
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Popover,
+  Progress,
+  Row,
+  Select,
+  Space,
+} from 'antd';
 import type { Store } from 'antd/es/form/interface';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
@@ -198,7 +209,11 @@ const Register: FC = () => {
               },
             ]}
           >
-            <Input size="large" type="password" placeholder="至少6位密码，区分大小写" />
+            <Input
+              size="large"
+              type="password"
+              placeholder="至少6位密码，区分大小写"
+            />
           </FormItem>
         </Popover>
         <FormItem

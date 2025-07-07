@@ -116,7 +116,10 @@ const TopSearch = ({
             height={45}
             axis={false}
             padding={-12}
-            style={{ fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)', fillOpacity: 0.4 }}
+            style={{
+              fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)',
+              fillOpacity: 0.4,
+            }}
             data={visitData2}
           />
         </Col>
@@ -151,7 +154,10 @@ const TopSearch = ({
             shapeField="smooth"
             height={45}
             padding={-12}
-            style={{ fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)', fillOpacity: 0.4 }}
+            style={{
+              fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)',
+              fillOpacity: 0.4,
+            }}
             data={visitData2}
             axis={false}
           />

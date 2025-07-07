@@ -1,4 +1,9 @@
-import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import {
+  LikeOutlined,
+  LoadingOutlined,
+  MessageOutlined,
+  StarOutlined,
+} from '@ant-design/icons';
 import { useRequest } from '@umijs/max';
 import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select';
@@ -139,13 +144,18 @@ const Articles: FC = () => {
           <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
             <FormItem name="category">
               <TagSelect expandable>
-              {categoryOptions
+                {categoryOptions
                   .filter(
-                    (category): category is { value: string | number; label: string } =>
-                      category.value !== undefined && category.value !== null
+                    (
+                      category,
+                    ): category is { value: string | number; label: string } =>
+                      category.value !== undefined && category.value !== null,
                   )
                   .map((category) => (
-                    <TagSelect.Option value={category.value} key={category.value}>
+                    <TagSelect.Option
+                      value={category.value}
+                      key={category.value}
+                    >
                       {category.label}
                     </TagSelect.Option>
                   ))}

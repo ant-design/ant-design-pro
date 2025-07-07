@@ -126,7 +126,7 @@ for (let i = 0; i < 10; i += 1) {
 }
 const offlineChartData = [];
 for (let i = 0; i < 20; i += 1) {
-  const date = dayjs(Date.now()+ 1000 * 60 * 30 * i).format('HH:mm');
+  const date = dayjs(Date.now() + 1000 * 60 * 30 * i).format('HH:mm');
   offlineChartData.push({
     date,
     type: '客流量',

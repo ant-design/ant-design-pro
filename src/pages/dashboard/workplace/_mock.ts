@@ -127,7 +127,7 @@ for (let i = 0; i < 10; i += 1) {
 const offlineChartData: DataItem[] = [];
 for (let i = 0; i < 20; i += 1) {
   offlineChartData.push({
-    x: Date.now()+ 1000 * 60 * 30 * i,
+    x: Date.now() + 1000 * 60 * 30 * i,
     y1: Math.floor(Math.random() * 100) + 10,
     y2: Math.floor(Math.random() * 100) + 10,
   });

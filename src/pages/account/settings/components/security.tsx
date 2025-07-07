@@ -46,14 +46,14 @@ const SecurityView: React.FC = () => {
   const data = getData();
   return (
     <List<Unpacked<typeof data>>
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item actions={item.actions}>
-            <List.Item.Meta title={item.title} description={item.description} />
-          </List.Item>
-        )}
-      />
+      itemLayout="horizontal"
+      dataSource={data}
+      renderItem={(item) => (
+        <List.Item actions={item.actions}>
+          <List.Item.Meta title={item.title} description={item.description} />
+        </List.Item>
+      )}
+    />
   );
 };
 

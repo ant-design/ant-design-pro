@@ -1,9 +1,14 @@
-import { addRule } from '@/services/ant-design-pro/api';
 import { PlusOutlined } from '@ant-design/icons';
-import { type ActionType, ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
+import {
+  type ActionType,
+  ModalForm,
+  ProFormText,
+  ProFormTextArea,
+} from '@ant-design/pro-components';
 import { FormattedMessage, useIntl, useRequest } from '@umijs/max';
 import { Button, message } from 'antd';
 import type { FC } from 'react';
+import { addRule } from '@/services/ant-design-pro/api';
 
 interface CreateFormProps {
   reload?: ActionType['reload'];

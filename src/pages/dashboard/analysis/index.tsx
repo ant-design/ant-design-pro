@@ -18,8 +18,8 @@ import type { AnalysisData } from './data.d';
 import { fakeChartData } from './service';
 import useStyles from './style.style';
 import { getTimeDistance } from './utils/utils';
-type RangePickerValue = RangePickerProps<dayjs.Dayjs>[
-  'value'];
+
+type RangePickerValue = RangePickerProps<dayjs.Dayjs>['value'];
 type AnalysisProps = {
   dashboardAndanalysis: AnalysisData;
   loading: boolean;
@@ -63,7 +63,10 @@ const Analysis: FC<AnalysisProps> = () => {
   if (salesType === 'all') {
     salesPieData = data?.salesTypeData;
   } else {
-    salesPieData = salesType === 'online' ? data?.salesTypeDataOnline : data?.salesTypeDataOffline;
+    salesPieData =
+      salesType === 'online'
+        ? data?.salesTypeDataOnline
+        : data?.salesTypeDataOffline;
   }
 
   const dropdownGroup = (
@@ -93,64 +96,62 @@ const Analysis: FC<AnalysisProps> = () => {
   const handleTabChange = (key: string) => {
     setCurrentTabKey(key);
   };
-  const activeKey = currentTabKey || (data?.offlineData[0]?.name) || '';
+  const activeKey = currentTabKey || data?.offlineData[0]?.name || '';
   return (
     <GridContent>
+      <Suspense fallback={<PageLoading />}>
+        <IntroduceRow loading={loading} visitData={data?.visitData || []} />
+      </Suspense>
 
-        <Suspense fallback={<PageLoading />}>
-          <IntroduceRow loading={loading} visitData={data?.visitData || []} />
-        </Suspense>
+      <Suspense fallback={null}>
+        <SalesCard
+          rangePickerValue={rangePickerValue}
+          salesData={data?.salesData || []}
+          isActive={isActive}
+          handleRangePickerChange={handleRangePickerChange}
+          loading={loading}
+          selectDate={selectDate}
+        />
+      </Suspense>
 
-        <Suspense fallback={null}>
-          <SalesCard
-            rangePickerValue={rangePickerValue}
-            salesData={data?.salesData || []}
-            isActive={isActive}
-            handleRangePickerChange={handleRangePickerChange}
-            loading={loading}
-            selectDate={selectDate}
-          />
-        </Suspense>
+      <Row
+        gutter={24}
+        style={{
+          marginTop: 24,
+        }}
+      >
+        <Col xl={12} lg={24} md={24} sm={24} xs={24}>
+          <Suspense fallback={null}>
+            <TopSearch
+              loading={loading}
+              visitData2={data?.visitData2 || []}
+              searchData={data?.searchData || []}
+              dropdownGroup={dropdownGroup}
+            />
+          </Suspense>
+        </Col>
+        <Col xl={12} lg={24} md={24} sm={24} xs={24}>
+          <Suspense fallback={null}>
+            <ProportionSales
+              dropdownGroup={dropdownGroup}
+              salesType={salesType}
+              loading={loading}
+              salesPieData={salesPieData || []}
+              handleChangeSalesType={handleChangeSalesType}
+            />
+          </Suspense>
+        </Col>
+      </Row>
 
-        <Row
-          gutter={24}
-          style={{
-            marginTop: 24,
-          }}
-        >
-          <Col xl={12} lg={24} md={24} sm={24} xs={24}>
-            <Suspense fallback={null}>
-              <TopSearch
-                loading={loading}
-                visitData2={data?.visitData2 || []}
-                searchData={data?.searchData || []}
-                dropdownGroup={dropdownGroup}
-              />
-            </Suspense>
-          </Col>
-          <Col xl={12} lg={24} md={24} sm={24} xs={24}>
-            <Suspense fallback={null}>
-              <ProportionSales
-                dropdownGroup={dropdownGroup}
-                salesType={salesType}
-                loading={loading}
-                salesPieData={salesPieData || []}
-                handleChangeSalesType={handleChangeSalesType}
-              />
-            </Suspense>
-          </Col>
-        </Row>
-
-        <Suspense fallback={null}>
-          <OfflineData
-            activeKey={activeKey}
-            loading={loading}
-            offlineData={data?.offlineData || []}
-            offlineChartData={data?.offlineChartData || []}
-            handleTabChange={handleTabChange}
-          />
-        </Suspense>
-
+      <Suspense fallback={null}>
+        <OfflineData
+          activeKey={activeKey}
+          loading={loading}
+          offlineData={data?.offlineData || []}
+          offlineChartData={data?.offlineChartData || []}
+          handleTabChange={handleTabChange}
+        />
+      </Suspense>
     </GridContent>
   );
 };

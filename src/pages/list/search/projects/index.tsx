@@ -41,7 +41,11 @@ const Projects: FC = () => {
       dataSource={list}
       renderItem={(item) => (
         <List.Item>
-          <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
+          <Card
+            className={styles.card}
+            hoverable
+            cover={<img alt={item.title} src={item.cover} />}
+          >
             <Card.Meta
               title={<a>{item.title}</a>}
               description={
@@ -105,11 +109,16 @@ const Projects: FC = () => {
               <TagSelect expandable>
                 {categoryOptions
                   .filter(
-                    (category): category is { value: string | number; label: string } =>
-                      category.value !== undefined && category.value !== null
+                    (
+                      category,
+                    ): category is { value: string | number; label: string } =>
+                      category.value !== undefined && category.value !== null,
                   )
                   .map((category) => (
-                    <TagSelect.Option value={category.value} key={category.value}>
+                    <TagSelect.Option
+                      value={category.value}
+                      key={category.value}
+                    >
                       {category.label}
                     </TagSelect.Option>
                   ))}

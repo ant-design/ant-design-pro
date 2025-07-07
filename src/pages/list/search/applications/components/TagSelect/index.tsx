@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useMergedState } from 'rc-util';
 import React, { type FC, useState } from 'react';
 import useStyles from './index.style';
+
 const { CheckableTag } = Tag;
 export interface TagSelectOptionProps {
   value: string | number;
@@ -26,7 +27,10 @@ const TagSelectOption: React.FC<TagSelectOptionProps> & {
 
 TagSelectOption.isTagSelectOption = true;
 
-type TagSelectOptionElement = React.ReactElement<TagSelectOptionProps, typeof TagSelectOption>;
+type TagSelectOptionElement = React.ReactElement<
+  TagSelectOptionProps,
+  typeof TagSelectOption
+>;
 
 export interface TagSelectProps {
   onChange?: (value: (string | number)[]) => void;
@@ -48,20 +52,33 @@ const TagSelect: FC<TagSelectProps> & {
   Option: typeof TagSelectOption;
 } = (props) => {
   const { styles } = useStyles();
-  const { children, hideCheckAll = false, className, style, expandable, actionsText = {} } = props;
+  const {
+    children,
+    hideCheckAll = false,
+    className,
+    style,
+    expandable,
+    actionsText = {},
+  } = props;
   const [expand, setExpand] = useState<boolean>(false);
 
-  const [value, setValue] = useMergedState<(string | number)[]>(props.defaultValue || [], {
-    value: props.value,
-    defaultValue: props.defaultValue,
-    onChange: props.onChange,
-  });
+  const [value, setValue] = useMergedState<(string | number)[]>(
+    props.defaultValue || [],
+    {
+      value: props.value,
+      defaultValue: props.defaultValue,
+      onChange: props.onChange,
+    },
+  );
 
   const isTagSelectOption = (node: TagSelectOptionElement) =>
     node?.type &&
-    (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
+    (node.type.isTagSelectOption ||
+      node.type.displayName === 'TagSelectOption');
   const getAllTags = () => {
-    const childrenArray = React.Children.toArray(children) as TagSelectOptionElement[];
+    const childrenArray = React.Children.toArray(
+      children,
+    ) as TagSelectOptionElement[];
     const checkedTags = childrenArray
       .filter((child) => isTagSelectOption(child))
       .map((child) => child.props.value);
@@ -85,7 +102,11 @@ const TagSelect: FC<TagSelectProps> & {
     setValue(checkedTags);
   };
   const checkedAll = getAllTags().length === value?.length;
-  const { expandText = '展开', collapseText = '收起', selectAllText = '全部' } = actionsText;
+  const {
+    expandText = '展开',
+    collapseText = '收起',
+    selectAllText = '全部',
+  } = actionsText;
   const cls = classNames(styles.tagSelect, className, {
     [styles.hasExpandTag]: expandable,
     [styles.expanded]: expand,
@@ -93,7 +114,11 @@ const TagSelect: FC<TagSelectProps> & {
   return (
     <div className={cls} style={style}>
       {hideCheckAll ? null : (
-        <CheckableTag checked={checkedAll} key="tag-select-__all__" onChange={onSelectAll}>
+        <CheckableTag
+          checked={checkedAll}
+          key="tag-select-__all__"
+          onChange={onSelectAll}
+        >
           {selectAllText}
         </CheckableTag>
       )}

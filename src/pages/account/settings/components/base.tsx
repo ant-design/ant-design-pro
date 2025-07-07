@@ -13,7 +13,11 @@ import React from 'react';
 import { queryCity, queryCurrent, queryProvince } from '../service';
 import useStyles from './index.style';
 
-const validatorPhone = (_rule: any, value: string[], callback: (message?: string) => void) => {
+const validatorPhone = (
+  _rule: any,
+  value: string[],
+  callback: (message?: string) => void,
+) => {
   if (!value[0]) {
     callback('Please input your area code!');
   }
@@ -50,7 +54,8 @@ const BaseView: React.FC = () => {
       if (currentUser.avatar) {
         return currentUser.avatar;
       }
-      const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
+      const url =
+        'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
       return url;
     }
     return '';
@@ -175,14 +180,16 @@ const BaseView: React.FC = () => {
                           if (!province?.key) {
                             return [];
                           }
-                          return queryCity(province.key || '').then(({ data }) => {
-                            return data.map((item) => {
-                              return {
-                                label: item.name,
-                                value: item.id,
-                              };
-                            });
-                          });
+                          return queryCity(province.key || '').then(
+                            ({ data }) => {
+                              return data.map((item) => {
+                                return {
+                                  label: item.name,
+                                  value: item.id,
+                                };
+                              });
+                            },
+                          );
                         }}
                       />
                     );

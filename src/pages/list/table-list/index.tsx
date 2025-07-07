@@ -1,5 +1,9 @@
 import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
+import type {
+  ActionType,
+  ProColumns,
+  ProDescriptionsItemProps,
+} from '@ant-design/pro-components';
 import {
   FooterToolbar,
   ModalForm,
@@ -15,6 +19,7 @@ import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
 import type { TableListItem, TableListPagination } from './data';
 import { addRule, removeRule, rule, updateRule } from './service';
+
 /**
  * 添加节点
  *
@@ -41,7 +46,10 @@ const handleAdd = async (fields: TableListItem) => {
  * @param fields
  */
 
-const handleUpdate = async (fields: FormValueType, currentRow?: TableListItem) => {
+const handleUpdate = async (
+  fields: FormValueType,
+  currentRow?: TableListItem,
+) => {
   const hide = message.loading('正在配置');
 
   try {
@@ -87,7 +95,8 @@ const TableList: React.FC = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   /** 分布更新窗口的弹窗 */
 
-  const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
+  const [updateModalVisible, handleUpdateModalVisible] =
+    useState<boolean>(false);
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<TableListItem>();
@@ -229,7 +238,12 @@ const TableList: React.FC = () => {
               </a>{' '}
               项 &nbsp;&nbsp;
               <span>
-                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + (item.callNo ?? 0), 0)} 万
+                服务调用次数总计{' '}
+                {selectedRowsState.reduce(
+                  (pre, item) => pre + (item.callNo ?? 0),
+                  0,
+                )}{' '}
+                万
               </span>
             </div>
           }

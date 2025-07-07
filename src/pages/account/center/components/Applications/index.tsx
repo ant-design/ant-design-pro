@@ -107,7 +107,10 @@ const Applications: React.FC = () => {
               </Dropdown>,
             ]}
           >
-            <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
+            <Card.Meta
+              avatar={<Avatar size="small" src={item.avatar} />}
+              title={item.title}
+            />
             <div>
               <CardInfo
                 activeUser={formatWan(item.activeUser)}

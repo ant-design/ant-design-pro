@@ -87,7 +87,11 @@ class WaterWave extends Component<WaterWaveProps> {
     const bR = radius - lineWidth;
     const circleOffset = -(Math.PI / 2);
     let circleLock = true;
-    for (let i = circleOffset; i < circleOffset + 2 * Math.PI; i += 1 / (8 * Math.PI)) {
+    for (
+      let i = circleOffset;
+      i < circleOffset + 2 * Math.PI;
+      i += 1 / (8 * Math.PI)
+    ) {
       arcStack.push([radius + bR * Math.cos(i), radius + bR * Math.sin(i)]);
     }
     const cStartPoint = arcStack.shift() as number[];

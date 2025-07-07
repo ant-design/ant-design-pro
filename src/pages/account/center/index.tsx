@@ -1,14 +1,29 @@
-import { ClusterOutlined, ContactsOutlined, HomeOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  ClusterOutlined,
+  ContactsOutlined,
+  HomeOutlined,
+  PlusOutlined,
+} from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
-import { Avatar, Card, Col, Divider, Input, type InputRef, Row, Tag } from 'antd';
+import {
+  Avatar,
+  Card,
+  Col,
+  Divider,
+  Input,
+  type InputRef,
+  Row,
+  Tag,
+} from 'antd';
 import React, { useRef, useState } from 'react';
 import useStyles from './Center.style';
 import Applications from './components/Applications';
 import Articles from './components/Articles';
 import Projects from './components/Projects';
-import type { CurrentUser, tabKeyType, TagType } from './data.d';
+import type { CurrentUser, TagType, tabKeyType } from './data.d';
 import { queryCurrent } from './service';
+
 const operationTabList = [
   {
     key: 'articles',
@@ -76,7 +91,10 @@ const TagList: React.FC<{
   };
   const handleInputConfirm = () => {
     let tempsTags = [...newTags];
-    if (inputValue && tempsTags.filter((tag) => tag.label === inputValue).length === 0) {
+    if (
+      inputValue &&
+      tempsTags.filter((tag) => tag.label === inputValue).length === 0
+    ) {
       tempsTags = [
         ...tempsTags,
         {
@@ -132,7 +150,11 @@ const Center: React.FC = () => {
   });
 
   //  渲染用户信息
-  const renderUserInfo = ({ title, group, geographic }: Partial<CurrentUser>) => {
+  const renderUserInfo = ({
+    title,
+    group,
+    geographic,
+  }: Partial<CurrentUser>) => {
     return (
       <div className={styles.detail}>
         <p>
@@ -224,13 +246,13 @@ const Center: React.FC = () => {
                   <div className={styles.teamTitle}>团队</div>
                   <Row gutter={36}>
                     {currentUser.notice?.map((item) => (
-                        <Col key={item.id} lg={24} xl={12}>
-                          <a href={item.href}>
-                            <Avatar size="small" src={item.logo} />
-                            {item.member}
-                          </a>
-                        </Col>
-                      ))}
+                      <Col key={item.id} lg={24} xl={12}>
+                        <a href={item.href}>
+                          <Avatar size="small" src={item.logo} />
+                          {item.member}
+                        </a>
+                      </Col>
+                    ))}
                   </Row>
                 </div>
               </div>

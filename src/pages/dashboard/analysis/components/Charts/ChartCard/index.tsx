@@ -4,6 +4,7 @@ import type { CardProps } from 'antd/es/card';
 import classNames from 'classnames';
 import React from 'react';
 import useStyles from './index.style';
+
 type totalType = () => React.ReactNode;
 
 export type ChartCardProps = {
@@ -36,7 +37,16 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     return totalDom;
   };
   const renderContent = () => {
-    const { contentHeight, title, avatar, action, total, footer, children, loading } = props;
+    const {
+      contentHeight,
+      title,
+      avatar,
+      action,
+      total,
+      footer,
+      children,
+      loading,
+    } = props;
     if (loading) {
       return false;
     }
@@ -63,7 +73,9 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
               height: contentHeight || 'auto',
             }}
           >
-            <div className={contentHeight ? styles.contentFixed : undefined}>{children}</div>
+            <div className={contentHeight ? styles.contentFixed : undefined}>
+              {children}
+            </div>
           </div>
         )}
         {footer && (
@@ -79,10 +91,7 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     );
   };
 
-  const {
-    loading = false,
-    ...rest
-  } = props;
+  const { loading = false, ...rest } = props;
   return (
     <Card
       loading={loading}

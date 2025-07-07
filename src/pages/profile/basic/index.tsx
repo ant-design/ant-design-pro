@@ -7,6 +7,7 @@ import React from 'react';
 import type { BasicGood, BasicProgress } from './data.d';
 import { queryBasicProfile } from './service';
 import useStyles from './style.style';
+
 const progressColumns: ProColumns<BasicProgress>[] = [
   {
     title: '时间',
@@ -191,7 +192,9 @@ const Basic: FC = () => {
           <Descriptions.Item label="用户姓名">付小小</Descriptions.Item>
           <Descriptions.Item label="联系电话">18100000000</Descriptions.Item>
           <Descriptions.Item label="常用快递">菜鸟仓储</Descriptions.Item>
-          <Descriptions.Item label="取货地址">浙江省杭州市西湖区万塘路18号</Descriptions.Item>
+          <Descriptions.Item label="取货地址">
+            浙江省杭州市西湖区万塘路18号
+          </Descriptions.Item>
           <Descriptions.Item label="备注">无</Descriptions.Item>
         </Descriptions>
         <Divider
