@@ -19,7 +19,6 @@ jobs:
       - name: build
         run: |
           yarn
-          yarn add umi-plugin-pro --save
           yarn build
 
       - name: upload dist artifact
