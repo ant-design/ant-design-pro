@@ -1,11 +1,22 @@
 import { history, Link, useRequest } from '@umijs/max';
-import { Button, Col, Form, Input, message, Popover, Progress, Row, Select, Space } from 'antd';
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Popover,
+  Progress,
+  Row,
+  Select,
+  Space,
+} from 'antd';
 import type { Store } from 'antd/es/form/interface';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import type { StateType } from './service';
 import { fakeRegister } from './service';
-import useStyles from './style.style';
+import useStyles from './styles';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -123,8 +134,10 @@ const Register: FC = () => {
   const renderPasswordProgress = () => {
     const value = form.getFieldValue('password');
     const passwordStatus = getPasswordStatus();
-    return value && value.length ? (
-      <div className={styles[`progress-${passwordStatus}`]}>
+    return value?.length ? (
+      <div
+        className={styles[`progress-${passwordStatus}` as keyof typeof styles]}
+      >
         <Progress
           status={passwordProgressMap[passwordStatus]}
           strokeWidth={6}
@@ -155,7 +168,7 @@ const Register: FC = () => {
         </FormItem>
         <Popover
           getPopupContainer={(node) => {
-            if (node && node.parentNode) {
+            if (node?.parentNode) {
               return node.parentNode as HTMLElement;
             }
             return node;
@@ -198,7 +211,11 @@ const Register: FC = () => {
               },
             ]}
           >
-            <Input size="large" type="password" placeholder="至少6位密码，区分大小写" />
+            <Input
+              size="large"
+              type="password"
+              placeholder="至少6位密码，区分大小写"
+            />
           </FormItem>
         </Popover>
         <FormItem

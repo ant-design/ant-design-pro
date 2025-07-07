@@ -1,8 +1,11 @@
 export default {
-  'pages.layouts.userLayout.title': 'طراحی مورچه تأثیرگذارترین مشخصات طراحی وب در منطقه Xihu است',
+  'pages.layouts.userLayout.title':
+    'طراحی مورچه تأثیرگذارترین مشخصات طراحی وب در منطقه Xihu است',
   'pages.login.accountLogin.tab': 'ورود به حساب کاربری',
-  'pages.login.accountLogin.errorMessage': 'نام کاربری / رمزعبور نادرست (مدیر / ant.design)',
-  'pages.login.failure': 'ورود به سیستم با شکست مواجه شد، لطفا دوباره سعی کنید!',
+  'pages.login.accountLogin.errorMessage':
+    'نام کاربری / رمزعبور نادرست (مدیر / ant.design)',
+  'pages.login.failure':
+    'ورود به سیستم با شکست مواجه شد، لطفا دوباره سعی کنید!',
   'pages.login.success': 'ورود موفق!',
   'pages.login.username.placeholder': 'نام کاربری: مدیر یا کاربر',
   'pages.login.username.required': 'لطفا نام کاربری خود را وارد کنید!',
@@ -33,9 +36,11 @@ export default {
   'pages.searchTable.updateForm.ruleConfig': 'پیکربندی قانون',
   'pages.searchTable.updateForm.basicConfig': 'اطلاعات اولیه',
   'pages.searchTable.updateForm.ruleName.nameLabel': ' نام قانون',
-  'pages.searchTable.updateForm.ruleName.nameRules': 'لطفاً نام قانون را وارد کنید!',
+  'pages.searchTable.updateForm.ruleName.nameRules':
+    'لطفاً نام قانون را وارد کنید!',
   'pages.searchTable.updateForm.ruleDesc.descLabel': 'شرح قانون',
-  'pages.searchTable.updateForm.ruleDesc.descPlaceholder': 'لطفاً حداقل پنج حرف وارد کنید',
+  'pages.searchTable.updateForm.ruleDesc.descPlaceholder':
+    'لطفاً حداقل پنج حرف وارد کنید',
   'pages.searchTable.updateForm.ruleDesc.descRules':
     'لطفاً حداقل یک قانون حاوی پنج کاراکتر شرح دهید!',
   'pages.searchTable.updateForm.ruleProps.title': 'پیکربندی خصوصیات',
@@ -44,7 +49,8 @@ export default {
   'pages.searchTable.updateForm.ruleProps.typeLabel': 'نوع قانون',
   'pages.searchTable.updateForm.schedulingPeriod.title': 'تنظیم دوره زمان بندی',
   'pages.searchTable.updateForm.schedulingPeriod.timeLabel': 'زمان شروع',
-  'pages.searchTable.updateForm.schedulingPeriod.timeRules': 'لطفاً زمان شروع را انتخاب کنید!',
+  'pages.searchTable.updateForm.schedulingPeriod.timeRules':
+    'لطفاً زمان شروع را انتخاب کنید!',
   'pages.searchTable.titleDesc': 'شرح',
   'pages.searchTable.ruleName': 'نام قانون لازم است',
   'pages.searchTable.titleCallNo': 'تعداد تماس های خدماتی',

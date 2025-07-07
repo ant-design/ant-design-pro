@@ -1,4 +1,3 @@
-import { updateRule } from '@/services/ant-design-pro/api';
 import {
   ProFormDateTimePicker,
   ProFormRadio,
@@ -8,8 +7,9 @@ import {
   StepsForm,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl, useRequest } from '@umijs/max';
-import { message, Modal } from 'antd';
+import { Modal, message } from 'antd';
 import React, { cloneElement, useCallback, useState } from 'react';
+import { updateRule } from '@/services/ant-design-pro/api';
 
 export type FormValueType = {
   target?: string;
@@ -20,7 +20,7 @@ export type FormValueType = {
 } & Partial<API.RuleListItem>;
 
 export type UpdateFormProps = {
-  trigger?: JSX.Element;
+  trigger?: React.ReactElement<any>;
   onOk?: () => void;
   values: Partial<API.RuleListItem>;
 };

@@ -4,7 +4,7 @@ import type { DataItem, OfflineDataType, SearchDataType } from './data.d';
 
 // mock data
 const visitData: DataItem[] = [];
-const beginDay = new Date().getTime();
+const beginDay = Date.now();
 
 const fakeY = [7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5];
 for (let i = 0; i < fakeY.length; i += 1) {
@@ -127,7 +127,7 @@ for (let i = 0; i < 10; i += 1) {
 const offlineChartData: DataItem[] = [];
 for (let i = 0; i < 20; i += 1) {
   offlineChartData.push({
-    x: new Date().getTime() + 1000 * 60 * 30 * i,
+    x: Date.now() + 1000 * 60 * 30 * i,
     y1: Math.floor(Math.random() * 100) + 10,
     y2: Math.floor(Math.random() * 100) + 10,
   });

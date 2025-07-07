@@ -5,6 +5,7 @@ import numeral from 'numeral';
 import React from 'react';
 import type { DataItem } from '../data.d';
 import useStyles from '../style.style';
+
 const { Text } = Typography;
 const ProportionSales = ({
   dropdownGroup,

@@ -1,0 +1,1088 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Page should login success 1`] = `
+<DocumentFragment>
+  <div
+    class="ant-app css-var-«r7»"
+  >
+    <div
+      class="acss-trkbkn"
+    >
+      <div
+        class="acss-1asxt4z"
+        data-lang="true"
+      >
+        <span
+          class="ant-dropdown-trigger"
+          style="cursor: pointer; padding: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; vertical-align: middle;"
+        >
+          <i
+            class="anticon"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="0 0 24 24"
+              width="1em"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                class="css-c4d79v"
+                d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z "
+              />
+            </svg>
+          </i>
+        </span>
+      </div>
+      <div
+        style="flex: 1; padding: 32px 0px;"
+      >
+        <div
+          class="ant-pro-form-login-container "
+        >
+          <div
+            class="ant-pro-form-login-top"
+          >
+            <div
+              class="ant-pro-form-login-header "
+            >
+              <span
+                class="ant-pro-form-login-logo "
+              >
+                <img
+                  alt="logo"
+                  src="/logo.svg"
+                />
+              </span>
+              <span
+                class="ant-pro-form-login-title "
+              >
+                Ant Design
+              </span>
+            </div>
+            <div
+              class="ant-pro-form-login-desc "
+            >
+              Ant Design is the most influential web design specification in Xihu district
+            </div>
+          </div>
+          <div
+            class="ant-pro-form-login-main "
+            style="width: 328px; min-width: 280px; max-width: 75vw;"
+          >
+            <form
+              autocomplete="off"
+              class="ant-form ant-form-vertical css-var-«r7» ant-form-css-var ant-pro-form"
+            >
+              <input
+                style="display: none;"
+                type="text"
+              />
+              <div
+                class="ant-tabs ant-tabs-top ant-tabs-centered css-var-«r7» ant-tabs-css-var"
+              >
+                <div
+                  aria-orientation="horizontal"
+                  class="ant-tabs-nav"
+                  role="tablist"
+                >
+                  <div
+                    class="ant-tabs-nav-wrap"
+                  >
+                    <div
+                      class="ant-tabs-nav-list"
+                      style="transform: translate(0px, 0px);"
+                    >
+                      <div
+                        class="ant-tabs-tab ant-tabs-tab-active"
+                        data-node-key="account"
+                      >
+                        <div
+                          aria-controls="rc-tabs-test-panel-account"
+                          aria-selected="true"
+                          class="ant-tabs-tab-btn"
+                          id="rc-tabs-test-tab-account"
+                          role="tab"
+                          tabindex="0"
+                        >
+                          Account Login
+                        </div>
+                      </div>
+                      <div
+                        class="ant-tabs-tab"
+                        data-node-key="mobile"
+                      >
+                        <div
+                          aria-controls="rc-tabs-test-panel-mobile"
+                          aria-selected="false"
+                          class="ant-tabs-tab-btn"
+                          id="rc-tabs-test-tab-mobile"
+                          role="tab"
+                          tabindex="-1"
+                        >
+                          Phone Login
+                        </div>
+                      </div>
+                      <div
+                        class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"
+                        style="width: 0px; left: 0px; transform: translateX(-50%);"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="ant-tabs-nav-operations ant-tabs-nav-operations-hidden"
+                  >
+                    <button
+                      aria-controls="rc-tabs-test-more-popup"
+                      aria-expanded="false"
+                      aria-haspopup="listbox"
+                      class="ant-tabs-nav-more"
+                      id="rc-tabs-test-more"
+                      style="visibility: hidden; order: 1;"
+                      type="button"
+                    >
+                      <span
+                        aria-label="ellipsis"
+                        class="anticon anticon-ellipsis"
+                        role="img"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          data-icon="ellipsis"
+                          fill="currentColor"
+                          focusable="false"
+                          height="1em"
+                          viewBox="64 64 896 896"
+                          width="1em"
+                        >
+                          <path
+                            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="ant-tabs-content-holder"
+                >
+                  <div
+                    class="ant-tabs-content ant-tabs-content-top"
+                  >
+                    <div
+                      aria-hidden="false"
+                      aria-labelledby="rc-tabs-test-tab-account"
+                      class="ant-tabs-tabpane ant-tabs-tabpane-active"
+                      id="rc-tabs-test-panel-account"
+                      role="tabpanel"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-form-item css-var-«r7» ant-form-css-var ant-form-item-has-success"
+              >
+                <div
+                  class="ant-row ant-form-item-row css-var-«r7»"
+                >
+                  <div
+                    class="ant-col ant-form-item-control css-var-«r7»"
+                  >
+                    <div
+                      class="ant-form-item-control-input"
+                    >
+                      <div
+                        class="ant-form-item-control-input-content"
+                      >
+                        <span
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-status-success css-var-«r7» ant-input-css-var"
+                        >
+                          <span
+                            class="ant-input-prefix"
+                          >
+                            <span
+                              aria-label="user"
+                              class="anticon anticon-user"
+                              role="img"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                data-icon="user"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <path
+                                  d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                                />
+                              </svg>
+                            </span>
+                          </span>
+                          <input
+                            class="ant-input ant-input-lg"
+                            id="username"
+                            placeholder="Username: admin or user"
+                            type="text"
+                            value="admin"
+                          />
+                          <span
+                            class="ant-input-suffix"
+                          >
+                            <button
+                              class="ant-input-clear-icon"
+                              tabindex="-1"
+                              type="button"
+                            >
+                              <span
+                                aria-label="close-circle"
+                                class="anticon anticon-close-circle"
+                                role="img"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  data-icon="close-circle"
+                                  fill="currentColor"
+                                  fill-rule="evenodd"
+                                  focusable="false"
+                                  height="1em"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
+                                >
+                                  <path
+                                    d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                                  />
+                                </svg>
+                              </span>
+                            </button>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-form-item css-var-«r7» ant-form-css-var ant-form-item-has-success"
+              >
+                <div
+                  class="ant-row ant-form-item-row css-var-«r7»"
+                >
+                  <div
+                    class="ant-col ant-form-item-control css-var-«r7»"
+                  >
+                    <div
+                      class="ant-form-item-control-input"
+                    >
+                      <div
+                        class="ant-form-item-control-input-content"
+                      >
+                        <span
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-status-success ant-input-password ant-input-password-large css-var-«r7» ant-input-css-var"
+                        >
+                          <span
+                            class="ant-input-prefix"
+                          >
+                            <span
+                              aria-label="lock"
+                              class="anticon anticon-lock"
+                              role="img"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                data-icon="lock"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <path
+                                  d="M832 464h-68V240c0-70.7-57.3-128-128-128H388c-70.7 0-128 57.3-128 128v224h-68c-17.7 0-32 14.3-32 32v384c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V496c0-17.7-14.3-32-32-32zM332 240c0-30.9 25.1-56 56-56h248c30.9 0 56 25.1 56 56v224H332V240zm460 600H232V536h560v304zM484 701v53c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-53a48.01 48.01 0 10-56 0z"
+                                />
+                              </svg>
+                            </span>
+                          </span>
+                          <input
+                            class="ant-input ant-input-lg"
+                            id="password"
+                            placeholder="Password: ant.design"
+                            type="password"
+                            value="ant.design"
+                          />
+                          <span
+                            class="ant-input-suffix"
+                          >
+                            <span
+                              aria-label="eye-invisible"
+                              class="anticon anticon-eye-invisible ant-input-password-icon"
+                              role="img"
+                              tabindex="-1"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                data-icon="eye-invisible"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <path
+                                  d="M942.2 486.2Q889.47 375.11 816.7 305l-50.88 50.88C807.31 395.53 843.45 447.4 874.7 512 791.5 684.2 673.4 766 512 766q-72.67 0-133.87-22.38L323 798.75Q408 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 000-51.5zm-63.57-320.64L836 122.88a8 8 0 00-11.32 0L715.31 232.2Q624.86 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 000 51.5q56.69 119.4 136.5 191.41L112.48 835a8 8 0 000 11.31L155.17 889a8 8 0 0011.31 0l712.15-712.12a8 8 0 000-11.32zM149.3 512C232.6 339.8 350.7 258 512 258c54.54 0 104.13 9.36 149.12 28.39l-70.3 70.3a176 176 0 00-238.13 238.13l-83.42 83.42C223.1 637.49 183.3 582.28 149.3 512zm246.7 0a112.11 112.11 0 01146.2-106.69L401.31 546.2A112 112 0 01396 512z"
+                                />
+                                <path
+                                  d="M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 00227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 01-112 112z"
+                                />
+                              </svg>
+                            </span>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="margin-bottom: 24px;"
+              >
+                <label
+                  class="ant-checkbox-wrapper ant-checkbox-wrapper-checked css-var-«r7» ant-checkbox-css-var"
+                >
+                  <span
+                    class="ant-checkbox ant-wave-target ant-checkbox-checked"
+                  >
+                    <input
+                      checked=""
+                      class="ant-checkbox-input"
+                      id="autoLogin"
+                      type="checkbox"
+                    />
+                    <span
+                      class="ant-checkbox-inner"
+                    />
+                  </span>
+                  <span
+                    class="ant-checkbox-label"
+                  >
+                    Remember me
+                  </span>
+                </label>
+                <a
+                  style="float: right;"
+                >
+                  Forgot Password ?
+                </a>
+              </div>
+              <button
+                class="ant-btn css-var-«r7» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
+                style="width: 100%;"
+                type="button"
+              >
+                <span>
+                  Login
+                </span>
+              </button>
+            </form>
+            <div
+              class="ant-pro-form-login-main-other "
+            >
+              Login with :
+              <span
+                aria-label="alipay-circle"
+                class="anticon anticon-alipay-circle acss-18yqg2u"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="alipay-circle"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64c247.42 0 448 200.58 448 448S759.42 960 512 960 64 759.42 64 512 264.58 64 512 64m32.5 168c-69.67 0-86.06 16.84-86.72 39.08l-.02 1.43v46.62H291.45c-9.92 0-14.28 23.05-14.27 39.3 0 2.7 2.08 4.93 4.77 4.93h175.81v58.3h-116.5c-9.96 0-14.3 23.76-14.27 39.47a4.77 4.77 0 004.77 4.76h233.45c-4.53 41.06-15.43 77.59-30.72 109.32l-1.22 2.5-.32-.28c-60.24-28.47-120.43-52.57-194.4-52.57l-2.62.01c-84.98 1.11-144.71 56.5-145.91 127.04l-.02 1.22.02 2.13c1.24 70.4 63.56 126.45 148.52 126.45 61.25 0 116.38-16.85 163.46-45.02a138.58 138.58 0 0014.07-7.96 345.6 345.6 0 0050.3-41.16l9.45 6.35 12.46 8.32c57.53 38.26 113.76 72.62 169.86 79.27a142.62 142.62 0 0018.31 1.16c43.02 0 55-52.68 57.39-95.51l.14-2.84c.4-8.46-6.2-15.6-14.65-15.86-75.46-2.37-136.45-22.05-192-46.11l-6.27-2.75c35.15-56.8 56.66-121.81 57.15-186.66l.09-1.08c.4-5.51-4-10.2-9.52-10.2H549.33v-58.3h165.73c9.92 0 14.28-22.12 14.27-39.31a4.85 4.85 0 00-4.78-4.92H549.32v-82.35a4.8 4.8 0 00-4.83-4.78M328 583.85c54.63 0 107.08 22.41 158.1 52.19l5.76 3.4c-103.57 119.84-247.17 95.9-261.72 26.37a66.89 66.89 0 01-1.14-9.83l-.06-2.34.02-.9c.97-40.12 45.33-68.9 99.04-68.9"
+                  />
+                </svg>
+              </span>
+              <span
+                aria-label="taobao-circle"
+                class="anticon anticon-taobao-circle acss-18yqg2u"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="taobao-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zM315.7 291.5c27.3 0 49.5 22.1 49.5 49.4s-22.1 49.4-49.5 49.4a49.4 49.4 0 110-98.8zM366.9 578c-13.6 42.3-10.2 26.7-64.4 144.5l-78.5-49s87.7-79.8 105.6-116.2c19.2-38.4-21.1-58.9-21.1-58.9l-60.2-37.5 32.7-50.2c45.4 33.7 48.7 36.6 79.2 67.2 23.8 23.9 20.7 56.8 6.7 100.1zm427.2 55c-15.3 143.8-202.4 90.3-202.4 90.3l10.2-41.1 43.3 9.3c80 5 72.3-64.9 72.3-64.9V423c.6-77.3-72.6-85.4-204.2-38.3l30.6 8.3c-2.5 9-12.5 23.2-25.2 38.6h176v35.6h-99.1v44.5h98.7v35.7h-98.7V622c14.9-4.8 28.6-11.5 40.5-20.5l-8.7-32.5 46.5-14.4 38.8 94.9-57.3 23.9-10.2-37.8c-25.6 19.5-78.8 48-171.8 45.4-99.2 2.6-73.7-112-73.7-112l2.5-1.3H472c-.5 14.7-6.6 38.7 1.7 51.8 6.8 10.8 24.2 12.6 35.3 13.1 1.3.1 2.6.1 3.9.1v-85.3h-101v-35.7h101v-44.5H487c-22.7 24.1-43.5 44.1-43.5 44.1l-30.6-26.7c21.7-22.9 43.3-59.1 56.8-83.2-10.9 4.4-22 9.2-33.6 14.2-11.2 14.3-24.2 29-38.7 43.5.5.8-50-28.4-50-28.4 52.2-44.4 81.4-139.9 81.4-139.9l72.5 20.4s-5.9 14-18.4 35.6c290.3-82.3 307.4 50.5 307.4 50.5s19.1 91.8 3.8 235.7z"
+                  />
+                </svg>
+              </span>
+              <span
+                aria-label="weibo-circle"
+                class="anticon anticon-weibo-circle acss-18yqg2u"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="weibo-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-44.4 672C353.1 736 236 680.4 236 588.9c0-47.8 30.2-103.1 82.3-155.3 69.5-69.6 150.6-101.4 181.1-70.8 13.5 13.5 14.8 36.8 6.1 64.6-4.5 14 13.1 6.3 13.1 6.3 56.2-23.6 105.2-25 123.1.7 9.6 13.7 8.6 32.8-.2 55.1-4.1 10.2 1.3 11.8 9 14.1 31.7 9.8 66.9 33.6 66.9 75.5.2 69.5-99.7 156.9-249.8 156.9zm207.3-290.8a34.9 34.9 0 00-7.2-34.1 34.68 34.68 0 00-33.1-10.7 18.24 18.24 0 01-7.6-35.7c24.1-5.1 50.1 2.3 67.7 21.9 17.7 19.6 22.4 46.3 14.9 69.8a18.13 18.13 0 01-22.9 11.7 18.18 18.18 0 01-11.8-22.9zm106 34.3s0 .1 0 0a21.1 21.1 0 01-26.6 13.7 21.19 21.19 0 01-13.6-26.7c11-34.2 4-73.2-21.7-101.8a104.04 104.04 0 00-98.9-32.1 21.14 21.14 0 01-25.1-16.3 21.07 21.07 0 0116.2-25.1c49.4-10.5 102.8 4.8 139.1 45.1 36.3 40.2 46.1 95.1 30.6 143.2zm-334.5 6.1c-91.4 9-160.7 65.1-154.7 125.2 5.9 60.1 84.8 101.5 176.2 92.5 91.4-9.1 160.7-65.1 154.7-125.3-5.9-60.1-84.8-101.5-176.2-92.4zm80.2 141.7c-18.7 42.3-72.3 64.8-117.8 50.1-43.9-14.2-62.5-57.7-43.3-96.8 18.9-38.4 68-60.1 111.5-48.8 45 11.7 68 54.2 49.6 95.5zm-93-32.2c-14.2-5.9-32.4.2-41.2 13.9-8.8 13.8-4.7 30.2 9.3 36.6 14.3 6.5 33.2.3 42-13.8 8.8-14.3 4.2-30.6-10.1-36.7zm34.9-14.5c-5.4-2.2-12.2.5-15.4 5.8-3.1 5.4-1.4 11.5 4.1 13.8 5.5 2.3 12.6-.3 15.8-5.8 3-5.6 1-11.8-4.5-13.8z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer
+        class="ant-layout-footer css-var-«r7»"
+        style="padding: 0px; background: none;"
+      >
+        <div
+          class="ant-pro-global-footer"
+        >
+          <div
+            class="ant-pro-global-footer-list"
+          >
+            <a
+              class="ant-pro-global-footer-list-link"
+              href="https://pro.ant.design"
+              rel="noreferrer"
+              target="_blank"
+              title="Ant Design Pro"
+            >
+              Ant Design Pro
+            </a>
+            <a
+              class="ant-pro-global-footer-list-link"
+              href="https://github.com/ant-design/ant-design-pro"
+              rel="noreferrer"
+              target="_blank"
+              title="github"
+            >
+              <span
+                aria-label="github"
+                class="anticon anticon-github"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="github"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                  />
+                </svg>
+              </span>
+            </a>
+            <a
+              class="ant-pro-global-footer-list-link"
+              href="https://ant.design"
+              rel="noreferrer"
+              target="_blank"
+              title="Ant Design"
+            >
+              Ant Design
+            </a>
+          </div>
+          <div
+            class="ant-pro-global-footer-copyright"
+          >
+            <span
+              aria-label="copyright"
+              class="anticon anticon-copyright"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="copyright"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372zm5.6-532.7c53 0 89 33.8 93 83.4.3 4.2 3.8 7.4 8 7.4h56.7c2.6 0 4.7-2.1 4.7-4.7 0-86.7-68.4-147.4-162.7-147.4C407.4 290 344 364.2 344 486.8v52.3C344 660.8 407.4 734 517.3 734c94 0 162.7-58.8 162.7-141.4 0-2.6-2.1-4.7-4.7-4.7h-56.8c-4.2 0-7.6 3.2-8 7.3-4.2 46.1-40.1 77.8-93 77.8-65.3 0-102.1-47.9-102.1-133.6v-52.6c.1-87 37-135.5 102.2-135.5z"
+                />
+              </svg>
+            </span>
+             Powered by Ant Desgin
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Login Page should show login form 1`] = `
+<DocumentFragment>
+  <div
+    class="ant-app css-var-«r0»"
+  >
+    <div
+      class="acss-trkbkn"
+    >
+      <div
+        class="acss-1asxt4z"
+        data-lang="true"
+      >
+        <span
+          class="ant-dropdown-trigger"
+          style="cursor: pointer; padding: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; vertical-align: middle;"
+        >
+          <i
+            class="anticon"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="0 0 24 24"
+              width="1em"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                class="css-c4d79v"
+                d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z "
+              />
+            </svg>
+          </i>
+        </span>
+      </div>
+      <div
+        style="flex: 1; padding: 32px 0px;"
+      >
+        <div
+          class="ant-pro-form-login-container "
+        >
+          <div
+            class="ant-pro-form-login-top"
+          >
+            <div
+              class="ant-pro-form-login-header "
+            >
+              <span
+                class="ant-pro-form-login-logo "
+              >
+                <img
+                  alt="logo"
+                  src="/logo.svg"
+                />
+              </span>
+              <span
+                class="ant-pro-form-login-title "
+              >
+                Ant Design
+              </span>
+            </div>
+            <div
+              class="ant-pro-form-login-desc "
+            >
+              Ant Design is the most influential web design specification in Xihu district
+            </div>
+          </div>
+          <div
+            class="ant-pro-form-login-main "
+            style="width: 328px; min-width: 280px; max-width: 75vw;"
+          >
+            <form
+              autocomplete="off"
+              class="ant-form ant-form-vertical css-var-«r0» ant-form-css-var ant-pro-form"
+            >
+              <input
+                style="display: none;"
+                type="text"
+              />
+              <div
+                class="ant-tabs ant-tabs-top ant-tabs-centered css-var-«r0» ant-tabs-css-var"
+              >
+                <div
+                  aria-orientation="horizontal"
+                  class="ant-tabs-nav"
+                  role="tablist"
+                >
+                  <div
+                    class="ant-tabs-nav-wrap"
+                  >
+                    <div
+                      class="ant-tabs-nav-list"
+                      style="transform: translate(0px, 0px);"
+                    >
+                      <div
+                        class="ant-tabs-tab ant-tabs-tab-active"
+                        data-node-key="account"
+                      >
+                        <div
+                          aria-controls="rc-tabs-test-panel-account"
+                          aria-selected="true"
+                          class="ant-tabs-tab-btn"
+                          id="rc-tabs-test-tab-account"
+                          role="tab"
+                          tabindex="0"
+                        >
+                          Account Login
+                        </div>
+                      </div>
+                      <div
+                        class="ant-tabs-tab"
+                        data-node-key="mobile"
+                      >
+                        <div
+                          aria-controls="rc-tabs-test-panel-mobile"
+                          aria-selected="false"
+                          class="ant-tabs-tab-btn"
+                          id="rc-tabs-test-tab-mobile"
+                          role="tab"
+                          tabindex="-1"
+                        >
+                          Phone Login
+                        </div>
+                      </div>
+                      <div
+                        class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"
+                        style="width: 0px; left: 0px; transform: translateX(-50%);"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="ant-tabs-nav-operations ant-tabs-nav-operations-hidden"
+                  >
+                    <button
+                      aria-controls="rc-tabs-test-more-popup"
+                      aria-expanded="false"
+                      aria-haspopup="listbox"
+                      class="ant-tabs-nav-more"
+                      id="rc-tabs-test-more"
+                      style="visibility: hidden; order: 1;"
+                      type="button"
+                    >
+                      <span
+                        aria-label="ellipsis"
+                        class="anticon anticon-ellipsis"
+                        role="img"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          data-icon="ellipsis"
+                          fill="currentColor"
+                          focusable="false"
+                          height="1em"
+                          viewBox="64 64 896 896"
+                          width="1em"
+                        >
+                          <path
+                            d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="ant-tabs-content-holder"
+                >
+                  <div
+                    class="ant-tabs-content ant-tabs-content-top"
+                  >
+                    <div
+                      aria-hidden="false"
+                      aria-labelledby="rc-tabs-test-tab-account"
+                      class="ant-tabs-tabpane ant-tabs-tabpane-active"
+                      id="rc-tabs-test-panel-account"
+                      role="tabpanel"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-form-item css-var-«r0» ant-form-css-var"
+              >
+                <div
+                  class="ant-row ant-form-item-row css-var-«r0»"
+                >
+                  <div
+                    class="ant-col ant-form-item-control css-var-«r0»"
+                  >
+                    <div
+                      class="ant-form-item-control-input"
+                    >
+                      <div
+                        class="ant-form-item-control-input-content"
+                      >
+                        <span
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined css-var-«r0» ant-input-css-var"
+                        >
+                          <span
+                            class="ant-input-prefix"
+                          >
+                            <span
+                              aria-label="user"
+                              class="anticon anticon-user"
+                              role="img"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                data-icon="user"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <path
+                                  d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                                />
+                              </svg>
+                            </span>
+                          </span>
+                          <input
+                            class="ant-input ant-input-lg"
+                            id="username"
+                            placeholder="Username: admin or user"
+                            type="text"
+                            value=""
+                          />
+                          <span
+                            class="ant-input-suffix"
+                          >
+                            <button
+                              class="ant-input-clear-icon ant-input-clear-icon-hidden"
+                              tabindex="-1"
+                              type="button"
+                            >
+                              <span
+                                aria-label="close-circle"
+                                class="anticon anticon-close-circle"
+                                role="img"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  data-icon="close-circle"
+                                  fill="currentColor"
+                                  fill-rule="evenodd"
+                                  focusable="false"
+                                  height="1em"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
+                                >
+                                  <path
+                                    d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                                  />
+                                </svg>
+                              </span>
+                            </button>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-form-item css-var-«r0» ant-form-css-var"
+              >
+                <div
+                  class="ant-row ant-form-item-row css-var-«r0»"
+                >
+                  <div
+                    class="ant-col ant-form-item-control css-var-«r0»"
+                  >
+                    <div
+                      class="ant-form-item-control-input"
+                    >
+                      <div
+                        class="ant-form-item-control-input-content"
+                      >
+                        <span
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-password ant-input-password-large css-var-«r0» ant-input-css-var"
+                        >
+                          <span
+                            class="ant-input-prefix"
+                          >
+                            <span
+                              aria-label="lock"
+                              class="anticon anticon-lock"
+                              role="img"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                data-icon="lock"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <path
+                                  d="M832 464h-68V240c0-70.7-57.3-128-128-128H388c-70.7 0-128 57.3-128 128v224h-68c-17.7 0-32 14.3-32 32v384c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V496c0-17.7-14.3-32-32-32zM332 240c0-30.9 25.1-56 56-56h248c30.9 0 56 25.1 56 56v224H332V240zm460 600H232V536h560v304zM484 701v53c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-53a48.01 48.01 0 10-56 0z"
+                                />
+                              </svg>
+                            </span>
+                          </span>
+                          <input
+                            class="ant-input ant-input-lg"
+                            id="password"
+                            placeholder="Password: ant.design"
+                            type="password"
+                          />
+                          <span
+                            class="ant-input-suffix"
+                          >
+                            <span
+                              aria-label="eye-invisible"
+                              class="anticon anticon-eye-invisible ant-input-password-icon"
+                              role="img"
+                              tabindex="-1"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                data-icon="eye-invisible"
+                                fill="currentColor"
+                                focusable="false"
+                                height="1em"
+                                viewBox="64 64 896 896"
+                                width="1em"
+                              >
+                                <path
+                                  d="M942.2 486.2Q889.47 375.11 816.7 305l-50.88 50.88C807.31 395.53 843.45 447.4 874.7 512 791.5 684.2 673.4 766 512 766q-72.67 0-133.87-22.38L323 798.75Q408 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 000-51.5zm-63.57-320.64L836 122.88a8 8 0 00-11.32 0L715.31 232.2Q624.86 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 000 51.5q56.69 119.4 136.5 191.41L112.48 835a8 8 0 000 11.31L155.17 889a8 8 0 0011.31 0l712.15-712.12a8 8 0 000-11.32zM149.3 512C232.6 339.8 350.7 258 512 258c54.54 0 104.13 9.36 149.12 28.39l-70.3 70.3a176 176 0 00-238.13 238.13l-83.42 83.42C223.1 637.49 183.3 582.28 149.3 512zm246.7 0a112.11 112.11 0 01146.2-106.69L401.31 546.2A112 112 0 01396 512z"
+                                />
+                                <path
+                                  d="M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 00227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 01-112 112z"
+                                />
+                              </svg>
+                            </span>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="margin-bottom: 24px;"
+              >
+                <label
+                  class="ant-checkbox-wrapper ant-checkbox-wrapper-checked css-var-«r0» ant-checkbox-css-var"
+                >
+                  <span
+                    class="ant-checkbox ant-wave-target ant-checkbox-checked"
+                  >
+                    <input
+                      checked=""
+                      class="ant-checkbox-input"
+                      id="autoLogin"
+                      type="checkbox"
+                    />
+                    <span
+                      class="ant-checkbox-inner"
+                    />
+                  </span>
+                  <span
+                    class="ant-checkbox-label"
+                  >
+                    Remember me
+                  </span>
+                </label>
+                <a
+                  style="float: right;"
+                >
+                  Forgot Password ?
+                </a>
+              </div>
+              <button
+                class="ant-btn css-var-«r0» ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
+                style="width: 100%;"
+                type="button"
+              >
+                <span>
+                  Login
+                </span>
+              </button>
+            </form>
+            <div
+              class="ant-pro-form-login-main-other "
+            >
+              Login with :
+              <span
+                aria-label="alipay-circle"
+                class="anticon anticon-alipay-circle acss-18yqg2u"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="alipay-circle"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64c247.42 0 448 200.58 448 448S759.42 960 512 960 64 759.42 64 512 264.58 64 512 64m32.5 168c-69.67 0-86.06 16.84-86.72 39.08l-.02 1.43v46.62H291.45c-9.92 0-14.28 23.05-14.27 39.3 0 2.7 2.08 4.93 4.77 4.93h175.81v58.3h-116.5c-9.96 0-14.3 23.76-14.27 39.47a4.77 4.77 0 004.77 4.76h233.45c-4.53 41.06-15.43 77.59-30.72 109.32l-1.22 2.5-.32-.28c-60.24-28.47-120.43-52.57-194.4-52.57l-2.62.01c-84.98 1.11-144.71 56.5-145.91 127.04l-.02 1.22.02 2.13c1.24 70.4 63.56 126.45 148.52 126.45 61.25 0 116.38-16.85 163.46-45.02a138.58 138.58 0 0014.07-7.96 345.6 345.6 0 0050.3-41.16l9.45 6.35 12.46 8.32c57.53 38.26 113.76 72.62 169.86 79.27a142.62 142.62 0 0018.31 1.16c43.02 0 55-52.68 57.39-95.51l.14-2.84c.4-8.46-6.2-15.6-14.65-15.86-75.46-2.37-136.45-22.05-192-46.11l-6.27-2.75c35.15-56.8 56.66-121.81 57.15-186.66l.09-1.08c.4-5.51-4-10.2-9.52-10.2H549.33v-58.3h165.73c9.92 0 14.28-22.12 14.27-39.31a4.85 4.85 0 00-4.78-4.92H549.32v-82.35a4.8 4.8 0 00-4.83-4.78M328 583.85c54.63 0 107.08 22.41 158.1 52.19l5.76 3.4c-103.57 119.84-247.17 95.9-261.72 26.37a66.89 66.89 0 01-1.14-9.83l-.06-2.34.02-.9c.97-40.12 45.33-68.9 99.04-68.9"
+                  />
+                </svg>
+              </span>
+              <span
+                aria-label="taobao-circle"
+                class="anticon anticon-taobao-circle acss-18yqg2u"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="taobao-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zM315.7 291.5c27.3 0 49.5 22.1 49.5 49.4s-22.1 49.4-49.5 49.4a49.4 49.4 0 110-98.8zM366.9 578c-13.6 42.3-10.2 26.7-64.4 144.5l-78.5-49s87.7-79.8 105.6-116.2c19.2-38.4-21.1-58.9-21.1-58.9l-60.2-37.5 32.7-50.2c45.4 33.7 48.7 36.6 79.2 67.2 23.8 23.9 20.7 56.8 6.7 100.1zm427.2 55c-15.3 143.8-202.4 90.3-202.4 90.3l10.2-41.1 43.3 9.3c80 5 72.3-64.9 72.3-64.9V423c.6-77.3-72.6-85.4-204.2-38.3l30.6 8.3c-2.5 9-12.5 23.2-25.2 38.6h176v35.6h-99.1v44.5h98.7v35.7h-98.7V622c14.9-4.8 28.6-11.5 40.5-20.5l-8.7-32.5 46.5-14.4 38.8 94.9-57.3 23.9-10.2-37.8c-25.6 19.5-78.8 48-171.8 45.4-99.2 2.6-73.7-112-73.7-112l2.5-1.3H472c-.5 14.7-6.6 38.7 1.7 51.8 6.8 10.8 24.2 12.6 35.3 13.1 1.3.1 2.6.1 3.9.1v-85.3h-101v-35.7h101v-44.5H487c-22.7 24.1-43.5 44.1-43.5 44.1l-30.6-26.7c21.7-22.9 43.3-59.1 56.8-83.2-10.9 4.4-22 9.2-33.6 14.2-11.2 14.3-24.2 29-38.7 43.5.5.8-50-28.4-50-28.4 52.2-44.4 81.4-139.9 81.4-139.9l72.5 20.4s-5.9 14-18.4 35.6c290.3-82.3 307.4 50.5 307.4 50.5s19.1 91.8 3.8 235.7z"
+                  />
+                </svg>
+              </span>
+              <span
+                aria-label="weibo-circle"
+                class="anticon anticon-weibo-circle acss-18yqg2u"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="weibo-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-44.4 672C353.1 736 236 680.4 236 588.9c0-47.8 30.2-103.1 82.3-155.3 69.5-69.6 150.6-101.4 181.1-70.8 13.5 13.5 14.8 36.8 6.1 64.6-4.5 14 13.1 6.3 13.1 6.3 56.2-23.6 105.2-25 123.1.7 9.6 13.7 8.6 32.8-.2 55.1-4.1 10.2 1.3 11.8 9 14.1 31.7 9.8 66.9 33.6 66.9 75.5.2 69.5-99.7 156.9-249.8 156.9zm207.3-290.8a34.9 34.9 0 00-7.2-34.1 34.68 34.68 0 00-33.1-10.7 18.24 18.24 0 01-7.6-35.7c24.1-5.1 50.1 2.3 67.7 21.9 17.7 19.6 22.4 46.3 14.9 69.8a18.13 18.13 0 01-22.9 11.7 18.18 18.18 0 01-11.8-22.9zm106 34.3s0 .1 0 0a21.1 21.1 0 01-26.6 13.7 21.19 21.19 0 01-13.6-26.7c11-34.2 4-73.2-21.7-101.8a104.04 104.04 0 00-98.9-32.1 21.14 21.14 0 01-25.1-16.3 21.07 21.07 0 0116.2-25.1c49.4-10.5 102.8 4.8 139.1 45.1 36.3 40.2 46.1 95.1 30.6 143.2zm-334.5 6.1c-91.4 9-160.7 65.1-154.7 125.2 5.9 60.1 84.8 101.5 176.2 92.5 91.4-9.1 160.7-65.1 154.7-125.3-5.9-60.1-84.8-101.5-176.2-92.4zm80.2 141.7c-18.7 42.3-72.3 64.8-117.8 50.1-43.9-14.2-62.5-57.7-43.3-96.8 18.9-38.4 68-60.1 111.5-48.8 45 11.7 68 54.2 49.6 95.5zm-93-32.2c-14.2-5.9-32.4.2-41.2 13.9-8.8 13.8-4.7 30.2 9.3 36.6 14.3 6.5 33.2.3 42-13.8 8.8-14.3 4.2-30.6-10.1-36.7zm34.9-14.5c-5.4-2.2-12.2.5-15.4 5.8-3.1 5.4-1.4 11.5 4.1 13.8 5.5 2.3 12.6-.3 15.8-5.8 3-5.6 1-11.8-4.5-13.8z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer
+        class="ant-layout-footer css-var-«r0»"
+        style="padding: 0px; background: none;"
+      >
+        <div
+          class="ant-pro-global-footer"
+        >
+          <div
+            class="ant-pro-global-footer-list"
+          >
+            <a
+              class="ant-pro-global-footer-list-link"
+              href="https://pro.ant.design"
+              rel="noreferrer"
+              target="_blank"
+              title="Ant Design Pro"
+            >
+              Ant Design Pro
+            </a>
+            <a
+              class="ant-pro-global-footer-list-link"
+              href="https://github.com/ant-design/ant-design-pro"
+              rel="noreferrer"
+              target="_blank"
+              title="github"
+            >
+              <span
+                aria-label="github"
+                class="anticon anticon-github"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="github"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                  />
+                </svg>
+              </span>
+            </a>
+            <a
+              class="ant-pro-global-footer-list-link"
+              href="https://ant.design"
+              rel="noreferrer"
+              target="_blank"
+              title="Ant Design"
+            >
+              Ant Design
+            </a>
+          </div>
+          <div
+            class="ant-pro-global-footer-copyright"
+          >
+            <span
+              aria-label="copyright"
+              class="anticon anticon-copyright"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="copyright"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372zm5.6-532.7c53 0 89 33.8 93 83.4.3 4.2 3.8 7.4 8 7.4h56.7c2.6 0 4.7-2.1 4.7-4.7 0-86.7-68.4-147.4-162.7-147.4C407.4 290 344 364.2 344 486.8v52.3C344 660.8 407.4 734 517.3 734c94 0 162.7-58.8 162.7-141.4 0-2.6-2.1-4.7-4.7-4.7h-56.8c-4.2 0-7.6 3.2-8 7.3-4.2 46.1-40.1 77.8-93 77.8-65.3 0-102.1-47.9-102.1-133.6v-52.6c.1-87 37-135.5 102.2-135.5z"
+                />
+              </svg>
+            </span>
+             Powered by Ant Desgin
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</DocumentFragment>
+`;

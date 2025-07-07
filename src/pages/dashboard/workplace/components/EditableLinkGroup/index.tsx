@@ -14,7 +14,7 @@ type EditableLinkGroupProps = {
 };
 const EditableLinkGroup: React.FC<EditableLinkGroupProps> = (props) => {
   const { styles } = useStyles();
-  const { links, linkElement, onAdd } = props;
+  const { links = [], linkElement = 'a', onAdd = () => {} } = props;
   return (
     <div className={styles.linkGroup}>
       {links.map((link) =>
@@ -34,9 +34,5 @@ const EditableLinkGroup: React.FC<EditableLinkGroupProps> = (props) => {
     </div>
   );
 };
-EditableLinkGroup.defaultProps = {
-  links: [],
-  onAdd: () => {},
-  linkElement: 'a',
-};
+
 export default EditableLinkGroup;

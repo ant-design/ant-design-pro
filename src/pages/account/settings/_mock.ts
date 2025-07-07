@@ -15,11 +15,12 @@ function getCity(req: Request, res: Response) {
   });
 }
 
-function getCurrentUse(req: Request, res: Response) {
+function getCurrentUse(_req: Request, res: Response) {
   return res.json({
     data: {
       name: 'Serati Ma',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+      avatar:
+        'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
       userid: '00000001',
       email: 'antdesign@alipay.com',
       signature: '海纳百川，有容乃大',

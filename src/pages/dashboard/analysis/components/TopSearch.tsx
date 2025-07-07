@@ -4,7 +4,6 @@ import { Card, Col, Row, Table, Tooltip } from 'antd';
 import numeral from 'numeral';
 import React from 'react';
 import type { DataItem } from '../data.d';
-import useStyles from '../style.style';
 import NumberInfo from './NumberInfo';
 import Trend from './Trend';
 
@@ -19,7 +18,6 @@ const TopSearch = ({
   dropdownGroup: React.ReactNode;
   searchData: DataItem[];
 }) => {
-  const { styles } = useStyles();
   const columns = [
     {
       title: '排名',
@@ -118,7 +116,10 @@ const TopSearch = ({
             height={45}
             axis={false}
             padding={-12}
-            style={{ fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)', fillOpacity: 0.4 }}
+            style={{
+              fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)',
+              fillOpacity: 0.4,
+            }}
             data={visitData2}
           />
         </Col>
@@ -153,7 +154,10 @@ const TopSearch = ({
             shapeField="smooth"
             height={45}
             padding={-12}
-            style={{ fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)', fillOpacity: 0.4 }}
+            style={{
+              fill: 'linear-gradient(-90deg, white 0%, #6294FA 100%)',
+              fillOpacity: 0.4,
+            }}
             data={visitData2}
             axis={false}
           />

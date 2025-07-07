@@ -15,6 +15,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { fakeSubmitForm } from './service';
 import useStyles from './style.style';
+
 interface TableFormDateType {
   key: string;
   workId?: string;
@@ -80,11 +81,21 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       if (!err || err.errors.length === 0) {
         return null;
       }
-      const key = err.name[0] as 'name' | 'url' | 'owner' | 'approver' | 'dateRange' | 'type';
+      const key = err.name[0] as
+        | 'name'
+        | 'url'
+        | 'owner'
+        | 'approver'
+        | 'dateRange'
+        | 'type';
       return (
-        <li key={key} className={styles.errorListItem} onClick={() => scrollToField(key)}>
+        <li
+          key={key}
+          className={styles.errorListItem}
+          onClick={() => scrollToField(key)}
+        >
           <CloseCircleOutlined className={styles.errorIcon} />
-          <div className={styles.errorMessage}>{err.errors[0]}</div>
+          <div>{err.errors[0]}</div>
           <div className={styles.errorField}>{fieldLabels[key]}</div>
         </li>
       );
@@ -97,7 +108,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
           overlayClassName={styles.errorPopover}
           trigger="click"
           getPopupContainer={(trigger: HTMLElement) => {
-            if (trigger && trigger.parentNode) {
+            if (trigger?.parentNode) {
               return trigger.parentNode as HTMLElement;
             }
             return trigger;
@@ -144,7 +155,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       title: '操作',
       key: 'action',
       valueType: 'option',
-      render: (_, record: TableFormDateType, index, action) => {
+      render: (_, record: TableFormDateType, _index, action) => {
         return [
           <a
             key="eidit"
@@ -163,7 +174,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       layout="vertical"
       hideRequiredMark
       submitter={{
-        render: (props, dom) => {
+        render: (_props, dom) => {
           return (
             <FooterToolbar>
               {getErrorInfo(error)}

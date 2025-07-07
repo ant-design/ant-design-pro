@@ -25,7 +25,8 @@ export default {
   'app.setting.othersettings': 'অন্যান্য সেটিংস্',
   'app.setting.weakmode': 'দুর্বল মোড',
   'app.setting.copy': 'সেটিং কপি করুন',
-  'app.setting.copyinfo': 'সাফল্যের অনুলিপি করুন - প্রতিস্থাপন করুন: src/models/setting.js',
+  'app.setting.copyinfo':
+    'সাফল্যের অনুলিপি করুন - প্রতিস্থাপন করুন: src/models/setting.js',
   'app.setting.production.hint':
     'কেবল বিকাশের পরিবেশে প্যানেল শো সেট করা হচ্ছে, দয়া করে ম্যানুয়ালি সংশোধন করুন',
 };

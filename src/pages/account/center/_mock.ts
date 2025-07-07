@@ -52,7 +52,8 @@ const user = [
 // 当前用户信息
 const currentUseDetail = {
   name: 'Serati Ma',
-  avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
+  avatar:
+    'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
   userid: '00000001',
   email: 'antdesign@alipay.com',
   signature: '海纳百川，有容乃大',
@@ -171,7 +172,10 @@ function fakeList(count: number): ListItemDataType[] {
       owner: user[i % 10],
       title: titles[i % 8],
       avatar: avatars[i % 8],
-      cover: parseInt(`${i / 4}`, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
+      cover:
+        parseInt(`${i / 4}`, 10) % 2 === 0
+          ? covers[i % 4]
+          : covers[3 - (i % 4)],
       status: ['active', 'exception', 'normal'][i % 3] as
         | 'normal'
         | 'exception'
@@ -180,8 +184,8 @@ function fakeList(count: number): ListItemDataType[] {
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % 8],
       href: 'https://ant.design',
-      updatedAt: new Date(new Date().getTime() - 1000 * 60 * 60 * 2 * i).getTime(),
-      createdAt: new Date(new Date().getTime() - 1000 * 60 * 60 * 2 * i).getTime(),
+      updatedAt: new Date(Date.now() - 1000 * 60 * 60 * 2 * i).getTime(),
+      createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2 * i).getTime(),
       subDescription: desc[i % 5],
       description:
         '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
@@ -194,17 +198,20 @@ function fakeList(count: number): ListItemDataType[] {
         '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
       members: [
         {
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
+          avatar:
+            'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
           name: '曲丽丽',
           id: 'member1',
         },
         {
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
+          avatar:
+            'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
           name: '王昭君',
           id: 'member2',
         },
         {
-          avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
+          avatar:
+            'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
           name: '董娜娜',
           id: 'member3',
         },
@@ -229,7 +236,7 @@ function getFakeList(req: Request, res: Response) {
 }
 
 // 获取用户信息
-function getCurrentUser(req: Request, res: Response) {
+function getCurrentUser(_req: Request, res: Response) {
   return res.json({
     data: currentUseDetail,
   });

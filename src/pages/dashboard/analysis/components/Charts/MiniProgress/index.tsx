@@ -1,6 +1,5 @@
 import { Tooltip } from 'antd';
 import React from 'react';
-import useStyles from './index.style';
 export type MiniProgressProps = {
   target: number;
   targetLabel?: string;
@@ -16,12 +15,10 @@ const MiniProgress: React.FC<MiniProgressProps> = ({
   strokeWidth,
   percent,
 }) => {
-  const { styles } = useStyles();
   return (
-    <div className={styles.miniProgress}>
+    <div>
       <Tooltip title={targetLabel}>
         <div
-          className={styles.target}
           style={{
             left: target ? `${target}%` : undefined,
           }}
@@ -38,16 +35,13 @@ const MiniProgress: React.FC<MiniProgressProps> = ({
           />
         </div>
       </Tooltip>
-      <div className={styles.progressWrap}>
-        <div
-          className={styles.progress}
-          style={{
-            backgroundColor: color || undefined,
-            width: percent ? `${percent}%` : undefined,
-            height: strokeWidth || undefined,
-          }}
-        />
-      </div>
+      <div
+        style={{
+          backgroundColor: color || undefined,
+          width: percent ? `${percent}%` : undefined,
+          height: strokeWidth || undefined,
+        }}
+      />
     </div>
   );
 };

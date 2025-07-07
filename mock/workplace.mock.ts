@@ -1,6 +1,6 @@
-import { DataItem } from '@antv/g2plot/esm/interface/config';
 import dayjs from 'dayjs';
 import type { Request, Response } from 'express';
+import type { DataItem, OfflineDataType } from '../src/pages/dashboard/workplace/data.d';
 
 export type SearchDataType = {
   index: number;
