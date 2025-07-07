@@ -40,11 +40,14 @@ export default {
   'app.settings.security.set': 'セットする',
   'app.settings.security.bind': 'バインド',
   'app.settings.binding.taobao': 'タオバオをバインドする',
-  'app.settings.binding.taobao-description': '現在バインドされていないタオバオアカウント',
+  'app.settings.binding.taobao-description':
+    '現在バインドされていないタオバオアカウント',
   'app.settings.binding.alipay': 'アリペイをバインドする',
-  'app.settings.binding.alipay-description': '現在バインドされていないアリペイアカウント',
+  'app.settings.binding.alipay-description':
+    '現在バインドされていないアリペイアカウント',
   'app.settings.binding.dingding': 'ディントークをバインドする',
-  'app.settings.binding.dingding-description': '現在バインドされていないディントークアカウント',
+  'app.settings.binding.dingding-description':
+    '現在バインドされていないディントークアカウント',
   'app.settings.binding.bind': 'バインド',
   'app.settings.notification.password': 'アカウントパスワード',
   'app.settings.notification.password-description':
@@ -53,7 +56,8 @@ export default {
   'app.settings.notification.messages-description':
     'システムメッセージは、ステーションレターの形式で通知されます',
   'app.settings.notification.todo': 'To Do（用事) 通知',
-  'app.settings.notification.todo-description': 'To Doタスクは、内部レターの形式で通知されます',
+  'app.settings.notification.todo-description':
+    'To Doタスクは、内部レターの形式で通知されます',
   'app.settings.open': '開く',
   'app.settings.close': '閉じる',
 };

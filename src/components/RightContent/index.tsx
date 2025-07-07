@@ -3,22 +3,30 @@ import { SelectLang as UmiSelectLang } from '@umijs/max';
 
 export type SiderTheme = 'light' | 'dark';
 
-export const SelectLang = () => {
-  return <UmiSelectLang />;
+export const SelectLang: React.FC = () => {
+  return (
+    <UmiSelectLang
+      style={{
+        padding: 4,
+      }}
+    />
+  );
 };
 
-export const Question = () => {
+export const Question: React.FC = () => {
   return (
-    <div
+    <a
+      href="https://pro.ant.design/docs/getting-started"
+      target="_blank"
+      rel="noreferrer"
       style={{
-        display: 'flex',
-        height: 26,
-      }}
-      onClick={() => {
-        window.open('https://pro.ant.design/docs/getting-started');
+        display: 'inline-flex',
+        padding: '4px',
+        fontSize: '18px',
+        color: 'inherit',
       }}
     >
       <QuestionCircleOutlined />
-    </div>
+    </a>
   );
 };

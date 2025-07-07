@@ -13,7 +13,7 @@ import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
 
 const TableList: React.FC = () => {
-  const actionRef = useRef<ActionType>();
+  const actionRef = useRef<ActionType | null>(null);
 
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
@@ -49,7 +49,6 @@ const TableList: React.FC = () => {
         />
       ),
       dataIndex: 'name',
-      tip: 'The rule name is the unique key',
       render: (dom, entity) => {
         return (
           <a
@@ -64,7 +63,12 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleDesc" defaultMessage="Description" />,
+      title: (
+        <FormattedMessage
+          id="pages.searchTable.titleDesc"
+          defaultMessage="Description"
+        />
+      ),
       dataIndex: 'desc',
       valueType: 'textarea',
     },
@@ -85,7 +89,12 @@ const TableList: React.FC = () => {
         })}`,
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="Status" />,
+      title: (
+        <FormattedMessage
+          id="pages.searchTable.titleStatus"
+          defaultMessage="Status"
+        />
+      ),
       dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
@@ -100,13 +109,19 @@ const TableList: React.FC = () => {
         },
         1: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="Running" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.running"
+              defaultMessage="Running"
+            />
           ),
           status: 'Processing',
         },
         2: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="Online" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.online"
+              defaultMessage="Online"
+            />
           ),
           status: 'Success',
         },
@@ -151,7 +166,12 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
+      title: (
+        <FormattedMessage
+          id="pages.searchTable.titleOption"
+          defaultMessage="Operating"
+        />
+      ),
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
@@ -224,17 +244,29 @@ const TableList: React.FC = () => {
         <FooterToolbar
           extra={
             <div>
-              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="Chosen" />{' '}
+              <FormattedMessage
+                id="pages.searchTable.chosen"
+                defaultMessage="Chosen"
+              />{' '}
               <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
-              <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
+              <FormattedMessage
+                id="pages.searchTable.item"
+                defaultMessage="项"
+              />
               &nbsp;&nbsp;
               <span>
                 <FormattedMessage
                   id="pages.searchTable.totalServiceCalls"
                   defaultMessage="Total number of service calls"
                 />{' '}
-                {selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)}{' '}
-                <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万" />
+                {selectedRowsState.reduce(
+                  (pre, item) => pre + (item.callNo ?? 0),
+                  0,
+                )}{' '}
+                <FormattedMessage
+                  id="pages.searchTable.tenThousand"
+                  defaultMessage="万"
+                />
               </span>
             </div>
           }

@@ -1,12 +1,20 @@
 // https://umijs.org/config/
+
+import { join } from 'node:path';
 import { defineConfig } from '@umijs/max';
-import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 
 import routes from './routes';
 
 const { REACT_APP_ENV = 'dev' } = process.env;
+
+/**
+ * @name 使用公共路径
+ * @description 部署时的路径，如果部署在非根目录下，需要配置这个变量
+ * @doc https://umijs.org/docs/api/config#publicpath
+ */
+const PUBLIC_PATH: string = '/';
 
 export default defineConfig({
   /**
@@ -15,6 +23,8 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
+
+  publicPath: PUBLIC_PATH,
 
   /**
    * @name 兼容性设置
@@ -107,7 +117,17 @@ export default defineConfig({
    * @description 内置了 babel import 插件
    * @doc https://umijs.org/docs/max/antd#antd
    */
-  antd: {},
+  antd: {
+    appConfig: {},
+    configProvider: {
+      theme: {
+        cssVar: true,
+        token: {
+          fontFamily: 'AlibabaSans, sans-serif',
+        },
+      },
+    },
+  },
   /**
    * @name 网络请求配置
    * @description 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
@@ -126,7 +146,7 @@ export default defineConfig({
    */
   headScripts: [
     // 解决首次加载时白屏的问题
-    { src: '/scripts/loading.js', async: true },
+    { src: join(PUBLIC_PATH, 'scripts/loading.js'), async: true },
   ],
   //================ pro 插件配置 =================
   presets: ['umi-presets-pro'],
@@ -145,16 +165,20 @@ export default defineConfig({
     },
     {
       requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
+      schemaPath:
+        'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
       projectName: 'swagger',
     },
   ],
   mock: {
     include: ['mock/**/*', 'src/pages/**/_mock.ts'],
   },
-  mfsu: {
-    strategy: 'normal',
-  },
+  /**
+   * @name 是否开启 mako
+   * @description 使用 mako 极速研发
+   * @doc https://umijs.org/docs/api/config#mako
+   */
+  mako: {},
   esbuildMinifyIIFE: true,
   requestRecord: {},
 });

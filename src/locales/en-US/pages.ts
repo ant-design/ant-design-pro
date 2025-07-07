@@ -2,7 +2,8 @@ export default {
   'pages.layouts.userLayout.title':
     'Ant Design is the most influential web design specification in Xihu district',
   'pages.login.accountLogin.tab': 'Account Login',
-  'pages.login.accountLogin.errorMessage': 'Incorrect username/password(admin/ant.design)',
+  'pages.login.accountLogin.errorMessage':
+    'Incorrect username/password(admin/ant.design)',
   'pages.login.failure': 'Login failed, please try again!',
   'pages.login.success': 'Login successful!',
   'pages.login.username.placeholder': 'Username: admin or user',
@@ -24,7 +25,8 @@ export default {
   'pages.login.loginWith': 'Login with :',
   'pages.login.registerAccount': 'Register Account',
   'pages.welcome.link': 'Welcome',
-  'pages.welcome.alertMessage': 'Faster and stronger heavy-duty components have been released.',
+  'pages.welcome.alertMessage':
+    'Faster and stronger heavy-duty components have been released.',
   'pages.404.subTitle': 'Sorry, the page you visited does not exist.',
   'pages.404.buttonText': 'Back Home',
   'pages.admin.subPage.title': 'This page can only be viewed by Admin',
@@ -34,18 +36,22 @@ export default {
   'pages.searchTable.updateForm.ruleConfig': 'Rule configuration',
   'pages.searchTable.updateForm.basicConfig': 'Basic Information',
   'pages.searchTable.updateForm.ruleName.nameLabel': 'Rule Name',
-  'pages.searchTable.updateForm.ruleName.nameRules': 'Please enter the rule name!',
+  'pages.searchTable.updateForm.ruleName.nameRules':
+    'Please enter the rule name!',
   'pages.searchTable.updateForm.ruleDesc.descLabel': 'Rule Description',
-  'pages.searchTable.updateForm.ruleDesc.descPlaceholder': 'Please enter at least five characters',
+  'pages.searchTable.updateForm.ruleDesc.descPlaceholder':
+    'Please enter at least five characters',
   'pages.searchTable.updateForm.ruleDesc.descRules':
     'Please enter a rule description of at least five characters!',
   'pages.searchTable.updateForm.ruleProps.title': 'Configure Properties',
   'pages.searchTable.updateForm.object': 'Monitoring Object',
   'pages.searchTable.updateForm.ruleProps.templateLabel': 'Rule Template',
   'pages.searchTable.updateForm.ruleProps.typeLabel': 'Rule Type',
-  'pages.searchTable.updateForm.schedulingPeriod.title': 'Set Scheduling Period',
+  'pages.searchTable.updateForm.schedulingPeriod.title':
+    'Set Scheduling Period',
   'pages.searchTable.updateForm.schedulingPeriod.timeLabel': 'Starting Time',
-  'pages.searchTable.updateForm.schedulingPeriod.timeRules': 'Please choose a start time!',
+  'pages.searchTable.updateForm.schedulingPeriod.timeRules':
+    'Please choose a start time!',
   'pages.searchTable.titleDesc': 'Description',
   'pages.searchTable.ruleName': 'Rule name is required',
   'pages.searchTable.titleCallNo': 'Number of Service Calls',
