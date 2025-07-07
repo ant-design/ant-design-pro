@@ -1,7 +1,7 @@
 // @ts-ignore
 /* eslint-disable */
 import { request } from '@umijs/max';
-import { TableListItem } from './data';
+import type { TableListItem } from './data';
 
 /** 获取规则列表 GET /api/rule */
 export async function rule(

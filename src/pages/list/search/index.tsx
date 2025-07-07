@@ -24,7 +24,7 @@ const tabList = [
 
 const Search: FC<SearchProps> = () => {
   const location = useLocation();
-  let match = useMatch(location.pathname);
+  const match = useMatch(location.pathname);
   const handleTabChange = (key: string) => {
     const url =
       match?.pathname === '/' ? '' : match?.pathname.substring(0, match.pathname.lastIndexOf('/'));

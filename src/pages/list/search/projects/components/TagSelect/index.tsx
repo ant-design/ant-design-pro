@@ -2,7 +2,7 @@ import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { Tag } from 'antd';
 import classNames from 'classnames';
 import { useMergedState } from 'rc-util';
-import React, { FC, useState } from 'react';
+import React, { type FC, useState } from 'react';
 import useStyles from './index.style';
 const { CheckableTag } = Tag;
 export interface TagSelectOptionProps {

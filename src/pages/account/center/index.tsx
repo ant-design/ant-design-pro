@@ -1,7 +1,7 @@
 import { ClusterOutlined, ContactsOutlined, HomeOutlined, PlusOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
-import { Avatar, Card, Col, Divider, Input, InputRef, Row, Tag } from 'antd';
+import { Avatar, Card, Col, Divider, Input, type InputRef, Row, Tag } from 'antd';
 import React, { useRef, useState } from 'react';
 import useStyles from './Center.style';
 import Applications from './components/Applications';

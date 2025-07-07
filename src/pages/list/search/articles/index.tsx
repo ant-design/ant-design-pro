@@ -1,7 +1,7 @@
 import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { useRequest } from '@umijs/max';
 import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
-import { DefaultOptionType } from 'antd/es/select';
+import type { DefaultOptionType } from 'antd/es/select';
 import type { FC } from 'react';
 import React, { useMemo } from 'react';
 import { categoryOptions } from '../../mock';
