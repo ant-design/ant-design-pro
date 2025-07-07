@@ -53,7 +53,8 @@ export default {
   'app.settings.notification.messages-description':
     'সিস্টেম বার্তাগুলি স্টেশন চিঠির আকারে জানানো হবে',
   'app.settings.notification.todo': 'করণীয় বিজ্ঞপ্তি',
-  'app.settings.notification.todo-description': 'করণীয় তালিকাটি স্টেশন থেকে চিঠি আকারে জানানো হবে',
+  'app.settings.notification.todo-description':
+    'করণীয় তালিকাটি স্টেশন থেকে চিঠি আকারে জানানো হবে',
   'app.settings.open': 'খোলা',
   'app.settings.close': 'বন্ধ',
 };

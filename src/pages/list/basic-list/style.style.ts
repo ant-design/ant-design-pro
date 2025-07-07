@@ -67,15 +67,16 @@ const useStyles = createStyles(({ token }) => {
           width: '100%',
         },
       },
-      [`@media screen and (max-width: ${token.screenLG}px) and (min-width: @screen-md)`]: {
-        '& > div': {
-          display: 'block',
+      [`@media screen and (max-width: ${token.screenLG}px) and (min-width: @screen-md)`]:
+        {
+          '& > div': {
+            display: 'block',
+          },
+          '& > div:last-child': {
+            top: '0',
+            width: '100%',
+          },
         },
-        '& > div:last-child': {
-          top: '0',
-          width: '100%',
-        },
-      },
       [`@media screen and (max-width: ${token.screenXL}px)`]: {
         '& > div': {
           marginLeft: '24px',

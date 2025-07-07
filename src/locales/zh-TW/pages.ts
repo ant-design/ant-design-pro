@@ -1,7 +1,9 @@
 export default {
-  'pages.layouts.userLayout.title': 'Ant Design 是西湖區最具影響力的 Web 設計規範',
+  'pages.layouts.userLayout.title':
+    'Ant Design 是西湖區最具影響力的 Web 設計規範',
   'pages.login.accountLogin.tab': '賬戶密碼登錄',
-  'pages.login.accountLogin.errorMessage': '錯誤的用戶名和密碼(admin/ant.design)',
+  'pages.login.accountLogin.errorMessage':
+    '錯誤的用戶名和密碼(admin/ant.design)',
   'pages.login.failure': '登錄失敗，請重試！',
   'pages.login.success': '登錄成功！',
   'pages.login.username.placeholder': '用戶名: admin or user',
@@ -27,7 +29,8 @@ export default {
   'pages.404.subTitle': '抱歉，您訪問的頁面不存在。',
   'pages.404.buttonText': '返回首頁',
   'pages.admin.subPage.title': '這個頁面只有 admin 權限才能查看',
-  'pages.admin.subPage.alertMessage': 'umi ui 現已發佈，歡迎使用 npm run ui 啓動體驗。',
+  'pages.admin.subPage.alertMessage':
+    'umi ui 現已發佈，歡迎使用 npm run ui 啓動體驗。',
   'pages.searchTable.createForm.newRule': '新建規則',
   'pages.searchTable.updateForm.ruleConfig': '規則配置',
   'pages.searchTable.updateForm.basicConfig': '基本信息',
@@ -35,7 +38,8 @@ export default {
   'pages.searchTable.updateForm.ruleName.nameRules': '請輸入規則名稱！',
   'pages.searchTable.updateForm.ruleDesc.descLabel': '規則描述',
   'pages.searchTable.updateForm.ruleDesc.descPlaceholder': '請輸入至少五個字符',
-  'pages.searchTable.updateForm.ruleDesc.descRules': '請輸入至少五個字符的規則描述！',
+  'pages.searchTable.updateForm.ruleDesc.descRules':
+    '請輸入至少五個字符的規則描述！',
   'pages.searchTable.updateForm.ruleProps.title': '配置規則屬性',
   'pages.searchTable.updateForm.object': '監控對象',
   'pages.searchTable.updateForm.ruleProps.templateLabel': '規則模板',

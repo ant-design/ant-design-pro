@@ -1,7 +1,12 @@
-import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import {
+  LikeOutlined,
+  LoadingOutlined,
+  MessageOutlined,
+  StarOutlined,
+} from '@ant-design/icons';
 import { useRequest } from '@umijs/max';
 import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
-import { DefaultOptionType } from 'antd/es/select';
+import type { DefaultOptionType } from 'antd/es/select';
 import type { FC } from 'react';
 import React, { useMemo } from 'react';
 import { categoryOptions } from '../../mock';
@@ -122,7 +127,7 @@ const Articles: FC = () => {
         label: item.name,
         value: item.id,
       })),
-    [owners],
+    [],
   );
 
   return (
@@ -139,11 +144,21 @@ const Articles: FC = () => {
           <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
             <FormItem name="category">
               <TagSelect expandable>
-                {categoryOptions.map((category) => (
-                  <TagSelect.Option value={category.value!} key={category.value}>
-                    {category.label}
-                  </TagSelect.Option>
-                ))}
+                {categoryOptions
+                  .filter(
+                    (
+                      category,
+                    ): category is { value: string | number; label: string } =>
+                      category.value !== undefined && category.value !== null,
+                  )
+                  .map((category) => (
+                    <TagSelect.Option
+                      value={category.value}
+                      key={category.value}
+                    >
+                      {category.label}
+                    </TagSelect.Option>
+                  ))}
               </TagSelect>
             </FormItem>
           </StandardFormRow>

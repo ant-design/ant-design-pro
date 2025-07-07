@@ -29,11 +29,13 @@ export default {
   'app.settings.security.phone': '密保手機',
   'app.settings.security.phone-description': '已綁定手機',
   'app.settings.security.question': '密保問題',
-  'app.settings.security.question-description': '未設置密保問題，密保問題可有效保護賬戶安全',
+  'app.settings.security.question-description':
+    '未設置密保問題，密保問題可有效保護賬戶安全',
   'app.settings.security.email': '備用郵箱',
   'app.settings.security.email-description': '已綁定郵箱',
   'app.settings.security.mfa': 'MFA 設備',
-  'app.settings.security.mfa-description': '未綁定 MFA 設備，綁定後，可以進行二次確認',
+  'app.settings.security.mfa-description':
+    '未綁定 MFA 設備，綁定後，可以進行二次確認',
   'app.settings.security.modify': '修改',
   'app.settings.security.set': '設置',
   'app.settings.security.bind': '綁定',
@@ -45,9 +47,11 @@ export default {
   'app.settings.binding.dingding-description': '當前未綁定釘釘賬號',
   'app.settings.binding.bind': '綁定',
   'app.settings.notification.password': '賬戶密碼',
-  'app.settings.notification.password-description': '其他用戶的消息將以站內信的形式通知',
+  'app.settings.notification.password-description':
+    '其他用戶的消息將以站內信的形式通知',
   'app.settings.notification.messages': '系統消息',
-  'app.settings.notification.messages-description': '系統消息將以站內信的形式通知',
+  'app.settings.notification.messages-description':
+    '系統消息將以站內信的形式通知',
   'app.settings.notification.todo': '待辦任務',
   'app.settings.notification.todo-description': '待辦任務將以站內信的形式通知',
   'app.settings.open': '開',

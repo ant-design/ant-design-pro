@@ -1,6 +1,8 @@
 import React from 'react';
 
-export type IReactComponent<P = any> = React.ComponentClass<P> | React.ClassicComponentClass<P>;
+export type IReactComponent<P = any> =
+  | React.ComponentClass<P>
+  | React.ClassicComponentClass<P>;
 
 function computeHeight(node: HTMLDivElement) {
   const { style } = node;

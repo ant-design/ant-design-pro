@@ -15,7 +15,12 @@ const useStyles = createStyles(() => {
       marginTop: '8px',
       fontSize: '0',
       lineHeight: '20px',
-      span: { display: 'inline-block', width: '33.33%', fontSize: '12px', textAlign: 'center' },
+      span: {
+        display: 'inline-block',
+        width: '33.33%',
+        fontSize: '12px',
+        textAlign: 'center',
+      },
       'span:first-child': { textAlign: 'left' },
       'span:last-child': { textAlign: 'right' },
     },
@@ -31,7 +36,8 @@ const useStyles = createStyles(() => {
       left: '0',
       width: '100%',
       height: '100%',
-      backgroundImage: 'linear-gradient(to right, transparent 50%, #e9e9e9 50%)',
+      backgroundImage:
+        'linear-gradient(to right, transparent 50%, #e9e9e9 50%)',
       backgroundSize: '6px',
     },
     'dashedLine:last-child': {

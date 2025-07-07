@@ -7,10 +7,19 @@ import {
   StepsForm,
 } from '@ant-design/pro-components';
 import type { FormInstance } from 'antd';
-import { Alert, Button, Card, Descriptions, Divider, Result, Statistic } from 'antd';
+import {
+  Alert,
+  Button,
+  Card,
+  Descriptions,
+  Divider,
+  Result,
+  Statistic,
+} from 'antd';
 import React, { useRef, useState } from 'react';
 import type { StepDataType } from './data.d';
 import useStyles from './style.style';
+
 const StepDescriptions: React.FC<{
   stepData: StepDataType;
   bordered?: boolean;
@@ -73,7 +82,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
     receiverMode: 'alipay',
   });
   const [current, setCurrent] = useState(0);
-  const formRef = useRef<FormInstance>();
+  const formRef = useRef<FormInstance>(null);
   return (
     <PageContainer content="将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。">
       <Card bordered={false}>

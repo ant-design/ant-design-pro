@@ -1,6 +1,6 @@
+import { parse } from 'node:url';
 import dayjs from 'dayjs';
-import { Request, Response } from 'express';
-import { parse } from 'url';
+import type { Request, Response } from 'express';
 
 // mock tableListDataSource
 const genList = (current: number, pageSize: number) => {
@@ -34,7 +34,10 @@ let tableListDataSource = genList(1, 100);
 
 function getRule(req: Request, res: Response, u: string) {
   let realUrl = u;
-  if (!realUrl || Object.prototype.toString.call(realUrl) !== '[object String]') {
+  if (
+    !realUrl ||
+    Object.prototype.toString.call(realUrl) !== '[object String]'
+  ) {
     realUrl = req.url;
   }
   const { current = 1, pageSize = 10 } = req.query;
@@ -53,8 +56,8 @@ function getRule(req: Request, res: Response, u: string) {
     dataSource = dataSource.sort((prev, next) => {
       let sortNumber = 0;
       (Object.keys(sorter) as Array<keyof API.RuleListItem>).forEach((key) => {
-        let nextSort = next?.[key] as number;
-        let preSort = prev?.[key] as number;
+        const nextSort = next?.[key] as number;
+        const preSort = prev?.[key] as number;
         if (sorter[key] === 'descend') {
           if (preSort - nextSort > 0) {
             sortNumber += -1;
@@ -78,21 +81,25 @@ function getRule(req: Request, res: Response, u: string) {
     };
     if (Object.keys(filter).length > 0) {
       dataSource = dataSource.filter((item) => {
-        return (Object.keys(filter) as Array<keyof API.RuleListItem>).some((key) => {
-          if (!filter[key]) {
-            return true;
-          }
-          if (filter[key].includes(`${item[key]}`)) {
-            return true;
-          }
-          return false;
-        });
+        return (Object.keys(filter) as Array<keyof API.RuleListItem>).some(
+          (key) => {
+            if (!filter[key]) {
+              return true;
+            }
+            if (filter[key].includes(`${item[key]}`)) {
+              return true;
+            }
+            return false;
+          },
+        );
       });
     }
   }
 
   if (params.name) {
-    dataSource = dataSource.filter((data) => data?.name?.includes(params.name || ''));
+    dataSource = dataSource.filter((data) =>
+      data?.name?.includes(params.name || ''),
+    );
   }
   const result = {
     data: dataSource,
@@ -107,17 +114,21 @@ function getRule(req: Request, res: Response, u: string) {
 
 function postRule(req: Request, res: Response, u: string, b: Request) {
   let realUrl = u;
-  if (!realUrl || Object.prototype.toString.call(realUrl) !== '[object String]') {
+  if (
+    !realUrl ||
+    Object.prototype.toString.call(realUrl) !== '[object String]'
+  ) {
     realUrl = req.url;
   }
 
-  const body = (b && b.body) || req.body;
+  const body = b?.body || req.body;
   const { method, name, desc, key } = body;
 
   switch (method) {
-    /* eslint no-case-declarations:0 */
     case 'delete':
-      tableListDataSource = tableListDataSource.filter((item) => key.indexOf(item.key) === -1);
+      tableListDataSource = tableListDataSource.filter(
+        (item) => key.indexOf(item.key) === -1,
+      );
       break;
     case 'post':
       (() => {
