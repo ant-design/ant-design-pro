@@ -4,7 +4,7 @@ import { useRequest } from '@umijs/max';
 import { Col, Dropdown, Row } from 'antd';
 import type { RangePickerProps } from 'antd/es/date-picker';
 import type { RadioChangeEvent } from 'antd/es/radio';
-import type dayjs from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import type { FC } from 'react';
 import { Suspense, useState } from 'react';
 import IntroduceRow from './components/IntroduceRow';
@@ -51,8 +51,8 @@ const Analysis: FC<AnalysisProps> = () => {
       return '';
     }
     if (
-      rangePickerValue[0].isSame(value[0] as dayjs.Dayjs, 'day') &&
-      rangePickerValue[1].isSame(value[1] as dayjs.Dayjs, 'day')
+      rangePickerValue[0].isSame(value[0] as Dayjs, 'day') &&
+      rangePickerValue[1].isSame(value[1] as Dayjs, 'day')
     ) {
       return styles.currentDate;
     }
