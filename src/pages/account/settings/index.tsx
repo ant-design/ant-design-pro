@@ -6,6 +6,7 @@ import BindingView from './components/binding';
 import NotificationView from './components/notification';
 import SecurityView from './components/security';
 import useStyles from './style.style';
+
 type SettingsStateKeys = 'base' | 'security' | 'binding' | 'notification';
 type SettingsState = {
   mode: 'inline' | 'horizontal';
@@ -23,7 +24,7 @@ const Settings: React.FC = () => {
     mode: 'inline',
     selectKey: 'base',
   });
-  const dom = useRef<HTMLDivElement>();
+  const dom = useRef<HTMLDivElement>(null);
   const resize = () => {
     requestAnimationFrame(() => {
       if (!dom.current) {
@@ -51,9 +52,12 @@ const Settings: React.FC = () => {
     return () => {
       window.removeEventListener('resize', resize);
     };
-  }, [dom.current]);
+  }, []);
   const getMenu = () => {
-    return Object.keys(menuMap).map((item) => ({ key: item, label: menuMap[item] }));
+    return Object.keys(menuMap).map((item) => ({
+      key: item,
+      label: menuMap[item],
+    }));
   };
   const renderChildren = () => {
     const { selectKey } = initConfig;

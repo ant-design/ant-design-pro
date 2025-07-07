@@ -4,6 +4,7 @@ import type { CardProps } from 'antd/es/card';
 import classNames from 'classnames';
 import React from 'react';
 import useStyles from './index.style';
+
 type totalType = () => React.ReactNode;
 
 export type ChartCardProps = {
@@ -22,7 +23,7 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     if (!total && total !== 0) {
       return null;
     }
-    let totalDom;
+    let totalDom: React.ReactNode | null = null;
     switch (typeof total) {
       case 'undefined':
         totalDom = null;
@@ -36,7 +37,16 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     return totalDom;
   };
   const renderContent = () => {
-    const { contentHeight, title, avatar, action, total, footer, children, loading } = props;
+    const {
+      contentHeight,
+      title,
+      avatar,
+      action,
+      total,
+      footer,
+      children,
+      loading,
+    } = props;
     if (loading) {
       return false;
     }
@@ -63,7 +73,9 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
               height: contentHeight || 'auto',
             }}
           >
-            <div className={contentHeight && styles.contentFixed}>{children}</div>
+            <div className={contentHeight ? styles.contentFixed : undefined}>
+              {children}
+            </div>
           </div>
         )}
         {footer && (
@@ -79,22 +91,14 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     );
   };
 
-  const {
-    loading = false,
-    contentHeight,
-    title,
-    avatar,
-    action,
-    total,
-    footer,
-    children,
-    ...rest
-  } = props;
+  const { loading = false, ...rest } = props;
   return (
     <Card
       loading={loading}
-      bodyStyle={{
-        padding: '20px 24px 8px 24px',
+      styles={{
+        body: {
+          padding: '20px 24px 8px 24px',
+        },
       }}
       {...rest}
     >

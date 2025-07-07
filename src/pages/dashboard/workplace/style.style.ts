@@ -3,7 +3,7 @@ import { createStyles } from 'antd-style';
 const useStyles = createStyles(({ token }) => {
   return {
     activitiesList: {
-      padding: '0 24px 8px 24px',
+      padding: 0,
     },
     username: {
       color: token.colorText,
@@ -55,9 +55,10 @@ const useStyles = createStyles(({ token }) => {
       },
       float: 'right',
       whiteSpace: 'nowrap',
-      [`@media screen and (max-width: ${token.screenXL}px) and (min-width: @screen-lg)`]: {
-        marginLeft: '-44px',
-      },
+      [`@media screen and (max-width: ${token.screenXL}px) and (min-width: @screen-lg)`]:
+        {
+          marginLeft: '-44px',
+        },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
         float: 'none',
         marginRight: '0',
@@ -101,9 +102,10 @@ const useStyles = createStyles(({ token }) => {
           display: 'none',
         },
       },
-      [`@media screen and (max-width: ${token.screenXL}px) and (min-width: @screen-lg)`]: {
-        padding: '0 16px',
-      },
+      [`@media screen and (max-width: ${token.screenXL}px) and (min-width: @screen-lg)`]:
+        {
+          padding: '0 16px',
+        },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
         padding: '0 16px',
         textAlign: 'left',
@@ -128,9 +130,10 @@ const useStyles = createStyles(({ token }) => {
           color: token.colorPrimary,
         },
       },
-      [`@media screen and (max-width: ${token.screenXL}px) and (min-width: @screen-lg)`]: {
-        marginBottom: '0',
-      },
+      [`@media screen and (max-width: ${token.screenXL}px) and (min-width: @screen-lg)`]:
+        {
+          marginBottom: '0',
+        },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
         marginBottom: '0',
       },
@@ -195,13 +198,13 @@ const useStyles = createStyles(({ token }) => {
     },
     datetime: {
       flex: '0 0 auto',
-      float: 'right',
       color: token.colorTextDisabled,
     },
     activeCard: {
-      [`@media screen and (max-width: ${token.screenXL}px) and (min-width: @screen-lg)`]: {
-        marginBottom: '24px',
-      },
+      [`@media screen and (max-width: ${token.screenXL}px) and (min-width: @screen-lg)`]:
+        {
+          marginBottom: '24px',
+        },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
         marginBottom: '24px',
       },

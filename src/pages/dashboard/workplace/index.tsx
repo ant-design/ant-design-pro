@@ -9,6 +9,7 @@ import EditableLinkGroup from './components/EditableLinkGroup';
 import type { ActivitiesType, CurrentUser } from './data.d';
 import { fakeChartData, queryActivities, queryProjectNotice } from './service';
 import useStyles from './style.style';
+
 dayjs.extend(relativeTime);
 
 const links = [
@@ -89,8 +90,10 @@ const ExtraContent: FC<Record<string, any>> = () => {
 };
 const Workplace: FC = () => {
   const { styles } = useStyles();
-  const { loading: projectLoading, data: projectNotice = [] } = useRequest(queryProjectNotice);
-  const { loading: activitiesLoading, data: activities = [] } = useRequest(queryActivities);
+  const { loading: projectLoading, data: projectNotice = [] } =
+    useRequest(queryProjectNotice);
+  const { loading: activitiesLoading, data: activities = [] } =
+    useRequest(queryActivities);
   const { data } = useRequest(fakeChartData);
   const renderActivities = (item: ActivitiesType) => {
     const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
@@ -130,7 +133,8 @@ const Workplace: FC = () => {
       content={
         <PageHeaderContent
           currentUser={{
-            avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+            avatar:
+              'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
             name: '吴彦祖',
             userid: '00000001',
             email: 'antdesign@alipay.com',
@@ -150,47 +154,42 @@ const Workplace: FC = () => {
               marginBottom: 24,
             }}
             title="进行中的项目"
-            bordered={false}
+            variant="borderless"
             extra={<Link to="/">全部项目</Link>}
             loading={projectLoading}
-            bodyStyle={{
-              padding: 0,
-            }}
           >
             {projectNotice.map((item) => (
               <Card.Grid className={styles.projectGrid} key={item.id}>
-                <Card
-                  bodyStyle={{
-                    padding: 0,
+                <Card.Meta
+                  title={
+                    <div className={styles.cardTitle}>
+                      <Avatar size="small" src={item.logo} />
+                      <Link to={item.href || '/'}>{item.title}</Link>
+                    </div>
+                  }
+                  description={item.description}
+                  style={{
+                    width: '100%',
                   }}
-                  bordered={false}
-                >
-                  <Card.Meta
-                    title={
-                      <div className={styles.cardTitle}>
-                        <Avatar size="small" src={item.logo} />
-                        <Link to={item.href || '/'}>{item.title}</Link>
-                      </div>
-                    }
-                    description={item.description}
-                  />
-                  <div className={styles.projectItemContent}>
-                    <Link to={item.memberLink || '/'}>{item.member || ''}</Link>
-                    {item.updatedAt && (
-                      <span className={styles.datetime} title={item.updatedAt}>
-                        {dayjs(item.updatedAt).fromNow()}
-                      </span>
-                    )}
-                  </div>
-                </Card>
+                />
+                <div className={styles.projectItemContent}>
+                  <Link to={item.memberLink || '/'}>{item.member || ''}</Link>
+                  {item.updatedAt && (
+                    <span className={styles.datetime} title={item.updatedAt}>
+                      {dayjs(item.updatedAt).fromNow()}
+                    </span>
+                  )}
+                </div>
               </Card.Grid>
             ))}
           </Card>
           <Card
-            bodyStyle={{
-              padding: 0,
+            styles={{
+              body: {
+                padding: activitiesLoading ? 16 : 0,
+              },
             }}
-            bordered={false}
+            variant="borderless"
             className={styles.activeCard}
             title="动态"
             loading={activitiesLoading}
@@ -210,54 +209,55 @@ const Workplace: FC = () => {
               marginBottom: 24,
             }}
             title="快速开始 / 便捷导航"
-            bordered={false}
-            bodyStyle={{
-              padding: 0,
-            }}
+            variant="borderless"
           >
-            <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
+            <EditableLinkGroup
+              onAdd={() => {}}
+              links={links}
+              linkElement={Link}
+            />
           </Card>
           <Card
             style={{
               marginBottom: 24,
             }}
-            bordered={false}
+            variant="borderless"
             title="XX 指数"
             loading={data?.radarData?.length === 0}
           >
-            <div>
-              <Radar
-                height={343}
-                data={data?.radarData || []}
-                xField="label"
-                colorField="name"
-                yField="value"
-                shapeField="smooth"
-                area={{
-                  style: {
-                    fillOpacity: 0.4,
-                  },
-                }}
-                axis={{
-                  y: {
-                    gridStrokeOpacity: 0.5,
-                  },
-                }}
-                legend={{
-                  color: {
-                    position: 'bottom',
-                    layout: { justifyContent: 'center' },
-                  },
-                }}
-              />
-            </div>
+            <Radar
+              height={343}
+              data={data?.radarData || []}
+              xField="label"
+              colorField="name"
+              yField="value"
+              shapeField="smooth"
+              area={{
+                style: {
+                  fillOpacity: 0.4,
+                },
+              }}
+              axis={{
+                y: {
+                  gridStrokeOpacity: 0.5,
+                },
+              }}
+              legend={{
+                color: {
+                  position: 'bottom',
+                  layout: { justifyContent: 'center' },
+                },
+              }}
+            />
           </Card>
           <Card
-            bodyStyle={{
-              paddingTop: 12,
-              paddingBottom: 12,
+            styles={{
+              body: {
+                paddingTop: 12,
+                paddingBottom: 12,
+              },
             }}
-            bordered={false}
+            variant="borderless"
             title="团队"
             loading={projectLoading}
           >
@@ -268,7 +268,9 @@ const Workplace: FC = () => {
                     <Col span={12} key={`members-item-${item.id}`}>
                       <a>
                         <Avatar src={item.logo} size="small" />
-                        <span className={styles.member}>{item.member.substring(0, 3)}</span>
+                        <span className={styles.member}>
+                          {item.member.substring(0, 3)}
+                        </span>
                       </a>
                     </Col>
                   );

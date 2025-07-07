@@ -30,7 +30,11 @@ const Trend: React.FC<TrendProps> = ({
     className,
   );
   return (
-    <div {...rest} className={classString} title={typeof children === 'string' ? children : ''}>
+    <div
+      {...rest}
+      className={classString}
+      title={typeof children === 'string' ? children : ''}
+    >
       <span>{children}</span>
       {flag && (
         <span className={styles[flag]}>

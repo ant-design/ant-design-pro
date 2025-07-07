@@ -24,10 +24,12 @@ const tabList = [
 
 const Search: FC<SearchProps> = () => {
   const location = useLocation();
-  let match = useMatch(location.pathname);
+  const match = useMatch(location.pathname);
   const handleTabChange = (key: string) => {
     const url =
-      match?.pathname === '/' ? '' : match?.pathname.substring(0, match.pathname.lastIndexOf('/'));
+      match?.pathname === '/'
+        ? ''
+        : match?.pathname.substring(0, match.pathname.lastIndexOf('/'));
     switch (key) {
       case 'articles':
         history.push(`${url}/articles`);
@@ -49,7 +51,9 @@ const Search: FC<SearchProps> = () => {
   };
 
   const getTabKey = () => {
-    const tabKey = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
+    const tabKey = location.pathname.substring(
+      location.pathname.lastIndexOf('/') + 1,
+    );
     if (tabKey && tabKey !== '/') {
       return tabKey;
     }
