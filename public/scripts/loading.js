@@ -2,7 +2,7 @@
  * loading 占位
  * 解决首次加载时白屏的问题
  */
- (function () {
+(function () {
   const _root = document.querySelector('#root');
   if (_root && _root.innerHTML === '') {
     _root.innerHTML = `

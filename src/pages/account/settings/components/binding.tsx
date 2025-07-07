@@ -1,4 +1,8 @@
-import { AlipayOutlined, DingdingOutlined, TaobaoOutlined } from '@ant-design/icons';
+import {
+  AlipayOutlined,
+  DingdingOutlined,
+  TaobaoOutlined,
+} from '@ant-design/icons';
 import { List } from 'antd';
 import React, { Fragment } from 'react';
 

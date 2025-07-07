@@ -27,13 +27,16 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
   const { styles } = useStyles();
   return (
     <div
-      className={classNames(styles.numberInfo, {
-        [styles[`numberInfo${theme}`]]: theme,
+      className={classNames({
+        [styles[`numberInfo${theme}` as keyof typeof styles]]: !!theme,
       })}
       {...rest}
     >
       {title && (
-        <div className={styles.numberInfoTitle} title={typeof title === 'string' ? title : ''}>
+        <div
+          className={styles.numberInfoTitle}
+          title={typeof title === 'string' ? title : ''}
+        >
           {title}
         </div>
       )}
@@ -62,7 +65,11 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
         {(status || subTotal) && (
           <span className={styles.subTotal}>
             {subTotal}
-            {status && status === 'up' ? <CaretUpOutlined /> : <CaretDownOutlined />}
+            {status && status === 'up' ? (
+              <CaretUpOutlined />
+            ) : (
+              <CaretDownOutlined />
+            )}
           </span>
         )}
       </div>

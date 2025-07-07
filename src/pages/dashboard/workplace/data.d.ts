@@ -1,7 +1,6 @@
-import { DataItem } from '@antv/g2plot/esm/interface/config';
-
-export { DataItem };
-
+export interface DataItem {
+  [field: string]: string | number | number[] | null | undefined;
+}
 export interface TagType {
   key: string;
   label: string;

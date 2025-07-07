@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import autoHeight from '../autoHeight';
+import autoHeight from '../../../../monitor/components/Charts/autoHeight';
 
 /* eslint no-return-assign: 0 */
 /* eslint no-mixed-operators: 0 */
@@ -87,7 +87,11 @@ class WaterWave extends Component<WaterWaveProps> {
     const bR = radius - lineWidth;
     const circleOffset = -(Math.PI / 2);
     let circleLock = true;
-    for (let i = circleOffset; i < circleOffset + 2 * Math.PI; i += 1 / (8 * Math.PI)) {
+    for (
+      let i = circleOffset;
+      i < circleOffset + 2 * Math.PI;
+      i += 1 / (8 * Math.PI)
+    ) {
       arcStack.push([radius + bR * Math.cos(i), radius + bR * Math.sin(i)]);
     }
     const cStartPoint = arcStack.shift() as number[];
@@ -184,8 +188,9 @@ class WaterWave extends Component<WaterWaveProps> {
     const { percent, title, height = 1 } = this.props;
     return (
       <div
-        className={styles.waterWave}
-        ref={(n) => (this.root = n)}
+        ref={(n) => {
+          this.root = n;
+        }}
         style={{
           transform: `scale(${radio})`,
         }}
@@ -198,14 +203,14 @@ class WaterWave extends Component<WaterWaveProps> {
           }}
         >
           <canvas
-            className={styles.waterWaveCanvasWrapper}
-            ref={(n) => (this.node = n)}
+            ref={(n) => {
+              this.node = n;
+            }}
             width={height * 2}
             height={height * 2}
           />
         </div>
         <div
-          className={styles.text}
           style={{
             width: height,
           }}

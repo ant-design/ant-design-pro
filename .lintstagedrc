@@ -1,0 +1,5 @@
+{
+  "**/*.{js,jsx,tsx,ts,md,css,less,json,yml}": [
+    "npx @biomejs/biome check --write"
+  ]
+}
