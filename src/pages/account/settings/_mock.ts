@@ -15,7 +15,7 @@ function getCity(req: Request, res: Response) {
   });
 }
 
-function getCurrentUse(req: Request, res: Response) {
+function getCurrentUse(_req: Request, res: Response) {
   return res.json({
     data: {
       name: 'Serati Ma',

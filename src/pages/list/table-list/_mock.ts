@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { parse } from 'url';
+import { parse } from 'node:url';
 import type { TableListItem, TableListParams } from './data.d';
 
 // mock tableListDataSource
@@ -109,7 +109,7 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
     realUrl = req.url;
   }
 
-  const body = (b && b.body) || req.body;
+  const body = (b?.body) || req.body;
   const { name, desc, key } = body;
 
   switch (req.method) {

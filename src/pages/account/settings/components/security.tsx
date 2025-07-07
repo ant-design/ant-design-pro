@@ -45,8 +45,7 @@ const SecurityView: React.FC = () => {
 
   const data = getData();
   return (
-    <>
-      <List<Unpacked<typeof data>>
+    <List<Unpacked<typeof data>>
         itemLayout="horizontal"
         dataSource={data}
         renderItem={(item) => (
@@ -55,7 +54,6 @@ const SecurityView: React.FC = () => {
           </List.Item>
         )}
       />
-    </>
   );
 };
 

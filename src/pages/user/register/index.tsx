@@ -123,7 +123,7 @@ const Register: FC = () => {
   const renderPasswordProgress = () => {
     const value = form.getFieldValue('password');
     const passwordStatus = getPasswordStatus();
-    return value && value.length ? (
+    return value?.length ? (
       <div className={styles[`progress-${passwordStatus}`]}>
         <Progress
           status={passwordProgressMap[passwordStatus]}
@@ -155,7 +155,7 @@ const Register: FC = () => {
         </FormItem>
         <Popover
           getPopupContainer={(node) => {
-            if (node && node.parentNode) {
+            if (node?.parentNode) {
               return node.parentNode as HTMLElement;
             }
             return node;

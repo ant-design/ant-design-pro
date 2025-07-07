@@ -65,7 +65,7 @@ const advancedOperation3 = [
   },
 ];
 
-function getProfileAdvancedData(req: Request, res: Response) {
+function getProfileAdvancedData(_req: Request, res: Response) {
   const result = {
     data: {
       advancedOperation1,

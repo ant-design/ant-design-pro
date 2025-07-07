@@ -1,6 +1,6 @@
 import { Area } from '@ant-design/plots';
 import { Statistic } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import useStyles from './index.style';
 function fixedZero(val: number) {
   return val * 1 < 10 ? `0${val}` : val;
@@ -21,24 +21,24 @@ const ActiveChart = () => {
   const requestRef = useRef<number | null>(null);
   const { styles } = useStyles();
   const [activeData, setActiveData] = useState<{ x: string; y: number }[]>([]);
-  const loopData = () => {
+  const loopData = useCallback(() => {
     requestRef.current = requestAnimationFrame(() => {
       timerRef.current = window.setTimeout(() => {
         setActiveData(getActiveData());
         loopData();
       }, 2000);
     });
-  };
+  }, []);
 
   useEffect(() => {
     loopData();
     return () => {
-      clearTimeout(timerRef.current!);
+      clearTimeout(timerRef.current as number);
       if (requestRef.current) {
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, []);
+  }, [loopData]);
 
   return (
     <div className={styles.activeChart}>

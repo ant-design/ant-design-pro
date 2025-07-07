@@ -66,8 +66,8 @@ function fakeList(count: number): BasicListItemDataType[] {
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % 8],
       href: 'https://ant.design',
-      updatedAt: new Date(new Date().getTime() - 1000 * 60 * 60 * 2 * i).getTime(),
-      createdAt: new Date(new Date().getTime() - 1000 * 60 * 60 * 2 * i).getTime(),
+      updatedAt: new Date(Date.now()- 1000 * 60 * 60 * 2 * i).getTime(),
+      createdAt: new Date(Date.now()- 1000 * 60 * 60 * 2 * i).getTime(),
       subDescription: desc[i % 5],
       description:
         '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
@@ -139,7 +139,7 @@ function postFakeList(req: Request, res: Response) {
       result.unshift({
         ...body,
         id: `fake-list-${result.length}`,
-        createdAt: new Date().getTime(),
+        createdAt: Date.now(),
       });
       break;
     default:

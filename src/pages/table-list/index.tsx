@@ -215,7 +215,7 @@ const TableList: React.FC = () => {
         },
       });
     },
-    [delRun],
+    [delRun, messageApi.warning],
   );
 
   return (

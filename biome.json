@@ -30,7 +30,8 @@
       },
       "a11y": {
         "noStaticElementInteractions": "off",
-        "useValidAnchor": "off"
+        "useValidAnchor": "off",
+        "useKeyWithClickEvents": "off"
       }
     }
   },

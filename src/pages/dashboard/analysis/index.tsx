@@ -18,7 +18,8 @@ import type { AnalysisData } from './data.d';
 import { fakeChartData } from './service';
 import useStyles from './style.style';
 import { getTimeDistance } from './utils/utils';
-type RangePickerValue = RangePickerProps<dayjs.Dayjs>['value'];
+type RangePickerValue = RangePickerProps<dayjs.Dayjs>[
+  'value'];
 type AnalysisProps = {
   dashboardAndanalysis: AnalysisData;
   loading: boolean;
@@ -58,8 +59,7 @@ const Analysis: FC<AnalysisProps> = () => {
     return '';
   };
 
-  let salesPieData;
-
+  let salesPieData: any;
   if (salesType === 'all') {
     salesPieData = data?.salesTypeData;
   } else {
@@ -93,10 +93,10 @@ const Analysis: FC<AnalysisProps> = () => {
   const handleTabChange = (key: string) => {
     setCurrentTabKey(key);
   };
-  const activeKey = currentTabKey || (data?.offlineData[0] && data?.offlineData[0].name) || '';
+  const activeKey = currentTabKey || (data?.offlineData[0]?.name) || '';
   return (
     <GridContent>
-      <>
+
         <Suspense fallback={<PageLoading />}>
           <IntroduceRow loading={loading} visitData={data?.visitData || []} />
         </Suspense>
@@ -150,7 +150,7 @@ const Analysis: FC<AnalysisProps> = () => {
             handleTabChange={handleTabChange}
           />
         </Suspense>
-      </>
+
     </GridContent>
   );
 };

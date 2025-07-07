@@ -5,7 +5,7 @@ import { Card, Col, Progress, Row, Statistic } from 'antd';
 import numeral from 'numeral';
 import type { FC } from 'react';
 import ActiveChart from './components/ActiveChart';
-import Map from './components/Map';
+import MonitorMap from './components/Map';
 import { queryTags } from './service';
 import useStyles from './style.style';
 
@@ -24,7 +24,6 @@ const Monitor: FC = () => {
   });
   return (
     <GridContent>
-      <>
         <Row gutter={24}>
           <Col
             xl={18}
@@ -56,7 +55,7 @@ const Monitor: FC = () => {
                 </Col>
               </Row>
               <div className={styles.mapChart}>
-                <Map />
+                <MonitorMap />
               </div>
             </Card>
           </Col>
@@ -178,7 +177,7 @@ const Monitor: FC = () => {
             </Card>
           </Col>
         </Row>
-      </>
+
     </GridContent>
   );
 };

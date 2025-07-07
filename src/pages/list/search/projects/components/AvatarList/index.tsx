@@ -28,7 +28,7 @@ const avatarSizeToClassName = (size: SizeType | 'mini', styles: any) =>
 const Item: React.FC<AvatarItemProps> = ({ src, size, tips, onClick = () => {} }) => {
   const { styles } = useStyles();
 
-  const cls = avatarSizeToClassName(size!, styles);
+  const cls = avatarSizeToClassName(size || 'default', styles);
 
   return (
     <li className={cls} onClick={onClick}>
@@ -62,7 +62,7 @@ const AvatarList: React.FC<AvatarListProps> & {
     }),
   );
   if (numToShow < numOfChildren) {
-    const cls = avatarSizeToClassName(size!, styles);
+    const cls = avatarSizeToClassName(size || 'default', styles);
     childrenWithProps.push(
       <li key="exceed" className={cls}>
         <Avatar size={size} style={excessItemsStyle}>{`+${numOfChildren - maxLength}`}</Avatar>

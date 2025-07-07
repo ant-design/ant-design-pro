@@ -51,7 +51,7 @@ const Settings: React.FC = () => {
     return () => {
       window.removeEventListener('resize', resize);
     };
-  }, [dom.current]);
+  }, [resize]);
   const getMenu = () => {
     return Object.keys(menuMap).map((item) => ({ key: item, label: menuMap[item] }));
   };

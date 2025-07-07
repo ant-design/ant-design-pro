@@ -95,11 +95,16 @@ export const Applications: FC<Record<string, any>> = () => {
           >
             <Form.Item name="category">
               <TagSelect expandable>
-                {categoryOptions.map((category) => (
-                  <TagSelect.Option value={category.value!} key={category.value}>
-                    {category.label}
-                  </TagSelect.Option>
-                ))}
+                {categoryOptions
+                  .filter(
+                    (category): category is { value: string | number; label: string } =>
+                      category.value !== undefined && category.value !== null
+                  )
+                  .map((category) => (
+                    <TagSelect.Option value={category.value} key={category.value}>
+                      {category.label}
+                    </TagSelect.Option>
+                  ))}
               </TagSelect>
             </Form.Item>
           </StandardFormRow>

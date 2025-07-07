@@ -36,7 +36,7 @@ const OperationModal: FC<OperationModalProps> = (props) => {
       submitter={{
         render: (_, dom) => (done ? null : dom),
       }}
-      trigger={<>{children}</>}
+      trigger={children}
       modalProps={{
         onCancel: () => onDone(),
         destroyOnClose: true,

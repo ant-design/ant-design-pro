@@ -1,6 +1,6 @@
 import { createStyles } from 'antd-style';
 
-const useStyles = createStyles(({}) => {
+const useStyles = createStyles(() => {
   return {
     colorWeak: {
       filter: 'invert(80%)',

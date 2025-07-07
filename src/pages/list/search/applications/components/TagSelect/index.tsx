@@ -18,7 +18,7 @@ const TagSelectOption: React.FC<TagSelectOptionProps> & {
   <CheckableTag
     checked={!!checked}
     key={value}
-    onChange={(state) => onChange && onChange(value, state)}
+    onChange={(state) => onChange?.(value, state)}
   >
     {children}
   </CheckableTag>
@@ -58,8 +58,7 @@ const TagSelect: FC<TagSelectProps> & {
   });
 
   const isTagSelectOption = (node: TagSelectOptionElement) =>
-    node &&
-    node.type &&
+    node?.type &&
     (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
   const getAllTags = () => {
     const childrenArray = React.Children.toArray(children) as TagSelectOptionElement[];

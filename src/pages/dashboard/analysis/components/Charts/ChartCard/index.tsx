@@ -22,7 +22,7 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     if (!total && total !== 0) {
       return null;
     }
-    let totalDom;
+    let totalDom: React.ReactNode | null = null;
     switch (typeof total) {
       case 'undefined':
         totalDom = null;
@@ -63,7 +63,7 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
               height: contentHeight || 'auto',
             }}
           >
-            <div className={contentHeight && styles.contentFixed}>{children}</div>
+            <div className={contentHeight ? styles.contentFixed : undefined}>{children}</div>
           </div>
         )}
         {footer && (
@@ -81,20 +81,15 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
 
   const {
     loading = false,
-    contentHeight,
-    title,
-    avatar,
-    action,
-    total,
-    footer,
-    children,
     ...rest
   } = props;
   return (
     <Card
       loading={loading}
-      bodyStyle={{
-        padding: '20px 24px 8px 24px',
+      styles={{
+        body: {
+          padding: '20px 24px 8px 24px',
+        },
       }}
       {...rest}
     >

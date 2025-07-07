@@ -72,7 +72,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
   ) => {
     const newData = [...(data as TableFormDateType[])];
     const target = getRowByKey(key, newData);
-    if (target && target[fieldName]) {
+    if (target?.[fieldName]) {
       target[fieldName as 'key'] = e.target.value;
       setData(newData);
     }
@@ -191,7 +191,7 @@ const TableForm: FC<TableFormProps> = ({ value, onChange }) => {
     {
       title: '操作',
       key: 'action',
-      render: (text: string, record: TableFormDateType) => {
+      render: (_text: string, record: TableFormDateType) => {
         if (!!record.editable && loading) {
           return null;
         }

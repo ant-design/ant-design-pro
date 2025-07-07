@@ -97,7 +97,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
           overlayClassName={styles.errorPopover}
           trigger="click"
           getPopupContainer={(trigger: HTMLElement) => {
-            if (trigger && trigger.parentNode) {
+            if (trigger?.parentNode) {
               return trigger.parentNode as HTMLElement;
             }
             return trigger;
@@ -144,7 +144,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       title: '操作',
       key: 'action',
       valueType: 'option',
-      render: (_, record: TableFormDateType, index, action) => {
+      render: (_, record: TableFormDateType, _index, action) => {
         return [
           <a
             key="eidit"
@@ -163,7 +163,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       layout="vertical"
       hideRequiredMark
       submitter={{
-        render: (props, dom) => {
+        render: (_props, dom) => {
           return (
             <FooterToolbar>
               {getErrorInfo(error)}

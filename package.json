@@ -43,7 +43,11 @@
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "@ant-design/plots": "^2.6.0",
+    "@antv/l7-react": "^2.4.3",
+    "@antv/l7": "^2.22.7",
+    "numeral": "^2.0.6"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^3.3.0",

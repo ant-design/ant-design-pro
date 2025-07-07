@@ -13,7 +13,7 @@ import React from 'react';
 import { queryCity, queryCurrent, queryProvince } from '../service';
 import useStyles from './index.style';
 
-const validatorPhone = (rule: any, value: string[], callback: (message?: string) => void) => {
+const validatorPhone = (_rule: any, value: string[], callback: (message?: string) => void) => {
   if (!value[0]) {
     callback('Please input your area code!');
   }
