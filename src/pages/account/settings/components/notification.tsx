@@ -1,5 +1,5 @@
 import { List, Switch } from 'antd';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 
@@ -29,17 +29,15 @@ const NotificationView: React.FC = () => {
 
   const data = getData();
   return (
-    <Fragment>
-      <List<Unpacked<typeof data>>
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item actions={item.actions}>
-            <List.Item.Meta title={item.title} description={item.description} />
-          </List.Item>
-        )}
-      />
-    </Fragment>
+    <List<Unpacked<typeof data>>
+      itemLayout="horizontal"
+      dataSource={data}
+      renderItem={(item) => (
+        <List.Item actions={item.actions}>
+          <List.Item.Meta title={item.title} description={item.description} />
+        </List.Item>
+      )}
+    />
   );
 };
 
