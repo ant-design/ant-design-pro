@@ -1,5 +1,5 @@
 import { Column } from '@ant-design/plots';
-import { Card, Col, DatePicker, Row, Tabs } from 'antd';
+import { Button, Card, Col, DatePicker, Row, Tabs } from 'antd';
 import type { RangePickerProps } from 'antd/es/date-picker';
 import numeral from 'numeral';
 import type { DataItem } from '../data.d';
@@ -51,30 +51,34 @@ const SalesCard = ({
         tabBarExtraContent={
           <div className={styles.salesExtraWrap}>
             <div className={styles.salesExtra}>
-              <a
+              <Button
+                type="text"
                 className={isActive('today')}
                 onClick={() => selectDate('today')}
               >
                 今日
-              </a>
-              <a
+              </Button>
+              <Button
+                type="text"
                 className={isActive('week')}
                 onClick={() => selectDate('week')}
               >
                 本周
-              </a>
-              <a
+              </Button>
+              <Button
+                type="text"
                 className={isActive('month')}
                 onClick={() => selectDate('month')}
               >
                 本月
-              </a>
-              <a
+              </Button>
+              <Button
+                type="text"
                 className={isActive('year')}
                 onClick={() => selectDate('year')}
               >
                 本年
-              </a>
+              </Button>
             </div>
             <RangePicker
               value={rangePickerValue}

@@ -89,6 +89,7 @@ const useStyles = createStyles(({ token }) => {
     },
     currentDate: {
       color: token.colorPrimary,
+      fontWeight: 'bold',
     },
     salesBar: {
       padding: '0 0 32px 32px',
