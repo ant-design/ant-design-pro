@@ -14,6 +14,7 @@
       "!**/dist/**",
       "!**/server/**",
       "!**/public/**",
+      "!**/coverage/**",
       "!biome.json"
     ]
   },
