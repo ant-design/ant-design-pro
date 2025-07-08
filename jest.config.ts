@@ -1,7 +1,6 @@
-import type { Config } from '@jest/types';
 import { configUmiAlias, createConfig } from '@umijs/max/test';
 
-export default async (): Promise<Config.InitialOptions> => {
+export default async (): Promise<any> => {
   const config = await configUmiAlias({
     ...createConfig({
       target: 'browser',
