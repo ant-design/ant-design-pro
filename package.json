@@ -47,7 +47,8 @@
     "@ant-design/plots": "^2.6.0",
     "@antv/l7-react": "^2.4.3",
     "@antv/l7": "^2.22.7",
-    "numeral": "^2.0.6"
+    "numeral": "^2.0.6",
+    "rc-util": "^5.44.4"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^3.3.0",
