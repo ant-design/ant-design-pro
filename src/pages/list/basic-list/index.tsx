@@ -11,8 +11,8 @@ import {
   List,
   Modal,
   Progress,
-  Radio,
   Row,
+  Segmented,
 } from 'antd';
 import dayjs from 'dayjs';
 import type { FC } from 'react';
@@ -27,8 +27,6 @@ import {
 } from './service';
 import useStyles from './style.style';
 
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
 const { Search } = Input;
 const Info: FC<{
   title: React.ReactNode;
@@ -139,15 +137,20 @@ export const BasicList: FC = () => {
   };
   const extraContent = (
     <div>
-      <RadioGroup defaultValue="all">
-        <RadioButton value="all">全部</RadioButton>
-        <RadioButton value="progress">进行中</RadioButton>
-        <RadioButton value="waiting">等待中</RadioButton>
-      </RadioGroup>
+      <Segmented
+        defaultValue="all"
+        options={[
+          { label: '全部', value: 'all' },
+          { label: '进行中', value: 'progress' },
+          { label: '等待中', value: 'waiting' },
+        ]}
+        // 如有需要可添加 onChange 事件
+      />
       <Search
         className={styles.extraContentSearch}
         placeholder="请输入"
         onSearch={() => ({})}
+        variant="filled"
       />
     </div>
   );
@@ -204,13 +207,15 @@ export const BasicList: FC = () => {
 
           <Card
             className={styles.listCard}
-            bordered={false}
+            variant="borderless"
             title="基本列表"
             style={{
               marginTop: 24,
             }}
-            bodyStyle={{
-              padding: '0 32px 40px 32px',
+            styles={{
+              body: {
+                padding: '0 32px 40px 32px',
+              },
             }}
             extra={extraContent}
           >

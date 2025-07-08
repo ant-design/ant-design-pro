@@ -3,7 +3,6 @@ import { GridContent } from '@ant-design/pro-components';
 import { useRequest } from '@umijs/max';
 import { Col, Dropdown, Row } from 'antd';
 import type { RangePickerProps } from 'antd/es/date-picker';
-import type { RadioChangeEvent } from 'antd/es/radio';
 import type { Dayjs } from 'dayjs';
 import type { FC } from 'react';
 import { Suspense, useState } from 'react';
@@ -90,8 +89,8 @@ const Analysis: FC<AnalysisProps> = () => {
       </Dropdown>
     </span>
   );
-  const handleChangeSalesType = (e: RadioChangeEvent) => {
-    setSalesType(e.target.value);
+  const handleChangeSalesType = (value: SalesType) => {
+    setSalesType(value);
   };
   const handleTabChange = (key: string) => {
     setCurrentTabKey(key);

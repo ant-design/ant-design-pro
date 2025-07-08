@@ -116,7 +116,6 @@ const TagList: React.FC<{
       {inputVisible && (
         <Input
           ref={ref}
-          type="text"
           size="small"
           style={{
             width: 78,
@@ -227,7 +226,7 @@ const Center: React.FC = () => {
             loading={loading}
           >
             {!loading && currentUser && (
-              <div>
+              <>
                 <div className={styles.avatarHolder}>
                   <img alt="" src={currentUser.avatar} />
                   <div className={styles.name}>{currentUser.name}</div>
@@ -255,14 +254,14 @@ const Center: React.FC = () => {
                     ))}
                   </Row>
                 </div>
-              </div>
+              </>
             )}
           </Card>
         </Col>
         <Col lg={17} md={24}>
           <Card
             className={styles.tabsCard}
-            bordered={false}
+            variant="borderless"
             tabList={operationTabList}
             activeTabKey={tabKey}
             onTabChange={(_tabKey: string) => {
