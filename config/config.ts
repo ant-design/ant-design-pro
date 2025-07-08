@@ -177,4 +177,5 @@ export default defineConfig({
   mako: {},
   esbuildMinifyIIFE: true,
   requestRecord: {},
+  exportStatic: {},
 });
