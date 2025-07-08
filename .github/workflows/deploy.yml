@@ -21,6 +21,8 @@ jobs:
 
       - name: Build project
         run: bun run build
+        env:
+          ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: 'site'
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

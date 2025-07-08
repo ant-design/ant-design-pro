@@ -20,6 +20,8 @@ jobs:
         run: |
           yarn
           yarn build
+        env:
+          ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: 'site'
 
       - name: upload dist artifact
         uses: actions/upload-artifact@v4

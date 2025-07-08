@@ -4,6 +4,7 @@
     "ignoreUnknown": true,
     "includes": [
       "**/*",
+      "**/*.yml",
       "!**/.umi/**",
       "**/*.md",
       "!**/.umi-production/**",
