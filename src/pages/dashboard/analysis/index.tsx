@@ -90,8 +90,8 @@ const Analysis: FC<AnalysisProps> = () => {
       </Dropdown>
     </span>
   );
-  const handleChangeSalesType = (e: RadioChangeEvent) => {
-    setSalesType(e.target.value);
+  const handleChangeSalesType = (value: SalesType) => {
+    setSalesType(value);
   };
   const handleTabChange = (key: string) => {
     setCurrentTabKey(key);

@@ -31,6 +31,9 @@ const Articles: React.FC = () => {
       rowKey="id"
       itemLayout="vertical"
       dataSource={listData?.list || []}
+      style={{
+        margin: '0 -24px',
+      }}
       renderItem={(item) => (
         <List.Item
           key={item.id}

@@ -10,8 +10,10 @@ const useStyles = createStyles(({ token }) => {
       marginTop: '16px',
       color: token.colorTextSecondary,
       lineHeight: '22px',
+      display: 'flex',
+      gap: '8px',
+      alignItems: 'center',
       '& > em': {
-        marginLeft: '16px',
         color: token.colorTextDisabled,
         fontStyle: 'normal',
       },
