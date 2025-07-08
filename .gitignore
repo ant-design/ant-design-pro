@@ -15,6 +15,7 @@ npm-debug.log*
 yarn-error.log
 
 /coverage
+/coverage/lcov-report
 .idea
 yarn.lock
 package-lock.json
