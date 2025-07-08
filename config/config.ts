@@ -179,7 +179,6 @@ export default defineConfig({
   requestRecord: {},
   exportStatic: {},
   define: {
-    'process.env.NODE_ENV': process.env.NODE_ENV,
     'process.env.CI': process.env.CI,
   },
 });
