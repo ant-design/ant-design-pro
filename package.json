@@ -62,7 +62,7 @@
     "express": "^4.21.1",
     "gh-pages": "^6.1.1",
     "husky": "^9.1.6",
-    "jest": "^29.7.0",
+    "jest": "^30.0.4",
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^16.1.2",
     "mockjs": "^1.1.0",
