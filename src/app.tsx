@@ -1,19 +1,26 @@
-import { AvatarDropdown, AvatarName, Footer, Question, SelectLang } from '@/components';
-import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
-import type { RunTimeLayoutConfig } from '@umijs/max';
+import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
 import React from 'react';
+import {
+  AvatarDropdown,
+  AvatarName,
+  Footer,
+  Question,
+  SelectLang,
+} from '@/components';
+import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
+import '@ant-design/v5-patch-for-react-19';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
 /**
- * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
+ * @see https://umijs.org/docs/api/runtime-config#getinitialstate
  * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
@@ -27,14 +34,18 @@ export async function getInitialState(): Promise<{
         skipErrorHandler: true,
       });
       return msg.data;
-    } catch (error) {
+    } catch (_error) {
       history.push(loginPath);
     }
     return undefined;
   };
   // 如果不是登录页面，执行
   const { location } = history;
-  if (location.pathname !== loginPath) {
+  if (
+    ![loginPath, '/user/register', '/user/register-result'].includes(
+      location.pathname,
+    )
+  ) {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,
@@ -49,9 +60,15 @@ export async function getInitialState(): Promise<{
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+export const layout: RunTimeLayoutConfig = ({
+  initialState,
+  setInitialState,
+}) => {
   return {
-    actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
+    actionsRender: () => [
+      <Question key="doc" />,
+      <SelectLang key="SelectLang" />,
+    ],
     avatarProps: {
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,
@@ -132,6 +149,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
  * 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
  * @doc https://umijs.org/docs/max/request#配置
  */
-export const request = {
+export const request: RequestConfig = {
+  baseURL: 'https://proapi.azurewebsites.net',
   ...errorConfig,
 };

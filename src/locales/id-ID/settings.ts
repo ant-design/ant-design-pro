@@ -11,11 +11,13 @@ export default {
   'app.settings.basic.nickname-message': 'Tolong masukkan Nickname!',
   'app.settings.basic.profile': 'Profil Personal',
   'app.settings.basic.profile-message': 'Tolong masukkan profil personal!',
-  'app.settings.basic.profile-placeholder': 'Perkenalan Singkat tentang Diri Anda',
+  'app.settings.basic.profile-placeholder':
+    'Perkenalan Singkat tentang Diri Anda',
   'app.settings.basic.country': 'Negara/Wilayah',
   'app.settings.basic.country-message': 'Tolong masukkan negara anda!',
   'app.settings.basic.geographic': 'Provinsi atau kota',
-  'app.settings.basic.geographic-message': 'Tolong masukkan info geografis anda!',
+  'app.settings.basic.geographic-message':
+    'Tolong masukkan info geografis anda!',
   'app.settings.basic.address': 'Alamat Jalan',
   'app.settings.basic.address-message': 'Tolong masukkan Alamat Jalan anda!',
   'app.settings.basic.phone': 'Nomor Ponsel',
@@ -40,9 +42,11 @@ export default {
   'app.settings.security.set': 'Setel',
   'app.settings.security.bind': 'Ikat',
   'app.settings.binding.taobao': 'Mengikat Taobao',
-  'app.settings.binding.taobao-description': 'Tidak mengikat akun Taobao saat ini',
+  'app.settings.binding.taobao-description':
+    'Tidak mengikat akun Taobao saat ini',
   'app.settings.binding.alipay': 'Mengikat Alipay',
-  'app.settings.binding.alipay-description': 'Tidak mengikat akun Alipay saat ini',
+  'app.settings.binding.alipay-description':
+    'Tidak mengikat akun Alipay saat ini',
   'app.settings.binding.dingding': 'Mengikat DingTalk',
   'app.settings.binding.dingding-description': 'Tidak mengikat akun DingTalk',
   'app.settings.binding.bind': 'Ikat',

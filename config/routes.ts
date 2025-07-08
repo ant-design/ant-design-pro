@@ -18,7 +18,7 @@ export default [
       {
         name: 'login',
         path: '/user/login',
-        component: './User/Login',
+        component: './user/login',
       },
     ],
   },
@@ -49,7 +49,7 @@ export default [
     name: 'list.table-list',
     icon: 'table',
     path: '/list',
-    component: './TableList',
+    component: './table-list',
   },
   {
     path: '/',

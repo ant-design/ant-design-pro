@@ -1,0 +1,48 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**/*",
+      "!**/.umi/**",
+      "!**/.umi-production/**",
+      "!**/.umi-test/**",
+      "!**/.umi-test-production/**",
+      "!**/src/services/**",
+      "!**/mock/**",
+      "!**/dist/**",
+      "!**/server/**",
+      "!**/public/**",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!biome.json"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      },
+      "a11y": {
+        "noStaticElementInteractions": "off",
+        "useValidAnchor": "off",
+        "useKeyWithClickEvents": "off"
+      }
+    }
+  },
+  "javascript": {
+    "jsxRuntime": "reactClassic",
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  }
+}

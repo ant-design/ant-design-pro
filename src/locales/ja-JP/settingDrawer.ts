@@ -21,11 +21,13 @@ export default {
   'app.setting.fixedsidebar': '固定サイドバー',
   'app.setting.fixedsidebar.hint': 'サイドメニューのレイアウトで動作します',
   'app.setting.hideheader': 'スクロール時の非表示ヘッダー',
-  'app.setting.hideheader.hint': '非表示ヘッダーが有効になっている場合に機能します',
+  'app.setting.hideheader.hint':
+    '非表示ヘッダーが有効になっている場合に機能します',
   'app.setting.othersettings': 'その他の設定',
   'app.setting.weakmode': 'ウィークモード',
   'app.setting.copy': 'コピー設定',
   'app.setting.copyinfo':
     'コピーが成功しました。src/models/setting.jsのdefaultSettingsを置き換えてください',
-  'app.setting.production.hint': '設定パネルは開発環境でのみ表示されます。手動で変更してください',
+  'app.setting.production.hint':
+    '設定パネルは開発環境でのみ表示されます。手動で変更してください',
 };

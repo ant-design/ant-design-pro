@@ -12,14 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: build
         run: |
           yarn
-          yarn add umi-plugin-pro --save
           yarn build
 
       - name: upload dist artifact
