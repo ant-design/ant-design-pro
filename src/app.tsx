@@ -1,7 +1,7 @@
 import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
-import type { RunTimeLayoutConfig } from '@umijs/max';
+import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
 import React from 'react';
 import {
@@ -41,7 +41,11 @@ export async function getInitialState(): Promise<{
   };
   // 如果不是登录页面，执行
   const { location } = history;
-  if (location.pathname !== loginPath) {
+  if (
+    ![loginPath, '/user/register', '/user/register-result'].includes(
+      location.pathname,
+    )
+  ) {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,
@@ -145,6 +149,7 @@ export const layout: RunTimeLayoutConfig = ({
  * 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
  * @doc https://umijs.org/docs/max/request#配置
  */
-export const request = {
+export const request: RequestConfig = {
+  baseURL: 'https://proapi.azurewebsites.net',
   ...errorConfig,
 };

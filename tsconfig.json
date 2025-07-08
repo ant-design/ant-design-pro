@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "esnext",
-    "module": "esnext",
     "moduleResolution": "node",
-    "importHelpers": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
-    "sourceMap": true,
-    "baseUrl": "./",
-    "skipLibCheck": true,
     "experimentalDecorators": true,
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "declaration": true,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": ["./src/*"],
       "@@/*": ["./src/.umi/*"],
