@@ -16,6 +16,8 @@ import {
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Button, Drawer, Input, message } from 'antd';
 import React, { useRef, useState } from 'react';
+import { useModalForm } from '@/hooks/useModalForm';
+import { useTableRequest } from '@/hooks/useTableRequest';
 import {
   addRule,
   removeRule,
