@@ -95,27 +95,25 @@ const handleRemove = async (selectedRows: API.RuleListItem[]) => {
 };
 
 const TableList: React.FC = () => {
-  /**
-   * @en-US Pop-up window of new window
-   * @zh-CN 新建窗口的弹窗
-   *  */
-  const [createModalOpen, handleModalOpen] = useState<boolean>(false);
-  /**
-   * @en-US The pop-up window of the distribution update window
-   * @zh-CN 分布更新窗口的弹窗
-   * */
-  const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
+  // 表格数据与增删改查
+  const { data, loading, refresh, handleAdd, handleUpdate, handleRemove } =
+    useTableRequest<API.PageParams>({
+      query: (params) => rule(params || {}),
+      add: addRule,
+      update: updateRule,
+      remove: (params) =>
+        removeRule({ key: Array.isArray(params) ? params : [params] }),
+    });
 
-  const [showDetail, setShowDetail] = useState<boolean>(false);
-
-  const actionRef = useRef<ActionType | null>(null);
-  const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
+  // 新建弹窗
+  const createModal = useModalForm();
+  // 编辑弹窗
+  const updateModal = useModalForm<API.RuleListItem>();
+  // 详情抽屉
+  const [showDetail, setShowDetail] = useState(false);
+  // 选中行
   const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
-
-  /**
-   * @en-US International configuration
-   * @zh-CN 国际化配置
-   * */
+  const actionRef = useRef<ActionType | null>(null);
   const intl = useIntl();
 
   const columns: ProColumns<API.RuleListItem>[] = [
@@ -131,7 +129,7 @@ const TableList: React.FC = () => {
         return (
           <a
             onClick={() => {
-              setCurrentRow(entity);
+              updateModal.setCurrent(entity);
               setShowDetail(true);
             }}
           >
@@ -256,8 +254,8 @@ const TableList: React.FC = () => {
         <a
           key="config"
           onClick={() => {
-            handleUpdateModalOpen(true);
-            setCurrentRow(record);
+            updateModal.show();
+            updateModal.setCurrent(record);
           }}
         >
           <FormattedMessage
@@ -284,28 +282,25 @@ const TableList: React.FC = () => {
         })}
         actionRef={actionRef}
         rowKey="key"
-        search={{
-          labelWidth: 120,
-        }}
+        search={{ labelWidth: 120 }}
         toolBarRender={() => [
           <Button
             type="primary"
             key="primary"
-            onClick={() => {
-              handleModalOpen(true);
-            }}
+            onClick={() => createModal.show()}
           >
             <PlusOutlined />{' '}
             <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
           </Button>,
         ]}
-        request={rule}
+        dataSource={data?.data || []}
+        loading={loading}
         columns={columns}
         rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
+          onChange: (_, selectedRows) => setSelectedRows(selectedRows),
         }}
+        pagination={data?.total ? { total: data.total } : undefined}
+        onChange={() => refresh()}
       />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
@@ -340,9 +335,10 @@ const TableList: React.FC = () => {
         >
           <Button
             onClick={async () => {
-              await handleRemove(selectedRowsState);
+              const keys = selectedRowsState.map((i) => i.key).filter(Boolean);
+              await handleRemove(keys);
               setSelectedRows([]);
-              actionRef.current?.reloadAndRest?.();
+              refresh();
             }}
           >
             <FormattedMessage
@@ -364,15 +360,13 @@ const TableList: React.FC = () => {
           defaultMessage: 'New rule',
         })}
         width="400px"
-        open={createModalOpen}
-        onOpenChange={handleModalOpen}
+        open={createModal.open}
+        onOpenChange={(v) => (v ? createModal.show() : createModal.hide())}
         onFinish={async (value) => {
           const success = await handleAdd(value as API.RuleListItem);
           if (success) {
-            handleModalOpen(false);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
+            createModal.hide();
+            refresh();
           }
         }}
       >
@@ -397,42 +391,26 @@ const TableList: React.FC = () => {
         onSubmit={async (value) => {
           const success = await handleUpdate(value);
           if (success) {
-            handleUpdateModalOpen(false);
-            setCurrentRow(undefined);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
+            updateModal.hide();
+            refresh();
           }
         }}
-        onCancel={() => {
-          handleUpdateModalOpen(false);
-          if (!showDetail) {
-            setCurrentRow(undefined);
-          }
-        }}
-        updateModalOpen={updateModalOpen}
-        values={currentRow || {}}
+        onCancel={() => updateModal.hide()}
+        updateModalOpen={updateModal.open}
+        values={updateModal.current || {}}
       />
-
       <Drawer
         width={600}
         open={showDetail}
-        onClose={() => {
-          setCurrentRow(undefined);
-          setShowDetail(false);
-        }}
+        onClose={() => setShowDetail(false)}
         closable={false}
       >
-        {currentRow?.name && (
+        {updateModal.current?.name && (
           <ProDescriptions<API.RuleListItem>
             column={2}
-            title={currentRow?.name}
-            request={async () => ({
-              data: currentRow || {},
-            })}
-            params={{
-              id: currentRow?.name,
-            }}
+            title={updateModal.current?.name}
+            request={async () => ({ data: updateModal.current || {} })}
+            params={{ id: updateModal.current?.name }}
             columns={columns as ProDescriptionsItemProps<API.RuleListItem>[]}
           />
         )}

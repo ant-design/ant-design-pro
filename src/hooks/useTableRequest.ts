@@ -35,9 +35,9 @@ export function useTableRequest<P = any>({
     return result;
   };
 
-  const handleRemove = async (id: string) => {
+  const handleRemove = async (id: string | number | (string | number)[]) => {
     if (!remove) return;
-    const result = await remove({ id });
+    const result = await remove(id);
     refresh();
     return result;
   };
