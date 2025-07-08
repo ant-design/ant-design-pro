@@ -27,7 +27,7 @@ import {
 } from 'antd';
 import classNames from 'classnames';
 import type { FC } from 'react';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import type { AdvancedProfileData } from './data.d';
 import { queryAdvancedProfile } from './service';
 import useStyles from './style.style';
@@ -187,28 +187,24 @@ const Advanced: FC = () => {
   );
   const desc1 = (
     <div className={classNames(styles.stepDescription)}>
-      <Fragment>
-        曲丽丽
-        <DingdingOutlined
-          style={{
-            marginLeft: 8,
-          }}
-        />
-      </Fragment>
+      曲丽丽
+      <DingdingOutlined
+        style={{
+          marginLeft: 8,
+        }}
+      />
       <div>2016-12-12 12:32</div>
     </div>
   );
   const desc2 = (
     <div className={styles.stepDescription}>
-      <Fragment>
-        周毛毛
-        <DingdingOutlined
-          style={{
-            color: '#00A0E9',
-            marginLeft: 8,
-          }}
-        />
-      </Fragment>
+      周毛毛
+      <DingdingOutlined
+        style={{
+          color: '#00A0E9',
+          marginLeft: 8,
+        }}
+      />
       <div>
         <a href="">催一下</a>
       </div>

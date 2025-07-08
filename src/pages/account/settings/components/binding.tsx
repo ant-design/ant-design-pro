@@ -4,7 +4,7 @@ import {
   TaobaoOutlined,
 } from '@ant-design/icons';
 import { List } from 'antd';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const BindingView: React.FC = () => {
   const getData = () => [
@@ -29,21 +29,19 @@ const BindingView: React.FC = () => {
   ];
 
   return (
-    <Fragment>
-      <List
-        itemLayout="horizontal"
-        dataSource={getData()}
-        renderItem={(item) => (
-          <List.Item actions={item.actions}>
-            <List.Item.Meta
-              avatar={item.avatar}
-              title={item.title}
-              description={item.description}
-            />
-          </List.Item>
-        )}
-      />
-    </Fragment>
+    <List
+      itemLayout="horizontal"
+      dataSource={getData()}
+      renderItem={(item) => (
+        <List.Item actions={item.actions}>
+          <List.Item.Meta
+            avatar={item.avatar}
+            title={item.title}
+            description={item.description}
+          />
+        </List.Item>
+      )}
+    />
   );
 };
 
