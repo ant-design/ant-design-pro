@@ -75,7 +75,8 @@
     "typescript": "^5.6.3",
     "umi-presets-pro": "^2.0.3",
     "umi-serve": "^1.9.11",
-    "@biomejs/biome": "^2.0.6"
+    "@biomejs/biome": "^2.0.6",
+    "@types/node": "^24.0.10"
   },
   "engines": {
     "node": ">=20.0.0"
