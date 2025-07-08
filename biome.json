@@ -14,8 +14,8 @@
       "!**/dist/**",
       "!**/server/**",
       "!**/public/**",
-      "!biome.json",
-      "!coverage/lcov-report/**"
+      "!**/coverage/**",
+      "!biome.json"
     ]
   },
   "formatter": {
