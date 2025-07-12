@@ -140,7 +140,7 @@ const Register: FC = () => {
       >
         <Progress
           status={passwordProgressMap[passwordStatus]}
-          strokeWidth={6}
+          size={6}
           percent={value.length * 10 > 100 ? 100 : value.length * 10}
           showInfo={false}
         />

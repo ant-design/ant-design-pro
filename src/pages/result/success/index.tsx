@@ -1,7 +1,6 @@
 import { DingdingOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
 import { Button, Card, Descriptions, Result, Steps } from 'antd';
-import { Fragment } from 'react';
 import useStyles from './index.style';
 
 const { Step } = Steps;
@@ -112,15 +111,15 @@ export default () => {
     </>
   );
   const extra = (
-    <Fragment>
+    <>
       <Button type="primary">返回列表</Button>
       <Button>查看项目</Button>
       <Button>打印</Button>
-    </Fragment>
+    </>
   );
   return (
     <GridContent>
-      <Card bordered={false}>
+      <Card variant="borderless">
         <Result
           status="success"
           title="提交成功"

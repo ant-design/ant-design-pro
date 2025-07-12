@@ -219,7 +219,7 @@ const Center: React.FC = () => {
       <Row gutter={24}>
         <Col lg={7} md={24}>
           <Card
-            bordered={false}
+            variant="borderless"
             style={{
               marginBottom: 24,
             }}

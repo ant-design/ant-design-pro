@@ -4,7 +4,7 @@ export type MiniProgressProps = {
   target: number;
   targetLabel?: string;
   color?: string;
-  strokeWidth?: number;
+  size?: number;
   percent?: number;
   style?: React.CSSProperties;
 };
@@ -12,7 +12,7 @@ const MiniProgress: React.FC<MiniProgressProps> = ({
   targetLabel,
   target,
   color = 'rgb(19, 194, 194)',
-  strokeWidth,
+  size,
   percent,
 }) => {
   return (
@@ -39,7 +39,7 @@ const MiniProgress: React.FC<MiniProgressProps> = ({
         style={{
           backgroundColor: color || undefined,
           width: percent ? `${percent}%` : undefined,
-          height: strokeWidth || undefined,
+          height: size || undefined,
         }}
       />
     </div>

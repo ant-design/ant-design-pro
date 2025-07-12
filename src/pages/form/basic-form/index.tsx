@@ -28,7 +28,7 @@ const BasicForm: FC<Record<string, any>> = () => {
   };
   return (
     <PageContainer content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。">
-      <Card bordered={false}>
+      <Card variant="borderless">
         <ProForm
           hideRequiredMark
           style={{

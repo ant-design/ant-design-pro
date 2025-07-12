@@ -166,7 +166,7 @@ const Basic: FC = () => {
   ];
   return (
     <PageContainer>
-      <Card bordered={false}>
+      <Card variant="borderless">
         <Descriptions
           title="退款申请"
           style={{
