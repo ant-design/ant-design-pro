@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Card } from 'antd';
 import type { CardProps } from 'antd/es/card';
 import classNames from 'classnames';
+import omit from 'rc-util/lib/omit';
 import React from 'react';
 import useStyles from './index.style';
 
@@ -92,6 +92,7 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
   };
 
   const { loading = false, ...rest } = props;
+  const cardProps = omit(rest, ['total', 'contentHeight', 'action']);
   return (
     <Card
       loading={loading}
@@ -100,7 +101,7 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
           padding: '20px 24px 8px 24px',
         },
       }}
-      {...rest}
+      {...cardProps}
     >
       {renderContent()}
     </Card>

@@ -27,13 +27,12 @@ import {
 } from 'antd';
 import classNames from 'classnames';
 import type { FC } from 'react';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import type { AdvancedProfileData } from './data.d';
 import { queryAdvancedProfile } from './service';
 import useStyles from './style.style';
 
 const { Step } = Steps;
-const ButtonGroup = Button.Group;
 
 const action = (
   <RouteContext.Consumer>
@@ -67,7 +66,7 @@ const action = (
       }
       return (
         <Space>
-          <ButtonGroup>
+          <Space.Compact>
             <Button>操作一</Button>
             <Button>操作二</Button>
             <Dropdown
@@ -93,7 +92,7 @@ const action = (
                 <EllipsisOutlined />
               </Button>
             </Dropdown>
-          </ButtonGroup>
+          </Space.Compact>
           <Button type="primary">主操作</Button>
         </Space>
       );
@@ -187,28 +186,24 @@ const Advanced: FC = () => {
   );
   const desc1 = (
     <div className={classNames(styles.stepDescription)}>
-      <Fragment>
-        曲丽丽
-        <DingdingOutlined
-          style={{
-            marginLeft: 8,
-          }}
-        />
-      </Fragment>
+      曲丽丽
+      <DingdingOutlined
+        style={{
+          marginLeft: 8,
+        }}
+      />
       <div>2016-12-12 12:32</div>
     </div>
   );
   const desc2 = (
     <div className={styles.stepDescription}>
-      <Fragment>
-        周毛毛
-        <DingdingOutlined
-          style={{
-            color: '#00A0E9',
-            marginLeft: 8,
-          }}
-        />
-      </Fragment>
+      周毛毛
+      <DingdingOutlined
+        style={{
+          color: '#00A0E9',
+          marginLeft: 8,
+        }}
+      />
       <div>
         <a href="">催一下</a>
       </div>
@@ -266,7 +261,9 @@ const Advanced: FC = () => {
       return (
         <Popover
           placement="topLeft"
-          arrowPointAtCenter
+          arrow={{
+            pointAtCenter: true,
+          }}
           content={popoverContent}
         >
           <span>{dot}</span>
@@ -366,7 +363,7 @@ const Advanced: FC = () => {
             style={{
               marginBottom: 24,
             }}
-            bordered={false}
+            variant="borderless"
           >
             <Descriptions
               style={{
@@ -477,12 +474,12 @@ const Advanced: FC = () => {
             style={{
               marginBottom: 24,
             }}
-            bordered={false}
+            variant="borderless"
           >
             <Empty />
           </Card>
           <Card
-            bordered={false}
+            variant="borderless"
             tabList={operationTabList}
             onTabChange={onOperationTabChange}
           >

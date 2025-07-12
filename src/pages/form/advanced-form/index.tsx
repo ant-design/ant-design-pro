@@ -190,7 +190,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       onFinishFailed={onFinishFailed}
     >
       <PageContainer content="高级表单常见于一次性输入和提交大批量数据的场景。">
-        <Card title="仓库管理" className={styles.card} bordered={false}>
+        <Card title="仓库管理" className={styles.card} variant="borderless">
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <ProFormText
@@ -363,7 +363,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             </Col>
           </Row>
         </Card>
-        <Card title="任务管理" className={styles.card} bordered={false}>
+        <Card title="任务管理" className={styles.card} variant="borderless">
           <Row gutter={16}>
             <Col lg={6} md={12} sm={24}>
               <ProFormText
@@ -527,7 +527,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             </Col>
           </Row>
         </Card>
-        <Card title="成员管理" bordered={false}>
+        <Card title="成员管理" variant="borderless">
           <ProForm.Item name="members">
             <EditableProTable<TableFormDateType>
               recordCreatorProps={{

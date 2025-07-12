@@ -1,13 +1,12 @@
 import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
 import { Button, Card, Result } from 'antd';
-import { Fragment } from 'react';
 import useStyles from './index.style';
 
 export default () => {
   const { styles } = useStyles();
   const Content = (
-    <Fragment>
+    <>
       <div className={styles.title}>
         <span>您提交的内容有如下错误：</span>
       </div>
@@ -49,11 +48,11 @@ export default () => {
           <RightOutlined />
         </a>
       </div>
-    </Fragment>
+    </>
   );
   return (
     <GridContent>
-      <Card bordered={false}>
+      <Card variant="borderless">
         <Result
           status="error"
           title="提交失败"

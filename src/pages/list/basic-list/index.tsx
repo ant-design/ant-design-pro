@@ -62,7 +62,7 @@ const ListContent = ({
         <Progress
           percent={percent}
           status={status}
-          strokeWidth={6}
+          size={6}
           style={{
             width: 180,
           }}
@@ -191,7 +191,7 @@ export const BasicList: FC = () => {
     <div>
       <PageContainer>
         <div className={styles.standardList}>
-          <Card bordered={false}>
+          <Card variant="borderless">
             <Row>
               <Col sm={8} xs={24}>
                 <Info title="我的待办" value="8个任务" bordered />
