@@ -36,8 +36,8 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
-    "@ant-design/pro-components": "^2.7.19",
-    "antd": "^5.25.4",
+    "@ant-design/pro-components": "^2.8.9",
+    "antd": "^5.26.4",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "antd-style": "^3.7.0",
     "classnames": "^2.5.1",
@@ -47,15 +47,14 @@
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^3.3.0",
-    "@commitlint/cli": "^19.5.0",
-    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@testing-library/dom": "^10.4.0",
-    "@testing-library/react": "^16.0.1",
+    "@testing-library/react": "^16.3.0",
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
-    "@types/lodash": "^4.17.10",
-    "@types/react": "^19.1.5",
-    "@types/react-dom": "^19.1.5",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@types/react-helmet": "^6.1.11",
     "@umijs/max": "^4.3.24",
     "cross-env": "^7.0.3",
@@ -70,8 +69,8 @@
     "typescript": "^5.6.3",
     "umi-presets-pro": "^2.0.3",
     "umi-serve": "^1.9.11",
-    "@biomejs/biome": "^2.0.6",
-    "@types/node": "^24.0.10"
+    "@biomejs/biome": "^2.1.1",
+    "@types/node": "^24.0.13"
   },
   "engines": {
     "node": ">=20.0.0"
