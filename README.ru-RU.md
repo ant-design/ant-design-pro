@@ -1,112 +1,125 @@
-Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | 🇷🇺 | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇵🇹](./README.pt-BR.md) | [🇸🇦](./README.ar-DZ.md)
+# Ant Design Pro
+
+Язык: 🇺🇸 | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇧🇷](./README.pt-BR.md) | [🇩🇿](./README.ar-DZ.md) | [🇪🇸](./README.es-ES.md)
 
 <h1 align="center">Ant Design Pro</h1>
 
 <div align="center">
 
-UI-решение "из коробки" для корпоративных приложений как React boilerplate
+Готовое решение UI для корпоративных приложений на базе React.
 
 [![CI](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml)
 [![Preview Deploy](https://github.com/ant-design/ant-design-pro/actions/workflows/preview-deploy.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/preview-deploy.yml)
 [![Build With Umi](https://img.shields.io/badge/build%20with-umi-028fe4.svg?style=flat-square)](http://umijs.org/)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
-![](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)
+[![](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
 
-![](https://github.com/user-attachments/assets/fde29061-3d9a-4397-8ac2-397b0e033ef5)
+<img width="1718" height="1191" alt="светлая тема" src="https://github.com/user-attachments/assets/74ad0b4a-e086-4955-8edd-9f2cff31aee8" />
+<img width="1718" height="1191" alt="тёмная тема" src="https://github.com/user-attachments/assets/d4bcb7c1-42c7-4c0f-b130-1193a931f9f7" />
 
 </div>
 
-- Демо: http://preview.pro.ant.design
-- Домашняя страница: http://pro.ant.design
+- Превью: http://preview.pro.ant.design
+- Главная страница: http://pro.ant.design
 - Документация: http://pro.ant.design/docs/getting-started
-- История изменений: http://pro.ant.design/docs/changelog
+- Список изменений: http://pro.ant.design/docs/changelog
 - FAQ: http://pro.ant.design/docs/faq
-
-## Поиск переводчиков :loudspeaker:
-
-Нам нужна ваша помощь: https://github.com/ant-design/ant-design-pro/issues/120
 
 ## Возможности
 
-- :gem: **Аккуратный дизайн**: Посмотрите [спецификацию Ant Design](http://ant.design/)
-- :triangular_ruler: **Общие шаблоны**: Стандартные шаблоны для корпоративных приложений
-- :rocket: **Разработка, как искусство**: Новейший стек технологий React/umi/dva/antd
-- :iphone: **Отзывчивая верстка**: Создан для экранов разных размеров
-- :art: **Темизация**: Возможность изменения темы с помощью конфигурации
-- :globe_with_meridians: **Мультиязычность**: Встроенное i18n решение
-- :gear: **Лучшие практики**: Надежные процессы для хорошего кода
-- :1234: **Разработка по шаблону**: Простое в использовании решение для разработки
-- :white_check_mark: **UI тесты**: Разрабатывайте безопасно с юнит и e2e тестами
+- :bulb: **TypeScript**: Язык для масштабируемых JavaScript-приложений
+- :scroll: **Блоки**: Построение страниц с помощью шаблонов блоков
+- :gem: **Элегантный дизайн**: Следует [спецификации Ant Design](http://ant.design/)
+- :triangular_ruler: **Типовые шаблоны**: Типовые шаблоны для корпоративных приложений
+- :rocket: **Современный стек**: Самые новые технологии React/umi/dva/antd
+- :iphone: **Адаптивность**: Поддержка разных размеров экранов
+- :art: **Темизация**: Кастомизация темы через простую конфигурацию
+- :globe_with_meridians: **Интернационализация**: Встроенное решение i18n
+- :gear: **Лучшие практики**: Надёжный workflow для поддержания качества кода
+- :1234: **Мок-разработка**: Удобное решение для разработки с мок-данными
+- :white_check_mark: **UI-тесты**: Безопасность с помощью unit и e2e тестов
 
 ## Шаблоны
 
 ```
-- Dashboard
-  - Analytic
-  - Monitor
-  - Workspace
-- Form
-  - Basic Form
-  - Step Form
-  - Advanced From
-- List
-  - Standard Table
-  - Standard List
-  - Card List
-  - Search List (Project/Applications/Article)
-- Profile
-  - Simple Profile
-  - Advanced Profile
-- Account
-  - Account Center
-  - Account Settings
-- Result
-  - Success
-  - Failed
-- Exception
+- Дашборд
+  - Аналитика
+  - Мониторинг
+  - Рабочее пространство
+- Форма
+  - Базовая форма
+  - Многошаговая форма
+  - Продвинутая форма
+- Список
+  - Стандартная таблица
+  - Стандартный список
+  - Список карточек
+  - Поисковый список (Проект/Приложения/Статья)
+- Профиль
+  - Простой профиль
+  - Продвинутый профиль
+- Аккаунт
+  - Центр аккаунта
+  - Настройки аккаунта
+- Результат
+  - Успех
+  - Ошибка
+- Исключения
   - 403
   - 404
   - 500
-- User
-  - Login
-  - Register
-  - Register Result
+- Пользователь
+  - Вход
+  - Регистрация
+  - Результат регистрации
 ```
 
 ## Использование
 
+### Использование bash
+
+Мы предоставляем pro-cli для быстрой инициализации проекта.
+
 ```bash
-$ mkdir <your-project-name>
-$ cd <your-project-name>
-$ yarn create umi  # or npm create umi
-
-# Choose ant-design-pro:
- Select the boilerplate type (Use arrow keys)
-❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
-  app             - Create project with a simple boilerplate, support typescript.
-  block           - Create a umi block.
-  library         - Create a library with umi.
-  plugin          - Create a umi plugin.
-
-$ git init
-$ npm install
-$ npm start         # visit http://localhost:8000
+# использовать npm
+npm i @ant-design/pro-cli -g
+pro create myapp
 ```
 
-Больше информации в [документации](http://pro.ant.design/docs/getting-started).
+Выберите шаблон pro. Simple — это базовый шаблон, который содержит только необходимый минимум для работы фреймворка. Complete включает все блоки и не подходит для вторичной разработки как базовый шаблон.
 
-## Совместимость
+```shell
+? 🚀 Полный или простой шаблон? (Используйте стрелки)
+➥ simple
+  complete
+```
+
+Инициализация репозитория Git:
+
+```shell
+$ git init myapp
+```
+
+Установка зависимостей:
+
+```shell
+$ cd myapp && tyarn
+// или
+$ cd myapp && npm install
+```
+
+## Поддержка браузеров
 
 Современные браузеры.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --- | --- | --- | --- | --- |
-| Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
+| Edge | последние 2 версии | последние 2 версии | последние 2 версии | последние 2 версии |
 
-## Распространение
+## Вклад
 
-Любые варианты распространения приветствуются! Вот несколько примеров того, как вы можете помочь распространению проекта:
+Любой вклад приветствуется. Вот несколько способов, как вы можете помочь проекту:
 
-- Использовать Ant Design Pro в ежедневной работе.
-- Создавать [задачи](http://github.com/ant-design/ant-design-pro/issues) заводить баги или отвечать на вопросы.
-- Делать [pull-реквесты](http://github.com/ant-design/ant-design-pro/pulls) для совершенствования нашего кода.
+- Используйте Ant Design Pro в своей повседневной работе.
+- Оставляйте [issues](http://github.com/ant-design/ant-design-pro/issues) для сообщений об ошибках или вопросов.
+- Предлагайте [pull requests](http://github.com/ant-design/ant-design-pro/pulls) для улучшения кода. 

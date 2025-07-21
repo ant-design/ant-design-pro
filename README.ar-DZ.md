@@ -1,129 +1,125 @@
-Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇵🇹](./README.pt-BR.md) | 🇸🇦 |
+# Ant Design Pro
+
+اللغة: 🇺🇸 | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇧🇷](./README.pt-BR.md) | [🇩🇿](./README.ar-DZ.md) | [🇪🇸](./README.es-ES.md)
 
 <h1 align="center">Ant Design Pro</h1>
-<div dir="rtl">
 
 <div align="center">
 
-حل UI جاهز لتطبيقات المؤسسات كنموذج معياري لـ React.
+حل واجهة مستخدم جاهز لتطبيقات المؤسسات مبني على React.
 
 [![CI](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml)
 [![Preview Deploy](https://github.com/ant-design/ant-design-pro/actions/workflows/preview-deploy.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/preview-deploy.yml)
 [![Build With Umi](https://img.shields.io/badge/build%20with-umi-028fe4.svg?style=flat-square)](http://umijs.org/)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
-![](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)
+[![](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
 
-![](https://github.com/user-attachments/assets/fde29061-3d9a-4397-8ac2-397b0e033ef5)
+<img width="1718" height="1191" alt="معاينة السمة الفاتحة" src="https://github.com/user-attachments/assets/74ad0b4a-e086-4955-8edd-9f2cff31aee8" />
+<img width="1718" height="1191" alt="معاينة السمة الداكنة" src="https://github.com/user-attachments/assets/d4bcb7c1-42c7-4c0f-b130-1193a931f9f7" />
 
 </div>
 
-- معاينة: http://preview.pro.ant.design
+- المعاينة: http://preview.pro.ant.design
 - الصفحة الرئيسية: http://pro.ant.design
-- توثيق: http://pro.ant.design/docs/getting-started
-- سجل التغيير: http://pro.ant.design/docs/changelog
+- التوثيق: http://pro.ant.design/docs/getting-started
+- سجل التغييرات: http://pro.ant.design/docs/changelog
 - الأسئلة الشائعة: http://pro.ant.design/docs/faq
-
-## 4.0 صدر الآن! 🎉🎉🎉
-
-[الإعلان عن Ant Design Pro 4.0.0](https://medium.com/ant-design/ant-design-pro-v4-is-here-6f23098ae9d9)
-
-## توظيف الترجمة :loudspeaker:
-
-نحن نحتاج مساعدتك: https://github.com/ant-design/ant-design-pro/issues/120
 
 ## الميزات
 
-- :bulb: **تايب سكريبت**: جافا سكريبت لتطوير التطبيقات
-- :scroll: **الكتل**: بناء الصفحة مع قالب كتلة
-- :gem: **تصميم أنيق**: يتبع [مواصفات تصميم النمل](http://ant.design/)
-- :triangular_ruler: **القوالب المشتركة**: قوالب نموذجية لتطبيقات المؤسسة
-- :rocket: **حالة التطور الفني**: أحدث حزمة تطوير لـ React/umi/dva/antd
-- :iphone: **متجاوب**: مصممة لأحجام الشاشات المتغيرة
-- :art: **تصميم**: تصميم قابل للتخصيص مع تكوين بسيط
-- :globe_with_meridians: **عالمي**: تم بناؤه بواسطة i18n solution
-- :gear: **أفضل الممارسات**: سير عمل قوي لجعل الكود سليم
-- :1234: **تطوير وهمي**: سهولة استخدام حل التطوير الوهمي
-- :white_check_mark: **اختبار واجهة المستخدم**: يمكنك الطيران بأمان مع اختبارات الوحدة و e2e
+- :bulb: **TypeScript**: لغة لتطبيقات JavaScript على نطاق واسع
+- :scroll: **الكتل**: بناء الصفحات باستخدام قوالب الكتل
+- :gem: **تصميم أنيق**: يتبع [مواصفات Ant Design](http://ant.design/)
+- :triangular_ruler: **قوالب شائعة**: قوالب نموذجية لتطبيقات المؤسسات
+- :rocket: **تطوير حديث**: أحدث تقنيات React/umi/dva/antd
+- :iphone: **متجاوب**: مصمم لأحجام شاشات مختلفة
+- :art: **تخصيص السمة**: سمة قابلة للتخصيص بإعداد بسيط
+- :globe_with_meridians: **دعم اللغات**: حل i18n مدمج
+- :gear: **أفضل الممارسات**: سير عمل قوي للحفاظ على صحة الكود
+- :1234: **تطوير وهمي**: حل تطوير وهمي سهل الاستخدام
+- :white_check_mark: **اختبار الواجهة**: أمان مع اختبارات الوحدة وe2e
 
 ## القوالب
 
 ```
 - لوحة القيادة
-  - تحليلي
-  - مراقب
+  - تحليلات
+  - مراقبة
   - مساحة العمل
-- نموذج
-  - النموذج الأساسي
-  - نموذج الخطوة
+- النماذج
+  - نموذج أساسي
+  - نموذج متعدد الخطوات
   - نموذج متقدم
-- القائمة
-  - الجدول القياسي
-  - القائمة القياسية
+- القوائم
+  - جدول قياسي
+  - قائمة قياسية
   - قائمة البطاقات
-  - قائمة البحث (Project/Applications/Article)
+  - قائمة البحث (مشروع/تطبيقات/مقال)
 - الملف الشخصي
   - ملف شخصي بسيط
   - ملف شخصي متقدم
 - الحساب
   - مركز الحساب
-  - اعدادات الحساب
-- النتيجة
+  - إعدادات الحساب
+- النتائج
   - نجاح
   - فشل
-- استثناء
+- الاستثناءات
   - 403
   - 404
   - 500
 - المستخدم
   - تسجيل الدخول
-  - تسجيل
-  - تسجيل النتائج
+  - التسجيل
+  - نتيجة التسجيل
 ```
 
-## الإستخدام
+## الاستخدام
 
-### استخدام ال bash
+### استخدام bash
 
-</div>
-
-<div dir="ltr">
+نوفر pro-cli لبدء المشروع بسرعة.
 
 ```bash
-$ mkdir <your-project-name>
-$ cd <your-project-name>
-$ yarn create umi  # or npm create umi
-
-# Choose ant-design-pro:
- Select the boilerplate type (Use arrow keys)
-❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
-  app             - Create project with a simple boilerplate, support typescript.
-  block           - Create a umi block.
-  library         - Create a library with umi.
-  plugin          - Create a umi plugin.
-
-$ git init
-$ npm install
-$ npm start         # visit http://localhost:8000
+# استخدم npm
+npm i @ant-design/pro-cli -g
+pro create myapp
 ```
 
-</div>
+اختر قالب pro. Simple هو القالب الأساسي الذي يوفر فقط المحتوى الأساسي لتشغيل الإطار. Complete يحتوي على جميع الكتل، وهو غير مناسب كقالب أساسي للتطوير الثانوي.
 
-<div dir="rtl">
+```shell
+? 🚀 مشروع كامل أم هيكل بسيط؟ (استخدم الأسهم)
+➥ simple
+  complete
+```
 
-## دعم المتصفحات
+تهيئة مستودع Git:
 
-المتصفحات الحديثة و.
+```shell
+$ git init myapp
+```
+
+تثبيت التبعيات:
+
+```shell
+$ cd myapp && tyarn
+// أو
+$ cd myapp && npm install
+```
+
+## المتصفحات المدعومة
+
+المتصفحات الحديثة.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --- | --- | --- | --- | --- |
-| Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
+| Edge | آخر إصدارين | آخر إصدارين | آخر إصدارين | آخر إصدارين |
 
 ## المساهمة
 
-نرحب بأي نوع من المساهمات ، وإليك بعض الأمثلة عن كيفية المساهمة في هذا المشروع:
+أي مساهمة مرحب بها. إليك بعض الطرق للمساهمة في هذا المشروع:
 
 - استخدم Ant Design Pro في عملك اليومي.
-- إرسال [القضايا](http://github.com/ant-design/ant-design-pro/issues) للإبلاغ عن مشكل أو لطرح أسئلة
-- اقترح [طلبات السحب](http://github.com/ant-design/ant-design-pro/pulls) لتحسين الكود الخاص بنا.
-
-</div>
+- أرسل [issues](http://github.com/ant-design/ant-design-pro/issues) للإبلاغ عن الأخطاء أو طرح الأسئلة.
+- اقترح [pull requests](http://github.com/ant-design/ant-design-pro/pulls) لتحسين الكود الخاص بنا. 

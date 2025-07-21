@@ -1,109 +1,116 @@
-Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | 🇵🇹 | [🇸🇦](./README.ar-DZ.md)
+# Ant Design Pro
+
+Idioma: 🇺🇸 | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇧🇷](./README.pt-BR.md) | [🇩🇿](./README.ar-DZ.md) | [🇪🇸](./README.es-ES.md)
 
 <h1 align="center">Ant Design Pro</h1>
 
 <div align="center">
 
-Uma solução de UI pronta para aplicações corporativos na forma de um boilerplate React.
+Uma solução de UI pronta para uso para aplicações empresariais baseada em React.
 
 [![CI](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml)
 [![Preview Deploy](https://github.com/ant-design/ant-design-pro/actions/workflows/preview-deploy.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/preview-deploy.yml)
 [![Build With Umi](https://img.shields.io/badge/build%20with-umi-028fe4.svg?style=flat-square)](http://umijs.org/)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
-![](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)
+[![](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
 
-![](https://github.com/user-attachments/assets/fde29061-3d9a-4397-8ac2-397b0e033ef5)
+<img width="1718" height="1191" alt="visualização do tema claro" src="https://github.com/user-attachments/assets/74ad0b4a-e086-4955-8edd-9f2cff31aee8" />
+<img width="1718" height="1191" alt="visualização do tema escuro" src="https://github.com/user-attachments/assets/d4bcb7c1-42c7-4c0f-b130-1193a931f9f7" />
 
 </div>
 
-- Prévia: http://preview.pro.ant.design
-- Página Inicial: http://pro.ant.design
+- Visualizar: http://preview.pro.ant.design
+- Página inicial: http://pro.ant.design
 - Documentação: http://pro.ant.design/docs/getting-started
-- Mudanças: http://pro.ant.design/docs/changelog
+- Registro de alterações: http://pro.ant.design/docs/changelog
 - FAQ: http://pro.ant.design/docs/faq
 
-## 4.0 Lançado! 🎉🎉🎉
+## Funcionalidades
 
-[Anúncio do Ant Design Pro 4.0.0](https://medium.com/ant-design/ant-design-pro-v4-is-here-6f23098ae9d9)
-
-## Recrutamento para tradução :loudspeaker:
-
-Precisamos da sua ajuda: https://github.com/ant-design/ant-design-pro/issues/120
-
-## Recursos
-
-- :bulb: **TypeScript**: Uma linguaguem para escalar aplicações JavaScript
-- :scroll: **Blocks**: Crie páginas com block template
-- :gem: **Design Elegante**: Segue as [especificações do Ant Design](http://ant.design/)
-- :triangular_ruler: **Modelos Comuns**: Modelos comuns para apliações empresariais
-- :rocket: **Estado da Arte do Desenvolvimento**: Stack de desenvolvimento mais recente do React/umi/dva/antd
-- :iphone: **Responsivo**: Projetado para tamanhos de telas variados
-- :art: **Personalização**: Customizável através de uma simples configuração
-- :globe_with_meridians: **Internacionalização**: Incluso i18n por padrão
-- :gear: **Melhores Práticas**: Fluxo de trabalho sólido para manter seu código saudável
-- :1234: **Desenvolvimento de Mock**: Fácil solução para desenvolvimento de mocks
-- :white_check_mark: **Testes de UI**: Voe tranquilamente com testes unitários e testes e2e
+- :bulb: **TypeScript**: Uma linguagem para aplicações JavaScript em larga escala
+- :scroll: **Blocos**: Construa páginas com modelos de blocos
+- :gem: **Design elegante**: Segue a [especificação do Ant Design](http://ant.design/)
+- :triangular_ruler: **Modelos comuns**: Modelos típicos para aplicações empresariais
+- :rocket: **Desenvolvimento de ponta**: Stack mais recente de React/umi/dva/antd
+- :iphone: **Responsivo**: Projetado para diferentes tamanhos de tela
+- :art: **Temas**: Tema personalizável com configuração simples
+- :globe_with_meridians: **Internacionalização**: Solução i18n integrada
+- :gear: **Boas práticas**: Workflow sólido para manter seu código saudável
+- :1234: **Desenvolvimento mock**: Solução de mock fácil de usar
+- :white_check_mark: **Teste de UI**: Segurança com testes unitários e e2e
 
 ## Modelos
 
 ```
-- Painel de Controle
-  - Gráficos
+- Painel
+  - Analítico
   - Monitoramento
-  - Areás de Trabalho
-- Formulários
-  - Formulários Básicos
-  - Formulário com Etapas
-  - Formulários Avançados
-- Listas
-  - Tabela Padrão
-  - Lista Padrão
-  - Lista com Cards
-  - Lista com Busca (Projeto/Aplicações/Artigos)
-- Perfís
-  - Perfil Simples
-  - Perfil Avançado
+  - Espaço de trabalho
+- Formulário
+  - Formulário básico
+  - Formulário em etapas
+  - Formulário avançado
+- Lista
+  - Tabela padrão
+  - Lista padrão
+  - Lista de cartões
+  - Lista de busca (Projeto/Aplicações/Artigo)
+- Perfil
+  - Perfil simples
+  - Perfil avançado
 - Conta
-  - Detalhes da Conta
-  - Configurações da Conta
-- Resultados
-  - Secesso
+  - Central da conta
+  - Configurações da conta
+- Resultado
+  - Sucesso
   - Falha
-- Exceções
+- Exceção
   - 403
   - 404
   - 500
 - Usuário
   - Login
-  - Cadastro
-  - Resultado do Cadastro
+  - Registro
+  - Resultado do registro
 ```
 
 ## Uso
 
-### Use o bash
+### Usando bash
+
+Fornecemos o pro-cli para inicializar rapidamente o projeto.
 
 ```bash
-$ mkdir <your-project-name>
-$ cd <your-project-name>
-$ yarn create umi  # ou npm create umi
-
-# Escolha ant-design-pro:
- Selecione o tipo do boilerplate (Use as teclas de seta)
-❯ ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.
-  app             - Create project with a simple boilerplate, support typescript.
-  block           - Create a umi block.
-  library         - Create a library with umi.
-  plugin          - Create a umi plugin.
-
-$ git init
-$ npm install
-$ npm start         # visit http://localhost:8000
+# usar npm
+npm i @ant-design/pro-cli -g
+pro create myapp
 ```
 
-## Suporte a navegadores
+Escolha o modelo pro. Simple é o modelo básico, que fornece apenas o conteúdo essencial para o funcionamento do framework. Complete contém todos os blocos, não sendo adequado como modelo base para desenvolvimento secundário.
 
-Navegadores modernos .
+```shell
+? 🚀 Projeto completo ou um esqueleto simples? (Use as setas)
+➥ simple
+  complete
+```
+
+Inicialize o repositório Git:
+
+```shell
+$ git init myapp
+```
+
+Instale as dependências:
+
+```shell
+$ cd myapp && tyarn
+// ou
+$ cd myapp && npm install
+```
+
+## Navegadores suportados
+
+Navegadores modernos.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --- | --- | --- | --- | --- |
@@ -111,8 +118,8 @@ Navegadores modernos .
 
 ## Contribuindo
 
-Qualquer tipo de contribuição é bem-vinda, aqui estão alguns exemplos de como você pode contribuir com esse projeto:
+Qualquer tipo de contribuição é bem-vinda. Aqui estão alguns exemplos de como você pode contribuir para este projeto:
 
-- Use Ant Design Pro no seu trabalho diário.
-- Submeta [issues](http://github.com/ant-design/ant-design-pro/issues) para reportar bugs ou tirar dúvidas.
-- Proponha [pull requests](http://github.com/ant-design/ant-design-pro/pulls) para melhorar nosso código.
+- Use o Ant Design Pro no seu trabalho diário.
+- Envie [issues](http://github.com/ant-design/ant-design-pro/issues) para relatar bugs ou fazer perguntas.
+- Proponha [pull requests](http://github.com/ant-design/ant-design-pro/pulls) para melhorar nosso código. 
