@@ -1,12 +1,12 @@
 # Ant Design Pro
 
-Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇧🇷](./README.pt-BR.md) | [🇩🇿](./README.ar-DZ.md) | [🇪🇸](./README.es-ES.md)
+Язык: 🇺🇸 | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇧🇷](./README.pt-BR.md) | [🇩🇿](./README.ar-DZ.md) | [🇪🇸](./README.es-ES.md)
 
 <h1 align="center">Ant Design Pro</h1>
 
 <div align="center">
 
-An out-of-box UI solution for enterprise applications as a React boilerplate.
+Готовое решение UI для корпоративных приложений на базе React.
 
 [![CI](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml)
 [![Preview Deploy](https://github.com/ant-design/ant-design-pro/actions/workflows/preview-deploy.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/preview-deploy.yml)
@@ -14,112 +14,112 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 [![](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
 
-<img width="1718" height="1191" alt="light theme preview" src="https://github.com/user-attachments/assets/74ad0b4a-e086-4955-8edd-9f2cff31aee8" />
-<img width="1718" height="1191" alt="dark theme preview" src="https://github.com/user-attachments/assets/d4bcb7c1-42c7-4c0f-b130-1193a931f9f7" />
+<img width="1718" height="1191" alt="светлая тема" src="https://github.com/user-attachments/assets/74ad0b4a-e086-4955-8edd-9f2cff31aee8" />
+<img width="1718" height="1191" alt="тёмная тема" src="https://github.com/user-attachments/assets/d4bcb7c1-42c7-4c0f-b130-1193a931f9f7" />
 
 </div>
 
-- Preview: http://preview.pro.ant.design
-- Home Page: http://pro.ant.design
-- Documentation: http://pro.ant.design/docs/getting-started
-- ChangeLog: http://pro.ant.design/docs/changelog
+- Превью: http://preview.pro.ant.design
+- Главная страница: http://pro.ant.design
+- Документация: http://pro.ant.design/docs/getting-started
+- Список изменений: http://pro.ant.design/docs/changelog
 - FAQ: http://pro.ant.design/docs/faq
 
-## Features
+## Возможности
 
-- :bulb: **TypeScript**: A language for application-scale JavaScript
-- :scroll: **Blocks**: Build page with block template
-- :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
-- :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd
-- :iphone: **Responsive**: Designed for variable screen sizes
-- :art: **Theming**: Customizable theme with simple config
-- :globe_with_meridians: **International**: Built-in i18n solution
-- :gear: **Best Practices**: Solid workflow to make your code healthy
-- :1234: **Mock development**: Easy to use mock development solution
-- :white_check_mark: **UI Test**: Fly safely with unit and e2e tests
+- :bulb: **TypeScript**: Язык для масштабируемых JavaScript-приложений
+- :scroll: **Блоки**: Построение страниц с помощью шаблонов блоков
+- :gem: **Элегантный дизайн**: Следует [спецификации Ant Design](http://ant.design/)
+- :triangular_ruler: **Типовые шаблоны**: Типовые шаблоны для корпоративных приложений
+- :rocket: **Современный стек**: Самые новые технологии React/umi/dva/antd
+- :iphone: **Адаптивность**: Поддержка разных размеров экранов
+- :art: **Темизация**: Кастомизация темы через простую конфигурацию
+- :globe_with_meridians: **Интернационализация**: Встроенное решение i18n
+- :gear: **Лучшие практики**: Надёжный workflow для поддержания качества кода
+- :1234: **Мок-разработка**: Удобное решение для разработки с мок-данными
+- :white_check_mark: **UI-тесты**: Безопасность с помощью unit и e2e тестов
 
-## Templates
+## Шаблоны
 
 ```
-- Dashboard
-  - Analytic
-  - Monitor
-  - Workspace
-- Form
-  - Basic Form
-  - Step Form
-  - Advanced From
-- List
-  - Standard Table
-  - Standard List
-  - Card List
-  - Search List (Project/Applications/Article)
-- Profile
-  - Simple Profile
-  - Advanced Profile
-- Account
-  - Account Center
-  - Account Settings
-- Result
-  - Success
-  - Failed
-- Exception
+- Дашборд
+  - Аналитика
+  - Мониторинг
+  - Рабочее пространство
+- Форма
+  - Базовая форма
+  - Многошаговая форма
+  - Продвинутая форма
+- Список
+  - Стандартная таблица
+  - Стандартный список
+  - Список карточек
+  - Поисковый список (Проект/Приложения/Статья)
+- Профиль
+  - Простой профиль
+  - Продвинутый профиль
+- Аккаунт
+  - Центр аккаунта
+  - Настройки аккаунта
+- Результат
+  - Успех
+  - Ошибка
+- Исключения
   - 403
   - 404
   - 500
-- User
-  - Login
-  - Register
-  - Register Result
+- Пользователь
+  - Вход
+  - Регистрация
+  - Результат регистрации
 ```
 
-## Usage
+## Использование
 
-### Use bash
+### Использование bash
 
-We provide pro-cli to quickly initialize scaffolding.
+Мы предоставляем pro-cli для быстрой инициализации проекта.
 
 ```bash
-# use npm
+# использовать npm
 npm i @ant-design/pro-cli -g
 pro create myapp
 ```
 
-Choose the pro template. Simple is the basic template, which only provides the basic content of the framework operation. Complete contains all blocks, which is not suitable for secondary development as a basic template.
+Выберите шаблон pro. Simple — это базовый шаблон, который содержит только необходимый минимум для работы фреймворка. Complete включает все блоки и не подходит для вторичной разработки как базовый шаблон.
 
 ```shell
-? 🚀 Full or a simple scaffold? (Use arrow keys)
+? 🚀 Полный или простой шаблон? (Используйте стрелки)
 ➥ simple
   complete
 ```
 
-Initialized Git repository:
+Инициализация репозитория Git:
 
 ```shell
 $ git init myapp
 ```
 
-Install dependencies:
+Установка зависимостей:
 
 ```shell
 $ cd myapp && tyarn
-// or
+// или
 $ cd myapp && npm install
 ```
 
-## Browsers support
+## Поддержка браузеров
 
-Modern browsers.
+Современные браузеры.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
 | --- | --- | --- | --- | --- |
-| Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
+| Edge | последние 2 версии | последние 2 версии | последние 2 версии | последние 2 версии |
 
-## Contributing
+## Вклад
 
-Any type of contribution is welcome, here are some examples of how you may contribute to this project:
+Любой вклад приветствуется. Вот несколько способов, как вы можете помочь проекту:
 
-- Use Ant Design Pro in your daily work.
-- Submit [issues](http://github.com/ant-design/ant-design-pro/issues) to report bugs or ask questions.
-- Propose [pull requests](http://github.com/ant-design/ant-design-pro/pulls) to improve our code. 
+- Используйте Ant Design Pro в своей повседневной работе.
+- Оставляйте [issues](http://github.com/ant-design/ant-design-pro/issues) для сообщений об ошибках или вопросов.
+- Предлагайте [pull requests](http://github.com/ant-design/ant-design-pro/pulls) для улучшения кода. 
