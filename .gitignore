@@ -33,6 +33,10 @@ functions/*
 .umi-production
 .umi-test
 
+# next.js
+.next/
+out/
+
 # screenshot
 screenshot
 .firebase
