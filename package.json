@@ -57,7 +57,7 @@
     "@types/react-dom": "^19.1.6",
     "@types/react-helmet": "^6.1.11",
     "@umijs/max": "^4.3.24",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.0.0",
     "express": "^4.21.1",
     "gh-pages": "^6.1.1",
     "husky": "^9.1.7",
