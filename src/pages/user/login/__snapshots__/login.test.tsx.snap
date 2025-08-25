@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Login Page should login success 1`] = `
 <DocumentFragment>
@@ -40,7 +40,7 @@ exports[`Login Page should login success 1`] = `
         </span>
       </div>
       <div
-        style="flex: 1; padding: 32px 0px;"
+        style="flex: 1 1 0%; padding: 32px 0px;"
       >
         <div
           class="ant-pro-form-login-container "
@@ -186,7 +186,7 @@ exports[`Login Page should login success 1`] = `
                 </div>
               </div>
               <div
-                class="ant-form-item css-var-«r7» ant-form-css-var ant-form-item-has-success"
+                class="ant-form-item css-var-«r7» ant-form-css-var ant-form-item-has-success ant-form-item-vertical"
               >
                 <div
                   class="ant-row ant-form-item-row css-var-«r7»"
@@ -270,7 +270,7 @@ exports[`Login Page should login success 1`] = `
                 </div>
               </div>
               <div
-                class="ant-form-item css-var-«r7» ant-form-css-var ant-form-item-has-success"
+                class="ant-form-item css-var-«r7» ant-form-css-var ant-form-item-has-success ant-form-item-vertical"
               >
                 <div
                   class="ant-row ant-form-item-row css-var-«r7»"
@@ -584,7 +584,7 @@ exports[`Login Page should show login form 1`] = `
         </span>
       </div>
       <div
-        style="flex: 1; padding: 32px 0px;"
+        style="flex: 1 1 0%; padding: 32px 0px;"
       >
         <div
           class="ant-pro-form-login-container "
@@ -730,7 +730,7 @@ exports[`Login Page should show login form 1`] = `
                 </div>
               </div>
               <div
-                class="ant-form-item css-var-«r0» ant-form-css-var"
+                class="ant-form-item css-var-«r0» ant-form-css-var ant-form-item-vertical"
               >
                 <div
                   class="ant-row ant-form-item-row css-var-«r0»"
@@ -814,7 +814,7 @@ exports[`Login Page should show login form 1`] = `
                 </div>
               </div>
               <div
-                class="ant-form-item css-var-«r0» ant-form-css-var"
+                class="ant-form-item css-var-«r0» ant-form-css-var ant-form-item-vertical"
               >
                 <div
                   class="ant-row ant-form-item-row css-var-«r0»"
