@@ -13,10 +13,14 @@
           height: 100%;
           margin: 0;
           padding: 0;
+          overflow-x: hidden;
+          box-sizing: border-box;
         }
         #root {
           background-repeat: no-repeat;
           background-size: 100% auto;
+          max-width: 100%;
+          box-sizing: border-box;
         }
 
         .loading-title {
@@ -34,6 +38,8 @@
           align-items: center;
           justify-content: center;
           padding: 26px;
+          max-width: 100%;
+          box-sizing: border-box;
         }
         .ant-spin {
           position: absolute;
@@ -179,6 +185,10 @@
         justify-content: center;
         height: 100%;
         min-height: 362px;
+        max-width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        padding: 20px;
       ">
         <div class="page-loading-warp">
           <div class="ant-spin ant-spin-lg ant-spin-spinning">
