@@ -48,7 +48,7 @@
   "devDependencies": {
     "@ant-design/pro-cli": "^3.3.0",
     "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/config-conventional": "^20.0.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.3.0",
     "@types/express": "^5.0.3",
