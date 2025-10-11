@@ -11,6 +11,7 @@ import React from 'react';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import useStyles from './index.style';
+
 export function formatWan(val: number) {
   const v = val * 1;
   if (!v || Number.isNaN(v)) return '';
@@ -35,19 +36,13 @@ export function formatWan(val: number) {
   }
   return result;
 }
-const Applications: React.FC = () => {
-  const { styles: stylesApplications } = useStyles();
-  // 获取tab列表数据
-  const { data: listData } = useRequest(() => {
-    return queryFakeList({
-      count: 30,
-    });
-  });
 
-  const CardInfo: React.FC<{
-    activeUser: React.ReactNode;
-    newUser: React.ReactNode;
-  }> = ({ activeUser, newUser }) => (
+const CardInfo: React.FC<{
+  activeUser: React.ReactNode;
+  newUser: React.ReactNode;
+}> = ({ activeUser, newUser }) => {
+  const { styles: stylesApplications } = useStyles();
+  return (
     <div className={stylesApplications.cardInfo}>
       <div>
         <p>活跃用户</p>
@@ -59,6 +54,17 @@ const Applications: React.FC = () => {
       </div>
     </div>
   );
+};
+
+const Applications: React.FC = () => {
+  const { styles: stylesApplications } = useStyles();
+  // 获取tab列表数据
+  const { data: listData } = useRequest(() => {
+    return queryFakeList({
+      count: 30,
+    });
+  });
+
   return (
     <List<ListItemDataType>
       rowKey="id"

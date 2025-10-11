@@ -21,6 +21,37 @@ const FormItem = Form.Item;
 
 const pageSize = 5;
 
+const IconText: React.FC<{
+  type: string;
+  text: React.ReactNode;
+}> = ({ type, text }) => {
+  switch (type) {
+    case 'star-o':
+      return (
+        <span>
+          <StarOutlined style={{ marginRight: 8 }} />
+          {text}
+        </span>
+      );
+    case 'like-o':
+      return (
+        <span>
+          <LikeOutlined style={{ marginRight: 8 }} />
+          {text}
+        </span>
+      );
+    case 'message':
+      return (
+        <span>
+          <MessageOutlined style={{ marginRight: 8 }} />
+          {text}
+        </span>
+      );
+    default:
+      return null;
+  }
+};
+
 const Articles: FC = () => {
   const [form] = Form.useForm();
 
@@ -67,37 +98,6 @@ const Articles: FC = () => {
       name: '姚明',
     },
   ];
-
-  const IconText: React.FC<{
-    type: string;
-    text: React.ReactNode;
-  }> = ({ type, text }) => {
-    switch (type) {
-      case 'star-o':
-        return (
-          <span>
-            <StarOutlined style={{ marginRight: 8 }} />
-            {text}
-          </span>
-        );
-      case 'like-o':
-        return (
-          <span>
-            <LikeOutlined style={{ marginRight: 8 }} />
-            {text}
-          </span>
-        );
-      case 'message':
-        return (
-          <span>
-            <MessageOutlined style={{ marginRight: 8 }} />
-            {text}
-          </span>
-        );
-      default:
-        return null;
-    }
-  };
 
   const formItemLayout = {
     wrapperCol: {
