@@ -16,6 +16,7 @@
     "lint": "npm run biome:lint && npm run tsc",
     "lint-staged": "lint-staged",
     "biome:lint": "npx @biomejs/biome lint",
+    "biome": "biome check --write",
     "openapi": "max openapi",
     "prepare": "husky",
     "preview": "npm run build && max preview --port 8000",

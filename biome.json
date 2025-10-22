@@ -4,17 +4,17 @@
     "ignoreUnknown": true,
     "includes": [
       "**/*",
-      "!**/.umi/**",
-      "!**/.umi-production/**",
-      "!**/.umi-test/**",
-      "!**/.umi-test-production/**",
-      "!**/src/services/**",
-      "!**/mock/**",
-      "!**/dist/**",
-      "!**/server/**",
-      "!**/public/**",
-      "!**/coverage/**",
-      "!**/node_modules/**",
+      "!**/.umi",
+      "!**/.umi-production",
+      "!**/.umi-test",
+      "!**/.umi-test-production",
+      "!**/src/services",
+      "!**/mock",
+      "!**/dist",
+      "!**/server",
+      "!**/public",
+      "!**/coverage",
+      "!**/node_modules",
       "!biome.json"
     ]
   },
@@ -30,7 +30,8 @@
         "noExplicitAny": "off"
       },
       "correctness": {
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "useUniqueElementIds": "off"
       },
       "a11y": {
         "noStaticElementInteractions": "off",

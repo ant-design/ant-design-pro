@@ -154,29 +154,31 @@ export const BasicList: FC = () => {
       />
     </div>
   );
-  const MoreBtn: React.FC<{
-    item: BasicListItemDataType;
-  }> = ({ item }) => (
-    <Dropdown
-      menu={{
-        onClick: ({ key }) => editAndDelete(key, item),
-        items: [
-          {
-            key: 'edit',
-            label: '编辑',
-          },
-          {
-            key: 'delete',
-            label: '删除',
-          },
-        ],
-      }}
-    >
-      <a>
-        更多 <DownOutlined />
-      </a>
-    </Dropdown>
-  );
+
+  const renderMoreBtn = (item: BasicListItemDataType) => {
+    return (
+      <Dropdown
+        menu={{
+          onClick: ({ key }) => editAndDelete(key, item),
+          items: [
+            {
+              key: 'edit',
+              label: '编辑',
+            },
+            {
+              key: 'delete',
+              label: '删除',
+            },
+          ],
+        }}
+      >
+        <a>
+          更多 <DownOutlined />
+        </a>
+      </Dropdown>
+    );
+  };
+
   const handleDone = () => {
     setDone(false);
     setVisible(false);
@@ -237,7 +239,7 @@ export const BasicList: FC = () => {
                     >
                       编辑
                     </a>,
-                    <MoreBtn key="more" item={item} />,
+                    renderMoreBtn(item),
                   ]}
                 >
                   <List.Item.Meta
