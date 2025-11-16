@@ -68,4 +68,9 @@ export default {
   'pages.searchTable.tenThousand': '万',
   'pages.searchTable.batchDeletion': '批量删除',
   'pages.searchTable.batchApproval': '批量审批',
+  'tts.title': '文字转语音',
+  'tts.register': '注册',
+  'tts.banner': 'banner 图片',
+  'tts.inputPlaceholder': '输入中英文',
+  'tts.generate': '生成',
 };

@@ -73,4 +73,9 @@ export default {
   'pages.searchTable.tenThousand': '0000',
   'pages.searchTable.batchDeletion': 'batch deletion',
   'pages.searchTable.batchApproval': 'batch approval',
+  'tts.title': 'Text to Speech',
+  'tts.register': 'Register',
+  'tts.banner': 'Banner Image',
+  'tts.inputPlaceholder': 'Enter Chinese/English',
+  'tts.generate': 'Generate',
 };

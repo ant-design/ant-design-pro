@@ -56,6 +56,10 @@ export default [
     redirect: '/welcome',
   },
   {
+    path: '/tts-mobile-pro',
+    component: './tts_mobile_pro',
+  },
+  {
     component: '404',
     layout: false,
     path: './*',
