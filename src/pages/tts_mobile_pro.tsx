@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Input, List, Space, Spin, message, InfiniteScroll } from 'antd';
+import { Button, Input, List, Space, Spin, message } from 'antd';
+import InfiniteScroll from 'react-infinite-scroller';
 import { PlayCircleOutlined, MenuOutlined, SettingOutlined, SoundOutlined } from '@ant-design/icons';
 import { useIntl } from 'umi';
 import styles from './tts_mobile_pro.less';

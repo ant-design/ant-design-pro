@@ -18,7 +18,7 @@ export default [
       {
         name: 'login',
         path: '/user/login',
-        component: './user/login',
+        component: './user',
       },
     ],
   },
@@ -63,7 +63,7 @@ export default [
     name: 'spoken-practice',
     icon: 'mic',
     path: '/spoken-practice',
-    component: './spokenPages/SpokenPractice',
+    component: './spokenPages',
   },
   {
     component: '404',

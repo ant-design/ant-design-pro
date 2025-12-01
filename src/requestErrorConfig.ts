@@ -1,6 +1,5 @@
-﻿import type { RequestOptions } from '@@/plugin-request/request';
+import type { RequestOptions } from '@@/plugin-request/request';
 import type { RequestConfig } from '@umijs/max';
-import { message, notification } from 'antd';
 
 // 错误处理方案： 错误类型
 enum ErrorShowType {
@@ -51,36 +50,43 @@ export const errorConfig: RequestConfig = {
               // do nothing
               break;
             case ErrorShowType.WARN_MESSAGE:
-              message.warning(errorMessage);
+              // 避免使用静态 message，让业务组件自行处理警告
+              console.warn(errorMessage);
               break;
             case ErrorShowType.ERROR_MESSAGE:
-              message.error(errorMessage);
+              // 避免使用静态 message，让业务组件自行处理错误
+              console.error(errorMessage);
               break;
             case ErrorShowType.NOTIFICATION:
-              notification.open({
-                description: errorMessage,
-                message: errorCode,
-              });
+              // 避免使用静态 notification
+              console.error(`Notification: ${errorCode} - ${errorMessage}`);
               break;
             case ErrorShowType.REDIRECT:
               // TODO: redirect
               break;
             default:
-              message.error(errorMessage);
+              // 避免使用静态 message
+              console.error(errorMessage);
           }
         }
       } else if (error.response) {
         // Axios 的错误
         // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
-        message.error(`Response status:${error.response.status}`);
+        console.error(`Response status:${error.response.status}`);
+        // 抛出错误让业务组件处理
+        throw error;
       } else if (error.request) {
         // 请求已经成功发起，但没有收到响应
         // \`error.request\` 在浏览器中是 XMLHttpRequest 的实例，
         // 而在node.js中是 http.ClientRequest 的实例
-        message.error('None response! Please retry.');
+        console.error('None response! Please retry.');
+        // 抛出错误让业务组件处理
+        throw error;
       } else {
         // 发送请求时出了点问题
-        message.error('Request error, please retry.');
+        console.error('Request error, please retry.');
+        // 抛出错误让业务组件处理
+        throw error;
       }
     },
   },
@@ -101,7 +107,8 @@ export const errorConfig: RequestConfig = {
       const { data } = response as unknown as ResponseStructure;
 
       if (data?.success === false) {
-        message.error('请求失败！');
+        // 避免使用静态 message，使用 console.error 替代
+        console.error('请求失败！');
       }
       return response;
     },
