@@ -1,0 +1,367 @@
+.spoken-practice-layout {
+  height: 100vh;
+  background-color: #f5f5f5;
+
+  .spoken-practice-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0 24px;
+    height: 64px;
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .app-icon {
+      background-color: #1890ff;
+    }
+
+    .header-center {
+      flex: 1;
+      text-align: center;
+
+      .app-title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+      }
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-button {
+      border: none;
+      color: #666;
+
+      &:hover {
+        background-color: #f0f0f0;
+        color: #1890ff;
+      }
+    }
+
+    .user-avatar {
+      background-color: #52c41a;
+    }
+  }
+
+  .spoken-practice-content {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 64px);
+    padding: 24px;
+    gap: 24px;
+
+    .conversation-area {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+      .message-item {
+        display: flex;
+        max-width: 70%;
+
+        &.user {
+          align-self: flex-end;
+          flex-direction: row-reverse;
+
+          .message-bubble {
+            background-color: #1890ff;
+            color: #fff;
+            border-radius: 12px 12px 0 12px;
+          }
+        }
+
+        &.ai {
+          align-self: flex-start;
+
+          .message-bubble {
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 12px 12px 12px 0;
+          }
+        }
+
+        .message-bubble {
+          padding: 12px 16px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+          .message-content {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            line-height: 1.5;
+          }
+
+          .message-timestamp {
+            margin: 0;
+            font-size: 12px;
+            opacity: 0.7;
+            text-align: right;
+          }
+        }
+      }
+    }
+
+    .input-area {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      padding: 16px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+      .text-input {
+        flex: 1;
+        border-radius: 8px;
+        border: 1px solid #d9d9d9;
+
+        &:focus {
+          border-color: #1890ff;
+          box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+      }
+
+      .input-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .voice-button,
+      .send-button {
+        border-radius: 8px;
+      }
+    }
+
+    .score-area {
+      padding: 16px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+      .score-title {
+        margin: 0 0 16px 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .score-details {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .score-item {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+
+          .score-label {
+            width: 120px;
+            font-size: 14px;
+            color: #666;
+          }
+
+          .score-progress {
+            flex: 1;
+          }
+
+          .score-value {
+            width: 60px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
+
+.recording-modal {
+  .ant-modal-content {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+  }
+
+  .recording-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 48px;
+
+    .mic-icon-container {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 1.5s infinite;
+    }
+
+    .mic-icon {
+      font-size: 60px;
+      color: #ff4d4f;
+    }
+
+    .recording-title {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .recording-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .cancel-button {
+      width: 120px;
+      height: 48px;
+      border-radius: 24px;
+      font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.4);
+        color: #fff;
+      }
+    }
+
+    .finish-button {
+      width: 120px;
+      height: 48px;
+      border-radius: 24px;
+      font-size: 16px;
+      background-color: #1890ff;
+      border: none;
+
+      &:hover {
+        background-color: #40a9ff;
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .spoken-practice-layout {
+    .spoken-practice-header {
+      padding: 0 16px;
+
+      .app-title {
+        font-size: 18px;
+      }
+    }
+
+    .spoken-practice-content {
+      padding: 16px;
+
+      .conversation-area {
+        max-width: 100%;
+        padding: 16px;
+
+        .message-item {
+          max-width: 85%;
+        }
+      }
+
+      .input-area {
+        padding: 12px;
+        flex-direction: column;
+        align-items: stretch;
+
+        .input-buttons {
+          justify-content: flex-end;
+        }
+      }
+
+      .score-area {
+        padding: 12px;
+
+        .score-details {
+          .score-item {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+
+            .score-label {
+              width: auto;
+            }
+
+            .score-value {
+              width: auto;
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .recording-modal {
+    .recording-content {
+      padding: 32px;
+
+      .mic-icon-container {
+        width: 80px;
+        height: 80px;
+      }
+
+      .mic-icon {
+        font-size: 40px;
+      }
+
+      .recording-title {
+        font-size: 20px;
+      }
+
+      .recording-buttons {
+        flex-direction: column;
+        width: 100%;
+
+        .cancel-button,
+        .finish-button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
