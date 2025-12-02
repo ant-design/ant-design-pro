@@ -157,6 +157,27 @@ export default {
     });
     access = 'guest';
   },
+  // 支持GET请求的登录接口
+  'GET /api/login/account': async (req: Request, res: Response) => {
+    const { token, username, type } = req.query;
+    await waitTime(1000);
+    if (token === '123' || username === 'admin') {
+      res.send({
+        status: 'ok',
+        type: type || 'account',
+        currentAuthority: 'admin',
+        token: '123',
+      });
+      access = 'admin';
+      return;
+    }
+    res.send({
+      status: 'error',
+      type: type || 'account',
+      currentAuthority: 'guest',
+    });
+    access = 'guest';
+  },
   'POST /api/login/outLogin': (_req: Request, res: Response) => {
     access = '';
     res.send({ data: {}, success: true });
