@@ -105,7 +105,13 @@ $ cd myapp && tyarn
 // or
 $ cd myapp && npm install
 ```
+# 任意端口启动
+$ PORT=8003 npm run start
+$ PORT=3000 npm run start
+$ PORT=8080 npm run start
 
+# 使用默认端口8001
+npm run start
 ## Browsers support
 
 Modern browsers.

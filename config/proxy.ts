@@ -9,13 +9,18 @@
  *
  * @doc https://umijs.org/docs/guides/proxy
  */
+// 获取当前端口，默认8001
+const getCurrentPort = () => {
+  return process.env.PORT || '8001';
+};
+
 export default {
   // 如果需要自定义本地开发服务器  请取消注释按需调整
   dev: {
-    // localhost:8003/api/** -> http://localhost:8003/api/
+    // localhost:8001/api/** -> http://localhost:8001/api/
     '/api/': {
       // 要代理的地址 - 指向开发服务器自身
-      target: 'http://localhost:8003',
+      target: `http://localhost:${getCurrentPort()}`,
       // 配置了这个可以从 http 代理到 https
       // 依赖 origin 的功能可能需要这个，比如 cookie
       changeOrigin: true,
