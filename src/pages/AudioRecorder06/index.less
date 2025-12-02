@@ -1,0 +1,158 @@
+.audio-recorder-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    margin: 0 0 24px 0;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+  }
+}
+
+.audio-recorder-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 24px;
+  background: #1890ff;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+
+  &:hover {
+    background: #40a9ff;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &.recording {
+    background: #ff4d4f;
+    animation: pulse 1.5s infinite;
+
+    &:hover {
+      background: #ff7875;
+    }
+  }
+
+  .anticon {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 77, 79, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 79, 0);
+  }
+}
+
+.audio-recorder-progress {
+  margin-bottom: 24px;
+}
+
+.audio-recorder-progress-bar {
+  position: relative;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.audio-recorder-progress-segment {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #1890ff;
+  transition: width 0.3s ease;
+}
+
+.audio-recorder-progress-current {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #ff4d4f;
+  transition: width 0.1s ease;
+}
+
+.audio-recorder-duration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #666;
+
+  span {
+    margin: 0 4px;
+  }
+
+  span:first-child {
+    color: #1890ff;
+    font-weight: 500;
+  }
+}
+
+.audio-recorder-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+
+  .ant-btn {
+    min-width: 120px;
+  }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .audio-recorder-container {
+    padding: 16px;
+  }
+
+  .audio-recorder-button {
+    width: 100px;
+    height: 100px;
+
+    .anticon {
+      font-size: 28px;
+    }
+
+    span {
+      font-size: 12px;
+    }
+  }
+
+  .audio-recorder-actions {
+    flex-direction: column;
+
+    .ant-btn {
+      width: 100%;
+    }
+  }
+}

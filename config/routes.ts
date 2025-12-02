@@ -65,9 +65,5 @@ export default [
     path: '/spoken-practice',
     component: './spokenPages',
   },
-  {
-    component: '404',
-    layout: false,
-    path: './*',
-  },
+  {    name: 'audio-recorder',    icon: 'audio',    path: '/audio-recorder',    component: './AudioRecorder06/Example',  },  {    component: '404',    layout: false,    path: './*',  },
 ];
