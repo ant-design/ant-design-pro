@@ -58,8 +58,8 @@ export const errorConfig: RequestConfig = {
               break;
             case ErrorShowType.NOTIFICATION:
               notification.open({
+                title: errorCode,
                 description: errorMessage,
-                message: errorCode,
               });
               break;
             case ErrorShowType.REDIRECT:
