@@ -117,7 +117,6 @@ export default defineConfig({
     appConfig: {},
     configProvider: {
       theme: {
-        cssVar: true,
         token: {
           fontFamily: 'AlibabaSans, sans-serif',
         },
