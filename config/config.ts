@@ -169,7 +169,6 @@ export default defineConfig({
     include: ['mock/**/*', 'src/pages/**/_mock.ts'],
   },
   utoopack: {},
-  esbuildMinifyIIFE: true,
   requestRecord: {},
   exportStatic: {},
   define: {
