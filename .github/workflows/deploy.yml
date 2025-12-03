@@ -11,16 +11,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install Bun
-        uses: oven-sh/setup-bun@v2
+        uses: utooland/setup-utoo@v1
 
       - name: Install dependencies with Bun
-        run: bun install
+        run: utoo install
 
       - name: Build project
-        run: bun run build
+        run: utoo run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
