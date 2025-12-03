@@ -9,13 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Use Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 20
       - run: echo ${{github.ref}}
-      - uses: oven-sh/setup-bun@v2
-      - run: bun install
-      - run: bun run test:coverage
+      - uses: utooland/setup-utoo@v1
+      - run: utoo install
+      - run: utoo run test:coverage
       - uses: codecov/codecov-action@v5
