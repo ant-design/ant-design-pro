@@ -58,7 +58,7 @@
     "@umijs/lint": "^4.6.1",
     "@umijs/max": "^4.6.2",
     "cross-env": "^10.0.0",
-    "express": "^4.21.1",
+    "express": "^5.2.0",
     "gh-pages": "^6.1.1",
     "husky": "^9.1.7",
     "jest": "^30.0.4",
