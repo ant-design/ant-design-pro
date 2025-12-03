@@ -1,0 +1,257 @@
+// 消息管理页面样式
+
+// 布局容器
+.ant-layout {
+  height: 100vh;
+}
+
+// 顶部头部
+.ant-layout-header {
+  padding: 0 24px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 64px;
+}
+
+// 左侧边栏
+.ant-layout-sider {
+  background: #fff;
+  border-right: 1px solid #f0f0f0;
+}
+
+// 内容区域
+.ant-layout-content {
+  background: #fff;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+// 卡片样式
+.ant-card {
+  border: none;
+  box-shadow: none;
+}
+
+.ant-card-head {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ant-card-head-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+// 表格样式
+.ant-table {
+  margin-bottom: 0;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #fafafa;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 8px;
+}
+
+.ant-table-tbody > tr {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ant-table-tbody > tr:hover {
+  background-color: #f5f5f5;
+}
+
+// 按钮样式
+.ant-btn {
+  font-size: 14px;
+  padding: 4px 12px;
+}
+
+.ant-btn-sm {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+// 输入框样式
+.ant-input {
+  font-size: 14px;
+}
+
+.ant-input-search {
+  width: 400px;
+}
+
+// 选择框样式
+.ant-select {
+  font-size: 14px;
+}
+
+.ant-select-selector {
+  border-radius: 4px;
+}
+
+// 日期选择器样式
+.ant-picker {
+  font-size: 14px;
+}
+
+// 标签样式
+.ant-tag {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+// 头像样式
+.ant-avatar {
+  cursor: pointer;
+}
+
+// 模态框样式
+.ant-modal-header {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ant-modal-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ant-modal-body {
+  padding: 24px;
+}
+
+.ant-modal-footer {
+  border-top: 1px solid #f0f0f0;
+  padding: 16px 24px;
+}
+
+// 表单样式
+.ant-form-item {
+  margin-bottom: 16px;
+}
+
+.ant-form-item-label {
+  font-weight: 500;
+}
+
+.ant-form-item-label > label {
+  font-size: 14px;
+}
+
+// 文本域样式
+.ant-input-textarea {
+  min-height: 80px;
+}
+
+// 间距样式
+.ant-space {
+  display: flex;
+  align-items: center;
+}
+
+.ant-space-between {
+  justify-content: space-between;
+}
+
+// 加载样式
+.ant-spin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+// 空状态样式
+.empty-state {
+  text-align: center;
+  padding: 100px 0;
+  color: #999;
+}
+
+.empty-state p {
+  margin-bottom: 0;
+}
+
+// 内容卡片样式
+.content-card {
+  margin-bottom: 16px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+}
+
+.content-card .ant-card-head {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.content-card .ant-card-head-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.content-card .ant-card-body {
+  padding: 16px;
+}
+
+.content-card .ant-card-extra {
+  padding: 0;
+}
+
+// 内容类型样式
+.content-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.6;
+}
+
+.content-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+
+.content-image .ant-avatar {
+  width: 80px;
+  height: 80px;
+}
+
+// 响应式样式
+@media (max-width: 1200px) {
+  .ant-layout-sider:first-child {
+    width: 280px !important;
+  }
+
+  .ant-layout-sider:last-child {
+    width: 400px !important;
+  }
+
+  .ant-input-search {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ant-layout-header {
+    padding: 0 16px;
+    line-height: 56px;
+  }
+
+  .ant-layout-content {
+    padding: 16px;
+  }
+
+  .ant-input-search {
+    width: 250px;
+  }
+
+  .ant-modal-body {
+    padding: 16px;
+  }
+
+  .ant-modal-footer {
+    padding: 12px 16px;
+  }
+}
