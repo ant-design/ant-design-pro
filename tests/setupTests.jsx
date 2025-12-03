@@ -69,3 +69,10 @@ Object.defineProperty(global.window.console, 'error', {
     errorLog(...rest);
   },
 });
+
+// Mock ResizeObserver
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
