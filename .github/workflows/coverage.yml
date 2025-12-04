@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 20
       - run: echo ${{github.ref}}
-      - uses: utooland/setup-utoo@v1
-      - run: utoo install
-      - run: utoo run test:coverage
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bun run test:coverage
       - uses: codecov/codecov-action@v5
