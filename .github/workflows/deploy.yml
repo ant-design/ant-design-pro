@@ -14,13 +14,13 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install Bun
-        uses: utooland/setup-utoo@v1
+        uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies with Bun
-        run: utoo install
+        run: bun install
 
       - name: Build project
-        run: utoo run build
+        run: bun run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
