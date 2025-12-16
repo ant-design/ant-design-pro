@@ -27,6 +27,13 @@ export default defineConfig({
   publicPath: PUBLIC_PATH,
 
   /**
+   * @name 输出路径配置
+   * @description 显式设置输出路径为相对路径，避免Windows系统下路径拼接错误
+   * @doc https://umijs.org/docs/api/config#outputpath
+   */
+  outputPath: 'dist',
+
+  /**
    * @name 兼容性设置
    * @description 设置 ie11 不一定完美兼容，需要检查自己使用的所有依赖
    * @doc https://umijs.org/docs/api/config#targets
@@ -168,7 +175,7 @@ export default defineConfig({
   mock: {
     include: ['mock/**/*', 'src/pages/**/_mock.ts'],
   },
-  utoopack: {},
+  utoopack: false,
   requestRecord: {},
   exportStatic: {},
   define: {
