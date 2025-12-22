@@ -70,7 +70,7 @@
     "umi-presets-pro": "^2.0.3",
     "umi-serve": "^1.9.11",
     "@biomejs/biome": "^2.1.1",
-    "@types/node": "^24.0.13"
+    "@types/node": "^25.0.3"
   },
   "engines": {
     "node": ">=20.0.0"
