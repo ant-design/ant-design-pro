@@ -38,7 +38,7 @@
     "@ant-design/icons": "^6.1.0",
     "@ant-design/pro-components": "^2.8.9",
     "antd": "^6.0.0",
-    "antd-style": "^3.7.0",
+    "antd-style": "^4.0.0",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
     "react": "^19.1.0",
