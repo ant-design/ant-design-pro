@@ -10,7 +10,7 @@ import {
   ProTable,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl, useRequest } from '@umijs/max';
-import { Button, Drawer, Input, message } from 'antd';
+import { Button, Drawer, type FormInstance, Input, message } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
 import { removeRule, rule } from '@/services/ant-design-pro/api';
 import CreateForm from './components/CreateForm';
@@ -150,7 +150,18 @@ const TableList: React.FC = () => {
       sorter: true,
       dataIndex: 'updatedAt',
       valueType: 'dateTime',
-      renderFormItem: (item, { defaultRender, ...rest }, form) => {
+      formItemRender: (
+        item: ProColumns<API.RuleListItem>,
+        {
+          defaultRender,
+          ...rest
+        }: {
+          defaultRender: (
+            item: ProColumns<API.RuleListItem>,
+          ) => React.ReactNode;
+        },
+        form: FormInstance,
+      ) => {
         const status = form.getFieldValue('status');
         if (`${status}` === '0') {
           return false;
