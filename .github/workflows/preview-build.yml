@@ -16,10 +16,9 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: build
-        run: |
-          yarn
-          yarn build
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bun run build
 
       - name: upload dist artifact
         uses: actions/upload-artifact@v4
