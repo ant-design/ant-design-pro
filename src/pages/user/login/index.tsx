@@ -103,7 +103,7 @@ const LoginMessage: React.FC<{
       style={{
         marginBottom: 24,
       }}
-      message={content}
+      title={content}
       type="error"
       showIcon
     />
