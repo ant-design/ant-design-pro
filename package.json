@@ -37,7 +37,7 @@
   "dependencies": {
     "@ant-design/icons": "^6.1.0",
     "@ant-design/pro-components": "3.1.0-0",
-    "antd": "^6.1.3",
+    "antd": "^6.2.0",
     "antd-style": "^4.1.0",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
