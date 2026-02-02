@@ -1,7 +1,7 @@
 import { Dropdown } from 'antd';
 import type { DropDownProps } from 'antd/es/dropdown';
 import { createStyles } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 
 const useStyles = createStyles(({ token }) => {
@@ -33,7 +33,7 @@ const HeaderDropdown: React.FC<HeaderDropdownProps> = ({
   return (
     <Dropdown
       classNames={{
-        root: classNames(styles.dropdown, cls),
+        root: clsx(styles.dropdown, cls),
       }}
       {...restProps}
     />
