@@ -535,7 +535,7 @@ exports[`Login Page should login success 1`] = `
                 />
               </svg>
             </span>
-             Powered by Ant Desgin
+             Powered by Ant Design
           </div>
         </div>
       </footer>
@@ -1078,7 +1078,7 @@ exports[`Login Page should show login form 1`] = `
                 />
               </svg>
             </span>
-             Powered by Ant Desgin
+             Powered by Ant Design
           </div>
         </div>
       </footer>
