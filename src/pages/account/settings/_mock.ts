@@ -10,8 +10,9 @@ function getProvince(_: Request, res: Response) {
 }
 
 function getCity(req: Request, res: Response) {
+  const province = req.params.province;
   return res.json({
-    data: city[req.params.province],
+    data: city[province as keyof typeof city],
   });
 }
 
