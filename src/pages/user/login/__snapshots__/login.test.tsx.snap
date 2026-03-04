@@ -3,7 +3,7 @@
 exports[`Login Page should login success 1`] = `
 <DocumentFragment>
   <div
-    class="ant-app css-var-_r_7_"
+    class="ant-app css-var-_r_9_"
   >
     <div
       class="acss-trkbkn"
@@ -40,7 +40,7 @@ exports[`Login Page should login success 1`] = `
         </span>
       </div>
       <div
-        style="flex: 1; padding: 32px 0px;"
+        style="flex: 1 1 0%; padding: 32px 0px;"
       >
         <div
           class="ant-pro-form-login-container "
@@ -77,14 +77,14 @@ exports[`Login Page should login success 1`] = `
           >
             <form
               autocomplete="off"
-              class="ant-form ant-form-vertical css-var-_r_7_ ant-form-css-var ant-pro-form"
+              class="ant-form ant-form-vertical css-var-_r_9_ ant-form-css-var ant-pro-form"
             >
               <input
                 style="display: none;"
                 type="text"
               />
               <div
-                class="ant-tabs ant-tabs-top ant-tabs-centered css-var-_r_7_ ant-tabs-css-var"
+                class="ant-tabs ant-tabs-top ant-tabs-centered css-var-_r_9_ ant-tabs-css-var"
               >
                 <div
                   aria-orientation="horizontal"
@@ -180,19 +180,19 @@ exports[`Login Page should login success 1`] = `
                       class="ant-tabs-tabpane ant-tabs-tabpane-active"
                       id="rc-tabs-test-panel-account"
                       role="tabpanel"
-                      tabindex="0"
+                      tabindex="-1"
                     />
                   </div>
                 </div>
               </div>
               <div
-                class="ant-form-item css-var-_r_7_ ant-form-css-var ant-form-item-has-success ant-form-item-vertical"
+                class="ant-form-item css-var-_r_9_ ant-form-css-var ant-form-item-has-success ant-form-item-vertical"
               >
                 <div
-                  class="ant-row ant-form-item-row css-var-_r_7_"
+                  class="ant-row ant-form-item-row css-var-_r_9_"
                 >
                   <div
-                    class="ant-col ant-form-item-control css-var-_r_7_"
+                    class="ant-col ant-form-item-control css-var-_r_9_"
                   >
                     <div
                       class="ant-form-item-control-input"
@@ -201,7 +201,7 @@ exports[`Login Page should login success 1`] = `
                         class="ant-form-item-control-input-content"
                       >
                         <span
-                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-status-success css-var-_r_7_ ant-input-css-var"
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-status-success css-var-_r_9_ ant-input-css-var"
                         >
                           <span
                             class="ant-input-prefix"
@@ -270,13 +270,13 @@ exports[`Login Page should login success 1`] = `
                 </div>
               </div>
               <div
-                class="ant-form-item css-var-_r_7_ ant-form-css-var ant-form-item-has-success ant-form-item-vertical"
+                class="ant-form-item css-var-_r_9_ ant-form-css-var ant-form-item-has-success ant-form-item-vertical"
               >
                 <div
-                  class="ant-row ant-form-item-row css-var-_r_7_"
+                  class="ant-row ant-form-item-row css-var-_r_9_"
                 >
                   <div
-                    class="ant-col ant-form-item-control css-var-_r_7_"
+                    class="ant-col ant-form-item-control css-var-_r_9_"
                   >
                     <div
                       class="ant-form-item-control-input"
@@ -285,7 +285,7 @@ exports[`Login Page should login success 1`] = `
                         class="ant-form-item-control-input-content"
                       >
                         <span
-                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-status-success ant-input-password ant-input-password-large css-var-_r_7_ ant-input-css-var"
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-status-success ant-input-password ant-input-password-large css-var-_r_9_ ant-input-css-var"
                         >
                           <span
                             class="ant-input-prefix"
@@ -354,7 +354,7 @@ exports[`Login Page should login success 1`] = `
                 style="margin-bottom: 24px;"
               >
                 <label
-                  class="ant-checkbox-wrapper ant-checkbox-wrapper-checked css-var-_r_7_ ant-checkbox-css-var"
+                  class="ant-checkbox-wrapper ant-checkbox-wrapper-checked css-var-_r_9_ ant-checkbox-css-var"
                 >
                   <span
                     class="ant-checkbox ant-wave-target ant-checkbox-checked"
@@ -364,9 +364,6 @@ exports[`Login Page should login success 1`] = `
                       class="ant-checkbox-input"
                       id="autoLogin"
                       type="checkbox"
-                    />
-                    <span
-                      class="ant-checkbox-inner"
                     />
                   </span>
                   <span
@@ -382,33 +379,10 @@ exports[`Login Page should login success 1`] = `
                 </a>
               </div>
               <button
-                class="ant-btn css-var-_r_7_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg ant-btn-loading"
+                class="ant-btn css-var-_r_9_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
                 style="width: 100%;"
                 type="button"
               >
-                <span
-                  class="ant-btn-icon ant-btn-loading-icon"
-                >
-                  <span
-                    aria-label="loading"
-                    class="anticon anticon-loading anticon-spin"
-                    role="img"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      data-icon="loading"
-                      fill="currentColor"
-                      focusable="false"
-                      height="1em"
-                      viewBox="0 0 1024 1024"
-                      width="1em"
-                    >
-                      <path
-                        d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
-                      />
-                    </svg>
-                  </span>
-                </span>
                 <span>
                   Login
                 </span>
@@ -481,7 +455,7 @@ exports[`Login Page should login success 1`] = `
         </div>
       </div>
       <footer
-        class="ant-layout-footer css-var-_r_7_"
+        class="ant-layout-footer"
         style="padding: 0px; background: none;"
       >
         <div
@@ -558,7 +532,7 @@ exports[`Login Page should login success 1`] = `
                 />
               </svg>
             </span>
-             Powered by Ant Desgin
+             Powered by Ant Design
           </div>
         </div>
       </footer>
@@ -607,7 +581,7 @@ exports[`Login Page should show login form 1`] = `
         </span>
       </div>
       <div
-        style="flex: 1; padding: 32px 0px;"
+        style="flex: 1 1 0%; padding: 32px 0px;"
       >
         <div
           class="ant-pro-form-login-container "
@@ -747,7 +721,7 @@ exports[`Login Page should show login form 1`] = `
                       class="ant-tabs-tabpane ant-tabs-tabpane-active"
                       id="rc-tabs-test-panel-account"
                       role="tabpanel"
-                      tabindex="0"
+                      tabindex="-1"
                     />
                   </div>
                 </div>
@@ -931,9 +905,6 @@ exports[`Login Page should show login form 1`] = `
                       id="autoLogin"
                       type="checkbox"
                     />
-                    <span
-                      class="ant-checkbox-inner"
-                    />
                   </span>
                   <span
                     class="ant-checkbox-label"
@@ -1024,7 +995,7 @@ exports[`Login Page should show login form 1`] = `
         </div>
       </div>
       <footer
-        class="ant-layout-footer css-var-_r_0_"
+        class="ant-layout-footer"
         style="padding: 0px; background: none;"
       >
         <div
@@ -1101,7 +1072,7 @@ exports[`Login Page should show login form 1`] = `
                 />
               </svg>
             </span>
-             Powered by Ant Desgin
+             Powered by Ant Design
           </div>
         </div>
       </footer>
