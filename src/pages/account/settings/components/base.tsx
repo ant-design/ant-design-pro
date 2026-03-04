@@ -65,7 +65,7 @@ const BaseView: React.FC = () => {
                 ...currentUser,
                 phone: currentUser?.phone.split('-'),
               }}
-              hideRequiredMark
+              requiredMark={false}
             >
               <ProFormText
                 width="md"

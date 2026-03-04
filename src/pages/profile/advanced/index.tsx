@@ -32,8 +32,6 @@ import type { AdvancedProfileData } from './data.d';
 import { queryAdvancedProfile } from './service';
 import useStyles from './style.style';
 
-const { Step } = Steps;
-
 const action = (
   <RouteContext.Consumer>
     {({ isMobile }) => {
@@ -349,12 +347,13 @@ const Advanced: FC = () => {
                   direction={isMobile ? 'vertical' : 'horizontal'}
                   progressDot={customDot}
                   current={1}
-                >
-                  <Step title="创建项目" description={desc1} />
-                  <Step title="部门初审" description={desc2} />
-                  <Step title="财务复核" />
-                  <Step title="完成" />
-                </Steps>
+                  items={[
+                    { title: '创建项目', description: desc1 },
+                    { title: '部门初审', description: desc2 },
+                    { title: '财务复核' },
+                    { title: '完成' },
+                  ]}
+                />
               )}
             </RouteContext.Consumer>
           </Card>

@@ -8,8 +8,8 @@
  * - 替换路由配置为简单版
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // 需要删除的页面目录
 const pageDirsToDelete = [
@@ -108,14 +108,14 @@ function updatePackageJson() {
   }
 
   // 移除 simple 脚本
-  if (pkg.scripts && pkg.scripts.simple) {
+  if (pkg.scripts?.simple) {
     delete pkg.scripts.simple;
     console.log('✓ 已移除 simple 脚本');
     modified = true;
   }
 
   if (modified) {
-    fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+    fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`);
     console.log('✓ 已更新 package.json');
   } else {
     console.log('- package.json 无需更新');

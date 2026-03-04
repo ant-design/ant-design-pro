@@ -6,17 +6,17 @@ import {
   ProFormText,
   StepsForm,
 } from '@ant-design/pro-components';
-import type { FormInstance } from 'antd';
 import {
   Alert,
   Button,
   Card,
   Descriptions,
   Divider,
+  Form,
   Result,
   Statistic,
 } from 'antd';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import type { StepDataType } from './data.d';
 import useStyles from './style.style';
 
@@ -82,7 +82,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
     receiverMode: 'alipay',
   });
   const [current, setCurrent] = useState(0);
-  const formRef = useRef<FormInstance>(null);
+  const [form] = Form.useForm<StepDataType>();
   return (
     <PageContainer content="将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。">
       <Card variant="borderless">
@@ -99,7 +99,9 @@ const StepForm: React.FC<Record<string, any>> = () => {
           }}
         >
           <StepsForm.StepForm<StepDataType>
-            formRef={formRef}
+            formRef={{
+              current: form,
+            }}
             title="填写转账信息"
             initialValues={stepData}
             onFinish={async (values) => {
@@ -218,7 +220,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
             <StepResult
               onFinish={async () => {
                 setCurrent(0);
-                formRef.current?.resetFields();
+                form.resetFields();
               }}
             >
               <StepDescriptions stepData={stepData} />

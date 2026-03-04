@@ -172,7 +172,7 @@ const AdvancedForm: FC<Record<string, any>> = () => {
   return (
     <ProForm
       layout="vertical"
-      hideRequiredMark
+      requiredMark={false}
       submitter={{
         render: (_props, dom) => {
           return (
