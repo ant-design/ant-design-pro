@@ -92,6 +92,35 @@ Choose the pro template. Simple is the basic template, which only provides the b
   complete
 ```
 
+### Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server (full version by default)
+npm start
+
+# Build for production
+npm run build
+```
+
+### Simplify to Simple Version
+
+If you want to simplify the project to a minimal version (removing extra blocks), run:
+
+```bash
+npm run simple
+```
+
+This will:
+- Remove extra page directories (dashboard, form, list/*, profile, result, exception, account, etc.)
+- Remove extra mock files
+- Replace routes with simple version
+- Remove extra dependencies from package.json
+
+**Note**: This operation is irreversible and will permanently delete files.
+
 Initialized Git repository:
 
 ```shell
