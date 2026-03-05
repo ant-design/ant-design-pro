@@ -74,40 +74,31 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 
 ## Usage
 
-### Use bash
+### Get Started
 
-We provide pro-cli to quickly initialize scaffolding.
+Clone or download this repository to your local machine:
 
 ```bash
-# use npm
-npm i @ant-design/pro-cli -g
-pro create myapp
+git clone --depth=1 https://github.com/ant-design/ant-design-pro.git myapp
+cd myapp
 ```
 
-Choose the pro template. Simple is the basic template, which only provides the basic content of the framework operation. Complete contains all blocks, which is not suitable for secondary development as a basic template.
+### Installation
 
-```shell
-? 🚀 Full or a simple scaffold? (Use arrow keys)
-❯ simple
-  complete
+```bash
+npm install
 ```
 
 ### Development
 
 ```bash
-# Install dependencies
-npm install
-
 # Start development server (full version by default)
 npm start
-
-# Build for production
-npm run build
 ```
 
 ### Simplify to Simple Version
 
-If you want to simplify the project to a minimal version (removing extra blocks), run:
+This project includes all blocks by default. If you need a minimal version, run:
 
 ```bash
 npm run simple
@@ -121,18 +112,10 @@ This will:
 
 **Note**: This operation is irreversible and will permanently delete files.
 
-Initialized Git repository:
+### Build
 
-```shell
-$ git init myapp
-```
-
-Install dependencies:
-
-```shell
-$ cd myapp && tyarn
-// or
-$ cd myapp && npm install
+```bash
+npm run build
 ```
 
 ## Browsers support

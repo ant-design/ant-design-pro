@@ -51,7 +51,6 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@ant-design/pro-cli": "^3.3.0",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@testing-library/dom": "^10.4.0",
