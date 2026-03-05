@@ -77,7 +77,18 @@ Language : [🇺🇸](./README.md) | 🇨🇳
 
 ## 使用
 
-### 开始使用
+### 使用 Umi Create 创建项目（推荐）
+
+使用 `umi create` 创建新项目：
+
+```bash
+npx create-umi myapp
+# 选择 "Ant Design Pro" 模板
+cd myapp
+npm install
+```
+
+### 或直接克隆
 
 克隆或下载本项目到本地：
 
