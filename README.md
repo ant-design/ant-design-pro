@@ -74,18 +74,7 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 
 ## Usage
 
-### Get Started with Umi Create (Recommended)
-
-Create a new project using `umi create`:
-
-```bash
-npx create-umi myapp
-# Select "Ant Design Pro" template when prompted
-cd myapp
-npm install
-```
-
-### Or Clone Directly
+### Get Started
 
 Clone or download this repository to your local machine:
 
