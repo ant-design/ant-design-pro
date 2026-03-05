@@ -1,4 +1,4 @@
-Language : [🇺🇸](./README.md) | 🇨🇳 | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇵🇹](./README.pt-BR.md) | [🇸🇦](./README.ar-DZ.md)
+Language : [🇺🇸](./README.md) | 🇨🇳
 
 <h1 align="center">Ant Design Pro</h1>
 
