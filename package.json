@@ -82,5 +82,34 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "create-umi": {
+    "ignoreScript": [
+      "docker*",
+      "functions*",
+      "site",
+      "generateMock"
+    ],
+    "ignoreDependencies": [
+      "netlify*",
+      "serverless"
+    ],
+    "ignore": [
+      ".dockerignore",
+      ".git",
+      ".github",
+      ".gitpod.yml",
+      "CODE_OF_CONDUCT.md",
+      "Dockerfile",
+      "Dockerfile.*",
+      "lambda",
+      "LICENSE",
+      "netlify.toml",
+      "README.*.md",
+      "azure-pipelines.yml",
+      "docker",
+      "CNAME",
+      "create-umi"
+    ]
   }
 }
