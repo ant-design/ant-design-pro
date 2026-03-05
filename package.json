@@ -42,6 +42,7 @@
     "@ant-design/pro-components": "3.1.2-0",
     "@antv/l7": "^2.22.7",
     "@antv/l7-react": "^2.4.3",
+    "@rc-component/util": "^1.9.0",
     "antd": "^6.2.2",
     "antd-style": "^4.1.0",
     "clsx": "^2.1.1",
@@ -51,6 +52,7 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.1.1",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@testing-library/dom": "^10.4.0",
@@ -64,7 +66,6 @@
     "@types/react-helmet": "^6.1.11",
     "@umijs/lint": "^4.6.13",
     "@umijs/max": "^4.6.25",
-    "@biomejs/biome": "^2.1.1",
     "cross-env": "^10.1.0",
     "express": "^5.2.0",
     "gh-pages": "^6.1.1",

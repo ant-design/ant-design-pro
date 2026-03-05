@@ -1,7 +1,7 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { useMergedState } from '@rc-component/util';
 import { Tag } from 'antd';
 import classNames from 'classnames';
-import { useMergedState } from 'rc-util';
 import React, { type FC, useState } from 'react';
 import useStyles from './index.style';
 
