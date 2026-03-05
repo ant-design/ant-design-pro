@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-export type IReactComponent<P = any> =
-  | React.ComponentClass<P>
-  | React.ClassicComponentClass<P>;
+export type IReactComponent<P = any> = React.ComponentClass<P> | React.FC<P>;
 
 function computeHeight(node: HTMLDivElement) {
   const { style } = node;
@@ -37,42 +35,35 @@ type AutoHeightProps = {
 function autoHeight() {
   return <P extends AutoHeightProps>(
     WrappedComponent: React.ComponentClass<P> | React.FC<P>,
-  ): React.ComponentClass<P> => {
-    class AutoHeightComponent extends React.Component<P & AutoHeightProps> {
-      state = {
-        computedHeight: 0,
-      };
+  ): React.FC<P & AutoHeightProps> => {
+    const AutoHeightComponent: React.FC<P & AutoHeightProps> = (props) => {
+      const [computedHeight, setComputedHeight] = useState(0);
+      const rootRef = useRef<HTMLDivElement>(null);
 
-      root: HTMLDivElement | null = null;
-
-      componentDidMount() {
-        const { height } = this.props;
-        if (!height && this.root) {
-          let h = getAutoHeight(this.root);
-          this.setState({ computedHeight: h });
+      useEffect(() => {
+        const { height } = props;
+        if (!height && rootRef.current) {
+          let h = getAutoHeight(rootRef.current);
+          setComputedHeight(h);
           if (h < 1) {
-            h = getAutoHeight(this.root);
-            this.setState({ computedHeight: h });
+            h = getAutoHeight(rootRef.current);
+            setComputedHeight(h);
           }
         }
-      }
+      }, [props]);
 
-      handleRoot = (node: HTMLDivElement) => {
-        this.root = node;
-      };
+      const { height } = props;
+      const h = height || computedHeight;
 
-      render() {
-        const { height } = this.props;
-        const { computedHeight } = this.state;
-        const h = height || computedHeight;
-        return (
-          <div ref={this.handleRoot}>
-            {h > 0 && <WrappedComponent {...this.props} height={h} />}
-          </div>
-        );
-      }
-    }
+      return (
+        <div ref={rootRef}>
+          {h > 0 && <WrappedComponent {...props} height={h} />}
+        </div>
+      );
+    };
+
     return AutoHeightComponent;
   };
 }
+
 export default autoHeight;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import autoHeight from '../autoHeight';
 
 /* eslint no-return-assign: 0 */
@@ -12,57 +12,25 @@ export type WaterWaveProps = {
   percent: number;
   style?: React.CSSProperties;
 };
-class WaterWave extends Component<WaterWaveProps> {
-  state = {
-    radio: 1,
-  };
-  timer: number = 0;
-  root: HTMLDivElement | undefined | null = null;
-  node: HTMLCanvasElement | undefined | null = null;
-  componentDidMount() {
-    this.renderChart();
-    this.resize();
-    window.addEventListener(
-      'resize',
-      () => {
-        requestAnimationFrame(() => this.resize());
-      },
-      {
-        passive: true,
-      },
-    );
-  }
-  componentDidUpdate(props: WaterWaveProps) {
-    const { percent } = this.props;
-    if (props.percent !== percent) {
-      // 不加这个会造成绘制缓慢
-      this.renderChart('update');
-    }
-  }
-  componentWillUnmount() {
-    cancelAnimationFrame(this.timer);
-    if (this.node) {
-      this.node.innerHTML = '';
-    }
-    window.removeEventListener('resize', this.resize);
-  }
-  resize = () => {
-    if (this.root) {
-      const { height = 1 } = this.props;
-      const { offsetWidth } = this.root.parentNode as HTMLElement;
-      this.setState({
-        radio: offsetWidth < height ? offsetWidth / height : 1,
-      });
-    }
-  };
-  renderChart(type?: string) {
-    const { percent, color = '#1890FF' } = this.props;
+
+const WaterWave: React.FC<WaterWaveProps> = ({
+  title,
+  color = '#1890FF',
+  height = 1,
+  percent,
+}) => {
+  const [radio, setRadio] = useState(1);
+  const timerRef = useRef<number>(0);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const nodeRef = useRef<HTMLCanvasElement>(null);
+
+  const renderChart = (type?: string) => {
     const data = percent / 100;
-    cancelAnimationFrame(this.timer);
-    if (!this.node || (data !== 0 && !data)) {
+    cancelAnimationFrame(timerRef.current);
+    if (!nodeRef.current || (data !== 0 && !data)) {
       return;
     }
-    const canvas = this.node;
+    const canvas = nodeRef.current;
     const ctx = canvas.getContext('2d');
     if (!ctx) {
       return;
@@ -179,47 +147,69 @@ class WaterWave extends Component<WaterWaveProps> {
         sp += 0.07;
         drawSin();
       }
-      this.timer = requestAnimationFrame(render);
+      timerRef.current = requestAnimationFrame(render);
     };
     render();
-  }
-  render() {
-    const { radio } = this.state;
-    const { percent, title, height = 1 } = this.props;
-    return (
+  };
+
+  const resize = () => {
+    if (rootRef.current) {
+      const { offsetWidth } = rootRef.current.parentNode as HTMLElement;
+      setRadio(offsetWidth < height ? offsetWidth / height : 1);
+    }
+  };
+
+  useEffect(() => {
+    renderChart();
+    resize();
+    const handleResize = () => {
+      requestAnimationFrame(resize);
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    renderChart('update');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [percent]);
+
+  useEffect(() => {
+    return () => {
+      cancelAnimationFrame(timerRef.current);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={rootRef}
+      style={{
+        transform: `scale(${radio})`,
+      }}
+    >
       <div
-        ref={(n) => {
-          this.root = n;
-        }}
         style={{
-          transform: `scale(${radio})`,
+          width: height,
+          height,
+          overflow: 'hidden',
         }}
       >
-        <div
-          style={{
-            width: height,
-            height,
-            overflow: 'hidden',
-          }}
-        >
-          <canvas
-            ref={(n) => {
-              this.node = n;
-            }}
-            width={height * 2}
-            height={height * 2}
-          />
-        </div>
-        <div
-          style={{
-            width: height,
-          }}
-        >
-          {title && <span>{title}</span>}
-          <h4>{percent}%</h4>
-        </div>
+        <canvas ref={nodeRef} width={height * 2} height={height * 2} />
       </div>
-    );
-  }
-}
+      <div
+        style={{
+          width: height,
+        }}
+      >
+        {title && <span>{title}</span>}
+        <h4>{percent}%</h4>
+      </div>
+    </div>
+  );
+};
+
 export default autoHeight()(WaterWave);
