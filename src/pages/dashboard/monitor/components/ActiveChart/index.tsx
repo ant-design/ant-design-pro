@@ -1,6 +1,6 @@
 import { Area } from '@ant-design/plots';
 import { Statistic } from 'antd';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import useStyles from './index.style';
 
 function fixedZero(val: number) {
@@ -19,27 +19,31 @@ function getActiveData() {
 
 const ActiveChart = () => {
   const timerRef = useRef<number | null>(null);
-  const requestRef = useRef<number | null>(null);
   const { styles } = useStyles();
   const [activeData, setActiveData] = useState<{ x: string; y: number }[]>([]);
-  const loopData = useCallback(() => {
-    requestRef.current = requestAnimationFrame(() => {
-      timerRef.current = window.setTimeout(() => {
-        setActiveData(getActiveData());
-        loopData();
-      }, 2000);
-    });
-  }, []);
 
   useEffect(() => {
+    const loopData = () => {
+      setActiveData(getActiveData());
+      timerRef.current = window.setTimeout(loopData, 2000);
+    };
     loopData();
     return () => {
-      clearTimeout(timerRef.current as number);
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
       }
     };
-  }, [loopData]);
+  }, []);
+
+  // Memoize max and median to avoid double sort on every render
+  const { maxValue, medianValue } = useMemo(() => {
+    if (!activeData.length) return { maxValue: 0, medianValue: 0 };
+    const sorted = [...activeData].sort((a, b) => a.y - b.y);
+    return {
+      maxValue: sorted[sorted.length - 1]?.y ?? 0,
+      medianValue: sorted[Math.floor(sorted.length / 2)]?.y ?? 0,
+    };
+  }, [activeData]);
 
   return (
     <div className={styles.activeChart}>
@@ -65,11 +69,8 @@ const ActiveChart = () => {
       {activeData && (
         <div>
           <div className={styles.activeChartGrid}>
-            <p>{[...activeData].sort()[activeData.length - 1]?.y + 200} 亿元</p>
-            <p>
-              {[...activeData].sort()[Math.floor(activeData.length / 2)]?.y}{' '}
-              亿元
-            </p>
+            <p>{maxValue + 200} 亿元</p>
+            <p>{medianValue} 亿元</p>
           </div>
           <div className={styles.dashedLine}>
             <div className={styles.line} />

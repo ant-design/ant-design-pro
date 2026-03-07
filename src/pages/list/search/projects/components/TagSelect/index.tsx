@@ -2,7 +2,7 @@ import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { useMergedState } from '@rc-component/util';
 import { Tag } from 'antd';
 import classNames from 'classnames';
-import React, { type FC, useState } from 'react';
+import React, { type FC, useMemo, useState } from 'react';
 import useStyles from './index.style';
 
 const { CheckableTag } = Tag;
@@ -75,33 +75,33 @@ const TagSelect: FC<TagSelectProps> & {
     node?.type &&
     (node.type.isTagSelectOption ||
       node.type.displayName === 'TagSelectOption');
-  const getAllTags = () => {
+
+  // Memoize all tags to avoid recalculating on every render
+  const allTags = useMemo(() => {
     const childrenArray = React.Children.toArray(
       children,
     ) as TagSelectOptionElement[];
-    const checkedTags = childrenArray
+    return childrenArray
       .filter((child) => isTagSelectOption(child))
       .map((child) => child.props.value);
-    return checkedTags || [];
-  };
+  }, [children]);
+
+  // Use Set for O(1) lookups
+  const valueSet = useMemo(() => new Set(value || []), [value]);
+
   const onSelectAll = (checked: boolean) => {
-    let checkedTags: (string | number)[] = [];
-    if (checked) {
-      checkedTags = getAllTags();
-    }
-    setValue(checkedTags);
+    setValue(checked ? [...allTags] : []);
   };
   const handleTagChange = (tag: string | number, checked: boolean) => {
-    const checkedTags: (string | number)[] = [...(value || [])];
-    const index = checkedTags.indexOf(tag);
-    if (checked && index === -1) {
-      checkedTags.push(tag);
-    } else if (!checked && index > -1) {
-      checkedTags.splice(index, 1);
+    const checkedTags = new Set(value || []);
+    if (checked) {
+      checkedTags.add(tag);
+    } else {
+      checkedTags.delete(tag);
     }
-    setValue(checkedTags);
+    setValue([...checkedTags]);
   };
-  const checkedAll = getAllTags().length === value?.length;
+  const checkedAll = allTags.length === value?.length && allTags.length > 0;
   const {
     expandText = '展开',
     collapseText = '收起',
@@ -128,7 +128,7 @@ const TagSelect: FC<TagSelectProps> & {
             return React.cloneElement(child, {
               key: `tag-select-${child.props.value}`,
               value: child.props.value,
-              checked: value && value.indexOf(child.props.value) > -1,
+              checked: valueSet.has(child.props.value),
               onChange: handleTagChange,
             });
           }

@@ -1,6 +1,6 @@
 import { GridContent } from '@ant-design/pro-components';
 import { Menu } from 'antd';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import BaseView from './components/base';
 import BindingView from './components/binding';
 import NotificationView from './components/notification';
@@ -25,7 +25,8 @@ const Settings: React.FC = () => {
     selectKey: 'base',
   });
   const dom = useRef<HTMLDivElement>(null);
-  const resize = () => {
+
+  const resize = useCallback(() => {
     requestAnimationFrame(() => {
       if (!dom.current) {
         return;
@@ -38,21 +39,20 @@ const Settings: React.FC = () => {
       if (window.innerWidth < 768 && offsetWidth > 400) {
         mode = 'horizontal';
       }
-      setInitConfig({
-        ...initConfig,
+      setInitConfig((prev) => ({
+        ...prev,
         mode: mode as SettingsState['mode'],
-      });
+      }));
     });
-  };
+  }, []);
+
   useLayoutEffect(() => {
-    if (dom.current) {
-      window.addEventListener('resize', resize);
-      resize();
-    }
+    window.addEventListener('resize', resize);
+    resize();
     return () => {
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [resize]);
   const getMenu = () => {
     return Object.keys(menuMap).map((item) => ({
       key: item,
