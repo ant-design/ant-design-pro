@@ -1,4 +1,4 @@
-import { configUmiAlias, createConfig } from '@umijs/max/test';
+import { configUmiAlias, createConfig } from '@umijs/max/test.js';
 
 export default async (): Promise<any> => {
   const config = await configUmiAlias({

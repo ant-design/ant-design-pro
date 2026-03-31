@@ -13,14 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies with Bun
-        run: bun install
-
-      - name: Build project
-        run: bun run build
+      - uses: utooland/setup-utoo@v1
+      - run: ut
+      - run: ut build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
