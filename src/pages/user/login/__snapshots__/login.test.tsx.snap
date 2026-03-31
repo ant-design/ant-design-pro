@@ -365,9 +365,6 @@ exports[`Login Page should login success 1`] = `
                       id="autoLogin"
                       type="checkbox"
                     />
-                    <span
-                      class="ant-checkbox-inner"
-                    />
                   </span>
                   <span
                     class="ant-checkbox-label"
@@ -907,9 +904,6 @@ exports[`Login Page should show login form 1`] = `
                       class="ant-checkbox-input"
                       id="autoLogin"
                       type="checkbox"
-                    />
-                    <span
-                      class="ant-checkbox-inner"
                     />
                   </span>
                   <span
