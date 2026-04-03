@@ -160,7 +160,7 @@ export const request: RequestConfig = {
  * @description Dynamically configure Ant Design theme based on current settings
  * @doc https://umijs.org/docs/max/antd#运行时配置
  */
-export const antd: RuntimeAntdConfig = (memo) => {
+export const antd: RuntimeAntdConfig = (memo: { initialState: any }) => {
   const isDark = memo?.initialState?.settings?.navTheme === 'realDark';
 
   return {
