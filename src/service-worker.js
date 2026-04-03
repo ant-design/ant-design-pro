@@ -45,6 +45,18 @@ workbox.routing.registerRoute(
 
 /** Response to client after skipping waiting with MessageChannel */
 addEventListener('message', (event) => {
+  // Security: Verify origin to prevent cross-origin attacks
+  const allowedOrigins = [
+    'https://pro.ant.design',
+    'https://preview.pro.ant.design',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+  ];
+
+  if (!allowedOrigins.includes(event.origin)) {
+    return;
+  }
+
   const replyPort = event.ports[0];
   const message = event.data;
   if (replyPort && message && message.type === 'skip-waiting') {

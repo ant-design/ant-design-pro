@@ -118,6 +118,25 @@ const Login: React.FC = () => {
   const { message } = App.useApp();
   const intl = useIntl();
 
+  /**
+   * Validate redirect URL to prevent open redirect attacks
+   * Only allow relative paths starting with '/' or trusted domains
+   */
+  const getSafeRedirectUrl = (redirect: string | null): string => {
+    if (!redirect) return '/';
+
+    // Allow relative paths starting with /
+    if (redirect.startsWith('/')) {
+      // Ensure it doesn't contain protocol-like patterns
+      if (redirect.includes('://') || redirect.startsWith('//')) {
+        return '/';
+      }
+      return redirect;
+    }
+
+    return '/';
+  };
+
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
@@ -142,7 +161,8 @@ const Login: React.FC = () => {
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
-        window.location.href = urlParams.get('redirect') || '/';
+        const redirectUrl = getSafeRedirectUrl(urlParams.get('redirect'));
+        window.location.href = redirectUrl;
         return;
       }
       console.log(msg);

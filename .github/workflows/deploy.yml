@@ -5,6 +5,10 @@ on:
     branches:
       - all-blocks
 
+permissions:
+  contents: read
+  pages: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
