@@ -45,6 +45,12 @@ workbox.routing.registerRoute(
 
 /** Response to client after skipping waiting with MessageChannel */
 addEventListener('message', (event) => {
+  // Security: Verify origin to prevent cross-origin attacks
+  // Use self.location.origin for dynamic origin validation (works across all deployment domains)
+  if (event.origin !== self.location.origin) {
+    return;
+  }
+
   const replyPort = event.ports[0];
   const message = event.data;
   if (replyPort && message && message.type === 'skip-waiting') {
