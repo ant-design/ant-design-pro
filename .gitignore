@@ -42,3 +42,6 @@ screenshot
 .firebase
 
 build
+
+# worktrees
+.worktrees
