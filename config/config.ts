@@ -114,14 +114,7 @@ export default defineConfig({
    * @doc https://umijs.org/docs/max/antd#antd
    */
   antd: {
-    appConfig: {},
-    configProvider: {
-      theme: {
-        token: {
-          fontFamily: 'AlibabaSans, sans-serif',
-        },
-      },
-    },
+    appConfig: '../src/antdConfig',
   },
   /**
    * @name 网络请求配置
