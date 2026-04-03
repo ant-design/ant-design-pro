@@ -6,7 +6,7 @@ on:
       - all-blocks
 
 permissions:
-  contents: read
+  contents: write
   pages: write
 
 jobs:

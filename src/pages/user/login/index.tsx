@@ -120,7 +120,7 @@ const Login: React.FC = () => {
 
   /**
    * Validate redirect URL to prevent open redirect attacks
-   * Only allow relative paths starting with '/' or trusted domains
+   * Only allow relative paths starting with '/'
    */
   const getSafeRedirectUrl = (redirect: string | null): string => {
     if (!redirect) return '/';

@@ -46,14 +46,8 @@ workbox.routing.registerRoute(
 /** Response to client after skipping waiting with MessageChannel */
 addEventListener('message', (event) => {
   // Security: Verify origin to prevent cross-origin attacks
-  const allowedOrigins = [
-    'https://pro.ant.design',
-    'https://preview.pro.ant.design',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-  ];
-
-  if (!allowedOrigins.includes(event.origin)) {
+  // Use self.location.origin for dynamic origin validation (works across all deployment domains)
+  if (event.origin !== self.location.origin) {
     return;
   }
 
