@@ -1,8 +1,9 @@
 import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
-import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max';
+import type { RequestConfig, RunTimeLayoutConfig, RuntimeAntdConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
+import { theme } from 'antd';
 import React from 'react';
 import {
   AvatarDropdown,
@@ -152,4 +153,22 @@ export const layout: RunTimeLayoutConfig = ({
 export const request: RequestConfig = {
   baseURL: isDev ? '' : 'https://proapi.azurewebsites.net',
   ...errorConfig,
+};
+
+/**
+ * @name antd runtime configuration
+ * @description Dynamically configure Ant Design theme based on current settings
+ * @doc https://umijs.org/docs/max/antd#运行时配置
+ */
+export const antd: RuntimeAntdConfig = (memo) => {
+  const isDark = memo?.initialState?.settings?.navTheme === 'realDark';
+
+  return {
+    theme: {
+      algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+      token: {
+        fontFamily: 'AlibabaSans, sans-serif',
+      },
+    },
+  };
 };
