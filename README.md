@@ -1,5 +1,3 @@
-Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md)
-
 <h1 align="center">Ant Design Pro</h1>
 
 <div align="center">
@@ -11,6 +9,8 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 [![Build With Umi](https://img.shields.io/badge/build%20with-umi-028fe4.svg?style=flat-square)](http://umijs.org/)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 [![](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
+
+Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md)
 
 <img width="1718" height="1191" alt="light theme preview" src="https://github.com/user-attachments/assets/74ad0b4a-e086-4955-8edd-9f2cff31aee8" />
 <img width="1718" height="1191" alt="dark theme preview" src="https://github.com/user-attachments/assets/d4bcb7c1-42c7-4c0f-b130-1193a931f9f7" />
