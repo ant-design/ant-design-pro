@@ -20,6 +20,8 @@ jobs:
           node-version: ${{ matrix.node_version }}
       - run: echo ${{github.ref}}
       - uses: utooland/setup-utoo@v1
+        with:
+          cache-utoo: false
       - run: ut
       - run: ut lint
       - run: ut build
