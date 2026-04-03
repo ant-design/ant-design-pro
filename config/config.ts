@@ -143,6 +143,7 @@ export default defineConfig({
     // 解决首次加载时白屏的问题
     { src: join(PUBLIC_PATH, 'scripts/loading.js'), async: true },
   ],
+
   //================ pro 插件配置 =================
   presets: ['umi-presets-pro'],
   /**
@@ -165,6 +166,7 @@ export default defineConfig({
       projectName: 'swagger',
     },
   ],
+
   mock: {
     include: ['mock/**/*', 'src/pages/**/_mock.ts'],
   },
@@ -174,4 +176,5 @@ export default defineConfig({
   define: {
     'process.env.CI': process.env.CI,
   },
+  tailwindcss: {},
 });

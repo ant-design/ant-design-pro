@@ -1,4 +1,4 @@
-Language : [🇺🇸](./README.md) | 🇨🇳 | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇵🇹](./README.pt-BR.md) | [🇸🇦](./README.ar-DZ.md)
+Language : [🇺🇸](./README.md) | 🇨🇳
 
 <h1 align="center">Ant Design Pro</h1>
 
@@ -77,28 +77,48 @@ Language : [🇺🇸](./README.md) | 🇨🇳 | [🇷🇺](./README.ru-RU.md) | 
 
 ## 使用
 
-我们提供了 pro-cli 来快速的初始化脚手架。
+### 开始使用
+
+克隆或下载本项目到本地：
 
 ```bash
-# 使用 npm
-npm i @ant-design/pro-cli -g
-pro create myapp
+git clone --depth=1 https://github.com/ant-design/ant-design-pro.git myapp
+cd myapp
 ```
 
-选择 pro 的模板，simple 是基础模板，只提供了框架运行的基本内容，complete 包含所有区块，不太适合当基础模板来进行二次开发。
+### 安装依赖
 
-```shell
-? 🚀 要全量的还是一个简单的脚手架? (Use arrow keys)
-❯ simple
-  complete
+```bash
+npm install
 ```
 
-安装依赖：
+### 开发
 
-```shell
-$ cd myapp && tyarn
-// 或
-$ cd myapp && npm install
+```bash
+# 启动开发服务器（默认为完整版）
+npm start
+```
+
+### 精简为简单版本
+
+本项目默认包含所有区块。如果你需要一个最小化的版本，运行：
+
+```bash
+npm run simple
+```
+
+这将会：
+- 删除多余的页面目录（dashboard、form、list/*、profile、result、exception、account 等）
+- 删除多余的 mock 文件
+- 替换路由为简单版本
+- 从 package.json 中移除多余的依赖
+
+**注意**：此操作不可逆，将永久删除文件。
+
+### 构建
+
+```bash
+npm run build
 ```
 
 更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。

@@ -85,8 +85,7 @@ const getNotices = (_req: Request, res: Response) => {
       {
         id: '000000010',
         title: '第三方紧急代码变更',
-        description:
-          '冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务',
+        description: '冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务',
         extra: '马上到期',
         status: 'urgent',
         type: 'event',
@@ -102,8 +101,7 @@ const getNotices = (_req: Request, res: Response) => {
       {
         id: '000000012',
         title: 'ABCD 版本发布',
-        description:
-          '冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务',
+        description: '冠霖提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务',
         extra: '进行中',
         status: 'processing',
         type: 'event',

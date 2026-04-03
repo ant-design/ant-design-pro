@@ -1,4 +1,4 @@
-Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇵🇹](./README.pt-BR.md) | [🇸🇦](./README.ar-DZ.md) | [🇪🇸](./README.es-ES.md)
+Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md)
 
 <h1 align="center">Ant Design Pro</h1>
 
@@ -74,36 +74,48 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 
 ## Usage
 
-### Use bash
+### Get Started
 
-We provide pro-cli to quickly initialize scaffolding.
+Clone or download this repository to your local machine:
 
 ```bash
-# use npm
-npm i @ant-design/pro-cli -g
-pro create myapp
+git clone --depth=1 https://github.com/ant-design/ant-design-pro.git myapp
+cd myapp
 ```
 
-Choose the pro template. Simple is the basic template, which only provides the basic content of the framework operation. Complete contains all blocks, which is not suitable for secondary development as a basic template.
+### Installation
 
-```shell
-? 🚀 Full or a simple scaffold? (Use arrow keys)
-❯ simple
-  complete
+```bash
+npm install
 ```
 
-Initialized Git repository:
+### Development
 
-```shell
-$ git init myapp
+```bash
+# Start development server (full version by default)
+npm start
 ```
 
-Install dependencies:
+### Simplify to Simple Version
 
-```shell
-$ cd myapp && tyarn
-// or
-$ cd myapp && npm install
+This project includes all blocks by default. If you need a minimal version, run:
+
+```bash
+npm run simple
+```
+
+This will:
+- Remove extra page directories (dashboard, form, list/*, profile, result, exception, account, etc.)
+- Remove extra mock files
+- Replace routes with simple version
+- Remove extra dependencies from package.json
+
+**Note**: This operation is irreversible and will permanently delete files.
+
+### Build
+
+```bash
+npm run build
 ```
 
 ## Browsers support
