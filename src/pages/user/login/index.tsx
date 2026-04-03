@@ -120,21 +120,23 @@ const Login: React.FC = () => {
 
   /**
    * Validate redirect URL to prevent open redirect attacks
-   * Only allow relative paths starting with '/'
+   * Only allow same-origin relative paths starting with '/'
    */
   const getSafeRedirectUrl = (redirect: string | null): string => {
-    if (!redirect) return '/';
+    if (!redirect || !redirect.startsWith('/')) return '/';
 
-    // Allow relative paths starting with /
-    if (redirect.startsWith('/')) {
-      // Ensure it doesn't contain protocol-like patterns
-      if (redirect.includes('://') || redirect.startsWith('//')) {
-        return '/';
-      }
-      return redirect;
+    // Block protocol-relative URLs (//example.com)
+    if (redirect.startsWith('//')) return '/';
+
+    try {
+      const parsed = new URL(redirect, window.location.origin);
+      // Only allow same-origin URLs
+      if (parsed.origin !== window.location.origin) return '/';
+      // Return the path with query and hash preserved
+      return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+    } catch {
+      return '/';
     }
-
-    return '/';
   };
 
   const fetchUserInfo = async () => {
