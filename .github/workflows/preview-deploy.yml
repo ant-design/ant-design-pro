@@ -33,7 +33,7 @@ jobs:
             echo "Invalid PR ID: $PR_ID"
             exit 1
           fi
-          echo "id=$PR_ID" >> $GITHUB_OUTPUT
+          echo "id=$PR_ID" >> "$GITHUB_OUTPUT"
 
       - name: download dist artifact
         uses: dawidd6/action-download-artifact@v6
@@ -98,7 +98,7 @@ jobs:
             echo "Invalid PR ID: $PR_ID"
             exit 1
           fi
-          echo "id=$PR_ID" >> $GITHUB_OUTPUT
+          echo "id=$PR_ID" >> "$GITHUB_OUTPUT"
 
       - name: The job failed
         uses: actions-cool/maintain-one-comment@v1.2.1
