@@ -1,6 +1,7 @@
 // https://umijs.org/config/
 
 import { join } from 'node:path';
+import tailwindcss from '@tailwindcss/postcss';
 import { defineConfig } from '@umijs/max';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
@@ -176,5 +177,5 @@ export default defineConfig({
   define: {
     'process.env.CI': process.env.CI,
   },
-  tailwindcss: {},
+  extraPostCSSPlugins: [tailwindcss],
 });
