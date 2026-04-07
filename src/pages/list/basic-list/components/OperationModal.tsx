@@ -16,7 +16,7 @@ type OperationModalProps = {
   current: Partial<BasicListItemDataType> | undefined;
   onDone: () => void;
   onSubmit: (values: BasicListItemDataType) => void;
-  children?: React.ReactNode;
+  children?: React.ReactElement;
 };
 const OperationModal: FC<OperationModalProps> = (props) => {
   const { styles } = useStyles();
@@ -37,7 +37,7 @@ const OperationModal: FC<OperationModalProps> = (props) => {
       submitter={{
         render: (_, dom) => (done ? null : dom),
       }}
-      trigger={children as React.ReactElement}
+      trigger={children}
       modalProps={{
         onCancel: () => onDone(),
         destroyOnHidden: true,
