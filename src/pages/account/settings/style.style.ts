@@ -24,14 +24,15 @@ const useStyles = createStyles(({ token }) => {
       '.ant-menu-horizontal': { fontWeight: 'bold' },
       [`@media screen and (max-width: ${token.screenMD}px)`]: {
         width: '100%',
-        border: 'none',
       },
     },
     right: {
       flex: '1',
       padding: '8px 40px',
+      borderInlineStart: `${token.lineWidth}px solid ${token.colorSplit}`,
       [`@media screen and (max-width: ${token.screenMD}px)`]: {
         padding: '40px',
+        border: 'none',
       },
     },
     title: {
