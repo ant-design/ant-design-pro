@@ -16,7 +16,7 @@ type OperationModalProps = {
   current: Partial<BasicListItemDataType> | undefined;
   onDone: () => void;
   onSubmit: (values: BasicListItemDataType) => void;
-  children?: React.ReactNode;
+  children?: React.ReactElement;
 };
 const OperationModal: FC<OperationModalProps> = (props) => {
   const { styles } = useStyles();
