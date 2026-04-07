@@ -123,7 +123,7 @@ const Login: React.FC = () => {
    * Only allow same-origin relative paths starting with '/'
    */
   const getSafeRedirectUrl = (redirect: string | null): string => {
-    if (!redirect || !redirect.startsWith('/')) return '/';
+    if (!redirect?.startsWith('/')) return '/';
 
     // Block protocol-relative URLs (//example.com)
     if (redirect.startsWith('//')) return '/';
