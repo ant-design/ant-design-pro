@@ -27,6 +27,7 @@ const useStyles = createStyles(({ token }) => {
     },
     right: {
       flex: '1',
+      marginInlineStart: -1,
       padding: '8px 40px',
       borderInlineStart: `${token.lineWidth}px solid ${token.colorSplit}`,
       [`@media screen and (max-width: ${token.screenMD}px)`]: {
