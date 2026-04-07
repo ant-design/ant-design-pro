@@ -19,7 +19,8 @@ const useStyles = createStyles(({ token }) => {
     },
     leftMenu: {
       width: '224px',
-      '.ant-menu-inline': { border: 'none' },
+      borderRight: `${token.lineWidth}px solid ${token.colorSplit}`,
+      '.ant-menu-inline': { border: 'none !important' },
       '.ant-menu-horizontal': { fontWeight: 'bold' },
       [`@media screen and (max-width: ${token.screenMD}px)`]: {
         width: '100%',
