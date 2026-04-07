@@ -74,6 +74,7 @@
     "jest-environment-jsdom": "^30.0.5",
     "lint-staged": "^16.1.2",
     "mockjs": "^1.1.0",
+    "patch-package": "^8.0.1",
     "tailwindcss": "^4",
     "@tailwindcss/postcss": "^4",
     "ts-node": "^10.9.2",

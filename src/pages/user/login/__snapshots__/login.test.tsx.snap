@@ -43,16 +43,16 @@ exports[`Login Page should login success 1`] = `
         style="flex: 1 1 0%; padding: 32px 0px;"
       >
         <div
-          class="ant-pro-form-login-container "
+          class="ant-pro-form-login-container"
         >
           <div
             class="ant-pro-form-login-top"
           >
             <div
-              class="ant-pro-form-login-header "
+              class="ant-pro-form-login-header"
             >
               <span
-                class="ant-pro-form-login-logo "
+                class="ant-pro-form-login-logo"
               >
                 <img
                   alt="logo"
@@ -60,19 +60,19 @@ exports[`Login Page should login success 1`] = `
                 />
               </span>
               <span
-                class="ant-pro-form-login-title "
+                class="ant-pro-form-login-title"
               >
                 Ant Design
               </span>
             </div>
             <div
-              class="ant-pro-form-login-desc "
+              class="ant-pro-form-login-desc"
             >
               Ant Design is the most influential web design specification in Xihu district
             </div>
           </div>
           <div
-            class="ant-pro-form-login-main "
+            class="ant-pro-form-login-main"
             style="width: 328px; min-width: 280px; max-width: 75vw;"
           >
             <form
@@ -389,7 +389,7 @@ exports[`Login Page should login success 1`] = `
               </button>
             </form>
             <div
-              class="ant-pro-form-login-main-other "
+              class="ant-pro-form-login-main-other"
             >
               Login with :
               <span
@@ -456,10 +456,12 @@ exports[`Login Page should login success 1`] = `
       </div>
       <footer
         class="ant-layout-footer"
+        data-testid="pro-layout-footer"
         style="padding: 0px; background: none;"
       >
         <div
           class="ant-pro-global-footer"
+          data-testid="pro-global-footer"
         >
           <div
             class="ant-pro-global-footer-list"
@@ -584,16 +586,16 @@ exports[`Login Page should show login form 1`] = `
         style="flex: 1 1 0%; padding: 32px 0px;"
       >
         <div
-          class="ant-pro-form-login-container "
+          class="ant-pro-form-login-container"
         >
           <div
             class="ant-pro-form-login-top"
           >
             <div
-              class="ant-pro-form-login-header "
+              class="ant-pro-form-login-header"
             >
               <span
-                class="ant-pro-form-login-logo "
+                class="ant-pro-form-login-logo"
               >
                 <img
                   alt="logo"
@@ -601,19 +603,19 @@ exports[`Login Page should show login form 1`] = `
                 />
               </span>
               <span
-                class="ant-pro-form-login-title "
+                class="ant-pro-form-login-title"
               >
                 Ant Design
               </span>
             </div>
             <div
-              class="ant-pro-form-login-desc "
+              class="ant-pro-form-login-desc"
             >
               Ant Design is the most influential web design specification in Xihu district
             </div>
           </div>
           <div
-            class="ant-pro-form-login-main "
+            class="ant-pro-form-login-main"
             style="width: 328px; min-width: 280px; max-width: 75vw;"
           >
             <form
@@ -929,7 +931,7 @@ exports[`Login Page should show login form 1`] = `
               </button>
             </form>
             <div
-              class="ant-pro-form-login-main-other "
+              class="ant-pro-form-login-main-other"
             >
               Login with :
               <span
@@ -996,10 +998,12 @@ exports[`Login Page should show login form 1`] = `
       </div>
       <footer
         class="ant-layout-footer"
+        data-testid="pro-layout-footer"
         style="padding: 0px; background: none;"
       >
         <div
           class="ant-pro-global-footer"
+          data-testid="pro-global-footer"
         >
           <div
             class="ant-pro-global-footer-list"
