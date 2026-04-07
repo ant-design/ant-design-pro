@@ -15,7 +15,9 @@
       "!**/public",
       "!**/coverage",
       "!**/node_modules",
-      "!biome.json"
+      "!biome.json",
+      "!tailwind.css",
+      "!**/.worktrees"
     ]
   },
   "formatter": {
