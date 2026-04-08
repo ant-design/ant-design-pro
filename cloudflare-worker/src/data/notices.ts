@@ -1,4 +1,31 @@
-export const notices = [
+type NoticeItem =
+  | {
+      id: string;
+      avatar: string;
+      title: string;
+      datetime: string;
+      type: 'notification';
+      read?: boolean;
+    }
+  | {
+      id: string;
+      avatar: string;
+      title: string;
+      description: string;
+      datetime: string;
+      type: 'message';
+      clickClose?: boolean;
+    }
+  | {
+      id: string;
+      title: string;
+      description: string;
+      extra: string;
+      status: 'todo' | 'urgent' | 'doing' | 'processing';
+      type: 'event';
+    };
+
+export const notices: NoticeItem[] = [
   {
     id: '000000001',
     avatar:

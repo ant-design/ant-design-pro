@@ -19,11 +19,14 @@ app.get('/fake_workplace_chart_data', (c) => {
       salesData: analysisChartData.salesData,
       searchData: analysisChartData.searchData,
       offlineData: analysisChartData.offlineData,
-      offlineChartData: analysisChartData.offlineChartData.map((item) => ({
-        x: item.date,
-        y1: item.value,
-        y2: Math.floor(Math.random() * 100) + 10,
-      })),
+      offlineChartData: analysisChartData.offlineChartData.map(
+        (item, index) => ({
+          x: item.date,
+          y1: item.value,
+          // Deterministic value based on index for reproducible results
+          y2: ((index * 23) % 100) + 10,
+        }),
+      ),
       salesTypeData: analysisChartData.salesTypeData,
       salesTypeDataOnline: analysisChartData.salesTypeDataOnline,
       salesTypeDataOffline: analysisChartData.salesTypeDataOffline,
