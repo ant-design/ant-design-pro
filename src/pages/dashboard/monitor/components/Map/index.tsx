@@ -1,7 +1,7 @@
 import { PageLoading } from '@ant-design/pro-components';
 import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
 import { useEffect, useState } from 'react';
-import { queryMapGeo, queryMapGrid } from '../../service';
+import { queryMapGeo, queryMapGrid } from '@/pages/dashboard/monitor/service';
 
 const colors = [
   '#eff3ff',
