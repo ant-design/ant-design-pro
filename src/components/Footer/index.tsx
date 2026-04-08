@@ -36,8 +36,8 @@ const Footer: React.FC = () => {
           title: (
             <>
               v{packageJson.version}
-              {COMMIT_HASH && <span> · {COMMIT_HASH.slice(0, 7)}</span>}{' '}
-              <GithubOutlined />
+              {COMMIT_HASH && <span> · {COMMIT_HASH.slice(0, 7)}</span>}
+              <GithubOutlined style={{ margin: '0 8px' }} />
               <a
                 href={repoUrl}
                 target="_blank"
