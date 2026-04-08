@@ -1,6 +1,9 @@
 import type { Request, Response } from 'express';
 import mockjs from 'mockjs';
 
+import mapGeoData from './map-geo.json';
+import mapGridData from './map-grid.json';
+
 const getTags = (_: Request, res: Response) => {
   return res.json({
     data: mockjs.mock({
@@ -9,20 +12,12 @@ const getTags = (_: Request, res: Response) => {
   });
 };
 
-const getMapGeo = async (_: Request, res: Response) => {
-  const response = await fetch(
-    'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
-  );
-  const data = await response.json();
-  return res.json(data);
+const getMapGeo = (_: Request, res: Response) => {
+  return res.json(mapGeoData);
 };
 
-const getMapGrid = async (_: Request, res: Response) => {
-  const response = await fetch(
-    'https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json',
-  );
-  const data = await response.json();
-  return res.json(data);
+const getMapGrid = (_: Request, res: Response) => {
+  return res.json(mapGridData);
 };
 
 export default {
