@@ -4,24 +4,16 @@ import packageJson from '@root/package.json';
 import GitUrlParse from 'git-url-parse';
 import React from 'react';
 
-const getRepoFromPackageJson = () => {
-  if (!packageJson.repository) return 'ant-design/ant-design-pro';
-  const parsed = GitUrlParse(packageJson.repository);
-  return `https://github.com/${parsed.owner}/${parsed.name}`;
-};
-
-const REPO = getRepoFromPackageJson();
+const REPO = packageJson.repository
+  ? GitUrlParse(packageJson.repository).toString()
+  : 'https://github.com/ant-design/ant-design-pro';
 
 // Git commit hash, can be updated via CI/CD (GitHub Actions or Cloudflare Pages)
 const COMMIT_HASH =
   process.env.COMMIT_HASH || process.env.CF_PAGES_COMMIT_SHA || '';
 
 const Footer: React.FC = () => {
-  const repo = REPO;
-  const commitUrl = COMMIT_HASH
-    ? `https://github.com/${repo}/commit/${COMMIT_HASH}`
-    : undefined;
-  const repoUrl = REPO;
+  const commitUrl = COMMIT_HASH ? `${REPO}/commit/${COMMIT_HASH}` : undefined;
 
   return (
     <DefaultFooter
@@ -51,7 +43,7 @@ const Footer: React.FC = () => {
               Ant Design Pro
             </>
           ),
-          href: repoUrl,
+          href: REPO,
         },
       ]}
     />
