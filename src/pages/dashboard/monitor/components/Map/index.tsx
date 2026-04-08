@@ -1,9 +1,7 @@
 import { PageLoading } from '@ant-design/pro-components';
 import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
 import { useEffect, useState } from 'react';
-
-const isDev = process.env.NODE_ENV === 'development';
-const API_URL = isDev ? '' : 'https://pro-api.ant-design-demo.workers.dev';
+import { queryMapGeo, queryMapGrid } from '../../service';
 
 const colors = [
   '#eff3ff',
@@ -23,8 +21,8 @@ export default function MonitorMap() {
   useEffect(() => {
     async function fetchData() {
       const [geoData, gridData] = await Promise.all([
-        fetch(`${API_URL}/api/monitor/map-geo`).then((d) => d.json()),
-        fetch(`${API_URL}/api/monitor/map-grid`).then((d) => d.json()),
+        queryMapGeo(),
+        queryMapGrid(),
       ]);
       setData(geoData);
       setGrid(gridData);
