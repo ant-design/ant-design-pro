@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
         {
           key: 'main',
           title: (
-            <>
+            <span>
               v{packageJson.version}
               {COMMIT_HASH && <span> · {COMMIT_HASH.slice(0, 7)}</span>}
               <GithubOutlined style={{ margin: '0 8px' }} />
@@ -46,8 +46,9 @@ const Footer: React.FC = () => {
               >
                 Ant Design Pro
               </a>
-            </>
+            </span>
           ),
+          href: undefined,
         },
       ]}
     />
