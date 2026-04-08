@@ -29,30 +29,20 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright={'Powered by Ant Design'}
       links={[
         {
-          key: 'version',
-          title: `v${packageJson.version}${COMMIT_HASH ? ` (${COMMIT_HASH.slice(0, 7)})` : ''}`,
-          href: commitUrl,
-          blankTarget: true,
-        },
-        {
-          key: 'Ant Design Pro',
-          title: 'Ant Design Pro',
-          href: 'https://pro.ant.design',
-          blankTarget: true,
-        },
-        {
-          key: 'github',
-          title: <GithubOutlined />,
+          key: 'main',
+          title: (
+            <>
+              v{packageJson.version}
+              {COMMIT_HASH && <span> · {COMMIT_HASH.slice(0, 7)}</span>}
+              <GithubOutlined />
+              <a href={repoUrl} target="_blank" rel="noopener noreferrer">
+                Ant Design Pro
+              </a>
+            </>
+          ),
           href: repoUrl,
-          blankTarget: true,
-        },
-        {
-          key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
           blankTarget: true,
         },
       ]}
