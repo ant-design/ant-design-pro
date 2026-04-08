@@ -8,18 +8,22 @@ import packageJson from '@/../package.json';
 const COMMIT_HASH = process.env.COMMIT_HASH || '';
 
 const Footer: React.FC = () => {
-  const commitUrl = `https://github.com/ant-design/ant-design-pro/commit/${COMMIT_HASH}`;
+  const repo = process.env.GITHUB_REPO || 'ant-design/ant-design-pro';
+  const commitUrl = COMMIT_HASH
+    ? `https://github.com/${repo}/commit/${COMMIT_HASH}`
+    : undefined;
+  const repoUrl = `https://github.com/${repo}`;
 
   return (
     <DefaultFooter
       style={{
         background: 'none',
       }}
-      copyright={'Powered by Ant Design | v' + packageJson.version}
+      copyright={'Powered by Ant Design'}
       links={[
         {
           key: 'version',
-          title: packageJson.version,
+          title: `v${packageJson.version}${COMMIT_HASH ? ` (${COMMIT_HASH.slice(0, 7)})` : ''}`,
           href: commitUrl,
           blankTarget: true,
         },
@@ -32,7 +36,7 @@ const Footer: React.FC = () => {
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: repoUrl,
           blankTarget: true,
         },
         {
