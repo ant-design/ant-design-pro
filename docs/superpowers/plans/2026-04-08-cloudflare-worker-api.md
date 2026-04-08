@@ -1131,7 +1131,7 @@ Edit `src/app.tsx`:
 // Change line 153 from:
 baseURL: isDev ? '' : 'https://proapi.azurewebsites.net',
 // To:
-baseURL: isDev ? '' : 'https://pro-api.afc163.workers.dev',
+baseURL: isDev ? '' : 'https://pro-api.ant-design-demo.workers.dev',
 ```
 
 - [ ] **Step 2: Remove Azure proxy config in config/proxy.ts**
@@ -1166,13 +1166,13 @@ git commit -m "feat: update API URL to cloudflare worker"
 
 Run: `cd cloudflare-worker && pnpm run deploy`
 
-Expected: Successfully deployed to `https://pro-api.afc163.workers.dev`
+Expected: Successfully deployed to `https://pro-api.ant-design-demo.workers.dev`
 
 - [ ] **Step 2: Verify production deployment**
 
 ```bash
 # Test production API
-curl https://pro-api.afc163.workers.dev/api/currentUser
+curl https://pro-api.ant-design-demo.workers.dev/api/currentUser
 ```
 
 Expected: Returns user data JSON

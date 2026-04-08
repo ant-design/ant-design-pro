@@ -14,7 +14,7 @@ Replace the dependency on `proapi.azurewebsites.net` with a self-hosted Cloudfla
                           │ HTTP requests to /api/*
                           ▼
 ┌─────────────────────────────────────────────────────────────┐
-│              pro-api.afc163.workers.dev                     │
+│              pro-api.ant-design-demo.workers.dev            │
 │              (Cloudflare Worker - Hono)                     │
 │                                                             │
 │  Routes:                                                    │
@@ -129,10 +129,10 @@ ENVIRONMENT = "production"
 
 1. `cd cloudflare-worker && pnpm install`
 2. `pnpm run dev` - Test locally at localhost:8787
-3. `pnpm run deploy` - Deploy to `pro-api.afc163.workers.dev`
+3. `pnpm run deploy` - Deploy to `pro-api.ant-design-demo.workers.dev`
 4. Update `src/app.tsx`:
    ```typescript
-   baseURL: isDev ? '' : 'https://pro-api.afc163.worker.dev'
+   baseURL: isDev ? '' : 'https://pro-api.ant-design-demo.workers.dev'
    ```
 5. Update `config/proxy.ts` - Remove `proapi.azurewebsites.net` reference
 
