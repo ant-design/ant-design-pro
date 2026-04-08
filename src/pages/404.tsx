@@ -1,4 +1,4 @@
-import { history, useIntl } from '@umijs/max';
+import { Link, useIntl } from '@umijs/max';
 import { Button, Card, Result } from 'antd';
 import React from 'react';
 
@@ -9,9 +9,11 @@ const NoFoundPage: React.FC = () => (
       title="404"
       subTitle={useIntl().formatMessage({ id: 'pages.404.subTitle' })}
       extra={
-        <Button type="primary" onClick={() => history.push('/')}>
-          {useIntl().formatMessage({ id: 'pages.404.buttonText' })}
-        </Button>
+        <Link to="/" prefetch>
+          <Button type="primary">
+            {useIntl().formatMessage({ id: 'pages.404.buttonText' })}
+          </Button>
+        </Link>
       }
     />
   </Card>

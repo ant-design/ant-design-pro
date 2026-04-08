@@ -8,7 +8,7 @@ export default () => (
       title="500"
       subTitle="Sorry, something went wrong."
       extra={
-        <Link to="/">
+        <Link to="/" prefetch>
           <Button type="primary">Back Home</Button>
         </Link>
       }

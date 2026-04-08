@@ -155,7 +155,11 @@ const Workplace: FC = () => {
             }}
             title="进行中的项目"
             variant="borderless"
-            extra={<Link to="/">全部项目</Link>}
+            extra={
+              <Link to="/" prefetch>
+                全部项目
+              </Link>
+            }
             loading={projectLoading}
           >
             {projectNotice.map((item) => (
@@ -164,7 +168,9 @@ const Workplace: FC = () => {
                   title={
                     <div className={styles.cardTitle}>
                       <Avatar size="small" src={item.logo} />
-                      <Link to={item.href || '/'}>{item.title}</Link>
+                      <Link to={item.href || '/'} prefetch>
+                        {item.title}
+                      </Link>
                     </div>
                   }
                   description={item.description}
@@ -173,7 +179,9 @@ const Workplace: FC = () => {
                   }}
                 />
                 <div className={styles.projectItemContent}>
-                  <Link to={item.memberLink || '/'}>{item.member || ''}</Link>
+                  <Link to={item.memberLink || '/'} prefetch>
+                    {item.member || ''}
+                  </Link>
                   {item.updatedAt && (
                     <span className={styles.datetime} title={item.updatedAt}>
                       {dayjs(item.updatedAt).fromNow()}

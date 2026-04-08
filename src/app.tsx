@@ -69,6 +69,16 @@ export const layout: RunTimeLayoutConfig = ({
       <Question key="doc" />,
       <SelectLang key="SelectLang" />,
     ],
+    menuItemRender: (item, dom) => {
+      if (item.path) {
+        return (
+          <Link to={item.path} prefetch>
+            {dom}
+          </Link>
+        );
+      }
+      return dom;
+    },
     avatarProps: {
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,
