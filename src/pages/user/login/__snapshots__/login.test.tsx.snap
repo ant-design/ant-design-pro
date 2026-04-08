@@ -201,7 +201,7 @@ exports[`Login Page should login success 1`] = `
                         class="ant-form-item-control-input-content"
                       >
                         <span
-                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-status-success css-var-_r_9_ ant-input-css-var"
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-filled ant-input-status-success css-var-_r_9_ ant-input-css-var"
                         >
                           <span
                             class="ant-input-prefix"
@@ -285,7 +285,7 @@ exports[`Login Page should login success 1`] = `
                         class="ant-form-item-control-input-content"
                       >
                         <span
-                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-status-success ant-input-password ant-input-password-large css-var-_r_9_ ant-input-css-var"
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-filled ant-input-status-success ant-input-password ant-input-password-large css-var-_r_9_ ant-input-css-var"
                         >
                           <span
                             class="ant-input-prefix"
@@ -744,7 +744,7 @@ exports[`Login Page should show login form 1`] = `
                         class="ant-form-item-control-input-content"
                       >
                         <span
-                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined css-var-_r_0_ ant-input-css-var"
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-filled css-var-_r_0_ ant-input-css-var"
                         >
                           <span
                             class="ant-input-prefix"
@@ -828,7 +828,7 @@ exports[`Login Page should show login form 1`] = `
                         class="ant-form-item-control-input-content"
                       >
                         <span
-                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-outlined ant-input-password ant-input-password-large css-var-_r_0_ ant-input-css-var"
+                          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-filled ant-input-password ant-input-password-large css-var-_r_0_ ant-input-css-var"
                         >
                           <span
                             class="ant-input-prefix"
