@@ -246,11 +246,11 @@ const getActivities = (_: Request, res: Response) => {
         },
         group: {
           name: '高逼格设计天团',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         project: {
           name: '六月迭代',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         template: '在 @{group} 新建项目 @{project}',
       },
@@ -263,11 +263,11 @@ const getActivities = (_: Request, res: Response) => {
         },
         group: {
           name: '高逼格设计天团',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         project: {
           name: '六月迭代',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         template: '在 @{group} 新建项目 @{project}',
       },
@@ -280,11 +280,11 @@ const getActivities = (_: Request, res: Response) => {
         },
         group: {
           name: '中二少女团',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         project: {
           name: '六月迭代',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         template: '在 @{group} 新建项目 @{project}',
       },
@@ -297,7 +297,7 @@ const getActivities = (_: Request, res: Response) => {
         },
         project: {
           name: '5 月日常迭代',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         template: '将 @{project} 更新至已发布状态',
       },
@@ -310,11 +310,11 @@ const getActivities = (_: Request, res: Response) => {
         },
         project: {
           name: '工程效能',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         comment: {
           name: '留言',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         template: '在 @{project} 发布了 @{comment}',
       },
@@ -327,11 +327,11 @@ const getActivities = (_: Request, res: Response) => {
         },
         group: {
           name: '程序员日常',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         project: {
           name: '品牌迭代',
-          link: 'http://github.com/',
+          link: 'https://github.com/',
         },
         template: '在 @{group} 新建项目 @{project}',
       },
