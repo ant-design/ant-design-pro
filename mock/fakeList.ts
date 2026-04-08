@@ -1,5 +1,4 @@
 import type { Request, Response } from 'express';
-import type { ListItemDataType } from './data.d';
 
 const titles = [
   'Alipay',
@@ -48,11 +47,11 @@ const user = [
   '仲尼',
 ];
 
-function fakeList(count: number): ListItemDataType[] {
+function fakeList(count: number) {
   const list = [];
   for (let i = 0; i < count; i += 1) {
     list.push({
-      id: `fake-list-${i}`,
+      id: `fake-list-${Math.random().toString(36).slice(2, 6)}${i}`,
       owner: user[i % 10],
       title: titles[i % 8],
       avatar: avatars[i % 8],
@@ -120,5 +119,5 @@ function getFakeList(req: Request, res: Response) {
 }
 
 export default {
-  'GET  /api/fake_list': getFakeList,
+  'GET /api/fake_list': getFakeList,
 };
