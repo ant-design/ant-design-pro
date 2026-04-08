@@ -470,7 +470,7 @@ exports[`Login Page should login success 1`] = `
               class="ant-pro-global-footer-list-link"
               href="https://github.com/ant-design/ant-design-pro.git"
               rel="noreferrer"
-              target="_self"
+              target="_blank"
               title="version"
             >
               v6.0.0-beta.3
@@ -479,7 +479,7 @@ exports[`Login Page should login success 1`] = `
               class="ant-pro-global-footer-list-link"
               href="https://github.com/ant-design/ant-design-pro.git"
               rel="noreferrer"
-              target="_self"
+              target="_blank"
               title="repo"
             >
               <span
@@ -981,7 +981,7 @@ exports[`Login Page should show login form 1`] = `
               class="ant-pro-global-footer-list-link"
               href="https://github.com/ant-design/ant-design-pro.git"
               rel="noreferrer"
-              target="_self"
+              target="_blank"
               title="version"
             >
               v6.0.0-beta.3
@@ -990,7 +990,7 @@ exports[`Login Page should show login form 1`] = `
               class="ant-pro-global-footer-list-link"
               href="https://github.com/ant-design/ant-design-pro.git"
               rel="noreferrer"
-              target="_self"
+              target="_blank"
               title="repo"
             >
               <span
