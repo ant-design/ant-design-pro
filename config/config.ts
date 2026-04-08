@@ -189,8 +189,6 @@ export default defineConfig({
   exportStatic: {},
   define: {
     'process.env.CI': process.env.CI,
-    'process.env.GITHUB_REPO':
-      process.env.GITHUB_REPO || 'ant-design/ant-design-pro',
     'process.env.COMMIT_HASH': process.env.COMMIT_HASH || '',
   },
   extraPostCSSPlugins: [tailwindcss],
