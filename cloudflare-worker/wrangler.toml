@@ -1,6 +1,7 @@
 name = "pro-api"
 main = "src/index.ts"
 compatibility_date = "2026-04-01"
+account_id = "e6395b6beb3487d0b05d2b606540a2d0"
 
 [vars]
 ENVIRONMENT = "production"

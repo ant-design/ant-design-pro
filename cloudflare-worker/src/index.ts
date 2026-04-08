@@ -33,7 +33,7 @@ app.route('/api', userRoutes);
 app.route('/api', dashboardRoutes);
 app.route('/api', tableRoutes);
 app.route('/api', noticesRoutes);
-app.route('/api', monitorRoutes);
+app.route('/api/monitor', monitorRoutes);
 app.route('/api', errorRoutes);
 
 export default app;

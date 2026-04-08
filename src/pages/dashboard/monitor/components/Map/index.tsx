@@ -2,6 +2,9 @@ import { PageLoading } from '@ant-design/pro-components';
 import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
 import { useEffect, useState } from 'react';
 
+const isDev = process.env.NODE_ENV === 'development';
+const API_URL = isDev ? '' : 'https://pro-api.ant-design-demo.workers.dev';
+
 const colors = [
   '#eff3ff',
   '#c6dbef',
@@ -20,12 +23,8 @@ export default function MonitorMap() {
   useEffect(() => {
     async function fetchData() {
       const [geoData, gridData] = await Promise.all([
-        fetch(
-          'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
-        ).then((d) => d.json()),
-        fetch(
-          'https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json',
-        ).then((d) => d.json()),
+        fetch(`${API_URL}/api/monitor/map-geo`).then((d) => d.json()),
+        fetch(`${API_URL}/api/monitor/map-grid`).then((d) => d.json()),
       ]);
       setData(geoData);
       setGrid(gridData);
