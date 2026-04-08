@@ -35,7 +35,11 @@ const Footer: React.FC = () => {
           title: (
             <>
               v{packageJson.version}
-              {COMMIT_HASH && <span> · {COMMIT_HASH.slice(0, 7)}</span>}
+              {COMMIT_HASH ? (
+                <span> · {COMMIT_HASH.slice(0, 7)}</span>
+              ) : (
+                <> ·</>
+              )}
               <GithubOutlined />
               <a href={repoUrl} target="_blank" rel="noopener noreferrer">
                 Ant Design Pro
