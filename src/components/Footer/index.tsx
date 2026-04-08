@@ -5,10 +5,9 @@ import GitUrlParse from 'git-url-parse';
 import React from 'react';
 
 const getRepoFromPackageJson = () => {
-  const repoUrl = packageJson.repository;
-  if (!repoUrl) return 'ant-design/ant-design-pro';
-  const parsed = GitUrlParse(repoUrl);
-  return `${parsed.owner}/${parsed.name}`;
+  if (!packageJson.repository) return 'ant-design/ant-design-pro';
+  const parsed = GitUrlParse(packageJson.repository);
+  return `https://github.com/${parsed.owner}/${parsed.name}`;
 };
 
 const REPO = getRepoFromPackageJson();
@@ -22,7 +21,7 @@ const Footer: React.FC = () => {
   const commitUrl = COMMIT_HASH
     ? `https://github.com/${repo}/commit/${COMMIT_HASH}`
     : undefined;
-  const repoUrl = `https://github.com/${repo}`;
+  const repoUrl = REPO;
 
   return (
     <DefaultFooter
