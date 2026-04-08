@@ -84,8 +84,8 @@ function fakeList(count: number) {
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % 8],
       href: 'https://ant.design',
-      updatedAt: new Date().getTime() - Math.floor(Math.random() * 1000000000),
-      createdAt: new Date().getTime() - Math.floor(Math.random() * 1000000000),
+      updatedAt: Date.now() - Math.floor(Math.random() * 1000000000),
+      createdAt: Date.now() - Math.floor(Math.random() * 1000000000),
       subDescription: desc[i % 5],
       description:
         '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的共通点和组成部分，该专案即是致力于归纳和吸收各种产品的各自优势，致力于打造成中后台产品的根底',

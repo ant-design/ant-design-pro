@@ -18,6 +18,8 @@ jobs:
 
       - uses: utooland/setup-utoo@v1
       - run: ut
+      - name: Set COMMIT_HASH
+        run: echo "COMMIT_HASH=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
       - run: ut build
 
       - name: upload dist artifact
