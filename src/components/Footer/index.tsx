@@ -5,7 +5,7 @@ import GitUrlParse from 'git-url-parse';
 import React from 'react';
 
 const REPO = packageJson.repository
-  ? GitUrlParse(packageJson.repository).toString()
+  ? GitUrlParse(packageJson.repository).toString('https')
   : 'https://github.com/ant-design/ant-design-pro';
 
 // Git commit hash, can be updated via CI/CD (GitHub Actions or Cloudflare Pages)
