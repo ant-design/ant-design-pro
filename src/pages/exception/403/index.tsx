@@ -8,7 +8,7 @@ export default () => (
       title="403"
       subTitle="Sorry, you are not authorized to access this page."
       extra={
-        <Link to="/">
+        <Link to="/" prefetch>
           <Button type="primary">Back to home</Button>
         </Link>
       }
