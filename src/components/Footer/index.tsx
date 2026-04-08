@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright={`Powered by Ant Design | v${packageJson.version} | `}
+      copyright={'Powered by Ant Design | v' + packageJson.version}
       links={[
         {
           key: 'version',
