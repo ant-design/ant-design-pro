@@ -1,15 +1,15 @@
 import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-components';
+import GitUrlParse from 'git-url-parse';
 import React from 'react';
 
 import packageJson from '@/../package.json';
 
-// Extract repo from package.json repository field (e.g., "git@github.com:ant-design/ant-design-pro.git" -> "ant-design/ant-design-pro")
 const getRepoFromPackageJson = () => {
   const repoUrl = packageJson.repository;
   if (!repoUrl) return 'ant-design/ant-design-pro';
-  const match = repoUrl.match(/[:/]([^:]+\/[^.]+)\.git$/);
-  return match ? match[1] : 'ant-design/ant-design-pro';
+  const parsed = GitUrlParse(repoUrl);
+  return `${parsed.owner}/${parsed.name}`;
 };
 
 const REPO = getRepoFromPackageJson();
