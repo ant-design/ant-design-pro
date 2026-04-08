@@ -32,23 +32,27 @@ const Footer: React.FC = () => {
       }}
       links={[
         {
-          key: 'main',
+          key: 'version',
+          title: `v${packageJson.version}`,
+        },
+        ...(COMMIT_HASH
+          ? [
+              {
+                key: 'commit',
+                title: COMMIT_HASH.slice(0, 7),
+                href: commitUrl,
+              },
+            ]
+          : []),
+        {
+          key: 'repo',
           title: (
-            <span>
-              v{packageJson.version}
-              {COMMIT_HASH && <span> · {COMMIT_HASH.slice(0, 7)}</span>}
-              <GithubOutlined style={{ margin: '0 8px' }} />
-              <a
-                href={repoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'inherit' }}
-              >
-                Ant Design Pro
-              </a>
-            </span>
+            <>
+              <GithubOutlined style={{ marginRight: 4 }} />
+              Ant Design Pro
+            </>
           ),
-          href: undefined,
+          href: repoUrl,
         },
       ]}
     />
