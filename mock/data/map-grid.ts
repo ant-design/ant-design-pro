@@ -1,3 +1,4 @@
+export default 
 {
   "type": "FeatureCollection",
   "crs": {
@@ -41407,3 +41408,4 @@
     }
   ]
 }
+;
