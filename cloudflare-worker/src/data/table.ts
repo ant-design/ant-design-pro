@@ -29,7 +29,7 @@ const generateTableData = (count: number): RuleListItem[] => {
     owner: '曲丽丽',
     desc: '这是一段描述',
     callNo: Math.floor(Math.random() * 1000),
-    status: Math.floor(Math.random() * 10) % 4,
+    status: Math.floor(Math.random() * 4),
     updatedAt: today,
     createdAt: today,
     progress: Math.ceil(Math.random() * 100),

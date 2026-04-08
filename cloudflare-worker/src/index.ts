@@ -11,15 +11,15 @@ import { corsOrigin } from './utils/cors';
 const app = new Hono();
 
 // CORS middleware
-app.use('/*', async (c, next) => {
-  const origin = c.req.header('Origin') || '';
-  const corsMiddleware = cors({
-    origin: corsOrigin(origin) ? origin : 'https://preview.pro.ant.design',
+app.use(
+  '/*',
+  cors({
+    origin: (origin) =>
+      corsOrigin(origin) ? origin : 'https://preview.pro.ant.design',
     allowMethods: ['GET', 'POST', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],
-  });
-  return corsMiddleware(c, next);
-});
+  }),
+);
 
 // Auth routes config
 app.get('/api/auth_routes', (c) => {

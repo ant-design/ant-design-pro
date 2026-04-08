@@ -1,6 +1,6 @@
 name = "pro-api"
 main = "src/index.ts"
-compatibility_date = "2024-01-01"
+compatibility_date = "2026-04-01"
 
 [vars]
 ENVIRONMENT = "production"

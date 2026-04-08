@@ -23,28 +23,43 @@ app.get('/rule', (c) => {
 
   // Sort
   if (sorter) {
-    const sorterObj = JSON.parse(sorter);
+    let sorterObj: Record<string, 'ascend' | 'descend'>;
+    try {
+      sorterObj = JSON.parse(sorter);
+    } catch {
+      return c.json({ success: false, error: 'Invalid sorter format' }, 400);
+    }
     dataSource.sort((prev, next) => {
-      let sortNumber = 0;
       for (const key of Object.keys(sorterObj) as Array<keyof RuleListItem>) {
-        const prevVal = prev[key] as number;
-        const nextVal = next[key] as number;
-        if (sorterObj[key] === 'descend') {
-          sortNumber += prevVal > nextVal ? -1 : 1;
-        } else {
-          sortNumber += prevVal > nextVal ? 1 : -1;
+        const prevVal = prev[key];
+        const nextVal = next[key];
+        const isDescend = sorterObj[key] === 'descend';
+        // Handle both string and number values
+        let comparison = 0;
+        if (typeof prevVal === 'string' && typeof nextVal === 'string') {
+          comparison = prevVal.localeCompare(nextVal);
+        } else if (typeof prevVal === 'number' && typeof nextVal === 'number') {
+          comparison = prevVal - nextVal;
+        }
+        if (comparison !== 0) {
+          return isDescend ? -comparison : comparison;
         }
       }
-      return sortNumber;
+      return 0;
     });
   }
 
   // Filter
   if (filter) {
-    const filterObj = JSON.parse(filter) as Record<string, string[]>;
+    let filterObj: Record<string, string[]>;
+    try {
+      filterObj = JSON.parse(filter);
+    } catch {
+      return c.json({ success: false, error: 'Invalid filter format' }, 400);
+    }
     if (Object.keys(filterObj).length > 0) {
       dataSource = dataSource.filter((item) => {
-        return Object.keys(filterObj).some((key) => {
+        return Object.keys(filterObj).every((key) => {
           const filterValues = filterObj[key];
           if (!filterValues || filterValues.length === 0) return true;
           return filterValues.includes(`${item[key as keyof RuleListItem]}`);
@@ -68,7 +83,17 @@ app.get('/rule', (c) => {
 });
 
 app.post('/rule', async (c) => {
-  const body = await c.req.json();
+  let body: {
+    method?: string;
+    name?: string;
+    desc?: string;
+    key?: number | number[];
+  } = {};
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ success: false, error: 'Invalid JSON body' }, 400);
+  }
   const { method, name, desc, key } = body;
 
   if (method === 'delete' && Array.isArray(key)) {
@@ -89,7 +114,7 @@ app.post('/rule', async (c) => {
       owner: '曲丽丽',
       desc,
       callNo: Math.floor(Math.random() * 1000),
-      status: Math.floor(Math.random() * 10) % 2,
+      status: Math.floor(Math.random() * 2),
       updatedAt: new Date().toISOString().split('T')[0],
       createdAt: new Date().toISOString().split('T')[0],
       progress: Math.ceil(Math.random() * 100),

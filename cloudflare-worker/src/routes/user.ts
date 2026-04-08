@@ -5,7 +5,12 @@ const app = new Hono();
 
 // Login - always succeeds with admin role
 app.post('/login/account', async (c) => {
-  const body = await c.req.json();
+  let body: { type?: string } = {};
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json({ status: 'error', message: 'Invalid JSON body' }, 400);
+  }
   return c.json({
     status: 'ok',
     type: body.type || 'account',
@@ -38,7 +43,7 @@ app.get('/currentUser', (c) => {
 
 // Users list
 app.get('/users', (c) => {
-  return c.json(userList);
+  return c.json({ data: userList });
 });
 
 export default app;
