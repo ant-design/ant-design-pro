@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express';
 import mockjs from 'mockjs';
 
-import mapGeoData from '@/mock-data/map-geo';
-import mapGridData from '@/mock-data/map-grid';
+import mapGeoData from '../../../mock-data/map-geo';
+import mapGridData from '../../../mock-data/map-grid';
 
 const getTags = (_: Request, res: Response) => {
   return res.json({
