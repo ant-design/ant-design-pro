@@ -68,6 +68,12 @@ export default defineConfig({
    * @description 一个不错的热更新组件，更新时可以保留 state
    */
   fastRefresh: true,
+  /**
+   * @name 路由预加载
+   * @description 在开发环境下预加载路由资源，提升页面切换速度
+   * @doc https://umijs.org/docs/api/config#routePrefetch
+   */
+  routePrefetch: {},
   //============== 以下都是max的插件配置 ===============
   /**
    * @name 数据流插件
