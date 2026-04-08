@@ -5,7 +5,7 @@ import React from 'react';
 import packageJson from '@/../package.json';
 
 // Git commit hash, can be updated via CI/CD
-const COMMIT_HASH = process.env.COMMIT_HASH || 'dc7c34c';
+const COMMIT_HASH = process.env.COMMIT_HASH || '';
 
 const Footer: React.FC = () => {
   const commitUrl = `https://github.com/ant-design/ant-design-pro/commit/${COMMIT_HASH}`;
