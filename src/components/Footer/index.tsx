@@ -41,7 +41,12 @@ const Footer: React.FC = () => {
                 <> ·</>
               )}
               <GithubOutlined />
-              <a href={repoUrl} target="_blank" rel="noopener noreferrer">
+              <a
+                href={repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'inherit' }}
+              >
                 Ant Design Pro
               </a>
             </>
