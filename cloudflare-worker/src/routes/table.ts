@@ -110,9 +110,9 @@ app.post('/rule', async (c) => {
       href: 'https://ant.design',
       avatar:
         'https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png',
-      name,
+      name: name || 'New Item',
       owner: '曲丽丽',
-      desc,
+      desc: desc || '',
       callNo: Math.floor(Math.random() * 1000),
       status: Math.floor(Math.random() * 2),
       updatedAt: new Date().toISOString().split('T')[0],
