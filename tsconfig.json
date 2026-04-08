@@ -15,7 +15,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@@/*": ["./src/.umi/*"],
-      "@@test/*": ["./src/.umi-test/*"]
+      "@@test/*": ["./src/.umi-test/*"],
+      "@@root/*": ["./*"],
+      "package.json": ["./package.json"]
     }
   },
   "include": ["./**/*.d.ts", "./**/*.ts", "./**/*.tsx"]
