@@ -45,3 +45,6 @@ build
 
 # worktrees
 .worktrees
+
+# cloudflare wrangler
+.wrangler

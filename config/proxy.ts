@@ -26,18 +26,16 @@ export default {
    * @doc https://github.com/chimurai/http-proxy-middleware
    */
   test: {
-    // localhost:8000/api/** -> https://preview.pro.ant.design/api/**
+    // localhost:8000/api/** -> https://pro-api.ant-design-demo.workers.dev/api/**
     '/api/': {
-      target: 'https://proapi.azurewebsites.net',
+      target: 'https://pro-api.ant-design-demo.workers.dev',
       changeOrigin: true,
-      pathRewrite: { '^': '' },
     },
   },
   pre: {
     '/api/': {
       target: 'your pre url',
       changeOrigin: true,
-      pathRewrite: { '^': '' },
     },
   },
 };

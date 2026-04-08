@@ -1,6 +1,7 @@
 import { PageLoading } from '@ant-design/pro-components';
 import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
 import { useEffect, useState } from 'react';
+import { queryMapGeo, queryMapGrid } from '@/pages/dashboard/monitor/service';
 
 const colors = [
   '#eff3ff',
@@ -20,12 +21,8 @@ export default function MonitorMap() {
   useEffect(() => {
     async function fetchData() {
       const [geoData, gridData] = await Promise.all([
-        fetch(
-          'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
-        ).then((d) => d.json()),
-        fetch(
-          'https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json',
-        ).then((d) => d.json()),
+        queryMapGeo(),
+        queryMapGrid(),
       ]);
       setData(geoData);
       setGrid(gridData);
