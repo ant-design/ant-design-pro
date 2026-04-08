@@ -9,6 +9,24 @@ const getTags = (_: Request, res: Response) => {
   });
 };
 
+const getMapGeo = async (_: Request, res: Response) => {
+  const response = await fetch(
+    'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
+  );
+  const data = await response.json();
+  return res.json(data);
+};
+
+const getMapGrid = async (_: Request, res: Response) => {
+  const response = await fetch(
+    'https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json',
+  );
+  const data = await response.json();
+  return res.json(data);
+};
+
 export default {
   'GET  /api/tags': getTags,
+  'GET  /api/monitor/map-geo': getMapGeo,
+  'GET  /api/monitor/map-grid': getMapGrid,
 };
