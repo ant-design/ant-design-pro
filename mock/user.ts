@@ -159,10 +159,7 @@ export default {
     access = '';
     res.send({ data: {}, success: true });
   },
-  'POST /api/register': (_req: Request, res: Response) => {
-    res.send({ status: 'ok', currentAuthority: 'user', success: true });
-  },
-  'GET /api/500': (_req: Request, res: Response) => {
+    'GET /api/500': (_req: Request, res: Response) => {
     res.status(500).send({
       timestamp: 1513932555104,
       status: 500,
@@ -199,5 +196,5 @@ export default {
     });
   },
 
-  'GET  /api/login/captcha': getFakeCaptcha,
+  'GET /api/login/captcha': getFakeCaptcha,
 };
