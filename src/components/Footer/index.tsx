@@ -27,12 +27,9 @@ const Footer: React.FC = () => {
   return (
     <DefaultFooter
       copyright={false}
-      style={
-        {
-          background: 'none',
-          '--ant-global-footer-link-gap': '4px',
-        } as React.CSSProperties
-      }
+      style={{
+        background: 'none',
+      }}
       links={[
         {
           key: 'version',
@@ -51,7 +48,7 @@ const Footer: React.FC = () => {
           key: 'repo',
           title: (
             <>
-              <GithubOutlined style={{ marginRight: 4 }} />
+              <GithubOutlined style={{ marginRight: 8 }} />
               Ant Design Pro
             </>
           ),
