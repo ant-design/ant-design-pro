@@ -50,6 +50,20 @@ const user = [
   '仲尼',
 ];
 
+// Count bounds to prevent memory exhaustion
+const COUNT_MIN = 1;
+const COUNT_MAX = 100;
+const DEFAULT_COUNT = 20;
+const DEFAULT_COUNT_SMALL = 5;
+
+function parseCount(value: string | undefined, defaultVal: number): number {
+  const parsed = Number(value);
+  if (Number.isNaN(parsed)) {
+    return defaultVal;
+  }
+  return Math.max(COUNT_MIN, Math.min(parsed, COUNT_MAX));
+}
+
 function fakeList(count: number) {
   const list = [];
   for (let i = 0; i < count; i += 1) {
@@ -113,7 +127,7 @@ const app = new Hono();
 
 // GET /api/get_list
 app.get('/get_list', (c) => {
-  const count = Number(c.req.query('count')) || 20;
+  const count = parseCount(c.req.query('count'), DEFAULT_COUNT);
   const result = fakeList(count);
   sourceData = result;
   return c.json({
@@ -158,7 +172,7 @@ app.post('/post_fake_list', async (c) => {
 
 // GET /api/card_fake_list
 app.get('/card_fake_list', (c) => {
-  const count = Number(c.req.query('count')) || 20;
+  const count = parseCount(c.req.query('count'), DEFAULT_COUNT);
   const result = fakeList(count);
   return c.json({
     data: {
@@ -184,7 +198,7 @@ app.get('/tags', (c) => {
 
 // GET /api/fake_list_Detail
 app.get('/fake_list_Detail', (c) => {
-  const count = Number(c.req.query('count')) || 5;
+  const count = parseCount(c.req.query('count'), DEFAULT_COUNT_SMALL);
   const result = fakeList(count);
   return c.json({
     data: {
@@ -215,6 +229,7 @@ app.get('/currentUserDetail', (c) => {
       ],
       notifyCount: 12,
       unreadCount: 11,
+      notice: [],
       country: 'China',
       geographic: {
         province: { label: '浙江省', key: '330000' },
