@@ -26,6 +26,7 @@ const Footer: React.FC = () => {
 
   return (
     <DefaultFooter
+      copyright={false}
       style={{
         background: 'none',
       }}
