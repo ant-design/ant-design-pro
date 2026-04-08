@@ -74,6 +74,11 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#routePrefetch
    */
   routePrefetch: {},
+  /**
+   * @name manifest 配置
+   * @description 生成资源清单，配合 routePrefetch 使用
+   */
+  manifest: {},
   //============== 以下都是max的插件配置 ===============
   /**
    * @name 数据流插件
