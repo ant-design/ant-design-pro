@@ -1,6 +1,4 @@
 import { Hono } from 'hono';
-import mapGeoData from '../data/map-geo.json';
-import mapGridData from '../data/map-grid.json';
 
 const app = new Hono();
 
@@ -15,16 +13,6 @@ app.get('/tags', (c) => {
   return c.json({
     data: { list },
   });
-});
-
-// Map geo data endpoint
-app.get('/map-geo', (c) => {
-  return c.json(mapGeoData);
-});
-
-// Map grid data endpoint
-app.get('/map-grid', (c) => {
-  return c.json(mapGridData);
 });
 
 export default app;

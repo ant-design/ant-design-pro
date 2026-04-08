@@ -13,8 +13,8 @@ app.get('/rule', (c) => {
   } = c.req.query();
 
   let dataSource = [...tableListDataSource];
-  const currentNum = parseInt(current, 10);
-  const pageSizeNum = parseInt(pageSize, 10);
+  const currentNum = Math.max(1, parseInt(current, 10) || 1);
+  const pageSizeNum = Math.max(1, parseInt(pageSize, 10) || 10);
 
   // Filter by name
   if (name) {
@@ -98,9 +98,12 @@ app.post('/rule', async (c) => {
 
   if (method === 'delete' && Array.isArray(key)) {
     // Return success for delete
+    const filteredList = tableListDataSource.filter(
+      (item) => !key.includes(item.key),
+    );
     return c.json({
-      list: tableListDataSource.filter((item) => !key.includes(item.key)),
-      pagination: { total: tableListDataSource.length },
+      list: filteredList,
+      pagination: { total: filteredList.length },
     });
   }
 
