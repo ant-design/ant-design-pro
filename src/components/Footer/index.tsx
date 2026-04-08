@@ -27,9 +27,12 @@ const Footer: React.FC = () => {
   return (
     <DefaultFooter
       copyright={false}
-      style={{
-        background: 'none',
-      }}
+      style={
+        {
+          background: 'none',
+          '--ant-global-footer-link-gap': '4px',
+        } as React.CSSProperties
+      }
       links={[
         {
           key: 'version',
