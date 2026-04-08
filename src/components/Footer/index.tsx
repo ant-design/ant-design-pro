@@ -25,13 +25,14 @@ const Footer: React.FC = () => {
         {
           key: 'version',
           title: `v${packageJson.version}`,
+          href: REPO,
         },
         ...(COMMIT_HASH
           ? [
               {
                 key: 'commit',
                 title: COMMIT_HASH.slice(0, 7),
-                href: commitUrl,
+                href: commitUrl!,
               },
             ]
           : []),
