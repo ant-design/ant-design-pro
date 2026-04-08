@@ -145,8 +145,8 @@ export default defineConfig({
     { src: join(PUBLIC_PATH, 'scripts/loading.js'), async: true },
   ],
 
-  //================ pro 插件配置 =================
-  presets: ['umi-presets-pro'],
+  plugins: ['@umijs/max-plugin-openapi', '@umijs/request-record'],
+
   /**
    * @name openAPI 插件的配置
    * @description 基于 openapi 的规范生成serve 和mock，能减少很多样板代码
