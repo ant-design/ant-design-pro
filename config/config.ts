@@ -145,6 +145,7 @@ export default defineConfig({
     { src: join(PUBLIC_PATH, 'scripts/loading.js'), async: true },
   ],
 
+  //================ pro 插件配置 =================
   plugins: ['@umijs/max-plugin-openapi', '@umijs/request-record'],
 
   /**
