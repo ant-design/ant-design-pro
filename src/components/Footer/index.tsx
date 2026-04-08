@@ -8,7 +8,7 @@ const getRepoUrl = () => {
   if (!packageJson.repository)
     return 'https://github.com/ant-design/ant-design-pro';
   const parsed = GitUrlParse(packageJson.repository);
-  return `https://github.com/${parsed.owner}/${parsed.name}`;
+  return `https://${parsed.source}/${parsed.owner}/${parsed.name}`;
 };
 
 const REPO = getRepoUrl();
