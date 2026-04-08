@@ -14,8 +14,9 @@ const getRepoFromPackageJson = () => {
 
 const REPO = getRepoFromPackageJson();
 
-// Git commit hash, can be updated via CI/CD
-const COMMIT_HASH = process.env.COMMIT_HASH || '';
+// Git commit hash, can be updated via CI/CD (GitHub Actions or Cloudflare Pages)
+const COMMIT_HASH =
+  process.env.COMMIT_HASH || process.env.CF_PAGES_COMMIT_SHA || '';
 
 const Footer: React.FC = () => {
   const repo = REPO;
