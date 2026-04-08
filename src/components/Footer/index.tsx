@@ -48,8 +48,6 @@ const Footer: React.FC = () => {
               </a>
             </>
           ),
-          href: repoUrl,
-          blankTarget: true,
         },
       ]}
     />
