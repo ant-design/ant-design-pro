@@ -1,6 +1,6 @@
 const allowedPatterns = [
-  /^https:\/\/[\w-]+\.surge\.sh$/,
-  /^https:\/\/[\w-]+\.pages\.dev$/,
+  /^https:\/\/.*\.surge\.sh$/,
+  /^https:\/\/.*\.pages\.dev$/,
   /^https:\/\/preview\.pro\.ant\.design$/,
   /^http:\/\/localhost:\d+$/,
 ];
