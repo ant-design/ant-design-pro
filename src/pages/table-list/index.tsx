@@ -9,7 +9,8 @@ import {
   ProDescriptions,
   ProTable,
 } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl, useRequest } from '@umijs/max';
+import { useMutation } from '@tanstack/react-query';
+import { FormattedMessage, useIntl } from '@umijs/max';
 import { Button, Drawer, type FormInstance, Input, message } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
 import { removeRule, rule } from '@/services/ant-design-pro/api';
@@ -31,8 +32,7 @@ const TableList: React.FC = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { run: delRun, loading } = useRequest(removeRule, {
-    manual: true,
+  const { mutate: delRun, isPending: loading } = useMutation(removeRule, {
     onSuccess: () => {
       setSelectedRows([]);
       actionRef.current?.reloadAndRest?.();

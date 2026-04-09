@@ -4,7 +4,7 @@ import {
   EllipsisOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Avatar, Card, Dropdown, List, Tooltip } from 'antd';
 import numeral from 'numeral';
 import React from 'react';
@@ -59,10 +59,9 @@ const CardInfo: React.FC<{
 const Applications: React.FC = () => {
   const { styles: stylesApplications } = useStyles();
   // 获取tab列表数据
-  const { data: listData } = useRequest(() => {
-    return queryFakeList({
-      count: 30,
-    });
+  const { data: listData } = useQuery({
+    queryKey: ['applications-list', 30],
+    queryFn: () => queryFakeList({ count: 30 }).then((res) => res.data),
   });
 
   return (

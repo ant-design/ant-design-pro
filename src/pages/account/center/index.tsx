@@ -5,7 +5,7 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import {
   Avatar,
   Card,
@@ -144,8 +144,9 @@ const Center: React.FC = () => {
   const [tabKey, setTabKey] = useState<tabKeyType>('articles');
 
   //  获取用户信息
-  const { data: currentUser, loading } = useRequest(() => {
-    return queryCurrent();
+  const { data: currentUser, isLoading: loading } = useQuery({
+    queryKey: ['current-user'],
+    queryFn: () => queryCurrent().then((res) => res.data),
   });
 
   //  渲染用户信息

@@ -1,4 +1,4 @@
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -18,12 +18,19 @@ const { Paragraph } = Typography;
 const getKey = (id: string, index: number) => `${id}-${index}`;
 const Projects: FC = () => {
   const { styles } = useStyles();
-  const { data, loading, run } = useRequest((values: any) => {
-    console.log('form data', values);
-    return queryFakeList({
-      count: 8,
-    });
+  const {
+    data,
+    isLoading: loading,
+    refetch,
+  } = useQuery({
+    queryKey: ['search-projects'],
+    queryFn: () => queryFakeList({ count: 8 }).then((res) => res.data),
   });
+
+  const run = (values: any) => {
+    console.log('form data', values);
+    refetch();
+  };
   const list = data?.list || [];
   const cardList = list && (
     <List<ListItemDataType>

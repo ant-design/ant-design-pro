@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Button, Card, List, Typography } from 'antd';
 import type { CardListItemDataType } from './data.d';
 import { queryFakeList } from './service';
@@ -9,10 +9,9 @@ import useStyles from './style.style';
 const { Paragraph } = Typography;
 const CardList = () => {
   const { styles } = useStyles();
-  const { data, loading } = useRequest(() => {
-    return queryFakeList({
-      count: 8,
-    });
+  const { data, isLoading: loading } = useQuery({
+    queryKey: ['card-list'],
+    queryFn: () => queryFakeList({ count: 8 }).then((res) => res.data),
   });
   const list = data?.list || [];
   const content = (

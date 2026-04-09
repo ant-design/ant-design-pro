@@ -1,4 +1,4 @@
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Card, List } from 'antd';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -12,10 +12,9 @@ dayjs.extend(relativeTime);
 const Projects: React.FC = () => {
   const { styles } = useStyles();
   // 获取tab列表数据
-  const { data: listData } = useRequest(() => {
-    return queryFakeList({
-      count: 30,
-    });
+  const { data: listData } = useQuery({
+    queryKey: ['projects-list', 30],
+    queryFn: () => queryFakeList({ count: 30 }).then((res) => res.data),
   });
   return (
     <List<ListItemDataType>

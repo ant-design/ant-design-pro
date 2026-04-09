@@ -1,4 +1,5 @@
-import { history, Link, useRequest } from '@umijs/max';
+import { useMutation } from '@tanstack/react-query';
+import { history, Link } from '@umijs/max';
 import {
   Button,
   Col,
@@ -85,10 +86,8 @@ const Register: FC = () => {
     }
     return 'poor';
   };
-  const { loading: submitting, run: register } = useRequest<{
-    data: StateType;
-  }>(fakeRegister, {
-    manual: true,
+  const { isPending: submitting, mutate: register } = useMutation({
+    mutationFn: fakeRegister,
     onSuccess: (data, params) => {
       if (data.status === 'ok') {
         message.success('注册成功！');

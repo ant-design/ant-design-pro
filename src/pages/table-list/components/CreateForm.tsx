@@ -5,7 +5,8 @@ import {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl, useRequest } from '@umijs/max';
+import { useMutation } from '@tanstack/react-query';
+import { FormattedMessage, useIntl } from '@umijs/max';
 import { Button, message } from 'antd';
 import type { FC } from 'react';
 import { addRule } from '@/services/ant-design-pro/api';
@@ -24,8 +25,7 @@ const CreateForm: FC<CreateFormProps> = (props) => {
    * */
   const intl = useIntl();
 
-  const { run, loading } = useRequest(addRule, {
-    manual: true,
+  const { mutate: run, isPending: loading } = useMutation(addRule, {
     onSuccess: () => {
       messageApi.success('Added successfully');
       reload?.();

@@ -9,7 +9,7 @@ import {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { useMutation } from '@tanstack/react-query';
 import { Card, message } from 'antd';
 import type { FC } from 'react';
 import { fakeSubmitForm } from './service';
@@ -17,8 +17,7 @@ import useStyles from './style.style';
 
 const BasicForm: FC<Record<string, any>> = () => {
   const { styles } = useStyles();
-  const { run } = useRequest(fakeSubmitForm, {
-    manual: true,
+  const { mutate: run } = useMutation(fakeSubmitForm, {
     onSuccess: () => {
       message.success('提交成功');
     },
