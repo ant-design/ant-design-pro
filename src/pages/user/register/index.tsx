@@ -87,12 +87,22 @@ const Register: FC = () => {
     return 'poor';
   };
   const { isPending: submitting, mutate: register } = useMutation({
-    mutationFn: (params: Store) => fakeRegister(params as any),
+    mutationFn: (formValues: Store) => {
+      const payload = {
+        mail: formValues.email,
+        password: formValues.password,
+        confirm: formValues.confirm,
+        mobile: formValues.mobile,
+        captcha: formValues.captcha,
+        prefix: formValues.prefix,
+      };
+      return fakeRegister(payload);
+    },
     onSuccess: (data, params) => {
       if (data.status === 'ok') {
         message.success('注册成功！');
         history.push({
-          pathname: `/user/register-result?account=${(params as any).mail}`,
+          pathname: `/user/register-result?account=${params.mail}`,
         });
       }
     },
