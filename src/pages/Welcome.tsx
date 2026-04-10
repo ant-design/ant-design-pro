@@ -3,9 +3,6 @@ import { useModel } from '@umijs/max';
 import { Card, theme } from 'antd';
 import React from 'react';
 
-/**
- * 每个单独的卡片，为了复用样式抽成了组件
- */
 const InfoCard: React.FC<{
   title: string;
   index: number;
@@ -20,39 +17,56 @@ const InfoCard: React.FC<{
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="block p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border"
+      className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02]"
       style={{
-        backgroundColor: token.colorBgContainer,
-        borderColor: isDark ? 'rgba(255,255,255,0.1)' : token.colorBorder,
+        background: isDark
+          ? 'rgba(255, 255, 255, 0.05)'
+          : 'rgba(255, 255, 255, 0.7)',
+        backdropFilter: 'blur(20px)',
+        border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.5)'}`,
+        boxShadow: isDark
+          ? '0 4px 24px rgba(0,0,0,0.3)'
+          : '0 4px 24px rgba(0,0,0,0.06)',
       }}
     >
-      <div className="flex items-center gap-3 mb-3">
+      {/* 悬停时的光效 */}
+      <div
+        className="absolute -inset-full top-0 block h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-0 transition-all duration-500 group-hover:animate-shine group-hover:opacity-10"
+        style={{ display: isDark ? 'none' : 'block' }}
+      />
+
+      <div className="relative flex items-start gap-4">
         <div
-          className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-lg font-bold"
+          className="shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl font-bold"
           style={{
             background: `linear-gradient(135deg, ${token.colorPrimary} 0%, ${token.colorPrimaryHover} 100%)`,
+            boxShadow: `0 8px 20px ${token.colorPrimary}40`,
           }}
         >
           {index}
         </div>
-        <span
-          className="text-lg font-medium"
-          style={{ color: token.colorText }}
-        >
-          {title}
-        </span>
+        <div className="flex-1 min-w-0">
+          <h3
+            className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors"
+            style={{ color: token.colorText }}
+          >
+            {title}
+          </h3>
+          <p
+            className="text-sm leading-relaxed line-clamp-2"
+            style={{ color: token.colorTextSecondary }}
+          >
+            {desc}
+          </p>
+        </div>
       </div>
-      <p
-        className="text-sm leading-relaxed"
-        style={{ color: token.colorTextSecondary }}
-      >
-        {desc}
-      </p>
+
       <div
-        className="mt-4 text-sm font-medium"
+        className="mt-4 text-sm font-medium flex items-center gap-1 transition-colors group-hover:gap-2"
         style={{ color: token.colorPrimary }}
       >
-        了解更多 →
+        了解更多
+        <span className="transition-transform">→</span>
       </div>
     </a>
   );
@@ -70,22 +84,28 @@ const Welcome: React.FC = () => {
         styles={{
           body: {
             background: isDark
-              ? 'linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
-              : 'linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
+              ? 'linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%)'
+              : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)',
+            padding: '48px 0',
           },
         }}
       >
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 p-6 lg:p-10">
-          {/* 左侧：欢迎和介绍 */}
-          <div className="lg:w-2/3 flex-none">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* 标题区域 */}
+          <div className="text-center mb-16">
             <h1
-              className="text-3xl lg:text-4xl font-bold mb-6"
-              style={{ color: token.colorTextHeading }}
+              className="text-5xl font-bold mb-6"
+              style={{
+                background: `linear-gradient(135deg, ${token.colorPrimary} 0%, ${token.colorPrimaryHover} 100%)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
             >
               欢迎使用 Ant Design Pro
             </h1>
             <p
-              className="text-base leading-7 max-w-2xl"
+              className="text-lg max-w-2xl mx-auto leading-relaxed"
               style={{ color: token.colorTextSecondary }}
             >
               Ant Design Pro 是一个整合了 umi，Ant Design 和 ProComponents
@@ -93,8 +113,8 @@ const Welcome: React.FC = () => {
             </p>
           </div>
 
-          {/* 右侧：信息卡片 */}
-          <div className="lg:w-1/3 flex-none flex flex-col gap-4">
+          {/* 卡片区域 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <InfoCard
               index={1}
               href="https://umijs.org/docs/introduce/introduce"
