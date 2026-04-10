@@ -87,18 +87,18 @@ const Register: FC = () => {
     return 'poor';
   };
   const { isPending: submitting, mutate: register } = useMutation({
-    mutationFn: fakeRegister,
-    onSuccess: (data) => {
+    mutationFn: (params: Store) => fakeRegister(params as any),
+    onSuccess: (data, params) => {
       if (data.status === 'ok') {
         message.success('注册成功！');
         history.push({
-          pathname: '/user/register-result',
+          pathname: `/user/register-result?account=${(params as any).mail}`,
         });
       }
     },
   });
   const onFinish = (values: Store) => {
-    register(values as any);
+    register(values);
   };
   const checkConfirm = (_: any, value: string) => {
     const promise = Promise;
