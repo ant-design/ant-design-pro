@@ -17,7 +17,8 @@ import useStyles from './style.style';
 
 const BasicForm: FC<Record<string, any>> = () => {
   const { styles } = useStyles();
-  const { mutate: run } = useMutation(fakeSubmitForm, {
+  const { mutate: run } = useMutation({
+    mutationFn: fakeSubmitForm,
     onSuccess: () => {
       message.success('提交成功');
     },

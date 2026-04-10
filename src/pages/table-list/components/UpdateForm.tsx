@@ -35,7 +35,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { mutate: run } = useMutation(updateRule, {
+  const { mutate: run } = useMutation({
+    mutationFn: updateRule,
     onSuccess: () => {
       messageApi.success('Configuration is successful');
       onOk?.();

@@ -88,17 +88,17 @@ const Register: FC = () => {
   };
   const { isPending: submitting, mutate: register } = useMutation({
     mutationFn: fakeRegister,
-    onSuccess: (data, params) => {
+    onSuccess: (data) => {
       if (data.status === 'ok') {
         message.success('注册成功！');
         history.push({
-          pathname: `/user/register-result?account=${params[0].email}`,
+          pathname: '/user/register-result',
         });
       }
     },
   });
   const onFinish = (values: Store) => {
-    register(values);
+    register(values as any);
   };
   const checkConfirm = (_: any, value: string) => {
     const promise = Promise;

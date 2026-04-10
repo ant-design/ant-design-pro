@@ -25,7 +25,8 @@ const CreateForm: FC<CreateFormProps> = (props) => {
    * */
   const intl = useIntl();
 
-  const { mutate: run, isPending: loading } = useMutation(addRule, {
+  const { mutate: run, isPending: loading } = useMutation({
+    mutationFn: addRule,
     onSuccess: () => {
       messageApi.success('Added successfully');
       reload?.();

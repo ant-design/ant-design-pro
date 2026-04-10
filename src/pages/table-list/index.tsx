@@ -32,7 +32,8 @@ const TableList: React.FC = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { mutate: delRun, isPending: loading } = useMutation(removeRule, {
+  const { mutate: delRun, isPending: loading } = useMutation({
+    mutationFn: removeRule,
     onSuccess: () => {
       setSelectedRows([]);
       actionRef.current?.reloadAndRest?.();

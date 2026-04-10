@@ -43,6 +43,7 @@
     "@antv/l7": "^2.22.7",
     "@antv/l7-react": "^2.4.3",
     "@rc-component/util": "^1.9.0",
+    "@tanstack/react-query": "^5.97.0",
     "antd": "^6.2.2",
     "antd-style": "^4.1.0",
     "clsx": "^2.1.1",
