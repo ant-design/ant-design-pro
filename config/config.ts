@@ -201,8 +201,4 @@ export default defineConfig({
     'process.env.COMMIT_HASH': process.env.COMMIT_HASH || '',
     'process.env.CF_PAGES_COMMIT_SHA': process.env.CF_PAGES_COMMIT_SHA || '',
   },
-  tailwindcss: {
-    // 这里可以配置 tailwindcss 的选项，具体配置项可以参考 tailwindcss 官方文档
-    // https://tailwindcss.com/docs/configuration
-  },
 });
