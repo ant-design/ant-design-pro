@@ -9,7 +9,7 @@ import {
   PageContainer,
   RouteContext,
 } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import {
   Badge,
   Button,
@@ -271,9 +271,10 @@ const Advanced: FC = () => {
     return dot;
   };
 
-  const { data = {}, loading } = useRequest<{
-    data: AdvancedProfileData;
-  }>(queryAdvancedProfile);
+  const { data = {}, isLoading: loading } = useQuery<AdvancedProfileData>({
+    queryKey: ['profile-advanced'],
+    queryFn: () => queryAdvancedProfile().then((res) => res.data),
+  });
   const { advancedOperation1, advancedOperation2, advancedOperation3 } = data;
   const contentList = {
     tab1: (

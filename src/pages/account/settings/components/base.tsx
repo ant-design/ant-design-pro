@@ -7,7 +7,7 @@ import {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Button, Input, message, Upload } from 'antd';
 import React from 'react';
 import { queryCity, queryCurrent, queryProvince } from '../service';
@@ -30,8 +30,9 @@ const validatorPhone = (
 const BaseView: React.FC = () => {
   const { styles } = useStyles();
 
-  const { data: currentUser, loading } = useRequest(() => {
-    return queryCurrent();
+  const { data: currentUser, isLoading: loading } = useQuery({
+    queryKey: ['current-user'],
+    queryFn: () => queryCurrent().then((res) => res.data),
   });
   const getAvatarURL = () => {
     if (currentUser) {

@@ -1,8 +1,9 @@
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import type { FC } from 'react';
+import { useState } from 'react';
 import { categoryOptions } from '../../mock';
 import AvatarList from './components/AvatarList';
 import StandardFormRow from './components/StandardFormRow';
@@ -18,12 +19,23 @@ const { Paragraph } = Typography;
 const getKey = (id: string, index: number) => `${id}-${index}`;
 const Projects: FC = () => {
   const { styles } = useStyles();
-  const { data, loading, run } = useRequest((values: any) => {
-    console.log('form data', values);
-    return queryFakeList({
-      count: 8,
-    });
+  const [filters, setFilters] = useState<{
+    category?: (string | number)[];
+    author?: string;
+  }>({});
+  const {
+    data,
+    isLoading: loading,
+    refetch,
+  } = useQuery({
+    queryKey: ['search-projects', filters],
+    queryFn: () =>
+      queryFakeList({ count: 8, ...filters }).then((res) => res.data),
   });
+
+  const run = (values: any) => {
+    setFilters(values);
+  };
   const list = data?.list || [];
   const cardList = list && (
     <List<ListItemDataType>

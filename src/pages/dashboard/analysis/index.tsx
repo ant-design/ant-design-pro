@@ -1,6 +1,6 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Col, Dropdown, Row } from 'antd';
 import type { RangePickerProps } from 'antd/es/date-picker';
 import type { Dayjs } from 'dayjs';
@@ -31,7 +31,10 @@ const Analysis: FC<AnalysisProps> = () => {
   const [rangePickerValue, setRangePickerValue] = useState<RangePickerValue>(
     getTimeDistance('year'),
   );
-  const { loading, data } = useRequest(fakeChartData);
+  const { isLoading: loading, data } = useQuery({
+    queryKey: ['dashboard-analysis'],
+    queryFn: () => fakeChartData().then((res) => res.data),
+  });
   const selectDate = (type: TimeType) => {
     setRangePickerValue(getTimeDistance(type));
   };

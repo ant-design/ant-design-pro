@@ -6,7 +6,8 @@ import {
   ProFormTextArea,
   StepsForm,
 } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl, useRequest } from '@umijs/max';
+import { useMutation } from '@tanstack/react-query';
+import { FormattedMessage, useIntl } from '@umijs/max';
 import { Modal, message } from 'antd';
 import React, { cloneElement, useCallback, useState } from 'react';
 import { updateRule } from '@/services/ant-design-pro/api';
@@ -34,8 +35,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { run } = useRequest(updateRule, {
-    manual: true,
+  const { mutateAsync: run } = useMutation({
+    mutationFn: updateRule,
     onSuccess: () => {
       messageApi.success('Configuration is successful');
       onOk?.();
@@ -56,7 +57,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const onFinish = useCallback(
     async (values?: any) => {
       await run({ data: values });
-
       onCancel();
     },
     [onCancel, run],

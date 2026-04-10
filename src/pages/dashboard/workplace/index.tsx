@@ -1,6 +1,7 @@
 import { Radar } from '@ant-design/plots';
 import { PageContainer } from '@ant-design/pro-components';
-import { Link, useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
+import { Link } from '@umijs/max';
 import { Avatar, Card, Col, List, Row, Skeleton, Statistic } from 'antd';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -90,11 +91,18 @@ const ExtraContent: FC<Record<string, any>> = () => {
 };
 const Workplace: FC = () => {
   const { styles } = useStyles();
-  const { loading: projectLoading, data: projectNotice = [] } =
-    useRequest(queryProjectNotice);
-  const { loading: activitiesLoading, data: activities = [] } =
-    useRequest(queryActivities);
-  const { data } = useRequest(fakeChartData);
+  const { isLoading: projectLoading, data: projectNotice = [] } = useQuery({
+    queryKey: ['project-notice'],
+    queryFn: () => queryProjectNotice().then((res) => res.data),
+  });
+  const { isLoading: activitiesLoading, data: activities = [] } = useQuery({
+    queryKey: ['activities'],
+    queryFn: () => queryActivities().then((res) => res.data),
+  });
+  const { data } = useQuery({
+    queryKey: ['workplace-chart'],
+    queryFn: () => fakeChartData().then((res) => res.data),
+  });
   const renderActivities = (item: ActivitiesType) => {
     const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
       if (item[key as keyof ActivitiesType]) {

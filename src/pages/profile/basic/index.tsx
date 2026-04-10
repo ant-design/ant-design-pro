@@ -1,6 +1,6 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Badge, Card, Descriptions, Divider } from 'antd';
 import type { FC } from 'react';
 import React from 'react';
@@ -43,8 +43,9 @@ const progressColumns: ProColumns<BasicProgress>[] = [
 ];
 const Basic: FC = () => {
   const { styles } = useStyles();
-  const { data, loading } = useRequest(() => {
-    return queryBasicProfile();
+  const { data, isLoading: loading } = useQuery({
+    queryKey: ['profile-basic'],
+    queryFn: () => queryBasicProfile().then((res) => res.data),
   });
   const { basicGoods, basicProgress } = data || {
     basicGoods: [],

@@ -4,7 +4,7 @@ import {
   EllipsisOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import {
   Avatar,
   Card,
@@ -79,12 +79,19 @@ const CardInfo: React.FC<{
 };
 export const Applications: FC<Record<string, any>> = () => {
   const { styles } = useStyles();
-  const { data, loading, run } = useRequest((values: any) => {
-    console.log('form data', values);
-    return queryFakeList({
-      count: 8,
-    });
+  const {
+    data,
+    isLoading: loading,
+    refetch,
+  } = useQuery({
+    queryKey: ['search-applications'],
+    queryFn: () => queryFakeList({ count: 8 }).then((res) => res.data),
   });
+
+  const run = (values: any) => {
+    console.log('form data', values);
+    refetch();
+  };
 
   const list = data?.list || [];
 

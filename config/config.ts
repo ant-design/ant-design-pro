@@ -146,6 +146,12 @@ export default defineConfig({
    */
   request: {},
   /**
+   * @name React Query 插件
+   * @description 使用 react-query 管理服务端状态
+   * @doc https://umijs.org/docs/max/react-query
+   */
+  reactQuery: {},
+  /**
    * @name 权限插件
    * @description 基于 initialState 的权限插件，必须先打开 initialState
    * @doc https://umijs.org/docs/max/access

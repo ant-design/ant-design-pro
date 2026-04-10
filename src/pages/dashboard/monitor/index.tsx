@@ -1,6 +1,6 @@
 import { Gauge, Liquid, WordCloud } from '@ant-design/plots';
 import { GridContent } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Card, Col, Progress, Row, Statistic } from 'antd';
 import numeral from 'numeral';
 import type { FC } from 'react';
@@ -13,7 +13,10 @@ const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Moment is 
 
 const Monitor: FC = () => {
   const { styles } = useStyles();
-  const { loading, data } = useRequest(queryTags);
+  const { isLoading: loading, data } = useQuery({
+    queryKey: ['monitor-tags'],
+    queryFn: () => queryTags().then((res) => res.data),
+  });
   const wordCloudData = (data?.list || []).map((item) => {
     return {
       id: +Date.now(),

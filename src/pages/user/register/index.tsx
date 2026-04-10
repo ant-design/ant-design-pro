@@ -1,4 +1,5 @@
-import { history, Link, useRequest } from '@umijs/max';
+import { useMutation } from '@tanstack/react-query';
+import { history, Link } from '@umijs/max';
 import {
   Button,
   Col,
@@ -85,15 +86,23 @@ const Register: FC = () => {
     }
     return 'poor';
   };
-  const { loading: submitting, run: register } = useRequest<{
-    data: StateType;
-  }>(fakeRegister, {
-    manual: true,
+  const { isPending: submitting, mutate: register } = useMutation({
+    mutationFn: (formValues: Store) => {
+      const payload = {
+        mail: formValues.email,
+        password: formValues.password,
+        confirm: formValues.confirm,
+        mobile: formValues.mobile,
+        captcha: formValues.captcha,
+        prefix: formValues.prefix,
+      };
+      return fakeRegister(payload);
+    },
     onSuccess: (data, params) => {
       if (data.status === 'ok') {
         message.success('注册成功！');
         history.push({
-          pathname: `/user/register-result?account=${params[0].email}`,
+          pathname: `/user/register-result?account=${params.mail}`,
         });
       }
     },

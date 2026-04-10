@@ -4,11 +4,11 @@ import {
   MessageOutlined,
   StarOutlined,
 } from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select';
 import type { FC } from 'react';
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { categoryOptions } from '../../mock';
 import ArticleListContent from './components/ArticleListContent';
 import StandardFormRow from './components/StandardFormRow';
@@ -54,19 +54,33 @@ const IconText: React.FC<{
 
 const Articles: FC = () => {
   const [form] = Form.useForm();
-
   const { styles } = useStyles();
+  const filtersRef = useRef<{
+    category?: (string | number)[];
+    owner?: string[];
+  }>({});
 
-  const { data, reload, loading, loadMore, loadingMore } = useRequest(
-    () => {
-      return queryFakeList({
-        count: pageSize,
-      });
-    },
-    {
-      loadMore: true,
-    },
-  );
+  const {
+    data,
+    isLoading: loading,
+    isFetching,
+    refetch,
+  } = useQuery({
+    queryKey: ['search-articles', pageSize, filtersRef.current],
+    queryFn: () =>
+      queryFakeList({ count: pageSize, ...filtersRef.current }).then(
+        (res) => res.data,
+      ),
+  });
+
+  const loadMore = () => {
+    refetch();
+  };
+  const loadingMore = isFetching;
+  const reload = () => {
+    filtersRef.current = form.getFieldsValue();
+    refetch();
+  };
 
   const list = data?.list || [];
 

@@ -1,5 +1,5 @@
 import { LikeOutlined, MessageFilled, StarTwoTone } from '@ant-design/icons';
-import { useRequest } from '@umijs/max';
+import { useQuery } from '@tanstack/react-query';
 import { List, Tag } from 'antd';
 import React from 'react';
 import type { ListItemDataType } from '../../data.d';
@@ -20,10 +20,9 @@ const Articles: React.FC = () => {
   const { styles } = useStyles();
 
   // 获取tab列表数据
-  const { data: listData } = useRequest(() => {
-    return queryFakeList({
-      count: 30,
-    });
+  const { data: listData } = useQuery({
+    queryKey: ['articles-list', 30],
+    queryFn: () => queryFakeList({ count: 30 }).then((res) => res.data),
   });
   return (
     <List<ListItemDataType>

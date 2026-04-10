@@ -1,6 +1,6 @@
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
-import { useRequest } from '@umijs/max';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   Avatar,
   Button,
@@ -78,17 +78,13 @@ export const BasicList: FC = () => {
   const [current, setCurrent] = useState<
     Partial<BasicListItemDataType> | undefined
   >(undefined);
-  const {
-    data: listData,
-    loading,
-    mutate,
-  } = useRequest(() => {
-    return queryFakeList({
-      count: 50,
-    });
+  const { data: listData, isLoading: loading } = useQuery({
+    queryKey: ['basic-list'],
+    queryFn: () => queryFakeList({ count: 50 }).then((res) => res.data),
   });
-  const { run: postRun } = useRequest(
-    (method, params) => {
+
+  const { mutate: postRun } = useMutation({
+    mutationFn: async ({ method, params }: { method: string; params: any }) => {
       if (method === 'remove') {
         return removeFakeList(params);
       }
@@ -97,13 +93,12 @@ export const BasicList: FC = () => {
       }
       return addFakeList(params);
     },
-    {
-      manual: true,
-      onSuccess: (result) => {
-        mutate(result);
-      },
-    },
-  );
+  });
+
+  // Wrapper to handle the original calling convention
+  const runListOperation = (method: string, params: any) => {
+    postRun({ method, params });
+  };
   const list = listData?.list || [];
   const paginationProps = {
     showSizeChanger: true,
@@ -116,7 +111,7 @@ export const BasicList: FC = () => {
     setCurrent(item);
   };
   const deleteItem = (id: string) => {
-    postRun('remove', {
+    runListOperation('remove', {
       id,
     });
   };
@@ -187,7 +182,7 @@ export const BasicList: FC = () => {
   const handleSubmit = (values: BasicListItemDataType) => {
     setDone(true);
     const method = values?.id ? 'update' : 'add';
-    postRun(method, values);
+    runListOperation(method, values);
   };
   return (
     <div>
