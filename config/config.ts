@@ -201,5 +201,4 @@ export default defineConfig({
     'process.env.COMMIT_HASH': process.env.COMMIT_HASH || '',
     'process.env.CF_PAGES_COMMIT_SHA': process.env.CF_PAGES_COMMIT_SHA || '',
   },
-  extraPostCSSPlugins: [require('@tailwindcss/postcss')],
 });
