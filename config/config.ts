@@ -1,7 +1,6 @@
 // https://umijs.org/config/
 
 import { join } from 'node:path';
-import tailwindcss from '@tailwindcss/postcss';
 import { defineConfig } from '@umijs/max';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
@@ -196,5 +195,8 @@ export default defineConfig({
     'process.env.COMMIT_HASH': process.env.COMMIT_HASH || '',
     'process.env.CF_PAGES_COMMIT_SHA': process.env.CF_PAGES_COMMIT_SHA || '',
   },
-  extraPostCSSPlugins: [tailwindcss],
+  tailwindcss: {
+    // 这里可以配置 tailwindcss 的选项，具体配置项可以参考 tailwindcss 官方文档
+    // https://tailwindcss.com/docs/configuration
+  },
 });
