@@ -284,6 +284,12 @@ export default [
     path: '/',
     redirect: '/dashboard/analysis',
   },
+  // openapi 插件路由
+  {
+    path: '/umi/plugin/openapi',
+    component: './plugin/openapi',
+    layout: false,
+  },
   {
     component: '404',
     path: './*',
