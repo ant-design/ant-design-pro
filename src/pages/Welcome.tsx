@@ -5,8 +5,6 @@ import React from 'react';
 
 /**
  * 每个单独的卡片，为了复用样式抽成了组件
- * @param param0
- * @returns
  */
 const InfoCard: React.FC<{
   title: string;
@@ -14,130 +12,75 @@ const InfoCard: React.FC<{
   desc: string;
   href: string;
 }> = ({ title, href, index, desc }) => {
-  const { useToken } = theme;
-
-  const { token } = useToken();
+  const { token } = theme.useToken();
 
   return (
-    <div
-      style={{
-        backgroundColor: token.colorBgContainer,
-        boxShadow: token.boxShadow,
-        borderRadius: '8px',
-        fontSize: '14px',
-        color: token.colorTextSecondary,
-        lineHeight: '22px',
-        padding: '16px 19px',
-        minWidth: '220px',
-        flex: 1,
-      }}
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="block p-6 rounded-2xl bg-white dark:bg-white/5 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 dark:border-white/10"
     >
-      <div
-        style={{
-          display: 'flex',
-          gap: '4px',
-          alignItems: 'center',
-        }}
-      >
+      <div className="flex items-center gap-3 mb-3">
         <div
+          className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-lg font-bold"
           style={{
-            width: 48,
-            height: 48,
-            lineHeight: '22px',
-            backgroundSize: '100%',
-            textAlign: 'center',
-            padding: '8px 16px 16px 12px',
-            color: '#FFF',
-            fontWeight: 'bold',
-            backgroundImage:
-              "url('https://gw.alipayobjects.com/zos/bmw-prod/daaf8d50-8e6d-4251-905d-676a24ddfa12.svg')",
+            background: `linear-gradient(135deg, ${token.colorPrimary} 0%, ${token.colorPrimaryHover} 100%)`,
           }}
         >
           {index}
         </div>
-        <div
-          style={{
-            fontSize: '16px',
-            color: token.colorText,
-            paddingBottom: 8,
-          }}
-        >
+        <span className="text-lg font-medium text-gray-900 dark:text-white">
           {title}
-        </div>
+        </span>
       </div>
-      <div
-        style={{
-          fontSize: '14px',
-          color: token.colorTextSecondary,
-          textAlign: 'justify',
-          lineHeight: '22px',
-          marginBottom: 8,
-        }}
-      >
+      <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
         {desc}
+      </p>
+      <div
+        className="mt-4 text-sm font-medium"
+        style={{ color: token.colorPrimary }}
+      >
+        了解更多 →
       </div>
-      <a href={href} target="_blank" rel="noreferrer">
-        了解更多 {'>'}
-      </a>
-    </div>
+    </a>
   );
 };
 
 const Welcome: React.FC = () => {
   const { token } = theme.useToken();
   const { initialState } = useModel('@@initialState');
+  const isDark = initialState?.settings?.navTheme === 'realDark';
+
   return (
     <PageContainer>
       <Card
-        style={{
-          borderRadius: 8,
-        }}
+        className="rounded-2xl overflow-hidden"
         styles={{
           body: {
-            backgroundImage:
-              initialState?.settings?.navTheme === 'realDark'
-                ? 'background-image: linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
-                : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
+            background: isDark
+              ? 'linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
+              : 'linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
           },
         }}
       >
-        <div
-          style={{
-            backgroundPosition: '100% -30%',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '274px auto',
-            backgroundImage:
-              "url('https://gw.alipayobjects.com/mdn/rms_a9745b/afts/img/A*BuFmQqsB2iAAAAAAAAAAAAAAARQnAQ')",
-          }}
-        >
-          <div
-            style={{
-              fontSize: '20px',
-              color: token.colorTextHeading,
-            }}
-          >
-            欢迎使用 Ant Design Pro
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 p-6 lg:p-10">
+          {/* 左侧：欢迎和介绍 */}
+          <div className="flex-1 lg:w-2/3">
+            <h1
+              className="text-3xl lg:text-4xl font-bold mb-6"
+              style={{ color: token.colorTextHeading }}
+            >
+              欢迎使用 Ant Design Pro
+            </h1>
+            <p className="text-base leading-7 text-gray-500 dark:text-gray-400 max-w-2xl">
+              Ant Design Pro 是一个整合了 umi，Ant Design 和 ProComponents
+              的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
+            </p>
           </div>
-          <p
-            style={{
-              fontSize: '14px',
-              color: token.colorTextSecondary,
-              lineHeight: '22px',
-              marginTop: 16,
-              marginBottom: 32,
-              width: '65%',
-            }}
-          >
-            Ant Design Pro 是一个整合了 umi，Ant Design 和 ProComponents
-            的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
-          </p>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 16,
-            }}
-          >
+
+          {/* 右侧：信息卡片 */}
+          <div className="flex-1 lg:w-1/3 flex flex-col gap-4">
             <InfoCard
               index={1}
               href="https://umijs.org/docs/introduce/introduce"
