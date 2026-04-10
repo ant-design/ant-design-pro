@@ -25,7 +25,7 @@ const CreateForm: FC<CreateFormProps> = (props) => {
    * */
   const intl = useIntl();
 
-  const { mutate: run, isPending: loading } = useMutation({
+  const { mutateAsync: run, isPending: loading } = useMutation({
     mutationFn: addRule,
     onSuccess: () => {
       messageApi.success('Added successfully');
@@ -52,9 +52,12 @@ const CreateForm: FC<CreateFormProps> = (props) => {
         width="400px"
         modalProps={{ okButtonProps: { loading } }}
         onFinish={async (value) => {
-          await run({ data: value as API.RuleListItem });
-
-          return true;
+          try {
+            await run({ data: value as API.RuleListItem });
+            return true;
+          } catch {
+            return false;
+          }
         }}
       >
         <ProFormText

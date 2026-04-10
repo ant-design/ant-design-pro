@@ -35,7 +35,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { mutate: run } = useMutation({
+  const { mutateAsync: run } = useMutation({
     mutationFn: updateRule,
     onSuccess: () => {
       messageApi.success('Configuration is successful');
@@ -57,7 +57,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const onFinish = useCallback(
     async (values?: any) => {
       await run({ data: values });
-
       onCancel();
     },
     [onCancel, run],
