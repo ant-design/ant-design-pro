@@ -1,2 +1,14 @@
-@import "tailwindcss";
-@source "./src/**/*.tsx";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @keyframes shine {
+    100% {
+      left: 125%;
+    }
+  }
+  .animate-shine {
+    animation: shine 0.75s;
+  }
+}
