@@ -11,7 +11,8 @@ const InfoCard: React.FC<{
   index: number;
   desc: string;
   href: string;
-}> = ({ title, href, index, desc }) => {
+  isDark?: boolean;
+}> = ({ title, href, index, desc, isDark }) => {
   const { token } = theme.useToken();
 
   return (
@@ -19,7 +20,11 @@ const InfoCard: React.FC<{
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="block p-6 rounded-2xl bg-white dark:bg-white/5 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 dark:border-white/10"
+      className="block p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border"
+      style={{
+        backgroundColor: token.colorBgContainer,
+        borderColor: isDark ? 'rgba(255,255,255,0.1)' : token.colorBorder,
+      }}
     >
       <div className="flex items-center gap-3 mb-3">
         <div
@@ -30,11 +35,17 @@ const InfoCard: React.FC<{
         >
           {index}
         </div>
-        <span className="text-lg font-medium text-gray-900 dark:text-white">
+        <span
+          className="text-lg font-medium"
+          style={{ color: token.colorText }}
+        >
           {title}
         </span>
       </div>
-      <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+      <p
+        className="text-sm leading-relaxed"
+        style={{ color: token.colorTextSecondary }}
+      >
         {desc}
       </p>
       <div
@@ -66,38 +77,44 @@ const Welcome: React.FC = () => {
       >
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 p-6 lg:p-10">
           {/* 左侧：欢迎和介绍 */}
-          <div className="flex-1 lg:w-2/3">
+          <div className="lg:w-2/3 flex-none">
             <h1
               className="text-3xl lg:text-4xl font-bold mb-6"
               style={{ color: token.colorTextHeading }}
             >
               欢迎使用 Ant Design Pro
             </h1>
-            <p className="text-base leading-7 text-gray-500 dark:text-gray-400 max-w-2xl">
+            <p
+              className="text-base leading-7 max-w-2xl"
+              style={{ color: token.colorTextSecondary }}
+            >
               Ant Design Pro 是一个整合了 umi，Ant Design 和 ProComponents
               的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
             </p>
           </div>
 
           {/* 右侧：信息卡片 */}
-          <div className="flex-1 lg:w-1/3 flex flex-col gap-4">
+          <div className="lg:w-1/3 flex-none flex flex-col gap-4">
             <InfoCard
               index={1}
               href="https://umijs.org/docs/introduce/introduce"
               title="了解 umi"
               desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
+              isDark={isDark}
             />
             <InfoCard
               index={2}
               title="了解 ant design"
               href="https://ant.design"
               desc="antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。"
+              isDark={isDark}
             />
             <InfoCard
               index={3}
               title="了解 Pro Components"
               href="https://procomponents.ant.design"
               desc="ProComponents 是一个基于 Ant Design 做了更高抽象的模板组件，以 一个组件就是一个页面为开发理念，为中后台开发带来更好的体验。"
+              isDark={isDark}
             />
           </div>
         </div>
