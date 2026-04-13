@@ -1,6 +1,7 @@
 import { PageLoading } from '@ant-design/pro-components';
 import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
 import { useQuery } from '@tanstack/react-query';
+import { queryMapGeo, queryMapGrid } from '../../service';
 
 const colors = [
   '#eff3ff',
@@ -13,17 +14,13 @@ const colors = [
 ];
 
 export default function MonitorMap() {
-  const { isLoading, data } = useQuery({
+  const { isLoading, data } = useQuery<{
+    geoData: Record<string, unknown>[];
+    grid: Record<string, unknown>[];
+  }>({
     queryKey: ['map-data'],
     queryFn: async () => {
-      const [geoData, gridData] = await Promise.all([
-        fetch(
-          'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
-        ).then((d) => d.json()),
-        fetch(
-          'https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json',
-        ).then((d) => d.json()),
-      ]);
+      const [geoData, gridData] = await Promise.all([queryMapGeo(), queryMapGrid()]);
       return { geoData, grid: gridData };
     },
   });

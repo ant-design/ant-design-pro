@@ -18,8 +18,6 @@ const COMMIT_HASH =
   process.env.COMMIT_HASH || process.env.CF_PAGES_COMMIT_SHA || '';
 
 const Footer: React.FC = () => {
-  const commitUrl = COMMIT_HASH ? `${REPO}/commit/${COMMIT_HASH}` : undefined;
-
   return (
     <DefaultFooter
       copyright={false}
@@ -38,7 +36,7 @@ const Footer: React.FC = () => {
               {
                 key: 'commit',
                 title: COMMIT_HASH.slice(0, 7),
-                href: commitUrl!,
+                href: `${REPO}/commit/${COMMIT_HASH}`,
                 blankTarget: true,
               },
             ]
