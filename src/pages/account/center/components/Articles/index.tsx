@@ -1,6 +1,6 @@
 import { LikeOutlined, MessageFilled, StarTwoTone } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
-import { List, Tag } from 'antd';
+import { Flex, List, Tag } from 'antd';
 import React from 'react';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
@@ -54,11 +54,11 @@ const Articles: React.FC = () => {
               </a>
             }
             description={
-              <span>
+              <Flex wrap gap="small">
                 <Tag>Ant Design</Tag>
                 <Tag>设计语言</Tag>
-                <Tag>蚂蚁金服</Tag>
-              </span>
+                <Tag>蚂蚁集团</Tag>
+              </Flex>
             }
           />
           <ArticleListContent data={item} />

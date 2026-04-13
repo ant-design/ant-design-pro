@@ -58,6 +58,7 @@ const useStyles = createStyles(({ token }) => {
     },
     contentLink: {
       marginTop: '16px',
+      whiteSpace: 'nowrap',
       a: {
         marginRight: '32px',
         img: {
