@@ -115,30 +115,30 @@ const TagList: React.FC<{
         {(tags || []).concat(newTags).map((item) => (
           <Tag key={item.key}>{item.label}</Tag>
         ))}
+        {inputVisible && (
+          <Input
+            ref={ref}
+            size="small"
+            style={{
+              width: 78,
+            }}
+            value={inputValue}
+            onChange={handleInputChange}
+            onBlur={handleInputConfirm}
+            onPressEnter={handleInputConfirm}
+          />
+        )}
+        {!inputVisible && (
+          <Tag
+            onClick={showInput}
+            style={{
+              borderStyle: 'dashed',
+            }}
+          >
+            <PlusOutlined />
+          </Tag>
+        )}
       </Flex>
-      {inputVisible && (
-        <Input
-          ref={ref}
-          size="small"
-          style={{
-            width: 78,
-          }}
-          value={inputValue}
-          onChange={handleInputChange}
-          onBlur={handleInputConfirm}
-          onPressEnter={handleInputConfirm}
-        />
-      )}
-      {!inputVisible && (
-        <Tag
-          onClick={showInput}
-          style={{
-            borderStyle: 'dashed',
-          }}
-        >
-          <PlusOutlined />
-        </Tag>
-      )}
     </div>
   );
 };
