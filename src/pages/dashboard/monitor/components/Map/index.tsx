@@ -1,7 +1,6 @@
 import { PageLoading } from '@ant-design/pro-components';
 import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
-import { useEffect, useState } from 'react';
-import { queryMapGeo, queryMapGrid } from '@/pages/dashboard/monitor/service';
+import { useQuery } from '@tanstack/react-query';
 
 const colors = [
   '#eff3ff',
@@ -14,31 +13,29 @@ const colors = [
 ];
 
 export default function MonitorMap() {
-  const [data, setData] = useState<Record<string, unknown>[] | null>(null);
-  const [grid, setGrid] = useState<Record<string, unknown>[] | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    async function fetchData() {
+  const { isLoading, data } = useQuery({
+    queryKey: ['map-data'],
+    queryFn: async () => {
       const [geoData, gridData] = await Promise.all([
-        queryMapGeo(),
-        queryMapGrid(),
+        fetch(
+          'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
+        ).then((d) => d.json()),
+        fetch(
+          'https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json',
+        ).then((d) => d.json()),
       ]);
-      setData(geoData);
-      setGrid(gridData);
-      setLoading(true);
-    }
-    fetchData();
-  }, []);
+      return { geoData, grid: gridData };
+    },
+  });
 
-  return loading === false ? (
+  return isLoading ? (
     <PageLoading />
   ) : (
     <MapboxScene
       map={{
         center: [110.19382669582967, 50.258134],
         pitch: 0,
-        style: 'blank',
+        style: 'light',
         zoom: 1,
       }}
       style={{
@@ -47,11 +44,11 @@ export default function MonitorMap() {
         height: '452px',
       }}
     >
-      {grid && (
+      {data?.grid && (
         <HeatmapLayer
           key="1"
           source={{
-            data: grid,
+            data: data.grid,
             transforms: [
               {
                 type: 'hexagon',
@@ -73,14 +70,14 @@ export default function MonitorMap() {
           }}
         />
       )}
-      {data && [
+      {data?.geoData && [
         <PointLayer
           key="2"
           options={{
             autoFit: true,
           }}
           source={{
-            data,
+            data: data.geoData,
           }}
           scale={{
             values: {
@@ -117,7 +114,7 @@ export default function MonitorMap() {
         <PointLayer
           key="5"
           source={{
-            data,
+            data: data.geoData,
           }}
           color={{
             values: '#fff',
