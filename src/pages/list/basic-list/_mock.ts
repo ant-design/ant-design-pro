@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 import { fakeList } from '../../../../mock/utils';
 
-let sourceData: any[] = [];
+let sourceData: ReturnType<typeof fakeList> = [];
 
 function getFakeList(req: Request, res: Response) {
   const params = req.query as any;

@@ -1,5 +1,3 @@
-// 公共数据常量，供所有 route 和 data 文件使用
-
 export const titles = [
   'Alipay',
   'Angular',
@@ -50,7 +48,6 @@ export const user = [
   '仲尼',
 ];
 
-// 成员数据
 export const members = [
   {
     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
@@ -69,7 +66,6 @@ export const members = [
   },
 ];
 
-// 默认用户信息
 export const defaultUser = {
   name: 'Serati Ma',
   avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
@@ -97,23 +93,25 @@ export const defaultUser = {
   phone: '0752-268888888',
 };
 
-// 生成列表数据
+const statuses = ['active', 'exception', 'normal'];
+
 export function fakeList(count: number) {
+  const safeCount = Number.isFinite(count) && count >= 0 ? Math.floor(count) : 0;
   const list = [];
-  for (let i = 0; i < count; i += 1) {
+  for (let i = 0; i < safeCount; i += 1) {
     list.push({
       id: `fake-list-${i}`,
-      owner: user[i % 10],
-      title: titles[i % 8],
-      avatar: avatars[i % 8],
-      cover: parseInt(`${i / 4}`, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
-      status: ['active', 'exception', 'normal'][i % 3],
+      owner: user[i % user.length],
+      title: titles[i % titles.length],
+      avatar: avatars[i % avatars.length],
+      cover: Math.floor(i / covers.length) % 2 === 0 ? covers[i % covers.length] : covers[covers.length - 1 - (i % covers.length)],
+      status: statuses[i % statuses.length],
       percent: Math.ceil(Math.random() * 50) + 50,
-      logo: avatars[i % 8],
+      logo: avatars[i % avatars.length],
       href: 'https://ant.design',
       updatedAt: Date.now() - Math.floor(Math.random() * 1000000000),
       createdAt: Date.now() - Math.floor(Math.random() * 1000000000),
-      subDescription: desc[i % 5],
+      subDescription: desc[i % desc.length],
       description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的共通点和组成部分，该专案即是致力于归纳和吸收各种产品的各自优势，致力于打造成中后台产品的根底',
       activeUser: Math.floor(Math.random() * 10000) + 1000,
       newUser: Math.floor(Math.random() * 1000) + 100,
