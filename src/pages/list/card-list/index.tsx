@@ -17,7 +17,7 @@ const CardList = () => {
   const content = (
     <div className={styles.pageHeaderContent}>
       <p>
-        段落示意：蚂蚁集团务设计平台
+        段落示意：蚂蚁集团设计平台
         ant.design，用最小的工作量，无缝接入蚂蚁集团生态，
         提供跨越设计与开发的体验解决方案。
       </p>
