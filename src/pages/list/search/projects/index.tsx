@@ -26,7 +26,6 @@ const Projects: FC = () => {
   const {
     data,
     isLoading: loading,
-    refetch,
   } = useQuery({
     queryKey: ['search-projects', filters],
     queryFn: () =>

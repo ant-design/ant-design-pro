@@ -15,15 +15,12 @@ function parseCount(value: string | undefined, defaultVal: number): number {
   return Math.max(COUNT_MIN, Math.min(parsed, COUNT_MAX));
 }
 
-let sourceData: ReturnType<typeof fakeList> = [];
-
 const app = new Hono();
 
 // GET /api/get_list
 app.get('/get_list', (c) => {
   const count = parseCount(c.req.query('count'), DEFAULT_COUNT);
   const result = fakeList(count);
-  sourceData = result;
   return c.json({
     data: {
       list: result,
@@ -35,7 +32,7 @@ app.get('/get_list', (c) => {
 app.post('/post_fake_list', async (c) => {
   const body = await c.req.json();
   const { method, id } = body;
-  let result = sourceData || [];
+  let result = fakeList(DEFAULT_COUNT);
 
   switch (method) {
     case 'delete':

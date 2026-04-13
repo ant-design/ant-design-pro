@@ -100,7 +100,7 @@ export const members = memberAvatars.map((avatar, i) => ({
 /**
  * 模拟异步延迟
  */
-export const waitTime = (time: number = 100) => {
+export const waitTime = (time: number = 100): Promise<boolean> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(true);
@@ -116,10 +116,10 @@ export function fakeList(count: number) {
   for (let i = 0; i < count; i += 1) {
     list.push({
       id: `fake-list-${Math.random().toString(36).slice(2, 6)}${i}`,
-      owner: user[i % 10],
-      title: titles[i % 8],
-      avatar: avatars[i % 8],
-      cover: Math.floor(i / 4) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
+      owner: user[i % user.length],
+      title: titles[i % titles.length],
+      avatar: avatars[i % avatars.length],
+      cover: Math.floor(i / 4) % 2 === 0 ? covers[i % covers.length] : covers[3 - (i % covers.length)],
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % 8],

@@ -14,16 +14,12 @@ function getProjectNotice() {
   }));
 }
 
-function fakeListForCenter(count: number) {
-  return fakeList(count);
-}
-
 function getFakeList(req: Request, res: Response) {
   const params = req.query as any;
 
   const count = Number(params.count) * 1 || 5;
 
-  const result = fakeListForCenter(count);
+  const result = fakeList(count);
   return res.json({
     data: {
       list: result,
