@@ -50,17 +50,20 @@ export const user = [
 
 export const members = [
   {
-    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
+    avatar:
+      'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
     name: '曲丽丽',
     id: 'member1',
   },
   {
-    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
+    avatar:
+      'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
     name: '王昭君',
     id: 'member2',
   },
   {
-    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
+    avatar:
+      'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
     name: '董娜娜',
     id: 'member3',
   },
@@ -68,12 +71,13 @@ export const members = [
 
 export const defaultUser = {
   name: 'Serati Ma',
-  avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
+  avatar:
+    'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
   userid: '00000001',
   email: 'antdesign@alipay.com',
   signature: '海纳百川，有容乃大',
   title: '交互专家',
-  group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+  group: '蚂蚁集团－某某某事业群－某某平台部－某某技术部－UED',
   tags: [
     { key: '0', label: '很有想法的' },
     { key: '1', label: '专注设计' },
@@ -96,7 +100,8 @@ export const defaultUser = {
 const statuses = ['active', 'exception', 'normal'];
 
 export function fakeList(count: number) {
-  const safeCount = Number.isFinite(count) && count >= 0 ? Math.floor(count) : 0;
+  const safeCount =
+    Number.isFinite(count) && count >= 0 ? Math.floor(count) : 0;
   const list = [];
   for (let i = 0; i < safeCount; i += 1) {
     list.push({
@@ -104,7 +109,10 @@ export function fakeList(count: number) {
       owner: user[i % user.length],
       title: titles[i % titles.length],
       avatar: avatars[i % avatars.length],
-      cover: Math.floor(i / covers.length) % 2 === 0 ? covers[i % covers.length] : covers[covers.length - 1 - (i % covers.length)],
+      cover:
+        Math.floor(i / covers.length) % 2 === 0
+          ? covers[i % covers.length]
+          : covers[covers.length - 1 - (i % covers.length)],
       status: statuses[i % statuses.length],
       percent: Math.ceil(Math.random() * 50) + 50,
       logo: avatars[i % avatars.length],
@@ -112,13 +120,15 @@ export function fakeList(count: number) {
       updatedAt: Date.now() - Math.floor(Math.random() * 1000000000),
       createdAt: Date.now() - Math.floor(Math.random() * 1000000000),
       subDescription: desc[i % desc.length],
-      description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的共通点和组成部分，该专案即是致力于归纳和吸收各种产品的各自优势，致力于打造成中后台产品的根底',
+      description:
+        '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的共通点和组成部分，该专案即是致力于归纳和吸收各种产品的各自优势，致力于打造成中后台产品的根底',
       activeUser: Math.floor(Math.random() * 10000) + 1000,
       newUser: Math.floor(Math.random() * 1000) + 100,
       star: Math.floor(Math.random() * 100) + 10,
       like: Math.floor(Math.random() * 100) + 10,
       message: Math.floor(Math.random() * 100) + 10,
-      content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+      content:
+        '段落示意：蚂蚁集团设计平台 ant.design，用最小的工作量，无缝接入蚂蚁集团生态，提供跨越设计与开发的体验解决方案。蚂蚁集团设计平台 ant.design，用最小的工作量，无缝接入蚂蚁集团生态，提供跨越设计与开发的体验解决方案。',
       members,
     });
   }

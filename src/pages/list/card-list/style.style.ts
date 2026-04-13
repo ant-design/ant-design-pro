@@ -52,19 +52,26 @@ const useStyles = createStyles(({ token }) => {
     },
     pageHeaderContent: {
       position: 'relative',
+      overflow: 'visible',
       [`@media screen and (max-width: ${token.screenSM}px)`]: {
         paddingBottom: '30px',
       },
     },
     contentLink: {
+      display: 'flex',
+      flexWrap: 'nowrap',
       marginTop: '16px',
       a: {
+        display: 'inline-flex',
+        alignItems: 'center',
         marginRight: '32px',
+        whiteSpace: 'nowrap',
         img: {
           width: '24px',
+          flexShrink: 0,
         },
       },
-      img: { marginRight: '8px', verticalAlign: 'middle' },
+      img: { marginRight: '8px' },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
         a: {
           marginRight: '16px',

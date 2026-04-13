@@ -41,9 +41,7 @@ const useStyles = createStyles(({ token }) => {
       color: token.colorTextHeading,
       fontWeight: '500',
     },
-    tags: {
-      '.ant-tag': { marginBottom: '8px' },
-    },
+    tags: {},
     team: {
       '.ant-avatar': { marginRight: '12px' },
       a: {

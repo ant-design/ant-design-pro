@@ -67,7 +67,7 @@ const PageHeaderContent: FC<{
           ，祝你开心每一天！
         </div>
         <div>
-          {currentUser.title} |{currentUser.group}
+          {currentUser.title} | {currentUser.group}
         </div>
       </div>
     </div>
@@ -148,7 +148,7 @@ const Workplace: FC = () => {
             email: 'antdesign@alipay.com',
             signature: '海纳百川，有容乃大',
             title: '交互专家',
-            group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+            group: '蚂蚁集团－某某某事业群－某某平台部－某某技术部－UED',
           }}
         />
       }

@@ -5,7 +5,7 @@ import {
   StarOutlined,
 } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
+import { Button, Card, Col, Flex, Form, List, Row, Select, Tag } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select';
 import type { FC } from 'react';
 import React, { useMemo, useRef } from 'react';
@@ -256,11 +256,11 @@ const Articles: FC = () => {
                   </a>
                 }
                 description={
-                  <span>
+                  <Flex wrap gap="small">
                     <Tag>Ant Design</Tag>
                     <Tag>设计语言</Tag>
-                    <Tag>蚂蚁金服</Tag>
-                  </span>
+                    <Tag>蚂蚁集团</Tag>
+                  </Flex>
                 }
               />
               <ArticleListContent data={item} />
