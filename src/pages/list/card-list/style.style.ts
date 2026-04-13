@@ -52,15 +52,18 @@ const useStyles = createStyles(({ token }) => {
     },
     pageHeaderContent: {
       position: 'relative',
+      overflow: 'visible',
       [`@media screen and (max-width: ${token.screenSM}px)`]: {
         paddingBottom: '30px',
       },
     },
     contentLink: {
+      display: 'flex',
+      flexWrap: 'nowrap',
       marginTop: '16px',
-      whiteSpace: 'nowrap',
       a: {
         marginRight: '32px',
+        whiteSpace: 'nowrap',
         img: {
           width: '24px',
         },

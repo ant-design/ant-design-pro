@@ -11,6 +11,7 @@ import {
   Card,
   Col,
   Divider,
+  Flex,
   Input,
   type InputRef,
   Row,
@@ -110,9 +111,11 @@ const TagList: React.FC<{
   return (
     <div className={styles.tags}>
       <div className={styles.tagsTitle}>标签</div>
-      {(tags || []).concat(newTags).map((item) => (
-        <Tag key={item.key}>{item.label}</Tag>
-      ))}
+      <Flex wrap gap="small">
+        {(tags || []).concat(newTags).map((item) => (
+          <Tag key={item.key}>{item.label}</Tag>
+        ))}
+      </Flex>
       {inputVisible && (
         <Input
           ref={ref}
