@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { fakeList, defaultUser, titles, avatars, covers, desc, user } from '../../../../mock/utils';
+import { fakeList, defaultUser, titles, avatars, desc } from '../../../../mock/utils';
 
 function getProjectNotice(): any[] {
   return titles.slice(0, 6).map((title, i) => ({
@@ -17,7 +17,7 @@ function getProjectNotice(): any[] {
 function fakeListForCenter(count: number) {
   const list = fakeList(count);
   // 添加 percent 和其他必需字段
-  return list.map((item: any, i: number) => ({
+  return list.map((item: any) => ({
     ...item,
     percent: Math.ceil(Math.random() * 50) + 50,
   }));
