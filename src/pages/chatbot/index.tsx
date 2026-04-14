@@ -9,7 +9,7 @@ import { useXChat } from '@ant-design/x-sdk';
 import { Avatar, Card } from 'antd';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-const WELCOME_TEXT = '你好，有什么可以帮你？';
+const WELCOME_TEXT = '🤖 你好，有什么可以帮你？';
 
 const TypewriterTitle: React.FC = () => {
   const [displayed, setDisplayed] = useState('');
@@ -119,11 +119,11 @@ const ChatbotPage: React.FC = () => {
   const { styles } = useStyles();
 
   const [conversations, setConversations] = useState<ConversationItem[]>([
-    { key: 'default', label: '新对话' },
-    { key: 'preset-1', label: '如何用 React 实现虚拟列表？' },
-    { key: 'preset-2', label: '解释一下 CAP 定理' },
-    { key: 'preset-3', label: '帮我写一个 Python 爬虫' },
-    { key: 'preset-4', label: 'Tailwind CSS 和 CSS Modules 对比' },
+    { key: 'default', label: '💬 新对话' },
+    { key: 'preset-1', label: '⚛️ 如何用 React 实现虚拟列表？' },
+    { key: 'preset-2', label: '📐 解释一下 CAP 定理' },
+    { key: 'preset-3', label: '🐍 帮我写一个 Python 爬虫' },
+    { key: 'preset-4', label: '🎨 Tailwind CSS 和 CSS Modules 对比' },
   ]);
   const [activeKey, setActiveKey] = useState<string>('default');
 
