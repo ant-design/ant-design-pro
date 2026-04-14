@@ -10,8 +10,7 @@ export const CHAT_API_URL =
  */
 export const createChatProvider = () =>
   new OpenAIChatProvider({
-    request: new XRequest(CHAT_API_URL, {
-      manual: true,
+    request: XRequest(CHAT_API_URL, {
       params: { model: 'glm-4.5-flash', stream: true },
     }),
   });
