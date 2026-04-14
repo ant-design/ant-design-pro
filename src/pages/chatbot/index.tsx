@@ -1,4 +1,3 @@
-// src/pages/chatbot/index.tsx
 import { UserOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import { Bubble, Conversations, Sender, Think, XProvider } from '@ant-design/x';
@@ -7,40 +6,30 @@ import type { BubbleItemType } from '@ant-design/x/es/bubble/interface';
 import XMarkdown from '@ant-design/x-markdown';
 import { useXChat } from '@ant-design/x-sdk';
 import { Avatar, Card } from 'antd';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+
+import type { ConversationItem, ParsedMessage } from './data';
+import { createChatProvider } from './service';
+import { useStyles } from './style';
 
 const WELCOME_TEXT = '🤖 你好，有什么可以帮你？';
 
 const TypewriterTitle: React.FC = () => {
-  const [displayed, setDisplayed] = useState('');
-  const [done, setDone] = useState(false);
-  const indexRef = useRef(0);
+  const [index, setIndex] = useState(0);
+  const done = index >= WELCOME_TEXT.length;
 
   useEffect(() => {
-    indexRef.current = 0;
-    setDisplayed('');
-    setDone(false);
     const timer = setInterval(() => {
-      indexRef.current += 1;
-      setDisplayed(WELCOME_TEXT.slice(0, indexRef.current));
-      if (indexRef.current >= WELCOME_TEXT.length) {
-        clearInterval(timer);
-        setDone(true);
-      }
+      setIndex((i) => (i < WELCOME_TEXT.length ? i + 1 : i));
     }, 80);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <>
-      {displayed}
+      {WELCOME_TEXT.slice(0, index)}
       {!done && (
-        <span
-          style={{
-            opacity: 1,
-            animation: 'chatbot-blink 0.8s step-end infinite',
-          }}
-        >
+        <span style={{ animation: 'chatbot-blink 0.8s step-end infinite' }}>
           |
         </span>
       )}
@@ -48,11 +37,6 @@ const TypewriterTitle: React.FC = () => {
   );
 };
 
-import type { ConversationItem, ParsedMessage } from './data';
-import { createChatProvider } from './service';
-import { useStyles } from './style';
-
-// ─── Parser ──────────────────────────────────────────────────────────────────
 const parser = (message: { content: string; role: string }): ParsedMessage => {
   const { content, role } = message;
   if (role !== 'assistant') return { role: 'user', content };
@@ -76,14 +60,16 @@ const parser = (message: { content: string; role: string }): ParsedMessage => {
   return { role: 'assistant', content };
 };
 
-// ─── Role config ─────────────────────────────────────────────────────────────
+const STREAMING_ACTIVE = { hasNextChunk: true, enableAnimation: true };
+const STREAMING_IDLE = { hasNextChunk: false, enableAnimation: true };
+
 const roleConfig: BubbleListProps['role'] = {
   user: {
-    placement: 'end' as const,
+    placement: 'end',
     avatar: <Avatar icon={<UserOutlined />} />,
   },
   ai: {
-    placement: 'start' as const,
+    placement: 'start',
     avatar: (
       <Avatar
         style={{
@@ -97,15 +83,14 @@ const roleConfig: BubbleListProps['role'] = {
         🤖
       </Avatar>
     ),
-    typing: { effect: 'typing' as const, step: 2, interval: 20 },
+    typing: { effect: 'typing', step: 2, interval: 20 },
     contentRender: (content: string, info: { status?: string }) => {
-      if (!content && info?.status !== 'updating') return null;
+      if (!content) return null;
       return (
         <XMarkdown
-          streaming={{
-            hasNextChunk: info?.status === 'updating',
-            enableAnimation: true,
-          }}
+          streaming={
+            info?.status === 'updating' ? STREAMING_ACTIVE : STREAMING_IDLE
+          }
         >
           {content}
         </XMarkdown>
@@ -114,7 +99,6 @@ const roleConfig: BubbleListProps['role'] = {
   },
 };
 
-// ─── Component ───────────────────────────────────────────────────────────────
 const ChatbotPage: React.FC = () => {
   const { styles } = useStyles();
 
@@ -176,7 +160,6 @@ const ChatbotPage: React.FC = () => {
     requestPlaceholder: { role: 'assistant', content: '' },
   });
 
-  // ─── Handlers ──────────────────────────────────────────────────────────────
   const sendMessage = (content: string) => {
     setConversations((prev) =>
       prev.map((c) =>
@@ -190,11 +173,13 @@ const ChatbotPage: React.FC = () => {
 
   const newChat = () => {
     const key = Date.now().toString();
-    setConversations((prev) => [{ key, label: '新对话' }, ...prev]);
+    setConversations((prev) => [
+      { key, label: '新对话', group: '今天' },
+      ...prev,
+    ]);
     setActiveKey(key);
   };
 
-  // ─── Bubble items ──────────────────────────────────────────────────────────
   const bubbleItems: BubbleItemType[] = parsedMessages.map((msg) => {
     const parsed = msg.message as ParsedMessage;
     const isAI = parsed.role === 'assistant';
@@ -205,7 +190,10 @@ const ChatbotPage: React.FC = () => {
       key: msg.id,
       role: isAI ? 'ai' : 'user',
       content: parsed.content,
-      loading: msg.status === 'loading',
+      loading:
+        isAI &&
+        (msg.status === 'loading' ||
+          (msg.status === 'updating' && !parsed.content)),
       status: msg.status,
     };
 
@@ -218,7 +206,6 @@ const ChatbotPage: React.FC = () => {
 
   const hasMessages = parsedMessages.length > 0;
 
-  // ─── Render ────────────────────────────────────────────────────────────────
   return (
     <PageContainer
       ghost
@@ -250,7 +237,6 @@ const ChatbotPage: React.FC = () => {
       >
         <XProvider>
           <div className={styles.layout}>
-            {/* Left sidebar */}
             <div className={styles.sidebar}>
               <Conversations
                 items={conversations}
@@ -277,7 +263,6 @@ const ChatbotPage: React.FC = () => {
               />
             </div>
 
-            {/* Right main area */}
             <div className={styles.main}>
               {hasMessages && (
                 <div className={styles.messages}>
