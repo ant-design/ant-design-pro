@@ -84,8 +84,11 @@ const roleConfig: BubbleListProps['role'] = {
       </Avatar>
     ),
     typing: { effect: 'typing', step: 2, interval: 20 },
-    contentRender: (content: string, info: { status?: string }) => {
-      if (!content) return null;
+    contentRender: (
+      content: string,
+      info: { status?: string; loading?: boolean },
+    ) => {
+      if (info?.loading || !content) return undefined;
       return (
         <XMarkdown
           streaming={
@@ -158,6 +161,7 @@ const ChatbotPage: React.FC = () => {
     provider,
     conversationKey: activeKey,
     parser,
+    requestPlaceholder: { role: 'assistant', content: '' },
   });
 
   const sendMessage = (content: string) => {
