@@ -15,12 +15,19 @@ import { useStyles } from './style';
 const WELCOME_TEXT = '🤖 你好，有什么可以帮你？';
 
 const TypewriterTitle: React.FC = () => {
+  const { styles } = useStyles();
   const [index, setIndex] = useState(0);
   const done = index >= WELCOME_TEXT.length;
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((i) => (i < WELCOME_TEXT.length ? i + 1 : i));
+      setIndex((i) => {
+        if (i >= WELCOME_TEXT.length) {
+          clearInterval(timer);
+          return i;
+        }
+        return i + 1;
+      });
     }, 80);
     return () => clearInterval(timer);
   }, []);
@@ -28,11 +35,7 @@ const TypewriterTitle: React.FC = () => {
   return (
     <>
       {WELCOME_TEXT.slice(0, index)}
-      {!done && (
-        <span style={{ animation: 'chatbot-blink 0.8s step-end infinite' }}>
-          |
-        </span>
-      )}
+      {!done && <span className={styles.cursor}>|</span>}
     </>
   );
 };
@@ -185,26 +188,30 @@ const ChatbotPage: React.FC = () => {
     setActiveKey(key);
   };
 
-  const bubbleItems: BubbleItemType[] = parsedMessages.map((msg) => {
-    const parsed = msg.message as ParsedMessage;
-    const isAI = parsed.role === 'assistant';
-    const thinkContent =
-      parsed.role === 'assistant' ? parsed.thinkContent : undefined;
+  const bubbleItems = useMemo<BubbleItemType[]>(
+    () =>
+      parsedMessages.map((msg) => {
+        const parsed = msg.message as ParsedMessage;
+        const isAI = parsed.role === 'assistant';
+        const thinkContent =
+          parsed.role === 'assistant' ? parsed.thinkContent : undefined;
 
-    const item: BubbleItemType = {
-      key: msg.id,
-      role: isAI ? 'ai' : 'user',
-      content: parsed.content,
-      loading: isAI && msg.status === 'loading',
-      status: msg.status,
-    };
+        const item: BubbleItemType = {
+          key: msg.id,
+          role: isAI ? 'ai' : 'user',
+          content: parsed.content,
+          loading: isAI && msg.status === 'loading',
+          status: msg.status,
+        };
 
-    if (isAI && thinkContent) {
-      item.header = <Think>{thinkContent}</Think>;
-    }
+        if (isAI && thinkContent) {
+          item.header = <Think>{thinkContent}</Think>;
+        }
 
-    return item;
-  });
+        return item;
+      }),
+    [parsedMessages],
+  );
 
   const hasMessages = parsedMessages.length > 0;
 

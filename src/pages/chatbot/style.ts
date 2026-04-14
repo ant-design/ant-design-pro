@@ -62,6 +62,10 @@ export const useStyles = createStyles(({ css, token }) => ({
     font-weight: 600;
     color: ${token.colorText};
     text-align: center;
+  `,
+
+  cursor: css`
+    animation: chatbot-blink 0.8s step-end infinite;
 
     @keyframes chatbot-blink {
       0%, 100% { opacity: 1; }
