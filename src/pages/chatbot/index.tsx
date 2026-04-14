@@ -119,11 +119,15 @@ const ChatbotPage: React.FC = () => {
   const { styles } = useStyles();
 
   const [conversations, setConversations] = useState<ConversationItem[]>([
-    { key: 'default', label: '💬 新对话' },
-    { key: 'preset-1', label: '⚛️ 如何用 React 实现虚拟列表？' },
-    { key: 'preset-2', label: '📐 解释一下 CAP 定理' },
-    { key: 'preset-3', label: '🐍 帮我写一个 Python 爬虫' },
-    { key: 'preset-4', label: '🎨 Tailwind CSS 和 CSS Modules 对比' },
+    { key: 'default', label: '💬 新对话', group: '今天' },
+    { key: 'preset-1', label: '⚛️ 如何用 React 实现虚拟列表？', group: '今天' },
+    { key: 'preset-2', label: '📐 解释一下 CAP 定理', group: '昨天' },
+    { key: 'preset-3', label: '🐍 帮我写一个 Python 爬虫', group: '昨天' },
+    {
+      key: 'preset-4',
+      label: '🎨 Tailwind CSS 和 CSS Modules 对比',
+      group: '更早',
+    },
   ]);
   const [activeKey, setActiveKey] = useState<string>('default');
 
@@ -220,6 +224,7 @@ const ChatbotPage: React.FC = () => {
                 items={conversations}
                 activeKey={activeKey}
                 onActiveChange={setActiveKey}
+                groupable
                 menu={(conversation) => ({
                   items: [{ key: 'delete', label: '删除', danger: true }],
                   onClick: ({ key }) => {

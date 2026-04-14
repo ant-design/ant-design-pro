@@ -1,10 +1,9 @@
 // src/pages/chatbot/data.d.ts
 
 export interface ConversationItem {
-  /** Unique key — also used as useXChat conversationKey */
   key: string;
-  /** Conversation title: first 20 chars of first user message */
   label: string;
+  group?: string;
 }
 
 export type ParsedMessage =
