@@ -2,19 +2,21 @@
 import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
-  // Full-height container — relies on PageContainer ghost mode
+  // Stretch the ProCard / PageContainer content area to full height
+  pageContainer: css`
+    height: 100%;
+
+    .ant-pro-page-container-children-container {
+      height: 100%;
+      padding: 0;
+    }
+  `,
+
   layout: css`
     display: flex;
     height: 100%;
     gap: 0;
-
-    // PageContainer ghost mode still adds padding in children container
-    .ant-pro-page-container-children-container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: 0;
-    }
+    overflow: hidden;
   `,
 
   sidebar: css`

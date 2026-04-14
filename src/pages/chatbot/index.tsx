@@ -1,5 +1,5 @@
 // src/pages/chatbot/index.tsx
-import { RobotOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import {
   Bubble,
@@ -59,7 +59,7 @@ const roleConfig: RoleType = {
   ai: {
     placement: 'start' as const,
     avatar: (
-      <Avatar icon={<RobotOutlined />} style={{ background: '#1677ff' }} />
+      <Avatar style={{ background: 'transparent', fontSize: 28 }}>🤖</Avatar>
     ),
     typing: { effect: 'typing' as const, step: 2, interval: 20 },
   },
@@ -158,7 +158,7 @@ const ChatbotPage: React.FC = () => {
 
   // ─── Render ────────────────────────────────────────────────────────────────
   return (
-    <PageContainer ghost>
+    <PageContainer className={styles.pageContainer}>
       <XProvider>
         <div className={styles.layout}>
           {/* Left sidebar — conversation list */}
@@ -193,7 +193,7 @@ const ChatbotPage: React.FC = () => {
               // Empty state — welcome + quick prompts
               <div className={styles.welcome}>
                 <Welcome
-                  icon={<RobotOutlined />}
+                  icon={<span style={{ fontSize: 48 }}>🤖</span>}
                   title="你好，有什么可以帮你？"
                   description="我是 AI 助手，可以帮助你写代码、分析数据、翻译文档等"
                 />
@@ -215,7 +215,6 @@ const ChatbotPage: React.FC = () => {
             {/* Input area */}
             <div className={styles.footer}>
               <Sender
-                value=""
                 loading={isRequesting}
                 onSubmit={sendMessage}
                 onCancel={abort}
