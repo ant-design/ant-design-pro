@@ -9,9 +9,9 @@ export const CHAT_API_URL =
  * OpenAIChatProvider handles SSE parsing and history accumulation internally.
  */
 export const createChatProvider = () =>
-  new OpenAIChatProvider(
-    new XRequest(CHAT_API_URL, {
+  new OpenAIChatProvider({
+    request: new XRequest(CHAT_API_URL, {
       manual: true,
       params: { model: 'glm-4.5-flash', stream: true },
     }),
-  );
+  });
