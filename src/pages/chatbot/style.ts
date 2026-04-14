@@ -3,12 +3,11 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   pageContainer: css`
-    // Let PageContainer fill the viewport area without disrupting other pages
     .ant-pro-page-container-children-container {
       position: relative;
-      padding: 0;
-      // Fill the remaining space below the page header
-      height: calc(100vh - 56px - 48px - 24px);
+      padding-block: 0;
+      // Fill viewport below the ProLayout header (56px) and page header (48px)
+      height: calc(100vh - 56px - 48px);
     }
   `,
 
