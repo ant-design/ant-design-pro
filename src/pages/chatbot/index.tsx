@@ -146,6 +146,7 @@ const ChatbotPage: React.FC = () => {
     },
   ]);
   const [activeKey, setActiveKey] = useState<string>('default');
+  const [inputValue, setInputValue] = useState('');
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const provider = useMemo(() => createChatProvider() as any, []);
@@ -160,6 +161,7 @@ const ChatbotPage: React.FC = () => {
   });
 
   const sendMessage = (content: string) => {
+    setInputValue('');
     setConversations((prev) =>
       prev.map((c) =>
         c.key === activeKey && c.label === '新对话'
@@ -280,6 +282,8 @@ const ChatbotPage: React.FC = () => {
                   </div>
                 )}
                 <Sender
+                  value={inputValue}
+                  onChange={setInputValue}
                   loading={isRequesting}
                   onSubmit={sendMessage}
                   onCancel={abort}
