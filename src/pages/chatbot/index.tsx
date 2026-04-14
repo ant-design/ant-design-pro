@@ -120,18 +120,46 @@ const ChatbotPage: React.FC = () => {
 
   const [conversations, setConversations] = useState<ConversationItem[]>([
     { key: 'default', label: '💬 新对话', group: '今天' },
-    { key: 'preset-1', label: '⚛️ 如何用 React 实现虚拟列表？', group: '今天' },
-    { key: 'preset-2', label: '🔐 JWT 和 Session 认证方式对比', group: '今天' },
-    { key: 'preset-3', label: '📐 解释一下 CAP 定理', group: '昨天' },
-    { key: 'preset-4', label: '🐍 帮我写一个 Python 爬虫', group: '昨天' },
-    { key: 'preset-5', label: '🗄️ PostgreSQL 索引优化实践', group: '昨天' },
+    {
+      key: 'preset-1',
+      label: '🧩 Ant Design 的 Form 表单如何做联动校验？',
+      group: '今天',
+    },
+    {
+      key: 'preset-2',
+      label: '📋 ProTable 如何自定义工具栏按钮？',
+      group: '今天',
+    },
+    {
+      key: 'preset-3',
+      label: '🎨 如何用 antd-style 实现暗色主题切换？',
+      group: '昨天',
+    },
+    {
+      key: 'preset-4',
+      label: '🗂️ ProLayout 侧边菜单如何动态生成？',
+      group: '昨天',
+    },
+    {
+      key: 'preset-5',
+      label: '📊 Ant Design Charts 折线图数据格式',
+      group: '昨天',
+    },
     {
       key: 'preset-6',
-      label: '🎨 Tailwind CSS 和 CSS Modules 对比',
+      label: '🚀 Ant Design Pro 如何接入后端权限系统？',
       group: '更早',
     },
-    { key: 'preset-7', label: '🚀 Docker 多阶段构建最佳实践', group: '更早' },
-    { key: 'preset-8', label: '📊 用 Python 做数据可视化', group: '更早' },
+    {
+      key: 'preset-7',
+      label: '🔍 ProForm 中 Select 远程搜索怎么实现？',
+      group: '更早',
+    },
+    {
+      key: 'preset-8',
+      label: '⚙️ Ant Design Token 定制主题最佳实践',
+      group: '更早',
+    },
   ]);
   const [activeKey, setActiveKey] = useState<string>('default');
 
