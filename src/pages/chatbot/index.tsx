@@ -121,13 +121,17 @@ const ChatbotPage: React.FC = () => {
   const [conversations, setConversations] = useState<ConversationItem[]>([
     { key: 'default', label: '💬 新对话', group: '今天' },
     { key: 'preset-1', label: '⚛️ 如何用 React 实现虚拟列表？', group: '今天' },
-    { key: 'preset-2', label: '📐 解释一下 CAP 定理', group: '昨天' },
-    { key: 'preset-3', label: '🐍 帮我写一个 Python 爬虫', group: '昨天' },
+    { key: 'preset-2', label: '🔐 JWT 和 Session 认证方式对比', group: '今天' },
+    { key: 'preset-3', label: '📐 解释一下 CAP 定理', group: '昨天' },
+    { key: 'preset-4', label: '🐍 帮我写一个 Python 爬虫', group: '昨天' },
+    { key: 'preset-5', label: '🗄️ PostgreSQL 索引优化实践', group: '昨天' },
     {
-      key: 'preset-4',
+      key: 'preset-6',
       label: '🎨 Tailwind CSS 和 CSS Modules 对比',
       group: '更早',
     },
+    { key: 'preset-7', label: '🚀 Docker 多阶段构建最佳实践', group: '更早' },
+    { key: 'preset-8', label: '📊 用 Python 做数据可视化', group: '更早' },
   ]);
   const [activeKey, setActiveKey] = useState<string>('default');
 
