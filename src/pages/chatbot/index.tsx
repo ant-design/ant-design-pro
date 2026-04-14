@@ -13,20 +13,39 @@ const WELCOME_TEXT = '你好，有什么可以帮你？';
 
 const TypewriterTitle: React.FC = () => {
   const [displayed, setDisplayed] = useState('');
+  const [done, setDone] = useState(false);
   const indexRef = useRef(0);
 
   useEffect(() => {
     indexRef.current = 0;
     setDisplayed('');
+    setDone(false);
     const timer = setInterval(() => {
       indexRef.current += 1;
       setDisplayed(WELCOME_TEXT.slice(0, indexRef.current));
-      if (indexRef.current >= WELCOME_TEXT.length) clearInterval(timer);
+      if (indexRef.current >= WELCOME_TEXT.length) {
+        clearInterval(timer);
+        setDone(true);
+      }
     }, 80);
     return () => clearInterval(timer);
   }, []);
 
-  return <>{displayed}</>;
+  return (
+    <>
+      {displayed}
+      {!done && (
+        <span
+          style={{
+            opacity: 1,
+            animation: 'chatbot-blink 0.8s step-end infinite',
+          }}
+        >
+          |
+        </span>
+      )}
+    </>
+  );
 };
 
 import type { ConversationItem, ParsedMessage } from './data';

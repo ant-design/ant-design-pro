@@ -1,10 +1,5 @@
 // src/pages/chatbot/style.ts
-import { createStyles, keyframes } from 'antd-style';
-
-const blink = keyframes`
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-`;
+import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   layout: css`
@@ -68,10 +63,9 @@ export const useStyles = createStyles(({ css, token }) => ({
     color: ${token.colorText};
     text-align: center;
 
-    &::after {
-      content: '|';
-      margin-left: 2px;
-      animation: ${blink} 0.8s step-end infinite;
+    @keyframes chatbot-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
   `,
 }));
