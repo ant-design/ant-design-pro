@@ -281,6 +281,12 @@ export default [
     ],
   },
   {
+    path: '/chatbot',
+    name: 'chatbot',
+    icon: 'robot',
+    component: './chatbot',
+  },
+  {
     path: '/',
     redirect: '/dashboard/analysis',
   },
