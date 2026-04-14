@@ -3,6 +3,11 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   pageContainer: css`
+    // Neutralize the global .ant-layout { min-height: 100vh } on nested layout
+    .ant-layout {
+      min-height: unset;
+    }
+
     .ant-pro-page-container-children-container {
       padding-block: 0;
       height: calc(100vh - 56px - 48px);
