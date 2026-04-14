@@ -100,7 +100,6 @@ const ChatbotPage: React.FC = () => {
 
   // ─── Handlers ──────────────────────────────────────────────────────────────
   const sendMessage = (content: string) => {
-    // Update conversation label on first message
     setConversations((prev) =>
       prev.map((c) =>
         c.key === activeKey && c.label === '新对话'
@@ -117,16 +116,12 @@ const ChatbotPage: React.FC = () => {
     setActiveKey(key);
   };
 
-  const switchChat = (key: string) => {
-    setActiveKey(key);
-  };
-
   // ─── Bubble items ──────────────────────────────────────────────────────────
   const bubbleItems: BubbleItemType[] = parsedMessages.map((msg) => {
     const parsed = msg.message as ParsedMessage;
     const isAI = parsed.role === 'assistant';
     const thinkContent =
-      isAI && parsed.role === 'assistant' ? parsed.thinkContent : undefined;
+      parsed.role === 'assistant' ? parsed.thinkContent : undefined;
 
     const item: BubbleItemType = {
       key: msg.id,
@@ -169,20 +164,20 @@ const ChatbotPage: React.FC = () => {
             <Conversations
               items={conversations}
               activeKey={activeKey}
-              onActiveChange={switchChat}
+              onActiveChange={setActiveKey}
               menu={(conversation) => ({
                 items: [{ key: 'delete', label: '删除', danger: true }],
                 onClick: ({ key }) => {
                   if (key === 'delete') {
-                    setConversations((prev) =>
-                      prev.filter((c) => c.key !== conversation.key),
-                    );
-                    if (activeKey === conversation.key) {
-                      const remaining = conversations.filter(
+                    setConversations((prev) => {
+                      const next = prev.filter(
                         (c) => c.key !== conversation.key,
                       );
-                      setActiveKey(remaining[0]?.key ?? '');
-                    }
+                      if (activeKey === conversation.key) {
+                        setActiveKey(next[0]?.key ?? '');
+                      }
+                      return next;
+                    });
                   }
                 },
               })}
