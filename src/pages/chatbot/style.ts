@@ -3,22 +3,18 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   pageContainer: css`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-
+    // Let PageContainer fill the viewport area without disrupting other pages
     .ant-pro-page-container-children-container {
-      flex: 1;
+      position: relative;
       padding: 0;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      // Fill the remaining space below the page header
+      height: calc(100vh - 56px - 48px - 24px);
     }
   `,
 
   card: css`
-    flex: 1;
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
