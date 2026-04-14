@@ -182,7 +182,7 @@ const ChatbotPage: React.FC = () => {
   };
 
   const newChat = () => {
-    const key = Date.now().toString();
+    const key = crypto.randomUUID();
     setConversations((prev) => [
       { key, label: '新对话', group: '今天', isDraft: true },
       ...prev,
@@ -262,7 +262,16 @@ const ChatbotPage: React.FC = () => {
                         const next = prev.filter(
                           (c) => c.key !== conversation.key,
                         );
-                        if (activeKey === conversation.key) {
+                        if (next.length === 0) {
+                          const key = crypto.randomUUID();
+                          next.push({
+                            key,
+                            label: '💬 新对话',
+                            group: '今天',
+                            isDraft: true,
+                          });
+                          setActiveKey(key);
+                        } else if (activeKey === conversation.key) {
                           setActiveKey(next[0]?.key ?? '');
                         }
                         return next;
