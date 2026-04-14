@@ -188,7 +188,7 @@ const ChatbotPage: React.FC = () => {
       ghost
       childrenContentStyle={{
         paddingBlock: 0,
-        height: 'calc(100vh - 120px)',
+        height: 'calc(100vh - 160px)',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
