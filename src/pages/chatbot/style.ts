@@ -13,32 +13,6 @@ const fadeSlideIn = keyframes`
 `;
 
 export const useStyles = createStyles(({ css, token }) => ({
-  pageContainer: css`
-    .ant-layout {
-      min-height: unset;
-    }
-
-    .ant-pro-page-container-children-container {
-      padding-block: 0;
-      height: calc(100vh - 56px - 48px);
-    }
-  `,
-
-  card: css`
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-
-    .ant-card-body {
-      flex: 1;
-      padding: 0;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-  `,
-
   layout: css`
     display: flex;
     flex: 1;

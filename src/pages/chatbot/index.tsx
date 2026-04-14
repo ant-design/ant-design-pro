@@ -141,8 +141,34 @@ const ChatbotPage: React.FC = () => {
 
   // ─── Render ────────────────────────────────────────────────────────────────
   return (
-    <PageContainer ghost className={styles.pageContainer}>
-      <Card variant="borderless" className={styles.card}>
+    <PageContainer
+      ghost
+      childrenContentStyle={{
+        padding: 0,
+        height: 'calc(100vh - 160px)',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}
+    >
+      <Card
+        variant="borderless"
+        style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+        }}
+        styles={{
+          body: {
+            flex: 1,
+            padding: 0,
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+          },
+        }}
+      >
         <XProvider>
           <div className={styles.layout}>
             {/* Left sidebar */}
