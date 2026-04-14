@@ -197,7 +197,7 @@ const ChatbotPage: React.FC = () => {
                   onSubmit={sendMessage}
                   onCancel={abort}
                   placeholder="输入消息，按 Enter 发送..."
-                  autoSize={{ minRows: 2, maxRows: 6 }}
+                  autoSize={{ minRows: 4, maxRows: 8 }}
                   style={{ maxWidth: 940, width: '100%' }}
                 />
               </div>

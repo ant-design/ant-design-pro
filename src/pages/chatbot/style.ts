@@ -1,5 +1,16 @@
 // src/pages/chatbot/style.ts
-import { createStyles } from 'antd-style';
+import { createStyles, keyframes } from 'antd-style';
+
+const fadeSlideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const useStyles = createStyles(({ css, token }) => ({
   pageContainer: css`
@@ -52,22 +63,6 @@ export const useStyles = createStyles(({ css, token }) => ({
     background: ${token.colorBgContainer};
   `,
 
-  welcome: css`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  `,
-
-  welcomeTitle: css`
-    font-size: 32px;
-    font-weight: 600;
-    color: ${token.colorText};
-    margin-bottom: 24px;
-    text-align: center;
-  `,
-
   messages: css`
     flex: 1;
     overflow-y: auto;
@@ -95,5 +90,14 @@ export const useStyles = createStyles(({ css, token }) => ({
     align-items: center;
     justify-content: center;
     padding: ${token.paddingLG}px;
+    gap: 32px;
+  `,
+
+  welcomeTitle: css`
+    font-size: 32px;
+    font-weight: 600;
+    color: ${token.colorText};
+    text-align: center;
+    animation: ${fadeSlideIn} 0.5s ${token.motionEaseOut} both;
   `,
 }));
