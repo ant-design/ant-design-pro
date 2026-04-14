@@ -1,20 +1,10 @@
 // src/pages/chatbot/index.tsx
 import { UserOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
-import {
-  Bubble,
-  Conversations,
-  Prompts,
-  Sender,
-  Think,
-  Welcome,
-  XProvider,
-} from '@ant-design/x';
-import type {
-  BubbleItemType,
-  RoleType,
-} from '@ant-design/x/es/bubble/interface';
-import { XMarkdown } from '@ant-design/x-markdown';
+import { Bubble, Conversations, Sender, Think, XProvider } from '@ant-design/x';
+import type { BubbleListProps } from '@ant-design/x/es/bubble/BubbleList';
+import type { BubbleItemType } from '@ant-design/x/es/bubble/interface';
+import XMarkdown from '@ant-design/x-markdown';
 import { useXChat } from '@ant-design/x-sdk';
 import { Avatar, Card } from 'antd';
 import React, { useMemo, useState } from 'react';
@@ -23,10 +13,6 @@ import { createChatProvider } from './service';
 import { useStyles } from './style';
 
 // ─── Parser ──────────────────────────────────────────────────────────────────
-// Handles three streaming states:
-//   1. Full <think>...</think> block has arrived
-//   2. Streaming in progress — </think> not yet received (partialMatch)
-//   3. No think tag at all
 const parser = (message: { content: string; role: string }): ParsedMessage => {
   const { content, role } = message;
   if (role !== 'assistant') return { role: 'user', content };
@@ -51,7 +37,7 @@ const parser = (message: { content: string; role: string }): ParsedMessage => {
 };
 
 // ─── Role config ─────────────────────────────────────────────────────────────
-const roleConfig: RoleType = {
+const roleConfig: BubbleListProps['role'] = {
   user: {
     placement: 'end' as const,
     avatar: <Avatar icon={<UserOutlined />} />,
@@ -72,31 +58,28 @@ const roleConfig: RoleType = {
       </Avatar>
     ),
     typing: { effect: 'typing' as const, step: 2, interval: 20 },
+    contentRender: (content: string, info: { status?: string }) => (
+      <XMarkdown
+        streaming={{
+          hasNextChunk: info?.status === 'updating',
+          enableAnimation: true,
+        }}
+      >
+        {content}
+      </XMarkdown>
+    ),
   },
 };
-
-// ─── Quick prompts ────────────────────────────────────────────────────────────
-const promptItems = [
-  { key: 'code', label: '写一段代码', description: '帮我写一个 React 组件' },
-  {
-    key: 'explain',
-    label: '解释概念',
-    description: '解释一下什么是向量数据库',
-  },
-  { key: 'translate', label: '翻译文档', description: '把这段文字翻译成英文' },
-];
 
 // ─── Component ───────────────────────────────────────────────────────────────
 const ChatbotPage: React.FC = () => {
   const { styles } = useStyles();
 
-  // Conversation list state
   const [conversations, setConversations] = useState<ConversationItem[]>([
     { key: 'default', label: '新对话' },
   ]);
   const [activeKey, setActiveKey] = useState<string>('default');
 
-  // Chat hook — keyed per conversation
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const provider = useMemo(() => createChatProvider() as any, []);
   const { onRequest, abort, isRequesting, parsedMessages } = useXChat<
@@ -140,23 +123,9 @@ const ChatbotPage: React.FC = () => {
       role: isAI ? 'ai' : 'user',
       content: parsed.content,
       loading: msg.status === 'loading',
+      status: msg.status,
     };
 
-    // Markdown rendering for AI messages
-    if (isAI) {
-      item.contentRender = (content: string) => (
-        <XMarkdown
-          content={content}
-          streaming={
-            msg.status === 'updating'
-              ? { hasNextChunk: true, tail: true }
-              : undefined
-          }
-        />
-      );
-    }
-
-    // Think-chain header
     if (isAI && thinkContent) {
       item.header = <Think>{thinkContent}</Think>;
     }
@@ -172,7 +141,7 @@ const ChatbotPage: React.FC = () => {
       <Card variant="borderless" className={styles.card}>
         <XProvider>
           <div className={styles.layout}>
-            {/* Left sidebar — conversation list */}
+            {/* Left sidebar */}
             <div className={styles.sidebar}>
               <Conversations
                 items={conversations}
@@ -200,40 +169,31 @@ const ChatbotPage: React.FC = () => {
 
             {/* Right main area */}
             <div className={styles.main}>
-              {!hasMessages ? (
-                // Empty state — welcome + quick prompts
-                <div className={styles.welcome}>
-                  <Welcome
-                    icon={<span style={{ fontSize: 48 }}>🤖</span>}
-                    title="你好，有什么可以帮你？"
-                    description="我是 AI 助手，可以帮助你写代码、分析数据、翻译文档等"
-                  />
-                  <Prompts
-                    items={promptItems}
-                    onItemClick={(info) =>
-                      sendMessage(info.data.description as string)
-                    }
-                    style={{ marginTop: 24 }}
-                  />
-                </div>
-              ) : (
-                // Message list
+              {hasMessages ? (
                 <div className={styles.messages}>
                   <Bubble.List
                     items={bubbleItems}
                     role={roleConfig}
                     autoScroll
+                    styles={{ root: { maxWidth: 940 } }}
                   />
+                </div>
+              ) : (
+                <div className={styles.welcome}>
+                  <div className={styles.welcomeTitle}>
+                    你好，有什么可以帮你？
+                  </div>
                 </div>
               )}
 
-              {/* Input area */}
               <div className={styles.footer}>
                 <Sender
                   loading={isRequesting}
                   onSubmit={sendMessage}
                   onCancel={abort}
                   placeholder="输入消息，按 Enter 发送..."
+                  autoSize={{ minRows: 2, maxRows: 6 }}
+                  style={{ maxWidth: 940, margin: '0 auto', display: 'block' }}
                 />
               </div>
             </div>

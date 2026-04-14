@@ -3,7 +3,6 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   pageContainer: css`
-    // Neutralize the global .ant-layout { min-height: 100vh } on nested layout
     .ant-layout {
       min-height: unset;
     }
@@ -32,12 +31,12 @@ export const useStyles = createStyles(({ css, token }) => ({
   layout: css`
     display: flex;
     flex: 1;
-    gap: 0;
     overflow: hidden;
   `,
 
   sidebar: css`
-    width: 240px;
+    width: 260px;
+    background: ${token.colorBgLayout};
     border-right: 1px solid ${token.colorBorderSecondary};
     display: flex;
     flex-direction: column;
@@ -50,6 +49,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     flex-direction: column;
     overflow: hidden;
     min-width: 0;
+    background: ${token.colorBgContainer};
   `,
 
   welcome: css`
@@ -58,13 +58,26 @@ export const useStyles = createStyles(({ css, token }) => ({
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: ${token.paddingLG}px;
+  `,
+
+  welcomeTitle: css`
+    font-size: 32px;
+    font-weight: 600;
+    color: ${token.colorText};
+    margin-bottom: 32px;
   `,
 
   messages: css`
     flex: 1;
     overflow-y: auto;
     padding: ${token.paddingMD}px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > * {
+      width: 100%;
+    }
   `,
 
   footer: css`
