@@ -65,6 +65,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     justify-content: center;
     padding: ${token.paddingLG}px;
     gap: 32px;
+    margin-top: -10%;
   `,
 
   welcomeTitle: css`
