@@ -65,6 +65,11 @@ export const layout: RunTimeLayoutConfig = ({
   setInitialState,
 }) => {
   return {
+    contentStyle: {
+      display: 'flex',
+      flexDirection: 'column' as const,
+      height: '100%',
+    },
     actionsRender: () => [
       <Question key="doc" />,
       <SelectLang key="SelectLang" />,

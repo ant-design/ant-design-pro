@@ -3,18 +3,25 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   pageContainer: css`
-    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 
     .ant-pro-page-container-children-container {
-      height: 100%;
-      padding-bottom: 0;
+      flex: 1;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
   `,
 
   card: css`
-    height: 100%;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     .ant-card-body {
       flex: 1;
@@ -27,7 +34,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 
   layout: css`
     display: flex;
-    height: 100%;
+    flex: 1;
     gap: 0;
     overflow: hidden;
   `,

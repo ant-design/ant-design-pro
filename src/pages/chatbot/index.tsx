@@ -60,7 +60,13 @@ const roleConfig: RoleType = {
     placement: 'start' as const,
     avatar: (
       <Avatar
-        style={{ background: 'transparent', fontSize: 24, lineHeight: 1 }}
+        style={{
+          background: 'transparent',
+          fontSize: 22,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
         🤖
       </Avatar>
