@@ -1,5 +1,5 @@
 // src/pages/chatbot/index.tsx
-import { UserOutlined } from '@ant-design/icons';
+import { RobotOutlined, UserOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import {
   Bubble,
@@ -58,7 +58,9 @@ const roleConfig: RoleType = {
   },
   ai: {
     placement: 'start' as const,
-    avatar: <Avatar src="/logo.svg" />,
+    avatar: (
+      <Avatar icon={<RobotOutlined />} style={{ background: '#1677ff' }} />
+    ),
     typing: { effect: 'typing' as const, step: 2, interval: 20 },
   },
 };
@@ -191,7 +193,7 @@ const ChatbotPage: React.FC = () => {
               // Empty state — welcome + quick prompts
               <div className={styles.welcome}>
                 <Welcome
-                  icon="/logo.svg"
+                  icon={<RobotOutlined />}
                   title="你好，有什么可以帮你？"
                   description="我是 AI 助手，可以帮助你写代码、分析数据、翻译文档等"
                 />
