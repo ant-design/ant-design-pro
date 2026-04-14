@@ -16,7 +16,7 @@ import type {
 } from '@ant-design/x/es/bubble/interface';
 import { XMarkdown } from '@ant-design/x-markdown';
 import { useXChat } from '@ant-design/x-sdk';
-import { Avatar } from 'antd';
+import { Avatar, Card } from 'antd';
 import React, { useMemo, useState } from 'react';
 import type { ConversationItem, ParsedMessage } from './data';
 import { createChatProvider } from './service';
@@ -59,7 +59,11 @@ const roleConfig: RoleType = {
   ai: {
     placement: 'start' as const,
     avatar: (
-      <Avatar style={{ background: 'transparent', fontSize: 28 }}>🤖</Avatar>
+      <Avatar
+        style={{ background: 'transparent', fontSize: 24, lineHeight: 1 }}
+      >
+        🤖
+      </Avatar>
     ),
     typing: { effect: 'typing' as const, step: 2, interval: 20 },
   },
@@ -158,72 +162,78 @@ const ChatbotPage: React.FC = () => {
 
   // ─── Render ────────────────────────────────────────────────────────────────
   return (
-    <PageContainer className={styles.pageContainer}>
-      <XProvider>
-        <div className={styles.layout}>
-          {/* Left sidebar — conversation list */}
-          <div className={styles.sidebar}>
-            <Conversations
-              items={conversations}
-              activeKey={activeKey}
-              onActiveChange={setActiveKey}
-              menu={(conversation) => ({
-                items: [{ key: 'delete', label: '删除', danger: true }],
-                onClick: ({ key }) => {
-                  if (key === 'delete') {
-                    setConversations((prev) => {
-                      const next = prev.filter(
-                        (c) => c.key !== conversation.key,
-                      );
-                      if (activeKey === conversation.key) {
-                        setActiveKey(next[0]?.key ?? '');
-                      }
-                      return next;
-                    });
-                  }
-                },
-              })}
-              creation={{ onClick: newChat, label: '新建对话' }}
-            />
-          </div>
-
-          {/* Right main area */}
-          <div className={styles.main}>
-            {!hasMessages ? (
-              // Empty state — welcome + quick prompts
-              <div className={styles.welcome}>
-                <Welcome
-                  icon={<span style={{ fontSize: 48 }}>🤖</span>}
-                  title="你好，有什么可以帮你？"
-                  description="我是 AI 助手，可以帮助你写代码、分析数据、翻译文档等"
-                />
-                <Prompts
-                  items={promptItems}
-                  onItemClick={(info) =>
-                    sendMessage(info.data.description as string)
-                  }
-                  style={{ marginTop: 24 }}
-                />
-              </div>
-            ) : (
-              // Message list
-              <div className={styles.messages}>
-                <Bubble.List items={bubbleItems} role={roleConfig} autoScroll />
-              </div>
-            )}
-
-            {/* Input area */}
-            <div className={styles.footer}>
-              <Sender
-                loading={isRequesting}
-                onSubmit={sendMessage}
-                onCancel={abort}
-                placeholder="输入消息，按 Enter 发送..."
+    <PageContainer ghost className={styles.pageContainer}>
+      <Card variant="borderless" className={styles.card}>
+        <XProvider>
+          <div className={styles.layout}>
+            {/* Left sidebar — conversation list */}
+            <div className={styles.sidebar}>
+              <Conversations
+                items={conversations}
+                activeKey={activeKey}
+                onActiveChange={setActiveKey}
+                menu={(conversation) => ({
+                  items: [{ key: 'delete', label: '删除', danger: true }],
+                  onClick: ({ key }) => {
+                    if (key === 'delete') {
+                      setConversations((prev) => {
+                        const next = prev.filter(
+                          (c) => c.key !== conversation.key,
+                        );
+                        if (activeKey === conversation.key) {
+                          setActiveKey(next[0]?.key ?? '');
+                        }
+                        return next;
+                      });
+                    }
+                  },
+                })}
+                creation={{ onClick: newChat, label: '新建对话' }}
               />
             </div>
+
+            {/* Right main area */}
+            <div className={styles.main}>
+              {!hasMessages ? (
+                // Empty state — welcome + quick prompts
+                <div className={styles.welcome}>
+                  <Welcome
+                    icon={<span style={{ fontSize: 48 }}>🤖</span>}
+                    title="你好，有什么可以帮你？"
+                    description="我是 AI 助手，可以帮助你写代码、分析数据、翻译文档等"
+                  />
+                  <Prompts
+                    items={promptItems}
+                    onItemClick={(info) =>
+                      sendMessage(info.data.description as string)
+                    }
+                    style={{ marginTop: 24 }}
+                  />
+                </div>
+              ) : (
+                // Message list
+                <div className={styles.messages}>
+                  <Bubble.List
+                    items={bubbleItems}
+                    role={roleConfig}
+                    autoScroll
+                  />
+                </div>
+              )}
+
+              {/* Input area */}
+              <div className={styles.footer}>
+                <Sender
+                  loading={isRequesting}
+                  onSubmit={sendMessage}
+                  onCancel={abort}
+                  placeholder="输入消息，按 Enter 发送..."
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </XProvider>
+        </XProvider>
+      </Card>
     </PageContainer>
   );
 };

@@ -2,13 +2,26 @@
 import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
-  // Stretch the ProCard / PageContainer content area to full height
   pageContainer: css`
     height: 100%;
 
     .ant-pro-page-container-children-container {
       height: 100%;
+      padding-bottom: 0;
+    }
+  `,
+
+  card: css`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .ant-card-body {
+      flex: 1;
       padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
   `,
 
