@@ -157,7 +157,6 @@ const ChatbotPage: React.FC = () => {
     provider,
     conversationKey: activeKey,
     parser,
-    requestPlaceholder: { role: 'assistant', content: '' },
   });
 
   const sendMessage = (content: string) => {
@@ -190,10 +189,7 @@ const ChatbotPage: React.FC = () => {
       key: msg.id,
       role: isAI ? 'ai' : 'user',
       content: parsed.content,
-      loading:
-        isAI &&
-        (msg.status === 'loading' ||
-          (msg.status === 'updating' && !parsed.content)),
+      loading: isAI && msg.status === 'loading',
       status: msg.status,
     };
 
