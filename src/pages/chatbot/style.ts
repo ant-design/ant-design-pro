@@ -36,7 +36,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 
   sidebar: css`
     width: 260px;
-    background: ${token.colorBgLayout};
+    background: ${token.colorBgContainer};
     border-right: 1px solid ${token.colorBorderSecondary};
     display: flex;
     flex-direction: column;
