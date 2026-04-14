@@ -1,15 +1,9 @@
 // src/pages/chatbot/style.ts
 import { createStyles, keyframes } from 'antd-style';
 
-const fadeSlideIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+const blink = keyframes`
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 `;
 
 export const useStyles = createStyles(({ css, token }) => ({
@@ -73,6 +67,11 @@ export const useStyles = createStyles(({ css, token }) => ({
     font-weight: 600;
     color: ${token.colorText};
     text-align: center;
-    animation: ${fadeSlideIn} 0.5s ${token.motionEaseOut} both;
+
+    &::after {
+      content: '|';
+      margin-left: 2px;
+      animation: ${blink} 0.8s step-end infinite;
+    }
   `,
 }));

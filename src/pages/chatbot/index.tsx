@@ -7,7 +7,28 @@ import type { BubbleItemType } from '@ant-design/x/es/bubble/interface';
 import XMarkdown from '@ant-design/x-markdown';
 import { useXChat } from '@ant-design/x-sdk';
 import { Avatar, Card } from 'antd';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+
+const WELCOME_TEXT = '你好，有什么可以帮你？';
+
+const TypewriterTitle: React.FC = () => {
+  const [displayed, setDisplayed] = useState('');
+  const indexRef = useRef(0);
+
+  useEffect(() => {
+    indexRef.current = 0;
+    setDisplayed('');
+    const timer = setInterval(() => {
+      indexRef.current += 1;
+      setDisplayed(WELCOME_TEXT.slice(0, indexRef.current));
+      if (indexRef.current >= WELCOME_TEXT.length) clearInterval(timer);
+    }, 80);
+    return () => clearInterval(timer);
+  }, []);
+
+  return <>{displayed}</>;
+};
+
 import type { ConversationItem, ParsedMessage } from './data';
 import { createChatProvider } from './service';
 import { useStyles } from './style';
@@ -58,16 +79,19 @@ const roleConfig: BubbleListProps['role'] = {
       </Avatar>
     ),
     typing: { effect: 'typing' as const, step: 2, interval: 20 },
-    contentRender: (content: string, info: { status?: string }) => (
-      <XMarkdown
-        streaming={{
-          hasNextChunk: info?.status === 'updating',
-          enableAnimation: true,
-        }}
-      >
-        {content}
-      </XMarkdown>
-    ),
+    contentRender: (content: string, info: { status?: string }) => {
+      if (!content && info?.status !== 'updating') return null;
+      return (
+        <XMarkdown
+          streaming={{
+            hasNextChunk: info?.status === 'updating',
+            enableAnimation: true,
+          }}
+        >
+          {content}
+        </XMarkdown>
+      );
+    },
   },
 };
 
@@ -215,7 +239,7 @@ const ChatbotPage: React.FC = () => {
               >
                 {!hasMessages && (
                   <div className={styles.welcomeTitle}>
-                    你好，有什么可以帮你？
+                    <TypewriterTitle />
                   </div>
                 )}
                 <Sender
