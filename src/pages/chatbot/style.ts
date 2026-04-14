@@ -4,16 +4,13 @@ import { createStyles } from 'antd-style';
 export const useStyles = createStyles(({ css, token }) => ({
   pageContainer: css`
     .ant-pro-page-container-children-container {
-      position: relative;
       padding-block: 0;
-      // Fill viewport below the ProLayout header (56px) and page header (48px)
       height: calc(100vh - 56px - 48px);
     }
   `,
 
   card: css`
-    position: absolute;
-    inset: 0;
+    height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
