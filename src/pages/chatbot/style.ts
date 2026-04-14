@@ -64,7 +64,8 @@ export const useStyles = createStyles(({ css, token }) => ({
     font-size: 32px;
     font-weight: 600;
     color: ${token.colorText};
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+    text-align: center;
   `,
 
   messages: css`
@@ -83,5 +84,16 @@ export const useStyles = createStyles(({ css, token }) => ({
   footer: css`
     padding: ${token.paddingMD}px;
     border-top: 1px solid ${token.colorBorderSecondary};
+    display: flex;
+    justify-content: center;
+  `,
+
+  footerCenter: css`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: ${token.paddingLG}px;
   `,
 }));

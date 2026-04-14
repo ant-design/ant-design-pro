@@ -169,7 +169,7 @@ const ChatbotPage: React.FC = () => {
 
             {/* Right main area */}
             <div className={styles.main}>
-              {hasMessages ? (
+              {hasMessages && (
                 <div className={styles.messages}>
                   <Bubble.List
                     items={bubbleItems}
@@ -178,22 +178,23 @@ const ChatbotPage: React.FC = () => {
                     styles={{ root: { maxWidth: 940 } }}
                   />
                 </div>
-              ) : (
-                <div className={styles.welcome}>
+              )}
+
+              <div
+                className={hasMessages ? styles.footer : styles.footerCenter}
+              >
+                {!hasMessages && (
                   <div className={styles.welcomeTitle}>
                     你好，有什么可以帮你？
                   </div>
-                </div>
-              )}
-
-              <div className={styles.footer}>
+                )}
                 <Sender
                   loading={isRequesting}
                   onSubmit={sendMessage}
                   onCancel={abort}
                   placeholder="输入消息，按 Enter 发送..."
                   autoSize={{ minRows: 2, maxRows: 6 }}
-                  style={{ maxWidth: 940, margin: '0 auto', display: 'block' }}
+                  style={{ maxWidth: 940, width: '100%' }}
                 />
               </div>
             </div>
