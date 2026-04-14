@@ -1,8 +1,10 @@
 import { UserOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import { Bubble, Conversations, Sender, Think, XProvider } from '@ant-design/x';
-import type { BubbleListProps } from '@ant-design/x/es/bubble/BubbleList';
-import type { BubbleItemType } from '@ant-design/x/es/bubble/interface';
+import type {
+  BubbleItemType,
+  BubbleListProps,
+} from '@ant-design/x/es/bubble/interface';
 import XMarkdown from '@ant-design/x-markdown';
 import { useXChat } from '@ant-design/x-sdk';
 import { Avatar, Card } from 'antd';
@@ -109,7 +111,7 @@ const ChatbotPage: React.FC = () => {
   const { styles } = useStyles();
 
   const [conversations, setConversations] = useState<ConversationItem[]>([
-    { key: 'default', label: '💬 新对话', group: '今天' },
+    { key: 'default', label: '💬 新对话', group: '今天', isDraft: true },
     {
       key: 'preset-1',
       label: '🧩 Ant Design 的 Form 表单如何做联动校验？',
@@ -171,8 +173,8 @@ const ChatbotPage: React.FC = () => {
     setInputValue('');
     setConversations((prev) =>
       prev.map((c) =>
-        c.key === activeKey && c.label === '新对话'
-          ? { ...c, label: content.slice(0, 20) }
+        c.key === activeKey && c.isDraft
+          ? { ...c, label: content.slice(0, 20), isDraft: false }
           : c,
       ),
     );
@@ -182,7 +184,7 @@ const ChatbotPage: React.FC = () => {
   const newChat = () => {
     const key = Date.now().toString();
     setConversations((prev) => [
-      { key, label: '新对话', group: '今天' },
+      { key, label: '新对话', group: '今天', isDraft: true },
       ...prev,
     ]);
     setActiveKey(key);

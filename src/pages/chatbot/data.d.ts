@@ -4,6 +4,7 @@ export interface ConversationItem {
   key: string;
   label: string;
   group?: string;
+  isDraft?: boolean;
 }
 
 export type ParsedMessage =
