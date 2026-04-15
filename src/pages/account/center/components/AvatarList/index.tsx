@@ -1,5 +1,5 @@
 import { Avatar, Tooltip } from 'antd';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import useStyles from './index.style';
 export declare type SizeType = number | 'small' | 'default' | 'large';
@@ -22,7 +22,7 @@ export type AvatarListProps = {
 };
 
 const avatarSizeToClassName = (styles: any, size?: SizeType | 'mini') =>
-  classNames(styles.avatarItem, {
+  clsx(styles.avatarItem, {
     [styles.avatarItemLarge]: size === 'large',
     [styles.avatarItemSmall]: size === 'small',
     [styles.avatarItemMini]: size === 'mini',
