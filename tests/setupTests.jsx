@@ -1,56 +1,69 @@
-﻿import { defaultConfig } from 'antd/lib/theme/internal';
+import { defaultConfig } from 'antd/lib/theme/internal';
 
 defaultConfig.hashed = false;
 
+const store = {};
+
 const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
+  getItem: jest.fn((key) => store[key] ?? null),
+  setItem: jest.fn((key, value) => {
+    store[key] = String(value);
+  }),
+  removeItem: jest.fn((key) => {
+    delete store[key];
+  }),
+  clear: jest.fn(() => {
+    Object.keys(store).forEach((key) => delete store[key]);
+  }),
 };
 
-global.localStorage = localStorageMock;
+globalThis.localStorage = localStorageMock;
 
 Object.defineProperty(URL, 'createObjectURL', {
   writable: true,
   value: jest.fn(),
 });
 
-class Worker {
+class MockWorker {
   constructor(stringUrl) {
     this.url = stringUrl;
-    this.onmessage = () => {};
+    this.onmessage = null;
   }
 
   postMessage(msg) {
-    this.onmessage(msg);
+    if (typeof this.onmessage === 'function') {
+      this.onmessage({ data: msg });
+    }
   }
+
+  terminate() {}
+  addEventListener() {}
+  removeEventListener() {}
 }
-window.Worker = Worker;
-// Polyfill MessageChannel for environments (like jest/jsdom) that don't provide it
-if (typeof global.MessageChannel === 'undefined') {
+
+globalThis.Worker = MockWorker;
+
+if (typeof globalThis.MessageChannel === 'undefined') {
   class PolyMessageChannel {
     constructor() {
       const channel = this;
+
       this.port1 = {
+        onmessage: null,
         postMessage(msg) {
           setTimeout(() => {
-            if (
-              channel.port2 &&
-              typeof channel.port2.onmessage === 'function'
-            ) {
+            if (typeof channel.port2.onmessage === 'function') {
               channel.port2.onmessage({ data: msg });
             }
           }, 0);
         },
       };
+
       this.port2 = {
+        onmessage: null,
         postMessage(msg) {
           setTimeout(() => {
-            if (
-              channel.port1 &&
-              typeof channel.port1.onmessage === 'function'
-            ) {
+            if (typeof channel.port1.onmessage === 'function') {
               channel.port1.onmessage({ data: msg });
             }
           }, 0);
@@ -59,39 +72,28 @@ if (typeof global.MessageChannel === 'undefined') {
     }
   }
 
-  global.MessageChannel = PolyMessageChannel;
-  if (typeof window !== 'undefined') {
-    window.MessageChannel = PolyMessageChannel;
-  }
+  globalThis.MessageChannel = PolyMessageChannel;
 }
 
-if (typeof window !== 'undefined') {
-  // ref: https://github.com/ant-design/ant-design/issues/18774
-  if (!window.matchMedia) {
-    Object.defineProperty(global.window, 'matchMedia', {
-      writable: true,
-      configurable: true,
-      value: jest.fn(() => ({
-        matches: false,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-      })),
-    });
-  }
-  if (!window.matchMedia) {
-    Object.defineProperty(global.window, 'matchMedia', {
-      writable: true,
-      configurable: true,
-      value: jest.fn((query) => ({
-        matches: query.includes('max-width'),
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-      })),
-    });
-  }
+if (typeof window !== 'undefined' && !window.matchMedia) {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    configurable: true,
+    value: jest.fn((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  });
 }
-const errorLog = console.error;
-Object.defineProperty(global.window.console, 'error', {
+
+const originalError = console.error;
+Object.defineProperty(window.console, 'error', {
   writable: true,
   configurable: true,
   value: (...rest) => {
@@ -103,12 +105,11 @@ Object.defineProperty(global.window.console, 'error', {
     ) {
       return;
     }
-    errorLog(...rest);
+    originalError(...rest);
   },
 });
 
-// Mock ResizeObserver
-global.ResizeObserver = class ResizeObserver {
+globalThis.ResizeObserver = class {
   observe() {}
   unobserve() {}
   disconnect() {}
