@@ -114,34 +114,5 @@ global.ResizeObserver = class ResizeObserver {
   disconnect() {}
 };
 
-// Mock @ant-design/x packages — mermaid dependency breaks in JSDOM
-jest.mock('@ant-design/x', () => {
-  const React = require('react');
-  const forwardRef = (name) =>
-    React.forwardRef((props, ref) =>
-      React.createElement(name, { ...props, ref }),
-    );
-  return {
-    Bubble: Object.assign(forwardRef('Bubble'), {
-      List: forwardRef('Bubble.List'),
-    }),
-    Conversations: forwardRef('Conversations'),
-    Sender: forwardRef('Sender'),
-    Think: forwardRef('Think'),
-    XProvider: forwardRef('XProvider'),
-  };
-});
-jest.mock('@ant-design/x-sdk', () => ({
-  useXChat: () => ({
-    onRequest: jest.fn(),
-    abort: jest.fn(),
-    isRequesting: false,
-    parsedMessages: [],
-  }),
-  OpenAIChatProvider: class {},
-  XRequest: jest.fn(),
-}));
-jest.mock('@ant-design/x-markdown', () => {
-  const React = require('react');
-  return (props) => React.createElement('div', null, props.children);
-});
+// Mock mermaid — its ESM internals break in JSDOM
+jest.mock('mermaid', () => ({}));
