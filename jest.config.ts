@@ -8,6 +8,7 @@ export default async (): Promise<any> => {
   });
   return {
     ...config,
+    testPathIgnorePatterns: ['/node_modules/', '/.worktrees/'],
     testEnvironmentOptions: {
       ...(config?.testEnvironmentOptions || {}),
       url: 'http://localhost:8000',
