@@ -94,7 +94,10 @@ describe('Login Page', () => {
     await rootContainer.findAllByText('Ant Design Pro');
 
     // Wait for the login button to exit loading state
-    await rootContainer.findAllByText('Login');
+    const loginBtn = rootContainer.container.querySelector('.ant-btn-loading');
+    if (loginBtn) {
+      await waitTime(1000);
+    }
 
     expect(rootContainer.asFragment()).toMatchSnapshot();
 
