@@ -48,3 +48,4 @@ build
 
 # cloudflare wrangler
 .wrangler
+requestRecord.mock.js
