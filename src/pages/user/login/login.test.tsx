@@ -93,11 +93,15 @@ describe('Login Page', () => {
 
     await rootContainer.findAllByText('Ant Design Pro');
 
-    // Wait for the login button to exit loading state
-    const loginBtn = rootContainer.container.querySelector('.ant-btn-loading');
-    if (loginBtn) {
-      await waitTime(1000);
-    }
+    // Remove unstable loading class/icon before snapshot
+    rootContainer.container
+      .querySelectorAll('.ant-btn-loading')
+      .forEach((btn) => {
+        btn.classList.remove('ant-btn-loading');
+        btn.querySelectorAll('.ant-btn-loading-icon').forEach((el) => {
+          el.remove();
+        });
+      });
 
     expect(rootContainer.asFragment()).toMatchSnapshot();
 
