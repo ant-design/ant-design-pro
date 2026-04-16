@@ -1,7 +1,7 @@
 import omit from '@rc-component/util/es/omit';
 import { Card } from 'antd';
 import type { CardProps } from 'antd/es/card';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import useStyles from './index.style';
 
@@ -53,7 +53,7 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
     return (
       <div className={styles.chartCard}>
         <div
-          className={classNames(styles.chartTop, {
+          className={clsx(styles.chartTop, {
             [styles.chartTopMargin]: !children && !footer,
           })}
         >
@@ -80,7 +80,7 @@ const ChartCard: React.FC<ChartCardProps> = (props) => {
         )}
         {footer && (
           <div
-            className={classNames(styles.footer, {
+            className={clsx(styles.footer, {
               [styles.footerMargin]: !children,
             })}
           >

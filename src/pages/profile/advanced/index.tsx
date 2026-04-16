@@ -25,7 +25,7 @@ import {
   Table,
   Tooltip,
 } from 'antd';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import type { AdvancedProfileData } from './data.d';
@@ -183,7 +183,7 @@ const Advanced: FC = () => {
     </RouteContext.Consumer>
   );
   const desc1 = (
-    <div className={classNames(styles.stepDescription)}>
+    <div className={clsx(styles.stepDescription)}>
       曲丽丽
       <DingdingOutlined
         style={{

@@ -1,7 +1,7 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { useMergedState } from '@rc-component/util';
 import { Tag } from 'antd';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React, { type FC, useMemo, useState } from 'react';
 import useStyles from './index.style';
 
@@ -107,7 +107,7 @@ const TagSelect: FC<TagSelectProps> & {
     collapseText = '收起',
     selectAllText = '全部',
   } = actionsText;
-  const cls = classNames(styles.tagSelect, className, {
+  const cls = clsx(styles.tagSelect, className, {
     [styles.hasExpandTag]: expandable,
     [styles.expanded]: expand,
   });

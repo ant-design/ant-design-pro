@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import useStyles from './index.style';
 
@@ -19,7 +19,7 @@ const StandardFormRow: React.FC<StandardFormRowProps> = ({
   ...rest
 }) => {
   const { styles } = useStyles();
-  const cls = classNames(styles.standardFormRow, {
+  const cls = clsx(styles.standardFormRow, {
     [styles.standardFormRowBlock]: block,
     [styles.standardFormRowLast]: last,
     [styles.standardFormRowGrid]: grid,
