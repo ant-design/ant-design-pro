@@ -8,6 +8,11 @@ export default async (): Promise<any> => {
   });
   return {
     ...config,
+    testPathIgnorePatterns: ['/node_modules/', '/.worktrees/'],
+    moduleNameMapper: {
+      ...(config.moduleNameMapper || {}),
+      '^mermaid$': '<rootDir>/tests/__mocks__/mermaid.js',
+    },
     testEnvironmentOptions: {
       ...(config?.testEnvironmentOptions || {}),
       url: 'http://localhost:8000',

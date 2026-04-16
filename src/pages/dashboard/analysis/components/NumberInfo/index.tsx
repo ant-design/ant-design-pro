@@ -1,5 +1,5 @@
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import useStyles from './index.style';
 export type NumberInfoProps = {
@@ -27,7 +27,7 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
   const { styles } = useStyles();
   return (
     <div
-      className={classNames({
+      className={clsx({
         [styles[`numberInfo${theme}` as keyof typeof styles]]: !!theme,
       })}
       {...rest}

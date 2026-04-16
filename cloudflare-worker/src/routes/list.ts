@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { fakeList, defaultUser } from '../data/common';
+import { defaultUser, fakeList } from '../data/common';
 
 // Count bounds to prevent memory exhaustion
 const COUNT_MIN = 1;
@@ -54,6 +54,17 @@ app.post('/post_fake_list', async (c) => {
       break;
   }
 
+  return c.json({
+    data: {
+      list: result,
+    },
+  });
+});
+
+// GET /api/fake_list
+app.get('/fake_list', (c) => {
+  const count = parseCount(c.req.query('count'), DEFAULT_COUNT);
+  const result = fakeList(count);
   return c.json({
     data: {
       list: result,

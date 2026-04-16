@@ -1,5 +1,5 @@
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import useStyles from './index.style';
 
@@ -21,7 +21,7 @@ const Trend: React.FC<TrendProps> = ({
   ...rest
 }) => {
   const { styles } = useStyles();
-  const classString = classNames(
+  const classString = clsx(
     styles.trendItem,
     {
       [styles.trendItemGrey]: !colorful,
