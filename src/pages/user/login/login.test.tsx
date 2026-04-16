@@ -4,14 +4,6 @@ import { TestBrowser } from '@@/testBrowser';
 import { fireEvent, render } from '@testing-library/react';
 import React, { act } from 'react';
 
-const waitTime = (time: number = 100) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
-
 let server: {
   close: () => void;
 };
@@ -88,14 +80,12 @@ describe('Login Page', () => {
 
     await (await rootContainer.findByText('Login')).click();
 
-    // 等待接口返回结果
-    await waitTime(5000);
-
-    await rootContainer.findAllByText('Ant Design Pro');
+    // Wait for login to succeed and navigate to home page
+    await rootContainer.findByText('Ant Design Pro', undefined, {
+      timeout: 10000,
+    });
 
     expect(rootContainer.asFragment()).toMatchSnapshot();
-
-    await waitTime(2000);
 
     rootContainer.unmount();
   });
