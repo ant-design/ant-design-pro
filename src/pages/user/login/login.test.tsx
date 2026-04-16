@@ -93,6 +93,9 @@ describe('Login Page', () => {
 
     await rootContainer.findAllByText('Ant Design Pro');
 
+    // Wait for the login button to exit loading state
+    await rootContainer.findAllByText('Login');
+
     expect(rootContainer.asFragment()).toMatchSnapshot();
 
     await waitTime(2000);
