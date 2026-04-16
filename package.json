@@ -57,7 +57,7 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.1.1",
+    "@biomejs/biome": "^2.4.12",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@tailwindcss/postcss": "^4.0.0",
