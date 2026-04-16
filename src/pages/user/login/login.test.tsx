@@ -93,16 +93,6 @@ describe('Login Page', () => {
 
     await rootContainer.findAllByText('Ant Design Pro');
 
-    // Remove unstable loading class/icon before snapshot
-    rootContainer.container
-      .querySelectorAll('.ant-btn-loading')
-      .forEach((btn) => {
-        btn.classList.remove('ant-btn-loading');
-        btn.querySelectorAll('.ant-btn-loading-icon').forEach((el) => {
-          el.remove();
-        });
-      });
-
     expect(rootContainer.asFragment()).toMatchSnapshot();
 
     await waitTime(2000);

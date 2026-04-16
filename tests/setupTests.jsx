@@ -113,6 +113,3 @@ global.ResizeObserver = class ResizeObserver {
   unobserve() {}
   disconnect() {}
 };
-
-// Mock mermaid — its ESM internals break in JSDOM
-jest.mock('mermaid', () => ({}));
