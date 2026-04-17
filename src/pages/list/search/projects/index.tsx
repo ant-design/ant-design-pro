@@ -23,10 +23,7 @@ const Projects: FC = () => {
     category?: (string | number)[];
     author?: string;
   }>({});
-  const {
-    data,
-    isLoading: loading,
-  } = useQuery({
+  const { data, isLoading: loading } = useQuery({
     queryKey: ['search-projects', filters],
     queryFn: () =>
       queryFakeList({ count: 8, ...filters }).then((res) => res.data),
