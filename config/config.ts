@@ -109,7 +109,7 @@ export default defineConfig({
    */
   moment2dayjs: {
     preset: 'antd',
-    plugins: ['duration'],
+    plugins: ['duration', 'relativeTime'],
   },
   /**
    * @name 国际化插件
@@ -149,7 +149,17 @@ export default defineConfig({
    * @description 使用 react-query 管理服务端状态
    * @doc https://umijs.org/docs/max/react-query
    */
-  reactQuery: {},
+  reactQuery: {
+    devtool: { initialIsOpen: false },
+    queryClient: {
+      defaultOptions: {
+        queries: {
+          staleTime: 30_000,
+          refetchOnWindowFocus: false,
+        },
+      },
+    },
+  },
   /**
    * @name 权限插件
    * @description 基于 initialState 的权限插件，必须先打开 initialState

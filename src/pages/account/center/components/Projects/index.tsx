@@ -1,14 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { Card, List } from 'antd';
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import AvatarList from '../AvatarList';
 import useStyles from './index.style';
 
-dayjs.extend(relativeTime);
 const Projects: React.FC = () => {
   const { styles } = useStyles();
   // 获取tab列表数据

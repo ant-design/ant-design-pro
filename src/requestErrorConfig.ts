@@ -13,7 +13,7 @@ enum ErrorShowType {
 // 与后端约定的响应数据格式
 interface ResponseStructure {
   success: boolean;
-  data: any;
+  data: unknown;
   errorCode?: number;
   errorMessage?: string;
   showType?: ErrorShowType;
@@ -63,7 +63,7 @@ export const errorConfig: RequestConfig = {
               });
               break;
             case ErrorShowType.REDIRECT:
-              // TODO: redirect
+              window.location.href = '/user/login';
               break;
             default:
               message.error(errorMessage);
@@ -95,15 +95,5 @@ export const errorConfig: RequestConfig = {
   ],
 
   // 响应拦截器
-  responseInterceptors: [
-    (response) => {
-      // 拦截响应数据，进行个性化处理
-      const { data } = response as unknown as ResponseStructure;
-
-      if (data?.success === false) {
-        message.error('请求失败！');
-      }
-      return response;
-    },
-  ],
+  responseInterceptors: [],
 };
