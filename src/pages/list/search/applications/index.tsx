@@ -16,9 +16,9 @@ import {
   Select,
   Tooltip,
 } from 'antd';
-import numeral from 'numeral';
 import type { FC } from 'react';
 import React from 'react';
+import { formatNumber } from '@/utils/format';
 import { categoryOptions } from '../../mock';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
@@ -233,7 +233,7 @@ export const Applications: FC<Record<string, any>> = () => {
               <div>
                 <CardInfo
                   activeUser={formatWan(item.activeUser)}
-                  newUser={numeral(item.newUser).format('0,0')}
+                  newUser={formatNumber(item.newUser)}
                 />
               </div>
             </Card>
