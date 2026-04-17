@@ -17,7 +17,6 @@ export default [
     routes: [
       {
         path: '/user/login',
-        layout: false,
         name: 'login',
         component: './user/login',
       },
@@ -27,13 +26,13 @@ export default [
       },
       {
         name: 'register-result',
-        icon: 'smile',
+        icon: 'checkCircle',
         path: '/user/register-result',
         component: './user/register-result',
       },
       {
         name: 'register',
-        icon: 'smile',
+        icon: 'userAdd',
         path: '/user/register',
         component: './user/register',
       },
@@ -46,7 +45,7 @@ export default [
   {
     path: '/welcome',
     name: 'welcome',
-    icon: 'smile',
+    icon: 'home',
     component: './Welcome',
   },
   {
@@ -77,19 +76,19 @@ export default [
       },
       {
         name: 'analysis',
-        icon: 'smile',
+        icon: 'barChart',
         path: '/dashboard/analysis',
         component: './dashboard/analysis',
       },
       {
         name: 'monitor',
-        icon: 'smile',
+        icon: 'monitor',
         path: '/dashboard/monitor',
         component: './dashboard/monitor',
       },
       {
         name: 'workplace',
-        icon: 'smile',
+        icon: 'desktop',
         path: '/dashboard/workplace',
         component: './dashboard/workplace',
       },
@@ -106,19 +105,19 @@ export default [
       },
       {
         name: 'basic-form',
-        icon: 'smile',
+        icon: 'form',
         path: '/form/basic-form',
         component: './form/basic-form',
       },
       {
         name: 'step-form',
-        icon: 'smile',
+        icon: 'orderedList',
         path: '/form/step-form',
         component: './form/step-form',
       },
       {
         name: 'advanced-form',
-        icon: 'smile',
+        icon: 'profile',
         path: '/form/advanced-form',
         component: './form/advanced-form',
       },
@@ -140,19 +139,19 @@ export default [
           },
           {
             name: 'articles',
-            icon: 'smile',
+            icon: 'read',
             path: '/list/search/articles',
             component: './list/search/articles',
           },
           {
             name: 'projects',
-            icon: 'smile',
+            icon: 'project',
             path: '/list/search/projects',
             component: './list/search/projects',
           },
           {
             name: 'applications',
-            icon: 'smile',
+            icon: 'appstore',
             path: '/list/search/applications',
             component: './list/search/applications',
           },
@@ -164,19 +163,19 @@ export default [
       },
       {
         name: 'table-list',
-        icon: 'smile',
+        icon: 'table',
         path: '/list/table-list',
         component: './table-list',
       },
       {
         name: 'basic-list',
-        icon: 'smile',
+        icon: 'unorderedList',
         path: '/list/basic-list',
         component: './list/basic-list',
       },
       {
         name: 'card-list',
-        icon: 'smile',
+        icon: 'creditCard',
         path: '/list/card-list',
         component: './list/card-list',
       },
@@ -193,13 +192,13 @@ export default [
       },
       {
         name: 'basic',
-        icon: 'smile',
+        icon: 'idcard',
         path: '/profile/basic',
         component: './profile/basic',
       },
       {
         name: 'advanced',
-        icon: 'smile',
+        icon: 'crown',
         path: '/profile/advanced',
         component: './profile/advanced',
       },
@@ -207,7 +206,7 @@ export default [
   },
   {
     name: 'result',
-    icon: 'CheckCircleOutlined',
+    icon: 'checkCircle',
     path: '/result',
     routes: [
       {
@@ -216,13 +215,13 @@ export default [
       },
       {
         name: 'success',
-        icon: 'smile',
+        icon: 'checkCircle',
         path: '/result/success',
         component: './result/success',
       },
       {
         name: 'fail',
-        icon: 'smile',
+        icon: 'closeCircle',
         path: '/result/fail',
         component: './result/fail',
       },
@@ -239,19 +238,19 @@ export default [
       },
       {
         name: '403',
-        icon: 'smile',
+        icon: 'stop',
         path: '/exception/403',
         component: './exception/403',
       },
       {
         name: '404',
-        icon: 'smile',
+        icon: 'warning',
         path: '/exception/404',
         component: './exception/404',
       },
       {
         name: '500',
-        icon: 'smile',
+        icon: 'bug',
         path: '/exception/500',
         component: './exception/500',
       },
@@ -268,13 +267,13 @@ export default [
       },
       {
         name: 'center',
-        icon: 'smile',
+        icon: 'user',
         path: '/account/center',
         component: './account/center',
       },
       {
         name: 'settings',
-        icon: 'smile',
+        icon: 'setting',
         path: '/account/settings',
         component: './account/settings',
       },
