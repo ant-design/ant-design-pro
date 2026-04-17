@@ -4,7 +4,7 @@ import {
   TaobaoOutlined,
 } from '@ant-design/icons';
 import { List } from 'antd';
-import React from 'react';
+import type React from 'react';
 
 const BindingView: React.FC = () => {
   const getData = () => [

@@ -1,5 +1,5 @@
 import { PageContainer } from '@ant-design/pro-components';
-import React from 'react';
+import type React from 'react';
 
 interface InfoCardProps {
   title: string;

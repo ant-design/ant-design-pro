@@ -9,7 +9,7 @@ import {
 } from '@ant-design/pro-components';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Input, message, Upload } from 'antd';
-import React from 'react';
+import type React from 'react';
 import { queryCity, queryCurrent, queryProvince } from '../service';
 import useStyles from './index.style';
 

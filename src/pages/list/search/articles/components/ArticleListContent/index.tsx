@@ -1,6 +1,6 @@
 import { Avatar } from 'antd';
 import dayjs from 'dayjs';
-import React from 'react';
+import type React from 'react';
 import useStyles from './index.style';
 
 type ArticleListContentProps = {

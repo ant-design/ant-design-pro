@@ -2,7 +2,7 @@ import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-components';
 import packageJson from '@root/package.json';
 import GitUrlParse from 'git-url-parse';
-import React from 'react';
+import type React from 'react';
 
 const getRepoUrl = () => {
   if (!packageJson.repository)

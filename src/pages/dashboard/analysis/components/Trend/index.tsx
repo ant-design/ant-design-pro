@@ -1,6 +1,6 @@
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { clsx } from 'clsx';
-import React from 'react';
+import type React from 'react';
 import useStyles from './index.style';
 
 export type TrendProps = {

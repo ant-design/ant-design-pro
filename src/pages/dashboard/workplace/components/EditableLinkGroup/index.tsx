@@ -1,6 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import React, { createElement } from 'react';
+import type React from 'react';
+import { createElement } from 'react';
 import useStyles from './index.style';
 export type EditableLink = {
   title: string;

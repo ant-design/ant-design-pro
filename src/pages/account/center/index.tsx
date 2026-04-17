@@ -17,7 +17,8 @@ import {
   Row,
   Tag,
 } from 'antd';
-import React, { useRef, useState } from 'react';
+import type React from 'react';
+import { useRef, useState } from 'react';
 import useStyles from './Center.style';
 import Applications from './components/Applications';
 import Articles from './components/Articles';

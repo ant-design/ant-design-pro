@@ -17,8 +17,8 @@ import {
   Tooltip,
 } from 'antd';
 import numeral from 'numeral';
+import type React from 'react';
 import type { FC } from 'react';
-import React from 'react';
 import { categoryOptions } from '../../mock';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
@@ -88,8 +88,7 @@ export const Applications: FC<Record<string, any>> = () => {
     queryFn: () => queryFakeList({ count: 8 }).then((res) => res.data),
   });
 
-  const run = (values: any) => {
-    console.log('form data', values);
+  const run = () => {
     refetch();
   };
 
@@ -99,8 +98,8 @@ export const Applications: FC<Record<string, any>> = () => {
     <div className={styles.filterCardList}>
       <Card variant="borderless">
         <Form
-          onValuesChange={(_, values) => {
-            run(values);
+          onValuesChange={(__, _) => {
+            run();
           }}
         >
           <StandardFormRow
