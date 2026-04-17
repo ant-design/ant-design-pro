@@ -1,6 +1,7 @@
 import { GridContent } from '@ant-design/pro-components';
 import { Menu } from 'antd';
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import type React from 'react';
+import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import BaseView from './components/base';
 import BindingView from './components/binding';
 import NotificationView from './components/notification';

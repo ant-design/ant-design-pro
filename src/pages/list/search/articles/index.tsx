@@ -7,8 +7,9 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { Button, Card, Col, Flex, Form, List, Row, Select, Tag } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select';
+import type React from 'react';
 import type { FC } from 'react';
-import React, { useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { categoryOptions } from '../../mock';
 import ArticleListContent from './components/ArticleListContent';
 import StandardFormRow from './components/StandardFormRow';
@@ -141,7 +142,7 @@ const Articles: FC = () => {
         label: item.name,
         value: item.id,
       })),
-    [],
+    [owners.map],
   );
 
   return (

@@ -16,7 +16,8 @@ import {
   Result,
   Statistic,
 } from 'antd';
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 import type { StepDataType } from './data.d';
 import useStyles from './style.style';
 

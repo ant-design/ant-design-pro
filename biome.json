@@ -20,6 +20,7 @@
       "!**/public",
       "!**/coverage",
       "!**/node_modules",
+      "!scripts",
       "!biome.json",
       "!tailwind.css",
       "!**/.worktrees"
@@ -35,11 +36,13 @@
       "recommended": true,
       "suspicious": {
         "noExplicitAny": "off",
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noConsole": "warn"
       },
       "correctness": {
         "useUniqueElementIds": "off",
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "warn",
+        "noUnusedImports": "error"
       },
       "a11y": {
         "noStaticElementInteractions": "off",
@@ -49,7 +52,7 @@
     }
   },
   "javascript": {
-    "jsxRuntime": "reactClassic",
+    "jsxRuntime": "transparent",
     "formatter": {
       "quoteStyle": "single"
     }

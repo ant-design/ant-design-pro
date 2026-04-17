@@ -7,7 +7,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { Avatar, Card, Dropdown, List, Tooltip } from 'antd';
 import numeral from 'numeral';
-import React from 'react';
+import type React from 'react';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import useStyles from './index.style';

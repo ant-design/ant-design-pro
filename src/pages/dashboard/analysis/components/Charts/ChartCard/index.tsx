@@ -2,7 +2,7 @@ import omit from '@rc-component/util/es/omit';
 import { Card } from 'antd';
 import type { CardProps } from 'antd/es/card';
 import { clsx } from 'clsx';
-import React from 'react';
+import type React from 'react';
 import useStyles from './index.style';
 
 type totalType = () => React.ReactNode;

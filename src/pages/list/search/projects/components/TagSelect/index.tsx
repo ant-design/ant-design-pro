@@ -84,7 +84,7 @@ const TagSelect: FC<TagSelectProps> & {
     return childrenArray
       .filter((child) => isTagSelectOption(child))
       .map((child) => child.props.value);
-  }, [children]);
+  }, [children, isTagSelectOption]);
 
   // Use Set for O(1) lookups
   const valueSet = useMemo(() => new Set(value || []), [value]);

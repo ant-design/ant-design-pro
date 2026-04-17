@@ -26,8 +26,9 @@ import {
   Tooltip,
 } from 'antd';
 import { clsx } from 'clsx';
+import type React from 'react';
 import type { FC } from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { AdvancedProfileData } from './data.d';
 import { queryAdvancedProfile } from './service';
 import useStyles from './style.style';

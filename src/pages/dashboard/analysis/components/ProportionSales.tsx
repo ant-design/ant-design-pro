@@ -1,7 +1,7 @@
 import { Pie } from '@ant-design/plots';
 import { Card, Segmented, Typography } from 'antd';
 import numeral from 'numeral';
-import React from 'react';
+import type React from 'react';
 import type { DataItem } from '../data.d';
 import useStyles from '../style.style';
 

@@ -1,6 +1,6 @@
 import { Link, useIntl } from '@umijs/max';
 import { Button, Card, Result } from 'antd';
-import React from 'react';
+import type React from 'react';
 
 const NoFoundPage: React.FC = () => (
   <Card variant="borderless">
