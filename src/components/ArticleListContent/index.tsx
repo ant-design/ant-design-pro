@@ -3,15 +3,16 @@ import dayjs from 'dayjs';
 import React from 'react';
 import useStyles from './index.style';
 
-type ArticleListContentProps = {
+export type ArticleListContentProps = {
   data: {
-    content: React.ReactNode;
-    updatedAt: number;
-    avatar: string;
-    owner: string;
-    href: string;
+    content?: React.ReactNode;
+    updatedAt?: number;
+    avatar?: string;
+    owner?: string;
+    href?: string;
   };
 };
+
 const ArticleListContent: React.FC<ArticleListContentProps> = ({
   data: { content, updatedAt, avatar, owner, href },
 }) => {
@@ -27,4 +28,5 @@ const ArticleListContent: React.FC<ArticleListContentProps> = ({
     </div>
   );
 };
+
 export default ArticleListContent;

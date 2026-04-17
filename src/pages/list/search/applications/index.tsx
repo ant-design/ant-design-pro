@@ -19,9 +19,8 @@ import {
 import numeral from 'numeral';
 import type { FC } from 'react';
 import React from 'react';
+import { StandardFormRow, TagSelect } from '@/components';
 import { categoryOptions } from '../../mock';
-import StandardFormRow from './components/StandardFormRow';
-import TagSelect from './components/TagSelect';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import useStyles from './style.style';
