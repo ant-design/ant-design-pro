@@ -20,7 +20,10 @@ export default function MonitorMap() {
   }>({
     queryKey: ['map-data'],
     queryFn: async () => {
-      const [geoData, gridData] = await Promise.all([queryMapGeo(), queryMapGrid()]);
+      const [geoData, gridData] = await Promise.all([
+        queryMapGeo(),
+        queryMapGrid(),
+      ]);
       return { geoData, grid: gridData };
     },
   });
