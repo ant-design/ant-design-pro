@@ -71,7 +71,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/react-helmet": "^6.1.11",
     "@umijs/lint": "^4.6.40",
-    "@umijs/max": "^4.6.40",
+    "@umijs/max": "^4.6.45",
     "@umijs/max-plugin-openapi": "^2.0.3",
     "@umijs/request-record": "^1.1.3",
     "cross-env": "^10.1.0",
