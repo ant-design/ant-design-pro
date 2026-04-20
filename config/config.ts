@@ -200,5 +200,6 @@ export default defineConfig({
     'process.env.CI': process.env.CI,
     'process.env.COMMIT_HASH': process.env.COMMIT_HASH || '',
     'process.env.CF_PAGES_COMMIT_SHA': process.env.CF_PAGES_COMMIT_SHA || '',
+    __APP_VERSION__: JSON.stringify(require('./../package.json').version),
   },
 });

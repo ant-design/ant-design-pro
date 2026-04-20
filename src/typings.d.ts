@@ -11,5 +11,6 @@ declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
 declare module 'omit.js';
-declare module 'numeral';
 declare module 'mockjs';
+
+declare const __APP_VERSION__: string;

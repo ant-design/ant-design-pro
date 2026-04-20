@@ -16,10 +16,10 @@ import {
   Select,
   Tooltip,
 } from 'antd';
-import numeral from 'numeral';
 import type { FC } from 'react';
 import React from 'react';
 import { StandardFormRow, TagSelect } from '@/components';
+import { formatNumber } from '@/utils/format';
 import { categoryOptions } from '../../mock';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
@@ -232,7 +232,7 @@ export const Applications: FC<Record<string, any>> = () => {
               <div>
                 <CardInfo
                   activeUser={formatWan(item.activeUser)}
-                  newUser={numeral(item.newUser).format('0,0')}
+                  newUser={formatNumber(item.newUser)}
                 />
               </div>
             </Card>
