@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { AvatarList, StandardFormRow, TagSelect } from '@/components';
@@ -9,8 +8,6 @@ import { categoryOptions } from '../../mock';
 import type { ListItemDataType } from './data.d';
 import { queryFakeList } from './service';
 import useStyles from './style.style';
-
-dayjs.extend(relativeTime);
 
 const FormItem = Form.Item;
 const { Paragraph } = Typography;

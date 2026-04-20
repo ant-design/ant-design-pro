@@ -109,7 +109,7 @@ export default defineConfig({
    */
   moment2dayjs: {
     preset: 'antd',
-    plugins: ['duration'],
+    plugins: ['duration', 'relativeTime'],
   },
   /**
    * @name 国际化插件
