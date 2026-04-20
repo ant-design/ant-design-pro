@@ -51,8 +51,6 @@
     "antd-style": "^4.1.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.19",
-    "git-url-parse": "^16.1.0",
-    "numeral": "^2.0.6",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
@@ -66,7 +64,6 @@
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.0.3",
-    "@types/numeral": "^2.0.5",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "@types/react-helmet": "^6.1.11",

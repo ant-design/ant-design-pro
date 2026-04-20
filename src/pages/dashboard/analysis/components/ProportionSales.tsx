@@ -1,7 +1,7 @@
 import { Pie } from '@ant-design/plots';
 import { Card, Segmented, Typography } from 'antd';
-import numeral from 'numeral';
 import React from 'react';
+import { formatNumber } from '@/utils/format';
 import type { DataItem } from '../data.d';
 import useStyles from '../style.style';
 
@@ -58,7 +58,7 @@ const ProportionSales = ({
         label={{
           position: 'spider',
           text: (item: { x: number; y: number }) =>
-            `${item.x}: ${numeral(item.y).format('0,0')}`,
+            `${item.x}: ${formatNumber(item.y)}`,
         }}
       />
     </Card>
