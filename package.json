@@ -79,7 +79,7 @@
     "jest-environment-jsdom": "^30.0.5",
     "lint-staged": "^16.1.2",
     "mockjs": "^1.1.0",
-    "tailwindcss": "^4.0.0",
+    "tailwindcss": "^4.2.4",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
     "umi-serve": "^1.9.11"
