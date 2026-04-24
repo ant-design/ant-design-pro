@@ -267,7 +267,16 @@ export default function MonitorMap() {
             d3.select(this).transition().duration(0).attr('fill-opacity', 0.85);
             if (tooltipRef.current) {
               const name = d.properties.Short_Name_ZH || d.properties.ADM0_NAME;
-              tooltipRef.current.innerHTML = `<strong>${name}</strong><br/>交易量: ${d.properties.cum_conf.toLocaleString()}`;
+              tooltipRef.current.textContent = '';
+              const strong = document.createElement('strong');
+              strong.textContent = name;
+              const br = document.createElement('br');
+              const text = document.createTextNode(
+                `交易量: ${d.properties.cum_conf.toLocaleString()}`,
+              );
+              tooltipRef.current.appendChild(strong);
+              tooltipRef.current.appendChild(br);
+              tooltipRef.current.appendChild(text);
               tooltipRef.current.style.opacity = '1';
             }
           })
@@ -298,19 +307,21 @@ export default function MonitorMap() {
           .attr('cy', (d) => projectedPoint(d, projection)[1])
           .attr('r', (d) => getRadius(d.properties.cum_conf, maxVal) + 2)
           .attr('fill', DATA_COLORS[3])
-          .attr('fill-opacity', 0.3);
+          .attr('fill-opacity', 0.3)
+          .style('pointer-events', 'none');
       }
     }
 
     drawMap();
 
     let resizeTimeout: ReturnType<typeof setTimeout>;
-    const resizeObserver = new ResizeObserver(() => {
+    const handleResize: ResizeObserverCallback = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         if (!cancelled) drawMap();
       }, 200);
-    });
+    };
+    const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(svgRef.current);
 
     return () => {

@@ -42,7 +42,7 @@ const Monitor: FC = () => {
           <Card
             title="活动实时交易情况"
             variant="borderless"
-            style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+            style={{ flex: 1 }}
             styles={{
               body: { display: 'flex', flexDirection: 'column', flex: 1 },
             }}
