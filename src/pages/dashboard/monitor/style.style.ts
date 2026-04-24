@@ -3,11 +3,14 @@ import { createStyles } from 'antd-style';
 const useStyles = createStyles(({ token }) => {
   return {
     mapChart: {
-      height: '452px',
-      paddingTop: '24px',
-      img: { display: 'inline-block', maxWidth: '100%', maxHeight: '437px' },
+      flex: 1,
+      minHeight: 420,
+      marginTop: 16,
+      position: 'relative',
+      img: { display: 'inline-block', maxWidth: '100%' },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
-        height: 'auto',
+        height: 300,
+        minHeight: 300,
       },
     },
   };

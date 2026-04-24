@@ -1,7 +1,7 @@
 import { Gauge, Liquid, WordCloud } from '@ant-design/plots';
 import { GridContent } from '@ant-design/pro-components';
 import { useQuery } from '@tanstack/react-query';
-import { Card, Col, Progress, Row, Spin, Statistic } from 'antd';
+import { Card, Col, Progress, Row, Skeleton, Statistic } from 'antd';
 import { type FC, lazy, Suspense } from 'react';
 import { formatNumber } from '@/utils/format';
 import ActiveChart from './components/ActiveChart';
@@ -36,9 +36,17 @@ const Monitor: FC = () => {
           xs={24}
           style={{
             marginBottom: 24,
+            display: 'flex',
           }}
         >
-          <Card title="活动实时交易情况" variant="borderless">
+          <Card
+            title="活动实时交易情况"
+            variant="borderless"
+            style={{ flex: 1 }}
+            styles={{
+              body: { display: 'flex', flexDirection: 'column', flex: 1 },
+            }}
+          >
             <Row>
               <Col md={6} sm={12} xs={24}>
                 <Statistic
@@ -67,7 +75,14 @@ const Monitor: FC = () => {
               </Col>
             </Row>
             <div className={styles.mapChart}>
-              <Suspense fallback={<Spin />}>
+              <Suspense
+                fallback={
+                  <Skeleton.Node
+                    active
+                    style={{ width: '100%', height: 356 }}
+                  />
+                }
+              >
                 <MonitorMap />
               </Suspense>
             </div>
