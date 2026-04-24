@@ -142,8 +142,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       tailwindcss:
-        specifier: ^4.0.0
-        version: 4.2.2
+        specifier: ^4.2.4
+        version: 4.2.4
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@25.6.0)(typescript@6.0.3)
@@ -9303,8 +9303,15 @@ packages:
   tailwindcss@4.2.2:
     resolution: {integrity: sha512-KWBIxs1Xb6NoLdMVqhbhgwZf2PGBpPEiwOqgI4pFIYbNTfBXiKYyWoTsXgBQ9WFg/OlhnvHaY+AEpW7wSmFo2Q==}
 
+  tailwindcss@4.2.4:
+    resolution: {integrity: sha512-HhKppgO81FQof5m6TEnuBWCZGgfRAWbaeOaGT00KOy/Pf/j6oUihdvBpA7ltCeAvZpFhW3j0PTclkxsd4IXYDA==}
+
   tapable@2.3.2:
     resolution: {integrity: sha512-1MOpMXuhGzGL5TTCZFItxCc0AARf1EZFQkGqMm7ERKj8+Hgr5oLvJOVFcC+lRmR8hCe2S3jC4T5D7Vg/d7/fhA==}
+    engines: {node: '>=6'}
+
+  tapable@2.3.3:
+    resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
     engines: {node: '>=6'}
 
   term-size@1.2.0:
@@ -21437,7 +21444,11 @@ snapshots:
 
   tailwindcss@4.2.2: {}
 
+  tailwindcss@4.2.4: {}
+
   tapable@2.3.2: {}
+
+  tapable@2.3.3: {}
 
   term-size@1.2.0:
     dependencies:
@@ -22031,7 +22042,7 @@ snapshots:
       mime-types: 2.1.35
       neo-async: 2.6.2
       schema-utils: 4.3.3
-      tapable: 2.3.2
+      tapable: 2.3.3
       terser-webpack-plugin: 5.4.0(webpack@5.106.1)
       watchpack: 2.5.1
       webpack-sources: 3.3.4
