@@ -1,0 +1,78 @@
+diff --git a/node_modules/@ant-design/pro-components/es/layout/components/SettingDrawer/index.js b/node_modules/@ant-design/pro-components/es/layout/components/SettingDrawer/index.js
+index 179a389..9d455e2 100644
+--- a/node_modules/@ant-design/pro-components/es/layout/components/SettingDrawer/index.js
++++ b/node_modules/@ant-design/pro-components/es/layout/components/SettingDrawer/index.js
+@@ -486,7 +486,33 @@ export const SettingDrawer = props => {
+                   id: 'app.setting.copyinfo'
+                 }));
+               } catch (error) {
+-                // console.log(error);
++                // Fallback to document.execCommand for older browsers or non-secure contexts
++                try {
++                  const textArea = document.createElement('textarea');
++                  textArea.value = genCopySettingJson(settingState);
++                  textArea.style.position = 'fixed';
++                  textArea.style.top = '0';
++                  textArea.style.left = '0';
++                  textArea.style.opacity = '0';
++                  document.body.appendChild(textArea);
++                  textArea.focus();
++                  textArea.select();
++                  const successful = document.execCommand('copy');
++                  document.body.removeChild(textArea);
++                  if (successful) {
++                    message.success(formatMessage({
++                      id: 'app.setting.copyinfo'
++                    }));
++                  } else {
++                    message.error(formatMessage({
++                      id: 'app.setting.copyinfo'
++                    }).replace('拷贝成功', '拷贝失败').replace('copy success', 'copy failed').replace('拷貝成功', '拷貝失敗'));
++                  }
++                } catch (fallbackError) {
++                  message.error(formatMessage({
++                    id: 'app.setting.copyinfo'
++                  }).replace('拷贝成功', '拷贝失败').replace('copy success', 'copy failed').replace('拷貝成功', '拷貝失敗'));
++                }
+               }
+             },
+             children: formatMessage({
+diff --git a/node_modules/@ant-design/pro-components/lib/layout/components/SettingDrawer/index.js b/node_modules/@ant-design/pro-components/lib/layout/components/SettingDrawer/index.js
+index 2ceb1d7..ee33af1 100644
+--- a/node_modules/@ant-design/pro-components/lib/layout/components/SettingDrawer/index.js
++++ b/node_modules/@ant-design/pro-components/lib/layout/components/SettingDrawer/index.js
+@@ -492,7 +492,33 @@ const SettingDrawer = props => {
+                   id: 'app.setting.copyinfo'
+                 }));
+               } catch (error) {
+-                // console.log(error);
++                // Fallback to document.execCommand for older browsers or non-secure contexts
++                try {
++                  const textArea = document.createElement('textarea');
++                  textArea.value = genCopySettingJson(settingState);
++                  textArea.style.position = 'fixed';
++                  textArea.style.top = '0';
++                  textArea.style.left = '0';
++                  textArea.style.opacity = '0';
++                  document.body.appendChild(textArea);
++                  textArea.focus();
++                  textArea.select();
++                  const successful = document.execCommand('copy');
++                  document.body.removeChild(textArea);
++                  if (successful) {
++                    _antd.message.success(formatMessage({
++                      id: 'app.setting.copyinfo'
++                    }));
++                  } else {
++                    _antd.message.error(formatMessage({
++                      id: 'app.setting.copyinfo'
++                    }).replace('拷贝成功', '拷贝失败').replace('copy success', 'copy failed').replace('拷貝成功', '拷貝失敗'));
++                  }
++                } catch (fallbackError) {
++                  _antd.message.error(formatMessage({
++                    id: 'app.setting.copyinfo'
++                  }).replace('拷贝成功', '拷贝失败').replace('copy success', 'copy failed').replace('拷貝成功', '拷貝失敗'));
++                }
+               }
+             },
+             children: formatMessage({
