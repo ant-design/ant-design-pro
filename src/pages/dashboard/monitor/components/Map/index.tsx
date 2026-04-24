@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Skeleton } from 'antd';
+import { Button, Skeleton } from 'antd';
 import * as d3 from 'd3';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
 import { useEffect, useMemo, useRef } from 'react';
@@ -105,7 +105,12 @@ export default function MonitorMap() {
   const svgRef = useRef<SVGSVGElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  const { isLoading: geoLoading, data: geoData } = useQuery<GeoData>({
+  const {
+    isLoading: geoLoading,
+    isError: geoError,
+    refetch: refetchGeo,
+    data: geoData,
+  } = useQuery<GeoData>({
     queryKey: ['map-data'],
     queryFn: async () => {
       const res = await fetch(
@@ -116,7 +121,12 @@ export default function MonitorMap() {
     },
   });
 
-  const { isLoading: worldLoading, data: worldData } = useQuery({
+  const {
+    isLoading: worldLoading,
+    isError: worldError,
+    refetch: refetchWorld,
+    data: worldData,
+  } = useQuery({
     queryKey: ['world-map'],
     queryFn: async () => {
       const res = await fetch(WORLD_MAP_URL);
@@ -140,156 +150,205 @@ export default function MonitorMap() {
   useEffect(() => {
     if (worldLoading || !worldData || !svgRef.current) return;
 
+    let cancelled = false;
     const svg = d3.select(svgRef.current);
-    svg.selectAll('*').remove();
 
-    const width = svgRef.current.clientWidth || 800;
-    const height = svgRef.current.clientHeight || 380;
+    function drawMap() {
+      if (cancelled || !svgRef.current) return;
+      svg.selectAll('*').interrupt();
+      svg.selectAll('*').remove();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const topology = worldData as any;
-    const countries = feature(
-      topology,
-      topology.objects.countries,
-    ) as unknown as FeatureCollection<Geometry>;
+      const width = svgRef.current.clientWidth || 800;
+      const height = svgRef.current.clientHeight || 380;
 
-    // Fit projection to container with small padding
-    const projection = d3
-      .geoNaturalEarth1()
-      .fitSize(
-        [width - 20, height - 10],
-        countries as unknown as GeoJSON.FeatureCollection,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const topology = worldData as any;
+      const countries = feature(
+        topology,
+        topology.objects.countries,
+      ) as unknown as FeatureCollection<Geometry>;
+
+      // Fit projection to container with small padding
+      const projection = d3
+        .geoNaturalEarth1()
+        .fitSize(
+          [width - 20, height - 10],
+          countries as unknown as GeoJSON.FeatureCollection,
+        );
+      const pathGenerator = d3.geoPath().projection(projection);
+
+      // ── Background ──
+      svg
+        .append('rect')
+        .attr('width', width)
+        .attr('height', height)
+        .attr('fill', '#fff');
+
+      const g = svg.append('g');
+
+      // ── Hex grid via land bitmap ──
+      const landBitmap = buildLandBitmap(
+        width,
+        height,
+        countries,
+        pathGenerator,
       );
-    const pathGenerator = d3.geoPath().projection(projection);
+      const hexR = 10;
+      const hexW = Math.sqrt(3) * hexR;
+      const hexH = 2 * hexR;
+      const landHexes: { cx: number; cy: number }[] = [];
 
-    // ── Background ──
-    svg
-      .append('rect')
-      .attr('width', width)
-      .attr('height', height)
-      .attr('fill', '#fff');
-
-    const g = svg.append('g');
-
-    // ── Hex grid via land bitmap ──
-    const landBitmap = buildLandBitmap(width, height, countries, pathGenerator);
-    const hexR = 10;
-    const hexW = Math.sqrt(3) * hexR;
-    const hexH = 2 * hexR;
-    const landHexes: { cx: number; cy: number }[] = [];
-
-    for (let row = -1; row * (hexH * 0.75) < height + hexH; row++) {
-      for (let col = -1; col * hexW < width + hexW; col++) {
-        const cx = col * hexW + (row % 2 !== 0 ? hexW / 2 : 0);
-        const cy = row * hexH * 0.75;
-        const px = Math.round(cx);
-        const py = Math.round(cy);
-        if (
-          px >= 0 &&
-          px < width &&
-          py >= 0 &&
-          py < height &&
-          landBitmap[py * width + px]
-        ) {
-          landHexes.push({ cx, cy });
+      for (let row = -1; row * (hexH * 0.75) < height + hexH; row++) {
+        for (let col = -1; col * hexW < width + hexW; col++) {
+          const cx = col * hexW + (row % 2 !== 0 ? hexW / 2 : 0);
+          const cy = row * hexH * 0.75;
+          const px = Math.round(cx);
+          const py = Math.round(cy);
+          if (
+            px >= 0 &&
+            px < width &&
+            py >= 0 &&
+            py < height &&
+            landBitmap[py * width + px]
+          ) {
+            landHexes.push({ cx, cy });
+          }
         }
       }
-    }
 
-    // Draw land hexes
-    g.selectAll('path.land-hex')
-      .data(landHexes)
-      .enter()
-      .append('path')
-      .attr('class', 'land-hex')
-      .attr('d', (d) => hexPath(d.cx, d.cy, hexR - 0.25))
-      .attr('fill', '#e8ecf1')
-      .attr('stroke', '#cdd5de')
-      .attr('stroke-width', 0.3);
+      // Draw land hexes
+      g.selectAll('path.land-hex')
+        .data(landHexes)
+        .enter()
+        .append('path')
+        .attr('class', 'land-hex')
+        .attr('d', (d) => hexPath(d.cx, d.cy, hexR - 0.25))
+        .attr('fill', '#e8ecf1')
+        .attr('stroke', '#cdd5de')
+        .attr('stroke-width', 0.3);
 
-    // ── Data points as circles ──
-    let cancelled = false;
+      // ── Data points as circles ──
+      if (validFeatures.length > 0) {
+        function startPulse(el: SVGCircleElement) {
+          if (cancelled) return;
+          const d = d3.select(el).datum() as GeoFeature;
+          const r = getRadius(d.properties.cum_conf, maxVal);
+          d3.select(el)
+            .transition()
+            .duration(2000)
+            .ease(d3.easeSinInOut)
+            .attr('fill-opacity', 0.25)
+            .attr('r', r * 0.85)
+            .transition()
+            .duration(2000)
+            .ease(d3.easeSinInOut)
+            .attr('fill-opacity', 0.55)
+            .attr('r', r)
+            .on('end', function () {
+              startPulse(this);
+            });
+        }
 
-    if (validFeatures.length > 0) {
-      function startPulse(el: SVGCircleElement) {
-        if (cancelled) return;
-        const d = d3.select(el).datum() as GeoFeature;
-        const r = getRadius(d.properties.cum_conf, maxVal);
-        d3.select(el)
-          .transition()
-          .duration(2000)
-          .ease(d3.easeSinInOut)
-          .attr('fill-opacity', 0.25)
-          .attr('r', r * 0.85)
-          .transition()
-          .duration(2000)
-          .ease(d3.easeSinInOut)
-          .attr('fill-opacity', 0.55)
-          .attr('r', r)
-          .on('end', function () {
+        g.selectAll('circle.data-point')
+          .data(validFeatures)
+          .enter()
+          .append('circle')
+          .attr('class', 'data-point')
+          .attr('cx', (d) => projectedPoint(d, projection)[0])
+          .attr('cy', (d) => projectedPoint(d, projection)[1])
+          .attr('r', (d) => getRadius(d.properties.cum_conf, maxVal))
+          .attr('fill', (d) => getColor(d.properties.cum_conf, maxVal))
+          .attr('fill-opacity', 0.4)
+          .style('cursor', 'pointer')
+          .each(function () {
+            startPulse(this);
+          })
+          .on('mouseenter', function (_event, d) {
+            d3.select(this).transition().duration(0).attr('fill-opacity', 0.85);
+            if (tooltipRef.current) {
+              const name = d.properties.Short_Name_ZH || d.properties.ADM0_NAME;
+              tooltipRef.current.innerHTML = `<strong>${name}</strong><br/>交易量: ${d.properties.cum_conf.toLocaleString()}`;
+              tooltipRef.current.style.opacity = '1';
+            }
+          })
+          .on('mousemove', (event) => {
+            if (tooltipRef.current) {
+              const [x, y] = d3.pointer(event, svgRef.current);
+              tooltipRef.current.style.left = `${x + 12}px`;
+              tooltipRef.current.style.top = `${y - 12}px`;
+            }
+          })
+          .on('mouseleave', function (_event, d) {
+            const r = getRadius(d.properties.cum_conf, maxVal);
+            d3.select(this)
+              .transition()
+              .duration(0)
+              .attr('fill-opacity', 0.4)
+              .attr('r', r);
             startPulse(this);
           });
+
+        // Highlight circles
+        g.selectAll('circle.highlight-point')
+          .data(highlightFeatures)
+          .enter()
+          .append('circle')
+          .attr('class', 'highlight-point')
+          .attr('cx', (d) => projectedPoint(d, projection)[0])
+          .attr('cy', (d) => projectedPoint(d, projection)[1])
+          .attr('r', (d) => getRadius(d.properties.cum_conf, maxVal) + 2)
+          .attr('fill', DATA_COLORS[3])
+          .attr('fill-opacity', 0.3);
       }
-
-      g.selectAll('circle.data-point')
-        .data(validFeatures)
-        .enter()
-        .append('circle')
-        .attr('class', 'data-point')
-        .attr('cx', (d) => projectedPoint(d, projection)[0])
-        .attr('cy', (d) => projectedPoint(d, projection)[1])
-        .attr('r', (d) => getRadius(d.properties.cum_conf, maxVal))
-        .attr('fill', (d) => getColor(d.properties.cum_conf, maxVal))
-        .attr('fill-opacity', 0.4)
-        .style('cursor', 'pointer')
-        .each(function () {
-          startPulse(this);
-        })
-        .on('mouseenter', function (_event, d) {
-          d3.select(this).transition().duration(0).attr('fill-opacity', 0.85);
-          if (tooltipRef.current) {
-            const name = d.properties.Short_Name_ZH || d.properties.ADM0_NAME;
-            tooltipRef.current.innerHTML = `<strong>${name}</strong><br/>交易量: ${d.properties.cum_conf.toLocaleString()}`;
-            tooltipRef.current.style.opacity = '1';
-          }
-        })
-        .on('mousemove', (event) => {
-          if (tooltipRef.current) {
-            tooltipRef.current.style.left = `${event.offsetX + 12}px`;
-            tooltipRef.current.style.top = `${event.offsetY - 12}px`;
-          }
-        })
-        .on('mouseleave', function (_event, d) {
-          const r = getRadius(d.properties.cum_conf, maxVal);
-          d3.select(this)
-            .transition()
-            .duration(0)
-            .attr('fill-opacity', 0.4)
-            .attr('r', r);
-          startPulse(this);
-        });
-
-      // Highlight circles
-      g.selectAll('circle.highlight-point')
-        .data(highlightFeatures)
-        .enter()
-        .append('circle')
-        .attr('class', 'highlight-point')
-        .attr('cx', (d) => projectedPoint(d, projection)[0])
-        .attr('cy', (d) => projectedPoint(d, projection)[1])
-        .attr('r', (d) => getRadius(d.properties.cum_conf, maxVal) + 2)
-        .attr('fill', DATA_COLORS[3])
-        .attr('fill-opacity', 0.3);
     }
+
+    drawMap();
+
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    const resizeObserver = new ResizeObserver(() => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (!cancelled) drawMap();
+      }, 200);
+    });
+    resizeObserver.observe(svgRef.current);
 
     return () => {
       cancelled = true;
+      clearTimeout(resizeTimeout);
+      resizeObserver.disconnect();
       svg.selectAll('*').interrupt();
     };
   }, [worldData, worldLoading, validFeatures, maxVal, highlightFeatures]);
 
   if (geoLoading || worldLoading) {
     return <Skeleton.Node active style={{ width: '100%', height: 356 }} />;
+  }
+
+  if (geoError || worldError) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: 356,
+          gap: 12,
+        }}
+      >
+        <span style={{ color: '#999' }}>地图数据加载失败</span>
+        <Button
+          size="small"
+          onClick={() => {
+            refetchGeo();
+            refetchWorld();
+          }}
+        >
+          重试
+        </Button>
+      </div>
+    );
   }
 
   return (
@@ -302,7 +361,6 @@ export default function MonitorMap() {
           display: 'block',
           borderRadius: 8,
         }}
-        preserveAspectRatio="xMidYMid meet"
       />
       <div
         ref={tooltipRef}

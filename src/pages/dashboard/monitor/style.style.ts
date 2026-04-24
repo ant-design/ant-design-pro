@@ -10,6 +10,7 @@ const useStyles = createStyles(({ token }) => {
       img: { display: 'inline-block', maxWidth: '100%' },
       [`@media screen and (max-width: ${token.screenLG}px)`]: {
         height: 300,
+        minHeight: 300,
       },
     },
   };
