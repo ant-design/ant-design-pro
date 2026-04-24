@@ -70,7 +70,7 @@
     "@types/topojson-client": "^3.1.5",
     "@types/d3": "^7.4.3",
     "@types/topojson-specification": "^1.0.5",
-    "@umijs/lint": "^4.6.45",
+    "@umijs/lint": "^4.6.47",
     "@umijs/max": "^4.6.45",
     "@umijs/max-plugin-openapi": "^2.0.3",
     "@umijs/request-record": "^1.1.3",
