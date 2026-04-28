@@ -15,7 +15,15 @@ npm install
 The project offers two modes:
 
 - **Full mode**: Includes all demo pages (Dashboard, Forms, Lists, Access, etc.), great for reference and learning
-- **Simple mode**: Only keeps login page and basic layout, ideal for starting from scratch. Run \`npm run simple\` to switch (**deletes demo pages and deps — commit your code first**)
+- **Simple mode**: Only keeps login page and basic layout, ideal for starting from scratch
+
+Switch to simple mode:
+
+\`\`\`bash
+git add -A && git commit -m "chore: save before simple"  # Commit first to allow revert
+npm run simple                                             # Remove demo pages and unused deps
+npm install                                                # Update dependencies
+\`\`\`
 
 > 💡 Start with full mode to learn the project structure, then switch to simple mode for development.
 
