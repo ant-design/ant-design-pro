@@ -2,7 +2,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import XMarkdown from '@ant-design/x-markdown';
 import enUS from '@root/docs/welcome.en-US';
 import zhCN from '@root/docs/welcome.zh-CN';
-import { useIntl, useLocale } from '@umijs/max';
+import { getLocale, useIntl } from '@umijs/max';
 import React from 'react';
 
 interface InfoCardProps {
@@ -40,8 +40,8 @@ const mdContent: Record<string, string> = {
 };
 
 const Welcome: React.FC = () => {
-  const { locale } = useLocale();
   const intl = useIntl();
+  const locale = getLocale();
   const content = mdContent[locale] || mdContent['zh-CN'];
 
   return (
