@@ -148,21 +148,18 @@
 
 /* Heading anchor links */
 .welcome-markdown .x-markdown .heading-anchor {
-  position: relative;
   scroll-margin-top: 24px;
 }
 
-.welcome-markdown .x-markdown .heading-anchor::before {
-  content: "#";
-  position: absolute;
-  left: -1.2em;
+.welcome-markdown .x-markdown .heading-anchor .anchor-link {
   color: var(--md-link-color);
   font-weight: normal;
+  margin-right: 4px;
   opacity: 0;
   transition: opacity 0.2s;
   text-decoration: none;
 }
 
-.welcome-markdown .x-markdown .heading-anchor:hover::before {
+.welcome-markdown .x-markdown .heading-anchor:hover .anchor-link {
   opacity: 1;
 }

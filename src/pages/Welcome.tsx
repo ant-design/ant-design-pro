@@ -55,6 +55,9 @@ const Heading: React.FC<
   return (
     // @ts-expect-error dynamic tag
     <Tag id={id} className="heading-anchor" {...rest}>
+      <a href={`#${id}`} className="anchor-link">
+        #
+      </a>
       {children}
     </Tag>
   );
