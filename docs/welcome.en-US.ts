@@ -51,9 +51,11 @@ npm install
 | \`npm test\` | Run tests |
 | \`npm run test:coverage\` | Test with coverage |
 | \`npm run openapi\` | Generate API code from OpenAPI schema |
-| \`npm run simple\` | Start in minimal mode |
+| \`npm run simple\` | Strip demo pages and unused deps (irreversible) |
 
 > 💡 \`UMI_ENV\` switches environment configs, mapping to different proxy rules in \`config/proxy.ts\`.
+
+> 💡 \`npm run simple\` removes demo pages (dashboard, form, list, etc.) and unused dependencies (plots, etc.), replacing with minimal routes. Ideal for starting from scratch. **This is irreversible — commit your code first.**
 
 → See [umi Getting Started](https://umijs.org/docs/guides/getting-started)
 

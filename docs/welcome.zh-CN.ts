@@ -51,9 +51,11 @@ npm install
 | \`npm test\` | 运行测试 |
 | \`npm run test:coverage\` | 测试覆盖率 |
 | \`npm run openapi\` | 根据 OpenAPI 生成 API 代码 |
-| \`npm run simple\` | 精简模式启动 |
+| \`npm run simple\` | 精简模式（删除示例页面和多余依赖，不可逆） |
 
 > 💡 \`UMI_ENV\` 用于切换环境配置，对应 \`config/proxy.ts\` 中的不同代理规则。
+
+> 💡 \`npm run simple\` 会删除示例页面（dashboard、form、list 等）和多余依赖（plots 等），替换为精简路由，适合从零开始开发。**此操作不可逆，请先提交代码。**
 
 → 更多内容见 [umi 入门指南](https://umijs.org/docs/guides/getting-started)
 
