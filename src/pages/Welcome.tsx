@@ -45,7 +45,18 @@ const mdContent: Record<string, string> = {
 
 const Heading: React.FC<
   React.HTMLAttributes<HTMLHeadingElement> & { tag?: string; domNode?: unknown }
-> = ({ tag: Tag = 'h1', children, className, ...rest }) => {
+> = ({
+  tag: Tag = 'h1',
+  children,
+  className,
+  classname,
+  class: htmlClass,
+  ...rest
+}) => {
+  // Merge all possible class sources from XMarkdown Renderer
+  const allClasses = [className, classname, htmlClass]
+    .filter(Boolean)
+    .join(' ');
   // Extract text content from children for id generation
   const textContent = React.Children.toArray(children)
     .map((child) => (typeof child === 'string' ? child : ''))
@@ -55,10 +66,10 @@ const Heading: React.FC<
     .trim()
     .replace(/\s+/g, '-')
     .toLowerCase();
-  const mergedClass = `heading-anchor ${className || ''}`.trim();
+  const mergedClass = `heading-anchor ${allClasses}`.trim();
   return (
     // @ts-expect-error dynamic tag
-    <Tag id={id} className={mergedClass} {...rest}>
+    <Tag id={id} className={mergedClass}>
       <a href={`#${id}`} className="anchor-link">
         #
       </a>
