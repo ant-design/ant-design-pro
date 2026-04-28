@@ -148,13 +148,17 @@
 
 /* Heading anchor links */
 .welcome-markdown .x-markdown .heading-anchor {
+  position: relative;
   scroll-margin-top: 24px;
 }
 
 .welcome-markdown .x-markdown .heading-anchor .anchor-link {
+  position: absolute;
+  left: -1.5em;
+  width: 1.2em;
+  text-align: center;
   color: var(--md-link-color);
   font-weight: normal;
-  margin-right: 4px;
   opacity: 0;
   transition: opacity 0.2s;
   text-decoration: none;
