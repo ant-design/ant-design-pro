@@ -193,15 +193,7 @@ export default defineConfig({
     include: ['src/pages/**/_mock.ts'],
     exclude: ['mock/requestRecord.mock.js'],
   },
-  utoopack: {
-    module: {
-      rules: {
-        '*.md': {
-          type: 'raw',
-        },
-      },
-    },
-  } as Record<string, unknown>,
+  utoopack: {},
   requestRecord: {},
   exportStatic: {},
   define: {
