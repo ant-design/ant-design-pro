@@ -12,6 +12,13 @@ npx create-umi@latest
 npm install
 \`\`\`
 
+The project offers two modes:
+
+- **Full mode**: Includes all demo pages (Dashboard, Forms, Lists, Access, etc.), great for reference and learning
+- **Simple mode**: Only keeps login page and basic layout, ideal for starting from scratch. Run \`npm run simple\` to switch (**irreversible — commit your code first**)
+
+> 💡 Start with full mode to learn the project structure, then switch to simple mode for development.
+
 **Directory structure:**
 
 \`\`\`
