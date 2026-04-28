@@ -1,4 +1,4 @@
-const content = `# Ant Design Pro Cheatsheet
+# Ant Design Pro Cheatsheet
 
 ![Ant Design Pro](https://mdn.alipayobjects.com/huamei_fkc4p0/afts/img/A*EX3ISYC2ghEAAAAAddAAAAgAeobDAQ/original)
 
@@ -8,11 +8,11 @@ const content = `# Ant Design Pro Cheatsheet
 
 **创建项目：**
 
-\`\`\`bash
+```bash
 git clone --depth 1 https://github.com/ant-design/ant-design-pro.git my-project
 cd my-project
 npm install
-\`\`\`
+```
 
 项目提供两种模式：
 
@@ -21,17 +21,17 @@ npm install
 
 切换精简模式：
 
-\`\`\`bash
+```bash
 git add -A && git commit -m "chore: save before simple"  # 先提交，以便回退
 npm run simple                                             # 删除示例页面和多余依赖
 npm install                                                # 更新依赖
-\`\`\`
+```
 
 > 💡 建议先用完整模式熟悉项目结构，再切换精简模式开始开发。
 
 **目录结构：**
 
-\`\`\`
+```
 ├── config/           # 配置文件（路由、代理、主题）
 │   ├── config.ts     # 主配置
 │   ├── routes.ts     # 路由配置
@@ -48,39 +48,41 @@ npm install                                                # 更新依赖
 │   └── app.tsx       # 运行时配置
 ├── docs/             # 项目文档
 └── types/            # 类型声明
-\`\`\`
+```
 
 **常用命令：**
 
 | 命令 | 说明 |
 |------|------|
-| \`npm start\` | 启动开发服务器（UMI_ENV=dev，带 Mock） |
-| \`npm run dev\` | 启动开发服务器（无 Mock） |
-| \`npm run start:dev\` | 同 dev，UMI_ENV=dev，无 Mock |
-| \`npm run start:no-mock\` | 无 Mock 启动 |
-| \`npm run start:pre\` | 预发布环境启动 |
-| \`npm run start:test\` | 测试环境启动 |
-| \`npm run build\` | 构建生产产物 |
-| \`npm run preview\` | 构建并本地预览（端口 8000） |
-| \`npm run analyze\` | 构建产物体积分析 |
-| \`npm run lint\` | 代码检查（Biome + TypeScript） |
-| \`npm run biome\` | Biome 自动修复 |
-| \`npm test\` | 运行测试 |
-| \`npm run test:coverage\` | 测试覆盖率 |
-| \`npm run openapi\` | 根据 OpenAPI 生成 API 代码 |
-| \`npm run simple\` | 精简模式（删除示例页面和多余依赖） |
+| `npm start` | 启动开发服务器（UMI_ENV=dev，带 Mock） |
+| `npm run dev` | 启动开发服务器（无 Mock） |
+| `npm run start:dev` | 同 dev，UMI_ENV=dev，无 Mock |
+| `npm run start:no-mock` | 无 Mock 启动 |
+| `npm run start:pre` | 预发布环境启动 |
+| `npm run start:test` | 测试环境启动 |
+| `npm run build` | 构建生产产物 |
+| `npm run preview` | 构建并本地预览（端口 8000） |
+| `npm run analyze` | 构建产物体积分析 |
+| `npm run lint` | 代码检查（Biome + TypeScript） |
+| `npm run biome` | Biome 自动修复 |
+| `npm test` | 运行测试 |
+| `npm run test:coverage` | 测试覆盖率 |
+| `npm run openapi` | 根据 OpenAPI 生成 API 代码 |
+| `npm run simple` | 精简模式（删除示例页面和多余依赖） |
 
-> 💡 \`UMI_ENV\` 用于切换环境配置，对应 \`config/proxy.ts\` 中的不同代理规则。
+> 💡 `UMI_ENV` 用于切换环境配置，对应 `config/proxy.ts` 中的不同代理规则。
 
-> 💡 \`npm run simple\` 会删除示例页面（dashboard、form、list 等）和多余依赖（plots 等），替换为精简路由，适合从零开始开发。**建议先提交代码，以便需要时回退。**
+> 💡 `npm run simple` 会删除示例页面（dashboard、form、list 等）和多余依赖（plots 等），替换为精简路由，适合从零开始开发。**建议先提交代码，以便需要时回退。**
 
-→ 更多内容见 [umi 入门指南](https://umijs.org/docs/guides/getting-started)
+**构建工具：** 本项目使用 [utoopack](https://github.com/utooland/utoo)（基于 Turbopack 的新一代打包器）作为默认构建工具，通过 `config/config.ts` 中的 `utoopack` 字段配置。utoopack 兼容 Webpack 配置格式，支持 `module.rules` 配置自定义加载器。
+
+→ 更多内容见 [umi 入门指南](https://umijs.org/docs/guides/getting-started)、[utoo 文档](https://utoo.land)
 
 ## 路由与菜单
 
-**路由配置** 位于 \`config/routes.ts\`：
+**路由配置** 位于 `config/routes.ts`：
 
-\`\`\`ts
+```ts
 export default [
   {
     path: '/welcome',
@@ -98,11 +100,11 @@ export default [
   { path: '/', redirect: '/dashboard/analysis' },
   { component: '404', path: './*' },
 ];
-\`\`\`
+```
 
 **路由导航：**
 
-\`\`\`tsx
+```tsx
 import { useNavigate, useParams, useLocation } from '@umijs/max';
 
 const navigate = useNavigate();
@@ -111,19 +113,19 @@ navigate(-1);                  // 后退
 
 const { id } = useParams();   // 获取动态参数 /user/:id
 const location = useLocation(); // 当前路由信息
-\`\`\`
+```
 
-**菜单与权限联动：** 路由配置中 \`access\` 字段控制菜单可见性，未授权路由不会出现在菜单中。
+**菜单与权限联动：** 路由配置中 `access` 字段控制菜单可见性，未授权路由不会出现在菜单中。
 
-> 💡 \`name\` 字段自动映射为 \`menu.xxx\` 国际化 key，在 \`src/locales/\` 中配置翻译。
+> 💡 `name` 字段自动映射为 `menu.xxx` 国际化 key，在 `src/locales/` 中配置翻译。
 
 → 更多内容见 [umi 路由文档](https://umijs.org/docs/guides/routes)、[Umi Max 布局与菜单](https://umijs.org/docs/max/layout-menu)
 
 ## 布局
 
-**ProLayout 配置** 位于 \`config/defaultSettings.ts\`：
+**ProLayout 配置** 位于 `config/defaultSettings.ts`：
 
-\`\`\`ts
+```ts
 export default {
   navTheme: 'light',        // 导航主题：light / dark
   colorPrimary: '#1890ff',  // 主题色
@@ -131,16 +133,16 @@ export default {
   contentWidth: 'Fluid',    // 内容宽度：Fluid / Fixed
   fixSiderbar: true,        // 固定侧边栏
 };
-\`\`\`
+```
 
 **布局模式：**
-- \`side\` — 左侧导航
-- \`top\` — 顶部导航
-- \`mix\` — 顶部 + 侧边混合导航
+- `side` — 左侧导航
+- `top` — 顶部导航
+- `mix` — 顶部 + 侧边混合导航
 
 **页面容器：**
 
-\`\`\`tsx
+```tsx
 import { PageContainer } from '@ant-design/pro-components';
 
 const Page = () => (
@@ -151,17 +153,17 @@ const Page = () => (
     {/* 页面内容 */}
   </PageContainer>
 );
-\`\`\`
+```
 
-**自定义区域：** 右上角 \`src/components/RightContent\`，底部 \`src/components/Footer\`。
+**自定义区域：** 右上角 `src/components/RightContent`，底部 `src/components/Footer`。
 
 → 更多内容见 [Umi Max 布局与菜单](https://umijs.org/docs/max/layout-menu)
 
 ## 数据流
 
-**useModel — 轻量全局状态：** 在 \`src/models/\` 下创建文件即自动注册：
+**useModel — 轻量全局状态：** 在 `src/models/` 下创建文件即自动注册：
 
-\`\`\`ts
+```ts
 // src/models/counter.ts
 import { useState } from 'react';
 
@@ -170,26 +172,26 @@ export default function useCounter() {
   const increment = () => setCount(c => c + 1);
   return { count, increment };
 }
-\`\`\`
+```
 
-\`\`\`tsx
+```tsx
 // 任意组件中使用
 import { useModel } from '@umijs/max';
 
 const { count, increment } = useModel('counter');
-\`\`\`
+```
 
 **useRequest — 数据请求：**
 
-\`\`\`tsx
+```tsx
 import { useRequest } from '@umijs/max';
 
 const { data, loading, error } = useRequest(getUserInfo);
-\`\`\`
+```
 
 **React Query — 服务端状态管理：**
 
-\`\`\`tsx
+```tsx
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 // 查询
@@ -205,11 +207,11 @@ const mutation = useMutation({
     queryClient.invalidateQueries({ queryKey: ['user'] });
   },
 });
-\`\`\`
+```
 
-**初始状态 — getInitialState：** 在 \`src/app.tsx\` 中定义，全局可访问：
+**初始状态 — getInitialState：** 在 `src/app.tsx` 中定义，全局可访问：
 
-\`\`\`tsx
+```tsx
 // src/app.tsx
 export async function getInitialState() {
   const currentUser = await fetchUserInfo();
@@ -219,30 +221,30 @@ export async function getInitialState() {
 // 组件中使用
 import { useModel } from '@umijs/max';
 const { initialState } = useModel('@@initialState');
-\`\`\`
+```
 
-> 💡 \`getInitialState\` 在应用启动时执行一次，适合获取全局信息（如用户身份、权限）。
+> 💡 `getInitialState` 在应用启动时执行一次，适合获取全局信息（如用户身份、权限）。
 
 → 更多内容见 [Umi Max 数据流](https://umijs.org/docs/max/data-flow)
 
 ## 请求
 
-**请求配置** 位于 \`src/app.tsx\`：
+**请求配置** 位于 `src/app.tsx`：
 
-\`\`\`ts
+```ts
 export const request: RequestConfig = {
   baseURL: 'https://api.example.com',
   timeout: 10000,
   requestInterceptors: [],   // 请求拦截器
   responseInterceptors: [],  // 响应拦截器
 };
-\`\`\`
+```
 
-**错误处理** 位于 \`src/requestErrorConfig.ts\`，可自定义错误码映射和提示逻辑。
+**错误处理** 位于 `src/requestErrorConfig.ts`，可自定义错误码映射和提示逻辑。
 
 **使用请求：**
 
-\`\`\`tsx
+```tsx
 import { request } from '@umijs/max';
 
 // GET
@@ -250,25 +252,25 @@ const data = await request('/api/users', { params: { page: 1 } });
 
 // POST
 await request('/api/users', { method: 'POST', data: { name: 'test' } });
-\`\`\`
+```
 
 **OpenAPI 代码生成：**
 
-\`\`\`bash
+```bash
 npm run openapi
-\`\`\`
+```
 
-根据 \`config/oneapi.json\` 自动生成 \`src/services/\` 下的 API 调用代码。
+根据 `config/oneapi.json` 自动生成 `src/services/` 下的 API 调用代码。
 
-> 💡 生成后的代码直接用 \`import { request } from '@umijs/max'\` 发起请求，无需手动封装。
+> 💡 生成后的代码直接用 `import { request } from '@umijs/max'` 发起请求，无需手动封装。
 
 → 更多内容见 [Umi Max 请求](https://umijs.org/docs/max/request)
 
 ## 权限
 
-**定义权限** 在 \`src/access.ts\`：
+**定义权限** 在 `src/access.ts`：
 
-\`\`\`ts
+```ts
 export default function access(initialState: { currentUser?: API.CurrentUser }) {
   const { currentUser } = initialState;
   return {
@@ -276,17 +278,17 @@ export default function access(initialState: { currentUser?: API.CurrentUser }) 
     canUser: !!currentUser,
   };
 }
-\`\`\`
+```
 
-**路由级权限：** 在路由配置中添加 \`access\` 字段：
+**路由级权限：** 在路由配置中添加 `access` 字段：
 
-\`\`\`ts
+```ts
 { path: '/admin', access: 'canAdmin' }
-\`\`\`
+```
 
 **组件级权限：**
 
-\`\`\`tsx
+```tsx
 import { Access, useAccess } from '@umijs/max';
 
 // 声明式
@@ -297,25 +299,25 @@ import { Access, useAccess } from '@umijs/max';
 // 命令式
 const access = useAccess();
 if (access.canAdmin) { /* ... */ }
-\`\`\`
+```
 
 → 更多内容见 [Umi Max 权限](https://umijs.org/docs/max/access)
 
 ## 国际化
 
-**配置** 在 \`config/config.ts\`：
+**配置** 在 `config/config.ts`：
 
-\`\`\`ts
+```ts
 locale: {
   default: 'zh-CN',
   antd: true,         // 同步 antd 组件语言
   baseNavigator: true, // 跟随浏览器语言
 },
-\`\`\`
+```
 
 **文件结构：**
 
-\`\`\`
+```
 src/locales/
 ├── zh-CN.ts        # 中文入口
 ├── zh-CN/
@@ -325,11 +327,11 @@ src/locales/
 ├── en-US.ts        # 英文入口
 └── en-US/
     └── ...
-\`\`\`
+```
 
 **使用方式：**
 
-\`\`\`tsx
+```tsx
 import { useIntl, FormattedMessage } from '@umijs/max';
 
 // Hook 方式
@@ -338,57 +340,57 @@ intl.formatMessage({ id: 'menu.welcome' });
 
 // 组件方式
 <FormattedMessage id="menu.welcome" />
-\`\`\`
+```
 
 **切换语言：**
 
-\`\`\`tsx
+```tsx
 import { setLocale } from '@umijs/max';
 setLocale('en-US', false);  // false = 不刷新页面
-\`\`\`
+```
 
 → 更多内容见 [Umi Max 国际化](https://umijs.org/docs/max/i18n)
 
 ## 样式
 
-**CSS Modules：** 文件命名为 \`*.module.less\` 或 \`*.module.css\`：
+**CSS Modules：** 文件命名为 `*.module.less` 或 `*.module.css`：
 
-\`\`\`css
+```css
 /* example.module.less */
 .container { padding: 24px; }
 .title { font-size: 16px; }
-\`\`\`
+```
 
-\`\`\`tsx
+```tsx
 import styles from './example.module.less';
 <div className={styles.container} />
-\`\`\`
+```
 
 **antd-style（CSS-in-JS）：**
 
-\`\`\`tsx
+```tsx
 import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
-  card: css\`
-    background: \${token.colorBgContainer};
-    border-radius: \${token.borderRadiusLG}px;
-  \`,
+  card: css`
+    background: ${token.colorBgContainer};
+    border-radius: ${token.borderRadiusLG}px;
+  `,
 }));
 
 const { styles } = useStyles();
 <div className={styles.card} />
-\`\`\`
+```
 
 **Tailwind CSS（v4）：** 直接在 className 中使用：
 
-\`\`\`tsx
+```tsx
 <div className="flex items-center gap-4 p-6 rounded-lg bg-white dark:bg-[#141414]" />
-\`\`\`
+```
 
-**动态主题：** 在 \`config/config.ts\` 的 \`antd\` 配置中设置：
+**动态主题：** 在 `config/config.ts` 的 `antd` 配置中设置：
 
-\`\`\`ts
+```ts
 antd: {
   configProvider: {
     theme: {
@@ -399,7 +401,7 @@ antd: {
     },
   },
 },
-\`\`\`
+```
 
 开发环境可通过右下角 SettingDrawer 实时切换主题。
 
@@ -411,29 +413,29 @@ antd: {
 
 **Jest 测试：**
 
-\`\`\`bash
+```bash
 npm test                    # 运行所有测试
 npm run test:coverage       # 带覆盖率报告
 npm run test:update         # 更新快照
-\`\`\`
+```
 
-测试文件放在对应组件目录下，命名为 \`*.test.ts(x)\`。
+测试文件放在对应组件目录下，命名为 `*.test.ts(x)`。
 
-**Mock 数据：** 在 \`mock/\` 目录下创建文件：
+**Mock 数据：** 在 `mock/` 目录下创建文件：
 
-\`\`\`ts
+```ts
 // mock/user.ts
 export default {
   'GET /api/currentUser': { name: 'Serati Ma', access: 'admin' },
   'POST /api/login': (req, res) => { res.end('ok'); },
 };
-\`\`\`
+```
 
 Umi 自动注册 mock，开发模式下生效。
 
-**代理配置** 位于 \`config/proxy.ts\`：
+**代理配置** 位于 `config/proxy.ts`：
 
-\`\`\`ts
+```ts
 export default {
   dev: {
     '/api/': {
@@ -442,32 +444,30 @@ export default {
     },
   },
 };
-\`\`\`
+```
 
-> 💡 用 \`MOCK=none\` 启动可跳过 Mock，直接代理到后端：\`npm run start:no-mock\`。
+> 💡 用 `MOCK=none` 启动可跳过 Mock，直接代理到后端：`npm run start:no-mock`。
 
 → 更多内容见 [umi 测试](https://umijs.org/docs/guides/testing)、[umi Mock](https://umijs.org/docs/guides/mock)
 
 ## FAQ
 
 **Q: 如何关闭 Mock？**
-\`npm run start:no-mock\` 或 \`cross-env MOCK=none max dev\`
+`npm run start:no-mock` 或 `cross-env MOCK=none max dev`
 
 **Q: 如何修改主题色？**
-修改 \`config/defaultSettings.ts\` 的 \`colorPrimary\`，开发时可用 SettingDrawer 实时调整。
+修改 `config/defaultSettings.ts` 的 `colorPrimary`，开发时可用 SettingDrawer 实时调整。
 
 **Q: 如何添加新页面？**
-1. 在 \`src/pages/\` 下创建组件 2. 在 \`config/routes.ts\` 添加路由 3. 在 \`src/locales/\` 添加菜单翻译（如需）
+1. 在 `src/pages/` 下创建组件 2. 在 `config/routes.ts` 添加路由 3. 在 `src/locales/` 添加菜单翻译（如需）
 
 **Q: 如何添加全局状态？**
-在 \`src/models/\` 下创建文件，导出自定义 Hook，组件中通过 \`useModel('文件名')\` 使用。
+在 `src/models/` 下创建文件，导出自定义 Hook，组件中通过 `useModel('文件名')` 使用。
 
 **Q: 如何部署？**
-\`npm run build\` 生成 \`dist/\` 目录，部署到任意静态服务器。配置 \`publicPath\` 处理非根目录部署。
+`npm run build` 生成 `dist/` 目录，部署到任意静态服务器。配置 `publicPath` 处理非根目录部署。
 
 **Q: 如何使用 OpenAPI 代码生成？**
-1. 在 \`config/config.ts\` 配置 \`openAPI\` 2. 运行 \`npm run openapi\` 3. 自动生成 \`src/services/\` 下的代码
+1. 在 `config/config.ts` 配置 `openAPI` 2. 运行 `npm run openapi` 3. 自动生成 `src/services/` 下的代码
 
-→ 更多内容见 [umi FAQ](https://umijs.org/docs/guides/faq)`;
-
-export default content;
+→ 更多内容见 [umi FAQ](https://umijs.org/docs/guides/faq)
