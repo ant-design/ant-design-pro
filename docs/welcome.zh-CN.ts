@@ -15,7 +15,7 @@ npm install
 项目提供两种模式：
 
 - **完整模式**：包含所有示例页面（Dashboard、表单、列表、权限等），适合参考学习
-- **精简模式**：仅保留登录页和基础布局，适合从零开发。运行 \`npm run simple\` 即可切换（**不可逆，请先提交代码**）
+- **精简模式**：仅保留登录页和基础布局，适合从零开发。运行 \`npm run simple\` 即可切换（**会删除示例页面和依赖，建议先提交代码**）
 
 > 💡 建议先用完整模式熟悉项目结构，再切换精简模式开始开发。
 
@@ -58,11 +58,11 @@ npm install
 | \`npm test\` | 运行测试 |
 | \`npm run test:coverage\` | 测试覆盖率 |
 | \`npm run openapi\` | 根据 OpenAPI 生成 API 代码 |
-| \`npm run simple\` | 精简模式（删除示例页面和多余依赖，不可逆） |
+| \`npm run simple\` | 精简模式（删除示例页面和多余依赖） |
 
 > 💡 \`UMI_ENV\` 用于切换环境配置，对应 \`config/proxy.ts\` 中的不同代理规则。
 
-> 💡 \`npm run simple\` 会删除示例页面（dashboard、form、list 等）和多余依赖（plots 等），替换为精简路由，适合从零开始开发。**此操作不可逆，请先提交代码。**
+> 💡 \`npm run simple\` 会删除示例页面（dashboard、form、list 等）和多余依赖（plots 等），替换为精简路由，适合从零开始开发。**建议先提交代码，以便需要时回退。**
 
 → 更多内容见 [umi 入门指南](https://umijs.org/docs/guides/getting-started)
 

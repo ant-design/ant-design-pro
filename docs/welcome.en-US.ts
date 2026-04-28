@@ -15,7 +15,7 @@ npm install
 The project offers two modes:
 
 - **Full mode**: Includes all demo pages (Dashboard, Forms, Lists, Access, etc.), great for reference and learning
-- **Simple mode**: Only keeps login page and basic layout, ideal for starting from scratch. Run \`npm run simple\` to switch (**irreversible — commit your code first**)
+- **Simple mode**: Only keeps login page and basic layout, ideal for starting from scratch. Run \`npm run simple\` to switch (**deletes demo pages and deps — commit your code first**)
 
 > 💡 Start with full mode to learn the project structure, then switch to simple mode for development.
 
@@ -58,11 +58,11 @@ The project offers two modes:
 | \`npm test\` | Run tests |
 | \`npm run test:coverage\` | Test with coverage |
 | \`npm run openapi\` | Generate API code from OpenAPI schema |
-| \`npm run simple\` | Strip demo pages and unused deps (irreversible) |
+| \`npm run simple\` | Strip demo pages and unused deps |
 
 > 💡 \`UMI_ENV\` switches environment configs, mapping to different proxy rules in \`config/proxy.ts\`.
 
-> 💡 \`npm run simple\` removes demo pages (dashboard, form, list, etc.) and unused dependencies (plots, etc.), replacing with minimal routes. Ideal for starting from scratch. **This is irreversible — commit your code first.**
+> 💡 \`npm run simple\` removes demo pages (dashboard, form, list, etc.) and unused dependencies (plots, etc.), replacing with minimal routes. Ideal for starting from scratch. **Commit your code first so you can revert if needed.**
 
 → See [umi Getting Started](https://umijs.org/docs/guides/getting-started)
 
