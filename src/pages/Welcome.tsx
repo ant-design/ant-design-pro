@@ -5,9 +5,13 @@ import enUS from '@root/docs/welcome.en-US';
 import zhCN from '@root/docs/welcome.zh-CN';
 import { getLocale, useIntl } from '@umijs/max';
 import { Card } from 'antd';
+import hljs from 'highlight.js';
+import type { marked } from 'marked';
 import React from 'react';
 
+import 'highlight.js/styles/github-gist.css';
 import './Welcome.css';
+import './Welcome-dark.css';
 
 interface InfoCardProps {
   title: string;
@@ -74,6 +78,15 @@ const mdComponents = {
   ),
 };
 
+const mdConfig: marked.MarkedOptions = {
+  highlight(code: string, lang: string) {
+    if (lang && hljs.getLanguage(lang)) {
+      return hljs.highlight(code, { language: lang }).value;
+    }
+    return hljs.highlightAuto(code).value;
+  },
+};
+
 const Welcome: React.FC = () => {
   const intl = useIntl();
   const locale = getLocale();
@@ -84,7 +97,9 @@ const Welcome: React.FC = () => {
       <div className="flex flex-col gap-6 md:flex-row">
         <div className="min-w-0 md:flex-[2] welcome-markdown">
           <Card>
-            <XMarkdown components={mdComponents}>{content}</XMarkdown>
+            <XMarkdown components={mdComponents} config={mdConfig}>
+              {content}
+            </XMarkdown>
           </Card>
         </div>
         <div className="flex flex-1 flex-col gap-4">

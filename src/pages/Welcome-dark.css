@@ -1,0 +1,49 @@
+/* Dark mode highlight.js override */
+.dark .welcome-markdown .x-markdown pre code.hljs {
+  background: var(--md-pre-bg);
+  color: #e6edf3;
+}
+
+.dark .welcome-markdown .x-markdown .hljs-keyword,
+.dark .welcome-markdown .x-markdown .hljs-selector-tag,
+.dark .welcome-markdown .x-markdown .hljs-literal,
+.dark .welcome-markdown .x-markdown .hljs-section,
+.dark .welcome-markdown .x-markdown .hljs-link {
+  color: #ff7b72;
+}
+
+.dark .welcome-markdown .x-markdown .hljs-string,
+.dark .welcome-markdown .x-markdown .hljs-title,
+.dark .welcome-markdown .x-markdown .hljs-name,
+.dark .welcome-markdown .x-markdown .hljs-type,
+.dark .welcome-markdown .x-markdown .hljs-attribute,
+.dark .welcome-markdown .x-markdown .hljs-symbol,
+.dark .welcome-markdown .x-markdown .hljs-bullet,
+.dark .welcome-markdown .x-markdown .hljs-addition,
+.dark .welcome-markdown .x-markdown .hljs-variable,
+.dark .welcome-markdown .x-markdown .hljs-template-tag,
+.dark .welcome-markdown .x-markdown .hljs-template-variable {
+  color: #a5d6ff;
+}
+
+.dark .welcome-markdown .x-markdown .hljs-comment,
+.dark .welcome-markdown .x-markdown .hljs-quote,
+.dark .welcome-markdown .x-markdown .hljs-deletion,
+.dark .welcome-markdown .x-markdown .hljs-meta {
+  color: #8b949e;
+}
+
+.dark .welcome-markdown .x-markdown .hljs-number {
+  color: #79c0ff;
+}
+
+.dark .welcome-markdown .x-markdown .hljs-built_in,
+.dark .welcome-markdown .x-markdown .hljs-class .hljs-title,
+.dark .welcome-markdown .x-markdown .hljs-title.class_ {
+  color: #ffa657;
+}
+
+.dark .welcome-markdown .x-markdown .hljs-regexp,
+.dark .welcome-markdown .x-markdown .hljs-emphasis {
+  color: #7ee787;
+}

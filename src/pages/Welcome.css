@@ -2,8 +2,8 @@
   --md-heading-weight: 600;
   --md-code-bg: rgba(0, 0, 0, 0.04);
   --md-code-border: rgba(0, 0, 0, 0.06);
-  --md-pre-bg: #1e1e2e;
-  --md-pre-color: #cdd6f4;
+  --md-pre-bg: #f6f8fa;
+  --md-pre-border: rgba(0, 0, 0, 0.06);
   --md-blockquote-bg: rgba(0, 0, 0, 0.04);
   --md-blockquote-border: #1677ff;
   --md-blockquote-color: rgba(0, 0, 0, 0.45);
@@ -17,8 +17,8 @@
 .dark .welcome-markdown .x-markdown {
   --md-code-bg: rgba(255, 255, 255, 0.08);
   --md-code-border: rgba(255, 255, 255, 0.1);
-  --md-pre-bg: #11111b;
-  --md-pre-color: #cdd6f4;
+  --md-pre-bg: #161b22;
+  --md-pre-border: rgba(255, 255, 255, 0.1);
   --md-blockquote-bg: rgba(255, 255, 255, 0.06);
   --md-blockquote-color: rgba(255, 255, 255, 0.45);
   --md-th-bg: rgba(255, 255, 255, 0.06);
@@ -79,11 +79,10 @@
 
 .welcome-markdown .x-markdown pre {
   background: var(--md-pre-bg);
-  border: none;
+  border: 1px solid var(--md-pre-border);
   border-radius: 8px;
   padding: 16px;
   overflow-x: auto;
-  color: var(--md-pre-color);
 }
 
 .welcome-markdown .x-markdown pre code {
@@ -94,7 +93,6 @@
   font-size: 13px;
   line-height: 1.6;
   border-radius: 0;
-  color: inherit;
 }
 
 .welcome-markdown .x-markdown blockquote {
