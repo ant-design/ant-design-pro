@@ -1,0 +1,169 @@
+.welcome-markdown .x-markdown {
+  --md-heading-weight: 600;
+  --md-code-bg: rgba(0, 0, 0, 0.04);
+  --md-code-border: rgba(0, 0, 0, 0.06);
+  --md-pre-bg: #f6f8fa;
+  --md-pre-border: rgba(0, 0, 0, 0.06);
+  --md-blockquote-bg: rgba(0, 0, 0, 0.04);
+  --md-blockquote-border: #1677ff;
+  --md-blockquote-color: rgba(0, 0, 0, 0.45);
+  --md-link-color: #1677ff;
+  --md-link-hover: #4096ff;
+  --md-th-bg: rgba(0, 0, 0, 0.04);
+  --md-table-border: rgba(0, 0, 0, 0.06);
+  --md-tr-hover-bg: rgba(0, 0, 0, 0.02);
+}
+
+.dark .welcome-markdown .x-markdown {
+  --md-code-bg: rgba(255, 255, 255, 0.08);
+  --md-code-border: rgba(255, 255, 255, 0.1);
+  --md-pre-bg: #161b22;
+  --md-pre-border: rgba(255, 255, 255, 0.1);
+  --md-blockquote-bg: rgba(255, 255, 255, 0.06);
+  --md-blockquote-color: rgba(255, 255, 255, 0.45);
+  --md-th-bg: rgba(255, 255, 255, 0.06);
+  --md-table-border: rgba(255, 255, 255, 0.1);
+  --md-tr-hover-bg: rgba(255, 255, 255, 0.04);
+}
+
+.welcome-markdown .x-markdown h1 {
+  font-size: 30px;
+  font-weight: var(--md-heading-weight);
+  margin: 0 0 16px;
+  line-height: 1.3;
+}
+
+.welcome-markdown .x-markdown h2 {
+  font-size: 24px;
+  font-weight: var(--md-heading-weight);
+  margin: 32px 0 8px;
+  line-height: 1.35;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--md-table-border);
+}
+
+.welcome-markdown .x-markdown h3 {
+  font-size: 20px;
+  font-weight: var(--md-heading-weight);
+  margin: 24px 0 4px;
+  line-height: 1.4;
+}
+
+.welcome-markdown .x-markdown h4 {
+  font-size: 16px;
+  font-weight: var(--md-heading-weight);
+  margin: 16px 0 4px;
+}
+
+.welcome-markdown .x-markdown h5,
+.welcome-markdown .x-markdown h6 {
+  font-size: 14px;
+  font-weight: var(--md-heading-weight);
+  margin: 16px 0 4px;
+}
+
+.welcome-markdown .x-markdown a {
+  color: var(--md-link-color);
+  text-decoration: none;
+}
+
+.welcome-markdown .x-markdown a:hover {
+  color: var(--md-link-hover);
+}
+
+.welcome-markdown .x-markdown code {
+  background: var(--md-code-bg);
+  border: 1px solid var(--md-code-border);
+  border-radius: 4px;
+}
+
+.welcome-markdown .x-markdown pre {
+  background: var(--md-pre-bg);
+  border: 1px solid var(--md-pre-border);
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.welcome-markdown .x-markdown pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  border-radius: 0;
+}
+
+.welcome-markdown .x-markdown blockquote {
+  margin: 16px 0;
+  padding: 8px 16px;
+  border-left: 4px solid var(--md-blockquote-border);
+  background: var(--md-blockquote-bg);
+  border-radius: 0 4px 4px 0;
+  color: var(--md-blockquote-color);
+}
+
+.welcome-markdown .x-markdown blockquote > p:first-child {
+  margin-top: 0;
+}
+
+.welcome-markdown .x-markdown blockquote > p:last-child {
+  margin-bottom: 0;
+}
+
+.welcome-markdown .x-markdown table:not(pre) {
+  border: 1px solid var(--md-table-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.welcome-markdown .x-markdown th {
+  background: var(--md-th-bg);
+  border-bottom: 2px solid var(--md-table-border);
+  font-weight: var(--md-heading-weight);
+}
+
+.welcome-markdown .x-markdown th,
+.welcome-markdown .x-markdown td {
+  border: 1px solid var(--md-table-border);
+}
+
+.welcome-markdown .x-markdown tr:hover td {
+  background: var(--md-tr-hover-bg);
+}
+
+.welcome-markdown .x-markdown hr {
+  border: none;
+  border-top: 1px solid var(--md-table-border);
+}
+
+.welcome-markdown .x-markdown strong {
+  font-weight: 600;
+}
+
+.welcome-markdown .x-markdown img {
+  border-radius: 8px;
+}
+
+/* Heading anchor links */
+.welcome-markdown .x-markdown .heading-anchor {
+  position: relative;
+  scroll-margin-top: 24px;
+}
+
+.welcome-markdown .x-markdown .heading-anchor .anchor-link {
+  position: absolute;
+  left: -1.2em;
+  width: 1.2em;
+  text-align: center;
+  color: var(--md-link-color);
+  font-weight: normal;
+  opacity: 0;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.welcome-markdown .x-markdown .heading-anchor:hover .anchor-link {
+  opacity: 1;
+}

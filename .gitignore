@@ -46,6 +46,9 @@ build
 # worktrees
 .worktrees
 
+# superpowers docs
+docs/superpowers
+
 # cloudflare wrangler
 .wrangler
 requestRecord.mock.js

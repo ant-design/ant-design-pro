@@ -1,5 +1,16 @@
 import { PageContainer } from '@ant-design/pro-components';
+import XMarkdown from '@ant-design/x-markdown';
+import '@ant-design/x-markdown/es/XMarkdown/index.css';
+import enUS from '@root/docs/cheatsheet.en-US';
+import zhCN from '@root/docs/cheatsheet.zh-CN';
+import { getLocale, useIntl, useModel } from '@umijs/max';
+import { Card } from 'antd';
+import hljs from 'highlight.js';
 import React from 'react';
+
+import 'highlight.js/styles/github-gist.css';
+import './Welcome.css';
+import './Welcome-dark.css';
 
 interface InfoCardProps {
   title: string;
@@ -9,71 +20,169 @@ interface InfoCardProps {
 }
 
 const InfoCard: React.FC<InfoCardProps> = ({ title, index, desc, href }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noreferrer"
-    className="block h-full rounded-lg border border-solid border-gray-200 p-5 transition-shadow hover:shadow-md dark:border-gray-700"
-  >
-    <div className="flex items-start gap-4">
-      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#1677ff] text-2xl font-bold text-white">
-        {index}
+  <a href={href} target="_blank" rel="noopener noreferrer" aria-label={title}>
+    <Card hoverable size="small">
+      <div className="flex items-start gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1677ff] text-base font-bold text-white">
+          {index}
+        </div>
+        <div className="min-w-0 flex-1">
+          <h4 className="mb-1 mt-0 text-sm font-semibold">{title}</h4>
+          <p className="mb-0 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+            {desc}
+          </p>
+        </div>
       </div>
-      <div className="min-w-0 flex-1">
-        <h4 className="mb-2 mt-0 text-base font-semibold">{title}</h4>
-        <p className="mb-0 line-clamp-2 text-sm text-gray-500 dark:text-gray-400">
-          {desc}
-        </p>
-      </div>
-    </div>
+    </Card>
   </a>
 );
 
-const Welcome: React.FC = () => (
-  <PageContainer>
-    <div className="rounded-lg border border-solid border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-[#141414]">
-      <div className="mb-10 text-center">
-        <h2 className="mb-4 text-2xl font-semibold">欢迎使用 Ant Design Pro</h2>
-        <p className="mx-auto max-w-[600px] text-base text-gray-500 dark:text-gray-400">
-          Ant Design Pro 是一个整合了 umi，Ant Design 和
-          ProComponents的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
-        </p>
-      </div>
+const mdContent: Record<string, string> = {
+  'zh-CN': zhCN,
+  'en-US': enUS,
+};
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        <InfoCard
-          index={1}
-          href="https://umijs.org/docs/introduce/introduce"
-          title="了解 umi"
-          desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
-        />
-        <InfoCard
-          index={2}
-          title="了解 ant design"
-          href="https://ant.design"
-          desc="antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。"
-        />
-        <InfoCard
-          index={3}
-          title="了解 Pro Components"
-          href="https://procomponents.ant.design"
-          desc="ProComponents 是一个基于 Ant Design 做了更高抽象的模板组件，以 一个组件就是一个页面为开发理念，为中后台开发带来更好的体验。"
-        />
-      </div>
+// XMarkdown Renderer passes class names via non-standard props
+interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  tag?: string;
+  domNode?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  classname?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  class?: any;
+}
 
-      <div className="mt-10 border-t border-gray-100 pt-6 text-center text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
-        更多文档请访问：{' '}
-        <a
-          href="https://pro.ant.design"
-          target="_blank"
-          rel="noreferrer"
-          className="text-[#1677ff] hover:text-[#4096ff]"
-        >
-          Pro 官方文档
-        </a>
+const Heading: React.FC<HeadingProps> = ({
+  tag: Tag = 'h1',
+  children,
+  className,
+  classname,
+  class: htmlClass,
+}) => {
+  // Merge all possible class sources from XMarkdown Renderer
+  const allClasses = [className, classname, htmlClass]
+    .filter(Boolean)
+    .join(' ');
+  // Extract text content from children for id generation
+  const textContent = React.Children.toArray(children)
+    .map((child) => (typeof child === 'string' ? child : ''))
+    .join('');
+  const id = textContent
+    .replace(/[^\w\s一-鿿-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+  const mergedClass = `heading-anchor ${allClasses}`.trim();
+  return (
+    // @ts-expect-error dynamic tag
+    <Tag id={id} className={mergedClass}>
+      <a href={`#${id}`} className="anchor-link">
+        #
+      </a>
+      {children}
+    </Tag>
+  );
+};
+
+const mdComponents = {
+  h1: (props: HeadingProps) => <Heading tag="h1" {...props} />,
+  h2: (props: HeadingProps) => <Heading tag="h2" {...props} />,
+  h3: (props: HeadingProps) => <Heading tag="h3" {...props} />,
+  h4: (props: HeadingProps) => <Heading tag="h4" {...props} />,
+};
+
+const mdConfig = {
+  renderer: {
+    code({ text, lang }: { text: string; lang?: string }) {
+      const langString = (lang || '').trim();
+      let highlighted: string;
+      if (langString && hljs.getLanguage(langString)) {
+        highlighted = hljs.highlight(text.replace(/\n$/, ''), {
+          language: langString,
+        }).value;
+      } else {
+        highlighted = hljs.highlightAuto(text.replace(/\n$/, '')).value;
+      }
+      const classAttr = langString
+        ? ` class="hljs language-${langString}"`
+        : ' class="hljs"';
+      return `<pre><code${classAttr}>${highlighted}\n</code></pre>\n`;
+    },
+  },
+};
+
+const infoCards = [
+  {
+    index: 1,
+    href: 'https://umijs.org/docs/introduce/introduce',
+    titleId: 'pages.welcome.infoCard.umi.title',
+    titleDefault: 'Learn umi',
+    descId: 'pages.welcome.infoCard.umi.desc',
+    descDefault:
+      'umi is an extensible enterprise-level frontend framework based on routing, supporting both config-based and convention-based routes.',
+  },
+  {
+    index: 2,
+    href: 'https://ant.design',
+    titleId: 'pages.welcome.infoCard.antd.title',
+    titleDefault: 'Learn Ant Design',
+    descId: 'pages.welcome.infoCard.antd.desc',
+    descDefault:
+      'antd is a React UI component library based on the Ant Design system, mainly for enterprise-level mid-end products.',
+  },
+  {
+    index: 3,
+    href: 'https://procomponents.ant.design',
+    titleId: 'pages.welcome.infoCard.procomponents.title',
+    titleDefault: 'Learn Pro Components',
+    descId: 'pages.welcome.infoCard.procomponents.desc',
+    descDefault:
+      'ProComponents provides higher-abstraction template components on top of Ant Design, with one-component-one-page philosophy.',
+  },
+] as const;
+
+const Welcome: React.FC = () => {
+  const intl = useIntl();
+  const locale = getLocale();
+  const normalizedLocale = locale.toLowerCase();
+  const content =
+    mdContent[locale] ??
+    (normalizedLocale.startsWith('zh') ? mdContent['zh-CN'] : mdContent['en-US']);
+  const { initialState } = useModel('@@initialState');
+  const isDark = initialState?.settings?.navTheme === 'realDark';
+
+  return (
+    <PageContainer>
+      <div
+        className={`flex flex-col gap-6 md:flex-row${isDark ? ' dark' : ''}`}
+      >
+        <div className="min-w-0 md:flex-[2] welcome-markdown">
+          <Card>
+            <XMarkdown components={mdComponents} config={mdConfig}>
+              {content}
+            </XMarkdown>
+          </Card>
+        </div>
+        <div className="flex flex-1 flex-col gap-4">
+          {infoCards.map((card) => (
+            <InfoCard
+              key={card.href}
+              index={card.index}
+              href={card.href}
+              title={intl.formatMessage({
+                id: card.titleId,
+                defaultMessage: card.titleDefault,
+              })}
+              desc={intl.formatMessage({
+                id: card.descId,
+                defaultMessage: card.descDefault,
+              })}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  </PageContainer>
-);
+    </PageContainer>
+  );
+};
 
 export default Welcome;
