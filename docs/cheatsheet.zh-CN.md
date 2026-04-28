@@ -31,7 +31,7 @@ npm install                                                # 更新依赖
 
 **目录结构：**
 
-```
+```text
 ├── config/           # 配置文件（路由、代理、主题）
 │   ├── config.ts     # 主配置
 │   ├── routes.ts     # 路由配置
@@ -194,6 +194,8 @@ const { data, loading, error } = useRequest(getUserInfo);
 ```tsx
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
+const queryClient = useQueryClient();
+
 // 查询
 const { data, isLoading } = useQuery({
   queryKey: ['user', id],
@@ -291,13 +293,14 @@ export default function access(initialState: { currentUser?: API.CurrentUser }) 
 ```tsx
 import { Access, useAccess } from '@umijs/max';
 
+const access = useAccess();
+
 // 声明式
 <Access accessible={access.canAdmin}>
   <AdminPanel />
 </Access>
 
 // 命令式
-const access = useAccess();
 if (access.canAdmin) { /* ... */ }
 ```
 
@@ -317,7 +320,7 @@ locale: {
 
 **文件结构：**
 
-```
+```text
 src/locales/
 ├── zh-CN.ts        # 中文入口
 ├── zh-CN/

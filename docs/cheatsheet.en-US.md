@@ -31,7 +31,7 @@ npm install                                                # Update dependencies
 
 **Directory structure:**
 
-```
+```text
 ├── config/           # Configuration (routes, proxy, theme)
 │   ├── config.ts     # Main config
 │   ├── routes.ts     # Route definitions
@@ -194,6 +194,8 @@ const { data, loading, error } = useRequest(getUserInfo);
 ```tsx
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
+const queryClient = useQueryClient();
+
 // Query
 const { data, isLoading } = useQuery({
   queryKey: ['user', id],
@@ -291,13 +293,14 @@ export default function access(initialState: { currentUser?: API.CurrentUser }) 
 ```tsx
 import { Access, useAccess } from '@umijs/max';
 
+const access = useAccess();
+
 // Declarative
 <Access accessible={access.canAdmin}>
   <AdminPanel />
 </Access>
 
 // Imperative
-const access = useAccess();
 if (access.canAdmin) { /* ... */ }
 ```
 
@@ -317,7 +320,7 @@ locale: {
 
 **File structure:**
 
-```
+```text
 src/locales/
 ├── zh-CN.ts        # Chinese entry
 ├── zh-CN/
