@@ -1,5 +1,10 @@
 import { PageContainer } from '@ant-design/pro-components';
-import React from 'react';
+import XMarkdown from '@ant-design/x-markdown';
+import { useLocale } from '@umijs/max';
+import React, { useEffect, useState } from 'react';
+
+import enUS from '../../docs/welcome.en-US.md?raw';
+import zhCN from '../../docs/welcome.zh-CN.md?raw';
 
 interface InfoCardProps {
   title: string;
@@ -29,51 +34,68 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, index, desc, href }) => (
   </a>
 );
 
-const Welcome: React.FC = () => (
-  <PageContainer>
-    <div className="rounded-lg border border-solid border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-[#141414]">
-      <div className="mb-10 text-center">
-        <h2 className="mb-4 text-2xl font-semibold">欢迎使用 Ant Design Pro</h2>
-        <p className="mx-auto max-w-[600px] text-base text-gray-500 dark:text-gray-400">
-          Ant Design Pro 是一个整合了 umi，Ant Design 和
-          ProComponents的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
-        </p>
-      </div>
+const mdContent: Record<string, string> = {
+  'zh-CN': zhCN,
+  'en-US': enUS,
+};
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        <InfoCard
-          index={1}
-          href="https://umijs.org/docs/introduce/introduce"
-          title="了解 umi"
-          desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
-        />
-        <InfoCard
-          index={2}
-          title="了解 ant design"
-          href="https://ant.design"
-          desc="antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。"
-        />
-        <InfoCard
-          index={3}
-          title="了解 Pro Components"
-          href="https://procomponents.ant.design"
-          desc="ProComponents 是一个基于 Ant Design 做了更高抽象的模板组件，以 一个组件就是一个页面为开发理念，为中后台开发带来更好的体验。"
-        />
-      </div>
+const Welcome: React.FC = () => {
+  const { locale } = useLocale();
+  const [content, setContent] = useState(
+    mdContent[locale] || mdContent['zh-CN'],
+  );
 
-      <div className="mt-10 border-t border-gray-100 pt-6 text-center text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
-        更多文档请访问：{' '}
-        <a
-          href="https://pro.ant.design"
-          target="_blank"
-          rel="noreferrer"
-          className="text-[#1677ff] hover:text-[#4096ff]"
-        >
-          Pro 官方文档
-        </a>
+  useEffect(() => {
+    setContent(mdContent[locale] || mdContent['zh-CN']);
+  }, [locale]);
+
+  return (
+    <PageContainer>
+      <div className="flex gap-6">
+        <div className="min-w-0 flex-[2]">
+          <div className="rounded-lg border border-solid border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-[#141414]">
+            <XMarkdown>{content}</XMarkdown>
+          </div>
+        </div>
+        <div className="flex flex-[1] flex-col gap-6">
+          <InfoCard
+            index={1}
+            href="https://umijs.org/docs/introduce/introduce"
+            title={locale === 'zh-CN' ? '了解 umi' : 'Learn umi'}
+            desc={
+              locale === 'zh-CN'
+                ? 'umi 是一个可扩展的企业级前端应用框架，以路由为基础，支持配置式路由和约定式路由。'
+                : 'umi is an extensible enterprise-level frontend framework based on routing, supporting both config-based and convention-based routes.'
+            }
+          />
+          <InfoCard
+            index={2}
+            title={locale === 'zh-CN' ? '了解 Ant Design' : 'Learn Ant Design'}
+            href="https://ant.design"
+            desc={
+              locale === 'zh-CN'
+                ? 'antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。'
+                : 'antd is a React UI component library based on the Ant Design system, mainly for enterprise-level mid-end products.'
+            }
+          />
+          <InfoCard
+            index={3}
+            title={
+              locale === 'zh-CN'
+                ? '了解 Pro Components'
+                : 'Learn Pro Components'
+            }
+            href="https://procomponents.ant.design"
+            desc={
+              locale === 'zh-CN'
+                ? 'ProComponents 是基于 Ant Design 的高抽象模板组件，以一个组件就是一个页面为开发理念。'
+                : 'ProComponents provides higher-abstraction template components on top of Ant Design, with one-component-one-page philosophy.'
+            }
+          />
+        </div>
       </div>
-    </div>
-  </PageContainer>
-);
+    </PageContainer>
+  );
+};
 
 export default Welcome;
