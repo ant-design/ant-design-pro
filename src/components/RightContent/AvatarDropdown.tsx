@@ -10,6 +10,7 @@ import { createStyles } from 'antd-style';
 import React from 'react';
 import { flushSync } from 'react-dom';
 import { outLogin } from '@/services/ant-design-pro/api';
+import { removeToken } from '@/utils/auth';
 import HeaderDropdown from '../HeaderDropdown';
 
 export type GlobalHeaderRightProps = {
@@ -49,6 +50,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
    * 退出登录，并且将当前的 url 保存
    */
   const loginOut = async () => {
+    removeToken();
     await outLogin();
     const { search, pathname } = window.location;
     const urlParams = new URL(window.location.href).searchParams;

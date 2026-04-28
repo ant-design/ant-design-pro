@@ -18,6 +18,7 @@ import {
   SelectLang,
 } from '@/components';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
+import { getToken } from '@/utils/auth';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 
@@ -45,19 +46,22 @@ export async function getInitialState(): Promise<{
     }
     return undefined;
   };
-  // 如果不是登录页面，执行
   const { location } = history;
   if (
     ![loginPath, '/user/register', '/user/register-result'].includes(
       location.pathname,
     )
   ) {
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: defaultSettings as Partial<LayoutSettings>,
-    };
+    const token = getToken();
+    if (token) {
+      const currentUser = await fetchUserInfo();
+      return {
+        fetchUserInfo,
+        currentUser,
+        settings: defaultSettings as Partial<LayoutSettings>,
+      };
+    }
+    history.push(loginPath);
   }
   return {
     fetchUserInfo,

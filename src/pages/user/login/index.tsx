@@ -26,6 +26,7 @@ import { flushSync } from 'react-dom';
 import { Footer } from '@/components';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
+import { setToken } from '@/utils/auth';
 import Settings from '../../../../config/defaultSettings';
 
 const useStyles = createStyles(({ token }) => {
@@ -161,6 +162,9 @@ const Login: React.FC = () => {
           defaultMessage: '登录成功！',
         });
         message.success(defaultLoginSuccessMessage);
+        if (msg.token) {
+          setToken(msg.token, values.autoLogin ?? false);
+        }
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
         const redirectUrl = getSafeRedirectUrl(urlParams.get('redirect'));
