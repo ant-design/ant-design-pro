@@ -10,8 +10,9 @@ export default async (): Promise<any> => {
     ...config,
     testPathIgnorePatterns: ['/node_modules/', '/.worktrees/'],
     moduleNameMapper: {
-      ...(config.moduleNameMapper || {}),
+      '\\.md$': '<rootDir>/tests/__mocks__/raw.js',
       '^mermaid$': '<rootDir>/tests/__mocks__/mermaid.js',
+      ...(config.moduleNameMapper || {}),
     },
     testEnvironmentOptions: {
       ...(config?.testEnvironmentOptions || {}),

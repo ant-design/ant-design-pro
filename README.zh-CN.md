@@ -18,10 +18,9 @@ Language : [🇺🇸](./README.md) | 🇨🇳
 
 - 预览：http://preview.pro.ant.design
 - 首页：http://pro.ant.design/index-cn
-- 使用文档：http://pro.ant.design/docs/getting-started-cn
-- 速查手册：[docs/cheatsheet.zh-CN.md](./docs/cheatsheet.zh-CN.md)
+- 使用文档：[docs/cheatsheet.zh-CN.md](./docs/cheatsheet.zh-CN.md)
 - 更新日志: http://pro.ant.design/docs/changelog-cn
-- 常见问题：http://pro.ant.design/docs/faq-cn
+- 常见问题：[docs/cheatsheet.zh-CN.md#faq](./docs/cheatsheet.zh-CN.md#faq)
 
 ## 5.0 已经发布! 🎉🎉🎉
 
