@@ -4,6 +4,7 @@ import '@ant-design/x-markdown/es/XMarkdown/index.css';
 import enUS from '@root/docs/welcome.en-US';
 import zhCN from '@root/docs/welcome.zh-CN';
 import { getLocale, useIntl } from '@umijs/max';
+import { Card } from 'antd';
 import React from 'react';
 
 import './Welcome.css';
@@ -16,24 +17,20 @@ interface InfoCardProps {
 }
 
 const InfoCard: React.FC<InfoCardProps> = ({ title, index, desc, href }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label={title}
-    className="block h-full rounded-lg border border-solid border-gray-200 p-5 transition-shadow hover:shadow-md dark:border-gray-700"
-  >
-    <div className="flex items-start gap-4">
-      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#1677ff] text-2xl font-bold text-white">
-        {index}
+  <a href={href} target="_blank" rel="noopener noreferrer" aria-label={title}>
+    <Card hoverable size="small">
+      <div className="flex items-start gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1677ff] text-base font-bold text-white">
+          {index}
+        </div>
+        <div className="min-w-0 flex-1">
+          <h4 className="mb-1 mt-0 text-sm font-semibold">{title}</h4>
+          <p className="mb-0 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+            {desc}
+          </p>
+        </div>
       </div>
-      <div className="min-w-0 flex-1">
-        <h4 className="mb-2 mt-0 text-base font-semibold">{title}</h4>
-        <p className="mb-0 line-clamp-2 text-sm text-gray-500 dark:text-gray-400">
-          {desc}
-        </p>
-      </div>
-    </div>
+    </Card>
   </a>
 );
 
@@ -51,11 +48,11 @@ const Welcome: React.FC = () => {
     <PageContainer>
       <div className="flex flex-col gap-6 md:flex-row">
         <div className="min-w-0 md:flex-[2] welcome-markdown">
-          <div className="rounded-lg border border-solid border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-[#141414]">
+          <Card>
             <XMarkdown>{content}</XMarkdown>
-          </div>
+          </Card>
         </div>
-        <div className="flex flex-1 flex-col gap-6">
+        <div className="flex flex-1 flex-col gap-4">
           <InfoCard
             index={1}
             href="https://umijs.org/docs/introduce/introduce"
