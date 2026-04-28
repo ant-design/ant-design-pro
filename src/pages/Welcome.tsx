@@ -3,10 +3,9 @@ import XMarkdown from '@ant-design/x-markdown';
 import '@ant-design/x-markdown/es/XMarkdown/index.css';
 import enUS from '@root/docs/welcome.en-US';
 import zhCN from '@root/docs/welcome.zh-CN';
-import { getLocale, useIntl } from '@umijs/max';
+import { getLocale, useIntl, useModel } from '@umijs/max';
 import { Card } from 'antd';
 import hljs from 'highlight.js';
-import type { marked } from 'marked';
 import React from 'react';
 
 import 'highlight.js/styles/github-gist.css';
@@ -43,15 +42,22 @@ const mdContent: Record<string, string> = {
   'en-US': enUS,
 };
 
-const Heading: React.FC<
-  React.HTMLAttributes<HTMLHeadingElement> & { tag?: string; domNode?: unknown }
-> = ({
+// XMarkdown Renderer passes class names via non-standard props
+interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  tag?: string;
+  domNode?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  classname?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  class?: any;
+}
+
+const Heading: React.FC<HeadingProps> = ({
   tag: Tag = 'h1',
   children,
   className,
   classname,
   class: htmlClass,
-  ...rest
 }) => {
   // Merge all possible class sources from XMarkdown Renderer
   const allClasses = [className, classname, htmlClass]
@@ -79,18 +85,10 @@ const Heading: React.FC<
 };
 
 const mdComponents = {
-  h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading tag="h1" {...props} />
-  ),
-  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading tag="h2" {...props} />
-  ),
-  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading tag="h3" {...props} />
-  ),
-  h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Heading tag="h4" {...props} />
-  ),
+  h1: (props: HeadingProps) => <Heading tag="h1" {...props} />,
+  h2: (props: HeadingProps) => <Heading tag="h2" {...props} />,
+  h3: (props: HeadingProps) => <Heading tag="h3" {...props} />,
+  h4: (props: HeadingProps) => <Heading tag="h4" {...props} />,
 };
 
 const mdConfig = {
@@ -117,10 +115,14 @@ const Welcome: React.FC = () => {
   const intl = useIntl();
   const locale = getLocale();
   const content = mdContent[locale] || mdContent['zh-CN'];
+  const { initialState } = useModel('@@initialState');
+  const isDark = initialState?.settings?.navTheme === 'realDark';
 
   return (
     <PageContainer>
-      <div className="flex flex-col gap-6 md:flex-row">
+      <div
+        className={`flex flex-col gap-6 md:flex-row${isDark ? ' dark' : ''}`}
+      >
         <div className="min-w-0 md:flex-[2] welcome-markdown">
           <Card>
             <XMarkdown components={mdComponents} config={mdConfig}>

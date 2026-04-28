@@ -1,5 +1,7 @@
 const content = `# Ant Design Pro Cheatsheet
 
+![Ant Design Pro](https://mdn.alipayobjects.com/huamei_fkc4p0/afts/img/A*EX3ISYC2ghEAAAAAddAAAAgAeobDAQ/original)
+
 ## 快速开始
 
 **环境要求：** Node.js >= 20
