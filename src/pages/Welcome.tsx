@@ -1,10 +1,9 @@
 import { PageContainer } from '@ant-design/pro-components';
 import XMarkdown from '@ant-design/x-markdown';
-import { useLocale } from '@umijs/max';
-import React, { useEffect, useState } from 'react';
-
-import enUS from '../../docs/welcome.en-US.md?raw';
-import zhCN from '../../docs/welcome.zh-CN.md?raw';
+import enUS from '@root/docs/welcome.en-US';
+import zhCN from '@root/docs/welcome.zh-CN';
+import { useIntl, useLocale } from '@umijs/max';
+import React from 'react';
 
 interface InfoCardProps {
   title: string;
@@ -17,7 +16,8 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, index, desc, href }) => (
   <a
     href={href}
     target="_blank"
-    rel="noreferrer"
+    rel="noopener noreferrer"
+    aria-label={title}
     className="block h-full rounded-lg border border-solid border-gray-200 p-5 transition-shadow hover:shadow-md dark:border-gray-700"
   >
     <div className="flex items-start gap-4">
@@ -41,56 +41,56 @@ const mdContent: Record<string, string> = {
 
 const Welcome: React.FC = () => {
   const { locale } = useLocale();
-  const [content, setContent] = useState(
-    mdContent[locale] || mdContent['zh-CN'],
-  );
-
-  useEffect(() => {
-    setContent(mdContent[locale] || mdContent['zh-CN']);
-  }, [locale]);
+  const intl = useIntl();
+  const content = mdContent[locale] || mdContent['zh-CN'];
 
   return (
     <PageContainer>
-      <div className="flex gap-6">
-        <div className="min-w-0 flex-[2]">
+      <div className="flex flex-col gap-6 md:flex-row">
+        <div className="min-w-0 md:flex-[2]">
           <div className="rounded-lg border border-solid border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-[#141414]">
             <XMarkdown>{content}</XMarkdown>
           </div>
         </div>
-        <div className="flex flex-[1] flex-col gap-6">
+        <div className="flex flex-1 flex-col gap-6">
           <InfoCard
             index={1}
             href="https://umijs.org/docs/introduce/introduce"
-            title={locale === 'zh-CN' ? '了解 umi' : 'Learn umi'}
-            desc={
-              locale === 'zh-CN'
-                ? 'umi 是一个可扩展的企业级前端应用框架，以路由为基础，支持配置式路由和约定式路由。'
-                : 'umi is an extensible enterprise-level frontend framework based on routing, supporting both config-based and convention-based routes.'
-            }
+            title={intl.formatMessage({
+              id: 'pages.welcome.infoCard.umi.title',
+              defaultMessage: 'Learn umi',
+            })}
+            desc={intl.formatMessage({
+              id: 'pages.welcome.infoCard.umi.desc',
+              defaultMessage:
+                'umi is an extensible enterprise-level frontend framework based on routing, supporting both config-based and convention-based routes.',
+            })}
           />
           <InfoCard
             index={2}
-            title={locale === 'zh-CN' ? '了解 Ant Design' : 'Learn Ant Design'}
             href="https://ant.design"
-            desc={
-              locale === 'zh-CN'
-                ? 'antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。'
-                : 'antd is a React UI component library based on the Ant Design system, mainly for enterprise-level mid-end products.'
-            }
+            title={intl.formatMessage({
+              id: 'pages.welcome.infoCard.antd.title',
+              defaultMessage: 'Learn Ant Design',
+            })}
+            desc={intl.formatMessage({
+              id: 'pages.welcome.infoCard.antd.desc',
+              defaultMessage:
+                'antd is a React UI component library based on the Ant Design system, mainly for enterprise-level mid-end products.',
+            })}
           />
           <InfoCard
             index={3}
-            title={
-              locale === 'zh-CN'
-                ? '了解 Pro Components'
-                : 'Learn Pro Components'
-            }
             href="https://procomponents.ant.design"
-            desc={
-              locale === 'zh-CN'
-                ? 'ProComponents 是基于 Ant Design 的高抽象模板组件，以一个组件就是一个页面为开发理念。'
-                : 'ProComponents provides higher-abstraction template components on top of Ant Design, with one-component-one-page philosophy.'
-            }
+            title={intl.formatMessage({
+              id: 'pages.welcome.infoCard.procomponents.title',
+              defaultMessage: 'Learn Pro Components',
+            })}
+            desc={intl.formatMessage({
+              id: 'pages.welcome.infoCard.procomponents.desc',
+              defaultMessage:
+                'ProComponents provides higher-abstraction template components on top of Ant Design, with one-component-one-page philosophy.',
+            })}
           />
         </div>
       </div>
