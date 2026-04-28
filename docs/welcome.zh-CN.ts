@@ -7,8 +7,8 @@ const content = `# Ant Design Pro Cheatsheet
 **创建项目：**
 
 \`\`\`bash
-npx create-umi@latest
-# 选择 Ant Design Pro 模板
+git clone --depth 1 https://github.com/ant-design/ant-design-pro.git my-project
+cd my-project
 npm install
 \`\`\`
 
