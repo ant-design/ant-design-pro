@@ -152,7 +152,8 @@
   scroll-margin-top: 24px;
 }
 
-.welcome-markdown .x-markdown .heading-anchor .anchor-link {
+.welcome-markdown .x-markdown .heading-anchor::before {
+  content: "#";
   position: absolute;
   left: -1.2em;
   color: var(--md-link-color);
@@ -162,7 +163,6 @@
   text-decoration: none;
 }
 
-.welcome-markdown .x-markdown .heading-anchor:hover .anchor-link,
-.welcome-markdown .x-markdown .heading-anchor .anchor-link:focus {
+.welcome-markdown .x-markdown .heading-anchor:hover::before {
   opacity: 1;
 }

@@ -55,9 +55,6 @@ const Heading: React.FC<
   return (
     // @ts-expect-error dynamic tag
     <Tag id={id} className="heading-anchor" {...rest}>
-      <a href={`#${id}`} className="anchor-link" tabIndex={-1}>
-        #
-      </a>
       {children}
     </Tag>
   );
@@ -78,12 +75,23 @@ const mdComponents = {
   ),
 };
 
-const mdConfig: marked.MarkedOptions = {
-  highlight(code: string, lang: string) {
-    if (lang && hljs.getLanguage(lang)) {
-      return hljs.highlight(code, { language: lang }).value;
-    }
-    return hljs.highlightAuto(code).value;
+const mdConfig = {
+  renderer: {
+    code({ text, lang }: { text: string; lang?: string }) {
+      const langString = (lang || '').trim();
+      let highlighted: string;
+      if (langString && hljs.getLanguage(langString)) {
+        highlighted = hljs.highlight(text.replace(/\n$/, ''), {
+          language: langString,
+        }).value;
+      } else {
+        highlighted = hljs.highlightAuto(text.replace(/\n$/, '')).value;
+      }
+      const classAttr = langString
+        ? ` class="hljs language-${langString}"`
+        : ' class="hljs"';
+      return `<pre><code${classAttr}>${highlighted}\n</code></pre>\n`;
+    },
   },
 };
 
