@@ -197,11 +197,12 @@ export default defineConfig({
     module: {
       rules: {
         '*.md': {
-          type: 'raw',
+          loaders: [{ loader: join(__dirname, 'md-raw-loader.cjs') }],
+          as: '*.js',
         },
       },
     },
-  } as Record<string, unknown>,
+  },
   requestRecord: {},
   exportStatic: {},
   define: {
