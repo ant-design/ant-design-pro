@@ -154,7 +154,7 @@
 
 .welcome-markdown .x-markdown .heading-anchor .anchor-link {
   position: absolute;
-  left: -1.5em;
+  left: -1.2em;
   width: 1.2em;
   text-align: center;
   color: var(--md-link-color);
