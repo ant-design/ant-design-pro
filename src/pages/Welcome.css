@@ -2,8 +2,8 @@
   --md-heading-weight: 600;
   --md-code-bg: rgba(0, 0, 0, 0.04);
   --md-code-border: rgba(0, 0, 0, 0.06);
-  --md-pre-bg: rgba(0, 0, 0, 0.04);
-  --md-pre-border: rgba(0, 0, 0, 0.06);
+  --md-pre-bg: #1e1e2e;
+  --md-pre-color: #cdd6f4;
   --md-blockquote-bg: rgba(0, 0, 0, 0.04);
   --md-blockquote-border: #1677ff;
   --md-blockquote-color: rgba(0, 0, 0, 0.45);
@@ -17,8 +17,8 @@
 .dark .welcome-markdown .x-markdown {
   --md-code-bg: rgba(255, 255, 255, 0.08);
   --md-code-border: rgba(255, 255, 255, 0.1);
-  --md-pre-bg: rgba(255, 255, 255, 0.08);
-  --md-pre-border: rgba(255, 255, 255, 0.1);
+  --md-pre-bg: #11111b;
+  --md-pre-color: #cdd6f4;
   --md-blockquote-bg: rgba(255, 255, 255, 0.06);
   --md-blockquote-color: rgba(255, 255, 255, 0.45);
   --md-th-bg: rgba(255, 255, 255, 0.06);
@@ -79,10 +79,11 @@
 
 .welcome-markdown .x-markdown pre {
   background: var(--md-pre-bg);
-  border: 1px solid var(--md-pre-border);
+  border: none;
   border-radius: 8px;
   padding: 16px;
   overflow-x: auto;
+  color: var(--md-pre-color);
 }
 
 .welcome-markdown .x-markdown pre code {
@@ -93,6 +94,7 @@
   font-size: 13px;
   line-height: 1.6;
   border-radius: 0;
+  color: inherit;
 }
 
 .welcome-markdown .x-markdown blockquote {
@@ -144,4 +146,25 @@
 
 .welcome-markdown .x-markdown img {
   border-radius: 8px;
+}
+
+/* Heading anchor links */
+.welcome-markdown .x-markdown .heading-anchor {
+  position: relative;
+  scroll-margin-top: 24px;
+}
+
+.welcome-markdown .x-markdown .heading-anchor .anchor-link {
+  position: absolute;
+  left: -1.2em;
+  color: var(--md-link-color);
+  font-weight: normal;
+  opacity: 0;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.welcome-markdown .x-markdown .heading-anchor:hover .anchor-link,
+.welcome-markdown .x-markdown .heading-anchor .anchor-link:focus {
+  opacity: 1;
 }

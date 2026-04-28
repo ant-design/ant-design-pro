@@ -39,6 +39,41 @@ const mdContent: Record<string, string> = {
   'en-US': enUS,
 };
 
+const Heading: React.FC<
+  React.HTMLAttributes<HTMLHeadingElement> & { tag?: string }
+> = ({ tag: Tag = 'h1', children, ...rest }) => {
+  const text = String(children);
+  const id = text
+    .replace(/[^\w\s\u4e00-\u9fff-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+  return (
+    // @ts-expect-error dynamic tag
+    <Tag id={id} className="heading-anchor" {...rest}>
+      <a href={`#${id}`} className="anchor-link" tabIndex={-1}>
+        #
+      </a>
+      {children}
+    </Tag>
+  );
+};
+
+const mdComponents = {
+  h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <Heading tag="h1" {...props} />
+  ),
+  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <Heading tag="h2" {...props} />
+  ),
+  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <Heading tag="h3" {...props} />
+  ),
+  h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <Heading tag="h4" {...props} />
+  ),
+};
+
 const Welcome: React.FC = () => {
   const intl = useIntl();
   const locale = getLocale();
@@ -49,7 +84,7 @@ const Welcome: React.FC = () => {
       <div className="flex flex-col gap-6 md:flex-row">
         <div className="min-w-0 md:flex-[2] welcome-markdown">
           <Card>
-            <XMarkdown>{content}</XMarkdown>
+            <XMarkdown components={mdComponents}>{content}</XMarkdown>
           </Card>
         </div>
         <div className="flex flex-1 flex-col gap-4">
