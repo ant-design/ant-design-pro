@@ -55,13 +55,13 @@ npm install                                                # 更新依赖
 | 命令 | 说明 |
 |------|------|
 | `npm start` | 启动开发服务器（UMI_ENV=dev，带 Mock） |
-| `npm run dev` | 启动开发服务器（无 Mock） |
-| `npm run start:dev` | 同 dev，UMI_ENV=dev，无 Mock |
+| `npm run dev` | 启动开发服务器（UMI_ENV=dev，无 Mock） |
 | `npm run start:no-mock` | 无 Mock 启动 |
 | `npm run start:pre` | 预发布环境启动 |
 | `npm run start:test` | 测试环境启动 |
 | `npm run build` | 构建生产产物 |
-| `npm run preview` | 构建并本地预览（端口 8000） |
+| `npm run preview` | 本地预览生产产物（端口 8000） |
+| `npm run preview:build` | 构建并本地预览（端口 8000） |
 | `npm run analyze` | 构建产物体积分析 |
 | `npm run lint` | 代码检查（Biome + TypeScript） |
 | `npm run biome` | Biome 自动修复 |

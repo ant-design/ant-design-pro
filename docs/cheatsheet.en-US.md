@@ -55,13 +55,13 @@ npm install                                                # Update dependencies
 | Command | Description |
 |---------|-------------|
 | `npm start` | Start dev server (UMI_ENV=dev, with Mock) |
-| `npm run dev` | Start dev server (no Mock) |
-| `npm run start:dev` | Same as dev, UMI_ENV=dev, no Mock |
+| `npm run dev` | Start dev server (UMI_ENV=dev, no Mock) |
 | `npm run start:no-mock` | Start without Mock |
 | `npm run start:pre` | Pre-production environment |
 | `npm run start:test` | Test environment |
 | `npm run build` | Build for production |
-| `npm run preview` | Build and preview locally (port 8000) |
+| `npm run preview` | Preview production build locally (port 8000) |
+| `npm run preview:build` | Build and preview (port 8000) |
 | `npm run analyze` | Analyze bundle size |
 | `npm run lint` | Lint (Biome + TypeScript) |
 | `npm run biome` | Auto-fix with Biome |
