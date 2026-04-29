@@ -82,7 +82,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
 
   const { currentUser } = initialState;
 
-  if (!currentUser?.name) {
+  if (!currentUser) {
     return <Spin size="small" />;
   }
 

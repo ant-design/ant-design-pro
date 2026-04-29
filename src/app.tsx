@@ -26,6 +26,7 @@ export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  settingDrawerOpen?: boolean;
 }> {
   const fetchUserInfo = async () => {
     try {
@@ -50,11 +51,13 @@ export async function getInitialState(): Promise<{
       fetchUserInfo,
       currentUser,
       settings: defaultSettings as Partial<LayoutSettings>,
+      settingDrawerOpen: false,
     };
   }
   return {
     fetchUserInfo,
     settings: defaultSettings as Partial<LayoutSettings>,
+    settingDrawerOpen: false,
   };
 }
 
