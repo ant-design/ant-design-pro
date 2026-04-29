@@ -123,7 +123,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
           {
             key: 'lang',
             icon: <GlobalOutlined />,
-            label: `${localeLabelMap[currentLocale]?.emoji ?? ''} ${localeLabelMap[currentLocale]?.label ?? currentLocale}`,
+            label: localeLabelMap[currentLocale]?.label ?? currentLocale,
             children: supportLocales.map((locale) => ({
               key: `lang-${locale}`,
               label: `${localeLabelMap[locale]?.emoji ?? ''} ${localeLabelMap[locale]?.label ?? locale}`,
@@ -143,11 +143,13 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
 
   return (
     <HeaderDropdown
+      placement="bottomRight"
       menu={{
         selectedKeys: [`lang-${currentLocale}`],
         onClick: onMenuClick,
         items: menuItems,
       }}
+      arrow
     >
       {children}
     </HeaderDropdown>
