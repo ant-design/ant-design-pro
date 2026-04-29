@@ -7,7 +7,6 @@ import {
 import { history, useModel } from '@umijs/max';
 import type { MenuProps } from 'antd';
 import { Spin } from 'antd';
-import { createStyles } from 'antd-style';
 import React from 'react';
 import { flushSync } from 'react-dom';
 import { outLogin } from '@/services/ant-design-pro/api';
@@ -17,32 +16,6 @@ export type GlobalHeaderRightProps = {
   menu?: boolean;
   children?: React.ReactNode;
 };
-
-export const AvatarName = () => {
-  const { initialState } = useModel('@@initialState');
-  const { currentUser } = initialState || {};
-  return <span className="anticon">{currentUser?.name}</span>;
-};
-
-const useStyles = createStyles(({ token }) => {
-  return {
-    action: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 48,
-      padding: '0 8px',
-      cursor: 'pointer',
-      borderRadius: token.borderRadius,
-      transition: 'background-color 0.3s, color 0.3s',
-      color: token.colorTextSecondary,
-      '&:hover': {
-        backgroundColor: token.colorBgTextHover,
-        color: token.colorText,
-      },
-    },
-  };
-});
 
 export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
   menu,
@@ -63,7 +36,6 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
       });
     }
   };
-  const { styles } = useStyles();
   const { initialState, setInitialState } = useModel('@@initialState');
 
   const onMenuClick: MenuProps['onClick'] = (event) => {
@@ -92,14 +64,8 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
   };
 
   const loading = (
-    <span className={styles.action}>
-      <Spin
-        size="small"
-        style={{
-          marginLeft: 8,
-          marginRight: 8,
-        }}
-      />
+    <span>
+      <Spin size="small" />
     </span>
   );
 
