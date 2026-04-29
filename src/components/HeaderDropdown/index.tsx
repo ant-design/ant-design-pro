@@ -12,7 +12,8 @@ const useStyles = createStyles(({ token }) => {
       },
       '.ant-dropdown-menu-item .anticon, .ant-dropdown-menu-submenu-title .anticon':
         {
-          verticalAlign: 'middle',
+          display: 'inline-flex',
+          alignItems: 'center',
         },
       '.ant-dropdown-menu-submenu-title .anticon': {
         color: token.colorTextSecondary,
