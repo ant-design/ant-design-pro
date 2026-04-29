@@ -10,6 +10,9 @@ const useStyles = createStyles(({ token }) => {
       [`@media screen and (max-width: ${token.screenXS}px)`]: {
         width: '100%',
       },
+      '.ant-dropdown-menu-item .anticon': {
+        verticalAlign: '-0.125em',
+      },
     },
   };
 });

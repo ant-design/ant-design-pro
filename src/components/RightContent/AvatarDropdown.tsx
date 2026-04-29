@@ -144,7 +144,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
   return (
     <HeaderDropdown
       menu={{
-        selectedKeys: [],
+        selectedKeys: [`lang-${currentLocale}`],
         onClick: onMenuClick,
         items: menuItems,
       }}
