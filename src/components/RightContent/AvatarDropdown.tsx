@@ -1,7 +1,7 @@
 import {
   LogoutOutlined,
   SettingOutlined,
-  UserOutlined,
+  SkinOutlined,
 } from '@ant-design/icons';
 import { history, useModel } from '@umijs/max';
 import type { MenuProps } from 'antd';
@@ -26,14 +26,14 @@ export const AvatarName = () => {
 const useStyles = createStyles(({ token }) => {
   return {
     action: {
-      display: 'flex',
-      height: '48px',
-      marginLeft: 'auto',
-      overflow: 'hidden',
+      display: 'inline-flex',
       alignItems: 'center',
+      justifyContent: 'center',
+      height: 48,
       padding: '0 8px',
       cursor: 'pointer',
       borderRadius: token.borderRadius,
+      transition: 'all 0.2s',
       '&:hover': {
         backgroundColor: token.colorBgTextHover,
       },
@@ -104,23 +104,19 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
   }
 
   const menuItems = [
-    ...(menu
-      ? [
-          {
-            key: 'center',
-            icon: <UserOutlined />,
-            label: '个人中心',
-          },
-          {
-            key: 'settings',
-            icon: <SettingOutlined />,
-            label: '个人设置',
-          },
-          {
-            type: 'divider' as const,
-          },
-        ]
-      : []),
+    {
+      key: 'settings',
+      icon: <SettingOutlined />,
+      label: '个人设置',
+    },
+    {
+      key: 'theme',
+      icon: <SkinOutlined />,
+      label: '主题设置',
+    },
+    {
+      type: 'divider' as const,
+    },
     {
       key: 'logout',
       icon: <LogoutOutlined />,
