@@ -24,10 +24,10 @@ export type GlobalHeaderRightProps = {
   children?: React.ReactNode;
 };
 
-const localeLabelMap: Record<string, string> = {
-  'zh-CN': '简体中文',
-  'zh-TW': '繁体中文',
-  'en-US': 'English',
+const localeLabelMap: Record<string, { emoji: string; label: string }> = {
+  'zh-CN': { emoji: '🇨🇳', label: '简体中文' },
+  'zh-TW': { emoji: '🇭🇰', label: '繁体中文' },
+  'en-US': { emoji: '🇺🇸', label: 'English' },
 };
 
 export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
@@ -123,10 +123,10 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
           {
             key: 'lang',
             icon: <GlobalOutlined />,
-            label: localeLabelMap[currentLocale] || currentLocale,
+            label: `${localeLabelMap[currentLocale]?.emoji ?? ''} ${localeLabelMap[currentLocale]?.label ?? currentLocale}`,
             children: supportLocales.map((locale) => ({
               key: `lang-${locale}`,
-              label: localeLabelMap[locale] || locale,
+              label: `${localeLabelMap[locale]?.emoji ?? ''} ${localeLabelMap[locale]?.label ?? locale}`,
             })),
           },
         ]
