@@ -60,7 +60,7 @@ npm install                                                # Update dependencies
 | `npm run start:pre` | Pre-production environment |
 | `npm run start:test` | Test environment |
 | `npm run build` | Build for production |
-| `npm run preview` | Preview production build locally (port 8000) |
+| `npm run preview` | Preview built output (run `npm run build` first, port 8000) |
 | `npm run preview:build` | Build and preview (port 8000) |
 | `npm run deploy` | Build and deploy to GitHub Pages |
 | `npm run analyze` | Analyze bundle size |
@@ -470,7 +470,7 @@ Edit `colorPrimary` in `config/defaultSettings.ts`. Use SettingDrawer for live p
 Create a file in `src/models/` exporting a custom Hook, then use `useModel('filename')` in components.
 
 **Q: How to deploy?**
-`npm run build` generates `dist/`. Deploy to any static file server. Set `publicPath` for non-root deployments.
+`npm run build` generates `dist/`. Deploy to any static file server. Set `publicPath` for non-root deployments. `npm run deploy` builds and publishes to GitHub Pages automatically (pushes to gh-pages branch).
 
 **Q: How to use OpenAPI code generation?**
 1. Configure `openAPI` in `config/config.ts` 2. Run `npm run openapi` 3. Code is auto-generated under `src/services/`

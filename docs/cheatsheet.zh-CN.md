@@ -60,7 +60,7 @@ npm install                                                # 更新依赖
 | `npm run start:pre` | 预发布环境启动 |
 | `npm run start:test` | 测试环境启动 |
 | `npm run build` | 构建生产产物 |
-| `npm run preview` | 本地预览生产产物（端口 8000） |
+| `npm run preview` | 预览已构建产物（需先 `npm run build`，端口 8000） |
 | `npm run preview:build` | 构建并本地预览（端口 8000） |
 | `npm run deploy` | 构建并部署到 GitHub Pages |
 | `npm run analyze` | 构建产物体积分析 |
@@ -470,7 +470,7 @@ export default {
 在 `src/models/` 下创建文件，导出自定义 Hook，组件中通过 `useModel('文件名')` 使用。
 
 **Q: 如何部署？**
-`npm run build` 生成 `dist/` 目录，部署到任意静态服务器。配置 `publicPath` 处理非根目录部署。
+`npm run build` 生成 `dist/` 目录，部署到任意静态服务器。配置 `publicPath` 处理非根目录部署。`npm run deploy` 会自动构建并发布到 GitHub Pages（推送到 gh-pages 分支）。
 
 **Q: 如何使用 OpenAPI 代码生成？**
 1. 在 `config/config.ts` 配置 `openAPI` 2. 运行 `npm run openapi` 3. 自动生成 `src/services/` 下的代码
