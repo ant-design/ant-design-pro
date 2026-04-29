@@ -9,7 +9,6 @@
     "build": "max build",
     "deploy": "cross-env CI=true max build && gh-pages -d dist",
     "dev": "cross-env UMI_ENV=dev MOCK=none max dev",
-    "gh-pages": "gh-pages -d dist",
     "i18n-remove": "max i18n-remove --locale=zh-CN --write",
     "lint": "npm run biome:lint && npm run tsc",
     "lint-staged": "lint-staged",
@@ -20,7 +19,6 @@
     "preview": "max preview --port 8000",
     "preview:build": "max build && max preview --port 8000",
     "record": "cross-env NODE_ENV=development UMI_ENV=test max record --scene=login",
-    "serve": "umi-serve",
     "simple": "node scripts/simple.js",
     "start": "cross-env UMI_ENV=dev max dev",
     "start:no-mock": "cross-env MOCK=none max dev",
@@ -83,8 +81,7 @@
     "mockjs": "^1.1.0",
     "tailwindcss": "^4.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.3",
-    "umi-serve": "^1.9.11"
+    "typescript": "^6.0.3"
   },
   "engines": {
     "node": ">=20.0.0"
