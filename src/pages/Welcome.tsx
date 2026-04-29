@@ -8,7 +8,7 @@ import { Card } from 'antd';
 import hljs from 'highlight.js';
 import React from 'react';
 
-import 'highlight.js/styles/github-gist.css';
+import 'highlight.js/styles/github.css';
 import './Welcome.css';
 import './Welcome-dark.css';
 
