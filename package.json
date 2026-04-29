@@ -46,10 +46,10 @@
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
     "dayjs": "^1.11.20",
+    "highlight.js": "^11.11.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "topojson-client": "^3.1.0",
-    "highlight.js": "^11.11.1"
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.13",
