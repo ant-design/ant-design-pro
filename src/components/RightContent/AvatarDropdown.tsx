@@ -21,7 +21,6 @@ import { outLogin } from '@/services/ant-design-pro/api';
 import HeaderDropdown from '../HeaderDropdown';
 
 export type GlobalHeaderRightProps = {
-  menu?: boolean;
   children?: React.ReactNode;
 };
 
@@ -31,8 +30,9 @@ const localeLabelMap: Record<string, { emoji: string; label: string }> = {
   'en-US': { emoji: '🇺🇸', label: 'English' },
 };
 
+const supportLocaleKeys = Object.keys(localeLabelMap);
+
 export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
-  menu,
   children,
 }) => {
   const loginOut = async () => {
@@ -62,12 +62,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
       return;
     }
     if (key === 'theme') {
-      flushSync(() => {
-        setInitialState((s) => ({
-          ...s,
-          settingDrawerOpen: true,
-        }));
-      });
+      setInitialState((s) => ({ ...s, settingDrawerOpen: true }));
       return;
     }
     if (key === 'doc') {
@@ -81,26 +76,20 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
     history.push(`/account/${key}`);
   };
 
-  const loading = (
-    <span>
-      <Spin size="small" />
-    </span>
-  );
-
   if (!initialState) {
-    return loading;
+    return <Spin size="small" />;
   }
 
   const { currentUser } = initialState;
 
   if (!currentUser?.name) {
-    return loading;
+    return <Spin size="small" />;
   }
 
   const allLocales = getAllLocales();
   const currentLocale = getLocale();
   const supportLocales = allLocales.filter((l) =>
-    ['zh-CN', 'en-US'].includes(l),
+    supportLocaleKeys.includes(l),
   );
 
   const menuItems: MenuProps['items'] = [

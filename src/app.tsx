@@ -16,7 +16,6 @@ import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 
 const isDev = process.env.NODE_ENV === 'development';
-const isDevOrTest = isDev || process.env.CI;
 const loginPath = '/user/login';
 
 /**
@@ -65,7 +64,6 @@ export const layout: RunTimeLayoutConfig = ({
   setInitialState,
 }) => {
   return {
-    actionsRender: () => [],
     menuItemRender: (item, dom) => {
       if (item.path) {
         return (
@@ -143,8 +141,8 @@ export const layout: RunTimeLayoutConfig = ({
             }}
             settings={initialState?.settings}
             onSettingChange={(settings) => {
-              setInitialState((preInitialState) => ({
-                ...preInitialState,
+              setInitialState((s) => ({
+                ...s,
                 settings,
               }));
             }}
