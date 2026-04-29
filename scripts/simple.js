@@ -5,7 +5,7 @@
  * 此操作不可逆，会删除以下内容：
  * - 页面目录：dashboard, form, list/basic-list, list/card-list, list/search, profile, result, exception, account, user/register, user/register-result
  * - 替换路由配置为简单版
- * - 移除不再需要的依赖：@ant-design/plots
+ * - 移除不再需要的依赖：@ant-design/plots, d3, topojson-client
  */
 
 const fs = require('node:fs');
@@ -30,9 +30,14 @@ const pageDirsToDelete = [
 const mockFilesToDelete = [];
 
 // 需要从 package.json 移除的依赖
-const depsToRemove = ['@ant-design/plots'];
+const depsToRemove = ['@ant-design/plots', 'd3', 'topojson-client'];
 
-const devDepsToRemove = [];
+const devDepsToRemove = [
+  '@types/d3',
+  '@types/topojson-client',
+  '@types/topojson-specification',
+  'geojson',
+];
 
 // 递归删除目录
 function deleteDir(dirPath) {
