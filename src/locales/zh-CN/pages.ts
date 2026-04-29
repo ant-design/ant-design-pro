@@ -26,6 +26,15 @@ export default {
   'pages.login.registerAccount': '注册账户',
   'pages.welcome.link': '欢迎使用',
   'pages.welcome.alertMessage': '更快更强的重型组件，已经发布。',
+  'pages.welcome.infoCard.umi.title': '了解 umi',
+  'pages.welcome.infoCard.umi.desc':
+    'umi 是一个可扩展的企业级前端应用框架，以路由为基础，支持配置式路由和约定式路由。',
+  'pages.welcome.infoCard.antd.title': '了解 Ant Design',
+  'pages.welcome.infoCard.antd.desc':
+    'antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。',
+  'pages.welcome.infoCard.procomponents.title': '了解 Pro Components',
+  'pages.welcome.infoCard.procomponents.desc':
+    'ProComponents 是基于 Ant Design 的高抽象模板组件，以一个组件就是一个页面为开发理念。',
   'pages.404.subTitle': '抱歉，您访问的页面不存在。',
   'pages.404.buttonText': '返回首页',
   'pages.admin.subPage.title': ' 这个页面只有 admin 权限才能查看',

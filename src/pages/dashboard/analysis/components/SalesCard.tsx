@@ -1,7 +1,7 @@
 import { Column } from '@ant-design/plots';
 import { Button, Card, Col, DatePicker, Row, Tabs } from 'antd';
 import type { RangePickerProps } from 'antd/es/date-picker';
-import numeral from 'numeral';
+import { formatNumber } from '@/utils/format';
 import type { DataItem } from '../data.d';
 import useStyles from '../style.style';
 
@@ -147,7 +147,7 @@ const SalesCard = ({
                           >
                             {item.title}
                           </span>
-                          <span>{numeral(item.total).format('0,0')}</span>
+                          <span>{formatNumber(item.total)}</span>
                         </li>
                       ))}
                     </ul>
@@ -208,7 +208,7 @@ const SalesCard = ({
                           >
                             {item.title}
                           </span>
-                          <span>{numeral(item.total).format('0,0')}</span>
+                          <span>{formatNumber(item.total)}</span>
                         </li>
                       ))}
                     </ul>

@@ -6,8 +6,8 @@ import {
 } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { Avatar, Card, Dropdown, List, Tooltip } from 'antd';
-import numeral from 'numeral';
 import React from 'react';
+import { formatNumber } from '@/utils/format';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import useStyles from './index.style';
@@ -123,7 +123,7 @@ const Applications: React.FC = () => {
             <div>
               <CardInfo
                 activeUser={formatWan(item.activeUser)}
-                newUser={numeral(item.newUser).format('0,0')}
+                newUser={formatNumber(item.newUser)}
               />
             </div>
           </Card>

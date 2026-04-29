@@ -1,13 +1,14 @@
 import { Gauge, Liquid, WordCloud } from '@ant-design/plots';
 import { GridContent } from '@ant-design/pro-components';
 import { useQuery } from '@tanstack/react-query';
-import { Card, Col, Progress, Row, Statistic } from 'antd';
-import numeral from 'numeral';
-import type { FC } from 'react';
+import { Card, Col, Progress, Row, Skeleton, Statistic } from 'antd';
+import { type FC, lazy, Suspense } from 'react';
+import { formatNumber } from '@/utils/format';
 import ActiveChart from './components/ActiveChart';
-import MonitorMap from './components/Map';
 import { queryTags } from './service';
 import useStyles from './style.style';
+
+const MonitorMap = lazy(() => import('./components/Map'));
 
 const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Moment is also OK
 
@@ -35,15 +36,23 @@ const Monitor: FC = () => {
           xs={24}
           style={{
             marginBottom: 24,
+            display: 'flex',
           }}
         >
-          <Card title="活动实时交易情况" variant="borderless">
+          <Card
+            title="活动实时交易情况"
+            variant="borderless"
+            style={{ flex: 1 }}
+            styles={{
+              body: { display: 'flex', flexDirection: 'column', flex: 1 },
+            }}
+          >
             <Row>
               <Col md={6} sm={12} xs={24}>
                 <Statistic
                   title="今日交易总额"
                   suffix="元"
-                  value={numeral(124543233).format('0,0')}
+                  value={formatNumber(124543233)}
                 />
               </Col>
               <Col md={6} sm={12} xs={24}>
@@ -61,12 +70,21 @@ const Monitor: FC = () => {
                 <Statistic
                   title="每秒交易总额"
                   suffix="元"
-                  value={numeral(234).format('0,0')}
+                  value={formatNumber(234)}
                 />
               </Col>
             </Row>
             <div className={styles.mapChart}>
-              <MonitorMap />
+              <Suspense
+                fallback={
+                  <Skeleton.Node
+                    active
+                    style={{ width: '100%', height: 356 }}
+                  />
+                }
+              >
+                <MonitorMap />
+              </Suspense>
             </div>
           </Card>
         </Col>

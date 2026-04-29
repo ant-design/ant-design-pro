@@ -10,6 +10,7 @@ export default async (): Promise<any> => {
     ...config,
     testPathIgnorePatterns: ['/node_modules/', '/.worktrees/'],
     moduleNameMapper: {
+      '\\.md$': '<rootDir>/tests/__mocks__/raw.js',
       ...(config.moduleNameMapper || {}),
       '^mermaid$': '<rootDir>/tests/__mocks__/mermaid.js',
     },
@@ -21,6 +22,7 @@ export default async (): Promise<any> => {
     globals: {
       ...config.globals,
       localStorage: null,
+      __APP_VERSION__: 'test',
     },
   };
 };

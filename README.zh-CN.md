@@ -17,10 +17,9 @@ Language : [🇺🇸](./README.md) | 🇨🇳
 </div>
 
 - 预览：http://preview.pro.ant.design
-- 首页：http://pro.ant.design/index-cn
-- 使用文档：http://pro.ant.design/docs/getting-started-cn
-- 更新日志: http://pro.ant.design/docs/changelog-cn
-- 常见问题：http://pro.ant.design/docs/faq-cn
+- 使用文档：[docs/cheatsheet.zh-CN.md](./docs/cheatsheet.zh-CN.md)
+- 更新日志: https://github.com/ant-design/ant-design-pro/releases
+- 常见问题：[docs/cheatsheet.zh-CN.md#faq](./docs/cheatsheet.zh-CN.md#faq)
 
 ## 5.0 已经发布! 🎉🎉🎉
 
@@ -121,7 +120,7 @@ npm run simple
 npm run build
 ```
 
-更多信息请参考 [使用文档](http://pro.ant.design/docs/getting-started)。
+更多信息请参考 [使用文档](./docs/cheatsheet.zh-CN.md)。
 
 ## 支持环境
 

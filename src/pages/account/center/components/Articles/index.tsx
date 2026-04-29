@@ -2,9 +2,9 @@ import { LikeOutlined, MessageFilled, StarTwoTone } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { Flex, List, Tag } from 'antd';
 import React from 'react';
+import { ArticleListContent } from '@/components';
 import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
-import ArticleListContent from '../ArticleListContent';
 import useStyles from './index.style';
 
 const IconText: React.FC<{

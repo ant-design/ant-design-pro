@@ -109,7 +109,7 @@ export default defineConfig({
    */
   moment2dayjs: {
     preset: 'antd',
-    plugins: ['duration'],
+    plugins: ['duration', 'relativeTime'],
   },
   /**
    * @name 国际化插件
@@ -193,12 +193,22 @@ export default defineConfig({
     include: ['src/pages/**/_mock.ts'],
     exclude: ['mock/requestRecord.mock.js'],
   },
-  utoopack: {},
+  utoopack: {
+    module: {
+      rules: {
+        '*.md': {
+          loaders: [{ loader: join(__dirname, 'md-raw-loader.cjs') }],
+          as: '*.js',
+        },
+      },
+    },
+  },
   requestRecord: {},
   exportStatic: {},
   define: {
     'process.env.CI': process.env.CI,
     'process.env.COMMIT_HASH': process.env.COMMIT_HASH || '',
     'process.env.CF_PAGES_COMMIT_SHA': process.env.CF_PAGES_COMMIT_SHA || '',
+    __APP_VERSION__: JSON.stringify(require('./../package.json').version),
   },
 });

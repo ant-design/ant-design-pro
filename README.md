@@ -18,10 +18,9 @@ Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md)
 </div>
 
 - Preview: http://preview.pro.ant.design
-- Home Page: http://pro.ant.design
-- Documentation: http://pro.ant.design/docs/getting-started
-- ChangeLog: http://pro.ant.design/docs/changelog
-- FAQ: http://pro.ant.design/docs/faq
+- Documentation: [docs/cheatsheet.en-US.md](./docs/cheatsheet.en-US.md)
+- ChangeLog: https://github.com/ant-design/ant-design-pro/releases
+- FAQ: [docs/cheatsheet.en-US.md#faq](./docs/cheatsheet.en-US.md#faq)
 
 ## Features
 

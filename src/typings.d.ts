@@ -10,6 +10,11 @@ declare module '*.jpeg';
 declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
+declare module '*.md' {
+  const content: string;
+  export default content;
+}
 declare module 'omit.js';
-declare module 'numeral';
 declare module 'mockjs';
+
+declare const __APP_VERSION__: string;

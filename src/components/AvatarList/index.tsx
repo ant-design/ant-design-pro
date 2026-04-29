@@ -2,7 +2,9 @@ import { Avatar, Tooltip } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
 import useStyles from './index.style';
+
 export declare type SizeType = number | 'small' | 'default' | 'large';
+
 export type AvatarItemProps = {
   tips: React.ReactNode;
   src: string;
@@ -10,6 +12,7 @@ export type AvatarItemProps = {
   style?: React.CSSProperties;
   onClick?: () => void;
 };
+
 export type AvatarListProps = {
   Item?: React.ReactElement<AvatarItemProps>;
   size?: SizeType;
@@ -20,7 +23,8 @@ export type AvatarListProps = {
     | React.ReactElement<AvatarItemProps>
     | React.ReactElement<AvatarItemProps>[];
 };
-const avatarSizeToClassName = (size: SizeType | 'mini', styles: any) =>
+
+const avatarSizeToClassName = (styles: any, size?: SizeType | 'mini') =>
   clsx(styles.avatarItem, {
     [styles.avatarItemLarge]: size === 'large',
     [styles.avatarItemSmall]: size === 'small',
@@ -34,9 +38,7 @@ const Item: React.FC<AvatarItemProps> = ({
   onClick = () => {},
 }) => {
   const { styles } = useStyles();
-
-  const cls = avatarSizeToClassName(size || 'default', styles);
-
+  const cls = avatarSizeToClassName(styles, size);
   return (
     <li className={cls} onClick={onClick}>
       {tips ? (
@@ -55,6 +57,7 @@ const Item: React.FC<AvatarItemProps> = ({
     </li>
   );
 };
+
 const AvatarList: React.FC<AvatarListProps> & {
   Item: typeof Item;
 } = ({ children, size, maxLength = 5, excessItemsStyle, ...other }) => {
@@ -64,14 +67,13 @@ const AvatarList: React.FC<AvatarListProps> & {
   const childrenArray = React.Children.toArray(
     children,
   ) as React.ReactElement<AvatarItemProps>[];
-
   const childrenWithProps = childrenArray.slice(0, numToShow).map((child) =>
     React.cloneElement(child, {
       size,
     }),
   );
   if (numToShow < numOfChildren) {
-    const cls = avatarSizeToClassName(size || 'default', styles);
+    const cls = avatarSizeToClassName(styles, size);
     childrenWithProps.push(
       <li key="exceed" className={cls}>
         <Avatar
@@ -87,5 +89,7 @@ const AvatarList: React.FC<AvatarListProps> & {
     </div>
   );
 };
+
 AvatarList.Item = Item;
+
 export default AvatarList;

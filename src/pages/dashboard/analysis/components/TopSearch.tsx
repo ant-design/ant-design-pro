@@ -1,8 +1,8 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Area } from '@ant-design/plots';
 import { Card, Col, Row, Table, Tooltip } from 'antd';
-import numeral from 'numeral';
 import React from 'react';
+import { formatNumber } from '@/utils/format';
 import type { DataItem } from '../data.d';
 import NumberInfo from './NumberInfo';
 import Trend from './Trend';
@@ -105,7 +105,7 @@ const TopSearch = ({
               </span>
             }
             gap={8}
-            total={numeral(12321).format('0,0')}
+            total={formatNumber(12321)}
             status="up"
             subTotal={17.1}
           />

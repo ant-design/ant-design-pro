@@ -1,0 +1,68 @@
+/* Dark mode: override highlight.js github-gist (white) with GitHub Dark theme */
+
+[data-theme="dark"] .welcome-markdown .x-markdown pre {
+  background: var(--md-pre-bg);
+  border-color: var(--md-pre-border);
+}
+
+[data-theme="dark"] .welcome-markdown .x-markdown pre code.hljs {
+  background: transparent;
+  color: #e6edf3;
+}
+
+/* Keywords: if, const, import, return, etc. */
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-keyword,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-selector-tag,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-literal,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-section,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-link {
+  color: #ff7b72;
+}
+
+/* Strings, types, attributes */
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-string,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-title,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-name,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-type,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-attribute,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-symbol,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-bullet,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-addition,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-variable,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-template-tag,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-template-variable {
+  color: #a5d6ff;
+}
+
+/* Comments, quotes, deletions */
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-comment,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-quote,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-deletion,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-meta {
+  color: #8b949e;
+}
+
+/* Numbers */
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-number {
+  color: #79c0ff;
+}
+
+/* Built-in types, class names */
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-built_in,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-class .hljs-title,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-title.class_ {
+  color: #ffa657;
+}
+
+/* RegExp, emphasis */
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-regexp,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-emphasis {
+  color: #7ee787;
+}
+
+/* Inline code */
+[data-theme="dark"] .welcome-markdown .x-markdown code {
+  background: var(--md-code-bg);
+  border-color: var(--md-code-border);
+  color: #e6edf3;
+}

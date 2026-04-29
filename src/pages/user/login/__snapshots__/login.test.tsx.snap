@@ -473,7 +473,7 @@ exports[`Login Page should login success 1`] = `
               target="_blank"
               title="version"
             >
-              v6.0.0-beta.4
+              vtest
             </a>
             <a
               class="ant-pro-global-footer-list-link"
@@ -984,7 +984,7 @@ exports[`Login Page should show login form 1`] = `
               target="_blank"
               title="version"
             >
-              v6.0.0-beta.4
+              vtest
             </a>
             <a
               class="ant-pro-global-footer-list-link"
