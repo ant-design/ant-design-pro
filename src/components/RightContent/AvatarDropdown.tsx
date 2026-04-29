@@ -98,6 +98,9 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
 
   const allLocales = getAllLocales();
   const currentLocale = getLocale();
+  const supportLocales = allLocales.filter((l) =>
+    ['zh-CN', 'en-US'].includes(l),
+  );
 
   const menuItems: MenuProps['items'] = [
     {
@@ -115,13 +118,13 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
       icon: <BookOutlined />,
       label: '使用文档',
     },
-    ...(allLocales.length > 1
+    ...(supportLocales.length > 1
       ? [
           {
             key: 'lang',
             icon: <GlobalOutlined />,
             label: localeLabelMap[currentLocale] || currentLocale,
-            children: allLocales.map((locale) => ({
+            children: supportLocales.map((locale) => ({
               key: `lang-${locale}`,
               label: localeLabelMap[locale] || locale,
             })),
