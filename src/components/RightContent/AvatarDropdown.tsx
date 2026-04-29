@@ -1,5 +1,6 @@
 import {
   BookOutlined,
+  CheckOutlined,
   GlobalOutlined,
   LogoutOutlined,
   SettingOutlined,
@@ -126,6 +127,12 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
             label: localeLabelMap[currentLocale]?.label ?? currentLocale,
             children: supportLocales.map((locale) => ({
               key: `lang-${locale}`,
+              icon:
+                locale === currentLocale ? (
+                  <CheckOutlined style={{ color: '#52c41a' }} />
+                ) : (
+                  <span style={{ display: 'inline-block', width: 14 }} />
+                ),
               label: `${localeLabelMap[locale]?.emoji ?? ''} ${localeLabelMap[locale]?.label ?? locale}`,
             })),
           },
@@ -145,7 +152,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
     <HeaderDropdown
       placement="bottomRight"
       menu={{
-        selectedKeys: [`lang-${currentLocale}`],
+        selectedKeys: [],
         onClick: onMenuClick,
         items: menuItems,
       }}
