@@ -4,8 +4,8 @@
  *
  * 此操作不可逆，会删除以下内容：
  * - 页面目录：dashboard, form, list/basic-list, list/card-list, list/search, profile, result, exception, account, user/register, user/register-result
- * - Mock 文件：analysis.mock.ts, workplace.mock.ts
  * - 替换路由配置为简单版
+ * - 移除不再需要的依赖：@ant-design/plots
  */
 
 const fs = require('node:fs');
@@ -27,17 +27,12 @@ const pageDirsToDelete = [
 ];
 
 // 需要删除的 mock 文件
-const mockFilesToDelete = ['mock/analysis.mock.ts', 'mock/workplace.mock.ts'];
+const mockFilesToDelete = [];
 
 // 需要从 package.json 移除的依赖
-const depsToRemove = [
-  '@ant-design/plots',
-  '@antv/l7-react',
-  '@antv/l7',
-  'numeral',
-];
+const depsToRemove = ['@ant-design/plots'];
 
-const devDepsToRemove = ['@types/numeral'];
+const devDepsToRemove = [];
 
 // 递归删除目录
 function deleteDir(dirPath) {
