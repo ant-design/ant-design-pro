@@ -2,6 +2,8 @@
 
 ![Ant Design Pro](https://mdn.alipayobjects.com/huamei_fkc4p0/afts/img/A*EX3ISYC2ghEAAAAAddAAAAgAeobDAQ/original)
 
+[![GitHub](https://img.shields.io/badge/GitHub-ant--design%2Fant--design--pro-181717?logo=github)](https://github.com/ant-design/ant-design-pro) [![Stars](https://img.shields.io/github/stars/ant-design/ant-design-pro?style=social)](https://github.com/ant-design/ant-design-pro)
+
 ## 快速开始
 
 **环境要求：** Node.js >= 20

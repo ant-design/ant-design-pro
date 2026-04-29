@@ -1,5 +1,8 @@
 {
-  "**/*.{js,jsx,tsx,ts,md,css,less,json}": [
+  "**/*.{js,jsx,tsx,ts,css,less,json}": [
+    "npx @biomejs/biome check --write"
+  ],
+  "src/**/*.md": [
     "npx @biomejs/biome check --write"
   ]
 }
