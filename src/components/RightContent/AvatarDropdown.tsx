@@ -65,7 +65,6 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
   };
   const { styles } = useStyles();
   const { initialState, setInitialState } = useModel('@@initialState');
-  const { setOpen: setSettingDrawerOpen } = useModel('settingDrawer');
 
   const onMenuClick: MenuProps['onClick'] = (event) => {
     const { key } = event;
@@ -77,7 +76,12 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
       return;
     }
     if (key === 'theme') {
-      setSettingDrawerOpen(true);
+      flushSync(() => {
+        setInitialState((s) => ({
+          ...s,
+          settingDrawerOpen: true,
+        }));
+      });
       return;
     }
     if (key === 'doc') {

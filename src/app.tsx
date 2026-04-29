@@ -136,6 +136,13 @@ export const layout: RunTimeLayoutConfig = ({
           <SettingDrawer
             disableUrlParams
             enableDarkTheme
+            collapse={initialState?.settingDrawerOpen}
+            onCollapseChange={(open) => {
+              setInitialState((s) => ({
+                ...s,
+                settingDrawerOpen: open,
+              }));
+            }}
             settings={initialState?.settings}
             onSettingChange={(settings) => {
               setInitialState((preInitialState) => ({
