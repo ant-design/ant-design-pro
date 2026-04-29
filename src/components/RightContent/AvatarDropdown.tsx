@@ -1,10 +1,17 @@
 import {
   BookOutlined,
+  GlobalOutlined,
   LogoutOutlined,
   SettingOutlined,
   SkinOutlined,
 } from '@ant-design/icons';
-import { history, useModel } from '@umijs/max';
+import {
+  getAllLocales,
+  getLocale,
+  history,
+  setLocale,
+  useModel,
+} from '@umijs/max';
 import type { MenuProps } from 'antd';
 import { Spin } from 'antd';
 import React from 'react';
@@ -15,6 +22,12 @@ import HeaderDropdown from '../HeaderDropdown';
 export type GlobalHeaderRightProps = {
   menu?: boolean;
   children?: React.ReactNode;
+};
+
+const localeLabelMap: Record<string, string> = {
+  'zh-CN': '简体中文',
+  'zh-TW': '繁体中文',
+  'en-US': 'English',
 };
 
 export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
@@ -60,6 +73,10 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
       history.push('/welcome');
       return;
     }
+    if (key.startsWith('lang-')) {
+      setLocale(key.replace('lang-', ''), false);
+      return;
+    }
     history.push(`/account/${key}`);
   };
 
@@ -79,7 +96,10 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
     return loading;
   }
 
-  const menuItems = [
+  const allLocales = getAllLocales();
+  const currentLocale = getLocale();
+
+  const menuItems: MenuProps['items'] = [
     {
       key: 'settings',
       icon: <SettingOutlined />,
@@ -95,6 +115,19 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
       icon: <BookOutlined />,
       label: '使用文档',
     },
+    ...(allLocales.length > 1
+      ? [
+          {
+            key: 'lang',
+            icon: <GlobalOutlined />,
+            label: localeLabelMap[currentLocale] || currentLocale,
+            children: allLocales.map((locale) => ({
+              key: `lang-${locale}`,
+              label: localeLabelMap[locale] || locale,
+            })),
+          },
+        ]
+      : []),
     {
       type: 'divider' as const,
     },
