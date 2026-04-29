@@ -62,11 +62,16 @@ npm install                                                # 更新依赖
 | `npm run build` | 构建生产产物 |
 | `npm run preview` | 本地预览生产产物（端口 8000） |
 | `npm run preview:build` | 构建并本地预览（端口 8000） |
+| `npm run deploy` | 构建并部署到 GitHub Pages |
 | `npm run analyze` | 构建产物体积分析 |
 | `npm run lint` | 代码检查（Biome + TypeScript） |
 | `npm run biome` | Biome 自动修复 |
 | `npm test` | 运行测试 |
 | `npm run test:coverage` | 测试覆盖率 |
+| `npm run test:update` | 更新测试快照 |
+| `npm run tsc` | 类型检查（不生成文件） |
+| `npm run i18n-remove` | 移除国际化（locale=zh-CN） |
+| `npm run record` | 录制登录场景请求数据 |
 | `npm run openapi` | 根据 OpenAPI 生成 API 代码 |
 | `npm run simple` | 精简模式（删除示例页面和多余依赖） |
 

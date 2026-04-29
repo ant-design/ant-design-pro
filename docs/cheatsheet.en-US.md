@@ -62,11 +62,16 @@ npm install                                                # Update dependencies
 | `npm run build` | Build for production |
 | `npm run preview` | Preview production build locally (port 8000) |
 | `npm run preview:build` | Build and preview (port 8000) |
+| `npm run deploy` | Build and deploy to GitHub Pages |
 | `npm run analyze` | Analyze bundle size |
 | `npm run lint` | Lint (Biome + TypeScript) |
 | `npm run biome` | Auto-fix with Biome |
 | `npm test` | Run tests |
 | `npm run test:coverage` | Test with coverage |
+| `npm run test:update` | Update test snapshots |
+| `npm run tsc` | Type check without emitting |
+| `npm run i18n-remove` | Remove i18n wrappers (locale=zh-CN) |
+| `npm run record` | Record request data for login scene |
 | `npm run openapi` | Generate API code from OpenAPI schema |
 | `npm run simple` | Strip demo pages and unused deps |
 
