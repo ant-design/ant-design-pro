@@ -14,7 +14,7 @@
   --md-tr-hover-bg: rgba(0, 0, 0, 0.02);
 }
 
-.dark .welcome-markdown .x-markdown {
+[data-theme="dark"] .welcome-markdown .x-markdown {
   --md-code-bg: rgba(255, 255, 255, 0.08);
   --md-code-border: rgba(255, 255, 255, 0.1);
   --md-pre-bg: #161b22;

@@ -1,67 +1,67 @@
 /* Dark mode: override highlight.js github-gist (white) with GitHub Dark theme */
 
-.dark .welcome-markdown .x-markdown pre {
+[data-theme="dark"] .welcome-markdown .x-markdown pre {
   background: var(--md-pre-bg);
   border-color: var(--md-pre-border);
 }
 
-.dark .welcome-markdown .x-markdown pre code.hljs {
+[data-theme="dark"] .welcome-markdown .x-markdown pre code.hljs {
   background: transparent;
   color: #e6edf3;
 }
 
 /* Keywords: if, const, import, return, etc. */
-.dark .welcome-markdown .x-markdown .hljs-keyword,
-.dark .welcome-markdown .x-markdown .hljs-selector-tag,
-.dark .welcome-markdown .x-markdown .hljs-literal,
-.dark .welcome-markdown .x-markdown .hljs-section,
-.dark .welcome-markdown .x-markdown .hljs-link {
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-keyword,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-selector-tag,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-literal,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-section,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-link {
   color: #ff7b72;
 }
 
 /* Strings, types, attributes */
-.dark .welcome-markdown .x-markdown .hljs-string,
-.dark .welcome-markdown .x-markdown .hljs-title,
-.dark .welcome-markdown .x-markdown .hljs-name,
-.dark .welcome-markdown .x-markdown .hljs-type,
-.dark .welcome-markdown .x-markdown .hljs-attribute,
-.dark .welcome-markdown .x-markdown .hljs-symbol,
-.dark .welcome-markdown .x-markdown .hljs-bullet,
-.dark .welcome-markdown .x-markdown .hljs-addition,
-.dark .welcome-markdown .x-markdown .hljs-variable,
-.dark .welcome-markdown .x-markdown .hljs-template-tag,
-.dark .welcome-markdown .x-markdown .hljs-template-variable {
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-string,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-title,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-name,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-type,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-attribute,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-symbol,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-bullet,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-addition,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-variable,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-template-tag,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-template-variable {
   color: #a5d6ff;
 }
 
 /* Comments, quotes, deletions */
-.dark .welcome-markdown .x-markdown .hljs-comment,
-.dark .welcome-markdown .x-markdown .hljs-quote,
-.dark .welcome-markdown .x-markdown .hljs-deletion,
-.dark .welcome-markdown .x-markdown .hljs-meta {
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-comment,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-quote,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-deletion,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-meta {
   color: #8b949e;
 }
 
 /* Numbers */
-.dark .welcome-markdown .x-markdown .hljs-number {
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-number {
   color: #79c0ff;
 }
 
 /* Built-in types, class names */
-.dark .welcome-markdown .x-markdown .hljs-built_in,
-.dark .welcome-markdown .x-markdown .hljs-class .hljs-title,
-.dark .welcome-markdown .x-markdown .hljs-title.class_ {
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-built_in,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-class .hljs-title,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-title.class_ {
   color: #ffa657;
 }
 
 /* RegExp, emphasis */
-.dark .welcome-markdown .x-markdown .hljs-regexp,
-.dark .welcome-markdown .x-markdown .hljs-emphasis {
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-regexp,
+[data-theme="dark"] .welcome-markdown .x-markdown .hljs-emphasis {
   color: #7ee787;
 }
 
 /* Inline code */
-.dark .welcome-markdown .x-markdown code {
+[data-theme="dark"] .welcome-markdown .x-markdown code {
   background: var(--md-code-bg);
   border-color: var(--md-code-border);
   color: #e6edf3;

@@ -28,9 +28,7 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, index, desc, href }) => (
         </div>
         <div className="min-w-0 flex-1">
           <h4 className="mb-1 mt-0 text-sm font-semibold">{title}</h4>
-          <p className="mb-0 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
-            {desc}
-          </p>
+          <p className="mb-0 line-clamp-2 text-xs text-gray-500">{desc}</p>
         </div>
       </div>
     </Card>
@@ -147,14 +145,17 @@ const Welcome: React.FC = () => {
   const normalizedLocale = locale.toLowerCase();
   const content =
     mdContent[locale] ??
-    (normalizedLocale.startsWith('zh') ? mdContent['zh-CN'] : mdContent['en-US']);
+    (normalizedLocale.startsWith('zh')
+      ? mdContent['zh-CN']
+      : mdContent['en-US']);
   const { initialState } = useModel('@@initialState');
   const isDark = initialState?.settings?.navTheme === 'realDark';
 
   return (
     <PageContainer>
       <div
-        className={`flex flex-col gap-6 md:flex-row${isDark ? ' dark' : ''}`}
+        data-theme={isDark ? 'dark' : 'light'}
+        className="flex flex-col gap-6 md:flex-row"
       >
         <div className="min-w-0 md:flex-[2] welcome-markdown">
           <Card>
