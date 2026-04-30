@@ -154,12 +154,22 @@ const Welcome: React.FC = () => {
   return (
     <PageContainer
       title={
-        <span className="welcome-gradient-title">
-          {intl.formatMessage({
-            id: 'pages.welcome.celebrationTitle',
-            defaultMessage: '欢迎使用 Ant Design Pro V6 🎉',
-          })}
-        </span>
+        <>
+          {intl.formatMessage(
+            {
+              id: 'pages.welcome.celebrationTitle',
+              defaultMessage: '欢迎使用 Ant Design Pro {v6}',
+            },
+            {
+              v6: (
+                <span key="v6" className="welcome-gradient-title">
+                  V6
+                </span>
+              ),
+            },
+          )}
+          🎉
+        </>
       }
     >
       <div
