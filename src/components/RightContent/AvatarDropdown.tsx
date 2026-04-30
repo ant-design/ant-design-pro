@@ -12,6 +12,7 @@ import {
   getLocale,
   history,
   setLocale,
+  useIntl,
   useModel,
 } from '@umijs/max';
 import type { MenuProps } from 'antd';
@@ -52,6 +53,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
     }
   };
   const { initialState, setInitialState } = useModel('@@initialState');
+  const intl = useIntl();
 
   const onMenuClick: MenuProps['onClick'] = (event) => {
     const { key } = event;
@@ -117,7 +119,9 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
     {
       key: 'version',
       icon: <HistoryOutlined />,
-      label: '历史版本',
+      label: intl.formatMessage({
+        id: 'component.globalHeader.historyVersion',
+      }),
       children: [
         {
           key: 'version-https://v5.pro.ant.design',

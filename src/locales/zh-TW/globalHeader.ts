@@ -4,6 +4,7 @@ export default {
   'component.globalHeader.search.example2': '搜索提示二',
   'component.globalHeader.search.example3': '搜索提示三',
   'component.globalHeader.help': '使用手冊',
+  'component.globalHeader.historyVersion': '歷史版本',
   'component.globalHeader.notification': '通知',
   'component.globalHeader.notification.empty': '妳已查看所有通知',
   'component.globalHeader.message': '消息',
