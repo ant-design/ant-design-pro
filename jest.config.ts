@@ -1,4 +1,7 @@
+import { createRequire } from 'node:module';
 import { configUmiAlias, createConfig } from '@umijs/max/test.js';
+
+const require = createRequire(import.meta.url);
 
 export default async (): Promise<any> => {
   const config = await configUmiAlias({
@@ -23,8 +26,8 @@ export default async (): Promise<any> => {
       ...config.globals,
       localStorage: null,
       __APP_VERSION__: 'test',
-      __UMI_VERSION__: '0.0.0',
-      __UTOO_VERSION__: '0.0.0',
+      __UMI_VERSION__: require('@umijs/max/package.json').version,
+      __UTOO_VERSION__: require('@utoo/pack/package.json').version,
     },
   };
 };
