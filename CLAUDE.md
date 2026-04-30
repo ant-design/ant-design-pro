@@ -43,6 +43,10 @@ npm run i18n-remove # Remove i18n, replace with zh-CN
 npm run record     # Record request data for mock replay
 ```
 
+## Documentation
+
+- `docs/cheatsheet.zh-CN.md` / `docs/cheatsheet.en-US.md` — comprehensive cheatsheet covering routes, layout, data flow, requests, permissions, i18n, styling, and testing with code examples. Rendered in the Welcome page via `@ant-design/x-markdown`.
+
 ## Architecture
 
 ### Framework: Umi Max
