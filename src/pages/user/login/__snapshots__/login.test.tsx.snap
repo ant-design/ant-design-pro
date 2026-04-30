@@ -482,7 +482,7 @@ exports[`Login Page should login success 1`] = `
               target="_blank"
               title="umi"
             >
-              Umi 4.6.47
+              Umi 4.6.49
             </a>
             <a
               class="ant-pro-global-footer-list-link"
@@ -491,7 +491,7 @@ exports[`Login Page should login success 1`] = `
               target="_blank"
               title="utoo"
             >
-              Utoo 1.4.0
+              Utoo 1.4.2-alpha.0
             </a>
             <a
               class="ant-pro-global-footer-list-link"
@@ -1011,7 +1011,7 @@ exports[`Login Page should show login form 1`] = `
               target="_blank"
               title="umi"
             >
-              Umi 4.6.47
+              Umi 4.6.49
             </a>
             <a
               class="ant-pro-global-footer-list-link"
@@ -1020,7 +1020,7 @@ exports[`Login Page should show login form 1`] = `
               target="_blank"
               title="utoo"
             >
-              Utoo 1.4.0
+              Utoo 1.4.2-alpha.0
             </a>
             <a
               class="ant-pro-global-footer-list-link"

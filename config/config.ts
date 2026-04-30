@@ -16,8 +16,10 @@ const commitHash =
   (() => {
     try {
       return require('child_process')
-        .execSync('git rev-parse HEAD')
-        .toString()
+        .execSync('git rev-parse HEAD', {
+          stdio: ['ignore', 'pipe', 'ignore'],
+          encoding: 'utf-8',
+        })
         .trim();
     } catch {
       return '';
