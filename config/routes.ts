@@ -38,7 +38,7 @@ export default [
       },
       {
         name: '404',
-        component: './404',
+        component: './exception/404',
         path: '/user/*',
       },
     ],
@@ -292,7 +292,7 @@ export default [
   },
   {
     name: '404',
-    component: './404',
+    component: './exception/404',
     path: '/*',
   },
 ];
