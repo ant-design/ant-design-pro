@@ -52,12 +52,14 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
+    "@ant-design/cli": "^6.3.7",
     "@biomejs/biome": "^2.4.13",
     "@commitlint/cli": "^20.5.2",
     "@commitlint/config-conventional": "^20.5.0",
     "@tailwindcss/postcss": "^4.2.4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
+    "@types/d3": "^7.4.3",
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.6.0",
@@ -65,7 +67,6 @@
     "@types/react-dom": "^19.2.3",
     "@types/react-helmet": "^6.1.11",
     "@types/topojson-client": "^3.1.5",
-    "@types/d3": "^7.4.3",
     "@types/topojson-specification": "^1.0.5",
     "@umijs/lint": "^4.6.49",
     "@umijs/max": "^4.6.49",
