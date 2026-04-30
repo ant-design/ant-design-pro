@@ -93,7 +93,7 @@ npm install                                                # Update dependencies
 
 **Build tool:** This project uses [utoopack](https://github.com/utooland/utoo) (a next-gen bundler powered by Turbopack) as the default build tool, configured via the `utoopack` field in `config/config.ts`. utoopack is Webpack-compatible and supports `module.rules` for custom loaders.
 
-→ See [umi Getting Started](https://umijs.org/docs/guides/getting-started), [utoo Docs](https://utoo.land)
+→ See [umi Getting Started](https://umijs.org/en-US/docs/guides/getting-started), [utoo Docs](https://utoo.land)
 
 ## Routes & Menu
 
@@ -136,7 +136,7 @@ const location = useLocation(); // current route info
 
 > 💡 The `name` field is automatically mapped to `menu.xxx` i18n keys. Configure translations in `src/locales/`.
 
-→ See [umi Routes](https://umijs.org/docs/guides/routes), [Umi Max Layout & Menu](https://umijs.org/docs/max/layout-menu)
+→ See [umi Routes](https://umijs.org/en-US/docs/guides/routes), [Umi Max Layout & Menu](https://umijs.org/en-US/docs/max/layout-menu)
 
 ## Layout
 
@@ -174,9 +174,9 @@ const Page = () => (
 
 **Custom areas:** Top-right `src/components/RightContent`, footer `src/components/Footer`.
 
-→ See [Umi Max Layout & Menu](https://umijs.org/docs/max/layout-menu)
+→ See [Umi Max Layout & Menu](https://umijs.org/en-US/docs/max/layout-menu)
 
-## Data Flow
+## Data Stream
 
 **useModel — lightweight global state:** Create a file in `src/models/` to auto-register:
 
@@ -242,7 +242,7 @@ const { initialState } = useModel('@@initialState');
 
 > 💡 `getInitialState` runs once on app startup, ideal for fetching global info (user identity, permissions).
 
-→ See [Umi Max Data Flow](https://umijs.org/docs/max/data-flow)
+→ See [Umi Max Data Stream](https://umijs.org/en-US/docs/max/data-flow)
 
 ## Request
 
@@ -281,9 +281,9 @@ Auto-generates API calling code under `src/services/` based on `config/oneapi.js
 
 > 💡 Generated code uses `import { request } from '@umijs/max'` directly — no manual wrapping needed.
 
-→ See [Umi Max Request](https://umijs.org/docs/max/request)
+→ See [Umi Max Request](https://umijs.org/en-US/docs/max/request)
 
-## Access Control
+## Permissions
 
 **Define permissions** in `src/access.ts`:
 
@@ -318,7 +318,7 @@ const access = useAccess();
 if (access.canAdmin) { /* ... */ }
 ```
 
-→ See [Umi Max Access](https://umijs.org/docs/max/access)
+→ See [Umi Max Permissions](https://umijs.org/en-US/docs/max/access)
 
 ## Internationalization
 
@@ -366,7 +366,7 @@ import { setLocale } from '@umijs/max';
 setLocale('en-US', false);  // false = no page reload
 ```
 
-→ See [Umi Max i18n](https://umijs.org/docs/max/i18n)
+→ See [Umi Max i18n](https://umijs.org/en-US/docs/max/i18n)
 
 ## Styling
 
@@ -424,7 +424,7 @@ Use SettingDrawer in dev mode to switch themes in real-time.
 
 > 💡 Three styling approaches can coexist: Tailwind for layout, CSS Modules for component styles, antd-style when consuming theme tokens.
 
-→ See [umi Styling](https://umijs.org/docs/guides/styling), [Umi Max antd Dynamic Theme](https://umijs.org/docs/max/antd#动态主题)
+→ See [umi Styling](https://umijs.org/en-US/docs/guides/styling), [Umi Max antd Dynamic Theme](https://umijs.org/en-US/docs/max/antd#dynamically-switch-global-configuration)
 
 ## Testing & Debugging
 
@@ -465,7 +465,7 @@ export default {
 
 > 💡 Use `MOCK=none` to skip mock and proxy to backend: `npm run start:no-mock`.
 
-→ See [umi Testing](https://umijs.org/docs/guides/testing), [umi Mock](https://umijs.org/docs/guides/mock)
+→ See [umi Testing](https://umijs.org/en-US/docs/guides/test), [umi Mock](https://umijs.org/en-US/docs/guides/mock)
 
 ## FAQ
 
@@ -487,4 +487,4 @@ Create a file in `src/models/` exporting a custom Hook, then use `useModel('file
 **Q: How to use OpenAPI code generation?**
 1. Configure `openAPI` in `config/config.ts` 2. Run `npm run openapi` 3. Code is auto-generated under `src/services/`
 
-→ See [umi FAQ](https://umijs.org/docs/guides/faq)
+→ See [umi FAQ](https://umijs.org/en-US/docs/introduce/faq)

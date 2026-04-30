@@ -424,7 +424,7 @@ antd: {
 
 > 💡 三种样式方案可以共存：Tailwind 适合布局、CSS Modules 适合组件样式、antd-style 适合需要消费主题 token 的场景。
 
-→ 更多内容见 [umi 样式文档](https://umijs.org/docs/guides/styling)、[Umi Max antd 动态主题](https://umijs.org/docs/max/antd#动态主题)
+→ 更多内容见 [umi 样式文档](https://umijs.org/docs/guides/styling)、[Umi Max antd 动态主题](https://umijs.org/docs/max/antd#动态切换全局配置)
 
 ## 测试 & 调试
 
@@ -465,7 +465,7 @@ export default {
 
 > 💡 用 `MOCK=none` 启动可跳过 Mock，直接代理到后端：`npm run start:no-mock`。
 
-→ 更多内容见 [umi 测试](https://umijs.org/docs/guides/testing)、[umi Mock](https://umijs.org/docs/guides/mock)
+→ 更多内容见 [umi 测试](https://umijs.org/docs/guides/test)、[umi Mock](https://umijs.org/docs/guides/mock)
 
 ## FAQ
 
@@ -487,4 +487,4 @@ export default {
 **Q: 如何使用 OpenAPI 代码生成？**
 1. 在 `config/config.ts` 配置 `openAPI` 2. 运行 `npm run openapi` 3. 自动生成 `src/services/` 下的代码
 
-→ 更多内容见 [umi FAQ](https://umijs.org/docs/guides/faq)
+→ 更多内容见 [umi FAQ](https://umijs.org/docs/introduce/faq)
