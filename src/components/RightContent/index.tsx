@@ -1,34 +1,54 @@
 import {
   BookOutlined,
   CheckOutlined,
+  DownOutlined,
   GlobalOutlined,
   HistoryOutlined,
 } from '@ant-design/icons';
-import {
-  getAllLocales,
-  getLocale,
-  history,
-  setLocale,
-  useIntl,
-} from '@umijs/max';
+import { getAllLocales, getLocale, history, setLocale } from '@umijs/max';
 import type { MenuProps } from 'antd';
+import { Button } from 'antd';
+import { createStyles } from 'antd-style';
 import React, { useMemo } from 'react';
 import HeaderDropdown from '../HeaderDropdown';
-import { localeLabelMap } from './AvatarDropdown';
 
-export type SiderTheme = 'light' | 'dark';
+export const localeLabelMap: Record<string, { emoji: string; label: string }> =
+  {
+    'zh-CN': { emoji: '🇨🇳', label: '简体中文' },
+    'zh-TW': { emoji: '🇭🇰', label: '繁體中文' },
+    'en-US': { emoji: '🇺🇸', label: 'English' },
+    'ja-JP': { emoji: '🇯🇵', label: '日本語' },
+    'pt-BR': { emoji: '🇧🇷', label: 'Português' },
+    'id-ID': { emoji: '🇮🇩', label: 'Bahasa Indonesia' },
+    'fa-IR': { emoji: '🇮🇷', label: 'فارسی' },
+    'bn-BD': { emoji: '🇧🇩', label: 'বাংলা' },
+  };
+
+const useStyles = createStyles(({ token, css }) => ({
+  action: css`
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 36px !important;
+    min-width: 36px;
+    padding-inline: 8px !important;
+    padding-block: 0 !important;
+    border-radius: ${token.borderRadius}px !important;
+  `,
+}));
 
 export const DocLink: React.FC = () => {
+  const { styles } = useStyles();
   return (
-    <span
-      className="anticon"
-      style={{ cursor: 'pointer', padding: '0 8px', fontSize: 16 }}
+    <Button
+      type="text"
+      className={styles.action}
+      icon={<BookOutlined />}
+      aria-label="使用文档"
       onClick={() => {
         history.push('/welcome');
       }}
-    >
-      <BookOutlined />
-    </span>
+    />
   );
 };
 
@@ -44,26 +64,28 @@ const onVersionClick: MenuProps['onClick'] = ({ key }) => {
 };
 
 export const VersionDropdown: React.FC = () => {
-  const intl = useIntl();
+  const { styles } = useStyles();
   return (
     <HeaderDropdown
+      placement="bottomRight"
+      arrow
       menu={{
         selectedKeys: [],
         onClick: onVersionClick,
         items: versionItems,
+        style: { minWidth: 100 },
       }}
     >
-      <span
-        className="anticon"
-        style={{ cursor: 'pointer', padding: '0 8px', fontSize: 16 }}
-      >
+      <Button type="text" className={styles.action} aria-label="历史版本">
         <HistoryOutlined />
-      </span>
+        <DownOutlined style={{ fontSize: 10, marginLeft: 4 }} />
+      </Button>
     </HeaderDropdown>
   );
 };
 
 export const LangDropdown: React.FC = () => {
+  const { styles } = useStyles();
   const allLocales = useMemo(() => getAllLocales(), []);
   const currentLocale = getLocale();
   const supportLocales = allLocales.filter((l) => l in localeLabelMap);
@@ -72,22 +94,16 @@ export const LangDropdown: React.FC = () => {
     return null;
   }
 
-  const langItems: MenuProps['items'] = [
-    {
-      key: 'lang',
-      label: localeLabelMap[currentLocale]?.label ?? currentLocale,
-      children: supportLocales.map((locale) => ({
-        key: `lang-${locale}`,
-        icon:
-          locale === currentLocale ? (
-            <CheckOutlined style={{ color: '#52c41a' }} />
-          ) : (
-            <span style={{ display: 'inline-block', width: 14 }} />
-          ),
-        label: `${localeLabelMap[locale]?.emoji ?? ''} ${localeLabelMap[locale]?.label ?? locale}`,
-      })),
-    },
-  ];
+  const langItems: MenuProps['items'] = supportLocales.map((locale) => ({
+    key: `lang-${locale}`,
+    icon:
+      locale === currentLocale ? (
+        <CheckOutlined style={{ color: '#52c41a' }} />
+      ) : (
+        <span style={{ display: 'inline-block', width: 14 }} />
+      ),
+    label: `${localeLabelMap[locale]?.emoji ?? ''} ${localeLabelMap[locale]?.label ?? locale}`,
+  }));
 
   const onLangClick: MenuProps['onClick'] = ({ key }) => {
     if (key.startsWith('lang-')) {
@@ -97,18 +113,19 @@ export const LangDropdown: React.FC = () => {
 
   return (
     <HeaderDropdown
+      placement="bottomRight"
+      arrow
       menu={{
-        selectedKeys: [],
+        selectedKeys: [`lang-${currentLocale}`],
         onClick: onLangClick,
         items: langItems,
+        style: { minWidth: 180 },
       }}
     >
-      <span
-        className="anticon"
-        style={{ cursor: 'pointer', padding: '0 8px', fontSize: 16 }}
-      >
+      <Button type="text" className={styles.action} aria-label="语言切换">
         <GlobalOutlined />
-      </span>
+        <DownOutlined style={{ fontSize: 10, marginLeft: 4 }} />
+      </Button>
     </HeaderDropdown>
   );
 };
