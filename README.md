@@ -6,7 +6,7 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 
 [![CI](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml)
 [![Build With Utoo](https://img.shields.io/badge/build%20with-utoo-028fe4.svg?style=flat-square)](https://utoo.land)
-[![Build With Umi](https://img.shields.io/badge/build%20with-umi-028fe4.svg?style=flat-square)](http://umijs.org/)
+[![Build With Umi](https://img.shields.io/badge/build%20with-umi-028fe4.svg?style=flat-square)](https://umijs.org/)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 [![](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
 
@@ -17,7 +17,7 @@ Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md)
 
 </div>
 
-- Preview: http://preview.pro.ant.design
+- Preview: https://preview.pro.ant.design
 - Documentation: [docs/cheatsheet.en-US.md](./docs/cheatsheet.en-US.md)
 - ChangeLog: https://github.com/ant-design/ant-design-pro/releases
 - FAQ: [docs/cheatsheet.en-US.md#faq](./docs/cheatsheet.en-US.md#faq)
@@ -26,9 +26,9 @@ Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md)
 
 - :bulb: **TypeScript**: A language for application-scale JavaScript
 - :scroll: **Blocks**: Build page with block template
-- :gem: **Neat Design**: Follow [Ant Design specification](http://ant.design/)
+- :gem: **Neat Design**: Follow [Ant Design specification](https://ant.design/)
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd
+- :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd/utoo
 - :iphone: **Responsive**: Designed for variable screen sizes
 - :art: **Theming**: Customizable theme with simple config
 - :globe_with_meridians: **International**: Built-in i18n solution
