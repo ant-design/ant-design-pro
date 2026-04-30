@@ -152,7 +152,16 @@ const Welcome: React.FC = () => {
   const isDark = initialState?.settings?.navTheme === 'realDark';
 
   return (
-    <PageContainer>
+    <PageContainer
+      title={
+        <span className="welcome-gradient-title">
+          {intl.formatMessage({
+            id: 'pages.welcome.celebrationTitle',
+            defaultMessage: '欢迎使用 Ant Design Pro V6 🎉',
+          })}
+        </span>
+      }
+    >
       <div
         data-theme={isDark ? 'dark' : 'light'}
         className="flex flex-col gap-6 md:flex-row"
