@@ -28,7 +28,7 @@ Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md)
 - :scroll: **Blocks**: Build page with block template
 - :gem: **Neat Design**: Follow [Ant Design specification](https://ant.design/)
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd/utoo
+- :rocket: **State of The Art Development**: Newest development stack of React/umi/antd/utoo
 - :iphone: **Responsive**: Designed for variable screen sizes
 - :art: **Theming**: Customizable theme with simple config
 - :globe_with_meridians: **International**: Built-in i18n solution
