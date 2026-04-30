@@ -37,7 +37,7 @@ export default [
         component: './user/register',
       },
       {
-        component: '404',
+        component: './404',
         path: '/user/*',
       },
     ],
@@ -290,7 +290,7 @@ export default [
     redirect: '/dashboard/analysis',
   },
   {
-    component: '404',
+    component: './404',
     path: './*',
   },
 ];
