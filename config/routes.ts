@@ -291,7 +291,6 @@ export default [
     redirect: '/dashboard/analysis',
   },
   {
-    name: '404',
     component: './exception/404',
     path: '/*',
   },
