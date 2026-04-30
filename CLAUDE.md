@@ -111,7 +111,7 @@ ProLayout is configured via the `layout` export in `src/app.tsx` (`RunTimeLayout
 
 ### Page Co-location Pattern
 
-Each page directory contains its own `index.tsx`, optional `service.ts`, `_mock.ts`, `data.d.ts` (types), and `style.style.ts` or CSS files. This is the primary organizational pattern — keep page-specific code with the page.
+Each page directory contains its own index.tsx, optional service.ts, _mock.ts, data.d.ts (types), and style.ts or CSS files. This is the primary organizational pattern — keep page-specific code with the page.
 
 ### Cloudflare Worker Backend
 
