@@ -174,6 +174,14 @@ export default defineConfig({
    */
   access: {},
   /**
+   * @name Google Analytics
+   * @description 使用 GA4 (gtag.js) 进行站点分析
+   * @doc https://umijs.org/docs/max/analytics
+   */
+  analytics: {
+    ga_v2: 'G-59NF1VHHPF',
+  },
+  /**
    * @name <head> 中额外的 script
    * @description 配置 <head> 中额外的 script
    */
