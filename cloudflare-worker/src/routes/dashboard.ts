@@ -1,17 +1,18 @@
 import { Hono } from 'hono';
 import {
-  activities,
-  analysisChartData,
-  projectNotice,
+  getActivities,
+  getAnalysisChartData,
+  getProjectNotice,
 } from '../data/dashboard';
 
 const app = new Hono();
 
 app.get('/fake_analysis_chart_data', (c) => {
-  return c.json({ data: analysisChartData });
+  return c.json({ data: getAnalysisChartData() });
 });
 
 app.get('/fake_workplace_chart_data', (c) => {
+  const analysisChartData = getAnalysisChartData();
   return c.json({
     data: {
       visitData: analysisChartData.visitData,
@@ -36,11 +37,11 @@ app.get('/fake_workplace_chart_data', (c) => {
 });
 
 app.get('/project/notice', (c) => {
-  return c.json({ data: projectNotice });
+  return c.json({ data: getProjectNotice() });
 });
 
 app.get('/activities', (c) => {
-  return c.json({ data: activities });
+  return c.json({ data: getActivities() });
 });
 
 export default app;
