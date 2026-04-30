@@ -76,7 +76,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
     }
     if (key.startsWith('version-')) {
       const url = key.replace('version-', '');
-      window.open(url, '_blank');
+      window.open(url, '_blank', 'noopener,noreferrer');
       return;
     }
     history.push(`/account/${key}`);
