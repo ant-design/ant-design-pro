@@ -2,6 +2,7 @@ import {
   BookOutlined,
   CheckOutlined,
   GlobalOutlined,
+  HistoryOutlined,
   LogoutOutlined,
   SettingOutlined,
   SkinOutlined,
@@ -73,6 +74,11 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
       setLocale(key.replace('lang-', ''), false);
       return;
     }
+    if (key.startsWith('version-')) {
+      const url = key.replace('version-', '');
+      window.open(url, '_blank');
+      return;
+    }
     history.push(`/account/${key}`);
   };
 
@@ -107,6 +113,29 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
       key: 'doc',
       icon: <BookOutlined />,
       label: '使用文档',
+    },
+    {
+      key: 'version',
+      icon: <HistoryOutlined />,
+      label: '历史版本',
+      children: [
+        {
+          key: 'version-https://v5.pro.ant.design',
+          label: 'v5',
+        },
+        {
+          key: 'version-https://v4.pro.ant.design',
+          label: 'v4',
+        },
+        {
+          key: 'version-https://v2.pro.ant.design',
+          label: 'v2',
+        },
+        {
+          key: 'version-https://v1.pro.ant.design',
+          label: 'v1',
+        },
+      ],
     },
     ...(supportLocales.length > 1
       ? [
