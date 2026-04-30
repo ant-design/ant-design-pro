@@ -117,6 +117,21 @@ Each page directory contains its own index.tsx, optional service.ts, _mock.ts, d
 
 `cloudflare-worker/` is a separate deployable (Hono framework, own `package.json`/`tsconfig.json`). Not an npm workspace — manage independently. Provides the production demo API.
 
+## Ant Design CLI
+
+`@ant-design/cli` (antd) is installed as a dev dependency. It provides offline antd component metadata and project analysis. Run via `npx antd`.
+
+- **Always query before writing antd code** — use `npx antd info <Component>` to check props/APIs rather than guessing from memory
+- `npx antd demo <Component> <name>` — get working demo code
+- `npx antd token <Component>` — check design tokens
+- `npx antd semantic <Component>` — check semantic classNames
+- `npx antd lint ./src` — find deprecated or problematic antd usage
+- `npx antd doctor` — diagnose project configuration issues
+- `npx antd migrate <v1> <v2>` — migration checklist between versions
+- Always use `--format json` for structured output
+
+The CLI also supports MCP server mode: `npx antd mcp` (for IDE integrations).
+
 ## Key Conventions
 
 - **Biome** replaces ESLint + Prettier. Config in `biome.json`. Pre-commit hook runs `lint-staged` with Biome.
