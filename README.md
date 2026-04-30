@@ -26,11 +26,11 @@ Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md)
 
 - :bulb: **TypeScript**: A language for application-scale JavaScript
 - :scroll: **Blocks**: Build page with block template
-- :gem: **Neat Design**: Follow [Ant Design specification](https://ant.design/)
+- :gem: **Neat Design**: Built on [Ant Design 6](https://ant.design/) specification
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
-- :rocket: **State of The Art Development**: Newest development stack of React/umi/antd/utoo
+- :rocket: **State of The Art Development**: Newest development stack of React 19/[umi](https://umijs.org/)/[antd 6](https://ant.design/)/[utoo](https://utoo.land)
 - :iphone: **Responsive**: Designed for variable screen sizes
-- :art: **Theming**: Customizable theme with simple config
+- :art: **Theming**: Customizable theme with [antd-style](https://github.com/ant-design/antd-style)
 - :globe_with_meridians: **International**: Built-in i18n solution
 - :gear: **Best Practices**: Solid workflow to make your code healthy
 - :1234: **Mock development**: Easy to use mock development solution

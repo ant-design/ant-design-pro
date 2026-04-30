@@ -25,11 +25,11 @@ Language : [🇺🇸](./README.md) | 🇨🇳
 
 - :bulb: **TypeScript**: 应用程序级 JavaScript 的语言
 - :scroll: **区块**: 通过区块模板快速构建页面
-- :gem: **优雅美观**：基于 Ant Design 体系精心设计
+- :gem: **优雅美观**：基于 [Ant Design 6](https://ant.design/) 体系精心设计
 - :triangular_ruler: **常见设计模式**：提炼自中后台应用的典型页面和场景
-- :rocket: **最新技术栈**：使用 React/umi/antd/utoo 等前端前沿技术开发
+- :rocket: **最新技术栈**：使用 React 19/[umi](https://umijs.org/)/[antd 6](https://ant.design/)/[utoo](https://utoo.land) 等前端前沿技术开发
 - :iphone: **响应式**：针对不同屏幕大小设计
-- :art: **主题**：可配置的主题满足多样化的品牌诉求
+- :art: **主题**：基于 [antd-style](https://github.com/ant-design/antd-style) 的可配置主题满足多样化品牌诉求
 - :globe_with_meridians: **国际化**：内建业界通用的国际化方案
 - :gear: **最佳实践**：良好的工程实践助您持续产出高质量代码
 - :1234: **Mock 数据**：实用的本地数据调试方案
