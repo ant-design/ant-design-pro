@@ -77,11 +77,9 @@ export const VersionDropdown: React.FC = () => {
         style: { minWidth: 100 },
       }}
     >
-      <Tooltip title="历史版本">
-        <Button type="text" className={styles.action} aria-label="历史版本">
-          <ForkOutlined />
-        </Button>
-      </Tooltip>
+      <Button type="text" className={styles.action} aria-label="历史版本">
+        <ForkOutlined />
+      </Button>
     </HeaderDropdown>
   );
 };
@@ -124,11 +122,9 @@ export const LangDropdown: React.FC = () => {
         style: { minWidth: 180 },
       }}
     >
-      <Tooltip title={localeLabelMap[currentLocale]?.label ?? '语言切换'}>
-        <Button type="text" className={styles.action} aria-label="语言切换">
-          <GlobalOutlined />
-        </Button>
-      </Tooltip>
+      <Button type="text" className={styles.action} aria-label="语言切换">
+        <GlobalOutlined />
+      </Button>
     </HeaderDropdown>
   );
 };
