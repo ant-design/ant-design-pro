@@ -176,7 +176,7 @@ const Page = () => (
 
 → See [Umi Max Layout & Menu](https://umijs.org/en-US/docs/max/layout-menu)
 
-## Data Stream
+## Data Flow
 
 **useModel — lightweight global state:** Create a file in `src/models/` to auto-register:
 
