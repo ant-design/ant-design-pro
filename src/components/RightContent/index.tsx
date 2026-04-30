@@ -1,7 +1,6 @@
 import {
   BookOutlined,
   CheckOutlined,
-  DownOutlined,
   GlobalOutlined,
   HistoryOutlined,
 } from '@ant-design/icons';
@@ -78,7 +77,6 @@ export const VersionDropdown: React.FC = () => {
     >
       <Button type="text" className={styles.action} aria-label="历史版本">
         <HistoryOutlined />
-        <DownOutlined style={{ fontSize: 10, marginLeft: 4 }} />
       </Button>
     </HeaderDropdown>
   );
@@ -124,7 +122,6 @@ export const LangDropdown: React.FC = () => {
     >
       <Button type="text" className={styles.action} aria-label="语言切换">
         <GlobalOutlined />
-        <DownOutlined style={{ fontSize: 10, marginLeft: 4 }} />
       </Button>
     </HeaderDropdown>
   );
