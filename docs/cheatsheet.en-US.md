@@ -242,7 +242,7 @@ const { initialState } = useModel('@@initialState');
 
 > 💡 `getInitialState` runs once on app startup, ideal for fetching global info (user identity, permissions).
 
-→ See [Umi Max Data Stream](https://umijs.org/en-US/docs/max/data-flow)
+→ See [Umi Max Data Flow](https://umijs.org/en-US/docs/max/data-flow)
 
 ## Request
 
