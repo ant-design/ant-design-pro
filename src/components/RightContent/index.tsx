@@ -1,12 +1,12 @@
 import {
   BookOutlined,
   CheckOutlined,
+  ForkOutlined,
   GlobalOutlined,
-  HistoryOutlined,
 } from '@ant-design/icons';
 import { getAllLocales, getLocale, history, setLocale } from '@umijs/max';
 import type { MenuProps } from 'antd';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useMemo } from 'react';
 import HeaderDropdown from '../HeaderDropdown';
@@ -39,15 +39,17 @@ const useStyles = createStyles(({ token, css }) => ({
 export const DocLink: React.FC = () => {
   const { styles } = useStyles();
   return (
-    <Button
-      type="text"
-      className={styles.action}
-      icon={<BookOutlined />}
-      aria-label="使用文档"
-      onClick={() => {
-        history.push('/welcome');
-      }}
-    />
+    <Tooltip title="使用文档">
+      <Button
+        type="text"
+        className={styles.action}
+        icon={<BookOutlined />}
+        aria-label="使用文档"
+        onClick={() => {
+          history.push('/welcome');
+        }}
+      />
+    </Tooltip>
   );
 };
 
@@ -75,9 +77,11 @@ export const VersionDropdown: React.FC = () => {
         style: { minWidth: 100 },
       }}
     >
-      <Button type="text" className={styles.action} aria-label="历史版本">
-        <HistoryOutlined />
-      </Button>
+      <Tooltip title="历史版本">
+        <Button type="text" className={styles.action} aria-label="历史版本">
+          <ForkOutlined />
+        </Button>
+      </Tooltip>
     </HeaderDropdown>
   );
 };
@@ -120,9 +124,11 @@ export const LangDropdown: React.FC = () => {
         style: { minWidth: 180 },
       }}
     >
-      <Button type="text" className={styles.action} aria-label="语言切换">
-        <GlobalOutlined />
-      </Button>
+      <Tooltip title={localeLabelMap[currentLocale]?.label ?? '语言切换'}>
+        <Button type="text" className={styles.action} aria-label="语言切换">
+          <GlobalOutlined />
+        </Button>
+      </Tooltip>
     </HeaderDropdown>
   );
 };
