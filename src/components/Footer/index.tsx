@@ -18,9 +18,8 @@ const getRepoUrl = () => {
 
 const REPO_URL = getRepoUrl();
 
-// Git commit hash, can be updated via CI/CD (GitHub Actions or Cloudflare Pages)
-const COMMIT_HASH =
-  process.env.COMMIT_HASH || process.env.CF_PAGES_COMMIT_SHA || '';
+// Git commit hash, resolved at build time from env vars or git
+const COMMIT_HASH = process.env.COMMIT_HASH || '';
 
 const Footer: React.FC = () => {
   return (
@@ -34,6 +33,18 @@ const Footer: React.FC = () => {
           key: 'version',
           title: `v${__APP_VERSION__}`,
           href: REPO_URL,
+          blankTarget: true,
+        },
+        {
+          key: 'umi',
+          title: `Umi ${__UMI_VERSION__}`,
+          href: 'https://umijs.org/',
+          blankTarget: true,
+        },
+        {
+          key: 'utoo',
+          title: `Utoo ${__UTOO_VERSION__}`,
+          href: 'https://utoo.land',
           blankTarget: true,
         },
         ...(COMMIT_HASH
