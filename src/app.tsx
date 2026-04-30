@@ -10,7 +10,13 @@ import React from 'react';
 // Initialize dayjs plugins globally
 dayjs.extend(relativeTime);
 
-import { AvatarDropdown, Footer } from '@/components';
+import {
+  AvatarDropdown,
+  DocLink,
+  Footer,
+  LangDropdown,
+  VersionDropdown,
+} from '@/components';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
@@ -80,6 +86,11 @@ export const layout: RunTimeLayoutConfig = ({
       }
       return dom;
     },
+    actionsRender: () => [
+      <DocLink key="doc" />,
+      <VersionDropdown key="version" />,
+      <LangDropdown key="lang" />,
+    ],
     avatarProps: {
       src: initialState?.currentUser?.avatar,
       title: 'ProUser',

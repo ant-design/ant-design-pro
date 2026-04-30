@@ -6,7 +6,7 @@
  * 布局组件
  */
 import Footer from './Footer';
-import { Question, SelectLang } from './RightContent';
+import { DocLink, LangDropdown, VersionDropdown } from './RightContent';
 import { AvatarDropdown } from './RightContent/AvatarDropdown';
 
 /**
@@ -17,4 +17,4 @@ export { default as AvatarList } from './AvatarList';
 export { default as StandardFormRow } from './StandardFormRow';
 export { default as TagSelect } from './TagSelect';
 
-export { AvatarDropdown, Footer, Question, SelectLang };
+export { AvatarDropdown, DocLink, Footer, LangDropdown, VersionDropdown };
