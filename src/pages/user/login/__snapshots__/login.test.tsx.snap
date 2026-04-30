@@ -477,6 +477,24 @@ exports[`Login Page should login success 1`] = `
             </a>
             <a
               class="ant-pro-global-footer-list-link"
+              href="https://umijs.org/"
+              rel="noreferrer"
+              target="_blank"
+              title="umi"
+            >
+              Umi 4.6.49
+            </a>
+            <a
+              class="ant-pro-global-footer-list-link"
+              href="https://utoo.land"
+              rel="noreferrer"
+              target="_blank"
+              title="utoo"
+            >
+              Utoo 1.4.2-alpha.0
+            </a>
+            <a
+              class="ant-pro-global-footer-list-link"
               href="https://github.com/ant-design/ant-design-pro"
               rel="noreferrer"
               target="_blank"
@@ -985,6 +1003,24 @@ exports[`Login Page should show login form 1`] = `
               title="version"
             >
               vtest
+            </a>
+            <a
+              class="ant-pro-global-footer-list-link"
+              href="https://umijs.org/"
+              rel="noreferrer"
+              target="_blank"
+              title="umi"
+            >
+              Umi 4.6.49
+            </a>
+            <a
+              class="ant-pro-global-footer-list-link"
+              href="https://utoo.land"
+              rel="noreferrer"
+              target="_blank"
+              title="utoo"
+            >
+              Utoo 1.4.2-alpha.0
             </a>
             <a
               class="ant-pro-global-footer-list-link"

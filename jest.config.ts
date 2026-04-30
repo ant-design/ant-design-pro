@@ -1,4 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { configUmiAlias, createConfig } from '@umijs/max/test.js';
+
+const readPkgVersion = (pkg: string) =>
+  JSON.parse(readFileSync(join('node_modules', pkg, 'package.json'), 'utf-8'))
+    .version;
 
 export default async (): Promise<any> => {
   const config = await configUmiAlias({
@@ -23,6 +29,8 @@ export default async (): Promise<any> => {
       ...config.globals,
       localStorage: null,
       __APP_VERSION__: 'test',
+      __UMI_VERSION__: readPkgVersion('@umijs/max'),
+      __UTOO_VERSION__: readPkgVersion('@utoo/pack'),
     },
   };
 };
