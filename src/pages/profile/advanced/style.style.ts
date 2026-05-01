@@ -12,7 +12,6 @@ const useStyles = createStyles(({ token }) => {
     },
     stepDescription: {
       position: 'relative',
-      left: '38px',
       paddingTop: '8px',
       fontSize: '14px',
       textAlign: 'left',

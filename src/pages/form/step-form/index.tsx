@@ -191,7 +191,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
               <Alert
                 closable
                 showIcon
-                message="确认转账后，资金将直接打入对方账户，无法退回。"
+                title="确认转账后，资金将直接打入对方账户，无法退回。"
                 style={{
                   marginBottom: 24,
                 }}

@@ -59,7 +59,7 @@ export default () => {
       </Descriptions>
       <br />
       <Steps
-        progressDot
+        type="dot"
         current={1}
         items={[
           {
@@ -72,7 +72,7 @@ export default () => {
                 创建项目
               </span>
             ),
-            description: desc1,
+            content: desc1,
           },
           {
             title: (
@@ -84,7 +84,7 @@ export default () => {
                 部门初审
               </span>
             ),
-            description: desc2,
+            content: desc2,
           },
           {
             title: (
