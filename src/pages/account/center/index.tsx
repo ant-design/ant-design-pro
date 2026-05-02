@@ -83,7 +83,6 @@ const TagList: React.FC<{
   const showInput = () => {
     setInputVisible(true);
     if (ref.current) {
-      // eslint-disable-next-line no-unused-expressions
       ref.current?.focus();
     }
   };

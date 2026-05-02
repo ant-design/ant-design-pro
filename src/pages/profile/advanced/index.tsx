@@ -208,6 +208,57 @@ const groupItems3: DescriptionsProps['items'] = [
   { key: '1', label: '负责人', children: '付小小' },
   { key: '2', label: '角色码', children: '1234568' },
 ];
+const customDot: IconRenderType = (dot: React.ReactNode, { active }) => {
+  if (active) {
+    const popoverContent = (
+      <div
+        style={{
+          width: 160,
+        }}
+      >
+        吴加号
+        <span
+          style={{
+            float: 'right',
+          }}
+        >
+          <Badge
+            status="default"
+            text={
+              <span
+                style={{
+                  color: 'rgba(0, 0, 0, 0.45)',
+                }}
+              >
+                未响应
+              </span>
+            }
+          />
+        </span>
+        <div
+          style={{
+            marginTop: 4,
+          }}
+        >
+          耗时：2小时25分钟
+        </div>
+      </div>
+    );
+    return (
+      <Popover
+        placement="topLeft"
+        arrow={{
+          pointAtCenter: true,
+        }}
+        content={popoverContent}
+      >
+        <span>{dot}</span>
+      </Popover>
+    );
+  }
+  return dot;
+};
+
 type AdvancedState = {
   operationKey: 'tab1' | 'tab2' | 'tab3';
   tabActiveKey: string;
@@ -269,57 +320,6 @@ const Advanced: FC = () => {
     operationKey: 'tab1',
     tabActiveKey: 'detail',
   });
-
-  const customDot: IconRenderType = (dot: React.ReactNode, { active }) => {
-    if (active) {
-      const popoverContent = (
-        <div
-          style={{
-            width: 160,
-          }}
-        >
-          吴加号
-          <span
-            style={{
-              float: 'right',
-            }}
-          >
-            <Badge
-              status="default"
-              text={
-                <span
-                  style={{
-                    color: 'rgba(0, 0, 0, 0.45)',
-                  }}
-                >
-                  未响应
-                </span>
-              }
-            />
-          </span>
-          <div
-            style={{
-              marginTop: 4,
-            }}
-          >
-            耗时：2小时25分钟
-          </div>
-        </div>
-      );
-      return (
-        <Popover
-          placement="topLeft"
-          arrow={{
-            pointAtCenter: true,
-          }}
-          content={popoverContent}
-        >
-          <span>{dot}</span>
-        </Popover>
-      );
-    }
-    return dot;
-  };
 
   const { data = {}, isLoading: loading } = useQuery<AdvancedProfileData>({
     queryKey: ['profile-advanced'],
