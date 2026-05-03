@@ -20,7 +20,6 @@ const pageDirsToDelete = [
   'src/pages/list/search',
   'src/pages/profile',
   'src/pages/result',
-  'src/pages/exception',
   'src/pages/account',
   'src/pages/user/register',
   'src/pages/user/register-result',
