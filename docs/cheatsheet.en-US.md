@@ -6,7 +6,7 @@
 
 ## 🎉 What's New in v6
 
-- **React 19 + antd 6 + Umi Max 4**: Full upgrade to the latest stack, powered by utoopack (Turbopack)
+- **React 19 + antd 6 + Umi Max 4**: Full upgrade to the latest stack, powered by Mako (Rust-based bundler)
 - **Style Overhaul**: Less → Tailwind CSS v4 + antd-style + CSS Modules, CSS variable theming enabled
 - **AI Assistant Page**: Chat interface example built with Ant Design X
 - **React Query**: Migrated from useRequest to @tanstack/react-query
@@ -91,9 +91,9 @@ npm install                                                # Update dependencies
 
 > 💡 `npm run simple` removes demo pages (dashboard, form, list etc.) and unused dependencies (plots, etc.), replacing with minimal routes. Ideal for starting from scratch. **Commit your code first so you can revert if needed.**
 
-**Build tool:** This project uses [utoopack](https://github.com/utooland/utoo) (a next-gen bundler powered by Turbopack) as the default build tool, configured via the `utoopack` field in `config/config.ts`. utoopack is Webpack-compatible and supports `module.rules` for custom loaders.
+**Build tool:** This project uses [Mako](https://makojs.dev) (a Rust-based extremely fast bundler) as the default build tool, configured via the `mako` field in `config/config.ts`. Mako supports `module.rules` for custom loaders.
 
-→ See [umi Getting Started](https://umijs.org/en-US/docs/guides/getting-started), [utoo Docs](https://utoo.land)
+→ See [umi Getting Started](https://umijs.org/en-US/docs/guides/getting-started), [Mako Docs](https://makojs.dev)
 
 ## Routes & Menu
 

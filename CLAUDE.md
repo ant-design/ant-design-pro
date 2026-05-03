@@ -17,7 +17,7 @@ npm run start:pre      # Pre-production environment
 npm run start:test     # Test environment
 
 # Build & Preview
-npm run build          # Production build (utoopack, Turbopack-based)
+npm run build          # Production build (Mako, Rust-based)
 npm run preview        # Preview production build on port 8000
 npm run preview:build  # Build and preview on port 8000
 npm run deploy         # Build and deploy to GitHub Pages (gh-pages branch)
@@ -53,7 +53,7 @@ npm run record     # Record request data for mock replay
 
 Umi Max (`@umijs/max`) is the meta-framework. It wraps the build pipeline and provides conventions:
 
-- **Build tool**: utoopack (Turbopack-based, Webpack-compatible). Configured via `utoopack` field in `config/config.ts`, supports `module.rules` for custom loaders
+- **Build tool**: Mako (Rust-based, extremely fast bundler). Configured via `mako` field in `config/config.ts`, supports `module.rules` for custom loaders
 - **Central config**: `config/config.ts` (defineConfig) controls all plugins, theme, proxy, and build settings
 - **Routes**: Defined declaratively in `config/routes.ts`, not convention-based. Each route maps `component` to a file under `src/pages/`. Route `name` auto-maps to `menu.xxx` i18n key. Route `access` field controls menu visibility (unauthorized routes hidden from menu)
 - **Convention files in `src/`**: `app.tsx` (runtime config), `access.ts` (permissions), `global.tsx` (side effects), `loading.tsx` (route transitions), `typings.d.ts` (global types)

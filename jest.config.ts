@@ -30,7 +30,7 @@ export default async (): Promise<any> => {
       localStorage: null,
       __APP_VERSION__: 'test',
       __UMI_VERSION__: readPkgVersion('@umijs/max'),
-      __UTOO_VERSION__: readPkgVersion('@utoo/pack'),
+      __MAKO_VERSION__: readPkgVersion('@umijs/mako'),
     },
   };
 };

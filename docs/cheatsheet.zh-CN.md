@@ -6,7 +6,7 @@
 
 ## 🎉 v6 新特性
 
-- **React 19 + antd 6 + Umi Max 4**：全面升级到最新技术栈，utoopack（Turbopack）构建
+- **React 19 + antd 6 + Umi Max 4**：全面升级到最新技术栈，Mako（Rust 构建工具）构建
 - **样式重构**：Less → Tailwind CSS v4 + antd-style + CSS Modules，启用 CSS 变量主题
 - **AI 助手页面**：基于 Ant Design X 的聊天界面示例
 - **React Query**：从 useRequest 迁移到 @tanstack/react-query
@@ -91,9 +91,9 @@ npm install                                                # 更新依赖
 
 > 💡 `npm run simple` 会删除示例页面（dashboard、form、list 等）和多余依赖（plots 等），替换为精简路由，适合从零开始开发。**建议先提交代码，以便需要时回退。**
 
-**构建工具：** 本项目使用 [utoopack](https://github.com/utooland/utoo)（基于 Turbopack 的新一代打包器）作为默认构建工具，通过 `config/config.ts` 中的 `utoopack` 字段配置。utoopack 兼容 Webpack 配置格式，支持 `module.rules` 配置自定义加载器。
+**构建工具：** 本项目使用 [Mako](https://makojs.dev)（基于 Rust 的极速打包器）作为默认构建工具，通过 `config/config.ts` 中的 `mako` 字段配置。Mako 支持 `module.rules` 配置自定义加载器。
 
-→ 更多内容见 [umi 入门指南](https://umijs.org/docs/guides/getting-started)、[utoo 文档](https://utoo.land)
+→ 更多内容见 [umi 入门指南](https://umijs.org/docs/guides/getting-started)、[Mako 文档](https://makojs.dev)
 
 ## 路由与菜单
 

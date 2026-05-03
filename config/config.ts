@@ -218,16 +218,7 @@ export default defineConfig({
     include: ['src/pages/**/_mock.ts'],
     exclude: ['mock/requestRecord.mock.js'],
   },
-  utoopack: {
-    module: {
-      rules: {
-        '*.md': {
-          loaders: [{ loader: join(__dirname, 'md-raw-loader.cjs') }],
-          as: '*.js',
-        },
-      },
-    },
-  },
+  mako: {},
   requestRecord: {},
   exportStatic: {},
   define: {
@@ -235,6 +226,6 @@ export default defineConfig({
     'process.env.COMMIT_HASH': commitHash,
     __APP_VERSION__: require('./../package.json').version,
     __UMI_VERSION__: require('@umijs/max/package.json').version,
-    __UTOO_VERSION__: require('@utoo/pack/package.json').version,
+    __MAKO_VERSION__: require('@umijs/mako/package.json').version,
   },
 });

@@ -42,9 +42,9 @@ const Footer: React.FC = () => {
           blankTarget: true,
         },
         {
-          key: 'utoo',
-          title: `Utoo ${__UTOO_VERSION__}`,
-          href: 'https://utoo.land',
+          key: 'mako',
+          title: `Mako ${__MAKO_VERSION__}`,
+          href: 'https://makojs.dev/',
           blankTarget: true,
         },
         ...(COMMIT_HASH
