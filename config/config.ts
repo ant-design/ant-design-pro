@@ -15,7 +15,7 @@ const commitHash =
   process.env.CF_PAGES_COMMIT_SHA ||
   (() => {
     try {
-      return require('child_process')
+      return require('node:child_process')
         .execSync('git rev-parse HEAD', {
           stdio: ['ignore', 'pipe', 'ignore'],
           encoding: 'utf-8',
