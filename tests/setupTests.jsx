@@ -13,7 +13,9 @@ const localStorageMock = {
     delete store[key];
   }),
   clear: jest.fn(() => {
-    Object.keys(store).forEach((key) => delete store[key]);
+    Object.keys(store).forEach((key) => {
+      delete store[key];
+    });
   }),
 };
 
