@@ -25,7 +25,11 @@ const OfflineBanner: React.FC = () => {
       type="warning"
       banner
       closable={false}
-      message={getIntl().formatMessage({ id: 'app.network.offline' })}
+      message={getIntl().formatMessage({
+        id: 'app.network.offline',
+        defaultMessage:
+          'You are currently offline. Some features may be unavailable.',
+      })}
     />
   );
 };

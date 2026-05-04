@@ -5,7 +5,7 @@ import React from 'react';
 function isChunkLoadError(error: Error): boolean {
   return (
     error.name === 'ChunkLoadError' ||
-    /loading (?:css )?chunk/i.test(error.message) ||
+    /(?:loading|failed to load) (?:css )?chunk/i.test(error.message) ||
     /imported module/i.test(error.message)
   );
 }
@@ -74,9 +74,15 @@ export default class ErrorBoundary extends React.Component<
 
     const title = intl.formatMessage({
       id: isChunkError ? 'app.error.chunk.title' : 'app.error.render.title',
+      defaultMessage: isChunkError
+        ? 'Failed to load page'
+        : 'Something went wrong',
     });
     const subTitle = intl.formatMessage({
       id: getSubTitleId(isChunkError, isOffline),
+      defaultMessage: isOffline
+        ? 'Your network connection has been lost. Please check your connection and refresh.'
+        : 'Page resources failed to load. Please refresh and try again.',
     });
 
     return (
@@ -87,10 +93,16 @@ export default class ErrorBoundary extends React.Component<
           subTitle={subTitle}
           extra={[
             <Button type="primary" key="retry" onClick={this.handleRetry}>
-              {intl.formatMessage({ id: 'app.error.retry' })}
+              {intl.formatMessage({
+                id: 'app.error.retry',
+                defaultMessage: 'Refresh',
+              })}
             </Button>,
             <Button href="/" key="home">
-              {intl.formatMessage({ id: 'app.error.home' })}
+              {intl.formatMessage({
+                id: 'app.error.home',
+                defaultMessage: 'Back Home',
+              })}
             </Button>,
           ]}
         />
