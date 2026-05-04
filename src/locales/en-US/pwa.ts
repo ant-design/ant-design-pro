@@ -1,7 +1,16 @@
 export default {
-  'app.pwa.offline': 'You are offline now',
-  'app.pwa.serviceworker.updated': 'New content is available',
-  'app.pwa.serviceworker.updated.hint':
-    'Please press the "Refresh" button to reload current page',
-  'app.pwa.serviceworker.updated.ok': 'Refresh',
+  'app.network.offline':
+    'You are currently offline. Some features may be unavailable.',
+  'app.error.chunk.title': 'Failed to load page',
+  'app.error.chunk.description.offline':
+    'Your network connection has been lost. Please check your connection and refresh.',
+  'app.error.chunk.description.online':
+    'Page resources failed to load. Please refresh and try again.',
+  'app.error.render.title': 'Something went wrong',
+  'app.error.render.description':
+    'Sorry, an error occurred on this page. Please refresh or go back to the home page.',
+  'app.error.retry': 'Refresh',
+  'app.error.home': 'Back Home',
+  'app.request.offline':
+    'Network unavailable. Please check your connection and try again.',
 };

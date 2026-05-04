@@ -13,8 +13,10 @@ dayjs.extend(relativeTime);
 import {
   AvatarDropdown,
   DocLink,
+  ErrorBoundary,
   Footer,
   LangDropdown,
+  OfflineBanner,
   VersionDropdown,
 } from '@/components';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
@@ -147,6 +149,7 @@ export const layout: RunTimeLayoutConfig = ({
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>
+          <OfflineBanner />
           {children}
           <SettingDrawer
             disableUrlParams
@@ -182,3 +185,7 @@ export const request: RequestConfig = {
   baseURL: isDev ? '' : 'https://pro-api.ant-design-demo.workers.dev',
   ...errorConfig,
 };
+
+export function rootContainer(container: React.ReactNode) {
+  return <ErrorBoundary>{container}</ErrorBoundary>;
+}

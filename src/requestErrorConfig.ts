@@ -77,7 +77,18 @@ export const errorConfig: RequestConfig = {
         // 请求已经成功发起，但没有收到响应
         // \`error.request\` 在浏览器中是 XMLHttpRequest 的实例，
         // 而在node.js中是 http.ClientRequest 的实例
-        message.error('None response! Please retry.');
+        if (!navigator.onLine) {
+          message.error(
+            'Network unavailable. Please check your connection and try again.',
+          );
+        } else {
+          message.error('None response! Please retry.');
+        }
+      } else if (!navigator.onLine) {
+        // 发送请求时出了点问题（离线）
+        message.error(
+          'Network unavailable. Please check your connection and try again.',
+        );
       } else {
         // 发送请求时出了点问题
         message.error('Request error, please retry.');
