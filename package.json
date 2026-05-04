@@ -9,7 +9,7 @@
     "build": "max build",
     "deploy": "cross-env CI=true max build && gh-pages -d dist",
     "dev": "cross-env UMI_ENV=dev MOCK=none max dev",
-    "i18n-remove": "max i18n-remove --locale=zh-CN --write",
+    "i18n-remove": "pro i18n-remove --locale=zh-CN --write",
     "lint": "npm run biome:lint && npm run tsc",
     "lint-staged": "lint-staged",
     "biome:lint": "biome lint",
@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@ant-design/cli": "^6.3.7",
+    "@ant-design/pro-cli": "^3.4.0",
     "@biomejs/biome": "^2.4.13",
     "@commitlint/cli": "^20.5.2",
     "@commitlint/config-conventional": "^20.5.0",
