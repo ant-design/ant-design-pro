@@ -1,5 +1,6 @@
 import { GithubOutlined } from '@ant-design/icons';
 import packageJson from '@root/package.json';
+import { Divider } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
 
@@ -56,9 +57,9 @@ const useStyles = createStyles(({ token, css }) => ({
   label: css`
     color: ${token.colorTextQuaternary};
   `,
-  sep: css`
-    color: ${token.colorBorderSecondary};
-    user-select: none;
+  divider: css`
+    display: inline-block;
+    vertical-align: middle;
   `,
 }));
 
@@ -91,9 +92,7 @@ const Footer: React.FC = () => {
             </a>
           )}
         </span>
-        <span className={styles.sep} aria-hidden="true">
-          |
-        </span>
+        <Divider type="vertical" className={styles.divider} />
         <span className={styles.group}>
           <span className={styles.label}>Umi</span>
           <a
@@ -105,9 +104,7 @@ const Footer: React.FC = () => {
             {__UMI_VERSION__}
           </a>
         </span>
-        <span className={styles.sep} aria-hidden="true">
-          |
-        </span>
+        <Divider type="vertical" className={styles.divider} />
         <span className={styles.group}>
           <span className={styles.label}>Utoo</span>
           <a
@@ -119,9 +116,7 @@ const Footer: React.FC = () => {
             {__UTOO_VERSION__}
           </a>
         </span>
-        <span className={styles.sep} aria-hidden="true">
-          |
-        </span>
+        <Divider type="vertical" className={styles.divider} />
         <a
           className={styles.link}
           href={REPO_URL}
