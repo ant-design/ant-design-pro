@@ -1,9 +1,22 @@
-import { useIntl, useModel } from '@umijs/max';
+import { getIntl } from '@umijs/max';
 import { Alert } from 'antd';
+import { useEffect, useState } from 'react';
 
 const OfflineBanner: React.FC = () => {
-  const { isOnline } = useModel('network');
-  const intl = useIntl();
+  const [isOnline, setIsOnline] = useState(
+    typeof navigator !== 'undefined' ? navigator.onLine : true,
+  );
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   if (isOnline) return null;
 
@@ -12,7 +25,7 @@ const OfflineBanner: React.FC = () => {
       type="warning"
       banner
       closable={false}
-      message={intl.formatMessage({ id: 'app.network.offline' })}
+      message={getIntl().formatMessage({ id: 'app.network.offline' })}
     />
   );
 };
