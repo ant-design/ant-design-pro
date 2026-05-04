@@ -20,17 +20,35 @@ function getSubTitleId(isChunkError: boolean, isOffline: boolean): string {
 interface ErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
+  isOnline: boolean;
 }
 
 export default class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   ErrorBoundaryState
 > {
-  state: ErrorBoundaryState = { hasError: false, error: null };
+  state: ErrorBoundaryState = {
+    hasError: false,
+    error: null,
+    isOnline: typeof navigator !== 'undefined' ? navigator.onLine : true,
+  };
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
     return { hasError: true, error };
   }
+
+  componentDidMount() {
+    window.addEventListener('online', this.handleOnline);
+    window.addEventListener('offline', this.handleOffline);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('online', this.handleOnline);
+    window.removeEventListener('offline', this.handleOffline);
+  }
+
+  handleOnline = () => this.setState({ isOnline: true });
+  handleOffline = () => this.setState({ isOnline: false });
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     console.error('[ErrorBoundary]', error, info.componentStack);
@@ -51,7 +69,7 @@ export default class ErrorBoundary extends React.Component<
 
     const { error } = this.state;
     const intl = getIntl();
-    const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
+    const isOffline = !this.state.isOnline;
     const isChunkError = isChunkLoadError(error);
 
     const title = intl.formatMessage({

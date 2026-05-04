@@ -187,9 +187,9 @@ export const request: RequestConfig = {
 
 export function rootContainer(container: React.ReactNode) {
   return (
-    <ErrorBoundary>
+    <>
       <OfflineBanner />
-      {container}
-    </ErrorBoundary>
+      <ErrorBoundary>{container}</ErrorBoundary>
+    </>
   );
 }
