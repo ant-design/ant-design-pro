@@ -10,6 +10,13 @@ function isChunkLoadError(error: Error): boolean {
   );
 }
 
+function getSubTitleId(isChunkError: boolean, isOffline: boolean): string {
+  if (!isChunkError) return 'app.error.render.description';
+  return isOffline
+    ? 'app.error.chunk.description.offline'
+    : 'app.error.chunk.description.online';
+}
+
 interface ErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
@@ -51,11 +58,7 @@ export default class ErrorBoundary extends React.Component<
       id: isChunkError ? 'app.error.chunk.title' : 'app.error.render.title',
     });
     const subTitle = intl.formatMessage({
-      id: isChunkError
-        ? isOffline
-          ? 'app.error.chunk.description.offline'
-          : 'app.error.chunk.description.online'
-        : 'app.error.render.description',
+      id: getSubTitleId(isChunkError, isOffline),
     });
 
     return (
@@ -68,9 +71,9 @@ export default class ErrorBoundary extends React.Component<
             <Button type="primary" key="retry" onClick={this.handleRetry}>
               {intl.formatMessage({ id: 'app.error.retry' })}
             </Button>,
-            <a href="/" key="home">
-              <Button>{intl.formatMessage({ id: 'app.error.home' })}</Button>
-            </a>,
+            <Button href="/" key="home">
+              {intl.formatMessage({ id: 'app.error.home' })}
+            </Button>,
           ]}
         />
       </Card>
