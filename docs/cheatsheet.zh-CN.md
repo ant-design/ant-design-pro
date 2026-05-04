@@ -1,12 +1,22 @@
 # Ant Design Pro Cheatsheet
 
+[![GitHub](https://img.shields.io/badge/GitHub-ant--design%2Fant--design--pro-181717?logo=github)](https://github.com/ant-design/ant-design-pro) [![Stars](https://img.shields.io/github/stars/ant-design/ant-design-pro?style=social)](https://github.com/ant-design/ant-design-pro) [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+
 ![Ant Design Pro](https://mdn.alipayobjects.com/huamei_fkc4p0/afts/img/A*EX3ISYC2ghEAAAAAddAAAAgAeobDAQ/original)
 
-[![GitHub](https://img.shields.io/badge/GitHub-ant--design%2Fant--design--pro-181717?logo=github)](https://github.com/ant-design/ant-design-pro) [![Stars](https://img.shields.io/github/stars/ant-design/ant-design-pro?style=social)](https://github.com/ant-design/ant-design-pro)
+## 🎉 v6 新特性
+
+- **React 19 + antd 6 + Umi Max 4**：全面升级到最新技术栈，utoopack（Turbopack）构建
+- **样式重构**：Less → Tailwind CSS v4 + antd-style + CSS Modules，启用 CSS 变量主题
+- **AI 助手页面**：基于 Ant Design X 的聊天界面示例
+- **React Query**：从 useRequest 迁移到 @tanstack/react-query
+- **Biome**：替代 ESLint + Prettier，统一 lint 和格式化
+- **Cloudflare Worker 后端**：演示 API 独立部署，基于 Hono 框架
+- **更多**：路由预加载、骨架屏 Loading、D3 地图、Cheatsheet 速查文档、moment → dayjs、Class → 函数式组件
+
+→ [查看完整更新日志](https://github.com/ant-design/ant-design-pro/releases/tag/v6.0.0)
 
 ## 快速开始
-
-**环境要求：** Node.js >= 20
 
 **创建项目：**
 
@@ -414,7 +424,7 @@ antd: {
 
 > 💡 三种样式方案可以共存：Tailwind 适合布局、CSS Modules 适合组件样式、antd-style 适合需要消费主题 token 的场景。
 
-→ 更多内容见 [umi 样式文档](https://umijs.org/docs/guides/styling)、[Umi Max antd 动态主题](https://umijs.org/docs/max/antd#动态主题)
+→ 更多内容见 [umi 样式文档](https://umijs.org/docs/guides/styling)、[Umi Max antd 动态主题](https://umijs.org/docs/max/antd#动态切换全局配置)
 
 ## 测试 & 调试
 
@@ -455,7 +465,7 @@ export default {
 
 > 💡 用 `MOCK=none` 启动可跳过 Mock，直接代理到后端：`npm run start:no-mock`。
 
-→ 更多内容见 [umi 测试](https://umijs.org/docs/guides/testing)、[umi Mock](https://umijs.org/docs/guides/mock)
+→ 更多内容见 [umi 测试](https://umijs.org/docs/guides/test)、[umi Mock](https://umijs.org/docs/guides/mock)
 
 ## FAQ
 
@@ -477,4 +487,4 @@ export default {
 **Q: 如何使用 OpenAPI 代码生成？**
 1. 在 `config/config.ts` 配置 `openAPI` 2. 运行 `npm run openapi` 3. 自动生成 `src/services/` 下的代码
 
-→ 更多内容见 [umi FAQ](https://umijs.org/docs/guides/faq)
+→ 更多内容见 [umi FAQ](https://umijs.org/docs/introduce/faq)

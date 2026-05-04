@@ -1,3 +1,10 @@
+.welcome-gradient-title {
+  background: linear-gradient(135deg, #1677ff 0%, #722ed1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .welcome-markdown .x-markdown {
   --md-heading-weight: 600;
   --md-code-bg: rgba(0, 0, 0, 0.04);

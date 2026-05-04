@@ -25,6 +25,7 @@ export default {
   'pages.login.loginWith': 'লগইন করতে পারেন:',
   'pages.login.registerAccount': 'অ্যাকাউন্ট নিবন্ধন করুন',
   'pages.welcome.link': 'স্বাগতম',
+  'pages.welcome.celebrationTitle': 'Ant Design Pro {v6} এ স্বাগতম',
   'pages.welcome.alertMessage': 'দ্রুত এবং শক্তিশালী ভারী শুল্ক উপাদান প্রকাশ করা হয়েছে।',
   'pages.404.subTitle': 'দুঃখিত, আপনি যে পৃষ্ঠাটি দেখতে চান তা বিদ্যমান নেই।',
   'pages.404.buttonText': 'প্রধান পাতায় ফিরে যান',

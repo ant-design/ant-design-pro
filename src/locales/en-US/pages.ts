@@ -25,6 +25,7 @@ export default {
   'pages.login.loginWith': 'Login with :',
   'pages.login.registerAccount': 'Register Account',
   'pages.welcome.link': 'Welcome',
+  'pages.welcome.celebrationTitle': 'Welcome to Ant Design Pro {v6}',
   'pages.welcome.alertMessage':
     'Faster and stronger heavy-duty components have been released.',
   'pages.welcome.infoCard.umi.title': 'Learn umi',

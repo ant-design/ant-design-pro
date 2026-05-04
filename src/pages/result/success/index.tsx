@@ -3,7 +3,13 @@ import { GridContent } from '@ant-design/pro-components';
 import { Button, Card, Descriptions, Result, Steps } from 'antd';
 import useStyles from './index.style';
 
-export default () => {
+const descriptionItems = [
+  { key: 'id', label: '项目 ID', children: '23421' },
+  { key: 'owner', label: '负责人', children: '曲丽丽' },
+  { key: 'time', label: '生效时间', children: '2016-12-12 ~ 2017-12-12' },
+];
+
+const Success: React.FC = () => {
   const { styles } = useStyles();
   const desc1 = (
     <div className={styles.title}>
@@ -50,16 +56,10 @@ export default () => {
   );
   const content = (
     <>
-      <Descriptions title="项目名称">
-        <Descriptions.Item label="项目 ID">23421</Descriptions.Item>
-        <Descriptions.Item label="负责人">曲丽丽</Descriptions.Item>
-        <Descriptions.Item label="生效时间">
-          2016-12-12 ~ 2017-12-12
-        </Descriptions.Item>
-      </Descriptions>
+      <Descriptions title="项目名称" items={descriptionItems} />
       <br />
       <Steps
-        progressDot
+        type="dot"
         current={1}
         items={[
           {
@@ -72,7 +72,7 @@ export default () => {
                 创建项目
               </span>
             ),
-            description: desc1,
+            content: desc1,
           },
           {
             title: (
@@ -84,7 +84,7 @@ export default () => {
                 部门初审
               </span>
             ),
-            description: desc2,
+            content: desc2,
           },
           {
             title: (
@@ -137,3 +137,5 @@ export default () => {
     </GridContent>
   );
 };
+
+export default Success;

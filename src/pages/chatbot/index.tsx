@@ -156,10 +156,8 @@ const ChatbotPage: React.FC = () => {
   const [activeKey, setActiveKey] = useState<string>('default');
   const [inputValue, setInputValue] = useState('');
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const provider = useMemo(() => createChatProvider() as any, []);
   const { onRequest, abort, isRequesting, parsedMessages } = useXChat<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any,
     ParsedMessage
   >({

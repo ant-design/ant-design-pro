@@ -25,6 +25,7 @@ export default {
   'pages.login.loginWith': 'その他のログイン方法：',
   'pages.login.registerAccount': 'アカウント登録',
   'pages.welcome.link': 'ようこそ',
+  'pages.welcome.celebrationTitle': 'Ant Design Pro {v6} へようこそ',
   'pages.welcome.alertMessage':
     'より高速で強力な頑丈なコンポーネントがリリースされました。',
   'pages.404.subTitle':

@@ -12,17 +12,16 @@ dayjs.extend(relativeTime);
 
 import {
   AvatarDropdown,
-  AvatarName,
+  DocLink,
   Footer,
-  Question,
-  SelectLang,
+  LangDropdown,
+  VersionDropdown,
 } from '@/components';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 
 const isDev = process.env.NODE_ENV === 'development';
-const isDevOrTest = isDev || process.env.CI;
 const loginPath = '/user/login';
 
 /**
@@ -33,6 +32,7 @@ export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  settingDrawerOpen?: boolean;
 }> {
   const fetchUserInfo = async () => {
     try {
@@ -41,7 +41,10 @@ export async function getInitialState(): Promise<{
       });
       return msg.data;
     } catch (_error) {
-      history.push(loginPath);
+      const { pathname, search, hash } = history.location;
+      history.replace(
+        `${loginPath}?redirect=${encodeURIComponent(pathname + search + hash)}`,
+      );
     }
     return undefined;
   };
@@ -57,11 +60,13 @@ export async function getInitialState(): Promise<{
       fetchUserInfo,
       currentUser,
       settings: defaultSettings as Partial<LayoutSettings>,
+      settingDrawerOpen: false,
     };
   }
   return {
     fetchUserInfo,
     settings: defaultSettings as Partial<LayoutSettings>,
+    settingDrawerOpen: false,
   };
 }
 
@@ -71,10 +76,6 @@ export const layout: RunTimeLayoutConfig = ({
   setInitialState,
 }) => {
   return {
-    actionsRender: () => [
-      <Question key="doc" />,
-      <SelectLang key="SelectLang" />,
-    ],
     menuItemRender: (item, dom) => {
       if (item.path) {
         return (
@@ -85,9 +86,14 @@ export const layout: RunTimeLayoutConfig = ({
       }
       return dom;
     },
+    actionsRender: () => [
+      <DocLink key="doc" />,
+      <VersionDropdown key="version" />,
+      <LangDropdown key="lang" />,
+    ],
     avatarProps: {
       src: initialState?.currentUser?.avatar,
-      title: <AvatarName />,
+      title: 'ProUser',
       render: (_, avatarChildren) => (
         <AvatarDropdown>{avatarChildren}</AvatarDropdown>
       ),
@@ -100,7 +106,9 @@ export const layout: RunTimeLayoutConfig = ({
       const { location } = history;
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== loginPath) {
-        history.push(loginPath);
+        history.replace(
+          `${loginPath}?redirect=${encodeURIComponent(location.pathname + location.search + location.hash)}`,
+        );
       }
     },
     bgLayoutImgList: [
@@ -140,19 +148,24 @@ export const layout: RunTimeLayoutConfig = ({
       return (
         <>
           {children}
-          {isDevOrTest && (
-            <SettingDrawer
-              disableUrlParams
-              enableDarkTheme
-              settings={initialState?.settings}
-              onSettingChange={(settings) => {
-                setInitialState((preInitialState) => ({
-                  ...preInitialState,
-                  settings,
-                }));
-              }}
-            />
-          )}
+          <SettingDrawer
+            disableUrlParams
+            enableDarkTheme
+            collapse={initialState?.settingDrawerOpen}
+            onCollapseChange={(open) => {
+              setInitialState((s) => ({
+                ...s,
+                settingDrawerOpen: open,
+              }));
+            }}
+            settings={initialState?.settings}
+            onSettingChange={(settings) => {
+              setInitialState((s) => ({
+                ...s,
+                settings,
+              }));
+            }}
+          />
         </>
       );
     },

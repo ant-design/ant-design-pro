@@ -82,7 +82,7 @@ function buildLandBitmap(
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
-  if (!ctx) return new Uint8Array(0);
+  if (!ctx) return new Uint8Array(width * height);
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = '#000';
   for (const f of countries.features) {

@@ -22,6 +22,7 @@
       "!**/node_modules",
       "!biome.json",
       "!tailwind.css",
+      "!package-lock.json",
       "!**/.worktrees"
     ]
   },

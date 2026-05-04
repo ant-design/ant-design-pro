@@ -25,6 +25,7 @@ export default {
   'pages.login.loginWith': 'Masuk dengan :',
   'pages.login.registerAccount': 'Daftar Akun',
   'pages.welcome.link': 'Selamat datang',
+  'pages.welcome.celebrationTitle': 'Selamat datang di Ant Design Pro {v6}',
   'pages.welcome.alertMessage':
     'Komponen heavy-duty yang lebih cepat dan lebih kuat telah dirilis.',
   'pages.404.subTitle': 'Maaf, halaman yang Anda kunjungi tidak ada. ',

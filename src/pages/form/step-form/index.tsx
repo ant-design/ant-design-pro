@@ -25,28 +25,23 @@ const StepDescriptions: React.FC<{
   bordered?: boolean;
 }> = ({ stepData, bordered }) => {
   const { payAccount, receiverAccount, receiverName, amount } = stepData;
-  return (
-    <Descriptions column={1} bordered={bordered}>
-      <Descriptions.Item label="付款账户"> {payAccount}</Descriptions.Item>
-      <Descriptions.Item label="收款账户"> {receiverAccount}</Descriptions.Item>
-      <Descriptions.Item label="收款人姓名"> {receiverName}</Descriptions.Item>
-      <Descriptions.Item label="转账金额">
+  const items = [
+    { key: 'payAccount', label: '付款账户', children: payAccount },
+    { key: 'receiverAccount', label: '收款账户', children: receiverAccount },
+    { key: 'receiverName', label: '收款人姓名', children: receiverName },
+    {
+      key: 'amount',
+      label: '转账金额',
+      children: (
         <Statistic
           value={amount}
-          suffix={
-            <span
-              style={{
-                fontSize: 14,
-              }}
-            >
-              元
-            </span>
-          }
+          suffix={<span style={{ fontSize: 14 }}>元</span>}
           precision={2}
         />
-      </Descriptions.Item>
-    </Descriptions>
-  );
+      ),
+    },
+  ];
+  return <Descriptions column={1} bordered={bordered} items={items} />;
 };
 const StepResult: React.FC<{
   onFinish: () => Promise<void>;
@@ -191,7 +186,7 @@ const StepForm: React.FC<Record<string, any>> = () => {
               <Alert
                 closable
                 showIcon
-                message="确认转账后，资金将直接打入对方账户，无法退回。"
+                title="确认转账后，资金将直接打入对方账户，无法退回。"
                 style={{
                   marginBottom: 24,
                 }}

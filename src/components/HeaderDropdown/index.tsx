@@ -10,6 +10,14 @@ const useStyles = createStyles(({ token }) => {
       [`@media screen and (max-width: ${token.screenXS}px)`]: {
         width: '100%',
       },
+      '.ant-dropdown-menu-item .anticon, .ant-dropdown-menu-submenu-title .anticon':
+        {
+          display: 'inline-flex',
+          alignItems: 'center',
+        },
+      '.ant-dropdown-menu-submenu-title .anticon': {
+        color: token.colorTextSecondary,
+      },
     },
   };
 });

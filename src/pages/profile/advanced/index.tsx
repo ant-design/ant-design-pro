@@ -10,6 +10,7 @@ import {
   RouteContext,
 } from '@ant-design/pro-components';
 import { useQuery } from '@tanstack/react-query';
+import type { DescriptionsProps } from 'antd';
 import {
   Badge,
   Button,
@@ -25,7 +26,7 @@ import {
   Table,
   Tooltip,
 } from 'antd';
-import { clsx } from 'clsx';
+import type { IconRenderType, StepsProps } from 'antd/es/steps';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import type { AdvancedProfileData } from './data.d';
@@ -145,82 +146,70 @@ const columns = [
     key: 'memo',
   },
 ];
-type AdvancedState = {
-  operationKey: 'tab1' | 'tab2' | 'tab3';
-  tabActiveKey: string;
-};
-const Advanced: FC = () => {
-  const { styles } = useStyles();
-
-  const extra = (
-    <div className={styles.moreInfo}>
-      <Statistic title="状态" value="待审批" />
-      <Statistic title="订单金额" value={568.08} prefix="¥" />
-    </div>
-  );
-  const description = (
-    <RouteContext.Consumer>
-      {({ isMobile }) => (
-        <Descriptions
-          className={styles.headerList}
-          size="small"
-          column={isMobile ? 1 : 2}
-        >
-          <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
-          <Descriptions.Item label="订购产品">XX 服务</Descriptions.Item>
-          <Descriptions.Item label="创建时间">2017-07-07</Descriptions.Item>
-          <Descriptions.Item label="关联单据">
-            <a href="">12421</a>
-          </Descriptions.Item>
-          <Descriptions.Item label="生效日期">
-            2017-07-07 ~ 2017-08-08
-          </Descriptions.Item>
-          <Descriptions.Item label="备注">
-            请于两个工作日内确认
-          </Descriptions.Item>
-        </Descriptions>
-      )}
-    </RouteContext.Consumer>
-  );
-  const desc1 = (
-    <div className={clsx(styles.stepDescription)}>
-      曲丽丽
-      <DingdingOutlined
-        style={{
-          marginLeft: 8,
-        }}
-      />
-      <div>2016-12-12 12:32</div>
-    </div>
-  );
-  const desc2 = (
-    <div className={styles.stepDescription}>
-      周毛毛
-      <DingdingOutlined
-        style={{
-          color: '#00A0E9',
-          marginLeft: 8,
-        }}
-      />
-      <div>
-        <a href="">催一下</a>
-      </div>
-    </div>
-  );
-
-  const [tabStatus, seTabStatus] = useState<AdvancedState>({
-    operationKey: 'tab1',
-    tabActiveKey: 'detail',
-  });
-
-  const customDot = (
-    dot: React.ReactNode,
-    {
-      status,
-    }: {
-      status: string;
-    },
-  ) => {
+const descriptionItems: DescriptionsProps['items'] = [
+  { key: '1', label: '创建人', children: '曲丽丽' },
+  { key: '2', label: '订购产品', children: 'XX 服务' },
+  { key: '3', label: '创建时间', children: '2017-07-07' },
+  { key: '4', label: '关联单据', children: <a href="">12421</a> },
+  { key: '5', label: '生效日期', children: '2017-07-07 ~ 2017-08-08' },
+  { key: '6', label: '备注', children: '请于两个工作日内确认' },
+];
+const userInfoItems: DescriptionsProps['items'] = [
+  { key: '1', label: '用户姓名', children: '付小小' },
+  { key: '2', label: '会员卡号', children: '32943898021309809423' },
+  { key: '3', label: '身份证', children: '3321944288191034921' },
+  { key: '4', label: '联系方式', children: '18112345678' },
+  {
+    key: '5',
+    label: '联系地址',
+    children: '曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口',
+  },
+];
+const infoGroupItems: DescriptionsProps['items'] = [
+  { key: '1', label: '某某数据', children: '725' },
+  { key: '2', label: '该数据更新时间', children: '2017-08-08' },
+  {
+    key: '3',
+    label: (
+      <span>
+        某某数据
+        <Tooltip title="数据说明">
+          <InfoCircleOutlined
+            style={{ color: 'rgba(0, 0, 0, 0.43)', marginLeft: 4 }}
+          />
+        </Tooltip>
+      </span>
+    ),
+    children: '725',
+  },
+  { key: '4', label: '该数据更新时间', children: '2017-08-08' },
+];
+const groupItems1: DescriptionsProps['items'] = [
+  { key: '1', label: '负责人', children: '林东东' },
+  { key: '2', label: '角色码', children: '1234567' },
+  { key: '3', label: '所属部门', children: 'XX公司 - YY部' },
+  { key: '4', label: '过期时间', children: '2017-08-08' },
+  {
+    key: '5',
+    label: '描述',
+    children:
+      '这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...',
+  },
+];
+const groupItems2: DescriptionsProps['items'] = [
+  {
+    key: '1',
+    label: '学名',
+    children:
+      'Citrullus lanatus (Thunb.) Matsum. et Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..',
+  },
+];
+const groupItems3: DescriptionsProps['items'] = [
+  { key: '1', label: '负责人', children: '付小小' },
+  { key: '2', label: '角色码', children: '1234568' },
+];
+const customDot: IconRenderType = (dot: React.ReactNode, { active }) => {
+  if (active) {
     const popoverContent = (
       <div
         style={{
@@ -255,21 +244,82 @@ const Advanced: FC = () => {
         </div>
       </div>
     );
-    if (status === 'process') {
-      return (
-        <Popover
-          placement="topLeft"
-          arrow={{
-            pointAtCenter: true,
-          }}
-          content={popoverContent}
-        >
-          <span>{dot}</span>
-        </Popover>
-      );
-    }
-    return dot;
-  };
+    return (
+      <Popover
+        placement="topLeft"
+        arrow={{
+          pointAtCenter: true,
+        }}
+        content={popoverContent}
+      >
+        <span>{dot}</span>
+      </Popover>
+    );
+  }
+  return dot;
+};
+
+type AdvancedState = {
+  operationKey: 'tab1' | 'tab2' | 'tab3';
+  tabActiveKey: string;
+};
+const Advanced: FC = () => {
+  const { styles } = useStyles();
+
+  const extra = (
+    <div className={styles.moreInfo}>
+      <Statistic title="状态" value="待审批" />
+      <Statistic title="订单金额" value={568.08} prefix="¥" />
+    </div>
+  );
+  const description = (
+    <RouteContext.Consumer>
+      {({ isMobile }) => (
+        <Descriptions
+          className={styles.headerList}
+          size="small"
+          column={isMobile ? 1 : 2}
+          items={descriptionItems}
+        />
+      )}
+    </RouteContext.Consumer>
+  );
+  const desc1 = (
+    <div className={styles.stepDescription}>
+      曲丽丽
+      <DingdingOutlined
+        style={{
+          marginLeft: 8,
+        }}
+      />
+      <div>2016-12-12 12:32</div>
+    </div>
+  );
+  const desc2 = (
+    <div className={styles.stepDescription}>
+      周毛毛
+      <DingdingOutlined
+        style={{
+          color: '#00A0E9',
+          marginLeft: 8,
+        }}
+      />
+      <div>
+        <a href="">催一下</a>
+      </div>
+    </div>
+  );
+  const stepsItems: StepsProps['items'] = [
+    { title: '创建项目', content: desc1 },
+    { title: '部门初审', content: desc2 },
+    { title: '财务复核' },
+    { title: '完成' },
+  ];
+
+  const [tabStatus, seTabStatus] = useState<AdvancedState>({
+    operationKey: 'tab1',
+    tabActiveKey: 'detail',
+  });
 
   const { data = {}, isLoading: loading } = useQuery<AdvancedProfileData>({
     queryKey: ['profile-advanced'],
@@ -345,15 +395,10 @@ const Advanced: FC = () => {
             <RouteContext.Consumer>
               {({ isMobile }) => (
                 <Steps
-                  direction={isMobile ? 'vertical' : 'horizontal'}
-                  progressDot={customDot}
+                  orientation={isMobile ? 'vertical' : 'horizontal'}
+                  iconRender={customDot}
                   current={1}
-                  items={[
-                    { title: '创建项目', description: desc1 },
-                    { title: '部门初审', description: desc2 },
-                    { title: '财务复核' },
-                    { title: '完成' },
-                  ]}
+                  items={stepsItems}
                 />
               )}
             </RouteContext.Consumer>
@@ -369,52 +414,15 @@ const Advanced: FC = () => {
               style={{
                 marginBottom: 24,
               }}
-            >
-              <Descriptions.Item label="用户姓名">付小小</Descriptions.Item>
-              <Descriptions.Item label="会员卡号">
-                32943898021309809423
-              </Descriptions.Item>
-              <Descriptions.Item label="身份证">
-                3321944288191034921
-              </Descriptions.Item>
-              <Descriptions.Item label="联系方式">
-                18112345678
-              </Descriptions.Item>
-              <Descriptions.Item label="联系地址">
-                曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口
-              </Descriptions.Item>
-            </Descriptions>
+              items={userInfoItems}
+            />
             <Descriptions
               style={{
                 marginBottom: 24,
               }}
               title="信息组"
-            >
-              <Descriptions.Item label="某某数据">725</Descriptions.Item>
-              <Descriptions.Item label="该数据更新时间">
-                2017-08-08
-              </Descriptions.Item>
-              <Descriptions.Item
-                label={
-                  <span>
-                    某某数据
-                    <Tooltip title="数据说明">
-                      <InfoCircleOutlined
-                        style={{
-                          color: 'rgba(0, 0, 0, 0.43)',
-                          marginLeft: 4,
-                        }}
-                      />
-                    </Tooltip>
-                  </span>
-                }
-              >
-                725
-              </Descriptions.Item>
-              <Descriptions.Item label="该数据更新时间">
-                2017-08-08
-              </Descriptions.Item>
-            </Descriptions>
+              items={infoGroupItems}
+            />
             <h4
               style={{
                 marginBottom: 16,
@@ -423,50 +431,11 @@ const Advanced: FC = () => {
               信息组
             </h4>
             <Card type="inner" title="多层级信息组">
-              <Descriptions
-                style={{
-                  marginBottom: 16,
-                }}
-                title="组名称"
-              >
-                <Descriptions.Item label="负责人">林东东</Descriptions.Item>
-                <Descriptions.Item label="角色码">1234567</Descriptions.Item>
-                <Descriptions.Item label="所属部门">
-                  XX公司 - YY部
-                </Descriptions.Item>
-                <Descriptions.Item label="过期时间">
-                  2017-08-08
-                </Descriptions.Item>
-                <Descriptions.Item label="描述">
-                  这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...
-                </Descriptions.Item>
-              </Descriptions>
-              <Divider
-                style={{
-                  margin: '16px 0',
-                }}
-              />
-              <Descriptions
-                style={{
-                  marginBottom: 16,
-                }}
-                title="组名称"
-                column={1}
-              >
-                <Descriptions.Item label="学名">
-                  Citrullus lanatus (Thunb.) Matsum. et
-                  Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..
-                </Descriptions.Item>
-              </Descriptions>
-              <Divider
-                style={{
-                  margin: '16px 0',
-                }}
-              />
-              <Descriptions title="组名称">
-                <Descriptions.Item label="负责人">付小小</Descriptions.Item>
-                <Descriptions.Item label="角色码">1234568</Descriptions.Item>
-              </Descriptions>
+              <Descriptions title="组名称" items={groupItems1} />
+              <Divider size="large" />
+              <Descriptions title="组名称" column={1} items={groupItems2} />
+              <Divider size="large" />
+              <Descriptions title="组名称" items={groupItems3} />
             </Card>
           </Card>
           <Card

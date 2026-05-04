@@ -25,6 +25,7 @@ export default {
   'pages.login.loginWith': '其他登录方式 :',
   'pages.login.registerAccount': '注册账户',
   'pages.welcome.link': '欢迎使用',
+  'pages.welcome.celebrationTitle': '欢迎使用 Ant Design Pro {v6}',
   'pages.welcome.alertMessage': '更快更强的重型组件，已经发布。',
   'pages.welcome.infoCard.umi.title': '了解 umi',
   'pages.welcome.infoCard.umi.desc':

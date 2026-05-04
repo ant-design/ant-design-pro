@@ -9,6 +9,23 @@ import routes from './routes';
 
 const { UMI_ENV = 'dev' } = process.env;
 
+// Compute commit hash: env vars take precedence, fall back to git at build time
+const commitHash =
+  process.env.COMMIT_HASH ||
+  process.env.CF_PAGES_COMMIT_SHA ||
+  (() => {
+    try {
+      return require('node:child_process')
+        .execSync('git rev-parse HEAD', {
+          stdio: ['ignore', 'pipe', 'ignore'],
+          encoding: 'utf-8',
+        })
+        .trim();
+    } catch {
+      return '';
+    }
+  })();
+
 /**
  * @name 使用公共路径
  * @description 部署时的路径，如果部署在非根目录下，需要配置这个变量
@@ -157,6 +174,14 @@ export default defineConfig({
    */
   access: {},
   /**
+   * @name Google Analytics
+   * @description 使用 GA4 (gtag.js) 进行站点分析
+   * @doc https://umijs.org/docs/max/analytics
+   */
+  analytics: {
+    ga_v2: 'G-59NF1VHHPF',
+  },
+  /**
    * @name <head> 中额外的 script
    * @description 配置 <head> 中额外的 script
    */
@@ -181,12 +206,6 @@ export default defineConfig({
       schemaPath: join(__dirname, 'oneapi.json'),
       mock: false,
     },
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath:
-        'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
-      projectName: 'swagger',
-    },
   ],
 
   mock: {
@@ -207,8 +226,9 @@ export default defineConfig({
   exportStatic: {},
   define: {
     'process.env.CI': process.env.CI,
-    'process.env.COMMIT_HASH': process.env.COMMIT_HASH || '',
-    'process.env.CF_PAGES_COMMIT_SHA': process.env.CF_PAGES_COMMIT_SHA || '',
-    __APP_VERSION__: JSON.stringify(require('./../package.json').version),
+    'process.env.COMMIT_HASH': commitHash,
+    __APP_VERSION__: require('./../package.json').version,
+    __UMI_VERSION__: require('@umijs/max/package.json').version,
+    __UTOO_VERSION__: require('@utoo/pack/package.json').version,
   },
 });

@@ -6,8 +6,8 @@
  * 布局组件
  */
 import Footer from './Footer';
-import { Question, SelectLang } from './RightContent';
-import { AvatarDropdown, AvatarName } from './RightContent/AvatarDropdown';
+import { DocLink, LangDropdown, VersionDropdown } from './RightContent';
+import { AvatarDropdown } from './RightContent/AvatarDropdown';
 
 /**
  * 业务组件
@@ -17,4 +17,4 @@ export { default as AvatarList } from './AvatarList';
 export { default as StandardFormRow } from './StandardFormRow';
 export { default as TagSelect } from './TagSelect';
 
-export { AvatarDropdown, AvatarName, Footer, Question, SelectLang };
+export { AvatarDropdown, DocLink, Footer, LangDropdown, VersionDropdown };
