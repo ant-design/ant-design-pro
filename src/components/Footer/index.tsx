@@ -91,7 +91,9 @@ const Footer: React.FC = () => {
             </a>
           )}
         </span>
-        <span className={styles.sep}>|</span>
+        <span className={styles.sep} aria-hidden="true">
+          |
+        </span>
         <span className={styles.group}>
           <span className={styles.label}>Umi</span>
           <a
@@ -103,7 +105,9 @@ const Footer: React.FC = () => {
             {__UMI_VERSION__}
           </a>
         </span>
-        <span className={styles.sep}>|</span>
+        <span className={styles.sep} aria-hidden="true">
+          |
+        </span>
         <span className={styles.group}>
           <span className={styles.label}>Utoo</span>
           <a
@@ -115,7 +119,9 @@ const Footer: React.FC = () => {
             {__UTOO_VERSION__}
           </a>
         </span>
-        <span className={styles.sep}>|</span>
+        <span className={styles.sep} aria-hidden="true">
+          |
+        </span>
         <a
           className={styles.link}
           href={REPO_URL}
