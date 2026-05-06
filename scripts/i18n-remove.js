@@ -264,11 +264,7 @@ function processFile(filePath, localeMap) {
   // 只在文件中不再有其他 intl. 引用时移除
   if (!content.match(/\bintl\./)) {
     content = content.replace(
-      /\n\s*\/\*\*[\s\S]*?\*\/\n\s*const\s+intl\s*=\s*(?:useIntl|getIntl)\(\)\s*;?\n/g,
-      '\n',
-    );
-    content = content.replace(
-      /\n\s*const\s+intl\s*=\s*(?:useIntl|getIntl)\(\)\s*;?\n/g,
+      /\n\s*(?:\/\*\*[\s\S]*?\*\/\n\s*)?const\s+intl\s*=\s*(?:useIntl|getIntl)\(\)\s*;?\n/g,
       '\n',
     );
   }
@@ -507,7 +503,9 @@ function deleteLocalesDir() {
 
 function checkResiduals() {
   const residualSymbols = [
+    'useIntl',
     'getIntl',
+    'FormattedMessage',
     'getLocale',
     'getAllLocales',
     'setLocale',
