@@ -23,9 +23,8 @@ const OfflineBanner: React.FC = () => {
   return (
     <Alert
       type="warning"
-      showIcon
+      banner
       closable={false}
-      style={{ marginBottom: 16 }}
       message={getIntl().formatMessage({
         id: 'app.network.offline',
         defaultMessage:

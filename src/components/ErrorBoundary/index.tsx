@@ -1,5 +1,5 @@
 import { getIntl } from '@umijs/max';
-import { Button, Card, Result } from 'antd';
+import { Button, Layout, Result } from 'antd';
 import React from 'react';
 
 function isChunkLoadError(error: Error): boolean {
@@ -27,7 +27,7 @@ function renderErrorFallback(
   const isChunkError = isChunkLoadError(error);
 
   return (
-    <Card variant="borderless">
+    <Layout.Content style={{ padding: 24 }}>
       <Result
         status="error"
         title={intl.formatMessage({
@@ -60,7 +60,7 @@ function renderErrorFallback(
           </Button>,
         ]}
       />
-    </Card>
+    </Layout.Content>
   );
 }
 
