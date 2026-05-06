@@ -8,7 +8,8 @@ export default {
   'app.error.render.title': '頁面出現錯誤',
   'app.error.render.description':
     '抱歉，頁面遇到了一些問題，請重新整理頁面或返回首頁。',
-  'app.error.retry': '重新整理',
+  'app.error.retry': '重試',
+  'app.error.reload': '重新整理頁面',
   'app.error.home': '返回首頁',
   'app.request.offline': '網路不可用，請檢查網路連線後重試。',
 };

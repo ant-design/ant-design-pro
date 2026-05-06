@@ -9,7 +9,8 @@ export default {
   'app.error.render.title': 'Terjadi kesalahan',
   'app.error.render.description':
     'Maaf, terjadi kesalahan pada halaman ini. Muat ulang halaman atau kembali ke beranda.',
-  'app.error.retry': 'Muat Ulang',
+  'app.error.retry': 'Coba Lagi',
+  'app.error.reload': 'Muat Ulang Halaman',
   'app.error.home': 'Kembali ke Beranda',
   'app.request.offline':
     'Jaringan tidak tersedia. Periksa koneksi Anda dan coba lagi.',

@@ -8,7 +8,8 @@ export default {
   'app.error.render.title': 'কিছু ভুল হয়েছে',
   'app.error.render.description':
     'দুঃখিত, এই পৃষ্ঠায় একটি ত্রুটি ঘটেছে। দয়া করে রিফ্রেশ করুন বা হোম পৃষ্ঠায় ফিরে যান।',
-  'app.error.retry': 'রিফ্রেশ',
+  'app.error.retry': 'আবার চেষ্টা করুন',
+  'app.error.reload': 'পৃষ্ঠা রিফ্রেশ করুন',
   'app.error.home': 'হোমে ফিরে যান',
   'app.request.offline':
     'নেটওয়ার্ক অনুপলব্ধ। আপনার সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন।',
