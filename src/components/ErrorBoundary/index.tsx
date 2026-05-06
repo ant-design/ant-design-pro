@@ -2,17 +2,31 @@ import { getIntl } from '@umijs/max';
 import { Button, Card, Result } from 'antd';
 import React from 'react';
 
+const CHUNK_ERROR_PATTERNS = [
+  /(?:loading|failed to load) (?:css )?chunk/i,
+  /imported module/i,
+  /chunkloaderror/i,
+];
+
 function isChunkLoadError(error: Error): boolean {
-  return (
-    error.name === 'ChunkLoadError' ||
-    /(?:loading|failed to load) (?:css )?chunk/i.test(error.message) ||
-    /imported module/i.test(error.message)
-  );
+  if (error.name === 'ChunkLoadError') return true;
+  // Check both message and stack trace (React may wrap errors)
+  const text = `${error.message}\n${error.stack ?? ''}`;
+  return CHUNK_ERROR_PATTERNS.some((p) => p.test(text));
 }
 
-function getSubTitleId(isChunkError: boolean, isOffline: boolean): string {
-  if (!isChunkError) return 'app.error.render.description';
-  return isOffline
+/** When offline, any render error is likely a chunk/network failure. */
+function isNetworkRelatedError(error: Error, offline: boolean): boolean {
+  return offline || isChunkLoadError(error);
+}
+
+function getTitleId(networkRelated: boolean): string {
+  return networkRelated ? 'app.error.chunk.title' : 'app.error.render.title';
+}
+
+function getSubTitleId(networkRelated: boolean, offline: boolean): string {
+  if (!networkRelated) return 'app.error.render.description';
+  return offline
     ? 'app.error.chunk.description.offline'
     : 'app.error.chunk.description.online';
 }
@@ -47,7 +61,14 @@ export default class ErrorBoundary extends React.Component<
     window.removeEventListener('offline', this.handleOffline);
   }
 
-  handleOnline = () => this.setState({ isOnline: true });
+  handleOnline = () => {
+    this.setState({ isOnline: true });
+    // Auto-reload when coming back online if the error was network-related
+    if (this.state.hasError && this.state.error) {
+      window.location.reload();
+    }
+  };
+
   handleOffline = () => this.setState({ isOnline: false });
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
@@ -55,7 +76,11 @@ export default class ErrorBoundary extends React.Component<
   }
 
   handleRetry = () => {
-    if (this.state.error && isChunkLoadError(this.state.error)) {
+    // For network-related errors, always reload (re-setting state won't re-fetch the chunk)
+    if (
+      this.state.error &&
+      isNetworkRelatedError(this.state.error, !this.state.isOnline)
+    ) {
       window.location.reload();
     } else {
       this.setState({ hasError: false, error: null });
@@ -70,19 +95,22 @@ export default class ErrorBoundary extends React.Component<
     const { error } = this.state;
     const intl = getIntl();
     const isOffline = !this.state.isOnline;
-    const isChunkError = isChunkLoadError(error);
+    const networkRelated = isNetworkRelatedError(error, isOffline);
 
     const title = intl.formatMessage({
-      id: isChunkError ? 'app.error.chunk.title' : 'app.error.render.title',
-      defaultMessage: isChunkError
+      id: getTitleId(networkRelated),
+      defaultMessage: networkRelated
         ? 'Failed to load page'
         : 'Something went wrong',
     });
     const subTitle = intl.formatMessage({
-      id: getSubTitleId(isChunkError, isOffline),
-      defaultMessage: isOffline
-        ? 'Your network connection has been lost. Please check your connection and refresh.'
-        : 'Page resources failed to load. Please refresh and try again.',
+      id: getSubTitleId(networkRelated, isOffline),
+      defaultMessage:
+        networkRelated && isOffline
+          ? 'Your network connection has been lost. Please check your connection and refresh.'
+          : networkRelated
+            ? 'Page resources failed to load. Please refresh and try again.'
+            : 'Sorry, an error occurred on this page. Please refresh or go back to the home page.',
     });
 
     return (
