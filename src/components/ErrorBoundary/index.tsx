@@ -1,4 +1,4 @@
-import { getIntl, useModel } from '@umijs/max';
+import { getIntl } from '@umijs/max';
 import { Button, Result } from 'antd';
 import React from 'react';
 
@@ -64,8 +64,6 @@ function renderErrorFallback(
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
-  /** When provided, skips internal online/offline listeners and uses this value. */
-  isOnline?: boolean;
 }
 
 interface ErrorBoundaryState {
@@ -73,54 +71,34 @@ interface ErrorBoundaryState {
   error: Error | null;
 }
 
-/**
- * Class-based error boundary with offline-aware error messages.
- * Accepts optional `isOnline` prop; falls back to own navigator.onLine tracking when unset.
- */
-export class ErrorBoundaryClass extends React.Component<
+export default class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {
   state: ErrorBoundaryState = { hasError: false, error: null };
-  private ownOnline =
-    typeof navigator !== 'undefined' ? navigator.onLine : true;
+  private isOnline = typeof navigator !== 'undefined' ? navigator.onLine : true;
 
   static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
     return { hasError: true, error };
   }
 
   componentDidMount() {
-    if (this.props.isOnline === undefined) {
-      window.addEventListener('online', this.handleOnline);
-      window.addEventListener('offline', this.handleOffline);
-    }
-  }
-
-  componentDidUpdate(prev: ErrorBoundaryProps) {
-    // Auto-reload on recovery when isOnline prop transitions to true
-    if (
-      this.props.isOnline === true &&
-      prev.isOnline === false &&
-      this.state.hasError
-    ) {
-      window.location.reload();
-    }
+    window.addEventListener('online', this.handleOnline);
+    window.addEventListener('offline', this.handleOffline);
   }
 
   componentWillUnmount() {
-    if (this.props.isOnline === undefined) {
-      window.removeEventListener('online', this.handleOnline);
-      window.removeEventListener('offline', this.handleOffline);
-    }
+    window.removeEventListener('online', this.handleOnline);
+    window.removeEventListener('offline', this.handleOffline);
   }
 
   handleOnline = () => {
-    this.ownOnline = true;
+    this.isOnline = true;
     if (this.state.hasError) window.location.reload();
   };
 
   handleOffline = () => {
-    this.ownOnline = false;
+    this.isOnline = false;
   };
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
@@ -135,29 +113,12 @@ export class ErrorBoundaryClass extends React.Component<
     }
   };
 
-  getIsOnline(): boolean {
-    return this.props.isOnline ?? this.ownOnline;
-  }
-
   render() {
     if (!this.state.hasError || !this.state.error) return this.props.children;
     return renderErrorFallback(
       this.state.error,
-      this.getIsOnline(),
+      this.isOnline,
       this.handleRetry,
     );
   }
 }
-
-/** Functional wrapper providing network state via useModel('network'). */
-const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const { isOnline } = useModel('network');
-
-  return (
-    <ErrorBoundaryClass isOnline={isOnline}>{children}</ErrorBoundaryClass>
-  );
-};
-
-export default ErrorBoundary;

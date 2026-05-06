@@ -17,7 +17,7 @@ export { default as AvatarList } from './AvatarList';
 /**
  * 通用组件
  */
-export { default as ErrorBoundary, ErrorBoundaryClass } from './ErrorBoundary';
+export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as OfflineBanner } from './OfflineBanner';
 export { default as StandardFormRow } from './StandardFormRow';
 export { default as TagSelect } from './TagSelect';
