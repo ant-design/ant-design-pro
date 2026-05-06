@@ -125,7 +125,7 @@ Each page directory contains its own index.tsx, optional service.ts, _mock.ts, d
 - `npx antd demo <Component> <name>` — get working demo code
 - `npx antd token <Component>` — check design tokens
 - `npx antd semantic <Component>` — check semantic classNames
-- `npx antd lint ./src` — find deprecated or problematic antd usage
+- `npx antd lint ./src` — find deprecated or problematic antd usage. **Must pass with zero errors and warnings before committing**
 - `npx antd doctor` — diagnose project configuration issues
 - `npx antd migrate <v1> <v2>` — migration checklist between versions
 - Always use `--format json` for structured output

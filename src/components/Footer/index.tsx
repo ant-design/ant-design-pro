@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
             </a>
           )}
         </span>
-        <Divider type="vertical" className={styles.divider} />
+        <Divider orientation="vertical" className={styles.divider} />
         <span className={styles.group}>
           <span className={styles.label}>Umi</span>
           <a
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
             {__UMI_VERSION__}
           </a>
         </span>
-        <Divider type="vertical" className={styles.divider} />
+        <Divider orientation="vertical" className={styles.divider} />
         <span className={styles.group}>
           <span className={styles.label}>Utoo</span>
           <a
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
             {__UTOO_VERSION__}
           </a>
         </span>
-        <Divider type="vertical" className={styles.divider} />
+        <Divider orientation="vertical" className={styles.divider} />
         <a
           className={styles.link}
           href={REPO_URL}
