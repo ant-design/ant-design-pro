@@ -79,7 +79,7 @@
     "husky": "^9.1.7",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
-    "lint-staged": "^16.4.0",
+    "lint-staged": "^17.0.2",
     "mockjs": "^1.1.0",
     "swagger-ui-dist": "^5.32.5",
     "tailwindcss": "^4.2.4",
