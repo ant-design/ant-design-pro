@@ -15,6 +15,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
+const I18N_SYMBOLS = ['useIntl', 'FormattedMessage', 'SelectLang', 'getLocale'];
+const FORMAT_MESSAGE_PATTERNS = [
+  'intl.formatMessage(',
+  'useIntl().formatMessage(',
+];
+
 // ─── 工具函数 ───────────────────────────────────────────
 
 function readDirRecursive(dir) {
@@ -196,7 +202,6 @@ function processFile(filePath, localeMap) {
   }
 
   // ── 1. 替换 formatMessage 调用（使用括号匹配精确处理）
-  // 替换 intl.formatMessage(...) 和 useIntl().formatMessage(...)
   // 只替换 id 为字符串字面量且无第二参数的简单调用
   content = replaceFormatMessageCalls(content, localeMap);
 
@@ -224,7 +229,6 @@ function processFile(filePath, localeMap) {
   );
 
   // ── 5. 处理 getLocale() 调用
-  // 将 const locale = getLocale() 替换为硬编码
   content = content.replace(
     /const\s+(\w+)\s*=\s*getLocale\(\)\s*;?/g,
     (_match, varName) => {
@@ -235,32 +239,24 @@ function processFile(filePath, localeMap) {
   // ── 6. 移除 data-lang 属性
   content = content.replace(/\s*data-lang/g, '');
 
-  // ── 6. 移除 Lang 组件调用和定义
+  // ── 7. 移除 Lang 组件调用和定义
   content = content.replace(/\n?\s*<Lang\s*\/>/g, '');
   content = content.replace(
     /const Lang = \(\) => \{\s*\n\s*const \{ styles \} = useStyles\(\);\s*\n\s*return \(\s*\n\s*<div className=\{styles\.lang\}>\s*\n\s*<\/div>\s*\n\s*\);\s*\n\s*\};\n?/g,
     '',
   );
 
-  // ── 7. 清理 import 语句
+  // ── 8. 清理 import 语句
   // 只移除文件中不再使用的 i18n 相关符号
-  const i18nSymbols = [
-    'useIntl',
-    'FormattedMessage',
-    'SelectLang',
-    'getLocale',
-  ];
   content = content.replace(
     /import\s*\{([^}]*)\}\s*from\s*['"]@umijs\/max['"];?\n?/g,
     (match, imports) => {
+      const codeWithoutImport = content.replace(match, '');
       const items = imports
         .split(',')
         .map((s) => s.trim())
         .filter((s) => {
-          if (!s || !i18nSymbols.includes(s)) return true;
-          // 检查该符号是否仍在文件中被使用
-          // 创建不含 import 行的副本来检查
-          const codeWithoutImport = content.replace(match, '');
+          if (!s || !I18N_SYMBOLS.includes(s)) return true;
           const regex = new RegExp(`\\b${s}\\b`);
           return regex.test(codeWithoutImport);
         });
@@ -273,8 +269,7 @@ function processFile(filePath, localeMap) {
     },
   );
 
-  // ── 8. 简化 JSX 文本子节点中的 {'中文'} → 中文
-  // 精确判断上下文，确保只在 JSX 标签间的文本子节点中简化
+  // ── 9. 简化 JSX 文本子节点中的 {'中文'} → 中文
   content = content.replace(/\{'([^']*)'\}/g, (match, text, offset, str) => {
     const before = str.slice(Math.max(0, offset - 30), offset);
     const charBeforeBrace = before.trimEnd().slice(-1);
@@ -291,18 +286,15 @@ function processFile(filePath, localeMap) {
     return text;
   });
 
-  // ── 8b. 简化 JSX 文本子节点中 FormattedMessage 产生的 '中文' → 中文
-  // 匹配 > 和 </ 之间的纯中文引号字符串
-  // 例如 <Button>'刷新'</Button> → <Button>刷新</Button>
+  // ── 10. 简化 JSX 文本子节点中 FormattedMessage 产生的 '中文' → 中文
   content = content.replace(
     />(\s*)'([^'<]*?)'(\s*)<\//g,
     (_match, ws1, text, ws2) => {
-      // 只对纯文本（不含 JSX 标签）进行简化
       return `>${ws1}${text}${ws2}</`;
     },
   );
 
-  // ── 9. 清理残留
+  // ── 11. 清理残留
   content = content.replace(/^\s*;\s*$/gm, '');
   content = content.replace(/\n{3,}/g, '\n\n');
   content = `${content.trimEnd()}\n`;
@@ -319,7 +311,7 @@ function processFile(filePath, localeMap) {
  * 使用括号匹配来精确找到完整的函数调用
  */
 function replaceFormatMessageCalls(content, localeMap) {
-  const patterns = ['intl.formatMessage(', 'useIntl().formatMessage('];
+  const patterns = FORMAT_MESSAGE_PATTERNS;
 
   for (const pattern of patterns) {
     let searchFrom = 0;
@@ -340,7 +332,6 @@ function replaceFormatMessageCalls(content, localeMap) {
       // 检查 id 是否为字符串字面量
       const idMatch = fullCall.match(/id:\s*['"]([^'"]+)['"]/);
       if (!idMatch) {
-        // id 是变量，跳过
         searchFrom = closeParenIdx + 1;
         continue;
       }
@@ -363,7 +354,6 @@ function replaceFormatMessageCalls(content, localeMap) {
       content =
         content.slice(0, idx) + zhText + content.slice(closeParenIdx + 1);
 
-      // 从替换点之后继续搜索
       searchFrom = idx + zhText.length;
     }
   }
@@ -383,7 +373,6 @@ function replaceFormattedMessageComponents(content, localeMap) {
     const idx = content.indexOf(pattern, searchFrom);
     if (idx === -1) break;
 
-    // 找到结束的 />
     const endPattern = '/>';
     let endIdx = content.indexOf(endPattern, idx);
     if (endIdx === -1) break;
@@ -391,7 +380,6 @@ function replaceFormattedMessageComponents(content, localeMap) {
 
     const fullTag = content.slice(idx, endIdx);
 
-    // 检查 id 是否为字符串字面量
     const idMatch = fullTag.match(/id=['"]([^'"]+)['"]/);
     if (!idMatch) {
       searchFrom = endIdx;
@@ -415,12 +403,8 @@ function replaceFormattedMessageComponents(content, localeMap) {
 
 function deleteLocalesDir() {
   const localeDir = path.join('src', 'locales');
-  if (fs.existsSync(localeDir)) {
-    fs.rmSync(localeDir, { recursive: true, force: true });
-    console.log('✓ 已删除 src/locales/ 目录');
-  } else {
-    console.log('- src/locales/ 目录不存在，跳过');
-  }
+  fs.rmSync(localeDir, { recursive: true, force: true });
+  console.log('✓ 已删除 src/locales/ 目录');
 }
 
 // ─── Step 7: 从 package.json 移除 i18n-remove 脚本 ──────
