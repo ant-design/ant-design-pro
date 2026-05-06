@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 20
+      - run: npm ci
       - run: npx antd lint ./src
 
   build:
