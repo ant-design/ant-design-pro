@@ -1,5 +1,5 @@
 import { getIntl } from '@umijs/max';
-import { Button, Result } from 'antd';
+import { Button, Card, Result } from 'antd';
 import React from 'react';
 
 function isChunkLoadError(error: Error): boolean {
@@ -27,38 +27,40 @@ function renderErrorFallback(
   const isChunkError = isChunkLoadError(error);
 
   return (
-    <Result
-      status="error"
-      title={intl.formatMessage({
-        id: isChunkError ? 'app.error.chunk.title' : 'app.error.render.title',
-        defaultMessage: isChunkError
-          ? 'Failed to load page'
-          : 'Something went wrong',
-      })}
-      subTitle={intl.formatMessage({
-        id: getSubTitleId(isChunkError, isOffline),
-        defaultMessage:
-          isChunkError && isOffline
-            ? 'Your network connection has been lost. Please check your connection and refresh.'
-            : isChunkError
-              ? 'Page resources failed to load. Please refresh and try again.'
-              : 'Sorry, an error occurred on this page. Please refresh or go back to the home page.',
-      })}
-      extra={[
-        <Button type="primary" key="retry" onClick={onRetry}>
-          {intl.formatMessage({
-            id: 'app.error.retry',
-            defaultMessage: 'Refresh',
-          })}
-        </Button>,
-        <Button href="/" key="home">
-          {intl.formatMessage({
-            id: 'app.error.home',
-            defaultMessage: 'Back Home',
-          })}
-        </Button>,
-      ]}
-    />
+    <Card variant="borderless">
+      <Result
+        status="error"
+        title={intl.formatMessage({
+          id: isChunkError ? 'app.error.chunk.title' : 'app.error.render.title',
+          defaultMessage: isChunkError
+            ? 'Failed to load page'
+            : 'Something went wrong',
+        })}
+        subTitle={intl.formatMessage({
+          id: getSubTitleId(isChunkError, isOffline),
+          defaultMessage:
+            isChunkError && isOffline
+              ? 'Your network connection has been lost. Please check your connection and refresh.'
+              : isChunkError
+                ? 'Page resources failed to load. Please refresh and try again.'
+                : 'Sorry, an error occurred on this page. Please refresh or go back to the home page.',
+        })}
+        extra={[
+          <Button type="primary" key="retry" onClick={onRetry}>
+            {intl.formatMessage({
+              id: 'app.error.retry',
+              defaultMessage: 'Refresh',
+            })}
+          </Button>,
+          <Button href="/" key="home">
+            {intl.formatMessage({
+              id: 'app.error.home',
+              defaultMessage: 'Back Home',
+            })}
+          </Button>,
+        ]}
+      />
+    </Card>
   );
 }
 
