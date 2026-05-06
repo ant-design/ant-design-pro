@@ -128,7 +128,6 @@ export default class ErrorBoundary extends React.Component<
     console.error('[ErrorBoundary]', error, info.componentStack);
   }
 
-  /** Retry loading the failed module without a full page reload. */
   handleRetry = () => {
     // Incrementing retryCount changes the key on the children fragment,
     // forcing React to unmount and remount all lazy components.

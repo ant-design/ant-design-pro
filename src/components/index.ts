@@ -14,9 +14,6 @@ import { AvatarDropdown } from './RightContent/AvatarDropdown';
  */
 export { default as ArticleListContent } from './ArticleListContent';
 export { default as AvatarList } from './AvatarList';
-/**
- * 通用组件
- */
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as OfflineBanner } from './OfflineBanner';
 export { default as StandardFormRow } from './StandardFormRow';
