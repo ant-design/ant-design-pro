@@ -9,7 +9,6 @@ export default {
   'app.error.render.title': 'エラーが発生しました',
   'app.error.render.description':
     '申し訳ありません、ページでエラーが発生しました。ページを再読み込みするか、ホームに戻ってください。',
-  'app.error.retry': '再試行',
   'app.error.reload': 'ページを再読み込み',
   'app.error.home': 'ホームに戻る',
   'app.request.offline':

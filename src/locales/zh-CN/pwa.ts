@@ -7,7 +7,6 @@ export default {
   'app.error.render.title': '页面出现错误',
   'app.error.render.description':
     '抱歉，页面遇到了一些问题，请刷新页面或返回首页。',
-  'app.error.retry': '重新加载',
   'app.error.reload': '刷新页面',
   'app.error.home': '返回首页',
   'app.request.offline': '网络不可用，请检查网络连接后重试。',
