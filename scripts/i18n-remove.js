@@ -17,6 +17,7 @@ const path = require('node:path');
 
 const I18N_SYMBOLS = [
   'useIntl',
+  'getIntl',
   'FormattedMessage',
   'SelectLang',
   'getLocale',
@@ -26,6 +27,7 @@ const I18N_SYMBOLS = [
 const FORMAT_MESSAGE_PATTERNS = [
   'intl.formatMessage(',
   'useIntl().formatMessage(',
+  'getIntl().formatMessage(',
 ];
 const QSTR = `'((?:[^'\\\\]|\\\\.)*)'|"((?:[^"\\\\]|\\\\.)*)"`;
 
@@ -241,6 +243,7 @@ function processFile(filePath, localeMap) {
     !content.includes('formatMessage') &&
     !content.includes('FormattedMessage') &&
     !content.includes('useIntl') &&
+    !content.includes('getIntl') &&
     !content.includes('SelectLang') &&
     !content.includes('getLocale') &&
     !content.includes('getAllLocales') &&
@@ -257,15 +260,11 @@ function processFile(filePath, localeMap) {
   // 只替换 id 为字符串字面量的调用
   content = replaceFormattedMessageComponents(content, localeMap);
 
-  // ── 3. 移除 const intl = useIntl() 声明
+  // ── 3. 移除 const intl = useIntl() / const intl = getIntl() 声明
   // 只在文件中不再有其他 intl. 引用时移除
   if (!content.match(/\bintl\./)) {
     content = content.replace(
-      /\n\s*\/\*\*[\s\S]*?\*\/\n\s*const\s+intl\s*=\s*useIntl\(\)\s*;?\n/g,
-      '\n',
-    );
-    content = content.replace(
-      /\n\s*const\s+intl\s*=\s*useIntl\(\)\s*;?\n/g,
+      /\n\s*(?:\/\*\*[\s\S]*?\*\/\n\s*)?const\s+intl\s*=\s*(?:useIntl|getIntl)\(\)\s*;?\n/g,
       '\n',
     );
   }
@@ -404,7 +403,7 @@ function replaceFormatMessageCalls(content, localeMap) {
 
       const id = idMatch[1] || idMatch[2];
       const dmMatch = fullCall.match(new RegExp(`defaultMessage:\\s*${QSTR}`));
-      const defaultMsg = dmMatch ? (dmMatch[1] || dmMatch[2]) : '';
+      const defaultMsg = dmMatch ? dmMatch[1] || dmMatch[2] : '';
 
       // 检查是否有第二参数（ICU 格式化参数），如果有则跳过
       // 第一参数结束位置: 找到第一个 },{ 或 },\s*{
@@ -454,7 +453,7 @@ function replaceFormattedMessageComponents(content, localeMap) {
 
     const id = idMatch[1] || idMatch[2];
     const dmMatch = fullTag.match(new RegExp(`defaultMessage=${QSTR}`));
-    const defaultMsg = dmMatch ? (dmMatch[1] || dmMatch[2]) : '';
+    const defaultMsg = dmMatch ? dmMatch[1] || dmMatch[2] : '';
 
     const zhText = resolveText(id, defaultMsg, localeMap);
     const replacement = toStrLiteral(zhText);
@@ -503,7 +502,14 @@ function deleteLocalesDir() {
 // ─── 残留检查 ────────────────────────────────────────────
 
 function checkResiduals() {
-  const residualSymbols = ['getLocale', 'getAllLocales', 'setLocale'];
+  const residualSymbols = [
+    'useIntl',
+    'getIntl',
+    'FormattedMessage',
+    'getLocale',
+    'getAllLocales',
+    'setLocale',
+  ];
   const srcDir = path.join('src');
   const files = readDirRecursive(srcDir).filter((f) => {
     const ext = path.extname(f);
