@@ -152,6 +152,7 @@ export const layout: RunTimeLayoutConfig = ({
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>
+          <OfflineBanner />
           {children}
           <SettingDrawer
             disableUrlParams
@@ -189,10 +190,5 @@ export const request: RequestConfig = {
 };
 
 export function rootContainer(container: React.ReactNode) {
-  return (
-    <>
-      <OfflineBanner />
-      <ErrorBoundary>{container}</ErrorBoundary>
-    </>
-  );
+  return <ErrorBoundary>{container}</ErrorBoundary>;
 }
