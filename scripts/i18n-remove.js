@@ -27,6 +27,7 @@ const FORMAT_MESSAGE_PATTERNS = [
   'intl.formatMessage(',
   'useIntl().formatMessage(',
 ];
+const QSTR = `'((?:[^'\\\\]|\\\\.)*)'|"((?:[^"\\\\]|\\\\.)*)"`;
 
 // ─── 工具函数 ───────────────────────────────────────────
 
@@ -299,7 +300,10 @@ function processFile(filePath, localeMap) {
   content = removeSetLocaleCalls(content);
 
   // ── 6. 移除 data-lang 属性
-  content = content.replace(/\s*data-lang/g, '');
+  content = content.replace(
+    /\s*data-lang(?:\s*=\s*(?:"[^"]*"|'[^']*'|\{[^}]*\}))?/g,
+    '',
+  );
 
   // ── 7. 移除 Lang 组件调用和定义
   content = content.replace(/\n?\s*<Lang\s*\/>/g, '');
@@ -391,16 +395,16 @@ function replaceFormatMessageCalls(content, localeMap) {
 
       const fullCall = content.slice(idx, closeParenIdx + 1);
 
-      // 检查 id 是否为字符串字面量
-      const idMatch = fullCall.match(/id:\s*['"]([^'"]+)['"]/);
+      // 检查 id 是否为字符串字面量（支持含转义引号的值）
+      const idMatch = fullCall.match(new RegExp(`id:\\s*${QSTR}`));
       if (!idMatch) {
         searchFrom = closeParenIdx + 1;
         continue;
       }
 
-      const id = idMatch[1];
-      const dmMatch = fullCall.match(/defaultMessage:\s*['"]([^'"]*?)['"]/);
-      const defaultMsg = dmMatch ? dmMatch[1] : '';
+      const id = idMatch[1] || idMatch[2];
+      const dmMatch = fullCall.match(new RegExp(`defaultMessage:\\s*${QSTR}`));
+      const defaultMsg = dmMatch ? (dmMatch[1] || dmMatch[2]) : '';
 
       // 检查是否有第二参数（ICU 格式化参数），如果有则跳过
       // 第一参数结束位置: 找到第一个 },{ 或 },\s*{
@@ -442,15 +446,15 @@ function replaceFormattedMessageComponents(content, localeMap) {
 
     const fullTag = content.slice(idx, endIdx);
 
-    const idMatch = fullTag.match(/id=['"]([^'"]+)['"]/);
+    const idMatch = fullTag.match(new RegExp(`id=${QSTR}`));
     if (!idMatch) {
       searchFrom = endIdx;
       continue;
     }
 
-    const id = idMatch[1];
-    const dmMatch = fullTag.match(/defaultMessage=['"]([^'"]*?)['"]/);
-    const defaultMsg = dmMatch ? dmMatch[1] : '';
+    const id = idMatch[1] || idMatch[2];
+    const dmMatch = fullTag.match(new RegExp(`defaultMessage=${QSTR}`));
+    const defaultMsg = dmMatch ? (dmMatch[1] || dmMatch[2]) : '';
 
     const zhText = resolveText(id, defaultMsg, localeMap);
     const replacement = toStrLiteral(zhText);
