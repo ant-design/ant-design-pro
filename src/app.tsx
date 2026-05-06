@@ -131,14 +131,24 @@ export const layout: RunTimeLayoutConfig = ({
         width: '331px',
       },
     ],
-    links: isDev
-      ? [
-          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
+    menuFooterRender: (props) => {
+      if (!isDev) return null;
+      return (
+        <div
+          style={{
+            textAlign: 'center',
+            paddingBlockStart: 12,
+          }}
+        >
+          <Link to="/umi/plugin/openapi" target="_blank">
             <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>,
-        ]
-      : [],
+            {!props?.collapsed && (
+              <span style={{ marginLeft: 8 }}>OpenAPI 文档</span>
+            )}
+          </Link>
+        </div>
+      );
+    },
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
