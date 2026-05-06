@@ -6,7 +6,7 @@ function isChunkLoadError(error: Error): boolean {
   return (
     error.name === 'ChunkLoadError' ||
     /(?:loading|failed to load) (?:css )?chunk/i.test(error.message) ||
-    /imported module/i.test(error.message)
+    /Failed to fetch dynamically imported module/i.test(error.message)
   );
 }
 
@@ -17,9 +17,13 @@ function getSubTitleId(isChunkError: boolean, isOffline: boolean): string {
     : 'app.error.chunk.description.online';
 }
 
-function renderErrorFallback(error: Error, onReload: () => void) {
+function renderErrorFallback(
+  error: Error,
+  isOnline: boolean,
+  onReload: () => void,
+) {
   const intl = getIntl();
-  const isOffline = !navigator.onLine;
+  const isOffline = !isOnline;
   const isChunkError = isChunkLoadError(error);
 
   return (
@@ -71,13 +75,18 @@ interface ErrorBoundaryProps {
 interface ErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
+  isOnline: boolean;
 }
 
 export default class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {
-  state: ErrorBoundaryState = { hasError: false, error: null };
+  state: ErrorBoundaryState = {
+    hasError: false,
+    error: null,
+    isOnline: typeof navigator !== 'undefined' ? navigator.onLine : true,
+  };
 
   static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
     return { hasError: true, error };
@@ -85,14 +94,16 @@ export default class ErrorBoundary extends React.Component<
 
   componentDidMount() {
     window.addEventListener('online', this.handleOnline);
+    window.addEventListener('offline', this.handleOffline);
   }
 
   componentWillUnmount() {
     window.removeEventListener('online', this.handleOnline);
+    window.removeEventListener('offline', this.handleOffline);
   }
 
-  /** Auto-reload when coming back online, but only for chunk load errors. */
   handleOnline = () => {
+    this.setState({ isOnline: true });
     if (
       this.state.hasError &&
       this.state.error &&
@@ -100,6 +111,10 @@ export default class ErrorBoundary extends React.Component<
     ) {
       window.location.reload();
     }
+  };
+
+  handleOffline = () => {
+    this.setState({ isOnline: false });
   };
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
@@ -112,6 +127,10 @@ export default class ErrorBoundary extends React.Component<
 
   render() {
     if (!this.state.hasError || !this.state.error) return this.props.children;
-    return renderErrorFallback(this.state.error, this.handleReload);
+    return renderErrorFallback(
+      this.state.error,
+      this.state.isOnline,
+      this.handleReload,
+    );
   }
 }
