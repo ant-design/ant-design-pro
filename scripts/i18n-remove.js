@@ -38,7 +38,13 @@ function readDirRecursive(dir) {
 }
 
 function toStrLiteral(text) {
-  return `'${text.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
+  return `'${text
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/\n/g, '\\n')
+    .replace(/\r/g, '\\r')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029')}'`;
 }
 
 function resolveText(id, defaultMsg, localeMap) {
@@ -53,12 +59,31 @@ function resolveText(id, defaultMsg, localeMap) {
  */
 function findClosingParen(str, openIdx) {
   let depth = 0;
-  for (let i = openIdx; i < str.length; i++) {
-    if (str[i] === '(') depth++;
-    else if (str[i] === ')') {
+  let i = openIdx;
+  while (i < str.length) {
+    const ch = str[i];
+    if (ch === '(') depth++;
+    else if (ch === ')') {
       depth--;
       if (depth === 0) return i;
+    } else if (ch === "'" || ch === '"' || ch === '`') {
+      // skip string literal
+      const quote = ch;
+      i++;
+      while (i < str.length && str[i] !== quote) {
+        if (str[i] === '\\') i++; // skip escaped char
+        i++;
+      }
+    } else if (ch === '/' && str[i + 1] === '/') {
+      // skip single-line comment
+      while (i < str.length && str[i] !== '\n') i++;
+    } else if (ch === '/' && str[i + 1] === '*') {
+      // skip block comment
+      i += 2;
+      while (i < str.length - 1 && !(str[i] === '*' && str[i + 1] === '/')) i++;
+      i++; // skip past */
     }
+    i++;
   }
   return -1;
 }
@@ -85,10 +110,14 @@ function buildLocaleMap() {
 }
 
 function extractLocaleKeys(content, localeMap) {
-  const regex = /['"]([a-zA-Z0-9_.-]+)['"]\s*:\s*['"]([^'"]*)['"]/g;
+  // Match key: 'value' or key: "value", supporting escaped quotes inside values
+  const regex =
+    /['"]([a-zA-Z0-9_.-]+)['"]\s*:\s*'((?:[^'\\]|\\.)*)'|['"]([a-zA-Z0-9_.-]+)['"]\s*:\s*"((?:[^"\\]|\\.)*)"/g;
   let match = regex.exec(content);
   while (match !== null) {
-    localeMap[match[1]] = match[2];
+    const key = match[1] || match[3];
+    const value = match[2] || match[4];
+    localeMap[key] = value;
     match = regex.exec(content);
   }
 }
@@ -146,14 +175,14 @@ function removeLocaleConfig() {
   let content = fs.readFileSync(configPath, 'utf-8');
   const original = content;
 
-  // 移除 locale: {...} 配置块（不含注释，精确匹配）
-  content = content.replace(/\n\s*locale:\s*\{[^}]*\},?\n/g, '\n');
-
-  // 移除 locale 块上方的紧邻注释（只往前查找最近的 /** ... */ 注释）
+  // 移除 locale 块及其紧邻的 JSDoc 注释（只匹配国际化相关的注释）
   content = content.replace(
-    /\n\s*\/\*\*[^*]*\*+(?:[^/*][^*]*\*+)*\/\n\n/g,
+    /\n\s*\/\*\*[^*]*\*+(?:[^/*][^*]*\*+)*\/\n\s*locale:\s*\{[^}]*\},?\n/g,
     '\n',
   );
+
+  // 移除无注释的 locale: {...} 配置块
+  content = content.replace(/\n\s*locale:\s*\{[^}]*\},?\n/g, '\n');
 
   // 移除 layout 中的 locale: true
   content = content.replace(/\n\s*locale:\s*true,?\n/g, '\n');
