@@ -4,8 +4,5 @@
   ],
   "src/**/*.md": [
     "npx @biomejs/biome check --write"
-  ],
-  "*.json": [
-    "npx @biomejs/biome check --write"
   ]
 }
