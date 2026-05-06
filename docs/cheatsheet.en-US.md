@@ -146,11 +146,17 @@ const location = useLocation(); // current route info
 ```ts
 // File: config/defaultSettings.ts
 export default {
-  navTheme: 'light',        // nav theme: light / dark
-  colorPrimary: '#1890ff',  // primary color
-  layout: 'mix',            // layout mode: side / top / mix
-  contentWidth: 'Fluid',    // content width: Fluid / Fixed
-  fixSiderbar: true,        // fixed sidebar
+  navTheme: 'light',               // nav theme: light / dark
+  colorPrimary: '#1890ff',         // primary color
+  layout: 'mix',                   // layout mode: side / top / mix
+  contentWidth: 'Fluid',           // content width: Fluid / Fixed
+  fixedHeader: false,              // fixed header
+  fixSiderbar: true,               // fixed sidebar
+  colorWeak: false,                // color weak mode
+  title: 'Ant Design Pro',         // site title
+  logo: 'https://...',             // logo URL
+  iconfontUrl: '',                 // iconfont URL
+  token: {},                       // ProLayout token for fine-grained style customization
 };
 ```
 

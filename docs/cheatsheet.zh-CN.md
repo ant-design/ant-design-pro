@@ -146,11 +146,17 @@ const location = useLocation(); // 当前路由信息
 ```ts
 // File: config/defaultSettings.ts
 export default {
-  navTheme: 'light',        // 导航主题：light / dark
-  colorPrimary: '#1890ff',  // 主题色
-  layout: 'mix',            // 布局模式：side / top / mix
-  contentWidth: 'Fluid',    // 内容宽度：Fluid / Fixed
-  fixSiderbar: true,        // 固定侧边栏
+  navTheme: 'light',               // 导航主题：light / dark
+  colorPrimary: '#1890ff',         // 主题色
+  layout: 'mix',                   // 布局模式：side / top / mix
+  contentWidth: 'Fluid',           // 内容宽度：Fluid / Fixed
+  fixedHeader: false,              // 固定顶部导航
+  fixSiderbar: true,               // 固定侧边栏
+  colorWeak: false,                // 色弱模式
+  title: 'Ant Design Pro',         // 站点标题
+  logo: 'https://...',             // Logo URL
+  iconfontUrl: '',                 // 图标字体 URL
+  token: {},                       // ProLayout token，用于细粒度样式定制
 };
 ```
 

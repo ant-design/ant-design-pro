@@ -24,6 +24,7 @@ jobs:
           cache-utoo: false
       - run: ut
       - run: ut lint
+      - run: npx antd lint ./src
       - run: ut build
         env:
           CI: true
