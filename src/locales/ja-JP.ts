@@ -1,8 +1,8 @@
 import component from './ja-JP/component';
 import globalHeader from './ja-JP/globalHeader';
 import menu from './ja-JP/menu';
+import network from './ja-JP/network';
 import pages from './ja-JP/pages';
-import pwa from './ja-JP/pwa';
 import settingDrawer from './ja-JP/settingDrawer';
 import settings from './ja-JP/settings';
 
@@ -17,7 +17,7 @@ export default {
   ...menu,
   ...settingDrawer,
   ...settings,
-  ...pwa,
+  ...network,
   ...component,
   ...pages,
 };

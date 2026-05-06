@@ -13,8 +13,10 @@ dayjs.extend(relativeTime);
 import {
   AvatarDropdown,
   DocLink,
+  ErrorBoundary,
   Footer,
   LangDropdown,
+  OfflineBanner,
   VersionDropdown,
 } from '@/components';
 import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
@@ -139,6 +141,9 @@ export const layout: RunTimeLayoutConfig = ({
           </Link>,
         ]
       : [],
+    // Replace ProLayout's default ErrorBoundary with our offline-aware version,
+    // so chunk load errors show friendly messages instead of "Something went wrong."
+    ErrorBoundary,
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
@@ -182,3 +187,12 @@ export const request: RequestConfig = {
   baseURL: isDev ? '' : 'https://pro-api.ant-design-demo.workers.dev',
   ...errorConfig,
 };
+
+export function rootContainer(container: React.ReactNode) {
+  return (
+    <>
+      <OfflineBanner />
+      <ErrorBoundary>{container}</ErrorBoundary>
+    </>
+  );
+}
