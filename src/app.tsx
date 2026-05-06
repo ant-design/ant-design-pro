@@ -14,6 +14,7 @@ import {
   AvatarDropdown,
   DocLink,
   ErrorBoundary,
+  ErrorBoundaryClass,
   Footer,
   LangDropdown,
   OfflineBanner,
@@ -143,7 +144,7 @@ export const layout: RunTimeLayoutConfig = ({
       : [],
     // Replace ProLayout's default ErrorBoundary with our offline-aware version,
     // so chunk load errors show friendly messages instead of "Something went wrong."
-    ErrorBoundary,
+    ErrorBoundary: ErrorBoundaryClass,
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
