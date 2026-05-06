@@ -100,6 +100,7 @@ npm install                                                # 更新依赖
 **路由配置** 位于 `config/routes.ts`：
 
 ```ts
+// File: config/routes.ts
 export default [
   {
     path: '/welcome',
@@ -143,12 +144,19 @@ const location = useLocation(); // 当前路由信息
 **ProLayout 配置** 位于 `config/defaultSettings.ts`：
 
 ```ts
+// File: config/defaultSettings.ts
 export default {
-  navTheme: 'light',        // 导航主题：light / dark
-  colorPrimary: '#1890ff',  // 主题色
-  layout: 'mix',            // 布局模式：side / top / mix
-  contentWidth: 'Fluid',    // 内容宽度：Fluid / Fixed
-  fixSiderbar: true,        // 固定侧边栏
+  navTheme: 'light',               // 导航主题：light / dark
+  colorPrimary: '#1890ff',         // 主题色
+  layout: 'mix',                   // 布局模式：side / top / mix
+  contentWidth: 'Fluid',           // 内容宽度：Fluid / Fixed
+  fixedHeader: false,              // 固定顶部导航
+  fixSiderbar: true,               // 固定侧边栏
+  colorWeak: false,                // 色弱模式
+  title: 'Ant Design Pro',         // 站点标题
+  logo: 'https://...',             // Logo URL
+  iconfontUrl: '',                 // 图标字体 URL
+  token: {},                       // ProLayout token，用于细粒度样式定制
 };
 ```
 
@@ -181,7 +189,7 @@ const Page = () => (
 **useModel — 轻量全局状态：** 在 `src/models/` 下创建文件即自动注册：
 
 ```ts
-// src/models/counter.ts
+// File: src/models/counter.ts
 import { useState } from 'react';
 
 export default function useCounter() {
@@ -229,7 +237,7 @@ const mutation = useMutation({
 **初始状态 — getInitialState：** 在 `src/app.tsx` 中定义，全局可访问：
 
 ```tsx
-// src/app.tsx
+// File: src/app.tsx
 export async function getInitialState() {
   const currentUser = await fetchUserInfo();
   return { currentUser };
@@ -249,6 +257,7 @@ const { initialState } = useModel('@@initialState');
 **请求配置** 位于 `src/app.tsx`：
 
 ```ts
+// File: src/app.tsx
 export const request: RequestConfig = {
   baseURL: 'https://api.example.com',
   timeout: 10000,
@@ -288,6 +297,7 @@ npm run openapi
 **定义权限** 在 `src/access.ts`：
 
 ```ts
+// File: src/access.ts
 export default function access(initialState: { currentUser?: API.CurrentUser }) {
   const { currentUser } = initialState;
   return {
@@ -441,7 +451,7 @@ npm run test:update         # 更新快照
 **Mock 数据：** 在 `mock/` 目录下创建文件：
 
 ```ts
-// mock/user.ts
+// File: mock/user.ts
 export default {
   'GET /api/currentUser': { name: 'Serati Ma', access: 'admin' },
   'POST /api/login': (req, res) => { res.end('ok'); },
@@ -453,6 +463,7 @@ Umi 自动注册 mock，开发模式下生效。
 **代理配置** 位于 `config/proxy.ts`：
 
 ```ts
+// File: config/proxy.ts
 export default {
   dev: {
     '/api/': {
@@ -488,3 +499,71 @@ export default {
 1. 在 `config/config.ts` 配置 `openAPI` 2. 运行 `npm run openapi` 3. 自动生成 `src/services/` 下的代码
 
 → 更多内容见 [umi FAQ](https://umijs.org/docs/introduce/faq)
+
+## 常见任务
+
+### 添加新页面
+
+```bash
+# 1. 创建页面组件
+#    文件路径：src/pages/my-page/index.tsx
+
+# 2. 在路由配置中注册
+#    文件路径：config/routes.ts
+#    { path: '/my-page', name: 'myPage', icon: 'file', component: './my-page' }
+
+# 3. 添加国际化翻译（如需菜单显示）
+#    文件路径：src/locales/zh-CN/menu.ts → menu.myPage: '我的页面'
+#    文件路径：src/locales/en-US/menu.ts → menu.myPage: 'My Page'
+```
+
+### 添加全局状态
+
+```bash
+# 1. 创建 model 文件（文件名即 model key）
+#    文件路径：src/models/myModel.ts
+#    导出自定义 Hook：export default function useMyModel() { ... }
+
+# 2. 在组件中使用
+#    import { useModel } from '@umijs/max';
+#    const { data } = useModel('myModel');  // 'myModel' 对应文件名
+```
+
+### 添加 Mock 接口
+
+```bash
+# 全局 Mock：mock/api.ts（匹配所有环境）
+# 页面级 Mock：src/pages/my-page/_mock.ts（Umi 自动发现）
+
+# Mock 格式：
+# export default { 'GET /api/my-data': { data: [] } }
+```
+
+### 生成 API 服务代码
+
+```bash
+# 1. 编辑 OpenAPI 配置：config/oneapi.json
+# 2. 运行生成命令（覆盖 src/services/ant-design-pro/）
+npm run openapi
+# 3. 不要手动编辑生成代码，改 oneapi.json 重新生成
+```
+
+### 切换到精简模式
+
+```bash
+git add -A && git commit -m "chore: save before simple"  # 必须先提交
+npm run simple                                              # 不可逆操作
+npm install                                                 # 更新依赖
+```
+
+## 注意事项
+
+- **`src/services/ant-design-pro/`** 为自动生成代码，禁止手动编辑。修改 `config/oneapi.json` 后执行 `npm run openapi` 重新生成
+- **`npm run simple` 不可逆**：会删除示例页面和多余依赖，执行前务必提交代码
+- **`.umi` 临时目录**：`src/.umi` 由 Umi 自动生成，遇到异常可删除后重启开发服务器
+- **Biome 代替 ESLint**：项目使用 Biome 进行 lint 和格式化，不要安装 ESLint 或 Prettier 插件
+- **Commit 规范**：必须遵循 [Conventional Commits](https://www.conventionalcommits.org/)，如 `feat:`, `fix:`, `chore:` 等
+- **`npx antd lint ./src`**：提交前必须零错误零警告
+- **Mock 优先级**：`mock/` 目录为全局 Mock，`src/pages/**/_mock.ts` 为页面级 Mock，两者都会被 Umi 自动注册
+- **样式优先级**：Tailwind（布局）> antd-style（主题 token）> CSS Modules（组件样式）> Less（仅遗留全局样式）
+- **路径别名**：`@/*` → `./src/*`，`@@/*` → `./src/.umi/*`

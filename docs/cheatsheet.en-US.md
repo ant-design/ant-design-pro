@@ -100,6 +100,7 @@ npm install                                                # Update dependencies
 **Route config** is in `config/routes.ts`:
 
 ```ts
+// File: config/routes.ts
 export default [
   {
     path: '/welcome',
@@ -143,12 +144,19 @@ const location = useLocation(); // current route info
 **ProLayout config** is in `config/defaultSettings.ts`:
 
 ```ts
+// File: config/defaultSettings.ts
 export default {
-  navTheme: 'light',        // nav theme: light / dark
-  colorPrimary: '#1890ff',  // primary color
-  layout: 'mix',            // layout mode: side / top / mix
-  contentWidth: 'Fluid',    // content width: Fluid / Fixed
-  fixSiderbar: true,        // fixed sidebar
+  navTheme: 'light',               // nav theme: light / dark
+  colorPrimary: '#1890ff',         // primary color
+  layout: 'mix',                   // layout mode: side / top / mix
+  contentWidth: 'Fluid',           // content width: Fluid / Fixed
+  fixedHeader: false,              // fixed header
+  fixSiderbar: true,               // fixed sidebar
+  colorWeak: false,                // color weak mode
+  title: 'Ant Design Pro',         // site title
+  logo: 'https://...',             // logo URL
+  iconfontUrl: '',                 // iconfont URL
+  token: {},                       // ProLayout token for fine-grained style customization
 };
 ```
 
@@ -181,7 +189,7 @@ const Page = () => (
 **useModel — lightweight global state:** Create a file in `src/models/` to auto-register:
 
 ```ts
-// src/models/counter.ts
+// File: src/models/counter.ts
 import { useState } from 'react';
 
 export default function useCounter() {
@@ -229,7 +237,7 @@ const mutation = useMutation({
 **Initial state — getInitialState:** Define in `src/app.tsx`, accessible globally:
 
 ```tsx
-// src/app.tsx
+// File: src/app.tsx
 export async function getInitialState() {
   const currentUser = await fetchUserInfo();
   return { currentUser };
@@ -249,6 +257,7 @@ const { initialState } = useModel('@@initialState');
 **Request config** is in `src/app.tsx`:
 
 ```ts
+// File: src/app.tsx
 export const request: RequestConfig = {
   baseURL: 'https://api.example.com',
   timeout: 10000,
@@ -288,6 +297,7 @@ Auto-generates API calling code under `src/services/` based on `config/oneapi.js
 **Define permissions** in `src/access.ts`:
 
 ```ts
+// File: src/access.ts
 export default function access(initialState: { currentUser?: API.CurrentUser }) {
   const { currentUser } = initialState;
   return {
@@ -441,7 +451,7 @@ Test files go next to the component, named `*.test.ts(x)`.
 **Mock data:** Create files in `mock/`:
 
 ```ts
-// mock/user.ts
+// File: mock/user.ts
 export default {
   'GET /api/currentUser': { name: 'Serati Ma', access: 'admin' },
   'POST /api/login': (req, res) => { res.end('ok'); },
@@ -453,6 +463,7 @@ Umi auto-registers mocks, active in dev mode.
 **Proxy config** is in `config/proxy.ts`:
 
 ```ts
+// File: config/proxy.ts
 export default {
   dev: {
     '/api/': {
@@ -488,3 +499,71 @@ Create a file in `src/models/` exporting a custom Hook, then use `useModel('file
 1. Configure `openAPI` in `config/config.ts` 2. Run `npm run openapi` 3. Code is auto-generated under `src/services/`
 
 → See [umi FAQ](https://umijs.org/en-US/docs/introduce/faq)
+
+## Common Tasks
+
+### Add a New Page
+
+```bash
+# 1. Create the page component
+#    File: src/pages/my-page/index.tsx
+
+# 2. Register in route config
+#    File: config/routes.ts
+#    { path: '/my-page', name: 'myPage', icon: 'file', component: './my-page' }
+
+# 3. Add i18n translations (for menu display)
+#    File: src/locales/zh-CN/menu.ts → menu.myPage: '我的页面'
+#    File: src/locales/en-US/menu.ts → menu.myPage: 'My Page'
+```
+
+### Add Global State
+
+```bash
+# 1. Create a model file (filename becomes the model key)
+#    File: src/models/myModel.ts
+#    Export a custom Hook: export default function useMyModel() { ... }
+
+# 2. Use in components
+#    import { useModel } from '@umijs/max';
+#    const { data } = useModel('myModel');  // 'myModel' matches filename
+```
+
+### Add a Mock API
+
+```bash
+# Global mock: mock/api.ts (applies to all environments)
+# Page-level mock: src/pages/my-page/_mock.ts (auto-discovered by Umi)
+
+# Mock format:
+# export default { 'GET /api/my-data': { data: [] } }
+```
+
+### Generate API Service Code
+
+```bash
+# 1. Edit OpenAPI config: config/oneapi.json
+# 2. Run generation (overwrites src/services/ant-design-pro/)
+npm run openapi
+# 3. Never edit generated code manually — modify oneapi.json and regenerate
+```
+
+### Switch to Simple Mode
+
+```bash
+git add -A && git commit -m "chore: save before simple"  # Must commit first
+npm run simple                                              # Irreversible
+npm install                                                 # Update dependencies
+```
+
+## Constraints & Gotchas
+
+- **`src/services/ant-design-pro/`** is auto-generated code. Do NOT edit manually. Modify `config/oneapi.json` and run `npm run openapi` to regenerate.
+- **`npm run simple` is irreversible**: It deletes demo pages and unused dependencies. Always commit before running.
+- **`.umi` temp directory**: `src/.umi` is auto-generated by Umi. Delete it and restart the dev server if you encounter unexpected behavior.
+- **Biome over ESLint**: This project uses Biome for linting and formatting. Do not install ESLint or Prettier plugins.
+- **Commit convention**: Must follow [Conventional Commits](https://www.conventionalcommits.org/) (e.g., `feat:`, `fix:`, `chore:`).
+- **`npx antd lint ./src`**: Must pass with zero errors and warnings before committing.
+- **Mock priority**: `mock/` directory for global mocks, `src/pages/**/_mock.ts` for page-level mocks. Both are auto-registered by Umi.
+- **Styling priority**: Tailwind (layout) > antd-style (theme tokens) > CSS Modules (component styles) > Less (legacy global styles only).
+- **Path aliases**: `@/*` → `./src/*`, `@@/*` → `./src/.umi/*`
