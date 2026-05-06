@@ -20,6 +20,7 @@ function getSubTitleId(isChunkError: boolean, isOffline: boolean): string {
 function renderErrorFallback(
   error: Error,
   isOnline: boolean,
+  onRetry: () => void,
   onReload: () => void,
 ) {
   const intl = getIntl();
@@ -27,65 +28,71 @@ function renderErrorFallback(
   const isChunkError = isChunkLoadError(error);
 
   return (
-    <div style={{ padding: 24 }}>
-      <Card variant="borderless">
-        <Result
-          status="error"
-          title={intl.formatMessage({
-            id: isChunkError
-              ? 'app.error.chunk.title'
-              : 'app.error.render.title',
-            defaultMessage: isChunkError
-              ? 'Failed to load page'
-              : 'Something went wrong',
-          })}
-          subTitle={intl.formatMessage({
-            id: getSubTitleId(isChunkError, isOffline),
-            defaultMessage:
-              isChunkError && isOffline
-                ? 'Your network connection has been lost. Please check your connection and reload.'
-                : isChunkError
-                  ? 'Page resources failed to load. Please reload and try again.'
-                  : 'Sorry, an error occurred on this page. Please reload or go back to the home page.',
-          })}
-          extra={[
-            <Button type="primary" key="reload" onClick={onReload}>
+    <Card variant="borderless" style={{ margin: 24 }}>
+      <Result
+        status="error"
+        title={intl.formatMessage({
+          id: isChunkError ? 'app.error.chunk.title' : 'app.error.render.title',
+          defaultMessage: isChunkError
+            ? 'Failed to load page'
+            : 'Something went wrong',
+        })}
+        subTitle={intl.formatMessage({
+          id: getSubTitleId(isChunkError, isOffline),
+          defaultMessage:
+            isChunkError && isOffline
+              ? 'Your network connection has been lost. Please check your connection and reload.'
+              : isChunkError
+                ? 'Page resources failed to load. Please reload and try again.'
+                : 'Sorry, an error occurred on this page. Please reload or go back to the home page.',
+        })}
+        extra={[
+          isChunkError && (
+            <Button type="primary" key="retry" onClick={onRetry}>
               {intl.formatMessage({
-                id: 'app.error.reload',
-                defaultMessage: 'Reload Page',
+                id: 'app.error.retry',
+                defaultMessage: 'Retry',
               })}
-            </Button>,
-            <Button href="/" key="home">
-              {intl.formatMessage({
-                id: 'app.error.home',
-                defaultMessage: 'Back Home',
-              })}
-            </Button>,
-          ]}
-        />
-      </Card>
-    </div>
+            </Button>
+          ),
+          <Button
+            type={isChunkError ? 'default' : 'primary'}
+            key="reload"
+            onClick={onReload}
+          >
+            {intl.formatMessage({
+              id: 'app.error.reload',
+              defaultMessage: 'Reload Page',
+            })}
+          </Button>,
+          <Button href="/" key="home">
+            {intl.formatMessage({
+              id: 'app.error.home',
+              defaultMessage: 'Back Home',
+            })}
+          </Button>,
+        ].filter(Boolean)}
+      />
+    </Card>
   );
-}
-
-interface ErrorBoundaryProps {
-  children: React.ReactNode;
 }
 
 interface ErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
   isOnline: boolean;
+  retryCount: number;
 }
 
 export default class ErrorBoundary extends React.Component<
-  ErrorBoundaryProps,
+  { children: React.ReactNode },
   ErrorBoundaryState
 > {
   state: ErrorBoundaryState = {
     hasError: false,
     error: null,
     isOnline: typeof navigator !== 'undefined' ? navigator.onLine : true,
+    retryCount: 0,
   };
 
   static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
@@ -121,15 +128,34 @@ export default class ErrorBoundary extends React.Component<
     console.error('[ErrorBoundary]', error, info.componentStack);
   }
 
+  /** Retry loading the failed module without a full page reload. */
+  handleRetry = () => {
+    // Incrementing retryCount changes the key on the children fragment,
+    // forcing React to unmount and remount all lazy components.
+    // This causes React.lazy to re-execute import() for the failed chunk.
+    this.setState((prev) => ({
+      hasError: false,
+      error: null,
+      retryCount: prev.retryCount + 1,
+    }));
+  };
+
   handleReload = () => {
     window.location.reload();
   };
 
   render() {
-    if (!this.state.hasError || !this.state.error) return this.props.children;
+    if (!this.state.hasError || !this.state.error) {
+      return (
+        <React.Fragment key={this.state.retryCount}>
+          {this.props.children}
+        </React.Fragment>
+      );
+    }
     return renderErrorFallback(
       this.state.error,
       this.state.isOnline,
+      this.handleRetry,
       this.handleReload,
     );
   }

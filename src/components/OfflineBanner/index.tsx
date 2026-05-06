@@ -21,33 +21,24 @@ const OfflineBanner: React.FC = () => {
   if (isOnline) return null;
 
   return (
-    <div
+    <Alert
+      type="warning"
+      showIcon
+      closable={false}
       style={{
         position: 'fixed',
-        top: 0,
-        insetInline: 0,
+        top: 8,
+        left: '50%',
+        transform: 'translateX(-50%)',
         zIndex: 999,
-        display: 'flex',
-        justifyContent: 'center',
-        pointerEvents: 'none',
+        maxWidth: 480,
       }}
-    >
-      <Alert
-        type="warning"
-        showIcon
-        closable={false}
-        style={{
-          margin: 8,
-          pointerEvents: 'auto',
-          maxWidth: 480,
-        }}
-        message={getIntl().formatMessage({
-          id: 'app.network.offline',
-          defaultMessage:
-            'You are currently offline. Some features may be unavailable.',
-        })}
-      />
-    </div>
+      message={getIntl().formatMessage({
+        id: 'app.network.offline',
+        defaultMessage:
+          'You are currently offline. Some features may be unavailable.',
+      })}
+    />
   );
 };
 

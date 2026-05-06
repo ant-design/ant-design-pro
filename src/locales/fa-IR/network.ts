@@ -9,6 +9,7 @@ export default {
   'app.error.render.title': 'خطایی رخ داد',
   'app.error.render.description':
     'متأسفانه، در این صفحه خطایی رخ داد. لطفاً صفحه را بارگذاری مجدد کنید یا به صفحه اصلی بازگردید.',
+  'app.error.retry': 'تلاش مجدد',
   'app.error.reload': 'بارگذاری مجدد صفحه',
   'app.error.home': 'بازگشت به صفحه اصلی',
   'app.request.offline':

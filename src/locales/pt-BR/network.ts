@@ -9,6 +9,7 @@ export default {
   'app.error.render.title': 'Algo deu errado',
   'app.error.render.description':
     'Desculpe, ocorreu um erro nesta página. Atualize a página ou volte para a página inicial.',
+  'app.error.retry': 'Tentar novamente',
   'app.error.reload': 'Atualizar página',
   'app.error.home': 'Voltar ao Início',
   'app.request.offline':
