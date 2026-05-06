@@ -15,7 +15,14 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const I18N_SYMBOLS = ['useIntl', 'FormattedMessage', 'SelectLang', 'getLocale'];
+const I18N_SYMBOLS = [
+  'useIntl',
+  'FormattedMessage',
+  'SelectLang',
+  'getLocale',
+  'getAllLocales',
+  'setLocale',
+];
 const FORMAT_MESSAGE_PATTERNS = [
   'intl.formatMessage(',
   'useIntl().formatMessage(',
@@ -150,7 +157,7 @@ function replaceRoutes(menuMap) {
     const zhValue = menuMap[name];
     if (zhValue) {
       modified = true;
-      return `name: '${zhValue}'`;
+      return `name: ${toStrLiteral(zhValue)}`;
     }
     return match;
   });
@@ -225,7 +232,9 @@ function processFile(filePath, localeMap) {
     !content.includes('FormattedMessage') &&
     !content.includes('useIntl') &&
     !content.includes('SelectLang') &&
-    !content.includes('getLocale')
+    !content.includes('getLocale') &&
+    !content.includes('getAllLocales') &&
+    !content.includes('setLocale')
   ) {
     return;
   }
@@ -264,6 +273,21 @@ function processFile(filePath, localeMap) {
       return `const ${varName} = 'zh-CN';`;
     },
   );
+
+  // ── 5b. 处理 getAllLocales() 调用
+  content = content.replace(
+    /useMemo\(\(\)\s*=>\s*getAllLocales\(\),\s*\[\]\)/g,
+    "['zh-CN']",
+  );
+  content = content.replace(
+    /const\s+(\w+)\s*=\s*getAllLocales\(\)\s*;?/g,
+    (_match, varName) => {
+      return `const ${varName} = ['zh-CN'];`;
+    },
+  );
+
+  // ── 5c. 移除 setLocale() 调用（使用括号匹配处理嵌套括号）
+  content = removeSetLocaleCalls(content);
 
   // ── 6. 移除 data-lang 属性
   content = content.replace(/\s*data-lang/g, '');
@@ -425,6 +449,33 @@ function replaceFormattedMessageComponents(content, localeMap) {
     searchFrom = idx + replacement.length;
   }
 
+  return content;
+}
+
+/**
+ * 移除 setLocale() 调用，使用括号匹配处理嵌套括号
+ */
+function removeSetLocaleCalls(content) {
+  const pattern = 'setLocale(';
+  let searchFrom = 0;
+  while (true) {
+    const idx = content.indexOf(pattern, searchFrom);
+    if (idx === -1) break;
+
+    const openParenIdx = idx + pattern.length - 1;
+    const closeParenIdx = findClosingParen(content, openParenIdx);
+    if (closeParenIdx === -1) {
+      searchFrom = idx + 1;
+      continue;
+    }
+
+    // Remove the entire call including trailing semicolon
+    let endIdx = closeParenIdx + 1;
+    if (content[endIdx] === ';') endIdx++;
+
+    content = content.slice(0, idx) + content.slice(endIdx);
+    searchFrom = idx;
+  }
   return content;
 }
 
