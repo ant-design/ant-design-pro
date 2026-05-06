@@ -90,7 +90,7 @@ Umi Max (`@umijs/max`) is the meta-framework. It wraps the build pipeline and pr
 - **@tanstack/react-query** for complex server state (e.g., table-list uses `useMutation` + `useQuery`)
 - Most pages use ProTable's built-in `request` prop for data loading
 
-### Styling: Three Systems Coexist
+### Styling Systems
 
 1. **Tailwind CSS v4** — entry: `src/tailwind.css`, PostCSS plugin in `postcss.config.js`. Best for layout utilities
 2. **antd-style v4** (`createStyles`) — CSS-in-JS with design token access (`{ token }`). Preferred when consuming theme tokens
@@ -116,6 +116,12 @@ Each page directory contains its own index.tsx, optional service.ts, _mock.ts, d
 ### Cloudflare Worker Backend
 
 `cloudflare-worker/` is a separate deployable (Hono framework, own `package.json`/`tsconfig.json`). Not an npm workspace — manage independently. Provides the production demo API.
+
+```bash
+cd cloudflare-worker
+npm run dev      # Local dev (wrangler dev)
+npm run deploy   # Deploy to Cloudflare (wrangler deploy)
+```
 
 ## Ant Design CLI
 
@@ -143,3 +149,12 @@ The CLI also supports MCP server mode: `npx antd mcp` (for IDE integrations).
 - **Adding a new page**: 1) Create component in `src/pages/` 2) Add route in `config/routes.ts` 3) Add menu translation in `src/locales/` (route `name` maps to `menu.xxx` i18n key)
 - **Adding global state**: Create a file in `src/models/` exporting a custom Hook, use `useModel('filename')` in components
 - **Access control**: Route-level via `access` field in routes; component-level via `<Access accessible={...}>` or `useAccess()` hook from `@umijs/max`
+
+## Gotchas & Troubleshooting
+
+- **Umi cache issues**: If dev server behaves unexpectedly, delete `src/.umi` and restart. This directory is auto-generated and safe to remove.
+- **Port 8000 in use**: Umi defaults to port 8000. Use `PORT=3000 npm start` to change it.
+- **Mock not updating**: Restart dev server after adding new mock files; Umi auto-discovers `mock/` and `src/pages/**/_mock.ts` on startup only.
+- **`npm run simple` is irreversible**: Always commit before running it — it deletes demo pages and replaces routes.
+- **Biome + ESLint conflict**: This project uses Biome only. Do not install ESLint or Prettier plugins.
+- **Lock file**: Uses `package-lock.json`. If deps break, delete `node_modules` and reinstall.
