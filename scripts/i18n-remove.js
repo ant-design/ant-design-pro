@@ -144,29 +144,38 @@ function buildMenuMap(localeMap) {
 // ─── Step 3: 替换路由文件中的 name ──────────────────────
 
 function replaceRoutes(menuMap) {
-  const routesPath = path.join('config', 'routes.ts');
-  if (!fs.existsSync(routesPath)) {
-    console.log('- config/routes.ts 不存在，跳过');
+  const configDir = path.join('config');
+  if (!fs.existsSync(configDir)) {
+    console.log('- config/ 目录不存在，跳过');
     return;
   }
 
-  let content = fs.readFileSync(routesPath, 'utf-8');
-  let modified = false;
+  const routeFiles = fs
+    .readdirSync(configDir)
+    .filter((f) => f.startsWith('routes') && f.endsWith('.ts'))
+    .map((f) => path.join(configDir, f));
 
-  content = content.replace(/name:\s*['"]([^'"]+)['"]/g, (match, name) => {
-    const zhValue = menuMap[name];
-    if (zhValue) {
-      modified = true;
-      return `name: ${toStrLiteral(zhValue)}`;
+  for (const routesPath of routeFiles) {
+    let content = fs.readFileSync(routesPath, 'utf-8');
+    let modified = false;
+
+    content = content.replace(/name:\s*['"]([^'"]+)['"]/g, (match, name) => {
+      const zhValue = menuMap[name];
+      if (zhValue) {
+        modified = true;
+        return `name: ${toStrLiteral(zhValue)}`;
+      }
+      return match;
+    });
+
+    if (modified) {
+      fs.writeFileSync(routesPath, content);
+      console.log(
+        `✓ 已替换 ${path.relative('.', routesPath)} 中的路由名称为中文`,
+      );
+    } else {
+      console.log(`- ${path.relative('.', routesPath)} 无需替换`);
     }
-    return match;
-  });
-
-  if (modified) {
-    fs.writeFileSync(routesPath, content);
-    console.log('✓ 已替换 config/routes.ts 中的路由名称为中文');
-  } else {
-    console.log('- config/routes.ts 无需替换');
   }
 }
 
@@ -487,6 +496,42 @@ function deleteLocalesDir() {
   console.log('✓ 已删除 src/locales/ 目录');
 }
 
+// ─── 残留检查 ────────────────────────────────────────────
+
+function checkResiduals() {
+  const residualSymbols = ['getLocale', 'getAllLocales', 'setLocale'];
+  const srcDir = path.join('src');
+  const files = readDirRecursive(srcDir).filter((f) => {
+    const ext = path.extname(f);
+    return (
+      ['.tsx', '.ts', '.jsx', '.js'].includes(ext) &&
+      !f.includes('.umi') &&
+      !f.includes('.umi-production') &&
+      !f.includes('.umi-test') &&
+      !f.endsWith('.d.ts')
+    );
+  });
+
+  let found = false;
+  for (const file of files) {
+    const content = fs.readFileSync(file, 'utf-8');
+    for (const sym of residualSymbols) {
+      const regex = new RegExp(`\\b${sym}\\b`);
+      const match = regex.exec(content);
+      if (match) {
+        const relPath = path.relative('.', file);
+        const line = content.slice(0, match.index).split('\n').length;
+        console.log(`  ⚠ ${relPath}:${line} 残留 ${sym} 调用，请手动检查`);
+        found = true;
+      }
+    }
+  }
+
+  if (!found) {
+    console.log('✓ 无残留 i18n 调用');
+  }
+}
+
 // ─── Step 7: 从 package.json 移除 i18n-remove 脚本 ──────
 
 function updatePackageJson() {
@@ -526,6 +571,9 @@ function main() {
 
   console.log('\n>>> 更新 package.json...');
   updatePackageJson();
+
+  console.log('\n>>> 检查残留 i18n 调用...');
+  checkResiduals();
 
   console.log('\n========================================');
   console.log('  i18n 移除完成！');
