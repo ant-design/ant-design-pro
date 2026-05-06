@@ -500,7 +500,7 @@ exports[`Login Page should login success 1`] = `
               rel="noopener noreferrer"
               target="_blank"
             >
-              4.6.49
+              4.6.50
             </a>
           </span>
           <div
@@ -521,7 +521,7 @@ exports[`Login Page should login success 1`] = `
               rel="noopener noreferrer"
               target="_blank"
             >
-              1.4.2-alpha.0
+              1.4.2
             </a>
           </span>
           <div
@@ -1062,7 +1062,7 @@ exports[`Login Page should show login form 1`] = `
               rel="noopener noreferrer"
               target="_blank"
             >
-              4.6.49
+              4.6.50
             </a>
           </span>
           <div
@@ -1083,7 +1083,7 @@ exports[`Login Page should show login form 1`] = `
               rel="noopener noreferrer"
               target="_blank"
             >
-              1.4.2-alpha.0
+              1.4.2
             </a>
           </span>
           <div
