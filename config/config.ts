@@ -174,6 +174,12 @@ export default defineConfig({
    */
   access: {},
   /**
+   * @name Valtio 插件
+   * @description 基于 valtio 的状态管理方案
+   * @doc https://umijs.org/docs/max/valtio
+   */
+  valtio: {},
+  /**
    * @name Google Analytics
    * @description 使用 GA4 (gtag.js) 进行站点分析
    * @doc https://umijs.org/docs/max/analytics

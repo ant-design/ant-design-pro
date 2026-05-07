@@ -88,6 +88,7 @@ Umi Max (`@umijs/max`) is the meta-framework. It wraps the build pipeline and pr
 - **`useModel('@@initialState')`** for global state (currentUser, settings). Initialized by `getInitialState()` in `app.tsx` which runs once on app startup
 - **`useRequest`** from `@umijs/max` for simple data fetching
 - **@tanstack/react-query** for complex server state (e.g., table-list uses `useMutation` + `useQuery`)
+- **Valtio** (`proxy`, `useSnapshot`): proxy-based reactive state for fine-grained updates. Import from `@umijs/max`. Create stores with `proxy()` at module level, read with `useSnapshot()` in components
 - Most pages use ProTable's built-in `request` prop for data loading
 
 ### Styling Systems

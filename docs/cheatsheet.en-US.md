@@ -234,6 +234,26 @@ const mutation = useMutation({
 });
 ```
 
+**Valtio — reactive state management:** Proxy-based reactive state for fine-grained updates:
+
+```ts
+// Create store (can be at module level in any file)
+import { proxy, useSnapshot } from '@umijs/max';
+
+export const settingsStore = proxy({
+  theme: 'light' as 'light' | 'dark',
+  sidebarCollapsed: false,
+});
+
+// Use in components
+function ThemeToggle() {
+  const snap = useSnapshot(settingsStore);
+  return <button onClick={() => { settingsStore.theme = snap.theme === 'light' ? 'dark' : 'light'; }}>
+    Current theme: {snap.theme}
+  </button>;
+}
+```
+
 **Initial state — getInitialState:** Define in `src/app.tsx`, accessible globally:
 
 ```tsx

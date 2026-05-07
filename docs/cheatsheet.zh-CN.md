@@ -234,6 +234,26 @@ const mutation = useMutation({
 });
 ```
 
+**Valtio — 响应式状态管理：** 基于 proxy 的响应式状态，适合需要细粒度更新的场景：
+
+```ts
+// 创建 store（可在任意文件中，模块级别直接调用）
+import { proxy, useSnapshot } from '@umijs/max';
+
+export const settingsStore = proxy({
+  theme: 'light' as 'light' | 'dark',
+  sidebarCollapsed: false,
+});
+
+// 组件中使用
+function ThemeToggle() {
+  const snap = useSnapshot(settingsStore);
+  return <button onClick={() => { settingsStore.theme = snap.theme === 'light' ? 'dark' : 'light'; }}>
+    当前主题: {snap.theme}
+  </button>;
+}
+```
+
 **初始状态 — getInitialState：** 在 `src/app.tsx` 中定义，全局可访问：
 
 ```tsx
