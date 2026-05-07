@@ -34,8 +34,8 @@ npm run test:coverage     # Jest with coverage
 npm run test:update       # Update test snapshots
 # Run a single test: npx jest src/pages/user/login/login.test.tsx
 
-# Code Generation
-npm run openapi    # Regenerate services from config/oneapi.json (overwrites src/services/)
+# Code Generation (OpenAPI — disabled by default, see below)
+# npm run openapi    # Regenerate services from config/oneapi.json (overwrites src/services/)
 
 # Other
 npm run simple     # Irreversible: removes most page blocks for minimal version
@@ -69,7 +69,7 @@ Umi Max (`@umijs/max`) is the meta-framework. It wraps the build pipeline and pr
 
 ### API & Request Layer
 
-- **Auto-generated services** in `src/services/ant-design-pro/` — do NOT edit manually; regenerate with `npm run openapi`
+- **Auto-generated services** in `src/services/ant-design-pro/` — do NOT edit manually; regenerate with `npm run openapi` (openapi plugin disabled by default — see Gotchas below)
 - **Per-page services**: many pages have co-located `service.ts` files
 - **Request config**: centralized in `src/requestErrorConfig.ts` (error handler, interceptors, base URL). The `request` export in `app.tsx` sets global `RequestConfig`
 - Built-in `request` function from `@umijs/max` — no manual axios wrapping needed
@@ -157,5 +157,6 @@ The CLI also supports MCP server mode: `npx antd mcp` (for IDE integrations).
 - **Mock not updating**: Umi usually auto-discovers `mock/` and `src/pages/**/_mock.ts` changes. If a new file isn't recognized, try restarting the dev server
 - **Biome + antd lint**: Both must pass before committing. `npm run lint` runs Biome + tsc; `npx antd lint ./src` runs separately. Do not install ESLint or Prettier — this project uses Biome only
 - **`src/services/` is auto-generated**: Never edit manually. Run `npm run openapi` to regenerate
+- **OpenAPI plugin disabled by default**: To re-enable, uncomment `@umijs/max-plugin-openapi` in `plugins` and the `openAPI` config in `config/config.ts`, uncomment the OpenAPI link in `src/app.tsx`, install `swagger-ui-dist`, then run `npm run openapi`
 - **`npm run simple` is irreversible**: Always commit or branch before running it
 - **Lock file**: Uses `package-lock.json`. If deps break, delete `node_modules` and reinstall
