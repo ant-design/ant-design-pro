@@ -1,6 +1,7 @@
 import { DingdingOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-components';
 import { Button, Card, Descriptions, Result, Steps } from 'antd';
+import React from 'react';
 import useStyles from './index.style';
 
 const descriptionItems = [

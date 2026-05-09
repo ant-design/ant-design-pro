@@ -373,6 +373,7 @@ exports[`Login Page should login success 1`] = `
                   </span>
                 </label>
                 <a
+                  href="#"
                   style="float: right;"
                 >
                   Forgot Password ?
@@ -935,6 +936,7 @@ exports[`Login Page should show login form 1`] = `
                   </span>
                 </label>
                 <a
+                  href="#"
                   style="float: right;"
                 >
                   Forgot Password ?
