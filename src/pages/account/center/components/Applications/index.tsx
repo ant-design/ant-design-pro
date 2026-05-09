@@ -12,7 +12,7 @@ import type { ListItemDataType } from '../../data.d';
 import { queryFakeList } from '../../service';
 import useStyles from './index.style';
 
-export function formatWan(val: number) {
+function formatWan(val: number) {
   const v = val * 1;
   if (!v || Number.isNaN(v)) return '';
   let result: React.ReactNode = val;

@@ -34,6 +34,7 @@ functions/*
 .umi
 .umi-production
 .umi-test
+.umi-undefined
 .turbopack
 
 # screenshot

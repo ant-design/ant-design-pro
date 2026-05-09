@@ -6,13 +6,13 @@ import {
   ProFormTextArea,
   StepsForm,
 } from '@ant-design/pro-components';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Modal, message } from 'antd';
 import React, { cloneElement, useCallback, useState } from 'react';
 import { updateRule } from '@/services/ant-design-pro/api';
 
-export type FormValueType = {
+type FormValueType = {
   target?: string;
   template?: string;
   type?: string;
@@ -20,7 +20,7 @@ export type FormValueType = {
   frequency?: string;
 } & Partial<API.RuleListItem>;
 
-export type UpdateFormProps = {
+type UpdateFormProps = {
   trigger?: React.ReactElement<any>;
   onOk?: () => void;
   values: Partial<API.RuleListItem>;
@@ -30,6 +30,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const { onOk, values, trigger } = props;
 
   const intl = useIntl();
+  const queryClient = useQueryClient();
 
   const [open, setOpen] = useState(false);
 
@@ -39,6 +40,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     mutationFn: updateRule,
     onSuccess: () => {
       messageApi.success('Configuration is successful');
+      queryClient.invalidateQueries({ queryKey: ['rule'] });
       onOk?.();
     },
     onError: () => {

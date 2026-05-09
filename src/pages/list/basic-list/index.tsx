@@ -1,6 +1,6 @@
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Avatar,
   Button,
@@ -71,7 +71,7 @@ const ListContent = ({
     </div>
   );
 };
-export const BasicList: FC = () => {
+const BasicList: FC = () => {
   const { styles } = useStyles();
   const [done, setDone] = useState<boolean>(false);
   const [open, setVisible] = useState<boolean>(false);
@@ -83,6 +83,7 @@ export const BasicList: FC = () => {
     queryFn: () => queryFakeList({ count: 50 }).then((res) => res.data),
   });
 
+  const queryClient = useQueryClient();
   const { mutate: postRun } = useMutation({
     mutationFn: async ({ method, params }: { method: string; params: any }) => {
       if (method === 'remove') {
@@ -92,6 +93,9 @@ export const BasicList: FC = () => {
         return updateFakeList(params);
       }
       return addFakeList(params);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['basic-list'] });
     },
   });
 
@@ -167,7 +171,7 @@ export const BasicList: FC = () => {
           ],
         }}
       >
-        <a>
+        <a href="#">
           更多 <DownOutlined />
         </a>
       </Dropdown>
@@ -227,6 +231,7 @@ export const BasicList: FC = () => {
                   actions={[
                     <a
                       key="edit"
+                      href="#"
                       onClick={(e) => {
                         e.preventDefault();
                         showEditModal(item);

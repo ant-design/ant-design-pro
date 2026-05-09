@@ -3,11 +3,12 @@ import React from 'react';
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 
+const Action = (
+  <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked />
+);
+
 const NotificationView: React.FC = () => {
   const getData = () => {
-    const Action = (
-      <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked />
-    );
     return [
       {
         title: '用户消息',

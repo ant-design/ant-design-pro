@@ -23,12 +23,12 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, index, desc, href }) => (
   <a href={href} target="_blank" rel="noopener noreferrer" aria-label={title}>
     <Card hoverable size="small">
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1677ff] text-base font-bold text-white">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#1677ff] text-base font-bold text-white">
           {index}
         </div>
         <div className="min-w-0 flex-1">
           <h4 className="mb-1 mt-0 text-sm font-semibold">{title}</h4>
-          <p className="mb-0 line-clamp-2 text-xs text-gray-500">{desc}</p>
+          <p className="mb-0 line-clamp-2 text-xs text-zinc-500">{desc}</p>
         </div>
       </div>
     </Card>

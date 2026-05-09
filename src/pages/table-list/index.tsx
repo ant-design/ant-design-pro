@@ -9,7 +9,7 @@ import {
   ProDescriptions,
   ProTable,
 } from '@ant-design/pro-components';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Button, Drawer, type FormInstance, Input, message } from 'antd';
 import React, { useCallback, useRef, useState } from 'react';
@@ -19,6 +19,7 @@ import UpdateForm from './components/UpdateForm';
 
 const TableList: React.FC = () => {
   const actionRef = useRef<ActionType | null>(null);
+  const queryClient = useQueryClient();
 
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
@@ -37,6 +38,7 @@ const TableList: React.FC = () => {
     onSuccess: () => {
       setSelectedRows([]);
       actionRef.current?.reloadAndRest?.();
+      queryClient.invalidateQueries({ queryKey: ['rule'] });
 
       messageApi.success('Deleted successfully and will refresh soon');
     },
@@ -57,7 +59,9 @@ const TableList: React.FC = () => {
       render: (dom, entity) => {
         return (
           <a
-            onClick={() => {
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
               setCurrentRow(entity);
               setShowDetail(true);
             }}
@@ -193,7 +197,7 @@ const TableList: React.FC = () => {
       render: (_, record) => [
         <UpdateForm
           trigger={
-            <a>
+            <a href="#">
               <FormattedMessage
                 id="pages.searchTable.config"
                 defaultMessage="Configuration"
@@ -269,7 +273,9 @@ const TableList: React.FC = () => {
                 id="pages.searchTable.chosen"
                 defaultMessage="Chosen"
               />{' '}
-              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
+              <span style={{ fontWeight: 600 }}>
+                {selectedRowsState.length}
+              </span>{' '}
               <FormattedMessage
                 id="pages.searchTable.item"
                 defaultMessage="项"

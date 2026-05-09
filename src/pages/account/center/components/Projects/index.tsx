@@ -36,7 +36,7 @@ const Projects: React.FC = () => {
             cover={<img alt={item.title} src={item.cover} />}
           >
             <Card.Meta
-              title={<a>{item.title}</a>}
+              title={<a href="#">{item.title}</a>}
               description={item.subDescription}
             />
             <div className={styles.cardItemContent}>

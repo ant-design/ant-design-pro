@@ -141,6 +141,68 @@ const TagList: React.FC<{
     </div>
   );
 };
+const UserInfo: React.FC<{ user: Partial<CurrentUser> }> = ({ user }) => {
+  const { styles } = useStyles();
+  return (
+    <div className={styles.detail}>
+      <p>
+        <ContactsOutlined
+          style={{
+            marginRight: 8,
+          }}
+        />
+        {user.title}
+      </p>
+      <p>
+        <ClusterOutlined
+          style={{
+            marginRight: 8,
+          }}
+        />
+        {user.group}
+      </p>
+      <p>
+        <HomeOutlined
+          style={{
+            marginRight: 8,
+          }}
+        />
+        {
+          (
+            user.geographic || {
+              province: {
+                label: '',
+              },
+            }
+          ).province.label
+        }
+        {
+          (
+            user.geographic || {
+              city: {
+                label: '',
+              },
+            }
+          ).city.label
+        }
+      </p>
+    </div>
+  );
+};
+
+const TabContent: React.FC<{ tabValue: tabKeyType }> = ({ tabValue }) => {
+  if (tabValue === 'projects') {
+    return <Projects />;
+  }
+  if (tabValue === 'applications') {
+    return <Applications />;
+  }
+  if (tabValue === 'articles') {
+    return <Articles />;
+  }
+  return null;
+};
+
 const Center: React.FC = () => {
   const { styles } = useStyles();
   const [tabKey, setTabKey] = useState<tabKeyType>('articles');
@@ -151,72 +213,6 @@ const Center: React.FC = () => {
     queryFn: () => queryCurrent().then((res) => res.data),
   });
 
-  //  渲染用户信息
-  const renderUserInfo = ({
-    title,
-    group,
-    geographic,
-  }: Partial<CurrentUser>) => {
-    return (
-      <div className={styles.detail}>
-        <p>
-          <ContactsOutlined
-            style={{
-              marginRight: 8,
-            }}
-          />
-          {title}
-        </p>
-        <p>
-          <ClusterOutlined
-            style={{
-              marginRight: 8,
-            }}
-          />
-          {group}
-        </p>
-        <p>
-          <HomeOutlined
-            style={{
-              marginRight: 8,
-            }}
-          />
-          {
-            (
-              geographic || {
-                province: {
-                  label: '',
-                },
-              }
-            ).province.label
-          }
-          {
-            (
-              geographic || {
-                city: {
-                  label: '',
-                },
-              }
-            ).city.label
-          }
-        </p>
-      </div>
-    );
-  };
-
-  // 渲染tab切换
-  const renderChildrenByTabKey = (tabValue: tabKeyType) => {
-    if (tabValue === 'projects') {
-      return <Projects />;
-    }
-    if (tabValue === 'applications') {
-      return <Applications />;
-    }
-    if (tabValue === 'articles') {
-      return <Articles />;
-    }
-    return null;
-  };
   return (
     <GridContent>
       <Row gutter={24}>
@@ -235,7 +231,7 @@ const Center: React.FC = () => {
                   <div className={styles.name}>{currentUser.name}</div>
                   <div>{currentUser?.signature}</div>
                 </div>
-                {renderUserInfo(currentUser)}
+                <UserInfo user={currentUser} />
                 <Divider dashed />
                 <TagList tags={currentUser.tags || []} />
                 <Divider
@@ -271,7 +267,7 @@ const Center: React.FC = () => {
               setTabKey(_tabKey as tabKeyType);
             }}
           >
-            {renderChildrenByTabKey(tabKey)}
+            <TabContent tabValue={tabKey} />
           </Card>
         </Col>
       </Row>

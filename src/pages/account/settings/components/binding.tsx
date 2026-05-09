@@ -11,19 +11,31 @@ const BindingView: React.FC = () => {
     {
       title: '绑定淘宝',
       description: '当前未绑定淘宝账号',
-      actions: [<a key="Bind">绑定</a>],
+      actions: [
+        <a key="Bind" href="#">
+          绑定
+        </a>,
+      ],
       avatar: <TaobaoOutlined className="taobao" />,
     },
     {
       title: '绑定支付宝',
       description: '当前未绑定支付宝账号',
-      actions: [<a key="Bind">绑定</a>],
+      actions: [
+        <a key="Bind" href="#">
+          绑定
+        </a>,
+      ],
       avatar: <AlipayOutlined className="alipay" />,
     },
     {
       title: '绑定钉钉',
       description: '当前未绑定钉钉账号',
-      actions: [<a key="Bind">绑定</a>],
+      actions: [
+        <a key="Bind" href="#">
+          绑定
+        </a>,
+      ],
       avatar: <DingdingOutlined className="dingding" />,
     },
   ];

@@ -9,7 +9,7 @@ const RegisterResult: React.FC<Record<string, unknown>> = () => {
 
   const actions = (
     <div className={styles.actions}>
-      <a href="">
+      <a href="#">
         <Button size="large" type="primary">
           <span>查看邮箱</span>
         </Button>

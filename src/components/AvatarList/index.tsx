@@ -40,7 +40,17 @@ const Item: React.FC<AvatarItemProps> = ({
   const { styles } = useStyles();
   const cls = avatarSizeToClassName(styles, size);
   return (
-    <li className={cls} onClick={onClick}>
+    <li
+      className={cls}
+      onClick={onClick}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === 'Enter') onClick();
+            }
+          : undefined
+      }
+    >
       {tips ? (
         <Tooltip title={tips}>
           <Avatar

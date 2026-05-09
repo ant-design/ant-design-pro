@@ -6,12 +6,11 @@ import {
 import { history, useModel } from '@umijs/max';
 import type { MenuProps } from 'antd';
 import { Spin } from 'antd';
-import React from 'react';
-import { flushSync } from 'react-dom';
+import React, { startTransition } from 'react';
 import { outLogin } from '@/services/ant-design-pro/api';
 import HeaderDropdown from '../HeaderDropdown';
 
-export type GlobalHeaderRightProps = {
+type GlobalHeaderRightProps = {
   children?: React.ReactNode;
 };
 
@@ -38,7 +37,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
   const onMenuClick: MenuProps['onClick'] = (event) => {
     const { key } = event;
     if (key === 'logout') {
-      flushSync(() => {
+      startTransition(() => {
         setInitialState((s) => ({ ...s, currentUser: undefined }));
       });
       loginOut();

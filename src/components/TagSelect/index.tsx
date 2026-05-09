@@ -6,7 +6,7 @@ import React, { type FC, useMemo, useState } from 'react';
 import useStyles from './index.style';
 
 const { CheckableTag } = Tag;
-export interface TagSelectOptionProps {
+interface TagSelectOptionProps {
   value: string | number;
   style?: React.CSSProperties;
   checked?: boolean;
@@ -32,7 +32,7 @@ type TagSelectOptionElement = React.ReactElement<
   typeof TagSelectOption
 >;
 
-export interface TagSelectProps {
+interface TagSelectProps {
   onChange?: (value: (string | number)[]) => void;
   expandable?: boolean;
   value?: (string | number)[];
@@ -81,9 +81,10 @@ const TagSelect: FC<TagSelectProps> & {
     const childrenArray = React.Children.toArray(
       children,
     ) as TagSelectOptionElement[];
-    return childrenArray
-      .filter((child) => isTagSelectOption(child))
-      .map((child) => child.props.value);
+    return childrenArray.reduce<(string | number)[]>((acc, child) => {
+      if (isTagSelectOption(child)) acc.push(child.props.value);
+      return acc;
+    }, []);
   }, [children]);
 
   // Use Set for O(1) lookups
@@ -137,8 +138,16 @@ const TagSelect: FC<TagSelectProps> & {
       {expandable && (
         <a
           className={styles.trigger}
-          onClick={() => {
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
             setExpand(!expand);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              setExpand(!expand);
+            }
           }}
         >
           {expand ? (

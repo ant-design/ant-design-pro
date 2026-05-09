@@ -9,7 +9,7 @@ import {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-components';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, message } from 'antd';
 import type { FC } from 'react';
 import { fakeSubmitForm } from './service';
@@ -17,10 +17,12 @@ import useStyles from './style.style';
 
 const BasicForm: FC<Record<string, any>> = () => {
   const { styles } = useStyles();
+  const queryClient = useQueryClient();
   const { mutate: run } = useMutation({
     mutationFn: fakeSubmitForm,
     onSuccess: () => {
       message.success('提交成功');
+      queryClient.invalidateQueries({ queryKey: ['basic-form'] });
     },
   });
   const onFinish = async (values: Record<string, any>) => {

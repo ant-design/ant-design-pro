@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
 import { useEffect, useMemo, useRef } from 'react';
 import { feature } from 'topojson-client';
+import useStyles from './index.style';
 
 const DATA_COLORS = [
   '#ede9fe',
@@ -103,6 +104,7 @@ function buildLandBitmap(
 }
 
 export default function MonitorMap() {
+  const { styles } = useStyles();
   const svgRef = useRef<SVGSVGElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
@@ -284,8 +286,10 @@ export default function MonitorMap() {
           .on('mousemove', (event) => {
             if (tooltipRef.current) {
               const [x, y] = d3.pointer(event, svgRef.current);
-              tooltipRef.current.style.left = `${x + 12}px`;
-              tooltipRef.current.style.top = `${y - 12}px`;
+              Object.assign(tooltipRef.current.style, {
+                left: `${x + 12}px`,
+                top: `${y - 12}px`,
+              });
             }
           })
           .on('mouseleave', function (_event, d) {
@@ -374,23 +378,7 @@ export default function MonitorMap() {
           borderRadius: 8,
         }}
       />
-      <div
-        ref={tooltipRef}
-        style={{
-          position: 'absolute',
-          background: '#fff',
-          color: '#334155',
-          padding: '8px 12px',
-          borderRadius: '8px',
-          fontSize: '12px',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-          pointerEvents: 'none',
-          opacity: 0,
-          transition: 'opacity 0.2s',
-          zIndex: 10,
-        }}
-      />
+      <div ref={tooltipRef} className={styles.tooltip} />
     </div>
   );
 }

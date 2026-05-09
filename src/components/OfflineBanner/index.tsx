@@ -1,15 +1,22 @@
 import { getIntl } from '@umijs/max';
 import { Alert } from 'antd';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const OfflineBanner: React.FC = () => {
-  const [isOnline, setIsOnline] = useState(
-    typeof navigator !== 'undefined' ? navigator.onLine : true,
-  );
+  const isOnlineRef = useRef(true);
+  const [, forceUpdate] = useState<number>(0);
 
   useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
+    isOnlineRef.current = navigator.onLine;
+    forceUpdate((n) => n + 1);
+    const handleOnline = () => {
+      isOnlineRef.current = true;
+      forceUpdate((n: number) => n + 1);
+    };
+    const handleOffline = () => {
+      isOnlineRef.current = false;
+      forceUpdate((n: number) => n + 1);
+    };
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
     return () => {
@@ -18,7 +25,7 @@ const OfflineBanner: React.FC = () => {
     };
   }, []);
 
-  if (isOnline) return null;
+  if (isOnlineRef.current) return null;
 
   return (
     <Alert
@@ -30,7 +37,7 @@ const OfflineBanner: React.FC = () => {
         top: 8,
         left: '50%',
         transform: 'translateX(-50%)',
-        zIndex: 999,
+        zIndex: 10,
         maxWidth: 480,
       }}
       message={getIntl().formatMessage({

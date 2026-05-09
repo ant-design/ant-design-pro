@@ -5,7 +5,7 @@ import {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-components';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Button, message } from 'antd';
 import type { FC } from 'react';
@@ -19,6 +19,7 @@ const CreateForm: FC<CreateFormProps> = (props) => {
   const { reload } = props;
 
   const [messageApi, contextHolder] = message.useMessage();
+  const queryClient = useQueryClient();
   /**
    * @en-US International configuration
    * @zh-CN 国际化配置
@@ -29,6 +30,7 @@ const CreateForm: FC<CreateFormProps> = (props) => {
     mutationFn: addRule,
     onSuccess: () => {
       messageApi.success('Added successfully');
+      queryClient.invalidateQueries({ queryKey: ['rule'] });
       reload?.();
     },
     onError: () => {

@@ -183,7 +183,20 @@ const Articles: FC = () => {
                 options={ownerOptions}
               />
             </FormItem>
-            <a className={styles.selfTrigger} onClick={setOwner}>
+            <a
+              className={styles.selfTrigger}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setOwner();
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  setOwner();
+                }
+              }}
+            >
               只看自己的
             </a>
           </StandardFormRow>

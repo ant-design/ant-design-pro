@@ -21,8 +21,7 @@ import {
 } from '@umijs/max';
 import { Alert, App, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
-import React, { useState } from 'react';
-import { flushSync } from 'react-dom';
+import React, { startTransition, useState } from 'react';
 import { Footer } from '@/components';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
@@ -142,7 +141,7 @@ const Login: React.FC = () => {
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
-      flushSync(() => {
+      startTransition(() => {
         setInitialState((s) => ({
           ...s,
           currentUser: userInfo,
@@ -399,6 +398,7 @@ const Login: React.FC = () => {
               />
             </ProFormCheckbox>
             <a
+              href="#"
               style={{
                 float: 'right',
               }}

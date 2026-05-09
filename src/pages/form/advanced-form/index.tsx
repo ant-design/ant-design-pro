@@ -12,7 +12,7 @@ import {
 } from '@ant-design/pro-components';
 import { Card, Col, message, Popover, Row } from 'antd';
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { fakeSubmitForm } from './service';
 import useStyles from './style.style';
 
@@ -66,6 +66,7 @@ interface ErrorField {
 const AdvancedForm: FC<Record<string, any>> = () => {
   const { styles } = useStyles();
   const [error, setError] = useState<ErrorField[]>([]);
+  const keyCounter = useRef(0);
   const getErrorInfo = (errors: ErrorField[]) => {
     const errorCount = errors.filter((item) => item.errors.length > 0).length;
     if (!errors || errorCount === 0) {
@@ -89,15 +90,16 @@ const AdvancedForm: FC<Record<string, any>> = () => {
         | 'dateRange'
         | 'type';
       return (
-        <li
+        <button
           key={key}
+          type="button"
           className={styles.errorListItem}
           onClick={() => scrollToField(key)}
         >
           <CloseCircleOutlined className={styles.errorIcon} />
           <div>{err.errors[0]}</div>
           <div className={styles.errorField}>{fieldLabels[key]}</div>
-        </li>
+        </button>
       );
     });
     return (
@@ -161,7 +163,9 @@ const AdvancedForm: FC<Record<string, any>> = () => {
         return [
           <a
             key="eidit"
-            onClick={() => {
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
               action?.startEditable(record.key);
             }}
           >
@@ -534,8 +538,9 @@ const AdvancedForm: FC<Record<string, any>> = () => {
             <EditableProTable<TableFormDateType>
               recordCreatorProps={{
                 record: () => {
+                  keyCounter.current += 1;
                   return {
-                    key: `0${Date.now()}`,
+                    key: `new-${keyCounter.current}`,
                   };
                 },
               }}

@@ -1,6 +1,6 @@
 import { GridContent } from '@ant-design/pro-components';
 import { Menu } from 'antd';
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import BaseView from './components/base';
 import BindingView from './components/binding';
 import NotificationView from './components/notification';
@@ -12,6 +12,24 @@ type SettingsState = {
   mode: 'inline' | 'horizontal';
   selectKey: SettingsStateKeys;
 };
+
+const SettingsContent: React.FC<{ selectKey: SettingsStateKeys }> = ({
+  selectKey,
+}) => {
+  switch (selectKey) {
+    case 'base':
+      return <BaseView />;
+    case 'security':
+      return <SecurityView />;
+    case 'binding':
+      return <BindingView />;
+    case 'notification':
+      return <NotificationView />;
+    default:
+      return null;
+  }
+};
+
 const Settings: React.FC = () => {
   const { styles } = useStyles();
   const menuMap: Record<string, React.ReactNode> = {
@@ -26,7 +44,7 @@ const Settings: React.FC = () => {
   });
   const dom = useRef<HTMLDivElement>(null);
 
-  const resize = useCallback(() => {
+  const resize = () => {
     requestAnimationFrame(() => {
       if (!dom.current) {
         return;
@@ -44,35 +62,24 @@ const Settings: React.FC = () => {
         mode: mode as SettingsState['mode'],
       }));
     });
-  }, []);
+  };
+
+  const resizeRef = useRef(resize);
+  resizeRef.current = resize;
 
   useLayoutEffect(() => {
-    window.addEventListener('resize', resize);
-    resize();
+    const handler = () => resizeRef.current();
+    window.addEventListener('resize', handler);
+    handler();
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', handler);
     };
-  }, [resize]);
+  }, []);
   const getMenu = () => {
     return Object.keys(menuMap).map((item) => ({
       key: item,
       label: menuMap[item],
     }));
-  };
-  const renderChildren = () => {
-    const { selectKey } = initConfig;
-    switch (selectKey) {
-      case 'base':
-        return <BaseView />;
-      case 'security':
-        return <SecurityView />;
-      case 'binding':
-        return <BindingView />;
-      case 'notification':
-        return <NotificationView />;
-      default:
-        return null;
-    }
   };
   return (
     <GridContent>
@@ -89,17 +96,17 @@ const Settings: React.FC = () => {
             mode={initConfig.mode}
             selectedKeys={[initConfig.selectKey]}
             onClick={({ key }) => {
-              setInitConfig({
-                ...initConfig,
+              setInitConfig((prev) => ({
+                ...prev,
                 selectKey: key as SettingsStateKeys,
-              });
+              }));
             }}
             items={getMenu()}
           />
         </div>
         <div className={styles.right}>
           <div className={styles.title}>{menuMap[initConfig.selectKey]}</div>
-          {renderChildren()}
+          <SettingsContent selectKey={initConfig.selectKey} />
         </div>
       </div>
     </GridContent>

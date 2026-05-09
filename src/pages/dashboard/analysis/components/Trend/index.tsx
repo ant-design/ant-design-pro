@@ -3,13 +3,14 @@ import { clsx } from 'clsx';
 import React from 'react';
 import useStyles from './index.style';
 
-export type TrendProps = {
+type TrendProps = {
   colorful?: boolean;
   flag: 'up' | 'down';
   style?: React.CSSProperties;
   reverseColor?: boolean;
   className?: string;
   children?: React.ReactNode;
+  title?: string;
 };
 
 const Trend: React.FC<TrendProps> = ({
@@ -18,6 +19,7 @@ const Trend: React.FC<TrendProps> = ({
   flag,
   children,
   className,
+  title = '',
   ...rest
 }) => {
   const { styles } = useStyles();
@@ -30,11 +32,7 @@ const Trend: React.FC<TrendProps> = ({
     className,
   );
   return (
-    <div
-      {...rest}
-      className={classString}
-      title={typeof children === 'string' ? children : ''}
-    >
+    <div {...rest} className={classString} title={title}>
       <span>{children}</span>
       {flag && (
         <span className={styles[flag]}>

@@ -1,18 +1,21 @@
 {
   "ignore": {
     "files": [
+      "config/**",
       "mock/**",
-      "src/services/**",
+      "public/**",
       "scripts/**",
+      "types/**",
       "cloudflare-worker/**",
-      "src/.umi/**",
-      "src/.umi-production/**",
-      "src/.umi-test/**",
+      "src/.umi*/**",
+      "src/services/**",
+      "src/service-worker.js",
+      "**/_mock.ts",
       "**/*.md",
       "**/*.less",
       "**/*.css"
     ]
   },
-  "failOn": "none",
+  "failOn": "error",
   "adoptExistingLintConfig": true
 }

@@ -150,7 +150,7 @@ const descriptionItems: DescriptionsProps['items'] = [
   { key: '1', label: '创建人', children: '曲丽丽' },
   { key: '2', label: '订购产品', children: 'XX 服务' },
   { key: '3', label: '创建时间', children: '2017-07-07' },
-  { key: '4', label: '关联单据', children: <a href="">12421</a> },
+  { key: '4', label: '关联单据', children: <a href="#">12421</a> },
   { key: '5', label: '生效日期', children: '2017-07-07 ~ 2017-08-08' },
   { key: '6', label: '备注', children: '请于两个工作日内确认' },
 ];
@@ -305,7 +305,7 @@ const Advanced: FC = () => {
         }}
       />
       <div>
-        <a href="">催一下</a>
+        <a href="#">催一下</a>
       </div>
     </div>
   );

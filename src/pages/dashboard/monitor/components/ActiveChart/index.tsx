@@ -38,7 +38,7 @@ const ActiveChart = () => {
   // Memoize max and median to avoid double sort on every render
   const { maxValue, medianValue } = useMemo(() => {
     if (!activeData.length) return { maxValue: 0, medianValue: 0 };
-    const sorted = [...activeData].sort((a, b) => a.y - b.y);
+    const sorted = activeData.toSorted((a, b) => a.y - b.y);
     return {
       maxValue: sorted[sorted.length - 1]?.y ?? 0,
       medianValue: sorted[Math.floor(sorted.length / 2)]?.y ?? 0,
