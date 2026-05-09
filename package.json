@@ -27,6 +27,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:update": "jest -u",
+    "doctor": "react-doctor .",
     "tsc": "tsc --noEmit"
   },
   "browserslist": [
@@ -73,6 +74,7 @@
     "@umijs/max-plugin-openapi": "^2.0.3",
     "@umijs/request-record": "^1.1.4",
     "cross-env": "^10.1.0",
+    "react-doctor": "^0.1.2",
     "express": "^5.2.1",
     "geojson": "^0.5.0",
     "gh-pages": "^6.3.0",
