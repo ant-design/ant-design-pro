@@ -20,7 +20,7 @@ const SecurityView: React.FC = () => {
         </>
       ),
       actions: [
-        <a key="Modify" href="#">
+        <a key="Modify" href="#" onClick={(e) => e.preventDefault()}>
           修改
         </a>,
       ],
@@ -29,7 +29,7 @@ const SecurityView: React.FC = () => {
       title: '密保手机',
       description: `已绑定手机：138****8293`,
       actions: [
-        <a key="Modify" href="#">
+        <a key="Modify" href="#" onClick={(e) => e.preventDefault()}>
           修改
         </a>,
       ],
@@ -38,7 +38,7 @@ const SecurityView: React.FC = () => {
       title: '密保问题',
       description: '未设置密保问题，密保问题可有效保护账户安全',
       actions: [
-        <a key="Set" href="#">
+        <a key="Set" href="#" onClick={(e) => e.preventDefault()}>
           设置
         </a>,
       ],
@@ -47,7 +47,7 @@ const SecurityView: React.FC = () => {
       title: '备用邮箱',
       description: `已绑定邮箱：ant***sign.com`,
       actions: [
-        <a key="Modify" href="#">
+        <a key="Modify" href="#" onClick={(e) => e.preventDefault()}>
           修改
         </a>,
       ],
@@ -56,7 +56,7 @@ const SecurityView: React.FC = () => {
       title: 'MFA 设备',
       description: '未绑定 MFA 设备，绑定后，可以进行二次确认',
       actions: [
-        <a key="bind" href="#">
+        <a key="bind" href="#" onClick={(e) => e.preventDefault()}>
           绑定
         </a>,
       ],

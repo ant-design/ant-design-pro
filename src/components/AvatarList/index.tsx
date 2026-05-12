@@ -31,12 +31,7 @@ const avatarSizeToClassName = (styles: any, size?: SizeType | 'mini') =>
     [styles.avatarItemMini]: size === 'mini',
   });
 
-const Item: React.FC<AvatarItemProps> = ({
-  src,
-  size,
-  tips,
-  onClick = () => {},
-}) => {
+const Item: React.FC<AvatarItemProps> = ({ src, size, tips, onClick }) => {
   const { styles } = useStyles();
   const cls = avatarSizeToClassName(styles, size);
   return (

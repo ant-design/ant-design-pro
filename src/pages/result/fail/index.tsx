@@ -24,6 +24,7 @@ export default () => {
         <span>您的账户已被冻结</span>
         <a
           href="#"
+          onClick={(e) => e.preventDefault()}
           style={{
             marginLeft: 16,
           }}
@@ -42,6 +43,7 @@ export default () => {
         <span>您的账户还不具备申请资格</span>
         <a
           href="#"
+          onClick={(e) => e.preventDefault()}
           style={{
             marginLeft: 16,
           }}

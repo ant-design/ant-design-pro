@@ -397,17 +397,17 @@ const Login: React.FC = () => {
                 defaultMessage="自动登录"
               />
             </ProFormCheckbox>
-            <a
-              href="#"
+            <span
               style={{
                 float: 'right',
+                cursor: 'pointer',
               }}
             >
               <FormattedMessage
                 id="pages.login.forgotPassword"
                 defaultMessage="忘记密码"
               />
-            </a>
+            </span>
           </div>
         </LoginForm>
       </div>

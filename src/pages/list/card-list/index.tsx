@@ -95,7 +95,7 @@ const CardList = () => {
                           src={item.avatar}
                         />
                       }
-                      title={<a href="#">{item.title}</a>}
+                      title={<a href={item.href}>{item.title}</a>}
                       description={
                         <Paragraph
                           className={styles.item}

@@ -167,24 +167,8 @@ const UserInfo: React.FC<{ user: Partial<CurrentUser> }> = ({ user }) => {
             marginRight: 8,
           }}
         />
-        {
-          (
-            user.geographic || {
-              province: {
-                label: '',
-              },
-            }
-          ).province.label
-        }
-        {
-          (
-            user.geographic || {
-              city: {
-                label: '',
-              },
-            }
-          ).city.label
-        }
+        {user.geographic?.province?.label}
+        {user.geographic?.city?.label}
       </p>
     </div>
   );

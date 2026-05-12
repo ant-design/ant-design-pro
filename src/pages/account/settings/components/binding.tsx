@@ -12,7 +12,7 @@ const BindingView: React.FC = () => {
       title: '绑定淘宝',
       description: '当前未绑定淘宝账号',
       actions: [
-        <a key="Bind" href="#">
+        <a key="Bind" href="#" onClick={(e) => e.preventDefault()}>
           绑定
         </a>,
       ],
@@ -22,7 +22,7 @@ const BindingView: React.FC = () => {
       title: '绑定支付宝',
       description: '当前未绑定支付宝账号',
       actions: [
-        <a key="Bind" href="#">
+        <a key="Bind" href="#" onClick={(e) => e.preventDefault()}>
           绑定
         </a>,
       ],
@@ -32,7 +32,7 @@ const BindingView: React.FC = () => {
       title: '绑定钉钉',
       description: '当前未绑定钉钉账号',
       actions: [
-        <a key="Bind" href="#">
+        <a key="Bind" href="#" onClick={(e) => e.preventDefault()}>
           绑定
         </a>,
       ],
