@@ -180,6 +180,7 @@ const ChatbotPage: React.FC = () => {
   };
 
   const newChat = () => {
+    // eslint-disable-next-line react-doctor/rendering-hydration-mismatch-time -- only called in event handlers, not during render
     const key = crypto.randomUUID();
     setConversations((prev) => [
       { key, label: '新对话', group: '今天', isDraft: true },
@@ -261,6 +262,7 @@ const ChatbotPage: React.FC = () => {
                           (c) => c.key !== conversation.key,
                         );
                         if (next.length === 0) {
+                          // eslint-disable-next-line react-doctor/rendering-hydration-mismatch-time -- only called in event handlers, not during render
                           const key = crypto.randomUUID();
                           next.push({
                             key,

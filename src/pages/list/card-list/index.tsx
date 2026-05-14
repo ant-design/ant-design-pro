@@ -22,21 +22,21 @@ const CardList = () => {
         提供跨越设计与开发的体验解决方案。
       </p>
       <div className={styles.contentLink}>
-        <a href="#">
+        <a href="/">
           <img
             alt=""
             src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
           />{' '}
           快速开始
         </a>
-        <a href="#">
+        <a href="/">
           <img
             alt=""
             src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
           />{' '}
           产品简介
         </a>
-        <a href="#">
+        <a href="/">
           <img
             alt=""
             src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
@@ -79,12 +79,12 @@ const CardList = () => {
                     hoverable
                     className={styles.card}
                     actions={[
-                      <a key="option1" href="#">
+                      <Button type="link" key="option1">
                         操作一
-                      </a>,
-                      <a key="option2" href="#">
+                      </Button>,
+                      <Button type="link" key="option2">
                         操作二
-                      </a>,
+                      </Button>,
                     ]}
                   >
                     <Card.Meta
@@ -95,7 +95,7 @@ const CardList = () => {
                           src={item.avatar}
                         />
                       }
-                      title={<a href="#">{item.title}</a>}
+                      title={<a href={item.href}>{item.title}</a>}
                       description={
                         <Paragraph
                           className={styles.item}

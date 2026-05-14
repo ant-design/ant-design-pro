@@ -51,7 +51,7 @@ const Success: React.FC = () => {
         }}
       >
         <span>周毛毛</span>
-        <a href="#">
+        <Button type="link">
           <DingdingOutlined
             style={{
               color: '#00A0E9',
@@ -59,7 +59,7 @@ const Success: React.FC = () => {
             }}
           />
           <span>催一下</span>
-        </a>
+        </Button>
       </div>
     </div>
   );

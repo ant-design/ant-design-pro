@@ -398,7 +398,7 @@ const Login: React.FC = () => {
               />
             </ProFormCheckbox>
             <a
-              href="#"
+              href="/"
               style={{
                 float: 'right',
               }}

@@ -22,15 +22,15 @@ export default () => {
           className={styles.error_icon}
         />
         <span>您的账户已被冻结</span>
-        <a
-          href="#"
+        <Button
+          type="link"
           style={{
             marginLeft: 16,
           }}
         >
           <span>立即解冻</span>
           <RightOutlined />
-        </a>
+        </Button>
       </div>
       <div>
         <CloseCircleOutlined
@@ -40,15 +40,15 @@ export default () => {
           className={styles.error_icon}
         />
         <span>您的账户还不具备申请资格</span>
-        <a
-          href="#"
+        <Button
+          type="link"
           style={{
             marginLeft: 16,
           }}
         >
           <span>立即升级</span>
           <RightOutlined />
-        </a>
+        </Button>
       </div>
     </>
   );
