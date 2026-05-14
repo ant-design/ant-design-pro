@@ -12,14 +12,6 @@ import { Modal, message } from 'antd';
 import React, { cloneElement, useCallback, useState } from 'react';
 import { updateRule } from '@/services/ant-design-pro/api';
 
-type FormValueType = {
-  target?: string;
-  template?: string;
-  type?: string;
-  time?: string;
-  frequency?: string;
-} & Partial<API.RuleListItem>;
-
 type UpdateFormProps = {
   trigger?: React.ReactElement<any>;
   onOk?: () => void;
