@@ -63,7 +63,7 @@
     "@types/d3": "^7.4.3",
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.7.0",
+    "@types/node": "^25.8.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-helmet": "^6.1.11",
