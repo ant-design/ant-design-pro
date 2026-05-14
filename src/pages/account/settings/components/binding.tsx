@@ -3,7 +3,7 @@ import {
   DingdingOutlined,
   TaobaoOutlined,
 } from '@ant-design/icons';
-import { List } from 'antd';
+import { Button, List } from 'antd';
 import React from 'react';
 
 const BindingView: React.FC = () => {
@@ -12,9 +12,9 @@ const BindingView: React.FC = () => {
       title: '绑定淘宝',
       description: '当前未绑定淘宝账号',
       actions: [
-        <a key="Bind" href="#">
+        <Button key="Bind" type="link">
           绑定
-        </a>,
+        </Button>,
       ],
       avatar: <TaobaoOutlined className="taobao" />,
     },
@@ -22,9 +22,9 @@ const BindingView: React.FC = () => {
       title: '绑定支付宝',
       description: '当前未绑定支付宝账号',
       actions: [
-        <a key="Bind" href="#">
+        <Button key="Bind" type="link">
           绑定
-        </a>,
+        </Button>,
       ],
       avatar: <AlipayOutlined className="alipay" />,
     },
@@ -32,9 +32,9 @@ const BindingView: React.FC = () => {
       title: '绑定钉钉',
       description: '当前未绑定钉钉账号',
       actions: [
-        <a key="Bind" href="#">
+        <Button key="Bind" type="link">
           绑定
-        </a>,
+        </Button>,
       ],
       avatar: <DingdingOutlined className="dingding" />,
     },

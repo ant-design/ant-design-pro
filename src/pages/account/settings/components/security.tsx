@@ -1,4 +1,4 @@
-import { List } from 'antd';
+import { Button, List } from 'antd';
 import React from 'react';
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
@@ -20,45 +20,45 @@ const SecurityView: React.FC = () => {
         </>
       ),
       actions: [
-        <a key="Modify" href="#">
+        <Button key="Modify" type="link">
           修改
-        </a>,
+        </Button>,
       ],
     },
     {
       title: '密保手机',
       description: `已绑定手机：138****8293`,
       actions: [
-        <a key="Modify" href="#">
+        <Button key="Modify" type="link">
           修改
-        </a>,
+        </Button>,
       ],
     },
     {
       title: '密保问题',
       description: '未设置密保问题，密保问题可有效保护账户安全',
       actions: [
-        <a key="Set" href="#">
+        <Button key="Set" type="link">
           设置
-        </a>,
+        </Button>,
       ],
     },
     {
       title: '备用邮箱',
       description: `已绑定邮箱：ant***sign.com`,
       actions: [
-        <a key="Modify" href="#">
+        <Button key="Modify" type="link">
           修改
-        </a>,
+        </Button>,
       ],
     },
     {
       title: 'MFA 设备',
       description: '未绑定 MFA 设备，绑定后，可以进行二次确认',
       actions: [
-        <a key="bind" href="#">
+        <Button key="bind" type="link">
           绑定
-        </a>,
+        </Button>,
       ],
     },
   ];

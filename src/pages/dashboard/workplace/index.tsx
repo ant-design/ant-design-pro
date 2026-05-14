@@ -118,9 +118,9 @@ const Workplace: FC = () => {
           avatar={<Avatar src={item.user.avatar} />}
           title={
             <span>
-              <a className={styles.username} href="#">
+              <Link className={styles.username} to="/" prefetch>
                 {item.user.name}
-              </a>
+              </Link>
               &nbsp;
               <span className={styles.event}>{events}</span>
             </span>
@@ -281,12 +281,12 @@ const Workplace: FC = () => {
                 {projectNotice.map((item) => {
                   return (
                     <Col span={12} key={`members-item-${item.id}`}>
-                      <a href="#">
+                      <Link to="/" prefetch>
                         <Avatar src={item.logo} size="small" />
                         <span className={styles.member}>
                           {item.member.substring(0, 3)}
                         </span>
-                      </a>
+                      </Link>
                     </Col>
                   );
                 })}

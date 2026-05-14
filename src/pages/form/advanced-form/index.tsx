@@ -10,7 +10,7 @@ import {
   ProFormText,
   ProFormTimePicker,
 } from '@ant-design/pro-components';
-import { Card, Col, message, Popover, Row } from 'antd';
+import { Button, Card, Col, message, Popover, Row } from 'antd';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
 import { fakeSubmitForm } from './service';
@@ -161,16 +161,13 @@ const AdvancedForm: FC<Record<string, any>> = () => {
       valueType: 'option',
       render: (_, record: TableFormDateType, _index, action) => {
         return [
-          <a
-            key="eidit"
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              action?.startEditable(record.key);
-            }}
+          <Button
+            key="edit"
+            type="link"
+            onClick={() => action?.startEditable(record.key)}
           >
             编辑
-          </a>,
+          </Button>,
         ];
       },
     },

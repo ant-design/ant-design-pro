@@ -1,6 +1,6 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { useMergedState } from '@rc-component/util';
-import { Tag } from 'antd';
+import { Button, Tag } from 'antd';
 import { clsx } from 'clsx';
 import React, { type FC, useMemo, useState } from 'react';
 import useStyles from './index.style';
@@ -136,19 +136,10 @@ const TagSelect: FC<TagSelectProps> & {
           return child;
         })}
       {expandable && (
-        <a
+        <Button
+          type="link"
           className={styles.trigger}
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            setExpand(!expand);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              setExpand(!expand);
-            }
-          }}
+          onClick={() => setExpand(!expand)}
         >
           {expand ? (
             <>
@@ -160,7 +151,7 @@ const TagSelect: FC<TagSelectProps> & {
               <DownOutlined />
             </>
           )}
-        </a>
+        </Button>
       )}
     </div>
   );
