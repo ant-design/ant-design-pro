@@ -53,7 +53,7 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
-    "@ant-design/cli": "^6.4.1",
+    "@ant-design/cli": "^6.4.2",
     "@biomejs/biome": "^2.4.13",
     "@commitlint/cli": "^21.0.0",
     "@commitlint/config-conventional": "^21.0.0",
