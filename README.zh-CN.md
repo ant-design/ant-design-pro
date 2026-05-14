@@ -11,6 +11,7 @@ Language : [🇺🇸](./README.md) | 🇨🇳
 [![Build With Utoo](https://img.shields.io/badge/build%20with-utoo-028fe4.svg)](https://utoo.land)
 [![Build With Umi](https://img.shields.io/badge/build%20with-umi-028fe4.svg)](https://umijs.org/)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
+[![React Doctor](https://github.com/ant-design/ant-design-pro/actions/workflows/react-doctor.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/react-doctor.yml)
 [![Ant Design](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
 
 ![](https://github.com/user-attachments/assets/fde29061-3d9a-4397-8ac2-397b0e033ef5)
