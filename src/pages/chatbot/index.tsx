@@ -8,7 +8,13 @@ import type {
 import XMarkdown from '@ant-design/x-markdown';
 import { useXChat } from '@ant-design/x-sdk';
 import { Avatar, Card } from 'antd';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import type { ConversationItem, ParsedMessage } from './data';
 import { createChatProvider } from './service';
@@ -109,6 +115,8 @@ const roleConfig: BubbleListProps['role'] = {
 
 const ChatbotPage: React.FC = () => {
   const { styles } = useStyles();
+  const idCounter = useRef(0);
+  const generateId = useCallback(() => `conv-${++idCounter.current}`, []);
 
   const [conversations, setConversations] = useState<ConversationItem[]>([
     { key: 'default', label: '💬 新对话', group: '今天', isDraft: true },
@@ -180,7 +188,7 @@ const ChatbotPage: React.FC = () => {
   };
 
   const newChat = () => {
-    const key = crypto.randomUUID();
+    const key = generateId();
     setConversations((prev) => [
       { key, label: '新对话', group: '今天', isDraft: true },
       ...prev,
@@ -261,7 +269,7 @@ const ChatbotPage: React.FC = () => {
                           (c) => c.key !== conversation.key,
                         );
                         if (next.length === 0) {
-                          const key = crypto.randomUUID();
+                          const key = generateId();
                           next.push({
                             key,
                             label: '💬 新对话',
