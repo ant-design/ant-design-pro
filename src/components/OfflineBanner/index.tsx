@@ -1,6 +1,6 @@
 import { getIntl } from '@umijs/max';
 import { Alert } from 'antd';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const OfflineBanner: React.FC = () => {
   const isOnlineRef = useRef(true);
@@ -40,7 +40,7 @@ const OfflineBanner: React.FC = () => {
         zIndex: 10,
         maxWidth: 480,
       }}
-      message={getIntl().formatMessage({
+      title={getIntl().formatMessage({
         id: 'app.network.offline',
         defaultMessage:
           'You are currently offline. Some features may be unavailable.',
