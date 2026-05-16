@@ -40,7 +40,7 @@
     "@ant-design/x": "^2.5.0",
     "@ant-design/x-markdown": "^2.5.0",
     "@ant-design/x-sdk": "^2.5.0",
-    "@rc-component/util": "^1.10.1",
+    "@rc-component/util": "^1.11.0",
     "@tanstack/react-query": "^5.100.6",
     "antd": "^6.4.2",
     "antd-style": "^4.1.0",
