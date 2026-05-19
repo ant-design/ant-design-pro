@@ -34,15 +34,15 @@
     "defaults"
   ],
   "dependencies": {
-    "@ant-design/icons": "^6.2.2",
+    "@ant-design/icons": "^6.2.3",
     "@ant-design/plots": "^2.6.8",
     "@ant-design/pro-components": "^3.1.12-0",
-    "@ant-design/x": "^2.5.0",
-    "@ant-design/x-markdown": "^2.5.0",
-    "@ant-design/x-sdk": "^2.5.0",
+    "@ant-design/x": "^2.7.0",
+    "@ant-design/x-markdown": "^2.7.0",
+    "@ant-design/x-sdk": "^2.7.0",
     "@rc-component/util": "^1.11.0",
     "@tanstack/react-query": "^5.100.6",
-    "antd": "^6.4.2",
+    "antd": "^6.4.3",
     "antd-style": "^4.1.0",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
@@ -53,7 +53,7 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
-    "@ant-design/cli": "^6.4.2",
+    "@ant-design/cli": "^6.4.3",
     "@biomejs/biome": "^2.4.13",
     "@commitlint/cli": "^21.0.0",
     "@commitlint/config-conventional": "^21.0.0",
