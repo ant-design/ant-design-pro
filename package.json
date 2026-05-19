@@ -88,6 +88,9 @@
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   },
+  "overrides": {
+    "@antv/g2": ">=5.2.7 <5.5.8"
+  },
   "engines": {
     "node": ">=20.0.0"
   },
