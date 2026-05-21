@@ -492,6 +492,9 @@ export default {
 **Q: 如何添加全局状态？**
 在 `src/models/` 下创建文件，导出自定义 Hook，组件中通过 `useModel('文件名')` 使用。
 
+**Q: 如何升级项目？**
+在项目根目录用 Claude Code 运行 `/pro-upgrade`，AI 会自动对比最新 Ant Design Pro 模板并完成升级（依赖、配置、代码模式等）。如使用其他 AI 助手，可将 `AGENTS.md` 中的内容提供给它。
+
 **Q: 如何部署？**
 `npm run build` 生成 `dist/` 目录，部署到任意静态服务器。配置 `publicPath` 处理非根目录部署。`npm run deploy` 会自动构建并发布到 GitHub Pages（推送到 gh-pages 分支）。
 
