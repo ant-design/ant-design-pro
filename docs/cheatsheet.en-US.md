@@ -493,7 +493,12 @@ Edit `colorPrimary` in `config/defaultSettings.ts`. Use SettingDrawer for live p
 Create a file in `src/models/` exporting a custom Hook, then use `useModel('filename')` in components.
 
 **Q: How to upgrade the project?**
-Run `/pro-upgrade` in Claude Code at the project root — AI will auto-diff the latest Ant Design Pro template and upgrade your project (deps, config, code patterns, etc.). For other AI assistants, paste the content from `AGENTS.md`.
+First, install the pro-upgrade skill into your project:
+```bash
+mkdir -p .claude/skills/pro-upgrade
+curl -sL https://raw.githubusercontent.com/ant-design/ant-design-pro/master/.claude/skills/pro-upgrade/SKILL.md -o .claude/skills/pro-upgrade/SKILL.md
+```
+Then run `/pro-upgrade` in Claude Code at the project root — AI will auto-diff the latest template and upgrade your project (deps, config, code patterns, etc.). For other AI assistants, paste the content of `.claude/skills/pro-upgrade/SKILL.md` to them.
 
 **Q: How to deploy?**
 `npm run build` generates `dist/`. Deploy to any static file server. Set `publicPath` for non-root deployments. `npm run deploy` builds and publishes to GitHub Pages automatically (pushes to gh-pages branch).
