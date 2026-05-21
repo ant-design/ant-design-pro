@@ -495,8 +495,7 @@ Create a file in `src/models/` exporting a custom Hook, then use `useModel('file
 **Q: How to upgrade the project?**
 First, install the pro-upgrade skill into your project:
 ```bash
-mkdir -p .claude/skills/pro-upgrade
-curl -sL https://raw.githubusercontent.com/ant-design/ant-design-pro/master/.claude/skills/pro-upgrade/SKILL.md -o .claude/skills/pro-upgrade/SKILL.md
+npx skills add ant-design/ant-design-pro
 ```
 Then run `/pro-upgrade` in Claude Code at the project root — AI will auto-diff the latest template and upgrade your project (deps, config, code patterns, etc.). For other AI assistants, paste the content of `.claude/skills/pro-upgrade/SKILL.md` to them.
 

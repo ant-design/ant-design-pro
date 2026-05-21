@@ -495,8 +495,7 @@ export default {
 **Q: 如何升级项目？**
 先将 pro-upgrade skill 安装到项目中：
 ```bash
-mkdir -p .claude/skills/pro-upgrade
-curl -sL https://raw.githubusercontent.com/ant-design/ant-design-pro/master/.claude/skills/pro-upgrade/SKILL.md -o .claude/skills/pro-upgrade/SKILL.md
+npx skills add ant-design/ant-design-pro
 ```
 然后在项目根目录用 Claude Code 运行 `/pro-upgrade`，AI 会自动对比最新模板并完成升级（依赖、配置、代码模式等）。如使用其他 AI 助手，可将 `.claude/skills/pro-upgrade/SKILL.md` 中的内容提供给它。
 
