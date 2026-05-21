@@ -497,7 +497,7 @@ export default {
 ```bash
 npx skills add ant-design/ant-design-pro
 ```
-然后在项目根目录用 Claude Code 运行 `/pro-upgrade`，AI 会自动对比最新模板并完成升级（依赖、配置、代码模式等）。如使用其他 AI 助手，可将 `.claude/skills/pro-upgrade/SKILL.md` 中的内容提供给它。
+然后在项目根目录用 Claude Code 运行 `/pro-upgrade`，AI 会自动对比最新模板并辅助完成升级（依赖、配置、代码模式等），遇到冲突时会保守处理并询问确认。如使用其他 AI 助手，可将 `.claude/skills/pro-upgrade/SKILL.md` 中的内容提供给它。
 
 **Q: 如何部署？**
 `npm run build` 生成 `dist/` 目录，部署到任意静态服务器。配置 `publicPath` 处理非根目录部署。`npm run deploy` 会自动构建并发布到 GitHub Pages（推送到 gh-pages 分支）。
