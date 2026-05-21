@@ -492,6 +492,13 @@ Edit `colorPrimary` in `config/defaultSettings.ts`. Use SettingDrawer for live p
 **Q: How to add global state?**
 Create a file in `src/models/` exporting a custom Hook, then use `useModel('filename')` in components.
 
+**Q: How to upgrade the project?**
+First, install the pro-upgrade skill into your project:
+```bash
+npx skills add ant-design/ant-design-pro
+```
+Then run `/pro-upgrade` in Claude Code at the project root — AI will auto-diff the latest template and assist your upgrade (deps, config, code patterns, etc.), with conservative handling for ambiguous merges. For other AI assistants, paste the content of `.claude/skills/pro-upgrade/SKILL.md` to them.
+
 **Q: How to deploy?**
 `npm run build` generates `dist/`. Deploy to any static file server. Set `publicPath` for non-root deployments. `npm run deploy` builds and publishes to GitHub Pages automatically (pushes to gh-pages branch).
 
