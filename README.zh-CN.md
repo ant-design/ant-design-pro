@@ -1,10 +1,10 @@
-Language : [🇺🇸](./README.md) | 🇨🇳
+🇺🇸 [English](./README.md) | 🇨🇳 中文
 
 <h1 align="center">Ant Design Pro</h1>
 
 <div align="center">
 
-开箱即用的中台前端/设计解决方案。
+开箱即用的中台前端框架。
 
 [![CI](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml/badge.svg)](https://github.com/ant-design/ant-design-pro/actions/workflows/ci.yml)
 [![GitHub release](https://img.shields.io/github/v/release/ant-design/ant-design-pro.svg)](https://github.com/ant-design/ant-design-pro/releases)
@@ -14,107 +14,53 @@ Language : [🇺🇸](./README.md) | 🇨🇳
 [![React Review](https://react.review/api/badge/ant-design/ant-design-pro)](https://react.review/repo/ant-design/ant-design-pro)
 [![Ant Design](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
 
-![](https://github.com/user-attachments/assets/fde29061-3d9a-4397-8ac2-397b0e033ef5)
+<img width="1718" height="1191" alt="浅色主题" src="https://github.com/user-attachments/assets/74ad0b4a-e086-4955-8edd-9f2cff31aee8" />
+<img width="1718" height="1191" alt="暗色主题" src="https://github.com/user-attachments/assets/d4bcb7c1-42c7-4c0f-b130-1193a931f9f7" />
 
 </div>
 
-- 预览：https://preview.pro.ant.design
-- 使用文档：[docs/cheatsheet.zh-CN.md](./docs/cheatsheet.zh-CN.md)
-- 更新日志: https://github.com/ant-design/ant-design-pro/releases
-- 常见问题：[docs/cheatsheet.zh-CN.md#faq](./docs/cheatsheet.zh-CN.md#faq)
-- **v6 正式发布！** — [查看 v6 更新内容](https://github.com/ant-design/ant-design-pro/releases/tag/v6.0.0)
+- **预览**：https://preview.pro.ant.design
+- **使用文档**：[速查表](./docs/cheatsheet.zh-CN.md) | [常见问题](./docs/cheatsheet.zh-CN.md#faq)
+- **更新日志**：[Releases](https://github.com/ant-design/ant-design-pro/releases)
+- **v6 正式发布！** — [查看更新内容](https://github.com/ant-design/ant-design-pro/releases/tag/v6.0.0)
 
 ## 特性
 
-- :bulb: **TypeScript**: 应用程序级 JavaScript 的语言
-- :scroll: **区块**: 通过区块模板快速构建页面
-- :gem: **优雅美观**：基于 [Ant Design 6](https://ant.design/) 体系精心设计
-- :triangular_ruler: **常见设计模式**：提炼自中后台应用的典型页面和场景
-- :rocket: **最新技术栈**：使用 React 19/[Umi Max 4](https://umijs.org/)/[antd 6](https://ant.design/)/[utoopack](https://utoo.land) 等前端前沿技术开发
-- :iphone: **响应式**：针对不同屏幕大小设计
-- :art: **主题**：基于 [Tailwind CSS v4](https://tailwindcss.com/) + [antd-style](https://github.com/ant-design/antd-style) 的可配置主题满足多样化品牌诉求
-- :globe_with_meridians: **国际化**：内建业界通用的国际化方案
-- :gear: **最佳实践**：良好的工程实践助您持续产出高质量代码
-- :1234: **Mock 数据**：实用的本地数据调试方案
-- :robot: **AI 助手**：内置 AI 聊天助手页面，基于 [Ant Design X](https://x.ant.design/)
-- :white_check_mark: **UI 测试**：自动化测试保障前端产品质量
+- **TypeScript** — 开箱即用的完整类型支持
+- **Ant Design 6** — 企业级 UI 组件库
+- **Umi Max 4** — 约定优于配置的框架，内置 utoopack
+- **React 19** — 最新 React 并发特性
+- **Tailwind CSS v4 + antd-style** — 灵活的主题定制能力
+- **国际化** — 内建 8 种语言的国际化方案
+- **Mock 数据** — 就近管理的 mock 文件，快速原型开发
+- **AI 助手** — 内置 AI 聊天助手页面，基于 [Ant Design X](https://x.ant.design/)
+- **最佳实践** — Biome 代码检查、单元与 e2e 测试、CI/CD 就绪
 
 ## 模板
 
-```
-- 欢迎页
-- Dashboard
-  - 分析页
-  - 监控页
-  - 工作台
-- 表单页
-  - 基础表单页
-  - 分步表单页
-  - 高级表单页
-- 列表页
-  - 搜索列表（文章/项目/应用）
-  - 查询表格
-  - 标准列表
-  - 卡片列表
-- 详情页
-  - 基础详情页
-  - 高级详情页
-- 结果
-  - 成功页
-  - 失败页
-- 异常
-  - 403 无权限
-  - 404 找不到
-  - 500 服务器出错
-- 用户
-  - 用户中心页
-  - 用户设置页
-- AI 助手
-- 账户
-  - 登录
-  - 注册
-  - 注册成功
-```
+Dashboard（分析页、监控页、工作台）· 表单页（基础表单、分步表单、高级表单）· 列表页（搜索列表、查询表格、标准列表、卡片列表）· 详情页（基础详情、高级详情）· 结果页（成功、失败）· 异常页（403、404、500）· 个人页（中心、设置）· AI 助手 · 用户页（登录、注册）
 
-## 使用
-
-### 开始使用
-
-克隆或下载本项目到本地：
+## 快速开始
 
 ```bash
+# 克隆项目
 git clone --depth=1 https://github.com/ant-design/ant-design-pro.git myapp
 cd myapp
-```
 
-### 安装依赖
-
-```bash
+# 安装依赖
 npm install
-```
 
-### 开发
-
-```bash
-# 启动开发服务器（默认为完整版）
+# 启动开发服务器
 npm start
 ```
 
-### 精简为简单版本
-
-本项目默认包含所有区块。如果你需要一个最小化的版本，运行：
+获取不含演示页面的精简版本：
 
 ```bash
 npm run simple
 ```
 
-这将会：
-- 删除多余的页面目录（dashboard、form、list/*、profile、result、exception、account 等）
-- 删除多余的 mock 文件
-- 替换路由为简单版本
-- 从 package.json 中移除多余的依赖
-
-**注意**：此操作不可逆，将永久删除文件。
+> **注意**：`npm run simple` 操作不可逆，将永久删除演示文件。
 
 ### 构建
 
@@ -124,18 +70,10 @@ npm run build
 
 更多信息请参考 [使用文档](./docs/cheatsheet.zh-CN.md)。
 
-## 支持环境
-
-现代浏览器。
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| --- | --- | --- | --- |
-| Edge | last 2 versions | last 2 versions | last 2 versions |
-
 ## 参与贡献
 
-我们非常欢迎你的贡献，你可以通过以下方式和我们一起共建 :smiley:：
+我们欢迎所有形式的贡献。请通过 [Issue](https://github.com/ant-design/ant-design-pro/issues) 报告 Bug 或提问，或提交 [Pull Request](https://github.com/ant-design/ant-design-pro/pulls) 改进代码。
 
-- 在你的公司或个人项目中使用 Ant Design Pro。
-- 通过 [Issue](http://github.com/ant-design/ant-design-pro/issues) 报告 bug 或进行咨询。
-- 提交 [Pull Request](http://github.com/ant-design/ant-design-pro/pulls) 改进 Pro 的代码。
+<a href="https://openomy.app/github/ant-design/ant-design-pro" target="_blank" style="display: block; width: 100%;" align="center">
+  <img src="https://openomy.app/svg?repo=ant-design/ant-design-pro&chart=bubble&latestMonth=3" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
+</a>
