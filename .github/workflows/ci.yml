@@ -9,8 +9,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 20
       - run: npm ci
@@ -23,13 +23,13 @@ jobs:
         node_version: [20]
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: ${{ matrix.node_version }}
       - run: echo ${{github.ref}}
-      - uses: utooland/setup-utoo@v1
+      - uses: utooland/setup-utoo@3a51006d0b66afcc32d1b9177a4b200b74f4a8cb # v1
         with:
           cache-utoo: false
       - run: ut
