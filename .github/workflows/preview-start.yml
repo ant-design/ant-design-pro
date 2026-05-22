@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create
-        uses: actions-cool/maintain-one-comment@v1.2.1
+        uses: actions-cool/maintain-one-comment@v1.2.1 # repo blocked, unable to pin to SHA
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
