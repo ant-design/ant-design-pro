@@ -9,7 +9,6 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 [![Build With Utoo](https://img.shields.io/badge/build%20with-utoo-028fe4.svg)](https://utoo.land)
 [![Build With Umi](https://img.shields.io/badge/build%20with-umi-028fe4.svg)](https://umijs.org/)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
-[![React Review](https://react.review/api/badge/ant-design/ant-design-pro)](https://react.review/repo/ant-design/ant-design-pro)
 [![Ant Design](https://badgen.net/badge/icon/Ant%20Design?icon=https://gw.alipayobjects.com/zos/antfincdn/Pp4WPgVDB3/KDpgvguMpGfqaHPjicRK.svg&label)](https://ant.design/)
 
 Language: 🇺🇸 | [🇨🇳](./README.zh-CN.md)
