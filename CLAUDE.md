@@ -42,12 +42,13 @@ Other: `npm run openapi` (regenerate `src/services/`), `npm run simple` (**irrev
 
 ## AI Skills
 
-Install skills: `npx skills add ant-design/ant-design-pro`
+This project ships with two Claude Code skills (already installed in `.claude/skills/`):
 
 **`/pro-upgrade`** — Auto-upgrade the project to the latest Ant Design Pro version. Diffs the latest template against this project, merges framework changes while preserving business code. Works for any version gap (v5→v6, v6.x→latest, etc.). Commit before running.
 
 **`/antd`** — Ant Design expert assistant powered by `@ant-design/cli` (offline metadata for v3–v6). Use it to look up component APIs (`npx antd info`), grab working demos (`npx antd demo`), lint deprecated usage (`npx antd lint`), get migration checklists (`npx antd migrate`), check changelogs, and report bugs. Always query before writing antd code.
 
+> To add these skills to other projects: `/pro-upgrade` via `npx skills add ant-design/ant-design-pro`, `/antd` via `npx skills add ant-design/ant-design-cli`.
 > For non-Claude AI assistants, paste `.claude/skills/pro-upgrade/SKILL.md` or `.claude/skills/antd/SKILL.md` to them.
 
 ## Page Co-location

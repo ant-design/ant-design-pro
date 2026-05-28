@@ -132,10 +132,12 @@ Modern browsers.
 
 ## AI Skills (Claude Code)
 
-This project includes built-in [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code) for AI-assisted development. Install the skills into your project:
+This project includes built-in [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code) for AI-assisted development (already installed in `.claude/skills/`).
 
+To add these skills to other projects:
 ```bash
-npx skills add ant-design/ant-design-pro
+npx skills add ant-design/ant-design-pro   # /pro-upgrade skill
+npx skills add ant-design/ant-design-cli   # /antd skill
 ```
 
 ### `/pro-upgrade` — Project Upgrade Assistant

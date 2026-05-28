@@ -133,10 +133,12 @@ npm run build
 
 ## AI Skills（Claude Code）
 
-本项目内置了 [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code)，用于 AI 辅助开发。先将 skills 安装到项目中：
+本项目内置了 [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code)，用于 AI 辅助开发（已安装在 `.claude/skills/` 中）。
 
+如需在其他项目中添加这些 skills：
 ```bash
-npx skills add ant-design/ant-design-pro
+npx skills add ant-design/ant-design-pro   # /pro-upgrade skill
+npx skills add ant-design/ant-design-cli   # /antd skill
 ```
 
 ### `/pro-upgrade` — 项目升级助手

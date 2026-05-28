@@ -500,9 +500,9 @@ npx skills add ant-design/ant-design-pro
 然后在项目根目录用 Claude Code 运行 `/pro-upgrade`，AI 会自动对比最新模板并辅助完成升级（依赖、配置、代码模式等），遇到冲突时会保守处理并询问确认。如使用其他 AI 助手，可将 `.claude/skills/pro-upgrade/SKILL.md` 中的内容提供给它。
 
 **Q: 如何使用 antd AI 技能？**
-先将 skills 安装到项目中：
+本项目已内置 `/antd` skill。如需在其他项目中使用，运行：
 ```bash
-npx skills add ant-design/ant-design-pro
+npx skills add ant-design/ant-design-cli
 ```
 然后在使用 Ant Design 组件时，用 Claude Code 运行 `/antd`。底层基于 `@ant-design/cli`，内置 antd v3–v6 离线元数据，可查询组件 API、获取可运行的 demo、lint 废弃用法、辅助版本迁移等。例如：让它"查看 Table 有哪些 props"或"将 Select 从 v4 迁移到 v5"。如使用其他 AI 助手，可将 `.claude/skills/antd/SKILL.md` 中的内容提供给它。
 
