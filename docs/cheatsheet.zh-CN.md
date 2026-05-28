@@ -563,6 +563,54 @@ npm run simple                                              # 不可逆操作
 npm install                                                 # 更新依赖
 ```
 
+## AI Skills（Claude Code）
+
+本项目内置两个 [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills)（位于 `.claude/skills/`）：
+
+### `/pro-upgrade` — 项目升级助手
+
+自动升级到最新 Ant Design Pro 版本。对比最新模板差异，合并框架变更并保留业务代码。
+
+```bash
+# 在 Claude Code 中直接运行：
+/pro-upgrade
+```
+
+执行流程：
+1. 克隆最新 Pro 模板
+2. 将文件分类为框架文件和业务文件
+3. 合并依赖更新、配置变更和代码模式迁移
+4. 运行 `npx antd lint` 检查 antd 相关问题
+5. 通过 `npm run lint && npm run build` 验证
+
+### `/antd` — Ant Design CLI 助手
+
+查询 antd 组件 API、调试问题、检查废弃用法、辅助版本迁移 — 基于 `@ant-design/cli`，离线元数据，无需网络。
+
+```bash
+# 在 Claude Code 中直接运行：
+/antd
+```
+
+常用命令：
+- `npx antd info <Component>` — props、类型、版本信息
+- `npx antd demo <Component> <demo>` — 可运行的代码示例
+- `npx antd lint ./src` — 检查废弃或有问题的用法
+- `npx antd migrate <from> <to>` — 版本迁移清单
+- `npx antd doc <Component>` — 完整组件文档
+
+### 安装与更新
+
+> 💡 如果你的项目是从本仓库克隆的，这些 skill 已经内置，无需额外安装。
+
+获取最新 skill 定义（或将其添加到已有项目）：
+
+```bash
+npx skills add ant-design/ant-design-pro
+```
+
+如使用其他 AI 助手（Cursor 等），可将 `.claude/skills/pro-upgrade/SKILL.md` 或 `.claude/skills/antd/SKILL.md` 的内容提供给它。
+
 ## 注意事项
 
 - **`src/services/ant-design-pro/`** 为自动生成代码，禁止手动编辑。修改 `config/oneapi.json` 后执行 `npm run openapi` 重新生成

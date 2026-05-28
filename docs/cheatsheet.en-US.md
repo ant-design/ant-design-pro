@@ -563,6 +563,54 @@ npm run simple                                              # Irreversible
 npm install                                                 # Update dependencies
 ```
 
+## AI Skills (Claude Code)
+
+This project includes two built-in [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills) (`.claude/skills/`):
+
+### `/pro-upgrade` — Project Upgrade Assistant
+
+Auto-upgrade to the latest Ant Design Pro version. Diffs the latest template against your project and merges framework changes while preserving business code.
+
+```bash
+# In Claude Code, just run:
+/pro-upgrade
+```
+
+What it does:
+1. Clones the latest Pro template
+2. Classifies framework vs. business files
+3. Merges dependency updates, config changes, and code pattern migrations
+4. Runs `npx antd lint` to catch antd-specific issues
+5. Verifies with `npm run lint && npm run build`
+
+### `/antd` — Ant Design CLI Helper
+
+Query antd component APIs, debug issues, lint for deprecated usage, and assist migrations — all via `@ant-design/cli` with offline bundled metadata.
+
+```bash
+# In Claude Code, just run:
+/antd
+```
+
+Key commands available:
+- `npx antd info <Component>` — props, types, version info
+- `npx antd demo <Component> <demo>` — working code examples
+- `npx antd lint ./src` — check for deprecated/problematic usage
+- `npx antd migrate <from> <to>` — migration checklist between versions
+- `npx antd doc <Component>` — full component documentation
+
+### Installation & Updates
+
+> 💡 If your project was cloned from this repo, these skills are already included — no installation needed.
+
+To get the latest skill definitions (or add them to an existing project):
+
+```bash
+npx skills add ant-design/ant-design-pro
+```
+
+For other AI assistants (Cursor, etc.), paste the content of `.claude/skills/pro-upgrade/SKILL.md` or `.claude/skills/antd/SKILL.md` into the assistant's context.
+
 ## Constraints & Gotchas
 
 - **`src/services/ant-design-pro/`** is auto-generated code. Do NOT edit manually. Modify `config/oneapi.json` and run `npm run openapi` to regenerate.

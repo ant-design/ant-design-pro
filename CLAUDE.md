@@ -40,9 +40,22 @@ Other: `npm run openapi` (regenerate `src/services/`), `npm run simple` (**irrev
 
 **Cloudflare Worker**: `cloudflare-worker/` — separate Hono app, own `package.json`, not an npm workspace.
 
-## Upgrading
+## AI Skills
+
+This project ships with two built-in Claude Code Skills (`.claude/skills/`). If you already have these skills in your project, no installation is needed — just run them directly. To update to the latest skill definitions, run `npx skills add ant-design/ant-design-pro`.
+
+### `/pro-upgrade` — Project Upgrade
 
 Run `/pro-upgrade` in Claude Code to auto-upgrade the project to the latest Ant Design Pro version. It diffs the latest template against this project and merges framework changes while preserving business code. Works for any version gap (v5→v6, v6.x→latest, etc.).
+
+### `/antd` — Ant Design CLI
+
+Run `/antd` in Claude Code for any antd-related work. It provides access to `@ant-design/cli` with offline metadata for antd v3/v4/v5/v6. Key commands:
+
+- `npx antd info <Component>` — look up props/API before writing code (mandatory)
+- `npx antd lint ./src` — check for deprecated or problematic usage (must pass before commit)
+- `npx antd demo <Component> <demo>` — get working code examples
+- `npx antd migrate <from> <to>` — migration checklist between major versions
 
 ## Page Co-location
 
