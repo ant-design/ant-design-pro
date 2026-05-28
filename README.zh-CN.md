@@ -131,6 +131,44 @@ npm run build
 | --- | --- | --- | --- |
 | Edge | last 2 versions | last 2 versions | last 2 versions |
 
+## AI Skills（Claude Code）
+
+本项目内置了 [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code)，用于 AI 辅助开发。先将 skills 安装到项目中：
+
+```bash
+npx skills add ant-design/ant-design-pro
+```
+
+### `/pro-upgrade` — 项目升级助手
+
+在项目根目录用 Claude Code 运行 `/pro-upgrade`，即可将你的 Pro 项目升级到最新版本。AI 会自动：
+- 拉取最新模板并与你的项目进行 diff 对比
+- 智能合并框架文件变更（依赖、配置、代码模式等）
+- 保留业务代码，仅调整必要的 import 路径和 API 调用
+- 运行 `antd lint` 检查跨 antd 主版本的废弃用法
+- 通过 `npm run lint` 和 `npm run build` 验证结果
+
+> 💡 运行前请先提交代码——升级过程会修改多个文件。
+
+### `/antd` — Ant Design 专家助手
+
+在使用 Ant Design 组件时，用 Claude Code 运行 `/antd`。底层基于 `@ant-design/cli`，内置 antd v3–v6 的离线元数据，可以帮你：
+- **编写组件**：编码前查询组件 props、demos、tokens、semantic classNames
+- **调试问题**：收集环境信息，检查特定版本的 API 是否可用，lint 废弃用法
+- **版本迁移**：获取迁移清单、changelog、breaking changes 详情
+- **分析用量**：扫描项目中组件使用统计，lint 最佳实践
+- **报告 Bug**：生成结构化 bug 报告（antd 或 CLI 本身）
+
+Skill 内部使用的示例命令：
+```bash
+npx antd info Button --format json       # 组件 API 参考
+npx antd demo Table basic --format json   # 可运行的代码示例
+npx antd lint ./src --format json         # 查找废弃/有问题的用法
+npx antd migrate 5 6 --format json        # 版本间迁移清单
+```
+
+> 💡 如使用其他 AI 助手，可将 `.claude/skills/antd/SKILL.md` 或 `.claude/skills/pro-upgrade/SKILL.md` 中的内容提供给它。
+
 ## 参与贡献
 
 我们非常欢迎你的贡献，你可以通过以下方式和我们一起共建 :smiley:：

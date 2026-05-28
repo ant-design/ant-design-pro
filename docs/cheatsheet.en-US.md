@@ -499,6 +499,13 @@ npx skills add ant-design/ant-design-pro
 ```
 Then run `/pro-upgrade` in Claude Code at the project root — AI will auto-diff the latest template and assist your upgrade (deps, config, code patterns, etc.), with conservative handling for ambiguous merges. For other AI assistants, paste the content of `.claude/skills/pro-upgrade/SKILL.md` to them.
 
+**Q: How to use the antd AI skill?**
+First, install the skills into your project:
+```bash
+npx skills add ant-design/ant-design-pro
+```
+Then run `/antd` in Claude Code when working with Ant Design components. It uses `@ant-design/cli` with offline antd v3–v6 metadata to look up component APIs, grab working demos, lint deprecated usage, assist with version migration, and more. Example: ask it to "check what props Table has" or "migrate my Select from v4 to v5". For other AI assistants, paste the content of `.claude/skills/antd/SKILL.md` to them.
+
 **Q: How to deploy?**
 `npm run build` generates `dist/`. Deploy to any static file server. Set `publicPath` for non-root deployments. `npm run deploy` builds and publishes to GitHub Pages automatically (pushes to gh-pages branch).
 

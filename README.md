@@ -130,6 +130,44 @@ Modern browsers.
 | --- | --- | --- | --- |
 | Edge | last 2 versions | last 2 versions | last 2 versions |
 
+## AI Skills (Claude Code)
+
+This project includes built-in [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code) for AI-assisted development. Install the skills into your project:
+
+```bash
+npx skills add ant-design/ant-design-pro
+```
+
+### `/pro-upgrade` — Project Upgrade Assistant
+
+Run `/pro-upgrade` in Claude Code at the project root to upgrade your Pro-based project to the latest version. The AI will:
+- Clone the latest template and diff against your project
+- Intelligently merge framework file changes (deps, config, patterns)
+- Preserve your business code, only adjusting imports/APIs as needed
+- Run `antd lint` to catch deprecated usage across antd major versions
+- Verify with `npm run lint` and `npm run build`
+
+> 💡 Commit your changes before running — the upgrade process modifies multiple files.
+
+### `/antd` — Ant Design Expert Assistant
+
+Run `/antd` in Claude Code when working with Ant Design components. Powered by `@ant-design/cli` with bundled offline metadata for antd v3–v6, it helps you:
+- **Write components**: Look up props, demos, tokens, and semantic classNames before coding
+- **Debug issues**: Collect environment info, check API availability for specific versions, lint for deprecated usage
+- **Migrate versions**: Get migration checklists, changelogs, and breaking change details
+- **Analyze usage**: Scan component usage statistics and lint for best practices
+- **Report bugs**: Generate structured bug reports for antd or the CLI itself
+
+Example commands the skill uses internally:
+```bash
+npx antd info Button --format json       # Component API reference
+npx antd demo Table basic --format json   # Working code examples
+npx antd lint ./src --format json         # Find deprecated/problematic usage
+npx antd migrate 5 6 --format json        # Migration checklist between versions
+```
+
+> 💡 For non-Claude AI assistants, paste the content of `.claude/skills/antd/SKILL.md` or `.claude/skills/pro-upgrade/SKILL.md` to them.
+
 ## Contributing
 
 Any type of contribution is welcome, here are some examples of how you may contribute to this project:
