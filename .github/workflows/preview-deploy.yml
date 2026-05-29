@@ -49,7 +49,7 @@ jobs:
           npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
 
       - name: update status comment
-        uses: actions-cool/maintain-one-comment@v1.2.1 # repo blocked, unable to pin to SHA
+        uses: actions-cool/maintain-one-comment-backup@17f644ff1665b05890083f7c1091fef135bce5e4 # v1.2.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
@@ -63,7 +63,7 @@ jobs:
 
       - name: The job failed
         if: ${{ failure() }}
-        uses: actions-cool/maintain-one-comment@v1.2.1 # repo blocked, unable to pin to SHA
+        uses: actions-cool/maintain-one-comment-backup@17f644ff1665b05890083f7c1091fef135bce5e4 # v1.2.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
@@ -101,7 +101,7 @@ jobs:
           echo "id=$PR_ID" >> "$GITHUB_OUTPUT"
 
       - name: The job failed
-        uses: actions-cool/maintain-one-comment@v1.2.1 # repo blocked, unable to pin to SHA
+        uses: actions-cool/maintain-one-comment-backup@17f644ff1665b05890083f7c1091fef135bce5e4 # v1.2.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
