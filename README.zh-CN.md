@@ -123,6 +123,27 @@ npm run build
 
 更多信息请参考 [使用文档](./docs/cheatsheet.zh-CN.md)。
 
+## AI Skills（Claude Code）
+
+本项目内置了两个 [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills)，位于 `.claude/skills/` 目录下：
+
+| Skill | 触发词 | 说明 |
+|---|---|---|
+| `/pro-upgrade` | "升级"、"upgrade pro"、"update to latest" | 自动升级到最新 Ant Design Pro 版本。对比最新模板差异，合并框架变更并保留业务代码。 |
+| `/antd` | antd 相关代码或问题 | 查询 antd 组件 API、props、token、demo；检查废弃用法；跨版本迁移 — 基于 `@ant-design/cli`。 |
+
+**在 Claude Code 中使用：**
+
+```bash
+# 升级项目到最新 Pro 版本
+/pro-upgrade
+
+# 查询 antd 组件信息、调试问题、运行 lint 等
+/antd
+```
+
+> 💡 如果你的项目是从本仓库克隆的，这些 skill 已经内置，无需额外安装。如需获取最新 skill 定义，可以从模板拉取更新或运行 `npx skills add ant-design/ant-design-pro` 刷新。
+
 ## 支持环境
 
 现代浏览器。

@@ -122,6 +122,27 @@ This will:
 npm run build
 ```
 
+## AI Skills (Claude Code)
+
+This project ships with two built-in [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills) in `.claude/skills/`:
+
+| Skill | Trigger | Description |
+|---|---|---|
+| `/pro-upgrade` | "upgrade pro", "update to latest" | Auto-upgrade to the latest Ant Design Pro version. Diffs the latest template, merges framework changes while preserving your business code. |
+| `/antd` | antd-related code or questions | Query antd component APIs, props, tokens, demos; lint for deprecated usage; migrate between versions — all via `@ant-design/cli`. |
+
+**Usage in Claude Code:**
+
+```bash
+# Upgrade the project to latest Pro version
+/pro-upgrade
+
+# Query antd component info, debug issues, run lint, etc.
+/antd
+```
+
+> 💡 If your project was cloned from this repo, these skills are already included — no installation needed. To get the latest skill definitions, pull the updates from the template or run `npx skills add ant-design/ant-design-pro` to refresh them.
+
 ## Browsers support
 
 Modern browsers.
