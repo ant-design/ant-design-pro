@@ -1,95 +1,100 @@
 import { defaultConfig } from 'antd/lib/theme/internal';
+import { vi } from 'vitest';
 
 defaultConfig.hashed = false;
 
-const store = {};
+const store: Record<string, string> = {};
 
 const localStorageMock = {
-  getItem: jest.fn((key) => store[key] ?? null),
-  setItem: jest.fn((key, value) => {
+  getItem: vi.fn((key: string) => store[key] ?? null),
+  setItem: vi.fn((key: string, value: string) => {
     store[key] = String(value);
   }),
-  removeItem: jest.fn((key) => {
+  removeItem: vi.fn((key: string) => {
     delete store[key];
   }),
-  clear: jest.fn(() => {
+  clear: vi.fn(() => {
     Object.keys(store).forEach((key) => {
       delete store[key];
     });
   }),
 };
 
-globalThis.localStorage = localStorageMock;
+globalThis.localStorage = localStorageMock as Storage;
 
 Object.defineProperty(URL, 'createObjectURL', {
   writable: true,
-  value: jest.fn(),
+  value: vi.fn(),
 });
 
 class MockWorker {
-  constructor(stringUrl) {
+  url: string;
+  onmessage: ((e: MessageEvent) => void) | null = null;
+  constructor(stringUrl: string) {
     this.url = stringUrl;
-    this.onmessage = null;
   }
-
-  postMessage(msg) {
+  postMessage(msg: unknown) {
     if (typeof this.onmessage === 'function') {
-      this.onmessage({ data: msg });
+      this.onmessage({ data: msg } as MessageEvent);
     }
   }
-
   terminate() {}
   addEventListener() {}
   removeEventListener() {}
 }
 
-globalThis.Worker = MockWorker;
+globalThis.Worker = MockWorker as unknown as typeof Worker;
 
 if (typeof globalThis.MessageChannel === 'undefined') {
   class PolyMessageChannel {
+    port1: {
+      onmessage: ((e: MessageEvent) => void) | null;
+      postMessage: (msg: unknown) => void;
+    };
+    port2: {
+      onmessage: ((e: MessageEvent) => void) | null;
+      postMessage: (msg: unknown) => void;
+    };
     constructor() {
       const channel = this;
-
       this.port1 = {
         onmessage: null,
-        postMessage(msg) {
+        postMessage(msg: unknown) {
           setTimeout(() => {
             if (typeof channel.port2.onmessage === 'function') {
-              channel.port2.onmessage({ data: msg });
+              channel.port2.onmessage({ data: msg } as MessageEvent);
             }
           }, 0);
         },
       };
-
       this.port2 = {
         onmessage: null,
-        postMessage(msg) {
+        postMessage(msg: unknown) {
           setTimeout(() => {
             if (typeof channel.port1.onmessage === 'function') {
-              channel.port1.onmessage({ data: msg });
+              channel.port1.onmessage({ data: msg } as MessageEvent);
             }
           }, 0);
         },
       };
     }
   }
-
-  globalThis.MessageChannel = PolyMessageChannel;
+  globalThis.MessageChannel = PolyMessageChannel as unknown as typeof MessageChannel;
 }
 
 if (typeof window !== 'undefined' && !window.matchMedia) {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     configurable: true,
-    value: jest.fn((query) => ({
+    value: vi.fn((query: string) => ({
       matches: false,
       media: query,
       onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
     })),
   });
 }
@@ -98,7 +103,7 @@ const originalError = console.error;
 Object.defineProperty(window.console, 'error', {
   writable: true,
   configurable: true,
-  value: (...rest) => {
+  value: (...rest: unknown[]) => {
     const logStr = rest.join('');
     if (
       logStr.includes(
