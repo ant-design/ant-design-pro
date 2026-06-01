@@ -88,11 +88,15 @@ export const layout: RunTimeLayoutConfig = ({
       }
       return dom;
     },
-    actionsRender: () => [
-      <DocLink key="doc" />,
-      <VersionDropdown key="version" />,
-      <LangDropdown key="lang" />,
-    ],
+    actionsRender: () => {
+      const localeEnabled =
+        (initialState?.settings as Record<string, unknown>)?.locale !== false;
+      return [
+        <DocLink key="doc" />,
+        <VersionDropdown key="version" />,
+        localeEnabled && <LangDropdown key="lang" />,
+      ].filter(Boolean);
+    },
     avatarProps: {
       src: initialState?.currentUser?.avatar,
       title: 'ProUser',
