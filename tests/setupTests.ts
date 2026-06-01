@@ -1,7 +1,4 @@
-import { defaultConfig } from 'antd/lib/theme/internal';
 import { vi } from 'vitest';
-
-defaultConfig.hashed = false;
 
 const store: Record<string, string> = {};
 
@@ -20,7 +17,7 @@ const localStorageMock = {
   }),
 };
 
-globalThis.localStorage = localStorageMock as Storage;
+globalThis.localStorage = localStorageMock as unknown as Storage;
 
 Object.defineProperty(URL, 'createObjectURL', {
   writable: true,
@@ -79,7 +76,8 @@ if (typeof globalThis.MessageChannel === 'undefined') {
       };
     }
   }
-  globalThis.MessageChannel = PolyMessageChannel as unknown as typeof MessageChannel;
+  globalThis.MessageChannel =
+    PolyMessageChannel as unknown as typeof MessageChannel;
 }
 
 if (typeof window !== 'undefined' && !window.matchMedia) {
@@ -98,23 +96,6 @@ if (typeof window !== 'undefined' && !window.matchMedia) {
     })),
   });
 }
-
-const originalError = console.error;
-Object.defineProperty(window.console, 'error', {
-  writable: true,
-  configurable: true,
-  value: (...rest: unknown[]) => {
-    const logStr = rest.join('');
-    if (
-      logStr.includes(
-        'Warning: An update to %s inside a test was not wrapped in act(...)',
-      )
-    ) {
-      return;
-    }
-    originalError(...rest);
-  },
-});
 
 globalThis.ResizeObserver = class {
   observe() {}
