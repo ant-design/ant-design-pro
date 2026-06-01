@@ -50,10 +50,10 @@ const useStyles = createStyles(({ token }) => {
       border: 'none',
     },
     standardFormRowBlock: {
-      '.ant-form-item, div.ant-form-item-control-wrapper': { display: 'block' },
+      '.ant-form-item, div.ant-form-item-control': { display: 'block' },
     },
     standardFormRowGrid: {
-      '.ant-form-item, div.ant-form-item-control-wrapper': { display: 'block' },
+      '.ant-form-item, div.ant-form-item-control': { display: 'block' },
       '.ant-form-item-label': { float: 'left' },
     },
   };
