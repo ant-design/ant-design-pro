@@ -7,7 +7,7 @@ import { history, useModel } from '@umijs/max';
 import type { MenuProps } from 'antd';
 import { Spin } from 'antd';
 import React, { startTransition } from 'react';
-import { outLogin } from '@/services/ant-design-pro/api';
+import { outLogin } from '@/services/ant-design-pro/login';
 import HeaderDropdown from '../HeaderDropdown';
 
 type GlobalHeaderRightProps = {
