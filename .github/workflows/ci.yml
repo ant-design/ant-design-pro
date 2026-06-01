@@ -13,8 +13,37 @@ jobs:
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 20
+      - name: Cache npm dependencies
+        uses: actions/cache@0400d5f644dc7451313e92007392d5e485c4b2fa # v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
       - run: npm ci
+      - run: npm run biome:lint
       - run: npx antd lint ./src
+
+  tsc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 20
+      - name: Cache npm dependencies
+        uses: actions/cache@0400d5f644dc7451313e92007392d5e485c4b2fa # v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
+      - run: npm ci
+      - run: npm run tsc
 
   build:
     runs-on: ${{ matrix.os }}
@@ -28,6 +57,15 @@ jobs:
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: ${{ matrix.node_version }}
+      - name: Cache npm dependencies
+        uses: actions/cache@0400d5f644dc7451313e92007392d5e485c4b2fa # v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
       - run: echo ${{github.ref}}
       - uses: utooland/setup-utoo@3a51006d0b66afcc32d1b9177a4b200b74f4a8cb # v1
         with:
