@@ -14,6 +14,9 @@ const useStyles = createStyles(() => {
     '.ant-pro-sider-collapsed .ant-pro-sider-link span:not([role="img"])': {
       display: 'none',
     },
+    '.ant-drawer.ant-drawer-inline.ant-pro-drawer-sider': {
+      position: 'fixed !important',
+    },
     canvas: {
       display: 'block',
     },
