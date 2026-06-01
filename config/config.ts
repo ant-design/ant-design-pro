@@ -222,7 +222,11 @@ export default defineConfig({
             );
           }
           const method = data.method || 'get';
-          const segments = (data.path || '').split('/').filter(Boolean);
+          // Remove path parameters (e.g. {id}), hyphens, and other non-alphanumeric chars
+          const segments = (data.path || '')
+            .replace(/[{}-]/g, '_')
+            .split('/')
+            .filter(Boolean);
           const name =
             method +
             segments
