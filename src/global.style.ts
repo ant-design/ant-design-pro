@@ -11,6 +11,9 @@ const useStyles = createStyles(() => {
     'ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed': {
       left: 'unset',
     },
+    '.ant-drawer.ant-drawer-inline.ant-pro-drawer-sider': {
+      position: 'fixed !important',
+    },
     canvas: {
       display: 'block',
     },
