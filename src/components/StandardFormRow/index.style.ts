@@ -8,15 +8,17 @@ const useStyles = createStyles(({ token }) => {
       marginBottom: '16px',
       paddingBottom: '16px',
       borderBottom: `1px dashed ${token.colorSplit}`,
-      '.ant-form-item, .ant-legacy-form-item': { marginRight: '24px' },
-      '.ant-form-item-label, .ant-legacy-form-item-label': {
+      '.ant-form-item': { marginRight: '24px' },
+      '.ant-form-item-label': {
         label: {
           marginRight: '0',
           color: token.colorText,
         },
       },
-      '.ant-form-item-label, .ant-legacy-form-item-label, .ant-form-item-control, .ant-legacy-form-item-control':
-        { padding: '0', lineHeight: '32px' },
+      '.ant-form-item-label, .ant-form-item-control': {
+        padding: '0',
+        lineHeight: '32px',
+      },
     },
     label: {
       flex: '0 0 auto',
@@ -35,7 +37,7 @@ const useStyles = createStyles(({ token }) => {
     },
     content: {
       flex: '1 1 0',
-      '.ant-form-item, .ant-legacy-form-item': {
+      '.ant-form-item': {
         '&:last-child': {
           display: 'block',
           marginRight: '0',
@@ -48,13 +50,11 @@ const useStyles = createStyles(({ token }) => {
       border: 'none',
     },
     standardFormRowBlock: {
-      '.ant-form-item, .ant-legacy-form-item, div.ant-form-item-control-wrapper, div.ant-legacy-form-item-control-wrapper':
-        { display: 'block' },
+      '.ant-form-item, div.ant-form-item-control-wrapper': { display: 'block' },
     },
     standardFormRowGrid: {
-      '.ant-form-item, .ant-legacy-form-item, div.ant-form-item-control-wrapper, div.ant-legacy-form-item-control-wrapper':
-        { display: 'block' },
-      '.ant-form-item-label, .ant-legacy-form-item-label': { float: 'left' },
+      '.ant-form-item, div.ant-form-item-control-wrapper': { display: 'block' },
+      '.ant-form-item-label': { float: 'left' },
     },
   };
 });
