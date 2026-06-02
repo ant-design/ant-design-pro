@@ -89,8 +89,10 @@ export const layout: RunTimeLayoutConfig = ({
       return dom;
     },
     actionsRender: () => {
+      // `locale: false` opts out of the language switcher. ProLayout's own
+      // `locale` prop is a locale string, so narrow to the boolean toggle here.
       const localeEnabled =
-        (initialState?.settings as Record<string, unknown>)?.locale !== false;
+        (initialState?.settings as { locale?: boolean })?.locale !== false;
       return [
         <DocLink key="doc" />,
         <VersionDropdown key="version" />,
