@@ -17,7 +17,7 @@ Other: `npm run openapi` (regenerate `src/services/`), `npm run simple` (**irrev
 - **Always `npx antd info <Component>` before writing antd code** — don't guess APIs from memory
 - **`npm run simple` is irreversible** — always commit/branch first
 - **Conventional commits** required (commitlint enforced)
-- **TypeScript strict** · **Node ≥ 20** · **`package-lock.json`** (not yarn/pnpm)
+- **TypeScript strict** · **Node ≥ 22** · **`package-lock.json`** (not yarn/pnpm)
 - **`.umi` dir is auto-generated** — delete `src/.umi` and restart if dev server acts up
 
 ## Architecture Essentials
