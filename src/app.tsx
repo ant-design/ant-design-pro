@@ -41,7 +41,7 @@ export async function getInitialState(): Promise<{
       const msg = await queryCurrentUser({
         skipErrorHandler: true,
       });
-      return msg;
+      return msg.data;
     } catch (_error) {
       const { pathname, search, hash } = history.location;
       history.replace(

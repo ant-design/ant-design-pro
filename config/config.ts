@@ -210,6 +210,9 @@ export default defineConfig({
       // types. isCamelCase (default true) normalizes function names back to
       // camelCase in service files.
       hook: {
+        // The plugin types this hook as `() => any` but invokes it with the
+        // operation data at runtime; cast to `() => string` to keep the real
+        // return type while satisfying the loose upstream signature.
         customFunctionName: ((data: {
           operationId?: string;
           method?: string;
@@ -233,7 +236,7 @@ export default defineConfig({
               .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
               .join('');
           return name.charAt(0).toUpperCase() + name.slice(1);
-        }) as () => any,
+        }) as () => string,
       },
     },
   ],
