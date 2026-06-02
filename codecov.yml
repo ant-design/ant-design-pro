@@ -1,0 +1,12 @@
+# Codecov configuration
+# Coverage is reported for visibility but does not block PRs. Small fixes
+# (style, config, generated code) often ship without tests; dedicated test
+# PRs raise coverage separately.
+coverage:
+  status:
+    project:
+      default:
+        informational: true
+    patch:
+      default:
+        informational: true
