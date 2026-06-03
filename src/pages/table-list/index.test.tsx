@@ -92,8 +92,7 @@ vi.mock('./components/UpdateForm', () => ({
   default: ({ trigger }: any) => <div data-testid="update-form">{trigger}</div>,
 }));
 
-// Import component after mocks
-const TableList = (await import('./index')).default;
+import TableList from './index';
 
 describe('TableList', () => {
   let queryClient: QueryClient;

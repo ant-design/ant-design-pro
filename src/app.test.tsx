@@ -59,6 +59,7 @@ describe('app getInitialState', () => {
   });
 
   it('should fetch currentUser when not on login page', async () => {
+    const { getInitialState } = await import('./app');
     mockQueryCurrentUser.mockResolvedValue({
       data: {
         name: 'Test User',
@@ -66,7 +67,6 @@ describe('app getInitialState', () => {
       },
     });
 
-    const { getInitialState } = await import('./app');
     const state = await getInitialState();
 
     expect(mockQueryCurrentUser).toHaveBeenCalled();
@@ -79,9 +79,9 @@ describe('app getInitialState', () => {
   });
 
   it('should redirect to login when currentUser fetch fails (401)', async () => {
+    const { getInitialState } = await import('./app');
     mockQueryCurrentUser.mockRejectedValue(new Error('401 Unauthorized'));
 
-    const { getInitialState } = await import('./app');
     const state = await getInitialState();
 
     expect(mockReplace).toHaveBeenCalledWith(
@@ -91,13 +91,13 @@ describe('app getInitialState', () => {
   });
 
   it('should not fetch currentUser on login page', async () => {
+    const { getInitialState } = await import('./app');
     mockHistory.location = {
       pathname: '/user/login',
       search: '',
       hash: '',
     };
 
-    const { getInitialState } = await import('./app');
     const state = await getInitialState();
 
     expect(mockQueryCurrentUser).not.toHaveBeenCalled();
@@ -106,6 +106,7 @@ describe('app getInitialState', () => {
   });
 
   it('should encode redirect path correctly on 401', async () => {
+    const { getInitialState } = await import('./app');
     mockHistory.location = {
       pathname: '/admin/users',
       search: '?page=2',
@@ -113,7 +114,6 @@ describe('app getInitialState', () => {
     };
     mockQueryCurrentUser.mockRejectedValue(new Error('401'));
 
-    const { getInitialState } = await import('./app');
     await getInitialState();
 
     expect(mockReplace).toHaveBeenCalledWith(
@@ -122,22 +122,22 @@ describe('app getInitialState', () => {
   });
 
   it('should include default settings in initial state', async () => {
+    const { getInitialState } = await import('./app');
     mockQueryCurrentUser.mockResolvedValue({
       data: { name: 'User' },
     });
 
-    const { getInitialState } = await import('./app');
     const state = await getInitialState();
 
     expect(state.settings).toEqual({ navTheme: 'light' });
   });
 
   it('fetchUserInfo should return user data on success', async () => {
+    const { getInitialState } = await import('./app');
     mockQueryCurrentUser.mockResolvedValue({
       data: { name: 'Fetched User', access: 'user' },
     });
 
-    const { getInitialState } = await import('./app');
     const state = await getInitialState();
 
     const user = await state.fetchUserInfo?.();

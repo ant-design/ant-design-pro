@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as service from './service';
 
@@ -84,8 +84,7 @@ vi.mock('./style.style', () => ({
   }),
 }));
 
-// Import component after mocks
-const BasicForm = (await import('./index')).default;
+import BasicForm from './index';
 
 describe('BasicForm', () => {
   let queryClient: QueryClient;
@@ -143,7 +142,11 @@ describe('BasicForm', () => {
     );
 
     const submitButton = screen.getByRole('button', { name: /提交/i });
-    expect(submitButton).toBeInTheDocument();
+    submitButton.click();
+
+    await waitFor(() => {
+      expect(mockSubmit).toHaveBeenCalled();
+    });
   });
 
   it('should render within PageContainer', () => {

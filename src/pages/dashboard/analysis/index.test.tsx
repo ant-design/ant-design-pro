@@ -80,8 +80,7 @@ vi.mock('./components/PageLoading', () => ({
   default: () => <div data-testid="page-loading">Loading...</div>,
 }));
 
-// Import component after mocks
-const Analysis = (await import('./index')).default;
+import Analysis from './index';
 
 const mockAnalysisData: AnalysisData = {
   visitData: [
@@ -235,7 +234,7 @@ describe('Analysis Dashboard', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByTestId('introduce-row')).toBeInTheDocument();
+      expect(screen.getByTestId('introduce-row')).toHaveTextContent('0 items');
     });
   });
 });
