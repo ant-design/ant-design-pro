@@ -145,7 +145,7 @@ describe('TableList', () => {
     expect(screen.getByText('Description')).toBeInTheDocument();
   });
 
-  it('should call removeRule mutation successfully', async () => {
+  it('should render table after data loading', async () => {
     const mockRemoveRule = vi.mocked(api.removeRule);
     mockRemoveRule.mockResolvedValue({ success: true });
 
@@ -160,7 +160,7 @@ describe('TableList', () => {
     });
   });
 
-  it('should handle empty data state', async () => {
+  it('should call rule API on mount', async () => {
     vi.mocked(api.rule).mockResolvedValue({
       data: [],
       total: 0,
