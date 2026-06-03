@@ -1,4 +1,3 @@
-declare module 'slash2';
 declare module '*.css';
 declare module '*.less';
 declare module '*.scss';
@@ -14,7 +13,6 @@ declare module '*.md' {
   const content: string;
   export default content;
 }
-declare module 'omit.js';
 declare module 'mockjs';
 
 declare const __APP_VERSION__: string;
