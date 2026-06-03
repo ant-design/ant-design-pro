@@ -4,7 +4,7 @@ const useStyles = createStyles(({ token }) => {
   return {
     card: {
       marginBottom: '24px',
-      '.ant-legacy-form-item .ant-legacy-form-item-control-wrapper': {
+      '.ant-form-item .ant-form-item-control': {
         width: '100%',
       },
     },

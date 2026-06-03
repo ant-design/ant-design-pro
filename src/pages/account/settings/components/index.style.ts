@@ -5,7 +5,7 @@ const useStyles = createStyles(({ token }) => {
     baseView: {
       display: 'flex',
       paddingTop: '12px',
-      '.ant-legacy-form-item .ant-legacy-form-item-control-wrapper': {
+      '.ant-form-item .ant-form-item-control': {
         width: '100%',
       },
       [`@media screen and (max-width: ${token.screenXL}px)`]: {
