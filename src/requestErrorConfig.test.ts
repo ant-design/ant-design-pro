@@ -63,6 +63,7 @@ describe('requestErrorConfig', () => {
         showType: 3,
       };
 
+      expect.assertions(5);
       try {
         errorThrower(response);
       } catch (error: any) {
@@ -157,9 +158,10 @@ describe('requestErrorConfig', () => {
 
       errorHandler(error, {});
 
-      // Note: In jsdom/happy-dom, window.location.href assignment may not work as expected
-      // This test verifies the code path is executed without error
-      expect(error.info.showType).toBe(9);
+      // REDIRECT 分支不应触发任何消息/通知提示
+      expect(message.warning).not.toHaveBeenCalled();
+      expect(message.error).not.toHaveBeenCalled();
+      expect(notification.open).not.toHaveBeenCalled();
     });
 
     it('should handle default case for unknown showType', () => {
@@ -198,16 +200,18 @@ describe('requestErrorConfig', () => {
         value: false,
       });
 
-      errorHandler(error, {});
+      try {
+        errorHandler(error, {});
 
-      expect(message.error).toHaveBeenCalledWith(
-        'Network unavailable. Please check your connection and try again.',
-      );
-
-      Object.defineProperty(navigator, 'onLine', {
-        writable: true,
-        value: originalOnLine,
-      });
+        expect(message.error).toHaveBeenCalledWith(
+          'Network unavailable. Please check your connection and try again.',
+        );
+      } finally {
+        Object.defineProperty(navigator, 'onLine', {
+          writable: true,
+          value: originalOnLine,
+        });
+      }
     });
 
     it('should handle request error with no response', () => {
@@ -240,7 +244,7 @@ describe('requestErrorConfig', () => {
       method?: string;
     }) => { url?: string };
 
-    it('should append token to URL', () => {
+    it('should pass through config without modification', () => {
       const config = {
         url: 'https://api.example.com/users',
         method: 'GET',
@@ -248,7 +252,9 @@ describe('requestErrorConfig', () => {
 
       const result = interceptor(config);
 
-      expect(result.url).toBe('https://api.example.com/users?token=123');
+      // Token attachment is intentionally commented out in the source;
+      // interceptor currently returns config as-is
+      expect(result.url).toBe('https://api.example.com/users');
     });
 
     it('should handle URL without config', () => {
