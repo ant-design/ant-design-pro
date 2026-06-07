@@ -1,0 +1,24 @@
+name: Preview Teardown
+
+on:
+  pull_request_target:
+    types: [closed]
+
+permissions:
+  contents: read
+
+jobs:
+  # Job id MUST match the deploy job id so surge-preview targets the same URL.
+  deploy:
+    permissions:
+      pull-requests: write # for surge-preview to modify or create PR comments
+    runs-on: ubuntu-latest
+    steps:
+      - name: Teardown preview site
+        uses: afc163/surge-preview@v1
+        with:
+          surge_token: ${{ secrets.SURGE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          failOnError: true
+          teardown: true
+          build: echo "Cleaning up preview"
