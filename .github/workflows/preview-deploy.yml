@@ -10,7 +10,6 @@ permissions:
   contents: read
 
 jobs:
-  # Job id `deploy` is part of the preview URL and MUST match the teardown job id.
   deploy:
     permissions:
       actions: read # for dawidd6/action-download-artifact to query and download artifacts
@@ -36,7 +35,7 @@ jobs:
           build: echo done
           dist: dist
           failOnError: true
-          teardown: false # teardown is handled by the separate workflow
+          teardown: false # preview sites are not torn down automatically
           screenshot: true
           lighthouse: true
           setCommitStatus: true
