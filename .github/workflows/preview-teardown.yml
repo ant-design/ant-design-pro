@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Teardown preview site
-        uses: afc163/surge-preview@v1
+        uses: afc163/surge-preview@bf90a5a86111f6311ca42f0a5a0f80fb0fb03cec # v1.13.0
         with:
           surge_token: ${{ secrets.SURGE_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
