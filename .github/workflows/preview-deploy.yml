@@ -10,105 +10,34 @@ permissions:
   contents: read
 
 jobs:
-  success:
+  deploy:
     permissions:
       actions: read # for dawidd6/action-download-artifact to query and download artifacts
-      issues: write # for actions-cool/maintain-one-comment to modify or create issue comments
-      pull-requests: write # for actions-cool/maintain-one-comment to modify or create PR comments
+      checks: write # for surge-preview to publish the deployment as a commit check run
+      issues: write # for surge-preview to modify or create issue comments
+      pull-requests: write # for surge-preview to modify or create PR comments
     runs-on: ubuntu-latest
     if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
     steps:
-      - name: download pr artifact
-        uses: dawidd6/action-download-artifact@b6e2e70617bc3265edd6dab6c906732b2f1ae151 # v21
-        with:
-          workflow: ${{ github.event.workflow_run.workflow_id }}
-          name: pr
-
-      - name: save PR id
-        id: pr
-        run: |
-          PR_ID=$(<pr-id.txt)
-          # Validate PR ID is numeric to prevent code injection
-          if [[ ! "$PR_ID" =~ ^[0-9]+$ ]]; then
-            echo "Invalid PR ID: $PR_ID"
-            exit 1
-          fi
-          echo "id=$PR_ID" >> "$GITHUB_OUTPUT"
-
       - name: download dist artifact
         uses: dawidd6/action-download-artifact@b6e2e70617bc3265edd6dab6c906732b2f1ae151 # v21
         with:
           workflow: ${{ github.event.workflow_run.workflow_id }}
           workflow_conclusion: success
           name: dist
+          path: dist
 
-      - name: upload surge service
-        id: deploy
-        run: |
-          export DEPLOY_DOMAIN=https://ant-design-pro-preview-pr-${{ steps.pr.outputs.id }}.surge.sh
-          npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
-
-      - name: update status comment
-        uses: actions-cool/maintain-one-comment-backup@17f644ff1665b05890083f7c1091fef135bce5e4 # v1.2.1
+      - name: Deploy to Surge
+        uses: afc163/surge-preview@bf90a5a86111f6311ca42f0a5a0f80fb0fb03cec # v1.13.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-            🎊 PR Preview has been successfully built and deployed to https://ant-design-pro-preview-pr-${{ steps.pr.outputs.id }}.surge.sh
-
-            <img width="300" src="https://user-images.githubusercontent.com/507615/90250366-88233900-de6e-11ea-95a5-84f0762ffd39.png">
-
-            <!-- Sticky Pull Request Comment -->
-          body-include: '<!-- Sticky Pull Request Comment -->'
-          number: ${{ steps.pr.outputs.id }}
-
-      - name: The job failed
-        if: ${{ failure() }}
-        uses: actions-cool/maintain-one-comment-backup@17f644ff1665b05890083f7c1091fef135bce5e4 # v1.2.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-            😭 Deploy PR Preview failed.
-
-            <img width="300" src="https://user-images.githubusercontent.com/507615/90250824-4e066700-de6f-11ea-8230-600ecc3d6a6b.png">
-
-            <!-- Sticky Pull Request Comment -->
-          body-include: '<!-- Sticky Pull Request Comment -->'
-          number: ${{ steps.pr.outputs.id }}
-
-  failed:
-    permissions:
-      actions: read # for dawidd6/action-download-artifact to query and download artifacts
-      issues: write # for actions-cool/maintain-one-comment to modify or create issue comments
-      pull-requests: write # for actions-cool/maintain-one-comment to modify or create PR comments
-    runs-on: ubuntu-latest
-    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'failure'
-    steps:
-      - name: download pr artifact
-        uses: dawidd6/action-download-artifact@b6e2e70617bc3265edd6dab6c906732b2f1ae151 # v21
-        with:
-          workflow: ${{ github.event.workflow_run.workflow_id }}
-          name: pr
-
-      - name: save PR id
-        id: pr
-        run: |
-          PR_ID=$(<pr-id.txt)
-          # Validate PR ID is numeric to prevent code injection
-          if [[ ! "$PR_ID" =~ ^[0-9]+$ ]]; then
-            echo "Invalid PR ID: $PR_ID"
-            exit 1
-          fi
-          echo "id=$PR_ID" >> "$GITHUB_OUTPUT"
-
-      - name: The job failed
-        uses: actions-cool/maintain-one-comment-backup@17f644ff1665b05890083f7c1091fef135bce5e4 # v1.2.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-            😭 Deploy PR Preview failed.
-
-            <img width="300" src="https://user-images.githubusercontent.com/507615/90250824-4e066700-de6f-11ea-8230-600ecc3d6a6b.png">
-
-            <!-- Sticky Pull Request Comment -->
-          body-include: '<!-- Sticky Pull Request Comment -->'
-          number: ${{ steps.pr.outputs.id }}
+          surge_token: ${{ secrets.SURGE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          build: echo done
+          dist: dist
+          failOnError: true
+          teardown: false # preview sites are not torn down automatically
+          screenshot: true
+          lighthouse: true
+          setCommitStatus: true
+        env:
+          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
