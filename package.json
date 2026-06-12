@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@ant-design/cli": "^6.4.3",
-    "@biomejs/biome": "^2.4.16",
+    "@biomejs/biome": "^2.5.0",
     "@commitlint/cli": "^21.0.0",
     "@commitlint/config-conventional": "^21.0.0",
     "@tailwindcss/postcss": "^4.3.0",
