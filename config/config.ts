@@ -205,6 +205,39 @@ export default defineConfig({
       // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
       schemaPath: join(__dirname, 'oneapi.json'),
       mock: false,
+      // Capitalize the first letter of operationId so that generated type
+      // names follow PascalCase convention, consistent with schema-derived
+      // types. isCamelCase (default true) normalizes function names back to
+      // camelCase in service files.
+      hook: {
+        // The plugin types this hook as `() => any` but invokes it with the
+        // operation data at runtime; cast to `() => string` to keep the real
+        // return type while satisfying the loose upstream signature.
+        customFunctionName: ((data: {
+          operationId?: string;
+          method?: string;
+          path?: string;
+        }) => {
+          if (data.operationId) {
+            return (
+              data.operationId.charAt(0).toUpperCase() +
+              data.operationId.slice(1)
+            );
+          }
+          const method = data.method || 'get';
+          // Remove path parameters (e.g. {id}), hyphens, and other non-alphanumeric chars
+          const segments = (data.path || '')
+            .replace(/[{}-]/g, '_')
+            .split('/')
+            .filter(Boolean);
+          const name =
+            method +
+            segments
+              .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+              .join('');
+          return name.charAt(0).toUpperCase() + name.slice(1);
+        }) as () => string,
+      },
     },
   ],
 

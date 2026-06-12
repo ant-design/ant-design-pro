@@ -9,7 +9,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Button, message } from 'antd';
 import type { FC } from 'react';
-import { addRule } from '@/services/ant-design-pro/api';
+import { addRule } from '@/services/ant-design-pro/rule';
 
 interface CreateFormProps {
   reload?: ActionType['reload'];
