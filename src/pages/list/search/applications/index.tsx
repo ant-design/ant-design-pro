@@ -88,8 +88,7 @@ const Applications: FC<Record<string, any>> = () => {
     queryFn: () => queryFakeList({ count: 8 }).then((res) => res.data),
   });
 
-  const run = (values: any) => {
-    console.log('form data', values);
+  const run = () => {
     refetch();
   };
 
@@ -99,8 +98,8 @@ const Applications: FC<Record<string, any>> = () => {
     <div className={styles.filterCardList}>
       <Card variant="borderless">
         <Form
-          onValuesChange={(_, values) => {
-            run(values);
+          onValuesChange={() => {
+            run();
           }}
         >
           <StandardFormRow
