@@ -1,17 +1,6 @@
 import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(() => {
-  // Override ProLayout mobile drawer position to ensure it appears above the mask overlay.
-  // `position: fixed` is needed because ProLayout uses `ant-drawer-inline` which sets
-  // `position: absolute`, causing the drawer to render below the mask on mobile.
-  // Cast via Record to satisfy createStyles' return type for dot-separated selectors.
-  const drawerFix: Record<string, React.CSSProperties> = {
-    '.ant-drawer.ant-drawer-inline.ant-pro-drawer-sider': {
-      position:
-        'fixed !important' as unknown as React.CSSProperties['position'],
-    },
-  };
-
   return {
     colorWeak: {
       filter: 'invert(80%)',
@@ -25,7 +14,6 @@ const useStyles = createStyles(() => {
     '.ant-pro-sider-collapsed .ant-pro-sider-link span:not([role="img"])': {
       display: 'none',
     },
-    ...drawerFix,
     canvas: {
       display: 'block',
     },

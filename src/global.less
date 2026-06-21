@@ -65,6 +65,11 @@ body,
   display: none;
 }
 
+// Keep ProLayout's mobile inline drawer attached to the viewport while the page scrolls.
+.ant-pro-layout .ant-layout-has-sider > .ant-drawer.ant-drawer-inline {
+  position: fixed;
+}
+
 canvas {
   display: block;
 }
