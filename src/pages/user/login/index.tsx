@@ -23,7 +23,7 @@ import { Alert, App, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { startTransition, useState } from 'react';
 import { Footer } from '@/components';
-import { getFakeCaptcha, login } from '@/services/ant-design-pro/login';
+import { getFakeCaptcha, login } from '@/services/ant-design-pro/Login';
 import Settings from '../../../../config/defaultSettings';
 
 const useStyles = createStyles(({ token }) => {

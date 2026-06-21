@@ -29,7 +29,8 @@
                     "data": {
                       "$ref": "#/components/schemas/CurrentUser"
                     }
-                  }
+                  },
+                  "required": ["data"]
                 }
               }
             }

@@ -11,7 +11,7 @@
     "declaration": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "types": ["vitest/globals", "node"],
+    "types": ["vitest/globals", "@testing-library/jest-dom", "node"],
     "paths": {
       "@/*": ["./src/*"],
       "@@/*": ["./src/.umi/*"],

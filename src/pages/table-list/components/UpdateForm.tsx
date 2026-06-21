@@ -10,7 +10,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { Modal, message } from 'antd';
 import React, { cloneElement, useCallback, useState } from 'react';
-import { updateRule } from '@/services/ant-design-pro/rule';
+import { updateRule } from '@/services/ant-design-pro/Rule';
 
 type UpdateFormProps = {
   trigger?: React.ReactElement<any>;
