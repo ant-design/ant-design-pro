@@ -18,7 +18,7 @@ vi.mock('@umijs/max', () => ({
   Link: ({ children }: any) => children,
 }));
 
-vi.mock('@/services/ant-design-pro/api', () => ({
+vi.mock('@/services/ant-design-pro/Api', () => ({
   currentUser: mockQueryCurrentUser,
 }));
 
