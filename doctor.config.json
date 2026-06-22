@@ -16,6 +16,6 @@
       "**/*.css"
     ]
   },
-  "failOn": "error",
+  "blocking": "error",
   "adoptExistingLintConfig": true
 }
