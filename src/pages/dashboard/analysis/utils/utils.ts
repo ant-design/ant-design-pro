@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 type RangePickerValue = RangePickerProps['value'];
 
-export function fixedZero(val: number) {
+function fixedZero(val: number) {
   return val * 1 < 10 ? `0${val}` : val;
 }
 

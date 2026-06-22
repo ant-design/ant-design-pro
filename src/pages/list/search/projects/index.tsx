@@ -12,6 +12,17 @@ import useStyles from './style.style';
 const FormItem = Form.Item;
 const { Paragraph } = Typography;
 const getKey = (id: string, index: number) => `${id}-${index}`;
+const formItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 16,
+    },
+  },
+};
+
 const Projects: FC = () => {
   const { styles } = useStyles();
   const [filters, setFilters] = useState<{
@@ -50,7 +61,7 @@ const Projects: FC = () => {
             cover={<img alt={item.title} src={item.cover} />}
           >
             <Card.Meta
-              title={<a href="#">{item.title}</a>}
+              title={<a href={item.href}>{item.title}</a>}
               description={
                 <Paragraph
                   ellipsis={{
@@ -80,16 +91,6 @@ const Projects: FC = () => {
       )}
     />
   );
-  const formItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 16,
-      },
-    },
-  };
   return (
     <div className={styles.coverCardList}>
       <Card variant="borderless">

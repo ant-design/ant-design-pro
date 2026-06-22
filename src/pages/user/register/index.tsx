@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { history, Link } from '@umijs/max';
 import {
   Button,
@@ -30,6 +30,34 @@ const passwordProgressMap: {
   pass: 'normal',
   poor: 'exception',
 };
+
+const getPasswordStatus = (value?: string) => {
+  if (value && value.length > 9) {
+    return 'ok';
+  }
+  if (value && value.length > 5) {
+    return 'pass';
+  }
+  return 'poor';
+};
+
+const PasswordProgress: React.FC<{
+  value?: string;
+  styles: Record<string, string>;
+}> = ({ value, styles }) => {
+  const passwordStatus = getPasswordStatus(value);
+  return value?.length ? (
+    <div className={styles[`progress-${passwordStatus}`]}>
+      <Progress
+        status={passwordProgressMap[passwordStatus]}
+        size={6}
+        percent={value.length * 10 > 100 ? 100 : value.length * 10}
+        showInfo={false}
+      />
+    </div>
+  ) : null;
+};
+
 const Register: FC = () => {
   const { styles } = useStyles();
   const [count, setCount]: [number, any] = useState(0);
@@ -38,6 +66,7 @@ const Register: FC = () => {
   const [popover, setPopover]: [boolean, any] = useState(false);
   const confirmDirty = false;
   let interval: number | undefined;
+  const queryClient = useQueryClient();
 
   const passwordStatusMap = {
     ok: (
@@ -75,16 +104,6 @@ const Register: FC = () => {
       }
     }, 1000);
   };
-  const getPasswordStatus = () => {
-    const value = form.getFieldValue('password');
-    if (value && value.length > 9) {
-      return 'ok';
-    }
-    if (value && value.length > 5) {
-      return 'pass';
-    }
-    return 'poor';
-  };
   const { isPending: submitting, mutate: register } = useMutation({
     mutationFn: (formValues: Store) => {
       const payload = {
@@ -99,6 +118,7 @@ const Register: FC = () => {
     },
     onSuccess: (data, params) => {
       if (data.status === 'ok') {
+        queryClient.invalidateQueries({ queryKey: ['current-user'] });
         message.success('注册成功！');
         history.push({
           pathname: `/user/register-result?account=${params.mail}`,
@@ -139,22 +159,8 @@ const Register: FC = () => {
   const changePrefix = (value: string) => {
     setPrefix(value);
   };
-  const renderPasswordProgress = () => {
-    const value = form.getFieldValue('password');
-    const passwordStatus = getPasswordStatus();
-    return value?.length ? (
-      <div
-        className={styles[`progress-${passwordStatus}` as keyof typeof styles]}
-      >
-        <Progress
-          status={passwordProgressMap[passwordStatus]}
-          size={6}
-          percent={value.length * 10 > 100 ? 100 : value.length * 10}
-          showInfo={false}
-        />
-      </div>
-    ) : null;
-  };
+  const password = Form.useWatch('password', form);
+  const passwordStatus = getPasswordStatus(password);
   return (
     <div className={styles.main}>
       <h3>注册</h3>
@@ -188,8 +194,8 @@ const Register: FC = () => {
                   padding: '4px 0',
                 }}
               >
-                {passwordStatusMap[getPasswordStatus()]}
-                {renderPasswordProgress()}
+                {passwordStatusMap[passwordStatus]}
+                <PasswordProgress value={password} styles={styles} />
                 <div
                   style={{
                     marginTop: 10,

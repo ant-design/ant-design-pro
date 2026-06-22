@@ -20,14 +20,16 @@ function getActiveData() {
 const ActiveChart = () => {
   const timerRef = useRef<number | null>(null);
   const { styles } = useStyles();
-  const [activeData, setActiveData] = useState<{ x: string; y: number }[]>([]);
+  const [activeData, setActiveData] = useState<{ x: string; y: number }[]>(() =>
+    getActiveData(),
+  );
 
   useEffect(() => {
     const loopData = () => {
       setActiveData(getActiveData());
       timerRef.current = window.setTimeout(loopData, 2000);
     };
-    loopData();
+    timerRef.current = window.setTimeout(loopData, 2000);
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);

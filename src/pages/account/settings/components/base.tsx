@@ -27,6 +27,10 @@ const validatorPhone = (
   callback();
 };
 
+const handleFinish = async () => {
+  message.success('更新基本信息成功');
+};
+
 const BaseView: React.FC = () => {
   const { styles } = useStyles();
 
@@ -44,9 +48,6 @@ const BaseView: React.FC = () => {
       return url;
     }
     return '';
-  };
-  const handleFinish = async () => {
-    message.success('更新基本信息成功');
   };
   return (
     <div className={styles.baseView}>

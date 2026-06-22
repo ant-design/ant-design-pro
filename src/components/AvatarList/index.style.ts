@@ -35,6 +35,12 @@ const useStyles = createStyles(({ token }) => {
         },
       },
     },
+    avatarButton: {
+      padding: 0,
+      border: 0,
+      background: 'transparent',
+      cursor: 'pointer',
+    },
   };
 });
 

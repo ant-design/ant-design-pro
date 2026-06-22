@@ -29,7 +29,7 @@ const Analysis: FC<AnalysisProps> = () => {
   const [salesType, setSalesType] = useState<SalesType>('all');
   const [currentTabKey, setCurrentTabKey] = useState<string>('');
   const [rangePickerValue, setRangePickerValue] = useState<RangePickerValue>(
-    getTimeDistance('year'),
+    () => getTimeDistance('year'),
   );
   const { isLoading: loading, data } = useQuery({
     queryKey: ['dashboard-analysis'],
@@ -71,7 +71,7 @@ const Analysis: FC<AnalysisProps> = () => {
         : data?.salesTypeDataOffline;
   }
 
-  const dropdownGroup = (
+  const renderDropdownGroup = () => (
     <span className={styles.iconGroup}>
       <Dropdown
         menu={{
@@ -128,14 +128,14 @@ const Analysis: FC<AnalysisProps> = () => {
               loading={loading}
               visitData2={data?.visitData2 || []}
               searchData={data?.searchData || []}
-              dropdownGroup={dropdownGroup}
+              renderDropdownGroup={renderDropdownGroup}
             />
           </Suspense>
         </Col>
         <Col xl={12} lg={24} md={24} sm={24} xs={24}>
           <Suspense fallback={null}>
             <ProportionSales
-              dropdownGroup={dropdownGroup}
+              renderDropdownGroup={renderDropdownGroup}
               salesType={salesType}
               loading={loading}
               salesPieData={salesPieData || []}

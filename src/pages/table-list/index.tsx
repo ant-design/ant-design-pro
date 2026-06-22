@@ -58,16 +58,15 @@ const TableList: React.FC = () => {
       dataIndex: 'name',
       render: (dom, entity) => {
         return (
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
+          <Button
+            type="link"
+            onClick={() => {
               setCurrentRow(entity);
               setShowDetail(true);
             }}
           >
             {dom}
-          </a>
+          </Button>
         );
       },
     },
@@ -197,12 +196,12 @@ const TableList: React.FC = () => {
       render: (_, record) => [
         <UpdateForm
           trigger={
-            <a href="#">
+            <Button type="link">
               <FormattedMessage
                 id="pages.searchTable.config"
                 defaultMessage="Configuration"
               />
-            </a>
+            </Button>
           }
           key="config"
           onOk={actionRef.current?.reload}

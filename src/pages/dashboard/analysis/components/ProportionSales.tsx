@@ -7,19 +7,36 @@ import useStyles from '../style.style';
 
 const { Text } = Typography;
 const ProportionSales = ({
-  dropdownGroup,
+  renderDropdownGroup,
   salesType,
   loading,
   salesPieData,
   handleChangeSalesType,
 }: {
   loading: boolean;
-  dropdownGroup: React.ReactNode;
+  renderDropdownGroup: () => React.ReactNode;
   salesType: 'all' | 'online' | 'stores';
   salesPieData: DataItem[];
   handleChangeSalesType?: (value: 'all' | 'online' | 'stores') => void;
 }) => {
   const { styles } = useStyles();
+  const dropdownGroup = renderDropdownGroup();
+  const extra = (
+    <div className={styles.salesCardExtra}>
+      {dropdownGroup}
+      <Segmented
+        className={styles.salesTypeRadio}
+        value={salesType}
+        onChange={handleChangeSalesType}
+        options={[
+          { label: '全部渠道', value: 'all' },
+          { label: '线上', value: 'online' },
+          { label: '门店', value: 'stores' },
+        ]}
+        size="middle"
+      />
+    </div>
+  );
   return (
     <Card
       loading={loading}
@@ -29,22 +46,7 @@ const ProportionSales = ({
       style={{
         height: '100%',
       }}
-      extra={
-        <div className={styles.salesCardExtra}>
-          {dropdownGroup}
-          <Segmented
-            className={styles.salesTypeRadio}
-            value={salesType}
-            onChange={handleChangeSalesType}
-            options={[
-              { label: '全部渠道', value: 'all' },
-              { label: '线上', value: 'online' },
-              { label: '门店', value: 'stores' },
-            ]}
-            size="middle"
-          />
-        </div>
-      }
+      extra={extra}
     >
       <Text>销售额</Text>
       <Pie

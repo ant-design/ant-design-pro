@@ -171,9 +171,9 @@ const BasicList: FC = () => {
           ],
         }}
       >
-        <a href="#">
+        <Button type="link">
           更多 <DownOutlined />
-        </a>
+        </Button>
       </Dropdown>
     );
   };
@@ -229,16 +229,13 @@ const BasicList: FC = () => {
               renderItem={(item) => (
                 <List.Item
                   actions={[
-                    <a
+                    <Button
                       key="edit"
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        showEditModal(item);
-                      }}
+                      type="link"
+                      onClick={() => showEditModal(item)}
                     >
                       编辑
-                    </a>,
+                    </Button>,
                     renderMoreBtn(item),
                   ]}
                 >

@@ -13,6 +13,17 @@ type SettingsState = {
   selectKey: SettingsStateKeys;
 };
 
+const menuMap: Record<string, React.ReactNode> = {
+  base: '基本设置',
+  security: '安全设置',
+  binding: '账号绑定',
+  notification: '新消息通知',
+};
+const menuItems = Object.keys(menuMap).map((item) => ({
+  key: item,
+  label: menuMap[item],
+}));
+
 const SettingsContent: React.FC<{ selectKey: SettingsStateKeys }> = ({
   selectKey,
 }) => {
@@ -32,12 +43,6 @@ const SettingsContent: React.FC<{ selectKey: SettingsStateKeys }> = ({
 
 const Settings: React.FC = () => {
   const { styles } = useStyles();
-  const menuMap: Record<string, React.ReactNode> = {
-    base: '基本设置',
-    security: '安全设置',
-    binding: '账号绑定',
-    notification: '新消息通知',
-  };
   const [initConfig, setInitConfig] = useState<SettingsState>({
     mode: 'inline',
     selectKey: 'base',
@@ -75,12 +80,6 @@ const Settings: React.FC = () => {
       window.removeEventListener('resize', handler);
     };
   }, []);
-  const getMenu = () => {
-    return Object.keys(menuMap).map((item) => ({
-      key: item,
-      label: menuMap[item],
-    }));
-  };
   return (
     <GridContent>
       <div
@@ -101,7 +100,7 @@ const Settings: React.FC = () => {
                 selectKey: key as SettingsStateKeys,
               }));
             }}
-            items={getMenu()}
+            items={menuItems}
           />
         </div>
         <div className={styles.right}>

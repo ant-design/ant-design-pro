@@ -5,7 +5,8 @@ import { formatNumber } from '@/utils/format';
 import type { DataItem } from '../data.d';
 import useStyles from '../style.style';
 import Yuan from '../utils/Yuan';
-import { ChartCard, Field } from './Charts';
+import ChartCard from './Charts/ChartCard';
+import Field from './Charts/Field';
 import Trend from './Trend';
 
 const topColResponsiveProps = {

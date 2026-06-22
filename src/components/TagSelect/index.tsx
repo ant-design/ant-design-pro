@@ -1,6 +1,6 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { useMergedState } from '@rc-component/util';
-import { Tag } from 'antd';
+import { Button, Tag } from 'antd';
 import { clsx } from 'clsx';
 import React, { type FC, useMemo, useState } from 'react';
 import useStyles from './index.style';
@@ -31,6 +31,10 @@ type TagSelectOptionElement = React.ReactElement<
   TagSelectOptionProps,
   typeof TagSelectOption
 >;
+
+const isTagSelectOption = (node: TagSelectOptionElement) =>
+  node?.type &&
+  (node.type.isTagSelectOption || node.type.displayName === 'TagSelectOption');
 
 interface TagSelectProps {
   onChange?: (value: (string | number)[]) => void;
@@ -70,11 +74,6 @@ const TagSelect: FC<TagSelectProps> & {
       onChange: props.onChange,
     },
   );
-
-  const isTagSelectOption = (node: TagSelectOptionElement) =>
-    node?.type &&
-    (node.type.isTagSelectOption ||
-      node.type.displayName === 'TagSelectOption');
 
   // Memoize all tags to avoid recalculating on every render
   const allTags = useMemo(() => {
@@ -136,19 +135,10 @@ const TagSelect: FC<TagSelectProps> & {
           return child;
         })}
       {expandable && (
-        <a
+        <Button
+          type="link"
           className={styles.trigger}
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            setExpand(!expand);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              setExpand(!expand);
-            }
-          }}
+          onClick={() => setExpand((prev) => !prev)}
         >
           {expand ? (
             <>
@@ -160,7 +150,7 @@ const TagSelect: FC<TagSelectProps> & {
               <DownOutlined />
             </>
           )}
-        </a>
+        </Button>
       )}
     </div>
   );

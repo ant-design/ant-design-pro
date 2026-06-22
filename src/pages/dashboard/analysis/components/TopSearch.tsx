@@ -7,17 +7,44 @@ import type { DataItem } from '../data.d';
 import NumberInfo from './NumberInfo';
 import Trend from './Trend';
 
+const renderSearchUserSubtitle = () => (
+  <span>
+    搜索用户数
+    <Tooltip title="指标说明">
+      <InfoCircleOutlined
+        style={{
+          marginLeft: 8,
+        }}
+      />
+    </Tooltip>
+  </span>
+);
+
+const renderAverageSearchSubtitle = () => (
+  <span>
+    人均搜索次数
+    <Tooltip title="指标说明">
+      <InfoCircleOutlined
+        style={{
+          marginLeft: 8,
+        }}
+      />
+    </Tooltip>
+  </span>
+);
+
 const TopSearch = ({
   loading,
   visitData2,
   searchData,
-  dropdownGroup,
+  renderDropdownGroup,
 }: {
   loading: boolean;
   visitData2: DataItem[];
-  dropdownGroup: React.ReactNode;
+  renderDropdownGroup: () => React.ReactNode;
   searchData: DataItem[];
 }) => {
+  const dropdownGroup = renderDropdownGroup();
   const columns = [
     {
       title: '排名',
@@ -92,18 +119,7 @@ const TopSearch = ({
           }}
         >
           <NumberInfo
-            subTitle={
-              <span>
-                搜索用户数
-                <Tooltip title="指标说明">
-                  <InfoCircleOutlined
-                    style={{
-                      marginLeft: 8,
-                    }}
-                  />
-                </Tooltip>
-              </span>
-            }
+            renderSubTitle={renderSearchUserSubtitle}
             gap={8}
             total={formatNumber(12321)}
             status="up"
@@ -131,18 +147,7 @@ const TopSearch = ({
           }}
         >
           <NumberInfo
-            subTitle={
-              <span>
-                人均搜索次数
-                <Tooltip title="指标说明">
-                  <InfoCircleOutlined
-                    style={{
-                      marginLeft: 8,
-                    }}
-                  />
-                </Tooltip>
-              </span>
-            }
+            renderSubTitle={renderAverageSearchSubtitle}
             total={2.7}
             status="down"
             subTotal={26.2}

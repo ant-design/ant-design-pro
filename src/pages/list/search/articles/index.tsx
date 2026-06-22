@@ -18,6 +18,35 @@ import useStyles from './style.style';
 const FormItem = Form.Item;
 
 const pageSize = 5;
+const owners = [
+  {
+    id: 'wzj',
+    name: '我自己',
+  },
+  {
+    id: 'wjh',
+    name: '吴家豪',
+  },
+  {
+    id: 'zxx',
+    name: '周星星',
+  },
+  {
+    id: 'zly',
+    name: '赵丽颖',
+  },
+  {
+    id: 'ym',
+    name: '姚明',
+  },
+];
+const formItemLayout = {
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 24 },
+    md: { span: 12 },
+  },
+};
 
 const IconText: React.FC<{
   type: string;
@@ -81,42 +110,12 @@ const Articles: FC = () => {
   };
 
   const list = data?.list || [];
+  const listItemExtra = <div className={styles.listItemExtra} />;
 
   const setOwner = () => {
     form.setFieldsValue({
       owner: ['wzj'],
     });
-  };
-
-  const owners = [
-    {
-      id: 'wzj',
-      name: '我自己',
-    },
-    {
-      id: 'wjh',
-      name: '吴家豪',
-    },
-    {
-      id: 'zxx',
-      name: '周星星',
-    },
-    {
-      id: 'zly',
-      name: '赵丽颖',
-    },
-    {
-      id: 'ym',
-      name: '姚明',
-    },
-  ];
-
-  const formItemLayout = {
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 24 },
-      md: { span: 12 },
-    },
   };
 
   const loadMoreDom = list.length > 0 && (
@@ -180,22 +179,13 @@ const Articles: FC = () => {
                 options={ownerOptions}
               />
             </FormItem>
-            <a
+            <Button
+              type="link"
               className={styles.selfTrigger}
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                setOwner();
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  setOwner();
-                }
-              }}
+              onClick={setOwner}
             >
               只看自己的
-            </a>
+            </Button>
           </StandardFormRow>
           <StandardFormRow title="其它选项" grid last>
             <Row gutter={16}>
@@ -245,7 +235,6 @@ const Articles: FC = () => {
           loading={loading}
           rowKey="id"
           itemLayout="vertical"
-          loadMore={loadMoreDom}
           dataSource={list}
           renderItem={(item) => (
             <List.Item
@@ -255,7 +244,7 @@ const Articles: FC = () => {
                 <IconText key="like" type="like-o" text={item.like} />,
                 <IconText key="message" type="message" text={item.message} />,
               ]}
-              extra={<div className={styles.listItemExtra} />}
+              extra={listItemExtra}
             >
               <List.Item.Meta
                 title={
@@ -275,6 +264,7 @@ const Articles: FC = () => {
             </List.Item>
           )}
         />
+        {loadMoreDom}
       </Card>
     </>
   );

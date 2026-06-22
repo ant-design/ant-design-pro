@@ -31,38 +31,31 @@ const avatarSizeToClassName = (styles: any, size?: SizeType | 'mini') =>
     [styles.avatarItemMini]: size === 'mini',
   });
 
-const Item: React.FC<AvatarItemProps> = ({
-  src,
-  size,
-  tips,
-  onClick = () => {},
-}) => {
+const Item: React.FC<AvatarItemProps> = ({ src, size, tips, onClick }) => {
   const { styles } = useStyles();
   const cls = avatarSizeToClassName(styles, size);
+  const avatar = tips ? (
+    <Tooltip title={tips}>
+      <Avatar
+        src={src}
+        size={size}
+        style={{
+          cursor: onClick ? 'pointer' : undefined,
+        }}
+      />
+    </Tooltip>
+  ) : (
+    <Avatar src={src} size={size} />
+  );
+
   return (
-    <li
-      className={cls}
-      onClick={onClick}
-      onKeyDown={
-        onClick
-          ? (e) => {
-              if (e.key === 'Enter') onClick();
-            }
-          : undefined
-      }
-    >
-      {tips ? (
-        <Tooltip title={tips}>
-          <Avatar
-            src={src}
-            size={size}
-            style={{
-              cursor: 'pointer',
-            }}
-          />
-        </Tooltip>
+    <li className={cls}>
+      {onClick ? (
+        <button type="button" className={styles.avatarButton} onClick={onClick}>
+          {avatar}
+        </button>
       ) : (
-        <Avatar src={src} size={size} />
+        avatar
       )}
     </li>
   );

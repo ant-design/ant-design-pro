@@ -3,47 +3,47 @@ import {
   DingdingOutlined,
   TaobaoOutlined,
 } from '@ant-design/icons';
-import { List } from 'antd';
+import { Button, List } from 'antd';
 import React from 'react';
 
-const BindingView: React.FC = () => {
-  const getData = () => [
-    {
-      title: '绑定淘宝',
-      description: '当前未绑定淘宝账号',
-      actions: [
-        <a key="Bind" href="#">
-          绑定
-        </a>,
-      ],
-      avatar: <TaobaoOutlined className="taobao" />,
-    },
-    {
-      title: '绑定支付宝',
-      description: '当前未绑定支付宝账号',
-      actions: [
-        <a key="Bind" href="#">
-          绑定
-        </a>,
-      ],
-      avatar: <AlipayOutlined className="alipay" />,
-    },
-    {
-      title: '绑定钉钉',
-      description: '当前未绑定钉钉账号',
-      actions: [
-        <a key="Bind" href="#">
-          绑定
-        </a>,
-      ],
-      avatar: <DingdingOutlined className="dingding" />,
-    },
-  ];
+const bindingData = [
+  {
+    title: '绑定淘宝',
+    description: '当前未绑定淘宝账号',
+    actions: [
+      <Button key="Bind" type="link">
+        绑定
+      </Button>,
+    ],
+    avatar: <TaobaoOutlined className="taobao" />,
+  },
+  {
+    title: '绑定支付宝',
+    description: '当前未绑定支付宝账号',
+    actions: [
+      <Button key="Bind" type="link">
+        绑定
+      </Button>,
+    ],
+    avatar: <AlipayOutlined className="alipay" />,
+  },
+  {
+    title: '绑定钉钉',
+    description: '当前未绑定钉钉账号',
+    actions: [
+      <Button key="Bind" type="link">
+        绑定
+      </Button>,
+    ],
+    avatar: <DingdingOutlined className="dingding" />,
+  },
+];
 
+const BindingView: React.FC = () => {
   return (
     <List
       itemLayout="horizontal"
-      dataSource={getData()}
+      dataSource={bindingData}
       renderItem={(item) => (
         <List.Item actions={item.actions}>
           <List.Item.Meta

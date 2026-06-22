@@ -14,24 +14,46 @@ type GlobalHeaderRightProps = {
   children?: React.ReactNode;
 };
 
+const menuItems: MenuProps['items'] = [
+  {
+    key: 'settings',
+    icon: <SettingOutlined />,
+    label: '个人设置',
+  },
+  {
+    key: 'theme',
+    icon: <SkinOutlined />,
+    label: '主题设置',
+  },
+  {
+    type: 'divider' as const,
+  },
+  {
+    key: 'logout',
+    icon: <LogoutOutlined />,
+    label: '退出登录',
+  },
+];
+
+const loginOut = async () => {
+  await outLogin();
+  const { search, pathname } = window.location;
+  const urlParams = new URL(window.location.href).searchParams;
+  const searchParams = new URLSearchParams({
+    redirect: pathname + search,
+  });
+  const redirect = urlParams.get('redirect');
+  if (window.location.pathname !== '/user/login' && !redirect) {
+    history.replace({
+      pathname: '/user/login',
+      search: searchParams.toString(),
+    });
+  }
+};
+
 export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
   children,
 }) => {
-  const loginOut = async () => {
-    await outLogin();
-    const { search, pathname } = window.location;
-    const urlParams = new URL(window.location.href).searchParams;
-    const searchParams = new URLSearchParams({
-      redirect: pathname + search,
-    });
-    const redirect = urlParams.get('redirect');
-    if (window.location.pathname !== '/user/login' && !redirect) {
-      history.replace({
-        pathname: '/user/login',
-        search: searchParams.toString(),
-      });
-    }
-  };
   const { initialState, setInitialState } = useModel('@@initialState');
 
   const onMenuClick: MenuProps['onClick'] = (event) => {
@@ -59,27 +81,6 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
   if (!currentUser) {
     return <Spin size="small" />;
   }
-
-  const menuItems: MenuProps['items'] = [
-    {
-      key: 'settings',
-      icon: <SettingOutlined />,
-      label: '个人设置',
-    },
-    {
-      key: 'theme',
-      icon: <SkinOutlined />,
-      label: '主题设置',
-    },
-    {
-      type: 'divider' as const,
-    },
-    {
-      key: 'logout',
-      icon: <LogoutOutlined />,
-      label: '退出登录',
-    },
-  ];
 
   return (
     <HeaderDropdown

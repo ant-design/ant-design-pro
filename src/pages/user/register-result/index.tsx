@@ -9,11 +9,9 @@ const RegisterResult: React.FC<Record<string, unknown>> = () => {
 
   const actions = (
     <div className={styles.actions}>
-      <a href="#">
-        <Button size="large" type="primary">
-          <span>查看邮箱</span>
-        </Button>
-      </a>
+      <Button size="large" type="primary">
+        <span>查看邮箱</span>
+      </Button>
       <Link to="/" prefetch>
         <Button size="large">返回首页</Button>
       </Link>

@@ -7,6 +7,8 @@ import { queryFakeList } from './service';
 import useStyles from './style.style';
 
 const { Paragraph } = Typography;
+const nullData: Partial<CardListItemDataType> = {};
+
 const CardList = () => {
   const { styles } = useStyles();
   const { data, isLoading: loading } = useQuery({
@@ -22,21 +24,21 @@ const CardList = () => {
         提供跨越设计与开发的体验解决方案。
       </p>
       <div className={styles.contentLink}>
-        <a href="#">
+        <a href="https://pro.ant.design/zh-CN/docs/getting-started">
           <img
             alt=""
             src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
           />{' '}
           快速开始
         </a>
-        <a href="#">
+        <a href="https://pro.ant.design/zh-CN/docs/introduction">
           <img
             alt=""
             src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
           />{' '}
           产品简介
         </a>
-        <a href="#">
+        <a href="https://pro.ant.design/zh-CN/docs/overview">
           <img
             alt=""
             src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
@@ -54,7 +56,6 @@ const CardList = () => {
       />
     </div>
   );
-  const nullData: Partial<CardListItemDataType> = {};
   return (
     <PageContainer content={content} extraContent={extraContent}>
       <div className={styles.cardList}>
@@ -79,12 +80,12 @@ const CardList = () => {
                     hoverable
                     className={styles.card}
                     actions={[
-                      <a key="option1" href="#">
+                      <Button key="option1" type="link">
                         操作一
-                      </a>,
-                      <a key="option2" href="#">
+                      </Button>,
+                      <Button key="option2" type="link">
                         操作二
-                      </a>,
+                      </Button>,
                     ]}
                   >
                     <Card.Meta
@@ -95,7 +96,7 @@ const CardList = () => {
                           src={item.avatar}
                         />
                       }
-                      title={<a href="#">{item.title}</a>}
+                      title={<a href={item.href}>{item.title}</a>}
                       description={
                         <Paragraph
                           className={styles.item}
