@@ -118,7 +118,7 @@ const Workplace: FC = () => {
           avatar={<Avatar src={item.user.avatar} />}
           title={
             <span>
-              <a className={styles.username} href={item.user.link}>
+              <a className={styles.username} href={item.user.link || '/'}>
                 {item.user.name}
               </a>
               &nbsp;

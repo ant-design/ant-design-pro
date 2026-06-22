@@ -28,6 +28,7 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
 }) => {
   const { styles } = useStyles();
   const subTitleNode = renderSubTitle?.() ?? subTitle;
+  const hasSubTitle = subTitleNode !== null && subTitleNode !== undefined;
   return (
     <div
       className={clsx({
@@ -43,7 +44,7 @@ const NumberInfo: React.FC<NumberInfoProps> = ({
           {title}
         </div>
       )}
-      {subTitleNode && (
+      {hasSubTitle && (
         <div
           className={styles.numberInfoSubTitle}
           title={typeof subTitleNode === 'string' ? subTitleNode : ''}

@@ -36,7 +36,11 @@ const menuItems: MenuProps['items'] = [
 ];
 
 const loginOut = async () => {
-  await outLogin();
+  try {
+    await outLogin();
+  } catch {
+    // Local logout has already cleared user state; redirect should still proceed.
+  }
   const { search, pathname } = window.location;
   const urlParams = new URL(window.location.href).searchParams;
   const searchParams = new URLSearchParams({

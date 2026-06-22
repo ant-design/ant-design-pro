@@ -14,7 +14,7 @@ vi.mock('@ant-design/pro-components', () => ({
   ProForm: ({ children, onFinish }: any) => (
     <div data-testid="pro-form">
       {children}
-      <button type="button" onClick={() => onFinish?.()}>
+      <button type="button" onClick={() => onFinish?.({})}>
         提交
       </button>
     </div>
@@ -141,7 +141,7 @@ describe('BasicForm', () => {
     submitButton.click();
 
     await waitFor(() => {
-      expect(mockSubmit).toHaveBeenCalled();
+      expect(mockSubmit.mock.calls[0]?.[0]).toEqual({});
     });
   });
 

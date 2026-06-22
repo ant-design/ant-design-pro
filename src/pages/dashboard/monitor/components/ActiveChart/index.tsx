@@ -29,6 +29,7 @@ const ActiveChart = () => {
       setActiveData(getActiveData());
       timerRef.current = window.setTimeout(loopData, 2000);
     };
+    // Initial data is already created lazily; start the refresh cadence after one interval.
     timerRef.current = window.setTimeout(loopData, 2000);
     return () => {
       if (timerRef.current) {

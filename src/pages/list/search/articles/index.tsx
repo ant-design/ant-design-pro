@@ -113,9 +113,15 @@ const Articles: FC = () => {
   const listItemExtra = <div className={styles.listItemExtra} />;
 
   const setOwner = () => {
+    const owner = ['wzj'];
     form.setFieldsValue({
-      owner: ['wzj'],
+      owner,
     });
+    filtersRef.current = {
+      ...filtersRef.current,
+      owner,
+    };
+    refetch();
   };
 
   const loadMoreDom = list.length > 0 && (
