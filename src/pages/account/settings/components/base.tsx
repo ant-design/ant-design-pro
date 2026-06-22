@@ -27,9 +27,13 @@ const validatorPhone = (
   callback();
 };
 
-const handleFinish = async () => {
-  message.success('更新基本信息成功');
-};
+const toSelectValue = (item?: { label?: string; key?: string }) =>
+  item
+    ? {
+        label: item.label,
+        value: item.key,
+      }
+    : undefined;
 
 const BaseView: React.FC = () => {
   const { styles } = useStyles();
@@ -49,6 +53,9 @@ const BaseView: React.FC = () => {
     }
     return '';
   };
+  const handleFinish = async () => {
+    message.success('更新基本信息成功');
+  };
   return (
     <div className={styles.baseView}>
       {loading ? null : (
@@ -65,6 +72,8 @@ const BaseView: React.FC = () => {
               }}
               initialValues={{
                 ...currentUser,
+                province: toSelectValue(currentUser?.geographic?.province),
+                city: toSelectValue(currentUser?.geographic?.city),
                 phone: currentUser?.phone?.split('-'),
               }}
               requiredMark={false}
@@ -134,7 +143,7 @@ const BaseView: React.FC = () => {
                   }}
                   name="province"
                   request={async () => {
-                    return queryProvince().then(({ data }) => {
+                    return queryProvince().then((data) => {
                       return data.map((item) => {
                         return {
                           label: item.name,
@@ -159,21 +168,22 @@ const BaseView: React.FC = () => {
                             message: '请输入您的所在城市!',
                           },
                         ]}
+                        fieldProps={{
+                          labelInValue: true,
+                        }}
                         disabled={!province}
                         request={async () => {
-                          if (!province?.key) {
+                          if (!province?.value) {
                             return [];
                           }
-                          return queryCity(province.key || '').then(
-                            ({ data }) => {
-                              return data.map((item) => {
-                                return {
-                                  label: item.name,
-                                  value: item.id,
-                                };
-                              });
-                            },
-                          );
+                          return queryCity(province.value).then((data) => {
+                            return data.map((item) => {
+                              return {
+                                label: item.name,
+                                value: item.id,
+                              };
+                            });
+                          });
                         }}
                       />
                     );

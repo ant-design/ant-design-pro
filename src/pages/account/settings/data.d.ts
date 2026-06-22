@@ -9,8 +9,14 @@ export type GeographicItemType = {
 };
 
 export type GeographicType = {
-  province: GeographicItemType;
-  city: GeographicItemType;
+  province: {
+    label: string;
+    key: string;
+  };
+  city: {
+    label: string;
+    key: string;
+  };
 };
 
 export type NoticeType = {
