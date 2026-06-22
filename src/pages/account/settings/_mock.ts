@@ -1,19 +1,19 @@
 import type { Request, Response } from 'express';
 import { defaultUser } from '../../../../mock/utils';
-
-const city = require('./geographic/city.json');
-const province = require('./geographic/province.json');
+import { getCityOptions, provinceOptions } from '../../../utils/chinaDivision';
 
 function getProvince(_: Request, res: Response) {
   return res.json({
-    data: province,
+    data: provinceOptions,
   });
 }
 
 function getCity(req: Request, res: Response) {
   const provinceKey = req.params.province;
   return res.json({
-    data: city[provinceKey as keyof typeof city],
+    data: getCityOptions(
+      Array.isArray(provinceKey) ? provinceKey[0] : provinceKey,
+    ),
   });
 }
 

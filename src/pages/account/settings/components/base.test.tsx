@@ -5,15 +5,31 @@ import * as service from '../service';
 import BaseView from './base';
 
 const mocks = vi.hoisted(() => ({
+  form: {
+    setFieldValue: vi.fn(),
+  },
   initialValues: undefined as Record<string, any> | undefined,
+  onValuesChange: undefined as
+    | ((changedValues: Record<string, unknown>) => void)
+    | undefined,
+  dependencyProvince: { label: '浙江省', value: '330000' },
   requestResults: {} as Record<string, any>,
 }));
 
 vi.mock('@ant-design/pro-components', async () => {
   const React = await import('react');
 
-  const ProForm = ({ children, initialValues }: any) => {
+  const ProForm = ({
+    children,
+    formRef,
+    initialValues,
+    onValuesChange,
+  }: any) => {
+    if (formRef) {
+      formRef.current = mocks.form;
+    }
     mocks.initialValues = initialValues;
+    mocks.onValuesChange = onValuesChange;
     return <form>{children}</form>;
   };
 
@@ -22,15 +38,15 @@ vi.mock('@ant-design/pro-components', async () => {
   return {
     ProForm,
     ProFormDependency: ({ children }: any) => (
-      <div>{children({ province: { label: '浙江省', value: '330000' } })}</div>
+      <div>{children({ province: mocks.dependencyProvince })}</div>
     ),
     ProFormFieldSet: ({ children }: any) => <div>{children}</div>,
-    ProFormSelect: ({ name, request }: any) => {
+    ProFormSelect: ({ name, params, request }: any) => {
       React.useEffect(() => {
-        request?.().then((result: any) => {
+        request?.(params).then((result: any) => {
           mocks.requestResults[name] = result;
         });
-      }, [name, request]);
+      }, [name, params, request]);
       return <div />;
     },
     ProFormText: () => <div />,
@@ -82,6 +98,8 @@ describe('BaseView geographic selects', () => {
       },
     });
     mocks.initialValues = undefined;
+    mocks.onValuesChange = undefined;
+    mocks.dependencyProvince = { label: '浙江省', value: '330000' };
     mocks.requestResults = {};
     vi.clearAllMocks();
 
@@ -108,10 +126,10 @@ describe('BaseView geographic selects', () => {
       },
     });
     vi.mocked(service.queryProvince).mockResolvedValue([
-      { id: '330000', name: '浙江省' },
+      { key: '330000', label: '浙江省' },
     ]);
     vi.mocked(service.queryCity).mockResolvedValue([
-      { id: '330100', name: '杭州市' },
+      { key: '330100', label: '杭州市' },
     ]);
   });
 
@@ -134,6 +152,43 @@ describe('BaseView geographic selects', () => {
     });
   });
 
+  it('does not set incomplete geographic initial values', async () => {
+    vi.mocked(service.queryCurrent).mockResolvedValue({
+      data: {
+        address: '西湖区工专路 77 号',
+        avatar: '',
+        country: 'China',
+        email: 'antdesign@alipay.com',
+        geographic: {
+          province: { label: '浙江省' },
+          city: { label: '杭州市' },
+        },
+        group: '',
+        name: 'Ant Design',
+        notice: [],
+        notifyCount: 0,
+        phone: '0752-268888888',
+        signature: '',
+        tags: [],
+        title: '',
+        unreadCount: 0,
+        userid: '00000001',
+      } as any,
+    });
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BaseView />
+      </QueryClientProvider>,
+    );
+
+    await waitFor(() => {
+      expect(mocks.initialValues?.name).toBe('Ant Design');
+      expect(mocks.initialValues?.province).toBeUndefined();
+      expect(mocks.initialValues?.city).toBeUndefined();
+    });
+  });
+
   it('loads cities with the selected province value', async () => {
     render(
       <QueryClientProvider client={queryClient}>
@@ -144,6 +199,24 @@ describe('BaseView geographic selects', () => {
     await waitFor(() => {
       expect(service.queryCity).toHaveBeenCalledWith('330000');
     });
+  });
+
+  it('clears city when province changes', async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BaseView />
+      </QueryClientProvider>,
+    );
+
+    await waitFor(() => {
+      expect(mocks.onValuesChange).toBeTypeOf('function');
+    });
+
+    mocks.onValuesChange?.({
+      province: { label: '河北省', value: '130000' },
+    });
+
+    expect(mocks.form.setFieldValue).toHaveBeenCalledWith('city', undefined);
   });
 
   it('returns label/value option arrays for geographic selects', async () => {
@@ -160,6 +233,49 @@ describe('BaseView geographic selects', () => {
       expect(mocks.requestResults.city).toEqual([
         { label: '杭州市', value: '330100' },
       ]);
+    });
+  });
+
+  it('supports local mock name/id geographic responses', async () => {
+    vi.mocked(service.queryProvince).mockResolvedValue([
+      { id: '440000', name: '广东省' },
+    ]);
+    vi.mocked(service.queryCity).mockResolvedValue([
+      { id: '440300', name: '深圳市' },
+    ]);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BaseView />
+      </QueryClientProvider>,
+    );
+
+    await waitFor(() => {
+      expect(mocks.requestResults.province).toEqual([
+        { label: '广东省', value: '440000' },
+      ]);
+      expect(mocks.requestResults.city).toEqual([
+        { label: '深圳市', value: '440300' },
+      ]);
+    });
+  });
+
+  it('falls back to local city options when remote city data is empty', async () => {
+    mocks.dependencyProvince = { label: '江苏省', value: '320000' };
+    vi.mocked(service.queryCity).mockResolvedValue([]);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BaseView />
+      </QueryClientProvider>,
+    );
+
+    await waitFor(() => {
+      expect(service.queryCity).toHaveBeenCalledWith('320000');
+      expect(mocks.requestResults.city).toContainEqual({
+        label: '南京市',
+        value: '320100',
+      });
     });
   });
 });

@@ -4,8 +4,10 @@ export type TagType = {
 };
 
 export type GeographicItemType = {
-  name: string;
-  id: string;
+  name?: string;
+  id?: string;
+  label?: string;
+  key?: string;
 };
 
 export type GeographicType = {

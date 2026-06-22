@@ -45,6 +45,7 @@
     "@tanstack/react-query": "^5.101.0",
     "antd": "^6.4.3",
     "antd-style": "^4.1.0",
+    "china-division": "^2.7.0",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
     "dayjs": "^1.11.20",

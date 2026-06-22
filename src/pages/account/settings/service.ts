@@ -12,7 +12,9 @@ export async function queryProvince(): Promise<GeographicItemType[]> {
 export async function queryCity(
   province: string,
 ): Promise<GeographicItemType[]> {
-  return request(`/api/geographic/city/${province}`).then(({ data }) => data);
+  return request(`/api/geographic/city/${encodeURIComponent(province)}`).then(
+    ({ data }) => data,
+  );
 }
 
 export async function query() {
