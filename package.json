@@ -57,7 +57,7 @@
   "devDependencies": {
     "@ant-design/cli": "^6.4.5",
     "@biomejs/biome": "^2.5.0",
-    "@commitlint/cli": "^21.0.0",
+    "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.0.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
