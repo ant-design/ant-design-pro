@@ -1,0 +1,179 @@
+name: Ant Design CLI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: antd-cli-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  antd-cli:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Run Ant Design CLI checks
+        id: antd-cli
+        shell: bash
+        run: |
+          set +e
+          set -o pipefail
+
+          mkdir -p artifacts/antd-cli
+
+          npx antd doctor --format json 2>&1 | tee artifacts/antd-cli/doctor.out
+          doctor_status=${PIPESTATUS[0]}
+
+          npx antd lint ./src --format json 2>&1 | tee artifacts/antd-cli/lint.out
+          lint_status=${PIPESTATUS[0]}
+
+          npx antd usage ./src --format json 2>&1 | tee artifacts/antd-cli/usage.out
+          usage_status=${PIPESTATUS[0]}
+
+          {
+            echo "doctor_status=${doctor_status}"
+            echo "lint_status=${lint_status}"
+            echo "usage_status=${usage_status}"
+          } >> "$GITHUB_OUTPUT"
+
+          if [ "$doctor_status" -ne 0 ] || [ "$lint_status" -ne 0 ] || [ "$usage_status" -ne 0 ]; then
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "failed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Generate Ant Design CLI summary
+        shell: bash
+        env:
+          DOCTOR_STATUS: ${{ steps.antd-cli.outputs.doctor_status }}
+          LINT_STATUS: ${{ steps.antd-cli.outputs.lint_status }}
+          USAGE_STATUS: ${{ steps.antd-cli.outputs.usage_status }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+
+          const artifactDir = 'artifacts/antd-cli';
+
+          function readOutput(name) {
+            return fs.readFileSync(path.join(artifactDir, `${name}.out`), 'utf8');
+          }
+
+          function extractJson(text) {
+            const start = text.indexOf('{');
+            if (start === -1) {
+              return null;
+            }
+
+            let depth = 0;
+            let inString = false;
+            let escaped = false;
+
+            for (let index = start; index < text.length; index += 1) {
+              const char = text[index];
+
+              if (inString) {
+                if (escaped) {
+                  escaped = false;
+                } else if (char === '\\') {
+                  escaped = true;
+                } else if (char === '"') {
+                  inString = false;
+                }
+                continue;
+              }
+
+              if (char === '"') {
+                inString = true;
+              } else if (char === '{') {
+                depth += 1;
+              } else if (char === '}') {
+                depth -= 1;
+                if (depth === 0) {
+                  return JSON.parse(text.slice(start, index + 1));
+                }
+              }
+            }
+
+            return null;
+          }
+
+          function statusText(status) {
+            return status === '0' ? `pass (${status})` : `fail (${status ?? 'unknown'})`;
+          }
+
+          function row(label, status, summary) {
+            return `| ${label} | \`${statusText(status)}\` | ${summary} |`;
+          }
+
+          const doctor = extractJson(readOutput('doctor'));
+          const lint = extractJson(readOutput('lint'));
+          const usage = extractJson(readOutput('usage'));
+
+          const doctorSummary = doctor?.summary
+            ? `${doctor.summary.pass} pass, ${doctor.summary.warn} warn, ${doctor.summary.fail} fail`
+            : 'No structured summary found';
+          const lintSummary = lint?.summary
+            ? `${lint.summary.total} issues (${lint.summary.deprecated} deprecated, ${lint.summary.a11y} a11y, ${lint.summary.usage} usage, ${lint.summary.performance} performance)`
+            : 'No structured summary found';
+          const usageSummary = usage?.summary
+            ? `${usage.scanned} files, ${usage.summary.totalComponents} components, ${usage.summary.totalImports} imports`
+            : 'No structured summary found';
+
+          const body = [
+            '<!-- antd-cli-results -->',
+            '## Ant Design CLI Results',
+            '',
+            '| Check | Exit Code | Summary |',
+            '| --- | --- | --- |',
+            row('`antd doctor`', process.env.DOCTOR_STATUS, doctorSummary),
+            row('`antd lint ./src`', process.env.LINT_STATUS, lintSummary),
+            row('`antd usage ./src`', process.env.USAGE_STATUS, usageSummary),
+            '',
+            `Commit: \`${process.env.GITHUB_SHA}\``,
+            `Workflow run: https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`,
+          ].join('\n');
+
+          fs.writeFileSync(path.join(artifactDir, 'comment.md'), `${body}\n`);
+
+          if (process.env.GITHUB_STEP_SUMMARY) {
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${body}\n`);
+          }
+          NODE
+      - name: Comment Ant Design CLI results
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          body="$(cat artifacts/antd-cli/comment.md)"
+          comment_id="$(
+            gh api "repos/${REPO}/issues/${PR_NUMBER}/comments" \
+              --jq '.[] | select(.user.type == "Bot" and (.body | contains("<!-- antd-cli-results -->"))) | .id' \
+              | tail -n 1
+          )"
+
+          if [ -n "$comment_id" ]; then
+            gh api --method PATCH "repos/${REPO}/issues/comments/${comment_id}" -f body="$body" > /dev/null
+          else
+            gh api --method POST "repos/${REPO}/issues/${PR_NUMBER}/comments" -f body="$body" > /dev/null
+          fi
+      - name: Fail on Ant Design CLI errors
+        if: steps.antd-cli.outputs.failed == 'true'
+        run: exit 1

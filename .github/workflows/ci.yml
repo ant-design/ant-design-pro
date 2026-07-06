@@ -16,7 +16,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run biome:lint
-      - run: npx antd lint ./src
 
   tsc:
     runs-on: ubuntu-latest
