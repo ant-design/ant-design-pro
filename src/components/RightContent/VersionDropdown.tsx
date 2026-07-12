@@ -5,10 +5,10 @@ import HeaderDropdown from '../HeaderDropdown';
 import useHeaderActionStyles from './style';
 
 const versionItems: MenuProps['items'] = [
-  { key: 'https://v5.pro.ant.design', label: 'v5' },
-  { key: 'https://v4.pro.ant.design', label: 'v4' },
-  { key: 'https://v2.pro.ant.design', label: 'v2' },
-  { key: 'https://v1.pro.ant.design', label: 'v1' },
+  { key: 'https://v5-pro.ant.design', label: 'v5' },
+  { key: 'https://v4-pro.ant.design', label: 'v4' },
+  { key: 'https://v2-pro.ant.design', label: 'v2' },
+  { key: 'https://v1-pro.ant.design', label: 'v1' },
 ];
 
 const onVersionClick: MenuProps['onClick'] = ({ key }) => {
