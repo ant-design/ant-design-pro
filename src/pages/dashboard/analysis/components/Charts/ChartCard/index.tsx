@@ -1,4 +1,3 @@
-import omit from '@rc-component/util/es/omit';
 import { Card } from 'antd';
 import type { CardProps } from 'antd/es/card';
 import { clsx } from 'clsx';
@@ -87,8 +86,13 @@ const ChartCardContent: React.FC<
 
 const ChartCard: React.FC<ChartCardProps> = (props) => {
   const { styles } = useStyles();
-  const { loading = false, ...rest } = props;
-  const cardProps = omit(rest, ['total', 'contentHeight', 'action']);
+  const {
+    loading = false,
+    total: _total,
+    contentHeight: _contentHeight,
+    action: _action,
+    ...cardProps
+  } = props;
   return (
     <Card
       loading={loading}
