@@ -21,9 +21,7 @@ type OperationModalProps = {
 const OperationModal: FC<OperationModalProps> = (props) => {
   const { styles } = useStyles();
   const { done, open, current, onDone, onSubmit, children } = props;
-  if (!open) {
-    return null;
-  }
+
   return (
     <ModalForm<BasicListItemDataType>
       open={open}
@@ -41,11 +39,13 @@ const OperationModal: FC<OperationModalProps> = (props) => {
       modalProps={{
         onCancel: () => onDone(),
         destroyOnHidden: true,
-        bodyStyle: done
-          ? {
-              padding: '72px 0',
-            }
-          : {},
+        styles: {
+          body: done
+            ? {
+                padding: '72px',
+              }
+            : undefined,
+        },
       }}
     >
       {!done ? (
