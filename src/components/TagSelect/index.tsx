@@ -71,7 +71,7 @@ const TagSelect: FC<TagSelectProps> & {
   const value = props.value ?? innerValue;
   const setValue = (nextValue: (string | number)[]) => {
     if (props.value === undefined) {
-      setInnerValue(nextValue);
+      setInnerValue(() => nextValue);
     }
     props.onChange?.(nextValue);
   };
