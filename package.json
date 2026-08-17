@@ -93,8 +93,22 @@
   },
   "overrides": {
     "@umijs/plugins": {
-      "@ant-design/pro-components": "$@ant-design/pro-components"
-    }
+      "@ant-design/pro-components": "$@ant-design/pro-components",
+      "axios": "^1.19.0"
+    },
+    "@umijs/lint": {
+      "@babel/core": "^7.29.6"
+    },
+    "@utoo/pack": {
+      "send": "^0.19.0"
+    },
+    "dva-immer": {
+      "immer": "^9.0.6"
+    },
+    "cosmiconfig": {
+      "js-yaml": "^4.3.1"
+    },
+    "postcss": "^8.5.23"
   },
   "engines": {
     "node": ">=22.0.0"
