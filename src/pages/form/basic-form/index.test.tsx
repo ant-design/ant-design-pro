@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { render } from 'vitest-browser-react';
 import * as service from './service';
 
 // Mock ProComponents
@@ -95,8 +95,8 @@ describe('BasicForm', () => {
     vi.clearAllMocks();
   });
 
-  it('should render without crashing', () => {
-    const { container } = render(
+  it('should render without crashing', async () => {
+    const { container } = await render(
       <QueryClientProvider client={queryClient}>
         <BasicForm />
       </QueryClientProvider>,
@@ -105,53 +105,57 @@ describe('BasicForm', () => {
     expect(container).toBeTruthy();
   });
 
-  it('should render form fields', () => {
-    render(
+  it('should render form fields', async () => {
+    const view = await render(
       <QueryClientProvider client={queryClient}>
         <BasicForm />
       </QueryClientProvider>,
     );
 
-    expect(screen.getByText('标题')).toBeInTheDocument();
-    expect(screen.getByText('起止日期')).toBeInTheDocument();
-    expect(screen.getByText('目标描述')).toBeInTheDocument();
+    await expect.element(view.getByText('标题')).toBeInTheDocument();
+    await expect.element(view.getByText('起止日期')).toBeInTheDocument();
+    await expect.element(view.getByText('目标描述')).toBeInTheDocument();
   });
 
-  it('should have submit button', () => {
-    render(
+  it('should have submit button', async () => {
+    const view = await render(
       <QueryClientProvider client={queryClient}>
         <BasicForm />
       </QueryClientProvider>,
     );
 
-    expect(screen.getByRole('button', { name: /提交/i })).toBeInTheDocument();
+    await expect
+      .element(view.getByRole('button', { name: /提交/i }))
+      .toBeInTheDocument();
   });
 
   it('should call fakeSubmitForm on successful submission', async () => {
     const mockSubmit = vi.mocked(service.fakeSubmitForm);
     mockSubmit.mockResolvedValue({ success: true });
 
-    render(
+    const view = await render(
       <QueryClientProvider client={queryClient}>
         <BasicForm />
       </QueryClientProvider>,
     );
 
-    const submitButton = screen.getByRole('button', { name: /提交/i });
-    submitButton.click();
+    const submitButton = view.getByRole('button', { name: /提交/i });
+    await submitButton.click();
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(mockSubmit.mock.calls[0]?.[0]).toEqual({});
     });
   });
 
-  it('should render within PageContainer', () => {
-    render(
+  it('should render within PageContainer', async () => {
+    const view = await render(
       <QueryClientProvider client={queryClient}>
         <BasicForm />
       </QueryClientProvider>,
     );
 
-    expect(screen.getByTestId('page-container')).toBeInTheDocument();
+    await expect
+      .element(view.getByTestId('page-container'))
+      .toBeInTheDocument();
   });
 });

@@ -1,8 +1,8 @@
-﻿// @ts-ignore
-import { startMock } from '@@/requestRecordMock';
+﻿import { startMock } from '@@/requestRecordMock';
 import { TestBrowser } from '@@/testBrowser';
-import { fireEvent, render } from '@testing-library/react';
 import React, { act } from 'react';
+import { expect } from 'vitest';
+import { render } from 'vitest-browser-react';
 
 let server: {
   close: () => void;
@@ -22,7 +22,7 @@ describe('Login Page', () => {
 
   it('should show login form', async () => {
     const historyRef = React.createRef<any>();
-    const rootContainer = render(
+    const rootContainer = await render(
       <TestBrowser
         historyRef={historyRef}
         location={{
@@ -31,7 +31,9 @@ describe('Login Page', () => {
       />,
     );
 
-    await rootContainer.findAllByText('Ant Design');
+    await expect
+      .element(rootContainer.getByText('Ant Design'))
+      .toBeInTheDocument();
 
     act(() => {
       historyRef.current?.push('/user/login');
@@ -46,12 +48,12 @@ describe('Login Page', () => {
 
     expect(rootContainer.asFragment()).toMatchSnapshot();
 
-    rootContainer.unmount();
+    await rootContainer.unmount();
   });
 
   it('should login success', async () => {
     const historyRef = React.createRef<any>();
-    const rootContainer = render(
+    const rootContainer = await render(
       <TestBrowser
         historyRef={historyRef}
         location={{
@@ -60,33 +62,29 @@ describe('Login Page', () => {
       />,
     );
 
-    await rootContainer.findAllByText('Ant Design');
+    await expect
+      .element(rootContainer.getByText('Ant Design'))
+      .toBeInTheDocument();
 
-    const userNameInput = await rootContainer.findByPlaceholderText(
+    const userNameInput = rootContainer.getByPlaceholder(
       'Username: admin or user',
     );
+    await userNameInput.fill('admin');
 
-    act(() => {
-      fireEvent.change(userNameInput, { target: { value: 'admin' } });
-    });
-
-    const passwordInput = await rootContainer.findByPlaceholderText(
+    const passwordInput = rootContainer.getByPlaceholder(
       'Password: ant.design',
     );
+    await passwordInput.fill('ant.design');
 
-    act(() => {
-      fireEvent.change(passwordInput, { target: { value: 'ant.design' } });
-    });
-
-    await (await rootContainer.findByText('Login')).click();
+    await rootContainer.getByText('Login').click();
 
     // Wait for login to succeed and navigate to home page
-    await rootContainer.findByText(/Ant Design Pro/, undefined, {
-      timeout: 10000,
-    });
+    await expect
+      .element(rootContainer.getByText(/Ant Design Pro/))
+      .toBeInTheDocument();
 
     expect(rootContainer.asFragment()).toMatchSnapshot();
 
-    rootContainer.unmount();
+    await rootContainer.unmount();
   });
 });

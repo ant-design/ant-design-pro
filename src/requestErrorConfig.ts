@@ -3,7 +3,7 @@ import type { RequestConfig } from '@umijs/max';
 import { getIntl } from '@umijs/max';
 import { message, notification } from 'antd';
 
-// 错误处理方案： 错误类型
+// 错误处理方案：错误类型
 enum ErrorShowType {
   SILENT = 0,
   WARN_MESSAGE = 1,
@@ -22,11 +22,11 @@ interface ResponseStructure {
 
 /**
  * @name 错误处理
- * pro 自带的错误处理， 可以在这里做自己的改动
+ * pro 自带的错误处理，可以在这里做自己的改动
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const errorConfig: RequestConfig = {
-  // 错误处理： umi@3 的错误处理方案。
+  // 错误处理：umi@3 的错误处理方案。
   errorConfig: {
     // 错误抛出
     errorThrower: (res) => {
@@ -64,7 +64,11 @@ export const errorConfig: RequestConfig = {
               });
               break;
             case ErrorShowType.REDIRECT:
-              window.location.href = '/user/login';
+              if (typeof opts?.onRedirect === 'function') {
+                opts.onRedirect('/user/login');
+              } else {
+                window.location.assign('/user/login');
+              }
               break;
             default:
               message.error(errorMessage);

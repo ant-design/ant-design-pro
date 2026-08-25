@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom/vitest';
 import { vi } from 'vitest';
 
 const store: Record<string, string> = {};
@@ -18,7 +17,9 @@ const localStorageMock = {
   }),
 };
 
-globalThis.localStorage = localStorageMock as unknown as Storage;
+if (typeof globalThis.localStorage === 'undefined') {
+  globalThis.localStorage = localStorageMock as unknown as Storage;
+}
 
 Object.defineProperty(URL, 'createObjectURL', {
   writable: true,

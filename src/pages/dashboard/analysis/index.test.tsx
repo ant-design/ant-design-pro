@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { render } from 'vitest-browser-react';
 import type { AnalysisData } from './data.d';
 import * as service from './service';
 
@@ -144,12 +144,12 @@ describe('Analysis Dashboard', () => {
     vi.clearAllMocks();
   });
 
-  it('should render without crashing', () => {
+  it('should render without crashing', async () => {
     vi.mocked(service.fakeChartData).mockResolvedValue({
       data: mockAnalysisData,
     });
 
-    const { container } = render(
+    const { container } = await render(
       <QueryClientProvider client={queryClient}>
         <Analysis loading={false} dashboardAndanalysis={mockAnalysisData} />
       </QueryClientProvider>,
@@ -163,19 +163,19 @@ describe('Analysis Dashboard', () => {
       data: mockAnalysisData,
     });
 
-    render(
+    const view = await render(
       <QueryClientProvider client={queryClient}>
         <Analysis loading={false} dashboardAndanalysis={mockAnalysisData} />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByTestId('introduce-row')).toBeInTheDocument();
-      expect(screen.getByTestId('sales-card')).toBeInTheDocument();
-      expect(screen.getByTestId('top-search')).toBeInTheDocument();
-      expect(screen.getByTestId('proportion-sales')).toBeInTheDocument();
-      expect(screen.getByTestId('offline-data')).toBeInTheDocument();
-    });
+    await expect.element(view.getByTestId('introduce-row')).toBeInTheDocument();
+    await expect.element(view.getByTestId('sales-card')).toBeInTheDocument();
+    await expect.element(view.getByTestId('top-search')).toBeInTheDocument();
+    await expect
+      .element(view.getByTestId('proportion-sales'))
+      .toBeInTheDocument();
+    await expect.element(view.getByTestId('offline-data')).toBeInTheDocument();
   });
 
   it('should fetch chart data on mount', async () => {
@@ -183,13 +183,13 @@ describe('Analysis Dashboard', () => {
       data: mockAnalysisData,
     });
 
-    render(
+    await render(
       <QueryClientProvider client={queryClient}>
         <Analysis loading={false} dashboardAndanalysis={mockAnalysisData} />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(service.fakeChartData).toHaveBeenCalled();
     });
   });
@@ -199,16 +199,18 @@ describe('Analysis Dashboard', () => {
       data: mockAnalysisData,
     });
 
-    render(
+    const view = await render(
       <QueryClientProvider client={queryClient}>
         <Analysis loading={false} dashboardAndanalysis={mockAnalysisData} />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByTestId('introduce-row')).toHaveTextContent('2 items');
-      expect(screen.getByTestId('sales-card')).toHaveTextContent('2 items');
-    });
+    await expect
+      .element(view.getByTestId('introduce-row'))
+      .toHaveTextContent('2 items');
+    await expect
+      .element(view.getByTestId('sales-card'))
+      .toHaveTextContent('2 items');
   });
 
   it('should handle empty data gracefully', async () => {
@@ -227,14 +229,14 @@ describe('Analysis Dashboard', () => {
       },
     });
 
-    render(
+    const view = await render(
       <QueryClientProvider client={queryClient}>
         <Analysis loading={false} dashboardAndanalysis={mockAnalysisData} />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByTestId('introduce-row')).toHaveTextContent('0 items');
-    });
+    await expect
+      .element(view.getByTestId('introduce-row'))
+      .toHaveTextContent('0 items');
   });
 });

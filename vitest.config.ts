@@ -1,7 +1,27 @@
 import { join } from 'node:path';
+import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  plugins: [
+    {
+      name: 'vitest-md-raw-loader',
+      transform(code, id) {
+        if (!id.endsWith('.md')) {
+          return null;
+        }
+        return {
+          code: `export default ${JSON.stringify(String(code))};`,
+          map: null,
+        };
+      },
+    },
+  ],
+  // 屏蔽 esbuild 噪声
+  optimizeDeps: {
+    noDiscovery: true,
+    include: [],
+  },
   resolve: {
     alias: {
       '@': join(__dirname, 'src'),
@@ -11,6 +31,12 @@ export default defineConfig({
   },
   test: {
     environment: 'happy-dom',
+    browser: {
+      enabled: true,
+      headless: true,
+      provider: playwright(),
+      instances: [{ browser: 'chromium' }],
+    },
     globals: true,
     setupFiles: ['./tests/setupTests.ts'],
     include: ['src/**/*.{test,spec}.{ts,tsx}'],

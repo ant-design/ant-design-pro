@@ -148,6 +148,8 @@ describe('requestErrorConfig', () => {
     });
 
     it('should handle REDIRECT showType', () => {
+      const onRedirect = vi.fn();
+
       const error: any = new Error('Redirect');
       error.name = 'BizError';
       error.info = {
@@ -156,7 +158,9 @@ describe('requestErrorConfig', () => {
         showType: 9,
       };
 
-      errorHandler(error, {});
+      errorHandler(error, { onRedirect });
+
+      expect(onRedirect).toHaveBeenCalledWith('/user/login');
 
       // REDIRECT 分支不应触发任何消息/通知提示
       expect(message.warning).not.toHaveBeenCalled();
