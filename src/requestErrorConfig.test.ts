@@ -157,6 +157,8 @@ describe('requestErrorConfig', () => {
       };
 
       errorHandler(error, {});
+      // cancel the real navigation triggered by REDIRECT before it tears down the test page
+      window.stop();
 
       // REDIRECT 分支不应触发任何消息/通知提示
       expect(message.warning).not.toHaveBeenCalled();

@@ -20,7 +20,7 @@ import { getTimeDistance } from './utils/utils';
 
 type RangePickerValue = RangePickerProps['value'];
 type AnalysisProps = {
-  dashboardAndanalysis: AnalysisData;
+  dashboardAndAnalysis: AnalysisData;
   loading: boolean;
 };
 type SalesType = 'all' | 'online' | 'stores';
