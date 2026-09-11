@@ -41,6 +41,8 @@ export default defineConfig({
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         'src/.umi/**',
+        'src/.umi-test/**',
+        'src/.umi-production/**',
         'src/services/ant-design-pro/**',
         'src/**/*.d.ts',
         'src/**/index.style.ts',
