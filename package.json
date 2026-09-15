@@ -75,8 +75,8 @@
     "@umijs/max-plugin-openapi": "^2.0.3",
     "@umijs/request-record": "^1.1.4",
     "@vitest/browser-playwright": "^5.0.0",
-    "@vitest/coverage-v8": "5.0.0",
-    "@vitest/ui": "5.0.0",
+    "@vitest/coverage-v8": "5.0.1",
+    "@vitest/ui": "5.0.1",
     "cross-env": "^10.1.0",
     "express": "^5.2.1",
     "geojson": "^0.5.0",
@@ -90,7 +90,7 @@
     "tailwindcss": "^4.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^7.0.2",
-    "vitest": "5.0.0",
+    "vitest": "5.0.1",
     "vitest-browser-react": "^2.3.0"
   },
   "overrides": {
