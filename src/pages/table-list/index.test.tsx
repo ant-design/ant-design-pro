@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { render } from 'vitest-browser-react';
 import * as api from '@/services/ant-design-pro/api';
 
 // Mock ProComponents before importing component
@@ -114,50 +114,48 @@ describe('TableList', () => {
     });
   });
 
-  it('should render without crashing', () => {
-    const { container } = render(
+  it('should render without crashing', async () => {
+    const screen = await render(
       <QueryClientProvider client={queryClient}>
         <TableList />
       </QueryClientProvider>,
     );
 
-    expect(container).toBeTruthy();
+    expect(screen.container).toBeTruthy();
   });
 
-  it('should render ProTable component', () => {
-    render(
+  it('should render ProTable component', async () => {
+    const screen = await render(
       <QueryClientProvider client={queryClient}>
         <TableList />
       </QueryClientProvider>,
     );
 
-    expect(screen.getByTestId('pro-table')).toBeInTheDocument();
+    await expect.element(screen.getByTestId('pro-table')).toBeInTheDocument();
   });
 
-  it('should have correct table columns', () => {
-    render(
+  it('should have correct table columns', async () => {
+    const screen = await render(
       <QueryClientProvider client={queryClient}>
         <TableList />
       </QueryClientProvider>,
     );
 
-    expect(screen.getByText('Rule name')).toBeInTheDocument();
-    expect(screen.getByText('Description')).toBeInTheDocument();
+    await expect.element(screen.getByText('Rule name')).toBeInTheDocument();
+    await expect.element(screen.getByText('Description')).toBeInTheDocument();
   });
 
   it('should render table after data loading', async () => {
     const mockRemoveRule = vi.mocked(api.removeRule);
     mockRemoveRule.mockResolvedValue({ success: true });
 
-    render(
+    const screen = await render(
       <QueryClientProvider client={queryClient}>
         <TableList />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByTestId('pro-table')).toBeInTheDocument();
-    });
+    await expect.element(screen.getByTestId('pro-table')).toBeInTheDocument();
   });
 
   it('should call rule API on mount', async () => {
@@ -167,13 +165,13 @@ describe('TableList', () => {
       success: true,
     });
 
-    render(
+    await render(
       <QueryClientProvider client={queryClient}>
         <TableList />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(api.rule).toHaveBeenCalled();
     });
   });
