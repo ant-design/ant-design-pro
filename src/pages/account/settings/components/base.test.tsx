@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { render } from 'vitest-browser-react';
 import * as service from '../service';
 import BaseView from './base';
 
@@ -134,13 +134,13 @@ describe('BaseView geographic selects', () => {
   });
 
   it('normalizes geographic initial values for labelInValue selects', async () => {
-    render(
+    await render(
       <QueryClientProvider client={queryClient}>
         <BaseView />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(mocks.initialValues?.province).toEqual({
         label: '浙江省',
         value: '330000',
@@ -176,13 +176,13 @@ describe('BaseView geographic selects', () => {
       } as any,
     });
 
-    render(
+    await render(
       <QueryClientProvider client={queryClient}>
         <BaseView />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(mocks.initialValues?.name).toBe('Ant Design');
       expect(mocks.initialValues?.province).toBeUndefined();
       expect(mocks.initialValues?.city).toBeUndefined();
@@ -190,25 +190,25 @@ describe('BaseView geographic selects', () => {
   });
 
   it('loads cities with the selected province value', async () => {
-    render(
+    await render(
       <QueryClientProvider client={queryClient}>
         <BaseView />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(service.queryCity).toHaveBeenCalledWith('330000');
     });
   });
 
   it('clears city when province changes', async () => {
-    render(
+    await render(
       <QueryClientProvider client={queryClient}>
         <BaseView />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(mocks.onValuesChange).toBeTypeOf('function');
     });
 
@@ -220,13 +220,13 @@ describe('BaseView geographic selects', () => {
   });
 
   it('returns label/value option arrays for geographic selects', async () => {
-    render(
+    await render(
       <QueryClientProvider client={queryClient}>
         <BaseView />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(mocks.requestResults.province).toEqual([
         { label: '浙江省', value: '330000' },
       ]);
@@ -244,13 +244,13 @@ describe('BaseView geographic selects', () => {
       { id: '440300', name: '深圳市' },
     ]);
 
-    render(
+    await render(
       <QueryClientProvider client={queryClient}>
         <BaseView />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(mocks.requestResults.province).toEqual([
         { label: '广东省', value: '440000' },
       ]);
@@ -264,13 +264,13 @@ describe('BaseView geographic selects', () => {
     mocks.dependencyProvince = { label: '江苏省', value: '320000' };
     vi.mocked(service.queryCity).mockResolvedValue([]);
 
-    render(
+    await render(
       <QueryClientProvider client={queryClient}>
         <BaseView />
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(service.queryCity).toHaveBeenCalledWith('320000');
       expect(mocks.requestResults.city).toContainEqual({
         label: '南京市',
