@@ -224,6 +224,7 @@ export default defineConfig({
       },
     },
     devServer: {
+      dynamicHmrChunkLists: true,
       lazyDynamicImports: true,
     },
   },
