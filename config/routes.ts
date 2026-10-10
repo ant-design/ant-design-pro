@@ -288,6 +288,7 @@ export default [
   },
   {
     path: '/',
+    layout: false,
     redirect: '/dashboard/analysis',
   },
   {
