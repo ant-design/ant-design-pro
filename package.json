@@ -69,8 +69,8 @@
     "@types/react-helmet": "^6.1.11",
     "@types/topojson-client": "^3.1.5",
     "@types/topojson-specification": "^1.0.5",
-    "@umijs/lint": "^4.7.3",
-    "@umijs/max": "^4.7.3",
+    "@umijs/lint": "^4.7.23",
+    "@umijs/max": "^4.7.23",
     "@umijs/max-plugin-openapi": "^2.0.3",
     "@umijs/request-record": "^1.1.4",
     "@vitest/coverage-v8": "4.1.10",
@@ -98,9 +98,6 @@
     },
     "@umijs/lint": {
       "@babel/core": "^7.29.6"
-    },
-    "@utoo/pack": {
-      "send": "^0.19.0"
     },
     "dva-immer": {
       "immer": "^9.0.6"
