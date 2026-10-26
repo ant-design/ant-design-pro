@@ -1,0 +1,9 @@
+/* Popup rows must not inherit the icon-above-label spacing of the collapsed sider. */
+.ant-menu-submenu.ant-menu-submenu-popup
+.ant-pro-base-menu-vertical-item-title.ant-pro-base-menu-vertical-item-collapsed-show-title {
+  align-items: center;
+
+  > .ant-pro-base-menu-vertical-item-text {
+    margin-block-start: 0;
+  }
+}
