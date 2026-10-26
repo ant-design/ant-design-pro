@@ -18,4 +18,5 @@ jobs:
       - run: echo ${{github.ref}}
       - uses: utooland/setup-utoo@e7aa4d726a17f79f68aed736476ea5bd68f8ba52 # v1
       - run: ut
+      - run: npx playwright install --with-deps chromium
       - run: ut test:coverage

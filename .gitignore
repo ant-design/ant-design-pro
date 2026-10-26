@@ -52,3 +52,6 @@ docs/superpowers
 # cloudflare wrangler
 .wrangler
 requestRecord.mock.js
+
+.vitest
+e2e-out
