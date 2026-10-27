@@ -215,6 +215,7 @@ export default defineConfig({
     exclude: ['mock/requestRecord.mock.js'],
   },
   utoopack: {
+    reactCompiler: true,
     module: {
       rules: {
         '*.md': {
