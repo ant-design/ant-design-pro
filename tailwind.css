@@ -1,3 +1,6 @@
+@layer theme, base, antd, components, utilities;
+
 @import "tailwindcss/index.css";
+@import "antd/dist/antd.css" layer(antd);
 
 @source "./src";

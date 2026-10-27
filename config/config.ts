@@ -149,10 +149,14 @@ export default defineConfig({
     configProvider: {
       variant: 'filled',
       theme: {
+        zeroRuntime: true,
         token: {
           fontFamily: 'AlibabaSans, sans-serif',
         },
       },
+    },
+    styleProvider: {
+      layer: true,
     },
   },
   /**
