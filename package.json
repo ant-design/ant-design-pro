@@ -110,7 +110,7 @@
     "postcss": "^8.5.23"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=26.12.1"
   },
   "create-umi": {
     "ignoreScript": [
