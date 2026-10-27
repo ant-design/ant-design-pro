@@ -21,8 +21,11 @@ test.describe('Login Page', () => {
     await page.getByPlaceholder('Password: ant.design').fill('ant.design');
     await page.getByRole('button', { name: 'Login' }).click();
 
-    // mock login has a 2s delay before redirecting to the dashboard
-    await expect(page.getByText(/Welcome/)).toBeVisible({
+    // Mock login has a 2s delay before redirecting to the default dashboard.
+    await expect(page).toHaveURL('/dashboard/analysis', {
+      timeout: 10000,
+    });
+    await expect(page.getByText('日销售额', { exact: true })).toBeVisible({
       timeout: 10000,
     });
   });
