@@ -40,7 +40,7 @@
   "dependencies": {
     "@ant-design/icons": "^6.3.4",
     "@ant-design/plots": "^2.6.8",
-    "@ant-design/pro-components": "^3.1.14-7",
+    "@ant-design/pro-components": "^3.1.15-8",
     "@ant-design/x": "^2.9.0",
     "@ant-design/x-markdown": "^2.9.0",
     "@ant-design/x-sdk": "^2.9.0",
