@@ -40,12 +40,12 @@
   "dependencies": {
     "@ant-design/icons": "^6.3.4",
     "@ant-design/plots": "^2.6.8",
-    "@ant-design/pro-components": "^3.1.14-2",
+    "@ant-design/pro-components": "^3.1.15-8",
     "@ant-design/x": "^2.9.0",
     "@ant-design/x-markdown": "^2.9.0",
     "@ant-design/x-sdk": "^2.9.0",
-    "@tanstack/react-query": "^5.104.5",
-    "antd": "^6.6.7",
+    "@tanstack/react-query": "^5.105.0",
+    "antd": "^6.6.8",
     "antd-style": "^4.1.0",
     "china-division": "^2.7.0",
     "clsx": "^2.1.1",
@@ -57,7 +57,7 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
-    "@ant-design/cli": "^6.6.7",
+    "@ant-design/cli": "^6.6.8",
     "@biomejs/biome": "^2.6.3",
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
@@ -70,8 +70,8 @@
     "@types/react-helmet": "^6.1.11",
     "@types/topojson-client": "^3.1.5",
     "@types/topojson-specification": "^1.0.5",
-    "@umijs/lint": "^4.7.27",
-    "@umijs/max": "^4.7.27",
+    "@umijs/lint": "^4.7.28",
+    "@umijs/max": "^4.7.28",
     "@umijs/max-plugin-openapi": "^2.0.3",
     "@umijs/request-record": "^1.1.4",
     "@vitest/browser-playwright": "^5.0.5",
@@ -110,7 +110,7 @@
     "postcss": "^8.5.23"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=26.13.0"
   },
   "create-umi": {
     "ignoreScript": [

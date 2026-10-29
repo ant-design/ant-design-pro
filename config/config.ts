@@ -149,10 +149,14 @@ export default defineConfig({
     configProvider: {
       variant: 'filled',
       theme: {
+        zeroRuntime: true,
         token: {
           fontFamily: 'AlibabaSans, sans-serif',
         },
       },
+    },
+    styleProvider: {
+      layer: true,
     },
   },
   /**
@@ -215,6 +219,7 @@ export default defineConfig({
     exclude: ['mock/requestRecord.mock.js'],
   },
   utoopack: {
+    reactCompiler: true,
     module: {
       rules: {
         '*.md': {

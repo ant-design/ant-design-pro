@@ -24,6 +24,12 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      - id: node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+
       - uses: millionco/react-doctor@695e46eee203a5d1855020191aa7e9c010a1250e # v2
         with:
           version: 0.7.1
+          node-version: ${{ steps.node.outputs.node-version }}
