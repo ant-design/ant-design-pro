@@ -6,6 +6,8 @@ export type Member = {
 
 export interface Params {
   count: number;
+  /** Where the page starts; omitted means the first page. */
+  start?: number;
 }
 export interface ListItemDataType {
   id: string;

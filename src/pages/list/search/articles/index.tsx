@@ -4,7 +4,7 @@ import {
   MessageOutlined,
   StarOutlined,
 } from '@ant-design/icons';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { Button, Card, Col, Flex, Form, List, Row, Select, Tag } from 'antd';
 import type { DefaultOptionType } from 'antd/es/select';
 import type { FC } from 'react';
@@ -90,26 +90,35 @@ const Articles: FC = () => {
   const {
     data,
     isLoading: loading,
-    isFetching,
+    isFetchingNextPage,
     refetch,
-  } = useQuery({
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
     queryKey: ['search-articles', pageSize, filtersRef.current],
-    queryFn: () =>
-      queryFakeList({ count: pageSize, ...filtersRef.current }).then(
-        (res) => res.data,
-      ),
+    initialPageParam: 0,
+    queryFn: ({ pageParam }) =>
+      queryFakeList({
+        count: pageSize,
+        start: pageParam,
+        ...filtersRef.current,
+      }).then((res) => res.data),
+    // The next page starts after the rows already shown. A short page means
+    // the list is exhausted, so there is nothing further to ask for.
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.list.length < pageSize ? undefined : allPages.length * pageSize,
   });
 
   const loadMore = () => {
-    refetch();
+    fetchNextPage();
   };
-  const loadingMore = isFetching;
+  const loadingMore = isFetchingNextPage;
   const reload = () => {
     filtersRef.current = form.getFieldsValue();
     refetch();
   };
 
-  const list = data?.list || [];
+  const list = data?.pages.flatMap((page) => page.list) || [];
   const listItemExtra = <div className={styles.listItemExtra} />;
 
   const setOwner = () => {
@@ -124,7 +133,7 @@ const Articles: FC = () => {
     refetch();
   };
 
-  const loadMoreDom = list.length > 0 && (
+  const loadMoreDom = hasNextPage && (
     <div style={{ textAlign: 'center', marginTop: 16 }}>
       <Button onClick={loadMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
         {loadingMore ? (
