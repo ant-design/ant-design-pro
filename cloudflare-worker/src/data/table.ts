@@ -36,4 +36,19 @@ const generateTableData = (count: number): RuleListItem[] => {
   })).reverse();
 };
 
-export const tableListDataSource = generateTableData(100);
+let tableListDataSource: RuleListItem[] | undefined;
+
+/**
+ * The rule list, built on first use.
+ *
+ * `generateTableData` reads the clock, and a Worker's `Date` is frozen while
+ * the module is evaluated: nothing has happened yet, so `new Date()` there is
+ * 1970-01-01, which is what every "Last Scheduled at" cell showed. Reading it
+ * lazily means the rows carry the date of the first request instead. The rows
+ * are still built once per isolate so the random columns (callNo, progress)
+ * stay stable across pages.
+ */
+export const getTableListDataSource = (): RuleListItem[] => {
+  tableListDataSource ??= generateTableData(100);
+  return tableListDataSource;
+};
