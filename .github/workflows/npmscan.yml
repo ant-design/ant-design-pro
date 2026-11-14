@@ -1,0 +1,30 @@
+name: NPMscan
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths: [package.json, package-lock.json, .github/workflows/npmscan.yml]
+
+permissions: {}
+
+jobs:
+  npmscan:
+    name: Dependency Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Run NPMscan
+        uses: NPMscan/npmscan-action@e2ff8c953f1a0b536abd70b4479984137c76e1fe # v1.4.1
+        with:
+          files: |
+            package-lock.json
+            package.json
+          mode: warn
+          comment: on-findings
+          fail-on-error: false
