@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { type RuleListItem, tableListDataSource } from '../data/table';
+import { getTableListDataSource, type RuleListItem } from '../data/table';
 
 const app = new Hono();
 
@@ -12,7 +12,7 @@ app.get('/rule', (c) => {
     filter,
   } = c.req.query();
 
-  let dataSource = [...tableListDataSource];
+  let dataSource = [...getTableListDataSource()];
   const currentNum = Math.max(1, parseInt(current, 10) || 1);
   const pageSizeNum = Math.max(1, parseInt(pageSize, 10) || 10);
 
@@ -98,7 +98,7 @@ app.post('/rule', async (c) => {
 
   if (method === 'delete' && Array.isArray(key)) {
     // Return success for delete
-    const filteredList = tableListDataSource.filter(
+    const filteredList = getTableListDataSource().filter(
       (item) => !key.includes(item.key),
     );
     return c.json({
@@ -109,7 +109,7 @@ app.post('/rule', async (c) => {
 
   if (method === 'post') {
     const newItem: RuleListItem = {
-      key: tableListDataSource.length,
+      key: getTableListDataSource().length,
       href: 'https://ant.design',
       avatar:
         'https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png',
