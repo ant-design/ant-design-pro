@@ -15,6 +15,13 @@ function parseCount(value: string | undefined, defaultVal: number): number {
   return Math.max(COUNT_MIN, Math.min(parsed, COUNT_MAX));
 }
 
+// Where a page starts. A missing, negative or unparseable value reads as the
+// first page, so a bad query string cannot skip the head of the list.
+function parseStart(value: string | undefined): number {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : 0;
+}
+
 const app = new Hono();
 
 // GET /api/get_list
@@ -64,7 +71,8 @@ app.post('/post_fake_list', async (c) => {
 // GET /api/fake_list
 app.get('/fake_list', (c) => {
   const count = parseCount(c.req.query('count'), DEFAULT_COUNT);
-  const result = fakeList(count);
+  const start = parseStart(c.req.query('start'));
+  const result = fakeList(count, start);
   return c.json({
     data: {
       list: result,

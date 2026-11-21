@@ -99,27 +99,32 @@ export const defaultUser = {
 
 const statuses = ['active', 'exception', 'normal'];
 
-export function fakeList(count: number) {
+export function fakeList(count: number, start = 0) {
   const safeCount =
     Number.isFinite(count) && count >= 0 ? Math.floor(count) : 0;
+  // Where this page starts in the fake list. Every row is derived from its
+  // absolute index, so asking for the next page returns the rows after the
+  // ones already shown instead of the same five again.
+  const offset = Number.isFinite(start) && start > 0 ? Math.floor(start) : 0;
   const list = [];
   for (let i = 0; i < safeCount; i += 1) {
+    const index = offset + i;
     list.push({
-      id: `fake-list-${i}`,
-      owner: user[i % user.length],
-      title: titles[i % titles.length],
-      avatar: avatars[i % avatars.length],
+      id: `fake-list-${index}`,
+      owner: user[index % user.length],
+      title: titles[index % titles.length],
+      avatar: avatars[index % avatars.length],
       cover:
-        Math.floor(i / covers.length) % 2 === 0
-          ? covers[i % covers.length]
-          : covers[covers.length - 1 - (i % covers.length)],
-      status: statuses[i % statuses.length],
+        Math.floor(index / covers.length) % 2 === 0
+          ? covers[index % covers.length]
+          : covers[covers.length - 1 - (index % covers.length)],
+      status: statuses[index % statuses.length],
       percent: Math.ceil(Math.random() * 50) + 50,
-      logo: avatars[i % avatars.length],
+      logo: avatars[index % avatars.length],
       href: 'https://ant.design',
       updatedAt: Date.now() - Math.floor(Math.random() * 1000000000),
       createdAt: Date.now() - Math.floor(Math.random() * 1000000000),
-      subDescription: desc[i % desc.length],
+      subDescription: desc[index % desc.length],
       description:
         '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的共通点和组成部分，该专案即是致力于归纳和吸收各种产品的各自优势，致力于打造成中后台产品的根底',
       activeUser: Math.floor(Math.random() * 10000) + 1000,
